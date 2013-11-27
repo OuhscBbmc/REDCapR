@@ -1,6 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 
-refresh.R
 REDCapRDocumentationPeek.pdf
 utility_scripts/
