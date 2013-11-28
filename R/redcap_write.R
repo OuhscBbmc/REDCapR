@@ -9,7 +9,7 @@ redcap_write <- function( ds, redcap_uri, token, verbose=TRUE ) {
   if( missing(token) )
     stop("The required parameter `token` was missing from the call to `redcap_write()`.")     
   
-  con <-  textConnection(object='csvElements', open='w', local=TRUE)
+  con <-  base::textConnection(object='csvElements', open='w', local=TRUE)
   write.csv(ds, con, row.names = FALSE, na="")  
   close(con)
   
