@@ -11,7 +11,7 @@ Depends:
     stats
 Imports:
     methods,
-    lavaan
+    RCurl
 Suggests:
     devtools,
     ggplot2,
@@ -26,3 +26,5 @@ LazyData: TRUE
 VignetteBuilder: knitr
 Collate:
     'REDCapR-package.R'
+    'redcap_read.R'
+    'redcap_write.R'
