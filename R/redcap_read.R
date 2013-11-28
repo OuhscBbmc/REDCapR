@@ -8,7 +8,7 @@
 #' @description This function uses REDCap's \href{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}{API}
 #' to select and return data.
 #' 
-#' @param redcap_uri The URI of your REDCap project (\emph{eg}, https://ouhsc.edu/redcap).  Required.
+#' @param redcap_uri The URI of the REDCap project.  Required.
 #' @param token The user-specific string that serves as the password for a project.  Required.
 #' @param records An array, where each element corresponds to the ID of a desired record.  Optional.
 #' @param records_collapsed A single string, where the desired ID values are separated by commas.  Optional.
@@ -30,26 +30,31 @@
 #' @examples 
 #' \dontrun{
 #' library(REDCapR) #Load the package into the current R session.
+#' redcap_uri <- "https://ouhsc.edu/redcap-test"
 #' 
 #' #Return all records and all variables.
-#' ds_all_rows_all_fields <- redcap_read(redcap_uri=redcapUri, token=token)$data
+#' ds_all_rows_all_fields <- redcap_read(redcap_uri=redcap_uri, token=token)$data
 #' 
 #' #Return only records with IDs of 101, 102, 103, and 104
-#' desired_records <- c(101, 102, 103, 104)
-#' ds_some_rows <- redcap_read(redcap_uri=redcapUri, token=token, records=desired_records)$data
+#' desired_records_v1 <- c(101, 102, 103, 104)
+#' ds_some_rows_v1 <- redcap_read(redcap_uri=redcap_uri, token=token, records=desired_records_v1)$data
 #' 
 #' #Return only records with IDs of 101, 102, 103, and 104 (alternate way)
-#' desired_records <- "101, 102, 103, 104"
-#' ds_some_rows <- redcap_read(redcap_uri=redcapUri, token=token, records_collapsed=desired_records)$data
+#' desired_records_v2 <- "101, 102, 103, 104"
+#' ds_some_rows_v2 <- redcap_read(redcap_uri=redcap_uri, token=token, records_collapsed=desired_records_v2)$data
 #' 
-#' dsCall1 <- redcap_read(redcap_uri=redcapUri, token=token, fields=initialFields )$data
+#' #Return only the fields recordid, dob, gender, and apgar
+#' desired_fields_v1 <- c("recordid", "dob", "gender", "apgar")
+#' ds_some_fields_v1 <- redcap_read(redcap_uri=redcap_uri, token=token, fields=desired_fields_v1)$data
 #' 
-#' initialFields <- c("recruitid", "call1_recruiter", "call1_start", "call1_outcome", "inactive_record", "inactivated_date")
-#' dsCall1 <- redcap_read(redcap_uri=redcapUri, token=token, fields=initialFields )$data
+#' #Return only the fields recordid, dob, gender, and apgar (alternate way)
+#' desired_fields_v2 <- "recordid, dob, gender, apgar"
+#' ds_some_fields_v2 <- redcap_read(redcap_uri=redcap_uri, token=token, fields_collapsed=desired_fields_v2)$data
 #' }
 
 redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL, fields=NULL, fields_collapsed=NULL, verbose=TRUE ) {
   #TODO: unaswered verbose parameter pulls from getOption("verbose")
+  #TODO: warns if any requested fields aren't entirely lowercase.
   start_time <- Sys.time()
   
   if( missing(redcap_uri) )
