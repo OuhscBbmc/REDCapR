@@ -2,6 +2,7 @@
 redcap_write <- function( ds, redcap_uri, token, verbose=TRUE ) {
   #TODO: convert boolean to integer/bit
   start_time <- Sys.time()
+  csvElements <- NULL #This prevents the R CHECK NOTE: 'No visible binding for global variable Note in R CMD check';  Also see  if( getRversion() >= "2.15.1" )    utils::globalVariables(names=c("csvElements")) #http://stackoverflow.com/questions/8096313/no-visible-binding-for-global-variable-note-in-r-cmd-check; http://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
   
   if( missing(redcap_uri) )
     stop("The required parameter `redcap_uri` was missing from the call to `redcap_write()`.")
