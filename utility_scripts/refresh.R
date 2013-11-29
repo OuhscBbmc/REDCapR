@@ -8,7 +8,7 @@ devtools::check_doc() #Should return NULL
 devtools::run_examples(); dev.off() #This overwrites the NAMESPACE file too
 # devtools::run_examples(, "Ace.Rd")
 devtools::test()
-
+devtools::build_vignettes()
 
 system("R CMD build --resave-data .") #Then move it up one directory.
 tarBallPattern <- "^REDCapR_.+\\.tar\\.gz$"
