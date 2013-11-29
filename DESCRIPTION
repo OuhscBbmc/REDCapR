@@ -1,8 +1,8 @@
 Package: REDCapR
 Title: Interaction between R and REDCap
 Description: Encapsulates functions to streamline calls from R
-Version: 0.1
-Date: 2013-11-27
+Version: 0.1-1
+Date: 2013-11-28
 Author: Will Beasley, David Bard, Thomas Wilson
 Maintainer: 'Will Beasley' <wibeasley@hotmail.com>
 URL: http://ouhsc.edu/bbmc/
@@ -23,6 +23,7 @@ Suggests:
     xtable
 License: GPL
 LazyData: TRUE
+BuildVignettes: FALSE
 VignetteBuilder: knitr
 Collate:
     'REDCapR-package.R'
