@@ -7,7 +7,7 @@ devtools::check_doc() #Should return NULL
 #
 devtools::run_examples(); dev.off() #This overwrites the NAMESPACE file too
 # devtools::run_examples(, "Ace.Rd")
-devtools::test()
+test_results <- devtools::test()
 devtools::build_vignettes()
 
 system("R CMD build --resave-data .") #Then move it up one directory.
@@ -21,5 +21,4 @@ unlink("REDCapR.Rcheck", recursive=T)
 
 # devtools::build_win()
 devtools::revdep_check(pkg="NlsyLinks", recursive=TRUE)
-# devtools::revdep_check(pkg="Wats", recursive=TRUE)
 # devtools::release(check=FALSE) #Careful, the last question ultimately uploads it to CRAN, where you can't delete/reverse your decision.

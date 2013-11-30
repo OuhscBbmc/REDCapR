@@ -116,11 +116,12 @@ redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL
     , fields = fields_collapsed
     , .opts = curl_options
   )
-  paste(raw_csv)
+  print(raw_csv)
   
   try (
     ds <- read.csv(text=raw_csv, stringsAsFactors=FALSE) #Convert the raw text to a dataset.
-  )
+  , silent = TRUE)
+  
   if( exists("ds") ) {
     #The comma formatting uses the same code as scales::comma, but I don't want to create a package dependency just for commas.
     status_message <- paste0(format(nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE), " records and ",  format(length(ds), big.mark = ",", scientific = FALSE, trim = TRUE), " columns were read from REDCap in ", round(elapsed_seconds, 2), " seconds.")
@@ -142,7 +143,7 @@ redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL
     data = ds, 
     raw_csv = raw_csv,
     records_collapsed = records_collapsed, 
-    records_collapsed = fields_collapsed,
+    fields_collapsed = fields_collapsed,
     elapsed_seconds = elapsed_seconds, 
     status_message = status_message, 
     success = success
