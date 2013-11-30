@@ -2,5 +2,6 @@
 ^\.Rproj\.user$
 
 REDCapRDocumentationPeek.pdf
-utility_scripts/
 documentation_for_developers/
+playgrounds/
+utility_scripts/

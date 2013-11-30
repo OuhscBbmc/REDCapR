@@ -97,7 +97,7 @@ redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL
   if( missing(fields_collapsed) & !missing(fields) )
     fields_collapsed <- paste0(fields, collapse=",")
   
-  if( missing( cert_location ) ) {
+  if( missing( cert_location ) | is.null(cert_location) ) {
     curl_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
   }
   else {
@@ -116,12 +116,25 @@ redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL
     , fields = fields_collapsed
     , .opts = curl_options
   )
-  ds <- read.csv(text=raw_csv, stringsAsFactors=FALSE) #Convert the raw text to a dataset.
+  paste(raw_csv)
+  
+  try (
+    ds <- read.csv(text=raw_csv, stringsAsFactors=FALSE) #Convert the raw text to a dataset.
+  )
+  if( exists("ds") ) {
+    #The comma formatting uses the same code as scales::comma, but I don't want to create a package dependency just for commas.
+    status_message <- paste0(format(nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE), " records and ",  format(length(ds), big.mark = ",", scientific = FALSE, trim = TRUE), " columns were read from REDCap in ", round(elapsed_seconds, 2), " seconds.")
+
+    success <- TRUE
+  }
+  else {
+    ds <- data.frame() #Return an empty data.frame
+    status_message <- paste0("Reading the REDCap data was not successful.  The error message was:\n", geterrmessage())
+    success <- FALSE
+  }
   
   elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time,units="secs"))
   
-  #The comma formatting uses the same code as scales::comma, but I don't want to create a package dependency just for commas.
-  status_message <- paste0(format(nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE), " records and ",  format(length(ds), big.mark = ",", scientific = FALSE, trim = TRUE), " columns were read from REDCap in ", round(elapsed_seconds, 2), " seconds.")
   if( verbose ) 
     message(status_message)
   
@@ -131,6 +144,7 @@ redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL
     records_collapsed = records_collapsed, 
     records_collapsed = fields_collapsed,
     elapsed_seconds = elapsed_seconds, 
-    status_message = status_message
+    status_message = status_message, 
+    success = success
   ))
 }
