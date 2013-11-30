@@ -121,10 +121,16 @@ redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL
   try (
     ds <- read.csv(text=raw_csv, stringsAsFactors=FALSE) #Convert the raw text to a dataset.
   , silent = TRUE)
+    
+  elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
   
   if( exists("ds") ) {
     #The comma formatting uses the same code as scales::comma, but I don't want to create a package dependency just for commas.
-    status_message <- paste0(format(nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE), " records and ",  format(length(ds), big.mark = ",", scientific = FALSE, trim = TRUE), " columns were read from REDCap in ", round(elapsed_seconds, 2), " seconds.")
+    status_message <- paste0(format(nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE), 
+                             " records and ",  
+                             format(length(ds), big.mark = ",", scientific = FALSE, trim = TRUE), 
+                             " columns were read from REDCap in ", 
+                             round(elapsed_seconds, 2), " seconds.")
 
     success <- TRUE
   }
@@ -133,9 +139,7 @@ redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL
     status_message <- paste0("Reading the REDCap data was not successful.  The error message was:\n", geterrmessage())
     success <- FALSE
   }
-  
-  elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time,units="secs"))
-  
+    
   if( verbose ) 
     message(status_message)
   

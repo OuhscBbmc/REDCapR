@@ -1,0 +1,6 @@
+﻿Version .1 (2013-12)
+------------------------------------------------------------------------------
+New Features:
+* Introduces redcap_read, with documentation
+* SSL verify peer by default, using cert file included in package
+* Initial submission to GitHub
