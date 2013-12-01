@@ -1,5 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+.gitignore
 
 REDCapRDocumentationPeek.pdf
 documentation_for_developers/

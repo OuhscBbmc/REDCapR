@@ -31,9 +31,11 @@
   the operation.  Optional.}
 
   \item{cert_location}{If present, this string should point
-  to the location of the cert files required for SSL.  If
-  the value is missing or NULL, the server's identity will
-  not be verified.}
+  to the location of the cert files required for SSL
+  verification.  If the value is missing or NULL, the
+  server's identity will be verified using a recent CA
+  bundle from the \href{http://curl.haxx.se}{cURL website}.
+  See the details below. Optional.}
 }
 \value{
   Currently, a list is returned with the following
@@ -64,6 +66,13 @@
   and cert location into a single \code{S4} object that's
   passed to these methods.  It will make these calls take
   less space.
+
+  The `REDCapR` package includes a recent version of the
+  \href{http://curl.haxx.se/ca/cacert.pem}{Bundle of CA
+  Root Certificates} from the official
+  \href{http://curl.haxx.se}{cURL site}.  This version is
+  used by default, unless the `cert_location` parameter is
+  given another location.
 }
 \examples{
 library(REDCapR) #Load the package into the current R session.
@@ -81,14 +90,6 @@ ds_some_rows_v1 <- redcap_read(
    records=desired_records_v1
 )$data
 
-#Return only records with IDs of 1 and 3 (alternate way)
-desired_records_v2 <- "1, 3"
-ds_some_rows_v2 <- redcap_read(
-   redcap_uri=uri,
-   token=token,
-   records_collapsed=desired_records_v2
-)$data
-
 #Return only the fields recordid, first_name, and age
 desired_fields_v1 <- c("recordid", "first_name", "age")
 ds_some_fields_v1 <- redcap_read(
@@ -96,21 +97,18 @@ ds_some_fields_v1 <- redcap_read(
    token=token,
    fields=desired_fields_v1
 )$data
-
-#Return only the fields recordid, first_name, and age (alternate way)
-desired_fields_v2 <- "recordid, first_name, age"
-ds_some_fields_v2 <- redcap_read(
-   redcap_uri=uri,
-   token=token,
-   fields_collapsed=desired_fields_v2
-)$data
 }
 \author{
   Will Beasley
 }
 \references{
-  The `API Examples' page on the REDCap wiki
+  The official documentation can be found on the `API
+  Examples' page on the REDCap wiki
   (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}).
   A user account is required.
+
+  The official \href{http://curl.haxx.se}{cURL site}
+  discusses the process of using SSL to verify the server
+  being connected to.
 }
 

@@ -13,7 +13,7 @@
 #' @param fields An array, where each element corresponds a desired project field.  Optional.
 #' @param fields_collapsed A single string, where the desired field names are separated by commas.  Optional.
 #' @param verbose A boolean value indicating if \code{message}s should be printed to the R console during the operation.  Optional.
-#' @param cert_location  If present, this string should point to the location of the cert files required for SSL.  If the value is missing or NULL, the server's identity will not be verified.
+#' @param cert_location  If present, this string should point to the location of the cert files required for SSL verification.  If the value is missing or NULL, the server's identity will be verified using a recent CA bundle from the \href{http://curl.haxx.se}{cURL website}.  See the details below. Optional.
 #' @return Currently, a list is returned with the following elements,
 #' \enumerate{
 #'  \item \code{data}: an R \code{data.frame} of the desired records and columns.
@@ -28,8 +28,14 @@
 #' I like the logic that it's associated with a particular REDCap project that shouldn't change between calls.
 #' As a compromise, I think I'll wrap the uri, token, and cert location into a single \code{S4} object that's passed to these methods.  It will make these calls take less space.  
 #' 
+#' The `REDCapR` package includes a recent version of the \href{http://curl.haxx.se/ca/cacert.pem}{Bundle of CA Root Certificates} 
+#' from the official \href{http://curl.haxx.se}{cURL site}.  This version is used by default, unless the `cert_location` parameter is given another location.
+
 #' @author Will Beasley
-#' @references The `API Examples' page on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}). A user account is required.
+#' @references The official documentation can be found on the `API Examples' page on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}). A user account is required.
+#' 
+#' The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.
+#' 
 #' @examples 
 #' library(REDCapR) #Load the package into the current R session.
 #' uri <- "https://miechvprojects.ouhsc.edu/redcap/api/"
@@ -46,28 +52,12 @@
 #'    records=desired_records_v1
 #' )$data
 #' 
-#' #Return only records with IDs of 1 and 3 (alternate way)
-#' desired_records_v2 <- "1, 3"
-#' ds_some_rows_v2 <- redcap_read(
-#'    redcap_uri=uri, 
-#'    token=token, 
-#'    records_collapsed=desired_records_v2
-#' )$data
-#' 
 #' #Return only the fields recordid, first_name, and age
 #' desired_fields_v1 <- c("recordid", "first_name", "age")
 #' ds_some_fields_v1 <- redcap_read(
 #'    redcap_uri=uri, 
 #'    token=token, 
 #'    fields=desired_fields_v1
-#' )$data
-#' 
-#' #Return only the fields recordid, first_name, and age (alternate way)
-#' desired_fields_v2 <- "recordid, first_name, age"
-#' ds_some_fields_v2 <- redcap_read(
-#'    redcap_uri=uri, 
-#'    token=token, 
-#'    fields_collapsed=desired_fields_v2
 #' )$data
 
 redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL, 

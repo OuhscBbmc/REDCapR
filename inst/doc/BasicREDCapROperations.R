@@ -5,6 +5,11 @@ opts_chunk$set(
     comment=NA, 
     tidy=FALSE
 )
+# options(markdown.HTML.header = system.file("misc", "vignette.css", package = "knitr"))
+# options(markdown.HTML.header = system.file("misc", "vignette.css", package = "REDCapR"))
+# options(markdown.HTML.header = file.path(devtools::inst("REDCapR"), "misc", "vignette.css"))
+
+options(width=120) #So the output is 50% wider than the default.
 
 
 ## ----project_values------------------------------------------------------
@@ -16,42 +21,57 @@ token <- "9446D2E3FAA71ABB815A2336E4692AF3"
 ## ----return_all----------------------------------------------------------
 #Return all records and all variables.
 ds_all_rows_all_fields <- redcap_read(redcap_uri=uri, token=token)$data
+ds_all_rows_all_fields #Inspect the returned dataset
 
 
-## ----read_row_subset-----------------------------------------------------
+## ----read_row_subset, results='hold'-------------------------------------
 #Return only records with IDs of 1 and 3
 desired_records_v1 <- c(1, 3)
 ds_some_rows_v1 <- redcap_read(
-   redcap_uri=uri, 
-   token=token, 
-   records=desired_records_v1
+   redcap_uri = uri, 
+   token = token, 
+   records = desired_records_v1
 )$data
 
 #Return only records with IDs of 1 and 3 (alternate way)
 desired_records_v2 <- "1, 3"
 ds_some_rows_v2 <- redcap_read(
-   redcap_uri=uri, 
-   token=token, 
-   records_collapsed=desired_records_v2
+   redcap_uri = uri, 
+   token = token, 
+   records_collapsed = desired_records_v2
 )$data
+
+ds_some_rows_v2 #Inspect the returned dataset
 
 
 ## ----read_field_subset---------------------------------------------------
 #Return only the fields recordid, first_name, and age
 desired_fields_v1 <- c("recordid", "first_name", "age")
 ds_some_fields_v1 <- redcap_read(
-   redcap_uri=uri, 
-   token=token, 
-   fields=desired_fields_v1
+   redcap_uri = uri, 
+   token = token, 
+   fields = desired_fields_v1
 )$data
 
 #Return only the fields recordid, first_name, and age (alternate way)
 desired_fields_v2 <- "recordid, first_name, age"
 ds_some_fields_v2 <- redcap_read(
-   redcap_uri=uri, 
-   token=token, 
-   fields_collapsed=desired_fields_v2
+   redcap_uri = uri, 
+   token = token, 
+   fields_collapsed = desired_fields_v2
 )$data
+
+ds_some_fields_v2 #Inspect the returned dataset
+
+
+## ----read_not_just_dataframe---------------------------------------------
+#Return only the fields recordid, first_name, and age
+all_information <- redcap_read(
+   redcap_uri = uri, 
+   token = token, 
+   fields = desired_fields_v1
+)
+all_information #Inspect the additional information
 
 
 ## ----session_info, echo=FALSE--------------------------------------------
