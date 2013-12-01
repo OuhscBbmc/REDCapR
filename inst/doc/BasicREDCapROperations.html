@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Title</title>
+<title>Basic REDCapR Operations</title>
 
 <!-- Styles for R syntax highlighter -->
 <style type="text/css">
@@ -185,30 +185,104 @@ hr {
 %\VignetteIndexEntry{Basic REDCapR Operations}
 -->
 
-<h1>Title</h1>
+<h1>Basic REDCapR Operations</h1>
 
-<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring web pages (click the <strong>MD</strong> toolbar button for help on Markdown).</p>
+<h2>Reading REDCap Data</h2>
 
-<p>When you click the <strong>Knit HTML</strong> button a web page will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
+<p>The function <code>redcap_read</code> uses the <code>RCurl</code> package to call the REDCap API.</p>
 
-<pre><code class="r">summary(cars)
+<pre><code>## Loading required package: knitr
 </code></pre>
 
-<pre><code>##      speed           dist    
-##  Min.   : 4.0   Min.   :  2  
-##  1st Qu.:12.0   1st Qu.: 26  
-##  Median :15.0   Median : 36  
-##  Mean   :15.4   Mean   : 43  
-##  3rd Qu.:19.0   3rd Qu.: 56  
-##  Max.   :25.0   Max.   :120
+<pre><code class="r">library(REDCapR) #Load the package into the current R session.
+uri &lt;- &quot;https://miechvprojects.ouhsc.edu/redcap/api/&quot;
+token &lt;- &quot;9446D2E3FAA71ABB815A2336E4692AF3&quot;
 </code></pre>
 
-<p>You can also embed plots, for example:</p>
-
-<pre><code class="r">plot(cars)
+<pre><code class="r">#Return all records and all variables.
+ds_all_rows_all_fields &lt;- redcap_read(redcap_uri=uri, token=token)$data
 </code></pre>
 
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAGwCAMAAABy/YdMAAAAbFBMVEX9/v0AAAAAADkAAGUAOTkAOWUAOY8AZrU5AAA5ADk5AGU5OY85j9plAABlADllAGVlOQBlZjlltf2POQCPOTmPOWWPjzmPtY+P2/21ZgC1/rW1/v3ajzna24/a/v39tWX924/9/rX9/tr9/v0hhXJqAAAAJHRSTlP//////////////////////////////////////////////wBYLA0NAAAACXBIWXMAAAsSAAALEgHS3X78AAAJjElEQVR4nO3di3LbuBlA4bW7jd2snLTyXqSNGl38/u9YkVbqRKIVUsRPAjjnm061bSYIN8ckCF2gX16E9MvcB6B5GB7K8FCGhzI8lOGhDA9leCjDQxkeyvBQhocyPJThoQwPZXgow0MZHsrwUIaHMjyU4aEMD2V4KMNDGR7K8FCGhzI8lOGhDA9leCjDQxkeyvBQhocyPJThoQwPZXgow0MZHsrwUIaHMjyU4aEMD2V4KMNDGR7K8FCGhzI8lOGhDA9leCjDQxkeakz4O+UsMPyI36too8PvHtufn398GTq0ZjU2/OF52T5uP3wdOLRmNTb8/vOXHx77D61ZecZDjZ7j90/O8SXyrh7K8FAplnP3K2/uMvPTJ2iS3NwdnheGz8rdy0//+tMs59YP34Xv+aSg4kwQ/rSc2/z60TM+HxOEPy7nFs3D5nI9Z/j5xM/xtw+tWRkeyvBQhocavZx7Oq3dvLkry+gzvnn25qahNavxl/r9p9VNQ2tWzvFQhocyPJThoQwPZXgow0MZHsrwUIaHMjyU4aEMD2V4KMNDGR7K8FCGhzI8lOGhDA9leCjDQxkeyvBQhocyPJThody2HMpNjKHcthzKMx7KbcuhvKuHMjyUyzkob+6gApZzblteAs94KJdzUN7VQxkeyvBQhody23Ioty2HcttyKOd4KMNDGR7K8FCGr5JfMco0xZcK3zy04vR4O4Tha+QZD+UZD+UZT+Vdvd5heCjDQxkeyvBQhocyPJThoQwPZXgow0MZHsrwEOcv2xie4eKFWsNPZOatYQw/kx5vjZj2zzf8NOYO7xw/k9nDnzP8RHLb/s3wUG5pCuUGh1B+QwWUZzyUW5pel9vNeDLe1V+V3fI7mYDwNW1bbvh3HZdzD5tqL/WGf8/h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" alt="plot of chunk unnamed-chunk-2"/> </p>
+<pre><code>3 records and 16 columns were read from REDCap in 1.6 seconds.
+</code></pre>
+
+<pre><code class="r">#Return only records with IDs of 1 and 3
+desired_records_v1 &lt;- c(1, 3)
+ds_some_rows_v1 &lt;- redcap_read(
+   redcap_uri=uri, 
+   token=token, 
+   records=desired_records_v1
+)$data
+</code></pre>
+
+<pre><code>2 records and 16 columns were read from REDCap in 0.83 seconds.
+</code></pre>
+
+<pre><code class="r">
+#Return only records with IDs of 1 and 3 (alternate way)
+desired_records_v2 &lt;- &quot;1, 3&quot;
+ds_some_rows_v2 &lt;- redcap_read(
+   redcap_uri=uri, 
+   token=token, 
+   records_collapsed=desired_records_v2
+)$data
+</code></pre>
+
+<pre><code>2 records and 16 columns were read from REDCap in 0.86 seconds.
+</code></pre>
+
+<pre><code class="r">#Return only the fields recordid, first_name, and age
+desired_fields_v1 &lt;- c(&quot;recordid&quot;, &quot;first_name&quot;, &quot;age&quot;)
+ds_some_fields_v1 &lt;- redcap_read(
+   redcap_uri=uri, 
+   token=token, 
+   fields=desired_fields_v1
+)$data
+</code></pre>
+
+<pre><code>3 records and 3 columns were read from REDCap in 0.83 seconds.
+</code></pre>
+
+<pre><code class="r">
+#Return only the fields recordid, first_name, and age (alternate way)
+desired_fields_v2 &lt;- &quot;recordid, first_name, age&quot;
+ds_some_fields_v2 &lt;- redcap_read(
+   redcap_uri=uri, 
+   token=token, 
+   fields_collapsed=desired_fields_v2
+)$data
+</code></pre>
+
+<pre><code>3 records and 3 columns were read from REDCap in 0.86 seconds.
+</code></pre>
+
+<h2>Session Info</h2>
+
+<pre><code>Report created by Will at 12/1/2013 12:07:33 AM, Central Standard Time
+</code></pre>
+
+<pre><code>R version 3.0.2 (2013-09-25)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+locale:
+[1] LC_COLLATE=English_United States.1252 
+[2] LC_CTYPE=English_United States.1252   
+[3] LC_MONETARY=English_United States.1252
+[4] LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.1252    
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] knitr_1.5      REDCapR_0.1-3  testthat_0.7.1 devtools_1.4.1
+[5] RCurl_1.95-4.1 bitops_1.0-6   roxygen2_2.2.2 digest_0.6.3  
+
+loaded via a namespace (and not attached):
+[1] brew_1.0-6     evaluate_0.5.1 formatR_0.10   httr_0.2      
+[5] memoise_0.1    parallel_3.0.2 stringr_0.6.2  tools_3.0.2   
+[9] whisker_0.3-2 
+</code></pre>
 
 </body>
 
