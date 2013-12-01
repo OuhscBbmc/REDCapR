@@ -5,7 +5,7 @@ options(device = "windows") #http://support.rstudio.org/help/discussions/problem
 devtools::check_doc() #Should return NULL
 #  system("R CMD Rd2pdf --force --output=./REDCapRDocumentationPeek.pdf ." )
 #
-devtools::run_examples(); dev.off() #This overwrites the NAMESPACE file too
+devtools::run_examples(); #dev.off() #This overwrites the NAMESPACE file too
 # devtools::run_examples(, "Ace.Rd")
 test_results <- devtools::test()
 devtools::build_vignettes()

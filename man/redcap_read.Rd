@@ -70,18 +70,16 @@
 library(REDCapR) #Load the package into the current R session.
 uri <- "https://ouhsc.edu/redcap-test"
 token <- "ReadThisFromAnEncryptedSomethingButNotHardCodedSourceCode"
-certs <- "./Dal/Certs/ca-bundle.crt"
 
 #Return all records and all variables.
-ds_all_rows_all_fields <- redcap_read(redcap_uri=uri, token=token, cert_location=certs)$data
+ds_all_rows_all_fields <- redcap_read(redcap_uri=uri, token=token)$data
 
 #Return only records with IDs of 101, 102, 103, and 104
 desired_records_v1 <- c(101, 102, 103, 104)
 ds_some_rows_v1 <- redcap_read(
    redcap_uri=uri,
    token=token,
-   records=desired_records_v1,
-   cert_location=certs
+   records=desired_records_v1
 )$data
 
 #Return only records with IDs of 101, 102, 103, and 104 (alternate way)
@@ -89,8 +87,7 @@ desired_records_v2 <- "101, 102, 103, 104"
 ds_some_rows_v2 <- redcap_read(
    redcap_uri=uri,
    token=token,
-   records_collapsed=desired_records_v2,
-   cert_location=certs
+   records_collapsed=desired_records_v2
 )$data
 
 #Return only the fields recordid, dob, gender, and apgar
@@ -98,8 +95,7 @@ desired_fields_v1 <- c("recordid", "dob", "gender", "apgar")
 ds_some_fields_v1 <- redcap_read(
    redcap_uri=uri,
    token=token,
-   fields=desired_fields_v1,
-   cert_location=certs
+   fields=desired_fields_v1
 )$data
 
 #Return only the fields recordid, dob, gender, and apgar (alternate way)
@@ -107,8 +103,7 @@ desired_fields_v2 <- "recordid, dob, gender, apgar"
 ds_some_fields_v2 <- redcap_read(
    redcap_uri=uri,
    token=token,
-   fields_collapsed=desired_fields_v2,
-   cert_location=certs
+   fields_collapsed=desired_fields_v2
 )$data
 
 } #End DontRun

@@ -35,18 +35,16 @@
 #' library(REDCapR) #Load the package into the current R session.
 #' uri <- "https://ouhsc.edu/redcap-test"
 #' token <- "ReadThisFromAnEncryptedSomethingButNotHardCodedSourceCode"
-#' certs <- "./Dal/Certs/ca-bundle.crt"
 #' 
 #' #Return all records and all variables.
-#' ds_all_rows_all_fields <- redcap_read(redcap_uri=uri, token=token, cert_location=certs)$data
+#' ds_all_rows_all_fields <- redcap_read(redcap_uri=uri, token=token)$data
 #' 
 #' #Return only records with IDs of 101, 102, 103, and 104
 #' desired_records_v1 <- c(101, 102, 103, 104)
 #' ds_some_rows_v1 <- redcap_read(
 #'    redcap_uri=uri, 
 #'    token=token, 
-#'    records=desired_records_v1, 
-#'    cert_location=certs
+#'    records=desired_records_v1
 #' )$data
 #' 
 #' #Return only records with IDs of 101, 102, 103, and 104 (alternate way)
@@ -54,8 +52,7 @@
 #' ds_some_rows_v2 <- redcap_read(
 #'    redcap_uri=uri, 
 #'    token=token, 
-#'    records_collapsed=desired_records_v2, 
-#'    cert_location=certs
+#'    records_collapsed=desired_records_v2
 #' )$data
 #' 
 #' #Return only the fields recordid, dob, gender, and apgar
@@ -63,8 +60,7 @@
 #' ds_some_fields_v1 <- redcap_read(
 #'    redcap_uri=uri, 
 #'    token=token, 
-#'    fields=desired_fields_v1, 
-#'    cert_location=certs
+#'    fields=desired_fields_v1
 #' )$data
 #' 
 #' #Return only the fields recordid, dob, gender, and apgar (alternate way)
@@ -72,8 +68,7 @@
 #' ds_some_fields_v2 <- redcap_read(
 #'    redcap_uri=uri, 
 #'    token=token, 
-#'    fields_collapsed=desired_fields_v2, 
-#'    cert_location=certs
+#'    fields_collapsed=desired_fields_v2
 #' )$data
 #' 
 #' } #End DontRun
@@ -97,14 +92,14 @@ redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL
   if( missing(fields_collapsed) & !missing(fields) )
     fields_collapsed <- paste0(fields, collapse=",")
   
-  if( missing( cert_location ) | is.null(cert_location) ) {
-    curl_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
-  }
-  else {
-    if( !base::file.exists(cert_location) )
+  if( missing( cert_location ) | is.null(cert_location) ) 
+    cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs", "mozilla_2012_12_29.crt")
+#     curl_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
+
+  if( !base::file.exists(cert_location) )
       stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
-    curl_options <- RCurl::curlOptions(cainfo = cert_location)
-  }
+  
+  curl_options <- RCurl::curlOptions(cainfo = cert_location)
   
   raw_csv <- RCurl::postForm(
     uri = redcap_uri
@@ -119,8 +114,9 @@ redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL
   print(raw_csv)
   
   try (
-    ds <- read.csv(text=raw_csv, stringsAsFactors=FALSE) #Convert the raw text to a dataset.
-  , silent = TRUE)
+    ds <- read.csv(text=raw_csv, stringsAsFactors=FALSE), #Convert the raw text to a dataset.
+    silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
+  )
     
   elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
   
@@ -131,12 +127,12 @@ redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL
                              format(length(ds), big.mark = ",", scientific = FALSE, trim = TRUE), 
                              " columns were read from REDCap in ", 
                              round(elapsed_seconds, 2), " seconds.")
-
     success <- TRUE
   }
   else {
     ds <- data.frame() #Return an empty data.frame
-    status_message <- paste0("Reading the REDCap data was not successful.  The error message was:\n", geterrmessage())
+    status_message <- paste0("Reading the REDCap data was not successful.  The error message was:\n", 
+                             geterrmessage())
     success <- FALSE
   }
     
@@ -151,5 +147,5 @@ redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL
     elapsed_seconds = elapsed_seconds, 
     status_message = status_message, 
     success = success
-  ))
+  ) )
 }
