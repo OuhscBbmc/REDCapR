@@ -1,8 +1,8 @@
 Package: REDCapR
 Title: Interaction between R and REDCap
 Description: Encapsulates functions to streamline calls from R
-Version: 0.1-3
-Date: 2013-11-30
+Version: 0.1-4
+Date: 2013-12-01
 Author: Will Beasley, David Bard, Thomas Wilson
 Maintainer: 'Will Beasley' <wibeasley@hotmail.com>
 URL: http://ouhsc.edu/bbmc/
@@ -11,12 +11,12 @@ Depends:
     stats
 Imports:
     methods,
+    plyr,
     RCurl
 Suggests:
     devtools,
     ggplot2,
     knitr,
-    plyr,
     scales,
     testit,
     testthat,
@@ -29,3 +29,4 @@ Collate:
     'REDCapR-package.R'
     'redcap_read.R'
     'redcap_write.R'
+    'validate_for_write.R'
