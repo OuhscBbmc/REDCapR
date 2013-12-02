@@ -36,11 +36,11 @@
 #' 
 #' The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.
 #' 
-#' @examples 
+#' @examples
+#' \dontrun{
 #' library(REDCapR) #Load the package into the current R session.
 #' uri <- "https://miechvprojects.ouhsc.edu/redcap/api/"
 #' token <- "9446D2E3FAA71ABB815A2336E4692AF3"
-#' 
 #' #Return all records and all variables.
 #' ds_all_rows_all_fields <- redcap_read(redcap_uri=uri, token=token)$data
 #' 
@@ -59,6 +59,8 @@
 #'    token=token, 
 #'    fields=desired_fields_v1
 #' )$data
+#' }
+#' 
 
 redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL, 
                          fields=NULL, fields_collapsed=NULL, 

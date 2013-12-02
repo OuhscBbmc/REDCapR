@@ -75,10 +75,10 @@
   given another location.
 }
 \examples{
+\dontrun{
 library(REDCapR) #Load the package into the current R session.
 uri <- "https://miechvprojects.ouhsc.edu/redcap/api/"
 token <- "9446D2E3FAA71ABB815A2336E4692AF3"
-
 #Return all records and all variables.
 ds_all_rows_all_fields <- redcap_read(redcap_uri=uri, token=token)$data
 
@@ -97,6 +97,7 @@ ds_some_fields_v1 <- redcap_read(
    token=token,
    fields=desired_fields_v1
 )$data
+}
 }
 \author{
   Will Beasley

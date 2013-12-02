@@ -15,9 +15,9 @@ For Windows, the consensus seemed to be [MiKTeX](http://miktex.org/download).  T
 ### qpdf
 [qpdf](http://sourceforge.net/projects/qpdf/) is a command line tool that R BUILD calls.  You'll never call it directly.  It is used to make see if the documentation pdfs can be further compressed to save additional space.  For Windows, download the zipped file from sourceforge and copy it into a permanent location (eg, in the `/Program Files/` directory.)  
 
-The location of the `bin` directory should be added to the OS's "PATH" environmental variable, so the executable can be found. At the time of this writing, I added `C:\Program Files\qpdf-5.0.1\bin;`.  Make sure a semicolon is separating it from all the stuff before it in the PATH variable.  Make sure the version number (eg, "5.0.1") matches the version of your current installation.
+The location of the `bin` directory should be added to the OS's "PATH" environmental variable, so the executable can be found. At the time of this writing, I added `C:\Program Files\qpdf-5.0.1\bin;`.  Make sure a semicolon is separating it from all the stuff before it in the PATH variable.  Make sure the version number (eg, "5.0.1") matches the version of your current installation. *Apparently I needed to reboot my computer for the new path entry to be recognized.*
 
-If you don't install qpdf, you'll likely receive the error message `WARNING 'qpdf' is needed for checks on size reduction of PDFs` when runing R CHECK with the `--as-cran-` option.
+If you don't install qpdf, you'll likely receive the error message `WARNING 'qpdf' is needed for checks on size reduction of PDFs` when running R CHECK with the `--as-cran-` option.
 
 ### R Packages
 We try to keep a current list of all the packages used in REDCapR in the file `/utility_scripts/package_dependencies.R`.  This is partly for the sake of documentation, and partly so there aren't any surprises for new contributors.  Just run this file, and everything should be installed if it's not already.  After this script is run the first time, make sure you click the 'Check for Updates' button in the 'Packages' every week or so.
