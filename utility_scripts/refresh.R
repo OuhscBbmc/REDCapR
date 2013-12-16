@@ -19,6 +19,6 @@ devtools::build_vignettes()
 # unlink("REDCapR.Rcheck", recursive=T)
 # system("R CMD check --as-cran D:/Projects/RDev/NlsyLinksStaging/NlsyLinks_1.300.tar.gz")
 
-# devtools::build_win()
+# devtools::build_win(version="R-devel") #CRAN submission policies encourage the development version
 devtools::revdep_check(pkg="REDCapR", recursive=TRUE)
 # devtools::release(check=FALSE) #Careful, the last question ultimately uploads it to CRAN, where you can't delete/reverse your decision.

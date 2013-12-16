@@ -39,7 +39,7 @@
 validate_no_logical <- function( df ) {
   indices <- which(sapply(df, class)=="logical")
   
-  if( length(indices) ==0 ) {
+  if( length(indices) == 0 ) {
     return( data.frame())
   }
   else {    
@@ -54,7 +54,7 @@ validate_no_logical <- function( df ) {
 }
 validate_no_uppercase <- function( df ) {
   indices <- grep(pattern="[A-Z]", x=colnames(df), perl=TRUE)
-  if( length(indices) ==0 ) {
+  if( length(indices) == 0 ) {
     return( data.frame())
   }
   else { 

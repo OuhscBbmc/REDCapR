@@ -40,7 +40,7 @@ redcap_write <- function( ds, redcap_uri, token, verbose=TRUE ) {
   else { #If the returned content wasn't recognized as valid IDs, then
     affectedIDs <- numeric() #Pass an empty array
     recordsAffectedCount <- NA
-    status_message <- "The content returned during the write operation was not recognized.  Please see the `returnContent` elemnt for more information." 
+    status_message <- "The content returned during the write operation was not recognized.  Please see the `returnContent` element for more information." 
   }
   if( verbose ) 
     message(status_message)
