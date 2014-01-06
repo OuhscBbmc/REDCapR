@@ -7,7 +7,8 @@ rm(list=ls(all=TRUE)) #Clear all the variables before starting a new run.
 require(testthat)
 require(devtools)
 
-directoryTests <- file.path(devtools::inst("REDCapR"), "tests/testthat")
+#directoryTests <- file.path(devtools::inst("REDCapR"), "tests/testthat")
+directoryTests <- file.path(devtools::inst("REDCapR"), "tests")
 
 ClearMostVariables <- function( ) {
   rm(list=ls(all=TRUE)[!(ls(all=TRUE) %in% c("ClearMostVariables", "directoryTests"))])
@@ -18,4 +19,4 @@ require(REDCapR)
 #?REDCapR
 
 ClearMostVariables()
-test_file(file.path(directoryTests, "test.read.R"))
+test_file(file.path(directoryTests, "test-read.R"))
