@@ -4,39 +4,39 @@
 \alias{validate_no_uppercase}
 \title{Inspect a \code{data.frame} to anticipate problems before writing to a REDCap project.}
 \usage{
-  validate_for_write( df )
+validate_for_write( df )
 
-  validate_no_logical( df )
+validate_no_logical( df )
 
-  validate_no_uppercase( df )
+validate_no_uppercase( df )
 }
 \arguments{
   \item{df}{The \code{data.frame} containing the dataset
   used to update the REDCap project.  Required.}
 }
 \value{
-  A \code{data.frame}, where each potential violation is a
-  row.  The two columns are: \enumerate{ \item
-  \code{field_name}: The name of the \code{data.frame} that
-  might cause problems during the upload.  \item
-  \code{field_index}: The position of the field.  (For
-  example, a value of '1' indicates the first column, while
-  a '3' indicates the third column.)  \item \code{concern}:
-  A description of the problem potentially caused by the
-  \code{field}.  \item \code{suggestion}: A
-  \emph{potential} solution to the concern. }
+A \code{data.frame}, where each potential violation is a
+row.  The two columns are: \enumerate{ \item
+\code{field_name}: The name of the \code{data.frame} that
+might cause problems during the upload.  \item
+\code{field_index}: The position of the field.  (For
+example, a value of '1' indicates the first column, while a
+'3' indicates the third column.)  \item \code{concern}: A
+description of the problem potentially caused by the
+\code{field}.  \item \code{suggestion}: A \emph{potential}
+solution to the concern. }
 }
 \description{
-  This set of functions inspect a \code{data.frame} to
-  anticipate problems before writing with REDCap's
-  \href{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}{API}.
+This set of functions inspect a \code{data.frame} to
+anticipate problems before writing with REDCap's
+\href{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}{API}.
 }
 \details{
-  All functions listed in the Usage section above inspect a
-  specific aspect of the dataset.  The
-  \code{validate_for_read()} function executes all these
-  individual validation checks.  It allows the client to
-  check everything with one call.
+All functions listed in the Usage section above inspect a
+specific aspect of the dataset.  The
+\code{validate_for_read()} function executes all these
+individual validation checks.  It allows the client to
+check everything with one call.
 }
 \examples{
 df <- data.frame(
@@ -47,6 +47,6 @@ df <- data.frame(
 validate_for_write(df = df)
 }
 \author{
-  Will Beasley
+Will Beasley
 }
 

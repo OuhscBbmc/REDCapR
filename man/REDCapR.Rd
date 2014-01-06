@@ -4,6 +4,6 @@
 \alias{REDCapR-package}
 \title{REDCapR}
 \description{
-  REDCapR
+REDCapR
 }
 

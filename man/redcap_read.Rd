@@ -2,10 +2,9 @@
 \alias{redcap_read}
 \title{Read records from a REDCap project.}
 \usage{
-  redcap_read(redcap_uri, token, records = NULL,
-    records_collapsed = NULL, fields = NULL,
-    fields_collapsed = NULL, verbose = TRUE,
-    cert_location = NULL)
+redcap_read(redcap_uri, token, records = NULL, records_collapsed = NULL,
+  fields = NULL, fields_collapsed = NULL, verbose = TRUE,
+  cert_location = NULL)
 }
 \arguments{
   \item{redcap_uri}{The URI of the REDCap project.
@@ -38,47 +37,46 @@
   See the details below. Optional.}
 }
 \value{
-  Currently, a list is returned with the following
-  elements, \enumerate{ \item \code{data}: an R
-  \code{data.frame} of the desired records and columns.
-  \item \code{raw_csv}: the text of comma separated values
-  returned by REDCap through \code{RCurl}.  \item
-  \code{records_collapsed}: the desired records IDs,
-  collapsed into a single string, separated by commas.
-  \item \code{fields_collapsed}: the desired field names,
-  collapsed into a single string, separated by commas.
-  \item \code{elapsed_seconds}: the duration of the
-  function.  \item \code{status_message}: a boolean value
-  indicating if the operation was apparently successful. }
+Currently, a list is returned with the following elements,
+\enumerate{ \item \code{data}: an R \code{data.frame} of
+the desired records and columns.  \item \code{raw_csv}: the
+text of comma separated values returned by REDCap through
+\code{RCurl}.  \item \code{records_collapsed}: the desired
+records IDs, collapsed into a single string, separated by
+commas.  \item \code{fields_collapsed}: the desired field
+names, collapsed into a single string, separated by commas.
+\item \code{elapsed_seconds}: the duration of the function.
+\item \code{status_message}: a boolean value indicating if
+the operation was apparently successful. }
 }
 \description{
-  This function uses REDCap's
-  \href{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}{API}
-  to select and return data.
+This function uses REDCap's
+\href{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}{API}
+to select and return data.
 }
 \details{
-  I like how \href{http://sburns.org/PyCap/}{PyCap} creates
-  a `project' object with methods that read and write from
-  REDCap.  However this isn't a style that R clients
-  typically use. I like the logic that it's associated with
-  a particular REDCap project that shouldn't change between
-  calls. As a compromise, I think I'll wrap the uri, token,
-  and cert location into a single \code{S4} object that's
-  passed to these methods.  It will make these calls take
-  less space.
+I like how \href{http://sburns.org/PyCap/}{PyCap} creates a
+`project' object with methods that read and write from
+REDCap.  However this isn't a style that R clients
+typically use. I like the logic that it's associated with a
+particular REDCap project that shouldn't change between
+calls. As a compromise, I think I'll wrap the uri, token,
+and cert location into a single \code{S4} object that's
+passed to these methods.  It will make these calls take
+less space.
 
-  The `REDCapR` package includes a recent version of the
-  \href{http://curl.haxx.se/ca/cacert.pem}{Bundle of CA
-  Root Certificates} from the official
-  \href{http://curl.haxx.se}{cURL site}.  This version is
-  used by default, unless the `cert_location` parameter is
-  given another location.
+The `REDCapR` package includes a recent version of the
+\href{http://curl.haxx.se/ca/cacert.pem}{Bundle of CA Root
+Certificates} from the official
+\href{http://curl.haxx.se}{cURL site}.  This version is
+used by default, unless the `cert_location` parameter is
+given another location.
 }
 \examples{
 \dontrun{
 library(REDCapR) #Load the package into the current R session.
 uri <- "https://miechvprojects.ouhsc.edu/redcap/api/"
-token <- "9446D2E3FAA71ABB815A2336E4692AF3"
+token <- "9A81268476645C4E5F03428B8AC3AA7B"
 #Return all records and all variables.
 ds_all_rows_all_fields <- redcap_read(redcap_uri=uri, token=token)$data
 
@@ -100,16 +98,16 @@ ds_some_fields_v1 <- redcap_read(
 }
 }
 \author{
-  Will Beasley
+Will Beasley
 }
 \references{
-  The official documentation can be found on the `API
-  Examples' page on the REDCap wiki
-  (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}).
-  A user account is required.
+The official documentation can be found on the `API
+Examples' page on the REDCap wiki
+(\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}).
+A user account is required.
 
-  The official \href{http://curl.haxx.se}{cURL site}
-  discusses the process of using SSL to verify the server
-  being connected to.
+The official \href{http://curl.haxx.se}{cURL site}
+discusses the process of using SSL to verify the server
+being connected to.
 }
 

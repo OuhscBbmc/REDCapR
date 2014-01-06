@@ -5,7 +5,7 @@ context("Read Errors")
 ###########
 test_that("Bad Uri", {
   uri <- "http://miechvprojects.ouhsc.edu/redcap/api/" #Not HTTPS
-  token <- "6E3BEDBE96DB36013FE291B56A8A1D9C"
+  token <- "9A81268476645C4E5F03428B8AC3AA7B"
   certs <- "C:/Users/Will/Documents/Miechv/MReporting/Dal/Certs"
   
   expect_message(

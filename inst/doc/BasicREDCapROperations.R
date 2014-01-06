@@ -15,7 +15,7 @@ options(width=120) #So the output is 50% wider than the default.
 ## ----project_values------------------------------------------------------
 library(REDCapR) #Load the package into the current R session.
 uri <- "https://miechvprojects.ouhsc.edu/redcap/api/"
-token <- "9446D2E3FAA71ABB815A2336E4692AF3"
+token <- "9A81268476645C4E5F03428B8AC3AA7B"
 
 
 ## ----return_all----------------------------------------------------------
@@ -75,7 +75,7 @@ all_information #Inspect the additional information
 
 
 ## ----session_info, echo=FALSE--------------------------------------------
-cat("Report created by", Sys.info()["user"], "at", strftime(Sys.time(), "%c, %z"))
+cat("Report created by", Sys.info()["user"], "at", strftime(Sys.time(), "%F, %T %z"))
 sessionInfo()
 
 
