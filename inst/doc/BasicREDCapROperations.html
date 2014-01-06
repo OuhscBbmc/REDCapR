@@ -193,6 +193,9 @@ hr {
 
 <p>The function <code>redcap_read</code> uses the <a href="http://cran.r-project.org/web/packages/RCurl/index.html"><code>RCurl</code></a> package to call the REDCap API.</p>
 
+<pre><code>## Loading required package: knitr
+</code></pre>
+
 <h3>Set project-wide values.</h3>
 
 <p>There is some information that is specific to the REDCap project, as opposed to an individual operation.  This includes the (1) uri of the server, the (2) token for the user&#39;s project, and the (3) location of the SSL certification store, which is necessary to verify the identity of the REDCap webserver.  </p>
@@ -212,7 +215,7 @@ token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;
 ds_all_rows_all_fields &lt;- redcap_read(redcap_uri=uri, token=token)$data
 </code></pre>
 
-<pre><code>3 records and 16 columns were read from REDCap in 5.45 seconds.
+<pre><code>3 records and 16 columns were read from REDCap in 1.38 seconds.
 </code></pre>
 
 <pre><code class="r">ds_all_rows_all_fields #Inspect the returned dataset
@@ -243,7 +246,7 @@ ds_some_rows_v1 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 0.89 seconds.
+<pre><code>2 records and 16 columns were read from REDCap in 1.12 seconds.
 </code></pre>
 
 <pre><code class="r">
@@ -256,7 +259,7 @@ ds_some_rows_v2 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 1.13 seconds.
+<pre><code>2 records and 16 columns were read from REDCap in 2.29 seconds.
 </code></pre>
 
 <pre><code class="r">
@@ -284,7 +287,7 @@ ds_some_fields_v1 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>3 records and 3 columns were read from REDCap in 2.34 seconds.
+<pre><code>3 records and 3 columns were read from REDCap in 0.87 seconds.
 </code></pre>
 
 <pre><code class="r">
@@ -297,7 +300,7 @@ ds_some_fields_v2 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>3 records and 3 columns were read from REDCap in 1.11 seconds.
+<pre><code>3 records and 3 columns were read from REDCap in 1 seconds.
 </code></pre>
 
 <pre><code class="r">
@@ -332,7 +335,7 @@ all_information &lt;- redcap_read(
 )
 </code></pre>
 
-<pre><code>3 records and 3 columns were read from REDCap in 3.34 seconds.
+<pre><code>3 records and 3 columns were read from REDCap in 1.12 seconds.
 </code></pre>
 
 <pre><code class="r">all_information #Inspect the additional information
@@ -357,10 +360,10 @@ $fields_collapsed
 [1] &quot;recordid,first_name,age&quot;
 
 $elapsed_seconds
-[1] 3.341
+[1] 1.124
 
 $status_message
-[1] &quot;3 records and 3 columns were read from REDCap in 3.34 seconds.&quot;
+[1] &quot;3 records and 3 columns were read from REDCap in 1.12 seconds.&quot;
 
 $success
 [1] TRUE
@@ -370,7 +373,7 @@ $success
 
 <p>For the sake of documentation and reproducibility, the current vignette was build on a system using the following software.</p>
 
-<pre><code>Report created by Will at 2014-01-05, 23:12:56 -0600
+<pre><code>Report created by Will at 2014-01-06, 06:50:33 +0000
 </code></pre>
 
 <pre><code>R Under development (unstable) (2014-01-03 r64635)
@@ -384,11 +387,10 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] REDCapR_0.1-6     knitr_1.5         RCurl_1.95-4.1    bitops_1.0-6      plyr_1.8.0.99     testthat_0.8     
-[7] roxygen2_3.0.0    devtools_1.4.1.99
+[1] knitr_1.5      RCurl_1.95-4.1 bitops_1.0-6   plyr_1.8.0.99  roxygen2_3.0.0 testthat_0.8   REDCapR_0.1-7 
 
 loaded via a namespace (and not attached):
- [1] brew_1.0-6      codetools_0.2-8 digest_0.6.4    evaluate_0.5.1  formatR_0.10    httr_0.2        markdown_0.6.3 
+ [1] brew_1.0-6      codetools_0.2-8 devtools_1.4.1  digest_0.6.4    evaluate_0.5.1  formatR_0.10    httr_0.2       
  [8] memoise_0.1     parallel_3.1.0  stringr_0.6.2   tools_3.1.0     whisker_0.3-2  
 </code></pre>
 
