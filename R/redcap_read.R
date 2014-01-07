@@ -64,6 +64,8 @@
 
 redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL, 
                          fields=NULL, fields_collapsed=NULL, 
+                         exportDataAccessGroups = NULL,
+                         rawOrLabel = NULL,
                          verbose=TRUE, cert_location=NULL ) {
   #TODO: NULL verbose parameter pulls from getOption("verbose")
   #TODO: warns if any requested fields aren't entirely lowercase.
@@ -96,6 +98,7 @@ redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL
     , content = 'record'
     , format = 'csv'
     , type = 'flat'
+    , rawOrLabel = rawOrLabel
     , records = records_collapsed
     , fields = fields_collapsed
     , .opts = curl_options
