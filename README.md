@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/OuhscBbmc/REDCapR.png?branch=master)](https://travis-ci.org/OuhscBbmc/REDCapR)
+
 REDCapR
 =======
 We’ve been using R with REDCap’s API since the Fall 2012 and have developed a few functions that we're assembling in an R package: [REDCapR](https://github.com/OuhscBbmc/REDCapR).

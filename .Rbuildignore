@@ -1,6 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-.gitignore
+^\.gitignore$
+^\.travis.yml$
 
 REDCapRDocumentationPeek.pdf
 documentation_for_developers/
