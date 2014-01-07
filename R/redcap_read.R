@@ -99,6 +99,7 @@ redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL
     , format = 'csv'
     , type = 'flat'
     , rawOrLabel = rawOrLabel
+    , exportDataAccessGroups = exportDataAccessGroups
     , records = records_collapsed
     , fields = fields_collapsed
     , .opts = curl_options
