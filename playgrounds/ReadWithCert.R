@@ -1,8 +1,8 @@
 rm(list=ls(all=TRUE))
 require(REDCapR)
 
-uri <- "https://miechvprojects.ouhsc.edu/redcap/api/"
-# uri <- "https://miechvprojects.ouhsc.edu/redcap/redcap_v5.2.3/API/"
+uri <- "https://bbmc.ouhsc.edu/redcap/api/"
+# uri <- "https://bbmc.ouhsc.edu/redcap/redcap_v5.2.3/API/"
 # token <- "0B3702D39ED7658B8236797689679DBF" #wbeasley
 token <- "C1A2B36F94B518FDD50561D1FD09170D" #UnitTesttPhiFree
 certs <- file.path(devtools::inst("REDCapR"), "ssl_certs", "mozilla_2012_12_29.crt")

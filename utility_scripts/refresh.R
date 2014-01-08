@@ -2,10 +2,11 @@ rm(list=ls(all=TRUE))
 require(devtools)
 options(device = "windows") #http://support.rstudio.org/help/discussions/problems/80-error-in-function-only-one-rstudio-graphics-device-is-permitted
 
+devtools::document()
 devtools::check_doc() #Should return NULL
 #  system("R CMD Rd2pdf --force --output=./REDCapRDocumentationPeek.pdf ." )
 
-devtools::run_examples(); dev.off() #This overwrites the NAMESPACE file too
+devtools::run_examples(); #dev.off() #This overwrites the NAMESPACE file too
 # devtools::run_examples(, "redcap_read.Rd")
 test_results <- devtools::test()
 devtools::build_vignettes()

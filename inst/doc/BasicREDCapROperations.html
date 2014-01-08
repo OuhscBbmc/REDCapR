@@ -193,9 +193,6 @@ hr {
 
 <p>The function <code>redcap_read</code> uses the <a href="http://cran.r-project.org/web/packages/RCurl/index.html"><code>RCurl</code></a> package to call the REDCap API.</p>
 
-<pre><code>## Loading required package: knitr
-</code></pre>
-
 <h3>Set project-wide values.</h3>
 
 <p>There is some information that is specific to the REDCap project, as opposed to an individual operation.  This includes the (1) uri of the server, the (2) token for the user&#39;s project, and the (3) location of the SSL certification store, which is necessary to verify the identity of the REDCap webserver.  </p>
@@ -215,20 +212,36 @@ token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;
 ds_all_rows_all_fields &lt;- redcap_read(redcap_uri=uri, token=token)$data
 </code></pre>
 
-<pre><code>3 records and 16 columns were read from REDCap in 1.38 seconds.
+<pre><code>5 records and 16 columns were read from REDCap in 5.48 seconds.
 </code></pre>
 
 <pre><code class="r">ds_all_rows_all_fields #Inspect the returned dataset
 </code></pre>
 
-<pre><code>  record_id first_name last_name                                 address      telephone            email        dob age
-1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232 (432) 456-4848  nutty@mouse.com 2003-08-30  10
-2         2     Tumtum  Nutmouse 14 Rose Cottage Blvd.\nKenning UK 34243 (234) 234-2343 tummy@mouse.comm 2003-03-10  10
-3         3     Marcus      Wood          243 Hill St.\nGuthrie OK 73402 (433) 435-9865     mw@mwood.net 1934-04-09  79
-  ethnicity race sex height weight   bmi                                comments demographics_complete
-1         1    2   0      5      1 400.0 Character in a book, with some guessing                     2
-2         1    6   1      6      1 277.8      A mouse character from a good book                     2
-3         0    4   1    180     80  24.7                      completely made up                     2
+<pre><code>  record_id first_name last_name                                 address      telephone               email        dob
+1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232 (432) 456-4848     nutty@mouse.com 2003-08-30
+2         2     Tumtum  Nutmouse 14 Rose Cottage Blvd.\nKenning UK 34243 (234) 234-2343    tummy@mouse.comm 2003-03-10
+3         3     Marcus      Wood          243 Hill St.\nGuthrie OK 73402 (433) 435-9865        mw@mwood.net 1934-04-09
+4         4      Trudy       DAG          342 Elm\nDuncanville TX, 75116 (987) 654-3210 peroxide@blonde.com 1952-11-02
+5         5   John Lee    Walker      Hotel Suite\nNew Orleans LA, 70115 (333) 333-4444  left@hippocket.com 1955-04-15
+  age ethnicity race sex height weight   bmi
+1  10         1    2   0      5      1 400.0
+2  10         1    6   1      6      1 277.8
+3  79         0    4   1    180     80  24.7
+4  61         1    4   0    165     54  19.8
+5  58         1    4   1    193    104  27.9
+                                                                                                                                  comments
+1                                                                                                  Character in a book, with some guessing
+2                                                                                                       A mouse character from a good book
+3                                                                                                                       completely made up
+4                              This record doesn&#39;t have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail
+5 Had a hand for trouble and a eye for cash\nHe had a gold watch chain and a black mustache\n\nhttps://www.youtube.com/watch?v=DUESvITrvsI
+  demographics_complete
+1                     2
+2                     2
+3                     2
+4                     2
+5                     2
 </code></pre>
 
 <h3>Read a subset of the records.</h3>
@@ -246,7 +259,7 @@ ds_some_rows_v1 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 1.12 seconds.
+<pre><code>2 records and 16 columns were read from REDCap in 0.89 seconds.
 </code></pre>
 
 <pre><code class="r">
@@ -259,7 +272,7 @@ ds_some_rows_v2 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 2.29 seconds.
+<pre><code>2 records and 16 columns were read from REDCap in 0.87 seconds.
 </code></pre>
 
 <pre><code class="r">
@@ -287,7 +300,7 @@ ds_some_fields_v1 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>3 records and 3 columns were read from REDCap in 0.87 seconds.
+<pre><code>5 records and 3 columns were read from REDCap in 8.52 seconds.
 </code></pre>
 
 <pre><code class="r">
@@ -300,7 +313,7 @@ ds_some_fields_v2 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>3 records and 3 columns were read from REDCap in 1 seconds.
+<pre><code>5 records and 3 columns were read from REDCap in 0.96 seconds.
 </code></pre>
 
 <pre><code class="r">
@@ -311,6 +324,8 @@ ds_some_fields_v2 #Inspect the returned dataset
 1         1     Nutmeg  10
 2         2     Tumtum  10
 3         3     Marcus  79
+4         4      Trudy  61
+5         5   John Lee  58
 </code></pre>
 
 <h3>Additional Returned Information</h3>
@@ -335,7 +350,7 @@ all_information &lt;- redcap_read(
 )
 </code></pre>
 
-<pre><code>3 records and 3 columns were read from REDCap in 1.12 seconds.
+<pre><code>5 records and 3 columns were read from REDCap in 1.16 seconds.
 </code></pre>
 
 <pre><code class="r">all_information #Inspect the additional information
@@ -346,9 +361,11 @@ all_information &lt;- redcap_read(
 1         1     Nutmeg  10
 2         2     Tumtum  10
 3         3     Marcus  79
+4         4      Trudy  61
+5         5   John Lee  58
 
 $raw_csv
-[1] &quot;record_id,first_name,age\n\&quot;1\&quot;,\&quot;Nutmeg\&quot;,10\n\&quot;2\&quot;,\&quot;Tumtum\&quot;,10\n\&quot;3\&quot;,\&quot;Marcus\&quot;,79\n&quot;
+[1] &quot;record_id,first_name,age\n\&quot;1\&quot;,\&quot;Nutmeg\&quot;,10\n\&quot;2\&quot;,\&quot;Tumtum\&quot;,10\n\&quot;3\&quot;,\&quot;Marcus\&quot;,79\n\&quot;4\&quot;,\&quot;Trudy\&quot;,61\n\&quot;5\&quot;,\&quot;John Lee\&quot;,58\n&quot;
 attr(,&quot;Content-Type&quot;)
                 charset 
 &quot;text/html&quot;     &quot;utf-8&quot; 
@@ -360,10 +377,10 @@ $fields_collapsed
 [1] &quot;recordid,first_name,age&quot;
 
 $elapsed_seconds
-[1] 1.124
+[1] 1.157
 
 $status_message
-[1] &quot;3 records and 3 columns were read from REDCap in 1.12 seconds.&quot;
+[1] &quot;5 records and 3 columns were read from REDCap in 1.16 seconds.&quot;
 
 $success
 [1] TRUE
@@ -373,7 +390,7 @@ $success
 
 <p>For the sake of documentation and reproducibility, the current vignette was build on a system using the following software.</p>
 
-<pre><code>Report created by Will at 2014-01-06, 06:50:33 +0000
+<pre><code>Report created by Will at 2014-01-07, 22:35:18 -0600
 </code></pre>
 
 <pre><code>R Under development (unstable) (2014-01-03 r64635)
@@ -387,11 +404,11 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] knitr_1.5      RCurl_1.95-4.1 bitops_1.0-6   plyr_1.8.0.99  roxygen2_3.0.0 testthat_0.8   REDCapR_0.1-7 
+[1] REDCapR_0.1-8  knitr_1.5      testthat_0.8   roxygen2_3.0.0 devtools_1.4.1
 
 loaded via a namespace (and not attached):
- [1] brew_1.0-6      codetools_0.2-8 devtools_1.4.1  digest_0.6.4    evaluate_0.5.1  formatR_0.10    httr_0.2       
- [8] memoise_0.1     parallel_3.1.0  stringr_0.6.2   tools_3.1.0     whisker_0.3-2  
+ [1] brew_1.0-6      codetools_0.2-8 digest_0.6.4    evaluate_0.5.1  formatR_0.10    httr_0.2        memoise_0.1    
+ [8] parallel_3.1.0  plyr_1.8.0.99   RCurl_1.95-4.1  stringr_0.6.2   tools_3.1.0     whisker_0.3-2  
 </code></pre>
 
 </body>
