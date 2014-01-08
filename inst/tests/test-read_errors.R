@@ -4,7 +4,7 @@ require(testthat)
 context("Read Errors")
 ###########
 test_that("Bad Uri", {
-  uri <- "http://miechvprojects.ouhsc.edu/redcap/api/" #Not HTTPS
+  uri <- "http://bbmc.ouhsc.edu/redcap/api/" #Not HTTPS
   token <- "9A81268476645C4E5F03428B8AC3AA7B"
   certs <- "C:/Users/Will/Documents/Miechv/MReporting/Dal/Certs"
   

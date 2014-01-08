@@ -12,6 +12,8 @@
 #' @param records_collapsed A single string, where the desired ID values are separated by commas.  Optional.
 #' @param fields An array, where each element corresponds a desired project field.  Optional.
 #' @param fields_collapsed A single string, where the desired field names are separated by commas.  Optional.
+#' @param export_data_access_groups A boolean value that specifies whether or not to export the ``redcap_data_access_group'' field when data access groups are utilized in the project. Default is \code{FALSE}. See the details below.
+#' @param raw_or_label A string (either \code{'raw'} or \code{'label'} that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is \code{'raw'}.
 #' @param verbose A boolean value indicating if \code{message}s should be printed to the R console during the operation.  Optional.
 #' @param cert_location  If present, this string should point to the location of the cert files required for SSL verification.  If the value is missing or NULL, the server's identity will be verified using a recent CA bundle from the \href{http://curl.haxx.se}{cURL website}.  See the details below. Optional.
 #' @return Currently, a list is returned with the following elements,
@@ -30,7 +32,8 @@
 #' 
 #' The `REDCapR` package includes a recent version of the \href{http://curl.haxx.se/ca/cacert.pem}{Bundle of CA Root Certificates} 
 #' from the official \href{http://curl.haxx.se}{cURL site}.  This version is used by default, unless the `cert_location` parameter is given another location.
-
+#' 
+#' If you do not pass in this export_data_access_groups value, it will default to \code{FALSE}. The following is from the API help page for version 5.2.3: This flag is only viable if the user whose token is being used to make the API request is *not* in a data access group. If the user is in a group, then this flag will revert to its default value.
 #' @author Will Beasley
 #' @references The official documentation can be found on the `API Examples' page on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}). A user account is required.
 #' 
@@ -39,7 +42,7 @@
 #' @examples
 #' \dontrun{
 #' library(REDCapR) #Load the package into the current R session.
-#' uri <- "https://miechvprojects.ouhsc.edu/redcap/api/"
+#' uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token <- "9A81268476645C4E5F03428B8AC3AA7B"
 #' #Return all records and all variables.
 #' ds_all_rows_all_fields <- redcap_read(redcap_uri=uri, token=token)$data
@@ -64,8 +67,8 @@
 
 redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL, 
                          fields=NULL, fields_collapsed=NULL, 
-                         exportDataAccessGroups = NULL,
-                         rawOrLabel = NULL,
+                         export_data_access_groups = FALSE,
+                         raw_or_label = 'raw',
                          verbose=TRUE, cert_location=NULL ) {
   #TODO: NULL verbose parameter pulls from getOption("verbose")
   #TODO: warns if any requested fields aren't entirely lowercase.
@@ -83,6 +86,8 @@ redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL
   if( missing(fields_collapsed) & !missing(fields) )
     fields_collapsed <- paste0(fields, collapse=",")
   
+  export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
+  
   if( missing( cert_location ) | is.null(cert_location) ) 
     cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs", "mozilla_2012_12_29.crt")
 #     curl_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
@@ -98,8 +103,8 @@ redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL
     , content = 'record'
     , format = 'csv'
     , type = 'flat'
-    , rawOrLabel = rawOrLabel
-    , exportDataAccessGroups = exportDataAccessGroups
+    , rawOrLabel = raw_or_label
+    , exportDataAccessGroups = export_data_access_groups_string
     , records = records_collapsed
     , fields = fields_collapsed
     , .opts = curl_options

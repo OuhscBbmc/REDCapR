@@ -3,7 +3,8 @@
 \title{Read records from a REDCap project.}
 \usage{
 redcap_read(redcap_uri, token, records = NULL, records_collapsed = NULL,
-  fields = NULL, fields_collapsed = NULL, verbose = TRUE,
+  fields = NULL, fields_collapsed = NULL,
+  export_data_access_groups = FALSE, raw_or_label = "raw", verbose = TRUE,
   cert_location = NULL)
 }
 \arguments{
@@ -24,6 +25,17 @@ redcap_read(redcap_uri, token, records = NULL, records_collapsed = NULL,
 
   \item{fields_collapsed}{A single string, where the
   desired field names are separated by commas.  Optional.}
+
+  \item{export_data_access_groups}{A boolean value that
+  specifies whether or not to export the
+  ``redcap_data_access_group'' field when data access
+  groups are utilized in the project. Default is
+  \code{FALSE}. See the details below.}
+
+  \item{raw_or_label}{A string (either \code{'raw'} or
+  \code{'label'} that specifies whether to export the raw
+  coded values or the labels for the options of multiple
+  choice fields.  Default is \code{'raw'}.}
 
   \item{verbose}{A boolean value indicating if
   \code{message}s should be printed to the R console during
@@ -71,11 +83,18 @@ Certificates} from the official
 \href{http://curl.haxx.se}{cURL site}.  This version is
 used by default, unless the `cert_location` parameter is
 given another location.
+
+If you do not pass in this export_data_access_groups value,
+it will default to \code{FALSE}. The following is from the
+API help page for version 5.2.3: This flag is only viable
+if the user whose token is being used to make the API
+request is *not* in a data access group. If the user is in
+a group, then this flag will revert to its default value.
 }
 \examples{
 \dontrun{
 library(REDCapR) #Load the package into the current R session.
-uri <- "https://miechvprojects.ouhsc.edu/redcap/api/"
+uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "9A81268476645C4E5F03428B8AC3AA7B"
 #Return all records and all variables.
 ds_all_rows_all_fields <- redcap_read(redcap_uri=uri, token=token)$data
