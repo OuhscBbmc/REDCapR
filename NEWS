@@ -4,3 +4,11 @@ New Features:
 * Introduces redcap_read, with documentation
 * SSL verify peer by default, using cert file included in package
 * Initial submission to GitHub
+
+Enhancements:
+* redcap_read takes parameter for raw_or_label (Thanks Rollie Parrish #3)
+* redcap_read takes parameter for export_data_access_groups (Thanks Rollie Parrish #4)
+
+GitHub Commits
+------------------------------------------------------------------------------
+For a detailed change log, please see https://github.com/OuhscBbmc/REDCapR/commits/master

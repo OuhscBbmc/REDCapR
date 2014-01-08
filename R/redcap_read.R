@@ -72,6 +72,10 @@ redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL
                          verbose=TRUE, cert_location=NULL ) {
   #TODO: NULL verbose parameter pulls from getOption("verbose")
   #TODO: warns if any requested fields aren't entirely lowercase.
+  #TODO: validate export_data_access_groups
+  #TODO: validate raw_or_label
+  
+  
   start_time <- Sys.time()
   
   if( missing(redcap_uri) )
