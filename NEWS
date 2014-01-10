@@ -1,7 +1,7 @@
-﻿Version 0.1 (2013-12)
+﻿Version 0.1 (Developed 2013-11-26 through 2014-01-?)
 ------------------------------------------------------------------------------
 New Features:
-* Introduces redcap_read, with documentation
+* Introduces redcap_read and redcap_read_batch with documentation
 * SSL verify peer by default, using cert file included in package
 * Initial submission to GitHub
 

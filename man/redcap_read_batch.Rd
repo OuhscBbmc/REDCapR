@@ -1,0 +1,114 @@
+\name{redcap_read_batch}
+\alias{redcap_read_batch}
+\title{Read records from a REDCap project in subsets, and stacks them together before returning a \code{data.frame}.}
+\usage{
+redcap_read_batch(batch_size = 100L, interbatch_delay = 0, redcap_uri,
+  token, records = NULL, records_collapsed = NULL, fields = NULL,
+  fields_collapsed = NULL, export_data_access_groups = FALSE,
+  raw_or_label = "raw", verbose = TRUE, cert_location = NULL)
+}
+\arguments{
+  \item{batch_size}{The maximum number of subject records a
+  single batch should contain.  The default is 100.}
+
+  \item{interbatch_delay}{The number of seconds the
+  function will wait before requesting a new subset from
+  REDCap. The default is 0.5 seconds.}
+
+  \item{redcap_uri}{The URI of the REDCap project.
+  Required.}
+
+  \item{token}{The user-specific string that serves as the
+  password for a project.  Required.}
+
+  \item{records}{An array, where each element corresponds
+  to the ID of a desired record.  Optional.}
+
+  \item{records_collapsed}{A single string, where the
+  desired ID values are separated by commas.  Optional.}
+
+  \item{fields}{An array, where each element corresponds a
+  desired project field.  Optional.}
+
+  \item{fields_collapsed}{A single string, where the
+  desired field names are separated by commas.  Optional.}
+
+  \item{export_data_access_groups}{A boolean value that
+  specifies whether or not to export the
+  ``redcap_data_access_group'' field when data access
+  groups are utilized in the project. Default is
+  \code{FALSE}. See the details below.}
+
+  \item{raw_or_label}{A string (either \code{'raw'} or
+  \code{'label'} that specifies whether to export the raw
+  coded values or the labels for the options of multiple
+  choice fields.  Default is \code{'raw'}.}
+
+  \item{verbose}{A boolean value indicating if
+  \code{message}s should be printed to the R console during
+  the operation.  Optional.}
+
+  \item{cert_location}{If present, this string should point
+  to the location of the cert files required for SSL
+  verification.  If the value is missing or NULL, the
+  server's identity will be verified using a recent CA
+  bundle from the \href{http://curl.haxx.se}{cURL website}.
+  See the details below. Optional.}
+}
+\value{
+Currently, a list is returned with the following elements,
+\enumerate{ \item \code{data}: an R \code{data.frame} of
+the desired records and columns.  \item \code{raw_csv}: the
+text of comma separated values returned by REDCap through
+\code{RCurl}.  \item \code{records_collapsed}: the desired
+records IDs, collapsed into a single string, separated by
+commas.  \item \code{fields_collapsed}: the desired field
+names, collapsed into a single string, separated by commas.
+\item \code{elapsed_seconds}: the duration of the function.
+\item \code{status_message}: a boolean value indicating if
+the operation was apparently successful. }
+}
+\description{
+From an external perpsective, this function is similar to
+\code{\link{redcap_read}}.  The internals differ in that
+\code{read_read_batch} retrieves subsets of the data, and
+then combines them before returning (among other objects) a
+single \code{data.frame}.  This function can be more
+appropriate than \code{\link{redcap_read}} when returning
+large datasets that could tie up the server.
+}
+\details{
+Specifically, it internally uses multiple calls to
+\code{\link{redcap_read}} to select and return data.
+Initially, only primary key is queried through the REDCap
+API.  The long list is then subsetted into partitions,
+whose sizes are determined by the \code{batch_size}
+parameter.  REDCap is then queried for all variables of the
+subset's subjects.  This is repeated for each subset,
+before returning a unified \code{data.frame}.
+
+The function allows a delay between calls, which allows the
+server to attend to other users' requests.
+}
+\examples{
+\dontrun{
+library(REDCapR) #Load the package into the current R session.
+uri <- "https://bbmc.ouhsc.edu/redcap/api/"
+token <- "9A81268476645C4E5F03428B8AC3AA7B"
+redcap_read_batch(batch_size=2, redcap_uri=uri, token=token)
+}
+}
+\author{
+Will Beasley
+}
+\references{
+The official documentation can be found on the `API
+Examples' page on the REDCap wiki
+(\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}).
+A user account is required.
+
+The official \href{http://curl.haxx.se}{cURL site}
+discusses the process of using SSL to verify the server
+being connected to.
+}
+
