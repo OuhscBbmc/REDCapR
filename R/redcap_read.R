@@ -151,3 +151,19 @@ redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL
     success = success
   ) )
 }
+
+# curl_options <- RCurl::curlOptions(cainfo = cert_location)
+
+# raw_csv <- RCurl::postForm(
+#   uri = "https://bbmc.ouhsc.edu/redcap/api/"
+#   , token = "9A81268476645C4E5F03428B8AC3AA7B"
+#   , content = 'record'
+# #   , format = 'csv'
+# #   , type = 'flat'
+#   #, rawOrLabel = raw_or_label
+#   #, exportDataAccessGroups = export_data_access_groups_string
+#   #, records = records_collapsed
+#   #, fields = fields_collapsed
+#   , .opts = RCurl::curlOptions(ssl.verifypeer = FALSE)
+# )
+

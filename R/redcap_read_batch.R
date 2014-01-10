@@ -101,6 +101,7 @@ redcap_read_batch <- function( batch_size=100L, interbatch_delay=0,
   ### Continue as intended if the initial query succeeded.
   ###
   ids <- initial_call$data[, 1]
+  ids <- ids[order(ids)]
   
   ds_glossary <- REDCapR:::create_batch_glossary(row_count=length(ids), batch_size=batch_size)
   lst_batch <- NULL
@@ -111,12 +112,15 @@ redcap_read_batch <- function( batch_size=100L, interbatch_delay=0,
   for( i in ds_glossary$id ) {
     selected_index <- seq(from=ds_glossary[i, "start_index"], to=ds_glossary[i, "stop_index"])
     selected_ids <- ids[selected_index]
-    message("Reading batch ", i, " of ", nrow(ds_glossary), ", with ids ", min(ids), " through ", max(ids), ".")
-    read_result <- REDCapR:::redcap_read(redcap_uri=redcap_uri, token=token,  
-                                  records = selected_ids,
-                                  fields_collapsed=fields_collapsed,
-                                  export_data_access_groups = export_data_access_groups, raw_or_label=raw_or_label,
-                                  verbose=verbose, cert_location=cert_location)
+    message("Reading batch ", i, " of ", nrow(ds_glossary), ", with ids ", min(selected_ids), " through ", max(selected_ids), ".")
+    read_result <- REDCapR::redcap_read(redcap_uri = redcap_uri,
+                                        token = token,  
+                                        records = selected_ids,
+                                        fields_collapsed = fields_collapsed,
+                                        export_data_access_groups = export_data_access_groups, 
+                                        raw_or_label = raw_or_label,
+                                        verbose = verbose, 
+                                        cert_location = cert_location)
     if( !read_result$success )
       stop("The `redcap_read_batch()` call failed on iteration", i, ". Set the `verbose` parameter to TRUE and rerun for additional information.")
     
@@ -124,15 +128,13 @@ redcap_read_batch <- function( batch_size=100L, interbatch_delay=0,
     lst_status_message[[i]] <- read_result$status_message
     success_combined <- success_combined | read_result$success
     
-    #rm(read_result) #Admittedly overkill defensiveness.
+    rm(read_result) #Admittedly overkill defensiveness.
   }
   
   ds_stacked <- plyr::rbind.fill(lst_batch)
   status_message_combined <- paste(lst_status_message, collapse="; ")
   
-  
   elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
-  
   
   return( list(
     data = ds_stacked, 
