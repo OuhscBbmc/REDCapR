@@ -38,7 +38,10 @@
 #' 
 #' The function allows a delay between calls, which allows the server to attend to other users' requests.
 #' @author Will Beasley
-#' @references The official documentation can be found on the `API Examples' page on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}). A user account is required.
+#' @references The official documentation can be found on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiDocumentation}).  
+#' Also see the `API Examples' page on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}). 
+#' A user account is required to access the wiki, which typically is granted only to REDCap administrators.  
+#' If you do not
 #' 
 #' The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.
 #' 
