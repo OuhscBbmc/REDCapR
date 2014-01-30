@@ -4,7 +4,7 @@ options(device = "windows") #http://support.rstudio.org/help/discussions/problem
 
 devtools::document()
 devtools::check_doc() #Should return NULL
-#  system("R CMD Rd2pdf --force --output=./REDCapRDocumentationPeek.pdf ." )
+#  system("R CMD Rd2pdf --force --output=./DocumentationPeek.pdf ." )
 
 devtools::run_examples(); #dev.off() #This overwrites the NAMESPACE file too
 # devtools::run_examples(, "redcap_read.Rd")
