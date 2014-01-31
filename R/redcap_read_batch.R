@@ -38,7 +38,10 @@
 #' 
 #' The function allows a delay between calls, which allows the server to attend to other users' requests.
 #' @author Will Beasley
-#' @references The official documentation can be found on the `API Examples' page on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}). A user account is required.
+#' @references The official documentation can be found on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiDocumentation}).  
+#' Also see the `API Examples' page on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}). 
+#' A user account is required to access the wiki, which typically is granted only to REDCap administrators.  
+#' If you do not
 #' 
 #' The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.
 #' 
@@ -72,7 +75,7 @@ redcap_read_batch <- function( batch_size=100L, interbatch_delay=0,
   #   export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
   #   
   #   if( missing( cert_location ) | is.null(cert_location) ) 
-  #     cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs", "mozilla_2012_12_29.crt")
+  #     cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs", "mozilla_2013_12_05.crt")
   #   #     curl_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
   #   
   #   if( !base::file.exists(cert_location) )

@@ -2,8 +2,9 @@
 ^\.Rproj\.user$
 ^\.gitignore$
 ^\.travis.yml$
+^ShortcutLucky1304.lnk$
 
-REDCapRDocumentationPeek.pdf
+DocumentationPeek.pdf
 documentation_for_developers/
 playgrounds/
 utility_scripts/

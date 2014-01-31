@@ -1,4 +1,9 @@
-﻿Version 0.1 (Developed 2013-11-26 through 2014-01-?)
+﻿Version 0.2 (Developed 2014-01-14 through 2014-02-?)
+------------------------------------------------------------------------------
+Updates:
+* New Mozilla SSL Certifcation Bundles released on cURL (released 2013-12-05; http://curl.haxx.se/ca/cacert.pem)
+
+Version 0.1 (Developed 2013-11-26 through 2014-01-14)
 ------------------------------------------------------------------------------
 New Features:
 * Introduces redcap_read and redcap_read_batch with documentation

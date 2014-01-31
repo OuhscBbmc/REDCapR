@@ -102,10 +102,13 @@ redcap_read_batch(batch_size=2, redcap_uri=uri, token=token)
 Will Beasley
 }
 \references{
-The official documentation can be found on the `API
-Examples' page on the REDCap wiki
+The official documentation can be found on the REDCap wiki
+(\url{https://iwg.devguard.com/trac/redcap/wiki/ApiDocumentation}).
+Also see the `API Examples' page on the REDCap wiki
 (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}).
-A user account is required.
+A user account is required to access the wiki, which
+typically is granted only to REDCap administrators. If you
+do not
 
 The official \href{http://curl.haxx.se}{cURL site}
 discusses the process of using SSL to verify the server
