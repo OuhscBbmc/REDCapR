@@ -9,7 +9,7 @@ test_that("Bad Uri", {
   certs <- "C:/Users/Will/Documents/Miechv/MReporting/Dal/Certs"
   
   expect_message(
-    returned_object <- redcap_read(redcap_uri=uri, token=token, verbose=T)    
+    returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, verbose=T)    
   )
   
   expect_equal(returned_object$data, expected=data.frame(), label="An empty data.frame should be returned.")

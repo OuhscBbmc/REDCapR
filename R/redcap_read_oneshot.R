@@ -1,5 +1,5 @@
-#' @name redcap_read
-#' @export redcap_read
+#' @name redcap_read_oneshot
+#' @export redcap_read_oneshot
 #' 
 #' @title Read records from a REDCap project.
 #'  
@@ -45,11 +45,11 @@
 #' uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token <- "9A81268476645C4E5F03428B8AC3AA7B"
 #' #Return all records and all variables.
-#' ds_all_rows_all_fields <- redcap_read(redcap_uri=uri, token=token)$data
+#' ds_all_rows_all_fields <- redcap_read_oneshot(redcap_uri=uri, token=token)$data
 #' 
 #' #Return only records with IDs of 1 and 3
 #' desired_records_v1 <- c(1, 3)
-#' ds_some_rows_v1 <- redcap_read(
+#' ds_some_rows_v1 <- redcap_read_oneshot(
 #'    redcap_uri=uri, 
 #'    token=token, 
 #'    records=desired_records_v1
@@ -57,7 +57,7 @@
 #' 
 #' #Return only the fields recordid, first_name, and age
 #' desired_fields_v1 <- c("recordid", "first_name", "age")
-#' ds_some_fields_v1 <- redcap_read(
+#' ds_some_fields_v1 <- redcap_read_oneshot(
 #'    redcap_uri=uri, 
 #'    token=token, 
 #'    fields=desired_fields_v1
@@ -65,7 +65,7 @@
 #' }
 #' 
 
-redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL, 
+redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collapsed=NULL, 
                          fields=NULL, fields_collapsed=NULL, 
                          export_data_access_groups = FALSE,
                          raw_or_label = 'raw',
@@ -79,10 +79,10 @@ redcap_read <- function( redcap_uri, token, records=NULL, records_collapsed=NULL
   start_time <- Sys.time()
   
   if( missing(redcap_uri) )
-    stop("The required parameter `redcap_uri` was missing from the call to `redcap_read()`.")
+    stop("The required parameter `redcap_uri` was missing from the call to `redcap_read_oneshot()`.")
   
   if( missing(token) )
-    stop("The required parameter `token` was missing from the call to `redcap_read()`.")
+    stop("The required parameter `token` was missing from the call to `redcap_read_oneshot()`.")
   
   if( missing(records_collapsed) & !missing(records) )
     records_collapsed <- paste0(records, collapse=",")

@@ -3,10 +3,10 @@
 #' 
 #' @title Read records from a REDCap project in subsets, and stacks them together before returning a \code{data.frame}.
 #'  
-#' @description From an external perpsective, this function is similar to \code{\link{redcap_read}}.  The internals
+#' @description From an external perpsective, this function is similar to \code{\link{redcap_read_oneshot}}.  The internals
 #' differ in that \code{read_read_batch} retrieves subsets of the data, and then combines them before returning
 #' (among other objects) a single \code{data.frame}.  This function can be more appropriate than 
-#' \code{\link{redcap_read}} when returning large datasets that could tie up the server.   
+#' \code{\link{redcap_read_oneshot}} when returning large datasets that could tie up the server.   
 #' 
 #' @param batch_size The maximum number of subject records a single batch should contain.  The default is 100.
 #' @param interbatch_delay The number of seconds the function will wait before requesting a new subset from REDCap. The default is 0.5 seconds.
@@ -31,7 +31,7 @@
 #'  \item \code{status_message}: a boolean value indicating if the operation was apparently successful.
 #' }
 #' @details 
-#' Specifically, it internally uses multiple calls to \code{\link{redcap_read}} to select and return data.
+#' Specifically, it internally uses multiple calls to \code{\link{redcap_read_oneshot}} to select and return data.
 #' Initially, only primary key is queried through the REDCap API.  The long list is then subsetted into partitions,
 #' whose sizes are determined by the \code{batch_size} parameter.  REDCap is then queried for all variables of
 #' the subset's subjects.  This is repeated for each subset, before returning a unified \code{data.frame}.
@@ -61,10 +61,10 @@ redcap_read_batch <- function( batch_size=100L, interbatch_delay=0,
                                raw_or_label = 'raw',
                                verbose=TRUE, cert_location=NULL ) {  
   if( missing(redcap_uri) )
-    stop("The required parameter `redcap_uri` was missing from the call to `redcap_read()`.")
+    stop("The required parameter `redcap_uri` was missing from the call to `redcap_read_oneshot()`.")
   
   if( missing(token) )
-    stop("The required parameter `token` was missing from the call to `redcap_read()`.")
+    stop("The required parameter `token` was missing from the call to `redcap_read_oneshot()`.")
   
   if( missing(records_collapsed) & !missing(records) )
     records_collapsed <- paste0(records, collapse=",")
@@ -82,7 +82,7 @@ redcap_read_batch <- function( batch_size=100L, interbatch_delay=0,
   #     stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
   
   start_time <- Sys.time()
-  initial_call <- REDCapR::redcap_read(redcap_uri=redcap_uri, token=token, records_collapsed=records_collapsed, fields_collapsed="nonexistant_field_name", verbose=verbose, cert_location=cert_location)
+  initial_call <- REDCapR::redcap_read_oneshot(redcap_uri=redcap_uri, token=token, records_collapsed=records_collapsed, fields_collapsed="nonexistant_field_name", verbose=verbose, cert_location=cert_location)
   
   ###
   ### Stop and return to the caller if the initial query failed.
@@ -116,7 +116,7 @@ redcap_read_batch <- function( batch_size=100L, interbatch_delay=0,
     selected_index <- seq(from=ds_glossary[i, "start_index"], to=ds_glossary[i, "stop_index"])
     selected_ids <- ids[selected_index]
     message("Reading batch ", i, " of ", nrow(ds_glossary), ", with ids ", min(selected_ids), " through ", max(selected_ids), ".")
-    read_result <- REDCapR::redcap_read(redcap_uri = redcap_uri,
+    read_result <- REDCapR::redcap_read_oneshot(redcap_uri = redcap_uri,
                                         token = token,  
                                         records = selected_ids,
                                         fields_collapsed = fields_collapsed,
@@ -141,7 +141,7 @@ redcap_read_batch <- function( batch_size=100L, interbatch_delay=0,
   
   return( list(
     data = ds_stacked, 
-    raw_csv = "The raw CSV isn't available with `redcap_read_batch()`.  Use `redcap_read()` instead.",
+    raw_csv = "The raw CSV isn't available with `redcap_read_batch()`.  Use `redcap_read_oneshot()` instead.",
     records_collapsed = records_collapsed, 
     fields_collapsed = fields_collapsed,
     elapsed_seconds = elapsed_seconds, 
