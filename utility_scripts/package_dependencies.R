@@ -1,5 +1,5 @@
 #This code checks the user's installed packages against a list of packages (that we've manually compiled) 
-#   necessary for our 'MReporting' repository to be fully operational. Missing packages are installed, while existing packages are not.
+#   necessary for our repository's code to be fully operational. Missing packages are installed, while existing packages are not.
 #   If anyone sees a package that should be on there, please tell me.
 rm(list=ls(all=TRUE)) #Clear the memory for any variables set from any previous runs.
 
