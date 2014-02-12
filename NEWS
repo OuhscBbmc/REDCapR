@@ -1,8 +1,10 @@
 ﻿Version 0.2 (Developed 2014-01-14 through 2014-02-?)
 ------------------------------------------------------------------------------
+New Features:
+* Added `redcap_column_sanitize()` function to address non-ASCII characters
+
 Updates:
 * New Mozilla SSL Certifcation Bundles released on cURL (released 2013-12-05; http://curl.haxx.se/ca/cacert.pem)
-* Added `redcap_column_sanitize()` function
 * Small renames
 
 Version 0.1 (Developed 2013-11-26 through 2014-01-14)

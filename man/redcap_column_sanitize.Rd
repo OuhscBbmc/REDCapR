@@ -1,0 +1,50 @@
+\name{redcap_column_sanitize}
+\alias{redcap_column_sanitize}
+\title{Sanitize to adhere to REDCap character encoding requirements.}
+\usage{
+redcap_column_sanitize(d, column_names = colnames(d),
+  encoding_initial = "latin1", substitution_character = "?")
+}
+\arguments{
+  \item{d}{The \code{data.frame} containing the dataset
+  used to update the REDCap project.  Required.}
+
+  \item{column_names}{An array of \code{character} values
+  indicating the names of the variables to sanitize.
+  Optional.}
+
+  \item{encoding_initial}{An array of \code{character}
+  values indicating the names of the variables to sanitize.
+  Optional.}
+
+  \item{substitution_character}{The \code{character} value
+  that replaces characters that were unable to be
+  appropriatedly matched.}
+}
+\value{
+A \code{data.frame} with same columns, but whose character
+values have been sanitized.
+}
+\description{
+Replace non-ASCII characters with legal characters that
+won't cause problems when writing to a REDCap project.
+}
+\details{
+Letters like an accented `A' are replaced with a plain `A'.
+
+This is a thin wrapper around
+\href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/iconv.html}{\code{base::iconv()}}.
+The \code{ASCII//TRANSLIT} option does the actual
+transliteration work.  As of \code{R 3.1.0}, the OSes use
+similar, but different, versions to convert the characters.
+Be aware of this in case you notice slight OS-dependent
+differences.
+}
+\examples{
+# Examples are not shown because they require non-ASCII encoding,
+#   which makes the package documentation less portable.
+}
+\author{
+Will Beasley
+}
+
