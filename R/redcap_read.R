@@ -24,7 +24,6 @@
 #' @return Currently, a list is returned with the following elements,
 #' \enumerate{
 #'  \item \code{data}: an R \code{data.frame} of the desired records and columns.
-#'  \item \code{raw_csv}: the text of comma separated values returned by REDCap through \code{RCurl}.
 #'  \item \code{records_collapsed}: the desired records IDs, collapsed into a single string, separated by commas.
 #'  \item \code{fields_collapsed}: the desired field names, collapsed into a single string, separated by commas.
 #'  \item \code{elapsed_seconds}: the duration of the function.
@@ -92,7 +91,6 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
     elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
     return( list(
       data = data.frame(), 
-      raw_csv = "",
       records_collapsed = "failed in initial batch call", 
       fields_collapsed = "failed in initial batch call",
       elapsed_seconds = elapsed_seconds, 
@@ -106,7 +104,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
   ids <- initial_call$data[, 1]
   ids <- ids[order(ids)]
   
-  ds_glossary <- REDCapR:::create_batch_glossary(row_count=length(ids), batch_size=batch_size)
+  ds_glossary <- REDCapR::create_batch_glossary(row_count=length(ids), batch_size=batch_size)
   lst_batch <- NULL
   lst_status_message <- NULL
   success_combined <- TRUE
@@ -141,7 +139,6 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
   
   return( list(
     data = ds_stacked, 
-    raw_csv = "The raw CSV isn't available with `redcap_read()`.  Use `redcap_read_oneshot()` instead.",
     records_collapsed = records_collapsed, 
     fields_collapsed = fields_collapsed,
     elapsed_seconds = elapsed_seconds, 
