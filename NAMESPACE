@@ -1,6 +1,6 @@
 export(redcap_column_sanitize)
 export(redcap_read)
-export(redcap_read_batch)
+export(redcap_read_oneshot)
 export(validate_for_write)
 export(validate_no_logical)
 export(validate_no_uppercase)

@@ -200,10 +200,7 @@ hr {
 
 <h2>Reading REDCap Data</h2>
 
-<p>The function <code>redcap_read</code> uses the <a href="http://cran.r-project.org/web/packages/RCurl/index.html"><code>RCurl</code></a> package to call the REDCap API.</p>
-
-<pre><code>## Loading required package: knitr
-</code></pre>
+<p>The function <code>redcap_read_oneshot</code> uses the <a href="http://cran.r-project.org/web/packages/RCurl/index.html"><code>RCurl</code></a> package to call the REDCap API.</p>
 
 <h3>Set project-wide values.</h3>
 
@@ -221,10 +218,10 @@ token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;
 <p>If no information is passed about the desired records or fields, then the entire data set is returned.  Only two parameters are required, <code>redcap_uri</code> and <code>token</code>.  Unless the <code>verbose</code> parameter is set to <code>FALSE</code>, a message will be printed on the R console with the number of records and fields returned.</p>
 
 <pre><code class="r">#Return all records and all variables.
-ds_all_rows_all_fields &lt;- redcap_read(redcap_uri=uri, token=token)$data
+ds_all_rows_all_fields &lt;- redcap_read_oneshot(redcap_uri=uri, token=token)$data
 </code></pre>
 
-<pre><code>5 records and 16 columns were read from REDCap in 1.09 seconds.
+<pre><code>5 records and 16 columns were read from REDCap in 1.31 seconds.
 </code></pre>
 
 <pre><code class="r">ds_all_rows_all_fields #Inspect the returned dataset
@@ -260,31 +257,31 @@ ds_all_rows_all_fields &lt;- redcap_read(redcap_uri=uri, token=token)$data
 
 <p>If only a subset of the <strong>records</strong> is desired, the two approaches are shown below.  The first is to pass an array (where each element is an ID) to the <code>records</code> parameter.  The second is to pass a single string (where the elements are separated by commas) to the <code>records_collapsed</code> parameter.  </p>
 
-<p>The first format is more natural for more R users.  The second format is what is expected by the REDCap API.  If a value for <code>records</code> is specified, but <code>records_collapsed</code> is missing, then <code>redcap_read</code> automatically converts the array into the format needed by the API.</p>
+<p>The first format is more natural for more R users.  The second format is what is expected by the REDCap API.  If a value for <code>records</code> is specified, but <code>records_collapsed</code> is missing, then <code>redcap_read_oneshot</code> automatically converts the array into the format needed by the API.</p>
 
 <pre><code class="r">#Return only records with IDs of 1 and 3
 desired_records_v1 &lt;- c(1, 3)
-ds_some_rows_v1 &lt;- redcap_read(
+ds_some_rows_v1 &lt;- redcap_read_oneshot(
    redcap_uri = uri, 
    token = token, 
    records = desired_records_v1
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 0.9 seconds.
+<pre><code>2 records and 16 columns were read from REDCap in 1.21 seconds.
 </code></pre>
 
 <pre><code class="r">
 #Return only records with IDs of 1 and 3 (alternate way)
 desired_records_v2 &lt;- &quot;1, 3&quot;
-ds_some_rows_v2 &lt;- redcap_read(
+ds_some_rows_v2 &lt;- redcap_read_oneshot(
    redcap_uri = uri, 
    token = token, 
    records_collapsed = desired_records_v2
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 0.87 seconds.
+<pre><code>2 records and 16 columns were read from REDCap in 0.92 seconds.
 </code></pre>
 
 <pre><code class="r">
@@ -305,27 +302,27 @@ ds_some_rows_v2 #Inspect the returned dataset
 
 <pre><code class="r">#Return only the fields recordid, first_name, and age
 desired_fields_v1 &lt;- c(&quot;recordid&quot;, &quot;first_name&quot;, &quot;age&quot;)
-ds_some_fields_v1 &lt;- redcap_read(
+ds_some_fields_v1 &lt;- redcap_read_oneshot(
    redcap_uri = uri, 
    token = token, 
    fields = desired_fields_v1
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.88 seconds.
+<pre><code>5 records and 3 columns were read from REDCap in 0.89 seconds.
 </code></pre>
 
 <pre><code class="r">
 #Return only the fields recordid, first_name, and age (alternate way)
 desired_fields_v2 &lt;- &quot;recordid, first_name, age&quot;
-ds_some_fields_v2 &lt;- redcap_read(
+ds_some_fields_v2 &lt;- redcap_read_oneshot(
    redcap_uri = uri, 
    token = token, 
    fields_collapsed = desired_fields_v2
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.92 seconds.
+<pre><code>5 records and 3 columns were read from REDCap in 1.11 seconds.
 </code></pre>
 
 <pre><code class="r">
@@ -351,18 +348,18 @@ ds_some_fields_v2 #Inspect the returned dataset
 <li>The <code>fields_collapsed</code> fields passed to the API.  This shows which field subsets, if any, were requested.</li>
 <li>The <code>elapsed_seconds</code> measures the duration of the call.</li>
 <li>The <code>status_message</code> has the number of rows and columns read in a successful operation.  In an unsuccessful operation, it should contain diagnostic information.</li>
-<li>The <code>success</code> boolean value indicates if <code>redcap_read</code> believes the operation completed as intended.</li>
+<li>The <code>success</code> boolean value indicates if <code>redcap_read_oneshot</code> believes the operation completed as intended.</li>
 </ol>
 
 <pre><code class="r">#Return only the fields recordid, first_name, and age
-all_information &lt;- redcap_read(
+all_information &lt;- redcap_read_oneshot(
    redcap_uri = uri, 
    token = token, 
    fields = desired_fields_v1
 )
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 4.27 seconds.
+<pre><code>5 records and 3 columns were read from REDCap in 1.13 seconds.
 </code></pre>
 
 <pre><code class="r">all_information #Inspect the additional information
@@ -389,10 +386,10 @@ $fields_collapsed
 [1] &quot;recordid,first_name,age&quot;
 
 $elapsed_seconds
-[1] 4.269
+[1] 1.127
 
 $status_message
-[1] &quot;5 records and 3 columns were read from REDCap in 4.27 seconds.&quot;
+[1] &quot;5 records and 3 columns were read from REDCap in 1.13 seconds.&quot;
 
 $success
 [1] TRUE
@@ -402,10 +399,10 @@ $success
 
 <p>For the sake of documentation and reproducibility, the current vignette was build on a system using the following software.</p>
 
-<pre><code>Report created by Will at 2014-02-11, 18:11:23 -0600
+<pre><code>Report created by Will at 2014-02-12, 14:48:35 -0600
 </code></pre>
 
-<pre><code>R Under development (unstable) (2014-02-06 r64933)
+<pre><code>R Under development (unstable) (2014-02-10 r64961)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 locale:
@@ -416,8 +413,8 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] knitr_1.5      REDCapR_0.2-3  testthat_0.8   devtools_1.4.1 stringr_0.6.2  RCurl_1.95-4.1 bitops_1.0-6  
-[8] plyr_1.8.0.99  roxygen2_3.1.0
+[1] REDCapR_0.2-6  stringr_0.6.2  RCurl_1.95-4.1 bitops_1.0-6   plyr_1.8.0.99  knitr_1.5      testthat_0.8  
+[8] roxygen2_3.1.0 devtools_1.4.1
 
 loaded via a namespace (and not attached):
  [1] brew_1.0-6      codetools_0.2-8 digest_0.6.4    evaluate_0.5.1  formatR_0.10    httr_0.2        memoise_0.1    

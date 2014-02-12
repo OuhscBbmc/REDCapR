@@ -1,20 +1,13 @@
-\name{redcap_read_batch}
-\alias{redcap_read_batch}
-\title{Read records from a REDCap project in subsets, and stacks them together before returning a \code{data.frame}.}
+\name{redcap_read_oneshot}
+\alias{redcap_read_oneshot}
+\title{Read records from a REDCap project.}
 \usage{
-redcap_read_batch(batch_size = 100L, interbatch_delay = 0, redcap_uri,
-  token, records = NULL, records_collapsed = NULL, fields = NULL,
-  fields_collapsed = NULL, export_data_access_groups = FALSE,
-  raw_or_label = "raw", verbose = TRUE, cert_location = NULL)
+redcap_read_oneshot(redcap_uri, token, records = NULL,
+  records_collapsed = NULL, fields = NULL, fields_collapsed = NULL,
+  export_data_access_groups = FALSE, raw_or_label = "raw", verbose = TRUE,
+  cert_location = NULL)
 }
 \arguments{
-  \item{batch_size}{The maximum number of subject records a
-  single batch should contain.  The default is 100.}
-
-  \item{interbatch_delay}{The number of seconds the
-  function will wait before requesting a new subset from
-  REDCap. The default is 0.5 seconds.}
-
   \item{redcap_uri}{The URI of the REDCap project.
   Required.}
 
@@ -69,46 +62,68 @@ names, collapsed into a single string, separated by commas.
 the operation was apparently successful. }
 }
 \description{
-From an external perpsective, this function is similar to
-\code{\link{redcap_read}}.  The internals differ in that
-\code{read_read_batch} retrieves subsets of the data, and
-then combines them before returning (among other objects) a
-single \code{data.frame}.  This function can be more
-appropriate than \code{\link{redcap_read}} when returning
-large datasets that could tie up the server.
+This function uses REDCap's
+\href{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}{API}
+to select and return data.
 }
 \details{
-Specifically, it internally uses multiple calls to
-\code{\link{redcap_read}} to select and return data.
-Initially, only primary key is queried through the REDCap
-API.  The long list is then subsetted into partitions,
-whose sizes are determined by the \code{batch_size}
-parameter.  REDCap is then queried for all variables of the
-subset's subjects.  This is repeated for each subset,
-before returning a unified \code{data.frame}.
+I like how \href{http://sburns.org/PyCap/}{PyCap} creates a
+`project' object with methods that read and write from
+REDCap.  However this isn't a style that R clients
+typically use. I like the logic that it's associated with a
+particular REDCap project that shouldn't change between
+calls. As a compromise, I think I'll wrap the uri, token,
+and cert location into a single \code{S4} object that's
+passed to these methods.  It will make these calls take
+less space.
 
-The function allows a delay between calls, which allows the
-server to attend to other users' requests.
+The `REDCapR' package includes a recent version of the
+\href{http://curl.haxx.se/ca/cacert.pem}{Bundle of CA Root
+Certificates} from the official
+\href{http://curl.haxx.se}{cURL site}.  This version is
+used by default, unless the `cert_location` parameter is
+given another location.
+
+If you do not pass in this export_data_access_groups value,
+it will default to \code{FALSE}. The following is from the
+API help page for version 5.2.3: This flag is only viable
+if the user whose token is being used to make the API
+request is *not* in a data access group. If the user is in
+a group, then this flag will revert to its default value.
 }
 \examples{
 \dontrun{
 library(REDCapR) #Load the package into the current R session.
 uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "9A81268476645C4E5F03428B8AC3AA7B"
-redcap_read_batch(batch_size=2, redcap_uri=uri, token=token)
+#Return all records and all variables.
+ds_all_rows_all_fields <- redcap_read_oneshot(redcap_uri=uri, token=token)$data
+
+#Return only records with IDs of 1 and 3
+desired_records_v1 <- c(1, 3)
+ds_some_rows_v1 <- redcap_read_oneshot(
+   redcap_uri=uri,
+   token=token,
+   records=desired_records_v1
+)$data
+
+#Return only the fields recordid, first_name, and age
+desired_fields_v1 <- c("recordid", "first_name", "age")
+ds_some_fields_v1 <- redcap_read_oneshot(
+   redcap_uri=uri,
+   token=token,
+   fields=desired_fields_v1
+)$data
 }
 }
 \author{
 Will Beasley
 }
 \references{
-The official documentation can be found on the REDCap wiki
-(\url{https://iwg.devguard.com/trac/redcap/wiki/ApiDocumentation}).
-Also see the `API Examples' page on the REDCap wiki
+The official documentation can be found on the `API
+Examples' page on the REDCap wiki
 (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}).
-A user account is required to access the wiki, which
-typically is granted only to REDCap administrators. If you
-do not
+A user account is required.
 
 The official \href{http://curl.haxx.se}{cURL site}
 discusses the process of using SSL to verify the server

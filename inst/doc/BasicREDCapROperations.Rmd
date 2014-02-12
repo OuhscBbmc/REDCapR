@@ -7,7 +7,7 @@
 This vignette covers the the basic functions exposed by the [`REDCapR`](https://github.com/OuhscCcanMiechvEvaluation/REDCapR) package which allow you to interact with [REDCap](http://www.project-redcap.org/) through its API.
 
 ## Reading REDCap Data
-The function `redcap_read` uses the [`RCurl`](http://cran.r-project.org/web/packages/RCurl/index.html) package to call the REDCap API.
+The function `redcap_read_oneshot` uses the [`RCurl`](http://cran.r-project.org/web/packages/RCurl/index.html) package to call the REDCap API.
 ```{r set_options, echo=FALSE, results='hide'}
 require(knitr)
 opts_chunk$set(
@@ -37,19 +37,19 @@ If no information is passed about the desired records or fields, then the entire
 
 ```{r return_all}
 #Return all records and all variables.
-ds_all_rows_all_fields <- redcap_read(redcap_uri=uri, token=token)$data
+ds_all_rows_all_fields <- redcap_read_oneshot(redcap_uri=uri, token=token)$data
 ds_all_rows_all_fields #Inspect the returned dataset
 ```
 
 ### Read a subset of the records.
 If only a subset of the **records** is desired, the two approaches are shown below.  The first is to pass an array (where each element is an ID) to the `records` parameter.  The second is to pass a single string (where the elements are separated by commas) to the `records_collapsed` parameter.  
 
-The first format is more natural for more R users.  The second format is what is expected by the REDCap API.  If a value for `records` is specified, but `records_collapsed` is missing, then `redcap_read` automatically converts the array into the format needed by the API.
+The first format is more natural for more R users.  The second format is what is expected by the REDCap API.  If a value for `records` is specified, but `records_collapsed` is missing, then `redcap_read_oneshot` automatically converts the array into the format needed by the API.
 
 ```{r read_row_subset, results='hold'}
 #Return only records with IDs of 1 and 3
 desired_records_v1 <- c(1, 3)
-ds_some_rows_v1 <- redcap_read(
+ds_some_rows_v1 <- redcap_read_oneshot(
    redcap_uri = uri, 
    token = token, 
    records = desired_records_v1
@@ -57,7 +57,7 @@ ds_some_rows_v1 <- redcap_read(
 
 #Return only records with IDs of 1 and 3 (alternate way)
 desired_records_v2 <- "1, 3"
-ds_some_rows_v2 <- redcap_read(
+ds_some_rows_v2 <- redcap_read_oneshot(
    redcap_uri = uri, 
    token = token, 
    records_collapsed = desired_records_v2
@@ -72,7 +72,7 @@ If only a subset of the **fields** is desired, then two approaches exist.  The f
 ```{r read_field_subset}
 #Return only the fields recordid, first_name, and age
 desired_fields_v1 <- c("recordid", "first_name", "age")
-ds_some_fields_v1 <- redcap_read(
+ds_some_fields_v1 <- redcap_read_oneshot(
    redcap_uri = uri, 
    token = token, 
    fields = desired_fields_v1
@@ -80,7 +80,7 @@ ds_some_fields_v1 <- redcap_read(
 
 #Return only the fields recordid, first_name, and age (alternate way)
 desired_fields_v2 <- "recordid, first_name, age"
-ds_some_fields_v2 <- redcap_read(
+ds_some_fields_v2 <- redcap_read_oneshot(
    redcap_uri = uri, 
    token = token, 
    fields_collapsed = desired_fields_v2
@@ -97,11 +97,11 @@ The examples above have shown only the resulting `data.frame`, by specifying `$d
  1. The `fields_collapsed` fields passed to the API.  This shows which field subsets, if any, were requested.
  1. The `elapsed_seconds` measures the duration of the call.
  1. The `status_message` has the number of rows and columns read in a successful operation.  In an unsuccessful operation, it should contain diagnostic information.
- 1. The `success` boolean value indicates if `redcap_read` believes the operation completed as intended.
+ 1. The `success` boolean value indicates if `redcap_read_oneshot` believes the operation completed as intended.
 
 ```{r read_not_just_dataframe}
 #Return only the fields recordid, first_name, and age
-all_information <- redcap_read(
+all_information <- redcap_read_oneshot(
    redcap_uri = uri, 
    token = token, 
    fields = desired_fields_v1
