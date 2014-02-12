@@ -1,9 +1,9 @@
-\name{redcap_read_batch}
-\alias{redcap_read_batch}
+\name{redcap_read}
+\alias{redcap_read}
 \title{Read records from a REDCap project in subsets, and stacks them together before returning a \code{data.frame}.}
 \usage{
-redcap_read_batch(batch_size = 100L, interbatch_delay = 0, redcap_uri,
-  token, records = NULL, records_collapsed = NULL, fields = NULL,
+redcap_read(batch_size = 100L, interbatch_delay = 0, redcap_uri, token,
+  records = NULL, records_collapsed = NULL, fields = NULL,
   fields_collapsed = NULL, export_data_access_groups = FALSE,
   raw_or_label = "raw", verbose = TRUE, cert_location = NULL)
 }
@@ -71,11 +71,11 @@ the operation was apparently successful. }
 \description{
 From an external perpsective, this function is similar to
 \code{\link{redcap_read_oneshot}}.  The internals differ in
-that \code{read_read_batch} retrieves subsets of the data,
-and then combines them before returning (among other
-objects) a single \code{data.frame}.  This function can be
-more appropriate than \code{\link{redcap_read_oneshot}}
-when returning large datasets that could tie up the server.
+that \code{redcap_read} retrieves subsets of the data, and
+then combines them before returning (among other objects) a
+single \code{data.frame}.  This function can be more
+appropriate than \code{\link{redcap_read_oneshot}} when
+returning large datasets that could tie up the server.
 }
 \details{
 Specifically, it internally uses multiple calls to
@@ -96,7 +96,7 @@ server to attend to other users' requests.
 library(REDCapR) #Load the package into the current R session.
 uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "9A81268476645C4E5F03428B8AC3AA7B"
-redcap_read_batch(batch_size=2, redcap_uri=uri, token=token)
+redcap_read(batch_size=2, redcap_uri=uri, token=token)
 }
 }
 \author{

@@ -1,14 +1,14 @@
 require(testthat)
 
 ###########
-context("Read")
+context("ReadBatch")
 ###########
 uri <- "https://bbmc.ouhsc.edu/redcap/redcap_v5.2.3/API/"
 token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account
 
 test_that("Smoke Test", {  
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, verbose=T)    
+    returned_object <- redcap_read(redcap_uri=uri, token=token, verbose=T)    
   )
 })
 
@@ -37,12 +37,12 @@ test_that("All Records -Default", {
   expected_status_message <- "5 records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, verbose=T),
+    returned_object <- redcap_read(redcap_uri=uri, token=token, verbose=T),
     regexp = expected_status_message
   )
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-  expect_equivalent(returned_object$raw_csv, expected=expected_csv) # dput(returned_object$raw_csv)
+#   expect_equivalent(returned_object$raw_csv, expected=expected_csv) # dput(returned_object$raw_csv)
   expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
   expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
   expect_match(returned_object$status_message, regexp=expected_status_message, perl=TRUE)
@@ -73,12 +73,12 @@ test_that("All Records -Raw", {
   expected_status_message <- "5 records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="raw", verbose=T),
+    returned_object <- redcap_read(redcap_uri=uri, token=token, raw_or_label="raw", verbose=T),
     regexp = expected_status_message
   )
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-  expect_equivalent(returned_object$raw_csv, expected=expected_csv) # dput(returned_object$raw_csv)
+#   expect_equivalent(returned_object$raw_csv, expected=expected_csv) # dput(returned_object$raw_csv)
   expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
   expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
   expect_match(returned_object$status_message, regexp=expected_status_message, perl=TRUE)
@@ -111,12 +111,12 @@ test_that("All Records -Raw", {
   expected_status_message <- "5 records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="raw", export_data_access_groups="true", verbose=T),
+    returned_object <- redcap_read(redcap_uri=uri, token=token, raw_or_label="raw", export_data_access_groups="true", verbose=T),
     regexp = expected_status_message
   )
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-  expect_equivalent(returned_object$raw_csv, expected=expected_csv) # dput(returned_object$raw_csv)
+#   expect_equivalent(returned_object$raw_csv, expected=expected_csv) # dput(returned_object$raw_csv)
   expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
   expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
   expect_match(returned_object$status_message, regexp=expected_status_message, perl=TRUE)
@@ -153,12 +153,12 @@ test_that("All Records -label and DAG", {
   expected_status_message <- "5 records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="label", export_data_access_groups="true", verbose=T),
+    returned_object <- redcap_read(redcap_uri=uri, token=token, raw_or_label="label", export_data_access_groups="true", verbose=T),
     regexp = expected_status_message
   )
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-  expect_equivalent(returned_object$raw_csv, expected=expected_csv) # dput(returned_object$raw_csv)
+#   expect_equivalent(returned_object$raw_csv, expected=expected_csv) # dput(returned_object$raw_csv)
   expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
   expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
   expect_match(returned_object$status_message, regexp=expected_status_message, perl=TRUE)
@@ -194,12 +194,12 @@ test_that("All Records -label", {
   expected_status_message <- "5 records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="label", export_data_access_groups="false", verbose=T),
+    returned_object <- redcap_read(redcap_uri=uri, token=token, raw_or_label="label", export_data_access_groups="false", verbose=T),
     regexp = expected_status_message
   )
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-  expect_equivalent(returned_object$raw_csv, expected=expected_csv) # dput(returned_object$raw_csv)
+#   expect_equivalent(returned_object$raw_csv, expected=expected_csv) # dput(returned_object$raw_csv)
   expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
   expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
   expect_match(returned_object$status_message, regexp=expected_status_message, perl=TRUE)
