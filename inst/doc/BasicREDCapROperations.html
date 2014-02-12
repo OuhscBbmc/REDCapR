@@ -13,19 +13,21 @@
    }
 
    pre .literal {
-     color: rgb(88, 72, 246)
+     color: #990073
    }
 
    pre .number {
-     color: rgb(0, 0, 205);
+     color: #099;
    }
 
    pre .comment {
-     color: rgb(76, 136, 107);
+     color: #998;
+     font-style: italic
    }
 
    pre .keyword {
-     color: rgb(0, 0, 255);
+     color: #900;
+     font-weight: bold
    }
 
    pre .identifier {
@@ -33,7 +35,7 @@
    }
 
    pre .string {
-     color: rgb(3, 106, 7);
+     color: #d14;
    }
 </style>
 
@@ -44,7 +46,7 @@ hljs.initHighlightingOnLoad();
 </script>
 
 <!-- MathJax scripts -->
-<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
 
@@ -52,8 +54,13 @@ hljs.initHighlightingOnLoad();
 body, td {
    font-family: sans-serif;
    background-color: white;
-   font-size: 12px;
-   margin: 8px;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  line-height: 20px;
 }
 
 tt, code, pre {
@@ -88,19 +95,21 @@ a:visited {
    color: rgb(50%, 0%, 50%);
 }
 
-pre {	
-   margin-top: 0;
-   max-width: 95%;
-   border: 1px solid #ccc;
-   white-space: pre-wrap;
+pre, img {
+  max-width: 100%;
 }
 
 pre code {
    display: block; padding: 0.5em;
 }
 
-code.r, code.cpp {
-   background-color: #F8F8F8;
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
 }
 
 table, td, th {
@@ -215,7 +224,7 @@ token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;
 ds_all_rows_all_fields &lt;- redcap_read(redcap_uri=uri, token=token)$data
 </code></pre>
 
-<pre><code>5 records and 16 columns were read from REDCap in 0.93 seconds.
+<pre><code>5 records and 16 columns were read from REDCap in 1.09 seconds.
 </code></pre>
 
 <pre><code class="r">ds_all_rows_all_fields #Inspect the returned dataset
@@ -262,7 +271,7 @@ ds_some_rows_v1 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 1.02 seconds.
+<pre><code>2 records and 16 columns were read from REDCap in 0.9 seconds.
 </code></pre>
 
 <pre><code class="r">
@@ -275,7 +284,7 @@ ds_some_rows_v2 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 1.14 seconds.
+<pre><code>2 records and 16 columns were read from REDCap in 0.87 seconds.
 </code></pre>
 
 <pre><code class="r">
@@ -303,7 +312,7 @@ ds_some_fields_v1 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 1.13 seconds.
+<pre><code>5 records and 3 columns were read from REDCap in 0.88 seconds.
 </code></pre>
 
 <pre><code class="r">
@@ -316,7 +325,7 @@ ds_some_fields_v2 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 2 seconds.
+<pre><code>5 records and 3 columns were read from REDCap in 0.92 seconds.
 </code></pre>
 
 <pre><code class="r">
@@ -353,7 +362,7 @@ all_information &lt;- redcap_read(
 )
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.92 seconds.
+<pre><code>5 records and 3 columns were read from REDCap in 4.27 seconds.
 </code></pre>
 
 <pre><code class="r">all_information #Inspect the additional information
@@ -380,10 +389,10 @@ $fields_collapsed
 [1] &quot;recordid,first_name,age&quot;
 
 $elapsed_seconds
-[1] 0.9224
+[1] 4.269
 
 $status_message
-[1] &quot;5 records and 3 columns were read from REDCap in 0.92 seconds.&quot;
+[1] &quot;5 records and 3 columns were read from REDCap in 4.27 seconds.&quot;
 
 $success
 [1] TRUE
@@ -393,10 +402,10 @@ $success
 
 <p>For the sake of documentation and reproducibility, the current vignette was build on a system using the following software.</p>
 
-<pre><code>Report created by Will at 2014-01-10, 11:37:02 -0600
+<pre><code>Report created by Will at 2014-02-11, 18:11:23 -0600
 </code></pre>
 
-<pre><code>R Under development (unstable) (2014-01-08 r64705)
+<pre><code>R Under development (unstable) (2014-02-06 r64933)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 locale:
@@ -407,12 +416,12 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] stringr_0.6.2  plyr_1.8.0.99  knitr_1.5      REDCapR_0.1-9  testthat_0.8   roxygen2_3.0.0 devtools_1.4.1
-[8] RCurl_1.95-4.1 bitops_1.0-6  
+[1] knitr_1.5      REDCapR_0.2-3  testthat_0.8   devtools_1.4.1 stringr_0.6.2  RCurl_1.95-4.1 bitops_1.0-6  
+[8] plyr_1.8.0.99  roxygen2_3.1.0
 
 loaded via a namespace (and not attached):
  [1] brew_1.0-6      codetools_0.2-8 digest_0.6.4    evaluate_0.5.1  formatR_0.10    httr_0.2        memoise_0.1    
- [8] parallel_3.1.0  tools_3.1.0     whisker_0.3-2  
+ [8] parallel_3.1.0  Rcpp_0.11.0     tools_3.1.0     whisker_0.3-2  
 </code></pre>
 
 </body>

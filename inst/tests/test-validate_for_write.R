@@ -17,25 +17,24 @@ dfGood <- data.frame(
 
 
 test_that("validate_for_write", {
-  ds <- validate_for_write(df=dfBad)
+  ds <- validate_for_write(d=dfBad)
   expect_equal(object=nrow(ds), expected=2)
 })
 
 test_that("validate_for_write_no_errors", {
-  ds <- validate_for_write(df=dfGood)
+  ds <- validate_for_write(d=dfGood)
   expect_equal(object=nrow(ds), expected=0)
 })
 
 test_that("validate_no_logical", {
-  ds <- validate_no_logical(df=dfBad)
+  ds <- validate_no_logical(d=dfBad)
   expect_equal(object=nrow(ds), expected=1, info="One logical field should be flagged")
   expect_equal(object=ds$field_name, expected="bad_logical")
   expect_equal(object=ds$field_index, expected=2)
 })
 
-
 test_that("validate_no_uppercase", {
-  ds <- validate_no_uppercase(df=dfBad)
+  ds <- validate_no_uppercase(d=dfBad)
   expect_equal(object=nrow(ds), expected=1, info="One uppercase field should be flagged")
   expect_equal(object=ds$field_name, expected="bad_Uppercase")
   expect_equal(object=ds$field_index, expected=3)

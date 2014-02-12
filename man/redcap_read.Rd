@@ -77,7 +77,7 @@ and cert location into a single \code{S4} object that's
 passed to these methods.  It will make these calls take
 less space.
 
-The `REDCapR` package includes a recent version of the
+The `REDCapR' package includes a recent version of the
 \href{http://curl.haxx.se/ca/cacert.pem}{Bundle of CA Root
 Certificates} from the official
 \href{http://curl.haxx.se}{cURL site}.  This version is

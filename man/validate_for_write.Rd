@@ -4,14 +4,14 @@
 \alias{validate_no_uppercase}
 \title{Inspect a \code{data.frame} to anticipate problems before writing to a REDCap project.}
 \usage{
-validate_for_write( df )
+validate_for_write( d )
 
-validate_no_logical( df )
+validate_no_logical( d )
 
-validate_no_uppercase( df )
+validate_no_uppercase( d )
 }
 \arguments{
-  \item{df}{The \code{data.frame} containing the dataset
+  \item{d}{The \code{data.frame} containing the dataset
   used to update the REDCap project.  Required.}
 }
 \value{
@@ -39,12 +39,12 @@ individual validation checks.  It allows the client to
 check everything with one call.
 }
 \examples{
-df <- data.frame(
+d <- data.frame(
   recordid = 1:4,
   flag_logical = c(TRUE, TRUE, FALSE, TRUE),
   flag_Uppercase = c(4, 6, 8, 2)
 )
-validate_for_write(df = df)
+validate_for_write(d = d)
 }
 \author{
 Will Beasley

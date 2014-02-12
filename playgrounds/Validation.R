@@ -6,7 +6,7 @@ dfBad <- data.frame(
   bad_logical = c(T, T, F, T),
   UpperCase = c(4, 6, 8, 2)
 )
-validate_for_write(df = dfBad)
+validate_for_write(d = dfBad)
 
 
 grep(pattern="[A-Z]", x=colnames(dfBad), perl=TRUE)
@@ -14,7 +14,7 @@ grep(pattern="[A-Z]", x=colnames(dfBad), perl=TRUE)
 indices <- which(sapply(dfBad, class)=="logical")
 colnames(dfBad)[indices]
 
-# indices <- which(sapply(df, class)=="logical")
+# indices <- which(sapply(d, class)=="logical")
 # colnames(df)[indices]
 
 data.frame(

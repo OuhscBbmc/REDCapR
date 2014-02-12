@@ -1,3 +1,4 @@
+export(redcap_column_sanitize)
 export(redcap_read)
 export(redcap_read_batch)
 export(validate_for_write)
