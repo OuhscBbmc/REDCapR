@@ -60,10 +60,10 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
                                raw_or_label = 'raw',
                                verbose=TRUE, cert_location=NULL ) {  
   if( missing(redcap_uri) )
-    stop("The required parameter `redcap_uri` was missing from the call to `redcap_read_oneshot()`.")
+    stop("The required parameter `redcap_uri` was missing from the call to `redcap_read()`.")
   
   if( missing(token) )
-    stop("The required parameter `token` was missing from the call to `redcap_read_oneshot()`.")
+    stop("The required parameter `token` was missing from the call to `redcap_read()`.")
   
   if( missing(records_collapsed) & !missing(records) )
     records_collapsed <- paste0(records, collapse=",")
@@ -109,7 +109,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
   lst_status_message <- NULL
   success_combined <- TRUE
   
-  message("Starting to read ", format(length(ids), big.mark=",", scientific=F, trim=T), " records to be deactivated at ", Sys.time())
+  message("Starting to read ", format(length(ids), big.mark=",", scientific=F, trim=T), " records  at ", Sys.time())
   for( i in ds_glossary$id ) {
     selected_index <- seq(from=ds_glossary[i, "start_index"], to=ds_glossary[i, "stop_index"])
     selected_ids <- ids[selected_index]
@@ -122,11 +122,12 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
                                         raw_or_label = raw_or_label,
                                         verbose = verbose, 
                                         cert_location = cert_location)
+    
+    lst_status_message[[i]] <- read_result$status_message
     if( !read_result$success )
       stop("The `redcap_read()` call failed on iteration", i, ". Set the `verbose` parameter to TRUE and rerun for additional information.")
     
     lst_batch[[i]] <- read_result$data
-    lst_status_message[[i]] <- read_result$status_message
     success_combined <- success_combined | read_result$success
     
     rm(read_result) #Admittedly overkill defensiveness.

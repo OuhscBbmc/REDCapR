@@ -57,4 +57,4 @@ create_batch_glossary <- function( row_count, batch_size ) {
   return(ds_batch)
 }
 
-# REDCapR:::create_batch_glossary(100, 3)
+# REDCapR::create_batch_glossary(100, 3)
