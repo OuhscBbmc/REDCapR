@@ -1,57 +1,71 @@
-redcap_write <- function( ds_to_write, 
-                          batch_size = 100L,
-                          interbatch_delay = 0,
-                          redcap_uri,
-                          token,
-                          verbose = TRUE ) {  
-  
-  if( base::missing(redcap_uri) )
-    base::stop("The required parameter `redcap_uri` was missing from the call to `redcap_write()`.")
-  
-  if( base::missing(token) )
-    base::stop("The required parameter `token` was missing from the call to `redcap_write()`.")
 
-  start_time <- base::Sys.time()
-
-  ds_glossary <- REDCapR::create_batch_glossary(row_count=base::nrow(ds_to_write), batch_size=batch_size)
+redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, cert_location=NULL ) {
+  #TODO: automatically convert boolean/logical class to integer/bit class
+  start_time <- Sys.time()
+  csvElements <- NULL #This prevents the R CHECK NOTE: 'No visible binding for global variable Note in R CMD check';  Also see  if( getRversion() >= "2.15.1" )    utils::globalVariables(names=c("csvElements")) #http://stackoverflow.com/questions/8096313/no-visible-binding-for-global-variable-note-in-r-cmd-check; http://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
   
-  affected_ids <- character(0)
-  lst_status_message <- NULL
-  success_combined <- TRUE
-
-  message("Starting to update ", format(nrow(ds_to_write), big.mark=",", scientific=F, trim=T), " records to be written at ", Sys.time())
-  for( i in seq_along(ds_glossary$id) ) {
-    selected_indices <- seq(from=ds_glossary[i, "start_index"], to=ds_glossary[i, "stop_index"])
-    #     selected_ids <- ids[selected_index]
-    message("Writing batch ", i, " of ", nrow(ds_glossary), ", with indices ", min(selected_indices), " through ", max(selected_indices), ".")
-    write_result <- REDCapR:::redcap_write_oneshot(ds = ds_to_write[selected_indices, ],                                                  
-                                                  redcap_uri = redcap_uri,
-                                                  token = token,
-                                                  verbose = verbose)
-    
-    lst_status_message[[i]] <- write_result$status_message
-    if( !write_result$success )
-      stop("The `redcap_write()` call failed on iteration", i, ". Set the `verbose` parameter to TRUE and rerun for additional information.")
-    
-    affected_ids <- c(affected_ids, write_result$affected_ids)
-    success_combined <- success_combined | write_result$success
-       
-    rm(write_result) #Admittedly overkill defensiveness.
+  if( missing(redcap_uri) )
+    stop("The required parameter `redcap_uri` was missing from the call to `redcap_write_oneshot()`.")
+  
+  if( missing(token) )
+    stop("The required parameter `token` was missing from the call to `redcap_write_oneshot()`.")     
+  
+  if( missing( cert_location ) | is.null(cert_location) ) 
+    cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs", "mozilla_2013_12_05.crt")
+  #     curl_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
+  
+  if( !base::file.exists(cert_location) )
+    stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
+  
+  curl_options <- RCurl::curlOptions(cainfo = cert_location)
+  
+  con <-  base::textConnection(object='csvElements', open='w', local=TRUE)
+  write.csv(ds, con, row.names = FALSE, na="")  
+  close(con)
+  
+  csv <- paste(csvElements, collapse="\n")
+  rm(csvElements, con)
+  
+  returnContent <- RCurl::postForm(
+    uri = redcap_uri, 
+    token = token,
+    content = 'record',
+    format = 'csv', 
+    type = 'flat', 
+    returnContent = "ids",
+    overwriteBehavior = 'overwrite', #overwriteBehavior: *normal* - blank/empty values will be ignored [default]; *overwrite* - blank/empty values are valid and will overwrite data
+    data = csv,
+    .opts = curl_options
+  )
+  elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time,units="secs"))    
+  
+  isValidIDList <- grepl(pattern="^id\\n.{1,}", x=returnContent, perl=TRUE) #example: x="id\n5835\n5836\n5837\n5838\n5839"
+  if( isValidIDList ) {
+    elements <- unlist(strsplit(returnContent, split="\\n"))
+    affectedIDs <- elements[-1]  
+    recordsAffectedCount <- length(affectedIDs)
+    status_message <- paste0(format(recordsAffectedCount, big.mark = ",", scientific = FALSE, trim = TRUE), " records were written to REDCap in ", round(elapsed_seconds, 2), " seconds.")
+  } 
+  else { #If the returned content wasn't recognized as valid IDs, then
+    affectedIDs <- numeric() #Pass an empty array
+    recordsAffectedCount <- NA
+    status_message <- "The content returned during the write operation was not recognized.  Please see the `returnContent` element for more information." 
   }
-  
-  status_message_combined <- paste(lst_status_message, collapse="; ")
-  
-  elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
+  if( verbose ) 
+    message(status_message)
   
   return( list(
-    affected_id_count = length(affected_ids), 
-    affected_ids = affected_ids, 
+    records_affected_count = recordsAffectedCount,
+    affected_ids = affectedIDs,
     elapsed_seconds = elapsed_seconds, 
-    status_message = status_message_combined, 
-    success = success_combined
-  ) )
+    status_message = status_message, 
+    return_content = returnContent, 
+    success = isValidIDList
+  ))
 }
 
+# result <- redcap_read_oneshot(redcap_uri="https://bbmc.ouhsc.edu/redcap/api/", token = "9A81268476645C4E5F03428B8AC3AA7B")
+# dput(result$data)
 # dsToWrite <- structure(list(record_id = 1:5, first_name = c("Nutmeg", "Tumtum", 
 #                                                             "Marcus", "Trudy", "John Lee"), last_name = c("Nutmouse", "Nutmouse", 
 #                                                                                                           "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232", 
@@ -73,5 +87,7 @@ redcap_write <- function( ds_to_write,
 #                                                                                                                                                                                                                                                                                                                                                                                       "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, 
 #                                                                                                                                                                                                                                                                                                                                                                                                                                                                 -5L))
 # dsToWrite <- dsToWrite[1:3, ]
-# result <- REDCapR:::redcap_write(batch_size=2L, ds=dsToWrite, redcap_uri="https://bbmc.ouhsc.edu/redcap/api/", token = "9A81268476645C4E5F03428B8AC3AA7B")
-# str(result)
+# result <- REDCapR:::redcap_write_oneshot(ds=dsToWrite, redcap_uri="https://bbmc.ouhsc.edu/redcap/api/", token = "9A81268476645C4E5F03428B8AC3AA7B")
+# str(result$affected_ids)
+
+

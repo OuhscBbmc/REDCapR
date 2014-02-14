@@ -58,13 +58,12 @@ redcap_read(batch_size = 100L, interbatch_delay = 0, redcap_uri, token,
 \value{
 Currently, a list is returned with the following elements,
 \enumerate{ \item \code{data}: an R \code{data.frame} of
-the desired records and columns.  \item \code{raw_csv}: the
-text of comma separated values returned by REDCap through
-\code{RCurl}.  \item \code{records_collapsed}: the desired
-records IDs, collapsed into a single string, separated by
-commas.  \item \code{fields_collapsed}: the desired field
-names, collapsed into a single string, separated by commas.
-\item \code{elapsed_seconds}: the duration of the function.
+the desired records and columns.  \item
+\code{records_collapsed}: the desired records IDs,
+collapsed into a single string, separated by commas.  \item
+\code{fields_collapsed}: the desired field names, collapsed
+into a single string, separated by commas.  \item
+\code{elapsed_seconds}: the duration of the function.
 \item \code{status_message}: a boolean value indicating if
 the operation was apparently successful. }
 }

@@ -24,7 +24,6 @@
 #' @return Currently, a list is returned with the following elements,
 #' \enumerate{
 #'  \item \code{data}: an R \code{data.frame} of the desired records and columns.
-#'  \item \code{raw_csv}: the text of comma separated values returned by REDCap through \code{RCurl}.
 #'  \item \code{records_collapsed}: the desired records IDs, collapsed into a single string, separated by commas.
 #'  \item \code{fields_collapsed}: the desired field names, collapsed into a single string, separated by commas.
 #'  \item \code{elapsed_seconds}: the duration of the function.
@@ -61,10 +60,10 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
                                raw_or_label = 'raw',
                                verbose=TRUE, cert_location=NULL ) {  
   if( missing(redcap_uri) )
-    stop("The required parameter `redcap_uri` was missing from the call to `redcap_read_oneshot()`.")
+    stop("The required parameter `redcap_uri` was missing from the call to `redcap_read()`.")
   
   if( missing(token) )
-    stop("The required parameter `token` was missing from the call to `redcap_read_oneshot()`.")
+    stop("The required parameter `token` was missing from the call to `redcap_read()`.")
   
   if( missing(records_collapsed) & !missing(records) )
     records_collapsed <- paste0(records, collapse=",")
@@ -92,7 +91,6 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
     elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
     return( list(
       data = data.frame(), 
-      raw_csv = "",
       records_collapsed = "failed in initial batch call", 
       fields_collapsed = "failed in initial batch call",
       elapsed_seconds = elapsed_seconds, 
@@ -106,12 +104,12 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
   ids <- initial_call$data[, 1]
   ids <- ids[order(ids)]
   
-  ds_glossary <- REDCapR:::create_batch_glossary(row_count=length(ids), batch_size=batch_size)
+  ds_glossary <- REDCapR::create_batch_glossary(row_count=length(ids), batch_size=batch_size)
   lst_batch <- NULL
   lst_status_message <- NULL
   success_combined <- TRUE
   
-  message("Starting to read ", format(length(ids), big.mark=",", scientific=F, trim=T), " records to be deactivated at ", Sys.time())
+  message("Starting to read ", format(length(ids), big.mark=",", scientific=F, trim=T), " records  at ", Sys.time())
   for( i in ds_glossary$id ) {
     selected_index <- seq(from=ds_glossary[i, "start_index"], to=ds_glossary[i, "stop_index"])
     selected_ids <- ids[selected_index]
@@ -124,11 +122,12 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
                                         raw_or_label = raw_or_label,
                                         verbose = verbose, 
                                         cert_location = cert_location)
+    
+    lst_status_message[[i]] <- read_result$status_message
     if( !read_result$success )
       stop("The `redcap_read()` call failed on iteration", i, ". Set the `verbose` parameter to TRUE and rerun for additional information.")
     
     lst_batch[[i]] <- read_result$data
-    lst_status_message[[i]] <- read_result$status_message
     success_combined <- success_combined | read_result$success
     
     rm(read_result) #Admittedly overkill defensiveness.
@@ -141,7 +140,6 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
   
   return( list(
     data = ds_stacked, 
-    raw_csv = "The raw CSV isn't available with `redcap_read()`.  Use `redcap_read_oneshot()` instead.",
     records_collapsed = records_collapsed, 
     fields_collapsed = fields_collapsed,
     elapsed_seconds = elapsed_seconds, 
