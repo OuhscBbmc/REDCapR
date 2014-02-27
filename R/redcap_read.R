@@ -151,7 +151,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
     records_collapsed = records_collapsed, 
     fields_collapsed = fields_collapsed,
     elapsed_seconds = elapsed_seconds, 
-    status_message = paste(status_message_combined, status_message_overall), 
+    status_message = status_message_combined, 
     success = success_combined
   ) )
 }

@@ -53,7 +53,7 @@ redcap_write <- function( ds_to_write,
     affected_id_count = length(affected_ids), 
     affected_ids = affected_ids, 
     elapsed_seconds = elapsed_seconds, 
-    status_message = paste(status_message_combined, status_message_overall),  
+    status_message = status_message_combined,  
     success = success_combined
   ) )
 }
