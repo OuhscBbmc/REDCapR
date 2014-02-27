@@ -39,15 +39,21 @@ redcap_write <- function( ds_to_write,
     rm(write_result) #Admittedly overkill defensiveness.
   }
   
-  status_message_combined <- paste(lst_status_message, collapse="; ")
-  
   elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
-  
+  status_message_combined <- paste(lst_status_message, collapse="; ")
+  status_message_overall <- paste0("\nAcross all batches,",
+                                   format(length(affected_ids), big.mark = ",", scientific = FALSE, trim = TRUE), 
+                                   " records were written to REDCap in ", 
+                                   round(elapsed_seconds, 2), 
+                                   " seconds.")
+  if( verbose ) 
+    message(status_message_overall)
+
   return( list(
     affected_id_count = length(affected_ids), 
     affected_ids = affected_ids, 
     elapsed_seconds = elapsed_seconds, 
-    status_message = status_message_combined, 
+    status_message = paste(status_message_combined, status_message_overall),  
     success = success_combined
   ) )
 }
