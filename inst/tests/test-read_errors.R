@@ -16,6 +16,9 @@ test_that("Bad Uri", {
   expect_equal(returned_object$raw_csv, expected=raw(0))
   expect_true(is.null(returned_object$records_collapsed))
   expect_true(is.null(returned_object$fields_collapsed))
-  expect_equal(returned_object$status_message, expected="Reading the REDCap data was not successful.  The error message was:\nError in textConnection(text, encoding = \"UTF-8\") : \n  invalid 'text' argument\n")
+  if( getRversion() < "3.1.0")
+    expect_equal(returned_object$status_message, expected="Reading the REDCap data was not successful.  The error message was:\nError in textConnection(text) : invalid 'text' argument\n")
+  else
+    expect_equal(returned_object$status_message, expected="Reading the REDCap data was not successful.  The error message was:\nError in textConnection(text, encoding = \"UTF-8\") : \n  invalid 'text' argument\n")
   expect_false(returned_object$success)
 })

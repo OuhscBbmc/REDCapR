@@ -134,9 +134,17 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
   }
   
   ds_stacked <- plyr::rbind.fill(lst_batch)
-  status_message_combined <- paste(lst_status_message, collapse="; ")
   
   elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
+  status_message_combined <- paste(lst_status_message, collapse="; ")
+#   status_message_overall <- paste0("\nAcross all batches,", 
+#                                    format(nrow(ds_stacked), big.mark = ",", scientific = FALSE, trim = TRUE), 
+#                                    " records and ",  
+#                                    format(length(ds_stacked), big.mark = ",", scientific = FALSE, trim = TRUE), 
+#                                    " columns were read from REDCap in ", 
+#                                    round(elapsed_seconds, 2), " seconds.")
+#   if( verbose )
+#     message(status_message_overall)
   
   return( list(
     data = ds_stacked, 
