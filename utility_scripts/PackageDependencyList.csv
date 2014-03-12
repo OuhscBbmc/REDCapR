@@ -17,7 +17,8 @@ RColorBrewer,TRUE,TRUE,,Explicit control over the Color Brewer colors.  See http
 RCurl,TRUE,TRUE,,Interact with the web APIs
 reshape2,TRUE,TRUE,,Data manipulation not covered in plyr
 RODBC,TRUE,TRUE,,For connecting to ODBC databases
-roxygen2,TRUE,TRUE,,Creates documentation Rd file from (well-formed) comments
+roxygen,FALSE,TRUE,klutometis,Creates documentation Rd file from (well-formed) comments
+roxygen2,TRUE,FALSE,,Creates documentation Rd file from (well-formed) comments
 stringr,TRUE,TRUE,,Consistent/convienent function signatures for manipulating text
 testit,TRUE,TRUE,,has the useful `assert()` function
 testthat,FALSE,TRUE,hadley,Heavier testing framework that's good for package development
