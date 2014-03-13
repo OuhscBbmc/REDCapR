@@ -5,10 +5,17 @@ context("ReadBatch")
 ###########
 uri <- "https://bbmc.ouhsc.edu/redcap/redcap_v5.2.3/API/"
 token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account
+project <- redcap_project$new(redcap_uri=uri, token=token)
 
 test_that("Smoke Test", {  
+  #Static method
   expect_message(
     returned_object <- redcap_read(redcap_uri=uri, token=token, verbose=T)    
+  )
+  
+  #Instance method
+  expect_message(
+    returned_object <- project$read()
   )
 })
 

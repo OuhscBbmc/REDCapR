@@ -58,27 +58,38 @@ redcap_read(batch_size = 100L, interbatch_delay = 0, redcap_uri, token,
 }
 \value{
 Currently, a list is returned with the following elements,
-\enumerate{
- \item \code{data}: an R \code{data.frame} of the desired records and columns.
- \item \code{records_collapsed}: the desired records IDs, collapsed into a single string, separated by commas.
- \item \code{fields_collapsed}: the desired field names, collapsed into a single string, separated by commas.
- \item \code{elapsed_seconds}: the duration of the function.
- \item \code{status_message}: a boolean value indicating if the operation was apparently successful.
-}
+\enumerate{ \item \code{data}: an R \code{data.frame} of
+the desired records and columns.  \item
+\code{records_collapsed}: the desired records IDs,
+collapsed into a single string, separated by commas.  \item
+\code{fields_collapsed}: the desired field names, collapsed
+into a single string, separated by commas.  \item
+\code{elapsed_seconds}: the duration of the function.
+\item \code{status_message}: a boolean value indicating if
+the operation was apparently successful. }
 }
 \description{
-From an external perpsective, this function is similar to \code{\link{redcap_read_oneshot}}.  The internals
-differ in that \code{redcap_read} retrieves subsets of the data, and then combines them before returning
-(among other objects) a single \code{data.frame}.  This function can be more appropriate than
-\code{\link{redcap_read_oneshot}} when returning large datasets that could tie up the server.
+From an external perpsective, this function is similar to
+\code{\link{redcap_read_oneshot}}.  The internals differ in
+that \code{redcap_read} retrieves subsets of the data, and
+then combines them before returning (among other objects) a
+single \code{data.frame}.  This function can be more
+appropriate than \code{\link{redcap_read_oneshot}} when
+returning large datasets that could tie up the server.
 }
 \details{
-Specifically, it internally uses multiple calls to \code{\link{redcap_read_oneshot}} to select and return data.
-Initially, only primary key is queried through the REDCap API.  The long list is then subsetted into partitions,
-whose sizes are determined by the \code{batch_size} parameter.  REDCap is then queried for all variables of
-the subset's subjects.  This is repeated for each subset, before returning a unified \code{data.frame}.
+Specifically, it internally uses multiple calls to
+\code{\link{redcap_read_oneshot}} to select and return
+data. Initially, only primary key is queried through the
+REDCap API.  The long list is then subsetted into
+partitions, whose sizes are determined by the
+\code{batch_size} parameter.  REDCap is then queried for
+all variables of the subset's subjects.  This is repeated
+for each subset, before returning a unified
+\code{data.frame}.
 
-The function allows a delay between calls, which allows the server to attend to other users' requests.
+The function allows a delay between calls, which allows the
+server to attend to other users' requests.
 }
 \examples{
 \dontrun{
@@ -92,11 +103,16 @@ redcap_read(batch_size=2, redcap_uri=uri, token=token)
 Will Beasley
 }
 \references{
-The official documentation can be found on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiDocumentation}).
-Also see the `API Examples' page on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}).
-A user account is required to access the wiki, which typically is granted only to REDCap administrators.
-If you do not
+The official documentation can be found on the REDCap wiki
+(\url{https://iwg.devguard.com/trac/redcap/wiki/ApiDocumentation}).
+Also see the `API Examples' page on the REDCap wiki
+(\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}).
+A user account is required to access the wiki, which
+typically is granted only to REDCap administrators. If you
+do not
 
-The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.
+The official \href{http://curl.haxx.se}{cURL site}
+discusses the process of using SSL to verify the server
+being connected to.
 }
 
