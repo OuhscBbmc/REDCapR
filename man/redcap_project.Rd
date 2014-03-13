@@ -7,8 +7,24 @@
 This \code{Reference Class} represents a REDCap project.
 Once some values are set that are specific to a REDCap
 project (such as the URI and token), later calls are less
-verbose (such as reading and writing data).
+verbose (such as reading and writing data).  The
+functionality
 }
+\section{Fields}{
+
+\describe{
+\item{\code{redcap_uri}}{The URI (uniform resource identifier) of the REDCap project.  Required.}
+
+\item{\code{token}}{token The user-specific string that serves as the password for a project.  Required.}
+}}
+\section{Methods}{
+
+\describe{
+\item{\code{read}}{\code{read(batch_size = 100L, interbatch_delay = 0, records = NULL,
+  records_collapsed = NULL, fields = NULL, fields_collapsed = NULL,
+  export_data_access_groups = FALSE, raw_or_label = "raw", verbose = TRUE,
+  cert_location = NULL)}: Reads records in a REDCap project.}
+}}
 \examples{
 library(REDCapR) #Load the package into the current R session.
 uri <- "https://bbmc.ouhsc.edu/redcap/api/"

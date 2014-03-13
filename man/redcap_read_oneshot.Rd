@@ -9,8 +9,8 @@ redcap_read_oneshot(redcap_uri, token, records = NULL,
   cert_location = NULL)
 }
 \arguments{
-  \item{redcap_uri}{The URI of the REDCap project.
-  Required.}
+  \item{redcap_uri}{The URI (uniform resource identifier)
+  of the REDCap project.  Required.}
 
   \item{token}{The user-specific string that serves as the
   password for a project.  Required.}

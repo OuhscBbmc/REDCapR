@@ -1,5 +1,6 @@
 ##' @name redcap_project
 ##' @export redcap_project
+##' @exportClass redcap_project
 ##' 
 ##' @title A \code{Reference Class} to make later calls to REDCap more convenient.
 ##' 
@@ -7,7 +8,10 @@
 ##' 
 ##' @description This \code{Reference Class} represents a REDCap project. 
 ##' Once some values are set that are specific to a REDCap project (such as the URI and token), 
-##' later calls are less verbose (such as reading and writing data).
+##' later calls are less verbose (such as reading and writing data).  The functionality 
+##' 
+##' @field redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
+##' @field token token The user-specific string that serves as the password for a project.  Required.
 ##' 
 ##' 
 ##' @examples
@@ -27,6 +31,7 @@ redcap_project <- setRefClass(
   ),
   
   methods = list(
+    
     read = function( 
       batch_size = 100L, interbatch_delay = 0,
       records = NULL, records_collapsed = NULL, 
@@ -34,6 +39,8 @@ redcap_project <- setRefClass(
       export_data_access_groups = FALSE,
       raw_or_label = 'raw',
       verbose = TRUE, cert_location = NULL) {
+      
+      "Reads records in a REDCap project."
       
       return( REDCapR::redcap_read( 
         batch_size = batch_size, interbatch_delay = interbatch_delay,
@@ -52,7 +59,7 @@ redcap_project <- setRefClass(
 
 # http://stackoverflow.com/questions/21875596/mapping-a-c-sharp-class-definition-to-an-r-reference-class-definition
 
-# REDCapR::redcap_project$
+# REDCapR::redcap_project$new()
 # # library(REDCapR) #Load the package into the current R session.
 # uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 # token <- "9A81268476645C4E5F03428B8AC3AA7B"

@@ -16,8 +16,8 @@ redcap_read(batch_size = 100L, interbatch_delay = 0, redcap_uri, token,
   function will wait before requesting a new subset from
   REDCap. The default is 0.5 seconds.}
 
-  \item{redcap_uri}{The URI of the REDCap project.
-  Required.}
+  \item{redcap_uri}{The URI (uniform resource identifier)
+  of the REDCap project.  Required.}
 
   \item{token}{The user-specific string that serves as the
   password for a project.  Required.}
