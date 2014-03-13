@@ -9,7 +9,7 @@ base::rm(list=base::ls(all=TRUE))
 
 #####################################
 ## @knitr DeclareGlobals
-pathCsv <- './utility_scripts/PackageDependencyList.csv'
+pathCsv <- './UtilityScripts/PackageDependencyList.csv'
 
 if( !file.exists(pathCsv)) 
   base::stop("The path `", pathCsv, "` was not found.  Make sure the working directory is set to the root of the repository.")
