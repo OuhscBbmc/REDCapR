@@ -15,10 +15,9 @@ A Reference Class to represent a bank account.
 \item{\code{balance2}}{A length-one numeric vector}
 }}
 \section{Methods}{
+\itemize{
+\item \code{withdraw1(x)}: Withdraw1 money from account. Allows overdrafts
 
-\describe{
-\item{\code{withdraw1}}{\code{withdraw1(x)}: Withdraw1 money from account. Allows overdrafts}
-
-\item{\code{withdraw2}}{\code{withdraw2(x)}: Withdraw2 money from account. Allows overdrafts}
+\item \code{withdraw2(x)}: Withdraw2 money from account. Allows overdrafts
 }}
 
