@@ -1,7 +1,7 @@
 require(testthat)
 
 ###########
-context("validate data frame for writing to REDCap")
+context("Validate data frame for writing to REDCap")
 ###########
 dfBad <- data.frame(
   recordid = 1:4,

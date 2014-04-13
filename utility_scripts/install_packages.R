@@ -4,7 +4,7 @@
 #   GitHub packages are installed regardless if they're already installed.
 #If anyone encounters a package that should be on there, please add it to `./UtilityScripts/PackageDependencyList.csv`
 
-#Clear memory from previous runs,.
+#Clear memory from previous runs.
 base::rm(list=base::ls(all=TRUE))
 
 #####################################
