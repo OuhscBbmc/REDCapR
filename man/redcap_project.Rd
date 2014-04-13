@@ -18,12 +18,11 @@ functionality
 \item{\code{token}}{token The user-specific string that serves as the password for a project.  Required.}
 }}
 \section{Methods}{
-
-\describe{
-\item{\code{read(batch_size = 100L, interbatch_delay = 0, records = NULL,
+\itemize{
+\item \code{read(batch_size = 100L, interbatch_delay = 0, records = NULL,
   records_collapsed = NULL, fields = NULL, fields_collapsed = NULL,
   export_data_access_groups = FALSE, raw_or_label = "raw", verbose = TRUE,
-  cert_location = NULL)}}{Reads records in a REDCap project.}
+  cert_location = NULL)}: Reads records in a REDCap project.
 }}
 \examples{
 library(REDCapR) #Load the package into the current R session.
