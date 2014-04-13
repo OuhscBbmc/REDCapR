@@ -19,6 +19,8 @@ The location of the `bin` directory should be added to the OS's "PATH" environme
 
 If you don't install qpdf correctly, you'll likely receive the error message `WARNING 'qpdf' is needed for checks on size reduction of PDFs` when running R CHECK with the `--as-cran-` option.
 
+In Redhat Linux, running the following worked for us: `yum install qpdf`.
+
 ### R Packages
 We try to keep a current list of all the packages used in REDCapR in the file `/utility_scripts/package_dependencies.R`.  This is partly for the sake of documentation, and partly so there aren't any surprises for new contributors.  Just run this file, and everything should be installed if it's not already.  After this script is run the first time, make sure you click the 'Check for Updates' button in the 'Packages' every week or so.
 
