@@ -1,0 +1,43 @@
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Troubleshooting REDCap API Calls}
+-->
+
+# Troubleshooting REDCap API Calls
+There are many links in the pipeline between your institution's [REDCap](http://www.project-redcap.org/) server and the API user.  When the end result is unsuccesful, this document should help narrow the location of the possible problem.
+
+## Server Configuration and Authorization
+This first group of checks focus primarily on the server and the logins.
+
+ 1. **Does the user have an account for the *server*?**  
+ This can be verified in the `Browse Users` section of the server's `Control Center`.
+ 
+ 1. **Does the user have permissions for the specific *project*?**  
+ This can be verified in the `User Rights` section within the project.  Notice that it's possible (but ultimately not useful) to have an account here, but not with the server, so don't skip the previous step.
+ 
+ 1. **Can the user login in normally through the interface?**  
+ If the username and password aren't working, the API theoretically might still work because it uses their token instead of their password.
+ 
+ 1. **Has the user verified their account by responding to the automated email sent to them?**  
+ This can be verified in the `Browse Users` section of the server's `Control Center`.  For each email address they've entered, there should be a green 'Verified' label and icon.
+ 
+ 1. **Has the user been granted the desired import and/or export permissions?**  
+ This can be verified in the `User Rights` section or in the `API` section (and it's `Manage All Project Tokens` tab) within the project.  Alternatively, it can be verified in the `API Tokens` section of the server's `Control Center`.
+ 
+ 1. **Are they using the correct token?**  
+ This can be verified in the `API` section (and it's `Manage All Project Tokens` tab) within the project.  Click the magnifying glass icon in the user's row.  Alternatively, it can be verified in the `API Tokens` section of the server's `Control Center`.
+
+## Language Agnostic API
+This section group examines potential problems that occur after it leaves a working server, but before it is handled by their programming language (eg, Python and R).  [Postman](http://www.getpostman.com/) is a Chrome plugin recommended by several people, including [Andy Martin](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ).  It's helped us a lot.
+
+<img src="./images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>
+
+ 1. **Is Postman installed and operating correctly?**
+ If it helps to start with a differen REDCap server, you can use this dummy project containing fake data.  The url can be found in the screenshot above.  There are three key-value pairs: (1) the 'token' is `9A81268476645C4E5F03428B8AC3AA7B`, (2) the 'content' is `record`, and (3) the 'format' should be `CSV`.  In the later check, the token should change, but the content and format should not.  It should return five records in a CSV format.  The 'status' should be `200 OK`.
+ 
+ 1. **Can you query the API successfully?** 
+ Create an account for yourself, and see if your token works on your server and project.
+ 
+ 
+## Document Info
+This document is primarily based on REDCap version 5.11.3, and was last updated 2016-06-24.
