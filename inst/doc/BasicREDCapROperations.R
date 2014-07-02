@@ -1,5 +1,4 @@
-
-## ----set_options, echo=FALSE, results='hide'-----------------------------
+## ----set_options, echo=FALSE, results='hide'--------------------------------------------------------------------------
 require(knitr)
 opts_chunk$set(
     comment=NA, 
@@ -11,20 +10,17 @@ opts_chunk$set(
 
 options(width=120) #So the output is 50% wider than the default.
 
-
-## ----project_values------------------------------------------------------
+## ----project_values---------------------------------------------------------------------------------------------------
 library(REDCapR) #Load the package into the current R session.
 uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "9A81268476645C4E5F03428B8AC3AA7B"
 
-
-## ----return_all----------------------------------------------------------
+## ----return_all-------------------------------------------------------------------------------------------------------
 #Return all records and all variables.
 ds_all_rows_all_fields <- redcap_read_oneshot(redcap_uri=uri, token=token)$data
 ds_all_rows_all_fields #Inspect the returned dataset
 
-
-## ----read_row_subset, results='hold'-------------------------------------
+## ----read_row_subset, results='hold'----------------------------------------------------------------------------------
 #Return only records with IDs of 1 and 3
 desired_records_v1 <- c(1, 3)
 ds_some_rows_v1 <- redcap_read_oneshot(
@@ -43,8 +39,7 @@ ds_some_rows_v2 <- redcap_read_oneshot(
 
 ds_some_rows_v2 #Inspect the returned dataset
 
-
-## ----read_field_subset---------------------------------------------------
+## ----read_field_subset------------------------------------------------------------------------------------------------
 #Return only the fields recordid, first_name, and age
 desired_fields_v1 <- c("recordid", "first_name", "age")
 ds_some_fields_v1 <- redcap_read_oneshot(
@@ -63,8 +58,7 @@ ds_some_fields_v2 <- redcap_read_oneshot(
 
 ds_some_fields_v2 #Inspect the returned dataset
 
-
-## ----read_not_just_dataframe---------------------------------------------
+## ----read_not_just_dataframe------------------------------------------------------------------------------------------
 #Return only the fields recordid, first_name, and age
 all_information <- redcap_read_oneshot(
    redcap_uri = uri, 
@@ -73,9 +67,7 @@ all_information <- redcap_read_oneshot(
 )
 all_information #Inspect the additional information
 
-
-## ----session_info, echo=FALSE--------------------------------------------
+## ----session_info, echo=FALSE-----------------------------------------------------------------------------------------
 cat("Report created by", Sys.info()["user"], "at", strftime(Sys.time(), "%F, %T %z"))
 sessionInfo()
-
 

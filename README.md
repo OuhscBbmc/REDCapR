@@ -43,12 +43,12 @@ Will Beasley, David Bard, & Thomas Wilson
 [Department of Pediatrics](https://www.oumedicine.com/pediatrics),
 [Biomedical & Behavioral Research Core](http://ouhsc.edu/BBMC/).
 
-The development version of REDCapR can be installed from [R-Forge](https://r-forge.r-project.org/projects/redcapr/),
+<!-- The development version of REDCapR can be installed from [R-Forge](https://r-forge.r-project.org/projects/redcapr/),
 ```
 install.packages("REDCapR", repos="http://R-Forge.R-project.org")
-```
+``` -->
 
-or from [GitHub](https://github.com/OuhscBbmc/REDCapR) after installing the `devtools` package.
+The development version of REDCapR can be installed from [GitHub](https://github.com/OuhscBbmc/REDCapR) after installing the `devtools` package.
 ```
 install.packages("devtools")
 devtools::install_github(repo="OuhscBbmc/REDCapR")

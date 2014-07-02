@@ -24,4 +24,4 @@ devtools::build_vignettes()
 devtools::revdep_check(pkg="REDCapR", recursive=TRUE)
 # devtools::release(check=FALSE) #Careful, the last question ultimately uploads it to CRAN, where you can't delete/reverse your decision.
 
-devtools::install_github("wibeasley/roxygen")
+# devtools::install_github("wibeasley/roxygen")
