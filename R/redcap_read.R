@@ -3,7 +3,7 @@
 #' 
 #' @title Read records from a REDCap project in subsets, and stacks them together before returning a \code{data.frame}.
 #'  
-#' @description From an external perpsective, this function is similar to \code{\link{redcap_read_oneshot}}.  The internals
+#' @description From an external perspective, this function is similar to \code{\link{redcap_read_oneshot}}.  The internals
 #' differ in that \code{redcap_read} retrieves subsets of the data, and then combines them before returning
 #' (among other objects) a single \code{data.frame}.  This function can be more appropriate than 
 #' \code{\link{redcap_read_oneshot}} when returning large datasets that could tie up the server.   
