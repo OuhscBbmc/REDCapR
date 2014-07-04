@@ -22,7 +22,7 @@ test_that("All Records -Default", {
     "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
-    "1955-04-15"), age = c(10L, 10L, 79L, 61L, 58L), ethnicity = c(1L, 
+    "1955-04-15"), age = c(10L, 11L, 79L, 61L, 58L), ethnicity = c(1L, 
     1L, 0L, 1L, 1L), race = c(2L, 6L, 4L, 4L, 4L), sex = c(0L, 1L, 
     1L, 0L, 1L), height = c(5, 6, 180, 165, 193.04), weight = c(1L, 
     1L, 80L, 54L, 104L), bmi = c(400, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
@@ -40,6 +40,10 @@ test_that("All Records -Default", {
     returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, verbose=T),
     regexp = expected_outcome_message
   )
+  
+  
+  returned_object$data$age
+  expected_data_frame$age
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
@@ -60,7 +64,7 @@ test_that("All Records -Raw", {
     "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
-    "1955-04-15"), age = c(10L, 10L, 79L, 61L, 58L), ethnicity = c(1L, 
+    "1955-04-15"), age = c(10L, 11L, 79L, 61L, 58L), ethnicity = c(1L, 
     1L, 0L, 1L, 1L), race = c(2L, 6L, 4L, 4L, 4L), sex = c(0L, 1L, 
     1L, 0L, 1L), height = c(5, 6, 180, 165, 193.04), weight = c(1L, 
     1L, 80L, 54L, 104L), bmi = c(400, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
@@ -100,7 +104,7 @@ test_that("All Records -Raw", {
     "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
-    "1955-04-15"), age = c(10L, 10L, 79L, 61L, 58L), ethnicity = c(1L, 
+    "1955-04-15"), age = c(10L, 11L, 79L, 61L, 58L), ethnicity = c(1L, 
     1L, 0L, 1L, 1L), race = c(2L, 6L, 4L, 4L, 4L), sex = c(0L, 1L, 
     1L, 0L, 1L), height = c(5, 6, 180, 165, 193.04), weight = c(1L, 
     1L, 80L, 54L, 104L), bmi = c(400, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
@@ -140,7 +144,7 @@ test_that("All Records -label and DAG", {
     "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
-    "1955-04-15"), age = c(10L, 10L, 79L, 61L, 58L), ethnicity = c("NOT Hispanic or Latino", 
+    "1955-04-15"), age = c(10L, 11L, 79L, 61L, 58L), ethnicity = c("NOT Hispanic or Latino", 
     "NOT Hispanic or Latino", "Hispanic or Latino", "NOT Hispanic or Latino", 
     "NOT Hispanic or Latino"), race = c("Native Hawaiian or Other Pacific Islander", 
     "Unknown / Not Reported", "White", "White", "White"), sex = c("Female", 
@@ -183,7 +187,7 @@ test_that("All Records -label", {
     "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
-    "1955-04-15"), age = c(10L, 10L, 79L, 61L, 58L), ethnicity = c("NOT Hispanic or Latino", 
+    "1955-04-15"), age = c(10L, 11L, 79L, 61L, 58L), ethnicity = c("NOT Hispanic or Latino", 
     "NOT Hispanic or Latino", "Hispanic or Latino", "NOT Hispanic or Latino", 
     "NOT Hispanic or Latino"), race = c("Native Hawaiian or Other Pacific Islander", 
     "Unknown / Not Reported", "White", "White", "White"), sex = c("Female", 

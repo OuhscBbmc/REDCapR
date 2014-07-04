@@ -158,7 +158,8 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
   }
   else {
     ds <- data.frame() #Return an empty data.frame
-    outcome_message <- paste0("Reading the REDCap data was not successful.  The error message was:\n",  geterrmessage())
+    #outcome_message <- paste0("Reading the REDCap data was not successful.  The error message was:\n",  geterrmessage())
+    outcome_message <- paste0("Reading the REDCap data was not successful.  The error message was:\n",  raw_text)
   }
     
   if( verbose ) 
