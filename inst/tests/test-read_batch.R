@@ -40,7 +40,7 @@ test_that("All Records -Default", {
     "age", "ethnicity", "race", "sex", "height", "weight", "bmi", 
     "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, 
     -5L))
-  expected_outcome_message <- "5 records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "\\d+ records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
     returned_object <- redcap_read(redcap_uri=uri, token=token, verbose=T),
@@ -48,10 +48,12 @@ test_that("All Records -Default", {
   )
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_true(returned_object$success)
+  expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
+  expect_match(returned_object$status_messages, regexp="OK", perl=TRUE)
   expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
   expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
   expect_match(returned_object$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
-  expect_true(returned_object$success)
 })
 test_that("All Records -Raw", {  
   expected_data_frame <- structure(list(record_id = 1:5, first_name = c("Nutmeg", "Tumtum", 
@@ -74,7 +76,7 @@ test_that("All Records -Raw", {
     "age", "ethnicity", "race", "sex", "height", "weight", "bmi", 
     "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, 
     -5L))
-  expected_outcome_message <- "5 records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "\\d+ records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
     returned_object <- redcap_read(redcap_uri=uri, token=token, raw_or_label="raw", verbose=T),
@@ -82,10 +84,12 @@ test_that("All Records -Raw", {
   )
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_true(returned_object$success)
+  expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
+  expect_match(returned_object$status_messages, regexp="OK", perl=TRUE)
   expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
   expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
-  expect_true(returned_object$success)
 })
 
 test_that("All Records -Raw", {  
@@ -110,7 +114,7 @@ test_that("All Records -Raw", {
     "telephone", "email", "dob", "age", "ethnicity", "race", "sex", 
     "height", "weight", "bmi", "comments", "demographics_complete"
     ), class = "data.frame", row.names = c(NA, -5L))
-  expected_outcome_message <- "5 records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "\\d+ records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
     returned_object <- redcap_read(redcap_uri=uri, token=token, raw_or_label="raw", export_data_access_groups="true", verbose=T),
@@ -118,10 +122,12 @@ test_that("All Records -Raw", {
   )
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_true(returned_object$success)
+  expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
+  expect_match(returned_object$status_messages, regexp="OK", perl=TRUE)
   expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
   expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
-  expect_true(returned_object$success)
 })
 
 test_that("All Records -label and DAG", {  
@@ -150,7 +156,7 @@ test_that("All Records -label and DAG", {
     "age", "ethnicity", "race", "sex", "height", "weight", "bmi", 
     "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              -5L))
-  expected_outcome_message <- "5 records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "\\d+ records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
     returned_object <- redcap_read(redcap_uri=uri, token=token, raw_or_label="label", export_data_access_groups="true", verbose=T),
@@ -158,10 +164,12 @@ test_that("All Records -label and DAG", {
   )
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_true(returned_object$success)
+  expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
+  expect_match(returned_object$status_messages, regexp="OK", perl=TRUE)
   expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
   expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
-  expect_true(returned_object$success)
 })
 
 test_that("All Records -label", {  
@@ -189,7 +197,7 @@ test_that("All Records -label", {
     "age", "ethnicity", "race", "sex", "height", "weight", "bmi", 
     "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, -5L))
 
-  expected_outcome_message <- "5 records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "\\d+ records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
     returned_object <- redcap_read(redcap_uri=uri, token=token, raw_or_label="label", export_data_access_groups="false", verbose=T),
@@ -197,8 +205,47 @@ test_that("All Records -label", {
   )
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_true(returned_object$success)
+  expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
+  expect_match(returned_object$status_messages, regexp="OK", perl=TRUE)
   expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
   expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+})
+
+test_that("All Records -Default", {  
+  expected_data_frame <- structure(list(record_id = 1:5, first_name = c("Nutmeg", "Tumtum", 
+    "Marcus", "Trudy", "John Lee"), last_name = c("Nutmouse", "Nutmouse", 
+    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232", 
+    "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402", 
+    "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
+    ), telephone = c("(432) 456-4848", "(234) 234-2343", "(433) 435-9865", 
+    "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
+    "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
+    ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
+    "1955-04-15"), age = c(10L, 10L, 79L, 61L, 58L), ethnicity = c(1L, 
+    1L, 0L, 1L, 1L), race = c(2L, 6L, 4L, 4L, 4L), sex = c(0L, 1L, 
+    1L, 0L, 1L), height = c(5, 6, 180, 165, 193.04), weight = c(1L, 
+    1L, 80L, 54L, 104L), bmi = c(400, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
+    "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
+    "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
+    ), demographics_complete = c(2L, 2L, 2L, 2L, 2L)), .Names = c("record_id", 
+    "first_name", "last_name", "address", "telephone", "email", "dob", 
+    "age", "ethnicity", "race", "sex", "height", "weight", "bmi", 
+    "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, -5L))
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  
+  expect_message(
+    returned_object <- redcap_read(redcap_uri=uri, token=token, verbose=T, batch_size=2),
+    regexp = expected_outcome_message
+  )
+  
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_true(returned_object$success)
+  expect_match(returned_object$status_codes, regexp="200; 200; 200", perl=TRUE)
+  expect_match(returned_object$status_messages, regexp="OK; OK; OK", perl=TRUE)
+  expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
+  expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
+  expect_match(returned_object$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+
 })

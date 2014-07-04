@@ -25,9 +25,9 @@
 #' \enumerate{
 #'  \item \code{data}: An R \code{data.frame} of the desired records and columns.
 #'  \item \code{success}: A boolean value indicating if the operation was apparently successful.
-#'  \item \code{status_codes}: A collection of \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes}, separated by commas.
-#'  \item \code{status_messages}: A collection of messages associated with the \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code}, separated by commas.
-#'  \item \code{outcome_messages}: A collection of human readable strings indicating the operations' outcomes.
+#'  \item \code{status_codes}: A collection of \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes}, separated by semicolons.
+#'  \item \code{status_messages}: A collection of messages associated with the \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code}, separated by semicolons.
+#'  \item \code{outcome_messages}: A collection of human readable strings indicating the operations' semicolons
 #'  \item \code{records_collapsed}: The desired records IDs, collapsed into a single string, separated by commas.
 #'  \item \code{fields_collapsed}: The desired field names, collapsed into a single string, separated by commas.
 #'  \item \code{elapsed_seconds}: The duration of the function.
