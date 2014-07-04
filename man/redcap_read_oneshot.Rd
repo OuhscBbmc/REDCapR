@@ -51,16 +51,24 @@ redcap_read_oneshot(redcap_uri, token, records = NULL,
 }
 \value{
 Currently, a list is returned with the following elements,
-\enumerate{ \item \code{data}: an R \code{data.frame} of
-the desired records and columns.  \item \code{raw_csv}: the
-text of comma separated values returned by REDCap through
-\code{RCurl}.  \item \code{records_collapsed}: the desired
-records IDs, collapsed into a single string, separated by
-commas.  \item \code{fields_collapsed}: the desired field
-names, collapsed into a single string, separated by commas.
-\item \code{elapsed_seconds}: the duration of the function.
-\item \code{outcome_message}: a boolean value indicating if
-the operation was apparently successful. }
+\enumerate{ \item \code{data}: An R \code{data.frame} of
+the desired records and columns.  \item \code{status_code}:
+The
+\href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http
+status code} of the operation.  \item
+\code{status_message}: The message associated with the
+\href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http
+status code}.  \item \code{raw_text}: If an operation is
+NOT successful, the text returned by REDCap.  If an
+operation is successful, the `raw_text` is returned as an
+empty string to save RAM.  \item \code{records_collapsed}:
+The desired records IDs, collapsed into a single string,
+separated by commas.  \item \code{fields_collapsed}: The
+desired field names, collapsed into a single string,
+separated by commas.  \item \code{elapsed_seconds}: The
+duration of the function.  \item \code{outcome_message}: A
+boolean value indicating if the operation was apparently
+successful. }
 }
 \description{
 This function uses REDCap's

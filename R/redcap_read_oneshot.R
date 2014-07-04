@@ -18,12 +18,14 @@
 #' @param cert_location  If present, this string should point to the location of the cert files required for SSL verification.  If the value is missing or NULL, the server's identity will be verified using a recent CA bundle from the \href{http://curl.haxx.se}{cURL website}.  See the details below. Optional.
 #' @return Currently, a list is returned with the following elements,
 #' \enumerate{
-#'  \item \code{data}: an R \code{data.frame} of the desired records and columns.
-#'  \item \code{raw_csv}: the text of comma separated values returned by REDCap through \code{RCurl}.
-#'  \item \code{records_collapsed}: the desired records IDs, collapsed into a single string, separated by commas.
-#'  \item \code{fields_collapsed}: the desired field names, collapsed into a single string, separated by commas.
-#'  \item \code{elapsed_seconds}: the duration of the function.
-#'  \item \code{outcome_message}: a boolean value indicating if the operation was apparently successful.
+#'  \item \code{data}: An R \code{data.frame} of the desired records and columns.
+#'  \item \code{status_code}: The \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code} of the operation.
+#'  \item \code{status_message}: The message associated with the \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code}.
+#'  \item \code{raw_text}: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
+#'  \item \code{records_collapsed}: The desired records IDs, collapsed into a single string, separated by commas.
+#'  \item \code{fields_collapsed}: The desired field names, collapsed into a single string, separated by commas.
+#'  \item \code{elapsed_seconds}: The duration of the function.
+#'  \item \code{outcome_message}: A boolean value indicating if the operation was apparently successful.
 #' }
 #' @details 
 #' I like how \href{http://sburns.org/PyCap/}{PyCap} creates a `project' object with methods that read and write from REDCap.  However this isn't a style that R clients typically use.
@@ -100,7 +102,7 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
   
   curl_options <- RCurl::curlOptions(cainfo = cert_location)
   
-  # raw_csv <- RCurl::postForm(
+  # raw_text <- RCurl::postForm(
   #   uri = redcap_uri
   #   , token = token
   #   , content = 'record'
@@ -134,12 +136,12 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
 #   browser()
   success <- (status_code==200L)
   
-  raw_csv <- httr::content(result, "text")  
+  raw_text <- httr::content(result, "text")  
   elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
   
   if( success ) {
     try (
-      ds <- read.csv(text=raw_csv, stringsAsFactors=FALSE), #Convert the raw text to a dataset.
+      ds <- read.csv(text=raw_text, stringsAsFactors=FALSE), #Convert the raw text to a dataset.
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
     )
     
@@ -151,8 +153,8 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
                              round(elapsed_seconds, 2), " seconds.  The http status code and message were ",
                              status_code, ": ", status_message, ".")
     
-    #If an operation is successful, the `raw_csv` is no longer returned to save RAM.  It's not really necessary with httr's status message exposed.
-    raw_csv <- "" 
+    #If an operation is successful, the `raw_text` is no longer returned to save RAM.  It's not really necessary with httr's status message exposed.
+    raw_text <- "" 
   }
   else {
     ds <- data.frame() #Return an empty data.frame
@@ -166,7 +168,7 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
     data = ds,
     status_code = status_code,
     status_message = status_message,
-    raw_csv = raw_csv,
+    raw_text = raw_text,
     records_collapsed = records_collapsed, 
     fields_collapsed = fields_collapsed,
     elapsed_seconds = elapsed_seconds, 
@@ -177,7 +179,7 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
 
 # curl_options <- RCurl::curlOptions(cainfo = cert_location)
 
-# raw_csv <- RCurl::postForm(
+# raw_text <- RCurl::postForm(
 #   uri = "https://bbmc.ouhsc.edu/redcap/api/"
 #   , token = "9A81268476645C4E5F03428B8AC3AA7B"
 #   , content = 'record'

@@ -203,9 +203,6 @@ hr {
 
 <p>The function <code>redcap_read_oneshot</code> uses the <a href="http://cran.r-project.org/web/packages/RCurl/index.html"><code>RCurl</code></a> package to call the REDCap API.</p>
 
-<pre><code>## Loading required package: knitr
-</code></pre>
-
 <h3>Set project-wide values.</h3>
 
 <p>There is some information that is specific to the REDCap project, as opposed to an individual operation.  This includes the (1) uri of the server, the (2) token for the user&#39;s project, and the (3) location of the SSL certification store, which is necessary to verify the identity of the REDCap webserver.  </p>
@@ -225,7 +222,7 @@ token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;
 ds_all_rows_all_fields &lt;- redcap_read_oneshot(redcap_uri=uri, token=token)$data
 </code></pre>
 
-<pre><code>5 records and 16 columns were read from REDCap in 0.26 seconds.  The http status code and message were 200: OK.
+<pre><code>5 records and 16 columns were read from REDCap in 0.23 seconds.  The http status code and message were 200: OK.
 </code></pre>
 
 <pre><code class="r">ds_all_rows_all_fields #Inspect the returned dataset
@@ -272,7 +269,7 @@ ds_some_rows_v1 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 0.27 seconds.  The http status code and message were 200: OK.
+<pre><code>2 records and 16 columns were read from REDCap in 0.33 seconds.  The http status code and message were 200: OK.
 </code></pre>
 
 <pre><code class="r">#Return only records with IDs of 1 and 3 (alternate way)
@@ -284,7 +281,7 @@ ds_some_rows_v2 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 0.25 seconds.  The http status code and message were 200: OK.
+<pre><code>2 records and 16 columns were read from REDCap in 0.34 seconds.  The http status code and message were 200: OK.
 </code></pre>
 
 <pre><code class="r">ds_some_rows_v2 #Inspect the returned dataset
@@ -311,7 +308,7 @@ ds_some_fields_v1 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.26 seconds.  The http status code and message were 200: OK.
+<pre><code>5 records and 3 columns were read from REDCap in 0.39 seconds.  The http status code and message were 200: OK.
 </code></pre>
 
 <pre><code class="r">#Return only the fields recordid, first_name, and age (alternate way)
@@ -323,7 +320,7 @@ ds_some_fields_v2 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.26 seconds.  The http status code and message were 200: OK.
+<pre><code>5 records and 3 columns were read from REDCap in 0.27 seconds.  The http status code and message were 200: OK.
 </code></pre>
 
 <pre><code class="r">ds_some_fields_v2 #Inspect the returned dataset
@@ -343,7 +340,7 @@ ds_some_fields_v2 &lt;- redcap_read_oneshot(
 
 <ol>
 <li>The <code>data</code> object has the <code>data.frame</code>, as in the previous examples.</li>
-<li>The <code>raw_csv</code> returned by the REDCap API. This might display helpful error messages, in the event something went wrong.</li>
+<li>The <code>raw_text</code> returned by the REDCap API. This might display helpful error messages, in the event something went wrong.</li>
 <li>The <code>records_collapsed</code> field passed to the API.  This shows which record subsets, if any, were requested.</li>
 <li>The <code>fields_collapsed</code> fields passed to the API.  This shows which field subsets, if any, were requested.</li>
 <li>The <code>elapsed_seconds</code> measures the duration of the call.</li>
@@ -379,7 +376,7 @@ $status_code
 $status_message
 [1] &quot;OK&quot;
 
-$raw_csv
+$raw_text
 [1] &quot;&quot;
 
 $records_collapsed
@@ -389,7 +386,7 @@ $fields_collapsed
 [1] &quot;recordid,first_name,age&quot;
 
 $elapsed_seconds
-[1] 0.2733
+[1] 0.2685
 
 $outcome_message
 [1] &quot;5 records and 3 columns were read from REDCap in 0.27 seconds.  The http status code and message were 200: OK.&quot;
@@ -402,7 +399,7 @@ $success
 
 <p>For the sake of documentation and reproducibility, the current vignette was build on a system using the following software.</p>
 
-<pre><code>Report created by Will at 2014-07-04, 11:29:01 -0500
+<pre><code>Report created by Will at 2014-07-04, 11:55:47 -0500
 </code></pre>
 
 <pre><code>R version 3.1.0 Patched (2014-06-15 r65949)
@@ -416,12 +413,12 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] knitr_1.6           REDCapR_0.3-1       devtools_1.5        testthat_0.8.1.0.99 stringr_0.6.2      
- [6] RCurl_1.95-4.1      bitops_1.0-6        plyr_1.8.1          httr_0.3            roxygen2_4.0.1     
+[1] REDCapR_0.3-3       stringr_0.6.2       RCurl_1.95-4.1      bitops_1.0-6        plyr_1.8.1         
+[6] httr_0.3            roxygen2_4.0.1      knitr_1.6           testthat_0.8.1.0.99
 
 loaded via a namespace (and not attached):
-[1] codetools_0.2-8 digest_0.6.4    evaluate_0.5.5  formatR_0.10    memoise_0.2.1   parallel_3.1.0  Rcpp_0.11.2    
-[8] tools_3.1.0     whisker_0.3-2  
+ [1] codetools_0.2-8 devtools_1.5    digest_0.6.4    evaluate_0.5.5  formatR_0.10    markdown_0.7    memoise_0.2.1  
+ [8] mime_0.1.1      parallel_3.1.0  Rcpp_0.11.2     tools_3.1.0     whisker_0.3-2  
 </code></pre>
 
 </body>

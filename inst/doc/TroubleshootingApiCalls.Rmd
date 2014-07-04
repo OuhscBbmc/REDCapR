@@ -33,7 +33,7 @@ This section group examines potential problems that occur after it leaves a work
  <img src="./images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>
 
  1. **Is Postman installed and operating correctly?**  
- If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/).  The url can be found in the screenshot above.  There are three key-value pairs: (1) the 'token' is `9A81268476645C4E5F03428B8AC3AA7B`, (2) the 'content' is `record`, and (3) the 'format' should be `CSV`.  When checking your own server, the token value should change, but the content and format should not.  It should return five records in a CSV format.  The 'status' should be `200 OK`.  The result should look roughly like:
+ If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/).  The url is `https://bbmc.ouhsc.edu/redcap/api/`.  There are three key-value pairs: (1) the 'token' is `9A81268476645C4E5F03428B8AC3AA7B`, (2) the 'content' is `record`, and (3) the 'format' should be `CSV`.  When checking your own server, the token value should change, but the content and format should not.  It should return five records in a CSV format.  The 'status' should be `200 OK`.  The result should look roughly like:
  
  ```
  record_id,first_name,last_name,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete
@@ -91,7 +91,7 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
     records_collapsed <- "1,2,3" #This assumes that their dataset contains ID values of 1, 2, and 3.  Adapt this to their dataset.
     fields_collapsed <- "record_id,first_name,last_name" #This assumes that their dataset contains variables called 'recordid', 'first_name', and 'last_name'.  Adapt this to their dataset.
     
-    raw_csv <- RCurl::postForm(
+    raw_text <- RCurl::postForm(
       uri = redcap_uri
       , token = token
       , content = 'record'
@@ -115,7 +115,7 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
     records_collapsed <- NULL
     fields_collapsed <- NULL
     
-    raw_csv <- RCurl::postForm(
+    raw_text <- RCurl::postForm(
       uri = redcap_uri
       , token = token
       , content = 'record'
@@ -150,7 +150,7 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
  This is the same fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/) as in the previous section.
   ``` r
   library(REDCapR) #Load the package into the current R session.
-  uri <- "<copy this value from the Postman screenshot above>"
+  uri <- "https://bbmc.ouhsc.edu/redcap/api/
   token <- "9A81268476645C4E5F03428B8AC3AA7B"
   redcap_read(redcap_uri=uri, token=token)$data
   ```

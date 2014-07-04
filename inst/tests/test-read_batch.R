@@ -49,7 +49,7 @@ test_that("All Records -Default", {
   )
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-#   expect_equivalent(returned_object$raw_csv, expected=expected_csv) # dput(returned_object$raw_csv)
+#   expect_equivalent(returned_object$raw_text, expected=expected_csv) # dput(returned_object$raw_text)
   expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
   expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
@@ -85,7 +85,7 @@ test_that("All Records -Raw", {
   )
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-#   expect_equivalent(returned_object$raw_csv, expected=expected_csv) # dput(returned_object$raw_csv)
+#   expect_equivalent(returned_object$raw_text, expected=expected_csv) # dput(returned_object$raw_text)
   expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
   expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
@@ -123,7 +123,7 @@ test_that("All Records -Raw", {
   )
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-#   expect_equivalent(returned_object$raw_csv, expected=expected_csv) # dput(returned_object$raw_csv)
+#   expect_equivalent(returned_object$raw_text, expected=expected_csv) # dput(returned_object$raw_text)
   expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
   expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
@@ -165,7 +165,7 @@ test_that("All Records -label and DAG", {
   )
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-#   expect_equivalent(returned_object$raw_csv, expected=expected_csv) # dput(returned_object$raw_csv)
+#   expect_equivalent(returned_object$raw_text, expected=expected_csv) # dput(returned_object$raw_text)
   expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
   expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
@@ -206,7 +206,7 @@ test_that("All Records -label", {
   )
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-#   expect_equivalent(returned_object$raw_csv, expected=expected_csv) # dput(returned_object$raw_csv)
+#   expect_equivalent(returned_object$raw_text, expected=expected_csv) # dput(returned_object$raw_text)
   expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
   expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)

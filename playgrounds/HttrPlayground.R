@@ -32,12 +32,12 @@ r <- httr::POST(
 r$status_code
 r$headers$status
 r$headers$statusmessage
-raw_csv <- httr::content(r, "text")
+raw_text <- httr::content(r, "text")
 
-ds <- read.csv(text=raw_csv, stringsAsFactors=FALSE) #Convert the raw text to a dataset.
+ds <- read.csv(text=raw_text, stringsAsFactors=FALSE) #Convert the raw text to a dataset.
 
 
-raw_csv2 <- RCurl::postForm(
+raw_text2 <- RCurl::postForm(
   uri = redcap_uri
   , token = token
   , content = 'record'
@@ -49,4 +49,4 @@ raw_csv2 <- RCurl::postForm(
   , fields = fields_collapsed
   , .opts = RCurl::curlOptions(ssl.verifypeer = FALSE)
 )
-ds2 <- read.csv(text=raw_csv2, stringsAsFactors=FALSE) #Convert the raw text to a dataset.
+ds2 <- read.csv(text=raw_text2, stringsAsFactors=FALSE) #Convert the raw text to a dataset.

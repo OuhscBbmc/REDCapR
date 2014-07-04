@@ -11,7 +11,7 @@ certs <- file.path(devtools::inst("REDCapR"), "ssl_certs", "mozilla_2013_12_05.c
 returned <- redcap_read(redcap_uri=uri, token=token)
 
 
-raw_csv <- RCurl::postForm(
+raw_text <- RCurl::postForm(
   uri = uri
   , token = token
   , content = 'record'
@@ -21,7 +21,7 @@ raw_csv <- RCurl::postForm(
   , .opts = RCurl::curlOptions(ssl.verifypeer = FALSE)
 )
 try(
-  dsTry <- read.csv(text=raw_csv, stringsAsFactors=FALSE) #Convert the raw text to a dataset.
+  dsTry <- read.csv(text=raw_text, stringsAsFactors=FALSE) #Convert the raw text to a dataset.
 )
 if( ! exists("dsTry") )
   dsTry <- data.frame()
