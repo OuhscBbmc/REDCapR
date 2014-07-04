@@ -5,6 +5,7 @@ New Features:
 
 Updates:
 * Renamed the former `status_message` to `outcome_message`. This is because the message associated with http code returned is conventionally called the 'status messages' (eg, OK, Forbidden, Not Found).
+* If an operation is successful, the `raw_csv` is no longer returned to save RAM.  It's not really necessary with httr's status message exposed.
 
 Version 0.2 (Developed 2014-01-14 through 2014-07-02)
 ------------------------------------------------------------------------------

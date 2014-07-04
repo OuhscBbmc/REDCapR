@@ -100,67 +100,72 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
   
   curl_options <- RCurl::curlOptions(cainfo = cert_location)
   
-  raw_csv <- RCurl::postForm(
-    uri = redcap_uri
-    , token = token
-    , content = 'record'
-    , format = 'csv'
-    , type = 'flat'
-    , rawOrLabel = raw_or_label
-    , exportDataAccessGroups = export_data_access_groups_string
-    , records = records_collapsed
-    , fields = fields_collapsed
-    , .opts = curl_options
+  # raw_csv <- RCurl::postForm(
+  #   uri = redcap_uri
+  #   , token = token
+  #   , content = 'record'
+  #   , format = 'csv'
+  #   , type = 'flat'
+  #   , rawOrLabel = raw_or_label
+  #   , exportDataAccessGroups = export_data_access_groups_string
+  #   , records = records_collapsed
+  #   , fields = fields_collapsed
+  #   , .opts = curl_options
+  # )
+  post_body <- list(
+    token = token,
+    content = 'record',
+    format = 'csv',
+    type = 'flat',
+    rawOrLabel = raw_or_label,
+    exportDataAccessGroups = export_data_access_groups_string,
+    records = records_collapsed,
+    fields = fields_collapsed
   )
-  # post_body <- list(
-  #   token = token,
-  #   content = 'record',
-  #   format = 'csv',
-  #   type = 'flat',
-  #   rawOrLabel = raw_or_label,
-  #   exportDataAccessGroups = export_data_access_groups_string,
-  #   records = records_collapsed,
-  #   fields = fields_collapsed
-  # )
-  # 
-  # result <- httr::POST(
-  #   url = redcap_uri,
-  #   body = post_body,
-  #   .opts = curl_options #RCurl::curlOptions(ssl.verifypeer = FALSE)
-  # )
-  # raw_csv <- httr::content(result, "text")
-  # status_code <- result$headers$status
-  # status_message <- result$headers$statusmessage
-  # browser()
   
-  try (
-    ds <- read.csv(text=raw_csv, stringsAsFactors=FALSE), #Convert the raw text to a dataset.
-    silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
+  result <- httr::POST(
+    url = redcap_uri,
+    body = post_body,
+    .opts = curl_options #RCurl::curlOptions(ssl.verifypeer = FALSE)
   )
-    
+
+  status_code <- result$status
+  status_message <- result$headers$statusmessage
+#   browser()
+  success <- (status_code==200L)
+  
+  raw_csv <- httr::content(result, "text")  
   elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
   
-  if( exists("ds") ) {
+  if( success ) {
+    try (
+      ds <- read.csv(text=raw_csv, stringsAsFactors=FALSE), #Convert the raw text to a dataset.
+      silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
+    )
+    
     #The comma formatting uses the same code as scales::comma, but I don't want to create a package dependency just for commas (https://github.com/hadley/scales/blob/master/R/formatter.r).
     outcome_message <- paste0(format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
                              " records and ",  
                              format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
                              " columns were read from REDCap in ", 
-                             round(elapsed_seconds, 2), " seconds.")
-    success <- TRUE
+                             round(elapsed_seconds, 2), " seconds.  The http status code and message were ",
+                             status_code, ": ", status_message, ".")
+    
+    #If an operation is successful, the `raw_csv` is no longer returned to save RAM.  It's not really necessary with httr's status message exposed.
+    raw_csv <- "" 
   }
   else {
     ds <- data.frame() #Return an empty data.frame
-    outcome_message <- paste0("Reading the REDCap data was not successful.  The error message was:\n", 
-                             geterrmessage())
-    success <- FALSE
+    outcome_message <- paste0("Reading the REDCap data was not successful.  The error message was:\n",  geterrmessage())
   }
     
   if( verbose ) 
     message(outcome_message)
   
   return( list(
-    data = ds, 
+    data = ds,
+    status_code = status_code,
+    status_message = status_message,
     raw_csv = raw_csv,
     records_collapsed = records_collapsed, 
     fields_collapsed = fields_collapsed,
