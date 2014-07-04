@@ -68,10 +68,10 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
   if( missing(token) )
     stop("The required parameter `token` was missing from the call to `redcap_read()`.")
   
-  if( missing(records_collapsed) & !missing(records) )
+  if( !missing(records) & (is.null(records_collapsed) | missing(records_collapsed)) )
     records_collapsed <- paste0(records, collapse=",")
   
-  if( missing(fields_collapsed) & !missing(fields) )
+  if( !missing(fields) & (is.null(fields_collapsed) | missing(fields_collapsed)) )
     fields_collapsed <- paste0(fields, collapse=",")
   
   #   export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")

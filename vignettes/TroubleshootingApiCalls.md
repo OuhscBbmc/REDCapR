@@ -197,11 +197,27 @@ Reading batch 1 of 1, with ids 1 through 5.
   library(REDCapR) #Load the package into the current R session, if you haven't already.
   redcap_uri <- "https://the.urlofyourinsitution.edu/api/" #Adapt this to your server.
   token <- "your-secret-token" #Adapt this to your user's token.
-  redcap_read(redcap_uri=uri, token=token)
+  redcap_read(redcap_uri=uri, token=token)$data
+  ```
+ 
+ Alternatively, a `redcap_project` object can be declared initially, which makes subsequent calls cleaner when the token and url are required only the when the object is declared.
+  ``` r
+  library(REDCapR) #Load the package into the current R session, if you haven't already.
+  uri <- "https://bbmc.ouhsc.edu/redcap/api/"
+  token <- "9A81268476645C4E5F03428B8AC3AA7B"  
+  project <- redcap_project$new(redcap_uri=uri, token=token)
+  
+  dsThreeColumns <- project$read(fields=c("record_id", "sex", "age"))$data
+  
+  idsOfMales <- dsThreeColumns[dsThreeColumns$sex==1, "record_id"]
+  idsOfMinors <- dsThreeColumns[dsThreeColumns$age < 18, "record_id"]
+  
+  dsMales <- project$read(records=idsOfMales, batch_size=2)$data
+  dsMinors <- project$read(records=idsOfMinors)$data
   ```
       
  1. **Can the user *import* to their own project?**    
- Writing records can be trickier, because the schema (eg, the names and data types) must match the project.  This section will be expanded in the future.  Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project's schema and dataset.
+ Writing records can be trickier, because the schema (eg, the names and data types) must match the project.  This section will be expanded in the future.  Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project's schema and dataset.  Also, consider exporting the dataset to your machine, and look for differences.  Note that you cannot import calculated fields into REDCap.
  
  1. **Is the operation still unsuccessful using REDCapR?**    
  If so the "Can the user query a *entire* REDCap project using RCurl?" check succeeded, but the REDCapR checks did not, consider posting a new [GitHub issue](https://github.com/OuhscBbmc/REDCapR/issues) to the package developers.

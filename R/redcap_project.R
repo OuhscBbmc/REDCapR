@@ -13,13 +13,21 @@
 ##' @field redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
 ##' @field token token The user-specific string that serves as the password for a project.  Required.
 ##' 
-##' 
 ##' @examples
 ##' library(REDCapR) #Load the package into the current R session.
 ##' uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 ##' token <- "9A81268476645C4E5F03428B8AC3AA7B"
 ##' project <- redcap_project$new(redcap_uri=uri, token=token)
-##' ds <- project$read()
+##' dsAll <- project$read()
+##' 
+##' #Demonstrate how repeated calls are more concise when the token and url aren't always passed.
+##' dsThreeColumns <- project$read(fields=c("record_id", "sex", "age"))$data
+##' 
+##' idsOfMales <- dsThreeColumns[dsThreeColumns$sex==1, "record_id"]
+##' idsOfMinors <- dsThreeColumns[dsThreeColumns$age < 18, "record_id"]
+##' 
+##' dsMales <- project$read(records=idsOfMales, batch_size=2)$data
+##' dsMinors <- project$read(records=idsOfMinors)$data
 
 redcap_project <- setRefClass(
   Class = "redcap_project",
@@ -74,5 +82,10 @@ redcap_project <- setRefClass(
 # # tt
 # 
 # project <- redcap_project$new(redcap_uri=uri, token=token)
-# project$read()
-# redcap_read(batch_size=2, redcap_uri=uri, token=token)
+# dsThreeColumns <- project$read(fields=c("record_id", "sex", "age"))$data
+# 
+# idsOfMales <- dsThreeColumns[dsThreeColumns$sex==1, "record_id"]
+# idsOfMinors <- dsThreeColumns[dsThreeColumns$age < 18, "record_id"]
+# 
+# dsMales <- project$read(records=idsOfMales, batch_size=2)$data
+# dsMinors <- project$read(records=idsOfMinors)$data
