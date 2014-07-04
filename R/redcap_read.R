@@ -23,11 +23,14 @@
 #' 
 #' @return Currently, a list is returned with the following elements,
 #' \enumerate{
-#'  \item \code{data}: an R \code{data.frame} of the desired records and columns.
-#'  \item \code{records_collapsed}: the desired records IDs, collapsed into a single string, separated by commas.
-#'  \item \code{fields_collapsed}: the desired field names, collapsed into a single string, separated by commas.
-#'  \item \code{elapsed_seconds}: the duration of the function.
-#'  \item \code{outcome_message}: a boolean value indicating if the operation was apparently successful.
+#'  \item \code{data}: An R \code{data.frame} of the desired records and columns.
+#'  \item \code{success}: A boolean value indicating if the operation was apparently successful.
+#'  \item \code{status_codes}: A collection of \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes}, separated by commas.
+#'  \item \code{status_messages}: A collection of messages associated with the \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code}, separated by commas.
+#'  \item \code{outcome_messages}: A collection of human readable strings indicating the operations' outcomes.
+#'  \item \code{records_collapsed}: The desired records IDs, collapsed into a single string, separated by commas.
+#'  \item \code{fields_collapsed}: The desired field names, collapsed into a single string, separated by commas.
+#'  \item \code{elapsed_seconds}: The duration of the function.
 #' }
 #' @details 
 #' Specifically, it internally uses multiple calls to \code{\link{redcap_read_oneshot}} to select and return data.
@@ -87,14 +90,14 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
   ### Stop and return to the caller if the initial query failed.
   ###
   if( !initial_call$success ) {
-    outcome_message <- paste0("The initial call failed with the message: ", initial_call$outcome_message, ".")
+    status_message <- paste0("The initial call failed with the message: ", initial_call$status_message, ".")
     elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
     return( list(
       data = data.frame(), 
       records_collapsed = "failed in initial batch call", 
       fields_collapsed = "failed in initial batch call",
       elapsed_seconds = elapsed_seconds, 
-      outcome_message = outcome_message, 
+      status_message = status_message, 
       success = initial_call$success
     ) )
   }
@@ -106,6 +109,8 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
   
   ds_glossary <- REDCapR::create_batch_glossary(row_count=length(ids), batch_size=batch_size)
   lst_batch <- NULL
+  lst_status_code <- NULL
+  lst_status_message <- NULL
   lst_outcome_message <- NULL
   success_combined <- TRUE
   
@@ -123,6 +128,8 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
                                         verbose = verbose, 
                                         cert_location = cert_location)
     
+    lst_status_code[[i]] <- read_result$status_code
+    lst_status_message[[i]] <- read_result$status_message
     lst_outcome_message[[i]] <- read_result$outcome_message
     if( !read_result$success )
       stop("The `redcap_read()` call failed on iteration", i, ". Set the `verbose` parameter to TRUE and rerun for additional information.")
@@ -136,23 +143,27 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
   ds_stacked <- plyr::rbind.fill(lst_batch)
   
   elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
+  status_code_combined <- paste(lst_status_code, collapse="; ")
+  status_message_combined <- paste(lst_status_message, collapse="; ")
   outcome_message_combined <- paste(lst_outcome_message, collapse="; ")
-#   outcome_message_overall <- paste0("\nAcross all batches,", 
+#   status_message_overall <- paste0("\nAcross all batches,", 
 #                                    format(nrow(ds_stacked), big.mark = ",", scientific = FALSE, trim = TRUE), 
 #                                    " records and ",  
 #                                    format(length(ds_stacked), big.mark = ",", scientific = FALSE, trim = TRUE), 
 #                                    " columns were read from REDCap in ", 
 #                                    round(elapsed_seconds, 2), " seconds.")
 #   if( verbose )
-#     message(outcome_message_overall)
+#     message(status_message_overall)
   
   return( list(
-    data = ds_stacked, 
-    records_collapsed = records_collapsed, 
+    data = ds_stacked,
+    success = success_combined,
+    status_codes = status_code_combined,
+    status_messages = status_message_combined,
+    outcome_messages = outcome_message_combined,
+    records_collapsed = records_collapsed,
     fields_collapsed = fields_collapsed,
-    elapsed_seconds = elapsed_seconds, 
-    outcome_message = outcome_message_combined, 
-    success = success_combined
+    elapsed_seconds = elapsed_seconds
   ) )
 }
 

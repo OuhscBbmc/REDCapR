@@ -58,15 +58,23 @@ redcap_read(batch_size = 100L, interbatch_delay = 0, redcap_uri, token,
 }
 \value{
 Currently, a list is returned with the following elements,
-\enumerate{ \item \code{data}: an R \code{data.frame} of
-the desired records and columns.  \item
-\code{records_collapsed}: the desired records IDs,
+\enumerate{ \item \code{data}: An R \code{data.frame} of
+the desired records and columns.  \item \code{success}: A
+boolean value indicating if the operation was apparently
+successful.  \item \code{status_codes}: A collection of
+\href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http
+status codes}, separated by commas.  \item
+\code{status_messages}: A collection of messages associated
+with the
+\href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http
+status code}, separated by commas.  \item
+\code{outcome_messages}: A collection of human readable
+strings indicating the operations' outcomes.  \item
+\code{records_collapsed}: The desired records IDs,
 collapsed into a single string, separated by commas.  \item
-\code{fields_collapsed}: the desired field names, collapsed
+\code{fields_collapsed}: The desired field names, collapsed
 into a single string, separated by commas.  \item
-\code{elapsed_seconds}: the duration of the function.
-\item \code{outcome_message}: a boolean value indicating if
-the operation was apparently successful. }
+\code{elapsed_seconds}: The duration of the function. }
 }
 \description{
 From an external perspective, this function is similar to

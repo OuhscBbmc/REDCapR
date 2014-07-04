@@ -19,13 +19,14 @@
 #' @return Currently, a list is returned with the following elements,
 #' \enumerate{
 #'  \item \code{data}: An R \code{data.frame} of the desired records and columns.
+#'  \item \code{success}: A boolean value indicating if the operation was apparently successful.
 #'  \item \code{status_code}: The \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code} of the operation.
 #'  \item \code{status_message}: The message associated with the \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code}.
-#'  \item \code{raw_text}: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
+#'  \item \code{outcome_message}: A human readable string indicating the operation's outcome.
 #'  \item \code{records_collapsed}: The desired records IDs, collapsed into a single string, separated by commas.
 #'  \item \code{fields_collapsed}: The desired field names, collapsed into a single string, separated by commas.
 #'  \item \code{elapsed_seconds}: The duration of the function.
-#'  \item \code{outcome_message}: A boolean value indicating if the operation was apparently successful.
+#'  \item \code{raw_text}: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
 #' }
 #' @details 
 #' I like how \href{http://sburns.org/PyCap/}{PyCap} creates a `project' object with methods that read and write from REDCap.  However this isn't a style that R clients typically use.
@@ -133,7 +134,6 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
 
   status_code <- result$status
   status_message <- result$headers$statusmessage
-#   browser()
   success <- (status_code==200L)
   
   raw_text <- httr::content(result, "text")  
@@ -165,15 +165,15 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
     message(outcome_message)
   
   return( list(
-    data = ds,
+    data = ds, 
+    success = success,
     status_code = status_code,
-    status_message = status_message,
-    raw_text = raw_text,
+    status_message = status_message, 
+    outcome_message = outcome_message,
     records_collapsed = records_collapsed, 
     fields_collapsed = fields_collapsed,
-    elapsed_seconds = elapsed_seconds, 
-    outcome_message = outcome_message, 
-    success = success
+    elapsed_seconds = elapsed_seconds,
+    raw_text = raw_text
   ) )
 }
 
