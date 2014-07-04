@@ -44,7 +44,7 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, cert_loca
     elements <- unlist(strsplit(returnContent, split="\\n"))
     affectedIDs <- elements[-1]  
     recordsAffectedCount <- length(affectedIDs)
-    status_message <- paste0(format(recordsAffectedCount, big.mark = ",", scientific = FALSE, trim = TRUE), 
+    outcome_message <- paste0(format(recordsAffectedCount, big.mark = ",", scientific = FALSE, trim = TRUE), 
                              " records were written to REDCap in ", 
                              round(elapsed_seconds, 2), 
                              " seconds.")
@@ -52,16 +52,16 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, cert_loca
   else { #If the returned content wasn't recognized as valid IDs, then
     affectedIDs <- numeric() #Pass an empty array
     recordsAffectedCount <- NA
-    status_message <- "The content returned during the write operation was not recognized.  Please see the `returnContent` element for more information." 
+    outcome_message <- "The content returned during the write operation was not recognized.  Please see the `returnContent` element for more information." 
   }
   if( verbose ) 
-    message(status_message)
+    message(outcome_message)
   
   return( list(
     records_affected_count = recordsAffectedCount,
     affected_ids = affectedIDs,
     elapsed_seconds = elapsed_seconds, 
-    status_message = status_message, 
+    outcome_message = outcome_message, 
     return_content = returnContent, 
     success = isValidIDList
   ))

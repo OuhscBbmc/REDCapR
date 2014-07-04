@@ -59,7 +59,7 @@ records IDs, collapsed into a single string, separated by
 commas.  \item \code{fields_collapsed}: the desired field
 names, collapsed into a single string, separated by commas.
 \item \code{elapsed_seconds}: the duration of the function.
-\item \code{status_message}: a boolean value indicating if
+\item \code{outcome_message}: a boolean value indicating if
 the operation was apparently successful. }
 }
 \description{

@@ -23,7 +23,7 @@
 #'  \item \code{records_collapsed}: the desired records IDs, collapsed into a single string, separated by commas.
 #'  \item \code{fields_collapsed}: the desired field names, collapsed into a single string, separated by commas.
 #'  \item \code{elapsed_seconds}: the duration of the function.
-#'  \item \code{status_message}: a boolean value indicating if the operation was apparently successful.
+#'  \item \code{outcome_message}: a boolean value indicating if the operation was apparently successful.
 #' }
 #' @details 
 #' I like how \href{http://sburns.org/PyCap/}{PyCap} creates a `project' object with methods that read and write from REDCap.  However this isn't a style that R clients typically use.
@@ -67,9 +67,8 @@
 
 redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collapsed=NULL, 
                          fields=NULL, fields_collapsed=NULL, 
-                         export_data_access_groups = FALSE,
-                         raw_or_label = 'raw',
-                         verbose=TRUE, cert_location=NULL ) {
+                         export_data_access_groups=FALSE,
+                         raw_or_label='raw', verbose=TRUE, cert_location=NULL ) {
   #TODO: NULL verbose parameter pulls from getOption("verbose")
   #TODO: warns if any requested fields aren't entirely lowercase.
   #TODO: validate export_data_access_groups
@@ -93,8 +92,8 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
   export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
   
   if( missing( cert_location ) | is.null(cert_location) ) 
-    cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs", "mozilla_2013_12_05.crt")
-#     curl_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
+    cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs/mozilla_2013_12_05.crt")
+  # curl_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
 
   if( !base::file.exists(cert_location) )
       stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
@@ -113,7 +112,26 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
     , fields = fields_collapsed
     , .opts = curl_options
   )
-#   print(raw_csv)
+  # post_body <- list(
+  #   token = token,
+  #   content = 'record',
+  #   format = 'csv',
+  #   type = 'flat',
+  #   rawOrLabel = raw_or_label,
+  #   exportDataAccessGroups = export_data_access_groups_string,
+  #   records = records_collapsed,
+  #   fields = fields_collapsed
+  # )
+  # 
+  # result <- httr::POST(
+  #   url = redcap_uri,
+  #   body = post_body,
+  #   .opts = curl_options #RCurl::curlOptions(ssl.verifypeer = FALSE)
+  # )
+  # raw_csv <- httr::content(result, "text")
+  # status_code <- result$headers$status
+  # status_message <- result$headers$statusmessage
+  # browser()
   
   try (
     ds <- read.csv(text=raw_csv, stringsAsFactors=FALSE), #Convert the raw text to a dataset.
@@ -123,23 +141,23 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
   elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
   
   if( exists("ds") ) {
-    #The comma formatting uses the same code as scales::comma, but I don't want to create a package dependency just for commas.
-    status_message <- paste0(format(nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE), 
+    #The comma formatting uses the same code as scales::comma, but I don't want to create a package dependency just for commas (https://github.com/hadley/scales/blob/master/R/formatter.r).
+    outcome_message <- paste0(format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
                              " records and ",  
-                             format(length(ds), big.mark = ",", scientific = FALSE, trim = TRUE), 
+                             format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
                              " columns were read from REDCap in ", 
                              round(elapsed_seconds, 2), " seconds.")
     success <- TRUE
   }
   else {
     ds <- data.frame() #Return an empty data.frame
-    status_message <- paste0("Reading the REDCap data was not successful.  The error message was:\n", 
+    outcome_message <- paste0("Reading the REDCap data was not successful.  The error message was:\n", 
                              geterrmessage())
     success <- FALSE
   }
     
   if( verbose ) 
-    message(status_message)
+    message(outcome_message)
   
   return( list(
     data = ds, 
@@ -147,7 +165,7 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
     records_collapsed = records_collapsed, 
     fields_collapsed = fields_collapsed,
     elapsed_seconds = elapsed_seconds, 
-    status_message = status_message, 
+    outcome_message = outcome_message, 
     success = success
   ) )
 }

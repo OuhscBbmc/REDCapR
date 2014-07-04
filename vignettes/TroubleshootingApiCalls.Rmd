@@ -208,4 +208,4 @@ Reading batch 1 of 1, with ids 1 through 5.
  
  
 ## Document Info
-This document is primarily based on REDCap version 5.11.3, and was last updated 2016-06-27.  A development version of the document is available on GitHub: http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/RefClassTry/inst/doc/TroubleshootingApiCalls.html.
+This document is primarily based on REDCap version 5.11.3, and was last updated 2016-06-27.  A development version of the document is available on GitHub: http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html.

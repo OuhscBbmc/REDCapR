@@ -27,7 +27,7 @@
 #'  \item \code{records_collapsed}: the desired records IDs, collapsed into a single string, separated by commas.
 #'  \item \code{fields_collapsed}: the desired field names, collapsed into a single string, separated by commas.
 #'  \item \code{elapsed_seconds}: the duration of the function.
-#'  \item \code{status_message}: a boolean value indicating if the operation was apparently successful.
+#'  \item \code{outcome_message}: a boolean value indicating if the operation was apparently successful.
 #' }
 #' @details 
 #' Specifically, it internally uses multiple calls to \code{\link{redcap_read_oneshot}} to select and return data.
@@ -87,14 +87,14 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
   ### Stop and return to the caller if the initial query failed.
   ###
   if( !initial_call$success ) {
-    status_message <- paste0("The initial call failed with the message: ", initial_call$status_message, ".")
+    outcome_message <- paste0("The initial call failed with the message: ", initial_call$outcome_message, ".")
     elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
     return( list(
       data = data.frame(), 
       records_collapsed = "failed in initial batch call", 
       fields_collapsed = "failed in initial batch call",
       elapsed_seconds = elapsed_seconds, 
-      status_message = status_message, 
+      outcome_message = outcome_message, 
       success = initial_call$success
     ) )
   }
@@ -106,7 +106,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
   
   ds_glossary <- REDCapR::create_batch_glossary(row_count=length(ids), batch_size=batch_size)
   lst_batch <- NULL
-  lst_status_message <- NULL
+  lst_outcome_message <- NULL
   success_combined <- TRUE
   
   message("Starting to read ", format(length(ids), big.mark=",", scientific=F, trim=T), " records  at ", Sys.time())
@@ -123,7 +123,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
                                         verbose = verbose, 
                                         cert_location = cert_location)
     
-    lst_status_message[[i]] <- read_result$status_message
+    lst_outcome_message[[i]] <- read_result$outcome_message
     if( !read_result$success )
       stop("The `redcap_read()` call failed on iteration", i, ". Set the `verbose` parameter to TRUE and rerun for additional information.")
     
@@ -136,22 +136,22 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
   ds_stacked <- plyr::rbind.fill(lst_batch)
   
   elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
-  status_message_combined <- paste(lst_status_message, collapse="; ")
-#   status_message_overall <- paste0("\nAcross all batches,", 
+  outcome_message_combined <- paste(lst_outcome_message, collapse="; ")
+#   outcome_message_overall <- paste0("\nAcross all batches,", 
 #                                    format(nrow(ds_stacked), big.mark = ",", scientific = FALSE, trim = TRUE), 
 #                                    " records and ",  
 #                                    format(length(ds_stacked), big.mark = ",", scientific = FALSE, trim = TRUE), 
 #                                    " columns were read from REDCap in ", 
 #                                    round(elapsed_seconds, 2), " seconds.")
 #   if( verbose )
-#     message(status_message_overall)
+#     message(outcome_message_overall)
   
   return( list(
     data = ds_stacked, 
     records_collapsed = records_collapsed, 
     fields_collapsed = fields_collapsed,
     elapsed_seconds = elapsed_seconds, 
-    status_message = status_message_combined, 
+    outcome_message = outcome_message_combined, 
     success = success_combined
   ) )
 }

@@ -65,11 +65,11 @@ collapsed into a single string, separated by commas.  \item
 \code{fields_collapsed}: the desired field names, collapsed
 into a single string, separated by commas.  \item
 \code{elapsed_seconds}: the duration of the function.
-\item \code{status_message}: a boolean value indicating if
+\item \code{outcome_message}: a boolean value indicating if
 the operation was apparently successful. }
 }
 \description{
-From an external perpsective, this function is similar to
+From an external perspective, this function is similar to
 \code{\link{redcap_read_oneshot}}.  The internals differ in
 that \code{redcap_read} retrieves subsets of the data, and
 then combines them before returning (among other objects) a

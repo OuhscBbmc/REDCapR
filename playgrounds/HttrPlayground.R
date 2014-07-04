@@ -11,6 +11,9 @@ export_data_access_groups_string <- "true"
 records_collapsed <- "1,2,5"
 fields_collapsed <- NULL
 
+
+curl_options <- RCurl::curlOptions(cainfo = "./inst/ssl_certs/mozilla_2013_12_05.crt")
+
 r <- httr::POST(
   url = redcap_uri
   , body = list(
@@ -23,9 +26,12 @@ r <- httr::POST(
     , records = records_collapsed
     , fields = fields_collapsed
   ),
-  , .opts = RCurl::curlOptions(ssl.verifypeer = FALSE)
+  #, .opts = RCurl::curlOptions(ssl.verifypeer = FALSE)
+  , .opts = curl_options
 )
 r$status_code
+r$headers$status
+r$headers$statusmessage
 raw_csv <- httr::content(r, "text")
 
 ds <- read.csv(text=raw_csv, stringsAsFactors=FALSE) #Convert the raw text to a dataset.

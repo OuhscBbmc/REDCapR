@@ -28,7 +28,7 @@ This first group of checks primarily focuses on the server and the logins accoun
  This can be verified in the `API` section (and it's `Manage All Project Tokens` tab) within the project.  Click the magnifying glass icon in the user's row.  Alternatively, it can be verified in the `API Tokens` section of the server's `Control Center`.
 
 ## Language Agnostic API
-This section group examines potential problems that occur after it leaves a working server, but before it is handled by their programming language (eg, Python and R).  [Postman](http://www.getpostman.com/) is a Chrome plugin recommended by several people, including [Andy Martin](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ).  It makes trouble shooting much more efficient.
+This section group examines potential problems that occur after it leaves a working server, but before it is handled by their programming language (eg, Python and R).  [Postman](http://www.getpostman.com/) is a Chrome plugin recommended by [several](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ) [people](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ) that makes trouble shooting much more efficient.
 
  <img src="./images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>
 
@@ -85,7 +85,7 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
  
  This check avoids SSL in order to simplify the troubleshooting.  SSL is supported by default in the [PyCap](http://sburns.org/PyCap/) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) packages.
     
-  ```
+  ``` r
     redcap_uri <- "https://the.urlofyourinsitution.edu/api/" #Adapt this to your server.
     token <- "your-secret-token" #Adapt this to your user's token.
     records_collapsed <- "1,2,3" #This assumes that their dataset contains ID values of 1, 2, and 3.  Adapt this to their dataset.
@@ -109,7 +109,7 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
  
  If the desired dataset is too large, consider if you can prune unnecessary records or fields.  If not, one solution is to pull smaller, multiple batches using the API, then reassemble them.  The `redcap_read()` function in [REDCapR](https://github.com/OuhscBbmc/REDCapR/blob/master/DocumentationPeek.pdf) does this automatically, and allows the user to specify a `batch_size`.
  
-  ```
+  ``` r
     redcap_uri <- "https://the.urlofyourinsitution.edu/api/" #Adapt this to your server.
     token <- "your-secret-token" #Adapt this to your user's token.
     records_collapsed <- NULL
@@ -128,6 +128,84 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
       , .opts = RCurl::curlOptions(ssl.verifypeer = FALSE)
     )
   ```
+   
+## Calling API from REDCapR
+ [REDCapR](https://github.com/OuhscBbmc/REDCapR) is a package that uses [RCurl](http://cran.r-project.org/web/packages/RCurl) to communicate with REDCap, and wraps convience functions around it to reduce the size and complexity of the user's code.  The package's basic functions are demonstrated in [this vignette](http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/BasicREDCapROperations.html) and are documented in its [reference manual](https://github.com/OuhscBbmc/REDCapR/blob/master/DocumentationPeek.pdf) (click the 'View Raw' link).
+ 
+ 1. **Is REDCapR installed on the user's machine?**   
+ Currently the easiest way to install REDCapR is with the [devtools](https://github.com/hadley/devtools).  The follow code installs devtools, then installs REDCapR.
+  ``` r
+  install.packages("devtools")
+  devtools::install_github(repo="OuhscBbmc/REDCapR")
+  ```
+   
+ 1. **Does REDCapR load successfully on the user's machine?**    
+ If so, running `require(REDCapR)` should produce the following output if you're starting with a fresh session of R:
+  ```
+  > require(REDCapR)
+  Loading required package: REDCapR
+  ```
+     
+ 1. **Can the user export from an example project?**    
+ This is the same fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/) as in the previous section.
+  ``` r
+  library(REDCapR) #Load the package into the current R session.
+  uri <- "<copy this value from the Postman screenshot above>"
+  token <- "9A81268476645C4E5F03428B8AC3AA7B"
+  redcap_read(redcap_uri=uri, token=token)$data
+  ```
+  
+  The previous code should produce output similar to this.  Notice there are five rows and the columns will wrap around, depending on the width of your console window.
+  ``` r
+5 records and 1 columns were read from REDCap in 0.41 seconds.
+Starting to read 5 records  at 2014-06-27 17:19:49
+Reading batch 1 of 1, with ids 1 through 5.
+5 records and 16 columns were read from REDCap in 0.42 seconds.
 
+  record_id first_name last_name                                 address      telephone               email
+1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232 (432) 456-4848     nutty@mouse.com
+2         2     Tumtum  Nutmouse 14 Rose Cottage Blvd.\nKenning UK 34243 (234) 234-2343    tummy@mouse.comm
+3         3     Marcus      Wood          243 Hill St.\nGuthrie OK 73402 (433) 435-9865        mw@mwood.net
+4         4      Trudy       DAG          342 Elm\nDuncanville TX, 75116 (987) 654-3210 peroxide@blonde.com
+5         5   John Lee    Walker      Hotel Suite\nNew Orleans LA, 70115 (333) 333-4444  left@hippocket.com
+
+         dob age ethnicity race sex height weight   bmi
+1 2003-08-30  10         1    2   0   5.00      1 400.0
+2 2003-03-10  10         1    6   1   6.00      1 277.8
+3 1934-04-09  79         0    4   1 180.00     80  24.7
+4 1952-11-02  61         1    4   0 165.00     54  19.8
+5 1955-04-15  58         1    4   1 193.04    104  27.9
+
+                                                                                                     comments
+1                                                                     Character in a book, with some guessing
+2                                                                          A mouse character from a good book
+3                                                                                          completely made up
+4 This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail
+5                 Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache
+
+  demographics_complete
+1                     2
+2                     2
+3                     2
+4                     2
+5                     2
+  ```
+      
+ 1. **Can the user *export* from their own project?**    
+ The code is similar to the previous check, but the `uri` and `token` values will need to be modified.
+  ``` r
+  library(REDCapR) #Load the package into the current R session, if you haven't already.
+  redcap_uri <- "https://the.urlofyourinsitution.edu/api/" #Adapt this to your server.
+  token <- "your-secret-token" #Adapt this to your user's token.
+  redcap_read(redcap_uri=uri, token=token)
+  ```
+      
+ 1. **Can the user *import* to their own project?**    
+ Writing records can be trickier, because the schema (eg, the names and data types) must match the project.  This section will be expanded in the future.  Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project's schema and dataset.
+ 
+ 1. **Is the operation still unsuccessful using REDCapR?**    
+ If so the "Can the user query a *entire* REDCap project using RCurl?" check succeeded, but the REDCapR checks did not, consider posting a new [GitHub issue](https://github.com/OuhscBbmc/REDCapR/issues) to the package developers.
+ 
+ 
 ## Document Info
-This document is primarily based on REDCap version 5.11.3, and was last updated 2016-06-27.
+This document is primarily based on REDCap version 5.11.3, and was last updated 2016-06-27.  A development version of the document is available on GitHub: http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html.
