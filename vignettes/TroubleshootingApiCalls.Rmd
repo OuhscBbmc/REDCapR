@@ -78,6 +78,47 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
  1. **Does the user have the most recent version of RCurl?**   
  There are several ways to do this, but the easiest is probably to run `update.packages(ask=FALSE)`.  That optional argument prevents the user from needing to respond 'Y' to updating each outdated package.
  
+ 1. **Can the user query a test  REDCap project using RCurl?**   
+ Both the [redcap](https://github.com/jeffreyhorner/redcap) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) employ something similar to the following function in [RCurl](http://cran.r-project.org/web/packages/RCurl).  If you're curious, here is the relevant source code for [https://github.com/jeffreyhorner/redcap/blob/master/R/exportRecords.R](redcap) and [REDCapR](https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap_read_oneshot.R).
+ 
+ If this fails, consider attempting again with the uri and token used above in the Postman example.
+ 
+ This check avoids SSL in order to simplify the troubleshooting.  SSL is supported by default in the [PyCap](http://sburns.org/PyCap/) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) packages.
+    
+  ``` r
+    redcap_uri <- "https://bbmc.ouhsc.edu/redcap/api/"
+    token <- "9A81268476645C4E5F03428B8AC3AA7B"
+    
+    raw_text <- RCurl::postForm(
+      uri = redcap_uri
+      , token = token
+      , content = 'record'
+      , format = 'csv'
+      , type = 'flat'
+      , rawOrLabel = 'raw'
+      , exportDataAccessGroups = 'true'
+      , .opts = RCurl::curlOptions(ssl.verifypeer = FALSE)
+    )
+  ```  
+  
+  Alternatively, you can try using the [`httr`](http://cran.r-project.org/web/packages/httr/) package, which uses `RCurl` underneath.  `REDCapR` actually uses `httr` directly, instead of `RCurl`.
+  
+  ```
+    post_body <- list(
+      token = token,
+      content = 'record',
+      format = 'csv',
+      type = 'flat',
+      rawOrLabel = 'raw',
+      exportDataAccessGroups = 'true'
+    )
+    
+    raw_text <- httr::POST(
+      url = redcap_uri,
+      body = post_body,
+      .opts = RCurl::curlOptions(ssl.verifypeer = FALSE)
+    )
+  ```
  1. **Can the user query a *subset* of the REDCap project using RCurl?**   
  Both the [redcap](https://github.com/jeffreyhorner/redcap) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) employ something similar to the following function in [RCurl](http://cran.r-project.org/web/packages/RCurl).  If you're curious, here is the relevant source code for [https://github.com/jeffreyhorner/redcap/blob/master/R/exportRecords.R](redcap) and [REDCapR](https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap_read_oneshot.R).
  

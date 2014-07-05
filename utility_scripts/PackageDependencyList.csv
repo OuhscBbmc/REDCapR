@@ -9,6 +9,7 @@ ggthemes,TRUE,TRUE,,"Extra themes, scales and geoms for ggplot"
 googleVis,TRUE,TRUE,,"JavaScript-based visualizations, like scrollable tables"
 ggmap,TRUE,TRUE,,"Maps & graphics, based on ggplot"
 knitr,TRUE,TRUE,,For reporting
+httr,TRUE,TRUE,,Calling REDCap API
 lme4,TRUE,TRUE,,Multilevel models
 lubridate,TRUE,TRUE,,Consistent/convienent function signatures for manipulating dates
 plyr,TRUE,TRUE,,Important for most of our data manipulation
