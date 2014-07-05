@@ -95,7 +95,7 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
   export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
   
   if( missing( cert_location ) | is.null(cert_location) ) 
-    cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs/mozilla_2013_12_05.crt")
+    cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs/mozilla_2014_04_22.crt")
   # curl_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
 
   if( !base::file.exists(cert_location) )

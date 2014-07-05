@@ -12,7 +12,7 @@ records_collapsed <- "1,2,5"
 fields_collapsed <- NULL
 
 
-curl_options <- RCurl::curlOptions(cainfo = "./inst/ssl_certs/mozilla_2013_12_05.crt")
+curl_options <- RCurl::curlOptions(cainfo = "./inst/ssl_certs/mozilla_2014_04_22.crt")
 
 r <- httr::POST(
   url = redcap_uri

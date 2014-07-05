@@ -11,7 +11,7 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, cert_loca
     stop("The required parameter `token` was missing from the call to `redcap_write_oneshot()`.")     
   
   if( missing( cert_location ) | is.null(cert_location) ) 
-    cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs", "mozilla_2013_12_05.crt")
+    cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs", "mozilla_2014_04_22.crt")
   #     curl_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
   
   if( !base::file.exists(cert_location) )

@@ -26,7 +26,8 @@ redcap_write <- function( ds_to_write,
     selected_indices <- seq(from=ds_glossary[i, "start_index"], to=ds_glossary[i, "stop_index"])
     #     selected_ids <- ids[selected_index]
     message("Writing batch ", i, " of ", nrow(ds_glossary), ", with indices ", min(selected_indices), " through ", max(selected_indices), ".")
-    write_result <- REDCapR:::redcap_write_oneshot(ds = ds_to_write[selected_indices, ],                                                  
+    #TODO: add REDCapR:: when the function becomes public
+    write_result <- redcap_write_oneshot(ds = ds_to_write[selected_indices, ],                                                  
                                                   redcap_uri = redcap_uri,
                                                   token = token,
                                                   verbose = verbose)
