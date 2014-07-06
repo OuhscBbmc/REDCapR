@@ -9,7 +9,9 @@ RCurl::curlVersion()
 certLocation <- "./inst/ssl_certs/mozilla_2014_04_22.crt"
 readLines(certLocation)
 curl_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
-curl_options <- RCurl::curlOptions(cainfo = certLocation, sslversion=3)
+curl_options <- RCurl::curlOptions(cainfo = certLocation)
+curl_options <- RCurl::curlOptions(sslversion=3)
+curl_options <- RCurl::curlOptions(cainfo=certLocation, sslversion=3)
 
 raw_text2 <- RCurl::postForm(
   uri = redcap_uri
@@ -32,6 +34,21 @@ raw_text2
 #     attr(,"Content-Type")
 #     charset 
 #     "text/html"     "utf-8" 
+
+
+raw_text3 <- httr::POST(
+  url = redcap_uri
+  , body = list(
+    token = token
+    , content = 'record'
+    , format = 'csv'
+    , type = 'flat'
+  ),
+  config = curl_options
+  #, httr::verbose()
+)
+raw_text3
+
 
 raw_text <- httr::POST(
   url = redcap_uri
@@ -61,4 +78,3 @@ raw_text
 #     "2","Tumtum","Nutmouse","14 Rose Cottage Blvd.\nKenning UK 34243","(234) 234-2343","tummy@mouse.comm","2003-03-10",11,1,6,1,6,1,277.8,"A mouse character from a good book",2
 #     "3","Marcus","Wood","243 Hill St.\nGuthrie OK 73402","(433) 435-9865","mw@mwood.net","1934-04-09",79,0,4,1,180,80,24.7,"completely made up",2
 #     "4","Trudy","DAG","342 Elm\nDuncanville TX, 75116","(987) 654-3210","peroxide@blonde.com","1952-11-02",61,1,4,0,165,54,19.8,"This record doesn't have a DAG assigned
- ...

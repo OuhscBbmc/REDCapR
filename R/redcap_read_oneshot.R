@@ -96,12 +96,12 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
   
   if( missing( cert_location ) | is.null(cert_location) ) 
     cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs/mozilla_2014_04_22.crt")
-  # curl_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
+  # curl_options <- RCurl::curlOptions(ssl.verifypeer=FALSE)
 
   if( !base::file.exists(cert_location) )
       stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
   
-  curl_options <- RCurl::curlOptions(cainfo = cert_location)
+  curl_options <- RCurl::curlOptions(cainfo=cert_location, sslversion=3)
   
   # raw_text <- RCurl::postForm(
   #   uri = redcap_uri
@@ -129,7 +129,7 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
   result <- httr::POST(
     url = redcap_uri,
     body = post_body,
-    .opts = curl_options #RCurl::curlOptions(ssl.verifypeer = FALSE)
+    config = curl_options #RCurl::curlOptions(ssl.verifypeer=FALSE)
   )
 
   status_code <- result$status
