@@ -27,12 +27,11 @@ We try to keep a current list of all the packages used in REDCapR in the file `/
 ### RStudio on Linux
 I primarily developed this on Windows 8 with a patched, or development version of R (see the links above), but I also build it on a Ubuntu 13.04 box on my network through a browser to RStudio.  This is to make sure I'm not introducing any problems on Linux.  I didn't record what I did initially (I'll do that the next time I start fresh).  Here are some recent steps I needed to do for the LaTeX reference manual to build correctly.
 ```
-
 sudo apt-get install texinfo 
 sudo apt-get install texlive 
 sudo apt-get install texlive-fonts-extra 
 ```
-See texi2dvi missing](https://github.com/yihui/knitr/issues/214) and [textlive-fonts-extra](http://tex.stackexchange.com/questions/125274/error-font-ts1-zi4r-at-540-not-found) for installing.  See the [R CMD Rd2pdf](http://stackoverflow.com/questions/10819959/diagnosing-r-package-build-warning-latex-errors-when-creating-pdf-version) for getting better error messages than R CMD check.
+See [texi2dvi missing](https://github.com/yihui/knitr/issues/214) and [textlive-fonts-extra](http://tex.stackexchange.com/questions/125274/error-font-ts1-zi4r-at-540-not-found) for installing.  See the [R CMD Rd2pdf](http://stackoverflow.com/questions/10819959/diagnosing-r-package-build-warning-latex-errors-when-creating-pdf-version) for getting better error messages than R CMD check.
 
 ### SVN
 SVN is necessary if you want to commit to R-Forge (otherwise, just download the release version from CRAN and the development version from [GitHub](https://github.com/OuhscBbmc/REDCapR)).  When a directory is deleted, using the command line to first [update](http://stackoverflow.com/questions/87950/how-do-you-overcome-the-svn-out-of-date-error) and then [delete](http://svnbook.red-bean.com/en/1.2/svn.ref.svn.c.delete.html) works for me.
