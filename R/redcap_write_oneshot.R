@@ -42,10 +42,6 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, cert_loca
     content = 'record',
     format = 'csv',
     type = 'flat',
-#     rawOrLabel = raw_or_label,
-#     exportDataAccessGroups = export_data_access_groups_string,
-#     records = records_collapsed,
-#     fields = fields_collapsed,
     
     #These next values separate the import from the export API call
     data = csv,

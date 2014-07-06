@@ -261,7 +261,7 @@ The values they enter should be exactly the same as those entered in the previou
 <li><p><strong>Is RCurl installed on the user&#39;s local machine?</strong><br/>
 If so, running <code>require(RCurl)</code> should produce the following output if you&#39;re starting with a fresh session of R:</p>
 
-<pre><code class="r">&gt; require(RCurl)
+<pre><code>&gt; require(RCurl)
 Loading required package: RCurl
 Loading required package: bitops
 </code></pre></li>
@@ -289,21 +289,22 @@ raw_text &lt;- RCurl::postForm(
 )
 </code></pre>
 
-<p>Alternatively, you can try using the <a href="http://cran.r-project.org/web/packages/httr/"><code>httr</code></a> package, which uses <code>RCurl</code> underneath.  <code>REDCapR</code> actually uses <code>httr</code> directly, instead of <code>RCurl</code>.</p>
+<p>Alternatively, you can try using the <a href="http://cran.r-project.org/web/packages/httr/"><code>httr</code></a> package, which uses <code>RCurl</code> underneath.  <code>REDCapR</code> actually uses <code>httr</code> directly, instead of <code>RCurl</code>.  As of 2014-07-06, this works with the Windows 8 version for libcurl (which is underneath RCurl), but now with some Linux versions; in this case pass the location of the SSL cert file.</p>
 
-<pre><code>post_body &lt;- list(
-  token = token,
-  content = &#39;record&#39;,
-  format = &#39;csv&#39;,
-  type = &#39;flat&#39;,
-  rawOrLabel = &#39;raw&#39;,
-  exportDataAccessGroups = &#39;true&#39;
+<pre><code class="r">post_body &lt;- list(
+token = token,
+content = &#39;record&#39;,
+format = &#39;csv&#39;,
+type = &#39;flat&#39;,
+rawOrLabel = &#39;raw&#39;,
+exportDataAccessGroups = &#39;true&#39;
 )
 
 raw_text &lt;- httr::POST(
-  url = redcap_uri,
-  body = post_body,
-  .opts = RCurl::curlOptions(ssl.verifypeer = FALSE)
+url = redcap_uri,
+body = post_body,
+config = RCurl::curlOptions(ssl.verifypeer = FALSE),
+httr::verbose()
 )
 </code></pre></li>
 <li><p><strong>Can the user query a <em>subset</em> of the REDCap project using RCurl?</strong><br/>

@@ -34,9 +34,9 @@ This section group examines potential problems that occur after it leaves a work
 
  1. **Is Postman installed and operating correctly?**  
  If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/).  The url is `https://bbmc.ouhsc.edu/redcap/api/`.  There are three key-value pairs: (1) the 'token' is `9A81268476645C4E5F03428B8AC3AA7B`, (2) the 'content' is `record`, and (3) the 'format' should be `CSV`.  When checking your own server, the token value should change, but the content and format should not.  It should return five records in a CSV format.  The 'status' should be `200 OK`.  The result should look roughly like:
- 
- ```
- record_id,first_name,last_name,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete
+
+  ```
+  record_id,first_name,last_name,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete
   "1","Nutmeg","Nutmouse","14 Rose Cottage St.
   Kenning UK, 323232","(432) 456-4848","nutty@mouse.com","2003-08-30",10,1,2,0,5,1,400,"Character in a book, with some guessing",2
   "2","Tumtum","Nutmouse","14 Rose Cottage Blvd.
@@ -52,8 +52,8 @@ This section group examines potential problems that occur after it leaves a work
   New Orleans LA, 70115","(333) 333-4444","left@hippocket.com","1955-04-15",58,1,4,1,193.04,104,27.9,"Had a hand for trouble and a eye for cash
   
   He had a gold watch chain and a black mustache",2
- ```
- 
+  ```
+
  1. **Can an administrator query the API successfully with Postman with the admin token?**  
  As an administrator, create an account for yourself, and verify that your token works on your server and project.
   
@@ -68,13 +68,13 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
  
  1. **Is RCurl installed on the user's local machine?**  
  If so, running `require(RCurl)` should produce the following output if you're starting with a fresh session of R:
- 
- ``` r
+    
+  ```
   > require(RCurl)
   Loading required package: RCurl
   Loading required package: bitops
- ``` 
- 
+  ``` 
+   
  1. **Does the user have the most recent version of RCurl?**   
  There are several ways to do this, but the easiest is probably to run `update.packages(ask=FALSE)`.  That optional argument prevents the user from needing to respond 'Y' to updating each outdated package.
  
@@ -101,30 +101,33 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
     )
   ```  
   
-  Alternatively, you can try using the [`httr`](http://cran.r-project.org/web/packages/httr/) package, which uses `RCurl` underneath.  `REDCapR` actually uses `httr` directly, instead of `RCurl`.
+  Alternatively, you can try using the [`httr`](http://cran.r-project.org/web/packages/httr/) package, which uses `RCurl` underneath.  `REDCapR` actually uses `httr` directly, instead of `RCurl`.  As of 2014-07-06, this works with the Windows 8 version for libcurl (which is underneath `RCurl), but now with some Linux versions; in this case pass the location of the SSL cert file.
   
+  ``` r
+  post_body <- list(
+    token = token,
+    content = 'record',
+    format = 'csv',
+    type = 'flat',
+    rawOrLabel = 'raw',
+    exportDataAccessGroups = 'true'
+  )
+  
+  raw_text <- httr::POST(
+    url = redcap_uri,
+    body = post_body,
+    config = RCurl::curlOptions(ssl.verifypeer = FALSE),
+    httr::verbose()
+  )
   ```
-    post_body <- list(
-      token = token,
-      content = 'record',
-      format = 'csv',
-      type = 'flat',
-      rawOrLabel = 'raw',
-      exportDataAccessGroups = 'true'
-    )
-    
-    raw_text <- httr::POST(
-      url = redcap_uri,
-      body = post_body,
-      .opts = RCurl::curlOptions(ssl.verifypeer = FALSE)
-    )
-  ```
+  
  1. **Can the user query a *subset* of the REDCap project using RCurl?**   
  Both the [redcap](https://github.com/jeffreyhorner/redcap) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) employ something similar to the following function in [RCurl](http://cran.r-project.org/web/packages/RCurl).  If you're curious, here is the relevant source code for [https://github.com/jeffreyhorner/redcap/blob/master/R/exportRecords.R](redcap) and [REDCapR](https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap_read_oneshot.R).
  
  If this fails, consider attempting again with the uri and token used above in the Postman example.
  
  This check avoids SSL in order to simplify the troubleshooting.  SSL is supported by default in the [PyCap](http://sburns.org/PyCap/) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) packages.
+ 
     
   ``` r
     redcap_uri <- "https://the.urlofyourinsitution.edu/api/" #Adapt this to your server.
@@ -145,6 +148,7 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
       , .opts = RCurl::curlOptions(ssl.verifypeer = FALSE)
     )
   ``` 
+  
  1. **Can the user query a *entire* REDCap project using RCurl?**   
  There are two advantages of trying a subset of the data.  First, small datasets avoid the time-out errors that plague large datasets.  Second, it may avoid problematic values being passed through the pipeline.  If the current check fails but the previous check succeedes, then experiment with different expanses of records and fields.  This should help determine which values are causing the problems, or if there's simply too much data being pulled in one pass.  
  
