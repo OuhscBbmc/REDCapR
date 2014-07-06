@@ -1,8 +1,18 @@
-﻿Version 0.2 (Developed 2014-01-14 through 2014-02-?)
+﻿Version 0.3 (Developed 2014-07-03 through ?)
+------------------------------------------------------------------------------
+New Features:
+* Relies on the `httr` package, which provides benefits like the status code message can be captured (eg, 200-OK, 403-Forbidden, 404-NotFound).  See http://cran.r-project.org/web/packages/httr/.
+
+Updates:
+* Renamed the former `status_message` to `outcome_message`. This is because the message associated with http code returned is conventionally called the 'status messages' (eg, OK, Forbidden, Not Found).
+* If an operation is successful, the `raw_text` value` (which was formerly called `raw_csv`) is returned as an empty string to save RAM.  It's not really necessary with httr's status message exposed.
+
+Version 0.2 (Developed 2014-01-14 through 2014-07-02)
 ------------------------------------------------------------------------------
 New Features:
 * Added `redcap_column_sanitize()` function to address non-ASCII characters
 * Added `redcap_write` (as an internal function).
+* The `redcap_project` boject reduces repeatedly passing parameters like the server URL, the user token, and the SSL cert location.
 
 Updates:
 * New Mozilla SSL Certification Bundles released on cURL (released 2013-12-05; http://curl.haxx.se/ca/cacert.pem)

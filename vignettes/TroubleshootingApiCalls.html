@@ -215,7 +215,7 @@ This can be verified in the <code>API</code> section (and it&#39;s <code>Manage 
 
 <ol>
 <li><p><strong>Is Postman installed and operating correctly?</strong><br/>
-If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a>.  The url can be found in the screenshot above.  There are three key-value pairs: (1) the &#39;token&#39; is <code>9A81268476645C4E5F03428B8AC3AA7B</code>, (2) the &#39;content&#39; is <code>record</code>, and (3) the &#39;format&#39; should be <code>CSV</code>.  When checking your own server, the token value should change, but the content and format should not.  It should return five records in a CSV format.  The &#39;status&#39; should be <code>200 OK</code>.  The result should look roughly like:</p>
+If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a>.  The url is <code>https://bbmc.ouhsc.edu/redcap/api/</code>.  There are three key-value pairs: (1) the &#39;token&#39; is <code>9A81268476645C4E5F03428B8AC3AA7B</code>, (2) the &#39;content&#39; is <code>record</code>, and (3) the &#39;format&#39; should be <code>CSV</code>.  When checking your own server, the token value should change, but the content and format should not.  It should return five records in a CSV format.  The &#39;status&#39; should be <code>200 OK</code>.  The result should look roughly like this.  Notice the line breaks were included in the text values themselves.</p>
 
 <pre><code>record_id,first_name,last_name,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete
 &quot;1&quot;,&quot;Nutmeg&quot;,&quot;Nutmouse&quot;,&quot;14 Rose Cottage St.
@@ -251,11 +251,51 @@ The values they enter should be exactly the same as those entered in the previou
 If so, running <code>require(RCurl)</code> should produce the following output if you&#39;re starting with a fresh session of R:</p>
 
 <pre><code class="r">&gt; require(RCurl)
-Loading required package: RCurl
-Loading required package: bitops
+## Loading required package: RCurl
+## Loading required package: bitops
 </code></pre></li>
 <li><p><strong>Does the user have the most recent version of RCurl?</strong><br/>
 There are several ways to do this, but the easiest is probably to run <code>update.packages(ask=FALSE)</code>.  That optional argument prevents the user from needing to respond &#39;Y&#39; to updating each outdated package.</p></li>
+<li><p><strong>Can the user query a test  REDCap project using RCurl?</strong><br/>
+Both the <a href="https://github.com/jeffreyhorner/redcap">redcap</a> and <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> employ something similar to the following function in <a href="http://cran.r-project.org/web/packages/RCurl">RCurl</a>.  If you&#39;re curious, here is the relevant source code for <a href="redcap">https://github.com/jeffreyhorner/redcap/blob/master/R/exportRecords.R</a> and <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap_read_oneshot.R">REDCapR</a>.</p>
+
+<p>If this fails, consider attempting again with the uri and token used above in the Postman example.</p>
+
+<p>This check avoids SSL in order to simplify the troubleshooting.  SSL is supported by default in the <a href="http://sburns.org/PyCap/">PyCap</a> and <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> packages.</p>
+
+<pre><code class="r">redcap_uri &lt;- &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;
+token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;
+
+raw_text &lt;- RCurl::postForm(
+  uri = redcap_uri
+  , token = token
+  , content = &#39;record&#39;
+  , format = &#39;csv&#39;
+  , type = &#39;flat&#39;
+  , rawOrLabel = &#39;raw&#39;
+  , exportDataAccessGroups = &#39;true&#39;
+  , .opts = RCurl::curlOptions(ssl.verifypeer = FALSE)
+)
+</code></pre>
+
+<p>Alternatively, you can try using the <a href="http://cran.r-project.org/web/packages/httr/"><code>httr</code></a> package, which uses <code>RCurl</code> underneath.  <code>REDCapR</code> actually uses <code>httr</code> directly, instead of <code>RCurl</code>.  As of 2014-07-06, this works with the Windows 8 version for libcurl (which is underneath RCurl), but now with some Linux versions; in this case pass the location of the SSL cert file.</p>
+
+<pre><code class="r">post_body &lt;- list(
+  token = token,
+  content = &#39;record&#39;,
+  format = &#39;csv&#39;,
+  type = &#39;flat&#39;,
+  rawOrLabel = &#39;raw&#39;,
+  exportDataAccessGroups = &#39;true&#39;
+)
+
+raw_text &lt;- httr::POST(
+  url = redcap_uri,
+  body = post_body,
+  config = httr::config(ssl.verifypeer = FALSE),
+  httr::verbose() #Remove this line to suppress the frequent console updates.
+)
+</code></pre></li>
 <li><p><strong>Can the user query a <em>subset</em> of the REDCap project using RCurl?</strong><br/>
 Both the <a href="https://github.com/jeffreyhorner/redcap">redcap</a> and <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> employ something similar to the following function in <a href="http://cran.r-project.org/web/packages/RCurl">RCurl</a>.  If you&#39;re curious, here is the relevant source code for <a href="redcap">https://github.com/jeffreyhorner/redcap/blob/master/R/exportRecords.R</a> and <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap_read_oneshot.R">REDCapR</a>.</p>
 
@@ -268,7 +308,7 @@ token &lt;- &quot;your-secret-token&quot; #Adapt this to your user&#39;s token.
 records_collapsed &lt;- &quot;1,2,3&quot; #This assumes that their dataset contains ID values of 1, 2, and 3.  Adapt this to their dataset.
 fields_collapsed &lt;- &quot;record_id,first_name,last_name&quot; #This assumes that their dataset contains variables called &#39;recordid&#39;, &#39;first_name&#39;, and &#39;last_name&#39;.  Adapt this to their dataset.
 
-raw_csv &lt;- RCurl::postForm(
+raw_text &lt;- RCurl::postForm(
   uri = redcap_uri
   , token = token
   , content = &#39;record&#39;
@@ -291,7 +331,7 @@ token &lt;- &quot;your-secret-token&quot; #Adapt this to your user&#39;s token.
 records_collapsed &lt;- NULL
 fields_collapsed &lt;- NULL
 
-raw_csv &lt;- RCurl::postForm(
+raw_text &lt;- RCurl::postForm(
   uri = redcap_uri
   , token = token
   , content = &#39;record&#39;
@@ -320,21 +360,21 @@ devtools::install_github(repo=&quot;OuhscBbmc/REDCapR&quot;)
 <li><p><strong>Does REDCapR load successfully on the user&#39;s machine?</strong><br/>
 If so, running <code>require(REDCapR)</code> should produce the following output if you&#39;re starting with a fresh session of R:</p>
 
-<pre><code>&gt; require(REDCapR)
-Loading required package: REDCapR
+<pre><code class="r">require(REDCapR)
+## Loading required package: REDCapR
 </code></pre></li>
 <li><p><strong>Can the user export from an example project?</strong><br/>
 This is the same fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a> as in the previous section.</p>
 
-<pre><code class="r">library(REDCapR) #Load the package into the current R session.
-uri &lt;- &quot;&lt;copy this value from the Postman screenshot above&gt;&quot;
+<pre><code class="r">require(REDCapR) #Load the package into the current R session.
+uri &lt;- &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;
 token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;
 redcap_read(redcap_uri=uri, token=token)$data
 </code></pre>
 
 <p>The previous code should produce output similar to this.  Notice there are five rows and the columns will wrap around, depending on the width of your console window.</p>
 
-<pre><code class="r">5 records and 1 columns were read from REDCap in 0.41 seconds.
+<pre><code>5 records and 1 columns were read from REDCap in 0.41 seconds.
 Starting to read 5 records  at 2014-06-27 17:19:49
 Reading batch 1 of 1, with ids 1 through 5.
 5 records and 16 columns were read from REDCap in 0.42 seconds.
@@ -370,20 +410,36 @@ demographics_complete
 <li><p><strong>Can the user <em>export</em> from their own project?</strong><br/>
 The code is similar to the previous check, but the <code>uri</code> and <code>token</code> values will need to be modified.</p>
 
-<pre><code class="r">library(REDCapR) #Load the package into the current R session, if you haven&#39;t already.
+<pre><code class="r">require(REDCapR) #Load the package into the current R session, if you haven&#39;t already.
 redcap_uri &lt;- &quot;https://the.urlofyourinsitution.edu/api/&quot; #Adapt this to your server.
 token &lt;- &quot;your-secret-token&quot; #Adapt this to your user&#39;s token.
-redcap_read(redcap_uri=uri, token=token)
+redcap_read(redcap_uri=uri, token=token)$data
+</code></pre>
+
+<p>Alternatively, a <code>redcap_project</code> object can be declared initially, which makes subsequent calls cleaner when the token and url are required only the when the object is declared.</p>
+
+<pre><code class="r">require(REDCapR) #Load the package into the current R session, if you haven&#39;t already.
+uri &lt;- &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;
+token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;  
+project &lt;- redcap_project$new(redcap_uri=uri, token=token)
+
+dsThreeColumns &lt;- project$read(fields=c(&quot;record_id&quot;, &quot;sex&quot;, &quot;age&quot;))$data
+
+idsOfMales &lt;- dsThreeColumns[dsThreeColumns$sex==1, &quot;record_id&quot;]
+idsOfMinors &lt;- dsThreeColumns[dsThreeColumns$age &lt; 18, &quot;record_id&quot;]
+
+dsMales &lt;- project$read(records=idsOfMales, batch_size=2)$data
+dsMinors &lt;- project$read(records=idsOfMinors)$data
 </code></pre></li>
 <li><p><strong>Can the user <em>import</em> to their own project?</strong><br/>
-Writing records can be trickier, because the schema (eg, the names and data types) must match the project.  This section will be expanded in the future.  Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project&#39;s schema and dataset.</p></li>
+Writing records can be trickier, because the schema (eg, the names and data types) must match the project.  This section will be expanded in the future.  Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project&#39;s schema and dataset.  Also, consider exporting the dataset to your machine, and look for differences.  Note that you cannot import calculated fields into REDCap.</p></li>
 <li><p><strong>Is the operation still unsuccessful using REDCapR?</strong><br/>
 If so the &ldquo;Can the user query a <em>entire</em> REDCap project using RCurl?&rdquo; check succeeded, but the REDCapR checks did not, consider posting a new <a href="https://github.com/OuhscBbmc/REDCapR/issues">GitHub issue</a> to the package developers.</p></li>
 </ol>
 
 <h2>Document Info</h2>
 
-<p>This document is primarily based on REDCap version 5.11.3, and was last updated 2016-06-27.  A development version of the document is available on GitHub: <a href="http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/RefClassTry/inst/doc/TroubleshootingApiCalls.html">http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/RefClassTry/inst/doc/TroubleshootingApiCalls.html</a>.</p>
+<p>This document is primarily based on REDCap version 5.11.3, and was last updated 2016-06-27.  A development version of the document is available on GitHub: <a href="http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html">http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html</a>.</p>
 
 </body>
 

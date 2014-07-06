@@ -203,9 +203,6 @@ hr {
 
 <p>The function <code>redcap_read_oneshot</code> uses the <a href="http://cran.r-project.org/web/packages/RCurl/index.html"><code>RCurl</code></a> package to call the REDCap API.</p>
 
-<pre><code>## Loading required package: knitr
-</code></pre>
-
 <h3>Set project-wide values.</h3>
 
 <p>There is some information that is specific to the REDCap project, as opposed to an individual operation.  This includes the (1) uri of the server, the (2) token for the user&#39;s project, and the (3) location of the SSL certification store, which is necessary to verify the identity of the REDCap webserver.  </p>
@@ -225,7 +222,8 @@ token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;
 ds_all_rows_all_fields &lt;- redcap_read_oneshot(redcap_uri=uri, token=token)$data
 </code></pre>
 
-<pre><code>5 records and 16 columns were read from REDCap in 1.76 seconds.
+<pre><code>5 records and 16 columns were read from REDCap in 0.29 seconds.  The http status code and message were 200: OK
+.
 </code></pre>
 
 <pre><code class="r">ds_all_rows_all_fields #Inspect the returned dataset
@@ -239,7 +237,7 @@ ds_all_rows_all_fields &lt;- redcap_read_oneshot(redcap_uri=uri, token=token)$da
 5         5   John Lee    Walker      Hotel Suite\nNew Orleans LA, 70115 (333) 333-4444  left@hippocket.com 1955-04-15
   age ethnicity race sex height weight   bmi
 1  10         1    2   0      5      1 400.0
-2  10         1    6   1      6      1 277.8
+2  11         1    6   1      6      1 277.8
 3  79         0    4   1    180     80  24.7
 4  61         1    4   0    165     54  19.8
 5  58         1    4   1    193    104  27.9
@@ -272,7 +270,8 @@ ds_some_rows_v1 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 0.39 seconds.
+<pre><code>2 records and 16 columns were read from REDCap in 0.28 seconds.  The http status code and message were 200: OK
+.
 </code></pre>
 
 <pre><code class="r">#Return only records with IDs of 1 and 3 (alternate way)
@@ -284,7 +283,8 @@ ds_some_rows_v2 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 0.41 seconds.
+<pre><code>2 records and 16 columns were read from REDCap in 0.32 seconds.  The http status code and message were 200: OK
+.
 </code></pre>
 
 <pre><code class="r">ds_some_rows_v2 #Inspect the returned dataset
@@ -311,7 +311,8 @@ ds_some_fields_v1 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.39 seconds.
+<pre><code>5 records and 3 columns were read from REDCap in 0.29 seconds.  The http status code and message were 200: OK
+.
 </code></pre>
 
 <pre><code class="r">#Return only the fields recordid, first_name, and age (alternate way)
@@ -323,7 +324,8 @@ ds_some_fields_v2 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.38 seconds.
+<pre><code>5 records and 3 columns were read from REDCap in 0.28 seconds.  The http status code and message were 200: OK
+.
 </code></pre>
 
 <pre><code class="r">ds_some_fields_v2 #Inspect the returned dataset
@@ -331,7 +333,7 @@ ds_some_fields_v2 &lt;- redcap_read_oneshot(
 
 <pre><code>  record_id first_name age
 1         1     Nutmeg  10
-2         2     Tumtum  10
+2         2     Tumtum  11
 3         3     Marcus  79
 4         4      Trudy  61
 5         5   John Lee  58
@@ -343,11 +345,11 @@ ds_some_fields_v2 &lt;- redcap_read_oneshot(
 
 <ol>
 <li>The <code>data</code> object has the <code>data.frame</code>, as in the previous examples.</li>
-<li>The <code>raw_csv</code> returned by the REDCap API. This might display helpful error messages, in the event something went wrong.</li>
+<li>The <code>raw_text</code> returned by the REDCap API. This might display helpful error messages, in the event something went wrong.</li>
 <li>The <code>records_collapsed</code> field passed to the API.  This shows which record subsets, if any, were requested.</li>
 <li>The <code>fields_collapsed</code> fields passed to the API.  This shows which field subsets, if any, were requested.</li>
 <li>The <code>elapsed_seconds</code> measures the duration of the call.</li>
-<li>The <code>status_message</code> has the number of rows and columns read in a successful operation.  In an unsuccessful operation, it should contain diagnostic information.</li>
+<li>The <code>outcome_message</code> has the number of rows and columns read in a successful operation.  In an unsuccessful operation, it should contain diagnostic information.</li>
 <li>The <code>success</code> boolean value indicates if <code>redcap_read_oneshot</code> believes the operation completed as intended.</li>
 </ol>
 
@@ -359,7 +361,8 @@ all_information &lt;- redcap_read_oneshot(
 )
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.4 seconds.
+<pre><code>5 records and 3 columns were read from REDCap in 0.27 seconds.  The http status code and message were 200: OK
+.
 </code></pre>
 
 <pre><code class="r">all_information #Inspect the additional information
@@ -368,16 +371,22 @@ all_information &lt;- redcap_read_oneshot(
 <pre><code>$data
   record_id first_name age
 1         1     Nutmeg  10
-2         2     Tumtum  10
+2         2     Tumtum  11
 3         3     Marcus  79
 4         4      Trudy  61
 5         5   John Lee  58
 
-$raw_csv
-[1] &quot;record_id,first_name,age\n\&quot;1\&quot;,\&quot;Nutmeg\&quot;,10\n\&quot;2\&quot;,\&quot;Tumtum\&quot;,10\n\&quot;3\&quot;,\&quot;Marcus\&quot;,79\n\&quot;4\&quot;,\&quot;Trudy\&quot;,61\n\&quot;5\&quot;,\&quot;John Lee\&quot;,58\n&quot;
-attr(,&quot;Content-Type&quot;)
-                charset 
-&quot;text/html&quot;     &quot;utf-8&quot; 
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$status_message
+[1] &quot;OK\r\n&quot;
+
+$outcome_message
+[1] &quot;5 records and 3 columns were read from REDCap in 0.27 seconds.  The http status code and message were 200: OK\r\n.&quot;
 
 $records_collapsed
 NULL
@@ -386,23 +395,20 @@ $fields_collapsed
 [1] &quot;recordid,first_name,age&quot;
 
 $elapsed_seconds
-[1] 0.3953
+[1] 0.2682
 
-$status_message
-[1] &quot;5 records and 3 columns were read from REDCap in 0.4 seconds.&quot;
-
-$success
-[1] TRUE
+$raw_text
+[1] &quot;&quot;
 </code></pre>
 
 <h2>Session Info</h2>
 
 <p>For the sake of documentation and reproducibility, the current vignette was build on a system using the following software.</p>
 
-<pre><code>Report created by Will at 2014-06-27, 16:26:17 -0500
+<pre><code>Report created by Will at 2014-07-06, 18:10:49 -0500
 </code></pre>
 
-<pre><code>R version 3.1.0 Patched (2014-06-15 r65949)
+<pre><code>R version 3.1.1 RC (2014-07-04 r66071)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 locale:
@@ -413,11 +419,12 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] knitr_1.6           REDCapR_0.2-23      testthat_0.8.1.0.99 devtools_1.5       
+[1] REDCapR_0.3-19      stringr_0.6.2       RCurl_1.95-4.1      bitops_1.0-6        plyr_1.8.1         
+[6] httr_0.3.0.99       roxygen2_4.0.1.99   knitr_1.6           testthat_0.8.1.0.99
 
 loaded via a namespace (and not attached):
- [1] codetools_0.2-8 digest_0.6.4    evaluate_0.5.5  formatR_0.10    httr_0.3        memoise_0.2.1   parallel_3.1.0 
- [8] plyr_1.8.1      Rcpp_0.11.2     RCurl_1.95-4.1  roxygen2_4.0.1  stringr_0.6.2   tools_3.1.0     whisker_0.3-2  
+ [1] codetools_0.2-8 devtools_1.5    digest_0.6.4    evaluate_0.5.5  formatR_0.10    memoise_0.2.1   parallel_3.1.1 
+ [8] Rcpp_0.11.2     tools_3.1.1     whisker_0.3-2  
 </code></pre>
 
 </body>

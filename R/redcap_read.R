@@ -3,7 +3,7 @@
 #' 
 #' @title Read records from a REDCap project in subsets, and stacks them together before returning a \code{data.frame}.
 #'  
-#' @description From an external perpsective, this function is similar to \code{\link{redcap_read_oneshot}}.  The internals
+#' @description From an external perspective, this function is similar to \code{\link{redcap_read_oneshot}}.  The internals
 #' differ in that \code{redcap_read} retrieves subsets of the data, and then combines them before returning
 #' (among other objects) a single \code{data.frame}.  This function can be more appropriate than 
 #' \code{\link{redcap_read_oneshot}} when returning large datasets that could tie up the server.   
@@ -23,11 +23,14 @@
 #' 
 #' @return Currently, a list is returned with the following elements,
 #' \enumerate{
-#'  \item \code{data}: an R \code{data.frame} of the desired records and columns.
-#'  \item \code{records_collapsed}: the desired records IDs, collapsed into a single string, separated by commas.
-#'  \item \code{fields_collapsed}: the desired field names, collapsed into a single string, separated by commas.
-#'  \item \code{elapsed_seconds}: the duration of the function.
-#'  \item \code{status_message}: a boolean value indicating if the operation was apparently successful.
+#'  \item \code{data}: An R \code{data.frame} of the desired records and columns.
+#'  \item \code{success}: A boolean value indicating if the operation was apparently successful.
+#'  \item \code{status_codes}: A collection of \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes}, separated by semicolons.
+#'  \item \code{status_messages}: A collection of messages associated with the \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code}, separated by semicolons.
+#'  \item \code{outcome_messages}: A collection of human readable strings indicating the operations' semicolons
+#'  \item \code{records_collapsed}: The desired records IDs, collapsed into a single string, separated by commas.
+#'  \item \code{fields_collapsed}: The desired field names, collapsed into a single string, separated by commas.
+#'  \item \code{elapsed_seconds}: The duration of the function.
 #' }
 #' @details 
 #' Specifically, it internally uses multiple calls to \code{\link{redcap_read_oneshot}} to select and return data.
@@ -65,16 +68,16 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
   if( missing(token) )
     stop("The required parameter `token` was missing from the call to `redcap_read()`.")
   
-  if( missing(records_collapsed) & !missing(records) )
+  if( !missing(records) & (is.null(records_collapsed) | missing(records_collapsed)) )
     records_collapsed <- paste0(records, collapse=",")
   
-  if( missing(fields_collapsed) & !missing(fields) )
+  if( !missing(fields) & (is.null(fields_collapsed) | missing(fields_collapsed)) )
     fields_collapsed <- paste0(fields, collapse=",")
   
   #   export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
   #   
   #   if( missing( cert_location ) | is.null(cert_location) ) 
-  #     cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs", "mozilla_2013_12_05.crt")
+  #     cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs", "mozilla_2014_04_22.crt")
   #   #     curl_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
   #   
   #   if( !base::file.exists(cert_location) )
@@ -106,7 +109,9 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
   
   ds_glossary <- REDCapR::create_batch_glossary(row_count=length(ids), batch_size=batch_size)
   lst_batch <- NULL
+  lst_status_code <- NULL
   lst_status_message <- NULL
+  lst_outcome_message <- NULL
   success_combined <- TRUE
   
   message("Starting to read ", format(length(ids), big.mark=",", scientific=F, trim=T), " records  at ", Sys.time())
@@ -123,7 +128,9 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
                                         verbose = verbose, 
                                         cert_location = cert_location)
     
+    lst_status_code[[i]] <- read_result$status_code
     lst_status_message[[i]] <- read_result$status_message
+    lst_outcome_message[[i]] <- read_result$outcome_message
     if( !read_result$success )
       stop("The `redcap_read()` call failed on iteration", i, ". Set the `verbose` parameter to TRUE and rerun for additional information.")
     
@@ -136,7 +143,9 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
   ds_stacked <- plyr::rbind.fill(lst_batch)
   
   elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
+  status_code_combined <- paste(lst_status_code, collapse="; ")
   status_message_combined <- paste(lst_status_message, collapse="; ")
+  outcome_message_combined <- paste(lst_outcome_message, collapse="; ")
 #   status_message_overall <- paste0("\nAcross all batches,", 
 #                                    format(nrow(ds_stacked), big.mark = ",", scientific = FALSE, trim = TRUE), 
 #                                    " records and ",  
@@ -147,12 +156,14 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
 #     message(status_message_overall)
   
   return( list(
-    data = ds_stacked, 
-    records_collapsed = records_collapsed, 
+    data = ds_stacked,
+    success = success_combined,
+    status_codes = status_code_combined,
+    status_messages = status_message_combined,
+    outcome_messages = outcome_message_combined,
+    records_collapsed = records_collapsed,
     fields_collapsed = fields_collapsed,
-    elapsed_seconds = elapsed_seconds, 
-    status_message = status_message_combined, 
-    success = success_combined
+    elapsed_seconds = elapsed_seconds
   ) )
 }
 

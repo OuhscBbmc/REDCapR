@@ -18,12 +18,15 @@
 #' @param cert_location  If present, this string should point to the location of the cert files required for SSL verification.  If the value is missing or NULL, the server's identity will be verified using a recent CA bundle from the \href{http://curl.haxx.se}{cURL website}.  See the details below. Optional.
 #' @return Currently, a list is returned with the following elements,
 #' \enumerate{
-#'  \item \code{data}: an R \code{data.frame} of the desired records and columns.
-#'  \item \code{raw_csv}: the text of comma separated values returned by REDCap through \code{RCurl}.
-#'  \item \code{records_collapsed}: the desired records IDs, collapsed into a single string, separated by commas.
-#'  \item \code{fields_collapsed}: the desired field names, collapsed into a single string, separated by commas.
-#'  \item \code{elapsed_seconds}: the duration of the function.
-#'  \item \code{status_message}: a boolean value indicating if the operation was apparently successful.
+#'  \item \code{data}: An R \code{data.frame} of the desired records and columns.
+#'  \item \code{success}: A boolean value indicating if the operation was apparently successful.
+#'  \item \code{status_code}: The \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code} of the operation.
+#'  \item \code{status_message}: The message associated with the \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code}.
+#'  \item \code{outcome_message}: A human readable string indicating the operation's outcome.
+#'  \item \code{records_collapsed}: The desired records IDs, collapsed into a single string, separated by commas.
+#'  \item \code{fields_collapsed}: The desired field names, collapsed into a single string, separated by commas.
+#'  \item \code{elapsed_seconds}: The duration of the function.
+#'  \item \code{raw_text}: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
 #' }
 #' @details 
 #' I like how \href{http://sburns.org/PyCap/}{PyCap} creates a `project' object with methods that read and write from REDCap.  However this isn't a style that R clients typically use.
@@ -67,9 +70,8 @@
 
 redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collapsed=NULL, 
                          fields=NULL, fields_collapsed=NULL, 
-                         export_data_access_groups = FALSE,
-                         raw_or_label = 'raw',
-                         verbose=TRUE, cert_location=NULL ) {
+                         export_data_access_groups=FALSE,
+                         raw_or_label='raw', verbose=TRUE, cert_location=NULL ) {
   #TODO: NULL verbose parameter pulls from getOption("verbose")
   #TODO: warns if any requested fields aren't entirely lowercase.
   #TODO: validate export_data_access_groups
@@ -93,68 +95,92 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
   export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
   
   if( missing( cert_location ) | is.null(cert_location) ) 
-    cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs", "mozilla_2013_12_05.crt")
-#     curl_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
+    cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs/mozilla_2014_04_22.crt")
+  # curl_options <- RCurl::curlOptions(ssl.verifypeer=FALSE)
 
   if( !base::file.exists(cert_location) )
       stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
   
-  curl_options <- RCurl::curlOptions(cainfo = cert_location)
+  curl_options <- RCurl::curlOptions(cainfo=cert_location, sslversion=3)
   
-  raw_csv <- RCurl::postForm(
-    uri = redcap_uri
-    , token = token
-    , content = 'record'
-    , format = 'csv'
-    , type = 'flat'
-    , rawOrLabel = raw_or_label
-    , exportDataAccessGroups = export_data_access_groups_string
-    , records = records_collapsed
-    , fields = fields_collapsed
-    , .opts = curl_options
+  # raw_text <- RCurl::postForm(
+  #   uri = redcap_uri
+  #   , token = token
+  #   , content = 'record'
+  #   , format = 'csv'
+  #   , type = 'flat'
+  #   , rawOrLabel = raw_or_label
+  #   , exportDataAccessGroups = export_data_access_groups_string
+  #   , records = records_collapsed
+  #   , fields = fields_collapsed
+  #   , .opts = curl_options
+  # )
+  post_body <- list(
+    token = token,
+    content = 'record',
+    format = 'csv',
+    type = 'flat',
+    rawOrLabel = raw_or_label,
+    exportDataAccessGroups = export_data_access_groups_string,
+    records = records_collapsed,
+    fields = fields_collapsed
   )
-#   print(raw_csv)
   
-  try (
-    ds <- read.csv(text=raw_csv, stringsAsFactors=FALSE), #Convert the raw text to a dataset.
-    silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
+  result <- httr::POST(
+    url = redcap_uri,
+    body = post_body,
+    config = curl_options #RCurl::curlOptions(ssl.verifypeer=FALSE)
   )
-    
+
+  status_code <- result$status
+  status_message <- result$headers$statusmessage
+  success <- (status_code==200L)
+  
+  raw_text <- httr::content(result, "text")  
   elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
   
-  if( exists("ds") ) {
-    #The comma formatting uses the same code as scales::comma, but I don't want to create a package dependency just for commas.
-    status_message <- paste0(format(nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE), 
+  if( success ) {
+    try (
+      ds <- read.csv(text=raw_text, stringsAsFactors=FALSE), #Convert the raw text to a dataset.
+      silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
+    )
+    
+    #The comma formatting uses the same code as scales::comma, but I don't want to create a package dependency just for commas (https://github.com/hadley/scales/blob/master/R/formatter.r).
+    outcome_message <- paste0(format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
                              " records and ",  
-                             format(length(ds), big.mark = ",", scientific = FALSE, trim = TRUE), 
+                             format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
                              " columns were read from REDCap in ", 
-                             round(elapsed_seconds, 2), " seconds.")
-    success <- TRUE
+                             round(elapsed_seconds, 2), " seconds.  The http status code and message were ",
+                             status_code, ": ", status_message, ".")
+    
+    #If an operation is successful, the `raw_text` is no longer returned to save RAM.  It's not really necessary with httr's status message exposed.
+    raw_text <- "" 
   }
   else {
     ds <- data.frame() #Return an empty data.frame
-    status_message <- paste0("Reading the REDCap data was not successful.  The error message was:\n", 
-                             geterrmessage())
-    success <- FALSE
+    #outcome_message <- paste0("Reading the REDCap data was not successful.  The error message was:\n",  geterrmessage())
+    outcome_message <- paste0("Reading the REDCap data was not successful.  The error message was:\n",  raw_text)
   }
     
   if( verbose ) 
-    message(status_message)
+    message(outcome_message)
   
   return( list(
     data = ds, 
-    raw_csv = raw_csv,
+    success = success,
+    status_code = status_code,
+    status_message = status_message, 
+    outcome_message = outcome_message,
     records_collapsed = records_collapsed, 
     fields_collapsed = fields_collapsed,
-    elapsed_seconds = elapsed_seconds, 
-    status_message = status_message, 
-    success = success
+    elapsed_seconds = elapsed_seconds,
+    raw_text = raw_text
   ) )
 }
 
 # curl_options <- RCurl::curlOptions(cainfo = cert_location)
 
-# raw_csv <- RCurl::postForm(
+# raw_text <- RCurl::postForm(
 #   uri = "https://bbmc.ouhsc.edu/redcap/api/"
 #   , token = "9A81268476645C4E5F03428B8AC3AA7B"
 #   , content = 'record'

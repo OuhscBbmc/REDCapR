@@ -11,13 +11,13 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, cert_loca
     stop("The required parameter `token` was missing from the call to `redcap_write_oneshot()`.")     
   
   if( missing( cert_location ) | is.null(cert_location) ) 
-    cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs", "mozilla_2013_12_05.crt")
-  #     curl_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
+    cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs/mozilla_2014_04_22.crt")
+  #     curl_options <- RCurl::curlOptions(ssl.verifypeer=FALSE)
   
   if( !base::file.exists(cert_location) )
     stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
   
-  curl_options <- RCurl::curlOptions(cainfo = cert_location)
+  curl_options <- RCurl::curlOptions(cainfo=cert_location, sslversion=3)
   
   con <-  base::textConnection(object='csvElements', open='w', local=TRUE)
   write.csv(ds, con, row.names = FALSE, na="")  
@@ -26,25 +26,49 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, cert_loca
   csv <- paste(csvElements, collapse="\n")
   rm(csvElements, con)
   
-  returnContent <- RCurl::postForm(
-    uri = redcap_uri, 
+  # returnContent <- RCurl::postForm(
+  #   uri = redcap_uri, 
+  #   token = token,
+  #   content = 'record',
+  #   format = 'csv', 
+  #   type = 'flat', 
+  #   returnContent = "ids",
+  #   overwriteBehavior = 'overwrite', #overwriteBehavior: *normal* - blank/empty values will be ignored [default]; *overwrite* - blank/empty values are valid and will overwrite data
+  #   data = csv,
+  #   .opts = curl_options
+  # )
+  post_body <- list(
     token = token,
     content = 'record',
-    format = 'csv', 
-    type = 'flat', 
-    returnContent = "ids",
-    overwriteBehavior = 'overwrite', #overwriteBehavior: *normal* - blank/empty values will be ignored [default]; *overwrite* - blank/empty values are valid and will overwrite data
+    format = 'csv',
+    type = 'flat',
+    
+    #These next values separate the import from the export API call
     data = csv,
-    .opts = curl_options
+    overwriteBehavior = 'overwrite', #overwriteBehavior: *normal* - blank/empty values will be ignored [default]; *overwrite* - blank/empty values are valid and will overwrite data
+    returnContent = 'ids',
+    returnFormat = 'csv'  
   )
+  
+  result <- httr::POST(
+    url = redcap_uri,
+    body = post_body,
+    config = curl_options #RCurl::curlOptions(ssl.verifypeer=FALSE)
+  )
+  
+  status_code <- result$status_code
+  status_message <- result$headers$statusmessage
+  raw_text <- httr::content(result, type="text")
   elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time,units="secs"))    
   
-  isValidIDList <- grepl(pattern="^id\\n.{1,}", x=returnContent, perl=TRUE) #example: x="id\n5835\n5836\n5837\n5838\n5839"
-  if( isValidIDList ) {
-    elements <- unlist(strsplit(returnContent, split="\\n"))
+  #isValidIDList <- grepl(pattern="^id\\n.{1,}", x=raw_text, perl=TRUE) #example: x="id\n5835\n5836\n5837\n5838\n5839"
+  success <- (status_code == 200L)
+    
+  if( success ) {
+    elements <- unlist(strsplit(raw_text, split="\\n"))
     affectedIDs <- elements[-1]  
     recordsAffectedCount <- length(affectedIDs)
-    status_message <- paste0(format(recordsAffectedCount, big.mark = ",", scientific = FALSE, trim = TRUE), 
+    outcome_message <- paste0(format(recordsAffectedCount, big.mark = ",", scientific = FALSE, trim = TRUE), 
                              " records were written to REDCap in ", 
                              round(elapsed_seconds, 2), 
                              " seconds.")
@@ -52,18 +76,22 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, cert_loca
   else { #If the returned content wasn't recognized as valid IDs, then
     affectedIDs <- numeric() #Pass an empty array
     recordsAffectedCount <- NA
-    status_message <- "The content returned during the write operation was not recognized.  Please see the `returnContent` element for more information." 
+    outcome_message <- "The content returned during the write operation was not recognized.  Please see the `returnContent` element for more information." 
   }
   if( verbose ) 
-    message(status_message)
+    message(outcome_message)
+  
+#   browser()
   
   return( list(
+    success = success,
+    status_code = status_code,
+    status_message = status_message, 
+    outcome_message = outcome_message,
     records_affected_count = recordsAffectedCount,
     affected_ids = affectedIDs,
-    elapsed_seconds = elapsed_seconds, 
-    status_message = status_message, 
-    return_content = returnContent, 
-    success = isValidIDList
+    elapsed_seconds = elapsed_seconds,
+    raw_text = raw_text    
   ))
 }
 
@@ -89,6 +117,7 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, cert_loca
 #                                                                                                                                                                                                                                                                                                                                                                                       "age", "ethnicity", "race", "sex", "height", "weight", "bmi", 
 #                                                                                                                                                                                                                                                                                                                                                                                       "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, 
 #                                                                                                                                                                                                                                                                                                                                                                                                                                                                 -5L))
+# dsToWrite$age <- NULL; dsToWrite$bmi <- NULL #Drop the calculated fields
 # dsToWrite <- dsToWrite[1:3, ]
 # result <- REDCapR:::redcap_write_oneshot(ds=dsToWrite, redcap_uri="https://bbmc.ouhsc.edu/redcap/api/", token = "9A81268476645C4E5F03428B8AC3AA7B")
 # str(result$affected_ids)

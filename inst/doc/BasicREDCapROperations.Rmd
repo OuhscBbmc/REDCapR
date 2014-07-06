@@ -92,11 +92,11 @@ ds_some_fields_v2 #Inspect the returned dataset
 ### Additional Returned Information
 The examples above have shown only the resulting `data.frame`, by specifying `$data` at the end of the call.  However, more is available to those wanting additional information, such as
  1. The `data` object has the `data.frame`, as in the previous examples.
- 1. The `raw_csv` returned by the REDCap API. This might display helpful error messages, in the event something went wrong.
+ 1. The `raw_text` returned by the REDCap API. This might display helpful error messages, in the event something went wrong.
  1. The `records_collapsed` field passed to the API.  This shows which record subsets, if any, were requested.
  1. The `fields_collapsed` fields passed to the API.  This shows which field subsets, if any, were requested.
  1. The `elapsed_seconds` measures the duration of the call.
- 1. The `status_message` has the number of rows and columns read in a successful operation.  In an unsuccessful operation, it should contain diagnostic information.
+ 1. The `outcome_message` has the number of rows and columns read in a successful operation.  In an unsuccessful operation, it should contain diagnostic information.
  1. The `success` boolean value indicates if `redcap_read_oneshot` believes the operation completed as intended.
 
 ```{r read_not_just_dataframe}

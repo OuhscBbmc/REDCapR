@@ -11,7 +11,7 @@ Account <- setRefClass("Account",
                            "Withdraw1 money from account. Allows overdrafts"
                            balance1 <<- balance1 - x
                          },
-                         withdraw2 = function(x) {
+                         withdraw2 = function(x, longParameterName1, longParameterName2, longParameterName3, longParameterName4, longParameterName5) {
                            "Withdraw2 money from account. Allows overdrafts"
                            balance2 <<- balance2 - x
                          }

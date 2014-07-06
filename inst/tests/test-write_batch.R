@@ -28,7 +28,7 @@ test_that("Smoke Test", {
                                                                                                                                                                                                                                                                                                                                                                                         "age", "ethnicity", "race", "sex", "height", "weight", "bmi", 
                                                                                                                                                                                                                                                                                                                                                                                         "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                   -5L))
-  
+  dsToWrite$age <- NULL; dsToWrite$bmi <- NULL #Drop the calculated fields
   
   expect_message(
     returned_object <- REDCapR:::redcap_write(batch_size=2L, ds=dsToWrite, redcap_uri=uri, token=token, verbose=T)    

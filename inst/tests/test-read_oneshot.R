@@ -22,7 +22,7 @@ test_that("All Records -Default", {
     "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
-    "1955-04-15"), age = c(10L, 10L, 79L, 61L, 58L), ethnicity = c(1L, 
+    "1955-04-15"), age = c(10L, 11L, 79L, 61L, 58L), ethnicity = c(1L, 
     1L, 0L, 1L, 1L), race = c(2L, 6L, 4L, 4L, 4L), sex = c(0L, 1L, 
     1L, 0L, 1L), height = c(5, 6, 180, 165, 193.04), weight = c(1L, 
     1L, 80L, 54L, 104L), bmi = c(400, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
@@ -34,18 +34,23 @@ test_that("All Records -Default", {
     "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, 
     -5L))
   expected_csv <- structure("record_id,first_name,last_name,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete\n\"1\",\"Nutmeg\",\"Nutmouse\",\"14 Rose Cottage St.\r\nKenning UK, 323232\",\"(432) 456-4848\",\"nutty@mouse.com\",\"2003-08-30\",10,1,2,0,5,1,400,\"Character in a book, with some guessing\",2\n\"2\",\"Tumtum\",\"Nutmouse\",\"14 Rose Cottage Blvd.\r\nKenning UK 34243\",\"(234) 234-2343\",\"tummy@mouse.comm\",\"2003-03-10\",10,1,6,1,6,1,277.8,\"A mouse character from a good book\",2\n\"3\",\"Marcus\",\"Wood\",\"243 Hill St.\r\nGuthrie OK 73402\",\"(433) 435-9865\",\"mw@mwood.net\",\"1934-04-09\",79,0,4,1,180,80,24.7,\"completely made up\",2\n\"4\",\"Trudy\",\"DAG\",\"342 Elm\r\nDuncanville TX, 75116\",\"(987) 654-3210\",\"peroxide@blonde.com\",\"1952-11-02\",61,1,4,0,165,54,19.8,\"This record doesn't have a DAG assigned\r\n\r\nSo call up Trudy on the telephone\r\nSend her a letter in the mail\",2\n\"5\",\"John Lee\",\"Walker\",\"Hotel Suite\r\nNew Orleans LA, 70115\",\"(333) 333-4444\",\"left@hippocket.com\",\"1955-04-15\",58,1,4,1,193.04,104,27.9,\"Had a hand for trouble and a eye for cash\r\n\r\nHe had a gold watch chain and a black mustache\",2\n", "`Content-Type`" = structure(c("text/html", "utf-8"), .Names = c("", "charset")))
-  expected_status_message <- "5 records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "5 records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
     returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, verbose=T),
-    regexp = expected_status_message
+    regexp = expected_outcome_message
   )
   
+  returned_object$data$age
+  expected_data_frame$age
+  
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-#   expect_equivalent(returned_object$raw_csv, expected=expected_csv) # dput(returned_object$raw_csv)
+  expect_equal(returned_object$status_code, expected=200L)
+  expect_match(returned_object$status_message, regexp="^OK", perl=TRUE) #For some reason, thhe win-builder was returning "OK\r\n".  No other windows r-dev version were fine.
+  expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
   expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
   expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
-  expect_match(returned_object$status_message, regexp=expected_status_message, perl=TRUE)
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
 test_that("All Records -Raw", {  
@@ -58,7 +63,7 @@ test_that("All Records -Raw", {
     "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
-    "1955-04-15"), age = c(10L, 10L, 79L, 61L, 58L), ethnicity = c(1L, 
+    "1955-04-15"), age = c(10L, 11L, 79L, 61L, 58L), ethnicity = c(1L, 
     1L, 0L, 1L, 1L), race = c(2L, 6L, 4L, 4L, 4L), sex = c(0L, 1L, 
     1L, 0L, 1L), height = c(5, 6, 180, 165, 193.04), weight = c(1L, 
     1L, 80L, 54L, 104L), bmi = c(400, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
@@ -70,18 +75,20 @@ test_that("All Records -Raw", {
     "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, 
     -5L))
   expected_csv <- structure("record_id,first_name,last_name,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete\n\"1\",\"Nutmeg\",\"Nutmouse\",\"14 Rose Cottage St.\r\nKenning UK, 323232\",\"(432) 456-4848\",\"nutty@mouse.com\",\"2003-08-30\",10,1,2,0,5,1,400,\"Character in a book, with some guessing\",2\n\"2\",\"Tumtum\",\"Nutmouse\",\"14 Rose Cottage Blvd.\r\nKenning UK 34243\",\"(234) 234-2343\",\"tummy@mouse.comm\",\"2003-03-10\",10,1,6,1,6,1,277.8,\"A mouse character from a good book\",2\n\"3\",\"Marcus\",\"Wood\",\"243 Hill St.\r\nGuthrie OK 73402\",\"(433) 435-9865\",\"mw@mwood.net\",\"1934-04-09\",79,0,4,1,180,80,24.7,\"completely made up\",2\n\"4\",\"Trudy\",\"DAG\",\"342 Elm\r\nDuncanville TX, 75116\",\"(987) 654-3210\",\"peroxide@blonde.com\",\"1952-11-02\",61,1,4,0,165,54,19.8,\"This record doesn't have a DAG assigned\r\n\r\nSo call up Trudy on the telephone\r\nSend her a letter in the mail\",2\n\"5\",\"John Lee\",\"Walker\",\"Hotel Suite\r\nNew Orleans LA, 70115\",\"(333) 333-4444\",\"left@hippocket.com\",\"1955-04-15\",58,1,4,1,193.04,104,27.9,\"Had a hand for trouble and a eye for cash\r\n\r\nHe had a gold watch chain and a black mustache\",2\n", "`Content-Type`" = structure(c("text/html", "utf-8"), .Names = c("", "charset")))
-  expected_status_message <- "5 records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "5 records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
     returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="raw", verbose=T),
-    regexp = expected_status_message
+    regexp = expected_outcome_message
   )
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-#   expect_equivalent(returned_object$raw_csv, expected=expected_csv) # dput(returned_object$raw_csv)
+  expect_equal(returned_object$status_code, expected=200L)
+  expect_match(returned_object$status_message, regexp="^OK", perl=TRUE) #For some reason, thhe win-builder was returning "OK\r\n".  No other windows r-dev version were fine.
+  expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
   expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
   expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
-  expect_match(returned_object$status_message, regexp=expected_status_message, perl=TRUE)
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
 
@@ -96,7 +103,7 @@ test_that("All Records -Raw", {
     "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
-    "1955-04-15"), age = c(10L, 10L, 79L, 61L, 58L), ethnicity = c(1L, 
+    "1955-04-15"), age = c(10L, 11L, 79L, 61L, 58L), ethnicity = c(1L, 
     1L, 0L, 1L, 1L), race = c(2L, 6L, 4L, 4L, 4L), sex = c(0L, 1L, 
     1L, 0L, 1L), height = c(5, 6, 180, 165, 193.04), weight = c(1L, 
     1L, 80L, 54L, 104L), bmi = c(400, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
@@ -108,18 +115,20 @@ test_that("All Records -Raw", {
     "height", "weight", "bmi", "comments", "demographics_complete"
     ), class = "data.frame", row.names = c(NA, -5L))
   expected_csv <- structure("record_id,redcap_data_access_group,first_name,last_name,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete\n\"1\",\"dag_1\",\"Nutmeg\",\"Nutmouse\",\"14 Rose Cottage St.\r\nKenning UK, 323232\",\"(432) 456-4848\",\"nutty@mouse.com\",\"2003-08-30\",10,1,2,0,5,1,400,\"Character in a book, with some guessing\",2\n\"2\",\"dag_1\",\"Tumtum\",\"Nutmouse\",\"14 Rose Cottage Blvd.\r\nKenning UK 34243\",\"(234) 234-2343\",\"tummy@mouse.comm\",\"2003-03-10\",10,1,6,1,6,1,277.8,\"A mouse character from a good book\",2\n\"3\",\"dag_1\",\"Marcus\",\"Wood\",\"243 Hill St.\r\nGuthrie OK 73402\",\"(433) 435-9865\",\"mw@mwood.net\",\"1934-04-09\",79,0,4,1,180,80,24.7,\"completely made up\",2\n\"4\",\"\",\"Trudy\",\"DAG\",\"342 Elm\r\nDuncanville TX, 75116\",\"(987) 654-3210\",\"peroxide@blonde.com\",\"1952-11-02\",61,1,4,0,165,54,19.8,\"This record doesn't have a DAG assigned\r\n\r\nSo call up Trudy on the telephone\r\nSend her a letter in the mail\",2\n\"5\",\"dag_2\",\"John Lee\",\"Walker\",\"Hotel Suite\r\nNew Orleans LA, 70115\",\"(333) 333-4444\",\"left@hippocket.com\",\"1955-04-15\",58,1,4,1,193.04,104,27.9,\"Had a hand for trouble and a eye for cash\r\n\r\nHe had a gold watch chain and a black mustache\",2\n", "`Content-Type`" = structure(c("text/html", "utf-8"), .Names = c("", "charset")))
-  expected_status_message <- "5 records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "5 records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
     returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="raw", export_data_access_groups="true", verbose=T),
-    regexp = expected_status_message
+    regexp = expected_outcome_message
   )
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-#   expect_equivalent(returned_object$raw_csv, expected=expected_csv) # dput(returned_object$raw_csv)
+  expect_equal(returned_object$status_code, expected=200L)
+  expect_match(returned_object$status_message, regexp="^OK", perl=TRUE) #For some reason, thhe win-builder was returning "OK\r\n".  No other windows r-dev version were fine.
+  expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
   expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
   expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
-  expect_match(returned_object$status_message, regexp=expected_status_message, perl=TRUE)
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
 
@@ -134,7 +143,7 @@ test_that("All Records -label and DAG", {
     "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
-    "1955-04-15"), age = c(10L, 10L, 79L, 61L, 58L), ethnicity = c("NOT Hispanic or Latino", 
+    "1955-04-15"), age = c(10L, 11L, 79L, 61L, 58L), ethnicity = c("NOT Hispanic or Latino", 
     "NOT Hispanic or Latino", "Hispanic or Latino", "NOT Hispanic or Latino", 
     "NOT Hispanic or Latino"), race = c("Native Hawaiian or Other Pacific Islander", 
     "Unknown / Not Reported", "White", "White", "White"), sex = c("Female", 
@@ -150,18 +159,20 @@ test_that("All Records -label and DAG", {
     "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              -5L))
   expected_csv <- structure("record_id,redcap_data_access_group,first_name,last_name,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete\n\"1\",\"dag_1\",\"Nutmeg\",\"Nutmouse\",\"14 Rose Cottage St.\r\nKenning UK, 323232\",\"(432) 456-4848\",\"nutty@mouse.com\",\"2003-08-30\",10,\"NOT Hispanic or Latino\",\"Native Hawaiian or Other Pacific Islander\",\"Female\",5,1,400,\"Character in a book, with some guessing\",\"Complete\"\n\"2\",\"dag_1\",\"Tumtum\",\"Nutmouse\",\"14 Rose Cottage Blvd.\r\nKenning UK 34243\",\"(234) 234-2343\",\"tummy@mouse.comm\",\"2003-03-10\",10,\"NOT Hispanic or Latino\",\"Unknown / Not Reported\",\"Male\",6,1,277.8,\"A mouse character from a good book\",\"Complete\"\n\"3\",\"dag_1\",\"Marcus\",\"Wood\",\"243 Hill St.\r\nGuthrie OK 73402\",\"(433) 435-9865\",\"mw@mwood.net\",\"1934-04-09\",79,\"Hispanic or Latino\",\"White\",\"Male\",180,80,24.7,\"completely made up\",\"Complete\"\n\"4\",\"\",\"Trudy\",\"DAG\",\"342 Elm\r\nDuncanville TX, 75116\",\"(987) 654-3210\",\"peroxide@blonde.com\",\"1952-11-02\",61,\"NOT Hispanic or Latino\",\"White\",\"Female\",165,54,19.8,\"This record doesn't have a DAG assigned\r\n\r\nSo call up Trudy on the telephone\r\nSend her a letter in the mail\",\"Complete\"\n\"5\",\"dag_2\",\"John Lee\",\"Walker\",\"Hotel Suite\r\nNew Orleans LA, 70115\",\"(333) 333-4444\",\"left@hippocket.com\",\"1955-04-15\",58,\"NOT Hispanic or Latino\",\"White\",\"Male\",193.04,104,27.9,\"Had a hand for trouble and a eye for cash\r\n\r\nHe had a gold watch chain and a black mustache\",\"Complete\"\n", "`Content-Type`" = structure(c("text/html", "utf-8"), .Names = c("", "charset")))
-  expected_status_message <- "5 records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "5 records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
     returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="label", export_data_access_groups="true", verbose=T),
-    regexp = expected_status_message
+    regexp = expected_outcome_message
   )
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-#   expect_equivalent(returned_object$raw_csv, expected=expected_csv) # dput(returned_object$raw_csv)
+  expect_equal(returned_object$status_code, expected=200L)
+  expect_match(returned_object$status_message, regexp="^OK", perl=TRUE) #For some reason, thhe win-builder was returning "OK\r\n".  No other windows r-dev version were fine.
+  expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
   expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
   expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
-  expect_match(returned_object$status_message, regexp=expected_status_message, perl=TRUE)
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
 
@@ -175,7 +186,7 @@ test_that("All Records -label", {
     "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
-    "1955-04-15"), age = c(10L, 10L, 79L, 61L, 58L), ethnicity = c("NOT Hispanic or Latino", 
+    "1955-04-15"), age = c(10L, 11L, 79L, 61L, 58L), ethnicity = c("NOT Hispanic or Latino", 
     "NOT Hispanic or Latino", "Hispanic or Latino", "NOT Hispanic or Latino", 
     "NOT Hispanic or Latino"), race = c("Native Hawaiian or Other Pacific Islander", 
     "Unknown / Not Reported", "White", "White", "White"), sex = c("Female", 
@@ -191,17 +202,19 @@ test_that("All Records -label", {
     "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, -5L))
 
   expected_csv <- structure("record_id,first_name,last_name,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete\n\"1\",\"Nutmeg\",\"Nutmouse\",\"14 Rose Cottage St.\r\nKenning UK, 323232\",\"(432) 456-4848\",\"nutty@mouse.com\",\"2003-08-30\",10,\"NOT Hispanic or Latino\",\"Native Hawaiian or Other Pacific Islander\",\"Female\",5,1,400,\"Character in a book, with some guessing\",\"Complete\"\n\"2\",\"Tumtum\",\"Nutmouse\",\"14 Rose Cottage Blvd.\r\nKenning UK 34243\",\"(234) 234-2343\",\"tummy@mouse.comm\",\"2003-03-10\",10,\"NOT Hispanic or Latino\",\"Unknown / Not Reported\",\"Male\",6,1,277.8,\"A mouse character from a good book\",\"Complete\"\n\"3\",\"Marcus\",\"Wood\",\"243 Hill St.\r\nGuthrie OK 73402\",\"(433) 435-9865\",\"mw@mwood.net\",\"1934-04-09\",79,\"Hispanic or Latino\",\"White\",\"Male\",180,80,24.7,\"completely made up\",\"Complete\"\n\"4\",\"Trudy\",\"DAG\",\"342 Elm\r\nDuncanville TX, 75116\",\"(987) 654-3210\",\"peroxide@blonde.com\",\"1952-11-02\",61,\"NOT Hispanic or Latino\",\"White\",\"Female\",165,54,19.8,\"This record doesn't have a DAG assigned\r\n\r\nSo call up Trudy on the telephone\r\nSend her a letter in the mail\",\"Complete\"\n\"5\",\"John Lee\",\"Walker\",\"Hotel Suite\r\nNew Orleans LA, 70115\",\"(333) 333-4444\",\"left@hippocket.com\",\"1955-04-15\",58,\"NOT Hispanic or Latino\",\"White\",\"Male\",193.04,104,27.9,\"Had a hand for trouble and a eye for cash\r\n\r\nHe had a gold watch chain and a black mustache\",\"Complete\"\n", "`Content-Type`" = structure(c("text/html", "utf-8"), .Names = c("", "charset")))
-  expected_status_message <- "5 records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "5 records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
     returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="label", export_data_access_groups="false", verbose=T),
-    regexp = expected_status_message
+    regexp = expected_outcome_message
   )
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-#   expect_equivalent(returned_object$raw_csv, expected=expected_csv) # dput(returned_object$raw_csv)
+  expect_equal(returned_object$status_code, expected=200L)
+  expect_match(returned_object$status_message, regexp="^OK", perl=TRUE) #For some reason, thhe win-builder was returning "OK\r\n".  No other windows r-dev version were fine.
+  expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
   expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
   expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
-  expect_match(returned_object$status_message, regexp=expected_status_message, perl=TRUE)
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
