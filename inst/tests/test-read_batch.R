@@ -244,9 +244,8 @@ test_that("All Records -Default", {
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_true(returned_object$success)
   expect_match(returned_object$status_codes, regexp="200; 200; 200", perl=TRUE)
-  expect_match(returned_object$status_messages, regexp="OK; OK; OK", perl=TRUE)
+  expect_match(returned_object$status_messages, regexp="OK.*; OK.*; OK") #Sometimes the Status Message have line breaks appended at the end.
   expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
   expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
   expect_match(returned_object$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
-
 })

@@ -38,7 +38,7 @@ This section group examines potential problems that occur after it leaves a work
  <img src="./images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>
 
  1. **Is Postman installed and operating correctly?**  
- If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/).  The url is `https://bbmc.ouhsc.edu/redcap/api/`.  There are three key-value pairs: (1) the 'token' is `9A81268476645C4E5F03428B8AC3AA7B`, (2) the 'content' is `record`, and (3) the 'format' should be `CSV`.  When checking your own server, the token value should change, but the content and format should not.  It should return five records in a CSV format.  The 'status' should be `200 OK`.  The result should look roughly like:
+ If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/).  The url is `https://bbmc.ouhsc.edu/redcap/api/`.  There are three key-value pairs: (1) the 'token' is `9A81268476645C4E5F03428B8AC3AA7B`, (2) the 'content' is `record`, and (3) the 'format' should be `CSV`.  When checking your own server, the token value should change, but the content and format should not.  It should return five records in a CSV format.  The 'status' should be `200 OK`.  The result should look roughly like this.  Notice the line breaks were included in the text values themselves.
 
   ```
   record_id,first_name,last_name,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete
@@ -74,10 +74,10 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
  1. **Is RCurl installed on the user's local machine?**  
  If so, running `require(RCurl)` should produce the following output if you're starting with a fresh session of R:
     
-  ```
-  > require(RCurl)
-  Loading required package: RCurl
-  Loading required package: bitops
+  ```r
+    > require(RCurl)
+    ## Loading required package: RCurl
+    ## Loading required package: bitops
   ``` 
    
  1. **Does the user have the most recent version of RCurl?**   
@@ -90,7 +90,7 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
  
  This check avoids SSL in order to simplify the troubleshooting.  SSL is supported by default in the [PyCap](http://sburns.org/PyCap/) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) packages.
     
-  ``` r
+  ```r
     redcap_uri <- "https://bbmc.ouhsc.edu/redcap/api/"
     token <- "9A81268476645C4E5F03428B8AC3AA7B"
     
@@ -107,23 +107,23 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
   ```  
   
   Alternatively, you can try using the [`httr`](http://cran.r-project.org/web/packages/httr/) package, which uses `RCurl` underneath.  `REDCapR` actually uses `httr` directly, instead of `RCurl`.  As of 2014-07-06, this works with the Windows 8 version for libcurl (which is underneath `RCurl), but now with some Linux versions; in this case pass the location of the SSL cert file.
-  
-  ``` r
-  post_body <- list(
-    token = token,
-    content = 'record',
-    format = 'csv',
-    type = 'flat',
-    rawOrLabel = 'raw',
-    exportDataAccessGroups = 'true'
-  )
-  
-  raw_text <- httr::POST(
-    url = redcap_uri,
-    body = post_body,
-    config = RCurl::curlOptions(ssl.verifypeer = FALSE),
-    httr::verbose()
-  )
+    
+  ```r
+    post_body <- list(
+      token = token,
+      content = 'record',
+      format = 'csv',
+      type = 'flat',
+      rawOrLabel = 'raw',
+      exportDataAccessGroups = 'true'
+    )
+    
+    raw_text <- httr::POST(
+      url = redcap_uri,
+      body = post_body,
+      config = httr::config(ssl.verifypeer = FALSE),
+      httr::verbose() #Remove this line to suppress the frequent console updates.
+    )
   ```
   
  1. **Can the user query a *subset* of the REDCap project using RCurl?**   
@@ -185,28 +185,28 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
  1. **Is REDCapR installed on the user's machine?**   
  Currently the easiest way to install REDCapR is with the [devtools](https://github.com/hadley/devtools).  The follow code installs devtools, then installs REDCapR.
   ``` r
-  install.packages("devtools")
-  devtools::install_github(repo="OuhscBbmc/REDCapR")
+    install.packages("devtools")
+    devtools::install_github(repo="OuhscBbmc/REDCapR")
   ```
    
  1. **Does REDCapR load successfully on the user's machine?**    
  If so, running `require(REDCapR)` should produce the following output if you're starting with a fresh session of R:
-  ```
-  > require(REDCapR)
-  Loading required package: REDCapR
+  ```r
+    require(REDCapR)
+    ## Loading required package: REDCapR
   ```
      
  1. **Can the user export from an example project?**    
  This is the same fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/) as in the previous section.
-  ``` r
-  library(REDCapR) #Load the package into the current R session.
-  uri <- "https://bbmc.ouhsc.edu/redcap/api/
-  token <- "9A81268476645C4E5F03428B8AC3AA7B"
-  redcap_read(redcap_uri=uri, token=token)$data
+  ```r
+    require(REDCapR) #Load the package into the current R session.
+    uri <- "https://bbmc.ouhsc.edu/redcap/api/"
+    token <- "9A81268476645C4E5F03428B8AC3AA7B"
+    redcap_read(redcap_uri=uri, token=token)$data
   ```
-  
+
   The previous code should produce output similar to this.  Notice there are five rows and the columns will wrap around, depending on the width of your console window.
-  ``` r
+  ```
 5 records and 1 columns were read from REDCap in 0.41 seconds.
 Starting to read 5 records  at 2014-06-27 17:19:49
 Reading batch 1 of 1, with ids 1 through 5.
@@ -244,7 +244,7 @@ Reading batch 1 of 1, with ids 1 through 5.
  1. **Can the user *export* from their own project?**    
  The code is similar to the previous check, but the `uri` and `token` values will need to be modified.
   ``` r
-  library(REDCapR) #Load the package into the current R session, if you haven't already.
+  require(REDCapR) #Load the package into the current R session, if you haven't already.
   redcap_uri <- "https://the.urlofyourinsitution.edu/api/" #Adapt this to your server.
   token <- "your-secret-token" #Adapt this to your user's token.
   redcap_read(redcap_uri=uri, token=token)$data
@@ -252,7 +252,7 @@ Reading batch 1 of 1, with ids 1 through 5.
  
  Alternatively, a `redcap_project` object can be declared initially, which makes subsequent calls cleaner when the token and url are required only the when the object is declared.
   ``` r
-  library(REDCapR) #Load the package into the current R session, if you haven't already.
+  require(REDCapR) #Load the package into the current R session, if you haven't already.
   uri <- "https://bbmc.ouhsc.edu/redcap/api/"
   token <- "9A81268476645C4E5F03428B8AC3AA7B"  
   project <- redcap_project$new(redcap_uri=uri, token=token)
@@ -271,7 +271,6 @@ Reading batch 1 of 1, with ids 1 through 5.
  
  1. **Is the operation still unsuccessful using REDCapR?**    
  If so the "Can the user query a *entire* REDCap project using RCurl?" check succeeded, but the REDCapR checks did not, consider posting a new [GitHub issue](https://github.com/OuhscBbmc/REDCapR/issues) to the package developers.
- 
- 
+
 ## Document Info
 This document is primarily based on REDCap version 5.11.3, and was last updated 2016-06-27.  A development version of the document is available on GitHub: http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html.
