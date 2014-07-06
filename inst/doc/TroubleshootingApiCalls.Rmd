@@ -1,3 +1,8 @@
+---
+output:
+  html_document:
+    keep_md: yes
+---
 <!--
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{Troubleshooting REDCap API Calls}
