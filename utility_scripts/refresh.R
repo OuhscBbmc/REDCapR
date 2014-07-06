@@ -4,7 +4,7 @@ options(device = "windows") #http://support.rstudio.org/help/discussions/problem
 
 devtools::document()
 devtools::check_doc() #Should return NULL
-#  system("R CMD Rd2pdf --force --output=./DocumentationPeek.pdf ." )
+#  system("R CMD Rd2pdf --no-preview --force --output=./DocumentationPeek.pdf ." )
 
 devtools::run_examples(); #dev.off() #This overwrites the NAMESPACE file too
 # devtools::run_examples(, "redcap_read.Rd")
@@ -24,4 +24,4 @@ devtools::build_vignettes()
 devtools::revdep_check(pkg="REDCapR", recursive=TRUE)
 # devtools::release(check=FALSE) #Careful, the last question ultimately uploads it to CRAN, where you can't delete/reverse your decision.
 
-# devtools::install_github("wibeasley/roxygen")
+# devtools::install_github("klutometis/roxygen")
