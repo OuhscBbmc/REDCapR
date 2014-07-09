@@ -203,6 +203,9 @@ hr {
 
 <p>The function <code>redcap_read_oneshot</code> uses the <a href="http://cran.r-project.org/web/packages/RCurl/index.html"><code>RCurl</code></a> package to call the REDCap API.</p>
 
+<pre><code>## Loading required package: knitr
+</code></pre>
+
 <h3>Set project-wide values.</h3>
 
 <p>There is some information that is specific to the REDCap project, as opposed to an individual operation.  This includes the (1) uri of the server, the (2) token for the user&#39;s project, and the (3) location of the SSL certification store, which is necessary to verify the identity of the REDCap webserver.  </p>
@@ -222,7 +225,7 @@ token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;
 ds_all_rows_all_fields &lt;- redcap_read_oneshot(redcap_uri=uri, token=token)$data
 </code></pre>
 
-<pre><code>5 records and 16 columns were read from REDCap in 0.29 seconds.  The http status code and message were 200: OK
+<pre><code>5 records and 16 columns were read from REDCap in 0.26 seconds.  The http status code and message were 200: OK
 .
 </code></pre>
 
@@ -270,7 +273,7 @@ ds_some_rows_v1 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 0.28 seconds.  The http status code and message were 200: OK
+<pre><code>2 records and 16 columns were read from REDCap in 0.24 seconds.  The http status code and message were 200: OK
 .
 </code></pre>
 
@@ -283,7 +286,7 @@ ds_some_rows_v2 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 0.32 seconds.  The http status code and message were 200: OK
+<pre><code>2 records and 16 columns were read from REDCap in 0.24 seconds.  The http status code and message were 200: OK
 .
 </code></pre>
 
@@ -311,7 +314,7 @@ ds_some_fields_v1 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.29 seconds.  The http status code and message were 200: OK
+<pre><code>5 records and 3 columns were read from REDCap in 0.53 seconds.  The http status code and message were 200: OK
 .
 </code></pre>
 
@@ -324,7 +327,7 @@ ds_some_fields_v2 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.28 seconds.  The http status code and message were 200: OK
+<pre><code>5 records and 3 columns were read from REDCap in 0.62 seconds.  The http status code and message were 200: OK
 .
 </code></pre>
 
@@ -361,7 +364,7 @@ all_information &lt;- redcap_read_oneshot(
 )
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.27 seconds.  The http status code and message were 200: OK
+<pre><code>5 records and 3 columns were read from REDCap in 1.47 seconds.  The http status code and message were 200: OK
 .
 </code></pre>
 
@@ -386,7 +389,7 @@ $status_message
 [1] &quot;OK\r\n&quot;
 
 $outcome_message
-[1] &quot;5 records and 3 columns were read from REDCap in 0.27 seconds.  The http status code and message were 200: OK\r\n.&quot;
+[1] &quot;5 records and 3 columns were read from REDCap in 1.47 seconds.  The http status code and message were 200: OK\r\n.&quot;
 
 $records_collapsed
 NULL
@@ -395,7 +398,7 @@ $fields_collapsed
 [1] &quot;recordid,first_name,age&quot;
 
 $elapsed_seconds
-[1] 0.2682
+[1] 1.465
 
 $raw_text
 [1] &quot;&quot;
@@ -405,7 +408,7 @@ $raw_text
 
 <p>For the sake of documentation and reproducibility, the current vignette was build on a system using the following software.</p>
 
-<pre><code>Report created by Will at 2014-07-06, 18:10:49 -0500
+<pre><code>Report created by Will at 2014-07-09, 14:53:45 -0500
 </code></pre>
 
 <pre><code>R version 3.1.1 RC (2014-07-04 r66071)
@@ -419,12 +422,12 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] REDCapR_0.3-19      stringr_0.6.2       RCurl_1.95-4.1      bitops_1.0-6        plyr_1.8.1         
-[6] httr_0.3.0.99       roxygen2_4.0.1.99   knitr_1.6           testthat_0.8.1.0.99
+[1] knitr_1.6           REDCapR_0.3-20      testthat_0.8.1.0.99
 
 loaded via a namespace (and not attached):
- [1] codetools_0.2-8 devtools_1.5    digest_0.6.4    evaluate_0.5.5  formatR_0.10    memoise_0.2.1   parallel_3.1.1 
- [8] Rcpp_0.11.2     tools_3.1.1     whisker_0.3-2  
+ [1] codetools_0.2-8   devtools_1.5      digest_0.6.4      evaluate_0.5.5    formatR_0.10      httr_0.3.0.99    
+ [7] memoise_0.2.1     parallel_3.1.1    plyr_1.8.1        Rcpp_0.11.2       RCurl_1.95-4.1    roxygen2_4.0.1.99
+[13] stringr_0.6.2     tools_3.1.1       whisker_0.3-2    
 </code></pre>
 
 </body>

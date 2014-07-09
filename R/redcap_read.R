@@ -104,21 +104,24 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
   ###
   ### Continue as intended if the initial query succeeded.
   ###
-  ids <- initial_call$data[, 1]
-  ids <- ids[order(ids)]
+  uniqueIDs <- sort(unique(initial_call$data[, 1]))
   
-  ds_glossary <- REDCapR::create_batch_glossary(row_count=length(ids), batch_size=batch_size)
+  ds_glossary <- REDCapR::create_batch_glossary(row_count=length(uniqueIDs), batch_size=batch_size)
   lst_batch <- NULL
   lst_status_code <- NULL
   lst_status_message <- NULL
   lst_outcome_message <- NULL
   success_combined <- TRUE
   
-  message("Starting to read ", format(length(ids), big.mark=",", scientific=F, trim=T), " records  at ", Sys.time())
+  message("Starting to read ", format(length(uniqueIDs), big.mark=",", scientific=F, trim=T), " records  at ", Sys.time())
   for( i in ds_glossary$id ) {
     selected_index <- seq(from=ds_glossary[i, "start_index"], to=ds_glossary[i, "stop_index"])
-    selected_ids <- ids[selected_index]
-    message("Reading batch ", i, " of ", nrow(ds_glossary), ", with ids ", min(selected_ids), " through ", max(selected_ids), ".")
+    selected_ids <- uniqueIDs[selected_index]
+    if( verbose ) {
+      message("Reading batch ", i, " of ", nrow(ds_glossary), ", with subjects ", min(selected_ids), " through ", max(selected_ids), 
+              " (ie, ", length(selected_ids), " unique subject records).")
+    }
+    
     read_result <- REDCapR::redcap_read_oneshot(redcap_uri = redcap_uri,
                                         token = token,  
                                         records = selected_ids,
