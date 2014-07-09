@@ -6,7 +6,8 @@
 redcap_read(batch_size = 100L, interbatch_delay = 0, redcap_uri, token,
   records = NULL, records_collapsed = NULL, fields = NULL,
   fields_collapsed = NULL, export_data_access_groups = FALSE,
-  raw_or_label = "raw", verbose = TRUE, cert_location = NULL)
+  raw_or_label = "raw", verbose = TRUE, cert_location = NULL,
+  id_position = 1L)
 }
 \arguments{
   \item{batch_size}{The maximum number of subject records a
@@ -55,6 +56,10 @@ redcap_read(batch_size = 100L, interbatch_delay = 0, redcap_uri, token,
   server's identity will be verified using a recent CA
   bundle from the \href{http://curl.haxx.se}{cURL website}.
   See the details below. Optional.}
+
+  \item{id_position}{The column position of the variable
+  that unique identifies the subject.  This defaults to the
+  first variable in the dataset.}
 }
 \value{
 Currently, a list is returned with the following elements,

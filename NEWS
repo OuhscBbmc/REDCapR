@@ -7,6 +7,9 @@ Updates:
 * Renamed the former `status_message` to `outcome_message`. This is because the message associated with http code returned is conventionally called the 'status messages' (eg, OK, Forbidden, Not Found).
 * If an operation is successful, the `raw_text` value` (which was formerly called `raw_csv`) is returned as an empty string to save RAM.  It's not really necessary with httr's status message exposed.
 
+Bug Fixes:
+ * Correct batch reads with longitudinal schema #27
+
 Version 0.2 (Developed 2014-01-14 through 2014-07-02)
 ------------------------------------------------------------------------------
 New Features:

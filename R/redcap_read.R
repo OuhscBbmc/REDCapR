@@ -20,6 +20,7 @@
 #' @param raw_or_label A string (either \code{'raw'} or \code{'label'} that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is \code{'raw'}.
 #' @param verbose A boolean value indicating if \code{message}s should be printed to the R console during the operation.  Optional.
 #' @param cert_location  If present, this string should point to the location of the cert files required for SSL verification.  If the value is missing or NULL, the server's identity will be verified using a recent CA bundle from the \href{http://curl.haxx.se}{cURL website}.  See the details below. Optional.
+#' @param id_position  The column position of the variable that unique identifies the subject.  This defaults to the first variable in the dataset.
 #' 
 #' @return Currently, a list is returned with the following elements,
 #' \enumerate{
@@ -61,7 +62,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
                                fields=NULL, fields_collapsed=NULL, 
                                export_data_access_groups = FALSE,
                                raw_or_label = 'raw',
-                               verbose=TRUE, cert_location=NULL ) {  
+                               verbose=TRUE, cert_location=NULL, id_position=1L ) {  
   if( missing(redcap_uri) )
     stop("The required parameter `redcap_uri` was missing from the call to `redcap_read()`.")
   
@@ -104,7 +105,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
   ###
   ### Continue as intended if the initial query succeeded.
   ###
-  uniqueIDs <- sort(unique(initial_call$data[, 1]))
+  uniqueIDs <- sort(unique(initial_call$data[, id_position]))
   
   ds_glossary <- REDCapR::create_batch_glossary(row_count=length(uniqueIDs), batch_size=batch_size)
   lst_batch <- NULL
