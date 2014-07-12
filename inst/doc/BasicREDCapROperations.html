@@ -222,8 +222,7 @@ token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;
 ds_all_rows_all_fields &lt;- redcap_read_oneshot(redcap_uri=uri, token=token)$data
 </code></pre>
 
-<pre><code>5 records and 16 columns were read from REDCap in 0.29 seconds.  The http status code and message were 200: OK
-.
+<pre><code>5 records and 16 columns were read from REDCap in 0.43 seconds.  The http status code and message were 200: OK.
 </code></pre>
 
 <pre><code class="r">ds_all_rows_all_fields #Inspect the returned dataset
@@ -270,8 +269,7 @@ ds_some_rows_v1 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 0.29 seconds.  The http status code and message were 200: OK
-.
+<pre><code>2 records and 16 columns were read from REDCap in 0.26 seconds.  The http status code and message were 200: OK.
 </code></pre>
 
 <pre><code class="r">#Return only records with IDs of 1 and 3 (alternate way)
@@ -283,8 +281,7 @@ ds_some_rows_v2 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 0.28 seconds.  The http status code and message were 200: OK
-.
+<pre><code>2 records and 16 columns were read from REDCap in 0.25 seconds.  The http status code and message were 200: OK.
 </code></pre>
 
 <pre><code class="r">ds_some_rows_v2 #Inspect the returned dataset
@@ -311,8 +308,7 @@ ds_some_fields_v1 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.24 seconds.  The http status code and message were 200: OK
-.
+<pre><code>5 records and 3 columns were read from REDCap in 0.24 seconds.  The http status code and message were 200: OK.
 </code></pre>
 
 <pre><code class="r">#Return only the fields recordid, first_name, and age (alternate way)
@@ -324,8 +320,7 @@ ds_some_fields_v2 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.24 seconds.  The http status code and message were 200: OK
-.
+<pre><code>5 records and 3 columns were read from REDCap in 1.45 seconds.  The http status code and message were 200: OK.
 </code></pre>
 
 <pre><code class="r">ds_some_fields_v2 #Inspect the returned dataset
@@ -361,8 +356,7 @@ all_information &lt;- redcap_read_oneshot(
 )
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.24 seconds.  The http status code and message were 200: OK
-.
+<pre><code>5 records and 3 columns were read from REDCap in 0.24 seconds.  The http status code and message were 200: OK.
 </code></pre>
 
 <pre><code class="r">all_information #Inspect the additional information
@@ -383,10 +377,10 @@ $status_code
 [1] 200
 
 $status_message
-[1] &quot;OK\r\n&quot;
+[1] &quot;OK&quot;
 
 $outcome_message
-[1] &quot;5 records and 3 columns were read from REDCap in 0.24 seconds.  The http status code and message were 200: OK\r\n.&quot;
+[1] &quot;5 records and 3 columns were read from REDCap in 0.24 seconds.  The http status code and message were 200: OK.&quot;
 
 $records_collapsed
 NULL
@@ -395,7 +389,7 @@ $fields_collapsed
 [1] &quot;recordid,first_name,age&quot;
 
 $elapsed_seconds
-[1] 0.2362
+[1] 0.2449
 
 $raw_text
 [1] &quot;&quot;
@@ -405,10 +399,10 @@ $raw_text
 
 <p>For the sake of documentation and reproducibility, the current vignette was build on a system using the following software.</p>
 
-<pre><code>Report created by Will at 2014-07-09, 15:20:28 -0500
+<pre><code>Report created by Will at 2014-07-12, 13:32:10 -0500
 </code></pre>
 
-<pre><code>R version 3.1.1 RC (2014-07-04 r66071)
+<pre><code>R version 3.1.1 Patched (2014-07-10 r66124)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 locale:
@@ -419,12 +413,13 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] REDCapR_0.3-21      knitr_1.6           testthat_0.8.1.0.99
+[1] knitr_1.6           REDCapR_0.3-22      testthat_0.8.1.0.99
 
 loaded via a namespace (and not attached):
- [1] codetools_0.2-8   devtools_1.5      digest_0.6.4      evaluate_0.5.5    formatR_0.10      httr_0.3.0.99    
- [7] memoise_0.2.1     parallel_3.1.1    plyr_1.8.1        Rcpp_0.11.2       RCurl_1.95-4.1    roxygen2_4.0.1.99
-[13] stringr_0.6.2     tools_3.1.1       whisker_0.3-2    
+ [1] codetools_0.2-8   devtools_1.5      digest_0.6.4      evaluate_0.5.5    formatR_0.10      htmltools_0.2.4  
+ [7] httr_0.3          markdown_0.7      memoise_0.2.1     mime_0.1.1        parallel_3.1.1    plyr_1.8.1       
+[13] Rcpp_0.11.2       RCurl_1.95-4.1    rmarkdown_0.2.49  roxygen2_4.0.1.99 stringr_0.6.2     tools_3.1.1      
+[19] whisker_0.3-2     yaml_2.1.13      
 </code></pre>
 
 </body>

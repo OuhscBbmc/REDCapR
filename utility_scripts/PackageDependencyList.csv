@@ -19,9 +19,10 @@ RCurl,TRUE,TRUE,,Interact with the web APIs
 reshape2,TRUE,TRUE,,Data manipulation not covered in plyr
 RODBC,TRUE,TRUE,,For connecting to ODBC databases
 roxygen,FALSE,TRUE,klutometis,Creates documentation Rd file from (well-formed) comments
-roxygen2,TRUE,FALSE,,Creates documentation Rd file from (well-formed) comments
+rmarkdown,FALSE,TRUE,"rstudio/rmarkdown","Needed for knitr and reports."
 stringr,TRUE,TRUE,,Consistent/convienent function signatures for manipulating text
 testit,TRUE,TRUE,,has the useful `assert()` function
 testthat,FALSE,TRUE,hadley,Heavier testing framework that's good for package development
 xtable,TRUE,TRUE,,"Formats tables, especially for LaTeX output."
+yaml,TRUE,TRUE,,"Needed for knitr and reports."
 zipcode,TRUE,TRUE,,Database of zipcodes and their lat & long; also useful for flagging bad zipcodes
