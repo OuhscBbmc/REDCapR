@@ -57,19 +57,16 @@ boolean value indicating if the operation was apparently
 successful.  \item \code{status_code}: The
 \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http
 status code} of the operation.  \item
-\code{status_message}: The message associated with the
-\href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http
-status code}.  \item \code{outcome_message}: A human
-readable string indicating the operation's outcome.  \item
-\code{records_collapsed}: The desired records IDs,
-collapsed into a single string, separated by commas.  \item
-\code{fields_collapsed}: The desired field names, collapsed
-into a single string, separated by commas.  \item
-\code{elapsed_seconds}: The duration of the function.
-\item \code{raw_text}: If an operation is NOT successful,
-the text returned by REDCap.  If an operation is
-successful, the `raw_text` is returned as an empty string
-to save RAM. }
+\code{outcome_message}: A human readable string indicating
+the operation's outcome.  \item \code{records_collapsed}:
+The desired records IDs, collapsed into a single string,
+separated by commas.  \item \code{fields_collapsed}: The
+desired field names, collapsed into a single string,
+separated by commas.  \item \code{elapsed_seconds}: The
+duration of the function.  \item \code{raw_text}: If an
+operation is NOT successful, the text returned by REDCap.
+If an operation is successful, the `raw_text` is returned
+as an empty string to save RAM. }
 }
 \description{
 This function uses REDCap's

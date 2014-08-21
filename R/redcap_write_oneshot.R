@@ -57,7 +57,7 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, cert_loca
   )
   
   status_code <- result$status_code
-  status_message <- result$headers$statusmessage
+  # status_message <- result$headers$statusmessage
   raw_text <- httr::content(result, type="text")
   elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time,units="secs"))    
   
@@ -86,7 +86,7 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, cert_loca
   return( list(
     success = success,
     status_code = status_code,
-    status_message = status_message, 
+    # status_message = status_message, 
     outcome_message = outcome_message,
     records_affected_count = recordsAffectedCount,
     affected_ids = affectedIDs,

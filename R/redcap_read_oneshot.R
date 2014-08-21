@@ -21,7 +21,6 @@
 #'  \item \code{data}: An R \code{data.frame} of the desired records and columns.
 #'  \item \code{success}: A boolean value indicating if the operation was apparently successful.
 #'  \item \code{status_code}: The \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code} of the operation.
-#'  \item \code{status_message}: The message associated with the \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code}.
 #'  \item \code{outcome_message}: A human readable string indicating the operation's outcome.
 #'  \item \code{records_collapsed}: The desired records IDs, collapsed into a single string, separated by commas.
 #'  \item \code{fields_collapsed}: The desired field names, collapsed into a single string, separated by commas.
@@ -133,7 +132,7 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
   )
 
   status_code <- result$status
-  status_message <- result$headers$statusmessage
+#   status_message <- result$headers$statusmessage
   success <- (status_code==200L)
   
   raw_text <- httr::content(result, "text")  
@@ -150,8 +149,8 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
                              " records and ",  
                              format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
                              " columns were read from REDCap in ", 
-                             round(elapsed_seconds, 2), " seconds.  The http status code and message were ",
-                             status_code, ": ", status_message, ".")
+                             round(elapsed_seconds, 2), " seconds.  The http status code was ",
+                             status_code, ".")
     
     #If an operation is successful, the `raw_text` is no longer returned to save RAM.  It's not really necessary with httr's status message exposed.
     raw_text <- "" 
@@ -169,7 +168,7 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
     data = ds, 
     success = success,
     status_code = status_code,
-    status_message = status_message, 
+    # status_message = status_message, 
     outcome_message = outcome_message,
     records_collapsed = records_collapsed, 
     fields_collapsed = fields_collapsed,
