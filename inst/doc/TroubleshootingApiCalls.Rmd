@@ -8,6 +8,8 @@ output:
 %\VignetteIndexEntry{Troubleshooting REDCap API Calls}
 -->
 
+<!-- rmarkdown v1 -->
+
 # Troubleshooting REDCap API Calls
 There are many links in the pipeline between your institution's [REDCap](http://www.project-redcap.org/) server and the API user.  When the end result is unsuccesful, this document should help narrow the location of the possible problem.  The first two sections will be relevant to almost any language interacting with the API.  The remaining sections are possibly relevant only to your language (eg, Python, R, SAS, bash), or your software library ([redcap](https://github.com/jeffreyhorner/redcap) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) in R and [PyCap](http://sburns.org/PyCap/) in Python).
 
@@ -68,7 +70,7 @@ This section group examines potential problems that occur after it leaves a work
  1. **Can an user query the API successfully with Postman with the their own token?**  
  The values they enter should be exactly the same as those entered in the previous step.  A failure here (assuming the previous step was successful) suggests a network or firewall issue.  If the server is behind your instituion's firewall, verify the user is connecting successfully through the VPN.
  
-## Calling API from R
+## Exporting from REDCap to R
 There are several ways to call REDCap's API from [R](http://cran.r-project.org/).  The packages [redcap](https://github.com/jeffreyhorner/redcap) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) both rely on the [RCurl](http://cran.r-project.org/web/packages/RCurl) package.
  
  1. **Is RCurl installed on the user's local machine?**  
@@ -179,8 +181,10 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
     )
   ```
    
-## Calling API from REDCapR
+## Exporting from REDCap to R, using REDCapR
  [REDCapR](https://github.com/OuhscBbmc/REDCapR) is a package that uses [RCurl](http://cran.r-project.org/web/packages/RCurl) to communicate with REDCap, and wraps convience functions around it to reduce the size and complexity of the user's code.  The package's basic functions are demonstrated in [this vignette](http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/BasicREDCapROperations.html) and are documented in its [reference manual](https://github.com/OuhscBbmc/REDCapR/blob/master/DocumentationPeek.pdf) (click the 'View Raw' link).
+ 
+ If you're not using REDCapR, you can skip this section and proceed to 'Importing into REDCap from R' below.
  
  1. **Is REDCapR installed on the user's machine?**   
  Currently the easiest way to install REDCapR is with the [devtools](https://github.com/hadley/devtools).  The follow code installs devtools, then installs REDCapR.
@@ -241,7 +245,7 @@ Reading batch 1 of 1, with ids 1 through 5.
 5                     2
   ```
       
- 1. **Can the user *export* from their own project?**    
+ 1. **Can the user export from their own project?**    
  The code is similar to the previous check, but the `uri` and `token` values will need to be modified.
   ``` r
   require(REDCapR) #Load the package into the current R session, if you haven't already.
@@ -266,11 +270,18 @@ Reading batch 1 of 1, with ids 1 through 5.
   dsMinors <- project$read(records=idsOfMinors)$data
   ```
       
- 1. **Can the user *import* to their own project?**    
- Writing records can be trickier, because the schema (eg, the names and data types) must match the project.  This section will be expanded in the future.  Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project's schema and dataset.  Also, consider exporting the dataset to your machine, and look for differences.  Note that you cannot import calculated fields into REDCap.
- 
- 1. **Is the operation still unsuccessful using REDCapR?**    
+ 1. **Is the export operation still unsuccessful using REDCapR?**    
  If so the "Can the user query a *entire* REDCap project using RCurl?" check succeeded, but the REDCapR checks did not, consider posting a new [GitHub issue](https://github.com/OuhscBbmc/REDCapR/issues) to the package developers.
 
+## Importing into REDCap from R
+Troubleshooting imports is trickier than exports for two major reasons.  First, the database potentially persists your *import* mistakes.  In contrast, repeatedly *exporting* data won't affect subsequent reads.  Considering cloning the REDCap project for testing until the problem is resolved.  Remember to create a new token (because they're not automatically created, even when users are copied), and to modify your code's token to point to the new testing clone.
+
+ The second reason why importing can be trickier is because the schema (eg, the names and data types) of your local dataset must match the project's schema.  This section will be expanded in the future.  Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project's schema and dataset.  Also, consider exporting the dataset to your machine, and look for differences.  Note that you cannot import calculated fields into REDCap.
+
+ 1. **Can the user import the *entire* project?**
+  
+ 1. **Can the user import a *subset* of the project?**    
+
+ 
 ## Document Info
 This document is primarily based on REDCap version 5.11.3, and was last updated 2016-06-27.  A development version of the document is available on GitHub: http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html.
