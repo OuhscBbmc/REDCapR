@@ -192,6 +192,8 @@ hr {
 %\VignetteIndexEntry{Basic REDCapR Operations}
 -->
 
+<!-- rmarkdown v1 -->
+
 <h1>Basic REDCapR Operations</h1>
 
 <p>This vignette covers the the basic functions exposed by the <a href="https://github.com/OuhscCcanMiechvEvaluation/REDCapR"><code>REDCapR</code></a> package which allow you to interact with <a href="http://www.project-redcap.org/">REDCap</a> through its API.</p>
@@ -199,6 +201,9 @@ hr {
 <h2>Reading REDCap Data</h2>
 
 <p>The function <code>redcap_read_oneshot</code> uses the <a href="http://cran.r-project.org/web/packages/RCurl/index.html"><code>RCurl</code></a> package to call the REDCap API.</p>
+
+<pre><code>## Loading required package: knitr
+</code></pre>
 
 <h3>Set project-wide values.</h3>
 
@@ -219,7 +224,7 @@ token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;
 ds_all_rows_all_fields &lt;- redcap_read_oneshot(redcap_uri=uri, token=token)$data
 </code></pre>
 
-<pre><code>5 records and 16 columns were read from REDCap in 1.55 seconds.  The http status code was 200.
+<pre><code>5 records and 16 columns were read from REDCap in 0.32 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_all_rows_all_fields #Inspect the returned dataset
@@ -278,7 +283,7 @@ ds_some_rows_v2 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 0.35 seconds.  The http status code was 200.
+<pre><code>2 records and 16 columns were read from REDCap in 0.29 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_some_rows_v2 #Inspect the returned dataset
@@ -305,7 +310,7 @@ ds_some_fields_v1 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.34 seconds.  The http status code was 200.
+<pre><code>5 records and 3 columns were read from REDCap in 0.31 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">#Return only the fields recordid, first_name, and age (alternate way)
@@ -317,7 +322,7 @@ ds_some_fields_v2 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.33 seconds.  The http status code was 200.
+<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_some_fields_v2 #Inspect the returned dataset
@@ -353,7 +358,7 @@ all_information &lt;- redcap_read_oneshot(
 )
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.34 seconds.  The http status code was 200.
+<pre><code>5 records and 3 columns were read from REDCap in 0.35 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">all_information #Inspect the additional information
@@ -374,7 +379,7 @@ $status_code
 [1] 200
 
 $outcome_message
-[1] &quot;5 records and 3 columns were read from REDCap in 0.34 seconds.  The http status code was 200.&quot;
+[1] &quot;5 records and 3 columns were read from REDCap in 0.35 seconds.  The http status code was 200.&quot;
 
 $records_collapsed
 NULL
@@ -383,7 +388,7 @@ $fields_collapsed
 [1] &quot;recordid,first_name,age&quot;
 
 $elapsed_seconds
-[1] 0.3352
+[1] 0.3495
 
 $raw_text
 [1] &quot;&quot;
@@ -393,10 +398,10 @@ $raw_text
 
 <p>For the sake of documentation and reproducibility, the current vignette was build on a system using the following software.</p>
 
-<pre><code>Report created by Will at 2014-08-20, 20:33:24 -0500
+<pre><code>Report created by Will at 2014-08-22, 12:14:44 -0500
 </code></pre>
 
-<pre><code>R version 3.1.1 Patched (2014-08-04 r66309)
+<pre><code>R version 3.1.1 Patched (2014-08-19 r66437)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 locale:
@@ -407,7 +412,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] REDCapR_0.3-23      knitr_1.6           testthat_0.8.1.0.99
+[1] knitr_1.6           REDCapR_0.3-24      testthat_0.8.1.0.99
 
 loaded via a namespace (and not attached):
  [1] codetools_0.2-8   devtools_1.5      digest_0.6.4      evaluate_0.5.5    formatR_0.10      httr_0.4         

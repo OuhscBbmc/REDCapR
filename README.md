@@ -11,7 +11,7 @@ ds <- redcap_read(redcap_uri=uri, token=token)$data
 
 The `REDCapR` package includes the [Bundle of CA Root Certificates](http://curl.haxx.se/ca/cacert.pem) from the official [cURL site](http://curl.haxx.se).  Your REDCap server's identity is always verified, unless the setting is overridden (or alternative certificates can also be provided).
 
-The `redcap_read()` function also accepts values for subsetting/filtering the records and fields.  The [current documentation](https://github.com/OuhscBbmc/REDCapR/blob/master/REDCapRDocumentationPeek.pdf) can be found in the [GitHub repository](https://github.com/OuhscBbmc/REDCapR).  A [vignette](http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/BasicREDCapROperations.html) has also been started.
+The `redcap_read()` function also accepts values for subsetting/filtering the records and fields.  The [current documentation](https://github.com/OuhscBbmc/REDCapR/blob/master/DocumentationPeek.pdf) can be found in the [GitHub repository](https://github.com/OuhscBbmc/REDCapR).  A [vignette](http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/BasicREDCapROperations.html) has also been started.
 ```
 #Return only records with IDs of 1 and 4
 desired_records <- c(1, 4)

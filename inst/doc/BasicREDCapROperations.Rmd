@@ -1,7 +1,14 @@
+---
+output:
+  html_document:
+    keep_md: yes    
+---
 <!--
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{Basic REDCapR Operations}
 -->
+
+<!-- rmarkdown v1 -->
 
 # Basic REDCapR Operations
 This vignette covers the the basic functions exposed by the [`REDCapR`](https://github.com/OuhscCcanMiechvEvaluation/REDCapR) package which allow you to interact with [REDCap](http://www.project-redcap.org/) through its API.
