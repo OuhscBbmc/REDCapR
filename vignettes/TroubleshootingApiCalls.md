@@ -1,8 +1,3 @@
----
-output:
-  html_document:
-    keep_md: yes
----
 <!--
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{Troubleshooting REDCap API Calls}
@@ -14,17 +9,17 @@ output:
 There are many links in the pipeline between your institution's [REDCap](http://www.project-redcap.org/) server and the API user.  When the end result is unsuccesful, this document should help narrow the location of the possible problem.  The first two sections will be relevant to almost any language interacting with the API.  The remaining sections are possibly relevant only to your language (eg, Python, R, SAS, bash), or your software library ([redcap](https://github.com/jeffreyhorner/redcap) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) in R and [PyCap](http://pycap.readthedocs.org/en/latest/) in Python).
 
 ## Server Configuration and Authorization
-This first group of checks primarily focuses on the server and the logins accounts.  Unlike the other sections, REDCap administrator privileges are necessary for most of these checks.
+This first group of checks primarily focuses on the server and the logins accounts.  Unlike later sections, REDCap administrator privileges are necessary for most of these checks.
 
  1. **Does the user have an account for the *server*?** 
  This can be verified in the `Browse Users` section of the server's `Control Center`.
- 
+
  1. **Does the user have permissions for the specific *project*?**
  This can be verified in the `User Rights` section within the project.  Notice that it's possible (but ultimately not useful) to have an account here, but not with the server, so don't skip the previous step.
- 
+
  1. **Can the user login in normally through the interface?**
  However if the username and password aren't working, the API theoretically might still work because it uses their token instead of their password.
- 
+
  1. **Has the user verified their account by responding to the automated email sent to them?**
  This can be verified in the `Browse Users` section of your server's `Control Center`.  For each email address they've entered, there should be a green 'Verified' label and icon.
 
@@ -41,7 +36,7 @@ This first group of checks primarily focuses on the server and the logins accoun
   <img src="./images/MagnifyingGlass.png" alt="MagnifyingGlass" style="width: 550px;"/>
 
 ## Language Agnostic API
-This section group examines potential problems that occur after it leaves a working server, but before it is handled by their programming language (eg, Python and R).  [Postman](http://www.getpostman.com/) is a Chrome plugin recommended by [several](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ) [people](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ) that makes trouble shooting much more efficient.
+This section group examines potential problems that occur after it leaves a working server, but before it is handled by their programming language (eg, Python and R).  [Postman](http://www.getpostman.com/) is a Chrome plugin recommended by [several](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ) [people](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ) that makes troubleshooting much more efficient.
 
  <img src="./images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>
 
@@ -71,11 +66,11 @@ This section group examines potential problems that occur after it leaves a work
  As an administrator, create an account for yourself, and verify that your token works on your server and project.
   
  1. **Can an administrator query the API successfully with Postman with the user's token?**
- Use Postman as before, but replace your token with the user's token.  Once the whole problem is solved, consider reissuing a new API token.
- 
+ Use [Postman](http://www.getpostman.com/) as before, but replace your token with the user's token.  Once the whole problem is solved, reissue new API tokens to both you and the user.
+
  1. **Can an user query the API successfully with Postman with the their own token?**
- The values they enter should be exactly the same as those entered in the previous step.  A failure here (assuming the previous step was successful) suggests a network or firewall issue.  If the server is behind your instituion's firewall, verify the user is connecting successfully through the VPN.
- 
+ The values they enter should be exactly the same as those entered in the previous step.  A failure here (assuming the previous step was successful) suggests a network or firewall issue.  If the server is behind your institution's firewall, verify the user is connecting successfully through the VPN.
+
 ## Exporting from REDCap to R
 There are several ways to call REDCap's API from [R](http://cran.r-project.org/).  The packages [redcap](https://github.com/jeffreyhorner/redcap) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) both rely on the [RCurl](http://cran.r-project.org/web/packages/RCurl) package.
  
@@ -89,13 +84,13 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
   ``` 
 
  1. **Does the user have the most recent version of RCurl?**   
- There are several ways to do this, but the easiest is probably to run `update.packages(ask=FALSE)`.  That optional argument prevents the user from needing to respond 'Y' to updating each outdated package.
+ There are several ways to do this, but the easiest is probably to run `update.packages(ask=FALSE, repos="http://cran.rstudio.com")`.  The optional argument `ask` prevents the user from needing to respond 'Y' to each outdated package.
  
  1. **Can the user query a *test* project using RCurl?**
  Both the [redcap](https://github.com/jeffreyhorner/redcap) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) packages employ something similar to the following function in [RCurl](http://cran.r-project.org/web/packages/RCurl).  If you're curious, here is the relevant source code for [redcap](https://github.com/jeffreyhorner/redcap/blob/master/R/exportRecords.R) and [REDCapR](https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap_read_oneshot.R).
- 
- If this fails, consider attempting again with the uri and token used above in the Postman example.
- 
+
+ If this check fails, consider attempting again with the uri and token used above in the Postman example.
+
  This check avoids SSL in order to simplify the troubleshooting.  SSL is supported by default in the [PyCap](http://pycap.readthedocs.org/en/latest/) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) packages.
 
   ```r
@@ -114,7 +109,7 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
     )
   ```  
 
-  Alternatively, you can try using the [`httr`](http://cran.r-project.org/web/packages/httr/) package, which uses `RCurl` underneath.  `REDCapR` actually uses `httr` directly, instead of `RCurl`.  As of 2014-07-06, this works with the Windows 8 version for libcurl (which is underneath `RCurl), but not with some Linux versions; in this case pass the location of the SSL cert file.
+  Alternatively, you can try using the [`httr`](http://cran.r-project.org/web/packages/httr/) package, which uses `RCurl` underneath.  `REDCapR` actually uses `httr` directly, instead of `RCurl`.  As of 2014-07-06, this works with the Windows 8 version for [libcurl](http://curl.haxx.se/libcurl/) (which is underneath `RCurl), but not with some Linux versions; in this case pass the location of the SSL cert file.
 
   ```r
     post_body <- list(
@@ -125,7 +120,7 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
       rawOrLabel = 'raw',
       exportDataAccessGroups = 'true'
     )
-    
+
     raw_text <- httr::POST(
       url = redcap_uri,
       body = post_body,
@@ -169,7 +164,7 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
     token <- "your-secret-token" #Adapt this to your user's token.
     records_collapsed <- NULL
     fields_collapsed <- NULL
-    
+
     raw_text <- RCurl::postForm(
       uri = redcap_uri
       , token = token
@@ -192,7 +187,7 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
  1. **Is REDCapR installed on the user's machine?**   
  Currently the easiest way to install REDCapR is with the [devtools](https://github.com/hadley/devtools).  The follow code installs devtools, then installs REDCapR.
   ``` r
-    install.packages("devtools")
+    install.packages("devtools", repos="http://cran.rstudio.com")
     devtools::install_github(repo="OuhscBbmc/REDCapR")
   ```
 
@@ -212,7 +207,7 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
     redcap_read(redcap_uri=uri, token=token)$data
   ```
 
-  The previous code should produce output similar to this.  Notice there are five rows and the columns will wrap around, depending on the width of your console window.
+  The previous code should produce similar output.  Notice there are five rows and the columns will wrap around if your console window is too narrow.
   ```
 5 records and 1 columns were read from REDCap in 0.41 seconds.
 Starting to read 5 records  at 2014-06-27 17:19:49
@@ -256,7 +251,7 @@ Reading batch 1 of 1, with ids 1 through 5.
   token <- "your-secret-token" #Adapt this to your user's token.
   redcap_read(redcap_uri=uri, token=token)$data
   ```
- 
+
  Alternatively, a `redcap_project` object can be declared initially, which makes subsequent calls cleaner when the token and url are required only the when the object is declared.
   ``` r
   require(REDCapR) #Load the package into the current R session, if you haven't already.
@@ -277,14 +272,13 @@ Reading batch 1 of 1, with ids 1 through 5.
  If so the "Can the user query a *entire* REDCap project using RCurl?" check succeeded, but the REDCapR checks did not, consider posting a new [GitHub issue](https://github.com/OuhscBbmc/REDCapR/issues) to the package developers.
 
 ## Importing into REDCap from R
-Troubleshooting imports is trickier than exports for two major reasons.  First, the database potentially persists your *import* mistakes.  In contrast, repeatedly *exporting* data won't affect subsequent reads.  Considering cloning the REDCap project for testing until the problem is resolved.  Remember to create a new token (because they're not automatically created, even when users are copied), and to modify your code's token to point to the new testing clone.
+Troubleshooting import operations is trickier than export operations for two major reasons.  First, the database potentially persists your *import* mistakes.  In contrast, repeatedly *exporting* data won't affect subsequent reads.  Considering cloning the REDCap project for testing until the problem is resolved.  Remember to create a new token (because they're not automatically created when projects are cloned, even when users are copied), and to modify your code's token to point to the new testing clone.
 
  The second reason why importing can be trickier is because the schema (eg, the names and data types) of your local dataset must match the project's schema.  This section will be expanded in the future.  Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project's schema and dataset.  Also, consider exporting the dataset to your machine, and look for differences.  Note that you cannot import calculated fields into REDCap.
 
  1. **Can the user import the *entire* project?**
 
  1. **Can the user import a *subset* of the project?**
-
 
 ## Document Info
 This document is primarily based on REDCap version 5.11.3, and was last updated 2014-08-22.  A development version of the document is available on GitHub: http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html.

@@ -90,14 +90,15 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
   ### Stop and return to the caller if the initial query failed.
   ###
   if( !initial_call$success ) {
-    status_message <- paste0("The initial call failed with the code: ", initial_call$status_code, ".")
-    elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
+    outcome_message <- paste0("The initial call failed with the code: ", initial_call$status_code, ".")
+    elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
     return( list(
       data = data.frame(), 
       records_collapsed = "failed in initial batch call", 
       fields_collapsed = "failed in initial batch call",
       elapsed_seconds = elapsed_seconds, 
-      status_code = status_code, 
+      status_code = initial_call$status_code,
+      outcome_message = outcome_message,
       success = initial_call$success
     ) )
   }
