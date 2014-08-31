@@ -4,7 +4,7 @@ populate_project_simple <- function( ) {
   uri <- "https://bbmc.ouhsc.edu/redcap/api/"
   token <- "D70F9ACD1EDD6F151C6EA78683944E98" #For `UnitTestPhiFree` account and the simple project (pid 213)
   project <- REDCapR::redcap_project$new(redcap_uri=uri, token=token)
-  path_in_simple <- file.path(devtools::inst(name="REDCapR"), "tests/simple.csv")
+  path_in_simple <- file.path(devtools::inst(name="REDCapR"), "tests/simple2.csv")
  
   #Write the file to disk (necessary only when you wanted to change the data).  Don't uncomment; just run manually.
   # returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="raw")
