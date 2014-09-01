@@ -1,3 +1,72 @@
+#' @name redcap_write_oneshot
+#' @export redcap_write_oneshot
+#' 
+#' @title Write/Import records to a REDCap project.
+#'  
+#' @description This function uses REDCap's \href{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}{API}
+#' to select and return data.
+#' 
+#' @param ds The \code{data.frame} to be imported into the REDCap project.  Required.
+#' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
+#' @param token The user-specific string that serves as the password for a project.  Required.
+#' @param verbose A boolean value indicating if \code{message}s should be printed to the R console during the operation.  Optional.
+#' @param cert_location  If present, this string should point to the location of the cert files required for SSL verification.  If the value is missing or NULL, the server's identity will be verified using a recent CA bundle from the \href{http://curl.haxx.se}{cURL website}.  See the details below. Optional.
+#' 
+#' @return Currently, a list is returned with the following elements,
+#' \enumerate{
+#'  \item \code{success}: A boolean value indicating if the operation was apparently successful.
+#'  \item \code{status_code}: The \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code} of the operation.
+#'  \item \code{outcome_message}: A human readable string indicating the operation's outcome.
+#'  \item \code{records_affected_count}: The number of records inserted or updated.
+#'  \item \code{affected_ids}: The subject IDs of the inserted or updated records.
+#'  \item \code{elapsed_seconds}: The duration of the function.
+#'  \item \code{raw_text}: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
+#' }
+#' @details 
+#' The `REDCapR' package includes a recent version of the \href{http://curl.haxx.se/ca/cacert.pem}{Bundle of CA Root Certificates} 
+#' from the official \href{http://curl.haxx.se}{cURL site}.  This version is used by default, unless the `cert_location` parameter is given another location.
+#' 
+#' Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See \code{\link{validate_for_write}} for a helper function that checks for some common important conflicts.
+#' @author Will Beasley
+#' @references The official documentation can be found on the `API Examples' page on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}). A user account is required.
+#' 
+#' The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.
+#' 
+#' @examples
+#' \dontrun{ 
+#' #Define some constants
+#' uri  <- "https://bbmc.ouhsc.edu/redcap/api/"
+#' token <- "D70F9ACD1EDD6F151C6EA78683944E98"
+#' 
+#' # Read the dataset for the first time.
+#' result_read1 <- redcap_read_oneshot(redcap_uri=uri, token=token)
+#' ds1 <- result_read1$data
+#' ds1$telephone
+#' # The line above returns something like this (depending on its previous state).
+#' # [1] "(432) 456-4848" "(234) 234-2343" "(433) 435-9865" "(987) 654-3210" "(333) 333-4444"
+#' 
+#' # Manipulate a field in the dataset in a VALID way
+#' ds1$telephone <- sprintf("(405) 321-%1$i%1$i%1$i%1$i", seq_len(nrow(ds1)))
+#' 
+#' ds1 <- ds1[1:3, ]
+#' ds1$age <- NULL; ds1$bmi <- NULL #Drop the calculated fields before writing.
+#' result_write <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=token)
+#' 
+#' # Read the dataset for the second time.
+#' result_read2 <- redcap_read_oneshot(redcap_uri=uri, token=token)
+#' ds2 <- result_read2$data
+#' ds2$telephone
+#' # The line above returns something like this.  Notice only the first three lines changed.
+#' # [1] "(405) 321-1111" "(405) 321-2222" "(405) 321-3333" "(987) 654-3210" "(333) 333-4444"
+#' 
+#' # Manipulate a field in the dataset in an INVALID way.  A US exchange can't be '111'.
+#' ds1$telephone <- sprintf("(405) 111-%1$i%1$i%1$i%1$i", seq_len(nrow(ds1)))
+#' 
+#' # This next line will throw an error.
+#' result_write <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=token)
+#' result_write$raw_text
+#' }
+#' 
 
 redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, cert_location=NULL ) {
   #TODO: automatically convert boolean/logical class to integer/bit class
@@ -26,17 +95,6 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, cert_loca
   csv <- paste(csvElements, collapse="\n")
   rm(csvElements, con)
   
-  # returnContent <- RCurl::postForm(
-  #   uri = redcap_uri, 
-  #   token = token,
-  #   content = 'record',
-  #   format = 'csv', 
-  #   type = 'flat', 
-  #   returnContent = "ids",
-  #   overwriteBehavior = 'overwrite', #overwriteBehavior: *normal* - blank/empty values will be ignored [default]; *overwrite* - blank/empty values are valid and will overwrite data
-  #   data = csv,
-  #   .opts = curl_options
-  # )
   post_body <- list(
     token = token,
     content = 'record',
@@ -80,9 +138,7 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, cert_loca
   }
   if( verbose ) 
     message(outcome_message)
-  
-#   browser()
-  
+
   return( list(
     success = success,
     status_code = status_code,
@@ -95,31 +151,34 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, cert_loca
   ))
 }
 
-# result <- redcap_read_oneshot(redcap_uri="https://bbmc.ouhsc.edu/redcap/api/", token = "9A81268476645C4E5F03428B8AC3AA7B")
-# dput(result$data)
-# dsToWrite <- structure(list(record_id = 1:5, first_name = c("Nutmeg", "Tumtum", 
-#                                                             "Marcus", "Trudy", "John Lee"), last_name = c("Nutmouse", "Nutmouse", 
-#                                                                                                           "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232", 
-#                                                                                                                                                 "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402", 
-#                                                                                                                                                 "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
-#                                                                                                           ), telephone = c("(432) 456-4848", "(234) 234-2343", "(433) 435-9865", 
-#                                                                                                                            "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
-#                                                                                                                                                                           "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
-#                                                                                                                            ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
-#                                                                                                                                       "1955-04-15"), age = c(10L, 10L, 79L, 61L, 58L), ethnicity = c(1L, 
-#                                                                                                                                                                                                      1L, 0L, 1L, 1L), race = c(2L, 6L, 4L, 4L, 4L), sex = c(0L, 1L, 
-#                                                                                                                                                                                                                                                             1L, 0L, 1L), height = c(5, 6, 180, 165, 193.04), weight = c(1L, 
-#                                                                                                                                                                                                                                                                                                                         1L, 80L, 54L, 104L), bmi = c(400, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
-#                                                                                                                                                                                                                                                                                                                                                                                                  "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
-#                                                                                                                                                                                                                                                                                                                                                                                                  "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-#                                                                                                                                                                                                                                                                                                                         ), demographics_complete = c(2L, 2L, 2L, 2L, 2L)), .Names = c("record_id", 
-#                                                                                                                                                                                                                                                                                                                                                                                       "first_name", "last_name", "address", "telephone", "email", "dob", 
-#                                                                                                                                                                                                                                                                                                                                                                                       "age", "ethnicity", "race", "sex", "height", "weight", "bmi", 
-#                                                                                                                                                                                                                                                                                                                                                                                       "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, 
-#                                                                                                                                                                                                                                                                                                                                                                                                                                                                 -5L))
-# dsToWrite$age <- NULL; dsToWrite$bmi <- NULL #Drop the calculated fields
-# dsToWrite <- dsToWrite[1:3, ]
-# result <- REDCapR:::redcap_write_oneshot(ds=dsToWrite, redcap_uri="https://bbmc.ouhsc.edu/redcap/api/", token = "9A81268476645C4E5F03428B8AC3AA7B")
-# str(result$affected_ids)
-
-
+# #Define some constants
+# uri  <- "https://bbmc.ouhsc.edu/redcap/api/"
+# token <- "D70F9ACD1EDD6F151C6EA78683944E98"
+# 
+# # Read the dataset for the first time.
+# result_read1 <- redcap_read_oneshot(redcap_uri=uri, token=token)
+# ds1 <- result_read1$data
+# ds1$telephone
+# # The line above returns something like this (depending on its previous state).
+# # [1] "(432) 456-4848" "(234) 234-2343" "(433) 435-9865" "(987) 654-3210" "(333) 333-4444"
+# 
+# # Manipulate a field in the dataset in a VALID way
+# ds1$telephone <- sprintf("(405) 321-%1$i%1$i%1$i%1$i", seq_len(nrow(ds1)))
+# 
+# ds1 <- ds1[1:3, ]
+# ds1$age <- NULL; ds1$bmi <- NULL #Drop the calculated fields before writing.
+# result_write <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=token)
+# 
+# # Read the dataset for the second time.
+# result_read2 <- redcap_read_oneshot(redcap_uri=uri, token=token)
+# ds2 <- result_read2$data
+# ds2$telephone
+# # The line above returns something like this.  Notice only the first three lines changed.
+# # [1] "(405) 321-1111" "(405) 321-2222" "(405) 321-3333" "(987) 654-3210" "(333) 333-4444"
+# 
+# # Manipulate a field in the dataset in an INVALID way.  A US exchange can't be '111'.
+# ds1$telephone <- sprintf("(405) 111-%1$i%1$i%1$i%1$i", seq_len(nrow(ds1)))
+# 
+# # This next line will throw an error.
+# result_write <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=token)
+# result_write$raw_text

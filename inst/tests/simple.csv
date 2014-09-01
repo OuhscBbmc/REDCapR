@@ -1,0 +1,16 @@
+"record_id","first_name","last_name","address","telephone","email","dob","age","ethnicity","race","sex","height","weight","bmi","comments","demographics_complete"
+1,"Nutmeg","Nutmouse","14 Rose Cottage St.
+Kenning UK, 323232","(432) 456-4848","nutty@mouse.com","2003-08-30",10,1,2,0,5,1,400,"Character in a book, with some guessing",2
+2,"Tumtum","Nutmouse","14 Rose Cottage Blvd.
+Kenning UK 34243","(234) 234-2343","tummy@mouse.comm","2003-03-10",11,1,6,1,6,1,277.8,"A mouse character from a good book",2
+3,"Marcus","Wood","243 Hill St.
+Guthrie OK 73402","(433) 435-9865","mw@mwood.net","1934-04-09",79,0,4,1,180,80,24.7,"completely made up",2
+4,"Trudy","DAG","342 Elm
+Duncanville TX, 75116","(987) 654-3210","peroxide@blonde.com","1952-11-02",61,1,4,0,165,54,19.8,"This record doesn't have a DAG assigned
+
+So call up Trudy on the telephone
+Send her a letter in the mail",2
+5,"John Lee","Walker","Hotel Suite
+New Orleans LA, 70115","(333) 333-4444","left@hippocket.com","1955-04-15",58,1,4,1,193.04,104,27.9,"Had a hand for trouble and a eye for cash
+
+He had a gold watch chain and a black mustache",2

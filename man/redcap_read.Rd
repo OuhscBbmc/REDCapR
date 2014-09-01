@@ -4,8 +4,8 @@
 \title{Read records from a REDCap project in subsets, and stacks them together before returning a \code{data.frame}.}
 \usage{
 redcap_read(batch_size = 100L, interbatch_delay = 0, redcap_uri, token,
-  records = NULL, records_collapsed = NULL, fields = NULL,
-  fields_collapsed = NULL, export_data_access_groups = FALSE,
+  records = NULL, records_collapsed = "", fields = NULL,
+  fields_collapsed = "", export_data_access_groups = FALSE,
   raw_or_label = "raw", verbose = TRUE, cert_location = NULL,
   id_position = 1L)
 }
@@ -68,14 +68,17 @@ the desired records and columns.  \item \code{success}: A
 boolean value indicating if the operation was apparently
 successful.  \item \code{status_codes}: A collection of
 \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http
-status codes}, separated by semicolons.  \item
-\code{outcome_messages}: A collection of human readable
-strings indicating the operations' semicolons \item
-\code{records_collapsed}: The desired records IDs,
-collapsed into a single string, separated by commas.  \item
-\code{fields_collapsed}: The desired field names, collapsed
-into a single string, separated by commas.  \item
-\code{elapsed_seconds}: The duration of the function. }
+status codes}, separated by semicolons.  There is one code
+for each batch attempted.  \item \code{outcome_messages}: A
+collection of human readable strings indicating the
+operations' semicolons.  There is one code for each batch
+attempted.  In an unsuccessful operation, it should contain
+diagnostic information.  \item \code{records_collapsed}:
+The desired records IDs, collapsed into a single string,
+separated by commas.  \item \code{fields_collapsed}: The
+desired field names, collapsed into a single string,
+separated by commas.  \item \code{elapsed_seconds}: The
+duration of the function. }
 }
 \description{
 From an external perspective, this function is similar to
