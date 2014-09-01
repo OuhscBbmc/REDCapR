@@ -114,7 +114,7 @@ redcap_project <- setRefClass(
 # # # token <- "8E66DB6844D58E990075AFB51658A002"
 # # 
 # # require(RCurl)
-# # cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs", "mozilla_2014_04_22.crt")
+# # cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs/mozilla_ca_root.crt")
 # # curl_options <- RCurl::curlOptions(cainfo = cert_location)
 # # # tt <- RCurl::getURL(url=uri, .opts=curl_options)
 # # # tt
