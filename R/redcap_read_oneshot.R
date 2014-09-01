@@ -1,7 +1,7 @@
 #' @name redcap_read_oneshot
 #' @export redcap_read_oneshot
 #' 
-#' @title Read records from a REDCap project.
+#' @title Read/Export records from a REDCap project.
 #'  
 #' @description This function uses REDCap's \href{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}{API}
 #' to select and return data.

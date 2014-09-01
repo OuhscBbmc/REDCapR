@@ -3,6 +3,7 @@ populate_project_simple <- function( ) {
   #Declare the server & user information
   uri <- "https://bbmc.ouhsc.edu/redcap/api/"
   token <- "D70F9ACD1EDD6F151C6EA78683944E98" #For `UnitTestPhiFree` account and the simple project (pid 213)
+  # token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account and the simple project (pid 153)
   project <- REDCapR::redcap_project$new(redcap_uri=uri, token=token)
   path_in_simple <- file.path(devtools::inst(name="REDCapR"), "tests/simple.csv")
  
@@ -19,7 +20,7 @@ populate_project_simple <- function( ) {
   
   #Import the data into the REDCap project
   expect_message(
-    returned_object <- REDCapR:::redcap_write_oneshot(ds=dsToWrite, redcap_uri=uri, token=token, verbose=T)
+    returned_object <- REDCapR::redcap_write_oneshot(ds=dsToWrite, redcap_uri=uri, token=token, verbose=T)
   )
   
   #Print a message and return a boolean value

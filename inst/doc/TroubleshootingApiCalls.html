@@ -308,7 +308,7 @@ raw_text &lt;- RCurl::postForm(
 )
 </code></pre>
 
-<p>Alternatively, you can try using the <a href="http://cran.r-project.org/web/packages/httr/"><code>httr</code></a> package, which uses <code>RCurl</code> underneath.  <code>REDCapR</code> actually uses <code>httr</code> directly, instead of <code>RCurl</code>.  As of 2014-07-06, this works with the Windows 8 version for <a href="http://curl.haxx.se/libcurl/">libcurl</a> (which is underneath RCurl), but not with some Linux versions; in this case pass the location of the SSL cert file.</p>
+<p>Alternatively, you can try using the <a href="http://cran.r-project.org/web/packages/httr/"><code>httr</code></a> package, which uses <code>RCurl</code> underneath.  <a href="https://github.com/OuhscBbmc/REDCapR"><code>REDCapR</code></a> and a recent fork of <a href="https://github.com/nutterb/redcap"><code>redcap</code></a> actually uses <code>httr</code> directly, instead of <code>RCurl</code>.  As of 2014-07-06, this works with the Windows 8 version for <a href="http://curl.haxx.se/libcurl/">libcurl</a> (which is underneath RCurl), but not with some Linux versions; in this case pass the location of the SSL cert file.</p>
 
 <pre><code class="r">post_body &lt;- list(
   token = token,
@@ -478,7 +478,7 @@ If so the &ldquo;Can the user query a <em>entire</em> REDCap project using RCurl
 
 <h2>Document Info</h2>
 
-<p>This document is primarily based on REDCap version 5.11.3, and was last updated 2014-08-22.  A development version of the document is available on GitHub: <a href="http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html">http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html</a>.</p>
+<p>This document is primarily based on REDCap version 5.11.3, and was last updated 2014-08-30.  A development version of the document is available on GitHub: <a href="http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html">http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html</a>.</p>
 
 </body>
 

@@ -109,7 +109,7 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
     )
   ```  
 
-  Alternatively, you can try using the [`httr`](http://cran.r-project.org/web/packages/httr/) package, which uses `RCurl` underneath.  `REDCapR` actually uses `httr` directly, instead of `RCurl`.  As of 2014-07-06, this works with the Windows 8 version for [libcurl](http://curl.haxx.se/libcurl/) (which is underneath `RCurl), but not with some Linux versions; in this case pass the location of the SSL cert file.
+  Alternatively, you can try using the [`httr`](http://cran.r-project.org/web/packages/httr/) package, which uses `RCurl` underneath.  [`REDCapR`](https://github.com/OuhscBbmc/REDCapR) and a recent fork of [`redcap`](https://github.com/nutterb/redcap) actually uses `httr` directly, instead of `RCurl`.  As of 2014-07-06, this works with the Windows 8 version for [libcurl](http://curl.haxx.se/libcurl/) (which is underneath `RCurl), but not with some Linux versions; in this case pass the location of the SSL cert file.
 
   ```r
     post_body <- list(
@@ -281,4 +281,4 @@ Troubleshooting import operations is trickier than export operations for two maj
  1. **Can the user import a *subset* of the project?**
 
 ## Document Info
-This document is primarily based on REDCap version 5.11.3, and was last updated 2014-08-22.  A development version of the document is available on GitHub: http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html.
+This document is primarily based on REDCap version 5.11.3, and was last updated 2014-08-30.  A development version of the document is available on GitHub: http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html.

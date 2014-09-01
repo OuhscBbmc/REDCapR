@@ -213,7 +213,7 @@ token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;
 ds_all_rows_all_fields &lt;- redcap_read_oneshot(redcap_uri=uri, token=token)$data
 </code></pre>
 
-<pre><code>5 records and 16 columns were read from REDCap in 1.21 seconds.  The http status code was 200.
+<pre><code>5 records and 16 columns were read from REDCap in 1.08 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_all_rows_all_fields #Inspect the returned dataset
@@ -260,7 +260,7 @@ ds_some_rows_v1 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 0.35 seconds.  The http status code was 200.
+<pre><code>2 records and 16 columns were read from REDCap in 0.29 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">#Return only records with IDs of 1 and 3 (alternate way)
@@ -272,7 +272,7 @@ ds_some_rows_v2 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 0.35 seconds.  The http status code was 200.
+<pre><code>2 records and 16 columns were read from REDCap in 0.31 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_some_rows_v2 #Inspect the returned dataset
@@ -299,7 +299,7 @@ ds_some_fields_v1 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.35 seconds.  The http status code was 200.
+<pre><code>5 records and 3 columns were read from REDCap in 0.29 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">#Return only the fields recordid, first_name, and age (alternate way)
@@ -311,7 +311,7 @@ ds_some_fields_v2 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.37 seconds.  The http status code was 200.
+<pre><code>5 records and 3 columns were read from REDCap in 0.36 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_some_fields_v2 #Inspect the returned dataset
@@ -347,7 +347,7 @@ all_information &lt;- redcap_read_oneshot(
 )
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.39 seconds.  The http status code was 200.
+<pre><code>5 records and 3 columns were read from REDCap in 0.32 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">all_information #Inspect the additional information
@@ -368,7 +368,7 @@ $status_code
 [1] 200
 
 $outcome_message
-[1] &quot;5 records and 3 columns were read from REDCap in 0.39 seconds.  The http status code was 200.&quot;
+[1] &quot;5 records and 3 columns were read from REDCap in 0.32 seconds.  The http status code was 200.&quot;
 
 $records_collapsed
 NULL
@@ -377,7 +377,7 @@ $fields_collapsed
 [1] &quot;recordid,first_name,age&quot;
 
 $elapsed_seconds
-[1] 0.3903
+[1] 0.3228
 
 $raw_text
 [1] &quot;&quot;
@@ -387,7 +387,7 @@ $raw_text
 
 <p>For the sake of documentation and reproducibility, the current vignette was build on a system using the following software.</p>
 
-<pre><code>Report created by Will at 2014-08-31, 16:12:27 -0500
+<pre><code>Report created by Will at 2014-08-31, 18:49:16 -0500
 </code></pre>
 
 <pre><code>R version 3.1.1 Patched (2014-08-27 r66482)
@@ -401,7 +401,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] REDCapR_0.3-27 knitr_1.6     
+[1] REDCapR_0.3-30 knitr_1.6     
 
 loaded via a namespace (and not attached):
  [1] devtools_1.5   digest_0.6.4   evaluate_0.5.5 formatR_1.0    httr_0.4.0.99  memoise_0.2.1  parallel_3.1.1

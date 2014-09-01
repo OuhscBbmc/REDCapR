@@ -75,7 +75,7 @@ dsToWrite <- structure(list(record_id = 1:5, first_name = c("Nutmeg", "Tumtum",
   -5L))
 dsToWrite$age <- NULL; dsToWrite$bmi <- NULL #Drop the calculated fields
 # dsToWrite <- dsToWrite[1:3, ]
-# result <- REDCapR:::redcap_write_oneshot(ds=dsToWrite, redcap_uri="https://bbmc.ouhsc.edu/redcap/api/", token = "9A81268476645C4E5F03428B8AC3AA7B")
+# result <- REDCapR::redcap_write_oneshot(ds=dsToWrite, redcap_uri="https://bbmc.ouhsc.edu/redcap/api/", token = "9A81268476645C4E5F03428B8AC3AA7B")
 
 con <-  base::textConnection(object='csvElements', open='w', local=TRUE)
 write.csv(dsToWrite, con, row.names = FALSE, na="")  
