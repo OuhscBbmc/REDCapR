@@ -8,7 +8,7 @@ test_that("Smoke Test", {
   project <- start_clean_result$redcap_project
 })
 
-test_that("Write One Shot -Insert", {  
+test_that("Write Batch -Insert", {  
   start_clean_result <- REDCapR:::clean_start_simple(batch=TRUE)
   project <- start_clean_result$redcap_project
   
@@ -44,13 +44,13 @@ test_that("Write One Shot -Insert", {
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") #returned_object$data$bmi<-NULL; returned_object$data$age<-NULL;dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
-  expect_true(is.null(returned_object$records_collapsed), "A subset of records was not requested.")
-  expect_true(is.null(returned_object$fields_collapsed), "A subset of fields was not requested.")
+  expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
 
-test_that("Write One Shot -Update One Field", {  
+test_that("Write Batch -Update One Field", {  
   start_clean_result <- REDCapR:::clean_start_simple(batch=TRUE)
   project <- start_clean_result$redcap_project
   
@@ -96,13 +96,13 @@ test_that("Write One Shot -Update One Field", {
   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
   expect_equal(returned_object2$status_code, expected=200L)
   expect_equivalent(returned_object2$raw_text, expected="") # dput(returned_object2$raw_text)
-  expect_true(is.null(returned_object2$records_collapsed), "A subset of records was not requested.")
-  expect_true(is.null(returned_object2$fields_collapsed), "A subset of fields was not requested.")
+  expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object2$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object2$success)
 })
 
-test_that("Write One Shot -Update Two Fields", {  
+test_that("Write Batch -Update Two Fields", {  
   start_clean_result <- REDCapR:::clean_start_simple(batch=TRUE)
   project <- start_clean_result$redcap_project
   
@@ -149,8 +149,8 @@ test_that("Write One Shot -Update Two Fields", {
   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
   expect_equal(returned_object2$status_code, expected=200L)
   expect_equivalent(returned_object2$raw_text, expected="") # dput(returned_object2$raw_text)
-  expect_true(is.null(returned_object2$records_collapsed), "A subset of records was not requested.")
-  expect_true(is.null(returned_object2$fields_collapsed), "A subset of fields was not requested.")
+  expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object2$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object2$success)
 })

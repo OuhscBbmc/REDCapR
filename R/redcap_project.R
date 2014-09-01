@@ -53,23 +53,34 @@ redcap_project <- setRefClass(
     
     read = function( 
       batch_size = 100L, interbatch_delay = 0,
-      records = NULL, records_collapsed = NULL, 
-      fields = NULL, fields_collapsed = NULL, 
+      records = NULL, records_collapsed = "", 
+      fields = NULL, fields_collapsed = "", 
       export_data_access_groups = FALSE,
       raw_or_label = 'raw',
       verbose = TRUE, cert_location = NULL) {
       
       "Exports records from a REDCap project."
-      
-      return( REDCapR::redcap_read( 
-        batch_size = batch_size, interbatch_delay = interbatch_delay,
-        redcap_uri = redcap_uri, token = token, 
-        records = records, records_collapsed = records_collapsed, 
-        fields = fields, fields_collapsed = fields_collapsed, 
-        export_data_access_groups = export_data_access_groups,
-        raw_or_label = raw_or_label,
-        verbose = verbose, cert_location=cert_location 
-      ))      
+
+    # r <- REDCapR::redcap_read( 
+    #   batch_size = batch_size, interbatch_delay = interbatch_delay,
+    #   redcap_uri = redcap_uri, token = token, 
+    #   records = records, records_collapsed = records_collapsed, 
+    #   fields = fields, fields_collapsed = fields_collapsed, 
+    #   export_data_access_groups = export_data_access_groups,
+    #   raw_or_label = raw_or_label,
+    #   verbose = verbose, cert_location=cert_location 
+    # )
+    # r$records_collapsed <- ifelse(!is.null(r$records_collapsed) & (nchar(r$records_collapsed)>0), r$records_collapsed, NULL)
+    # return( r )
+    return( REDCapR::redcap_read( 
+      batch_size = batch_size, interbatch_delay = interbatch_delay,
+      redcap_uri = redcap_uri, token = token, 
+      records = records, records_collapsed = records_collapsed, 
+      fields = fields, fields_collapsed = fields_collapsed, 
+      export_data_access_groups = export_data_access_groups,
+      raw_or_label = raw_or_label,
+      verbose = verbose, cert_location=cert_location 
+    ) )
     },
     
     write = function( 

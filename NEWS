@@ -1,4 +1,12 @@
-﻿Version 0.3 (Developed 2014-07-03 through ?)
+﻿Version 0.4 (Developed 2014-09-01 through ?)
+------------------------------------------------------------------------------
+New Features:
+* `redcap_write` and `redcap_write_oneshot` are now tested and public.
+
+Breaking Changes:
+* The `records_collapsed` default empty value is now "" (ie, and empty string) instead of NULL.  This applies with `records_collapsed` is either a parameter, or a returned value.
+
+Version 0.3 (Developed 2014-07-03 through 2014-09-01)
 ------------------------------------------------------------------------------
 New Features:
 * Relies on the `httr` package, which provides benefits like the status code message can be captured (eg, 200-OK, 403-Forbidden, 404-NotFound).  See http://cran.r-project.org/web/packages/httr/.

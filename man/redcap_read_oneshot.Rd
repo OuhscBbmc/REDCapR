@@ -4,7 +4,7 @@
 \title{Read/Export records from a REDCap project.}
 \usage{
 redcap_read_oneshot(redcap_uri, token, records = NULL,
-  records_collapsed = NULL, fields = NULL, fields_collapsed = NULL,
+  records_collapsed = "", fields = NULL, fields_collapsed = "",
   export_data_access_groups = FALSE, raw_or_label = "raw", verbose = TRUE,
   cert_location = NULL)
 }

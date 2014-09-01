@@ -57,8 +57,8 @@
 #' 
 
 redcap_read <- function( batch_size=100L, interbatch_delay=0,
-                               redcap_uri, token, records=NULL, records_collapsed=NULL, 
-                               fields=NULL, fields_collapsed=NULL, 
+                               redcap_uri, token, records=NULL, records_collapsed="", 
+                               fields=NULL, fields_collapsed="", 
                                export_data_access_groups = FALSE,
                                raw_or_label = 'raw',
                                verbose=TRUE, cert_location=NULL, id_position=1L ) {  
@@ -68,11 +68,15 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
   if( missing(token) )
     stop("The required parameter `token` was missing from the call to `redcap_read()`.")
   
-  if( !missing(records) & (is.null(records_collapsed) | missing(records_collapsed)) )
-    records_collapsed <- paste0(records, collapse=",")
+  # if( !missing(records) & (is.null(records_collapsed) | missing(records_collapsed)) )
+  #   records_collapsed <- paste0(records, collapse=",")
+  # if( !missing(fields) & (is.null(fields_collapsed) | missing(fields_collapsed)) )
+  #   fields_collapsed <- paste0(fields, collapse=",")
   
-  if( !missing(fields) & (is.null(fields_collapsed) | missing(fields_collapsed)) )
-    fields_collapsed <- paste0(fields, collapse=",")
+  if( nchar(records_collapsed)==0 )
+    records_collapsed <- ifelse(is.null(records), "", paste0(records, collapse=",")) #This is an empty string if `records` is NULL.
+  if( nchar(fields_collapsed)==0 )
+    fields_collapsed <- ifelse(is.null(fields), "", paste0(fields, collapse=",")) #This is an empty string if `fields` is NULL.
   
   #   export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
   #   
