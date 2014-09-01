@@ -213,7 +213,7 @@ token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;
 ds_all_rows_all_fields &lt;- redcap_read_oneshot(redcap_uri=uri, token=token)$data
 </code></pre>
 
-<pre><code>5 records and 16 columns were read from REDCap in 1.08 seconds.  The http status code was 200.
+<pre><code>5 records and 16 columns were read from REDCap in 1.04 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_all_rows_all_fields #Inspect the returned dataset
@@ -260,7 +260,7 @@ ds_some_rows_v1 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 0.29 seconds.  The http status code was 200.
+<pre><code>2 records and 16 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">#Return only records with IDs of 1 and 3 (alternate way)
@@ -272,7 +272,7 @@ ds_some_rows_v2 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 0.31 seconds.  The http status code was 200.
+<pre><code>2 records and 16 columns were read from REDCap in 0.53 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_some_rows_v2 #Inspect the returned dataset
@@ -311,7 +311,7 @@ ds_some_fields_v2 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.36 seconds.  The http status code was 200.
+<pre><code>5 records and 3 columns were read from REDCap in 0.32 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_some_fields_v2 #Inspect the returned dataset
@@ -331,12 +331,12 @@ ds_some_fields_v2 &lt;- redcap_read_oneshot(
 
 <ol>
 <li>The <code>data</code> object has the <code>data.frame</code>, as in the previous examples.</li>
-<li>The <code>raw_text</code> returned by the REDCap API. This might display helpful error messages, in the event something went wrong.</li>
+<li>The <code>success</code> boolean value indicates if <code>redcap_read_oneshot</code> believes the operation completed as intended.</li>
+<li>The <code>status_codes</code> is a collection of <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">http status codes</a>, separated by semicolons.  There is one code for each batch attempted.</li>
+<li>The <code>outcome_messages</code>: A collection of human readable strings indicating the operations&#39; semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.</li>
 <li>The <code>records_collapsed</code> field passed to the API.  This shows which record subsets, if any, were requested.</li>
 <li>The <code>fields_collapsed</code> fields passed to the API.  This shows which field subsets, if any, were requested.</li>
-<li>The <code>elapsed_seconds</code> measures the duration of the call.</li>
-<li>The <code>outcome_message</code> has the number of rows and columns read in a successful operation.  In an unsuccessful operation, it should contain diagnostic information.</li>
-<li>The <code>success</code> boolean value indicates if <code>redcap_read_oneshot</code> believes the operation completed as intended.</li>
+<li>The <code>elapsed_seconds</code> measures the duration of the call. </li>
 </ol>
 
 <pre><code class="r">#Return only the fields recordid, first_name, and age
@@ -377,7 +377,7 @@ $fields_collapsed
 [1] &quot;recordid,first_name,age&quot;
 
 $elapsed_seconds
-[1] 0.3228
+[1] 0.318
 
 $raw_text
 [1] &quot;&quot;
@@ -387,7 +387,7 @@ $raw_text
 
 <p>For the sake of documentation and reproducibility, the current vignette was build on a system using the following software.</p>
 
-<pre><code>Report created by Will at 2014-08-31, 18:49:16 -0500
+<pre><code>Report created by Will at 2014-08-31, 23:37:36 -0500
 </code></pre>
 
 <pre><code>R version 3.1.1 Patched (2014-08-27 r66482)
@@ -401,7 +401,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] REDCapR_0.3-30 knitr_1.6     
+[1] REDCapR_0.3-32 knitr_1.6     
 
 loaded via a namespace (and not attached):
  [1] devtools_1.5   digest_0.6.4   evaluate_0.5.5 formatR_1.0    httr_0.4.0.99  memoise_0.2.1  parallel_3.1.1

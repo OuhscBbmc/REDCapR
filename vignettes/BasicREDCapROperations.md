@@ -34,7 +34,7 @@ ds_all_rows_all_fields <- redcap_read_oneshot(redcap_uri=uri, token=token)$data
 ```
 
 ```
-5 records and 16 columns were read from REDCap in 1.08 seconds.  The http status code was 200.
+5 records and 16 columns were read from REDCap in 1.04 seconds.  The http status code was 200.
 ```
 
 ```r
@@ -85,7 +85,7 @@ ds_some_rows_v1 <- redcap_read_oneshot(
 ```
 
 ```
-2 records and 16 columns were read from REDCap in 0.29 seconds.  The http status code was 200.
+2 records and 16 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
 ```
 
 ```r
@@ -99,7 +99,7 @@ ds_some_rows_v2 <- redcap_read_oneshot(
 ```
 
 ```
-2 records and 16 columns were read from REDCap in 0.31 seconds.  The http status code was 200.
+2 records and 16 columns were read from REDCap in 0.53 seconds.  The http status code was 200.
 ```
 
 ```r
@@ -144,7 +144,7 @@ ds_some_fields_v2 <- redcap_read_oneshot(
 ```
 
 ```
-5 records and 3 columns were read from REDCap in 0.36 seconds.  The http status code was 200.
+5 records and 3 columns were read from REDCap in 0.32 seconds.  The http status code was 200.
 ```
 
 ```r
@@ -163,12 +163,12 @@ ds_some_fields_v2 #Inspect the returned dataset
 ### Additional Returned Information
 The examples above have shown only the resulting `data.frame`, by specifying `$data` at the end of the call.  However, more is available to those wanting additional information, such as
  1. The `data` object has the `data.frame`, as in the previous examples.
- 1. The `raw_text` returned by the REDCap API. This might display helpful error messages, in the event something went wrong.
+ 1. The `success` boolean value indicates if `redcap_read_oneshot` believes the operation completed as intended.
+ 1. The `status_codes` is a collection of [http status codes](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes), separated by semicolons.  There is one code for each batch attempted.
+ 1. The `outcome_messages`: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.
  1. The `records_collapsed` field passed to the API.  This shows which record subsets, if any, were requested.
  1. The `fields_collapsed` fields passed to the API.  This shows which field subsets, if any, were requested.
- 1. The `elapsed_seconds` measures the duration of the call.
- 1. The `outcome_message` has the number of rows and columns read in a successful operation.  In an unsuccessful operation, it should contain diagnostic information.
- 1. The `success` boolean value indicates if `redcap_read_oneshot` believes the operation completed as intended.
+ 1. The `elapsed_seconds` measures the duration of the call. 
 
 
 ```r
@@ -213,7 +213,7 @@ $fields_collapsed
 [1] "recordid,first_name,age"
 
 $elapsed_seconds
-[1] 0.3228
+[1] 0.318
 
 $raw_text
 [1] ""
@@ -224,7 +224,7 @@ For the sake of documentation and reproducibility, the current vignette was buil
 
 
 ```
-Report created by Will at 2014-08-31, 18:49:16 -0500
+Report created by Will at 2014-08-31, 23:37:36 -0500
 ```
 
 ```
@@ -239,7 +239,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] REDCapR_0.3-30 knitr_1.6     
+[1] REDCapR_0.3-32 knitr_1.6     
 
 loaded via a namespace (and not attached):
  [1] devtools_1.5   digest_0.6.4   evaluate_0.5.5 formatR_1.0    httr_0.4.0.99  memoise_0.2.1  parallel_3.1.1
