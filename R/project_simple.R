@@ -19,7 +19,7 @@ populate_project_simple <- function( batch = FALSE ) {
   dsToWrite$bmi <- NULL
   
   #Import the data into the REDCap project
-  expect_message(
+  testthat::expect_message(
     if( batch ) {
       returned_object <- REDCapR::redcap_write(ds=dsToWrite, redcap_uri=uri, token=token, verbose=T)
     }

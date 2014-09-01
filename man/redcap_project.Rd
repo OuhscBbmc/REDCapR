@@ -23,22 +23,36 @@ functionality
 \item{\code{read(batch_size = 100L, interbatch_delay = 0, records = NULL,
   records_collapsed = NULL, fields = NULL, fields_collapsed = NULL,
   export_data_access_groups = FALSE, raw_or_label = "raw", verbose = TRUE,
-  cert_location = NULL)}}{Reads records in a REDCap project.}
+  cert_location = NULL)}}{Exports records from a REDCap project.}
+
+\item{\code{write(ds_to_write, batch_size = 100L, interbatch_delay = 0,
+  verbose = TRUE, cert_location = NULL)}}{Imports records to a REDCap project.}
 }}
 \examples{
 library(REDCapR) #Load the package into the current R session.
 uri <- "https://bbmc.ouhsc.edu/redcap/api/"
-token <- "9A81268476645C4E5F03428B8AC3AA7B"
+token <- "D70F9ACD1EDD6F151C6EA78683944E98"
 project <- redcap_project$new(redcap_uri=uri, token=token)
 dsAll <- project$read()
 
 #Demonstrate how repeated calls are more concise when the token and url aren't always passed.
-dsThreeColumns <- project$read(fields=c("record_id", "sex", "age"))$data
+dsThreeColumns <- project$read(fields=c("record_id", "sex", "height"))$data
 
 idsOfMales <- dsThreeColumns[dsThreeColumns$sex==1, "record_id"]
-idsOfMinors <- dsThreeColumns[dsThreeColumns$age < 18, "record_id"]
+idsOfShorties <- dsThreeColumns[dsThreeColumns$height < 40, "record_id"]
 
 dsMales <- project$read(records=idsOfMales, batch_size=2)$data
-dsMinors <- project$read(records=idsOfMinors)$data
+dsShorties <- project$read(records=idsOfShorties)$data
+
+\dontrun{
+#Switch the Genders
+sex_original <- dsThreeColumns$sex
+dsThreeColumns$sex <- (1 - dsThreeColumns$sex)
+project$write(dsThreeColumns)
+
+#Switch the Genders back
+dsThreeColumns$sex <- sex_original
+project$write(dsThreeColumns)
+}
 }
 

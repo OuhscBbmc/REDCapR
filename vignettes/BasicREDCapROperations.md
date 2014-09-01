@@ -34,7 +34,7 @@ ds_all_rows_all_fields <- redcap_read_oneshot(redcap_uri=uri, token=token)$data
 ```
 
 ```
-5 records and 16 columns were read from REDCap in 1.04 seconds.  The http status code was 200.
+5 records and 16 columns were read from REDCap in 1.09 seconds.  The http status code was 200.
 ```
 
 ```r
@@ -85,7 +85,7 @@ ds_some_rows_v1 <- redcap_read_oneshot(
 ```
 
 ```
-2 records and 16 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
+2 records and 16 columns were read from REDCap in 0.28 seconds.  The http status code was 200.
 ```
 
 ```r
@@ -99,7 +99,7 @@ ds_some_rows_v2 <- redcap_read_oneshot(
 ```
 
 ```
-2 records and 16 columns were read from REDCap in 0.53 seconds.  The http status code was 200.
+2 records and 16 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
 ```
 
 ```r
@@ -144,7 +144,7 @@ ds_some_fields_v2 <- redcap_read_oneshot(
 ```
 
 ```
-5 records and 3 columns were read from REDCap in 0.32 seconds.  The http status code was 200.
+5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
 ```
 
 ```r
@@ -181,7 +181,7 @@ all_information <- redcap_read_oneshot(
 ```
 
 ```
-5 records and 3 columns were read from REDCap in 0.32 seconds.  The http status code was 200.
+5 records and 3 columns were read from REDCap in 0.31 seconds.  The http status code was 200.
 ```
 
 ```r
@@ -204,7 +204,7 @@ $status_code
 [1] 200
 
 $outcome_message
-[1] "5 records and 3 columns were read from REDCap in 0.32 seconds.  The http status code was 200."
+[1] "5 records and 3 columns were read from REDCap in 0.31 seconds.  The http status code was 200."
 
 $records_collapsed
 NULL
@@ -213,7 +213,7 @@ $fields_collapsed
 [1] "recordid,first_name,age"
 
 $elapsed_seconds
-[1] 0.318
+[1] 0.3139
 
 $raw_text
 [1] ""
@@ -224,7 +224,7 @@ For the sake of documentation and reproducibility, the current vignette was buil
 
 
 ```
-Report created by Will at 2014-08-31, 23:37:36 -0500
+Report created by Will at 2014-09-01, 00:15:28 -0500
 ```
 
 ```
