@@ -11,6 +11,7 @@
 #' @param token The user-specific string that serves as the password for a project.  Required.
 #' @param verbose A boolean value indicating if \code{message}s should be printed to the R console during the operation.  Optional.
 #' @param cert_location  If present, this string should point to the location of the cert files required for SSL verification.  If the value is missing or NULL, the server's identity will be verified using a recent CA bundle from the \href{http://curl.haxx.se}{cURL website}.  See the details below. Optional.
+#' 
 #' @return Currently, a list is returned with the following elements,
 #' \enumerate{
 #'  \item \code{success}: A boolean value indicating if the operation was apparently successful.
@@ -137,9 +138,7 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, cert_loca
   }
   if( verbose ) 
     message(outcome_message)
-  
-#   browser()
-  
+
   return( list(
     success = success,
     status_code = status_code,
@@ -163,15 +162,12 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, cert_loca
 # # The line above returns something like this (depending on its previous state).
 # # [1] "(432) 456-4848" "(234) 234-2343" "(433) 435-9865" "(987) 654-3210" "(333) 333-4444"
 # 
-# # Manipulate a field in the dataset
-# #ds1$telephone <- sprintf("(%1$i%1$i%1$i) %1$i%1$i%1$i-%1$i%1$i%1$i%1$i", seq_len(nrow(ds1)))
+# # Manipulate a field in the dataset in a VALID way
 # ds1$telephone <- sprintf("(405) 321-%1$i%1$i%1$i%1$i", seq_len(nrow(ds1)))
-# # ds1$telephone <- c("(432) 456-4848", "(234) 234-2343", "(433) 435-9865", "(987) 654-3210", "(333) 333-4444")
 # 
 # ds1 <- ds1[1:3, ]
 # ds1$age <- NULL; ds1$bmi <- NULL #Drop the calculated fields before writing.
 # result_write <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=token)
-# result_write$raw_text
 # 
 # # Read the dataset for the second time.
 # result_read2 <- redcap_read_oneshot(redcap_uri=uri, token=token)
@@ -179,4 +175,10 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, cert_loca
 # ds2$telephone
 # # The line above returns something like this.  Notice only the first three lines changed.
 # # [1] "(405) 321-1111" "(405) 321-2222" "(405) 321-3333" "(987) 654-3210" "(333) 333-4444"
-
+# 
+# # Manipulate a field in the dataset in an INVALID way.  A US exchange can't be '111'.
+# ds1$telephone <- sprintf("(405) 111-%1$i%1$i%1$i%1$i", seq_len(nrow(ds1)))
+# 
+# # This next line will throw an error.
+# result_write <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=token)
+# result_write$raw_text

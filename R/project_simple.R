@@ -1,5 +1,5 @@
 
-populate_project_simple <- function( ) {
+populate_project_simple <- function( batch = FALSE ) {
   #Declare the server & user information
   uri <- "https://bbmc.ouhsc.edu/redcap/api/"
   token <- "D70F9ACD1EDD6F151C6EA78683944E98" #For `UnitTestPhiFree` account and the simple project (pid 213)
@@ -20,7 +20,12 @@ populate_project_simple <- function( ) {
   
   #Import the data into the REDCap project
   expect_message(
-    returned_object <- REDCapR::redcap_write_oneshot(ds=dsToWrite, redcap_uri=uri, token=token, verbose=T)
+    if( batch ) {
+      returned_object <- REDCapR::redcap_write(ds=dsToWrite, redcap_uri=uri, token=token, verbose=T)
+    }
+    else {
+      returned_object <- REDCapR::redcap_write_oneshot(ds=dsToWrite, redcap_uri=uri, token=token, verbose=T)
+    }
   )
   
   #Print a message and return a boolean value
@@ -39,5 +44,23 @@ clear_project_simple <- function( ) {
   return( was_successful )
 }
 
+clean_start_simple <- function( batch = FALSE ) {
+  expect_message(
+    clear_result <- REDCapR:::clear_project_simple(),
+    regexp = "clear_project_simple success: TRUE."   
+  )
+  expect_true(clear_result, "Clearing the results from the simple project should be successful.")
+  
+  expect_message(
+    populate_result <- REDCapR:::populate_project_simple(batch=batch),
+    regexp = "populate_project_simple success: TRUE."    
+  )
+  expect_true(populate_result$is_success, "Population the the simple project should be successful.")
+  return( populate_result )
+}
+
 # populate_project_simple()
+# populate_project_simple(batch=TRUE)
 # clear_project_simple()
+# clean_start_simple()
+# clean_start_simple(batch=TRUE)
