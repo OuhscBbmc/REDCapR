@@ -81,12 +81,11 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, cert_loca
   
   if( missing( cert_location ) | is.null(cert_location) ) 
     cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs/mozilla_ca_root.crt")
-  #     curl_options <- RCurl::curlOptions(ssl.verifypeer=FALSE)
-  
+
   if( !base::file.exists(cert_location) )
     stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
   
-  curl_options <- RCurl::curlOptions(cainfo=cert_location, sslversion=3)
+  config_options <- list(cainfo=cert_location, sslversion=3)
   
   con <-  base::textConnection(object='csvElements', open='w', local=TRUE)
   write.csv(ds, con, row.names = FALSE, na="")  
@@ -111,7 +110,7 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, cert_loca
   result <- httr::POST(
     url = redcap_uri,
     body = post_body,
-    config = curl_options #RCurl::curlOptions(ssl.verifypeer=FALSE)
+    config = config_options
   )
   
   status_code <- result$status_code

@@ -113,12 +113,6 @@ redcap_project <- setRefClass(
 # # # uri <- "https://redcap.vanderbilt.edu/api/"
 # # # token <- "8E66DB6844D58E990075AFB51658A002"
 # # 
-# # require(RCurl)
-# # cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs/mozilla_ca_root.crt")
-# # curl_options <- RCurl::curlOptions(cainfo = cert_location)
-# # # tt <- RCurl::getURL(url=uri, .opts=curl_options)
-# # # tt
-# # 
 # project <- redcap_project$new(redcap_uri=uri, token=token)
 # dsThreeColumns <- project$redcap_uri(fields=c("record_id", "sex", "age"))$data
 # dsThreeColumns$sex <- (1- dsThreeColumns$sex)
