@@ -6,7 +6,7 @@ populate_project_simple <- function( batch = FALSE ) {
   token <- "D70F9ACD1EDD6F151C6EA78683944E98" #For `UnitTestPhiFree` account and the simple project (pid 213)
   # token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account and the simple project (pid 153)
   project <- REDCapR::redcap_project$new(redcap_uri=uri, token=token)
-  path_in_simple <- base::file.path(devtools::inst(name="REDCapR"), "tests/simple.csv")
+  path_in_simple <- base::file.path(devtools::inst(name="REDCapR"), "test_data/simple.csv")
  
   #Write the file to disk (necessary only when you wanted to change the data).  Don't uncomment; just run manually.
   # returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="raw")
