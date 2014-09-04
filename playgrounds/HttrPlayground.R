@@ -11,8 +11,8 @@ export_data_access_groups_string <- "true"
 records_collapsed <- "1,2,5"
 fields_collapsed <- NULL
 
-
-curl_options <- RCurl::curlOptions(cainfo = "./inst/ssl_certs/mozilla_2014_04_22.crt")
+config_options <- list(cainfo = "./inst/ssl_certs/mozilla_ca_root.crt")
+# config_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
 
 r <- httr::POST(
   url = redcap_uri
@@ -26,8 +26,7 @@ r <- httr::POST(
     , records = records_collapsed
     , fields = fields_collapsed
   ),
-  #, .opts = RCurl::curlOptions(ssl.verifypeer = FALSE)
-  , .opts = curl_options
+  , .opts = config_options
 )
 r$status_code
 r$headers$status
@@ -105,7 +104,7 @@ post_body <- list(
 result <- httr::POST(
   url = redcap_uri,
   body = post_body,
-  .opts = curl_options #RCurl::curlOptions(ssl.verifypeer = FALSE)
+  .opts = config_options
 )
 result
 

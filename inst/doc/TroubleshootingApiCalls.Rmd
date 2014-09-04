@@ -285,9 +285,10 @@ REDCap is used in many enviroments, andit's not surprising that a lot of librari
  **Actively developed in the past two years**
  1. [`PyCap`](http://sburns.org/PyCap/): "PyCap is an interface to the REDCap Application Programming Interface (API). PyCap is designed to be a minimal interface exposing all required and optional API parameters." (Written in Python)
  1. [`redcap`](https://github.com/jeffreyhorner/redcap): "R interface to REDCap."
- 1. [`redcap forks`](https://github.com/nutterb/redcap): This is the most actively-developed fork of the library above.  A complete list can be found through GitHub.
+ 1. [`redcap` forks](https://github.com/nutterb/redcap): This is the most actively-developed fork of the library above.  A complete list can be found through GitHub.
  1. [`REDCapR`](https://github.com/OuhscBbmc/REDCapR): "R Utilities for interacting with a REDCap data system."
  1. [`redcap-repeat`](https://github.com/cbmi/redcap-repeat): "Script for REDCap data dictionaries to support repeating fields and groups of fields."
+ 1. [`django-redcap`](https://github.com/cbmi/django-redcap): "Utilities for porting REDCap projects to and from Django models."
  
 ## Document Info
 This document is primarily based on REDCap version 5.11.3, and was last updated 2014-08-30.  A development version of the document is available on GitHub: http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html.

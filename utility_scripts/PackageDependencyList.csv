@@ -9,18 +9,18 @@ ggthemes,TRUE,TRUE,,"Extra themes, scales and geoms for ggplot"
 googleVis,TRUE,TRUE,,"JavaScript-based visualizations, like scrollable tables"
 ggmap,TRUE,TRUE,,"Maps & graphics, based on ggplot"
 knitr,TRUE,TRUE,,For reporting
-httr,TRUE,TRUE,,Calling REDCap API
+httr,FALSE,TRUE,hadley,Calling REDCap API
 lme4,TRUE,TRUE,,Multilevel models
-lubridate,TRUE,TRUE,,Consistent/convienent function signatures for manipulating dates
+lubridate,TRUE,TRUE,,Consistent/convenient function signatures for manipulating dates
 plyr,TRUE,TRUE,,Important for most of our data manipulation
 random,TRUE,TRUE,,Creates random numbers for salts
 RColorBrewer,TRUE,TRUE,,Explicit control over the Color Brewer colors.  See http://colorbrewer2.org/
-RCurl,TRUE,TRUE,,Interact with the web APIs
+RCurl,FALSE,TRUE,,Interact with the web APIs
 reshape2,TRUE,TRUE,,Data manipulation not covered in plyr
 RODBC,TRUE,TRUE,,For connecting to ODBC databases
 roxygen,FALSE,TRUE,klutometis,Creates documentation Rd file from (well-formed) comments
-rmarkdown,FALSE,TRUE,"rstudio","Needed for knitr and reports."
-stringr,TRUE,TRUE,,Consistent/convienent function signatures for manipulating text
+rmarkdown,FALSE,TRUE,rstudio,"Needed for knitr and reports."
+stringr,TRUE,TRUE,,Consistent/convenient function signatures for manipulating text
 testit,TRUE,TRUE,,has the useful `assert()` function
 testthat,FALSE,TRUE,hadley,Heavier testing framework that's good for package development
 xtable,TRUE,TRUE,,"Formats tables, especially for LaTeX output."

@@ -98,13 +98,14 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
   export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
   
   if( missing( cert_location ) | is.null(cert_location) | (length(cert_location)==0)) 
-    cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs/mozilla_2014_04_22.crt")
+    cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs/mozilla_ca_root.crt")
   # curl_options <- RCurl::curlOptions(ssl.verifypeer=FALSE)
 
   if( !base::file.exists(cert_location) )
       stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
   
-  curl_options <- RCurl::curlOptions(cainfo=cert_location, sslversion=3)
+  #curl_options <- RCurl::curlOptions(cainfo=cert_location, sslversion=3)
+  config_options <- list(cainfo=cert_location, sslversion=3)
   
   # raw_text <- RCurl::postForm(
   #   uri = redcap_uri
@@ -132,7 +133,7 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
   result <- httr::POST(
     url = redcap_uri,
     body = post_body,
-    config = curl_options #RCurl::curlOptions(ssl.verifypeer=FALSE)
+    config = config_options
   )
 
   status_code <- result$status
@@ -180,19 +181,4 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
     raw_text = raw_text
   ) )
 }
-
-# curl_options <- RCurl::curlOptions(cainfo = cert_location)
-
-# raw_text <- RCurl::postForm(
-#   uri = "https://bbmc.ouhsc.edu/redcap/api/"
-#   , token = "9A81268476645C4E5F03428B8AC3AA7B"
-#   , content = 'record'
-# #   , format = 'csv'
-# #   , type = 'flat'
-#   #, rawOrLabel = raw_or_label
-#   #, exportDataAccessGroups = export_data_access_groups_string
-#   #, records = records_collapsed
-#   #, fields = fields_collapsed
-#   , .opts = RCurl::curlOptions(ssl.verifypeer = FALSE)
-# )
 

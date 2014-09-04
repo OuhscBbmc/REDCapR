@@ -4,7 +4,7 @@ New Features:
 * `redcap_write` and `redcap_write_oneshot` are now tested and public.
 
 Breaking Changes:
-* The `records_collapsed` default empty value is now "" (ie, and empty string) instead of NULL.  This applies with `records_collapsed` is either a parameter, or a returned value.
+* The `records_collapsed` default empty value is now an empty string (ie, "") instead of NULL.  This applies when `records_collapsed` is either a parameter, or a returned value.
 
 Version 0.3 (Developed 2014-07-03 through 2014-09-01)
 ------------------------------------------------------------------------------
@@ -23,7 +23,7 @@ Version 0.2 (Developed 2014-01-14 through 2014-07-02)
 New Features:
 * Added `redcap_column_sanitize()` function to address non-ASCII characters
 * Added `redcap_write` (as an internal function).
-* The `redcap_project` boject reduces repeatedly passing parameters like the server URL, the user token, and the SSL cert location.
+* The `redcap_project` object reduces repeatedly passing parameters like the server URL, the user token, and the SSL cert location.
 
 Updates:
 * New Mozilla SSL Certification Bundles released on cURL (released 2013-12-05; http://curl.haxx.se/ca/cacert.pem)

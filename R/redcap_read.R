@@ -79,16 +79,16 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
     fields_collapsed <- ifelse(is.null(fields), "", paste0(fields, collapse=",")) #This is an empty string if `fields` is NULL.
   
   #   export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
-  #   
-  #   if( missing( cert_location ) | is.null(cert_location) ) 
-  #     cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs", "mozilla_2014_04_22.crt")
-  #   #     curl_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
-  #   
-  #   if( !base::file.exists(cert_location) )
-  #     stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
-  
+
   start_time <- Sys.time()
-  initial_call <- REDCapR::redcap_read_oneshot(redcap_uri=redcap_uri, token=token, records_collapsed=records_collapsed, fields_collapsed="nonexistant_field_name", verbose=verbose, cert_location=cert_location)
+  initial_call <- REDCapR::redcap_read_oneshot(
+    redcap_uri = redcap_uri, 
+    token = token, 
+    records_collapsed = records_collapsed,
+    fields_collapsed = "nonexistant_field_name", 
+    verbose = verbose, 
+    cert_location = cert_location
+  )
   
   ###
   ### Stop and return to the caller if the initial query failed.
