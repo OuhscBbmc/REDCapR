@@ -6,8 +6,9 @@ redcap_uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "9A81268476645C4E5F03428B8AC3AA7B"
 
 
-curl_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
-curl_options <- RCurl::curlOptions(cainfo = "./inst/ssl_certs/mozilla_ca_root.crt", sslversion=3)
+# curl_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
+# curl_options <- RCurl::curlOptions(cainfo = "./inst/ssl_certs/mozilla_ca_root.crt", sslversion=3)
+curl_options <- list(cainfo = system.file("cacert.pem", package = "httr"))
 
 raw_text2 <- RCurl::postForm(
   uri = redcap_uri

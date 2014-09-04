@@ -5,8 +5,9 @@ uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 # uri <- "https://bbmc.ouhsc.edu/redcap/redcap_v5.2.3/API/"
 # token <- "0B3702D39ED7658B8236797689679DBF" #wbeasley
 token <- "C1A2B36F94B518FDD50561D1FD09170D" #UnitTesttPhiFree
-certs <- file.path(devtools::inst("REDCapR"), "ssl_certs", "mozilla_ca_root.crt")
-# certs <- file.path(devtools::inst("REDCapR"), "ssl_certs", "v2.crt")
+certs <- file.path(devtools::inst("REDCapR"), "ssl_certs/mozilla_ca_root.crt")
+# certs <- file.path(devtools::inst("REDCapR"), "ssl_cert/v2.crt")
+certs <- list(cainfo = system.file("cacert.pem", package = "httr"))
 
 returned <- redcap_read(redcap_uri=uri, token=token)
 

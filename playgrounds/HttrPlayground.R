@@ -11,7 +11,8 @@ export_data_access_groups_string <- "true"
 records_collapsed <- "1,2,5"
 fields_collapsed <- NULL
 
-config_options <- list(cainfo = "./inst/ssl_certs/mozilla_ca_root.crt")
+config_options <- list(cainfo = system.file("cacert.pem", package = "httr"))
+# config_options <- list(cainfo = "./inst/ssl_certs/mozilla_ca_root.crt")
 # config_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
 
 r <- httr::POST(
