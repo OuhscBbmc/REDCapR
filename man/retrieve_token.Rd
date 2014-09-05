@@ -4,12 +4,14 @@
 \alias{retrieve_token_mssql}
 \title{Read a token from a (non-REDCap) database.}
 \usage{
-retrieve_token_mssql(dsn_name, project_name, channel = NULL,
+retrieve_token_mssql(dsn, project_name, channel = NULL,
   schema_name = "[Redcap]", procedure_name = "[prcToken]",
   variable_name_project = "@RedcapProjectName", field_name_token = "Token")
 }
 \arguments{
-  \item{dsn_name}{---.  The default is 100.}
+  \item{dsn}{A
+  \href{http://en.wikipedia.org/wiki/Data_source_name}{DA}.
+  The default is 100.}
 
   \item{project_name}{---. The default is 0.5 seconds.}
 
@@ -52,9 +54,9 @@ server to attend to other users' requests.
 \examples{
 \dontrun{
 library(REDCapR) #Load the package into the current R session.
-dsn_name <- "TokenSecurity"
+dsn <- "TokenSecurity"
 project_name <- "DiabetesSurveyProject2"
-token <- retrieve_token(dsn_name=dsn, project_name=project)
+token <- retrieve_token(dsn=dsn, project_name=project)
 }
 }
 \author{

@@ -8,7 +8,7 @@
 #' (among other objects) a single \code{data.frame}.  This function can be more appropriate than 
 #' \code{\link{redcap_read_oneshot}} when returning large datasets that could tie up the server.   
 #' 
-#' @param dsn_name ---.  The default is 100.
+#' @param dsn A \href{http://en.wikipedia.org/wiki/Data_source_name}{DA}.  The default is 100.
 #' @param project_name ---. The default is 0.5 seconds.
 #' @param channel ---.  Required.
 #' @param schema_name ---.  Required.
@@ -35,14 +35,14 @@
 #' @examples
 #' \dontrun{
 #' library(REDCapR) #Load the package into the current R session.
-#' dsn_name <- "TokenSecurity"
+#' dsn <- "TokenSecurity"
 #' project_name <- "DiabetesSurveyProject2"
-#' token <- retrieve_token(dsn_name=dsn, project_name=project)
+#' token <- retrieve_token(dsn=dsn, project_name=project)
 #' }
 #' 
 
 retrieve_token_mssql <- function( 
-  dsn_name, 
+  dsn, 
   project_name, 
   channel = NULL, 
   schema_name = "[Redcap]", 
@@ -56,7 +56,7 @@ retrieve_token_mssql <- function(
   sql <- sprintf("EXEC %s.%s %s = %s", schema_name, procedure_name, variable_name_project, field_name_token)
   
   if( base::missing(channel) | is.null(channel) ) {
-    channel <- RODBC::odbcConnect(dsn=dsn_name)
+    channel <- RODBC::odbcConnect(dsn=dsn)
     close_channel <- FALSE
   } else {
     close_channel <- TRUE
