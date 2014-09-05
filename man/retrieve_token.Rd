@@ -10,69 +10,99 @@ retrieve_token_mssql(dsn, project_name, channel = NULL,
 }
 \arguments{
   \item{dsn}{A
-  \href{http://en.wikipedia.org/wiki/Data_source_name}{DA}.
-  The default is 100.}
+  \href{http://en.wikipedia.org/wiki/Data_source_name}{DSN}
+  on the local machine that points to the desired MSSQL
+  database. Required.}
 
-  \item{project_name}{---. The default is 0.5 seconds.}
+  \item{project_name}{The friendly/shortened name given to
+  the REDCap project in the MSSQL table.  Notice this isn't
+  necessarily the same name used by REDCap. Required}
 
-  \item{channel}{---.  Required.}
+  \item{channel}{An \emph{optional} connection handle as
+  returned by \code{RODBC::odbcConnect}.  See Details
+  below. Optional.}
 
-  \item{schema_name}{---.  Required.}
+  \item{schema_name}{The schema used within the database.
+  Note that MSSQL uses the more conventional definition of
+  \href{http://en.wikipedia.org/wiki/Database_schema}{schema}
+  than MySQL.  Defaults to \code{'[Redcap]'}. Optional.}
 
-  \item{procedure_name}{---.  Optional.}
+  \item{procedure_name}{The stored procedure called to
+  retrieve the token. Defaults to \code{'[prcToken]'}.
+  Optional.}
 
-  \item{variable_name_project}{---.  Optional.}
+  \item{variable_name_project}{The variable declared within
+  the stored procedure that contains the desired project
+  name.  Optional.}
 
-  \item{field_name_token}{---.  Optional.}
+  \item{field_name_token}{The field/column/variable name in
+  the database table containing the token values.  Defaults
+  to \code{'Token'}.  Optional.}
 }
 \value{
 The token, which is a 32 character string.
 }
 \description{
-From an external perspective, this function is similar to
-\code{\link{redcap_read_oneshot}}.  The internals differ in
-that \code{redcap_read} retrieves subsets of the data, and
-then combines them before returning (among other objects) a
-single \code{data.frame}.  This function can be more
-appropriate than \code{\link{redcap_read_oneshot}} when
-returning large datasets that could tie up the server.
+These functions are not essential to calling the REDCap
+API, but instead are functions that help manage tokens
+securely.
 }
 \details{
-Specifically, it internally uses multiple calls to
-\code{\link{redcap_read_oneshot}} to select and return
-data. Initially, only primary key is queried through the
-REDCap API.  The long list is then subsetted into
-partitions, whose sizes are determined by the
-\code{batch_size} parameter.  REDCap is then queried for
-all variables of the subset's subjects.  This is repeated
-for each subset, before returning a unified
-\code{data.frame}.
+If no \code{channel} is passed, one will be created at the
+beginning of the function, and destroyed at the end.
+However if a channel is created, it's the caller's
+responsibility to destroy this resource.  If you're making
+successive calls to the database, it might be quicker to
+create a single \code{channel} object and batch the calls
+together.  Otherwise, the performance should be equivalent.
 
-The function allows a delay between calls, which allows the
-server to attend to other users' requests.
+If you create the \code{channel} object yourself, consider
+wrapping calls in a \code{base::tryCatch} block, and
+closing the channel in its \code{finally} expression; this
+helps ensure the expensive database resource isn't held
+open unnecessarily.  See the internals of
+\code{retrieve_token_mssql} for an example of closing the
+\code{channel} in a \code{tryCatch} block.
+
+If the database elements are create with the script
+provided in \link{security_database}, the default values
+will work.
+}
+\note{
+We use Microsoft SQL Server, because that fits our
+University's infrastructure the easiest.  But this approach
+theoretically can work with any LDAP-enabled database
+server.  Please contact us if your institution is using
+something other than SQL Server, and would like help
+adapting this approach to your infrastructure.
 }
 \examples{
 \dontrun{
 library(REDCapR) #Load the package into the current R session.
+
+##
+## Rely on `retrieve_token()` to create & destory the channel.
+##
 dsn <- "TokenSecurity"
-project_name <- "DiabetesSurveyProject2"
+project <- "DiabetesSurveyProject"
 token <- retrieve_token(dsn=dsn, project_name=project)
+
+##
+## Create & close the channel yourself, to optimize repeated calls.
+##
+dsn <- "TokenSecurity"
+project1 <- "DiabetesSurveyProject1"
+project2 <- "DiabetesSurveyProject2"
+project3 <- "DiabetesSurveyProject3"
+
+channel <- RODBC::odbcConnect(dsn=dsn)
+token1 <- retrieve_token(dsn=dsn, project_name=project1)
+token2 <- retrieve_token(dsn=dsn, project_name=project2)
+token3 <- retrieve_token(dsn=dsn, project_name=project3)
+RODBC::odbcClose(channel)
 }
 }
 \author{
 Will Beasley
-}
-\references{
-The official documentation can be found on the REDCap wiki
-(\url{https://iwg.devguard.com/trac/redcap/wiki/ApiDocumentation}).
-Also see the `API Examples' page on the REDCap wiki
-(\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}).
-A user account is required to access the wiki, which
-typically is granted only to REDCap administrators. If you
-do not
-
-The official \href{http://curl.haxx.se}{cURL site}
-discusses the process of using SSL to verify the server
-being connected to.
 }
 

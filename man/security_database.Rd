@@ -1,20 +1,22 @@
 \name{security_database}
+\alias{security_database}
 \title{Create an auxiliary database that handles sensitive values.}
 
 \description{
-The SQL code below adds schemas, a table and two stored procedures to an existing Microsoft SQL Database. 
+The SQL code below adds schemas, a table and two stored procedures to an existing Microsoft SQL Database.  This second database is not essential to calling the REDCap API, but it helps manage tokens securely.
 }
 \details{
-This database contains the tokens and other sensitive content (such as passwords, API tokens, and file paths) that cannot be stored in a Git repository (even a private Git repository).  These passwords can be retrieved by \code{\link{retrieve_token_mssql}}.
+This database contains the tokens and other sensitive content (such as passwords, API tokens, and file paths) that should not be stored in a Git repository (even a private Git repository).  These passwords can be retrieved by \code{\link{retrieve_token_mssql}}.
 
-After executing the SQL code in an existing database, create an ODBC DSN (data source name) to \emph{each} client machine that calls the database.  Download the most recent drivers, then run the wizard.  Many values will remain at the default values.  Here are the important ones to change.
+After executing the SQL code in an existing database, create an ODBC \href{http://en.wikipedia.org/wiki/Data_source_name}{DSN} on \emph{each} client machine that calls the database.  Download the most recent drivers (as of Sept 2014, the most recent version is 11 for \href{http://www.microsoft.com/en-us/download/details.aspx?id=36434}{Windows} and \href{http://msdn.microsoft.com/library/hh568451(SQL.110).aspx}{Linux}.), then run the wizard.  Many values in the wizard will remain at the default values.  Here are the important ones to change.
 \enumerate{
-  \item Set the DSN's \code{name} to whatever is used in the repository's R code.
-  \item Set the authenicity method to \code{Inegrated Windows authentication}.
-  \item Set the \code{default database} to the name of the database that you just executed the SQL code in.
+  \item Set the DSN's "\code{name}" field to whatever is used in the repository's R code.
+  \item Set the authenticity method to \code{Integrated Windows authentication}.
+  \item Set the \code{default database} to the name of the database that containing the tokens (\emph{i.e.}, corresponding to the SQL code below in the example).
 }
-
-We use Microsoft SQL Server, because that fits our University's infrastructure the easiest.  But this approach theoretically can work with any LDAP-enabled database server.  If your institution is using something else, and would like help adapting this approach to your infrastructure, please contact us.
+}
+\note{
+We use Microsoft SQL Server, because that fits our University's infrastructure the easiest.  But this approach theoretically can work with any LDAP-enabled database server.  Please contact us if your institution is using something other than SQL Server, and would like help adapting this approach to your infrastructure.
 }
 \examples{
 \dontrun{
@@ -59,7 +61,7 @@ GO
 
 --
 -- Create a stored procedure for users to call to retrieve the token.
--- Notice it has a different (and more permissive) schema than the table.
+-- Notice it should a different (and more permissive) schema than the table.
 --
 CREATE PROCEDURE [Redcap].[prcToken]
   @RedcapProjectName varchar(30) -- Add the parameters for the stored procedure here

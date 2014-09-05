@@ -36,7 +36,7 @@
 
 redcap_write <- function( ds_to_write, 
                           batch_size = 100L,
-                          interbatch_delay = 0,
+                          interbatch_delay = 0.5,
                           redcap_uri,
                           token,
                           verbose = TRUE, cert_location=NULL ) {  
