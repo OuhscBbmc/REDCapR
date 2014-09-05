@@ -3,7 +3,7 @@
 \alias{redcap_read}
 \title{Read records from a REDCap project in subsets, and stacks them together before returning a \code{data.frame}.}
 \usage{
-redcap_read(batch_size = 100L, interbatch_delay = 0, redcap_uri, token,
+redcap_read(batch_size = 100L, interbatch_delay = 0.5, redcap_uri, token,
   records = NULL, records_collapsed = "", fields = NULL,
   fields_collapsed = "", export_data_access_groups = FALSE,
   raw_or_label = "raw", verbose = TRUE, cert_location = NULL,
