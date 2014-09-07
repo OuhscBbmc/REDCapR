@@ -1,5 +1,5 @@
-#' @name retrieve_token_mssql
-#' @aliases retrieve_token
+#' @name retrieve_token
+#' @aliases retrieve_token_mssql
 #' @export retrieve_token_mssql
 #' 
 #' @title Read a token from a (non-REDCap) database.

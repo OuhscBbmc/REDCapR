@@ -1,7 +1,7 @@
 Package: REDCapR
 Title: Interaction between R and REDCap
 Description: Encapsulates functions to streamline calls from R
-Version: 0.4-12
+Version: 0.4-13
 Date: 2014-09-05
 Author: Will Beasley, David Bard, Thomas Wilson
 Maintainer: 'Will Beasley' <wibeasley@hotmail.com>
