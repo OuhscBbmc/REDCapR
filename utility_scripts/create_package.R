@@ -1,4 +1,4 @@
-require(devtools)
+library(devtools)
 devtools::create(  path=file.path(getwd(), "seed"),check=TRUE, description=list(
   "Title"= "Interaction between R and REDCap",
   "Description"="Encapuslates functions to streamline calls from R",

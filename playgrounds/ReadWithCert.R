@@ -1,5 +1,5 @@
 rm(list=ls(all=TRUE))
-require(REDCapR)
+library(REDCapR)
 
 uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 # uri <- "https://bbmc.ouhsc.edu/redcap/redcap_v5.2.3/API/"

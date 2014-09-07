@@ -1,6 +1,6 @@
 rm(list=ls(all=TRUE))  #Clear the variables from previous runs.
-require(RCurl)
-require(httr)
+library(RCurl)
+library(httr)
 
 redcap_uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "9A81268476645C4E5F03428B8AC3AA7B"

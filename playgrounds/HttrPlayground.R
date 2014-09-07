@@ -1,6 +1,6 @@
 rm(list=ls(all=TRUE))  #Clear the variables from previous runs.
 
-require(httr)
+library(httr)
 
 
 redcap_uri <- "https://bbmc.ouhsc.edu/redcap/api/"

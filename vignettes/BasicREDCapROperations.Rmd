@@ -11,7 +11,7 @@ This vignette covers the the basic functions exposed by the [`REDCapR`](https://
 ## Reading REDCap Data
 The function `redcap_read_oneshot` uses the [`RCurl`](http://cran.r-project.org/web/packages/RCurl/index.html) package to call the REDCap API.
 ```{r set_options, echo=FALSE, results='hide'}
-require(knitr)
+library(knitr)
 opts_chunk$set(
     comment=NA, 
     tidy=FALSE
