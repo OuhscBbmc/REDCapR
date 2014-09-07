@@ -24,7 +24,7 @@
 #' its \code{finally} expression; this helps ensure the expensive database resource isn't held open unnecessarily.  See the internals of
 #' \code{retrieve_token_mssql} for an example of closing the \code{channel} in a \code{tryCatch} block.
 #' 
-#' If the database elements are create with the script provided in \link{security_database}, the default values will work.
+#' If the database elements are create with the script provided in package's `Security Database` vignette, the default values will work.
 #' 
 #' @note
 #' We use Microsoft SQL Server, because that fits our University's infrastructure the easiest.  But this approach theoretically can work 

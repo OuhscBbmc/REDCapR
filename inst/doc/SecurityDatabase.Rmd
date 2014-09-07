@@ -1,0 +1,173 @@
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Security Database}
+-->
+# Security Database
+
+## Description
+The SQL code below adds schemas, a table and two stored procedures to an existing Microsoft SQL Database.  This second database is not essential to calling the REDCap API, but it helps manage tokens securely.
+
+This database contains the tokens and other sensitive content (such as passwords, API tokens, and file paths) that should not be stored in a Git repository (even a private Git repository).  These passwords can be retrieved by `REDCapR::retrieve_token_mssql()`.
+
+## Create a DSN on each client
+After executing the SQL code in an existing database, create an ODBC [DSN](http://en.wikipedia.org/wiki/Data_source_name) on *each* client machine that calls the database.  Download the most recent drivers (as of Sept 2014, the most recent version is 11 for [Windows](http://www.microsoft.com/en-us/download/details.aspx?id=36434) and [Linux](http://msdn.microsoft.com/library/hh568451(SQL.110).aspx)., then run the wizard.  Many values in the wizard will remain at the default values.  Here are the important ones to change.
+
+ 1. Set the DSN's `name` field to whatever is used in the repository's R code.
+ 2. Set the authenticity method to `Integrated Windows authentication`.
+ 3. Set the `default database` to the name of the database that containing the tokens *i.e.*, corresponding to the SQL code below in the example).
+
+## Note
+We use Microsoft SQL Server, because that fits our University's infrastructure the easiest.  But this approach theoretically can work with any LDAP-enabled database server.  Please contact us if your institution is using something other than SQL Server, and would like help adapting this approach to your infrastructure.
+
+## Create Database
+This SQL code is run once inside an existing database to establish the schemas, table, and stored procedure used by `REDCapR::retrieve_token_mssql()`.
+
+```SQL
+------- SQL code to create necessary components in a Microsoft SQL Sever database -------
+
+-----------------------------------------------------------------------
+-- Create two schemas.  
+-- The first scehma is accessible by all REDCap API users. 
+-- The second scehma is restricted to administrators.
+--
+CREATE SCHEMA [Redcap]
+CREATE SCHEMA [RedcapPrivate]
+GO
+
+-----------------------------------------------------------------------
+-- Create a table to contain the token
+--
+CREATE TABLE [RedcapPrivate].[tblToken](
+  [ID] [smallint] IDENTITY(1,1) NOT NULL,
+  [Username] [varchar](30) NOT NULL,
+  [RedcapProjectName] [varchar](90) NOT NULL,
+  [RedcapProjectID] [smallint] NOT NULL,
+  [Token] [char](32) NOT NULL,
+ CONSTRAINT [PK_RedcapApiTokens] PRIMARY KEY CLUSTERED(
+  [ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, 
+  ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE NONCLUSTERED INDEX [IX_tblToken_UniqueUsernameProjectID] ON [RedcapPrivate].[tblToken](
+  [Username] ASC,
+  [RedcapProjectID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, 
+  ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+CREATE NONCLUSTERED INDEX [IX_tblToken_UniqueUsernameProjectName] ON [RedcapPrivate].[tblToken](
+  [Username] ASC,
+  [RedcapProjectName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, 
+  ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+-----------------------------------------------------------------------
+-- Create a stored procedure for users to call to retrieve the token.
+-- Notice it should a different (and more permissive) schema than the table.
+--
+CREATE PROCEDURE [Redcap].[prcToken]
+  @RedcapProjectName varchar(30) -- Add the parameters for the stored procedure here
+AS
+BEGIN
+  -- SET NOCOUNT ON added to prevent extra result sets from interfering with SELECT statements.
+  SET NOCOUNT ON; 
+
+  SELECT Token FROM [RedcapPrivate].[tblToken]
+  WHERE Username=system_user AND RedcapProjectName=@RedcapProjectName
+END
+```
+
+## Add user's token to the auxiliary database
+Add a user's LDAP account to the `SecurityAuxiliary` database so that they can query the tables to retrieve their API.
+
+Notice that this only gives the permissions to retrieve the token.  You must still:
+ 1. grant them API privileges to each appropriate REDCap project, and
+ 2. copy the API from the REDCap database into the  SecurityAuxiliary database.
+
+In the future `REDCapR` may expose a function that allows the user to perform the second step (through a stored procedure).
+
+Also, do not give typical users authorization for the 'RedcapPrivate' schema.  The current system allows the to view only their own tokens.
+
+```sql
+-----------------------------------------------------------------------
+-- Add a user's LDAP account to the `SecurityAuxiliary` database so that they can query the tables to retrieve their API.
+-- Notice that this only gives the permissions to retrieve the token.  You must still:
+--   1) grant them API privileges to each appropriate REDCap project, and
+--   2) copy the API from the REDCap database into the  SecurityAuxiliary database.
+-- Also, do not give typical users authorization for the 'RedcapPrivate' schema.  The current system allows the to view only their own tokens.
+-----------------------------------------------------------------------
+
+-- STEP #1: Declare the user name.  If everything runs correctly, this should be the only piece of code that you need to modify.
+print 'Step #1 executing....' 
+USE [master]
+GO
+DECLARE @QualifiedUserName varchar(255); SET @QualifiedUserName = '[OUHSC\lsuarez3]'
+print 'Resulting login name: ' + @QualifiedUserName; print '' 
+
+--EXEC sp_helplogins @LoginNamePattern=@QualifiedUserName
+--SELECT * FROM master..syslogins WHERE name = @QualifiedUserName
+--SELECT * FROM SecurityAuxiliary.sys.sysusers 
+--SELECT * FROM sys.database_permissions
+--SELECT * FROM sys.server_principals
+
+-----------------------------------------------------------------------
+-- STEP #2: Create a login for the *server*.
+print 'Step #2 executing....' 
+DECLARE @sqlCreateLogin nvarchar(max)
+SET @sqlCreateLogin = 'CREATE LOGIN ' + @QualifiedUserName + ' FROM WINDOWS WITH DEFAULT_DATABASE=[SecurityAuxiliary]'
+EXECUTE sp_executesql @sqlCreateLogin
+DECLARE @LoginCount AS INT; SET @LoginCount = (SELECT COUNT(*) AS LoginCount FROM master..syslogins WHERE '[' + loginname + ']' = @QualifiedUserName)
+print 'Logins matching desired name should equal 1.  It equals: ' + CONVERT(varchar, @LoginCount); print '' 
+
+-----------------------------------------------------------------------
+-- STEP #3: Create a user account for the *data base*, after switching the database under focus to SecurityAuxiliary.
+print 'Step #3 executing....' 
+USE [SecurityAuxiliary]
+DECLARE @sqlCreateUser nvarchar(max)
+SET @sqlCreateUser = 'CREATE USER ' + @QualifiedUserName + ' FOR LOGIN ' + @QualifiedUserName
+EXECUTE sp_executesql @sqlCreateUser
+DECLARE @UserCount AS INT; SET @UserCount = (SELECT COUNT(*) AS UserCount FROM SecurityAuxiliary.sys.sysusers WHERE '[' + name + ']' = @QualifiedUserName)
+print 'User accounts matching desired name should equal 1.  It equals: ' + CONVERT(varchar, @UserCount); print '' 
+
+-----------------------------------------------------------------------
+-- STEP #4: Grant appropriate privileges for the 'Redcap' schema.
+print 'Step #4 executing....' 
+DECLARE @sqlGrantSchemaRedcap nvarchar(max)
+-- SET @sqlGrantSchemaRedcap = 'GRANT SELECT, EXECUTE ON SCHEMA::[Redcap] TO ' + @QualifiedUserName 
+SET @sqlGrantSchemaRedcap = 'GRANT EXECUTE ON SCHEMA::[Redcap] TO ' + @QualifiedUserName 
+EXECUTE sp_executesql @sqlGrantSchemaRedcap
+print 'Step #4 executed'; print '' 
+
+-----------------------------------------------------------------------
+-- STEP #5: Grant appropriate privileges for the 'Security' schema.
+print 'Step #5 executing....' 
+DECLARE @sqlGrantSchemaSecurity nvarchar(max)
+-- SET @sqlGrantSchemaSecurity = 'GRANT SELECT, EXECUTE ON SCHEMA::[Security] TO ' + @QualifiedUserName 
+SET @sqlGrantSchemaSecurity = 'GRANT EXECUTE ON SCHEMA::[Security] TO ' + @QualifiedUserName 
+EXECUTE sp_executesql @sqlGrantSchemaSecurity
+print 'Step #5 executed'; print '' 
+
+-----------------------------------------------------------------------
+-- OPTIONAL STEP: Delete the user from the database (the first line) and then the server (the second line).  
+-- The person's other database user accounts (besides with the SecurityAuxiliary database) will NOT be automatically deleted by these two lines.
+--USE [SecurityAuxiliary]; DROP USER [OUHSC\lsuarez3]
+--USE [master]; DROP LOGIN [OUHSC\lsuarez3]
+
+-----------------------------------------------------------------------
+-- REFERENCES & NOTES
+  --The @QualifiedUserName must have both (a) the 'OUHSC' domain qualification, and (b) the square brackets (to escape the backslash).
+	--Using sp_executesql to add users: http://www.sqlservercentral.com/Forums/Topic497615-359-1.aspx
+	--Check if a server login exists: http://stackoverflow.com/questions/37275/sql-query-for-logins
+	--Retrieve database users: http://stackoverflow.com/questions/2445444/how-to-get-a-list-of-users-for-all-instances-databases
+	--Concatenating strings: http://blog.sqlauthority.com/2010/11/25/sql-server-concat-function-in-sql-server-sql-concatenation/
+	--DROP USER from database: http://msdn.microsoft.com/en-us/library/ms189438.aspx
+	--DROP LOGIN from server: http://msdn.microsoft.com/en-us/library/ms188012.aspx
+	--Declaring variables (eg, the username above): http://technet.microsoft.com/en-us/library/aa258839.aspx
+	--A different (& non-dynamic) way to establish a user: http://pic.dhe.ibm.com/infocenter/dmndhelp/v8r5m0/index.jsp?topic=%2Fcom.ibm.wbpm.imuc.sbpm.doc%2Ftopics%2Fdb_create_users_nd_aix.html
+	--If the variable has to cross a 'GO' (which the current version of the script doesn't need): http://stackoverflow.com/questions/937336/is-there-a-way-to-persist-a-variable-across-a-go
+```
+ 
+## Document Info
+This document is primarily based on REDCap version 5.11.3, and was last updated 2014-09-07.  A development version of the document is available on GitHub: http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html.
