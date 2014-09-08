@@ -1,5 +1,5 @@
 rm(list=ls(all=TRUE))
-require(REDCapR)
+library(REDCapR)
 
 dfBad <- data.frame(
   recordid = 1:4,

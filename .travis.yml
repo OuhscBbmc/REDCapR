@@ -22,3 +22,9 @@ notifications:
   email:
     on_success: change
     on_failure: change
+
+# I'm not forcing RODBC (a suggested package) to load so the checks can proceed on Travis-CI
+# RODBC isn't used in functions essential to the package.
+env:
+  global:
+    - _R_CHECK_FORCE_SUGGESTS_=FALSE

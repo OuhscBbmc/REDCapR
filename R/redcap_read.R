@@ -56,7 +56,7 @@
 #' }
 #' 
 
-redcap_read <- function( batch_size=100L, interbatch_delay=0,
+redcap_read <- function( batch_size=100L, interbatch_delay=0.5,
                                redcap_uri, token, records=NULL, records_collapsed="", 
                                fields=NULL, fields_collapsed="", 
                                export_data_access_groups = FALSE,
@@ -122,6 +122,8 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0,
   for( i in ds_glossary$id ) {
     selected_index <- seq(from=ds_glossary[i, "start_index"], to=ds_glossary[i, "stop_index"])
     selected_ids <- uniqueIDs[selected_index]
+    
+    if( i > 0 ) Sys.sleep(time = interbatch_delay)
     if( verbose ) {
       message("Reading batch ", i, " of ", nrow(ds_glossary), ", with subjects ", min(selected_ids), " through ", max(selected_ids), 
               " (ie, ", length(selected_ids), " unique subject records).")

@@ -1,5 +1,5 @@
 ## ----set_options, echo=FALSE, results='hide'--------------------------------------------------------------------------
-require(knitr)
+library(knitr)
 opts_chunk$set(
     comment=NA, 
     tidy=FALSE

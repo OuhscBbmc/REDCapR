@@ -3,7 +3,7 @@
 \alias{redcap_write}
 \title{Write/Import records to a REDCap project.}
 \usage{
-redcap_write(ds_to_write, batch_size = 100L, interbatch_delay = 0,
+redcap_write(ds_to_write, batch_size = 100L, interbatch_delay = 0.5,
   redcap_uri, token, verbose = TRUE, cert_location = NULL)
 }
 \arguments{

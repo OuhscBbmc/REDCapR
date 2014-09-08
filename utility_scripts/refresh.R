@@ -1,5 +1,5 @@
 rm(list=ls(all=TRUE))
-# require(devtools)
+# library(devtools)
 deviceType <- ifelse(R.version$os=="linux-gnu", "X11", "windows")
 options(device = deviceType) #http://support.rstudio.org/help/discussions/problems/80-error-in-function-only-one-rstudio-graphics-device-is-permitted
 

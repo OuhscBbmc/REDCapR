@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Security Database</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Security Database}
+-->
+
+<h1>Security Database</h1>
+
+<h2>Description</h2>
+
+<p>The SQL code below adds schemas, a table and two stored procedures to an existing Microsoft SQL Database.  This second database is not essential to calling the REDCap API, but it helps manage tokens securely.</p>
+
+<p>This database contains the tokens and other sensitive content (such as passwords, API tokens, and file paths) that should not be stored in a Git repository (even a private Git repository).  These passwords can be retrieved by <code>REDCapR::retrieve_token_mssql()</code>.</p>
+
+<h2>Create a DSN on each client</h2>
+
+<p>After executing the SQL code in an existing database, create an ODBC <a href="http://en.wikipedia.org/wiki/Data_source_name">DSN</a> on <em>each</em> client machine that calls the database.  Download the most recent drivers (as of Sept 2014, the most recent version is 11 for <a href="http://www.microsoft.com/en-us/download/details.aspx?id=36434">Windows</a> and <a href="http://msdn.microsoft.com/library/hh568451(SQL.110">Linux</a>.aspx)., then run the wizard.  Many values in the wizard will remain at the default values.  Here are the important ones to change.</p>
+
+<ol>
+<li>Set the DSN&#39;s <code>name</code> field to whatever is used in the repository&#39;s R code.</li>
+<li>Set the authenticity method to <code>Integrated Windows authentication</code>.</li>
+<li>Set the <code>default database</code> to the name of the database that containing the tokens <em>i.e.</em>, corresponding to the SQL code below in the example).</li>
+</ol>
+
+<h2>Note</h2>
+
+<p>We use Microsoft SQL Server, because that fits our University&#39;s infrastructure the easiest.  But this approach theoretically can work with any LDAP-enabled database server.  Please contact us if your institution is using something other than SQL Server, and would like help adapting this approach to your infrastructure.</p>
+
+<h2>Create Database</h2>
+
+<p>This SQL code is run once inside an existing database to establish the schemas, table, and stored procedure used by <code>REDCapR::retrieve_token_mssql()</code>.</p>
+
+<pre><code class="SQL">------- SQL code to create necessary components in a Microsoft SQL Sever database -------
+
+-----------------------------------------------------------------------
+-- Create two schemas.  
+-- The first scehma is accessible by all REDCap API users. 
+-- The second scehma is restricted to administrators.
+--
+CREATE SCHEMA [Redcap]
+CREATE SCHEMA [RedcapPrivate]
+GO
+
+-----------------------------------------------------------------------
+-- Create a table to contain the token
+--
+CREATE TABLE [RedcapPrivate].[tblToken](
+  [ID] [smallint] IDENTITY(1,1) NOT NULL,
+  [Username] [varchar](30) NOT NULL,
+  [RedcapProjectName] [varchar](90) NOT NULL,
+  [RedcapProjectID] [smallint] NOT NULL,
+  [Token] [char](32) NOT NULL,
+ CONSTRAINT [PK_RedcapApiTokens] PRIMARY KEY CLUSTERED(
+  [ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, 
+  ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE NONCLUSTERED INDEX [IX_tblToken_UniqueUsernameProjectID] ON [RedcapPrivate].[tblToken](
+  [Username] ASC,
+  [RedcapProjectID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, 
+  ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+CREATE NONCLUSTERED INDEX [IX_tblToken_UniqueUsernameProjectName] ON [RedcapPrivate].[tblToken](
+  [Username] ASC,
+  [RedcapProjectName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, 
+  ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+-----------------------------------------------------------------------
+-- Create a stored procedure for users to call to retrieve the token.
+-- Notice it should a different (and more permissive) schema than the table.
+--
+CREATE PROCEDURE [Redcap].[prcToken]
+  @RedcapProjectName varchar(30) -- Add the parameters for the stored procedure here
+AS
+BEGIN
+  -- SET NOCOUNT ON added to prevent extra result sets from interfering with SELECT statements.
+  SET NOCOUNT ON; 
+
+  SELECT Token FROM [RedcapPrivate].[tblToken]
+  WHERE Username=system_user AND RedcapProjectName=@RedcapProjectName
+END
+</code></pre>
+
+<h2>Add user&#39;s token to the auxiliary database</h2>
+
+<p>Add a user&#39;s LDAP account to the <code>SecurityAuxiliary</code> database so that they can query the tables to retrieve their API.</p>
+
+<p>Notice that this only gives the permissions to retrieve the token.  You must still:</p>
+
+<ol>
+<li>grant them API privileges to each appropriate REDCap project, and</li>
+<li>copy the API from the REDCap database into the  SecurityAuxiliary database.</li>
+</ol>
+
+<p>In the future <code>REDCapR</code> may expose a function that allows the user to perform the second step (through a stored procedure).</p>
+
+<p>Also, do not give typical users authorization for the &#39;RedcapPrivate&#39; schema.  The current system allows the to view only their own tokens.</p>
+
+<pre><code class="sql">-----------------------------------------------------------------------
+-- Add a user&#39;s LDAP account to the `SecurityAuxiliary` database so that they can query the tables to retrieve their API.
+-- Notice that this only gives the permissions to retrieve the token.  You must still:
+--   1) grant them API privileges to each appropriate REDCap project, and
+--   2) copy the API from the REDCap database into the  SecurityAuxiliary database.
+-- Also, do not give typical users authorization for the &#39;RedcapPrivate&#39; schema.  The current system allows the to view only their own tokens.
+-----------------------------------------------------------------------
+
+-- STEP #1: Declare the user name.  If everything runs correctly, this should be the only piece of code that you need to modify.
+print &#39;Step #1 executing....&#39; 
+USE [master]
+GO
+DECLARE @QualifiedUserName varchar(255); SET @QualifiedUserName = &#39;[OUHSC\lsuarez3]&#39;
+print &#39;Resulting login name: &#39; + @QualifiedUserName; print &#39;&#39; 
+
+--EXEC sp_helplogins @LoginNamePattern=@QualifiedUserName
+--SELECT * FROM master..syslogins WHERE name = @QualifiedUserName
+--SELECT * FROM SecurityAuxiliary.sys.sysusers 
+--SELECT * FROM sys.database_permissions
+--SELECT * FROM sys.server_principals
+
+-----------------------------------------------------------------------
+-- STEP #2: Create a login for the *server*.
+print &#39;Step #2 executing....&#39; 
+DECLARE @sqlCreateLogin nvarchar(max)
+SET @sqlCreateLogin = &#39;CREATE LOGIN &#39; + @QualifiedUserName + &#39; FROM WINDOWS WITH DEFAULT_DATABASE=[SecurityAuxiliary]&#39;
+EXECUTE sp_executesql @sqlCreateLogin
+DECLARE @LoginCount AS INT; SET @LoginCount = (SELECT COUNT(*) AS LoginCount FROM master..syslogins WHERE &#39;[&#39; + loginname + &#39;]&#39; = @QualifiedUserName)
+print &#39;Logins matching desired name should equal 1.  It equals: &#39; + CONVERT(varchar, @LoginCount); print &#39;&#39; 
+
+-----------------------------------------------------------------------
+-- STEP #3: Create a user account for the *data base*, after switching the database under focus to SecurityAuxiliary.
+print &#39;Step #3 executing....&#39; 
+USE [SecurityAuxiliary]
+DECLARE @sqlCreateUser nvarchar(max)
+SET @sqlCreateUser = &#39;CREATE USER &#39; + @QualifiedUserName + &#39; FOR LOGIN &#39; + @QualifiedUserName
+EXECUTE sp_executesql @sqlCreateUser
+DECLARE @UserCount AS INT; SET @UserCount = (SELECT COUNT(*) AS UserCount FROM SecurityAuxiliary.sys.sysusers WHERE &#39;[&#39; + name + &#39;]&#39; = @QualifiedUserName)
+print &#39;User accounts matching desired name should equal 1.  It equals: &#39; + CONVERT(varchar, @UserCount); print &#39;&#39; 
+
+-----------------------------------------------------------------------
+-- STEP #4: Grant appropriate privileges for the &#39;Redcap&#39; schema.
+print &#39;Step #4 executing....&#39; 
+DECLARE @sqlGrantSchemaRedcap nvarchar(max)
+-- SET @sqlGrantSchemaRedcap = &#39;GRANT SELECT, EXECUTE ON SCHEMA::[Redcap] TO &#39; + @QualifiedUserName 
+SET @sqlGrantSchemaRedcap = &#39;GRANT EXECUTE ON SCHEMA::[Redcap] TO &#39; + @QualifiedUserName 
+EXECUTE sp_executesql @sqlGrantSchemaRedcap
+print &#39;Step #4 executed&#39;; print &#39;&#39; 
+
+-----------------------------------------------------------------------
+-- STEP #5: Grant appropriate privileges for the &#39;Security&#39; schema.
+print &#39;Step #5 executing....&#39; 
+DECLARE @sqlGrantSchemaSecurity nvarchar(max)
+-- SET @sqlGrantSchemaSecurity = &#39;GRANT SELECT, EXECUTE ON SCHEMA::[Security] TO &#39; + @QualifiedUserName 
+SET @sqlGrantSchemaSecurity = &#39;GRANT EXECUTE ON SCHEMA::[Security] TO &#39; + @QualifiedUserName 
+EXECUTE sp_executesql @sqlGrantSchemaSecurity
+print &#39;Step #5 executed&#39;; print &#39;&#39; 
+
+-----------------------------------------------------------------------
+-- OPTIONAL STEP: Delete the user from the database (the first line) and then the server (the second line).  
+-- The person&#39;s other database user accounts (besides with the SecurityAuxiliary database) will NOT be automatically deleted by these two lines.
+--USE [SecurityAuxiliary]; DROP USER [OUHSC\lsuarez3]
+--USE [master]; DROP LOGIN [OUHSC\lsuarez3]
+
+-----------------------------------------------------------------------
+-- REFERENCES &amp; NOTES
+  --The @QualifiedUserName must have both (a) the &#39;OUHSC&#39; domain qualification, and (b) the square brackets (to escape the backslash).
+    --Using sp_executesql to add users: http://www.sqlservercentral.com/Forums/Topic497615-359-1.aspx
+    --Check if a server login exists: http://stackoverflow.com/questions/37275/sql-query-for-logins
+    --Retrieve database users: http://stackoverflow.com/questions/2445444/how-to-get-a-list-of-users-for-all-instances-databases
+    --Concatenating strings: http://blog.sqlauthority.com/2010/11/25/sql-server-concat-function-in-sql-server-sql-concatenation/
+    --DROP USER from database: http://msdn.microsoft.com/en-us/library/ms189438.aspx
+    --DROP LOGIN from server: http://msdn.microsoft.com/en-us/library/ms188012.aspx
+    --Declaring variables (eg, the username above): http://technet.microsoft.com/en-us/library/aa258839.aspx
+    --A different (&amp; non-dynamic) way to establish a user: http://pic.dhe.ibm.com/infocenter/dmndhelp/v8r5m0/index.jsp?topic=%2Fcom.ibm.wbpm.imuc.sbpm.doc%2Ftopics%2Fdb_create_users_nd_aix.html
+    --If the variable has to cross a &#39;GO&#39; (which the current version of the script doesn&#39;t need): http://stackoverflow.com/questions/937336/is-there-a-way-to-persist-a-variable-across-a-go
+</code></pre>
+
+<h2>Document Info</h2>
+
+<p>This document is primarily based on REDCap version 5.11.3, and was last updated 2014-09-07.  A development version of the document is available on GitHub: <a href="http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html">http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html</a>.</p>
+
+</body>
+
+</html>

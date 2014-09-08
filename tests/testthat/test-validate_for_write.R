@@ -1,4 +1,4 @@
-require(testthat)
+library(testthat)
 
 ###########
 context("Validate data frame for writing to REDCap")

@@ -278,9 +278,9 @@ The values they enter should be exactly the same as those entered in the previou
 
 <ol>
 <li><p><strong>Is RCurl installed on the user&#39;s local machine?</strong>
-If so, running <code>require(RCurl)</code> should produce the following output if you&#39;re starting with a fresh session of R:</p>
+If so, running <code>library(RCurl)</code> should produce the following output if you&#39;re starting with a fresh session of R:</p>
 
-<pre><code class="r">&gt; require(RCurl)
+<pre><code class="r">&gt; library(RCurl)
 ## Loading required package: RCurl
 ## Loading required package: bitops
 </code></pre></li>
@@ -388,15 +388,15 @@ Currently the easiest way to install REDCapR is with the <a href="https://github
 devtools::install_github(repo=&quot;OuhscBbmc/REDCapR&quot;)
 </code></pre></li>
 <li><p><strong>Does REDCapR load successfully on the user&#39;s machine?</strong><br/>
-If so, running <code>require(REDCapR)</code> should produce the following output if you&#39;re starting with a fresh session of R:</p>
+If so, running <code>library(REDCapR)</code> should produce the following output if you&#39;re starting with a fresh session of R:</p>
 
-<pre><code class="r">require(REDCapR)
+<pre><code class="r">library(REDCapR)
 ## Loading required package: REDCapR
 </code></pre></li>
 <li><p><strong>Can the user export from an example project?</strong><br/>
 This is the same fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a> as in the previous section.</p>
 
-<pre><code class="r">require(REDCapR) #Load the package into the current R session.
+<pre><code class="r">library(REDCapR) #Load the package into the current R session.
 uri &lt;- &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;
 token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;
 redcap_read(redcap_uri=uri, token=token)$data
@@ -440,7 +440,7 @@ demographics_complete
 <li><p><strong>Can the user export from their own project?</strong>
 The code is similar to the previous check, but the <code>uri</code> and <code>token</code> values will need to be modified.</p>
 
-<pre><code class="r">require(REDCapR) #Load the package into the current R session, if you haven&#39;t already.
+<pre><code class="r">library(REDCapR) #Load the package into the current R session, if you haven&#39;t already.
 redcap_uri &lt;- &quot;https://the.urlofyourinsitution.edu/api/&quot; #Adapt this to your server.
 token &lt;- &quot;your-secret-token&quot; #Adapt this to your user&#39;s token.
 redcap_read(redcap_uri=uri, token=token)$data
@@ -448,7 +448,7 @@ redcap_read(redcap_uri=uri, token=token)$data
 
 <p>Alternatively, a <code>redcap_project</code> object can be declared initially, which makes subsequent calls cleaner when the token and url are required only the when the object is declared.</p>
 
-<pre><code class="r">require(REDCapR) #Load the package into the current R session, if you haven&#39;t already.
+<pre><code class="r">library(REDCapR) #Load the package into the current R session, if you haven&#39;t already.
 uri &lt;- &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;
 token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;  
 project &lt;- redcap_project$new(redcap_uri=uri, token=token)
