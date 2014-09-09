@@ -34,7 +34,7 @@
 #' 
 #' Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See \code{\link{validate_for_write}} for a helper function that checks for some common important conflicts.
 #' @author Will Beasley
-#' @author John Aponte
+#' @author John J. Aponte
 #' @references The official documentation can be found on the `API Examples' page on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}). A user account is required.
 #' 
 #' The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.
