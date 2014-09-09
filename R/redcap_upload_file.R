@@ -1,15 +1,12 @@
-#' @name redcap_download_file
-#' @export redcap_download_file
+#' @name redcap_upload_file
+#' @export redcap_upload_file
 #' 
-#' @title Download a file from a REDCap project record.
+#' @title Upload a file into to a REDCap project record.
 #'  
 #' @description This function uses REDCap's \href{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}{API}
 #' to upload a file
 #' 
-#' @param fn The name of the file where the downloaded file is saved.
-#' 		     If empty the original name of the file will be used and saved in 
-#' 		     the default directory.  Optional. 
-#' @parm  dir The directory where the file is saved. By default current directory. Optional
+#' @param fn The name of the file to be uploaded into the REDCap project.  Required.
 #' @param record The record id where the file is to be imported. Required
 #' @param field The name of the field where the file is saved in REDCap. Required
 #' @param event The name of the event where the file is saved in REDCap. Optional
@@ -44,14 +41,16 @@
 #' #Define some constants
 #' uri  <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token <- "D70F9ACD1EDD6F151C6EA78683944E98"
+#' file <- "myFile"
 #' record <- 1
 #' field<-"file_field"
 #' event <- "" # only for longitudinal events
-#' redcap_download_file(record=record,field=field,event=event,redcap_uri=uri, token=token)
+#' redcap_upload_file(file,record,field,,uri, token)
 #' 
+#' TO BE COMPLETED
 #' }
 #' 
-redcap_download_file <- function( fn="", dir="." , record, field, event="", redcap_uri, token, verbose=TRUE, cert_location=NULL ) {
+redcap_upload_file <- function( fn, record, field, event="", redcap_uri, token, verbose=TRUE, cert_location=NULL ) {
 	#TODO: automatically convert boolean/logical class to integer/bit class
 	start_time <- Sys.time()
 	
@@ -74,10 +73,11 @@ redcap_download_file <- function( fn="", dir="." , record, field, event="", redc
 	post_body <- list(
 		token = token,
 		content = 'file',
-		action = 'export',
+		action = 'import',
 		record = record,
 		field = field,
 		event = event,
+		file = httr::upload_file(fn),
 		returnFormat = 'csv'  
 	)
 	
@@ -89,32 +89,24 @@ redcap_download_file <- function( fn="", dir="." , record, field, event="", redc
 	
 	status_code <- result$status_code
 	# status_message <- result$headers$statusmessage
-
 	elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time,units="secs"))    
 	
 	#isValidIDList <- grepl(pattern="^id\\n.{1,}", x=raw_text, perl=TRUE) #example: x="id\n5835\n5836\n5837\n5838\n5839"
 	success <- (status_code == 200L)
 	
 	if( success ) {
-		rh<-result$headers$`content-type`
-		if (fn == "") {
-			#process the content-type to get the file name
-			fn<-gsub('(name=.)|(")',"",regmatches(rh,regexpr("name=.*",rh)))
-		}
-		newfile<-file.path(dir,fn)
-		writeBin(httr::content(result, as="raw"),newfile)
-		outcome_message <- paste0(rh, " Downloaded with success in " ,
+		outcome_message <- paste0("file uploaded to REDCap in ", 
 								  round(elapsed_seconds, 2), 
-								  " seconds, and saved as ", newfile)
-		recordsAffectedCount = 0
+								  " seconds.")
+		recordsAffectedCount = 1
 		record_id = record
-		raw_text = ""
+		raw_text=""
 	} 
 	else { #If the returned content wasn't recognized as valid IDs, then
-		outcome_message <- paste0("file NOT not downloaded ")
+		raw_text <- httr::content(result, type="text")
+		outcome_message <- paste0("file NOT uploaded ")
 		recordsAffectedCount = 0
 		record_id = ""
-		raw_text = httr::content(result, type="text")
 	}
 	if( verbose ) 
 		message(outcome_message)
