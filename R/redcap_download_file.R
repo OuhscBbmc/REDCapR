@@ -6,10 +6,10 @@
 #' @description This function uses REDCap's \href{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}{API}
 #' to upload a file
 #' 
-#' @param fn The name of the file where the downloaded file is saved.
+#' @param file_name The name of the file where the downloaded file is saved.
 #' 		     If empty the original name of the file will be used and saved in 
 #' 		     the default directory.  Optional. 
-#' @parm  dir The directory where the file is saved. By default current directory. Optional
+#' @param dir The directory where the file is saved. By default current directory. Optional
 #' @param record The record id where the file is to be imported. Required
 #' @param field The name of the field where the file is saved in REDCap. Required
 #' @param event The name of the event where the file is saved in REDCap. Optional
@@ -41,18 +41,17 @@
 #' 
 #' @examples
 #' \dontrun{ 
+#' #This example won't work yet because the test project doesn't accept files; it will in the future.
 #' #Define some constants
 #' uri  <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token <- "D70F9ACD1EDD6F151C6EA78683944E98"
 #' record <- 1
-#' field<-"file_field"
+#' field <- "file_field"
 #' event <- "" # only for longitudinal events
-#' redcap_download_file(record=record,field=field,event=event,redcap_uri=uri, token=token)
-#' 
+#' redcap_download_file(record=record, field=field, event=event, redcap_uri=uri, token=token)
 #' }
 #' 
-redcap_download_file <- function( fn="", dir="." , record, field, event="", redcap_uri, token, verbose=TRUE, cert_location=NULL ) {
-	#TODO: automatically convert boolean/logical class to integer/bit class
+redcap_download_file <- function( file_name="", dir="." , record, field, event="", redcap_uri, token, verbose=TRUE, cert_location=NULL ) {
 	start_time <- Sys.time()
 	
 	if( missing(redcap_uri) )
@@ -63,13 +62,11 @@ redcap_download_file <- function( fn="", dir="." , record, field, event="", redc
 	
 	if( missing( cert_location ) | is.null(cert_location) ) 
 		cert_location <- system.file("cacert.pem", package = "httr")
-	# cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs/mozilla_ca_root.crt")
 	
 	if( !base::file.exists(cert_location) )
 		stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
 	
 	config_options <- list(cainfo=cert_location, sslversion=3)
-
 		
 	post_body <- list(
 		token = token,
@@ -96,25 +93,26 @@ redcap_download_file <- function( fn="", dir="." , record, field, event="", redc
 	success <- (status_code == 200L)
 	
 	if( success ) {
-		rh<-result$headers$`content-type`
-		if (fn == "") {
+		result_header <- result$headers$`content-type`
+		if( file_name == "" ) {
 			#process the content-type to get the file name
-			fn<-gsub('(name=.)|(")',"",regmatches(rh,regexpr("name=.*",rh)))
+		  regex_matches <- regmatches(result_header, regexpr("name=.*", result_header))
+		  file_name <- gsub(pattern='(name=.)|(")', replacement="", x=regex_matches)
 		}
-		newfile<-file.path(dir,fn)
-		writeBin(httr::content(result, as="raw"),newfile)
-		outcome_message <- paste0(rh, " Downloaded with success in " ,
+		file_path <- file.path(dir, file_name) #Qualify the file with its full path.
+		writeBin(httr::content(result, as="raw"), con=file_path)
+		outcome_message <- paste0(result_header, " Downloaded with success in " ,
 								  round(elapsed_seconds, 2), 
-								  " seconds, and saved as ", newfile)
+								  " seconds, and saved as ", file_path)
 		recordsAffectedCount = 0
-		record_id = record
-		raw_text = ""
+		record_id <- record
+		raw_text <- ""
 	} 
 	else { #If the returned content wasn't recognized as valid IDs, then
 		outcome_message <- paste0("file NOT not downloaded ")
 		recordsAffectedCount = 0
-		record_id = ""
-		raw_text = httr::content(result, type="text")
+		record_id <- ""
+		raw_text <- httr::content(result, type="text")
 	}
 	if( verbose ) 
 		message(outcome_message)
@@ -130,4 +128,3 @@ redcap_download_file <- function( fn="", dir="." , record, field, event="", redc
 		raw_text = raw_text    
 	))
 }
-
