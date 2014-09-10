@@ -72,7 +72,7 @@ redcap_download_file <- function( file_name=NULL, dir=NULL, record, field, event
 		stop("The required parameter `token` was missing from the call to `redcap_write_oneshot()`.")     
 	
 	if( missing( cert_location ) | is.null(cert_location) ) 
-		cert_location <- system.file("cacert.pem", package = "httr")
+		cert_location <- system.file("cacert.pem", package="httr")
 	
 	if( !base::file.exists(cert_location) )
 		stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
@@ -129,12 +129,12 @@ redcap_download_file <- function( file_name=NULL, dir=NULL, record, field, event
 		writeBin(httr::content(result, as="raw"), con=file_path)
     
 		outcome_message <- paste0(result_header, " successfully downloaded in " ,
-								  round(elapsed_seconds, 2), " seconds, and saved as ", file_path)
-		recordsAffectedCount <- 0
+								  round(elapsed_seconds, 1), " seconds, and saved as ", file_path)
+		recordsAffectedCount <- 0L
 		record_id <- record
 		raw_text <- ""
 	} 
-	else { #If the operation was unsuccesful, then...
+	else { #If the operation was unsuccessful, then...
 		outcome_message <- paste0("file NOT not downloaded ")
 		recordsAffectedCount <- 0
 		record_id <- numeric(0) #Return an empty vector.

@@ -6,7 +6,7 @@
 #' @description This function uses REDCap's \href{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}{API}
 #' to upload a file
 #' 
-#' @param fn The name of the file to be uploaded into the REDCap project.  Required.
+#' @param file_name The name of the file to be uploaded into the REDCap project.  Required.
 #' @param record The record id where the file is to be imported. Required
 #' @param field The name of the field where the file is saved in REDCap. Required
 #' @param event The name of the event where the file is saved in REDCap. Optional
@@ -50,8 +50,7 @@
 #' TO BE COMPLETED
 #' }
 #' 
-redcap_upload_file <- function( fn, record, field, event="", redcap_uri, token, verbose=TRUE, cert_location=NULL ) {
-	#TODO: automatically convert boolean/logical class to integer/bit class
+redcap_upload_file <- function( file_name, record, field, event="", redcap_uri, token, verbose=TRUE, cert_location=NULL ) {
 	start_time <- Sys.time()
 	
 	if( missing(redcap_uri) )
@@ -61,14 +60,12 @@ redcap_upload_file <- function( fn, record, field, event="", redcap_uri, token, 
 		stop("The required parameter `token` was missing from the call to `redcap_write_oneshot()`.")     
 	
 	if( missing( cert_location ) | is.null(cert_location) ) 
-		cert_location <- system.file("cacert.pem", package = "httr")
-	# cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs/mozilla_ca_root.crt")
+		cert_location <- system.file("cacert.pem", package="httr")
 	
 	if( !base::file.exists(cert_location) )
 		stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
 	
 	config_options <- list(cainfo=cert_location, sslversion=3)
-
 		
 	post_body <- list(
 		token = token,
@@ -77,7 +74,7 @@ redcap_upload_file <- function( fn, record, field, event="", redcap_uri, token, 
 		record = record,
 		field = field,
 		event = event,
-		file = httr::upload_file(fn),
+		file = httr::upload_file(path=file_name),
 		returnFormat = 'csv'  
 	)
 	
@@ -96,17 +93,16 @@ redcap_upload_file <- function( fn, record, field, event="", redcap_uri, token, 
 	
 	if( success ) {
 		outcome_message <- paste0("file uploaded to REDCap in ", 
-								  round(elapsed_seconds, 2), 
-								  " seconds.")
-		recordsAffectedCount = 1
-		record_id = record
-		raw_text=""
+								  round(elapsed_seconds, 1), " seconds.")
+		recordsAffectedCount <- 1
+		record_id <- record
+		raw_text <- ""
 	} 
 	else { #If the returned content wasn't recognized as valid IDs, then
 		raw_text <- httr::content(result, type="text")
 		outcome_message <- paste0("file NOT uploaded ")
-		recordsAffectedCount = 0
-		record_id = ""
+		recordsAffectedCount <- 0L
+		record_id <- numeric(0) #Return an empty vector.
 	}
 	if( verbose ) 
 		message(outcome_message)
@@ -122,4 +118,3 @@ redcap_upload_file <- function( fn, record, field, event="", redcap_uri, token, 
 		raw_text = raw_text    
 	))
 }
-

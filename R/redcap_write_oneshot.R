@@ -80,7 +80,7 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, cert_loca
     stop("The required parameter `token` was missing from the call to `redcap_write_oneshot()`.")     
   
   if( missing( cert_location ) | is.null(cert_location) ) 
-    cert_location <- system.file("cacert.pem", package = "httr")
+    cert_location <- system.file("cacert.pem", package="httr")
     # cert_location <- file.path(devtools::inst("REDCapR"), "ssl_certs/mozilla_ca_root.crt")
 
   if( !base::file.exists(cert_location) )
