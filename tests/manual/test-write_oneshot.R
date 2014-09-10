@@ -12,7 +12,7 @@ test_that("Write One Shot -Insert", {
   start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
   project <- start_clean_result$redcap_project
   
-  expected_outcome_message <- "5 records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "5 records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message(
     returned_object <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
     regexp = expected_outcome_message
@@ -36,11 +36,12 @@ test_that("Write One Shot -Insert", {
     180, 165, 193.04), weight = c(1L, 1L, 80L, 54L, 104L), comments = c("Character in a book, with some guessing", 
     "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), demographics_complete = c(2L, 2L, 2L, 2L, 2L)), .Names = c("record_id", 
-    "first_name", "last_name", "address", "telephone", "email", "dob", 
-    "ethnicity", "race", "sex", "height", "weight", "comments", "demographics_complete"
+    ), mugshot = c(NA, NA, NA, NA, NA), demographics_complete = c(2L, 
+    2L, 2L, 2L, 2L)), .Names = c("record_id", "first_name", "last_name", 
+    "address", "telephone", "email", "dob", "ethnicity", "race", 
+    "sex", "height", "weight", "comments", "mugshot", "demographics_complete"
     ), row.names = c(NA, -5L), class = "data.frame")
-    
+
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") #returned_object$data$bmi<-NULL; returned_object$data$age<-NULL;dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
@@ -54,7 +55,7 @@ test_that("Write One Shot -Update One Field", {
   start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
   project <- start_clean_result$redcap_project
   
-  expected_outcome_message <- "5 records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "5 records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message(
     returned_object1 <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
     regexp = expected_outcome_message
@@ -67,7 +68,7 @@ test_that("Write One Shot -Update One Field", {
   returned_object1$data$address <- 1000 + seq_len(nrow(returned_object1$data))
   REDCapR::redcap_write_oneshot(ds=returned_object1$data, redcap_uri=project$redcap_uri, token=project$token)
   
-  expected_outcome_message <- "5 records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "5 records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message(
     returned_object2 <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
     regexp = expected_outcome_message
@@ -88,9 +89,10 @@ test_that("Write One Shot -Update One Field", {
     1L, 80L, 54L, 104L), comments = c("Character in a book, with some guessing", 
     "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), demographics_complete = c(2L, 2L, 2L, 2L, 2L)), .Names = c("record_id", 
-    "first_name", "last_name", "address", "telephone", "email", "dob", 
-    "ethnicity", "race", "sex", "height", "weight", "comments", "demographics_complete"
+    ), mugshot = c(NA, NA, NA, NA, NA), demographics_complete = c(2L, 
+    2L, 2L, 2L, 2L)), .Names = c("record_id", "first_name", "last_name", 
+    "address", "telephone", "email", "dob", "ethnicity", "race", 
+    "sex", "height", "weight", "comments", "mugshot", "demographics_complete"
     ), row.names = c(NA, -5L), class = "data.frame")
 
   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
@@ -106,7 +108,7 @@ test_that("Write One Shot -Update Two Fields", {
   start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
   project <- start_clean_result$redcap_project
   
-  expected_outcome_message <- "5 records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "5 records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message(
     returned_object1 <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
     regexp = expected_outcome_message
@@ -120,7 +122,7 @@ test_that("Write One Shot -Update Two Fields", {
   returned_object1$data$telephone <- sprintf("(405) 321-%1$i%1$i%1$i%1$i", seq_len(nrow(returned_object1$data)))
   REDCapR::redcap_write_oneshot(ds=returned_object1$data, redcap_uri=project$redcap_uri, token=project$token)
   
-  expected_outcome_message <- "5 records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "5 records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message(
     returned_object2 <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
     regexp = expected_outcome_message
@@ -141,9 +143,10 @@ test_that("Write One Shot -Update Two Fields", {
     1L, 80L, 54L, 104L), comments = c("Character in a book, with some guessing", 
     "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), demographics_complete = c(2L, 2L, 2L, 2L, 2L)), .Names = c("record_id", 
-    "first_name", "last_name", "address", "telephone", "email", "dob", 
-    "ethnicity", "race", "sex", "height", "weight", "comments", "demographics_complete"
+    ), mugshot = c(NA, NA, NA, NA, NA), demographics_complete = c(2L, 
+    2L, 2L, 2L, 2L)), .Names = c("record_id", "first_name", "last_name", 
+    "address", "telephone", "email", "dob", "ethnicity", "race", 
+    "sex", "height", "weight", "comments", "mugshot", "demographics_complete"
     ), row.names = c(NA, -5L), class = "data.frame")
 
   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)

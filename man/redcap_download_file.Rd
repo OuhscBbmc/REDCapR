@@ -3,8 +3,8 @@
 \alias{redcap_download_file}
 \title{Download a file from a REDCap project record.}
 \usage{
-redcap_download_file(file_name = "", dir = ".", record, field, event = "",
-  redcap_uri, token, verbose = TRUE, cert_location = NULL)
+redcap_download_file(file_name = NULL, dir = NULL, record, field,
+  event = "", redcap_uri, token, verbose = TRUE, cert_location = NULL)
 }
 \arguments{
   \item{file_name}{The name of the file where the
@@ -79,14 +79,25 @@ checks for some common important conflicts.
 }
 \examples{
 \dontrun{
-#This example won't work yet because the test project doesn't accept files; it will in the future.
-#Define some constants
 uri  <- "https://bbmc.ouhsc.edu/redcap/api/"
-token <- "D70F9ACD1EDD6F151C6EA78683944E98"
+token <- "D70F9ACD1EDD6F151C6EA78683944E98" #pid=213
 record <- 1
-field <- "file_field"
-event <- "" # only for longitudinal events
-redcap_download_file(record=record, field=field, event=event, redcap_uri=uri, token=token)
+field <- "mugshot"
+# event <- "" # only for longitudinal events
+
+result_1 <- redcap_download_file(record=record, field=field,
+                                 redcap_uri=uri, token=token)
+base::unlink("mugshot_1.jpg)
+
+(full_name <- base::tempfile(pattern="mugshot", fileext=".jpg"))
+result_2 <- redcap_download_file(file_name=full_name, record=record, field=field,
+                                 redcap_uri=uri, token=token)
+base::unlink(full_name)
+
+(relative_name <- "ssss.jpg")
+result_3 <- redcap_download_file(file_name=relative_name, record=record, field=field,
+                                 redcap_uri=uri, token=token)
+base::unlink(relative_name)
 }
 }
 \author{

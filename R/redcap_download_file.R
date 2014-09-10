@@ -40,18 +40,29 @@
 #' The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.
 #' 
 #' @examples
-#' \dontrun{ 
-#' #This example won't work yet because the test project doesn't accept files; it will in the future.
-#' #Define some constants
+#' \dontrun{  
 #' uri  <- "https://bbmc.ouhsc.edu/redcap/api/"
-#' token <- "D70F9ACD1EDD6F151C6EA78683944E98"
+#' token <- "D70F9ACD1EDD6F151C6EA78683944E98" #pid=213
 #' record <- 1
-#' field <- "file_field"
-#' event <- "" # only for longitudinal events
-#' redcap_download_file(record=record, field=field, event=event, redcap_uri=uri, token=token)
-#' }
+#' field <- "mugshot"
+#' # event <- "" # only for longitudinal events
 #' 
-redcap_download_file <- function( file_name="", dir="." , record, field, event="", redcap_uri, token, verbose=TRUE, cert_location=NULL ) {
+#' result_1 <- redcap_download_file(record=record, field=field, 
+#'                                  redcap_uri=uri, token=token)
+#' base::unlink("mugshot_1.jpg)
+#' 
+#' (full_name <- base::tempfile(pattern="mugshot", fileext=".jpg"))
+#' result_2 <- redcap_download_file(file_name=full_name, record=record, field=field, 
+#'                                  redcap_uri=uri, token=token)
+#' base::unlink(full_name)
+#' 
+#' (relative_name <- "ssss.jpg")
+#' result_3 <- redcap_download_file(file_name=relative_name, record=record, field=field, 
+#'                                  redcap_uri=uri, token=token)
+#' base::unlink(relative_name)
+#' }
+
+redcap_download_file <- function( file_name=NULL, dir=NULL, record, field, event="", redcap_uri, token, verbose=TRUE, cert_location=NULL ) {
 	start_time <- Sys.time()
 	
 	if( missing(redcap_uri) )
@@ -78,6 +89,8 @@ redcap_download_file <- function( file_name="", dir="." , record, field, event="
 		returnFormat = 'csv'  
 	)
 	
+  #This is the first of two important lines in the function.
+  #  It retrieves the information from the server and stores it in RAM.
 	result <- httr::POST(
 		url = redcap_uri,
 		body = post_body,
@@ -93,27 +106,41 @@ redcap_download_file <- function( file_name="", dir="." , record, field, event="
 	success <- (status_code == 200L)
 	
 	if( success ) {
+    browser()
 		result_header <- result$headers$`content-type`
-		if( file_name == "" ) {
+    
+		if( missing(file_name) | is.null(file_name) ) {
 			#process the content-type to get the file name
 		  regex_matches <- regmatches(result_header, regexpr("name=.*", result_header))
 		  file_name <- gsub(pattern='(name=.)|(")', replacement="", x=regex_matches)
 		}
-		file_path <- file.path(dir, file_name) #Qualify the file with its full path.
+		
+		if( missing(dir) & is.null(dir) ) {
+		  file_path <- file_name #Qualify the file with its full path.
+    } else {
+		  file_path <- file.path(dir, file_name) #Qualify the file with its full path.
+    }
+    
+    if( verbose )
+      message("Preparing to save the file to `", file_path, "`.")
+    
+		#This is the second of two important lines in the function.
+		#  It persists/converts the information in RAM to a file.
 		writeBin(httr::content(result, as="raw"), con=file_path)
-		outcome_message <- paste0(result_header, " Downloaded with success in " ,
-								  round(elapsed_seconds, 2), 
-								  " seconds, and saved as ", file_path)
-		recordsAffectedCount = 0
+    
+		outcome_message <- paste0(result_header, " successfully downloaded in " ,
+								  round(elapsed_seconds, 2), " seconds, and saved as ", file_path)
+		recordsAffectedCount <- 0
 		record_id <- record
 		raw_text <- ""
 	} 
-	else { #If the returned content wasn't recognized as valid IDs, then
+	else { #If the operation was unsuccesful, then...
 		outcome_message <- paste0("file NOT not downloaded ")
-		recordsAffectedCount = 0
-		record_id <- ""
+		recordsAffectedCount <- 0
+		record_id <- numeric(0) #Return an empty vector.
 		raw_text <- httr::content(result, type="text")
 	}
+  
 	if( verbose ) 
 		message(outcome_message)
 	

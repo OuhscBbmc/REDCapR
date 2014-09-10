@@ -4,7 +4,7 @@ library(testthat)
 context("ReadBatch")
 ###########
 uri <- "https://bbmc.ouhsc.edu/redcap/api/"
-token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account
+token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account on pid=153.
 project <- redcap_project$new(redcap_uri=uri, token=token)
 
 test_that("Smoke Test", {  
