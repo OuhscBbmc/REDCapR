@@ -1,13 +1,24 @@
 library(testthat)
+##
+## Since the project is wiped clean at the start of each function, the upload & download calls are tested by one function.
 
 ###########
-context("FileDownloadOneshot")
+context("FileOneshot")
 ###########
-uri <- "https://bbmc.ouhsc.edu/redcap/api/"
-token <- "D70F9ACD1EDD6F151C6EA78683944E98" #For `UnitTestPhiFree` account on pid=213.
+# uri <- "https://bbmc.ouhsc.edu/redcap/api/"
+# token <- "D70F9ACD1EDD6F151C6EA78683944E98" #For `UnitTestPhiFree` account on pid=213.
 
 
 test_that("NameComesFromREDCap", {  
+  start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
+  project <- start_clean_result$redcap_project
+  
+  expected_outcome_message <- "5 records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expect_message(
+    returned_object <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
+    regexp = expected_outcome_message
+  )
+    
   start_time <- Sys.time() - lubridate::seconds(1) #Knock off a second inc ase there's small time imprecisions
   path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test_data/mugshot_1.jpg")
   info_expected <- file.info(path_of_expected)
@@ -19,7 +30,7 @@ test_that("NameComesFromREDCap", {
   
   tryCatch({
     expect_message(
-      returned_object <- redcap_download_file_oneshot(record=record, field=field, redcap_uri=uri, token=token),
+      returned_object <- redcap_download_file_oneshot(record=record, field=field, redcap_uri=start_clean_result$redcap_project$redcap_uri, token=start_clean_result$redcap_project$token),
       regexp = expected_outcome_message
     )
     info_actual <- file.info(returned_object$file_name)
@@ -46,7 +57,17 @@ test_that("NameComesFromREDCap", {
   expect_more_than(info_actual$atime, expected=start_time, label="The downloaded file's last access time should not precede this function's start time.")
   expect_equal(info_actual$exe, "no", "The downloaded file should not be an executible.")
 })
-test_that("FullPathSpecified", {  
+
+test_that("FullPathSpecified", {    
+  start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
+  project <- start_clean_result$redcap_project
+  
+  expected_outcome_message <- "5 records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expect_message(
+    returned_object <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
+    regexp = expected_outcome_message
+  )
+  
   start_time <- Sys.time() - lubridate::seconds(1) #Knock off a second inc ase there's small time imprecisions
   path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test_data/mugshot_2.jpg")
   info_expected <- file.info(path_of_expected)
@@ -58,7 +79,7 @@ test_that("FullPathSpecified", {
   (full_name <- base::tempfile(pattern="mugshot", fileext=".jpg"))
   tryCatch({
     expect_message(
-      returned_object <- redcap_download_file_oneshot(file_name=full_name, record=record, field=field, redcap_uri=uri, token=token),
+      returned_object <- redcap_download_file_oneshot(file_name=full_name, record=record, field=field, redcap_uri=start_clean_result$redcap_project$redcap_uri, token=start_clean_result$redcap_project$token),
       regexp = expected_outcome_message
     )
     info_actual <- file.info(full_name)
@@ -85,7 +106,17 @@ test_that("FullPathSpecified", {
   expect_more_than(info_actual$atime, expected=start_time, label="The downloaded file's last access time should not precede this function's start time.")
   expect_equal(info_actual$exe, "no", "The downloaded file should not be an executible.")
 })
-test_that("RelativePath", {  
+
+test_that("RelativePath", {    
+  start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
+  project <- start_clean_result$redcap_project
+  
+  expected_outcome_message <- "5 records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expect_message(
+    returned_object <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
+    regexp = expected_outcome_message
+  )
+  
   start_time <- Sys.time() - lubridate::seconds(1) #Knock off a second inc ase there's small time imprecisions
   path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test_data/mugshot_3.jpg")
   info_expected <- file.info(path_of_expected)
@@ -97,7 +128,7 @@ test_that("RelativePath", {
   (relative_name <- "ssss.jpg")
   tryCatch({
     expect_message(
-      returned_object <- redcap_download_file_oneshot(file_name=relative_name, record=record, field=field, redcap_uri=uri, token=token),
+      returned_object <- redcap_download_file_oneshot(file_name=relative_name, record=record, field=field, redcap_uri=start_clean_result$redcap_project$redcap_uri, token=start_clean_result$redcap_project$token),
       regexp = expected_outcome_message
     )
     info_actual <- file.info(relative_name)
