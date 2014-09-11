@@ -43,21 +43,21 @@
 #' token <- "D70F9ACD1EDD6F151C6EA78683944E98"
 #' file <- "myFile"
 #' record <- 1
-#' field<-"file_field"
+#' field <- "file_field"
 #' event <- "" # only for longitudinal events
-#' redcap_upload_file(file,record,field,,uri, token)
+#' redcap_upload_file(file, record, field, uri, token)
 #' 
 #' TO BE COMPLETED
 #' }
-#' 
+
 redcap_upload_file <- function( file_name, record, field, event="", redcap_uri, token, verbose=TRUE, cert_location=NULL ) {
 	start_time <- Sys.time()
 	
 	if( missing(redcap_uri) )
-		stop("The required parameter `redcap_uri` was missing from the call to `redcap_write_oneshot()`.")
+		stop("The required parameter `redcap_uri` was missing from the call to `redcap_upload_file()`.")
 	
 	if( missing(token) )
-		stop("The required parameter `token` was missing from the call to `redcap_write_oneshot()`.")     
+		stop("The required parameter `token` was missing from the call to `redcap_upload_file()`.")     
 	
 	if( missing( cert_location ) | is.null(cert_location) ) 
 		cert_location <- system.file("cacert.pem", package="httr")

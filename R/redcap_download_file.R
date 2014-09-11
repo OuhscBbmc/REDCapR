@@ -49,7 +49,7 @@
 #' 
 #' result_1 <- redcap_download_file(record=record, field=field, 
 #'                                  redcap_uri=uri, token=token)
-#' base::unlink("mugshot_1.jpg)
+#' base::unlink("mugshot_1.jpg")
 #' 
 #' (full_name <- base::tempfile(pattern="mugshot", fileext=".jpg"))
 #' result_2 <- redcap_download_file(file_name=full_name, record=record, field=field, 
@@ -66,10 +66,10 @@ redcap_download_file <- function( file_name=NULL, dir=NULL, record, field, event
 	start_time <- Sys.time()
 	
 	if( missing(redcap_uri) )
-		stop("The required parameter `redcap_uri` was missing from the call to `redcap_write_oneshot()`.")
+		stop("The required parameter `redcap_uri` was missing from the call to `redcap_download_file()`.")
 	
 	if( missing(token) )
-		stop("The required parameter `token` was missing from the call to `redcap_write_oneshot()`.")     
+		stop("The required parameter `token` was missing from the call to `redcap_download_file()`.")     
 	
 	if( missing( cert_location ) | is.null(cert_location) ) 
 		cert_location <- system.file("cacert.pem", package="httr")
@@ -106,7 +106,6 @@ redcap_download_file <- function( file_name=NULL, dir=NULL, record, field, event
 	success <- (status_code == 200L)
 	
 	if( success ) {
-    browser()
 		result_header <- result$headers$`content-type`
     
 		if( missing(file_name) | is.null(file_name) ) {
