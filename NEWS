@@ -1,10 +1,16 @@
-﻿Version 0.4 (Developed 2014-09-01 through ?)
+Version 0.4 (Developed 2014-09-01 through ?)
 ------------------------------------------------------------------------------
 New Features:
 * `redcap_write` and `redcap_write_oneshot` are now tested and public.
+* `redcap_write` and `redcap_write_oneshot` are now tested and public.
+* `redcap_download_file_oneshot` function contributed by @johnaponte (Pull request #35)
+* `redcap_upload_file_oneshot` function contributed by @johnaponte (Pull request #34)
 
 Breaking Changes:
 * The `records_collapsed` default empty value is now an empty string (ie, "") instead of NULL.  This applies when `records_collapsed` is either a parameter, or a returned value.
+
+Updates:
+* By default, the SSL certs come from the `httr` package.  However, REDCapR will continue to maintain a copy in case httr's version on CRAN gets out of date.
 
 Version 0.3 (Developed 2014-07-03 through 2014-09-01)
 ------------------------------------------------------------------------------

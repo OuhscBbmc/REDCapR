@@ -5,7 +5,7 @@
 # ###########
 # test_that("Bad Uri -Not HTTPS", {
 #   uri <- "http://bbmc.ouhsc.edu/redcap/api/" #Not HTTPS
-#   token <- "9A81268476645C4E5F03428B8AC3AA7B"
+#   token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account on pid=153.
 #   expected_message <- "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\"http://www.w3.org/TR/html4/strict.dtd\">\r\n<HTML><HEAD><TITLE>Length Required</TITLE>\r\n<META HTTP-EQUIV=\"Content-Type\" Content=\"text/html; charset=us-ascii\"></HEAD>\r\n<BODY><h2>Length Required</h2>\r\n<hr><p>HTTP Error 411. The request must be chunked or have a content length.</p>\r\n</BODY></HTML>\r\n"
 #   
 #   expect_message(

@@ -2,9 +2,11 @@
 
 export(create_batch_glossary)
 export(redcap_column_sanitize)
+export(redcap_download_file_oneshot)
 export(redcap_project)
 export(redcap_read)
 export(redcap_read_oneshot)
+export(redcap_upload_file_oneshot)
 export(redcap_write)
 export(redcap_write_oneshot)
 export(retrieve_token_mssql)
