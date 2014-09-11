@@ -3,27 +3,27 @@
 \alias{redcap_upload_file_oneshot}
 \title{Upload a file into to a REDCap project record.}
 \usage{
-redcap_upload_file_oneshot(file_name, record, field, event = "", redcap_uri,
-  token, verbose = TRUE, cert_location = NULL)
+redcap_upload_file_oneshot(file_name, record, redcap_uri, token, field,
+  event = "", verbose = TRUE, cert_location = NULL)
 }
 \arguments{
-  \item{file_name}{The name of the file to be uploaded into
-  the REDCap project.  Required.}
+  \item{file_name}{The name of the relative or full file to
+  be uploaded into the REDCap project.  Required.}
 
   \item{record}{The record ID where the file is to be
   imported. Required}
-
-  \item{field}{The name of the field where the file is
-  saved in REDCap. Required}
-
-  \item{event}{The name of the event where the file is
-  saved in REDCap. Optional}
 
   \item{redcap_uri}{The URI (uniform resource identifier)
   of the REDCap project.  Required.}
 
   \item{token}{The user-specific string that serves as the
   password for a project.  Required.}
+
+  \item{field}{The name of the field where the file is
+  saved in REDCap. Required}
+
+  \item{event}{The name of the event where the file is
+  saved in REDCap. Optional}
 
   \item{verbose}{A boolean value indicating if
   \code{message}s should be printed to the R console during

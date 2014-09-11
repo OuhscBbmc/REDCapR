@@ -6,12 +6,12 @@
 #' @description This function uses REDCap's \href{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}{API}
 #' to upload a file
 #' 
-#' @param file_name The name of the file to be uploaded into the REDCap project.  Required.
+#' @param file_name The name of the relative or full file to be uploaded into the REDCap project.  Required.
+#' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
+#' @param token The user-specific string that serves as the password for a project.  Required.
 #' @param record The record ID where the file is to be imported. Required
 #' @param field The name of the field where the file is saved in REDCap. Required
 #' @param event The name of the event where the file is saved in REDCap. Optional
-#' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
-#' @param token The user-specific string that serves as the password for a project.  Required.
 #' @param verbose A boolean value indicating if \code{message}s should be printed to the R console during the operation.  Optional.
 #' @param cert_location  If present, this string should point to the location of the cert files required for SSL verification.  If the value is missing or NULL, the server's identity will be verified using a recent CA bundle from the \href{http://curl.haxx.se}{cURL website}.  See the details below. Optional.
 #' 
@@ -64,7 +64,7 @@
 #' } 
 #' }
 
-redcap_upload_file_oneshot <- function( file_name, record, field, event="", redcap_uri, token, verbose=TRUE, cert_location=NULL ) {
+redcap_upload_file_oneshot <- function( file_name, record, redcap_uri, token, field, event="", verbose=TRUE, cert_location=NULL ) {
 	start_time <- Sys.time()
 	
 	if( missing(file_name) | is.null(file_name) )
@@ -86,7 +86,10 @@ redcap_upload_file_oneshot <- function( file_name, record, field, event="", redc
 		stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
 	
 	config_options <- list(cainfo=cert_location, sslversion=3)
-		
+  
+	if( verbose )
+	  message("Preparing to upload the file `", file_name, "`.")
+  
 	post_body <- list(
 		token = token,
 		content = 'file',
@@ -106,7 +109,7 @@ redcap_upload_file_oneshot <- function( file_name, record, field, event="", redc
 	
 	status_code <- result$status_code
 	# status_message <- result$headers$statusmessage
-	elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time,units="secs"))    
+	elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))    
 	
 	#isValidIDList <- grepl(pattern="^id\\n.{1,}", x=raw_text, perl=TRUE) #example: x="id\n5835\n5836\n5837\n5838\n5839"
 	success <- (status_code == 200L)

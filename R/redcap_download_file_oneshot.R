@@ -9,13 +9,13 @@
 #' @param file_name The name of the file where the downloaded file is saved.
 #' 		     If empty the original name of the file will be used and saved in 
 #' 		     the default directory.  Optional. 
-#' @param dir The directory where the file is saved. By default current directory. Optional
+#' @param directory The directory where the file is saved. By default current directory. Optional
 #' @param overwrite Boolean value indicating if existing files should be overwritten. Optional
+#' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
+#' @param token The user-specific string that serves as the password for a project.  Required.
 #' @param record The record ID where the file is to be imported. Required
 #' @param field The name of the field where the file is saved in REDCap. Required
 #' @param event The name of the event where the file is saved in REDCap. Optional
-#' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
-#' @param token The user-specific string that serves as the password for a project.  Required.
 #' @param verbose A boolean value indicating if \code{message}s should be printed to the R console during the operation.  Optional.
 #' @param cert_location  If present, this string should point to the location of the cert files required for SSL verification.  If the value is missing or NULL, the server's identity will be verified using a recent CA bundle from the \href{http://curl.haxx.se}{cURL website}.  See the details below. Optional.
 #' 
@@ -64,7 +64,7 @@
 #' base::unlink(relative_name)
 #' }
 
-redcap_download_file_oneshot <- function( file_name=NULL, dir=NULL, overwrite=FALSE, record, field, event="", redcap_uri, token, verbose=TRUE, cert_location=NULL ) {
+redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwrite=FALSE, redcap_uri, token, record, field, event="", verbose=TRUE, cert_location=NULL ) {
 	start_time <- Sys.time()
 	
 	if( missing(redcap_uri) )
@@ -102,7 +102,7 @@ redcap_download_file_oneshot <- function( file_name=NULL, dir=NULL, overwrite=FA
 	status_code <- result$status_code
 	# status_message <- result$headers$statusmessage
 
-	elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time,units="secs"))    
+	elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))    
 	
 	#isValidIDList <- grepl(pattern="^id\\n.{1,}", x=raw_text, perl=TRUE) #example: x="id\n5835\n5836\n5837\n5838\n5839"
 	success <- (status_code == 200L)
@@ -116,14 +116,14 @@ redcap_download_file_oneshot <- function( file_name=NULL, dir=NULL, overwrite=FA
 		  file_name <- gsub(pattern='(name=.)|(")', replacement="", x=regex_matches)
 		}
 		
-		if( missing(dir) & is.null(dir) ) {
+		if( missing(directory) & is.null(directory) ) {
 		  file_path <- file_name #Qualify the file with its full path.
     } else {
-		  file_path <- file.path(dir, file_name) #Qualify the file with its full path.
+		  file_path <- file.path(directory, file_name) #Qualify the file with its full path.
     }
     
     if( verbose )
-      message("Preparing to save the file to `", file_path, "`.")
+      message("Preparing to download the file `", file_path, "`.")
     
     if( !overwrite & file.exists(file_path) )
       stop("The operation was halted because the file `", file_path, "` already exists and `overwrite` is FALSE.  Please check the directory if you believe this is a mistake.")

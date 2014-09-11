@@ -3,8 +3,8 @@
 \alias{redcap_download_file_oneshot}
 \title{Download a file from a REDCap project record.}
 \usage{
-redcap_download_file_oneshot(file_name = NULL, dir = NULL,
-  overwrite = FALSE, record, field, event = "", redcap_uri, token,
+redcap_download_file_oneshot(file_name = NULL, directory = NULL,
+  overwrite = FALSE, redcap_uri, token, record, field, event = "",
   verbose = TRUE, cert_location = NULL)
 }
 \arguments{
@@ -13,11 +13,17 @@ redcap_download_file_oneshot(file_name = NULL, dir = NULL,
   the file will be used and saved in the default directory.
   Optional.}
 
-  \item{dir}{The directory where the file is saved. By
-  default current directory. Optional}
+  \item{directory}{The directory where the file is saved.
+  By default current directory. Optional}
 
   \item{overwrite}{Boolean value indicating if existing
   files should be overwritten. Optional}
+
+  \item{redcap_uri}{The URI (uniform resource identifier)
+  of the REDCap project.  Required.}
+
+  \item{token}{The user-specific string that serves as the
+  password for a project.  Required.}
 
   \item{record}{The record ID where the file is to be
   imported. Required}
@@ -27,12 +33,6 @@ redcap_download_file_oneshot(file_name = NULL, dir = NULL,
 
   \item{event}{The name of the event where the file is
   saved in REDCap. Optional}
-
-  \item{redcap_uri}{The URI (uniform resource identifier)
-  of the REDCap project.  Required.}
-
-  \item{token}{The user-specific string that serves as the
-  password for a project.  Required.}
 
   \item{verbose}{A boolean value indicating if
   \code{message}s should be printed to the R console during
