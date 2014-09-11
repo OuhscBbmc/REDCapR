@@ -7,7 +7,7 @@
 #' to upload a file
 #' 
 #' @param file_name The name of the file to be uploaded into the REDCap project.  Required.
-#' @param record The record id where the file is to be imported. Required
+#' @param record The record ID where the file is to be imported. Required
 #' @param field The name of the field where the file is saved in REDCap. Required
 #' @param event The name of the event where the file is saved in REDCap. Optional
 #' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
@@ -40,21 +40,41 @@
 #' \dontrun{ 
 #' #Define some constants
 #' uri  <- "https://bbmc.ouhsc.edu/redcap/api/"
-#' token <- "D70F9ACD1EDD6F151C6EA78683944E98"
-#' file <- "myFile"
-#' record <- 1
-#' field <- "file_field"
+#' token <- "D70F9ACD1EDD6F151C6EA78683944E98" #For the simple project (pid 213)
+#' field <- "mugshot"
 #' event <- "" # only for longitudinal events
-#' redcap_upload_file_oneshot(file, record, field, uri, token)
 #' 
-#' TO BE COMPLETED
+#' #Upload a single image file.
+#' record <- 1
+#' file_path <- base::file.path(devtools::inst(name="REDCapR"), paste0("test_data/mugshot_1.jpg"))
+#' 
+#' redcap_upload_file_oneshot(file_name=file_path, redcap_uri=redcap_uri, token=token,
+#'                            record=record, field=field)
+#' 
+#' #Upload a collection of five images.
+#' records <- 1:5
+#' file_paths <- base::file.path(devtools::inst(name="REDCapR"), 
+#'                               paste0("test_data/mugshot_", records, ".jpg"))
+#' 
+#' for( i in seq_along(records) ) {
+#'   record <- records[i]
+#'   file_path <- file_paths[i]
+#'   redcap_upload_file_oneshot(file_name=file_path, redcap_uri=redcap_uri, token=token,
+#'                              record=record, field=field)
+#' } 
 #' }
 
 redcap_upload_file_oneshot <- function( file_name, record, field, event="", redcap_uri, token, verbose=TRUE, cert_location=NULL ) {
 	start_time <- Sys.time()
 	
+	if( missing(file_name) | is.null(file_name) )
+	  stop("The required parameter `file_name` was missing from the call to `redcap_upload_file_oneshot()`.")
+	
+	if( !base::file.exists(file_name) )
+	  stop("The file `", file_name, "` was not found at the specified path.")
+	
 	if( missing(redcap_uri) )
-		stop("The required parameter `redcap_uri` was missing from the call to `redcap_upload_file_oneshot()`.")
+	  stop("The required parameter `redcap_uri` was missing from the call to `redcap_upload_file_oneshot()`.")
 	
 	if( missing(token) )
 		stop("The required parameter `token` was missing from the call to `redcap_upload_file_oneshot()`.")     

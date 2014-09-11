@@ -10,7 +10,8 @@
 #' 		     If empty the original name of the file will be used and saved in 
 #' 		     the default directory.  Optional. 
 #' @param dir The directory where the file is saved. By default current directory. Optional
-#' @param record The record id where the file is to be imported. Required
+#' @param overwrite Boolean value indicating if existing files should be overwritten. Optional
+#' @param record The record ID where the file is to be imported. Required
 #' @param field The name of the field where the file is saved in REDCap. Required
 #' @param event The name of the event where the file is saved in REDCap. Optional
 #' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
@@ -63,7 +64,7 @@
 #' base::unlink(relative_name)
 #' }
 
-redcap_download_file_oneshot <- function( file_name=NULL, dir=NULL, record, field, event="", redcap_uri, token, verbose=TRUE, cert_location=NULL ) {
+redcap_download_file_oneshot <- function( file_name=NULL, dir=NULL, overwrite=FALSE, record, field, event="", redcap_uri, token, verbose=TRUE, cert_location=NULL ) {
 	start_time <- Sys.time()
 	
 	if( missing(redcap_uri) )
@@ -123,6 +124,9 @@ redcap_download_file_oneshot <- function( file_name=NULL, dir=NULL, record, fiel
     
     if( verbose )
       message("Preparing to save the file to `", file_path, "`.")
+    
+    if( !overwrite & file.exists(file_path) )
+      stop("The operation was halted because the file `", file_path, "` already exists and `overwrite` is FALSE.  Please check the directory if you believe this is a mistake.")
     
 		#This is the second of two important lines in the function.
 		#  It persists/converts the information in RAM to a file.

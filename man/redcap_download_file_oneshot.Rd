@@ -3,8 +3,9 @@
 \alias{redcap_download_file_oneshot}
 \title{Download a file from a REDCap project record.}
 \usage{
-redcap_download_file_oneshot(file_name = NULL, dir = NULL, record, field,
-  event = "", redcap_uri, token, verbose = TRUE, cert_location = NULL)
+redcap_download_file_oneshot(file_name = NULL, dir = NULL,
+  overwrite = FALSE, record, field, event = "", redcap_uri, token,
+  verbose = TRUE, cert_location = NULL)
 }
 \arguments{
   \item{file_name}{The name of the file where the
@@ -15,7 +16,10 @@ redcap_download_file_oneshot(file_name = NULL, dir = NULL, record, field,
   \item{dir}{The directory where the file is saved. By
   default current directory. Optional}
 
-  \item{record}{The record id where the file is to be
+  \item{overwrite}{Boolean value indicating if existing
+  files should be overwritten. Optional}
+
+  \item{record}{The record ID where the file is to be
   imported. Required}
 
   \item{field}{The name of the field where the file is

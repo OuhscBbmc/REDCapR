@@ -10,7 +10,7 @@ redcap_upload_file_oneshot(file_name, record, field, event = "", redcap_uri,
   \item{file_name}{The name of the file to be uploaded into
   the REDCap project.  Required.}
 
-  \item{record}{The record id where the file is to be
+  \item{record}{The record ID where the file is to be
   imported. Required}
 
   \item{field}{The name of the field where the file is
@@ -76,14 +76,28 @@ checks for some common important conflicts.
 \dontrun{
 #Define some constants
 uri  <- "https://bbmc.ouhsc.edu/redcap/api/"
-token <- "D70F9ACD1EDD6F151C6EA78683944E98"
-file <- "myFile"
-record <- 1
-field <- "file_field"
+token <- "D70F9ACD1EDD6F151C6EA78683944E98" #For the simple project (pid 213)
+field <- "mugshot"
 event <- "" # only for longitudinal events
-redcap_upload_file_oneshot(file, record, field, uri, token)
 
-TO BE COMPLETED
+#Upload a single image file.
+record <- 1
+file_path <- base::file.path(devtools::inst(name="REDCapR"), paste0("test_data/mugshot_1.jpg"))
+
+redcap_upload_file_oneshot(file_name=file_path, redcap_uri=redcap_uri, token=token,
+                           record=record, field=field)
+
+#Upload a collection of five images.
+records <- 1:5
+file_paths <- base::file.path(devtools::inst(name="REDCapR"),
+                              paste0("test_data/mugshot_", records, ".jpg"))
+
+for( i in seq_along(records) ) {
+  record <- records[i]
+  file_path <- file_paths[i]
+  redcap_upload_file_oneshot(file_name=file_path, redcap_uri=redcap_uri, token=token,
+                             record=record, field=field)
+}
 }
 }
 \author{
