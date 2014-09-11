@@ -27,6 +27,7 @@
 #'  \item \code{affected_ids}: The subject IDs of the inserted or updated records.
 #'  \item \code{elapsed_seconds}: The duration of the function.
 #'  \item \code{raw_text}: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
+#'  \item \code{file_name}: The name of the file persisted to disk. This is useful if the name stored in REDCap is used (which is the default).
 #' }
 #' @details 
 #' The `REDCapR' package includes a recent version of the \href{http://curl.haxx.se/ca/cacert.pem}{Bundle of CA Root Certificates} 
@@ -129,7 +130,7 @@ redcap_download_file_oneshot <- function( file_name=NULL, dir=NULL, record, fiel
     
 		outcome_message <- paste0(result_header, " successfully downloaded in " ,
 								  round(elapsed_seconds, 1), " seconds, and saved as ", file_path)
-		recordsAffectedCount <- 0L
+		recordsAffectedCount <- length(record)
 		record_id <- record
 		raw_text <- ""
 	} 
@@ -151,6 +152,7 @@ redcap_download_file_oneshot <- function( file_name=NULL, dir=NULL, record, fiel
 		records_affected_count = recordsAffectedCount,
 		affected_ids = record_id,
 		elapsed_seconds = elapsed_seconds,
-		raw_text = raw_text    
+		raw_text = raw_text,
+		file_name = file_name
 	))
 }

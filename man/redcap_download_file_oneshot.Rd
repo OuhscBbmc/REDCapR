@@ -57,7 +57,9 @@ subject IDs of the inserted or updated records.  \item
 \item \code{raw_text}: If an operation is NOT successful,
 the text returned by REDCap.  If an operation is
 successful, the `raw_text` is returned as an empty string
-to save RAM. }
+to save RAM.  \item \code{file_name}: The name of the file
+persisted to disk. This is useful if the name stored in
+REDCap is used (which is the default). }
 }
 \description{
 This function uses REDCap's
