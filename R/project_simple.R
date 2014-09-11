@@ -31,7 +31,7 @@ populate_project_simple <- function( batch = FALSE ) {
   
   #If uploading the data was successful, then upload the image files.
   if( returned_object$success) {
-    upload_file_simple()
+    upload_file_simple(redcap_uri=uri, token=token)
   }
   
   #Print a message and return a boolean value
@@ -67,7 +67,7 @@ clean_start_simple <- function( batch = FALSE ) {
   return( populate_result )
 }
 
-upload_file_simple <- function( ) {
+upload_file_simple <- function( redcap_uri, token=token ) {
   records <- 1:5
   file_paths <- base::file.path(devtools::inst(name="REDCapR"), paste0("test_data/mugshot_", records, ".jpg"))
   
@@ -77,7 +77,7 @@ upload_file_simple <- function( ) {
   for( i in seq_along(records) ) {
     record <- records[i]
     file_path <- file_paths[i]
-    redcap_upload_file(file_name=file_path, record=record, field=field, redcap_uri=uri, token=token)
+    redcap_upload_file_oneshot(file_name=file_path, record=record, field=field, redcap_uri=redcap_uri, token=token)
   }  
 }
 

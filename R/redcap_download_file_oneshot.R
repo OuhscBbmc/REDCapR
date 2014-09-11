@@ -1,5 +1,5 @@
-#' @name redcap_download_file
-#' @export redcap_download_file
+#' @name redcap_download_file_oneshot
+#' @export redcap_download_file_oneshot
 #' 
 #' @title Download a file from a REDCap project record.
 #'  
@@ -47,29 +47,29 @@
 #' field <- "mugshot"
 #' # event <- "" # only for longitudinal events
 #' 
-#' result_1 <- redcap_download_file(record=record, field=field, 
+#' result_1 <- redcap_download_file_oneshot(record=record, field=field, 
 #'                                  redcap_uri=uri, token=token)
 #' base::unlink("mugshot_1.jpg")
 #' 
 #' (full_name <- base::tempfile(pattern="mugshot", fileext=".jpg"))
-#' result_2 <- redcap_download_file(file_name=full_name, record=record, field=field, 
+#' result_2 <- redcap_download_file_oneshot(file_name=full_name, record=record, field=field, 
 #'                                  redcap_uri=uri, token=token)
 #' base::unlink(full_name)
 #' 
 #' (relative_name <- "ssss.jpg")
-#' result_3 <- redcap_download_file(file_name=relative_name, record=record, field=field, 
+#' result_3 <- redcap_download_file_oneshot(file_name=relative_name, record=record, field=field, 
 #'                                  redcap_uri=uri, token=token)
 #' base::unlink(relative_name)
 #' }
 
-redcap_download_file <- function( file_name=NULL, dir=NULL, record, field, event="", redcap_uri, token, verbose=TRUE, cert_location=NULL ) {
+redcap_download_file_oneshot <- function( file_name=NULL, dir=NULL, record, field, event="", redcap_uri, token, verbose=TRUE, cert_location=NULL ) {
 	start_time <- Sys.time()
 	
 	if( missing(redcap_uri) )
-		stop("The required parameter `redcap_uri` was missing from the call to `redcap_download_file()`.")
+		stop("The required parameter `redcap_uri` was missing from the call to `redcap_download_file_oneshot()`.")
 	
 	if( missing(token) )
-		stop("The required parameter `token` was missing from the call to `redcap_download_file()`.")     
+		stop("The required parameter `token` was missing from the call to `redcap_download_file_oneshot()`.")     
 	
 	if( missing( cert_location ) | is.null(cert_location) ) 
 		cert_location <- system.file("cacert.pem", package="httr")

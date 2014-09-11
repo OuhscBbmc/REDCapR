@@ -49,7 +49,7 @@ test_that("Read, Insert, and Update", {
     1L, 80L, 54L, 104L), comments = c("Character in a book, with some guessing", 
     "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), mugshot = c(NA, NA, NA, NA, NA), demographics_complete = c(2L, 
+    ), mugshot = c("[document]", "[document]", "[document]", "[document]", "[document]"), demographics_complete = c(2L, 
     2L, 2L, 2L, 2L)), .Names = c("record_id", "first_name", "last_name", 
     "address", "telephone", "email", "dob", "ethnicity", "race", 
     "sex", "height", "weight", "comments", "mugshot", "demographics_complete"
