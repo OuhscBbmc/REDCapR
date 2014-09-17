@@ -2,6 +2,7 @@
 \name{redcap_download_file_oneshot}
 \alias{redcap_download_file_oneshot}
 \title{Download a file from a REDCap project record.}
+\Description{This function uses REDCaps API to download a file}
 \usage{
 redcap_download_file_oneshot(file_name = NULL, directory = NULL,
   overwrite = FALSE, redcap_uri, token, record, field, event = "",
