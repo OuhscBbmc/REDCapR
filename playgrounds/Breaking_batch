@@ -16,4 +16,4 @@ create_batch_glossary(nrow(dummy_data), batch_size=1)
 # I would be verys surprised if this turned out to be helpful to anyone.
 
 create_batch_glossary(nrow(dummy_data), batch_size=0)
-#returns error.
+#returns an error message.
