@@ -2,7 +2,6 @@
 \name{redcap_download_file_oneshot}
 \alias{redcap_download_file_oneshot}
 \title{Download a file from a REDCap project record.}
-\Description{This function uses REDCaps API to download a file}
 \usage{
 redcap_download_file_oneshot(file_name = NULL, directory = NULL,
   overwrite = FALSE, redcap_uri, token, record, field, event = "",
@@ -69,7 +68,7 @@ REDCap is used (which is the default). }
 \description{
 This function uses REDCap's
 \href{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}{API}
-to upload a file
+to download a file
 }
 \details{
 The `REDCapR' package includes a recent version of the

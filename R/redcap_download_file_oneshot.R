@@ -4,7 +4,7 @@
 #' @title Download a file from a REDCap project record.
 #'  
 #' @description This function uses REDCap's \href{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}{API}
-#' to upload a file
+#' to download a file
 #' 
 #' @param file_name The name of the file where the downloaded file is saved.
 #' 		     If empty the original name of the file will be used and saved in 
