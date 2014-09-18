@@ -11,6 +11,7 @@ Breaking Changes:
 
 Updates:
 * By default, the SSL certs come from the `httr` package.  However, REDCapR will continue to maintain a copy in case httr's version on CRAN gets out of date.
+* The tests are split into two collections: one that's run by the CRAN checks, and the other run manually.  [Thanks, Gabor Csardi](http://stackoverflow.com/questions/25595487/testthat-pattern-for-long-running-tests).
 
 Version 0.3 (Developed 2014-07-03 through 2014-09-01)
 ------------------------------------------------------------------------------
