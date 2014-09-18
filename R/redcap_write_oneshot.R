@@ -128,7 +128,7 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, cert_loca
     recordsAffectedCount <- length(affectedIDs)
     outcome_message <- paste0(format(recordsAffectedCount, big.mark = ",", scientific = FALSE, trim = TRUE), 
                              " records were written to REDCap in ", 
-                             round(elapsed_seconds, 2), 
+                             round(elapsed_seconds, 1), 
                              " seconds.")
   } 
   else { #If the returned content wasn't recognized as valid IDs, then

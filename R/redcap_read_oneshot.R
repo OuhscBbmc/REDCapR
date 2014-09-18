@@ -155,7 +155,7 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
                              " records and ",  
                              format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
                              " columns were read from REDCap in ", 
-                             round(elapsed_seconds, 2), " seconds.  The http status code was ",
+                             round(elapsed_seconds, 1), " seconds.  The http status code was ",
                              status_code, ".")
     
     #If an operation is successful, the `raw_text` is no longer returned to save RAM.  It's not really necessary with httr's status message exposed.
