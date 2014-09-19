@@ -40,7 +40,10 @@ redcap_read_oneshot(redcap_uri, token, records = NULL,
 
   \item{verbose}{A boolean value indicating if
   \code{message}s should be printed to the R console during
-  the operation.  Optional.}
+  the operation.  The verbose output might contain
+  sensitive information (\emph{e.g.} PHI), so turn this off
+  if the output might be visible somewhere public.
+  Optional.}
 
   \item{cert_location}{If present, this string should point
   to the location of the cert files required for SSL

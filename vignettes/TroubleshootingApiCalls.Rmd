@@ -291,7 +291,8 @@ REDCap is used in many enviroments, andit's not surprising that a lot of librari
  1. [`django-redcap`](https://github.com/cbmi/django-redcap): "Utilities for porting REDCap projects to and from Django models." (Written in Python primarily by 'dmegahan at CHOP's [CBMI](https://github.com/cbmi)).
 
 ## Other good resources
- * The basic API documentation is available on your REDCap server, typically at http://<*your server name*>/redcap/api/help
+ * The basic API documentation is available on your REDCap server, typically at http://<*your server name*>/redcap/api/help.
+ * If you have access to the REDCap wiki, some newer examples might exist at <https://iwg.devguard.com/trac/redcap/wiki/ApiExamples>.
  * Scott Burns, the developer of [PyCap](http://sburns.org/PyCap/) has a good intro at http://sburns.org/2013/07/22/intro-to-redcap-api.html
  * Bejamin Nutter, the developer of [redcapAPI](https://github.com/nutterb/redcapAPI/wiki) has a good wiki at https://github.com/nutterb/redcapAPI/wiki
  * In addition to this troubleshooting document, REDCapR has a [vignette](http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/BasicREDCapROperations.html) that covers its basic operations.
