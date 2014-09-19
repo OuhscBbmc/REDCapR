@@ -294,7 +294,7 @@ ds_some_rows_v2 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
+<pre><code>2 records and 16 columns were read from REDCap in 0.8 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_some_rows_v2 #Inspect the returned dataset
@@ -399,7 +399,7 @@ $fields_collapsed
 [1] &quot;recordid,first_name,age&quot;
 
 $elapsed_seconds
-[1] 0.285
+[1] 0.3295
 
 $raw_text
 [1] &quot;&quot;
@@ -409,10 +409,10 @@ $raw_text
 
 <p>For the sake of documentation and reproducibility, the current vignette was build on a system using the following software.</p>
 
-<pre><code>Report created by Will at 2014-09-18, 16:49:19 -0500
+<pre><code>Report created by Will at 2014-09-19, 09:51:27 -0500
 </code></pre>
 
-<pre><code>R version 3.1.1 Patched (2014-09-03 r66517)
+<pre><code>R version 3.1.1 Patched (2014-09-17 r66626)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 locale:
@@ -423,7 +423,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] REDCapR_0.4-25      knitr_1.6           testthat_0.8.1.0.99
+[1] knitr_1.6           REDCapR_0.4-28      testthat_0.8.1.0.99
 
 loaded via a namespace (and not attached):
  [1] codetools_0.2-9 devtools_1.5    digest_0.6.4    evaluate_0.5.5  formatR_1.0     httr_0.5        lubridate_1.3.3

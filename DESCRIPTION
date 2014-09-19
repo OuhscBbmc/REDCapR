@@ -1,8 +1,8 @@
 Package: REDCapR
 Title: Interaction between R and REDCap
 Description: Encapsulates functions to streamline calls from R
-Version: 0.4-27
-Date: 2014-09-18
+Version: 0.4-28
+Date: 2014-09-19
 Authors@R: c(person("Will", "Beasley", role = c("aut", "cre"), email =
     "wibeasley@hotmail.com"), person("David", "Bard", role = "ctb"),
     person("Thomas", "Wilson", role = "ctb"), person(given="John J",
