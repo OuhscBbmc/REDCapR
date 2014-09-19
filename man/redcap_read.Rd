@@ -3,11 +3,11 @@
 \alias{redcap_read}
 \title{Read records from a REDCap project in subsets, and stacks them together before returning a \code{data.frame}.}
 \usage{
-redcap_read(batch_size = 100L, interbatch_delay = 0.5, redcap_uri, token,
-  records = NULL, records_collapsed = "", fields = NULL,
-  fields_collapsed = "", export_data_access_groups = FALSE,
-  raw_or_label = "raw", verbose = TRUE, cert_location = NULL,
-  id_position = 1L)
+redcap_read(batch_size = 100L, interbatch_delay = 0.5,
+  continue_on_error = FALSE, redcap_uri, token, records = NULL,
+  records_collapsed = "", fields = NULL, fields_collapsed = "",
+  export_data_access_groups = FALSE, raw_or_label = "raw", verbose = TRUE,
+  cert_location = NULL, id_position = 1L)
 }
 \arguments{
   \item{batch_size}{The maximum number of subject records a
@@ -16,6 +16,11 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5, redcap_uri, token,
   \item{interbatch_delay}{The number of seconds the
   function will wait before requesting a new subset from
   REDCap. The default is 0.5 seconds.}
+
+  \item{continue_on_error}{If an error occurs while
+  reading, should records in subsequent batches be
+  attempted.  The default is \code{FALSE}, which prevents
+  subsequent batches from running.  Required.}
 
   \item{redcap_uri}{The URI (uniform resource identifier)
   of the REDCap project.  Required.}

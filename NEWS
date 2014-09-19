@@ -5,6 +5,7 @@ New Features:
 * `redcap_write` and `redcap_write_oneshot` are now tested and public.
 * `redcap_download_file_oneshot` function contributed by @johnaponte (Pull request #35)
 * `redcap_upload_file_oneshot` function contributed by @johnaponte (Pull request #34)
+* Users can specify if an operation should continue after an error occurs on a batch read or write.  Regardless of their choice, more debugging output is written to the console if `verbose==TRUE`.  Follows advice of @johnaponte and @rparrish. Closes #43.
 
 Breaking Changes:
 * The `records_collapsed` default empty value is now an empty string (ie, "") instead of NULL.  This applies when `records_collapsed` is either a parameter, or a returned value.

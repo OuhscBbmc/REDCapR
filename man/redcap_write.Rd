@@ -4,7 +4,8 @@
 \title{Write/Import records to a REDCap project.}
 \usage{
 redcap_write(ds_to_write, batch_size = 100L, interbatch_delay = 0.5,
-  redcap_uri, token, verbose = TRUE, cert_location = NULL)
+  continue_on_error = FALSE, redcap_uri, token, verbose = TRUE,
+  cert_location = NULL)
 }
 \arguments{
   \item{ds_to_write}{The \code{data.frame} to be imported
@@ -16,6 +17,11 @@ redcap_write(ds_to_write, batch_size = 100L, interbatch_delay = 0.5,
   \item{interbatch_delay}{The number of seconds the
   function will wait before requesting a new subset from
   REDCap. The default is 0.5 seconds.}
+
+  \item{continue_on_error}{If an error occurs while
+  writing, should records in subsequent batches be
+  attempted.  The default is \code{FALSE}, which prevents
+  subsequent batches from running.  Required.}
 
   \item{redcap_uri}{The URI (uniform resource identifier)
   of the REDCap project.  Required.}

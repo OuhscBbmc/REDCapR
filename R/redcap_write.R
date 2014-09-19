@@ -9,6 +9,7 @@
 #' @param ds_to_write The \code{data.frame} to be imported into the REDCap project.  Required.
 #' @param batch_size The maximum number of subject records a single batch should contain.  The default is 100.
 #' @param interbatch_delay The number of seconds the function will wait before requesting a new subset from REDCap. The default is 0.5 seconds.
+#' @param continue_on_error If an error occurs while writing, should records in subsequent batches be attempted.  The default is \code{FALSE}, which prevents subsequent batches from running.  Required.
 #' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
 #' @param token The user-specific string that serves as the password for a project.  Required.
 #' @param verbose A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.
@@ -70,6 +71,7 @@
 redcap_write <- function( ds_to_write, 
                           batch_size = 100L,
                           interbatch_delay = 0.5,
+                          continue_on_error = FALSE,
                           redcap_uri,
                           token,
                           verbose = TRUE, cert_location=NULL ) {  
@@ -107,8 +109,13 @@ redcap_write <- function( ds_to_write,
     # lst_status_message[[i]] <- write_result$status_message
     lst_outcome_message[[i]] <- write_result$outcome_message
     
-    if( !write_result$success )
-      stop("The `redcap_write()` call failed on iteration ", i, ". Set the `verbose` parameter to TRUE and rerun for additional information.")
+    if( !write_result$success ) {
+      error_message <- paste0("The `redcap_write()` call failed on iteration ", i, ".")
+      error_message <- paste(error_message, ifelse(!verbose, "Set the `verbose` parameter to TRUE and rerun for additional information.", ""))
+      
+      if( continue_on_error ) warning(error_message)
+      else stop(error_message)
+    }
     
     affected_ids <- c(affected_ids, write_result$affected_ids)
     success_combined <- success_combined | write_result$success

@@ -10,6 +10,7 @@
 #' 
 #' @param batch_size The maximum number of subject records a single batch should contain.  The default is 100.
 #' @param interbatch_delay The number of seconds the function will wait before requesting a new subset from REDCap. The default is 0.5 seconds.
+#' @param continue_on_error If an error occurs while reading, should records in subsequent batches be attempted.  The default is \code{FALSE}, which prevents subsequent batches from running.  Required.
 #' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
 #' @param token The user-specific string that serves as the password for a project.  Required.
 #' @param records An array, where each element corresponds to the ID of a desired record.  Optional.
@@ -56,22 +57,17 @@
 #' }
 #' 
 
-redcap_read <- function( batch_size=100L, interbatch_delay=0.5,
-                               redcap_uri, token, records=NULL, records_collapsed="", 
-                               fields=NULL, fields_collapsed="", 
-                               export_data_access_groups = FALSE,
-                               raw_or_label = 'raw',
-                               verbose=TRUE, cert_location=NULL, id_position=1L ) {  
+redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_error = FALSE,
+                         redcap_uri, token, records=NULL, records_collapsed="", 
+                         fields=NULL, fields_collapsed="", 
+                         export_data_access_groups = FALSE,
+                         raw_or_label = 'raw',
+                         verbose=TRUE, cert_location=NULL, id_position=1L ) {  
   if( missing(redcap_uri) )
     stop("The required parameter `redcap_uri` was missing from the call to `redcap_read()`.")
   
   if( missing(token) )
     stop("The required parameter `token` was missing from the call to `redcap_read()`.")
-  
-  # if( !missing(records) & (is.null(records_collapsed) | missing(records_collapsed)) )
-  #   records_collapsed <- paste0(records, collapse=",")
-  # if( !missing(fields) & (is.null(fields_collapsed) | missing(fields_collapsed)) )
-  #   fields_collapsed <- paste0(fields, collapse=",")
   
   if( nchar(records_collapsed)==0 )
     records_collapsed <- ifelse(is.null(records), "", paste0(records, collapse=",")) #This is an empty string if `records` is NULL.
@@ -141,8 +137,14 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5,
     lst_status_code[[i]] <- read_result$status_code
     # lst_status_message[[i]] <- read_result$status_message
     lst_outcome_message[[i]] <- read_result$outcome_message
-    if( !read_result$success )
-      stop("The `redcap_read()` call failed on iteration", i, ". Set the `verbose` parameter to TRUE and rerun for additional information.")
+
+    if( !read_result$success ) {
+      error_message <- paste0("The `redcap_read()` call failed on iteration ", i, ".")
+      error_message <- paste(error_message, ifelse(!verbose, "Set the `verbose` parameter to TRUE and rerun for additional information.", ""))
+      
+      if( continue_on_error ) warning(error_message)
+      else stop(error_message)
+    }
     
     lst_batch[[i]] <- read_result$data
     success_combined <- success_combined | read_result$success
