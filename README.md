@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/OuhscBbmc/REDCapR.png?branch=master)](https://travis-ci.org/OuhscBbmc/REDCapR)
+[![DOI](https://zenodo.org/badge/4971/OuhscBbmc/REDCapR.png)](http://dx.doi.org/10.5281/zenodo.11796)
 
 REDCapR
 =======
@@ -29,12 +30,11 @@ ds_some_fields <- redcap_read(
    fields = desired_fields
 )$data
 ```
+In the next year, we hope to implement everything exposed by the REDCap API.  If there's a feature that would help your projects, feel free to post something here in the forums, or create an issue in REDCapR's [GitHub repository](https://github.com/OuhscBbmc/REDCapR/issues).  A [troubleshooting](http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/TroubleshootingApiCalls.html) document helps diagnose issues with the API.
 
-We have completed `redcap_write()`, but aren't releasing it until appropriate unit/regression/integration tests are written.  We first need a way to automate deleting the newly inserted records, so the database's state is cleaned up before subsequent tests.
+Our group has benefited so much from REDCap and the surrounding community, and we'd like to contribute back.  Suggestions, criticisms, and code contributions are welcome.  And if anyone is interested in trying a direction that suits them better, we'll be happy to explain the package's internals and help you fork your own version.  We have some starting material described in the [`./documentation_for_developers/`](https://github.com/OuhscBbmc/REDCapR/tree/master/documentation_for_developers) directory.  Also a few other currently-developed libraries exist for communicating with REDCap: [redcapAPI](https://github.com/nutterb/redcapAPI) written for R (which is a fork of [redcap](https://github.com/jeffreyhorner/redcap)), [RedcapAPI](https://github.com/eugyev/RedcapAPI), and [PyCap](http://sburns.org/PyCap/) written for Python.
 
-Once the `redcap_write()` function is tested and documented, we'll release it on [CRAN](http://cran.r-project.org/web/packages/).  In the next few months, we hope to implement everything exposed by the REDCap API.  If there's a feature that would help your projects, feel free to post something here in the forums, or create an issue in REDCapR's [GitHub repository](https://github.com/OuhscBbmc/REDCapR/issues).  A [troubleshooting](http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/TroubleshootingApiCalls.html) document helps diagnose issues with the API.
-
-Our group has benefited so much from REDCap and the surrounding community, and we'd like to contribute back.  Suggestions, criticisms, and code contributions are welcome.  And if anyone is interested in trying a direction that suits them better, we'll be happy to explain the package's internals and help you fork your own version.  We have some starting material described in the [`./documentation_for_developers/`](https://github.com/OuhscBbmc/REDCapR/tree/master/documentation_for_developers) directory.  Also two other libraries exist for communicating with REDCap: [redcap](https://github.com/nutterb/redcap) and its current fork, [redcapAPI](https://github.com/nutterb/redcapAPI) written for R, and [PyCap](http://sburns.org/PyCap/) written for Python.
+We'd like to thank the following developers for their [advice](https://github.com/OuhscBbmc/REDCapR/issues?q=is%3Aissue+is%3Aclosed) and [code contributions](https://github.com/OuhscBbmc/REDCapR/graphs/contributors): [Rollie Parrish](https://github.com/rparrish), [Scott Burns](https://github.com/sburns), [Benjamin Nutter](https://github.com/nutterb), [John Aponte](https://github.com/johnaponte), and [Andrew Peters](https://github.com/ARPeters).
 
 Thanks, 
 Will Beasley, David Bard, & Thomas Wilson
@@ -48,8 +48,18 @@ Will Beasley, David Bard, & Thomas Wilson
 install.packages("REDCapR", repos="http://R-Forge.R-project.org")
 ``` -->
 
-The development version of REDCapR can be installed from [GitHub](https://github.com/OuhscBbmc/REDCapR) after installing the `devtools` package.
+The *release* version of REDCapR can be installed from [CRAN](http://cran.r-project.org/web/packages/REDCapR/).  **It was submitted 2014-09-19, and sometimes takes a few days for the binaries to be replicated on all the mirrors.**
+```
+install.packages("REDCapR")
+```
+
+The *development* version of REDCapR can be installed from [GitHub](https://github.com/OuhscBbmc/REDCapR) after installing the `devtools` package.
 ```
 install.packages("devtools")
 devtools::install_github(repo="OuhscBbmc/REDCapR")
 ```
+
+### Thanks to Funders
+[HRSA/ACF D89MC23154](https://perf-data.hrsa.gov/mchb/DGISReports/Abstract/AbstractDetails.aspx?Source=TVIS&GrantNo=D89MC23154&FY=2012)
+
+*OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting ([MIECHV](http://mchb.hrsa.gov/programs/homevisiting/)) Project.*: Evaluates MIECHV expansion and enhancement of Evidence-based Home Visitation programs in four Oklahoma counties.

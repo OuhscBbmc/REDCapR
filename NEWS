@@ -1,20 +1,22 @@
-Version 0.4 (Developed 2014-09-01 through ?)
+Version 0.5 (Developed 2014-09-20 through ?)
+------------------------------------------------------------------------------
+
+Version 0.4 (Developed 2014-09-01 through 2014-09-20)
 ------------------------------------------------------------------------------
 New Features:
 * `redcap_write` and `redcap_write_oneshot` are now tested and public.
 * `redcap_write` and `redcap_write_oneshot` are now tested and public.
-* `redcap_download_file_oneshot` function contributed by @johnaponte (Pull request #35)
+* `redcap_download_file_oneshot` function contributed by John Aponte (@johnaponte; Pull request #35)
 * `redcap_upload_file_oneshot` function contributed by @johnaponte (Pull request #34)
-* Users can specify if an operation should continue after an error occurs on a batch read or write.  Regardless of their choice, more debugging output is written to the console if `verbose==TRUE`.  Follows advice of @johnaponte, @nutterb, and @rparrish. Closes #43.
+* Users can specify if an operation should continue after an error occurs on a batch read or write.  Regardless of their choice, more debugging output is written to the console if `verbose==TRUE`.  Follows advice of @johnaponte, Benjamin Nutter (@nutterb), and Rollie Parrish (@rparrish). Closes #43.
 
 Breaking Changes:
 * The `records_collapsed` default empty value is now an empty string (ie, "") instead of NULL.  This applies when `records_collapsed` is either a parameter, or a returned value.
 
 Updates:
 * By default, the SSL certs come from the `httr` package.  However, REDCapR will continue to maintain a copy in case httr's version on CRAN gets out of date.
-* The tests are split into two collections: one that's run by the CRAN checks, and the other run manually.  [Thanks, Gabor Csardi](http://stackoverflow.com/questions/25595487/testthat-pattern-for-long-running-tests).
-
-  Any test with a dependency outside the package code (especially the REDCap test projects) is run manually so changes to the test databases won't affect the success of building the previous version on CRAN.
+* The tests are split into two collections: one that's run by the CRAN checks, and the other run manually.  [Thanks, Gabor Csardi](http://stackoverflow.com/questions/25595487/testthat-pattern-for-long-running-tests).  Any test with a dependency outside the package code (especially the REDCap test projects) is run manually so changes to the test databases won't affect the success of building the previous version on CRAN.
+* Corrected typo in `redcap_download_file_oneshot()` documentation, but Andrew Peters (@ARPeters; Pull request #45).
 
 Version 0.3 (Developed 2014-07-03 through 2014-09-01)
 ------------------------------------------------------------------------------

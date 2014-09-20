@@ -1,20 +1,25 @@
 Package: REDCapR
 Title: Interaction between R and REDCap
 Description: Encapsulates functions to streamline calls from R
-Version: 0.4-28
-Date: 2014-09-19
+Version: 0.5-1
+Date: 2014-09-20
 Authors@R: c(person("Will", "Beasley", role = c("aut", "cre"), email =
     "wibeasley@hotmail.com"), person("David", "Bard", role = "ctb"),
     person("Thomas", "Wilson", role = "ctb"), person(given="John J",
     family="Aponte", role = "ctb"), person("Rollie", "Parrish",
+    role = "ctb"), person("Benjamin", "Nutter",
+    role = "ctb"), person("Andrew", "Peters",
     role = "ctb"))
 Author: Will Beasley [aut, cre],
     David Bard [ctb],
     Thomas Wilson [ctb],
     John J Aponte [ctb],
-    Rollie Parrish [ctb]
+    Rollie Parrish [ctb],
+    Benjamin Nutter [ctb],
+    Andrew Peters [ctb]
 Maintainer: Will Beasley <wibeasley@hotmail.com>
-URL: http://ouhsc.edu/bbmc/
+URL: https://github.com/OuhscBbmc/REDCapR, http://ouhsc.edu/bbmc/,
+    http://project-redcap.org
 Depends:
     R(>= 3.0.0),
     stats
