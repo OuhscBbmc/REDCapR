@@ -7,12 +7,14 @@ uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account on pid=153.
 
 test_that("Smoke Test", {  
+  testthat::skip_on_cran()
   expect_message(
     returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, verbose=T)    
   )
 })
 
 test_that("All Records -Default", {  
+  testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 1:5, first_name = c("Nutmeg", "Tumtum", 
     "Marcus", "Trudy", "John Lee"), last_name = c("Nutmouse", "Nutmouse", 
     "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232", 
@@ -54,6 +56,7 @@ test_that("All Records -Default", {
   expect_true(returned_object$success)
 })
 test_that("All Records -Raw", {  
+  testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 1:5, first_name = c("Nutmeg", "Tumtum", 
     "Marcus", "Trudy", "John Lee"), last_name = c("Nutmouse", "Nutmouse", 
     "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232", 
@@ -93,6 +96,7 @@ test_that("All Records -Raw", {
 })
 
 test_that("All Records -Raw", {  
+  testthat::skip_on_cran()
   expected_data_frame <-structure(list(record_id = 1:5, redcap_data_access_group = c("dag_1", 
     "dag_1", "dag_1", "", "dag_2"), first_name = c("Nutmeg", "Tumtum", 
     "Marcus", "Trudy", "John Lee"), last_name = c("Nutmouse", "Nutmouse", 
@@ -133,6 +137,7 @@ test_that("All Records -Raw", {
 })
 
 test_that("All Records -label and DAG", {  
+  testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 1:5, redcap_data_access_group = c("dag_1", 
     "dag_1", "dag_1", "", "dag_2"), first_name = c("Nutmeg", "Tumtum", 
     "Marcus", "Trudy", "John Lee"), last_name = c("Nutmouse", "Nutmouse", 
@@ -177,6 +182,7 @@ test_that("All Records -label and DAG", {
 })
 
 test_that("All Records -label", {  
+  testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 1:5, first_name = c("Nutmeg", "Tumtum", 
     "Marcus", "Trudy", "John Lee"), last_name = c("Nutmouse", "Nutmouse", 
     "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232", 
