@@ -3,16 +3,16 @@
 
 REDCapR
 =======
-We’ve been using R with REDCap’s API since the Fall 2012 and have developed a few functions that we're assembling in an R package: [REDCapR](https://github.com/OuhscBbmc/REDCapR).
+We’ve been using R with REDCap’s API since the Fall 2012 and have developed a few functions that we're assembling in an R package: `REDCapR`.  The release version and documentation is on [CRAN](http://cran.rstudio.com/web/packages/REDCapR/), while the development site for collaboration is on [GitHub](https://github.com/OuhscBbmc/REDCapR).
 
-It was taking us about 50 lines of code to contact REDCap and robustly transform the returned CSV into an R `data.frame`.  The same thing can be done in one line of code with the package's `redcap_read()` function:
+It was taking us about 50 lines of code to contact REDCap and robustly transform the returned CSV into an R `data.frame`.  It took more than twice that much code to implement batching.  AL this can be done in one line of code with the package's `redcap_read()` function:
 ```
 ds <- redcap_read(redcap_uri=uri, token=token)$data
 ```
 
 The `REDCapR` package includes the [Bundle of CA Root Certificates](http://curl.haxx.se/ca/cacert.pem) from the official [cURL site](http://curl.haxx.se).  Your REDCap server's identity is always verified, unless the setting is overridden (or alternative certificates can also be provided).
 
-The `redcap_read()` function also accepts values for subsetting/filtering the records and fields.  The [current documentation](https://github.com/OuhscBbmc/REDCapR/blob/master/DocumentationPeek.pdf) can be found in the [GitHub repository](https://github.com/OuhscBbmc/REDCapR).  A [vignette](http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/BasicREDCapROperations.html) has also been started.
+The `redcap_read()` function also accepts values for subsetting/filtering the records and fields.  The [most recent documentation](https://github.com/OuhscBbmc/REDCapR/blob/master/DocumentationPeek.pdf) can be found in the [GitHub repository](https://github.com/OuhscBbmc/REDCapR).  A [vignette](http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/BasicREDCapROperations.html) has also been started.
 ```
 #Return only records with IDs of 1 and 4
 desired_records <- c(1, 4)
