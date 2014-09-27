@@ -321,7 +321,7 @@ ds_some_fields_v1 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.6 seconds.  The http status code was 200.
+<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">#Return only the fields recordid, first_name, and age (alternate way)
@@ -399,7 +399,7 @@ $fields_collapsed
 [1] &quot;recordid,first_name,age&quot;
 
 $elapsed_seconds
-[1] 0.256
+[1] 0.2708
 
 $raw_text
 [1] &quot;&quot;
@@ -409,7 +409,7 @@ $raw_text
 
 <p>For the sake of documentation and reproducibility, the current vignette was build on a system using the following software.</p>
 
-<pre><code>Report created by Will at 2014-09-20, 10:38:55 -0500
+<pre><code>Report created by Will at 2014-09-27, 16:21:27 -0500
 </code></pre>
 
 <pre><code>R version 3.1.1 Patched (2014-09-17 r66626)
@@ -423,12 +423,11 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] knitr_1.6           REDCapR_0.5-1       testthat_0.8.1.0.99
+[1] knitr_1.6     REDCapR_0.5-3 testthat_0.9 
 
 loaded via a namespace (and not attached):
- [1] codetools_0.2-9 devtools_1.5    digest_0.6.4    evaluate_0.5.5  formatR_1.0     htmltools_0.2.6 httr_0.5       
- [8] lubridate_1.3.3 memoise_0.2.1   parallel_3.1.1  plyr_1.8.1      Rcpp_0.11.2     RCurl_1.95-4.3  rmarkdown_0.3.3
-[15] roxygen2_4.0.2  stringr_0.6.2   tools_3.1.1     whisker_0.3-2  
+ [1] codetools_0.2-9 devtools_1.6    digest_0.6.4    evaluate_0.5.5  formatR_1.0     httr_0.5        lubridate_1.3.3
+ [8] memoise_0.2.1   plyr_1.8.1      Rcpp_0.11.2     RCurl_1.95-4.3  roxygen2_4.0.2  stringr_0.6.2   tools_3.1.1    
 </code></pre>
 
 </body>
