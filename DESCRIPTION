@@ -38,7 +38,7 @@ Suggests:
     methods,
     RODBC,
     testit,
-    testthat
+    testthat (>= 0.9)
 License: GPL-3
 LazyData: TRUE
 VignetteBuilder: knitr

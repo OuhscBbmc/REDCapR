@@ -17,6 +17,7 @@
 #' library(REDCapR) #Load the package into the current R session.
 #' uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token <- "D70F9ACD1EDD6F151C6EA78683944E98"
+#' \dontrun{
 #' project <- redcap_project$new(redcap_uri=uri, token=token)
 #' dsAll <- project$read()
 #' 
@@ -29,7 +30,6 @@
 #' dsMales <- project$read(records=idsOfMales, batch_size=2)$data
 #' dsShorties <- project$read(records=idsOfShorties)$data
 #' 
-#' \dontrun{
 #' #Switch the Genders
 #' sex_original <- dsThreeColumns$sex
 #' dsThreeColumns$sex <- (1 - dsThreeColumns$sex)

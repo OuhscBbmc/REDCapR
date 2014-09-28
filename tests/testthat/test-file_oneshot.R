@@ -20,7 +20,8 @@ test_that("NameComesFromREDCap", {
     regexp = expected_outcome_message
   )
     
-  start_time <- Sys.time() - lubridate::seconds(1) #Knock off a second inc ase there's small time imprecisions
+#   start_time <- Sys.time() - lubridate::seconds(1) #Knock off a second inc ase there's small time imprecisions
+  start_time <- Sys.time() - 1 #Knock off a second in case there are small time imprecisions
   path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test_data/mugshot_1.jpg")
   info_expected <- file.info(path_of_expected)
   record <- 1
@@ -70,7 +71,7 @@ test_that("FullPathSpecified", {
     regexp = expected_outcome_message
   )
   
-  start_time <- Sys.time() - lubridate::seconds(1) #Knock off a second inc ase there's small time imprecisions
+  start_time <- Sys.time() - 1 #Knock off a second in case there are small time imprecisions
   path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test_data/mugshot_2.jpg")
   info_expected <- file.info(path_of_expected)
   record <- 2
@@ -120,7 +121,7 @@ test_that("RelativePath", {
     regexp = expected_outcome_message
   )
   
-  start_time <- Sys.time() - lubridate::seconds(1) #Knock off a second inc ase there's small time imprecisions
+  start_time <- Sys.time() - 1 #Knock off a second in case there are small time imprecisions
   path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test_data/mugshot_3.jpg")
   info_expected <- file.info(path_of_expected)
   record <- 3
