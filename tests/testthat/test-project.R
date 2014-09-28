@@ -3,7 +3,8 @@ library(testthat)
 ###########
 context("Project Object")
 ###########
-test_that("Smoke Test", {  
+test_that("Smoke Test", {
+  testthat::skip_on_cran()
   start_clean_result <- REDCapR:::clean_start_simple(batch=TRUE)
   project <- start_clean_result$redcap_project
 })
