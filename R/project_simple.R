@@ -38,16 +38,20 @@ populate_project_simple <- function( batch = FALSE ) {
   base::message(base::sprintf("populate_project_simple success: %s.", returned_object$success))
   return( list(is_success=returned_object$success, redcap_project=project) )
 }
-clear_project_simple <- function( ) {
+clear_project_simple <- function( verbose = TRUE ) {
   if( !require(testthat) ) stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.")
   pathDeleteTestRecord <- "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_simple.php"
+  
+  cert_location <- system.file("ssl_certs/mozilla_ca_root.crt", package="REDCapR")
+  config_options <- list(cainfo=cert_location, sslversion=3)
   # httr::url_ok(pathDeleteTestRecord)
   
   #Returns a boolean value if successful
-  (was_successful <- httr::url_success(pathDeleteTestRecord))
+  (was_successful <- httr::url_success(url=pathDeleteTestRecord, config=config_options))
   
   #Print a message and return a boolean value
-  base::message(base::sprintf("clear_project_simple success: %s.", was_successful))
+  if( verbose ) 
+    base::message(base::sprintf("clear_project_simple success: %s.", was_successful))
   return( was_successful )
 }
 
