@@ -57,7 +57,6 @@ test_that("NameComesFromREDCap", {
   expect_more_than(info_actual$mtime, expected=start_time, label="The downloaded file's modification time should not precede this function's start time.")
   expect_more_than(info_actual$ctime, expected=start_time, label="The downloaded file's last change time should not precede this function's start time.")
   expect_more_than(info_actual$atime, expected=start_time, label="The downloaded file's last access time should not precede this function's start time.")
-  expect_equal(info_actual$exe, "no", "The downloaded file should not be an executible.")
 })
 
 test_that("FullPathSpecified", {
@@ -107,7 +106,6 @@ test_that("FullPathSpecified", {
   expect_more_than(info_actual$mtime, expected=start_time, label="The downloaded file's modification time should not precede this function's start time.")
   expect_more_than(info_actual$ctime, expected=start_time, label="The downloaded file's last change time should not precede this function's start time.")
   expect_more_than(info_actual$atime, expected=start_time, label="The downloaded file's last access time should not precede this function's start time.")
-  expect_equal(info_actual$exe, "no", "The downloaded file should not be an executible.")
 })
 
 test_that("RelativePath", {
@@ -157,5 +155,4 @@ test_that("RelativePath", {
   expect_more_than(info_actual$mtime, expected=start_time, label="The downloaded file's modification time should not precede this function's start time.")
   expect_more_than(info_actual$ctime, expected=start_time, label="The downloaded file's last change time should not precede this function's start time.")
   expect_more_than(info_actual$atime, expected=start_time, label="The downloaded file's last access time should not precede this function's start time.")
-  expect_equal(info_actual$exe, "no", "The downloaded file should not be an executible.")
 })

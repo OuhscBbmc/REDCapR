@@ -235,7 +235,7 @@ token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;
 ds_all_rows_all_fields &lt;- redcap_read_oneshot(redcap_uri=uri, token=token)$data
 </code></pre>
 
-<pre><code>5 records and 16 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
+<pre><code>5 records and 16 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_all_rows_all_fields #Inspect the returned dataset
@@ -294,7 +294,7 @@ ds_some_rows_v2 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
+<pre><code>2 records and 16 columns were read from REDCap in 0.4 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_some_rows_v2 #Inspect the returned dataset
@@ -333,7 +333,7 @@ ds_some_fields_v2 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
+<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_some_fields_v2 #Inspect the returned dataset
@@ -369,7 +369,7 @@ all_information &lt;- redcap_read_oneshot(
 )
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
+<pre><code>5 records and 3 columns were read from REDCap in 0.4 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">all_information #Inspect the additional information
@@ -390,7 +390,7 @@ $status_code
 [1] 200
 
 $outcome_message
-[1] &quot;5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.&quot;
+[1] &quot;5 records and 3 columns were read from REDCap in 0.4 seconds.  The http status code was 200.&quot;
 
 $records_collapsed
 [1] &quot;&quot;
@@ -399,7 +399,7 @@ $fields_collapsed
 [1] &quot;recordid,first_name,age&quot;
 
 $elapsed_seconds
-[1] 0.2708
+[1] 0.369
 
 $raw_text
 [1] &quot;&quot;
@@ -409,10 +409,10 @@ $raw_text
 
 <p>For the sake of documentation and reproducibility, the current vignette was build on a system using the following software.</p>
 
-<pre><code>Report created by Will at 2014-09-27, 16:21:27 -0500
+<pre><code>Report created by wbeasley at 2014-09-29, 11:07:16 -0500
 </code></pre>
 
-<pre><code>R version 3.1.1 Patched (2014-09-17 r66626)
+<pre><code>R version 3.1.1 Patched (2014-07-11 r66127)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 locale:
@@ -423,11 +423,11 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] knitr_1.6     REDCapR_0.5-3 testthat_0.9 
+[1] knitr_1.6     REDCapR_0.5-9 testthat_0.9  RODBC_1.3-10  httr_0.5     
 
 loaded via a namespace (and not attached):
- [1] codetools_0.2-9 devtools_1.6    digest_0.6.4    evaluate_0.5.5  formatR_1.0     httr_0.5        lubridate_1.3.3
- [8] memoise_0.2.1   plyr_1.8.1      Rcpp_0.11.2     RCurl_1.95-4.3  roxygen2_4.0.2  stringr_0.6.2   tools_3.1.1    
+ [1] codetools_0.2-9 devtools_1.6    digest_0.6.4    evaluate_0.5.5  formatR_1.0     plyr_1.8.1      Rcpp_0.11.2    
+ [8] RCurl_1.95-4.3  roxygen2_4.0.2  stringr_0.6.2   tools_3.1.1    
 </code></pre>
 
 </body>

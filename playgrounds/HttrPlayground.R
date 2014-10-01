@@ -124,3 +124,14 @@ return_content <- httr::content(result, type="text")
 #   data = csv,
 #   .opts = curl_options
 # )
+
+(was_successful <- httr::url_success("https://bbmc.ouhsc.edu/redcap/plugins/redcapr/no_auth_test.php"))
+
+RCurl::httpHEAD(url = "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/no_auth_test.php", .opts = RCurl::curlOptions(ssl.verifypeer = FALSE))
+RCurl::httpGET(url = "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/no_auth_test.php", .opts = RCurl::curlOptions(ssl.verifypeer = FALSE))
+
+
+#cert_location <- system.file("cacert.pem", package="httr")
+cert_location <- system.file("ssl_certs/mozilla_ca_root.crt", package="REDCapR")
+file.exists(cert_location)
+httr::url_ok("http://bbmc.ouhsc.edu/redcap/plugins/redcapr/no_auth_test.php", config=list(cainfo=cert_location, sslversion=3))

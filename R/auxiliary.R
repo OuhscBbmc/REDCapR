@@ -71,7 +71,7 @@ retrieve_token_mssql <- function(
   
   if( !require(RODBC) ) stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBC` package is not installed.  Please install it and try again.")
 
-  sql <- base::sprintf("EXEC %s.%s %s = %s", schema_name, procedure_name, variable_name_project, field_name_token)
+  sql <- base::sprintf("EXEC %s.%s %s = %s", schema_name, procedure_name, variable_name_project, project_name)
   
   if( base::missing(channel) | base::is.null(channel) ) {
     channel <- RODBC::odbcConnect(dsn=dsn)
