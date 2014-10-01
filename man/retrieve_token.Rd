@@ -65,7 +65,7 @@ open unnecessarily.  See the internals of
 \code{channel} in a \code{tryCatch} block.
 
 If the database elements are create with the script
-provided in package's `Security Database` vignette, the
+provided in package's `Security Database' vignette, the
 default values will work.
 }
 \note{
