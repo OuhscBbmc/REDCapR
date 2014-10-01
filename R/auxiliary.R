@@ -24,7 +24,7 @@
 #' its \code{finally} expression; this helps ensure the expensive database resource isn't held open unnecessarily.  See the internals of
 #' \code{retrieve_token_mssql} for an example of closing the \code{channel} in a \code{tryCatch} block.
 #' 
-#' If the database elements are create with the script provided in package's `Security Database` vignette, the default values will work.
+#' If the database elements are create with the script provided in package's `Security Database' vignette, the default values will work.
 #' 
 #' @note
 #' We use Microsoft SQL Server, because that fits our University's infrastructure the easiest.  But this approach theoretically can work 
@@ -59,30 +59,34 @@
 #' }
 #' 
 
-retrieve_token_mssql <- function( 
-  dsn, 
-  project_name, 
-  channel = NULL, 
-  schema_name = "[Redcap]", 
-  procedure_name = "[prcToken]", 
-  variable_name_project = "@RedcapProjectName", 
+retrieve_token_mssql <- function(
+  dsn,
+  project_name,
+  channel = NULL,
+  schema_name = "[Redcap]",
+  procedure_name = "[prcToken]",
+  variable_name_project = "@RedcapProjectName",
   field_name_token = "Token"
   ) {
   
   if( !require(RODBC) ) stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBC` package is not installed.  Please install it and try again.")
-
+  
   sql <- base::sprintf("EXEC %s.%s %s = %s", schema_name, procedure_name, variable_name_project, project_name)
   
   if( base::missing(channel) | base::is.null(channel) ) {
     channel <- RODBC::odbcConnect(dsn=dsn)
-    close_channel <- FALSE
+    close_channel_on_exit <- TRUE
   } else {
-    close_channel <- TRUE
+    close_channel_on_exit <- FALSE
   }
   
   base::tryCatch(
-    expr = { token <- RODBC::sqlQuery(channel, sql, stringsAsFactors=FALSE)[1, field_name_token] }, 
-    finally = { if( close_channel ) RODBC::odbcClose(channel) }
+    expr = {
+      token <- RODBC::sqlQuery(channel, sql, stringsAsFactors=FALSE)[1, field_name_token]
+    }, finally = {
+      if( close_channel_on_exit )
+        RODBC::odbcClose(channel)
+    }
   )
   
   return( token )
