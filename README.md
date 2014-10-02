@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/OuhscBbmc/REDCapR.png?branch=master)](https://travis-ci.org/OuhscBbmc/REDCapR)
+[![Build Status](https://travis-ci.org/OuhscBbmc/REDCapR.svg?branch=master)](https://travis-ci.org/OuhscBbmc/REDCapR)
 [![DOI](https://zenodo.org/badge/4971/OuhscBbmc/REDCapR.png)](http://dx.doi.org/10.5281/zenodo.11796)
 
 REDCapR
