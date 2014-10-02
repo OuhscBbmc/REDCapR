@@ -1,5 +1,5 @@
-#' @name redcap_metadata_export
-#' @export redcap_metadata_export
+#' @name redcap_metadata_read
+#' @export redcap_metadata_read
 #' 
 #' @title Export the metadata of a REDCap project.
 #'  
@@ -41,18 +41,18 @@
 #' library(REDCapR) #Load the package into the current R session.
 # uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 # token <- "9A81268476645C4E5F03428B8AC3AA7B"
-# redcap_metadata_export(redcap_uri=uri, token=token)
+# redcap_metadata_read(redcap_uri=uri, token=token)
 #' }
 #' 
 
-redcap_metadata_export <- function( 
+redcap_metadata_read <- function( 
                          redcap_uri, token, forms=NULL, forms_collapsed="", 
                          fields=NULL, fields_collapsed="", 
                          verbose=TRUE, cert_location=NULL ) {  
   #TODO: NULL verbose parameter pulls from getOption("verbose")
   #TODO: warns if any requested fields aren't entirely lowercase.
   
-  warning("The `REDCapR::redcap_metadata_export()` function is very new and underdevelopment; it's very likely to change in the future, especially how it handles checkboxes.")
+  warning("The `REDCapR::redcap_metadata_read()` function is very new and underdevelopment; it's very likely to change in the future, especially how it handles checkboxes.")
   
   start_time <- Sys.time()
   
@@ -137,8 +137,8 @@ redcap_metadata_export <- function(
 # token <- "D70F9ACD1EDD6F151C6EA78683944E98" #The version that is repeatedly deleted and rewritten for mosts unit tests.
 # token <- "9A81268476645C4E5F03428B8AC3AA7B" #The version that is relatively static (and isn't repeatedly deleted).
 # 
-# redcap_metadata_export(redcap_uri=uri, token=token)
-# redcap_metadata_export(redcap_uri=uri, token=token, fields=c("record_id", "name_last"))
-# redcap_metadata_export(redcap_uri=uri, token=token, fields_collapsed = "record_id, name_last")
-# redcap_metadata_export(redcap_uri=uri, token=token, forms = c("health"))
-# redcap_metadata_export(redcap_uri=uri, token=token, forms_collapsed = "health")
+# redcap_metadata_read(redcap_uri=uri, token=token)
+# redcap_metadata_read(redcap_uri=uri, token=token, fields=c("record_id", "name_last"))
+# redcap_metadata_read(redcap_uri=uri, token=token, fields_collapsed = "record_id, name_last")
+# redcap_metadata_read(redcap_uri=uri, token=token, forms = c("health"))
+# redcap_metadata_read(redcap_uri=uri, token=token, forms_collapsed = "health")
