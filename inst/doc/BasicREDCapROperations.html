@@ -259,13 +259,13 @@ ds_all_rows_all_fields &lt;- redcap_read_oneshot(redcap_uri=uri, token=token)$da
 3                                                                                          completely made up
 4 This record doesn&#39;t have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail
 5                 Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache
-     mugshot health_complete race2___1 race2___2 race2___3 race2___4 race2___5 race2___6 ethnicity
+     mugshot health_complete race___1 race___2 race___3 race___4 race___5 race___6 ethnicity
 1 [document]               1         0         0         0         0         1         0         1
 2 [document]               0         0         0         1         0         1         0         1
 3 [document]               2         0         0         0         1         1         0         0
 4 [document]               2         0         1         0         0         1         0         1
 5 [document]               0         1         0         0         0         0         1         2
-  raceandethnicity_complete
+  race_and_ethnicity_complete
 1                         2
 2                         0
 3                         2
@@ -312,7 +312,7 @@ ds_some_rows_v2 &lt;- redcap_read_oneshot(
   sex demographics_complete height weight   bmi                                comments    mugshot health_complete
 1   0                     2      7      1 204.1 Character in a book, with some guessing [document]               1
 2   1                     2    180     80  24.7                      completely made up [document]               2
-  race2___1 race2___2 race2___3 race2___4 race2___5 race2___6 ethnicity raceandethnicity_complete
+  race___1 race___2 race___3 race___4 race___5 race___6 ethnicity race_and_ethnicity_complete
 1         0         0         0         0         1         0         1                         2
 2         0         0         0         1         1         0         0                         2
 </code></pre>

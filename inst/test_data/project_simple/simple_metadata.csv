@@ -13,5 +13,5 @@
 "bmi","health","","calc","BMI","round(([weight]*10000)/(([height])^(2)),1)","","",NA,NA,"",NA,NA,NA,NA,NA,NA
 "comments","health","General Comments","notes","Comments","","","",NA,NA,"",NA,NA,NA,NA,NA,NA
 "mugshot","health","","file","Mugshot","","","",NA,NA,"",NA,NA,NA,NA,NA,NA
-"race2","raceandethnicity","","checkbox","Race (Select all that apply","1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported","","",NA,NA,"",NA,NA,NA,NA,NA,NA
-"ethnicity","raceandethnicity","","radio","Ethnicity","0, Unknown / Not Reported | 1, NOT Hispanic or Latino | 2, Hispanic or Latino","","",NA,NA,"",NA,NA,NA,NA,NA,NA
+"race","race_and_ethnicity","","checkbox","Race (Select all that apply)","1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported","","",NA,NA,"",NA,NA,NA,NA,NA,NA
+"ethnicity","race_and_ethnicity","","radio","Ethnicity","0, Unknown / Not Reported | 1, NOT Hispanic or Latino | 2, Hispanic or Latino","","",NA,NA,"",NA,NA,NA,NA,NA,NA

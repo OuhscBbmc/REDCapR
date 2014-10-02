@@ -1,7 +1,7 @@
 library(testthat)
 
 ###########
-context("ReadBatch")
+context("Read Batch")
 ###########
 uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account on pid=153.
@@ -48,16 +48,16 @@ test_that("All Records -Default", {
     "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
     ), mugshot = c("[document]", "[document]", "[document]", "[document]", 
-    "[document]"), health_complete = c(1L, 0L, 2L, 2L, 0L), race2___1 = c(0L, 
-    0L, 0L, 0L, 1L), race2___2 = c(0L, 0L, 0L, 1L, 0L), race2___3 = c(0L, 
-    1L, 0L, 0L, 0L), race2___4 = c(0L, 0L, 1L, 0L, 0L), race2___5 = c(1L, 
-    1L, 1L, 1L, 0L), race2___6 = c(0L, 0L, 0L, 0L, 1L), ethnicity = c(1L, 
-    1L, 0L, 1L, 2L), raceandethnicity_complete = c(2L, 0L, 2L, 2L, 
+    "[document]"), health_complete = c(1L, 0L, 2L, 2L, 0L), race___1 = c(0L, 
+    0L, 0L, 0L, 1L), race___2 = c(0L, 0L, 0L, 1L, 0L), race___3 = c(0L, 
+    1L, 0L, 0L, 0L), race___4 = c(0L, 0L, 1L, 0L, 0L), race___5 = c(1L, 
+    1L, 1L, 1L, 0L), race___6 = c(0L, 0L, 0L, 0L, 1L), ethnicity = c(1L, 
+    1L, 0L, 1L, 2L), race_and_ethnicity_complete = c(2L, 0L, 2L, 2L, 
     2L)), .Names = c("record_id", "name_first", "name_last", "address", 
     "telephone", "email", "dob", "age", "sex", "demographics_complete", 
     "height", "weight", "bmi", "comments", "mugshot", "health_complete", 
-    "race2___1", "race2___2", "race2___3", "race2___4", "race2___5", 
-    "race2___6", "ethnicity", "raceandethnicity_complete"), class = "data.frame", row.names = c(NA, 
+    "race___1", "race___2", "race___3", "race___4", "race___5", 
+    "race___6", "ethnicity", "race_and_ethnicity_complete"), class = "data.frame", row.names = c(NA, 
     -5L))
   expected_outcome_message <- "\\d+ records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
@@ -108,16 +108,16 @@ test_that("All Records -Raw", {
     "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
     ), mugshot = c("[document]", "[document]", "[document]", "[document]", 
-    "[document]"), health_complete = c(1L, 0L, 2L, 2L, 0L), race2___1 = c(0L, 
-    0L, 0L, 0L, 1L), race2___2 = c(0L, 0L, 0L, 1L, 0L), race2___3 = c(0L, 
-    1L, 0L, 0L, 0L), race2___4 = c(0L, 0L, 1L, 0L, 0L), race2___5 = c(1L, 
-    1L, 1L, 1L, 0L), race2___6 = c(0L, 0L, 0L, 0L, 1L), ethnicity = c(1L, 
-    1L, 0L, 1L, 2L), raceandethnicity_complete = c(2L, 0L, 2L, 2L, 
+    "[document]"), health_complete = c(1L, 0L, 2L, 2L, 0L), race___1 = c(0L, 
+    0L, 0L, 0L, 1L), race___2 = c(0L, 0L, 0L, 1L, 0L), race___3 = c(0L, 
+    1L, 0L, 0L, 0L), race___4 = c(0L, 0L, 1L, 0L, 0L), race___5 = c(1L, 
+    1L, 1L, 1L, 0L), race___6 = c(0L, 0L, 0L, 0L, 1L), ethnicity = c(1L, 
+    1L, 0L, 1L, 2L), race_and_ethnicity_complete = c(2L, 0L, 2L, 2L, 
     2L)), .Names = c("record_id", "name_first", "name_last", "address", 
     "telephone", "email", "dob", "age", "sex", "demographics_complete", 
     "height", "weight", "bmi", "comments", "mugshot", "health_complete", 
-    "race2___1", "race2___2", "race2___3", "race2___4", "race2___5", 
-    "race2___6", "ethnicity", "raceandethnicity_complete"), class = "data.frame", row.names = c(NA, 
+    "race___1", "race___2", "race___3", "race___4", "race___5", 
+    "race___6", "ethnicity", "race_and_ethnicity_complete"), class = "data.frame", row.names = c(NA, 
     -5L))
   expected_outcome_message <- "\\d+ records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
@@ -174,16 +174,16 @@ test_that("All Records -Raw and DAG", {
     "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
     ), mugshot = c("[document]", "[document]", "[document]", "[document]", 
-    "[document]"), health_complete = c(1L, 0L, 2L, 2L, 0L), race2___1 = c(0L, 
-    0L, 0L, 0L, 1L), race2___2 = c(0L, 0L, 0L, 1L, 0L), race2___3 = c(0L, 
-    1L, 0L, 0L, 0L), race2___4 = c(0L, 0L, 1L, 0L, 0L), race2___5 = c(1L, 
-    1L, 1L, 1L, 0L), race2___6 = c(0L, 0L, 0L, 0L, 1L), ethnicity = c(1L, 
-    1L, 0L, 1L, 2L), raceandethnicity_complete = c(2L, 0L, 2L, 2L, 
+    "[document]"), health_complete = c(1L, 0L, 2L, 2L, 0L), race___1 = c(0L, 
+    0L, 0L, 0L, 1L), race___2 = c(0L, 0L, 0L, 1L, 0L), race___3 = c(0L, 
+    1L, 0L, 0L, 0L), race___4 = c(0L, 0L, 1L, 0L, 0L), race___5 = c(1L, 
+    1L, 1L, 1L, 0L), race___6 = c(0L, 0L, 0L, 0L, 1L), ethnicity = c(1L, 
+    1L, 0L, 1L, 2L), race_and_ethnicity_complete = c(2L, 0L, 2L, 2L, 
     2L)), .Names = c("record_id", "redcap_data_access_group", "name_first", 
     "name_last", "address", "telephone", "email", "dob", "age", "sex", 
     "demographics_complete", "height", "weight", "bmi", "comments", 
-    "mugshot", "health_complete", "race2___1", "race2___2", "race2___3", 
-    "race2___4", "race2___5", "race2___6", "ethnicity", "raceandethnicity_complete"
+    "mugshot", "health_complete", "race___1", "race___2", "race___3", 
+    "race___4", "race___5", "race___6", "ethnicity", "race_and_ethnicity_complete"
     ), class = "data.frame", row.names = c(NA, -5L))
   expected_outcome_message <- "\\d+ records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
@@ -237,20 +237,20 @@ test_that("All Records -label and DAG -one single batch", {
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
     ), mugshot = c("[document]", "[document]", "[document]", "[document]", 
     "[document]"), health_complete = c("Unverified", "Incomplete", 
-    "Complete", "Complete", "Incomplete"), race2___1 = c("", "", 
-    "", "", "American Indian/Alaska Native"), race2___2 = c("", "", 
-    "", "Asian", ""), race2___3 = c("", "Native Hawaiian or Other Pacific Islander", 
-    "", "", ""), race2___4 = c("", "", "Black or African American", 
-    "", ""), race2___5 = c("White", "White", "White", "White", ""
-    ), race2___6 = c("", "", "", "", "Unknown / Not Reported"), ethnicity = c("NOT Hispanic or Latino", 
+    "Complete", "Complete", "Incomplete"), race___1 = c("", "", 
+    "", "", "American Indian/Alaska Native"), race___2 = c("", "", 
+    "", "Asian", ""), race___3 = c("", "Native Hawaiian or Other Pacific Islander", 
+    "", "", ""), race___4 = c("", "", "Black or African American", 
+    "", ""), race___5 = c("White", "White", "White", "White", ""
+    ), race___6 = c("", "", "", "", "Unknown / Not Reported"), ethnicity = c("NOT Hispanic or Latino", 
     "NOT Hispanic or Latino", "Unknown / Not Reported", "NOT Hispanic or Latino", 
-    "Hispanic or Latino"), raceandethnicity_complete = c("Complete", 
+    "Hispanic or Latino"), race_and_ethnicity_complete = c("Complete", 
     "Incomplete", "Complete", "Complete", "Complete")), .Names = c("record_id", 
     "redcap_data_access_group", "name_first", "name_last", "address", 
     "telephone", "email", "dob", "age", "sex", "demographics_complete", 
     "height", "weight", "bmi", "comments", "mugshot", "health_complete", 
-    "race2___1", "race2___2", "race2___3", "race2___4", "race2___5", 
-    "race2___6", "ethnicity", "raceandethnicity_complete"), class = "data.frame", row.names = c(NA, 
+    "race___1", "race___2", "race___3", "race___4", "race___5", 
+    "race___6", "ethnicity", "race_and_ethnicity_complete"), class = "data.frame", row.names = c(NA, 
     -5L))
   expected_outcome_message <- "\\d+ records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
@@ -289,20 +289,20 @@ test_that("All Records -label and DAG -three tiny batches", {
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
     ), mugshot = c("[document]", "[document]", "[document]", "[document]", 
     "[document]"), health_complete = c("Unverified", "Incomplete", 
-    "Complete", "Complete", "Incomplete"), race2___1 = c(NA, NA, 
-    NA, NA, "American Indian/Alaska Native"), race2___2 = c(NA, NA, 
-    "", "Asian", NA), race2___3 = c("", "Native Hawaiian or Other Pacific Islander", 
-    NA, NA, NA), race2___4 = c(NA, NA, "Black or African American", 
-    "", NA), race2___5 = c("White", "White", "White", "White", NA
-    ), race2___6 = c(NA, NA, NA, NA, "Unknown / Not Reported"), ethnicity = c("NOT Hispanic or Latino", 
+    "Complete", "Complete", "Incomplete"), race___1 = c(NA, NA, 
+    NA, NA, "American Indian/Alaska Native"), race___2 = c(NA, NA, 
+    "", "Asian", NA), race___3 = c("", "Native Hawaiian or Other Pacific Islander", 
+    NA, NA, NA), race___4 = c(NA, NA, "Black or African American", 
+    "", NA), race___5 = c("White", "White", "White", "White", NA
+    ), race___6 = c(NA, NA, NA, NA, "Unknown / Not Reported"), ethnicity = c("NOT Hispanic or Latino", 
     "NOT Hispanic or Latino", "Unknown / Not Reported", "NOT Hispanic or Latino", 
-    "Hispanic or Latino"), raceandethnicity_complete = c("Complete", 
+    "Hispanic or Latino"), race_and_ethnicity_complete = c("Complete", 
     "Incomplete", "Complete", "Complete", "Complete")), .Names = c("record_id", 
     "redcap_data_access_group", "name_first", "name_last", "address", 
     "telephone", "email", "dob", "age", "sex", "demographics_complete", 
     "height", "weight", "bmi", "comments", "mugshot", "health_complete", 
-    "race2___1", "race2___2", "race2___3", "race2___4", "race2___5", 
-    "race2___6", "ethnicity", "raceandethnicity_complete"), class = "data.frame", row.names = c(NA, 
+    "race___1", "race___2", "race___3", "race___4", "race___5", 
+    "race___6", "ethnicity", "race_and_ethnicity_complete"), class = "data.frame", row.names = c(NA, 
     -5L))
   expected_outcome_message <- "\\d+ records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
@@ -340,20 +340,20 @@ test_that("All Records -label", {
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
     ), mugshot = c("[document]", "[document]", "[document]", "[document]", 
     "[document]"), health_complete = c("Unverified", "Incomplete", 
-    "Complete", "Complete", "Incomplete"), race2___1 = c("", "", 
-    "", "", "American Indian/Alaska Native"), race2___2 = c("", "", 
-    "", "Asian", ""), race2___3 = c("", "Native Hawaiian or Other Pacific Islander", 
-    "", "", ""), race2___4 = c("", "", "Black or African American", 
-    "", ""), race2___5 = c("White", "White", "White", "White", ""
-    ), race2___6 = c("", "", "", "", "Unknown / Not Reported"), ethnicity = c("NOT Hispanic or Latino", 
+    "Complete", "Complete", "Incomplete"), race___1 = c("", "", 
+    "", "", "American Indian/Alaska Native"), race___2 = c("", "", 
+    "", "Asian", ""), race___3 = c("", "Native Hawaiian or Other Pacific Islander", 
+    "", "", ""), race___4 = c("", "", "Black or African American", 
+    "", ""), race___5 = c("White", "White", "White", "White", ""
+    ), race___6 = c("", "", "", "", "Unknown / Not Reported"), ethnicity = c("NOT Hispanic or Latino", 
     "NOT Hispanic or Latino", "Unknown / Not Reported", "NOT Hispanic or Latino", 
-    "Hispanic or Latino"), raceandethnicity_complete = c("Complete", 
+    "Hispanic or Latino"), race_and_ethnicity_complete = c("Complete", 
     "Incomplete", "Complete", "Complete", "Complete")), .Names = c("record_id", 
     "name_first", "name_last", "address", "telephone", "email", "dob", 
     "age", "sex", "demographics_complete", "height", "weight", "bmi", 
-    "comments", "mugshot", "health_complete", "race2___1", "race2___2", 
-    "race2___3", "race2___4", "race2___5", "race2___6", "ethnicity", 
-    "raceandethnicity_complete"), class = "data.frame", row.names = c(NA, 
+    "comments", "mugshot", "health_complete", "race___1", "race___2", 
+    "race___3", "race___4", "race___5", "race___6", "ethnicity", 
+    "race_and_ethnicity_complete"), class = "data.frame", row.names = c(NA, 
     -5L))
 
   

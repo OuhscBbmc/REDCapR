@@ -1,7 +1,7 @@
 library(testthat)
 
 ###########
-context("WriteOneshot")
+context("Write Oneshot")
 ###########
 test_that("Smoke Test", {  
   start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
@@ -38,16 +38,16 @@ test_that("Write One Shot -Insert", {
     "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
     ), mugshot = c("[document]", "[document]", "[document]", "[document]", 
-    "[document]"), health_complete = c(1L, 0L, 2L, 2L, 0L), race2___1 = c(0L, 
-    0L, 0L, 0L, 1L), race2___2 = c(0L, 0L, 0L, 1L, 0L), race2___3 = c(0L, 
-    1L, 0L, 0L, 0L), race2___4 = c(0L, 0L, 1L, 0L, 0L), race2___5 = c(1L, 
-    1L, 1L, 1L, 0L), race2___6 = c(0L, 0L, 0L, 0L, 1L), ethnicity = c(1L, 
-    1L, 0L, 1L, 2L), raceandethnicity_complete = c(2L, 0L, 2L, 2L, 
+    "[document]"), health_complete = c(1L, 0L, 2L, 2L, 0L), race___1 = c(0L, 
+    0L, 0L, 0L, 1L), race___2 = c(0L, 0L, 0L, 1L, 0L), race___3 = c(0L, 
+    1L, 0L, 0L, 0L), race___4 = c(0L, 0L, 1L, 0L, 0L), race___5 = c(1L, 
+    1L, 1L, 1L, 0L), race___6 = c(0L, 0L, 0L, 0L, 1L), ethnicity = c(1L, 
+    1L, 0L, 1L, 2L), race_and_ethnicity_complete = c(2L, 0L, 2L, 2L, 
     2L)), .Names = c("record_id", "name_first", "name_last", "address", 
     "telephone", "email", "dob", "sex", "demographics_complete", 
     "height", "weight", "comments", "mugshot", "health_complete", 
-    "race2___1", "race2___2", "race2___3", "race2___4", "race2___5", 
-    "race2___6", "ethnicity", "raceandethnicity_complete"), row.names = c(NA, 
+    "race___1", "race___2", "race___3", "race___4", "race___5", 
+    "race___6", "ethnicity", "race_and_ethnicity_complete"), row.names = c(NA, 
     -5L), class = "data.frame")
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") #returned_object$data$bmi<-NULL; returned_object$data$age<-NULL;dput(returned_object$data)
@@ -98,16 +98,16 @@ test_that("Write One Shot -Update One Field", {
     "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
     ), mugshot = c("[document]", "[document]", "[document]", "[document]", 
-    "[document]"), health_complete = c(1L, 0L, 2L, 2L, 0L), race2___1 = c(0L, 
-    0L, 0L, 0L, 1L), race2___2 = c(0L, 0L, 0L, 1L, 0L), race2___3 = c(0L, 
-    1L, 0L, 0L, 0L), race2___4 = c(0L, 0L, 1L, 0L, 0L), race2___5 = c(1L, 
-    1L, 1L, 1L, 0L), race2___6 = c(0L, 0L, 0L, 0L, 1L), ethnicity = c(1L, 
-    1L, 0L, 1L, 2L), raceandethnicity_complete = c(2L, 0L, 2L, 2L, 
+    "[document]"), health_complete = c(1L, 0L, 2L, 2L, 0L), race___1 = c(0L, 
+    0L, 0L, 0L, 1L), race___2 = c(0L, 0L, 0L, 1L, 0L), race___3 = c(0L, 
+    1L, 0L, 0L, 0L), race___4 = c(0L, 0L, 1L, 0L, 0L), race___5 = c(1L, 
+    1L, 1L, 1L, 0L), race___6 = c(0L, 0L, 0L, 0L, 1L), ethnicity = c(1L, 
+    1L, 0L, 1L, 2L), race_and_ethnicity_complete = c(2L, 0L, 2L, 2L, 
     2L)), .Names = c("record_id", "name_first", "name_last", "address", 
     "telephone", "email", "dob", "sex", "demographics_complete", 
     "height", "weight", "comments", "mugshot", "health_complete", 
-    "race2___1", "race2___2", "race2___3", "race2___4", "race2___5", 
-    "race2___6", "ethnicity", "raceandethnicity_complete"), row.names = c(NA, 
+    "race___1", "race___2", "race___3", "race___4", "race___5", 
+    "race___6", "ethnicity", "race_and_ethnicity_complete"), row.names = c(NA, 
     -5L), class = "data.frame")
 
   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
@@ -159,16 +159,16 @@ test_that("Write One Shot -Update Two Fields", {
     "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
     ), mugshot = c("[document]", "[document]", "[document]", "[document]", 
-    "[document]"), health_complete = c(1L, 0L, 2L, 2L, 0L), race2___1 = c(0L, 
-    0L, 0L, 0L, 1L), race2___2 = c(0L, 0L, 0L, 1L, 0L), race2___3 = c(0L, 
-    1L, 0L, 0L, 0L), race2___4 = c(0L, 0L, 1L, 0L, 0L), race2___5 = c(1L, 
-    1L, 1L, 1L, 0L), race2___6 = c(0L, 0L, 0L, 0L, 1L), ethnicity = c(1L, 
-    1L, 0L, 1L, 2L), raceandethnicity_complete = c(2L, 0L, 2L, 2L, 
+    "[document]"), health_complete = c(1L, 0L, 2L, 2L, 0L), race___1 = c(0L, 
+    0L, 0L, 0L, 1L), race___2 = c(0L, 0L, 0L, 1L, 0L), race___3 = c(0L, 
+    1L, 0L, 0L, 0L), race___4 = c(0L, 0L, 1L, 0L, 0L), race___5 = c(1L, 
+    1L, 1L, 1L, 0L), race___6 = c(0L, 0L, 0L, 0L, 1L), ethnicity = c(1L, 
+    1L, 0L, 1L, 2L), race_and_ethnicity_complete = c(2L, 0L, 2L, 2L, 
     2L)), .Names = c("record_id", "name_first", "name_last", "address", 
     "telephone", "email", "dob", "sex", "demographics_complete", 
     "height", "weight", "comments", "mugshot", "health_complete", 
-    "race2___1", "race2___2", "race2___3", "race2___4", "race2___5", 
-    "race2___6", "ethnicity", "raceandethnicity_complete"), row.names = c(NA, 
+    "race___1", "race___2", "race___3", "race___4", "race___5", 
+    "race___6", "ethnicity", "race_and_ethnicity_complete"), row.names = c(NA, 
     -5L), class = "data.frame")
 
   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)

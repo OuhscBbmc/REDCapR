@@ -1,4 +1,4 @@
-"record_id","name_first","name_last","address","telephone","email","dob","age","sex","demographics_complete","height","weight","bmi","comments","mugshot","health_complete","race2___1","race2___2","race2___3","race2___4","race2___5","race2___6","ethnicity","raceandethnicity_complete"
+"record_id","name_first","name_last","address","telephone","email","dob","age","sex","demographics_complete","height","weight","bmi","comments","mugshot","health_complete","race___1","race___2","race___3","race___4","race___5","race___6","ethnicity","race_and_ethnicity_complete"
 1,"Nutmeg","Nutmouse","14 Rose Cottage St.
 Kenning UK, 323232","(405) 321-1111","nutty@mouse.com","2003-08-30",11,0,2,7,1,204.1,"Character in a book, with some guessing","[document]",1,0,0,0,0,1,0,1,2
 2,"Tumtum","Nutmouse","14 Rose Cottage Blvd.
