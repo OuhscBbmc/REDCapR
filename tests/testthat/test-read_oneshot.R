@@ -6,45 +6,49 @@ context("ReadOneshot")
 uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account on pid=153.
 
+
 test_that("Smoke Test", {  
   testthat::skip_on_cran()
   expect_message(
     returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, verbose=T)    
   )
 })
-
 test_that("All Records -Default", {  
   testthat::skip_on_cran()
-  expected_data_frame <- structure(list(record_id = 1:5, first_name = c("Nutmeg", "Tumtum", 
-    "Marcus", "Trudy", "John Lee"), last_name = c("Nutmouse", "Nutmouse", 
+  expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum", 
+    "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse", 
     "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232", 
     "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402", 
     "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
-    ), telephone = c("(432) 456-4848", "(234) 234-2343", "(433) 435-9865", 
-    "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
+    ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333", 
+    "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com", 
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
-    "1955-04-15"), age = c(10L, 11L, 79L, 61L, 58L), ethnicity = c(1L, 
-    1L, 0L, 1L, 1L), race = c(2L, 6L, 4L, 4L, 4L), sex = c(0L, 1L, 
-    1L, 0L, 1L), height = c(5, 6, 180, 165, 193.04), weight = c(1L, 
-    1L, 80L, 54L, 104L), bmi = c(400, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
+    "1955-04-15"), age = c(11L, 11L, 80L, 61L, 59L), sex = c(0L, 
+    1L, 1L, 0L, 1L), demographics_complete = c(2L, 2L, 2L, 2L, 2L
+    ), height = c(7, 6, 180, 165, 193.04), weight = c(1L, 1L, 80L, 
+    54L, 104L), bmi = c(204.1, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
     "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), demographics_complete = c(2L, 2L, 2L, 2L, 2L)), .Names = c("record_id", 
-    "first_name", "last_name", "address", "telephone", "email", "dob", 
-    "age", "ethnicity", "race", "sex", "height", "weight", "bmi", 
-    "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, 
+    ), mugshot = c("[document]", "[document]", "[document]", "[document]", 
+    "[document]"), health_complete = c(1L, 0L, 2L, 2L, 0L), race2___1 = c(0L, 
+    0L, 0L, 0L, 1L), race2___2 = c(0L, 0L, 0L, 1L, 0L), race2___3 = c(0L, 
+    1L, 0L, 0L, 0L), race2___4 = c(0L, 0L, 1L, 0L, 0L), race2___5 = c(1L, 
+    1L, 1L, 1L, 0L), race2___6 = c(0L, 0L, 0L, 0L, 1L), ethnicity = c(1L, 
+    1L, 0L, 1L, 2L), raceandethnicity_complete = c(2L, 0L, 2L, 2L, 
+    2L)), .Names = c("record_id", "name_first", "name_last", "address", 
+    "telephone", "email", "dob", "age", "sex", "demographics_complete", 
+    "height", "weight", "bmi", "comments", "mugshot", "health_complete", 
+    "race2___1", "race2___2", "race2___3", "race2___4", "race2___5", 
+    "race2___6", "ethnicity", "raceandethnicity_complete"), class = "data.frame", row.names = c(NA, 
     -5L))
   expected_csv <- structure("record_id,first_name,last_name,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete\n\"1\",\"Nutmeg\",\"Nutmouse\",\"14 Rose Cottage St.\r\nKenning UK, 323232\",\"(432) 456-4848\",\"nutty@mouse.com\",\"2003-08-30\",10,1,2,0,5,1,400,\"Character in a book, with some guessing\",2\n\"2\",\"Tumtum\",\"Nutmouse\",\"14 Rose Cottage Blvd.\r\nKenning UK 34243\",\"(234) 234-2343\",\"tummy@mouse.comm\",\"2003-03-10\",10,1,6,1,6,1,277.8,\"A mouse character from a good book\",2\n\"3\",\"Marcus\",\"Wood\",\"243 Hill St.\r\nGuthrie OK 73402\",\"(433) 435-9865\",\"mw@mwood.net\",\"1934-04-09\",79,0,4,1,180,80,24.7,\"completely made up\",2\n\"4\",\"Trudy\",\"DAG\",\"342 Elm\r\nDuncanville TX, 75116\",\"(987) 654-3210\",\"peroxide@blonde.com\",\"1952-11-02\",61,1,4,0,165,54,19.8,\"This record doesn't have a DAG assigned\r\n\r\nSo call up Trudy on the telephone\r\nSend her a letter in the mail\",2\n\"5\",\"John Lee\",\"Walker\",\"Hotel Suite\r\nNew Orleans LA, 70115\",\"(333) 333-4444\",\"left@hippocket.com\",\"1955-04-15\",58,1,4,1,193.04,104,27.9,\"Had a hand for trouble and a eye for cash\r\n\r\nHe had a gold watch chain and a black mustache\",2\n", "`Content-Type`" = structure(c("text/html", "utf-8"), .Names = c("", "charset")))
-  expected_outcome_message <- "5 records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
     returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, verbose=T),
     regexp = expected_outcome_message
   )
-  
-  returned_object$data$age
-  expected_data_frame$age
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
@@ -54,31 +58,40 @@ test_that("All Records -Default", {
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+  #expect_equal_to_reference(returned_object$data, file=base::file.path(devtools::inst(name="REDCapR"), "test_data/project_simple/variations/default.rds") )
+  #expect_equal_to_reference(returned_object$data, file="./test_data/project_simple/variations/default.rds") 
 })
 test_that("All Records -Raw", {  
   testthat::skip_on_cran()
-  expected_data_frame <- structure(list(record_id = 1:5, first_name = c("Nutmeg", "Tumtum", 
-    "Marcus", "Trudy", "John Lee"), last_name = c("Nutmouse", "Nutmouse", 
+  expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum", 
+    "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse", 
     "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232", 
     "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402", 
     "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
-    ), telephone = c("(432) 456-4848", "(234) 234-2343", "(433) 435-9865", 
-    "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
+    ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333", 
+    "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com", 
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
-    "1955-04-15"), age = c(10L, 11L, 79L, 61L, 58L), ethnicity = c(1L, 
-    1L, 0L, 1L, 1L), race = c(2L, 6L, 4L, 4L, 4L), sex = c(0L, 1L, 
-    1L, 0L, 1L), height = c(5, 6, 180, 165, 193.04), weight = c(1L, 
-    1L, 80L, 54L, 104L), bmi = c(400, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
+    "1955-04-15"), age = c(11L, 11L, 80L, 61L, 59L), sex = c(0L, 
+    1L, 1L, 0L, 1L), demographics_complete = c(2L, 2L, 2L, 2L, 2L
+    ), height = c(7, 6, 180, 165, 193.04), weight = c(1L, 1L, 80L, 
+    54L, 104L), bmi = c(204.1, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
     "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), demographics_complete = c(2L, 2L, 2L, 2L, 2L)), .Names = c("record_id", 
-    "first_name", "last_name", "address", "telephone", "email", "dob", 
-    "age", "ethnicity", "race", "sex", "height", "weight", "bmi", 
-    "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, 
+    ), mugshot = c("[document]", "[document]", "[document]", "[document]", 
+    "[document]"), health_complete = c(1L, 0L, 2L, 2L, 0L), race2___1 = c(0L, 
+    0L, 0L, 0L, 1L), race2___2 = c(0L, 0L, 0L, 1L, 0L), race2___3 = c(0L, 
+    1L, 0L, 0L, 0L), race2___4 = c(0L, 0L, 1L, 0L, 0L), race2___5 = c(1L, 
+    1L, 1L, 1L, 0L), race2___6 = c(0L, 0L, 0L, 0L, 1L), ethnicity = c(1L, 
+    1L, 0L, 1L, 2L), raceandethnicity_complete = c(2L, 0L, 2L, 2L, 
+    2L)), .Names = c("record_id", "name_first", "name_last", "address", 
+    "telephone", "email", "dob", "age", "sex", "demographics_complete", 
+    "height", "weight", "bmi", "comments", "mugshot", "health_complete", 
+    "race2___1", "race2___2", "race2___3", "race2___4", "race2___5", 
+    "race2___6", "ethnicity", "raceandethnicity_complete"), class = "data.frame", row.names = c(NA, 
     -5L))
   expected_csv <- structure("record_id,first_name,last_name,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete\n\"1\",\"Nutmeg\",\"Nutmouse\",\"14 Rose Cottage St.\r\nKenning UK, 323232\",\"(432) 456-4848\",\"nutty@mouse.com\",\"2003-08-30\",10,1,2,0,5,1,400,\"Character in a book, with some guessing\",2\n\"2\",\"Tumtum\",\"Nutmouse\",\"14 Rose Cottage Blvd.\r\nKenning UK 34243\",\"(234) 234-2343\",\"tummy@mouse.comm\",\"2003-03-10\",10,1,6,1,6,1,277.8,\"A mouse character from a good book\",2\n\"3\",\"Marcus\",\"Wood\",\"243 Hill St.\r\nGuthrie OK 73402\",\"(433) 435-9865\",\"mw@mwood.net\",\"1934-04-09\",79,0,4,1,180,80,24.7,\"completely made up\",2\n\"4\",\"Trudy\",\"DAG\",\"342 Elm\r\nDuncanville TX, 75116\",\"(987) 654-3210\",\"peroxide@blonde.com\",\"1952-11-02\",61,1,4,0,165,54,19.8,\"This record doesn't have a DAG assigned\r\n\r\nSo call up Trudy on the telephone\r\nSend her a letter in the mail\",2\n\"5\",\"John Lee\",\"Walker\",\"Hotel Suite\r\nNew Orleans LA, 70115\",\"(333) 333-4444\",\"left@hippocket.com\",\"1955-04-15\",58,1,4,1,193.04,104,27.9,\"Had a hand for trouble and a eye for cash\r\n\r\nHe had a gold watch chain and a black mustache\",2\n", "`Content-Type`" = structure(c("text/html", "utf-8"), .Names = c("", "charset")))
-  expected_outcome_message <- "5 records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
     returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="raw", verbose=T),
@@ -94,32 +107,38 @@ test_that("All Records -Raw", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
-
-test_that("All Records -Raw", {  
+test_that("All Records -Raw and DAG", {  
   testthat::skip_on_cran()
-  expected_data_frame <-structure(list(record_id = 1:5, redcap_data_access_group = c("dag_1", 
-    "dag_1", "dag_1", "", "dag_2"), first_name = c("Nutmeg", "Tumtum", 
-    "Marcus", "Trudy", "John Lee"), last_name = c("Nutmouse", "Nutmouse", 
+  expected_data_frame <- structure(list(record_id = 1:5, redcap_data_access_group = c("dag_1", 
+    "dag_1", "dag_1", "", "dag_2"), name_first = c("Nutmeg", "Tumtum", 
+    "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse", 
     "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232", 
     "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402", 
     "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
-    ), telephone = c("(432) 456-4848", "(234) 234-2343", "(433) 435-9865", 
-    "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
+    ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333", 
+    "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com", 
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
-    "1955-04-15"), age = c(10L, 11L, 79L, 61L, 58L), ethnicity = c(1L, 
-    1L, 0L, 1L, 1L), race = c(2L, 6L, 4L, 4L, 4L), sex = c(0L, 1L, 
-    1L, 0L, 1L), height = c(5, 6, 180, 165, 193.04), weight = c(1L, 
-    1L, 80L, 54L, 104L), bmi = c(400, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
+    "1955-04-15"), age = c(11L, 11L, 80L, 61L, 59L), sex = c(0L, 
+    1L, 1L, 0L, 1L), demographics_complete = c(2L, 2L, 2L, 2L, 2L
+    ), height = c(7, 6, 180, 165, 193.04), weight = c(1L, 1L, 80L, 
+    54L, 104L), bmi = c(204.1, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
     "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), demographics_complete = c(2L, 2L, 2L, 2L, 2L)), .Names = c("record_id", 
-    "redcap_data_access_group", "first_name", "last_name", "address", 
-    "telephone", "email", "dob", "age", "ethnicity", "race", "sex", 
-    "height", "weight", "bmi", "comments", "demographics_complete"
+    ), mugshot = c("[document]", "[document]", "[document]", "[document]", 
+    "[document]"), health_complete = c(1L, 0L, 2L, 2L, 0L), race2___1 = c(0L, 
+    0L, 0L, 0L, 1L), race2___2 = c(0L, 0L, 0L, 1L, 0L), race2___3 = c(0L, 
+    1L, 0L, 0L, 0L), race2___4 = c(0L, 0L, 1L, 0L, 0L), race2___5 = c(1L, 
+    1L, 1L, 1L, 0L), race2___6 = c(0L, 0L, 0L, 0L, 1L), ethnicity = c(1L, 
+    1L, 0L, 1L, 2L), raceandethnicity_complete = c(2L, 0L, 2L, 2L, 
+    2L)), .Names = c("record_id", "redcap_data_access_group", "name_first", 
+    "name_last", "address", "telephone", "email", "dob", "age", "sex", 
+    "demographics_complete", "height", "weight", "bmi", "comments", 
+    "mugshot", "health_complete", "race2___1", "race2___2", "race2___3", 
+    "race2___4", "race2___5", "race2___6", "ethnicity", "raceandethnicity_complete"
     ), class = "data.frame", row.names = c(NA, -5L))
   expected_csv <- structure("record_id,redcap_data_access_group,first_name,last_name,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete\n\"1\",\"dag_1\",\"Nutmeg\",\"Nutmouse\",\"14 Rose Cottage St.\r\nKenning UK, 323232\",\"(432) 456-4848\",\"nutty@mouse.com\",\"2003-08-30\",10,1,2,0,5,1,400,\"Character in a book, with some guessing\",2\n\"2\",\"dag_1\",\"Tumtum\",\"Nutmouse\",\"14 Rose Cottage Blvd.\r\nKenning UK 34243\",\"(234) 234-2343\",\"tummy@mouse.comm\",\"2003-03-10\",10,1,6,1,6,1,277.8,\"A mouse character from a good book\",2\n\"3\",\"dag_1\",\"Marcus\",\"Wood\",\"243 Hill St.\r\nGuthrie OK 73402\",\"(433) 435-9865\",\"mw@mwood.net\",\"1934-04-09\",79,0,4,1,180,80,24.7,\"completely made up\",2\n\"4\",\"\",\"Trudy\",\"DAG\",\"342 Elm\r\nDuncanville TX, 75116\",\"(987) 654-3210\",\"peroxide@blonde.com\",\"1952-11-02\",61,1,4,0,165,54,19.8,\"This record doesn't have a DAG assigned\r\n\r\nSo call up Trudy on the telephone\r\nSend her a letter in the mail\",2\n\"5\",\"dag_2\",\"John Lee\",\"Walker\",\"Hotel Suite\r\nNew Orleans LA, 70115\",\"(333) 333-4444\",\"left@hippocket.com\",\"1955-04-15\",58,1,4,1,193.04,104,27.9,\"Had a hand for trouble and a eye for cash\r\n\r\nHe had a gold watch chain and a black mustache\",2\n", "`Content-Type`" = structure(c("text/html", "utf-8"), .Names = c("", "charset")))
-  expected_outcome_message <- "5 records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "5 records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
     returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="raw", export_data_access_groups="true", verbose=T),
@@ -135,36 +154,44 @@ test_that("All Records -Raw", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
-
 test_that("All Records -label and DAG", {  
   testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 1:5, redcap_data_access_group = c("dag_1", 
-    "dag_1", "dag_1", "", "dag_2"), first_name = c("Nutmeg", "Tumtum", 
-    "Marcus", "Trudy", "John Lee"), last_name = c("Nutmouse", "Nutmouse", 
+    "dag_1", "dag_1", "", "dag_2"), name_first = c("Nutmeg", "Tumtum", 
+    "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse", 
     "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232", 
     "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402", 
     "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
-    ), telephone = c("(432) 456-4848", "(234) 234-2343", "(433) 435-9865", 
-    "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
+    ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333", 
+    "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com", 
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
-    "1955-04-15"), age = c(10L, 11L, 79L, 61L, 58L), ethnicity = c("NOT Hispanic or Latino", 
-    "NOT Hispanic or Latino", "Hispanic or Latino", "NOT Hispanic or Latino", 
-    "NOT Hispanic or Latino"), race = c("Native Hawaiian or Other Pacific Islander", 
-    "Unknown / Not Reported", "White", "White", "White"), sex = c("Female", 
-    "Male", "Male", "Female", "Male"), height = c(5, 6, 180, 165, 
-    193.04), weight = c(1L, 1L, 80L, 54L, 104L), bmi = c(400, 277.8, 
-    24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
+    "1955-04-15"), age = c(11L, 11L, 80L, 61L, 59L), sex = c("Female", 
+    "Male", "Male", "Female", "Male"), demographics_complete = c("Complete", 
+    "Complete", "Complete", "Complete", "Complete"), height = c(7, 
+    6, 180, 165, 193.04), weight = c(1L, 1L, 80L, 54L, 104L), bmi = c(204.1, 
+    277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
     "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), demographics_complete = c("Complete", "Complete", "Complete", 
-    "Complete", "Complete")), .Names = c("record_id", "redcap_data_access_group", 
-    "first_name", "last_name", "address", "telephone", "email", "dob", 
-    "age", "ethnicity", "race", "sex", "height", "weight", "bmi", 
-    "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             -5L))
+    ), mugshot = c("[document]", "[document]", "[document]", "[document]", 
+    "[document]"), health_complete = c("Unverified", "Incomplete", 
+    "Complete", "Complete", "Incomplete"), race2___1 = c("", "", 
+    "", "", "American Indian/Alaska Native"), race2___2 = c("", "", 
+    "", "Asian", ""), race2___3 = c("", "Native Hawaiian or Other Pacific Islander", 
+    "", "", ""), race2___4 = c("", "", "Black or African American", 
+    "", ""), race2___5 = c("White", "White", "White", "White", ""
+    ), race2___6 = c("", "", "", "", "Unknown / Not Reported"), ethnicity = c("NOT Hispanic or Latino", 
+    "NOT Hispanic or Latino", "Unknown / Not Reported", "NOT Hispanic or Latino", 
+    "Hispanic or Latino"), raceandethnicity_complete = c("Complete", 
+    "Incomplete", "Complete", "Complete", "Complete")), .Names = c("record_id", 
+    "redcap_data_access_group", "name_first", "name_last", "address", 
+    "telephone", "email", "dob", "age", "sex", "demographics_complete", 
+    "height", "weight", "bmi", "comments", "mugshot", "health_complete", 
+    "race2___1", "race2___2", "race2___3", "race2___4", "race2___5", 
+    "race2___6", "ethnicity", "raceandethnicity_complete"), class = "data.frame", row.names = c(NA, 
+    -5L))
   expected_csv <- structure("record_id,redcap_data_access_group,first_name,last_name,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete\n\"1\",\"dag_1\",\"Nutmeg\",\"Nutmouse\",\"14 Rose Cottage St.\r\nKenning UK, 323232\",\"(432) 456-4848\",\"nutty@mouse.com\",\"2003-08-30\",10,\"NOT Hispanic or Latino\",\"Native Hawaiian or Other Pacific Islander\",\"Female\",5,1,400,\"Character in a book, with some guessing\",\"Complete\"\n\"2\",\"dag_1\",\"Tumtum\",\"Nutmouse\",\"14 Rose Cottage Blvd.\r\nKenning UK 34243\",\"(234) 234-2343\",\"tummy@mouse.comm\",\"2003-03-10\",10,\"NOT Hispanic or Latino\",\"Unknown / Not Reported\",\"Male\",6,1,277.8,\"A mouse character from a good book\",\"Complete\"\n\"3\",\"dag_1\",\"Marcus\",\"Wood\",\"243 Hill St.\r\nGuthrie OK 73402\",\"(433) 435-9865\",\"mw@mwood.net\",\"1934-04-09\",79,\"Hispanic or Latino\",\"White\",\"Male\",180,80,24.7,\"completely made up\",\"Complete\"\n\"4\",\"\",\"Trudy\",\"DAG\",\"342 Elm\r\nDuncanville TX, 75116\",\"(987) 654-3210\",\"peroxide@blonde.com\",\"1952-11-02\",61,\"NOT Hispanic or Latino\",\"White\",\"Female\",165,54,19.8,\"This record doesn't have a DAG assigned\r\n\r\nSo call up Trudy on the telephone\r\nSend her a letter in the mail\",\"Complete\"\n\"5\",\"dag_2\",\"John Lee\",\"Walker\",\"Hotel Suite\r\nNew Orleans LA, 70115\",\"(333) 333-4444\",\"left@hippocket.com\",\"1955-04-15\",58,\"NOT Hispanic or Latino\",\"White\",\"Male\",193.04,104,27.9,\"Had a hand for trouble and a eye for cash\r\n\r\nHe had a gold watch chain and a black mustache\",\"Complete\"\n", "`Content-Type`" = structure(c("text/html", "utf-8"), .Names = c("", "charset")))
-  expected_outcome_message <- "5 records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "5 records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
     returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="label", export_data_access_groups="true", verbose=T),
@@ -180,35 +207,45 @@ test_that("All Records -label and DAG", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
-
 test_that("All Records -label", {  
   testthat::skip_on_cran()
-  expected_data_frame <- structure(list(record_id = 1:5, first_name = c("Nutmeg", "Tumtum", 
-    "Marcus", "Trudy", "John Lee"), last_name = c("Nutmouse", "Nutmouse", 
+  expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum", 
+    "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse", 
     "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232", 
     "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402", 
     "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
-    ), telephone = c("(432) 456-4848", "(234) 234-2343", "(433) 435-9865", 
-    "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
+    ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333", 
+    "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com", 
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
-    "1955-04-15"), age = c(10L, 11L, 79L, 61L, 58L), ethnicity = c("NOT Hispanic or Latino", 
-    "NOT Hispanic or Latino", "Hispanic or Latino", "NOT Hispanic or Latino", 
-    "NOT Hispanic or Latino"), race = c("Native Hawaiian or Other Pacific Islander", 
-    "Unknown / Not Reported", "White", "White", "White"), sex = c("Female", 
-    "Male", "Male", "Female", "Male"), height = c(5, 6, 180, 165, 
-    193.04), weight = c(1L, 1L, 80L, 54L, 104L), bmi = c(400, 277.8, 
-    24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
+    "1955-04-15"), age = c(11L, 11L, 80L, 61L, 59L), sex = c("Female", 
+    "Male", "Male", "Female", "Male"), demographics_complete = c("Complete", 
+    "Complete", "Complete", "Complete", "Complete"), height = c(7, 
+    6, 180, 165, 193.04), weight = c(1L, 1L, 80L, 54L, 104L), bmi = c(204.1, 
+    277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
     "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), demographics_complete = c("Complete", "Complete", "Complete", 
-    "Complete", "Complete")), .Names = c("record_id", 
-    "first_name", "last_name", "address", "telephone", "email", "dob", 
-    "age", "ethnicity", "race", "sex", "height", "weight", "bmi", 
-    "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, -5L))
+    ), mugshot = c("[document]", "[document]", "[document]", "[document]", 
+    "[document]"), health_complete = c("Unverified", "Incomplete", 
+    "Complete", "Complete", "Incomplete"), race2___1 = c("", "", 
+    "", "", "American Indian/Alaska Native"), race2___2 = c("", "", 
+    "", "Asian", ""), race2___3 = c("", "Native Hawaiian or Other Pacific Islander", 
+    "", "", ""), race2___4 = c("", "", "Black or African American", 
+    "", ""), race2___5 = c("White", "White", "White", "White", ""
+    ), race2___6 = c("", "", "", "", "Unknown / Not Reported"), ethnicity = c("NOT Hispanic or Latino", 
+    "NOT Hispanic or Latino", "Unknown / Not Reported", "NOT Hispanic or Latino", 
+    "Hispanic or Latino"), raceandethnicity_complete = c("Complete", 
+    "Incomplete", "Complete", "Complete", "Complete")), .Names = c("record_id", 
+    "name_first", "name_last", "address", "telephone", "email", "dob", 
+    "age", "sex", "demographics_complete", "height", "weight", "bmi", 
+    "comments", "mugshot", "health_complete", "race2___1", "race2___2", 
+    "race2___3", "race2___4", "race2___5", "race2___6", "ethnicity", 
+    "raceandethnicity_complete"), class = "data.frame", row.names = c(NA, 
+    -5L))
+
 
   expected_csv <- structure("record_id,first_name,last_name,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete\n\"1\",\"Nutmeg\",\"Nutmouse\",\"14 Rose Cottage St.\r\nKenning UK, 323232\",\"(432) 456-4848\",\"nutty@mouse.com\",\"2003-08-30\",10,\"NOT Hispanic or Latino\",\"Native Hawaiian or Other Pacific Islander\",\"Female\",5,1,400,\"Character in a book, with some guessing\",\"Complete\"\n\"2\",\"Tumtum\",\"Nutmouse\",\"14 Rose Cottage Blvd.\r\nKenning UK 34243\",\"(234) 234-2343\",\"tummy@mouse.comm\",\"2003-03-10\",10,\"NOT Hispanic or Latino\",\"Unknown / Not Reported\",\"Male\",6,1,277.8,\"A mouse character from a good book\",\"Complete\"\n\"3\",\"Marcus\",\"Wood\",\"243 Hill St.\r\nGuthrie OK 73402\",\"(433) 435-9865\",\"mw@mwood.net\",\"1934-04-09\",79,\"Hispanic or Latino\",\"White\",\"Male\",180,80,24.7,\"completely made up\",\"Complete\"\n\"4\",\"Trudy\",\"DAG\",\"342 Elm\r\nDuncanville TX, 75116\",\"(987) 654-3210\",\"peroxide@blonde.com\",\"1952-11-02\",61,\"NOT Hispanic or Latino\",\"White\",\"Female\",165,54,19.8,\"This record doesn't have a DAG assigned\r\n\r\nSo call up Trudy on the telephone\r\nSend her a letter in the mail\",\"Complete\"\n\"5\",\"John Lee\",\"Walker\",\"Hotel Suite\r\nNew Orleans LA, 70115\",\"(333) 333-4444\",\"left@hippocket.com\",\"1955-04-15\",58,\"NOT Hispanic or Latino\",\"White\",\"Male\",193.04,104,27.9,\"Had a hand for trouble and a eye for cash\r\n\r\nHe had a gold watch chain and a black mustache\",\"Complete\"\n", "`Content-Type`" = structure(c("text/html", "utf-8"), .Names = c("", "charset")))
-  expected_outcome_message <- "5 records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
     returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="label", export_data_access_groups="false", verbose=T),

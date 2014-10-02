@@ -9,7 +9,7 @@ test_that("Smoke Test", {
 })
 
 test_that("Write One Shot -Insert", {
-  testthat::skip_on_cran()
+  testthat::skip(message = "Skipping test to address in a subsequent batch.")
   start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
   project <- start_clean_result$redcap_project
   
@@ -53,7 +53,7 @@ test_that("Write One Shot -Insert", {
 })
 
 test_that("Write One Shot -Update One Field", {
-  testthat::skip_on_cran()
+  testthat::skip(message = "Skipping test to address in a subsequent batch.")
   start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
   project <- start_clean_result$redcap_project
   
@@ -107,7 +107,7 @@ test_that("Write One Shot -Update One Field", {
 })
 
 test_that("Write One Shot -Update Two Fields", {
-  testthat::skip_on_cran()
+  testthat::skip(message = "Skipping test to address in a subsequent batch.")
   start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
   project <- start_clean_result$redcap_project
   
