@@ -224,7 +224,7 @@ hr {
 
 <pre><code class="r">library(REDCapR) #Load the package into the current R session.
 uri &lt;- &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;
-token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;
+token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot; #For `UnitTestPhiFree` account and the simple project (pid 153)
 </code></pre>
 
 <h3>Read all records and fields.</h3>
@@ -235,36 +235,42 @@ token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;
 ds_all_rows_all_fields &lt;- redcap_read_oneshot(redcap_uri=uri, token=token)$data
 </code></pre>
 
-<pre><code>5 records and 16 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+<pre><code>5 records and 24 columns were read from REDCap in 1.5 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_all_rows_all_fields #Inspect the returned dataset
 </code></pre>
 
-<pre><code>  record_id first_name last_name                                 address      telephone               email        dob
-1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232 (432) 456-4848     nutty@mouse.com 2003-08-30
-2         2     Tumtum  Nutmouse 14 Rose Cottage Blvd.\nKenning UK 34243 (234) 234-2343    tummy@mouse.comm 2003-03-10
-3         3     Marcus      Wood          243 Hill St.\nGuthrie OK 73402 (433) 435-9865        mw@mwood.net 1934-04-09
-4         4      Trudy       DAG          342 Elm\nDuncanville TX, 75116 (987) 654-3210 peroxide@blonde.com 1952-11-02
-5         5   John Lee    Walker      Hotel Suite\nNew Orleans LA, 70115 (333) 333-4444  left@hippocket.com 1955-04-15
-  age ethnicity race sex height weight   bmi
-1  10         1    2   0      5      1 400.0
-2  11         1    6   1      6      1 277.8
-3  79         0    4   1    180     80  24.7
-4  61         1    4   0    165     54  19.8
-5  58         1    4   1    193    104  27.9
+<pre><code>  record_id name_first name_last                                 address      telephone               email        dob
+1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232 (405) 321-1111     nutty@mouse.com 2003-08-30
+2         2     Tumtum  Nutmouse 14 Rose Cottage Blvd.\nKenning UK 34243 (405) 321-2222    tummy@mouse.comm 2003-03-10
+3         3     Marcus      Wood          243 Hill St.\nGuthrie OK 73402 (405) 321-3333        mw@mwood.net 1934-04-09
+4         4      Trudy       DAG          342 Elm\nDuncanville TX, 75116 (405) 321-4444 peroxide@blonde.com 1952-11-02
+5         5   John Lee    Walker      Hotel Suite\nNew Orleans LA, 70115 (405) 321-5555  left@hippocket.com 1955-04-15
+  age sex demographics_complete height weight   bmi
+1  11   0                     2      7      1 204.1
+2  11   1                     2      6      1 277.8
+3  80   1                     2    180     80  24.7
+4  61   0                     2    165     54  19.8
+5  59   1                     2    193    104  27.9
                                                                                                      comments
 1                                                                     Character in a book, with some guessing
 2                                                                          A mouse character from a good book
 3                                                                                          completely made up
 4 This record doesn&#39;t have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail
 5                 Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache
-  demographics_complete
-1                     2
-2                     2
-3                     2
-4                     2
-5                     2
+     mugshot health_complete race2___1 race2___2 race2___3 race2___4 race2___5 race2___6 ethnicity
+1 [document]               1         0         0         0         0         1         0         1
+2 [document]               0         0         0         1         0         1         0         1
+3 [document]               2         0         0         0         1         1         0         0
+4 [document]               2         0         1         0         0         1         0         1
+5 [document]               0         1         0         0         0         0         1         2
+  raceandethnicity_complete
+1                         2
+2                         0
+3                         2
+4                         2
+5                         2
 </code></pre>
 
 <h3>Read a subset of the records.</h3>
@@ -282,7 +288,7 @@ ds_some_rows_v1 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
+<pre><code>2 records and 24 columns were read from REDCap in 0.8 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">#Return only records with IDs of 1 and 3 (alternate way)
@@ -294,26 +300,29 @@ ds_some_rows_v2 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>2 records and 16 columns were read from REDCap in 0.4 seconds.  The http status code was 200.
+<pre><code>2 records and 24 columns were read from REDCap in 0.4 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_some_rows_v2 #Inspect the returned dataset
 </code></pre>
 
-<pre><code>  record_id first_name last_name                                 address      telephone           email        dob age
-1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232 (432) 456-4848 nutty@mouse.com 2003-08-30  10
-2         3     Marcus      Wood          243 Hill St.\nGuthrie OK 73402 (433) 435-9865    mw@mwood.net 1934-04-09  79
-  ethnicity race sex height weight   bmi                                comments demographics_complete
-1         1    2   0      5      1 400.0 Character in a book, with some guessing                     2
-2         0    4   1    180     80  24.7                      completely made up                     2
+<pre><code>  record_id name_first name_last                                 address      telephone           email        dob age
+1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232 (405) 321-1111 nutty@mouse.com 2003-08-30  11
+2         3     Marcus      Wood          243 Hill St.\nGuthrie OK 73402 (405) 321-3333    mw@mwood.net 1934-04-09  80
+  sex demographics_complete height weight   bmi                                comments    mugshot health_complete
+1   0                     2      7      1 204.1 Character in a book, with some guessing [document]               1
+2   1                     2    180     80  24.7                      completely made up [document]               2
+  race2___1 race2___2 race2___3 race2___4 race2___5 race2___6 ethnicity raceandethnicity_complete
+1         0         0         0         0         1         0         1                         2
+2         0         0         0         1         1         0         0                         2
 </code></pre>
 
 <h3>Read a subset of the fields.</h3>
 
 <p>If only a subset of the <strong>fields</strong> is desired, then two approaches exist.  The first is to pass an array (where each element is an field) to the <code>fields</code> parameter.  The second is to pass a single string (where the elements are separated by commas) to the <code>fields_collapsed</code> parameter. Like with <code>records</code> and <code>records_collapsed</code> described above, this function converts the more natural format (<em>ie</em>, <code>fields</code>) to the format required by the API (<em>ie</em>, <code>fields_collapsed</code>) if <code>fields</code> is specified and <code>fields_collapsed</code> is not.</p>
 
-<pre><code class="r">#Return only the fields recordid, first_name, and age
-desired_fields_v1 &lt;- c(&quot;recordid&quot;, &quot;first_name&quot;, &quot;age&quot;)
+<pre><code class="r">#Return only the fields recordid, name_first, and age
+desired_fields_v1 &lt;- c(&quot;recordid&quot;, &quot;name_first&quot;, &quot;age&quot;)
 ds_some_fields_v1 &lt;- redcap_read_oneshot(
    redcap_uri = uri, 
    token = token, 
@@ -321,11 +330,11 @@ ds_some_fields_v1 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
+<pre><code>5 records and 3 columns were read from REDCap in 0.5 seconds.  The http status code was 200.
 </code></pre>
 
-<pre><code class="r">#Return only the fields recordid, first_name, and age (alternate way)
-desired_fields_v2 &lt;- &quot;recordid, first_name, age&quot;
+<pre><code class="r">#Return only the fields recordid, name_first, and age (alternate way)
+desired_fields_v2 &lt;- &quot;recordid, name_first, age&quot;
 ds_some_fields_v2 &lt;- redcap_read_oneshot(
    redcap_uri = uri, 
    token = token, 
@@ -333,18 +342,18 @@ ds_some_fields_v2 &lt;- redcap_read_oneshot(
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+<pre><code>5 records and 3 columns were read from REDCap in 0.4 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_some_fields_v2 #Inspect the returned dataset
 </code></pre>
 
-<pre><code>  record_id first_name age
-1         1     Nutmeg  10
+<pre><code>  record_id name_first age
+1         1     Nutmeg  11
 2         2     Tumtum  11
-3         3     Marcus  79
+3         3     Marcus  80
 4         4      Trudy  61
-5         5   John Lee  58
+5         5   John Lee  59
 </code></pre>
 
 <h3>Additional Returned Information</h3>
@@ -361,7 +370,7 @@ ds_some_fields_v2 &lt;- redcap_read_oneshot(
 <li>The <code>elapsed_seconds</code> measures the duration of the call. </li>
 </ol>
 
-<pre><code class="r">#Return only the fields recordid, first_name, and age
+<pre><code class="r">#Return only the fields recordid, name_first, and age
 all_information &lt;- redcap_read_oneshot(
    redcap_uri = uri, 
    token = token, 
@@ -369,19 +378,19 @@ all_information &lt;- redcap_read_oneshot(
 )
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.4 seconds.  The http status code was 200.
+<pre><code>5 records and 3 columns were read from REDCap in 0.5 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">all_information #Inspect the additional information
 </code></pre>
 
 <pre><code>$data
-  record_id first_name age
-1         1     Nutmeg  10
+  record_id name_first age
+1         1     Nutmeg  11
 2         2     Tumtum  11
-3         3     Marcus  79
+3         3     Marcus  80
 4         4      Trudy  61
-5         5   John Lee  58
+5         5   John Lee  59
 
 $success
 [1] TRUE
@@ -390,16 +399,16 @@ $status_code
 [1] 200
 
 $outcome_message
-[1] &quot;5 records and 3 columns were read from REDCap in 0.4 seconds.  The http status code was 200.&quot;
+[1] &quot;5 records and 3 columns were read from REDCap in 0.5 seconds.  The http status code was 200.&quot;
 
 $records_collapsed
 [1] &quot;&quot;
 
 $fields_collapsed
-[1] &quot;recordid,first_name,age&quot;
+[1] &quot;recordid,name_first,age&quot;
 
 $elapsed_seconds
-[1] 0.369
+[1] 0.4516
 
 $raw_text
 [1] &quot;&quot;
@@ -409,10 +418,10 @@ $raw_text
 
 <p>For the sake of documentation and reproducibility, the current vignette was build on a system using the following software.</p>
 
-<pre><code>Report created by wbeasley at 2014-09-29, 11:07:16 -0500
+<pre><code>Report created by Will at 2014-10-01, 22:45:11 -0500
 </code></pre>
 
-<pre><code>R version 3.1.1 Patched (2014-07-11 r66127)
+<pre><code>R version 3.1.1 Patched (2014-09-27 r66695)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 locale:
@@ -423,11 +432,10 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] knitr_1.6     REDCapR_0.5-9 testthat_0.9  RODBC_1.3-10  httr_0.5     
+[1] REDCapR_0.5-12 knitr_1.6      testthat_0.9  
 
 loaded via a namespace (and not attached):
- [1] codetools_0.2-9 devtools_1.6    digest_0.6.4    evaluate_0.5.5  formatR_1.0     plyr_1.8.1      Rcpp_0.11.2    
- [8] RCurl_1.95-4.3  roxygen2_4.0.2  stringr_0.6.2   tools_3.1.1    
+[1] devtools_1.6   evaluate_0.5.5 formatR_1.0    httr_0.5       RCurl_1.95-4.3 stringr_0.6.2  tools_3.1.1   
 </code></pre>
 
 </body>

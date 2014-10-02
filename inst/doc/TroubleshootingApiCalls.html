@@ -247,7 +247,7 @@ This can be verified in the <code>API</code> section (and it&#39;s <code>Manage 
 <li><p><strong>Is Postman installed and operating correctly?</strong><br/>
 If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a>.  The url is <code>https://bbmc.ouhsc.edu/redcap/api/</code>.  There are three key-value pairs: (1) the &#39;token&#39; is <code>9A81268476645C4E5F03428B8AC3AA7B</code>, (2) the &#39;content&#39; is <code>record</code>, and (3) the &#39;format&#39; should be <code>CSV</code>.  When checking your own server, the token value should change, but the content and format should not.  It should return five records in a CSV format.  The &#39;status&#39; should be <code>200 OK</code>.  The result should look roughly like this.  Notice the line breaks were included in the text values themselves.</p>
 
-<pre><code>record_id,first_name,last_name,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete
+<pre><code>record_id,name_first,name_last,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete
 &quot;1&quot;,&quot;Nutmeg&quot;,&quot;Nutmouse&quot;,&quot;14 Rose Cottage St.
 Kenning UK, 323232&quot;,&quot;(432) 456-4848&quot;,&quot;nutty@mouse.com&quot;,&quot;2003-08-30&quot;,10,1,2,0,5,1,400,&quot;Character in a book, with some guessing&quot;,2
 &quot;2&quot;,&quot;Tumtum&quot;,&quot;Nutmouse&quot;,&quot;14 Rose Cottage Blvd.
@@ -334,7 +334,7 @@ This step is like the previous one, but with two differences.  First, it&#39;s u
 <pre><code class="r">redcap_uri &lt;- &quot;https://the.urlofyourinsitution.edu/api/&quot; #Adapt this to your server.
 token &lt;- &quot;your-secret-token&quot; #Adapt this to your user&#39;s token.
 records_collapsed &lt;- &quot;1,2,3&quot; #This assumes that their dataset contains ID values of 1, 2, and 3.  Adapt this to their dataset.
-fields_collapsed &lt;- &quot;record_id,first_name,last_name&quot; #This assumes that their dataset contains variables called &#39;recordid&#39;, &#39;first_name&#39;, and &#39;last_name&#39;.  Adapt this to their dataset.
+fields_collapsed &lt;- &quot;record_id,name_first,name_last&quot; #This assumes that their dataset contains variables called &#39;recordid&#39;, &#39;name_first&#39;, and &#39;name_last&#39;.  Adapt this to their dataset.
 
 raw_text &lt;- RCurl::postForm(
   uri = redcap_uri
@@ -409,7 +409,7 @@ Starting to read 5 records  at 2014-06-27 17:19:49
 Reading batch 1 of 1, with ids 1 through 5.
 5 records and 16 columns were read from REDCap in 0.42 seconds.
 
-record_id first_name last_name                                 address      telephone               email
+record_id name_first name_last                                 address      telephone               email
 1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232 (432) 456-4848     nutty@mouse.com
 2         2     Tumtum  Nutmouse 14 Rose Cottage Blvd.\nKenning UK 34243 (234) 234-2343    tummy@mouse.comm
 3         3     Marcus      Wood          243 Hill St.\nGuthrie OK 73402 (433) 435-9865        mw@mwood.net
