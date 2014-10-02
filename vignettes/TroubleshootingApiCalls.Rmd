@@ -44,7 +44,7 @@ This section group examines potential problems that occur after it leaves a work
  If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/).  The url is `https://bbmc.ouhsc.edu/redcap/api/`.  There are three key-value pairs: (1) the 'token' is `9A81268476645C4E5F03428B8AC3AA7B`, (2) the 'content' is `record`, and (3) the 'format' should be `CSV`.  When checking your own server, the token value should change, but the content and format should not.  It should return five records in a CSV format.  The 'status' should be `200 OK`.  The result should look roughly like this.  Notice the line breaks were included in the text values themselves.
 
   ```
-  record_id,first_name,last_name,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete
+  record_id,name_first,name_last,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete
   "1","Nutmeg","Nutmouse","14 Rose Cottage St.
   Kenning UK, 323232","(432) 456-4848","nutty@mouse.com","2003-08-30",10,1,2,0,5,1,400,"Character in a book, with some guessing",2
   "2","Tumtum","Nutmouse","14 Rose Cottage Blvd.
@@ -138,7 +138,7 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
     redcap_uri <- "https://the.urlofyourinsitution.edu/api/" #Adapt this to your server.
     token <- "your-secret-token" #Adapt this to your user's token.
     records_collapsed <- "1,2,3" #This assumes that their dataset contains ID values of 1, 2, and 3.  Adapt this to their dataset.
-    fields_collapsed <- "record_id,first_name,last_name" #This assumes that their dataset contains variables called 'recordid', 'first_name', and 'last_name'.  Adapt this to their dataset.
+    fields_collapsed <- "record_id,name_first,name_last" #This assumes that their dataset contains variables called 'recordid', 'name_first', and 'name_last'.  Adapt this to their dataset.
 
     raw_text <- RCurl::postForm(
       uri = redcap_uri
@@ -214,7 +214,7 @@ Starting to read 5 records  at 2014-06-27 17:19:49
 Reading batch 1 of 1, with ids 1 through 5.
 5 records and 16 columns were read from REDCap in 0.42 seconds.
 
-  record_id first_name last_name                                 address      telephone               email
+  record_id name_first name_last                                 address      telephone               email
 1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232 (432) 456-4848     nutty@mouse.com
 2         2     Tumtum  Nutmouse 14 Rose Cottage Blvd.\nKenning UK 34243 (234) 234-2343    tummy@mouse.comm
 3         3     Marcus      Wood          243 Hill St.\nGuthrie OK 73402 (433) 435-9865        mw@mwood.net

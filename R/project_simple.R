@@ -3,17 +3,20 @@ populate_project_simple <- function( batch = FALSE ) {
   if( !require(testthat) ) stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.")
   #Declare the server & user information
   uri <- "https://bbmc.ouhsc.edu/redcap/api/"
-  token <- "D70F9ACD1EDD6F151C6EA78683944E98" #For `UnitTestPhiFree` account and the simple project (pid 213)
   # token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account and the simple project (pid 153)
+  token <- "D70F9ACD1EDD6F151C6EA78683944E98" #For `UnitTestPhiFree` account and the simple project (pid 213)
   project <- REDCapR::redcap_project$new(redcap_uri=uri, token=token)
-  path_in_simple <- base::file.path(devtools::inst(name="REDCapR"), "test_data/simple.csv")
+  path_in_simple <- base::file.path(devtools::inst(name="REDCapR"), "test_data/project_simple/simple_data.csv")
  
   #Write the file to disk (necessary only when you wanted to change the data).  Don't uncomment; just run manually.
   # returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="raw")
-  # write.csv(returned_object$data, file=path_in_simple, row.names=FALSE)
+  # write.csv(returned_object$data, file="./inst/test_data/project_simple/simple_data.csv", row.names=FALSE)
+  # returned_object_metadata <- redcap_metadata_read(redcap_uri=uri, token=token)
+  # write.csv(returned_object_metadata$data, file="./inst/test_data/project_simple/simple_metadata.csv", row.names=FALSE)
     
   #Read in the data in R's memory from a csv file.
   dsToWrite <- utils::read.csv(file=path_in_simple, stringsAsFactors=FALSE)
+  # dsToWrite <- utils::read.csv(file="./inst/test_data/project_simple/simple_data.csv", stringsAsFactors=FALSE)
   
   #Remove the calculated variables.
   dsToWrite$age <- NULL

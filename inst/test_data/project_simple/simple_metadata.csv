@@ -1,0 +1,17 @@
+"field_name","form_name","section_header","field_type","field_label","select_choices_or_calculations","field_note","text_validation_type_or_show_slider_number","text_validation_min","text_validation_max","identifier","branching_logic","required_field","custom_alignment","question_number","matrix_group_name","matrix_ranking"
+"record_id","demographics","","text","Study ID","","","",NA,NA,"",NA,NA,NA,NA,NA,NA
+"name_first","demographics","Contact Information","text","First Name","","","",NA,NA,"Y",NA,NA,NA,NA,NA,NA
+"name_last","demographics","","text","Last Name","","","",NA,NA,"Y",NA,NA,NA,NA,NA,NA
+"address","demographics","","notes","Street, City, State, ZIP","","","",NA,NA,"Y",NA,NA,NA,NA,NA,NA
+"telephone","demographics","","text","Phone number","","Include Area Code","phone",NA,NA,"Y",NA,NA,NA,NA,NA,NA
+"email","demographics","","text","E-mail","","","email",NA,NA,"Y",NA,NA,NA,NA,NA,NA
+"dob","demographics","","text","Date of birth","","","date_ymd",NA,NA,"Y",NA,NA,NA,NA,NA,NA
+"age","demographics","","calc","Age (years)","rounddown(datediff([dob],'today','y'))","","",NA,NA,"",NA,NA,NA,NA,NA,NA
+"sex","demographics","","radio","Gender","0, Female | 1, Male","","",NA,NA,"",NA,NA,NA,NA,NA,NA
+"height","health","","text","Height (cm)","","","number",130,215,"",NA,NA,NA,NA,NA,NA
+"weight","health","","text","Weight (kilograms)","","","integer",35,200,"",NA,NA,NA,NA,NA,NA
+"bmi","health","","calc","BMI","round(([weight]*10000)/(([height])^(2)),1)","","",NA,NA,"",NA,NA,NA,NA,NA,NA
+"comments","health","General Comments","notes","Comments","","","",NA,NA,"",NA,NA,NA,NA,NA,NA
+"mugshot","health","","file","Mugshot","","","",NA,NA,"",NA,NA,NA,NA,NA,NA
+"race","race_and_ethnicity","","checkbox","Race (Select all that apply)","1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported","","",NA,NA,"",NA,NA,NA,NA,NA,NA
+"ethnicity","race_and_ethnicity","","radio","Ethnicity","0, Unknown / Not Reported | 1, NOT Hispanic or Latino | 2, Hispanic or Latino","","",NA,NA,"",NA,NA,NA,NA,NA,NA

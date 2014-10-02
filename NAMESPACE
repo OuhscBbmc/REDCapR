@@ -3,6 +3,7 @@
 export(create_batch_glossary)
 export(redcap_column_sanitize)
 export(redcap_download_file_oneshot)
+export(redcap_metadata_read)
 export(redcap_project)
 export(redcap_read)
 export(redcap_read_oneshot)

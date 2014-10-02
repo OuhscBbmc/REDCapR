@@ -53,8 +53,8 @@ ds <- read.csv(text=raw_text, stringsAsFactors=FALSE) #Convert the raw text to a
 
 # result <- redcap_read_oneshot(redcap_uri="https://bbmc.ouhsc.edu/redcap/api/", token = "9A81268476645C4E5F03428B8AC3AA7B")
 # dput(result$data)
-dsToWrite <- structure(list(record_id = 1:5, first_name = c("Nutmeg", "Tumtum", 
-  "Marcus", "Trudy", "John Lee"), last_name = c("Nutmouse", "Nutmouse", 
+dsToWrite <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum", 
+  "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse", 
   "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232", 
   "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402", 
   "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
@@ -69,7 +69,7 @@ dsToWrite <- structure(list(record_id = 1:5, first_name = c("Nutmeg", "Tumtum",
   "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
   "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
   ), demographics_complete = c(2L, 2L, 2L, 2L, 2L)), .Names = c("record_id", 
-  "first_name", "last_name", "address", "telephone", "email", "dob", 
+  "name_first", "name_last", "address", "telephone", "email", "dob", 
   "age", "ethnicity", "race", "sex", "height", "weight", "bmi", 
   "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, 
   -5L))

@@ -1,7 +1,7 @@
 library(testthat)
 
 ###########
-context("ReadBatch")
+context("Read Batch")
 ###########
 uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account on pid=153.
@@ -9,250 +9,387 @@ project <- redcap_project$new(redcap_uri=uri, token=token)
 
 test_that("Smoke Test", {  
   testthat::skip_on_cran()
-  #Static method
+  
+  #Static method w/ default batch size
   expect_message(
     returned_object <- redcap_read(redcap_uri=uri, token=token, verbose=T)    
+  )  
+  
+  #Static method w/ tiny batch size
+  expect_message(
+    returned_object <- redcap_read(redcap_uri=uri, token=token, verbose=T, batch_size=2)    
   )
   
-  #Instance method
+  #Instance method w/ default batch size
   expect_message(
     returned_object <- project$read()
+  )  
+  
+  #Instance method w/ tiny batch size
+  expect_message(
+    returned_object <- project$read(batch_size=2)
   )
 })
-
 test_that("All Records -Default", {   
   testthat::skip_on_cran()
-  expected_data_frame <- structure(list(record_id = 1:5, first_name = c("Nutmeg", "Tumtum", 
-    "Marcus", "Trudy", "John Lee"), last_name = c("Nutmouse", "Nutmouse", 
+  expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum", 
+    "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse", 
     "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232", 
     "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402", 
     "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
-    ), telephone = c("(432) 456-4848", "(234) 234-2343", "(433) 435-9865", 
-    "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
+    ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333", 
+    "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com", 
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
-    "1955-04-15"), age = c(10L, 11L, 79L, 61L, 58L), ethnicity = c(1L, 
-    1L, 0L, 1L, 1L), race = c(2L, 6L, 4L, 4L, 4L), sex = c(0L, 1L, 
-    1L, 0L, 1L), height = c(5, 6, 180, 165, 193.04), weight = c(1L, 
-    1L, 80L, 54L, 104L), bmi = c(400, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
+    "1955-04-15"), age = c(11L, 11L, 80L, 61L, 59L), sex = c(0L, 
+    1L, 1L, 0L, 1L), demographics_complete = c(2L, 2L, 2L, 2L, 2L
+    ), height = c(7, 6, 180, 165, 193.04), weight = c(1L, 1L, 80L, 
+    54L, 104L), bmi = c(204.1, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
     "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), demographics_complete = c(2L, 2L, 2L, 2L, 2L)), .Names = c("record_id", 
-    "first_name", "last_name", "address", "telephone", "email", "dob", 
-    "age", "ethnicity", "race", "sex", "height", "weight", "bmi", 
-    "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, 
+    ), mugshot = c("[document]", "[document]", "[document]", "[document]", 
+    "[document]"), health_complete = c(1L, 0L, 2L, 2L, 0L), race___1 = c(0L, 
+    0L, 0L, 0L, 1L), race___2 = c(0L, 0L, 0L, 1L, 0L), race___3 = c(0L, 
+    1L, 0L, 0L, 0L), race___4 = c(0L, 0L, 1L, 0L, 0L), race___5 = c(1L, 
+    1L, 1L, 1L, 0L), race___6 = c(0L, 0L, 0L, 0L, 1L), ethnicity = c(1L, 
+    1L, 0L, 1L, 2L), race_and_ethnicity_complete = c(2L, 0L, 2L, 2L, 
+    2L)), .Names = c("record_id", "name_first", "name_last", "address", 
+    "telephone", "email", "dob", "age", "sex", "demographics_complete", 
+    "height", "weight", "bmi", "comments", "mugshot", "health_complete", 
+    "race___1", "race___2", "race___3", "race___4", "race___5", 
+    "race___6", "ethnicity", "race_and_ethnicity_complete"), class = "data.frame", row.names = c(NA, 
     -5L))
-  expected_outcome_message <- "\\d+ records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "\\d+ records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
+  ###########################
+  ## Default Batch size
   expect_message(
-    returned_object <- redcap_read(redcap_uri=uri, token=token, verbose=T),
+    returned_object1 <- redcap_read(redcap_uri=uri, token=token, verbose=T),
+    regexp = expected_outcome_message
+  )  
+  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
+  expect_true(returned_object1$success)
+  expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
+  # expect_match(returned_object1$status_messages, regexp="OK", perl=TRUE)
+  expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)  
+  
+  ###########################
+  ## Tiny Batch size
+  expect_message(
+    returned_object2 <- redcap_read(redcap_uri=uri, token=token, verbose=T, batch_size=2),
     regexp = expected_outcome_message
   )
   
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-  # expect_equal(dsToWrite, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-  expect_true(returned_object$success)
-  expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
-  # expect_match(returned_object$status_messages, regexp="OK", perl=TRUE)
-  expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
-  expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
-  expect_match(returned_object$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
+  expect_true(returned_object2$success)
+  expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
+  # expect_match(returned_object2$status_messages, regexp="OK", perl=TRUE)
+  expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
 test_that("All Records -Raw", {   
   testthat::skip_on_cran()
-  expected_data_frame <- structure(list(record_id = 1:5, first_name = c("Nutmeg", "Tumtum", 
-    "Marcus", "Trudy", "John Lee"), last_name = c("Nutmouse", "Nutmouse", 
+  expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum", 
+    "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse", 
     "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232", 
     "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402", 
     "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
-    ), telephone = c("(432) 456-4848", "(234) 234-2343", "(433) 435-9865", 
-    "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
+    ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333", 
+    "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com", 
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
-    "1955-04-15"), age = c(10L, 11L, 79L, 61L, 58L), ethnicity = c(1L, 
-    1L, 0L, 1L, 1L), race = c(2L, 6L, 4L, 4L, 4L), sex = c(0L, 1L, 
-    1L, 0L, 1L), height = c(5, 6, 180, 165, 193.04), weight = c(1L, 
-    1L, 80L, 54L, 104L), bmi = c(400, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
+    "1955-04-15"), age = c(11L, 11L, 80L, 61L, 59L), sex = c(0L, 
+    1L, 1L, 0L, 1L), demographics_complete = c(2L, 2L, 2L, 2L, 2L
+    ), height = c(7, 6, 180, 165, 193.04), weight = c(1L, 1L, 80L, 
+    54L, 104L), bmi = c(204.1, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
     "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), demographics_complete = c(2L, 2L, 2L, 2L, 2L)), .Names = c("record_id", 
-    "first_name", "last_name", "address", "telephone", "email", "dob", 
-    "age", "ethnicity", "race", "sex", "height", "weight", "bmi", 
-    "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, 
+    ), mugshot = c("[document]", "[document]", "[document]", "[document]", 
+    "[document]"), health_complete = c(1L, 0L, 2L, 2L, 0L), race___1 = c(0L, 
+    0L, 0L, 0L, 1L), race___2 = c(0L, 0L, 0L, 1L, 0L), race___3 = c(0L, 
+    1L, 0L, 0L, 0L), race___4 = c(0L, 0L, 1L, 0L, 0L), race___5 = c(1L, 
+    1L, 1L, 1L, 0L), race___6 = c(0L, 0L, 0L, 0L, 1L), ethnicity = c(1L, 
+    1L, 0L, 1L, 2L), race_and_ethnicity_complete = c(2L, 0L, 2L, 2L, 
+    2L)), .Names = c("record_id", "name_first", "name_last", "address", 
+    "telephone", "email", "dob", "age", "sex", "demographics_complete", 
+    "height", "weight", "bmi", "comments", "mugshot", "health_complete", 
+    "race___1", "race___2", "race___3", "race___4", "race___5", 
+    "race___6", "ethnicity", "race_and_ethnicity_complete"), class = "data.frame", row.names = c(NA, 
     -5L))
-  expected_outcome_message <- "\\d+ records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "\\d+ records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
     returned_object <- redcap_read(redcap_uri=uri, token=token, raw_or_label="raw", verbose=T),
     regexp = expected_outcome_message
   )
   
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-  expect_true(returned_object$success)
-  expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
-  # expect_match(returned_object$status_messages, regexp="OK", perl=TRUE)
-  expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
-  expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
-  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
-})
-
-test_that("All Records -Raw", {   
-  testthat::skip_on_cran()
-  expected_data_frame <-structure(list(record_id = 1:5, redcap_data_access_group = c("dag_1", 
-    "dag_1", "dag_1", "", "dag_2"), first_name = c("Nutmeg", "Tumtum", 
-    "Marcus", "Trudy", "John Lee"), last_name = c("Nutmouse", "Nutmouse", 
-    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232", 
-    "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402", 
-    "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
-    ), telephone = c("(432) 456-4848", "(234) 234-2343", "(433) 435-9865", 
-    "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
-    "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
-    ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
-    "1955-04-15"), age = c(10L, 11L, 79L, 61L, 58L), ethnicity = c(1L, 
-    1L, 0L, 1L, 1L), race = c(2L, 6L, 4L, 4L, 4L), sex = c(0L, 1L, 
-    1L, 0L, 1L), height = c(5, 6, 180, 165, 193.04), weight = c(1L, 
-    1L, 80L, 54L, 104L), bmi = c(400, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
-    "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
-    "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), demographics_complete = c(2L, 2L, 2L, 2L, 2L)), .Names = c("record_id", 
-    "redcap_data_access_group", "first_name", "last_name", "address", 
-    "telephone", "email", "dob", "age", "ethnicity", "race", "sex", 
-    "height", "weight", "bmi", "comments", "demographics_complete"
-    ), class = "data.frame", row.names = c(NA, -5L))
-  expected_outcome_message <- "\\d+ records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
-  
+  ###########################
+  ## Default Batch size
   expect_message(
-    returned_object <- redcap_read(redcap_uri=uri, token=token, raw_or_label="raw", export_data_access_groups="true", verbose=T),
+    returned_object1 <- redcap_read(redcap_uri=uri, token=token, verbose=T),
+    regexp = expected_outcome_message
+  )  
+  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
+  expect_true(returned_object1$success)
+  expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
+  # expect_match(returned_object1$status_messages, regexp="OK", perl=TRUE)
+  expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)  
+  
+  ###########################
+  ## Tiny Batch size
+  expect_message(
+    returned_object2 <- redcap_read(redcap_uri=uri, token=token, verbose=T, batch_size=2),
     regexp = expected_outcome_message
   )
   
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-  expect_true(returned_object$success)
-  expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
-  # expect_match(returned_object$status_messages, regexp="OK", perl=TRUE)
-  expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
-  expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
-  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
+  expect_true(returned_object2$success)
+  expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
+  # expect_match(returned_object2$status_messages, regexp="OK", perl=TRUE)
+  expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
-
-test_that("All Records -label and DAG", {   
+test_that("All Records -Raw and DAG", {   
   testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 1:5, redcap_data_access_group = c("dag_1", 
-    "dag_1", "dag_1", "", "dag_2"), first_name = c("Nutmeg", "Tumtum", 
-    "Marcus", "Trudy", "John Lee"), last_name = c("Nutmouse", "Nutmouse", 
+    "dag_1", "dag_1", "", "dag_2"), name_first = c("Nutmeg", "Tumtum", 
+    "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse", 
     "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232", 
     "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402", 
     "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
-    ), telephone = c("(432) 456-4848", "(234) 234-2343", "(433) 435-9865", 
-    "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
+    ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333", 
+    "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com", 
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
-    "1955-04-15"), age = c(10L, 11L, 79L, 61L, 58L), ethnicity = c("NOT Hispanic or Latino", 
-    "NOT Hispanic or Latino", "Hispanic or Latino", "NOT Hispanic or Latino", 
-    "NOT Hispanic or Latino"), race = c("Native Hawaiian or Other Pacific Islander", 
-    "Unknown / Not Reported", "White", "White", "White"), sex = c("Female", 
-    "Male", "Male", "Female", "Male"), height = c(5, 6, 180, 165, 
-    193.04), weight = c(1L, 1L, 80L, 54L, 104L), bmi = c(400, 277.8, 
-    24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
+    "1955-04-15"), age = c(11L, 11L, 80L, 61L, 59L), sex = c(0L, 
+    1L, 1L, 0L, 1L), demographics_complete = c(2L, 2L, 2L, 2L, 2L
+    ), height = c(7, 6, 180, 165, 193.04), weight = c(1L, 1L, 80L, 
+    54L, 104L), bmi = c(204.1, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
     "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), demographics_complete = c("Complete", "Complete", "Complete", 
-    "Complete", "Complete")), .Names = c("record_id", "redcap_data_access_group", 
-    "first_name", "last_name", "address", "telephone", "email", "dob", 
-    "age", "ethnicity", "race", "sex", "height", "weight", "bmi", 
-    "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             -5L))
-  expected_outcome_message <- "\\d+ records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+    ), mugshot = c("[document]", "[document]", "[document]", "[document]", 
+    "[document]"), health_complete = c(1L, 0L, 2L, 2L, 0L), race___1 = c(0L, 
+    0L, 0L, 0L, 1L), race___2 = c(0L, 0L, 0L, 1L, 0L), race___3 = c(0L, 
+    1L, 0L, 0L, 0L), race___4 = c(0L, 0L, 1L, 0L, 0L), race___5 = c(1L, 
+    1L, 1L, 1L, 0L), race___6 = c(0L, 0L, 0L, 0L, 1L), ethnicity = c(1L, 
+    1L, 0L, 1L, 2L), race_and_ethnicity_complete = c(2L, 0L, 2L, 2L, 
+    2L)), .Names = c("record_id", "redcap_data_access_group", "name_first", 
+    "name_last", "address", "telephone", "email", "dob", "age", "sex", 
+    "demographics_complete", "height", "weight", "bmi", "comments", 
+    "mugshot", "health_complete", "race___1", "race___2", "race___3", 
+    "race___4", "race___5", "race___6", "ethnicity", "race_and_ethnicity_complete"
+    ), class = "data.frame", row.names = c(NA, -5L))
+  expected_outcome_message <- "\\d+ records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
+  ###########################
+  ## Default Batch size
   expect_message(
-    returned_object <- redcap_read(redcap_uri=uri, token=token, raw_or_label="label", export_data_access_groups="true", verbose=T),
+    returned_object1 <- redcap_read(redcap_uri=uri, token=token, raw_or_label="raw", export_data_access_groups="true", verbose=T),
+    regexp = expected_outcome_message
+  )  
+  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
+  expect_true(returned_object1$success)
+  expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
+  # expect_match(returned_object1$status_messages, regexp="OK", perl=TRUE)
+  expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)  
+  
+  ###########################
+  ## Tiny Batch size
+  expect_message(
+    returned_object2 <- redcap_read(redcap_uri=uri, token=token, raw_or_label="raw", export_data_access_groups="true", verbose=T, batch_size=2),
     regexp = expected_outcome_message
   )
   
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-  expect_true(returned_object$success)
-  expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
-  # expect_match(returned_object$status_messages, regexp="OK", perl=TRUE)
-  expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
-  expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
-  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
+  expect_true(returned_object2$success)
+  expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
+  # expect_match(returned_object2$status_messages, regexp="OK", perl=TRUE)
+  expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
-
+test_that("All Records -label and DAG -one single batch", {   
+  testthat::skip_on_cran()
+  expected_data_frame <- structure(list(record_id = 1:5, redcap_data_access_group = c("dag_1", 
+    "dag_1", "dag_1", "", "dag_2"), name_first = c("Nutmeg", "Tumtum", 
+    "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse", 
+    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232", 
+    "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402", 
+    "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
+    ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333", 
+    "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com", 
+    "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
+    ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
+    "1955-04-15"), age = c(11L, 11L, 80L, 61L, 59L), sex = c("Female", 
+    "Male", "Male", "Female", "Male"), demographics_complete = c("Complete", 
+    "Complete", "Complete", "Complete", "Complete"), height = c(7, 
+    6, 180, 165, 193.04), weight = c(1L, 1L, 80L, 54L, 104L), bmi = c(204.1, 
+    277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
+    "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
+    "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
+    ), mugshot = c("[document]", "[document]", "[document]", "[document]", 
+    "[document]"), health_complete = c("Unverified", "Incomplete", 
+    "Complete", "Complete", "Incomplete"), race___1 = c("", "", 
+    "", "", "American Indian/Alaska Native"), race___2 = c("", "", 
+    "", "Asian", ""), race___3 = c("", "Native Hawaiian or Other Pacific Islander", 
+    "", "", ""), race___4 = c("", "", "Black or African American", 
+    "", ""), race___5 = c("White", "White", "White", "White", ""
+    ), race___6 = c("", "", "", "", "Unknown / Not Reported"), ethnicity = c("NOT Hispanic or Latino", 
+    "NOT Hispanic or Latino", "Unknown / Not Reported", "NOT Hispanic or Latino", 
+    "Hispanic or Latino"), race_and_ethnicity_complete = c("Complete", 
+    "Incomplete", "Complete", "Complete", "Complete")), .Names = c("record_id", 
+    "redcap_data_access_group", "name_first", "name_last", "address", 
+    "telephone", "email", "dob", "age", "sex", "demographics_complete", 
+    "height", "weight", "bmi", "comments", "mugshot", "health_complete", 
+    "race___1", "race___2", "race___3", "race___4", "race___5", 
+    "race___6", "ethnicity", "race_and_ethnicity_complete"), class = "data.frame", row.names = c(NA, 
+    -5L))
+  expected_outcome_message <- "\\d+ records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  
+  ###########################
+  ## Default Batch size
+  expect_message(
+    returned_object1 <- redcap_read(redcap_uri=uri, token=token, raw_or_label="label", export_data_access_groups="true", verbose=T),
+    regexp = expected_outcome_message
+  )  
+  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
+  expect_true(returned_object1$success)
+  expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
+  # expect_match(returned_object1$status_messages, regexp="OK", perl=TRUE)
+  expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)  
+})
+test_that("All Records -label and DAG -three tiny batches", {   
+  testthat::skip_on_cran()
+  expected_data_frame <- structure(list(record_id = 1:5, redcap_data_access_group = c("dag_1", 
+    "dag_1", "dag_1", "", "dag_2"), name_first = c("Nutmeg", "Tumtum", 
+    "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse", 
+    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232", 
+    "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402", 
+    "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
+    ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333", 
+    "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com", 
+    "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
+    ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
+    "1955-04-15"), age = c(11L, 11L, 80L, 61L, 59L), sex = c("Female", 
+    "Male", "Male", "Female", "Male"), demographics_complete = c("Complete", 
+    "Complete", "Complete", "Complete", "Complete"), height = c(7, 
+    6, 180, 165, 193.04), weight = c(1L, 1L, 80L, 54L, 104L), bmi = c(204.1, 
+    277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
+    "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
+    "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
+    ), mugshot = c("[document]", "[document]", "[document]", "[document]", 
+    "[document]"), health_complete = c("Unverified", "Incomplete", 
+    "Complete", "Complete", "Incomplete"), race___1 = c(NA, NA, 
+    NA, NA, "American Indian/Alaska Native"), race___2 = c(NA, NA, 
+    "", "Asian", NA), race___3 = c("", "Native Hawaiian or Other Pacific Islander", 
+    NA, NA, NA), race___4 = c(NA, NA, "Black or African American", 
+    "", NA), race___5 = c("White", "White", "White", "White", NA
+    ), race___6 = c(NA, NA, NA, NA, "Unknown / Not Reported"), ethnicity = c("NOT Hispanic or Latino", 
+    "NOT Hispanic or Latino", "Unknown / Not Reported", "NOT Hispanic or Latino", 
+    "Hispanic or Latino"), race_and_ethnicity_complete = c("Complete", 
+    "Incomplete", "Complete", "Complete", "Complete")), .Names = c("record_id", 
+    "redcap_data_access_group", "name_first", "name_last", "address", 
+    "telephone", "email", "dob", "age", "sex", "demographics_complete", 
+    "height", "weight", "bmi", "comments", "mugshot", "health_complete", 
+    "race___1", "race___2", "race___3", "race___4", "race___5", 
+    "race___6", "ethnicity", "race_and_ethnicity_complete"), class = "data.frame", row.names = c(NA, 
+    -5L))
+  expected_outcome_message <- "\\d+ records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  
+  ###########################
+  ## Default Batch size
+  expect_message(
+    returned_object2 <- redcap_read(redcap_uri=uri, token=token, raw_or_label="label", export_data_access_groups="true", verbose=T, batch_size=2),
+    regexp = expected_outcome_message
+  )  
+  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
+  expect_true(returned_object2$success)
+  expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
+  # expect_match(returned_object2$status_messages, regexp="OK", perl=TRUE)
+  expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)  
+})
 test_that("All Records -label", {   
   testthat::skip_on_cran()
-  expected_data_frame <- structure(list(record_id = 1:5, first_name = c("Nutmeg", "Tumtum", 
-    "Marcus", "Trudy", "John Lee"), last_name = c("Nutmouse", "Nutmouse", 
+  expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum", 
+    "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse", 
     "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232", 
     "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402", 
     "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
-    ), telephone = c("(432) 456-4848", "(234) 234-2343", "(433) 435-9865", 
-    "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
+    ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333", 
+    "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com", 
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
-    "1955-04-15"), age = c(10L, 11L, 79L, 61L, 58L), ethnicity = c("NOT Hispanic or Latino", 
-    "NOT Hispanic or Latino", "Hispanic or Latino", "NOT Hispanic or Latino", 
-    "NOT Hispanic or Latino"), race = c("Native Hawaiian or Other Pacific Islander", 
-    "Unknown / Not Reported", "White", "White", "White"), sex = c("Female", 
-    "Male", "Male", "Female", "Male"), height = c(5, 6, 180, 165, 
-    193.04), weight = c(1L, 1L, 80L, 54L, 104L), bmi = c(400, 277.8, 
-    24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
+    "1955-04-15"), age = c(11L, 11L, 80L, 61L, 59L), sex = c("Female", 
+    "Male", "Male", "Female", "Male"), demographics_complete = c("Complete", 
+    "Complete", "Complete", "Complete", "Complete"), height = c(7, 
+    6, 180, 165, 193.04), weight = c(1L, 1L, 80L, 54L, 104L), bmi = c(204.1, 
+    277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
     "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), demographics_complete = c("Complete", "Complete", "Complete", 
-    "Complete", "Complete")), .Names = c("record_id", 
-    "first_name", "last_name", "address", "telephone", "email", "dob", 
-    "age", "ethnicity", "race", "sex", "height", "weight", "bmi", 
-    "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, -5L))
+    ), mugshot = c("[document]", "[document]", "[document]", "[document]", 
+    "[document]"), health_complete = c("Unverified", "Incomplete", 
+    "Complete", "Complete", "Incomplete"), race___1 = c("", "", 
+    "", "", "American Indian/Alaska Native"), race___2 = c("", "", 
+    "", "Asian", ""), race___3 = c("", "Native Hawaiian or Other Pacific Islander", 
+    "", "", ""), race___4 = c("", "", "Black or African American", 
+    "", ""), race___5 = c("White", "White", "White", "White", ""
+    ), race___6 = c("", "", "", "", "Unknown / Not Reported"), ethnicity = c("NOT Hispanic or Latino", 
+    "NOT Hispanic or Latino", "Unknown / Not Reported", "NOT Hispanic or Latino", 
+    "Hispanic or Latino"), race_and_ethnicity_complete = c("Complete", 
+    "Incomplete", "Complete", "Complete", "Complete")), .Names = c("record_id", 
+    "name_first", "name_last", "address", "telephone", "email", "dob", 
+    "age", "sex", "demographics_complete", "height", "weight", "bmi", 
+    "comments", "mugshot", "health_complete", "race___1", "race___2", 
+    "race___3", "race___4", "race___5", "race___6", "ethnicity", 
+    "race_and_ethnicity_complete"), class = "data.frame", row.names = c(NA, 
+    -5L))
 
-  expected_outcome_message <- "\\d+ records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
+  expected_outcome_message <- "\\d+ records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  
+#   expect_message(
+#     returned_object <- redcap_read(redcap_uri=uri, token=token, raw_or_label="label", export_data_access_groups="false", verbose=T),
+#     regexp = expected_outcome_message
+#   )
+  
+  ###########################
+  ## Default Batch size
   expect_message(
-    returned_object <- redcap_read(redcap_uri=uri, token=token, raw_or_label="label", export_data_access_groups="false", verbose=T),
+    returned_object1 <- redcap_read(redcap_uri=uri, token=token, raw_or_label="label", export_data_access_groups="false", verbose=T),
     regexp = expected_outcome_message
-  )
+  )  
+  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
+  expect_true(returned_object1$success)
+  expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
+  # expect_match(returned_object1$status_messages, regexp="OK", perl=TRUE)
+  expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)  
   
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-  expect_true(returned_object$success)
-  expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
-  # expect_match(returned_object$status_messages, regexp="OK", perl=TRUE)
-  expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
-  expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
-  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
-})
-
-test_that("All Records -Default", {   
-  testthat::skip_on_cran()
-  expected_data_frame <- structure(list(record_id = 1:5, first_name = c("Nutmeg", "Tumtum", 
-    "Marcus", "Trudy", "John Lee"), last_name = c("Nutmouse", "Nutmouse", 
-    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232", 
-    "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402", 
-    "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
-    ), telephone = c("(432) 456-4848", "(234) 234-2343", "(433) 435-9865", 
-    "(987) 654-3210", "(333) 333-4444"), email = c("nutty@mouse.com", 
-    "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
-    ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02", 
-    "1955-04-15"), age = c(10L, 11L, 79L, 61L, 58L), ethnicity = c(1L, 
-    1L, 0L, 1L, 1L), race = c(2L, 6L, 4L, 4L, 4L), sex = c(0L, 1L, 
-    1L, 0L, 1L), height = c(5, 6, 180, 165, 193.04), weight = c(1L, 
-    1L, 80L, 54L, 104L), bmi = c(400, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing", 
-    "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
-    "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), demographics_complete = c(2L, 2L, 2L, 2L, 2L)), .Names = c("record_id", 
-    "first_name", "last_name", "address", "telephone", "email", "dob", 
-    "age", "ethnicity", "race", "sex", "height", "weight", "bmi", 
-    "comments", "demographics_complete"), class = "data.frame", row.names = c(NA, -5L))
-  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
-  
-  expect_message(
-    returned_object <- redcap_read(redcap_uri=uri, token=token, verbose=T, batch_size=2),
-    regexp = expected_outcome_message
-  )
-  
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-  expect_true(returned_object$success)
-  expect_match(returned_object$status_codes, regexp="200; 200; 200", perl=TRUE)
-  # expect_match(returned_object$status_messages, regexp="OK.*; OK.*; OK") #Sometimes the Status Message have line breaks appended at the end.
-  expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
-  expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
-  expect_match(returned_object$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+#   ###########################
+#   ## Tiny Batch size
+#   expect_message(
+#     returned_object2 <- redcap_read(redcap_uri=uri, token=token, raw_or_label="label", export_data_access_groups="false", verbose=T, batch_size=2),
+#     regexp = expected_outcome_message
+#   )
+#   
+#   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
+#   expect_true(returned_object2$success)
+#   expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
+#   # expect_match(returned_object2$status_messages, regexp="OK", perl=TRUE)
+#   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
+#   expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
+#   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })

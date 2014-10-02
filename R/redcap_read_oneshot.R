@@ -57,8 +57,8 @@
 #'    records=desired_records_v1
 #' )$data
 #' 
-#' #Return only the fields recordid, first_name, and age
-#' desired_fields_v1 <- c("recordid", "first_name", "age")
+#' #Return only the fields recordid, name_first, and age
+#' desired_fields_v1 <- c("recordid", "name_first", "age")
 #' ds_some_fields_v1 <- redcap_read_oneshot(
 #'    redcap_uri=uri, 
 #'    token=token, 
@@ -150,7 +150,6 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
     )
     
-    #The comma formatting uses the same code as scales::comma, but I don't want to create a package dependency just for commas (https://github.com/hadley/scales/blob/master/R/formatter.r).
     outcome_message <- paste0(format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
                              " records and ",  
                              format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
