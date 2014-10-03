@@ -1,7 +1,8 @@
 rm(list=ls(all=TRUE))
+library(REDCapR)
 uri <- "https://bbmc.ouhsc.edu/redcap/api/"
-token <- "D70F9ACD1EDD6F151C6EA78683944E98" #The version that is repeatedly deleted and rewritten for most unit tests.
-# token <- "9A81268476645C4E5F03428B8AC3AA7B" #The version that is relatively static (and isn't repeatedly deleted).
+token <- "9A81268476645C4E5F03428B8AC3AA7B" #The version that is relatively static (and isn't repeatedly deleted).
+# token <- "D70F9ACD1EDD6F151C6EA78683944E98" #The version that is repeatedly deleted and rewritten for most unit tests.
 
 d <- redcap_metadata_read(redcap_uri=uri, token=token)$data
 # redcap_metadata_read(redcap_uri=uri, token=token, fields=c("record_id", "name_last"))
@@ -10,29 +11,46 @@ d <- redcap_metadata_read(redcap_uri=uri, token=token)$data
 # redcap_metadata_read(redcap_uri=uri, token=token, forms_collapsed = "health")
 choices <- d[d$field_name=="race", "select_choices_or_calculations"]
 
-pattern <- "(?<=\\A| \\| )(?<id>\\d{1,}), (?<label>[\\w ]{1,})(?= \\| |\\Z)"
+# pattern <- "(?<=\\A| \\| )(?<id>\\d{1,}), (?<label>[\\w ]{1,})(?= \\| |\\Z)"
+# pattern_checkboxes <- "(?<=\\A| \\| )(?<id>\\d{1,}), (?<label>[\\w ]{1,})(?= \\| |\\Z)"
+# pattern_checkboxes <- "(?<=\\A| \\| )(?<id>\\d{1,}), (?<label>[\\w ]{1,})(?= \\s|\\Z)"
+# pattern_checkboxes <- "(?<=\\A| \\| )(?<id>\\d{1,}), (?<label>[\\w ]{1,})(?=[ | ] |\\Z)"
+# pattern_checkboxes <- "(?<=\\A| \\| )(?<id>\\d{1,}), (?<label>[\\w ]{1,})"
+pattern_checkboxes <- "(?<=\\A| \\| )(?<id>\\d{1,}), (?<label>[\x21-\x7B\x7D-\x7E ]{1,})(?= \\| |\\Z)" #The weird ranges are to avoid the pipe character; PCRE doesn't support character negation.
 
-regex_named_captures <- function( pattern, text, perl=TRUE ) {
-  match <- gregexpr(pattern, choices, perl=perl)[[1]]
-  capture_names <- attr(match, "capture.names")
-  d <- as.data.frame(matrix(NA, nrow=length(attr(match, "match.length")), ncol=length(capture_names)))
-  colnames(d) <- capture_names
-  
-  for( column_name in colnames(d) ) {
-    d[, column_name] <- mapply( function (start, len) substr(choices, start, start+len-1),
-                                attr(match, "capture.start")[, column_name],
-                                attr(match, "capture.length")[, column_name] )
-  }
-  return( d )
-}
-regex_named_captures(pattern=pattern, text=choices)
-# > regex_named_captures(pattern=pattern, text=choices)
+# regex_named_captures <- function( pattern, text, perl=TRUE ) {
+#   match <- gregexpr(pattern, choices, perl=perl)[[1]]
+#   capture_names <- attr(match, "capture.names")
+#   d <- as.data.frame(matrix(NA, nrow=length(attr(match, "match.length")), ncol=length(capture_names)))
+#   colnames(d) <- capture_names
+#   
+#   for( column_name in colnames(d) ) {
+#     d[, column_name] <- mapply( function (start, len) substr(choices, start, start+len-1),
+#                                 attr(match, "capture.start")[, column_name],
+#                                 attr(match, "capture.length")[, column_name] )
+#   }
+#   return( d )
+# }
+# REDCapR::
+regex_named_captures(pattern=pattern_checkboxes, text=choices)
 #   id                                     label
-# 1  2                                     Asian
-# 2  3 Native Hawaiian or Other Pacific Islander
-# 3  4                 Black or African American
-# 4  5                                     White
+# 1  1             American Indian/Alaska Native
+# 2  2                                     Asian
+# 3  3 Native Hawaiian or Other Pacific Islander
+# 4  4                 Black or African American
+# 5  5                                     White
+# 6  6                    Unknown / Not Reported
 
+
+# checkbox_choices <- function( select_choices ) {
+#   #The weird ranges are to avoid the pipe character; PCRE doesn't support character negation.
+#   pattern_checkboxes <- "(?<=\\A| \\| )(?<id>\\d{1,}), (?<label>[\x21-\x7B\x7D-\x7E ]{1,})(?= \\| |\\Z)" 
+#   
+#   d <- regex_named_captures(pattern=pattern_checkboxes, text=select_choices)
+#   return( d )
+# }
+
+checkbox_choices(select_choices=choices)
 
 
 

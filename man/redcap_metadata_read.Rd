@@ -82,6 +82,9 @@ server to attend to other users' requests.
 \examples{
 \dontrun{
 library(REDCapR) #Load the package into the current R session.
+uri <- "https://bbmc.ouhsc.edu/redcap/api/"
+token <- "9A81268476645C4E5F03428B8AC3AA7B"
+redcap_metadata_read(redcap_uri=uri, token=token)
 }
 }
 \author{
