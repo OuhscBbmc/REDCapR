@@ -17,13 +17,13 @@ token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account and t
 
 ## ----return_all-------------------------------------------------------------------------------------------------------
 #Return all records and all variables.
-ds_all_rows_all_fields <- redcap_read_oneshot(redcap_uri=uri, token=token)$data
+ds_all_rows_all_fields <- redcap_read(redcap_uri=uri, token=token)$data
 ds_all_rows_all_fields #Inspect the returned dataset
 
 ## ----read_row_subset, results='hold'----------------------------------------------------------------------------------
 #Return only records with IDs of 1 and 3
 desired_records_v1 <- c(1, 3)
-ds_some_rows_v1 <- redcap_read_oneshot(
+ds_some_rows_v1 <- redcap_read(
    redcap_uri = uri, 
    token = token, 
    records = desired_records_v1
@@ -31,7 +31,7 @@ ds_some_rows_v1 <- redcap_read_oneshot(
 
 #Return only records with IDs of 1 and 3 (alternate way)
 desired_records_v2 <- "1, 3"
-ds_some_rows_v2 <- redcap_read_oneshot(
+ds_some_rows_v2 <- redcap_read(
    redcap_uri = uri, 
    token = token, 
    records_collapsed = desired_records_v2
@@ -42,7 +42,7 @@ ds_some_rows_v2 #Inspect the returned dataset
 ## ----read_field_subset------------------------------------------------------------------------------------------------
 #Return only the fields recordid, name_first, and age
 desired_fields_v1 <- c("recordid", "name_first", "age")
-ds_some_fields_v1 <- redcap_read_oneshot(
+ds_some_fields_v1 <- redcap_read(
    redcap_uri = uri, 
    token = token, 
    fields = desired_fields_v1
@@ -50,7 +50,7 @@ ds_some_fields_v1 <- redcap_read_oneshot(
 
 #Return only the fields recordid, name_first, and age (alternate way)
 desired_fields_v2 <- "recordid, name_first, age"
-ds_some_fields_v2 <- redcap_read_oneshot(
+ds_some_fields_v2 <- redcap_read(
    redcap_uri = uri, 
    token = token, 
    fields_collapsed = desired_fields_v2
@@ -58,9 +58,40 @@ ds_some_fields_v2 <- redcap_read_oneshot(
 
 ds_some_fields_v2 #Inspect the returned dataset
 
+## ----read_record_field_subset-----------------------------------------------------------------------------------------
+######
+## Step 1: First call to REDCap
+desired_fields_v3 <- c("recordid", "dob", "weight")
+ds_some_fields_v3 <- redcap_read(
+   redcap_uri = uri, 
+   token = token, 
+   fields = desired_fields_v3
+)$data
+
+ds_some_fields_v3 #Examine the these three variables.
+
+######
+## Step 2: identify desired records, based on age & weight
+before_1960 <- (ds_some_fields_v3$dob <= as.Date("1960-01-01"))
+heavier_than_70_kg <- (ds_some_fields_v3$weight > 70)
+desired_records_v3 <- ds_some_fields_v3[before_1960 & heavier_than_70_kg, "record_id"]
+
+desired_records_v3 #Peek at IDs of the identified records
+
+######
+## Step 3: second call to REDCap
+#Return only records that met the age & weight criteria.
+ds_some_rows_v3 <- redcap_read(
+   redcap_uri = uri, 
+   token = token, 
+   records = desired_records_v3
+)$data
+
+ds_some_rows_v3 #Examine the results.
+
 ## ----read_not_just_dataframe------------------------------------------------------------------------------------------
 #Return only the fields recordid, name_first, and age
-all_information <- redcap_read_oneshot(
+all_information <- redcap_read(
    redcap_uri = uri, 
    token = token, 
    fields = desired_fields_v1

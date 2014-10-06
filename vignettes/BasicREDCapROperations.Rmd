@@ -39,19 +39,19 @@ If no information is passed about the desired records or fields, then the entire
 
 ```{r return_all}
 #Return all records and all variables.
-ds_all_rows_all_fields <- redcap_read_oneshot(redcap_uri=uri, token=token)$data
+ds_all_rows_all_fields <- redcap_read(redcap_uri=uri, token=token)$data
 ds_all_rows_all_fields #Inspect the returned dataset
 ```
 
 ### Read a subset of the records.
 If only a subset of the **records** is desired, the two approaches are shown below.  The first is to pass an array (where each element is an ID) to the `records` parameter.  The second is to pass a single string (where the elements are separated by commas) to the `records_collapsed` parameter.  
 
-The first format is more natural for more R users.  The second format is what is expected by the REDCap API.  If a value for `records` is specified, but `records_collapsed` is missing, then `redcap_read_oneshot` automatically converts the array into the format needed by the API.
+The first format is more natural for more R users.  The second format is what is expected by the REDCap API.  If a value for `records` is specified, but `records_collapsed` is not specified, then `redcap_read_oneshot` automatically converts the array into the format needed by the API.
 
 ```{r read_row_subset, results='hold'}
 #Return only records with IDs of 1 and 3
 desired_records_v1 <- c(1, 3)
-ds_some_rows_v1 <- redcap_read_oneshot(
+ds_some_rows_v1 <- redcap_read(
    redcap_uri = uri, 
    token = token, 
    records = desired_records_v1
@@ -59,7 +59,7 @@ ds_some_rows_v1 <- redcap_read_oneshot(
 
 #Return only records with IDs of 1 and 3 (alternate way)
 desired_records_v2 <- "1, 3"
-ds_some_rows_v2 <- redcap_read_oneshot(
+ds_some_rows_v2 <- redcap_read(
    redcap_uri = uri, 
    token = token, 
    records_collapsed = desired_records_v2
@@ -74,7 +74,7 @@ If only a subset of the **fields** is desired, then two approaches exist.  The f
 ```{r read_field_subset}
 #Return only the fields recordid, name_first, and age
 desired_fields_v1 <- c("recordid", "name_first", "age")
-ds_some_fields_v1 <- redcap_read_oneshot(
+ds_some_fields_v1 <- redcap_read(
    redcap_uri = uri, 
    token = token, 
    fields = desired_fields_v1
@@ -82,13 +82,49 @@ ds_some_fields_v1 <- redcap_read_oneshot(
 
 #Return only the fields recordid, name_first, and age (alternate way)
 desired_fields_v2 <- "recordid, name_first, age"
-ds_some_fields_v2 <- redcap_read_oneshot(
+ds_some_fields_v2 <- redcap_read(
    redcap_uri = uri, 
    token = token, 
    fields_collapsed = desired_fields_v2
 )$data
 
 ds_some_fields_v2 #Inspect the returned dataset
+```
+
+
+### Read a subset of records, conditioned on the values in some variables.
+The two techniques above can be combined when your datasets are large and you don't want to pull records with certain values.  Suppose you want to select subjects from the previous dataset *if* the were born before 1960 and their weight was over 70kg.  Two calls to the server are required.  The **first call** to REDCap pulls all the records, but for only three columns: `record_id`, `dob`, and `weight`.  From this subset, identify the records that you want to pull all the data for; in this case, the desired `record_id` values are `3` & `5`.  The **second call** to REDCap pulls all the columns, but only for the identified records.
+
+```{r read_record_field_subset}
+######
+## Step 1: First call to REDCap
+desired_fields_v3 <- c("recordid", "dob", "weight")
+ds_some_fields_v3 <- redcap_read(
+   redcap_uri = uri, 
+   token = token, 
+   fields = desired_fields_v3
+)$data
+
+ds_some_fields_v3 #Examine the these three variables.
+
+######
+## Step 2: identify desired records, based on age & weight
+before_1960 <- (ds_some_fields_v3$dob <= as.Date("1960-01-01"))
+heavier_than_70_kg <- (ds_some_fields_v3$weight > 70)
+desired_records_v3 <- ds_some_fields_v3[before_1960 & heavier_than_70_kg, "record_id"]
+
+desired_records_v3 #Peek at IDs of the identified records
+
+######
+## Step 3: second call to REDCap
+#Return only records that met the age & weight criteria.
+ds_some_rows_v3 <- redcap_read(
+   redcap_uri = uri, 
+   token = token, 
+   records = desired_records_v3
+)$data
+
+ds_some_rows_v3 #Examine the results.
 ```
 
 ### Additional Returned Information
@@ -103,7 +139,7 @@ The examples above have shown only the resulting `data.frame`, by specifying `$d
 
 ```{r read_not_just_dataframe}
 #Return only the fields recordid, name_first, and age
-all_information <- redcap_read_oneshot(
+all_information <- redcap_read(
    redcap_uri = uri, 
    token = token, 
    fields = desired_fields_v1

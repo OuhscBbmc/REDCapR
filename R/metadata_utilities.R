@@ -1,6 +1,5 @@
 #' @name metadata_utilities
 #' @export
-# @export regex_named_captures checkbox_choices
 #' @aliases regex_named_captures checkbox_choices
 #' 
 #' @title Manipulate and interpret the metadata of a REDCap project.

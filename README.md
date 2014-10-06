@@ -1,3 +1,4 @@
+<!-- rmarkdown v1 -->
 [![Build Status](https://travis-ci.org/OuhscBbmc/REDCapR.svg?branch=master)](https://travis-ci.org/OuhscBbmc/REDCapR)
 [![DOI](https://zenodo.org/badge/4971/OuhscBbmc/REDCapR.png)](http://dx.doi.org/10.5281/zenodo.11796)
 
@@ -12,7 +13,7 @@ ds <- redcap_read(redcap_uri=uri, token=token)$data
 
 The `REDCapR` package includes the [Bundle of CA Root Certificates](http://curl.haxx.se/ca/cacert.pem) from the official [cURL site](http://curl.haxx.se).  Your REDCap server's identity is always verified, unless the setting is overridden (or alternative certificates can also be provided).
 
-The `redcap_read()` function also accepts values for subsetting/filtering the records and fields.  The [most recent documentation](https://github.com/OuhscBbmc/REDCapR/blob/master/DocumentationPeek.pdf) can be found in the [GitHub repository](https://github.com/OuhscBbmc/REDCapR).  A [vignette](http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/BasicREDCapROperations.html) has also been started.
+The `redcap_read()` function also accepts values for subsetting/filtering the records and fields.  The [most recent documentation](https://github.com/OuhscBbmc/REDCapR/blob/master/DocumentationPeek.pdf) can be found in the [GitHub repository](https://github.com/OuhscBbmc/REDCapR).  A [vignette](http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/BasicREDCapROperations.html) has also been started.  Here's are two examples; the first selects only a portion of the rows, while the second selects only a portion of the columns.
 ```
 #Return only records with IDs of 1 and 4
 desired_records <- c(1, 4)
@@ -30,6 +31,8 @@ ds_some_fields <- redcap_read(
    fields = desired_fields
 )$data
 ```
+
+
 In the next year, we hope to implement everything exposed by the REDCap API.  If there's a feature that would help your projects, feel free to post something here in the forums, or create an issue in REDCapR's [GitHub repository](https://github.com/OuhscBbmc/REDCapR/issues).  A [troubleshooting](http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/TroubleshootingApiCalls.html) document helps diagnose issues with the API.
 
 Our group has benefited so much from REDCap and the surrounding community, and we'd like to contribute back.  Suggestions, criticisms, and code contributions are welcome.  And if anyone is interested in trying a direction that suits them better, we'll be happy to explain the package's internals and help you fork your own version.  We have some starting material described in the [`./documentation_for_developers/`](https://github.com/OuhscBbmc/REDCapR/tree/master/documentation_for_developers) directory.  Also a few other currently-developed libraries exist for communicating with REDCap: [redcapAPI](https://github.com/nutterb/redcapAPI) written for R (which is a fork of [redcap](https://github.com/jeffreyhorner/redcap)), [RedcapAPI](https://github.com/eugyev/RedcapAPI), and [PyCap](http://sburns.org/PyCap/) written for Python.
@@ -48,7 +51,7 @@ Will Beasley, David Bard, & Thomas Wilson
 install.packages("REDCapR", repos="http://R-Forge.R-project.org")
 ``` -->
 
-The *release* version of REDCapR can be installed from [CRAN](http://cran.r-project.org/web/packages/REDCapR/).  **It was submitted 2014-09-19, and sometimes takes a few days for the binaries to be replicated on all the mirrors.**
+The *release* version of REDCapR can be installed from [CRAN](http://cran.r-project.org/web/packages/REDCapR/).
 ```
 install.packages("REDCapR")
 ```
