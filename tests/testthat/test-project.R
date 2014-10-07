@@ -9,7 +9,8 @@ test_that("Smoke Test", {
   project <- start_clean_result$redcap_project
 })
 
-test_that("Read, Insert, and Update", {  
+test_that("Read, Insert, and Update", {
+  testthat::skip_on_cran()
   start_clean_result <- REDCapR:::clean_start_simple(batch=TRUE)
   project <- start_clean_result$redcap_project
   

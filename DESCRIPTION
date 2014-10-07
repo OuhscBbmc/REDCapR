@@ -6,8 +6,8 @@ Description: Encapsulates functions to streamline calls from R to the REDCap
     University.  The Application Programming Interface (API) offers an avenue
     to access and modify data programmatically, improving the capacity for
     literate and reproducible programming.
-Version: 0.5-16
-Date: 2014-10-05
+Version: 0.5-17
+Date: 2014-10-07
 Authors@R: c(person("Will", "Beasley", role = c("aut", "cre"), email =
     "wibeasley@hotmail.com"), person("David", "Bard", role = "ctb"),
     person("Thomas", "Wilson", role = "ctb"), person(given="John J",

@@ -3,7 +3,8 @@ library(testthat)
 ###########
 context("Write Oneshot")
 ###########
-test_that("Smoke Test", {  
+test_that("Smoke Test", {
+  testthat::skip_on_cran()
   start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
   project <- start_clean_result$redcap_project
 })
