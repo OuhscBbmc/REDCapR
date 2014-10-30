@@ -235,10 +235,10 @@ token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot; #For `UnitTestPhiFree` 
 ds_all_rows_all_fields &lt;- redcap_read(redcap_uri=uri, token=token)$data
 </code></pre>
 
-<pre><code>5 records and 1 columns were read from REDCap in 0.9 seconds.  The http status code was 200.
-Starting to read 5 records  at 2014-10-05 21:36:25
+<pre><code>5 records and 1 columns were read from REDCap in 0.7 seconds.  The http status code was 200.
+Starting to read 5 records  at 2014-10-19 19:06:01
 Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
-5 records and 24 columns were read from REDCap in 0.7 seconds.  The http status code was 200.
+5 records and 24 columns were read from REDCap in 0.5 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_all_rows_all_fields #Inspect the returned dataset
@@ -251,11 +251,11 @@ Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
 4         4      Trudy       DAG          342 Elm\nDuncanville TX, 75116 (405) 321-4444 peroxide@blonde.com 1952-11-02
 5         5   John Lee    Walker      Hotel Suite\nNew Orleans LA, 70115 (405) 321-5555  left@hippocket.com 1955-04-15
   age sex demographics_complete height weight   bmi
-1  11   0                     2      7      1 204.1
-2  11   1                     2      6      1 277.8
-3  80   1                     2    180     80  24.7
-4  61   0                     2    165     54  19.8
-5  59   1                     2    193    104  27.9
+1  11   0                     2   7.00      1 204.1
+2  11   1                     2   6.00      1 277.8
+3  80   1                     2 180.00     80  24.7
+4  61   0                     2 165.00     54  19.8
+5  59   1                     2 193.04    104  27.9
                                                                                                      comments
 1                                                                     Character in a book, with some guessing
 2                                                                          A mouse character from a good book
@@ -291,10 +291,10 @@ ds_some_rows_v1 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>2 records and 1 columns were read from REDCap in 0.8 seconds.  The http status code was 200.
-Starting to read 2 records  at 2014-10-05 21:36:27
+<pre><code>2 records and 1 columns were read from REDCap in 0.5 seconds.  The http status code was 200.
+Starting to read 2 records  at 2014-10-19 19:06:03
 Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).
-2 records and 24 columns were read from REDCap in 0.5 seconds.  The http status code was 200.
+2 records and 24 columns were read from REDCap in 0.4 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">#Return only records with IDs of 1 and 3 (alternate way)
@@ -306,8 +306,8 @@ ds_some_rows_v2 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>2 records and 1 columns were read from REDCap in 0.6 seconds.  The http status code was 200.
-Starting to read 2 records  at 2014-10-05 21:36:29
+<pre><code>2 records and 1 columns were read from REDCap in 0.4 seconds.  The http status code was 200.
+Starting to read 2 records  at 2014-10-19 19:06:04
 Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).
 2 records and 24 columns were read from REDCap in 0.5 seconds.  The http status code was 200.
 </code></pre>
@@ -339,8 +339,8 @@ ds_some_fields_v1 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>5 records and 1 columns were read from REDCap in 0.6 seconds.  The http status code was 200.
-Starting to read 5 records  at 2014-10-05 21:36:31
+<pre><code>5 records and 1 columns were read from REDCap in 0.5 seconds.  The http status code was 200.
+Starting to read 5 records  at 2014-10-19 19:06:06
 Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
 5 records and 3 columns were read from REDCap in 0.6 seconds.  The http status code was 200.
 </code></pre>
@@ -355,9 +355,9 @@ ds_some_fields_v2 &lt;- redcap_read(
 </code></pre>
 
 <pre><code>5 records and 1 columns were read from REDCap in 0.5 seconds.  The http status code was 200.
-Starting to read 5 records  at 2014-10-05 21:36:32
+Starting to read 5 records  at 2014-10-19 19:06:07
 Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
-5 records and 3 columns were read from REDCap in 0.6 seconds.  The http status code was 200.
+5 records and 3 columns were read from REDCap in 0.4 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_some_fields_v2 #Inspect the returned dataset
@@ -385,10 +385,10 @@ ds_some_fields_v3 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>5 records and 1 columns were read from REDCap in 0.4 seconds.  The http status code was 200.
-Starting to read 5 records  at 2014-10-05 21:36:34
+<pre><code>5 records and 1 columns were read from REDCap in 0.8 seconds.  The http status code was 200.
+Starting to read 5 records  at 2014-10-19 19:06:09
 Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
-5 records and 3 columns were read from REDCap in 0.6 seconds.  The http status code was 200.
+5 records and 3 columns were read from REDCap in 0.4 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_some_fields_v3 #Examine the these three variables.
@@ -424,8 +424,8 @@ ds_some_rows_v3 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>2 records and 1 columns were read from REDCap in 0.6 seconds.  The http status code was 200.
-Starting to read 2 records  at 2014-10-05 21:36:35
+<pre><code>2 records and 1 columns were read from REDCap in 0.5 seconds.  The http status code was 200.
+Starting to read 2 records  at 2014-10-19 19:06:10
 Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).
 2 records and 24 columns were read from REDCap in 0.5 seconds.  The http status code was 200.
 </code></pre>
@@ -437,8 +437,8 @@ Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).
 1         3     Marcus      Wood     243 Hill St.\nGuthrie OK 73402 (405) 321-3333       mw@mwood.net 1934-04-09  80
 2         5   John Lee    Walker Hotel Suite\nNew Orleans LA, 70115 (405) 321-5555 left@hippocket.com 1955-04-15  59
   sex demographics_complete height weight  bmi
-1   1                     2    180     80 24.7
-2   1                     2    193    104 27.9
+1   1                     2 180.00     80 24.7
+2   1                     2 193.04    104 27.9
                                                                                      comments    mugshot
 1                                                                          completely made up [document]
 2 Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache [document]
@@ -470,9 +470,9 @@ all_information &lt;- redcap_read(
 </code></pre>
 
 <pre><code>5 records and 1 columns were read from REDCap in 0.5 seconds.  The http status code was 200.
-Starting to read 5 records  at 2014-10-05 21:36:37
+Starting to read 5 records  at 2014-10-19 19:06:12
 Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
-5 records and 3 columns were read from REDCap in 0.6 seconds.  The http status code was 200.
+5 records and 3 columns were read from REDCap in 0.5 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">all_information #Inspect the additional information
@@ -493,7 +493,7 @@ $status_codes
 [1] &quot;200&quot;
 
 $outcome_messages
-[1] &quot;5 records and 3 columns were read from REDCap in 0.6 seconds.  The http status code was 200.&quot;
+[1] &quot;5 records and 3 columns were read from REDCap in 0.5 seconds.  The http status code was 200.&quot;
 
 $records_collapsed
 [1] &quot;&quot;
@@ -502,14 +502,14 @@ $fields_collapsed
 [1] &quot;recordid,name_first,age&quot;
 
 $elapsed_seconds
-[1] 1.65
+[1] 1.486995
 </code></pre>
 
 <h2>Session Info</h2>
 
 <p>For the sake of documentation and reproducibility, the current vignette was build on a system using the following software.</p>
 
-<pre><code>Report created by Will at 2014-10-05, 21:36:38 -0500
+<pre><code>Report created by Will at 2014-10-19, 19:06:13 -0500
 </code></pre>
 
 <pre><code>R version 3.1.1 Patched (2014-09-27 r66695)
@@ -523,12 +523,11 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] knitr_1.6      REDCapR_0.5-16
+[1] knitr_1.7      REDCapR_0.5-17
 
 loaded via a namespace (and not attached):
- [1] codetools_0.2-9 devtools_1.6    digest_0.6.4    evaluate_0.5.5  formatR_1.0     htmltools_0.2.6 httr_0.5       
- [8] markdown_0.7.4  mime_0.2        plyr_1.8.1      Rcpp_0.11.3     RCurl_1.95-4.3  rmarkdown_0.3.3 roxygen2_4.0.2 
-[15] stringr_0.6.2   tools_3.1.1    
+[1] devtools_1.6.1 evaluate_0.5.5 formatR_1.0    httr_0.5       plyr_1.8.1     Rcpp_0.11.3    RCurl_1.95-4.3
+[8] stringr_0.6.2  tools_3.1.1   
 </code></pre>
 
 </body>

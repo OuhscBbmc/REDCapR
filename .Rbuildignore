@@ -2,7 +2,8 @@
 ^\.Rproj\.user$
 ^\.gitignore$
 ^\.travis.yml$
-^ShortcutLucky1304.lnk$
+^cran-comments\.md$
+^ShortcutLucky1304\.lnk$
 
 DocumentationPeek.pdf
 documentation_for_developers/
