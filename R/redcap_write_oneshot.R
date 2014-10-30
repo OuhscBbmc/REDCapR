@@ -11,6 +11,7 @@
 #' @param token The user-specific string that serves as the password for a project.  Required.
 #' @param verbose A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param cert_location  If present, this string should point to the location of the cert files required for SSL verification.  If the value is missing or NULL, the server's identity will be verified using a recent CA bundle from the \href{http://curl.haxx.se}{cURL website}.  See the details below. Optional.
+#' @param sslversion The SSL version for curl. The default is 3. Set to NULL if your server has disabled SSL v3.
 #' 
 #' @return Currently, a list is returned with the following elements,
 #' \enumerate{

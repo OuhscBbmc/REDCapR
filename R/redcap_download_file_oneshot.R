@@ -18,6 +18,7 @@
 #' @param event The name of the event where the file is saved in REDCap. Optional
 #' @param verbose A boolean value indicating if \code{message}s should be printed to the R console during the operation.  Optional.
 #' @param cert_location  If present, this string should point to the location of the cert files required for SSL verification.  If the value is missing or NULL, the server's identity will be verified using a recent CA bundle from the \href{http://curl.haxx.se}{cURL website}.  See the details below. Optional.
+#' @param sslversion The SSL version for curl. The default is 3. Set to NULL if your server has disabled SSL v3.
 #' 
 #' @return Currently, a list is returned with the following elements,
 #' \enumerate{
