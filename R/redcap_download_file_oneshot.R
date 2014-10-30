@@ -64,7 +64,7 @@
 #' base::unlink(relative_name)
 #' }
 
-redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwrite=FALSE, redcap_uri, token, record, field, event="", verbose=TRUE, cert_location=NULL ) {
+redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwrite=FALSE, redcap_uri, token, record, field, event="", verbose=TRUE, cert_location=NULL, sslversion=3 ) {
 	start_time <- Sys.time()
 	
 	if( missing(redcap_uri) )
@@ -79,7 +79,7 @@ redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwr
 	if( !base::file.exists(cert_location) )
 		stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
 	
-	config_options <- list(cainfo=cert_location, sslversion=3)
+	config_options <- list(cainfo=cert_location, sslversion=sslversion)
 		
 	post_body <- list(
 		token = token,

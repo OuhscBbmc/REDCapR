@@ -62,7 +62,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
                          fields=NULL, fields_collapsed="", 
                          export_data_access_groups = FALSE,
                          raw_or_label = 'raw',
-                         verbose=TRUE, cert_location=NULL, id_position=1L ) {  
+                         verbose=TRUE, cert_location=NULL, sslversion=3, id_position=1L) {  
   if( missing(redcap_uri) )
     stop("The required parameter `redcap_uri` was missing from the call to `redcap_read()`.")
   
@@ -83,7 +83,8 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
     records_collapsed = records_collapsed,
     fields_collapsed = "nonexistant_field_name", 
     verbose = verbose, 
-    cert_location = cert_location
+    cert_location = cert_location,
+    sslversion = sslversion
   )
   
   ###
@@ -132,7 +133,8 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
                                         export_data_access_groups = export_data_access_groups, 
                                         raw_or_label = raw_or_label,
                                         verbose = verbose, 
-                                        cert_location = cert_location)
+                                        cert_location = cert_location,
+                                        sslversion = sslversion)
     
     lst_status_code[[i]] <- read_result$status_code
     # lst_status_message[[i]] <- read_result$status_message

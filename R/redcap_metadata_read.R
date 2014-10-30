@@ -47,7 +47,7 @@
 redcap_metadata_read <- function( 
                          redcap_uri, token, forms=NULL, forms_collapsed="", 
                          fields=NULL, fields_collapsed="", 
-                         verbose=TRUE, cert_location=NULL ) {  
+                         verbose=TRUE, cert_location=NULL, sslversion=3 ) {  
   #TODO: NULL verbose parameter pulls from getOption("verbose")
   #TODO: warns if any requested fields aren't entirely lowercase.
   
@@ -72,7 +72,7 @@ redcap_metadata_read <- function(
   if( !base::file.exists(cert_location) )
       stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
   
-  config_options <- list(cainfo=cert_location, sslversion=3)
+  config_options <- list(cainfo=cert_location, sslversion=sslversion)
   
   post_body <- list(
     token = token,
