@@ -70,7 +70,7 @@
 redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collapsed="", 
                          fields=NULL, fields_collapsed="", 
                          export_data_access_groups=FALSE,
-                         raw_or_label='raw', verbose=TRUE, cert_location=NULL ) {
+                         raw_or_label='raw', verbose=TRUE, cert_location=NULL, sslversion=3 ) {
   #TODO: NULL verbose parameter pulls from getOption("verbose")
   #TODO: warns if any requested fields aren't entirely lowercase.
   #TODO: validate export_data_access_groups
@@ -106,7 +106,7 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
       stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
   
   #curl_options <- RCurl::curlOptions(cainfo=cert_location, sslversion=3)
-  config_options <- list(cainfo=cert_location, sslversion=3)
+  config_options <- list(cainfo=cert_location, sslversion=sslversion)
   
   # raw_text <- RCurl::postForm(
   #   uri = redcap_uri

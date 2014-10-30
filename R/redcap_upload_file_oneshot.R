@@ -64,7 +64,7 @@
 #' } 
 #' }
 
-redcap_upload_file_oneshot <- function( file_name, record, redcap_uri, token, field, event="", verbose=TRUE, cert_location=NULL ) {
+redcap_upload_file_oneshot <- function( file_name, record, redcap_uri, token, field, event="", verbose=TRUE, cert_location=NULL, sslversion=3 ) {
 	start_time <- Sys.time()
 	
 	if( missing(file_name) | is.null(file_name) )
@@ -85,7 +85,7 @@ redcap_upload_file_oneshot <- function( file_name, record, redcap_uri, token, fi
 	if( !base::file.exists(cert_location) )
 		stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
 	
-	config_options <- list(cainfo=cert_location, sslversion=3)
+	config_options <- list(cainfo=cert_location, sslversion=sslversion)
   
 	if( verbose )
 	  message("Preparing to upload the file `", file_name, "`.")

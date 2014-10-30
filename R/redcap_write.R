@@ -74,7 +74,8 @@ redcap_write <- function( ds_to_write,
                           continue_on_error = FALSE,
                           redcap_uri,
                           token,
-                          verbose = TRUE, cert_location=NULL ) {  
+                          verbose = TRUE, cert_location=NULL, 
+                          sslversion = 3) {  
   
   if( base::missing(redcap_uri) )
     base::stop("The required parameter `redcap_uri` was missing from the call to `redcap_write()`.")
@@ -103,7 +104,8 @@ redcap_write <- function( ds_to_write,
                                                   redcap_uri = redcap_uri,
                                                   token = token,
                                                   verbose = verbose, 
-                                                  cert_location=cert_location)
+                                                  cert_location=cert_location,
+                                                  sslversion=sslversion)
     
     lst_status_code[[i]] <- write_result$status_code
     # lst_status_message[[i]] <- write_result$status_message
