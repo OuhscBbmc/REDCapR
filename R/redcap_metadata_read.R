@@ -14,6 +14,7 @@
 #' @param fields_collapsed A single string, where the desired field names are separated by commas.  Optional.
 #' @param verbose A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param cert_location  If present, this string should point to the location of the cert files required for SSL verification.  If the value is missing or NULL, the server's identity will be verified using a recent CA bundle from the \href{http://curl.haxx.se}{cURL website}.  See the details below. Optional.
+#' @param sslversion The SSL version for curl. The default is 3. Set to NULL if your server has disabled SSL v3.
 #' 
 #' @return Currently, a list is returned with the following elements,
 #' \enumerate{
@@ -47,7 +48,7 @@
 redcap_metadata_read <- function( 
                          redcap_uri, token, forms=NULL, forms_collapsed="", 
                          fields=NULL, fields_collapsed="", 
-                         verbose=TRUE, cert_location=NULL ) {  
+                         verbose=TRUE, cert_location=NULL, sslversion=3 ) {  
   #TODO: NULL verbose parameter pulls from getOption("verbose")
   #TODO: warns if any requested fields aren't entirely lowercase.
   
@@ -72,7 +73,7 @@ redcap_metadata_read <- function(
   if( !base::file.exists(cert_location) )
       stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
   
-  config_options <- list(cainfo=cert_location, sslversion=3)
+  config_options <- list(cainfo=cert_location, sslversion=sslversion)
   
   post_body <- list(
     token = token,

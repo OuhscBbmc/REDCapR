@@ -18,6 +18,7 @@
 #' @param event The name of the event where the file is saved in REDCap. Optional
 #' @param verbose A boolean value indicating if \code{message}s should be printed to the R console during the operation.  Optional.
 #' @param cert_location  If present, this string should point to the location of the cert files required for SSL verification.  If the value is missing or NULL, the server's identity will be verified using a recent CA bundle from the \href{http://curl.haxx.se}{cURL website}.  See the details below. Optional.
+#' @param sslversion The SSL version for curl. The default is 3. Set to NULL if your server has disabled SSL v3.
 #' 
 #' @return Currently, a list is returned with the following elements,
 #' \enumerate{
@@ -64,7 +65,7 @@
 #' base::unlink(relative_name)
 #' }
 
-redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwrite=FALSE, redcap_uri, token, record, field, event="", verbose=TRUE, cert_location=NULL ) {
+redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwrite=FALSE, redcap_uri, token, record, field, event="", verbose=TRUE, cert_location=NULL, sslversion=3 ) {
 	start_time <- Sys.time()
 	
 	if( missing(redcap_uri) )
@@ -79,7 +80,7 @@ redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwr
 	if( !base::file.exists(cert_location) )
 		stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
 	
-	config_options <- list(cainfo=cert_location, sslversion=3)
+	config_options <- list(cainfo=cert_location, sslversion=sslversion)
 		
 	post_body <- list(
 		token = token,
