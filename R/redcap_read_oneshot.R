@@ -58,17 +58,17 @@
 #' #Return only records with IDs of 1 and 3
 #' desired_records_v1 <- c(1, 3)
 #' ds_some_rows_v1 <- redcap_read_oneshot(
-#'    redcap_uri=uri, 
-#'    token=token, 
-#'    records=desired_records_v1
+#'    redcap_uri = uri, 
+#'    token = token, 
+#'    records = desired_records_v1
 #' )$data
 #' 
 #' #Return only the fields recordid, name_first, and age
 #' desired_fields_v1 <- c("recordid", "name_first", "age")
 #' ds_some_fields_v1 <- redcap_read_oneshot(
-#'    redcap_uri=uri, 
-#'    token=token, 
-#'    fields=desired_fields_v1
+#'    redcap_uri = uri, 
+#'    token = token, 
+#'    fields = desired_fields_v1
 #' )$data
 #' 
 #' 
@@ -76,16 +76,24 @@
 #' cert_location <- system.file("cacert.pem", package="httr")
 #' config_options <- list(cainfo=cert_location)
 #' ds_different_cert_file <- redcap_read_oneshot(
-#'    redcap_uri=uri,
-#'    token=token, 
-#'    config_options=config_options
+#'    redcap_uri = uri,
+#'    token = token, 
+#'    config_options = config_options
+#' )$data
+#' 
+#' #Force the connection to use SSL=3 (which is not preferred, and possibly insecure).
+#' config_options <- list(sslversion=3)
+#' ds_ssl_3 <- redcap_read_oneshot(
+#'   redcap_uri = uri,
+#'   token = token, 
+#'   config_options = config_options
 #' )$data
 #' 
 #' config_options <- list(ssl.verifypeer=FALSE)
 #' ds_no_ssl <- redcap_read_oneshot(
-#'    redcap_uri=uri,
-#'    token=token, 
-#'    config_options=config_options
+#'    redcap_uri = uri,
+#'    token = token, 
+#'    config_options = config_options
 #' )$data
 #' }
 
