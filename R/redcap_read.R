@@ -20,8 +20,7 @@
 #' @param export_data_access_groups A boolean value that specifies whether or not to export the ``redcap_data_access_group'' field when data access groups are utilized in the project. Default is \code{FALSE}. See the details below.
 #' @param raw_or_label A string (either \code{'raw'} or \code{'label'} that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is \code{'raw'}.
 #' @param verbose A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.
-#' @param cert_location  If present, this string should point to the location of the cert files required for SSL verification.  If the value is missing or NULL, the server's identity will be verified using a recent CA bundle from the \href{http://curl.haxx.se}{cURL website}.  See the details below. Optional.
-#' @param sslversion The SSL version for curl. The default is 3. Set to NULL if your server has disabled SSL v3.
+#' @param config_options  A list of options to pass to \code{POST} method in the \code{httr} package.  See the details below. Optional.
 #' @param id_position  The column position of the variable that unique identifies the subject.  This defaults to the first variable in the dataset.
 #' 
 #' @return Currently, a list is returned with the following elements,
@@ -63,7 +62,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
                          fields=NULL, fields_collapsed="", 
                          export_data_access_groups = FALSE,
                          raw_or_label = 'raw',
-                         verbose=TRUE, cert_location=NULL, sslversion=3, id_position=1L) {  
+                         verbose=TRUE, config_options=NULL, id_position=1L) {  
   if( missing(redcap_uri) )
     stop("The required parameter `redcap_uri` was missing from the call to `redcap_read()`.")
   
@@ -84,8 +83,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
     records_collapsed = records_collapsed,
     fields_collapsed = "nonexistant_field_name", 
     verbose = verbose, 
-    cert_location = cert_location,
-    sslversion = sslversion
+    config_options = config_options
   )
   
   ###
@@ -134,8 +132,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
                                         export_data_access_groups = export_data_access_groups, 
                                         raw_or_label = raw_or_label,
                                         verbose = verbose, 
-                                        cert_location = cert_location,
-                                        sslversion = sslversion)
+                                        config_options = config_options)
     
     lst_status_code[[i]] <- read_result$status_code
     # lst_status_message[[i]] <- read_result$status_message

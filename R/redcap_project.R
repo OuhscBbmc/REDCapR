@@ -57,7 +57,7 @@ redcap_project <- setRefClass(
       fields = NULL, fields_collapsed = "", 
       export_data_access_groups = FALSE,
       raw_or_label = 'raw',
-      verbose = TRUE, cert_location = NULL) {
+      verbose = TRUE, config_options = NULL) {
       
       "Exports records from a REDCap project."
 
@@ -79,7 +79,7 @@ redcap_project <- setRefClass(
       fields = fields, fields_collapsed = fields_collapsed, 
       export_data_access_groups = export_data_access_groups,
       raw_or_label = raw_or_label,
-      verbose = verbose, cert_location=cert_location 
+      verbose = verbose, config_options=config_options 
     ) )
     },
     

@@ -23,7 +23,7 @@ functionality
 \item{\code{read(batch_size = 100L, interbatch_delay = 0, records = NULL,
   records_collapsed = "", fields = NULL, fields_collapsed = "",
   export_data_access_groups = FALSE, raw_or_label = "raw", verbose = TRUE,
-  cert_location = NULL)}}{Exports records from a REDCap project.}
+  config_options = NULL)}}{Exports records from a REDCap project.}
 
 \item{\code{write(ds_to_write, batch_size = 100L, interbatch_delay = 0,
   verbose = TRUE, cert_location = NULL)}}{Imports records to a REDCap project.}

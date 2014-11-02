@@ -15,8 +15,7 @@
 #' @param export_data_access_groups A boolean value that specifies whether or not to export the ``redcap_data_access_group'' field when data access groups are utilized in the project. Default is \code{FALSE}. See the details below.
 #' @param raw_or_label A string (either \code{'raw'} or \code{'label'} that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is \code{'raw'}.
 #' @param verbose A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.
-#' @param cert_location  If present, this string should point to the location of the cert files required for SSL verification.  If the value is missing or NULL, the server's identity will be verified using a recent CA bundle from the \href{http://curl.haxx.se}{cURL website}.  See the details below. Optional.
-#' @param sslversion The SSL version for curl. The default is 3. Set to NULL if your server has disabled SSL v3.
+#' @param config_options  A list of options to pass to \code{POST} method in the \code{httr} package.  See the details below. Optional.
 #' @return Currently, a list is returned with the following elements,
 #' \enumerate{
 #'  \item \code{data}: An R \code{data.frame} of the desired records and columns.
@@ -33,9 +32,15 @@
 #' I like the logic that it's associated with a particular REDCap project that shouldn't change between calls.
 #' As a compromise, I think I'll wrap the uri, token, and cert location into a single \code{S4} object that's passed to these methods.  It will make these calls take less space.  
 #' 
-#' The `REDCapR' package includes a recent version of the \href{http://curl.haxx.se/ca/cacert.pem}{Bundle of CA Root Certificates} 
-#' from the official \href{http://curl.haxx.se}{cURL site}.  This version is used by default, unless the `cert_location` parameter is given another location.
+#' The full list of configuration options accepted by the \code{httr} package is viewable by executing \code{httr::httr_options()}.  The \code{httr}
+#' package and documentation is available at \url{http://cran.r-project.org/package=httr}.
 #' 
+#' The `REDCapR' package includes a recent version of the \href{http://curl.haxx.se/ca/cacert.pem}{Bundle of CA Root Certificates} 
+#' from the official \href{http://curl.haxx.se}{cURL site}.  This version is used by default, unless the `config_options` argument is
+#' given a value; in this case, the user is responsible for passing the location of the cert file if SSL verification is desired.
+#' See the examples below for one example of using a different SSL cert, and one example of avoiding SSL entirely.  Avoiding SSL
+#' is suggested only for debugging purposes, and not for production code.
+#'  
 #' If you do not pass in this export_data_access_groups value, it will default to \code{FALSE}. The following is from the API help page for version 5.2.3: This flag is only viable if the user whose token is being used to make the API request is *not* in a data access group. If the user is in a group, then this flag will revert to its default value.
 #' @author Will Beasley
 #' @references The official documentation can be found on the `API Examples' page on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}). A user account is required.
@@ -65,13 +70,29 @@
 #'    token=token, 
 #'    fields=desired_fields_v1
 #' )$data
-#' }
 #' 
+#' 
+#' #Use the SSL cert file that come with the httr package.
+#' cert_location <- system.file("cacert.pem", package="httr")
+#' config_options <- list(cainfo=cert_location)
+#' ds_different_cert_file <- redcap_read_oneshot(
+#'    redcap_uri=uri,
+#'    token=token, 
+#'    config_options=config_options
+#' )$data
+#' 
+#' config_options <- list(ssl.verifypeer=FALSE)
+#' ds_no_ssl <- redcap_read_oneshot(
+#'    redcap_uri=uri,
+#'    token=token, 
+#'    config_options=config_options
+#' )$data
+#' }
 
 redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collapsed="", 
                          fields=NULL, fields_collapsed="", 
                          export_data_access_groups=FALSE,
-                         raw_or_label='raw', verbose=TRUE, cert_location=NULL, sslversion=3 ) {
+                         raw_or_label='raw', verbose=TRUE, config_options=NULL ) {
   #TODO: NULL verbose parameter pulls from getOption("verbose")
   #TODO: warns if any requested fields aren't entirely lowercase.
   #TODO: validate export_data_access_groups
@@ -98,16 +119,19 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
   
   export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
   
-  if( missing( cert_location ) | is.null(cert_location) | (length(cert_location)==0)) 
-    #cert_location <- system.file("cacert.pem", package="httr")
+  if( missing( config_options ) | is.null(config_options) ) {
     cert_location <- system.file("ssl_certs/mozilla_ca_root.crt", package="REDCapR")
-    # curl_options <- RCurl::curlOptions(ssl.verifypeer=FALSE)
+    config_options <- list(cainfo=cert_location)
+  }
+  #     #cert_location <- system.file("cacert.pem", package="httr")
+  #     cert_location <- system.file("ssl_certs/mozilla_ca_root.crt", package="REDCapR")
+  #     # curl_options <- RCurl::curlOptions(ssl.verifypeer=FALSE)
 
   if( !base::file.exists(cert_location) )
       stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
   
   #curl_options <- RCurl::curlOptions(cainfo=cert_location, sslversion=3)
-  config_options <- list(cainfo=cert_location, sslversion=sslversion)
+  # config_options <- list(cainfo=cert_location, sslversion=sslversion)
   
   # raw_text <- RCurl::postForm(
   #   uri = redcap_uri

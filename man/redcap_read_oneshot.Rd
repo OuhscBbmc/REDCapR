@@ -6,7 +6,7 @@
 redcap_read_oneshot(redcap_uri, token, records = NULL,
   records_collapsed = "", fields = NULL, fields_collapsed = "",
   export_data_access_groups = FALSE, raw_or_label = "raw", verbose = TRUE,
-  cert_location = NULL, sslversion = 3)
+  config_options = NULL)
 }
 \arguments{
   \item{redcap_uri}{The URI (uniform resource identifier)
@@ -45,15 +45,9 @@ redcap_read_oneshot(redcap_uri, token, records = NULL,
   if the output might be visible somewhere public.
   Optional.}
 
-  \item{cert_location}{If present, this string should point
-  to the location of the cert files required for SSL
-  verification.  If the value is missing or NULL, the
-  server's identity will be verified using a recent CA
-  bundle from the \href{http://curl.haxx.se}{cURL website}.
-  See the details below. Optional.}
-
-  \item{sslversion}{The SSL version for curl. The default
-  is 3. Set to NULL if your server has disabled SSL v3.}
+  \item{config_options}{A list of options to pass to
+  \code{POST} method in the \code{httr} package.  See the
+  details below. Optional.}
 }
 \value{
 Currently, a list is returned with the following elements,
@@ -90,12 +84,23 @@ and cert location into a single \code{S4} object that's
 passed to these methods.  It will make these calls take
 less space.
 
+The full list of configuration options accepted by the
+\code{httr} package is viewable by executing
+\code{httr::httr_options()}.  The \code{httr} package and
+documentation is available at
+\url{http://cran.r-project.org/package=httr}.
+
 The `REDCapR' package includes a recent version of the
 \href{http://curl.haxx.se/ca/cacert.pem}{Bundle of CA Root
 Certificates} from the official
 \href{http://curl.haxx.se}{cURL site}.  This version is
-used by default, unless the `cert_location` parameter is
-given another location.
+used by default, unless the `config_options` argument is
+given a value; in this case, the user is responsible for
+passing the location of the cert file if SSL verification
+is desired. See the examples below for one example of using
+a different SSL cert, and one example of avoiding SSL
+entirely.  Avoiding SSL is suggested only for debugging
+purposes, and not for production code.
 
 If you do not pass in this export_data_access_groups value,
 it will default to \code{FALSE}. The following is from the
@@ -126,6 +131,23 @@ ds_some_fields_v1 <- redcap_read_oneshot(
    redcap_uri=uri,
    token=token,
    fields=desired_fields_v1
+)$data
+
+
+#Use the SSL cert file that come with the httr package.
+cert_location <- system.file("cacert.pem", package="httr")
+config_options <- list(cainfo=cert_location)
+ds_different_cert_file <- redcap_read_oneshot(
+   redcap_uri=uri,
+   token=token,
+   config_options=config_options
+)$data
+
+config_options <- list(ssl.verifypeer=FALSE)
+ds_no_ssl <- redcap_read_oneshot(
+   redcap_uri=uri,
+   token=token,
+   config_options=config_options
 )$data
 }
 }
