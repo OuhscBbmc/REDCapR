@@ -4,7 +4,7 @@
 \title{Write/Import records to a REDCap project.}
 \usage{
 redcap_write_oneshot(ds, redcap_uri, token, verbose = TRUE,
-  cert_location = NULL)
+  cert_location = NULL, sslversion = 3)
 }
 \arguments{
   \item{ds}{The \code{data.frame} to be imported into the
@@ -29,6 +29,9 @@ redcap_write_oneshot(ds, redcap_uri, token, verbose = TRUE,
   server's identity will be verified using a recent CA
   bundle from the \href{http://curl.haxx.se}{cURL website}.
   See the details below. Optional.}
+
+  \item{sslversion}{The SSL version for curl. The default
+  is 3. Set to NULL if your server has disabled SSL v3.}
 }
 \value{
 Currently, a list is returned with the following elements,

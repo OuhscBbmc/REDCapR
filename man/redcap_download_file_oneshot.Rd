@@ -5,7 +5,7 @@
 \usage{
 redcap_download_file_oneshot(file_name = NULL, directory = NULL,
   overwrite = FALSE, redcap_uri, token, record, field, event = "",
-  verbose = TRUE, cert_location = NULL)
+  verbose = TRUE, cert_location = NULL, sslversion = 3)
 }
 \arguments{
   \item{file_name}{The name of the file where the
@@ -44,6 +44,9 @@ redcap_download_file_oneshot(file_name = NULL, directory = NULL,
   server's identity will be verified using a recent CA
   bundle from the \href{http://curl.haxx.se}{cURL website}.
   See the details below. Optional.}
+
+  \item{sslversion}{The SSL version for curl. The default
+  is 3. Set to NULL if your server has disabled SSL v3.}
 }
 \value{
 Currently, a list is returned with the following elements,

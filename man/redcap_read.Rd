@@ -7,7 +7,7 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
   continue_on_error = FALSE, redcap_uri, token, records = NULL,
   records_collapsed = "", fields = NULL, fields_collapsed = "",
   export_data_access_groups = FALSE, raw_or_label = "raw", verbose = TRUE,
-  cert_location = NULL, id_position = 1L)
+  cert_location = NULL, sslversion = 3, id_position = 1L)
 }
 \arguments{
   \item{batch_size}{The maximum number of subject records a
@@ -64,6 +64,9 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
   server's identity will be verified using a recent CA
   bundle from the \href{http://curl.haxx.se}{cURL website}.
   See the details below. Optional.}
+
+  \item{sslversion}{The SSL version for curl. The default
+  is 3. Set to NULL if your server has disabled SSL v3.}
 
   \item{id_position}{The column position of the variable
   that unique identifies the subject.  This defaults to the

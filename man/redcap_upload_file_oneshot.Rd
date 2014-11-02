@@ -4,7 +4,7 @@
 \title{Upload a file into to a REDCap project record.}
 \usage{
 redcap_upload_file_oneshot(file_name, record, redcap_uri, token, field,
-  event = "", verbose = TRUE, cert_location = NULL)
+  event = "", verbose = TRUE, cert_location = NULL, sslversion = 3)
 }
 \arguments{
   \item{file_name}{The name of the relative or full file to
@@ -35,6 +35,9 @@ redcap_upload_file_oneshot(file_name, record, redcap_uri, token, field,
   server's identity will be verified using a recent CA
   bundle from the \href{http://curl.haxx.se}{cURL website}.
   See the details below. Optional.}
+
+  \item{sslversion}{The SSL version for curl. The default
+  is 3. Set to NULL if your server has disabled SSL v3.}
 }
 \value{
 Currently, a list is returned with the following elements,

@@ -6,7 +6,7 @@
 redcap_read_oneshot(redcap_uri, token, records = NULL,
   records_collapsed = "", fields = NULL, fields_collapsed = "",
   export_data_access_groups = FALSE, raw_or_label = "raw", verbose = TRUE,
-  cert_location = NULL)
+  cert_location = NULL, sslversion = 3)
 }
 \arguments{
   \item{redcap_uri}{The URI (uniform resource identifier)
@@ -51,6 +51,9 @@ redcap_read_oneshot(redcap_uri, token, records = NULL,
   server's identity will be verified using a recent CA
   bundle from the \href{http://curl.haxx.se}{cURL website}.
   See the details below. Optional.}
+
+  \item{sslversion}{The SSL version for curl. The default
+  is 3. Set to NULL if your server has disabled SSL v3.}
 }
 \value{
 Currently, a list is returned with the following elements,
