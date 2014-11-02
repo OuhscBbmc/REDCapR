@@ -121,18 +121,14 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
   
   if( missing( config_options ) | is.null(config_options) ) {
     cert_location <- system.file("ssl_certs/mozilla_ca_root.crt", package="REDCapR")
+    
+    if( !base::file.exists(cert_location) )
+      stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
+    
     config_options <- list(cainfo=cert_location)
   }
-  #     #cert_location <- system.file("cacert.pem", package="httr")
-  #     cert_location <- system.file("ssl_certs/mozilla_ca_root.crt", package="REDCapR")
-  #     # curl_options <- RCurl::curlOptions(ssl.verifypeer=FALSE)
-
-  if( !base::file.exists(cert_location) )
-      stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
-  
+      
   #curl_options <- RCurl::curlOptions(cainfo=cert_location, sslversion=3)
-  # config_options <- list(cainfo=cert_location, sslversion=sslversion)
-  
   # raw_text <- RCurl::postForm(
   #   uri = redcap_uri
   #   , token = token

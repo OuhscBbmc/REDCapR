@@ -60,7 +60,7 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
 
   \item{config_options}{A list of options to pass to
   \code{POST} method in the \code{httr} package.  See the
-  details below. Optional.}
+  details in \code{redcap_read_oneshot()} Optional.}
 
   \item{id_position}{The column position of the variable
   that unique identifies the subject.  This defaults to the

@@ -86,7 +86,7 @@ redcap_project <- setRefClass(
     write = function( 
       ds_to_write,
       batch_size = 100L, interbatch_delay = 0,
-      verbose = TRUE, cert_location = NULL) {
+      verbose = TRUE, config_options = NULL) {
       
       "Imports records to a REDCap project."
       
@@ -94,7 +94,7 @@ redcap_project <- setRefClass(
         ds_to_write = ds_to_write,
         batch_size = batch_size, interbatch_delay = interbatch_delay,
         redcap_uri = redcap_uri, token = token, 
-        verbose = verbose, cert_location=cert_location 
+        config_options = config_options 
       ))      
     }
     
