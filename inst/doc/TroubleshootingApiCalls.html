@@ -210,7 +210,7 @@ hr {
 
 <h1>Troubleshooting REDCap API Calls</h1>
 
-<p>There are many links in the pipeline between your institution&#39;s <a href="http://www.project-redcap.org/">REDCap</a> server and the API user.  When the end result is unsuccesful, this document should help narrow the location of the possible problem.  The first two sections will be relevant to almost any language interacting with the API.  The remaining sections are possibly relevant only to your language (eg, Python, R, SAS, bash), or your software library (<a href="https://github.com/jeffreyhorner/redcap">redcap</a> and <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> in R and <a href="http://pycap.readthedocs.org/en/latest/">PyCap</a> in Python).</p>
+<p>There are many links in the pipeline between your institution&#39;s <a href="http://www.project-redcap.org/">REDCap</a> server and the API user.  When the end result is unsuccesful, this document should help narrow the location of the possible problem.  The first two sections will be relevant to almost any language interacting with the API.  The remaining sections are possibly relevant only to your language (eg, Python, R, SAS, bash), or your software library (<a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> in R and <a href="http://pycap.readthedocs.org/en/latest/">PyCap</a> in Python).</p>
 
 <h2>Server Configuration and Authorization</h2>
 
@@ -274,7 +274,7 @@ The values they enter should be exactly the same as those entered in the previou
 
 <h2>Exporting from REDCap to R</h2>
 
-<p>There are several ways to call REDCap&#39;s API from <a href="http://cran.r-project.org/">R</a>.  The packages <a href="https://github.com/jeffreyhorner/redcap">redcap</a> and <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> both rely on the <a href="http://cran.r-project.org/web/packages/RCurl">RCurl</a> package.</p>
+<p>There are several ways to call REDCap&#39;s API from <a href="http://cran.r-project.org/">R</a>.  The packages <a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> both rely on the <a href="http://cran.r-project.org/web/packages/httr/index.html">httr</a> package, which calls the <a href="http://cran.r-project.org/web/packages/RCurl">RCurl</a> package.</p>
 
 <ol>
 <li><p><strong>Is RCurl installed on the user&#39;s local machine?</strong>
@@ -287,7 +287,7 @@ If so, running <code>library(RCurl)</code> should produce the following output i
 <li><p><strong>Does the user have the most recent version of RCurl?</strong><br/>
 There are several ways to do this, but the easiest is probably to run <code>update.packages(ask=FALSE, repos=&quot;http://cran.rstudio.com&quot;)</code>.  The optional argument <code>ask</code> prevents the user from needing to respond &#39;Y&#39; to each outdated package.</p></li>
 <li><p><strong>Can the user query a <em>test</em> project using RCurl?</strong>
-Both the <a href="https://github.com/jeffreyhorner/redcap">redcap</a> and <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> packages employ something similar to the following function in <a href="http://cran.r-project.org/web/packages/RCurl">RCurl</a>.  If you&#39;re curious, here is the relevant source code for <a href="https://github.com/jeffreyhorner/redcap/blob/master/R/exportRecords.R">redcap</a> and <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap_read_oneshot.R">REDCapR</a>.</p>
+Both the <a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> packages employ something similar to the following function in <a href="http://cran.r-project.org/web/packages/RCurl">RCurl</a>.  If you&#39;re curious, here is the relevant source code for <a href="https://github.com/nutterb/redcapAPI/blob/master/R/exportRecords.R">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap_read_oneshot.R">REDCapR</a>.</p>
 
 <p>If this check fails, consider attempting again with the uri and token used above in the Postman example.</p>
 

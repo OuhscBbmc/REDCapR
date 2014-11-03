@@ -6,7 +6,7 @@
 <!-- rmarkdown v1 -->
 
 # Troubleshooting REDCap API Calls
-There are many links in the pipeline between your institution's [REDCap](http://www.project-redcap.org/) server and the API user.  When the end result is unsuccesful, this document should help narrow the location of the possible problem.  The first two sections will be relevant to almost any language interacting with the API.  The remaining sections are possibly relevant only to your language (eg, Python, R, SAS, bash), or your software library ([redcap](https://github.com/jeffreyhorner/redcap) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) in R and [PyCap](http://pycap.readthedocs.org/en/latest/) in Python).
+There are many links in the pipeline between your institution's [REDCap](http://www.project-redcap.org/) server and the API user.  When the end result is unsuccesful, this document should help narrow the location of the possible problem.  The first two sections will be relevant to almost any language interacting with the API.  The remaining sections are possibly relevant only to your language (eg, Python, R, SAS, bash), or your software library ([redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) in R and [PyCap](http://pycap.readthedocs.org/en/latest/) in Python).
 
 ## Server Configuration and Authorization
 This first group of checks primarily focuses on the server and the logins accounts.  Unlike later sections, REDCap administrator privileges are necessary for most of these checks.
@@ -72,7 +72,7 @@ This section group examines potential problems that occur after it leaves a work
  The values they enter should be exactly the same as those entered in the previous step.  A failure here (assuming the previous step was successful) suggests a network or firewall issue.  If the server is behind your institution's firewall, verify the user is connecting successfully through the VPN.
 
 ## Exporting from REDCap to R
-There are several ways to call REDCap's API from [R](http://cran.r-project.org/).  The packages [redcap](https://github.com/jeffreyhorner/redcap) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) both rely on the [RCurl](http://cran.r-project.org/web/packages/RCurl) package.
+There are several ways to call REDCap's API from [R](http://cran.r-project.org/).  The packages [redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) both rely on the [httr](http://cran.r-project.org/web/packages/httr/index.html) package, which calls the [RCurl](http://cran.r-project.org/web/packages/RCurl) package.
  
  1. **Is RCurl installed on the user's local machine?**
  If so, running `library(RCurl)` should produce the following output if you're starting with a fresh session of R:
@@ -87,7 +87,7 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
  There are several ways to do this, but the easiest is probably to run `update.packages(ask=FALSE, repos="http://cran.rstudio.com")`.  The optional argument `ask` prevents the user from needing to respond 'Y' to each outdated package.
  
  1. **Can the user query a *test* project using RCurl?**
- Both the [redcap](https://github.com/jeffreyhorner/redcap) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) packages employ something similar to the following function in [RCurl](http://cran.r-project.org/web/packages/RCurl).  If you're curious, here is the relevant source code for [redcap](https://github.com/jeffreyhorner/redcap/blob/master/R/exportRecords.R) and [REDCapR](https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap_read_oneshot.R).
+ Both the [redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) packages employ something similar to the following function in [RCurl](http://cran.r-project.org/web/packages/RCurl).  If you're curious, here is the relevant source code for [redcapAPI](https://github.com/nutterb/redcapAPI/blob/master/R/exportRecords.R) and [REDCapR](https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap_read_oneshot.R).
 
  If this check fails, consider attempting again with the uri and token used above in the Postman example.
 
