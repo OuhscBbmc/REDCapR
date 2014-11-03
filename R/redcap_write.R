@@ -13,8 +13,7 @@
 #' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
 #' @param token The user-specific string that serves as the password for a project.  Required.
 #' @param verbose A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.
-#' @param cert_location  If present, this string should point to the location of the cert files required for SSL verification.  If the value is missing or NULL, the server's identity will be verified using a recent CA bundle from the \href{http://curl.haxx.se}{cURL website}.  See the details below. Optional.
-#' @param sslversion The SSL version for curl. The default is 3. Set to NULL if your server has disabled SSL v3.
+#' @param config_options  A list of options to pass to \code{POST} method in the \code{httr} package.  See the details in \code{redcap_read_oneshot()} Optional.
 #' 
 #' @return Currently, a list is returned with the following elements,
 #' \enumerate{
@@ -75,8 +74,7 @@ redcap_write <- function( ds_to_write,
                           continue_on_error = FALSE,
                           redcap_uri,
                           token,
-                          verbose = TRUE, cert_location=NULL, 
-                          sslversion = 3) {  
+                          verbose = TRUE, config_options = NULL) {  
   
   if( base::missing(redcap_uri) )
     base::stop("The required parameter `redcap_uri` was missing from the call to `redcap_write()`.")
@@ -105,8 +103,7 @@ redcap_write <- function( ds_to_write,
                                                   redcap_uri = redcap_uri,
                                                   token = token,
                                                   verbose = verbose, 
-                                                  cert_location=cert_location,
-                                                  sslversion=sslversion)
+                                                  config_options = config_options)
     
     lst_status_code[[i]] <- write_result$status_code
     # lst_status_message[[i]] <- write_result$status_message

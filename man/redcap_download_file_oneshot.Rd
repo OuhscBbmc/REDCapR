@@ -5,7 +5,7 @@
 \usage{
 redcap_download_file_oneshot(file_name = NULL, directory = NULL,
   overwrite = FALSE, redcap_uri, token, record, field, event = "",
-  verbose = TRUE, cert_location = NULL, sslversion = 3)
+  verbose = TRUE, config_options = NULL)
 }
 \arguments{
   \item{file_name}{The name of the file where the
@@ -38,15 +38,9 @@ redcap_download_file_oneshot(file_name = NULL, directory = NULL,
   \code{message}s should be printed to the R console during
   the operation.  Optional.}
 
-  \item{cert_location}{If present, this string should point
-  to the location of the cert files required for SSL
-  verification.  If the value is missing or NULL, the
-  server's identity will be verified using a recent CA
-  bundle from the \href{http://curl.haxx.se}{cURL website}.
-  See the details below. Optional.}
-
-  \item{sslversion}{The SSL version for curl. The default
-  is 3. Set to NULL if your server has disabled SSL v3.}
+  \item{config_options}{A list of options to pass to
+  \code{POST} method in the \code{httr} package.  See the
+  details below. Optional.}
 }
 \value{
 Currently, a list is returned with the following elements,

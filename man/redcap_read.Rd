@@ -7,7 +7,7 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
   continue_on_error = FALSE, redcap_uri, token, records = NULL,
   records_collapsed = "", fields = NULL, fields_collapsed = "",
   export_data_access_groups = FALSE, raw_or_label = "raw", verbose = TRUE,
-  cert_location = NULL, sslversion = 3, id_position = 1L)
+  config_options = NULL, id_position = 1L)
 }
 \arguments{
   \item{batch_size}{The maximum number of subject records a
@@ -58,15 +58,9 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
   if the output might be visible somewhere public.
   Optional.}
 
-  \item{cert_location}{If present, this string should point
-  to the location of the cert files required for SSL
-  verification.  If the value is missing or NULL, the
-  server's identity will be verified using a recent CA
-  bundle from the \href{http://curl.haxx.se}{cURL website}.
-  See the details below. Optional.}
-
-  \item{sslversion}{The SSL version for curl. The default
-  is 3. Set to NULL if your server has disabled SSL v3.}
+  \item{config_options}{A list of options to pass to
+  \code{POST} method in the \code{httr} package.  See the
+  details in \code{redcap_read_oneshot()} Optional.}
 
   \item{id_position}{The column position of the variable
   that unique identifies the subject.  This defaults to the

@@ -5,7 +5,7 @@
 \usage{
 redcap_metadata_read(redcap_uri, token, forms = NULL, forms_collapsed = "",
   fields = NULL, fields_collapsed = "", verbose = TRUE,
-  cert_location = NULL, sslversion = 3)
+  config_options = NULL)
 }
 \arguments{
   \item{redcap_uri}{The URI (uniform resource identifier)
@@ -33,15 +33,9 @@ redcap_metadata_read(redcap_uri, token, forms = NULL, forms_collapsed = "",
   if the output might be visible somewhere public.
   Optional.}
 
-  \item{cert_location}{If present, this string should point
-  to the location of the cert files required for SSL
-  verification.  If the value is missing or NULL, the
-  server's identity will be verified using a recent CA
-  bundle from the \href{http://curl.haxx.se}{cURL website}.
-  See the details below. Optional.}
-
-  \item{sslversion}{The SSL version for curl. The default
-  is 3. Set to NULL if your server has disabled SSL v3.}
+  \item{config_options}{A list of options to pass to
+  \code{POST} method in the \code{httr} package.  See the
+  details in \code{redcap_read_oneshot()} Optional.}
 }
 \value{
 Currently, a list is returned with the following elements,
