@@ -282,7 +282,7 @@ Reading batch 1 of 1, with ids 1 through 5.
     install.packages("redcapAPI")
  ```
  
-Developmental versions may be available on Github.
+  Developmental versions may be available on GitHub.
   ``` r
     install.packages("devtools", repos="http://cran.rstudio.com")
     devtools::install_github(repo="nutterb/redcapAPI")
@@ -300,7 +300,7 @@ Developmental versions may be available on Github.
   ```r
     library(redcapAPI) #Load the package into the current R session.
     rcon <- redcapConnection(url = "https://bbmc.ouhsc.edu/redcap/api/",
-                             token <- "9A81268476645C4E5F03428B8AC3AA7B")
+                             token = "9A81268476645C4E5F03428B8AC3AA7B")
     exportRecords(rcon)
   ```
 
