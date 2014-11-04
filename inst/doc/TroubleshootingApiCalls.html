@@ -465,6 +465,81 @@ dsMinors &lt;- project$read(records=idsOfMinors)$data
 If so the &ldquo;Can the user query a <em>entire</em> REDCap project using RCurl?&rdquo; check succeeded, but the REDCapR checks did not, consider posting a new <a href="https://github.com/OuhscBbmc/REDCapR/issues">GitHub issue</a> to the package developers.</p></li>
 </ol>
 
+<h2>Exporting from REDCap to R, using redcapAPI</h2>
+
+<p><a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> is a package that uses <a href="http://cran.r-project.org/web/packages/RCurl">httr</a> (via <a href="https://github.com/hadley/httr">httr</a>) to communicate with REDCap, and wraps convience functions around it to reduce the size and complexity of the user&#39;s code.  </p>
+
+<p>If you&#39;re not using redcapAPI, you can skip this section and proceed to &#39;Importing into REDCap from R&#39; below.  More specific discussion about <code>redcapAPI</code> can be found at the <a href="https://github.com/nutterb/redcapAPI/wiki">package&#39;s wiki</a>.</p>
+
+<ol>
+<li><p><strong>Is redcapAPI installed on the user&#39;s machine?</strong><br/>
+Currently, the easiest way to install <code>redcapAPI</code> is from CRAN.</p>
+
+<pre><code class="r">install.packages(&quot;redcapAPI&quot;)
+</code></pre>
+
+<p>Developmental versions may be available on GitHub.</p>
+
+<pre><code class="r">install.packages(&quot;devtools&quot;, repos=&quot;http://cran.rstudio.com&quot;)
+devtools::install_github(repo=&quot;nutterb/redcapAPI&quot;)
+</code></pre></li>
+<li><p><strong>Does redcapAPI load successfully on the user&#39;s machine?</strong><br/>
+If so, running <code>library(redcapAPI)</code> should produce the following output if you&#39;re starting with a fresh session of R:</p>
+
+<pre><code class="r">library(redcapAPI)
+## Loading required package: redcapAPI
+</code></pre></li>
+<li><p><strong>Can the user export from an example project?</strong><br/>
+This is the same fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a> as in the previous section.</p>
+
+<pre><code class="r">library(redcapAPI) #Load the package into the current R session.
+rcon &lt;- redcapConnection(url = &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;,
+                         token = &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;)
+exportRecords(rcon)
+</code></pre>
+
+<p>The previous code should produce similar output.  Notice there are five rows and the columns will wrap around if your console window is too narrow.</p>
+
+<pre><code>record_id name_first name_last                                 address      telephone               email
+1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232 (432) 456-4848     nutty@mouse.com
+2         2     Tumtum  Nutmouse 14 Rose Cottage Blvd.\nKenning UK 34243 (234) 234-2343    tummy@mouse.comm
+3         3     Marcus      Wood          243 Hill St.\nGuthrie OK 73402 (433) 435-9865        mw@mwood.net
+4         4      Trudy       DAG          342 Elm\nDuncanville TX, 75116 (987) 654-3210 peroxide@blonde.com
+5         5   John Lee    Walker      Hotel Suite\nNew Orleans LA, 70115 (333) 333-4444  left@hippocket.com
+
+     dob age ethnicity race sex height weight   bmi
+1 2003-08-30  10         1    2   0   5.00      1 400.0
+2 2003-03-10  10         1    6   1   6.00      1 277.8
+3 1934-04-09  79         0    4   1 180.00     80  24.7
+4 1952-11-02  61         1    4   0 165.00     54  19.8
+5 1955-04-15  58         1    4   1 193.04    104  27.9
+
+                                                                                                 comments
+1                                                                     Character in a book, with some guessing
+2                                                                          A mouse character from a good book
+3                                                                                          completely made up
+4 This record doesn&#39;t have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail
+5                 Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache
+
+demographics_complete
+1                     2
+2                     2
+3                     2
+4                     2
+5                     2
+</code></pre></li>
+<li><p><strong>Can the user export from their own project?</strong>
+The code is similar to the previous check, but the <code>uri</code> and <code>token</code> values will need to be modified.</p>
+
+<pre><code class="r">library(redcapAPI) #Load the package into the current R session, if you haven&#39;t already.
+rcon &lt;- redcapConnection(url = &quot;https://the.urlofyourinsitution.edu/api/&quot;, #Adapt this to your server.
+                       token = &quot;your-secret-token&quot;) #Adapt this to your user&#39;s token.
+exportRecords(rcon)
+</code></pre></li>
+<li><p><strong>Is the export operation still unsuccessful using redcapAPI?</strong>
+If so the &ldquo;Can the user query a <em>entire</em> REDCap project using RCurl?&rdquo; check succeeded, but the redcapAPI checks did not, consider posting a new <a href="https://github.com/nutterb/redcapAPI/issues">GitHub issue</a> to the package developers.</p></li>
+</ol>
+
 <h2>Importing into REDCap from R</h2>
 
 <p>Troubleshooting import operations is trickier than export operations for two major reasons.  First, the database potentially persists your <em>import</em> mistakes.  In contrast, repeatedly <em>exporting</em> data won&#39;t affect subsequent reads.  Considering cloning the REDCap project for testing until the problem is resolved.  Remember to create a new token (because they&#39;re not automatically created when projects are cloned, even when users are copied), and to modify your code&#39;s token to point to the new testing clone.</p>
