@@ -334,7 +334,7 @@ This step is like the previous one, but with two differences.  First, it&#39;s u
 <pre><code class="r">redcap_uri &lt;- &quot;https://the.urlofyourinsitution.edu/api/&quot; #Adapt this to your server.
 token &lt;- &quot;your-secret-token&quot; #Adapt this to your user&#39;s token.
 records_collapsed &lt;- &quot;1,2,3&quot; #This assumes that their dataset contains ID values of 1, 2, and 3.  Adapt this to their dataset.
-fields_collapsed &lt;- &quot;record_id,name_first,name_last&quot; #This assumes that their dataset contains variables called &#39;recordid&#39;, &#39;name_first&#39;, and &#39;name_last&#39;.  Adapt this to their dataset.
+fields_collapsed &lt;- &quot;record_id,name_first,name_last&quot; #This assumes that their dataset contains variables called &#39;record_id&#39;, &#39;name_first&#39;, and &#39;name_last&#39;.  Adapt this to their dataset.
 
 raw_text &lt;- RCurl::postForm(
   uri = redcap_uri

@@ -29,7 +29,7 @@
 #' 
 #' @examples
 #' d <- data.frame(
-#'   recordid = 1:4,
+#'   record_id = 1:4,
 #'   flag_logical = c(TRUE, TRUE, FALSE, TRUE),
 #'   flag_Uppercase = c(4, 6, 8, 2)
 #' )

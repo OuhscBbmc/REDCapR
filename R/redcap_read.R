@@ -81,7 +81,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
     redcap_uri = redcap_uri, 
     token = token, 
     records_collapsed = records_collapsed,
-    fields_collapsed = "nonexistant_field_name", 
+    fields_collapsed = fields_collapsed, 
     verbose = verbose, 
     config_options = config_options
   )

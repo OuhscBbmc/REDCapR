@@ -2,7 +2,7 @@ rm(list=ls(all=TRUE))
 library(REDCapR)
 
 dfBad <- data.frame(
-  recordid = 1:4,
+  record_id = 1:4,
   bad_logical = c(T, T, F, T),
   UpperCase = c(4, 6, 8, 2)
 )
@@ -27,7 +27,7 @@ data.frame(
 v <- validate_for_write(dfBad)
 
 dfGood <- data.frame(
-  recordid = 1:4,
+  record_id = 1:4,
   not_logical = c(1, 1, 0, 1),
   no_uppercase = c(4, 6, 8, 2)
 )
@@ -47,7 +47,7 @@ v <- validate_no_logical(dfGood)
 v <- validate_for_write(dfGood)
 
 dfSoso <- data.frame(
-  recordid = 1:4,
+  record_id = 1:4,
   bad_logical = c(T, T, T, F),
   no_uppercase = c(4, 6, 8, 2)
 )

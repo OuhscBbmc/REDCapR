@@ -138,7 +138,7 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
     redcap_uri <- "https://the.urlofyourinsitution.edu/api/" #Adapt this to your server.
     token <- "your-secret-token" #Adapt this to your user's token.
     records_collapsed <- "1,2,3" #This assumes that their dataset contains ID values of 1, 2, and 3.  Adapt this to their dataset.
-    fields_collapsed <- "record_id,name_first,name_last" #This assumes that their dataset contains variables called 'recordid', 'name_first', and 'name_last'.  Adapt this to their dataset.
+    fields_collapsed <- "record_id,name_first,name_last" #This assumes that their dataset contains variables called 'record_id', 'name_first', and 'name_last'.  Adapt this to their dataset.
 
     raw_text <- RCurl::postForm(
       uri = redcap_uri

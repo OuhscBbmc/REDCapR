@@ -40,16 +40,16 @@ ds_some_rows_v2 <- redcap_read(
 ds_some_rows_v2 #Inspect the returned dataset
 
 ## ----read_field_subset------------------------------------------------------------------------------------------------
-#Return only the fields recordid, name_first, and age
-desired_fields_v1 <- c("recordid", "name_first", "age")
+#Return only the fields record_id, name_first, and age
+desired_fields_v1 <- c("record_id", "name_first", "age")
 ds_some_fields_v1 <- redcap_read(
    redcap_uri = uri, 
    token = token, 
    fields = desired_fields_v1
 )$data
 
-#Return only the fields recordid, name_first, and age (alternate way)
-desired_fields_v2 <- "recordid, name_first, age"
+#Return only the fields record_id, name_first, and age (alternate way)
+desired_fields_v2 <- "record_id, name_first, age"
 ds_some_fields_v2 <- redcap_read(
    redcap_uri = uri, 
    token = token, 
@@ -61,7 +61,7 @@ ds_some_fields_v2 #Inspect the returned dataset
 ## ----read_record_field_subset-----------------------------------------------------------------------------------------
 ######
 ## Step 1: First call to REDCap
-desired_fields_v3 <- c("recordid", "dob", "weight")
+desired_fields_v3 <- c("record_id", "dob", "weight")
 ds_some_fields_v3 <- redcap_read(
    redcap_uri = uri, 
    token = token, 
@@ -90,7 +90,7 @@ ds_some_rows_v3 <- redcap_read(
 ds_some_rows_v3 #Examine the results.
 
 ## ----read_not_just_dataframe------------------------------------------------------------------------------------------
-#Return only the fields recordid, name_first, and age
+#Return only the fields record_id, name_first, and age
 all_information <- redcap_read(
    redcap_uri = uri, 
    token = token, 

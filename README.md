@@ -23,8 +23,8 @@ ds_some_rows <- redcap_read(
    records = desired_records
 )$data
 
-#Return only the fields recordid, name_first, and age
-desired_fields <- c("recordid", "name_first", "age")
+#Return only the fields record_id, name_first, and age
+desired_fields <- c("record_id", "name_first", "age")
 ds_some_fields <- redcap_read(
    redcap_uri = uri, 
    token = token, 
