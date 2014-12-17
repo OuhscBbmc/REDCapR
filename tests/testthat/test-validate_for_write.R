@@ -4,12 +4,12 @@ library(testthat)
 context("Validate data frame for writing to REDCap")
 ###########
 dfBad <- data.frame(
-  recordid = 1:4,
+  record_id = 1:4,
   bad_logical = c(T, T, F, T),
   bad_Uppercase = c(4, 6, 8, 2)
 )
 dfGood <- data.frame(
-  recordid = 1:4,
+  record_id = 1:4,
   not_logical = c(1, 1, 0, 1),
   no_uppercase = c(4, 6, 8, 2)
 )

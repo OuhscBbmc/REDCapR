@@ -63,8 +63,8 @@
 #'    records = desired_records_v1
 #' )$data
 #' 
-#' #Return only the fields recordid, name_first, and age
-#' desired_fields_v1 <- c("recordid", "name_first", "age")
+#' #Return only the fields record_id, name_first, and age
+#' desired_fields_v1 <- c("record_id", "name_first", "age")
 #' ds_some_fields_v1 <- redcap_read_oneshot(
 #'    redcap_uri = uri, 
 #'    token = token, 

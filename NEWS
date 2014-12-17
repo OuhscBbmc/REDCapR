@@ -1,4 +1,9 @@
-Version 0.6 (Developed 2014-10-29 through ?)
+Version 0.7 (Developed 2014-12-17 through 2014-12-17)
+------------------------------------------------------------------------------
+New Features: 
+* Updated for Version 6.0.x of REDCap (which introduced a lot of improvements to API behavior).
+
+Version 0.6 (Developed 2014-10-29 through 2014-11-03)
 ------------------------------------------------------------------------------
 New Features: 
 * The `config_options` in the `httr` package are exposed to the REDCapR user.  See issues #55 & #58; thanks to @rparrish and @nutterb for their contributions (https://github.com/OuhscBbmc/REDCapR/issues/55 & https://github.com/OuhscBbmc/REDCapR/issues/58).

@@ -6,7 +6,6 @@ context("Read Oneshot")
 uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account on pid=153.
 
-
 test_that("Smoke Test", {  
   testthat::skip_on_cran()
   expect_message(
@@ -175,20 +174,21 @@ test_that("All Records -label and DAG", {
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
     ), mugshot = c("[document]", "[document]", "[document]", "[document]", 
     "[document]"), health_complete = c("Unverified", "Incomplete", 
-    "Complete", "Complete", "Incomplete"), race___1 = c("", "", 
-    "", "", "American Indian/Alaska Native"), race___2 = c("", "", 
-    "", "Asian", ""), race___3 = c("", "Native Hawaiian or Other Pacific Islander", 
-    "", "", ""), race___4 = c("", "", "Black or African American", 
-    "", ""), race___5 = c("White", "White", "White", "White", ""
-    ), race___6 = c("", "", "", "", "Unknown / Not Reported"), ethnicity = c("NOT Hispanic or Latino", 
+    "Complete", "Complete", "Incomplete"), race___1 = c("Unchecked", 
+    "Unchecked", "Unchecked", "Unchecked", "Checked"), race___2 = c("Unchecked", 
+    "Unchecked", "Unchecked", "Checked", "Unchecked"), race___3 = c("Unchecked", 
+    "Checked", "Unchecked", "Unchecked", "Unchecked"), race___4 = c("Unchecked", 
+    "Unchecked", "Checked", "Unchecked", "Unchecked"), race___5 = c("Checked", 
+    "Checked", "Checked", "Checked", "Unchecked"), race___6 = c("Unchecked", 
+    "Unchecked", "Unchecked", "Unchecked", "Checked"), ethnicity = c("NOT Hispanic or Latino", 
     "NOT Hispanic or Latino", "Unknown / Not Reported", "NOT Hispanic or Latino", 
     "Hispanic or Latino"), race_and_ethnicity_complete = c("Complete", 
     "Incomplete", "Complete", "Complete", "Complete")), .Names = c("record_id", 
     "redcap_data_access_group", "name_first", "name_last", "address", 
     "telephone", "email", "dob", "age", "sex", "demographics_complete", 
     "height", "weight", "bmi", "comments", "mugshot", "health_complete", 
-    "race___1", "race___2", "race___3", "race___4", "race___5", 
-    "race___6", "ethnicity", "race_and_ethnicity_complete"), class = "data.frame", row.names = c(NA, 
+    "race___1", "race___2", "race___3", "race___4", "race___5", "race___6", 
+    "ethnicity", "race_and_ethnicity_complete"), class = "data.frame", row.names = c(NA, 
     -5L))
 
   expected_outcome_message <- "5 records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
@@ -227,12 +227,13 @@ test_that("All Records -label", {
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
     ), mugshot = c("[document]", "[document]", "[document]", "[document]", 
     "[document]"), health_complete = c("Unverified", "Incomplete", 
-    "Complete", "Complete", "Incomplete"), race___1 = c("", "", 
-    "", "", "American Indian/Alaska Native"), race___2 = c("", "", 
-    "", "Asian", ""), race___3 = c("", "Native Hawaiian or Other Pacific Islander", 
-    "", "", ""), race___4 = c("", "", "Black or African American", 
-    "", ""), race___5 = c("White", "White", "White", "White", ""
-    ), race___6 = c("", "", "", "", "Unknown / Not Reported"), ethnicity = c("NOT Hispanic or Latino", 
+    "Complete", "Complete", "Incomplete"), race___1 = c("Unchecked", 
+    "Unchecked", "Unchecked", "Unchecked", "Checked"), race___2 = c("Unchecked", 
+    "Unchecked", "Unchecked", "Checked", "Unchecked"), race___3 = c("Unchecked", 
+    "Checked", "Unchecked", "Unchecked", "Unchecked"), race___4 = c("Unchecked", 
+    "Unchecked", "Checked", "Unchecked", "Unchecked"), race___5 = c("Checked", 
+    "Checked", "Checked", "Checked", "Unchecked"), race___6 = c("Unchecked", 
+    "Unchecked", "Unchecked", "Unchecked", "Checked"), ethnicity = c("NOT Hispanic or Latino", 
     "NOT Hispanic or Latino", "Unknown / Not Reported", "NOT Hispanic or Latino", 
     "Hispanic or Latino"), race_and_ethnicity_complete = c("Complete", 
     "Incomplete", "Complete", "Complete", "Complete")), .Names = c("record_id", 
