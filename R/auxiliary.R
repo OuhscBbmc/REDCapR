@@ -69,7 +69,7 @@ retrieve_token_mssql <- function(
   field_name_token = "Token"
   ) {
   
-  if( !require(RODBC) ) stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBC` package is not installed.  Please install it and try again.")
+  if( !requireNamespace("RODBC", quietly=TRUE) ) stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBC` package is not installed.  Please install it and try again.")
   
   sql <- base::sprintf("EXEC %s.%s %s = %s", schema_name, procedure_name, variable_name_project, project_name)
   

@@ -1,6 +1,6 @@
 
 populate_project_simple <- function( batch = FALSE ) {
-  if( !require(testthat) ) stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.")
+  if( !requireNamespace("testthat") ) stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.")
   #Declare the server & user information
   uri <- "https://bbmc.ouhsc.edu/redcap/api/"
   # token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account and the simple project (pid 153)
@@ -42,7 +42,7 @@ populate_project_simple <- function( batch = FALSE ) {
   return( list(is_success=returned_object$success, redcap_project=project) )
 }
 clear_project_simple <- function( verbose = TRUE ) {
-  if( !require(testthat) ) stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.")
+  if( !requireNamespace("testthat", quietly=TRUE) ) stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.")
   pathDeleteTestRecord <- "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_simple.php"
   
   cert_location <- system.file("ssl_certs/mozilla_ca_root.crt", package="REDCapR")
@@ -59,7 +59,7 @@ clear_project_simple <- function( verbose = TRUE ) {
 }
 
 clean_start_simple <- function( batch = FALSE ) {
-  if( !require(testthat) ) stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.")
+  if( !requireNamespace("testthat", quietly=TRUE) ) stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.")
   testthat::expect_message(
     clear_result <- clear_project_simple(),
     regexp = "clear_project_simple success: TRUE."   
