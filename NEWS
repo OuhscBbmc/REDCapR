@@ -1,3 +1,10 @@
+Version 0.8 (Developed 2015-01-15 through ?)
+------------------------------------------------------------------------------
+New Features: 
+
+Minor Updates:
+* Uses `requireNamespace()` instead of `require()`.
+
 Version 0.7 (Developed 2014-12-17 through 2014-12-17)
 ------------------------------------------------------------------------------
 New Features: 
