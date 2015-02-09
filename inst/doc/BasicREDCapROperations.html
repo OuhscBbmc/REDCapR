@@ -235,10 +235,10 @@ token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot; #For `UnitTestPhiFree` 
 ds_all_rows_all_fields &lt;- redcap_read(redcap_uri=uri, token=token)$data
 </code></pre>
 
-<pre><code>5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
-Starting to read 5 records  at 2014-12-17 14:27:56
+<pre><code>5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+Starting to read 5 records  at 2015-02-08 18:16:43
 Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
-5 records and 24 columns were read from REDCap in 0.4 seconds.  The http status code was 200.
+5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_all_rows_all_fields #Inspect the returned dataset
@@ -291,10 +291,10 @@ ds_some_rows_v1 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>2 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
-Starting to read 2 records  at 2014-12-17 14:27:57
+<pre><code>2 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+Starting to read 2 records  at 2015-02-08 18:16:44
 Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).
-2 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
+2 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">#Return only records with IDs of 1 and 3 (alternate way)
@@ -306,10 +306,10 @@ ds_some_rows_v2 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>2 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
-Starting to read 2 records  at 2014-12-17 14:27:58
+<pre><code>2 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+Starting to read 2 records  at 2015-02-08 18:16:45
 Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).
-2 records and 24 columns were read from REDCap in 0.4 seconds.  The http status code was 200.
+2 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_some_rows_v2 #Inspect the returned dataset
@@ -339,10 +339,10 @@ ds_some_fields_v1 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
-Starting to read 5 records  at 2014-12-17 14:28:00
+<pre><code>5 records and 3 columns were read from REDCap in 0.4 seconds.  The http status code was 200.
+Starting to read 5 records  at 2015-02-08 18:16:46
 Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
-5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
+5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">#Return only the fields record_id, name_first, and age (alternate way)
@@ -354,10 +354,10 @@ ds_some_fields_v2 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
-Starting to read 5 records  at 2014-12-17 14:28:01
+<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+Starting to read 5 records  at 2015-02-08 18:16:47
 Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
-5 records and 3 columns were read from REDCap in 0.4 seconds.  The http status code was 200.
+5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_some_fields_v2 #Inspect the returned dataset
@@ -385,10 +385,10 @@ ds_some_fields_v3 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
-Starting to read 5 records  at 2014-12-17 14:28:02
+<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+Starting to read 5 records  at 2015-02-08 18:16:48
 Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
-5 records and 3 columns were read from REDCap in 0.4 seconds.  The http status code was 200.
+5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_some_fields_v3 #Examine the these three variables.
@@ -424,10 +424,10 @@ ds_some_rows_v3 &lt;- redcap_read(
 )$data
 </code></pre>
 
-<pre><code>2 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
-Starting to read 2 records  at 2014-12-17 14:28:03
+<pre><code>2 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+Starting to read 2 records  at 2015-02-08 18:16:49
 Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).
-2 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
+2 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">ds_some_rows_v3 #Examine the results.
@@ -469,10 +469,10 @@ all_information &lt;- redcap_read(
 )
 </code></pre>
 
-<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
-Starting to read 5 records  at 2014-12-17 14:28:04
+<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+Starting to read 5 records  at 2015-02-08 18:16:50
 Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
-5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
+5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 </code></pre>
 
 <pre><code class="r">all_information #Inspect the additional information
@@ -493,7 +493,7 @@ $status_codes
 [1] &quot;200&quot;
 
 $outcome_messages
-[1] &quot;5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.&quot;
+[1] &quot;5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.&quot;
 
 $records_collapsed
 [1] &quot;&quot;
@@ -502,17 +502,17 @@ $fields_collapsed
 [1] &quot;record_id,name_first,age&quot;
 
 $elapsed_seconds
-[1] 1.171071
+[1] 0.962096
 </code></pre>
 
 <h2>Session Info</h2>
 
 <p>For the sake of documentation and reproducibility, the current vignette was build on a system using the following software.</p>
 
-<pre><code>Report created by Will at 2014-12-17, 14:28:05 -0600
+<pre><code>Report created by wbeasley at 2015-02-08, 18:16:51 -0600
 </code></pre>
 
-<pre><code>R version 3.1.2 Patched (2014-12-11 r67168)
+<pre><code>R version 3.1.2 Patched (2014-10-31 r66921)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
 locale:
@@ -523,12 +523,12 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] knitr_1.8      REDCapR_0.7-1  testthat_0.9.1
+[1] knitr_1.8           REDCapR_0.8-2       testthat_0.9.1.9001
 
 loaded via a namespace (and not attached):
- [1] bitops_1.0-6        codetools_0.2-9     devtools_1.6.1.9000 digest_0.6.6        evaluate_0.5.5     
- [6] formatR_1.0         httr_0.6.0          plyr_1.8.1          Rcpp_0.11.3         RCurl_1.95-4.5     
-[11] roxygen2_4.1.0      stringr_0.6.2       tools_3.1.2        
+ [1] bitops_1.0-6     codetools_0.2-10 crayon_1.1.0     devtools_1.6.1   digest_0.6.8     evaluate_0.5.5  
+ [7] formatR_1.0      httr_0.6.1       plyr_1.8.1       Rcpp_0.11.3      RCurl_1.95-4.5   roxygen2_4.1.0  
+[13] stringr_0.6.2    tools_3.1.2     
 </code></pre>
 
 </body>

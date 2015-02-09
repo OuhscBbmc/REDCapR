@@ -175,16 +175,23 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
   
   if( success ) {
     try (
-      ds <- read.csv(text=raw_text, stringsAsFactors=FALSE), #Convert the raw text to a dataset.
+      {
+        #browser();
+        ds <- read.csv(text=raw_text, stringsAsFactors=FALSE)
+      }, #Convert the raw text to a dataset.
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
     )
     
-    outcome_message <- paste0(format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
-                             " records and ",  
-                             format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
-                             " columns were read from REDCap in ", 
-                             round(elapsed_seconds, 1), " seconds.  The http status code was ",
-                             status_code, ".")
+    if( exists("ds") ) {
+      outcome_message <- paste0(format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
+                         " records and ",  
+                         format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
+                         " columns were read from REDCap in ", 
+                         round(elapsed_seconds, 1), " seconds.  The http status code was ",
+                         status_code, ".")
+    } else {
+      outcome_message <- paste0("The REDCap read failed.  The http status code was ", status_code, ".  The 'raw_text' returned was '", raw_text, ".")
+    }
     
     #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
     raw_text <- "" 
