@@ -107,6 +107,10 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
   ###
   uniqueIDs <- sort(unique(initial_call$data[, id_position]))
   
+  if( all(nchar(uniqueIDs)==32L) )
+    warning("It appears that the REDCap record IDs have been hashed. For `redcap_read` to function properly, the user must have Export permissions for the 'Full Data Set'.")
+
+  
   ds_glossary <- REDCapR::create_batch_glossary(row_count=length(uniqueIDs), batch_size=batch_size)
   lst_batch <- NULL
   lst_status_code <- NULL
@@ -124,7 +128,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
       message("Reading batch ", i, " of ", nrow(ds_glossary), ", with subjects ", min(selected_ids), " through ", max(selected_ids), 
               " (ie, ", length(selected_ids), " unique subject records).")
     }
-    
+#     browser()
     read_result <- REDCapR::redcap_read_oneshot(redcap_uri = redcap_uri,
                                         token = token,  
                                         records = selected_ids,
