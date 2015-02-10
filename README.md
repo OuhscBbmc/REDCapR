@@ -45,6 +45,7 @@ Thanks,
 [Department of Pediatrics](https://www.oumedicine.com/pediatrics),
 [Biomedical & Behavioral Research Core](http://ouhsc.edu/BBMC/).
 
+### Download and Installation Instructions
 <!-- The development version of REDCapR can be installed from [R-Forge](https://r-forge.r-project.org/projects/redcapr/),
 ```r
 install.packages("REDCapR", repos="http://R-Forge.R-project.org")
