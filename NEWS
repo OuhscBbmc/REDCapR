@@ -5,6 +5,7 @@ New Features:
 Minor Updates:
 * Uses `requireNamespace()` instead of `require()`.
 * Added warning if it appears `readcap_read()` is being used without 'Full Data Set' export privileges.  The problem involves the record IDs are hashed.
+* Reconnected code that reads only the `id_position` in the first stage of batching.  The metadata needed to be read before that, after the updates for REDCap Version 6.0.x.
 
 Version 0.7 (Developed 2014-12-17 through 2014-12-17)
 ------------------------------------------------------------------------------

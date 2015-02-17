@@ -57,11 +57,11 @@
 #' }
 #' 
 
-redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_error = FALSE,
+redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_error=FALSE,
                          redcap_uri, token, records=NULL, records_collapsed="", 
                          fields=NULL, fields_collapsed="", 
-                         export_data_access_groups = FALSE,
-                         raw_or_label = 'raw',
+                         export_data_access_groups=FALSE,
+                         raw_or_label='raw',
                          verbose=TRUE, config_options=NULL, id_position=1L) {  
   if( missing(redcap_uri) )
     stop("The required parameter `redcap_uri` was missing from the call to `redcap_read()`.")
@@ -77,11 +77,19 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
   #   export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
 
   start_time <- Sys.time()
+  
+  metadata <- REDCapR::redcap_metadata_read(
+    redcap_uri = redcap_uri, 
+    token = token, 
+    verbose = verbose, 
+    config_options = config_options
+  )
+  
   initial_call <- REDCapR::redcap_read_oneshot(
     redcap_uri = redcap_uri, 
     token = token, 
     records_collapsed = records_collapsed,
-    fields_collapsed = fields_collapsed, 
+    fields_collapsed = metadata$data[1, "field_name"], 
     verbose = verbose, 
     config_options = config_options
   )
@@ -105,7 +113,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
   ###
   ### Continue as intended if the initial query succeeded.
   ###
-  uniqueIDs <- sort(unique(initial_call$data[, id_position]))
+  uniqueIDs <- sort(unique(initial_call$data[, 1]))
   
   if( all(nchar(uniqueIDs)==32L) )
     warning("It appears that the REDCap record IDs have been hashed. For `redcap_read` to function properly, the user must have Export permissions for the 'Full Data Set'.")
