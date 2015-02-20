@@ -116,7 +116,12 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
   uniqueIDs <- sort(unique(initial_call$data[, 1]))
   
   if( all(nchar(uniqueIDs)==32L) )
-    warning("It appears that the REDCap record IDs have been hashed. For `redcap_read` to function properly, the user must have Export permissions for the 'Full Data Set'.")
+    warning("It appears that the REDCap record IDs have been hashed. ", 
+            "For `redcap_read` to function properly, the user must have Export permissions for the 'Full Data Set'. ",
+            "To grant the appropriate permissions: ",
+            "(1) go to 'User Rights' in the REDCap project site, ",
+            "(2) select the desired user, and then select 'Edit User Privileges', ",
+            "(3) in the 'Data Exports' radio buttons, select 'Full Data Set'.")
 
   
   ds_glossary <- REDCapR::create_batch_glossary(row_count=length(uniqueIDs), batch_size=batch_size)
