@@ -108,6 +108,14 @@ for each subset, before returning a unified
 
 The function allows a delay between calls, which allows the
 server to attend to other users' requests.
+
+For \code{redcap_read} to function properly, the user must
+have Export permissions for the `Full Data Set'.  To grant
+the appropriate permissions: \enumerate{ \item go to `User
+Rights' in the REDCap project site, \item select the
+desired user, and then select `Edit User Privileges', \item
+in the `Data Exports' radio buttons, select `Full Data
+Set'. }
 }
 \examples{
 \dontrun{
