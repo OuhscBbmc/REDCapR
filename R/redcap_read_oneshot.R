@@ -190,7 +190,7 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
                          round(elapsed_seconds, 1), " seconds.  The http status code was ",
                          status_code, ".")
     } else {
-      outcome_message <- paste0("The REDCap read failed.  The http status code was ", status_code, ".  The 'raw_text' returned was '", raw_text, ".")
+      outcome_message <- paste0("The REDCap read failed.  The http status code was ", status_code, ".  The 'raw_text' returned was '", raw_text, "'.")
     }
     
     #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
