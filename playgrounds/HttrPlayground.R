@@ -26,7 +26,7 @@ r <- httr::POST(
     , exportDataAccessGroups = export_data_access_groups_string
     , records = records_collapsed
     , fields = fields_collapsed
-  ),
+  )
   , .opts = config_options
 )
 r$status_code
