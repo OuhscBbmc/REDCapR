@@ -40,7 +40,7 @@ Suggests:
     RODBC,
     testit,
     testthat (>= 0.9)
-License: GPL-3
+License: GPL-2
 LazyData: TRUE
 VignetteBuilder: knitr
 Roxygen: list(wrap = TRUE)
