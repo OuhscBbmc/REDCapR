@@ -57,7 +57,7 @@ test_that("N100B100", {
                                                                                                                        "stop_index_pretty", "label"), row.names = c(NA, -1L), class = "data.frame")
   
   expect_equal(object=nrow(dsResult), expected=expectedGlossaryCount, info="The number of batches should be correct.")
-  expect_equal(object=colnames(dsResult), expected=ExpectedColumnNames, info="The column namesshould be correct.")
+  expect_equal(object=colnames(dsResult), expected=ExpectedColumnNames, info="The column names should be correct.")
   expect_equal(object=dsResult, expected=dsExpected, info="The returned batch glossary should be correct.")
 })
 
@@ -76,6 +76,6 @@ test_that("N50B10", {
                                                                                                                                                                                                             "index_pretty", "start_index_pretty", "stop_index_pretty", "label"
                                                                                                                                                                                     ), row.names = c(NA, -5L), class = "data.frame")
   expect_equal(object=nrow(dsResult), expected=expectedGlossaryCount, info="The number of batches should be correct.")
-  expect_equal(object=colnames(dsResult), expected=ExpectedColumnNames, info="The column namesshould be correct.")
+  expect_equal(object=colnames(dsResult), expected=ExpectedColumnNames, info="The column names should be correct.")
   expect_equal(object=dsResult, expected=dsExpected, info="The returned batch glossary should be correct.")
 })
