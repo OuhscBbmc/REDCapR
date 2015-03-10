@@ -1,7 +1,8 @@
-#So HTML & MD output isn't considered as code when determining language of repo.
+#So HTML, MD, & CSS files aren't considered as code when determining language of repo.
 # https://github.com/github/linguist#using-gitattributes
 *.html linguist-documentation
 *.md linguist-documentation
+*.css linguist-documentation
 
 #For AppVeyor
 * text=auto
