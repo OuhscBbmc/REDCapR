@@ -70,10 +70,19 @@ retrieve_token_mssql <- function(
   ) {
   
   if( !requireNamespace("RODBC", quietly=TRUE) ) stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBC` package is not installed.  Please install it and try again.")
+    
+  regex_pattern <- "^\\[*[a-zA-Z0-9_]*\\]*$"
+  if( !grepl(regex_pattern, project_name) ) stop("The 'project_name' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets.")
+  if( !grepl(regex_pattern, schema_name) ) stop("The 'schema_name' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets.")
+  if( !grepl(regex_pattern, procedure_name) ) stop("The 'procedure_name' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets.")
+  if( !grepl(regex_pattern, variable_name_project) ) stop("The 'variable_name_project' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets.")
+  if( !grepl(regex_pattern, field_name_token) ) stop("The 'field_name_token' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets.")
   
   sql <- base::sprintf("EXEC %s.%s %s = '%s'", schema_name, procedure_name, variable_name_project, project_name)
   
   if( base::missing(channel) | base::is.null(channel) ) {
+    if( base::missing(dsn) | base::is.null(dsn) ) stop("The 'dsn' parameter can be missing only if a 'channel' has been passed to 'retrieve_token_mssql'.")
+      
     channel <- RODBC::odbcConnect(dsn=dsn)
     close_channel_on_exit <- TRUE
   } else {
@@ -84,8 +93,7 @@ retrieve_token_mssql <- function(
     expr = {
       token <- RODBC::sqlQuery(channel, sql, stringsAsFactors=FALSE)[1, field_name_token]
     }, finally = {
-      if( close_channel_on_exit )
-        RODBC::odbcClose(channel)
+      if( close_channel_on_exit ) RODBC::odbcClose(channel)
     }
   )
   

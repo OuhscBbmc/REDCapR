@@ -12,11 +12,12 @@ retrieve_token_mssql2 <- function(
   
   if( !requireNamespace("RODBC", quietly=TRUE) ) stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBC` package is not installed.  Please install it and try again.")
   
-  if( !grepl("[a-zA-Z0-9_]*", project_name) ) stop("The 'project_name' parameter must contain only letters, numbers, and underscores.")
-  if( !grepl("[a-zA-Z0-9_]*", schema_name) ) stop("The 'schema_name' parameter must contain only letters, numbers, and underscores.")
-  if( !grepl("[a-zA-Z0-9_]*", procedure_name) ) stop("The 'procedure_name' parameter must contain only letters, numbers, and underscores.")
-  if( !grepl("[a-zA-Z0-9_]*", variable_name_project) ) stop("The 'variable_name_project' parameter must contain only letters, numbers, and underscores.")
-  if( !grepl("[a-zA-Z0-9_]*", field_name_token) ) stop("The 'field_name_token' parameter must contain only letters, numbers, and underscores.")
+  regex_pattern <- "^\\[*[a-zA-Z0-9_]*\\]*$"
+  if( !grepl(regex_pattern, project_name) ) stop("The 'project_name' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets.")
+  if( !grepl(regex_pattern, schema_name) ) stop("The 'schema_name' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets.")
+  if( !grepl(regex_pattern, procedure_name) ) stop("The 'procedure_name' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets.")
+  if( !grepl(regex_pattern, variable_name_project) ) stop("The 'variable_name_project' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets.")
+  if( !grepl(regex_pattern, field_name_token) ) stop("The 'field_name_token' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets.")
   
   sql <- base::sprintf("EXEC %s.%s %s = '%s'", schema_name, procedure_name, variable_name_project, project_name)
   
@@ -39,7 +40,12 @@ retrieve_token_mssql2 <- function(
   return( token )
 }
 
-retrieve_token_mssql2(dsn="BbmcSecurity", project_name="Gpav2")
+retrieve_token_mssql2(dsn="BbmcSecurity", project_name="Gpav2", schema_name = "[Redcap]")
+!grepl("^[a-zA-Z0-9_]*$", "Redcap")
+!grepl("^[a-zA-Z0-9_]*$", "[Redcap]")
+!grepl("^\\[*[a-zA-Z0-9_]*\\]*$", "[Redcap]")
+
+
 
 # library(RODBC)
 # channel <- RODBC::odbcConnect("BbmcSecurity")
