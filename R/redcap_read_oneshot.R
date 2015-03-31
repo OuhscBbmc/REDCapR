@@ -12,6 +12,8 @@
 #' @param records_collapsed A single string, where the desired ID values are separated by commas.  Optional.
 #' @param fields An array, where each element corresponds a desired project field.  Optional.
 #' @param fields_collapsed A single string, where the desired field names are separated by commas.  Optional.
+#' @param events An array, where each element corresponds a desired project event  Optional.
+#' @param events_collapsed A single string, where the desired event names are separated by commas.  Optional.
 #' @param export_data_access_groups A boolean value that specifies whether or not to export the ``redcap_data_access_group'' field when data access groups are utilized in the project. Default is \code{FALSE}. See the details below.
 #' @param raw_or_label A string (either \code{'raw'} or \code{'label'} that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is \code{'raw'}.
 #' @param verbose A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.
@@ -99,6 +101,7 @@
 
 redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collapsed="", 
                          fields=NULL, fields_collapsed="", 
+                         events=NULL, events_collapsed="",
                          export_data_access_groups=FALSE,
                          raw_or_label='raw', verbose=TRUE, config_options=NULL ) {
   #TODO: NULL verbose parameter pulls from getOption("verbose")
@@ -124,6 +127,8 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
     records_collapsed <- ifelse(is.null(records), "", paste0(records, collapse=",")) #This is an empty string if `records` is NULL.
   if( nchar(fields_collapsed)==0 )
     fields_collapsed <- ifelse(is.null(fields), "", paste0(fields, collapse=",")) #This is an empty string if `fields` is NULL.
+  if( nchar(events_collapsed)==0 )
+    events_collapsed <- ifelse(is.null(events), "", paste0(events, collapse=",")) #This is an empty string if `events` is NULL.
   
   export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
   
@@ -157,7 +162,8 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
     rawOrLabel = raw_or_label,
     exportDataAccessGroups = export_data_access_groups_string,
     records = records_collapsed,
-    fields = fields_collapsed
+    fields = fields_collapsed,
+    events = events_collapsed
   )
   
   result <- httr::POST(
