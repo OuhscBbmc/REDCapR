@@ -219,6 +219,7 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
     outcome_message = outcome_message,
     records_collapsed = records_collapsed, 
     fields_collapsed = fields_collapsed,
+    events_collapsed = events_collapsed,
     elapsed_seconds = elapsed_seconds,
     raw_text = raw_text
   ) )
