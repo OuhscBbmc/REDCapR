@@ -6,8 +6,8 @@
 \usage{
 redcap_read_oneshot(redcap_uri, token, records = NULL,
   records_collapsed = "", fields = NULL, fields_collapsed = "",
-  export_data_access_groups = FALSE, raw_or_label = "raw", verbose = TRUE,
-  config_options = NULL)
+  events = NULL, events_collapsed = "", export_data_access_groups = FALSE,
+  raw_or_label = "raw", verbose = TRUE, config_options = NULL)
 }
 \arguments{
   \item{redcap_uri}{The URI (uniform resource identifier)
@@ -27,6 +27,12 @@ redcap_read_oneshot(redcap_uri, token, records = NULL,
 
   \item{fields_collapsed}{A single string, where the
   desired field names are separated by commas.  Optional.}
+
+  \item{events}{An array, where each element corresponds a
+  desired project event Optional.}
+
+  \item{events_collapsed}{A single string, where the
+  desired event names are separated by commas.  Optional.}
 
   \item{export_data_access_groups}{A boolean value that
   specifies whether or not to export the

@@ -17,6 +17,8 @@
 #' @param records_collapsed A single string, where the desired ID values are separated by commas.  Optional.
 #' @param fields An array, where each element corresponds a desired project field.  Optional.
 #' @param fields_collapsed A single string, where the desired field names are separated by commas.  Optional.
+#' @param events An array, where each element corresponds a desired project event  Optional.
+#' @param events_collapsed A single string, where the desired event names are separated by commas.  Optional.
 #' @param export_data_access_groups A boolean value that specifies whether or not to export the ``redcap_data_access_group'' field when data access groups are utilized in the project. Default is \code{FALSE}. See the details below.
 #' @param raw_or_label A string (either \code{'raw'} or \code{'label'} that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is \code{'raw'}.
 #' @param verbose A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.
@@ -68,6 +70,7 @@
 redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_error=FALSE,
                          redcap_uri, token, records=NULL, records_collapsed="", 
                          fields=NULL, fields_collapsed="", 
+                         events=NULL, events_collapsed="",
                          export_data_access_groups=FALSE,
                          raw_or_label='raw',
                          verbose=TRUE, config_options=NULL, id_position=1L) {  
@@ -81,6 +84,8 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
     records_collapsed <- ifelse(is.null(records), "", paste0(records, collapse=",")) #This is an empty string if `records` is NULL.
   if( nchar(fields_collapsed)==0 )
     fields_collapsed <- ifelse(is.null(fields), "", paste0(fields, collapse=",")) #This is an empty string if `fields` is NULL.
+  if( nchar(events_collapsed)==0 )
+    events_collapsed <- ifelse(is.null(events), "", paste0(events, collapse=",")) #This is an empty string if `events` is NULL.
   
   #   export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
 
@@ -98,6 +103,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
     token = token, 
     records_collapsed = records_collapsed,
     fields_collapsed = metadata$data[1, "field_name"], 
+    events_collapsed = events_collapsed,
     verbose = verbose, 
     config_options = config_options
   )
@@ -112,6 +118,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
       data = data.frame(), 
       records_collapsed = "failed in initial batch call", 
       fields_collapsed = "failed in initial batch call",
+      events_collapsed = "failed in initial batch call",
       elapsed_seconds = elapsed_seconds, 
       status_code = initial_call$status_code,
       outcome_message = outcome_message,
@@ -154,6 +161,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
                                         token = token,  
                                         records = selected_ids,
                                         fields_collapsed = fields_collapsed,
+                                        events_collapsed = events_collapsed,
                                         export_data_access_groups = export_data_access_groups, 
                                         raw_or_label = raw_or_label,
                                         verbose = verbose, 
@@ -200,6 +208,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
     outcome_messages = outcome_message_combined,
     records_collapsed = records_collapsed,
     fields_collapsed = fields_collapsed,
+    events_collapsed = events_collapsed,
     elapsed_seconds = elapsed_seconds
   ) )
 }
