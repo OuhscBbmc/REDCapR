@@ -336,7 +336,7 @@ raw_text &lt;- RCurl::postForm(
 </code></pre></li>
 <li><p><strong>Can the user query an <em>entire</em> project using RCurl?</strong> There are two advantages of trying a subset of the data.  First, small datasets avoid the time-out errors that plague large datasets.  Second, it may avoid problematic values being passed through the pipeline.  If the current check fails but the previous check succeedes, then experiment with different expanses of records and fields.  This should help determine which values are causing the problems, or if there&#39;s simply too much data being pulled in one pass.</p>
 
-<p>If the desired dataset is too large, consider if you can prune unnecessary records or fields.  If not, one solution is to pull smaller, multiple batches using the API, then reassemble them.  The <code>redcap_read()</code> function in <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/DocumentationPeek.pdf">REDCapR</a> does this automatically, and allows the user to specify a <code>batch_size</code>.</p>
+<p>If the desired dataset is too large, consider if you can prune unnecessary records or fields.  If not, one solution is to pull smaller, multiple batches using the API, then reassemble them.  The <code>redcap_read()</code> function in <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/documentation_peek.pdf">REDCapR</a> does this automatically, and allows the user to specify a <code>batch_size</code>.</p>
 
 <pre><code class="r">redcap_uri &lt;- &quot;https://the.urlofyourinsitution.edu/api/&quot; #Adapt this to your server.
 token &lt;- &quot;your-secret-token&quot; #Adapt this to your user&#39;s token.
@@ -360,7 +360,7 @@ raw_text &lt;- RCurl::postForm(
 
 <h2>Exporting from REDCap to R, using REDCapR</h2>
 
-<p><a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> is a package that uses <a href="http://cran.r-project.org/web/packages/RCurl">RCurl</a> (via <a href="https://github.com/hadley/httr">httr</a>) to communicate with REDCap, and wraps convience functions around it to reduce the size and complexity of the user&#39;s code.  The package&#39;s basic functions are demonstrated in <a href="http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/BasicREDCapROperations.html">this vignette</a> and are documented in its <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/DocumentationPeek.pdf">reference manual</a> (click the &#39;View Raw&#39; link).</p>
+<p><a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> is a package that uses <a href="http://cran.r-project.org/web/packages/RCurl">RCurl</a> (via <a href="https://github.com/hadley/httr">httr</a>) to communicate with REDCap, and wraps convience functions around it to reduce the size and complexity of the user&#39;s code.  The package&#39;s basic functions are demonstrated in <a href="http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/BasicREDCapROperations.html">this vignette</a> and are documented in its <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/documentation_peek.pdf">reference manual</a> (click the &#39;View Raw&#39; link).</p>
 
 <p>If you&#39;re not using REDCapR, you can skip this section and proceed to &#39;Importing into REDCap from R&#39; below.</p>
 
