@@ -30,6 +30,7 @@ test_that("Smoke Test", {
     returned_object <- project$read(batch_size=2)
   )
 })
+
 # test_that("All Records -Default", {   
 #   testthat::skip_on_cran()
 #   path_expected <- "./inst/test_data/project_longitudinal/expected/default.rds"
@@ -54,8 +55,14 @@ test_that("Smoke Test", {
 #   expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 # })
 test_that("SO example for data.frame retreival", {   
-  path_expected <- "./inst/test_data/project_longitudinal/expected/default.rds"
-  actual <- data.frame(a=1:5, b=6:10) #saveRDS(actual, file=path_expected)
-#   expected <- readRDS(path_expected)
-#   expect_equal(actual, expected, label="The returned data.frame should be correct")
+  # path_relative <- "inst/test_data/project_longitudinal/expected/dummy.rds"
+  # path_qualified <- base::system.file(path_relative, package="REDCapR")
+  path_qualified <- base::file.path(devtools::inst(name="REDCapR"), "test_data/project_longitudinal/expected/dummy.rds")
+  
+  actual <- data.frame(a=1:5, b=6:10) #saveRDS(actual, file=path_relative)
+  # warning(getwd())
+  # browser()
+  expect_true(file.exists(path_qualified), "The saved data.frame should be retrieved from disk.")
+  expected <- readRDS(path_qualified)
+  expect_equal(actual, expected, label="The returned data.frame should be correct")
 })
