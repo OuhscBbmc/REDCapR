@@ -30,23 +30,32 @@ test_that("Smoke Test", {
     returned_object <- project$read(batch_size=2)
   )
 })
-test_that("All Records -Default", {   
-  testthat::skip_on_cran()
-  path_expected <- "./inst/test_data/project_longitudinal/expected/default.txt"
-  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
-  
-  expect_message(
-    returned_object1 <- redcap_read(redcap_uri=uri, token=token, verbose=T),
-    regexp = expected_outcome_message
-  )
-  
-  # expected_data_frame <- eval(parse(path_expected), enclos = new.env()) #dput(returned_object1$data, file=path_expected)
-  # expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # 
-  
-  expect_true(returned_object1$success)
-  expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
-  # expect_match(returned_object1$status_messages, regexp="OK", perl=TRUE)
-  expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
-  expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
-  expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+# test_that("All Records -Default", {   
+#   testthat::skip_on_cran()
+#   path_expected <- "./inst/test_data/project_longitudinal/expected/default.rds"
+#   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+#   
+#   expect_message(
+#     returned_object1 <- redcap_read(redcap_uri=uri, token=token, verbose=T),
+#     regexp = expected_outcome_message
+#   )
+#   
+#   # saveRDS(returned_object1$data, file=path_expected, ascii=F)#, compress="xz")
+#   # dump("returned_object1$data", file=path_expected)
+#   expected_data_frame <- readRDS(path_expected)
+#   # expected_data_frame <- eval(parse(path_expected), enclos = new.env()) #dput(returned_object1$data, file=path_expected)
+#   expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # 
+#   
+#   expect_true(returned_object1$success)
+#   expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
+#   # expect_match(returned_object1$status_messages, regexp="OK", perl=TRUE)
+#   expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
+#   expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
+#   expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+# })
+test_that("SO example for data.frame retreival", {   
+  path_expected <- "./inst/test_data/project_longitudinal/expected/default.rds"
+  actual <- data.frame(a=1:5, b=6:10) #saveRDS(actual, file=path_expected)
+#   expected <- readRDS(path_expected)
+#   expect_equal(actual, expected, label="The returned data.frame should be correct")
 })
