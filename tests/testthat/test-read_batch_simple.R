@@ -120,12 +120,7 @@ test_that("All Records -Raw", {
     "race___6", "ethnicity", "race_and_ethnicity_complete"), class = "data.frame", row.names = c(NA, 
     -5L))
   expected_outcome_message <- "\\d+ records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
-  
-  expect_message(
-    returned_object <- redcap_read(redcap_uri=uri, token=token, raw_or_label="raw", verbose=T),
-    regexp = expected_outcome_message
-  )
-  
+
   ###########################
   ## Default Batch size
   expect_message(
