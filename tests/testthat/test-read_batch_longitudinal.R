@@ -47,7 +47,7 @@ test_that("All Records -Default", {
   # saveRDS(returned_object1$data, file.path("./inst", directory_relative, file_name), compress="xz")
   expected_data_frame <- readRDS(path_qualified)
   # expected_data_frame <- eval(parse(path_expected), enclos = new.env()) #dput(returned_object1$data, file=path_expected)
-  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct")
+  expect_equal(returned_object1$data, expected=expected_data_frame, info="The returned data.frame should be correct.")
   
   expect_true(returned_object1$success)
   expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
