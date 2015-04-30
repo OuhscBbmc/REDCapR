@@ -45,12 +45,12 @@ clear_project_simple <- function( verbose = TRUE ) {
   if( !requireNamespace("testthat", quietly=TRUE) ) stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.")
   pathDeleteTestRecord <- "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_simple.php"
   
-  cert_location <- system.file("ssl_certs/mozilla_ca_root.crt", package="REDCapR")
-  config_options <- list(cainfo=cert_location)#, sslversion=3)
+  # cert_location <- system.file("ssl_certs/mozilla_ca_root.crt", package="REDCapR")
+  # config_options <- list(cainfo=cert_location, sslversion=3)
   # httr::url_ok(pathDeleteTestRecord)
   
   #Returns a boolean value if successful
-  (was_successful <- httr::url_success(url=pathDeleteTestRecord, config=config_options))
+  (was_successful <- httr::url_success(url=pathDeleteTestRecord))#, config=config_options))
   
   #Print a message and return a boolean value
   if( verbose ) 
