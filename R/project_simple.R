@@ -46,7 +46,7 @@ clear_project_simple <- function( verbose = TRUE ) {
   pathDeleteTestRecord <- "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_simple.php"
   
   cert_location <- system.file("ssl_certs/mozilla_ca_root.crt", package="REDCapR")
-  config_options <- list(cainfo=cert_location, sslversion=3)
+  config_options <- list(cainfo=cert_location)#, sslversion=3)
   # httr::url_ok(pathDeleteTestRecord)
   
   #Returns a boolean value if successful
