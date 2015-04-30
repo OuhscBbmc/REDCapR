@@ -1,7 +1,7 @@
 <!-- rmarkdown v1 -->
 Travis-CI on Ubuntu 12.04 LTS:  [![Build Status](https://travis-ci.org/OuhscBbmc/REDCapR.svg?branch=master)](https://travis-ci.org/OuhscBbmc/REDCapR); AppVeyor on Windows Server 2012: [![Build status](https://ci.appveyor.com/api/projects/status/0i41tn0n2jo4pd2k/branch/master?svg=true)](https://ci.appveyor.com/project/wibeasley/redcapr/branch/master).
 
-Independently-hosted Archive: [![DOI](https://zenodo.org/badge/4971/OuhscBbmc/REDCapR.svg)](http://dx.doi.org/10.5281/zenodo.13326)
+Independently-hosted Archive: [![DOI](https://zenodo.org/badge/4971/OuhscBbmc/REDCapR.svg)](http://dx.doi.org/10.5281/zenodo.13326).  Coveralls: [![Coverage Status](https://coveralls.io/repos/OuhscBbmc/REDCapR/badge.svg)](https://coveralls.io/r/OuhscBbmc/REDCapR).
 
 
 REDCapR
@@ -68,6 +68,9 @@ If installing on Linux, the default R CHECK command will try (and fail) to insta
 ```r
 devtools::check(force_suggests = FALSE)
 ```
+
+### Collaborative Development
+We encourage input and collaboration from the overall community.  If you're familar with GitHub and R packages, feel free to submit a [pull request](https://github.com/OuhscBbmc/REDCapR/pulls).  If you'd like to report a bug or make a suggestion, please create a GitHub [issue](https://github.com/OuhscBbmc/REDCapR/issues); issues are a usually a good place to ask public questions too.  However, feel free to email Andrey or Will (<andkov@uvic.ca> or <wibeasley@hotmail.com>).
 
 ### Thanks to Funders
 *OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting ([MIECHV](http://mchb.hrsa.gov/programs/homevisiting/)) Project.*: Evaluates MIECHV expansion and enhancement of Evidence-based Home Visitation programs in four Oklahoma counties. [HRSA/ACF D89MC23154](https://perf-data.hrsa.gov/mchb/DGISReports/Abstract/AbstractDetails.aspx?Source=TVIS&GrantNo=D89MC23154&FY=2012).  
