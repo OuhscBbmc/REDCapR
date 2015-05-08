@@ -10,72 +10,41 @@ retrieve_token_mssql(dsn, project_name, channel = NULL,
   variable_name_project = "@RedcapProjectName", field_name_token = "Token")
 }
 \arguments{
-  \item{dsn}{A
-  \href{http://en.wikipedia.org/wiki/Data_source_name}{DSN}
-  on the local machine that points to the desired MSSQL
-  database. Required.}
+\item{dsn}{A \href{http://en.wikipedia.org/wiki/Data_source_name}{DSN} on the local machine that points to the desired MSSQL database. Required.}
 
-  \item{project_name}{The friendly/shortened name given to
-  the REDCap project in the MSSQL table.  Notice this isn't
-  necessarily the same name used by REDCap. Required}
+\item{project_name}{The friendly/shortened name given to the REDCap project in the MSSQL table.  Notice this isn't necessarily the same name used by REDCap. Required}
 
-  \item{channel}{An \emph{optional} connection handle as
-  returned by \code{RODBC::odbcConnect}.  See Details
-  below. Optional.}
+\item{channel}{An \emph{optional} connection handle as returned by \code{RODBC::odbcConnect}.  See Details below. Optional.}
 
-  \item{schema_name}{The schema used within the database.
-  Note that MSSQL uses the more conventional definition of
-  \href{http://en.wikipedia.org/wiki/Database_schema}{schema}
-  than MySQL.  Defaults to \code{'[Redcap]'}. Optional.}
+\item{schema_name}{The schema used within the database.  Note that MSSQL uses the more conventional definition of \href{http://en.wikipedia.org/wiki/Database_schema}{schema} than MySQL.  Defaults to \code{'[Redcap]'}. Optional.}
 
-  \item{procedure_name}{The stored procedure called to
-  retrieve the token. Defaults to \code{'[prcToken]'}.
-  Optional.}
+\item{procedure_name}{The stored procedure called to retrieve the token. Defaults to \code{'[prcToken]'}.  Optional.}
 
-  \item{variable_name_project}{The variable declared within
-  the stored procedure that contains the desired project
-  name.  Optional.}
+\item{variable_name_project}{The variable declared within the stored procedure that contains the desired project name.  Optional.}
 
-  \item{field_name_token}{The field/column/variable name in
-  the database table containing the token values.  Defaults
-  to \code{'Token'}.  Optional.}
+\item{field_name_token}{The field/column/variable name in the database table containing the token values.  Defaults to \code{'Token'}.  Optional.}
 }
 \value{
 The token, which is a 32 character string.
 }
 \description{
-These functions are not essential to calling the REDCap
-API, but instead are functions that help manage tokens
-securely.
+These functions are not essential to calling the REDCap API, but instead are functions that help manage tokens securely.
 }
 \details{
-If no \code{channel} is passed, one will be created at the
-beginning of the function, and destroyed at the end.
-However if a channel is created, it's the caller's
-responsibility to destroy this resource.  If you're making
-successive calls to the database, it might be quicker to
-create a single \code{channel} object and batch the calls
-together.  Otherwise, the performance should be equivalent.
+If no \code{channel} is passed, one will be created at the beginning of the function, and destroyed at the end.  However if a channel
+is created, it's the caller's responsibility to destroy this resource.  If you're making successive calls to the database, it might
+be quicker to create a single \code{channel} object and batch the calls together.  Otherwise, the performance should be equivalent.
 
-If you create the \code{channel} object yourself, consider
-wrapping calls in a \code{base::tryCatch} block, and
-closing the channel in its \code{finally} expression; this
-helps ensure the expensive database resource isn't held
-open unnecessarily.  See the internals of
-\code{retrieve_token_mssql} for an example of closing the
-\code{channel} in a \code{tryCatch} block.
+If you create the \code{channel} object yourself, consider wrapping calls in a \code{base::tryCatch} block, and closing the channel in
+its \code{finally} expression; this helps ensure the expensive database resource isn't held open unnecessarily.  See the internals of
+\code{retrieve_token_mssql} for an example of closing the \code{channel} in a \code{tryCatch} block.
 
-If the database elements are create with the script
-provided in package's `Security Database' vignette, the
-default values will work.
+If the database elements are create with the script provided in package's `Security Database' vignette, the default values will work.
 }
 \note{
-We use Microsoft SQL Server, because that fits our
-University's infrastructure the easiest.  But this approach
-theoretically can work with any LDAP-enabled database
-server.  Please contact us if your institution is using
-something other than SQL Server, and would like help
-adapting this approach to your infrastructure.
+We use Microsoft SQL Server, because that fits our University's infrastructure the easiest.  But this approach theoretically can work
+with any LDAP-enabled database server.  Please contact us if your institution is using something other than SQL Server, and would like help adapting this approach to
+your infrastructure.
 }
 \examples{
 \dontrun{

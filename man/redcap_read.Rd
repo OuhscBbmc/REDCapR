@@ -12,117 +12,70 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
   id_position = 1L)
 }
 \arguments{
-  \item{batch_size}{The maximum number of subject records a
-  single batch should contain.  The default is 100.}
+\item{batch_size}{The maximum number of subject records a single batch should contain.  The default is 100.}
 
-  \item{interbatch_delay}{The number of seconds the
-  function will wait before requesting a new subset from
-  REDCap. The default is 0.5 seconds.}
+\item{interbatch_delay}{The number of seconds the function will wait before requesting a new subset from REDCap. The default is 0.5 seconds.}
 
-  \item{continue_on_error}{If an error occurs while
-  reading, should records in subsequent batches be
-  attempted.  The default is \code{FALSE}, which prevents
-  subsequent batches from running.  Required.}
+\item{continue_on_error}{If an error occurs while reading, should records in subsequent batches be attempted.  The default is \code{FALSE}, which prevents subsequent batches from running.  Required.}
 
-  \item{redcap_uri}{The URI (uniform resource identifier)
-  of the REDCap project.  Required.}
+\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap project.  Required.}
 
-  \item{token}{The user-specific string that serves as the
-  password for a project.  Required.}
+\item{token}{The user-specific string that serves as the password for a project.  Required.}
 
-  \item{records}{An array, where each element corresponds
-  to the ID of a desired record.  Optional.}
+\item{records}{An array, where each element corresponds to the ID of a desired record.  Optional.}
 
-  \item{records_collapsed}{A single string, where the
-  desired ID values are separated by commas.  Optional.}
+\item{records_collapsed}{A single string, where the desired ID values are separated by commas.  Optional.}
 
-  \item{fields}{An array, where each element corresponds a
-  desired project field.  Optional.}
+\item{fields}{An array, where each element corresponds a desired project field.  Optional.}
 
-  \item{fields_collapsed}{A single string, where the
-  desired field names are separated by commas.  Optional.}
+\item{fields_collapsed}{A single string, where the desired field names are separated by commas.  Optional.}
 
-  \item{events}{An array, where each element corresponds a
-  desired project event Optional.}
+\item{events}{An array, where each element corresponds a desired project event  Optional.}
 
-  \item{events_collapsed}{A single string, where the
-  desired event names are separated by commas.  Optional.}
+\item{events_collapsed}{A single string, where the desired event names are separated by commas.  Optional.}
 
-  \item{export_data_access_groups}{A boolean value that
-  specifies whether or not to export the
-  ``redcap_data_access_group'' field when data access
-  groups are utilized in the project. Default is
-  \code{FALSE}. See the details below.}
+\item{export_data_access_groups}{A boolean value that specifies whether or not to export the ``redcap_data_access_group'' field when data access groups are utilized in the project. Default is \code{FALSE}. See the details below.}
 
-  \item{raw_or_label}{A string (either \code{'raw'} or
-  \code{'label'} that specifies whether to export the raw
-  coded values or the labels for the options of multiple
-  choice fields.  Default is \code{'raw'}.}
+\item{raw_or_label}{A string (either \code{'raw'} or \code{'label'} that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is \code{'raw'}.}
 
-  \item{verbose}{A boolean value indicating if
-  \code{message}s should be printed to the R console during
-  the operation.  The verbose output might contain
-  sensitive information (\emph{e.g.} PHI), so turn this off
-  if the output might be visible somewhere public.
-  Optional.}
+\item{verbose}{A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.}
 
-  \item{config_options}{A list of options to pass to
-  \code{POST} method in the \code{httr} package.  See the
-  details in \code{redcap_read_oneshot()} Optional.}
+\item{config_options}{A list of options to pass to \code{POST} method in the \code{httr} package.  See the details in \code{redcap_read_oneshot()} Optional.}
 
-  \item{id_position}{The column position of the variable
-  that unique identifies the subject.  This defaults to the
-  first variable in the dataset.}
+\item{id_position}{The column position of the variable that unique identifies the subject.  This defaults to the first variable in the dataset.}
 }
 \value{
 Currently, a list is returned with the following elements,
-\enumerate{ \item \code{data}: An R \code{data.frame} of
-the desired records and columns.  \item \code{success}: A
-boolean value indicating if the operation was apparently
-successful.  \item \code{status_codes}: A collection of
-\href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http
-status codes}, separated by semicolons.  There is one code
-for each batch attempted.  \item \code{outcome_messages}: A
-collection of human readable strings indicating the
-operations' semicolons.  There is one code for each batch
-attempted.  In an unsuccessful operation, it should contain
-diagnostic information.  \item \code{records_collapsed}:
-The desired records IDs, collapsed into a single string,
-separated by commas.  \item \code{fields_collapsed}: The
-desired field names, collapsed into a single string,
-separated by commas.  \item \code{elapsed_seconds}: The
-duration of the function. }
+\enumerate{
+ \item \code{data}: An R \code{data.frame} of the desired records and columns.
+ \item \code{success}: A boolean value indicating if the operation was apparently successful.
+ \item \code{status_codes}: A collection of \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes}, separated by semicolons.  There is one code for each batch attempted.
+ \item \code{outcome_messages}: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.
+ \item \code{records_collapsed}: The desired records IDs, collapsed into a single string, separated by commas.
+ \item \code{fields_collapsed}: The desired field names, collapsed into a single string, separated by commas.
+ \item \code{elapsed_seconds}: The duration of the function.
+}
 }
 \description{
-From an external perspective, this function is similar to
-\code{\link{redcap_read_oneshot}}.  The internals differ in
-that \code{redcap_read} retrieves subsets of the data, and
-then combines them before returning (among other objects) a
-single \code{data.frame}.  This function can be more
-appropriate than \code{\link{redcap_read_oneshot}} when
-returning large datasets that could tie up the server.
+From an external perspective, this function is similar to \code{\link{redcap_read_oneshot}}.  The internals
+differ in that \code{redcap_read} retrieves subsets of the data, and then combines them before returning
+(among other objects) a single \code{data.frame}.  This function can be more appropriate than
+\code{\link{redcap_read_oneshot}} when returning large datasets that could tie up the server.
 }
 \details{
-Specifically, it internally uses multiple calls to
-\code{\link{redcap_read_oneshot}} to select and return
-data. Initially, only primary key is queried through the
-REDCap API.  The long list is then subsetted into
-partitions, whose sizes are determined by the
-\code{batch_size} parameter.  REDCap is then queried for
-all variables of the subset's subjects.  This is repeated
-for each subset, before returning a unified
-\code{data.frame}.
+Specifically, it internally uses multiple calls to \code{\link{redcap_read_oneshot}} to select and return data.
+Initially, only primary key is queried through the REDCap API.  The long list is then subsetted into partitions,
+whose sizes are determined by the \code{batch_size} parameter.  REDCap is then queried for all variables of
+the subset's subjects.  This is repeated for each subset, before returning a unified \code{data.frame}.
 
-The function allows a delay between calls, which allows the
-server to attend to other users' requests.
+The function allows a delay between calls, which allows the server to attend to other users' requests.
 
-For \code{redcap_read} to function properly, the user must
-have Export permissions for the `Full Data Set'.  To grant
-the appropriate permissions: \enumerate{ \item go to `User
-Rights' in the REDCap project site, \item select the
-desired user, and then select `Edit User Privileges', \item
-in the `Data Exports' radio buttons, select `Full Data
-Set'. }
+For \code{redcap_read} to function properly, the user must have Export permissions for the `Full Data Set'.  To grant the appropriate permissions:
+\enumerate{
+ \item go to `User Rights' in the REDCap project site,
+ \item select the desired user, and then select `Edit User Privileges',
+ \item in the `Data Exports' radio buttons, select `Full Data Set'.
+}
 }
 \examples{
 \dontrun{
@@ -136,16 +89,11 @@ redcap_read(batch_size=2, redcap_uri=uri, token=token)
 Will Beasley
 }
 \references{
-The official documentation can be found on the REDCap wiki
-(\url{https://iwg.devguard.com/trac/redcap/wiki/ApiDocumentation}).
-Also see the `API Examples' page on the REDCap wiki
-(\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}).
-A user account is required to access the wiki, which
-typically is granted only to REDCap administrators. If you
-do not
+The official documentation can be found on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiDocumentation}).
+Also see the `API Examples' page on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}).
+A user account is required to access the wiki, which typically is granted only to REDCap administrators.
+If you do not
 
-The official \href{http://curl.haxx.se}{cURL site}
-discusses the process of using SSL to verify the server
-being connected to.
+The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.
 }
 
