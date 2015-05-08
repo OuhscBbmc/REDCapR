@@ -6,6 +6,5 @@ apt_packages:
  - r-cran-rodbc
 r_github_packages:
   - jimhester/covr
-  - Rexamine/stringi
 after_success:
   - Rscript -e 'library(covr);coveralls()'
