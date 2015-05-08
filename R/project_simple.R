@@ -58,19 +58,22 @@ clear_project_simple <- function( verbose = TRUE ) {
   return( was_successful )
 }
 
-clean_start_simple <- function( batch = FALSE ) {
+clean_start_simple <- function( batch = FALSE, delay_in_seconds = 1 ) {
   if( !requireNamespace("testthat", quietly=TRUE) ) stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.")
   testthat::expect_message(
     clear_result <- clear_project_simple(),
     regexp = "clear_project_simple success: TRUE."   
   )
   testthat::expect_true(clear_result, "Clearing the results from the simple project should be successful.")
+  base::Sys.sleep(delay_in_seconds) #Pause after deleting records.
   
   testthat::expect_message(
     populate_result <- populate_project_simple(batch=batch),
     regexp = "populate_project_simple success: TRUE."    
   )
   testthat::expect_true(populate_result$is_success, "Population the the simple project should be successful.")
+  base::Sys.sleep(delay_in_seconds) #Pause after writing records.
+  
   return( populate_result )
 }
 

@@ -1,8 +1,8 @@
 ## ----set_options, echo=FALSE, results='hide'--------------------------------------------------------------------------
 library(knitr)
 opts_chunk$set(
-    comment=NA, 
-    tidy=FALSE
+    comment = NA, 
+    tidy    = FALSE
 )
 # options(markdown.HTML.header = system.file("misc", "vignette.css", package = "knitr"))
 # options(markdown.HTML.header = system.file("misc", "vignette.css", package = "REDCapR"))
@@ -25,15 +25,15 @@ ds_all_rows_all_fields #Inspect the returned dataset
 desired_records_v1 <- c(1, 3)
 ds_some_rows_v1 <- redcap_read(
    redcap_uri = uri, 
-   token = token, 
-   records = desired_records_v1
+   token      = token, 
+   records    = desired_records_v1
 )$data
 
 #Return only records with IDs of 1 and 3 (alternate way)
 desired_records_v2 <- "1, 3"
 ds_some_rows_v2 <- redcap_read(
-   redcap_uri = uri, 
-   token = token, 
+   redcap_uri        = uri, 
+   token             = token, 
    records_collapsed = desired_records_v2
 )$data
 
@@ -44,15 +44,15 @@ ds_some_rows_v2 #Inspect the returned dataset
 desired_fields_v1 <- c("record_id", "name_first", "age")
 ds_some_fields_v1 <- redcap_read(
    redcap_uri = uri, 
-   token = token, 
-   fields = desired_fields_v1
+   token      = token, 
+   fields     = desired_fields_v1
 )$data
 
 #Return only the fields record_id, name_first, and age (alternate way)
 desired_fields_v2 <- "record_id, name_first, age"
 ds_some_fields_v2 <- redcap_read(
-   redcap_uri = uri, 
-   token = token, 
+   redcap_uri       = uri, 
+   token            = token, 
    fields_collapsed = desired_fields_v2
 )$data
 
@@ -64,8 +64,8 @@ ds_some_fields_v2 #Inspect the returned dataset
 desired_fields_v3 <- c("record_id", "dob", "weight")
 ds_some_fields_v3 <- redcap_read(
    redcap_uri = uri, 
-   token = token, 
-   fields = desired_fields_v3
+   token      = token, 
+   fields     = desired_fields_v3
 )$data
 
 ds_some_fields_v3 #Examine the these three variables.
@@ -83,8 +83,8 @@ desired_records_v3 #Peek at IDs of the identified records
 #Return only records that met the age & weight criteria.
 ds_some_rows_v3 <- redcap_read(
    redcap_uri = uri, 
-   token = token, 
-   records = desired_records_v3
+   token      = token, 
+   records    = desired_records_v3
 )$data
 
 ds_some_rows_v3 #Examine the results.
@@ -93,8 +93,8 @@ ds_some_rows_v3 #Examine the results.
 #Return only the fields record_id, name_first, and age
 all_information <- redcap_read(
    redcap_uri = uri, 
-   token = token, 
-   fields = desired_fields_v1
+   token      = token, 
+   fields     = desired_fields_v1
 )
 all_information #Inspect the additional information
 

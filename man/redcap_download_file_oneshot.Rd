@@ -9,77 +9,50 @@ redcap_download_file_oneshot(file_name = NULL, directory = NULL,
   verbose = TRUE, config_options = NULL)
 }
 \arguments{
-  \item{file_name}{The name of the file where the
-  downloaded file is saved. If empty the original name of
-  the file will be used and saved in the default directory.
-  Optional.}
+\item{file_name}{The name of the file where the downloaded file is saved.
+If empty the original name of the file will be used and saved in
+the default directory.  Optional.}
 
-  \item{directory}{The directory where the file is saved.
-  By default current directory. Optional}
+\item{directory}{The directory where the file is saved. By default current directory. Optional}
 
-  \item{overwrite}{Boolean value indicating if existing
-  files should be overwritten. Optional}
+\item{overwrite}{Boolean value indicating if existing files should be overwritten. Optional}
 
-  \item{redcap_uri}{The URI (uniform resource identifier)
-  of the REDCap project.  Required.}
+\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap project.  Required.}
 
-  \item{token}{The user-specific string that serves as the
-  password for a project.  Required.}
+\item{token}{The user-specific string that serves as the password for a project.  Required.}
 
-  \item{record}{The record ID where the file is to be
-  imported. Required}
+\item{record}{The record ID where the file is to be imported. Required}
 
-  \item{field}{The name of the field where the file is
-  saved in REDCap. Required}
+\item{field}{The name of the field where the file is saved in REDCap. Required}
 
-  \item{event}{The name of the event where the file is
-  saved in REDCap. Optional}
+\item{event}{The name of the event where the file is saved in REDCap. Optional}
 
-  \item{verbose}{A boolean value indicating if
-  \code{message}s should be printed to the R console during
-  the operation.  Optional.}
+\item{verbose}{A boolean value indicating if \code{message}s should be printed to the R console during the operation.  Optional.}
 
-  \item{config_options}{A list of options to pass to
-  \code{POST} method in the \code{httr} package.  See the
-  details below. Optional.}
+\item{config_options}{A list of options to pass to \code{POST} method in the \code{httr} package.  See the details below. Optional.}
 }
 \value{
 Currently, a list is returned with the following elements,
-\enumerate{ \item \code{success}: A boolean value
-indicating if the operation was apparently successful.
-\item \code{status_code}: The
-\href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http
-status code} of the operation.  \item
-\code{outcome_message}: A human readable string indicating
-the operation's outcome.  \item
-\code{records_affected_count}: The number of records
-inserted or updated.  \item \code{affected_ids}: The
-subject IDs of the inserted or updated records.  \item
-\code{elapsed_seconds}: The duration of the function.
-\item \code{raw_text}: If an operation is NOT successful,
-the text returned by REDCap.  If an operation is
-successful, the `raw_text` is returned as an empty string
-to save RAM.  \item \code{file_name}: The name of the file
-persisted to disk. This is useful if the name stored in
-REDCap is used (which is the default). }
+\enumerate{
+ \item \code{success}: A boolean value indicating if the operation was apparently successful.
+ \item \code{status_code}: The \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code} of the operation.
+ \item \code{outcome_message}: A human readable string indicating the operation's outcome.
+ \item \code{records_affected_count}: The number of records inserted or updated.
+ \item \code{affected_ids}: The subject IDs of the inserted or updated records.
+ \item \code{elapsed_seconds}: The duration of the function.
+ \item \code{raw_text}: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
+ \item \code{file_name}: The name of the file persisted to disk. This is useful if the name stored in REDCap is used (which is the default).
+}
 }
 \description{
-This function uses REDCap's
-\href{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}{API}
+This function uses REDCap's \href{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}{API}
 to download a file
 }
 \details{
-The `REDCapR' package includes a recent version of the
-\href{http://curl.haxx.se/ca/cacert.pem}{Bundle of CA Root
-Certificates} from the official
-\href{http://curl.haxx.se}{cURL site}.  This version is
-used by default, unless the `cert_location` parameter is
-given another location.
+The `REDCapR' package includes a recent version of the \href{http://curl.haxx.se/ca/cacert.pem}{Bundle of CA Root Certificates}
+from the official \href{http://curl.haxx.se}{cURL site}.  This version is used by default, unless the `cert_location` parameter is given another location.
 
-Currently, the function doesn't modify any variable types
-to conform to REDCap's supported variables.  See
-\code{\link{validate_for_write}} for a helper function that
-checks for some common important conflicts.
+Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See \code{\link{validate_for_write}} for a helper function that checks for some common important conflicts.
 }
 \examples{
 \dontrun{
@@ -110,13 +83,8 @@ Will Beasley
 John J. Aponte
 }
 \references{
-The official documentation can be found on the `API
-Examples' page on the REDCap wiki
-(\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}).
-A user account is required.
+The official documentation can be found on the `API Examples' page on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}). A user account is required.
 
-The official \href{http://curl.haxx.se}{cURL site}
-discusses the process of using SSL to verify the server
-being connected to.
+The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.
 }
 

@@ -85,10 +85,10 @@ checkbox_choices <- function( select_choices ) {
 # regex_named_captures(pattern=pattern_checkboxes, text=choices_1)
 # 
 # regmatches(choices, regexpr("(?<=\\A| \\| )(?<id>\\d{1,}), (?<label>[\\w ]{1,})(?= \\| |\\Z)", choices, perl=TRUE));
-choices_1 <- paste0(
-  "1, American Indian/Alaska Native | ", 
-  "2, Asian | ",
-  "3, Native Hawaiian or Other Pacific Islander | ",
-  "4, Black or African American | ",
-  "5, White | ",
-  "6, Unknown / Not Reported")
+# choices_1 <- paste0(
+#   "1, American Indian/Alaska Native | ", 
+#   "2, Asian | ",
+#   "3, Native Hawaiian or Other Pacific Islander | ",
+#   "4, Black or African American | ",
+#   "5, White | ",
+#   "6, Unknown / Not Reported")
