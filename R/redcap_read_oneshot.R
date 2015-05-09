@@ -141,19 +141,6 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
     config_options <- list(cainfo=cert_location)
   }
       
-  #curl_options <- RCurl::curlOptions(cainfo=cert_location, sslversion=3)
-  # raw_text <- RCurl::postForm(
-  #   uri = redcap_uri
-  #   , token = token
-  #   , content = 'record'
-  #   , format = 'csv'
-  #   , type = 'flat'
-  #   , rawOrLabel = raw_or_label
-  #   , exportDataAccessGroups = export_data_access_groups_string
-  #   , records = records_collapsed
-  #   , fields = fields_collapsed
-  #   , .opts = curl_options
-  # )
   post_body <- list(
     token = token,
     content = 'record',
@@ -188,7 +175,7 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
     )
     
-    if( exists("ds") ) {
+    if( exists("ds") & (class(ds)=="data.frame") ) {
       outcome_message <- paste0(format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
                          " records and ",  
                          format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
