@@ -169,7 +169,6 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
   if( success ) {
     try (
       {
-        #browser();
         ds <- read.csv(text=raw_text, stringsAsFactors=FALSE)
       }, #Convert the raw text to a dataset.
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
@@ -183,6 +182,8 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
                          round(elapsed_seconds, 1), " seconds.  The http status code was ",
                          status_code, ".")
     } else {
+      success <- FALSE #Override the 'success' determination from the http status code.
+      ds <- data.frame() #Return an empty data.frame
       outcome_message <- paste0("The REDCap read failed.  The http status code was ", status_code, ".  The 'raw_text' returned was '", raw_text, "'.")
     }
     
