@@ -1,352 +1,236 @@
 <!DOCTYPE html>
-<html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="date" content="2015-05-09" />
 
 <title>Security Database</title>
 
-<script type="text/javascript">
-window.onload = function() {
-  var imgs = document.getElementsByTagName('img'), i, img;
-  for (i = 0; i < imgs.length; i++) {
-    img = imgs[i];
-    // center an image if it is the only element of its parent
-    if (img.parentElement.childElementCount === 1)
-      img.parentElement.style.textAlign = 'center';
-  }
-};
-</script>
 
 
-
-
-
+<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-body, td {
-   font-family: sans-serif;
-   background-color: white;
-   font-size: 13px;
-}
-
-body {
-  max-width: 800px;
-  margin: auto;
-  padding: 1em;
-  line-height: 20px;
-}
-
-tt, code, pre {
-   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
-}
-
-h1 {
-   font-size:2.2em;
-}
-
-h2 {
-   font-size:1.8em;
-}
-
-h3 {
-   font-size:1.4em;
-}
-
-h4 {
-   font-size:1.0em;
-}
-
-h5 {
-   font-size:0.9em;
-}
-
-h6 {
-   font-size:0.8em;
-}
-
-a:visited {
-   color: rgb(50%, 0%, 50%);
-}
-
-pre, img {
-  max-width: 100%;
-}
-pre {
-  overflow-x: auto;
-}
-pre code {
-   display: block; padding: 0.5em;
-}
-
-code {
-  font-size: 92%;
-  border: 1px solid #ccc;
-}
-
-code[class] {
-  background-color: #F8F8F8;
-}
-
-table, td, th {
-  border: none;
-}
-
-blockquote {
-   color:#666666;
-   margin:0;
-   padding-left: 1em;
-   border-left: 0.5em #EEE solid;
-}
-
-hr {
-   height: 0px;
-   border-bottom: none;
-   border-top-width: thin;
-   border-top-style: dotted;
-   border-top-color: #999999;
-}
-
-@media print {
-   * {
-      background: transparent !important;
-      color: black !important;
-      filter:none !important;
-      -ms-filter: none !important;
-   }
-
-   body {
-      font-size:12pt;
-      max-width:100%;
-   }
-
-   a, a:visited {
-      text-decoration: underline;
-   }
-
-   hr {
-      visibility: hidden;
-      page-break-before: always;
-   }
-
-   pre, blockquote {
-      padding-right: 1em;
-      page-break-inside: avoid;
-   }
-
-   tr, img {
-      page-break-inside: avoid;
-   }
-
-   img {
-      max-width: 100% !important;
-   }
-
-   @page :left {
-      margin: 15mm 20mm 15mm 10mm;
-   }
-
-   @page :right {
-      margin: 15mm 10mm 15mm 20mm;
-   }
-
-   p, h2, h3 {
-      orphans: 3; widows: 3;
-   }
-
-   h2, h3 {
-      page-break-after: avoid;
-   }
-}
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
 </style>
 
 
+<link href="data:text/css,body%20%7B%0A%20%20background%2Dcolor%3A%20%23fff%3B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20max%2Dwidth%3A%20700px%3B%0A%20%20overflow%3A%20visible%3B%0A%20%20padding%2Dleft%3A%202em%3B%0A%20%20padding%2Dright%3A%202em%3B%0A%20%20font%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014px%3B%0A%20%20line%2Dheight%3A%201%2E35%3B%0A%7D%0A%0A%23header%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0A%23TOC%20%7B%0A%20%20clear%3A%20both%3B%0A%20%20margin%3A%200%200%2010px%2010px%3B%0A%20%20padding%3A%204px%3B%0A%20%20width%3A%20400px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20border%2Dradius%3A%205px%3B%0A%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20font%2Dsize%3A%2013px%3B%0A%20%20line%2Dheight%3A%201%2E3%3B%0A%7D%0A%20%20%23TOC%20%2Etoctitle%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%20%20font%2Dsize%3A%2015px%3B%0A%20%20%20%20margin%2Dleft%3A%205px%3B%0A%20%20%7D%0A%0A%20%20%23TOC%20ul%20%7B%0A%20%20%20%20padding%2Dleft%3A%2040px%3B%0A%20%20%20%20margin%2Dleft%3A%20%2D1%2E5em%3B%0A%20%20%20%20margin%2Dtop%3A%205px%3B%0A%20%20%20%20margin%2Dbottom%3A%205px%3B%0A%20%20%7D%0A%20%20%23TOC%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dleft%3A%20%2D2em%3B%0A%20%20%7D%0A%20%20%23TOC%20li%20%7B%0A%20%20%20%20line%2Dheight%3A%2016px%3B%0A%20%20%7D%0A%0Atable%20%7B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dcolor%3A%20%23DDDDDD%3B%0A%20%20border%2Dstyle%3A%20outset%3B%0A%20%20border%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20padding%3A%205px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%20%20line%2Dheight%3A%2018px%3B%0A%20%20padding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0A%20%20border%2Dleft%2Dstyle%3A%20none%3B%0A%20%20border%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Ap%20%7B%0A%20%20margin%3A%200%2E5em%200%3B%0A%7D%0A%0Ablockquote%20%7B%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20padding%3A%200%2E25em%200%2E75em%3B%0A%7D%0A%0Ahr%20%7B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%3A%20none%3B%0A%20%20border%2Dtop%3A%201px%20solid%20%23777%3B%0A%20%20margin%3A%2028px%200%3B%0A%7D%0A%0Adl%20%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%7D%0A%20%20dl%20dd%20%7B%0A%20%20%20%20margin%2Dbottom%3A%2013px%3B%0A%20%20%20%20margin%2Dleft%3A%2013px%3B%0A%20%20%7D%0A%20%20dl%20dt%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%7D%0A%0Aul%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%7D%0A%20%20ul%20li%20%7B%0A%20%20%20%20list%2Dstyle%3A%20circle%20outside%3B%0A%20%20%7D%0A%20%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dbottom%3A%200%3B%0A%20%20%7D%0A%0Apre%2C%20code%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20color%3A%20%23333%3B%0A%7D%0Apre%20%7B%0A%20%20white%2Dspace%3A%20pre%2Dwrap%3B%20%20%20%20%2F%2A%20Wrap%20long%20lines%20%2A%2F%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20margin%3A%205px%200px%2010px%200px%3B%0A%20%20padding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Acode%20%7B%0A%20%20font%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0A%20%20font%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0A%20%20padding%3A%202px%200px%3B%0A%7D%0A%0Adiv%2Efigure%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0A%20%20background%2Dcolor%3A%20%23FFFFFF%3B%0A%20%20padding%3A%202px%3B%0A%20%20border%3A%201px%20solid%20%23DDDDDD%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20margin%3A%200%205px%3B%0A%7D%0A%0Ah1%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20font%2Dsize%3A%2035px%3B%0A%20%20line%2Dheight%3A%2040px%3B%0A%7D%0A%0Ah2%20%7B%0A%20%20border%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20padding%2Dbottom%3A%202px%3B%0A%20%20font%2Dsize%3A%20145%25%3B%0A%7D%0A%0Ah3%20%7B%0A%20%20border%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20font%2Dsize%3A%20120%25%3B%0A%7D%0A%0Ah4%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0A%20%20margin%2Dleft%3A%208px%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Ah5%2C%20h6%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23ccc%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Aa%20%7B%0A%20%20color%3A%20%230033dd%3B%0A%20%20text%2Ddecoration%3A%20none%3B%0A%7D%0A%20%20a%3Ahover%20%7B%0A%20%20%20%20color%3A%20%236666ff%3B%20%7D%0A%20%20a%3Avisited%20%7B%0A%20%20%20%20color%3A%20%23800080%3B%20%7D%0A%20%20a%3Avisited%3Ahover%20%7B%0A%20%20%20%20color%3A%20%23BB00BB%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%0A%2F%2A%20Class%20described%20in%20https%3A%2F%2Fbenjeffrey%2Ecom%2Fposts%2Fpandoc%2Dsyntax%2Dhighlighting%2Dcss%0A%20%20%20Colours%20from%20https%3A%2F%2Fgist%2Egithub%2Ecom%2Frobsimmons%2F1172277%20%2A%2F%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Keyword%20%2A%2F%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%2F%2A%20DataType%20%2A%2F%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%2F%2A%20DecVal%20%28decimal%20values%29%20%2A%2F%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20BaseN%20%2A%2F%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Float%20%2A%2F%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Char%20%2A%2F%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20String%20%2A%2F%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%2F%2A%20Comment%20%2A%2F%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%2F%2A%20OtherToken%20%2A%2F%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20AlertToken%20%2A%2F%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Function%20calls%20%2A%2F%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%2F%2A%20ErrorTok%20%2A%2F%0A%0A" rel="stylesheet" type="text/css" />
 
 </head>
 
 <body>
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Security Database}
--->
 
-<h1>Security Database</h1>
 
+
+<div id="header">
+<h1 class="title">Security Database</h1>
+<h4 class="date"><em>2015-05-09</em></h4>
+</div>
+
+
+<div id="description" class="section level2">
 <h2>Description</h2>
-
-<p>The SQL code below adds schemas, a table and two stored procedures to an existing Microsoft SQL Database.  This second database is not essential to calling the REDCap API, but it helps manage tokens securely.</p>
-
-<p>This database contains the tokens and other sensitive content (such as passwords, API tokens, and file paths) that should not be stored in a Git repository (even a private Git repository).  These passwords can be retrieved by <code>REDCapR::retrieve_token_mssql()</code>.</p>
-
+<p>The SQL code below adds schemas, a table and two stored procedures to an existing Microsoft SQL Database. This second database is not essential to calling the REDCap API, but it helps manage tokens securely.</p>
+<p>This database contains the tokens and other sensitive content (such as passwords, API tokens, and file paths) that should not be stored in a Git repository (even a private Git repository). These passwords can be retrieved by <code>REDCapR::retrieve_token_mssql()</code>.</p>
+</div>
+<div id="create-a-dsn-on-each-client" class="section level2">
 <h2>Create a DSN on each client</h2>
-
-<p>After executing the SQL code in an existing database, create an ODBC <a href="http://en.wikipedia.org/wiki/Data_source_name">DSN</a> on <em>each</em> client machine that calls the database.  Download the most recent drivers (as of Sept 2014, the most recent version is 11 for <a href="http://www.microsoft.com/en-us/download/details.aspx?id=36434">Windows</a> and <a href="https://msdn.microsoft.com/library/hh568451(SQL.110">Linux</a>.aspx)., then run the wizard.  Many values in the wizard will remain at the default values.  Here are the important ones to change.</p>
-
-<ol>
-<li>Set the DSN&#39;s <code>name</code> field to whatever is used in the repository&#39;s R code.</li>
+<p>After executing the SQL code in an existing database, create an ODBC <a href="http://en.wikipedia.org/wiki/Data_source_name">DSN</a> on <em>each</em> client machine that calls the database. Download the most recent drivers (as of Sept 2014, the most recent version is 11 for <a href="http://www.microsoft.com/en-us/download/details.aspx?id=36434">Windows</a> and <a href="https://msdn.microsoft.com/library/hh568451(SQL.110).aspx">Linux</a>., then run the wizard. Many values in the wizard will remain at the default values. Here are the important ones to change.</p>
+<ol style="list-style-type: decimal">
+<li>Set the DSN’s <code>name</code> field to whatever is used in the repository’s R code.</li>
 <li>Set the authenticity method to <code>Integrated Windows authentication</code>.</li>
 <li>Set the <code>default database</code> to the name of the database that containing the tokens <em>i.e.</em>, corresponding to the SQL code below in the example).</li>
 </ol>
-
+</div>
+<div id="note" class="section level2">
 <h2>Note</h2>
-
-<p>We use Microsoft SQL Server, because that fits our University&#39;s infrastructure the easiest.  But this approach theoretically can work with any LDAP-enabled database server.  Please contact us if your institution is using something other than SQL Server, and would like help adapting this approach to your infrastructure.</p>
-
+<p>We use Microsoft SQL Server, because that fits our University’s infrastructure the easiest. But this approach theoretically can work with any LDAP-enabled database server. Please contact us if your institution is using something other than SQL Server, and would like help adapting this approach to your infrastructure.</p>
+</div>
+<div id="create-database" class="section level2">
 <h2>Create Database</h2>
-
 <p>This SQL code is run once inside an existing database to establish the schemas, table, and stored procedure used by <code>REDCapR::retrieve_token_mssql()</code>.</p>
+<pre class="sourceCode sql"><code class="sourceCode sql"><span class="co">------- SQL code to create necessary components in a Microsoft SQL Sever database -------</span>
 
-<pre><code class="SQL">------- SQL code to create necessary components in a Microsoft SQL Sever database -------
-
------------------------------------------------------------------------
--- Create two schemas.  
--- The first scehma is accessible by all REDCap API users. 
--- The second scehma is restricted to administrators.
---
-CREATE SCHEMA [Redcap]
-CREATE SCHEMA [RedcapPrivate]
+<span class="co">-----------------------------------------------------------------------</span>
+<span class="co">-- Create two schemas.  </span>
+<span class="co">-- The first scehma is accessible by all REDCap API users. </span>
+<span class="co">-- The second scehma is restricted to administrators.</span>
+<span class="co">--</span>
+<span class="kw">CREATE</span> <span class="kw">SCHEMA</span> [Redcap]
+<span class="kw">CREATE</span> <span class="kw">SCHEMA</span> [RedcapPrivate]
 GO
 
------------------------------------------------------------------------
--- Create a table to contain the token
---
-CREATE TABLE [RedcapPrivate].[tblToken](
-  [ID] [smallint] IDENTITY(1,1) NOT NULL,
-  [Username] [varchar](30) NOT NULL,
-  [RedcapProjectName] [varchar](90) NOT NULL,
-  [RedcapProjectID] [smallint] NOT NULL,
-  [Token] [char](32) NOT NULL,
- CONSTRAINT [PK_RedcapApiTokens] PRIMARY KEY CLUSTERED(
-  [ID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, 
-  ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
+<span class="co">-----------------------------------------------------------------------</span>
+<span class="co">-- Create a table to contain the token</span>
+<span class="co">--</span>
+<span class="kw">CREATE</span> <span class="kw">TABLE</span> [RedcapPrivate].[tblToken](
+  [<span class="kw">ID</span>] [<span class="dt">smallint</span>] IDENTITY(<span class="dv">1</span>,<span class="dv">1</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
+  [Username] [<span class="dt">varchar</span>](<span class="dv">30</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
+  [RedcapProjectName] [<span class="dt">varchar</span>](<span class="dv">90</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
+  [RedcapProjectID] [<span class="dt">smallint</span>] <span class="kw">NOT</span> <span class="kw">NULL</span>,
+  [Token] [<span class="dt">char</span>](<span class="dv">32</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
+ <span class="kw">CONSTRAINT</span> [PK_RedcapApiTokens] <span class="kw">PRIMARY</span> <span class="kw">KEY</span> CLUSTERED(
+  [<span class="kw">ID</span>] <span class="kw">ASC</span>
+)<span class="kw">WITH</span> (PAD_INDEX = <span class="kw">OFF</span>, STATISTICS_NORECOMPUTE = <span class="kw">OFF</span>, IGNORE_DUP_KEY = <span class="kw">OFF</span>, 
+  ALLOW_ROW_LOCKS = <span class="kw">ON</span>, ALLOW_PAGE_LOCKS = <span class="kw">ON</span>) <span class="kw">ON</span> [<span class="kw">PRIMARY</span>]
+) <span class="kw">ON</span> [<span class="kw">PRIMARY</span>]
 GO
 
-CREATE NONCLUSTERED INDEX [IX_tblToken_UniqueUsernameProjectID] ON [RedcapPrivate].[tblToken](
-  [Username] ASC,
-  [RedcapProjectID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, 
-  ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+<span class="kw">CREATE</span> NONCLUSTERED <span class="kw">INDEX</span> [IX_tblToken_UniqueUsernameProjectID] <span class="kw">ON</span> [RedcapPrivate].[tblToken](
+  [Username] <span class="kw">ASC</span>,
+  [RedcapProjectID] <span class="kw">ASC</span>
+)<span class="kw">WITH</span> (PAD_INDEX = <span class="kw">OFF</span>, STATISTICS_NORECOMPUTE = <span class="kw">OFF</span>, SORT_IN_TEMPDB = <span class="kw">OFF</span>, DROP_EXISTING = <span class="kw">OFF</span>, 
+  <span class="kw">ONLINE</span> = <span class="kw">OFF</span>, ALLOW_ROW_LOCKS = <span class="kw">ON</span>, ALLOW_PAGE_LOCKS = <span class="kw">ON</span>) <span class="kw">ON</span> [<span class="kw">PRIMARY</span>]
 
-CREATE NONCLUSTERED INDEX [IX_tblToken_UniqueUsernameProjectName] ON [RedcapPrivate].[tblToken](
-  [Username] ASC,
-  [RedcapProjectName] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, 
-  ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+<span class="kw">CREATE</span> NONCLUSTERED <span class="kw">INDEX</span> [IX_tblToken_UniqueUsernameProjectName] <span class="kw">ON</span> [RedcapPrivate].[tblToken](
+  [Username] <span class="kw">ASC</span>,
+  [RedcapProjectName] <span class="kw">ASC</span>
+)<span class="kw">WITH</span> (PAD_INDEX = <span class="kw">OFF</span>, STATISTICS_NORECOMPUTE = <span class="kw">OFF</span>, SORT_IN_TEMPDB = <span class="kw">OFF</span>, DROP_EXISTING = <span class="kw">OFF</span>, 
+  <span class="kw">ONLINE</span> = <span class="kw">OFF</span>, ALLOW_ROW_LOCKS = <span class="kw">ON</span>, ALLOW_PAGE_LOCKS = <span class="kw">ON</span>) <span class="kw">ON</span> [<span class="kw">PRIMARY</span>]
 GO
 
------------------------------------------------------------------------
--- Create a stored procedure for users to call to retrieve the token.
--- Notice it should a different (and more permissive) schema than the table.
---
-CREATE PROCEDURE [Redcap].[prcToken]
-  @RedcapProjectName varchar(30) -- Add the parameters for the stored procedure here
-AS
-BEGIN
-  -- SET NOCOUNT ON added to prevent extra result sets from interfering with SELECT statements.
-  SET NOCOUNT ON; 
+<span class="co">-----------------------------------------------------------------------</span>
+<span class="co">-- Create a stored procedure for users to call to retrieve the token.</span>
+<span class="co">-- Notice it should a different (and more permissive) schema than the table.</span>
+<span class="co">--</span>
+<span class="kw">CREATE</span> <span class="kw">PROCEDURE</span> [Redcap].[prcToken]
+  @RedcapProjectName <span class="dt">varchar</span>(<span class="dv">30</span>) <span class="co">-- Add the parameters for the stored procedure here</span>
+<span class="kw">AS</span>
+<span class="kw">BEGIN</span>
+  <span class="co">-- SET NOCOUNT ON added to prevent extra result sets from interfering with SELECT statements.</span>
+  <span class="kw">SET</span> NOCOUNT <span class="kw">ON</span>; 
 
-  SELECT Token FROM [RedcapPrivate].[tblToken]
-  WHERE Username=system_user AND RedcapProjectName=@RedcapProjectName
-END
-</code></pre>
-
-<h2>Add user&#39;s token to the auxiliary database</h2>
-
-<p>Add a user&#39;s LDAP account to the <code>SecurityAuxiliary</code> database so that they can query the tables to retrieve their API.</p>
-
-<p>Notice that this only gives the permissions to retrieve the token.  You must still:</p>
-
-<ol>
-<li>grant them API privileges to each appropriate REDCap project, and</li>
-<li>copy the API from the REDCap database into the  SecurityAuxiliary database.</li>
-</ol>
-
+  <span class="kw">SELECT</span> Token <span class="kw">FROM</span> [RedcapPrivate].[tblToken]
+  <span class="kw">WHERE</span> Username=system_user <span class="kw">AND</span> RedcapProjectName=@RedcapProjectName
+<span class="kw">END</span></code></pre>
+</div>
+<div id="add-users-token-to-the-auxiliary-database" class="section level2">
+<h2>Add user’s token to the auxiliary database</h2>
+<p>Add a user’s LDAP account to the <code>SecurityAuxiliary</code> database so that they can query the tables to retrieve their API.</p>
+<p>Notice that this only gives the permissions to retrieve the token. You must still: 1. grant them API privileges to each appropriate REDCap project, and 2. copy the API from the REDCap database into the SecurityAuxiliary database.</p>
 <p>In the future <code>REDCapR</code> may expose a function that allows the user to perform the second step (through a stored procedure).</p>
+<p>Also, do not give typical users authorization for the ‘RedcapPrivate’ schema. The current system allows the to view only their own tokens.</p>
+<pre class="sourceCode sql"><code class="sourceCode sql"><span class="co">-----------------------------------------------------------------------</span>
+<span class="co">-- Add a user's LDAP account to the `SecurityAuxiliary` database so that they can query the tables to retrieve their API.</span>
+<span class="co">-- Notice that this only gives the permissions to retrieve the token.  You must still:</span>
+<span class="co">--   1) grant them API privileges to each appropriate REDCap project, and</span>
+<span class="co">--   2) copy the API from the REDCap database into the  SecurityAuxiliary database.</span>
+<span class="co">-- Also, do not give typical users authorization for the 'RedcapPrivate' schema.  The current system allows the to view only their own tokens.</span>
+<span class="co">-----------------------------------------------------------------------</span>
 
-<p>Also, do not give typical users authorization for the &#39;RedcapPrivate&#39; schema.  The current system allows the to view only their own tokens.</p>
-
-<pre><code class="sql">-----------------------------------------------------------------------
--- Add a user&#39;s LDAP account to the `SecurityAuxiliary` database so that they can query the tables to retrieve their API.
--- Notice that this only gives the permissions to retrieve the token.  You must still:
---   1) grant them API privileges to each appropriate REDCap project, and
---   2) copy the API from the REDCap database into the  SecurityAuxiliary database.
--- Also, do not give typical users authorization for the &#39;RedcapPrivate&#39; schema.  The current system allows the to view only their own tokens.
------------------------------------------------------------------------
-
--- STEP #1: Declare the user name.  If everything runs correctly, this should be the only piece of code that you need to modify.
-print &#39;Step #1 executing....&#39; 
-USE [master]
+<span class="co">-- STEP #1: Declare the user name.  If everything runs correctly, this should be the only piece of code that you need to modify.</span>
+print <span class="st">'Step #1 executing....'</span> 
+<span class="kw">USE</span> [<span class="kw">master</span>]
 GO
-DECLARE @QualifiedUserName varchar(255); SET @QualifiedUserName = &#39;[OUHSC\lsuarez3]&#39;
-print &#39;Resulting login name: &#39; + @QualifiedUserName; print &#39;&#39; 
+<span class="kw">DECLARE</span> @QualifiedUserName <span class="dt">varchar</span>(<span class="dv">255</span>); <span class="kw">SET</span> @QualifiedUserName = <span class="st">'[OUHSC\lsuarez3]'</span>
+print <span class="st">'Resulting login name: '</span> + @QualifiedUserName; print <span class="st">''</span> 
 
---EXEC sp_helplogins @LoginNamePattern=@QualifiedUserName
---SELECT * FROM master..syslogins WHERE name = @QualifiedUserName
---SELECT * FROM SecurityAuxiliary.sys.sysusers 
---SELECT * FROM sys.database_permissions
---SELECT * FROM sys.server_principals
+<span class="co">--EXEC sp_helplogins @LoginNamePattern=@QualifiedUserName</span>
+<span class="co">--SELECT * FROM master..syslogins WHERE name = @QualifiedUserName</span>
+<span class="co">--SELECT * FROM SecurityAuxiliary.sys.sysusers </span>
+<span class="co">--SELECT * FROM sys.database_permissions</span>
+<span class="co">--SELECT * FROM sys.server_principals</span>
 
------------------------------------------------------------------------
--- STEP #2: Create a login for the *server*.
-print &#39;Step #2 executing....&#39; 
-DECLARE @sqlCreateLogin nvarchar(max)
-SET @sqlCreateLogin = &#39;CREATE LOGIN &#39; + @QualifiedUserName + &#39; FROM WINDOWS WITH DEFAULT_DATABASE=[SecurityAuxiliary]&#39;
-EXECUTE sp_executesql @sqlCreateLogin
-DECLARE @LoginCount AS INT; SET @LoginCount = (SELECT COUNT(*) AS LoginCount FROM master..syslogins WHERE &#39;[&#39; + loginname + &#39;]&#39; = @QualifiedUserName)
-print &#39;Logins matching desired name should equal 1.  It equals: &#39; + CONVERT(varchar, @LoginCount); print &#39;&#39; 
+<span class="co">-----------------------------------------------------------------------</span>
+<span class="co">-- STEP #2: Create a login for the *server*.</span>
+print <span class="st">'Step #2 executing....'</span> 
+<span class="kw">DECLARE</span> @sqlCreateLogin <span class="dt">nvarchar</span>(<span class="fu">max</span>)
+<span class="kw">SET</span> @sqlCreateLogin = <span class="st">'CREATE LOGIN '</span> + @QualifiedUserName + <span class="st">' FROM WINDOWS WITH DEFAULT_DATABASE=[SecurityAuxiliary]'</span>
+<span class="kw">EXECUTE</span> sp_executesql @sqlCreateLogin
+<span class="kw">DECLARE</span> @LoginCount <span class="kw">AS</span> <span class="dt">INT</span>; <span class="kw">SET</span> @LoginCount = (<span class="kw">SELECT</span> <span class="fu">COUNT</span>(*) <span class="kw">AS</span> LoginCount <span class="kw">FROM</span> master..syslogins <span class="kw">WHERE</span> <span class="st">'['</span> + loginname + <span class="st">']'</span> = @QualifiedUserName)
+print <span class="st">'Logins matching desired name should equal 1.  It equals: '</span> + <span class="fu">CONVERT</span>(<span class="dt">varchar</span>, @LoginCount); print <span class="st">''</span> 
 
------------------------------------------------------------------------
--- STEP #3: Create a user account for the *data base*, after switching the database under focus to SecurityAuxiliary.
-print &#39;Step #3 executing....&#39; 
-USE [SecurityAuxiliary]
-DECLARE @sqlCreateUser nvarchar(max)
-SET @sqlCreateUser = &#39;CREATE USER &#39; + @QualifiedUserName + &#39; FOR LOGIN &#39; + @QualifiedUserName
-EXECUTE sp_executesql @sqlCreateUser
-DECLARE @UserCount AS INT; SET @UserCount = (SELECT COUNT(*) AS UserCount FROM SecurityAuxiliary.sys.sysusers WHERE &#39;[&#39; + name + &#39;]&#39; = @QualifiedUserName)
-print &#39;User accounts matching desired name should equal 1.  It equals: &#39; + CONVERT(varchar, @UserCount); print &#39;&#39; 
+<span class="co">-----------------------------------------------------------------------</span>
+<span class="co">-- STEP #3: Create a user account for the *data base*, after switching the database under focus to SecurityAuxiliary.</span>
+print <span class="st">'Step #3 executing....'</span> 
+<span class="kw">USE</span> [SecurityAuxiliary]
+<span class="kw">DECLARE</span> @sqlCreateUser <span class="dt">nvarchar</span>(<span class="fu">max</span>)
+<span class="kw">SET</span> @sqlCreateUser = <span class="st">'CREATE USER '</span> + @QualifiedUserName + <span class="st">' FOR LOGIN '</span> + @QualifiedUserName
+<span class="kw">EXECUTE</span> sp_executesql @sqlCreateUser
+<span class="kw">DECLARE</span> @UserCount <span class="kw">AS</span> <span class="dt">INT</span>; <span class="kw">SET</span> @UserCount = (<span class="kw">SELECT</span> <span class="fu">COUNT</span>(*) <span class="kw">AS</span> UserCount <span class="kw">FROM</span> SecurityAuxiliary.sys.sysusers <span class="kw">WHERE</span> <span class="st">'['</span> + name + <span class="st">']'</span> = @QualifiedUserName)
+print <span class="st">'User accounts matching desired name should equal 1.  It equals: '</span> + <span class="fu">CONVERT</span>(<span class="dt">varchar</span>, @UserCount); print <span class="st">''</span> 
 
------------------------------------------------------------------------
--- STEP #4: Grant appropriate privileges for the &#39;Redcap&#39; schema.
-print &#39;Step #4 executing....&#39; 
-DECLARE @sqlGrantSchemaRedcap nvarchar(max)
--- SET @sqlGrantSchemaRedcap = &#39;GRANT SELECT, EXECUTE ON SCHEMA::[Redcap] TO &#39; + @QualifiedUserName 
-SET @sqlGrantSchemaRedcap = &#39;GRANT EXECUTE ON SCHEMA::[Redcap] TO &#39; + @QualifiedUserName 
-EXECUTE sp_executesql @sqlGrantSchemaRedcap
-print &#39;Step #4 executed&#39;; print &#39;&#39; 
+<span class="co">-----------------------------------------------------------------------</span>
+<span class="co">-- STEP #4: Grant appropriate privileges for the 'Redcap' schema.</span>
+print <span class="st">'Step #4 executing....'</span> 
+<span class="kw">DECLARE</span> @sqlGrantSchemaRedcap <span class="dt">nvarchar</span>(<span class="fu">max</span>)
+<span class="co">-- SET @sqlGrantSchemaRedcap = 'GRANT SELECT, EXECUTE ON SCHEMA::[Redcap] TO ' + @QualifiedUserName </span>
+<span class="kw">SET</span> @sqlGrantSchemaRedcap = <span class="st">'GRANT EXECUTE ON SCHEMA::[Redcap] TO '</span> + @QualifiedUserName 
+<span class="kw">EXECUTE</span> sp_executesql @sqlGrantSchemaRedcap
+print <span class="st">'Step #4 executed'</span>; print <span class="st">''</span> 
 
------------------------------------------------------------------------
--- STEP #5: Grant appropriate privileges for the &#39;Security&#39; schema.
-print &#39;Step #5 executing....&#39; 
-DECLARE @sqlGrantSchemaSecurity nvarchar(max)
--- SET @sqlGrantSchemaSecurity = &#39;GRANT SELECT, EXECUTE ON SCHEMA::[Security] TO &#39; + @QualifiedUserName 
-SET @sqlGrantSchemaSecurity = &#39;GRANT EXECUTE ON SCHEMA::[Security] TO &#39; + @QualifiedUserName 
-EXECUTE sp_executesql @sqlGrantSchemaSecurity
-print &#39;Step #5 executed&#39;; print &#39;&#39; 
+<span class="co">-----------------------------------------------------------------------</span>
+<span class="co">-- STEP #5: Grant appropriate privileges for the 'Security' schema.</span>
+print <span class="st">'Step #5 executing....'</span> 
+<span class="kw">DECLARE</span> @sqlGrantSchemaSecurity <span class="dt">nvarchar</span>(<span class="fu">max</span>)
+<span class="co">-- SET @sqlGrantSchemaSecurity = 'GRANT SELECT, EXECUTE ON SCHEMA::[Security] TO ' + @QualifiedUserName </span>
+<span class="kw">SET</span> @sqlGrantSchemaSecurity = <span class="st">'GRANT EXECUTE ON SCHEMA::[Security] TO '</span> + @QualifiedUserName 
+<span class="kw">EXECUTE</span> sp_executesql @sqlGrantSchemaSecurity
+print <span class="st">'Step #5 executed'</span>; print <span class="st">''</span> 
 
------------------------------------------------------------------------
--- OPTIONAL STEP: Delete the user from the database (the first line) and then the server (the second line).  
--- The person&#39;s other database user accounts (besides with the SecurityAuxiliary database) will NOT be automatically deleted by these two lines.
---USE [SecurityAuxiliary]; DROP USER [OUHSC\lsuarez3]
---USE [master]; DROP LOGIN [OUHSC\lsuarez3]
+<span class="co">-----------------------------------------------------------------------</span>
+<span class="co">-- OPTIONAL STEP: Delete the user from the database (the first line) and then the server (the second line).  </span>
+<span class="co">-- The person's other database user accounts (besides with the SecurityAuxiliary database) will NOT be automatically deleted by these two lines.</span>
+<span class="co">--USE [SecurityAuxiliary]; DROP USER [OUHSC\lsuarez3]</span>
+<span class="co">--USE [master]; DROP LOGIN [OUHSC\lsuarez3]</span>
 
------------------------------------------------------------------------
--- REFERENCES &amp; NOTES
-  --The @QualifiedUserName must have both (a) the &#39;OUHSC&#39; domain qualification, and (b) the square brackets (to escape the backslash).
-    --Using sp_executesql to add users: http://www.sqlservercentral.com/Forums/Topic497615-359-1.aspx
-    --Check if a server login exists: http://stackoverflow.com/questions/37275/sql-query-for-logins
-    --Retrieve database users: http://stackoverflow.com/questions/2445444/how-to-get-a-list-of-users-for-all-instances-databases
-    --Concatenating strings: http://blog.sqlauthority.com/2010/11/25/sql-server-concat-function-in-sql-server-sql-concatenation/
-    --DROP USER from database: http://msdn.microsoft.com/en-us/library/ms189438.aspx
-    --DROP LOGIN from server: http://msdn.microsoft.com/en-us/library/ms188012.aspx
-    --Declaring variables (eg, the username above): http://technet.microsoft.com/en-us/library/aa258839.aspx
-    --A different (&amp; non-dynamic) way to establish a user: http://pic.dhe.ibm.com/infocenter/dmndhelp/v8r5m0/index.jsp?topic=%2Fcom.ibm.wbpm.imuc.sbpm.doc%2Ftopics%2Fdb_create_users_nd_aix.html
-    --If the variable has to cross a &#39;GO&#39; (which the current version of the script doesn&#39;t need): http://stackoverflow.com/questions/937336/is-there-a-way-to-persist-a-variable-across-a-go
-</code></pre>
-
+<span class="co">-----------------------------------------------------------------------</span>
+<span class="co">-- REFERENCES &amp; NOTES</span>
+  <span class="co">--The @QualifiedUserName must have both (a) the 'OUHSC' domain qualification, and (b) the square brackets (to escape the backslash).</span>
+    <span class="co">--Using sp_executesql to add users: http://www.sqlservercentral.com/Forums/Topic497615-359-1.aspx</span>
+    <span class="co">--Check if a server login exists: http://stackoverflow.com/questions/37275/sql-query-for-logins</span>
+    <span class="co">--Retrieve database users: http://stackoverflow.com/questions/2445444/how-to-get-a-list-of-users-for-all-instances-databases</span>
+    <span class="co">--Concatenating strings: http://blog.sqlauthority.com/2010/11/25/sql-server-concat-function-in-sql-server-sql-concatenation/</span>
+    <span class="co">--DROP USER from database: http://msdn.microsoft.com/en-us/library/ms189438.aspx</span>
+    <span class="co">--DROP LOGIN from server: http://msdn.microsoft.com/en-us/library/ms188012.aspx</span>
+    <span class="co">--Declaring variables (eg, the username above): http://technet.microsoft.com/en-us/library/aa258839.aspx</span>
+    <span class="co">--A different (&amp; non-dynamic) way to establish a user: http://pic.dhe.ibm.com/infocenter/dmndhelp/v8r5m0/index.jsp?topic=%2Fcom.ibm.wbpm.imuc.sbpm.doc%2Ftopics%2Fdb_create_users_nd_aix.html</span>
+    <span class="co">--If the variable has to cross a 'GO' (which the current version of the script doesn't need): http://stackoverflow.com/questions/937336/is-there-a-way-to-persist-a-variable-across-a-go</span></code></pre>
+</div>
+<div id="document-info" class="section level2">
 <h2>Document Info</h2>
+<p>This document is primarily based on REDCap version 5.11.3, and was last updated 2014-09-07. A development version of the document is available on GitHub: <a href="http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html" class="uri">http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html</a>.</p>
+</div>
 
-<p>This document is primarily based on REDCap version 5.11.3, and was last updated 2014-09-07.  A development version of the document is available on GitHub: <a href="http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html">http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html</a>.</p>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 </body>
-
 </html>
