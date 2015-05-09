@@ -6,7 +6,7 @@ context("Read Oneshot")
 uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account on pid=153.
 
-read_count <- 20L
+read_count <- 200L
 file_count <- 20L
 
 # Read ---------------------------------------------------
@@ -55,7 +55,7 @@ for( i in seq_len(read_count) ) {
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
-  message(returned_object$elapsed_seconds)
+  message(i, ": ", returned_object$elapsed_seconds)
 }
 
 
