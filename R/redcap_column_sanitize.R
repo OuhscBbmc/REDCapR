@@ -19,7 +19,15 @@
 #' @author Will Beasley
 #' 
 #' @examples
-#' # Examples are not shown because they require non-ASCII encoding, 
+#' dirty <- data.frame(id=1:3, names=c("Ekstr\xf8m", "J\xf6reskog", "bi\xdfchen Z\xfcrcher"))
+#' REDCapR::redcap_column_sanitize(dirty)
+#' # Produces the dataset:
+#' #  id            names
+#' #1  1          Ekstr?m
+#' #2  2         Joreskog
+#' #3  3 bisschen Zurcher
+#' 
+#' # Typical examples are not shown because they require non-ASCII encoding, 
 #' #   which makes the package documentation less portable.
 
 redcap_column_sanitize <- function( 
@@ -37,4 +45,4 @@ redcap_column_sanitize <- function(
   return( d )
 }
 # https://stat.ethz.ch/R-manual/R-devel/library/base/html/iconv.html
-
+redcap_column_sanitize(c("Ekstr\xf8m", "J\xf6reskog", "bi\xdfchen Z\xfcrcher"))

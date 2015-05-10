@@ -30,7 +30,15 @@ The \code{ASCII//TRANSLIT} option does the actual transliteration work.  As of \
 but different, versions to convert the characters.  Be aware of this in case you notice slight OS-dependent differences.
 }
 \examples{
-# Examples are not shown because they require non-ASCII encoding,
+dirty <- data.frame(id=1:3, names=c("Ekstr\\xf8m", "J\\xf6reskog", "bi\\xdfchen Z\\xfcrcher"))
+REDCapR::redcap_column_sanitize(dirty)
+# Produces the dataset:
+#  id            names
+#1  1          Ekstr?m
+#2  2         Joreskog
+#3  3 bisschen Zurcher
+
+# Typical examples are not shown because they require non-ASCII encoding,
 #   which makes the package documentation less portable.
 }
 \author{
