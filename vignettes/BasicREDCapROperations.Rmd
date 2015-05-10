@@ -1,11 +1,13 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Basic REDCapR Operations}
--->
+---
+title: Basic REDCapR Operations
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Basic REDCapR Operations}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
 
-<!-- rmarkdown v1 -->
-
-# Basic REDCapR Operations
 This vignette covers the the basic functions exposed by the [`REDCapR`](https://github.com/OuhscCcanMiechvEvaluation/REDCapR) package which allow you to interact with [REDCap](http://www.project-redcap.org/) through its API.
 
 ## Reading REDCap Data
@@ -20,7 +22,7 @@ opts_chunk$set(
 # options(markdown.HTML.header = system.file("misc", "vignette.css", package = "REDCapR"))
 # options(markdown.HTML.header = file.path(devtools::inst("REDCapR"), "misc", "vignette.css"))
 
-options(width=120) #So the output is 50% wider than the default.
+# options(width=120) #So the output is 50% wider than the default.
 ```
 
 ### Set project-wide values.
@@ -31,7 +33,7 @@ The `REDCapR` package includes a recent version of the [Bundle of CA Root Certif
 ```{r project_values}
 library(REDCapR) #Load the package into the current R session.
 uri <- "https://bbmc.ouhsc.edu/redcap/api/"
-token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account and the simple project (pid 153)
+token <- "9A81268476645C4E5F03428B8AC3AA7B" #`UnitTestPhiFree` user and simple project (pid 153)
 ```
 
 ### Read all records and fields.

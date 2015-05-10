@@ -70,7 +70,9 @@ the subset's subjects.  This is repeated for each subset, before returning a uni
 
 The function allows a delay between calls, which allows the server to attend to other users' requests.
 
-For \code{redcap_read} to function properly, the user must have Export permissions for the `Full Data Set'.  To grant the appropriate permissions:
+For \code{redcap_read} to function properly, the user must have Export permissions for the
+`Full Data Set'.  Users with only `De-Identified' export privileges can still use
+\code{redcap_read_oneshot}.  To grant the appropriate permissions:
 \enumerate{
  \item go to `User Rights' in the REDCap project site,
  \item select the desired user, and then select `Edit User Privileges',
@@ -92,7 +94,6 @@ Will Beasley
 The official documentation can be found on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiDocumentation}).
 Also see the `API Examples' page on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}).
 A user account is required to access the wiki, which typically is granted only to REDCap administrators.
-If you do not
 
 The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.
 }

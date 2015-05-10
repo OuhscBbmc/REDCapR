@@ -41,10 +41,22 @@ This function uses REDCap's \href{https://iwg.devguard.com/trac/redcap/wiki/ApiE
 to select and return data.
 }
 \details{
-The `REDCapR' package includes a recent version of the \href{http://curl.haxx.se/ca/cacert.pem}{Bundle of CA Root Certificates}
-from the official \href{http://curl.haxx.se}{cURL site}.  This version is used by default, unless the `cert_location` parameter is given another location.
+The `REDCapR' package includes a recent version of the
+\href{http://curl.haxx.se/ca/cacert.pem}{Bundle of CA Root Certificates}
+from the official \href{http://curl.haxx.se}{cURL site}.
+This version is used by default, unless the `cert_location` parameter is given another location.
 
-Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See \code{\link{validate_for_write}} for a helper function that checks for some common important conflicts.
+Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.
+See \code{\link{validate_for_write}} for a helper function that checks for some common important conflicts.
+
+For \code{redcap_write} to function properly, the user must have Export permissions for the
+`Full Data Set'.  Users with only `De-Identified' export privileges can still use
+\code{redcap_write_oneshot}.  To grant the appropriate permissions:
+\enumerate{
+ \item go to `User Rights' in the REDCap project site,
+ \item select the desired user, and then select `Edit User Privileges',
+ \item in the `Data Exports' radio buttons, select `Full Data Set'.
+}
 }
 \examples{
 \dontrun{

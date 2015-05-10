@@ -141,19 +141,6 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
     config_options <- list(cainfo=cert_location)
   }
       
-  #curl_options <- RCurl::curlOptions(cainfo=cert_location, sslversion=3)
-  # raw_text <- RCurl::postForm(
-  #   uri = redcap_uri
-  #   , token = token
-  #   , content = 'record'
-  #   , format = 'csv'
-  #   , type = 'flat'
-  #   , rawOrLabel = raw_or_label
-  #   , exportDataAccessGroups = export_data_access_groups_string
-  #   , records = records_collapsed
-  #   , fields = fields_collapsed
-  #   , .opts = curl_options
-  # )
   post_body <- list(
     token = token,
     content = 'record',
@@ -179,28 +166,37 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
   raw_text <- httr::content(result, "text")  
   elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
   
+  # raw_text <- "The hostname (redcap-db.hsc.net.ou.edu) / username (redcapsql) / password (XXXXXX) combination could not connect to the MySQL server. \r\n\t\tPlease check their values."
+  regex_cannot_connect <- "^The hostname \\((.+)\\) / username \\((.+)\\) / password \\((.+)\\) combination could not connect.+"
+  
+  if( any(grepl(regex_cannot_connect, raw_text)) ) 
+    success <- FALSE
+  
   if( success ) {
     try (
       {
-        #browser();
         ds <- read.csv(text=raw_text, stringsAsFactors=FALSE)
       }, #Convert the raw text to a dataset.
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
     )
     
-    if( exists("ds") ) {
+    #TODO #80: catch variant of ' The.hostname..redcap.db.hsc.net.ou.edu....username..redcapsql....password..XXXXXX..combination.could.not.connect.to.the.MySQL.server. \t\tPlease check their values.'
+    
+    if( exists("ds") & (class(ds)=="data.frame") ) {
       outcome_message <- paste0(format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
                          " records and ",  
                          format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
                          " columns were read from REDCap in ", 
                          round(elapsed_seconds, 1), " seconds.  The http status code was ",
                          status_code, ".")
+    
+      #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
+      raw_text <- "" 
     } else {
+      success <- FALSE #Override the 'success' determination from the http status code.
+      ds <- data.frame() #Return an empty data.frame
       outcome_message <- paste0("The REDCap read failed.  The http status code was ", status_code, ".  The 'raw_text' returned was '", raw_text, "'.")
     }
-    
-    #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
-    raw_text <- "" 
   }
   else {
     ds <- data.frame() #Return an empty data.frame

@@ -1,8 +1,12 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Security Database}
--->
-# Security Database
+---
+title: Security Database
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Security Database}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
 
 ## Description
 The SQL code below adds schemas, a table and two stored procedures to an existing Microsoft SQL Database.  This second database is not essential to calling the REDCap API, but it helps manage tokens securely.

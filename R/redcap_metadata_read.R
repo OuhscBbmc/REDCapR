@@ -51,7 +51,7 @@ redcap_metadata_read <- function(
   #TODO: NULL verbose parameter pulls from getOption("verbose")
   #TODO: warns if any requested fields aren't entirely lowercase.
   
-  warning("The `REDCapR::redcap_metadata_read()` function is very new and under development; it's likely to change in the future, especially how it handles checkboxes.")
+  message("The `REDCapR::redcap_metadata_read()` function is very new and under development; it's likely to change in the future, especially how it handles checkboxes.")
   
   start_time <- Sys.time()
   
@@ -102,14 +102,21 @@ redcap_metadata_read <- function(
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
     )
     
-    outcome_message <- paste0("The data dictionary describing ",
-                              format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
-                              " fields was read from REDCap in ", 
-                             round(elapsed_seconds, 1), " seconds.  The http status code was ",
-                             status_code, ".")
+    if( exists("ds") & (class(ds)=="data.frame") ) {
+      outcome_message <- paste0(
+        "The data dictionary describing ",
+        format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
+        " fields was read from REDCap in ", 
+        round(elapsed_seconds, 1), " seconds.  The http status code was ",
+        status_code, ".")
     
-    #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
-    raw_text <- "" 
+      #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
+      raw_text <- "" 
+    } else {
+      success <- FALSE #Override the 'success' determination from the http status code.
+      ds <- data.frame() #Return an empty data.frame
+      outcome_message <- paste0("The REDCap metadata export failed.  The http status code was ", status_code, ".  The 'raw_text' returned was '", raw_text, "'.")
+    }
   }
   else {
     ds <- data.frame() #Return an empty data.frame
