@@ -81,11 +81,11 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
   if( missing(token) )
     stop("The required parameter `token` was missing from the call to `redcap_read()`.")
   
-  if( nchar(records_collapsed)==0 )
+  if( all(nchar(records_collapsed)==0) )
     records_collapsed <- ifelse(is.null(records), "", paste0(records, collapse=",")) #This is an empty string if `records` is NULL.
-  if( nchar(fields_collapsed)==0 )
+  if( (length(fields_collapsed)==0L) | is.null(fields_collapsed) | all(nchar(fields_collapsed)==0) )
     fields_collapsed <- ifelse(is.null(fields), "", paste0(fields, collapse=",")) #This is an empty string if `fields` is NULL.
-  if( nchar(events_collapsed)==0 )
+  if( all(nchar(events_collapsed)==0) )
     events_collapsed <- ifelse(is.null(events), "", paste0(events, collapse=",")) #This is an empty string if `events` is NULL.
   
   #   export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
@@ -113,7 +113,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
   ### Stop and return to the caller if the initial query failed.
   ###
   if( !initial_call$success ) {
-    outcome_message <- paste0("The initial call failed with the code: ", initial_call$status_code, ".")
+    outcome_messages <- paste0("The initial call failed with the code: ", initial_call$status_code, ".")
     elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
     return( list(
       data = data.frame(), 
@@ -122,7 +122,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
       events_collapsed = "failed in initial batch call",
       elapsed_seconds = elapsed_seconds, 
       status_code = initial_call$status_code,
-      outcome_message = outcome_message,
+      outcome_messages = outcome_messages,
       success = initial_call$success
     ) )
   }
