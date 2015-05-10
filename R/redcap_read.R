@@ -50,11 +50,12 @@
 #'  \item in the `Data Exports' radio buttons, select `Full Data Set'.
 #' }
 #' 
+#' Users with only `De-Identified` export privileges can still use `redcap_read_oneshot()` and `redcap_write_oneshot()`.
+#' 
 #' @author Will Beasley
 #' @references The official documentation can be found on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiDocumentation}).  
 #' Also see the `API Examples' page on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}). 
 #' A user account is required to access the wiki, which typically is granted only to REDCap administrators.  
-#' If you do not
 #' 
 #' The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.
 #' 
@@ -136,9 +137,10 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
             "To grant the appropriate permissions: ",
             "(1) go to 'User Rights' in the REDCap project site, ",
             "(2) select the desired user, and then select 'Edit User Privileges', ",
-            "(3) in the 'Data Exports' radio buttons, select 'Full Data Set'.")
+            "(3) in the 'Data Exports' radio buttons, select 'Full Data Set'.\n",
+            "Users with only `De-Identified` export privileges can still use ",
+            "`redcap_read_oneshot()` and `redcap_write_oneshot()`.")
 
-  
   ds_glossary <- REDCapR::create_batch_glossary(row_count=length(uniqueIDs), batch_size=batch_size)
   lst_batch <- NULL
   lst_status_code <- NULL

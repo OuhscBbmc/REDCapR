@@ -76,6 +76,8 @@ For \code{redcap_read} to function properly, the user must have Export permissio
  \item select the desired user, and then select `Edit User Privileges',
  \item in the `Data Exports' radio buttons, select `Full Data Set'.
 }
+
+Users with only `De-Identified` export privileges can still use `redcap_read_oneshot()` and `redcap_write_oneshot()`.
 }
 \examples{
 \dontrun{
@@ -92,7 +94,6 @@ Will Beasley
 The official documentation can be found on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiDocumentation}).
 Also see the `API Examples' page on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}).
 A user account is required to access the wiki, which typically is granted only to REDCap administrators.
-If you do not
 
 The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.
 }
