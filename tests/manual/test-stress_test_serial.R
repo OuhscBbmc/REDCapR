@@ -6,8 +6,8 @@ context("Read Oneshot")
 uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account on pid=153.
 
-read_count <- 200L
-file_count <- 20L
+read_count <- 0L
+file_count <- 200L
 
 # Read ---------------------------------------------------
 message("\n========\nRead")
@@ -109,5 +109,5 @@ for( i in seq_len(file_count) ) {
   expect_more_than(info_actual$mtime, expected=start_time, label="The downloaded file's modification time should not precede this function's start time.")
   expect_more_than(info_actual$ctime, expected=start_time, label="The downloaded file's last change time should not precede this function's start time.")
   expect_more_than(info_actual$atime, expected=start_time, label="The downloaded file's last access time should not precede this function's start time.")
-  message(returned_object$elapsed_seconds)
+  message(i, ": ", returned_object$elapsed_seconds)
 }

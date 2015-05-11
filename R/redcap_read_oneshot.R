@@ -109,7 +109,6 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
   #TODO: validate export_data_access_groups
   #TODO: validate raw_or_label
   
-  
   start_time <- Sys.time()
   
   if( missing(redcap_uri) )
@@ -118,16 +117,13 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
   if( missing(token) )
     stop("The required parameter `token` was missing from the call to `redcap_read_oneshot()`.")
   
-  # if( missing(records_collapsed) & !missing(records) )
-  #   records_collapsed <- paste0(records, collapse=",")
-  # if( missing(fields_collapsed) & !missing(fields) )
-  #   fields_collapsed <- paste0(fields, collapse=",")
+  # browser() #| missing(fields_collapsed)
   
-  if( nchar(records_collapsed)==0 )
+  if( all(nchar(records_collapsed)==0) )
     records_collapsed <- ifelse(is.null(records), "", paste0(records, collapse=",")) #This is an empty string if `records` is NULL.
-  if( nchar(fields_collapsed)==0 )
+  if( (length(fields_collapsed)==0L) | is.null(fields_collapsed) | all(nchar(fields_collapsed)==0L) )
     fields_collapsed <- ifelse(is.null(fields), "", paste0(fields, collapse=",")) #This is an empty string if `fields` is NULL.
-  if( nchar(events_collapsed)==0 )
+  if( all(nchar(events_collapsed)==0) )
     events_collapsed <- ifelse(is.null(events), "", paste0(events, collapse=",")) #This is an empty string if `events` is NULL.
   
   export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
