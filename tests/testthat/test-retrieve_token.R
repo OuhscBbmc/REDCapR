@@ -79,6 +79,7 @@ test_that("Bad Variable Name Project", {
     )
   )
 })
+
 test_that("Field Name Token", {
   expected_message <- "The 'field_name_token' parameter must contain only letters, numbers, and underscores."
   
@@ -96,3 +97,19 @@ test_that("Field Name Token", {
   )
 })
 
+test_that("Missing DSN & Channel", {
+  expected_message <- "The 'dsn' parameter can be missing only if a 'channel' has been passed to 'retrieve_token_mssql'."
+  
+  expect_error(
+    regexp = expected_message,
+    object = observed <- REDCapR::retrieve_token_mssql(
+      dsn                   = dsn,
+      project_name          = project_name,
+      channel               = channel,
+      schema_name           = schema_name,
+      procedure_name        = procedure_name,
+      variable_name_project = variable_name_project,
+      field_name_token      = field_name_token
+    )
+  )
+})
