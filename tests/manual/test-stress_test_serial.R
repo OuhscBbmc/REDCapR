@@ -3,7 +3,7 @@ library(testthat)
 ###########
 context("Stress Test - Serial")
 ###########
-uri <- "https://bbmc.ouhsc.edu/redcap/api/"
+uri <- "https://bbmc.ouhsc.edu/redcap/api/api2.phpapi2.php"
 token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account on pid=153.
 
 read_count <- 2000L
@@ -73,7 +73,7 @@ for( i in seq_len(file_count) ) {
   )
     
 #   start_time <- Sys.time() - lubridate::seconds(1) #Knock off a second inc ase there's small time imprecisions
-  start_time <- Sys.time() - 1 #Knock off a second in case there are small time imprecisions
+  start_time <- Sys.time() - 25 #Knock off a second in case there are small time imprecisions
   path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test_data/mugshot_1.jpg")
   info_expected <- file.info(path_of_expected)
   record <- 1

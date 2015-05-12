@@ -3,7 +3,7 @@ library(testthat)
 ###########
 context("Read Batch - Longitudinal")
 ###########
-uri <- "https://bbmc.ouhsc.edu/redcap/api/"
+uri <- "https://bbmc.ouhsc.edu/redcap/api/api2.php"
 token <- "0434F0E9CF53ED0587847AB6E51DE762" #For `UnitTestPhiFree` account on pid=212.
 project <- redcap_project$new(redcap_uri=uri, token=token)
 directory_relative <- "test_data/project_longitudinal/expected"
