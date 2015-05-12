@@ -3,10 +3,11 @@ library(testthat)
 ###########
 context("Estimate 'Could Not Connect' Rate")
 ###########
-uri <- "https://bbmc.ouhsc.edu/redcap/api/"
+uri <- "https://bbmc.ouhsc.edu/redcap/api/api2.php"
+uri <- "https://bbmc.ouhsc.edu/redcap/api/api2.phpapi2.php"
 token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account on pid=153.
 
-record_read_count <- 2000L
+record_read_count <- 200L
 record_write_count <- 200L
 file_read_count <- 20L
 file_write_count <- 20L

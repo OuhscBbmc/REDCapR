@@ -3,7 +3,7 @@ library(testthat)
 ###########
 context("Metadata Read")
 ###########
-uri <- "https://bbmc.ouhsc.edu/redcap/api/"
+uri <- "https://bbmc.ouhsc.edu/redcap/api/api2.php"
 token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account on pid=153.
 
 test_that("Smoke Test", {  
