@@ -3,7 +3,7 @@ library(testthat)
 ###########
 context("Russian Unencoded")
 ###########
-uri <- "https://bbmc.ouhsc.edu/redcap/api/api2.php"
+uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "D72C6485B52FE9F75D27B696977FBA43" #For `UnitTestPhiFree` account on pid=153.
 
 test_that("Russian Recruit", {  
