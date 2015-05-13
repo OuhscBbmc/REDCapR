@@ -3,13 +3,14 @@ library(testthat)
 ###########
 context("Estimate 'Could Not Connect' Rate")
 ###########
-uri <- "https://bbmc.ouhsc.edu/redcap/api/api2.php"
-uri <- "https://bbmc.ouhsc.edu/redcap/api/api2.phpapi2.php"
+uri <- "https://bbmc.ouhsc.edu/redcap/api/"
+# uri <- "https://bbmc.ouhsc.edu/redcap/api/api2.php"
+# uri <- "https://bbmc.ouhsc.edu/redcap/api/dx.php"
 token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account on pid=153.
 
-record_read_count <- 200L
+record_read_count <- 2000L
 record_write_count <- 200L
-file_read_count <- 20L
+file_read_count <- 0L
 file_write_count <- 20L
 
 # Record Read ---------------------------------------------------
@@ -28,7 +29,8 @@ rm(i, returned_object, record_read_count, record_read_error_count)
 
 # File Read ---------------------------------------------------
 message("\n========\nFile Read")
-start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
+if( file_read_count > 0 )
+  start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
 
 file_read_error_count <- 0L
 for( i in seq_len(file_read_count) ) {

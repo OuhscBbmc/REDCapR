@@ -6,7 +6,7 @@ library(testthat)
 ###########
 context("FileOneshot")
 ###########
-# uri <- "https://bbmc.ouhsc.edu/redcap/api/api2.php"
+# uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 # token <- "D70F9ACD1EDD6F151C6EA78683944E98" #For `UnitTestPhiFree` account on pid=213.
 
 delay_after_download_file <- 1.0 #In seconds

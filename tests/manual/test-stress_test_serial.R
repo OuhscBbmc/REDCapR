@@ -3,7 +3,7 @@ library(testthat)
 ###########
 context("Stress Test - Serial")
 ###########
-uri <- "https://bbmc.ouhsc.edu/redcap/api/api2.phpapi2.php"
+uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account on pid=153.
 
 read_count <- 2000L
