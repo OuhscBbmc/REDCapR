@@ -10,7 +10,7 @@ token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account on pi
 
 record_read_count <- 2000L
 record_write_count <- 200L
-file_read_count <- 0L
+file_read_count <- 200L
 file_write_count <- 20L
 
 # Record Read ---------------------------------------------------

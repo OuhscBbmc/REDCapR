@@ -7,3 +7,6 @@ devtools::create(  path=file.path(getwd(), "seed"),check=TRUE, description=list(
   "Maintainer"="'Will Beasley' <wibeasley@hotmail.com> "
 ))
 
+devtools::use_cran_badge() 
+# dr_github() 
+devtools::use_code_of_conduct() 
