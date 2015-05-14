@@ -1,16 +1,17 @@
 <!-- rmarkdown v1 -->
 
-| Branch | [Travis-CI](https://travis-ci.org/OuhscBbmc/REDCapR/builds) | [AppVeyor](https://ci.appveyor.com/project/wibeasley/redcapr/history) | [Coveralls](https://coveralls.io/r/OuhscBbmc/REDCapR) | [Zenodo](https://zenodo.org/search?ln=en&p=redcapr) |
-| :----- | :---------------------------: | :-----------------------------: | :-------: | :----: |
-| Master | [![Build Status](https://travis-ci.org/OuhscBbmc/REDCapR.svg?branch=master)](https://travis-ci.org/OuhscBbmc/REDCapR) | [![Build status](https://ci.appveyor.com/api/projects/status/0i41tn0n2jo4pd2k/branch/master?svg=true)](https://ci.appveyor.com/project/wibeasley/redcapr/branch/master) | [![Coverage Status](https://coveralls.io/repos/OuhscBbmc/REDCapR/badge.svg?branch=master)](https://coveralls.io/r/OuhscBbmc/REDCapR?branch=master) | [![DOI](https://zenodo.org/badge/4971/OuhscBbmc/REDCapR.svg)](http://dx.doi.org/10.5281/zenodo.13326) |
+| GitHub | [Travis-CI](https://travis-ci.org/OuhscBbmc/REDCapR/builds) | [AppVeyor](https://ci.appveyor.com/project/wibeasley/redcapr/history) | [Coveralls](https://coveralls.io/r/OuhscBbmc/REDCapR) |
+| :----- | :---------------------------: | :-----------------------------: | :-------: |
+| Master | [![Build Status](https://travis-ci.org/OuhscBbmc/REDCapR.svg?branch=master)](https://travis-ci.org/OuhscBbmc/REDCapR) | [![Build status](https://ci.appveyor.com/api/projects/status/0i41tn0n2jo4pd2k/branch/master?svg=true)](https://ci.appveyor.com/project/wibeasley/redcapr/branch/master) | [![Coverage Status](https://coveralls.io/repos/OuhscBbmc/REDCapR/badge.svg?branch=master)](https://coveralls.io/r/OuhscBbmc/REDCapR?branch=master) |
 | Dev | [![Build Status](https://travis-ci.org/OuhscBbmc/REDCapR.svg?branch=dev)](https://travis-ci.org/OuhscBbmc/REDCapR) | [![Build status](https://ci.appveyor.com/api/projects/status/0i41tn0n2jo4pd2k/branch/dev?svg=true)](https://ci.appveyor.com/project/wibeasley/redcapr/branch/dev) | [![Coverage Status](https://coveralls.io/repos/OuhscBbmc/REDCapR/badge.svg?branch=dev)](https://coveralls.io/r/OuhscBbmc/REDCapR?branch=dev) | -- |
-| | (Ubuntu 12.04 LTS) | (Windows Server 2012) | (Test Coverage) | (Independently-hosted Archive) |
+| | *Ubuntu 12.04 LTS* | *Windows Server 2012* | *Test Coverage* | *Independently-hosted Archive* |
+
 
 REDCapR
 =======
 We’ve been using R with REDCap’s API since the Fall 2012 and have developed some functions that we're assembling in an R package: `REDCapR`.  The release version and documentation is on [CRAN](http://cran.rstudio.com/web/packages/REDCapR/), while the development site for collaboration is on [GitHub](https://github.com/OuhscBbmc/REDCapR).
 
-It was taking us about 50 lines of code to contact REDCap and robustly transform the returned CSV into an R `data.frame`.  It took more than twice that much code to implement batching.  All this can be done in one line of code with the package's `redcap_read()` function:
+It was taking us a minimum of 50 lines of code to contact REDCap and robustly transform the returned CSV into an R `data.frame`.  It took more than twice that much code to implement batching.  All this can be done in one line of R code with the package's `redcap_read()` function:
 ```r
 ds <- redcap_read(redcap_uri=uri, token=token)$data
 ```
@@ -50,6 +51,11 @@ Thanks,
 [Biomedical & Behavioral Research Core](http://ouhsc.edu/BBMC/).
 
 ### Download and Installation Instructions
+
+|  | [Version](http://cran.r-project.org/web/packages/REDCapR/) | [Pace](http://cranlogs.r-pkg.org/) | [Zenodo](https://zenodo.org/search?ln=en&p=redcapr) | 
+|  :---- | :----: | :----: | :----: |
+| CRAN | [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/REDCapR)](http://cran.r-project.org/web/packages/REDCapR) | ![CRANPace](http://cranlogs.r-pkg.org/badges/redcapAPI) | [![DOI](https://zenodo.org/badge/4971/OuhscBbmc/REDCapR.svg)](http://dx.doi.org/10.5281/zenodo.13326) |
+
 <!-- The development version of REDCapR can be installed from [R-Forge](https://r-forge.r-project.org/projects/redcapr/),
 ```r
 install.packages("REDCapR", repos="http://R-Forge.R-project.org")
@@ -72,7 +78,7 @@ devtools::check(force_suggests = FALSE)
 ```
 
 ### Collaborative Development
-We encourage input and collaboration from the overall community.  If you're familar with GitHub and R packages, feel free to submit a [pull request](https://github.com/OuhscBbmc/REDCapR/pulls).  If you'd like to report a bug or make a suggestion, please create a GitHub [issue](https://github.com/OuhscBbmc/REDCapR/issues); issues are a usually a good place to ask public questions too.  However, feel free to email Andrey or Will (<andkov@uvic.ca> or <wibeasley@hotmail.com>).
+We encourage input and collaboration from the overall community.  If you're familar with GitHub and R packages, feel free to submit a [pull request](https://github.com/OuhscBbmc/REDCapR/pulls).  If you'd like to report a bug or make a suggestion, please create a GitHub [issue](https://github.com/OuhscBbmc/REDCapR/issues); issues are a usually a good place to ask public questions too.  However, feel free to email Will (<wibeasley@hotmail.com>).  Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 ### Thanks to Funders
 *OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting ([MIECHV](http://mchb.hrsa.gov/programs/homevisiting/)) Project.*: Evaluates MIECHV expansion and enhancement of Evidence-based Home Visitation programs in four Oklahoma counties. [HRSA/ACF D89MC23154](https://perf-data.hrsa.gov/mchb/DGISReports/Abstract/AbstractDetails.aspx?Source=TVIS&GrantNo=D89MC23154&FY=2012).  
