@@ -13,3 +13,4 @@ utility/
 ^\.travis\.yml$
 ^appveyor\.yml$
 ^revdep$
+^CONDUCT\.md$
