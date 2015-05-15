@@ -56,7 +56,7 @@ Thanks,
 
 | [CRAN](http://cran.rstudio.com/) | [Version](http://cran.r-project.org/web/packages/REDCapR/) | [Rate](http://cranlogs.r-pkg.org/) | [Zenodo](https://zenodo.org/search?ln=en&p=redcapr) | 
 |  :---- | :----: | :----: | :----: |
-| [Latest](http://cran.r-project.org/web/packages/REDCapR/) | [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/REDCapR)](http://cran.r-project.org/web/packages/REDCapR) | ![CRANPace](http://cranlogs.r-pkg.org/badges/redcapAPI) | [![DOI](https://zenodo.org/badge/4971/OuhscBbmc/REDCapR.svg)](http://dx.doi.org/10.5281/zenodo.13326) |
+| [Latest](http://cran.r-project.org/web/packages/REDCapR/) | [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/REDCapR)](http://cran.r-project.org/web/packages/REDCapR) | ![CRANPace](http://cranlogs.r-pkg.org/badges/REDCapR) | [![DOI](https://zenodo.org/badge/4971/OuhscBbmc/REDCapR.svg)](http://dx.doi.org/10.5281/zenodo.13326) |
 |   | *Latest CRAN version* | *CRAN Downloads* | *Independently-hosted Archive* |
 
 <!-- The development version of REDCapR can be installed from [R-Forge](https://r-forge.r-project.org/projects/redcapr/),
