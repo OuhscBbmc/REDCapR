@@ -84,10 +84,10 @@ devtools::check(force_suggests = FALSE)
 
 Alternatively, the RODBC package can be installed from your distribution's repository using the shell.  Here are instructions for [Ubuntu](http://cran.r-project.org/bin/linux/ubuntu/README.html) and [Red Hat](http://cran.r-project.org/bin/linux/redhat/README).
 ```shell
-#For Ubuntu
+#From Ubuntu terminal
 sudo apt-get install r-cran-rodbc
 
-#For Red Hat
+#From Red Hat terminal
 sudo yum install R-RODBC
 ```
 

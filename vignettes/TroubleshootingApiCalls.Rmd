@@ -13,7 +13,7 @@ This first group of checks primarily focuses on the server and the logins accoun
 
 1. **Does the user have permissions for the specific *project*?** This can be verified in the `User Rights` section within the project.  Notice that it's possible (but ultimately not useful) to have an account here, but not with the server, so don't skip the previous step.
 
-1. **Can the user login in normally through the interface?** However if the username and password aren't working, the API theoretically might still work because it uses their token instead of their password.
+1. **Can the user log in normally through the interface?** However if the username and password aren't working, the API theoretically might still work because it uses their token instead of their password.
 
 1. **Has the user verified their account by responding to the automated email sent to them?** This can be verified in the `Browse Users` section of your server's `Control Center`.  For each email address they've entered, there should be a green 'Verified' label and icon.
 
@@ -164,7 +164,7 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
     ```
 
 ## Exporting from REDCap to R, using REDCapR
- [REDCapR](https://github.com/OuhscBbmc/REDCapR) is a package that uses [RCurl](http://cran.r-project.org/web/packages/RCurl) (via [httr](https://github.com/hadley/httr)) to communicate with REDCap, and wraps convience functions around it to reduce the size and complexity of the user's code.  The package's basic functions are demonstrated in [this vignette](http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/BasicREDCapROperations.html) and are documented in its [reference manual](https://github.com/OuhscBbmc/REDCapR/blob/master/documentation_peek.pdf) (click the 'View Raw' link).
+ [REDCapR](https://github.com/OuhscBbmc/REDCapR) is a package that uses [cURL](http://curl.haxx.se/) (via [httr](https://github.com/hadley/httr)) to communicate with REDCap, and wraps convience functions around it to reduce the size and complexity of the user's code.  The package's basic functions are demonstrated in [this vignette](http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/BasicREDCapROperations.html) and are documented in its [reference manual](https://github.com/OuhscBbmc/REDCapR/blob/master/documentation_peek.pdf) (click the 'View Raw' link).
 
 If you're not using REDCapR, you can skip this section and proceed to 'Importing into REDCap from R' below.
 
@@ -252,7 +252,7 @@ If you're not using REDCapR, you can skip this section and proceed to 'Importing
  If so the "Can the user query a *entire* REDCap project using RCurl?" check succeeded, but the REDCapR checks did not, consider posting a new [GitHub issue](https://github.com/OuhscBbmc/REDCapR/issues) to the package developers.
 
 ## Exporting from REDCap to R, using redcapAPI
-[redcapAPI](https://github.com/nutterb/redcapAPI) is a package that uses [httr](http://cran.r-project.org/web/packages/RCurl) (via [httr](https://github.com/hadley/httr)) to communicate with REDCap, and wraps convience functions around it to reduce the size and complexity of the user's code.  
+[redcapAPI](https://github.com/nutterb/redcapAPI) is a package that uses [cURL](http://curl.haxx.se/) (via [httr](https://github.com/hadley/httr)) to communicate with REDCap, and wraps convience functions around it to reduce the size and complexity of the user's code.  
 
 If you're not using redcapAPI, you can skip this section and proceed to 'Importing into REDCap from R' below.  More specific discussion about `redcapAPI` can be found at the [package's wiki](https://github.com/nutterb/redcapAPI/wiki).
 

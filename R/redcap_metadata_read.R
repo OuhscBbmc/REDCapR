@@ -51,7 +51,7 @@ redcap_metadata_read <- function(
   #TODO: NULL verbose parameter pulls from getOption("verbose")
   #TODO: warns if any requested fields aren't entirely lowercase.
   
-  message("The `REDCapR::redcap_metadata_read()` function is very new and under development; it's likely to change in the future, especially how it handles checkboxes.")
+  message("The `REDCapR::redcap_metadata_read()` function is very new and under development.\nIt's likely to change in the future, especially how it handles checkboxes.")
   
   start_time <- Sys.time()
   
