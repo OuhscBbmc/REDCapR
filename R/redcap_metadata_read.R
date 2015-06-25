@@ -66,14 +66,14 @@ redcap_metadata_read <- function(
   if( nchar(fields_collapsed)==0 )
     fields_collapsed <- ifelse(is.null(fields), "", paste0(fields, collapse=",")) #This is an empty string if `fields` is NULL.
   
-  if( missing( config_options ) | is.null(config_options) ) {
-    cert_location <- system.file("ssl_certs/mozilla_ca_root.crt", package="REDCapR")
-    
-    if( !base::file.exists(cert_location) )
-      stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
-    
-    config_options <- list(cainfo=cert_location)
-  }
+  # if( missing( config_options ) | is.null(config_options) ) {
+  #   cert_location <- system.file("ssl_certs/mozilla_ca_root.crt", package="REDCapR")
+  #   
+  #   if( !base::file.exists(cert_location) )
+  #     stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
+  #   
+  #   config_options <- list(cainfo=cert_location)
+  # }
   
   post_body <- list(
     token = token,

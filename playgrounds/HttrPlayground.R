@@ -10,25 +10,32 @@ raw_or_label <- "raw"
 export_data_access_groups_string <- "true"
 records_collapsed <- "1,2,5"
 fields_collapsed <- NULL
+events_collapsed <- NULL
 
-config_options <- list(cainfo = system.file("cacert.pem", package = "httr"))
-# config_options <- list(cainfo = "./inst/ssl_certs/mozilla_ca_root.crt")
+# config_options <- list(cainfo = system.file("cacert.pem", package = "httr"))
+config_options <- list(cainfo = "./inst/ssl_certs/mozilla_ca_root.crt")
 # config_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
+config_options <- list()
 
-r <- httr::POST(
-  url = redcap_uri
-  , body = list(
-    token = token
-    , content = 'record'
-    , format = 'csv'
-    , type = 'flat'
-    , rawOrLabel = raw_or_label
-    , exportDataAccessGroups = export_data_access_groups_string
-    , records = records_collapsed
-    , fields = fields_collapsed
-  )
-  , .opts = config_options
+post_body <- list(
+  token = token,
+  content = 'record',
+  format = 'csv',
+  type = 'flat',
+  rawOrLabel = raw_or_label,
+  exportDataAccessGroups = export_data_access_groups_string,
+  records = records_collapsed,
+  fields = fields_collapsed,
+  events = events_collapsed
 )
+
+result <- httr::POST(
+  url = redcap_uri,
+  body = post_body,
+  config = config_options
+)
+
+
 r$status_code
 r$headers$status
 r$headers$statusmessage
