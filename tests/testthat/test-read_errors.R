@@ -6,8 +6,8 @@ context("Read Errors")
 test_that("One Shot: Bad Uri -Not HTTPS", {
   uri <- "http://bbmc.ouhsc.edu/redcap/api/" #Not HTTPS
   token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account on pid=153.
-  # expected_message <- "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\"http://www.w3.org/TR/html4/strict.dtd\">\r\n<HTML><HEAD><TITLE>Length Required</TITLE>\r\n<META HTTP-EQUIV=\"Content-Type\" Content=\"text/html; charset=us-ascii\"></HEAD>\r\n<BODY><h2>Length Required</h2>\r\n<hr><p>HTTP Error 411. The request must be chunked or have a content length.</p>\r\n</BODY></HTML>\r\n"
-  expected_message <- "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><hash><error>The requested method is not implemented.</error></hash>"
+  expected_message <- "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\"http://www.w3.org/TR/html4/strict.dtd\">\r\n<HTML><HEAD><TITLE>Length Required</TITLE>\r\n<META HTTP-EQUIV=\"Content-Type\" Content=\"text/html; charset=us-ascii\"></HEAD>\r\n<BODY><h2>Length Required</h2>\r\n<hr><p>HTTP Error 411. The request must be chunked or have a content length.</p>\r\n</BODY></HTML>\r\n"
+  # expected_message <- "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><hash><error>The requested method is not implemented.</error></hash>"
   
   expect_message(
     returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, verbose=T)    
@@ -18,7 +18,7 @@ test_that("One Shot: Bad Uri -Not HTTPS", {
 #   )
   
   expect_equal(returned_object$data, expected=data.frame(), label="An empty data.frame should be returned.")
-  expect_equal(returned_object$status_code, expected=501L)
+  expect_equal(returned_object$status_code, expected=411L)
   # expect_equal(returned_object$status_message, expected="Length Required")
   expect_equal(returned_object$raw_text, expected=expected_message)
   expect_equal(returned_object$records_collapsed, "")
@@ -50,13 +50,13 @@ test_that("Batch: Bad Uri -Not HTTPS", {
   uri <- "http://bbmc.ouhsc.edu/redcap/api/" #Not HTTPS
   token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account on pid=153.
   
-  expected_outcome_message <- "The initial call failed with the code: 501."
+  expected_outcome_message <- "The initial call failed with the code: 411."
   expect_message(
     returned_object <- redcap_read(redcap_uri=uri, token=token, verbose=T)    
   )  
   
   expect_equal(returned_object$data, expected=data.frame(), label="An empty data.frame should be returned.")
-  expect_equal(returned_object$status_code, expected=501L)
+  expect_equal(returned_object$status_code, expected=411L)
   # expect_equal(returned_object$status_message, expected="Length Required")
   expect_equal(returned_object$records_collapsed, "failed in initial batch call")
   expect_equal(returned_object$fields_collapsed, "failed in initial batch call")

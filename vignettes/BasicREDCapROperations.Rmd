@@ -11,7 +11,7 @@ vignette: >
 This vignette covers the the basic functions exposed by the [`REDCapR`](https://github.com/OuhscCcanMiechvEvaluation/REDCapR) package which allow you to interact with [REDCap](http://www.project-redcap.org/) through its API.
 
 ## Reading REDCap Data
-The function `redcap_read_oneshot` uses the [`RCurl`](http://cran.r-project.org/web/packages/RCurl/index.html) package to call the REDCap API.
+The function `redcap_read_oneshot` uses the [`RCurl`](http://cran.r-project.org/package=RCurl) package to call the REDCap API.
 ```{r set_options, echo=FALSE, results='hide'}
 library(knitr)
 opts_chunk$set(
