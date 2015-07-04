@@ -52,7 +52,7 @@ result <- httr::POST(
 )
 httr::content(result, "text")
 
-ds <- read.csv(text=raw_text, stringsAsFactors=FALSE) #Convert the raw text to a dataset.
+ds <- utils::read.csv(text=raw_text, stringsAsFactors=FALSE) #Convert the raw text to a dataset.
 
 # 
 # raw_text2 <- RCurl::postForm(
@@ -67,7 +67,7 @@ ds <- read.csv(text=raw_text, stringsAsFactors=FALSE) #Convert the raw text to a
 #   , fields = fields_collapsed
 #   , .opts = RCurl::curlOptions(ssl.verifypeer = FALSE)
 # )
-# ds2 <- read.csv(text=raw_text2, stringsAsFactors=FALSE) #Convert the raw text to a dataset.
+# ds2 <- utils::read.csv(text=raw_text2, stringsAsFactors=FALSE) #Convert the raw text to a dataset.
 
 # result <- redcap_read_oneshot(redcap_uri="https://bbmc.ouhsc.edu/redcap/api/", token = "9A81268476645C4E5F03428B8AC3AA7B")
 # dput(result$data)
@@ -96,7 +96,7 @@ dsToWrite$age <- NULL; dsToWrite$bmi <- NULL #Drop the calculated fields
 # result <- REDCapR::redcap_write_oneshot(ds=dsToWrite, redcap_uri="https://bbmc.ouhsc.edu/redcap/api/", token = "9A81268476645C4E5F03428B8AC3AA7B")
 
 con <-  base::textConnection(object='csvElements', open='w', local=TRUE)
-write.csv(dsToWrite, con, row.names = FALSE, na="")  
+utils::write.csv(dsToWrite, con, row.names = FALSE, na="")  
 close(con)
 
 csv <- paste(csvElements, collapse="\n")

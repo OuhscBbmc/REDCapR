@@ -15,9 +15,9 @@ populate_project_simple <- function( batch = FALSE ) {
  
   #Write the file to disk (necessary only when you wanted to change the data).  Don't uncomment; just run manually.
   # returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="raw")
-  # write.csv(returned_object$data, file="./inst/test_data/project_simple/simple_data.csv", row.names=FALSE)
+  # utils::write.csv(returned_object$data, file="./inst/test_data/project_simple/simple_data.csv", row.names=FALSE)
   # returned_object_metadata <- redcap_metadata_read(redcap_uri=uri, token=token)
-  # write.csv(returned_object_metadata$data, file="./inst/test_data/project_simple/simple_metadata.csv", row.names=FALSE)
+  # utils::write.csv(returned_object_metadata$data, file="./inst/test_data/project_simple/simple_metadata.csv", row.names=FALSE)
     
   #Read in the data in R's memory from a csv file.
   dsToWrite <- utils::read.csv(file=path_in_simple, stringsAsFactors=FALSE)

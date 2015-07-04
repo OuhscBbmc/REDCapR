@@ -25,18 +25,18 @@ curl::curl_fetch_memory(url=redcap_uri)
 ##########################################################################
 library(httr) #devtools::install_github("hadley/httr")
 post_body <- list(
-    token = token,
-    content = 'record',
-    format = 'csv',
-    type = 'flat',
-    rawOrLabel = 'raw',
+    token                  = token,
+    content                = 'record',
+    format                 = 'csv',
+    type                   = 'flat',
+    rawOrLabel             = 'raw',
     exportDataAccessGroups = 'true'
 )
 
 httr_raw <- httr::POST(
-    url = redcap_uri,
-    body = post_body,
-    config = config(cainfo=cert_location),
+    url            = redcap_uri,
+    body           = post_body,
+    config         = config(cainfo=cert_location),
     httr::verbose() 
 )
 httr_raw

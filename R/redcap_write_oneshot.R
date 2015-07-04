@@ -89,7 +89,7 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, config_op
   # }
   
   con <-  base::textConnection(object='csvElements', open='w', local=TRUE)
-  write.csv(ds, con, row.names = FALSE, na="")  
+  utils::write.csv(ds, con, row.names = FALSE, na="")  
   close(con)
   
   csv <- paste(csvElements, collapse="\n")
