@@ -1,10 +1,15 @@
 
 populate_project_simple <- function( batch = FALSE ) {
   if( !requireNamespace("testthat") ) stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.")
+  
   #Declare the server & user information
+  # uri <- "https://www.redcapplugins.org/api/"
   uri <- "https://bbmc.ouhsc.edu/redcap/api/"
+  
+  # token <- "D96029BFCE8FFE76737BFC33C2BCC72E" #For `UnitTestPhiFree` account and the simple project (pid 27) on Vandy's test server.
   # token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account and the simple project (pid 153)
   token <- "D70F9ACD1EDD6F151C6EA78683944E98" #For `UnitTestPhiFree` account and the simple project (pid 213)
+  
   project <- REDCapR::redcap_project$new(redcap_uri=uri, token=token)
   path_in_simple <- base::file.path(devtools::inst(name="REDCapR"), "test_data/project_simple/simple_data.csv")
  
@@ -31,6 +36,7 @@ populate_project_simple <- function( batch = FALSE ) {
       returned_object <- REDCapR::redcap_write_oneshot(ds=dsToWrite, redcap_uri=uri, token=token, verbose=TRUE)
     }
   )
+  # For internal inspection: REDCapR::redcap_read_oneshot(redcap_uri=uri, token=token, verbose=TRUE)
   
   #If uploading the data was successful, then upload the image files.
   if( returned_object$success) {
