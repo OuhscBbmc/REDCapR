@@ -2,6 +2,9 @@ rm(list=ls(all=TRUE))  #Clear the variables from previous runs.
 
 library(httr)
 
+redcap_uri <- "http://www.redcapplugins.org/redcap_v6.5.0/API/"
+token <- "D96029BFCE8FFE76737BFC33C2BCC72E" #For `UnitTestPhiFree` account and the simple project (pid 27) on Vandy's test server.
+
 
 redcap_uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "9A81268476645C4E5F03428B8AC3AA7B"
@@ -15,7 +18,8 @@ events_collapsed <- NULL
 # config_options <- list(cainfo = system.file("cacert.pem", package = "httr"))
 config_options <- list(cainfo = "./inst/ssl_certs/mozilla_ca_root.crt")
 # config_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
-config_options <- list()
+config_options <- httr::config(ssl_verifypeer=F)
+# config_options <- list()
 
 post_body <- list(
   token = token,
@@ -36,12 +40,19 @@ result <- httr::POST(
 )
 
 
-r$status_code
-r$headers$status
-r$headers$statusmessage
-raw_text <- httr::content(r, "text")
+result$status_code
+result$headers$status
+result$headers$statusmessage
+raw_text <- httr::content(result, "text")
 
-ds <- read.csv(text=raw_text, stringsAsFactors=FALSE) #Convert the raw text to a dataset.
+result <- httr::POST(
+  url    = "http://httpbin.org/post",
+  body   = "A simple text string", 
+  config = httr::config(ssl_verifypeer=FALSE)
+)
+httr::content(result, "text")
+
+ds <- utils::read.csv(text=raw_text, stringsAsFactors=FALSE) #Convert the raw text to a dataset.
 
 # 
 # raw_text2 <- RCurl::postForm(
@@ -56,7 +67,7 @@ ds <- read.csv(text=raw_text, stringsAsFactors=FALSE) #Convert the raw text to a
 #   , fields = fields_collapsed
 #   , .opts = RCurl::curlOptions(ssl.verifypeer = FALSE)
 # )
-# ds2 <- read.csv(text=raw_text2, stringsAsFactors=FALSE) #Convert the raw text to a dataset.
+# ds2 <- utils::read.csv(text=raw_text2, stringsAsFactors=FALSE) #Convert the raw text to a dataset.
 
 # result <- redcap_read_oneshot(redcap_uri="https://bbmc.ouhsc.edu/redcap/api/", token = "9A81268476645C4E5F03428B8AC3AA7B")
 # dput(result$data)
@@ -85,7 +96,7 @@ dsToWrite$age <- NULL; dsToWrite$bmi <- NULL #Drop the calculated fields
 # result <- REDCapR::redcap_write_oneshot(ds=dsToWrite, redcap_uri="https://bbmc.ouhsc.edu/redcap/api/", token = "9A81268476645C4E5F03428B8AC3AA7B")
 
 con <-  base::textConnection(object='csvElements', open='w', local=TRUE)
-write.csv(dsToWrite, con, row.names = FALSE, na="")  
+utils::write.csv(dsToWrite, con, row.names = FALSE, na="")  
 close(con)
 
 csv <- paste(csvElements, collapse="\n")

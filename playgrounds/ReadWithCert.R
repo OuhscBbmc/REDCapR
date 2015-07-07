@@ -20,7 +20,7 @@ raw_text <- RCurl::postForm(
   , .opts = RCurl::curlOptions(ssl.verifypeer = FALSE)
 )
 try(
-  dsTry <- read.csv(text=raw_text, stringsAsFactors=FALSE) #Convert the raw text to a dataset.
+  dsTry <- utils::read.csv(text=raw_text, stringsAsFactors=FALSE) #Convert the raw text to a dataset.
 )
 if( ! exists("dsTry") )
   dsTry <- data.frame()

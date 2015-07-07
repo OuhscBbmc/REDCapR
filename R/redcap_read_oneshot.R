@@ -171,7 +171,7 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
   if( success ) {
     try (
       {
-        ds <- read.csv(text=raw_text, stringsAsFactors=FALSE)
+        ds <- utils::read.csv(text=raw_text, stringsAsFactors=FALSE)
       }, #Convert the raw text to a dataset.
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
     )

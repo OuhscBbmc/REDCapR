@@ -98,7 +98,7 @@ redcap_metadata_read <- function(
   
   if( success ) {
     try (
-      ds <- read.csv(text=raw_text, stringsAsFactors=FALSE), #Convert the raw text to a dataset.
+      ds <- utils::read.csv(text=raw_text, stringsAsFactors=FALSE), #Convert the raw text to a dataset.
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
     )
     

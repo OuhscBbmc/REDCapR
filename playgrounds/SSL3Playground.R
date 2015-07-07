@@ -6,6 +6,9 @@ token <- "D70F9ACD1EDD6F151C6EA78683944E98****"
 # redcap_uri <- "https://ampa.org/redcap/api/"
 # token <- "D1BB670A719F1D481A5574F33125A04C" ## expires 11/2/2014
 
+redcap_uri <- "https://www.redcapplugins.org/redcap_v6.5.0/API/"
+token <- "D96029BFCE8FFE76737BFC33C2BCC72E" #For `UnitTestPhiFree` account and the simple project (pid 27) on Vandy's test server.
+
 ## RCurl
 library(RCurl)
 
@@ -24,7 +27,7 @@ RCurl_raw <- RCurl::postForm(
 #     , type = 'flat'
 #     , rawOrLabel = 'raw'
 #     , exportDataAccessGroups = 'true'
-    , .opts = RCurl::curlOptions(ssl.verifypeer=T, verbose=TRUE)
+    , .opts = RCurl::curlOptions(ssl.verifypeer=F, verbose=TRUE)
 )
 
 RCurl_raw
@@ -40,13 +43,19 @@ post_body <- list(
     exportDataAccessGroups = 'true'
 )
 
+set_config(ssl_verifypeer=FALSE)
+config(ssl_verifypeer=FALSE)
+config()
+
 httr_raw <- httr::POST(
     url = redcap_uri,
     body = post_body#,
+    # config = config(ssl_verifypeer=FALSE)
    # config = httr::config(ssl.verifypeer=F)
     #httr::verbose() 
 )
 httr_raw
+content(httr_raw)
 
 # devtools::install_github("nutterb/redcapAPI")
 # install.packages("redcapAPI")
