@@ -259,6 +259,10 @@ He had a gold watch chain and a black mustache&quot;,2
 <li><p><strong>Can an administrator query the API successfully with Postman with the admin token?</strong> As an administrator, create an account for yourself, and verify that your token works on your server and project.</p></li>
 <li><p><strong>Can an administrator query the API successfully with Postman with the user&#39;s token?</strong> Use <a href="http://www.getpostman.com/">Postman</a> as before, but replace your token with the user&#39;s token.  Once the whole problem is solved, reissue new API tokens to both you and the user.</p></li>
 <li><p><strong>Can an user query the API successfully with Postman with the their own token?</strong> The values they enter should be exactly the same as those entered in the previous step.  A failure here (assuming the previous step was successful) suggests a network or firewall issue.  If the server is behind your institution&#39;s firewall, verify the user is connecting successfully through the VPN.</p></li>
+<li><p><strong>Can a user query the API with cURL?</strong>  <a href="http://curl.haxx.se/docs/manpage.html">cURL</a> is a command line tool that&#39;s underneath a lot of libraries.  If it&#39;s installed correctly on your location machine, it can be executed from the terminal or command line.</p>
+
+<pre><code class="shell">curl -X POST -H &quot;Cache-Control: no-cache&quot; -F &quot;token=9A81268476645C4E5F03428B8AC3AA7B&quot; -F &quot;content=record&quot; -F &quot;format=csv&quot; &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;
+</code></pre></li>
 </ol>
 
 <h2>Exporting from REDCap to R</h2>
