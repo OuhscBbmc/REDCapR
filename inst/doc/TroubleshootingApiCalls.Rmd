@@ -3,10 +3,14 @@
 %\VignetteIndexEntry{Troubleshooting REDCap API Calls}
 -->
 
-# Troubleshooting REDCap API Calls
+Troubleshooting REDCap API Calls
+==================================================================
+
 There are many links in the pipeline between your institution's [REDCap](http://www.project-redcap.org/) server and the API user.  When the end result is unsuccesful, this document should help narrow the location of the possible problem.  The first two sections will be relevant to almost any language interacting with the API.  The remaining sections are possibly relevant only to your language (eg, Python, R, SAS, bash), or your software library ([redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) in R and [PyCap](http://pycap.readthedocs.org/en/latest/) in Python).
 
-## Server Configuration and Authorization
+Server Configuration and Authorization
+------------------------------------------------------------------
+
 This first group of checks primarily focuses on the server and the logins accounts.  Unlike later sections, REDCap administrator privileges are necessary for most of these checks.
 
 1. **Does the user have an account for the *server*?**  This can be verified in the `Browse Users` section of the server's `Control Center`.
@@ -27,7 +31,9 @@ This first group of checks primarily focuses on the server and the logins accoun
 
     <img src="./images/MagnifyingGlass.png" alt="MagnifyingGlass" style="width: 550px;"/>
 
-## Language Agnostic API
+Language Agnostic API
+------------------------------------------------------------------
+
 This section group examines potential problems that occur after it leaves a working server, but before it is handled by their programming language (eg, Python and R).  [Postman](http://www.getpostman.com/) is a Chrome plugin recommended by [several](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ) [people](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ) that makes troubleshooting much more efficient.
 
 <img src="./images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>
@@ -60,7 +66,14 @@ This section group examines potential problems that occur after it leaves a work
 
 1. **Can an user query the API successfully with Postman with the their own token?** The values they enter should be exactly the same as those entered in the previous step.  A failure here (assuming the previous step was successful) suggests a network or firewall issue.  If the server is behind your institution's firewall, verify the user is connecting successfully through the VPN.
 
-## Exporting from REDCap to R
+1. **Can a user query the API with cURL?**  [cURL](http://curl.haxx.se/docs/manpage.html) is a command line tool that's underneath a lot of libraries.  If it's installed correctly on your location machine, it can be executed from the terminal or command line.
+    ```shell
+    curl -X POST -H "Cache-Control: no-cache" -F "token=9A81268476645C4E5F03428B8AC3AA7B" -F "content=record" -F "format=csv" "https://bbmc.ouhsc.edu/redcap/api/"
+    ```
+
+Exporting from REDCap to R
+------------------------------------------------------------------
+
 There are several ways to call REDCap's API from [R](http://cran.r-project.org/).  The packages [redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) both rely on the [httr](http://cran.r-project.org/package=httr) package, which calls the [RCurl](http://cran.r-project.org/package=RCurl) package.
  
 1. **Is RCurl installed on the user's local machine?** If so, running `library(RCurl)` should produce the following output if you're starting with a fresh session of R:
@@ -163,8 +176,10 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
     )
     ```
 
-## Exporting from REDCap to R, using REDCapR
- [REDCapR](https://github.com/OuhscBbmc/REDCapR) is a package that uses [cURL](http://curl.haxx.se/) (via [httr](https://github.com/hadley/httr)) to communicate with REDCap, and wraps convience functions around it to reduce the size and complexity of the user's code.  The package's basic functions are demonstrated in [this vignette](http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/BasicREDCapROperations.html) and are documented in its [reference manual](https://github.com/OuhscBbmc/REDCapR/blob/master/documentation_peek.pdf) (click the 'View Raw' link).
+Exporting from REDCap to R, using REDCapR
+------------------------------------------------------------------
+
+[REDCapR](https://github.com/OuhscBbmc/REDCapR) is a package that uses [cURL](http://curl.haxx.se/) (via [httr](https://github.com/hadley/httr)) to communicate with REDCap, and wraps convience functions around it to reduce the size and complexity of the user's code.  The package's basic functions are demonstrated in [this vignette](http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/BasicREDCapROperations.html) and are documented in its [reference manual](https://github.com/OuhscBbmc/REDCapR/blob/master/documentation_peek.pdf) (click the 'View Raw' link).
 
 If you're not using REDCapR, you can skip this section and proceed to 'Importing into REDCap from R' below.
 
@@ -251,7 +266,9 @@ If you're not using REDCapR, you can skip this section and proceed to 'Importing
 1. **Is the export operation still unsuccessful using REDCapR?**
  If so the "Can the user query a *entire* REDCap project using RCurl?" check succeeded, but the REDCapR checks did not, consider posting a new [GitHub issue](https://github.com/OuhscBbmc/REDCapR/issues) to the package developers.
 
-## Exporting from REDCap to R, using redcapAPI
+Exporting from REDCap to R, using redcapAPI
+------------------------------------------------------------------
+
 [redcapAPI](https://github.com/nutterb/redcapAPI) is a package that uses [cURL](http://curl.haxx.se/) (via [httr](https://github.com/hadley/httr)) to communicate with REDCap, and wraps convience functions around it to reduce the size and complexity of the user's code.  
 
 If you're not using redcapAPI, you can skip this section and proceed to 'Importing into REDCap from R' below.  More specific discussion about `redcapAPI` can be found at the [package's wiki](https://github.com/nutterb/redcapAPI/wiki).
@@ -323,7 +340,9 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
 1. **Is the export operation still unsuccessful using redcapAPI?** If so the "Can the user query a *entire* REDCap project using RCurl?" check succeeded, but the redcapAPI checks did not, consider posting a new [GitHub issue](https://github.com/nutterb/redcapAPI/issues) to the package developers.
 
 
-## Importing into REDCap from R
+Importing into REDCap from R
+------------------------------------------------------------------
+
 Troubleshooting import operations is trickier than export operations for two major reasons.  First, the database potentially persists your *import* mistakes.  In contrast, repeatedly *exporting* data won't affect subsequent reads.  Considering cloning the REDCap project for testing until the problem is resolved.  Remember to create a new token (because they're not automatically created when projects are cloned, even when users are copied), and to modify your code's token to point to the new testing clone.
 
  The second reason why importing can be trickier is because the schema (eg, the names and data types) of your local dataset must match the project's schema.  This section will be expanded in the future.  Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project's schema and dataset.  Also, consider exporting the dataset to your machine, and look for differences.  Note that you cannot import calculated fields into REDCap.
@@ -332,8 +351,11 @@ Troubleshooting import operations is trickier than export operations for two maj
 
 1. **Can the user import a *subset* of the project?**
  
-## Other software for communication and automation with REDCap
+Other software for communication and automation with REDCap
+------------------------------------------------------------------
+
 REDCap is used in many enviroments, andit's not surprising that a lot of libraries have been developed that cater to different scenarios and languages.  Here's a partial list, and please [email me](mailto:wibeasley@hotmail.com) if there are more that should be included.
+
 
 **Actively developed in the past two years**
 
@@ -344,12 +366,16 @@ REDCap is used in many enviroments, andit's not surprising that a lot of librari
 1. [`redcap-repeat`](https://github.com/cbmi/redcap-repeat): "Script for REDCap data dictionaries to support repeating fields and groups of fields." (Written in Python primarily by Jeff Max at CHOP's [CBMI](https://github.com/cbmi)).
 1. [`django-redcap`](https://github.com/cbmi/django-redcap): "Utilities for porting REDCap projects to and from Django models." (Written in Python primarily by 'dmegahan at CHOP's [CBMI](https://github.com/cbmi)).
 
-## Other good resources
+Other good resources
+------------------------------------------------------------------
+
  * The basic API documentation is available on your REDCap server, typically at http://<*your server name*>/redcap/api/help.
  * If you have access to the REDCap wiki, some newer examples might exist at <https://iwg.devguard.com/trac/redcap/wiki/ApiExamples>.
  * Scott Burns, the developer of [PyCap](http://sburns.org/PyCap/) has a good intro at http://sburns.org/2013/07/22/intro-to-redcap-api.html
  * Bejamin Nutter, the developer of [redcapAPI](https://github.com/nutterb/redcapAPI/wiki) has a good wiki at https://github.com/nutterb/redcapAPI/wiki
  * In addition to this troubleshooting document, REDCapR has a [vignette](http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/BasicREDCapROperations.html) that covers its basic operations.
 
-## Document Info
+Document Info
+------------------------------------------------------------------
+
 This document is primarily based on REDCap version 6.0.2 and was last updated 2015-02-21.  A development version of the document is available on GitHub: http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html.
