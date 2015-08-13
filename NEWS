@@ -1,9 +1,11 @@
-Version 0.8 (Developed 2015-01-15 through ?)
+Version 0.8 (Developed 2015-01-15 through 2015-08-12)
 ------------------------------------------------------------------------------
-New Features: 
+New Features:
+* Adapted for version 1.0.0 of httr (which is now based on the `curl` package, instead of `RCurl`).
 
 Minor Updates:
 * Uses `requireNamespace()` instead of `require()`.
+* By default, uses the SSL cert files used by httr, which by default, uses those packaged with R.
 * Added warning if it appears `readcap_read()` is being used without 'Full Data Set' export privileges.  The problem involves the record IDs are hashed.
 * Reconnected code that reads only the `id_position` in the first stage of batching.  The metadata needed to be read before that, after the updates for REDCap Version 6.0.x.
 * `retrieve_token_mssql()` uses regexes to validate parameters

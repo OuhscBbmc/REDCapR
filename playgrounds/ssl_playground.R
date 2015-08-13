@@ -8,9 +8,9 @@ token <- "D70F9ACD1EDD6F151C6EA78683944E98"
 
 
 # # Credentials for Vandy's EC2 test server
-# redcap_uri <- "https://www.redcapplugins.org/api/"
-# # redcap_uri <- "https://www.redcapplugins.org/redcap_v6.5.0/API/"
-# token <- "D96029BFCE8FFE76737BFC33C2BCC72E" #For `UnitTestPhiFree` account and the simple project (pid 27) on Vandy's test server.
+redcap_uri <- "https://www.redcapplugins.org/api/"
+# redcap_uri <- "https://www.redcapplugins.org/redcap_v6.5.0/API/"
+token <- "D96029BFCE8FFE76737BFC33C2BCC72E" #For `UnitTestPhiFree` account and the simple project (pid 27) on Vandy's test server.
 
 # SO post:
 # http://stackoverflow.com/questions/15347233/ssl-certificate-failed-for-twitter-in-r
