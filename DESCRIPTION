@@ -31,11 +31,11 @@ Depends:
     stats
 Imports:
     httr(>= 1.0.0),
-    methods,
     plyr
 Suggests:
     devtools,
     knitr,
+    methods,
     rmarkdown,
     RODBC,
     testthat (>= 0.9)

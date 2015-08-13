@@ -1,18 +1,15 @@
 #' @name redcap_project
 #' @export redcap_project
-#' @exportClass redcap_project
 #' 
 #' @title A \code{Reference Class} to make later calls to REDCap more convenient.
-#' 
-#' @docType class
-#' 
+#'
 #' @description This \code{Reference Class} represents a REDCap project. 
 #' Once some values are set that are specific to a REDCap project (such as the URI and token), 
 #' later calls are less verbose (such as reading and writing data).  The functionality 
-#' 
+#'
 #' @field redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
 #' @field token token The user-specific string that serves as the password for a project.  Required.
-#' 
+#'
 #' @examples
 #' library(REDCapR) #Load the package into the current R session.
 #' uri <- "https://bbmc.ouhsc.edu/redcap/api/"
@@ -39,7 +36,7 @@
 #' dsThreeColumns$sex <- sex_original
 #' project$write(dsThreeColumns)
 #' }
-#' 
+
 redcap_project <- setRefClass(
   Class = "redcap_project",
   
