@@ -9,7 +9,7 @@
 
 REDCapR
 =======
-We’ve been using R with REDCap’s API since the Fall 2012 and have developed some functions that we're assembling in an R package: `REDCapR`.  The release version and documentation is on [CRAN](http://cran.rstudio.com/web/packages/REDCapR/), while the development site for collaboration is on [GitHub](https://github.com/OuhscBbmc/REDCapR).
+We’ve been using R with REDCap’s API since the Fall 2012 and have developed some functions that we're assembling in an R package: `REDCapR`.  The release version and documentation is on [CRAN](http://cran.r-project.org/package=REDCapR), while the development site for collaboration is on [GitHub](https://github.com/OuhscBbmc/REDCapR).
 
 It was taking us a minimum of 50 lines of code to contact REDCap and robustly transform the returned CSV into an R `data.frame`.  It took more than twice that much code to implement batching.  All this can be done in one line of R code with the package's `redcap_read()` function:
 ```r
@@ -54,9 +54,9 @@ Thanks,
 
 #### All Operating Systems
 
-| [CRAN](http://cran.rstudio.com/) | [Version](http://cran.r-project.org/web/packages/REDCapR/) | [Rate](http://cranlogs.r-pkg.org/) | [Zenodo](https://zenodo.org/search?ln=en&p=redcapr) | 
+| [CRAN](http://cran.rstudio.com/) | [Version](http://cran.r-project.org/package=REDCapR) | [Rate](http://cranlogs.r-pkg.org/) | [Zenodo](https://zenodo.org/search?ln=en&p=redcapr) | 
 |  :---- | :----: | :----: | :----: |
-| [Latest](http://cran.r-project.org/web/packages/REDCapR/) | [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/REDCapR)](http://cran.r-project.org/web/packages/REDCapR) | ![CRANPace](http://cranlogs.r-pkg.org/badges/REDCapR) | [![DOI](https://zenodo.org/badge/4971/OuhscBbmc/REDCapR.svg)](http://dx.doi.org/10.5281/zenodo.13326) |
+| [Latest](http://cran.r-project.org/package=REDCapR) | [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/REDCapR)](http://cran.r-project.org/package=REDCapR) | ![CRANPace](http://cranlogs.r-pkg.org/badges/REDCapR) | [![DOI](https://zenodo.org/badge/4971/OuhscBbmc/REDCapR.svg)](http://dx.doi.org/10.5281/zenodo.13326) |
 |   | *Latest CRAN version* | *CRAN Downloads* | *Independently-hosted Archive* |
 
 <!-- The development version of REDCapR can be installed from [R-Forge](https://r-forge.r-project.org/projects/redcapr/),
@@ -64,7 +64,7 @@ Thanks,
 install.packages("REDCapR", repos="http://R-Forge.R-project.org")
 ``` -->
 
-The *release* version of REDCapR can be installed from [CRAN](http://cran.r-project.org/web/packages/REDCapR/).
+The *release* version of REDCapR can be installed from [CRAN](http://cran.r-project.org/package=REDCapR).
 ```r
 install.packages("REDCapR")
 ```
