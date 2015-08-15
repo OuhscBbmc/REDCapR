@@ -1,7 +1,9 @@
-This release is in response to Kurt's request last week to fix a break due ot httr's slightly differen configuration parameter.
+This release is in response to Kurt's request last week to fix a break due ot httr's slightly different configuration parameter.
 
-I also made some updates to reflect newer CRAN policies (eg, using `requireNamespace()` instead of `require()`) snd some change regarding how S4 and RC classes are documented.
+Yesterday I submitted something that was flagged on one of the builds for (a) an export issue (fixed with the roxygen command `@importFrom methods new`) and (b) for two invalid URLs.  Those URLs are intentional and unavoidable; they lead to some very good information that's secured by the REDCap server developer.  Almost everyone using this REDCapR package will have access to the REDCap wiki.
 
-I've checked it on two local machines (one Win7, and one Ubuntu), as well as a Linux build on Travis-CI (https://travis-ci.org/OuhscBbmc/REDCapR), a Windows build on AppVeyor (https://ci.appveyor.com/project/wibeasley/redcapr/history) and Uwe's win-builder (http://win-builder.r-project.org/py6pNOb1gyLR/).  Please tell me if there's something else I should do for CRAN.
+I also made some updates to reflect newer CRAN policies (eg, using `requireNamespace()` instead of `require()`) and some change regarding how S4 and RC classes are documented.
+
+I've checked it on two local machines (one Win7, and one Ubuntu), as well as a Linux build on Travis-CI (https://travis-ci.org/OuhscBbmc/REDCapR), a Windows build on AppVeyor (https://ci.appveyor.com/project/wibeasley/redcapr/history) and Uwe's win-builder (http://win-builder.r-project.org/DMn8pdP1W36K/).  Please tell me if there's something else I should do for CRAN.
 
 -Will Beasley
