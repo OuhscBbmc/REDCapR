@@ -11,19 +11,9 @@ devtools::run_examples(); #dev.off() #This overwrites the NAMESPACE file too
 # devtools::run_examples(, "redcap_read.Rd")
 test_results_checked <- devtools::test()
 # test_results_checked <- devtools::test(filter = "read_batch_l.*")
-# test_results_checked <- devtools::test(filter = "read_russian*")
 # testthat::test_dir("./tests/")
 test_results_not_checked <- testthat::test_dir("./tests/manual/")
 devtools::build_vignettes()
-
-# system("R CMD build --resave-data .") #Then move it up one directory.
-# tarBallPattern <- "^REDCapR_.+\\.tar\\.gz$"
-# file.copy(from=list.files(pattern=tarBallPattern), to="../", overwrite=TRUE)
-# system(paste("R CMD check --as-cran", list.files(pattern=tarBallPattern, path="..//", full.names=TRUE)))
-# unlink(list.files(pattern=tarBallPattern))
-# unlink(list.files(pattern=tarBallPattern, path="..//", full.names=TRUE))
-# unlink("REDCapR.Rcheck", recursive=T)
-# system("R CMD check --as-cran D:/Projects/RDev/NlsyLinksStaging/NlsyLinks_1.300.tar.gz")
 
 # devtools::check(force_suggests = FALSE)
 # devtools::build_win(version="R-devel") #CRAN submission policies encourage the development version

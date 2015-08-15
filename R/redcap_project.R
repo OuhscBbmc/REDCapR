@@ -1,5 +1,6 @@
 #' @name redcap_project
 #' @export redcap_project
+#' @importFrom methods new
 #' 
 #' @title A \code{Reference Class} to make later calls to REDCap more convenient.
 #'

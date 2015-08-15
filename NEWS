@@ -1,4 +1,4 @@
-Version 0.8 (Developed 2015-01-15 through 2015-08-12)
+Versions 0.9 & 0.8 (Developed 2015-01-15 through 2015-08-14)
 ------------------------------------------------------------------------------
 New Features:
 * Adapted for version 1.0.0 of httr (which is now based on the `curl` package, instead of `RCurl`).
@@ -49,7 +49,7 @@ Updates:
 Version 0.3 (Developed 2014-07-03 through 2014-09-01)
 ------------------------------------------------------------------------------
 New Features:
-* Relies on the `httr` package, which provides benefits like the status code message can be captured (eg, 200-OK, 403-Forbidden, 404-NotFound).  See http://cran.r-project.org/web/packages/httr/.
+* Relies on the `httr` package, which provides benefits like the status code message can be captured (eg, 200-OK, 403-Forbidden, 404-NotFound).  See http://cran.r-project.org/package=httr.
 
 Updates:
 * Renamed the former `status_message` to `outcome_message`. This is because the message associated with http code returned is conventionally called the 'status messages' (eg, OK, Forbidden, Not Found).
