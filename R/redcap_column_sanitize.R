@@ -45,4 +45,4 @@ redcap_column_sanitize <- function(
   return( d )
 }
 # https://stat.ethz.ch/R-manual/R-devel/library/base/html/iconv.html
-redcap_column_sanitize(c("Ekstr\xf8m", "J\xf6reskog", "bi\xdfchen Z\xfcrcher"))
+# redcap_column_sanitize(c("Ekstr\xf8m", "J\xf6reskog", "bi\xdfchen Z\xfcrcher"))
