@@ -22,4 +22,14 @@ running
 If you're having trouble with the package, please install the development version.  If this doesn't solve
 your problem, please create a \href{https://github.com/OuhscBbmc/REDCapR/issues}{new issue}, or email Will.
 }
+\examples{
+\dontrun{
+# Install/update REDCapR with the release version from CRAN.
+install.packages('REDCapR')
+
+# Install/update REDCapR with the development version from GitHub
+#install.packages('devtools') #Uncomment if `devtools` isn't installed already.
+devtools::install_github('OuhscBbmc/REDCapR')
+}
+}
 
