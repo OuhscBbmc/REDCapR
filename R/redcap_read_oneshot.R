@@ -3,8 +3,7 @@
 #' 
 #' @title Read/Export records from a REDCap project.
 #'  
-#' @description This function uses REDCap's \href{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}{API}
-#' to select and return data.
+#' @description This function uses REDCap's API to select and return data.
 #' 
 #' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
 #' @param token The user-specific string that serves as the password for a project.  Required.
@@ -45,7 +44,10 @@
 #'  
 #' If you do not pass in this export_data_access_groups value, it will default to \code{FALSE}. The following is from the API help page for version 5.2.3: This flag is only viable if the user whose token is being used to make the API request is *not* in a data access group. If the user is in a group, then this flag will revert to its default value.
 #' @author Will Beasley
-#' @references The official documentation can be found on the `API Examples' page on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}). A user account is required.
+#' @references The official documentation can be found on the `API Help Page` and `API Examples' pages 
+#' on the REDCap wiki (ie, \url{https://iwg.devguard.com/trac/redcap/wiki/ApiDocumentation} and
+#' \url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}). If you do not have an account 
+#' for the wiki, please ask your campus REDCap administrator to send you the static material.
 #' 
 #' The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.
 #' 

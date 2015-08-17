@@ -33,9 +33,11 @@
 #' 
 #' The function allows a delay between calls, which allows the server to attend to other users' requests.
 #' @author Will Beasley
-#' @references The official documentation can be found on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiDocumentation}).  
-#' A user account is required to access the wiki, which typically is granted only to REDCap administrators.  
-#' 
+#' @references The official documentation can be found on the `API Help Page` and `API Examples' pages 
+#' on the REDCap wiki (ie, \url{https://iwg.devguard.com/trac/redcap/wiki/ApiDocumentation} and
+#' \url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}). If you do not have an account 
+#' for the wiki, please ask your campus REDCap administrator to send you the static material.
+#'  
 #' @examples
 #' \dontrun{
 #' library(REDCapR) #Load the package into the current R session.

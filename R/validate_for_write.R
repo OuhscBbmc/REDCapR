@@ -11,7 +11,7 @@
 #' 
 #' @title Inspect a \code{data.frame} to anticipate problems before writing to a REDCap project.
 #'  
-#' @description This set of functions inspect a \code{data.frame} to anticipate problems before writing with REDCap's \href{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}{API}.
+#' @description This set of functions inspect a \code{data.frame} to anticipate problems before writing with REDCap's API.
 #' 
 #' @param d The \code{data.frame} containing the dataset used to update the REDCap project.  Required.
 #' @return A \code{data.frame}, where each potential violation is a row.  The two columns are:
@@ -26,6 +26,10 @@
 #' these individual validation checks.  It allows the client to check everything with one call.
 #' 
 #' @author Will Beasley
+#' @references The official documentation can be found on the `API Help Page` and `API Examples' pages 
+#' on the REDCap wiki (ie, \url{https://iwg.devguard.com/trac/redcap/wiki/ApiDocumentation} and
+#' \url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}). If you do not have an account 
+#' for the wiki, please ask your campus REDCap administrator to send you the static material.
 #' 
 #' @examples
 #' d <- data.frame(

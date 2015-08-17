@@ -25,7 +25,7 @@ A \code{data.frame}, where each potential violation is a row.  The two columns a
 }
 }
 \description{
-This set of functions inspect a \code{data.frame} to anticipate problems before writing with REDCap's \href{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}{API}.
+This set of functions inspect a \code{data.frame} to anticipate problems before writing with REDCap's API.
 }
 \details{
 All functions listed in the Usage section above inspect a specific aspect of the dataset.  The \code{validate_for_read()} function executes all
@@ -41,5 +41,11 @@ validate_for_write(d = d)
 }
 \author{
 Will Beasley
+}
+\references{
+The official documentation can be found on the `API Help Page` and `API Examples' pages
+on the REDCap wiki (ie, \url{https://iwg.devguard.com/trac/redcap/wiki/ApiDocumentation} and
+\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}). If you do not have an account
+for the wiki, please ask your campus REDCap administrator to send you the static material.
 }
 

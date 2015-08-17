@@ -1,11 +1,34 @@
-This release is in response to Kurt's request last week to fix a break due ot httr's slightly different configuration parameter.
-
-Yesterday I submitted something that was flagged on one of the builds for (a) an export issue (fixed with the roxygen command `@importFrom methods new`) and (b) for two invalid URLs.  Those URLs are intentional and unavoidable; they lead to some very good information that's secured by the REDCap server developer.  Almost everyone using this REDCapR package will have access to the REDCap wiki.
-
-Today I added a `skip_on_cran()` to the 'sanitize_last_names' test, b/c apparently the `base::iconv()` gives different results on platforms/configurations that I can't test.
-
-I also made some updates to reflect newer CRAN policies (eg, using `requireNamespace()` instead of `require()`) and some change regarding how S4 and RC classes are documented.
-
-I've checked it on two local machines (one Win7, and one Ubuntu), as well as a Linux build on Travis-CI (https://travis-ci.org/OuhscBbmc/REDCapR), a Windows build on AppVeyor (https://ci.appveyor.com/project/wibeasley/redcapr/history) and Uwe's win-builder (http://win-builder.r-project.org/DMn8pdP1W36K/).  Please tell me if there's something else I should do for CRAN.
+Description
+-----------------------------------------------
+This submission zzz.  Thank you for taking the time to review my submission, and please tell me if there's something else I should do for CRAN.
 
 -Will Beasley
+
+
+Test environments
+-----------------------------------------------
+
+* Local Win8, R 3.2.2 patched
+* [win-builder](http://win-builder.r-project.org/DMn8pdP1W36K) (version="R-devel")
+* [Travis CI](https://travis-ci.org/OuhscBbmc/REDCapR), Ubuntu 12.04 LTS
+* [AppVeyor](https://ci.appveyor.com/project/wibeasley/REDCapR), Windows Server 2012
+
+
+R CMD check results
+-----------------------------------------------
+
+* No ERRORs or WARNINGs on any builds.
+
+* No NOTEs on win-builder.
+
+* No other unexplainable NOTEs on the other builds.
+
+* It doesn't appear to be an official "NOTE", but there is a message about 2 invalid URLs producing a 403-Forbidden status.  These are links to the private REDCap wiki.  These URLs are intentional and unavoidable; they lead to some very good information that's secured by the REDCap server developers.  Almost everyone using this REDCapR package will have access to the [REDCap wiki](https://iwg.devguard.com/trac/redcap/).  And if they're not in contact with an admin on their campus who has access to the wiki, there's a decent chance they're using the server without a license agreement.  I've kept the count of the invalid links to a minimum (once per function), and suggested how the user should preocde if they don't have access.
+    1. https://iwg.devguard.com/trac/redcap/wiki/ApiDocumentation
+    2. https://iwg.devguard.com/trac/redcap/wiki/ApiExamples
+
+
+Downstream dependencies
+-----------------------------------------------
+
+No other packages depend/import this one.

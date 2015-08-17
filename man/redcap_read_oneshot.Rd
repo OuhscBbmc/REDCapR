@@ -48,8 +48,7 @@ Currently, a list is returned with the following elements,
 }
 }
 \description{
-This function uses REDCap's \href{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}{API}
-to select and return data.
+This function uses REDCap's API to select and return data.
 }
 \details{
 I like how \href{http://sburns.org/PyCap/}{PyCap} creates a `project' object with methods that read and write from REDCap.  However this isn't a style that R clients typically use.
@@ -121,7 +120,10 @@ ds_no_ssl <- redcap_read_oneshot(
 Will Beasley
 }
 \references{
-The official documentation can be found on the `API Examples' page on the REDCap wiki (\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}). A user account is required.
+The official documentation can be found on the `API Help Page` and `API Examples' pages
+on the REDCap wiki (ie, \url{https://iwg.devguard.com/trac/redcap/wiki/ApiDocumentation} and
+\url{https://iwg.devguard.com/trac/redcap/wiki/ApiExamples}). If you do not have an account
+for the wiki, please ask your campus REDCap administrator to send you the static material.
 
 The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.
 }
