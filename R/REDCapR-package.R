@@ -1,7 +1,9 @@
-#' REDCapR
-#'
-#' @name REDCapR
 #' @docType package
+#' @name REDCapR-package
+#' @aliases REDCapR
+#' 
+#' @title R utilities for interacting with a REDCap data system <http://www.project-redcap.org/>
+#' 
 #' @description
 #' 
 #' Thanks to Funders, including \href{https://perf-data.hrsa.gov/mchb/DGISReports/Abstract/AbstractDetails.aspx?Source=TVIS&GrantNo=D89MC23154&FY=2012}{HRSA/ACF D89MC23154}
