@@ -15,6 +15,11 @@ field_name_token      = "Token"
 test_that("Bad Project Name", {
   expected_message <- "The 'project_name' parameter must contain only letters, numbers, and underscores."
   
+  if( !requireNamespace("RDOBC", quietly = TRUE) ) {
+    message("Test `Bad Project Name` in `test-retrieve_token.R` will be skipped because the RODBC package is not available.")
+    return( )
+  }
+  
   expect_error(
     regexp = expected_message,
     object = observed <- REDCapR::retrieve_token_mssql(
@@ -31,6 +36,11 @@ test_that("Bad Project Name", {
 
 test_that("Bad Schema Name", {
   expected_message <- "The 'schema_name' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets."
+  
+  if( !requireNamespace("RDOBC", quietly = TRUE) ) {
+    message("Test `Bad Schema Name` in `test-retrieve_token.R` will be skipped because the RODBC package is not available.")
+    return( )
+  }
   
   expect_error(
     regexp = expected_message,
@@ -49,6 +59,11 @@ test_that("Bad Schema Name", {
 test_that("Bad Procedure Name", {
   expected_message <- "The 'procedure_name' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets."
   
+  if( !requireNamespace("RDOBC", quietly = TRUE) ) {
+    message("Test `Bad Procedure Name` in `test-retrieve_token.R` will be skipped because the RODBC package is not available.")
+    return( )
+  }
+  
   expect_error(
     regexp = expected_message,
     object = observed <- REDCapR::retrieve_token_mssql(
@@ -65,6 +80,11 @@ test_that("Bad Procedure Name", {
 
 test_that("Bad Variable Name Project", {
   expected_message <- "The 'variable_name_project' parameter must contain only letters, numbers, and underscores.  It may optionally have a leading ampersand."
+  
+  if( !requireNamespace("RDOBC", quietly = TRUE) ) {
+    message("Test `Bad Variable Name Project` in `test-retrieve_token.R` will be skipped because the RODBC package is not available.")
+    return( )
+  }
   
   expect_error(
     regexp = expected_message,
@@ -83,6 +103,11 @@ test_that("Bad Variable Name Project", {
 test_that("Field Name Token", {
   expected_message <- "The 'field_name_token' parameter must contain only letters, numbers, and underscores."
   
+  if( !requireNamespace("RDOBC", quietly = TRUE) ) {
+    message("Test `Field Name Token` in `test-retrieve_token.R` will be skipped because the RODBC package is not available.")
+    return( )
+  }
+  
   expect_error(
     regexp = expected_message,
     object = observed <- REDCapR::retrieve_token_mssql(
@@ -99,6 +124,11 @@ test_that("Field Name Token", {
 
 test_that("Missing DSN & Channel", {
   expected_message <- "The 'dsn' parameter can be missing only if a 'channel' has been passed to 'retrieve_token_mssql'."
+  
+  if( !requireNamespace("RDOBC", quietly = TRUE) ) {
+    message("Test `Missing DSN & Channel` in `test-retrieve_token.R` will be skipped because the RODBC package is not available.")
+    return( )
+  }
   
   expect_error(
     regexp = expected_message,
