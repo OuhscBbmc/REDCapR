@@ -1,3 +1,8 @@
+Versions 0.9.3 (Developed 2015-08-25)
+------------------------------------------------------------------------------
+Minor Updates:
+* The `retrieve-token()` tests now account for the (OS X) builds where the RODBC package isn't available.
+
 Versions 0.9 & 0.8 (Developed 2015-01-15 through 2015-08-14)
 ------------------------------------------------------------------------------
 New Features:
