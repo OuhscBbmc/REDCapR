@@ -14,3 +14,4 @@ utility/
 ^appveyor\.yml$
 ^revdep$
 ^CONDUCT\.md$
+^.*\.o$
