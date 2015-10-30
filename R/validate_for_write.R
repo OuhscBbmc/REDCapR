@@ -1,7 +1,6 @@
 #' @name validate_for_write
 #' @aliases validate_for_write validate_no_logical validate_no_uppercase
 #' @export validate_for_write validate_no_logical validate_no_uppercase 
-#' 
 #' @usage
 #' validate_for_write( d )
 #' 

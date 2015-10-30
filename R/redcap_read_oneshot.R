@@ -1,6 +1,5 @@
 #' @name redcap_read_oneshot
 #' @export redcap_read_oneshot
-#' 
 #' @title Read/Export records from a REDCap project.
 #'  
 #' @description This function uses REDCap's API to select and return data.

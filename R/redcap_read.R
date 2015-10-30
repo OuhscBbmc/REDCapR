@@ -1,6 +1,5 @@
 #' @name redcap_read
 #' @export redcap_read
-#' 
 #' @title Read records from a REDCap project in subsets, and stacks them together before returning a \code{data.frame}.
 #'  
 #' @description From an external perspective, this function is similar to \code{\link{redcap_read_oneshot}}.  The internals

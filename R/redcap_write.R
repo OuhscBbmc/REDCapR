@@ -1,6 +1,5 @@
 #' @name redcap_write
 #' @export redcap_write
-#' 
 #' @title Write/Import records to a REDCap project.
 #'  
 #' @description This function uses REDCap's APIs to select and return data.

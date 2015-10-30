@@ -1,7 +1,6 @@
 #' @name retrieve_token
 #' @aliases retrieve_token_mssql
 #' @export retrieve_token_mssql
-#'
 #' @title Read a token from a (non-REDCap) database.
 #'
 #' @description These functions are not essential to calling the REDCap API, but instead are functions that help manage tokens securely.

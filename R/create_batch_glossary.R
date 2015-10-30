@@ -1,6 +1,5 @@
 #' @name create_batch_glossary
 #' @export create_batch_glossary
-#' 
 #' @title Creates a \code{data.frame} that help batching long-running read and writes.
 #'  
 #' @description The function returns a \code{data.frame} that other functions use to separate long-running
