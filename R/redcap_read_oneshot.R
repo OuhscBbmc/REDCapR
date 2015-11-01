@@ -28,7 +28,7 @@
 #'  \item \code{raw_text}: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
 #' }
 #' @details 
-#' I like how \href{http://sburns.org/PyCap/}{PyCap} creates a `project' object with methods that read and write from REDCap.  However this isn't a style that R clients typically use.
+#' I like how \href{https://github.com/redcap-tools/PyCap}{PyCap} creates a `project' object with methods that read and write from REDCap.  However this isn't a style that R clients typically use.
 #' I like the logic that it's associated with a particular REDCap project that shouldn't change between calls.
 #' As a compromise, I think I'll wrap the uri, token, and cert location into a single \code{S4} object that's passed to these methods.  It will make these calls take less space.  
 #' 

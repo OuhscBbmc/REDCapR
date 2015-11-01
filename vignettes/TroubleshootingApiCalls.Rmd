@@ -359,7 +359,7 @@ REDCap is used in many enviroments, andit's not surprising that a lot of librari
 
 **Actively developed in the past two years**
 
-1. [`PyCap`](http://sburns.org/PyCap/): "PyCap is an interface to the REDCap Application Programming Interface (API). PyCap is designed to be a minimal interface exposing all required and optional API parameters." (Written in Python primarily by Scott Burns, formerly with Vanderbilt, now at [Stratasan](http://www.stratasan.com/).)
+1. [`PyCap`](https://github.com/redcap-tools/PyCap): "PyCap is an interface to the REDCap Application Programming Interface (API). PyCap is designed to be a minimal interface exposing all required and optional API parameters." (Written in Python primarily by Scott Burns, formerly with Vanderbilt, now at [Stratasan](http://www.stratasan.com/).)
 1. [`redcap`](https://github.com/jeffreyhorner/redcap): "R interface to REDCap." (Written in R primarily by Jeffrey Horner.  The last commit was Feb 2013)
 1. [`redcapAPI`](https://github.com/nutterb/redcapAPI): This is the most actively-developed fork of the library above. (Written in R primarily by Benjamin Nutter at the Cleveland Clinic Foundation.)
 1. [`REDCapR`](https://github.com/OuhscBbmc/REDCapR): "R Utilities for interacting with a REDCap data system." (Written in R primarily by Will Beasley, and the [OUHSC BBMC](http://ouhsc.edu/bbmc/).
@@ -371,8 +371,8 @@ Other good resources
 
  * The basic API documentation is available on your REDCap server, typically at http://<*your server name*>/redcap/api/help.
  * If you have access to the REDCap wiki, some newer examples might exist at <https://iwg.devguard.com/trac/redcap/wiki/ApiExamples>.  The official documentation can be found on the `API Help Page` and `API Examples' pages on the REDCap wiki (ie, <https://iwg.devguard.com/trac/redcap/wiki/ApiDocumentation> and <https://iwg.devguard.com/trac/redcap/wiki/ApiExamples>). If you do not have an account  for the wiki, please ask your campus REDCap administrator to send you the static material.
- * Scott Burns, the developer of [PyCap](http://sburns.org/PyCap/) has a good intro at http://sburns.org/2013/07/22/intro-to-redcap-api.html
- * Bejamin Nutter, the developer of [redcapAPI](https://github.com/nutterb/redcapAPI/wiki) has a good wiki at https://github.com/nutterb/redcapAPI/wiki
+ * Scott Burns, the primary developer of [PyCap](https://github.com/redcap-tools/PyCap) has a good intro at http://sburns.org/2013/07/22/intro-to-redcap-api.html
+ * Bejamin Nutter, the primary developer of [redcapAPI](https://github.com/nutterb/redcapAPI/wiki) has a good wiki at https://github.com/nutterb/redcapAPI/wiki
  * In addition to this troubleshooting document, REDCapR has a [vignette](http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/BasicREDCapROperations.html) that covers its basic operations.
 
 Document Info
