@@ -109,9 +109,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
     config_options = config_options
   )
   
-  ###
-  ### Stop and return to the caller if the initial query failed.
-  ###
+  # Stop and return to the caller if the initial query failed. --------------
   if( !initial_call$success ) {
     outcome_messages <- paste0("The initial call failed with the code: ", initial_call$status_code, ".")
     elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
@@ -126,9 +124,8 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
       success = initial_call$success
     ) )
   }
-  ###
-  ### Continue as intended if the initial query succeeded.
-  ###
+  
+  # Continue as intended if the initial query succeeded. --------------------
   uniqueIDs <- sort(unique(initial_call$data[, 1]))
   
   if( all(nchar(uniqueIDs)==32L) )
@@ -158,7 +155,6 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
       message("Reading batch ", i, " of ", nrow(ds_glossary), ", with subjects ", min(selected_ids), " through ", max(selected_ids), 
               " (ie, ", length(selected_ids), " unique subject records).")
     }
-#     browser()
     read_result <- REDCapR::redcap_read_oneshot(redcap_uri = redcap_uri,
                                         token = token,  
                                         records = selected_ids,
@@ -187,7 +183,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
     rm(read_result) #Admittedly overkill defensiveness.
   }
   
-  ds_stacked <- dplyr::bind_rows(lst_batch)
+  ds_stacked <- as.data.frame(dplyr::bind_rows(lst_batch))
   
   elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
   status_code_combined <- paste(lst_status_code, collapse="; ")
