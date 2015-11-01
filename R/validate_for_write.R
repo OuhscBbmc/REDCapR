@@ -76,7 +76,7 @@ validate_for_write <- function( d ) {
     validate_no_logical(d),
     validate_no_uppercase(d)
   )
-  dsAggregatedConcerns <- data.frame(do.call(plyr::rbind.fill, lstConcerns), stringsAsFactors=FALSE) #Vertically stack all the data.frames into a single data.frame
+  dsAggregatedConcerns <- data.frame(do.call(dplyr::bind_rows, lstConcerns), stringsAsFactors=FALSE) #Vertically stack all the data.frames into a single data.frame
   
  return( dsAggregatedConcerns )
 }

@@ -187,7 +187,7 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
     rm(read_result) #Admittedly overkill defensiveness.
   }
   
-  ds_stacked <- plyr::rbind.fill(lst_batch)
+  ds_stacked <- dplyr::bind_rows(lst_batch)
   
   elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
   status_code_combined <- paste(lst_status_code, collapse="; ")

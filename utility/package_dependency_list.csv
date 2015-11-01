@@ -2,6 +2,7 @@ package_name,on_cran,install,github_username,description
 colorspace,TRUE,TRUE,,Explicit control over the HCL color scheme
 devtools,TRUE,TRUE,,Used in the C1 survival for sourcing gists
 digest,TRUE,TRUE,,Creates SHA hashes for the recruiting database
+dplyr,TRUE,TRUE,,Important for most of our data manipulation
 evaluate,TRUE,TRUE,,A package that Hadley et al use a lot in their packages.  It helps when things are passed by reference.
 foreign,TRUE,TRUE,,Reads data in other formats
 ggplot2,TRUE,TRUE,,Graphing
@@ -12,7 +13,6 @@ knitr,TRUE,TRUE,,For reporting
 httr,TRUE,TRUE,hadley,Calling REDCap API
 lme4,TRUE,TRUE,,Multilevel models
 lubridate,TRUE,TRUE,,Consistent/convenient function signatures for manipulating dates
-plyr,TRUE,TRUE,,Important for most of our data manipulation
 random,TRUE,TRUE,,Creates random numbers for salts
 RColorBrewer,TRUE,TRUE,,Explicit control over the Color Brewer colors.  See http://colorbrewer2.org/
 RCurl,TRUE,TRUE,,Interact with the web APIs

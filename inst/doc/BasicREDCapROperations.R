@@ -74,7 +74,7 @@ ds_some_fields_v3 #Examine the these three variables.
 ## Step 2: identify desired records, based on age & weight
 before_1960 <- (ds_some_fields_v3$dob <= as.Date("1960-01-01"))
 heavier_than_70_kg <- (ds_some_fields_v3$weight > 70)
-desired_records_v3 <- ds_some_fields_v3[before_1960 & heavier_than_70_kg, "record_id"]
+desired_records_v3 <- ds_some_fields_v3[before_1960 & heavier_than_70_kg, ]$record_id
 
 desired_records_v3 #Peek at IDs of the identified records
 
