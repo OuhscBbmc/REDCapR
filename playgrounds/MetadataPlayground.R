@@ -102,9 +102,8 @@ labels <- mapply(function (start, len) substr(choices, start, start+len-1),
 # 
 # 
 
-gregexpr(pattern, choices, perl=T)
-# 
-# stringr::str_match_all(choices, pattern)
+gregexpr(pattern_id, choices, perl=T)
+gregexpr(pattern_label, choices, perl=T)
 
 #This function is adapted from https://stat.ethz.ch/R-manual/R-devel/library/base/html/grep.html
 parse.one <- function(res, result) {
@@ -116,10 +115,10 @@ parse.one <- function(res, result) {
   colnames(m) <- attr(result, "capture.names")
   m
 }
-(parsed <- regexpr(pattern=pattern, text=choices, perl = TRUE))
+(parsed <- regexpr(pattern=pattern_id, text=choices, perl = TRUE))
 parse.one(choices, parsed)
 
-matches <- stringr::str_extract_all(choices, pattern)
+matches <- stringr::str_extract_all(choices, pattern_id)
 lapply(matches, function(match) {
-    str_match(match, pattern)
+    stringr::str_match(match, pattern_id)
 })
