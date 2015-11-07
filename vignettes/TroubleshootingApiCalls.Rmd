@@ -6,7 +6,7 @@
 Troubleshooting REDCap API Calls
 ==================================================================
 
-There are many links in the pipeline between your institution's [REDCap](http://www.project-redcap.org/) server and the API user.  When the end result is unsuccesful, this document should help narrow the location of the possible problem.  The first two sections will be relevant to almost any language interacting with the API.  The remaining sections are possibly relevant only to your language (eg, Python, R, SAS, bash), or your software library ([redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) in R and [PyCap](http://pycap.readthedocs.org/en/latest/) in Python).
+There are many links in the pipeline between your institution's [REDCap](http://www.project-redcap.org/) server and the API user.  When the end result is unsuccessful, this document should help narrow the location of the possible problem.  The first two sections will be relevant to almost any language interacting with the API.  The remaining sections are possibly relevant only to your language (eg, Python, R, SAS, bash), or your software library ([redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) in R and [PyCap](http://pycap.readthedocs.org/en/latest/) in Python).
 
 Server Configuration and Authorization
 ------------------------------------------------------------------
