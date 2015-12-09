@@ -42,4 +42,4 @@ Suggests:
 License: GPL-2
 LazyData: TRUE
 VignetteBuilder: knitr
-RoxygenNote: 5.0.0
+RoxygenNote: 5.0.1

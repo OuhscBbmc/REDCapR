@@ -63,7 +63,7 @@ field <- "mugshot"
 
 result_1 <- redcap_download_file_oneshot(record=record, field=field, 
                                  redcap_uri=uri, token=token)
-base::unlink("mugshot_1.jpg")
+base::unlink("mugshot-1.jpg")
 
 (full_name <- base::tempfile(pattern="mugshot", fileext=".jpg"))
 result_2 <- redcap_download_file_oneshot(file_name=full_name, record=record, field=field, 
