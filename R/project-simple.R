@@ -11,17 +11,17 @@ populate_project_simple <- function( batch = FALSE ) {
   token <- "D70F9ACD1EDD6F151C6EA78683944E98" #For `UnitTestPhiFree` account and the simple project (pid 213)
   
   project <- REDCapR::redcap_project$new(redcap_uri=uri, token=token)
-  path_in_simple <- base::file.path(devtools::inst(name="REDCapR"), "test-data/project-simple/simple_data.csv")
+  path_in_simple <- base::file.path(devtools::inst(name="REDCapR"), "test-data/project-simple/simple-data.csv")
  
   #Write the file to disk (necessary only when you wanted to change the data).  Don't uncomment; just run manually.
   # returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="raw")
-  # utils::write.csv(returned_object$data, file="./inst/test-data/project-simple/simple_data.csv", row.names=FALSE)
+  # utils::write.csv(returned_object$data, file="./inst/test-data/project-simple/simple-data.csv", row.names=FALSE)
   # returned_object_metadata <- redcap_metadata_read(redcap_uri=uri, token=token)
   # utils::write.csv(returned_object_metadata$data, file="./inst/test-data/project-simple/simple-metadata.csv", row.names=FALSE)
     
   #Read in the data in R's memory from a csv file.
   dsToWrite <- utils::read.csv(file=path_in_simple, stringsAsFactors=FALSE)
-  # dsToWrite <- utils::read.csv(file="./inst/test-data/project-simple/simple_data.csv", stringsAsFactors=FALSE)
+  # dsToWrite <- utils::read.csv(file="./inst/test-data/project-simple/simple-data.csv", stringsAsFactors=FALSE)
   
   #Remove the calculated variables.
   dsToWrite$age <- NULL
