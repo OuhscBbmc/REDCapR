@@ -6,7 +6,7 @@ context("Read Batch - Longitudinal")
 uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "0434F0E9CF53ED0587847AB6E51DE762" #For `UnitTestPhiFree` account on pid=212.
 project <- redcap_project$new(redcap_uri=uri, token=token)
-directory_relative <- "test-data/project_longitudinal/expected"
+directory_relative <- "test-data/project-longitudinal/expected"
 
 test_that("Smoke Test", {  
   testthat::skip_on_cran()
