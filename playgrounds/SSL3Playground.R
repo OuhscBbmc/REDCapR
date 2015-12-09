@@ -15,7 +15,7 @@ library(RCurl)
 # SO post:
 # http://stackoverflow.com/questions/15347233/ssl-certificate-failed-for-twitter-in-r
 cert_location <- system.file("CurlSSL", "cacert.pem", package = "RCurl")
-cert_location <- "./inst/ssl_certs/mozilla_ca_root.crt"
+cert_location <- "./inst/ssl-certs/mozilla-ca-root.crt"
 file.exists(cert_location)
 options(RCurlOptions = list(cainfo=cert_location))
 

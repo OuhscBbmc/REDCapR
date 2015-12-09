@@ -75,7 +75,7 @@ redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwr
 		stop("The required parameter `token` was missing from the call to `redcap_download_file_oneshot()`.")     
 	
   # if( missing( config_options ) | is.null(config_options) ) {
-  #   cert_location <- system.file("ssl_certs/mozilla_ca_root.crt", package="REDCapR")
+  #   cert_location <- system.file("ssl-certs/mozilla-ca-root.crt", package="REDCapR")
   #   
   #   if( !base::file.exists(cert_location) )
   #     stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))

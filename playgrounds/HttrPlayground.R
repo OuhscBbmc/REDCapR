@@ -16,7 +16,7 @@ fields_collapsed <- NULL
 events_collapsed <- NULL
 
 # config_options <- list(cainfo = system.file("cacert.pem", package = "httr"))
-config_options <- list(cainfo = "./inst/ssl_certs/mozilla_ca_root.crt")
+config_options <- list(cainfo = "./inst/ssl-certs/mozilla-ca-root.crt")
 # config_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
 config_options <- httr::config(ssl_verifypeer=F)
 # config_options <- list()
@@ -150,6 +150,6 @@ RCurl::httpGET(url = "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/no_auth_test
 
 
 #cert_location <- system.file("cacert.pem", package="httr")
-cert_location <- system.file("ssl_certs/mozilla_ca_root.crt", package="REDCapR")
+cert_location <- system.file("ssl-certs/mozilla-ca-root.crt", package="REDCapR")
 file.exists(cert_location)
 httr::url_ok("http://bbmc.ouhsc.edu/redcap/plugins/redcapr/no_auth_test.php", config=list(cainfo=cert_location, sslversion=3))
