@@ -3,11 +3,10 @@
 ^\.gitignore$
 ^\.travis.yml$
 ^cran-comments\.md$
-^shortcut_lucky_1404\.lnk$
 README.html$
 
-documentation_peek.pdf
-documentation_for_developers/
+documentation-peek.pdf
+documentation-for-developers/
 playgrounds/
 utility/
 ^\.travis\.yml$

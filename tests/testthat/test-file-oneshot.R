@@ -24,13 +24,13 @@ test_that("NameComesFromREDCap", {
     
 #   start_time <- Sys.time() - lubridate::seconds(1) #Knock off a second inc ase there's small time imprecisions
   start_time <- Sys.time() - 1 #Knock off a second in case there are small time imprecisions
-  path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test_data/mugshot_1.jpg")
+  path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test-data/mugshot-1.jpg")
   info_expected <- file.info(path_of_expected)
   record <- 1
   field <- "mugshot"
   
-  expected_outcome_message <- 'image/jpeg; name="mugshot_1\\.jpg" successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as mugshot_1.jpg'
-  # image/jpeg; name="mugshot_1.jpg" successfully downloaded in 0.7 seconds, and saved as mugshot_1.jpg
+  expected_outcome_message <- 'image/jpeg; name="mugshot-1\\.jpg" successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as mugshot-1.jpg'
+  # image/jpeg; name="mugshot-1.jpg" successfully downloaded in 0.7 seconds, and saved as mugshot-1.jpg
   
   tryCatch({
     expect_message(
@@ -52,7 +52,7 @@ test_that("NameComesFromREDCap", {
   expect_equal(returned_object$affected_ids, 1L)
   expect_true(returned_object$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")  
   expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
-  expect_equal(returned_object$file_name, "mugshot_1.jpg", label="The name of the downloaded file should be correct.")
+  expect_equal(returned_object$file_name, "mugshot-1.jpg", label="The name of the downloaded file should be correct.")
   
   #Test the values of the file.  
   expect_equal(info_actual$size, expected=info_expected$size, label="The size of the downloaded file should match.")
@@ -75,12 +75,12 @@ test_that("FullPathSpecified", {
   )
   
   start_time <- Sys.time() - 1 #Knock off a second in case there are small time imprecisions
-  path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test_data/mugshot_2.jpg")
+  path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test-data/mugshot-2.jpg")
   info_expected <- file.info(path_of_expected)
   record <- 2
   field <- "mugshot"
   
-  expected_outcome_message <- 'image/jpeg; name="mugshot_2\\.jpg" successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as .+\\.jpg'
+  expected_outcome_message <- 'image/jpeg; name="mugshot-2\\.jpg" successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as .+\\.jpg'
   
   (full_name <- base::tempfile(pattern="mugshot", fileext=".jpg"))
   tryCatch({
@@ -126,12 +126,12 @@ test_that("RelativePath", {
   )
   
   start_time <- Sys.time() - 1 #Knock off a second in case there are small time imprecisions
-  path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test_data/mugshot_3.jpg")
+  path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test-data/mugshot-3.jpg")
   info_expected <- file.info(path_of_expected)
   record <- 3
   field <- "mugshot"
   
-  expected_outcome_message <- 'image/jpeg; name="mugshot_3\\.jpg" successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as .+\\.jpg'
+  expected_outcome_message <- 'image/jpeg; name="mugshot-3\\.jpg" successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as .+\\.jpg'
   
   (relative_name <- "ssss.jpg")
   tryCatch({
@@ -177,13 +177,13 @@ test_that("Full Directory Specific", {
   )
   
   start_time <- Sys.time() - 1 #Knock off a second in case there are small time imprecisions
-  path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test_data/mugshot_3.jpg")
+  path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test-data/mugshot-3.jpg")
   directory <- getwd()#  base::tempfile()
   info_expected <- file.info(path_of_expected)
   record <- 3
   field <- "mugshot"
   
-  expected_outcome_message <- 'image/jpeg; name="mugshot_3\\.jpg" successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as .+\\.jpg'
+  expected_outcome_message <- 'image/jpeg; name="mugshot-3\\.jpg" successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as .+\\.jpg'
   
   tryCatch({
     expect_message(

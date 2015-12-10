@@ -3,7 +3,7 @@ library(REDCapR)
 
 uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "C1A2B36F94B518FDD50561D1FD09170D" #UnitTesttPhiFree
-certs <- file.path(devtools::inst("REDCapR"), "ssl_certs/mozilla_ca_root.crt")
+certs <- file.path(devtools::inst("REDCapR"), "ssl-certs/mozilla-ca-root.crt")
 # certs <- file.path(devtools::inst("REDCapR"), "ssl_cert/v2.crt")
 certs <- list(cainfo = system.file("cacert.pem", package = "httr"))
 

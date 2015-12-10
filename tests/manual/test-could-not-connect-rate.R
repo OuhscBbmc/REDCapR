@@ -40,7 +40,7 @@ for( i in seq_len(file_read_count) ) {
                                                     redcap_uri=start_clean_result$redcap_project$redcap_uri, token=start_clean_result$redcap_project$token)
     
     expect_true(file.exists(returned_object$file_name), "The downloaded file should exist.")
-    }, finally = base::unlink("mugshot_1.jpg")
+    }, finally = base::unlink("mugshot-1.jpg")
   )
   
   message(i, ": ", returned_object$elapsed_seconds, " -", returned_object$raw_text)

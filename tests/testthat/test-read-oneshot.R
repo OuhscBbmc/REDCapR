@@ -57,8 +57,8 @@ test_that("All Records -Default", {
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
-  #expect_equal_to_reference(returned_object$data, file=base::file.path(devtools::inst(name="REDCapR"), "test_data/project_simple/variations/default.rds") )
-  #expect_equal_to_reference(returned_object$data, file="./test_data/project_simple/variations/default.rds") 
+  #expect_equal_to_reference(returned_object$data, file=base::file.path(devtools::inst(name="REDCapR"), "test-data/project-simple/variations/default.rds") )
+  #expect_equal_to_reference(returned_object$data, file="./test-data/project-simple/variations/default.rds") 
 })
 test_that("All Records -Raw", {  
   testthat::skip_on_cran()
