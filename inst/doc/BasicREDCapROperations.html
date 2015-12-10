@@ -9,7 +9,7 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="date" content="2015-11-01" />
+<meta name="date" content="2015-12-09" />
 
 <title>Basic REDCapR Operations</title>
 
@@ -17,23 +17,41 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
+div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
 table.sourceCode { width: 100%; line-height: 100%; }
 td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
 td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; }
-code > span.dt { color: #902000; }
-code > span.dv { color: #40a070; }
-code > span.bn { color: #40a070; }
-code > span.fl { color: #40a070; }
-code > span.ch { color: #4070a0; }
-code > span.st { color: #4070a0; }
-code > span.co { color: #60a0b0; font-style: italic; }
-code > span.ot { color: #007020; }
-code > span.al { color: #ff0000; font-weight: bold; }
-code > span.fu { color: #06287e; }
-code > span.er { color: #ff0000; font-weight: bold; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 <style type="text/css">
   pre:not([class]) {
@@ -42,7 +60,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </style>
 
 
-<link href="data:text/css,body%20%7B%0A%20%20background%2Dcolor%3A%20%23fff%3B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20max%2Dwidth%3A%20700px%3B%0A%20%20overflow%3A%20visible%3B%0A%20%20padding%2Dleft%3A%202em%3B%0A%20%20padding%2Dright%3A%202em%3B%0A%20%20font%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014px%3B%0A%20%20line%2Dheight%3A%201%2E35%3B%0A%7D%0A%0A%23header%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0A%23TOC%20%7B%0A%20%20clear%3A%20both%3B%0A%20%20margin%3A%200%200%2010px%2010px%3B%0A%20%20padding%3A%204px%3B%0A%20%20width%3A%20400px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20border%2Dradius%3A%205px%3B%0A%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20font%2Dsize%3A%2013px%3B%0A%20%20line%2Dheight%3A%201%2E3%3B%0A%7D%0A%20%20%23TOC%20%2Etoctitle%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%20%20font%2Dsize%3A%2015px%3B%0A%20%20%20%20margin%2Dleft%3A%205px%3B%0A%20%20%7D%0A%0A%20%20%23TOC%20ul%20%7B%0A%20%20%20%20padding%2Dleft%3A%2040px%3B%0A%20%20%20%20margin%2Dleft%3A%20%2D1%2E5em%3B%0A%20%20%20%20margin%2Dtop%3A%205px%3B%0A%20%20%20%20margin%2Dbottom%3A%205px%3B%0A%20%20%7D%0A%20%20%23TOC%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dleft%3A%20%2D2em%3B%0A%20%20%7D%0A%20%20%23TOC%20li%20%7B%0A%20%20%20%20line%2Dheight%3A%2016px%3B%0A%20%20%7D%0A%0Atable%20%7B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dcolor%3A%20%23DDDDDD%3B%0A%20%20border%2Dstyle%3A%20outset%3B%0A%20%20border%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20padding%3A%205px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%20%20line%2Dheight%3A%2018px%3B%0A%20%20padding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0A%20%20border%2Dleft%2Dstyle%3A%20none%3B%0A%20%20border%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Ap%20%7B%0A%20%20margin%3A%200%2E5em%200%3B%0A%7D%0A%0Ablockquote%20%7B%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20padding%3A%200%2E25em%200%2E75em%3B%0A%7D%0A%0Ahr%20%7B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%3A%20none%3B%0A%20%20border%2Dtop%3A%201px%20solid%20%23777%3B%0A%20%20margin%3A%2028px%200%3B%0A%7D%0A%0Adl%20%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%7D%0A%20%20dl%20dd%20%7B%0A%20%20%20%20margin%2Dbottom%3A%2013px%3B%0A%20%20%20%20margin%2Dleft%3A%2013px%3B%0A%20%20%7D%0A%20%20dl%20dt%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%7D%0A%0Aul%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%7D%0A%20%20ul%20li%20%7B%0A%20%20%20%20list%2Dstyle%3A%20circle%20outside%3B%0A%20%20%7D%0A%20%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dbottom%3A%200%3B%0A%20%20%7D%0A%0Apre%2C%20code%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20color%3A%20%23333%3B%0A%7D%0Apre%20%7B%0A%20%20white%2Dspace%3A%20pre%2Dwrap%3B%20%20%20%20%2F%2A%20Wrap%20long%20lines%20%2A%2F%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20margin%3A%205px%200px%2010px%200px%3B%0A%20%20padding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Acode%20%7B%0A%20%20font%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0A%20%20font%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0A%20%20padding%3A%202px%200px%3B%0A%7D%0A%0Adiv%2Efigure%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0A%20%20background%2Dcolor%3A%20%23FFFFFF%3B%0A%20%20padding%3A%202px%3B%0A%20%20border%3A%201px%20solid%20%23DDDDDD%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20margin%3A%200%205px%3B%0A%7D%0A%0Ah1%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20font%2Dsize%3A%2035px%3B%0A%20%20line%2Dheight%3A%2040px%3B%0A%7D%0A%0Ah2%20%7B%0A%20%20border%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20padding%2Dbottom%3A%202px%3B%0A%20%20font%2Dsize%3A%20145%25%3B%0A%7D%0A%0Ah3%20%7B%0A%20%20border%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20font%2Dsize%3A%20120%25%3B%0A%7D%0A%0Ah4%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0A%20%20margin%2Dleft%3A%208px%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Ah5%2C%20h6%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23ccc%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Aa%20%7B%0A%20%20color%3A%20%230033dd%3B%0A%20%20text%2Ddecoration%3A%20none%3B%0A%7D%0A%20%20a%3Ahover%20%7B%0A%20%20%20%20color%3A%20%236666ff%3B%20%7D%0A%20%20a%3Avisited%20%7B%0A%20%20%20%20color%3A%20%23800080%3B%20%7D%0A%20%20a%3Avisited%3Ahover%20%7B%0A%20%20%20%20color%3A%20%23BB00BB%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%0A%2F%2A%20Class%20described%20in%20https%3A%2F%2Fbenjeffrey%2Ecom%2Fposts%2Fpandoc%2Dsyntax%2Dhighlighting%2Dcss%0A%20%20%20Colours%20from%20https%3A%2F%2Fgist%2Egithub%2Ecom%2Frobsimmons%2F1172277%20%2A%2F%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Keyword%20%2A%2F%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%2F%2A%20DataType%20%2A%2F%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%2F%2A%20DecVal%20%28decimal%20values%29%20%2A%2F%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20BaseN%20%2A%2F%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Float%20%2A%2F%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Char%20%2A%2F%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20String%20%2A%2F%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%2F%2A%20Comment%20%2A%2F%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%2F%2A%20OtherToken%20%2A%2F%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20AlertToken%20%2A%2F%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Function%20calls%20%2A%2F%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%2F%2A%20ErrorTok%20%2A%2F%0A%0A" rel="stylesheet" type="text/css" />
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0A%7D%0Apre%20%7B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -52,7 +70,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 
 <div id="header">
 <h1 class="title">Basic REDCapR Operations</h1>
-<h4 class="date"><em>2015-11-01</em></h4>
+<h4 class="date"><em>2015-12-09</em></h4>
 </div>
 
 
@@ -64,23 +82,23 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <h3>Set project-wide values.</h3>
 <p>There is some information that is specific to the REDCap project, as opposed to an individual operation. This includes the (1) uri of the server, the (2) token for the user’s project, and the (3) location of the SSL certification store, which is necessary to verify the identity of the REDCap webserver.</p>
 <p>The <code>REDCapR</code> package includes a recent version of the <a href="http://curl.haxx.se/ca/cacert.pem">Bundle of CA Root Certificates</a> from the official <a href="http://curl.haxx.se">cURL site</a>. This version is used by default, unless the <code>cert_location</code> parameter is given another location.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(REDCapR) <span class="co">#Load the package into the current R session.</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(REDCapR) <span class="co">#Load the package into the current R session.</span>
 uri &lt;-<span class="st"> &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;</span>
-token &lt;-<span class="st"> &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;</span> <span class="co">#`UnitTestPhiFree` user and simple project (pid 153)</span></code></pre>
+token &lt;-<span class="st"> &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;</span> <span class="co">#`UnitTestPhiFree` user and simple project (pid 153)</span></code></pre></div>
 </div>
 <div id="read-all-records-and-fields." class="section level3">
 <h3>Read all records and fields.</h3>
 <p>If no information is passed about the desired records or fields, then the entire data set is returned. Only two parameters are required, <code>redcap_uri</code> and <code>token</code>. Unless the <code>verbose</code> parameter is set to <code>FALSE</code>, a message will be printed on the R console with the number of records and fields returned.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return all records and all variables.</span>
-ds_all_rows_all_fields &lt;-<span class="st"> </span><span class="kw">redcap_read</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)$data</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return all records and all variables.</span>
+ds_all_rows_all_fields &lt;-<span class="st"> </span><span class="kw">redcap_read</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)$data</code></pre></div>
 <pre><code>The `REDCapR::redcap_metadata_read()` function is very new and under development.
 It's likely to change in the future, especially how it handles checkboxes.
-The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.
-5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-Starting to read 5 records  at 2015-11-01 14:35:13
+The data dictionary describing 16 fields was read from REDCap in 0.6 seconds.  The http status code was 200.
+5 records and 1 columns were read from REDCap in 0.5 seconds.  The http status code was 200.
+Starting to read 5 records  at 2015-12-09 23:51:24
 Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
-5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">ds_all_rows_all_fields <span class="co">#Inspect the returned dataset</span></code></pre>
+5 records and 24 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_all_rows_all_fields <span class="co">#Inspect the returned dataset</span></code></pre></div>
 <pre><code>  record_id name_first name_last                                 address
 1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232
 2         2     Tumtum  Nutmouse 14 Rose Cottage Blvd.\nKenning UK 34243
@@ -122,35 +140,35 @@ Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
 <h3>Read a subset of the records.</h3>
 <p>If only a subset of the <strong>records</strong> is desired, the two approaches are shown below. The first is to pass an array (where each element is an ID) to the <code>records</code> parameter. The second is to pass a single string (where the elements are separated by commas) to the <code>records_collapsed</code> parameter.</p>
 <p>The first format is more natural for more R users. The second format is what is expected by the REDCap API. If a value for <code>records</code> is specified, but <code>records_collapsed</code> is not specified, then <code>redcap_read_oneshot</code> automatically converts the array into the format needed by the API.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return only records with IDs of 1 and 3</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return only records with IDs of 1 and 3</span>
 desired_records_v1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)
 ds_some_rows_v1 &lt;-<span class="st"> </span><span class="kw">redcap_read</span>(
    <span class="dt">redcap_uri =</span> uri, 
    <span class="dt">token      =</span> token, 
    <span class="dt">records    =</span> desired_records_v1
-)$data</code></pre>
+)$data</code></pre></div>
 <pre><code>The `REDCapR::redcap_metadata_read()` function is very new and under development.
 It's likely to change in the future, especially how it handles checkboxes.
-The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
-2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-Starting to read 2 records  at 2015-11-01 14:35:14
+The data dictionary describing 16 fields was read from REDCap in 0.5 seconds.  The http status code was 200.
+2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
+Starting to read 2 records  at 2015-12-09 23:51:25
 Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).
-2 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return only records with IDs of 1 and 3 (alternate way)</span>
+2 records and 24 columns were read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return only records with IDs of 1 and 3 (alternate way)</span>
 desired_records_v2 &lt;-<span class="st"> &quot;1, 3&quot;</span>
 ds_some_rows_v2 &lt;-<span class="st"> </span><span class="kw">redcap_read</span>(
    <span class="dt">redcap_uri        =</span> uri, 
    <span class="dt">token             =</span> token, 
    <span class="dt">records_collapsed =</span> desired_records_v2
-)$data</code></pre>
+)$data</code></pre></div>
 <pre><code>The `REDCapR::redcap_metadata_read()` function is very new and under development.
 It's likely to change in the future, especially how it handles checkboxes.
-The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
-2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-Starting to read 2 records  at 2015-11-01 14:35:15
+The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.
+2 records and 1 columns were read from REDCap in 0.8 seconds.  The http status code was 200.
+Starting to read 2 records  at 2015-12-09 23:51:27
 Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).
 2 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">ds_some_rows_v2 <span class="co">#Inspect the returned dataset</span></code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_rows_v2 <span class="co">#Inspect the returned dataset</span></code></pre></div>
 <pre><code>  record_id name_first name_last                                 address
 1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232
 2         3     Marcus      Wood          243 Hill St.\nGuthrie OK 73402
@@ -170,35 +188,35 @@ Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).
 <div id="read-a-subset-of-the-fields." class="section level3">
 <h3>Read a subset of the fields.</h3>
 <p>If only a subset of the <strong>fields</strong> is desired, then two approaches exist. The first is to pass an array (where each element is an field) to the <code>fields</code> parameter. The second is to pass a single string (where the elements are separated by commas) to the <code>fields_collapsed</code> parameter. Like with <code>records</code> and <code>records_collapsed</code> described above, this function converts the more natural format (<em>ie</em>, <code>fields</code>) to the format required by the API (<em>ie</em>, <code>fields_collapsed</code>) if <code>fields</code> is specified and <code>fields_collapsed</code> is not.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return only the fields record_id, name_first, and age</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return only the fields record_id, name_first, and age</span>
 desired_fields_v1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;record_id&quot;</span>, <span class="st">&quot;name_first&quot;</span>, <span class="st">&quot;age&quot;</span>)
 ds_some_fields_v1 &lt;-<span class="st"> </span><span class="kw">redcap_read</span>(
    <span class="dt">redcap_uri =</span> uri, 
    <span class="dt">token      =</span> token, 
    <span class="dt">fields     =</span> desired_fields_v1
-)$data</code></pre>
+)$data</code></pre></div>
 <pre><code>The `REDCapR::redcap_metadata_read()` function is very new and under development.
 It's likely to change in the future, especially how it handles checkboxes.
-The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
+The data dictionary describing 16 fields was read from REDCap in 0.5 seconds.  The http status code was 200.
 5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
-Starting to read 5 records  at 2015-11-01 14:35:16
+Starting to read 5 records  at 2015-12-09 23:51:29
 Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
 5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return only the fields record_id, name_first, and age (alternate way)</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return only the fields record_id, name_first, and age (alternate way)</span>
 desired_fields_v2 &lt;-<span class="st"> &quot;record_id, name_first, age&quot;</span>
 ds_some_fields_v2 &lt;-<span class="st"> </span><span class="kw">redcap_read</span>(
    <span class="dt">redcap_uri       =</span> uri, 
    <span class="dt">token            =</span> token, 
    <span class="dt">fields_collapsed =</span> desired_fields_v2
-)$data</code></pre>
+)$data</code></pre></div>
 <pre><code>The `REDCapR::redcap_metadata_read()` function is very new and under development.
 It's likely to change in the future, especially how it handles checkboxes.
-The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
-5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-Starting to read 5 records  at 2015-11-01 14:35:17
+The data dictionary describing 16 fields was read from REDCap in 0.5 seconds.  The http status code was 200.
+5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
+Starting to read 5 records  at 2015-12-09 23:51:31
 Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
-5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">ds_some_fields_v2 <span class="co">#Inspect the returned dataset</span></code></pre>
+5 records and 3 columns were read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_fields_v2 <span class="co">#Inspect the returned dataset</span></code></pre></div>
 <pre><code>  record_id name_first age
 1         1     Nutmeg  11
 2         2     Tumtum  11
@@ -209,52 +227,52 @@ Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
 <div id="read-a-subset-of-records-conditioned-on-the-values-in-some-variables." class="section level3">
 <h3>Read a subset of records, conditioned on the values in some variables.</h3>
 <p>The two techniques above can be combined when your datasets are large and you don’t want to pull records with certain values. Suppose you want to select subjects from the previous dataset <em>if</em> the were born before 1960 and their weight was over 70kg. Two calls to the server are required. The <strong>first call</strong> to REDCap pulls all the records, but for only three columns: <code>record_id</code>, <code>dob</code>, and <code>weight</code>. From this subset, identify the records that you want to pull all the data for; in this case, the desired <code>record_id</code> values are <code>3</code> &amp; <code>5</code>. The <strong>second call</strong> to REDCap pulls all the columns, but only for the identified records.</p>
-<pre class="sourceCode r"><code class="sourceCode r">######
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">######
 ## Step 1: First call to REDCap
 desired_fields_v3 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;record_id&quot;</span>, <span class="st">&quot;dob&quot;</span>, <span class="st">&quot;weight&quot;</span>)
 ds_some_fields_v3 &lt;-<span class="st"> </span><span class="kw">redcap_read</span>(
    <span class="dt">redcap_uri =</span> uri, 
    <span class="dt">token      =</span> token, 
    <span class="dt">fields     =</span> desired_fields_v3
-)$data</code></pre>
+)$data</code></pre></div>
 <pre><code>The `REDCapR::redcap_metadata_read()` function is very new and under development.
 It's likely to change in the future, especially how it handles checkboxes.
-The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
-5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-Starting to read 5 records  at 2015-11-01 14:35:19
+The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.
+5 records and 1 columns were read from REDCap in 0.8 seconds.  The http status code was 200.
+Starting to read 5 records  at 2015-12-09 23:51:33
 Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
-5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">ds_some_fields_v3 <span class="co">#Examine the these three variables.</span></code></pre>
+5 records and 3 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_fields_v3 <span class="co">#Examine the these three variables.</span></code></pre></div>
 <pre><code>  record_id        dob weight
 1         1 2003-08-30      1
 2         2 2003-03-10      1
 3         3 1934-04-09     80
 4         4 1952-11-02     54
 5         5 1955-04-15    104</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">######
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">######
 ## Step 2: identify desired records, based on age &amp; weight
 before_1960 &lt;-<span class="st"> </span>(ds_some_fields_v3$dob &lt;=<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;1960-01-01&quot;</span>))
 heavier_than_70_kg &lt;-<span class="st"> </span>(ds_some_fields_v3$weight &gt;<span class="st"> </span><span class="dv">70</span>)
 desired_records_v3 &lt;-<span class="st"> </span>ds_some_fields_v3[before_1960 &amp;<span class="st"> </span>heavier_than_70_kg, ]$record_id
 
-desired_records_v3 <span class="co">#Peek at IDs of the identified records</span></code></pre>
+desired_records_v3 <span class="co">#Peek at IDs of the identified records</span></code></pre></div>
 <pre><code>[1] 3 5</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">######
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">######
 ## Step 3: second call to REDCap
 <span class="co">#Return only records that met the age &amp; weight criteria.</span>
 ds_some_rows_v3 &lt;-<span class="st"> </span><span class="kw">redcap_read</span>(
    <span class="dt">redcap_uri =</span> uri, 
    <span class="dt">token      =</span> token, 
    <span class="dt">records    =</span> desired_records_v3
-)$data</code></pre>
+)$data</code></pre></div>
 <pre><code>The `REDCapR::redcap_metadata_read()` function is very new and under development.
 It's likely to change in the future, especially how it handles checkboxes.
-The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
-2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-Starting to read 2 records  at 2015-11-01 14:35:20
+The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.
+2 records and 1 columns were read from REDCap in 0.4 seconds.  The http status code was 200.
+Starting to read 2 records  at 2015-12-09 23:51:34
 Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).
-2 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">ds_some_rows_v3 <span class="co">#Examine the results.</span></code></pre>
+2 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_rows_v3 <span class="co">#Examine the results.</span></code></pre></div>
 <pre><code>  record_id name_first name_last                            address
 1         3     Marcus      Wood     243 Hill St.\nGuthrie OK 73402
 2         5   John Lee    Walker Hotel Suite\nNew Orleans LA, 70115
@@ -277,20 +295,20 @@ Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).
 <div id="additional-returned-information" class="section level3">
 <h3>Additional Returned Information</h3>
 <p>The examples above have shown only the resulting <code>data.frame</code>, by specifying <code>$data</code> at the end of the call. However, more is available to those wanting additional information, such as 1. The <code>data</code> object has the <code>data.frame</code>, as in the previous examples. 1. The <code>success</code> boolean value indicates if <code>redcap_read_oneshot</code> believes the operation completed as intended. 1. The <code>status_codes</code> is a collection of <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">http status codes</a>, separated by semicolons. There is one code for each batch attempted. 1. The <code>outcome_messages</code>: A collection of human readable strings indicating the operations’ semicolons. There is one code for each batch attempted. In an unsuccessful operation, it should contain diagnostic information. 1. The <code>records_collapsed</code> field passed to the API. This shows which record subsets, if any, were requested. 1. The <code>fields_collapsed</code> fields passed to the API. This shows which field subsets, if any, were requested. 1. The <code>elapsed_seconds</code> measures the duration of the call.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return only the fields record_id, name_first, and age</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return only the fields record_id, name_first, and age</span>
 all_information &lt;-<span class="st"> </span><span class="kw">redcap_read</span>(
    <span class="dt">redcap_uri =</span> uri, 
    <span class="dt">token      =</span> token, 
    <span class="dt">fields     =</span> desired_fields_v1
-)</code></pre>
+)</code></pre></div>
 <pre><code>The `REDCapR::redcap_metadata_read()` function is very new and under development.
 It's likely to change in the future, especially how it handles checkboxes.
-The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
-5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-Starting to read 5 records  at 2015-11-01 14:35:21
+The data dictionary describing 16 fields was read from REDCap in 0.5 seconds.  The http status code was 200.
+5 records and 1 columns were read from REDCap in 0.5 seconds.  The http status code was 200.
+Starting to read 5 records  at 2015-12-09 23:51:36
 Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
-5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">all_information <span class="co">#Inspect the additional information</span></code></pre>
+5 records and 3 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_information <span class="co">#Inspect the additional information</span></code></pre></div>
 <pre><code>$data
   record_id name_first age
 1         1     Nutmeg  11
@@ -306,7 +324,7 @@ $status_codes
 [1] &quot;200&quot;
 
 $outcome_messages
-[1] &quot;5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.&quot;
+[1] &quot;5 records and 3 columns were read from REDCap in 0.4 seconds.  The http status code was 200.&quot;
 
 $records_collapsed
 [1] &quot;&quot;
@@ -318,38 +336,41 @@ $events_collapsed
 [1] &quot;&quot;
 
 $elapsed_seconds
-[1] 1.17904</code></pre>
+[1] 1.854159</code></pre>
 </div>
 </div>
 <div id="session-info" class="section level2">
 <h2>Session Info</h2>
 <p>For the sake of documentation and reproducibility, the current vignette was build on a system using the following software.</p>
-<pre><code>Report created by Will at 2015-11-01, 14:35:22 -0600</code></pre>
-<pre><code>R version 3.2.2 Patched (2015-10-11 r69514)
-Platform: x86_64-w64-mingw32/x64 (64-bit)
-Running under: Windows &gt;= 8 x64 (build 9200)
+<pre><code>Report created by wibeasley at 2015-12-09, 23:51:37 -0600</code></pre>
+<pre><code>R version 3.2.2 (2015-08-14)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 14.04.3 LTS
 
 locale:
-[1] LC_COLLATE=English_United States.1252 
-[2] LC_CTYPE=English_United States.1252   
-[3] LC_MONETARY=English_United States.1252
-[4] LC_NUMERIC=C                          
-[5] LC_TIME=English_United States.1252    
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] REDCapR_0.9.4.9000 knitr_1.11        
+[1] knitr_1.11.3       REDCapR_0.9.4.9000 testthat_0.11.0   
 
 loaded via a namespace (and not attached):
- [1] Rcpp_0.12.1      magrittr_1.5     roxygen2_5.0.0   devtools_1.9.1  
- [5] R6_2.1.1         stringr_1.0.0    httr_1.0.0       dplyr_0.4.3     
- [9] tools_3.2.2      parallel_3.2.2   DBI_0.3.1        htmltools_0.2.6 
-[13] yaml_2.1.13      digest_0.6.8     assertthat_0.1   formatR_1.2.1   
-[17] codetools_0.2-14 rsconnect_0.3.79 curl_0.9.3       memoise_0.2.1   
-[21] evaluate_0.8     mime_0.4         rmarkdown_0.8.1  stringi_1.0-1   
-[25] markdown_0.7.7  </code></pre>
+ [1] Rcpp_0.12.2        magrittr_1.5       roxygen2_5.0.1    
+ [4] devtools_1.9.1     R6_2.1.1           stringr_1.0.0.9000
+ [7] httr_1.0.0         dplyr_0.4.3.9000   tools_3.2.2       
+[10] parallel_3.2.2     DBI_0.3.1.9008     htmltools_0.2.6   
+[13] yaml_2.1.13        assertthat_0.1     digest_0.6.8      
+[16] crayon_1.3.1       formatR_1.2.1      RODBC_1.3-12      
+[19] codetools_0.2-14   curl_0.9.4         memoise_0.2.1     
+[22] evaluate_0.8       mime_0.4           rmarkdown_0.8.1   
+[25] stringi_1.0-1     </code></pre>
 </div>
 
 
