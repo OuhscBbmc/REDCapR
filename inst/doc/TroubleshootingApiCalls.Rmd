@@ -6,7 +6,7 @@
 Troubleshooting REDCap API Calls
 ==================================================================
 
-There are many links in the pipeline between your institution's [REDCap](http://www.project-redcap.org/) server and the API user.  When the end result is unsuccesful, this document should help narrow the location of the possible problem.  The first two sections will be relevant to almost any language interacting with the API.  The remaining sections are possibly relevant only to your language (eg, Python, R, SAS, bash), or your software library ([redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) in R and [PyCap](http://pycap.readthedocs.org/en/latest/) in Python).
+There are many links in the pipeline between your institution's [REDCap](http://www.project-redcap.org/) server and the API user.  When the end result is unsuccessful, this document should help narrow the location of the possible problem.  The first two sections will be relevant to almost any language interacting with the API.  The remaining sections are possibly relevant only to your language (eg, Python, R, SAS, bash), or your software library ([redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) in R and [PyCap](http://pycap.readthedocs.org/en/latest/) in Python).
 
 Server Configuration and Authorization
 ------------------------------------------------------------------
@@ -86,7 +86,7 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
 
 1. **Does the user have the most recent version of RCurl?** There are several ways to do this, but the easiest is probably to run `update.packages(ask=FALSE, repos="http://cran.rstudio.com")`.  The optional argument `ask` prevents the user from needing to respond 'Y' to each outdated package.
  
-1. **Can the user query a *test* project using RCurl?** Both the [redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) packages employ something similar to the following function in [RCurl](http://cran.r-project.org/package=RCurl).  If you're curious, here is the relevant source code for [redcapAPI](https://github.com/nutterb/redcapAPI/blob/master/R/exportRecords.R) and [REDCapR](https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap_read_oneshot.R).
+1. **Can the user query a *test* project using RCurl?** Both the [redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) packages employ something similar to the following function in [RCurl](http://cran.r-project.org/package=RCurl).  If you're curious, here is the relevant source code for [redcapAPI](https://github.com/nutterb/redcapAPI/blob/master/R/exportRecords.R) and [REDCapR](https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-read-oneshot.R).
 
     If this check fails, consider attempting again with the uri and token used above in the Postman example.
 
@@ -154,7 +154,7 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
 
 1. **Can the user query an *entire* project using RCurl?** There are two advantages of trying a subset of the data.  First, small datasets avoid the time-out errors that plague large datasets.  Second, it may avoid problematic values being passed through the pipeline.  If the current check fails but the previous check succeedes, then experiment with different expanses of records and fields.  This should help determine which values are causing the problems, or if there's simply too much data being pulled in one pass.
  
-    If the desired dataset is too large, consider if you can prune unnecessary records or fields.  If not, one solution is to pull smaller, multiple batches using the API, then reassemble them.  The `redcap_read()` function in [REDCapR](https://github.com/OuhscBbmc/REDCapR/blob/master/documentation_peek.pdf) does this automatically, and allows the user to specify a `batch_size`.
+    If the desired dataset is too large, consider if you can prune unnecessary records or fields.  If not, one solution is to pull smaller, multiple batches using the API, then reassemble them.  The `redcap_read()` function in [REDCapR](https://github.com/OuhscBbmc/REDCapR/blob/master/documentation-peek.pdf) does this automatically, and allows the user to specify a `batch_size`.
  
     ``` r
     redcap_uri <- "https://the.urlofyourinsitution.edu/api/" #Adapt this to your server.
@@ -179,7 +179,7 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
 Exporting from REDCap to R, using REDCapR
 ------------------------------------------------------------------
 
-[REDCapR](https://github.com/OuhscBbmc/REDCapR) is a package that uses [cURL](http://curl.haxx.se/) (via [httr](https://github.com/hadley/httr)) to communicate with REDCap, and wraps convience functions around it to reduce the size and complexity of the user's code.  The package's basic functions are demonstrated in [this vignette](http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/BasicREDCapROperations.html) and are documented in its [reference manual](https://github.com/OuhscBbmc/REDCapR/blob/master/documentation_peek.pdf) (click the 'View Raw' link).
+[REDCapR](https://github.com/OuhscBbmc/REDCapR) is a package that uses [cURL](http://curl.haxx.se/) (via [httr](https://github.com/hadley/httr)) to communicate with REDCap, and wraps convience functions around it to reduce the size and complexity of the user's code.  The package's basic functions are demonstrated in [this vignette](http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/BasicREDCapROperations.html) and are documented in its [reference manual](https://github.com/OuhscBbmc/REDCapR/blob/master/documentation-peek.pdf) (click the 'View Raw' link).
 
 If you're not using REDCapR, you can skip this section and proceed to 'Importing into REDCap from R' below.
 
