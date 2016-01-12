@@ -56,7 +56,7 @@ clear_project_simple <- function( verbose = TRUE ) {
   # httr::url_ok(pathDeleteTestRecord)
   
   #Returns a boolean value if successful
-  (was_successful <- httr::url_success(url=pathDeleteTestRecord))#, config=config_options))
+  (was_successful <- !httr::http_error(pathDeleteTestRecord))#, config=config_options))
   
   #Print a message and return a boolean value
   if( verbose ) 
