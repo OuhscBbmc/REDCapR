@@ -143,7 +143,7 @@ return_content <- httr::content(result, type="text")
 #   .opts = curl_options
 # )
 
-(was_successful <- httr::url_success("https://bbmc.ouhsc.edu/redcap/plugins/redcapr/no_auth_test.php"))
+(was_successful <- !httr::http_error("https://bbmc.ouhsc.edu/redcap/plugins/redcapr/no_auth_test.php"))
 
 RCurl::httpHEAD(url = "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/no_auth_test.php", .opts = RCurl::curlOptions(ssl.verifypeer = FALSE))
 RCurl::httpGET(url = "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/no_auth_test.php", .opts = RCurl::curlOptions(ssl.verifypeer = FALSE))
