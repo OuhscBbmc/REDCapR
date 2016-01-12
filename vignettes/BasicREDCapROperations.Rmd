@@ -8,10 +8,10 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-This vignette covers the the basic functions exposed by the [`REDCapR`](https://github.com/OuhscCcanMiechvEvaluation/REDCapR) package which allow you to interact with [REDCap](http://www.project-redcap.org/) through its API.
+This vignette covers the the basic functions exposed by the [`httr`](https://github.com/OuhscCcanMiechvEvaluation/httr) and [`curl`](http://cran.r-project.org/package=curl) packages which allow you to interact with [REDCap](http://www.project-redcap.org/) through its API.
 
 ## Reading REDCap Data
-The function `redcap_read_oneshot` uses the [`RCurl`](http://cran.r-project.org/package=RCurl) package to call the REDCap API.
+The function `redcap_read_oneshot` uses the [`httr`](http://cran.r-project.org/package=httr) package to call the REDCap API.
 ```{r set_options, echo=FALSE, results='hide'}
 library(knitr)
 opts_chunk$set(
