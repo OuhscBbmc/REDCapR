@@ -352,17 +352,18 @@ Troubleshooting import operations is trickier than export operations for two maj
 Other software for communication and automation with REDCap
 ------------------------------------------------------------------
 
-REDCap is used in many enviroments, andit's not surprising that a lot of libraries have been developed that cater to different scenarios and languages.  Here's a partial list, and please [email me](mailto:wibeasley@hotmail.com) if there are more that should be included.
+REDCap is used in many enviroments, and it's not surprising that a lot of libraries have been developed that cater to different scenarios and languages.  An active list is maintained at [REDCap-Tools](http://redcap-tools.github.io/projects/).  In an entry needs to be added, please notify us; instructions are found at the bottom of the page.
 
-
+<!--
 **Actively developed in the past two years**
 
 1. [`PyCap`](https://github.com/redcap-tools/PyCap): "PyCap is an interface to the REDCap Application Programming Interface (API). PyCap is designed to be a minimal interface exposing all required and optional API parameters." (Written in Python primarily by Scott Burns, formerly with Vanderbilt, now at [Stratasan](http://www.stratasan.com/).)
 1. [`redcap`](https://github.com/jeffreyhorner/redcap): "R interface to REDCap." (Written in R primarily by Jeffrey Horner.  The last commit was Feb 2013)
 1. [`redcapAPI`](https://github.com/nutterb/redcapAPI): This is the most actively-developed fork of the library above. (Written in R primarily by Benjamin Nutter at the Cleveland Clinic Foundation.)
-1. [`REDCapR`](https://github.com/OuhscBbmc/REDCapR): "R Utilities for interacting with a REDCap data system." (Written in R primarily by Will Beasley, and the [OUHSC BBMC](http://ouhsc.edu/bbmc/).
+1. [`REDCapR`](https://github.com/OuhscBbmc/REDCapR): "R Utilities for interacting with a REDCap data system." (Written in R primarily by Will Beasley, and the [OUHSC BBMC](http://ouhsc.edu/bbmc/).)
 1. [`redcap-repeat`](https://github.com/cbmi/redcap-repeat): "Script for REDCap data dictionaries to support repeating fields and groups of fields." (Written in Python primarily by Jeff Max at CHOP's [CBMI](https://github.com/cbmi)).
 1. [`django-redcap`](https://github.com/cbmi/django-redcap): "Utilities for porting REDCap projects to and from Django models." (Written in Python primarily by 'dmegahan at CHOP's [CBMI](https://github.com/cbmi)).
+-->
 
 Other good resources
 ------------------------------------------------------------------
