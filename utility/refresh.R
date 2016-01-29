@@ -4,7 +4,7 @@ deviceType <- ifelse(R.version$os=="linux-gnu", "X11", "windows")
 options(device = deviceType) #http://support.rstudio.org/help/discussions/problems/80-error-in-function-only-one-rstudio-graphics-device-is-permitted
 
 devtools::document()
-devtools::check_doc() #Should return NULL
+devtools::check_man() #Should return NULL
 system("R CMD Rd2pdf --no-preview --force --output=./documentation-peek.pdf ." )
 
 devtools::run_examples(); #dev.off() #This overwrites the NAMESPACE file too
