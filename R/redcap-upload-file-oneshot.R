@@ -80,6 +80,8 @@ redcap_upload_file_oneshot <- function( file_name, record, redcap_uri, token, fi
 	if( missing(token) )
 		stop("The required parameter `token` was missing from the call to `redcap_upload_file_oneshot()`.")     
 	
+	token <- sub("\\n", "", token)
+	
 	# if( missing( config_options ) | is.null(config_options) ) {
 	#   cert_location <- system.file("ssl-certs/mozilla-ca-root.crt", package="REDCapR")
 	#   
