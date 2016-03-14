@@ -97,7 +97,9 @@ redcap_write <- function( ds_to_write,
     base::stop("The required parameter `token` was missing from the call to `redcap_write()`.")
 
   start_time <- base::Sys.time()
-
+  
+  token <- sub("\\n", "", token)
+  
   ds_glossary <- REDCapR::create_batch_glossary(row_count=base::nrow(ds_to_write), batch_size=batch_size)
   
   affected_ids <- character(0)

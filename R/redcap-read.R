@@ -81,6 +81,8 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
   if( missing(token) )
     stop("The required parameter `token` was missing from the call to `redcap_read()`.")
   
+  token <- sub("\\n", "", token)
+  
   if( all(nchar(records_collapsed)==0) )
     records_collapsed <- ifelse(is.null(records), "", paste0(records, collapse=",")) #This is an empty string if `records` is NULL.
   if( (length(fields_collapsed)==0L) | is.null(fields_collapsed) | all(nchar(fields_collapsed)==0) )

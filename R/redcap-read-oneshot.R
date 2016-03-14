@@ -118,6 +118,8 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
   if( missing(token) )
     stop("The required parameter `token` was missing from the call to `redcap_read_oneshot()`.")
   
+  token <- sub("\\n", "", token)
+  
   # browser() #| missing(fields_collapsed)
   
   if( all(nchar(records_collapsed)==0) )
