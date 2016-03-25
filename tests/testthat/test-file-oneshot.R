@@ -23,7 +23,7 @@ test_that("NameComesFromREDCap", {
   )
     
 #   start_time <- Sys.time() - lubridate::seconds(1) #Knock off a second inc ase there's small time imprecisions
-  start_time <- Sys.time() - 1 #Knock off a second in case there are small time imprecisions
+  start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
   path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test-data/mugshot-1.jpg")
   info_expected <- file.info(path_of_expected)
   record <- 1
@@ -58,9 +58,9 @@ test_that("NameComesFromREDCap", {
   expect_equal(info_actual$size, expected=info_expected$size, label="The size of the downloaded file should match.")
   expect_false(info_actual$isdir, "The downloaded file should not be a directory.")
   # expect_equal(as.character(info_actual$mode), expected=as.character(info_expected$mode), label="The mode/permissions of the downloaded file should match.")
-  expect_more_than(info_actual$mtime, expected=start_time, label="The downloaded file's modification time should not precede this function's start time.")
-  expect_more_than(info_actual$ctime, expected=start_time, label="The downloaded file's last change time should not precede this function's start time.")
-  expect_more_than(info_actual$atime, expected=start_time, label="The downloaded file's last access time should not precede this function's start time.")
+  expect_true(start_time <= info_actual$mtime, label="The downloaded file's modification time should not precede this function's start time.")
+  expect_true(start_time <= info_actual$ctime, label="The downloaded file's last change time should not precede this function's start time.")
+  expect_true(start_time <= info_actual$atime, label="The downloaded file's last access time should not precede this function's start time.")
 })
 
 test_that("FullPathSpecified", {
@@ -74,7 +74,7 @@ test_that("FullPathSpecified", {
     regexp = expected_outcome_message
   )
   
-  start_time <- Sys.time() - 1 #Knock off a second in case there are small time imprecisions
+  start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
   path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test-data/mugshot-2.jpg")
   info_expected <- file.info(path_of_expected)
   record <- 2
@@ -109,9 +109,9 @@ test_that("FullPathSpecified", {
   expect_equal(info_actual$size, expected=info_expected$size, label="The size of the downloaded file should match.")
   expect_false(info_actual$isdir, "The downloaded file should not be a directory.")
   # expect_equal(as.character(info_actual$mode), expected=as.character(info_expected$mode), label="The mode/permissions of the downloaded file should match.")
-  expect_more_than(info_actual$mtime, expected=start_time, label="The downloaded file's modification time should not precede this function's start time.")
-  expect_more_than(info_actual$ctime, expected=start_time, label="The downloaded file's last change time should not precede this function's start time.")
-  expect_more_than(info_actual$atime, expected=start_time, label="The downloaded file's last access time should not precede this function's start time.")
+  expect_true(start_time <= info_actual$mtime, label="The downloaded file's modification time should not precede this function's start time.")
+  expect_true(start_time <= info_actual$ctime, label="The downloaded file's last change time should not precede this function's start time.")
+  expect_true(start_time <= info_actual$atime, label="The downloaded file's last access time should not precede this function's start time.")
 })
 
 test_that("RelativePath", {
@@ -125,7 +125,7 @@ test_that("RelativePath", {
     regexp = expected_outcome_message
   )
   
-  start_time <- Sys.time() - 1 #Knock off a second in case there are small time imprecisions
+  start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
   path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test-data/mugshot-3.jpg")
   info_expected <- file.info(path_of_expected)
   record <- 3
@@ -160,9 +160,9 @@ test_that("RelativePath", {
   expect_equal(info_actual$size, expected=info_expected$size, label="The size of the downloaded file should match.")
   expect_false(info_actual$isdir, "The downloaded file should not be a directory.")
   # expect_equal(as.character(info_actual$mode), expected=as.character(info_expected$mode), label="The mode/permissions of the downloaded file should match.")
-  expect_more_than(info_actual$mtime, expected=start_time, label="The downloaded file's modification time should not precede this function's start time.")
-  expect_more_than(info_actual$ctime, expected=start_time, label="The downloaded file's last change time should not precede this function's start time.")
-  expect_more_than(info_actual$atime, expected=start_time, label="The downloaded file's last access time should not precede this function's start time.")
+  expect_true(start_time <= info_actual$mtime, label="The downloaded file's modification time should not precede this function's start time.")
+  expect_true(start_time <= info_actual$ctime, label="The downloaded file's last change time should not precede this function's start time.")
+  expect_true(start_time <= info_actual$atime, label="The downloaded file's last access time should not precede this function's start time.")
 })
 
 test_that("Full Directory Specific", {
@@ -176,7 +176,7 @@ test_that("Full Directory Specific", {
     regexp = expected_outcome_message
   )
   
-  start_time <- Sys.time() - 1 #Knock off a second in case there are small time imprecisions
+  start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
   path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test-data/mugshot-3.jpg")
   directory <- getwd()#  base::tempfile()
   info_expected <- file.info(path_of_expected)
@@ -212,7 +212,7 @@ test_that("Full Directory Specific", {
   expect_equal(info_actual$size, expected=info_expected$size, label="The size of the downloaded file should match.")
   expect_false(info_actual$isdir, "The downloaded file should not be a directory.")
   # expect_equal(as.character(info_actual$mode), expected=as.character(info_expected$mode), label="The mode/permissions of the downloaded file should match.")
-  expect_more_than(info_actual$mtime, expected=start_time, label="The downloaded file's modification time should not precede this function's start time.")
-  expect_more_than(info_actual$ctime, expected=start_time, label="The downloaded file's last change time should not precede this function's start time.")
-  expect_more_than(info_actual$atime, expected=start_time, label="The downloaded file's last access time should not precede this function's start time.")
+  expect_true(start_time <= info_actual$mtime, label="The downloaded file's modification time should not precede this function's start time.")
+  expect_true(start_time <= info_actual$ctime, label="The downloaded file's last change time should not precede this function's start time.")
+  expect_true(start_time <= info_actual$atime, label="The downloaded file's last access time should not precede this function's start time.")
 })
