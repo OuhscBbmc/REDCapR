@@ -61,11 +61,11 @@
 retrieve_token_mssql <- function(
   dsn,
   project_name,
-  channel = NULL,
-  schema_name = "[Redcap]",
-  procedure_name = "[prcToken]",
-  variable_name_project = "@RedcapProjectName",
-  field_name_token = "Token"
+  channel                  = NULL,
+  schema_name              = "[Redcap]",
+  procedure_name           = "[prcToken]",
+  variable_name_project    = "@RedcapProjectName",
+  field_name_token         = "Token"
   ) {
 
   if( !requireNamespace("RODBC", quietly=TRUE) ) 
