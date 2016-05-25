@@ -31,8 +31,8 @@
 #' library(REDCapR) #Load the package into the current R session.
 #' # ---- Local File Example ----------------------------
 #' path <- system.file("misc/example.credentials", package="REDCapR")
-#' project_id  <- 153
-#' retrieve_credential_local(path, project_id)
+#' (p1 <- retrieve_credential_local(path, 153))
+#' (p2 <- retrieve_credential_local(path, 212))
 
 retrieve_credential_local <- function(
   path_credential,
@@ -73,6 +73,7 @@ retrieve_credential_local <- function(
       "if you're sure you have the correct file & file contents."
     )
     stop(error_message_username)
+    
   } else if( check_username & (Sys.info()["user"]!=credential$username) ) {
     error_message_username <- paste(
       "The username (according to R's `Sys.info()['user']` doesn't match the",
@@ -82,6 +83,7 @@ retrieve_credential_local <- function(
       "Otherwise, you may be pointing to the wrong credentials file."
     )
     stop(error_message_username)
+    
   } else if( check_token_pattern & !grepl("[A-F0-9]{32}", credential$token, perl=TRUE) ) {
     error_message_token <- paste(
       "A REDCap token should be a string of 32 digits and uppercase",
@@ -90,6 +92,7 @@ retrieve_credential_local <- function(
       "if you're sure you have the correct file & file contents."
     )
     stop(error_message_token)
+    
   }
   
   # Return to caller.

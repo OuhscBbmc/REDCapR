@@ -43,8 +43,8 @@ would like help adapting this approach to your infrastructure.
 library(REDCapR) #Load the package into the current R session.
 # ---- Local File Example ----------------------------
 path <- system.file("misc/example.credentials", package="REDCapR")
-project_id  <- 153
-retrieve_credential_local(path, project_id)
+(p1 <- retrieve_credential_local(path, 153))
+(p2 <- retrieve_credential_local(path, 212))
 }
 \author{
 Will Beasley
