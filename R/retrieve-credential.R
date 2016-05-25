@@ -46,6 +46,13 @@ retrieve_credential_local <- function(
   if( !file.exists(path_credential) ) stop("The credential file was not found.")
   ds_credentials <- utils::read.csv(path_credential, comment.char="#", stringsAsFactors=FALSE)
   
+  # Check that it's a data.frame with valid variable names
+  if( !inherits(ds_credentials, "data.frame") ) {
+    stop("The credentials file was not correctly transformed into a `data.frame`.  Make sure it's a well-formed CSV.")
+  } else if ( !identical(colnames(ds_credentials), c("redcap_uri", "username", "project_id", "token", "comment")) ) {
+    stop("The credentials file did not contain the proper variables of `redcap_uri`, `username`, `project_id`, `token`,  and `comment`.")
+  }
+  
   # Select only the records with a matching project id.
   ds_credential <- ds_credentials[ds_credentials$project_id==project_id, ]
   

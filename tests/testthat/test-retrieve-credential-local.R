@@ -37,6 +37,29 @@ test_that("Good Credentials", {
   expect_equal(credential_write$comment      , expected_write_comment)
 })
 
+test_that("Missing file", {
+  expected_message <- "The credential file was not found."
+  
+  expect_error(
+    regexp = expected_message,
+    object = REDCapR::retrieve_credential_local(
+      path           = system.file("misc/missing.credentials", package="REDCapR"),
+      project_id     = pid_read
+    )
+  )
+})
+test_that("Malformed file", {
+  expected_message <- "The credentials file did not contain the proper variables"
+  
+  expect_error(
+    regexp = expected_message,
+    object = REDCapR::retrieve_credential_local(
+      path           = system.file("misc/out-of-order.credentials", package="REDCapR"),
+      project_id     = pid_read
+    )
+  )
+})
+
 test_that("Zero rows", {
   expected_message <- "The project_id was not found in the csv credential file."
   
