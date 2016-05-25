@@ -43,23 +43,19 @@ If the database elements are create with the script provided in package's `Secur
 }
 \note{
 We use Microsoft SQL Server, because that fits our University's infrastructure the easiest.  But this approach theoretically can work
-with any LDAP-enabled database server.  Please contact us if your institution is using something other than SQL Server, and would like help adapting this approach to
-your infrastructure.
+with any LDAP-enabled database server.  Please contact us if your institution is using something other than SQL Server, and 
+would like help adapting this approach to your infrastructure.
 }
 \examples{
-\dontrun{
 library(REDCapR) #Load the package into the current R session.
-
-##
-## Rely on `retrieve_token()` to create & destory the channel.
-##
+\dontrun{
+# ---- SQL Server Example ----------------------------
+# Rely on `retrieve_token()` to create & destory the channel.
 dsn <- "TokenSecurity"
 project <- "DiabetesSurveyProject"
 token <- retrieve_token(dsn=dsn, project_name=project)
 
-##
-## Create & close the channel yourself, to optimize repeated calls.
-##
+# Create & close the channel yourself, to optimize repeated calls.
 dsn <- "TokenSecurity"
 project1 <- "DiabetesSurveyProject1"
 project2 <- "DiabetesSurveyProject2"
@@ -71,7 +67,6 @@ token2 <- retrieve_token(dsn=dsn, project_name=project2)
 token3 <- retrieve_token(dsn=dsn, project_name=project3)
 RODBC::odbcClose(channel)
 }
-
 }
 \author{
 Will Beasley

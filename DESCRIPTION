@@ -7,13 +7,14 @@ Description: Encapsulates functions to streamline calls from R to the REDCap
     to access and modify data programmatically, improving the capacity for
     literate and reproducible programming.
 Version: 0.9.5.9000
-Date: 2016-03-23
+Date: 2016-05-24
 Authors@R: c(person("Will", "Beasley", role = c("aut", "cre"), email =
     "wibeasley@hotmail.com"), person("David", "Bard", role = "ctb"),
     person("Thomas", "Wilson", role = "ctb"), person(given="John J",
     family="Aponte", role = "ctb"), person("Rollie", "Parrish",
     role = "ctb"), person("Benjamin", "Nutter",
     role = "ctb"), person("Andrew", "Peters",
+    role = "ctb"), person("Hao", "Zhu",
     role = "ctb"))
 Author: Will Beasley [aut, cre],
     David Bard [ctb],
@@ -21,7 +22,8 @@ Author: Will Beasley [aut, cre],
     John J Aponte [ctb],
     Rollie Parrish [ctb],
     Benjamin Nutter [ctb],
-    Andrew Peters [ctb]
+    Andrew Peters [ctb],
+    Hao Zhu [ctb]
 Maintainer: Will Beasley <wibeasley@hotmail.com>
 URL: https://github.com/OuhscBbmc/REDCapR, http://ouhsc.edu/bbmc/,
     http://project-redcap.org

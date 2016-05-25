@@ -27,24 +27,20 @@
 #'
 #' @note
 #' We use Microsoft SQL Server, because that fits our University's infrastructure the easiest.  But this approach theoretically can work
-#' with any LDAP-enabled database server.  Please contact us if your institution is using something other than SQL Server, and would like help adapting this approach to
-#' your infrastructure.
+#' with any LDAP-enabled database server.  Please contact us if your institution is using something other than SQL Server, and 
+#' would like help adapting this approach to your infrastructure.
 #' @author Will Beasley
 #'
 #' @examples
-#' \dontrun{
 #' library(REDCapR) #Load the package into the current R session.
-#'
-#' ##
-#' ## Rely on `retrieve_token()` to create & destory the channel.
-#' ##
+#' \dontrun{
+#' # ---- SQL Server Example ----------------------------
+#' # Rely on `retrieve_token()` to create & destory the channel.
 #' dsn <- "TokenSecurity"
 #' project <- "DiabetesSurveyProject"
 #' token <- retrieve_token(dsn=dsn, project_name=project)
 #'
-#' ##
-#' ## Create & close the channel yourself, to optimize repeated calls.
-#' ##
+#' # Create & close the channel yourself, to optimize repeated calls.
 #' dsn <- "TokenSecurity"
 #' project1 <- "DiabetesSurveyProject1"
 #' project2 <- "DiabetesSurveyProject2"
@@ -56,17 +52,16 @@
 #' token3 <- retrieve_token(dsn=dsn, project_name=project3)
 #' RODBC::odbcClose(channel)
 #' }
-#'
 
 retrieve_token_mssql <- function(
   dsn,
   project_name,
-  channel = NULL,
-  schema_name = "[Redcap]",
-  procedure_name = "[prcToken]",
-  variable_name_project = "@RedcapProjectName",
-  field_name_token = "Token"
-  ) {
+  channel                  = NULL,
+  schema_name              = "[Redcap]",
+  procedure_name           = "[prcToken]",
+  variable_name_project    = "@RedcapProjectName",
+  field_name_token         = "Token"
+) {
 
   if( !requireNamespace("RODBC", quietly=TRUE) ) 
     stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBC` package is not installed.  Please install it and try again.")
