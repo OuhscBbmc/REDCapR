@@ -7,6 +7,6 @@ apt_packages:
   - r-cran-rodbc
 r_github_packages:
   - jimhester/covr
-  - hadley/testthat
+# - hadley/testthat
 after_success:
   - Rscript -e 'library(covr);coveralls()'
