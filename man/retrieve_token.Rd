@@ -2,7 +2,6 @@
 % Please edit documentation in R/retrieve-token.R
 \name{retrieve_token}
 \alias{retrieve_token}
-\alias{retrieve_token_local}
 \alias{retrieve_token_mssql}
 \title{Read a token from a (non-REDCap) database.}
 \usage{
@@ -68,11 +67,6 @@ token2 <- retrieve_token(dsn=dsn, project_name=project2)
 token3 <- retrieve_token(dsn=dsn, project_name=project3)
 RODBC::odbcClose(channel)
 }
-
-# ---- Local File Example ----------------------------
-path <- system.file("misc/example.credentials", package="REDCapR")
-project_id  <- 153
-retrieve_token_local(path, project_id)
 }
 \author{
 Will Beasley
