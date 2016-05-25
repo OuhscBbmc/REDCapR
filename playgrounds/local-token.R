@@ -7,7 +7,8 @@ check_token_pattern      <- TRUE
 
 # Check that the file exists and read it into a data frame.
 if( !file.exists(path_credential) ) stop("The credential file was not found.")
-ds_credentials <- readr::read_csv(path_credential, comment = "#")
+# ds_credentials <- readr::read_csv(path_credential, comment = "#")
+ds_credentials <- utils::read.csv(path_credential, comment.char="#", stringsAsFactors=FALSE)
 
 # Select only the records with a matching project id.
 ds_credential <- ds_credentials[ds_credentials$project_id==project_id, ]

@@ -2,6 +2,7 @@
 % Please edit documentation in R/retrieve-token.R
 \name{retrieve_token}
 \alias{retrieve_token}
+\alias{retrieve_token_local}
 \alias{retrieve_token_mssql}
 \title{Read a token from a (non-REDCap) database.}
 \usage{

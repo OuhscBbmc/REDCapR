@@ -1,6 +1,6 @@
 #' @name retrieve_token
-#' @aliases retrieve_token_mssql
-#' @export retrieve_token_mssql
+#' @aliases retrieve_token_mssql retrieve_token_local
+#' @export retrieve_token_mssql retrieve_token_local
 #' @title Read a token from a (non-REDCap) database.
 #'
 #' @description These functions are not essential to calling the REDCap API, but instead are functions that help manage tokens securely.
@@ -53,12 +53,10 @@
 #' RODBC::odbcClose(channel)
 #' }
 #' 
-#' \dontrun{
 #' # ---- Local File Example ----------------------------
 #' path <- system.file("misc/example.credentials", package="REDCapR")
 #' project_id  <- 153
 #' retrieve_token_local(path, project_id)
-#' }
 
 retrieve_token_mssql <- function(
   dsn,
@@ -122,7 +120,7 @@ retrieve_token_local <- function(
 
   # Check that the file exists and read it into a data frame.
   if( !file.exists(path_credential) ) stop("The credential file was not found.")
-  ds_credentials <- readr::read_csv(path_credential, comment = "#")
+  ds_credentials <- utils::read.csv(path_credential, comment.char="#", stringsAsFactors=FALSE)
   
   # Select only the records with a matching project id.
   ds_credential <- ds_credentials[ds_credentials$project_id==project_id, ]
