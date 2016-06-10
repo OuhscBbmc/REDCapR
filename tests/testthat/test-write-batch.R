@@ -1,8 +1,6 @@
 library(testthat)
-
-###########
 context("Write Batch")
-###########
+
 test_that("Smoke Test", {
   testthat::skip_on_cran()
   start_clean_result <- REDCapR:::clean_start_simple(batch=TRUE)

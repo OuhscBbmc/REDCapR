@@ -1,13 +1,8 @@
 library(testthat)
-##
-## Since the project data is wiped clean at the start of each function, 
-## the upload & download calls are tested by one function.
-
-###########
 context("FileOneshot")
-###########
-# uri <- "https://bbmc.ouhsc.edu/redcap/api/"
-# token <- "D70F9ACD1EDD6F151C6EA78683944E98" #For `UnitTestPhiFree` account on pid=213.
+
+# Since the project data is wiped clean at the start of each function,
+# the upload & download calls are tested by one function.
 
 delay_after_download_file <- 1.0 #In seconds
 
@@ -22,7 +17,7 @@ test_that("NameComesFromREDCap", {
     regexp = expected_outcome_message
   )
     
-#   start_time <- Sys.time() - lubridate::seconds(1) #Knock off a second inc ase there's small time imprecisions
+  # start_time <- Sys.time() - lubridate::seconds(1) #Knock off a second in case there's small time imprecisions
   start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
   path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test-data/mugshot-1.jpg")
   info_expected <- file.info(path_of_expected)

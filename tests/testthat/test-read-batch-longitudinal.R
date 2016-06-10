@@ -1,16 +1,11 @@
 library(testthat)
-
-###########
 context("Read Batch - Longitudinal")
-###########
-# uri <- "https://bbmc.ouhsc.edu/redcap/api/"
-# token <- "0434F0E9CF53ED0587847AB6E51DE762" #For `UnitTestPhiFree` account on pid=212.
+
 credential <- REDCapR::retrieve_credential_local(
   path_credential = base::file.path(devtools::inst(name="REDCapR"), "misc/example.credentials"),
   project_id      = 212
 )
 project <- redcap_project$new(redcap_uri=credential$redcap_uri, token=credential$token)
-
 directory_relative <- "test-data/project-longitudinal/expected"
 
 test_that("Smoke Test", {  

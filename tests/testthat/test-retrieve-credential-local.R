@@ -1,10 +1,7 @@
 library(testthat)
-
-###########
 context("Retrieve Credentials Local")
 
-
-path <- system.file("misc/example.credentials", package="REDCapR")
+path               <- system.file("misc/example.credentials", package="REDCapR")
 pid_read           <- 153L #This project is for testing only reading from the server.
 pid_longitudinal   <- 212L #This project is for testing reading longitudinal projects.
 pid_write          <- 213L #This project is for testing reading & writing.
