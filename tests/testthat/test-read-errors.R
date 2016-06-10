@@ -2,8 +2,8 @@ library(testthat)
 context("Read Errors")
 
 test_that("One Shot: Bad Uri -Not HTTPS", {
-  #expected_message <- "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\"http://www.w3.org/TR/html4/strict.dtd\">\r\n<HTML><HEAD><TITLE>Length Required</TITLE>\r\n<META HTTP-EQUIV=\"Content-Type\" Content=\"text/html; charset=us-ascii\"></HEAD>\r\n<BODY><h2>Length Required</h2>\r\n<hr><p>HTTP Error 411. The request must be chunked or have a content length.</p>\r\n</BODY></HTML>\r\n"
-  expected_message <- "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><hash><error>The requested method is not implemented.</error></hash>"
+  expected_message_411 <- "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\"http://www.w3.org/TR/html4/strict.dtd\">\r\n<HTML><HEAD><TITLE>Length Required</TITLE>\r\n<META HTTP-EQUIV=\"Content-Type\" Content=\"text/html; charset=us-ascii\"></HEAD>\r\n<BODY><h2>Length Required</h2>\r\n<hr><p>HTTP Error 411. The request must be chunked or have a content length.</p>\r\n</BODY></HTML>\r\n"
+  expected_message_501 <- "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><hash><error>The requested method is not implemented.</error></hash>"
   
   credential <- REDCapR::retrieve_credential_local(
     path_credential = base::file.path(devtools::inst(name="REDCapR"), "misc/example.credentials"),
@@ -16,11 +16,10 @@ test_that("One Shot: Bad Uri -Not HTTPS", {
   )  
 
   expect_equal(returned_object$data, expected=data.frame(), label="An empty data.frame should be returned.")
-  # expect_equal(returned_object$status_code, expected=411L)
-  expect_equal(returned_object$status_code, expected=501L)
-  # expect_true(returned_object$status_code %in% c(411L, 501L))
+  expect_true(returned_object$status_code %in% c(411L, 501L))
   # expect_equal(returned_object$status_message, expected="Length Required")
-  expect_equal(returned_object$raw_text, expected=expected_message)
+  expect_true(returned_object$raw_text %in% c(expected_message_411, expected_message_501))
+  # expect_equal(returned_object$raw_text, expected=expected_message)
   expect_equal(returned_object$records_collapsed, "")
   expect_equal(returned_object$fields_collapsed, "")
   expect_false(returned_object$success)
