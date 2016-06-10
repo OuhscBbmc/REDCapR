@@ -3,9 +3,14 @@ library(testthat)
 ###########
 context("Read Batch - Longitudinal")
 ###########
-uri <- "https://bbmc.ouhsc.edu/redcap/api/"
-token <- "0434F0E9CF53ED0587847AB6E51DE762" #For `UnitTestPhiFree` account on pid=212.
-project <- redcap_project$new(redcap_uri=uri, token=token)
+# uri <- "https://bbmc.ouhsc.edu/redcap/api/"
+# token <- "0434F0E9CF53ED0587847AB6E51DE762" #For `UnitTestPhiFree` account on pid=212.
+credential <- REDCapR::retrieve_credential_local(
+  path_credential = base::file.path(devtools::inst(name="REDCapR"), "misc/example.credentials"),
+  project_id      = 212
+)
+project <- redcap_project$new(redcap_uri=credential$redcap_uri, token=credential$token)
+
 directory_relative <- "test-data/project-longitudinal/expected"
 
 test_that("Smoke Test", {  
@@ -13,12 +18,12 @@ test_that("Smoke Test", {
   
   #Static method w/ default batch size
   expect_message(
-    returned_object <- redcap_read(redcap_uri=uri, token=token, verbose=T)    
+    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T)    
   )  
   
   #Static method w/ tiny batch size
   expect_message(
-    returned_object <- redcap_read(redcap_uri=uri, token=token, verbose=T, batch_size=2)    
+    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T, batch_size=2)    
   )
   
   #Instance method w/ default batch size
@@ -58,7 +63,7 @@ test_that("All Records -Default", {
   ###########################
   ## Default Batch size
   expect_message(
-    returned_object1 <- redcap_read(redcap_uri=uri, token=token, verbose=T),
+    returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T),
     regexp = expected_outcome_message
   )  
   expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
@@ -72,7 +77,7 @@ test_that("All Records -Default", {
   ###########################
   ## Tiny Batch size
   expect_message(
-    returned_object2 <- redcap_read(redcap_uri=uri, token=token, verbose=T, batch_size=8),
+    returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T, batch_size=8),
     regexp = expected_outcome_message
   )
   
@@ -84,5 +89,3 @@ test_that("All Records -Default", {
   expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
-
-
