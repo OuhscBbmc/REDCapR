@@ -1,16 +1,13 @@
 library(testthat)
-
-###########
 context("Retrieve Token")
-###########
 
-dsn                   = NULL #The dsn is never really called in these tests
-project_name          = "rc_project_1"
-channel               = NULL
-schema_name           = "[Redcap]"
-procedure_name        = "[prcToken]"
-variable_name_project = "@RedcapProjectName"
-field_name_token      = "Token"
+dsn                   <- NULL #The dsn is never really called in these tests
+project_name          <- "rc_project_1"
+channel               <- NULL
+schema_name           <- "[Redcap]"
+procedure_name        <- "[prcToken]"
+variable_name_project <- "@RedcapProjectName"
+field_name_token      <- "Token"
 
 test_that("Bad Project Name", {
   testthat::skip_if_not_installed(pkg = "RODBC")

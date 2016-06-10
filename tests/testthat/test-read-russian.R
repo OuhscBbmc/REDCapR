@@ -1,15 +1,15 @@
 library(testthat)
-
-###########
 context("Russian Unencoded")
-###########
-uri <- "https://bbmc.ouhsc.edu/redcap/api/"
-token <- "D72C6485B52FE9F75D27B696977FBA43" #For `UnitTestPhiFree` account on pid=268.
+
+credential <- REDCapR::retrieve_credential_local(
+  path_credential = base::file.path(devtools::inst(name="REDCapR"), "misc/example.credentials"),
+  project_id      = 268
+)
 
 test_that("Russian Recruit", {
   testthat::skip_on_cran()
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, verbose=T)
+    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T)
   )
 
   d <- returned_object$data

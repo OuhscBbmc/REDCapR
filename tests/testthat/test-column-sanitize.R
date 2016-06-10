@@ -1,8 +1,5 @@
 library(testthat)
-
-###########
 context("Sanitize")
-###########
 
 test_that("dry_run", {
   dirty <- data.frame(id=seq_along(letters), names=letters, stringsAsFactors=FALSE) #These aren't really dirty.  And should have no conversion problems

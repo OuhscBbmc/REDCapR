@@ -1,13 +1,13 @@
 These notes are to hep potential REDCapR contributors get their development machines set up correctly to build the package.  It's also to help me remember how to do it if I switch to another computer.  Nothing mysterious -just little things to save 10 minutes here and there.  Unfortunately it's not as easy as installing R and RStudio and clicking `Build`.
 
 ### R
-Install the [latest version](http://cran.rstudio.com/bin/windows/base/) of R.  Before a version is submitted to CRAN, the CRAN maintainers prefer you use the [patched](http://cran.rstudio.com/bin/windows/base/rpatched.html) version of R, or even the [development](http://cran.rstudio.com/bin/windows/base/rdevel.html) version.  These links point to the windows versions.  If you're running Linux, you probably already know how to get the right version, and there's not a simply URL I can link to.
+Install the [latest version](https://cran.r-project.org/bin/windows/base/) of R.  Before a version is submitted to CRAN, the CRAN maintainers prefer you use the [patched](http://cran.r-project.org/bin/windows/base/rpatched.html) version of R, or even the [development](http://cran.r-project.org/bin/windows/base/rdevel.html) version.  These links point to the windows versions.  If you're running Linux, you probably already know how to get the right version, and there's not a simply URL I can link to.
 
 ### RStudio
 Although other R IDEs are available, using [RStudio](http://www.rstudio.com/ide/download/desktop) will be easier when developing REDCapR, since that the major link of the tool chain I'm used to.
 
 ### Rtools
-[Rtools](http://cran.rstudio.com/bin/windows/Rtools/) is the main thing that builds and checks the package being developed.  CRAN maintainers like you to run the most recent version.
+[Rtools](https://cran.r-project.org/bin/windows/Rtools/) is the main thing that builds and checks the package being developed.  CRAN maintainers like you to run the most recent version.
 
 ### LaTeX  software
 For Windows, the consensus seemed to be [MiKTeX](http://miktex.org/download).  The full version is huge, and contains almost every possible package (LaTeX has a package system similar to R and Linux).  If you install something other than the full version, and a document requires a package you don't have, it will simply prompt you to download it.
