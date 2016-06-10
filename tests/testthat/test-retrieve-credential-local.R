@@ -5,8 +5,9 @@ context("Retrieve Credentials Local")
 
 
 path <- system.file("misc/example.credentials", package="REDCapR")
-pid_read    <- 153L #This project is for testing only reading from the server.
-pid_write   <- 212L #This project is for testing reading & writing.
+pid_read           <- 153L #This project is for testing only reading from the server.
+pid_longitudinal   <- 212L #This project is for testing reading longitudinal projects.
+pid_write          <- 213L #This project is for testing reading & writing.
 
 test_that("Good Credentials", {
   expected_read_redcap_uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
@@ -15,20 +16,33 @@ test_that("Good Credentials", {
   expected_read_token           <- "9A81268476645C4E5F03428B8AC3AA7B"
   expected_read_comment         <- "simple static (read-only) test project"
   
+  expected_longitudinal_redcap_uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
+  expected_longitudinal_username       <- "myusername"
+  expected_longitudinal_project_id     <- pid_longitudinal
+  expected_longitudinal_token          <- "0434F0E9CF53ED0587847AB6E51DE762"
+  expected_longitudinal_comment        <- "longitudinal (read-only) test project"
+  
   expected_write_redcap_uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
   expected_write_username       <- "myusername"
   expected_write_project_id     <- pid_write
   expected_write_token          <- "D70F9ACD1EDD6F151C6EA78683944E98"
   expected_write_comment        <- "simple write test project"
 
-  credential_read  <- REDCapR::retrieve_credential_local(path, pid_read)
-  credential_write <- REDCapR::retrieve_credential_local(path, pid_write)
+  credential_read         <- REDCapR::retrieve_credential_local(path, pid_read)
+  credential_longitudinal <- REDCapR::retrieve_credential_local(path, pid_longitudinal)
+  credential_write        <- REDCapR::retrieve_credential_local(path, pid_write)
   
   expect_equal(credential_read$redcap_uri   , expected_read_redcap_uri)
   expect_equal(credential_read$username     , expected_read_username)
   expect_equal(credential_read$project_id   , expected_read_project_id)
   expect_equal(credential_read$token        , expected_read_token)
   expect_equal(credential_read$comment      , expected_read_comment)
+  
+  expect_equal(credential_longitudinal$redcap_uri   , expected_longitudinal_redcap_uri)
+  expect_equal(credential_longitudinal$username     , expected_longitudinal_username)
+  expect_equal(credential_longitudinal$project_id   , expected_longitudinal_project_id)
+  expect_equal(credential_longitudinal$token        , expected_longitudinal_token)
+  expect_equal(credential_longitudinal$comment      , expected_longitudinal_comment)
   
   expect_equal(credential_write$redcap_uri   , expected_write_redcap_uri)
   expect_equal(credential_write$username     , expected_write_username)
