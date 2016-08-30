@@ -8,25 +8,36 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-## Description
+Description
+========================================
+
 The SQL code below adds schemas, a table and two stored procedures to an existing Microsoft SQL Database.  This second database is not essential to calling the REDCap API, but it helps manage tokens securely.
 
 This database contains the tokens and other sensitive content (such as passwords, API tokens, and file paths) that should not be stored in a Git repository (even a private Git repository).  These passwords can be retrieved by `REDCapR::retrieve_token_mssql()`.
 
-## Create a DSN on each client
-After executing the SQL code in an existing database, create an ODBC [DSN](http://en.wikipedia.org/wiki/Data_source_name) on *each* client machine that calls the database.  Download the most recent drivers (as of Sept 2014, the most recent version is 11 for [Windows](http://www.microsoft.com/en-us/download/details.aspx?id=36434) and [Linux](https://msdn.microsoft.com/library/hh568451(SQL.110).aspx)., then run the wizard.  Many values in the wizard will remain at the default values.  Here are the important ones to change.
+
+Create a DSN on each client
+========================================
+
+After executing the SQL code in an existing database, create an ODBC [DSN](http://en.wikipedia.org/wiki/Data_source_name) on *each* client machine that calls the database.  Download the most recent drivers (as of Aug 2016, the most recent version is 11 for [Windows](http://www.microsoft.com/en-us/download/details.aspx?id=36434) and [Linux](https://msdn.microsoft.com/library/hh568451(SQL.110).aspx)., then run the wizard.  Many values in the wizard will remain at the default values.  Here are the important ones to change.
 
  1. Set the DSN's `name` field to whatever is used in the repository's R code.
  2. Set the authenticity method to `Integrated Windows authentication`.
  3. Set the `default database` to the name of the database that containing the tokens *i.e.*, corresponding to the SQL code below in the example).
 
-## Note
+
+Note
+========================================
+
 We use Microsoft SQL Server, because that fits our University's infrastructure the easiest.  But this approach theoretically can work with any LDAP-enabled database server.  Please contact us if your institution is using something other than SQL Server, and would like help adapting this approach to your infrastructure.
 
-## Create Database
+
+Create Database
+========================================
+
 This SQL code is run once inside an existing database to establish the schemas, table, and stored procedure used by `REDCapR::retrieve_token_mssql()`.
 
-```SQL
+```sql
 ------- SQL code to create necessary components in a Microsoft SQL Sever database -------
 
 -----------------------------------------------------------------------
@@ -83,7 +94,10 @@ BEGIN
 END
 ```
 
-## Add user's token to the auxiliary database
+
+Create user credentials to the auxiliary database
+========================================
+
 Add a user's LDAP account to the `SecurityAuxiliary` database so that they can query the tables to retrieve their API.
 
 Notice that this only gives the permissions to retrieve the token.  You must still:
@@ -173,5 +187,7 @@ print 'Step #5 executed'; print ''
 	--If the variable has to cross a 'GO' (which the current version of the script doesn't need): http://stackoverflow.com/questions/937336/is-there-a-way-to-persist-a-variable-across-a-go
 ```
  
-## Document Info
-This document is primarily based on REDCap version 5.11.3, and was last updated 2014-09-07.  A development version of the document is available on GitHub: http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html.
+Document Info
+========================================
+
+This document is primarily based on REDCap version 6.11.5, and was last updated 2016-08-30.  A development version of the document is available on GitHub: https://cdn.rawgit.com/OuhscBbmc/REDCapR/dev/inst/doc/SecurityDatabase.html
