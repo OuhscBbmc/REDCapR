@@ -12,7 +12,7 @@
 #' )
 #' retrieve_credential_mssql(
 #'   dsn, project_id, instance,
-#'   channel=NULL, schema_name="[Redcap]", procedure_name="[prc_credential]"
+#'   channel=NULL, schema_name="[redcap]", procedure_name="[prc_credential]"
 #' )
 #'  
 #' @param path_credential The file path to the CSV containing the credentials. Required.
@@ -40,6 +40,12 @@
 #' when this approach is not feasible and the token must be stored locally.  Please contact us 
 #' if your institution is using something other than SQL Server, and 
 #' would like help adapting this approach to your infrastructure.
+#' 
+#' #There's a lot of error checking for SQL injection, but remember that the user is executing under their 
+#' own credentials, so this doesn't obviate the need for disciplined credential management.  There's nothing 
+#' that can be done with this R function that isn't already exposed by any other interface intot he database 
+#' (eg, SQL Server Managment Studio, or MySQL Workbench.)
+#' 
 #' @author Will Beasley
 #'
 #' @examples
@@ -126,20 +132,23 @@ retrieve_credential_mssql <- function(
   project_id,
   instance,
   channel                  = NULL,
-  schema_name              = "[Redcap]",
+  schema_name              = "[redcap]",
   procedure_name           = "[prc_credential]"
 ) {
+  
 
   if( !requireNamespace("RODBC", quietly=TRUE) ) 
     stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBC` package is not installed.  Please install it and try again.")
 
   regex_pattern_1 <- "^\\d+$"
-  regex_pattern_2 <- "^\\[*[a-zA-Z0-9_]*\\]*$"
-  regex_pattern_3 <- "^@*[a-zA-Z0-9_]*$"
-  regex_pattern_4 <- "^*[a-zA-Z0-9_]*$"
+  regex_pattern_2 <- "^\\[*[a-zA-Z0-9_]+\\]*$"
+  regex_pattern_3 <- "^@[a-zA-Z0-9_]+$"
   
+  # browser()
   if( !grepl(regex_pattern_1, project_id) ) 
     stop("The 'project_id' parameter must contain at least one digit, and only digits.")
+  if( !grepl(regex_pattern_2, instance) ) 
+    stop("The 'instance' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets.")
   if( !grepl(regex_pattern_2, schema_name) ) 
     stop("The 'schema_name' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets.")
   if( !grepl(regex_pattern_2, procedure_name) ) 
@@ -150,7 +159,10 @@ retrieve_credential_mssql <- function(
   field_name_token         <- "token"
   
   if( !grepl(regex_pattern_3, variable_name_project_id) ) 
-    stop("The 'variable_name_project_id' parameter must contain only letters, numbers, and underscores.  It may optionally have a leading ampersand.")
+    stop("The 'variable_name_project_id' parameter must start with a '@' and then contain only letters, numbers, and underscores.  It may optionally have a leading ampersand.")
+  
+  if( !grepl(regex_pattern_3, variable_name_instance) ) 
+    stop("The 'variable_name_instance' parameter must start with a '@' and then contain only letters, numbers, and underscores.  It may optionally have a leading ampersand.")
   
   sql <- base::sprintf(
     "EXEC %s.%s %s=%s, %s='%s'", 
@@ -191,4 +203,4 @@ retrieve_credential_mssql <- function(
   
   return( credential )
 }
- # a <- REDCapR::retrieve_credential_mssql(dsn="BbmcSecurity", project_id=404, instance='bbmc')
+# a <- REDCapR::retrieve_credential_mssql(dsn="BbmcSecurity", project_id=404, instance='bbmc')
