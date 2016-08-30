@@ -3,10 +3,17 @@
 \name{retrieve_credential}
 \alias{retrieve_credential}
 \alias{retrieve_credential_local}
+\alias{retrieve_credential_mssql}
 \title{Read a token and other credentials from a (non-REDCap) database or file.}
 \usage{
-retrieve_credential_local(path_credential, project_id, check_url = TRUE,
-  check_username = FALSE, check_token_pattern = TRUE)
+retrieve_credential_local(
+  path_credential, project_id, check_url=TRUE, 
+  check_username=FALSE, check_token_pattern=TRUE
+)
+retrieve_credential_mssql(
+  dsn, project_id, channel=NULL, schema_name="[Redcap]", 
+  procedure_name="[prc_credential]"
+)
 }
 \arguments{
 \item{path_credential}{The file path to the CSV containing the credentials. Required.}
@@ -18,6 +25,14 @@ retrieve_credential_local(path_credential, project_id, check_url = TRUE,
 \item{check_username}{A \code{logical} value indicates if the username in the credential file should be checked against the username returned by R.  Defaults to FALSE.}
 
 \item{check_token_pattern}{A \code{logical} value indicates if the token in the credential file is a 32-character hexadecimal string.  Defaults to FALSE.}
+
+\item{dsn}{A \href{http://en.wikipedia.org/wiki/Data_source_name}{DSN} on the local machine that points to the desired MSSQL database. Required.}
+
+\item{channel}{An \emph{optional} connection handle as returned by \code{RODBC::odbcConnect}.  See Details below. Optional.}
+
+\item{schema_name}{The schema used within the database.  Note that MSSQL uses the more conventional definition of \href{http://en.wikipedia.org/wiki/Database_schema}{schema} than MySQL.  Defaults to \code{'[Redcap]'}. Optional.}
+
+\item{procedure_name}{The stored procedure called to retrieve the token. Defaults to \code{'[prc_credential]'}.  Optional.}
 }
 \value{
 A list of the following elements

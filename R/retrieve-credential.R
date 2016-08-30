@@ -1,15 +1,29 @@
 #' @name retrieve_credential
-#' @aliases retrieve_credential_local
-#' @export retrieve_credential_local
+#' @aliases retrieve_credential_local retrieve_credential_mssql
+#' @export retrieve_credential_local retrieve_credential_mssql
 #' @title Read a token and other credentials from a (non-REDCap) database or file.
 #'
 #' @description These functions are not essential to calling the REDCap API, but instead are functions that help manage tokens securely.
 #'
+#' @usage 
+#' retrieve_credential_local(
+#'   path_credential, project_id, check_url=TRUE, 
+#'   check_username=FALSE, check_token_pattern=TRUE
+#' )
+#' retrieve_credential_mssql(
+#'   dsn, project_id, channel=NULL, schema_name="[Redcap]", 
+#'   procedure_name="[prc_credential]"
+#' )
+#'  
 #' @param path_credential The file path to the CSV containing the credentials. Required.
 #' @param project_id The ID assigned to the project withing REDCap.  This allows the user to store tokens to multiple REDCap projects in one file.  Required
 #' @param check_url A \code{logical} value indicates if the url in the credential file should be checked to have approximately the correct form.  Defaults to TRUE.
 #' @param check_username A \code{logical} value indicates if the username in the credential file should be checked against the username returned by R.  Defaults to FALSE.
 #' @param check_token_pattern A \code{logical} value indicates if the token in the credential file is a 32-character hexadecimal string.  Defaults to FALSE.
+#' @param dsn A \href{http://en.wikipedia.org/wiki/Data_source_name}{DSN} on the local machine that points to the desired MSSQL database. Required.
+#' @param channel An \emph{optional} connection handle as returned by \code{RODBC::odbcConnect}.  See Details below. Optional.
+#' @param schema_name The schema used within the database.  Note that MSSQL uses the more conventional definition of \href{http://en.wikipedia.org/wiki/Database_schema}{schema} than MySQL.  Defaults to \code{'[Redcap]'}. Optional.
+#' @param procedure_name The stored procedure called to retrieve the token. Defaults to \code{'[prc_credential]'}.  Optional.
 #'
 #' @return A list of the following elements
 #' \enumerate{
@@ -104,4 +118,64 @@ retrieve_credential_local <- function(
   
   # Return to caller.
   return( credential )
+}
+
+retrieve_credential_mssql <- function(
+  dsn,
+  project_id,
+  channel                  = NULL,
+  schema_name              = "[Redcap]",
+  procedure_name           = "[prc_credential]"
+) {
+
+  if( !requireNamespace("RODBC", quietly=TRUE) ) 
+    stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBC` package is not installed.  Please install it and try again.")
+
+  regex_pattern_1 <- "^\\d+*$"
+  regex_pattern_2 <- "^\\[*[a-zA-Z0-9_]*\\]*$"
+  regex_pattern_3 <- "^@*[a-zA-Z0-9_]*$"
+  regex_pattern_4 <- "^*[a-zA-Z0-9_]*$"
+  
+  if( !grepl(regex_pattern_1, project_id) ) 
+    stop("The 'project_id' parameter must contain only digits.")
+  if( !grepl(regex_pattern_2, schema_name) ) 
+    stop("The 'schema_name' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets.")
+  if( !grepl(regex_pattern_2, procedure_name) ) 
+    stop("The 'procedure_name' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets.")
+
+  variable_name_project_id <- "@project_id"
+  variable_name_instance   <- "@instance"
+  field_name_token         <- "token"
+  
+  if( !grepl(regex_pattern_3, variable_name_project_id) ) 
+    stop("The 'variable_name_project_id' parameter must contain only letters, numbers, and underscores.  It may optionally have a leading ampersand.")
+  
+  sql <- base::sprintf("EXEC %s.%s %s = '%s'", schema_name, procedure_name, variable_name_project_id, project_id)
+
+  if( base::missing(channel) | base::is.null(channel) ) {
+    if( base::missing(dsn) | base::is.null(dsn) ) 
+      stop("The 'dsn' parameter can be missing only if a 'channel' has been passed to 'retrieve_token_mssql'.")
+
+    channel <- RODBC::odbcConnect(dsn=dsn)
+    close_channel_on_exit <- TRUE
+  } else {
+    close_channel_on_exit <- FALSE
+  }
+
+  base::tryCatch(
+    expr = {
+      ds_credential <- RODBC::sqlQuery(channel, sql, stringsAsFactors=FALSE)[1L, ]
+    credential <- list(
+      redcap_uri   = ds_credential$redcap_uri[1],
+      username     = ds_credential$username[1],
+      project_id   = ds_credential$project_id[1],
+      token        = ds_credential$token[1],
+      comment      = ds_credential$comment[1]
+    )
+    }, finally = {
+      if( close_channel_on_exit ) RODBC::odbcClose(channel)
+    }
+  )
+
+  return( token )
 }
