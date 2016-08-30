@@ -52,45 +52,44 @@ GO
 -----------------------------------------------------------------------
 -- Create a table to contain the token
 --
-CREATE TABLE [RedcapPrivate].[tblToken](
-  [ID] [smallint] IDENTITY(1,1) NOT NULL,
-  [Username] [varchar](30) NOT NULL,
-  [RedcapProjectName] [varchar](90) NOT NULL,
-  [RedcapProjectID] [smallint] NOT NULL,
-  [Token] [char](32) NOT NULL,
- CONSTRAINT [PK_RedcapApiTokens] PRIMARY KEY CLUSTERED(
-  [ID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, 
-  ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+CREATE TABLE [RedcapPrivate].[tbl_credential](
+	[id] [smallint] NOT NULL,
+	[username] [varchar](30) NOT NULL,
+	[project_id] [smallint] NOT NULL,
+	[instance] [varchar](30) NOT NULL,
+	[token] [char](32) NOT NULL,
+	[redcap_uri] [varchar](255) NOT NULL,
+ CONSTRAINT [PK_credential] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
 
-CREATE NONCLUSTERED INDEX [IX_tblToken_UniqueUsernameProjectID] ON [RedcapPrivate].[tblToken](
-  [Username] ASC,
-  [RedcapProjectID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, 
-  ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-
-CREATE NONCLUSTERED INDEX [IX_tblToken_UniqueUsernameProjectName] ON [RedcapPrivate].[tblToken](
-  [Username] ASC,
-  [RedcapProjectName] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, 
-  ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+CREATE UNIQUE NONCLUSTERED INDEX [IX_tbl_credential_unique] ON [RedcapPrivate].[tbl_credential]
+(
+	[instance] ASC,
+	[project_id] ASC,
+	[username] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 
 -----------------------------------------------------------------------
 -- Create a stored procedure for users to call to retrieve the token.
 -- Notice it should a different (and more permissive) schema than the table.
 --
-CREATE PROCEDURE [Redcap].[prcToken]
-  @RedcapProjectName varchar(30) -- Add the parameters for the stored procedure here
+CREATE PROCEDURE [Redcap].[prc_credential]
+	-- Add the parameters for the stored procedure here
+	
+	@project_id smallint,
+	@instance varchar(10)
 AS
 BEGIN
-  -- SET NOCOUNT ON added to prevent extra result sets from interfering with SELECT statements.
-  SET NOCOUNT ON; 
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
 
-  SELECT Token FROM [RedcapPrivate].[tblToken]
-  WHERE Username=system_user AND RedcapProjectName=@RedcapProjectName
+   SELECT username, project_id, token, redcap_uri FROM [RedcapPrivate].[tbl_credential]
+   WHERE username=system_user AND project_id=@project_id AND instance=@instance
 END
 ```
 
