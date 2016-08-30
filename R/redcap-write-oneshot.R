@@ -80,6 +80,8 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, config_op
   if( missing(token) )
     stop("The required parameter `token` was missing from the call to `redcap_write_oneshot()`.")     
   
+  token <- sub("\\n", "", token)
+  
   # if( missing( config_options ) | is.null(config_options) ) {
   #   cert_location <- system.file("ssl-certs/mozilla-ca-root.crt", package="REDCapR")
   #   

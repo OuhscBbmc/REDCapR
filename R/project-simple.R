@@ -90,6 +90,8 @@ upload_file_simple <- function( redcap_uri, token=token ) {
   field <- "mugshot"
   event <- "" # only for longitudinal events
   
+  token <- sub("\\n", "", token)
+  
   for( i in seq_along(records) ) {
     record <- records[i]
     file_path <- file_paths[i]

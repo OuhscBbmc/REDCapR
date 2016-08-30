@@ -62,6 +62,8 @@ redcap_metadata_read <- function(
   if( missing(token) )
     stop("The required parameter `token` was missing from the call to `redcap_read_oneshot()`.")
   
+  token <- sub("\\n", "", token)
+  
   if( nchar(forms_collapsed)==0 )
     forms_collapsed <- ifelse(is.null(forms), "", paste0(forms, collapse=",")) #This is an empty string if `forms` is NULL.
   if( nchar(fields_collapsed)==0 )
