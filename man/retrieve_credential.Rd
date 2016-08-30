@@ -11,8 +11,7 @@ retrieve_credential_local(
   check_username=FALSE, check_token_pattern=TRUE
 )
 retrieve_credential_mssql(
-  dsn, project_id, instance,
-  channel=NULL, schema_name="[redcap]", procedure_name="[prc_credential]"
+  dsn, project_id, instance, channel=NULL
 )
 }
 \arguments{
@@ -31,10 +30,6 @@ retrieve_credential_mssql(
 \item{dsn}{A \href{http://en.wikipedia.org/wiki/Data_source_name}{DSN} on the local machine that points to the desired MSSQL database. Required.}
 
 \item{channel}{An \emph{optional} connection handle as returned by \code{RODBC::odbcConnect}.  See Details below. Optional.}
-
-\item{schema_name}{The schema used within the database.  Note that MSSQL uses the more conventional definition of \href{http://en.wikipedia.org/wiki/Database_schema}{schema} than MySQL.  Defaults to \code{'[Redcap]'}. Optional.}
-
-\item{procedure_name}{The stored procedure called to retrieve the token. Defaults to \code{'[prc_credential]'}.  Optional.}
 }
 \value{
 A list of the following elements

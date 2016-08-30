@@ -11,8 +11,7 @@
 #'   check_username=FALSE, check_token_pattern=TRUE
 #' )
 #' retrieve_credential_mssql(
-#'   dsn, project_id, instance,
-#'   channel=NULL, schema_name="[redcap]", procedure_name="[prc_credential]"
+#'   dsn, project_id, instance, channel=NULL
 #' )
 #'  
 #' @param path_credential The file path to the CSV containing the credentials. Required.
@@ -23,8 +22,6 @@
 #' @param check_token_pattern A \code{logical} value indicates if the token in the credential file is a 32-character hexadecimal string.  Defaults to FALSE.
 #' @param dsn A \href{http://en.wikipedia.org/wiki/Data_source_name}{DSN} on the local machine that points to the desired MSSQL database. Required.
 #' @param channel An \emph{optional} connection handle as returned by \code{RODBC::odbcConnect}.  See Details below. Optional.
-#' @param schema_name The schema used within the database.  Note that MSSQL uses the more conventional definition of \href{http://en.wikipedia.org/wiki/Database_schema}{schema} than MySQL.  Defaults to \code{'[Redcap]'}. Optional.
-#' @param procedure_name The stored procedure called to retrieve the token. Defaults to \code{'[prc_credential]'}.  Optional.
 #'
 #' @return A list of the following elements
 #' \enumerate{
@@ -126,12 +123,9 @@ retrieve_credential_mssql <- function(
   dsn,
   project_id,
   instance,
-  channel                  = NULL,
-  schema_name              = "[redcap]",
-  procedure_name           = "[prc_credential]"
+  channel                  = NULL
 ) {
   
-
   if( !requireNamespace("RODBC", quietly=TRUE) ) 
     stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBC` package is not installed.  Please install it and try again.")
 
@@ -147,11 +141,6 @@ retrieve_credential_mssql <- function(
     stop("The 'project_id' parameter must contain at least one digit, and only digits.")
   if( !grepl(regex_pattern_2, instance) ) 
     stop("The 'instance' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets.")
-  if( !grepl(regex_pattern_2, schema_name) ) 
-    stop("The 'schema_name' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets.")
-  if( !grepl(regex_pattern_2, procedure_name) ) 
-    stop("The 'procedure_name' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets.")
-
 
   sql <- "EXEC [redcap].[prc_credential] @project_id = ?, @instance = ?" 
   

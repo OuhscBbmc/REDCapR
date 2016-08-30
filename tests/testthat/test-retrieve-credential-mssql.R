@@ -67,46 +67,4 @@ test_that("Bad instance name", {
     REDCapR::retrieve_credential_mssql(dsn=NULL, pid_read, instance="", channel=NULL)
   )
 })
-test_that("Bad schema name", {
-  expected_message <- "The 'schema_name' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets."
-
-  #dashes #1
-  expect_error(
-    regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(dsn=NULL, pid_read, "dev", schema_name="234 --DROP tbl_bobby", channel=NULL)
-  )
-  
-  #dashes #2
-  expect_error(
-    regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(dsn=NULL, pid_read, "dev", schema_name="234 --332", channel=NULL)
-  )
-  
-  #Blank
-  expect_error(
-    regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(dsn=NULL, pid_read, "dev", schema_name="", channel=NULL)
-  )
-})
-test_that("Bad procedure name", {
-  expected_message <- "The 'procedure_name' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets."
-
-  #dashes #1
-  expect_error(
-    regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(dsn=NULL, pid_read, "dev", procedure_name="234 --DROP tbl_bobby", channel=NULL)
-  )
-  
-  #dashes #2
-  expect_error(
-    regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(dsn=NULL, pid_read, "dev", procedure_name="234 --332", channel=NULL)
-  )
-  
-  #Blank
-  expect_error(
-    regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(dsn=NULL, pid_read, "dev", procedure_name="", channel=NULL)
-  )
-})
 
