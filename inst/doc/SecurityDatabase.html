@@ -8,8 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="date" content="2016-01-29" />
+
+<meta name="date" content="2016-08-30" />
 
 <title>Security Database</title>
 
@@ -53,14 +55,10 @@ code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Ann
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 
 
-<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0A%7D%0Apre%20%7B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -68,161 +66,158 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<div id="header">
-<h1 class="title">Security Database</h1>
-<h4 class="date"><em>2016-01-29</em></h4>
-</div>
+
+<h1 class="title toc-ignore">Security Database</h1>
+<h4 class="date"><em>2016-08-30</em></h4>
 
 
-<div id="description" class="section level2">
-<h2>Description</h2>
+
+<div id="description" class="section level1">
+<h1>Description</h1>
 <p>The SQL code below adds schemas, a table and two stored procedures to an existing Microsoft SQL Database. This second database is not essential to calling the REDCap API, but it helps manage tokens securely.</p>
-<p>This database contains the tokens and other sensitive content (such as passwords, API tokens, and file paths) that should not be stored in a Git repository (even a private Git repository). These passwords can be retrieved by <code>REDCapR::retrieve_token_mssql()</code>.</p>
+<p>This database contains the tokens and other sensitive content (such as passwords, API tokens, and file paths) that should not be stored in a Git repository (even a private Git repository). These passwords can be retrieved by <code>REDCapR::retrieve_credential_mssql()</code>.</p>
 </div>
-<div id="create-a-dsn-on-each-client" class="section level2">
-<h2>Create a DSN on each client</h2>
-<p>After executing the SQL code in an existing database, create an ODBC <a href="http://en.wikipedia.org/wiki/Data_source_name">DSN</a> on <em>each</em> client machine that calls the database. Download the most recent drivers (as of Sept 2014, the most recent version is 11 for <a href="http://www.microsoft.com/en-us/download/details.aspx?id=36434">Windows</a> and <a href="https://msdn.microsoft.com/library/hh568451(SQL.110).aspx">Linux</a>., then run the wizard. Many values in the wizard will remain at the default values. Here are the important ones to change.</p>
+<div id="create-a-dsn-on-each-client" class="section level1">
+<h1>Create a DSN on each client</h1>
+<p>After executing the SQL code in an existing database, create an ODBC <a href="http://en.wikipedia.org/wiki/Data_source_name">DSN</a> on <em>each</em> client machine that calls the database. Download the most recent drivers (as of Aug 2016, the most recent version is 11 for <a href="http://www.microsoft.com/en-us/download/details.aspx?id=36434">Windows</a> and <a href="https://msdn.microsoft.com/library/hh568451(SQL.110).aspx">Linux</a>., then run the wizard. Many values in the wizard will remain at the default values. Here are the important ones to change.</p>
 <ol style="list-style-type: decimal">
 <li>Set the DSN’s <code>name</code> field to whatever is used in the repository’s R code.</li>
 <li>Set the authenticity method to <code>Integrated Windows authentication</code>.</li>
 <li>Set the <code>default database</code> to the name of the database that containing the tokens <em>i.e.</em>, corresponding to the SQL code below in the example).</li>
 </ol>
 </div>
-<div id="note" class="section level2">
-<h2>Note</h2>
-<p>We use Microsoft SQL Server, because that fits our University’s infrastructure the easiest. But this approach theoretically can work with any LDAP-enabled database server. Please contact us if your institution is using something other than SQL Server, and would like help adapting this approach to your infrastructure.</p>
+<div id="note" class="section level1">
+<h1>Note</h1>
+<p>We use Microsoft SQL Server, because that fits our University’s infrastructure the easiest. But this approach theoretically can work with any LDAP-enabled database server. Please contact us if your institution is using something other than SQL Server (or a different configuration of these components), and would like help adapting this approach to your infrastructure.</p>
 </div>
-<div id="create-database" class="section level2">
-<h2>Create Database</h2>
-<p>This SQL code is run once inside an existing database to establish the schemas, table, and stored procedure used by <code>REDCapR::retrieve_token_mssql()</code>.</p>
+<div id="create-database" class="section level1">
+<h1>Create Database</h1>
+<p>This SQL code is run once inside an existing database to establish the schemas, table, and stored procedure used by <code>REDCapR::retrieve_credential_mssql()</code>.</p>
 <div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="co">------- SQL code to create necessary components in a Microsoft SQL Sever database -------</span>
 
 <span class="co">-----------------------------------------------------------------------</span>
 <span class="co">-- Create two schemas.  </span>
-<span class="co">-- The first scehma is accessible by all REDCap API users. </span>
+<span class="co">-- The first scehma is accessible by all REDCap API users.</span>
 <span class="co">-- The second scehma is restricted to administrators.</span>
 <span class="co">--</span>
-<span class="kw">CREATE</span> <span class="kw">SCHEMA</span> [Redcap]
-<span class="kw">CREATE</span> <span class="kw">SCHEMA</span> [RedcapPrivate]
+<span class="kw">CREATE</span> <span class="kw">SCHEMA</span> [redcap]
+<span class="kw">CREATE</span> <span class="kw">SCHEMA</span> [redcap_private]
 GO
 
 <span class="co">-----------------------------------------------------------------------</span>
 <span class="co">-- Create a table to contain the token</span>
 <span class="co">--</span>
-<span class="kw">CREATE</span> <span class="kw">TABLE</span> [RedcapPrivate].[tblToken](
-  [<span class="kw">ID</span>] [<span class="dt">smallint</span>] IDENTITY(<span class="dv">1</span>,<span class="dv">1</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
-  [Username] [<span class="dt">varchar</span>](<span class="dv">30</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
-  [RedcapProjectName] [<span class="dt">varchar</span>](<span class="dv">90</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
-  [RedcapProjectID] [<span class="dt">smallint</span>] <span class="kw">NOT</span> <span class="kw">NULL</span>,
-  [Token] [<span class="dt">char</span>](<span class="dv">32</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
- <span class="kw">CONSTRAINT</span> [PK_RedcapApiTokens] <span class="kw">PRIMARY</span> <span class="kw">KEY</span> CLUSTERED(
-  [<span class="kw">ID</span>] <span class="kw">ASC</span>
-)<span class="kw">WITH</span> (PAD_INDEX = <span class="kw">OFF</span>, STATISTICS_NORECOMPUTE = <span class="kw">OFF</span>, IGNORE_DUP_KEY = <span class="kw">OFF</span>, 
-  ALLOW_ROW_LOCKS = <span class="kw">ON</span>, ALLOW_PAGE_LOCKS = <span class="kw">ON</span>) <span class="kw">ON</span> [<span class="kw">PRIMARY</span>]
+<span class="kw">CREATE</span> <span class="kw">TABLE</span> [redcap_private].[tbl_credential](
+    [<span class="kw">id</span>] [<span class="dt">smallint</span>] <span class="kw">NOT</span> <span class="kw">NULL</span>,
+    [username] [<span class="dt">varchar</span>](<span class="dv">30</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
+    [project_id] [<span class="dt">smallint</span>] <span class="kw">NOT</span> <span class="kw">NULL</span>,
+    [<span class="kw">instance</span>] [<span class="dt">varchar</span>](<span class="dv">30</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
+    [token] [<span class="dt">char</span>](<span class="dv">32</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
+    [redcap_uri] [<span class="dt">varchar</span>](<span class="dv">255</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
+ <span class="kw">CONSTRAINT</span> [PK_credential] <span class="kw">PRIMARY</span> <span class="kw">KEY</span> CLUSTERED
+(
+    [<span class="kw">id</span>] <span class="kw">ASC</span>
+)<span class="kw">WITH</span> (PAD_INDEX = <span class="kw">OFF</span>, STATISTICS_NORECOMPUTE = <span class="kw">OFF</span>, IGNORE_DUP_KEY = <span class="kw">OFF</span>, ALLOW_ROW_LOCKS = <span class="kw">ON</span>, ALLOW_PAGE_LOCKS = <span class="kw">ON</span>) <span class="kw">ON</span> [<span class="kw">PRIMARY</span>]
 ) <span class="kw">ON</span> [<span class="kw">PRIMARY</span>]
-GO
 
-<span class="kw">CREATE</span> NONCLUSTERED <span class="kw">INDEX</span> [IX_tblToken_UniqueUsernameProjectID] <span class="kw">ON</span> [RedcapPrivate].[tblToken](
-  [Username] <span class="kw">ASC</span>,
-  [RedcapProjectID] <span class="kw">ASC</span>
-)<span class="kw">WITH</span> (PAD_INDEX = <span class="kw">OFF</span>, STATISTICS_NORECOMPUTE = <span class="kw">OFF</span>, SORT_IN_TEMPDB = <span class="kw">OFF</span>, DROP_EXISTING = <span class="kw">OFF</span>, 
-  <span class="kw">ONLINE</span> = <span class="kw">OFF</span>, ALLOW_ROW_LOCKS = <span class="kw">ON</span>, ALLOW_PAGE_LOCKS = <span class="kw">ON</span>) <span class="kw">ON</span> [<span class="kw">PRIMARY</span>]
-
-<span class="kw">CREATE</span> NONCLUSTERED <span class="kw">INDEX</span> [IX_tblToken_UniqueUsernameProjectName] <span class="kw">ON</span> [RedcapPrivate].[tblToken](
-  [Username] <span class="kw">ASC</span>,
-  [RedcapProjectName] <span class="kw">ASC</span>
-)<span class="kw">WITH</span> (PAD_INDEX = <span class="kw">OFF</span>, STATISTICS_NORECOMPUTE = <span class="kw">OFF</span>, SORT_IN_TEMPDB = <span class="kw">OFF</span>, DROP_EXISTING = <span class="kw">OFF</span>, 
-  <span class="kw">ONLINE</span> = <span class="kw">OFF</span>, ALLOW_ROW_LOCKS = <span class="kw">ON</span>, ALLOW_PAGE_LOCKS = <span class="kw">ON</span>) <span class="kw">ON</span> [<span class="kw">PRIMARY</span>]
+<span class="kw">CREATE</span> <span class="kw">UNIQUE</span> NONCLUSTERED <span class="kw">INDEX</span> [IX_tbl_credential_unique] <span class="kw">ON</span> [redcap_private].[tbl_credential]
+(
+    [<span class="kw">instance</span>] <span class="kw">ASC</span>,
+    [project_id] <span class="kw">ASC</span>,
+    [username] <span class="kw">ASC</span>
+)<span class="kw">WITH</span> (PAD_INDEX = <span class="kw">OFF</span>, STATISTICS_NORECOMPUTE = <span class="kw">OFF</span>, SORT_IN_TEMPDB = <span class="kw">OFF</span>, IGNORE_DUP_KEY = <span class="kw">OFF</span>, DROP_EXISTING = <span class="kw">OFF</span>, <span class="kw">ONLINE</span> = <span class="kw">OFF</span>, ALLOW_ROW_LOCKS = <span class="kw">ON</span>, ALLOW_PAGE_LOCKS = <span class="kw">ON</span>) <span class="kw">ON</span> [<span class="kw">PRIMARY</span>]
 GO
 
 <span class="co">-----------------------------------------------------------------------</span>
 <span class="co">-- Create a stored procedure for users to call to retrieve the token.</span>
 <span class="co">-- Notice it should a different (and more permissive) schema than the table.</span>
 <span class="co">--</span>
-<span class="kw">CREATE</span> <span class="kw">PROCEDURE</span> [Redcap].[prcToken]
-  @RedcapProjectName <span class="dt">varchar</span>(<span class="dv">30</span>) <span class="co">-- Add the parameters for the stored procedure here</span>
+<span class="kw">CREATE</span> <span class="kw">PROCEDURE</span> [redcap].[prc_credential]
+    <span class="co">-- Add the parameters for the stored procedure here</span>
+
+    @project_id <span class="dt">smallint</span>,
+    @instance <span class="dt">varchar</span>(<span class="dv">30</span>)
 <span class="kw">AS</span>
 <span class="kw">BEGIN</span>
-  <span class="co">-- SET NOCOUNT ON added to prevent extra result sets from interfering with SELECT statements.</span>
-  <span class="kw">SET</span> NOCOUNT <span class="kw">ON</span>; 
+    <span class="co">-- SET NOCOUNT ON added to prevent extra result sets from</span>
+    <span class="co">-- interfering with SELECT statements.</span>
+    <span class="kw">SET</span> NOCOUNT <span class="kw">ON</span>;
 
-  <span class="kw">SELECT</span> Token <span class="kw">FROM</span> [RedcapPrivate].[tblToken]
-  <span class="kw">WHERE</span> Username=system_user <span class="kw">AND</span> RedcapProjectName=@RedcapProjectName
+   <span class="kw">SELECT</span> username, project_id, token, redcap_uri <span class="kw">FROM</span> [redcap_private].[tbl_credential]
+   <span class="kw">WHERE</span> username=system_user <span class="kw">AND</span> project_id=@project_id <span class="kw">AND</span> instance=@instance
 <span class="kw">END</span></code></pre></div>
 </div>
-<div id="add-users-token-to-the-auxiliary-database" class="section level2">
-<h2>Add user’s token to the auxiliary database</h2>
+<div id="create-user-credentials-to-the-auxiliary-database" class="section level1">
+<h1>Create user credentials to the auxiliary database</h1>
 <p>Add a user’s LDAP account to the <code>SecurityAuxiliary</code> database so that they can query the tables to retrieve their API.</p>
 <p>Notice that this only gives the permissions to retrieve the token. You must still: 1. grant them API privileges to each appropriate REDCap project, and 2. copy the API from the REDCap database into the SecurityAuxiliary database.</p>
 <p>In the future <code>REDCapR</code> may expose a function that allows the user to perform the second step (through a stored procedure).</p>
-<p>Also, do not give typical users authorization for the ‘RedcapPrivate’ schema. The current system allows the to view only their own tokens.</p>
+<p>Also, do not give typical users authorization for the ‘redcap_private’ schema. The current system allows the to view only their own tokens.</p>
 <div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="co">-----------------------------------------------------------------------</span>
-<span class="co">-- Add a user's LDAP account to the `SecurityAuxiliary` database so that they can query the tables to retrieve their API.</span>
+<span class="co">-- Add a OUHSC's user account to the auxiliary_security database so that they can query the tables to retrieve their API.</span>
 <span class="co">-- Notice that this only gives the permissions to retrieve the token.  You must still:</span>
 <span class="co">--   1) grant them API privileges to each appropriate REDCap project, and</span>
-<span class="co">--   2) copy the API from the REDCap database into the  SecurityAuxiliary database.</span>
-<span class="co">-- Also, do not give typical users authorization for the 'RedcapPrivate' schema.  The current system allows the to view only their own tokens.</span>
+<span class="co">--   2) copy the API from the REDCap database into the  auxiliary_security database.</span>
+<span class="co">-- Also, do not give typical users authorization for the 'redcap_private' schema.  The current system allows the to view only their own tokens.</span>
 <span class="co">-----------------------------------------------------------------------</span>
 
 <span class="co">-- STEP #1: Declare the user name.  If everything runs correctly, this should be the only piece of code that you need to modify.</span>
-print <span class="st">'Step #1 executing....'</span> 
+print <span class="st">'Step #1 executing....'</span>
 <span class="kw">USE</span> [<span class="kw">master</span>]
 GO
-<span class="kw">DECLARE</span> @QualifiedUserName <span class="dt">varchar</span>(<span class="dv">255</span>); <span class="kw">SET</span> @QualifiedUserName = <span class="st">'[OUHSC\lsuarez3]'</span>
-print <span class="st">'Resulting login name: '</span> + @QualifiedUserName; print <span class="st">''</span> 
+<span class="kw">DECLARE</span> @qualified_user_name <span class="dt">varchar</span>(<span class="dv">255</span>); <span class="kw">SET</span> @qualified_user_name = <span class="st">'[OUHSC\lsuarez3]'</span>
+print <span class="st">'Resulting login name: '</span> + @qualified_user_name; print <span class="st">''</span>
 
-<span class="co">--EXEC sp_helplogins @LoginNamePattern=@QualifiedUserName</span>
-<span class="co">--SELECT * FROM master..syslogins WHERE name = @QualifiedUserName</span>
-<span class="co">--SELECT * FROM SecurityAuxiliary.sys.sysusers </span>
+<span class="co">--EXEC sp_helplogins @LoginNamePattern=@qualified_user_name</span>
+<span class="co">--SELECT * FROM master..syslogins WHERE name = @qualified_user_name</span>
+<span class="co">--SELECT * FROM auxiliary_security.sys.sysusers</span>
 <span class="co">--SELECT * FROM sys.database_permissions</span>
 <span class="co">--SELECT * FROM sys.server_principals</span>
 
 <span class="co">-----------------------------------------------------------------------</span>
 <span class="co">-- STEP #2: Create a login for the *server*.</span>
-print <span class="st">'Step #2 executing....'</span> 
-<span class="kw">DECLARE</span> @sqlCreateLogin <span class="dt">nvarchar</span>(<span class="fu">max</span>)
-<span class="kw">SET</span> @sqlCreateLogin = <span class="st">'CREATE LOGIN '</span> + @QualifiedUserName + <span class="st">' FROM WINDOWS WITH DEFAULT_DATABASE=[SecurityAuxiliary]'</span>
-<span class="kw">EXECUTE</span> sp_executesql @sqlCreateLogin
-<span class="kw">DECLARE</span> @LoginCount <span class="kw">AS</span> <span class="dt">INT</span>; <span class="kw">SET</span> @LoginCount = (<span class="kw">SELECT</span> <span class="fu">COUNT</span>(*) <span class="kw">AS</span> LoginCount <span class="kw">FROM</span> master..syslogins <span class="kw">WHERE</span> <span class="st">'['</span> + loginname + <span class="st">']'</span> = @QualifiedUserName)
-print <span class="st">'Logins matching desired name should equal 1.  It equals: '</span> + <span class="fu">CONVERT</span>(<span class="dt">varchar</span>, @LoginCount); print <span class="st">''</span> 
+print <span class="st">'Step #2 executing....'</span>
+<span class="kw">DECLARE</span> @sql_create_login <span class="dt">nvarchar</span>(<span class="fu">max</span>)
+<span class="kw">SET</span> @sql_create_login = <span class="st">'CREATE LOGIN '</span> + @qualified_user_name + <span class="st">' FROM WINDOWS WITH DEFAULT_DATABASE=[auxiliary_security]'</span>
+<span class="kw">EXECUTE</span> sp_executesql @sql_create_login
+<span class="kw">DECLARE</span> @login_count <span class="kw">AS</span> <span class="dt">INT</span>; <span class="kw">SET</span> @login_count = (<span class="kw">SELECT</span> <span class="fu">COUNT</span>(*) <span class="kw">AS</span> login_count <span class="kw">FROM</span> master..syslogins <span class="kw">WHERE</span> <span class="st">'['</span> + loginname + <span class="st">']'</span> = @qualified_user_name)
+print <span class="st">'Logins matching desired name should equal 1.  It equals: '</span> + <span class="fu">CONVERT</span>(<span class="dt">varchar</span>, @login_count); print <span class="st">''</span>
 
 <span class="co">-----------------------------------------------------------------------</span>
-<span class="co">-- STEP #3: Create a user account for the *data base*, after switching the database under focus to SecurityAuxiliary.</span>
-print <span class="st">'Step #3 executing....'</span> 
-<span class="kw">USE</span> [SecurityAuxiliary]
-<span class="kw">DECLARE</span> @sqlCreateUser <span class="dt">nvarchar</span>(<span class="fu">max</span>)
-<span class="kw">SET</span> @sqlCreateUser = <span class="st">'CREATE USER '</span> + @QualifiedUserName + <span class="st">' FOR LOGIN '</span> + @QualifiedUserName
-<span class="kw">EXECUTE</span> sp_executesql @sqlCreateUser
-<span class="kw">DECLARE</span> @UserCount <span class="kw">AS</span> <span class="dt">INT</span>; <span class="kw">SET</span> @UserCount = (<span class="kw">SELECT</span> <span class="fu">COUNT</span>(*) <span class="kw">AS</span> UserCount <span class="kw">FROM</span> SecurityAuxiliary.sys.sysusers <span class="kw">WHERE</span> <span class="st">'['</span> + name + <span class="st">']'</span> = @QualifiedUserName)
-print <span class="st">'User accounts matching desired name should equal 1.  It equals: '</span> + <span class="fu">CONVERT</span>(<span class="dt">varchar</span>, @UserCount); print <span class="st">''</span> 
+<span class="co">-- STEP #3: Create a user account for the *data base*, after switching the database under focus to auxiliary_security.</span>
+print <span class="st">'Step #3 executing....'</span>
+<span class="kw">USE</span> [auxiliary_security]
+<span class="kw">DECLARE</span> @sql_create_user <span class="dt">nvarchar</span>(<span class="fu">max</span>)
+<span class="kw">SET</span> @sql_create_user = <span class="st">'CREATE USER '</span> + @qualified_user_name + <span class="st">' FOR LOGIN '</span> + @qualified_user_name
+<span class="kw">EXECUTE</span> sp_executesql @sql_create_user
+<span class="kw">DECLARE</span> @user_count <span class="kw">AS</span> <span class="dt">INT</span>; <span class="kw">SET</span> @user_count = (<span class="kw">SELECT</span> <span class="fu">COUNT</span>(*) <span class="kw">AS</span> user_count <span class="kw">FROM</span> auxiliary_security.sys.sysusers <span class="kw">WHERE</span> <span class="st">'['</span> + name + <span class="st">']'</span> = @qualified_user_name)
+print <span class="st">'User accounts matching desired name should equal 1.  It equals: '</span> + <span class="fu">CONVERT</span>(<span class="dt">varchar</span>, @user_count); print <span class="st">''</span>
 
 <span class="co">-----------------------------------------------------------------------</span>
-<span class="co">-- STEP #4: Grant appropriate privileges for the 'Redcap' schema.</span>
-print <span class="st">'Step #4 executing....'</span> 
-<span class="kw">DECLARE</span> @sqlGrantSchemaRedcap <span class="dt">nvarchar</span>(<span class="fu">max</span>)
-<span class="co">-- SET @sqlGrantSchemaRedcap = 'GRANT SELECT, EXECUTE ON SCHEMA::[Redcap] TO ' + @QualifiedUserName </span>
-<span class="kw">SET</span> @sqlGrantSchemaRedcap = <span class="st">'GRANT EXECUTE ON SCHEMA::[Redcap] TO '</span> + @QualifiedUserName 
-<span class="kw">EXECUTE</span> sp_executesql @sqlGrantSchemaRedcap
-print <span class="st">'Step #4 executed'</span>; print <span class="st">''</span> 
+<span class="co">-- STEP #4: Grant appropriate privileges for the 'redcap' schema.</span>
+print <span class="st">'Step #4 executing....'</span>
+<span class="kw">DECLARE</span> @sql_grant_schema_redcap <span class="dt">nvarchar</span>(<span class="fu">max</span>)
+<span class="kw">SET</span> @sql_grant_schema_redcap = <span class="st">'GRANT EXECUTE ON SCHEMA::[redcap] TO '</span> + @qualified_user_name
+<span class="kw">EXECUTE</span> sp_executesql @sql_grant_schema_redcap
+print <span class="st">'Step #4 executed'</span>; print <span class="st">''</span>
 
 <span class="co">-----------------------------------------------------------------------</span>
 <span class="co">-- STEP #5: Grant appropriate privileges for the 'Security' schema.</span>
-print <span class="st">'Step #5 executing....'</span> 
-<span class="kw">DECLARE</span> @sqlGrantSchemaSecurity <span class="dt">nvarchar</span>(<span class="fu">max</span>)
-<span class="co">-- SET @sqlGrantSchemaSecurity = 'GRANT SELECT, EXECUTE ON SCHEMA::[Security] TO ' + @QualifiedUserName </span>
-<span class="kw">SET</span> @sqlGrantSchemaSecurity = <span class="st">'GRANT EXECUTE ON SCHEMA::[Security] TO '</span> + @QualifiedUserName 
-<span class="kw">EXECUTE</span> sp_executesql @sqlGrantSchemaSecurity
-print <span class="st">'Step #5 executed'</span>; print <span class="st">''</span> 
+print <span class="st">'Step #5 executing....'</span>
+<span class="kw">DECLARE</span> @sql_grant_schema_security <span class="dt">nvarchar</span>(<span class="fu">max</span>)
+<span class="kw">SET</span> @sql_grant_schema_security = <span class="st">'GRANT EXECUTE ON SCHEMA::[security] TO '</span> + @qualified_user_name
+<span class="kw">EXECUTE</span> sp_executesql @sql_grant_schema_security
+print <span class="st">'Step #5 executed'</span>; print <span class="st">''</span>
 
 <span class="co">-----------------------------------------------------------------------</span>
 <span class="co">-- OPTIONAL STEP: Delete the user from the database (the first line) and then the server (the second line).  </span>
-<span class="co">-- The person's other database user accounts (besides with the SecurityAuxiliary database) will NOT be automatically deleted by these two lines.</span>
-<span class="co">--USE [SecurityAuxiliary]; DROP USER [OUHSC\lsuarez3]</span>
+<span class="co">-- The person's other database user accounts (besides with the auxiliary_security database) will NOT be automatically deleted by these two lines.</span>
+<span class="co">--USE [auxiliary_security]; DROP USER [OUHSC\lsuarez3]</span>
 <span class="co">--USE [master]; DROP LOGIN [OUHSC\lsuarez3]</span>
 
 <span class="co">-----------------------------------------------------------------------</span>
 <span class="co">-- REFERENCES &amp; NOTES</span>
-  <span class="co">--The @QualifiedUserName must have both (a) the 'OUHSC' domain qualification, and (b) the square brackets (to escape the backslash).</span>
+    <span class="co">--The @qualified_user_name must have both (a) the 'OUHSC' domain qualification, and (b) the square brackets (to escape the backslash).</span>
     <span class="co">--Using sp_executesql to add users: http://www.sqlservercentral.com/Forums/Topic497615-359-1.aspx</span>
     <span class="co">--Check if a server login exists: http://stackoverflow.com/questions/37275/sql-query-for-logins</span>
     <span class="co">--Retrieve database users: http://stackoverflow.com/questions/2445444/how-to-get-a-list-of-users-for-all-instances-databases</span>
@@ -233,9 +228,145 @@ print <span class="st">'Step #5 executed'</span>; print <span class="st">''</spa
     <span class="co">--A different (&amp; non-dynamic) way to establish a user: http://pic.dhe.ibm.com/infocenter/dmndhelp/v8r5m0/index.jsp?topic=%2Fcom.ibm.wbpm.imuc.sbpm.doc%2Ftopics%2Fdb_create_users_nd_aix.html</span>
     <span class="co">--If the variable has to cross a 'GO' (which the current version of the script doesn't need): http://stackoverflow.com/questions/937336/is-there-a-way-to-persist-a-variable-across-a-go</span></code></pre></div>
 </div>
-<div id="document-info" class="section level2">
-<h2>Document Info</h2>
-<p>This document is primarily based on REDCap version 5.11.3, and was last updated 2014-09-07. A development version of the document is available on GitHub: <a href="http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html" class="uri">http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html</a>.</p>
+<div id="transfer-credentials" class="section level1">
+<h1>Transfer Credentials</h1>
+<p>Manually transfer tokens to the auxiliary server becomes unmanageable as your institution’s collection of API users grows. This script demonstrates how to progamatically transfer all tokens from multiple REDCap instances on your network. The basic steps are:</p>
+<ol style="list-style-type: decimal">
+<li>Read from the MySQL database underneath each REDCap instance.</li>
+<li>Combine &amp; groom the credentials.</li>
+<li>Upload to SQL Server.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>(<span class="dt">all=</span><span class="ot">TRUE</span>)) <span class="co">#Clear the memory for any variables set from any previous runs.</span>
+
+<span class="co"># ---- load-sources ------------------------------------------------------------</span>
+
+<span class="co"># ---- load-packages -----------------------------------------------------------</span>
+<span class="kw">library</span>(magrittr)
+<span class="kw">requireNamespace</span>(<span class="st">&quot;RODBC&quot;</span>)
+<span class="kw">requireNamespace</span>(<span class="st">&quot;dplyr&quot;</span>)
+<span class="kw">requireNamespace</span>(<span class="st">&quot;readr&quot;</span>)
+
+<span class="co"># ---- declare-globals ---------------------------------------------------------</span>
+
+<span class="co"># The Activity Directory name that should precede each username.</span>
+<span class="co">#   This should correspond with the result of `SYSTEM_USER`</span>
+<span class="co">#   (https://msdn.microsoft.com/en-us/library/ms179930.aspx)</span>
+ldap_prefix &lt;-<span class="st"> &quot;OUHSC</span><span class="ch">\\</span><span class="st">&quot;</span>  
+
+<span class="co">#Create a SQL statement for each REDCap instance.  Only the `instance` value should change.</span>
+sql &lt;-<span class="st"> &quot;</span>
+<span class="st">  SELECT username, project_id, api_token</span>
+<span class="st">  FROM redcap_user_rights</span>
+<span class="st">  WHERE api_token IS NOT NULL&quot;</span>
+
+<span class="co">#Update this ad-hoc CSV.  Each row should represent one REDCap instance.</span>
+<span class="co">#   Choose any casual name for the first variable, consistent with the `tweak-data` chunk below.</span>
+<span class="co">#   Enter the exact URL for the second variable.</span>
+ds_url &lt;-<span class="st"> </span>readr::<span class="kw">read_csv</span>(<span class="kw">paste</span>(
+  <span class="st">&quot;instance,redcap_uri&quot;</span>,
+  <span class="st">&quot;production,https://redcap-production.ouhsc.edu/redcap/api/&quot;</span>,
+  <span class="st">&quot;dev,https://redcap-dev.ouhsc.edu/redcap/api/&quot;</span>,
+<span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>))
+
+
+<span class="co"># ---- load-data ---------------------------------------------------------------</span>
+
+<span class="co"># Load the credentials from the first instance.</span>
+channel &lt;-<span class="st"> </span>RODBC::<span class="kw">odbcConnect</span>(<span class="st">&quot;redcap-production&quot;</span>) <span class="co"># odbcGetInfo(channel)</span>
+ds_prod &lt;-<span class="st"> </span>RODBC::<span class="kw">sqlQuery</span>(channel, <span class="dt">query=</span>sql, <span class="dt">stringsAsFactors=</span>F)
+RODBC::<span class="kw">odbcClose</span>(channel); <span class="kw">rm</span>(channel)
+
+<span class="co"># Load the credentials from the second instance.  </span>
+<span class="co">#   Duplicate or remove this block, dependending on the number of instances.</span>
+channel &lt;-<span class="st"> </span>RODBC::<span class="kw">odbcConnect</span>(<span class="st">&quot;redcap-dev&quot;</span>) <span class="co"># odbcGetInfo(channel)</span>
+ds_dev  &lt;-<span class="st"> </span>RODBC::<span class="kw">sqlQuery</span>(channel, <span class="dt">query=</span>sql, <span class="dt">stringsAsFactors=</span>F)
+RODBC::<span class="kw">odbcClose</span>(channel); <span class="kw">rm</span>(channel, sql)
+
+<span class="co"># Assert these variables contain valid datasets (instead of a character error message).</span>
+testit::<span class="kw">assert</span>(<span class="st">&quot;The object returned from the database should be a data.frame.&quot;</span>, <span class="kw">inherits</span>(ds_prod, <span class="st">&quot;data.frame&quot;</span>))
+testit::<span class="kw">assert</span>(<span class="st">&quot;The object returned from the database should be a data.frame.&quot;</span>, <span class="kw">inherits</span>(ds_dev , <span class="st">&quot;data.frame&quot;</span>))
+
+<span class="co"># Assert that at least some rows were returned.</span>
+<span class="co">#   Adjust this to smaller values if necessary.  It's really just to catch blatant retrieval problems.</span>
+testit::<span class="kw">assert</span>(<span class="st">&quot;There should be at least 5 tokens retrieved from the BBMC box.&quot;</span>, <span class="kw">nrow</span>(ds_prod) &gt;=<span class="st"> </span>5L)
+testit::<span class="kw">assert</span>(<span class="st">&quot;There should be at least 5 tokens retrieved from the DEV box.&quot;</span> , <span class="kw">nrow</span>(ds_dev ) &gt;=<span class="st"> </span>5L)
+
+
+<span class="co"># ---- tweak-data --------------------------------------------------------------</span>
+
+<span class="co">#Label each instance, so they're distinguishable later.  Add/remove lines, depending on the number of campus instances</span>
+ds_prod$instance &lt;-<span class="st"> &quot;production&quot;</span>
+ds_dev$instance  &lt;-<span class="st"> &quot;dev&quot;</span>
+
+<span class="co">#Combine the token collection from each instance.  Then prefix the username and include the URL of each instance.</span>
+ds &lt;-<span class="st"> </span>ds_prod %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">union</span>(ds_dev) %&gt;%<span class="st">                                     </span><span class="co"># Add/remove unions, based on the number of REDCap instances.</span>
+<span class="st">  </span>dplyr::<span class="kw">select_</span>(
+    <span class="st">&quot;username&quot;</span>             =<span class="st"> &quot;`username`&quot;</span>
+    , <span class="st">&quot;project_id&quot;</span>         =<span class="st"> &quot;`project_id`&quot;</span>
+    , <span class="st">&quot;instance&quot;</span>           =<span class="st"> &quot;`instance`&quot;</span>
+    , <span class="st">&quot;token&quot;</span>              =<span class="st"> &quot;`api_token`&quot;</span>
+  ) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">arrange</span>(instance, project_id, username) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">mutate</span>(
+    <span class="dt">username               =</span> <span class="kw">paste0</span>(ldap_prefix, username),    <span class="co"># Qualify for the Active Directory.</span>
+    <span class="dt">id                     =</span> <span class="kw">seq_len</span>(<span class="kw">n</span>())                      <span class="co"># For the sake of a clustered primary key.</span>
+  ) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">left_join</span>( ds_url, <span class="dt">by=</span><span class="st">&quot;instance&quot;</span>)                     <span class="co"># Include the instance URL.</span>
+
+<span class="kw">rm</span>(ds_prod, ds_dev, ds_url)
+
+
+<span class="co"># ---- verify-values -----------------------------------------------------------</span>
+
+<span class="co">#Assert that the dataset is well-behaved.</span>
+testit::<span class="kw">assert</span>(<span class="st">&quot;All `id` values must be nonmissing.&quot;</span>         , <span class="kw">sum</span>(<span class="kw">is.na</span>(ds$id        )) ==<span class="st"> </span>0L)
+testit::<span class="kw">assert</span>(<span class="st">&quot;All `username` values must be nonmissing.&quot;</span>   , <span class="kw">sum</span>(<span class="kw">is.na</span>(ds$username  )) ==<span class="st"> </span>0L)
+testit::<span class="kw">assert</span>(<span class="st">&quot;All `project_id` values must be nonmissing.&quot;</span> , <span class="kw">sum</span>(<span class="kw">is.na</span>(ds$project_id)) ==<span class="st"> </span>0L)
+testit::<span class="kw">assert</span>(<span class="st">&quot;All `token` values must be nonmissing.&quot;</span>      , <span class="kw">sum</span>(<span class="kw">is.na</span>(ds$token     )) ==<span class="st"> </span>0L)
+testit::<span class="kw">assert</span>(<span class="st">&quot;All `instance` values must be nonmissing.&quot;</span>   , <span class="kw">sum</span>(<span class="kw">is.na</span>(ds$instance  )) ==<span class="st"> </span>0L)
+testit::<span class="kw">assert</span>(<span class="st">&quot;All `redcap_uri` values must be nonmissing.&quot;</span> , <span class="kw">sum</span>(<span class="kw">is.na</span>(ds$redcap_uri)) ==<span class="st"> </span>0L)
+
+testit::<span class="kw">assert</span>(<span class="st">&quot;The `token` must be unique.&quot;</span>, <span class="kw">sum</span>(<span class="kw">duplicated</span>(ds$token)) ==<span class="st"> </span>0L)
+testit::<span class="kw">assert</span>(
+  <span class="st">&quot;The `username` x `project_id` x `instance` must be unique.&quot;</span>,
+  <span class="kw">sum</span>(<span class="kw">duplicated</span>(<span class="kw">paste0</span>(ds$username, <span class="st">&quot;-&quot;</span>, ds$project_id, <span class="st">&quot;-&quot;</span>, ds$instance))) ==<span class="st"> </span>0L
+)
+
+testit::<span class="kw">assert</span>(<span class="st">&quot;There should be at least 10 tokens written.&quot;</span> , <span class="kw">nrow</span>(ds) &gt;=<span class="st"> </span>10L)
+
+
+<span class="co"># ---- specify-columns-to-upload -----------------------------------------------</span>
+
+<span class="co"># Dictate the exact columns and order that will be uploaded.</span>
+columns_to_write &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;id&quot;</span>, <span class="st">&quot;username&quot;</span>, <span class="st">&quot;project_id&quot;</span>, <span class="st">&quot;instance&quot;</span>, <span class="st">&quot;token&quot;</span>, <span class="st">&quot;redcap_uri&quot;</span>)
+ds_slim &lt;-<span class="st"> </span>ds[, columns_to_write]
+
+<span class="kw">rm</span>(columns_to_write)
+
+
+<span class="co"># ---- upload-to-db-credential ------------------------------------------------------------</span>
+
+<span class="co">#Upload to SQL Server through ODBC.</span>
+(start_time &lt;-<span class="st"> </span><span class="kw">Sys.time</span>())
+
+db_table         &lt;-<span class="st"> &quot;redcap_private.tbl_credential&quot;</span>
+channel          &lt;-<span class="st"> </span>RODBC::<span class="kw">odbcConnect</span>(<span class="st">&quot;auxiliary_security&quot;</span>) <span class="co">#getSqlTypeInfo(&quot;Microsoft SQL Server&quot;) #;odbcGetInfo(channel)</span>
+
+column_info      &lt;-<span class="st"> </span>RODBC::<span class="kw">sqlColumns</span>(channel, db_table)
+var_types        &lt;-<span class="st"> </span><span class="kw">as.character</span>(column_info$TYPE_NAME)
+<span class="kw">names</span>(var_types) &lt;-<span class="st"> </span><span class="kw">as.character</span>(column_info$COLUMN_NAME)  <span class="co">#var_types</span>
+
+RODBC::<span class="kw">sqlClear</span>(channel, db_table)
+RODBC::<span class="kw">sqlSave</span>(channel, ds_slim, db_table, <span class="dt">append=</span><span class="ot">TRUE</span>, <span class="dt">rownames=</span><span class="ot">FALSE</span>, <span class="dt">fast=</span><span class="ot">TRUE</span>, <span class="dt">varTypes=</span>var_types)
+RODBC::<span class="kw">odbcClose</span>(channel); <span class="kw">rm</span>(channel)
+
+(elapsed_duration &lt;-<span class="st">  </span><span class="kw">Sys.time</span>() -<span class="st"> </span>start_time) <span class="co">#0.6026149 secs 2016-08-29.</span>
+<span class="kw">rm</span>(db_table, column_info, var_types, start_time, elapsed_duration)</code></pre></div>
+</div>
+<div id="document-info" class="section level1">
+<h1>Document Info</h1>
+<p>This document is primarily based on REDCap version 6.11.5, and was last updated 2016-08-30. A development version of the document is available on GitHub: <a href="https://cdn.rawgit.com/OuhscBbmc/REDCapR/dev/inst/doc/SecurityDatabase.html" class="uri">https://cdn.rawgit.com/OuhscBbmc/REDCapR/dev/inst/doc/SecurityDatabase.html</a></p>
 </div>
 
 
