@@ -3,14 +3,9 @@ language: r
 sudo: required
 cache: packages
 warnings_are_errors: true
-
-addons:
-  apt:
-    packages:
-      - unixodbc-dev
-      
 apt_packages:
   - r-cran-rodbc
+  - unixodbc-dev
 r_github_packages:
   - jimhester/covr
 # - hadley/testthat
