@@ -95,7 +95,7 @@ retrieve_token_mssql <- function(
 
   base::tryCatch(
     expr = {
-      token <- RODBC::sqlQuery(channel, sql, stringsAsFactors=FALSE)[1, field_name_token]
+      token <- RODBC::sqlQuery(channel, sql, stringsAsFactors=FALSE)[[field_name_token]][1]
     }, finally = {
       if( close_channel_on_exit ) RODBC::odbcClose(channel)
     }
