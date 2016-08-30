@@ -11,8 +11,8 @@ retrieve_credential_local(
   check_username=FALSE, check_token_pattern=TRUE
 )
 retrieve_credential_mssql(
-  dsn, project_id, channel=NULL, schema_name="[Redcap]", 
-  procedure_name="[prc_credential]"
+  dsn, project_id, instance,
+  channel=NULL, schema_name="[redcap]", procedure_name="[prc_credential]"
 )
 }
 \arguments{
@@ -25,6 +25,8 @@ retrieve_credential_mssql(
 \item{check_username}{A \code{logical} value indicates if the username in the credential file should be checked against the username returned by R.  Defaults to FALSE.}
 
 \item{check_token_pattern}{A \code{logical} value indicates if the token in the credential file is a 32-character hexadecimal string.  Defaults to FALSE.}
+
+\item{instance}{The casual name associated with the REDCap instance on campus.  This allows one credential system to accommodate multiple instances on campus.  Required}
 
 \item{dsn}{A \href{http://en.wikipedia.org/wiki/Data_source_name}{DSN} on the local machine that points to the desired MSSQL database. Required.}
 
@@ -53,6 +55,11 @@ Although we strongly encourage storing all the tokens on a central server (\emph
 when this approach is not feasible and the token must be stored locally.  Please contact us 
 if your institution is using something other than SQL Server, and 
 would like help adapting this approach to your infrastructure.
+
+#There's a lot of error checking for SQL injection, but remember that the user is executing under their 
+own credentials, so this doesn't obviate the need for disciplined credential management.  There's nothing 
+that can be done with this R function that isn't already exposed by any other interface intot he database 
+(eg, SQL Server Managment Studio, or MySQL Workbench.)
 }
 \examples{
 library(REDCapR) #Load the package into the current R session.
