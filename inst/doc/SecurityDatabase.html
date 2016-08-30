@@ -100,14 +100,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="co">-- The first scehma is accessible by all REDCap API users. </span>
 <span class="co">-- The second scehma is restricted to administrators.</span>
 <span class="co">--</span>
-<span class="kw">CREATE</span> <span class="kw">SCHEMA</span> [Redcap]
-<span class="kw">CREATE</span> <span class="kw">SCHEMA</span> [RedcapPrivate]
+<span class="kw">CREATE</span> <span class="kw">SCHEMA</span> [redcap]
+<span class="kw">CREATE</span> <span class="kw">SCHEMA</span> [redcap_private]
 GO
 
 <span class="co">-----------------------------------------------------------------------</span>
 <span class="co">-- Create a table to contain the token</span>
 <span class="co">--</span>
-<span class="kw">CREATE</span> <span class="kw">TABLE</span> [RedcapPrivate].[tbl_credential](
+<span class="kw">CREATE</span> <span class="kw">TABLE</span> [redcap_private].[tbl_credential](
     [<span class="kw">id</span>] [<span class="dt">smallint</span>] <span class="kw">NOT</span> <span class="kw">NULL</span>,
     [username] [<span class="dt">varchar</span>](<span class="dv">30</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
     [project_id] [<span class="dt">smallint</span>] <span class="kw">NOT</span> <span class="kw">NULL</span>,
@@ -120,7 +120,7 @@ GO
 )<span class="kw">WITH</span> (PAD_INDEX = <span class="kw">OFF</span>, STATISTICS_NORECOMPUTE = <span class="kw">OFF</span>, IGNORE_DUP_KEY = <span class="kw">OFF</span>, ALLOW_ROW_LOCKS = <span class="kw">ON</span>, ALLOW_PAGE_LOCKS = <span class="kw">ON</span>) <span class="kw">ON</span> [<span class="kw">PRIMARY</span>]
 ) <span class="kw">ON</span> [<span class="kw">PRIMARY</span>]
 
-<span class="kw">CREATE</span> <span class="kw">UNIQUE</span> NONCLUSTERED <span class="kw">INDEX</span> [IX_tbl_credential_unique] <span class="kw">ON</span> [RedcapPrivate].[tbl_credential]
+<span class="kw">CREATE</span> <span class="kw">UNIQUE</span> NONCLUSTERED <span class="kw">INDEX</span> [IX_tbl_credential_unique] <span class="kw">ON</span> [redcap_private].[tbl_credential]
 (
     [<span class="kw">instance</span>] <span class="kw">ASC</span>,
     [project_id] <span class="kw">ASC</span>,
@@ -132,7 +132,7 @@ GO
 <span class="co">-- Create a stored procedure for users to call to retrieve the token.</span>
 <span class="co">-- Notice it should a different (and more permissive) schema than the table.</span>
 <span class="co">--</span>
-<span class="kw">CREATE</span> <span class="kw">PROCEDURE</span> [Redcap].[prc_credential]
+<span class="kw">CREATE</span> <span class="kw">PROCEDURE</span> [redcap].[prc_credential]
     <span class="co">-- Add the parameters for the stored procedure here</span>
     
     @project_id <span class="dt">smallint</span>,
@@ -143,7 +143,7 @@ GO
     <span class="co">-- interfering with SELECT statements.</span>
     <span class="kw">SET</span> NOCOUNT <span class="kw">ON</span>;
 
-   <span class="kw">SELECT</span> username, project_id, token, redcap_uri <span class="kw">FROM</span> [RedcapPrivate].[tbl_credential]
+   <span class="kw">SELECT</span> username, project_id, token, redcap_uri <span class="kw">FROM</span> [redcap_private].[tbl_credential]
    <span class="kw">WHERE</span> username=system_user <span class="kw">AND</span> project_id=@project_id <span class="kw">AND</span> instance=@instance
 <span class="kw">END</span></code></pre></div>
 </div>
@@ -152,13 +152,13 @@ GO
 <p>Add a user’s LDAP account to the <code>SecurityAuxiliary</code> database so that they can query the tables to retrieve their API.</p>
 <p>Notice that this only gives the permissions to retrieve the token. You must still: 1. grant them API privileges to each appropriate REDCap project, and 2. copy the API from the REDCap database into the SecurityAuxiliary database.</p>
 <p>In the future <code>REDCapR</code> may expose a function that allows the user to perform the second step (through a stored procedure).</p>
-<p>Also, do not give typical users authorization for the ‘RedcapPrivate’ schema. The current system allows the to view only their own tokens.</p>
+<p>Also, do not give typical users authorization for the ‘redcap_private’ schema. The current system allows the to view only their own tokens.</p>
 <div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="co">-----------------------------------------------------------------------</span>
 <span class="co">-- Add a user's LDAP account to the `SecurityAuxiliary` database so that they can query the tables to retrieve their API.</span>
 <span class="co">-- Notice that this only gives the permissions to retrieve the token.  You must still:</span>
 <span class="co">--   1) grant them API privileges to each appropriate REDCap project, and</span>
 <span class="co">--   2) copy the API from the REDCap database into the  SecurityAuxiliary database.</span>
-<span class="co">-- Also, do not give typical users authorization for the 'RedcapPrivate' schema.  The current system allows the to view only their own tokens.</span>
+<span class="co">-- Also, do not give typical users authorization for the 'redcap_private' schema.  The current system allows the to view only their own tokens.</span>
 <span class="co">-----------------------------------------------------------------------</span>
 
 <span class="co">-- STEP #1: Declare the user name.  If everything runs correctly, this should be the only piece of code that you need to modify.</span>
@@ -194,11 +194,11 @@ print <span class="st">'Step #3 executing....'</span>
 print <span class="st">'User accounts matching desired name should equal 1.  It equals: '</span> + <span class="fu">CONVERT</span>(<span class="dt">varchar</span>, @UserCount); print <span class="st">''</span> 
 
 <span class="co">-----------------------------------------------------------------------</span>
-<span class="co">-- STEP #4: Grant appropriate privileges for the 'Redcap' schema.</span>
+<span class="co">-- STEP #4: Grant appropriate privileges for the 'redcap' schema.</span>
 print <span class="st">'Step #4 executing....'</span> 
 <span class="kw">DECLARE</span> @sqlGrantSchemaRedcap <span class="dt">nvarchar</span>(<span class="fu">max</span>)
-<span class="co">-- SET @sqlGrantSchemaRedcap = 'GRANT SELECT, EXECUTE ON SCHEMA::[Redcap] TO ' + @QualifiedUserName </span>
-<span class="kw">SET</span> @sqlGrantSchemaRedcap = <span class="st">'GRANT EXECUTE ON SCHEMA::[Redcap] TO '</span> + @QualifiedUserName 
+<span class="co">-- SET @sqlGrantSchemaRedcap = 'GRANT SELECT, EXECUTE ON SCHEMA::[redcap] TO ' + @QualifiedUserName </span>
+<span class="kw">SET</span> @sqlGrantSchemaRedcap = <span class="st">'GRANT EXECUTE ON SCHEMA::[redcap] TO '</span> + @QualifiedUserName 
 <span class="kw">EXECUTE</span> sp_executesql @sqlGrantSchemaRedcap
 print <span class="st">'Step #4 executed'</span>; print <span class="st">''</span> 
 
@@ -347,7 +347,7 @@ ds_slim &lt;-<span class="st"> </span>ds[, columns_to_write]
 <span class="co">#Upload to SQL Server through ODBC.</span>
 (start_time &lt;-<span class="st"> </span><span class="kw">Sys.time</span>())
 
-db_table         &lt;-<span class="st"> &quot;RedcapPrivate.tbl_credential&quot;</span>
+db_table         &lt;-<span class="st"> &quot;redcap_private.tbl_credential&quot;</span>
 channel          &lt;-<span class="st"> </span>RODBC::<span class="kw">odbcConnect</span>(<span class="st">&quot;BbmcSecurity&quot;</span>) <span class="co">#getSqlTypeInfo(&quot;Microsoft SQL Server&quot;) #;odbcGetInfo(channel)</span>
 
 column_info      &lt;-<span class="st"> </span>RODBC::<span class="kw">sqlColumns</span>(channel, db_table)

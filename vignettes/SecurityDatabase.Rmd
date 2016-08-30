@@ -45,14 +45,14 @@ This SQL code is run once inside an existing database to establish the schemas, 
 -- The first scehma is accessible by all REDCap API users. 
 -- The second scehma is restricted to administrators.
 --
-CREATE SCHEMA [Redcap]
-CREATE SCHEMA [RedcapPrivate]
+CREATE SCHEMA [redcap]
+CREATE SCHEMA [redcap_private]
 GO
 
 -----------------------------------------------------------------------
 -- Create a table to contain the token
 --
-CREATE TABLE [RedcapPrivate].[tbl_credential](
+CREATE TABLE [redcap_private].[tbl_credential](
 	[id] [smallint] NOT NULL,
 	[username] [varchar](30) NOT NULL,
 	[project_id] [smallint] NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE [RedcapPrivate].[tbl_credential](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
-CREATE UNIQUE NONCLUSTERED INDEX [IX_tbl_credential_unique] ON [RedcapPrivate].[tbl_credential]
+CREATE UNIQUE NONCLUSTERED INDEX [IX_tbl_credential_unique] ON [redcap_private].[tbl_credential]
 (
 	[instance] ASC,
 	[project_id] ASC,
@@ -77,7 +77,7 @@ GO
 -- Create a stored procedure for users to call to retrieve the token.
 -- Notice it should a different (and more permissive) schema than the table.
 --
-CREATE PROCEDURE [Redcap].[prc_credential]
+CREATE PROCEDURE [redcap].[prc_credential]
 	-- Add the parameters for the stored procedure here
 	
 	@project_id smallint,
@@ -88,7 +88,7 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-   SELECT username, project_id, token, redcap_uri FROM [RedcapPrivate].[tbl_credential]
+   SELECT username, project_id, token, redcap_uri FROM [redcap_private].[tbl_credential]
    WHERE username=system_user AND project_id=@project_id AND instance=@instance
 END
 ```
@@ -105,7 +105,7 @@ Notice that this only gives the permissions to retrieve the token.  You must sti
 
 In the future `REDCapR` may expose a function that allows the user to perform the second step (through a stored procedure).
 
-Also, do not give typical users authorization for the 'RedcapPrivate' schema.  The current system allows the to view only their own tokens.
+Also, do not give typical users authorization for the 'redcap_private' schema.  The current system allows the to view only their own tokens.
 
 ```sql
 -----------------------------------------------------------------------
@@ -113,7 +113,7 @@ Also, do not give typical users authorization for the 'RedcapPrivate' schema.  T
 -- Notice that this only gives the permissions to retrieve the token.  You must still:
 --   1) grant them API privileges to each appropriate REDCap project, and
 --   2) copy the API from the REDCap database into the  SecurityAuxiliary database.
--- Also, do not give typical users authorization for the 'RedcapPrivate' schema.  The current system allows the to view only their own tokens.
+-- Also, do not give typical users authorization for the 'redcap_private' schema.  The current system allows the to view only their own tokens.
 -----------------------------------------------------------------------
 
 -- STEP #1: Declare the user name.  If everything runs correctly, this should be the only piece of code that you need to modify.
@@ -149,11 +149,11 @@ DECLARE @UserCount AS INT; SET @UserCount = (SELECT COUNT(*) AS UserCount FROM S
 print 'User accounts matching desired name should equal 1.  It equals: ' + CONVERT(varchar, @UserCount); print '' 
 
 -----------------------------------------------------------------------
--- STEP #4: Grant appropriate privileges for the 'Redcap' schema.
+-- STEP #4: Grant appropriate privileges for the 'redcap' schema.
 print 'Step #4 executing....' 
 DECLARE @sqlGrantSchemaRedcap nvarchar(max)
--- SET @sqlGrantSchemaRedcap = 'GRANT SELECT, EXECUTE ON SCHEMA::[Redcap] TO ' + @QualifiedUserName 
-SET @sqlGrantSchemaRedcap = 'GRANT EXECUTE ON SCHEMA::[Redcap] TO ' + @QualifiedUserName 
+-- SET @sqlGrantSchemaRedcap = 'GRANT SELECT, EXECUTE ON SCHEMA::[redcap] TO ' + @QualifiedUserName 
+SET @sqlGrantSchemaRedcap = 'GRANT EXECUTE ON SCHEMA::[redcap] TO ' + @QualifiedUserName 
 EXECUTE sp_executesql @sqlGrantSchemaRedcap
 print 'Step #4 executed'; print '' 
 
@@ -308,7 +308,7 @@ rm(columns_to_write)
 #Upload to SQL Server through ODBC.
 (start_time <- Sys.time())
 
-db_table         <- "RedcapPrivate.tbl_credential"
+db_table         <- "redcap_private.tbl_credential"
 channel          <- RODBC::odbcConnect("BbmcSecurity") #getSqlTypeInfo("Microsoft SQL Server") #;odbcGetInfo(channel)
 
 column_info      <- RODBC::sqlColumns(channel, db_table)
