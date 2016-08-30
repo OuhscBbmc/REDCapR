@@ -109,10 +109,10 @@ Also, do not give typical users authorization for the 'redcap_private' schema.  
 
 ```sql
 -----------------------------------------------------------------------
--- Add a user's LDAP account to the `SecurityAuxiliary` database so that they can query the tables to retrieve their API.
+-- Add a OUHSC's user account to the auxiliary_security database so that they can query the tables to retrieve their API.
 -- Notice that this only gives the permissions to retrieve the token.  You must still:
 --   1) grant them API privileges to each appropriate REDCap project, and
---   2) copy the API from the REDCap database into the  SecurityAuxiliary database.
+--   2) copy the API from the REDCap database into the  auxiliary_security database.
 -- Also, do not give typical users authorization for the 'redcap_private' schema.  The current system allows the to view only their own tokens.
 -----------------------------------------------------------------------
 
@@ -120,61 +120,59 @@ Also, do not give typical users authorization for the 'redcap_private' schema.  
 print 'Step #1 executing....' 
 USE [master]
 GO
-DECLARE @QualifiedUserName varchar(255); SET @QualifiedUserName = '[OUHSC\lsuarez3]'
-print 'Resulting login name: ' + @QualifiedUserName; print '' 
+DECLARE @qualified_user_name varchar(255); SET @qualified_user_name = '[OUHSC\lsuarez3]'
+print 'Resulting login name: ' + @qualified_user_name; print '' 
 
---EXEC sp_helplogins @LoginNamePattern=@QualifiedUserName
---SELECT * FROM master..syslogins WHERE name = @QualifiedUserName
---SELECT * FROM SecurityAuxiliary.sys.sysusers 
+--EXEC sp_helplogins @LoginNamePattern=@qualified_user_name
+--SELECT * FROM master..syslogins WHERE name = @qualified_user_name
+--SELECT * FROM auxiliary_security.sys.sysusers 
 --SELECT * FROM sys.database_permissions
 --SELECT * FROM sys.server_principals
 
 -----------------------------------------------------------------------
 -- STEP #2: Create a login for the *server*.
 print 'Step #2 executing....' 
-DECLARE @sqlCreateLogin nvarchar(max)
-SET @sqlCreateLogin = 'CREATE LOGIN ' + @QualifiedUserName + ' FROM WINDOWS WITH DEFAULT_DATABASE=[SecurityAuxiliary]'
-EXECUTE sp_executesql @sqlCreateLogin
-DECLARE @LoginCount AS INT; SET @LoginCount = (SELECT COUNT(*) AS LoginCount FROM master..syslogins WHERE '[' + loginname + ']' = @QualifiedUserName)
-print 'Logins matching desired name should equal 1.  It equals: ' + CONVERT(varchar, @LoginCount); print '' 
+DECLARE @sql_create_login nvarchar(max)
+SET @sql_create_login = 'CREATE LOGIN ' + @qualified_user_name + ' FROM WINDOWS WITH DEFAULT_DATABASE=[auxiliary_security]'
+EXECUTE sp_executesql @sql_create_login
+DECLARE @login_count AS INT; SET @login_count = (SELECT COUNT(*) AS login_count FROM master..syslogins WHERE '[' + loginname + ']' = @qualified_user_name)
+print 'Logins matching desired name should equal 1.  It equals: ' + CONVERT(varchar, @login_count); print '' 
 
 -----------------------------------------------------------------------
--- STEP #3: Create a user account for the *data base*, after switching the database under focus to SecurityAuxiliary.
+-- STEP #3: Create a user account for the *data base*, after switching the database under focus to auxiliary_security.
 print 'Step #3 executing....' 
-USE [SecurityAuxiliary]
-DECLARE @sqlCreateUser nvarchar(max)
-SET @sqlCreateUser = 'CREATE USER ' + @QualifiedUserName + ' FOR LOGIN ' + @QualifiedUserName
-EXECUTE sp_executesql @sqlCreateUser
-DECLARE @UserCount AS INT; SET @UserCount = (SELECT COUNT(*) AS UserCount FROM SecurityAuxiliary.sys.sysusers WHERE '[' + name + ']' = @QualifiedUserName)
-print 'User accounts matching desired name should equal 1.  It equals: ' + CONVERT(varchar, @UserCount); print '' 
+USE [auxiliary_security]
+DECLARE @sql_create_user nvarchar(max)
+SET @sql_create_user = 'CREATE USER ' + @qualified_user_name + ' FOR LOGIN ' + @qualified_user_name
+EXECUTE sp_executesql @sql_create_user
+DECLARE @user_count AS INT; SET @user_count = (SELECT COUNT(*) AS user_count FROM auxiliary_security.sys.sysusers WHERE '[' + name + ']' = @qualified_user_name)
+print 'User accounts matching desired name should equal 1.  It equals: ' + CONVERT(varchar, @user_count); print '' 
 
 -----------------------------------------------------------------------
 -- STEP #4: Grant appropriate privileges for the 'redcap' schema.
 print 'Step #4 executing....' 
-DECLARE @sqlGrantSchemaRedcap nvarchar(max)
--- SET @sqlGrantSchemaRedcap = 'GRANT SELECT, EXECUTE ON SCHEMA::[redcap] TO ' + @QualifiedUserName 
-SET @sqlGrantSchemaRedcap = 'GRANT EXECUTE ON SCHEMA::[redcap] TO ' + @QualifiedUserName 
-EXECUTE sp_executesql @sqlGrantSchemaRedcap
+DECLARE @sql_grant_schema_redcap nvarchar(max)
+SET @sql_grant_schema_redcap = 'GRANT EXECUTE ON SCHEMA::[redcap] TO ' + @qualified_user_name 
+EXECUTE sp_executesql @sql_grant_schema_redcap
 print 'Step #4 executed'; print '' 
 
 -----------------------------------------------------------------------
 -- STEP #5: Grant appropriate privileges for the 'Security' schema.
 print 'Step #5 executing....' 
-DECLARE @sqlGrantSchemaSecurity nvarchar(max)
--- SET @sqlGrantSchemaSecurity = 'GRANT SELECT, EXECUTE ON SCHEMA::[Security] TO ' + @QualifiedUserName 
-SET @sqlGrantSchemaSecurity = 'GRANT EXECUTE ON SCHEMA::[Security] TO ' + @QualifiedUserName 
-EXECUTE sp_executesql @sqlGrantSchemaSecurity
+DECLARE @sql_grant_schema_security nvarchar(max)
+SET @sql_grant_schema_security = 'GRANT EXECUTE ON SCHEMA::[security] TO ' + @qualified_user_name 
+EXECUTE sp_executesql @sql_grant_schema_security
 print 'Step #5 executed'; print '' 
 
 -----------------------------------------------------------------------
 -- OPTIONAL STEP: Delete the user from the database (the first line) and then the server (the second line).  
--- The person's other database user accounts (besides with the SecurityAuxiliary database) will NOT be automatically deleted by these two lines.
---USE [SecurityAuxiliary]; DROP USER [OUHSC\lsuarez3]
+-- The person's other database user accounts (besides with the auxiliary_security database) will NOT be automatically deleted by these two lines.
+--USE [auxiliary_security]; DROP USER [OUHSC\lsuarez3]
 --USE [master]; DROP LOGIN [OUHSC\lsuarez3]
 
 -----------------------------------------------------------------------
 -- REFERENCES & NOTES
-  --The @QualifiedUserName must have both (a) the 'OUHSC' domain qualification, and (b) the square brackets (to escape the backslash).
+	--The @qualified_user_name must have both (a) the 'OUHSC' domain qualification, and (b) the square brackets (to escape the backslash).
 	--Using sp_executesql to add users: http://www.sqlservercentral.com/Forums/Topic497615-359-1.aspx
 	--Check if a server login exists: http://stackoverflow.com/questions/37275/sql-query-for-logins
 	--Retrieve database users: http://stackoverflow.com/questions/2445444/how-to-get-a-list-of-users-for-all-instances-databases
@@ -309,7 +307,7 @@ rm(columns_to_write)
 (start_time <- Sys.time())
 
 db_table         <- "redcap_private.tbl_credential"
-channel          <- RODBC::odbcConnect("BbmcSecurity") #getSqlTypeInfo("Microsoft SQL Server") #;odbcGetInfo(channel)
+channel          <- RODBC::odbcConnect("auxiliary_security") #getSqlTypeInfo("Microsoft SQL Server") #;odbcGetInfo(channel)
 
 column_info      <- RODBC::sqlColumns(channel, db_table)
 var_types        <- as.character(column_info$TYPE_NAME)

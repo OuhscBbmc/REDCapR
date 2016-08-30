@@ -154,10 +154,10 @@ GO
 <p>In the future <code>REDCapR</code> may expose a function that allows the user to perform the second step (through a stored procedure).</p>
 <p>Also, do not give typical users authorization for the ‘redcap_private’ schema. The current system allows the to view only their own tokens.</p>
 <div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="co">-----------------------------------------------------------------------</span>
-<span class="co">-- Add a user's LDAP account to the `SecurityAuxiliary` database so that they can query the tables to retrieve their API.</span>
+<span class="co">-- Add a OUHSC's user account to the auxiliary_security database so that they can query the tables to retrieve their API.</span>
 <span class="co">-- Notice that this only gives the permissions to retrieve the token.  You must still:</span>
 <span class="co">--   1) grant them API privileges to each appropriate REDCap project, and</span>
-<span class="co">--   2) copy the API from the REDCap database into the  SecurityAuxiliary database.</span>
+<span class="co">--   2) copy the API from the REDCap database into the  auxiliary_security database.</span>
 <span class="co">-- Also, do not give typical users authorization for the 'redcap_private' schema.  The current system allows the to view only their own tokens.</span>
 <span class="co">-----------------------------------------------------------------------</span>
 
@@ -165,61 +165,59 @@ GO
 print <span class="st">'Step #1 executing....'</span> 
 <span class="kw">USE</span> [<span class="kw">master</span>]
 GO
-<span class="kw">DECLARE</span> @QualifiedUserName <span class="dt">varchar</span>(<span class="dv">255</span>); <span class="kw">SET</span> @QualifiedUserName = <span class="st">'[OUHSC\lsuarez3]'</span>
-print <span class="st">'Resulting login name: '</span> + @QualifiedUserName; print <span class="st">''</span> 
+<span class="kw">DECLARE</span> @qualified_user_name <span class="dt">varchar</span>(<span class="dv">255</span>); <span class="kw">SET</span> @qualified_user_name = <span class="st">'[OUHSC\lsuarez3]'</span>
+print <span class="st">'Resulting login name: '</span> + @qualified_user_name; print <span class="st">''</span> 
 
-<span class="co">--EXEC sp_helplogins @LoginNamePattern=@QualifiedUserName</span>
-<span class="co">--SELECT * FROM master..syslogins WHERE name = @QualifiedUserName</span>
-<span class="co">--SELECT * FROM SecurityAuxiliary.sys.sysusers </span>
+<span class="co">--EXEC sp_helplogins @LoginNamePattern=@qualified_user_name</span>
+<span class="co">--SELECT * FROM master..syslogins WHERE name = @qualified_user_name</span>
+<span class="co">--SELECT * FROM auxiliary_security.sys.sysusers </span>
 <span class="co">--SELECT * FROM sys.database_permissions</span>
 <span class="co">--SELECT * FROM sys.server_principals</span>
 
 <span class="co">-----------------------------------------------------------------------</span>
 <span class="co">-- STEP #2: Create a login for the *server*.</span>
 print <span class="st">'Step #2 executing....'</span> 
-<span class="kw">DECLARE</span> @sqlCreateLogin <span class="dt">nvarchar</span>(<span class="fu">max</span>)
-<span class="kw">SET</span> @sqlCreateLogin = <span class="st">'CREATE LOGIN '</span> + @QualifiedUserName + <span class="st">' FROM WINDOWS WITH DEFAULT_DATABASE=[SecurityAuxiliary]'</span>
-<span class="kw">EXECUTE</span> sp_executesql @sqlCreateLogin
-<span class="kw">DECLARE</span> @LoginCount <span class="kw">AS</span> <span class="dt">INT</span>; <span class="kw">SET</span> @LoginCount = (<span class="kw">SELECT</span> <span class="fu">COUNT</span>(*) <span class="kw">AS</span> LoginCount <span class="kw">FROM</span> master..syslogins <span class="kw">WHERE</span> <span class="st">'['</span> + loginname + <span class="st">']'</span> = @QualifiedUserName)
-print <span class="st">'Logins matching desired name should equal 1.  It equals: '</span> + <span class="fu">CONVERT</span>(<span class="dt">varchar</span>, @LoginCount); print <span class="st">''</span> 
+<span class="kw">DECLARE</span> @sql_create_login <span class="dt">nvarchar</span>(<span class="fu">max</span>)
+<span class="kw">SET</span> @sql_create_login = <span class="st">'CREATE LOGIN '</span> + @qualified_user_name + <span class="st">' FROM WINDOWS WITH DEFAULT_DATABASE=[auxiliary_security]'</span>
+<span class="kw">EXECUTE</span> sp_executesql @sql_create_login
+<span class="kw">DECLARE</span> @login_count <span class="kw">AS</span> <span class="dt">INT</span>; <span class="kw">SET</span> @login_count = (<span class="kw">SELECT</span> <span class="fu">COUNT</span>(*) <span class="kw">AS</span> login_count <span class="kw">FROM</span> master..syslogins <span class="kw">WHERE</span> <span class="st">'['</span> + loginname + <span class="st">']'</span> = @qualified_user_name)
+print <span class="st">'Logins matching desired name should equal 1.  It equals: '</span> + <span class="fu">CONVERT</span>(<span class="dt">varchar</span>, @login_count); print <span class="st">''</span> 
 
 <span class="co">-----------------------------------------------------------------------</span>
-<span class="co">-- STEP #3: Create a user account for the *data base*, after switching the database under focus to SecurityAuxiliary.</span>
+<span class="co">-- STEP #3: Create a user account for the *data base*, after switching the database under focus to auxiliary_security.</span>
 print <span class="st">'Step #3 executing....'</span> 
-<span class="kw">USE</span> [SecurityAuxiliary]
-<span class="kw">DECLARE</span> @sqlCreateUser <span class="dt">nvarchar</span>(<span class="fu">max</span>)
-<span class="kw">SET</span> @sqlCreateUser = <span class="st">'CREATE USER '</span> + @QualifiedUserName + <span class="st">' FOR LOGIN '</span> + @QualifiedUserName
-<span class="kw">EXECUTE</span> sp_executesql @sqlCreateUser
-<span class="kw">DECLARE</span> @UserCount <span class="kw">AS</span> <span class="dt">INT</span>; <span class="kw">SET</span> @UserCount = (<span class="kw">SELECT</span> <span class="fu">COUNT</span>(*) <span class="kw">AS</span> UserCount <span class="kw">FROM</span> SecurityAuxiliary.sys.sysusers <span class="kw">WHERE</span> <span class="st">'['</span> + name + <span class="st">']'</span> = @QualifiedUserName)
-print <span class="st">'User accounts matching desired name should equal 1.  It equals: '</span> + <span class="fu">CONVERT</span>(<span class="dt">varchar</span>, @UserCount); print <span class="st">''</span> 
+<span class="kw">USE</span> [auxiliary_security]
+<span class="kw">DECLARE</span> @sql_create_user <span class="dt">nvarchar</span>(<span class="fu">max</span>)
+<span class="kw">SET</span> @sql_create_user = <span class="st">'CREATE USER '</span> + @qualified_user_name + <span class="st">' FOR LOGIN '</span> + @qualified_user_name
+<span class="kw">EXECUTE</span> sp_executesql @sql_create_user
+<span class="kw">DECLARE</span> @user_count <span class="kw">AS</span> <span class="dt">INT</span>; <span class="kw">SET</span> @user_count = (<span class="kw">SELECT</span> <span class="fu">COUNT</span>(*) <span class="kw">AS</span> user_count <span class="kw">FROM</span> auxiliary_security.sys.sysusers <span class="kw">WHERE</span> <span class="st">'['</span> + name + <span class="st">']'</span> = @qualified_user_name)
+print <span class="st">'User accounts matching desired name should equal 1.  It equals: '</span> + <span class="fu">CONVERT</span>(<span class="dt">varchar</span>, @user_count); print <span class="st">''</span> 
 
 <span class="co">-----------------------------------------------------------------------</span>
 <span class="co">-- STEP #4: Grant appropriate privileges for the 'redcap' schema.</span>
 print <span class="st">'Step #4 executing....'</span> 
-<span class="kw">DECLARE</span> @sqlGrantSchemaRedcap <span class="dt">nvarchar</span>(<span class="fu">max</span>)
-<span class="co">-- SET @sqlGrantSchemaRedcap = 'GRANT SELECT, EXECUTE ON SCHEMA::[redcap] TO ' + @QualifiedUserName </span>
-<span class="kw">SET</span> @sqlGrantSchemaRedcap = <span class="st">'GRANT EXECUTE ON SCHEMA::[redcap] TO '</span> + @QualifiedUserName 
-<span class="kw">EXECUTE</span> sp_executesql @sqlGrantSchemaRedcap
+<span class="kw">DECLARE</span> @sql_grant_schema_redcap <span class="dt">nvarchar</span>(<span class="fu">max</span>)
+<span class="kw">SET</span> @sql_grant_schema_redcap = <span class="st">'GRANT EXECUTE ON SCHEMA::[redcap] TO '</span> + @qualified_user_name 
+<span class="kw">EXECUTE</span> sp_executesql @sql_grant_schema_redcap
 print <span class="st">'Step #4 executed'</span>; print <span class="st">''</span> 
 
 <span class="co">-----------------------------------------------------------------------</span>
 <span class="co">-- STEP #5: Grant appropriate privileges for the 'Security' schema.</span>
 print <span class="st">'Step #5 executing....'</span> 
-<span class="kw">DECLARE</span> @sqlGrantSchemaSecurity <span class="dt">nvarchar</span>(<span class="fu">max</span>)
-<span class="co">-- SET @sqlGrantSchemaSecurity = 'GRANT SELECT, EXECUTE ON SCHEMA::[Security] TO ' + @QualifiedUserName </span>
-<span class="kw">SET</span> @sqlGrantSchemaSecurity = <span class="st">'GRANT EXECUTE ON SCHEMA::[Security] TO '</span> + @QualifiedUserName 
-<span class="kw">EXECUTE</span> sp_executesql @sqlGrantSchemaSecurity
+<span class="kw">DECLARE</span> @sql_grant_schema_security <span class="dt">nvarchar</span>(<span class="fu">max</span>)
+<span class="kw">SET</span> @sql_grant_schema_security = <span class="st">'GRANT EXECUTE ON SCHEMA::[security] TO '</span> + @qualified_user_name 
+<span class="kw">EXECUTE</span> sp_executesql @sql_grant_schema_security
 print <span class="st">'Step #5 executed'</span>; print <span class="st">''</span> 
 
 <span class="co">-----------------------------------------------------------------------</span>
 <span class="co">-- OPTIONAL STEP: Delete the user from the database (the first line) and then the server (the second line).  </span>
-<span class="co">-- The person's other database user accounts (besides with the SecurityAuxiliary database) will NOT be automatically deleted by these two lines.</span>
-<span class="co">--USE [SecurityAuxiliary]; DROP USER [OUHSC\lsuarez3]</span>
+<span class="co">-- The person's other database user accounts (besides with the auxiliary_security database) will NOT be automatically deleted by these two lines.</span>
+<span class="co">--USE [auxiliary_security]; DROP USER [OUHSC\lsuarez3]</span>
 <span class="co">--USE [master]; DROP LOGIN [OUHSC\lsuarez3]</span>
 
 <span class="co">-----------------------------------------------------------------------</span>
 <span class="co">-- REFERENCES &amp; NOTES</span>
-  <span class="co">--The @QualifiedUserName must have both (a) the 'OUHSC' domain qualification, and (b) the square brackets (to escape the backslash).</span>
+    <span class="co">--The @qualified_user_name must have both (a) the 'OUHSC' domain qualification, and (b) the square brackets (to escape the backslash).</span>
     <span class="co">--Using sp_executesql to add users: http://www.sqlservercentral.com/Forums/Topic497615-359-1.aspx</span>
     <span class="co">--Check if a server login exists: http://stackoverflow.com/questions/37275/sql-query-for-logins</span>
     <span class="co">--Retrieve database users: http://stackoverflow.com/questions/2445444/how-to-get-a-list-of-users-for-all-instances-databases</span>
@@ -348,7 +346,7 @@ ds_slim &lt;-<span class="st"> </span>ds[, columns_to_write]
 (start_time &lt;-<span class="st"> </span><span class="kw">Sys.time</span>())
 
 db_table         &lt;-<span class="st"> &quot;redcap_private.tbl_credential&quot;</span>
-channel          &lt;-<span class="st"> </span>RODBC::<span class="kw">odbcConnect</span>(<span class="st">&quot;BbmcSecurity&quot;</span>) <span class="co">#getSqlTypeInfo(&quot;Microsoft SQL Server&quot;) #;odbcGetInfo(channel)</span>
+channel          &lt;-<span class="st"> </span>RODBC::<span class="kw">odbcConnect</span>(<span class="st">&quot;auxiliary_security&quot;</span>) <span class="co">#getSqlTypeInfo(&quot;Microsoft SQL Server&quot;) #;odbcGetInfo(channel)</span>
 
 column_info      &lt;-<span class="st"> </span>RODBC::<span class="kw">sqlColumns</span>(channel, db_table)
 var_types        &lt;-<span class="st"> </span><span class="kw">as.character</span>(column_info$TYPE_NAME)
