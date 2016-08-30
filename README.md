@@ -47,7 +47,7 @@ Thanks,
 [Will Beasley](https://www.researchgate.net/profile/William_Beasley2), David Bard, & Thomas Wilson
 
 [University of Oklahoma Health Sciences Center](http://ouhsc.edu/),
-[Department of Pediatrics](https://www.oumedicine.com/pediatrics),
+[Department of Pediatrics](https://www.oumedicine.com/department-of-pediatrics),
 [Biomedical & Behavioral Research Core](http://ouhsc.edu/BBMC/).
 
 ### Download and Installation Instructions
@@ -97,4 +97,4 @@ We encourage input and collaboration from the overall community.  If you're fami
 ### Thanks to Funders
 *OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting ([MIECHV](http://mchb.hrsa.gov/programs/homevisiting/)) Project.*: Evaluates MIECHV expansion and enhancement of Evidence-based Home Visitation programs in four Oklahoma counties. [HRSA/ACF D89MC23154](https://perf-data.hrsa.gov/mchb/DGISReports/Abstract/AbstractDetails.aspx?Source=TVIS&GrantNo=D89MC23154&FY=2012).  
 
-(So far) the primary developers of REDCapR are the external evaluators for [Oklahoma's MIECHV](http://www.ok.gov/health/Child_and_Family_Health/Family_Support_and_Prevention_Service/MIECHV_Program_-_Federal_Home_Visiting_Grant/MIECHV_Program_Resources/index.html) program.  See the prelimary CQI reports (many of which use REDCapR) at http://ouhscbbmc.github.io/MReportingPublic/.
+(So far) the primary developers of REDCapR are the external evaluators for [Oklahoma's MIECHV](https://www.ok.gov/health/Community_&_Family_Health/Family_Support_and_Prevention_Service/MIECHV_Program_-_Federal_Home_Visiting_Grant/MIECHV_Program_Resources/index.html) program.  See the prelimary CQI reports (many of which use REDCapR) at http://ouhscbbmc.github.io/MReportingPublic/.
