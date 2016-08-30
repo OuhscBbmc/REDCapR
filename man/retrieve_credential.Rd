@@ -12,7 +12,7 @@ retrieve_credential_local(
 )
 retrieve_credential_mssql(
   dsn, project_id, instance,
-  channel=NULL, schema_name="[Redcap]", procedure_name="[prc_credential]"
+  channel=NULL, schema_name="[redcap]", procedure_name="[prc_credential]"
 )
 }
 \arguments{
