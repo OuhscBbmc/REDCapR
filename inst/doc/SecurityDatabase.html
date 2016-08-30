@@ -231,6 +231,137 @@ print <span class="st">'Step #5 executed'</span>; print <span class="st">''</spa
     <span class="co">--A different (&amp; non-dynamic) way to establish a user: http://pic.dhe.ibm.com/infocenter/dmndhelp/v8r5m0/index.jsp?topic=%2Fcom.ibm.wbpm.imuc.sbpm.doc%2Ftopics%2Fdb_create_users_nd_aix.html</span>
     <span class="co">--If the variable has to cross a 'GO' (which the current version of the script doesn't need): http://stackoverflow.com/questions/937336/is-there-a-way-to-persist-a-variable-across-a-go</span></code></pre></div>
 </div>
+<div id="transfer-credentials" class="section level1">
+<h1>Transfer Credentials</h1>
+<p>Manually transfer tokens to the auxiliary server becomes unmanageable as your institution’s collection of API users grows. This script demonstrates how to progamtically transfer all tokens from multiple REDCap instances on your network. The basic steps are 1. Read from the MySQL database underneath each REDCap instance. 1. Combine &amp; groom the credentials. 1. Upload to SQL Server.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>(<span class="dt">all=</span><span class="ot">TRUE</span>)) <span class="co">#Clear the memory for any variables set from any previous runs.</span>
+
+<span class="co"># ---- load-sources ------------------------------------------------------------</span>
+
+<span class="co"># ---- load-packages -----------------------------------------------------------</span>
+<span class="kw">library</span>(magrittr)
+<span class="kw">requireNamespace</span>(<span class="st">&quot;RODBC&quot;</span>)
+<span class="kw">requireNamespace</span>(<span class="st">&quot;dplyr&quot;</span>)
+<span class="kw">requireNamespace</span>(<span class="st">&quot;readr&quot;</span>)
+
+<span class="co"># ---- declare-globals ---------------------------------------------------------</span>
+
+<span class="co"># The Activity Directory name that should precede each username.</span>
+<span class="co">#   This should correspond with the result of `SYSTEM_USER` </span>
+<span class="co">#   (https://msdn.microsoft.com/en-us/library/ms179930.aspx)</span>
+ldap_prefix &lt;-<span class="st"> &quot;OUHSC</span><span class="ch">\\</span><span class="st">&quot;</span>  
+
+<span class="co">#Create a SQL statement for each REDCap instance.  Only the `instance` value should change.</span>
+sql &lt;-<span class="st"> &quot;</span>
+<span class="st">  SELECT username, project_id, api_token</span>
+<span class="st">  FROM redcap_user_rights</span>
+<span class="st">  WHERE api_token IS NOT NULL&quot;</span>
+
+<span class="co">#Update this ad-hoc CSV.  Each row should represent one REDCap instance.</span>
+<span class="co">#   Choose any casual name for the first variable, consistent with the `tweak-data` chunk below.</span>
+<span class="co">#   Enter the exact URL for the second variable.</span>
+ds_url &lt;-<span class="st"> </span>readr::<span class="kw">read_csv</span>(<span class="kw">paste</span>(
+  <span class="st">&quot;instance,redcap_uri&quot;</span>,
+  <span class="st">&quot;production,https://redcap-production.ouhsc.edu/redcap/api/&quot;</span>,
+  <span class="st">&quot;dev,https://redcap-dev.ouhsc.edu/redcap/api/&quot;</span>,
+<span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>))
+
+
+<span class="co"># ---- load-data ---------------------------------------------------------------</span>
+
+<span class="co"># Load the credentials from the first instance.</span>
+channel &lt;-<span class="st"> </span>RODBC::<span class="kw">odbcConnect</span>(<span class="st">&quot;redcap-production&quot;</span>) <span class="co"># odbcGetInfo(channel)</span>
+ds_prod &lt;-<span class="st"> </span>RODBC::<span class="kw">sqlQuery</span>(channel, <span class="dt">query=</span>sql, <span class="dt">stringsAsFactors=</span>F)
+RODBC::<span class="kw">odbcClose</span>(channel); <span class="kw">rm</span>(channel)
+
+<span class="co"># Load the credentials from the second instance.  </span>
+<span class="co">#   Duplicate or remove this block, dependending on the number of instances.</span>
+channel &lt;-<span class="st"> </span>RODBC::<span class="kw">odbcConnect</span>(<span class="st">&quot;redcap-dev&quot;</span>) <span class="co"># odbcGetInfo(channel)</span>
+ds_dev  &lt;-<span class="st"> </span>RODBC::<span class="kw">sqlQuery</span>(channel, <span class="dt">query=</span>sql, <span class="dt">stringsAsFactors=</span>F)
+RODBC::<span class="kw">odbcClose</span>(channel); <span class="kw">rm</span>(channel, sql)
+
+<span class="co"># Assert these variables contain valid datasets (instead of a character error message).</span>
+testit::<span class="kw">assert</span>(<span class="st">&quot;The object returned from the database should be a data.frame.&quot;</span>, <span class="kw">inherits</span>(ds_prod, <span class="st">&quot;data.frame&quot;</span>))
+testit::<span class="kw">assert</span>(<span class="st">&quot;The object returned from the database should be a data.frame.&quot;</span>, <span class="kw">inherits</span>(ds_dev , <span class="st">&quot;data.frame&quot;</span>))
+
+<span class="co"># Assert that at least some rows were returned.</span>
+<span class="co">#   Adjust this to smaller values if necessary.  It's really just to catch blatant retrieval problems.</span>
+testit::<span class="kw">assert</span>(<span class="st">&quot;There should be at least 5 tokens retrieved from the BBMC box.&quot;</span>, <span class="kw">nrow</span>(ds_prod) &gt;=<span class="st"> </span>5L)
+testit::<span class="kw">assert</span>(<span class="st">&quot;There should be at least 5 tokens retrieved from the DEV box.&quot;</span> , <span class="kw">nrow</span>(ds_dev ) &gt;=<span class="st"> </span>5L)
+
+
+<span class="co"># ---- tweak-data --------------------------------------------------------------</span>
+
+<span class="co">#Label each instance, so they're distinguishable later.  Add/remove lines, depending on the number of campus instances</span>
+ds_prod$instance &lt;-<span class="st"> &quot;production&quot;</span>
+ds_dev$instance  &lt;-<span class="st"> &quot;dev&quot;</span>
+
+<span class="co">#Combine the token collection from each instance.  Then prefix the username and include the URL of each instance.</span>
+ds &lt;-<span class="st"> </span>ds_prod %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">union</span>(ds_dev) %&gt;%<span class="st">                                     </span><span class="co"># Add/remove unions, based on the number of REDCap instances.</span>
+<span class="st">  </span>dplyr::<span class="kw">select_</span>(
+    <span class="st">&quot;username&quot;</span>             =<span class="st"> &quot;`username`&quot;</span>
+    , <span class="st">&quot;project_id&quot;</span>         =<span class="st"> &quot;`project_id`&quot;</span>
+    , <span class="st">&quot;instance&quot;</span>           =<span class="st"> &quot;`instance`&quot;</span>
+    , <span class="st">&quot;token&quot;</span>              =<span class="st"> &quot;`api_token`&quot;</span>
+  ) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">arrange</span>(instance, project_id, username) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">mutate</span>(
+    <span class="dt">username               =</span> <span class="kw">paste0</span>(ldap_prefix, username),    <span class="co"># Qualify for the Active Directory.</span>
+    <span class="dt">id                     =</span> <span class="kw">seq_len</span>(<span class="kw">n</span>())                      <span class="co"># For the sake of a clustered primary key.</span>
+  ) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">left_join</span>( ds_url, <span class="dt">by=</span><span class="st">&quot;instance&quot;</span>)                     <span class="co"># Include the instance URL.</span>
+
+<span class="kw">rm</span>(ds_prod, ds_dev, ds_url)
+
+
+<span class="co"># ---- verify-values -----------------------------------------------------------</span>
+
+<span class="co">#Assert that the dataset is well-behaved.</span>
+testit::<span class="kw">assert</span>(<span class="st">&quot;All `id` values must be nonmissing.&quot;</span>         , <span class="kw">sum</span>(<span class="kw">is.na</span>(ds$id        )) ==<span class="st"> </span>0L)
+testit::<span class="kw">assert</span>(<span class="st">&quot;All `username` values must be nonmissing.&quot;</span>   , <span class="kw">sum</span>(<span class="kw">is.na</span>(ds$username  )) ==<span class="st"> </span>0L)
+testit::<span class="kw">assert</span>(<span class="st">&quot;All `project_id` values must be nonmissing.&quot;</span> , <span class="kw">sum</span>(<span class="kw">is.na</span>(ds$project_id)) ==<span class="st"> </span>0L)
+testit::<span class="kw">assert</span>(<span class="st">&quot;All `token` values must be nonmissing.&quot;</span>      , <span class="kw">sum</span>(<span class="kw">is.na</span>(ds$token     )) ==<span class="st"> </span>0L)
+testit::<span class="kw">assert</span>(<span class="st">&quot;All `instance` values must be nonmissing.&quot;</span>   , <span class="kw">sum</span>(<span class="kw">is.na</span>(ds$instance  )) ==<span class="st"> </span>0L)
+testit::<span class="kw">assert</span>(<span class="st">&quot;All `redcap_uri` values must be nonmissing.&quot;</span> , <span class="kw">sum</span>(<span class="kw">is.na</span>(ds$redcap_uri)) ==<span class="st"> </span>0L)
+
+testit::<span class="kw">assert</span>(<span class="st">&quot;The `token` must be unique.&quot;</span>, <span class="kw">sum</span>(<span class="kw">duplicated</span>(ds$token)) ==<span class="st"> </span>0L)
+testit::<span class="kw">assert</span>(
+  <span class="st">&quot;The `username` x `project_id` x `instance` must be unique.&quot;</span>,
+  <span class="kw">sum</span>(<span class="kw">duplicated</span>(<span class="kw">paste0</span>(ds$username, <span class="st">&quot;-&quot;</span>, ds$project_id, <span class="st">&quot;-&quot;</span>, ds$instance))) ==<span class="st"> </span>0L
+)
+
+testit::<span class="kw">assert</span>(<span class="st">&quot;There should be at least 10 tokens written.&quot;</span> , <span class="kw">nrow</span>(ds) &gt;=<span class="st"> </span>10L)
+
+
+<span class="co"># ---- specify-columns-to-upload -----------------------------------------------</span>
+
+<span class="co"># Dictate the exact columns and order that will be uploaded.</span>
+columns_to_write &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;id&quot;</span>, <span class="st">&quot;username&quot;</span>, <span class="st">&quot;project_id&quot;</span>, <span class="st">&quot;instance&quot;</span>, <span class="st">&quot;token&quot;</span>, <span class="st">&quot;redcap_uri&quot;</span>)
+ds_slim &lt;-<span class="st"> </span>ds[, columns_to_write]
+
+<span class="kw">rm</span>(columns_to_write)
+
+
+<span class="co"># ---- upload-to-db-credential ------------------------------------------------------------</span>
+
+<span class="co">#Upload to SQL Server through ODBC.</span>
+(start_time &lt;-<span class="st"> </span><span class="kw">Sys.time</span>())
+
+db_table         &lt;-<span class="st"> &quot;RedcapPrivate.tbl_credential&quot;</span>
+channel          &lt;-<span class="st"> </span>RODBC::<span class="kw">odbcConnect</span>(<span class="st">&quot;BbmcSecurity&quot;</span>) <span class="co">#getSqlTypeInfo(&quot;Microsoft SQL Server&quot;) #;odbcGetInfo(channel)</span>
+
+column_info      &lt;-<span class="st"> </span>RODBC::<span class="kw">sqlColumns</span>(channel, db_table)
+var_types        &lt;-<span class="st"> </span><span class="kw">as.character</span>(column_info$TYPE_NAME)
+<span class="kw">names</span>(var_types) &lt;-<span class="st"> </span><span class="kw">as.character</span>(column_info$COLUMN_NAME)  <span class="co">#var_types</span>
+
+RODBC::<span class="kw">sqlClear</span>(channel, db_table)
+RODBC::<span class="kw">sqlSave</span>(channel, ds_slim, db_table, <span class="dt">append=</span><span class="ot">TRUE</span>, <span class="dt">rownames=</span><span class="ot">FALSE</span>, <span class="dt">fast=</span><span class="ot">TRUE</span>, <span class="dt">varTypes=</span>var_types)
+RODBC::<span class="kw">odbcClose</span>(channel); <span class="kw">rm</span>(channel)
+
+(elapsed_duration &lt;-<span class="st">  </span><span class="kw">Sys.time</span>() -<span class="st"> </span>start_time) <span class="co">#0.6026149 secs 2016-08-29.</span>
+<span class="kw">rm</span>(db_table, column_info, var_types, start_time, elapsed_duration)</code></pre></div>
+</div>
 <div id="document-info" class="section level1">
 <h1>Document Info</h1>
 <p>This document is primarily based on REDCap version 6.11.5, and was last updated 2016-08-30. A development version of the document is available on GitHub: <a href="https://cdn.rawgit.com/OuhscBbmc/REDCapR/dev/inst/doc/SecurityDatabase.html" class="uri">https://cdn.rawgit.com/OuhscBbmc/REDCapR/dev/inst/doc/SecurityDatabase.html</a></p>
