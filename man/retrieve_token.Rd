@@ -28,7 +28,7 @@ retrieve_token_mssql(dsn, project_name, channel = NULL,
 The token, which is a 32 character string.
 }
 \description{
-These functions are not essential to calling the REDCap API, but instead are functions that help manage tokens securely.
+This function will soon be deprecated; please transition to \code{retrieve_token_mssql()}. These functions are not essential to calling the REDCap API, but instead are functions that help manage tokens securely.
 }
 \details{
 If no \code{channel} is passed, one will be created at the beginning of the function, and destroyed at the end.  However if a channel
@@ -45,6 +45,11 @@ If the database elements are create with the script provided in package's `Secur
 We use Microsoft SQL Server, because that fits our University's infrastructure the easiest.  But this approach theoretically can work
 with any LDAP-enabled database server.  Please contact us if your institution is using something other than SQL Server, and 
 would like help adapting this approach to your infrastructure.
+
+There's a lot of error checking for SQL injection, but remember that the user is executing under their 
+own credentials, so this doesn't obviate the need for disciplined credential management.  There's nothing 
+that can be done with this R function that isn't already exposed by any other interface intot he database 
+(eg, SQL Server Managment Studio, or MySQL Workbench.)
 }
 \examples{
 library(REDCapR) #Load the package into the current R session.

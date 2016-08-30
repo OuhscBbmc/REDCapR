@@ -55,11 +55,6 @@ Although we strongly encourage storing all the tokens on a central server (\emph
 when this approach is not feasible and the token must be stored locally.  Please contact us 
 if your institution is using something other than SQL Server, and 
 would like help adapting this approach to your infrastructure.
-
-#There's a lot of error checking for SQL injection, but remember that the user is executing under their 
-own credentials, so this doesn't obviate the need for disciplined credential management.  There's nothing 
-that can be done with this R function that isn't already exposed by any other interface intot he database 
-(eg, SQL Server Managment Studio, or MySQL Workbench.)
 }
 \examples{
 library(REDCapR) #Load the package into the current R session.

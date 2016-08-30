@@ -41,11 +41,6 @@
 #' if your institution is using something other than SQL Server, and 
 #' would like help adapting this approach to your infrastructure.
 #' 
-#' #There's a lot of error checking for SQL injection, but remember that the user is executing under their 
-#' own credentials, so this doesn't obviate the need for disciplined credential management.  There's nothing 
-#' that can be done with this R function that isn't already exposed by any other interface intot he database 
-#' (eg, SQL Server Managment Studio, or MySQL Workbench.)
-#' 
 #' @author Will Beasley
 #'
 #' @examples
@@ -157,21 +152,13 @@ retrieve_credential_mssql <- function(
   if( !grepl(regex_pattern_2, procedure_name) ) 
     stop("The 'procedure_name' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets.")
 
-  variable_name_project_id <- "@project_id"
-  variable_name_instance   <- "@instance"
-  field_name_token         <- "token"
+
+  sql <- "EXEC [redcap].[prc_credential] @project_id = ?, @instance = ?" 
   
-  if( !grepl(regex_pattern_3, variable_name_project_id) ) 
-    stop("The 'variable_name_project_id' parameter must start with a '@' and then contain only letters, numbers, and underscores.  It may optionally have a leading ampersand.")
-  
-  if( !grepl(regex_pattern_3, variable_name_instance) ) 
-    stop("The 'variable_name_instance' parameter must start with a '@' and then contain only letters, numbers, and underscores.  It may optionally have a leading ampersand.")
-  
-  sql <- base::sprintf(
-    "EXEC %s.%s %s=%s, %s='%s'", 
-    schema_name             , procedure_name, 
-    variable_name_project_id, project_id, 
-    variable_name_instance  , instance
+  d_input <- data.frame(
+    project_id         = project_id,
+    instance           = instance,
+    stringsAsFactors   = FALSE
   )
 
   if( base::missing(channel) | base::is.null(channel) ) {
@@ -186,7 +173,7 @@ retrieve_credential_mssql <- function(
 
   base::tryCatch(
     expr = {
-      ds_credential <- RODBC::sqlQuery(channel, sql, stringsAsFactors=FALSE)
+      ds_credential <- RODBCext::sqlExecute(channel, sql, d_input, fetch=TRUE, stringsAsFactors=FALSE)
     }, finally = {
       if( close_channel_on_exit ) RODBC::odbcClose(channel)
     }
