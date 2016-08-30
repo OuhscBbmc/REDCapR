@@ -62,6 +62,7 @@ retrieve_token_mssql <- function(
   variable_name_project    = "@RedcapProjectName",
   field_name_token         = "Token"
 ) {
+  message("REDCapR::retrieve_token_mssql() is deprecated: please use REDCapR::retrieve_credential_mssql() instead")
 
   if( !requireNamespace("RODBC", quietly=TRUE) ) 
     stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBC` package is not installed.  Please install it and try again.")
