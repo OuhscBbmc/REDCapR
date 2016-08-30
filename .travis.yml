@@ -3,11 +3,16 @@ language: r
 sudo: required
 cache: packages
 warnings_are_errors: true
+
+addons:
+  apt:
+    packages:
+      - unixodbc-dev
+      
 apt_packages:
   - r-cran-rodbc
 r_github_packages:
   - jimhester/covr
-  - zozlak/RODBCext
 # - hadley/testthat
 after_success:
   - Rscript -e 'library(covr);coveralls()'
