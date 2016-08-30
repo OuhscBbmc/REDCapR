@@ -75,7 +75,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="description" class="section level1">
 <h1>Description</h1>
 <p>The SQL code below adds schemas, a table and two stored procedures to an existing Microsoft SQL Database. This second database is not essential to calling the REDCap API, but it helps manage tokens securely.</p>
-<p>This database contains the tokens and other sensitive content (such as passwords, API tokens, and file paths) that should not be stored in a Git repository (even a private Git repository). These passwords can be retrieved by <code>REDCapR::retrieve_token_mssql()</code>.</p>
+<p>This database contains the tokens and other sensitive content (such as passwords, API tokens, and file paths) that should not be stored in a Git repository (even a private Git repository). These passwords can be retrieved by <code>REDCapR::retrieve_credential_mssql()</code>.</p>
 </div>
 <div id="create-a-dsn-on-each-client" class="section level1">
 <h1>Create a DSN on each client</h1>
@@ -88,16 +88,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="note" class="section level1">
 <h1>Note</h1>
-<p>We use Microsoft SQL Server, because that fits our University’s infrastructure the easiest. But this approach theoretically can work with any LDAP-enabled database server. Please contact us if your institution is using something other than SQL Server, and would like help adapting this approach to your infrastructure.</p>
+<p>We use Microsoft SQL Server, because that fits our University’s infrastructure the easiest. But this approach theoretically can work with any LDAP-enabled database server. Please contact us if your institution is using something other than SQL Server (or a different configuration of these components), and would like help adapting this approach to your infrastructure.</p>
 </div>
 <div id="create-database" class="section level1">
 <h1>Create Database</h1>
-<p>This SQL code is run once inside an existing database to establish the schemas, table, and stored procedure used by <code>REDCapR::retrieve_token_mssql()</code>.</p>
+<p>This SQL code is run once inside an existing database to establish the schemas, table, and stored procedure used by <code>REDCapR::retrieve_credential_mssql()</code>.</p>
 <div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="co">------- SQL code to create necessary components in a Microsoft SQL Sever database -------</span>
 
 <span class="co">-----------------------------------------------------------------------</span>
 <span class="co">-- Create two schemas.  </span>
-<span class="co">-- The first scehma is accessible by all REDCap API users. </span>
+<span class="co">-- The first scehma is accessible by all REDCap API users.</span>
 <span class="co">-- The second scehma is restricted to administrators.</span>
 <span class="co">--</span>
 <span class="kw">CREATE</span> <span class="kw">SCHEMA</span> [redcap]
@@ -114,7 +114,7 @@ GO
     [<span class="kw">instance</span>] [<span class="dt">varchar</span>](<span class="dv">30</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
     [token] [<span class="dt">char</span>](<span class="dv">32</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
     [redcap_uri] [<span class="dt">varchar</span>](<span class="dv">255</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
- <span class="kw">CONSTRAINT</span> [PK_credential] <span class="kw">PRIMARY</span> <span class="kw">KEY</span> CLUSTERED 
+ <span class="kw">CONSTRAINT</span> [PK_credential] <span class="kw">PRIMARY</span> <span class="kw">KEY</span> CLUSTERED
 (
     [<span class="kw">id</span>] <span class="kw">ASC</span>
 )<span class="kw">WITH</span> (PAD_INDEX = <span class="kw">OFF</span>, STATISTICS_NORECOMPUTE = <span class="kw">OFF</span>, IGNORE_DUP_KEY = <span class="kw">OFF</span>, ALLOW_ROW_LOCKS = <span class="kw">ON</span>, ALLOW_PAGE_LOCKS = <span class="kw">ON</span>) <span class="kw">ON</span> [<span class="kw">PRIMARY</span>]
@@ -134,9 +134,9 @@ GO
 <span class="co">--</span>
 <span class="kw">CREATE</span> <span class="kw">PROCEDURE</span> [redcap].[prc_credential]
     <span class="co">-- Add the parameters for the stored procedure here</span>
-    
+
     @project_id <span class="dt">smallint</span>,
-    @instance <span class="dt">varchar</span>(<span class="dv">10</span>)
+    @instance <span class="dt">varchar</span>(<span class="dv">30</span>)
 <span class="kw">AS</span>
 <span class="kw">BEGIN</span>
     <span class="co">-- SET NOCOUNT ON added to prevent extra result sets from</span>
@@ -162,52 +162,52 @@ GO
 <span class="co">-----------------------------------------------------------------------</span>
 
 <span class="co">-- STEP #1: Declare the user name.  If everything runs correctly, this should be the only piece of code that you need to modify.</span>
-print <span class="st">'Step #1 executing....'</span> 
+print <span class="st">'Step #1 executing....'</span>
 <span class="kw">USE</span> [<span class="kw">master</span>]
 GO
 <span class="kw">DECLARE</span> @qualified_user_name <span class="dt">varchar</span>(<span class="dv">255</span>); <span class="kw">SET</span> @qualified_user_name = <span class="st">'[OUHSC\lsuarez3]'</span>
-print <span class="st">'Resulting login name: '</span> + @qualified_user_name; print <span class="st">''</span> 
+print <span class="st">'Resulting login name: '</span> + @qualified_user_name; print <span class="st">''</span>
 
 <span class="co">--EXEC sp_helplogins @LoginNamePattern=@qualified_user_name</span>
 <span class="co">--SELECT * FROM master..syslogins WHERE name = @qualified_user_name</span>
-<span class="co">--SELECT * FROM auxiliary_security.sys.sysusers </span>
+<span class="co">--SELECT * FROM auxiliary_security.sys.sysusers</span>
 <span class="co">--SELECT * FROM sys.database_permissions</span>
 <span class="co">--SELECT * FROM sys.server_principals</span>
 
 <span class="co">-----------------------------------------------------------------------</span>
 <span class="co">-- STEP #2: Create a login for the *server*.</span>
-print <span class="st">'Step #2 executing....'</span> 
+print <span class="st">'Step #2 executing....'</span>
 <span class="kw">DECLARE</span> @sql_create_login <span class="dt">nvarchar</span>(<span class="fu">max</span>)
 <span class="kw">SET</span> @sql_create_login = <span class="st">'CREATE LOGIN '</span> + @qualified_user_name + <span class="st">' FROM WINDOWS WITH DEFAULT_DATABASE=[auxiliary_security]'</span>
 <span class="kw">EXECUTE</span> sp_executesql @sql_create_login
 <span class="kw">DECLARE</span> @login_count <span class="kw">AS</span> <span class="dt">INT</span>; <span class="kw">SET</span> @login_count = (<span class="kw">SELECT</span> <span class="fu">COUNT</span>(*) <span class="kw">AS</span> login_count <span class="kw">FROM</span> master..syslogins <span class="kw">WHERE</span> <span class="st">'['</span> + loginname + <span class="st">']'</span> = @qualified_user_name)
-print <span class="st">'Logins matching desired name should equal 1.  It equals: '</span> + <span class="fu">CONVERT</span>(<span class="dt">varchar</span>, @login_count); print <span class="st">''</span> 
+print <span class="st">'Logins matching desired name should equal 1.  It equals: '</span> + <span class="fu">CONVERT</span>(<span class="dt">varchar</span>, @login_count); print <span class="st">''</span>
 
 <span class="co">-----------------------------------------------------------------------</span>
 <span class="co">-- STEP #3: Create a user account for the *data base*, after switching the database under focus to auxiliary_security.</span>
-print <span class="st">'Step #3 executing....'</span> 
+print <span class="st">'Step #3 executing....'</span>
 <span class="kw">USE</span> [auxiliary_security]
 <span class="kw">DECLARE</span> @sql_create_user <span class="dt">nvarchar</span>(<span class="fu">max</span>)
 <span class="kw">SET</span> @sql_create_user = <span class="st">'CREATE USER '</span> + @qualified_user_name + <span class="st">' FOR LOGIN '</span> + @qualified_user_name
 <span class="kw">EXECUTE</span> sp_executesql @sql_create_user
 <span class="kw">DECLARE</span> @user_count <span class="kw">AS</span> <span class="dt">INT</span>; <span class="kw">SET</span> @user_count = (<span class="kw">SELECT</span> <span class="fu">COUNT</span>(*) <span class="kw">AS</span> user_count <span class="kw">FROM</span> auxiliary_security.sys.sysusers <span class="kw">WHERE</span> <span class="st">'['</span> + name + <span class="st">']'</span> = @qualified_user_name)
-print <span class="st">'User accounts matching desired name should equal 1.  It equals: '</span> + <span class="fu">CONVERT</span>(<span class="dt">varchar</span>, @user_count); print <span class="st">''</span> 
+print <span class="st">'User accounts matching desired name should equal 1.  It equals: '</span> + <span class="fu">CONVERT</span>(<span class="dt">varchar</span>, @user_count); print <span class="st">''</span>
 
 <span class="co">-----------------------------------------------------------------------</span>
 <span class="co">-- STEP #4: Grant appropriate privileges for the 'redcap' schema.</span>
-print <span class="st">'Step #4 executing....'</span> 
+print <span class="st">'Step #4 executing....'</span>
 <span class="kw">DECLARE</span> @sql_grant_schema_redcap <span class="dt">nvarchar</span>(<span class="fu">max</span>)
-<span class="kw">SET</span> @sql_grant_schema_redcap = <span class="st">'GRANT EXECUTE ON SCHEMA::[redcap] TO '</span> + @qualified_user_name 
+<span class="kw">SET</span> @sql_grant_schema_redcap = <span class="st">'GRANT EXECUTE ON SCHEMA::[redcap] TO '</span> + @qualified_user_name
 <span class="kw">EXECUTE</span> sp_executesql @sql_grant_schema_redcap
-print <span class="st">'Step #4 executed'</span>; print <span class="st">''</span> 
+print <span class="st">'Step #4 executed'</span>; print <span class="st">''</span>
 
 <span class="co">-----------------------------------------------------------------------</span>
 <span class="co">-- STEP #5: Grant appropriate privileges for the 'Security' schema.</span>
-print <span class="st">'Step #5 executing....'</span> 
+print <span class="st">'Step #5 executing....'</span>
 <span class="kw">DECLARE</span> @sql_grant_schema_security <span class="dt">nvarchar</span>(<span class="fu">max</span>)
-<span class="kw">SET</span> @sql_grant_schema_security = <span class="st">'GRANT EXECUTE ON SCHEMA::[security] TO '</span> + @qualified_user_name 
+<span class="kw">SET</span> @sql_grant_schema_security = <span class="st">'GRANT EXECUTE ON SCHEMA::[security] TO '</span> + @qualified_user_name
 <span class="kw">EXECUTE</span> sp_executesql @sql_grant_schema_security
-print <span class="st">'Step #5 executed'</span>; print <span class="st">''</span> 
+print <span class="st">'Step #5 executed'</span>; print <span class="st">''</span>
 
 <span class="co">-----------------------------------------------------------------------</span>
 <span class="co">-- OPTIONAL STEP: Delete the user from the database (the first line) and then the server (the second line).  </span>
@@ -230,7 +230,12 @@ print <span class="st">'Step #5 executed'</span>; print <span class="st">''</spa
 </div>
 <div id="transfer-credentials" class="section level1">
 <h1>Transfer Credentials</h1>
-<p>Manually transfer tokens to the auxiliary server becomes unmanageable as your institution’s collection of API users grows. This script demonstrates how to progamtically transfer all tokens from multiple REDCap instances on your network. The basic steps are 1. Read from the MySQL database underneath each REDCap instance. 1. Combine &amp; groom the credentials. 1. Upload to SQL Server.</p>
+<p>Manually transfer tokens to the auxiliary server becomes unmanageable as your institution’s collection of API users grows. This script demonstrates how to progamatically transfer all tokens from multiple REDCap instances on your network. The basic steps are:</p>
+<ol style="list-style-type: decimal">
+<li>Read from the MySQL database underneath each REDCap instance.</li>
+<li>Combine &amp; groom the credentials.</li>
+<li>Upload to SQL Server.</li>
+</ol>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>(<span class="dt">all=</span><span class="ot">TRUE</span>)) <span class="co">#Clear the memory for any variables set from any previous runs.</span>
 
 <span class="co"># ---- load-sources ------------------------------------------------------------</span>
@@ -244,7 +249,7 @@ print <span class="st">'Step #5 executed'</span>; print <span class="st">''</spa
 <span class="co"># ---- declare-globals ---------------------------------------------------------</span>
 
 <span class="co"># The Activity Directory name that should precede each username.</span>
-<span class="co">#   This should correspond with the result of `SYSTEM_USER` </span>
+<span class="co">#   This should correspond with the result of `SYSTEM_USER`</span>
 <span class="co">#   (https://msdn.microsoft.com/en-us/library/ms179930.aspx)</span>
 ldap_prefix &lt;-<span class="st"> &quot;OUHSC</span><span class="ch">\\</span><span class="st">&quot;</span>  
 

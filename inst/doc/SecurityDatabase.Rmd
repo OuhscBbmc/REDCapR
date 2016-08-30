@@ -13,7 +13,7 @@ Description
 
 The SQL code below adds schemas, a table and two stored procedures to an existing Microsoft SQL Database.  This second database is not essential to calling the REDCap API, but it helps manage tokens securely.
 
-This database contains the tokens and other sensitive content (such as passwords, API tokens, and file paths) that should not be stored in a Git repository (even a private Git repository).  These passwords can be retrieved by `REDCapR::retrieve_token_mssql()`.
+This database contains the tokens and other sensitive content (such as passwords, API tokens, and file paths) that should not be stored in a Git repository (even a private Git repository).  These passwords can be retrieved by `REDCapR::retrieve_credential_mssql()`.
 
 
 Create a DSN on each client
@@ -29,20 +29,20 @@ After executing the SQL code in an existing database, create an ODBC [DSN](http:
 Note
 ========================================
 
-We use Microsoft SQL Server, because that fits our University's infrastructure the easiest.  But this approach theoretically can work with any LDAP-enabled database server.  Please contact us if your institution is using something other than SQL Server, and would like help adapting this approach to your infrastructure.
+We use Microsoft SQL Server, because that fits our University's infrastructure the easiest.  But this approach theoretically can work with any LDAP-enabled database server.  Please contact us if your institution is using something other than SQL Server (or a different configuration of these components), and would like help adapting this approach to your infrastructure.
 
 
 Create Database
 ========================================
 
-This SQL code is run once inside an existing database to establish the schemas, table, and stored procedure used by `REDCapR::retrieve_token_mssql()`.
+This SQL code is run once inside an existing database to establish the schemas, table, and stored procedure used by `REDCapR::retrieve_credential_mssql()`.
 
 ```sql
 ------- SQL code to create necessary components in a Microsoft SQL Sever database -------
 
 -----------------------------------------------------------------------
 -- Create two schemas.  
--- The first scehma is accessible by all REDCap API users. 
+-- The first scehma is accessible by all REDCap API users.
 -- The second scehma is restricted to administrators.
 --
 CREATE SCHEMA [redcap]
@@ -59,7 +59,7 @@ CREATE TABLE [redcap_private].[tbl_credential](
 	[instance] [varchar](30) NOT NULL,
 	[token] [char](32) NOT NULL,
 	[redcap_uri] [varchar](255) NOT NULL,
- CONSTRAINT [PK_credential] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_credential] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -79,9 +79,9 @@ GO
 --
 CREATE PROCEDURE [redcap].[prc_credential]
 	-- Add the parameters for the stored procedure here
-	
+
 	@project_id smallint,
-	@instance varchar(10)
+	@instance varchar(30)
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -117,52 +117,52 @@ Also, do not give typical users authorization for the 'redcap_private' schema.  
 -----------------------------------------------------------------------
 
 -- STEP #1: Declare the user name.  If everything runs correctly, this should be the only piece of code that you need to modify.
-print 'Step #1 executing....' 
+print 'Step #1 executing....'
 USE [master]
 GO
 DECLARE @qualified_user_name varchar(255); SET @qualified_user_name = '[OUHSC\lsuarez3]'
-print 'Resulting login name: ' + @qualified_user_name; print '' 
+print 'Resulting login name: ' + @qualified_user_name; print ''
 
 --EXEC sp_helplogins @LoginNamePattern=@qualified_user_name
 --SELECT * FROM master..syslogins WHERE name = @qualified_user_name
---SELECT * FROM auxiliary_security.sys.sysusers 
+--SELECT * FROM auxiliary_security.sys.sysusers
 --SELECT * FROM sys.database_permissions
 --SELECT * FROM sys.server_principals
 
 -----------------------------------------------------------------------
 -- STEP #2: Create a login for the *server*.
-print 'Step #2 executing....' 
+print 'Step #2 executing....'
 DECLARE @sql_create_login nvarchar(max)
 SET @sql_create_login = 'CREATE LOGIN ' + @qualified_user_name + ' FROM WINDOWS WITH DEFAULT_DATABASE=[auxiliary_security]'
 EXECUTE sp_executesql @sql_create_login
 DECLARE @login_count AS INT; SET @login_count = (SELECT COUNT(*) AS login_count FROM master..syslogins WHERE '[' + loginname + ']' = @qualified_user_name)
-print 'Logins matching desired name should equal 1.  It equals: ' + CONVERT(varchar, @login_count); print '' 
+print 'Logins matching desired name should equal 1.  It equals: ' + CONVERT(varchar, @login_count); print ''
 
 -----------------------------------------------------------------------
 -- STEP #3: Create a user account for the *data base*, after switching the database under focus to auxiliary_security.
-print 'Step #3 executing....' 
+print 'Step #3 executing....'
 USE [auxiliary_security]
 DECLARE @sql_create_user nvarchar(max)
 SET @sql_create_user = 'CREATE USER ' + @qualified_user_name + ' FOR LOGIN ' + @qualified_user_name
 EXECUTE sp_executesql @sql_create_user
 DECLARE @user_count AS INT; SET @user_count = (SELECT COUNT(*) AS user_count FROM auxiliary_security.sys.sysusers WHERE '[' + name + ']' = @qualified_user_name)
-print 'User accounts matching desired name should equal 1.  It equals: ' + CONVERT(varchar, @user_count); print '' 
+print 'User accounts matching desired name should equal 1.  It equals: ' + CONVERT(varchar, @user_count); print ''
 
 -----------------------------------------------------------------------
 -- STEP #4: Grant appropriate privileges for the 'redcap' schema.
-print 'Step #4 executing....' 
+print 'Step #4 executing....'
 DECLARE @sql_grant_schema_redcap nvarchar(max)
-SET @sql_grant_schema_redcap = 'GRANT EXECUTE ON SCHEMA::[redcap] TO ' + @qualified_user_name 
+SET @sql_grant_schema_redcap = 'GRANT EXECUTE ON SCHEMA::[redcap] TO ' + @qualified_user_name
 EXECUTE sp_executesql @sql_grant_schema_redcap
-print 'Step #4 executed'; print '' 
+print 'Step #4 executed'; print ''
 
 -----------------------------------------------------------------------
 -- STEP #5: Grant appropriate privileges for the 'Security' schema.
-print 'Step #5 executing....' 
+print 'Step #5 executing....'
 DECLARE @sql_grant_schema_security nvarchar(max)
-SET @sql_grant_schema_security = 'GRANT EXECUTE ON SCHEMA::[security] TO ' + @qualified_user_name 
+SET @sql_grant_schema_security = 'GRANT EXECUTE ON SCHEMA::[security] TO ' + @qualified_user_name
 EXECUTE sp_executesql @sql_grant_schema_security
-print 'Step #5 executed'; print '' 
+print 'Step #5 executed'; print ''
 
 -----------------------------------------------------------------------
 -- OPTIONAL STEP: Delete the user from the database (the first line) and then the server (the second line).  
@@ -183,10 +183,11 @@ print 'Step #5 executed'; print ''
 	--A different (& non-dynamic) way to establish a user: http://pic.dhe.ibm.com/infocenter/dmndhelp/v8r5m0/index.jsp?topic=%2Fcom.ibm.wbpm.imuc.sbpm.doc%2Ftopics%2Fdb_create_users_nd_aix.html
 	--If the variable has to cross a 'GO' (which the current version of the script doesn't need): http://stackoverflow.com/questions/937336/is-there-a-way-to-persist-a-variable-across-a-go
 ```
- 
+
 Transfer Credentials
 ========================================
-Manually transfer tokens to the auxiliary server becomes unmanageable as your institution's collection of API users grows.  This script demonstrates how to progamtically transfer all tokens from multiple REDCap instances on your network.  The basic steps are
+Manually transfer tokens to the auxiliary server becomes unmanageable as your institution's collection of API users grows.  This script demonstrates how to progamatically transfer all tokens from multiple REDCap instances on your network.  The basic steps are:
+
 1. Read from the MySQL database underneath each REDCap instance.
 1. Combine & groom the credentials.
 1. Upload to SQL Server.
@@ -205,7 +206,7 @@ requireNamespace("readr")
 # ---- declare-globals ---------------------------------------------------------
 
 # The Activity Directory name that should precede each username.
-#   This should correspond with the result of `SYSTEM_USER` 
+#   This should correspond with the result of `SYSTEM_USER`
 #   (https://msdn.microsoft.com/en-us/library/ms179930.aspx)
 ldap_prefix <- "OUHSC\\"  
 
