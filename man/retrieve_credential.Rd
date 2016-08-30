@@ -11,8 +11,8 @@ retrieve_credential_local(
   check_username=FALSE, check_token_pattern=TRUE
 )
 retrieve_credential_mssql(
-  dsn, project_id, channel=NULL, schema_name="[Redcap]", 
-  procedure_name="[prc_credential]"
+  dsn, project_id, instance,
+  channel=NULL, schema_name="[Redcap]", procedure_name="[prc_credential]"
 )
 }
 \arguments{
@@ -25,6 +25,8 @@ retrieve_credential_mssql(
 \item{check_username}{A \code{logical} value indicates if the username in the credential file should be checked against the username returned by R.  Defaults to FALSE.}
 
 \item{check_token_pattern}{A \code{logical} value indicates if the token in the credential file is a 32-character hexadecimal string.  Defaults to FALSE.}
+
+\item{instance}{The casual name associated with the REDCap instance on campus.  This allows one credential system to accommodate multiple instances on campus.  Required}
 
 \item{dsn}{A \href{http://en.wikipedia.org/wiki/Data_source_name}{DSN} on the local machine that points to the desired MSSQL database. Required.}
 
