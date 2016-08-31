@@ -26,7 +26,7 @@ opts_chunk$set(
 ```
 
 ### Set project-wide values.
-There is some information that is specific to the REDCap project, as opposed to an individual operation.  This includes the (1) uri of the server, and the (2) token for the user's project.  
+There is some information that is specific to the REDCap project, as opposed to an individual operation.  This includes the (1) uri of the server, and the (2) token for the user's project.
 
 ```{r project_values}
 library(REDCapR) #Load the package into the current R session.
