@@ -28,19 +28,9 @@
 #'  \item \code{raw_text}: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
 #' }
 #' @details 
-#' I like how \href{https://github.com/redcap-tools/PyCap}{PyCap} creates a `project' object with methods that read and write from REDCap.  However this isn't a style that R clients typically use.
-#' I like the logic that it's associated with a particular REDCap project that shouldn't change between calls.
-#' As a compromise, I think I'll wrap the uri, token, and cert location into a single \code{S4} object that's passed to these methods.  It will make these calls take less space.  
-#' 
 #' The full list of configuration options accepted by the \code{httr} package is viewable by executing \code{httr::httr_options()}.  The \code{httr}
 #' package and documentation is available at \url{http://cran.r-project.org/package=httr}.
 #' 
-#' The `REDCapR' package includes a recent version of the \href{http://curl.haxx.se/ca/cacert.pem}{Bundle of CA Root Certificates} 
-#' from the official \href{http://curl.haxx.se}{cURL site}.  This version is used by default, unless the `config_options` argument is
-#' given a value; in this case, the user is responsible for passing the location of the cert file if SSL verification is desired.
-#' See the examples below for one example of using a different SSL cert, and one example of avoiding SSL entirely.  Avoiding SSL
-#' is suggested only for debugging purposes, and not for production code.
-#'  
 #' If you do not pass in this export_data_access_groups value, it will default to \code{FALSE}. The following is from the API help page for version 5.2.3: This flag is only viable if the user whose token is being used to make the API request is *not* in a data access group. If the user is in a group, then this flag will revert to its default value.
 #' @author Will Beasley
 #' @references The official documentation can be found on the `API Help Page` and `API Examples' pages 
@@ -75,14 +65,16 @@
 #' )$data
 #' 
 #' 
-#' #Use the SSL cert file that come with the httr package.
-#' cert_location <- system.file("cacert.pem", package="httr")
-#' config_options <- list(cainfo=cert_location)
-#' ds_different_cert_file <- redcap_read_oneshot(
-#'    redcap_uri = uri,
-#'    token = token, 
-#'    config_options = config_options
-#' )$data
+#' #Use the SSL cert file that come with the openssl package.
+#' cert_location <- system.file("cacert.pem", package="openssl")
+#' if( file.exists(cert_location) ) {
+#'   config_options <- list(cainfo=cert_location)
+#'   ds_different_cert_file <- redcap_read_oneshot(
+#'     redcap_uri = uri,
+#'     token = token, 
+#'     config_options = config_options
+#'   )$data
+#' }
 #' 
 #' #Force the connection to use SSL=3 (which is not preferred, and possibly insecure).
 #' config_options <- list(sslversion=3)

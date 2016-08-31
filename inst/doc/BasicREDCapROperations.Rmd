@@ -26,9 +26,7 @@ opts_chunk$set(
 ```
 
 ### Set project-wide values.
-There is some information that is specific to the REDCap project, as opposed to an individual operation.  This includes the (1) uri of the server, the (2) token for the user's project, and the (3) location of the SSL certification store, which is necessary to verify the identity of the REDCap webserver.  
-
-The `REDCapR` package includes a recent version of the [Bundle of CA Root Certificates](http://curl.haxx.se/ca/cacert.pem) from the official [cURL site](http://curl.haxx.se).  This version is used by default, unless the `cert_location` parameter is given another location.
+There is some information that is specific to the REDCap project, as opposed to an individual operation.  This includes the (1) uri of the server, and the (2) token for the user's project.  
 
 ```{r project_values}
 library(REDCapR) #Load the package into the current R session.
