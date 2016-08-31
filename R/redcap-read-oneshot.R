@@ -181,7 +181,7 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
     
     #TODO #80: catch variant of ' The.hostname..redcap.db.hsc.net.ou.edu....username..redcapsql....password..XXXXXX..combination.could.not.connect.to.the.MySQL.server. \t\tPlease check their values.'
     
-    if( exists("ds") & (class(ds)=="data.frame") ) {
+    if( exists("ds") & inherits(ds, "data.frame") ) {
       outcome_message <- paste0(format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
                          " records and ",  
                          format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
