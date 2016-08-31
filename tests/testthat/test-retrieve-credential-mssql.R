@@ -8,7 +8,7 @@ test_that("Missing DSN", {
   
   expect_error(
     regexp = expected_message,
-    object = REDCapR::retrieve_credential_mssql(dsn=NULL, pid_read, "dev", channel=NULL)
+    object = REDCapR::retrieve_credential_mssql(pid_read, "dev")
   )
   
 })
@@ -19,7 +19,7 @@ test_that("Bad project ID", {
   #Digits with letters
   expect_error(
     regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(dsn=NULL, -2L, "dev", channel=NULL)
+    REDCapR::retrieve_credential_mssql(-2L, "dev")
   )
   
 })
@@ -29,19 +29,19 @@ test_that("Bad instance name", {
   #dashes #1
   expect_error(
     regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(dsn=NULL, pid_read, instance="234 --DROP tbl_bobby", channel=NULL)
+    REDCapR::retrieve_credential_mssql(pid_read, instance="234 --DROP tbl_bobby")
   )
   
   #dashes #2
   expect_error(
     regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(dsn=NULL, pid_read, instance="234 --332", channel=NULL)
+    REDCapR::retrieve_credential_mssql(pid_read, instance="234 --332")
   )
   
   #Blank
   expect_error(
     regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(dsn=NULL, pid_read, instance="", channel=NULL)
+    REDCapR::retrieve_credential_mssql(pid_read, instance="")
   )
 })
 
@@ -51,13 +51,13 @@ test_that("pid wrong length", {
   #empty
   expect_error(
     regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(dsn=NULL, project_id=integer(0), instance="234 --DROP tbl_bobby", channel=NULL)
+    REDCapR::retrieve_credential_mssql(project_id=integer(0), instance="234 --DROP tbl_bobby")
   )
   
   #too many
   expect_error(
     regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(dsn=NULL, project_id=integer(2), instance="234 --DROP tbl_bobby", channel=NULL)
+    REDCapR::retrieve_credential_mssql(project_id=integer(2), instance="234 --DROP tbl_bobby")
   )
 })
 
@@ -67,13 +67,13 @@ test_that("instance wrong length", {
   #empty
   expect_error(
     regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(dsn=NULL, pid_read, instance=character(0), channel=NULL)
+    REDCapR::retrieve_credential_mssql(pid_read, instance=character(0))
   )
   
   #too many
   expect_error(
     regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(dsn=NULL, pid_read, instance=character(2), channel=NULL)
+    REDCapR::retrieve_credential_mssql(pid_read, instance=character(2))
   )
 })
 
@@ -113,13 +113,13 @@ test_that("bad type: DSN name", {
   #integer
   expect_error(
     regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(dsn=integer(1), pid_read, instance="dev", channel=NULL)
+    REDCapR::retrieve_credential_mssql(dsn=integer(1), pid_read, instance="dev")
   )
   
   #numeric
   expect_error(
     regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(dsn=integer(1), pid_read, instance="dev", channel=NULL)
+    REDCapR::retrieve_credential_mssql(dsn=integer(1), pid_read, instance="dev")
   )
 })
 
