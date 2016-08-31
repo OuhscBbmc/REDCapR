@@ -19,32 +19,9 @@ test_that("Bad project ID", {
   #Digits with letters
   expect_error(
     regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(dsn=NULL, "asdf32", "dev", channel=NULL)
+    REDCapR::retrieve_credential_mssql(dsn=NULL, -2L, "dev", channel=NULL)
   )
   
-  #letters only
-  expect_error(
-    regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(dsn=NULL, "asdf", "dev", channel=NULL)
-  )
-  
-  #dashes #1
-  expect_error(
-    regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(dsn=NULL, "234 --DROP tbl_bobby", "dev", channel=NULL)
-  )
-  
-  #dashes #2
-  expect_error(
-    regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(dsn=NULL, "234 --332", "dev", channel=NULL)
-  )
-  
-  #Blank
-  expect_error(
-    regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(dsn=NULL, "", "dev", channel=NULL)
-  )
 })
 test_that("Bad instance name", {
   expected_message <- "The 'instance' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets."
@@ -65,6 +42,100 @@ test_that("Bad instance name", {
   expect_error(
     regexp = expected_message,
     REDCapR::retrieve_credential_mssql(dsn=NULL, pid_read, instance="", channel=NULL)
+  )
+})
+
+test_that("pid wrong length", {
+  expected_message <- "The `project_id` parameter should contain exactly one element."
+
+  #empty
+  expect_error(
+    regexp = expected_message,
+    REDCapR::retrieve_credential_mssql(dsn=NULL, project_id=integer(0), instance="234 --DROP tbl_bobby", channel=NULL)
+  )
+  
+  #too many
+  expect_error(
+    regexp = expected_message,
+    REDCapR::retrieve_credential_mssql(dsn=NULL, project_id=integer(2), instance="234 --DROP tbl_bobby", channel=NULL)
+  )
+})
+
+test_that("instance wrong length", {
+  expected_message <- "The `instance` parameter should contain exactly one element."
+
+  #empty
+  expect_error(
+    regexp = expected_message,
+    REDCapR::retrieve_credential_mssql(dsn=NULL, pid_read, instance=character(0), channel=NULL)
+  )
+  
+  #too many
+  expect_error(
+    regexp = expected_message,
+    REDCapR::retrieve_credential_mssql(dsn=NULL, pid_read, instance=character(2), channel=NULL)
+  )
+})
+
+test_that("bad type: project_id", {
+  expected_message <- "The `project_id` parameter be a integer type."
+
+  #character
+  expect_error(
+    regexp = expected_message,
+    REDCapR::retrieve_credential_mssql(character(1), instance="dev")
+  )
+
+  #numeric
+  expect_error(
+    regexp = expected_message,
+    REDCapR::retrieve_credential_mssql(numeric(1), instance="dev")
+  )
+})
+test_that("bad type: instance", {
+  expected_message <- "The `instance` parameter be a character type."
+
+  #integer
+  expect_error(
+    regexp = expected_message,
+    REDCapR::retrieve_credential_mssql(pid_read, instance=integer(1))
+  )
+  
+  #numeric
+  expect_error(
+    regexp = expected_message,
+    REDCapR::retrieve_credential_mssql(pid_read, instance=numeric(1))
+  )
+})
+test_that("bad type: DSN name", {
+  expected_message <- "The `dsn` parameter be a character type, or missing or NULL."
+
+  #integer
+  expect_error(
+    regexp = expected_message,
+    REDCapR::retrieve_credential_mssql(dsn=integer(1), pid_read, instance="dev", channel=NULL)
+  )
+  
+  #numeric
+  expect_error(
+    regexp = expected_message,
+    REDCapR::retrieve_credential_mssql(dsn=integer(1), pid_read, instance="dev", channel=NULL)
+  )
+})
+
+test_that("bad type: channel ", {
+  expected_message <- "The `channel` parameter be a `RODBC` type, or NULL."
+
+  #integer
+  expect_error(
+    regexp = expected_message,
+    REDCapR::retrieve_credential_mssql(pid_read, instance="dev", channel=integer(1))
+  )
+
+  #numeric
+  expect_error(
+    regexp = expected_message,
+    REDCapR::retrieve_credential_mssql(pid_read, instance="dev", channel=numeric(1))
   )
 })
 
