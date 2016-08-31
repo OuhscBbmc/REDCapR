@@ -8,11 +8,7 @@
 #' @param dsn A \href{http://en.wikipedia.org/wiki/Data_source_name}{DSN} on the local machine that points to the desired MSSQL database. Required.
 #' @param project_name The friendly/shortened name given to the REDCap project in the MSSQL table.  Notice this isn't necessarily the same name used by REDCap. Required
 #' @param channel An \emph{optional} connection handle as returned by \code{RODBC::odbcConnect}.  See Details below. Optional.
-#' @param schema_name The schema used within the database.  Note that MSSQL uses the more conventional definition of \href{http://en.wikipedia.org/wiki/Database_schema}{schema} than MySQL.  Defaults to \code{'[Redcap]'}. Optional.
-#' @param procedure_name The stored procedure called to retrieve the token. Defaults to \code{'[prcToken]'}.  Optional.
-#' @param variable_name_project The variable declared within the stored procedure that contains the desired project name.  Optional.
-#' @param field_name_token The field/column/variable name in the database table containing the token values.  Defaults to \code{'Token'}.  Optional.
-#'
+
 #' @return The token, which is a 32 character string.
 #' @details
 #' If no \code{channel} is passed, one will be created at the beginning of the function, and destroyed at the end.  However if a channel
@@ -23,7 +19,7 @@
 #' its \code{finally} expression; this helps ensure the expensive database resource isn't held open unnecessarily.  See the internals of
 #' \code{retrieve_token_mssql} for an example of closing the \code{channel} in a \code{tryCatch} block.
 #'
-#' If the database elements are create with the script provided in package's `Security Database' vignette, the default values will work.
+#' If the database elements are created with the script provided in package's `Security Database' vignette, the default values will work.
 #'
 #' @note
 #' We use Microsoft SQL Server, because that fits our University's infrastructure the easiest.  But this approach theoretically can work
@@ -60,36 +56,29 @@
 #' }
 
 retrieve_token_mssql <- function(
-  dsn,
   project_name,
-  channel                  = NULL,
-  schema_name              = "[Redcap]",
-  procedure_name           = "[prcToken]",
-  variable_name_project    = "@RedcapProjectName",
-  field_name_token         = "Token"
+  dsn,
+  channel                  = NULL
 ) {
   message("REDCapR::retrieve_token_mssql() is deprecated: please use REDCapR::retrieve_credential_mssql() instead")
 
   if( !requireNamespace("RODBC", quietly=TRUE) ) 
     stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBC` package is not installed.  Please install it and try again.")
 
+  if( !requireNamespace("RODBCext", quietly=TRUE) ) 
+    stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBCext` package is not installed.  Please install it and try again.")
+
   regex_pattern_1 <- "^*[a-zA-Z0-9_]*$"
-  regex_pattern_2 <- "^\\[*[a-zA-Z0-9_]*\\]*$"
-  regex_pattern_3 <- "^@*[a-zA-Z0-9_]*$"
-  
+
   if( !grepl(regex_pattern_1, project_name) ) 
     stop("The 'project_name' parameter must contain only letters, numbers, and underscores.")
-  if( !grepl(regex_pattern_2, schema_name) ) 
-    stop("The 'schema_name' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets.")
-  if( !grepl(regex_pattern_2, procedure_name) ) 
-    stop("The 'procedure_name' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets.")
-  if( !grepl(regex_pattern_3, variable_name_project) ) 
-    stop("The 'variable_name_project' parameter must contain only letters, numbers, and underscores.  It may optionally have a leading ampersand.")
-  if( !grepl(regex_pattern_1, field_name_token) ) 
-    stop("The 'field_name_token' parameter must contain only letters, numbers, and underscores.")
-  
-  sql <- base::sprintf("EXEC %s.%s %s = '%s'", schema_name, procedure_name, variable_name_project, project_name)
 
+  sql <- "EXEC [redcap].[prcToken] @RedcapProjectName = ?" 
+  d_input <- data.frame(
+    RedcapProjectName  = project_name,
+    stringsAsFactors   = FALSE
+  )
+    
   if( base::missing(channel) | base::is.null(channel) ) {
     if( base::missing(dsn) | base::is.null(dsn) ) 
       stop("The 'dsn' parameter can be missing only if a 'channel' has been passed to 'retrieve_token_mssql'.")
@@ -102,7 +91,7 @@ retrieve_token_mssql <- function(
 
   base::tryCatch(
     expr = {
-      token <- RODBC::sqlQuery(channel, sql, stringsAsFactors=FALSE)[[field_name_token]][1]
+      token <- RODBCext::sqlExecute(channel, sql, d_input, fetch=TRUE, stringsAsFactors=FALSE)$Token[1]
     }, finally = {
       if( close_channel_on_exit ) RODBC::odbcClose(channel)
     }
@@ -110,3 +99,5 @@ retrieve_token_mssql <- function(
 
   return( token )
 }
+
+# a <- REDCapR::retrieve_token_mssql(dsn="BbmcSecurity", project_name='GpavRecruitment')
