@@ -10,7 +10,6 @@ test_that("Missing DSN", {
     regexp = expected_message,
     object = REDCapR::retrieve_credential_mssql(pid_read, "dev")
   )
-  
 })
 
 test_that("Bad project ID", {
@@ -21,7 +20,6 @@ test_that("Bad project ID", {
     regexp = expected_message,
     REDCapR::retrieve_credential_mssql(-2L, "dev")
   )
-  
 })
 test_that("Bad instance name", {
   expected_message <- "The 'instance' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets."
@@ -146,4 +144,3 @@ test_that("bad type: channel ", {
     REDCapR::retrieve_credential_mssql(pid_read, instance="dev", channel=numeric(1))
   )
 })
-

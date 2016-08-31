@@ -5,7 +5,7 @@
 \alias{retrieve_token_mssql}
 \title{Read a token from a (non-REDCap) database.}
 \usage{
-retrieve_token_mssql(project_name, dsn, channel = NULL)
+retrieve_token_mssql(project_name, dsn = NULL, channel = NULL)
 }
 \arguments{
 \item{project_name}{The friendly/shortened name given to the REDCap project in the MSSQL table.  Notice this isn't necessarily the same name used by REDCap. Required}

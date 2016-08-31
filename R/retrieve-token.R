@@ -57,23 +57,38 @@
 
 retrieve_token_mssql <- function(
   project_name,
-  dsn,
+  dsn                      = NULL,
   channel                  = NULL
 ) {
-  message("REDCapR::retrieve_token_mssql() is deprecated: please use REDCapR::retrieve_credential_mssql() instead")
+  # message("REDCapR::retrieve_token_mssql() is deprecated: please use REDCapR::retrieve_credential_mssql() instead.")
 
   if( !requireNamespace("RODBC", quietly=TRUE) ) 
     stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBC` package is not installed.  Please install it and try again.")
-
   if( !requireNamespace("RODBCext", quietly=TRUE) ) 
     stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBCext` package is not installed.  Please install it and try again.")
 
-  regex_pattern_1 <- "^*[a-zA-Z0-9_]*$"
+  regex_pattern_1 <- "^[a-zA-Z0-9_]+$"
 
+  if( class(project_name)  != "character" )
+    stop("The `project_name` parameter be a character type.")
+  if( !(base::missing(dsn) | base::is.null(dsn)) & !(class(dsn) %in% c("character")) )
+    stop("The `dsn` parameter be a character type, or missing or NULL.")
+  if( !(base::missing(channel) | base::is.null(channel)) & !inherits(channel, "RODBC") )
+    stop("The `channel` parameter be a `RODBC` type, or NULL.")
+  
+  if( length(project_name) != 1L )
+    stop("The `project_name` parameter should contain exactly one element.")
+  if( length(dsn) > 1L )
+    stop("The `dsn` parameter should contain at most one element.")
+  if( length(channel) > 1L )
+    stop("The `channel` parameter should contain at most one element.")
+  
   if( !grepl(regex_pattern_1, project_name) ) 
     stop("The 'project_name' parameter must contain only letters, numbers, and underscores.")
 
+  
   sql <- "EXEC [redcap].[prcToken] @RedcapProjectName = ?" 
+  
   d_input <- data.frame(
     RedcapProjectName  = project_name,
     stringsAsFactors   = FALSE
@@ -97,6 +112,9 @@ retrieve_token_mssql <- function(
     }
   )
 
+  if( length(token) >= 2L )
+    stop("No more than one token should be retrieved  The [username]-by-[project_name] should be unique in the table.")
+  
   return( token )
 }
 
