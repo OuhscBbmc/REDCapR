@@ -44,7 +44,6 @@ redcap_project <- setRefClass(
   fields = list(
     redcap_uri = "character",
     token = "character"
-    # batch_size_default 
   ),
   
   methods = list(
@@ -55,36 +54,26 @@ redcap_project <- setRefClass(
       fields = NULL, fields_collapsed = "", 
       export_data_access_groups = FALSE,
       raw_or_label = 'raw',
-      verbose = TRUE, config_options = NULL) {
+      verbose = TRUE, config_options = NULL
+    ) {
       
       "Exports records from a REDCap project."
 
-    # r <- REDCapR::redcap_read( 
-    #   batch_size = batch_size, interbatch_delay = interbatch_delay,
-    #   redcap_uri = redcap_uri, token = token, 
-    #   records = records, records_collapsed = records_collapsed, 
-    #   fields = fields, fields_collapsed = fields_collapsed, 
-    #   export_data_access_groups = export_data_access_groups,
-    #   raw_or_label = raw_or_label,
-    #   verbose = verbose, cert_location=cert_location 
-    # )
-    # r$records_collapsed <- ifelse(!is.null(r$records_collapsed) & (nchar(r$records_collapsed)>0), r$records_collapsed, NULL)
-    # return( r )
-    return( REDCapR::redcap_read( 
-      batch_size = batch_size, interbatch_delay = interbatch_delay,
-      redcap_uri = redcap_uri, token = token, 
-      records = records, records_collapsed = records_collapsed, 
-      fields = fields, fields_collapsed = fields_collapsed, 
-      export_data_access_groups = export_data_access_groups,
-      raw_or_label = raw_or_label,
-      verbose = verbose, config_options=config_options 
-    ) )
+      return( REDCapR::redcap_read( 
+        batch_size = batch_size, interbatch_delay = interbatch_delay,
+        redcap_uri = redcap_uri, token = token, 
+        records = records, records_collapsed = records_collapsed, 
+        fields = fields, fields_collapsed = fields_collapsed, 
+        export_data_access_groups = export_data_access_groups,
+        raw_or_label = raw_or_label,
+        verbose = verbose, config_options=config_options 
+      ) )
     },
     
     write = function( 
-      ds_to_write,
-      batch_size = 100L, interbatch_delay = 0,
-      verbose = TRUE, config_options = NULL) {
+      ds_to_write, batch_size = 100L, interbatch_delay = 0,
+      verbose = TRUE, config_options = NULL
+    ) {
       
       "Imports records to a REDCap project."
       
@@ -93,11 +82,10 @@ redcap_project <- setRefClass(
         batch_size = batch_size, interbatch_delay = interbatch_delay,
         redcap_uri = redcap_uri, token = token, 
         config_options = config_options 
-      ))      
+      ) )      
     }
-    
-  )
-)
+  ) #End methods list
+) #End class
 # http://adv-r.had.co.nz/OO-essentials.html
 
 # http://stackoverflow.com/questions/21875596/mapping-a-c-sharp-class-definition-to-an-r-reference-class-definition
