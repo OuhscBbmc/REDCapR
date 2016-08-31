@@ -132,7 +132,6 @@ retrieve_credential_mssql <- function(
   
   if( !requireNamespace("RODBC", quietly=TRUE) ) 
     stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBC` package is not installed.  Please install it and try again.")
-
   if( !requireNamespace("RODBCext", quietly=TRUE) ) 
     stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBCext` package is not installed.  Please install it and try again.")
 

@@ -7,8 +7,7 @@ token <- "9A81268476645C4E5F03428B8AC3AA7B"
 
 
 # curl_options <- RCurl::curlOptions(ssl.verifypeer = FALSE)
-# curl_options <- RCurl::curlOptions(cainfo = "./inst/ssl-certs/mozilla-ca-root.crt", sslversion=3)
-curl_options <- list(cainfo = system.file("cacert.pem", package = "httr"))
+curl_options <- list(cainfo = system.file("cacert.pem", package="openssl")
 
 raw_text2 <- RCurl::postForm(
   uri = redcap_uri
