@@ -44,9 +44,12 @@ A list of the following elements
 \description{
 These functions are not essential to calling the REDCap API, but instead are functions that help manage tokens securely.
 }
+\details{
+If the database elements are created with the script provided in package's `Security Database' vignette, the default values will work.
+}
 \note{
 Although we strongly encourage storing all the tokens on a central server (\emph{e.g.}, see the 
-\code{retrieve_token_mssql()} function and the "SecurityDatabase" vignette), there are times
+\code{retrieve_credential_mssql()} function and the "SecurityDatabase" vignette), there are times
 when this approach is not feasible and the token must be stored locally.  Please contact us 
 if your institution is using something other than SQL Server, and 
 would like help adapting this approach to your infrastructure.

@@ -60,7 +60,6 @@ test_that("pid wrong length", {
     REDCapR::retrieve_credential_mssql(project_id=integer(2), instance="234")
   )
 })
-
 test_that("instance wrong length", {
   expected_message <- "The `instance` parameter should contain exactly one element."
 
@@ -74,6 +73,15 @@ test_that("instance wrong length", {
   expect_error(
     regexp = expected_message,
     REDCapR::retrieve_credential_mssql(pid_read, instance=character(2))
+  )
+})
+test_that("dsn wrong length", {
+  expected_message <- "The `dsn` parameter should contain at most one element."
+
+  #too many
+  expect_error(
+    regexp = expected_message,
+    REDCapR::retrieve_credential_mssql(pid_read, instance='dev', dsn = character(2))
   )
 })
 
