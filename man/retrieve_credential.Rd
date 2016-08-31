@@ -11,7 +11,7 @@ retrieve_credential_local(
   check_username=FALSE, check_token_pattern=TRUE
 )
 retrieve_credential_mssql(
-  dsn, project_id, instance, channel=NULL
+  project_id, instance, dsn, channel=NULL
 )
 }
 \arguments{

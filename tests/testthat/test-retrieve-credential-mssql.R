@@ -51,13 +51,13 @@ test_that("pid wrong length", {
   #empty
   expect_error(
     regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(project_id=integer(0), instance="234 --DROP tbl_bobby")
+    REDCapR::retrieve_credential_mssql(project_id=integer(0), instance="234")
   )
   
   #too many
   expect_error(
     regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(project_id=integer(2), instance="234 --DROP tbl_bobby")
+    REDCapR::retrieve_credential_mssql(project_id=integer(2), instance="234")
   )
 })
 
