@@ -2,7 +2,7 @@ library(testthat)
 context("Retrieve Token")
 
 test_that("Missing DSN & Channel", {
-  testthat::skip_if_not_installed(pkg="RODBC")
+  testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
   expected_message <- "The 'dsn' parameter can be missing only if a 'channel' has been passed to 'retrieve_token_mssql'."
   
   expect_error(
@@ -12,7 +12,7 @@ test_that("Missing DSN & Channel", {
 })
 
 test_that("Bad Project Name", {
-  testthat::skip_if_not_installed(pkg = "RODBC")
+  testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
   expected_message <- "The 'project_name' parameter must contain only letters, numbers, and underscores."
   
   expect_error(
@@ -39,6 +39,7 @@ test_that("Bad Project Name", {
   )
 })
 test_that("project_name wrong length", {
+  testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
   expected_message <- "The `project_name` parameter should contain exactly one element."
 
   #empty
@@ -54,6 +55,7 @@ test_that("project_name wrong length", {
   )
 })
 test_that("dsn wrong length", {
+  testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
   expected_message <- "The `dsn` parameter should contain at most one element."
 
   #too many
@@ -63,6 +65,7 @@ test_that("dsn wrong length", {
   )
 })
 test_that("bad type: project_name", {
+  testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
   expected_message <- "The `project_name` parameter be a character type."
 
   #integer
@@ -78,6 +81,7 @@ test_that("bad type: project_name", {
   )
 })
 test_that("bad type: DSN name", {
+  testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
   expected_message <- "The `dsn` parameter be a character type, or missing or NULL."
 
   #integer
@@ -94,6 +98,7 @@ test_that("bad type: DSN name", {
 })
 
 test_that("bad type: channel ", {
+  testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
   expected_message <- "The `channel` parameter be a `RODBC` type, or NULL."
 
   #integer
