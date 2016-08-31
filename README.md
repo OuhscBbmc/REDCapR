@@ -23,17 +23,17 @@ The `redcap_read()` function also accepts values for subsetting/filtering the re
 #Return only records with IDs of 1 and 4
 desired_records <- c(1, 4)
 ds_some_rows <- redcap_read(
-   redcap_uri = uri, 
-   token = token, 
-   records = desired_records
+  redcap_uri   = uri, 
+  token        = token, 
+  records      = desired_records
 )$data
 
 #Return only the fields record_id, name_first, and age
 desired_fields <- c("record_id", "name_first", "age")
 ds_some_fields <- redcap_read(
-   redcap_uri = uri, 
-   token = token, 
-   fields = desired_fields
+  redcap_uri  = uri, 
+  token       = token, 
+  fields      = desired_fields
 )$data
 ```
 
@@ -59,11 +59,6 @@ Thanks,
 | [Latest](http://cran.r-project.org/package=REDCapR) | [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/REDCapR)](http://cran.r-project.org/package=REDCapR) | ![CRANPace](http://cranlogs.r-pkg.org/badges/REDCapR) | [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.28053.svg)](http://dx.doi.org/10.5281/zenodo.28053) |
 |   | *Latest CRAN version* | *CRAN Downloads* | *Independently-hosted Archive* |
 
-<!-- The development version of REDCapR can be installed from [R-Forge](https://r-forge.r-project.org/projects/redcapr/),
-```r
-install.packages("REDCapR", repos="http://R-Forge.R-project.org")
-``` -->
-
 The *release* version of REDCapR can be installed from [CRAN](http://cran.r-project.org/package=REDCapR).
 ```r
 install.packages("REDCapR")
@@ -77,18 +72,19 @@ devtools::install_github(repo="OuhscBbmc/REDCapR")
 
 #### Linux
 
-If installing on Linux, the default R CHECK command will try (and fail) to install the (nonvital) RODBC package.  While this package isn't available for Windows, isn't necessary to interact with your REDCap server (and thus not necesssary for the core features of REDCapR).  To check REDCapR's installation on Linux, run the following R code.  Make sure the working directory is set to the root of the REDCapR directory; this will happen automatically when you use RStudio to open the `REDCapR.Rproj` file.
+If installing on Linux, the default R CHECK command will try (and fail) to install the (nonvital) RODBC package.  While this package isn't necessary to interact with your REDCap server (and thus not necesssary for the core features of REDCapR).  To check REDCapR's installation on Linux, run the following R code.  Make sure the working directory is set to the root of the REDCapR directory; this will happen automatically when you use RStudio to open the `REDCapR.Rproj` file.
 ```r
 devtools::check(force_suggests = FALSE)
 ```
 
-Alternatively, the RODBC package can be installed from your distribution's repository using the shell.  Here are instructions for [Ubuntu](http://cran.r-project.org/bin/linux/ubuntu/README.html) and [Red Hat](http://cran.r-project.org/bin/linux/redhat/README).
+Alternatively, the RODBC package can be installed from your distribution's repository using the shell.  Here are instructions for [Ubuntu](http://cran.r-project.org/bin/linux/ubuntu/README.html) and [Red Hat](http://cran.r-project.org/bin/linux/redhat/README).  `unixodbc` is necessary for the `RODBCext` R package to be built.
+
 ```shell
 #From Ubuntu terminal
-sudo apt-get install r-cran-rodbc
+sudo apt-get install r-cran-rodbc unixodbc-dev
 
 #From Red Hat terminal
-sudo yum install R-RODBC
+sudo yum install R-RODBC unixODBC-devel
 ```
 
 ### Collaborative Development
