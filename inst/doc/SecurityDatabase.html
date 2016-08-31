@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="date" content="2016-08-30" />
+<meta name="date" content="2016-08-31" />
 
 <title>Security Database</title>
 
@@ -68,7 +68,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">Security Database</h1>
-<h4 class="date"><em>2016-08-30</em></h4>
+<h4 class="date"><em>2016-08-31</em></h4>
 
 
 
@@ -79,7 +79,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="create-a-dsn-on-each-client" class="section level1">
 <h1>Create a DSN on each client</h1>
-<p>After executing the SQL code in an existing database, create an ODBC <a href="http://en.wikipedia.org/wiki/Data_source_name">DSN</a> on <em>each</em> client machine that calls the database. Download the most recent drivers (as of Aug 2016, the most recent version is 11 for <a href="http://www.microsoft.com/en-us/download/details.aspx?id=36434">Windows</a> and <a href="https://msdn.microsoft.com/library/hh568451(SQL.110).aspx">Linux</a>., then run the wizard. Many values in the wizard will remain at the default values. Here are the important ones to change.</p>
+<p>After executing the SQL code in an existing database, create an ODBC <a href="http://en.wikipedia.org/wiki/Data_source_name">DSN</a> on <em>each</em> client machine that calls the database. Download the most recent drivers (as of Aug 2016, the <a href="https://msdn.microsoft.com/library/mt703139.aspx">most recent version is 13.1</a> for Windows and Linux, then run the wizard. Many values in the wizard will remain at the default values. Here are the important ones to change.</p>
 <ol style="list-style-type: decimal">
 <li>Set the DSN’s <code>name</code> field to whatever is used in the repository’s R code.</li>
 <li>Set the authenticity method to <code>Integrated Windows authentication</code>.</li>

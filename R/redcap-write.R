@@ -23,11 +23,6 @@
 #'  \item \code{elapsed_seconds}: The duration of the function.
 #' }
 #' @details 
-#' The `REDCapR' package includes a recent version of the 
-#' \href{http://curl.haxx.se/ca/cacert.pem}{Bundle of CA Root Certificates} 
-#' from the official \href{http://curl.haxx.se}{cURL site}.  
-#' This version is used by default, unless the `cert_location` parameter is given another location.
-#' 
 #' Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  
 #' See \code{\link{validate_for_write}} for a helper function that checks for some common important conflicts.
 #' 

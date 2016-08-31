@@ -24,9 +24,6 @@
 #'  \item \code{raw_text}: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
 #' }
 #' @details 
-#' The `REDCapR' package includes a recent version of the \href{http://curl.haxx.se/ca/cacert.pem}{Bundle of CA Root Certificates} 
-#' from the official \href{http://curl.haxx.se}{cURL site}.  This version is used by default, unless the `cert_location` parameter is given another location.
-#' 
 #' Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See \code{\link{validate_for_write}} for a helper function that checks for some common important conflicts.
 #' @author Will Beasley
 #' @author John J. Aponte
@@ -49,19 +46,25 @@
 #' record <- 1
 #' file_path <- base::file.path(devtools::inst(name="REDCapR"), paste0("test-data/mugshot-1.jpg"))
 #' 
-#' redcap_upload_file_oneshot(file_name=file_path, redcap_uri=redcap_uri, token=token,
-#'                            record=record, field=field)
+#' redcap_upload_file_oneshot(
+#'   file_name=file_path, record=record, field=field,
+#'   redcap_uri=redcap_uri, token=token
+#' )
 #' 
 #' #Upload a collection of five images.
 #' records <- 1:5
-#' file_paths <- base::file.path(devtools::inst(name="REDCapR"), 
-#'                               paste0("test-data/mugshot-", records, ".jpg"))
+#' file_paths <- base::file.path(
+#'   devtools::inst(name="REDCapR"), 
+#'   paste0("test-data/mugshot-", records, ".jpg")
+#' )
 #' 
 #' for( i in seq_along(records) ) {
 #'   record <- records[i]
 #'   file_path <- file_paths[i]
-#'   redcap_upload_file_oneshot(file_name=file_path, redcap_uri=redcap_uri, token=token,
-#'                              record=record, field=field)
+#'   redcap_upload_file_oneshot(
+#'     file_name=file_path, record=record, field=field,
+#'     redcap_uri=redcap_uri, token=token
+#'   )
 #' } 
 #' }
 

@@ -48,9 +48,6 @@ Currently, a list is returned with the following elements,
 This function uses REDCap's API to download a file
 }
 \details{
-The `REDCapR' package includes a recent version of the \href{http://curl.haxx.se/ca/cacert.pem}{Bundle of CA Root Certificates} 
-from the official \href{http://curl.haxx.se}{cURL site}.  This version is used by default, unless the `cert_location` parameter is given another location.
-
 Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See \code{\link{validate_for_write}} for a helper function that checks for some common important conflicts.
 }
 \examples{
@@ -61,18 +58,24 @@ record <- 1
 field <- "mugshot"
 # event <- "" # only for longitudinal events
 
-result_1 <- redcap_download_file_oneshot(record=record, field=field, 
-                                 redcap_uri=uri, token=token)
+result_1 <- redcap_download_file_oneshot(
+  record=record, field=field, 
+  redcap_uri=uri, token=token
+)
 base::unlink("mugshot-1.jpg")
 
 (full_name <- base::tempfile(pattern="mugshot", fileext=".jpg"))
-result_2 <- redcap_download_file_oneshot(file_name=full_name, record=record, field=field, 
-                                 redcap_uri=uri, token=token)
+result_2 <- redcap_download_file_oneshot(
+  file_name=full_name, record=record, field=field, 
+  redcap_uri=uri, token=token
+)
 base::unlink(full_name)
 
 (relative_name <- "ssss.jpg")
-result_3 <- redcap_download_file_oneshot(file_name=relative_name, record=record, field=field, 
-                                 redcap_uri=uri, token=token)
+result_3 <- redcap_download_file_oneshot(
+  file_name=relative_name, record=record, field=field, 
+  redcap_uri=uri, token=token
+)
 base::unlink(relative_name)
 }
 }

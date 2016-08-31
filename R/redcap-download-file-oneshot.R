@@ -29,9 +29,6 @@
 #'  \item \code{file_name}: The name of the file persisted to disk. This is useful if the name stored in REDCap is used (which is the default).
 #' }
 #' @details 
-#' The `REDCapR' package includes a recent version of the \href{http://curl.haxx.se/ca/cacert.pem}{Bundle of CA Root Certificates} 
-#' from the official \href{http://curl.haxx.se}{cURL site}.  This version is used by default, unless the `cert_location` parameter is given another location.
-#' 
 #' Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See \code{\link{validate_for_write}} for a helper function that checks for some common important conflicts.
 #' @author Will Beasley
 #' @author John J. Aponte
@@ -50,18 +47,24 @@
 #' field <- "mugshot"
 #' # event <- "" # only for longitudinal events
 #' 
-#' result_1 <- redcap_download_file_oneshot(record=record, field=field, 
-#'                                  redcap_uri=uri, token=token)
+#' result_1 <- redcap_download_file_oneshot(
+#'   record=record, field=field, 
+#'   redcap_uri=uri, token=token
+#' )
 #' base::unlink("mugshot-1.jpg")
 #' 
 #' (full_name <- base::tempfile(pattern="mugshot", fileext=".jpg"))
-#' result_2 <- redcap_download_file_oneshot(file_name=full_name, record=record, field=field, 
-#'                                  redcap_uri=uri, token=token)
+#' result_2 <- redcap_download_file_oneshot(
+#'   file_name=full_name, record=record, field=field, 
+#'   redcap_uri=uri, token=token
+#' )
 #' base::unlink(full_name)
 #' 
 #' (relative_name <- "ssss.jpg")
-#' result_3 <- redcap_download_file_oneshot(file_name=relative_name, record=record, field=field, 
-#'                                  redcap_uri=uri, token=token)
+#' result_3 <- redcap_download_file_oneshot(
+#'   file_name=relative_name, record=record, field=field, 
+#'   redcap_uri=uri, token=token
+#' )
 #' base::unlink(relative_name)
 #' }
 
@@ -75,16 +78,7 @@ redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwr
 		stop("The required parameter `token` was missing from the call to `redcap_download_file_oneshot()`.")     
 	
 	token <- sub("\\n", "", token)
-	
-  # if( missing( config_options ) | is.null(config_options) ) {
-  #   cert_location <- system.file("ssl-certs/mozilla-ca-root.crt", package="REDCapR")
-  #   
-  #   if( !base::file.exists(cert_location) )
-  #     stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
-  #   
-  #   config_options <- list(cainfo=cert_location)
-  # }
-		
+
 	post_body <- list(
 		token         = token,
 		content       = 'file',
