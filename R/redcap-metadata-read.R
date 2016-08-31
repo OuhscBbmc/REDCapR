@@ -105,7 +105,7 @@ redcap_metadata_read <- function(
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
     )
     
-    if( exists("ds") & (class(ds)=="data.frame") ) {
+    if( exists("ds") & inherits(ds, "data.frame") ) {
       outcome_message <- paste0(
         "The data dictionary describing ",
         format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
