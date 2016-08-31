@@ -3,7 +3,7 @@
 #' @export retrieve_token_mssql
 #' @title Read a token from a (non-REDCap) database.
 #'
-#' @description These functions are not essential to calling the REDCap API, but instead are functions that help manage tokens securely.
+#' @description This function will soon be deprecated; please transition to \code{retrieve_token_mssql()}. These functions are not essential to calling the REDCap API, but instead are functions that help manage tokens securely.
 #'
 #' @param dsn A \href{http://en.wikipedia.org/wiki/Data_source_name}{DSN} on the local machine that points to the desired MSSQL database. Required.
 #' @param project_name The friendly/shortened name given to the REDCap project in the MSSQL table.  Notice this isn't necessarily the same name used by REDCap. Required
@@ -29,6 +29,12 @@
 #' We use Microsoft SQL Server, because that fits our University's infrastructure the easiest.  But this approach theoretically can work
 #' with any LDAP-enabled database server.  Please contact us if your institution is using something other than SQL Server, and 
 #' would like help adapting this approach to your infrastructure.
+#' 
+#' There's a lot of error checking for SQL injection, but remember that the user is executing under their 
+#' own credentials, so this doesn't obviate the need for disciplined credential management.  There's nothing 
+#' that can be done with this R function that isn't already exposed by any other interface intot he database 
+#' (eg, SQL Server Managment Studio, or MySQL Workbench.)
+#' 
 #' @author Will Beasley
 #'
 #' @examples

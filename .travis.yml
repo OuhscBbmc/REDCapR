@@ -5,6 +5,7 @@ cache: packages
 warnings_are_errors: true
 apt_packages:
   - r-cran-rodbc
+  - unixodbc-dev
 r_github_packages:
   - jimhester/covr
 # - hadley/testthat
