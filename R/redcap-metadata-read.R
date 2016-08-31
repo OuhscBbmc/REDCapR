@@ -46,13 +46,14 @@
 #' }
 
 redcap_metadata_read <- function( 
-                         redcap_uri, token, forms=NULL, forms_collapsed="", 
-                         fields=NULL, fields_collapsed="", 
-                         verbose=TRUE, config_options=NULL ) {  
+  redcap_uri, token, forms=NULL, forms_collapsed="", 
+  fields=NULL, fields_collapsed="", 
+  verbose=TRUE, config_options=NULL 
+) {  
   #TODO: NULL verbose parameter pulls from getOption("verbose")
   #TODO: warns if any requested fields aren't entirely lowercase.
   
-  message("The `REDCapR::redcap_metadata_read()` function is very new and under development.\nIt's likely to change in the future, especially how it handles checkboxes.")
+  # message("The `REDCapR::redcap_metadata_read()` function is very new and under development.\nIt's likely to change in the future, especially how it handles checkboxes.")
   
   start_time <- Sys.time()
   
@@ -69,31 +70,21 @@ redcap_metadata_read <- function(
   if( nchar(fields_collapsed)==0 )
     fields_collapsed <- ifelse(is.null(fields), "", paste0(fields, collapse=",")) #This is an empty string if `fields` is NULL.
   
-  # if( missing( config_options ) | is.null(config_options) ) {
-  #   cert_location <- system.file("ssl-certs/mozilla-ca-root.crt", package="REDCapR")
-  #   
-  #   if( !base::file.exists(cert_location) )
-  #     stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
-  #   
-  #   config_options <- list(cainfo=cert_location)
-  # }
-  
   post_body <- list(
-    token = token,
-    content = 'metadata',
-    format = 'csv',
-    forms = forms_collapsed,
-    fields = fields_collapsed
+    token    = token,
+    content  = 'metadata',
+    format   = 'csv',
+    forms    = forms_collapsed,
+    fields   = fields_collapsed
   )
   
   result <- httr::POST(
-    url = redcap_uri,
-    body = post_body,
-    config = config_options
+    url      = redcap_uri,
+    body     = post_body,
+    config   = config_options
   )
 
   status_code <- result$status
-#   status_message <- result$headers$statusmessage
   success <- (status_code==200L)
   
   raw_text <- httr::content(result, "text")  
@@ -111,7 +102,8 @@ redcap_metadata_read <- function(
         format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
         " fields was read from REDCap in ", 
         round(elapsed_seconds, 1), " seconds.  The http status code was ",
-        status_code, ".")
+        status_code, "."
+      )
     
       #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
       raw_text <- "" 
@@ -130,15 +122,14 @@ redcap_metadata_read <- function(
     message(outcome_message)
   
   return( list(
-    data = ds, 
-    success = success,
-    status_code = status_code,
-    # status_message = status_message, 
-    outcome_message = outcome_message,
-    forms_collapsed = forms_collapsed, 
-    fields_collapsed = fields_collapsed,
-    elapsed_seconds = elapsed_seconds,
-    raw_text = raw_text
+    data               = ds, 
+    success            = success,
+    status_code        = status_code,
+    outcome_message    = outcome_message,
+    forms_collapsed    = forms_collapsed, 
+    fields_collapsed   = fields_collapsed,
+    elapsed_seconds    = elapsed_seconds,
+    raw_text           = raw_text
   ) )
 }
 

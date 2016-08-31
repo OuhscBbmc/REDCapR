@@ -81,67 +81,53 @@ redcap_upload_file_oneshot <- function( file_name, record, redcap_uri, token, fi
 		stop("The required parameter `token` was missing from the call to `redcap_upload_file_oneshot()`.")     
 	
 	token <- sub("\\n", "", token)
-	
-	# if( missing( config_options ) | is.null(config_options) ) {
-	#   cert_location <- system.file("ssl-certs/mozilla-ca-root.crt", package="REDCapR")
-	#   
-	#   if( !base::file.exists(cert_location) )
-	#     stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
-	#   
-	#   config_options <- list(cainfo=cert_location)
-	# }
-  
+
 	if( verbose )
 	  message("Preparing to upload the file `", file_name, "`.")
   
 	post_body <- list(
-		token = token,
-		content = 'file',
-		action = 'import',
-		record = record,
-		field = field,
-		event = event,
-		file = httr::upload_file(path=file_name),
-		returnFormat = 'csv'  
+		token          = token,
+		content        = 'file',
+		action         = 'import',
+		record         = record,
+		field          = field,
+		event          = event,
+		file           = httr::upload_file(path=file_name),
+		returnFormat   = 'csv'  
 	)
 	
 	result <- httr::POST(
-		url = redcap_uri,
-		body = post_body,
+		url    = redcap_uri,
+		body   = post_body,
 		config = config_options
 	)
 	
-	status_code <- result$status_code
-	# status_message <- result$headers$statusmessage
-	elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))    
-	
-	#isValidIDList <- grepl(pattern="^id\\n.{1,}", x=raw_text, perl=TRUE) #example: x="id\n5835\n5836\n5837\n5838\n5839"
-	success <- (status_code == 200L)
+	status_code       <- result$status_code
+	elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units="secs"))    
+	success           <- (status_code == 200L)
 	
 	if( success ) {
-		outcome_message <- paste0("file uploaded to REDCap in ", 
-								  round(elapsed_seconds, 1), " seconds.")
+		outcome_message <- paste0("file uploaded to REDCap in ",  round(elapsed_seconds, 1), " seconds.")
 		recordsAffectedCount <- 1
 		record_id <- record
 		raw_text <- ""
 	} 
 	else { #If the returned content wasn't recognized as valid IDs, then
-		raw_text <- httr::content(result, type="text")
-		outcome_message <- paste0("file NOT uploaded ")
-		recordsAffectedCount <- 0L
-		record_id <- numeric(0) #Return an empty vector.
+		raw_text               <- httr::content(result, type="text")
+		outcome_message        <- paste0("file NOT uploaded ")
+		recordsAffectedCount   <- 0L
+		record_id              <- numeric(0) #Return an empty vector.
 	}
 	if( verbose ) 
 		message(outcome_message)
 	
 	return( list(
-		success = success,
-		status_code = status_code,
-		# status_message = status_message, 
-		outcome_message = outcome_message,
-		records_affected_count = recordsAffectedCount,
-		affected_ids = record_id,
-		elapsed_seconds = elapsed_seconds,
-		raw_text = raw_text    
+		success                  = success,
+		status_code              = status_code, 
+		outcome_message          = outcome_message,
+		records_affected_count   = recordsAffectedCount,
+		affected_ids             = record_id,
+		elapsed_seconds          = elapsed_seconds,
+		raw_text                 = raw_text    
 	))
 }

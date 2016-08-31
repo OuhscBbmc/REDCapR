@@ -86,30 +86,26 @@ redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwr
   # }
 		
 	post_body <- list(
-		token = token,
-		content = 'file',
-		action = 'export',
-		record = record,
-		field = field,
-		event = event,
-		returnFormat = 'csv'  
+		token         = token,
+		content       = 'file',
+		action        = 'export',
+		record        = record,
+		field         = field,
+		event         = event,
+		returnFormat  = 'csv'  
 	)
 	
   #This is the first of two important lines in the function.
   #  It retrieves the information from the server and stores it in RAM.
 	result <- httr::POST(
-		url = redcap_uri,
-		body = post_body,
-		config = config_options
+		url      = redcap_uri,
+		body     = post_body,
+		config   = config_options
 	)
 	
-	status_code <- result$status_code
-	# status_message <- result$headers$statusmessage
-
-	elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))    
-	
-	#isValidIDList <- grepl(pattern="^id\\n.{1,}", x=raw_text, perl=TRUE) #example: x="id\n5835\n5836\n5837\n5838\n5839"
-	success <- (status_code == 200L)
+	status_code       <- result$status_code
+  elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units="secs"))    
+	success           <- (status_code == 200L)
 	
 	if( success ) {
 		result_header <- result$headers$`content-type`
@@ -136,32 +132,33 @@ redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwr
 		#  It persists/converts the information in RAM to a file.
 		writeBin(httr::content(result, as="raw"), con=file_path)
     
-		outcome_message <- paste0(result_header, " successfully downloaded in " ,
-								  round(elapsed_seconds, 1), " seconds, and saved as ", file_path)
-		recordsAffectedCount <- length(record)
-		record_id <- record
-		raw_text <- ""
+		outcome_message <- paste0(
+		  result_header, " successfully downloaded in " ,
+			round(elapsed_seconds, 1), " seconds, and saved as ", file_path
+		)
+		recordsAffectedCount   <- length(record)
+		record_id              <- record
+		raw_text               <- ""
 	} 
 	else { #If the operation was unsuccessful, then...
-		outcome_message <- paste0("file NOT downloaded ")
-		recordsAffectedCount <- 0
-		record_id <- numeric(0) #Return an empty vector.
-		raw_text <- httr::content(result, type="text")
+		outcome_message         <- paste0("file NOT downloaded ")
+		recordsAffectedCount    <- 0L
+		record_id               <- numeric(0) #Return an empty vector.
+		raw_text                <- httr::content(result, type="text")
 	}
   
 	if( verbose ) 
 		message(outcome_message)
 	
 	return( list(
-		success = success,
-		status_code = status_code,
-		# status_message = status_message, 
-		outcome_message = outcome_message,
-		records_affected_count = recordsAffectedCount,
-		affected_ids = record_id,
-		elapsed_seconds = elapsed_seconds,
-		raw_text = raw_text,
-		file_name = file_name,
-		file_path = file_path
+		success                  = success,
+		status_code              = status_code,
+		outcome_message          = outcome_message,
+		records_affected_count   = recordsAffectedCount,
+		affected_ids             = record_id,
+		elapsed_seconds          = elapsed_seconds,
+		raw_text                 = raw_text,
+		file_name                = file_name,
+		file_path                = file_path
 	))
 }
