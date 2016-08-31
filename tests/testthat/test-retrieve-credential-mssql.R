@@ -91,7 +91,7 @@ test_that("dsn wrong length", {
 
 test_that("bad type: project_id", {
   testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
-  expected_message <- "The `project_id` parameter be a integer type."
+  expected_message <- "The `project_id` parameter be an integer type.  Either append an `L` to the number, or cast with `as.integer\\(\\)`."
 
   #character
   expect_error(
@@ -107,7 +107,7 @@ test_that("bad type: project_id", {
 })
 test_that("bad type: instance", {
   testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
-  expected_message <- "The `instance` parameter be a character type."
+  expected_message <- "The `instance` parameter be a character type.  Either enclose in quotes, or cast with `as.character\\(\\)`."
 
   #integer
   expect_error(
@@ -123,7 +123,7 @@ test_that("bad type: instance", {
 })
 test_that("bad type: DSN name", {
   testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
-  expected_message <- "The `dsn` parameter be a character type, or missing or NULL."
+  expected_message <- "The `dsn` parameter be a character type, or missing or NULL.  Either enclose in quotes, or cast with `as.character\\(\\)`."
 
   #integer
   expect_error(
