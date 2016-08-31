@@ -47,11 +47,11 @@ validate_no_logical <- function( d ) {
   }
   else {    
     data.frame(
-      field_name = colnames(d)[indices],
-      field_index = indices,
-      concern = "The REDCap API does not automatically convert boolean values to 0/1 values.",
-      suggestion = "Convert the variable with the `as.integer()` function.",
-      stringsAsFactors = FALSE
+      field_name         = colnames(d)[indices],
+      field_index        = indices,
+      concern            = "The REDCap API does not automatically convert boolean values to 0/1 values.",
+      suggestion         = "Convert the variable with the `as.integer()` function.",
+      stringsAsFactors   = FALSE
     )
   }
 }
@@ -62,11 +62,11 @@ validate_no_uppercase <- function( d ) {
   }
   else { 
     data.frame(
-      field_name = colnames(d)[indices],
-      field_index = indices,
-      concern = "A REDCap project does not allow field names with an uppercase letter.",
-      suggestion = "Change the uppercase letters to lowercase, potentially with `base::tolower()`.",
-      stringsAsFactors = FALSE
+      field_name         = colnames(d)[indices],
+      field_index        = indices,
+      concern            = "A REDCap project does not allow field names with an uppercase letter.",
+      suggestion         = "Change the uppercase letters to lowercase, potentially with `base::tolower()`.",
+      stringsAsFactors   = FALSE
     )
   }
 }

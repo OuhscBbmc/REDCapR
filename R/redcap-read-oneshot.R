@@ -100,11 +100,13 @@
 #' )$data
 #' }
 
-redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collapsed="", 
-                         fields=NULL, fields_collapsed="", 
-                         events=NULL, events_collapsed="",
-                         export_data_access_groups=FALSE,
-                         raw_or_label='raw', verbose=TRUE, config_options=NULL ) {
+redcap_read_oneshot <- function( 
+  redcap_uri, token, records=NULL, records_collapsed="", 
+  fields=NULL, fields_collapsed="", 
+  events=NULL, events_collapsed="",
+  export_data_access_groups=FALSE,
+  raw_or_label='raw', verbose=TRUE, config_options=NULL 
+) {
   #TODO: NULL verbose parameter pulls from getOption("verbose")
   #TODO: warns if any requested fields aren't entirely lowercase.
   #TODO: validate export_data_access_groups
@@ -120,8 +122,6 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
   
   token <- sub("\\n", "", token)
   
-  # browser() #| missing(fields_collapsed)
-  
   if( all(nchar(records_collapsed)==0) )
     records_collapsed <- ifelse(is.null(records), "", paste0(records, collapse=",")) #This is an empty string if `records` is NULL.
   if( (length(fields_collapsed)==0L) | is.null(fields_collapsed) | all(nchar(fields_collapsed)==0L) )
@@ -130,36 +130,26 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
     events_collapsed <- ifelse(is.null(events), "", paste0(events, collapse=",")) #This is an empty string if `events` is NULL.
   
   export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
-  
-  # if( missing( config_options ) | is.null(config_options) ) {
-  #   cert_location <- system.file("ssl-certs/mozilla-ca-root.crt", package="REDCapR")
-  #   
-  #   if( !base::file.exists(cert_location) )
-  #     stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
-  #   
-  #   config_options <- list(cainfo=cert_location)
-  # }
-      
+
   post_body <- list(
-    token = token,
-    content = 'record',
-    format = 'csv',
-    type = 'flat',
-    rawOrLabel = raw_or_label,
-    exportDataAccessGroups = export_data_access_groups_string,
-    records = records_collapsed,
-    fields = fields_collapsed,
-    events = events_collapsed
+    token                   = token,
+    content                 = 'record',
+    format                  = 'csv',
+    type                    = 'flat',
+    rawOrLabel              = raw_or_label,
+    exportDataAccessGroups  = export_data_access_groups_string,
+    records                 = records_collapsed,
+    fields                  = fields_collapsed,
+    events                  = events_collapsed
   )
   
   result <- httr::POST(
-    url = redcap_uri,
-    body = post_body,
-    config = config_options
+    url     = redcap_uri,
+    body    = post_body,
+    config  = config_options
   )
 
   status_code <- result$status
-#   status_message <- result$headers$statusmessage
   success <- (status_code==200L)
   
   raw_text <- httr::content(result, "text")  
@@ -182,40 +172,40 @@ redcap_read_oneshot <- function( redcap_uri, token, records=NULL, records_collap
     #TODO #80: catch variant of ' The.hostname..redcap.db.hsc.net.ou.edu....username..redcapsql....password..XXXXXX..combination.could.not.connect.to.the.MySQL.server. \t\tPlease check their values.'
     
     if( exists("ds") & inherits(ds, "data.frame") ) {
-      outcome_message <- paste0(format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
-                         " records and ",  
-                         format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
-                         " columns were read from REDCap in ", 
-                         round(elapsed_seconds, 1), " seconds.  The http status code was ",
-                         status_code, ".")
+      outcome_message <- paste0(
+        format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
+        " records and ",  
+        format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE), 
+        " columns were read from REDCap in ", 
+        round(elapsed_seconds, 1), " seconds.  The http status code was ",
+        status_code, "."
+      )
     
       #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
       raw_text <- "" 
     } else {
-      success <- FALSE #Override the 'success' determination from the http status code.
-      ds <- data.frame() #Return an empty data.frame
-      outcome_message <- paste0("The REDCap read failed.  The http status code was ", status_code, ".  The 'raw_text' returned was '", raw_text, "'.")
+      success          <- FALSE #Override the 'success' determination from the http status code.
+      ds               <- data.frame() #Return an empty data.frame
+      outcome_message  <- paste0("The REDCap read failed.  The http status code was ", status_code, ".  The 'raw_text' returned was '", raw_text, "'.")
     }
   }
   else {
-    ds <- data.frame() #Return an empty data.frame
-    #outcome_message <- paste0("Reading the REDCap data was not successful.  The error message was:\n",  geterrmessage())
-    outcome_message <- paste0("The REDCapR read/export operation was not successful.  The error message was:\n",  raw_text)
+    ds                 <- data.frame() #Return an empty data.frame
+    outcome_message    <- paste0("The REDCapR read/export operation was not successful.  The error message was:\n",  raw_text)
   }
     
   if( verbose ) 
     message(outcome_message)
   
   return( list(
-    data = ds, 
-    success = success,
-    status_code = status_code,
-    # status_message = status_message, 
-    outcome_message = outcome_message,
-    records_collapsed = records_collapsed, 
-    fields_collapsed = fields_collapsed,
-    events_collapsed = events_collapsed,
-    elapsed_seconds = elapsed_seconds,
-    raw_text = raw_text
+    data               = ds, 
+    success            = success,
+    status_code        = status_code,
+    outcome_message    = outcome_message,
+    records_collapsed  = records_collapsed, 
+    fields_collapsed   = fields_collapsed,
+    events_collapsed   = events_collapsed,
+    elapsed_seconds    = elapsed_seconds,
+    raw_text           = raw_text
   ) )
 }

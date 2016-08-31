@@ -82,13 +82,15 @@
 #' result_write <- REDCapR::redcap_write(ds=ds1, redcap_uri=uri, token=token)
 #' result_write$raw_text
 #' }
-redcap_write <- function( ds_to_write, 
-                          batch_size = 100L,
-                          interbatch_delay = 0.5,
-                          continue_on_error = FALSE,
-                          redcap_uri,
-                          token,
-                          verbose = TRUE, config_options = NULL) {  
+redcap_write <- function( 
+  ds_to_write, 
+  batch_size = 100L,
+  interbatch_delay = 0.5,
+  continue_on_error = FALSE,
+  redcap_uri,
+  token,
+  verbose = TRUE, config_options = NULL
+) {  
   
   if( base::missing(redcap_uri) )
     base::stop("The required parameter `redcap_uri` was missing from the call to `redcap_write()`.")
@@ -102,11 +104,10 @@ redcap_write <- function( ds_to_write,
   
   ds_glossary <- REDCapR::create_batch_glossary(row_count=base::nrow(ds_to_write), batch_size=batch_size)
   
-  affected_ids <- character(0)
-  lst_status_code <- NULL
-  # lst_status_message <- NULL
-  lst_outcome_message <- NULL
-  success_combined <- TRUE
+  affected_ids          <- character(0)
+  lst_status_code       <- NULL
+  lst_outcome_message   <- NULL
+  success_combined      <- TRUE
 
   message("Starting to update ", format(nrow(ds_to_write), big.mark=",", scientific=F, trim=T), " records to be written at ", Sys.time())
   for( i in seq_along(ds_glossary$id) ) {
@@ -115,14 +116,15 @@ redcap_write <- function( ds_to_write,
     if( i > 0 ) Sys.sleep(time = interbatch_delay)
     #     selected_ids <- ids[selected_index]
     message("Writing batch ", i, " of ", nrow(ds_glossary), ", with indices ", min(selected_indices), " through ", max(selected_indices), ".")
-    write_result <- REDCapR::redcap_write_oneshot(ds = ds_to_write[selected_indices, ],                                                  
-                                                  redcap_uri = redcap_uri,
-                                                  token = token,
-                                                  verbose = verbose, 
-                                                  config_options = config_options)
+    write_result <- REDCapR::redcap_write_oneshot(
+      ds               = ds_to_write[selected_indices, ],                                                  
+      redcap_uri       = redcap_uri,
+      token            = token,
+      verbose          = verbose, 
+      config_options   = config_options
+    )
     
-    lst_status_code[[i]] <- write_result$status_code
-    # lst_status_message[[i]] <- write_result$status_message
+    lst_status_code[[i]]     <- write_result$status_code
     lst_outcome_message[[i]] <- write_result$outcome_message
     
     if( !write_result$success ) {
@@ -139,25 +141,16 @@ redcap_write <- function( ds_to_write,
     rm(write_result) #Admittedly overkill defensiveness.
   }
   
-  elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
-  status_code_combined <- paste(lst_status_code, collapse="; ")
-  # status_message_combined <- paste(lst_status_message, collapse="; ")
+  elapsed_seconds          <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
+  status_code_combined     <- paste(lst_status_code, collapse="; ")
   outcome_message_combined <- paste(lst_outcome_message, collapse="; ")
-#   outcome_message_overall <- paste0("\nAcross all batches,",
-#                                    format(length(affected_ids), big.mark = ",", scientific = FALSE, trim = TRUE), 
-#                                    " records were written to REDCap in ", 
-#                                    round(elapsed_seconds, 2), 
-#                                    " seconds.")
-#   if( verbose ) 
-#     message(outcome_message_overall)
 
   return( list(
-    success = success_combined,
-    status_code = status_code_combined,
-    # status_message = status_message_combined, 
-    outcome_message = outcome_message_combined,
-    records_affected_count = length(affected_ids),
-    affected_ids = affected_ids,
-    elapsed_seconds = elapsed_seconds    
+    success                  = success_combined,
+    status_code              = status_code_combined,
+    outcome_message          = outcome_message_combined,
+    records_affected_count   = length(affected_ids),
+    affected_ids             = affected_ids,
+    elapsed_seconds          = elapsed_seconds    
   ) )
 }

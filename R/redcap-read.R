@@ -68,13 +68,16 @@
 #' }
 #' 
 
-redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_error=FALSE,
-                         redcap_uri, token, records=NULL, records_collapsed="", 
-                         fields=NULL, fields_collapsed="", 
-                         events=NULL, events_collapsed="",
-                         export_data_access_groups=FALSE,
-                         raw_or_label='raw',
-                         verbose=TRUE, config_options=NULL, id_position=1L) {  
+redcap_read <- function( 
+  batch_size=100L, interbatch_delay=0.5, continue_on_error=FALSE,
+  redcap_uri, token, records=NULL, records_collapsed="", 
+  fields=NULL, fields_collapsed="", 
+  events=NULL, events_collapsed="",
+  export_data_access_groups=FALSE,
+  raw_or_label='raw',
+  verbose=TRUE, config_options=NULL, id_position=1L
+) {  
+  
   if( missing(redcap_uri) )
     stop("The required parameter `redcap_uri` was missing from the call to `redcap_read()`.")
   
@@ -90,25 +93,23 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
   if( all(nchar(events_collapsed)==0) )
     events_collapsed <- ifelse(is.null(events), "", paste0(events, collapse=",")) #This is an empty string if `events` is NULL.
   
-  #   export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
-
   start_time <- Sys.time()
   
   metadata <- REDCapR::redcap_metadata_read(
-    redcap_uri = redcap_uri, 
-    token = token, 
-    verbose = verbose, 
-    config_options = config_options
+    redcap_uri         = redcap_uri, 
+    token              = token, 
+    verbose            = verbose, 
+    config_options     = config_options
   )
   
   initial_call <- REDCapR::redcap_read_oneshot(
-    redcap_uri = redcap_uri, 
-    token = token, 
-    records_collapsed = records_collapsed,
-    fields_collapsed = metadata$data[1, "field_name"], 
-    events_collapsed = events_collapsed,
-    verbose = verbose, 
-    config_options = config_options
+    redcap_uri         = redcap_uri, 
+    token              = token, 
+    records_collapsed  = records_collapsed,
+    fields_collapsed   = metadata$data[1, "field_name"], 
+    events_collapsed   = events_collapsed,
+    verbose            = verbose, 
+    config_options     = config_options
   )
   
   # Stop and return to the caller if the initial query failed. --------------
@@ -116,14 +117,14 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
     outcome_messages <- paste0("The initial call failed with the code: ", initial_call$status_code, ".")
     elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
     return( list(
-      data = data.frame(), 
-      records_collapsed = "failed in initial batch call", 
-      fields_collapsed = "failed in initial batch call",
-      events_collapsed = "failed in initial batch call",
-      elapsed_seconds = elapsed_seconds, 
-      status_code = initial_call$status_code,
-      outcome_messages = outcome_messages,
-      success = initial_call$success
+      data                  = data.frame(), 
+      records_collapsed     = "failed in initial batch call", 
+      fields_collapsed      = "failed in initial batch call",
+      events_collapsed      = "failed in initial batch call",
+      elapsed_seconds       = elapsed_seconds, 
+      status_code           = initial_call$status_code,
+      outcome_messages      = outcome_messages,
+      success               = initial_call$success
     ) )
   }
   
@@ -131,21 +132,23 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
   uniqueIDs <- sort(unique(initial_call$data[, 1]))
   
   if( all(nchar(uniqueIDs)==32L) )
-    warning("It appears that the REDCap record IDs have been hashed. ", 
-            "For `redcap_read` to function properly, the user must have Export permissions for the 'Full Data Set'. ",
-            "To grant the appropriate permissions: ",
-            "(1) go to 'User Rights' in the REDCap project site, ",
-            "(2) select the desired user, and then select 'Edit User Privileges', ",
-            "(3) in the 'Data Exports' radio buttons, select 'Full Data Set'.\n",
-            "Users with only `De-Identified` export privileges can still use ",
-            "`redcap_read_oneshot()` and `redcap_write_oneshot()`.")
+    warning(
+      "It appears that the REDCap record IDs have been hashed. ", 
+      "For `redcap_read` to function properly, the user must have Export permissions for the 'Full Data Set'. ",
+      "To grant the appropriate permissions: ",
+      "(1) go to 'User Rights' in the REDCap project site, ",
+      "(2) select the desired user, and then select 'Edit User Privileges', ",
+      "(3) in the 'Data Exports' radio buttons, select 'Full Data Set'.\n",
+      "Users with only `De-Identified` export privileges can still use ",
+      "`redcap_read_oneshot()` and `redcap_write_oneshot()`."
+    )
 
-  ds_glossary <- REDCapR::create_batch_glossary(row_count=length(uniqueIDs), batch_size=batch_size)
-  lst_batch <- NULL
-  lst_status_code <- NULL
-  # lst_status_message <- NULL
-  lst_outcome_message <- NULL
-  success_combined <- TRUE
+  ds_glossary            <- REDCapR::create_batch_glossary(row_count=length(uniqueIDs), batch_size=batch_size)
+  lst_batch              <- NULL
+  lst_status_code        <- NULL
+  # lst_status_message   <- NULL
+  lst_outcome_message    <- NULL
+  success_combined       <- TRUE
   
   message("Starting to read ", format(length(uniqueIDs), big.mark=",", scientific=F, trim=T), " records  at ", Sys.time())
   for( i in ds_glossary$id ) {
@@ -154,18 +157,22 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
     
     if( i > 0 ) Sys.sleep(time = interbatch_delay)
     if( verbose ) {
-      message("Reading batch ", i, " of ", nrow(ds_glossary), ", with subjects ", min(selected_ids), " through ", max(selected_ids), 
-              " (ie, ", length(selected_ids), " unique subject records).")
+      message(
+        "Reading batch ", i, " of ", nrow(ds_glossary), ", with subjects ", min(selected_ids), " through ", max(selected_ids), 
+        " (ie, ", length(selected_ids), " unique subject records)."
+      )
     }
-    read_result <- REDCapR::redcap_read_oneshot(redcap_uri = redcap_uri,
-                                        token = token,  
-                                        records = selected_ids,
-                                        fields_collapsed = fields_collapsed,
-                                        events_collapsed = events_collapsed,
-                                        export_data_access_groups = export_data_access_groups, 
-                                        raw_or_label = raw_or_label,
-                                        verbose = verbose, 
-                                        config_options = config_options)
+    read_result <- REDCapR::redcap_read_oneshot(
+      redcap_uri                  = redcap_uri,
+      token                       = token,  
+      records                     = selected_ids,
+      fields_collapsed            = fields_collapsed,
+      events_collapsed            = events_collapsed,
+      export_data_access_groups   = export_data_access_groups, 
+      raw_or_label                = raw_or_label,
+      verbose                     = verbose, 
+      config_options              = config_options
+    )
     
     lst_status_code[[i]] <- read_result$status_code
     # lst_status_message[[i]] <- read_result$status_message
@@ -179,37 +186,27 @@ redcap_read <- function( batch_size=100L, interbatch_delay=0.5, continue_on_erro
       else stop(error_message)
     }
     
-    lst_batch[[i]] <- read_result$data
+    lst_batch[[i]]   <- read_result$data
     success_combined <- success_combined | read_result$success
     
     rm(read_result) #Admittedly overkill defensiveness.
   }
   
-  ds_stacked <- as.data.frame(dplyr::bind_rows(lst_batch))
+  ds_stacked               <- as.data.frame(dplyr::bind_rows(lst_batch))
   
-  elapsed_seconds <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
-  status_code_combined <- paste(lst_status_code, collapse="; ")
-  # status_message_combined <- paste(lst_status_message, collapse="; ")
+  elapsed_seconds          <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
+  status_code_combined     <- paste(lst_status_code, collapse="; ")
   outcome_message_combined <- paste(lst_outcome_message, collapse="; ")
-#   status_message_overall <- paste0("\nAcross all batches,", 
-#                                    format(nrow(ds_stacked), big.mark = ",", scientific = FALSE, trim = TRUE), 
-#                                    " records and ",  
-#                                    format(length(ds_stacked), big.mark = ",", scientific = FALSE, trim = TRUE), 
-#                                    " columns were read from REDCap in ", 
-#                                    round(elapsed_seconds, 2), " seconds.")
-#   if( verbose )
-#     message(status_message_overall)
-  
+
   return( list(
-    data = ds_stacked,
-    success = success_combined,
-    status_codes = status_code_combined,
-    # status_messages = status_message_combined,
-    outcome_messages = outcome_message_combined,
-    records_collapsed = records_collapsed,
-    fields_collapsed = fields_collapsed,
-    events_collapsed = events_collapsed,
-    elapsed_seconds = elapsed_seconds
+    data                = ds_stacked,
+    success             = success_combined,
+    status_codes        = status_code_combined,
+    outcome_messages    = outcome_message_combined,
+    records_collapsed   = records_collapsed,
+    fields_collapsed    = fields_collapsed,
+    events_collapsed    = events_collapsed,
+    elapsed_seconds     = elapsed_seconds
   ) )
 }
 

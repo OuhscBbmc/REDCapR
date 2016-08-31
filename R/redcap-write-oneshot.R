@@ -81,17 +81,7 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, config_op
     stop("The required parameter `token` was missing from the call to `redcap_write_oneshot()`.")     
   
   token <- sub("\\n", "", token)
-  
-  # if( missing( config_options ) | is.null(config_options) ) {
-  #   cert_location <- system.file("ssl-certs/mozilla-ca-root.crt", package="REDCapR")
-  #   
-  #   if( !base::file.exists(cert_location) )
-  #     stop(paste0("The file specified by `cert_location`, (", cert_location, ") could not be found."))
-  #   
-  #   config_options <- list(cainfo=cert_location)
-  # }
-  
-  con <-  base::textConnection(object='csvElements', open='w', local=TRUE)
+  con   <-  base::textConnection(object='csvElements', open='w', local=TRUE)
   utils::write.csv(ds, con, row.names = FALSE, na="")  
   close(con)
   
@@ -99,62 +89,59 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, config_op
   rm(csvElements, con)
   
   post_body <- list(
-    token = token,
-    content = 'record',
-    format = 'csv',
-    type = 'flat',
+    token     = token,
+    content   = 'record',
+    format    = 'csv',
+    type      = 'flat',
     
     #These next values separate the import from the export API call
-    data = csv,
-    overwriteBehavior = 'overwrite', #overwriteBehavior: *normal* - blank/empty values will be ignored [default]; *overwrite* - blank/empty values are valid and will overwrite data
-    returnContent = 'ids',
-    returnFormat = 'csv'  
+    data                = csv,
+    overwriteBehavior   = 'overwrite', #overwriteBehavior: *normal* - blank/empty values will be ignored [default]; *overwrite* - blank/empty values are valid and will overwrite data
+    returnContent       = 'ids',
+    returnFormat        = 'csv'  
   )
   
   result <- httr::POST(
-    url = redcap_uri,
-    body = post_body,
+    url    = redcap_uri,
+    body   = post_body,
     config = config_options
   )
   
-  status_code <- result$status_code
-  # status_message <- result$headers$statusmessage
-  raw_text <- httr::content(result, type="text")
-  elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))    
-  
-  #isValidIDList <- grepl(pattern="^id\\n.{1,}", x=raw_text, perl=TRUE) #example: x="id\n5835\n5836\n5837\n5838\n5839"
-  success <- (status_code == 200L)
+  status_code       <- result$status_code
+  raw_text          <- httr::content(result, type="text")
+  elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units="secs"))    
+  success           <- (status_code == 200L)
     
   if( success ) {
     elements <- unlist(strsplit(raw_text, split="\\n"))
     affectedIDs <- elements[-1]  
     recordsAffectedCount <- length(affectedIDs)
-    outcome_message <- paste0(format(recordsAffectedCount, big.mark = ",", scientific = FALSE, trim = TRUE), 
-                             " records were written to REDCap in ", 
-                             round(elapsed_seconds, 1), 
-                             " seconds.")
+    outcome_message <- paste0(
+      format(recordsAffectedCount, big.mark = ",", scientific = FALSE, trim = TRUE),
+      " records were written to REDCap in ", 
+      round(elapsed_seconds, 1), 
+      " seconds."
+    )
     
     #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
     raw_text <- ""     
   } 
   else { #If the returned content wasn't recognized as valid IDs, then
-    affectedIDs <- numeric(0) #Pass an empty array
-    recordsAffectedCount <- NA_integer_
-    # outcome_message <- "The REDCapR write operation was not successful.  Please see the `raw_text` element for more information." 
-    outcome_message <- paste0("The REDCapR write/import operation was not successful.  The error message was:\n",  raw_text)
+    affectedIDs            <- numeric(0) #Pass an empty array
+    recordsAffectedCount   <- NA_integer_
+    outcome_message        <- paste0("The REDCapR write/import operation was not successful.  The error message was:\n",  raw_text)
   }
   if( verbose ) 
     message(outcome_message)
 
   return( list(
-    success = success,
-    status_code = status_code,
-    # status_message = status_message, 
-    outcome_message = outcome_message,
-    records_affected_count = recordsAffectedCount,
-    affected_ids = affectedIDs,
-    elapsed_seconds = elapsed_seconds,
-    raw_text = raw_text    
+    success                   = success,
+    status_code               = status_code,
+    outcome_message           = outcome_message,
+    records_affected_count    = recordsAffectedCount,
+    affected_ids              = affectedIDs,
+    elapsed_seconds           = elapsed_seconds,
+    raw_text                  = raw_text    
   ))
 }
 

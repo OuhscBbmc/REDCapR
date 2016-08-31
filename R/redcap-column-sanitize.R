@@ -37,10 +37,12 @@ redcap_column_sanitize <- function(
   substitution_character = "?" ) {
 
   for( column in column_names ) {
-    d[, column] <- base::iconv(x = d[, column], 
-                               from = encoding_initial, 
-                               to = "ASCII//TRANSLIT", 
-                               sub = substitution_character)
+    d[, column] <- base::iconv(
+      x     = d[, column], 
+      from  = encoding_initial, 
+      to    = "ASCII//TRANSLIT", 
+      sub   = substitution_character
+    )
   }  
   return( d )
 }
