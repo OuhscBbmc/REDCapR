@@ -31,9 +31,13 @@
 #'  \item \code{token}: The token to pass to the REDCap server
 #'  \item \code{comment}: An optional string.
 #' }
+#' 
+#' @details 
+#' If the database elements are created with the script provided in package's `Security Database' vignette, the default values will work.
+#' 
 #' @note
 #' Although we strongly encourage storing all the tokens on a central server (\emph{e.g.}, see the 
-#' \code{retrieve_token_mssql()} function and the "SecurityDatabase" vignette), there are times
+#' \code{retrieve_credential_mssql()} function and the "SecurityDatabase" vignette), there are times
 #' when this approach is not feasible and the token must be stored locally.  Please contact us 
 #' if your institution is using something other than SQL Server, and 
 #' would like help adapting this approach to your infrastructure.
@@ -134,23 +138,24 @@ retrieve_credential_mssql <- function(
 
   regex_pattern_1 <- "^\\d+$"
   regex_pattern_2 <- "^\\[*[a-zA-Z0-9_]+\\]*$"
-  regex_pattern_3 <- "^@[a-zA-Z0-9_]+$"
   
   if( class(project_id)  != "integer" )
     stop("The `project_id` parameter be a integer type.")
   if( class(instance)  != "character" )
     stop("The `instance` parameter be a character type.")
-  
   if( !(base::missing(dsn) | base::is.null(dsn)) & !(class(dsn) %in% c("character")) )
     stop("The `dsn` parameter be a character type, or missing or NULL.")
   if( !(base::missing(channel) | base::is.null(channel)) & !inherits(channel, "RODBC") )
     stop("The `channel` parameter be a `RODBC` type, or NULL.")
   
-  
   if( length(project_id) != 1L )
     stop("The `project_id` parameter should contain exactly one element.")
   if( length(instance) != 1L )
     stop("The `instance` parameter should contain exactly one element.")
+  if( length(dsn) > 1L )
+    stop("The `dsn` parameter should contain at most one element.")
+  if( length(channel) > 1L )
+    stop("The `channel` parameter should contain at most one element.")
   
   if( !grepl(regex_pattern_1, project_id) ) 
     stop("The 'project_id' parameter must contain at least one digit, and only digits.")

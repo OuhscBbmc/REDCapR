@@ -4,16 +4,17 @@ context("Retrieve Credentials MS-SQL")
 pid_read           <- 153L #This project is for testing only reading from the server.
 
 test_that("Missing DSN", {
+  testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
   expected_message <- "The 'dsn' parameter can be missing only if a 'channel' has been passed to 'retrieve_token_mssql'."
   
   expect_error(
     regexp = expected_message,
     object = REDCapR::retrieve_credential_mssql(pid_read, "dev")
   )
-  
 })
 
 test_that("Bad project ID", {
+  testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
   expected_message <- "The 'project_id' parameter must contain at least one digit, and only digits."
   
   #Digits with letters
@@ -21,9 +22,9 @@ test_that("Bad project ID", {
     regexp = expected_message,
     REDCapR::retrieve_credential_mssql(-2L, "dev")
   )
-  
 })
 test_that("Bad instance name", {
+  testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
   expected_message <- "The 'instance' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets."
 
   #dashes #1
@@ -46,6 +47,7 @@ test_that("Bad instance name", {
 })
 
 test_that("pid wrong length", {
+  testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
   expected_message <- "The `project_id` parameter should contain exactly one element."
 
   #empty
@@ -60,8 +62,8 @@ test_that("pid wrong length", {
     REDCapR::retrieve_credential_mssql(project_id=integer(2), instance="234")
   )
 })
-
 test_that("instance wrong length", {
+  testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
   expected_message <- "The `instance` parameter should contain exactly one element."
 
   #empty
@@ -76,8 +78,19 @@ test_that("instance wrong length", {
     REDCapR::retrieve_credential_mssql(pid_read, instance=character(2))
   )
 })
+test_that("dsn wrong length", {
+  testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
+  expected_message <- "The `dsn` parameter should contain at most one element."
+
+  #too many
+  expect_error(
+    regexp = expected_message,
+    REDCapR::retrieve_credential_mssql(pid_read, instance='dev', dsn = character(2))
+  )
+})
 
 test_that("bad type: project_id", {
+  testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
   expected_message <- "The `project_id` parameter be a integer type."
 
   #character
@@ -93,6 +106,7 @@ test_that("bad type: project_id", {
   )
 })
 test_that("bad type: instance", {
+  testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
   expected_message <- "The `instance` parameter be a character type."
 
   #integer
@@ -108,6 +122,7 @@ test_that("bad type: instance", {
   )
 })
 test_that("bad type: DSN name", {
+  testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
   expected_message <- "The `dsn` parameter be a character type, or missing or NULL."
 
   #integer
@@ -124,6 +139,7 @@ test_that("bad type: DSN name", {
 })
 
 test_that("bad type: channel ", {
+  testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
   expected_message <- "The `channel` parameter be a `RODBC` type, or NULL."
 
   #integer
@@ -138,4 +154,3 @@ test_that("bad type: channel ", {
     REDCapR::retrieve_credential_mssql(pid_read, instance="dev", channel=numeric(1))
   )
 })
-

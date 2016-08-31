@@ -5,24 +5,14 @@
 \alias{retrieve_token_mssql}
 \title{Read a token from a (non-REDCap) database.}
 \usage{
-retrieve_token_mssql(dsn, project_name, channel = NULL,
-  schema_name = "[Redcap]", procedure_name = "[prcToken]",
-  variable_name_project = "@RedcapProjectName", field_name_token = "Token")
+retrieve_token_mssql(project_name, dsn = NULL, channel = NULL)
 }
 \arguments{
-\item{dsn}{A \href{http://en.wikipedia.org/wiki/Data_source_name}{DSN} on the local machine that points to the desired MSSQL database. Required.}
-
 \item{project_name}{The friendly/shortened name given to the REDCap project in the MSSQL table.  Notice this isn't necessarily the same name used by REDCap. Required}
 
+\item{dsn}{A \href{http://en.wikipedia.org/wiki/Data_source_name}{DSN} on the local machine that points to the desired MSSQL database. Required.}
+
 \item{channel}{An \emph{optional} connection handle as returned by \code{RODBC::odbcConnect}.  See Details below. Optional.}
-
-\item{schema_name}{The schema used within the database.  Note that MSSQL uses the more conventional definition of \href{http://en.wikipedia.org/wiki/Database_schema}{schema} than MySQL.  Defaults to \code{'[Redcap]'}. Optional.}
-
-\item{procedure_name}{The stored procedure called to retrieve the token. Defaults to \code{'[prcToken]'}.  Optional.}
-
-\item{variable_name_project}{The variable declared within the stored procedure that contains the desired project name.  Optional.}
-
-\item{field_name_token}{The field/column/variable name in the database table containing the token values.  Defaults to \code{'Token'}.  Optional.}
 }
 \value{
 The token, which is a 32 character string.
@@ -39,7 +29,7 @@ If you create the \code{channel} object yourself, consider wrapping calls in a \
 its \code{finally} expression; this helps ensure the expensive database resource isn't held open unnecessarily.  See the internals of
 \code{retrieve_token_mssql} for an example of closing the \code{channel} in a \code{tryCatch} block.
 
-If the database elements are create with the script provided in package's `Security Database' vignette, the default values will work.
+If the database elements are created with the script provided in package's `Security Database' vignette, the default values will work.
 }
 \note{
 We use Microsoft SQL Server, because that fits our University's infrastructure the easiest.  But this approach theoretically can work
