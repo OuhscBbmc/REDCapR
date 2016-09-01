@@ -177,7 +177,7 @@ There are several ways to call REDCap's API from [R](http://cran.r-project.org/)
 Exporting from REDCap to R, using REDCapR
 ------------------------------------------------------------------
 
-[REDCapR](https://github.com/OuhscBbmc/REDCapR) is a package that uses [cURL](http://curl.haxx.se/) (via [httr](https://github.com/hadley/httr)) to communicate with REDCap, and wraps convience functions around it to reduce the size and complexity of the user's code.  The package's basic functions are demonstrated in [this vignette](http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/BasicREDCapROperations.html) and are documented in its [reference manual](https://github.com/OuhscBbmc/REDCapR/blob/master/documentation-peek.pdf) (click the 'View Raw' link).
+[REDCapR](https://github.com/OuhscBbmc/REDCapR) is a package that uses [cURL](http://curl.haxx.se/) (via [httr](https://github.com/hadley/httr)) to communicate with REDCap, and wraps convenience functions around it to reduce the size and complexity of the user's code.  The package's basic functions are demonstrated in [this vignette](https://cdn.rawgit.com/OuhscBbmc/REDCapR/master/inst/doc/BasicREDCapROperations.html) and are documented in its [reference manual](https://github.com/OuhscBbmc/REDCapR/blob/master/documentation-peek.pdf) (click the 'View Raw' link).
 
 If you're not using REDCapR, you can skip this section and proceed to 'Importing into REDCap from R' below.
 
@@ -267,7 +267,7 @@ If you're not using REDCapR, you can skip this section and proceed to 'Importing
 Exporting from REDCap to R, using redcapAPI
 ------------------------------------------------------------------
 
-[redcapAPI](https://github.com/nutterb/redcapAPI) is a package that uses [cURL](http://curl.haxx.se/) (via [httr](https://github.com/hadley/httr)) to communicate with REDCap, and wraps convience functions around it to reduce the size and complexity of the user's code.  
+[redcapAPI](https://github.com/nutterb/redcapAPI) is a package that uses [cURL](http://curl.haxx.se/) (via [httr](https://github.com/hadley/httr)) to communicate with REDCap, and wraps convenience functions around it to reduce the size and complexity of the user's code.  
 
 If you're not using redcapAPI, you can skip this section and proceed to 'Importing into REDCap from R' below.  More specific discussion about `redcapAPI` can be found at the [package's wiki](https://github.com/nutterb/redcapAPI/wiki).
 
@@ -376,9 +376,9 @@ Other good resources
 * If you have access to the REDCap wiki, some newer examples might exist at <https://community.projectredcap.org/articles/462/api-examples.html>.  The official documentation can be found on the `API Help Page` and `API Examples' pages on the REDCap wiki (ie, <https://community.projectredcap.org/articles/456/api-documentation.html> and <https://community.projectredcap.org/articles/462/api-examples.html>). If you do not have an account for the wiki, please ask your campus REDCap administrator to send you the static material.
 * Scott Burns, the primary developer of [PyCap](https://github.com/redcap-tools/PyCap) has a good intro at http://sburns.org/2013/07/22/intro-to-redcap-api.html
 * Bejamin Nutter, the primary developer of [redcapAPI](https://github.com/nutterb/redcapAPI/wiki) has a good wiki at https://github.com/nutterb/redcapAPI/wiki
-* In addition to this troubleshooting document, REDCapR has a [vignette](http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/BasicREDCapROperations.html) that covers its basic operations.
+* In addition to this troubleshooting document, REDCapR has a [vignette](https://cdn.rawgit.com/OuhscBbmc/REDCapR/master/inst/doc/BasicREDCapROperations.html) that covers its basic operations.
 
 Document Info
 ------------------------------------------------------------------
 
-This document is primarily based on REDCap version 6.0.2 and was last updated 2015-02-21.  A development version of the document is available on GitHub: http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/dev/inst/doc/TroubleshootingApiCalls.html.
+This document is primarily based on REDCap version 6.0.2 and was last updated 2015-02-21.  A development version of the document is available on GitHub: https://cdn.rawgit.com/OuhscBbmc/REDCapR/dev/inst/doc/TroubleshootingApiCalls.html.
