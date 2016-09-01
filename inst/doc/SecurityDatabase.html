@@ -108,12 +108,12 @@ GO
 <span class="co">-- Create a table to contain the token</span>
 <span class="co">--</span>
 <span class="kw">CREATE</span> <span class="kw">TABLE</span> [redcap_private].[tbl_credential](
-    [<span class="kw">id</span>] [<span class="dt">smallint</span>] <span class="kw">NOT</span> <span class="kw">NULL</span>,
-    [username] [<span class="dt">varchar</span>](<span class="dv">30</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
-    [project_id] [<span class="dt">smallint</span>] <span class="kw">NOT</span> <span class="kw">NULL</span>,
-    [<span class="kw">instance</span>] [<span class="dt">varchar</span>](<span class="dv">30</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
-    [token] [<span class="dt">char</span>](<span class="dv">32</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
-    [redcap_uri] [<span class="dt">varchar</span>](<span class="dv">255</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,
+    [<span class="kw">id</span>]              [<span class="dt">smallint</span>]          <span class="kw">NOT</span> <span class="kw">NULL</span>,
+    [username]        [<span class="dt">varchar</span>](<span class="dv">30</span>)       <span class="kw">NOT</span> <span class="kw">NULL</span>,
+    [project_id]      [<span class="dt">smallint</span>]          <span class="kw">NOT</span> <span class="kw">NULL</span>,
+    [<span class="kw">instance</span>]        [<span class="dt">varchar</span>](<span class="dv">30</span>)       <span class="kw">NOT</span> <span class="kw">NULL</span>,
+    [token]           [<span class="dt">char</span>](<span class="dv">32</span>)          <span class="kw">NOT</span> <span class="kw">NULL</span>,
+    [redcap_uri]      [<span class="dt">varchar</span>](<span class="dv">255</span>)      <span class="kw">NOT</span> <span class="kw">NULL</span>,
  <span class="kw">CONSTRAINT</span> [PK_credential] <span class="kw">PRIMARY</span> <span class="kw">KEY</span> CLUSTERED
 (
     [<span class="kw">id</span>] <span class="kw">ASC</span>
@@ -122,9 +122,9 @@ GO
 
 <span class="kw">CREATE</span> <span class="kw">UNIQUE</span> NONCLUSTERED <span class="kw">INDEX</span> [IX_tbl_credential_unique] <span class="kw">ON</span> [redcap_private].[tbl_credential]
 (
-    [<span class="kw">instance</span>] <span class="kw">ASC</span>,
-    [project_id] <span class="kw">ASC</span>,
-    [username] <span class="kw">ASC</span>
+    [<span class="kw">instance</span>]        <span class="kw">ASC</span>,
+    [project_id]      <span class="kw">ASC</span>,
+    [username]        <span class="kw">ASC</span>
 )<span class="kw">WITH</span> (PAD_INDEX = <span class="kw">OFF</span>, STATISTICS_NORECOMPUTE = <span class="kw">OFF</span>, SORT_IN_TEMPDB = <span class="kw">OFF</span>, IGNORE_DUP_KEY = <span class="kw">OFF</span>, DROP_EXISTING = <span class="kw">OFF</span>, <span class="kw">ONLINE</span> = <span class="kw">OFF</span>, ALLOW_ROW_LOCKS = <span class="kw">ON</span>, ALLOW_PAGE_LOCKS = <span class="kw">ON</span>) <span class="kw">ON</span> [<span class="kw">PRIMARY</span>]
 GO
 
@@ -143,8 +143,8 @@ GO
     <span class="co">-- interfering with SELECT statements.</span>
     <span class="kw">SET</span> NOCOUNT <span class="kw">ON</span>;
 
-   <span class="kw">SELECT</span> username, project_id, token, redcap_uri <span class="kw">FROM</span> [redcap_private].[tbl_credential]
-   <span class="kw">WHERE</span> username=system_user <span class="kw">AND</span> project_id=@project_id <span class="kw">AND</span> instance=@instance
+  <span class="kw">SELECT</span> username, project_id, token, redcap_uri <span class="kw">FROM</span> [redcap_private].[tbl_credential]
+  <span class="kw">WHERE</span> username=system_user <span class="kw">AND</span> project_id=@project_id <span class="kw">AND</span> instance=@instance
 <span class="kw">END</span></code></pre></div>
 </div>
 <div id="create-user-credentials-to-the-auxiliary-database" class="section level1">

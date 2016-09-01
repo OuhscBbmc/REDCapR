@@ -282,35 +282,35 @@ He had a gold watch chain and a black mustache&quot;,2
 <p>This check avoids checking the SSL certificate in order to simplify the troubleshooting.  SSL verification is supported by default in the <a href="http://pycap.readthedocs.org/en/latest/">PyCap</a>, <a href="https://github.com/nutterb/redcapAPI">redcapAPI</a>, and <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> packages.</p>
 
 <pre><code class="r">redcap_uri &lt;- &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;
-token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;
+token      &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;
 
 raw_text &lt;- RCurl::postForm(
-  uri = redcap_uri
-  , token = token
-  , content = &#39;record&#39;
-  , format = &#39;csv&#39;
-  , type = &#39;flat&#39;
-  , rawOrLabel = &#39;raw&#39;
-  , exportDataAccessGroups = &#39;true&#39;
-  , .opts = RCurl::curlOptions(ssl.verifypeer=FALSE)
+  uri                         = redcap_uri
+  , token                     = token
+  , content                   = &#39;record&#39;
+  , format                    = &#39;csv&#39;
+  , type                      = &#39;flat&#39;
+  , rawOrLabel                = &#39;raw&#39;
+  , exportDataAccessGroups    = &#39;true&#39;
+  , .opts                     = RCurl::curlOptions(ssl.verifypeer=FALSE)
 )
 </code></pre>
 
 <p>Alternatively, you can try using the <a href="http://cran.r-project.org/package=httr"><code>httr</code></a> package, which uses <code>RCurl</code> underneath.  <a href="https://github.com/OuhscBbmc/REDCapR"><code>REDCapR</code></a> and a recent fork of <a href="https://github.com/nutterb/redcap"><code>redcap</code></a> actually uses <code>httr</code> directly, instead of <code>RCurl</code>.  As of 2014-07-06, this works with the Windows 8 version for <a href="http://curl.haxx.se/libcurl/">libcurl</a> (which is underneath RCurl), but not with some Linux versions; in this case pass the location of the SSL cert file.</p>
 
 <pre><code class="r">post_body &lt;- list(
-  token = token,
-  content = &#39;record&#39;,
-  format = &#39;csv&#39;,
-  type = &#39;flat&#39;,
-  rawOrLabel = &#39;raw&#39;,
-  exportDataAccessGroups = &#39;true&#39;
+  token                       = token,
+  content                     = &#39;record&#39;,
+  format                      = &#39;csv&#39;,
+  type                        = &#39;flat&#39;,
+  rawOrLabel                  = &#39;raw&#39;,
+  exportDataAccessGroups      = &#39;true&#39;
 )
 
 raw_text &lt;- httr::POST(
-  url = redcap_uri,
-  body = post_body,
-  config = httr::config(ssl.verifypeer=FALSE),
+  url                         = redcap_uri,
+  body                        = post_body,
+  config                      = httr::config(ssl.verifypeer=FALSE),
   httr::verbose() #Remove this line to suppress the frequent console updates.
 )
 </code></pre></li>
@@ -318,44 +318,44 @@ raw_text &lt;- httr::POST(
 
 <p>Notice this call to <code>RCurl::postForm()</code> now passes values to the <code>records</code> and <code>fields</code> parameters.  Also notice the value is a <em>single</em> long string, rather a <em>vector</em> of shorter strings (which is more natural to most R users).</p>
 
-<pre><code class="r">redcap_uri &lt;- &quot;https://the.urlofyourinsitution.edu/api/&quot; #Adapt this to your server.
-token &lt;- &quot;your-secret-token&quot; #Adapt this to your user&#39;s token.
-records_collapsed &lt;- &quot;1,2,3&quot; #This assumes that their dataset contains ID values of 1, 2, and 3.  Adapt this to their dataset.
-fields_collapsed &lt;- &quot;record_id,name_first,name_last&quot; #This assumes that their dataset contains variables called &#39;record_id&#39;, &#39;name_first&#39;, and &#39;name_last&#39;.  Adapt this to their dataset.
+<pre><code class="r">redcap_uri         &lt;- &quot;https://the.urlofyourinsitution.edu/api/&quot; 
+token              &lt;- &quot;your-secret-token&quot;                        
+records_collapsed  &lt;- &quot;1,2,3&quot;                             # Assumes dataset contains ID values of 1-3.
+fields_collapsed   &lt;- &quot;record_id,name_first,name_last&quot;    # Assumes dataset contains these variables.
 
 raw_text &lt;- RCurl::postForm(
-  uri = redcap_uri
-  , token = token
-  , content = &#39;record&#39;
-  , format = &#39;csv&#39;
-  , type = &#39;flat&#39;
-  , rawOrLabel = &#39;raw&#39;
-  , exportDataAccessGroups = &#39;true&#39;
-  , records = records_collapsed
-  , fields = fields_collapsed
-  , .opts = RCurl::curlOptions(ssl.verifypeer=FALSE)
+  uri                          = redcap_uri
+  , token                      = token
+  , content                    = &#39;record&#39;
+  , format                     = &#39;csv&#39;
+  , type                       = &#39;flat&#39;
+  , rawOrLabel                 = &#39;raw&#39;
+  , exportDataAccessGroups     = &#39;true&#39;
+  , records                    = records_collapsed
+  , fields                     = fields_collapsed
+  , .opts                      = RCurl::curlOptions(ssl.verifypeer=FALSE)
 )
 </code></pre></li>
 <li><p><strong>Can the user query an <em>entire</em> project using RCurl?</strong> There are two advantages of trying a subset of the data.  First, small datasets avoid the time-out errors that plague large datasets.  Second, it may avoid problematic values being passed through the pipeline.  If the current check fails but the previous check succeedes, then experiment with different expanses of records and fields.  This should help determine which values are causing the problems, or if there&#39;s simply too much data being pulled in one pass.</p>
 
 <p>If the desired dataset is too large, consider if you can prune unnecessary records or fields.  If not, one solution is to pull smaller, multiple batches using the API, then reassemble them.  The <code>redcap_read()</code> function in <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/documentation-peek.pdf">REDCapR</a> does this automatically, and allows the user to specify a <code>batch_size</code>.</p>
 
-<pre><code class="r">redcap_uri &lt;- &quot;https://the.urlofyourinsitution.edu/api/&quot; #Adapt this to your server.
-token &lt;- &quot;your-secret-token&quot; #Adapt this to your user&#39;s token.
-records_collapsed &lt;- NULL
-fields_collapsed &lt;- NULL
+<pre><code class="r">redcap_uri                  &lt;- &quot;https://the.urlofyourinsitution.edu/api/&quot; 
+token                       &lt;- &quot;your-secret-token&quot;
+records_collapsed           &lt;- NULL
+fields_collapsed            &lt;- NULL
 
 raw_text &lt;- RCurl::postForm(
-  uri = redcap_uri
-  , token = token
-  , content = &#39;record&#39;
-  , format = &#39;csv&#39;
-  , type = &#39;flat&#39;
-  , rawOrLabel = &#39;raw&#39;
-  , exportDataAccessGroups = &#39;true&#39;
-  , records = records_collapsed
-  , fields = fields_collapsed
-  , .opts = RCurl::curlOptions(ssl.verifypeer=FALSE)
+  uri                        = redcap_uri
+  , token                    = token
+  , content                  = &#39;record&#39;
+  , format                   = &#39;csv&#39;
+  , type                     = &#39;flat&#39;
+  , rawOrLabel               = &#39;raw&#39;
+  , exportDataAccessGroups   = &#39;true&#39;
+  , records                  = records_collapsed
+  , fields                   = fields_collapsed
+  , .opts                    = RCurl::curlOptions(ssl.verifypeer=FALSE)
 )
 </code></pre></li>
 </ol>
@@ -380,7 +380,7 @@ devtools::install_github(repo=&quot;OuhscBbmc/REDCapR&quot;)
 <li><p><strong>Can the user export from an example project?</strong> This is the same fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a> as in the previous section.</p>
 
 <pre><code class="r">library(REDCapR) #Load the package into the current R session.
-uri &lt;- &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;
+uri   &lt;- &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;
 token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;
 redcap_read(redcap_uri=uri, token=token)$data
 </code></pre>
@@ -423,25 +423,25 @@ Reading batch 1 of 1, with ids 1 through 5.
 <li><p><strong>Can the user export from their own project?</strong> The code is similar to the previous check, but the <code>uri</code> and <code>token</code> values will need to be modified.</p>
 
 <pre><code class="r">library(REDCapR) #Load the package into the current R session, if you haven&#39;t already.
-redcap_uri &lt;- &quot;https://the.urlofyourinsitution.edu/api/&quot; #Adapt this to your server.
-token &lt;- &quot;your-secret-token&quot; #Adapt this to your user&#39;s token.
+redcap_uri       &lt;- &quot;https://the.urlofyourinsitution.edu/api/&quot;
+token            &lt;- &quot;your-secret-token&quot;
 redcap_read(redcap_uri=uri, token=token)$data
 </code></pre>
 
 <p>Alternatively, a <code>redcap_project</code> object can be declared initially, which makes subsequent calls cleaner when the token and url are required only the when the object is declared.</p>
 
 <pre><code class="r">library(REDCapR) #Load the package into the current R session, if you haven&#39;t already.
-uri &lt;- &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;
-token &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;  
-project &lt;- redcap_project$new(redcap_uri=uri, token=token)
+uri               &lt;- &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;
+token             &lt;- &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;  
+project           &lt;- redcap_project$new(redcap_uri=uri, token=token)
 
-dsThreeColumns &lt;- project$read(fields=c(&quot;record_id&quot;, &quot;sex&quot;, &quot;age&quot;))$data
+dsThreeColumns    &lt;- project$read(fields=c(&quot;record_id&quot;, &quot;sex&quot;, &quot;age&quot;))$data
 
-idsOfMales &lt;- dsThreeColumns[dsThreeColumns$sex==1, &quot;record_id&quot;]
-idsOfMinors &lt;- dsThreeColumns[dsThreeColumns$age &lt; 18, &quot;record_id&quot;]
+idsOfMales        &lt;- dsThreeColumns[dsThreeColumns$sex==1, &quot;record_id&quot;]
+idsOfMinors       &lt;- dsThreeColumns[dsThreeColumns$age &lt; 18, &quot;record_id&quot;]
 
-dsMales &lt;- project$read(records=idsOfMales, batch_size=2)$data
-dsMinors &lt;- project$read(records=idsOfMinors)$data
+dsMales           &lt;- project$read(records=idsOfMales, batch_size=2)$data
+dsMinors          &lt;- project$read(records=idsOfMinors)$data
 </code></pre></li>
 <li><p><strong>Is the export operation still unsuccessful using REDCapR?</strong>
 If so the &ldquo;Can the user query a <em>entire</em> REDCap project using RCurl?&rdquo; check succeeded, but the REDCapR checks did not, consider posting a new <a href="https://github.com/OuhscBbmc/REDCapR/issues">GitHub issue</a> to the package developers.</p></li>
@@ -466,14 +466,16 @@ devtools::install_github(repo=&quot;nutterb/redcapAPI&quot;)
 </code></pre></li>
 <li><p><strong>Does redcapAPI load successfully on the user&#39;s machine?</strong> If so, running <code>library(redcapAPI)</code> should produce the following output if you&#39;re starting with a fresh session of R:</p>
 
-<pre><code class="r">  library(redcapAPI)
-  ## Loading required package: redcapAPI
+<pre><code class="r">library(redcapAPI)
+## Loading required package: redcapAPI
 </code></pre></li>
 <li><p><strong>Can the user export from an example project?</strong> This is the same fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a> as in the previous section.</p>
 
 <pre><code class="r">library(redcapAPI) #Load the package into the current R session.
-rcon &lt;- redcapConnection(url = &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;,
-                         token = &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;)
+rcon &lt;- redcapConnection(
+  url   = &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;,
+  token = &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;
+)
 exportRecords(rcon)
 </code></pre>
 
@@ -510,8 +512,10 @@ demographics_complete
 <li><p><strong>Can the user export from their own project?</strong> The code is similar to the previous check, but the <code>uri</code> and <code>token</code> values will need to be modified.</p>
 
 <pre><code class="r">library(redcapAPI) #Load the package into the current R session, if you haven&#39;t already.
-rcon &lt;- redcapConnection(url = &quot;https://the.urlofyourinsitution.edu/api/&quot;, #Adapt this to your server.
-                         token = &quot;your-secret-token&quot;) #Adapt this to your user&#39;s token.
+rcon &lt;- redcapConnection(
+  url   = &quot;https://the.urlofyourinsitution.edu/api/&quot;, # Adapt this to your server.
+  token = &quot;your-secret-token&quot;                         # Adapt this to your user&#39;s token.
+) 
 exportRecords(rcon)
 </code></pre></li>
 <li><p><strong>Is the export operation still unsuccessful using redcapAPI?</strong> If so the &ldquo;Can the user query a <em>entire</em> REDCap project using RCurl?&rdquo; check succeeded, but the redcapAPI checks did not, consider posting a new <a href="https://github.com/nutterb/redcapAPI/issues">GitHub issue</a> to the package developers.</p></li>
@@ -547,7 +551,7 @@ exportRecords(rcon)
 
 <ul>
 <li>The basic API documentation is available on your REDCap server, typically at http://&lt;<em>your server name</em>&gt;/redcap/api/help.</li>
-<li>If you have access to the REDCap wiki, some newer examples might exist at <a href="https://community.projectredcap.org/articles/462/api-examples.html">https://community.projectredcap.org/articles/462/api-examples.html</a>.  The official documentation can be found on the <code>API Help Page</code> and API Examples&#39; pages on the REDCap wiki (ie, <a href="https://community.projectredcap.org/articles/456/api-documentation.html">https://community.projectredcap.org/articles/456/api-documentation.html</a> and <a href="https://community.projectredcap.org/articles/462/api-examples.html">https://community.projectredcap.org/articles/462/api-examples.html</a>). If you do not have an account  for the wiki, please ask your campus REDCap administrator to send you the static material.</li>
+<li>If you have access to the REDCap wiki, some newer examples might exist at <a href="https://community.projectredcap.org/articles/462/api-examples.html">https://community.projectredcap.org/articles/462/api-examples.html</a>.  The official documentation can be found on the <code>API Help Page</code> and API Examples&#39; pages on the REDCap wiki (ie, <a href="https://community.projectredcap.org/articles/456/api-documentation.html">https://community.projectredcap.org/articles/456/api-documentation.html</a> and <a href="https://community.projectredcap.org/articles/462/api-examples.html">https://community.projectredcap.org/articles/462/api-examples.html</a>). If you do not have an account for the wiki, please ask your campus REDCap administrator to send you the static material.</li>
 <li>Scott Burns, the primary developer of <a href="https://github.com/redcap-tools/PyCap">PyCap</a> has a good intro at <a href="http://sburns.org/2013/07/22/intro-to-redcap-api.html">http://sburns.org/2013/07/22/intro-to-redcap-api.html</a></li>
 <li>Bejamin Nutter, the primary developer of <a href="https://github.com/nutterb/redcapAPI/wiki">redcapAPI</a> has a good wiki at <a href="https://github.com/nutterb/redcapAPI/wiki">https://github.com/nutterb/redcapAPI/wiki</a></li>
 <li>In addition to this troubleshooting document, REDCapR has a <a href="http://htmlpreview.github.io/?https://github.com/OuhscBbmc/REDCapR/blob/master/inst/doc/BasicREDCapROperations.html">vignette</a> that covers its basic operations.</li>

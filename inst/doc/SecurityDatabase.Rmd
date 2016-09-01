@@ -21,9 +21,9 @@ Create a DSN on each client
 
 After executing the SQL code in an existing database, create an ODBC [DSN](http://en.wikipedia.org/wiki/Data_source_name) on *each* client machine that calls the database.  Download the most recent drivers (as of Aug 2016, the [most recent version is 13.1](https://msdn.microsoft.com/library/mt703139.aspx) for Windows and Linux, then run the wizard.  Many values in the wizard will remain at the default values.  Here are the important ones to change.
 
- 1. Set the DSN's `name` field to whatever is used in the repository's R code.
- 2. Set the authenticity method to `Integrated Windows authentication`.
- 3. Set the `default database` to the name of the database that containing the tokens *i.e.*, corresponding to the SQL code below in the example).
+1. Set the DSN's `name` field to whatever is used in the repository's R code.
+2. Set the authenticity method to `Integrated Windows authentication`.
+3. Set the `default database` to the name of the database that containing the tokens *i.e.*, corresponding to the SQL code below in the example).
 
 
 Note
@@ -53,12 +53,12 @@ GO
 -- Create a table to contain the token
 --
 CREATE TABLE [redcap_private].[tbl_credential](
-	[id] [smallint] NOT NULL,
-	[username] [varchar](30) NOT NULL,
-	[project_id] [smallint] NOT NULL,
-	[instance] [varchar](30) NOT NULL,
-	[token] [char](32) NOT NULL,
-	[redcap_uri] [varchar](255) NOT NULL,
+	[id]              [smallint]          NOT NULL,
+	[username]        [varchar](30)       NOT NULL,
+	[project_id]      [smallint]          NOT NULL,
+	[instance]        [varchar](30)       NOT NULL,
+	[token]           [char](32)          NOT NULL,
+	[redcap_uri]      [varchar](255)      NOT NULL,
  CONSTRAINT [PK_credential] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
@@ -67,9 +67,9 @@ CREATE TABLE [redcap_private].[tbl_credential](
 
 CREATE UNIQUE NONCLUSTERED INDEX [IX_tbl_credential_unique] ON [redcap_private].[tbl_credential]
 (
-	[instance] ASC,
-	[project_id] ASC,
-	[username] ASC
+	[instance]        ASC,
+	[project_id]      ASC,
+	[username]        ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 
@@ -88,8 +88,8 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-   SELECT username, project_id, token, redcap_uri FROM [redcap_private].[tbl_credential]
-   WHERE username=system_user AND project_id=@project_id AND instance=@instance
+  SELECT username, project_id, token, redcap_uri FROM [redcap_private].[tbl_credential]
+  WHERE username=system_user AND project_id=@project_id AND instance=@instance
 END
 ```
 
@@ -100,8 +100,8 @@ Create user credentials to the auxiliary database
 Add a user's LDAP account to the `SecurityAuxiliary` database so that they can query the tables to retrieve their API.
 
 Notice that this only gives the permissions to retrieve the token.  You must still:
- 1. grant them API privileges to each appropriate REDCap project, and
- 2. copy the API from the REDCap database into the  SecurityAuxiliary database.
+  1. grant them API privileges to each appropriate REDCap project, and
+  2. copy the API from the REDCap database into the  SecurityAuxiliary database.
 
 In the future `REDCapR` may expose a function that allows the user to perform the second step (through a stored procedure).
 
