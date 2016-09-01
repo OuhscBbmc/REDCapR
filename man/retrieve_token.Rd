@@ -46,20 +46,20 @@ library(REDCapR) #Load the package into the current R session.
 \dontrun{
 # ---- SQL Server Example ----------------------------
 # Rely on `retrieve_token()` to create & destory the channel.
-dsn <- "TokenSecurity"
-project <- "DiabetesSurveyProject"
-token <- retrieve_token(dsn=dsn, project_name=project)
+dsn      <- "TokenSecurity"
+project  <- "DiabetesSurveyProject"
+token    <- retrieve_token(dsn=dsn, project_name=project)
 
 # Create & close the channel yourself, to optimize repeated calls.
-dsn <- "TokenSecurity"
+dsn      <- "TokenSecurity"
 project1 <- "DiabetesSurveyProject1"
 project2 <- "DiabetesSurveyProject2"
 project3 <- "DiabetesSurveyProject3"
 
-channel <- RODBC::odbcConnect(dsn=dsn)
-token1 <- retrieve_token(dsn=dsn, project_name=project1)
-token2 <- retrieve_token(dsn=dsn, project_name=project2)
-token3 <- retrieve_token(dsn=dsn, project_name=project3)
+channel  <- RODBC::odbcConnect(dsn=dsn)
+token1   <- retrieve_token(dsn=dsn, project_name=project1)
+token2   <- retrieve_token(dsn=dsn, project_name=project2)
+token3   <- retrieve_token(dsn=dsn, project_name=project3)
 RODBC::odbcClose(channel)
 }
 }

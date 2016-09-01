@@ -32,8 +32,8 @@
 #' 
 #' @examples
 #' d <- data.frame(
-#'   record_id = 1:4,
-#'   flag_logical = c(TRUE, TRUE, FALSE, TRUE),
+#'   record_id      = 1:4,
+#'   flag_logical   = c(TRUE, TRUE, FALSE, TRUE),
 #'   flag_Uppercase = c(4, 6, 8, 2)
 #' )
 #' validate_for_write(d = d)

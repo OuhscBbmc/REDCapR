@@ -56,11 +56,11 @@ regex_named_captures(pattern=pattern_boxes, text=choices_1)
 checkbox_choices(select_choices=choices_1)
 
 \dontrun{
-uri <- "https://bbmc.ouhsc.edu/redcap/api/"
-token <- "9A81268476645C4E5F03428B8AC3AA7B"
+uri         <- "https://bbmc.ouhsc.edu/redcap/api/"
+token       <- "9A81268476645C4E5F03428B8AC3AA7B"
 
 ds_metadata <- redcap_metadata_read(redcap_uri=uri, token=token)$data
-choices_2 <- ds_metadata[ds_metadata$field_name=="race", "select_choices_or_calculations"]
+choices_2   <- ds_metadata[ds_metadata$field_name=="race", "select_choices_or_calculations"]
 
 regex_named_captures(pattern=pattern_boxes, text=choices_2)
 }
