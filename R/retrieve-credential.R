@@ -48,8 +48,8 @@
 #' library(REDCapR) #Load the package into the current R session.
 #' # ---- Local File Example ----------------------------
 #' path <- system.file("misc/example.credentials", package="REDCapR")
-#' (p1 <- retrieve_credential_local(path, 153))
-#' (p2 <- retrieve_credential_local(path, 212))
+#' (p1  <- retrieve_credential_local(path, 153L))
+#' (p2  <- retrieve_credential_local(path, 212L))
 
 retrieve_credential_local <- function(
   path_credential,
@@ -132,7 +132,6 @@ retrieve_credential_mssql <- function(
   
   if( !requireNamespace("RODBC", quietly=TRUE) ) 
     stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBC` package is not installed.  Please install it and try again.")
-
   if( !requireNamespace("RODBCext", quietly=TRUE) ) 
     stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBCext` package is not installed.  Please install it and try again.")
 
@@ -140,11 +139,11 @@ retrieve_credential_mssql <- function(
   regex_pattern_2 <- "^\\[*[a-zA-Z0-9_]+\\]*$"
   
   if( class(project_id)  != "integer" )
-    stop("The `project_id` parameter be a integer type.")
+    stop("The `project_id` parameter be an integer type.  Either append an `L` to the number, or cast with `as.integer()`.")
   if( class(instance)  != "character" )
-    stop("The `instance` parameter be a character type.")
+    stop("The `instance` parameter be a character type.  Either enclose in quotes, or cast with `as.character()`.")
   if( !(base::missing(dsn) | base::is.null(dsn)) & !(class(dsn) %in% c("character")) )
-    stop("The `dsn` parameter be a character type, or missing or NULL.")
+    stop("The `dsn` parameter be a character type, or missing or NULL.  Either enclose in quotes, or cast with `as.character()`.")
   if( !(base::missing(channel) | base::is.null(channel)) & !inherits(channel, "RODBC") )
     stop("The `channel` parameter be a `RODBC` type, or NULL.")
   

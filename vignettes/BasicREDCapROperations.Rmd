@@ -1,7 +1,8 @@
 ---
 title: Basic REDCapR Operations
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Basic REDCapR Operations}
   %\VignetteEngine{knitr::rmarkdown}

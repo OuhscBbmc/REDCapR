@@ -45,13 +45,13 @@ Currently, the function doesn't modify any variable types to conform to REDCap's
 \examples{
 \dontrun{ 
 #Define some constants
-uri  <- "https://bbmc.ouhsc.edu/redcap/api/"
-token <- "D70F9ACD1EDD6F151C6EA78683944E98" #For the simple project (pid 213)
-field <- "mugshot"
-event <- "" # only for longitudinal events
+uri       <- "https://bbmc.ouhsc.edu/redcap/api/"
+token     <- "D70F9ACD1EDD6F151C6EA78683944E98" #For the simple project (pid 213)
+field     <- "mugshot"
+event     <- "" # only for longitudinal events
 
 #Upload a single image file.
-record <- 1
+record    <- 1
 file_path <- base::file.path(devtools::inst(name="REDCapR"), paste0("test-data/mugshot-1.jpg"))
 
 redcap_upload_file_oneshot(
@@ -60,14 +60,14 @@ redcap_upload_file_oneshot(
 )
 
 #Upload a collection of five images.
-records <- 1:5
+records   <- 1:5
 file_paths <- base::file.path(
   devtools::inst(name="REDCapR"), 
   paste0("test-data/mugshot-", records, ".jpg")
 )
 
 for( i in seq_along(records) ) {
-  record <- records[i]
+  record    <- records[i]
   file_path <- file_paths[i]
   redcap_upload_file_oneshot(
     file_name=file_path, record=record, field=field,

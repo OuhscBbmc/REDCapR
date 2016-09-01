@@ -59,8 +59,8 @@ If you do not pass in this export_data_access_groups value, it will default to \
 \examples{
 \dontrun{
 library(REDCapR) #Load the package into the current R session.
-uri <- "https://bbmc.ouhsc.edu/redcap/api/"
-token <- "9A81268476645C4E5F03428B8AC3AA7B"
+uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
+token    <- "9A81268476645C4E5F03428B8AC3AA7B"
 #Return all records and all variables.
 ds_all_rows_all_fields <- redcap_read_oneshot(redcap_uri=uri, token=token)$data
 
@@ -68,26 +68,26 @@ ds_all_rows_all_fields <- redcap_read_oneshot(redcap_uri=uri, token=token)$data
 desired_records_v1 <- c(1, 3)
 ds_some_rows_v1 <- redcap_read_oneshot(
    redcap_uri = uri, 
-   token = token, 
-   records = desired_records_v1
+   token      = token, 
+   records    = desired_records_v1
 )$data
 
 #Return only the fields record_id, name_first, and age
 desired_fields_v1 <- c("record_id", "name_first", "age")
 ds_some_fields_v1 <- redcap_read_oneshot(
    redcap_uri = uri, 
-   token = token, 
-   fields = desired_fields_v1
+   token      = token, 
+   fields     = desired_fields_v1
 )$data
 
 
 #Use the SSL cert file that come with the openssl package.
 cert_location <- system.file("cacert.pem", package="openssl")
 if( file.exists(cert_location) ) {
-  config_options <- list(cainfo=cert_location)
+  config_options         <- list(cainfo=cert_location)
   ds_different_cert_file <- redcap_read_oneshot(
-    redcap_uri = uri,
-    token = token, 
+    redcap_uri     = uri,
+    token          = token, 
     config_options = config_options
   )$data
 }
@@ -95,15 +95,15 @@ if( file.exists(cert_location) ) {
 #Force the connection to use SSL=3 (which is not preferred, and possibly insecure).
 config_options <- list(sslversion=3)
 ds_ssl_3 <- redcap_read_oneshot(
-  redcap_uri = uri,
-  token = token, 
+  redcap_uri     = uri,
+  token          = token, 
   config_options = config_options
 )$data
 
 config_options <- list(ssl.verifypeer=FALSE)
 ds_no_ssl <- redcap_read_oneshot(
-   redcap_uri = uri,
-   token = token, 
+   redcap_uri     = uri,
+   token          = token, 
    config_options = config_options
 )$data
 }

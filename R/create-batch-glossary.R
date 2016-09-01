@@ -35,8 +35,8 @@
 #' create_batch_glossary(100, 3)
 #' d <- data.frame(
 #'   record_id = 1:100,
-#'   iv = sample(x=4, size=100, replace=TRUE),
-#'   dv = rnorm(n=100)
+#'   iv        = sample(x=4, size=100, replace=TRUE),
+#'   dv        = rnorm(n=100)
 #' )
 #' create_batch_glossary(nrow(d), batch_size=40)
 

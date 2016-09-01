@@ -33,35 +33,35 @@
 #' @examples
 #' \dontrun{ 
 #' #Define some constants
-#' uri  <- "https://bbmc.ouhsc.edu/redcap/api/"
-#' token <- "D70F9ACD1EDD6F151C6EA78683944E98"
+#' uri            <- "https://bbmc.ouhsc.edu/redcap/api/"
+#' token          <- "D70F9ACD1EDD6F151C6EA78683944E98"
 #' 
 #' # Read the dataset for the first time.
-#' result_read1 <- redcap_read_oneshot(redcap_uri=uri, token=token)
-#' ds1 <- result_read1$data
+#' result_read1   <- redcap_read_oneshot(redcap_uri=uri, token=token)
+#' ds1            <- result_read1$data
 #' ds1$telephone
 #' # The line above returns something like this (depending on its previous state).
 #' # [1] "(432) 456-4848" "(234) 234-2343" "(433) 435-9865" "(987) 654-3210" "(333) 333-4444"
 #' 
 #' # Manipulate a field in the dataset in a VALID way
-#' ds1$telephone <- sprintf("(405) 321-%1$i%1$i%1$i%1$i", seq_len(nrow(ds1)))
+#' ds1$telephone  <- sprintf("(405) 321-%1$i%1$i%1$i%1$i", seq_len(nrow(ds1)))
 #' 
 #' ds1 <- ds1[1:3, ]
-#' ds1$age <- NULL; ds1$bmi <- NULL #Drop the calculated fields before writing.
-#' result_write <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=token)
+#' ds1$age        <- NULL; ds1$bmi <- NULL #Drop the calculated fields before writing.
+#' result_write   <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=token)
 #' 
 #' # Read the dataset for the second time.
-#' result_read2 <- redcap_read_oneshot(redcap_uri=uri, token=token)
-#' ds2 <- result_read2$data
+#' result_read2   <- redcap_read_oneshot(redcap_uri=uri, token=token)
+#' ds2            <- result_read2$data
 #' ds2$telephone
 #' # The line above returns something like this.  Notice only the first three lines changed.
 #' # [1] "(405) 321-1111" "(405) 321-2222" "(405) 321-3333" "(987) 654-3210" "(333) 333-4444"
 #' 
 #' # Manipulate a field in the dataset in an INVALID way.  A US exchange can't be '111'.
-#' ds1$telephone <- sprintf("(405) 111-%1$i%1$i%1$i%1$i", seq_len(nrow(ds1)))
+#' ds1$telephone  <- sprintf("(405) 111-%1$i%1$i%1$i%1$i", seq_len(nrow(ds1)))
 #' 
 #' # This next line will throw an error.
-#' result_write <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=token)
+#' result_write   <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=token)
 #' result_write$raw_text
 #' }
 #' 

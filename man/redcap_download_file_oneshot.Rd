@@ -52,10 +52,10 @@ Currently, the function doesn't modify any variable types to conform to REDCap's
 }
 \examples{
 \dontrun{  
-uri  <- "https://bbmc.ouhsc.edu/redcap/api/"
-token <- "D70F9ACD1EDD6F151C6EA78683944E98" #pid=213
-record <- 1
-field <- "mugshot"
+uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
+token   <- "D70F9ACD1EDD6F151C6EA78683944E98" #pid=213
+record  <- 1
+field   <- "mugshot"
 # event <- "" # only for longitudinal events
 
 result_1 <- redcap_download_file_oneshot(
