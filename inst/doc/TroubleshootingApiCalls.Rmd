@@ -252,13 +252,13 @@ If you're not using REDCapR, you can skip this section and proceed to 'Importing
     token             <- "9A81268476645C4E5F03428B8AC3AA7B"  
     project           <- redcap_project$new(redcap_uri=uri, token=token)
     
-    dsThreeColumns    <- project$read(fields=c("record_id", "sex", "age"))$data
+    ds_three_columns  <- project$read(fields=c("record_id", "sex", "age"))$data
     
-    idsOfMales        <- dsThreeColumns[dsThreeColumns$sex==1, "record_id"]
-    idsOfMinors       <- dsThreeColumns[dsThreeColumns$age < 18, "record_id"]
+    ids_of_males      <- ds_three_columns$record_id[ds_three_columns$sex==1]
+    ids_of_minors     <- ds_three_columns$record_id[ds_three_columns$age < 18]
     
-    dsMales           <- project$read(records=idsOfMales, batch_size=2)$data
-    dsMinors          <- project$read(records=idsOfMinors)$data
+    ds_males          <- project$read(records=ids_of_males, batch_size=2)$data
+    ds_minors         <- project$read(records=ids_of_minors)$data
     ```
 
 1. **Is the export operation still unsuccessful using REDCapR?**
