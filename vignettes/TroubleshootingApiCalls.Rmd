@@ -1,7 +1,14 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Troubleshooting REDCap API Calls}
--->
+---
+title: Troubleshooting REDCap API Calls
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Troubleshooting REDCap API Calls}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
 
 Troubleshooting REDCap API Calls
 ==================================================================
