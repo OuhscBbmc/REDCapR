@@ -10,6 +10,7 @@
 #' @param records_collapsed A single string, where the desired ID values are separated by commas.  Optional.
 #' @param fields An array, where each element corresponds a desired project field.  Optional.
 #' @param fields_collapsed A single string, where the desired field names are separated by commas.  Optional.
+#' @param filter_logic String of logic text (e.g., \code{[gender] = 'male'}) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.
 #' @param events An array, where each element corresponds a desired project event  Optional.
 #' @param events_collapsed A single string, where the desired event names are separated by commas.  Optional.
 #' @param export_data_access_groups A boolean value that specifies whether or not to export the ``redcap_data_access_group'' field when data access groups are utilized in the project. Default is \code{FALSE}. See the details below.
@@ -24,6 +25,7 @@
 #'  \item \code{outcome_message}: A human readable string indicating the operation's outcome.
 #'  \item \code{records_collapsed}: The desired records IDs, collapsed into a single string, separated by commas.
 #'  \item \code{fields_collapsed}: The desired field names, collapsed into a single string, separated by commas.
+#'  \item \code{filter_logic}: The filter statement passed as an argument.
 #'  \item \code{elapsed_seconds}: The duration of the function.
 #'  \item \code{raw_text}: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
 #' }
@@ -97,6 +99,7 @@ redcap_read_oneshot <- function(
   fields=NULL, fields_collapsed="", 
   events=NULL, events_collapsed="",
   export_data_access_groups=FALSE,
+  filter_logic="",
   raw_or_label='raw', verbose=TRUE, config_options=NULL 
 ) {
   #TODO: NULL verbose parameter pulls from getOption("verbose")
@@ -120,6 +123,8 @@ redcap_read_oneshot <- function(
     fields_collapsed <- ifelse(is.null(fields), "", paste0(fields, collapse=",")) #This is an empty string if `fields` is NULL.
   if( all(nchar(events_collapsed)==0) )
     events_collapsed <- ifelse(is.null(events), "", paste0(events, collapse=",")) #This is an empty string if `events` is NULL.
+  if( all(nchar(filter_logic)==0) )
+    filter_logic <- ifelse(is.null(filter_logic), "", filter_logic) #This is an empty string if `filter_logic` is NULL.
   
   export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
 
@@ -132,9 +137,10 @@ redcap_read_oneshot <- function(
     exportDataAccessGroups  = export_data_access_groups_string,
     records                 = records_collapsed,
     fields                  = fields_collapsed,
-    events                  = events_collapsed
+    events                  = events_collapsed,
+    filterLogic             = filter_logic
   )
-  
+
   result <- httr::POST(
     url     = redcap_uri,
     body    = post_body,
@@ -196,6 +202,7 @@ redcap_read_oneshot <- function(
     outcome_message    = outcome_message,
     records_collapsed  = records_collapsed, 
     fields_collapsed   = fields_collapsed,
+    filter_logic       = filter_logic,
     events_collapsed   = events_collapsed,
     elapsed_seconds    = elapsed_seconds,
     raw_text           = raw_text
