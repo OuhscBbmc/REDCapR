@@ -73,6 +73,7 @@ test_that("All Records -Default", {
   # expect_match(returned_object1$status_messages, regexp="OK", perl=TRUE)
   expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_true(returned_object1$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)  
   
   ###########################
@@ -88,6 +89,7 @@ test_that("All Records -Default", {
   # expect_match(returned_object2$status_messages, regexp="OK", perl=TRUE)
   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_true(returned_object2$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
 test_that("All Records -Raw", {   
@@ -133,6 +135,7 @@ test_that("All Records -Raw", {
   # expect_match(returned_object1$status_messages, regexp="OK", perl=TRUE)
   expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_true(returned_object1$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)  
   
   ###########################
@@ -148,6 +151,7 @@ test_that("All Records -Raw", {
   # expect_match(returned_object2$status_messages, regexp="OK", perl=TRUE)
   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_true(returned_object2$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
 test_that("All Records -Raw and DAG", {   
@@ -194,6 +198,7 @@ test_that("All Records -Raw and DAG", {
   # expect_match(returned_object1$status_messages, regexp="OK", perl=TRUE)
   expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_true(returned_object1$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)  
   
   ###########################
@@ -209,6 +214,7 @@ test_that("All Records -Raw and DAG", {
   # expect_match(returned_object2$status_messages, regexp="OK", perl=TRUE)
   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_true(returned_object2$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
 test_that("All Records -label and DAG -one single batch", {   
@@ -262,6 +268,7 @@ test_that("All Records -label and DAG -one single batch", {
   # expect_match(returned_object1$status_messages, regexp="OK", perl=TRUE)
   expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_true(returned_object1$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)  
 })
 test_that("All Records -label and DAG -three tiny batches", {   
@@ -315,6 +322,7 @@ test_that("All Records -label and DAG -three tiny batches", {
   # expect_match(returned_object2$status_messages, regexp="OK", perl=TRUE)
   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_true(returned_object2$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)  
 })
 test_that("All Records -label", {   
@@ -374,6 +382,7 @@ test_that("All Records -label", {
   # expect_match(returned_object1$status_messages, regexp="OK", perl=TRUE)
   expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_true(returned_object1$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)  
   
 #   ###########################
