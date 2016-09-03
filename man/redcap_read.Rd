@@ -8,8 +8,8 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
   continue_on_error = FALSE, redcap_uri, token, records = NULL,
   records_collapsed = "", fields = NULL, fields_collapsed = "",
   events = NULL, events_collapsed = "", export_data_access_groups = FALSE,
-  raw_or_label = "raw", verbose = TRUE, config_options = NULL,
-  id_position = 1L)
+  filter_logic = "", raw_or_label = "raw", verbose = TRUE,
+  config_options = NULL, id_position = 1L)
 }
 \arguments{
 \item{batch_size}{The maximum number of subject records a single batch should contain.  The default is 100.}
@@ -36,6 +36,8 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
 
 \item{export_data_access_groups}{A boolean value that specifies whether or not to export the ``redcap_data_access_group'' field when data access groups are utilized in the project. Default is \code{FALSE}. See the details below.}
 
+\item{filter_logic}{String of logic text (e.g., \code{[gender] = 'male'}) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.}
+
 \item{raw_or_label}{A string (either \code{'raw'} or \code{'label'} that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is \code{'raw'}.}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.}
@@ -53,6 +55,7 @@ Currently, a list is returned with the following elements,
  \item \code{outcome_messages}: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.
  \item \code{records_collapsed}: The desired records IDs, collapsed into a single string, separated by commas.
  \item \code{fields_collapsed}: The desired field names, collapsed into a single string, separated by commas.
+ \item \code{filter_logic}: The filter statement passed as an argument.
  \item \code{elapsed_seconds}: The duration of the function.
 }
 }

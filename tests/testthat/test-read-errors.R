@@ -17,7 +17,6 @@ test_that("One Shot: Bad Uri -Not HTTPS", {
 
   expect_equal(returned_object$data, expected=data.frame(), label="An empty data.frame should be returned.")
   expect_true(returned_object$status_code %in% c(411L, 501L))
-  # expect_equal(returned_object$status_message, expected="Length Required")
   expect_true(returned_object$raw_text %in% c(expected_message_411, expected_message_501))
   # expect_equal(returned_object$raw_text, expected=expected_message)
   expect_equal(returned_object$records_collapsed, "")
@@ -40,7 +39,6 @@ test_that("One Shot: Bad Uri -wrong address", {
   
   expect_equal(returned_object$data, expected=data.frame(), label="An empty data.frame should be returned.")
   expect_equal(returned_object$status_code, expected=404L)
-  # expect_equal(returned_object$status_message, expected="Not Found")
   expect_equal(returned_object$raw_text, expected=expected_message)
   expect_equal(returned_object$records_collapsed, "")
   expect_equal(returned_object$fields_collapsed, "")
@@ -61,9 +59,7 @@ test_that("Batch: Bad Uri -Not HTTPS", {
   )  
   
   expect_equal(returned_object$data, expected=data.frame(), label="An empty data.frame should be returned.")
-  # expect_equal(returned_object$status_code, expected=411L)
   expect_true(returned_object$status_code %in% c(411L, 501L))
-  # expect_equal(returned_object$status_message, expected="Length Required")
   expect_equal(returned_object$records_collapsed, "failed in initial batch call")
   expect_equal(returned_object$fields_collapsed, "failed in initial batch call")
   expect_match(returned_object$outcome_messages, expected_outcome_message)
@@ -85,7 +81,6 @@ test_that("Batch: Bad Uri -wrong address", {
   
   expect_equal(returned_object$data, expected=data.frame(), label="An empty data.frame should be returned.")
   expect_equal(returned_object$status_code, expected=404L)
-  # expect_equal(returned_object$status_message, expected="Not Found")
   expect_equal(returned_object$records_collapsed, "failed in initial batch call")
   expect_equal(returned_object$fields_collapsed, "failed in initial batch call")
   expect_equal(returned_object$outcome_messages, expected_outcome_message) 
