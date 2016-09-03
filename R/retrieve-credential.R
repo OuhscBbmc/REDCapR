@@ -202,4 +202,5 @@ retrieve_credential_mssql <- function(
   
   return( credential )
 }
-# a <- REDCapR::retrieve_credential_mssql(dsn="BbmcSecurity", project_id=404, instance='bbmc')
+# credential <- REDCapR::retrieve_credential_mssql(dsn="BbmcSecurity", project_id=404L, instance='bbmc')
+# ds <- REDCapR::redcap_read(redcap_uri=credential$redcap_uri, token=credential$token)$data
