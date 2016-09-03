@@ -51,7 +51,6 @@ test_that("All Records -Default", {
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
-  # expect_match(returned_object$status_message, regexp="^OK", perl=TRUE) #For some reason, thhe win-builder was returning "OK\r\n".  No other windows r-dev version were fine.
   expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
@@ -296,7 +295,6 @@ test_that("Filter - numeric", {
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
-  # expect_match(returned_object$status_message, regexp="^OK", perl=TRUE) #For some reason, thhe win-builder was returning "OK\r\n".  No other windows r-dev version were fine.
   expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
@@ -331,7 +329,6 @@ test_that("Filter - character", {
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
-  # expect_match(returned_object$status_message, regexp="^OK", perl=TRUE) #For some reason, thhe win-builder was returning "OK\r\n".  No other windows r-dev version were fine.
   expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
