@@ -64,8 +64,8 @@ test_that("All Records -Default", {
   ###########################
   ## Default Batch size
   expect_message(
-    returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T),
-    regexp = expected_outcome_message
+    regexp            = expected_outcome_message,
+    returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T)
   )  
   expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
   expect_true(returned_object1$success)
@@ -124,8 +124,8 @@ test_that("All Records -Raw", {
   ###########################
   ## Default Batch size
   expect_message(
-    returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T),
-    regexp = expected_outcome_message
+    regexp            = expected_outcome_message,
+    returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T)
   )  
   expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
   expect_true(returned_object1$success)
@@ -138,8 +138,8 @@ test_that("All Records -Raw", {
   ###########################
   ## Tiny Batch size
   expect_message(
-    returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T, batch_size=2),
-    regexp = expected_outcome_message
+    regexp            = expected_outcome_message,
+    returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T, batch_size=2)
   )
   
   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
@@ -185,8 +185,8 @@ test_that("All Records -Raw and DAG", {
   ###########################
   ## Default Batch size
   expect_message(
-    returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="raw", export_data_access_groups="true", verbose=T),
-    regexp = expected_outcome_message
+    regexp            = expected_outcome_message,
+    returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="raw", export_data_access_groups="true", verbose=T)
   )  
   expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
   expect_true(returned_object1$success)
@@ -199,8 +199,8 @@ test_that("All Records -Raw and DAG", {
   ###########################
   ## Tiny Batch size
   expect_message(
-    returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="raw", export_data_access_groups="true", verbose=T, batch_size=2),
-    regexp = expected_outcome_message
+    regexp            = expected_outcome_message,
+    returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="raw", export_data_access_groups="true", verbose=T, batch_size=2)
   )
   
   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
@@ -253,8 +253,8 @@ test_that("All Records -label and DAG -one single batch", {
   ###########################
   ## Default Batch size
   expect_message(
-    returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups="true", verbose=T),
-    regexp = expected_outcome_message
+    regexp            = expected_outcome_message,
+    returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups="true", verbose=T)
   )  
   expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
   expect_true(returned_object1$success)
@@ -306,8 +306,8 @@ test_that("All Records -label and DAG -three tiny batches", {
   ###########################
   ## Default Batch size
   expect_message(
-    returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups="true", verbose=T, batch_size=2),
-    regexp = expected_outcome_message
+    regexp            = expected_outcome_message,
+    returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups="true", verbose=T, batch_size=2)
   )  
   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
   expect_true(returned_object2$success)
@@ -356,17 +356,12 @@ test_that("All Records -label", {
 
   
   expected_outcome_message <- "\\d+ records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
-  
-#   expect_message(
-#     returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups="false", verbose=T),
-#     regexp = expected_outcome_message
-#   )
-  
+
   ###########################
   ## Default Batch size
   expect_message(
-    returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups="false", verbose=T),
-    regexp = expected_outcome_message
+    regexp            = expected_outcome_message,
+    returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups="false", verbose=T)
   )  
   expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
   expect_true(returned_object1$success)
@@ -379,8 +374,8 @@ test_that("All Records -label", {
   ###########################
   ## Tiny Batch size
   expect_message(
-    returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups="false", verbose=T, batch_size=2),
-    regexp = expected_outcome_message
+    regexp            = expected_outcome_message,
+    returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups="false", verbose=T, batch_size=2)
   )
 
   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
@@ -415,8 +410,8 @@ test_that("Filter - numeric", {
   expected_outcome_message <- "2 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   filter <- "[age] >= 61"
   expect_message(
-    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T, filter_logic=filter),
-    regexp = expected_outcome_message
+    regexp           = expected_outcome_message,
+    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T, filter_logic=filter)
   )
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
@@ -448,8 +443,8 @@ test_that("Filter - character", {
   expected_outcome_message <- "1 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   filter <- "[name_first] = 'John Lee'"
   expect_message(
-    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T, filter_logic=filter),
-    regexp = expected_outcome_message
+    regexp           = expected_outcome_message,
+    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T, filter_logic=filter)
   )
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
