@@ -376,20 +376,19 @@ test_that("All Records -label", {
   expect_true(returned_object1$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)  
   
-#   ###########################
-#   ## Tiny Batch size
-#   expect_message(
-#     returned_object2 <- redcap_read(redcap_uri=uri, token=token, raw_or_label="label", export_data_access_groups="false", verbose=T, batch_size=2),
-#     regexp = expected_outcome_message
-#   )
-#   
-#   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
-#   expect_true(returned_object2$success)
-#   expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
-#   # expect_match(returned_object2$status_messages, regexp="OK", perl=TRUE)
-#   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
-#   expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
-#   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  ###########################
+  ## Tiny Batch size
+  expect_message(
+    returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups="false", verbose=T, batch_size=2),
+    regexp = expected_outcome_message
+  )
+
+  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
+  expect_true(returned_object2$success)
+  expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
+  expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
 
 test_that("Filter - numeric", {  
