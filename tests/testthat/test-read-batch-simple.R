@@ -421,7 +421,6 @@ test_that("Filter - numeric", {
   
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
-  # expect_match(returned_object$status_message, regexp="^OK", perl=TRUE) #For some reason, thhe win-builder was returning "OK\r\n".  No other windows r-dev version were fine.
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_equal(returned_object$filter_logic, filter, "The filter was not correct.")
