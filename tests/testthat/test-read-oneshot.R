@@ -265,3 +265,77 @@ test_that("All Records -label", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
+
+test_that("Filter - numeric", {  
+  testthat::skip_on_cran()
+  expected_data_frame <- structure(list(record_id = 3:4, name_first = c("Marcus", "Trudy"
+    ), name_last = c("Wood", "DAG"), address = c("243 Hill St.\nGuthrie OK 73402", 
+    "342 Elm\nDuncanville TX, 75116"), telephone = c("(405) 321-3333", 
+    "(405) 321-4444"), email = c("mw@mwood.net", "peroxide@blonde.com"
+    ), dob = c("1934-04-09", "1952-11-02"), age = c(80L, 61L), sex = c(1L, 
+    0L), demographics_complete = c(2L, 2L), height = c(180L, 165L
+    ), weight = c(80L, 54L), bmi = c(24.7, 19.8), comments = c("completely made up", 
+    "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail"
+    ), mugshot = c("[document]", "[document]"), health_complete = c(2L, 
+    2L), race___1 = c(0L, 0L), race___2 = 0:1, race___3 = c(0L, 0L
+    ), race___4 = c(1L, 0L), race___5 = c(1L, 1L), race___6 = c(0L, 
+    0L), ethnicity = 0:1, race_and_ethnicity_complete = c(2L, 2L)), .Names = c("record_id", 
+    "name_first", "name_last", "address", "telephone", "email", "dob", 
+    "age", "sex", "demographics_complete", "height", "weight", "bmi", 
+    "comments", "mugshot", "health_complete", "race___1", "race___2", 
+    "race___3", "race___4", "race___5", "race___6", "ethnicity", 
+    "race_and_ethnicity_complete"), class = "data.frame", row.names = c(NA, 
+    -2L))
+
+  expected_outcome_message <- "2 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  filter <- "[age] >= 61"
+  expect_message(
+    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T, filter_logic=filter),
+    regexp = expected_outcome_message
+  )
+  
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_equal(returned_object$status_code, expected=200L)
+  # expect_match(returned_object$status_message, regexp="^OK", perl=TRUE) #For some reason, thhe win-builder was returning "OK\r\n".  No other windows r-dev version were fine.
+  expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
+  expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_equal(returned_object$filter_logic, filter, "The filter was not correct.")
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true(returned_object$success)
+})
+
+test_that("Filter - character", {  
+  testthat::skip_on_cran()
+  expected_data_frame <- structure(list(record_id = 5L, name_first = "John Lee", name_last = "Walker", 
+    address = "Hotel Suite\nNew Orleans LA, 70115", telephone = "(405) 321-5555", 
+    email = "left@hippocket.com", dob = "1955-04-15", age = 59L, 
+    sex = 1L, demographics_complete = 2L, height = 193.04, weight = 104L, 
+    bmi = 27.9, comments = "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache", 
+    mugshot = "[document]", health_complete = 0L, race___1 = 1L, 
+    race___2 = 0L, race___3 = 0L, race___4 = 0L, race___5 = 0L, 
+    race___6 = 1L, ethnicity = 2L, race_and_ethnicity_complete = 2L), .Names = c("record_id", 
+    "name_first", "name_last", "address", "telephone", "email", "dob", 
+    "age", "sex", "demographics_complete", "height", "weight", "bmi", 
+    "comments", "mugshot", "health_complete", "race___1", "race___2", 
+    "race___3", "race___4", "race___5", "race___6", "ethnicity", 
+    "race_and_ethnicity_complete"), class = "data.frame", row.names = c(NA, 
+    -1L))
+
+  expected_outcome_message <- "1 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  filter <- "[name_first] = 'John Lee'"
+  expect_message(
+    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T, filter_logic=filter),
+    regexp = expected_outcome_message
+  )
+  
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_equal(returned_object$status_code, expected=200L)
+  # expect_match(returned_object$status_message, regexp="^OK", perl=TRUE) #For some reason, thhe win-builder was returning "OK\r\n".  No other windows r-dev version were fine.
+  expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
+  expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_equal(returned_object$filter_logic, filter, "The filter was not correct.")
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true(returned_object$success) 
+})
