@@ -36,6 +36,7 @@ Imports:
     dplyr,
     httr(>= 1.0.0.9000),
     methods,
+    magrittr,
     readr
 Suggests:
     devtools,
