@@ -4,10 +4,12 @@ New Features:
 * Support for filtering logic in `redcap_read()` and `redcap_read_oneshot()`.
 * New functions `retrieve_credential_mssql()` and `retrieve_credential_local()`.  These transition from storing & retrieving just the token (ie, `retrieve_token_mssql()`) to storing & retrieving more information.  `retrieve_credential_local()` facilitates a standard way of storing tokens locally, which should make it easier to follow practices of keeping it off the repository.
 * Using parameterized queries with the RODBCext package.  (Thanks @nutterb in issues #115 & #116.)
-* Remove line breaks from token (Thanks @haozhu233 in issues #103)
+* `redcap_read()` and `redcap_read_oneshot()` allows caller to specify data types for columns.
+* Remove line breaks from token (Thanks @haozhu233 in issues #103 & #104)
 
 Minor Updates:
 * Uses the `dplyr` package instead of `plyr`.  This shouldn't affect callers, because immediately before returning the data, `REDCapR::redcap_read()` coerces the `tibble::tibble` (which was formerly called `dplyr::tbl_df`) back to a vanilla `data.frame` with `as.data.frame()`.
+* Under the covers, uses `readr::read_csv()` instead of `utils::read.csv()`.
 
 Versions 0.9.3 (Developed 2015-08-25)
 ------------------------------------------------------------------------------

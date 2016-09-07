@@ -163,6 +163,7 @@ redcap_read_oneshot <- function(
     try (
       {
         ds <- utils::read.csv(text=raw_text, stringsAsFactors=FALSE)
+        # ds <- readr::read_csv(file=raw_text)
       }, #Convert the raw text to a dataset.
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
     )
@@ -178,6 +179,21 @@ redcap_read_oneshot <- function(
         round(elapsed_seconds, 1), " seconds.  The http status code was ",
         status_code, "."
       )
+      
+      ds <- ds %>%  #dplyr::`%>%`
+        dplyr::mutate_if(
+          is.character,
+          function(x) dplyr::coalesce(x, "") #Replace NAs with blanks
+        ) %>% 
+        dplyr::mutate_if(
+          is.character,
+          function( x ) gsub("\r\n", "\n", x, perl=TRUE)
+        ) %>% 
+        dplyr::mutate_if(
+          function( x) inherits(x, "Date"),
+          as.character
+        ) %>% 
+        base::as.data.frame()
     
       #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
       raw_text <- "" 

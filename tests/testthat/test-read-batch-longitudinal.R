@@ -16,10 +16,10 @@ test_that("Smoke Test", {
     returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T)    
   )  
   
-  #Static method w/ tiny batch size
-  expect_message(
-    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T, batch_size=2)    
-  )
+  # #Static method w/ tiny batch size
+  # expect_message(
+  #   returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T, batch_size=2)    
+  # )
   
   #Instance method w/ default batch size
   expect_message(

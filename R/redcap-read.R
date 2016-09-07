@@ -199,8 +199,14 @@ redcap_read <- function(
     
     rm(read_result) #Admittedly overkill defensiveness.
   }
-  
+  # browser()
+  # ds_stacked               <- dplyr::union_all(.dots=lst_batch)
   ds_stacked               <- as.data.frame(dplyr::bind_rows(lst_batch))
+  # ds_stacked               <- as.data.frame(dplyr::combine(lst_batch))
+  # colnames(ds_stacked)     <- colnames(lst_batch[[1]])
+  
+  # lst_batch[[1]]$vld1
+  # lst_batch[[2]]$vld1
   
   elapsed_seconds          <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
   status_code_combined     <- paste(lst_status_code, collapse="; ")
