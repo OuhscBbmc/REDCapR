@@ -33,6 +33,7 @@ Depends:
     R(>= 3.0.0),
     stats
 Imports:
+    data.table,
     dplyr,
     httr(>= 1.0.0.9000),
     methods,
