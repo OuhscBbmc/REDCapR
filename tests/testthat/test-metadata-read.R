@@ -154,7 +154,7 @@ test_that("All Records -Raw and DAG", {
   expected_outcome_message <- "5 records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="raw", export_data_access_groups="true", verbose=T),
+    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="raw", export_data_access_groups=TRUE, verbose=T),
     regexp = expected_outcome_message
   )
   
@@ -207,7 +207,7 @@ test_that("All Records -label and DAG", {
   expected_outcome_message <- "5 records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups="true", verbose=T),
+    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups=TRUE, verbose=T),
     regexp = expected_outcome_message
   )
   
@@ -259,7 +259,7 @@ test_that("All Records -label", {
   expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups="false", verbose=T),
+    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups=FALSE, verbose=T),
     regexp = expected_outcome_message
   )
   
