@@ -9,7 +9,7 @@
 
 REDCapR
 =======
-We’ve been using R with REDCap’s API since the Fall 2012 and have developed some functions that we're assembling in an R package: `REDCapR`.  The release version and documentation is on [CRAN](http://cran.r-project.org/package=REDCapR), while the development site for collaboration is on [GitHub](https://github.com/OuhscBbmc/REDCapR).
+We’ve been using R with REDCap’s API since the Fall 2012 and have developed some functions that we're assembling in an R package: `REDCapR`.  The release version and documentation is on [CRAN](https://cran.r-project.org/package=REDCapR), while the development site for collaboration is on [GitHub](https://github.com/OuhscBbmc/REDCapR).
 
 It was taking us a minimum of 50 lines of code to contact REDCap and robustly transform the returned CSV into an R `data.frame`.  It took more than twice that much code to implement batching.  All this can be done in one line of R code with the package's `redcap_read()` function:
 ```r
@@ -23,16 +23,16 @@ The `redcap_read()` function also accepts values for subsetting/filtering the re
 #Return only records with IDs of 1 and 4
 desired_records <- c(1, 4)
 ds_some_rows <- redcap_read(
-  redcap_uri   = uri, 
-  token        = token, 
+  redcap_uri   = uri,
+  token        = token,
   records      = desired_records
 )$data
 
 #Return only the fields record_id, name_first, and age
 desired_fields <- c("record_id", "name_first", "age")
 ds_some_fields <- redcap_read(
-  redcap_uri  = uri, 
-  token       = token, 
+  redcap_uri  = uri,
+  token       = token,
   fields      = desired_fields
 )$data
 ```
@@ -43,7 +43,7 @@ Our group has benefited so much from REDCap and the surrounding community, and w
 
 We'd like to thank the following developers for their [advice](https://github.com/OuhscBbmc/REDCapR/issues?q=is%3Aissue+is%3Aclosed) and [code contributions](https://github.com/OuhscBbmc/REDCapR/graphs/contributors): [Rollie Parrish](https://github.com/rparrish), [Scott Burns](https://github.com/sburns), [Benjamin Nutter](https://github.com/nutterb), [John Aponte](https://github.com/johnaponte), [Andrew Peters](https://github.com/ARPeters), and [Hao Zhu](https://github.com/haozhu233).
 
-Thanks, 
+Thanks,
 [Will Beasley](https://www.researchgate.net/profile/William_Beasley2), David Bard, & Thomas Wilson
 
 [University of Oklahoma Health Sciences Center](http://ouhsc.edu/),
@@ -54,12 +54,12 @@ Thanks,
 
 #### All Operating Systems
 
-| [CRAN](https://cran.r-project.org/) | [Version](http://cran.r-project.org/package=REDCapR) | [Rate](http://cranlogs.r-pkg.org/) | [Zenodo](https://zenodo.org/search?ln=en&p=redcapr) | 
+| [CRAN](https://cran.r-project.org/) | [Version](https://cran.r-project.org/package=REDCapR) | [Rate](http://cranlogs.r-pkg.org/) | [Zenodo](https://zenodo.org/search?ln=en&p=redcapr) |
 |  :---- | :----: | :----: | :----: |
-| [Latest](http://cran.r-project.org/package=REDCapR) | [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/REDCapR)](http://cran.r-project.org/package=REDCapR) | ![CRANPace](http://cranlogs.r-pkg.org/badges/REDCapR) | [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.28053.svg)](http://dx.doi.org/10.5281/zenodo.28053) |
+| [Latest](https://cran.r-project.org/package=REDCapR) | [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/REDCapR)](https://cran.r-project.org/package=REDCapR) | ![CRANPace](http://cranlogs.r-pkg.org/badges/REDCapR) | [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.28053.svg)](http://dx.doi.org/10.5281/zenodo.28053) |
 |   | *Latest CRAN version* | *CRAN Downloads* | *Independently-hosted Archive* |
 
-The *release* version of REDCapR can be installed from [CRAN](http://cran.r-project.org/package=REDCapR).
+The *release* version of REDCapR can be installed from [CRAN](https://cran.r-project.org/package=REDCapR).
 ```r
 install.packages("REDCapR")
 ```
@@ -77,7 +77,7 @@ If installing on Linux, the default R CHECK command will try (and fail) to insta
 devtools::check(force_suggests = FALSE)
 ```
 
-Alternatively, the RODBC package can be installed from your distribution's repository using the shell.  Here are instructions for [Ubuntu](http://cran.r-project.org/bin/linux/ubuntu/README.html) and [Red Hat](http://cran.r-project.org/bin/linux/redhat/README).  `unixodbc` is necessary for the `RODBCext` R package to be built.
+Alternatively, the RODBC package can be installed from your distribution's repository using the shell.  Here are instructions for [Ubuntu](https://cran.r-project.org/bin/linux/ubuntu/README.html) and [Red Hat](https://cran.r-project.org/bin/linux/redhat/README).  `unixodbc` is necessary for the `RODBCext` R package to be built.
 
 ```shell
 #From Ubuntu terminal

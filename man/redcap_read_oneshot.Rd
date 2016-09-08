@@ -56,7 +56,7 @@ This function uses REDCap's API to select and return data.
 }
 \details{
 The full list of configuration options accepted by the \code{httr} package is viewable by executing \code{httr::httr_options()}.  The \code{httr}
-package and documentation is available at \url{http://cran.r-project.org/package=httr}.
+package and documentation is available at \url{https://cran.r-project.org/package=httr}.
 
 If you do not pass in this export_data_access_groups value, it will default to \code{FALSE}. The following is from the API help page for version 5.2.3: This flag is only viable if the user whose token is being used to make the API request is *not* in a data access group. If the user is in a group, then this flag will revert to its default value.
 }
@@ -71,16 +71,16 @@ ds_all_rows_all_fields <- redcap_read_oneshot(redcap_uri=uri, token=token)$data
 #Return only records with IDs of 1 and 3
 desired_records_v1 <- c(1, 3)
 ds_some_rows_v1 <- redcap_read_oneshot(
-   redcap_uri = uri, 
-   token      = token, 
+   redcap_uri = uri,
+   token      = token,
    records    = desired_records_v1
 )$data
 
 #Return only the fields record_id, name_first, and age
 desired_fields_v1 <- c("record_id", "name_first", "age")
 ds_some_fields_v1 <- redcap_read_oneshot(
-   redcap_uri = uri, 
-   token      = token, 
+   redcap_uri = uri,
+   token      = token,
    fields     = desired_fields_v1
 )$data
 
@@ -91,7 +91,7 @@ if( file.exists(cert_location) ) {
   config_options         <- list(cainfo=cert_location)
   ds_different_cert_file <- redcap_read_oneshot(
     redcap_uri     = uri,
-    token          = token, 
+    token          = token,
     config_options = config_options
   )$data
 }
@@ -100,14 +100,14 @@ if( file.exists(cert_location) ) {
 config_options <- list(sslversion=3)
 ds_ssl_3 <- redcap_read_oneshot(
   redcap_uri     = uri,
-  token          = token, 
+  token          = token,
   config_options = config_options
 )$data
 
 config_options <- list(ssl.verifypeer=FALSE)
 ds_no_ssl <- redcap_read_oneshot(
    redcap_uri     = uri,
-   token          = token, 
+   token          = token,
    config_options = config_options
 )$data
 }
@@ -116,9 +116,9 @@ ds_no_ssl <- redcap_read_oneshot(
 Will Beasley
 }
 \references{
-The official documentation can be found on the `API Help Page` and `API Examples' pages 
+The official documentation can be found on the `API Help Page` and `API Examples' pages
 on the REDCap wiki (ie, \url{https://community.projectredcap.org/articles/456/api-documentation.html} and
-\url{https://community.projectredcap.org/articles/462/api-examples.html}). If you do not have an account 
+\url{https://community.projectredcap.org/articles/462/api-examples.html}). If you do not have an account
 for the wiki, please ask your campus REDCap administrator to send you the static material.
 
 The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.

@@ -3,6 +3,9 @@ language: r
 sudo: required
 cache: packages
 warnings_are_errors: true
+r:
+# - release
+  - devel
 apt_packages:
   - r-cran-rodbc
   - unixodbc-dev

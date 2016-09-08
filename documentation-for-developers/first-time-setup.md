@@ -1,7 +1,7 @@
 These notes are to hep potential REDCapR contributors get their development machines set up correctly to build the package.  It's also to help me remember how to do it if I switch to another computer.  Nothing mysterious -just little things to save 10 minutes here and there.  Unfortunately it's not as easy as installing R and RStudio and clicking `Build`.
 
 ### R
-Install the [latest version](https://cran.r-project.org/bin/windows/base/) of R.  Before a version is submitted to CRAN, the CRAN maintainers prefer you use the [patched](http://cran.r-project.org/bin/windows/base/rpatched.html) version of R, or even the [development](http://cran.r-project.org/bin/windows/base/rdevel.html) version.  These links point to the windows versions.  If you're running Linux, you probably already know how to get the right version, and there's not a simply URL I can link to.
+Install the [latest version](https://cran.r-project.org/bin/windows/base/) of R.  Before a version is submitted to CRAN, the CRAN maintainers prefer you use the [patched](https://cran.r-project.org/bin/windows/base/rpatched.html) version of R, or even the [development](https://cran.r-project.org/bin/windows/base/rdevel.html) version.  These links point to the windows versions.  If you're running Linux, you probably already know how to get the right version, and there's not a simply URL I can link to.
 
 ### RStudio
 Although other R IDEs are available, using [RStudio](http://www.rstudio.com/ide/download/desktop) will be easier when developing REDCapR, since that the major link of the tool chain I'm used to.
@@ -27,9 +27,9 @@ We try to keep a current list of all the packages used in REDCapR in the file `/
 ### RStudio on Linux
 I primarily developed this on Windows 8 with a patched, or development version of R (see the links above), but I also build it on a Ubuntu 13.04 box on my network through a browser to RStudio.  This is to make sure I'm not introducing any problems on Linux.  I didn't record what I did initially (I'll do that the next time I start fresh).  Here are some recent steps I needed to do for the LaTeX reference manual to build correctly.
 ```
-sudo apt-get install texinfo 
-sudo apt-get install texlive 
-sudo apt-get install texlive-fonts-extra 
+sudo apt-get install texinfo
+sudo apt-get install texlive
+sudo apt-get install texlive-fonts-extra
 ```
 See [texi2dvi missing](https://github.com/yihui/knitr/issues/214) and [textlive-fonts-extra](http://tex.stackexchange.com/questions/125274/error-font-ts1-zi4r-at-540-not-found) for installing.  See the [R CMD Rd2pdf](http://stackoverflow.com/questions/10819959/diagnosing-r-package-build-warning-latex-errors-when-creating-pdf-version) for getting better error messages than R CMD check.
 
