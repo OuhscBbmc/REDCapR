@@ -11,8 +11,8 @@ Date: 2016-09-07
 Authors@R: c(person("Will", "Beasley", role = c("aut", "cre"), email =
     "wibeasley@hotmail.com"), person("David", "Bard", role = "ctb"),
     person("Thomas", "Wilson", role = "ctb"), person(given="John J",
-    family="Aponte", role = "ctb"), person("Rollie", "Parrish",
-    role = "ctb", email =
+    family="Aponte", role = "ctb", email="john.aponte@isglobal.org"), 
+    person("Rollie", "Parrish", role = "ctb", email =
     "rparrish@flightweb.com"), person("Benjamin", "Nutter",
     role = "ctb"), person("Andrew", "Peters",
     role = "ctb"), person("Hao", "Zhu",
