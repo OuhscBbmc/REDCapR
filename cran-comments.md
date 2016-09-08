@@ -26,6 +26,9 @@ R CMD check results
 
 * It doesn't appear to be an official "NOTE", but there is a message about 1 invalid URLs producing a "libcurl error code 6".  This is a fake url that demonstrates how to built one to their own REDCap server: `http://<*your server name*>/redcap/api/help`.
 
+* It doesn't appear to be an official "NOTE", but there is a message about 2 invalid URLs producing a 403-Forbidden status. These are links to the private REDCap forums. These URLs are intentional and unavoidable; they lead to some very good information that's secured by the REDCap server developers. Almost everyone using this REDCapR package will have access to the REDCap forums. And if they're not in contact with an admin on their campus who has access to the wiki, there's a decent chance they're using the server without a license agreement. I've kept the count of the invalid links to a minimum (once per function), and suggested how the user should preocde if they don't have access.  These URL messages appear in the checks on some machines/builds, but not all.
+    * https://community.projectredcap.org/articles/456/api-documentation.html
+    * https://community.projectredcap.org/articles/462/api-examples.html
 
 Downstream dependencies
 -----------------------------------------------
