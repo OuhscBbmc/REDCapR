@@ -179,25 +179,26 @@ redcap_read_oneshot <- function(
         round(elapsed_seconds, 1), " seconds.  The http status code was ",
         status_code, "."
       )
-      
-      ds <- dplyr::mutate_if(
-        ds,
-        is.character,
-        function(x) dplyr::coalesce(x, "") #Replace NAs with blanks
-      ) 
-      
-      ds <- dplyr::mutate_if(
-        ds,
-        is.character,
-        function( x ) gsub("\r\n", "\n", x, perl=TRUE)
-      ) 
-      ds <-  dplyr::mutate_if(
-        ds,
-        function( x) inherits(x, "Date"),
-        as.character
-      ) 
-      
-      ds <- base::as.data.frame(ds)
+
+      # browser()
+      # ds <- dplyr::mutate_if(
+      #   ds,
+      #   is.character,
+      #   function(x) dplyr::coalesce(x, "") #Replace NAs with blanks
+      # ) 
+      # 
+      # ds <- dplyr::mutate_if(
+      #   ds,
+      #   is.character,
+      #   function( x ) gsub("\r\n", "\n", x, perl=TRUE)
+      # ) 
+      # ds <- dplyr::mutate_if(
+      #   ds,
+      #   function( x) inherits(x, "Date"),
+      #   as.character
+      # ) 
+      # 
+      # ds <- base::as.data.frame(ds)
     
       #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
       raw_text <- "" 
