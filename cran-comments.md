@@ -8,9 +8,10 @@ Thank you for taking the time to review my submission, and please tell me if the
 Test environments
 -----------------------------------------------
 
+* Local Ubuntu, R 3.3.1 patched
 * Local Win8, R 3.3.1 patched
 * Local Win8, R 3.4.0 devel
-* [win-builder](http://win-builder.r-project.org/Ah51K5zq8lvu/) (version="R-devel")
+* [win-builder](http://win-builder.r-project.org/Y7BvJp8BAiH2/) (version="R-devel")
 * [Travis CI](https://travis-ci.org/OuhscBbmc/REDCapR), Ubuntu 12.04 LTS
 * [AppVeyor](https://ci.appveyor.com/project/wibeasley/REDCapR), Windows Server 2012
 
