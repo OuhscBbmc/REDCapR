@@ -1,6 +1,6 @@
 Description
 -----------------------------------------------
-This submission addresses breaking builds related to changing packages underneath.  It also adds new features.
+This submission addresses breaking builds related to changing packages underneath.  It also adds new features.  In response to Kurt's request this morning, the example url `http://<*your server name*>/redcap/api/help` has been encolsed in a code block, so it doesn't show up in the check.
 
 Thank you for taking the time to review my submission, and please tell me if there's something else I should do for CRAN.  -Will Beasley
 
@@ -11,7 +11,7 @@ Test environments
 * Local Ubuntu, R 3.3.1 patched
 * Local Win8, R 3.3.1 patched
 * Local Win8, R 3.4.0 devel
-* [win-builder](http://win-builder.r-project.org/Y7BvJp8BAiH2/) (version="R-devel")
+* [win-builder](http://win-builder.r-project.org/K3oV4Wlpmp0c/) (version="R-devel")
 * [Travis CI](https://travis-ci.org/OuhscBbmc/REDCapR), Ubuntu 12.04 LTS
 * [AppVeyor](https://ci.appveyor.com/project/wibeasley/REDCapR), Windows Server 2012
 
