@@ -104,17 +104,20 @@ redcap_read_oneshot <- function(
 ) {
   #TODO: NULL verbose parameter pulls from getOption("verbose")
   #TODO: warns if any requested fields aren't entirely lowercase.
-  #TODO: validate export_data_access_groups
-  #TODO: validate raw_or_label
 
   start_time <- Sys.time()
 
   if( missing(redcap_uri) )
     stop("The required parameter `redcap_uri` was missing from the call to `redcap_read_oneshot()`.")
-
   if( missing(token) )
     stop("The required parameter `token` was missing from the call to `redcap_read_oneshot()`.")
-
+  if( !is.logical(export_data_access_groups) )
+    stop("The optional parameter `export_data_access_groups` must be a logical/Boolean variable.")
+  if( !is.character(filter_logic) )
+    stop("The optional parameter `filter_logic` must be a character/string variable.")
+  if( !(raw_or_label %in% c("raw", "label")) )
+    stop("The optional parameter `raw_or_label` must be either 'raw' or 'label'.")
+  
   token <- sub("\\n", "", token)
 
   if( all(nchar(records_collapsed)==0) )
@@ -126,6 +129,9 @@ redcap_read_oneshot <- function(
   if( all(nchar(filter_logic)==0) )
     filter_logic <- ifelse(is.null(filter_logic), "", filter_logic) #This is an empty string if `filter_logic` is NULL.
 
+  if( any(grepl("[A-Z]", fields_collapsed)) )
+    warning("The fields passed to REDCap appear to have at least uppercase letter.  REDCap variable names are snake case.")
+  
   export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
 
   post_body <- list(
