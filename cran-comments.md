@@ -11,7 +11,7 @@ Test environments
 * Local Ubuntu, R 3.3.1 patched
 * Local Win8, R 3.3.1 patched
 * Local Win8, R 3.4.0 devel
-* [win-builder](http://win-builder.r-project.org/M5egIeHC52x4/) (version="R-devel")
+* [win-builder](http://win-builder.r-project.org/K3oV4Wlpmp0c/) (version="R-devel")
 * [Travis CI](https://travis-ci.org/OuhscBbmc/REDCapR), Ubuntu 12.04 LTS
 * [AppVeyor](https://ci.appveyor.com/project/wibeasley/REDCapR), Windows Server 2012
 
