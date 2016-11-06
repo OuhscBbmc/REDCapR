@@ -38,7 +38,7 @@ would like help adapting this approach to your infrastructure.
 
 There's a lot of error checking for SQL injection, but remember that the user is executing under their 
 own credentials, so this doesn't obviate the need for disciplined credential management.  There's nothing 
-that can be done with this R function that isn't already exposed by any other interface intot he database 
+that can be done with this R function that isn't already exposed by any other interface into the database 
 (eg, SQL Server Managment Studio, or MySQL Workbench.)
 }
 \examples{
