@@ -17,7 +17,7 @@ test_that("sanitize_last_names", {
   #   So I don't feel compelled to either.  It was having some localization issues too.
   dirty <- data.frame(id=1:3, names=c("Ekstr\xf8m", "J\xf6reskog", "bi\xdfchen Z\xfcrcher"))
   
-  expected_linux <- structure(list(id = c("1", "2", "3"), names = c("Ekstr?m", "Joreskog", 
+  expected_ubuntu <- structure(list(id = c("1", "2", "3"), names = c("Ekstr?m", "Joreskog", 
     "bisschen Zurcher")), .Names = c("id", "names"), row.names = c(NA, 
     -3L), class = "data.frame")
   
@@ -25,11 +25,17 @@ test_that("sanitize_last_names", {
     "bi?chen Zurcher")), .Names = c("id", "names"), row.names = c(NA, 
     -3L), class = "data.frame")
   
+  expected_fedora <- structure(list(id = c("1", "2", "3"), names = c("Ekstrom", "Joreskog", 
+    "bisschen Zurcher")), .Names = c("id", "names"), row.names = c(NA, 
+    -3L), class = "data.frame")
+
   #The different OSes can have subtly different conversions, b/c they're based on different underlying conversion libraries.
   if( Sys.info()["sysname"]=="Windows" ) {
     expected <- expected_windows
+  } else if ( grepl("^Fedora", sessionInfo()$running) ) {
+    expected <- expected_fedora
   } else {
-    expected <- expected_linux
+    expected <- expected_ubuntu
   }
 
   observed <- REDCapR::redcap_column_sanitize(dirty)
