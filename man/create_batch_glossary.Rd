@@ -44,10 +44,9 @@ d <- data.frame(
 )
 create_batch_glossary(nrow(d), batch_size=40)
 }
-\author{
-Will Beasley
-}
 \seealso{
 See \code{\link{redcap_read}} for a function that uses \code{create_batch_gloassary}.
 }
-
+\author{
+Will Beasley
+}

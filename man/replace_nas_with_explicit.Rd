@@ -34,4 +34,3 @@ library(REDCapR) #Load the package into the current R session.
 \author{
 Will Beasley
 }
-

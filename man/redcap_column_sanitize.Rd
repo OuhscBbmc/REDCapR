@@ -44,4 +44,3 @@ REDCapR::redcap_column_sanitize(dirty)
 \author{
 Will Beasley
 }
-

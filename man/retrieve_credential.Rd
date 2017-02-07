@@ -64,4 +64,3 @@ path <- system.file("misc/example.credentials", package="REDCapR")
 \author{
 Will Beasley
 }
-

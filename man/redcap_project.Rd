@@ -16,6 +16,7 @@ later calls are less verbose (such as reading and writing data).  The functional
 
 \item{\code{token}}{token The user-specific string that serves as the password for a project.  Required.}
 }}
+
 \section{Methods}{
 
 \describe{
@@ -27,6 +28,7 @@ later calls are less verbose (such as reading and writing data).  The functional
 \item{\code{write(ds_to_write, batch_size = 100L, interbatch_delay = 0,
   verbose = TRUE, config_options = NULL)}}{Imports records to a REDCap project.}
 }}
+
 \examples{
 library(REDCapR) #Load the package into the current R session.
 uri <- "https://bbmc.ouhsc.edu/redcap/api/"
@@ -54,4 +56,3 @@ ds_three_columns$sex <- sex_original
 project$write(ds_three_columns)
 }
 }
-

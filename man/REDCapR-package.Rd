@@ -2,8 +2,8 @@
 % Please edit documentation in R/REDCapR-package.R
 \docType{package}
 \name{REDCapR-package}
-\alias{REDCapR}
 \alias{REDCapR-package}
+\alias{REDCapR}
 \title{R utilities for interacting with a REDCap data system <http://www.project-redcap.org/>}
 \description{
 Much of this package has been developed to support the needs of the following projects.  We appreciate the support.
@@ -45,4 +45,3 @@ install.packages('REDCapR')
 devtools::install_github('OuhscBbmc/REDCapR')
 }
 }
-

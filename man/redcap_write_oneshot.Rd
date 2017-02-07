@@ -72,9 +72,6 @@ result_write$raw_text
 }
 
 }
-\author{
-Will Beasley
-}
 \references{
 The official documentation can be found on the `API Help Page` and `API Examples' pages 
 on the REDCap wiki (ie, \url{https://community.projectredcap.org/articles/456/api-documentation.html} and
@@ -83,4 +80,6 @@ for the wiki, please ask your campus REDCap administrator to send you the static
 
 The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.
 }
-
+\author{
+Will Beasley
+}

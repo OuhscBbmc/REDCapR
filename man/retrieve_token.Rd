@@ -66,4 +66,3 @@ RODBC::odbcClose(channel)
 \author{
 Will Beasley
 }
-
