@@ -7,7 +7,7 @@ Description: Encapsulates functions to streamline calls from R to the REDCap
     to access and modify data programmatically, improving the capacity for
     literate and reproducible programming.
 Version: 0.9.7.9000
-Date: 2016-12-22
+Date: 2017-02-06
 Authors@R: c(person("Will", "Beasley", role = c("aut", "cre"), email =
     "wibeasley@hotmail.com"), person("David", "Bard", role = "ctb"),
     person("Thomas", "Wilson", role = "ctb"), person(given="John J",

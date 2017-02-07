@@ -117,7 +117,7 @@ redcap_read_oneshot <- function(
     stop("The optional parameter `filter_logic` must be a character/string variable.")
   if( !(raw_or_label %in% c("raw", "label")) )
     stop("The optional parameter `raw_or_label` must be either 'raw' or 'label'.")
-  
+
   token <- sub("\\n", "", token)
 
   if( all(nchar(records_collapsed)==0) )
@@ -131,7 +131,7 @@ redcap_read_oneshot <- function(
 
   if( any(grepl("[A-Z]", fields_collapsed)) )
     warning("The fields passed to REDCap appear to have at least uppercase letter.  REDCap variable names are snake case.")
-  
+
   export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
 
   post_body <- list(
@@ -161,9 +161,14 @@ redcap_read_oneshot <- function(
 
   # raw_text <- "The hostname (redcap-db.hsc.net.ou.edu) / username (redcapsql) / password (XXXXXX) combination could not connect to the MySQL server. \r\n\t\tPlease check their values."
   regex_cannot_connect <- "^The hostname \\((.+)\\) / username \\((.+)\\) / password \\((.+)\\) combination could not connect.+"
+  regex_empty <- "^\\s+$"
 
-  if( any(grepl(regex_cannot_connect, raw_text)) )
+  if(
+    any(grepl(regex_cannot_connect, raw_text)) |
+    any(grepl(regex_empty, raw_text))
+  ) {
     success <- FALSE
+  }
 
   if( success ) {
     try (
@@ -216,7 +221,11 @@ redcap_read_oneshot <- function(
   }
   else {
     ds                 <- data.frame() #Return an empty data.frame
-    outcome_message    <- paste0("The REDCapR read/export operation was not successful.  The error message was:\n",  raw_text)
+    if( any(grepl(regex_empty, raw_text)) ) {
+      outcome_message    <- "The REDCapR read/export operation was not successful.  The returned dataset was empty."
+    } else {
+      outcome_message    <- paste0("The REDCapR read/export operation was not successful.  The error message was:\n",  raw_text)
+    }
   }
 
   if( verbose )
