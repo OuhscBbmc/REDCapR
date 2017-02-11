@@ -48,7 +48,7 @@ populate_project_simple <- function( batch = FALSE ) {
   return( list(is_success=returned_object$success, redcap_project=project) )
 }
 clear_project_simple <- function( verbose = TRUE ) {
-  if( !requireNamespace("testthat", quietly=TRUE) ) stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.")
+  if( !requireNamespace("testthat") ) stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.")
   pathDeleteTestRecord <- "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_simple.php"
 
   # httr::url_ok(pathDeleteTestRecord)
@@ -63,7 +63,7 @@ clear_project_simple <- function( verbose = TRUE ) {
 }
 
 clean_start_simple <- function( batch = FALSE, delay_in_seconds = 1 ) {
-  if( !requireNamespace("testthat", quietly=TRUE) ) stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.")
+  if( !requireNamespace("testthat") ) stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.")
   testthat::expect_message(
     clear_result <- clear_project_simple(),
     regexp = "clear_project_simple success: TRUE."   

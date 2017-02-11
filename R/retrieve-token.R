@@ -62,9 +62,9 @@ retrieve_token_mssql <- function(
 ) {
   message("REDCapR::retrieve_token_mssql() is deprecated: please use REDCapR::retrieve_credential_mssql() instead.")
 
-  if( !requireNamespace("RODBC", quietly=TRUE) ) 
+  if( !requireNamespace("RODBC") ) 
     stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBC` package is not installed.  Please install it and try again.")
-  if( !requireNamespace("RODBCext", quietly=TRUE) ) 
+  if( !requireNamespace("RODBCext") ) 
     stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBCext` package is not installed.  Please install it and try again.")
 
   regex_pattern_1 <- "^[a-zA-Z0-9_]+$"
