@@ -54,10 +54,10 @@ Thanks,
 
 #### All Operating Systems
 
-| [CRAN](https://cran.r-project.org/) | [Version](https://cran.r-project.org/package=REDCapR) | [Rate](http://cranlogs.r-pkg.org/) | [Zenodo](https://zenodo.org/search?ln=en&p=redcapr) |
-|  :---- | :----: | :----: | :----: |
-| [Latest](https://cran.r-project.org/package=REDCapR) | [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/REDCapR)](https://cran.r-project.org/package=REDCapR) | ![CRANPace](http://cranlogs.r-pkg.org/badges/REDCapR) | [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.61990.svg)](http://dx.doi.org/10.5281/zenodo.61990) |
-|   | *Latest CRAN version* | *CRAN Downloads* | *Independently-hosted Archive* |
+| [CRAN](https://cran.r-project.org/) | [Version](https://cran.r-project.org/package=REDCapR) | [Rate](http://cranlogs.r-pkg.org/) | [Zenodo](https://zenodo.org/search?ln=en&p=redcapr) | [RDocumentation](https://www.rdocumentation.org/) |
+|  :---- | :----: | :----: | :----: | :----: | 
+| [Latest](https://cran.r-project.org/package=REDCapR) | [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/REDCapR)](https://cran.r-project.org/package=REDCapR) | ![CRANPace](http://cranlogs.r-pkg.org/badges/REDCapR) | [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.61990.svg)](http://dx.doi.org/10.5281/zenodo.61990) | [![Rdoc](http://www.rdocumentation.org/badges/version/REDCapR)](http://www.rdocumentation.org/packages/REDCapR) |
+|   | *Latest CRAN version* | *CRAN Downloads* | *Independently-hosted Archive* | *HTML Documentation* |
 
 The *release* version of REDCapR can be installed from [CRAN](https://cran.r-project.org/package=REDCapR).
 ```r
