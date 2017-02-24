@@ -1,5 +1,3 @@
-<!-- rmarkdown v1 -->
-
 | [GitHub](https://github.com/OuhscBbmc/REDCapR) | [Travis-CI](https://travis-ci.org/OuhscBbmc/REDCapR/builds) | [AppVeyor](https://ci.appveyor.com/project/wibeasley/redcapr/history) | [Coveralls](https://coveralls.io/r/OuhscBbmc/REDCapR) |
 | :----- | :---------------------------: | :-----------------------------: | :-------: |
 | [Master](https://github.com/OuhscBbmc/REDCapR/tree/master) | [![Build Status](https://travis-ci.org/OuhscBbmc/REDCapR.svg?branch=master)](https://travis-ci.org/OuhscBbmc/REDCapR) | [![Build status](https://ci.appveyor.com/api/projects/status/0i41tn0n2jo4pd2k/branch/master?svg=true)](https://ci.appveyor.com/project/wibeasley/redcapr/branch/master) | [![Coverage Status](https://coveralls.io/repos/OuhscBbmc/REDCapR/badge.svg?branch=master)](https://coveralls.io/r/OuhscBbmc/REDCapR?branch=master) |
@@ -7,18 +5,16 @@
 | | *Ubuntu 12.04 LTS* | *Windows Server 2012* | *Test Coverage* | *Independently-hosted Archive* |
 
 
-REDCapR
+[REDCapR](https://github.com/OuhscBbmc/REDCapR)
 =======
-We’ve been using R with REDCap’s API since the Fall 2012 and have developed some functions that we're assembling in an R package: `REDCapR`.  The release version and documentation is on [CRAN](https://cran.r-project.org/package=REDCapR), while the development site for collaboration is on [GitHub](https://github.com/OuhscBbmc/REDCapR).
+We’ve been using R with [REDCap](https://projectredcap.org/)’s API since the Fall 2012 and have developed some functions that we're assembling in an R package: [`REDCapR`](https://github.com/OuhscBbmc/REDCapR).  The release version and documentation is on [CRAN](https://cran.r-project.org/package=REDCapR), while the development site for collaboration is on [GitHub](https://github.com/OuhscBbmc/REDCapR).
 
-It was taking us a minimum of 50 lines of code to contact REDCap and robustly transform the returned CSV into an R `data.frame`.  It took more than twice that much code to implement batching.  All this can be done in one line of R code with the package's `redcap_read()` function:
+It was taking 50+ lines of code to contact REDCap and robustly transform the returned CSV into an R `data.frame`; it took twice that much to implement batching.  All this can be done in one line of R code with the package's [`redcap_read()`](https://www.rdocumentation.org/packages/REDCapR/topics/redcap_read) function:
 ```r
 ds <- redcap_read(redcap_uri=uri, token=token)$data
 ```
 
-The `REDCapR` package includes the SSL certificate retrieved by [`httr`'s `find_cert_bundle()`](https://github.com/hadley/httr/blob/master/R/utils.r).  Your REDCap server's identity is always verified, unless the setting is overridden (or alternative certificates can also be provided).
-
-The `redcap_read()` function also accepts values for subsetting/filtering the records and fields.  The [most recent documentation](https://github.com/OuhscBbmc/REDCapR/blob/master/documentation-peek.pdf) can be found in the [GitHub repository](https://github.com/OuhscBbmc/REDCapR).  A [vignette](https://cdn.rawgit.com/OuhscBbmc/REDCapR/master/inst/doc/BasicREDCapROperations.html) has also been started.  Here's are two examples; the first selects only a portion of the rows, while the second selects only a portion of the columns.
+The [`redcap_read()`](https://www.rdocumentation.org/packages/REDCapR/topics/redcap_read) function also accepts values for subsetting/filtering the records and fields.  The [development version's documentation](https://github.com/OuhscBbmc/REDCapR/blob/master/documentation-peek.pdf) can be found in the [GitHub repository](https://github.com/OuhscBbmc/REDCapR).  A [vignette](https://cdn.rawgit.com/OuhscBbmc/REDCapR/master/inst/doc/BasicREDCapROperations.html) has also been started.  Here's are two examples; the first selects only a portion of the rows, while the second selects only a portion of the columns.
 ```r
 #Return only records with IDs of 1 and 4
 desired_records <- c(1, 4)
@@ -37,9 +33,11 @@ ds_some_fields <- redcap_read(
 )$data
 ```
 
-In the next year, we hope to implement everything exposed by the REDCap API.  If there's a feature that would help your projects, feel free to post something here in the forums, or create an issue in REDCapR's [GitHub repository](https://github.com/OuhscBbmc/REDCapR/issues).  A [troubleshooting](https://cdn.rawgit.com/OuhscBbmc/REDCapR/master/inst/doc/TroubleshootingApiCalls.html) document helps diagnose issues with the API.
+The `REDCapR` package includes the SSL certificate retrieved by [`httr`'s `find_cert_bundle()`](https://github.com/hadley/httr/blob/master/R/utils.r).  Your REDCap server's identity is always verified, unless the setting is overridden (or alternative certificates can also be provided).
 
-Our group has benefited so much from REDCap and the surrounding community, and we'd like to contribute back.  Suggestions, criticisms, and code contributions are welcome.  And if anyone is interested in trying a direction that suits them better, we'll be happy to explain the package's internals and help you fork your own version.  We have some starting material described in the [`./documentation_for_developers/`](https://github.com/OuhscBbmc/REDCapR/tree/master/documentation-for-developers) directory.  Also a few other libraries exist for communicating with REDCap, which are listed in the [REDCap Tools](http://redcap-tools.github.io/projects/) directory.
+To keep our maintence efforts managable, the package implements only the REDCap API functions that have been requested.  If there's a feature that would help your projects, please tell us about it in a new issue in REDCapR's [GitHub repository](https://github.com/OuhscBbmc/REDCapR/issues).  A [troubleshooting](https://cdn.rawgit.com/OuhscBbmc/REDCapR/master/inst/doc/TroubleshootingApiCalls.html) document helps diagnose issues with the API.
+
+Our group has benefited from REDCap and the surrounding community, and we'd like to contribute back.  Suggestions, criticisms, and code contributions are welcome.  And if anyone is interested in trying a direction that suits them better, we'll be happy to explain the package's internals and help you fork your own version.  We have some starting material described in the [`./documentation_for_developers/`](https://github.com/OuhscBbmc/REDCapR/tree/master/documentation-for-developers) directory.  Also checkout the other libraries that exist for communicating with REDCap, which are listed in the [REDCap Tools](http://redcap-tools.github.io/projects/) directory.
 
 We'd like to thank the following developers for their [advice](https://github.com/OuhscBbmc/REDCapR/issues?q=is%3Aissue+is%3Aclosed) and [code contributions](https://github.com/OuhscBbmc/REDCapR/graphs/contributors): [Rollie Parrish](https://github.com/rparrish), [Scott Burns](https://github.com/sburns), [Benjamin Nutter](https://github.com/nutterb), [John Aponte](https://github.com/johnaponte), [Andrew Peters](https://github.com/ARPeters), and [Hao Zhu](https://github.com/haozhu233).
 
@@ -54,10 +52,10 @@ Thanks,
 
 #### All Operating Systems
 
-| [CRAN](https://cran.r-project.org/) | [Version](https://cran.r-project.org/package=REDCapR) | [Rate](http://cranlogs.r-pkg.org/) | [Zenodo](https://zenodo.org/search?ln=en&p=redcapr) |
-|  :---- | :----: | :----: | :----: |
-| [Latest](https://cran.r-project.org/package=REDCapR) | [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/REDCapR)](https://cran.r-project.org/package=REDCapR) | ![CRANPace](http://cranlogs.r-pkg.org/badges/REDCapR) | [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.61990.svg)](http://dx.doi.org/10.5281/zenodo.61990) |
-|   | *Latest CRAN version* | *CRAN Downloads* | *Independently-hosted Archive* |
+| [CRAN](https://cran.r-project.org/) | [Version](https://cran.r-project.org/package=REDCapR) | [Rate](http://cranlogs.r-pkg.org/) | [Zenodo](https://zenodo.org/search?ln=en&p=redcapr) | [RDocumentation](https://www.rdocumentation.org/) |
+|  :---- | :----: | :----: | :----: | :----: | 
+| [Latest](https://cran.r-project.org/package=REDCapR) | [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/REDCapR)](https://cran.r-project.org/package=REDCapR) | ![CRANPace](http://cranlogs.r-pkg.org/badges/REDCapR) | [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.61990.svg)](http://dx.doi.org/10.5281/zenodo.61990) | [![Rdoc](http://www.rdocumentation.org/badges/version/REDCapR)](http://www.rdocumentation.org/packages/REDCapR) |
+|   | *Latest CRAN version* | *CRAN Downloads* | *Independently-hosted Archive* | *HTML Documentation* |
 
 The *release* version of REDCapR can be installed from [CRAN](https://cran.r-project.org/package=REDCapR).
 ```r
@@ -77,7 +75,7 @@ If installing on Linux, the default R CHECK command will try (and fail) to insta
 devtools::check(force_suggests = FALSE)
 ```
 
-Alternatively, the RODBC package can be installed from your distribution's repository using the shell.  Here are instructions for [Ubuntu](https://cran.r-project.org/bin/linux/ubuntu/README.html) and [Red Hat](https://cran.r-project.org/bin/linux/redhat/README).  `unixodbc` is necessary for the `RODBCext` R package to be built.
+Alternatively, the [RODBC](https://CRAN.R-project.org/package=RODBC) package can be installed from your distribution's repository using the shell.  Here are instructions for [Ubuntu](https://cran.r-project.org/bin/linux/ubuntu/README.html) and [Red Hat](https://cran.r-project.org/bin/linux/redhat/README).  `unixodbc` is necessary for the [`RODBCext`](https://CRAN.R-project.org/package=RODBCext) R package to be built.
 
 ```shell
 #From Ubuntu terminal
@@ -88,7 +86,7 @@ sudo yum install R-RODBC unixODBC-devel
 ```
 
 ### Collaborative Development
-We encourage input and collaboration from the overall community.  If you're familar with GitHub and R packages, feel free to submit a [pull request](https://github.com/OuhscBbmc/REDCapR/pulls).  If you'd like to report a bug or make a suggestion, please create a GitHub [issue](https://github.com/OuhscBbmc/REDCapR/issues); issues are a usually a good place to ask public questions too.  However, feel free to email Will (<wibeasley@hotmail.com>).  Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+We encourage input and collaboration from the overall community.  If you're familar with GitHub and R packages, feel free to submit a [pull request](https://github.com/OuhscBbmc/REDCapR/pulls).  If you'd like to report a bug or make a suggestion, please create a GitHub [issue](https://github.com/OuhscBbmc/REDCapR/issues); issues are a usually a good place to ask public questions too.  However, feel free to email Will (<wibeasley@hotmail.com>).  Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md); by participating in this project you agree to abide by its terms.
 
 ### Thanks to Funders
 
