@@ -42,8 +42,27 @@ ds_eav <- readr::read_csv(raw_text)
 
 # ---- tweak-data --------------------------------------------------------------
 
-ds_checkbox <- ds_metadata %>%
+ds_meta_checkbox <- ds_metadata %>%
   dplyr::filter(field_type=="checkbox")
+
+ds_possible_checkbox_rows <- ds_meta_checkbox %>%
+  dplyr::select(field_name, select_choices_or_calculations) %>%
+  # dplyr::rowwise() %>%
+  dplyr::mutate(
+    ids   = gsub("(\\d+),.+?(\\||$)", "\\1", select_choices_or_calculations),
+    ids   = strsplit(ids, " ")
+  ) %>%
+  dplyr::select(-select_choices_or_calculations) %>%
+  tidyr::unnest(ids) %>%
+  dplyr::transmute(
+    # field_name_base     = field_name,
+    field_name          = paste0(field_name, "___", ids)
+  ) %>%
+  tidyr::crossing(
+    field_name = .,
+    record_id  = dplyr::distinct(ds_eav, record)
+  ) %>%
+  tibble::as_tibble()
 
 ds_eav_2 <- ds_eav %>%
   dplyr::left_join(
@@ -56,7 +75,7 @@ ds_eav_2 <- ds_eav %>%
     value      = dplyr::if_else(!is.na(field_type) & (field_type=="checkbox"), "TRUE"                          , value     )
   )
 
-# TODO: get this list from metadata, in case there are columns that aren't yet populated.
+# # TODO: get this list from metadata, in case there are columns that aren't yet populated.
 checkboxes <- ds_eav_2 %>%
   dplyr::filter(field_type=="checkbox") %>%
   dplyr::distinct(field_name) %>%
@@ -75,14 +94,17 @@ ds_2 <- ds %>%
     .funs = function(x) !is.na(x)                       # If there's any value, then it's TRUE.  Missingness is converted to FALSE.
   )
 
-strsplit(ds_checkbox$select_choices_or_calculations[[1]], split="\\s*\\|\\s*", perl=F)[[1]]
+# strsplit(ds_meta_checkbox$select_choices_or_calculations[[1]], split="\\s*\\|\\s*", perl=F)[[1]]
 
 checkbox_ids <-
-  ds_checkbox$select_choices_or_calculations[1] %>%
+  ds_meta_checkbox$select_choices_or_calculations[1] %>%
   strsplit( split="\\s*\\|\\s*", perl=F) %>%
   .[[1]] %>%
   gsub("(\\d{1,}),\\s*.+", "\\1", ., perl=T) %>%
   as.integer()
+
+ds_meta_checkbox$select_choices_or_calculations %>%
+  gsub("(\\d+),.+?(\\||$)", "\\1", .)
 
 
 # ---- verify-values -----------------------------------------------------------
