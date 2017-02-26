@@ -42,10 +42,10 @@ ds_eav <- readr::read_csv(raw_text)
 
 # ---- tweak-data --------------------------------------------------------------
 
-ds_checkbox <- ds_metadata %>%
-  dplyr::filter(field_type=="checkbox")
+# ds_checkbox <- ds_metadata %>%
+#   dplyr::filter(field_type=="checkbox")
 
-ds <- ds_eav %>%
+ds_eav_2 <- ds_eav %>%
   dplyr::left_join(
     ds_metadata %>%
       dplyr::select(field_name, field_type),
@@ -54,10 +54,31 @@ ds <- ds_eav %>%
   dplyr::mutate(
     field_name = dplyr::if_else(!is.na(field_type) & (field_type=="checkbox"), paste0(field_name, "___", value), field_name),
     value      = dplyr::if_else(!is.na(field_type) & (field_type=="checkbox"), "TRUE"                          , value     )
-  ) %>%
+  )
+
+# TODO: get this list from metadata, in case there are columns that aren't yet populated.
+checkboxes <- ds_eav_2 %>%
+  dplyr::filter(field_type=="checkbox") %>%
+  dplyr::distinct(field_name) %>%
+  .[["field_name"]] %>%
+  sort()
+
+ds <- ds_eav_2 %>%
   dplyr::select(-field_type) %>%
   tidyr::spread(key=field_name, value=value)#, -record)
+# ds2 <- ds
+
+ds[, 2:ncol(ds)] <- lapply(ds[, 2:ncol(ds), drop=FALSE], type.convert)
+
+ds_2 <- ds %>%
+  dplyr::mutate_at(
+    .cols = dplyr::vars(dplyr::one_of(checkboxes)),
+    .funs = function(x) !is.na(x)                       # If there's any value, then it's TRUE.  Missingness is converted to FALSE.
+  )
 
 # ---- verify-values -----------------------------------------------------------
+setdiff(colnames(ds_expected), colnames(ds_2))
+setdiff(colnames(ds_2), colnames(ds_expected))
+
 # testit::assert("All IDs should be nonmissing and positive.", all(!is.na(ds$CountyID) & (ds$CountyID>0)))
 
