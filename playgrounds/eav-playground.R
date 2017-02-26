@@ -42,8 +42,8 @@ ds_eav <- readr::read_csv(raw_text)
 
 # ---- tweak-data --------------------------------------------------------------
 
-# ds_checkbox <- ds_metadata %>%
-#   dplyr::filter(field_type=="checkbox")
+ds_checkbox <- ds_metadata %>%
+  dplyr::filter(field_type=="checkbox")
 
 ds_eav_2 <- ds_eav %>%
   dplyr::left_join(
@@ -74,6 +74,16 @@ ds_2 <- ds %>%
     .cols = dplyr::vars(dplyr::one_of(checkboxes)),
     .funs = function(x) !is.na(x)                       # If there's any value, then it's TRUE.  Missingness is converted to FALSE.
   )
+
+strsplit(ds_checkbox$select_choices_or_calculations[[1]], split="\\s*\\|\\s*", perl=F)[[1]]
+
+checkbox_ids <-
+  ds_checkbox$select_choices_or_calculations[1] %>%
+  strsplit( split="\\s*\\|\\s*", perl=F) %>%
+  .[[1]] %>%
+  gsub("(\\d{1,}),\\s*.+", "\\1", ., perl=T) %>%
+  as.integer()
+
 
 # ---- verify-values -----------------------------------------------------------
 setdiff(colnames(ds_expected), colnames(ds_2))
