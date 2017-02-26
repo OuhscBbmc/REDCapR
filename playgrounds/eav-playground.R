@@ -17,7 +17,11 @@ raw_or_label <- "raw"
 export_data_access_groups_string <- "true"
 
 # ---- load-data ---------------------------------------------------------------
+# system.time(
 ds_expected <- REDCapR::redcap_read_oneshot(redcap_uri, token)$data
+# )
+
+# system.time({
 ds_metadata <- REDCapR::redcap_metadata_read(redcap_uri, token)$data
 
 r <- httr::POST(
@@ -39,15 +43,13 @@ r$headers$statusmessage
 raw_text <- httr::content(r, "text")
 
 ds_eav <- readr::read_csv(raw_text)
+# })
 
 # ---- tweak-data --------------------------------------------------------------
 
-ds_meta_checkbox <- ds_metadata %>%
-  dplyr::filter(field_type=="checkbox")
-
-ds_possible_checkbox_rows <- ds_meta_checkbox %>%
+ds_possible_checkbox_rows <- ds_metadata %>%
+  dplyr::filter(field_type=="checkbox") %>%
   dplyr::select(field_name, select_choices_or_calculations) %>%
-  # dplyr::rowwise() %>%
   dplyr::mutate(
     ids   = gsub("(\\d+),.+?(\\||$)", "\\1", select_choices_or_calculations),
     ids   = strsplit(ids, " ")
@@ -60,7 +62,8 @@ ds_possible_checkbox_rows <- ds_meta_checkbox %>%
   ) %>%
   tidyr::crossing(
     field_name = .,
-    record_id  = dplyr::distinct(ds_eav, record)
+    record     = dplyr::distinct(ds_eav, record),
+    field_type = "checkbox"
   ) %>%
   tibble::as_tibble()
 
@@ -71,16 +74,12 @@ ds_eav_2 <- ds_eav %>%
     by = "field_name"
   ) %>%
   dplyr::mutate(
-    field_name = dplyr::if_else(!is.na(field_type) & (field_type=="checkbox"), paste0(field_name, "___", value), field_name),
-    value      = dplyr::if_else(!is.na(field_type) & (field_type=="checkbox"), "TRUE"                          , value     )
+    field_name = dplyr::if_else(!is.na(field_type) & (field_type=="checkbox"), paste0(field_name, "___", value), field_name)
+  ) %>%
+  dplyr::full_join(ds_possible_checkbox_rows, by=c("record", "field_name", "field_type")) %>%
+  dplyr::mutate(
+    value      = dplyr::if_else(!is.na(field_type) & (field_type=="checkbox"), as.character(!is.na(value))                        , value     )
   )
-
-# # TODO: get this list from metadata, in case there are columns that aren't yet populated.
-checkboxes <- ds_eav_2 %>%
-  dplyr::filter(field_type=="checkbox") %>%
-  dplyr::distinct(field_name) %>%
-  .[["field_name"]] %>%
-  sort()
 
 ds <- ds_eav_2 %>%
   dplyr::select(-field_type) %>%
@@ -88,23 +87,9 @@ ds <- ds_eav_2 %>%
 
 ds_2 <- ds %>%
   dplyr::mutate_if(is.character, type.convert) %>%
-  dplyr::mutate_if(is.factor   , as.character) %>%
-  dplyr::mutate_at(
-    .cols = dplyr::vars(dplyr::one_of(checkboxes)),
-    .funs = function(x) !is.na(x)                       # If there's any value, then it's TRUE.  Missingness is converted to FALSE.
-  )
+  dplyr::mutate_if(is.factor   , as.character)
 
-# strsplit(ds_meta_checkbox$select_choices_or_calculations[[1]], split="\\s*\\|\\s*", perl=F)[[1]]
 
-checkbox_ids <-
-  ds_meta_checkbox$select_choices_or_calculations[1] %>%
-  strsplit( split="\\s*\\|\\s*", perl=F) %>%
-  .[[1]] %>%
-  gsub("(\\d{1,}),\\s*.+", "\\1", ., perl=T) %>%
-  as.integer()
-
-ds_meta_checkbox$select_choices_or_calculations %>%
-  gsub("(\\d+),.+?(\\||$)", "\\1", .)
 
 
 # ---- verify-values -----------------------------------------------------------
@@ -112,4 +97,32 @@ setdiff(colnames(ds_expected), colnames(ds_2))
 setdiff(colnames(ds_2), colnames(ds_expected))
 
 # testit::assert("All IDs should be nonmissing and positive.", all(!is.na(ds$CountyID) & (ds$CountyID>0)))
+
+
+# ---- old-snippets ------------------------------------------------------------
+
+# TODO: get this list from metadata, in case there are columns that aren't yet populated.
+# checkboxes <- ds_eav_2 %>%
+#   dplyr::filter(field_type=="checkbox") %>%
+#   dplyr::distinct(field_name) %>%
+#   .[["field_name"]] %>%
+#   sort()
+
+# strsplit(ds_meta_checkbox$select_choices_or_calculations[[1]], split="\\s*\\|\\s*", perl=F)[[1]]
+
+# checkbox_ids <-
+#   ds_meta_checkbox$select_choices_or_calculations[1] %>%
+#   strsplit( split="\\s*\\|\\s*", perl=F) %>%
+#   .[[1]] %>%
+#   gsub("(\\d{1,}),\\s*.+", "\\1", ., perl=T) %>%
+#   as.integer()
+#
+# ds_meta_checkbox$select_choices_or_calculations %>%
+#   gsub("(\\d+),.+?(\\||$)", "\\1", .)
+#
+# ds_2 <- ds_2 %>%
+#   dplyr::mutate_at(
+#     .cols = dplyr::vars(dplyr::one_of(checkboxes)),
+#     .funs = function(x) !is.na(x)                       # If there's any value, then it's TRUE.  Missingness is converted to FALSE.
+#   )
 
