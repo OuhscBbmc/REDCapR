@@ -65,12 +65,11 @@ checkboxes <- ds_eav_2 %>%
 
 ds <- ds_eav_2 %>%
   dplyr::select(-field_type) %>%
-  tidyr::spread(key=field_name, value=value)#, -record)
-# ds2 <- ds
-
-ds[, 2:ncol(ds)] <- lapply(ds[, 2:ncol(ds), drop=FALSE], type.convert)
+  tidyr::spread(key=field_name, value=value)
 
 ds_2 <- ds %>%
+  dplyr::mutate_if(is.character, type.convert) %>%
+  dplyr::mutate_if(is.factor   , as.character) %>%
   dplyr::mutate_at(
     .cols = dplyr::vars(dplyr::one_of(checkboxes)),
     .funs = function(x) !is.na(x)                       # If there's any value, then it's TRUE.  Missingness is converted to FALSE.
