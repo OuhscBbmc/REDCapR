@@ -17,11 +17,11 @@ raw_or_label <- "raw"
 export_data_access_groups_string <- "true"
 
 # ---- load-data ---------------------------------------------------------------
-# system.time(
+system.time(
 ds_expected <- REDCapR::redcap_read_oneshot(redcap_uri, token)$data
-# )
+)
 
-# system.time({
+system.time({
 ds_metadata <- REDCapR::redcap_metadata_read(redcap_uri, token)$data
 
 r <- httr::POST(
@@ -34,7 +34,7 @@ r <- httr::POST(
     # , rawOrLabel = raw_or_label
     # , exportDataAccessGroups = export_data_access_groups_string
     # , records = records_collapsed
-    # , fields = fields_collapsed
+    # , fields = "studyid,referral_source" #fields_collapsed
   )
 )
 r$status_code
@@ -43,17 +43,16 @@ r$headers$statusmessage
 raw_text <- httr::content(r, "text")
 
 ds_eav <- readr::read_csv(raw_text)
-# })
+# ds_csv <- readr::read_csv(raw_text)
+# ds_json <- jsonlite::fromJSON(raw_text)
+})
 
 # ---- tweak-data --------------------------------------------------------------
 
-# TODO: split this up in the middle, so a vector of columns/variable names is created,
-#   that combines the metadata columns, with the expanded checkboxes.
 ds_metadata_expanded <- ds_metadata %>%
-  # dplyr::filter(field_type=="checkbox") %>%
   dplyr::select(field_name, select_choices_or_calculations, field_type) %>%
   dplyr::mutate(
-    is_checkbox  = field_type=="checkbox",
+    is_checkbox  = (field_type=="checkbox"),
     ids   = dplyr::if_else(is_checkbox, select_choices_or_calculations, "1"),
     ids   = gsub("(\\d+),.+?(\\||$)", "\\1", ids),
     ids   = strsplit(ids, " ")
@@ -62,12 +61,11 @@ ds_metadata_expanded <- ds_metadata %>%
   tidyr::unnest(ids) %>%
   dplyr::transmute(
     is_checkbox,
-    # field_name_base     = field_name,
     field_name          = dplyr::if_else(is_checkbox, paste0(field_name, "___", ids), field_name)
   ) %>%
   tibble::as_tibble()
 
-field_name <- ds_metadata_expanded %>%
+ds_possible_checkbox_rows <- ds_metadata_expanded %>%
   dplyr::filter(is_checkbox) %>%
   .[["field_name"]] %>%
   tidyr::crossing(
@@ -92,20 +90,20 @@ ds_eav_2 <- ds_eav %>%
 
 ds <- ds_eav_2 %>%
   dplyr::select(-field_type) %>%
-  tidyr::spread(key=field_name, value=value)
-
-ds_3 <- ds %>%
-  dplyr::mutate_if(is.character, type.convert) %>%
-  dplyr::mutate_if(is.factor   , as.character) %>%
+  tidyr::spread(key=field_name, value=value) %>%
   dplyr::select_(.dots=ds_metadata_expanded$field_name)
 
-stop("25 to 21 variables?")
+ds_2 <- ds %>%
+  dplyr::mutate_if(is.character, type.convert) %>%
+  dplyr::mutate_if(is.factor   , as.character)
 
 
 # ---- verify-values -----------------------------------------------------------
 setdiff(colnames(ds_expected), colnames(ds_2))
 setdiff(colnames(ds_2), colnames(ds_expected))
 
+# setdiff(colnames(ds_3), colnames(ds_2))
+# setdiff(colnames(ds_2), colnames(ds_3))
 # testit::assert("All IDs should be nonmissing and positive.", all(!is.na(ds$CountyID) & (ds$CountyID>0)))
 
 
