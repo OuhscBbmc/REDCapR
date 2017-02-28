@@ -47,25 +47,34 @@ ds_eav <- readr::read_csv(raw_text)
 
 # ---- tweak-data --------------------------------------------------------------
 
-ds_possible_checkbox_rows <- ds_metadata %>%
-  dplyr::filter(field_type=="checkbox") %>%
-  dplyr::select(field_name, select_choices_or_calculations) %>%
+# TODO: split this up in the middle, so a vector of columns/variable names is created,
+#   that combines the metadata columns, with the expanded checkboxes.
+ds_metadata_expanded <- ds_metadata %>%
+  # dplyr::filter(field_type=="checkbox") %>%
+  dplyr::select(field_name, select_choices_or_calculations, field_type) %>%
   dplyr::mutate(
-    ids   = gsub("(\\d+),.+?(\\||$)", "\\1", select_choices_or_calculations),
+    is_checkbox  = field_type=="checkbox",
+    ids   = dplyr::if_else(is_checkbox, select_choices_or_calculations, "1"),
+    ids   = gsub("(\\d+),.+?(\\||$)", "\\1", ids),
     ids   = strsplit(ids, " ")
   ) %>%
-  dplyr::select(-select_choices_or_calculations) %>%
+  dplyr::select(-select_choices_or_calculations, -field_type) %>%
   tidyr::unnest(ids) %>%
   dplyr::transmute(
+    is_checkbox,
     # field_name_base     = field_name,
-    field_name          = paste0(field_name, "___", ids)
+    field_name          = dplyr::if_else(is_checkbox, paste0(field_name, "___", ids), field_name)
   ) %>%
+  tibble::as_tibble()
+
+field_name <- ds_metadata_expanded %>%
+  dplyr::filter(is_checkbox) %>%
+  .[["field_name"]] %>%
   tidyr::crossing(
     field_name = .,
     record     = dplyr::distinct(ds_eav, record),
     field_type = "checkbox"
-  ) %>%
-  tibble::as_tibble()
+  )
 
 ds_eav_2 <- ds_eav %>%
   dplyr::left_join(
@@ -85,11 +94,12 @@ ds <- ds_eav_2 %>%
   dplyr::select(-field_type) %>%
   tidyr::spread(key=field_name, value=value)
 
-ds_2 <- ds %>%
+ds_3 <- ds %>%
   dplyr::mutate_if(is.character, type.convert) %>%
-  dplyr::mutate_if(is.factor   , as.character)
+  dplyr::mutate_if(is.factor   , as.character) %>%
+  dplyr::select_(.dots=ds_metadata_expanded$field_name)
 
-
+stop("25 to 21 variables?")
 
 
 # ---- verify-values -----------------------------------------------------------
