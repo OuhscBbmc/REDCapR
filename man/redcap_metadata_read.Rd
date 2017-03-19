@@ -28,7 +28,7 @@ redcap_metadata_read(redcap_uri, token, forms = NULL, forms_collapsed = "",
 \value{
 Currently, a list is returned with the following elements,
 \itemize{
-\item \code{data}: An R \code{data.frame} of the desired records and columns.
+\item \code{data}: An R \code{\link[base:data.frame]{base::data.frame()}} of the desired records and columns.
 \item \code{success}: A boolean value indicating if the operation was apparently successful.
 \item \code{status_codes}: A collection of \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes}, separated by semicolons.  There is one code for each batch attempted.
 \item \code{outcome_messages}: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.
@@ -38,14 +38,14 @@ Currently, a list is returned with the following elements,
 }
 }
 \description{
-Export the metadata (as a data dictionary) of a REDCap project as a \code{data.frame}.
+Export the metadata (as a data dictionary) of a REDCap project as a \code{\link[base:data.frame]{base::data.frame()}}.
 Each row in the data dictionary corresponds to one field in the project's dataset.
 }
 \details{
 Specifically, it internally uses multiple calls to \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}} to select and return data.
 Initially, only primary key is queried through the REDCap API.  The long list is then subsetted into partitions,
 whose sizes are determined by the \code{batch_size} parameter.  REDCap is then queried for all variables of
-the subset's subjects.  This is repeated for each subset, before returning a unified \code{data.frame}.
+the subset's subjects.  This is repeated for each subset, before returning a unified \code{\link[base:data.frame]{base::data.frame()}}.
 
 The function allows a delay between calls, which allows the server to attend to other users' requests.
 }

@@ -1,15 +1,15 @@
 #' @name create_batch_glossary
 #' @export create_batch_glossary
-#' @title Creates a `data.frame` that help batching long-running read and writes.
+#' @title Creates a [base::data.frame()] that help batching long-running read and writes.
 #'
-#' @description The function returns a `data.frame` that other functions use to separate long-running
+#' @description The function returns a [base::data.frame()] that other functions use to separate long-running
 #' read and write REDCap calls into multiple, smaller REDCap calls.  The goal is to (1) reduce the chance of time-outs,
 #' and (2) introduce little breaks between batches so that the server isn't continually tied up.
 #'
 #' @param row_count The number records in the large dataset, before it's split.
 #' @param batch_size The maximum number of subject records a single batch should contain.
 
-#' @return Currently, a `data.frame` is returned with the following columns,
+#' @return Currently, a [base::data.frame()] is returned with the following columns,
 #' * `id`: an `integer` that uniquely identifies the batch, starting at `1`.
 #' * `start_index`: the index of the first row in the batch. `integer`.
 #' * `stop_index`: the index of the last row in the batch. `integer`.
@@ -19,7 +19,7 @@
 #' * `label`: a `character` concatenation of `id_pretty`, `start_index`, and `stop_index_pretty`.
 #'
 #' @details
-#' This function can also assist splitting and saving a large `data.frame` to disk as smaller files (such as a .csv).
+#' This function can also assist splitting and saving a large [base::data.frame()] to disk as smaller files (such as a .csv).
 #' The padded columns allow the OS to sort the batches/files in sequential order.
 #'
 #' @author Will Beasley

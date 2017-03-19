@@ -8,7 +8,7 @@ redcap_write_oneshot(ds, redcap_uri, token, verbose = TRUE,
   config_options = NULL)
 }
 \arguments{
-\item{ds}{The \code{data.frame} to be imported into the REDCap project.  Required.}
+\item{ds}{The \code{\link[base:data.frame]{base::data.frame()}} to be imported into the REDCap project.  Required.}
 
 \item{redcap_uri}{The URI (uniform resource identifier) of the REDCap project.  Required.}
 

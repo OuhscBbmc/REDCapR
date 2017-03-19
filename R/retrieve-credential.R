@@ -63,7 +63,7 @@ retrieve_credential_local <- function(
 
   # Check that it's a data.frame with valid variable names
   if( !inherits(ds_credentials, "data.frame") ) {
-    stop("The credentials file was not correctly transformed into a `data.frame`.  Make sure it's a well-formed CSV.")
+    stop("The credentials file was not correctly transformed into a [base::data.frame()].  Make sure it's a well-formed CSV.")
   } else if ( !identical(colnames(ds_credentials), c("redcap_uri", "username", "project_id", "token", "comment")) ) {
     stop("The credentials file did not contain the proper variables of `redcap_uri`, `username`, `project_id`, `token`,  and `comment`.")
   }

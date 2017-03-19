@@ -9,7 +9,7 @@ redcap_write(ds_to_write, batch_size = 100L, interbatch_delay = 0.5,
   config_options = NULL)
 }
 \arguments{
-\item{ds_to_write}{The \code{data.frame} to be imported into the REDCap project.  Required.}
+\item{ds_to_write}{The \code{\link[base:data.frame]{base::data.frame()}} to be imported into the REDCap project.  Required.}
 
 \item{batch_size}{The maximum number of subject records a single batch should contain.  The default is 100.}
 

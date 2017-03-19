@@ -1,10 +1,10 @@
 #' @name redcap_read
 #' @export redcap_read
-#' @title Read records from a REDCap project in subsets, and stacks them together before returning a `data.frame`.
+#' @title Read records from a REDCap project in subsets, and stacks them together before returning a [base::data.frame()].
 #'
 #' @description From an external perspective, this function is similar to [redcap_read_oneshot()].  The internals
 #' differ in that `redcap_read` retrieves subsets of the data, and then combines them before returning
-#' (among other objects) a single `data.frame`.  This function can be more appropriate than
+#' (among other objects) a single [base::data.frame()].  This function can be more appropriate than
 #' [redcap_read_oneshot()] when returning large datasets that could tie up the server.
 #'
 #' @param batch_size The maximum number of subject records a single batch should contain.  The default is 100.
@@ -26,7 +26,7 @@
 #' @param id_position  The column position of the variable that unique identifies the subject.  This defaults to the first variable in the dataset.
 #'
 #' @return Currently, a list is returned with the following elements,
-#' * `data`: An R `data.frame` of the desired records and columns.
+#' * `data`: An R [base::data.frame()] of the desired records and columns.
 #' * `success`: A boolean value indicating if the operation was apparently successful.
 #' * `status_codes`: A collection of [http status codes](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes), separated by semicolons.  There is one code for each batch attempted.
 #' * `outcome_messages`: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.
@@ -38,7 +38,7 @@
 #' Specifically, it internally uses multiple calls to [redcap_read_oneshot()] to select and return data.
 #' Initially, only primary key is queried through the REDCap API.  The long list is then subsetted into partitions,
 #' whose sizes are determined by the `batch_size` parameter.  REDCap is then queried for all variables of
-#' the subset's subjects.  This is repeated for each subset, before returning a unified `data.frame`.
+#' the subset's subjects.  This is repeated for each subset, before returning a unified [base::data.frame()].
 #'
 #' The function allows a delay between calls, which allows the server to attend to other users' requests.
 #'

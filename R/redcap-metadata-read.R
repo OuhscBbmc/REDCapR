@@ -2,7 +2,7 @@
 #' @export redcap_metadata_read
 #' @title Export the metadata of a REDCap project.
 #'
-#' @description Export the metadata (as a data dictionary) of a REDCap project as a `data.frame`.
+#' @description Export the metadata (as a data dictionary) of a REDCap project as a [base::data.frame()].
 #' Each row in the data dictionary corresponds to one field in the project's dataset.
 #'
 #' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
@@ -16,7 +16,7 @@
 #'
 #' @return Currently, a list is returned with the following elements,
 #'
-#' * `data`: An R `data.frame` of the desired records and columns.
+#' * `data`: An R [base::data.frame()] of the desired records and columns.
 #' * `success`: A boolean value indicating if the operation was apparently successful.
 #' * `status_codes`: A collection of [http status codes](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes), separated by semicolons.  There is one code for each batch attempted.
 #' * `outcome_messages`: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.
@@ -28,7 +28,7 @@
 #' Specifically, it internally uses multiple calls to [redcap_read_oneshot()] to select and return data.
 #' Initially, only primary key is queried through the REDCap API.  The long list is then subsetted into partitions,
 #' whose sizes are determined by the `batch_size` parameter.  REDCap is then queried for all variables of
-#' the subset's subjects.  This is repeated for each subset, before returning a unified `data.frame`.
+#' the subset's subjects.  This is repeated for each subset, before returning a unified [base::data.frame()].
 #'
 #' The function allows a delay between calls, which allows the server to attend to other users' requests.
 #' @author Will Beasley

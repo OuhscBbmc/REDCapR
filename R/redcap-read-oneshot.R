@@ -18,7 +18,7 @@
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below. Optional.
 #' @return Currently, a list is returned with the following elements,
-#' * `data`: An R `data.frame` of the desired records and columns.
+#' * `data`: An R [base::data.frame()] of the desired records and columns.
 #' * `success`: A boolean value indicating if the operation was apparently successful.
 #' * `status_code`: The [http status code](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes) of the operation.
 #' * `outcome_message`: A human readable string indicating the operation's outcome.

@@ -4,7 +4,7 @@
 #'
 #' @description This function uses REDCap's APIs to select and return data.
 #'
-#' @param ds_to_write The `data.frame` to be imported into the REDCap project.  Required.
+#' @param ds_to_write The [base::data.frame()] to be imported into the REDCap project.  Required.
 #' @param batch_size The maximum number of subject records a single batch should contain.  The default is 100.
 #' @param interbatch_delay The number of seconds the function will wait before requesting a new subset from REDCap. The default is 0.5 seconds.
 #' @param continue_on_error If an error occurs while writing, should records in subsequent batches be attempted.  The default is `FALSE`, which prevents subsequent batches from running.  Required.

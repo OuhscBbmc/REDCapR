@@ -4,7 +4,7 @@
 #'
 #' @description This function uses REDCap's API to select and return data.
 #'
-#' @param ds The `data.frame` to be imported into the REDCap project.  Required.
+#' @param ds The [base::data.frame()] to be imported into the REDCap project.  Required.
 #' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
 #' @param token The user-specific string that serves as the password for a project.  Required.
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.

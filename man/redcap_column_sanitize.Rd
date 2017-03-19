@@ -8,7 +8,7 @@ redcap_column_sanitize(d, column_names = colnames(d),
   encoding_initial = "latin1", substitution_character = "?")
 }
 \arguments{
-\item{d}{The \code{data.frame} containing the dataset used to update the REDCap project.  Required.}
+\item{d}{The \code{\link[base:data.frame]{base::data.frame()}} containing the dataset used to update the REDCap project.  Required.}
 
 \item{column_names}{An array of \code{character} values indicating the names of the variables to sanitize.  Optional.}
 
@@ -17,7 +17,7 @@ redcap_column_sanitize(d, column_names = colnames(d),
 \item{substitution_character}{The \code{character} value that replaces characters that were unable to be appropriately matched.}
 }
 \value{
-A \code{data.frame} with same columns, but whose character values have been sanitized.
+A \code{\link[base:data.frame]{base::data.frame()}} with same columns, but whose character values have been sanitized.
 }
 \description{
 Replace non-ASCII characters with legal characters that won't cause problems when writing to a REDCap project.

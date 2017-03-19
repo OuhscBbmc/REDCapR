@@ -4,7 +4,7 @@
 \alias{validate_for_write}
 \alias{validate_no_logical}
 \alias{validate_no_uppercase}
-\title{Inspect a \code{data.frame} to anticipate problems before writing to a REDCap project.}
+\title{Inspect a \code{\link[base:data.frame]{base::data.frame()}} to anticipate problems before writing to a REDCap project.}
 \usage{
 validate_for_write( d )
 
@@ -13,19 +13,19 @@ validate_no_logical( d )
 validate_no_uppercase( d )
 }
 \arguments{
-\item{d}{The \code{data.frame} containing the dataset used to update the REDCap project.  Required.}
+\item{d}{The \code{\link[base:data.frame]{base::data.frame()}} containing the dataset used to update the REDCap project.  Required.}
 }
 \value{
-A \code{data.frame}, where each potential violation is a row.  The two columns are:
+A \code{\link[base:data.frame]{base::data.frame()}}, where each potential violation is a row.  The two columns are:
 \itemize{
-\item \code{field_name}: The name of the \code{data.frame} that might cause problems during the upload.
+\item \code{field_name}: The name of the \code{\link[base:data.frame]{base::data.frame()}} that might cause problems during the upload.
 \item \code{field_index}: The position of the field.  (For example, a value of '1' indicates the first column, while a '3' indicates the third column.)
 \item \code{concern}: A description of the problem potentially caused by the \code{field}.
 \item \code{suggestion}: A \emph{potential} solution to the concern.
 }
 }
 \description{
-This set of functions inspect a \code{data.frame} to anticipate problems before writing with REDCap's API.
+This set of functions inspect a \code{\link[base:data.frame]{base::data.frame()}} to anticipate problems before writing with REDCap's API.
 }
 \details{
 All functions listed in the Usage section above inspect a specific aspect of the dataset.  The \code{\link[=validate_for_write]{validate_for_write()}} function executes all

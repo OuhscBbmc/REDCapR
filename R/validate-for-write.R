@@ -8,13 +8,13 @@
 #'
 #' validate_no_uppercase( d )
 #'
-#' @title Inspect a `data.frame` to anticipate problems before writing to a REDCap project.
+#' @title Inspect a [base::data.frame()] to anticipate problems before writing to a REDCap project.
 #'
-#' @description This set of functions inspect a `data.frame` to anticipate problems before writing with REDCap's API.
+#' @description This set of functions inspect a [base::data.frame()] to anticipate problems before writing with REDCap's API.
 #'
-#' @param d The `data.frame` containing the dataset used to update the REDCap project.  Required.
-#' @return A `data.frame`, where each potential violation is a row.  The two columns are:
-#' * `field_name`: The name of the `data.frame` that might cause problems during the upload.
+#' @param d The [base::data.frame()] containing the dataset used to update the REDCap project.  Required.
+#' @return A [base::data.frame()], where each potential violation is a row.  The two columns are:
+#' * `field_name`: The name of the [base::data.frame()] that might cause problems during the upload.
 #' * `field_index`: The position of the field.  (For example, a value of '1' indicates the first column, while a '3' indicates the third column.)
 #' * `concern`: A description of the problem potentially caused by the `field`.
 #' * `suggestion`: A *potential* solution to the concern.
