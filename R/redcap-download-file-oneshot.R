@@ -15,7 +15,7 @@
 #' @param field The name of the field where the file is saved in REDCap. Required
 #' @param event The name of the event where the file is saved in REDCap. Optional
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  Optional.
-#' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below. Optional.
+#' @param config_options  A list of options to pass to [httr::POST()] method in the 'httr' package.  See the details below. Optional.
 #'
 #' @return Currently, a list is returned with the following elements,
 #' * `success`: A boolean value indicating if the operation was apparently successful.
@@ -26,7 +26,7 @@
 #' * `elapsed_seconds`: The duration of the function.
 #' * `raw_text`: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
 #' * `file_name`: The name of the file persisted to disk. This is useful if the name stored in REDCap is used (which is the default).
-#' 
+#'
 #' @details
 #' Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See [validate_for_write()] for a helper function that checks for some common important conflicts.
 #' @author Will Beasley

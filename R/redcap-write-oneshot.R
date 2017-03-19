@@ -8,7 +8,7 @@
 #' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
 #' @param token The user-specific string that serves as the password for a project.  Required.
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
-#' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details in `redcap_read_oneshot()` Optional.
+#' @param config_options  A list of options to pass to [httr::POST()] method in the 'httr' package.  See the details in [redcap_read_oneshot()] Optional.
 #'
 #' @return Currently, a list is returned with the following elements,
 #' * `success`: A boolean value indicating if the operation was apparently successful.

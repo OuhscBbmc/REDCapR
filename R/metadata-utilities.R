@@ -15,10 +15,10 @@
 #' * `label`: The label assigned to each choice (in the data dictionary).
 #'
 #' @details
-#' The `regex_named_captures()` function is general, and not specific to REDCap; it accepts any arbitrary regular expression.
+#' The [regex_named_captures()] function is general, and not specific to REDCap; it accepts any arbitrary regular expression.
 #' It returns a `data.frame` with as many columns as named matches.
 #'
-#' The `checkbox_choices()` function is specialized, and accommodates the "select choices" for a *single* REDCap checkbox group (where multiple boxes can be selected).
+#' The [checkbox_choices()] function is specialized, and accommodates the "select choices" for a *single* REDCap checkbox group (where multiple boxes can be selected).
 #' It returns a `data.frame` with two columns, one for the numeric id and one for the text label.
 #'
 #' @author Will Beasley

@@ -21,7 +21,7 @@
 #' @param check_username A `logical` value indicates if the username in the credential file should be checked against the username returned by R.  Defaults to FALSE.
 #' @param check_token_pattern A `logical` value indicates if the token in the credential file is a 32-character hexadecimal string.  Defaults to FALSE.
 #' @param dsn A [DSN](http://en.wikipedia.org/wiki/Data_source_name) on the local machine that points to the desired MSSQL database. Required.
-#' @param channel An *optional* connection handle as returned by `RODBC::odbcConnect`.  See Details below. Optional.
+#' @param channel An *optional* connection handle as returned by [RODBC::odbcConnect()].  See Details below. Optional.
 #'
 #' @return A list of the following elements
 #' * `redcap_uri`: The URI of the REDCap Server.

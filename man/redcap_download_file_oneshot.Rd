@@ -29,7 +29,7 @@ the default directory.  Optional.}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed to the R console during the operation.  Optional.}
 
-\item{config_options}{A list of options to pass to \code{POST} method in the \code{httr} package.  See the details below. Optional.}
+\item{config_options}{A list of options to pass to \code{\link[httr:POST]{httr::POST()}} method in the 'httr' package.  See the details below. Optional.}
 }
 \value{
 Currently, a list is returned with the following elements,

@@ -73,7 +73,7 @@ the subset's subjects.  This is repeated for each subset, before returning a uni
 
 The function allows a delay between calls, which allows the server to attend to other users' requests.
 
-For \code{redcap_read} to function properly, the user must have Export permissions for the
+For \code{\link[=redcap_read]{redcap_read()}} to function properly, the user must have Export permissions for the
 'Full Data Set'.  Users with only 'De-Identified' export privileges can still use
 \code{redcap_read_oneshot}.  To grant the appropriate permissions:
 \itemize{

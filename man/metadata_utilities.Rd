@@ -31,10 +31,10 @@ Currently, a \code{data.frame} is returned a row for each match, and a column fo
 A collection of functions that assists handling REDCap project metadata.
 }
 \details{
-The \code{regex_named_captures()} function is general, and not specific to REDCap; it accepts any arbitrary regular expression.
+The \code{\link[=regex_named_captures]{regex_named_captures()}} function is general, and not specific to REDCap; it accepts any arbitrary regular expression.
 It returns a \code{data.frame} with as many columns as named matches.
 
-The \code{checkbox_choices()} function is specialized, and accommodates the "select choices" for a \emph{single} REDCap checkbox group (where multiple boxes can be selected).
+The \code{\link[=checkbox_choices]{checkbox_choices()}} function is specialized, and accommodates the "select choices" for a \emph{single} REDCap checkbox group (where multiple boxes can be selected).
 It returns a \code{data.frame} with two columns, one for the numeric id and one for the text label.
 }
 \examples{

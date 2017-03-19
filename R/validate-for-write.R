@@ -20,7 +20,7 @@
 #' * `suggestion`: A *potential* solution to the concern.
 #'
 #' @details
-#' All functions listed in the Usage section above inspect a specific aspect of the dataset.  The `validate_for_read()` function executes all
+#' All functions listed in the Usage section above inspect a specific aspect of the dataset.  The [validate_for_write()] function executes all
 #' these individual validation checks.  It allows the client to check everything with one call.
 #'
 #' @author Will Beasley

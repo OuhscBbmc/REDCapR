@@ -3,11 +3,11 @@
 #' @export retrieve_token_mssql
 #' @title Read a token from a (non-REDCap) database.
 #'
-#' @description This function will soon be deprecated; please transition to `retrieve_token_mssql()`. These functions are not essential to calling the REDCap API, but instead are functions that help manage tokens securely.
+#' @description This function will soon be deprecated; please transition to [retrieve_token_mssql()]. These functions are not essential to calling the REDCap API, but instead are functions that help manage tokens securely.
 #'
 #' @param dsn A [DSN](http://en.wikipedia.org/wiki/Data_source_name) on the local machine that points to the desired MSSQL database. Required.
 #' @param project_name The friendly/shortened name given to the REDCap project in the MSSQL table.  Notice this isn't necessarily the same name used by REDCap. Required
-#' @param channel An *optional* connection handle as returned by `RODBC::odbcConnect`.  See Details below. Optional.
+#' @param channel An *optional* connection handle as returned by [RODBC::odbcConnect()].  See Details below. Optional.
 
 #' @return The token, which is a 32 character string.
 #' @details
@@ -17,7 +17,7 @@
 #'
 #' If you create the `channel` object yourself, consider wrapping calls in a `base::tryCatch` block, and closing the channel in
 #' its `finally` expression; this helps ensure the expensive database resource isn't held open unnecessarily.  See the internals of
-#' `retrieve_token_mssql` for an example of closing the `channel` in a `tryCatch` block.
+#' [retrieve_token_mssql()] for an example of closing the `channel` in a `tryCatch` block.
 #'
 #' If the database elements are created with the script provided in package's 'Security Database' vignette, the default values will work.
 #'
@@ -29,7 +29,7 @@
 #' There's a lot of error checking for SQL injection, but remember that the user is executing under their
 #' own credentials, so this doesn't obviate the need for disciplined credential management.  There's nothing
 #' that can be done with this R function that isn't already exposed by any other interface into the database
-#' (eg, SQL Server Managment Studio, or MySQL Workbench.)
+#' (eg, SQL Server Management Studio, or MySQL Workbench.)
 #'
 #' @author Will Beasley
 #'
