@@ -17,19 +17,19 @@
 #' @param path_credential The file path to the CSV containing the credentials. Required.
 #' @param project_id The ID assigned to the project withing REDCap.  This allows the user to store tokens to multiple REDCap projects in one file.  Required
 #' @param instance The casual name associated with the REDCap instance on campus.  This allows one credential system to accommodate multiple instances on campus.  Required
-#' @param check_url A \code{logical} value indicates if the url in the credential file should be checked to have approximately the correct form.  Defaults to TRUE.
-#' @param check_username A \code{logical} value indicates if the username in the credential file should be checked against the username returned by R.  Defaults to FALSE.
-#' @param check_token_pattern A \code{logical} value indicates if the token in the credential file is a 32-character hexadecimal string.  Defaults to FALSE.
-#' @param dsn A \href{http://en.wikipedia.org/wiki/Data_source_name}{DSN} on the local machine that points to the desired MSSQL database. Required.
-#' @param channel An \emph{optional} connection handle as returned by \code{RODBC::odbcConnect}.  See Details below. Optional.
+#' @param check_url A `logical` value indicates if the url in the credential file should be checked to have approximately the correct form.  Defaults to TRUE.
+#' @param check_username A `logical` value indicates if the username in the credential file should be checked against the username returned by R.  Defaults to FALSE.
+#' @param check_token_pattern A `logical` value indicates if the token in the credential file is a 32-character hexadecimal string.  Defaults to FALSE.
+#' @param dsn A [DSN](http://en.wikipedia.org/wiki/Data_source_name) on the local machine that points to the desired MSSQL database. Required.
+#' @param channel An \emph{optional} connection handle as returned by `RODBC::odbcConnect`.  See Details below. Optional.
 #'
 #' @return A list of the following elements
 #' \enumerate{
-#'  \item \code{redcap_uri}: The URI of the REDCap Server.
-#'  \item \code{username}: Username.
-#'  \item \code{project_id}: The ID assigned to the project withing REDCap.
-#'  \item \code{token}: The token to pass to the REDCap server
-#'  \item \code{comment}: An optional string.
+#'  \item `redcap_uri`: The URI of the REDCap Server.
+#'  \item `username`: Username.
+#'  \item `project_id`: The ID assigned to the project withing REDCap.
+#'  \item `token`: The token to pass to the REDCap server
+#'  \item `comment`: An optional string.
 #' }
 #'
 #' @details
@@ -37,7 +37,7 @@
 #'
 #' @note
 #' Although we strongly encourage storing all the tokens on a central server (\emph{e.g.}, see the
-#' \code{retrieve_credential_mssql()} function and the "SecurityDatabase" vignette), there are times
+#' `retrieve_credential_mssql()` function and the "SecurityDatabase" vignette), there are times
 #' when this approach is not feasible and the token must be stored locally.  Please contact us
 #' if your institution is using something other than SQL Server, and
 #' would like help adapting this approach to your infrastructure.

@@ -25,7 +25,7 @@ Replace non-ASCII characters with legal characters that won't cause problems whe
 \details{
 Letters like an accented 'A' are replaced with a plain 'A'.
 
-This is a thin wrapper around \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/iconv.html}{\code{base::iconv()}}.
+This is a thin wrapper around \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/iconv.html}{base::iconv()}.
 The \code{ASCII//TRANSLIT} option does the actual transliteration work.  As of \code{R 3.1.0}, the OSes use similar,
 but different, versions to convert the characters.  Be aware of this in case you notice slight OS-dependent differences.
 }

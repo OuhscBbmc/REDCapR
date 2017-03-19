@@ -41,7 +41,7 @@ This function uses REDCap's APIs to select and return data.
 }
 \details{
 Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.
-See \code{\link{validate_for_write}} for a helper function that checks for some common important conflicts.
+See `\link{validate_for_write`} for a helper function that checks for some common important conflicts.
 
 For \code{redcap_write} to function properly, the user must have Export permissions for the
 'Full Data Set'.  Users with only 'De-Identified' export privileges can still use
@@ -89,8 +89,8 @@ result_write$raw_text
 }
 \references{
 The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-on the REDCap wiki (ie, \url{https://community.projectredcap.org/articles/456/api-documentation.html} and
-\url{https://community.projectredcap.org/articles/462/api-examples.html}). If you do not have an account
+on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and
+https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
 for the wiki, please ask your campus REDCap administrator to send you the static material.
 
 The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.

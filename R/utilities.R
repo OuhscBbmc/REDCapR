@@ -7,16 +7,16 @@
 #' It also allows the presence of a missing to become a predictor in models.
 #' 
 #' @param scores An array of values, ideally either factor or character. Required
-#' @param new_na_label The factor label assigned to the missing value.  Defaults to \code{Unknown}.
-#' @param create_factor Converts \code{scores} into a factor, if it isn't one already.   Defaults to \code{FALSE}.
-#' @param add_unknown_level Should a new factor level be created?  (Specify \code{TRUE} if it already exists.)   Defaults to \code{FALSE}.
+#' @param new_na_label The factor label assigned to the missing value.  Defaults to `Unknown`.
+#' @param create_factor Converts `scores` into a factor, if it isn't one already.   Defaults to `FALSE`.
+#' @param add_unknown_level Should a new factor level be created?  (Specify `TRUE` if it already exists.)   Defaults to `FALSE`.
 #' 
-#' @return An array of values, where the \code{NA} values are now a factor level, with the label specified by the \code{new_na_label} value.
+#' @return An array of values, where the `NA` values are now a factor level, with the label specified by the `new_na_label` value.
 #' 
 #' @note
-#' The \code{create_factor} parameter is respected only if \code{scores} isn't already a factor.  Otherwise, levels without any values would be lost.
+#' The `create_factor` parameter is respected only if `scores` isn't already a factor.  Otherwise, levels without any values would be lost.
 #'
-#' A \code{stop} error will be thrown if the operation fails to convert all the \code{NA} values.
+#' A `stop` error will be thrown if the operation fails to convert all the `NA` values.
 #' 
 #' @author Will Beasley
 #' 

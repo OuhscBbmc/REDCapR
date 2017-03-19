@@ -14,30 +14,30 @@
 #' @param record The record ID where the file is to be imported. Required
 #' @param field The name of the field where the file is saved in REDCap. Required
 #' @param event The name of the event where the file is saved in REDCap. Optional
-#' @param verbose A boolean value indicating if \code{message}s should be printed to the R console during the operation.  Optional.
-#' @param config_options  A list of options to pass to \code{POST} method in the \code{httr} package.  See the details below. Optional.
+#' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  Optional.
+#' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below. Optional.
 #'
 #' @return Currently, a list is returned with the following elements,
 #' \enumerate{
-#'  \item \code{success}: A boolean value indicating if the operation was apparently successful.
-#'  \item \code{status_code}: The \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code} of the operation.
-#'  \item \code{outcome_message}: A human readable string indicating the operation's outcome.
-#'  \item \code{records_affected_count}: The number of records inserted or updated.
-#'  \item \code{affected_ids}: The subject IDs of the inserted or updated records.
-#'  \item \code{elapsed_seconds}: The duration of the function.
-#'  \item \code{raw_text}: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
-#'  \item \code{file_name}: The name of the file persisted to disk. This is useful if the name stored in REDCap is used (which is the default).
+#'  \item `success`: A boolean value indicating if the operation was apparently successful.
+#'  \item `status_code`: The [http status code](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes) of the operation.
+#'  \item `outcome_message`: A human readable string indicating the operation's outcome.
+#'  \item `records_affected_count`: The number of records inserted or updated.
+#'  \item `affected_ids`: The subject IDs of the inserted or updated records.
+#'  \item `elapsed_seconds`: The duration of the function.
+#'  \item `raw_text`: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
+#'  \item `file_name`: The name of the file persisted to disk. This is useful if the name stored in REDCap is used (which is the default).
 #' }
 #' @details
-#' Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See \code{\link{validate_for_write}} for a helper function that checks for some common important conflicts.
+#' Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See `\link{validate_for_write`} for a helper function that checks for some common important conflicts.
 #' @author Will Beasley
 #' @author John J. Aponte
 #' @references The official documentation can be found on the 'API Help Page' and 'API Examples' pages 
-#' on the REDCap wiki (ie, \url{https://community.projectredcap.org/articles/456/api-documentation.html} and
-#' \url{https://community.projectredcap.org/articles/462/api-examples.html}). If you do not have an account
+#' on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and
+#' https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
 #' for the wiki, please ask your campus REDCap administrator to send you the static material.
 #'
-#' The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.
+#' The official [cURL site](http://curl.haxx.se) discusses the process of using SSL to verify the server being connected to.
 #'
 #' @examples
 #' \dontrun{

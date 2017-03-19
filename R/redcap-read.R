@@ -1,65 +1,61 @@
 #' @name redcap_read
 #' @export redcap_read
-#' @title Read records from a REDCap project in subsets, and stacks them together before returning a \code{data.frame}.
+#' @title Read records from a REDCap project in subsets, and stacks them together before returning a `data.frame`.
 #'
-#' @description From an external perspective, this function is similar to \code{\link{redcap_read_oneshot}}.  The internals
-#' differ in that \code{redcap_read} retrieves subsets of the data, and then combines them before returning
-#' (among other objects) a single \code{data.frame}.  This function can be more appropriate than
-#' \code{\link{redcap_read_oneshot}} when returning large datasets that could tie up the server.
+#' @description From an external perspective, this function is similar to [`redcap_read_oneshot()`](redcap_read_oneshot()).  The internals
+#' differ in that `redcap_read` retrieves subsets of the data, and then combines them before returning
+#' (among other objects) a single `data.frame`.  This function can be more appropriate than
+#' [`redcap_read_oneshot()`](redcap_read_oneshot()) when returning large datasets that could tie up the server.
 #'
 #' @param batch_size The maximum number of subject records a single batch should contain.  The default is 100.
 #' @param interbatch_delay The number of seconds the function will wait before requesting a new subset from REDCap. The default is 0.5 seconds.
-#' @param continue_on_error If an error occurs while reading, should records in subsequent batches be attempted.  The default is \code{FALSE}, which prevents subsequent batches from running.  Required.
+#' @param continue_on_error If an error occurs while reading, should records in subsequent batches be attempted.  The default is `FALSE`, which prevents subsequent batches from running.  Required.
 #' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
 #' @param token The user-specific string that serves as the password for a project.  Required.
 #' @param records An array, where each element corresponds to the ID of a desired record.  Optional.
 #' @param records_collapsed A single string, where the desired ID values are separated by commas.  Optional.
 #' @param fields An array, where each element corresponds a desired project field.  Optional.
 #' @param fields_collapsed A single string, where the desired field names are separated by commas.  Optional.
-#' @param filter_logic String of logic text (e.g., \code{[gender] = 'male'}) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.
+#' @param filter_logic String of logic text (e.g., `[gender] = 'male'`) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.
 #' @param events An array, where each element corresponds a desired project event  Optional.
 #' @param events_collapsed A single string, where the desired event names are separated by commas.  Optional.
-#' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is \code{FALSE}. See the details below.
-#' @param raw_or_label A string (either \code{'raw'} or \code{'label'} that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is \code{'raw'}.
-#' @param verbose A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.
-#' @param config_options  A list of options to pass to \code{POST} method in the \code{httr} package.  See the details in \code{redcap_read_oneshot()} Optional.
+#' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is `FALSE`. See the details below.
+#' @param raw_or_label A string (either 'raw` or 'label' that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is `'raw'`.
+#' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.
+#' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details in `redcap_read_oneshot()` Optional.
 #' @param id_position  The column position of the variable that unique identifies the subject.  This defaults to the first variable in the dataset.
 #'
 #' @return Currently, a list is returned with the following elements,
-#' \enumerate{
-#'  \item \code{data}: An R \code{data.frame} of the desired records and columns.
-#'  \item \code{success}: A boolean value indicating if the operation was apparently successful.
-#'  \item \code{status_codes}: A collection of \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes}, separated by semicolons.  There is one code for each batch attempted.
-#'  \item \code{outcome_messages}: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.
-#'  \item \code{records_collapsed}: The desired records IDs, collapsed into a single string, separated by commas.
-#'  \item \code{fields_collapsed}: The desired field names, collapsed into a single string, separated by commas.
-#'  \item \code{filter_logic}: The filter statement passed as an argument.
-#'  \item \code{elapsed_seconds}: The duration of the function.
-#' }
+#' * `data`: An R `data.frame` of the desired records and columns.
+#' * `success`: A boolean value indicating if the operation was apparently successful.
+#' * `status_codes`: A collection of [http status codes](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes), separated by semicolons.  There is one code for each batch attempted.
+#' * `outcome_messages`: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.
+#' * `records_collapsed`: The desired records IDs, collapsed into a single string, separated by commas.
+#' * `fields_collapsed`: The desired field names, collapsed into a single string, separated by commas.
+#' * `filter_logic`: The filter statement passed as an argument.
+#' * `elapsed_seconds`: The duration of the function.
 #' @details
-#' Specifically, it internally uses multiple calls to \code{\link{redcap_read_oneshot}} to select and return data.
+#' Specifically, it internally uses multiple calls to [`redcap_read_oneshot()`](redcap_read_oneshot()) to select and return data.
 #' Initially, only primary key is queried through the REDCap API.  The long list is then subsetted into partitions,
-#' whose sizes are determined by the \code{batch_size} parameter.  REDCap is then queried for all variables of
-#' the subset's subjects.  This is repeated for each subset, before returning a unified \code{data.frame}.
+#' whose sizes are determined by the `batch_size` parameter.  REDCap is then queried for all variables of
+#' the subset's subjects.  This is repeated for each subset, before returning a unified `data.frame`.
 #'
 #' The function allows a delay between calls, which allows the server to attend to other users' requests.
 #'
-#' For \code{redcap_read} to function properly, the user must have Export permissions for the
+#' For `redcap_read` to function properly, the user must have Export permissions for the
 #' 'Full Data Set'.  Users with only 'De-Identified' export privileges can still use
-#' \code{redcap_read_oneshot}.  To grant the appropriate permissions:
-#' \enumerate{
-#'  \item go to 'User Rights' in the REDCap project site,
-#'  \item select the desired user, and then select 'Edit User Privileges',
-#'  \item in the 'Data Exports' radio buttons, select 'Full Data Set'.
-#' }
+#' `redcap_read_oneshot`.  To grant the appropriate permissions:
+#' * go to 'User Rights' in the REDCap project site,
+#' * select the desired user, and then select 'Edit User Privileges',
+#' * in the 'Data Exports' radio buttons, select 'Full Data Set'.
 #'
 #' @author Will Beasley
 #' @references The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-#' on the REDCap wiki (ie, \url{https://community.projectredcap.org/articles/456/api-documentation.html} and
-#' \url{https://community.projectredcap.org/articles/462/api-examples.html}). If you do not have an account
+#' on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and
+#' https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
 #' for the wiki, please ask your campus REDCap administrator to send you the static material.
 #'
-#' The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.
+#' The official [cURL site](http://curl.haxx.se) discusses the process of using SSL to verify the server being connected to.
 #'
 #' @examples
 #' \dontrun{

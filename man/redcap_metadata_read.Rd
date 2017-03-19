@@ -27,7 +27,7 @@ redcap_metadata_read(redcap_uri, token, forms = NULL, forms_collapsed = "",
 }
 \value{
 Currently, a list is returned with the following elements,
-\enumerate{
+\itemize{
 \item \code{data}: An R \code{data.frame} of the desired records and columns.
 \item \code{success}: A boolean value indicating if the operation was apparently successful.
 \item \code{status_codes}: A collection of \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes}, separated by semicolons.  There is one code for each batch attempted.
@@ -42,7 +42,7 @@ Export the metadata (as a data dictionary) of a REDCap project as a \code{data.f
 Each row in the data dictionary corresponds to one field in the project's dataset.
 }
 \details{
-Specifically, it internally uses multiple calls to \code{\link{redcap_read_oneshot}} to select and return data.
+Specifically, it internally uses multiple calls to \url{redcap_read_oneshot()} to select and return data.
 Initially, only primary key is queried through the REDCap API.  The long list is then subsetted into partitions,
 whose sizes are determined by the \code{batch_size} parameter.  REDCap is then queried for all variables of
 the subset's subjects.  This is repeated for each subset, before returning a unified \code{data.frame}.
@@ -59,8 +59,8 @@ redcap_metadata_read(redcap_uri=uri, token=token)
 }
 \references{
 The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-on the REDCap wiki (ie, \url{https://community.projectredcap.org/articles/456/api-documentation.html} and
-\url{https://community.projectredcap.org/articles/462/api-examples.html}). If you do not have an account
+on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and
+https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
 for the wiki, please ask your campus REDCap administrator to send you the static material.
 }
 \author{

@@ -41,8 +41,8 @@ validate_for_write(d = d)
 }
 \references{
 The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-on the REDCap wiki (ie, \url{https://community.projectredcap.org/articles/456/api-documentation.html} and
-\url{https://community.projectredcap.org/articles/462/api-examples.html}). If you do not have an account
+on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and
+https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
 for the wiki, please ask your campus REDCap administrator to send you the static material.
 }
 \author{

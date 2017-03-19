@@ -38,7 +38,7 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
 
 \item{filter_logic}{String of logic text (e.g., \code{[gender] = 'male'}) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.}
 
-\item{raw_or_label}{A string (either \code{'raw'} or \code{'label'} that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is \code{'raw'}.}
+\item{raw_or_label}{A string (either 'raw\code{or 'label' that specifies whether to export the raw coded values or the labels for the options of multiple choice fields. Default is}'raw'`.}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.}
 
@@ -48,7 +48,7 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
 }
 \value{
 Currently, a list is returned with the following elements,
-\enumerate{
+\itemize{
 \item \code{data}: An R \code{data.frame} of the desired records and columns.
 \item \code{success}: A boolean value indicating if the operation was apparently successful.
 \item \code{status_codes}: A collection of \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes}, separated by semicolons.  There is one code for each batch attempted.
@@ -60,13 +60,13 @@ Currently, a list is returned with the following elements,
 }
 }
 \description{
-From an external perspective, this function is similar to \code{\link{redcap_read_oneshot}}.  The internals
+From an external perspective, this function is similar to \url{redcap_read_oneshot()}.  The internals
 differ in that \code{redcap_read} retrieves subsets of the data, and then combines them before returning
 (among other objects) a single \code{data.frame}.  This function can be more appropriate than
-\code{\link{redcap_read_oneshot}} when returning large datasets that could tie up the server.
+\url{redcap_read_oneshot()} when returning large datasets that could tie up the server.
 }
 \details{
-Specifically, it internally uses multiple calls to \code{\link{redcap_read_oneshot}} to select and return data.
+Specifically, it internally uses multiple calls to \url{redcap_read_oneshot()} to select and return data.
 Initially, only primary key is queried through the REDCap API.  The long list is then subsetted into partitions,
 whose sizes are determined by the \code{batch_size} parameter.  REDCap is then queried for all variables of
 the subset's subjects.  This is repeated for each subset, before returning a unified \code{data.frame}.
@@ -76,7 +76,7 @@ The function allows a delay between calls, which allows the server to attend to 
 For \code{redcap_read} to function properly, the user must have Export permissions for the
 'Full Data Set'.  Users with only 'De-Identified' export privileges can still use
 \code{redcap_read_oneshot}.  To grant the appropriate permissions:
-\enumerate{
+\itemize{
 \item go to 'User Rights' in the REDCap project site,
 \item select the desired user, and then select 'Edit User Privileges',
 \item in the 'Data Exports' radio buttons, select 'Full Data Set'.
@@ -93,8 +93,8 @@ redcap_read(batch_size=2, redcap_uri=uri, token=token)
 }
 \references{
 The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-on the REDCap wiki (ie, \url{https://community.projectredcap.org/articles/456/api-documentation.html} and
-\url{https://community.projectredcap.org/articles/462/api-examples.html}). If you do not have an account
+on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and
+https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
 for the wiki, please ask your campus REDCap administrator to send you the static material.
 
 The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.

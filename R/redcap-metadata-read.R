@@ -2,7 +2,7 @@
 #' @export redcap_metadata_read
 #' @title Export the metadata of a REDCap project.
 #'
-#' @description Export the metadata (as a data dictionary) of a REDCap project as a \code{data.frame}.
+#' @description Export the metadata (as a data dictionary) of a REDCap project as a `data.frame`.
 #' Each row in the data dictionary corresponds to one field in the project's dataset.
 #'
 #' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
@@ -11,30 +11,30 @@
 #' @param forms_collapsed A single string, where the desired forms are separated by commas.  Optional.
 #' @param fields An array, where each element corresponds to a desired project field.  Optional.
 #' @param fields_collapsed A single string, where the desired field names are separated by commas.  Optional.
-#' @param verbose A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.
-#' @param config_options  A list of options to pass to \code{POST} method in the \code{httr} package.  See the details in \code{redcap_read_oneshot()} Optional.
+#' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.
+#' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details in `redcap_read_oneshot()` Optional.
 #'
 #' @return Currently, a list is returned with the following elements,
-#' \enumerate{
-#'  \item \code{data}: An R \code{data.frame} of the desired records and columns.
-#'  \item \code{success}: A boolean value indicating if the operation was apparently successful.
-#'  \item \code{status_codes}: A collection of \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes}, separated by semicolons.  There is one code for each batch attempted.
-#'  \item \code{outcome_messages}: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.
-#'  \item \code{forms_collapsed}: The desired records IDs, collapsed into a single string, separated by commas.
-#'  \item \code{fields_collapsed}: The desired field names, collapsed into a single string, separated by commas.
-#'  \item \code{elapsed_seconds}: The duration of the function.
-#' }
+#'
+#' * `data`: An R `data.frame` of the desired records and columns.
+#' * `success`: A boolean value indicating if the operation was apparently successful.
+#' * `status_codes`: A collection of [http status codes](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes), separated by semicolons.  There is one code for each batch attempted.
+#' * `outcome_messages`: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.
+#' * `forms_collapsed`: The desired records IDs, collapsed into a single string, separated by commas.
+#' * `fields_collapsed`: The desired field names, collapsed into a single string, separated by commas.
+#' * `elapsed_seconds`: The duration of the function.
+#'
 #' @details
-#' Specifically, it internally uses multiple calls to \code{\link{redcap_read_oneshot}} to select and return data.
+#' Specifically, it internally uses multiple calls to [`redcap_read_oneshot()`](redcap_read_oneshot()) to select and return data.
 #' Initially, only primary key is queried through the REDCap API.  The long list is then subsetted into partitions,
-#' whose sizes are determined by the \code{batch_size} parameter.  REDCap is then queried for all variables of
-#' the subset's subjects.  This is repeated for each subset, before returning a unified \code{data.frame}.
+#' whose sizes are determined by the `batch_size` parameter.  REDCap is then queried for all variables of
+#' the subset's subjects.  This is repeated for each subset, before returning a unified `data.frame`.
 #'
 #' The function allows a delay between calls, which allows the server to attend to other users' requests.
 #' @author Will Beasley
-#' @references The official documentation can be found on the 'API Help Page' and 'API Examples' pages 
-#' on the REDCap wiki (ie, \url{https://community.projectredcap.org/articles/456/api-documentation.html} and
-#' \url{https://community.projectredcap.org/articles/462/api-examples.html}). If you do not have an account
+#' @references The official documentation can be found on the 'API Help Page' and 'API Examples' pages
+#' on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and
+#' https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
 #' for the wiki, please ask your campus REDCap administrator to send you the static material.
 #'
 #' @examples
