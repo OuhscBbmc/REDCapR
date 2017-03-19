@@ -8,12 +8,12 @@
 #'
 #'
 #' Much of this package has been developed to support the needs of the following projects.  We appreciate the support.
-#' * \emph{OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting ([MIECHV](http://mchb.hrsa.gov/programs/homevisiting/)) Project}. [HRSA/ACF D89MC23154](https://perf-data.hrsa.gov/mchb/DGISReports/Abstract/AbstractDetails.aspx?Source=TVIS&GrantNo=D89MC23154&FY=2012).  David Bard, PI, OUHSC; 2011-2015.
-#' * \emph{Independent Evaluation of the State of OK MIECHV Evidence Based Home Visitation Project}, [NIH](https://www.nih.gov/)-sponsored collaboration with [OSDH](https://www.ok.gov/health/). David Bard, PI, OUHSC; 2015-2017.
-#' * \emph{OSDH ParentPRO Pilot Evaluation}, federally-sponsored collaboration with [OSDH](https://www.ok.gov/health/).  David Bard, PI, OUHSC; 2015-2017.
-#' * \emph{Title IV-E Waiver Project}, [HRSA/MCHB](http://mchb.hrsa.gov/)-sponsored collaboration with [OKDHS](http://www.okdhs.org/); David Bard, PI, OUHSC; 2014-2017.
-#' * \emph{Integrative Analysis of Longitudinal Studies of Aging (IALSA)}, sponsored by [NIH 5P01AG043362](http://grantome.com/grant/NIH/P01-AG043362).  Scott Hofer, PI, University of Victoria; Will Beasley, PI of site-award, OUHSC; 2013-2018.
-#' * \emph{Oklahoma Shared Clinical and Translational Resources}, sponsored by [NIH NIGMS; U54 GM104938](http://grantome.com/grant/NIH/U54-GM104938). Judith A. James, PI, OUHSC; 2013-2018.
+#' * *OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting ([MIECHV](http://mchb.hrsa.gov/programs/homevisiting/)) Project*. [HRSA/ACF D89MC23154](https://perf-data.hrsa.gov/mchb/DGISReports/Abstract/AbstractDetails.aspx?Source=TVIS&GrantNo=D89MC23154&FY=2012).  David Bard, PI, OUHSC; 2011-2015.
+#' * *Independent Evaluation of the State of OK MIECHV Evidence Based Home Visitation Project*, [NIH](https://www.nih.gov/)-sponsored collaboration with [OSDH](https://www.ok.gov/health/). David Bard, PI, OUHSC; 2015-2017.
+#' * *OSDH ParentPRO Pilot Evaluation*, federally-sponsored collaboration with [OSDH](https://www.ok.gov/health/).  David Bard, PI, OUHSC; 2015-2017.
+#' * *Title IV-E Waiver Project*, [HRSA/MCHB](http://mchb.hrsa.gov/)-sponsored collaboration with [OKDHS](http://www.okdhs.org/); David Bard, PI, OUHSC; 2014-2017.
+#' * *Integrative Analysis of Longitudinal Studies of Aging (IALSA)*, sponsored by [NIH 5P01AG043362](http://grantome.com/grant/NIH/P01-AG043362).  Scott Hofer, PI, University of Victoria; Will Beasley, PI of site-award, OUHSC; 2013-2018.
+#' * *Oklahoma Shared Clinical and Translational Resources*, sponsored by [NIH NIGMS; U54 GM104938](http://grantome.com/grant/NIH/U54-GM104938). Judith A. James, PI, OUHSC; 2013-2018.
 #' * Additional Institutional Support from OUHSC [Dept of Pediatrics](https://www.oumedicine.com/department-of-pediatrics); 2013-2017.
 #'
 #'

@@ -7,7 +7,7 @@
 #'
 #' @param dsn A [DSN](http://en.wikipedia.org/wiki/Data_source_name) on the local machine that points to the desired MSSQL database. Required.
 #' @param project_name The friendly/shortened name given to the REDCap project in the MSSQL table.  Notice this isn't necessarily the same name used by REDCap. Required
-#' @param channel An \emph{optional} connection handle as returned by `RODBC::odbcConnect`.  See Details below. Optional.
+#' @param channel An *optional* connection handle as returned by `RODBC::odbcConnect`.  See Details below. Optional.
 
 #' @return The token, which is a 32 character string.
 #' @details

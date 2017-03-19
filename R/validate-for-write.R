@@ -17,7 +17,7 @@
 #' * `field_name`: The name of the `data.frame` that might cause problems during the upload.
 #' * `field_index`: The position of the field.  (For example, a value of '1' indicates the first column, while a '3' indicates the third column.)
 #' * `concern`: A description of the problem potentially caused by the `field`.
-#' * `suggestion`: A \emph{potential} solution to the concern.
+#' * `suggestion`: A *potential* solution to the concern.
 #'
 #' @details
 #' All functions listed in the Usage section above inspect a specific aspect of the dataset.  The `validate_for_read()` function executes all
