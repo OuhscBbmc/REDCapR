@@ -26,24 +26,24 @@ redcap_upload_file_oneshot(file_name, record, redcap_uri, token, field,
 }
 \value{
 Currently, a list is returned with the following elements,
-\enumerate{
- \item \code{success}: A boolean value indicating if the operation was apparently successful.
- \item \code{status_code}: The \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code} of the operation.
- \item \code{outcome_message}: A human readable string indicating the operation's outcome.
- \item \code{records_affected_count}: The number of records inserted or updated.
- \item \code{affected_ids}: The subject IDs of the inserted or updated records.
- \item \code{elapsed_seconds}: The duration of the function.
- \item \code{raw_text}: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
+\itemize{
+\item \code{success}: A boolean value indicating if the operation was apparently successful.
+\item \code{status_code}: The \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code} of the operation.
+\item \code{outcome_message}: A human readable string indicating the operation's outcome.
+\item \code{records_affected_count}: The number of records inserted or updated.
+\item \code{affected_ids}: The subject IDs of the inserted or updated records.
+\item \code{elapsed_seconds}: The duration of the function.
+\item \code{raw_text}: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the \code{raw_text} is returned as an empty string to save RAM.
 }
 }
 \description{
 This function uses REDCap's API to upload a file
 }
 \details{
-Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See \code{\link{validate_for_write}} for a helper function that checks for some common important conflicts.
+Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See \code{\link[=validate_for_write]{validate_for_write()}} for a helper function that checks for some common important conflicts.
 }
 \examples{
-\dontrun{ 
+\dontrun{
 #Define some constants
 uri       <- "https://bbmc.ouhsc.edu/redcap/api/"
 token     <- "D70F9ACD1EDD6F151C6EA78683944E98" #For the simple project (pid 213)
@@ -62,7 +62,7 @@ redcap_upload_file_oneshot(
 #Upload a collection of five images.
 records   <- 1:5
 file_paths <- base::file.path(
-  devtools::inst(name="REDCapR"), 
+  devtools::inst(name="REDCapR"),
   paste0("test-data/mugshot-", records, ".jpg")
 )
 
@@ -73,15 +73,15 @@ for( i in seq_along(records) ) {
     file_name=file_path, record=record, field=field,
     redcap_uri=redcap_uri, token=token
   )
-} 
+}
 }
 }
 \references{
-The official documentation can be found on the `API Help Page` and `API Examples' pages 
-on the REDCap wiki (ie, \url{https://community.projectredcap.org/articles/456/api-documentation.html} and
-\url{https://community.projectredcap.org/articles/462/api-examples.html}). If you do not have an account 
+The official documentation can be found on the 'API Help Page' and 'API Examples' pages
+on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and
+https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
 for the wiki, please ask your campus REDCap administrator to send you the static material.
- 
+
 The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.
 }
 \author{

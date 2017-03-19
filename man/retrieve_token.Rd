@@ -12,13 +12,13 @@ retrieve_token_mssql(project_name, dsn = NULL, channel = NULL)
 
 \item{dsn}{A \href{http://en.wikipedia.org/wiki/Data_source_name}{DSN} on the local machine that points to the desired MSSQL database. Required.}
 
-\item{channel}{An \emph{optional} connection handle as returned by \code{RODBC::odbcConnect}.  See Details below. Optional.}
+\item{channel}{An \emph{optional} connection handle as returned by \code{\link[RODBC:odbcConnect]{RODBC::odbcConnect()}}.  See Details below. Optional.}
 }
 \value{
 The token, which is a 32 character string.
 }
 \description{
-This function will soon be deprecated; please transition to \code{retrieve_token_mssql()}. These functions are not essential to calling the REDCap API, but instead are functions that help manage tokens securely.
+This function will soon be deprecated; please transition to \code{\link[=retrieve_token_mssql]{retrieve_token_mssql()}}. These functions are not essential to calling the REDCap API, but instead are functions that help manage tokens securely.
 }
 \details{
 If no \code{channel} is passed, one will be created at the beginning of the function, and destroyed at the end.  However if a channel
@@ -27,19 +27,19 @@ be quicker to create a single \code{channel} object and batch the calls together
 
 If you create the \code{channel} object yourself, consider wrapping calls in a \code{base::tryCatch} block, and closing the channel in
 its \code{finally} expression; this helps ensure the expensive database resource isn't held open unnecessarily.  See the internals of
-\code{retrieve_token_mssql} for an example of closing the \code{channel} in a \code{tryCatch} block.
+\code{\link[=retrieve_token_mssql]{retrieve_token_mssql()}} for an example of closing the \code{channel} in a \code{tryCatch} block.
 
-If the database elements are created with the script provided in package's `Security Database' vignette, the default values will work.
+If the database elements are created with the script provided in package's 'Security Database' vignette, the default values will work.
 }
 \note{
 We use Microsoft SQL Server, because that fits our University's infrastructure the easiest.  But this approach theoretically can work
-with any LDAP-enabled database server.  Please contact us if your institution is using something other than SQL Server, and 
+with any LDAP-enabled database server.  Please contact us if your institution is using something other than SQL Server, and
 would like help adapting this approach to your infrastructure.
 
-There's a lot of error checking for SQL injection, but remember that the user is executing under their 
-own credentials, so this doesn't obviate the need for disciplined credential management.  There's nothing 
-that can be done with this R function that isn't already exposed by any other interface into the database 
-(eg, SQL Server Managment Studio, or MySQL Workbench.)
+There's a lot of error checking for SQL injection, but remember that the user is executing under their
+own credentials, so this doesn't obviate the need for disciplined credential management.  There's nothing
+that can be done with this R function that isn't already exposed by any other interface into the database
+(eg, SQL Server Management Studio, or MySQL Workbench.)
 }
 \examples{
 library(REDCapR) #Load the package into the current R session.

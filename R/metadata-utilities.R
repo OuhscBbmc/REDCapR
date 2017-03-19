@@ -7,23 +7,22 @@
 #'
 #' @param pattern The regular expression pattern.  Required.
 #' @param text The text to apply the regex against.  Required.
-#' @param select_choices The text containing the choices that should be parsed to determine the \code{id} and \code{label} values.  Required.
+#' @param select_choices The text containing the choices that should be parsed to determine the `id` and `label` values.  Required.
 #' @param perl Indicates if perl-compatible regexps should be used.  Optional.
 #'
-#' @return Currently, a \code{data.frame} is returned a row for each match, and a column for each \emph{named} group witin a match.  For the \code{retrieve_checkbox_choices()} function, the columns will be.
-#' \enumerate{
-#'  \item \code{id}: The numeric value assigned to each choice (in the data dictionary).
-#'  \item \code{label}: The label assigned to each choice (in the data dictionary).
-#' }
-#' @details
-#' The \code{regex_named_captures()} function is general, and not specific to REDCap; it accepts any arbitrary regular expression.
-#' It returns a \code{data.frame} with as many columns as named matches.
+#' @return Currently, a [base::data.frame()] is returned a row for each match, and a column for each *named* group within a match.  For the `retrieve_checkbox_choices()` function, the columns will be.
+#' * `id`: The numeric value assigned to each choice (in the data dictionary).
+#' * `label`: The label assigned to each choice (in the data dictionary).
 #'
-#' The \code{checkbox_choices()} function is specialized, and accommodates the "select choices" for a \emph{single} REDCap checkbox group (where multiple boxes can be selected).
-#' It returns a \code{data.frame} with two columns, one for the numeric id and one fo the text label.
+#' @details
+#' The [regex_named_captures()] function is general, and not specific to REDCap; it accepts any arbitrary regular expression.
+#' It returns a [base::data.frame()] with as many columns as named matches.
+#'
+#' The [checkbox_choices()] function is specialized, and accommodates the "select choices" for a *single* REDCap checkbox group (where multiple boxes can be selected).
+#' It returns a [base::data.frame()] with two columns, one for the numeric id and one for the text label.
 #'
 #' @author Will Beasley
-#' @references See the official documentation for permissible characters in a checkbox label. \emph{I'm bluffing here, because I don't know where this is located.  If you know, please tell me.}
+#' @references See the official documentation for permissible characters in a checkbox label. *I'm bluffing here, because I don't know where this is located.  If you know, please tell me.*
 #'
 #' @examples
 #' library(REDCapR) #Load the package into the current R session.

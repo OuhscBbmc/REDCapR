@@ -2,7 +2,7 @@
 % Please edit documentation in R/create-batch-glossary.R
 \name{create_batch_glossary}
 \alias{create_batch_glossary}
-\title{Creates a \code{data.frame} that help batching long-running read and writes.}
+\title{Creates a \code{\link[base:data.frame]{base::data.frame()}} that help batching long-running read and writes.}
 \usage{
 create_batch_glossary(row_count, batch_size)
 }
@@ -12,24 +12,24 @@ create_batch_glossary(row_count, batch_size)
 \item{batch_size}{The maximum number of subject records a single batch should contain.}
 }
 \value{
-Currently, a \code{data.frame} is returned with the following columns,
-\enumerate{
- \item \code{id}: an \code{integer} that uniquely identifies the batch, starting at \code{1}.
- \item \code{start_index}: the index of the first row in the batch. \code{integer}.
- \item \code{stop_index}: the index of the last row in the batch. \code{integer}.
- \item \code{id_pretty}: a \code{character} representation of \code{id}, but padded with zeros.
- \item \code{start_index}: a \code{character} representation of \code{start_index}, but padded with zeros.
- \item \code{stop_index}: a \code{character} representation of \code{stop_index}, but padded with zeros.
- \item \code{label}: a \code{character} concatenation of \code{id_pretty}, \code{start_index}, and \code{stop_index_pretty}.
+Currently, a \code{\link[base:data.frame]{base::data.frame()}} is returned with the following columns,
+\itemize{
+\item \code{id}: an \code{integer} that uniquely identifies the batch, starting at \code{1}.
+\item \code{start_index}: the index of the first row in the batch. \code{integer}.
+\item \code{stop_index}: the index of the last row in the batch. \code{integer}.
+\item \code{id_pretty}: a \code{character} representation of \code{id}, but padded with zeros.
+\item \code{start_index}: a \code{character} representation of \code{start_index}, but padded with zeros.
+\item \code{stop_index}: a \code{character} representation of \code{stop_index}, but padded with zeros.
+\item \code{label}: a \code{character} concatenation of \code{id_pretty}, \code{start_index}, and \code{stop_index_pretty}.
 }
 }
 \description{
-The function returns a \code{data.frame} that other functions use to separate long-running
-read and write REDCap calls into multiple, smaller REDCap calls.  The goal is to (1) reduce the chance of time-outs, 
+The function returns a \code{\link[base:data.frame]{base::data.frame()}} that other functions use to separate long-running
+read and write REDCap calls into multiple, smaller REDCap calls.  The goal is to (1) reduce the chance of time-outs,
 and (2) introduce little breaks between batches so that the server isn't continually tied up.
 }
 \details{
-This function can also assist splitting and saving a large \code{data.frame} to disk as smaller files (such as a .csv).
+This function can also assist splitting and saving a large \code{\link[base:data.frame]{base::data.frame()}} to disk as smaller files (such as a .csv).
 The padded columns allow the OS to sort the batches/files in sequential order.
 }
 \examples{
@@ -45,7 +45,7 @@ d <- data.frame(
 create_batch_glossary(nrow(d), batch_size=40)
 }
 \seealso{
-See \code{\link{redcap_read}} for a function that uses \code{create_batch_gloassary}.
+See \code{\link[=redcap_read]{redcap_read()}} for a function that uses \code{create_batch_gloassary}.
 }
 \author{
 Will Beasley
