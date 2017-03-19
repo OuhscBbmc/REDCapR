@@ -4,7 +4,8 @@ devtools,TRUE,TRUE,,Important package development functions.
 dplyr,TRUE,TRUE,,Data manipulation
 knitr,TRUE,TRUE,,For reporting
 httr,TRUE,TRUE,hadley,Calling REDCap API
-RCurl,FALSE,TRUE,,Interact with the web APIs
+lubridate,TRUE,TRUE,hadley,Manipulating dates
+RCurl,FALSE,TRUE,,Interact with the web APIs -not used anymore by REDCapR
 readr,TRUE,TRUE,,Converting CSVs to data.frames
 RODBC,TRUE,TRUE,,For connecting to ODBC databases
 RODBCext,TRUE,TRUE,,Parameterized queries
