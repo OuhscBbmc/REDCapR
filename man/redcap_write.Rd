@@ -41,7 +41,7 @@ This function uses REDCap's APIs to select and return data.
 }
 \details{
 Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.
-See `\link{validate_for_write`} for a helper function that checks for some common important conflicts.
+See \code{\link[=validate_for_write]{validate_for_write()}} for a helper function that checks for some common important conflicts.
 
 For \code{redcap_write} to function properly, the user must have Export permissions for the
 'Full Data Set'.  Users with only 'De-Identified' export privileges can still use

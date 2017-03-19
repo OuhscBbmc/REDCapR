@@ -2,10 +2,10 @@
 #' @export redcap_read
 #' @title Read records from a REDCap project in subsets, and stacks them together before returning a `data.frame`.
 #'
-#' @description From an external perspective, this function is similar to [`redcap_read_oneshot()`](redcap_read_oneshot()).  The internals
+#' @description From an external perspective, this function is similar to [redcap_read_oneshot()].  The internals
 #' differ in that `redcap_read` retrieves subsets of the data, and then combines them before returning
 #' (among other objects) a single `data.frame`.  This function can be more appropriate than
-#' [`redcap_read_oneshot()`](redcap_read_oneshot()) when returning large datasets that could tie up the server.
+#' [redcap_read_oneshot()] when returning large datasets that could tie up the server.
 #'
 #' @param batch_size The maximum number of subject records a single batch should contain.  The default is 100.
 #' @param interbatch_delay The number of seconds the function will wait before requesting a new subset from REDCap. The default is 0.5 seconds.
@@ -35,7 +35,7 @@
 #' * `filter_logic`: The filter statement passed as an argument.
 #' * `elapsed_seconds`: The duration of the function.
 #' @details
-#' Specifically, it internally uses multiple calls to [`redcap_read_oneshot()`](redcap_read_oneshot()) to select and return data.
+#' Specifically, it internally uses multiple calls to [redcap_read_oneshot()] to select and return data.
 #' Initially, only primary key is queried through the REDCap API.  The long list is then subsetted into partitions,
 #' whose sizes are determined by the `batch_size` parameter.  REDCap is then queried for all variables of
 #' the subset's subjects.  This is repeated for each subset, before returning a unified `data.frame`.

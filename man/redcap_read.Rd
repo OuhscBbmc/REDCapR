@@ -60,13 +60,13 @@ Currently, a list is returned with the following elements,
 }
 }
 \description{
-From an external perspective, this function is similar to \url{redcap_read_oneshot()}.  The internals
+From an external perspective, this function is similar to \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}}.  The internals
 differ in that \code{redcap_read} retrieves subsets of the data, and then combines them before returning
 (among other objects) a single \code{data.frame}.  This function can be more appropriate than
-\url{redcap_read_oneshot()} when returning large datasets that could tie up the server.
+\code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}} when returning large datasets that could tie up the server.
 }
 \details{
-Specifically, it internally uses multiple calls to \url{redcap_read_oneshot()} to select and return data.
+Specifically, it internally uses multiple calls to \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}} to select and return data.
 Initially, only primary key is queried through the REDCap API.  The long list is then subsetted into partitions,
 whose sizes are determined by the \code{batch_size} parameter.  REDCap is then queried for all variables of
 the subset's subjects.  This is repeated for each subset, before returning a unified \code{data.frame}.

@@ -29,7 +29,7 @@
 #'  \item `file_name`: The name of the file persisted to disk. This is useful if the name stored in REDCap is used (which is the default).
 #' }
 #' @details
-#' Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See `\link{validate_for_write`} for a helper function that checks for some common important conflicts.
+#' Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See [validate_for_write()] for a helper function that checks for some common important conflicts.
 #' @author Will Beasley
 #' @author John J. Aponte
 #' @references The official documentation can be found on the 'API Help Page' and 'API Examples' pages 

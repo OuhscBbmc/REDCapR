@@ -21,7 +21,7 @@
 #'  \item `raw_text`: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
 #' }
 #' @details
-#' Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See `\link{validate_for_write`} for a helper function that checks for some common important conflicts.
+#' Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See [validate_for_write()] for a helper function that checks for some common important conflicts.
 #' @author Will Beasley
 #' @references The official documentation can be found on the 'API Help Page' and 'API Examples' pages 
 #' on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and

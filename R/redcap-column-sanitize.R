@@ -7,12 +7,12 @@
 #' @param d The `data.frame` containing the dataset used to update the REDCap project.  Required.
 #' @param column_names An array of `character` values indicating the names of the variables to sanitize.  Optional.
 #' @param encoding_initial An array of `character` values indicating the names of the variables to sanitize.  Optional.
-#' @param substitution_character The `character` value that replaces characters that were unable to be appropriatedly matched.
+#' @param substitution_character The `character` value that replaces characters that were unable to be appropriately matched.
 #' @return A `data.frame` with same columns, but whose character values have been sanitized.
 #' @details
-#' Letters like an accented 'A' are replaced with a plain 'A'.  
+#' Letters like an accented 'A' are replaced with a plain 'A'.
 #'
-#' This is a thin wrapper around [`base::iconv()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/iconv.html).
+#' This is a thin wrapper around [base::iconv()].
 #' The `ASCII//TRANSLIT` option does the actual transliteration work.  As of `R 3.1.0`, the OSes use similar,
 #' but different, versions to convert the characters.  Be aware of this in case you notice slight OS-dependent differences.
 #'

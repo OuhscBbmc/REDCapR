@@ -45,7 +45,7 @@ d <- data.frame(
 create_batch_glossary(nrow(d), batch_size=40)
 }
 \seealso{
-See \code{\link{redcap_read`} for a function that uses}create_batch_gloassary`.
+See \code{\link[=redcap_read]{redcap_read()}} for a function that uses \code{create_batch_gloassary}.
 }
 \author{
 Will Beasley

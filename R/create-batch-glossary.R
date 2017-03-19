@@ -26,7 +26,7 @@
 #' @author Will Beasley
 #'  
 #' @seealso
-#' See `\link{redcap_read`} for a function that uses `create_batch_gloassary`.
+#' See [redcap_read()] for a function that uses `create_batch_gloassary`.
 #' 
 #' @examples
 #' library(REDCapR) #Load the package into the current R session.

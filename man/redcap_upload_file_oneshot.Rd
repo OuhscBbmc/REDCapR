@@ -40,7 +40,7 @@ Currently, a list is returned with the following elements,
 This function uses REDCap's API to upload a file
 }
 \details{
-Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See `\link{validate_for_write`} for a helper function that checks for some common important conflicts.
+Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See \code{\link[=validate_for_write]{validate_for_write()}} for a helper function that checks for some common important conflicts.
 }
 \examples{
 \dontrun{

@@ -14,7 +14,7 @@ redcap_column_sanitize(d, column_names = colnames(d),
 
 \item{encoding_initial}{An array of \code{character} values indicating the names of the variables to sanitize.  Optional.}
 
-\item{substitution_character}{The \code{character} value that replaces characters that were unable to be appropriatedly matched.}
+\item{substitution_character}{The \code{character} value that replaces characters that were unable to be appropriately matched.}
 }
 \value{
 A \code{data.frame} with same columns, but whose character values have been sanitized.
@@ -25,7 +25,7 @@ Replace non-ASCII characters with legal characters that won't cause problems whe
 \details{
 Letters like an accented 'A' are replaced with a plain 'A'.
 
-This is a thin wrapper around \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/iconv.html}{base::iconv()}.
+This is a thin wrapper around \code{\link[base:iconv]{base::iconv()}}.
 The \code{ASCII//TRANSLIT} option does the actual transliteration work.  As of \code{R 3.1.0}, the OSes use similar,
 but different, versions to convert the characters.  Be aware of this in case you notice slight OS-dependent differences.
 }

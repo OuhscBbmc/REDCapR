@@ -42,7 +42,7 @@ Export the metadata (as a data dictionary) of a REDCap project as a \code{data.f
 Each row in the data dictionary corresponds to one field in the project's dataset.
 }
 \details{
-Specifically, it internally uses multiple calls to \url{redcap_read_oneshot()} to select and return data.
+Specifically, it internally uses multiple calls to \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}} to select and return data.
 Initially, only primary key is queried through the REDCap API.  The long list is then subsetted into partitions,
 whose sizes are determined by the \code{batch_size} parameter.  REDCap is then queried for all variables of
 the subset's subjects.  This is repeated for each subset, before returning a unified \code{data.frame}.

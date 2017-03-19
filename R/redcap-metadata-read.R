@@ -25,7 +25,7 @@
 #' * `elapsed_seconds`: The duration of the function.
 #'
 #' @details
-#' Specifically, it internally uses multiple calls to [`redcap_read_oneshot()`](redcap_read_oneshot()) to select and return data.
+#' Specifically, it internally uses multiple calls to [redcap_read_oneshot()] to select and return data.
 #' Initially, only primary key is queried through the REDCap API.  The long list is then subsetted into partitions,
 #' whose sizes are determined by the `batch_size` parameter.  REDCap is then queried for all variables of
 #' the subset's subjects.  This is repeated for each subset, before returning a unified `data.frame`.
