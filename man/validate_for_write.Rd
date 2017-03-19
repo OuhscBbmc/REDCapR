@@ -17,7 +17,7 @@ validate_no_uppercase( d )
 }
 \value{
 A \code{data.frame}, where each potential violation is a row.  The two columns are:
-\enumerate{
+\itemize{
 \item \code{field_name}: The name of the \code{data.frame} that might cause problems during the upload.
 \item \code{field_index}: The position of the field.  (For example, a value of '1' indicates the first column, while a '3' indicates the third column.)
 \item \code{concern}: A description of the problem potentially caused by the \code{field}.

@@ -14,14 +14,13 @@
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details in `redcap_read_oneshot()` Optional.
 #'
 #' @return Currently, a list is returned with the following elements,
-#' \enumerate{
-#'  \item `success`: A boolean value indicating if the operation was apparently successful.
-#'  \item `status_code`: The [http status code](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes) of the operation.
-#'  \item `outcome_message`: A human readable string indicating the operation's outcome.
-#'  \item `records_affected_count`: The number of records inserted or updated.
-#'  \item `affected_ids`: The subject IDs of the inserted or updated records.
-#'  \item `elapsed_seconds`: The duration of the function.
-#' }
+#' * `success`: A boolean value indicating if the operation was apparently successful.
+#' * `status_code`: The [http status code](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes) of the operation.
+#' * `outcome_message`: A human readable string indicating the operation's outcome.
+#' * `records_affected_count`: The number of records inserted or updated.
+#' * `affected_ids`: The subject IDs of the inserted or updated records.
+#' * `elapsed_seconds`: The duration of the function.
+#'
 #' @details
 #' Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.
 #' See [validate_for_write()] for a helper function that checks for some common important conflicts.
@@ -29,11 +28,9 @@
 #' For `redcap_write` to function properly, the user must have Export permissions for the
 #' 'Full Data Set'.  Users with only 'De-Identified' export privileges can still use
 #' `redcap_write_oneshot`.  To grant the appropriate permissions:
-#' \enumerate{
-#'  \item go to 'User Rights' in the REDCap project site,
-#'  \item select the desired user, and then select 'Edit User Privileges',
-#'  \item in the 'Data Exports' radio buttons, select 'Full Data Set'.
-#' }
+#' * go to 'User Rights' in the REDCap project site,
+#' * select the desired user, and then select 'Edit User Privileges',
+#' * in the 'Data Exports' radio buttons, select 'Full Data Set'.
 #'
 #' @author Will Beasley
 #' @references The official documentation can be found on the 'API Help Page' and 'API Examples' pages

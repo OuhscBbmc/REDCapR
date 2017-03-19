@@ -24,13 +24,11 @@
 #' @param channel An \emph{optional} connection handle as returned by `RODBC::odbcConnect`.  See Details below. Optional.
 #'
 #' @return A list of the following elements
-#' \enumerate{
-#'  \item `redcap_uri`: The URI of the REDCap Server.
-#'  \item `username`: Username.
-#'  \item `project_id`: The ID assigned to the project withing REDCap.
-#'  \item `token`: The token to pass to the REDCap server
-#'  \item `comment`: An optional string.
-#' }
+#' * `redcap_uri`: The URI of the REDCap Server.
+#' * `username`: Username.
+#' * `project_id`: The ID assigned to the project withing REDCap.
+#' * `token`: The token to pass to the REDCap server
+#' * `comment`: An optional string.
 #'
 #' @details
 #' If the database elements are created with the script provided in package's 'Security Database' vignette, the default values will work.

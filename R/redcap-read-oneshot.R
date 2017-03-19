@@ -18,17 +18,16 @@
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below. Optional.
 #' @return Currently, a list is returned with the following elements,
-#' \enumerate{
-#'  \item `data`: An R `data.frame` of the desired records and columns.
-#'  \item `success`: A boolean value indicating if the operation was apparently successful.
-#'  \item `status_code`: The [http status code](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes) of the operation.
-#'  \item `outcome_message`: A human readable string indicating the operation's outcome.
-#'  \item `records_collapsed`: The desired records IDs, collapsed into a single string, separated by commas.
-#'  \item `fields_collapsed`: The desired field names, collapsed into a single string, separated by commas.
-#'  \item `filter_logic`: The filter statement passed as an argument.
-#'  \item `elapsed_seconds`: The duration of the function.
-#'  \item `raw_text`: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
-#' }
+#' * `data`: An R `data.frame` of the desired records and columns.
+#' * `success`: A boolean value indicating if the operation was apparently successful.
+#' * `status_code`: The [http status code](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes) of the operation.
+#' * `outcome_message`: A human readable string indicating the operation's outcome.
+#' * `records_collapsed`: The desired records IDs, collapsed into a single string, separated by commas.
+#' * `fields_collapsed`: The desired field names, collapsed into a single string, separated by commas.
+#' * `filter_logic`: The filter statement passed as an argument.
+#' * `elapsed_seconds`: The duration of the function.
+#' * `raw_text`: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
+#'
 #' @details
 #' The full list of configuration options accepted by the `httr` package is viewable by executing `httr::httr_options()`.  The `httr`
 #' package and documentation is available at https://cran.r-project.org/package=httr.

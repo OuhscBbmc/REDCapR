@@ -21,8 +21,8 @@ checkbox_choices(select_choices)
 \item{select_choices}{The text containing the choices that should be parsed to determine the \code{id} and \code{label} values.  Required.}
 }
 \value{
-Currently, a \code{data.frame} is returned a row for each match, and a column for each \emph{named} group witin a match.  For the \code{retrieve_checkbox_choices()} function, the columns will be.
-\enumerate{
+Currently, a \code{data.frame} is returned a row for each match, and a column for each \emph{named} group within a match.  For the \code{retrieve_checkbox_choices()} function, the columns will be.
+\itemize{
 \item \code{id}: The numeric value assigned to each choice (in the data dictionary).
 \item \code{label}: The label assigned to each choice (in the data dictionary).
 }
@@ -35,7 +35,7 @@ The \code{regex_named_captures()} function is general, and not specific to REDCa
 It returns a \code{data.frame} with as many columns as named matches.
 
 The \code{checkbox_choices()} function is specialized, and accommodates the "select choices" for a \emph{single} REDCap checkbox group (where multiple boxes can be selected).
-It returns a \code{data.frame} with two columns, one for the numeric id and one fo the text label.
+It returns a \code{data.frame} with two columns, one for the numeric id and one for the text label.
 }
 \examples{
 library(REDCapR) #Load the package into the current R session.

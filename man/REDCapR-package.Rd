@@ -7,22 +7,14 @@
 \title{R utilities for interacting with a REDCap data system \url{http://www.project-redcap.org/}}
 \description{
 Much of this package has been developed to support the needs of the following projects.  We appreciate the support.
-\enumerate{
-
+\itemize{
 \item \emph{OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting (\href{http://mchb.hrsa.gov/programs/homevisiting/}{MIECHV}) Project}. \href{https://perf-data.hrsa.gov/mchb/DGISReports/Abstract/AbstractDetails.aspx?Source=TVIS&GrantNo=D89MC23154&FY=2012}{HRSA/ACF D89MC23154}.  David Bard, PI, OUHSC; 2011-2015.
-
 \item \emph{Independent Evaluation of the State of OK MIECHV Evidence Based Home Visitation Project}, \href{https://www.nih.gov/}{NIH}-sponsored collaboration with \href{https://www.ok.gov/health/}{OSDH}. David Bard, PI, OUHSC; 2015-2017.
-
 \item \emph{OSDH ParentPRO Pilot Evaluation}, federally-sponsored collaboration with \href{https://www.ok.gov/health/}{OSDH}.  David Bard, PI, OUHSC; 2015-2017.
-
 \item \emph{Title IV-E Waiver Project}, \href{http://mchb.hrsa.gov/}{HRSA/MCHB}-sponsored collaboration with \href{http://www.okdhs.org/}{OKDHS}; David Bard, PI, OUHSC; 2014-2017.
-
 \item \emph{Integrative Analysis of Longitudinal Studies of Aging (IALSA)}, sponsored by \href{http://grantome.com/grant/NIH/P01-AG043362}{NIH 5P01AG043362}.  Scott Hofer, PI, University of Victoria; Will Beasley, PI of site-award, OUHSC; 2013-2018.
-
 \item \emph{Oklahoma Shared Clinical and Translational Resources}, sponsored by \href{http://grantome.com/grant/NIH/U54-GM104938}{NIH NIGMS; U54 GM104938}. Judith A. James, PI, OUHSC; 2013-2018.
-
-\item Additional Insitutional Support from OUHSC \href{https://www.oumedicine.com/department-of-pediatrics}{Dept of Pediatrics}; 2013-2017.
-
+\item Additional Institutional Support from OUHSC \href{https://www.oumedicine.com/department-of-pediatrics}{Dept of Pediatrics}; 2013-2017.
 }
 }
 \note{

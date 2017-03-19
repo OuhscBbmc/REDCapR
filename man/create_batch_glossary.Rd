@@ -13,7 +13,7 @@ create_batch_glossary(row_count, batch_size)
 }
 \value{
 Currently, a \code{data.frame} is returned with the following columns,
-\enumerate{
+\itemize{
 \item \code{id}: an \code{integer} that uniquely identifies the batch, starting at \code{1}.
 \item \code{start_index}: the index of the first row in the batch. \code{integer}.
 \item \code{stop_index}: the index of the last row in the batch. \code{integer}.

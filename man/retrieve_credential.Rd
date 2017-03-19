@@ -33,7 +33,7 @@ retrieve_credential_mssql(
 }
 \value{
 A list of the following elements
-\enumerate{
+\itemize{
 \item \code{redcap_uri}: The URI of the REDCap Server.
 \item \code{username}: Username.
 \item \code{project_id}: The ID assigned to the project withing REDCap.

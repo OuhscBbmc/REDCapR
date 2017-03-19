@@ -27,7 +27,7 @@ redcap_write(ds_to_write, batch_size = 100L, interbatch_delay = 0.5,
 }
 \value{
 Currently, a list is returned with the following elements,
-\enumerate{
+\itemize{
 \item \code{success}: A boolean value indicating if the operation was apparently successful.
 \item \code{status_code}: The \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code} of the operation.
 \item \code{outcome_message}: A human readable string indicating the operation's outcome.
@@ -46,7 +46,7 @@ See \code{\link[=validate_for_write]{validate_for_write()}} for a helper functio
 For \code{redcap_write} to function properly, the user must have Export permissions for the
 'Full Data Set'.  Users with only 'De-Identified' export privileges can still use
 \code{redcap_write_oneshot}.  To grant the appropriate permissions:
-\enumerate{
+\itemize{
 \item go to 'User Rights' in the REDCap project site,
 \item select the desired user, and then select 'Edit User Privileges',
 \item in the 'Data Exports' radio buttons, select 'Full Data Set'.
