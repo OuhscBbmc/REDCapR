@@ -10,7 +10,7 @@ redcap_download_file_oneshot(file_name = NULL, directory = NULL,
 }
 \arguments{
 \item{file_name}{The name of the file where the downloaded file is saved.
-If empty the original name of the file will be used and saved in 
+If empty the original name of the file will be used and saved in
 the default directory.  Optional.}
 
 \item{directory}{The directory where the file is saved. By default current directory. Optional}
@@ -34,14 +34,14 @@ the default directory.  Optional.}
 \value{
 Currently, a list is returned with the following elements,
 \enumerate{
- \item \code{success}: A boolean value indicating if the operation was apparently successful.
- \item \code{status_code}: The \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code} of the operation.
- \item \code{outcome_message}: A human readable string indicating the operation's outcome.
- \item \code{records_affected_count}: The number of records inserted or updated.
- \item \code{affected_ids}: The subject IDs of the inserted or updated records.
- \item \code{elapsed_seconds}: The duration of the function.
- \item \code{raw_text}: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
- \item \code{file_name}: The name of the file persisted to disk. This is useful if the name stored in REDCap is used (which is the default).
+\item \code{success}: A boolean value indicating if the operation was apparently successful.
+\item \code{status_code}: The \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code} of the operation.
+\item \code{outcome_message}: A human readable string indicating the operation's outcome.
+\item \code{records_affected_count}: The number of records inserted or updated.
+\item \code{affected_ids}: The subject IDs of the inserted or updated records.
+\item \code{elapsed_seconds}: The duration of the function.
+\item \code{raw_text}: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the \code{raw_text} is returned as an empty string to save RAM.
+\item \code{file_name}: The name of the file persisted to disk. This is useful if the name stored in REDCap is used (which is the default).
 }
 }
 \description{
@@ -51,7 +51,7 @@ This function uses REDCap's API to download a file
 Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See \code{\link{validate_for_write}} for a helper function that checks for some common important conflicts.
 }
 \examples{
-\dontrun{  
+\dontrun{
 uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
 token   <- "D70F9ACD1EDD6F151C6EA78683944E98" #pid=213
 record  <- 1
@@ -59,30 +59,30 @@ field   <- "mugshot"
 # event <- "" # only for longitudinal events
 
 result_1 <- redcap_download_file_oneshot(
-  record=record, field=field, 
+  record=record, field=field,
   redcap_uri=uri, token=token
 )
 base::unlink("mugshot-1.jpg")
 
 (full_name <- base::tempfile(pattern="mugshot", fileext=".jpg"))
 result_2 <- redcap_download_file_oneshot(
-  file_name=full_name, record=record, field=field, 
+  file_name=full_name, record=record, field=field,
   redcap_uri=uri, token=token
 )
 base::unlink(full_name)
 
 (relative_name <- "ssss.jpg")
 result_3 <- redcap_download_file_oneshot(
-  file_name=relative_name, record=record, field=field, 
+  file_name=relative_name, record=record, field=field,
   redcap_uri=uri, token=token
 )
 base::unlink(relative_name)
 }
 }
 \references{
-The official documentation can be found on the `API Help Page` and `API Examples' pages 
+The official documentation can be found on the 'API Help Page' and 'API Examples' pages
 on the REDCap wiki (ie, \url{https://community.projectredcap.org/articles/456/api-documentation.html} and
-\url{https://community.projectredcap.org/articles/462/api-examples.html}). If you do not have an account 
+\url{https://community.projectredcap.org/articles/462/api-examples.html}). If you do not have an account
 for the wiki, please ask your campus REDCap administrator to send you the static material.
 
 The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.

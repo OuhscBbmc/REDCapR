@@ -13,7 +13,7 @@
 #' @param filter_logic String of logic text (e.g., \code{[gender] = 'male'}) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.
 #' @param events An array, where each element corresponds a desired project event  Optional.
 #' @param events_collapsed A single string, where the desired event names are separated by commas.  Optional.
-#' @param export_data_access_groups A boolean value that specifies whether or not to export the ``redcap_data_access_group'' field when data access groups are utilized in the project. Default is \code{FALSE}. See the details below.
+#' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is \code{FALSE}. See the details below.
 #' @param raw_or_label A string (either \code{'raw'} or \code{'label'} that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is \code{'raw'}.
 #' @param verbose A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to \code{POST} method in the \code{httr} package.  See the details below. Optional.
@@ -35,7 +35,7 @@
 #'
 #' If you do not pass in this export_data_access_groups value, it will default to \code{FALSE}. The following is from the API help page for version 5.2.3: This flag is only viable if the user whose token is being used to make the API request is *not* in a data access group. If the user is in a group, then this flag will revert to its default value.
 #' @author Will Beasley
-#' @references The official documentation can be found on the `API Help Page` and `API Examples' pages
+#' @references The official documentation can be found on the 'API Help Page' and 'API Examples' pages
 #' on the REDCap wiki (ie, \url{https://community.projectredcap.org/articles/456/api-documentation.html} and
 #' \url{https://community.projectredcap.org/articles/462/api-examples.html}). If you do not have an account
 #' for the wiki, please ask your campus REDCap administrator to send you the static material.

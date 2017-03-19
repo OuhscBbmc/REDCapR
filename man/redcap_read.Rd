@@ -34,7 +34,7 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
 
 \item{events_collapsed}{A single string, where the desired event names are separated by commas.  Optional.}
 
-\item{export_data_access_groups}{A boolean value that specifies whether or not to export the ``redcap_data_access_group'' field when data access groups are utilized in the project. Default is \code{FALSE}. See the details below.}
+\item{export_data_access_groups}{A boolean value that specifies whether or not to export the \code{redcap_data_access_group} field when data access groups are utilized in the project. Default is \code{FALSE}. See the details below.}
 
 \item{filter_logic}{String of logic text (e.g., \code{[gender] = 'male'}) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.}
 
@@ -49,20 +49,20 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
 \value{
 Currently, a list is returned with the following elements,
 \enumerate{
- \item \code{data}: An R \code{data.frame} of the desired records and columns.
- \item \code{success}: A boolean value indicating if the operation was apparently successful.
- \item \code{status_codes}: A collection of \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes}, separated by semicolons.  There is one code for each batch attempted.
- \item \code{outcome_messages}: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.
- \item \code{records_collapsed}: The desired records IDs, collapsed into a single string, separated by commas.
- \item \code{fields_collapsed}: The desired field names, collapsed into a single string, separated by commas.
- \item \code{filter_logic}: The filter statement passed as an argument.
- \item \code{elapsed_seconds}: The duration of the function.
+\item \code{data}: An R \code{data.frame} of the desired records and columns.
+\item \code{success}: A boolean value indicating if the operation was apparently successful.
+\item \code{status_codes}: A collection of \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes}, separated by semicolons.  There is one code for each batch attempted.
+\item \code{outcome_messages}: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.
+\item \code{records_collapsed}: The desired records IDs, collapsed into a single string, separated by commas.
+\item \code{fields_collapsed}: The desired field names, collapsed into a single string, separated by commas.
+\item \code{filter_logic}: The filter statement passed as an argument.
+\item \code{elapsed_seconds}: The duration of the function.
 }
 }
 \description{
 From an external perspective, this function is similar to \code{\link{redcap_read_oneshot}}.  The internals
 differ in that \code{redcap_read} retrieves subsets of the data, and then combines them before returning
-(among other objects) a single \code{data.frame}.  This function can be more appropriate than 
+(among other objects) a single \code{data.frame}.  This function can be more appropriate than
 \code{\link{redcap_read_oneshot}} when returning large datasets that could tie up the server.
 }
 \details{
@@ -73,13 +73,13 @@ the subset's subjects.  This is repeated for each subset, before returning a uni
 
 The function allows a delay between calls, which allows the server to attend to other users' requests.
 
-For \code{redcap_read} to function properly, the user must have Export permissions for the 
-`Full Data Set'.  Users with only `De-Identified' export privileges can still use 
-\code{redcap_read_oneshot}.  To grant the appropriate permissions: 
+For \code{redcap_read} to function properly, the user must have Export permissions for the
+'Full Data Set'.  Users with only 'De-Identified' export privileges can still use
+\code{redcap_read_oneshot}.  To grant the appropriate permissions:
 \enumerate{
- \item go to `User Rights' in the REDCap project site, 
- \item select the desired user, and then select `Edit User Privileges', 
- \item in the `Data Exports' radio buttons, select `Full Data Set'.
+\item go to 'User Rights' in the REDCap project site,
+\item select the desired user, and then select 'Edit User Privileges',
+\item in the 'Data Exports' radio buttons, select 'Full Data Set'.
 }
 }
 \examples{
@@ -92,11 +92,11 @@ redcap_read(batch_size=2, redcap_uri=uri, token=token)
 
 }
 \references{
-The official documentation can be found on the `API Help Page` and `API Examples' pages 
+The official documentation can be found on the 'API Help Page' and 'API Examples' pages
 on the REDCap wiki (ie, \url{https://community.projectredcap.org/articles/456/api-documentation.html} and
-\url{https://community.projectredcap.org/articles/462/api-examples.html}). If you do not have an account 
+\url{https://community.projectredcap.org/articles/462/api-examples.html}). If you do not have an account
 for the wiki, please ask your campus REDCap administrator to send you the static material.
- 
+
 The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.
 }
 \author{

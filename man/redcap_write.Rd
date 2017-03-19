@@ -28,32 +28,32 @@ redcap_write(ds_to_write, batch_size = 100L, interbatch_delay = 0.5,
 \value{
 Currently, a list is returned with the following elements,
 \enumerate{
- \item \code{success}: A boolean value indicating if the operation was apparently successful.
- \item \code{status_code}: The \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code} of the operation.
- \item \code{outcome_message}: A human readable string indicating the operation's outcome.
- \item \code{records_affected_count}: The number of records inserted or updated.
- \item \code{affected_ids}: The subject IDs of the inserted or updated records.
- \item \code{elapsed_seconds}: The duration of the function.
+\item \code{success}: A boolean value indicating if the operation was apparently successful.
+\item \code{status_code}: The \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code} of the operation.
+\item \code{outcome_message}: A human readable string indicating the operation's outcome.
+\item \code{records_affected_count}: The number of records inserted or updated.
+\item \code{affected_ids}: The subject IDs of the inserted or updated records.
+\item \code{elapsed_seconds}: The duration of the function.
 }
 }
 \description{
 This function uses REDCap's APIs to select and return data.
 }
 \details{
-Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  
+Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.
 See \code{\link{validate_for_write}} for a helper function that checks for some common important conflicts.
 
-For \code{redcap_write} to function properly, the user must have Export permissions for the 
-`Full Data Set'.  Users with only `De-Identified' export privileges can still use 
-\code{redcap_write_oneshot}.  To grant the appropriate permissions: 
+For \code{redcap_write} to function properly, the user must have Export permissions for the
+'Full Data Set'.  Users with only 'De-Identified' export privileges can still use
+\code{redcap_write_oneshot}.  To grant the appropriate permissions:
 \enumerate{
- \item go to `User Rights' in the REDCap project site, 
- \item select the desired user, and then select `Edit User Privileges', 
- \item in the `Data Exports' radio buttons, select `Full Data Set'.
+\item go to 'User Rights' in the REDCap project site,
+\item select the desired user, and then select 'Edit User Privileges',
+\item in the 'Data Exports' radio buttons, select 'Full Data Set'.
 }
 }
 \examples{
-\dontrun{ 
+\dontrun{
 #Define some constants
 uri           <- "https://bbmc.ouhsc.edu/redcap/api/"
 token         <- "D70F9ACD1EDD6F151C6EA78683944E98"
@@ -88,11 +88,11 @@ result_write$raw_text
 }
 }
 \references{
-The official documentation can be found on the `API Help Page` and `API Examples' pages 
+The official documentation can be found on the 'API Help Page' and 'API Examples' pages
 on the REDCap wiki (ie, \url{https://community.projectredcap.org/articles/456/api-documentation.html} and
-\url{https://community.projectredcap.org/articles/462/api-examples.html}). If you do not have an account 
+\url{https://community.projectredcap.org/articles/462/api-examples.html}). If you do not have an account
 for the wiki, please ask your campus REDCap administrator to send you the static material.
- 
+
 The official \href{http://curl.haxx.se}{cURL site} discusses the process of using SSL to verify the server being connected to.
 }
 \author{

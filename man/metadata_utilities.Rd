@@ -23,8 +23,8 @@ checkbox_choices(select_choices)
 \value{
 Currently, a \code{data.frame} is returned a row for each match, and a column for each \emph{named} group witin a match.  For the \code{retrieve_checkbox_choices()} function, the columns will be.
 \enumerate{
- \item \code{id}: The numeric value assigned to each choice (in the data dictionary).
- \item \code{label}: The label assigned to each choice (in the data dictionary).
+\item \code{id}: The numeric value assigned to each choice (in the data dictionary).
+\item \code{label}: The label assigned to each choice (in the data dictionary).
 }
 }
 \description{

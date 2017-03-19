@@ -28,17 +28,17 @@ redcap_metadata_read(redcap_uri, token, forms = NULL, forms_collapsed = "",
 \value{
 Currently, a list is returned with the following elements,
 \enumerate{
- \item \code{data}: An R \code{data.frame} of the desired records and columns.
- \item \code{success}: A boolean value indicating if the operation was apparently successful.
- \item \code{status_codes}: A collection of \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes}, separated by semicolons.  There is one code for each batch attempted.
- \item \code{outcome_messages}: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.
- \item \code{forms_collapsed}: The desired records IDs, collapsed into a single string, separated by commas.
- \item \code{fields_collapsed}: The desired field names, collapsed into a single string, separated by commas.
- \item \code{elapsed_seconds}: The duration of the function.
+\item \code{data}: An R \code{data.frame} of the desired records and columns.
+\item \code{success}: A boolean value indicating if the operation was apparently successful.
+\item \code{status_codes}: A collection of \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes}, separated by semicolons.  There is one code for each batch attempted.
+\item \code{outcome_messages}: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.
+\item \code{forms_collapsed}: The desired records IDs, collapsed into a single string, separated by commas.
+\item \code{fields_collapsed}: The desired field names, collapsed into a single string, separated by commas.
+\item \code{elapsed_seconds}: The duration of the function.
 }
 }
 \description{
-Export the metadata (as a data dictionary) of a REDCap project as a \code{data.frame}.  
+Export the metadata (as a data dictionary) of a REDCap project as a \code{data.frame}.
 Each row in the data dictionary corresponds to one field in the project's dataset.
 }
 \details{
@@ -58,9 +58,9 @@ redcap_metadata_read(redcap_uri=uri, token=token)
 }
 }
 \references{
-The official documentation can be found on the `API Help Page` and `API Examples' pages 
+The official documentation can be found on the 'API Help Page' and 'API Examples' pages
 on the REDCap wiki (ie, \url{https://community.projectredcap.org/articles/456/api-documentation.html} and
-\url{https://community.projectredcap.org/articles/462/api-examples.html}). If you do not have an account 
+\url{https://community.projectredcap.org/articles/462/api-examples.html}). If you do not have an account
 for the wiki, please ask your campus REDCap administrator to send you the static material.
 }
 \author{

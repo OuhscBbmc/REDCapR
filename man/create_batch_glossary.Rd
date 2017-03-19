@@ -14,18 +14,18 @@ create_batch_glossary(row_count, batch_size)
 \value{
 Currently, a \code{data.frame} is returned with the following columns,
 \enumerate{
- \item \code{id}: an \code{integer} that uniquely identifies the batch, starting at \code{1}.
- \item \code{start_index}: the index of the first row in the batch. \code{integer}.
- \item \code{stop_index}: the index of the last row in the batch. \code{integer}.
- \item \code{id_pretty}: a \code{character} representation of \code{id}, but padded with zeros.
- \item \code{start_index}: a \code{character} representation of \code{start_index}, but padded with zeros.
- \item \code{stop_index}: a \code{character} representation of \code{stop_index}, but padded with zeros.
- \item \code{label}: a \code{character} concatenation of \code{id_pretty}, \code{start_index}, and \code{stop_index_pretty}.
+\item \code{id}: an \code{integer} that uniquely identifies the batch, starting at \code{1}.
+\item \code{start_index}: the index of the first row in the batch. \code{integer}.
+\item \code{stop_index}: the index of the last row in the batch. \code{integer}.
+\item \code{id_pretty}: a \code{character} representation of \code{id}, but padded with zeros.
+\item \code{start_index}: a \code{character} representation of \code{start_index}, but padded with zeros.
+\item \code{stop_index}: a \code{character} representation of \code{stop_index}, but padded with zeros.
+\item \code{label}: a \code{character} concatenation of \code{id_pretty}, \code{start_index}, and \code{stop_index_pretty}.
 }
 }
 \description{
 The function returns a \code{data.frame} that other functions use to separate long-running
-read and write REDCap calls into multiple, smaller REDCap calls.  The goal is to (1) reduce the chance of time-outs, 
+read and write REDCap calls into multiple, smaller REDCap calls.  The goal is to (1) reduce the chance of time-outs,
 and (2) introduce little breaks between batches so that the server isn't continually tied up.
 }
 \details{

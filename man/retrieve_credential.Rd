@@ -7,7 +7,7 @@
 \title{Read a token and other credentials from a (non-REDCap) database or file.}
 \usage{
 retrieve_credential_local(
-  path_credential, project_id, check_url=TRUE, 
+  path_credential, project_id, check_url=TRUE,
   check_username=FALSE, check_token_pattern=TRUE
 )
 retrieve_credential_mssql(
@@ -34,24 +34,24 @@ retrieve_credential_mssql(
 \value{
 A list of the following elements
 \enumerate{
- \item \code{redcap_uri}: The URI of the REDCap Server.
- \item \code{username}: Username.
- \item \code{project_id}: The ID assigned to the project withing REDCap.
- \item \code{token}: The token to pass to the REDCap server
- \item \code{comment}: An optional string.
+\item \code{redcap_uri}: The URI of the REDCap Server.
+\item \code{username}: Username.
+\item \code{project_id}: The ID assigned to the project withing REDCap.
+\item \code{token}: The token to pass to the REDCap server
+\item \code{comment}: An optional string.
 }
 }
 \description{
 These functions are not essential to calling the REDCap API, but instead are functions that help manage tokens securely.
 }
 \details{
-If the database elements are created with the script provided in package's `Security Database' vignette, the default values will work.
+If the database elements are created with the script provided in package's 'Security Database' vignette, the default values will work.
 }
 \note{
-Although we strongly encourage storing all the tokens on a central server (\emph{e.g.}, see the 
+Although we strongly encourage storing all the tokens on a central server (\emph{e.g.}, see the
 \code{retrieve_credential_mssql()} function and the "SecurityDatabase" vignette), there are times
-when this approach is not feasible and the token must be stored locally.  Please contact us 
-if your institution is using something other than SQL Server, and 
+when this approach is not feasible and the token must be stored locally.  Please contact us
+if your institution is using something other than SQL Server, and
 would like help adapting this approach to your infrastructure.
 }
 \examples{

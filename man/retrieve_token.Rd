@@ -29,16 +29,16 @@ If you create the \code{channel} object yourself, consider wrapping calls in a \
 its \code{finally} expression; this helps ensure the expensive database resource isn't held open unnecessarily.  See the internals of
 \code{retrieve_token_mssql} for an example of closing the \code{channel} in a \code{tryCatch} block.
 
-If the database elements are created with the script provided in package's `Security Database' vignette, the default values will work.
+If the database elements are created with the script provided in package's 'Security Database' vignette, the default values will work.
 }
 \note{
 We use Microsoft SQL Server, because that fits our University's infrastructure the easiest.  But this approach theoretically can work
-with any LDAP-enabled database server.  Please contact us if your institution is using something other than SQL Server, and 
+with any LDAP-enabled database server.  Please contact us if your institution is using something other than SQL Server, and
 would like help adapting this approach to your infrastructure.
 
-There's a lot of error checking for SQL injection, but remember that the user is executing under their 
-own credentials, so this doesn't obviate the need for disciplined credential management.  There's nothing 
-that can be done with this R function that isn't already exposed by any other interface into the database 
+There's a lot of error checking for SQL injection, but remember that the user is executing under their
+own credentials, so this doesn't obviate the need for disciplined credential management.  There's nothing
+that can be done with this R function that isn't already exposed by any other interface into the database
 (eg, SQL Server Managment Studio, or MySQL Workbench.)
 }
 \examples{

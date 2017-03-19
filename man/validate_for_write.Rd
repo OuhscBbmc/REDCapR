@@ -18,10 +18,10 @@ validate_no_uppercase( d )
 \value{
 A \code{data.frame}, where each potential violation is a row.  The two columns are:
 \enumerate{
- \item \code{field_name}: The name of the \code{data.frame} that might cause problems during the upload.
- \item \code{field_index}: The position of the field.  (For example, a value of '1' indicates the first column, while a '3' indicates the third column.)
- \item \code{concern}: A description of the problem potentially caused by the \code{field}.
- \item \code{suggestion}: A \emph{potential} solution to the concern.
+\item \code{field_name}: The name of the \code{data.frame} that might cause problems during the upload.
+\item \code{field_index}: The position of the field.  (For example, a value of '1' indicates the first column, while a '3' indicates the third column.)
+\item \code{concern}: A description of the problem potentially caused by the \code{field}.
+\item \code{suggestion}: A \emph{potential} solution to the concern.
 }
 }
 \description{
@@ -40,9 +40,9 @@ d <- data.frame(
 validate_for_write(d = d)
 }
 \references{
-The official documentation can be found on the `API Help Page` and `API Examples' pages 
+The official documentation can be found on the 'API Help Page' and 'API Examples' pages
 on the REDCap wiki (ie, \url{https://community.projectredcap.org/articles/456/api-documentation.html} and
-\url{https://community.projectredcap.org/articles/462/api-examples.html}). If you do not have an account 
+\url{https://community.projectredcap.org/articles/462/api-examples.html}). If you do not have an account
 for the wiki, please ask your campus REDCap administrator to send you the static material.
 }
 \author{
