@@ -83,7 +83,7 @@ redcap_read <- function(
   if( missing(token) )
     stop("The required parameter `token` was missing from the call to `redcap_read()`.")
 
-  token <- sub("\\n", "", token)
+  token <- sanitize_token(token)
 
   if( all(nchar(records_collapsed)==0) )
     records_collapsed <- ifelse(is.null(records), "", paste0(records, collapse=",")) #This is an empty string if `records` is NULL.

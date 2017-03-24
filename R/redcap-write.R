@@ -84,15 +84,15 @@ redcap_write <- function(
   verbose = TRUE, config_options = NULL
 ) {
 
+  start_time <- base::Sys.time()
+
   if( base::missing(redcap_uri) )
     base::stop("The required parameter `redcap_uri` was missing from the call to `redcap_write()`.")
 
   if( base::missing(token) )
     base::stop("The required parameter `token` was missing from the call to `redcap_write()`.")
 
-  start_time <- base::Sys.time()
-
-  token <- sub("\\n", "", token)
+  token <- sanitize_token(token)
 
   ds_glossary <- REDCapR::create_batch_glossary(row_count=base::nrow(ds_to_write), batch_size=batch_size)
 
