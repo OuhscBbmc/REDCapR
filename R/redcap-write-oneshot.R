@@ -76,7 +76,8 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, config_op
   if( missing(token) )
     stop("The required parameter `token` was missing from the call to `redcap_write_oneshot()`.")
 
-  token <- sub("\\n", "", token)
+  token <- sanitize_token(token)
+
   con   <-  base::textConnection(object='csvElements', open='w', local=TRUE)
   utils::write.csv(ds, con, row.names = FALSE, na="")
   close(con)

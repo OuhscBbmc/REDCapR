@@ -82,7 +82,7 @@ redcap_upload_file_oneshot <- function( file_name, record, redcap_uri, token, fi
 	if( missing(token) )
 		stop("The required parameter `token` was missing from the call to `redcap_upload_file_oneshot()`.")
 
-	token <- sub("\\n", "", token)
+  token <- sanitize_token(token)
 
 	if( verbose )
 	  message("Preparing to upload the file `", file_name, "`.")

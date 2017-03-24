@@ -117,7 +117,7 @@ redcap_read_oneshot <- function(
   if( !(raw_or_label %in% c("raw", "label")) )
     stop("The optional parameter `raw_or_label` must be either 'raw' or 'label'.")
 
-  token <- sub("\\n", "", token)
+  token <- sanitize_token(token)
 
   if( all(nchar(records_collapsed)==0) )
     records_collapsed <- ifelse(is.null(records), "", paste0(records, collapse=",")) #This is an empty string if `records` is NULL.
