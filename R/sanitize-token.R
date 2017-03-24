@@ -22,11 +22,15 @@
 #' sanitize_token(secret_token_2)
 
 sanitize_token <- function( token ) {
-  # Validate only 32-character hexadecimals, with an optional line ending.
   pattern <- "^([0-9A-F]{32})(?:\\n)?$"
 
-  if( !grepl(pattern, token, perl=TRUE) )
+  if( is.na(token) ) {
+    stop("The token is `NA`, not a valid 32-character hexademical value.")
+  } else if( nchar(token)==0L ) {
+    stop("The token is an empty string, not a valid 32-character hexademical value.")
+  } else if( !grepl(pattern, token, perl=TRUE) ) {
     stop("The token is not a valid 32-character hexademical value.")
+  }
 
   sub(pattern, "\\1", token, perl=TRUE)
 }

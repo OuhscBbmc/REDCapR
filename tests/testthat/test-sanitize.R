@@ -25,4 +25,18 @@ test_that("sanitize token w/o line endings", {
   )
 })
 
+test_that("sanitize token -NA", {
+  secret_token <- NA_character_
+  expect_error(
+    object    = sanitize_token(secret_token),
+    regexp    = "The token is `NA`, not a valid 32-character hexademical value\\."
+  )
+})
 
+test_that("sanitize token -empty", {
+  secret_token <- ""
+  expect_error(
+    object    = sanitize_token(secret_token),
+    regexp    = "The token is an empty string, not a valid 32-character hexademical value\\."
+  )
+})
