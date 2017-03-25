@@ -8,17 +8,17 @@ img{display:block;margin:auto;}
   border:solid 1px #B0B0B0;
 }
 .error {
-	font-weight: bold;
-	color: #FF0000;
+  font-weight: bold;
+  color: #FF0000;
 },
 .warning {
-	font-weight: bold;
+  font-weight: bold;
 }
 .message {
-	font-style: italic;
+  font-style: italic;
 }
 .source, .output, .warning, .error, .message {
-	padding: 0em 1em;
+  padding: 0em 1em;
   border:solid 1px #F7F7F7;
 }
 .source {

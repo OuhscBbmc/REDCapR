@@ -53,23 +53,23 @@ GO
 -- Create a table to contain the token
 --
 CREATE TABLE [redcap_private].[tbl_credential](
-	[id]              [smallint]          NOT NULL,
-	[username]        [varchar](30)       NOT NULL,
-	[project_id]      [smallint]          NOT NULL,
-	[instance]        [varchar](30)       NOT NULL,
-	[token]           [char](32)          NOT NULL,
-	[redcap_uri]      [varchar](255)      NOT NULL,
+  [id]              [smallint]          NOT NULL,
+  [username]        [varchar](30)       NOT NULL,
+  [project_id]      [smallint]          NOT NULL,
+  [instance]        [varchar](30)       NOT NULL,
+  [token]           [char](32)          NOT NULL,
+  [redcap_uri]      [varchar](255)      NOT NULL,
  CONSTRAINT [PK_credential] PRIMARY KEY CLUSTERED
 (
-	[id] ASC
+  [id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
 CREATE UNIQUE NONCLUSTERED INDEX [IX_tbl_credential_unique] ON [redcap_private].[tbl_credential]
 (
-	[instance]        ASC,
-	[project_id]      ASC,
-	[username]        ASC
+  [instance]        ASC,
+  [project_id]      ASC,
+  [username]        ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 
@@ -78,15 +78,15 @@ GO
 -- Notice it should a different (and more permissive) schema than the table.
 --
 CREATE PROCEDURE [redcap].[prc_credential]
-	-- Add the parameters for the stored procedure here
+  -- Add the parameters for the stored procedure here
 
-	@project_id smallint,
-	@instance varchar(30)
+  @project_id smallint,
+  @instance varchar(30)
 AS
 BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
+  -- SET NOCOUNT ON added to prevent extra result sets from
+  -- interfering with SELECT statements.
+  SET NOCOUNT ON;
 
   SELECT username, project_id, token, redcap_uri FROM [redcap_private].[tbl_credential]
   WHERE username=system_user AND project_id=@project_id AND instance=@instance
@@ -172,16 +172,16 @@ print 'Step #5 executed'; print ''
 
 -----------------------------------------------------------------------
 -- REFERENCES & NOTES
-	--The @qualified_user_name must have both (a) the 'OUHSC' domain qualification, and (b) the square brackets (to escape the backslash).
-	--Using sp_executesql to add users: http://www.sqlservercentral.com/Forums/Topic497615-359-1.aspx
-	--Check if a server login exists: http://stackoverflow.com/questions/37275/sql-query-for-logins
-	--Retrieve database users: http://stackoverflow.com/questions/2445444/how-to-get-a-list-of-users-for-all-instances-databases
-	--Concatenating strings: http://blog.sqlauthority.com/2010/11/25/sql-server-concat-function-in-sql-server-sql-concatenation/
-	--DROP USER from database: http://msdn.microsoft.com/en-us/library/ms189438.aspx
-	--DROP LOGIN from server: http://msdn.microsoft.com/en-us/library/ms188012.aspx
-	--Declaring variables (eg, the username above): http://technet.microsoft.com/en-us/library/aa258839.aspx
-	--A different (& non-dynamic) way to establish a user: http://pic.dhe.ibm.com/infocenter/dmndhelp/v8r5m0/index.jsp?topic=%2Fcom.ibm.wbpm.imuc.sbpm.doc%2Ftopics%2Fdb_create_users_nd_aix.html
-	--If the variable has to cross a 'GO' (which the current version of the script doesn't need): http://stackoverflow.com/questions/937336/is-there-a-way-to-persist-a-variable-across-a-go
+  --The @qualified_user_name must have both (a) the 'OUHSC' domain qualification, and (b) the square brackets (to escape the backslash).
+  --Using sp_executesql to add users: http://www.sqlservercentral.com/Forums/Topic497615-359-1.aspx
+  --Check if a server login exists: http://stackoverflow.com/questions/37275/sql-query-for-logins
+  --Retrieve database users: http://stackoverflow.com/questions/2445444/how-to-get-a-list-of-users-for-all-instances-databases
+  --Concatenating strings: http://blog.sqlauthority.com/2010/11/25/sql-server-concat-function-in-sql-server-sql-concatenation/
+  --DROP USER from database: http://msdn.microsoft.com/en-us/library/ms189438.aspx
+  --DROP LOGIN from server: http://msdn.microsoft.com/en-us/library/ms188012.aspx
+  --Declaring variables (eg, the username above): http://technet.microsoft.com/en-us/library/aa258839.aspx
+  --A different (& non-dynamic) way to establish a user: http://pic.dhe.ibm.com/infocenter/dmndhelp/v8r5m0/index.jsp?topic=%2Fcom.ibm.wbpm.imuc.sbpm.doc%2Ftopics%2Fdb_create_users_nd_aix.html
+  --If the variable has to cross a 'GO' (which the current version of the script doesn't need): http://stackoverflow.com/questions/937336/is-there-a-way-to-persist-a-variable-across-a-go
 ```
 
 Transfer Credentials

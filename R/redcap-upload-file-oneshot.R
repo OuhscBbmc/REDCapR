@@ -68,68 +68,68 @@
 #' }
 
 redcap_upload_file_oneshot <- function( file_name, record, redcap_uri, token, field, event="", verbose=TRUE, config_options=NULL ) {
-	start_time <- Sys.time()
+  start_time <- Sys.time()
 
-	if( missing(file_name) | is.null(file_name) )
-	  stop("The required parameter `file_name` was missing from the call to `redcap_upload_file_oneshot()`.")
+  if( missing(file_name) | is.null(file_name) )
+    stop("The required parameter `file_name` was missing from the call to `redcap_upload_file_oneshot()`.")
 
-	if( !base::file.exists(file_name) )
-	  stop("The file `", file_name, "` was not found at the specified path.")
+  if( !base::file.exists(file_name) )
+    stop("The file `", file_name, "` was not found at the specified path.")
 
-	if( missing(redcap_uri) )
-	  stop("The required parameter `redcap_uri` was missing from the call to `redcap_upload_file_oneshot()`.")
+  if( missing(redcap_uri) )
+    stop("The required parameter `redcap_uri` was missing from the call to `redcap_upload_file_oneshot()`.")
 
-	if( missing(token) )
-		stop("The required parameter `token` was missing from the call to `redcap_upload_file_oneshot()`.")
+  if( missing(token) )
+    stop("The required parameter `token` was missing from the call to `redcap_upload_file_oneshot()`.")
 
   token <- sanitize_token(token)
 
-	if( verbose )
-	  message("Preparing to upload the file `", file_name, "`.")
+  if( verbose )
+    message("Preparing to upload the file `", file_name, "`.")
 
-	post_body <- list(
-		token          = token,
-		content        = 'file',
-		action         = 'import',
-		record         = record,
-		field          = field,
-		event          = event,
-		file           = httr::upload_file(path=file_name),
-		returnFormat   = 'csv'
-	)
+  post_body <- list(
+    token          = token,
+    content        = 'file',
+    action         = 'import',
+    record         = record,
+    field          = field,
+    event          = event,
+    file           = httr::upload_file(path=file_name),
+    returnFormat   = 'csv'
+  )
 
-	result <- httr::POST(
-		url    = redcap_uri,
-		body   = post_body,
-		config = config_options
-	)
+  result <- httr::POST(
+    url    = redcap_uri,
+    body   = post_body,
+    config = config_options
+  )
 
-	status_code       <- result$status_code
-	elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
-	success           <- (status_code == 200L)
+  status_code       <- result$status_code
+  elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
+  success           <- (status_code == 200L)
 
-	if( success ) {
-		outcome_message <- paste0("file uploaded to REDCap in ",  round(elapsed_seconds, 1), " seconds.")
-		recordsAffectedCount <- 1
-		record_id <- record
-		raw_text <- ""
-	}
-	else { #If the returned content wasn't recognized as valid IDs, then
-		raw_text               <- httr::content(result, type="text")
-		outcome_message        <- paste0("file NOT uploaded ")
-		recordsAffectedCount   <- 0L
-		record_id              <- numeric(0) #Return an empty vector.
-	}
-	if( verbose )
-		message(outcome_message)
+  if( success ) {
+    outcome_message <- paste0("file uploaded to REDCap in ",  round(elapsed_seconds, 1), " seconds.")
+    recordsAffectedCount <- 1
+    record_id <- record
+    raw_text <- ""
+  }
+  else { #If the returned content wasn't recognized as valid IDs, then
+    raw_text               <- httr::content(result, type="text")
+    outcome_message        <- paste0("file NOT uploaded ")
+    recordsAffectedCount   <- 0L
+    record_id              <- numeric(0) #Return an empty vector.
+  }
+  if( verbose )
+    message(outcome_message)
 
-	return( list(
-		success                  = success,
-		status_code              = status_code,
-		outcome_message          = outcome_message,
-		records_affected_count   = recordsAffectedCount,
-		affected_ids             = record_id,
-		elapsed_seconds          = elapsed_seconds,
-		raw_text                 = raw_text
-	))
+  return( list(
+    success                  = success,
+    status_code              = status_code,
+    outcome_message          = outcome_message,
+    records_affected_count   = recordsAffectedCount,
+    affected_ids             = record_id,
+    elapsed_seconds          = elapsed_seconds,
+    raw_text                 = raw_text
+  ))
 }
