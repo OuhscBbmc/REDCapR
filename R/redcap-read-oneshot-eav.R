@@ -156,6 +156,7 @@ redcap_read_oneshot_eav <- function(
   ds_metadata <- REDCapR::redcap_metadata_read(redcap_uri, token)$data
 
   if( success ) {
+    . <- record <- value <- field_type <- field_name <- is_checkbox <- select_choices_or_calculations <- ids <- NULL
     try (
       {
         ds_eav <- readr::read_csv(raw_text)
