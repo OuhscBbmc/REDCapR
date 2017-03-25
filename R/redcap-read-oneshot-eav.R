@@ -163,15 +163,15 @@ redcap_read_oneshot_eav <- function(
 
 
         ds_metadata_expanded <- ds_metadata %>%
-          dplyr::select(field_name, select_choices_or_calculations, field_type) %>%
+          dplyr::select_("field_name", "select_choices_or_calculations", "field_type") %>%
           dplyr::mutate(
             is_checkbox  = (field_type=="checkbox"),
             ids   = dplyr::if_else(is_checkbox, select_choices_or_calculations, "1"),
             ids   = gsub("(\\d+),.+?(\\||$)", "\\1", ids),
             ids   = strsplit(ids, " ")
           ) %>%
-          dplyr::select(-select_choices_or_calculations, -field_type) %>%
-          tidyr::unnest(ids) %>%
+          dplyr::select_("-select_choices_or_calculations", "-field_type") %>%
+          tidyr::unnest_("ids") %>%
           dplyr::transmute(
             is_checkbox,
             field_name          = dplyr::if_else(is_checkbox, paste0(field_name, "___", ids), field_name)
@@ -179,7 +179,7 @@ redcap_read_oneshot_eav <- function(
           tibble::as_tibble()
 
         ds_possible_checkbox_rows <- ds_metadata_expanded %>%
-          dplyr::filter(is_checkbox) %>%
+          dplyr::filter_("is_checkbox") %>%
           .[["field_name"]] %>%
           tidyr::crossing(
             field_name = .,
@@ -190,7 +190,7 @@ redcap_read_oneshot_eav <- function(
         ds_eav_2 <- ds_eav %>%
           dplyr::left_join(
             ds_metadata %>%
-              dplyr::select(field_name, field_type),
+              dplyr::select_("field_name", "field_type"),
             by = "field_name"
           ) %>%
           dplyr::mutate(
@@ -202,8 +202,8 @@ redcap_read_oneshot_eav <- function(
           )
 
         ds <- ds_eav_2 %>%
-          dplyr::select(-field_type) %>%
-          tidyr::spread(key=field_name, value=value) %>%
+          dplyr::select_("-field_type") %>%
+          tidyr::spread_(key="field_name", value="value") %>%
           dplyr::select_(.dots=ds_metadata_expanded$field_name)
 
         ds_2 <- ds %>%
