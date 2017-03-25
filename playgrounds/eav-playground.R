@@ -47,6 +47,9 @@ ds_eav <- readr::read_csv(raw_text)
 # ds_json <- jsonlite::fromJSON(raw_text)
 })
 
+# ds_eav$field_name
+
+
 # ---- tweak-data --------------------------------------------------------------
 
 ds_metadata_expanded <- ds_metadata %>%
@@ -91,7 +94,7 @@ ds_eav_2 <- ds_eav %>%
 ds <- ds_eav_2 %>%
   dplyr::select(-field_type) %>%
   tidyr::spread(key=field_name, value=value) %>%
-  dplyr::select_(.dots=ds_metadata_expanded$field_name)
+  dplyr::select_(.dots=ds_metadata_expanded$field_name)  #TODO: don't drop the *form*_complete booleans
 
 ds_2 <- ds %>%
   dplyr::mutate_if(is.character, type.convert) %>%
