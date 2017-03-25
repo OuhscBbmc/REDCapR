@@ -76,7 +76,7 @@ redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwr
 	if( missing(token) )
 		stop("The required parameter `token` was missing from the call to `redcap_download_file_oneshot()`.")
 
-	token <- sub("\\n", "", token)
+	token <- sanitize_token(token)
 
 	post_body <- list(
 		token         = token,
