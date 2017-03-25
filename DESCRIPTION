@@ -36,8 +36,11 @@ Imports:
     data.table,
     dplyr,
     httr(>= 1.0.0.9000),
+    magrittr,
     methods,
-    readr
+    readr,
+    tibble,
+    tidyr
 Suggests:
     devtools,
     knitr,

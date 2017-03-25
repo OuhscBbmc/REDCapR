@@ -25,12 +25,12 @@ system.time({
 ds_metadata <- REDCapR::redcap_metadata_read(redcap_uri, token)$data
 
 r <- httr::POST(
-  url = redcap_uri
-  , body = list(
-    token = token
-    , content = 'record'
-    , format = 'csv'
-    , type = 'eav'  ##This is the difference from the call above
+  url  = redcap_uri,
+  body = list(
+    token       = token,
+    content     = 'record',
+    format      = 'csv',
+    type        = 'eav'  ##This is the difference from the call above
     # , rawOrLabel = raw_or_label
     # , exportDataAccessGroups = export_data_access_groups_string
     # , records = records_collapsed
