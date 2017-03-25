@@ -1,5 +1,5 @@
-#' @name redcap_read_oneshot
-#' @export redcap_read_oneshot
+#' @name redcap_read_oneshot_eav
+#' @export redcap_read_oneshot_eav
 #' @title Read/Export records from a REDCap project.
 #'
 #' @description This function uses REDCap's API to select and return data.
@@ -28,6 +28,9 @@
 #' * `elapsed_seconds`: The duration of the function.
 #' * `raw_text`: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
 #'
+#' @importFrom magrittr %>%
+#' @importFrom utils type.convert
+#'
 #' @details
 #' The full list of configuration options accepted by the `httr` package is viewable by executing [httr::httr_options()].  The `httr`
 #' package and documentation is available at https://cran.r-project.org/package=httr.
@@ -47,11 +50,11 @@
 #' uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token    <- "9A81268476645C4E5F03428B8AC3AA7B"
 #' #Return all records and all variables.
-#' ds_all_rows_all_fields <- redcap_read_oneshot(redcap_uri=uri, token=token)$data
+#' ds_all_rows_all_fields <- redcap_read_oneshot_eav(redcap_uri=uri, token=token)$data
 #'
 #' #Return only records with IDs of 1 and 3
 #' desired_records_v1 <- c(1, 3)
-#' ds_some_rows_v1 <- redcap_read_oneshot(
+#' ds_some_rows_v1 <- redcap_read_oneshot_eav(
 #'    redcap_uri = uri,
 #'    token      = token,
 #'    records    = desired_records_v1
@@ -59,47 +62,28 @@
 #'
 #' #Return only the fields record_id, name_first, and age
 #' desired_fields_v1 <- c("record_id", "name_first", "age")
-#' ds_some_fields_v1 <- redcap_read_oneshot(
+#' ds_some_fields_v1 <- redcap_read_oneshot_eav(
 #'    redcap_uri = uri,
 #'    token      = token,
 #'    fields     = desired_fields_v1
 #' )$data
-#'
-#'
-#' #Use the SSL cert file that come with the openssl package.
-#' cert_location <- system.file("cacert.pem", package="openssl")
-#' if( file.exists(cert_location) ) {
-#'   config_options         <- list(cainfo=cert_location)
-#'   ds_different_cert_file <- redcap_read_oneshot(
-#'     redcap_uri     = uri,
-#'     token          = token,
-#'     config_options = config_options
-#'   )$data
-#' }
-#'
-#' #Force the connection to use SSL=3 (which is not preferred, and possibly insecure).
-#' config_options <- list(sslversion=3)
-#' ds_ssl_3 <- redcap_read_oneshot(
-#'   redcap_uri     = uri,
-#'   token          = token,
-#'   config_options = config_options
-#' )$data
-#'
-#' config_options <- list(ssl.verifypeer=FALSE)
-#' ds_no_ssl <- redcap_read_oneshot(
-#'    redcap_uri     = uri,
-#'    token          = token,
-#'    config_options = config_options
-#' )$data
-#' }
+#'}
 
-redcap_read_oneshot <- function(
-  redcap_uri, token, records=NULL, records_collapsed="",
-  fields=NULL, fields_collapsed="",
-  events=NULL, events_collapsed="",
-  export_data_access_groups=FALSE,
-  filter_logic="",
-  raw_or_label='raw', verbose=TRUE, config_options=NULL
+
+redcap_read_oneshot_eav <- function(
+  redcap_uri,
+  token,
+  records                       = NULL,
+  records_collapsed             = "",
+  fields                        = NULL,
+  fields_collapsed              = "",
+  events                        = NULL,
+  events_collapsed              = "",
+  export_data_access_groups     = FALSE,
+  filter_logic                  = "",
+  raw_or_label                  = 'raw',
+  verbose                       = TRUE,
+  config_options                = NULL
 ) {
   #TODO: NULL verbose parameter pulls from getOption("verbose")
   #TODO: warns if any requested fields aren't entirely lowercase.
@@ -107,9 +91,9 @@ redcap_read_oneshot <- function(
   start_time <- Sys.time()
 
   if( missing(redcap_uri) )
-    stop("The required parameter `redcap_uri` was missing from the call to `redcap_read_oneshot()`.")
+    stop("The required parameter `redcap_uri` was missing from the call to `redcap_read_oneshot_eav()`.")
   if( missing(token) )
-    stop("The required parameter `token` was missing from the call to `redcap_read_oneshot()`.")
+    stop("The required parameter `token` was missing from the call to `redcap_read_oneshot_eav()`.")
   if( !is.logical(export_data_access_groups) )
     stop("The optional parameter `export_data_access_groups` must be a logical/Boolean variable.")
   if( !is.character(filter_logic) )
@@ -137,7 +121,7 @@ redcap_read_oneshot <- function(
     token                   = token,
     content                 = 'record',
     format                  = 'csv',
-    type                    = 'flat',
+    type                    = 'eav',
     rawOrLabel              = raw_or_label,
     exportDataAccessGroups  = export_data_access_groups_string,
     records                 = records_collapsed,
@@ -169,57 +153,85 @@ redcap_read_oneshot <- function(
     success <- FALSE
   }
 
+  ds_metadata <- REDCapR::redcap_metadata_read(redcap_uri, token)$data
+
   if( success ) {
     try (
       {
-        ds <- utils::read.csv(text=raw_text, stringsAsFactors=FALSE)
-        # ds <- readr::read_csv(file=raw_text)
+        ds_eav <- readr::read_csv(raw_text)
+        # ds <- utils::read.csv(text=raw_text, stringsAsFactors=FALSE)
+
+
+        ds_metadata_expanded <- ds_metadata %>%
+          dplyr::select(field_name, select_choices_or_calculations, field_type) %>%
+          dplyr::mutate(
+            is_checkbox  = (field_type=="checkbox"),
+            ids   = dplyr::if_else(is_checkbox, select_choices_or_calculations, "1"),
+            ids   = gsub("(\\d+),.+?(\\||$)", "\\1", ids),
+            ids   = strsplit(ids, " ")
+          ) %>%
+          dplyr::select(-select_choices_or_calculations, -field_type) %>%
+          tidyr::unnest(ids) %>%
+          dplyr::transmute(
+            is_checkbox,
+            field_name          = dplyr::if_else(is_checkbox, paste0(field_name, "___", ids), field_name)
+          ) %>%
+          tibble::as_tibble()
+
+        ds_possible_checkbox_rows <- ds_metadata_expanded %>%
+          dplyr::filter(is_checkbox) %>%
+          .[["field_name"]] %>%
+          tidyr::crossing(
+            field_name = .,
+            record     = dplyr::distinct(ds_eav, record),
+            field_type = "checkbox"
+          )
+
+        ds_eav_2 <- ds_eav %>%
+          dplyr::left_join(
+            ds_metadata %>%
+              dplyr::select(field_name, field_type),
+            by = "field_name"
+          ) %>%
+          dplyr::mutate(
+            field_name = dplyr::if_else(!is.na(field_type) & (field_type=="checkbox"), paste0(field_name, "___", value), field_name)
+          ) %>%
+          dplyr::full_join(ds_possible_checkbox_rows, by=c("record", "field_name", "field_type")) %>%
+          dplyr::mutate(
+            value      = dplyr::if_else(!is.na(field_type) & (field_type=="checkbox"), as.character(!is.na(value))                        , value     )
+          )
+
+        ds <- ds_eav_2 %>%
+          dplyr::select(-field_type) %>%
+          tidyr::spread(key=field_name, value=value) %>%
+          dplyr::select_(.dots=ds_metadata_expanded$field_name)
+
+        ds_2 <- ds %>%
+          dplyr::mutate_if(is.character, type.convert) %>%
+          dplyr::mutate_if(is.factor   , as.character)
       }, #Convert the raw text to a dataset.
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
     )
 
-    #TODO #80: catch variant of ' The.hostname..redcap.db.hsc.net.ou.edu....username..redcapsql....password..XXXXXX..combination.could.not.connect.to.the.MySQL.server. \t\tPlease check their values.'
-
-    if( exists("ds") & inherits(ds, "data.frame") ) {
+    if( ifelse(exists("ds_2"), inherits(ds_2, "data.frame"), FALSE) ) {
       outcome_message <- paste0(
-        format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE),
-        " records and ",
-        format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE),
-        " columns were read from REDCap in ",
+        format(nrow(ds_2), big.mark=",", scientific=FALSE, trim=TRUE),
+        " cells were read from REDCap in ",
         round(elapsed_seconds, 1), " seconds.  The http status code was ",
         status_code, "."
       )
 
-      # browser()
-      # ds <- dplyr::mutate_if(
-      #   ds,
-      #   is.character,
-      #   function(x) dplyr::coalesce(x, "") #Replace NAs with blanks
-      # )
-      #
-      # ds <- dplyr::mutate_if(
-      #   ds,
-      #   is.character,
-      #   function( x ) gsub("\r\n", "\n", x, perl=TRUE)
-      # )
-      # ds <- dplyr::mutate_if(
-      #   ds,
-      #   function( x) inherits(x, "Date"),
-      #   as.character
-      # )
-      #
-      # ds <- base::as.data.frame(ds)
 
       #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
       raw_text <- ""
     } else {
       success          <- FALSE #Override the 'success' determination from the http status code.
-      ds               <- data.frame() #Return an empty data.frame
+      ds_2               <- tibble::tibble() #Return an empty data.frame
       outcome_message  <- paste0("The REDCap read failed.  The http status code was ", status_code, ".  The 'raw_text' returned was '", raw_text, "'.")
     }
   }
   else {
-    ds                 <- data.frame() #Return an empty data.frame
+    ds_2                 <- tibble::tibble() #Return an empty data.frame
     if( any(grepl(regex_empty, raw_text)) ) {
       outcome_message    <- "The REDCapR read/export operation was not successful.  The returned dataset was empty."
     } else {
@@ -231,7 +243,7 @@ redcap_read_oneshot <- function(
     message(outcome_message)
 
   return( list(
-    data               = ds,
+    data               = ds_2,
     success            = success,
     status_code        = status_code,
     outcome_message    = outcome_message,
