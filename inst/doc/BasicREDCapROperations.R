@@ -1,4 +1,5 @@
 ## ----set_options, echo=FALSE, results='hide'-----------------------------
+report_render_start_time <- Sys.time()
 library(knitr)
 opts_chunk$set(
     comment = NA, 
@@ -98,7 +99,13 @@ all_information <- redcap_read(
 )
 all_information #Inspect the additional information
 
-## ----session_info, echo=FALSE--------------------------------------------
-cat("Report created by", Sys.info()["user"], "at", strftime(Sys.time(), "%F, %T %z"))
-sessionInfo()
+## ----session-info, echo=FALSE--------------------------------------------
+if( requireNamespace("devtools", quietly = TRUE) ) {
+  devtools::session_info()
+} else {
+  sessionInfo()
+} 
+
+## ----session-duration, echo=FALSE----------------------------------------
+report_render_duration_in_seconds <- round(as.numeric(difftime(Sys.time(), report_render_start_time, units="secs")))
 

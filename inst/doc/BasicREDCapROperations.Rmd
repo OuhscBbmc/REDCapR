@@ -14,6 +14,7 @@ This vignette covers the the basic functions exposed by the [`httr`](https://git
 ## Reading REDCap Data
 The function `redcap_read_oneshot` uses the [`httr`](https://cran.r-project.org/package=httr) package to call the REDCap API.
 ```{r set_options, echo=FALSE, results='hide'}
+report_render_start_time <- Sys.time()
 library(knitr)
 opts_chunk$set(
     comment = NA, 
@@ -148,10 +149,23 @@ all_information <- redcap_read(
 all_information #Inspect the additional information
 ```
 
-## Session Info
-For the sake of documentation and reproducibility, the current vignette was build on a system using the following software.
+## Session Information
+For the sake of documentation and reproducibility, the current report was rendered in the following environment.  Click the line below to expand.
 
-```{r session_info, echo=FALSE}
-cat("Report created by", Sys.info()["user"], "at", strftime(Sys.time(), "%F, %T %z"))
-sessionInfo()
+<details>
+  <summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary>
+```{r session-info, echo=FALSE}
+if( requireNamespace("devtools", quietly = TRUE) ) {
+  devtools::session_info()
+} else {
+  sessionInfo()
+} 
 ```
+</details>
+
+```{r session-duration, echo=FALSE}
+report_render_duration_in_seconds <- round(as.numeric(difftime(Sys.time(), report_render_start_time, units="secs")))
+```
+
+Report rendered by `r Sys.info()["user"]` at `r strftime(Sys.time(), "%Y-%m-%d, %H:%M %z")` in `r report_render_duration_in_seconds` seconds.
+
