@@ -10,8 +10,7 @@ redcap_download_file_oneshot(file_name = NULL, directory = NULL,
 }
 \arguments{
 \item{file_name}{The name of the file where the downloaded file is saved.
-If empty the original name of the file will be used and saved in
-the default directory.  Optional.}
+If empty the original name of the file will be used and saved in the default directory.  Optional.}
 
 \item{directory}{The directory where the file is saved. By default current directory. Optional}
 
@@ -59,22 +58,30 @@ field   <- "mugshot"
 # event <- "" # only for longitudinal events
 
 result_1 <- redcap_download_file_oneshot(
-  record=record, field=field,
-  redcap_uri=uri, token=token
+  record        = record,
+  field         = field,
+  redcap_uri    = uri,
+  token         = token
 )
 base::unlink("mugshot-1.jpg")
 
 (full_name <- base::tempfile(pattern="mugshot", fileext=".jpg"))
 result_2 <- redcap_download_file_oneshot(
-  file_name=full_name, record=record, field=field,
-  redcap_uri=uri, token=token
+  file_name    = full_name,
+  record       = record,
+  field        = field,
+  redcap_uri   = uri,
+  token        = token
 )
 base::unlink(full_name)
 
 (relative_name <- "ssss.jpg")
 result_3 <- redcap_download_file_oneshot(
-  file_name=relative_name, record=record, field=field,
-  redcap_uri=uri, token=token
+  file_name    = relative_name,
+  record       = record,
+  field        = field,
+  redcap_uri   = uri,
+  token        = token
 )
 base::unlink(relative_name)
 }

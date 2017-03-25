@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="date" content="2016-09-09" />
+<meta name="date" content="2017-03-24" />
 
 <title>Security Database</title>
 
@@ -68,7 +68,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">Security Database</h1>
-<h4 class="date"><em>2016-09-09</em></h4>
+<h4 class="date"><em>2017-03-24</em></h4>
 
 
 
@@ -108,23 +108,23 @@ GO
 <span class="co">-- Create a table to contain the token</span>
 <span class="co">--</span>
 <span class="kw">CREATE</span> <span class="kw">TABLE</span> [redcap_private].[tbl_credential](
-    [<span class="kw">id</span>]              [<span class="dt">smallint</span>]          <span class="kw">NOT</span> <span class="kw">NULL</span>,
-    [username]        [<span class="dt">varchar</span>](<span class="dv">30</span>)       <span class="kw">NOT</span> <span class="kw">NULL</span>,
-    [project_id]      [<span class="dt">smallint</span>]          <span class="kw">NOT</span> <span class="kw">NULL</span>,
-    [<span class="kw">instance</span>]        [<span class="dt">varchar</span>](<span class="dv">30</span>)       <span class="kw">NOT</span> <span class="kw">NULL</span>,
-    [token]           [<span class="dt">char</span>](<span class="dv">32</span>)          <span class="kw">NOT</span> <span class="kw">NULL</span>,
-    [redcap_uri]      [<span class="dt">varchar</span>](<span class="dv">255</span>)      <span class="kw">NOT</span> <span class="kw">NULL</span>,
+  [<span class="kw">id</span>]              [<span class="dt">smallint</span>]          <span class="kw">NOT</span> <span class="kw">NULL</span>,
+  [username]        [<span class="dt">varchar</span>](<span class="dv">30</span>)       <span class="kw">NOT</span> <span class="kw">NULL</span>,
+  [project_id]      [<span class="dt">smallint</span>]          <span class="kw">NOT</span> <span class="kw">NULL</span>,
+  [<span class="kw">instance</span>]        [<span class="dt">varchar</span>](<span class="dv">30</span>)       <span class="kw">NOT</span> <span class="kw">NULL</span>,
+  [token]           [<span class="dt">char</span>](<span class="dv">32</span>)          <span class="kw">NOT</span> <span class="kw">NULL</span>,
+  [redcap_uri]      [<span class="dt">varchar</span>](<span class="dv">255</span>)      <span class="kw">NOT</span> <span class="kw">NULL</span>,
  <span class="kw">CONSTRAINT</span> [PK_credential] <span class="kw">PRIMARY</span> <span class="kw">KEY</span> CLUSTERED
 (
-    [<span class="kw">id</span>] <span class="kw">ASC</span>
+  [<span class="kw">id</span>] <span class="kw">ASC</span>
 )<span class="kw">WITH</span> (PAD_INDEX = <span class="kw">OFF</span>, STATISTICS_NORECOMPUTE = <span class="kw">OFF</span>, IGNORE_DUP_KEY = <span class="kw">OFF</span>, ALLOW_ROW_LOCKS = <span class="kw">ON</span>, ALLOW_PAGE_LOCKS = <span class="kw">ON</span>) <span class="kw">ON</span> [<span class="kw">PRIMARY</span>]
 ) <span class="kw">ON</span> [<span class="kw">PRIMARY</span>]
 
 <span class="kw">CREATE</span> <span class="kw">UNIQUE</span> NONCLUSTERED <span class="kw">INDEX</span> [IX_tbl_credential_unique] <span class="kw">ON</span> [redcap_private].[tbl_credential]
 (
-    [<span class="kw">instance</span>]        <span class="kw">ASC</span>,
-    [project_id]      <span class="kw">ASC</span>,
-    [username]        <span class="kw">ASC</span>
+  [<span class="kw">instance</span>]        <span class="kw">ASC</span>,
+  [project_id]      <span class="kw">ASC</span>,
+  [username]        <span class="kw">ASC</span>
 )<span class="kw">WITH</span> (PAD_INDEX = <span class="kw">OFF</span>, STATISTICS_NORECOMPUTE = <span class="kw">OFF</span>, SORT_IN_TEMPDB = <span class="kw">OFF</span>, IGNORE_DUP_KEY = <span class="kw">OFF</span>, DROP_EXISTING = <span class="kw">OFF</span>, <span class="kw">ONLINE</span> = <span class="kw">OFF</span>, ALLOW_ROW_LOCKS = <span class="kw">ON</span>, ALLOW_PAGE_LOCKS = <span class="kw">ON</span>) <span class="kw">ON</span> [<span class="kw">PRIMARY</span>]
 GO
 
@@ -133,15 +133,15 @@ GO
 <span class="co">-- Notice it should a different (and more permissive) schema than the table.</span>
 <span class="co">--</span>
 <span class="kw">CREATE</span> <span class="kw">PROCEDURE</span> [redcap].[prc_credential]
-    <span class="co">-- Add the parameters for the stored procedure here</span>
+  <span class="co">-- Add the parameters for the stored procedure here</span>
 
-    @project_id <span class="dt">smallint</span>,
-    @instance <span class="dt">varchar</span>(<span class="dv">30</span>)
+  @project_id <span class="dt">smallint</span>,
+  @instance <span class="dt">varchar</span>(<span class="dv">30</span>)
 <span class="kw">AS</span>
 <span class="kw">BEGIN</span>
-    <span class="co">-- SET NOCOUNT ON added to prevent extra result sets from</span>
-    <span class="co">-- interfering with SELECT statements.</span>
-    <span class="kw">SET</span> NOCOUNT <span class="kw">ON</span>;
+  <span class="co">-- SET NOCOUNT ON added to prevent extra result sets from</span>
+  <span class="co">-- interfering with SELECT statements.</span>
+  <span class="kw">SET</span> NOCOUNT <span class="kw">ON</span>;
 
   <span class="kw">SELECT</span> username, project_id, token, redcap_uri <span class="kw">FROM</span> [redcap_private].[tbl_credential]
   <span class="kw">WHERE</span> username=system_user <span class="kw">AND</span> project_id=@project_id <span class="kw">AND</span> instance=@instance
@@ -217,16 +217,16 @@ print <span class="st">'Step #5 executed'</span>; print <span class="st">''</spa
 
 <span class="co">-----------------------------------------------------------------------</span>
 <span class="co">-- REFERENCES &amp; NOTES</span>
-    <span class="co">--The @qualified_user_name must have both (a) the 'OUHSC' domain qualification, and (b) the square brackets (to escape the backslash).</span>
-    <span class="co">--Using sp_executesql to add users: http://www.sqlservercentral.com/Forums/Topic497615-359-1.aspx</span>
-    <span class="co">--Check if a server login exists: http://stackoverflow.com/questions/37275/sql-query-for-logins</span>
-    <span class="co">--Retrieve database users: http://stackoverflow.com/questions/2445444/how-to-get-a-list-of-users-for-all-instances-databases</span>
-    <span class="co">--Concatenating strings: http://blog.sqlauthority.com/2010/11/25/sql-server-concat-function-in-sql-server-sql-concatenation/</span>
-    <span class="co">--DROP USER from database: http://msdn.microsoft.com/en-us/library/ms189438.aspx</span>
-    <span class="co">--DROP LOGIN from server: http://msdn.microsoft.com/en-us/library/ms188012.aspx</span>
-    <span class="co">--Declaring variables (eg, the username above): http://technet.microsoft.com/en-us/library/aa258839.aspx</span>
-    <span class="co">--A different (&amp; non-dynamic) way to establish a user: http://pic.dhe.ibm.com/infocenter/dmndhelp/v8r5m0/index.jsp?topic=%2Fcom.ibm.wbpm.imuc.sbpm.doc%2Ftopics%2Fdb_create_users_nd_aix.html</span>
-    <span class="co">--If the variable has to cross a 'GO' (which the current version of the script doesn't need): http://stackoverflow.com/questions/937336/is-there-a-way-to-persist-a-variable-across-a-go</span></code></pre></div>
+  <span class="co">--The @qualified_user_name must have both (a) the 'OUHSC' domain qualification, and (b) the square brackets (to escape the backslash).</span>
+  <span class="co">--Using sp_executesql to add users: http://www.sqlservercentral.com/Forums/Topic497615-359-1.aspx</span>
+  <span class="co">--Check if a server login exists: http://stackoverflow.com/questions/37275/sql-query-for-logins</span>
+  <span class="co">--Retrieve database users: http://stackoverflow.com/questions/2445444/how-to-get-a-list-of-users-for-all-instances-databases</span>
+  <span class="co">--Concatenating strings: http://blog.sqlauthority.com/2010/11/25/sql-server-concat-function-in-sql-server-sql-concatenation/</span>
+  <span class="co">--DROP USER from database: http://msdn.microsoft.com/en-us/library/ms189438.aspx</span>
+  <span class="co">--DROP LOGIN from server: http://msdn.microsoft.com/en-us/library/ms188012.aspx</span>
+  <span class="co">--Declaring variables (eg, the username above): http://technet.microsoft.com/en-us/library/aa258839.aspx</span>
+  <span class="co">--A different (&amp; non-dynamic) way to establish a user: http://pic.dhe.ibm.com/infocenter/dmndhelp/v8r5m0/index.jsp?topic=%2Fcom.ibm.wbpm.imuc.sbpm.doc%2Ftopics%2Fdb_create_users_nd_aix.html</span>
+  <span class="co">--If the variable has to cross a 'GO' (which the current version of the script doesn't need): http://stackoverflow.com/questions/937336/is-there-a-way-to-persist-a-variable-across-a-go</span></code></pre></div>
 </div>
 <div id="transfer-credentials" class="section level1">
 <h1>Transfer Credentials</h1>
