@@ -93,7 +93,6 @@ redcap_read_oneshot_eav <- function(
   config_options                = NULL
 ) {
   #TODO: NULL verbose parameter pulls from getOption("verbose")
-  #TODO: warns if any requested fields aren't entirely lowercase.
 
   start_time <- Sys.time()
 
@@ -109,6 +108,7 @@ redcap_read_oneshot_eav <- function(
     stop("The optional parameter `raw_or_label` must be either 'raw' or 'label'.")
 
   token <- sanitize_token(token)
+  validate_field_names(fields)
 
   if( all(nchar(records_collapsed)==0) )
     records_collapsed <- ifelse(is.null(records), "", paste0(records, collapse=",")) #This is an empty string if `records` is NULL.
