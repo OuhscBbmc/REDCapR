@@ -1,4 +1,4 @@
-#' @name validate_for_write
+#' @name validate
 #' @aliases validate_for_write validate_no_logical validate_field_names
 #' @export validate_for_write validate_no_logical validate_field_names
 #' @usage
