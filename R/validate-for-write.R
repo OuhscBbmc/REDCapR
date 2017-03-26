@@ -1,12 +1,12 @@
 #' @name validate_for_write
-#' @aliases validate_for_write validate_no_logical validate_no_uppercase
-#' @export validate_for_write validate_no_logical validate_no_uppercase
+#' @aliases validate_for_write validate_no_logical validate_field_names
+#' @export validate_for_write validate_no_logical validate_field_names
 #' @usage
 #' validate_for_write( d )
 #'
 #' validate_no_logical( d )
 #'
-#' validate_no_uppercase( d )
+#' validate_field_names( d )
 #'
 #' @title Inspect a [base::data.frame()] to anticipate problems before writing to a REDCap project.
 #'
@@ -52,7 +52,7 @@ validate_no_logical <- function( d ) {
     )
   }
 }
-validate_no_uppercase <- function( d ) {
+validate_field_names <- function( d ) {
   indices <- grep(pattern="[A-Z]", x=colnames(d), perl=TRUE)
   if( length(indices) == 0 ) {
     return( tibble::tibble())
@@ -69,7 +69,7 @@ validate_no_uppercase <- function( d ) {
 validate_for_write <- function( d ) {
   lst_concerns <- list(
     validate_no_logical(d),
-    validate_no_uppercase(d)
+    validate_field_names(d)
   )
   ds_concern <- dplyr::bind_rows(lst_concerns) #Vertically stack all the data.frames into a single data.frame
 

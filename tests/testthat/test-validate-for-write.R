@@ -29,8 +29,8 @@ test_that("validate_no_logical", {
   expect_equal(object=ds$field_index, expected=2)
 })
 
-test_that("validate_no_uppercase", {
-  ds <- validate_no_uppercase(d=ds_bad)
+test_that("validate_field_names", {
+  ds <- validate_field_names(d=ds_bad)
   expect_equal(object=nrow(ds), expected=1, info="One uppercase field should be flagged")
   expect_equal(object=ds$field_name, expected="bad_Uppercase")
   expect_equal(object=ds$field_index, expected=3)

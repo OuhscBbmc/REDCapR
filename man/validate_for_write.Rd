@@ -3,14 +3,14 @@
 \name{validate_for_write}
 \alias{validate_for_write}
 \alias{validate_no_logical}
-\alias{validate_no_uppercase}
+\alias{validate_field_names}
 \title{Inspect a \code{\link[base:data.frame]{base::data.frame()}} to anticipate problems before writing to a REDCap project.}
 \usage{
 validate_for_write( d )
 
 validate_no_logical( d )
 
-validate_no_uppercase( d )
+validate_field_names( d )
 }
 \arguments{
 \item{d}{The \code{\link[base:data.frame]{base::data.frame()}} containing the dataset used to update the REDCap project.  Required.}
