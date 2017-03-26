@@ -43,8 +43,7 @@ validate_no_logical <- function( d ) {
 
   if( length(indices) == 0 ) {
     return( data.frame())
-  }
-  else {
+  } else {
     data.frame(
       field_name         = colnames(d)[indices],
       field_index        = indices,
@@ -58,8 +57,7 @@ validate_no_uppercase <- function( d ) {
   indices <- grep(pattern="[A-Z]", x=colnames(d), perl=TRUE)
   if( length(indices) == 0 ) {
     return( data.frame())
-  }
-  else {
+  } else {
     data.frame(
       field_name         = colnames(d)[indices],
       field_index        = indices,
@@ -71,11 +69,11 @@ validate_no_uppercase <- function( d ) {
 }
 
 validate_for_write <- function( d ) {
-  lstConcerns <- list(
+  lst_concerns <- list(
     validate_no_logical(d),
     validate_no_uppercase(d)
   )
-  dsAggregatedConcerns <- dplyr::bind_rows(lstConcerns) #Vertically stack all the data.frames into a single data.frame
+  ds_concern <- dplyr::bind_rows(lst_concerns) #Vertically stack all the data.frames into a single data.frame
 
- return( dsAggregatedConcerns )
+ return( ds_concern )
 }
