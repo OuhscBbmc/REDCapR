@@ -9,12 +9,14 @@
 \usage{
 validate_for_write( d )
 
-validate_no_logical( data_types )
+validate_no_logical( data_types, stop_on_error )
 
-validate_field_names( field_names )
+validate_field_names( field_names, stop_on_error )
 }
 \arguments{
 \item{data_types}{The data types of the \code{\link[base:data.frame]{base::data.frame()}} corresponding to the REDCap project.}
+
+\item{stop_on_error}{If \code{TRUE}, an error is thrown for violations.  Otherwise, a dataset summarizing the problems is returned.}
 
 \item{d}{The \code{\link[base:data.frame]{base::data.frame()}} containing the dataset used to update the REDCap project.}
 
