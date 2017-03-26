@@ -35,7 +35,14 @@
 #' The full list of configuration options accepted by the `httr` package is viewable by executing [httr::httr_options()].  The `httr`
 #' package and documentation is available at https://cran.r-project.org/package=httr.
 #'
-#' If you do not pass in this export_data_access_groups value, it will default to `FALSE`. The following is from the API help page for version 5.2.3: This flag is only viable if the user whose token is being used to make the API request is *not* in a data access group. If the user is in a group, then this flag will revert to its default value.
+#' If you do not pass in this export_data_access_groups value, it will default to `FALSE`.
+#' The following is from the API help page for version 5.2.3:
+#' This flag is only viable if the user whose token is being used to make the API request is *not*
+#' in a data access group. If the user is in a group, then this flag will revert to its default value.
+#'
+#' As of REDCap 6.14.3, this field is not exported in the EAV API call.
+#'
+#'
 #' @author Will Beasley
 #' @references The official documentation can be found on the 'API Help Page' and 'API Examples' pages
 #' on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and

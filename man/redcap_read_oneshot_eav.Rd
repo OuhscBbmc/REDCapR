@@ -58,7 +58,12 @@ This function uses REDCap's API to select and return data.
 The full list of configuration options accepted by the \code{httr} package is viewable by executing \code{\link[httr:httr_options]{httr::httr_options()}}.  The \code{httr}
 package and documentation is available at https://cran.r-project.org/package=httr.
 
-If you do not pass in this export_data_access_groups value, it will default to \code{FALSE}. The following is from the API help page for version 5.2.3: This flag is only viable if the user whose token is being used to make the API request is \emph{not} in a data access group. If the user is in a group, then this flag will revert to its default value.
+If you do not pass in this export_data_access_groups value, it will default to \code{FALSE}.
+The following is from the API help page for version 5.2.3:
+This flag is only viable if the user whose token is being used to make the API request is \emph{not}
+in a data access group. If the user is in a group, then this flag will revert to its default value.
+
+As of REDCap 6.14.3, this field is not exported in the EAV API call.
 }
 \examples{
 \dontrun{

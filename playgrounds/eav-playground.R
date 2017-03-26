@@ -14,7 +14,7 @@ redcap_uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "D70F9ACD1EDD6F151C6EA78683944E98"  #This is for a PHI-free demo project
 
 raw_or_label <- "raw"
-export_data_access_groups_string <- "true"
+export_data_access_groups_string <- "false"
 
 # ---- load-data ---------------------------------------------------------------
 system.time(
@@ -33,7 +33,7 @@ r <- httr::POST(
     format      = 'csv',
     type        = 'eav'  ##This is the difference from the call above
     # , rawOrLabel = raw_or_label
-    # , exportDataAccessGroups = export_data_access_groups_string
+    , exportDataAccessGroups = export_data_access_groups_string
     # , records = records_collapsed
     # , fields = "studyid,referral_source" #fields_collapsed
   )
