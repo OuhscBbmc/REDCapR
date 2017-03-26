@@ -154,6 +154,7 @@ redcap_read_oneshot_eav <- function(
   }
 
   ds_metadata <- REDCapR::redcap_metadata_read(redcap_uri, token)$data
+  ds_variable <- REDCapR::redcap_variables(redcap_uri, token)$data
 
   if( success ) {
 
@@ -191,6 +192,16 @@ redcap_read_oneshot_eav <- function(
             field_type = "checkbox"
           )
 
+        variables_to_keep <- ds_metadata_expanded %>%
+          dplyr::select(field_name) %>%
+          dplyr::union(
+            ds_variable %>%
+              dplyr::select_("field_name" = "export_field_name") %>%
+              dplyr::filter(grepl("^\\w+?_complete$", field_name))
+          ) %>%
+          .[["field_name"]] %>%
+          rev()
+
         ds_eav_2 <- ds_eav %>%
           dplyr::left_join(
             ds_metadata %>%
@@ -208,7 +219,7 @@ redcap_read_oneshot_eav <- function(
         ds <- ds_eav_2 %>%
           dplyr::select_("-field_type") %>%
           tidyr::spread_(key="field_name", value="value") %>%
-          dplyr::select_(.dots=ds_metadata_expanded$field_name)
+          dplyr::select_(.dots=variables_to_keep)
 
         ds_2 <- ds %>%
           dplyr::mutate_if(is.character, type.convert) %>%
@@ -219,8 +230,10 @@ redcap_read_oneshot_eav <- function(
 
     if( ifelse(exists("ds_2"), inherits(ds_2, "data.frame"), FALSE) ) {
       outcome_message <- paste0(
-        format(nrow(ds_2), big.mark=",", scientific=FALSE, trim=TRUE),
-        " cells were read from REDCap in ",
+        format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE),
+        " records and ",
+        format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE),
+        " columns were read from REDCap in ",
         round(elapsed_seconds, 1), " seconds.  The http status code was ",
         status_code, "."
       )
