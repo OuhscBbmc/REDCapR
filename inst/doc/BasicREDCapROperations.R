@@ -2,8 +2,8 @@
 report_render_start_time <- Sys.time()
 library(knitr)
 opts_chunk$set(
-    comment = NA, 
-    tidy    = FALSE
+  comment = NA, 
+  tidy    = FALSE
 )
 # options(markdown.HTML.header = system.file("misc", "vignette.css", package = "knitr"))
 # options(markdown.HTML.header = system.file("misc", "vignette.css", package = "REDCapR"))
