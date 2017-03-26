@@ -6,14 +6,16 @@
 #'
 #' validate_no_logical( d )
 #'
-#' validate_field_names( d )
+#' validate_field_names( field_names )
 #'
 #' @title Inspect a [base::data.frame()] to anticipate problems before writing to a REDCap project.
 #'
 #' @description This set of functions inspect a [base::data.frame()] to anticipate problems before writing with REDCap's API.
 #'
 #' @param d The [base::data.frame()] containing the dataset used to update the REDCap project.  Required.
-#' @return A [base::data.frame()], where each potential violation is a row.  The two columns are:
+#' @param field_names The names of the fields/variables in the REDCap project.
+#'
+#' @return A [tibble::tibble()], where each potential violation is a row.  The two columns are:
 #' * `field_name`: The name of the [base::data.frame()] that might cause problems during the upload.
 #' * `field_index`: The position of the field.  (For example, a value of '1' indicates the first column, while a '3' indicates the third column.)
 #' * `concern`: A description of the problem potentially caused by the `field`.
@@ -52,16 +54,15 @@ validate_no_logical <- function( d ) {
     )
   }
 }
-validate_field_names <- function( d ) {
+validate_field_names <- function( field_names ) {
   pattern <- "^[0-9a-z_]+$"
 
-  indices <- which(!grepl(pattern, x=colnames(d), perl=TRUE))
-  # indices <- grep(pattern="[A-Z]", x=colnames(d), perl=TRUE)
+  indices <- which(!grepl(pattern, x=field_names, perl=TRUE))
   if( length(indices) == 0 ) {
     return( tibble::tibble())
   } else {
     tibble::tibble(
-      field_name         = colnames(d)[indices],
+      field_name         = field_names[indices],
       field_index        = indices,
       concern            = "A REDCap project does not allow field names with an uppercase letter.",
       suggestion         = "Change the uppercase letters to lowercase, potentially with `base::tolower()`."
@@ -72,7 +73,7 @@ validate_field_names <- function( d ) {
 validate_for_write <- function( d ) {
   lst_concerns <- list(
     validate_no_logical(d),
-    validate_field_names(d)
+    validate_field_names(colnames(d))
   )
   ds_concern <- dplyr::bind_rows(lst_concerns) #Vertically stack all the data.frames into a single data.frame
 

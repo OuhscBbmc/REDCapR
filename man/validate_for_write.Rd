@@ -10,13 +10,15 @@ validate_for_write( d )
 
 validate_no_logical( d )
 
-validate_field_names( d )
+validate_field_names( field_names )
 }
 \arguments{
 \item{d}{The \code{\link[base:data.frame]{base::data.frame()}} containing the dataset used to update the REDCap project.  Required.}
+
+\item{field_names}{The names of the fields/variables in the REDCap project.}
 }
 \value{
-A \code{\link[base:data.frame]{base::data.frame()}}, where each potential violation is a row.  The two columns are:
+A \code{\link[tibble:tibble]{tibble::tibble()}}, where each potential violation is a row.  The two columns are:
 \itemize{
 \item \code{field_name}: The name of the \code{\link[base:data.frame]{base::data.frame()}} that might cause problems during the upload.
 \item \code{field_index}: The position of the field.  (For example, a value of '1' indicates the first column, while a '3' indicates the third column.)
