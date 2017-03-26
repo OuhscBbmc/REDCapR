@@ -23,6 +23,7 @@ ds_expected <- REDCapR::redcap_read_oneshot(redcap_uri, token)$data
 
 system.time({
 ds_metadata <- REDCapR::redcap_metadata_read(redcap_uri, token)$data
+ds_variable <- REDCapR::redcap_variables(redcap_uri, token)$data
 
 r <- httr::POST(
   url  = redcap_uri,
@@ -77,6 +78,19 @@ ds_possible_checkbox_rows <- ds_metadata_expanded %>%
     field_type = "checkbox"
   )
 
+# ds_metadata %>%
+#   dplyr::filter(field_type %in% c("calc", "file")) %>%
+#   dplyr::select_("field_name")
+variables_to_keep <- ds_metadata_expanded %>%
+  dplyr::select(field_name) %>%
+  dplyr::union(
+    ds_variable %>%
+      dplyr::select_("field_name" = "export_field_name") %>%
+      dplyr::filter(grepl("^\\w+?_complete$", field_name))
+  ) %>%
+  .[["field_name"]] %>%
+  rev()
+
 ds_eav_2 <- ds_eav %>%
   dplyr::left_join(
     ds_metadata %>%
@@ -94,7 +108,7 @@ ds_eav_2 <- ds_eav %>%
 ds <- ds_eav_2 %>%
   dplyr::select(-field_type) %>%
   tidyr::spread(key=field_name, value=value) %>%
-  dplyr::select_(.dots=ds_metadata_expanded$field_name)  #TODO: don't drop the *form*_complete booleans
+  dplyr::select_(.dots=variables_to_keep)
 
 ds_2 <- ds %>%
   dplyr::mutate_if(is.character, type.convert) %>%
