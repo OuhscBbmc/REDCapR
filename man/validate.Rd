@@ -9,12 +9,14 @@
 \usage{
 validate_for_write( d )
 
-validate_no_logical( d )
+validate_no_logical( data_types )
 
 validate_field_names( field_names )
 }
 \arguments{
-\item{d}{The \code{\link[base:data.frame]{base::data.frame()}} containing the dataset used to update the REDCap project.  Required.}
+\item{data_types}{The data types of the \code{\link[base:data.frame]{base::data.frame()}} corresponding to the REDCap project.}
+
+\item{d}{The \code{\link[base:data.frame]{base::data.frame()}} containing the dataset used to update the REDCap project.}
 
 \item{field_names}{The names of the fields/variables in the REDCap project.}
 }

@@ -4,7 +4,7 @@
 #' @usage
 #' validate_for_write( d )
 #'
-#' validate_no_logical( d )
+#' validate_no_logical( data_types )
 #'
 #' validate_field_names( field_names )
 #'
@@ -12,7 +12,8 @@
 #'
 #' @description This set of functions inspect a [base::data.frame()] to anticipate problems before writing with REDCap's API.
 #'
-#' @param d The [base::data.frame()] containing the dataset used to update the REDCap project.  Required.
+#' @param d The [base::data.frame()] containing the dataset used to update the REDCap project.
+#' @param data_types The data types of the [base::data.frame()] corresponding to the REDCap project.
 #' @param field_names The names of the fields/variables in the REDCap project.
 #'
 #' @return A [tibble::tibble()], where each potential violation is a row.  The two columns are:
@@ -40,14 +41,15 @@
 #' validate_for_write(d = d)
 
 
-validate_no_logical <- function( d ) {
-  indices <- which(sapply(d, class)=="logical")
+validate_no_logical <- function( data_types ) {
+  # indices <- which(sapply(d, class)=="logical")
+  indices <- which(data_types=="logical")
 
   if( length(indices) == 0 ) {
     return( tibble::tibble())
   } else {
     tibble::tibble(
-      field_name         = colnames(d)[indices],
+      field_name         = names(data_types)[indices],
       field_index        = indices,
       concern            = "The REDCap API does not automatically convert boolean values to 0/1 values.",
       suggestion         = "Convert the variable with the `as.integer()` function."
@@ -72,7 +74,7 @@ validate_field_names <- function( field_names ) {
 
 validate_for_write <- function( d ) {
   lst_concerns <- list(
-    validate_no_logical(d),
+    validate_no_logical(sapply(d, class)),
     validate_field_names(colnames(d))
   )
   ds_concern <- dplyr::bind_rows(lst_concerns) #Vertically stack all the data.frames into a single data.frame

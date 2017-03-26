@@ -23,7 +23,7 @@ test_that("validate_for_write_no_errors", {
 })
 
 test_that("validate_no_logical", {
-  ds <- validate_no_logical(d=ds_bad)
+  ds <- validate_no_logical(sapply(ds_bad, class))
   expect_equal(object=nrow(ds), expected=1, info="One logical field should be flagged")
   expect_equal(object=ds$field_name, expected="bad_logical")
   expect_equal(object=ds$field_index, expected=2)
