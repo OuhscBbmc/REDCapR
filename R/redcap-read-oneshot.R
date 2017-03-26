@@ -102,7 +102,6 @@ redcap_read_oneshot <- function(
   raw_or_label='raw', verbose=TRUE, config_options=NULL
 ) {
   #TODO: NULL verbose parameter pulls from getOption("verbose")
-  #TODO: warns if any requested fields aren't entirely lowercase.
 
   start_time <- Sys.time()
 
@@ -118,6 +117,7 @@ redcap_read_oneshot <- function(
     stop("The optional parameter `raw_or_label` must be either 'raw' or 'label'.")
 
   token <- sanitize_token(token)
+  validate_field_names(fields)
 
   if( all(nchar(records_collapsed)==0) )
     records_collapsed <- ifelse(is.null(records), "", paste0(records, collapse=",")) #This is an empty string if `records` is NULL.
@@ -177,8 +177,6 @@ redcap_read_oneshot <- function(
       }, #Convert the raw text to a dataset.
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
     )
-
-    #TODO #80: catch variant of ' The.hostname..redcap.db.hsc.net.ou.edu....username..redcapsql....password..XXXXXX..combination.could.not.connect.to.the.MySQL.server. \t\tPlease check their values.'
 
     if( exists("ds") & inherits(ds, "data.frame") ) {
       outcome_message <- paste0(
