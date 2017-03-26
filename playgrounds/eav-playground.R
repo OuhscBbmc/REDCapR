@@ -14,7 +14,7 @@ redcap_uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "D70F9ACD1EDD6F151C6EA78683944E98"  #This is for a PHI-free demo project
 
 raw_or_label <- "raw"
-export_data_access_groups_string <- "true"
+export_data_access_groups_string <- "false"
 
 # ---- load-data ---------------------------------------------------------------
 system.time(
@@ -23,16 +23,17 @@ ds_expected <- REDCapR::redcap_read_oneshot(redcap_uri, token)$data
 
 system.time({
 ds_metadata <- REDCapR::redcap_metadata_read(redcap_uri, token)$data
+ds_variable <- REDCapR::redcap_variables(redcap_uri, token)$data
 
 r <- httr::POST(
-  url = redcap_uri
-  , body = list(
-    token = token
-    , content = 'record'
-    , format = 'csv'
-    , type = 'eav'  ##This is the difference from the call above
+  url  = redcap_uri,
+  body = list(
+    token       = token,
+    content     = 'record',
+    format      = 'csv',
+    type        = 'eav'  ##This is the difference from the call above
     # , rawOrLabel = raw_or_label
-    # , exportDataAccessGroups = export_data_access_groups_string
+    , exportDataAccessGroups = export_data_access_groups_string
     # , records = records_collapsed
     # , fields = "studyid,referral_source" #fields_collapsed
   )
@@ -46,6 +47,9 @@ ds_eav <- readr::read_csv(raw_text)
 # ds_csv <- readr::read_csv(raw_text)
 # ds_json <- jsonlite::fromJSON(raw_text)
 })
+
+# ds_eav$field_name
+
 
 # ---- tweak-data --------------------------------------------------------------
 
@@ -74,6 +78,19 @@ ds_possible_checkbox_rows <- ds_metadata_expanded %>%
     field_type = "checkbox"
   )
 
+# ds_metadata %>%
+#   dplyr::filter(field_type %in% c("calc", "file")) %>%
+#   dplyr::select_("field_name")
+variables_to_keep <- ds_metadata_expanded %>%
+  dplyr::select(field_name) %>%
+  dplyr::union(
+    ds_variable %>%
+      dplyr::select_("field_name" = "export_field_name") %>%
+      dplyr::filter(grepl("^\\w+?_complete$", field_name))
+  ) %>%
+  .[["field_name"]] %>%
+  rev()
+
 ds_eav_2 <- ds_eav %>%
   dplyr::left_join(
     ds_metadata %>%
@@ -91,7 +108,7 @@ ds_eav_2 <- ds_eav %>%
 ds <- ds_eav_2 %>%
   dplyr::select(-field_type) %>%
   tidyr::spread(key=field_name, value=value) %>%
-  dplyr::select_(.dots=ds_metadata_expanded$field_name)
+  dplyr::select_(.dots=variables_to_keep)
 
 ds_2 <- ds %>%
   dplyr::mutate_if(is.character, type.convert) %>%
