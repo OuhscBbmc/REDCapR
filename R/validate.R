@@ -46,7 +46,12 @@ validate_no_logical <- function( data_types ) {
   indices <- which(data_types=="logical")
 
   if( length(indices) == 0 ) {
-    return( tibble::tibble())
+    tibble::tibble(
+      field_name         = character(0),
+      field_index        = integer(0),
+      concern            = character(0),
+      suggestion         = character(0)
+    )
   } else {
     tibble::tibble(
       field_name         = names(data_types)[indices],
@@ -61,7 +66,12 @@ validate_field_names <- function( field_names ) {
 
   indices <- which(!grepl(pattern, x=field_names, perl=TRUE))
   if( length(indices) == 0 ) {
-    return( tibble::tibble())
+    tibble::tibble(
+      field_name         = character(0),
+      field_index        = integer(0),
+      concern            = character(0),
+      suggestion         = character(0)
+    )
   } else {
     tibble::tibble(
       field_name         = field_names[indices],
