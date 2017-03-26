@@ -53,7 +53,10 @@ validate_no_logical <- function( d ) {
   }
 }
 validate_field_names <- function( d ) {
-  indices <- grep(pattern="[A-Z]", x=colnames(d), perl=TRUE)
+  pattern <- "^[0-9a-z_]+$"
+
+  indices <- which(!grepl(pattern, x=colnames(d), perl=TRUE))
+  # indices <- grep(pattern="[A-Z]", x=colnames(d), perl=TRUE)
   if( length(indices) == 0 ) {
     return( tibble::tibble())
   } else {
