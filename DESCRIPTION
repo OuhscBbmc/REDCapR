@@ -43,6 +43,7 @@ Imports:
     tidyr
 Suggests:
     devtools,
+    kableExtra,
     knitr,
     rmarkdown,
     RODBC,

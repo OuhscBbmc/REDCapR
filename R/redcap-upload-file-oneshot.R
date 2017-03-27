@@ -93,10 +93,12 @@ redcap_upload_file_oneshot <- function( file_name, record, redcap_uri, token, fi
     action         = 'import',
     record         = record,
     field          = field,
-    event          = event,
+    # event          = event,
     file           = httr::upload_file(path=file_name),
     returnFormat   = 'csv'
   )
+
+  if( nchar(event ) > 0 ) post_body$event  <- event
 
   result <- httr::POST(
     url    = redcap_uri,

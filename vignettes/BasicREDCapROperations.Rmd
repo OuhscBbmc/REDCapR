@@ -15,11 +15,38 @@ This vignette covers the the basic functions exposed by the [`httr`](https://git
 The function `redcap_read_oneshot` uses the [`httr`](https://cran.r-project.org/package=httr) package to call the REDCap API.
 ```{r set_options, echo=FALSE, results='hide'}
 report_render_start_time <- Sys.time()
+
 library(knitr)
+library(magrittr)
+requireNamespace("kableExtra")
+
 opts_chunk$set(
-    comment = NA, 
-    tidy    = FALSE
+  comment = NA, 
+  tidy    = FALSE
 )
+
+knit_print.data.frame = function(x, ...) {
+  # Adapted from https://cran.r-project.org/web/packages/knitr/vignettes/knit_print.html
+  # res = paste(c("", "", kable(x)), collapse = "\n")
+  # asis_output(res)
+  x %>% 
+    # dplyr::mutate_if(
+    #   is.character,
+    #   function( s ) gsub("\\n", "<br/>", s)
+    # ) %>%
+    kable(
+      col.names = gsub("_", " ", colnames(.)),
+      format = "html"
+    ) %>%
+    kableExtra::kable_styling(
+      bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+      full_width        = FALSE
+    ) %>%
+    c("", "", .) %>% 
+    paste(collapse = "\n") %>% 
+    asis_output()
+  
+}
 # options(markdown.HTML.header = system.file("misc", "vignette.css", package = "knitr"))
 # options(markdown.HTML.header = system.file("misc", "vignette.css", package = "REDCapR"))
 # options(markdown.HTML.header = file.path(devtools::inst("REDCapR"), "misc", "vignette.css"))
@@ -130,14 +157,15 @@ ds_some_rows_v3 #Examine the results.
 ```
 
 ### Additional Returned Information
-The examples above have shown only the resulting `data.frame`, by specifying `$data` at the end of the call.  However, more is available to those wanting additional information, such as
- 1. The `data` object has the `data.frame`, as in the previous examples.
- 1. The `success` boolean value indicates if `redcap_read_oneshot` believes the operation completed as intended.
- 1. The `status_codes` is a collection of [http status codes](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes), separated by semicolons.  There is one code for each batch attempted.
- 1. The `outcome_messages`: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.
- 1. The `records_collapsed` field passed to the API.  This shows which record subsets, if any, were requested.
- 1. The `fields_collapsed` fields passed to the API.  This shows which field subsets, if any, were requested.
- 1. The `elapsed_seconds` measures the duration of the call. 
+The examples above have shown only the resulting `data.frame`, by specifying `$data` at the end of the call.  However, more is available to those wanting additional information, such as:
+
+1. The `data` object has the `data.frame`, as in the previous examples.
+1. The `success` boolean value indicates if `redcap_read_oneshot` believes the operation completed as intended.
+1. The `status_codes` is a collection of [http status codes](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes), separated by semicolons.  There is one code for each batch attempted.
+1. The `outcome_messages`: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.
+1. The `records_collapsed` field passed to the API.  This shows which record subsets, if any, were requested.
+1. The `fields_collapsed` fields passed to the API.  This shows which field subsets, if any, were requested.
+1. The `elapsed_seconds` measures the duration of the call. 
 
 ```{r read_not_just_dataframe}
 #Return only the fields record_id, name_first, and age

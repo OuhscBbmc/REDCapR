@@ -1,10 +1,37 @@
 ## ----set_options, echo=FALSE, results='hide'-----------------------------
 report_render_start_time <- Sys.time()
+
 library(knitr)
+library(magrittr)
+requireNamespace("kableExtra")
+
 opts_chunk$set(
-    comment = NA, 
-    tidy    = FALSE
+  comment = NA, 
+  tidy    = FALSE
 )
+
+knit_print.data.frame = function(x, ...) {
+  # Adapted from https://cran.r-project.org/web/packages/knitr/vignettes/knit_print.html
+  # res = paste(c("", "", kable(x)), collapse = "\n")
+  # asis_output(res)
+  x %>% 
+    # dplyr::mutate_if(
+    #   is.character,
+    #   function( s ) gsub("\\n", "<br/>", s)
+    # ) %>%
+    kable(
+      col.names = gsub("_", " ", colnames(.)),
+      format = "html"
+    ) %>%
+    kableExtra::kable_styling(
+      bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+      full_width        = FALSE
+    ) %>%
+    c("", "", .) %>% 
+    paste(collapse = "\n") %>% 
+    asis_output()
+  
+}
 # options(markdown.HTML.header = system.file("misc", "vignette.css", package = "knitr"))
 # options(markdown.HTML.header = system.file("misc", "vignette.css", package = "REDCapR"))
 # options(markdown.HTML.header = file.path(devtools::inst("REDCapR"), "misc", "vignette.css"))

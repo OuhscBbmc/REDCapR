@@ -11,6 +11,7 @@ apt_packages:
   - unixodbc-dev
 r_github_packages:
   - jimhester/covr
+  - jeroen/curl
 # - hadley/testthat
 after_success:
   - Rscript -e 'library(covr);coveralls()'
