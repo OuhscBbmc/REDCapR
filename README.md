@@ -1,3 +1,5 @@
+# Monday Morning, 2017-03-27: please see [problem w/ curl 2.4](https://github.com/OuhscBbmc/REDCapR/issues/154) issue.
+
 | [GitHub](https://github.com/OuhscBbmc/REDCapR) | [Travis-CI](https://travis-ci.org/OuhscBbmc/REDCapR/builds) | [AppVeyor](https://ci.appveyor.com/project/wibeasley/redcapr/history) | [Coveralls](https://coveralls.io/r/OuhscBbmc/REDCapR) |
 | :----- | :---------------------------: | :-----------------------------: | :-------: |
 | [Master](https://github.com/OuhscBbmc/REDCapR/tree/master) | [![Build Status](https://travis-ci.org/OuhscBbmc/REDCapR.svg?branch=master)](https://travis-ci.org/OuhscBbmc/REDCapR) | [![Build status](https://ci.appveyor.com/api/projects/status/0i41tn0n2jo4pd2k/branch/master?svg=true)](https://ci.appveyor.com/project/wibeasley/redcapr/branch/master) | [![Coverage Status](https://coveralls.io/repos/OuhscBbmc/REDCapR/badge.svg?branch=master)](https://coveralls.io/r/OuhscBbmc/REDCapR?branch=master) |
