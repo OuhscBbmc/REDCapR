@@ -16,10 +16,27 @@ The function `redcap_read_oneshot` uses the [`httr`](https://cran.r-project.org/
 ```{r set_options, echo=FALSE, results='hide'}
 report_render_start_time <- Sys.time()
 library(knitr)
+library(magrittr)
 opts_chunk$set(
   comment = NA, 
   tidy    = FALSE
 )
+
+knit_print.data.frame = function(x, ...) {
+  # Adapted from https://cran.r-project.org/web/packages/knitr/vignettes/knit_print.html
+  # res = paste(c("", "", kable(x)), collapse = "\n")
+  # asis_output(res)
+  x %>% 
+    dplyr::mutate_if(
+      is.character,
+      function( s ) gsub("\\n", "<br/>", s)
+    ) %>%
+    kable() %>% 
+    c("", "", .) %>% 
+    paste(collapse = "\n") %>% 
+    asis_output()
+  
+}
 # options(markdown.HTML.header = system.file("misc", "vignette.css", package = "knitr"))
 # options(markdown.HTML.header = system.file("misc", "vignette.css", package = "REDCapR"))
 # options(markdown.HTML.header = file.path(devtools::inst("REDCapR"), "misc", "vignette.css"))
