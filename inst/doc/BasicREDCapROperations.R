@@ -17,6 +17,7 @@ knit_print.data.frame = function(x, ...) {
     #   function( s ) gsub("\\n", "<br/>", s)
     # ) %>%
     kable(
+      col.names = gsub("_", " ", colnames(.)),
       format = "html"
     ) %>% 
     c("", "", .) %>% 
