@@ -1,7 +1,10 @@
 ## ----set_options, echo=FALSE, results='hide'-----------------------------
 report_render_start_time <- Sys.time()
+
 library(knitr)
 library(magrittr)
+requireNamespace("kableExtra")
+
 opts_chunk$set(
   comment = NA, 
   tidy    = FALSE
@@ -19,6 +22,10 @@ knit_print.data.frame = function(x, ...) {
     kable(
       col.names = gsub("_", " ", colnames(.)),
       format = "html"
+    ) %>% 
+    kableExtra::kable_styling(
+      bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+      full_width        = FALSE
     ) %>% 
     c("", "", .) %>% 
     paste(collapse = "\n") %>% 
