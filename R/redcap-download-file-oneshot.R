@@ -91,9 +91,11 @@ redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwr
     action        = 'export',
     record        = record,
     field         = field,
-    event         = event,
+    # event         = event,
     returnFormat  = 'csv'
   )
+
+  if( nchar(event ) > 0 ) post_body$event   <- event
 
   #This is the first of two important lines in the function.
   #  It retrieves the information from the server and stores it in RAM.

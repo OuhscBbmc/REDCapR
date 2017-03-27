@@ -140,11 +140,15 @@ redcap_read_oneshot <- function(
     type                    = 'flat',
     rawOrLabel              = raw_or_label,
     exportDataAccessGroups  = export_data_access_groups_string,
-    records                 = records_collapsed,
-    fields                  = fields_collapsed,
-    events                  = events_collapsed,
+    # records               = ifelse(nchar(records_collapsed)   > 0, records_collapsed  , NULL),
+    # fields                = ifelse(nchar(fields_collapsed)    > 0, fields_collapsed   , NULL),
+    # events                = ifelse(nchar(events_collapsed)    > 0, events_collapsed   , NULL),
     filterLogic             = filter_logic
   )
+
+  if( nchar(records_collapsed) > 0 ) post_body$records  <- records_collapsed
+  if( nchar(fields_collapsed ) > 0 ) post_body$fields   <- fields_collapsed
+  if( nchar(events_collapsed ) > 0 ) post_body$events   <- events_collapsed
 
   result <- httr::POST(
     url     = redcap_uri,
