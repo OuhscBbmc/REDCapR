@@ -27,11 +27,13 @@ knit_print.data.frame = function(x, ...) {
   # res = paste(c("", "", kable(x)), collapse = "\n")
   # asis_output(res)
   x %>% 
-    dplyr::mutate_if(
-      is.character,
-      function( s ) gsub("\\n", "<br/>", s)
-    ) %>%
-    kable() %>% 
+    # dplyr::mutate_if(
+    #   is.character,
+    #   function( s ) gsub("\\n", "<br/>", s)
+    # ) %>%
+    kable(
+      format = "html"
+    ) %>% 
     c("", "", .) %>% 
     paste(collapse = "\n") %>% 
     asis_output()

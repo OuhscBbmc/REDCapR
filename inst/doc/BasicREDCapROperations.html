@@ -88,171 +88,471 @@ token &lt;-<span class="st"> &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;</span>
 <p>If no information is passed about the desired records or fields, then the entire data set is returned. Only two parameters are required, <code>redcap_uri</code> and <code>token</code>. Unless the <code>verbose</code> parameter is set to <code>FALSE</code>, a message will be printed on the R console with the number of records and fields returned.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return all records and all variables.</span>
 ds_all_rows_all_fields &lt;-<span class="st"> </span><span class="kw">redcap_read</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)$data</code></pre></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2017-03-26 23:20:37</code></pre>
+<pre><code>Starting to read 5 records  at 2017-03-26 23:23:48</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_all_rows_all_fields <span class="co">#Inspect the returned dataset</span></code></pre></div>
 <table>
 <thead>
-<tr class="header">
-<th align="right">record_id</th>
-<th align="left">name_first</th>
-<th align="left">name_last</th>
-<th align="left">address</th>
-<th align="left">telephone</th>
-<th align="left">email</th>
-<th align="left">dob</th>
-<th align="right">age</th>
-<th align="right">sex</th>
-<th align="right">demographics_complete</th>
-<th align="right">height</th>
-<th align="right">weight</th>
-<th align="right">bmi</th>
-<th align="left">comments</th>
-<th align="left">mugshot</th>
-<th align="right">health_complete</th>
-<th align="right">race___1</th>
-<th align="right">race___2</th>
-<th align="right">race___3</th>
-<th align="right">race___4</th>
-<th align="right">race___5</th>
-<th align="right">race___6</th>
-<th align="right">ethnicity</th>
-<th align="right">race_and_ethnicity_complete</th>
+<tr>
+<th style="text-align:right;">
+record_id
+</th>
+<th style="text-align:left;">
+name_first
+</th>
+<th style="text-align:left;">
+name_last
+</th>
+<th style="text-align:left;">
+address
+</th>
+<th style="text-align:left;">
+telephone
+</th>
+<th style="text-align:left;">
+email
+</th>
+<th style="text-align:left;">
+dob
+</th>
+<th style="text-align:right;">
+age
+</th>
+<th style="text-align:right;">
+sex
+</th>
+<th style="text-align:right;">
+demographics_complete
+</th>
+<th style="text-align:right;">
+height
+</th>
+<th style="text-align:right;">
+weight
+</th>
+<th style="text-align:right;">
+bmi
+</th>
+<th style="text-align:left;">
+comments
+</th>
+<th style="text-align:left;">
+mugshot
+</th>
+<th style="text-align:right;">
+health_complete
+</th>
+<th style="text-align:right;">
+race___1
+</th>
+<th style="text-align:right;">
+race___2
+</th>
+<th style="text-align:right;">
+race___3
+</th>
+<th style="text-align:right;">
+race___4
+</th>
+<th style="text-align:right;">
+race___5
+</th>
+<th style="text-align:right;">
+race___6
+</th>
+<th style="text-align:right;">
+ethnicity
+</th>
+<th style="text-align:right;">
+race_and_ethnicity_complete
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">Nutmeg</td>
-<td align="left">Nutmouse</td>
-<td align="left">14 Rose Cottage St.<br />Kenning UK, 323232</td>
-<td align="left">(405) 321-1111</td>
-<td align="left"><a href="mailto:nutty@mouse.com">nutty@mouse.com</a></td>
-<td align="left">2003-08-30</td>
-<td align="right">11</td>
-<td align="right">0</td>
-<td align="right">2</td>
-<td align="right">7.00</td>
-<td align="right">1</td>
-<td align="right">204.1</td>
-<td align="left">Character in a book, with some guessing</td>
-<td align="left">[document]</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">2</td>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Nutmeg
+</td>
+<td style="text-align:left;">
+Nutmouse
+</td>
+<td style="text-align:left;">
+14 Rose Cottage St. Kenning UK, 323232
+</td>
+<td style="text-align:left;">
+<ol start="405" style="list-style-type: decimal">
+<li>321-1111
+</td>
+<td style="text-align:left;">
+<a href="mailto:nutty@mouse.com">nutty@mouse.com</a>
+</td>
+<td style="text-align:left;">
+2003-08-30
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+7.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+204.1
+</td>
+<td style="text-align:left;">
+Character in a book, with some guessing
+</td>
+<td style="text-align:left;">
+[document]
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
 </tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">Tumtum</td>
-<td align="left">Nutmouse</td>
-<td align="left">14 Rose Cottage Blvd.<br />Kenning UK 34243</td>
-<td align="left">(405) 321-2222</td>
-<td align="left"><a href="mailto:tummy@mouse.comm">tummy@mouse.comm</a></td>
-<td align="left">2003-03-10</td>
-<td align="right">11</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">6.00</td>
-<td align="right">1</td>
-<td align="right">277.8</td>
-<td align="left">A mouse character from a good book</td>
-<td align="left">[document]</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+Tumtum
+</td>
+<td style="text-align:left;">
+Nutmouse
+</td>
+<td style="text-align:left;">
+14 Rose Cottage Blvd. Kenning UK 34243
+</td>
+<td style="text-align:left;">
+<ol start="405" style="list-style-type: decimal">
+<li>321-2222
+</td>
+<td style="text-align:left;">
+<a href="mailto:tummy@mouse.comm">tummy@mouse.comm</a>
+</td>
+<td style="text-align:left;">
+2003-03-10
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+6.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+277.8
+</td>
+<td style="text-align:left;">
+A mouse character from a good book
+</td>
+<td style="text-align:left;">
+[document]
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="odd">
-<td align="right">3</td>
-<td align="left">Marcus</td>
-<td align="left">Wood</td>
-<td align="left">243 Hill St.<br />Guthrie OK 73402</td>
-<td align="left">(405) 321-3333</td>
-<td align="left"><a href="mailto:mw@mwood.net">mw@mwood.net</a></td>
-<td align="left">1934-04-09</td>
-<td align="right">80</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">180.00</td>
-<td align="right">80</td>
-<td align="right">24.7</td>
-<td align="left">completely made up</td>
-<td align="left">[document]</td>
-<td align="right">2</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">2</td>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Marcus
+</td>
+<td style="text-align:left;">
+Wood
+</td>
+<td style="text-align:left;">
+243 Hill St. Guthrie OK 73402
+</td>
+<td style="text-align:left;">
+<ol start="405" style="list-style-type: decimal">
+<li>321-3333
+</td>
+<td style="text-align:left;">
+<a href="mailto:mw@mwood.net">mw@mwood.net</a>
+</td>
+<td style="text-align:left;">
+1934-04-09
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+180.00
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+24.7
+</td>
+<td style="text-align:left;">
+completely made up
+</td>
+<td style="text-align:left;">
+[document]
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
 </tr>
-<tr class="even">
-<td align="right">4</td>
-<td align="left">Trudy</td>
-<td align="left">DAG</td>
-<td align="left">342 Elm<br />Duncanville TX, 75116</td>
-<td align="left">(405) 321-4444</td>
-<td align="left"><a href="mailto:peroxide@blonde.com">peroxide@blonde.com</a></td>
-<td align="left">1952-11-02</td>
-<td align="right">61</td>
-<td align="right">0</td>
-<td align="right">2</td>
-<td align="right">165.00</td>
-<td align="right">54</td>
-<td align="right">19.8</td>
-<td align="left">This record doesn’t have a DAG assigned<br /><br />So call up Trudy on the telephone<br />Send her a letter in the mail</td>
-<td align="left">[document]</td>
-<td align="right">2</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">2</td>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Trudy
+</td>
+<td style="text-align:left;">
+DAG
+</td>
+<td style="text-align:left;">
+342 Elm Duncanville TX, 75116
+</td>
+<td style="text-align:left;">
+<ol start="405" style="list-style-type: decimal">
+<li>321-4444
+</td>
+<td style="text-align:left;">
+<a href="mailto:peroxide@blonde.com">peroxide@blonde.com</a>
+</td>
+<td style="text-align:left;">
+1952-11-02
+</td>
+<td style="text-align:right;">
+61
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+165.00
+</td>
+<td style="text-align:right;">
+54
+</td>
+<td style="text-align:right;">
+19.8
+</td>
+<td style="text-align:left;">
+This record doesn’t have a DAG assigned</li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol>
+So call up Trudy on the telephone Send her a letter in the mail
+</td>
+<td style="text-align:left;">
+[document]
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
 </tr>
-<tr class="odd">
-<td align="right">5</td>
-<td align="left">John Lee</td>
-<td align="left">Walker</td>
-<td align="left">Hotel Suite<br />New Orleans LA, 70115</td>
-<td align="left">(405) 321-5555</td>
-<td align="left"><a href="mailto:left@hippocket.com">left@hippocket.com</a></td>
-<td align="left">1955-04-15</td>
-<td align="right">59</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">193.04</td>
-<td align="right">104</td>
-<td align="right">27.9</td>
-<td align="left">Had a hand for trouble and a eye for cash<br /><br />He had a gold watch chain and a black mustache</td>
-<td align="left">[document]</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">2</td>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+John Lee
+</td>
+<td style="text-align:left;">
+Walker
+</td>
+<td style="text-align:left;">
+Hotel Suite New Orleans LA, 70115
+</td>
+<td style="text-align:left;">
+<ol start="405" style="list-style-type: decimal">
+<li>321-5555
+</td>
+<td style="text-align:left;">
+<a href="mailto:left@hippocket.com">left@hippocket.com</a>
+</td>
+<td style="text-align:left;">
+1955-04-15
+</td>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+193.04
+</td>
+<td style="text-align:right;">
+104
+</td>
+<td style="text-align:right;">
+27.9
+</td>
+<td style="text-align:left;">
+Had a hand for trouble and a eye for cash</li>
+</ol>
+He had a gold watch chain and a black mustache
+</td>
+<td style="text-align:left;">
+[document]
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
 </tr>
 </tbody>
 </table>
@@ -269,8 +569,8 @@ ds_some_rows_v1 &lt;-<span class="st"> </span><span class="kw">redcap_read</span
    <span class="dt">records    =</span> desired_records_v1
 )$data</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2017-03-26 23:20:38</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2017-03-26 23:23:49</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return only records with IDs of 1 and 3 (alternate way)</span>
@@ -280,96 +580,244 @@ ds_some_rows_v2 &lt;-<span class="st"> </span><span class="kw">redcap_read</span
    <span class="dt">token             =</span> token, 
    <span class="dt">records_collapsed =</span> desired_records_v2
 )$data</code></pre></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2017-03-26 23:20:40</code></pre>
+<pre><code>Starting to read 2 records  at 2017-03-26 23:23:51</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
-<pre><code>2 records and 24 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_rows_v2 <span class="co">#Inspect the returned dataset</span></code></pre></div>
 <table>
 <thead>
-<tr class="header">
-<th align="right">record_id</th>
-<th align="left">name_first</th>
-<th align="left">name_last</th>
-<th align="left">address</th>
-<th align="left">telephone</th>
-<th align="left">email</th>
-<th align="left">dob</th>
-<th align="right">age</th>
-<th align="right">sex</th>
-<th align="right">demographics_complete</th>
-<th align="right">height</th>
-<th align="right">weight</th>
-<th align="right">bmi</th>
-<th align="left">comments</th>
-<th align="left">mugshot</th>
-<th align="right">health_complete</th>
-<th align="right">race___1</th>
-<th align="right">race___2</th>
-<th align="right">race___3</th>
-<th align="right">race___4</th>
-<th align="right">race___5</th>
-<th align="right">race___6</th>
-<th align="right">ethnicity</th>
-<th align="right">race_and_ethnicity_complete</th>
+<tr>
+<th style="text-align:right;">
+record_id
+</th>
+<th style="text-align:left;">
+name_first
+</th>
+<th style="text-align:left;">
+name_last
+</th>
+<th style="text-align:left;">
+address
+</th>
+<th style="text-align:left;">
+telephone
+</th>
+<th style="text-align:left;">
+email
+</th>
+<th style="text-align:left;">
+dob
+</th>
+<th style="text-align:right;">
+age
+</th>
+<th style="text-align:right;">
+sex
+</th>
+<th style="text-align:right;">
+demographics_complete
+</th>
+<th style="text-align:right;">
+height
+</th>
+<th style="text-align:right;">
+weight
+</th>
+<th style="text-align:right;">
+bmi
+</th>
+<th style="text-align:left;">
+comments
+</th>
+<th style="text-align:left;">
+mugshot
+</th>
+<th style="text-align:right;">
+health_complete
+</th>
+<th style="text-align:right;">
+race___1
+</th>
+<th style="text-align:right;">
+race___2
+</th>
+<th style="text-align:right;">
+race___3
+</th>
+<th style="text-align:right;">
+race___4
+</th>
+<th style="text-align:right;">
+race___5
+</th>
+<th style="text-align:right;">
+race___6
+</th>
+<th style="text-align:right;">
+ethnicity
+</th>
+<th style="text-align:right;">
+race_and_ethnicity_complete
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">Nutmeg</td>
-<td align="left">Nutmouse</td>
-<td align="left">14 Rose Cottage St.<br />Kenning UK, 323232</td>
-<td align="left">(405) 321-1111</td>
-<td align="left"><a href="mailto:nutty@mouse.com">nutty@mouse.com</a></td>
-<td align="left">2003-08-30</td>
-<td align="right">11</td>
-<td align="right">0</td>
-<td align="right">2</td>
-<td align="right">7</td>
-<td align="right">1</td>
-<td align="right">204.1</td>
-<td align="left">Character in a book, with some guessing</td>
-<td align="left">[document]</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">2</td>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Nutmeg
+</td>
+<td style="text-align:left;">
+Nutmouse
+</td>
+<td style="text-align:left;">
+14 Rose Cottage St. Kenning UK, 323232
+</td>
+<td style="text-align:left;">
+<ol start="405" style="list-style-type: decimal">
+<li>321-1111
+</td>
+<td style="text-align:left;">
+<a href="mailto:nutty@mouse.com">nutty@mouse.com</a>
+</td>
+<td style="text-align:left;">
+2003-08-30
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+204.1
+</td>
+<td style="text-align:left;">
+Character in a book, with some guessing
+</td>
+<td style="text-align:left;">
+[document]
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
 </tr>
-<tr class="even">
-<td align="right">3</td>
-<td align="left">Marcus</td>
-<td align="left">Wood</td>
-<td align="left">243 Hill St.<br />Guthrie OK 73402</td>
-<td align="left">(405) 321-3333</td>
-<td align="left"><a href="mailto:mw@mwood.net">mw@mwood.net</a></td>
-<td align="left">1934-04-09</td>
-<td align="right">80</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">180</td>
-<td align="right">80</td>
-<td align="right">24.7</td>
-<td align="left">completely made up</td>
-<td align="left">[document]</td>
-<td align="right">2</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">2</td>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Marcus
+</td>
+<td style="text-align:left;">
+Wood
+</td>
+<td style="text-align:left;">
+243 Hill St. Guthrie OK 73402
+</td>
+<td style="text-align:left;">
+<ol start="405" style="list-style-type: decimal">
+<li>321-3333
+</td>
+<td style="text-align:left;">
+<a href="mailto:mw@mwood.net">mw@mwood.net</a>
+</td>
+<td style="text-align:left;">
+1934-04-09
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+180
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+24.7
+</td>
+<td style="text-align:left;">
+completely made up
+</td>
+<td style="text-align:left;">
+[document]
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
 </tr>
 </tbody>
-</table>
+</table></li>
+</ol></li>
+</ol>
 </div>
 <div id="read-a-subset-of-the-fields." class="section level3">
 <h3>Read a subset of the fields.</h3>
@@ -382,10 +830,10 @@ ds_some_fields_v1 &lt;-<span class="st"> </span><span class="kw">redcap_read</sp
    <span class="dt">fields     =</span> desired_fields_v1
 )$data</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2017-03-26 23:20:42</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2017-03-26 23:23:52</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return only the fields record_id, name_first, and age (alternate way)</span>
 desired_fields_v2 &lt;-<span class="st"> &quot;record_id, name_first, age&quot;</span>
 ds_some_fields_v2 &lt;-<span class="st"> </span><span class="kw">redcap_read</span>(
@@ -394,44 +842,80 @@ ds_some_fields_v2 &lt;-<span class="st"> </span><span class="kw">redcap_read</sp
    <span class="dt">fields_collapsed =</span> desired_fields_v2
 )$data</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2017-03-26 23:20:43</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2017-03-26 23:23:53</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_fields_v2 <span class="co">#Inspect the returned dataset</span></code></pre></div>
 <table>
 <thead>
-<tr class="header">
-<th align="right">record_id</th>
-<th align="left">name_first</th>
-<th align="right">age</th>
+<tr>
+<th style="text-align:right;">
+record_id
+</th>
+<th style="text-align:left;">
+name_first
+</th>
+<th style="text-align:right;">
+age
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">Nutmeg</td>
-<td align="right">11</td>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Nutmeg
+</td>
+<td style="text-align:right;">
+11
+</td>
 </tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">Tumtum</td>
-<td align="right">11</td>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+Tumtum
+</td>
+<td style="text-align:right;">
+11
+</td>
 </tr>
-<tr class="odd">
-<td align="right">3</td>
-<td align="left">Marcus</td>
-<td align="right">80</td>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Marcus
+</td>
+<td style="text-align:right;">
+80
+</td>
 </tr>
-<tr class="even">
-<td align="right">4</td>
-<td align="left">Trudy</td>
-<td align="right">61</td>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Trudy
+</td>
+<td style="text-align:right;">
+61
+</td>
 </tr>
-<tr class="odd">
-<td align="right">5</td>
-<td align="left">John Lee</td>
-<td align="right">59</td>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+John Lee
+</td>
+<td style="text-align:right;">
+59
+</td>
 </tr>
 </tbody>
 </table>
@@ -449,43 +933,79 @@ ds_some_fields_v3 &lt;-<span class="st"> </span><span class="kw">redcap_read</sp
 )$data</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2017-03-26 23:20:45</code></pre>
+<pre><code>Starting to read 5 records  at 2017-03-26 23:23:55</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_fields_v3 <span class="co">#Examine the these three variables.</span></code></pre></div>
 <table>
 <thead>
-<tr class="header">
-<th align="right">record_id</th>
-<th align="left">dob</th>
-<th align="right">weight</th>
+<tr>
+<th style="text-align:right;">
+record_id
+</th>
+<th style="text-align:left;">
+dob
+</th>
+<th style="text-align:right;">
+weight
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">2003-08-30</td>
-<td align="right">1</td>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+2003-08-30
+</td>
+<td style="text-align:right;">
+1
+</td>
 </tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left">2003-03-10</td>
-<td align="right">1</td>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+2003-03-10
+</td>
+<td style="text-align:right;">
+1
+</td>
 </tr>
-<tr class="odd">
-<td align="right">3</td>
-<td align="left">1934-04-09</td>
-<td align="right">80</td>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+1934-04-09
+</td>
+<td style="text-align:right;">
+80
+</td>
 </tr>
-<tr class="even">
-<td align="right">4</td>
-<td align="left">1952-11-02</td>
-<td align="right">54</td>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+1952-11-02
+</td>
+<td style="text-align:right;">
+54
+</td>
 </tr>
-<tr class="odd">
-<td align="right">5</td>
-<td align="left">1955-04-15</td>
-<td align="right">104</td>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+1955-04-15
+</td>
+<td style="text-align:right;">
+104
+</td>
 </tr>
 </tbody>
 </table>
@@ -507,91 +1027,240 @@ ds_some_rows_v3 &lt;-<span class="st"> </span><span class="kw">redcap_read</span
 )$data</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2017-03-26 23:20:46</code></pre>
+<pre><code>Starting to read 2 records  at 2017-03-26 23:23:56</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_rows_v3 <span class="co">#Examine the results.</span></code></pre></div>
 <table>
 <thead>
-<tr class="header">
-<th align="right">record_id</th>
-<th align="left">name_first</th>
-<th align="left">name_last</th>
-<th align="left">address</th>
-<th align="left">telephone</th>
-<th align="left">email</th>
-<th align="left">dob</th>
-<th align="right">age</th>
-<th align="right">sex</th>
-<th align="right">demographics_complete</th>
-<th align="right">height</th>
-<th align="right">weight</th>
-<th align="right">bmi</th>
-<th align="left">comments</th>
-<th align="left">mugshot</th>
-<th align="right">health_complete</th>
-<th align="right">race___1</th>
-<th align="right">race___2</th>
-<th align="right">race___3</th>
-<th align="right">race___4</th>
-<th align="right">race___5</th>
-<th align="right">race___6</th>
-<th align="right">ethnicity</th>
-<th align="right">race_and_ethnicity_complete</th>
+<tr>
+<th style="text-align:right;">
+record_id
+</th>
+<th style="text-align:left;">
+name_first
+</th>
+<th style="text-align:left;">
+name_last
+</th>
+<th style="text-align:left;">
+address
+</th>
+<th style="text-align:left;">
+telephone
+</th>
+<th style="text-align:left;">
+email
+</th>
+<th style="text-align:left;">
+dob
+</th>
+<th style="text-align:right;">
+age
+</th>
+<th style="text-align:right;">
+sex
+</th>
+<th style="text-align:right;">
+demographics_complete
+</th>
+<th style="text-align:right;">
+height
+</th>
+<th style="text-align:right;">
+weight
+</th>
+<th style="text-align:right;">
+bmi
+</th>
+<th style="text-align:left;">
+comments
+</th>
+<th style="text-align:left;">
+mugshot
+</th>
+<th style="text-align:right;">
+health_complete
+</th>
+<th style="text-align:right;">
+race___1
+</th>
+<th style="text-align:right;">
+race___2
+</th>
+<th style="text-align:right;">
+race___3
+</th>
+<th style="text-align:right;">
+race___4
+</th>
+<th style="text-align:right;">
+race___5
+</th>
+<th style="text-align:right;">
+race___6
+</th>
+<th style="text-align:right;">
+ethnicity
+</th>
+<th style="text-align:right;">
+race_and_ethnicity_complete
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="right">3</td>
-<td align="left">Marcus</td>
-<td align="left">Wood</td>
-<td align="left">243 Hill St.<br />Guthrie OK 73402</td>
-<td align="left">(405) 321-3333</td>
-<td align="left"><a href="mailto:mw@mwood.net">mw@mwood.net</a></td>
-<td align="left">1934-04-09</td>
-<td align="right">80</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">180.00</td>
-<td align="right">80</td>
-<td align="right">24.7</td>
-<td align="left">completely made up</td>
-<td align="left">[document]</td>
-<td align="right">2</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">2</td>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Marcus
+</td>
+<td style="text-align:left;">
+Wood
+</td>
+<td style="text-align:left;">
+243 Hill St. Guthrie OK 73402
+</td>
+<td style="text-align:left;">
+<ol start="405" style="list-style-type: decimal">
+<li>321-3333
+</td>
+<td style="text-align:left;">
+<a href="mailto:mw@mwood.net">mw@mwood.net</a>
+</td>
+<td style="text-align:left;">
+1934-04-09
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+180.00
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+24.7
+</td>
+<td style="text-align:left;">
+completely made up
+</td>
+<td style="text-align:left;">
+[document]
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
 </tr>
-<tr class="even">
-<td align="right">5</td>
-<td align="left">John Lee</td>
-<td align="left">Walker</td>
-<td align="left">Hotel Suite<br />New Orleans LA, 70115</td>
-<td align="left">(405) 321-5555</td>
-<td align="left"><a href="mailto:left@hippocket.com">left@hippocket.com</a></td>
-<td align="left">1955-04-15</td>
-<td align="right">59</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">193.04</td>
-<td align="right">104</td>
-<td align="right">27.9</td>
-<td align="left">Had a hand for trouble and a eye for cash<br /><br />He had a gold watch chain and a black mustache</td>
-<td align="left">[document]</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">2</td>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+John Lee
+</td>
+<td style="text-align:left;">
+Walker
+</td>
+<td style="text-align:left;">
+Hotel Suite New Orleans LA, 70115
+</td>
+<td style="text-align:left;">
+<ol start="405" style="list-style-type: decimal">
+<li>321-5555
+</td>
+<td style="text-align:left;">
+<a href="mailto:left@hippocket.com">left@hippocket.com</a>
+</td>
+<td style="text-align:left;">
+1955-04-15
+</td>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+193.04
+</td>
+<td style="text-align:right;">
+104
+</td>
+<td style="text-align:right;">
+27.9
+</td>
+<td style="text-align:left;">
+Had a hand for trouble and a eye for cash</li>
+</ol></li>
+</ol>
+He had a gold watch chain and a black mustache
+</td>
+<td style="text-align:left;">
+[document]
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
 </tr>
 </tbody>
 </table>
@@ -614,9 +1283,9 @@ all_information &lt;-<span class="st"> </span><span class="kw">redcap_read</span
    <span class="dt">token      =</span> token, 
    <span class="dt">fields     =</span> desired_fields_v1
 )</code></pre></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.7 seconds.  The http status code was 200.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2017-03-26 23:20:48</code></pre>
+<pre><code>Starting to read 5 records  at 2017-03-26 23:23:58</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_information <span class="co">#Inspect the additional information</span></code></pre></div>
@@ -650,7 +1319,7 @@ $events_collapsed
 [1] &quot;&quot;
 
 $elapsed_seconds
-[1] 1.794981</code></pre>
+[1] 1.394526</code></pre>
 </div>
 </div>
 <div id="session-information" class="section level2">
@@ -700,7 +1369,7 @@ $elapsed_seconds
  xml2         1.1.1      2017-01-24 CRAN (R 3.3.1)
  yaml         2.1.14     2016-11-12 CRAN (R 3.3.1)</code></pre>
 <p></details></p>
-<p>Report rendered by wibeasley at 2017-03-26, 23:20 -0500 in 13 seconds.</p>
+<p>Report rendered by wibeasley at 2017-03-26, 23:23 -0500 in 12 seconds.</p>
 </div>
 
 
