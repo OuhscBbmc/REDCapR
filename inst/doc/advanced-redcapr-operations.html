@@ -72,13 +72,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<p>This vignette covers the the basic functions exposed by the <a href="https://github.com/hadley/httr"><code>httr</code></a> and <a href="https://cran.r-project.org/package=curl"><code>curl</code></a> packages which allow you to interact with <a href="http://www.project-redcap.org/">REDCap</a> through its API.</p>
-<div id="reading-redcap-data" class="section level2">
-<h2>Reading REDCap Data</h2>
-<p>The function <code>redcap_read_oneshot</code> uses the <a href="https://cran.r-project.org/package=httr"><code>httr</code></a> package to call the REDCap API.</p>
+<p>This vignette covers the the less-typical uses of <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> to interact with <a href="http://www.project-redcap.org/">REDCap</a> through its API.</p>
 <div id="set-project-wide-values." class="section level3">
 <h3>Set project-wide values.</h3>
-<p>There is some information that is specific to a REDCap project, as opposed to an individual operation. This includes the (1) uri of the server, and the (2) token for the user’s project.</p>
+<p>There is some information that is specific to a REDCap project, as opposed to an individual operation. This includes the (1) uri of the server, and the (2) token for the user’s project. This is hosted on a machine used in REDCapR’s public test suite, so you can run this example from any computer. Unless tests are running.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(REDCapR) <span class="co">#Load the package into the current R session.</span>
 uri                   &lt;-<span class="st"> &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;</span>
 token_simple          &lt;-<span class="st"> &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;</span>
@@ -86,13 +83,15 @@ token_longitudinal    &lt;-<span class="st"> &quot;0434F0E9CF53ED0587847AB6E51DE
 </div>
 <div id="converting-from-talllong-to-wide" class="section level3">
 <h3>Converting from tall/long to wide</h3>
-<p>Occasionally we’re asked for a longitudinal dataset to be converted from a “long/tall format” (where typically each row is one observation for a participant) to a “wide format” (where each row is on participant). Usually we advise against it. Besides all the database benefits of a long structure, a wide structure restricts your options with the stat routine. No modern longitudinal analysis procedures (eg, growth curve models or multilevel/hierarchical models) accept wide. You’re pretty much stuck with repeated measures anova, which is very inflexible for real-world medical-ish analyses. It requires a patient to have a measurement at every time point; otherwise the anova excludes the patient entirely.</p>
-<p>But we like going wide to produce visual tables for publications, and here’s one way to do it in R. First retrieve the dataset from REDCap.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(magrittr); <span class="kw">requireNamespace</span>(<span class="kw">c</span>(<span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;tidyr&quot;</span>))
+<p><em>Disclaimer</em>: Occasionally we’re asked for a longitudinal dataset to be converted from a “long/tall format” (where typically each row is one observation for a participant) to a “wide format” (where each row is on participant). Usually we advise against it. Besides all the database benefits of a long structure, a wide structure restricts your options with the stat routine. No modern longitudinal analysis procedures (eg, growth curve models or multilevel/hierarchical models) accept wide. You’re pretty much stuck with repeated measures anova, which is very inflexible for real-world medical-ish analyses. It requires a patient to have a measurement at every time point; otherwise the anova excludes the patient entirely.</p>
+<p>However we like going wide to produce visual tables for publications, and here’s one way to do it in R. First retrieve the dataset from REDCap.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(magrittr); 
+<span class="kw">suppressPackageStartupMessages</span>(<span class="kw">requireNamespace</span>(<span class="st">&quot;dplyr&quot;</span>))
+<span class="kw">suppressPackageStartupMessages</span>(<span class="kw">requireNamespace</span>(<span class="st">&quot;tidyr&quot;</span>))
 events_to_retain  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;dose_1_arm_1&quot;</span>, <span class="st">&quot;visit_1_arm_1&quot;</span>, <span class="st">&quot;dose_2_arm_1&quot;</span>, <span class="st">&quot;visit_2_arm_1&quot;</span>)
 
 ds_long &lt;-<span class="st"> </span>REDCapR::<span class="kw">redcap_read_oneshot</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token_longitudinal)$data</code></pre></div>
-<pre><code>18 records and 125 columns were read from REDCap in 0.9 seconds.  The http status code was 200.</code></pre>
+<pre><code>18 records and 125 columns were read from REDCap in 0.7 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_long %&gt;%<span class="st"> </span>
 <span class="st">  </span>dplyr::<span class="kw">select</span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)</code></pre></div>
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -482,7 +481,7 @@ NA
 </tr>
 </tbody>
 </table>
-<p>When you’re widening only one variable (eg, <code>pmq1</code>), the code’s pretty simple:</p>
+<p>When widening only one variable (eg, <code>pmq1</code>), the code’s pretty simple:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_wide &lt;-<span class="st"> </span>ds_long %&gt;%<span class="st"> </span>
 <span class="st">  </span>dplyr::<span class="kw">select</span>(study_id, redcap_event_name, pmq1) %&gt;%<span class="st"> </span>
 <span class="st">  </span>dplyr::<span class="kw">filter</span>(redcap_event_name %in%<span class="st"> </span>events_to_retain) %&gt;%<span class="st"> </span>
@@ -546,7 +545,425 @@ visit 2 arm 1
 </tr>
 </tbody>
 </table>
-</div>
+<p>When widening more than one variable (eg, <code>pmq1</code> - <code>pmq4</code>), it’s usually easiest to go even longer/taller (eg, <code>ds_eav</code>) before reversing direction and going wide:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pattern &lt;-<span class="st"> &quot;^(</span><span class="ch">\\</span><span class="st">w+?)_arm_(</span><span class="ch">\\</span><span class="st">d)$&quot;</span>
+
+ds_eav &lt;-<span class="st"> </span>ds_long %&gt;%<span class="st"> </span>
+<span class="st">  </span>dplyr::<span class="kw">select</span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4) %&gt;%<span class="st"> </span>
+<span class="st">  </span>dplyr::<span class="kw">mutate</span>(
+    <span class="dt">event      =</span> <span class="kw">sub</span>(pattern, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>, redcap_event_name),
+    <span class="dt">arm        =</span> <span class="kw">as.integer</span>(<span class="kw">sub</span>(pattern, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">2&quot;</span>, redcap_event_name))
+  ) %&gt;%<span class="st"> </span>
+<span class="st">  </span>dplyr::<span class="kw">select</span>(study_id, event, arm, pmq1, pmq2, pmq3, pmq4) %&gt;%<span class="st"> </span>
+<span class="st">  </span>tidyr::<span class="kw">gather</span>(<span class="dt">key=</span>key, <span class="dt">value=</span>value, pmq1, pmq2, pmq3, pmq4) %&gt;%<span class="st"> </span>
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(!(event %in%<span class="st"> </span><span class="kw">c</span>(
+    <span class="st">&quot;enrollment&quot;</span>, <span class="st">&quot;final_visit&quot;</span>, <span class="st">&quot;deadline_to_return&quot;</span>, <span class="st">&quot;deadline_to_opt_ou&quot;</span>)
+  )) %&gt;%<span class="st"> </span>
+<span class="st">  </span>dplyr::<span class="kw">mutate</span>( <span class="co"># Simulate correcting for mismatched names across arms:</span>
+    <span class="dt">event =</span> dplyr::<span class="kw">recode</span>(event, <span class="st">&quot;first_dose&quot;</span>=<span class="st">&quot;dose_1&quot;</span>, <span class="st">&quot;first_visit&quot;</span>=<span class="st">&quot;visit_1&quot;</span>),
+    <span class="dt">key =</span> <span class="kw">paste0</span>(event, <span class="st">&quot;_&quot;</span>, key)
+  ) %&gt;%<span class="st"> </span>
+<span class="st">  </span>dplyr::<span class="kw">select</span>(-event)
+
+<span class="co"># Show the first 10 rows of the EAV table.</span>
+ds_eav %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">10</span>)</code></pre></div>
+<?xml version="1.0" encoding="UTF-8" ?>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+study id
+</th>
+<th style="text-align:right;">
+arm
+</th>
+<th style="text-align:left;">
+key
+</th>
+<th style="text-align:right;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+dose_1_pmq1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+visit_1_pmq1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+dose_2_pmq1
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+visit_2_pmq1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+220
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+dose_1_pmq1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+220
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+visit_1_pmq1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+220
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+dose_2_pmq1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+220
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+visit_2_pmq1
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+304
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+dose_1_pmq1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+304
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+visit_1_pmq1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Spread the EAV to wide.</span>
+ds_wide &lt;-<span class="st"> </span>ds_eav %&gt;%<span class="st"> </span>
+<span class="st">  </span>tidyr::<span class="kw">spread</span>(<span class="dt">key=</span>key, <span class="dt">value=</span>value)
+ds_wide</code></pre></div>
+<?xml version="1.0" encoding="UTF-8" ?>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+study id
+</th>
+<th style="text-align:right;">
+arm
+</th>
+<th style="text-align:right;">
+dose 1 pmq1
+</th>
+<th style="text-align:right;">
+dose 1 pmq2
+</th>
+<th style="text-align:right;">
+dose 1 pmq3
+</th>
+<th style="text-align:right;">
+dose 1 pmq4
+</th>
+<th style="text-align:right;">
+dose 2 pmq1
+</th>
+<th style="text-align:right;">
+dose 2 pmq2
+</th>
+<th style="text-align:right;">
+dose 2 pmq3
+</th>
+<th style="text-align:right;">
+dose 2 pmq4
+</th>
+<th style="text-align:right;">
+visit 1 pmq1
+</th>
+<th style="text-align:right;">
+visit 1 pmq2
+</th>
+<th style="text-align:right;">
+visit 1 pmq3
+</th>
+<th style="text-align:right;">
+visit 1 pmq4
+</th>
+<th style="text-align:right;">
+visit 2 pmq1
+</th>
+<th style="text-align:right;">
+visit 2 pmq2
+</th>
+<th style="text-align:right;">
+visit 2 pmq3
+</th>
+<th style="text-align:right;">
+visit 2 pmq4
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+220
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+304
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="session-information" class="section level2">
 <h2>Session Information</h2>
@@ -567,6 +984,7 @@ visit 2 arm 1
  backports    1.0.5      2017-01-18 CRAN (R 3.3.1)
  crayon       1.3.2      2016-06-28 CRAN (R 3.3.1)
  curl         2.4        2017-03-24 CRAN (R 3.3.3)
+ data.table   1.10.4     2017-02-01 CRAN (R 3.3.1)
  DBI          0.6        2017-03-09 CRAN (R 3.3.1)
  devtools     1.12.0     2016-06-24 CRAN (R 3.3.1)
  digest       0.6.12     2017-01-27 CRAN (R 3.3.1)
@@ -586,6 +1004,7 @@ visit 2 arm 1
  rmarkdown    1.4        2017-03-24 CRAN (R 3.3.3)
  rprojroot    1.2        2017-01-16 CRAN (R 3.3.1)
  rsconnect    0.7        2016-12-21 CRAN (R 3.3.1)
+ rstudioapi   0.6        2016-06-27 CRAN (R 3.3.1)
  rvest        0.3.2      2016-06-17 CRAN (R 3.3.1)
  selectr      0.3-1      2016-12-19 CRAN (R 3.3.1)
  stringi      1.1.3      2017-03-21 CRAN (R 3.3.1)
@@ -598,7 +1017,7 @@ visit 2 arm 1
  xml2         1.1.1      2017-01-24 CRAN (R 3.3.1)
  yaml         2.1.14     2016-11-12 CRAN (R 3.3.1)</code></pre>
 <p></details></p>
-<p>Report rendered by wibeasley at 2017-03-29, 01:11 -0500 in 1 seconds.</p>
+<p>Report rendered by wibeasley at 2017-03-29, 01:44 -0500 in 1 seconds.</p>
 </div>
 
 
