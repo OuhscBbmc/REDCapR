@@ -26,6 +26,8 @@ running
 (make sure \href{https://cran.r-project.org/package=devtools}{devtools} is already installed).
 If you're having trouble with the package, please install the development version.  If this doesn't solve
 your problem, please create a \href{https://github.com/OuhscBbmc/REDCapR/issues}{new issue}, or email Will.
+
+See REDCapR's advanced vignette for information and examples for overriding the default SSL options.
 }
 \examples{
 \dontrun{

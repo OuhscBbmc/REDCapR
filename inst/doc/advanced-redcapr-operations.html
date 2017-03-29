@@ -73,16 +73,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <p>This vignette covers the the less-typical uses of <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> to interact with <a href="http://www.project-redcap.org/">REDCap</a> through its API.</p>
-<div id="set-project-wide-values." class="section level3">
-<h3>Set project-wide values.</h3>
+<div id="set-project-wide-values." class="section level2">
+<h2>Set project-wide values.</h2>
 <p>There is some information that is specific to a REDCap project, as opposed to an individual operation. This includes the (1) uri of the server, and the (2) token for the user’s project. This is hosted on a machine used in REDCapR’s public test suite, so you can run this example from any computer. Unless tests are running.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(REDCapR) <span class="co">#Load the package into the current R session.</span>
 uri                   &lt;-<span class="st"> &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;</span>
 token_simple          &lt;-<span class="st"> &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;</span>
 token_longitudinal    &lt;-<span class="st"> &quot;0434F0E9CF53ED0587847AB6E51DE762&quot;</span></code></pre></div>
 </div>
-<div id="converting-from-talllong-to-wide" class="section level3">
-<h3>Converting from tall/long to wide</h3>
+<div id="converting-from-talllong-to-wide" class="section level2">
+<h2>Converting from tall/long to wide</h2>
 <p><em>Disclaimer</em>: Occasionally we’re asked for a longitudinal dataset to be converted from a “long/tall format” (where typically each row is one observation for a participant) to a “wide format” (where each row is on participant). Usually we advise against it. Besides all the database benefits of a long structure, a wide structure restricts your options with the stat routine. No modern longitudinal analysis procedures (eg, growth curve models or multilevel/hierarchical models) accept wide. You’re pretty much stuck with repeated measures anova, which is very inflexible for real-world medical-ish analyses. It requires a patient to have a measurement at every time point; otherwise the anova excludes the patient entirely.</p>
 <p>However we like going wide to produce visual tables for publications, and here’s one way to do it in R. First retrieve the dataset from REDCap.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(magrittr); 
@@ -91,7 +91,7 @@ token_longitudinal    &lt;-<span class="st"> &quot;0434F0E9CF53ED0587847AB6E51DE
 events_to_retain  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;dose_1_arm_1&quot;</span>, <span class="st">&quot;visit_1_arm_1&quot;</span>, <span class="st">&quot;dose_2_arm_1&quot;</span>, <span class="st">&quot;visit_2_arm_1&quot;</span>)
 
 ds_long &lt;-<span class="st"> </span>REDCapR::<span class="kw">redcap_read_oneshot</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token_longitudinal)$data</code></pre></div>
-<pre><code>18 records and 125 columns were read from REDCap in 0.7 seconds.  The http status code was 200.</code></pre>
+<pre><code>18 records and 125 columns were read from REDCap in 0.6 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_long %&gt;%<span class="st"> </span>
 <span class="st">  </span>dplyr::<span class="kw">select</span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)</code></pre></div>
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -965,6 +965,37 @@ NA
 </tbody>
 </table>
 </div>
+<div id="ssl-options" class="section level2">
+<h2>SSL Options</h2>
+<p>The official <a href="http://curl.haxx.se">cURL site</a> discusses the process of using SSL to verify the server being connected to.</p>
+<p>Use the SSL cert file that come with the <code>openssl</code> package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cert_location &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;cacert.pem&quot;</span>, <span class="dt">package=</span><span class="st">&quot;openssl&quot;</span>)
+if( <span class="kw">file.exists</span>(cert_location) ) {
+  config_options         &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">cainfo=</span>cert_location)
+  ds_different_cert_file &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</span>(
+    <span class="dt">redcap_uri     =</span> uri,
+    <span class="dt">token          =</span> token,
+    <span class="dt">config_options =</span> config_options
+  )$data
+}</code></pre></div>
+<pre><code>5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<p>Force the connection to use SSL=3 (which is not preferred, and possibly insecure).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">config_options &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">sslversion=</span><span class="dv">3</span>)
+ds_ssl_3 &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</span>(
+  <span class="dt">redcap_uri     =</span> uri,
+  <span class="dt">token          =</span> token,
+  <span class="dt">config_options =</span> config_options
+)$data</code></pre></div>
+<pre><code>5 records and 24 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">config_options &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)
+ds_no_ssl &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</span>(
+   <span class="dt">redcap_uri     =</span> uri,
+   <span class="dt">token          =</span> token,
+   <span class="dt">config_options =</span> config_options
+)$data</code></pre></div>
+<pre><code>5 records and 24 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<p>}</p>
+</div>
 <div id="session-information" class="section level2">
 <h2>Session Information</h2>
 <p>For the sake of documentation and reproducibility, the current report was rendered in the following environment. Click the line below to expand.</p>
@@ -1017,7 +1048,7 @@ NA
  xml2         1.1.1      2017-01-24 CRAN (R 3.3.1)
  yaml         2.1.14     2016-11-12 CRAN (R 3.3.1)</code></pre>
 <p></details></p>
-<p>Report rendered by wibeasley at 2017-03-29, 01:44 -0500 in 1 seconds.</p>
+<p>Report rendered by wibeasley at 2017-03-29, 01:59 -0500 in 2 seconds.</p>
 </div>
 
 

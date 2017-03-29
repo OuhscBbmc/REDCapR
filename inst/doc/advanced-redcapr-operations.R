@@ -80,6 +80,32 @@ ds_wide <- ds_eav %>%
   tidyr::spread(key=key, value=value)
 ds_wide
 
+## ------------------------------------------------------------------------
+cert_location <- system.file("cacert.pem", package="openssl")
+if( file.exists(cert_location) ) {
+  config_options         <- list(cainfo=cert_location)
+  ds_different_cert_file <- redcap_read_oneshot(
+    redcap_uri     = uri,
+    token          = token,
+    config_options = config_options
+  )$data
+}
+
+## ------------------------------------------------------------------------
+config_options <- list(sslversion=3)
+ds_ssl_3 <- redcap_read_oneshot(
+  redcap_uri     = uri,
+  token          = token,
+  config_options = config_options
+)$data
+
+config_options <- list(ssl.verifypeer=FALSE)
+ds_no_ssl <- redcap_read_oneshot(
+   redcap_uri     = uri,
+   token          = token,
+   config_options = config_options
+)$data
+
 ## ----session-info, echo=FALSE--------------------------------------------
 if( requireNamespace("devtools", quietly = TRUE) ) {
   devtools::session_info()

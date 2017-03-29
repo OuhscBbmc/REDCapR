@@ -55,8 +55,6 @@
 #' https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
 #' for the wiki, please ask your campus REDCap administrator to send you the static material.
 #'
-#' The official [cURL site](http://curl.haxx.se) discusses the process of using SSL to verify the server being connected to.
-#'
 #' @examples
 #' \dontrun{
 #' library(REDCapR) #Load the package into the current R session.

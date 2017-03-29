@@ -43,7 +43,7 @@ knit_print.data.frame = function(x, ...) {
 }
 ```
 
-### Set project-wide values.
+## Set project-wide values.
 There is some information that is specific to a REDCap project, as opposed to an individual operation.  This includes the (1) uri of the server, and the (2) token for the user's project.  This is hosted on a machine used in REDCapR's public test suite, so you can run this example from any computer.  Unless tests are running.
 
 ```{r project_values}
@@ -53,7 +53,7 @@ token_simple          <- "9A81268476645C4E5F03428B8AC3AA7B"
 token_longitudinal    <- "0434F0E9CF53ED0587847AB6E51DE762"
 ```
 
-### Converting from tall/long to wide
+## Converting from tall/long to wide
 *Disclaimer*: Occasionally we're asked for a longitudinal dataset to be converted from a "long/tall format" (where  typically each row is one observation for a participant) to a "wide format" (where each row is on participant).  Usually we advise against it.  Besides all the database benefits of a long structure, a wide structure restricts your options with the stat routine.  No modern longitudinal analysis procedures (eg, growth curve models or multilevel/hierarchical models) accept wide.  You're pretty much stuck with repeated measures anova, which is very inflexible for real-world medical-ish analyses.  It requires a patient to have a measurement at every time point; otherwise the anova excludes the patient entirely.
 
 However we like going wide to produce visual tables for publications, and here's one way to do it in R. First retrieve the dataset from REDCap.
@@ -109,6 +109,44 @@ ds_wide <- ds_eav %>%
 ds_wide
 ```
   
+  
+## SSL Options
+
+The official [cURL site](http://curl.haxx.se) discusses the process of using SSL to verify the server being connected to.
+
+Use the SSL cert file that come with the `openssl` package.  
+
+```{r}
+cert_location <- system.file("cacert.pem", package="openssl")
+if( file.exists(cert_location) ) {
+  config_options         <- list(cainfo=cert_location)
+  ds_different_cert_file <- redcap_read_oneshot(
+    redcap_uri     = uri,
+    token          = token,
+    config_options = config_options
+  )$data
+}
+```
+
+Force the connection to use SSL=3 (which is not preferred, and possibly insecure).
+```{r}
+config_options <- list(sslversion=3)
+ds_ssl_3 <- redcap_read_oneshot(
+  redcap_uri     = uri,
+  token          = token,
+  config_options = config_options
+)$data
+
+config_options <- list(ssl.verifypeer=FALSE)
+ds_no_ssl <- redcap_read_oneshot(
+   redcap_uri     = uri,
+   token          = token,
+   config_options = config_options
+)$data
+```
+}
+
+
 ## Session Information
 For the sake of documentation and reproducibility, the current report was rendered in the following environment.  Click the line below to expand.
 
