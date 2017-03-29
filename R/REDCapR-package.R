@@ -25,6 +25,10 @@
 #' (make sure [devtools](https://cran.r-project.org/package=devtools) is already installed).
 #' If you're having trouble with the package, please install the development version.  If this doesn't solve
 #' your problem, please create a [new issue](https://github.com/OuhscBbmc/REDCapR/issues), or email Will.
+#'
+#'
+#' See REDCapR's advanced vignette for information and examples for overriding the default SSL options.
+#'
 #' @examples
 #' \dontrun{
 #' # Install/update REDCapR with the release version from CRAN.
