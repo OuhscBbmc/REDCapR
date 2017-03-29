@@ -91,7 +91,7 @@ token_longitudinal    &lt;-<span class="st"> &quot;0434F0E9CF53ED0587847AB6E51DE
 events_to_retain  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;dose_1_arm_1&quot;</span>, <span class="st">&quot;visit_1_arm_1&quot;</span>, <span class="st">&quot;dose_2_arm_1&quot;</span>, <span class="st">&quot;visit_2_arm_1&quot;</span>)
 
 ds_long &lt;-<span class="st"> </span>REDCapR::<span class="kw">redcap_read_oneshot</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token_longitudinal)$data</code></pre></div>
-<pre><code>18 records and 125 columns were read from REDCap in 0.6 seconds.  The http status code was 200.</code></pre>
+<pre><code>18 records and 125 columns were read from REDCap in 0.7 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_long %&gt;%<span class="st"> </span>
 <span class="st">  </span>dplyr::<span class="kw">select</span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)</code></pre></div>
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -974,27 +974,26 @@ if( <span class="kw">file.exists</span>(cert_location) ) {
   config_options         &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">cainfo=</span>cert_location)
   ds_different_cert_file &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</span>(
     <span class="dt">redcap_uri     =</span> uri,
-    <span class="dt">token          =</span> token,
+    <span class="dt">token          =</span> token_simple,
     <span class="dt">config_options =</span> config_options
   )$data
 }</code></pre></div>
-<pre><code>5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 24 columns were read from REDCap in 0.7 seconds.  The http status code was 200.</code></pre>
 <p>Force the connection to use SSL=3 (which is not preferred, and possibly insecure).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">config_options &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">sslversion=</span><span class="dv">3</span>)
 ds_ssl_3 &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</span>(
   <span class="dt">redcap_uri     =</span> uri,
-  <span class="dt">token          =</span> token,
+  <span class="dt">token          =</span> token_simple,
   <span class="dt">config_options =</span> config_options
 )$data</code></pre></div>
-<pre><code>5 records and 24 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 24 columns were read from REDCap in 0.6 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">config_options &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)
 ds_no_ssl &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</span>(
    <span class="dt">redcap_uri     =</span> uri,
-   <span class="dt">token          =</span> token,
+   <span class="dt">token          =</span> token_simple,
    <span class="dt">config_options =</span> config_options
 )$data</code></pre></div>
-<pre><code>5 records and 24 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
-<p>}</p>
+<pre><code>5 records and 24 columns were read from REDCap in 1 seconds.  The http status code was 200.</code></pre>
 </div>
 <div id="session-information" class="section level2">
 <h2>Session Information</h2>
@@ -1048,7 +1047,7 @@ ds_no_ssl &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</sp
  xml2         1.1.1      2017-01-24 CRAN (R 3.3.1)
  yaml         2.1.14     2016-11-12 CRAN (R 3.3.1)</code></pre>
 <p></details></p>
-<p>Report rendered by wibeasley at 2017-03-29, 01:59 -0500 in 2 seconds.</p>
+<p>Report rendered by wibeasley at 2017-03-29, 02:15 -0500 in 4 seconds.</p>
 </div>
 
 

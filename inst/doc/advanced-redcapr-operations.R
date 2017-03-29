@@ -86,7 +86,7 @@ if( file.exists(cert_location) ) {
   config_options         <- list(cainfo=cert_location)
   ds_different_cert_file <- redcap_read_oneshot(
     redcap_uri     = uri,
-    token          = token,
+    token          = token_simple,
     config_options = config_options
   )$data
 }
@@ -95,14 +95,14 @@ if( file.exists(cert_location) ) {
 config_options <- list(sslversion=3)
 ds_ssl_3 <- redcap_read_oneshot(
   redcap_uri     = uri,
-  token          = token,
+  token          = token_simple,
   config_options = config_options
 )$data
 
 config_options <- list(ssl.verifypeer=FALSE)
 ds_no_ssl <- redcap_read_oneshot(
    redcap_uri     = uri,
-   token          = token,
+   token          = token_simple,
    config_options = config_options
 )$data
 
