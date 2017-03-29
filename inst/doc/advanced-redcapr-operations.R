@@ -1,0 +1,61 @@
+## ----set_options, echo=FALSE, results='hide'-----------------------------
+report_render_start_time <- Sys.time()
+
+library(knitr)
+library(magrittr)
+requireNamespace("kableExtra")
+
+opts_chunk$set(
+  comment = NA, 
+  tidy    = FALSE
+)
+
+knit_print.data.frame = function(x, ...) {
+  # Adapted from https://cran.r-project.org/web/packages/knitr/vignettes/knit_print.html
+
+  x %>% 
+    kable(
+      col.names = gsub("_", " ", colnames(.)),
+      format = "html"
+    ) %>%
+    kableExtra::kable_styling(
+      bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+      full_width        = FALSE
+    ) %>%
+    c("", "", .) %>% 
+    paste(collapse = "\n") %>% 
+    asis_output()
+  
+}
+
+## ----project_values------------------------------------------------------
+library(REDCapR) #Load the package into the current R session.
+uri                   <- "https://bbmc.ouhsc.edu/redcap/api/"
+token_simple          <- "9A81268476645C4E5F03428B8AC3AA7B"
+token_longitudinal    <- "0434F0E9CF53ED0587847AB6E51DE762"
+
+## ----retrieve-longitudinal, results='hold'-------------------------------
+library(magrittr); requireNamespace(c("dplyr", "tidyr"))
+events_to_retain  <- c("dose_1_arm_1", "visit_1_arm_1", "dose_2_arm_1", "visit_2_arm_1")
+
+ds_long <- REDCapR::redcap_read_oneshot(redcap_uri=uri, token=token_longitudinal)$data
+ds_long %>% 
+  dplyr::select(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)
+
+## ----widen-simple, results='hold'----------------------------------------
+ds_wide <- ds_long %>% 
+  dplyr::select(study_id, redcap_event_name, pmq1) %>% 
+  dplyr::filter(redcap_event_name %in% events_to_retain) %>% 
+  tidyr::spread(key=redcap_event_name, value=pmq1)
+ds_wide
+
+## ----session-info, echo=FALSE--------------------------------------------
+if( requireNamespace("devtools", quietly = TRUE) ) {
+  devtools::session_info()
+} else {
+  sessionInfo()
+} 
+
+## ----session-duration, echo=FALSE----------------------------------------
+report_render_duration_in_seconds <- round(as.numeric(difftime(Sys.time(), report_render_start_time, units="secs")))
+

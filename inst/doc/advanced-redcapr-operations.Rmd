@@ -1,0 +1,98 @@
+---
+title: Advanced REDCapR Operations
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Advanced REDCapR Operations}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+This vignette covers the the basic functions exposed by the [`httr`](https://github.com/hadley/httr) and [`curl`](https://cran.r-project.org/package=curl) packages which allow you to interact with [REDCap](http://www.project-redcap.org/) through its API.
+
+## Reading REDCap Data
+The function `redcap_read_oneshot` uses the [`httr`](https://cran.r-project.org/package=httr) package to call the REDCap API.
+```{r set_options, echo=FALSE, results='hide'}
+report_render_start_time <- Sys.time()
+
+library(knitr)
+library(magrittr)
+requireNamespace("kableExtra")
+
+opts_chunk$set(
+  comment = NA, 
+  tidy    = FALSE
+)
+
+knit_print.data.frame = function(x, ...) {
+  # Adapted from https://cran.r-project.org/web/packages/knitr/vignettes/knit_print.html
+
+  x %>% 
+    kable(
+      col.names = gsub("_", " ", colnames(.)),
+      format = "html"
+    ) %>%
+    kableExtra::kable_styling(
+      bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+      full_width        = FALSE
+    ) %>%
+    c("", "", .) %>% 
+    paste(collapse = "\n") %>% 
+    asis_output()
+  
+}
+```
+
+### Set project-wide values.
+There is some information that is specific to a REDCap project, as opposed to an individual operation.  This includes the (1) uri of the server, and the (2) token for the user's project.
+
+```{r project_values}
+library(REDCapR) #Load the package into the current R session.
+uri                   <- "https://bbmc.ouhsc.edu/redcap/api/"
+token_simple          <- "9A81268476645C4E5F03428B8AC3AA7B"
+token_longitudinal    <- "0434F0E9CF53ED0587847AB6E51DE762"
+```
+
+### Converting from tall/long to wide
+Occasionally we're asked for a longitudinal dataset to be converted from a "long/tall format" (where  typically each row is one observation for a participant) to a "wide format" (where each row is on participant).  Usually we advise against it.  Besides all the database benefits of a long structure, a wide structure restricts your options with the stat routine.  No modern longitudinal analysis procedures (eg, growth curve models or multilevel/hierarchical models) accept wide.  You're pretty much stuck with repeated measures anova, which is very inflexible for real-world medical-ish analyses.  It requires a patient to have a measurement at every time point; otherwise the anova excludes the patient entirely.
+
+But we like going wide to produce visual tables for publications, and here's one way to do it in R. First retrieve the dataset from REDCap.
+```{r retrieve-longitudinal, results='hold'}
+library(magrittr); requireNamespace(c("dplyr", "tidyr"))
+events_to_retain  <- c("dose_1_arm_1", "visit_1_arm_1", "dose_2_arm_1", "visit_2_arm_1")
+
+ds_long <- REDCapR::redcap_read_oneshot(redcap_uri=uri, token=token_longitudinal)$data
+ds_long %>% 
+  dplyr::select(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)
+```
+
+When you're widening only one variable (eg, `pmq1`), the code's pretty simple:
+```{r widen-simple, results='hold'}
+ds_wide <- ds_long %>% 
+  dplyr::select(study_id, redcap_event_name, pmq1) %>% 
+  dplyr::filter(redcap_event_name %in% events_to_retain) %>% 
+  tidyr::spread(key=redcap_event_name, value=pmq1)
+ds_wide
+```
+
+## Session Information
+For the sake of documentation and reproducibility, the current report was rendered in the following environment.  Click the line below to expand.
+
+<details>
+  <summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary>
+```{r session-info, echo=FALSE}
+if( requireNamespace("devtools", quietly = TRUE) ) {
+  devtools::session_info()
+} else {
+  sessionInfo()
+} 
+```
+</details>
+
+```{r session-duration, echo=FALSE}
+report_render_duration_in_seconds <- round(as.numeric(difftime(Sys.time(), report_render_start_time, units="secs")))
+```
+
+Report rendered by `r Sys.info()["user"]` at `r strftime(Sys.time(), "%Y-%m-%d, %H:%M %z")` in `r report_render_duration_in_seconds` seconds.
+
