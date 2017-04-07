@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="date" content="2017-03-29" />
+<meta name="date" content="2017-04-06" />
 
 <title>Advanced REDCapR Operations</title>
 
@@ -68,11 +68,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">Advanced REDCapR Operations</h1>
-<h4 class="date"><em>2017-03-29</em></h4>
+<h4 class="date"><em>2017-04-06</em></h4>
 
 
 
 <p>This vignette covers the the less-typical uses of <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> to interact with <a href="http://www.project-redcap.org/">REDCap</a> through its API.</p>
+<div id="nextsteps" class="section level2 emphasized">
+<h2>Next Steps</h2>
+</div>
 <div id="set-project-wide-values." class="section level2">
 <h2>Set project-wide values.</h2>
 <p>There is some information that is specific to a REDCap project, as opposed to an individual operation. This includes the (1) uri of the server, and the (2) token for the user’s project. This is hosted on a machine used in REDCapR’s public test suite, so you can run this example from any computer. Unless tests are running.</p>
@@ -91,7 +94,7 @@ token_longitudinal    &lt;-<span class="st"> &quot;0434F0E9CF53ED0587847AB6E51DE
 events_to_retain  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;dose_1_arm_1&quot;</span>, <span class="st">&quot;visit_1_arm_1&quot;</span>, <span class="st">&quot;dose_2_arm_1&quot;</span>, <span class="st">&quot;visit_2_arm_1&quot;</span>)
 
 ds_long &lt;-<span class="st"> </span>REDCapR::<span class="kw">redcap_read_oneshot</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token_longitudinal)$data</code></pre></div>
-<pre><code>18 records and 125 columns were read from REDCap in 0.7 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 1.4 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_long %&gt;%<span class="st"> </span>
 <span class="st">  </span>dplyr::<span class="kw">select</span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)</code></pre></div>
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -978,7 +981,7 @@ if( <span class="kw">file.exists</span>(cert_location) ) {
     <span class="dt">config_options =</span> config_options
   )$data
 }</code></pre></div>
-<pre><code>5 records and 24 columns were read from REDCap in 0.7 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.6 seconds.  The http status code was 200.</code></pre>
 <p>Force the connection to use SSL=3 (which is not preferred, and possibly insecure).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">config_options &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">sslversion=</span><span class="dv">3</span>)
 ds_ssl_3 &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</span>(
@@ -986,68 +989,63 @@ ds_ssl_3 &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</spa
   <span class="dt">token          =</span> token_simple,
   <span class="dt">config_options =</span> config_options
 )$data</code></pre></div>
-<pre><code>5 records and 24 columns were read from REDCap in 0.6 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">config_options &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)
 ds_no_ssl &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</span>(
    <span class="dt">redcap_uri     =</span> uri,
    <span class="dt">token          =</span> token_simple,
    <span class="dt">config_options =</span> config_options
 )$data</code></pre></div>
-<pre><code>5 records and 24 columns were read from REDCap in 1 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
 </div>
 <div id="session-information" class="section level2">
 <h2>Session Information</h2>
 <p>For the sake of documentation and reproducibility, the current report was rendered in the following environment. Click the line below to expand.</p>
 <p><details> <summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary></p>
-<pre><code>Session info --------------------------------------------------------------</code></pre>
-<pre><code> setting  value                       
- version  R version 3.3.3 (2017-03-06)
- system   x86_64, linux-gnu           
- ui       RStudio (1.0.136)           
- language en_US                       
- collate  en_US.UTF-8                 
- tz       America/Chicago             
- date     2017-03-29                  </code></pre>
-<pre><code>Packages ------------------------------------------------------------------</code></pre>
-<pre><code> package    * version    date       source        
- assertthat   0.1        2013-12-06 CRAN (R 3.3.0)
- backports    1.0.5      2017-01-18 CRAN (R 3.3.1)
- crayon       1.3.2      2016-06-28 CRAN (R 3.3.1)
- curl         2.4        2017-03-24 CRAN (R 3.3.3)
- data.table   1.10.4     2017-02-01 CRAN (R 3.3.1)
- DBI          0.6        2017-03-09 CRAN (R 3.3.1)
- devtools     1.12.0     2016-06-24 CRAN (R 3.3.1)
- digest       0.6.12     2017-01-27 CRAN (R 3.3.1)
- dplyr        0.5.0      2016-06-24 CRAN (R 3.3.3)
- evaluate     0.10       2016-10-11 CRAN (R 3.3.1)
- highr        0.6        2016-05-09 CRAN (R 3.3.0)
- htmltools    0.3.5      2016-03-21 CRAN (R 3.3.0)
- httr         1.2.1      2016-07-03 CRAN (R 3.3.1)
- kableExtra   0.1.0      2017-03-02 CRAN (R 3.3.1)
- knitr      * 1.15.1     2016-11-22 CRAN (R 3.3.1)
- lazyeval     0.2.0      2016-06-12 CRAN (R 3.3.0)
- magrittr   * 1.5        2014-11-22 CRAN (R 3.3.0)
- memoise      1.0.0      2016-01-29 CRAN (R 3.3.0)
- R6           2.2.0      2016-10-05 CRAN (R 3.3.1)
- Rcpp         0.12.10    2017-03-19 CRAN (R 3.3.1)
- REDCapR    * 0.9.7.9002 2017-03-28 local         
- rmarkdown    1.4        2017-03-24 CRAN (R 3.3.3)
- rprojroot    1.2        2017-01-16 CRAN (R 3.3.1)
- rsconnect    0.7        2016-12-21 CRAN (R 3.3.1)
- rstudioapi   0.6        2016-06-27 CRAN (R 3.3.1)
- rvest        0.3.2      2016-06-17 CRAN (R 3.3.1)
- selectr      0.3-1      2016-12-19 CRAN (R 3.3.1)
- stringi      1.1.3      2017-03-21 CRAN (R 3.3.1)
- stringr      1.2.0      2017-02-18 CRAN (R 3.3.1)
- testthat     1.0.2      2016-04-23 CRAN (R 3.3.0)
- tibble       1.2        2016-08-26 CRAN (R 3.3.1)
- tidyr        0.6.1      2017-01-10 CRAN (R 3.3.1)
- withr        1.0.2      2016-06-20 CRAN (R 3.3.0)
- XML          3.98-1.5   2016-11-10 CRAN (R 3.3.1)
- xml2         1.1.1      2017-01-24 CRAN (R 3.3.1)
- yaml         2.1.14     2016-11-12 CRAN (R 3.3.1)</code></pre>
+<pre><code>#&gt; Session info --------------------------------------------------------------</code></pre>
+<pre><code>#&gt;  setting  value                       
+#&gt;  version  R version 3.3.3 (2017-03-06)
+#&gt;  system   x86_64, linux-gnu           
+#&gt;  ui       RStudio (1.0.136)           
+#&gt;  language en_US                       
+#&gt;  collate  en_US.UTF-8                 
+#&gt;  tz       America/Chicago             
+#&gt;  date     2017-04-06</code></pre>
+<pre><code>#&gt; Packages ------------------------------------------------------------------</code></pre>
+<pre><code>#&gt;  package    * version    date       source                            
+#&gt;  assertthat   0.1        2013-12-06 CRAN (R 3.3.0)                    
+#&gt;  backports    1.0.5      2017-01-18 CRAN (R 3.3.1)                    
+#&gt;  curl         2.4        2017-03-24 CRAN (R 3.3.3)                    
+#&gt;  DBI          0.6-1      2017-04-01 CRAN (R 3.3.3)                    
+#&gt;  devtools     1.12.0     2016-06-24 CRAN (R 3.3.1)                    
+#&gt;  digest       0.6.12     2017-01-27 CRAN (R 3.3.1)                    
+#&gt;  dplyr        0.5.0      2016-06-24 CRAN (R 3.3.3)                    
+#&gt;  evaluate     0.10       2016-10-11 CRAN (R 3.3.1)                    
+#&gt;  highr        0.6        2016-05-09 CRAN (R 3.3.0)                    
+#&gt;  htmltools    0.3.5      2016-03-21 CRAN (R 3.3.0)                    
+#&gt;  httr         1.2.1      2016-07-03 CRAN (R 3.3.1)                    
+#&gt;  kableExtra   0.1.0      2017-03-02 CRAN (R 3.3.1)                    
+#&gt;  knitr      * 1.15.1     2016-11-22 CRAN (R 3.3.1)                    
+#&gt;  lazyeval     0.2.0      2016-06-12 CRAN (R 3.3.0)                    
+#&gt;  magrittr   * 1.5        2014-11-22 CRAN (R 3.3.0)                    
+#&gt;  memoise      1.0.0      2016-01-29 CRAN (R 3.3.0)                    
+#&gt;  R6           2.2.0      2016-10-05 CRAN (R 3.3.1)                    
+#&gt;  Rcpp         0.12.10    2017-03-19 CRAN (R 3.3.1)                    
+#&gt;  REDCapR    * 0.9.7.9002 2017-03-28 local                             
+#&gt;  rmarkdown    1.4.0.9000 2017-04-01 Github (rstudio/rmarkdown@5f7cd3c)
+#&gt;  rprojroot    1.2        2017-01-16 CRAN (R 3.3.1)                    
+#&gt;  rvest        0.3.2      2016-06-17 CRAN (R 3.3.1)                    
+#&gt;  selectr      0.3-1      2016-12-19 CRAN (R 3.3.1)                    
+#&gt;  stringi      1.1.3      2017-03-21 CRAN (R 3.3.1)                    
+#&gt;  stringr      1.2.0      2017-02-18 CRAN (R 3.3.1)                    
+#&gt;  tibble       1.3.0      2017-04-01 CRAN (R 3.3.3)                    
+#&gt;  tidyr        0.6.1      2017-01-10 CRAN (R 3.3.1)                    
+#&gt;  withr        1.0.2      2016-06-20 CRAN (R 3.3.0)                    
+#&gt;  XML          3.98-1.6   2017-03-30 CRAN (R 3.3.3)                    
+#&gt;  xml2         1.1.1      2017-01-24 CRAN (R 3.3.1)                    
+#&gt;  yaml         2.1.14     2016-11-12 CRAN (R 3.3.1)</code></pre>
 <p></details></p>
-<p>Report rendered by wibeasley at 2017-03-29, 02:15 -0500 in 4 seconds.</p>
+<p>Report rendered by wibeasley at 2017-04-06, 21:21 -0500 in 4 seconds.</p>
 </div>
 
 
