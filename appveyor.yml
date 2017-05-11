@@ -13,7 +13,6 @@ install:
 
 build_script:
   - travis-tool.sh install_deps
-  - travis-tool.sh install_github jeroen/curl
   - travis-tool.sh install_github tidyverse/dplyr
 
 test_script:
