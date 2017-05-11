@@ -6,14 +6,17 @@ library(magrittr)
 suppressPackageStartupMessages(requireNamespace("kableExtra"))
 
 opts_chunk$set(
-  comment = NA, 
+  comment = "#>", 
+  # collapse = TRUE, 
   tidy    = FALSE
 )
 
+# knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
 knit_print.data.frame = function(x, ...) {
   # Adapted from https://cran.r-project.org/web/packages/knitr/vignettes/knit_print.html
 
   x %>% 
+    # rmarkdown::print.paged_df() %>% 
     kable(
       col.names = gsub("_", " ", colnames(.)),
       format = "html"
@@ -22,8 +25,8 @@ knit_print.data.frame = function(x, ...) {
       bootstrap_options = c("striped", "hover", "condensed", "responsive"),
       full_width        = FALSE
     ) %>%
-    c("", "", .) %>% 
-    paste(collapse = "\n") %>% 
+    c("", "", .) %>%
+    paste(collapse = "\n") %>%
     asis_output()
   
 }

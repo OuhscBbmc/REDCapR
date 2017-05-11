@@ -2,7 +2,9 @@
 title: Advanced REDCapR Operations
 date: "`r Sys.Date()`"
 output: 
-  rmarkdown::html_vignette
+  rmarkdown::html_vignette:
+    # css: styles.css
+
 vignette: >
   %\VignetteIndexEntry{Advanced REDCapR Operations}
   %\VignetteEngine{knitr::rmarkdown}
@@ -20,14 +22,17 @@ library(magrittr)
 suppressPackageStartupMessages(requireNamespace("kableExtra"))
 
 opts_chunk$set(
-  comment = NA, 
+  comment = "#>", 
+  # collapse = TRUE, 
   tidy    = FALSE
 )
 
+# knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
 knit_print.data.frame = function(x, ...) {
   # Adapted from https://cran.r-project.org/web/packages/knitr/vignettes/knit_print.html
 
   x %>% 
+    # rmarkdown::print.paged_df() %>% 
     kable(
       col.names = gsub("_", " ", colnames(.)),
       format = "html"
@@ -36,12 +41,13 @@ knit_print.data.frame = function(x, ...) {
       bootstrap_options = c("striped", "hover", "condensed", "responsive"),
       full_width        = FALSE
     ) %>%
-    c("", "", .) %>% 
-    paste(collapse = "\n") %>% 
+    c("", "", .) %>%
+    paste(collapse = "\n") %>%
     asis_output()
   
 }
 ```
+## Next Steps {#nextsteps .emphasized}
 
 ## Set project-wide values.
 There is some information that is specific to a REDCap project, as opposed to an individual operation.  This includes the (1) uri of the server, and the (2) token for the user's project.  This is hosted on a machine used in REDCapR's public test suite, so you can run this example from any computer.  Unless tests are running.
