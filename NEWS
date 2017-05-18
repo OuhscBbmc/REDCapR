@@ -4,7 +4,18 @@ In the future:
 * When converting REDCap's CSV to R's data.frame, `readr::read_csv()` is used instead of `utils::read.csv()` (Issue #127).
 * `redcap_read()` and `redcap_read_oneshot()` allows caller to specify data types for columns.
 
-Versions 0.9.4 through 0.9.6 (Developed 2015-08-26 through)
+
+Versions 0.9.8 (Released 2017-05-18)
+------------------------------------------------------------------------------
+New Features:
+* Enumerate the exported variables. with `redcap_variables()`.
+* Experimental EAV export in `redcap_read_oneshot_eav()`, which can be accessed with a triple colon (ie, `REDCapR::redcap_read_oneshot_eav()`).
+
+Bug Fixes
+* Adapted to new 2.4 version of curl (see #154)
+
+
+Versions 0.9.4 through 0.9.6 (Developed 2015-08-26 through 2017-09-09)
 ------------------------------------------------------------------------------
 New Features:
 * Support for filtering logic in `redcap_read()` and `redcap_read_oneshot()` (PR #126)
