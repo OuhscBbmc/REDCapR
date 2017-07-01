@@ -186,8 +186,11 @@ retrieve_credential_mssql <- function(
     }
   )
 
-  if( nrow(ds_credential) >= 2L )
+  if( nrow(ds_credential) == 0L ) {
+    stop("No credential was found that matched the [username]-by-[instance]-by-[project_id] combination.")
+  } else if( nrow(ds_credential) >= 2L ) {
     stop("No more than one row should be retrieved from the credentials.  The [username]-by-[instance]-by-[project_id] should be unique in the table.")
+  }
 
   # browser()
   credential <- list(
