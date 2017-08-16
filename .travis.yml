@@ -11,9 +11,9 @@ apt_packages:
   - unixodbc-dev
 r_github_packages:
   - jimhester/covr
-  - tidyverse/dplyr
-  - jeroen/curl
-  - r-lib/httr
+# - tidyverse/dplyr
+# - jeroen/curl
+# - r-lib/httr
 # - hadley/testthat
 after_success:
   - Rscript -e 'library(covr);coveralls()'
