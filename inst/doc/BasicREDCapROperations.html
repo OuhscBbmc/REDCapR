@@ -90,11 +90,10 @@ token &lt;-<span class="st"> &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;</span>
 ds_all_rows_all_fields &lt;-<span class="st"> </span><span class="kw">redcap_read</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)$data</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2017-08-21 17:48:23</code></pre>
+<pre><code>Starting to read 5 records  at 2017-08-21 18:09:37</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_all_rows_all_fields <span class="co">#Inspect the returned dataset</span></code></pre></div>
-<?xml version="1.0" encoding="UTF-8" ?>
 <table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -571,7 +570,7 @@ ds_some_rows_v1 &lt;-<span class="st"> </span><span class="kw">redcap_read</span
 )$data</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2017-08-21 17:48:25</code></pre>
+<pre><code>Starting to read 2 records  at 2017-08-21 18:09:38</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return only records with IDs of 1 and 3 (alternate way)</span>
@@ -582,12 +581,11 @@ ds_some_rows_v2 &lt;-<span class="st"> </span><span class="kw">redcap_read</span
    <span class="dt">records_collapsed =</span> desired_records_v2
 )$data</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2017-08-21 17:48:26</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2017-08-21 18:09:40</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_rows_v2 <span class="co">#Inspect the returned dataset</span></code></pre></div>
-<?xml version="1.0" encoding="UTF-8" ?>
 <table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -833,7 +831,7 @@ ds_some_fields_v1 &lt;-<span class="st"> </span><span class="kw">redcap_read</sp
 )$data</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2017-08-21 17:48:27</code></pre>
+<pre><code>Starting to read 5 records  at 2017-08-21 18:09:41</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return only the fields record_id, name_first, and age (alternate way)</span>
@@ -845,11 +843,10 @@ ds_some_fields_v2 &lt;-<span class="st"> </span><span class="kw">redcap_read</sp
 )$data</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2017-08-21 17:48:28</code></pre>
+<pre><code>Starting to read 5 records  at 2017-08-21 18:09:42</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_fields_v2 <span class="co">#Inspect the returned dataset</span></code></pre></div>
-<?xml version="1.0" encoding="UTF-8" ?>
 <table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -936,11 +933,10 @@ ds_some_fields_v3 &lt;-<span class="st"> </span><span class="kw">redcap_read</sp
 )$data</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2017-08-21 17:48:29</code></pre>
+<pre><code>Starting to read 5 records  at 2017-08-21 18:09:43</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_fields_v3 <span class="co">#Examine the these three variables.</span></code></pre></div>
-<?xml version="1.0" encoding="UTF-8" ?>
 <table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1031,11 +1027,10 @@ ds_some_rows_v3 &lt;-<span class="st"> </span><span class="kw">redcap_read</span
 )$data</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2017-08-21 17:48:30</code></pre>
+<pre><code>Starting to read 2 records  at 2017-08-21 18:09:44</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_rows_v3 <span class="co">#Examine the results.</span></code></pre></div>
-<?xml version="1.0" encoding="UTF-8" ?>
 <table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1290,7 +1285,7 @@ all_information &lt;-<span class="st"> </span><span class="kw">redcap_read</span
 )</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2017-08-21 17:48:31</code></pre>
+<pre><code>Starting to read 5 records  at 2017-08-21 18:09:45</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_information <span class="co">#Inspect the additional information</span></code></pre></div>
@@ -1324,7 +1319,7 @@ $events_collapsed
 [1] &quot;&quot;
 
 $elapsed_seconds
-[1] 1.078721</code></pre>
+[1] 1.102033</code></pre>
 </div>
 </div>
 <div id="session-information" class="section level2">
@@ -1343,48 +1338,49 @@ $elapsed_seconds
  date     2017-08-21                                 
 
 - Packages --------------------------------------------------------------
- package     * version    date       source        
- assertthat    0.2.0      2017-04-11 CRAN (R 3.4.1)
- backports     1.1.0      2017-05-22 CRAN (R 3.4.0)
- bindr         0.1        2016-11-13 CRAN (R 3.4.1)
- bindrcpp    * 0.2        2017-06-17 CRAN (R 3.4.1)
- clisymbols    1.2.0      2017-05-21 CRAN (R 3.4.1)
- crayon        1.3.2      2016-06-28 CRAN (R 3.4.1)
- curl          2.8.1      2017-07-21 CRAN (R 3.4.1)
- data.table    1.10.4     2017-02-01 CRAN (R 3.4.0)
- devtools      1.13.2     2017-06-02 CRAN (R 3.4.1)
- digest        0.6.12     2017-01-27 CRAN (R 3.4.1)
- dplyr         0.7.2      2017-07-20 CRAN (R 3.4.1)
- evaluate      0.10.1     2017-06-24 CRAN (R 3.4.1)
- glue          1.1.1      2017-06-21 CRAN (R 3.4.1)
- highr         0.6        2016-05-09 CRAN (R 3.4.1)
- hms           0.3        2016-11-22 CRAN (R 3.4.1)
- htmltools     0.3.6      2017-04-28 CRAN (R 3.4.1)
- httr          1.2.1      2016-07-03 CRAN (R 3.4.1)
- kableExtra    0.3.0      2017-07-04 CRAN (R 3.4.1)
- knitr       * 1.16       2017-05-18 CRAN (R 3.4.1)
- magrittr    * 1.5        2014-11-22 CRAN (R 3.4.1)
- memoise       1.1.0      2017-04-21 CRAN (R 3.4.1)
- pkgconfig     2.0.1      2017-03-21 CRAN (R 3.4.1)
- R6            2.2.2      2017-06-17 CRAN (R 3.4.1)
- Rcpp          0.12.12    2017-07-15 CRAN (R 3.4.1)
- readr         1.1.1      2017-05-16 CRAN (R 3.4.1)
- REDCapR     * 0.9.8.9000 2017-08-21 local         
- rlang         0.1.1      2017-05-18 CRAN (R 3.4.1)
- rmarkdown     1.6        2017-06-15 CRAN (R 3.4.1)
- rprojroot     1.2        2017-01-16 CRAN (R 3.4.1)
- rvest         0.3.2      2016-06-17 CRAN (R 3.4.1)
- sessioninfo   1.0.0      2017-06-21 CRAN (R 3.4.1)
- stringi       1.1.5      2017-04-07 CRAN (R 3.4.0)
- stringr       1.2.0      2017-02-18 CRAN (R 3.4.1)
- testthat      1.0.2      2016-04-23 CRAN (R 3.4.1)
- tibble        1.3.3      2017-05-28 CRAN (R 3.4.1)
- tidyr         0.6.3      2017-05-15 CRAN (R 3.4.1)
- withr         1.0.2      2016-06-20 CRAN (R 3.4.1)
- xml2          1.1.1      2017-01-24 CRAN (R 3.4.1)
- yaml          2.1.14     2016-11-12 CRAN (R 3.4.1)</code></pre>
+ package     * version    date       source                          
+ assertthat    0.2.0      2017-04-11 CRAN (R 3.4.1)                  
+ backports     1.1.0      2017-05-22 CRAN (R 3.4.0)                  
+ bindr         0.1        2016-11-13 CRAN (R 3.4.1)                  
+ bindrcpp    * 0.2        2017-06-17 CRAN (R 3.4.1)                  
+ clisymbols    1.2.0      2017-05-21 CRAN (R 3.4.1)                  
+ curl          2.8.1      2017-07-21 CRAN (R 3.4.1)                  
+ data.table    1.10.4     2017-02-01 CRAN (R 3.4.0)                  
+ devtools      1.13.3     2017-08-02 CRAN (R 3.4.1)                  
+ digest        0.6.12     2017-01-27 CRAN (R 3.4.1)                  
+ dplyr         0.7.2      2017-07-20 CRAN (R 3.4.1)                  
+ evaluate      0.10.1     2017-06-24 CRAN (R 3.4.1)                  
+ git2r         0.19.0     2017-07-19 CRAN (R 3.4.1)                  
+ glue          1.1.1      2017-06-21 CRAN (R 3.4.1)                  
+ highr         0.6        2016-05-09 CRAN (R 3.4.1)                  
+ hms           0.3        2016-11-22 CRAN (R 3.4.1)                  
+ htmltools     0.3.6      2017-04-28 CRAN (R 3.4.1)                  
+ httr          1.3.1      2017-08-20 CRAN (R 3.4.1)                  
+ kableExtra    0.4.0      2017-08-06 CRAN (R 3.4.1)                  
+ knitr       * 1.17       2017-08-10 CRAN (R 3.4.1)                  
+ magrittr    * 1.5        2014-11-22 CRAN (R 3.4.1)                  
+ memoise       1.1.0      2017-04-21 CRAN (R 3.4.1)                  
+ pkgconfig     2.0.1      2017-03-21 CRAN (R 3.4.1)                  
+ purrr         0.2.3      2017-08-02 CRAN (R 3.4.1)                  
+ R6            2.2.2      2017-06-17 CRAN (R 3.4.1)                  
+ Rcpp          0.12.12    2017-07-15 CRAN (R 3.4.1)                  
+ readr         1.1.1      2017-05-16 CRAN (R 3.4.1)                  
+ REDCapR     * 0.9.8.9000 2017-08-21 local                           
+ rlang         0.1.2.9000 2017-08-21 Github (tidyverse/rlang@f20124b)
+ rmarkdown     1.6        2017-06-15 CRAN (R 3.4.1)                  
+ rprojroot     1.2        2017-01-16 CRAN (R 3.4.1)                  
+ rvest         0.3.2      2016-06-17 CRAN (R 3.4.1)                  
+ sessioninfo   1.0.0      2017-06-21 CRAN (R 3.4.1)                  
+ stringi       1.1.5      2017-04-07 CRAN (R 3.4.0)                  
+ stringr       1.2.0      2017-02-18 CRAN (R 3.4.1)                  
+ tibble        1.3.3      2017-05-28 CRAN (R 3.4.1)                  
+ tidyr         0.7.0      2017-08-16 CRAN (R 3.4.1)                  
+ tidyselect    0.1.1      2017-07-24 CRAN (R 3.4.1)                  
+ withr         2.0.0      2017-07-28 CRAN (R 3.4.1)                  
+ xml2          1.1.1      2017-01-24 CRAN (R 3.4.1)                  
+ yaml          2.1.14     2016-11-12 CRAN (R 3.4.1)                  </code></pre>
 <p></details></p>
-<p>Report rendered by Will at 2017-08-21, 17:48 -0500 in 9 seconds.</p>
+<p>Report rendered by Will at 2017-08-21, 18:09 -0500 in 10 seconds.</p>
 </div>
 
 

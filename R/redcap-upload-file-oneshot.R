@@ -41,7 +41,7 @@
 #'
 #' #Upload a single image file.
 #' record    <- 1
-#' file_path <- base::file.path(devtools::inst(name="REDCapR"), paste0("test-data/mugshot-1.jpg"))
+#' file_path <- base::file.path(pkgload::inst(name="REDCapR"), paste0("test-data/mugshot-1.jpg"))
 #'
 #' redcap_upload_file_oneshot(
 #'   file_name=file_path, record=record, field=field,
@@ -51,7 +51,7 @@
 #' #Upload a collection of five images.
 #' records   <- 1:5
 #' file_paths <- base::file.path(
-#'   devtools::inst(name="REDCapR"),
+#'   pkgload::inst(name="REDCapR"),
 #'   paste0("test-data/mugshot-", records, ".jpg")
 #' )
 #'

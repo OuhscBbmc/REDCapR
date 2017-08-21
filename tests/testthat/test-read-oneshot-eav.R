@@ -2,7 +2,7 @@
 # context("Read Oneshot EAV")
 #
 # credential <- REDCapR::retrieve_credential_local(
-#   path_credential = base::file.path(devtools::inst(name="REDCapR"), "misc/example.credentials"),
+#   path_credential = base::file.path(pkgload::inst(name="REDCapR"), "misc/example.credentials"),
 #   project_id      = 153
 # )
 #
@@ -59,7 +59,7 @@
 #   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
 #   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
 #   expect_true(returned_object$success)
-#   #expect_equal_to_reference(returned_object$data, file=base::file.path(devtools::inst(name="REDCapR"), "test-data/project-simple/variations/default.rds") )
+#   #expect_equal_to_reference(returned_object$data, file=base::file.path(pkgload::inst(name="REDCapR"), "test-data/project-simple/variations/default.rds") )
 #   #expect_equal_to_reference(returned_object$data, file="./test-data/project-simple/variations/default.rds")
 # })
 # test_that("All Records -Raw", {

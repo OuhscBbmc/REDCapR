@@ -11,6 +11,7 @@ apt_packages:
   - unixodbc-dev
 r_github_packages:
   - jimhester/covr
+  - r-lib/pkgload
 # - tidyverse/dplyr
 # - jeroen/curl
 # - r-lib/httr

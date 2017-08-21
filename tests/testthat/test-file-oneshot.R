@@ -19,7 +19,7 @@ test_that("NameComesFromREDCap", {
 
   # start_time <- Sys.time() - lubridate::seconds(1) #Knock off a second in case there's small time imprecisions
   start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
-  path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test-data/mugshot-1.jpg")
+  path_of_expected <- base::file.path(pkgload::inst(name="REDCapR"), "test-data/mugshot-1.jpg")
   info_expected <- file.info(path_of_expected)
   record <- 1
   field <- "mugshot"
@@ -70,7 +70,7 @@ test_that("FullPathSpecified", {
   )
 
   start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
-  path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test-data/mugshot-2.jpg")
+  path_of_expected <- base::file.path(pkgload::inst(name="REDCapR"), "test-data/mugshot-2.jpg")
   info_expected <- file.info(path_of_expected)
   record <- 2
   field <- "mugshot"
@@ -121,7 +121,7 @@ test_that("RelativePath", {
   )
 
   start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
-  path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test-data/mugshot-3.jpg")
+  path_of_expected <- base::file.path(pkgload::inst(name="REDCapR"), "test-data/mugshot-3.jpg")
   info_expected <- file.info(path_of_expected)
   record <- 3
   field <- "mugshot"
@@ -172,7 +172,7 @@ test_that("Full Directory Specific", {
   )
 
   start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
-  path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test-data/mugshot-3.jpg")
+  path_of_expected <- base::file.path(pkgload::inst(name="REDCapR"), "test-data/mugshot-3.jpg")
   directory <- getwd()#  base::tempfile()
   info_expected <- file.info(path_of_expected)
   record <- 3
