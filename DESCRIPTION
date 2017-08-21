@@ -48,6 +48,7 @@ Suggests:
     rmarkdown,
     RODBC,
     RODBCext,
+    sessioninfo,
     testthat (>= 0.9)
 License: GPL-2
 LazyData: TRUE

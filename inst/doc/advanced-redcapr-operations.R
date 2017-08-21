@@ -111,7 +111,7 @@ ds_no_ssl <- redcap_read_oneshot(
 
 ## ----session-info, echo=FALSE--------------------------------------------
 if( requireNamespace("devtools", quietly = TRUE) ) {
-  devtools::session_info()
+  sessioninfo::session_info()
 } else {
   sessionInfo()
 } 

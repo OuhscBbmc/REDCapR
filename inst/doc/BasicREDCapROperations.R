@@ -128,7 +128,7 @@ all_information #Inspect the additional information
 
 ## ----session-info, echo=FALSE--------------------------------------------
 if( requireNamespace("devtools", quietly = TRUE) ) {
-  devtools::session_info()
+  sessioninfo::session_info()
 } else {
   sessionInfo()
 } 

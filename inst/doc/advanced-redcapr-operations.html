@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="date" content="2017-05-18" />
+<meta name="date" content="2017-08-21" />
 
 <title>Advanced REDCapR Operations</title>
 
@@ -68,7 +68,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">Advanced REDCapR Operations</h1>
-<h4 class="date"><em>2017-05-18</em></h4>
+<h4 class="date"><em>2017-08-21</em></h4>
 
 
 
@@ -94,7 +94,7 @@ token_longitudinal    &lt;-<span class="st"> &quot;0434F0E9CF53ED0587847AB6E51DE
 events_to_retain  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;dose_1_arm_1&quot;</span>, <span class="st">&quot;visit_1_arm_1&quot;</span>, <span class="st">&quot;dose_2_arm_1&quot;</span>, <span class="st">&quot;visit_2_arm_1&quot;</span>)
 
 ds_long &lt;-<span class="st"> </span>REDCapR::<span class="kw">redcap_read_oneshot</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token_longitudinal)$data</code></pre></div>
-<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.7 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 1.7 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_long %&gt;%<span class="st"> </span>
 <span class="st">  </span>dplyr::<span class="kw">select</span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)</code></pre></div>
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -989,77 +989,72 @@ ds_ssl_3 &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</spa
   <span class="dt">token          =</span> token_simple,
   <span class="dt">config_options =</span> config_options
 )$data</code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">config_options &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)
 ds_no_ssl &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</span>(
    <span class="dt">redcap_uri     =</span> uri,
    <span class="dt">token          =</span> token_simple,
    <span class="dt">config_options =</span> config_options
 )$data</code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 </div>
 <div id="session-information" class="section level2">
 <h2>Session Information</h2>
 <p>For the sake of documentation and reproducibility, the current report was rendered in the following environment. Click the line below to expand.</p>
 <p><details> <summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary></p>
-<pre><code>#&gt; Session info -------------------------------------------------------------</code></pre>
-<pre><code>#&gt;  setting  value                       
-#&gt;  version  R version 3.4.0 (2017-04-21)
-#&gt;  system   x86_64, linux-gnu           
-#&gt;  ui       RStudio (1.0.143)           
-#&gt;  language en_US                       
-#&gt;  collate  en_US.UTF-8                 
-#&gt;  tz       America/Chicago             
-#&gt;  date     2017-05-18</code></pre>
-<pre><code>#&gt; Packages -----------------------------------------------------------------</code></pre>
-<pre><code>#&gt;  package    * version    date       source                           
-#&gt;  assertthat   0.2.0      2017-04-11 CRAN (R 3.4.0)                   
-#&gt;  backports    1.0.5      2017-01-18 CRAN (R 3.3.1)                   
-#&gt;  base       * 3.4.0      2017-04-21 local                            
-#&gt;  bindr        0.1        2016-11-13 cran (@0.1)                      
-#&gt;  bindrcpp   * 0.1        2016-12-11 cran (@0.1)                      
-#&gt;  compiler     3.4.0      2017-04-21 local                            
-#&gt;  crayon       1.3.2      2016-06-28 CRAN (R 3.3.1)                   
-#&gt;  curl         2.6        2017-04-27 CRAN (R 3.4.0)                   
-#&gt;  datasets   * 3.4.0      2017-04-21 local                            
-#&gt;  devtools     1.13.0     2017-05-08 CRAN (R 3.4.0)                   
-#&gt;  digest       0.6.12     2017-01-27 CRAN (R 3.3.1)                   
-#&gt;  dplyr        0.5.0.9005 2017-05-18 Github (tidyverse/dplyr@aece1a5) 
-#&gt;  evaluate     0.10       2016-10-11 CRAN (R 3.3.1)                   
-#&gt;  git2r        0.18.0     2017-01-01 CRAN (R 3.3.1)                   
-#&gt;  glue         1.0.0      2017-04-17 CRAN (R 3.4.0)                   
-#&gt;  graphics   * 3.4.0      2017-04-21 local                            
-#&gt;  grDevices  * 3.4.0      2017-04-21 local                            
-#&gt;  highr        0.6        2016-05-09 CRAN (R 3.3.0)                   
-#&gt;  htmltools    0.3.6      2017-04-28 CRAN (R 3.4.0)                   
-#&gt;  httr         1.2.1      2016-07-03 CRAN (R 3.3.1)                   
-#&gt;  kableExtra   0.1.0      2017-03-02 CRAN (R 3.3.1)                   
-#&gt;  knitr      * 1.15.1     2016-11-22 CRAN (R 3.3.1)                   
-#&gt;  magrittr   * 1.5        2014-11-22 CRAN (R 3.3.0)                   
-#&gt;  memoise      1.1.0      2017-04-21 CRAN (R 3.4.0)                   
-#&gt;  methods    * 3.4.0      2017-04-21 local                            
-#&gt;  R6           2.2.1      2017-05-10 CRAN (R 3.4.0)                   
-#&gt;  Rcpp         0.12.10    2017-03-19 CRAN (R 3.3.1)                   
-#&gt;  REDCapR    * 0.9.7.9002 2017-05-11 local                            
-#&gt;  rlang        0.1        2017-05-06 CRAN (R 3.4.0)                   
-#&gt;  rmarkdown    1.5        2017-04-26 CRAN (R 3.4.0)                   
-#&gt;  rprojroot    1.2        2017-01-16 CRAN (R 3.3.1)                   
-#&gt;  rvest        0.3.2      2016-06-17 CRAN (R 3.3.1)                   
-#&gt;  selectr      0.3-1      2016-12-19 CRAN (R 3.3.1)                   
-#&gt;  stats      * 3.4.0      2017-04-21 local                            
-#&gt;  stringi      1.1.5      2017-04-07 CRAN (R 3.3.3)                   
-#&gt;  stringr      1.2.0      2017-02-18 CRAN (R 3.3.1)                   
-#&gt;  testthat     1.0.2      2016-04-23 CRAN (R 3.3.0)                   
-#&gt;  tibble       1.3.1      2017-05-18 Github (tidyverse/tibble@8f30072)
-#&gt;  tidyr        0.6.2      2017-05-04 CRAN (R 3.4.0)                   
-#&gt;  tools        3.4.0      2017-04-21 local                            
-#&gt;  utils      * 3.4.0      2017-04-21 local                            
-#&gt;  withr        1.0.2      2016-06-20 CRAN (R 3.3.0)                   
-#&gt;  XML          3.98-1.7   2017-05-03 CRAN (R 3.4.0)                   
-#&gt;  xml2         1.1.1      2017-01-24 CRAN (R 3.3.1)                   
-#&gt;  yaml         2.1.14     2016-11-12 CRAN (R 3.3.1)</code></pre>
+<pre><code>#&gt; - Session info ----------------------------------------------------------
+#&gt;  setting  value                                      
+#&gt;  version  R version 3.4.1 Patched (2017-07-04 r72891)
+#&gt;  os       Windows &gt;= 8 x64                           
+#&gt;  system   x86_64, mingw32                            
+#&gt;  ui       RStudio                                    
+#&gt;  language (EN)                                       
+#&gt;  collate  English_United States.1252                 
+#&gt;  tz       America/Chicago                            
+#&gt;  date     2017-08-21                                 
+#&gt; 
+#&gt; - Packages --------------------------------------------------------------
+#&gt;  package     * version    date       source        
+#&gt;  assertthat    0.2.0      2017-04-11 CRAN (R 3.4.1)
+#&gt;  backports     1.1.0      2017-05-22 CRAN (R 3.4.0)
+#&gt;  bindr         0.1        2016-11-13 CRAN (R 3.4.1)
+#&gt;  bindrcpp    * 0.2        2017-06-17 CRAN (R 3.4.1)
+#&gt;  clisymbols    1.2.0      2017-05-21 CRAN (R 3.4.1)
+#&gt;  crayon        1.3.2      2016-06-28 CRAN (R 3.4.1)
+#&gt;  curl          2.8.1      2017-07-21 CRAN (R 3.4.1)
+#&gt;  devtools      1.13.2     2017-06-02 CRAN (R 3.4.1)
+#&gt;  digest        0.6.12     2017-01-27 CRAN (R 3.4.1)
+#&gt;  dplyr         0.7.2      2017-07-20 CRAN (R 3.4.1)
+#&gt;  evaluate      0.10.1     2017-06-24 CRAN (R 3.4.1)
+#&gt;  glue          1.1.1      2017-06-21 CRAN (R 3.4.1)
+#&gt;  highr         0.6        2016-05-09 CRAN (R 3.4.1)
+#&gt;  hms           0.3        2016-11-22 CRAN (R 3.4.1)
+#&gt;  htmltools     0.3.6      2017-04-28 CRAN (R 3.4.1)
+#&gt;  httr          1.2.1      2016-07-03 CRAN (R 3.4.1)
+#&gt;  kableExtra    0.3.0      2017-07-04 CRAN (R 3.4.1)
+#&gt;  knitr       * 1.16       2017-05-18 CRAN (R 3.4.1)
+#&gt;  magrittr    * 1.5        2014-11-22 CRAN (R 3.4.1)
+#&gt;  memoise       1.1.0      2017-04-21 CRAN (R 3.4.1)
+#&gt;  pkgconfig     2.0.1      2017-03-21 CRAN (R 3.4.1)
+#&gt;  R6            2.2.2      2017-06-17 CRAN (R 3.4.1)
+#&gt;  Rcpp          0.12.12    2017-07-15 CRAN (R 3.4.1)
+#&gt;  readr         1.1.1      2017-05-16 CRAN (R 3.4.1)
+#&gt;  REDCapR     * 0.9.8.9000 2017-08-21 local         
+#&gt;  rlang         0.1.1      2017-05-18 CRAN (R 3.4.1)
+#&gt;  rmarkdown     1.6        2017-06-15 CRAN (R 3.4.1)
+#&gt;  rprojroot     1.2        2017-01-16 CRAN (R 3.4.1)
+#&gt;  rvest         0.3.2      2016-06-17 CRAN (R 3.4.1)
+#&gt;  sessioninfo   1.0.0      2017-06-21 CRAN (R 3.4.1)
+#&gt;  stringi       1.1.5      2017-04-07 CRAN (R 3.4.0)
+#&gt;  stringr       1.2.0      2017-02-18 CRAN (R 3.4.1)
+#&gt;  testthat      1.0.2      2016-04-23 CRAN (R 3.4.1)
+#&gt;  tibble        1.3.3      2017-05-28 CRAN (R 3.4.1)
+#&gt;  tidyr         0.6.3      2017-05-15 CRAN (R 3.4.1)
+#&gt;  withr         1.0.2      2016-06-20 CRAN (R 3.4.1)
+#&gt;  xml2          1.1.1      2017-01-24 CRAN (R 3.4.1)
+#&gt;  yaml          2.1.14     2016-11-12 CRAN (R 3.4.1)</code></pre>
 <p></details></p>
-<p>Report rendered by wibeasley at 2017-05-18, 09:59 -0500 in 5 seconds.</p>
+<p>Report rendered by Will at 2017-08-21, 17:48 -0500 in 4 seconds.</p>
 </div>
 
 
