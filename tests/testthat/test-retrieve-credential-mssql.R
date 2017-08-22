@@ -5,8 +5,8 @@ pid_read           <- 153L #This project is for testing only reading from the se
 
 test_that("Missing DSN", {
   testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
-  expected_message <- "The 'dsn' parameter can be missing only if a 'channel' has been passed to 'retrieve_token_mssql'."
-  
+  expected_message <- "The 'dsn' parameter can be missing only if a 'channel' has been passed to 'retrieve_credential_mssql'."
+
   expect_error(
     regexp = expected_message,
     object = REDCapR::retrieve_credential_mssql(pid_read, "dev")
@@ -16,7 +16,7 @@ test_that("Missing DSN", {
 test_that("Bad project ID", {
   testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
   expected_message <- "The 'project_id' parameter must contain at least one digit, and only digits."
-  
+
   #Digits with letters
   expect_error(
     regexp = expected_message,
@@ -32,13 +32,13 @@ test_that("Bad instance name", {
     regexp = expected_message,
     REDCapR::retrieve_credential_mssql(pid_read, instance="234 --DROP tbl_bobby")
   )
-  
+
   #dashes #2
   expect_error(
     regexp = expected_message,
     REDCapR::retrieve_credential_mssql(pid_read, instance="234 --332")
   )
-  
+
   #Blank
   expect_error(
     regexp = expected_message,
@@ -55,7 +55,7 @@ test_that("pid wrong length", {
     regexp = expected_message,
     REDCapR::retrieve_credential_mssql(project_id=integer(0), instance="234")
   )
-  
+
   #too many
   expect_error(
     regexp = expected_message,
@@ -71,7 +71,7 @@ test_that("instance wrong length", {
     regexp = expected_message,
     REDCapR::retrieve_credential_mssql(pid_read, instance=character(0))
   )
-  
+
   #too many
   expect_error(
     regexp = expected_message,
@@ -114,7 +114,7 @@ test_that("bad type: instance", {
     regexp = expected_message,
     REDCapR::retrieve_credential_mssql(pid_read, instance=integer(1))
   )
-  
+
   #numeric
   expect_error(
     regexp = expected_message,
@@ -130,7 +130,7 @@ test_that("bad type: DSN name", {
     regexp = expected_message,
     REDCapR::retrieve_credential_mssql(dsn=integer(1), pid_read, instance="dev")
   )
-  
+
   #numeric
   expect_error(
     regexp = expected_message,

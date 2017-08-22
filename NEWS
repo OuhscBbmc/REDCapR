@@ -5,6 +5,11 @@ In the future:
 * `redcap_read()` and `redcap_read_oneshot()` allows caller to specify data types for columns.
 
 
+Versions 0.9.9 (Released )
+------------------------------------------------------------------------------
+Deprecated Features:
+* `retrieve_token_mssql()`, because `retrieve_credential_mssql()` is more general and more useful.
+
 Versions 0.9.8 (Released 2017-05-18)
 ------------------------------------------------------------------------------
 New Features:

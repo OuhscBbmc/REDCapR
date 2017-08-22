@@ -129,9 +129,9 @@ retrieve_credential_mssql <- function(
 ) {
 
   if( !requireNamespace("RODBC") )
-    stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBC` package is not installed.  Please install it and try again.")
+    stop("The function REDCapR::retrieve_credential_mssql() cannot run if the `RODBC` package is not installed.  Please install it and try again.")
   if( !requireNamespace("RODBCext") )
-    stop("The function REDCapR::retrieve_token_mssql() cannot run if the `RODBCext` package is not installed.  Please install it and try again.")
+    stop("The function REDCapR::retrieve_credential_mssql() cannot run if the `RODBCext` package is not installed.  Please install it and try again.")
 
   regex_pattern_1 <- "^\\d+$"
   regex_pattern_2 <- "^\\[*[a-zA-Z0-9_]+\\]*$"
@@ -170,7 +170,7 @@ retrieve_credential_mssql <- function(
 
   if( base::missing(channel) | base::is.null(channel) ) {
     if( base::missing(dsn) | base::is.null(dsn) )
-      stop("The 'dsn' parameter can be missing only if a 'channel' has been passed to 'retrieve_token_mssql'.")
+      stop("The 'dsn' parameter can be missing only if a 'channel' has been passed to 'retrieve_credential_mssql'.")
 
     channel <- RODBC::odbcConnect(dsn=dsn)
     close_channel_on_exit <- TRUE
