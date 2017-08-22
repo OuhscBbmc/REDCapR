@@ -109,7 +109,7 @@ redcap_variables <- function(
   else {
     ds                 <- data.frame() #Return an empty data.frame
     if( any(grepl(regex_empty, raw_text)) ) {
-      outcome_message    <- "The REDCapR read/export operation was not successful.  The returned dataset was empty."
+      outcome_message    <- "The REDCapR read/export operation was not successful.  The returned dataset (of variables) was empty."
     } else {
       outcome_message    <- paste0("The REDCapR variable retrieval was not successful.  The error message was:\n",  raw_text)
     }

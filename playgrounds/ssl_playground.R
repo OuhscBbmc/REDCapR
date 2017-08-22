@@ -69,7 +69,7 @@ content(httr_raw, type = "text")
 ##########################################################################
 library(RCurl)
 # SO post: http://stackoverflow.com/questions/15347233/ssl-certificate-failed-for-twitter-in-r
-file.exists(file.path(devtools::inst("REDCapR"), "ssl-certs/mozilla-ca-root.crt"))
+file.exists(file.path(pkgload::inst("REDCapR"), "ssl-certs/mozilla-ca-root.crt"))
 
 rcurl_raw <- RCurl::postForm(
   uri = redcap_uri
@@ -79,7 +79,7 @@ rcurl_raw <- RCurl::postForm(
   , type = 'flat'
   , rawOrLabel = 'raw'
   , exportDataAccessGroups = 'true'
-  , .opts = RCurl::curlOptions(cainfo = file.path(devtools::inst("REDCapR"), "ssl-certs/mozilla-ca-root.crt"))
+  , .opts = RCurl::curlOptions(cainfo = file.path(pkgload::inst("REDCapR"), "ssl-certs/mozilla-ca-root.crt"))
   # , .opts = RCurl::curlOptions(ssl.verifypeer=F, verbose=TRUE)
 )
 rcurl_raw

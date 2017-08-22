@@ -34,7 +34,7 @@ knit_print.data.frame = function(x, ...) {
 }
 # options(markdown.HTML.header = system.file("misc", "vignette.css", package = "knitr"))
 # options(markdown.HTML.header = system.file("misc", "vignette.css", package = "REDCapR"))
-# options(markdown.HTML.header = file.path(devtools::inst("REDCapR"), "misc", "vignette.css"))
+# options(markdown.HTML.header = file.path(pkgload::inst("REDCapR"), "misc", "vignette.css"))
 
 # options(width=120) #So the output is 50% wider than the default.
 
@@ -128,7 +128,7 @@ all_information #Inspect the additional information
 
 ## ----session-info, echo=FALSE--------------------------------------------
 if( requireNamespace("devtools", quietly = TRUE) ) {
-  devtools::session_info()
+  sessioninfo::session_info()
 } else {
   sessionInfo()
 } 

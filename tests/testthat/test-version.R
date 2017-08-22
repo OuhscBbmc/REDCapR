@@ -2,7 +2,7 @@ library(testthat)
 context("Version")
 
 credential <- REDCapR::retrieve_credential_local(
-  path_credential = base::file.path(devtools::inst(name="REDCapR"), "misc/example.credentials"),
+  path_credential = base::file.path(pkgload::inst(name="REDCapR"), "misc/example.credentials"),
   project_id      = 153
 )
 

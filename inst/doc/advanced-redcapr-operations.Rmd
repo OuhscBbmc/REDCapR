@@ -159,7 +159,7 @@ For the sake of documentation and reproducibility, the current report was render
   <summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary>
 ```{r session-info, echo=FALSE}
 if( requireNamespace("devtools", quietly = TRUE) ) {
-  devtools::session_info()
+  sessioninfo::session_info()
 } else {
   sessionInfo()
 } 

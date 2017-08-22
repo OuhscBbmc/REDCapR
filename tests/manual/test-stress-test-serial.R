@@ -73,7 +73,7 @@ for( i in seq_len(file_count) ) {
     
 #   start_time <- Sys.time() - lubridate::seconds(1) #Knock off a second inc ase there's small time imprecisions
   start_time <- Sys.time() - 25 #Knock off a second in case there are small time imprecisions
-  path_of_expected <- base::file.path(devtools::inst(name="REDCapR"), "test-data/mugshot-1.jpg")
+  path_of_expected <- base::file.path(pkgload::inst(name="REDCapR"), "test-data/mugshot-1.jpg")
   info_expected <- file.info(path_of_expected)
   record <- 1
   field <- "mugshot"

@@ -45,10 +45,14 @@ Suggests:
     devtools,
     kableExtra,
     knitr,
+    pkgload,
     rmarkdown,
     RODBC,
     RODBCext,
+    sessioninfo,
     testthat (>= 0.9)
+Remotes: 
+  github::r-lib/pkgload
 License: GPL-2
 LazyData: TRUE
 VignetteBuilder: knitr
