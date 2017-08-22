@@ -211,3 +211,47 @@ test_that("Full Directory Specific", {
   expect_true(start_time <= info_actual$ctime, label="The downloaded file's last change time should not precede this function's start time.")
   expect_true(start_time <= info_actual$atime, label="The downloaded file's last access time should not precede this function's start time.")
 })
+
+test_that("Error --bad field name", {
+  testthat::skip_on_cran()
+  start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
+  project <- start_clean_result$redcap_project
+
+  expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expect_message(
+    returned_object <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
+    regexp = expected_outcome_message
+  )
+
+  start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
+  path_of_expected <- base::file.path(pkgload::inst(name="REDCapR"), "test-data/mugshot-3.jpg")
+  directory <- getwd()#  base::tempfile()
+  info_expected <- file.info(path_of_expected)
+  record <- 3
+  field <- "mugshotttttt"
+
+  expected_outcome_message <- 'file NOT downloaded'
+  expected_raw_text        <- "ERROR: The field 'mugshotttttt' does not exist or is not a 'file' field"
+
+  tryCatch({
+    expect_message(
+      returned_object <- redcap_download_file_oneshot(directory=directory, record=record, field=field, redcap_uri=start_clean_result$redcap_project$redcap_uri, token=start_clean_result$redcap_project$token),
+      # returned_object <- redcap_download_file_oneshot(record=record, field=field, redcap_uri=start_clean_result$redcap_project$redcap_uri, token=start_clean_result$redcap_project$token),
+      regexp = expected_outcome_message
+    )
+    Sys.sleep(delay_after_download_file)
+
+    expect_null(returned_object$file_name)
+  }, finally = base::unlink(returned_object$file_path)
+  )
+
+  #Test the values of the returned object.
+  expect_false(returned_object$success)
+  expect_equal(returned_object$status_code, expected=400L)
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_equal(returned_object$records_affected_count, 0L)
+  expect_equal(returned_object$affected_ids, numeric(0))
+  expect_true(returned_object$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
+  expect_equivalent(returned_object$raw_text, expected=expected_raw_text) # dput(returned_object$raw_text)
+  expect_null(returned_object$file_name, label="The name of the downloaded file should be correct.")
+})

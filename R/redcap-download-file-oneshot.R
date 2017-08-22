@@ -145,6 +145,7 @@ redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwr
     recordsAffectedCount    <- 0L
     record_id               <- numeric(0) #Return an empty vector.
     raw_text                <- httr::content(result, type="text")
+    file_path               <- character(0)
   }
 
   if( verbose )
