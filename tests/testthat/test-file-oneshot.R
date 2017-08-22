@@ -212,7 +212,7 @@ test_that("Full Directory Specific", {
   expect_true(start_time <= info_actual$atime, label="The downloaded file's last access time should not precede this function's start time.")
 })
 
-test_that("Error --bad field name", {
+test_that("Download Error --bad field name", {
   testthat::skip_on_cran()
   start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
   project <- start_clean_result$redcap_project
