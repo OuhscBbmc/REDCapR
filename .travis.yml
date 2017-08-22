@@ -4,11 +4,8 @@ language: r
 cache: packages
 warnings_are_errors: true
 r:
-# - release
-  - devel
-# apt_packages:
-#   - r-cran-rodbc
-#   - unixodbc-dev
+  - release
+# - devel
 addons:
   apt:
     packages:
@@ -23,3 +20,7 @@ r_github_packages:
 # - hadley/testthat
 after_success:
   - Rscript -e 'library(covr);coveralls()'
+
+# apt_packages:
+#   - r-cran-rodbc
+#   - unixodbc-dev
