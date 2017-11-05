@@ -27,7 +27,7 @@ Letters like an accented 'A' are replaced with a plain 'A'.
 
 This is a thin wrapper around \code{\link[base:iconv]{base::iconv()}}.
 The \code{ASCII//TRANSLIT} option does the actual transliteration work.  As of \code{R 3.1.0}, the OSes use similar,
-but different, versions to convert the characters.  Be aware of this in case you notice slight OS-dependent differences.
+but different, versions to convert the characters.  Be aware of this in case you notice OS-dependent differences.
 }
 \examples{
 dirty <- data.frame(id=1:3, names=c("Ekstr\\xf8m", "J\\xf6reskog", "bi\\xdfchen Z\\xfcrcher"))

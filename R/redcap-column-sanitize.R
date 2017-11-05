@@ -14,7 +14,7 @@
 #'
 #' This is a thin wrapper around [base::iconv()].
 #' The `ASCII//TRANSLIT` option does the actual transliteration work.  As of `R 3.1.0`, the OSes use similar,
-#' but different, versions to convert the characters.  Be aware of this in case you notice slight OS-dependent differences.
+#' but different, versions to convert the characters.  Be aware of this in case you notice OS-dependent differences.
 #'
 #' @author Will Beasley
 #'
@@ -32,13 +32,13 @@
 
 redcap_column_sanitize <- function(
   d,
-  column_names = colnames(d),
-  encoding_initial = "latin1",
-  substitution_character = "?" ) {
+  column_names            = colnames(d),
+  encoding_initial        = "latin1",
+  substitution_character  = "?" ) {
 
   for( column in column_names ) {
-    d[, column] <- base::iconv(
-      x     = d[, column],
+    d[[column]] <- base::iconv(
+      x     = d[[column]],
       from  = encoding_initial,
       to    = "ASCII//TRANSLIT",
       sub   = substitution_character
