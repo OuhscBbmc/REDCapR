@@ -20,7 +20,7 @@ populate_project_simple <- function( batch = FALSE ) {
   # utils::write.csv(returned_object_metadata$data, file="./inst/test-data/project-simple/simple-metadata.csv", row.names=FALSE)
 
   #Read in the data in R's memory from a csv file.
-  dsToWrite <- utils::read.csv(file=path_in_simple, stringsAsFactors=FALSE)
+  dsToWrite <- readr::read_csv(path_in_simple)
   # dsToWrite <- utils::read.csv(file="./inst/test-data/project-simple/simple-data.csv", stringsAsFactors=FALSE)
 
   #Remove the calculated variables.

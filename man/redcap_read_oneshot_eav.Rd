@@ -2,7 +2,7 @@
 % Please edit documentation in R/redcap-read-oneshot-eav.R
 \name{redcap_read_oneshot_eav}
 \alias{redcap_read_oneshot_eav}
-\title{Read/Export records from a REDCap project.}
+\title{Read/Export records from a REDCap project --still in development.}
 \usage{
 redcap_read_oneshot_eav(redcap_uri, token, records = NULL,
   records_collapsed = "", fields = NULL, fields_collapsed = "",
@@ -52,7 +52,7 @@ Currently, a list is returned with the following elements,
 }
 }
 \description{
-This function uses REDCap's API to select and return data.
+This function uses REDCap's API to select and return data.  This function is still in development.
 }
 \details{
 The full list of configuration options accepted by the \code{httr} package is viewable by executing \code{\link[httr:httr_options]{httr::httr_options()}}.  The \code{httr}

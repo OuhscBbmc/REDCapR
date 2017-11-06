@@ -59,7 +59,7 @@ retrieve_credential_local <- function(
 
   # Check that the file exists and read it into a data frame.
   if( !file.exists(path_credential) ) stop("The credential file was not found.")
-  ds_credentials <- utils::read.csv(path_credential, comment.char="#", stringsAsFactors=FALSE)
+  ds_credentials <- readr::read_csv(path_credential, comment="#")
 
   # Check that it's a data.frame with valid variable names
   if( !inherits(ds_credentials, "data.frame") ) {

@@ -1,8 +1,8 @@
 #' @name redcap_read_oneshot_eav
 # @export redcap_read_oneshot_eav
-#' @title Read/Export records from a REDCap project.
+#' @title Read/Export records from a REDCap project --still in development.
 #'
-#' @description This function uses REDCap's API to select and return data.
+#' @description This function uses REDCap's API to select and return data.  This function is still in development.
 #'
 #' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
 #' @param token The user-specific string that serves as the password for a project.  Required.
@@ -74,6 +74,8 @@
 #' )$data
 #'}
 
+# redcap_uri  <- "https://bbmc.ouhsc.edu/redcap/api/"
+# token       <- "9A81268476645C4E5F03428B8AC3AA7B"
 
 redcap_read_oneshot_eav <- function(
   redcap_uri,
@@ -168,7 +170,7 @@ redcap_read_oneshot_eav <- function(
   if( success ) {
 
     # This next line exists solely to avoid RCMD checks
-    . <- record <- value <- field_type <- field_name <- is_checkbox <- select_choices_or_calculations <- ids <- NULL
+    . <- record <- event_id <- value <- field_type <- field_name <- is_checkbox <- select_choices_or_calculations <- ids <- NULL
 
     try (
       {
@@ -198,7 +200,8 @@ redcap_read_oneshot_eav <- function(
           tidyr::crossing(
             field_name = .,
             record     = dplyr::distinct(ds_eav, record),
-            field_type = "checkbox"
+            field_type = "checkbox",
+            record     = dplyr::distinct(ds_eav, event_id)
           )
 
         variables_to_keep <- ds_metadata_expanded %>%
@@ -220,13 +223,19 @@ redcap_read_oneshot_eav <- function(
           dplyr::mutate(
             field_name = dplyr::if_else(!is.na(field_type) & (field_type=="checkbox"), paste0(field_name, "___", value), field_name)
           ) %>%
-          dplyr::full_join(ds_possible_checkbox_rows, by=c("record", "field_name", "field_type")) %>%
+          dplyr::full_join(ds_possible_checkbox_rows, by=c("record", "field_name", "field_type", "event_id")) %>%
           dplyr::mutate(
-            value      = dplyr::if_else(!is.na(field_type) & (field_type=="checkbox"), as.character(!is.na(value))                        , value     )
+            value      = dplyr::if_else(!is.na(field_type) & (field_type=="checkbox"), as.character(!is.na(value)), value)
           )
+
+        # ds_eav_2 %>%
+        #   dplyr::filter(field_type=="checkbox") %>%
+        #   head(20)
 
         ds <- ds_eav_2 %>%
           dplyr::select_("-field_type") %>%
+          # dplyr::select_("-redcap_repeat_instance") %>%           # TODO: need a good fix for repeats
+          # tidyr::drop_na(event_id) %>%                            # TODO: need a good fix for repeats
           tidyr::spread_(key="field_name", value="value") %>%
           dplyr::select_(.dots=variables_to_keep)
 

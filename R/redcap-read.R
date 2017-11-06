@@ -106,7 +106,7 @@ redcap_read <- function(
     redcap_uri         = redcap_uri,
     token              = token,
     records_collapsed  = records_collapsed,
-    fields_collapsed   = metadata$data[1, "field_name"],
+    fields_collapsed   = metadata$data$field_name[1],
     filter_logic       = filter_logic,
     events_collapsed   = events_collapsed,
     verbose            = verbose,
