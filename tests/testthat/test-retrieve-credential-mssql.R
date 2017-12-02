@@ -23,6 +23,7 @@ test_that("Bad project ID", {
     REDCapR::retrieve_credential_mssql(-2L, "dev")
   )
 })
+
 test_that("Bad instance name", {
   testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")
   expected_message <- "The 'instance' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets."
