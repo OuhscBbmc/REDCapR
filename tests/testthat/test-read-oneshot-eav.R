@@ -9,8 +9,8 @@ credential <- REDCapR::retrieve_credential_local(
 test_that("Smoke Test", {
   testthat::skip_on_cran()
   returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T)
-
 })
+
 test_that("All Records -Default", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
