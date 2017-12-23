@@ -6,13 +6,14 @@ credential <- REDCapR::retrieve_credential_local(
   project_id      = 153
 )
 
-test_that("Smoke Test", {
+test_that("Metadata Smoke Test", {
   testthat::skip_on_cran()
   expect_message(
     returned_object <- redcap_metadata_read(redcap_uri=credential$redcap_uri, token=credential$token)
   )
 })
-test_that("All Records -Default", {
+
+test_that("Metadata Normal", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(list(field_name = c("record_id", "name_first", "name_last",
     "address", "telephone", "email", "dob", "age", "sex", "height",
@@ -24,14 +25,13 @@ test_that("All Records -Default", {
     ), section_header = c(NA, "Contact Information", NA, NA,
     NA, NA, NA, NA, NA, NA, NA, NA, "General Comments", NA, NA,
     NA), field_type = c("text", "text", "text", "notes", "text",
-    "text", "text", "calc", "radio", "text", "text", "calc",
+    "text", "text", "text", "radio", "text", "text", "calc",
     "notes", "file", "checkbox", "radio"), field_label = c("Study ID",
     "First Name", "Last Name", "Street, City, State, ZIP", "Phone number",
     "E-mail", "Date of birth", "Age (years)", "Gender", "Height (cm)",
     "Weight (kilograms)", "BMI", "Comments", "Mugshot", "Race (Select all that apply)",
     "Ethnicity"), select_choices_or_calculations = c(NA, NA,
-    NA, NA, NA, NA, NA, "rounddown(datediff([dob],'today','y'))",
-    "0, Female | 1, Male", NA, NA, "round(([weight]*10000)/(([height])^(2)),1)",
+    NA, NA, NA, NA, NA, NA, "0, Female | 1, Male", NA, NA, "round(([weight]*10000)/(([height])^(2)),1)",
     NA, NA, "1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported",
     "0, Unknown / Not Reported | 1, NOT Hispanic or Latino | 2, Hispanic or Latino"
     ), field_note = c(NA, NA, NA, NA, "Include Area Code", NA,
