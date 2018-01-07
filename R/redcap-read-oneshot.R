@@ -110,6 +110,7 @@ redcap_read_oneshot <- function(
     format                  = 'csv',
     type                    = 'flat',
     rawOrLabel              = raw_or_label,
+    rawOrLabelHeaders       = raw_or_label,
     exportDataAccessGroups  = export_data_access_groups_string,
     # records               = ifelse(nchar(records_collapsed)   > 0, records_collapsed  , NULL),
     # fields                = ifelse(nchar(fields_collapsed)    > 0, fields_collapsed   , NULL),
