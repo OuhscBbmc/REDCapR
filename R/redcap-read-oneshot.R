@@ -15,6 +15,7 @@
 #' @param events_collapsed A single string, where the desired event names are separated by commas.  Optional.
 #' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is `FALSE`. See the details below.
 #' @param raw_or_label A string (either `'raw'` or `'label'` that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is `'raw'`.
+#' @param raw_or_label_headers A string (either `'raw'` or `'label'` that specifies for the CSV headers whether to export the variable/field names (raw) or the field labels (label).  Default is `'raw'`.
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below. Optional.
 #' @return Currently, a list is returned with the following elements,
@@ -70,7 +71,8 @@ redcap_read_oneshot <- function(
   events=NULL, events_collapsed="",
   export_data_access_groups=FALSE,
   filter_logic="",
-  raw_or_label='raw', verbose=TRUE, config_options=NULL
+  raw_or_label='raw', raw_or_label_headers='raw',
+  verbose=TRUE, config_options=NULL
 ) {
   #TODO: NULL verbose parameter pulls from getOption("verbose")
 
@@ -86,6 +88,8 @@ redcap_read_oneshot <- function(
     stop("The optional parameter `filter_logic` must be a character/string variable.")
   if( !(raw_or_label %in% c("raw", "label")) )
     stop("The optional parameter `raw_or_label` must be either 'raw' or 'label'.")
+  if( !(raw_or_label_headers %in% c("raw", "label")) )
+    stop("The optional parameter `raw_or_label_headers` must be either 'raw' or 'label'.")
 
   token <- sanitize_token(token)
   validate_field_names(fields)
@@ -110,7 +114,7 @@ redcap_read_oneshot <- function(
     format                  = 'csv',
     type                    = 'flat',
     rawOrLabel              = raw_or_label,
-    rawOrLabelHeaders       = raw_or_label,
+    rawOrLabelHeaders       = raw_or_label_headers,
     exportDataAccessGroups  = export_data_access_groups_string,
     # records               = ifelse(nchar(records_collapsed)   > 0, records_collapsed  , NULL),
     # fields                = ifelse(nchar(fields_collapsed)    > 0, fields_collapsed   , NULL),
