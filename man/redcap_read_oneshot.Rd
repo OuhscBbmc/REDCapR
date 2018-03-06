@@ -6,9 +6,9 @@
 \usage{
 redcap_read_oneshot(redcap_uri, token, records = NULL,
   records_collapsed = "", fields = NULL, fields_collapsed = "",
-  events = NULL, events_collapsed = "", export_data_access_groups = FALSE,
-  filter_logic = "", raw_or_label = "raw", verbose = TRUE,
-  config_options = NULL)
+  events = NULL, events_collapsed = "", export_survey_fields = FALSE,
+  export_data_access_groups = FALSE, filter_logic = "",
+  raw_or_label = "raw", verbose = TRUE, config_options = NULL)
 }
 \arguments{
 \item{redcap_uri}{The URI (uniform resource identifier) of the REDCap project.  Required.}
@@ -27,11 +27,13 @@ redcap_read_oneshot(redcap_uri, token, records = NULL,
 
 \item{events_collapsed}{A single string, where the desired event names are separated by commas.  Optional.}
 
+\item{export_survey_fields}{A boolean that specifies whether to export the survey identifier field (e.g., 'redcap_survey_identifier') or survey timestamp fields (e.g., instrument+'_timestamp') .}
+
 \item{export_data_access_groups}{A boolean value that specifies whether or not to export the \code{redcap_data_access_group} field when data access groups are utilized in the project. Default is \code{FALSE}. See the details below.}
 
 \item{filter_logic}{String of logic text (e.g., \code{[gender] = 'male'}) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.}
 
-\item{raw_or_label}{A string (either \code{'raw'} or \code{'label'} that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is \code{'raw'}.}
+\item{raw_or_label}{A string (either \code{'raw'} or \code{'label'}) that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is \code{'raw'}.}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.}
 

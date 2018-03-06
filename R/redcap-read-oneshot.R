@@ -13,8 +13,9 @@
 #' @param filter_logic String of logic text (e.g., `[gender] = 'male'`) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.
 #' @param events An array, where each element corresponds a desired project event  Optional.
 #' @param events_collapsed A single string, where the desired event names are separated by commas.  Optional.
+#' @param export_survey_fields A boolean that specifies whether to export the survey identifier field (e.g., 'redcap_survey_identifier') or survey timestamp fields (e.g., instrument+'_timestamp') .
 #' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is `FALSE`. See the details below.
-#' @param raw_or_label A string (either `'raw'` or `'label'` that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is `'raw'`.
+#' @param raw_or_label A string (either `'raw'` or `'label'`) that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is `'raw'`.
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below. Optional.
 #' @return Currently, a list is returned with the following elements,
@@ -68,9 +69,11 @@ redcap_read_oneshot <- function(
   redcap_uri, token, records=NULL, records_collapsed="",
   fields=NULL, fields_collapsed="",
   events=NULL, events_collapsed="",
+  export_survey_fields = FALSE,
   export_data_access_groups=FALSE,
   filter_logic="",
-  raw_or_label='raw', verbose=TRUE, config_options=NULL
+  raw_or_label='raw',
+  verbose=TRUE, config_options=NULL
 ) {
   #TODO: NULL verbose parameter pulls from getOption("verbose")
 
@@ -98,11 +101,13 @@ redcap_read_oneshot <- function(
     events_collapsed <- ifelse(is.null(events), "", paste0(events, collapse=",")) #This is an empty string if `events` is NULL.
   if( all(nchar(filter_logic)==0) )
     filter_logic <- ifelse(is.null(filter_logic), "", filter_logic) #This is an empty string if `filter_logic` is NULL.
+  checkmate::assert_logical(export_survey_fields, any.missing=F, len=1)
 
   if( any(grepl("[A-Z]", fields_collapsed)) )
     warning("The fields passed to REDCap appear to have at least uppercase letter.  REDCap variable names are snake case.")
 
   export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
+  export_survey_fields             <- tolower(as.character(export_survey_fields))
 
   post_body <- list(
     token                   = token,
@@ -110,6 +115,7 @@ redcap_read_oneshot <- function(
     format                  = 'csv',
     type                    = 'flat',
     rawOrLabel              = raw_or_label,
+    exportSurveyFields      = export_survey_fields,
     exportDataAccessGroups  = export_data_access_groups_string,
     # records               = ifelse(nchar(records_collapsed)   > 0, records_collapsed  , NULL),
     # fields                = ifelse(nchar(fields_collapsed)    > 0, fields_collapsed   , NULL),
