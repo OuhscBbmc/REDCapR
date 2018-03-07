@@ -42,6 +42,7 @@ Imports:
     tibble,
     tidyr
 Suggests:
+    checkmate,
     devtools,
     kableExtra,
     knitr,
