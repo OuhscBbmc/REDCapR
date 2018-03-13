@@ -20,7 +20,7 @@ r_github_packages:
 # - r-lib/httr
 # - hadley/testthat
 after_success:
-  - Rscript -e 'library(covr);coveralls()'
+  - Rscript -e 'covr::coveralls()'
 
 # apt_packages:
 #   - r-cran-rodbc
