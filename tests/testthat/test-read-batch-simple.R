@@ -34,31 +34,32 @@ test_that("All Records -Default", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
     "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
-    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
-    "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402",
-    "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
+    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\r\nKenning UK, 323232",
+    "14 Rose Cottage Blvd.\r\nKenning UK 34243", "243 Hill St.\r\nGuthrie OK 73402",
+    "342 Elm\r\nDuncanville TX, 75116", "Hotel Suite\r\nNew Orleans LA, 70115"
     ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333",
     "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com",
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
-    ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02",
-    "1955-04-15"), age = c(11L, 11L, 80L, 61L, 59L), sex = c(0L,
-    1L, 1L, 0L, 1L), demographics_complete = c(2L, 2L, 2L, 2L, 2L
-    ), height = c(7, 6, 180, 165, 193.04), weight = c(1L, 1L, 80L,
-    54L, 104L), bmi = c(204.1, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing",
-    "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
-    "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), mugshot = c("[document]", "[document]", "[document]", "[document]",
-    "[document]"), health_complete = c(1L, 0L, 2L, 2L, 0L), race___1 = c(0L,
-    0L, 0L, 0L, 1L), race___2 = c(0L, 0L, 0L, 1L, 0L), race___3 = c(0L,
-    1L, 0L, 0L, 0L), race___4 = c(0L, 0L, 1L, 0L, 0L), race___5 = c(1L,
-    1L, 1L, 1L, 0L), race___6 = c(0L, 0L, 0L, 0L, 1L), ethnicity = c(1L,
-    1L, 0L, 1L, 2L), race_and_ethnicity_complete = c(2L, 0L, 2L, 2L,
-    2L)), .Names = c("record_id", "name_first", "name_last", "address",
-    "telephone", "email", "dob", "age", "sex", "demographics_complete",
+    ), dob = structure(c(12294, 12121, -13051, -6269, -5375), class = "Date"),
+    age = c(11L, 11L, 80L, 61L, 59L), sex = c(0L, 1L, 1L, 0L,
+    1L), demographics_complete = c(2L, 2L, 2L, 2L, 2L), height = c(7,
+    6, 180, 165, 193.04), weight = c(1L, 1L, 80L, 54L, 104L),
+    bmi = c(204.1, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing",
+    "A mouse character from a good book", "completely made up",
+    "This record doesn't have a DAG assigned\r\n\r\nSo call up Trudy on the telephone\r\nSend her a letter in the mail",
+    "Had a hand for trouble and a eye for cash\r\n\r\nHe had a gold watch chain and a black mustache"
+    ), mugshot = c("[document]", "[document]", "[document]",
+    "[document]", "[document]"), health_complete = c(1L, 0L,
+    2L, 2L, 0L), race___1 = c(0L, 0L, 0L, 0L, 1L), race___2 = c(0L,
+    0L, 0L, 1L, 0L), race___3 = c(0L, 1L, 0L, 0L, 0L), race___4 = c(0L,
+    0L, 1L, 0L, 0L), race___5 = c(1L, 1L, 1L, 1L, 0L), race___6 = c(0L,
+    0L, 0L, 0L, 1L), ethnicity = c(1L, 1L, 0L, 1L, 2L), race_and_ethnicity_complete = c(2L,
+    0L, 2L, 2L, 2L)), .Names = c("record_id", "name_first", "name_last",
+    "address", "telephone", "email", "dob", "age", "sex", "demographics_complete",
     "height", "weight", "bmi", "comments", "mugshot", "health_complete",
-    "race___1", "race___2", "race___3", "race___4", "race___5",
-    "race___6", "ethnicity", "race_and_ethnicity_complete"), class = "data.frame", row.names = c(NA,
-    -5L))
+    "race___1", "race___2", "race___3", "race___4", "race___5", "race___6",
+    "ethnicity", "race_and_ethnicity_complete"), row.names = c(NA,
+    -5L), class = "data.frame")
   expected_outcome_message <- "\\d+ records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   ###########################
