@@ -196,7 +196,7 @@ retrieve_credential_mssql <- function(
   )
 
   if( nrow(ds_credential) == 0L ) {
-    stop(paste("The REDCap token for project", project_id, "was not found on for this username and instance."))
+    stop(paste("The REDCap token for project", project_id, "was not found on for this username and instance.  Please verify with your REDCap admin that you have both (a) API rights AND (b) an API token generated."))
   } else if( nrow(ds_credential) >= 2L ) {
     stop("No more than one row should be retrieved from the credentials.  The [username]-by-[instance]-by-[project_id] should be unique in the table.")
   }
