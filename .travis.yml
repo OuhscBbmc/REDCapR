@@ -11,6 +11,7 @@ addons:
   apt:
     packages:
     - r-cran-rodbc
+    - r-cran-rodbcext
     - unixodbc-dev
 r_github_packages:
   - jimhester/covr
