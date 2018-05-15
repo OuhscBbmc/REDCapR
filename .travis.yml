@@ -11,11 +11,11 @@ addons:
   apt:
     packages:
     - r-cran-rodbc
-    - r-cran-rodbcext
     - unixodbc-dev
 r_github_packages:
   - jimhester/covr
   - r-lib/pkgload
+  - zozlak/RODBCext
 # - tidyverse/dplyr
 # - jeroen/curl
 # - r-lib/httr
