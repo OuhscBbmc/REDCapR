@@ -52,6 +52,7 @@ redcap_project <- setRefClass(
       batch_size = 100L, interbatch_delay = 0,
       records = NULL, records_collapsed = "",
       fields = NULL, fields_collapsed = "",
+      export_survey_fields = FALSE,
       export_data_access_groups = FALSE,
       raw_or_label = 'raw',
       verbose = TRUE, config_options = NULL

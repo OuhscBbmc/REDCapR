@@ -7,9 +7,10 @@
 redcap_read(batch_size = 100L, interbatch_delay = 0.5,
   continue_on_error = FALSE, redcap_uri, token, records = NULL,
   records_collapsed = "", fields = NULL, fields_collapsed = "",
-  events = NULL, events_collapsed = "", export_data_access_groups = FALSE,
-  filter_logic = "", raw_or_label = "raw", verbose = TRUE,
-  config_options = NULL, id_position = 1L)
+  events = NULL, events_collapsed = "", export_survey_fields = FALSE,
+  export_data_access_groups = FALSE, filter_logic = "",
+  raw_or_label = "raw", verbose = TRUE, config_options = NULL,
+  id_position = 1L)
 }
 \arguments{
 \item{batch_size}{The maximum number of subject records a single batch should contain.  The default is 100.}
@@ -33,6 +34,8 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
 \item{events}{An array, where each element corresponds a desired project event  Optional.}
 
 \item{events_collapsed}{A single string, where the desired event names are separated by commas.  Optional.}
+
+\item{export_survey_fields}{A boolean that specifies whether to export the survey identifier field (e.g., 'redcap_survey_identifier') or survey timestamp fields (e.g., instrument+'_timestamp') .}
 
 \item{export_data_access_groups}{A boolean value that specifies whether or not to export the \code{redcap_data_access_group} field when data access groups are utilized in the project. Default is \code{FALSE}. See the details below.}
 

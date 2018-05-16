@@ -19,6 +19,7 @@
 #' @param filter_logic String of logic text (e.g., `[gender] = 'male'`) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.
 #' @param events An array, where each element corresponds a desired project event  Optional.
 #' @param events_collapsed A single string, where the desired event names are separated by commas.  Optional.
+#' @param export_survey_fields A boolean that specifies whether to export the survey identifier field (e.g., 'redcap_survey_identifier') or survey timestamp fields (e.g., instrument+'_timestamp') .
 #' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is `FALSE`. See the details below.
 #' @param raw_or_label A string (either 'raw` or 'label' that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is `'raw'`.
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
@@ -69,6 +70,7 @@ redcap_read <- function(
   redcap_uri, token, records=NULL, records_collapsed="",
   fields=NULL, fields_collapsed="",
   events=NULL, events_collapsed="",
+  export_survey_fields = FALSE,
   export_data_access_groups=FALSE,
   filter_logic="",
   raw_or_label='raw',
@@ -171,6 +173,7 @@ redcap_read <- function(
       fields_collapsed            = fields_collapsed,
       filter_logic                = filter_logic,
       events_collapsed            = events_collapsed,
+      export_survey_fields        = export_survey_fields,
       export_data_access_groups   = export_data_access_groups,
       raw_or_label                = raw_or_label,
       verbose                     = verbose,

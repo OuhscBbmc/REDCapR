@@ -62,10 +62,11 @@ The *release* version of REDCapR can be installed from [CRAN](https://cran.r-pro
 install.packages("REDCapR")
 ```
 
-The *development* version of REDCapR can be installed from [GitHub](https://github.com/OuhscBbmc/REDCapR) after installing the `devtools` package.
+The *development* version of REDCapR can be installed from [GitHub](https://github.com/OuhscBbmc/REDCapR) after installing the `remotes` package.
+
 ```r
-install.packages("devtools")
-devtools::install_github(repo="OuhscBbmc/REDCapR")
+install.packages("remotes") # Run this line if the 'remotes' package isn't installed already.
+remotes::install_github(repo="OuhscBbmc/REDCapR")
 ```
 
 #### Linux
