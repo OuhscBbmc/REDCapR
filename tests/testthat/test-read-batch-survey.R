@@ -47,7 +47,6 @@ test_that("All Records -Default", {
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   # saveRDS(returned_object1$data, file.path("./inst", directory_relative, file_name), compress="xz")
-  # saveRDS(returned_object2$data, file.path("./inst", directory_relative, file_name), compress="xz")
   expected_data_frame <- readRDS(path_qualified)
   # expected_data_frame <- eval(parse(path_expected), enclos = new.env()) #dput(returned_object1$data, file=path_expected)
 
