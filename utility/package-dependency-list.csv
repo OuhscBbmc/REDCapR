@@ -1,4 +1,5 @@
 package_name,on_cran,install,github_username,description
+checkmate,TRUE,TRUE,,Tests and assertions to perform frequent argument checks. 
 data.table,TRUE,FALSE,,For combining batches --phased out
 devtools,TRUE,TRUE,,Important package development functions.
 dplyr,TRUE,TRUE,,Data manipulation

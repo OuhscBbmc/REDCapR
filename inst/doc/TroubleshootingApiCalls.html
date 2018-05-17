@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="date" content="2017-08-22" />
+<meta name="date" content="2018-05-17" />
 
 <title>Troubleshooting REDCap API Calls</title>
 
@@ -68,7 +68,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">Troubleshooting REDCap API Calls</h1>
-<h4 class="date"><em>2017-08-22</em></h4>
+<h4 class="date"><em>2018-05-17</em></h4>
 
 
 
@@ -125,7 +125,7 @@ He had a gold watch chain and a black mustache&quot;,2</code></pre></li>
 <p>There are several ways to call REDCap’s API from <a href="https://cran.r-project.org/">R</a>. The packages <a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> both rely on the <a href="https://cran.r-project.org/package=httr">httr</a> package, which calls the <a href="https://cran.r-project.org/package=curl">curl</a> package.</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Is httr installed on the user’s local machine?</strong> If so, running <code>library(httr)</code> should not produce any error messages if you’re starting with a fresh session of R:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">&gt;<span class="st"> </span><span class="kw">library</span>(httr)</code></pre></div></li>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span><span class="kw">library</span>(httr)</code></pre></div></li>
 <li><p><strong>Does the user have the most recent version of httr?</strong> There are several ways to do this, but the easiest is probably to run <code>update.packages(ask=FALSE, repos=&quot;http://cran.rstudio.com&quot;)</code>. The optional argument <code>ask</code> prevents the user from needing to respond ‘Y’ to each outdated package.</p></li>
 <li><p><strong>Can the user query a <em>test</em> project using httr?</strong> Both the <a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> packages employ something similar to the following function in <a href="https://cran.r-project.org/package=httr">httr</a>. If you’re curious, here is the relevant source code for <a href="https://github.com/nutterb/redcapAPI/blob/master/R/exportRecords.R">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-read-oneshot.R">REDCapR</a>.</p>
 <p>If this check fails, consider attempting again with the uri and token used above in the Postman example.</p>
@@ -133,7 +133,7 @@ He had a gold watch chain and a black mustache&quot;,2</code></pre></li>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">redcap_uri &lt;-<span class="st"> &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;</span>
 token      &lt;-<span class="st"> &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;</span>
 
-raw_text &lt;-<span class="st"> </span>RCurl::<span class="kw">postForm</span>(
+raw_text &lt;-<span class="st"> </span>RCurl<span class="op">::</span><span class="kw">postForm</span>(
   <span class="dt">uri                         =</span> redcap_uri
   , <span class="dt">token                     =</span> token
   , <span class="dt">content                   =</span> <span class="st">'record'</span>
@@ -141,7 +141,7 @@ raw_text &lt;-<span class="st"> </span>RCurl::<span class="kw">postForm</span>(
   , <span class="dt">type                      =</span> <span class="st">'flat'</span>
   , <span class="dt">rawOrLabel                =</span> <span class="st">'raw'</span>
   , <span class="dt">exportDataAccessGroups    =</span> <span class="st">'true'</span>
-  , <span class="dt">.opts                     =</span> RCurl::<span class="kw">curlOptions</span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)
+  , <span class="dt">.opts                     =</span> RCurl<span class="op">::</span><span class="kw">curlOptions</span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <p>Alternatively, you can try using the <a href="https://cran.r-project.org/package=httr"><code>httr</code></a> package, which uses <code>RCurl</code> underneath. <a href="https://github.com/OuhscBbmc/REDCapR"><code>REDCapR</code></a> and a recent fork of <a href="https://github.com/nutterb/redcap"><code>redcap</code></a> actually uses <code>httr</code> directly, instead of <code>RCurl</code>. As of 2014-07-06, this works with the Windows 8 version for <a href="http://curl.haxx.se/libcurl/">libcurl</a> (which is underneath `RCurl), but not with some Linux versions; in this case pass the location of the SSL cert file.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">post_body &lt;-<span class="st"> </span><span class="kw">list</span>(
@@ -153,11 +153,11 @@ raw_text &lt;-<span class="st"> </span>RCurl::<span class="kw">postForm</span>(
   <span class="dt">exportDataAccessGroups      =</span> <span class="st">'true'</span>
 )
 
-raw_text &lt;-<span class="st"> </span>httr::<span class="kw">POST</span>(
+raw_text &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">POST</span>(
   <span class="dt">url                         =</span> redcap_uri,
   <span class="dt">body                        =</span> post_body,
-  <span class="dt">config                      =</span> httr::<span class="kw">config</span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>),
-  httr::<span class="kw">verbose</span>() <span class="co">#Remove this line to suppress the frequent console updates.</span>
+  <span class="dt">config                      =</span> httr<span class="op">::</span><span class="kw">config</span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>),
+  httr<span class="op">::</span><span class="kw">verbose</span>() <span class="co">#Remove this line to suppress the frequent console updates.</span>
 )</code></pre></div></li>
 <li><p><strong>Can the user query a <em>subset</em> of <em>their</em> project using RCurl?</strong> This step is like the previous one, but with two differences. First, it’s using their REDCap project (instead of the test project). Second, it pulls fewer records, and a smaller collection of fields. Subsetting can help troubleshoot by avoiding (and thus identifying) cells with problematic values.</p>
 <p>Notice this call to <code>RCurl::postForm()</code> now passes values to the <code>records</code> and <code>fields</code> parameters. Also notice the value is a <em>single</em> long string, rather a <em>vector</em> of shorter strings (which is more natural to most R users).</p>
@@ -166,7 +166,7 @@ token              &lt;-<span class="st"> &quot;your-secret-token&quot;</span>
 records_collapsed  &lt;-<span class="st"> &quot;1,2,3&quot;</span>                             <span class="co"># Assumes dataset contains ID values of 1-3.</span>
 fields_collapsed   &lt;-<span class="st"> &quot;record_id,name_first,name_last&quot;</span>    <span class="co"># Assumes dataset contains these variables.</span>
 
-raw_text &lt;-<span class="st"> </span>RCurl::<span class="kw">postForm</span>(
+raw_text &lt;-<span class="st"> </span>RCurl<span class="op">::</span><span class="kw">postForm</span>(
   <span class="dt">uri                          =</span> redcap_uri
   , <span class="dt">token                      =</span> token
   , <span class="dt">content                    =</span> <span class="st">'record'</span>
@@ -176,7 +176,7 @@ raw_text &lt;-<span class="st"> </span>RCurl::<span class="kw">postForm</span>(
   , <span class="dt">exportDataAccessGroups     =</span> <span class="st">'true'</span>
   , <span class="dt">records                    =</span> records_collapsed
   , <span class="dt">fields                     =</span> fields_collapsed
-  , <span class="dt">.opts                      =</span> RCurl::<span class="kw">curlOptions</span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)
+  , <span class="dt">.opts                      =</span> RCurl<span class="op">::</span><span class="kw">curlOptions</span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)
 )</code></pre></div></li>
 <li><p><strong>Can the user query an <em>entire</em> project using RCurl?</strong> There are two advantages of trying a subset of the data. First, small datasets avoid the time-out errors that plague large datasets. Second, it may avoid problematic values being passed through the pipeline. If the current check fails but the previous check succeedes, then experiment with different expanses of records and fields. This should help determine which values are causing the problems, or if there’s simply too much data being pulled in one pass.</p>
 <p>If the desired dataset is too large, consider if you can prune unnecessary records or fields. If not, one solution is to pull smaller, multiple batches using the API, then reassemble them. The <code>redcap_read()</code> function in <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/documentation-peek.pdf">REDCapR</a> does this automatically, and allows the user to specify a <code>batch_size</code>.</p>
@@ -185,7 +185,7 @@ token                       &lt;-<span class="st"> &quot;your-secret-token&quot;
 records_collapsed           &lt;-<span class="st"> </span><span class="ot">NULL</span>
 fields_collapsed            &lt;-<span class="st"> </span><span class="ot">NULL</span>
 
-raw_text &lt;-<span class="st"> </span>RCurl::<span class="kw">postForm</span>(
+raw_text &lt;-<span class="st"> </span>RCurl<span class="op">::</span><span class="kw">postForm</span>(
   <span class="dt">uri                        =</span> redcap_uri
   , <span class="dt">token                    =</span> token
   , <span class="dt">content                  =</span> <span class="st">'record'</span>
@@ -195,7 +195,7 @@ raw_text &lt;-<span class="st"> </span>RCurl::<span class="kw">postForm</span>(
   , <span class="dt">exportDataAccessGroups   =</span> <span class="st">'true'</span>
   , <span class="dt">records                  =</span> records_collapsed
   , <span class="dt">fields                   =</span> fields_collapsed
-  , <span class="dt">.opts                    =</span> RCurl::<span class="kw">curlOptions</span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)
+  , <span class="dt">.opts                    =</span> RCurl<span class="op">::</span><span class="kw">curlOptions</span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)
 )</code></pre></div></li>
 </ol>
 </div>
@@ -206,7 +206,7 @@ raw_text &lt;-<span class="st"> </span>RCurl::<span class="kw">postForm</span>(
 <ol style="list-style-type: decimal">
 <li><p><strong>Is REDCapR installed on the user’s machine?</strong> Currently the easiest way to install REDCapR is with the <a href="https://github.com/hadley/devtools">devtools</a>. The follow code installs devtools, then installs REDCapR.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>, <span class="dt">repos=</span><span class="st">&quot;http://cran.rstudio.com&quot;</span>)
-devtools::<span class="kw">install_github</span>(<span class="dt">repo=</span><span class="st">&quot;OuhscBbmc/REDCapR&quot;</span>)</code></pre></div></li>
+devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="dt">repo=</span><span class="st">&quot;OuhscBbmc/REDCapR&quot;</span>)</code></pre></div></li>
 <li><p><strong>Does REDCapR load successfully on the user’s machine?</strong> If so, running <code>library(REDCapR)</code> should produce the following output if you’re starting with a fresh session of R:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(REDCapR)
 ## Loading required package: REDCapR</code></pre></div></li>
@@ -214,7 +214,7 @@ devtools::<span class="kw">install_github</span>(<span class="dt">repo=</span><s
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(REDCapR) <span class="co">#Load the package into the current R session.</span>
 uri   &lt;-<span class="st"> &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;</span>
 token &lt;-<span class="st"> &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;</span>
-<span class="kw">redcap_read</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)$data</code></pre></div>
+<span class="kw">redcap_read</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)<span class="op">$</span>data</code></pre></div>
 <p>The previous code should produce similar output. Notice there are five rows and the columns will wrap around if your console window is too narrow.</p>
 <pre><code>5 records and 1 columns were read from REDCap in 0.41 seconds.
 Starting to read 5 records  at 2014-06-27 17:19:49
@@ -252,20 +252,20 @@ Reading batch 1 of 1, with ids 1 through 5.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(REDCapR) <span class="co">#Load the package into the current R session, if you haven't already.</span>
 redcap_uri       &lt;-<span class="st"> &quot;https://the.urlofyourinsitution.edu/api/&quot;</span>
 token            &lt;-<span class="st"> &quot;your-secret-token&quot;</span>
-<span class="kw">redcap_read</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)$data</code></pre></div>
+<span class="kw">redcap_read</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)<span class="op">$</span>data</code></pre></div>
 <p>Alternatively, a <code>redcap_project</code> object can be declared initially, which makes subsequent calls cleaner when the token and url are required only the when the object is declared.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(REDCapR) <span class="co">#Load the package into the current R session, if you haven't already.</span>
 uri               &lt;-<span class="st"> &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;</span>
 token             &lt;-<span class="st"> &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;</span>  
-project           &lt;-<span class="st"> </span>redcap_project$<span class="kw">new</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)
+project           &lt;-<span class="st"> </span>redcap_project<span class="op">$</span><span class="kw">new</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)
 
-ds_three_columns  &lt;-<span class="st"> </span>project$<span class="kw">read</span>(<span class="dt">fields=</span><span class="kw">c</span>(<span class="st">&quot;record_id&quot;</span>, <span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>))$data
+ds_three_columns  &lt;-<span class="st"> </span>project<span class="op">$</span><span class="kw">read</span>(<span class="dt">fields=</span><span class="kw">c</span>(<span class="st">&quot;record_id&quot;</span>, <span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>))<span class="op">$</span>data
 
-ids_of_males      &lt;-<span class="st"> </span>ds_three_columns$record_id[ds_three_columns$sex==<span class="dv">1</span>]
-ids_of_minors     &lt;-<span class="st"> </span>ds_three_columns$record_id[ds_three_columns$age &lt;<span class="st"> </span><span class="dv">18</span>]
+ids_of_males      &lt;-<span class="st"> </span>ds_three_columns<span class="op">$</span>record_id[ds_three_columns<span class="op">$</span>sex<span class="op">==</span><span class="dv">1</span>]
+ids_of_minors     &lt;-<span class="st"> </span>ds_three_columns<span class="op">$</span>record_id[ds_three_columns<span class="op">$</span>age <span class="op">&lt;</span><span class="st"> </span><span class="dv">18</span>]
 
-ds_males          &lt;-<span class="st"> </span>project$<span class="kw">read</span>(<span class="dt">records=</span>ids_of_males, <span class="dt">batch_size=</span><span class="dv">2</span>)$data
-ds_minors         &lt;-<span class="st"> </span>project$<span class="kw">read</span>(<span class="dt">records=</span>ids_of_minors)$data</code></pre></div></li>
+ds_males          &lt;-<span class="st"> </span>project<span class="op">$</span><span class="kw">read</span>(<span class="dt">records=</span>ids_of_males, <span class="dt">batch_size=</span><span class="dv">2</span>)<span class="op">$</span>data
+ds_minors         &lt;-<span class="st"> </span>project<span class="op">$</span><span class="kw">read</span>(<span class="dt">records=</span>ids_of_minors)<span class="op">$</span>data</code></pre></div></li>
 <li><p><strong>Is the export operation still unsuccessful using REDCapR?</strong> If so the “Can the user query a <em>entire</em> REDCap project using RCurl?” check succeeded, but the REDCapR checks did not, consider posting a new <a href="https://github.com/OuhscBbmc/REDCapR/issues">GitHub issue</a> to the package developers.</p></li>
 </ol>
 </div>
@@ -278,7 +278,7 @@ ds_minors         &lt;-<span class="st"> </span>project$<span class="kw">read</s
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;redcapAPI&quot;</span>)</code></pre></div>
 <p>Developmental versions may be available on GitHub.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>, <span class="dt">repos=</span><span class="st">&quot;http://cran.rstudio.com&quot;</span>)
-devtools::<span class="kw">install_github</span>(<span class="dt">repo=</span><span class="st">&quot;nutterb/redcapAPI&quot;</span>)</code></pre></div></li>
+devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="dt">repo=</span><span class="st">&quot;nutterb/redcapAPI&quot;</span>)</code></pre></div></li>
 <li><p><strong>Does redcapAPI load successfully on the user’s machine?</strong> If so, running <code>library(redcapAPI)</code> should produce the following output if you’re starting with a fresh session of R:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(redcapAPI)
 ## Loading required package: redcapAPI</code></pre></div></li>
