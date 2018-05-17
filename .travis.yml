@@ -15,6 +15,7 @@ addons:
 r_github_packages:
   - jimhester/covr
   - r-lib/pkgload
+#  - zozlak/RODBCext
 # - tidyverse/dplyr
 # - jeroen/curl
 # - r-lib/httr
@@ -26,4 +27,8 @@ after_success:
 #   - r-cran-rodbc
 #   - unixodbc-dev
 
-# To temporarily disable the checks for unavailable packages, see https://github.com/travis-ci/travis-ci/issues/5996
+# Disabling the checks is temporary and ideally removed soon.
+# See https://github.com/OuhscBbmc/REDCapR/issues/188 and https://github.com/travis-ci/travis-ci/issues/5996
+env:
+  global:
+    - _R_CHECK_FORCE_SUGGESTS_=FALSE
