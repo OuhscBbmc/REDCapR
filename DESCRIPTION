@@ -43,6 +43,7 @@ Imports:
     tidyr
 Suggests:
     checkmate,
+    DBI,
     devtools,
     kableExtra,
     knitr,
