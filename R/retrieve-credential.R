@@ -137,12 +137,13 @@ retrieve_credential_mssql <- function(
   channel                  = NULL
 ) {
 
-  if( !requireNamespace("DBI") ) stop("The function REDCapR::retrieve_credential_mssql() cannot run if the `DBI` package is not installed.  Please install it and try again.")
+  if( !requireNamespace("DBI")  ) stop("The function REDCapR::retrieve_credential_mssql() cannot run if the `DBI` package is not installed.  Please install it and try again.")
   if( !requireNamespace("odbc") ) stop("The function REDCapR::retrieve_credential_mssql() cannot run if the `odbc` package is not installed.  Please install it and try again.")
 
   regex_pattern_1 <- "^\\d+$"
   regex_pattern_2 <- "^\\[*[a-zA-Z0-9_]+\\]*$"
 
+  # checkmate::assert_integer(project_id, any.missing=F, len=1L, lower=1L)
   if( class(project_id)  != "integer" )
     stop("The `project_id` parameter be an integer type.  Either append an `L` to the number, or cast with `as.integer()`.")
   if( class(instance)  != "character" )
