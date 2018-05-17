@@ -1,5 +1,5 @@
 package_name,on_cran,install,github_username,description
-data.table,TRUE,TRUE,,For combining batches
+data.table,TRUE,FALSE,,For combining batches --phased out
 devtools,TRUE,TRUE,,Important package development functions.
 dplyr,TRUE,TRUE,,Data manipulation
 knitr,TRUE,TRUE,,For reporting
