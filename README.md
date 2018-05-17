@@ -2,7 +2,7 @@
 | :----- | :---------------------------: | :-----------------------------: | :-------: |
 | [Master](https://github.com/OuhscBbmc/REDCapR/tree/master) | [![Build Status](https://travis-ci.org/OuhscBbmc/REDCapR.svg?branch=master)](https://travis-ci.org/OuhscBbmc/REDCapR) | [![Build status](https://ci.appveyor.com/api/projects/status/0i41tn0n2jo4pd2k/branch/master?svg=true)](https://ci.appveyor.com/project/wibeasley/redcapr/branch/master) | [![Coverage Status](https://coveralls.io/repos/github/OuhscBbmc/REDCapR/badge.svg?branch=master)](https://coveralls.io/github/OuhscBbmc/REDCapR?branch=master) |
 | [Dev](https://github.com/OuhscBbmc/REDCapR/tree/dev) | [![Build Status](https://travis-ci.org/OuhscBbmc/REDCapR.svg?branch=dev)](https://travis-ci.org/OuhscBbmc/REDCapR) | [![Build status](https://ci.appveyor.com/api/projects/status/0i41tn0n2jo4pd2k/branch/dev?svg=true)](https://ci.appveyor.com/project/wibeasley/redcapr/branch/dev) | [![Coverage Status](https://coveralls.io/repos/github/OuhscBbmc/REDCapR/badge.svg?branch=dev)](https://coveralls.io/github/OuhscBbmc/REDCapR?branch=dev) | -- |
-| | *Ubuntu 12.04 LTS* | *Windows Server 2012* | *Test Coverage* | *Independently-hosted Archive* |
+| | *Ubuntu LTS* | *Windows Server* | *Test Coverage* | *Independently-hosted Archive* |
 
 
 [REDCapR](https://github.com/OuhscBbmc/REDCapR)
@@ -53,7 +53,7 @@ Thanks,
 #### All Operating Systems
 
 | [CRAN](https://cran.r-project.org/) | [Version](https://cran.r-project.org/package=REDCapR) | [Rate](http://cranlogs.r-pkg.org/) | [Zenodo](https://zenodo.org/search?ln=en&p=redcapr) | [RDocumentation](https://www.rdocumentation.org/) |
-|  :---- | :----: | :----: | :----: | :----: | 
+|  :---- | :----: | :----: | :----: | :----: |
 | [Latest](https://cran.r-project.org/package=REDCapR) | [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/REDCapR)](https://cran.r-project.org/package=REDCapR) | ![CRANPace](http://cranlogs.r-pkg.org/badges/REDCapR) | [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.61990.svg)](http://dx.doi.org/10.5281/zenodo.61990) | [![Rdoc](http://www.rdocumentation.org/badges/version/REDCapR)](http://www.rdocumentation.org/packages/REDCapR) |
 |   | *Latest CRAN version* | *CRAN Downloads* | *Independently-hosted Archive* | *HTML Documentation* |
 

@@ -109,6 +109,7 @@ test_that("Metadata Normal", {
     regexp = expected_outcome_message
   )
 
+  # datapasta::tribble_paste(returned_object$data)
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)

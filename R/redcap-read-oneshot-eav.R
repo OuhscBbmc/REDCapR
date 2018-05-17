@@ -175,8 +175,6 @@ redcap_read_oneshot_eav <- function(
     try (
       {
         ds_eav <- readr::read_csv(raw_text)
-        # ds <- utils::read.csv(text=raw_text, stringsAsFactors=FALSE)
-
 
         ds_metadata_expanded <- ds_metadata %>%
           dplyr::select_("field_name", "select_choices_or_calculations", "field_type") %>%
