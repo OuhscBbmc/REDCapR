@@ -46,10 +46,9 @@ Suggests:
     devtools,
     kableExtra,
     knitr,
+    odbc,
     pkgload,
     rmarkdown,
-    RODBC,
-    RODBCext,
     sessioninfo,
     testthat (>= 0.9)
 Remotes:
