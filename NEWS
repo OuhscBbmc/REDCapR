@@ -12,6 +12,7 @@ Deprecated Features:
 * uses `odbc` package to retrieve credentials from the token server.  Remove RODBC and RODBCext (#188)
 * export survey time-stamps optionally (#159)
 * `data.table::rbindlist()` replaced by `dplyr::bind_rows()`
+* New secure Zenodo DOI resolver (katrinleinweber #191)
 
 Version 0.9.8 (Released 2017-05-18)
 ------------------------------------------------------------------------------
