@@ -20,28 +20,37 @@ retrieve_credential_mssql2 <- function(
   # , schema_name, procedure_name, variable_name_project, project_name)
 
   if( base::missing(channel) | base::is.null(channel) ) {
-    channel <- RODBC::odbcConnect(dsn=dsn)
+    #channel <- RODBC::odbcConnect(dsn=dsn)
+    channel <- DBI::dbConnect(odbc::odbc(), dsn=dsn)
     close_channel_on_exit <- TRUE
   } else {
     close_channel_on_exit <- FALSE
   }
 
-  d_input <- data.frame(
+  # d_input <- data.frame(
+  #   project_id         = project_id,
+  #   instance           = instance,
+  #   stringsAsFactors   = FALSE
+  # )
+
+  input <- list(
     project_id         = project_id,
-    instance           = instance,
-    stringsAsFactors   = FALSE
+    instance           = instance
   )
 
 
   base::tryCatch(
     expr = {
-
-      d_credential <- RODBCext::sqlExecute(channel, sql, d_input, fetch=TRUE, stringsAsFactors=FALSE)
-
+      # d_credential <- RODBCext::sqlExecute(channel, sql, d_input, fetch=TRUE, stringsAsFactors=FALSE)
+      result <- DBI::dbSendQuery(channel, sql)
+      DBI::dbBind(result, input)
+      d_credential <- DBI::dbFetch(result)
+      DBI::dbClearResult(result)
 
     }, finally = {
       if( close_channel_on_exit )
-        RODBC::odbcClose(channel)
+        #RODBC::odbcClose(channel)
+        DBI::dbDisconnect(channel);
     }
   )
 

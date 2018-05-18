@@ -1,16 +1,20 @@
 Upcoming Versions
 ------------------------------------------------------------------------------
 In the future:
-* When converting REDCap's CSV to R's data.frame, `readr::read_csv()` is used instead of `utils::read.csv()` (Issue #127).
 * `redcap_read()` and `redcap_read_oneshot()` allows caller to specify data types for columns.
 
 
-Versions 0.9.9 (Released )
+Version 0.9.9 (to be released)
 ------------------------------------------------------------------------------
 Deprecated Features:
 * `retrieve_token_mssql()`, because `retrieve_credential_mssql()` is more general and more useful.
+* When converting REDCap's CSV to R's data.frame, `readr::read_csv()` is used instead of `utils::read.csv()` (Issue #127).
+* uses `odbc` package to retrieve credentials from the token server.  Remove RODBC and RODBCext (#188)
+* export survey time-stamps optionally (#159)
+* `data.table::rbindlist()` replaced by `dplyr::bind_rows()`
+* New secure Zenodo DOI resolver (katrinleinweber #191)
 
-Versions 0.9.8 (Released 2017-05-18)
+Version 0.9.8 (Released 2017-05-18)
 ------------------------------------------------------------------------------
 New Features:
 * Enumerate the exported variables. with `redcap_variables()`.

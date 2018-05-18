@@ -202,6 +202,8 @@ library(magrittr)
 requireNamespace("RODBC")
 requireNamespace("dplyr")
 requireNamespace("readr")
+requireNamespace("tibble")
+requireNamespace("checkmate")
 
 # ---- declare-globals ---------------------------------------------------------
 
@@ -239,14 +241,11 @@ channel <- RODBC::odbcConnect("redcap-dev") # odbcGetInfo(channel)
 ds_dev  <- RODBC::sqlQuery(channel, query=sql, stringsAsFactors=F)
 RODBC::odbcClose(channel); rm(channel, sql)
 
-# Assert these variables contain valid datasets (instead of a character error message).
-testit::assert("The object returned from the database should be a data.frame.", inherits(ds_prod, "data.frame"))
-testit::assert("The object returned from the database should be a data.frame.", inherits(ds_dev , "data.frame"))
-
-# Assert that at least some rows were returned.
+# Assert these variables contain valid datasets (instead of a character error message), and
+#   that at least some rows were returned.
 #   Adjust this to smaller values if necessary.  It's really just to catch blatant retrieval problems.
-testit::assert("There should be at least 5 tokens retrieved from the BBMC box.", nrow(ds_prod) >= 5L)
-testit::assert("There should be at least 5 tokens retrieved from the DEV box." , nrow(ds_dev ) >= 5L)
+checkmate::assert_data_frame(ds_bbmc, min.rows=5)
+checkmate::assert_data_frame(ds_dev , min.rows=5)
 
 
 # ---- tweak-data --------------------------------------------------------------
@@ -275,22 +274,21 @@ rm(ds_prod, ds_dev, ds_url)
 
 
 # ---- verify-values -----------------------------------------------------------
+# devtools::install_github("OuhscBbmc/OuhscMunge"); OuhscMunge::verify_value_headstart(ds)
+# Assert that the dataset is well-behaved.
+checkmate::assert_integer(  ds$id         , any.missing=F , lower=1, upper=2^31-1 , unique=T)
+checkmate::assert_character(ds$username   , any.missing=F , pattern="^.{1,255}$"            )
+checkmate::assert_integer(  ds$project_id , any.missing=F , lower=1, upper=2^31-1           )
+checkmate::assert_character(ds$token      , any.missing=F , pattern="^.{32}$"     , unique=T)
+checkmate::assert_character(ds$instance   , any.missing=F , pattern="^.{1,255}$"            )
+checkmate::assert_character(ds$redcap_uri , any.missing=F , pattern="^.{1,255}$"            )
 
-#Assert that the dataset is well-behaved.
-testit::assert("All `id` values must be nonmissing."         , sum(is.na(ds$id        )) == 0L)
-testit::assert("All `username` values must be nonmissing."   , sum(is.na(ds$username  )) == 0L)
-testit::assert("All `project_id` values must be nonmissing." , sum(is.na(ds$project_id)) == 0L)
-testit::assert("All `token` values must be nonmissing."      , sum(is.na(ds$token     )) == 0L)
-testit::assert("All `instance` values must be nonmissing."   , sum(is.na(ds$instance  )) == 0L)
-testit::assert("All `redcap_uri` values must be nonmissing." , sum(is.na(ds$redcap_uri)) == 0L)
-
-testit::assert("The `token` must be unique.", sum(duplicated(ds$token)) == 0L)
 testit::assert(
   "The `username` x `project_id` x `instance` must be unique.",
   sum(duplicated(paste0(ds$username, "-", ds$project_id, "-", ds$instance))) == 0L
 )
 
-testit::assert("There should be at least 10 tokens written." , nrow(ds) >= 10L)
+testit::assert("There should be at least 10 tokens written." , 10L <= nrow(ds))
 
 
 # ---- specify-columns-to-upload -----------------------------------------------

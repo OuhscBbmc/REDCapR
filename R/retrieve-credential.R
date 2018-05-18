@@ -21,7 +21,7 @@
 #' @param check_username A `logical` value indicates if the username in the credential file should be checked against the username returned by R.  Defaults to FALSE.
 #' @param check_token_pattern A `logical` value indicates if the token in the credential file is a 32-character hexadecimal string.  Defaults to FALSE.
 #' @param dsn A [DSN](http://en.wikipedia.org/wiki/Data_source_name) on the local machine that points to the desired MSSQL database. Required.
-#' @param channel An *optional* connection handle as returned by [RODBC::odbcConnect()].  See Details below. Optional.
+#' @param channel An *optional* connection handle as returned by [DBI::dbConnect()].  See Details below. Optional.
 #'
 #' @return A list of the following elements
 #' * `redcap_uri`: The URI of the REDCap Server.
@@ -57,8 +57,8 @@ retrieve_credential_local <- function(
   check_token_pattern      = TRUE
 ) {
 
-  # Check that the file exists and read it into a data frame.
-  if( !file.exists(path_credential) ) stop("The credential file was not found.")
+  checkmate::assert_character(path_credential           , any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_file_exists(path_credential                                                  )
 
   col_types <- readr::cols_only(
     redcap_uri    = readr::col_character(),
@@ -137,22 +137,22 @@ retrieve_credential_mssql <- function(
   channel                  = NULL
 ) {
 
-  if( !requireNamespace("RODBC") )
-    stop("The function REDCapR::retrieve_credential_mssql() cannot run if the `RODBC` package is not installed.  Please install it and try again.")
-  if( !requireNamespace("RODBCext") )
-    stop("The function REDCapR::retrieve_credential_mssql() cannot run if the `RODBCext` package is not installed.  Please install it and try again.")
+  if( !requireNamespace("DBI")  ) stop("The function REDCapR::retrieve_credential_mssql() cannot run if the `DBI` package is not installed.  Please install it and try again.")
+  if( !requireNamespace("odbc") ) stop("The function REDCapR::retrieve_credential_mssql() cannot run if the `odbc` package is not installed.  Please install it and try again.")
 
   regex_pattern_1 <- "^\\d+$"
   regex_pattern_2 <- "^\\[*[a-zA-Z0-9_]+\\]*$"
 
+  # checkmate::assert_integer(project_id, any.missing=F, len=1L, lower=1L)
   if( class(project_id)  != "integer" )
     stop("The `project_id` parameter be an integer type.  Either append an `L` to the number, or cast with `as.integer()`.")
   if( class(instance)  != "character" )
     stop("The `instance` parameter be a character type.  Either enclose in quotes, or cast with `as.character()`.")
   if( !(base::missing(dsn) | base::is.null(dsn)) & !(class(dsn) %in% c("character")) )
     stop("The `dsn` parameter be a character type, or missing or NULL.  Either enclose in quotes, or cast with `as.character()`.")
-  if( !(base::missing(channel) | base::is.null(channel)) & !inherits(channel, "RODBC") )
-    stop("The `channel` parameter be a `RODBC` type, or NULL.")
+  #if( !(base::missing(channel) | base::is.null(channel)) ) & !inherits(channel, "RODBC") )
+  # if( (base::missing(channel) | base::is.null(channel))  )
+  #   stop("The `channel` parameter be a `DBI` connection type, or NULL.")
 
   if( length(project_id) != 1L )
     stop("The `project_id` parameter should contain exactly one element.")
@@ -170,18 +170,20 @@ retrieve_credential_mssql <- function(
 
 
   sql <- "EXEC [redcap].[prc_credential] @project_id = ?, @instance = ?"
+  input <- list(project_id = project_id, instance = instance)
 
-  d_input <- data.frame(
-    project_id         = project_id,
-    instance           = instance,
-    stringsAsFactors   = FALSE
-  )
+  # d_input <- data.frame(
+  #   project_id         = project_id,
+  #   instance           = instance,
+  #   stringsAsFactors   = FALSE
+  # )
 
   if( base::missing(channel) | base::is.null(channel) ) {
     if( base::missing(dsn) | base::is.null(dsn) )
       stop("The 'dsn' parameter can be missing only if a 'channel' has been passed to 'retrieve_credential_mssql'.")
 
-    channel <- RODBC::odbcConnect(dsn=dsn)
+    # channel <- RODBC::odbcConnect(dsn=dsn)
+    channel <- DBI::dbConnect(odbc::odbc(), dsn=dsn)
     close_channel_on_exit <- TRUE
   } else {
     close_channel_on_exit <- FALSE
@@ -189,24 +191,29 @@ retrieve_credential_mssql <- function(
 
   base::tryCatch(
     expr = {
-      ds_credential <- RODBCext::sqlExecute(channel, sql, d_input, fetch=TRUE, stringsAsFactors=FALSE)
+      # ds_credential <- RODBCext::sqlExecute(channel, sql, d_input, fetch=TRUE, stringsAsFactors=FALSE)
+      result        <- DBI::dbSendQuery(channel, sql)
+      DBI::dbBind(result, input)
+      d_credential  <- DBI::dbFetch(result)
     }, finally = {
-      if( close_channel_on_exit ) RODBC::odbcClose(channel)
+      # if( close_channel_on_exit ) RODBC::odbcClose(channel)
+      if( !is.null(result))       DBI::dbClearResult(result)
+      if( close_channel_on_exit ) DBI::dbDisconnect(channel)
     }
   )
 
-  if( nrow(ds_credential) == 0L ) {
+  if( nrow(d_credential) == 0L ) {
     stop(paste("The REDCap token for project", project_id, "was not found on for this username and instance.  Please verify with your REDCap admin that you have both (a) API rights AND (b) an API token generated."))
-  } else if( nrow(ds_credential) >= 2L ) {
+  } else if( nrow(d_credential) >= 2L ) {
     stop("No more than one row should be retrieved from the credentials.  The [username]-by-[instance]-by-[project_id] should be unique in the table.")
   }
 
   # browser()
   credential <- list(
-    redcap_uri   = ds_credential$redcap_uri,
-    username     = ds_credential$username,
-    project_id   = ds_credential$project_id,
-    token        = ds_credential$token,
+    redcap_uri   = d_credential$redcap_uri,
+    username     = d_credential$username,
+    project_id   = d_credential$project_id,
+    token        = d_credential$token,
     comment      = ""
   )
 

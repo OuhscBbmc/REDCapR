@@ -12,8 +12,7 @@ addons:
   apt:
     update:          false
     packages:
-      - r-cran-rodbc
-      - unixodbc-dev
+#      - unixodbc-dev
 
 r_github_packages:
   - jimhester/covr
