@@ -66,19 +66,12 @@
 #' }
 
 redcap_upload_file_oneshot <- function( file_name, record, redcap_uri, token, field, event="", verbose=TRUE, config_options=NULL ) {
+
   start_time <- Sys.time()
-
-  if( missing(file_name) | is.null(file_name) )
-    stop("The required parameter `file_name` was missing from the call to `redcap_upload_file_oneshot()`.")
-
-  if( !base::file.exists(file_name) )
-    stop("The file `", file_name, "` was not found at the specified path.")
-
-  if( missing(redcap_uri) )
-    stop("The required parameter `redcap_uri` was missing from the call to `redcap_upload_file_oneshot()`.")
-
-  if( missing(token) )
-    stop("The required parameter `token` was missing from the call to `redcap_upload_file_oneshot()`.")
+  checkmate::assert_character(file_name                 , any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_file_exists(file_name                                                        )
+  checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
 
   token <- sanitize_token(token)
 

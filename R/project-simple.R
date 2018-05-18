@@ -31,8 +31,7 @@ populate_project_simple <- function( batch = FALSE ) {
   testthat::expect_message(
     if( batch ) {
       returned_object <- REDCapR::redcap_write(ds=dsToWrite, redcap_uri=uri, token=token, verbose=TRUE)
-    }
-    else {
+    } else {
       returned_object <- REDCapR::redcap_write_oneshot(ds=dsToWrite, redcap_uri=uri, token=token, verbose=TRUE)
     }
   )

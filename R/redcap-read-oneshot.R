@@ -78,17 +78,11 @@ redcap_read_oneshot <- function(
   #TODO: NULL verbose parameter pulls from getOption("verbose")
 
   start_time <- Sys.time()
-
-  if( missing(redcap_uri) )
-    stop("The required parameter `redcap_uri` was missing from the call to `redcap_read_oneshot()`.")
-  if( missing(token) )
-    stop("The required parameter `token` was missing from the call to `redcap_read_oneshot()`.")
-  if( !is.logical(export_data_access_groups) )
-    stop("The optional parameter `export_data_access_groups` must be a logical/Boolean variable.")
-  if( !is.character(filter_logic) )
-    stop("The optional parameter `filter_logic` must be a character/string variable.")
-  if( !(raw_or_label %in% c("raw", "label")) )
-    stop("The optional parameter `raw_or_label` must be either 'raw' or 'label'.")
+  checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_logical(  export_data_access_groups , any.missing=F, len=1)
+  checkmate::assert_character(filter_logic              , any.missing=F, len=1, pattern="^.{0,}$")
+  checkmate::assert_subset(  raw_or_label               , c("raw", "label"))
 
   token <- sanitize_token(token)
   validate_field_names(fields)

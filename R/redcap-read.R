@@ -77,11 +77,8 @@ redcap_read <- function(
   verbose=TRUE, config_options=NULL, id_position=1L
 ) {
 
-  if( missing(redcap_uri) )
-    stop("The required parameter `redcap_uri` was missing from the call to `redcap_read()`.")
-
-  if( missing(token) )
-    stop("The required parameter `token` was missing from the call to `redcap_read()`.")
+  checkmate::assert_character(redcap_uri, any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(token, any.missing=F, len=1, pattern="^.{1,}$")
 
   token <- sanitize_token(token)
   validate_field_names(fields)

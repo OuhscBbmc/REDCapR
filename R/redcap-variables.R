@@ -43,12 +43,10 @@
 redcap_variables <- function(
   redcap_uri, token, verbose=TRUE, config_options=NULL
 ) {
-  start_time <- Sys.time()
 
-  if( missing(redcap_uri) )
-    stop("The required parameter `redcap_uri` was missing from the call to `redcap_read_oneshot()`.")
-  if( missing(token) )
-    stop("The required parameter `token` was missing from the call to `redcap_read_oneshot()`.")
+  start_time <- Sys.time()
+  checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
 
   token <- sanitize_token(token)
 

@@ -49,12 +49,12 @@ test_that("Good Credentials", {
 })
 
 test_that("Missing file", {
-  expected_message <- "The credential file was not found."
+  expected_message <- "Assertion on 'path_credential' failed: File does not exist: 'misc/missing.credentials'."
 
   expect_error(
     regexp = expected_message,
     object = REDCapR::retrieve_credential_local(
-      path           = system.file("misc/missing.credentials", package="REDCapR"),
+      path           = "misc/missing.credentials", #system.file("misc/missing.credentials", package="REDCapR"),
       project_id     = pid_read
     )
   )

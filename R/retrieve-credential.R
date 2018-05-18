@@ -57,8 +57,8 @@ retrieve_credential_local <- function(
   check_token_pattern      = TRUE
 ) {
 
-  # Check that the file exists and read it into a data frame.
-  if( !file.exists(path_credential) ) stop("The credential file was not found.")
+  checkmate::assert_character(path_credential           , any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_file_exists(path_credential                                                  )
 
   col_types <- readr::cols_only(
     redcap_uri    = readr::col_character(),
