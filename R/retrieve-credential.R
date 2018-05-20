@@ -150,9 +150,9 @@ retrieve_credential_mssql <- function(
     stop("The `instance` parameter be a character type.  Either enclose in quotes, or cast with `as.character()`.")
   if( !(base::missing(dsn) | base::is.null(dsn)) & !(class(dsn) %in% c("character")) )
     stop("The `dsn` parameter be a character type, or missing or NULL.  Either enclose in quotes, or cast with `as.character()`.")
-  #if( !(base::missing(channel) | base::is.null(channel)) ) & !inherits(channel, "RODBC") )
-  # if( (base::missing(channel) | base::is.null(channel))  )
-  #   stop("The `channel` parameter be a `DBI` connection type, or NULL.")
+  # if( !(base::missing(channel) | base::is.null(channel))  & !inherits(channel, "DBIConnection") )
+  if( !(base::missing(channel) | base::is.null(channel)) & !inherits(channel, "DBIConnection") )
+    stop("The `channel` parameter be a `DBIConnection` connection type, or NULL.")
 
   if( length(project_id) != 1L )
     stop("The `project_id` parameter should contain exactly one element.")
