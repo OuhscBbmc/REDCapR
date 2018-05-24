@@ -84,8 +84,10 @@ redcap_metadata_read <- function(
   elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
 
   if( success ) {
+    col_types <- readr::cols(field_name = readr::col_character(), .default = readr::col_character())
+
     try (
-      ds <- readr::read_csv(raw_text), #Convert the raw text to a dataset.
+      ds <- readr::read_csv(raw_text, col_types = col_types), #Convert the raw text to a dataset.
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
     )
 
