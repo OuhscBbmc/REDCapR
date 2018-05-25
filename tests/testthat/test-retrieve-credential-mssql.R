@@ -139,19 +139,19 @@ test_that("bad type: DSN name", {
   )
 })
 
-# test_that("bad type: channel ", {
-#   testthat::skip_if_not_installed(pkg="odbc")
-#   expected_message <- "The `channel` parameter be a `DBI` connection type, or NULL."
-#
-#   #integer
-#   expect_error(
-#     regexp = expected_message,
-#     REDCapR::retrieve_credential_mssql(pid_read, instance="dev", channel=integer(1))
-#   )
-#
-#   #numeric
-#   expect_error(
-#     regexp = expected_message,
-#     REDCapR::retrieve_credential_mssql(pid_read, instance="dev", channel=numeric(1))
-#   )
-# })
+test_that("bad type: channel ", {
+  testthat::skip_if_not_installed(pkg="odbc")
+  expected_message <- "The `channel` parameter be a `DBIConnection` connection type, or NULL."
+
+  #integer
+  expect_error(
+    regexp = expected_message,
+    REDCapR::retrieve_credential_mssql(pid_read, instance="dev", channel=integer(1))
+  )
+
+  #numeric
+  expect_error(
+    regexp = expected_message,
+    REDCapR::retrieve_credential_mssql(pid_read, instance="dev", channel=numeric(1))
+  )
+})

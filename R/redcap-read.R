@@ -22,6 +22,7 @@
 #' @param export_survey_fields A boolean that specifies whether to export the survey identifier field (e.g., 'redcap_survey_identifier') or survey timestamp fields (e.g., instrument+'_timestamp') .
 #' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is `FALSE`. See the details below.
 #' @param raw_or_label A string (either 'raw` or 'label' that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is `'raw'`.
+#' @param guess_type A boolean value indicating if all columns should be returned as character.  If true, [readr::read_csv()] guesses the intended data type for each column.
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details in `redcap_read_oneshot()` Optional.
 #' @param id_position  The column position of the variable that unique identifies the subject.  This defaults to the first variable in the dataset.
@@ -74,11 +75,13 @@ redcap_read <- function(
   export_data_access_groups=FALSE,
   filter_logic="",
   raw_or_label='raw',
+  guess_type                  = TRUE,
   verbose=TRUE, config_options=NULL, id_position=1L
 ) {
 
   checkmate::assert_character(redcap_uri, any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token, any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_logical(  guess_type            , any.missing=F, len=1)
 
   token <- sanitize_token(token)
   validate_field_names(fields)
@@ -108,6 +111,7 @@ redcap_read <- function(
     fields_collapsed   = metadata$data$field_name[1],
     filter_logic       = filter_logic,
     events_collapsed   = events_collapsed,
+    guess_type         = guess_type,
     verbose            = verbose,
     config_options     = config_options
   )
@@ -173,6 +177,7 @@ redcap_read <- function(
       export_survey_fields        = export_survey_fields,
       export_data_access_groups   = export_data_access_groups,
       raw_or_label                = raw_or_label,
+      guess_type              = guess_type,
       verbose                     = verbose,
       config_options              = config_options
     )

@@ -94,6 +94,90 @@ test_that("All Records -Default", {
   #expect_equal_to_reference(returned_object$data, file=base::file.path(pkgload::inst(name="REDCapR"), "test-data/project-simple/variations/default.rds") )
   #expect_equal_to_reference(returned_object$data, file="./test-data/project-simple/variations/default.rds")
 })
+
+test_that("All Records -force character type", {
+  testthat::skip_on_cran()
+  expected_data_frame <- structure(list(record_id = c("1", "2", "3", "4", "5"), name_first = c("Nutmeg",
+    "Tumtum", "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse",
+    "Nutmouse", "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\r\nKenning UK, 323232",
+    "14 Rose Cottage Blvd.\r\nKenning UK 34243", "243 Hill St.\r\nGuthrie OK 73402",
+    "342 Elm\r\nDuncanville TX, 75116", "Hotel Suite\r\nNew Orleans LA, 70115"
+    ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333",
+    "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com",
+    "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
+    ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02",
+    "1955-04-15"), age = c("11", "11", "80", "61", "59"), sex = c("0",
+    "1", "1", "0", "1"), demographics_complete = c("2", "2", "2",
+    "2", "2"), height = c("7", "6", "180", "165", "193.04"), weight = c("1",
+    "1", "80", "54", "104"), bmi = c("204.1", "277.8", "24.7", "19.8",
+    "27.9"), comments = c("Character in a book, with some guessing",
+    "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\r\n\r\nSo call up Trudy on the telephone\r\nSend her a letter in the mail",
+    "Had a hand for trouble and a eye for cash\r\n\r\nHe had a gold watch chain and a black mustache"
+    ), mugshot = c("[document]", "[document]", "[document]", "[document]",
+    "[document]"), health_complete = c("1", "0", "2", "2", "0"),
+    race___1 = c("0", "0", "0", "0", "1"), race___2 = c("0",
+    "0", "0", "1", "0"), race___3 = c("0", "1", "0", "0", "0"
+    ), race___4 = c("0", "0", "1", "0", "0"), race___5 = c("1",
+    "1", "1", "1", "0"), race___6 = c("0", "0", "0", "0", "1"
+    ), ethnicity = c("1", "1", "0", "1", "2"), race_and_ethnicity_complete = c("2",
+    "0", "2", "2", "2")), class = "data.frame", .Names = c("record_id",
+    "name_first", "name_last", "address", "telephone", "email", "dob",
+    "age", "sex", "demographics_complete", "height", "weight", "bmi",
+    "comments", "mugshot", "health_complete", "race___1", "race___2",
+    "race___3", "race___4", "race___5", "race___6", "ethnicity",
+    "race_and_ethnicity_complete"), row.names = c(NA, -5L), spec = structure(list(
+    cols = structure(list(record_id = structure(list(), class = c("collector_character",
+    "collector")), name_first = structure(list(), class = c("collector_character",
+    "collector")), name_last = structure(list(), class = c("collector_character",
+    "collector")), address = structure(list(), class = c("collector_character",
+    "collector")), telephone = structure(list(), class = c("collector_character",
+    "collector")), email = structure(list(), class = c("collector_character",
+    "collector")), dob = structure(list(), class = c("collector_character",
+    "collector")), age = structure(list(), class = c("collector_character",
+    "collector")), sex = structure(list(), class = c("collector_character",
+    "collector")), demographics_complete = structure(list(), class = c("collector_character",
+    "collector")), height = structure(list(), class = c("collector_character",
+    "collector")), weight = structure(list(), class = c("collector_character",
+    "collector")), bmi = structure(list(), class = c("collector_character",
+    "collector")), comments = structure(list(), class = c("collector_character",
+    "collector")), mugshot = structure(list(), class = c("collector_character",
+    "collector")), health_complete = structure(list(), class = c("collector_character",
+    "collector")), race___1 = structure(list(), class = c("collector_character",
+    "collector")), race___2 = structure(list(), class = c("collector_character",
+    "collector")), race___3 = structure(list(), class = c("collector_character",
+    "collector")), race___4 = structure(list(), class = c("collector_character",
+    "collector")), race___5 = structure(list(), class = c("collector_character",
+    "collector")), race___6 = structure(list(), class = c("collector_character",
+    "collector")), ethnicity = structure(list(), class = c("collector_character",
+    "collector")), race_and_ethnicity_complete = structure(list(), class = c("collector_character",
+    "collector"))), .Names = c("record_id", "name_first", "name_last",
+    "address", "telephone", "email", "dob", "age", "sex", "demographics_complete",
+    "height", "weight", "bmi", "comments", "mugshot", "health_complete",
+    "race___1", "race___2", "race___3", "race___4", "race___5",
+    "race___6", "ethnicity", "race_and_ethnicity_complete")),
+    default = structure(list(), class = c("collector_character",
+    "collector"))), .Names = c("cols", "default"), class = "col_spec")
+  )
+
+  expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+
+  expect_message(
+    regexp           = expected_outcome_message,
+    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, guess_type=FALSE)
+  )
+
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_equal(returned_object$status_code, expected=200L)
+  expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
+  expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_true(returned_object$filter_logic=="", "A filter was not specified.")
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true(returned_object$success)
+  #expect_equal_to_reference(returned_object$data, file=base::file.path(pkgload::inst(name="REDCapR"), "test-data/project-simple/variations/default.rds") )
+  #expect_equal_to_reference(returned_object$data, file="./test-data/project-simple/variations/default.rds")
+})
+
 test_that("All Records -Raw", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
