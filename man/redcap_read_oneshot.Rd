@@ -8,8 +8,8 @@ redcap_read_oneshot(redcap_uri, token, records = NULL,
   records_collapsed = "", fields = NULL, fields_collapsed = "",
   events = NULL, events_collapsed = "", export_survey_fields = FALSE,
   export_data_access_groups = FALSE, filter_logic = "",
-  raw_or_label = "raw", guess_type = TRUE, verbose = TRUE,
-  config_options = NULL)
+  raw_or_label = "raw", guess_type = TRUE, guess_max = 1000L,
+  verbose = TRUE, config_options = NULL)
 }
 \arguments{
 \item{redcap_uri}{The URI (uniform resource identifier) of the REDCap project.  Required.}
@@ -37,6 +37,8 @@ redcap_read_oneshot(redcap_uri, token, records = NULL,
 \item{raw_or_label}{A string (either \code{'raw'} or \code{'label'}) that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is \code{'raw'}.}
 
 \item{guess_type}{A boolean value indicating if all columns should be returned as character.  If false, \code{\link[readr:read_csv]{readr::read_csv()}} guesses the intended data type for each column.}
+
+\item{guess_max}{A positive integer passed to \code{\link[readr:read_csv]{readr::read_csv()}} that specifies the maximum number of records to use for guessing column types.}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.}
 
