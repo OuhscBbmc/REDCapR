@@ -17,6 +17,7 @@ addons:
 r_github_packages:
   - jimhester/covr
   - r-lib/pkgload
+  - tidyverse/readr
 # - zozlak/RODBCext
 # - tidyverse/dplyr
 # - jeroen/curl

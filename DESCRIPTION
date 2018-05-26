@@ -34,10 +34,10 @@ Depends:
     stats
 Imports:
     dplyr,
-    httr(>= 1.0.0.9000),
+    httr(>= 1.3.0),
     magrittr,
     methods,
-    readr,
+    readr (>= 1.2.0),
     tibble,
     tidyr
 Suggests:
@@ -52,6 +52,7 @@ Suggests:
     sessioninfo,
     testthat (>= 0.9)
 Remotes:
+  github::tidyrverse/readr
   github::r-lib/pkgload
 License: GPL-2
 LazyData: TRUE
