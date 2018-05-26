@@ -52,7 +52,7 @@ Suggests:
     sessioninfo,
     testthat (>= 0.9)
 Remotes:
-  github::tidyrverse/readr
+  github::tidyverse/readr
   github::r-lib/pkgload
 License: GPL-2
 LazyData: TRUE
