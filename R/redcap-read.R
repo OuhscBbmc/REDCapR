@@ -137,16 +137,7 @@ redcap_read <- function(
   uniqueIDs <- sort(unique(initial_call$data[, 1]))
 
   if( all(nchar(uniqueIDs)==32L) )
-    warning(
-      "It appears that the REDCap record IDs have been hashed. ",
-      "For `redcap_read` to function properly, the user must have Export permissions for the 'Full Data Set'. ",
-      "To grant the appropriate permissions: ",
-      "(1) go to 'User Rights' in the REDCap project site, ",
-      "(2) select the desired user, and then select 'Edit User Privileges', ",
-      "(3) in the 'Data Exports' radio buttons, select 'Full Data Set'.\n",
-      "Users with only `De-Identified` export privileges can still use ",
-      "`redcap_read_oneshot()` and `redcap_write_oneshot()`."
-    )
+    warn_hash_record_id()
 
   ds_glossary            <- REDCapR::create_batch_glossary(row_count=length(uniqueIDs), batch_size=batch_size)
   lst_batch              <- NULL
@@ -223,3 +214,16 @@ redcap_read <- function(
 # redcap_uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 # token <- "9A81268476645C4E5F03428B8AC3AA7B"
 # redcap_read(batch_size=2, redcap_uri=redcap_uri, token=token)
+
+warn_hash_record_id <- function( )  {
+  warning(
+    "It appears that the REDCap record IDs have been hashed. ",
+    "For `redcap_read` to function properly, the user must have Export permissions for the 'Full Data Set'. ",
+    "To grant the appropriate permissions: ",
+    "(1) go to 'User Rights' in the REDCap project site, ",
+    "(2) select the desired user, and then select 'Edit User Privileges', ",
+    "(3) in the 'Data Exports' radio buttons, select 'Full Data Set'.\n",
+    "Users with only `De-Identified` export privileges can still use ",
+    "`redcap_read_oneshot()` and `redcap_write_oneshot()`."
+  )
+}

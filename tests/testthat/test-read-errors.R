@@ -86,3 +86,13 @@ test_that("Batch: Bad Uri -wrong address", {
   expect_equal(returned_object$outcome_messages, expected_outcome_message)
   expect_false(returned_object$success)
 })
+
+test_that("warn hashed record is", {
+  # This dinky little test is mostly to check that the warning message has legal syntax.
+  expected_warning <- "^It appears that the REDCap record IDs have been hashed.+"
+
+  expect_warning(
+    REDCapR:::warn_hash_record_id(),
+    expected_warning
+  )
+})
