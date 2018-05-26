@@ -4,6 +4,7 @@
 \alias{metadata_utilities}
 \alias{regex_named_captures}
 \alias{checkbox_choices}
+\alias{checkbox_choices}
 \title{Manipulate and interpret the metadata of a REDCap project.}
 \usage{
 regex_named_captures(pattern, text, perl = TRUE)
