@@ -137,6 +137,8 @@ redcap_read_oneshot <- function(
   success <- (status_code==200L)
 
   raw_text <- httr::content(result, "text")
+  raw_text <- gsub("\r\n", "\n", raw_text)
+  # browser()
   elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
 
   # raw_text <- "The hostname (redcap-db.hsc.net.ou.edu) / username (redcapsql) / password (XXXXXX) combination could not connect to the MySQL server. \r\n\t\tPlease check their values."
