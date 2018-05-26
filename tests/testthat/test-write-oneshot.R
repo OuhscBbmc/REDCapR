@@ -23,7 +23,7 @@ test_that("Write One Shot -Insert", {
   returned_object$data$age <- NULL
 
   expected_data_frame <- structure(
-    list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum", 
+    list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
     "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
     "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
     "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402",
@@ -81,7 +81,7 @@ test_that("Write One Shot -Insert", {
     "collector"))), .Names = c("cols", "default"), class = "col_spec"), class = "data.frame"
 )
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") #returned_object$data$bmi<-NULL; returned_object$data$age<-NULL;dput(returned_object$data)
+  expect_equivalent(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") #returned_object$data$bmi<-NULL; returned_object$data$age<-NULL;dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
@@ -171,7 +171,7 @@ test_that("Write One Shot -Update One Field", {
     "collector"))), .Names = c("cols", "default"), class = "col_spec"), class = "data.frame"
   )
 
-  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
+  expect_equivalent(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
   expect_equal(returned_object2$status_code, expected=200L)
   expect_equivalent(returned_object2$raw_text, expected="") # dput(returned_object2$raw_text)
   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
@@ -262,7 +262,7 @@ test_that("Write One Shot -Update Two Fields", {
     "collector"))), .Names = c("cols", "default"), class = "col_spec"), class = "data.frame"
   )
 
-  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
+  expect_equivalent(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
   expect_equal(returned_object2$status_code, expected=200L)
   expect_equivalent(returned_object2$raw_text, expected="") # dput(returned_object2$raw_text)
   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")

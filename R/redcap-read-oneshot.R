@@ -88,7 +88,7 @@ redcap_read_oneshot <- function(
   checkmate::assert_character(filter_logic              , any.missing=F, len=1, pattern="^.{0,}$")
   checkmate::assert_subset(  raw_or_label               , c("raw", "label"))
   checkmate::assert_logical(  guess_type                , any.missing=F, len=1)
-  checkmate::assert_integer(  guess_max                 , any.missing=F, len=1, lower=1)
+  checkmate::assert_integerish(guess_max                , any.missing=F, len=1, lower=1)
 
   token <- sanitize_token(token)
   validate_field_names(fields)
@@ -137,6 +137,8 @@ redcap_read_oneshot <- function(
   success <- (status_code==200L)
 
   raw_text <- httr::content(result, "text")
+  raw_text <- gsub("\r\n", "\n", raw_text)
+  # browser()
   elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
 
   # raw_text <- "The hostname (redcap-db.hsc.net.ou.edu) / username (redcapsql) / password (XXXXXX) combination could not connect to the MySQL server. \r\n\t\tPlease check their values."
