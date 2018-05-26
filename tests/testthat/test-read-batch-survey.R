@@ -56,7 +56,7 @@ test_that("All Records -Default", {
     regexp            = expected_outcome_message,
     returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, export_survey_fields=T)
   )
-  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
+  expect_equivalent(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
   expect_true(all(!is.na(returned_object1$data$prescreening_survey_timestamp)))
   expect_true(returned_object1$success)
   expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)

@@ -83,7 +83,7 @@ test_that("All Records -Default", {
     returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T)
   )
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_equivalent(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
@@ -166,7 +166,7 @@ test_that("All Records -force character type", {
     returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, guess_type=FALSE)
   )
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_equivalent(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
@@ -248,7 +248,7 @@ test_that("All Records -Raw", {
     returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="raw", verbose=T)
   )
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_equivalent(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
@@ -329,7 +329,7 @@ test_that("All Records -Raw and DAG", {
     returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="raw", export_data_access_groups=TRUE, verbose=T)
   )
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_equivalent(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
@@ -417,7 +417,7 @@ test_that("All Records -label and DAG", {
     returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups=TRUE, verbose=T)
   )
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_equivalent(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
@@ -502,7 +502,7 @@ test_that("All Records -label", {
     returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups=FALSE, verbose=T)
   )
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_equivalent(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
@@ -572,7 +572,7 @@ test_that("Filter - numeric", {
     returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T, filter_logic=filter)
   )
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_equivalent(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
@@ -637,7 +637,7 @@ test_that("Filter - character", {
     returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T, filter_logic=filter)
   )
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_equivalent(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
