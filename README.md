@@ -1,8 +1,8 @@
 | [GitHub](https://github.com/OuhscBbmc/REDCapR) | [Travis-CI](https://travis-ci.org/OuhscBbmc/REDCapR/builds) | [AppVeyor](https://ci.appveyor.com/project/wibeasley/redcapr/history) | [Coveralls](https://coveralls.io/r/OuhscBbmc/REDCapR) |
 | :----- | :---------------------------: | :-----------------------------: | :-------: |
 | [Master](https://github.com/OuhscBbmc/REDCapR/tree/master) | [![Build Status](https://travis-ci.org/OuhscBbmc/REDCapR.svg?branch=master)](https://travis-ci.org/OuhscBbmc/REDCapR) | [![Build status](https://ci.appveyor.com/api/projects/status/0i41tn0n2jo4pd2k/branch/master?svg=true)](https://ci.appveyor.com/project/wibeasley/redcapr/branch/master) | [![Coverage Status](https://coveralls.io/repos/github/OuhscBbmc/REDCapR/badge.svg?branch=master)](https://coveralls.io/github/OuhscBbmc/REDCapR?branch=master) |
-| [Dev](https://github.com/OuhscBbmc/REDCapR/tree/dev) | [![Build Status](https://travis-ci.org/OuhscBbmc/REDCapR.svg?branch=dev)](https://travis-ci.org/OuhscBbmc/REDCapR) | [![Build status](https://ci.appveyor.com/api/projects/status/0i41tn0n2jo4pd2k/branch/dev?svg=true)](https://ci.appveyor.com/project/wibeasley/redcapr/branch/dev) | [![Coverage Status](https://coveralls.io/repos/github/OuhscBbmc/REDCapR/badge.svg?branch=dev)](https://coveralls.io/github/OuhscBbmc/REDCapR?branch=dev) | -- |
-| | *Ubuntu LTS* | *Windows Server* | *Test Coverage* | *Independently-hosted Archive* |
+| [Dev](https://github.com/OuhscBbmc/REDCapR/tree/dev) | [![Build Status](https://travis-ci.org/OuhscBbmc/REDCapR.svg?branch=dev)](https://travis-ci.org/OuhscBbmc/REDCapR) | [![Build status](https://ci.appveyor.com/api/projects/status/0i41tn0n2jo4pd2k/branch/dev?svg=true)](https://ci.appveyor.com/project/wibeasley/redcapr/branch/dev) | [![Coverage Status](https://coveralls.io/repos/github/OuhscBbmc/REDCapR/badge.svg?branch=dev)](https://coveralls.io/github/OuhscBbmc/REDCapR?branch=dev) |
+| | *Ubuntu LTS* | *Windows Server* | *Test Coverage* |
 
 
 [REDCapR](https://github.com/OuhscBbmc/REDCapR)
@@ -50,7 +50,7 @@ Thanks,
 
 ### Download and Installation Instructions
 
-#### All Operating Systems
+Applies to Windows and Linux.
 
 | [CRAN](https://cran.r-project.org/) | [Version](https://cran.r-project.org/package=REDCapR) | [Rate](http://cranlogs.r-pkg.org/) | [Zenodo](https://zenodo.org/search?ln=en&p=redcapr) | [RDocumentation](https://www.rdocumentation.org/) |
 |  :---- | :----: | :----: | :----: | :----: |
@@ -67,23 +67,6 @@ The *development* version of REDCapR can be installed from [GitHub](https://gith
 ```r
 install.packages("remotes") # Run this line if the 'remotes' package isn't installed already.
 remotes::install_github(repo="OuhscBbmc/REDCapR")
-```
-
-#### Linux
-
-If installing on Linux, the default R CHECK command will try (and fail) to install the (non-vital) RODBC package.  While this package isn't necessary to interact with your REDCap server (and thus not necessary for the core features of REDCapR).  To check REDCapR's installation on Linux, run the following R code.  Make sure the working directory is set to the root of the REDCapR directory; this will happen automatically when you use RStudio to open the `REDCapR.Rproj` file.
-```r
-devtools::check(force_suggests = FALSE)
-```
-
-Alternatively, the [RODBC](https://CRAN.R-project.org/package=RODBC) package can be installed from your distribution's repository using the shell.  Here are instructions for [Ubuntu](https://cran.r-project.org/bin/linux/ubuntu/README.html) and [Red Hat](https://cran.r-project.org/bin/linux/redhat/README).  `unixodbc` is necessary for the [`RODBCext`](https://CRAN.R-project.org/package=RODBCext) R package to be built.
-
-```shell
-#From Ubuntu terminal
-sudo apt-get install r-cran-rodbc unixodbc-dev
-
-#From Red Hat terminal
-sudo yum install R-RODBC unixODBC-devel
 ```
 
 ### Collaborative Development
