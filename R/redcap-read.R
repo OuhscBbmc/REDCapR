@@ -217,13 +217,13 @@ redcap_read <- function(
 
 warn_hash_record_id <- function( )  {
   warning(
-    "It appears that the REDCap record IDs have been hashed. ",
-    "For `redcap_read` to function properly, the user must have Export permissions for the 'Full Data Set'. ",
-    "To grant the appropriate permissions: ",
-    "(1) go to 'User Rights' in the REDCap project site, ",
-    "(2) select the desired user, and then select 'Edit User Privileges', ",
+    "It appears that the REDCap record IDs have been hashed.\n",
+    "For `REDCapR::redcap_read()` to function properly, the user must have Export permissions for the 'Full Data Set'.\n",
+    "To grant the appropriate permissions:\n",
+    "(1) go to 'User Rights' in the REDCap project site,\n",
+    "(2) select the desired user, and then select 'Edit User Privileges',\n",
     "(3) in the 'Data Exports' radio buttons, select 'Full Data Set'.\n",
-    "Users with only `De-Identified` export privileges can still use ",
+    "Users with only `De-Identified` export privileges can still use\n",
     "`redcap_read_oneshot()` and `redcap_write_oneshot()`."
   )
 }
