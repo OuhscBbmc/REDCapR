@@ -69,17 +69,20 @@
 #' }
 
 redcap_read_oneshot <- function(
-  redcap_uri, token, records=NULL, records_collapsed="",
-  fields=NULL, fields_collapsed="",
-  events=NULL, events_collapsed="",
-  export_survey_fields = FALSE,
-  export_data_access_groups=FALSE,
-  filter_logic="",
-  raw_or_label='raw',
-  raw_or_label_headers='raw',
+  redcap_uri,
+  token,
+  records                     = NULL, records_collapsed = "",
+  fields                      = NULL, fields_collapsed  = "",
+  events                      = NULL, events_collapsed  = "",
+  export_survey_fields        = FALSE,
+  export_data_access_groups   = FALSE,
+  filter_logi                 = "",
+  raw_or_labe                 = "raw",
+  raw_or_label_headers        = "raw",
   guess_type                  = TRUE,
   guess_max                   = 1000L,
-  verbose=TRUE, config_options=NULL
+  verbose                     = TRUE,
+  config_options              = NULL
 ) {
   #TODO: NULL verbose parameter pulls from getOption("verbose")
 
@@ -96,7 +99,7 @@ redcap_read_oneshot <- function(
   if( !(raw_or_label_headers %in% c("raw", "label")) )
   stop("The optional parameter `raw_or_label_headers` must be either 'raw' or 'label'.")
 
-    token <- sanitize_token(token)
+  token <- sanitize_token(token)
   validate_field_names(fields)
 
   if( all(nchar(records_collapsed)==0) )

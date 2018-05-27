@@ -9,8 +9,8 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
   records_collapsed = "", fields = NULL, fields_collapsed = "",
   events = NULL, events_collapsed = "", export_survey_fields = FALSE,
   export_data_access_groups = FALSE, filter_logic = "",
-  raw_or_label = "raw", guess_type = TRUE, verbose = TRUE,
-  config_options = NULL, id_position = 1L)
+  raw_or_label = "raw", raw_or_label_headers = "raw", guess_type = TRUE,
+  verbose = TRUE, config_options = NULL, id_position = 1L)
 }
 \arguments{
 \item{batch_size}{The maximum number of subject records a single batch should contain.  The default is 100.}
@@ -42,6 +42,8 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
 \item{filter_logic}{String of logic text (e.g., \code{[gender] = 'male'}) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.}
 
 \item{raw_or_label}{A string (either 'raw\code{or 'label' that specifies whether to export the raw coded values or the labels for the options of multiple choice fields. Default is}'raw'`.}
+
+\item{raw_or_label_headers}{A string (either \code{'raw'} or \code{'label'} that specifies for the CSV headers whether to export the variable/field names (raw) or the field labels (label).  Default is \code{'raw'}.}
 
 \item{guess_type}{A boolean value indicating if all columns should be returned as character.  If true, \code{\link[readr:read_csv]{readr::read_csv()}} guesses the intended data type for each column.}
 

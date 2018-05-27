@@ -68,17 +68,23 @@
 #'
 
 redcap_read <- function(
-  batch_size=100L, interbatch_delay=0.5, continue_on_error=FALSE,
-  redcap_uri, token, records=NULL, records_collapsed="",
-  fields=NULL, fields_collapsed="",
-  events=NULL, events_collapsed="",
-  export_survey_fields = FALSE,
-  export_data_access_groups=FALSE,
-  filter_logic="",
-  raw_or_label='raw', 
-  raw_or_label_headers='raw',
+  batch_size                  = 100L,
+  interbatch_delay            = 0.5,
+  continue_on_error           = FALSE,
+  redcap_uri,
+  token,
+  records                     = NULL, records_collapsed = "",
+  fields                      = NULL, fields_collapsed  = "",
+  events                      = NULL, events_collapsed  = "",
+  export_survey_fields        = FALSE,
+  export_data_access_groups   = FALSE,
+  filter_logic                = "",
+  raw_or_label                = "raw",
+  raw_or_label_headers        = "raw",
   guess_type                  = TRUE,
-  verbose=TRUE, config_options=NULL, id_position=1L
+  verbose                     = TRUE,
+  config_options              = NULL,
+  id_position                 = 1L
 ) {
 
   checkmate::assert_character(redcap_uri, any.missing=F, len=1, pattern="^.{1,}$")

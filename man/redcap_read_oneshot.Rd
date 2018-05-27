@@ -7,9 +7,9 @@
 redcap_read_oneshot(redcap_uri, token, records = NULL,
   records_collapsed = "", fields = NULL, fields_collapsed = "",
   events = NULL, events_collapsed = "", export_survey_fields = FALSE,
-  export_data_access_groups = FALSE, filter_logic = "",
-  raw_or_label = "raw", guess_type = TRUE, guess_max = 1000L,
-  verbose = TRUE, config_options = NULL)
+  export_data_access_groups = FALSE, filter_logi = "",
+  raw_or_labe = "raw", raw_or_label_headers = "raw", guess_type = TRUE,
+  guess_max = 1000L, verbose = TRUE, config_options = NULL)
 }
 \arguments{
 \item{redcap_uri}{The URI (uniform resource identifier) of the REDCap project.  Required.}
@@ -32,9 +32,7 @@ redcap_read_oneshot(redcap_uri, token, records = NULL,
 
 \item{export_data_access_groups}{A boolean value that specifies whether or not to export the \code{redcap_data_access_group} field when data access groups are utilized in the project. Default is \code{FALSE}. See the details below.}
 
-\item{filter_logic}{String of logic text (e.g., \code{[gender] = 'male'}) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.}
-
-\item{raw_or_label}{A string (either \code{'raw'} or \code{'label'}) that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is \code{'raw'}.}
+\item{raw_or_label_headers}{A string (either \code{'raw'} or \code{'label'} that specifies for the CSV headers whether to export the variable/field names (raw) or the field labels (label).  Default is \code{'raw'}.}
 
 \item{guess_type}{A boolean value indicating if all columns should be returned as character.  If false, \code{\link[readr:read_csv]{readr::read_csv()}} guesses the intended data type for each column.}
 
@@ -43,6 +41,10 @@ redcap_read_oneshot(redcap_uri, token, records = NULL,
 \item{verbose}{A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.}
 
 \item{config_options}{A list of options to pass to \code{POST} method in the \code{httr} package.  See the details below. Optional.}
+
+\item{filter_logic}{String of logic text (e.g., \code{[gender] = 'male'}) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.}
+
+\item{raw_or_label}{A string (either \code{'raw'} or \code{'label'}) that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is \code{'raw'}.}
 }
 \value{
 Currently, a list is returned with the following elements,

@@ -81,16 +81,13 @@
 redcap_read_oneshot_eav <- function(
   redcap_uri,
   token,
-  records                       = NULL,
-  records_collapsed             = "",
-  fields                        = NULL,
-  fields_collapsed              = "",
-  events                        = NULL,
-  events_collapsed              = "",
+  records                       = NULL, records_collapsed = "",
+  fields                        = NULL, fields_collapsed  = "",
+  events                        = NULL, events_collapsed  = "",
   export_data_access_groups     = FALSE,
   filter_logic                  = "",
-  raw_or_label                  = 'raw',
-  raw_or_label_headers          = 'raw',
+  raw_or_label                  = "raw",
+  raw_or_label_headers          = "raw",
   verbose                       = TRUE,
   config_options                = NULL
 ) {
