@@ -193,7 +193,7 @@ redcap_read_oneshot_eav <- function(
   if( success ) {
 
     # This next line exists solely to avoid R CMD checks
-    . <- NULL
+    # . <- NULL
     # TODO: remove this line and use .data$... inside dplyr
     # . <- record <- event_id <- value <- field_type <- field_name <- is_checkbox <- select_choices_or_calculations <- ids <- NULL
 
@@ -217,11 +217,13 @@ redcap_read_oneshot_eav <- function(
           ) %>%
           tibble::as_tibble()
 
-        ds_possible_checkbox_rows <- ds_metadata_expanded %>%
+        distinct_checkboxes <- ds_metadata_expanded %>%
           dplyr::filter_("is_checkbox") %>%
-          dplyr::pull(.data$field_name) %>%
+          dplyr::pull(.data$field_name)
+
+        ds_possible_checkbox_rows  <-
           tidyr::crossing(
-            field_name = .,
+            field_name = distinct_checkboxes,
             record     = dplyr::distinct(ds_eav, .data$record),
             field_type = "checkbox",
             event_id   = dplyr::distinct(ds_eav, .data$event_id)
