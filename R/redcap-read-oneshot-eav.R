@@ -224,7 +224,7 @@ redcap_read_oneshot_eav <- function(
             field_name = .,
             record     = dplyr::distinct(ds_eav, .data$record),
             field_type = "checkbox",
-            record     = dplyr::distinct(ds_eav, .data$event_id)
+            event_id   = dplyr::distinct(ds_eav, .data$event_id)
           )
 
         variables_to_keep <- ds_metadata_expanded %>%
