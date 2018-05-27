@@ -22,8 +22,8 @@ later calls are less verbose (such as reading and writing data).  The functional
 \describe{
 \item{\code{read(batch_size = 100L, interbatch_delay = 0, records = NULL,
   records_collapsed = "", fields = NULL, fields_collapsed = "",
-  export_data_access_groups = FALSE, raw_or_label = "raw", verbose = TRUE,
-  config_options = NULL)}}{Exports records from a REDCap project.}
+  export_survey_fields = FALSE, export_data_access_groups = FALSE,
+  raw_or_label = "raw", verbose = TRUE, config_options = NULL)}}{Exports records from a REDCap project.}
 
 \item{\code{write(ds_to_write, batch_size = 100L, interbatch_delay = 0,
   verbose = TRUE, config_options = NULL)}}{Imports records to a REDCap project.}

@@ -10,9 +10,13 @@ install:
   ps: Bootstrap
 
 # Adapt as necessary starting from here
+environment:
+  USE_RTOOLS: true # Set to false if no GitHub packages are necessary
 
 build_script:
   - travis-tool.sh install_deps
+  - travis-tool.sh install_github r-lib/pkgload
+  - travis-tool.sh install_github tidyverse/readr
 # - travis-tool.sh install_github r-lib/httr
 
 test_script:

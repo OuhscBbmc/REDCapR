@@ -83,12 +83,8 @@ redcap_write <- function(
 ) {
 
   start_time <- base::Sys.time()
-
-  if( base::missing(redcap_uri) )
-    base::stop("The required parameter `redcap_uri` was missing from the call to `redcap_write()`.")
-
-  if( base::missing(token) )
-    base::stop("The required parameter `token` was missing from the call to `redcap_write()`.")
+  checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
 
   token <- sanitize_token(token)
 

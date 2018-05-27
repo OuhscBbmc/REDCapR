@@ -1,27 +1,38 @@
 # Travis's native R Image (http://docs.travis-ci.com/user/languages/r/)
-sudo: false
-language: r
-cache: packages
+sudo:                false
+language:            r
+cache:               packages
 warnings_are_errors: true
-dist: trusty
+dist:                trusty
 r:
   - release
 # - devel
+
 addons:
   apt:
+    update:          false
     packages:
-    - r-cran-rodbc
-    - unixodbc-dev
+#      - unixodbc-dev
+
 r_github_packages:
   - jimhester/covr
   - r-lib/pkgload
+  - tidyverse/readr
+# - zozlak/RODBCext
 # - tidyverse/dplyr
 # - jeroen/curl
 # - r-lib/httr
 # - hadley/testthat
+
 after_success:
-  - Rscript -e 'library(covr);coveralls()'
+  - Rscript -e 'covr::coveralls()'
 
 # apt_packages:
 #   - r-cran-rodbc
 #   - unixodbc-dev
+
+# # Disabling the checks is temporary and ideally removed soon.
+# # See https://github.com/OuhscBbmc/REDCapR/issues/188 and https://github.com/travis-ci/travis-ci/issues/5996
+# env:
+#   global:
+#     - _R_CHECK_FORCE_SUGGESTS_=FALSE

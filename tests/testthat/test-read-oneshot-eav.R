@@ -15,9 +15,9 @@ test_that("All Records -Default", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
     "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
-    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\r\nKenning UK, 323232",
-    "14 Rose Cottage Blvd.\r\nKenning UK 34243", "243 Hill St.\r\nGuthrie OK 73402",
-    "342 Elm\r\nDuncanville TX, 75116", "Hotel Suite\r\nNew Orleans LA, 70115"
+    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
+    "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402",
+    "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
     ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333",
     "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com",
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
@@ -26,8 +26,8 @@ test_that("All Records -Default", {
     1L, 1L, 0L, 1L), height = c(7, 6, 180, 165, 193.04), weight = c(1L,
     1L, 80L, 54L, 104L), bmi = c(204.1, 277.8, 24.7, 19.8, 27.9),
     comments = c("Character in a book, with some guessing", "A mouse character from a good book",
-    "completely made up", "This record doesn't have a DAG assigned\r\n\r\nSo call up Trudy on the telephone\r\nSend her a letter in the mail",
-    "Had a hand for trouble and a eye for cash\r\n\r\nHe had a gold watch chain and a black mustache"
+    "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
+    "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
     ), mugshot = 7610:7614, race___1 = c(FALSE, FALSE, FALSE,
     FALSE, TRUE), race___2 = c(FALSE, FALSE, FALSE, TRUE, FALSE
     ), race___3 = c(FALSE, TRUE, FALSE, FALSE, FALSE), race___4 = c(FALSE,
@@ -65,9 +65,9 @@ test_that("All Records -Raw", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
     "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
-    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\r\nKenning UK, 323232",
-    "14 Rose Cottage Blvd.\r\nKenning UK 34243", "243 Hill St.\r\nGuthrie OK 73402",
-    "342 Elm\r\nDuncanville TX, 75116", "Hotel Suite\r\nNew Orleans LA, 70115"
+    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
+    "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402",
+    "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
     ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333",
     "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com",
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
@@ -76,8 +76,8 @@ test_that("All Records -Raw", {
     1L, 1L, 0L, 1L), height = c(7, 6, 180, 165, 193.04), weight = c(1L,
     1L, 80L, 54L, 104L), bmi = c(204.1, 277.8, 24.7, 19.8, 27.9),
     comments = c("Character in a book, with some guessing", "A mouse character from a good book",
-    "completely made up", "This record doesn't have a DAG assigned\r\n\r\nSo call up Trudy on the telephone\r\nSend her a letter in the mail",
-    "Had a hand for trouble and a eye for cash\r\n\r\nHe had a gold watch chain and a black mustache"
+    "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
+    "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
     ), mugshot = 7610:7614, race___1 = c(FALSE, FALSE, FALSE,
     FALSE, TRUE), race___2 = c(FALSE, FALSE, FALSE, TRUE, FALSE
     ), race___3 = c(FALSE, TRUE, FALSE, FALSE, FALSE), race___4 = c(FALSE,
@@ -113,9 +113,9 @@ test_that("All Records -Raw and DAG", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
     "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
-    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\r\nKenning UK, 323232",
-    "14 Rose Cottage Blvd.\r\nKenning UK 34243", "243 Hill St.\r\nGuthrie OK 73402",
-    "342 Elm\r\nDuncanville TX, 75116", "Hotel Suite\r\nNew Orleans LA, 70115"
+    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
+    "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402",
+    "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
     ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333",
     "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com",
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
@@ -124,8 +124,8 @@ test_that("All Records -Raw and DAG", {
     1L, 1L, 0L, 1L), height = c(7, 6, 180, 165, 193.04), weight = c(1L,
     1L, 80L, 54L, 104L), bmi = c(204.1, 277.8, 24.7, 19.8, 27.9),
     comments = c("Character in a book, with some guessing", "A mouse character from a good book",
-    "completely made up", "This record doesn't have a DAG assigned\r\n\r\nSo call up Trudy on the telephone\r\nSend her a letter in the mail",
-    "Had a hand for trouble and a eye for cash\r\n\r\nHe had a gold watch chain and a black mustache"
+    "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
+    "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
     ), mugshot = 7610:7614, race___1 = c(FALSE, FALSE, FALSE,
     FALSE, TRUE), race___2 = c(FALSE, FALSE, FALSE, TRUE, FALSE
     ), race___3 = c(FALSE, TRUE, FALSE, FALSE, FALSE), race___4 = c(FALSE,
@@ -161,9 +161,9 @@ test_that("All Records -label and DAG", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
     "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
-    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\r\nKenning UK, 323232",
-    "14 Rose Cottage Blvd.\r\nKenning UK 34243", "243 Hill St.\r\nGuthrie OK 73402",
-    "342 Elm\r\nDuncanville TX, 75116", "Hotel Suite\r\nNew Orleans LA, 70115"
+    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
+    "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402",
+    "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
     ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333",
     "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com",
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
@@ -172,8 +172,8 @@ test_that("All Records -label and DAG", {
     "Male", "Male", "Female", "Male"), height = c(7, 6, 180, 165,
     193.04), weight = c(1L, 1L, 80L, 54L, 104L), bmi = c(204.1, 277.8,
     24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing",
-    "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\r\n\r\nSo call up Trudy on the telephone\r\nSend her a letter in the mail",
-    "Had a hand for trouble and a eye for cash\r\n\r\nHe had a gold watch chain and a black mustache"
+    "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
+    "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
     ), mugshot = 7610:7614, race___1 = c(FALSE, FALSE, FALSE, FALSE,
     FALSE), race___2 = c(FALSE, FALSE, FALSE, FALSE, FALSE), race___3 = c(FALSE,
     FALSE, FALSE, FALSE, FALSE), race___4 = c(FALSE, FALSE, FALSE,
@@ -211,9 +211,9 @@ test_that("All Records -label", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
     "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
-    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\r\nKenning UK, 323232",
-    "14 Rose Cottage Blvd.\r\nKenning UK 34243", "243 Hill St.\r\nGuthrie OK 73402",
-    "342 Elm\r\nDuncanville TX, 75116", "Hotel Suite\r\nNew Orleans LA, 70115"
+    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
+    "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402",
+    "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
     ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333",
     "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com",
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
@@ -222,8 +222,8 @@ test_that("All Records -label", {
     "Male", "Male", "Female", "Male"), height = c(7, 6, 180, 165,
     193.04), weight = c(1L, 1L, 80L, 54L, 104L), bmi = c(204.1, 277.8,
     24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing",
-    "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\r\n\r\nSo call up Trudy on the telephone\r\nSend her a letter in the mail",
-    "Had a hand for trouble and a eye for cash\r\n\r\nHe had a gold watch chain and a black mustache"
+    "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
+    "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
     ), mugshot = 7610:7614, race___1 = c(FALSE, FALSE, FALSE, FALSE,
     FALSE), race___2 = c(FALSE, FALSE, FALSE, FALSE, FALSE), race___3 = c(FALSE,
     FALSE, FALSE, FALSE, FALSE), race___4 = c(FALSE, FALSE, FALSE,
@@ -261,12 +261,12 @@ test_that("All Records -label", {
 test_that("Filter - numeric", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 3:4, name_first = c("Marcus", "Trudy"
-    ), name_last = c("Wood", "DAG"), address = c("243 Hill St.\r\nGuthrie OK 73402",
-    "342 Elm\r\nDuncanville TX, 75116"), telephone = c("(405) 321-3333",
+    ), name_last = c("Wood", "DAG"), address = c("243 Hill St.\nGuthrie OK 73402",
+    "342 Elm\nDuncanville TX, 75116"), telephone = c("(405) 321-3333",
     "(405) 321-4444"), email = c("mw@mwood.net", "peroxide@blonde.com"
     ), dob = c("1934-04-09", "1952-11-02"), age = c(80L, 61L), sex = c(1L,
     0L), height = c(180L, 165L), weight = c(80L, 54L), bmi = c(24.7,
-    19.8), comments = c("completely made up", "This record doesn't have a DAG assigned\r\n\r\nSo call up Trudy on the telephone\r\nSend her a letter in the mail"
+    19.8), comments = c("completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail"
     ), mugshot = 7612:7613, race___1 = c(FALSE, FALSE), race___2 = c(FALSE,
     TRUE), race___3 = c(FALSE, FALSE), race___4 = c(TRUE, FALSE),
     race___5 = c(TRUE, TRUE), race___6 = c(FALSE, FALSE), ethnicity = 0:1,
@@ -299,9 +299,9 @@ test_that("Filter - numeric", {
 test_that("Filter - character", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 5L, name_first = "John Lee", name_last = "Walker",
-    address = "Hotel Suite\r\nNew Orleans LA, 70115", telephone = "(405) 321-5555",
+    address = "Hotel Suite\nNew Orleans LA, 70115", telephone = "(405) 321-5555",
     email = "left@hippocket.com", dob = "1955-04-15", age = 59L,
-    sex = 1L, height = 193.04, weight = 104L, bmi = 27.9, comments = "Had a hand for trouble and a eye for cash\r\n\r\nHe had a gold watch chain and a black mustache",
+    sex = 1L, height = 193.04, weight = 104L, bmi = 27.9, comments = "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache",
     mugshot = 7614L, race___1 = TRUE, race___2 = FALSE, race___3 = FALSE,
     race___4 = FALSE, race___5 = FALSE, race___6 = TRUE, ethnicity = 2L,
     demographics_complete = 2L, health_complete = 0L, race_and_ethnicity_complete = 2L), .Names = c("record_id",

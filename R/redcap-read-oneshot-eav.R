@@ -98,16 +98,12 @@ redcap_read_oneshot_eav <- function(
 
   start_time <- Sys.time()
 
-  if( missing(redcap_uri) )
-    stop("The required parameter `redcap_uri` was missing from the call to `redcap_read_oneshot_eav()`.")
-  if( missing(token) )
-    stop("The required parameter `token` was missing from the call to `redcap_read_oneshot_eav()`.")
-  if( !is.logical(export_data_access_groups) )
-    stop("The optional parameter `export_data_access_groups` must be a logical/Boolean variable.")
-  if( !is.character(filter_logic) )
-    stop("The optional parameter `filter_logic` must be a character/string variable.")
-  if( !(raw_or_label %in% c("raw", "label")) )
-    stop("The optional parameter `raw_or_label` must be either 'raw' or 'label'.")
+  checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_logical(  export_data_access_groups , any.missing=F, len=1)
+  checkmate::assert_character(filter_logic              , any.missing=F, len=1, pattern="^.{0,}$")
+  checkmate::assert_subset(  raw_or_label               , c("raw", "label"))
+
   if( !(raw_or_label_headers %in% c("raw", "label")) )
     stop("The optional parameter `raw_or_label_headers` must be either 'raw' or 'label'.")
 
@@ -156,6 +152,7 @@ redcap_read_oneshot_eav <- function(
   success <- (status_code==200L)
 
   raw_text <- httr::content(result, "text")
+  raw_text <- gsub("\r\n", "\n", raw_text)
   elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
 
   # raw_text <- "The hostname (redcap-db.hsc.net.ou.edu) / username (redcapsql) / password (XXXXXX) combination could not connect to the MySQL server. \r\n\t\tPlease check their values."
@@ -180,8 +177,6 @@ redcap_read_oneshot_eav <- function(
     try (
       {
         ds_eav <- readr::read_csv(raw_text)
-        # ds <- utils::read.csv(text=raw_text, stringsAsFactors=FALSE)
-
 
         ds_metadata_expanded <- ds_metadata %>%
           dplyr::select_("field_name", "select_choices_or_calculations", "field_type") %>%

@@ -6,12 +6,12 @@ Description: Encapsulates functions to streamline calls from R to the REDCap
     University.  The Application Programming Interface (API) offers an avenue
     to access and modify data programmatically, improving the capacity for
     literate and reproducible programming.
-Version: 0.9.8.9001
-Date: 2017-12-01
+Version: 0.9.10.9001
+Date: 2018-05-26
 Authors@R: c(person("Will", "Beasley", role = c("aut", "cre"), email =
     "wibeasley@hotmail.com"), person("David", "Bard", role = "ctb"),
     person("Thomas", "Wilson", role = "ctb"), person(given="John J",
-    family="Aponte", role = "ctb", email="john.aponte@isglobal.org"), 
+    family="Aponte", role = "ctb", email="john.aponte@isglobal.org"),
     person("Rollie", "Parrish", role = "ctb", email =
     "rparrish@flightweb.com"), person("Benjamin", "Nutter",
     role = "ctb"), person("Andrew", "Peters",
@@ -33,25 +33,26 @@ Depends:
     R(>= 3.0.0),
     stats
 Imports:
-    data.table,
-    dplyr,
-    httr(>= 1.0.0.9000),
+    dplyr (>= 0.5.0),
+    httr (>= 1.3.0),
     magrittr,
     methods,
-    readr,
-    tibble,
-    tidyr
+    readr (>= 1.2.0),
+    tibble (>= 1.4.0),
+    tidyr (>= 0.7.0)
 Suggests:
-    devtools,
+    checkmate  (>= 1.8.4),
+    DBI (>= 0.7.0),
+    devtools (>= 1.13.0),
     kableExtra,
-    knitr,
+    knitr (>= 1.18.0),
+    odbc (>= 1.1.1),
     pkgload,
     rmarkdown,
-    RODBC,
-    RODBCext,
     sessioninfo,
     testthat (>= 0.9)
-Remotes: 
+Remotes:
+  github::tidyverse/readr,
   github::r-lib/pkgload
 License: GPL-2
 LazyData: TRUE

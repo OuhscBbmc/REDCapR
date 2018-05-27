@@ -33,14 +33,6 @@ sudo apt-get install texlive-fonts-extra
 ```
 See [texi2dvi missing](https://github.com/yihui/knitr/issues/214) and [textlive-fonts-extra](http://tex.stackexchange.com/questions/125274/error-font-ts1-zi4r-at-540-not-found) for installing.  See the [R CMD Rd2pdf](http://stackoverflow.com/questions/10819959/diagnosing-r-package-build-warning-latex-errors-when-creating-pdf-version) for getting better error messages than R CMD check.
 
-### SVN
-SVN is necessary if you want to commit to R-Forge (otherwise, just download the release version from CRAN and the development version from [GitHub](https://github.com/OuhscBbmc/REDCapR)).  When a directory is deleted, using the command line to first [update](http://stackoverflow.com/questions/87950/how-do-you-overcome-the-svn-out-of-date-error) and then [delete](http://svnbook.red-bean.com/en/1.2/svn.ref.svn.c.delete.html) works for me.
-```
-$ svn update doc
-
-$ svn delete doc
-$ svn commit -m "Deleted directory 'inst/doc'."
-```
 
 ### Help me add more to this
 This document is mostly from memory, except for the qpdf which was a waste of 10 minutes of re-googling.  There's probably other stuff I've forgotten, that would cost time.  If so, please tell me and I'll add it here.

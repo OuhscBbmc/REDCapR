@@ -40,10 +40,8 @@
 #' create_batch_glossary(nrow(d), batch_size=40)
 
 create_batch_glossary <- function( row_count, batch_size ) {
-  if( !(!is.na(row_count) & (length(row_count)==1L) & (row_count[1]>=1) | inherits(row_count, "integer")) )
-    stop("`row_count` must be a positive scalar integer.")
-  if( !(!is.na(batch_size) & (length(batch_size)==1L) & (batch_size[1]>=1) | inherits(row_count, "integer")) )
-    stop("`batch_size` must be a positive scalar integer.")
+  checkmate::assert_integerish(row_count , any.missing=F, len=1L, lower=1L)
+  checkmate::assert_integerish(batch_size, any.missing=F, len=1L, lower=1L)
 
   start_index <- base::seq.int(from=1, to=row_count, by=batch_size)
 

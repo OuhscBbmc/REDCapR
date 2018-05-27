@@ -19,9 +19,11 @@
 #' @param filter_logic String of logic text (e.g., `[gender] = 'male'`) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.
 #' @param events An array, where each element corresponds a desired project event  Optional.
 #' @param events_collapsed A single string, where the desired event names are separated by commas.  Optional.
+#' @param export_survey_fields A boolean that specifies whether to export the survey identifier field (e.g., 'redcap_survey_identifier') or survey timestamp fields (e.g., instrument+'_timestamp') .
 #' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is `FALSE`. See the details below.
 #' @param raw_or_label A string (either 'raw` or 'label' that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is `'raw'`.
 #' @param raw_or_label_headers A string (either `'raw'` or `'label'` that specifies for the CSV headers whether to export the variable/field names (raw) or the field labels (label).  Default is `'raw'`.
+#' @param guess_type A boolean value indicating if all columns should be returned as character.  If true, [readr::read_csv()] guesses the intended data type for each column.
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details in `redcap_read_oneshot()` Optional.
 #' @param id_position  The column position of the variable that unique identifies the subject.  This defaults to the first variable in the dataset.
@@ -70,17 +72,18 @@ redcap_read <- function(
   redcap_uri, token, records=NULL, records_collapsed="",
   fields=NULL, fields_collapsed="",
   events=NULL, events_collapsed="",
+  export_survey_fields = FALSE,
   export_data_access_groups=FALSE,
   filter_logic="",
-  raw_or_label='raw', raw_or_label_headers='raw',
+  raw_or_label='raw', 
+  raw_or_label_headers='raw',
+  guess_type                  = TRUE,
   verbose=TRUE, config_options=NULL, id_position=1L
 ) {
 
-  if( missing(redcap_uri) )
-    stop("The required parameter `redcap_uri` was missing from the call to `redcap_read()`.")
-
-  if( missing(token) )
-    stop("The required parameter `token` was missing from the call to `redcap_read()`.")
+  checkmate::assert_character(redcap_uri, any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(token, any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_logical(  guess_type            , any.missing=F, len=1)
 
   token <- sanitize_token(token)
   validate_field_names(fields)
@@ -110,6 +113,7 @@ redcap_read <- function(
     fields_collapsed   = metadata$data$field_name[1],
     filter_logic       = filter_logic,
     events_collapsed   = events_collapsed,
+    guess_type         = guess_type,
     verbose            = verbose,
     config_options     = config_options
   )
@@ -135,16 +139,7 @@ redcap_read <- function(
   uniqueIDs <- sort(unique(initial_call$data[, 1]))
 
   if( all(nchar(uniqueIDs)==32L) )
-    warning(
-      "It appears that the REDCap record IDs have been hashed. ",
-      "For `redcap_read` to function properly, the user must have Export permissions for the 'Full Data Set'. ",
-      "To grant the appropriate permissions: ",
-      "(1) go to 'User Rights' in the REDCap project site, ",
-      "(2) select the desired user, and then select 'Edit User Privileges', ",
-      "(3) in the 'Data Exports' radio buttons, select 'Full Data Set'.\n",
-      "Users with only `De-Identified` export privileges can still use ",
-      "`redcap_read_oneshot()` and `redcap_write_oneshot()`."
-    )
+    warn_hash_record_id()
 
   ds_glossary            <- REDCapR::create_batch_glossary(row_count=length(uniqueIDs), batch_size=batch_size)
   lst_batch              <- NULL
@@ -172,9 +167,11 @@ redcap_read <- function(
       fields_collapsed            = fields_collapsed,
       filter_logic                = filter_logic,
       events_collapsed            = events_collapsed,
+      export_survey_fields        = export_survey_fields,
       export_data_access_groups   = export_data_access_groups,
       raw_or_label                = raw_or_label,
       raw_or_label_headers        = raw_or_label_headers,
+      guess_type                  = guess_type,
       verbose                     = verbose,
       config_options              = config_options
     )
@@ -197,8 +194,8 @@ redcap_read <- function(
     rm(read_result) #Admittedly overkill defensiveness.
   }
   # browser()
-  ds_stacked               <- as.data.frame(data.table::rbindlist(lst_batch))
-  # ds_stacked               <- as.data.frame(dplyr::bind_rows(lst_batch))
+  # ds_stacked               <- as.data.frame(data.table::rbindlist(lst_batch))
+  ds_stacked               <- as.data.frame(dplyr::bind_rows(lst_batch))
 
   elapsed_seconds          <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
   status_code_combined     <- paste(lst_status_code, collapse="; ")
@@ -220,3 +217,16 @@ redcap_read <- function(
 # redcap_uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 # token <- "9A81268476645C4E5F03428B8AC3AA7B"
 # redcap_read(batch_size=2, redcap_uri=redcap_uri, token=token)
+
+warn_hash_record_id <- function( )  {
+  warning(
+    "It appears that the REDCap record IDs have been hashed.\n",
+    "For `REDCapR::redcap_read()` to function properly, the user must have Export permissions for the 'Full Data Set'.\n",
+    "To grant the appropriate permissions:\n",
+    "(1) go to 'User Rights' in the REDCap project site,\n",
+    "(2) select the desired user, and then select 'Edit User Privileges',\n",
+    "(3) in the 'Data Exports' radio buttons, select 'Full Data Set'.\n",
+    "Users with only `De-Identified` export privileges can still use\n",
+    "`redcap_read_oneshot()` and `redcap_write_oneshot()`."
+  )
+}
