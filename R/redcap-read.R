@@ -102,7 +102,7 @@ redcap_read <- function(
   # forms
   # events
   checkmate::assert_subset(  raw_or_label               , c("raw", "label"))
-  # raw_or_label_headers
+  checkmate::assert_subset(  raw_or_label_headers       , c("raw", "label"))
   # exportCheckboxLabel
   # returnFormat
   # export_survey_fields

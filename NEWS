@@ -14,6 +14,7 @@ Minor New Features:
 * `redcap_read()`, `redcap_read_oneshot()`, and `redcap_read_eav()` always return Linux-style line endings (ie `\n`) instead of Windows style line endings (ie, `\r\n`) on all OSes.  (#198)
 * Link to new secure Zenodo DOI resolver (katrinleinweber #191)
 * `read_metadata()` always returns `character` vectors for all variables.  With readr 1.2.0, some column were returned differently than before.  (#193)
+* 'raw_orLabel_headers' now supprted (Thanks Hatem Hosny - hatemhosny, #183 & #203)
 
 Modified Internals:
 * When converting REDCap's CSV to R's data.frame, `readr::read_csv()` is used instead of `utils::read.csv()` (Issue #127).

@@ -104,7 +104,7 @@ redcap_read_oneshot <- function(
   # forms
   # events
   checkmate::assert_subset(  raw_or_label               , c("raw", "label"))
-  # raw_or_label_headers
+  checkmate::assert_subset(  raw_or_label_headers       , c("raw", "label"))
   # exportCheckboxLabel
   # returnFormat
   checkmate::assert_logical(export_survey_fields, any.missing=F, len=1)
@@ -115,10 +115,6 @@ redcap_read_oneshot <- function(
   checkmate::assert_integerish(guess_max                , any.missing=F, len=1, lower=1)
   # verbose
   # config_options
-
-  # TODO: convert this to checkmate::assert_subset
-  if( !(raw_or_label_headers %in% c("raw", "label")) )
-    stop("The optional parameter `raw_or_label_headers` must be either 'raw' or 'label'.")
 
   token <- sanitize_token(token)
   validate_field_names(fields)
