@@ -219,7 +219,7 @@ redcap_read_oneshot_eav <- function(
 
         ds_possible_checkbox_rows <- ds_metadata_expanded %>%
           dplyr::filter_("is_checkbox") %>%
-          .[["field_name"]] %>%
+          dplyr::pull(.data$field_name) %>%
           tidyr::crossing(
             field_name = .,
             record     = dplyr::distinct(ds_eav, .data$record),
@@ -234,7 +234,7 @@ redcap_read_oneshot_eav <- function(
               dplyr::select_("field_name" = "export_field_name") %>%
               dplyr::filter(grepl("^\\w+?_complete$", .data$field_name))
           ) %>%
-          .[["field_name"]] %>%
+          dplyr::pull(.data$field_name) %>%
           rev()
 
         ds_eav_2 <- ds_eav %>%
