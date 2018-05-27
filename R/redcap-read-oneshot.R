@@ -16,6 +16,7 @@
 #' @param export_survey_fields A boolean that specifies whether to export the survey identifier field (e.g., 'redcap_survey_identifier') or survey timestamp fields (e.g., instrument+'_timestamp') .
 #' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is `FALSE`. See the details below.
 #' @param raw_or_label A string (either `'raw'` or `'label'`) that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is `'raw'`.
+#' @param raw_or_label_headers A string (either `'raw'` or `'label'` that specifies for the CSV headers whether to export the variable/field names (raw) or the field labels (label).  Default is `'raw'`.
 #' @param guess_type A boolean value indicating if all columns should be returned as character.  If false, [readr::read_csv()] guesses the intended data type for each column.
 #' @param guess_max A positive integer passed to [readr::read_csv()] that specifies the maximum number of records to use for guessing column types.
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
@@ -75,6 +76,7 @@ redcap_read_oneshot <- function(
   export_data_access_groups=FALSE,
   filter_logic="",
   raw_or_label='raw',
+  raw_or_label_headers='raw',
   guess_type                  = TRUE,
   guess_max                   = 1000L,
   verbose=TRUE, config_options=NULL
@@ -82,6 +84,7 @@ redcap_read_oneshot <- function(
   #TODO: NULL verbose parameter pulls from getOption("verbose")
 
   start_time <- Sys.time()
+
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_logical(  export_data_access_groups , any.missing=F, len=1)
@@ -90,7 +93,10 @@ redcap_read_oneshot <- function(
   checkmate::assert_logical(  guess_type                , any.missing=F, len=1)
   checkmate::assert_integerish(guess_max                , any.missing=F, len=1, lower=1)
 
-  token <- sanitize_token(token)
+  if( !(raw_or_label_headers %in% c("raw", "label")) )
+  stop("The optional parameter `raw_or_label_headers` must be either 'raw' or 'label'.")
+
+    token <- sanitize_token(token)
   validate_field_names(fields)
 
   if( all(nchar(records_collapsed)==0) )
@@ -115,6 +121,7 @@ redcap_read_oneshot <- function(
     format                  = 'csv',
     type                    = 'flat',
     rawOrLabel              = raw_or_label,
+    rawOrLabelHeaders       = raw_or_label_headers,
     exportSurveyFields      = export_survey_fields,
     exportDataAccessGroups  = export_data_access_groups_string,
     # records               = ifelse(nchar(records_collapsed)   > 0, records_collapsed  , NULL),
