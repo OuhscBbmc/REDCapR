@@ -20,6 +20,7 @@
 # export_survey_fields
 #' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is `FALSE`. See the details below.
 #' @param filter_logic String of logic text (e.g., `[gender] = 'male'`) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.
+#' @importFrom rlang .data
 #'
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below. Optional.
@@ -192,8 +193,9 @@ redcap_read_oneshot_eav <- function(
   if( success ) {
 
     # This next line exists solely to avoid R CMD checks
+    . <- NULL
     # TODO: remove this line and use .data$... inside dplyr
-    . <- record <- event_id <- value <- field_type <- field_name <- is_checkbox <- select_choices_or_calculations <- ids <- NULL
+    # . <- record <- event_id <- value <- field_type <- field_name <- is_checkbox <- select_choices_or_calculations <- ids <- NULL
 
     try (
       {
@@ -202,16 +204,16 @@ redcap_read_oneshot_eav <- function(
         ds_metadata_expanded <- ds_metadata %>%
           dplyr::select_("field_name", "select_choices_or_calculations", "field_type") %>%
           dplyr::mutate(
-            is_checkbox  = (field_type=="checkbox"),
-            ids   = dplyr::if_else(is_checkbox, select_choices_or_calculations, "1"),
-            ids   = gsub("(\\d+),.+?(\\||$)", "\\1", ids),
-            ids   = strsplit(ids, " ")
+            is_checkbox  = (.data$field_type=="checkbox"),
+            ids   = dplyr::if_else(.data$is_checkbox, .data$select_choices_or_calculations, "1"),
+            ids   = gsub("(\\d+),.+?(\\||$)", "\\1", .data$ids),
+            ids   = strsplit(.data$ids, " ")
           ) %>%
           dplyr::select_("-select_choices_or_calculations", "-field_type") %>%
           tidyr::unnest_("ids") %>%
           dplyr::transmute(
-            is_checkbox,
-            field_name          = dplyr::if_else(is_checkbox, paste0(field_name, "___", ids), field_name)
+            .data$is_checkbox,
+            field_name          = dplyr::if_else(.data$is_checkbox, paste0(.data$field_name, "___", .data$ids), .data$field_name)
           ) %>%
           tibble::as_tibble()
 
@@ -220,17 +222,17 @@ redcap_read_oneshot_eav <- function(
           .[["field_name"]] %>%
           tidyr::crossing(
             field_name = .,
-            record     = dplyr::distinct(ds_eav, record),
+            record     = dplyr::distinct(ds_eav, .data$record),
             field_type = "checkbox",
-            record     = dplyr::distinct(ds_eav, event_id)
+            record     = dplyr::distinct(ds_eav, .data$event_id)
           )
 
         variables_to_keep <- ds_metadata_expanded %>%
-          dplyr::select(field_name) %>%
+          dplyr::select(.data$field_name) %>%
           dplyr::union(
             ds_variable %>%
               dplyr::select_("field_name" = "export_field_name") %>%
-              dplyr::filter(grepl("^\\w+?_complete$", field_name))
+              dplyr::filter(grepl("^\\w+?_complete$", .data$field_name))
           ) %>%
           .[["field_name"]] %>%
           rev()
@@ -242,11 +244,11 @@ redcap_read_oneshot_eav <- function(
             by = "field_name"
           ) %>%
           dplyr::mutate(
-            field_name = dplyr::if_else(!is.na(field_type) & (field_type=="checkbox"), paste0(field_name, "___", value), field_name)
+            field_name = dplyr::if_else(!is.na(.data$field_type) & (.data$field_type=="checkbox"), paste0(.data$field_name, "___", .data$value), .data$field_name)
           ) %>%
           dplyr::full_join(ds_possible_checkbox_rows, by=c("record", "field_name", "field_type", "event_id")) %>%
           dplyr::mutate(
-            value      = dplyr::if_else(!is.na(field_type) & (field_type=="checkbox"), as.character(!is.na(value)), value)
+            value      = dplyr::if_else(!is.na(.data$field_type) & (.data$field_type=="checkbox"), as.character(!is.na(.data$value)), .data$value)
           )
 
         # ds_eav_2 %>%
