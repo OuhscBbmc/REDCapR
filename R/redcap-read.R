@@ -16,13 +16,17 @@
 #' @param records_collapsed A single string, where the desired ID values are separated by commas.  Optional.
 #' @param fields An array, where each element corresponds a desired project field.  Optional.
 #' @param fields_collapsed A single string, where the desired field names are separated by commas.  Optional.
-#' @param filter_logic String of logic text (e.g., `[gender] = 'male'`) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.
+# forms
 #' @param events An array, where each element corresponds a desired project event  Optional.
 #' @param events_collapsed A single string, where the desired event names are separated by commas.  Optional.
-#' @param export_survey_fields A boolean that specifies whether to export the survey identifier field (e.g., 'redcap_survey_identifier') or survey timestamp fields (e.g., instrument+'_timestamp') .
-#' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is `FALSE`. See the details below.
 #' @param raw_or_label A string (either 'raw` or 'label' that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is `'raw'`.
 #' @param raw_or_label_headers A string (either `'raw'` or `'label'` that specifies for the CSV headers whether to export the variable/field names (raw) or the field labels (label).  Default is `'raw'`.
+# exportCheckboxLabel
+# returnFormat
+#' @param export_survey_fields A boolean that specifies whether to export the survey identifier field (e.g., 'redcap_survey_identifier') or survey timestamp fields (e.g., instrument+'_timestamp') .
+#' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is `FALSE`. See the details below.
+#' @param filter_logic String of logic text (e.g., `[gender] = 'male'`) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.
+#'
 #' @param guess_type A boolean value indicating if all columns should be returned as character.  If true, [readr::read_csv()] guesses the intended data type for each column.
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details in `redcap_read_oneshot()` Optional.
@@ -68,28 +72,47 @@
 #'
 
 redcap_read <- function(
-  batch_size                  = 100L,
-  interbatch_delay            = 0.5,
-  continue_on_error           = FALSE,
+  batch_size                    = 100L,
+  interbatch_delay              = 0.5,
+  continue_on_error             = FALSE,
   redcap_uri,
   token,
-  records                     = NULL, records_collapsed = "",
-  fields                      = NULL, fields_collapsed  = "",
-  events                      = NULL, events_collapsed  = "",
-  export_survey_fields        = FALSE,
-  export_data_access_groups   = FALSE,
-  filter_logic                = "",
-  raw_or_label                = "raw",
-  raw_or_label_headers        = "raw",
-  guess_type                  = TRUE,
-  verbose                     = TRUE,
-  config_options              = NULL,
-  id_position                 = 1L
+  records                       = NULL, records_collapsed = "",
+  fields                        = NULL, fields_collapsed  = "",
+  # forms
+  events                        = NULL, events_collapsed  = "",
+  raw_or_label                  = "raw",
+  raw_or_label_headers          = "raw",
+  # exportCheckboxLabel
+  # returnFormat
+  export_survey_fields          = FALSE,
+  export_data_access_groups     = FALSE,
+  filter_logic                  = "",
+
+  guess_type                    = TRUE,
+  verbose                       = TRUE,
+  config_options                = NULL,
+  id_position                   = 1L
 ) {
 
   checkmate::assert_character(redcap_uri, any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token, any.missing=F, len=1, pattern="^.{1,}$")
+  # records
+  # fields
+  # forms
+  # events
+  checkmate::assert_subset(  raw_or_label               , c("raw", "label"))
+  # raw_or_label_headers
+  # exportCheckboxLabel
+  # returnFormat
+  # export_survey_fields
+  checkmate::assert_logical(  export_data_access_groups , any.missing=F, len=1)
+  checkmate::assert_character(filter_logic              , any.missing=F, len=1, pattern="^.{0,}$")
+  #
   checkmate::assert_logical(  guess_type            , any.missing=F, len=1)
+  # verbose
+  # config_options
+  # id_position
 
   token <- sanitize_token(token)
   validate_field_names(fields)

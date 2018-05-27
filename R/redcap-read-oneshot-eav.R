@@ -10,14 +10,20 @@
 #' @param records_collapsed A single string, where the desired ID values are separated by commas.  Optional.
 #' @param fields An array, where each element corresponds a desired project field.  Optional.
 #' @param fields_collapsed A single string, where the desired field names are separated by commas.  Optional.
-#' @param filter_logic String of logic text (e.g., `[gender] = 'male'`) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.
+# forms
 #' @param events An array, where each element corresponds a desired project event  Optional.
 #' @param events_collapsed A single string, where the desired event names are separated by commas.  Optional.
-#' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is `FALSE`. See the details below.
 #' @param raw_or_label A string (either `'raw'` or `'label'` that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is `'raw'`.
 #' @param raw_or_label_headers A string (either `'raw'` or `'label'` that specifies for the CSV headers whether to export the variable/field names (raw) or the field labels (label).  Default is `'raw'`.
+# exportCheckboxLabel
+# returnFormat
+# export_survey_fields
+#' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is `FALSE`. See the details below.
+#' @param filter_logic String of logic text (e.g., `[gender] = 'male'`) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.
+#'
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below. Optional.
+#'
 #' @return Currently, a list is returned with the following elements,
 #' * `data`: An R [base::data.frame()] of the desired records and columns.
 #' * `success`: A boolean value indicating if the operation was apparently successful.
@@ -83,11 +89,18 @@ redcap_read_oneshot_eav <- function(
   token,
   records                       = NULL, records_collapsed = "",
   fields                        = NULL, fields_collapsed  = "",
+  # forms
   events                        = NULL, events_collapsed  = "",
-  export_data_access_groups     = FALSE,
-  filter_logic                  = "",
   raw_or_label                  = "raw",
   raw_or_label_headers          = "raw",
+  # exportCheckboxLabel
+  # returnFormat
+  # export_survey_fields
+  export_data_access_groups     = FALSE,
+  filter_logic                  = "",
+
+  # guess_type
+  # guess_max
   verbose                       = TRUE,
   config_options                = NULL
 ) {
@@ -97,10 +110,24 @@ redcap_read_oneshot_eav <- function(
 
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
+  # records
+  # fields
+  # forms
+  # events
+  checkmate::assert_subset(  raw_or_label               , c("raw", "label"))
+  # raw_or_label_headers
+  # exportCheckboxLabel
+  # returnFormat
+  # export_survey_fields
   checkmate::assert_logical(  export_data_access_groups , any.missing=F, len=1)
   checkmate::assert_character(filter_logic              , any.missing=F, len=1, pattern="^.{0,}$")
-  checkmate::assert_subset(  raw_or_label               , c("raw", "label"))
+  #
+  # guess_type
+  # verbose
+  # config_options
+  # id_position
 
+  # TODO: convert this to checkmate::assert_subset
   if( !(raw_or_label_headers %in% c("raw", "label")) )
     stop("The optional parameter `raw_or_label_headers` must be either 'raw' or 'label'.")
 
@@ -168,7 +195,8 @@ redcap_read_oneshot_eav <- function(
 
   if( success ) {
 
-    # This next line exists solely to avoid RCMD checks
+    # This next line exists solely to avoid R CMD checks
+    # TODO: remove this line and use .data$... inside dplyr
     . <- record <- event_id <- value <- field_type <- field_name <- is_checkbox <- select_choices_or_calculations <- ids <- NULL
 
     try (
