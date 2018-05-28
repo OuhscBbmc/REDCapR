@@ -38,6 +38,7 @@ Imports:
     magrittr,
     methods,
     readr (>= 1.2.0),
+    rlang,
     tibble (>= 1.4.0),
     tidyr (>= 0.7.0)
 Suggests:

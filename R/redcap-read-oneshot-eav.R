@@ -10,13 +10,21 @@
 #' @param records_collapsed A single string, where the desired ID values are separated by commas.  Optional.
 #' @param fields An array, where each element corresponds a desired project field.  Optional.
 #' @param fields_collapsed A single string, where the desired field names are separated by commas.  Optional.
-#' @param filter_logic String of logic text (e.g., `[gender] = 'male'`) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.
+# forms
 #' @param events An array, where each element corresponds a desired project event  Optional.
 #' @param events_collapsed A single string, where the desired event names are separated by commas.  Optional.
-#' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is `FALSE`. See the details below.
 #' @param raw_or_label A string (either `'raw'` or `'label'` that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is `'raw'`.
+#' @param raw_or_label_headers A string (either `'raw'` or `'label'` that specifies for the CSV headers whether to export the variable/field names (raw) or the field labels (label).  Default is `'raw'`.
+# exportCheckboxLabel
+# returnFormat
+# export_survey_fields
+#' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is `FALSE`. See the details below.
+#' @param filter_logic String of logic text (e.g., `[gender] = 'male'`) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.
+#' @importFrom rlang .data
+#'
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below. Optional.
+#'
 #' @return Currently, a list is returned with the following elements,
 #' * `data`: An R [base::data.frame()] of the desired records and columns.
 #' * `success`: A boolean value indicating if the operation was apparently successful.
@@ -80,26 +88,47 @@
 redcap_read_oneshot_eav <- function(
   redcap_uri,
   token,
-  records                       = NULL,
-  records_collapsed             = "",
-  fields                        = NULL,
-  fields_collapsed              = "",
-  events                        = NULL,
-  events_collapsed              = "",
+  records                       = NULL, records_collapsed = "",
+  fields                        = NULL, fields_collapsed  = "",
+  # forms
+  events                        = NULL, events_collapsed  = "",
+  raw_or_label                  = "raw",
+  raw_or_label_headers          = "raw",
+  # exportCheckboxLabel
+  # returnFormat
+  # export_survey_fields
   export_data_access_groups     = FALSE,
   filter_logic                  = "",
-  raw_or_label                  = 'raw',
+
+  # guess_type
+  # guess_max
   verbose                       = TRUE,
   config_options                = NULL
 ) {
   #TODO: NULL verbose parameter pulls from getOption("verbose")
 
   start_time <- Sys.time()
+
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
+  # records
+  # fields
+  # forms
+  # events
+  checkmate::assert_character(raw_or_label              , any.missing=F, len=1)
+  checkmate::assert_subset(   raw_or_label              , c("raw", "label"))
+  checkmate::assert_character(raw_or_label_headers      , any.missing=F, len=1)
+  checkmate::assert_subset(   raw_or_label_headers      , c("raw", "label"))
+  # exportCheckboxLabel
+  # returnFormat
+  # export_survey_fields
   checkmate::assert_logical(  export_data_access_groups , any.missing=F, len=1)
   checkmate::assert_character(filter_logic              , any.missing=F, len=1, pattern="^.{0,}$")
-  checkmate::assert_subset(  raw_or_label               , c("raw", "label"))
+  #
+  # guess_type
+  # verbose
+  # config_options
+  # id_position
 
   token <- sanitize_token(token)
   validate_field_names(fields)
@@ -124,6 +153,7 @@ redcap_read_oneshot_eav <- function(
     format                  = 'csv',
     type                    = 'eav',
     rawOrLabel              = raw_or_label,
+    rawOrLabelHeaders       = raw_or_label_headers,
     exportDataAccessGroups  = export_data_access_groups_string,
     # records                 = records_collapsed,
     # fields                  = fields_collapsed,
@@ -141,32 +171,22 @@ redcap_read_oneshot_eav <- function(
     config  = config_options
   )
 
-  status_code <- result$status
-  success <- (status_code==200L)
-
-  raw_text <- httr::content(result, "text")
-  raw_text <- gsub("\r\n", "\n", raw_text)
-  elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
+  status_code           <- result$status
+  success               <- (status_code==200L)
+  raw_text              <- httr::content(result, "text")
+  raw_text              <- gsub("\r\n", "\n", raw_text)
+  elapsed_seconds       <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
 
   # raw_text <- "The hostname (redcap-db.hsc.net.ou.edu) / username (redcapsql) / password (XXXXXX) combination could not connect to the MySQL server. \r\n\t\tPlease check their values."
-  regex_cannot_connect <- "^The hostname \\((.+)\\) / username \\((.+)\\) / password \\((.+)\\) combination could not connect.+"
-  regex_empty <- "^\\s+$"
+  regex_cannot_connect  <- "^The hostname \\((.+)\\) / username \\((.+)\\) / password \\((.+)\\) combination could not connect.+"
+  regex_empty           <- "^\\s+$"
 
-  if(
-    any(grepl(regex_cannot_connect, raw_text)) |
-    any(grepl(regex_empty, raw_text))
-  ) {
-    success <- FALSE
-  }
+  success     <- (success & !any(grepl(regex_cannot_connect, raw_text)) & !any(grepl(regex_empty, raw_text)))
 
   ds_metadata <- REDCapR::redcap_metadata_read(redcap_uri, token)$data
   ds_variable <- REDCapR::redcap_variables(redcap_uri, token)$data
 
   if( success ) {
-
-    # This next line exists solely to avoid RCMD checks
-    . <- record <- event_id <- value <- field_type <- field_name <- is_checkbox <- select_choices_or_calculations <- ids <- NULL
-
     try (
       {
         ds_eav <- readr::read_csv(raw_text)
@@ -174,37 +194,39 @@ redcap_read_oneshot_eav <- function(
         ds_metadata_expanded <- ds_metadata %>%
           dplyr::select_("field_name", "select_choices_or_calculations", "field_type") %>%
           dplyr::mutate(
-            is_checkbox  = (field_type=="checkbox"),
-            ids   = dplyr::if_else(is_checkbox, select_choices_or_calculations, "1"),
-            ids   = gsub("(\\d+),.+?(\\||$)", "\\1", ids),
-            ids   = strsplit(ids, " ")
+            is_checkbox   = (.data$field_type=="checkbox"),
+            ids           = dplyr::if_else(.data$is_checkbox, .data$select_choices_or_calculations, "1"),
+            ids           = gsub("(\\d+),.+?(\\||$)", "\\1", .data$ids),
+            ids           = strsplit(.data$ids, " ")
           ) %>%
           dplyr::select_("-select_choices_or_calculations", "-field_type") %>%
           tidyr::unnest_("ids") %>%
           dplyr::transmute(
-            is_checkbox,
-            field_name          = dplyr::if_else(is_checkbox, paste0(field_name, "___", ids), field_name)
+            .data$is_checkbox,
+            field_name          = dplyr::if_else(.data$is_checkbox, paste0(.data$field_name, "___", .data$ids), .data$field_name)
           ) %>%
           tibble::as_tibble()
 
-        ds_possible_checkbox_rows <- ds_metadata_expanded %>%
+        distinct_checkboxes <- ds_metadata_expanded %>%
           dplyr::filter_("is_checkbox") %>%
-          .[["field_name"]] %>%
+          dplyr::pull(.data$field_name)
+
+        ds_possible_checkbox_rows  <-
           tidyr::crossing(
-            field_name = .,
-            record     = dplyr::distinct(ds_eav, record),
+            field_name = distinct_checkboxes,
+            record     = dplyr::distinct(ds_eav, .data$record),
             field_type = "checkbox",
-            record     = dplyr::distinct(ds_eav, event_id)
+            event_id   = dplyr::distinct(ds_eav, .data$event_id)
           )
 
         variables_to_keep <- ds_metadata_expanded %>%
-          dplyr::select(field_name) %>%
+          dplyr::select(.data$field_name) %>%
           dplyr::union(
             ds_variable %>%
               dplyr::select_("field_name" = "export_field_name") %>%
-              dplyr::filter(grepl("^\\w+?_complete$", field_name))
+              dplyr::filter(grepl("^\\w+?_complete$", .data$field_name))
           ) %>%
-          .[["field_name"]] %>%
+          dplyr::pull(.data$field_name) %>%
           rev()
 
         ds_eav_2 <- ds_eav %>%
@@ -214,16 +236,12 @@ redcap_read_oneshot_eav <- function(
             by = "field_name"
           ) %>%
           dplyr::mutate(
-            field_name = dplyr::if_else(!is.na(field_type) & (field_type=="checkbox"), paste0(field_name, "___", value), field_name)
+            field_name = dplyr::if_else(!is.na(.data$field_type) & (.data$field_type=="checkbox"), paste0(.data$field_name, "___", .data$value), .data$field_name)
           ) %>%
           dplyr::full_join(ds_possible_checkbox_rows, by=c("record", "field_name", "field_type", "event_id")) %>%
           dplyr::mutate(
-            value      = dplyr::if_else(!is.na(field_type) & (field_type=="checkbox"), as.character(!is.na(value)), value)
+            value      = dplyr::if_else(!is.na(.data$field_type) & (.data$field_type=="checkbox"), as.character(!is.na(.data$value)), .data$value)
           )
-
-        # ds_eav_2 %>%
-        #   dplyr::filter(field_type=="checkbox") %>%
-        #   head(20)
 
         ds <- ds_eav_2 %>%
           dplyr::select_("-field_type") %>%
@@ -249,21 +267,20 @@ redcap_read_oneshot_eav <- function(
         status_code, "."
       )
 
-
-      #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
+      # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
       raw_text <- ""
     } else {
-      success          <- FALSE #Override the 'success' determination from the http status code.
-      ds_2               <- tibble::tibble() #Return an empty data.frame
-      outcome_message  <- paste0("The REDCap read failed.  The http status code was ", status_code, ".  The 'raw_text' returned was '", raw_text, "'.")
+      success           <- FALSE #Override the 'success' determination from the http status code.
+      ds_2              <- tibble::tibble() #Return an empty data.frame
+      outcome_message   <- paste0("The REDCap read failed.  The http status code was ", status_code, ".  The 'raw_text' returned was '", raw_text, "'.")
     }
   }
   else {
-    ds_2                 <- tibble::tibble() #Return an empty data.frame
-    if( any(grepl(regex_empty, raw_text)) ) {
-      outcome_message    <- "The REDCapR read/export operation was not successful.  The returned dataset was empty."
+    ds_2            <- tibble::tibble() #Return an empty data.frame
+    outcome_message <- if( any(grepl(regex_empty, raw_text)) ) {
+      "The REDCapR read/export operation was not successful.  The returned dataset was empty."
     } else {
-      outcome_message    <- paste0("The REDCapR read/export operation was not successful.  The error message was:\n",  raw_text)
+      paste0("The REDCapR read/export operation was not successful.  The error message was:\n",  raw_text)
     }
   }
 

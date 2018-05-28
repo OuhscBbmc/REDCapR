@@ -16,12 +16,17 @@
 #' @param records_collapsed A single string, where the desired ID values are separated by commas.  Optional.
 #' @param fields An array, where each element corresponds a desired project field.  Optional.
 #' @param fields_collapsed A single string, where the desired field names are separated by commas.  Optional.
-#' @param filter_logic String of logic text (e.g., `[gender] = 'male'`) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.
+# forms
 #' @param events An array, where each element corresponds a desired project event  Optional.
 #' @param events_collapsed A single string, where the desired event names are separated by commas.  Optional.
+#' @param raw_or_label A string (either 'raw` or 'label' that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is `'raw'`.
+#' @param raw_or_label_headers A string (either `'raw'` or `'label'` that specifies for the CSV headers whether to export the variable/field names (raw) or the field labels (label).  Default is `'raw'`.
+# exportCheckboxLabel
+# returnFormat
 #' @param export_survey_fields A boolean that specifies whether to export the survey identifier field (e.g., 'redcap_survey_identifier') or survey timestamp fields (e.g., instrument+'_timestamp') .
 #' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is `FALSE`. See the details below.
-#' @param raw_or_label A string (either 'raw` or 'label' that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is `'raw'`.
+#' @param filter_logic String of logic text (e.g., `[gender] = 'male'`) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.
+#'
 #' @param guess_type A boolean value indicating if all columns should be returned as character.  If true, [readr::read_csv()] guesses the intended data type for each column.
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details in `redcap_read_oneshot()` Optional.
@@ -67,21 +72,48 @@
 #'
 
 redcap_read <- function(
-  batch_size=100L, interbatch_delay=0.5, continue_on_error=FALSE,
-  redcap_uri, token, records=NULL, records_collapsed="",
-  fields=NULL, fields_collapsed="",
-  events=NULL, events_collapsed="",
-  export_survey_fields = FALSE,
-  export_data_access_groups=FALSE,
-  filter_logic="",
-  raw_or_label='raw',
-  guess_type                  = TRUE,
-  verbose=TRUE, config_options=NULL, id_position=1L
+  batch_size                    = 100L,
+  interbatch_delay              = 0.5,
+  continue_on_error             = FALSE,
+  redcap_uri,
+  token,
+  records                       = NULL, records_collapsed = "",
+  fields                        = NULL, fields_collapsed  = "",
+  # forms
+  events                        = NULL, events_collapsed  = "",
+  raw_or_label                  = "raw",
+  raw_or_label_headers          = "raw",
+  # exportCheckboxLabel
+  # returnFormat
+  export_survey_fields          = FALSE,
+  export_data_access_groups     = FALSE,
+  filter_logic                  = "",
+
+  guess_type                    = TRUE,
+  verbose                       = TRUE,
+  config_options                = NULL,
+  id_position                   = 1L
 ) {
 
-  checkmate::assert_character(redcap_uri, any.missing=F, len=1, pattern="^.{1,}$")
-  checkmate::assert_character(token, any.missing=F, len=1, pattern="^.{1,}$")
-  checkmate::assert_logical(  guess_type            , any.missing=F, len=1)
+  checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
+  # records
+  # fields
+  # forms
+  # events
+  checkmate::assert_character(raw_or_label              , any.missing=F, len=1)
+  checkmate::assert_subset(   raw_or_label              , c("raw", "label"))
+  checkmate::assert_character(raw_or_label_headers      , any.missing=F, len=1)
+  checkmate::assert_subset(   raw_or_label_headers      , c("raw", "label"))
+  # exportCheckboxLabel
+  # returnFormat
+  # export_survey_fields
+  checkmate::assert_logical(  export_data_access_groups , any.missing=F, len=1)
+  #
+  checkmate::assert_logical(  guess_type                , any.missing=F, len=1)
+  # verbose
+  # config_options
+  # id_position
 
   token <- sanitize_token(token)
   validate_field_names(fields)
@@ -118,8 +150,8 @@ redcap_read <- function(
 
   # Stop and return to the caller if the initial query failed. --------------
   if( !initial_call$success ) {
-    outcome_messages <- paste0("The initial call failed with the code: ", initial_call$status_code, ".")
-    elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
+    outcome_messages  <- paste0("The initial call failed with the code: ", initial_call$status_code, ".")
+    elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
     return( list(
       data                  = data.frame(),
       records_collapsed     = "failed in initial batch call",
@@ -148,8 +180,8 @@ redcap_read <- function(
 
   message("Starting to read ", format(length(uniqueIDs), big.mark=",", scientific=F, trim=T), " records  at ", Sys.time())
   for( i in ds_glossary$id ) {
-    selected_index <- seq(from=ds_glossary[i, "start_index"], to=ds_glossary[i, "stop_index"])
-    selected_ids <- uniqueIDs[selected_index]
+    selected_index  <- seq(from=ds_glossary[i, "start_index"], to=ds_glossary[i, "stop_index"])
+    selected_ids    <- uniqueIDs[selected_index]
 
     if( i > 0 ) Sys.sleep(time = interbatch_delay)
     if( verbose ) {
@@ -168,14 +200,14 @@ redcap_read <- function(
       export_survey_fields        = export_survey_fields,
       export_data_access_groups   = export_data_access_groups,
       raw_or_label                = raw_or_label,
-      guess_type              = guess_type,
+      raw_or_label_headers        = raw_or_label_headers,
+      guess_type                  = guess_type,
       verbose                     = verbose,
       config_options              = config_options
     )
 
-    lst_status_code[[i]] <- read_result$status_code
-    # lst_status_message[[i]] <- read_result$status_message
-    lst_outcome_message[[i]] <- read_result$outcome_message
+    lst_status_code[[i]]      <- read_result$status_code
+    lst_outcome_message[[i]]  <- read_result$outcome_message
 
     if( !read_result$success ) {
       error_message <- paste0("The `redcap_read()` call failed on iteration ", i, ".")
@@ -190,7 +222,7 @@ redcap_read <- function(
 
     rm(read_result) #Admittedly overkill defensiveness.
   }
-  # browser()
+
   # ds_stacked               <- as.data.frame(data.table::rbindlist(lst_batch))
   ds_stacked               <- as.data.frame(dplyr::bind_rows(lst_batch))
 
