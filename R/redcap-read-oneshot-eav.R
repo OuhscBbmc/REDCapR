@@ -180,7 +180,7 @@ redcap_read_oneshot_eav <- function(
   regex_cannot_connect <- "^The hostname \\((.+)\\) / username \\((.+)\\) / password \\((.+)\\) combination could not connect.+"
   regex_empty <- "^\\s+$"
 
-  success <- !(any(grepl(regex_cannot_connect, raw_text)) | any(grepl(regex_empty, raw_text)))
+  success <- (success & !any(grepl(regex_cannot_connect, raw_text)) & !any(grepl(regex_empty, raw_text)))
 
   ds_metadata <- REDCapR::redcap_metadata_read(redcap_uri, token)$data
   ds_variable <- REDCapR::redcap_variables(redcap_uri, token)$data
