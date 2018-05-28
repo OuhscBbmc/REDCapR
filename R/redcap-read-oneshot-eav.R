@@ -180,23 +180,12 @@ redcap_read_oneshot_eav <- function(
   regex_cannot_connect <- "^The hostname \\((.+)\\) / username \\((.+)\\) / password \\((.+)\\) combination could not connect.+"
   regex_empty <- "^\\s+$"
 
-  if(
-    any(grepl(regex_cannot_connect, raw_text)) |
-    any(grepl(regex_empty, raw_text))
-  ) {
-    success <- FALSE
-  }
+  success <- !(any(grepl(regex_cannot_connect, raw_text)) | any(grepl(regex_empty, raw_text)))
 
   ds_metadata <- REDCapR::redcap_metadata_read(redcap_uri, token)$data
   ds_variable <- REDCapR::redcap_variables(redcap_uri, token)$data
 
   if( success ) {
-
-    # This next line exists solely to avoid R CMD checks
-    # . <- NULL
-    # TODO: remove this line and use .data$... inside dplyr
-    # . <- record <- event_id <- value <- field_type <- field_name <- is_checkbox <- select_choices_or_calculations <- ids <- NULL
-
     try (
       {
         ds_eav <- readr::read_csv(raw_text)
@@ -253,10 +242,6 @@ redcap_read_oneshot_eav <- function(
             value      = dplyr::if_else(!is.na(.data$field_type) & (.data$field_type=="checkbox"), as.character(!is.na(.data$value)), .data$value)
           )
 
-        # ds_eav_2 %>%
-        #   dplyr::filter(field_type=="checkbox") %>%
-        #   head(20)
-
         ds <- ds_eav_2 %>%
           dplyr::select_("-field_type") %>%
           # dplyr::select_("-redcap_repeat_instance") %>%           # TODO: need a good fix for repeats
@@ -291,11 +276,11 @@ redcap_read_oneshot_eav <- function(
     }
   }
   else {
-    ds_2                 <- tibble::tibble() #Return an empty data.frame
-    if( any(grepl(regex_empty, raw_text)) ) {
-      outcome_message    <- "The REDCapR read/export operation was not successful.  The returned dataset was empty."
+    ds_2            <- tibble::tibble() #Return an empty data.frame
+    outcome_message <- if( any(grepl(regex_empty, raw_text)) ) {
+      "The REDCapR read/export operation was not successful.  The returned dataset was empty."
     } else {
-      outcome_message    <- paste0("The REDCapR read/export operation was not successful.  The error message was:\n",  raw_text)
+      paste0("The REDCapR read/export operation was not successful.  The error message was:\n",  raw_text)
     }
   }
 
