@@ -95,21 +95,22 @@ redcap_read <- function(
   id_position                   = 1L
 ) {
 
-  checkmate::assert_character(redcap_uri, any.missing=F, len=1, pattern="^.{1,}$")
-  checkmate::assert_character(token, any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
   # records
   # fields
   # forms
   # events
-  checkmate::assert_subset(  raw_or_label               , c("raw", "label"))
-  checkmate::assert_subset(  raw_or_label_headers       , c("raw", "label"))
+  checkmate::assert_character(raw_or_label              , any.missing=F, len=1)
+  checkmate::assert_subset(   raw_or_label              , c("raw", "label"))
+  checkmate::assert_character(raw_or_label_headers      , any.missing=F, len=1)
+  checkmate::assert_subset(   raw_or_label_headers      , c("raw", "label"))
   # exportCheckboxLabel
   # returnFormat
   # export_survey_fields
   checkmate::assert_logical(  export_data_access_groups , any.missing=F, len=1)
-  checkmate::assert_character(filter_logic              , any.missing=F, len=1, pattern="^.{0,}$")
   #
-  checkmate::assert_logical(  guess_type            , any.missing=F, len=1)
+  checkmate::assert_logical(  guess_type                , any.missing=F, len=1)
   # verbose
   # config_options
   # id_position
@@ -149,8 +150,8 @@ redcap_read <- function(
 
   # Stop and return to the caller if the initial query failed. --------------
   if( !initial_call$success ) {
-    outcome_messages <- paste0("The initial call failed with the code: ", initial_call$status_code, ".")
-    elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
+    outcome_messages  <- paste0("The initial call failed with the code: ", initial_call$status_code, ".")
+    elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
     return( list(
       data                  = data.frame(),
       records_collapsed     = "failed in initial batch call",
@@ -179,8 +180,8 @@ redcap_read <- function(
 
   message("Starting to read ", format(length(uniqueIDs), big.mark=",", scientific=F, trim=T), " records  at ", Sys.time())
   for( i in ds_glossary$id ) {
-    selected_index <- seq(from=ds_glossary[i, "start_index"], to=ds_glossary[i, "stop_index"])
-    selected_ids <- uniqueIDs[selected_index]
+    selected_index  <- seq(from=ds_glossary[i, "start_index"], to=ds_glossary[i, "stop_index"])
+    selected_ids    <- uniqueIDs[selected_index]
 
     if( i > 0 ) Sys.sleep(time = interbatch_delay)
     if( verbose ) {
@@ -205,9 +206,8 @@ redcap_read <- function(
       config_options              = config_options
     )
 
-    lst_status_code[[i]] <- read_result$status_code
-    # lst_status_message[[i]] <- read_result$status_message
-    lst_outcome_message[[i]] <- read_result$outcome_message
+    lst_status_code[[i]]      <- read_result$status_code
+    lst_outcome_message[[i]]  <- read_result$outcome_message
 
     if( !read_result$success ) {
       error_message <- paste0("The `redcap_read()` call failed on iteration ", i, ".")
@@ -222,7 +222,7 @@ redcap_read <- function(
 
     rm(read_result) #Admittedly overkill defensiveness.
   }
-  # browser()
+
   # ds_stacked               <- as.data.frame(data.table::rbindlist(lst_batch))
   ds_stacked               <- as.data.frame(dplyr::bind_rows(lst_batch))
 

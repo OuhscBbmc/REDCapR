@@ -115,8 +115,10 @@ redcap_read_oneshot_eav <- function(
   # fields
   # forms
   # events
-  checkmate::assert_subset(  raw_or_label               , c("raw", "label"))
-  checkmate::assert_subset(  raw_or_label_headers       , c("raw", "label"))
+  checkmate::assert_character(raw_or_label              , any.missing=F, len=1)
+  checkmate::assert_subset(   raw_or_label              , c("raw", "label"))
+  checkmate::assert_character(raw_or_label_headers      , any.missing=F, len=1)
+  checkmate::assert_subset(   raw_or_label_headers      , c("raw", "label"))
   # exportCheckboxLabel
   # returnFormat
   # export_survey_fields
@@ -169,18 +171,17 @@ redcap_read_oneshot_eav <- function(
     config  = config_options
   )
 
-  status_code <- result$status
-  success <- (status_code==200L)
-
-  raw_text <- httr::content(result, "text")
-  raw_text <- gsub("\r\n", "\n", raw_text)
-  elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
+  status_code           <- result$status
+  success               <- (status_code==200L)
+  raw_text              <- httr::content(result, "text")
+  raw_text              <- gsub("\r\n", "\n", raw_text)
+  elapsed_seconds       <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
 
   # raw_text <- "The hostname (redcap-db.hsc.net.ou.edu) / username (redcapsql) / password (XXXXXX) combination could not connect to the MySQL server. \r\n\t\tPlease check their values."
-  regex_cannot_connect <- "^The hostname \\((.+)\\) / username \\((.+)\\) / password \\((.+)\\) combination could not connect.+"
-  regex_empty <- "^\\s+$"
+  regex_cannot_connect  <- "^The hostname \\((.+)\\) / username \\((.+)\\) / password \\((.+)\\) combination could not connect.+"
+  regex_empty           <- "^\\s+$"
 
-  success <- (success & !any(grepl(regex_cannot_connect, raw_text)) & !any(grepl(regex_empty, raw_text)))
+  success     <- (success & !any(grepl(regex_cannot_connect, raw_text)) & !any(grepl(regex_empty, raw_text)))
 
   ds_metadata <- REDCapR::redcap_metadata_read(redcap_uri, token)$data
   ds_variable <- REDCapR::redcap_variables(redcap_uri, token)$data
@@ -193,10 +194,10 @@ redcap_read_oneshot_eav <- function(
         ds_metadata_expanded <- ds_metadata %>%
           dplyr::select_("field_name", "select_choices_or_calculations", "field_type") %>%
           dplyr::mutate(
-            is_checkbox  = (.data$field_type=="checkbox"),
-            ids   = dplyr::if_else(.data$is_checkbox, .data$select_choices_or_calculations, "1"),
-            ids   = gsub("(\\d+),.+?(\\||$)", "\\1", .data$ids),
-            ids   = strsplit(.data$ids, " ")
+            is_checkbox   = (.data$field_type=="checkbox"),
+            ids           = dplyr::if_else(.data$is_checkbox, .data$select_choices_or_calculations, "1"),
+            ids           = gsub("(\\d+),.+?(\\||$)", "\\1", .data$ids),
+            ids           = strsplit(.data$ids, " ")
           ) %>%
           dplyr::select_("-select_choices_or_calculations", "-field_type") %>%
           tidyr::unnest_("ids") %>%
@@ -266,13 +267,12 @@ redcap_read_oneshot_eav <- function(
         status_code, "."
       )
 
-
-      #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
+      # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
       raw_text <- ""
     } else {
-      success          <- FALSE #Override the 'success' determination from the http status code.
-      ds_2               <- tibble::tibble() #Return an empty data.frame
-      outcome_message  <- paste0("The REDCap read failed.  The http status code was ", status_code, ".  The 'raw_text' returned was '", raw_text, "'.")
+      success           <- FALSE #Override the 'success' determination from the http status code.
+      ds_2              <- tibble::tibble() #Return an empty data.frame
+      outcome_message   <- paste0("The REDCap read failed.  The http status code was ", status_code, ".  The 'raw_text' returned was '", raw_text, "'.")
     }
   }
   else {
