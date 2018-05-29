@@ -7,15 +7,12 @@
 #' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
 #' @param token The user-specific string that serves as the password for a project.  Required.
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
-#' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below. Optional.
+#' @param config_options A list of options to pass to `POST` method in the `httr` package.  See the details below. Optional.
 #' @return Currently, a list is returned with the following elements,
 #' * `data`: An R [base::data.frame()] where each row represents one column in the readl dataset.
 #' * `success`: A boolean value indicating if the operation was apparently successful.
 #' * `status_code`: The [http status code](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes) of the operation.
 #' * `outcome_message`: A human readable string indicating the operation's outcome.
-#' * `records_collapsed`: The desired records IDs, collapsed into a single string, separated by commas.
-#' * `fields_collapsed`: The desired field names, collapsed into a single string, separated by commas.
-#' * `filter_logic`: The filter statement passed as an argument.
 #' * `elapsed_seconds`: The duration of the function.
 #' * `raw_text`: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
 #'
@@ -62,27 +59,20 @@ redcap_variables <- function(
     config  = config_options
   )
 
-  status_code <- result$status
-  success <- (status_code==200L)
-
-  raw_text <- httr::content(result, "text")
+  status_code     <- result$status
+  success         <- (status_code==200L)
+  raw_text        <- httr::content(result, "text")
   elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
 
   regex_cannot_connect <- "^The hostname \\((.+)\\) / username \\((.+)\\) / password \\((.+)\\) combination could not connect.+"
   regex_empty <- "^\\s+$"
 
-  if(
-    any(grepl(regex_cannot_connect, raw_text)) |
-    any(grepl(regex_empty, raw_text))
-  ) {
-    success <- FALSE
-  }
+  success     <- (success & !any(grepl(regex_cannot_connect, raw_text)) & !any(grepl(regex_empty, raw_text)))
 
   if( success ) {
     try (
       {
-        ds <- readr::read_csv(raw_text)
-        # ds <- readr::read_csv(file=raw_text)
+        ds <- readr::read_csv(file=raw_text)
       }, #Convert the raw text to a dataset.
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
     )
@@ -106,10 +96,10 @@ redcap_variables <- function(
   }
   else {
     ds                 <- data.frame() #Return an empty data.frame
-    if( any(grepl(regex_empty, raw_text)) ) {
-      outcome_message    <- "The REDCapR read/export operation was not successful.  The returned dataset (of variables) was empty."
+    outcome_message    <- if( any(grepl(regex_empty, raw_text)) ) {
+      "The REDCapR read/export operation was not successful.  The returned dataset (of variables) was empty."
     } else {
-      outcome_message    <- paste0("The REDCapR variable retrieval was not successful.  The error message was:\n",  raw_text)
+      paste0("The REDCapR variable retrieval was not successful.  The error message was:\n",  raw_text)
     }
   }
 

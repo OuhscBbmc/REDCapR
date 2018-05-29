@@ -2,16 +2,16 @@
 #' @export redcap_upload_file_oneshot
 #' @title Upload a file into to a REDCap project record.
 #'
-#' @description This function uses REDCap's API to upload a file
+#' @description This function uses REDCap's API to upload a file.
 #'
 #' @param file_name The name of the relative or full file to be uploaded into the REDCap project.  Required.
 #' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
 #' @param token The user-specific string that serves as the password for a project.  Required.
-#' @param record The record ID where the file is to be imported. Required
-#' @param field The name of the field where the file is saved in REDCap. Required
-#' @param event The name of the event where the file is saved in REDCap. Optional
+#' @param record The record ID where the file is to be imported.  Required
+#' @param field The name of the field where the file is saved in REDCap.  Required
+#' @param event The name of the event where the file is saved in REDCap.  Optional
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  Optional.
-#' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below. Optional.
+#' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below.  Optional.
 #'
 #' @return Currently, a list is returned with the following elements,
 #' * `success`: A boolean value indicating if the operation was apparently successful.
