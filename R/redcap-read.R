@@ -83,7 +83,7 @@ redcap_read <- function(
   events                        = NULL, events_collapsed  = "",
   raw_or_label                  = "raw",
   raw_or_label_headers          = "raw",
-  export_checkbox_label         = FALSE,   # exportCheckboxLabel
+  export_checkbox_label         = FALSE,
   # returnFormat
   export_survey_fields          = FALSE,
   export_data_access_groups     = FALSE,
@@ -141,8 +141,9 @@ redcap_read <- function(
     token              = token,
     records_collapsed  = records_collapsed,
     fields_collapsed   = metadata$data$field_name[1],
-    filter_logic       = filter_logic,
+    # forms
     events_collapsed   = events_collapsed,
+    filter_logic       = filter_logic,
     guess_type         = guess_type,
     verbose            = verbose,
     config_options     = config_options
@@ -156,8 +157,9 @@ redcap_read <- function(
       data                  = data.frame(),
       records_collapsed     = "failed in initial batch call",
       fields_collapsed      = "failed in initial batch call",
-      filter_logic          = "failed in initial batch call",
+      # forms
       events_collapsed      = "failed in initial batch call",
+      filter_logic          = "failed in initial batch call",
       elapsed_seconds       = elapsed_seconds,
       status_code           = initial_call$status_code,
       outcome_messages      = outcome_messages,
@@ -195,13 +197,16 @@ redcap_read <- function(
       token                       = token,
       records                     = selected_ids,
       fields_collapsed            = fields_collapsed,
-      filter_logic                = filter_logic,
       events_collapsed            = events_collapsed,
-      export_survey_fields        = export_survey_fields,
-      export_data_access_groups   = export_data_access_groups,
+      # forms
       raw_or_label                = raw_or_label,
       raw_or_label_headers        = raw_or_label_headers,
       export_checkbox_label       = export_checkbox_label,
+      # return_format
+      export_survey_fields        = export_survey_fields,
+      export_data_access_groups   = export_data_access_groups,
+      filter_logic                = filter_logic,
+
       guess_type                  = guess_type,
       verbose                     = verbose,
       config_options              = config_options
@@ -238,8 +243,9 @@ redcap_read <- function(
     outcome_messages    = outcome_message_combined,
     records_collapsed   = records_collapsed,
     fields_collapsed    = fields_collapsed,
-    filter_logic        = filter_logic,
+    # forms
     events_collapsed    = events_collapsed,
+    filter_logic        = filter_logic,
     elapsed_seconds     = elapsed_seconds
   ) )
 }

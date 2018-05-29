@@ -82,7 +82,7 @@ redcap_read_oneshot <- function(
   events                        = NULL, events_collapsed  = "",
   raw_or_label                  = "raw",
   raw_or_label_headers          = "raw",
-  export_checkbox_label         = FALSE,   # exportCheckboxLabel
+  export_checkbox_label         = FALSE,
   # returnFormat
   export_survey_fields          = FALSE,
   export_data_access_groups     = FALSE,
@@ -243,8 +243,9 @@ redcap_read_oneshot <- function(
     outcome_message    = outcome_message,
     records_collapsed  = records_collapsed,
     fields_collapsed   = fields_collapsed,
-    filter_logic       = filter_logic,
+    # forms
     events_collapsed   = events_collapsed,
+    filter_logic       = filter_logic,
     elapsed_seconds    = elapsed_seconds,
     raw_text           = raw_text
   ) )
