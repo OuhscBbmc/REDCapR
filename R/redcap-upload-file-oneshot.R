@@ -67,7 +67,7 @@
 
 redcap_upload_file_oneshot <- function( file_name, record, redcap_uri, token, field, event="", verbose=TRUE, config_options=NULL ) {
 
-  start_time <- Sys.time()
+  # start_time <- Sys.time()
   checkmate::assert_character(file_name                 , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_file_exists(file_name                                                        )
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
@@ -91,24 +91,27 @@ redcap_upload_file_oneshot <- function( file_name, record, redcap_uri, token, fi
 
   if( nchar(event ) > 0 ) post_body$event  <- event
 
-  result <- httr::POST(
-    url    = redcap_uri,
-    body   = post_body,
-    config = config_options
-  )
+  # This is the important line that communicates with the REDCap server.
+  kernel <- kernel_api(redcap_uri, post_body, config_options)
+  #
+  # result <- httr::POST(
+  #   url    = redcap_uri,
+  #   body   = post_body,
+  #   config = config_options
+  # )
+  #
+  # status_code       <- result$status_code
+  # elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
+  # success           <- (status_code == 200L)
 
-  status_code       <- result$status_code
-  elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
-  success           <- (status_code == 200L)
-
-  if( success ) {
-    outcome_message <- paste0("file uploaded to REDCap in ",  round(elapsed_seconds, 1), " seconds.")
+  if( kernel$success ) {
+    outcome_message <- paste0("file uploaded to REDCap in ",  round(kernel$elapsed_seconds, 1), " seconds.")
     recordsAffectedCount <- 1
     record_id <- as.character(record)
-    raw_text <- ""
+    kernel$raw_text <- ""
   }
   else { #If the returned content wasn't recognized as valid IDs, then
-    raw_text               <- httr::content(result, type="text")
+    raw_text               <- httr::content(kernel$result, type="text") # TODO: would this be stored as kernal$raw_text?
     outcome_message        <- paste0("file NOT uploaded ")
     recordsAffectedCount   <- 0L
     record_id              <- character(0) # Return an empty vector.
@@ -117,12 +120,12 @@ redcap_upload_file_oneshot <- function( file_name, record, redcap_uri, token, fi
     message(outcome_message)
 
   return( list(
-    success                  = success,
-    status_code              = status_code,
+    success                  = kernel$success,
+    status_code              = kernel$status_code,
     outcome_message          = outcome_message,
     records_affected_count   = recordsAffectedCount,
     affected_ids             = record_id,
-    elapsed_seconds          = elapsed_seconds,
-    raw_text                 = raw_text
+    elapsed_seconds          = kernel$elapsed_seconds,
+    raw_text                 = kernel$raw_text
   ))
 }
