@@ -1,13 +1,17 @@
 library(testthat)
-context("collapse_vector")
+context("Replace NAs")
 
-test_that("both NULL", {
-  elements  <- NULL
-  collapsed <- NULL
-  expected  <- ""
+test_that("replace_nas_character_standard", {
+  a <- letters
+  missing_indices <- c(3, 6, 8, 25)
+  a[missing_indices] <- NA_character_
 
-  observed <- REDCapR:::collapse_vector(elements, collapsed)
-  expect_equal(observed, expected)
+  expected <- c("a", "b", "Unknown", "d", "e", "Unknown", "g", "Unknown", "i", "j", "k", "l", "m",
+                "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "Unknown", "z")
+
+  a <- REDCapR:::replace_nas_with_explicit(a)
+  expect_equal(a, expected, label="The correct letters should have been replaced.")
+  expect_equal(class(a), "character", "The returned array should remain a character.")
 })
 
 test_that("replace_nas_factor_standard", {

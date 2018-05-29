@@ -1,5 +1,5 @@
 #' @name replace_nas_with_explicit
-## I'm intentionally not exporting this function.
+## We're intentionally not exporting this function.
 #'
 #' @title Create explicit factor level for missing values.
 #'
@@ -42,4 +42,43 @@ replace_nas_with_explicit <- function( scores, new_na_label="Unknown", create_fa
     stop("The reassigned factor variable should not have any NA values.")
 
   return( scores )
+}
+
+
+#' @name collapse_vector
+## We're intentionally not exporting this function.
+#'
+#' @title Collapse a vector of values into a single string when necessary.
+#'
+#' @description REDCap's API frequently specifies a series of values separated by commas.
+#' In the R world, it's easier to keep these values as separate elements in a vector.
+#' This functions squashes them together in a single character element (presumably right before the return value is passed to the API)
+#'
+#' @param elements An array of values.  Can be `NULL`.  Required.
+#' @param collapsed A single character element, where the values are separated by commas.  Can be `NULL`.  Required.
+
+#' @return A single character element, where the values are separated by commas.  Can be blank. (*i.e.*, `""`).
+#'
+#' @author Will Beasley
+#'
+#' @examples
+#' library(REDCapR) #Load the package into the current R session.
+#' REDCapR:::collapse_vector(elements=NULL, collapsed=NULL)
+#' REDCapR:::collapse_vector(elements=letters, collapsed=NULL)
+#' REDCapR:::collapse_vector(elements=NULL, collapsed="4,5,6")
+
+collapse_vector <- function( elements, collapsed ) {
+  checkmate::assert_character(collapsed, len=1, any.missing=T, null.ok=T)
+
+  if( (is.null(collapsed) | length(collapsed)==0L) | all(nchar(collapsed)==0L) ) {
+
+    #This is an empty string if `elements` (eg, fields`) is NULL.
+    collapsed <- dplyr::if_else(
+      is.null(elements),
+      "",
+      paste0(elements, collapse=",")
+    )
+  }
+
+  return( collapsed )
 }
