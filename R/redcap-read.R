@@ -21,7 +21,7 @@
 #' @param events_collapsed A single string, where the desired event names are separated by commas.  Optional.
 #' @param raw_or_label A string (either 'raw` or 'label' that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is `'raw'`.
 #' @param raw_or_label_headers A string (either `'raw'` or `'label'` that specifies for the CSV headers whether to export the variable/field names (raw) or the field labels (label).  Default is `'raw'`.
-# exportCheckboxLabel
+#' @param export_checkbox_label specifies the format of checkbox field values specifically when exporting the data as labels.  If `raw_or_label` is `'label'` and `export_checkbox_label` is TRUE, the values will be the text displayed to the users.  Otherwise, the values will be 0/1.
 # returnFormat
 #' @param export_survey_fields A boolean that specifies whether to export the survey identifier field (e.g., 'redcap_survey_identifier') or survey timestamp fields (e.g., instrument+'_timestamp') .
 #' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is `FALSE`. See the details below.
@@ -83,7 +83,7 @@ redcap_read <- function(
   events                        = NULL, events_collapsed  = "",
   raw_or_label                  = "raw",
   raw_or_label_headers          = "raw",
-  # exportCheckboxLabel
+  export_checkbox_label         = FALSE,   # exportCheckboxLabel
   # returnFormat
   export_survey_fields          = FALSE,
   export_data_access_groups     = FALSE,
@@ -105,7 +105,7 @@ redcap_read <- function(
   checkmate::assert_subset(   raw_or_label              , c("raw", "label"))
   checkmate::assert_character(raw_or_label_headers      , any.missing=F, len=1)
   checkmate::assert_subset(   raw_or_label_headers      , c("raw", "label"))
-  # exportCheckboxLabel
+  checkmate::assert_logical(  export_checkbox_label     , any.missing=F, len=1)
   # returnFormat
   # export_survey_fields
   checkmate::assert_logical(  export_data_access_groups , any.missing=F, len=1)
@@ -201,6 +201,7 @@ redcap_read <- function(
       export_data_access_groups   = export_data_access_groups,
       raw_or_label                = raw_or_label,
       raw_or_label_headers        = raw_or_label_headers,
+      export_checkbox_label       = export_checkbox_label,
       guess_type                  = guess_type,
       verbose                     = verbose,
       config_options              = config_options
