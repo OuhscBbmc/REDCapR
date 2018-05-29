@@ -6,12 +6,11 @@ credential <- REDCapR::retrieve_credential_local(
   project_id      = 153
 )
 
-test_that("Smoke Test", {
+test_that("smoke test", {
   testthat::skip_on_cran()
   returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T)
 })
-
-test_that("All Records -Default", {
+test_that("default", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
     "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
@@ -61,7 +60,51 @@ test_that("All Records -Default", {
   #expect_equal_to_reference(returned_object$data, file=base::file.path(pkgload::inst(name="REDCapR"), "test-data/project-simple/variations/default.rds") )
   #expect_equal_to_reference(returned_object$data, file="./test-data/project-simple/variations/default.rds")
 })
-test_that("All Records -Raw", {
+test_that("specify forms", {
+  testthat::skip_on_cran()
+  desired_forms <- c("demographics", "race_and_ethnicity")
+  expected_data_frame <-structure(
+    list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
+    "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
+    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
+    "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402",
+    "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
+    ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333",
+    "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com",
+    "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
+    ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02",
+    "1955-04-15"), age = c(11L, 11L, 80L, 61L, 59L), sex = c(0L,
+    1L, 1L, 0L, 1L), race___1 = c(FALSE, FALSE, FALSE, FALSE, TRUE
+    ), race___2 = c(FALSE, FALSE, FALSE, TRUE, FALSE), race___3 = c(FALSE,
+    TRUE, FALSE, FALSE, FALSE), race___4 = c(FALSE, FALSE, TRUE,
+    FALSE, FALSE), race___5 = c(TRUE, TRUE, TRUE, TRUE, FALSE), race___6 = c(FALSE,
+    FALSE, FALSE, FALSE, TRUE), ethnicity = c(1L, 1L, 0L, 1L, 2L),
+    demographics_complete = c(2L, 2L, 2L, 2L, 2L), race_and_ethnicity_complete = c(2L,
+    0L, 2L, 2L, 2L)), .Names = c("record_id", "name_first", "name_last",
+    "address", "telephone", "email", "dob", "age", "sex", "race___1",
+    "race___2", "race___3", "race___4", "race___5", "race___6", "ethnicity",
+    "demographics_complete", "race_and_ethnicity_complete"), class = c("tbl_df",
+    "tbl", "data.frame"), row.names = c(NA, -5L)
+  )
+  expected_outcome_message <- "5 records and 18 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+
+  expect_message(
+    regexp           = expected_outcome_message,
+    returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token, forms=desired_forms)
+  )
+
+  expect_equal(returned_object$data, expected=expected_data_frame) # dput(returned_object$data)
+  expect_equal(returned_object$status_code, expected=200L)
+  expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
+  expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_true(returned_object$filter_logic=="", "A filter was not specified.")
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true(returned_object$success)
+  #expect_equal_to_reference(returned_object$data, file=base::file.path(pkgload::inst(name="REDCapR"), "test-data/project-simple/variations/default.rds") )
+  #expect_equal_to_reference(returned_object$data, file="./test-data/project-simple/variations/default.rds")
+})
+test_that("raw", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
     "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
@@ -109,7 +152,7 @@ test_that("All Records -Raw", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
-test_that("All Records -Raw and DAG", {
+test_that("raw and DAG", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
     "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
@@ -157,7 +200,7 @@ test_that("All Records -Raw and DAG", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
-test_that("All Records -label and DAG", {
+test_that("label and DAG", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
     "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
@@ -207,8 +250,7 @@ test_that("All Records -label and DAG", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
-
-test_that("All Records -label header", {
+test_that("label header", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
     "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
@@ -256,9 +298,7 @@ test_that("All Records -label header", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
-
-
-test_that("Filter - numeric", {
+test_that("filter - numeric", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 3:4, name_first = c("Marcus", "Trudy"
     ), name_last = c("Wood", "DAG"), address = c("243 Hill St.\nGuthrie OK 73402",
@@ -295,8 +335,7 @@ test_that("Filter - numeric", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
-
-test_that("Filter - character", {
+test_that("filter - character", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 5L, name_first = "John Lee", name_last = "Walker",
     address = "Hotel Suite\nNew Orleans LA, 70115", telephone = "(405) 321-5555",

@@ -7,10 +7,12 @@
 redcap_read(batch_size = 100L, interbatch_delay = 0.5,
   continue_on_error = FALSE, redcap_uri, token, records = NULL,
   records_collapsed = "", fields = NULL, fields_collapsed = "",
-  events = NULL, events_collapsed = "", raw_or_label = "raw",
-  raw_or_label_headers = "raw", export_survey_fields = FALSE,
-  export_data_access_groups = FALSE, filter_logic = "", guess_type = TRUE,
-  verbose = TRUE, config_options = NULL, id_position = 1L)
+  forms = NULL, forms_collapsed = "", events = NULL,
+  events_collapsed = "", raw_or_label = "raw",
+  raw_or_label_headers = "raw", export_checkbox_label = FALSE,
+  export_survey_fields = FALSE, export_data_access_groups = FALSE,
+  filter_logic = "", guess_type = TRUE, verbose = TRUE,
+  config_options = NULL, id_position = 1L)
 }
 \arguments{
 \item{batch_size}{The maximum number of subject records a single batch should contain.  The default is 100.}
@@ -27,17 +29,23 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
 
 \item{records_collapsed}{A single string, where the desired ID values are separated by commas.  Optional.}
 
-\item{fields}{An array, where each element corresponds a desired project field.  Optional.}
+\item{fields}{An array, where each element corresponds to a desired project field.  Optional.}
 
 \item{fields_collapsed}{A single string, where the desired field names are separated by commas.  Optional.}
 
-\item{events}{An array, where each element corresponds a desired project event  Optional.}
+\item{forms}{An array, where each element corresponds to a desired project form.  Optional.}
+
+\item{forms_collapsed}{A single string, where the desired form names are separated by commas.  Optional.}
+
+\item{events}{An array, where each element corresponds to a desired project event.  Optional.}
 
 \item{events_collapsed}{A single string, where the desired event names are separated by commas.  Optional.}
 
 \item{raw_or_label}{A string (either 'raw\code{or 'label' that specifies whether to export the raw coded values or the labels for the options of multiple choice fields. Default is}'raw'`.}
 
 \item{raw_or_label_headers}{A string (either \code{'raw'} or \code{'label'} that specifies for the CSV headers whether to export the variable/field names (raw) or the field labels (label).  Default is \code{'raw'}.}
+
+\item{export_checkbox_label}{specifies the format of checkbox field values specifically when exporting the data as labels.  If \code{raw_or_label} is \code{'label'} and \code{export_checkbox_label} is TRUE, the values will be the text displayed to the users.  Otherwise, the values will be 0/1.}
 
 \item{export_survey_fields}{A boolean that specifies whether to export the survey identifier field (e.g., 'redcap_survey_identifier') or survey timestamp fields (e.g., instrument+'_timestamp') .}
 
@@ -96,7 +104,6 @@ uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
 token   <- "9A81268476645C4E5F03428B8AC3AA7B"
 redcap_read(batch_size=2, redcap_uri=uri, token=token)
 }
-
 }
 \references{
 The official documentation can be found on the 'API Help Page' and 'API Examples' pages

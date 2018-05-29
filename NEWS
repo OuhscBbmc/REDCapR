@@ -11,17 +11,22 @@ Minor New Features:
 * `redcap_read()` and `redcap_read_oneshot()` allow the user to specify if all variables
   should be returned with the `character` data type.  The default is to allow `readr::read_csv()` to guess the data type. (#194)
 * `redcap_read_oneshot()` allows use to specify how many rows should be considered when `readr::read_csv()` guesses the data type. (#194)
-* `redcap_read()`, `redcap_read_oneshot()`, and `redcap_read_eav()` always return Linux-style line endings (ie `\n`) instead of Windows style line endings (ie, `\r\n`) on all OSes.  (#198)
-* Link to new secure Zenodo DOI resolver (katrinleinweber #191)
+* `redcap_read()`, `redcap_read_oneshot()`, and `redcap_read_oneshot_eav()` always return Linux-style line endings (ie `\n`) instead of Windows style line endings (ie, `\r\n`) on all OSes.  (#198)
 * `read_metadata()` always returns `character` vectors for all variables.  With readr 1.2.0, some column were returned differently than before.  (#193)
-* 'raw_orLabel_headers' now supprted (Thanks Hatem Hosny - hatemhosny, #183 & #203)
+* 'raw_or_label_headers' now supported (Thanks Hatem Hosny - hatemhosny, #183 & #203)
+* 'export_checkbox_labels' now supported (#186)
+* 'forms' now supported for `redcap_read()`, `redcap_read_oneshot()`, & `redcap_read_oneshot_eav()`(#206).  It was already implemented for `redcap_metadata_read()`.
+
+* `id_position` allows user to specify if the record_id isn't in the first position (#207).  However, we recommend that all REDCap projects keep this important variable first in the data dictionary.
+* Link to new secure Zenodo DOI resolver (katrinleinweber #191)
+* parameters in `redcap_read()` and `redcap_read_oneshot()` are more consistent with the order in raw REDCap API. (#204)
 
 Modified Internals:
 * When converting REDCap's CSV to R's data.frame, `readr::read_csv()` is used instead of `utils::read.csv()` (Issue #127).
 * uses `odbc` package to retrieve credentials from the token server.  Remove RODBC and RODBCext (#188)
 * `data.table::rbindlist()` replaced by `dplyr::bind_rows()`
 * updated to readr 1.2.0 (#200)
-* the checkmate package inspects most function parameters now (instead of `testit::assert()` and `base:stop()` ) (#190).
+* the checkmate package inspects most function parameters now (instead of `testit::assert()` and `base:stop()` ) (#190 & #208).
 
 Deprecated Features:
 * `retrieve_token_mssql()`, because `retrieve_credential_mssql()` is more general and more useful.

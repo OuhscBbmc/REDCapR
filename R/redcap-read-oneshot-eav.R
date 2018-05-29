@@ -8,19 +8,19 @@
 #' @param token The user-specific string that serves as the password for a project.  Required.
 #' @param records An array, where each element corresponds to the ID of a desired record.  Optional.
 #' @param records_collapsed A single string, where the desired ID values are separated by commas.  Optional.
-#' @param fields An array, where each element corresponds a desired project field.  Optional.
+#' @param fields An array, where each element corresponds to a desired project field.  Optional.
 #' @param fields_collapsed A single string, where the desired field names are separated by commas.  Optional.
-# forms
-#' @param events An array, where each element corresponds a desired project event  Optional.
+#' @param forms An array, where each element corresponds to a desired project field.  Optional.
+#' @param forms_collapsed A single string, where the desired form names are separated by commas.  Optional.
+#' @param events An array, where each element corresponds to a desired project event.  Optional.
 #' @param events_collapsed A single string, where the desired event names are separated by commas.  Optional.
 #' @param raw_or_label A string (either `'raw'` or `'label'` that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is `'raw'`.
 #' @param raw_or_label_headers A string (either `'raw'` or `'label'` that specifies for the CSV headers whether to export the variable/field names (raw) or the field labels (label).  Default is `'raw'`.
-# exportCheckboxLabel
-# returnFormat
-# export_survey_fields
+# placeholder: exportCheckboxLabel
+# placeholder: returnFormat
+# placeholder: export_survey_fields
 #' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is `FALSE`. See the details below.
 #' @param filter_logic String of logic text (e.g., `[gender] = 'male'`) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.
-#' @importFrom rlang .data
 #'
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below. Optional.
@@ -38,6 +38,7 @@
 #'
 #' @importFrom magrittr %>%
 #' @importFrom utils type.convert
+#' @importFrom rlang .data
 #'
 #' @details
 #' The full list of configuration options accepted by the `httr` package is viewable by executing [httr::httr_options()].  The `httr`
@@ -90,18 +91,18 @@ redcap_read_oneshot_eav <- function(
   token,
   records                       = NULL, records_collapsed = "",
   fields                        = NULL, fields_collapsed  = "",
-  # forms
+  forms                         = NULL, forms_collapsed   = "",
   events                        = NULL, events_collapsed  = "",
   raw_or_label                  = "raw",
   raw_or_label_headers          = "raw",
-  # exportCheckboxLabel
-  # returnFormat
-  # export_survey_fields
+  # placeholder: exportCheckboxLabel
+  # placeholder: returnFormat
+  # placeholder: export_survey_fields
   export_data_access_groups     = FALSE,
   filter_logic                  = "",
 
-  # guess_type
-  # guess_max
+  # placeholder: guess_type
+  # placeholder: guess_max
   verbose                       = TRUE,
   config_options                = NULL
 ) {
@@ -111,24 +112,28 @@ redcap_read_oneshot_eav <- function(
 
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
-  # records
-  # fields
-  # forms
-  # events
+  checkmate::assert_atomic(records                      , any.missing=T, min.len=0)
+  checkmate::assert_character(records_collapsed         , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
+  checkmate::assert_character(fields                    , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
+  checkmate::assert_character(fields_collapsed          , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
+  checkmate::assert_character(forms                     , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
+  checkmate::assert_character(forms_collapsed           , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
+  checkmate::assert_character(events                    , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
+  checkmate::assert_character(events_collapsed          , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
   checkmate::assert_character(raw_or_label              , any.missing=F, len=1)
   checkmate::assert_subset(   raw_or_label              , c("raw", "label"))
   checkmate::assert_character(raw_or_label_headers      , any.missing=F, len=1)
   checkmate::assert_subset(   raw_or_label_headers      , c("raw", "label"))
-  # exportCheckboxLabel
-  # returnFormat
-  # export_survey_fields
+  # placeholder: export_checkbox_label --irrelevant in EAV
+  # placeholder: returnFormat
+  # placeholder: export_survey_fields
   checkmate::assert_logical(  export_data_access_groups , any.missing=F, len=1)
   checkmate::assert_character(filter_logic              , any.missing=F, len=1, pattern="^.{0,}$")
   #
-  # guess_type
-  # verbose
-  # config_options
-  # id_position
+  # placeholder: checkmate::assert_logical(  guess_type                , any.missing=F, len=1)
+  # placeholder: checkmate::assert_integerish(guess_max                , any.missing=F, len=1, lower=1)
+  checkmate::assert_logical(  verbose                   , any.missing=F, len=1, null.ok=T)
+  checkmate::assert_list(     config_options            , any.missing=T, len=1, null.ok=T)
 
   token <- sanitize_token(token)
   validate_field_names(fields)
@@ -137,6 +142,8 @@ redcap_read_oneshot_eav <- function(
     records_collapsed <- ifelse(is.null(records), "", paste0(records, collapse=",")) #This is an empty string if `records` is NULL.
   if( (length(fields_collapsed)==0L) | is.null(fields_collapsed) | all(nchar(fields_collapsed)==0L) )
     fields_collapsed <- ifelse(is.null(fields), "", paste0(fields, collapse=",")) #This is an empty string if `fields` is NULL.
+  if( (length(forms_collapsed)==0L) | is.null(forms_collapsed) | all(nchar(forms_collapsed)==0L) )
+    forms_collapsed <- ifelse(is.null(forms), "", paste0(forms, collapse=",")) #This is an empty string if `forms` is NULL.
   if( all(nchar(events_collapsed)==0) )
     events_collapsed <- ifelse(is.null(events), "", paste0(events, collapse=",")) #This is an empty string if `events` is NULL.
   if( all(nchar(filter_logic)==0) )
@@ -155,14 +162,13 @@ redcap_read_oneshot_eav <- function(
     rawOrLabel              = raw_or_label,
     rawOrLabelHeaders       = raw_or_label_headers,
     exportDataAccessGroups  = export_data_access_groups_string,
-    # records                 = records_collapsed,
-    # fields                  = fields_collapsed,
-    # events                  = events_collapsed,
     filterLogic             = filter_logic
+    # record, fields, forms & events are specified below
   )
 
   if( nchar(records_collapsed) > 0 ) post_body$records  <- records_collapsed
   if( nchar(fields_collapsed ) > 0 ) post_body$fields   <- fields_collapsed
+  if( nchar(forms_collapsed  ) > 0 ) post_body$forms    <- forms_collapsed
   if( nchar(events_collapsed ) > 0 ) post_body$events   <- events_collapsed
 
   result <- httr::POST(
@@ -183,7 +189,7 @@ redcap_read_oneshot_eav <- function(
 
   success     <- (success & !any(grepl(regex_cannot_connect, raw_text)) & !any(grepl(regex_empty, raw_text)))
 
-  ds_metadata <- REDCapR::redcap_metadata_read(redcap_uri, token)$data
+  ds_metadata <- REDCapR::redcap_metadata_read(redcap_uri, token, forms_collapsed=forms_collapsed)$data
   ds_variable <- REDCapR::redcap_variables(redcap_uri, token)$data
 
   if( success ) {
@@ -243,12 +249,13 @@ redcap_read_oneshot_eav <- function(
             value      = dplyr::if_else(!is.na(.data$field_type) & (.data$field_type=="checkbox"), as.character(!is.na(.data$value)), .data$value)
           )
 
+        . <- NULL # For the sake of avoiding an R CMD check note.
         ds <- ds_eav_2 %>%
           dplyr::select_("-field_type") %>%
           # dplyr::select_("-redcap_repeat_instance") %>%           # TODO: need a good fix for repeats
           # tidyr::drop_na(event_id) %>%                            # TODO: need a good fix for repeats
           tidyr::spread_(key="field_name", value="value") %>%
-          dplyr::select_(.dots=variables_to_keep)
+          dplyr::select_(.data=., .dots=intersect(variables_to_keep, colnames(.)))
 
         ds_2 <- ds %>%
           dplyr::mutate_if(is.character, type.convert) %>%
@@ -259,12 +266,9 @@ redcap_read_oneshot_eav <- function(
 
     if( ifelse(exists("ds_2"), inherits(ds_2, "data.frame"), FALSE) ) {
       outcome_message <- paste0(
-        format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE),
-        " records and ",
-        format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE),
-        " columns were read from REDCap in ",
-        round(elapsed_seconds, 1), " seconds.  The http status code was ",
-        status_code, "."
+        format(  nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE), " records and ",
+        format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE), " columns were read from REDCap in ",
+        round(elapsed_seconds, 1), " seconds.  The http status code was ", status_code, "."
       )
 
       # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.

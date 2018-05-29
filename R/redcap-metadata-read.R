@@ -77,10 +77,10 @@ redcap_metadata_read <- function(
     config   = config_options
   )
 
-  status_code <- result$status
-  success <- (status_code==200L)
-
-  raw_text <- httr::content(result, "text")
+  status_code     <- result$status
+  success         <- (status_code==200L)
+  raw_text        <- httr::content(result, "text")
+  # TODO: convert all line endings to "\n"
   elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
 
   if( success ) {

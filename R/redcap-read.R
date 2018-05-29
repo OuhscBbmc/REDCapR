@@ -14,15 +14,16 @@
 #' @param token The user-specific string that serves as the password for a project.  Required.
 #' @param records An array, where each element corresponds to the ID of a desired record.  Optional.
 #' @param records_collapsed A single string, where the desired ID values are separated by commas.  Optional.
-#' @param fields An array, where each element corresponds a desired project field.  Optional.
+#' @param fields An array, where each element corresponds to a desired project field.  Optional.
 #' @param fields_collapsed A single string, where the desired field names are separated by commas.  Optional.
-# forms
-#' @param events An array, where each element corresponds a desired project event  Optional.
+#' @param forms An array, where each element corresponds to a desired project form.  Optional.
+#' @param forms_collapsed A single string, where the desired form names are separated by commas.  Optional.
+#' @param events An array, where each element corresponds to a desired project event.  Optional.
 #' @param events_collapsed A single string, where the desired event names are separated by commas.  Optional.
 #' @param raw_or_label A string (either 'raw` or 'label' that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is `'raw'`.
 #' @param raw_or_label_headers A string (either `'raw'` or `'label'` that specifies for the CSV headers whether to export the variable/field names (raw) or the field labels (label).  Default is `'raw'`.
-# exportCheckboxLabel
-# returnFormat
+#' @param export_checkbox_label specifies the format of checkbox field values specifically when exporting the data as labels.  If `raw_or_label` is `'label'` and `export_checkbox_label` is TRUE, the values will be the text displayed to the users.  Otherwise, the values will be 0/1.
+# placeholder: returnFormat
 #' @param export_survey_fields A boolean that specifies whether to export the survey identifier field (e.g., 'redcap_survey_identifier') or survey timestamp fields (e.g., instrument+'_timestamp') .
 #' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is `FALSE`. See the details below.
 #' @param filter_logic String of logic text (e.g., `[gender] = 'male'`) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.
@@ -69,7 +70,6 @@
 #' token   <- "9A81268476645C4E5F03428B8AC3AA7B"
 #' redcap_read(batch_size=2, redcap_uri=uri, token=token)
 #' }
-#'
 
 redcap_read <- function(
   batch_size                    = 100L,
@@ -79,12 +79,12 @@ redcap_read <- function(
   token,
   records                       = NULL, records_collapsed = "",
   fields                        = NULL, fields_collapsed  = "",
-  # forms
+  forms                         = NULL, forms_collapsed   = "",
   events                        = NULL, events_collapsed  = "",
   raw_or_label                  = "raw",
   raw_or_label_headers          = "raw",
-  # exportCheckboxLabel
-  # returnFormat
+  export_checkbox_label         = FALSE,
+  # placeholder: returnFormat
   export_survey_fields          = FALSE,
   export_data_access_groups     = FALSE,
   filter_logic                  = "",
@@ -97,23 +97,27 @@ redcap_read <- function(
 
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
-  # records
-  # fields
-  # forms
-  # events
+  checkmate::assert_atomic(records                      , any.missing=T, min.len=0)
+  checkmate::assert_character(records_collapsed         , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
+  checkmate::assert_character(fields                    , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
+  checkmate::assert_character(fields_collapsed          , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
+  checkmate::assert_character(forms                     , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
+  checkmate::assert_character(forms_collapsed           , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
+  checkmate::assert_character(events                    , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
+  checkmate::assert_character(events_collapsed          , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
   checkmate::assert_character(raw_or_label              , any.missing=F, len=1)
   checkmate::assert_subset(   raw_or_label              , c("raw", "label"))
   checkmate::assert_character(raw_or_label_headers      , any.missing=F, len=1)
   checkmate::assert_subset(   raw_or_label_headers      , c("raw", "label"))
-  # exportCheckboxLabel
-  # returnFormat
-  # export_survey_fields
+  checkmate::assert_logical(  export_checkbox_label     , any.missing=F, len=1)
+  # placeholder: returnFormat
+  checkmate::assert_logical(  export_survey_fields      , any.missing=F, len=1)
   checkmate::assert_logical(  export_data_access_groups , any.missing=F, len=1)
   #
   checkmate::assert_logical(  guess_type                , any.missing=F, len=1)
-  # verbose
-  # config_options
-  # id_position
+  checkmate::assert_logical(  verbose                   , any.missing=F, len=1, null.ok=T)
+  checkmate::assert_list(     config_options            , any.missing=T, len=1, null.ok=T)
+  checkmate::assert_integer(  id_position               , any.missing=F, len=1, lower=1L)
 
   token <- sanitize_token(token)
   validate_field_names(fields)
@@ -122,6 +126,8 @@ redcap_read <- function(
     records_collapsed <- ifelse(is.null(records), "", paste0(records, collapse=",")) #This is an empty string if `records` is NULL.
   if( (length(fields_collapsed)==0L) | is.null(fields_collapsed) | all(nchar(fields_collapsed)==0) )
     fields_collapsed <- ifelse(is.null(fields), "", paste0(fields, collapse=",")) #This is an empty string if `fields` is NULL.
+  if( (length(forms_collapsed)==0L) | is.null(forms_collapsed) | all(nchar(forms_collapsed)==0L) )
+    forms_collapsed <- ifelse(is.null(forms), "", paste0(forms, collapse=",")) #This is an empty string if `forms` is NULL.
   if( all(nchar(events_collapsed)==0) )
     events_collapsed <- ifelse(is.null(events), "", paste0(events, collapse=",")) #This is an empty string if `events` is NULL.
   if( all(nchar(filter_logic)==0) )
@@ -140,9 +146,10 @@ redcap_read <- function(
     redcap_uri         = redcap_uri,
     token              = token,
     records_collapsed  = records_collapsed,
-    fields_collapsed   = metadata$data$field_name[1],
-    filter_logic       = filter_logic,
+    fields_collapsed   = metadata$data$field_name[id_position],
+    forms_collapsed    = forms_collapsed,
     events_collapsed   = events_collapsed,
+    filter_logic       = filter_logic,
     guess_type         = guess_type,
     verbose            = verbose,
     config_options     = config_options
@@ -156,8 +163,9 @@ redcap_read <- function(
       data                  = data.frame(),
       records_collapsed     = "failed in initial batch call",
       fields_collapsed      = "failed in initial batch call",
-      filter_logic          = "failed in initial batch call",
+      forms_collapsed       = "failed in initial batch call",
       events_collapsed      = "failed in initial batch call",
+      filter_logic          = "failed in initial batch call",
       elapsed_seconds       = elapsed_seconds,
       status_code           = initial_call$status_code,
       outcome_messages      = outcome_messages,
@@ -166,7 +174,7 @@ redcap_read <- function(
   }
 
   # Continue as intended if the initial query succeeded. --------------------
-  uniqueIDs <- sort(unique(initial_call$data[, 1]))
+  uniqueIDs <- sort(unique(initial_call$data[[id_position]]))
 
   if( all(nchar(uniqueIDs)==32L) )
     warn_hash_record_id()
@@ -178,7 +186,7 @@ redcap_read <- function(
   lst_outcome_message    <- NULL
   success_combined       <- TRUE
 
-  message("Starting to read ", format(length(uniqueIDs), big.mark=",", scientific=F, trim=T), " records  at ", Sys.time())
+  message("Starting to read ", format(length(uniqueIDs), big.mark=",", scientific=F, trim=T), " records  at ", Sys.time(), ".")
   for( i in ds_glossary$id ) {
     selected_index  <- seq(from=ds_glossary[i, "start_index"], to=ds_glossary[i, "stop_index"])
     selected_ids    <- uniqueIDs[selected_index]
@@ -195,12 +203,16 @@ redcap_read <- function(
       token                       = token,
       records                     = selected_ids,
       fields_collapsed            = fields_collapsed,
-      filter_logic                = filter_logic,
       events_collapsed            = events_collapsed,
-      export_survey_fields        = export_survey_fields,
-      export_data_access_groups   = export_data_access_groups,
+      forms_collapsed             = forms_collapsed,
       raw_or_label                = raw_or_label,
       raw_or_label_headers        = raw_or_label_headers,
+      export_checkbox_label       = export_checkbox_label,
+      # placeholder: return_format
+      export_survey_fields        = export_survey_fields,
+      export_data_access_groups   = export_data_access_groups,
+      filter_logic                = filter_logic,
+
       guess_type                  = guess_type,
       verbose                     = verbose,
       config_options              = config_options
@@ -237,8 +249,9 @@ redcap_read <- function(
     outcome_messages    = outcome_message_combined,
     records_collapsed   = records_collapsed,
     fields_collapsed    = fields_collapsed,
-    filter_logic        = filter_logic,
+    forms_collapsed     = forms_collapsed,
     events_collapsed    = events_collapsed,
+    filter_logic        = filter_logic,
     elapsed_seconds     = elapsed_seconds
   ) )
 }
