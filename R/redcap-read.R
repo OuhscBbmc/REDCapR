@@ -140,7 +140,7 @@ redcap_read <- function(
     redcap_uri         = redcap_uri,
     token              = token,
     records_collapsed  = records_collapsed,
-    fields_collapsed   = metadata$data$field_name[1],
+    fields_collapsed   = metadata$data$field_name[id_position],
     # forms
     events_collapsed   = events_collapsed,
     filter_logic       = filter_logic,
@@ -168,7 +168,7 @@ redcap_read <- function(
   }
 
   # Continue as intended if the initial query succeeded. --------------------
-  uniqueIDs <- sort(unique(initial_call$data[, 1]))
+  uniqueIDs <- sort(unique(initial_call$data[[id_position]]))
 
   if( all(nchar(uniqueIDs)==32L) )
     warn_hash_record_id()

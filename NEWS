@@ -15,6 +15,7 @@ Minor New Features:
 * `read_metadata()` always returns `character` vectors for all variables.  With readr 1.2.0, some column were returned differently than before.  (#193)
 * 'raw_or_label_headers' now supported (Thanks Hatem Hosny - hatemhosny, #183 & #203)
 * 'export_checkbox_labels' now supported (#186)
+* `id_position` allows user to specify if the record_id isn't in the first position (#207).  However, we recommend that all REDCap projects keep this important variable first in the data dictionary.
 * Link to new secure Zenodo DOI resolver (katrinleinweber #191)
 * parameters in `redcap_read()` and `redcap_read_oneshot()` are more consistent with the order in raw REDCap API. (#204)
 
