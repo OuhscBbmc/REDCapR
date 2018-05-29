@@ -10,13 +10,13 @@
 #' @param records_collapsed A single string, where the desired ID values are separated by commas.  Optional.
 #' @param fields An array, where each element corresponds a desired project field.  Optional.
 #' @param fields_collapsed A single string, where the desired field names are separated by commas.  Optional.
-# forms
+# TODO: add forms
 #' @param events An array, where each element corresponds a desired project event  Optional.
 #' @param events_collapsed A single string, where the desired event names are separated by commas.  Optional.
 #' @param raw_or_label A string (either `'raw'` or `'label'`) that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is `'raw'`.
 #' @param raw_or_label_headers A string (either `'raw'` or `'label'` that specifies for the CSV headers whether to export the variable/field names (raw) or the field labels (label).  Default is `'raw'`.
 #' @param export_checkbox_label specifies the format of checkbox field values specifically when exporting the data as labels.  If `raw_or_label` is `'label'` and `export_checkbox_label` is TRUE, the values will be the text displayed to the users.  Otherwise, the values will be 0/1.
-# returnFormat
+# placeholder: returnFormat
 #' @param export_survey_fields A boolean that specifies whether to export the survey identifier field (e.g., 'redcap_survey_identifier') or survey timestamp fields (e.g., instrument+'_timestamp') .
 #' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is `FALSE`. See the details below.
 #' @param filter_logic String of logic text (e.g., `[gender] = 'male'`) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.
@@ -78,12 +78,12 @@ redcap_read_oneshot <- function(
   token,
   records                       = NULL, records_collapsed = "",
   fields                        = NULL, fields_collapsed  = "",
-  # forms
+  # TODO: add forms
   events                        = NULL, events_collapsed  = "",
   raw_or_label                  = "raw",
   raw_or_label_headers          = "raw",
   export_checkbox_label         = FALSE,
-  # returnFormat
+  # placeholder returnFormat
   export_survey_fields          = FALSE,
   export_data_access_groups     = FALSE,
   filter_logic                  = "",
@@ -103,8 +103,8 @@ redcap_read_oneshot <- function(
   checkmate::assert_character(records_collapsed         , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
   checkmate::assert_character(fields                    , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
   checkmate::assert_character(fields_collapsed          , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
-  # forms
-  # forms_collapsed
+  # TODO: add forms
+  # TODO: add forms_collapsed
   checkmate::assert_character(events                    , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
   checkmate::assert_character(events_collapsed          , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
   checkmate::assert_character(raw_or_label              , any.missing=F, len=1)
@@ -112,7 +112,7 @@ redcap_read_oneshot <- function(
   checkmate::assert_character(raw_or_label_headers      , any.missing=F, len=1)
   checkmate::assert_subset(   raw_or_label_headers      , c("raw", "label"))
   checkmate::assert_logical(  export_checkbox_label     , any.missing=F, len=1)
-  # returnFormat
+  # placeholder: returnFormat
   checkmate::assert_logical(  export_survey_fields      , any.missing=F, len=1)
   checkmate::assert_logical(  export_data_access_groups , any.missing=F, len=1)
   checkmate::assert_character(filter_logic              , any.missing=F, len=1, pattern="^.{0,}$")
@@ -137,11 +137,6 @@ redcap_read_oneshot <- function(
   if( any(grepl("[A-Z]", fields_collapsed)) )
     warning("The fields passed to REDCap appear to have at least uppercase letter.  REDCap variable names are snake case.")
 
-  export_checkbox_label_string     <- ifelse(export_checkbox_label    , "true", "false")
-  export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
-
-  export_survey_fields             <- tolower(as.character(export_survey_fields))
-
   post_body <- list(
     token                   = token,
     content                 = 'record',
@@ -149,17 +144,17 @@ redcap_read_oneshot <- function(
     type                    = 'flat',
     rawOrLabel              = raw_or_label,
     rawOrLabelHeaders       = raw_or_label_headers,
-    exportCheckboxLabel     = export_checkbox_label_string,
-    exportSurveyFields      = export_survey_fields,
-    exportDataAccessGroups  = export_data_access_groups_string,
-    # records               = ifelse(nchar(records_collapsed)   > 0, records_collapsed  , NULL),
-    # fields                = ifelse(nchar(fields_collapsed)    > 0, fields_collapsed   , NULL),
-    # events                = ifelse(nchar(events_collapsed)    > 0, events_collapsed   , NULL),
+    exportCheckboxLabel     = tolower(as.character(export_checkbox_label)),
+    # placeholder: returnFormat
+    exportSurveyFields      = tolower(as.character(export_survey_fields)),
+    exportDataAccessGroups  = tolower(as.character(export_data_access_groups)),
     filterLogic             = filter_logic
+    # record, fields, forms & events are specified below
   )
 
   if( nchar(records_collapsed) > 0 ) post_body$records  <- records_collapsed
   if( nchar(fields_collapsed ) > 0 ) post_body$fields   <- fields_collapsed
+  # TODO: add forms
   if( nchar(events_collapsed ) > 0 ) post_body$events   <- events_collapsed
 
   result <- httr::POST(
@@ -171,7 +166,7 @@ redcap_read_oneshot <- function(
   status_code           <- result$status
   success               <- (status_code==200L)
   raw_text              <- httr::content(result, "text")
-  raw_text              <- gsub("\r\n", "\n", raw_text)
+  raw_text              <- gsub("\r\n", "\n", raw_text) # Convert all line-ending to linux-style
   elapsed_seconds       <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
 
   # raw_text <- "The hostname (redcap-db.hsc.net.ou.edu) / username (redcapsql) / password (XXXXXX) combination could not connect to the MySQL server. \r\n\t\tPlease check their values."
@@ -201,7 +196,6 @@ redcap_read_oneshot <- function(
         status_code, "."
       )
 
-      # browser()
       # ds <- dplyr::mutate_if(
       #   ds,
       #   is.character,
@@ -221,8 +215,7 @@ redcap_read_oneshot <- function(
       #
       # ds <- base::as.data.frame(ds)
 
-      #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
-      raw_text <- ""
+      raw_text <- "" # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
     } else {
       success          <- FALSE #Override the 'success' determination from the http status code.
       ds               <- data.frame() #Return an empty data.frame
@@ -230,10 +223,10 @@ redcap_read_oneshot <- function(
     }
   } else {
     ds                 <- data.frame() #Return an empty data.frame
-    if( any(grepl(regex_empty, raw_text)) ) {
-      outcome_message    <- "The REDCapR read/export operation was not successful.  The returned dataset was empty."
+    outcome_message    <- if( any(grepl(regex_empty, raw_text)) ) {
+      "The REDCapR read/export operation was not successful.  The returned dataset was empty."
     } else {
-      outcome_message    <- paste0("The REDCapR read/export operation was not successful.  The error message was:\n",  raw_text)
+      paste0("The REDCapR read/export operation was not successful.  The error message was:\n",  raw_text)
     }
   }
 
@@ -247,7 +240,7 @@ redcap_read_oneshot <- function(
     outcome_message    = outcome_message,
     records_collapsed  = records_collapsed,
     fields_collapsed   = fields_collapsed,
-    # forms
+    # TODO: add forms
     events_collapsed   = events_collapsed,
     filter_logic       = filter_logic,
     elapsed_seconds    = elapsed_seconds,
