@@ -14,11 +14,11 @@
 #' @param token The user-specific string that serves as the password for a project.  Required.
 #' @param records An array, where each element corresponds to the ID of a desired record.  Optional.
 #' @param records_collapsed A single string, where the desired ID values are separated by commas.  Optional.
-#' @param fields An array, where each element corresponds a desired project field.  Optional.
+#' @param fields An array, where each element corresponds to a desired project field.  Optional.
 #' @param fields_collapsed A single string, where the desired field names are separated by commas.  Optional.
-#' @param forms An array, where each element corresponds a desired project field.  Optional.
-#' @param forms_collapsed A single string, where the desired field names are separated by commas.  Optional.
-#' @param events An array, where each element corresponds a desired project event  Optional.
+#' @param forms An array, where each element corresponds to a desired project form.  Optional.
+#' @param forms_collapsed A single string, where the desired form names are separated by commas.  Optional.
+#' @param events An array, where each element corresponds to a desired project event.  Optional.
 #' @param events_collapsed A single string, where the desired event names are separated by commas.  Optional.
 #' @param raw_or_label A string (either 'raw` or 'label' that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is `'raw'`.
 #' @param raw_or_label_headers A string (either `'raw'` or `'label'` that specifies for the CSV headers whether to export the variable/field names (raw) or the field labels (label).  Default is `'raw'`.
@@ -186,7 +186,7 @@ redcap_read <- function(
   lst_outcome_message    <- NULL
   success_combined       <- TRUE
 
-  message("Starting to read ", format(length(uniqueIDs), big.mark=",", scientific=F, trim=T), " records  at ", Sys.time())
+  message("Starting to read ", format(length(uniqueIDs), big.mark=",", scientific=F, trim=T), " records  at ", Sys.time(), ".")
   for( i in ds_glossary$id ) {
     selected_index  <- seq(from=ds_glossary[i, "start_index"], to=ds_glossary[i, "stop_index"])
     selected_ids    <- uniqueIDs[selected_index]

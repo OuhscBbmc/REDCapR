@@ -20,15 +20,15 @@ redcap_read_oneshot_eav(redcap_uri, token, records = NULL,
 
 \item{records_collapsed}{A single string, where the desired ID values are separated by commas.  Optional.}
 
-\item{fields}{An array, where each element corresponds a desired project field.  Optional.}
+\item{fields}{An array, where each element corresponds to a desired project field.  Optional.}
 
 \item{fields_collapsed}{A single string, where the desired field names are separated by commas.  Optional.}
 
-\item{forms}{An array, where each element corresponds a desired project field.  Optional.}
+\item{forms}{An array, where each element corresponds to a desired project field.  Optional.}
 
-\item{forms_collapsed}{A single string, where the desired field names are separated by commas.  Optional.}
+\item{forms_collapsed}{A single string, where the desired form names are separated by commas.  Optional.}
 
-\item{events}{An array, where each element corresponds a desired project event  Optional.}
+\item{events}{An array, where each element corresponds to a desired project event.  Optional.}
 
 \item{events_collapsed}{A single string, where the desired event names are separated by commas.  Optional.}
 

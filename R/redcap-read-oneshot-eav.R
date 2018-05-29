@@ -8,11 +8,11 @@
 #' @param token The user-specific string that serves as the password for a project.  Required.
 #' @param records An array, where each element corresponds to the ID of a desired record.  Optional.
 #' @param records_collapsed A single string, where the desired ID values are separated by commas.  Optional.
-#' @param fields An array, where each element corresponds a desired project field.  Optional.
+#' @param fields An array, where each element corresponds to a desired project field.  Optional.
 #' @param fields_collapsed A single string, where the desired field names are separated by commas.  Optional.
-#' @param forms An array, where each element corresponds a desired project field.  Optional.
-#' @param forms_collapsed A single string, where the desired field names are separated by commas.  Optional.
-#' @param events An array, where each element corresponds a desired project event  Optional.
+#' @param forms An array, where each element corresponds to a desired project field.  Optional.
+#' @param forms_collapsed A single string, where the desired form names are separated by commas.  Optional.
+#' @param events An array, where each element corresponds to a desired project event.  Optional.
 #' @param events_collapsed A single string, where the desired event names are separated by commas.  Optional.
 #' @param raw_or_label A string (either `'raw'` or `'label'` that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is `'raw'`.
 #' @param raw_or_label_headers A string (either `'raw'` or `'label'` that specifies for the CSV headers whether to export the variable/field names (raw) or the field labels (label).  Default is `'raw'`.
@@ -21,7 +21,6 @@
 # placeholder: export_survey_fields
 #' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is `FALSE`. See the details below.
 #' @param filter_logic String of logic text (e.g., `[gender] = 'male'`) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.
-#' @importFrom rlang .data
 #'
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below. Optional.
@@ -39,6 +38,7 @@
 #'
 #' @importFrom magrittr %>%
 #' @importFrom utils type.convert
+#' @importFrom rlang .data
 #'
 #' @details
 #' The full list of configuration options accepted by the `httr` package is viewable by executing [httr::httr_options()].  The `httr`
@@ -266,12 +266,9 @@ redcap_read_oneshot_eav <- function(
 
     if( ifelse(exists("ds_2"), inherits(ds_2, "data.frame"), FALSE) ) {
       outcome_message <- paste0(
-        format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE),
-        " records and ",
-        format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE),
-        " columns were read from REDCap in ",
-        round(elapsed_seconds, 1), " seconds.  The http status code was ",
-        status_code, "."
+        format(  nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE), " records and ",
+        format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE), " columns were read from REDCap in ",
+        round(elapsed_seconds, 1), " seconds.  The http status code was ", status_code, "."
       )
 
       # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.

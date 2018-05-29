@@ -7,7 +7,7 @@ credential <- REDCapR::retrieve_credential_local(
 )
 project <- redcap_project$new(redcap_uri=credential$redcap_uri, token=credential$token)
 
-test_that("Smoke Test", {
+test_that("smoke test", {
   testthat::skip_on_cran()
 
   #Static method w/ default batch size
@@ -30,7 +30,7 @@ test_that("Smoke Test", {
     returned_object <- project$read(batch_size=2)
   )
 })
-test_that("All Records -Default", {
+test_that("default", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
     "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
@@ -91,8 +91,7 @@ test_that("All Records -Default", {
   expect_true(returned_object2$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
-
-test_that("All Records -specify forms", {
+test_that("specify forms", {
   testthat::skip_on_cran()
   desired_forms <- c("demographics", "race_and_ethnicity")
   expected_data_frame <-structure(
@@ -147,7 +146,7 @@ test_that("All Records -specify forms", {
   expect_true(returned_object2$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
-test_that("All Records -Raw", {
+test_that("raw", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(
     list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
@@ -211,7 +210,7 @@ test_that("All Records -Raw", {
   expect_true(returned_object2$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
-test_that("All Records -Raw and DAG", {
+test_that("raw and DAG", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(
     list(record_id = 1:5, redcap_data_access_group = c("dag_1",
@@ -275,7 +274,7 @@ test_that("All Records -Raw and DAG", {
   expect_true(returned_object2$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
-test_that("All Records -label and DAG -one single batch", {
+test_that("label and DAG -one single batch", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(
     list(record_id = 1:5, redcap_data_access_group = c("dag_1",
@@ -331,7 +330,7 @@ test_that("All Records -label and DAG -one single batch", {
   expect_true(returned_object1$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
-test_that("All Records -label and DAG -three tiny batches", {
+test_that("label and DAG -three tiny batches", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(
     list(record_id = 1:5, redcap_data_access_group = c("dag_1",
@@ -387,7 +386,7 @@ test_that("All Records -label and DAG -three tiny batches", {
   expect_true(returned_object2$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
-test_that("All Records -label", {
+test_that("label", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(
     list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
@@ -456,7 +455,7 @@ test_that("All Records -label", {
   expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
-test_that("All Records -label header", {
+test_that("label header", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(list(`Study ID` = c(1, 2, 3, 4, 5), `First Name` = c("Nutmeg",
     "Tumtum", "Marcus", "Trudy", "John Lee"), `Last Name` = c("Nutmouse",
@@ -543,7 +542,7 @@ test_that("All Records -label header", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
-test_that("All Records -export_checkbox_label", {
+test_that("export_checkbox_label", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(
     list(record_id = c(1, 2, 3, 4, 5), name_first = c("Nutmeg",
@@ -611,9 +610,7 @@ test_that("All Records -export_checkbox_label", {
   expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
-
-
-test_that("Filter - numeric", {
+test_that("filter - numeric", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(
     list(record_id = 3:4, name_first = c("Marcus", "Trudy"
@@ -650,8 +647,7 @@ test_that("Filter - numeric", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
-
-test_that("Filter - character", {
+test_that("filter - character", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(
     list(record_id = 5L, name_first = "John Lee", name_last = "Walker",

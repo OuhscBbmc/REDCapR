@@ -8,11 +8,11 @@
 #' @param token The user-specific string that serves as the password for a project.  Required.
 #' @param records An array, where each element corresponds to the ID of a desired record.  Optional.
 #' @param records_collapsed A single string, where the desired ID values are separated by commas.  Optional.
-#' @param fields An array, where each element corresponds a desired project field.  Optional.
+#' @param fields An array, where each element corresponds to a desired project field.  Optional.
 #' @param fields_collapsed A single string, where the desired field names are separated by commas.  Optional.
-#' @param forms An array, where each element corresponds a desired project field.  Optional.
-#' @param forms_collapsed A single string, where the desired field names are separated by commas.  Optional.
-#' @param events An array, where each element corresponds a desired project event  Optional.
+#' @param forms An array, where each element corresponds to a desired project form.  Optional.
+#' @param forms_collapsed A single string, where the desired form names are separated by commas.  Optional.
+#' @param events An array, where each element corresponds to a desired project event.  Optional.
 #' @param events_collapsed A single string, where the desired event names are separated by commas.  Optional.
 #' @param raw_or_label A string (either `'raw'` or `'label'`) that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is `'raw'`.
 #' @param raw_or_label_headers A string (either `'raw'` or `'label'` that specifies for the CSV headers whether to export the variable/field names (raw) or the field labels (label).  Default is `'raw'`.
@@ -191,12 +191,9 @@ redcap_read_oneshot <- function(
 
     if( exists("ds") & inherits(ds, "data.frame") ) {
       outcome_message <- paste0(
-        format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE),
-        " records and ",
-        format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE),
-        " columns were read from REDCap in ",
-        round(elapsed_seconds, 1), " seconds.  The http status code was ",
-        status_code, "."
+        format(  nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE), " records and ",
+        format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE), " columns were read from REDCap in ",
+        round(elapsed_seconds, 1), " seconds.  The http status code was ", status_code, "."
       )
 
       # ds <- dplyr::mutate_if(
