@@ -52,7 +52,7 @@ redcap_metadata_read <- function(
 ) {
   #TODO: NULL verbose parameter pulls from getOption("verbose")
 
-  start_time <- Sys.time()
+  # start_time <- Sys.time()
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
 
@@ -69,23 +69,24 @@ redcap_metadata_read <- function(
     fields   = fields_collapsed
   )
 
-  result <- httr::POST(
-    url      = redcap_uri,
-    body     = post_body,
-    config   = config_options
-  )
+  kernel <- kernel_api(redcap_uri, post_body, config_options)
+  # result <- httr::POST(
+  #   url      = redcap_uri,
+  #   body     = post_body,
+  #   config   = config_options
+  # )
+  #
+  # status_code     <- result$status
+  # success         <- (status_code==200L)
+  # raw_text        <- httr::content(result, "text")
+  # # TODO: convert all line endings to "\n"
+  # elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
 
-  status_code     <- result$status
-  success         <- (status_code==200L)
-  raw_text        <- httr::content(result, "text")
-  # TODO: convert all line endings to "\n"
-  elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
-
-  if( success ) {
+  if( kernel$success ) {
     col_types <- readr::cols(field_name = readr::col_character(), .default = readr::col_character())
 
     try (
-      ds <- readr::read_csv(raw_text, col_types = col_types), #Convert the raw text to a dataset.
+      ds <- readr::read_csv(kernel$raw_text, col_types = col_types), #Convert the raw text to a dataset.
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
     )
 
@@ -94,21 +95,21 @@ redcap_metadata_read <- function(
         "The data dictionary describing ",
         format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE),
         " fields was read from REDCap in ",
-        round(elapsed_seconds, 1), " seconds.  The http status code was ",
-        status_code, "."
+        round(kernel$elapsed_seconds, 1), " seconds.  The http status code was ",
+        kernel$status_code, "."
       )
 
-      #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
-      raw_text <- ""
+      # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
+      kernel$raw_text <- ""
     } else {
       success <- FALSE #Override the 'success' determination from the http status code.
       ds <- data.frame() #Return an empty data.frame
-      outcome_message <- paste0("The REDCap metadata export failed.  The http status code was ", status_code, ".  The 'raw_text' returned was '", raw_text, "'.")
+      outcome_message <- paste0("The REDCap metadata export failed.  The http status code was ", kernel$status_code, ".  The 'raw_text' returned was '", kernel$raw_text, "'.")
     }
   }
   else {
     ds <- data.frame() #Return an empty data.frame
-    outcome_message <- paste0("The REDCapR metadata export operation was not successful.  The error message was:\n",  raw_text)
+    outcome_message <- paste0("The REDCapR metadata export operation was not successful.  The error message was:\n",  kernel$raw_text)
   }
 
   if( verbose )
@@ -116,13 +117,13 @@ redcap_metadata_read <- function(
 
   return( list(
     data               = ds,
-    success            = success,
-    status_code        = status_code,
+    success            = kernel$success,
+    status_code        = kernel$status_code,
     outcome_message    = outcome_message,
     forms_collapsed    = forms_collapsed,
     fields_collapsed   = fields_collapsed,
-    elapsed_seconds    = elapsed_seconds,
-    raw_text           = raw_text
+    elapsed_seconds    = kernel$elapsed_seconds,
+    raw_text           = kernel$raw_text
   ) )
 }
 

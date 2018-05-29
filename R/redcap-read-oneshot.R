@@ -215,7 +215,7 @@ redcap_read_oneshot <- function(
     } else {
       kernel$success   <- FALSE #Override the 'success' determination from the http status code.
       ds               <- data.frame() #Return an empty data.frame
-      outcome_message  <- paste0("The REDCap read failed.  The http status code was ", kernel$status_code, ".  The 'raw_text' returned was '", raw_text, "'.")
+      outcome_message  <- paste0("The REDCap read failed.  The http status code was ", kernel$status_code, ".  The 'raw_text' returned was '", kernel$raw_text, "'.")
     }
   } else {
     ds                 <- data.frame() #Return an empty data.frame
