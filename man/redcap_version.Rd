@@ -4,7 +4,7 @@
 \alias{redcap_version}
 \title{Determine version of REDCap instance}
 \usage{
-redcap_version(redcap_uri, token, verbose = TRUE)
+redcap_version(redcap_uri, token, verbose = TRUE, config_options = NULL)
 }
 \arguments{
 \item{redcap_uri}{The URI (uniform resource identifier) of the REDCap project.  Required.}
@@ -12,6 +12,8 @@ redcap_version(redcap_uri, token, verbose = TRUE)
 \item{token}{The user-specific string that serves as the password for a project.  Required.}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.}
+
+\item{config_options}{A list of options to pass to \code{POST} method in the \code{httr} package.  See the details below.  Optional.}
 }
 \value{
 A \link[utils:packageVersion]{utils::packageVersion}.
