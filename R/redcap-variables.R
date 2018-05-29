@@ -41,7 +41,7 @@ redcap_variables <- function(
   redcap_uri, token, verbose=TRUE, config_options=NULL
 ) {
 
-  start_time <- Sys.time()
+  # start_time <- Sys.time()
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
 
@@ -53,26 +53,30 @@ redcap_variables <- function(
     format                  = 'csv'
   )
 
-  result <- httr::POST(
-    url     = redcap_uri,
-    body    = post_body,
-    config  = config_options
-  )
+  # browser()
+  # This is the important line that communicates with the REDCap server.
+  kernel <- kernel_api(redcap_uri, post_body, config_options)
 
-  status_code     <- result$status
-  success         <- (status_code==200L)
-  raw_text        <- httr::content(result, "text")
-  elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
+  # result <- httr::POST(
+  #   url     = redcap_uri,
+  #   body    = post_body,
+  #   config  = config_options
+  # )
+  #
+  # status_code     <- result$status
+  # success         <- (status_code==200L)
+  # raw_text        <- httr::content(result, "text")
+  # elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
+  #
+  # regex_cannot_connect <- "^The hostname \\((.+)\\) / username \\((.+)\\) / password \\((.+)\\) combination could not connect.+"
+  # regex_empty <- "^\\s+$"
+  #
+  # success     <- (success & !any(grepl(regex_cannot_connect, raw_text)) & !any(grepl(regex_empty, raw_text)))
 
-  regex_cannot_connect <- "^The hostname \\((.+)\\) / username \\((.+)\\) / password \\((.+)\\) combination could not connect.+"
-  regex_empty <- "^\\s+$"
-
-  success     <- (success & !any(grepl(regex_cannot_connect, raw_text)) & !any(grepl(regex_empty, raw_text)))
-
-  if( success ) {
+  if( kernel$success ) {
     try (
       {
-        ds <- readr::read_csv(file=raw_text)
+        ds <- readr::read_csv(file=kernel$raw_text)
       }, #Convert the raw text to a dataset.
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
     )
@@ -82,24 +86,24 @@ redcap_variables <- function(
       outcome_message <- paste0(
         format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE),
         " variable metadata records were read from REDCap in ",
-        round(elapsed_seconds, 1), " seconds.  The http status code was ",
-        status_code, "."
+        round(kernel$elapsed_seconds, 1), " seconds.  The http status code was ",
+        kernel$status_code, "."
       )
 
       #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
-      raw_text <- ""
+      kernel$raw_text <- ""
     } else {
       success          <- FALSE #Override the 'success' determination from the http status code.
       ds               <- data.frame() #Return an empty data.frame
-      outcome_message  <- paste0("The REDCap variable retrieval failed.  The http status code was ", status_code, ".  The 'raw_text' returned was '", raw_text, "'.")
+      outcome_message  <- paste0("The REDCap variable retrieval failed.  The http status code was ", kernel$status_code, ".  The 'raw_text' returned was '", kernel$raw_text, "'.")
     }
   }
   else {
     ds                 <- data.frame() #Return an empty data.frame
-    outcome_message    <- if( any(grepl(regex_empty, raw_text)) ) {
+    outcome_message    <- if( any(grepl(kernel$regex_empty, kernel$raw_text)) ) {
       "The REDCapR read/export operation was not successful.  The returned dataset (of variables) was empty."
     } else {
-      paste0("The REDCapR variable retrieval was not successful.  The error message was:\n",  raw_text)
+      paste0("The REDCapR variable retrieval was not successful.  The error message was:\n",  kernel$raw_text)
     }
   }
 
@@ -108,10 +112,10 @@ redcap_variables <- function(
 
   return( list(
     data               = ds,
-    success            = success,
-    status_code        = status_code,
+    success            = kernel$success,
+    status_code        = kernel$status_code,
     outcome_message    = outcome_message,
-    elapsed_seconds    = elapsed_seconds,
-    raw_text           = raw_text
+    elapsed_seconds    = kernel$elapsed_seconds,
+    raw_text           = kernel$raw_text
   ) )
 }
