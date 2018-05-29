@@ -10,7 +10,8 @@
 #' @param records_collapsed A single string, where the desired ID values are separated by commas.  Optional.
 #' @param fields An array, where each element corresponds a desired project field.  Optional.
 #' @param fields_collapsed A single string, where the desired field names are separated by commas.  Optional.
-# placeholder: forms
+#' @param forms An array, where each element corresponds a desired project field.  Optional.
+#' @param forms_collapsed A single string, where the desired field names are separated by commas.  Optional.
 #' @param events An array, where each element corresponds a desired project event  Optional.
 #' @param events_collapsed A single string, where the desired event names are separated by commas.  Optional.
 #' @param raw_or_label A string (either `'raw'` or `'label'` that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is `'raw'`.
@@ -90,7 +91,7 @@ redcap_read_oneshot_eav <- function(
   token,
   records                       = NULL, records_collapsed = "",
   fields                        = NULL, fields_collapsed  = "",
-  # placeholder: forms
+  forms                         = NULL, forms_collapsed   = "",
   events                        = NULL, events_collapsed  = "",
   raw_or_label                  = "raw",
   raw_or_label_headers          = "raw",
@@ -115,8 +116,8 @@ redcap_read_oneshot_eav <- function(
   checkmate::assert_character(records_collapsed         , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
   checkmate::assert_character(fields                    , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
   checkmate::assert_character(fields_collapsed          , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
-  # TODO: add forms
-  # TODO: add forms_collapsed
+  checkmate::assert_character(forms                     , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
+  checkmate::assert_character(forms_collapsed           , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
   checkmate::assert_character(events                    , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
   checkmate::assert_character(events_collapsed          , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
   checkmate::assert_character(raw_or_label              , any.missing=F, len=1)
@@ -141,6 +142,8 @@ redcap_read_oneshot_eav <- function(
     records_collapsed <- ifelse(is.null(records), "", paste0(records, collapse=",")) #This is an empty string if `records` is NULL.
   if( (length(fields_collapsed)==0L) | is.null(fields_collapsed) | all(nchar(fields_collapsed)==0L) )
     fields_collapsed <- ifelse(is.null(fields), "", paste0(fields, collapse=",")) #This is an empty string if `fields` is NULL.
+  if( (length(forms_collapsed)==0L) | is.null(forms_collapsed) | all(nchar(forms_collapsed)==0L) )
+    forms_collapsed <- ifelse(is.null(forms), "", paste0(forms, collapse=",")) #This is an empty string if `forms` is NULL.
   if( all(nchar(events_collapsed)==0) )
     events_collapsed <- ifelse(is.null(events), "", paste0(events, collapse=",")) #This is an empty string if `events` is NULL.
   if( all(nchar(filter_logic)==0) )
@@ -159,14 +162,13 @@ redcap_read_oneshot_eav <- function(
     rawOrLabel              = raw_or_label,
     rawOrLabelHeaders       = raw_or_label_headers,
     exportDataAccessGroups  = export_data_access_groups_string,
-    # records                 = records_collapsed,
-    # fields                  = fields_collapsed,
-    # events                  = events_collapsed,
     filterLogic             = filter_logic
+    # record, fields, forms & events are specified below
   )
 
   if( nchar(records_collapsed) > 0 ) post_body$records  <- records_collapsed
   if( nchar(fields_collapsed ) > 0 ) post_body$fields   <- fields_collapsed
+  if( nchar(forms_collapsed  ) > 0 ) post_body$forms    <- forms_collapsed
   if( nchar(events_collapsed ) > 0 ) post_body$events   <- events_collapsed
 
   result <- httr::POST(
@@ -187,7 +189,7 @@ redcap_read_oneshot_eav <- function(
 
   success     <- (success & !any(grepl(regex_cannot_connect, raw_text)) & !any(grepl(regex_empty, raw_text)))
 
-  ds_metadata <- REDCapR::redcap_metadata_read(redcap_uri, token)$data
+  ds_metadata <- REDCapR::redcap_metadata_read(redcap_uri, token, forms_collapsed=forms_collapsed)$data
   ds_variable <- REDCapR::redcap_variables(redcap_uri, token)$data
 
   if( success ) {
@@ -247,12 +249,13 @@ redcap_read_oneshot_eav <- function(
             value      = dplyr::if_else(!is.na(.data$field_type) & (.data$field_type=="checkbox"), as.character(!is.na(.data$value)), .data$value)
           )
 
+        . <- NULL # For the sake of avoiding an R CMD check note.
         ds <- ds_eav_2 %>%
           dplyr::select_("-field_type") %>%
           # dplyr::select_("-redcap_repeat_instance") %>%           # TODO: need a good fix for repeats
           # tidyr::drop_na(event_id) %>%                            # TODO: need a good fix for repeats
           tidyr::spread_(key="field_name", value="value") %>%
-          dplyr::select_(.dots=variables_to_keep)
+          dplyr::select_(.data=., .dots=intersect(variables_to_keep, colnames(.)))
 
         ds_2 <- ds %>%
           dplyr::mutate_if(is.character, type.convert) %>%
