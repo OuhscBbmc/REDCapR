@@ -25,6 +25,8 @@ kernel_api <- function( redcap_uri, post_body, config_options ) {
     success             = success,
     raw_text            = raw_text,
     elapsed_seconds     = elapsed_seconds,
+    result              = result,
+    result_headers      = result$headers,
 
     regex_empty         = regex_empty
   ) )

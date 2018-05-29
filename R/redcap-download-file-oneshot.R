@@ -74,7 +74,7 @@
 
 redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwrite=FALSE, redcap_uri, token, record, field, event="", verbose=TRUE, config_options=NULL ) {
 
-  start_time <- Sys.time()
+  # start_time <- Sys.time()
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
 
@@ -92,24 +92,28 @@ redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwr
 
   if( nchar(event ) > 0 ) post_body$event   <- event
 
-  #This is the first of two important lines in the function.
-  #  It retrieves the information from the server and stores it in RAM.
-  result <- httr::POST(
-    url      = redcap_uri,
-    body     = post_body,
-    config   = config_options
-  )
+  # This is the first of two important lines in the function.
+  #   It retrieves the information from the server and stores it in RAM.
+  kernel <- kernel_api(redcap_uri, post_body, config_options)
 
-  status_code       <- result$status_code
-  elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
-  success           <- (status_code == 200L)
 
-  if( success ) {
-    result_header <- result$headers$`content-type`
+  # #  It retrieves the information from the server and stores it in RAM.
+  # result <- httr::POST(
+  #   url      = redcap_uri,
+  #   body     = post_body,
+  #   config   = config_options
+  # )
+  #
+  # status_code       <- result$status_code
+  # elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
+  # success           <- (status_code == 200L)
+
+  if( kernel$success ) {
+    result_header <- kernel$result_headers$`content-type`
 
     if( missing(file_name) | is.null(file_name) ) {
       #process the content-type to get the file name
-      regex_matches <- regmatches(result_header, regexpr("name=.*", result_header))
+      regex_matches <- regmatches(kernel$result_headers, regexpr("name=.*", kernel$result_headers))
       file_name <- gsub(pattern='(name=.)|(")', replacement="", x=regex_matches)
     }
 
@@ -127,20 +131,20 @@ redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwr
 
     #This is the second of two important lines in the function.
     #  It persists/converts the information in RAM to a file.
-    writeBin(httr::content(result, as="raw"), con=file_path)
+    writeBin(httr::content(kernel$result, as="raw"), con=file_path)
 
     outcome_message <- paste0(
       result_header, " successfully downloaded in " ,
-      round(elapsed_seconds, 1), " seconds, and saved as ", file_path
+      round(kernel$elapsed_seconds, 1), " seconds, and saved as ", file_path
     )
     recordsAffectedCount   <- length(record)
     record_id              <- as.character(record)
-    raw_text               <- ""
+    kernel$raw_text       <- ""
   } else { #If the operation was unsuccessful, then...
     outcome_message         <- paste0("file NOT downloaded ")
     recordsAffectedCount    <- 0L
     record_id               <- character(0) # Return an empty vector.
-    raw_text                <- httr::content(result, type="text")
+    raw_text                <- httr::content(kernel$result, type="text")
     file_path               <- character(0)
   }
 
@@ -148,13 +152,13 @@ redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwr
     message(outcome_message)
 
   return( list(
-    success                  = success,
-    status_code              = status_code,
+    success                  = kernel$success,
+    status_code              = kernel$status_code,
     outcome_message          = outcome_message,
     records_affected_count   = recordsAffectedCount,
     affected_ids             = record_id,
-    elapsed_seconds          = elapsed_seconds,
-    raw_text                 = raw_text,
+    elapsed_seconds          = kernel$elapsed_seconds,
+    raw_text                 = kernel$raw_text,
     file_name                = file_name,
     file_path                = file_path
   ))
