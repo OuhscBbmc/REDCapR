@@ -58,10 +58,8 @@ redcap_metadata_read <- function(
 
   token <- sanitize_token(token)
 
-  if( nchar(forms_collapsed)==0 )
-    forms_collapsed <- ifelse(is.null(forms), "", paste0(forms, collapse=",")) #This is an empty string if `forms` is NULL.
-  if( nchar(fields_collapsed)==0 )
-    fields_collapsed <- ifelse(is.null(fields), "", paste0(fields, collapse=",")) #This is an empty string if `fields` is NULL.
+  fields_collapsed    <- collapse_vector(fields   , fields_collapsed)
+  forms_collapsed     <- collapse_vector(forms    , forms_collapsed)
 
   post_body <- list(
     token    = token,

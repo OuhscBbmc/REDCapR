@@ -126,14 +126,11 @@ redcap_read_oneshot <- function(
   token <- sanitize_token(token)
   validate_field_names(fields)
 
-  if( all(nchar(records_collapsed)==0) )
-    records_collapsed <- ifelse(is.null(records), "", paste0(records, collapse=",")) #This is an empty string if `records` is NULL.
-  if( (length(fields_collapsed)==0L) | is.null(fields_collapsed) | all(nchar(fields_collapsed)==0L) )
-    fields_collapsed <- ifelse(is.null(fields), "", paste0(fields, collapse=",")) #This is an empty string if `fields` is NULL.
-  if( (length(forms_collapsed)==0L) | is.null(forms_collapsed) | all(nchar(forms_collapsed)==0L) )
-    forms_collapsed <- ifelse(is.null(forms), "", paste0(forms, collapse=",")) #This is an empty string if `forms` is NULL.
-  if( all(nchar(events_collapsed)==0) )
-    events_collapsed <- ifelse(is.null(events), "", paste0(events, collapse=",")) #This is an empty string if `events` is NULL.
+  records_collapsed   <- collapse_vector(records  , records_collapsed)
+  fields_collapsed    <- collapse_vector(fields   , fields_collapsed)
+  forms_collapsed     <- collapse_vector(forms    , forms_collapsed)
+  events_collapsed    <- collapse_vector(events   , events_collapsed)
+
   if( all(nchar(filter_logic)==0) )
     filter_logic <- ifelse(is.null(filter_logic), "", filter_logic) #This is an empty string if `filter_logic` is NULL.
 

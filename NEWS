@@ -27,6 +27,7 @@ Modified Internals:
 * `data.table::rbindlist()` replaced by `dplyr::bind_rows()`
 * updated to readr 1.2.0 (#200)
 * the checkmate package inspects most function parameters now (instead of `testit::assert()` and `base:stop()` ) (#190 & #208).
+* `collapse_vector()` is refactored and tested (#209)
 
 Deprecated Features:
 * `retrieve_token_mssql()`, because `retrieve_credential_mssql()` is more general and more useful.
