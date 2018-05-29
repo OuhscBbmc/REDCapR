@@ -104,14 +104,14 @@ redcap_upload_file_oneshot <- function( file_name, record, redcap_uri, token, fi
   if( success ) {
     outcome_message <- paste0("file uploaded to REDCap in ",  round(elapsed_seconds, 1), " seconds.")
     recordsAffectedCount <- 1
-    record_id <- record
+    record_id <- as.character(record)
     raw_text <- ""
   }
   else { #If the returned content wasn't recognized as valid IDs, then
     raw_text               <- httr::content(result, type="text")
     outcome_message        <- paste0("file NOT uploaded ")
     recordsAffectedCount   <- 0L
-    record_id              <- numeric(0) #Return an empty vector.
+    record_id              <- character(0) # Return an empty vector.
   }
   if( verbose )
     message(outcome_message)

@@ -16,7 +16,7 @@ Minor New Features:
 * 'raw_or_label_headers' now supported (Thanks Hatem Hosny - hatemhosny, #183 & #203)
 * 'export_checkbox_labels' now supported (#186)
 * 'forms' now supported for `redcap_read()`, `redcap_read_oneshot()`, & `redcap_read_oneshot_eav()`(#206).  It was already implemented for `redcap_metadata_read()`.
-
+* If no records are affected, a zero-length *character* vector is returned (instead of sometimes a zero-length *numeric* vector)  (#212)
 * `id_position` allows user to specify if the record_id isn't in the first position (#207).  However, we recommend that all REDCap projects keep this important variable first in the data dictionary.
 * Link to new secure Zenodo DOI resolver (katrinleinweber #191)
 * parameters in `redcap_read()` and `redcap_read_oneshot()` are more consistent with the order in raw REDCap API. (#204)

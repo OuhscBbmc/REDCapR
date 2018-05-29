@@ -134,13 +134,12 @@ redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwr
       round(elapsed_seconds, 1), " seconds, and saved as ", file_path
     )
     recordsAffectedCount   <- length(record)
-    record_id              <- record
+    record_id              <- as.character(record)
     raw_text               <- ""
-  }
-  else { #If the operation was unsuccessful, then...
+  } else { #If the operation was unsuccessful, then...
     outcome_message         <- paste0("file NOT downloaded ")
     recordsAffectedCount    <- 0L
-    record_id               <- numeric(0) #Return an empty vector.
+    record_id               <- character(0) # Return an empty vector.
     raw_text                <- httr::content(result, type="text")
     file_path               <- character(0)
   }

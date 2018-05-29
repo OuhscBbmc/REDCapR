@@ -106,7 +106,7 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, config_op
 
   if( success ) {
     elements               <- unlist(strsplit(raw_text, split="\\n"))
-    affected_ids           <- elements[-1]
+    affected_ids           <- as.character(elements[-1])
     records_affected_count <- length(affected_ids)
     outcome_message        <- paste0(
       format(records_affected_count, big.mark = ",", scientific = FALSE, trim = TRUE),
@@ -118,7 +118,7 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, config_op
     #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
     raw_text <- ""
   } else { #If the returned content wasn't recognized as valid IDs, then
-    affected_ids           <- numeric(0) #Pass an empty array
+    affected_ids           <- character(0) # Return an empty array
     records_affected_count <- NA_integer_
     outcome_message        <- paste0("The REDCapR write/import operation was not successful.  The error message was:\n",  raw_text)
   }
