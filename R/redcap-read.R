@@ -69,7 +69,6 @@
 #' token   <- "9A81268476645C4E5F03428B8AC3AA7B"
 #' redcap_read(batch_size=2, redcap_uri=uri, token=token)
 #' }
-#'
 
 redcap_read <- function(
   batch_size                    = 100L,
@@ -97,23 +96,27 @@ redcap_read <- function(
 
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
-  # records
-  # fields
+  checkmate::assert_atomic(records                      , any.missing=T, min.len=0)
+  checkmate::assert_character(records_collapsed         , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
+  checkmate::assert_character(fields                    , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
+  checkmate::assert_character(fields_collapsed          , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
   # forms
-  # events
+  # forms_collapsed
+  checkmate::assert_character(events                    , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
+  checkmate::assert_character(events_collapsed          , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
   checkmate::assert_character(raw_or_label              , any.missing=F, len=1)
   checkmate::assert_subset(   raw_or_label              , c("raw", "label"))
   checkmate::assert_character(raw_or_label_headers      , any.missing=F, len=1)
   checkmate::assert_subset(   raw_or_label_headers      , c("raw", "label"))
   checkmate::assert_logical(  export_checkbox_label     , any.missing=F, len=1)
   # returnFormat
-  # export_survey_fields
+  checkmate::assert_logical(  export_survey_fields      , any.missing=F, len=1)
   checkmate::assert_logical(  export_data_access_groups , any.missing=F, len=1)
   #
   checkmate::assert_logical(  guess_type                , any.missing=F, len=1)
-  # verbose
-  # config_options
-  # id_position
+  checkmate::assert_logical(  verbose                   , any.missing=F, len=1, null.ok=T)
+  checkmate::assert_list(     config_options            , any.missing=T, len=1, null.ok=T)
+  checkmate::assert_integer(  id_position               , any.missing=F, len=1, lower=1L)
 
   token <- sanitize_token(token)
   validate_field_names(fields)

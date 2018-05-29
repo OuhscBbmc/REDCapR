@@ -99,10 +99,14 @@ redcap_read_oneshot <- function(
 
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
-  # records
-  # fields
+  checkmate::assert_atomic(records                      , any.missing=T, min.len=0)
+  checkmate::assert_character(records_collapsed         , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
+  checkmate::assert_character(fields                    , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
+  checkmate::assert_character(fields_collapsed          , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
   # forms
-  # events
+  # forms_collapsed
+  checkmate::assert_character(events                    , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
+  checkmate::assert_character(events_collapsed          , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
   checkmate::assert_character(raw_or_label              , any.missing=F, len=1)
   checkmate::assert_subset(   raw_or_label              , c("raw", "label"))
   checkmate::assert_character(raw_or_label_headers      , any.missing=F, len=1)
@@ -115,8 +119,8 @@ redcap_read_oneshot <- function(
   #
   checkmate::assert_logical(  guess_type                , any.missing=F, len=1)
   checkmate::assert_integerish(guess_max                , any.missing=F, len=1, lower=1)
-  # verbose
-  # config_options
+  checkmate::assert_logical(  verbose                   , any.missing=F, len=1, null.ok=T)
+  checkmate::assert_list(     config_options            , any.missing=T, len=1, null.ok=T)
 
   token <- sanitize_token(token)
   validate_field_names(fields)
