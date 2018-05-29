@@ -91,6 +91,62 @@ test_that("All Records -Default", {
   expect_true(returned_object2$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
+
+test_that("All Records -specify forms", {
+  testthat::skip_on_cran()
+  desired_forms <- c("demographics", "race_and_ethnicity")
+  expected_data_frame <-structure(
+    list(record_id = c(1, 2, 3, 4, 5), name_first = c("Nutmeg",
+    "Tumtum", "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse",
+    "Nutmouse", "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
+    "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402",
+    "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
+    ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333",
+    "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com",
+    "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
+    ), dob = structure(c(12294, 12121, -13051, -6269, -5375), class = "Date"),
+    age = c(11, 11, 80, 61, 59), sex = c(0, 1, 1, 0, 1), demographics_complete = c(2,
+    2, 2, 2, 2), race___1 = c(0, 0, 0, 0, 1), race___2 = c(0,
+    0, 0, 1, 0), race___3 = c(0, 1, 0, 0, 0), race___4 = c(0,
+    0, 1, 0, 0), race___5 = c(1, 1, 1, 1, 0), race___6 = c(0,
+    0, 0, 0, 1), ethnicity = c(1, 1, 0, 1, 2), race_and_ethnicity_complete = c(2,
+    0, 2, 2, 2)), .Names = c("record_id", "name_first", "name_last",
+    "address", "telephone", "email", "dob", "age", "sex", "demographics_complete",
+    "race___1", "race___2", "race___3", "race___4", "race___5", "race___6",
+    "ethnicity", "race_and_ethnicity_complete"), row.names = c(NA,
+    -5L), class = "data.frame"
+  )
+  expected_outcome_message <- "\\d+ records and 18 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+
+  ###########################
+  ## Default Batch size
+  expect_message(
+    regexp            = expected_outcome_message,
+    returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, forms=desired_forms)
+  )
+  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
+  expect_true(returned_object1$success)
+  expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
+  expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_true(returned_object1$filter_logic=="", "A filter was not specified.")
+  expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+
+  ###########################
+  ## Tiny Batch size
+  expect_message(
+    returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, forms=desired_forms, batch_size=2),
+    regexp = expected_outcome_message
+  )
+
+  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
+  expect_true(returned_object2$success)
+  expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
+  expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_true(returned_object2$filter_logic=="", "A filter was not specified.")
+  expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+})
 test_that("All Records -Raw", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(
