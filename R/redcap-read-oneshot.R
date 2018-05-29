@@ -155,24 +155,8 @@ redcap_read_oneshot <- function(
   if( nchar(forms_collapsed  ) > 0 ) post_body$forms    <- forms_collapsed
   if( nchar(events_collapsed ) > 0 ) post_body$events   <- events_collapsed
 
+  # This is the important line that communicates with the REDCap server.
   kernel <- kernel_api(redcap_uri, post_body, config_options)
-  # result <- httr::POST(
-  #   url     = redcap_uri,
-  #   body    = post_body,
-  #   config  = config_options
-  # )
-
-  # status_code           <- result$status
-  # success               <- (status_code==200L)
-  # raw_text              <- httr::content(result, "text")
-  # raw_text              <- gsub("\r\n", "\n", raw_text) # Convert all line-ending to linux-style
-  # elapsed_seconds       <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
-  #
-  # # raw_text <- "The hostname (redcap-db.hsc.net.ou.edu) / username (redcapsql) / password (XXXXXX) combination could not connect to the MySQL server. \r\n\t\tPlease check their values."
-  # regex_cannot_connect  <- "^The hostname \\((.+)\\) / username \\((.+)\\) / password \\((.+)\\) combination could not connect.+"
-  # regex_empty           <- "^\\s+$"
-  #
-  # success     <- (success & !any(grepl(regex_cannot_connect, raw_text)) & !any(grepl(regex_empty, raw_text)))
 
   if( kernel$success ) {
     col_types <- if( guess_type ) NULL else readr::cols(.default=readr::col_character())
@@ -211,7 +195,7 @@ redcap_read_oneshot <- function(
       #
       # ds <- base::as.data.frame(ds)
 
-      kernel$raw_text <- "" # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
+      kernel$raw_text   <- "" # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
     } else {
       kernel$success   <- FALSE #Override the 'success' determination from the http status code.
       ds               <- data.frame() #Return an empty data.frame

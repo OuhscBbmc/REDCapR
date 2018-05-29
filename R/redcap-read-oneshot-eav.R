@@ -108,8 +108,6 @@ redcap_read_oneshot_eav <- function(
 ) {
   #TODO: NULL verbose parameter pulls from getOption("verbose")
 
-  # start_time <- Sys.time()
-
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_atomic(records                      , any.missing=T, min.len=0)
@@ -169,25 +167,7 @@ redcap_read_oneshot_eav <- function(
   if( nchar(events_collapsed ) > 0 ) post_body$events   <- events_collapsed
 
   # This is the important line that communicates with the REDCap server.
-  kernel <- kernel_api(redcap_uri, post_body, config_options)
-
-  # result <- httr::POST(
-  #   url     = redcap_uri,
-  #   body    = post_body,
-  #   config  = config_options
-  # )
-  #
-  # status_code           <- result$status
-  # success               <- (status_code==200L)
-  # raw_text              <- httr::content(result, "text")
-  # raw_text              <- gsub("\r\n", "\n", raw_text)
-  # elapsed_seconds       <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
-  #
-  # # raw_text <- "The hostname (redcap-db.hsc.net.ou.edu) / username (redcapsql) / password (XXXXXX) combination could not connect to the MySQL server. \r\n\t\tPlease check their values."
-  # regex_cannot_connect  <- "^The hostname \\((.+)\\) / username \\((.+)\\) / password \\((.+)\\) combination could not connect.+"
-  # regex_empty           <- "^\\s+$"
-  #
-  # success     <- (success & !any(grepl(regex_cannot_connect, raw_text)) & !any(grepl(regex_empty, raw_text)))
+  kernel      <- kernel_api(redcap_uri, post_body, config_options)
 
   ds_metadata <- REDCapR::redcap_metadata_read(redcap_uri, token, forms_collapsed=forms_collapsed)$data
   ds_variable <- REDCapR::redcap_variables(redcap_uri, token)$data
@@ -271,8 +251,7 @@ redcap_read_oneshot_eav <- function(
         round(kernel$elapsed_seconds, 1), " seconds.  The http status code was ", kernel$status_code, "."
       )
 
-      # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
-      kernel$raw_text <- ""
+      kernel$raw_text   <- "" # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
     } else {
       success           <- FALSE #Override the 'success' determination from the http status code.
       ds_2              <- tibble::tibble() #Return an empty data.frame
