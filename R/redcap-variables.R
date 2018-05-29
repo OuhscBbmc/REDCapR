@@ -38,10 +38,12 @@
 #' }
 #'
 redcap_variables <- function(
-  redcap_uri, token, verbose=TRUE, config_options=NULL
+  redcap_uri,
+  token,
+  verbose           = TRUE,
+  config_options    = NULL
 ) {
 
-  # start_time <- Sys.time()
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
 
@@ -53,25 +55,8 @@ redcap_variables <- function(
     format                  = 'csv'
   )
 
-  # browser()
   # This is the important line that communicates with the REDCap server.
   kernel <- kernel_api(redcap_uri, post_body, config_options)
-
-  # result <- httr::POST(
-  #   url     = redcap_uri,
-  #   body    = post_body,
-  #   config  = config_options
-  # )
-  #
-  # status_code     <- result$status
-  # success         <- (status_code==200L)
-  # raw_text        <- httr::content(result, "text")
-  # elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
-  #
-  # regex_cannot_connect <- "^The hostname \\((.+)\\) / username \\((.+)\\) / password \\((.+)\\) combination could not connect.+"
-  # regex_empty <- "^\\s+$"
-  #
-  # success     <- (success & !any(grepl(regex_cannot_connect, raw_text)) & !any(grepl(regex_empty, raw_text)))
 
   if( kernel$success ) {
     try (
@@ -81,7 +66,6 @@ redcap_variables <- function(
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
     )
 
-
     if( exists("ds") & inherits(ds, "data.frame") ) {
       outcome_message <- paste0(
         format(nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE),
@@ -90,17 +74,15 @@ redcap_variables <- function(
         kernel$status_code, "."
       )
 
-      #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
-      kernel$raw_text <- ""
+      kernel$raw_text   <- "" # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
     } else {
-      success          <- FALSE #Override the 'success' determination from the http status code.
-      ds               <- data.frame() #Return an empty data.frame
-      outcome_message  <- paste0("The REDCap variable retrieval failed.  The http status code was ", kernel$status_code, ".  The 'raw_text' returned was '", kernel$raw_text, "'.")
+      success           <- FALSE #Override the 'success' determination from the http status code.
+      ds                <- data.frame() #Return an empty data.frame
+      outcome_message   <- paste0("The REDCap variable retrieval failed.  The http status code was ", kernel$status_code, ".  The 'raw_text' returned was '", kernel$raw_text, "'.")
     }
-  }
-  else {
-    ds                 <- data.frame() #Return an empty data.frame
-    outcome_message    <- if( any(grepl(kernel$regex_empty, kernel$raw_text)) ) {
+  } else {
+    ds                  <- data.frame() #Return an empty data.frame
+    outcome_message     <- if( any(grepl(kernel$regex_empty, kernel$raw_text)) ) {
       "The REDCapR read/export operation was not successful.  The returned dataset (of variables) was empty."
     } else {
       paste0("The REDCapR variable retrieval was not successful.  The error message was:\n",  kernel$raw_text)
@@ -111,11 +93,11 @@ redcap_variables <- function(
     message(outcome_message)
 
   return( list(
-    data               = ds,
-    success            = kernel$success,
-    status_code        = kernel$status_code,
-    outcome_message    = outcome_message,
-    elapsed_seconds    = kernel$elapsed_seconds,
-    raw_text           = kernel$raw_text
+    data                = ds,
+    success             = kernel$success,
+    status_code         = kernel$status_code,
+    outcome_message     = outcome_message,
+    elapsed_seconds     = kernel$elapsed_seconds,
+    raw_text            = kernel$raw_text
   ) )
 }

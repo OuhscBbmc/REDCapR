@@ -72,9 +72,19 @@
 #' base::unlink(relative_name)
 #' }
 
-redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwrite=FALSE, redcap_uri, token, record, field, event="", verbose=TRUE, config_options=NULL ) {
+redcap_download_file_oneshot <- function(
+  file_name       = NULL,
+  directory       = NULL,
+  overwrite       = FALSE,
+  redcap_uri,
+  token,
+  record,
+  field,
+  event           = "",
+  verbose         = TRUE,
+  config_options  = NULL
+) {
 
-  # start_time <- Sys.time()
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
 
@@ -96,18 +106,6 @@ redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwr
   #   It retrieves the information from the server and stores it in RAM.
   kernel <- kernel_api(redcap_uri, post_body, config_options)
 
-
-  # #  It retrieves the information from the server and stores it in RAM.
-  # result <- httr::POST(
-  #   url      = redcap_uri,
-  #   body     = post_body,
-  #   config   = config_options
-  # )
-  #
-  # status_code       <- result$status_code
-  # elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
-  # success           <- (status_code == 200L)
-
   if( kernel$success ) {
     result_header <- kernel$result_headers$`content-type`
 
@@ -117,10 +115,10 @@ redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwr
       file_name <- gsub(pattern='(name=.)|(")', replacement="", x=regex_matches)
     }
 
-    if( missing(directory) & is.null(directory) ) {
-      file_path <- file_name #Use relative path.
+    file_path <- if( missing(directory) & is.null(directory) ) {
+      file_name #Use relative path.
     } else {
-      file_path <- file.path(directory, file_name) #Qualify the file with its full path.
+      file.path(directory, file_name) #Qualify the file with its full path.
     }
 
     if( verbose )
@@ -139,7 +137,7 @@ redcap_download_file_oneshot <- function( file_name=NULL, directory=NULL, overwr
     )
     recordsAffectedCount   <- length(record)
     record_id              <- as.character(record)
-    kernel$raw_text       <- ""
+    kernel$raw_text        <- ""  # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
   } else { #If the operation was unsuccessful, then...
     outcome_message         <- paste0("file NOT downloaded ")
     recordsAffectedCount    <- 0L
