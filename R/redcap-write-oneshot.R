@@ -93,47 +93,50 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, config_op
     returnFormat        = 'csv'
   )
 
-  result <- httr::POST(
-    url    = redcap_uri,
-    body   = post_body,
-    config = config_options
-  )
+  # This is the important line that communicates with the REDCap server.
+  kernel <- kernel_api(redcap_uri, post_body, config_options)
 
-  status_code       <- result$status_code
-  raw_text          <- httr::content(result, type="text")
-  elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
-  success           <- (status_code == 200L)
+  # result <- httr::POST(
+  #   url    = redcap_uri,
+  #   body   = post_body,
+  #   config = config_options
+  # )
+  #
+  # status_code       <- result$status_code
+  # raw_text          <- httr::content(result, type="text")
+  # elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
+  # success           <- (status_code == 200L)
 
-  if( success ) {
-    elements               <- unlist(strsplit(raw_text, split="\\n"))
+  if( kernel$success ) {
+    elements               <- unlist(strsplit(kernel$raw_text, split="\\n"))
     affected_ids           <- as.character(elements[-1])
     records_affected_count <- length(affected_ids)
     outcome_message        <- paste0(
       format(records_affected_count, big.mark = ",", scientific = FALSE, trim = TRUE),
       " records were written to REDCap in ",
-      round(elapsed_seconds, 1),
+      round(kernel$elapsed_seconds, 1),
       " seconds."
     )
 
     #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
-    raw_text <- ""
+    kernel$raw_text <- ""
   } else { #If the returned content wasn't recognized as valid IDs, then
     affected_ids           <- character(0) # Return an empty array
     records_affected_count <- NA_integer_
-    outcome_message        <- paste0("The REDCapR write/import operation was not successful.  The error message was:\n",  raw_text)
+    outcome_message        <- paste0("The REDCapR write/import operation was not successful.  The error message was:\n",  kernel$raw_text)
   }
 
   if( verbose )
     message(outcome_message)
 
   return( list(
-    success                   = success,
-    status_code               = status_code,
+    success                   = kernel$success,
+    status_code               = kernel$status_code,
     outcome_message           = outcome_message,
     records_affected_count    = records_affected_count,
     affected_ids              = affected_ids,
-    elapsed_seconds           = elapsed_seconds,
-    raw_text                  = raw_text
+    elapsed_seconds           = kernel$elapsed_seconds,
+    raw_text                  = kernel$raw_text
   ))
 }
 
