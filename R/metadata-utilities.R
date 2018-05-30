@@ -63,8 +63,8 @@ regex_named_captures <- function( pattern, text, perl=TRUE ) {
   for( column_name in colnames(d) ) {
     d[[column_name]] <- mapply(
       function (start, len) substr(text, start, start+len-1L),
-      attr(match, "capture.start" )[[column_name]],
-      attr(match, "capture.length")[[column_name]]
+      attr(match, "capture.start" )[, column_name],
+      attr(match, "capture.length")[, column_name]
     )
   }
   return( d )
