@@ -112,7 +112,7 @@ redcap_download_file_oneshot <- function(
     if( missing(file_name) | is.null(file_name) ) {
       #process the content-type to get the file name
       regex_matches <- regmatches(kernel$result_headers, regexpr("name=.*", kernel$result_headers))
-      file_name <- gsub(pattern='(name=.)|(")', replacement="", x=regex_matches)
+      file_name     <- gsub(pattern='(name=.)|(")', replacement="", x=regex_matches)
     }
 
     file_path <- if( missing(directory) & is.null(directory) ) {
@@ -133,14 +133,14 @@ redcap_download_file_oneshot <- function(
 
     outcome_message <- paste0(
       result_header, " successfully downloaded in " ,
-      round(kernel$elapsed_seconds, 1), " seconds, and saved as ", file_path
+      round(kernel$elapsed_seconds, 1), " seconds, and saved as ", file_path, "."
     )
-    recordsAffectedCount   <- length(record)
-    record_id              <- as.character(record)
-    kernel$raw_text        <- ""  # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
+    records_affected_count  <- length(record)
+    record_id               <- as.character(record)
+    kernel$raw_text         <- ""  # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
   } else { #If the operation was unsuccessful, then...
-    outcome_message         <- paste0("file NOT downloaded ")
-    recordsAffectedCount    <- 0L
+    outcome_message         <- "file NOT downloaded."
+    records_affected_count  <- 0L
     record_id               <- character(0) # Return an empty vector.
     raw_text                <- httr::content(kernel$result, type="text")
     file_path               <- character(0)
@@ -153,7 +153,7 @@ redcap_download_file_oneshot <- function(
     success                  = kernel$success,
     status_code              = kernel$status_code,
     outcome_message          = outcome_message,
-    records_affected_count   = recordsAffectedCount,
+    records_affected_count   = records_affected_count,
     affected_ids             = record_id,
     elapsed_seconds          = kernel$elapsed_seconds,
     raw_text                 = kernel$raw_text,

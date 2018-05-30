@@ -74,12 +74,13 @@
 #' }
 redcap_write <- function(
   ds_to_write,
-  batch_size = 100L,
-  interbatch_delay = 0.5,
-  continue_on_error = FALSE,
+  batch_size          = 100L,
+  interbatch_delay    = 0.5,
+  continue_on_error   = FALSE,
   redcap_uri,
   token,
-  verbose = TRUE, config_options = NULL
+  verbose             = TRUE,
+  config_options      = NULL
 ) {
 
   start_time <- base::Sys.time()

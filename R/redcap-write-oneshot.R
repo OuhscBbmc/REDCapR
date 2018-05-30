@@ -65,20 +65,19 @@
 
 redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, config_options=NULL ) {
   #TODO: automatically convert boolean/logical class to integer/bit class
-  csvElements <- NULL #This prevents the R CHECK NOTE: 'No visible binding for global variable Note in R CMD check';  Also see  if( getRversion() >= "2.15.1" )    utils::globalVariables(names=c("csvElements")) #http://stackoverflow.com/questions/8096313/no-visible-binding-for-global-variable-note-in-r-cmd-check; http://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
+  csv_elements <- NULL #This prevents the R CHECK NOTE: 'No visible binding for global variable Note in R CMD check';  Also see  if( getRversion() >= "2.15.1" )    utils::globalVariables(names=c("csv_elements")) #http://stackoverflow.com/questions/8096313/no-visible-binding-for-global-variable-note-in-r-cmd-check; http://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
 
-  start_time <- Sys.time()
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
 
   token <- sanitize_token(token)
 
-  con   <-  base::textConnection(object='csvElements', open='w', local=TRUE)
+  con   <-  base::textConnection(object='csv_elements', open='w', local=TRUE)
   utils::write.csv(ds, con, row.names = FALSE, na="")
   close(con)
 
-  csv <- paste(csvElements, collapse="\n")
-  rm(csvElements, con)
+  csv <- paste(csv_elements, collapse="\n")
+  rm(csv_elements, con)
 
   post_body <- list(
     token     = token,
@@ -95,17 +94,6 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, config_op
 
   # This is the important line that communicates with the REDCap server.
   kernel <- kernel_api(redcap_uri, post_body, config_options)
-
-  # result <- httr::POST(
-  #   url    = redcap_uri,
-  #   body   = post_body,
-  #   config = config_options
-  # )
-  #
-  # status_code       <- result$status_code
-  # raw_text          <- httr::content(result, type="text")
-  # elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
-  # success           <- (status_code == 200L)
 
   if( kernel$success ) {
     elements               <- unlist(strsplit(kernel$raw_text, split="\\n"))

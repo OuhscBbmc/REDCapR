@@ -65,9 +65,17 @@
 #' }
 #' }
 
-redcap_upload_file_oneshot <- function( file_name, record, redcap_uri, token, field, event="", verbose=TRUE, config_options=NULL ) {
+redcap_upload_file_oneshot <- function(
+  file_name,
+  record,
+  redcap_uri,
+  token,
+  field,
+  event             = "",
+  verbose           = TRUE,
+  config_options    = NULL
+) {
 
-  # start_time <- Sys.time()
   checkmate::assert_character(file_name                 , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_file_exists(file_name                                                        )
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
@@ -93,39 +101,28 @@ redcap_upload_file_oneshot <- function( file_name, record, redcap_uri, token, fi
 
   # This is the important line that communicates with the REDCap server.
   kernel <- kernel_api(redcap_uri, post_body, config_options)
-  #
-  # result <- httr::POST(
-  #   url    = redcap_uri,
-  #   body   = post_body,
-  #   config = config_options
-  # )
-  #
-  # status_code       <- result$status_code
-  # elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
-  # success           <- (status_code == 200L)
 
   if( kernel$success ) {
-    outcome_message <- paste0("file uploaded to REDCap in ",  round(kernel$elapsed_seconds, 1), " seconds.")
-    recordsAffectedCount <- 1
-    record_id <- as.character(record)
-    kernel$raw_text <- ""
-  }
-  else { #If the returned content wasn't recognized as valid IDs, then
-    raw_text               <- httr::content(kernel$result, type="text") # TODO: would this be stored as kernal$raw_text?
-    outcome_message        <- paste0("file NOT uploaded ")
-    recordsAffectedCount   <- 0L
-    record_id              <- character(0) # Return an empty vector.
+    outcome_message         <- paste0("file uploaded to REDCap in ",  round(kernel$elapsed_seconds, 1), " seconds.")
+    records_affected_count  <- 1
+    record_id               <- as.character(record)
+    kernel$raw_text         <- ""
+  } else { #If the returned content wasn't recognized as valid IDs, then
+    raw_text                <- httr::content(kernel$result, type="text") # TODO: would this be stored as kernal$raw_text?
+    outcome_message         <- paste0("file NOT uploaded ")
+    records_affected_count  <- 0L
+    record_id               <- character(0) # Return an empty vector.
   }
   if( verbose )
     message(outcome_message)
 
   return( list(
-    success                  = kernel$success,
-    status_code              = kernel$status_code,
-    outcome_message          = outcome_message,
-    records_affected_count   = recordsAffectedCount,
-    affected_ids             = record_id,
-    elapsed_seconds          = kernel$elapsed_seconds,
-    raw_text                 = kernel$raw_text
+    success                 = kernel$success,
+    status_code             = kernel$status_code,
+    outcome_message         = outcome_message,
+    records_affected_count  = records_affected_count,
+    affected_ids            = record_id,
+    elapsed_seconds         = kernel$elapsed_seconds,
+    raw_text                = kernel$raw_text
   ))
 }

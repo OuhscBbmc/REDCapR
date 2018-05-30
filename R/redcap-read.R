@@ -97,7 +97,7 @@ redcap_read <- function(
 
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
-  checkmate::assert_atomic(records                      , any.missing=T, min.len=0)
+  checkmate::assert_atomic(  records                    , any.missing=T, min.len=0)
   checkmate::assert_character(records_collapsed         , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
   checkmate::assert_character(fields                    , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
   checkmate::assert_character(fields_collapsed          , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)

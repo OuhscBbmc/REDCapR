@@ -21,8 +21,7 @@
 #' redcap_version(redcap_uri=uri, token=token)
 
 redcap_version <- function( redcap_uri, token, verbose=TRUE, config_options=NULL ) {
-  version_error=base::package_version("0.0.0")
-  # start_time <- Sys.time()
+  version_error <- base::package_version("0.0.0")
 
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
@@ -36,27 +35,6 @@ redcap_version <- function( redcap_uri, token, verbose=TRUE, config_options=NULL
 
   # This is the important line that communicates with the REDCap server.
   kernel <- kernel_api(redcap_uri, post_body, config_options)
-
-  # result <- httr::POST(
-  #   url     = redcap_uri,
-  #   body    = post_body
-  # )
-  # status_code <- result$status
-  # success <- (status_code==200L)
-  #
-  # raw_text <- httr::content(result, "text")
-  # elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
-  #
-  # # raw_text <- "The hostname (redcap-db.hsc.net.ou.edu) / username (redcapsql) / password (XXXXXX) combination could not connect to the MySQL server. \r\n\t\tPlease check their values."
-  # regex_cannot_connect <- "^The hostname \\((.+)\\) / username \\((.+)\\) / password \\((.+)\\) combination could not connect.+"
-  # regex_empty <- "^\\s+$"
-  #
-  # if(
-  #   any(grepl(regex_cannot_connect, raw_text)) |
-  #   any(grepl(regex_empty, raw_text))
-  # ) {
-  #   success <- FALSE
-  # }
 
   if( kernel$success ) {
     try (
@@ -78,8 +56,7 @@ redcap_version <- function( redcap_uri, token, verbose=TRUE, config_options=NULL
       version          <- version_error
       outcome_message  <- paste0("The REDCap version determination failed.  The http status code was ", kernel$status_code, ".  The 'raw_text' returned was '", kernel$raw_text, "'.")
     }
-  }
-  else {
+  } else {
     version          <- version_error
     outcome_message  <- paste0("The REDCap version determination failed.  The error message was:\n",  kernel$raw_text)
   }

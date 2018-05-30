@@ -7,7 +7,7 @@ In the future:
 Version 0.10 (to be released)
 ------------------------------------------------------------------------------
 Minor New Features:
-* export survey time-stamps optionally (#159)
+* export survey time-stamps optionally (Issue #159)
 * `redcap_read()` and `redcap_read_oneshot()` allow the user to specify if all variables
   should be returned with the `character` data type.  The default is to allow `readr::read_csv()` to guess the data type. (#194)
 * `redcap_read_oneshot()` allows use to specify how many rows should be considered when `readr::read_csv()` guesses the data type. (#194)
@@ -22,10 +22,11 @@ Minor New Features:
 * parameters in `redcap_read()` and `redcap_read_oneshot()` are more consistent with the order in raw REDCap API. (#204)
 
 Modified Internals:
+* All interaction with the REDCap server goes through the new `kernal_api()` function, which uses the 'httr' and 'curl' packages underneath.  Until now, each function called those packages directly. (#213)
 * When converting REDCap's CSV to R's data.frame, `readr::read_csv()` is used instead of `utils::read.csv()` (Issue #127).
+* updated to readr 1.2.0 (#200).  This changed how some data variables were assigned a data types
 * uses `odbc` package to retrieve credentials from the token server.  Remove RODBC and RODBCext (#188)
 * `data.table::rbindlist()` replaced by `dplyr::bind_rows()`
-* updated to readr 1.2.0 (#200)
 * the checkmate package inspects most function parameters now (instead of `testit::assert()` and `base:stop()` ) (#190 & #208).
 * `collapse_vector()` is refactored and tested (#209)
 

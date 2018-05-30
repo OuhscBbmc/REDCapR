@@ -16,7 +16,7 @@ checkbox_choices(select_choices)
 
 \item{text}{The text to apply the regex against.  Required.}
 
-\item{perl}{Indicates if perl-compatible regexps should be used.  Optional.}
+\item{perl}{Indicates if perl-compatible regexps should be used.  Default is \code{TRUE}. Optional.}
 
 \item{select_choices}{The text containing the choices that should be parsed to determine the \code{id} and \code{label} values.  Required.}
 }
