@@ -94,9 +94,6 @@ redcap_read_oneshot <- function(
   verbose                       = TRUE,
   config_options                = NULL
 ) {
-  #TODO: NULL verbose parameter pulls from getOption("verbose")
-
-  start_time <- Sys.time()
 
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
@@ -123,19 +120,15 @@ redcap_read_oneshot <- function(
   checkmate::assert_logical(  verbose                   , any.missing=F, len=1, null.ok=T)
   checkmate::assert_list(     config_options            , any.missing=T, len=1, null.ok=T)
 
-  token <- sanitize_token(token)
   validate_field_names(fields)
 
-  if( all(nchar(records_collapsed)==0) )
-    records_collapsed <- ifelse(is.null(records), "", paste0(records, collapse=",")) #This is an empty string if `records` is NULL.
-  if( (length(fields_collapsed)==0L) | is.null(fields_collapsed) | all(nchar(fields_collapsed)==0L) )
-    fields_collapsed <- ifelse(is.null(fields), "", paste0(fields, collapse=",")) #This is an empty string if `fields` is NULL.
-  if( (length(forms_collapsed)==0L) | is.null(forms_collapsed) | all(nchar(forms_collapsed)==0L) )
-    forms_collapsed <- ifelse(is.null(forms), "", paste0(forms, collapse=",")) #This is an empty string if `forms` is NULL.
-  if( all(nchar(events_collapsed)==0) )
-    events_collapsed <- ifelse(is.null(events), "", paste0(events, collapse=",")) #This is an empty string if `events` is NULL.
-  if( all(nchar(filter_logic)==0) )
-    filter_logic <- ifelse(is.null(filter_logic), "", filter_logic) #This is an empty string if `filter_logic` is NULL.
+  token               <- sanitize_token(token)
+  records_collapsed   <- collapse_vector(records  , records_collapsed)
+  fields_collapsed    <- collapse_vector(fields   , fields_collapsed)
+  forms_collapsed     <- collapse_vector(forms    , forms_collapsed)
+  events_collapsed    <- collapse_vector(events   , events_collapsed)
+  filter_logic        <- filter_logic_prepare(filter_logic)
+  verbose             <- verbose_prepare(verbose)
 
   if( any(grepl("[A-Z]", fields_collapsed)) )
     warning("The fields passed to REDCap appear to have at least uppercase letter.  REDCap variable names are snake case.")
@@ -160,30 +153,15 @@ redcap_read_oneshot <- function(
   if( nchar(forms_collapsed  ) > 0 ) post_body$forms    <- forms_collapsed
   if( nchar(events_collapsed ) > 0 ) post_body$events   <- events_collapsed
 
-  result <- httr::POST(
-    url     = redcap_uri,
-    body    = post_body,
-    config  = config_options
-  )
+  # This is the important line that communicates with the REDCap server.
+  kernel <- kernel_api(redcap_uri, post_body, config_options)
 
-  status_code           <- result$status
-  success               <- (status_code==200L)
-  raw_text              <- httr::content(result, "text")
-  raw_text              <- gsub("\r\n", "\n", raw_text) # Convert all line-ending to linux-style
-  elapsed_seconds       <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
-
-  # raw_text <- "The hostname (redcap-db.hsc.net.ou.edu) / username (redcapsql) / password (XXXXXX) combination could not connect to the MySQL server. \r\n\t\tPlease check their values."
-  regex_cannot_connect  <- "^The hostname \\((.+)\\) / username \\((.+)\\) / password \\((.+)\\) combination could not connect.+"
-  regex_empty           <- "^\\s+$"
-
-  success     <- (success & !any(grepl(regex_cannot_connect, raw_text)) & !any(grepl(regex_empty, raw_text)))
-
-  if( success ) {
+  if( kernel$success ) {
     col_types <- if( guess_type ) NULL else readr::cols(.default=readr::col_character())
     try (
       {
         # ds <- utils::read.csv(text=raw_text, stringsAsFactors=FALSE)
-        ds <- readr::read_csv(file=raw_text, col_types=col_types, guess_max=guess_max) %>%
+        ds <- readr::read_csv(file=kernel$raw_text, col_types=col_types, guess_max=guess_max) %>%
           as.data.frame()
       }, #Convert the raw text to a dataset.
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
@@ -193,7 +171,7 @@ redcap_read_oneshot <- function(
       outcome_message <- paste0(
         format(  nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE), " records and ",
         format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE), " columns were read from REDCap in ",
-        round(elapsed_seconds, 1), " seconds.  The http status code was ", status_code, "."
+        round(kernel$elapsed_seconds, 1), " seconds.  The http status code was ", kernel$status_code, "."
       )
 
       # ds <- dplyr::mutate_if(
@@ -215,18 +193,18 @@ redcap_read_oneshot <- function(
       #
       # ds <- base::as.data.frame(ds)
 
-      raw_text <- "" # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
+      kernel$raw_text   <- "" # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
     } else {
-      success          <- FALSE #Override the 'success' determination from the http status code.
+      kernel$success   <- FALSE #Override the 'success' determination from the http status code.
       ds               <- data.frame() #Return an empty data.frame
-      outcome_message  <- paste0("The REDCap read failed.  The http status code was ", status_code, ".  The 'raw_text' returned was '", raw_text, "'.")
+      outcome_message  <- paste0("The REDCap read failed.  The http status code was ", kernel$status_code, ".  The 'raw_text' returned was '", kernel$raw_text, "'.")
     }
   } else {
     ds                 <- data.frame() #Return an empty data.frame
-    outcome_message    <- if( any(grepl(regex_empty, raw_text)) ) {
+    outcome_message    <- if( any(grepl(kernel$regex_empty, kernel$raw_text)) ) {
       "The REDCapR read/export operation was not successful.  The returned dataset was empty."
     } else {
-      paste0("The REDCapR read/export operation was not successful.  The error message was:\n",  raw_text)
+      paste0("The REDCapR read/export operation was not successful.  The error message was:\n",  kernel$raw_text)
     }
   }
 
@@ -235,15 +213,15 @@ redcap_read_oneshot <- function(
 
   return( list(
     data               = ds,
-    success            = success,
-    status_code        = status_code,
+    success            = kernel$success,
+    status_code        = kernel$status_code,
     outcome_message    = outcome_message,
     records_collapsed  = records_collapsed,
     fields_collapsed   = fields_collapsed,
     forms_collapsed    = forms_collapsed,
     events_collapsed   = events_collapsed,
     filter_logic       = filter_logic,
-    elapsed_seconds    = elapsed_seconds,
-    raw_text           = raw_text
+    elapsed_seconds    = kernel$elapsed_seconds,
+    raw_text           = kernel$raw_text
   ) )
 }

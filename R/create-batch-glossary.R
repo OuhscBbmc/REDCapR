@@ -46,7 +46,7 @@ create_batch_glossary <- function( row_count, batch_size ) {
   start_index <- base::seq.int(from=1, to=row_count, by=batch_size)
 
   ds_batch             <- base::data.frame(id=seq_along(start_index), start_index=start_index)
-  ds_batch$stop_index  <- base::mapply(function(i) base::ifelse(i<length(start_index), start_index[i+1]-1, row_count), ds_batch$id )
+  ds_batch$stop_index  <- base::mapply(function(i) base::ifelse(i<length(start_index), start_index[i+1L]-1L, row_count), ds_batch$id )
 
   sprintf_format_1 <- base::paste0("%0.", base::max(base::nchar(ds_batch$id)), "i")
   sprintf_format_2 <- base::paste0("%0.", base::nchar(row_count), "i")

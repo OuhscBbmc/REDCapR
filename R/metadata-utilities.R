@@ -8,7 +8,7 @@
 #' @param pattern The regular expression pattern.  Required.
 #' @param text The text to apply the regex against.  Required.
 #' @param select_choices The text containing the choices that should be parsed to determine the `id` and `label` values.  Required.
-#' @param perl Indicates if perl-compatible regexps should be used.  Optional.
+#' @param perl Indicates if perl-compatible regexps should be used.  Default is `TRUE`. Optional.
 #'
 #' @return Currently, a [base::data.frame()] is returned a row for each match, and a column for each *named* group within a match.  For the `retrieve_checkbox_choices()` function, the columns will be.
 #' * `id`: The numeric value assigned to each choice (in the data dictionary).
@@ -61,9 +61,9 @@ regex_named_captures <- function( pattern, text, perl=TRUE ) {
   colnames(d) <- capture_names
 
   for( column_name in colnames(d) ) {
-    d[, column_name] <- mapply(
-      function (start, len) substr(text, start, start+len-1),
-      attr(match, "capture.start")[, column_name],
+    d[[column_name]] <- mapply(
+      function (start, len) substr(text, start, start+len-1L),
+      attr(match, "capture.start" )[, column_name],
       attr(match, "capture.length")[, column_name]
     )
   }

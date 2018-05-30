@@ -74,19 +74,21 @@
 #' }
 redcap_write <- function(
   ds_to_write,
-  batch_size = 100L,
-  interbatch_delay = 0.5,
-  continue_on_error = FALSE,
+  batch_size          = 100L,
+  interbatch_delay    = 0.5,
+  continue_on_error   = FALSE,
   redcap_uri,
   token,
-  verbose = TRUE, config_options = NULL
+  verbose             = TRUE,
+  config_options      = NULL
 ) {
 
   start_time <- base::Sys.time()
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
 
-  token <- sanitize_token(token)
+  token   <- sanitize_token(token)
+  verbose <- verbose_prepare(verbose)
 
   ds_glossary <- REDCapR::create_batch_glossary(row_count=base::nrow(ds_to_write), batch_size=batch_size)
 
@@ -97,7 +99,7 @@ redcap_write <- function(
 
   message("Starting to update ", format(nrow(ds_to_write), big.mark=",", scientific=F, trim=T), " records to be written at ", Sys.time())
   for( i in seq_along(ds_glossary$id) ) {
-    selected_indices <- seq(from=ds_glossary[i, "start_index"], to=ds_glossary[i, "stop_index"])
+    selected_indices <- seq(from=ds_glossary$start_index[i], to=ds_glossary$stop_index[i])
 
     if( i > 0 ) Sys.sleep(time = interbatch_delay)
     #     selected_ids <- ids[selected_index]
@@ -121,14 +123,14 @@ redcap_write <- function(
       else stop(error_message)
     }
 
-    affected_ids <- c(affected_ids, write_result$affected_ids)
+    affected_ids     <- c(affected_ids, write_result$affected_ids)
     success_combined <- success_combined | write_result$success
 
     rm(write_result) #Admittedly overkill defensiveness.
   }
 
   elapsed_seconds          <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
-  status_code_combined     <- paste(lst_status_code, collapse="; ")
+  status_code_combined     <- paste(lst_status_code    , collapse="; ")
   outcome_message_combined <- paste(lst_outcome_message, collapse="; ")
 
   return( list(

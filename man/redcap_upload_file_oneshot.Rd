@@ -10,19 +10,19 @@ redcap_upload_file_oneshot(file_name, record, redcap_uri, token, field,
 \arguments{
 \item{file_name}{The name of the relative or full file to be uploaded into the REDCap project.  Required.}
 
-\item{record}{The record ID where the file is to be imported. Required}
+\item{record}{The record ID where the file is to be imported.  Required}
 
 \item{redcap_uri}{The URI (uniform resource identifier) of the REDCap project.  Required.}
 
 \item{token}{The user-specific string that serves as the password for a project.  Required.}
 
-\item{field}{The name of the field where the file is saved in REDCap. Required}
+\item{field}{The name of the field where the file is saved in REDCap.  Required}
 
-\item{event}{The name of the event where the file is saved in REDCap. Optional}
+\item{event}{The name of the event where the file is saved in REDCap.  Optional}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed to the R console during the operation.  Optional.}
 
-\item{config_options}{A list of options to pass to \code{POST} method in the \code{httr} package.  See the details below. Optional.}
+\item{config_options}{A list of options to pass to \code{POST} method in the \code{httr} package.  See the details below.  Optional.}
 }
 \value{
 Currently, a list is returned with the following elements,
@@ -37,7 +37,7 @@ Currently, a list is returned with the following elements,
 }
 }
 \description{
-This function uses REDCap's API to upload a file
+This function uses REDCap's API to upload a file.
 }
 \details{
 Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See \code{\link[=validate_for_write]{validate_for_write()}} for a helper function that checks for some common important conflicts.

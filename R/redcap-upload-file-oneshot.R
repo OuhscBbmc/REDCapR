@@ -2,16 +2,16 @@
 #' @export redcap_upload_file_oneshot
 #' @title Upload a file into to a REDCap project record.
 #'
-#' @description This function uses REDCap's API to upload a file
+#' @description This function uses REDCap's API to upload a file.
 #'
 #' @param file_name The name of the relative or full file to be uploaded into the REDCap project.  Required.
 #' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
 #' @param token The user-specific string that serves as the password for a project.  Required.
-#' @param record The record ID where the file is to be imported. Required
-#' @param field The name of the field where the file is saved in REDCap. Required
-#' @param event The name of the event where the file is saved in REDCap. Optional
+#' @param record The record ID where the file is to be imported.  Required
+#' @param field The name of the field where the file is saved in REDCap.  Required
+#' @param event The name of the event where the file is saved in REDCap.  Optional
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  Optional.
-#' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below. Optional.
+#' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below.  Optional.
 #'
 #' @return Currently, a list is returned with the following elements,
 #' * `success`: A boolean value indicating if the operation was apparently successful.
@@ -65,15 +65,24 @@
 #' }
 #' }
 
-redcap_upload_file_oneshot <- function( file_name, record, redcap_uri, token, field, event="", verbose=TRUE, config_options=NULL ) {
+redcap_upload_file_oneshot <- function(
+  file_name,
+  record,
+  redcap_uri,
+  token,
+  field,
+  event             = "",
+  verbose           = TRUE,
+  config_options    = NULL
+) {
 
-  start_time <- Sys.time()
   checkmate::assert_character(file_name                 , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_file_exists(file_name                                                        )
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
 
-  token <- sanitize_token(token)
+  token   <- sanitize_token(token)
+  verbose <- verbose_prepare(verbose)
 
   if( verbose )
     message("Preparing to upload the file `", file_name, "`.")
@@ -91,38 +100,30 @@ redcap_upload_file_oneshot <- function( file_name, record, redcap_uri, token, fi
 
   if( nchar(event ) > 0 ) post_body$event  <- event
 
-  result <- httr::POST(
-    url    = redcap_uri,
-    body   = post_body,
-    config = config_options
-  )
+  # This is the important line that communicates with the REDCap server.
+  kernel <- kernel_api(redcap_uri, post_body, config_options)
 
-  status_code       <- result$status_code
-  elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
-  success           <- (status_code == 200L)
-
-  if( success ) {
-    outcome_message <- paste0("file uploaded to REDCap in ",  round(elapsed_seconds, 1), " seconds.")
-    recordsAffectedCount <- 1
-    record_id <- record
-    raw_text <- ""
-  }
-  else { #If the returned content wasn't recognized as valid IDs, then
-    raw_text               <- httr::content(result, type="text")
-    outcome_message        <- paste0("file NOT uploaded ")
-    recordsAffectedCount   <- 0L
-    record_id              <- numeric(0) #Return an empty vector.
+  if( kernel$success ) {
+    outcome_message         <- paste0("file uploaded to REDCap in ",  round(kernel$elapsed_seconds, 1), " seconds.")
+    records_affected_count  <- 1L
+    record_id               <- as.character(record)
+    kernel$raw_text         <- ""
+  } else { #If the returned content wasn't recognized as valid IDs, then
+    raw_text                <- kernel$raw_text
+    outcome_message         <- paste0("file NOT uploaded ")
+    records_affected_count  <- 0L
+    record_id               <- character(0) # Return an empty vector.
   }
   if( verbose )
     message(outcome_message)
 
   return( list(
-    success                  = success,
-    status_code              = status_code,
-    outcome_message          = outcome_message,
-    records_affected_count   = recordsAffectedCount,
-    affected_ids             = record_id,
-    elapsed_seconds          = elapsed_seconds,
-    raw_text                 = raw_text
+    success                 = kernel$success,
+    status_code             = kernel$status_code,
+    outcome_message         = outcome_message,
+    records_affected_count  = records_affected_count,
+    affected_ids            = record_id,
+    elapsed_seconds         = kernel$elapsed_seconds,
+    raw_text                = kernel$raw_text
   ))
 }

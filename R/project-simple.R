@@ -29,10 +29,10 @@ populate_project_simple <- function( batch = FALSE ) {
 
   #Import the data into the REDCap project
   testthat::expect_message(
-    if( batch ) {
-      returned_object <- REDCapR::redcap_write(ds=dsToWrite, redcap_uri=uri, token=token, verbose=TRUE)
+    returned_object <- if( batch ) {
+      REDCapR::redcap_write(ds=dsToWrite, redcap_uri=uri, token=token, verbose=TRUE)
     } else {
-      returned_object <- REDCapR::redcap_write_oneshot(ds=dsToWrite, redcap_uri=uri, token=token, verbose=TRUE)
+      REDCapR::redcap_write_oneshot(ds=dsToWrite, redcap_uri=uri, token=token, verbose=TRUE)
     }
   )
   # For internal inspection: REDCapR::redcap_read_oneshot(redcap_uri=uri, token=token, verbose=TRUE)
@@ -90,7 +90,7 @@ upload_file_simple <- function( redcap_uri, token=token ) {
   token <- sanitize_token(token)
 
   for( i in seq_along(records) ) {
-    record <- records[i]
+    record    <- records[i]
     file_path <- file_paths[i]
     redcap_upload_file_oneshot(file_name=file_path, record=record, field=field, redcap_uri=redcap_uri, token=token)
   }

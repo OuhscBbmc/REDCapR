@@ -42,47 +42,79 @@ redcap_project <- setRefClass(
   Class = "redcap_project",
 
   fields = list(
-    redcap_uri = "character",
-    token = "character"
+    redcap_uri  = "character",
+    token       = "character"
   ),
 
   methods = list(
 
     read = function(
-      batch_size = 100L, interbatch_delay = 0,
-      records = NULL, records_collapsed = "",
-      fields = NULL, fields_collapsed = "",
-      export_survey_fields = FALSE,
-      export_data_access_groups = FALSE,
-      raw_or_label = 'raw',
-      verbose = TRUE, config_options = NULL
+      batch_size                  = 100L,
+      interbatch_delay            = 0,
+      records                     = NULL , records_collapsed = "",
+      fields                      = NULL , fields_collapsed  = "",
+      forms                       = NULL , forms_collapsed   = "",
+      events                      = NULL , events_collapsed  = "",
+      raw_or_label                = 'raw',
+      raw_or_label_headers        = 'raw',
+      export_checkbox_label       = FALSE,
+      # placeholder returnFormat
+      export_survey_fields        = FALSE,
+      export_data_access_groups   = FALSE,
+      filter_logic                  = "",
+
+      guess_type                    = TRUE,
+      guess_max                     = 1000L,
+      verbose                       = TRUE,
+      config_options                = NULL
     ) {
 
       "Exports records from a REDCap project."
 
       return( REDCapR::redcap_read(
-        batch_size = batch_size, interbatch_delay = interbatch_delay,
-        redcap_uri = redcap_uri, token = token,
-        records = records, records_collapsed = records_collapsed,
-        fields = fields, fields_collapsed = fields_collapsed,
-        export_data_access_groups = export_data_access_groups,
-        raw_or_label = raw_or_label,
-        verbose = verbose, config_options=config_options
+        batch_size                    = batch_size,
+        interbatch_delay              = interbatch_delay,
+
+        redcap_uri                    = redcap_uri,
+        token                         = token,
+        records                       = records                  , records_collapsed = records_collapsed,
+        fields                        = fields                   , fields_collapsed  = fields_collapsed ,
+        forms                         = forms                    , forms_collapsed   = forms_collapsed  ,
+        events                        = events                   , events_collapsed  = events_collapsed ,
+        raw_or_label                  = raw_or_label,
+        raw_or_label_headers          = raw_or_label_headers,
+        export_checkbox_label         = export_checkbox_label,
+        # placeholder returnFormat
+        export_survey_fields          = export_survey_fields,
+        export_data_access_groups     = export_data_access_groups,
+        filter_logic                  = filter_logic,
+
+        guess_type                    = guess_type,
+        # placeholder guess_max
+        verbose                       = verbose,
+        config_options                = config_options
       ) )
     },
 
     write = function(
-      ds_to_write, batch_size = 100L, interbatch_delay = 0,
-      verbose = TRUE, config_options = NULL
+      ds_to_write,
+      batch_size            = 100L,
+      interbatch_delay      = 0,
+      continue_on_error     = FALSE,
+      verbose               = TRUE,
+      config_options        = NULL
     ) {
 
       "Imports records to a REDCap project."
 
       return( REDCapR::redcap_write(
-        ds_to_write = ds_to_write,
-        batch_size = batch_size, interbatch_delay = interbatch_delay,
-        redcap_uri = redcap_uri, token = token,
-        config_options = config_options
+        ds_to_write             = ds_to_write,
+        batch_size              = batch_size,
+        interbatch_delay        = interbatch_delay,
+        continue_on_error       = continue_on_error,
+        redcap_uri              = redcap_uri,
+        token                   = token,
+        config_options          = config_options
       ) )
     }
   ) #End methods list

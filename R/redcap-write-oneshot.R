@@ -63,22 +63,29 @@
 #' }
 #'
 
-redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, config_options=NULL ) {
-  #TODO: automatically convert boolean/logical class to integer/bit class
-  csvElements <- NULL #This prevents the R CHECK NOTE: 'No visible binding for global variable Note in R CMD check';  Also see  if( getRversion() >= "2.15.1" )    utils::globalVariables(names=c("csvElements")) #http://stackoverflow.com/questions/8096313/no-visible-binding-for-global-variable-note-in-r-cmd-check; http://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
+redcap_write_oneshot <- function(
+  ds,
+  redcap_uri,
+  token,
+  verbose         = TRUE,
+  config_options  = NULL
+) {
 
-  start_time <- Sys.time()
+  # TODO: automatically convert boolean/logical class to integer/bit class
+  csv_elements <- NULL #This prevents the R CHECK NOTE: 'No visible binding for global variable Note in R CMD check';  Also see  if( getRversion() >= "2.15.1" )    utils::globalVariables(names=c("csv_elements")) #http://stackoverflow.com/questions/8096313/no-visible-binding-for-global-variable-note-in-r-cmd-check; http://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
+
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
 
-  token <- sanitize_token(token)
+  token   <- sanitize_token(token)
+  verbose <- verbose_prepare(verbose)
 
-  con   <-  base::textConnection(object='csvElements', open='w', local=TRUE)
+  con     <-  base::textConnection(object='csv_elements', open='w', local=TRUE)
   utils::write.csv(ds, con, row.names = FALSE, na="")
   close(con)
 
-  csv <- paste(csvElements, collapse="\n")
-  rm(csvElements, con)
+  csv     <- paste(csv_elements, collapse="\n")
+  rm(csv_elements, con)
 
   post_body <- list(
     token     = token,
@@ -93,47 +100,39 @@ redcap_write_oneshot <- function( ds, redcap_uri, token, verbose=TRUE, config_op
     returnFormat        = 'csv'
   )
 
-  result <- httr::POST(
-    url    = redcap_uri,
-    body   = post_body,
-    config = config_options
-  )
+  # This is the important line that communicates with the REDCap server.
+  kernel <- kernel_api(redcap_uri, post_body, config_options)
 
-  status_code       <- result$status_code
-  raw_text          <- httr::content(result, type="text")
-  elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
-  success           <- (status_code == 200L)
-
-  if( success ) {
-    elements <- unlist(strsplit(raw_text, split="\\n"))
-    affectedIDs <- elements[-1]
-    recordsAffectedCount <- length(affectedIDs)
-    outcome_message <- paste0(
-      format(recordsAffectedCount, big.mark = ",", scientific = FALSE, trim = TRUE),
+  if( kernel$success ) {
+    elements               <- unlist(strsplit(kernel$raw_text, split="\\n"))
+    affected_ids           <- as.character(elements[-1])
+    records_affected_count <- length(affected_ids)
+    outcome_message        <- paste0(
+      format(records_affected_count, big.mark = ",", scientific = FALSE, trim = TRUE),
       " records were written to REDCap in ",
-      round(elapsed_seconds, 1),
+      round(kernel$elapsed_seconds, 1),
       " seconds."
     )
 
     #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
-    raw_text <- ""
+    kernel$raw_text <- ""
+  } else { #If the returned content wasn't recognized as valid IDs, then
+    affected_ids           <- character(0) # Return an empty array
+    records_affected_count <- NA_integer_
+    outcome_message        <- paste0("The REDCapR write/import operation was not successful.  The error message was:\n",  kernel$raw_text)
   }
-  else { #If the returned content wasn't recognized as valid IDs, then
-    affectedIDs            <- numeric(0) #Pass an empty array
-    recordsAffectedCount   <- NA_integer_
-    outcome_message        <- paste0("The REDCapR write/import operation was not successful.  The error message was:\n",  raw_text)
-  }
+
   if( verbose )
     message(outcome_message)
 
   return( list(
-    success                   = success,
-    status_code               = status_code,
+    success                   = kernel$success,
+    status_code               = kernel$status_code,
     outcome_message           = outcome_message,
-    records_affected_count    = recordsAffectedCount,
-    affected_ids              = affectedIDs,
-    elapsed_seconds           = elapsed_seconds,
-    raw_text                  = raw_text
+    records_affected_count    = records_affected_count,
+    affected_ids              = affected_ids,
+    elapsed_seconds           = kernel$elapsed_seconds,
+    raw_text                  = kernel$raw_text
   ))
 }
 

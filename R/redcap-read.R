@@ -97,7 +97,7 @@ redcap_read <- function(
 
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
-  checkmate::assert_atomic(records                      , any.missing=T, min.len=0)
+  checkmate::assert_atomic(  records                    , any.missing=T, min.len=0)
   checkmate::assert_character(records_collapsed         , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
   checkmate::assert_character(fields                    , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
   checkmate::assert_character(fields_collapsed          , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
@@ -119,19 +119,15 @@ redcap_read <- function(
   checkmate::assert_list(     config_options            , any.missing=T, len=1, null.ok=T)
   checkmate::assert_integer(  id_position               , any.missing=F, len=1, lower=1L)
 
-  token <- sanitize_token(token)
   validate_field_names(fields)
 
-  if( all(nchar(records_collapsed)==0) )
-    records_collapsed <- ifelse(is.null(records), "", paste0(records, collapse=",")) #This is an empty string if `records` is NULL.
-  if( (length(fields_collapsed)==0L) | is.null(fields_collapsed) | all(nchar(fields_collapsed)==0) )
-    fields_collapsed <- ifelse(is.null(fields), "", paste0(fields, collapse=",")) #This is an empty string if `fields` is NULL.
-  if( (length(forms_collapsed)==0L) | is.null(forms_collapsed) | all(nchar(forms_collapsed)==0L) )
-    forms_collapsed <- ifelse(is.null(forms), "", paste0(forms, collapse=",")) #This is an empty string if `forms` is NULL.
-  if( all(nchar(events_collapsed)==0) )
-    events_collapsed <- ifelse(is.null(events), "", paste0(events, collapse=",")) #This is an empty string if `events` is NULL.
-  if( all(nchar(filter_logic)==0) )
-    filter_logic <- ifelse(is.null(filter_logic), "", filter_logic) #This is an empty string if `filter_logic` is NULL.
+  token               <- sanitize_token(token)
+  records_collapsed   <- collapse_vector(records  , records_collapsed)
+  fields_collapsed    <- collapse_vector(fields   , fields_collapsed)
+  forms_collapsed     <- collapse_vector(forms    , forms_collapsed)
+  events_collapsed    <- collapse_vector(events   , events_collapsed)
+  filter_logic        <- filter_logic_prepare(filter_logic)
+  verbose             <- verbose_prepare(verbose)
 
   start_time <- Sys.time()
 
@@ -188,7 +184,7 @@ redcap_read <- function(
 
   message("Starting to read ", format(length(uniqueIDs), big.mark=",", scientific=F, trim=T), " records  at ", Sys.time(), ".")
   for( i in ds_glossary$id ) {
-    selected_index  <- seq(from=ds_glossary[i, "start_index"], to=ds_glossary[i, "stop_index"])
+    selected_index  <- seq(from=ds_glossary$start_index[i], to=ds_glossary$stop_index[i])
     selected_ids    <- uniqueIDs[selected_index]
 
     if( i > 0 ) Sys.sleep(time = interbatch_delay)
@@ -239,7 +235,7 @@ redcap_read <- function(
   ds_stacked               <- as.data.frame(dplyr::bind_rows(lst_batch))
 
   elapsed_seconds          <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
-  status_code_combined     <- paste(lst_status_code, collapse="; ")
+  status_code_combined     <- paste(lst_status_code    , collapse="; ")
   outcome_message_combined <- paste(lst_outcome_message, collapse="; ")
 
   return( list(
