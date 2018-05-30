@@ -142,7 +142,7 @@ redcap_download_file_oneshot <- function(
     outcome_message         <- "file NOT downloaded."
     records_affected_count  <- 0L
     record_id               <- character(0) # Return an empty vector.
-    raw_text                <- httr::content(kernel$result, type="text")
+    raw_text                <- kernel$raw_text
     file_path               <- character(0)
   }
 
