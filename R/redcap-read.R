@@ -184,7 +184,7 @@ redcap_read <- function(
 
   message("Starting to read ", format(length(uniqueIDs), big.mark=",", scientific=F, trim=T), " records  at ", Sys.time(), ".")
   for( i in ds_glossary$id ) {
-    selected_index  <- seq(from=ds_glossary[i, "start_index"], to=ds_glossary[i, "stop_index"])
+    selected_index  <- seq(from=ds_glossary$start_index[i], to=ds_glossary$stop_index[i])
     selected_ids    <- uniqueIDs[selected_index]
 
     if( i > 0 ) Sys.sleep(time = interbatch_delay)
@@ -235,7 +235,7 @@ redcap_read <- function(
   ds_stacked               <- as.data.frame(dplyr::bind_rows(lst_batch))
 
   elapsed_seconds          <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
-  status_code_combined     <- paste(lst_status_code, collapse="; ")
+  status_code_combined     <- paste(lst_status_code    , collapse="; ")
   outcome_message_combined <- paste(lst_outcome_message, collapse="; ")
 
   return( list(

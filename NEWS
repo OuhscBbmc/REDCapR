@@ -20,6 +20,7 @@ Minor New Features:
 * `id_position` allows user to specify if the record_id isn't in the first position (#207).  However, we recommend that all REDCap projects keep this important variable first in the data dictionary.
 * Link to new secure Zenodo DOI resolver (katrinleinweber #191)
 * parameters in `redcap_read()` and `redcap_read_oneshot()` are more consistent with the order in raw REDCap API. (#204)
+* When the `verbose` parameter is NULL, then the value from getOption("verbose") is used. (#215)
 
 Modified Internals:
 * All interaction with the REDCap server goes through the new `kernal_api()` function, which uses the 'httr' and 'curl' packages underneath.  Until now, each function called those packages directly. (#213)

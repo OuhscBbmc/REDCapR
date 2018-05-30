@@ -80,11 +80,11 @@ redcap_write_oneshot <- function(
   token   <- sanitize_token(token)
   verbose <- verbose_prepare(verbose)
 
-  con   <-  base::textConnection(object='csv_elements', open='w', local=TRUE)
+  con     <-  base::textConnection(object='csv_elements', open='w', local=TRUE)
   utils::write.csv(ds, con, row.names = FALSE, na="")
   close(con)
 
-  csv <- paste(csv_elements, collapse="\n")
+  csv     <- paste(csv_elements, collapse="\n")
   rm(csv_elements, con)
 
   post_body <- list(

@@ -84,8 +84,9 @@ collapse_vector <- function( elements, collapsed ) {
 }
 
 filter_logic_prepare <- function( filter_logic ) {
+  # This is an empty string if `filter_logic` is NULL.
   if( all(nchar(filter_logic)==0) )
-    filter_logic <- ifelse(is.null(filter_logic), "", filter_logic) #This is an empty string if `filter_logic` is NULL.
+    filter_logic <- dplyr::if_else(is.null(filter_logic), "", filter_logic)
   return( filter_logic )
 }
 
