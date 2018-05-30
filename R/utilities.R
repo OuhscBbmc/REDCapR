@@ -82,3 +82,13 @@ collapse_vector <- function( elements, collapsed ) {
 
   return( collapsed )
 }
+
+filter_logic_prepare <- function( filter_logic ) {
+  if( all(nchar(filter_logic)==0) )
+    filter_logic <- ifelse(is.null(filter_logic), "", filter_logic) #This is an empty string if `filter_logic` is NULL.
+  return( filter_logic )
+}
+
+verbose_prepare <- function( verbose ) {
+  ifelse(!is.null(verbose), verbose, getOption("verbose"))
+}

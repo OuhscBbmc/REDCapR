@@ -27,7 +27,7 @@ redcap_version <- function( redcap_uri, token, verbose=TRUE, config_options=NULL
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
 
   token   <- sanitize_token(token)
-  verbose <- ifelse(!is.null(verbose), verbose, getOption("verbose"))
+  verbose <- verbose_prepare(verbose)
 
   post_body <- list(
     token                   = token,

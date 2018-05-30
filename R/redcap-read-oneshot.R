@@ -127,11 +127,8 @@ redcap_read_oneshot <- function(
   fields_collapsed    <- collapse_vector(fields   , fields_collapsed)
   forms_collapsed     <- collapse_vector(forms    , forms_collapsed)
   events_collapsed    <- collapse_vector(events   , events_collapsed)
-
-  if( all(nchar(filter_logic)==0) )
-    filter_logic <- ifelse(is.null(filter_logic), "", filter_logic) #This is an empty string if `filter_logic` is NULL.
-
-  verbose <- ifelse(!is.null(verbose), verbose, getOption("verbose"))
+  filter_logic        <- filter_logic_prepare(filter_logic)
+  verbose             <- verbose_prepare(verbose)
 
   if( any(grepl("[A-Z]", fields_collapsed)) )
     warning("The fields passed to REDCap appear to have at least uppercase letter.  REDCap variable names are snake case.")

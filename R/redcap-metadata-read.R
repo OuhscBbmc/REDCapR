@@ -60,7 +60,7 @@ redcap_metadata_read <- function(
   token               <- sanitize_token(token)
   fields_collapsed    <- collapse_vector(fields   , fields_collapsed)
   forms_collapsed     <- collapse_vector(forms    , forms_collapsed)
-  verbose             <- ifelse(!is.null(verbose), verbose, getOption("verbose"))
+  verbose             <- verbose_prepare(verbose)
 
   post_body <- list(
     token    = token,

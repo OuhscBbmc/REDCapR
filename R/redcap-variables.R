@@ -48,7 +48,7 @@ redcap_variables <- function(
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
 
   token   <- sanitize_token(token)
-  verbose <- ifelse(!is.null(verbose), verbose, getOption("verbose"))
+  verbose <- verbose_prepare(verbose)
 
   post_body <- list(
     token                   = token,

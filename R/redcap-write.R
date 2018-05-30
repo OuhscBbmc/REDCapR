@@ -88,7 +88,7 @@ redcap_write <- function(
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
 
   token   <- sanitize_token(token)
-  verbose <- ifelse(!is.null(verbose), verbose, getOption("verbose"))
+  verbose <- verbose_prepare(verbose)
 
   ds_glossary <- REDCapR::create_batch_glossary(row_count=base::nrow(ds_to_write), batch_size=batch_size)
 
