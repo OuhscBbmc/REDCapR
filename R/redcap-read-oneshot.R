@@ -94,7 +94,6 @@ redcap_read_oneshot <- function(
   verbose                       = TRUE,
   config_options                = NULL
 ) {
-  #TODO: NULL verbose parameter pulls from getOption("verbose")
 
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
@@ -131,6 +130,8 @@ redcap_read_oneshot <- function(
 
   if( all(nchar(filter_logic)==0) )
     filter_logic <- ifelse(is.null(filter_logic), "", filter_logic) #This is an empty string if `filter_logic` is NULL.
+
+  verbose <- ifelse(!is.null(verbose), verbose, getOption("verbose"))
 
   if( any(grepl("[A-Z]", fields_collapsed)) )
     warning("The fields passed to REDCap appear to have at least uppercase letter.  REDCap variable names are snake case.")

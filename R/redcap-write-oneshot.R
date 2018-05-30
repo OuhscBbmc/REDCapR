@@ -78,6 +78,7 @@ redcap_write_oneshot <- function(
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
 
   token <- sanitize_token(token)
+  verbose <- ifelse(!is.null(verbose), verbose, getOption("verbose"))
 
   con   <-  base::textConnection(object='csv_elements', open='w', local=TRUE)
   utils::write.csv(ds, con, row.names = FALSE, na="")

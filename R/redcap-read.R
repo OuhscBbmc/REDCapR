@@ -130,6 +130,8 @@ redcap_read <- function(
   if( all(nchar(filter_logic)==0) )
     filter_logic <- ifelse(is.null(filter_logic), "", filter_logic) #This is an empty string if `filter_logic` is NULL.
 
+  verbose <- ifelse(!is.null(verbose), verbose, getOption("verbose"))
+
   start_time <- Sys.time()
 
   metadata <- REDCapR::redcap_metadata_read(

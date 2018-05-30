@@ -106,7 +106,6 @@ redcap_read_oneshot_eav <- function(
   verbose                       = TRUE,
   config_options                = NULL
 ) {
-  #TODO: NULL verbose parameter pulls from getOption("verbose")
 
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
@@ -148,6 +147,7 @@ redcap_read_oneshot_eav <- function(
     warning("The fields passed to REDCap appear to have at least uppercase letter.  REDCap variable names are snake case.")
 
   export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
+  verbose <- ifelse(!is.null(verbose), verbose, getOption("verbose"))
 
   post_body <- list(
     token                   = token,

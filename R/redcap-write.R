@@ -89,6 +89,8 @@ redcap_write <- function(
 
   token <- sanitize_token(token)
 
+  verbose <- ifelse(!is.null(verbose), verbose, getOption("verbose"))
+
   ds_glossary <- REDCapR::create_batch_glossary(row_count=base::nrow(ds_to_write), batch_size=batch_size)
 
   affected_ids          <- character(0)

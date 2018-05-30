@@ -53,7 +53,6 @@ redcap_metadata_read <- function(
   verbose           = TRUE,
   config_options    = NULL
 ) {
-  #TODO: NULL verbose parameter pulls from getOption("verbose")
 
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
@@ -62,6 +61,7 @@ redcap_metadata_read <- function(
 
   fields_collapsed    <- collapse_vector(fields   , fields_collapsed)
   forms_collapsed     <- collapse_vector(forms    , forms_collapsed)
+  verbose <- ifelse(!is.null(verbose), verbose, getOption("verbose"))
 
   post_body <- list(
     token    = token,
