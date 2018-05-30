@@ -132,22 +132,22 @@ redcap_read_oneshot_eav <- function(
   checkmate::assert_logical(  verbose                   , any.missing=F, len=1, null.ok=T)
   checkmate::assert_list(     config_options            , any.missing=T, len=1, null.ok=T)
 
-  token <- sanitize_token(token)
   validate_field_names(fields)
 
+  token               <- sanitize_token(token)
   records_collapsed   <- collapse_vector(records  , records_collapsed)
   fields_collapsed    <- collapse_vector(fields   , fields_collapsed)
   forms_collapsed     <- collapse_vector(forms    , forms_collapsed)
   events_collapsed    <- collapse_vector(events   , events_collapsed)
+  export_data_access_groups <- ifelse(export_data_access_groups, "true", "false")
 
   if( all(nchar(filter_logic)==0) )
     filter_logic <- ifelse(is.null(filter_logic), "", filter_logic) #This is an empty string if `filter_logic` is NULL.
 
+  verbose <- ifelse(!is.null(verbose), verbose, getOption("verbose"))
+
   if( any(grepl("[A-Z]", fields_collapsed)) )
     warning("The fields passed to REDCap appear to have at least uppercase letter.  REDCap variable names are snake case.")
-
-  export_data_access_groups_string <- ifelse(export_data_access_groups, "true", "false")
-  verbose <- ifelse(!is.null(verbose), verbose, getOption("verbose"))
 
   post_body <- list(
     token                   = token,
@@ -156,7 +156,7 @@ redcap_read_oneshot_eav <- function(
     type                    = 'eav',
     rawOrLabel              = raw_or_label,
     rawOrLabelHeaders       = raw_or_label_headers,
-    exportDataAccessGroups  = export_data_access_groups_string,
+    exportDataAccessGroups  = export_data_access_groups,
     filterLogic             = filter_logic
     # record, fields, forms & events are specified below
   )

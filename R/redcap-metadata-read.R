@@ -57,11 +57,10 @@ redcap_metadata_read <- function(
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
 
-  token <- sanitize_token(token)
-
+  token               <- sanitize_token(token)
   fields_collapsed    <- collapse_vector(fields   , fields_collapsed)
   forms_collapsed     <- collapse_vector(forms    , forms_collapsed)
-  verbose <- ifelse(!is.null(verbose), verbose, getOption("verbose"))
+  verbose             <- ifelse(!is.null(verbose), verbose, getOption("verbose"))
 
   post_body <- list(
     token    = token,

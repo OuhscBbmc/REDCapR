@@ -119,9 +119,9 @@ redcap_read <- function(
   checkmate::assert_list(     config_options            , any.missing=T, len=1, null.ok=T)
   checkmate::assert_integer(  id_position               , any.missing=F, len=1, lower=1L)
 
-  token <- sanitize_token(token)
   validate_field_names(fields)
 
+  token               <- sanitize_token(token)
   records_collapsed   <- collapse_vector(records  , records_collapsed)
   fields_collapsed    <- collapse_vector(fields   , fields_collapsed)
   forms_collapsed     <- collapse_vector(forms    , forms_collapsed)

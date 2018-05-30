@@ -120,9 +120,9 @@ redcap_read_oneshot <- function(
   checkmate::assert_logical(  verbose                   , any.missing=F, len=1, null.ok=T)
   checkmate::assert_list(     config_options            , any.missing=T, len=1, null.ok=T)
 
-  token <- sanitize_token(token)
   validate_field_names(fields)
 
+  token               <- sanitize_token(token)
   records_collapsed   <- collapse_vector(records  , records_collapsed)
   fields_collapsed    <- collapse_vector(fields   , fields_collapsed)
   forms_collapsed     <- collapse_vector(forms    , forms_collapsed)

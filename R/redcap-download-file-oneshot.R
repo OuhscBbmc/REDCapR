@@ -88,7 +88,7 @@ redcap_download_file_oneshot <- function(
   checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
 
-  token <- sanitize_token(token)
+  token   <- sanitize_token(token)
   verbose <- ifelse(!is.null(verbose), verbose, getOption("verbose"))
 
   post_body <- list(
