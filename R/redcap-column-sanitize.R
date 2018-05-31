@@ -36,6 +36,11 @@ redcap_column_sanitize <- function(
   encoding_initial        = "latin1",
   substitution_character  = "?" ) {
 
+  checkmate::assert_data_frame(d                      , any.missing=F)
+  checkmate::assert_character( column_names           , any.missing=F)
+  checkmate::assert_character( encoding_initial       , any.missing=F, len=1)
+  checkmate::assert_character( substitution_character , any.missing=F, len=1, pattern="^.$")
+
   for( column in column_names ) {
     d[[column]] <- base::iconv(
       x     = d[[column]],

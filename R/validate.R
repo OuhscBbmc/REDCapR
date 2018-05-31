@@ -41,8 +41,10 @@
 #' )
 #' validate_for_write(d = d)
 
-
 validate_no_logical <- function( data_types, stop_on_error=FALSE ) {
+  checkmate::assert_character(data_types, any.missing=F, min.len=1, min.chars=2)
+  checkmate::assert_logical(stop_on_error, any.missing=F, len=1)
+
   # indices <- which(sapply(d, class)=="logical")
   indices <- which(data_types=="logical")
 
@@ -64,7 +66,11 @@ validate_no_logical <- function( data_types, stop_on_error=FALSE ) {
     )
   }
 }
+
 validate_field_names <- function( field_names, stop_on_error=FALSE ) {
+  checkmate::assert_character(field_names, any.missing=F, null.ok=T, min.len=1, min.chars=2)
+  checkmate::assert_logical(stop_on_error, any.missing=F, len=1)
+
   pattern <- "^[0-9a-z_]+$"
 
   indices <- which(!grepl(pattern, x=field_names, perl=TRUE))
@@ -88,6 +94,8 @@ validate_field_names <- function( field_names, stop_on_error=FALSE ) {
 }
 
 validate_for_write <- function( d ) {
+  checkmate::assert_data_frame(d, any.missing=F)
+
   lst_concerns <- list(
     validate_no_logical(sapply(d, class)),
     validate_field_names(colnames(d))

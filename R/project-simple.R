@@ -1,5 +1,7 @@
 
 populate_project_simple <- function( batch = FALSE ) {
+  checkmate::assert_logical(batch, any.missing=F, len=1)
+
   if( !requireNamespace("testthat") ) stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.")
 
   #Declare the server & user information
@@ -30,7 +32,7 @@ populate_project_simple <- function( batch = FALSE ) {
   #Import the data into the REDCap project
   testthat::expect_message(
     returned_object <- if( batch ) {
-      REDCapR::redcap_write(ds=dsToWrite, redcap_uri=uri, token=token, verbose=TRUE)
+      REDCapR::redcap_write(        ds=dsToWrite, redcap_uri=uri, token=token, verbose=TRUE)
     } else {
       REDCapR::redcap_write_oneshot(ds=dsToWrite, redcap_uri=uri, token=token, verbose=TRUE)
     }
@@ -62,6 +64,9 @@ clear_project_simple <- function( verbose = TRUE ) {
 }
 
 clean_start_simple <- function( batch = FALSE, delay_in_seconds = 1 ) {
+  checkmate::assert_logical( batch            , any.missing=F, len=1)
+  checkmate::assert_numeric( delay_in_seconds , any.missing=F, len=1, lower=0)
+
   if( !requireNamespace("testthat") ) stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.")
   testthat::expect_message(
     clear_result <- clear_project_simple(),
@@ -81,6 +86,9 @@ clean_start_simple <- function( batch = FALSE, delay_in_seconds = 1 ) {
 }
 
 upload_file_simple <- function( redcap_uri, token=token ) {
+  checkmate::assert_character(redcap_uri, any.missing=F, len=1, min.chars = 5)
+  checkmate::assert_character(token     , any.missing=F, len=1, pattern="^\\w{32}$")
+
   records <- 1:5
   file_paths <- base::file.path(pkgload::inst(name="REDCapR"), paste0("test-data/mugshot-", records, ".jpg"))
 
