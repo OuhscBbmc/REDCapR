@@ -20,11 +20,10 @@ Trailing line endings are removed.
 Contact your institution's REDCap administrator for more informationa about your project-specific token.
 }
 \examples{
-library(REDCapR) #Load the package into the current R session.
 secret_token_1 <- "12345678901234567890123456ABCDEF"
 secret_token_2 <- "12345678901234567890123456ABCDEF\\n"
-sanitize_token(secret_token_1)
-sanitize_token(secret_token_2)
+REDCapR::sanitize_token(secret_token_1)
+REDCapR::sanitize_token(secret_token_2)
 }
 \author{
 Hao Zhu, Benjamin Nutter, Will Beasley

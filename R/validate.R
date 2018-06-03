@@ -39,7 +39,7 @@
 #'   flag_logical   = c(TRUE, TRUE, FALSE, TRUE),
 #'   flag_Uppercase = c(4, 6, 8, 2)
 #' )
-#' validate_for_write(d = d)
+#' REDCapR::validate_for_write(d = d)
 
 validate_no_logical <- function( data_types, stop_on_error=FALSE ) {
   checkmate::assert_character(data_types, any.missing=F, min.len=1, min.chars=2)

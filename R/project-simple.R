@@ -1,3 +1,4 @@
+# These functions are not exported.
 
 populate_project_simple <- function( batch = FALSE ) {
   checkmate::assert_logical(batch, any.missing=F, len=1)

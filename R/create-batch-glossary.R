@@ -28,16 +28,15 @@
 #' See [redcap_read()] for a function that uses `create_batch_gloassary`.
 #'
 #' @examples
-#' library(REDCapR) #Load the package into the current R session.
-#' create_batch_glossary(100, 50)
-#' create_batch_glossary(100, 25)
-#' create_batch_glossary(100, 3)
+#' REDCapR::create_batch_glossary(100, 50)
+#' REDCapR::create_batch_glossary(100, 25)
+#' REDCapR::create_batch_glossary(100, 3)
 #' d <- data.frame(
 #'   record_id = 1:100,
 #'   iv        = sample(x=4, size=100, replace=TRUE),
 #'   dv        = rnorm(n=100)
 #' )
-#' create_batch_glossary(nrow(d), batch_size=40)
+#' REDCapR::create_batch_glossary(nrow(d), batch_size=40)
 
 create_batch_glossary <- function( row_count, batch_size ) {
   checkmate::assert_integerish(row_count , any.missing=F, len=1L, lower=1L)

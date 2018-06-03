@@ -33,11 +33,11 @@ in the GitHub documentation.
 }
 \examples{
 
-constant("form_incomplete")  # Returns 0L
-constant("form_unverified")  # Returns 1L
-constant("form_complete")    # Returns 2L
+REDCapR::constant("form_incomplete")  # Returns 0L
+REDCapR::constant("form_unverified")  # Returns 1L
+REDCapR::constant("form_complete")    # Returns 2L
 
-constant(c("form_complete", "form_complete", "form_incomplete")) # Returns c(2L, 2L, 0L)
+REDCapR::constant(c("form_complete", "form_complete", "form_incomplete")) # Returns c(2L, 2L, 0L)
 
 \dontrun{
 # The following line returns an error:
@@ -45,9 +45,9 @@ constant(c("form_complete", "form_complete", "form_incomplete")) # Returns c(2L,
 #     {'form_complete','form_incomplete','form_unverified'},
 #     but is {'bad-name'}.
 
-constant("bad-name")    # Returns an error
+REDCapR::constant("bad-name")    # Returns an error
 
-constant(c("form_complete", "bad-name")) # Returns an error
+REDCapR::constant(c("form_complete", "bad-name")) # Returns an error
 }
 }
 \author{
