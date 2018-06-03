@@ -4,10 +4,12 @@
 \alias{constant}
 \title{Collection of REDCap-specific constants}
 \usage{
-constant(name)
+constant(name, simplify = TRUE)
 }
 \arguments{
 \item{name}{Name of constant.  Required character.}
+
+\item{simplify}{Simplifies the vector of values to a common data-type, if possible.  Passed to the \code{simplify} parameter of \code{\link[base:sapply]{base::sapply()}}.}
 }
 \value{
 The constant's value.  Currently all are single integers, but that could be expanded in the future.
@@ -35,6 +37,8 @@ constant("form_incomplete")  # Returns 0L
 constant("form_unverified")  # Returns 1L
 constant("form_complete")    # Returns 2L
 
+constant(c("form_complete", "form_complete", "form_incomplete")) # Returns c(2L, 2L, 0L)
+
 \dontrun{
 # The following line returns an error:
 #     Assertion on 'name' failed: Must be a subset of
@@ -42,6 +46,8 @@ constant("form_complete")    # Returns 2L
 #     but is {'bad-name'}.
 
 constant("bad-name")    # Returns an error
+
+constant(c("form_complete", "bad-name")) # Returns an error
 }
 }
 \author{
