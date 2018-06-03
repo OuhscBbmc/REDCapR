@@ -44,12 +44,12 @@
 #' file_path <- base::file.path(pkgload::inst(name="REDCapR"), paste0("test-data/mugshot-1.jpg"))
 #'
 #' REDCapR::redcap_upload_file_oneshot(
-#'   file_name=file_path, record=record, field=field,
-#'   redcap_uri=redcap_uri, token=token
+#'   file_name  = file_path, record=record, field=field,
+#'   redcap_uri = redcap_uri, token=token
 #' )
 #'
 #' #Upload a collection of five images.
-#' records   <- 1:5
+#' records    <- 1:5
 #' file_paths <- base::file.path(
 #'   pkgload::inst(name="REDCapR"),
 #'   paste0("test-data/mugshot-", records, ".jpg")
@@ -59,8 +59,8 @@
 #'   record    <- records[i]
 #'   file_path <- file_paths[i]
 #'   REDCapR::redcap_upload_file_oneshot(
-#'     file_name=file_path, record=record, field=field,
-#'     redcap_uri=redcap_uri, token=token
+#'     file_name  = file_path, record=record, field=field,
+#'     redcap_uri = redcap_uri, token=token
 #'   )
 #' }
 #' }

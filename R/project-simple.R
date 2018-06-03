@@ -16,7 +16,7 @@ populate_project_simple <- function( batch = FALSE ) {
   project <- REDCapR::redcap_project$new(redcap_uri=uri, token=token)
   path_in_simple <- base::file.path(pkgload::inst(name="REDCapR"), "test-data/project-simple/simple-data.csv")
 
-  #Write the file to disk (necessary only when you wanted to change the data).  Don't uncomment; just run manually.
+  # Write the file to disk (necessary only when you wanted to change the data).  Don't uncomment; just run manually.
   # returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="raw")
   # utils::write.csv(returned_object$data, file="./inst/test-data/project-simple/simple-data.csv", row.names=FALSE)
   # returned_object_metadata <- redcap_metadata_read(redcap_uri=uri, token=token)
@@ -30,7 +30,7 @@ populate_project_simple <- function( batch = FALSE ) {
   dsToWrite$age <- NULL
   dsToWrite$bmi <- NULL
 
-  #Import the data into the REDCap project
+  # Import the data into the REDCap project
   testthat::expect_message(
     returned_object <- if( batch ) {
       REDCapR::redcap_write(        ds=dsToWrite, redcap_uri=uri, token=token, verbose=TRUE)

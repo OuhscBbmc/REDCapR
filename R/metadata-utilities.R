@@ -25,7 +25,6 @@
 #' @references See the official documentation for permissible characters in a checkbox label. *I'm bluffing here, because I don't know where this is located.  If you know, please tell me.*
 #'
 #' @examples
-#' library(REDCapR) #Load the package into the current R session.
 #' #The weird ranges are to avoid the pipe character; PCRE doesn't support character negation.
 #' pattern_boxes <- "(?<=\\A| \\| )(?<id>\\d{1,}), (?<label>[\x20-\x7B\x7D-\x7E]{1,})(?= \\| |\\Z)"
 #'

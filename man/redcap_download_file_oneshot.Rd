@@ -66,12 +66,12 @@ result_1 <- REDCapR::redcap_download_file_oneshot(
 base::unlink("mugshot-1.jpg")
 
 (full_name <- base::tempfile(pattern="mugshot", fileext=".jpg"))
-result_2 <- REDCapR::redcap_download_file_oneshot(
-  file_name    = full_name,
-  record       = record,
-  field        = field,
-  redcap_uri   = uri,
-  token        = token
+result_2   <- REDCapR::redcap_download_file_oneshot(
+  file_name     = full_name,
+  record        = record,
+  field         = field,
+  redcap_uri    = uri,
+  token         = token
 )
 base::unlink(full_name)
 

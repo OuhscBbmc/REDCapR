@@ -68,7 +68,7 @@
 #'
 #' #Return only records with IDs of 1 and 3
 #' desired_records_v1 <- c(1, 3)
-#' ds_some_rows_v1 <- redcap_read_oneshot_eav(
+#' ds_some_rows_v1    <- REDCapR::redcap_read_oneshot_eav(
 #'    redcap_uri = uri,
 #'    token      = token,
 #'    records    = desired_records_v1

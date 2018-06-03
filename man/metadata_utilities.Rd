@@ -38,7 +38,6 @@ The \code{\link[=checkbox_choices]{checkbox_choices()}} function is specialized,
 It returns a \code{\link[base:data.frame]{base::data.frame()}} with two columns, one for the numeric id and one for the text label.
 }
 \examples{
-library(REDCapR) #Load the package into the current R session.
 #The weird ranges are to avoid the pipe character; PCRE doesn't support character negation.
 pattern_boxes <- "(?<=\\\\A| \\\\| )(?<id>\\\\d{1,}), (?<label>[\\x20-\\x7B\\x7D-\\x7E]{1,})(?= \\\\| |\\\\Z)"
 
