@@ -68,9 +68,11 @@ test_that("missing simplify", {
   )
 })
 test_that("NA simplify", {
-  # expected_error_message <- "Assertion on 'simplify' failed: Contains missing values (element 1)."
+  # newer version of checkmate: "Assertion on 'simplify' failed: Contains missing values (element 1)."
+  # older version of checkmate: "Assertion on 'simplify' failed: Contains missing values."
   expect_error(
     constant("form_complete", simplify=NA_character_),
-    "^Assertion on 'simplify' failed: Contains missing values \\(element 1\\)\\.$"
+    "^Assertion on 'simplify' failed: Contains missing values.*$"
+
   )
 })
