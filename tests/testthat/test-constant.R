@@ -52,3 +52,25 @@ test_that("missing name", {
     expected_error_message
   )
 })
+
+test_that("bad simplify", {
+  # expected_error_message <- "Assertion on 'simplify' failed: Must be of type 'logical', not 'character'."
+  expect_error(
+    constant("form_complete", simplify="aa"),
+    "^Assertion on 'simplify' failed: Must be of type 'logical', not 'character'\\.$"
+  )
+})
+test_that("missing simplify", {
+  # expected_error_message <- "Assertion on 'simplify' failed: Must be of type 'logical', not 'NULL'. "
+  expect_error(
+    constant("form_complete", simplify=NULL),
+    "^Assertion on 'simplify' failed: Must be of type 'logical', not 'NULL'\\.$"
+  )
+})
+test_that("NA simplify", {
+  # expected_error_message <- "Assertion on 'simplify' failed: Contains missing values (element 1)."
+  expect_error(
+    constant("form_complete", simplify=NA_character_),
+    "^Assertion on 'simplify' failed: Contains missing values \\(element 1\\)\\.$"
+  )
+})

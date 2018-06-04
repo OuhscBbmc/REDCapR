@@ -46,6 +46,7 @@
 constant <- function( name, simplify=TRUE ) {
   checkmate::assert_character(name, any.missing=F, min.chars=1L)
   checkmate::assert_subset(name, names(constant_list), empty.ok=F)
+  checkmate::assert_logical(simplify, any.missing=F, len=1L)
 
   # return( constant_list[[name]] )
   sapply(
