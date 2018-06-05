@@ -48,13 +48,11 @@ Suggests:
     kableExtra,
     knitr (>= 1.18.0),
     odbc (>= 1.1.1),
-    pkgload,
     rmarkdown,
     sessioninfo,
     testthat (>= 0.9)
 Remotes:
-  github::tidyverse/readr,
-  github::r-lib/pkgload
+  github::tidyverse/readr
 License: GPL-2
 LazyData: TRUE
 VignetteBuilder: knitr
