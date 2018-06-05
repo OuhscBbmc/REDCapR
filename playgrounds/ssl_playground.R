@@ -1,4 +1,4 @@
-rm(list=ls(all=TRUE)) #Clear the memory of variables from previous run. 
+rm(list=ls(all=TRUE)) #Clear the memory of variables from previous run.
 ## This playground comes directly for @rparrish's thread at https://github.com/OuhscBbmc/REDCapR/issues/55
 
 # Credential for OU's test server
@@ -36,7 +36,7 @@ httr_raw <- httr::POST(
     url            = redcap_uri,
     body           = post_body,
     config         = config(cainfo=cert_location),
-    httr::verbose() 
+    httr::verbose()
 )
 httr_raw
 content(httr_raw, type = "text")
@@ -51,17 +51,17 @@ content(httr_raw, type = "text")
 #   rawOrLabel = 'raw',
 #   exportDataAccessGroups = 'true'
 # )
-# 
+#
 # # set_config(ssl_verifypeer=FALSE)
 # # config(ssl_verifypeer=FALSE)
 # # config()
-# 
+#
 # httr_raw <- httr::POST(
 #   url = redcap_uri,
 #   body = post_body#,
 #   # config = config(ssl_verifypeer=FALSE)
 #   # config = httr::config(ssl.verifypeer=F)
-#   #httr::verbose() 
+#   #httr::verbose()
 # )
 # httr_raw
 # content(httr_raw, type = "text")
@@ -69,7 +69,7 @@ content(httr_raw, type = "text")
 ##########################################################################
 library(RCurl)
 # SO post: http://stackoverflow.com/questions/15347233/ssl-certificate-failed-for-twitter-in-r
-file.exists(file.path(pkgload::inst("REDCapR"), "ssl-certs/mozilla-ca-root.crt"))
+file.exists(system.file("ssl-certs/mozilla-ca-root.crt", package="REDCapR"))
 
 rcurl_raw <- RCurl::postForm(
   uri = redcap_uri
@@ -79,7 +79,7 @@ rcurl_raw <- RCurl::postForm(
   , type = 'flat'
   , rawOrLabel = 'raw'
   , exportDataAccessGroups = 'true'
-  , .opts = RCurl::curlOptions(cainfo = file.path(pkgload::inst("REDCapR"), "ssl-certs/mozilla-ca-root.crt"))
+  , .opts = RCurl::curlOptions(cainfo = system.file("ssl-certs/mozilla-ca-root.crt", package="REDCapR"))
   # , .opts = RCurl::curlOptions(ssl.verifypeer=F, verbose=TRUE)
 )
 rcurl_raw

@@ -27,8 +27,7 @@ This ensures that a the function will always return an object of class \link[bas
 It guarantees the value can always be used in \code{\link[utils:compareVersion]{utils::compareVersion()}}.
 }
 \examples{
-library(REDCapR) #Load the package into the current R session.
 uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
 token    <- "9A81268476645C4E5F03428B8AC3AA7B"
-redcap_version(redcap_uri=uri, token=token)
+REDCapR::redcap_version(redcap_uri=uri, token=token)
 }

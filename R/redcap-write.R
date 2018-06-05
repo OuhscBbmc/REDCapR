@@ -45,7 +45,7 @@
 #' token         <- "D70F9ACD1EDD6F151C6EA78683944E98"
 #'
 #' # Read the dataset for the first time.
-#' result_read1  <- redcap_read_oneshot(redcap_uri=uri, token=token)
+#' result_read1  <- REDCapR::redcap_read_oneshot(redcap_uri=uri, token=token)
 #' ds1           <- result_read1$data
 #' ds1$telephone
 #' # The line above returns something like this (depending on its previous state).
@@ -59,7 +59,7 @@
 #' result_write  <- REDCapR::redcap_write(ds=ds1, redcap_uri=uri, token=token)
 #'
 #' # Read the dataset for the second time.
-#' result_read2  <- redcap_read_oneshot(redcap_uri=uri, token=token)
+#' result_read2  <- REDCapR::redcap_read_oneshot(redcap_uri=uri, token=token)
 #' ds2           <- result_read2$data
 #' ds2$telephone
 #' # The line above returns something like this.  Notice only the first three lines changed.

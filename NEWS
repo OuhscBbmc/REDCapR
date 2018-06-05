@@ -17,6 +17,7 @@ Minor New Features:
 * 'export_checkbox_labels' now supported (#186)
 * 'forms' now supported for `redcap_read()`, `redcap_read_oneshot()`, & `redcap_read_oneshot_eav()`(#206).  It was already implemented for `redcap_metadata_read()`.
 * If no records are affected, a zero-length *character* vector is returned (instead of sometimes a zero-length *numeric* vector)  (#212)
+* New function (called `constants()`) easily exposes REDCap-specific constants.  (#217)
 * `id_position` allows user to specify if the record_id isn't in the first position (#207).  However, we recommend that all REDCap projects keep this important variable first in the data dictionary.
 * Link to new secure Zenodo DOI resolver (katrinleinweber #191)
 * parameters in `redcap_read()` and `redcap_read_oneshot()` are more consistent with the order in raw REDCap API. (#204)
@@ -30,6 +31,7 @@ Modified Internals:
 * `data.table::rbindlist()` replaced by `dplyr::bind_rows()`
 * the checkmate package inspects most function parameters now (instead of `testit::assert()` and `base:stop()` ) (#190 & #208).
 * `collapse_vector()` is refactored and tested (#209)
+* remove dependency on `pkgload` package (#218)
 
 Deprecated Features:
 * `retrieve_token_mssql()`, because `retrieve_credential_mssql()` is more general and more useful.

@@ -44,7 +44,7 @@ d <- data.frame(
   flag_logical   = c(TRUE, TRUE, FALSE, TRUE),
   flag_Uppercase = c(4, 6, 8, 2)
 )
-validate_for_write(d = d)
+REDCapR::validate_for_write(d = d)
 }
 \references{
 The official documentation can be found on the 'API Help Page' and 'API Examples' pages

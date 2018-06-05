@@ -38,7 +38,6 @@ The \code{\link[=checkbox_choices]{checkbox_choices()}} function is specialized,
 It returns a \code{\link[base:data.frame]{base::data.frame()}} with two columns, one for the numeric id and one for the text label.
 }
 \examples{
-library(REDCapR) #Load the package into the current R session.
 #The weird ranges are to avoid the pipe character; PCRE doesn't support character negation.
 pattern_boxes <- "(?<=\\\\A| \\\\| )(?<id>\\\\d{1,}), (?<label>[\\x20-\\x7B\\x7D-\\x7E]{1,})(?= \\\\| |\\\\Z)"
 
@@ -51,10 +50,10 @@ choices_1 <- paste0(
   "6, Unknown / Not Reported")
 
 #This calls the general function, and requires the correct regex pattern.
-regex_named_captures(pattern=pattern_boxes, text=choices_1)
+REDCapR::regex_named_captures(pattern=pattern_boxes, text=choices_1)
 
 #This function is designed specifically for the checkbox values.
-checkbox_choices(select_choices=choices_1)
+REDCapR::checkbox_choices(select_choices=choices_1)
 
 \dontrun{
 uri         <- "https://bbmc.ouhsc.edu/redcap/api/"
@@ -63,8 +62,13 @@ token       <- "9A81268476645C4E5F03428B8AC3AA7B"
 ds_metadata <- redcap_metadata_read(redcap_uri=uri, token=token)$data
 choices_2   <- ds_metadata[ds_metadata$field_name=="race", "select_choices_or_calculations"]
 
-regex_named_captures(pattern=pattern_boxes, text=choices_2)
+REDCapR::regex_named_captures(pattern=pattern_boxes, text=choices_2)
 }
+
+path_3         <- system.file(package="REDCapR", "test-data/project-simple/simple-metadata.csv")
+ds_metadata_3  <- read.csv(path_3, stringsAsFactors=FALSE)
+choices_3      <- ds_metadata_3[ds_metadata_3$field_name=="race", "select_choices_or_calculations"]
+REDCapR::regex_named_captures(pattern=pattern_boxes, text=choices_3)
 }
 \references{
 See the official documentation for permissible characters in a checkbox label. \emph{I'm bluffing here, because I don't know where this is located.  If you know, please tell me.}

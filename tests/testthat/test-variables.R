@@ -2,7 +2,7 @@ library(testthat)
 context("Variables")
 
 credential <- REDCapR::retrieve_credential_local(
-  path_credential = base::file.path(pkgload::inst(name="REDCapR"), "misc/example.credentials"),
+  path_credential = system.file("misc/example.credentials", package="REDCapR"),
   project_id      = 153
 )
 

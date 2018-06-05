@@ -1,5 +1,8 @@
+# These functions are not exported.
 
 populate_project_simple <- function( batch = FALSE ) {
+  checkmate::assert_logical(batch, any.missing=F, len=1)
+
   if( !requireNamespace("testthat") ) stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.")
 
   #Declare the server & user information
@@ -11,9 +14,9 @@ populate_project_simple <- function( batch = FALSE ) {
   token <- "D70F9ACD1EDD6F151C6EA78683944E98" #For `UnitTestPhiFree` account and the simple project (pid 213)
 
   project <- REDCapR::redcap_project$new(redcap_uri=uri, token=token)
-  path_in_simple <- base::file.path(pkgload::inst(name="REDCapR"), "test-data/project-simple/simple-data.csv")
+  path_in_simple <- system.file("test-data/project-simple/simple-data.csv", package="REDCapR")
 
-  #Write the file to disk (necessary only when you wanted to change the data).  Don't uncomment; just run manually.
+  # Write the file to disk (necessary only when you wanted to change the data).  Don't uncomment; just run manually.
   # returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="raw")
   # utils::write.csv(returned_object$data, file="./inst/test-data/project-simple/simple-data.csv", row.names=FALSE)
   # returned_object_metadata <- redcap_metadata_read(redcap_uri=uri, token=token)
@@ -27,10 +30,10 @@ populate_project_simple <- function( batch = FALSE ) {
   dsToWrite$age <- NULL
   dsToWrite$bmi <- NULL
 
-  #Import the data into the REDCap project
+  # Import the data into the REDCap project
   testthat::expect_message(
     returned_object <- if( batch ) {
-      REDCapR::redcap_write(ds=dsToWrite, redcap_uri=uri, token=token, verbose=TRUE)
+      REDCapR::redcap_write(        ds=dsToWrite, redcap_uri=uri, token=token, verbose=TRUE)
     } else {
       REDCapR::redcap_write_oneshot(ds=dsToWrite, redcap_uri=uri, token=token, verbose=TRUE)
     }
@@ -62,6 +65,9 @@ clear_project_simple <- function( verbose = TRUE ) {
 }
 
 clean_start_simple <- function( batch = FALSE, delay_in_seconds = 1 ) {
+  checkmate::assert_logical( batch            , any.missing=F, len=1)
+  checkmate::assert_numeric( delay_in_seconds , any.missing=F, len=1, lower=0)
+
   if( !requireNamespace("testthat") ) stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.")
   testthat::expect_message(
     clear_result <- clear_project_simple(),
@@ -81,8 +87,11 @@ clean_start_simple <- function( batch = FALSE, delay_in_seconds = 1 ) {
 }
 
 upload_file_simple <- function( redcap_uri, token=token ) {
+  checkmate::assert_character(redcap_uri, any.missing=F, len=1, min.chars = 5)
+  checkmate::assert_character(token     , any.missing=F, len=1, pattern="^\\w{32}$")
+
   records <- 1:5
-  file_paths <- base::file.path(pkgload::inst(name="REDCapR"), paste0("test-data/mugshot-", records, ".jpg"))
+  file_paths <- system.file(paste0("test-data/mugshot-", records, ".jpg"), package="REDCapR")
 
   field <- "mugshot"
   event <- "" # only for longitudinal events

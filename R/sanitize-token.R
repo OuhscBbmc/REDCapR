@@ -15,11 +15,10 @@
 #' @author Hao Zhu, Benjamin Nutter, Will Beasley
 #'
 #' @examples
-#' library(REDCapR) #Load the package into the current R session.
 #' secret_token_1 <- "12345678901234567890123456ABCDEF"
 #' secret_token_2 <- "12345678901234567890123456ABCDEF\n"
-#' sanitize_token(secret_token_1)
-#' sanitize_token(secret_token_2)
+#' REDCapR::sanitize_token(secret_token_1)
+#' REDCapR::sanitize_token(secret_token_2)
 
 sanitize_token <- function( token ) {
   pattern <- "^([0-9A-F]{32})(?:\\n)?$"

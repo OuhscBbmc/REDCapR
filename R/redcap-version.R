@@ -15,10 +15,9 @@
 #'
 #' @return A [utils::packageVersion].
 #' @examples
-#' library(REDCapR) #Load the package into the current R session.
 #' uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token    <- "9A81268476645C4E5F03428B8AC3AA7B"
-#' redcap_version(redcap_uri=uri, token=token)
+#' REDCapR::redcap_version(redcap_uri=uri, token=token)
 
 redcap_version <- function( redcap_uri, token, verbose=TRUE, config_options=NULL ) {
   version_error <- base::package_version("0.0.0")

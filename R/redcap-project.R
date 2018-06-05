@@ -12,12 +12,11 @@
 #' @field token token The user-specific string that serves as the password for a project.  Required.
 #'
 #' @examples
-#' library(REDCapR) #Load the package into the current R session.
-#' uri <- "https://bbmc.ouhsc.edu/redcap/api/"
-#' token <- "D70F9ACD1EDD6F151C6EA78683944E98"
+#' uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
+#' token   <- "D70F9ACD1EDD6F151C6EA78683944E98"
 #' \dontrun{
-#' project <- redcap_project$new(redcap_uri=uri, token=token)
-#' ds_all <- project$read()
+#' project <- REDCapR::redcap_project$new(redcap_uri=uri, token=token)
+#' ds_all  <- project$read()
 #'
 #' #Demonstrate how repeated calls are more concise when the token and url aren't always passed.
 #' ds_three_columns <- project$read(fields=c("record_id", "sex", "height"))$data

@@ -2,7 +2,7 @@ library(testthat)
 context("Read Batch - Longitudinal")
 
 credential <- REDCapR::retrieve_credential_local(
-  path_credential = base::file.path(pkgload::inst(name="REDCapR"), "misc/example.credentials"),
+  path_credential = system.file("misc/example.credentials", package="REDCapR"),
   project_id      = 212
 )
 project <- redcap_project$new(redcap_uri=credential$redcap_uri, token=credential$token)
@@ -32,9 +32,10 @@ test_that("Smoke Test", {
   )
 })
 
-test_that("SO example for data.frame retreival", {
+test_that("SO example for data.frame retrieval", {
   file_name <- "dummy.rds"
-  path_qualified <- base::file.path(pkgload::inst(name="REDCapR"), directory_relative, file_name)
+  path_qualified <- system.file(directory_relative, file_name, package="REDCapR")
+
 
   actual <- data.frame(a=1:5, b=6:10) # saveRDS(actual, file.path("./inst", directory_relative, file_name))
   expect_true(file.exists(path_qualified), "The saved data.frame should be retrieved from disk.")
@@ -46,7 +47,7 @@ test_that("All Records -Default", {
   testthat::skip_on_cran()
 
   file_name <- "default.rds"
-  path_qualified <- base::file.path(pkgload::inst(name="REDCapR"), directory_relative, file_name)
+  path_qualified <- system.file(directory_relative, file_name, package="REDCapR")
 
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
@@ -88,7 +89,7 @@ test_that("filter - numeric", {
   testthat::skip_on_cran()
 
   file_name <- "filter-bmi.rds"
-  path_qualified <- base::file.path(pkgload::inst(name="REDCapR"), directory_relative, file_name)
+  path_qualified <- system.file(directory_relative, file_name, package="REDCapR")
 
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   filter <- "[bmi] > 25"
@@ -129,7 +130,7 @@ test_that("filter - character", {
   testthat::skip_on_cran()
 
   file_name <- "filter-email.rds"
-  path_qualified <- base::file.path(pkgload::inst(name="REDCapR"), directory_relative, file_name)
+  path_qualified <- system.file(directory_relative, file_name, package="REDCapR")
 
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   filter <- "[email] = 'zlehnox@gmail.com'"

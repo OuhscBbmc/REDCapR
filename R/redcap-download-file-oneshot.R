@@ -43,7 +43,7 @@
 #' field   <- "mugshot"
 #' # event <- "" # only for longitudinal events
 #'
-#' result_1 <- redcap_download_file_oneshot(
+#' result_1 <- REDCapR::redcap_download_file_oneshot(
 #'   record        = record,
 #'   field         = field,
 #'   redcap_uri    = uri,
@@ -52,17 +52,17 @@
 #' base::unlink("mugshot-1.jpg")
 #'
 #' (full_name <- base::tempfile(pattern="mugshot", fileext=".jpg"))
-#' result_2 <- redcap_download_file_oneshot(
-#'   file_name    = full_name,
-#'   record       = record,
-#'   field        = field,
-#'   redcap_uri   = uri,
-#'   token        = token
+#' result_2   <- REDCapR::redcap_download_file_oneshot(
+#'   file_name     = full_name,
+#'   record        = record,
+#'   field         = field,
+#'   redcap_uri    = uri,
+#'   token         = token
 #' )
 #' base::unlink(full_name)
 #'
 #' (relative_name <- "ssss.jpg")
-#' result_3 <- redcap_download_file_oneshot(
+#' result_3 <- REDCapR::redcap_download_file_oneshot(
 #'   file_name    = relative_name,
 #'   record       = record,
 #'   field        = field,

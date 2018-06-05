@@ -55,11 +55,10 @@ if your institution is using something other than SQL Server, and
 would like help adapting this approach to your infrastructure.
 }
 \examples{
-library(REDCapR) #Load the package into the current R session.
 # ---- Local File Example ----------------------------
 path <- system.file("misc/example.credentials", package="REDCapR")
-(p1  <- retrieve_credential_local(path, 153L))
-(p2  <- retrieve_credential_local(path, 212L))
+(p1  <- REDCapR::retrieve_credential_local(path, 153L))
+(p2  <- REDCapR::retrieve_credential_local(path, 212L))
 }
 \author{
 Will Beasley

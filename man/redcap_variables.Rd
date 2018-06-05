@@ -38,10 +38,9 @@ calculated, file, and descriptive.  All variables returned are writable/uploadab
 }
 \examples{
 \dontrun{
-library(REDCapR) #Load the package into the current R session.
-uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
-token    <- "9A81268476645C4E5F03428B8AC3AA7B"
-ds_variable <- redcap_variables(redcap_uri=uri, token=token)$data
+uri         <- "https://bbmc.ouhsc.edu/redcap/api/"
+token       <- "9A81268476645C4E5F03428B8AC3AA7B"
+ds_variable <- REDCapR::redcap_variables(redcap_uri=uri, token=token)$data
 }
 
 }
