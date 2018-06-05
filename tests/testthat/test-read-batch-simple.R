@@ -2,7 +2,7 @@ library(testthat)
 context("Read Batch - Simple")
 
 credential <- REDCapR::retrieve_credential_local(
-  path_credential = base::file.path(pkgload::inst(name="REDCapR"), "misc/example.credentials"),
+  path_credential = system.file("misc/example.credentials", package="REDCapR"),
   project_id      = 153
 )
 project <- redcap_project$new(redcap_uri=credential$redcap_uri, token=credential$token)

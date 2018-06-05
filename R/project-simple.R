@@ -14,7 +14,7 @@ populate_project_simple <- function( batch = FALSE ) {
   token <- "D70F9ACD1EDD6F151C6EA78683944E98" #For `UnitTestPhiFree` account and the simple project (pid 213)
 
   project <- REDCapR::redcap_project$new(redcap_uri=uri, token=token)
-  path_in_simple <- base::file.path(pkgload::inst(name="REDCapR"), "test-data/project-simple/simple-data.csv")
+  path_in_simple <- system.file("test-data/project-simple/simple-data.csv", package="REDCapR")
 
   # Write the file to disk (necessary only when you wanted to change the data).  Don't uncomment; just run manually.
   # returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="raw")
@@ -91,7 +91,7 @@ upload_file_simple <- function( redcap_uri, token=token ) {
   checkmate::assert_character(token     , any.missing=F, len=1, pattern="^\\w{32}$")
 
   records <- 1:5
-  file_paths <- base::file.path(pkgload::inst(name="REDCapR"), paste0("test-data/mugshot-", records, ".jpg"))
+  file_paths <- system.file(paste0("test-data/mugshot-", records, ".jpg"), package="REDCapR")
 
   field <- "mugshot"
   event <- "" # only for longitudinal events

@@ -47,10 +47,7 @@ knit_print.data.frame = function(x, ...) {
     asis_output()
   
 }
-# options(markdown.HTML.header = system.file("misc", "vignette.css", package = "knitr"))
-# options(markdown.HTML.header = system.file("misc", "vignette.css", package = "REDCapR"))
-# options(markdown.HTML.header = file.path(pkgload::inst("REDCapR"), "misc", "vignette.css"))
-
+# options(markdown.HTML.header = system.file("misc/vignette.css", package = "REDCapR"))
 # options(width=120) #So the output is 50% wider than the default.
 ```
 
