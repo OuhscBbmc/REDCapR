@@ -17,21 +17,46 @@ addons:
 r_github_packages:
   - jimhester/covr
   - tidyverse/readr
-# - zozlak/RODBCext
 # - tidyverse/dplyr
 # - jeroen/curl
 # - r-lib/httr
-# - hadley/testthat
 
 after_success:
   - Rscript -e 'covr::coveralls()'
 
 # apt_packages:
 #   - r-cran-rodbc
-#   - unixodbc-dev
 
-# # Disabling the checks is temporary and ideally removed soon.
-# # See https://github.com/OuhscBbmc/REDCapR/issues/188 and https://github.com/travis-ci/travis-ci/issues/5996
-# env:
-#   global:
-#     - _R_CHECK_FORCE_SUGGESTS_=FALSE
+# The following SQL Server setup is copied from https://github.com/agstudy/rsqlserver/blob/master/.travis.yml
+
+services:
+  - docker
+
+before_install:
+  - docker pull microsoft/mssql-server-linux:latest
+  - docker network create sqlserver_net
+  - |
+    docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=Password12!' \
+      --network sqlserver_net -p 1433:1433 --name mssqldb -d microsoft/mssql-server-linux
+  - sleep 90
+  - docker cp inst/setup.sql mssqldb:.
+  - |
+    docker exec -t mssqldb /opt/mssql-tools/bin/sqlcmd \
+      -S localhost -U SA -P 'Password12!' \
+      -i setup.sql
+
+install:
+  - docker build -t rsqlserver -f .ci/Dockerfile .
+
+script:
+  - |
+    docker run -e CI=true -e TRAVIS=true -e CONTINUOUS_INTEGRATION=true \
+      -t --network sqlserver_net --name pkgcheck rsqlserver Rscript \
+        -e 'devtools::install_dev_deps()' \
+        -e 'devtools::check(document = FALSE, check_dir = ".")'
+  - docker cp pkgcheck:/usr/local/R/rsqlserver.Rcheck/00check.log .
+  - cat 00check.log
+  - if cat 00check.log | grep -q ERROR ; then exit 1; fi
+  # Choose to fail if warnings are present in R CMD CHECK (comment this out for now)
+  #- if cat 00check.log | grep -q WARNING ; then exit 1; fi
+  - exit 0
