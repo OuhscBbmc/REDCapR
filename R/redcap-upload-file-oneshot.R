@@ -95,7 +95,8 @@ redcap_upload_file_oneshot <- function(
     returnFormat   = 'csv'
   )
 
-  if( nchar(event ) > 0 ) post_body$event  <- event
+  if( nchar(event ) > 0 )
+    post_body$event  <- event
 
   # This is the important line that communicates with the REDCap server.
   kernel <- kernel_api(redcap_uri, post_body, config_options)

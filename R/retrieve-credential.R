@@ -136,8 +136,10 @@ retrieve_credential_mssql <- function(
   channel                  = NULL
 ) {
 
-  if( !requireNamespace("DBI")  ) stop("The function REDCapR::retrieve_credential_mssql() cannot run if the `DBI` package is not installed.  Please install it and try again.")
-  if( !requireNamespace("odbc") ) stop("The function REDCapR::retrieve_credential_mssql() cannot run if the `odbc` package is not installed.  Please install it and try again.")
+  if( !requireNamespace("DBI")  )
+    stop("The function REDCapR::retrieve_credential_mssql() cannot run if the `DBI` package is not installed.  Please install it and try again.")
+  if( !requireNamespace("odbc") )
+    stop("The function REDCapR::retrieve_credential_mssql() cannot run if the `odbc` package is not installed.  Please install it and try again.")
 
   regex_pattern_1 <- "^\\d+$"
   regex_pattern_2 <- "^\\[*[a-zA-Z0-9_]+\\]*$"
