@@ -150,7 +150,7 @@ retrieve_credential_mssql <- function(
   if( !(base::missing(dsn) | base::is.null(dsn)) & !(class(dsn) %in% c("character")) )
     stop("The `dsn` parameter be a character type, or missing or NULL.  Either enclose in quotes, or cast with `as.character()`.")
   # if( !(base::missing(channel) | base::is.null(channel))  & !inherits(channel, "DBIConnection") )
-  if( !(base::missing(channel) | base::is.null(channel)) & !inherits(channel, "DBIConnection") )
+  if( !(base::missing(channel) | base::is.null(channel)) & !methods::is(channel, "DBIConnection") )
     stop("The `channel` parameter be a `DBIConnection` connection type, or NULL.")
 
   if( length(project_id) != 1L )
