@@ -23,5 +23,5 @@ url <- sprintf("Server=%s;Database=%s;User Id=%s;Password=%s;",
                server, dbname, user, password)
 
 get_con <- function(){
-  dbConnect("SqlServer", url = url)
+  DBI::dbConnect("SqlServer", url = url)
 }
