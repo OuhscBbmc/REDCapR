@@ -9,7 +9,8 @@ Description: Encapsulates functions to streamline calls from R to the REDCap
 Version: 0.9.10.9001
 Date: 2018-05-26
 Authors@R: c(person("Will", "Beasley", role = c("aut", "cre"), email =
-    "wibeasley@hotmail.com"), person("David", "Bard", role = "ctb"),
+    "wibeasley@hotmail.com", comment = c(ORCID = "0000-0002-5613-5006")),
+    person("David", "Bard", role = "ctb"),
     person("Thomas", "Wilson", role = "ctb"), person(given="John J",
     family="Aponte", role = "ctb", email="john.aponte@isglobal.org"),
     person("Rollie", "Parrish", role = "ctb", email =
