@@ -15,6 +15,7 @@ test_results_checked <- devtools::test(filter = "retrieve-credential-mssql$")
 # testthat::test_dir("./tests/")
 test_results_not_checked <- testthat::test_dir("./tests/manual/")
 devtools::build_vignettes()
+pkgdown::build_site()
 
 # devtools::check(force_suggests = FALSE)
 # devtools::build_win(version="R-devel") #CRAN submission policies encourage the development version
