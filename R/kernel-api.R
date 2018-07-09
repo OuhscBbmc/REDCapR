@@ -1,3 +1,33 @@
+#' @name kernel_api
+#' @title REDCapR internal function for calling the REDCap API
+#'
+#' @description This function is used by other functions to read and write values
+#'
+#' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
+#' @param post_body List of contents expected by the REDCap API.  Required.
+#' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below.  Optional.
+#'
+#' @details If the API call is unsuccessful, a value of `base::package_version("0.0.0")` will be returned.
+#' This ensures that a the function will always return an object of class [base::package_version].
+#' It guarantees the value can always be used in [utils::compareVersion()].
+#'
+#' @return A [utils::packageVersion].
+#' @examples
+#' config_options <- NULL
+#' uri            <- "https://bbmc.ouhsc.edu/redcap/api/"
+#' token          <- "9A81268476645C4E5F03428B8AC3AA7B"
+#' post_body      <- list(
+#'   token    = token,
+#'   content  = 'project',
+#'   format   = 'csv'
+#' )
+#' kernel <- REDCapR:::kernel_api(uri, post_body, config_options)
+#'
+#' # Consume the results in a few different ways.
+#' kernel$result
+#' read.csv(text=kernel$raw_text, stringsAsFactors=FALSE)
+#' as.list(read.csv(text=kernel$raw_text, stringsAsFactors=FALSE))
+
 kernel_api <- function( redcap_uri, post_body, config_options ) {
 
   start_time <- Sys.time()
@@ -14,7 +44,7 @@ kernel_api <- function( redcap_uri, post_body, config_options ) {
   raw_text              <- gsub("\r\n", "\n", raw_text) # Convert all line-endings to linux-style
   elapsed_seconds       <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
 
-  # example: raw_text <- "The hostname (redcap-db.hsc.net.ou.edu) / username (redcapsql) / password (XXXXXX) combination could not connect to the MySQL server. \r\n\t\tPlease check their values."
+  # example: raw_text <- "The hostname (redcap-db.hsc.net.ou.edreu) / username (redcapsql) / password (XXXXXX) combination could not connect to the MySQL server. \r\n\t\tPlease check their values."
   regex_cannot_connect  <- "^The hostname \\((.+)\\) / username \\((.+)\\) / password \\((.+)\\) combination could not connect.+"
   regex_empty           <- "^\\s+$"
 

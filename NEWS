@@ -27,7 +27,7 @@ Modified Internals:
 * All interaction with the REDCap server goes through the new `kernal_api()` function, which uses the 'httr' and 'curl' packages underneath.  Until now, each function called those packages directly. (#213)
 * When converting REDCap's CSV to R's data.frame, `readr::read_csv()` is used instead of `utils::read.csv()` (Issue #127).
 * updated to readr 1.2.0 (#200).  This changed how some data variables were assigned a data types
-* uses `odbc` package to retrieve credentials from the token server.  Remove RODBC and RODBCext (#188)
+* uses `odbc` package to retrieve credentials from the token server.  Remove RODBC and RODBCext (#188).  Thanks to @krlmlr for error checking advice in https://stackoverflow.com/a/50419403/1082435.
 * `data.table::rbindlist()` replaced by `dplyr::bind_rows()`
 * the checkmate package inspects most function parameters now (instead of `testit::assert()` and `base:stop()` ) (#190 & #208).
 * `collapse_vector()` is refactored and tested (#209)
