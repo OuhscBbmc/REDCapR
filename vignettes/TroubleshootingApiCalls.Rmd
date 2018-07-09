@@ -391,4 +391,4 @@ Other good resources
 Document Info
 ------------------------------------------------------------------
 
-This document is primarily based on REDCap version 6.0.2 and was last updated 2015-02-21.  A development version of the document is available on GitHub: https://cdn.rawgit.com/OuhscBbmc/REDCapR/dev/inst/doc/TroubleshootingApiCalls.html.
+This document is primarily based on REDCap version 6.0.2 and was last updated 2018-07-09.  A development version of the document is available on GitHub: https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html.
