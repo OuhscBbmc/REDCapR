@@ -22,6 +22,7 @@ Minor New Features:
 * Link to new secure Zenodo DOI resolver (katrinleinweber #191)
 * parameters in `redcap_read()` and `redcap_read_oneshot()` are more consistent with the order in raw REDCap API. (#204)
 * When the `verbose` parameter is NULL, then the value from getOption("verbose") is used. (#215)
+* Documentation website constructed with pkgdown (#224).
 
 Modified Internals:
 * All interaction with the REDCap server goes through the new `kernal_api()` function, which uses the 'httr' and 'curl' packages underneath.  Until now, each function called those packages directly. (#213)
