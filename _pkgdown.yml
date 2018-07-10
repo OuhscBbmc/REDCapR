@@ -1,3 +1,5 @@
+url: https://ouhscbbmc.github.io/REDCapR
+
 template:
   params:
     bootswatch: simplex
@@ -6,6 +8,9 @@ home:
   links:
 #  - text: Ask a question
 #    href: http://discourse.mc-stan.org/
+
+development:
+  mode: release
 
 navbar:
   title: "REDCapR"
