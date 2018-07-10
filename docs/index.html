@@ -150,44 +150,11 @@ ds_some_fields &lt;-<span class="st"> </span><span class="kw"><a href="reference
 <div id="download-and-installation-instructions" class="section level3">
 <h3 class="hasAnchor">
 <a href="#download-and-installation-instructions" class="anchor"></a>Download and Installation Instructions</h3>
-<p>Applies to Windows and Linux.</p>
-<table style="width:47%;" class="table">
-<colgroup>
-<col width="8%">
-<col width="9%">
-<col width="9%">
-<col width="9%">
-<col width="9%">
-</colgroup>
-<thead><tr class="header">
-<th align="left"><a href="https://cran.r-project.org/">CRAN</a></th>
-<th align="center"><a href="https://cran.r-project.org/package=REDCapR">Version</a></th>
-<th align="center"><a href="http://cranlogs.r-pkg.org/">Rate</a></th>
-<th align="center"><a href="https://zenodo.org/search?ln=en&amp;p=redcapr">Zenodo</a></th>
-<th align="center"><a href="https://www.rdocumentation.org/">RDocumentation</a></th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left"><a href="https://cran.r-project.org/package=REDCapR">Latest</a></td>
-<td align="center"><a href="https://cran.r-project.org/package=REDCapR"><img src="http://www.r-pkg.org/badges/version/REDCapR" alt="CRAN_Status_Badge"></a></td>
-<td align="center"><img src="http://cranlogs.r-pkg.org/badges/REDCapR" alt="CRANPace"></td>
-<td align="center"><a href="https://doi.org/10.5281/zenodo.61990"><img src="https://zenodo.org/badge/doi/10.5281/zenodo.61990.svg" alt="DOI"></a></td>
-<td align="center"><a href="http://www.rdocumentation.org/packages/REDCapR"><img src="http://www.rdocumentation.org/badges/version/REDCapR" alt="Rdoc"></a></td>
-</tr>
-<tr class="even">
-<td align="left"></td>
-<td align="center"><em>Latest CRAN version</em></td>
-<td align="center"><em>CRAN Downloads</em></td>
-<td align="center"><em>Independently-hosted Archive</em></td>
-<td align="center"><em>HTML Documentation</em></td>
-</tr>
-</tbody>
-</table>
 <p>The <em>release</em> version of REDCapR can be installed from <a href="https://cran.r-project.org/package=REDCapR">CRAN</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"REDCapR"</span>)</code></pre></div>
-<p>The <em>development</em> version of REDCapR can be installed from <a href="https://github.com/OuhscBbmc/REDCapR">GitHub</a> after installing the <code>remotes</code> package.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"remotes"</span>) <span class="co"># Run this line if the 'remotes' package isn't installed already.</span>
-remotes<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="dt">repo=</span><span class="st">"OuhscBbmc/REDCapR"</span>)</code></pre></div>
+<p>The <em>development</em> version of REDCapR can be installed from <a href="https://github.com/OuhscBbmc/REDCapR">GitHub</a> after installing the <code>devtools</code> package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"devtools"</span>) <span class="co"># Run this line if the 'devtools' package isn't installed already.</span>
+devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="dt">repo=</span><span class="st">"OuhscBbmc/REDCapR"</span>)</code></pre></div>
 </div>
 <div id="collaborative-development" class="section level3">
 <h3 class="hasAnchor">
@@ -208,6 +175,34 @@ remotes<span class="op">::</span><span class="kw"><a href="http://www.rdocumenta
 <li><p>Additional Institutional Support from OUHSC <a href="https://www.oumedicine.com/department-of-pediatrics">Dept of Pediatrics</a>; 2013-2017.</p></li>
 </ul>
 <p>(So far) the primary developers of REDCapR are the external evaluators for <a href="https://www.ok.gov/health/Community_&amp;_Family_Health/Family_Support_and_Prevention_Service/MIECHV_Program_-_Federal_Home_Visiting_Grant/MIECHV_Program_Resources/index.html">Oklahoma’s MIECHV</a> program. See the preliminary CQI reports (many of which use REDCapR) at <a href="http://ouhscbbmc.github.io/MReportingPublic/" class="uri">http://ouhscbbmc.github.io/MReportingPublic/</a>.</p>
+</div>
+<div id="cran-characteristics" class="section level3">
+<h3 class="hasAnchor">
+<a href="#cran-characteristics" class="anchor"></a>CRAN Characteristics</h3>
+<table class="table">
+<thead><tr class="header">
+<th align="left">CRAN</th>
+<th align="left">Characteristic</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="https://cran.r-project.org/package=REDCapR">Version</a></td>
+<td align="left"><a href="https://cran.r-project.org/package=REDCapR"><img src="http://www.r-pkg.org/badges/version/REDCapR" alt="CRAN_Status_Badge"></a></td>
+</tr>
+<tr class="even">
+<td align="left"><a href="http://cranlogs.r-pkg.org/">Download Rate</a></td>
+<td align="left"><img src="http://cranlogs.r-pkg.org/badges/REDCapR" alt="CRANPace"></td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://zenodo.org/search?ln=en&amp;p=redcapr">Zenodo Archive</a></td>
+<td align="left"><a href="https://doi.org/10.5281/zenodo.61990"><img src="https://zenodo.org/badge/doi/10.5281/zenodo.61990.svg" alt="DOI"></a></td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://www.rdocumentation.org/">RDocumentation</a></td>
+<td align="left"><a href="http://www.rdocumentation.org/packages/REDCapR"><img src="http://www.rdocumentation.org/badges/version/REDCapR" alt="Rdoc"></a></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
