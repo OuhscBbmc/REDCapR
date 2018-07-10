@@ -3,6 +3,9 @@ url: https://ouhscbbmc.github.io/REDCapR
 template:
   params:
     bootswatch: simplex
+    docsearch:
+      api_key: d672935e2d904316d6ee40239317764e
+      index_name: redcapr
 
 home:
   links:

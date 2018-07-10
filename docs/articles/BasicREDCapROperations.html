@@ -9,7 +9,9 @@
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/simplex/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Basic REDCapR Operations">
+<script src="../pkgdown.js"></script><!-- docsearch --><script src="../docsearch.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css">
+<link href="../docsearch.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Basic REDCapR Operations">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -74,7 +76,13 @@
   </a>
 </li>
       </ul>
+<form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
 </div>
+      </form>
+      
+    </div>
 <!--/.nav-collapse -->
   </div>
 <!--/.container -->
@@ -116,9 +124,9 @@ token &lt;-<span class="st"> "9A81268476645C4E5F03428B8AC3AA7B"</span> <span cla
 <p>If no information is passed about the desired records or fields, then the entire data set is returned. Only two parameters are required, <code>redcap_uri</code> and <code>token</code>. Unless the <code>verbose</code> parameter is set to <code>FALSE</code>, a message will be printed on the R console with the number of records and fields returned.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return all records and all variables.</span>
 ds_all_rows_all_fields &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read.html">redcap_read</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)<span class="op">$</span>data</code></pre></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.9 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2018-07-10 16:52:40.</code></pre>
+<pre><code>Starting to read 5 records  at 2018-07-10 16:59:08.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_all_rows_all_fields <span class="co">#Inspect the returned dataset</span></code></pre></div>
@@ -171,9 +179,9 @@ ds_some_rows_v1 &lt;-<span class="st"> </span><span class="kw"><a href="../refer
    <span class="dt">token      =</span> token, 
    <span class="dt">records    =</span> desired_records_v1
 )<span class="op">$</span>data</code></pre></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2018-07-10 16:52:42.</code></pre>
+<pre><code>Starting to read 2 records  at 2018-07-10 16:59:10.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return only records with IDs of 1 and 3 (alternate way)</span>
@@ -185,7 +193,7 @@ ds_some_rows_v2 &lt;-<span class="st"> </span><span class="kw"><a href="../refer
 )<span class="op">$</span>data</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2018-07-10 16:52:43.</code></pre>
+<pre><code>Starting to read 2 records  at 2018-07-10 16:59:11.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_rows_v2 <span class="co">#Inspect the returned dataset</span></code></pre></div>
@@ -216,9 +224,9 @@ ds_some_fields_v1 &lt;-<span class="st"> </span><span class="kw"><a href="../ref
    <span class="dt">token      =</span> token, 
    <span class="dt">fields     =</span> desired_fields_v1
 )<span class="op">$</span>data</code></pre></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2018-07-10 16:52:44.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2018-07-10 16:59:12.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return only the fields record_id, name_first, and age (alternate way)</span>
@@ -229,8 +237,8 @@ ds_some_fields_v2 &lt;-<span class="st"> </span><span class="kw"><a href="../ref
    <span class="dt">fields_collapsed =</span> desired_fields_v2
 )<span class="op">$</span>data</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2018-07-10 16:52:45.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2018-07-10 16:59:13.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_fields_v2 <span class="co">#Inspect the returned dataset</span></code></pre></div>
@@ -255,7 +263,7 @@ ds_some_fields_v3 &lt;-<span class="st"> </span><span class="kw"><a href="../ref
 )<span class="op">$</span>data</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2018-07-10 16:52:47.</code></pre>
+<pre><code>Starting to read 5 records  at 2018-07-10 16:59:15.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_fields_v3 <span class="co">#Examine the these three variables.</span></code></pre></div>
@@ -283,9 +291,9 @@ ds_some_rows_v3 &lt;-<span class="st"> </span><span class="kw"><a href="../refer
 )<span class="op">$</span>data</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2018-07-10 16:52:48.</code></pre>
+<pre><code>Starting to read 2 records  at 2018-07-10 16:59:16.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).</code></pre>
-<pre><code>2 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_rows_v3 <span class="co">#Examine the results.</span></code></pre></div>
 <pre><code>  record_id name_first name_last                            address
 1         3     Marcus      Wood     243 Hill St.\nGuthrie OK 73402
@@ -326,10 +334,10 @@ all_information &lt;-<span class="st"> </span><span class="kw"><a href="../refer
    <span class="dt">fields     =</span> desired_fields_v1
 )</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2018-07-10 16:52:49.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2018-07-10 16:59:17.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_information <span class="co">#Inspect the additional information</span></code></pre></div>
 <pre><code>$data
   record_id name_first age
@@ -346,7 +354,7 @@ $status_codes
 [1] "200"
 
 $outcome_messages
-[1] "5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200."
+[1] "5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200."
 
 $records_collapsed
 [1] ""
@@ -364,7 +372,7 @@ $filter_logic
 [1] ""
 
 $elapsed_seconds
-[1] 1.201708</code></pre>
+[1] 1.207081</code></pre>
 </div>
 </div>
 <div id="session-information" class="section level2">
@@ -398,7 +406,7 @@ $elapsed_seconds
  desc          1.2.0       2018-05-01 CRAN (R 3.5.0)                    
  devtools      1.13.6      2018-06-27 CRAN (R 3.5.0)                    
  digest        0.6.15      2018-01-28 CRAN (R 3.5.0)                    
- dplyr         0.7.5       2018-05-19 CRAN (R 3.5.0)                    
+ dplyr         0.7.6       2018-06-29 CRAN (R 3.5.1)                    
  evaluate      0.10.1      2017-06-24 CRAN (R 3.5.0)                    
  fs            1.2.3       2018-06-08 CRAN (R 3.5.1)                    
  glue          1.2.0       2017-10-29 CRAN (R 3.5.0)                    
@@ -437,7 +445,7 @@ $elapsed_seconds
  xml2          1.2.0       2018-01-24 CRAN (R 3.5.0)                    
  yaml          2.1.19      2018-05-01 CRAN (R 3.5.0)                    </code></pre>
 <p></p>
-<p>Report rendered by Will at 2018-07-10, 16:52 -0500 in 11 seconds.</p>
+<p>Report rendered by Will at 2018-07-10, 16:59 -0500 in 12 seconds.</p>
 </div>
   </div>
 
@@ -467,6 +475,20 @@ $elapsed_seconds
 </div>
 
   
-
-  </body>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script><script>
+  docsearch({
+    
+    
+    apiKey: 'd672935e2d904316d6ee40239317764e',
+    indexName: 'redcapr',
+    inputSelector: 'input#search-input.form-control',
+    transformData: function(hits) {
+      return hits.map(function (hit) {
+        hit.url = updateHitURL(hit);
+        return hit;
+      });
+    }
+  });
+</script>
+</body>
 </html>
