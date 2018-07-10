@@ -1,10 +1,15 @@
 template:
   params:
+    bootswatch: simplex
 
 home:
   links:
 #  - text: Ask a question
 #    href: http://discourse.mc-stan.org/
+
+navbar:
+  title: "REDCapR"
+  type: inverse
 
 articles:
   - title: "Getting Started"
