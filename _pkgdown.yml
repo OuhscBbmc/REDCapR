@@ -1,0 +1,70 @@
+template:
+  params:
+    bootswatch: simplex
+
+home:
+  links:
+#  - text: Ask a question
+#    href: http://discourse.mc-stan.org/
+
+navbar:
+  title: "REDCapR"
+  type: inverse
+
+articles:
+  - title: "Getting Started"
+    desc: >
+      These vignettes provide an introduction to REDCapR.
+    contents:
+      - BasicREDCapROperations
+      - SecurityDatabase
+      - TroubleshootingApiCalls
+      - advanced-redcapr-operations
+reference:
+
+  - title: "Records via the API"
+    desc: >
+      Reading and writing REDCap records, and files within a record.
+    contents:
+      - redcap_read
+      - redcap_read_oneshot
+      - redcap_read_oneshot_eav
+      - redcap_write
+      - redcap_write_oneshot
+      - redcap_download_file_oneshot
+      - redcap_upload_file_oneshot
+
+  - title: "Additional API Methods"
+    desc: >
+      Accessing other information from the REDCap project or server.
+    contents:
+      - redcap_metadata_read
+      - redcap_variables
+      - redcap_version
+
+  - title: "Internals"
+    desc: >
+      Functions and classes used by the methods above.
+    contents:
+      - REDCapR-package
+      - redcap_project
+      - kernel_api
+
+  - title: "Security"
+    desc: >
+      Responsibly store and retrieve a user's project-specific token.
+    contents:
+      - retrieve_credential
+
+  - title: "Utilities"
+    desc: >
+      Functions to help the methods above.
+    contents:
+      - collapse_vector
+      - constant
+      - create_batch_glossary
+      - metadata_utilities
+      - redcap_column_sanitize
+      - replace_nas_with_explicit
+      - sanitize_token
+      - validate

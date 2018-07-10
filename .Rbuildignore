@@ -14,3 +14,5 @@ utility/
 ^revdep$
 ^CONDUCT\.md$
 ^.*\.o$
+^_pkgdown\.yml$
+^docs$

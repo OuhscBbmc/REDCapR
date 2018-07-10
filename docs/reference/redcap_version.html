@@ -11,8 +11,8 @@
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/simplex/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -51,7 +51,7 @@
   <body>
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -154,19 +154,19 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <a href='http://www.rdocumentation.org/packages/utils/topics/packageDescription'>utils::packageVersion</a>.</p>
+    <p>a <code><a href='http://www.rdocumentation.org/packages/utils/topics/packageDescription'>utils::packageVersion</a></code>.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>If the API call is unsuccessful, a value of <code><a href='http://www.rdocumentation.org/packages/base/topics/numeric_version'>base::package_version("0.0.0")</a></code> will be returned.
-This ensures that a the function will always return an object of class <a href='http://www.rdocumentation.org/packages/base/topics/numeric_version'>base::package_version</a>.
+This ensures that a the function will always return an object of class <code><a href='http://www.rdocumentation.org/packages/base/topics/numeric_version'>base::package_version</a></code>.
 It guarantees the value can always be used in <code><a href='http://www.rdocumentation.org/packages/utils/topics/compareVersion'>utils::compareVersion()</a></code>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>uri</span>      <span class='kw'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
 <span class='no'>token</span>    <span class='kw'>&lt;-</span> <span class='st'>"9A81268476645C4E5F03428B8AC3AA7B"</span>
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/redcap_version'>redcap_version</a></span>(<span class='kw'>redcap_uri</span><span class='kw'>=</span><span class='no'>uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>)</div><div class='output co'>#&gt; <span class='message'>The REDCap version was successfully determined in 0.2 seconds.  The http status code was 200.  It is 8.4.0.</span></div><div class='output co'>#&gt; [1] ‘8.4.0’</div></pre>
+<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/redcap_version'>redcap_version</a></span>(<span class='kw'>redcap_uri</span><span class='kw'>=</span><span class='no'>uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>)</div><div class='output co'>#&gt; <span class='message'>The REDCap version was successfully determined in 0.4 seconds.  The http status code was 200.  It is 8.4.0.</span></div><div class='output co'>#&gt; [1] ‘8.4.0’</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

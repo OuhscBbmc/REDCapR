@@ -11,8 +11,8 @@
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/simplex/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -48,7 +48,7 @@
   <body>
     <div class="container template-reference-index">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -129,71 +129,11 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-records-via-the-api" class="hasAnchor"><a href="#section-records-via-the-api" class="anchor"></a>Records via the API</h2>
+          <p class="section-desc"><p>Reading and writing REDCap records, and files within a record.</p></p>
         </th>
       </tr>
       <tr>
-        
-        <td>
-          <p><code><a href="REDCapR-package.html">REDCapR-package</a></code> </p>
-        </td>
-        <td><p>R utilities for interacting with a REDCap data system <a href='http://www.project-redcap.org/'>http://www.project-redcap.org/</a></p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="collapse_vector.html">collapse_vector()</a></code> </p>
-        </td>
-        <td><p>Collapse a vector of values into a single string when necessary.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="constant.html">constant()</a></code> </p>
-        </td>
-        <td><p>Collection of REDCap-specific constants</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="create_batch_glossary.html">create_batch_glossary()</a></code> </p>
-        </td>
-        <td><p>Creates a <code><a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>base::data.frame()</a></code> that help batching long-running read and writes.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="kernel_api.html">kernel_api()</a></code> </p>
-        </td>
-        <td><p>REDCapR internal function for calling the REDCap API</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="metadata_utilities.html">regex_named_captures()</a></code> <code><a href="metadata_utilities.html">checkbox_choices()</a></code> </p>
-        </td>
-        <td><p>Manipulate and interpret the metadata of a REDCap project.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="redcap_column_sanitize.html">redcap_column_sanitize()</a></code> </p>
-        </td>
-        <td><p>Sanitize to adhere to REDCap character encoding requirements.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="redcap_download_file_oneshot.html">redcap_download_file_oneshot()</a></code> </p>
-        </td>
-        <td><p>Download a file from a REDCap project record.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="redcap_metadata_read.html">redcap_metadata_read()</a></code> </p>
-        </td>
-        <td><p>Export the metadata of a REDCap project.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="redcap_project.html">redcap_project</a></code> </p>
-        </td>
-        <td><p>A <code>Reference Class</code> to make later calls to REDCap more convenient.</p></td>
-      </tr><tr>
         
         <td>
           <p><code><a href="redcap_read.html">redcap_read()</a></code> </p>
@@ -214,24 +154,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="redcap_upload_file_oneshot.html">redcap_upload_file_oneshot()</a></code> </p>
-        </td>
-        <td><p>Upload a file into to a REDCap project record.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="redcap_variables.html">redcap_variables()</a></code> </p>
-        </td>
-        <td><p>Enumerate the exported variables.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="redcap_version.html">redcap_version()</a></code> </p>
-        </td>
-        <td><p>Determine version of REDCap instance</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="redcap_write.html">redcap_write()</a></code> </p>
         </td>
         <td><p>Write/Import records to a REDCap project.</p></td>
@@ -244,15 +166,125 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="replace_nas_with_explicit.html">replace_nas_with_explicit()</a></code> </p>
+          <p><code><a href="redcap_download_file_oneshot.html">redcap_download_file_oneshot()</a></code> </p>
         </td>
-        <td><p>Create explicit factor level for missing values.</p></td>
+        <td><p>Download a file from a REDCap project record.</p></td>
       </tr><tr>
+        
+        <td>
+          <p><code><a href="redcap_upload_file_oneshot.html">redcap_upload_file_oneshot()</a></code> </p>
+        </td>
+        <td><p>Upload a file into to a REDCap project record.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-additional-api-methods" class="hasAnchor"><a href="#section-additional-api-methods" class="anchor"></a>Additional API Methods</h2>
+          <p class="section-desc"><p>Accessing other information from the REDCap project or server.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="redcap_metadata_read.html">redcap_metadata_read()</a></code> </p>
+        </td>
+        <td><p>Export the metadata of a REDCap project.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="redcap_variables.html">redcap_variables()</a></code> </p>
+        </td>
+        <td><p>Enumerate the exported variables.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="redcap_version.html">redcap_version()</a></code> </p>
+        </td>
+        <td><p>Determine version of REDCap instance</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-internals" class="hasAnchor"><a href="#section-internals" class="anchor"></a>Internals</h2>
+          <p class="section-desc"><p>Functions and classes used by the methods above.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="REDCapR-package.html">REDCapR-package</a></code> </p>
+        </td>
+        <td><p>R utilities for interacting with a REDCap data system <a href='http://www.project-redcap.org/'>http://www.project-redcap.org/</a></p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="redcap_project.html">redcap_project</a></code> </p>
+        </td>
+        <td><p>A <code>Reference Class</code> to make later calls to REDCap more convenient.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="kernel_api.html">kernel_api()</a></code> </p>
+        </td>
+        <td><p>REDCapR internal function for calling the REDCap API</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-security" class="hasAnchor"><a href="#section-security" class="anchor"></a>Security</h2>
+          <p class="section-desc"><p>Responsibly store and retrieve a user’s project-specific token.</p></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
           <p><code><a href="retrieve_credential.html">retrieve_credential_local()</a></code> <code><a href="retrieve_credential.html">retrieve_credential_mssql()</a></code> </p>
         </td>
         <td><p>Read a token and other credentials from a (non-REDCap) database or file.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-utilities" class="hasAnchor"><a href="#section-utilities" class="anchor"></a>Utilities</h2>
+          <p class="section-desc"><p>Functions to help the methods above.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="collapse_vector.html">collapse_vector()</a></code> </p>
+        </td>
+        <td><p>Collapse a vector of values into a single string when necessary.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="constant.html">constant()</a></code> </p>
+        </td>
+        <td><p>Collection of REDCap-specific constants</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="create_batch_glossary.html">create_batch_glossary()</a></code> </p>
+        </td>
+        <td><p>Creates a <code><a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>base::data.frame()</a></code> that help batching long-running read and writes.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="metadata_utilities.html">regex_named_captures()</a></code> <code><a href="metadata_utilities.html">checkbox_choices()</a></code> </p>
+        </td>
+        <td><p>Manipulate and interpret the metadata of a REDCap project.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="redcap_column_sanitize.html">redcap_column_sanitize()</a></code> </p>
+        </td>
+        <td><p>Sanitize to adhere to REDCap character encoding requirements.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="replace_nas_with_explicit.html">replace_nas_with_explicit()</a></code> </p>
+        </td>
+        <td><p>Create explicit factor level for missing values.</p></td>
       </tr><tr>
         
         <td>
@@ -273,7 +305,11 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-records-via-the-api">Records via the API</a></li>
+      <li><a href="#section-additional-api-methods">Additional API Methods</a></li>
+      <li><a href="#section-internals">Internals</a></li>
+      <li><a href="#section-security">Security</a></li>
+      <li><a href="#section-utilities">Utilities</a></li>
     </ul>
   </div>
 </div>
