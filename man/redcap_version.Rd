@@ -16,14 +16,14 @@ redcap_version(redcap_uri, token, verbose = TRUE, config_options = NULL)
 \item{config_options}{A list of options to pass to \code{POST} method in the \code{httr} package.  See the details below.  Optional.}
 }
 \value{
-A \link[utils:packageVersion]{utils::packageVersion}.
+a \code{\link[utils:packageDescription]{utils::packageVersion}}.
 }
 \description{
 This function uses REDCap's API to query its version.
 }
 \details{
 If the API call is unsuccessful, a value of \code{base::package_version("0.0.0")} will be returned.
-This ensures that a the function will always return an object of class \link[base:package_version]{base::package_version}.
+This ensures that a the function will always return an object of class \code{\link[base:numeric_version]{base::package_version}}.
 It guarantees the value can always be used in \code{\link[utils:compareVersion]{utils::compareVersion()}}.
 }
 \examples{
