@@ -52,6 +52,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
+    </li>
+    <li>
       <a href="../articles/BasicREDCapROperations.html">Basic REDCapR Operations</a>
     </li>
     <li>
@@ -59,9 +62,6 @@
     </li>
     <li>
       <a href="../articles/TroubleshootingApiCalls.html">Troubleshooting REDCap API Calls</a>
-    </li>
-    <li>
-      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
     </li>
   </ul>
 </li>
@@ -116,472 +116,48 @@ token &lt;-<span class="st"> "9A81268476645C4E5F03428B8AC3AA7B"</span> <span cla
 <p>If no information is passed about the desired records or fields, then the entire data set is returned. Only two parameters are required, <code>redcap_uri</code> and <code>token</code>. Unless the <code>verbose</code> parameter is set to <code>FALSE</code>, a message will be printed on the R console with the number of records and fields returned.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return all records and all variables.</span>
 ds_all_rows_all_fields &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read.html">redcap_read</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)<span class="op">$</span>data</code></pre></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.6 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2018-07-10 00:43:50.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2018-07-10 16:52:40.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_all_rows_all_fields <span class="co">#Inspect the returned dataset</span></code></pre></div>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<thead><tr>
-<th style="text-align:right;">
-record id
-</th>
-<th style="text-align:left;">
-name first
-</th>
-<th style="text-align:left;">
-name last
-</th>
-<th style="text-align:left;">
-address
-</th>
-<th style="text-align:left;">
-telephone
-</th>
-<th style="text-align:left;">
-email
-</th>
-<th style="text-align:left;">
-dob
-</th>
-<th style="text-align:right;">
-age
-</th>
-<th style="text-align:right;">
-sex
-</th>
-<th style="text-align:right;">
-demographics complete
-</th>
-<th style="text-align:right;">
-height
-</th>
-<th style="text-align:right;">
-weight
-</th>
-<th style="text-align:right;">
-bmi
-</th>
-<th style="text-align:left;">
-comments
-</th>
-<th style="text-align:left;">
-mugshot
-</th>
-<th style="text-align:right;">
-health complete
-</th>
-<th style="text-align:right;">
-race 1
-</th>
-<th style="text-align:right;">
-race 2
-</th>
-<th style="text-align:right;">
-race 3
-</th>
-<th style="text-align:right;">
-race 4
-</th>
-<th style="text-align:right;">
-race 5
-</th>
-<th style="text-align:right;">
-race 6
-</th>
-<th style="text-align:right;">
-ethnicity
-</th>
-<th style="text-align:right;">
-race and ethnicity complete
-</th>
-</tr></thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-Nutmeg
-</td>
-<td style="text-align:left;">
-Nutmouse
-</td>
-<td style="text-align:left;">
-14 Rose Cottage St. Kenning UK, 323232
-</td>
-<td style="text-align:left;">
-<ol start="405" style="list-style-type: decimal"><li>321-1111
-</li></ol>
-</td>
-<td style="text-align:left;">
-<a href="mailto:nutty@mouse.com">nutty@mouse.com</a>
-</td>
-<td style="text-align:left;">
-2003-08-30
-</td>
-<td style="text-align:right;">
-11
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-7.00
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-204.1
-</td>
-<td style="text-align:left;">
-Character in a book, with some guessing
-</td>
-<td style="text-align:left;">
-[document]
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-Tumtum
-</td>
-<td style="text-align:left;">
-Nutmouse
-</td>
-<td style="text-align:left;">
-14 Rose Cottage Blvd. Kenning UK 34243
-</td>
-<td style="text-align:left;">
-<ol start="405" style="list-style-type: decimal"><li>321-2222
-</li></ol>
-</td>
-<td style="text-align:left;">
-<a href="mailto:tummy@mouse.comm">tummy@mouse.comm</a>
-</td>
-<td style="text-align:left;">
-2003-03-10
-</td>
-<td style="text-align:right;">
-11
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-6.00
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-277.8
-</td>
-<td style="text-align:left;">
-A mouse character from a good book
-</td>
-<td style="text-align:left;">
-[document]
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:left;">
-Marcus
-</td>
-<td style="text-align:left;">
-Wood
-</td>
-<td style="text-align:left;">
-243 Hill St. Guthrie OK 73402
-</td>
-<td style="text-align:left;">
-<ol start="405" style="list-style-type: decimal"><li>321-3333
-</li></ol>
-</td>
-<td style="text-align:left;">
-<a href="mailto:mw@mwood.net">mw@mwood.net</a>
-</td>
-<td style="text-align:left;">
-1934-04-09
-</td>
-<td style="text-align:right;">
-80
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-180.00
-</td>
-<td style="text-align:right;">
-80
-</td>
-<td style="text-align:right;">
-24.7
-</td>
-<td style="text-align:left;">
-completely made up
-</td>
-<td style="text-align:left;">
-[document]
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-2
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:left;">
-Trudy
-</td>
-<td style="text-align:left;">
-DAG
-</td>
-<td style="text-align:left;">
-342 Elm Duncanville TX, 75116
-</td>
-<td style="text-align:left;">
-<ol start="405" style="list-style-type: decimal"><li>321-4444
-</li></ol>
-</td>
-<td style="text-align:left;">
-<a href="mailto:peroxide@blonde.com">peroxide@blonde.com</a>
-</td>
-<td style="text-align:left;">
-1952-11-02
-</td>
-<td style="text-align:right;">
-61
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-165.00
-</td>
-<td style="text-align:right;">
-54
-</td>
-<td style="text-align:right;">
-19.8
-</td>
-<td style="text-align:left;">
-This record doesn’t have a DAG assigned
-
-
-
-
-So call up Trudy on the telephone Send her a letter in the mail
-</td>
-<td style="text-align:left;">
-[document]
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:left;">
-John Lee
-</td>
-<td style="text-align:left;">
-Walker
-</td>
-<td style="text-align:left;">
-Hotel Suite New Orleans LA, 70115
-</td>
-<td style="text-align:left;">
-<ol start="405" style="list-style-type: decimal"><li>321-5555
-</li></ol>
-</td>
-<td style="text-align:left;">
-<a href="mailto:left@hippocket.com">left@hippocket.com</a>
-</td>
-<td style="text-align:left;">
-1955-04-15
-</td>
-<td style="text-align:right;">
-59
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-193.04
-</td>
-<td style="text-align:right;">
-104
-</td>
-<td style="text-align:right;">
-27.9
-</td>
-<td style="text-align:left;">
-Had a hand for trouble and a eye for cash
-
-He had a gold watch chain and a black mustache
-</td>
-<td style="text-align:left;">
-[document]
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-2
-</td>
-</tr>
-</tbody>
-</table>
+<pre><code>  record_id name_first name_last                                 address
+1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232
+2         2     Tumtum  Nutmouse 14 Rose Cottage Blvd.\nKenning UK 34243
+3         3     Marcus      Wood          243 Hill St.\nGuthrie OK 73402
+4         4      Trudy       DAG          342 Elm\nDuncanville TX, 75116
+5         5   John Lee    Walker      Hotel Suite\nNew Orleans LA, 70115
+       telephone               email        dob age sex
+1 (405) 321-1111     nutty@mouse.com 2003-08-30  11   0
+2 (405) 321-2222    tummy@mouse.comm 2003-03-10  11   1
+3 (405) 321-3333        mw@mwood.net 1934-04-09  80   1
+4 (405) 321-4444 peroxide@blonde.com 1952-11-02  61   0
+5 (405) 321-5555  left@hippocket.com 1955-04-15  59   1
+  demographics_complete height weight   bmi
+1                     2   7.00      1 204.1
+2                     2   6.00      1 277.8
+3                     2 180.00     80  24.7
+4                     2 165.00     54  19.8
+5                     2 193.04    104  27.9
+                                                                                                     comments
+1                                                                     Character in a book, with some guessing
+2                                                                          A mouse character from a good book
+3                                                                                          completely made up
+4 This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail
+5                 Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache
+     mugshot health_complete race___1 race___2 race___3 race___4 race___5
+1 [document]               1        0        0        0        0        1
+2 [document]               0        0        0        1        0        1
+3 [document]               2        0        0        0        1        1
+4 [document]               2        0        1        0        0        1
+5 [document]               0        1        0        0        0        0
+  race___6 ethnicity race_and_ethnicity_complete
+1        0         1                           2
+2        0         1                           0
+3        0         0                           2
+4        0         1                           2
+5        1         2                           2</code></pre>
 </div>
 <div id="read-a-subset-of-the-records-" class="section level3">
 <h3 class="hasAnchor">
@@ -595,11 +171,11 @@ ds_some_rows_v1 &lt;-<span class="st"> </span><span class="kw"><a href="../refer
    <span class="dt">token      =</span> token, 
    <span class="dt">records    =</span> desired_records_v1
 )<span class="op">$</span>data</code></pre></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2018-07-10 00:43:52.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2018-07-10 16:52:42.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
-<pre><code>2 records and 24 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return only records with IDs of 1 and 3 (alternate way)</span>
 desired_records_v2 &lt;-<span class="st"> "1, 3"</span>
 ds_some_rows_v2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read.html">redcap_read</a></span>(
@@ -607,240 +183,27 @@ ds_some_rows_v2 &lt;-<span class="st"> </span><span class="kw"><a href="../refer
    <span class="dt">token             =</span> token, 
    <span class="dt">records_collapsed =</span> desired_records_v2
 )<span class="op">$</span>data</code></pre></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2018-07-10 00:43:54.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2018-07-10 16:52:43.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
-<pre><code>2 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_rows_v2 <span class="co">#Inspect the returned dataset</span></code></pre></div>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<thead><tr>
-<th style="text-align:right;">
-record id
-</th>
-<th style="text-align:left;">
-name first
-</th>
-<th style="text-align:left;">
-name last
-</th>
-<th style="text-align:left;">
-address
-</th>
-<th style="text-align:left;">
-telephone
-</th>
-<th style="text-align:left;">
-email
-</th>
-<th style="text-align:left;">
-dob
-</th>
-<th style="text-align:right;">
-age
-</th>
-<th style="text-align:right;">
-sex
-</th>
-<th style="text-align:right;">
-demographics complete
-</th>
-<th style="text-align:right;">
-height
-</th>
-<th style="text-align:right;">
-weight
-</th>
-<th style="text-align:right;">
-bmi
-</th>
-<th style="text-align:left;">
-comments
-</th>
-<th style="text-align:left;">
-mugshot
-</th>
-<th style="text-align:right;">
-health complete
-</th>
-<th style="text-align:right;">
-race 1
-</th>
-<th style="text-align:right;">
-race 2
-</th>
-<th style="text-align:right;">
-race 3
-</th>
-<th style="text-align:right;">
-race 4
-</th>
-<th style="text-align:right;">
-race 5
-</th>
-<th style="text-align:right;">
-race 6
-</th>
-<th style="text-align:right;">
-ethnicity
-</th>
-<th style="text-align:right;">
-race and ethnicity complete
-</th>
-</tr></thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-Nutmeg
-</td>
-<td style="text-align:left;">
-Nutmouse
-</td>
-<td style="text-align:left;">
-14 Rose Cottage St. Kenning UK, 323232
-</td>
-<td style="text-align:left;">
-<ol start="405" style="list-style-type: decimal"><li>321-1111
-</li></ol>
-</td>
-<td style="text-align:left;">
-<a href="mailto:nutty@mouse.com">nutty@mouse.com</a>
-</td>
-<td style="text-align:left;">
-2003-08-30
-</td>
-<td style="text-align:right;">
-11
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-7
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-204.1
-</td>
-<td style="text-align:left;">
-Character in a book, with some guessing
-</td>
-<td style="text-align:left;">
-[document]
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:left;">
-Marcus
-</td>
-<td style="text-align:left;">
-Wood
-</td>
-<td style="text-align:left;">
-243 Hill St. Guthrie OK 73402
-</td>
-<td style="text-align:left;">
-<ol start="405" style="list-style-type: decimal"><li>321-3333
-</li></ol>
-</td>
-<td style="text-align:left;">
-<a href="mailto:mw@mwood.net">mw@mwood.net</a>
-</td>
-<td style="text-align:left;">
-1934-04-09
-</td>
-<td style="text-align:right;">
-80
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-180
-</td>
-<td style="text-align:right;">
-80
-</td>
-<td style="text-align:right;">
-24.7
-</td>
-<td style="text-align:left;">
-completely made up
-</td>
-<td style="text-align:left;">
-[document]
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-2
-</td>
-</tr>
-</tbody>
-</table>
+<pre><code>  record_id name_first name_last                                 address
+1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232
+2         3     Marcus      Wood          243 Hill St.\nGuthrie OK 73402
+       telephone           email        dob age sex demographics_complete
+1 (405) 321-1111 nutty@mouse.com 2003-08-30  11   0                     2
+2 (405) 321-3333    mw@mwood.net 1934-04-09  80   1                     2
+  height weight   bmi                                comments    mugshot
+1      7      1 204.1 Character in a book, with some guessing [document]
+2    180     80  24.7                      completely made up [document]
+  health_complete race___1 race___2 race___3 race___4 race___5 race___6
+1               1        0        0        0        0        1        0
+2               2        0        0        0        1        1        0
+  ethnicity race_and_ethnicity_complete
+1         1                           2
+2         0                           2</code></pre>
 </div>
 <div id="read-a-subset-of-the-fields-" class="section level3">
 <h3 class="hasAnchor">
@@ -854,10 +217,10 @@ ds_some_fields_v1 &lt;-<span class="st"> </span><span class="kw"><a href="../ref
    <span class="dt">fields     =</span> desired_fields_v1
 )<span class="op">$</span>data</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2018-07-10 00:43:55.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2018-07-10 16:52:44.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return only the fields record_id, name_first, and age (alternate way)</span>
 desired_fields_v2 &lt;-<span class="st"> "record_id, name_first, age"</span>
 ds_some_fields_v2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read.html">redcap_read</a></span>(
@@ -865,82 +228,18 @@ ds_some_fields_v2 &lt;-<span class="st"> </span><span class="kw"><a href="../ref
    <span class="dt">token            =</span> token, 
    <span class="dt">fields_collapsed =</span> desired_fields_v2
 )<span class="op">$</span>data</code></pre></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2018-07-10 00:43:57.</code></pre>
+<pre><code>Starting to read 5 records  at 2018-07-10 16:52:45.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_fields_v2 <span class="co">#Inspect the returned dataset</span></code></pre></div>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<thead><tr>
-<th style="text-align:right;">
-record id
-</th>
-<th style="text-align:left;">
-name first
-</th>
-<th style="text-align:right;">
-age
-</th>
-</tr></thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-Nutmeg
-</td>
-<td style="text-align:right;">
-11
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-Tumtum
-</td>
-<td style="text-align:right;">
-11
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:left;">
-Marcus
-</td>
-<td style="text-align:right;">
-80
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:left;">
-Trudy
-</td>
-<td style="text-align:right;">
-61
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:left;">
-John Lee
-</td>
-<td style="text-align:right;">
-59
-</td>
-</tr>
-</tbody>
-</table>
+<pre><code>  record_id name_first age
+1         1     Nutmeg  11
+2         2     Tumtum  11
+3         3     Marcus  80
+4         4      Trudy  61
+5         5   John Lee  59</code></pre>
 </div>
 <div id="read-a-subset-of-records-conditioned-on-the-values-in-some-variables-" class="section level3">
 <h3 class="hasAnchor">
@@ -954,82 +253,18 @@ ds_some_fields_v3 &lt;-<span class="st"> </span><span class="kw"><a href="../ref
    <span class="dt">token      =</span> token, 
    <span class="dt">fields     =</span> desired_fields_v3
 )<span class="op">$</span>data</code></pre></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2018-07-10 00:43:58.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2018-07-10 16:52:47.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_fields_v3 <span class="co">#Examine the these three variables.</span></code></pre></div>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<thead><tr>
-<th style="text-align:right;">
-record id
-</th>
-<th style="text-align:left;">
-dob
-</th>
-<th style="text-align:right;">
-weight
-</th>
-</tr></thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-2003-08-30
-</td>
-<td style="text-align:right;">
-1
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-2003-03-10
-</td>
-<td style="text-align:right;">
-1
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:left;">
-1934-04-09
-</td>
-<td style="text-align:right;">
-80
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:left;">
-1952-11-02
-</td>
-<td style="text-align:right;">
-54
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:left;">
-1955-04-15
-</td>
-<td style="text-align:right;">
-104
-</td>
-</tr>
-</tbody>
-</table>
+<pre><code>  record_id        dob weight
+1         1 2003-08-30      1
+2         2 2003-03-10      1
+3         3 1934-04-09     80
+4         4 1952-11-02     54
+5         5 1955-04-15    104</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">######
 ## Step 2: identify desired records, based on age &amp; weight
 before_<span class="dv">1960</span> &lt;-<span class="st"> </span>(ds_some_fields_v3<span class="op">$</span>dob <span class="op">&lt;=</span><span class="st"> </span><span class="kw">as.Date</span>(<span class="st">"1960-01-01"</span>))
@@ -1046,243 +281,30 @@ ds_some_rows_v3 &lt;-<span class="st"> </span><span class="kw"><a href="../refer
    <span class="dt">token      =</span> token, 
    <span class="dt">records    =</span> desired_records_v3
 )<span class="op">$</span>data</code></pre></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2018-07-10 00:44:00.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2018-07-10 16:52:48.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_rows_v3 <span class="co">#Examine the results.</span></code></pre></div>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<thead><tr>
-<th style="text-align:right;">
-record id
-</th>
-<th style="text-align:left;">
-name first
-</th>
-<th style="text-align:left;">
-name last
-</th>
-<th style="text-align:left;">
-address
-</th>
-<th style="text-align:left;">
-telephone
-</th>
-<th style="text-align:left;">
-email
-</th>
-<th style="text-align:left;">
-dob
-</th>
-<th style="text-align:right;">
-age
-</th>
-<th style="text-align:right;">
-sex
-</th>
-<th style="text-align:right;">
-demographics complete
-</th>
-<th style="text-align:right;">
-height
-</th>
-<th style="text-align:right;">
-weight
-</th>
-<th style="text-align:right;">
-bmi
-</th>
-<th style="text-align:left;">
-comments
-</th>
-<th style="text-align:left;">
-mugshot
-</th>
-<th style="text-align:right;">
-health complete
-</th>
-<th style="text-align:right;">
-race 1
-</th>
-<th style="text-align:right;">
-race 2
-</th>
-<th style="text-align:right;">
-race 3
-</th>
-<th style="text-align:right;">
-race 4
-</th>
-<th style="text-align:right;">
-race 5
-</th>
-<th style="text-align:right;">
-race 6
-</th>
-<th style="text-align:right;">
-ethnicity
-</th>
-<th style="text-align:right;">
-race and ethnicity complete
-</th>
-</tr></thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:left;">
-Marcus
-</td>
-<td style="text-align:left;">
-Wood
-</td>
-<td style="text-align:left;">
-243 Hill St. Guthrie OK 73402
-</td>
-<td style="text-align:left;">
-<ol start="405" style="list-style-type: decimal"><li>321-3333
-</li></ol>
-</td>
-<td style="text-align:left;">
-<a href="mailto:mw@mwood.net">mw@mwood.net</a>
-</td>
-<td style="text-align:left;">
-1934-04-09
-</td>
-<td style="text-align:right;">
-80
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-180.00
-</td>
-<td style="text-align:right;">
-80
-</td>
-<td style="text-align:right;">
-24.7
-</td>
-<td style="text-align:left;">
-completely made up
-</td>
-<td style="text-align:left;">
-[document]
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-2
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:left;">
-John Lee
-</td>
-<td style="text-align:left;">
-Walker
-</td>
-<td style="text-align:left;">
-Hotel Suite New Orleans LA, 70115
-</td>
-<td style="text-align:left;">
-<ol start="405" style="list-style-type: decimal"><li>321-5555
-</li></ol>
-</td>
-<td style="text-align:left;">
-<a href="mailto:left@hippocket.com">left@hippocket.com</a>
-</td>
-<td style="text-align:left;">
-1955-04-15
-</td>
-<td style="text-align:right;">
-59
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-193.04
-</td>
-<td style="text-align:right;">
-104
-</td>
-<td style="text-align:right;">
-27.9
-</td>
-<td style="text-align:left;">
-Had a hand for trouble and a eye for cash
-
-
-He had a gold watch chain and a black mustache
-</td>
-<td style="text-align:left;">
-[document]
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-2
-</td>
-</tr>
-</tbody>
-</table>
+<pre><code>  record_id name_first name_last                            address
+1         3     Marcus      Wood     243 Hill St.\nGuthrie OK 73402
+2         5   John Lee    Walker Hotel Suite\nNew Orleans LA, 70115
+       telephone              email        dob age sex
+1 (405) 321-3333       mw@mwood.net 1934-04-09  80   1
+2 (405) 321-5555 left@hippocket.com 1955-04-15  59   1
+  demographics_complete height weight  bmi
+1                     2 180.00     80 24.7
+2                     2 193.04    104 27.9
+                                                                                     comments
+1                                                                          completely made up
+2 Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache
+     mugshot health_complete race___1 race___2 race___3 race___4 race___5
+1 [document]               2        0        0        0        1        1
+2 [document]               0        1        0        0        0        0
+  race___6 ethnicity race_and_ethnicity_complete
+1        0         0                           2
+2        1         2                           2</code></pre>
 </div>
 <div id="additional-returned-information" class="section level3">
 <h3 class="hasAnchor">
@@ -1303,11 +325,11 @@ all_information &lt;-<span class="st"> </span><span class="kw"><a href="../refer
    <span class="dt">token      =</span> token, 
    <span class="dt">fields     =</span> desired_fields_v1
 )</code></pre></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2018-07-10 00:44:01.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2018-07-10 16:52:49.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 1.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_information <span class="co">#Inspect the additional information</span></code></pre></div>
 <pre><code>$data
   record_id name_first age
@@ -1324,7 +346,7 @@ $status_codes
 [1] "200"
 
 $outcome_messages
-[1] "5 records and 3 columns were read from REDCap in 1.4 seconds.  The http status code was 200."
+[1] "5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200."
 
 $records_collapsed
 [1] ""
@@ -1342,7 +364,7 @@ $filter_logic
 [1] ""
 
 $elapsed_seconds
-[1] 2.529168</code></pre>
+[1] 1.201708</code></pre>
 </div>
 </div>
 <div id="session-information" class="section level2">
@@ -1350,73 +372,72 @@ $elapsed_seconds
 <a href="#session-information" class="anchor"></a>Session Information</h2>
 <p>For the sake of documentation and reproducibility, the current report was rendered in the following environment. Click the line below to expand.</p>
 <p><details><summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary></details></p>
-<pre><code>─ Session info ──────────────────────────────────────────────────────────
- setting  value                       
- version  R version 3.4.4 (2018-03-15)
- os       Ubuntu 18.04 LTS            
- system   x86_64, linux-gnu           
- ui       X11                         
- language (EN)                        
- collate  en_US.UTF-8                 
- tz       America/Chicago             
- date     2018-07-10                  
+<pre><code>- Session info ----------------------------------------------------------
+ setting  value                                      
+ version  R version 3.5.0 Patched (2018-05-14 r74725)
+ os       Windows &gt;= 8 x64                           
+ system   x86_64, mingw32                            
+ ui       RTerm                                      
+ language (EN)                                       
+ collate  English_United States.1252                 
+ tz       America/Chicago                            
+ date     2018-07-10                                 
 
-─ Packages ──────────────────────────────────────────────────────────────
- package     * version     date       source                          
- assertthat    0.2.0       2017-04-11 cran (@0.2.0)                   
- backports     1.1.2       2017-12-13 cran (@1.1.2)                   
- bindr         0.1.1       2018-03-13 CRAN (R 3.4.3)                  
- bindrcpp      0.2.2       2018-03-29 CRAN (R 3.4.3)                  
- checkmate     1.8.6       2018-04-10 Github (mllg/checkmate@489319a) 
- clisymbols    1.2.0       2017-05-21 CRAN (R 3.4.3)                  
- colorspace    1.3-2       2016-12-14 CRAN (R 3.4.3)                  
- commonmark    1.5         2018-04-28 CRAN (R 3.4.4)                  
- crayon        1.3.4       2017-09-16 CRAN (R 3.4.3)                  
- curl          3.2         2018-03-28 CRAN (R 3.4.4)                  
- desc          1.2.0       2018-05-01 CRAN (R 3.4.4)                  
- devtools      1.13.6      2018-06-27 CRAN (R 3.4.4)                  
- digest        0.6.15      2018-01-28 CRAN (R 3.4.3)                  
- dplyr         0.7.6       2018-06-29 CRAN (R 3.4.4)                  
- evaluate      0.10.1      2017-06-24 CRAN (R 3.4.3)                  
- fs            1.2.3       2018-06-08 CRAN (R 3.4.4)                  
- glue          1.2.0       2017-10-29 cran (@1.2.0)                   
- highr         0.7         2018-06-09 CRAN (R 3.4.4)                  
- hms           0.4.2.9000  2018-05-26 Github (tidyverse/hms@14e74ab)  
- htmltools     0.3.6       2017-04-28 CRAN (R 3.4.3)                  
- httr          1.3.1       2017-08-20 CRAN (R 3.4.3)                  
- kableExtra    0.9.0       2018-05-21 CRAN (R 3.4.4)                  
- knitr       * 1.20        2018-02-20 CRAN (R 3.4.3)                  
- magrittr    * 1.5         2014-11-22 cran (@1.5)                     
- MASS          7.3-50      2018-04-30 CRAN (R 3.4.4)                  
- memoise       1.1.0       2017-04-21 CRAN (R 3.4.3)                  
- munsell       0.5.0       2018-06-12 CRAN (R 3.4.4)                  
- pillar        1.2.3       2018-05-25 CRAN (R 3.4.4)                  
- pkgconfig     2.0.1       2017-03-21 cran (@2.0.1)                   
- pkgdown       1.1.0       2018-06-02 CRAN (R 3.4.4)                  
- plyr          1.8.4       2016-06-08 CRAN (R 3.4.3)                  
- purrr         0.2.5       2018-05-29 CRAN (R 3.4.4)                  
- R6            2.2.2       2017-06-17 CRAN (R 3.4.3)                  
- Rcpp          0.12.17     2018-05-18 CRAN (R 3.4.4)                  
- readr         1.2.0       2018-05-26 Github (tidyverse/readr@d6d622b)
- REDCapR     * 0.9.10.9001 2018-07-10 local                           
- rlang         0.2.1       2018-05-30 CRAN (R 3.4.4)                  
- rmarkdown     1.10        2018-06-11 CRAN (R 3.4.4)                  
- roxygen2      6.0.1       2017-02-06 CRAN (R 3.4.4)                  
- rprojroot     1.3-2       2018-01-03 CRAN (R 3.4.3)                  
- rstudioapi    0.7         2017-09-07 CRAN (R 3.4.3)                  
- rvest         0.3.2       2016-06-17 CRAN (R 3.4.3)                  
- scales        0.5.0.9000  2018-03-29 Github (hadley/scales@d767915)  
- sessioninfo   1.0.0       2017-06-21 CRAN (R 3.4.3)                  
- stringi       1.2.3       2018-06-12 CRAN (R 3.4.4)                  
- stringr       1.3.1       2018-05-10 CRAN (R 3.4.4)                  
- tibble        1.4.2       2018-01-22 CRAN (R 3.4.3)                  
- tidyselect    0.2.4       2018-02-26 CRAN (R 3.4.3)                  
- viridisLite   0.3.0       2018-02-01 CRAN (R 3.4.3)                  
- withr         2.1.2       2018-03-29 Github (jimhester/withr@79d7b0d)
- xml2          1.2.0       2018-01-24 CRAN (R 3.4.3)                  
- yaml          2.1.19      2018-05-01 CRAN (R 3.4.4)                  </code></pre>
+- Packages --------------------------------------------------------------
+ package     * version     date       source                            
+ assertthat    0.2.0       2017-04-11 CRAN (R 3.5.0)                    
+ backports     1.1.2       2017-12-13 CRAN (R 3.5.0)                    
+ bindr         0.1.1       2018-03-13 CRAN (R 3.5.0)                    
+ bindrcpp      0.2.2       2018-03-29 CRAN (R 3.5.0)                    
+ checkmate     1.8.6       2018-07-02 Github (mllg/checkmate@bc16595)   
+ clisymbols    1.2.0       2017-05-21 CRAN (R 3.5.0)                    
+ colorspace    1.3-2       2016-12-14 CRAN (R 3.5.0)                    
+ commonmark    1.5         2018-04-28 CRAN (R 3.5.0)                    
+ crayon        1.3.4       2017-09-16 CRAN (R 3.5.0)                    
+ curl          3.2         2018-03-28 CRAN (R 3.5.0)                    
+ desc          1.2.0       2018-05-01 CRAN (R 3.5.0)                    
+ devtools      1.13.6      2018-06-27 CRAN (R 3.5.0)                    
+ digest        0.6.15      2018-01-28 CRAN (R 3.5.0)                    
+ dplyr         0.7.5       2018-05-19 CRAN (R 3.5.0)                    
+ evaluate      0.10.1      2017-06-24 CRAN (R 3.5.0)                    
+ fs            1.2.3       2018-06-08 CRAN (R 3.5.1)                    
+ glue          1.2.0       2017-10-29 CRAN (R 3.5.0)                    
+ hms           0.4.2.9000  2018-06-28 Github (tidyverse/hms@2e0a39a)    
+ htmltools     0.3.6       2017-04-28 CRAN (R 3.5.0)                    
+ httr          1.3.1       2017-08-20 CRAN (R 3.5.0)                    
+ kableExtra    0.9.0       2018-05-21 CRAN (R 3.5.0)                    
+ knitr       * 1.20        2018-02-20 CRAN (R 3.5.0)                    
+ magrittr    * 1.5         2014-11-22 CRAN (R 3.5.0)                    
+ MASS          7.3-50      2018-04-30 CRAN (R 3.5.0)                    
+ memoise       1.1.0       2017-04-21 CRAN (R 3.5.0)                    
+ munsell       0.5.0       2018-06-12 CRAN (R 3.5.0)                    
+ pillar        1.2.3       2018-05-25 CRAN (R 3.5.0)                    
+ pkgconfig     2.0.1       2017-03-21 CRAN (R 3.5.0)                    
+ pkgdown       1.1.0       2018-06-02 CRAN (R 3.5.1)                    
+ plyr          1.8.4       2016-06-08 CRAN (R 3.5.0)                    
+ purrr         0.2.5       2018-05-29 CRAN (R 3.5.0)                    
+ R6            2.2.2       2017-06-17 CRAN (R 3.5.0)                    
+ Rcpp          0.12.17     2018-05-18 CRAN (R 3.5.0)                    
+ readr         1.2.0       2018-06-28 Github (tidyverse/readr@05890c3)  
+ REDCapR     * 0.9.10.9001 2018-06-28 Github (OuhscBbmc/REDCapR@5481f15)
+ rlang         0.2.1       2018-05-30 CRAN (R 3.5.0)                    
+ rmarkdown     1.10        2018-06-11 CRAN (R 3.5.0)                    
+ roxygen2      6.0.1       2017-02-06 CRAN (R 3.5.0)                    
+ rprojroot     1.3-2       2018-01-03 CRAN (R 3.5.0)                    
+ rstudioapi    0.7         2017-09-07 CRAN (R 3.5.0)                    
+ rvest         0.3.2       2016-06-17 CRAN (R 3.5.0)                    
+ scales        0.5.0       2017-08-24 CRAN (R 3.5.0)                    
+ sessioninfo   1.0.0       2017-06-21 CRAN (R 3.5.0)                    
+ stringi       1.2.3       2018-06-12 CRAN (R 3.5.0)                    
+ stringr       1.3.1       2018-05-10 CRAN (R 3.5.0)                    
+ tibble        1.4.2       2018-01-22 CRAN (R 3.5.0)                    
+ tidyselect    0.2.4       2018-02-26 CRAN (R 3.5.0)                    
+ viridisLite   0.3.0       2018-02-01 CRAN (R 3.5.0)                    
+ withr         2.1.2       2018-03-15 CRAN (R 3.5.0)                    
+ xml2          1.2.0       2018-01-24 CRAN (R 3.5.0)                    
+ yaml          2.1.19      2018-05-01 CRAN (R 3.5.0)                    </code></pre>
 <p></p>
-<p>Report rendered by wibeasley at 2018-07-10, 00:44 -0500 in 16 seconds.</p>
+<p>Report rendered by Will at 2018-07-10, 16:52 -0500 in 11 seconds.</p>
 </div>
   </div>
 

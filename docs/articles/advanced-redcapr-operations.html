@@ -52,6 +52,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
+    </li>
+    <li>
       <a href="../articles/BasicREDCapROperations.html">Basic REDCapR Operations</a>
     </li>
     <li>
@@ -59,9 +62,6 @@
     </li>
     <li>
       <a href="../articles/TroubleshootingApiCalls.html">Troubleshooting REDCap API Calls</a>
-    </li>
-    <li>
-      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
     </li>
   </ul>
 </li>
@@ -121,454 +121,37 @@ token_longitudinal    &lt;-<span class="st"> "0434F0E9CF53ED0587847AB6E51DE762"<
 events_to_retain  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"dose_1_arm_1"</span>, <span class="st">"visit_1_arm_1"</span>, <span class="st">"dose_2_arm_1"</span>, <span class="st">"visit_2_arm_1"</span>)
 
 ds_long &lt;-<span class="st"> </span>REDCapR<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/REDCapR/topics/redcap_read_oneshot">redcap_read_oneshot</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token_longitudinal)<span class="op">$</span>data</code></pre></div>
-<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.6 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_long <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)</code></pre></div>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<thead><tr>
-<th style="text-align:right;">
-study id
-</th>
-<th style="text-align:left;">
-redcap event name
-</th>
-<th style="text-align:right;">
-pmq1
-</th>
-<th style="text-align:right;">
-pmq2
-</th>
-<th style="text-align:right;">
-pmq3
-</th>
-<th style="text-align:right;">
-pmq4
-</th>
-</tr></thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-100
-</td>
-<td style="text-align:left;">
-enrollment_arm_1
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-100
-</td>
-<td style="text-align:left;">
-dose_1_arm_1
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-1
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-100
-</td>
-<td style="text-align:left;">
-visit_1_arm_1
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-100
-</td>
-<td style="text-align:left;">
-dose_2_arm_1
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-100
-</td>
-<td style="text-align:left;">
-visit_2_arm_1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-100
-</td>
-<td style="text-align:left;">
-final_visit_arm_1
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-220
-</td>
-<td style="text-align:left;">
-enrollment_arm_1
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-220
-</td>
-<td style="text-align:left;">
-dose_1_arm_1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-2
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-220
-</td>
-<td style="text-align:left;">
-visit_1_arm_1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-220
-</td>
-<td style="text-align:left;">
-dose_2_arm_1
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-220
-</td>
-<td style="text-align:left;">
-visit_2_arm_1
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-220
-</td>
-<td style="text-align:left;">
-final_visit_arm_1
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-304
-</td>
-<td style="text-align:left;">
-enrollment_arm_2
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-304
-</td>
-<td style="text-align:left;">
-deadline_to_opt_ou_arm_2
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-304
-</td>
-<td style="text-align:left;">
-first_dose_arm_2
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-304
-</td>
-<td style="text-align:left;">
-first_visit_arm_2
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-304
-</td>
-<td style="text-align:left;">
-final_visit_arm_2
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-304
-</td>
-<td style="text-align:left;">
-deadline_to_return_arm_2
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-</tr>
-</tbody>
-</table>
+<pre><code>#&gt;    study_id        redcap_event_name pmq1 pmq2 pmq3 pmq4
+#&gt; 1       100         enrollment_arm_1   NA   NA   NA   NA
+#&gt; 2       100             dose_1_arm_1    2    2    1    1
+#&gt; 3       100            visit_1_arm_1    1    0    0    0
+#&gt; 4       100             dose_2_arm_1    3    1    0    0
+#&gt; 5       100            visit_2_arm_1    0    1    0    0
+#&gt; 6       100        final_visit_arm_1   NA   NA   NA   NA
+#&gt; 7       220         enrollment_arm_1   NA   NA   NA   NA
+#&gt; 8       220             dose_1_arm_1    0    1    0    2
+#&gt; 9       220            visit_1_arm_1    0    3    1    0
+#&gt; 10      220             dose_2_arm_1    1    2    0    1
+#&gt; 11      220            visit_2_arm_1    3    4    1    0
+#&gt; 12      220        final_visit_arm_1   NA   NA   NA   NA
+#&gt; 13      304         enrollment_arm_2   NA   NA   NA   NA
+#&gt; 14      304 deadline_to_opt_ou_arm_2   NA   NA   NA   NA
+#&gt; 15      304         first_dose_arm_2    0    1    0    0
+#&gt; 16      304        first_visit_arm_2    2    0    0    0
+#&gt; 17      304        final_visit_arm_2   NA   NA   NA   NA
+#&gt; 18      304 deadline_to_return_arm_2   NA   NA   NA   NA</code></pre>
 <p>When widening only one variable (eg, <code>pmq1</code>), the code’s pretty simple:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_wide &lt;-<span class="st"> </span>ds_long <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(study_id, redcap_event_name, pmq1) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(redcap_event_name <span class="op">%in%</span><span class="st"> </span>events_to_retain) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/spread">spread</a></span>(<span class="dt">key=</span>redcap_event_name, <span class="dt">value=</span>pmq1)
 ds_wide</code></pre></div>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<thead><tr>
-<th style="text-align:right;">
-study id
-</th>
-<th style="text-align:right;">
-dose 1 arm 1
-</th>
-<th style="text-align:right;">
-dose 2 arm 1
-</th>
-<th style="text-align:right;">
-visit 1 arm 1
-</th>
-<th style="text-align:right;">
-visit 2 arm 1
-</th>
-</tr></thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-100
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-220
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-3
-</td>
-</tr>
-</tbody>
-</table>
+<pre><code>#&gt;   study_id dose_1_arm_1 dose_2_arm_1 visit_1_arm_1 visit_2_arm_1
+#&gt; 1      100            2            3             1             0
+#&gt; 2      220            0            1             0             3</code></pre>
 <p>When widening more than one variable (eg, <code>pmq1</code> - <code>pmq4</code>), it’s usually easiest to go even longer/taller (eg, <code>ds_eav</code>) before reversing direction and going wide:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pattern &lt;-<span class="st"> "^(</span><span class="ch">\\</span><span class="st">w+?)_arm_(</span><span class="ch">\\</span><span class="st">d)$"</span>
 
@@ -592,396 +175,37 @@ ds_eav &lt;-<span class="st"> </span>ds_long <span class="op">%&gt;%</span><span
 <span class="co"># Show the first 10 rows of the EAV table.</span>
 ds_eav <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">head</span>(<span class="dv">10</span>)</code></pre></div>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<thead><tr>
-<th style="text-align:right;">
-study id
-</th>
-<th style="text-align:right;">
-arm
-</th>
-<th style="text-align:left;">
-key
-</th>
-<th style="text-align:right;">
-value
-</th>
-</tr></thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-100
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-dose_1_pmq1
-</td>
-<td style="text-align:right;">
-2
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-100
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-visit_1_pmq1
-</td>
-<td style="text-align:right;">
-1
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-100
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-dose_2_pmq1
-</td>
-<td style="text-align:right;">
-3
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-100
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-visit_2_pmq1
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-220
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-dose_1_pmq1
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-220
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-visit_1_pmq1
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-220
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-dose_2_pmq1
-</td>
-<td style="text-align:right;">
-1
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-220
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-visit_2_pmq1
-</td>
-<td style="text-align:right;">
-3
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-304
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-dose_1_pmq1
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-304
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-visit_1_pmq1
-</td>
-<td style="text-align:right;">
-2
-</td>
-</tr>
-</tbody>
-</table>
+<pre><code>#&gt;    study_id arm          key value
+#&gt; 1       100   1  dose_1_pmq1     2
+#&gt; 2       100   1 visit_1_pmq1     1
+#&gt; 3       100   1  dose_2_pmq1     3
+#&gt; 4       100   1 visit_2_pmq1     0
+#&gt; 5       220   1  dose_1_pmq1     0
+#&gt; 6       220   1 visit_1_pmq1     0
+#&gt; 7       220   1  dose_2_pmq1     1
+#&gt; 8       220   1 visit_2_pmq1     3
+#&gt; 9       304   2  dose_1_pmq1     0
+#&gt; 10      304   2 visit_1_pmq1     2</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Spread the EAV to wide.</span>
 ds_wide &lt;-<span class="st"> </span>ds_eav <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/spread">spread</a></span>(<span class="dt">key=</span>key, <span class="dt">value=</span>value)
 ds_wide</code></pre></div>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<thead><tr>
-<th style="text-align:right;">
-study id
-</th>
-<th style="text-align:right;">
-arm
-</th>
-<th style="text-align:right;">
-dose 1 pmq1
-</th>
-<th style="text-align:right;">
-dose 1 pmq2
-</th>
-<th style="text-align:right;">
-dose 1 pmq3
-</th>
-<th style="text-align:right;">
-dose 1 pmq4
-</th>
-<th style="text-align:right;">
-dose 2 pmq1
-</th>
-<th style="text-align:right;">
-dose 2 pmq2
-</th>
-<th style="text-align:right;">
-dose 2 pmq3
-</th>
-<th style="text-align:right;">
-dose 2 pmq4
-</th>
-<th style="text-align:right;">
-visit 1 pmq1
-</th>
-<th style="text-align:right;">
-visit 1 pmq2
-</th>
-<th style="text-align:right;">
-visit 1 pmq3
-</th>
-<th style="text-align:right;">
-visit 1 pmq4
-</th>
-<th style="text-align:right;">
-visit 2 pmq1
-</th>
-<th style="text-align:right;">
-visit 2 pmq2
-</th>
-<th style="text-align:right;">
-visit 2 pmq3
-</th>
-<th style="text-align:right;">
-visit 2 pmq4
-</th>
-</tr></thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-100
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-220
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-304
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
-</tr>
-</tbody>
-</table>
+<pre><code>#&gt;   study_id arm dose_1_pmq1 dose_1_pmq2 dose_1_pmq3 dose_1_pmq4 dose_2_pmq1
+#&gt; 1      100   1           2           2           1           1           3
+#&gt; 2      220   1           0           1           0           2           1
+#&gt; 3      304   2           0           1           0           0          NA
+#&gt;   dose_2_pmq2 dose_2_pmq3 dose_2_pmq4 visit_1_pmq1 visit_1_pmq2
+#&gt; 1           1           0           0            1            0
+#&gt; 2           2           0           1            0            3
+#&gt; 3          NA          NA          NA            2            0
+#&gt;   visit_1_pmq3 visit_1_pmq4 visit_2_pmq1 visit_2_pmq2 visit_2_pmq3
+#&gt; 1            0            0            0            1            0
+#&gt; 2            1            0            3            4            1
+#&gt; 3            0            0           NA           NA           NA
+#&gt;   visit_2_pmq4
+#&gt; 1            0
+#&gt; 2            0
+#&gt; 3           NA</code></pre>
 </div>
 <div id="ssl-options" class="section level2">
 <h2 class="hasAnchor">
@@ -997,7 +221,7 @@ NA
     <span class="dt">config_options =</span> config_options
   )<span class="op">$</span>data
 }</code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <p>Force the connection to use SSL=3 (which is not preferred, and possibly insecure).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">config_options &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">sslversion=</span><span class="dv">3</span>)
 ds_ssl_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(
@@ -1012,81 +236,80 @@ ds_no_ssl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/r
    <span class="dt">token          =</span> token_simple,
    <span class="dt">config_options =</span> config_options
 )<span class="op">$</span>data</code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 </div>
 <div id="session-information" class="section level2">
 <h2 class="hasAnchor">
 <a href="#session-information" class="anchor"></a>Session Information</h2>
 <p>For the sake of documentation and reproducibility, the current report was rendered in the following environment. Click the line below to expand.</p>
 <p><details><summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary></details></p>
-<pre><code>#&gt; ─ Session info ──────────────────────────────────────────────────────────
-#&gt;  setting  value                       
-#&gt;  version  R version 3.4.4 (2018-03-15)
-#&gt;  os       Ubuntu 18.04 LTS            
-#&gt;  system   x86_64, linux-gnu           
-#&gt;  ui       X11                         
-#&gt;  language (EN)                        
-#&gt;  collate  en_US.UTF-8                 
-#&gt;  tz       America/Chicago             
-#&gt;  date     2018-07-10                  
+<pre><code>#&gt; - Session info ----------------------------------------------------------
+#&gt;  setting  value                                      
+#&gt;  version  R version 3.5.0 Patched (2018-05-14 r74725)
+#&gt;  os       Windows &gt;= 8 x64                           
+#&gt;  system   x86_64, mingw32                            
+#&gt;  ui       RTerm                                      
+#&gt;  language (EN)                                       
+#&gt;  collate  English_United States.1252                 
+#&gt;  tz       America/Chicago                            
+#&gt;  date     2018-07-10                                 
 #&gt; 
-#&gt; ─ Packages ──────────────────────────────────────────────────────────────
-#&gt;  package     * version     date       source                          
-#&gt;  assertthat    0.2.0       2017-04-11 cran (@0.2.0)                   
-#&gt;  backports     1.1.2       2017-12-13 cran (@1.1.2)                   
-#&gt;  bindr         0.1.1       2018-03-13 CRAN (R 3.4.3)                  
-#&gt;  bindrcpp    * 0.2.2       2018-03-29 CRAN (R 3.4.3)                  
-#&gt;  checkmate     1.8.6       2018-04-10 Github (mllg/checkmate@489319a) 
-#&gt;  clisymbols    1.2.0       2017-05-21 CRAN (R 3.4.3)                  
-#&gt;  colorspace    1.3-2       2016-12-14 CRAN (R 3.4.3)                  
-#&gt;  commonmark    1.5         2018-04-28 CRAN (R 3.4.4)                  
-#&gt;  crayon        1.3.4       2017-09-16 CRAN (R 3.4.3)                  
-#&gt;  curl          3.2         2018-03-28 CRAN (R 3.4.4)                  
-#&gt;  desc          1.2.0       2018-05-01 CRAN (R 3.4.4)                  
-#&gt;  devtools      1.13.6      2018-06-27 CRAN (R 3.4.4)                  
-#&gt;  digest        0.6.15      2018-01-28 CRAN (R 3.4.3)                  
-#&gt;  dplyr         0.7.6       2018-06-29 CRAN (R 3.4.4)                  
-#&gt;  evaluate      0.10.1      2017-06-24 CRAN (R 3.4.3)                  
-#&gt;  fs            1.2.3       2018-06-08 CRAN (R 3.4.4)                  
-#&gt;  glue          1.2.0       2017-10-29 cran (@1.2.0)                   
-#&gt;  highr         0.7         2018-06-09 CRAN (R 3.4.4)                  
-#&gt;  hms           0.4.2.9000  2018-05-26 Github (tidyverse/hms@14e74ab)  
-#&gt;  htmltools     0.3.6       2017-04-28 CRAN (R 3.4.3)                  
-#&gt;  httr          1.3.1       2017-08-20 CRAN (R 3.4.3)                  
-#&gt;  kableExtra    0.9.0       2018-05-21 CRAN (R 3.4.4)                  
-#&gt;  knitr       * 1.20        2018-02-20 CRAN (R 3.4.3)                  
-#&gt;  magrittr    * 1.5         2014-11-22 cran (@1.5)                     
-#&gt;  MASS          7.3-50      2018-04-30 CRAN (R 3.4.4)                  
-#&gt;  memoise       1.1.0       2017-04-21 CRAN (R 3.4.3)                  
-#&gt;  munsell       0.5.0       2018-06-12 CRAN (R 3.4.4)                  
-#&gt;  pillar        1.2.3       2018-05-25 CRAN (R 3.4.4)                  
-#&gt;  pkgconfig     2.0.1       2017-03-21 cran (@2.0.1)                   
-#&gt;  pkgdown       1.1.0       2018-06-02 CRAN (R 3.4.4)                  
-#&gt;  plyr          1.8.4       2016-06-08 CRAN (R 3.4.3)                  
-#&gt;  purrr         0.2.5       2018-05-29 CRAN (R 3.4.4)                  
-#&gt;  R6            2.2.2       2017-06-17 CRAN (R 3.4.3)                  
-#&gt;  Rcpp          0.12.17     2018-05-18 CRAN (R 3.4.4)                  
-#&gt;  readr         1.2.0       2018-05-26 Github (tidyverse/readr@d6d622b)
-#&gt;  REDCapR     * 0.9.10.9001 2018-07-10 local                           
-#&gt;  rlang         0.2.1       2018-05-30 CRAN (R 3.4.4)                  
-#&gt;  rmarkdown     1.10        2018-06-11 CRAN (R 3.4.4)                  
-#&gt;  roxygen2      6.0.1       2017-02-06 CRAN (R 3.4.4)                  
-#&gt;  rprojroot     1.3-2       2018-01-03 CRAN (R 3.4.3)                  
-#&gt;  rstudioapi    0.7         2017-09-07 CRAN (R 3.4.3)                  
-#&gt;  rvest         0.3.2       2016-06-17 CRAN (R 3.4.3)                  
-#&gt;  scales        0.5.0.9000  2018-03-29 Github (hadley/scales@d767915)  
-#&gt;  sessioninfo   1.0.0       2017-06-21 CRAN (R 3.4.3)                  
-#&gt;  stringi       1.2.3       2018-06-12 CRAN (R 3.4.4)                  
-#&gt;  stringr       1.3.1       2018-05-10 CRAN (R 3.4.4)                  
-#&gt;  tibble        1.4.2       2018-01-22 CRAN (R 3.4.3)                  
-#&gt;  tidyr         0.8.1       2018-05-18 CRAN (R 3.4.4)                  
-#&gt;  tidyselect    0.2.4       2018-02-26 CRAN (R 3.4.3)                  
-#&gt;  viridisLite   0.3.0       2018-02-01 CRAN (R 3.4.3)                  
-#&gt;  withr         2.1.2       2018-03-29 Github (jimhester/withr@79d7b0d)
-#&gt;  xml2          1.2.0       2018-01-24 CRAN (R 3.4.3)                  
-#&gt;  yaml          2.1.19      2018-05-01 CRAN (R 3.4.4)</code></pre>
+#&gt; - Packages --------------------------------------------------------------
+#&gt;  package     * version     date       source                            
+#&gt;  assertthat    0.2.0       2017-04-11 CRAN (R 3.5.0)                    
+#&gt;  backports     1.1.2       2017-12-13 CRAN (R 3.5.0)                    
+#&gt;  bindr         0.1.1       2018-03-13 CRAN (R 3.5.0)                    
+#&gt;  bindrcpp    * 0.2.2       2018-03-29 CRAN (R 3.5.0)                    
+#&gt;  checkmate     1.8.6       2018-07-02 Github (mllg/checkmate@bc16595)   
+#&gt;  clisymbols    1.2.0       2017-05-21 CRAN (R 3.5.0)                    
+#&gt;  colorspace    1.3-2       2016-12-14 CRAN (R 3.5.0)                    
+#&gt;  commonmark    1.5         2018-04-28 CRAN (R 3.5.0)                    
+#&gt;  crayon        1.3.4       2017-09-16 CRAN (R 3.5.0)                    
+#&gt;  curl          3.2         2018-03-28 CRAN (R 3.5.0)                    
+#&gt;  desc          1.2.0       2018-05-01 CRAN (R 3.5.0)                    
+#&gt;  devtools      1.13.6      2018-06-27 CRAN (R 3.5.0)                    
+#&gt;  digest        0.6.15      2018-01-28 CRAN (R 3.5.0)                    
+#&gt;  dplyr         0.7.5       2018-05-19 CRAN (R 3.5.0)                    
+#&gt;  evaluate      0.10.1      2017-06-24 CRAN (R 3.5.0)                    
+#&gt;  fs            1.2.3       2018-06-08 CRAN (R 3.5.1)                    
+#&gt;  glue          1.2.0       2017-10-29 CRAN (R 3.5.0)                    
+#&gt;  hms           0.4.2.9000  2018-06-28 Github (tidyverse/hms@2e0a39a)    
+#&gt;  htmltools     0.3.6       2017-04-28 CRAN (R 3.5.0)                    
+#&gt;  httr          1.3.1       2017-08-20 CRAN (R 3.5.0)                    
+#&gt;  kableExtra    0.9.0       2018-05-21 CRAN (R 3.5.0)                    
+#&gt;  knitr       * 1.20        2018-02-20 CRAN (R 3.5.0)                    
+#&gt;  magrittr    * 1.5         2014-11-22 CRAN (R 3.5.0)                    
+#&gt;  MASS          7.3-50      2018-04-30 CRAN (R 3.5.0)                    
+#&gt;  memoise       1.1.0       2017-04-21 CRAN (R 3.5.0)                    
+#&gt;  munsell       0.5.0       2018-06-12 CRAN (R 3.5.0)                    
+#&gt;  pillar        1.2.3       2018-05-25 CRAN (R 3.5.0)                    
+#&gt;  pkgconfig     2.0.1       2017-03-21 CRAN (R 3.5.0)                    
+#&gt;  pkgdown       1.1.0       2018-06-02 CRAN (R 3.5.1)                    
+#&gt;  plyr          1.8.4       2016-06-08 CRAN (R 3.5.0)                    
+#&gt;  purrr         0.2.5       2018-05-29 CRAN (R 3.5.0)                    
+#&gt;  R6            2.2.2       2017-06-17 CRAN (R 3.5.0)                    
+#&gt;  Rcpp          0.12.17     2018-05-18 CRAN (R 3.5.0)                    
+#&gt;  readr         1.2.0       2018-06-28 Github (tidyverse/readr@05890c3)  
+#&gt;  REDCapR     * 0.9.10.9001 2018-06-28 Github (OuhscBbmc/REDCapR@5481f15)
+#&gt;  rlang         0.2.1       2018-05-30 CRAN (R 3.5.0)                    
+#&gt;  rmarkdown     1.10        2018-06-11 CRAN (R 3.5.0)                    
+#&gt;  roxygen2      6.0.1       2017-02-06 CRAN (R 3.5.0)                    
+#&gt;  rprojroot     1.3-2       2018-01-03 CRAN (R 3.5.0)                    
+#&gt;  rstudioapi    0.7         2017-09-07 CRAN (R 3.5.0)                    
+#&gt;  rvest         0.3.2       2016-06-17 CRAN (R 3.5.0)                    
+#&gt;  scales        0.5.0       2017-08-24 CRAN (R 3.5.0)                    
+#&gt;  sessioninfo   1.0.0       2017-06-21 CRAN (R 3.5.0)                    
+#&gt;  stringi       1.2.3       2018-06-12 CRAN (R 3.5.0)                    
+#&gt;  stringr       1.3.1       2018-05-10 CRAN (R 3.5.0)                    
+#&gt;  tibble        1.4.2       2018-01-22 CRAN (R 3.5.0)                    
+#&gt;  tidyr         0.8.1       2018-05-18 CRAN (R 3.5.0)                    
+#&gt;  tidyselect    0.2.4       2018-02-26 CRAN (R 3.5.0)                    
+#&gt;  viridisLite   0.3.0       2018-02-01 CRAN (R 3.5.0)                    
+#&gt;  withr         2.1.2       2018-03-15 CRAN (R 3.5.0)                    
+#&gt;  xml2          1.2.0       2018-01-24 CRAN (R 3.5.0)                    
+#&gt;  yaml          2.1.19      2018-05-01 CRAN (R 3.5.0)</code></pre>
 <p></p>
-<p>Report rendered by wibeasley at 2018-07-10, 00:44 -0500 in 4 seconds.</p>
+<p>Report rendered by Will at 2018-07-10, 16:52 -0500 in 3 seconds.</p>
 </div>
   </div>
 
