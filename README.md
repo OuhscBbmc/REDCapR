@@ -9,12 +9,12 @@
 =======
 We’ve been using R with [REDCap](https://projectredcap.org/)’s API since 2012 and have developed some functions that we're assembling in an R package: [`REDCapR`](https://github.com/OuhscBbmc/REDCapR).  The release version and documentation is on [CRAN](https://cran.r-project.org/package=REDCapR), while the development site for collaboration is on [GitHub](https://github.com/OuhscBbmc/REDCapR).
 
-It was taking 50+ lines of code to contact REDCap and robustly transform the returned [csv](https://en.wikipedia.org/wiki/Comma-separated_values) into an R `data.frame`; it took twice that much to implement batching.  All this can be done in one line of R code with the package's [`redcap_read()`](https://www.rdocumentation.org/packages/REDCapR/topics/redcap_read) function:
+It was taking 50+ lines of code to contact REDCap and robustly transform the returned [csv](https://en.wikipedia.org/wiki/Comma-separated_values) into an R `data.frame`; it took twice that much to implement batching.  All this can be done in one line of R code with the package's [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html) function:
 ```r
 ds <- redcap_read(redcap_uri=uri, token=token)$data
 ```
 
-The [`redcap_read()`](https://www.rdocumentation.org/packages/REDCapR/topics/redcap_read) function also accepts values for subsetting/filtering the records and fields.  The development version's [documentation](https://ouhscbbmc.github.io/REDCapR/) and [vignette](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) can be found in the [GitHub repository](https://github.com/OuhscBbmc/REDCapR).  Here's are two examples; the first selects only a portion of the rows, while the second selects only a portion of the columns.
+The [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html) function also accepts values for subsetting/filtering the records and fields.  The development version's [documentation](https://ouhscbbmc.github.io/REDCapR/) and [vignette](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) can be found in the [GitHub repository](https://github.com/OuhscBbmc/REDCapR).  Here's are two examples; the first selects only a portion of the rows, while the second selects only a portion of the columns.
 ```r
 #Return only records with IDs of 1 and 4
 desired_records <- c(1, 4)
