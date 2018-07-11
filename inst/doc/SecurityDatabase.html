@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="date" content="2018-07-10" />
+<meta name="date" content="2018-07-11" />
 
 <title>Security Database</title>
 
@@ -68,7 +68,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">Security Database</h1>
-<h4 class="date"><em>2018-07-10</em></h4>
+<h4 class="date"><em>2018-07-11</em></h4>
 
 
 
@@ -96,7 +96,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="co">------- SQL code to create necessary components in a Microsoft SQL Sever database -------</span>
 
 <span class="co">-----------------------------------------------------------------------</span>
-<span class="co">-- Create two schemas.  </span>
+<span class="co">-- Create two schemas.</span>
 <span class="co">-- The first scehma is accessible by all REDCap API users.</span>
 <span class="co">-- The second scehma is restricted to administrators.</span>
 <span class="co">--</span>
@@ -210,7 +210,7 @@ print <span class="st">'Step #5 executing....'</span>
 print <span class="st">'Step #5 executed'</span>; print <span class="st">''</span>
 
 <span class="co">-----------------------------------------------------------------------</span>
-<span class="co">-- OPTIONAL STEP: Delete the user from the database (the first line) and then the server (the second line).  </span>
+<span class="co">-- OPTIONAL STEP: Delete the user from the database (the first line) and then the server (the second line).</span>
 <span class="co">-- The person's other database user accounts (besides with the auxiliary_security database) will NOT be automatically deleted by these two lines.</span>
 <span class="co">--USE [auxiliary_security]; DROP USER [OUHSC\lsuarez3]</span>
 <span class="co">--USE [master]; DROP LOGIN [OUHSC\lsuarez3]</span>
@@ -253,7 +253,7 @@ print <span class="st">'Step #5 executed'</span>; print <span class="st">''</spa
 <span class="co"># The Activity Directory name that should precede each username.</span>
 <span class="co">#   This should correspond with the result of `SYSTEM_USER`</span>
 <span class="co">#   (https://msdn.microsoft.com/en-us/library/ms179930.aspx)</span>
-ldap_prefix &lt;-<span class="st"> &quot;OUHSC</span><span class="ch">\\</span><span class="st">&quot;</span>  
+ldap_prefix &lt;-<span class="st"> &quot;OUHSC</span><span class="ch">\\</span><span class="st">&quot;</span>
 
 <span class="co">#Create a SQL statement for each REDCap instance.  Only the `instance` value should change.</span>
 sql &lt;-<span class="st"> &quot;</span>
@@ -278,7 +278,7 @@ channel &lt;-<span class="st"> </span>RODBC<span class="op">::</span><span class
 ds_prod &lt;-<span class="st"> </span>RODBC<span class="op">::</span><span class="kw">sqlQuery</span>(channel, <span class="dt">query=</span>sql, <span class="dt">stringsAsFactors=</span>F)
 RODBC<span class="op">::</span><span class="kw">odbcClose</span>(channel); <span class="kw">rm</span>(channel)
 
-<span class="co"># Load the credentials from the second instance.  </span>
+<span class="co"># Load the credentials from the second instance.</span>
 <span class="co">#   Duplicate or remove this block, dependending on the number of instances.</span>
 channel &lt;-<span class="st"> </span>RODBC<span class="op">::</span><span class="kw">odbcConnect</span>(<span class="st">&quot;redcap-dev&quot;</span>) <span class="co"># odbcGetInfo(channel)</span>
 ds_dev  &lt;-<span class="st"> </span>RODBC<span class="op">::</span><span class="kw">sqlQuery</span>(channel, <span class="dt">query=</span>sql, <span class="dt">stringsAsFactors=</span>F)
@@ -364,7 +364,7 @@ RODBC<span class="op">::</span><span class="kw">odbcClose</span>(channel); <span
 </div>
 <div id="document-info" class="section level1">
 <h1>Document Info</h1>
-<p>This document is primarily based on REDCap version 6.11.5, and was last updated 2016-08-30. A development version of the document is available on GitHub: <a href="https://cdn.rawgit.com/OuhscBbmc/REDCapR/dev/inst/doc/SecurityDatabase.html" class="uri">https://cdn.rawgit.com/OuhscBbmc/REDCapR/dev/inst/doc/SecurityDatabase.html</a></p>
+<p>This document is primarily based on REDCap version 6.11.5, and was last updated 2016-08-30. A development version of the document is available on GitHub: <a href="https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html" class="uri">https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html</a></p>
 </div>
 
 

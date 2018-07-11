@@ -14,7 +14,7 @@ It was taking 50+ lines of code to contact REDCap and robustly transform the ret
 ds <- redcap_read(redcap_uri=uri, token=token)$data
 ```
 
-The [`redcap_read()`](https://www.rdocumentation.org/packages/REDCapR/topics/redcap_read) function also accepts values for subsetting/filtering the records and fields.  The development version's [documentation](https://github.com/OuhscBbmc/REDCapR/blob/master/documentation-peek.pdf) and [vignette](https://cdn.rawgit.com/OuhscBbmc/REDCapR/master/inst/doc/BasicREDCapROperations.html) can be found in the [GitHub repository](https://github.com/OuhscBbmc/REDCapR).  Here's are two examples; the first selects only a portion of the rows, while the second selects only a portion of the columns.
+The [`redcap_read()`](https://www.rdocumentation.org/packages/REDCapR/topics/redcap_read) function also accepts values for subsetting/filtering the records and fields.  The development version's [documentation](https://github.com/OuhscBbmc/REDCapR/blob/master/documentation-peek.pdf) and [vignette](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) can be found in the [GitHub repository](https://github.com/OuhscBbmc/REDCapR).  Here's are two examples; the first selects only a portion of the rows, while the second selects only a portion of the columns.
 ```r
 #Return only records with IDs of 1 and 4
 desired_records <- c(1, 4)
@@ -35,7 +35,7 @@ ds_some_fields <- redcap_read(
 
 The `REDCapR` package includes the SSL certificate retrieved by [`httr`'s `find_cert_bundle()`](https://github.com/hadley/httr/blob/master/R/utils.r).  Your REDCap server's identity is always verified, unless the setting is overridden (alternative certificates can also be provided).
 
-To keep our maintenance efforts manageable, the package implements only the REDCap API functions that have been requested.  If there's a feature that would help your projects, please tell us about it in a new issue in REDCapR's [GitHub repository](https://github.com/OuhscBbmc/REDCapR/issues).  A [troubleshooting](https://cdn.rawgit.com/OuhscBbmc/REDCapR/master/inst/doc/TroubleshootingApiCalls.html) document helps diagnose issues with the API.
+To keep our maintenance efforts manageable, the package implements only the REDCap API functions that have been requested.  If there's a feature that would help your projects, please tell us about it in a new issue in REDCapR's [GitHub repository](https://github.com/OuhscBbmc/REDCapR/issues).  A [troubleshooting](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html) document helps diagnose issues with the API.
 
 Our group has benefited from REDCap and the surrounding community, and we'd like to contribute back.  Suggestions, criticisms, and code contributions are welcome.  And if anyone is interested in trying a direction that suits them better, we'll be happy to explain the package's internals and help you fork your own version.  We have some starting material described in the [`./documentation-for-developers/`](https://github.com/OuhscBbmc/REDCapR/tree/master/documentation-for-developers) directory.  Also checkout the other libraries that exist for communicating with REDCap, which are listed in the [REDCap Tools](http://redcap-tools.github.io/projects/) directory.
 
