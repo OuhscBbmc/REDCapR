@@ -41,7 +41,7 @@ This SQL code is run once inside an existing database to establish the schemas, 
 ------- SQL code to create necessary components in a Microsoft SQL Sever database -------
 
 -----------------------------------------------------------------------
--- Create two schemas.  
+-- Create two schemas.
 -- The first scehma is accessible by all REDCap API users.
 -- The second scehma is restricted to administrators.
 --
@@ -165,7 +165,7 @@ EXECUTE sp_executesql @sql_grant_schema_security
 print 'Step #5 executed'; print ''
 
 -----------------------------------------------------------------------
--- OPTIONAL STEP: Delete the user from the database (the first line) and then the server (the second line).  
+-- OPTIONAL STEP: Delete the user from the database (the first line) and then the server (the second line).
 -- The person's other database user accounts (besides with the auxiliary_security database) will NOT be automatically deleted by these two lines.
 --USE [auxiliary_security]; DROP USER [OUHSC\lsuarez3]
 --USE [master]; DROP LOGIN [OUHSC\lsuarez3]
@@ -210,7 +210,7 @@ requireNamespace("checkmate")
 # The Activity Directory name that should precede each username.
 #   This should correspond with the result of `SYSTEM_USER`
 #   (https://msdn.microsoft.com/en-us/library/ms179930.aspx)
-ldap_prefix <- "OUHSC\\"  
+ldap_prefix <- "OUHSC\\"
 
 #Create a SQL statement for each REDCap instance.  Only the `instance` value should change.
 sql <- "
@@ -235,7 +235,7 @@ channel <- RODBC::odbcConnect("redcap-production") # odbcGetInfo(channel)
 ds_prod <- RODBC::sqlQuery(channel, query=sql, stringsAsFactors=F)
 RODBC::odbcClose(channel); rm(channel)
 
-# Load the credentials from the second instance.  
+# Load the credentials from the second instance.
 #   Duplicate or remove this block, dependending on the number of instances.
 channel <- RODBC::odbcConnect("redcap-dev") # odbcGetInfo(channel)
 ds_dev  <- RODBC::sqlQuery(channel, query=sql, stringsAsFactors=F)
@@ -324,4 +324,4 @@ rm(db_table, column_info, var_types, start_time, elapsed_duration)
 Document Info
 ========================================
 
-This document is primarily based on REDCap version 6.11.5, and was last updated 2016-08-30.  A development version of the document is available on GitHub: https://cdn.rawgit.com/OuhscBbmc/REDCapR/dev/inst/doc/SecurityDatabase.html
+This document is primarily based on REDCap version 6.11.5, and was last updated 2016-08-30.  A development version of the document is available on GitHub: https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html

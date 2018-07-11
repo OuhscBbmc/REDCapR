@@ -9,7 +9,9 @@
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/simplex/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Troubleshooting REDCap API Calls">
+<script src="../pkgdown.js"></script><!-- docsearch --><script src="../docsearch.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css">
+<link href="../docsearch.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Troubleshooting REDCap API Calls">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -74,7 +76,13 @@
   </a>
 </li>
       </ul>
+<form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
 </div>
+      </form>
+      
+    </div>
 <!--/.nav-collapse -->
   </div>
 <!--/.container -->
@@ -87,7 +95,7 @@
     <div class="page-header toc-ignore">
       <h1>Troubleshooting REDCap API Calls</h1>
             
-            <h4 class="date">2018-07-09</h4>
+            <h4 class="date">2018-07-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/TroubleshootingApiCalls.Rmd"><code>vignettes/TroubleshootingApiCalls.Rmd</code></a></small>
       <div class="hidden name"><code>TroubleshootingApiCalls.Rmd</code></div>
@@ -129,8 +137,7 @@
 <p><img src="images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"></p>
 <ol style="list-style-type: decimal">
 <li>
-<p><strong>Is Postman installed and operating correctly?</strong><br>
-If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a>. The url is <code>https://bbmc.ouhsc.edu/redcap/api/</code>. There are three key-value pairs: (1) the ‘token’ is <code>9A81268476645C4E5F03428B8AC3AA7B</code>, (2) the ‘content’ is <code>record</code>, and (3) the ‘format’ should be <code>CSV</code>. When checking your own server, the token value should change, but the content and format should not. It should return five records in a CSV format. The ‘status’ should be <code>200 OK</code>. The result should look roughly like this. Notice the line breaks were included in the text values themselves.</p>
+<p><strong>Is Postman installed and operating correctly?</strong> If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a>. The url is <code>https://bbmc.ouhsc.edu/redcap/api/</code>. There are three key-value pairs: (1) the ‘token’ is <code>9A81268476645C4E5F03428B8AC3AA7B</code>, (2) the ‘content’ is <code>record</code>, and (3) the ‘format’ should be <code>CSV</code>. When checking your own server, the token value should change, but the content and format should not. It should return five records in a CSV format. The ‘status’ should be <code>200 OK</code>. The result should look roughly like this. Notice the line breaks were included in the text values themselves.</p>
 <pre><code>record_id,name_first,name_last,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete
 "1","Nutmeg","Nutmouse","14 Rose Cottage St.
 Kenning UK, 323232","(432) 456-4848","nutty@mouse.com","2003-08-30",10,1,2,0,5,1,400,"Character in a book, with some guessing",2
@@ -204,8 +211,8 @@ raw_text &lt;-<span class="st"> </span>httr<span class="op">::</span><span class
 <li>
 <p><strong>Can the user query a <em>subset</em> of <em>their</em> project using RCurl?</strong> This step is like the previous one, but with two differences. First, it’s using their REDCap project (instead of the test project). Second, it pulls fewer records, and a smaller collection of fields. Subsetting can help troubleshoot by avoiding (and thus identifying) cells with problematic values.</p>
 <p>Notice this call to <code><a href="http://www.rdocumentation.org/packages/RCurl/topics/postForm">RCurl::postForm()</a></code> now passes values to the <code>records</code> and <code>fields</code> parameters. Also notice the value is a <em>single</em> long string, rather a <em>vector</em> of shorter strings (which is more natural to most R users).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">redcap_uri         &lt;-<span class="st"> "https://the.urlofyourinsitution.edu/api/"</span> 
-token              &lt;-<span class="st"> "your-secret-token"</span>                        
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">redcap_uri         &lt;-<span class="st"> "https://the.urlofyourinsitution.edu/api/"</span>
+token              &lt;-<span class="st"> "your-secret-token"</span>
 records_collapsed  &lt;-<span class="st"> "1,2,3"</span>                             <span class="co"># Assumes dataset contains ID values of 1-3.</span>
 fields_collapsed   &lt;-<span class="st"> "record_id,name_first,name_last"</span>    <span class="co"># Assumes dataset contains these variables.</span>
 
@@ -224,8 +231,8 @@ raw_text &lt;-<span class="st"> </span>RCurl<span class="op">::</span><span clas
 </li>
 <li>
 <p><strong>Can the user query an <em>entire</em> project using RCurl?</strong> There are two advantages of trying a subset of the data. First, small datasets avoid the time-out errors that plague large datasets. Second, it may avoid problematic values being passed through the pipeline. If the current check fails but the previous check succeedes, then experiment with different expanses of records and fields. This should help determine which values are causing the problems, or if there’s simply too much data being pulled in one pass.</p>
-<p>If the desired dataset is too large, consider if you can prune unnecessary records or fields. If not, one solution is to pull smaller, multiple batches using the API, then reassemble them. The <code><a href="../reference/redcap_read.html">redcap_read()</a></code> function in <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/documentation-peek.pdf">REDCapR</a> does this automatically, and allows the user to specify a <code>batch_size</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">redcap_uri                  &lt;-<span class="st"> "https://the.urlofyourinsitution.edu/api/"</span> 
+<p>If the desired dataset is too large, consider if you can prune unnecessary records or fields. If not, one solution is to pull smaller, multiple batches using the API, then reassemble them. The <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code><a href="../reference/redcap_read.html">redcap_read()</a></code> function</a> in <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> does this automatically, and allows the user to specify a <code>batch_size</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">redcap_uri                  &lt;-<span class="st"> "https://the.urlofyourinsitution.edu/api/"</span>
 token                       &lt;-<span class="st"> "your-secret-token"</span>
 records_collapsed           &lt;-<span class="st"> </span><span class="ot">NULL</span>
 fields_collapsed            &lt;-<span class="st"> </span><span class="ot">NULL</span>
@@ -248,7 +255,7 @@ raw_text &lt;-<span class="st"> </span>RCurl<span class="op">::</span><span clas
 <div id="exporting-from-redcap-to-r-using-redcapr" class="section level2">
 <h2 class="hasAnchor">
 <a href="#exporting-from-redcap-to-r-using-redcapr" class="anchor"></a>Exporting from REDCap to R, using REDCapR</h2>
-<p><a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> is a package that uses <a href="http://curl.haxx.se/">cURL</a> (via <a href="https://github.com/hadley/httr">httr</a>) to communicate with REDCap, and wraps convenience functions around it to reduce the size and complexity of the user’s code. The package’s basic functions are demonstrated in <a href="https://cdn.rawgit.com/OuhscBbmc/REDCapR/master/inst/doc/BasicREDCapROperations.html">this vignette</a> and are documented in its <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/documentation-peek.pdf">reference manual</a> (click the ‘View Raw’ link).</p>
+<p><a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> is a package that uses <a href="http://curl.haxx.se/">cURL</a> (via <a href="https://github.com/hadley/httr">httr</a>) to communicate with REDCap, and wraps convenience functions around it to reduce the size and complexity of the user’s code. The package’s basic functions are <a href="https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html">demonstrated in a vignette</a> and are documented in its <a href="https://ouhscbbmc.github.io/REDCapR/">reference manual</a> (a downloadable <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/documentation-peek.pdf">pdf</a> of the functions are also available).</p>
 <p>If you’re not using REDCapR, you can skip this section and proceed to ‘Importing into REDCap from R’ below.</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -310,7 +317,7 @@ token            &lt;-<span class="st"> "your-secret-token"</span>
 <p>Alternatively, a <code>redcap_project</code> object can be declared initially, which makes subsequent calls cleaner when the token and url are required only the when the object is declared.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(REDCapR) <span class="co">#Load the package into the current R session, if you haven't already.</span>
 uri               &lt;-<span class="st"> "https://bbmc.ouhsc.edu/redcap/api/"</span>
-token             &lt;-<span class="st"> "9A81268476645C4E5F03428B8AC3AA7B"</span>  
+token             &lt;-<span class="st"> "9A81268476645C4E5F03428B8AC3AA7B"</span>
 project           &lt;-<span class="st"> </span>redcap_project<span class="op">$</span><span class="kw">new</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)
 
 ds_three_columns  &lt;-<span class="st"> </span>project<span class="op">$</span><span class="kw">read</span>(<span class="dt">fields=</span><span class="kw">c</span>(<span class="st">"record_id"</span>, <span class="st">"sex"</span>, <span class="st">"age"</span>))<span class="op">$</span>data
@@ -385,7 +392,7 @@ demographics_complete
 rcon &lt;-<span class="st"> </span><span class="kw">redcapConnection</span>(
   <span class="dt">url   =</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>, <span class="co"># Adapt this to your server.</span>
   <span class="dt">token =</span> <span class="st">"your-secret-token"</span>                         <span class="co"># Adapt this to your user's token.</span>
-) 
+)
 <span class="kw">exportRecords</span>(rcon)</code></pre></div>
 </li>
 <li><p><strong>Is the export operation still unsuccessful using redcapAPI?</strong> If so the “Can the user query a <em>entire</em> REDCap project using RCurl?” check succeeded, but the redcapAPI checks did not, consider posting a new <a href="https://github.com/nutterb/redcapAPI/issues">GitHub issue</a> to the package developers.</p></li>
@@ -429,7 +436,7 @@ rcon &lt;-<span class="st"> </span><span class="kw">redcapConnection</span>(
 </li>
 <li>Bejamin Nutter, the primary developer of <a href="https://github.com/nutterb/redcapAPI/wiki">redcapAPI</a> has a good wiki at <a href="https://github.com/nutterb/redcapAPI/wiki" class="uri">https://github.com/nutterb/redcapAPI/wiki</a>
 </li>
-<li><p>In addition to this troubleshooting document, REDCapR has a <a href="https://cdn.rawgit.com/OuhscBbmc/REDCapR/master/inst/doc/BasicREDCapROperations.html">vignette</a> that covers its basic operations.</p></li>
+<li><p>In addition to this troubleshooting document, REDCapR has a <a href="https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html">vignette</a> that covers its basic operations.</p></li>
 </ul>
 </div>
 <div id="document-info" class="section level2">
@@ -477,6 +484,20 @@ rcon &lt;-<span class="st"> </span><span class="kw">redcapConnection</span>(
 </div>
 
   
-
-  </body>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script><script>
+  docsearch({
+    
+    
+    apiKey: 'd672935e2d904316d6ee40239317764e',
+    indexName: 'redcapr',
+    inputSelector: 'input#search-input.form-control',
+    transformData: function(hits) {
+      return hits.map(function (hit) {
+        hit.url = updateHitURL(hit);
+        return hit;
+      });
+    }
+  });
+</script>
+</body>
 </html>

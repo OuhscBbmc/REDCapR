@@ -9,12 +9,12 @@
 =======
 We’ve been using R with [REDCap](https://projectredcap.org/)’s API since 2012 and have developed some functions that we're assembling in an R package: [`REDCapR`](https://github.com/OuhscBbmc/REDCapR).  The release version and documentation is on [CRAN](https://cran.r-project.org/package=REDCapR), while the development site for collaboration is on [GitHub](https://github.com/OuhscBbmc/REDCapR).
 
-It was taking 50+ lines of code to contact REDCap and robustly transform the returned [csv](https://en.wikipedia.org/wiki/Comma-separated_values) into an R `data.frame`; it took twice that much to implement batching.  All this can be done in one line of R code with the package's [`redcap_read()`](https://www.rdocumentation.org/packages/REDCapR/topics/redcap_read) function:
+It was taking 50+ lines of code to contact REDCap and robustly transform the returned [csv](https://en.wikipedia.org/wiki/Comma-separated_values) into an R `data.frame`; it took twice that much to implement batching.  All this can be done in one line of R code with the package's [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html) function:
 ```r
 ds <- redcap_read(redcap_uri=uri, token=token)$data
 ```
 
-The [`redcap_read()`](https://www.rdocumentation.org/packages/REDCapR/topics/redcap_read) function also accepts values for subsetting/filtering the records and fields.  The development version's [documentation](https://github.com/OuhscBbmc/REDCapR/blob/master/documentation-peek.pdf) and [vignette](https://cdn.rawgit.com/OuhscBbmc/REDCapR/master/inst/doc/BasicREDCapROperations.html) can be found in the [GitHub repository](https://github.com/OuhscBbmc/REDCapR).  Here's are two examples; the first selects only a portion of the rows, while the second selects only a portion of the columns.
+The [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html) function also accepts values for subsetting/filtering the records and fields.  The development version's [documentation](https://ouhscbbmc.github.io/REDCapR/) and [vignette](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) can be found in the [GitHub repository](https://github.com/OuhscBbmc/REDCapR).  Here's are two examples; the first selects only a portion of the rows, while the second selects only a portion of the columns.
 ```r
 #Return only records with IDs of 1 and 4
 desired_records <- c(1, 4)
@@ -35,7 +35,7 @@ ds_some_fields <- redcap_read(
 
 The `REDCapR` package includes the SSL certificate retrieved by [`httr`'s `find_cert_bundle()`](https://github.com/hadley/httr/blob/master/R/utils.r).  Your REDCap server's identity is always verified, unless the setting is overridden (alternative certificates can also be provided).
 
-To keep our maintenance efforts manageable, the package implements only the REDCap API functions that have been requested.  If there's a feature that would help your projects, please tell us about it in a new issue in REDCapR's [GitHub repository](https://github.com/OuhscBbmc/REDCapR/issues).  A [troubleshooting](https://cdn.rawgit.com/OuhscBbmc/REDCapR/master/inst/doc/TroubleshootingApiCalls.html) document helps diagnose issues with the API.
+To keep our maintenance efforts manageable, the package implements only the REDCap API functions that have been requested.  If there's a feature that would help your projects, please tell us about it in a new issue in REDCapR's [GitHub repository](https://github.com/OuhscBbmc/REDCapR/issues).  A [troubleshooting](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html) document helps diagnose issues with the API.
 
 Our group has benefited from REDCap and the surrounding community, and we'd like to contribute back.  Suggestions, criticisms, and code contributions are welcome.  And if anyone is interested in trying a direction that suits them better, we'll be happy to explain the package's internals and help you fork your own version.  We have some starting material described in the [`./documentation-for-developers/`](https://github.com/OuhscBbmc/REDCapR/tree/master/documentation-for-developers) directory.  Also checkout the other libraries that exist for communicating with REDCap, which are listed in the [REDCap Tools](http://redcap-tools.github.io/projects/) directory.
 
@@ -50,23 +50,16 @@ Thanks,
 
 ### Download and Installation Instructions
 
-Applies to Windows and Linux.
-
-| [CRAN](https://cran.r-project.org/) | [Version](https://cran.r-project.org/package=REDCapR) | [Rate](http://cranlogs.r-pkg.org/) | [Zenodo](https://zenodo.org/search?ln=en&p=redcapr) | [RDocumentation](https://www.rdocumentation.org/) |
-|  :---- | :----: | :----: | :----: | :----: |
-| [Latest](https://cran.r-project.org/package=REDCapR) | [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/REDCapR)](https://cran.r-project.org/package=REDCapR) | ![CRANPace](http://cranlogs.r-pkg.org/badges/REDCapR) | [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.61990.svg)](https://doi.org/10.5281/zenodo.61990) | [![Rdoc](http://www.rdocumentation.org/badges/version/REDCapR)](http://www.rdocumentation.org/packages/REDCapR) |
-|   | *Latest CRAN version* | *CRAN Downloads* | *Independently-hosted Archive* | *HTML Documentation* |
-
 The *release* version of REDCapR can be installed from [CRAN](https://cran.r-project.org/package=REDCapR).
 ```r
 install.packages("REDCapR")
 ```
 
-The *development* version of REDCapR can be installed from [GitHub](https://github.com/OuhscBbmc/REDCapR) after installing the `remotes` package.
+The *development* version of REDCapR can be installed from [GitHub](https://github.com/OuhscBbmc/REDCapR) after installing the `devtools` package.
 
 ```r
-install.packages("remotes") # Run this line if the 'remotes' package isn't installed already.
-remotes::install_github(repo="OuhscBbmc/REDCapR")
+install.packages("devtools") # Run this line if the 'devtools' package isn't installed already.
+devtools::install_github(repo="OuhscBbmc/REDCapR")
 ```
 
 ### Collaborative Development
@@ -91,3 +84,14 @@ Much of this package has been developed to support the needs of the following pr
 * Additional Institutional Support from OUHSC [Dept of Pediatrics](https://www.oumedicine.com/department-of-pediatrics); 2013-2017.
 
 (So far) the primary developers of REDCapR are the external evaluators for [Oklahoma's MIECHV](https://www.ok.gov/health/Community_&_Family_Health/Family_Support_and_Prevention_Service/MIECHV_Program_-_Federal_Home_Visiting_Grant/MIECHV_Program_Resources/index.html) program.  See the preliminary CQI reports (many of which use REDCapR) at http://ouhscbbmc.github.io/MReportingPublic/.
+
+### Package Characteristics
+
+| Key | Value |
+| :--- | :----- |
+| [License](https://choosealicense.com/) | [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html) |
+| [CRAN Version](https://cran.r-project.org/package=REDCapR) | [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/REDCapR)](https://cran.r-project.org/package=REDCapR) |
+| [CRAN Rate](http://cranlogs.r-pkg.org/) | ![CRANPace](http://cranlogs.r-pkg.org/badges/REDCapR) |
+| [Zenodo Archive](https://zenodo.org/search?ln=en&p=redcapr) | [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.61990.svg)](https://doi.org/10.5281/zenodo.61990) |
+| [Production Doc](https://www.rdocumentation.org/) | [![Rdoc](http://www.rdocumentation.org/badges/version/REDCapR)](http://www.rdocumentation.org/packages/REDCapR) |
+| [Development Doc](https://www.rdocumentation.org/) | [![Rdoc](https://img.shields.io/badge/pkgodwn-GitHub.io-orange.svg?longCache=true&style=style=for-the-badge)](https://ouhscbbmc.github.io/REDCapR/) |

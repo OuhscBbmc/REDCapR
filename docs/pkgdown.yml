@@ -6,4 +6,7 @@ articles:
   SecurityDatabase: SecurityDatabase.html
   TroubleshootingApiCalls: TroubleshootingApiCalls.html
   advanced-redcapr-operations: advanced-redcapr-operations.html
+urls:
+  reference: https://ouhscbbmc.github.io/REDCapR/reference
+  article: https://ouhscbbmc.github.io/REDCapR/articles
 
