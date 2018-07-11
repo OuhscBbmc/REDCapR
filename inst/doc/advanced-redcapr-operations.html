@@ -19,256 +19,46 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 
 
-<style type="text/css">body {
-background-color: #fff;
-margin: 1em auto;
-max-width: 700px;
-overflow: visible;
-padding-left: 2em;
-padding-right: 2em;
-font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-font-size: 14px;
-line-height: 1.35;
-}
-#header {
-text-align: center;
-}
-#TOC {
-clear: both;
-margin: 0 0 10px 10px;
-padding: 4px;
-width: 400px;
-border: 1px solid #CCCCCC;
-border-radius: 5px;
-background-color: #f6f6f6;
-font-size: 13px;
-line-height: 1.3;
-}
-#TOC .toctitle {
-font-weight: bold;
-font-size: 15px;
-margin-left: 5px;
-}
-#TOC ul {
-padding-left: 40px;
-margin-left: -1.5em;
-margin-top: 5px;
-margin-bottom: 5px;
-}
-#TOC ul ul {
-margin-left: -2em;
-}
-#TOC li {
-line-height: 16px;
-}
-table {
-margin: 1em auto;
-border-width: 1px;
-border-color: #DDDDDD;
-border-style: outset;
-border-collapse: collapse;
-}
-table th {
-border-width: 2px;
-padding: 5px;
-border-style: inset;
-}
-table td {
-border-width: 1px;
-border-style: inset;
-line-height: 18px;
-padding: 5px 5px;
-}
-table, table th, table td {
-border-left-style: none;
-border-right-style: none;
-}
-table thead, table tr.even {
-background-color: #f7f7f7;
-}
-p {
-margin: 0.5em 0;
-}
-blockquote {
-background-color: #f6f6f6;
-padding: 0.25em 0.75em;
-}
-hr {
-border-style: solid;
-border: none;
-border-top: 1px solid #777;
-margin: 28px 0;
-}
-dl {
-margin-left: 0;
-}
-dl dd {
-margin-bottom: 13px;
-margin-left: 13px;
-}
-dl dt {
-font-weight: bold;
-}
-ul {
-margin-top: 0;
-}
-ul li {
-list-style: circle outside;
-}
-ul ul {
-margin-bottom: 0;
-}
-pre, code {
-background-color: #f7f7f7;
-border-radius: 3px;
-color: #333;
-white-space: pre-wrap; 
-}
-pre {
-border-radius: 3px;
-margin: 5px 0px 10px 0px;
-padding: 10px;
-}
-pre:not([class]) {
-background-color: #f7f7f7;
-}
-code {
-font-family: Consolas, Monaco, 'Courier New', monospace;
-font-size: 85%;
-}
-p > code, li > code {
-padding: 2px 0px;
-}
-div.figure {
-text-align: center;
-}
-img {
-background-color: #FFFFFF;
-padding: 2px;
-border: 1px solid #DDDDDD;
-border-radius: 3px;
-border: 1px solid #CCCCCC;
-margin: 0 5px;
-}
-h1 {
-margin-top: 0;
-font-size: 35px;
-line-height: 40px;
-}
-h2 {
-border-bottom: 4px solid #f7f7f7;
-padding-top: 10px;
-padding-bottom: 2px;
-font-size: 145%;
-}
-h3 {
-border-bottom: 2px solid #f7f7f7;
-padding-top: 10px;
-font-size: 120%;
-}
-h4 {
-border-bottom: 1px solid #f7f7f7;
-margin-left: 8px;
-font-size: 105%;
-}
-h5, h6 {
-border-bottom: 1px solid #ccc;
-font-size: 105%;
-}
-a {
-color: #0033dd;
-text-decoration: none;
-}
-a:hover {
-color: #6666ff; }
-a:visited {
-color: #800080; }
-a:visited:hover {
-color: #BB00BB; }
-a[href^="http:"] {
-text-decoration: underline; }
-a[href^="https:"] {
-text-decoration: underline; }
-
-code > span.kw { color: #555; font-weight: bold; } 
-code > span.dt { color: #902000; } 
-code > span.dv { color: #40a070; } 
-code > span.bn { color: #d14; } 
-code > span.fl { color: #d14; } 
-code > span.ch { color: #d14; } 
-code > span.st { color: #d14; } 
-code > span.co { color: #888888; font-style: italic; } 
-code > span.ot { color: #007020; } 
-code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
-</style>
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -289,209 +79,1005 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div id="set-project-wide-values." class="section level2">
 <h2>Set project-wide values.</h2>
 <p>There is some information that is specific to a REDCap project, as opposed to an individual operation. This includes the (1) uri of the server, and the (2) token for the user’s project. This is hosted on a machine used in REDCapR’s public test suite, so you can run this example from any computer. Unless tests are running.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(REDCapR) <span class="co">#Load the package into the current R session.</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">uri                   &lt;-<span class="st"> &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">token_simple          &lt;-<span class="st"> &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">token_longitudinal    &lt;-<span class="st"> &quot;0434F0E9CF53ED0587847AB6E51DE762&quot;</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(REDCapR) <span class="co">#Load the package into the current R session.</span>
+uri                   &lt;-<span class="st"> &quot;https://bbmc.ouhsc.edu/redcap/api/&quot;</span>
+token_simple          &lt;-<span class="st"> &quot;9A81268476645C4E5F03428B8AC3AA7B&quot;</span>
+token_longitudinal    &lt;-<span class="st"> &quot;0434F0E9CF53ED0587847AB6E51DE762&quot;</span></code></pre></div>
 </div>
 <div id="converting-from-talllong-to-wide" class="section level2">
 <h2>Converting from tall/long to wide</h2>
 <p><em>Disclaimer</em>: Occasionally we’re asked for a longitudinal dataset to be converted from a “long/tall format” (where typically each row is one observation for a participant) to a “wide format” (where each row is on participant). Usually we advise against it. Besides all the database benefits of a long structure, a wide structure restricts your options with the stat routine. No modern longitudinal analysis procedures (eg, growth curve models or multilevel/hierarchical models) accept wide. You’re pretty much stuck with repeated measures anova, which is very inflexible for real-world medical-ish analyses. It requires a patient to have a measurement at every time point; otherwise the anova excludes the patient entirely.</p>
 <p>However we like going wide to produce visual tables for publications, and here’s one way to do it in R. First retrieve the dataset from REDCap.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(magrittr); </a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">requireNamespace</span>(<span class="st">&quot;dplyr&quot;</span>))</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">requireNamespace</span>(<span class="st">&quot;tidyr&quot;</span>))</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">events_to_retain  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;dose_1_arm_1&quot;</span>, <span class="st">&quot;visit_1_arm_1&quot;</span>, <span class="st">&quot;dose_2_arm_1&quot;</span>, <span class="st">&quot;visit_2_arm_1&quot;</span>)</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">ds_long &lt;-<span class="st"> </span>REDCapR<span class="op">::</span><span class="kw">redcap_read_oneshot</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token_longitudinal)<span class="op">$</span>data</a></code></pre></div>
-<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">ds_long <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)</a></code></pre></div>
-<pre><code>#&gt;    study_id        redcap_event_name pmq1 pmq2 pmq3 pmq4
-#&gt; 1       100         enrollment_arm_1   NA   NA   NA   NA
-#&gt; 2       100             dose_1_arm_1    2    2    1    1
-#&gt; 3       100            visit_1_arm_1    1    0    0    0
-#&gt; 4       100             dose_2_arm_1    3    1    0    0
-#&gt; 5       100            visit_2_arm_1    0    1    0    0
-#&gt; 6       100        final_visit_arm_1   NA   NA   NA   NA
-#&gt; 7       220         enrollment_arm_1   NA   NA   NA   NA
-#&gt; 8       220             dose_1_arm_1    0    1    0    2
-#&gt; 9       220            visit_1_arm_1    0    3    1    0
-#&gt; 10      220             dose_2_arm_1    1    2    0    1
-#&gt; 11      220            visit_2_arm_1    3    4    1    0
-#&gt; 12      220        final_visit_arm_1   NA   NA   NA   NA
-#&gt; 13      304         enrollment_arm_2   NA   NA   NA   NA
-#&gt; 14      304 deadline_to_opt_ou_arm_2   NA   NA   NA   NA
-#&gt; 15      304         first_dose_arm_2    0    1    0    0
-#&gt; 16      304        first_visit_arm_2    2    0    0    0
-#&gt; 17      304        final_visit_arm_2   NA   NA   NA   NA
-#&gt; 18      304 deadline_to_return_arm_2   NA   NA   NA   NA</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(magrittr); 
+<span class="kw">suppressPackageStartupMessages</span>(<span class="kw">requireNamespace</span>(<span class="st">&quot;dplyr&quot;</span>))
+<span class="kw">suppressPackageStartupMessages</span>(<span class="kw">requireNamespace</span>(<span class="st">&quot;tidyr&quot;</span>))
+events_to_retain  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;dose_1_arm_1&quot;</span>, <span class="st">&quot;visit_1_arm_1&quot;</span>, <span class="st">&quot;dose_2_arm_1&quot;</span>, <span class="st">&quot;visit_2_arm_1&quot;</span>)
+
+ds_long &lt;-<span class="st"> </span>REDCapR<span class="op">::</span><span class="kw">redcap_read_oneshot</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token_longitudinal)<span class="op">$</span>data</code></pre></div>
+<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.6 seconds.  The http status code was 200.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)</code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+study id
+</th>
+<th style="text-align:left;">
+redcap event name
+</th>
+<th style="text-align:right;">
+pmq1
+</th>
+<th style="text-align:right;">
+pmq2
+</th>
+<th style="text-align:right;">
+pmq3
+</th>
+<th style="text-align:right;">
+pmq4
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:left;">
+enrollment_arm_1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:left;">
+dose_1_arm_1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:left;">
+visit_1_arm_1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:left;">
+dose_2_arm_1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:left;">
+visit_2_arm_1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:left;">
+final_visit_arm_1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+220
+</td>
+<td style="text-align:left;">
+enrollment_arm_1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+220
+</td>
+<td style="text-align:left;">
+dose_1_arm_1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+220
+</td>
+<td style="text-align:left;">
+visit_1_arm_1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+220
+</td>
+<td style="text-align:left;">
+dose_2_arm_1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+220
+</td>
+<td style="text-align:left;">
+visit_2_arm_1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+220
+</td>
+<td style="text-align:left;">
+final_visit_arm_1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+304
+</td>
+<td style="text-align:left;">
+enrollment_arm_2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+304
+</td>
+<td style="text-align:left;">
+deadline_to_opt_ou_arm_2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+304
+</td>
+<td style="text-align:left;">
+first_dose_arm_2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+304
+</td>
+<td style="text-align:left;">
+first_visit_arm_2
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+304
+</td>
+<td style="text-align:left;">
+final_visit_arm_2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+304
+</td>
+<td style="text-align:left;">
+deadline_to_return_arm_2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
 <p>When widening only one variable (eg, <code>pmq1</code>), the code’s pretty simple:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">ds_wide &lt;-<span class="st"> </span>ds_long <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(study_id, redcap_event_name, pmq1) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(redcap_event_name <span class="op">%in%</span><span class="st"> </span>events_to_retain) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw">spread</span>(<span class="dt">key=</span>redcap_event_name, <span class="dt">value=</span>pmq1)</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">ds_wide</a></code></pre></div>
-<pre><code>#&gt;   study_id dose_1_arm_1 dose_2_arm_1 visit_1_arm_1 visit_2_arm_1
-#&gt; 1      100            2            3             1             0
-#&gt; 2      220            0            1             0             3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_wide &lt;-<span class="st"> </span>ds_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(study_id, redcap_event_name, pmq1) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(redcap_event_name <span class="op">%in%</span><span class="st"> </span>events_to_retain) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>tidyr<span class="op">::</span><span class="kw">spread</span>(<span class="dt">key=</span>redcap_event_name, <span class="dt">value=</span>pmq1)
+ds_wide</code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+study id
+</th>
+<th style="text-align:right;">
+dose 1 arm 1
+</th>
+<th style="text-align:right;">
+dose 2 arm 1
+</th>
+<th style="text-align:right;">
+visit 1 arm 1
+</th>
+<th style="text-align:right;">
+visit 2 arm 1
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+220
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+</tbody>
+</table>
 <p>When widening more than one variable (eg, <code>pmq1</code> - <code>pmq4</code>), it’s usually easiest to go even longer/taller (eg, <code>ds_eav</code>) before reversing direction and going wide:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">pattern &lt;-<span class="st"> &quot;^(</span><span class="ch">\\</span><span class="st">w+?)_arm_(</span><span class="ch">\\</span><span class="st">d)$&quot;</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">ds_eav &lt;-<span class="st"> </span>ds_long <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb8-6" data-line-number="6">    <span class="dt">event      =</span> <span class="kw">sub</span>(pattern, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>, redcap_event_name),</a>
-<a class="sourceLine" id="cb8-7" data-line-number="7">    <span class="dt">arm        =</span> <span class="kw">as.integer</span>(<span class="kw">sub</span>(pattern, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">2&quot;</span>, redcap_event_name))</a>
-<a class="sourceLine" id="cb8-8" data-line-number="8">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(study_id, event, arm, pmq1, pmq2, pmq3, pmq4) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw">gather</span>(<span class="dt">key=</span>key, <span class="dt">value=</span>value, pmq1, pmq2, pmq3, pmq4) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(<span class="op">!</span>(event <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb8-12" data-line-number="12">    <span class="st">&quot;enrollment&quot;</span>, <span class="st">&quot;final_visit&quot;</span>, <span class="st">&quot;deadline_to_return&quot;</span>, <span class="st">&quot;deadline_to_opt_ou&quot;</span>)</a>
-<a class="sourceLine" id="cb8-13" data-line-number="13">  )) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>( <span class="co"># Simulate correcting for mismatched names across arms:</span></a>
-<a class="sourceLine" id="cb8-15" data-line-number="15">    <span class="dt">event =</span> dplyr<span class="op">::</span><span class="kw">recode</span>(event, <span class="st">&quot;first_dose&quot;</span>=<span class="st">&quot;dose_1&quot;</span>, <span class="st">&quot;first_visit&quot;</span>=<span class="st">&quot;visit_1&quot;</span>),</a>
-<a class="sourceLine" id="cb8-16" data-line-number="16">    <span class="dt">key =</span> <span class="kw">paste0</span>(event, <span class="st">&quot;_&quot;</span>, key)</a>
-<a class="sourceLine" id="cb8-17" data-line-number="17">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>event)</a>
-<a class="sourceLine" id="cb8-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb8-20" data-line-number="20"><span class="co"># Show the first 10 rows of the EAV table.</span></a>
-<a class="sourceLine" id="cb8-21" data-line-number="21">ds_eav <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-22" data-line-number="22"><span class="st">  </span><span class="kw">head</span>(<span class="dv">10</span>)</a></code></pre></div>
-<pre><code>#&gt;    study_id arm          key value
-#&gt; 1       100   1  dose_1_pmq1     2
-#&gt; 2       100   1 visit_1_pmq1     1
-#&gt; 3       100   1  dose_2_pmq1     3
-#&gt; 4       100   1 visit_2_pmq1     0
-#&gt; 5       220   1  dose_1_pmq1     0
-#&gt; 6       220   1 visit_1_pmq1     0
-#&gt; 7       220   1  dose_2_pmq1     1
-#&gt; 8       220   1 visit_2_pmq1     3
-#&gt; 9       304   2  dose_1_pmq1     0
-#&gt; 10      304   2 visit_1_pmq1     2</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># Spread the EAV to wide.</span></a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">ds_wide &lt;-<span class="st"> </span>ds_eav <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw">spread</span>(<span class="dt">key=</span>key, <span class="dt">value=</span>value)</a>
-<a class="sourceLine" id="cb10-4" data-line-number="4">ds_wide</a></code></pre></div>
-<pre><code>#&gt;   study_id arm dose_1_pmq1 dose_1_pmq2 dose_1_pmq3 dose_1_pmq4 dose_2_pmq1
-#&gt; 1      100   1           2           2           1           1           3
-#&gt; 2      220   1           0           1           0           2           1
-#&gt; 3      304   2           0           1           0           0          NA
-#&gt;   dose_2_pmq2 dose_2_pmq3 dose_2_pmq4 visit_1_pmq1 visit_1_pmq2
-#&gt; 1           1           0           0            1            0
-#&gt; 2           2           0           1            0            3
-#&gt; 3          NA          NA          NA            2            0
-#&gt;   visit_1_pmq3 visit_1_pmq4 visit_2_pmq1 visit_2_pmq2 visit_2_pmq3
-#&gt; 1            0            0            0            1            0
-#&gt; 2            1            0            3            4            1
-#&gt; 3            0            0           NA           NA           NA
-#&gt;   visit_2_pmq4
-#&gt; 1            0
-#&gt; 2            0
-#&gt; 3           NA</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pattern &lt;-<span class="st"> &quot;^(</span><span class="ch">\\</span><span class="st">w+?)_arm_(</span><span class="ch">\\</span><span class="st">d)$&quot;</span>
+
+ds_eav &lt;-<span class="st"> </span>ds_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(
+    <span class="dt">event      =</span> <span class="kw">sub</span>(pattern, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>, redcap_event_name),
+    <span class="dt">arm        =</span> <span class="kw">as.integer</span>(<span class="kw">sub</span>(pattern, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">2&quot;</span>, redcap_event_name))
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(study_id, event, arm, pmq1, pmq2, pmq3, pmq4) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>tidyr<span class="op">::</span><span class="kw">gather</span>(<span class="dt">key=</span>key, <span class="dt">value=</span>value, pmq1, pmq2, pmq3, pmq4) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(<span class="op">!</span>(event <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(
+    <span class="st">&quot;enrollment&quot;</span>, <span class="st">&quot;final_visit&quot;</span>, <span class="st">&quot;deadline_to_return&quot;</span>, <span class="st">&quot;deadline_to_opt_ou&quot;</span>)
+  )) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>( <span class="co"># Simulate correcting for mismatched names across arms:</span>
+    <span class="dt">event =</span> dplyr<span class="op">::</span><span class="kw">recode</span>(event, <span class="st">&quot;first_dose&quot;</span>=<span class="st">&quot;dose_1&quot;</span>, <span class="st">&quot;first_visit&quot;</span>=<span class="st">&quot;visit_1&quot;</span>),
+    <span class="dt">key =</span> <span class="kw">paste0</span>(event, <span class="st">&quot;_&quot;</span>, key)
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>event)
+
+<span class="co"># Show the first 10 rows of the EAV table.</span>
+ds_eav <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">10</span>)</code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+study id
+</th>
+<th style="text-align:right;">
+arm
+</th>
+<th style="text-align:left;">
+key
+</th>
+<th style="text-align:right;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+dose_1_pmq1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+visit_1_pmq1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+dose_2_pmq1
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+visit_2_pmq1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+220
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+dose_1_pmq1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+220
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+visit_1_pmq1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+220
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+dose_2_pmq1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+220
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+visit_2_pmq1
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+304
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+dose_1_pmq1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+304
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+visit_1_pmq1
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Spread the EAV to wide.</span>
+ds_wide &lt;-<span class="st"> </span>ds_eav <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>tidyr<span class="op">::</span><span class="kw">spread</span>(<span class="dt">key=</span>key, <span class="dt">value=</span>value)
+ds_wide</code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+study id
+</th>
+<th style="text-align:right;">
+arm
+</th>
+<th style="text-align:right;">
+dose 1 pmq1
+</th>
+<th style="text-align:right;">
+dose 1 pmq2
+</th>
+<th style="text-align:right;">
+dose 1 pmq3
+</th>
+<th style="text-align:right;">
+dose 1 pmq4
+</th>
+<th style="text-align:right;">
+dose 2 pmq1
+</th>
+<th style="text-align:right;">
+dose 2 pmq2
+</th>
+<th style="text-align:right;">
+dose 2 pmq3
+</th>
+<th style="text-align:right;">
+dose 2 pmq4
+</th>
+<th style="text-align:right;">
+visit 1 pmq1
+</th>
+<th style="text-align:right;">
+visit 1 pmq2
+</th>
+<th style="text-align:right;">
+visit 1 pmq3
+</th>
+<th style="text-align:right;">
+visit 1 pmq4
+</th>
+<th style="text-align:right;">
+visit 2 pmq1
+</th>
+<th style="text-align:right;">
+visit 2 pmq2
+</th>
+<th style="text-align:right;">
+visit 2 pmq3
+</th>
+<th style="text-align:right;">
+visit 2 pmq4
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+220
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+304
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="ssl-options" class="section level2">
 <h2>SSL Options</h2>
 <p>The official <a href="http://curl.haxx.se">cURL site</a> discusses the process of using SSL to verify the server being connected to.</p>
 <p>Use the SSL cert file that come with the <code>openssl</code> package.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">cert_location &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;cacert.pem&quot;</span>, <span class="dt">package=</span><span class="st">&quot;openssl&quot;</span>)</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="cf">if</span>( <span class="kw">file.exists</span>(cert_location) ) {</a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">  config_options         &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">cainfo=</span>cert_location)</a>
-<a class="sourceLine" id="cb12-4" data-line-number="4">  ds_different_cert_file &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</span>(</a>
-<a class="sourceLine" id="cb12-5" data-line-number="5">    <span class="dt">redcap_uri     =</span> uri,</a>
-<a class="sourceLine" id="cb12-6" data-line-number="6">    <span class="dt">token          =</span> token_simple,</a>
-<a class="sourceLine" id="cb12-7" data-line-number="7">    <span class="dt">config_options =</span> config_options</a>
-<a class="sourceLine" id="cb12-8" data-line-number="8">  )<span class="op">$</span>data</a>
-<a class="sourceLine" id="cb12-9" data-line-number="9">}</a></code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cert_location &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;cacert.pem&quot;</span>, <span class="dt">package=</span><span class="st">&quot;openssl&quot;</span>)
+<span class="cf">if</span>( <span class="kw">file.exists</span>(cert_location) ) {
+  config_options         &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">cainfo=</span>cert_location)
+  ds_different_cert_file &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</span>(
+    <span class="dt">redcap_uri     =</span> uri,
+    <span class="dt">token          =</span> token_simple,
+    <span class="dt">config_options =</span> config_options
+  )<span class="op">$</span>data
+}</code></pre></div>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
 <p>Force the connection to use SSL=3 (which is not preferred, and possibly insecure).</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">config_options &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">sslversion=</span><span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">ds_ssl_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</span>(</a>
-<a class="sourceLine" id="cb14-3" data-line-number="3">  <span class="dt">redcap_uri     =</span> uri,</a>
-<a class="sourceLine" id="cb14-4" data-line-number="4">  <span class="dt">token          =</span> token_simple,</a>
-<a class="sourceLine" id="cb14-5" data-line-number="5">  <span class="dt">config_options =</span> config_options</a>
-<a class="sourceLine" id="cb14-6" data-line-number="6">)<span class="op">$</span>data</a></code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">config_options &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2">ds_no_ssl &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</span>(</a>
-<a class="sourceLine" id="cb16-3" data-line-number="3">   <span class="dt">redcap_uri     =</span> uri,</a>
-<a class="sourceLine" id="cb16-4" data-line-number="4">   <span class="dt">token          =</span> token_simple,</a>
-<a class="sourceLine" id="cb16-5" data-line-number="5">   <span class="dt">config_options =</span> config_options</a>
-<a class="sourceLine" id="cb16-6" data-line-number="6">)<span class="op">$</span>data</a></code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">config_options &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">sslversion=</span><span class="dv">3</span>)
+ds_ssl_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</span>(
+  <span class="dt">redcap_uri     =</span> uri,
+  <span class="dt">token          =</span> token_simple,
+  <span class="dt">config_options =</span> config_options
+)<span class="op">$</span>data</code></pre></div>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">config_options &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)
+ds_no_ssl &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</span>(
+   <span class="dt">redcap_uri     =</span> uri,
+   <span class="dt">token          =</span> token_simple,
+   <span class="dt">config_options =</span> config_options
+)<span class="op">$</span>data</code></pre></div>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 </div>
 <div id="session-information" class="section level2">
 <h2>Session Information</h2>
 <p>For the sake of documentation and reproducibility, the current report was rendered in the following environment. Click the line below to expand.</p>
-<details>
-<p><summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary></p>
-<pre><code>#&gt; - Session info ----------------------------------------------------------
-#&gt;  setting  value                                      
-#&gt;  version  R version 3.5.1 Patched (2018-07-02 r74950)
-#&gt;  os       Windows &gt;= 8 x64                           
-#&gt;  system   x86_64, mingw32                            
-#&gt;  ui       RStudio                                    
-#&gt;  language (EN)                                       
-#&gt;  collate  English_United States.1252                 
-#&gt;  tz       America/Chicago                            
-#&gt;  date     2018-07-10                                 
+<p><details> <summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary></p>
+<pre><code>#&gt; ─ Session info ──────────────────────────────────────────────────────────
+#&gt;  setting  value                       
+#&gt;  version  R version 3.4.4 (2018-03-15)
+#&gt;  os       Ubuntu 18.04 LTS            
+#&gt;  system   x86_64, linux-gnu           
+#&gt;  ui       RStudio                     
+#&gt;  language (EN)                        
+#&gt;  collate  en_US.UTF-8                 
+#&gt;  tz       America/Chicago             
+#&gt;  date     2018-07-10                  
 #&gt; 
-#&gt; - Packages --------------------------------------------------------------
+#&gt; ─ Packages ──────────────────────────────────────────────────────────────
 #&gt;  package     * version     date       source                          
-#&gt;  assertthat    0.2.0       2017-04-11 CRAN (R 3.5.0)                  
-#&gt;  backports     1.1.2       2017-12-13 CRAN (R 3.5.0)                  
-#&gt;  bindr         0.1.1       2018-03-13 CRAN (R 3.5.0)                  
-#&gt;  bindrcpp    * 0.2.2       2018-03-29 CRAN (R 3.5.0)                  
-#&gt;  checkmate     1.8.6       2018-07-02 Github (mllg/checkmate@bc16595) 
-#&gt;  clisymbols    1.2.0       2017-05-21 CRAN (R 3.5.0)                  
-#&gt;  codetools     0.2-15      2016-10-05 CRAN (R 3.5.1)                  
-#&gt;  colorspace    1.3-2       2016-12-14 CRAN (R 3.5.0)                  
-#&gt;  commonmark    1.5         2018-04-28 CRAN (R 3.5.0)                  
-#&gt;  crayon        1.3.4       2017-09-16 CRAN (R 3.5.0)                  
-#&gt;  curl          3.2         2018-03-28 CRAN (R 3.5.0)                  
-#&gt;  desc          1.2.0       2018-05-01 CRAN (R 3.5.0)                  
-#&gt;  devtools      1.13.6      2018-06-27 CRAN (R 3.5.0)                  
-#&gt;  digest        0.6.15      2018-01-28 CRAN (R 3.5.0)                  
-#&gt;  dplyr         0.7.6       2018-06-29 CRAN (R 3.5.1)                  
-#&gt;  evaluate      0.10.1      2017-06-24 CRAN (R 3.5.0)                  
-#&gt;  git2r         0.21.0      2018-01-04 CRAN (R 3.5.0)                  
-#&gt;  glue          1.2.0       2017-10-29 CRAN (R 3.5.0)                  
-#&gt;  hms           0.4.2.9000  2018-06-28 Github (tidyverse/hms@2e0a39a)  
-#&gt;  htmltools     0.3.6       2017-04-28 CRAN (R 3.5.0)                  
-#&gt;  httr          1.3.1       2017-08-20 CRAN (R 3.5.0)                  
-#&gt;  kableExtra    0.9.0       2018-05-21 CRAN (R 3.5.0)                  
-#&gt;  knitr       * 1.20        2018-02-20 CRAN (R 3.5.0)                  
-#&gt;  magrittr    * 1.5         2014-11-22 CRAN (R 3.5.0)                  
-#&gt;  memoise       1.1.0       2017-04-21 CRAN (R 3.5.0)                  
-#&gt;  munsell       0.5.0       2018-06-12 CRAN (R 3.5.0)                  
-#&gt;  pillar        1.2.3       2018-05-25 CRAN (R 3.5.0)                  
-#&gt;  pkgconfig     2.0.1       2017-03-21 CRAN (R 3.5.0)                  
-#&gt;  plyr          1.8.4       2016-06-08 CRAN (R 3.5.0)                  
-#&gt;  purrr         0.2.5       2018-05-29 CRAN (R 3.5.0)                  
-#&gt;  R6            2.2.2       2017-06-17 CRAN (R 3.5.0)                  
-#&gt;  Rcpp          0.12.17     2018-05-18 CRAN (R 3.5.0)                  
-#&gt;  readr         1.2.0       2018-06-28 Github (tidyverse/readr@05890c3)
+#&gt;  assertthat    0.2.0       2017-04-11 cran (@0.2.0)                   
+#&gt;  backports     1.1.2       2017-12-13 cran (@1.1.2)                   
+#&gt;  bindr         0.1.1       2018-03-13 CRAN (R 3.4.3)                  
+#&gt;  bindrcpp    * 0.2.2       2018-03-29 CRAN (R 3.4.3)                  
+#&gt;  bit           1.1-14      2018-05-29 CRAN (R 3.4.4)                  
+#&gt;  bit64         0.9-7       2017-05-08 cran (@0.9-7)                   
+#&gt;  blob          1.1.1       2018-03-25 CRAN (R 3.4.3)                  
+#&gt;  callr         2.0.4       2018-05-15 CRAN (R 3.4.4)                  
+#&gt;  checkmate     1.8.6       2018-04-10 Github (mllg/checkmate@489319a) 
+#&gt;  cli           1.0.0       2017-11-05 CRAN (R 3.4.3)                  
+#&gt;  clisymbols    1.2.0       2017-05-21 CRAN (R 3.4.3)                  
+#&gt;  codetools     0.2-15      2016-10-05 CRAN (R 3.4.3)                  
+#&gt;  colorspace    1.3-2       2016-12-14 CRAN (R 3.4.3)                  
+#&gt;  commonmark    1.5         2018-04-28 CRAN (R 3.4.4)                  
+#&gt;  crayon        1.3.4       2017-09-16 CRAN (R 3.4.3)                  
+#&gt;  curl          3.2         2018-03-28 CRAN (R 3.4.4)                  
+#&gt;  DBI           1.0.0       2018-05-02 CRAN (R 3.4.4)                  
+#&gt;  debugme       1.1.0       2017-10-22 cran (@1.1.0)                   
+#&gt;  desc          1.2.0       2018-05-01 CRAN (R 3.4.4)                  
+#&gt;  devtools      1.13.6      2018-06-27 CRAN (R 3.4.4)                  
+#&gt;  digest        0.6.15      2018-01-28 CRAN (R 3.4.3)                  
+#&gt;  dplyr         0.7.6       2018-06-29 CRAN (R 3.4.4)                  
+#&gt;  evaluate      0.10.1      2017-06-24 CRAN (R 3.4.3)                  
+#&gt;  fs            1.2.3       2018-06-08 CRAN (R 3.4.4)                  
+#&gt;  glue          1.2.0       2017-10-29 cran (@1.2.0)                   
+#&gt;  highr         0.7         2018-06-09 CRAN (R 3.4.4)                  
+#&gt;  hms           0.4.2.9000  2018-05-26 Github (tidyverse/hms@14e74ab)  
+#&gt;  htmltools     0.3.6       2017-04-28 CRAN (R 3.4.3)                  
+#&gt;  httr          1.3.1       2017-08-20 CRAN (R 3.4.3)                  
+#&gt;  kableExtra    0.9.0       2018-05-21 CRAN (R 3.4.4)                  
+#&gt;  knitr       * 1.20        2018-02-20 CRAN (R 3.4.3)                  
+#&gt;  magrittr    * 1.5         2014-11-22 cran (@1.5)                     
+#&gt;  MASS          7.3-50      2018-04-30 CRAN (R 3.4.4)                  
+#&gt;  memoise       1.1.0       2017-04-21 CRAN (R 3.4.3)                  
+#&gt;  munsell       0.5.0       2018-06-12 CRAN (R 3.4.4)                  
+#&gt;  odbc          1.1.6       2018-06-09 CRAN (R 3.4.4)                  
+#&gt;  pillar        1.2.3       2018-05-25 CRAN (R 3.4.4)                  
+#&gt;  pkgconfig     2.0.1       2017-03-21 cran (@2.0.1)                   
+#&gt;  pkgdown       1.1.0       2018-06-02 CRAN (R 3.4.4)                  
+#&gt;  plyr          1.8.4       2016-06-08 CRAN (R 3.4.3)                  
+#&gt;  processx      3.1.0       2018-05-15 CRAN (R 3.4.4)                  
+#&gt;  purrr         0.2.5       2018-05-29 CRAN (R 3.4.4)                  
+#&gt;  R6            2.2.2       2017-06-17 CRAN (R 3.4.3)                  
+#&gt;  Rcpp          0.12.17     2018-05-18 CRAN (R 3.4.4)                  
+#&gt;  readr         1.2.0       2018-05-26 Github (tidyverse/readr@d6d622b)
 #&gt;  REDCapR     * 0.9.10.9001 &lt;NA&gt;       local                           
-#&gt;  rlang         0.2.1       2018-05-30 CRAN (R 3.5.0)                  
-#&gt;  rmarkdown     1.10        2018-06-11 CRAN (R 3.5.0)                  
-#&gt;  roxygen2      6.0.1       2017-02-06 CRAN (R 3.5.0)                  
-#&gt;  rprojroot     1.3-2       2018-01-03 CRAN (R 3.5.0)                  
-#&gt;  rstudioapi    0.7         2017-09-07 CRAN (R 3.5.0)                  
-#&gt;  rvest         0.3.2       2016-06-17 CRAN (R 3.5.0)                  
-#&gt;  scales        0.5.0       2017-08-24 CRAN (R 3.5.0)                  
-#&gt;  sessioninfo   1.0.0       2017-06-21 CRAN (R 3.5.0)                  
-#&gt;  stringi       1.2.3       2018-06-12 CRAN (R 3.5.0)                  
-#&gt;  stringr       1.3.1       2018-05-10 CRAN (R 3.5.0)                  
-#&gt;  testthat      2.0.0       2017-12-13 CRAN (R 3.5.0)                  
-#&gt;  tibble        1.4.2       2018-01-22 CRAN (R 3.5.0)                  
-#&gt;  tidyr         0.8.1       2018-05-18 CRAN (R 3.5.0)                  
-#&gt;  tidyselect    0.2.4       2018-02-26 CRAN (R 3.5.0)                  
-#&gt;  viridisLite   0.3.0       2018-02-01 CRAN (R 3.5.0)                  
-#&gt;  withr         2.1.2       2018-03-15 CRAN (R 3.5.0)                  
-#&gt;  xml2          1.2.0       2018-01-24 CRAN (R 3.5.0)                  
-#&gt;  yaml          2.1.19      2018-05-01 CRAN (R 3.5.0)</code></pre>
-</details>
-<p>Report rendered by Will at 2018-07-10, 17:15 -0500 in 2 seconds.</p>
+#&gt;  rlang         0.2.1       2018-05-30 CRAN (R 3.4.4)                  
+#&gt;  rmarkdown     1.10        2018-06-11 CRAN (R 3.4.4)                  
+#&gt;  roxygen2      6.0.1       2017-02-06 CRAN (R 3.4.4)                  
+#&gt;  rprojroot     1.3-2       2018-01-03 CRAN (R 3.4.3)                  
+#&gt;  rstudioapi    0.7         2017-09-07 CRAN (R 3.4.3)                  
+#&gt;  rvest         0.3.2       2016-06-17 CRAN (R 3.4.3)                  
+#&gt;  scales        0.5.0.9000  2018-03-29 Github (hadley/scales@d767915)  
+#&gt;  sessioninfo   1.0.0       2017-06-21 CRAN (R 3.4.3)                  
+#&gt;  stringi       1.2.3       2018-06-12 CRAN (R 3.4.4)                  
+#&gt;  stringr       1.3.1       2018-05-10 CRAN (R 3.4.4)                  
+#&gt;  testthat    * 2.0.0       2017-12-13 CRAN (R 3.4.3)                  
+#&gt;  tibble        1.4.2       2018-01-22 CRAN (R 3.4.3)                  
+#&gt;  tidyr         0.8.1       2018-05-18 CRAN (R 3.4.4)                  
+#&gt;  tidyselect    0.2.4       2018-02-26 CRAN (R 3.4.3)                  
+#&gt;  usethis       1.3.0       2018-02-24 CRAN (R 3.4.4)                  
+#&gt;  viridisLite   0.3.0       2018-02-01 CRAN (R 3.4.3)                  
+#&gt;  withr         2.1.2       2018-03-29 Github (jimhester/withr@79d7b0d)
+#&gt;  xml2          1.2.0       2018-01-24 CRAN (R 3.4.3)                  
+#&gt;  yaml          2.1.19      2018-05-01 CRAN (R 3.4.4)</code></pre>
+<p></details></p>
+<p>Report rendered by wibeasley at 2018-07-10, 20:29 -0500 in 4 seconds.</p>
 </div>
 
 

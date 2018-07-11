@@ -4,6 +4,9 @@
     <loc>https://ouhscbbmc.github.io/REDCapR/index.html</loc>
   </url>
   <url>
+    <loc>https://ouhscbbmc.github.io/REDCapR/reference/REDCapR-package.html</loc>
+  </url>
+  <url>
     <loc>https://ouhscbbmc.github.io/REDCapR/reference/collapse_vector.html</loc>
   </url>
   <url>
@@ -17,9 +20,6 @@
   </url>
   <url>
     <loc>https://ouhscbbmc.github.io/REDCapR/reference/metadata_utilities.html</loc>
-  </url>
-  <url>
-    <loc>https://ouhscbbmc.github.io/REDCapR/reference/REDCapR-package.html</loc>
   </url>
   <url>
     <loc>https://ouhscbbmc.github.io/REDCapR/reference/redcap_column_sanitize.html</loc>
@@ -70,9 +70,6 @@
     <loc>https://ouhscbbmc.github.io/REDCapR/reference/validate.html</loc>
   </url>
   <url>
-    <loc>https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.html</loc>
-  </url>
-  <url>
     <loc>https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html</loc>
   </url>
   <url>
@@ -80,5 +77,8 @@
   </url>
   <url>
     <loc>https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html</loc>
+  </url>
+  <url>
+    <loc>https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.html</loc>
   </url>
 </urlset>
