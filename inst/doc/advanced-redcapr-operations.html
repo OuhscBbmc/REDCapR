@@ -94,7 +94,7 @@ token_longitudinal    &lt;-<span class="st"> &quot;0434F0E9CF53ED0587847AB6E51DE
 events_to_retain  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;dose_1_arm_1&quot;</span>, <span class="st">&quot;visit_1_arm_1&quot;</span>, <span class="st">&quot;dose_2_arm_1&quot;</span>, <span class="st">&quot;visit_2_arm_1&quot;</span>)
 
 ds_long &lt;-<span class="st"> </span>REDCapR<span class="op">::</span><span class="kw">redcap_read_oneshot</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token_longitudinal)<span class="op">$</span>data</code></pre></div>
-<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.6 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.7 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_long <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)</code></pre></div>
 <table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
@@ -992,7 +992,7 @@ ds_no_ssl &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</sp
    <span class="dt">token          =</span> token_simple,
    <span class="dt">config_options =</span> config_options
 )<span class="op">$</span>data</code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 </div>
 <div id="session-information" class="section level2">
 <h2>Session Information</h2>
@@ -1055,7 +1055,7 @@ ds_no_ssl &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</sp
 #&gt;  sessioninfo   1.0.0       2017-06-21 CRAN (R 3.4.3)                  
 #&gt;  stringi       1.2.3       2018-06-12 CRAN (R 3.4.4)                  
 #&gt;  stringr       1.3.1       2018-05-10 CRAN (R 3.4.4)                  
-#&gt;  testthat    * 2.0.0       2017-12-13 CRAN (R 3.4.3)                  
+#&gt;  testthat      2.0.0       2017-12-13 CRAN (R 3.4.3)                  
 #&gt;  tibble        1.4.2       2018-01-22 CRAN (R 3.4.3)                  
 #&gt;  tidyr         0.8.1       2018-05-18 CRAN (R 3.4.4)                  
 #&gt;  tidyselect    0.2.4       2018-02-26 CRAN (R 3.4.3)                  
@@ -1064,7 +1064,7 @@ ds_no_ssl &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</sp
 #&gt;  xml2          1.2.0       2018-01-24 CRAN (R 3.4.3)                  
 #&gt;  yaml          2.1.19      2018-05-01 CRAN (R 3.4.4)</code></pre>
 <p></details></p>
-<p>Report rendered by wibeasley at 2018-07-11, 10:21 -0500 in 4 seconds.</p>
+<p>Report rendered by wibeasley at 2018-07-11, 11:04 -0500 in 5 seconds.</p>
 </div>
 
 
