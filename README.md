@@ -14,7 +14,7 @@ It was taking 50+ lines of code to contact REDCap and robustly transform the ret
 ds <- redcap_read(redcap_uri=uri, token=token)$data
 ```
 
-The [`redcap_read()`](https://www.rdocumentation.org/packages/REDCapR/topics/redcap_read) function also accepts values for subsetting/filtering the records and fields.  The development version's [documentation](https://github.com/OuhscBbmc/REDCapR/blob/master/documentation-peek.pdf) and [vignette](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) can be found in the [GitHub repository](https://github.com/OuhscBbmc/REDCapR).  Here's are two examples; the first selects only a portion of the rows, while the second selects only a portion of the columns.
+The [`redcap_read()`](https://www.rdocumentation.org/packages/REDCapR/topics/redcap_read) function also accepts values for subsetting/filtering the records and fields.  The development version's [documentation](https://ouhscbbmc.github.io/REDCapR/) and [vignette](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) can be found in the [GitHub repository](https://github.com/OuhscBbmc/REDCapR).  Here's are two examples; the first selects only a portion of the rows, while the second selects only a portion of the columns.
 ```r
 #Return only records with IDs of 1 and 4
 desired_records <- c(1, 4)

@@ -94,7 +94,7 @@ token_longitudinal    &lt;-<span class="st"> &quot;0434F0E9CF53ED0587847AB6E51DE
 events_to_retain  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;dose_1_arm_1&quot;</span>, <span class="st">&quot;visit_1_arm_1&quot;</span>, <span class="st">&quot;dose_2_arm_1&quot;</span>, <span class="st">&quot;visit_2_arm_1&quot;</span>)
 
 ds_long &lt;-<span class="st"> </span>REDCapR<span class="op">::</span><span class="kw">redcap_read_oneshot</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token_longitudinal)<span class="op">$</span>data</code></pre></div>
-<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.6 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_long <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)</code></pre></div>
 <table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
@@ -977,7 +977,7 @@ NA
     <span class="dt">config_options =</span> config_options
   )<span class="op">$</span>data
 }</code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
 <p>Force the connection to use SSL=3 (which is not preferred, and possibly insecure).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">config_options &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">sslversion=</span><span class="dv">3</span>)
 ds_ssl_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</span>(
@@ -1015,22 +1015,18 @@ ds_no_ssl &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</sp
 #&gt;  backports     1.1.2       2017-12-13 cran (@1.1.2)                   
 #&gt;  bindr         0.1.1       2018-03-13 CRAN (R 3.4.3)                  
 #&gt;  bindrcpp    * 0.2.2       2018-03-29 CRAN (R 3.4.3)                  
-#&gt;  callr         2.0.4       2018-05-15 CRAN (R 3.4.4)                  
 #&gt;  checkmate     1.8.6       2018-04-10 Github (mllg/checkmate@489319a) 
-#&gt;  cli           1.0.0       2017-11-05 CRAN (R 3.4.3)                  
 #&gt;  clisymbols    1.2.0       2017-05-21 CRAN (R 3.4.3)                  
 #&gt;  codetools     0.2-15      2016-10-05 CRAN (R 3.4.3)                  
 #&gt;  colorspace    1.3-2       2016-12-14 CRAN (R 3.4.3)                  
 #&gt;  commonmark    1.5         2018-04-28 CRAN (R 3.4.4)                  
 #&gt;  crayon        1.3.4       2017-09-16 CRAN (R 3.4.3)                  
 #&gt;  curl          3.2         2018-03-28 CRAN (R 3.4.4)                  
-#&gt;  debugme       1.1.0       2017-10-22 cran (@1.1.0)                   
 #&gt;  desc          1.2.0       2018-05-01 CRAN (R 3.4.4)                  
 #&gt;  devtools      1.13.6      2018-06-27 CRAN (R 3.4.4)                  
 #&gt;  digest        0.6.15      2018-01-28 CRAN (R 3.4.3)                  
 #&gt;  dplyr         0.7.6       2018-06-29 CRAN (R 3.4.4)                  
 #&gt;  evaluate      0.10.1      2017-06-24 CRAN (R 3.4.3)                  
-#&gt;  fs            1.2.3       2018-06-08 CRAN (R 3.4.4)                  
 #&gt;  glue          1.2.0       2017-10-29 cran (@1.2.0)                   
 #&gt;  highr         0.7         2018-06-09 CRAN (R 3.4.4)                  
 #&gt;  hms           0.4.2.9000  2018-05-26 Github (tidyverse/hms@14e74ab)  
@@ -1039,14 +1035,11 @@ ds_no_ssl &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</sp
 #&gt;  kableExtra    0.9.0       2018-05-21 CRAN (R 3.4.4)                  
 #&gt;  knitr       * 1.20        2018-02-20 CRAN (R 3.4.3)                  
 #&gt;  magrittr    * 1.5         2014-11-22 cran (@1.5)                     
-#&gt;  MASS          7.3-50      2018-04-30 CRAN (R 3.4.4)                  
 #&gt;  memoise       1.1.0       2017-04-21 CRAN (R 3.4.3)                  
 #&gt;  munsell       0.5.0       2018-06-12 CRAN (R 3.4.4)                  
 #&gt;  pillar        1.2.3       2018-05-25 CRAN (R 3.4.4)                  
 #&gt;  pkgconfig     2.0.1       2017-03-21 cran (@2.0.1)                   
-#&gt;  pkgdown       1.1.0       2018-06-02 CRAN (R 3.4.4)                  
 #&gt;  plyr          1.8.4       2016-06-08 CRAN (R 3.4.3)                  
-#&gt;  processx      3.1.0       2018-05-15 CRAN (R 3.4.4)                  
 #&gt;  purrr         0.2.5       2018-05-29 CRAN (R 3.4.4)                  
 #&gt;  R6            2.2.2       2017-06-17 CRAN (R 3.4.3)                  
 #&gt;  Rcpp          0.12.17     2018-05-18 CRAN (R 3.4.4)                  
@@ -1071,7 +1064,7 @@ ds_no_ssl &lt;-<span class="st"> </span><span class="kw">redcap_read_oneshot</sp
 #&gt;  xml2          1.2.0       2018-01-24 CRAN (R 3.4.3)                  
 #&gt;  yaml          2.1.19      2018-05-01 CRAN (R 3.4.4)</code></pre>
 <p></details></p>
-<p>Report rendered by wibeasley at 2018-07-11, 10:07 -0500 in 3 seconds.</p>
+<p>Report rendered by wibeasley at 2018-07-11, 10:21 -0500 in 4 seconds.</p>
 </div>
 
 
