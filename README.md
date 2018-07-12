@@ -1,16 +1,16 @@
 [REDCapR](https://github.com/OuhscBbmc/REDCapR)  <img src="man/figures/logo.png" align="right" width="130" />
 =======
 
-We’ve been using R with [REDCap](https://projectredcap.org/)’s API since 2012 and have developed some functions that we're assembling in an R package: [`REDCapR`](https://github.com/OuhscBbmc/REDCapR).  The release version and documentation is on [CRAN](https://cran.r-project.org/package=REDCapR), while the development site for collaboration is on [GitHub](https://github.com/OuhscBbmc/REDCapR).
+We’ve been using R with [REDCap](https://projectredcap.org/)’s API since 2012 and have developed   [`REDCapR`](https://github.com/OuhscBbmc/REDCapR).  Before encapsulating these functions in a package, we were replicating 50+ lines of code to contact REDCap and robustly transform the returned [csv](https://en.wikipedia.org/wiki/Comma-separated_values) into an R [`data.frame`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html); it took twice that much to implement batching.  All this can be done in one call to [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html):
 
-It was taking 50+ lines of code to contact REDCap and robustly transform the returned [csv](https://en.wikipedia.org/wiki/Comma-separated_values) into an R `data.frame`; it took twice that much to implement batching.  All this can be done in one line of R code with the package's [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html) function:
 ```r
 ds <- redcap_read(redcap_uri=uri, token=token)$data
 ```
 
-The [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html) function also accepts values for subsetting/filtering the records and fields.  The development version's [documentation](https://ouhscbbmc.github.io/REDCapR/) and [vignette](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) can be found in the [GitHub repository](https://github.com/OuhscBbmc/REDCapR).  Here's are two examples; the first selects only a portion of the rows, while the second selects only a portion of the columns.
+The [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html) function also accepts values for subsetting/filtering the records and fields.  Here are two examples; the first selects only a portion of the rows, while the second selects only a portion of the columns.  Documentation for the additional 20+ functions are found at [ouhscbbmc.github.io/REDCapR/reference](https://ouhscbbmc.github.io/REDCapR/reference/).
+
 ```r
-#Return only records with IDs of 1 and 4
+# Return only records with IDs of 1 and 4
 desired_records <- c(1, 4)
 ds_some_rows <- redcap_read(
   redcap_uri   = uri,
@@ -18,7 +18,7 @@ ds_some_rows <- redcap_read(
   records      = desired_records
 )$data
 
-#Return only the fields record_id, name_first, and age
+# Return only the fields record_id, name_first, and age
 desired_fields <- c("record_id", "name_first", "age")
 ds_some_fields <- redcap_read(
   redcap_uri  = uri,
@@ -27,34 +27,28 @@ ds_some_fields <- redcap_read(
 )$data
 ```
 
-The `REDCapR` package includes the SSL certificate retrieved by [`httr`'s `find_cert_bundle()`](https://github.com/hadley/httr/blob/master/R/utils.r).  Your REDCap server's identity is always verified, unless the setting is overridden (alternative certificates can also be provided).
+The `REDCapR` package includes the SSL certificate retrieved by [`httr::find_cert_bundle()`](https://github.com/r-lib/httr/blob/master/R/utils.r).  Your REDCap server's identity is always verified, unless the setting is overridden (alternative certificates can also be provided).
 
-To keep our maintenance efforts manageable, the package implements only the REDCap API functions that have been requested.  If there's a feature that would help your projects, please tell us about it in a new issue in REDCapR's [GitHub repository](https://github.com/OuhscBbmc/REDCapR/issues).  A [troubleshooting](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html) document helps diagnose issues with the API.
+To keep our maintenance efforts manageable, the package implements only the REDCap API functions that have been requested.  If there's a feature that would help your projects, please tell us in a new issue in REDCapR's [GitHub repository](https://github.com/OuhscBbmc/REDCapR/issues).  A [troubleshooting](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html) document helps diagnose issues with the API.
 
-Our group has benefited from REDCap and the surrounding community, and we'd like to contribute back.  Suggestions, criticisms, and code contributions are welcome.  And if anyone is interested in trying a direction that suits them better, we'll be happy to explain the package's internals and help you fork your own version.  We have some starting material described in the [`./documentation-for-developers/`](https://github.com/OuhscBbmc/REDCapR/tree/master/documentation-for-developers) directory.  Also checkout the other libraries that exist for communicating with REDCap, which are listed in the [REDCap Tools](http://redcap-tools.github.io/projects/) directory.
 
-We'd like to thank the following developers for their [advice](https://github.com/OuhscBbmc/REDCapR/issues?q=is%3Aissue+is%3Aclosed) and [code contributions](https://github.com/OuhscBbmc/REDCapR/graphs/contributors): [Rollie Parrish](https://github.com/rparrish), [Scott Burns](https://github.com/sburns), [Benjamin Nutter](https://github.com/nutterb), [John Aponte](https://github.com/johnaponte), [Andrew Peters](https://github.com/ARPeters), and [Hao Zhu](https://github.com/haozhu233).
+### Installation and Documentation
 
-Thanks,
-[Will Beasley](https://www.researchgate.net/profile/William_Beasley2), David Bard, & Thomas Wilson
-
-[University of Oklahoma Health Sciences Center](http://ouhsc.edu/),
-[Department of Pediatrics](https://www.oumedicine.com/department-of-pediatrics),
-[Biomedical & Behavioral Research Core](http://ouhsc.edu/BBMC/).
-
-### Download and Installation Instructions
-
-The *release* version of REDCapR can be installed from [CRAN](https://cran.r-project.org/package=REDCapR).
+The *release* version can be installed from [CRAN](https://cran.r-project.org/package=REDCapR).
 ```r
 install.packages("REDCapR")
 ```
 
-The *development* version of REDCapR can be installed from [GitHub](https://github.com/OuhscBbmc/REDCapR) after installing the `devtools` package.
+The *development* version can be installed from [GitHub](https://github.com/OuhscBbmc/REDCapR) after installing the `devtools` package.
 
 ```r
 install.packages("devtools") # Run this line if the 'devtools' package isn't installed already.
 devtools::install_github(repo="OuhscBbmc/REDCapR")
 ```
+The  [ouhscbbmc.github.io/REDCapR](https://ouhscbbmc.github.io/REDCapR) site describes the package functions, and includes documents involving [basic operations](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html), [advanced operations](https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.html), [token security](https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html), and
+[troubleshooting](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html).
+
+Also checkout the other packages that exist for communicating with REDCap, which are listed in the [REDCap Tools](http://redcap-tools.github.io/projects/) directory.
 
 ### Build Status
 
@@ -65,27 +59,27 @@ devtools::install_github(repo="OuhscBbmc/REDCapR")
 | | *Ubuntu LTS* | *Windows Server* | *Test Coverage* |
 
 ### Collaborative Development
-We encourage input and collaboration from the overall community.  If you're familiar with GitHub and R packages, feel free to submit a [pull request](https://github.com/OuhscBbmc/REDCapR/pulls).  If you'd like to report a bug or make a suggestion, please create a GitHub [issue](https://github.com/OuhscBbmc/REDCapR/issues); issues are a usually a good place to ask public questions too.  However, feel free to email Will (<wibeasley@hotmail.com>).  Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md); by participating in this project you agree to abide by its terms.
+We encourage input and collaboration.  If you're familiar with GitHub and R packages, feel free to submit a [pull request](https://github.com/OuhscBbmc/REDCapR/pulls).  If you'd like to report a bug or make a suggestion, please create a GitHub [issue](https://github.com/OuhscBbmc/REDCapR/issues); issues are a usually a good place to ask public questions too.  However, feel free to email Will (<wibeasley@hotmail.com>).  Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md); by participating in this project you agree to abide by its terms.  We have some starting material described in the [`./documentation-for-developers/`](https://github.com/OuhscBbmc/REDCapR/tree/master/documentation-for-developers) directory.  
 
-### Thanks to Funders
+We'd like to thank the following developers for their [advice](https://github.com/OuhscBbmc/REDCapR/issues?q=is%3Aissue+is%3Aclosed) and [code contributions](https://github.com/OuhscBbmc/REDCapR/graphs/contributors): [Benjamin Nutter](https://github.com/nutterb), [Rollie Parrish](https://github.com/rparrish), [Scott Burns](https://github.com/sburns), [John Aponte](https://github.com/johnaponte), [Andrew Peters](https://github.com/ARPeters), and [Hao Zhu](https://github.com/haozhu233).
 
-Much of this package has been developed to support the needs of the following projects.  We appreciate the support.
+### Funders
+
+Much of this package has been developed to support the needs of the following projects.  We appreciate the support.  (So far) the primary developers of REDCapR are the external evaluators for [Oklahoma's MIECHV](https://www.ok.gov/health/Community_&_Family_Health/Family_Support_and_Prevention_Service/MIECHV_Program_-_Federal_Home_Visiting_Grant/MIECHV_Program_Resources/index.html) program.  See the preliminary CQI reports (many of which use REDCapR) at http://ouhscbbmc.github.io/MReportingPublic/.
 
 * *OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting ([MIECHV](http://mchb.hrsa.gov/programs/homevisiting/)) Project*. [HRSA/ACF D89MC23154](https://perf-data.hrsa.gov/mchb/DGISReports/Abstract/AbstractDetails.aspx?Source=TVIS&GrantNo=D89MC23154&FY=2012).  David Bard, PI, OUHSC; 2011-2015.
-
 * *Independent Evaluation of the State of OK MIECHV Evidence Based Home Visitation Project*, [NIH](https://www.nih.gov/)-sponsored collaboration with [OSDH](https://www.ok.gov/health/). David Bard, PI, OUHSC; 2015-2017.
-
 * *OSDH ParentPRO Pilot Evaluation*, federally-sponsored collaboration with [OSDH](https://www.ok.gov/health/).  David Bard, PI, OUHSC; 2015-2017.
-
 * *Title IV-E Waiver Project*, [HRSA/MCHB](http://mchb.hrsa.gov/)-sponsored collaboration with [OKDHS](http://www.okdhs.org/); David Bard, PI, OUHSC; 2014-2017.
-
 * *Integrative Analysis of Longitudinal Studies of Aging (IALSA)*, sponsored by [NIH 5P01AG043362](http://grantome.com/grant/NIH/P01-AG043362).  Scott Hofer, PI, University of Victoria; Will Beasley, PI of site-award, OUHSC; 2013-2018.
-
 * *Oklahoma Shared Clinical and Translational Resources*, sponsored by [NIH NIGMS; U54 GM104938](http://grantome.com/grant/NIH/U54-GM104938). Judith A. James, PI, OUHSC; 2013-2018.
-
 * Additional Institutional Support from OUHSC [Dept of Pediatrics](https://www.oumedicine.com/department-of-pediatrics); 2013-2017.
 
-(So far) the primary developers of REDCapR are the external evaluators for [Oklahoma's MIECHV](https://www.ok.gov/health/Community_&_Family_Health/Family_Support_and_Prevention_Service/MIECHV_Program_-_Federal_Home_Visiting_Grant/MIECHV_Program_Resources/index.html) program.  See the preliminary CQI reports (many of which use REDCapR) at http://ouhscbbmc.github.io/MReportingPublic/.
+Thanks,
+[Will Beasley](https://www.researchgate.net/profile/William_Beasley2), David Bard, & Thomas Wilson<br/>
+[University of Oklahoma Health Sciences Center](http://ouhsc.edu/),
+[Department of Pediatrics](https://www.oumedicine.com/department-of-pediatrics),
+[Biomedical & Behavioral Research Core](http://ouhsc.edu/BBMC/).
 
 ### Package Characteristics
 
