@@ -13,6 +13,7 @@
 <link href="../docsearch.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Basic REDCapR Operations">
 <meta property="og:description" content="">
+<meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -125,10 +126,10 @@ token &lt;-<span class="st"> "9A81268476645C4E5F03428B8AC3AA7B"</span> <span cla
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return all records and all variables.</span>
 ds_all_rows_all_fields &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read.html">redcap_read</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)<span class="op">$</span>data</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.6 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2018-07-11 11:04:59.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.7 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2018-07-11 22:44:38.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_all_rows_all_fields <span class="co">#Inspect the returned dataset</span></code></pre></div>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -605,7 +606,7 @@ ds_some_rows_v1 &lt;-<span class="st"> </span><span class="kw"><a href="../refer
 )<span class="op">$</span>data</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2018-07-11 11:05:01.</code></pre>
+<pre><code>Starting to read 2 records  at 2018-07-11 22:44:39.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return only records with IDs of 1 and 3 (alternate way)</span>
@@ -615,9 +616,9 @@ ds_some_rows_v2 &lt;-<span class="st"> </span><span class="kw"><a href="../refer
    <span class="dt">token             =</span> token, 
    <span class="dt">records_collapsed =</span> desired_records_v2
 )<span class="op">$</span>data</code></pre></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2018-07-11 11:05:02.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2018-07-11 22:44:41.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_rows_v2 <span class="co">#Inspect the returned dataset</span></code></pre></div>
@@ -861,11 +862,11 @@ ds_some_fields_v1 &lt;-<span class="st"> </span><span class="kw"><a href="../ref
    <span class="dt">token      =</span> token, 
    <span class="dt">fields     =</span> desired_fields_v1
 )<span class="op">$</span>data</code></pre></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2018-07-11 11:05:04.</code></pre>
+<pre><code>Starting to read 5 records  at 2018-07-11 22:44:42.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 1.1 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Return only the fields record_id, name_first, and age (alternate way)</span>
 desired_fields_v2 &lt;-<span class="st"> "record_id, name_first, age"</span>
 ds_some_fields_v2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read.html">redcap_read</a></span>(
@@ -873,9 +874,9 @@ ds_some_fields_v2 &lt;-<span class="st"> </span><span class="kw"><a href="../ref
    <span class="dt">token            =</span> token, 
    <span class="dt">fields_collapsed =</span> desired_fields_v2
 )<span class="op">$</span>data</code></pre></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2018-07-11 11:05:06.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2018-07-11 22:44:44.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_fields_v2 <span class="co">#Inspect the returned dataset</span></code></pre></div>
@@ -964,7 +965,7 @@ ds_some_fields_v3 &lt;-<span class="st"> </span><span class="kw"><a href="../ref
 )<span class="op">$</span>data</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2018-07-11 11:05:07.</code></pre>
+<pre><code>Starting to read 5 records  at 2018-07-11 22:44:46.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_fields_v3 <span class="co">#Examine the these three variables.</span></code></pre></div>
@@ -1055,8 +1056,8 @@ ds_some_rows_v3 &lt;-<span class="st"> </span><span class="kw"><a href="../refer
    <span class="dt">records    =</span> desired_records_v3
 )<span class="op">$</span>data</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2018-07-11 11:05:09.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2018-07-11 22:44:47.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_some_rows_v3 <span class="co">#Examine the results.</span></code></pre></div>
@@ -1313,9 +1314,9 @@ all_information &lt;-<span class="st"> </span><span class="kw"><a href="../refer
 )</code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2018-07-11 11:05:10.</code></pre>
+<pre><code>Starting to read 5 records  at 2018-07-11 22:44:49.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_information <span class="co">#Inspect the additional information</span></code></pre></div>
 <pre><code>$data
   record_id name_first age
@@ -1332,7 +1333,7 @@ $status_codes
 [1] "200"
 
 $outcome_messages
-[1] "5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200."
+[1] "5 records and 3 columns were read from REDCap in 0.5 seconds.  The http status code was 200."
 
 $records_collapsed
 [1] ""
@@ -1350,7 +1351,7 @@ $filter_logic
 [1] ""
 
 $elapsed_seconds
-[1] 1.446971</code></pre>
+[1] 1.603175</code></pre>
 </div>
 </div>
 <div id="session-information" class="section level2">
@@ -1424,7 +1425,7 @@ $elapsed_seconds
  xml2          1.2.0       2018-01-24 CRAN (R 3.4.3)                  
  yaml          2.1.19      2018-05-01 CRAN (R 3.4.4)                  </code></pre>
 <p></p>
-<p>Report rendered by wibeasley at 2018-07-11, 11:05 -0500 in 15 seconds.</p>
+<p>Report rendered by wibeasley at 2018-07-11, 22:44 -0500 in 15 seconds.</p>
 </div>
   </div>
 

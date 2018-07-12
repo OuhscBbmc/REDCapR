@@ -18,6 +18,7 @@
     University.  The Application Programming Interface (API) offers an avenue
     to access and modify data programmatically, improving the capacity for
     literate and reproducible programming.">
+<meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -97,38 +98,9 @@
       
       </header><div class="row">
   <div class="contents col-md-9">
-    
-<table class="table">
-<thead><tr class="header">
-<th align="left"><a href="https://github.com/OuhscBbmc/REDCapR">GitHub</a></th>
-<th align="center"><a href="https://travis-ci.org/OuhscBbmc/REDCapR/builds">Travis-CI</a></th>
-<th align="center"><a href="https://ci.appveyor.com/project/wibeasley/redcapr/history">AppVeyor</a></th>
-<th align="center"><a href="https://coveralls.io/r/OuhscBbmc/REDCapR">Coveralls</a></th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left"><a href="https://github.com/OuhscBbmc/REDCapR/tree/master">Master</a></td>
-<td align="center"><a href="https://travis-ci.org/OuhscBbmc/REDCapR"><img src="https://travis-ci.org/OuhscBbmc/REDCapR.svg?branch=master" alt="Build Status"></a></td>
-<td align="center"><a href="https://ci.appveyor.com/project/wibeasley/redcapr/branch/master"><img src="https://ci.appveyor.com/api/projects/status/0i41tn0n2jo4pd2k/branch/master?svg=true" alt="Build status"></a></td>
-<td align="center"><a href="https://coveralls.io/github/OuhscBbmc/REDCapR?branch=master"><img src="https://coveralls.io/repos/github/OuhscBbmc/REDCapR/badge.svg?branch=master" alt="Coverage Status"></a></td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://github.com/OuhscBbmc/REDCapR/tree/dev">Dev</a></td>
-<td align="center"><a href="https://travis-ci.org/OuhscBbmc/REDCapR"><img src="https://travis-ci.org/OuhscBbmc/REDCapR.svg?branch=dev" alt="Build Status"></a></td>
-<td align="center"><a href="https://ci.appveyor.com/project/wibeasley/redcapr/branch/dev"><img src="https://ci.appveyor.com/api/projects/status/0i41tn0n2jo4pd2k/branch/dev?svg=true" alt="Build status"></a></td>
-<td align="center"><a href="https://coveralls.io/github/OuhscBbmc/REDCapR?branch=dev"><img src="https://coveralls.io/repos/github/OuhscBbmc/REDCapR/badge.svg?branch=dev" alt="Coverage Status"></a></td>
-</tr>
-<tr class="odd">
-<td align="left"></td>
-<td align="center"><em>Ubuntu LTS</em></td>
-<td align="center"><em>Windows Server</em></td>
-<td align="center"><em>Test Coverage</em></td>
-</tr>
-</tbody>
-</table>
-<div id="redcapr" class="section level1">
+    <div id="redcapr" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#redcapr" class="anchor"></a><a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a>
+<a href="#redcapr" class="anchor"></a><a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> <img src="reference/figures/logo.png" align="right" width="130">
 </h1></div>
 <p>We’ve been using R with <a href="https://projectredcap.org/">REDCap</a>’s API since 2012 and have developed some functions that we’re assembling in an R package: <a href="https://github.com/OuhscBbmc/REDCapR"><code>REDCapR</code></a>. The release version and documentation is on <a href="https://cran.r-project.org/package=REDCapR">CRAN</a>, while the development site for collaboration is on <a href="https://github.com/OuhscBbmc/REDCapR">GitHub</a>.</p>
 <p>It was taking 50+ lines of code to contact REDCap and robustly transform the returned <a href="https://en.wikipedia.org/wiki/Comma-separated_values">csv</a> into an R <code>data.frame</code>; it took twice that much to implement batching. All this can be done in one line of R code with the package’s <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code><a href="reference/redcap_read.html">redcap_read()</a></code></a> function:</p>
@@ -163,6 +135,38 @@ ds_some_fields &lt;-<span class="st"> </span><span class="kw"><a href="reference
 <p>The <em>development</em> version of REDCapR can be installed from <a href="https://github.com/OuhscBbmc/REDCapR">GitHub</a> after installing the <code>devtools</code> package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"devtools"</span>) <span class="co"># Run this line if the 'devtools' package isn't installed already.</span>
 devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="dt">repo=</span><span class="st">"OuhscBbmc/REDCapR"</span>)</code></pre></div>
+</div>
+<div id="build-status" class="section level3">
+<h3 class="hasAnchor">
+<a href="#build-status" class="anchor"></a>Build Status</h3>
+<table class="table">
+<thead><tr class="header">
+<th align="left"><a href="https://github.com/OuhscBbmc/REDCapR">GitHub</a></th>
+<th align="center"><a href="https://travis-ci.org/OuhscBbmc/REDCapR/builds">Travis-CI</a></th>
+<th align="center"><a href="https://ci.appveyor.com/project/wibeasley/redcapr/history">AppVeyor</a></th>
+<th align="center"><a href="https://coveralls.io/r/OuhscBbmc/REDCapR">Coveralls</a></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="https://github.com/OuhscBbmc/REDCapR/tree/master">Master</a></td>
+<td align="center"><a href="https://travis-ci.org/OuhscBbmc/REDCapR"><img src="https://travis-ci.org/OuhscBbmc/REDCapR.svg?branch=master" alt="Build Status"></a></td>
+<td align="center"><a href="https://ci.appveyor.com/project/wibeasley/redcapr/branch/master"><img src="https://ci.appveyor.com/api/projects/status/0i41tn0n2jo4pd2k/branch/master?svg=true" alt="Build status"></a></td>
+<td align="center"><a href="https://coveralls.io/github/OuhscBbmc/REDCapR?branch=master"><img src="https://coveralls.io/repos/github/OuhscBbmc/REDCapR/badge.svg?branch=master" alt="Coverage Status"></a></td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://github.com/OuhscBbmc/REDCapR/tree/dev">Dev</a></td>
+<td align="center"><a href="https://travis-ci.org/OuhscBbmc/REDCapR"><img src="https://travis-ci.org/OuhscBbmc/REDCapR.svg?branch=dev" alt="Build Status"></a></td>
+<td align="center"><a href="https://ci.appveyor.com/project/wibeasley/redcapr/branch/dev"><img src="https://ci.appveyor.com/api/projects/status/0i41tn0n2jo4pd2k/branch/dev?svg=true" alt="Build status"></a></td>
+<td align="center"><a href="https://coveralls.io/github/OuhscBbmc/REDCapR?branch=dev"><img src="https://coveralls.io/repos/github/OuhscBbmc/REDCapR/badge.svg?branch=dev" alt="Coverage Status"></a></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="center"><em>Ubuntu LTS</em></td>
+<td align="center"><em>Windows Server</em></td>
+<td align="center"><em>Test Coverage</em></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="collaborative-development" class="section level3">
 <h3 class="hasAnchor">
@@ -215,13 +219,12 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 </tr>
 <tr class="even">
 <td align="left"><a href="https://www.rdocumentation.org/">Development Doc</a></td>
-<td align="left"><a href="https://ouhscbbmc.github.io/REDCapR/"><img src="https://img.shields.io/badge/pkgodwn-doc-orange.svg?longCache=true&amp;style=style=for-the-badge" alt="Rdoc"></a></td>
+<td align="left"><a href="https://ouhscbbmc.github.io/REDCapR/"><img src="https://img.shields.io/badge/pkgodwn-GitHub.io-orange.svg?longCache=true&amp;style=style=for-the-badge" alt="Rdoc"></a></td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-
   </div>
 
   <div class="col-md-3" id="sidebar">
