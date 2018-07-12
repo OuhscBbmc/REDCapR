@@ -6,6 +6,7 @@
 #'
 #' @description
 #'
+#' Comprehensive documentation is also available at https://ouhscbbmc.github.io/REDCapR/.
 #'
 #' Much of this package has been developed to support the needs of the following projects.  We appreciate the support.
 #' * *OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting ([MIECHV](http://mchb.hrsa.gov/programs/homevisiting/)) Project*. [HRSA/ACF D89MC23154](https://perf-data.hrsa.gov/mchb/DGISReports/Abstract/AbstractDetails.aspx?Source=TVIS&GrantNo=D89MC23154&FY=2012).  David Bard, PI, OUHSC; 2011-2015.

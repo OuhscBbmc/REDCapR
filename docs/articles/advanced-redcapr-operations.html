@@ -13,6 +13,7 @@
 <link href="../docsearch.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Advanced REDCapR Operations">
 <meta property="og:description" content="">
+<meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -95,7 +96,7 @@
     <div class="page-header toc-ignore">
       <h1>Advanced REDCapR Operations</h1>
             
-            <h4 class="date">2018-07-11</h4>
+            <h4 class="date">2018-07-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/advanced-redcapr-operations.Rmd"><code>vignettes/advanced-redcapr-operations.Rmd</code></a></small>
       <div class="hidden name"><code>advanced-redcapr-operations.Rmd</code></div>
@@ -129,7 +130,7 @@ token_longitudinal    &lt;-<span class="st"> "0434F0E9CF53ED0587847AB6E51DE762"<
 events_to_retain  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"dose_1_arm_1"</span>, <span class="st">"visit_1_arm_1"</span>, <span class="st">"dose_2_arm_1"</span>, <span class="st">"visit_2_arm_1"</span>)
 
 ds_long &lt;-<span class="st"> </span>REDCapR<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/REDCapR/topics/redcap_read_oneshot">redcap_read_oneshot</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token_longitudinal)<span class="op">$</span>data</code></pre></div>
-<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.6 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds_long <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)</code></pre></div>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
@@ -1005,7 +1006,7 @@ NA
     <span class="dt">config_options =</span> config_options
   )<span class="op">$</span>data
 }</code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.7 seconds.  The http status code was 200.</code></pre>
 <p>Force the connection to use SSL=3 (which is not preferred, and possibly insecure).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">config_options &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">sslversion=</span><span class="dv">3</span>)
 ds_ssl_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(
@@ -1036,7 +1037,7 @@ ds_no_ssl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/r
 #&gt;  language (EN)                        
 #&gt;  collate  en_US.UTF-8                 
 #&gt;  tz       America/Chicago             
-#&gt;  date     2018-07-11                  
+#&gt;  date     2018-07-12                  
 #&gt; 
 #&gt; ─ Packages ──────────────────────────────────────────────────────────────
 #&gt;  package     * version     date       source                          
@@ -1094,7 +1095,7 @@ ds_no_ssl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/r
 #&gt;  xml2          1.2.0       2018-01-24 CRAN (R 3.4.3)                  
 #&gt;  yaml          2.1.19      2018-05-01 CRAN (R 3.4.4)</code></pre>
 <p></p>
-<p>Report rendered by wibeasley at 2018-07-11, 11:05 -0500 in 5 seconds.</p>
+<p>Report rendered by wibeasley at 2018-07-12, 00:22 -0500 in 5 seconds.</p>
 </div>
   </div>
 

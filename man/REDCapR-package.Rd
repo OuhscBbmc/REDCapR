@@ -6,6 +6,8 @@
 \alias{REDCapR}
 \title{R utilities for interacting with a REDCap data system \url{http://www.project-redcap.org/}}
 \description{
+Comprehensive documentation is also available at https://ouhscbbmc.github.io/REDCapR/.
+
 Much of this package has been developed to support the needs of the following projects.  We appreciate the support.
 \itemize{
 \item \emph{OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting (\href{http://mchb.hrsa.gov/programs/homevisiting/}{MIECHV}) Project}. \href{https://perf-data.hrsa.gov/mchb/DGISReports/Abstract/AbstractDetails.aspx?Source=TVIS&GrantNo=D89MC23154&FY=2012}{HRSA/ACF D89MC23154}.  David Bard, PI, OUHSC; 2011-2015.
