@@ -100,8 +100,8 @@ Create user credentials to the auxiliary database
 Add a user's LDAP account to the `SecurityAuxiliary` database so that they can query the tables to retrieve their API.
 
 Notice that this only gives the permissions to retrieve the token.  You must still:
-  1. grant them API privileges to each appropriate REDCap project, and
-  2. copy the API from the REDCap database into the  SecurityAuxiliary database.
+1. grant them API privileges to each appropriate REDCap project, and
+2. copy the API from the REDCap database into the  SecurityAuxiliary database.
 
 In the future `REDCapR` may expose a function that allows the user to perform the second step (through a stored procedure).
 
@@ -199,7 +199,7 @@ rm(list=ls(all=TRUE)) #Clear the memory for any variables set from any previous 
 
 # ---- load-packages -----------------------------------------------------------
 library(magrittr)
-requireNamespace("RODBC")
+requireNamespace("odbc")
 requireNamespace("dplyr")
 requireNamespace("readr")
 requireNamespace("tibble")
@@ -231,15 +231,15 @@ sep="\n"))
 # ---- load-data ---------------------------------------------------------------
 
 # Load the credentials from the first instance.
-channel <- RODBC::odbcConnect("redcap-production") # odbcGetInfo(channel)
-ds_prod <- RODBC::sqlQuery(channel, query=sql, stringsAsFactors=F)
-RODBC::odbcClose(channel); rm(channel)
+channel <- DBI::dbConnect(odbc::odbc(), dsn="redcap-production") 
+ds_prod <- DBI::dbGetQuery(channel, sql)
+DBI::dbDisconnect(channel); rm(channel)
 
 # Load the credentials from the second instance.
 #   Duplicate or remove this block, dependending on the number of instances.
-channel <- RODBC::odbcConnect("redcap-dev") # odbcGetInfo(channel)
-ds_dev  <- RODBC::sqlQuery(channel, query=sql, stringsAsFactors=F)
-RODBC::odbcClose(channel); rm(channel, sql)
+channel <- DBI::dbConnect(odbc::odbc(), dsn="redcap-dev")
+ds_dev  <- DBI::dbGetQuery(channel, sql)
+DBI::dbDisconnect(channel); rm(channel)
 
 # Assert these variables contain valid datasets (instead of a character error message), and
 #   that at least some rows were returned.
@@ -302,19 +302,19 @@ rm(columns_to_write)
 
 # ---- upload-to-db-credential ------------------------------------------------------------
 
-#Upload to SQL Server through ODBC.
-(start_time <- Sys.time())
+if( !require(OuhscMunge) ) 
+  stop('The `OuhscMunge` package needs to be installed with `devtools::install_github("OuhscBbmc/OuhscMunge")`.')
 
-db_table         <- "redcap_private.tbl_credential"
-channel          <- RODBC::odbcConnect("auxiliary_security") #getSqlTypeInfo("Microsoft SQL Server") #;odbcGetInfo(channel)
-
-column_info      <- RODBC::sqlColumns(channel, db_table)
-var_types        <- as.character(column_info$TYPE_NAME)
-names(var_types) <- as.character(column_info$COLUMN_NAME)  #var_types
-
-RODBC::sqlClear(channel, db_table)
-RODBC::sqlSave(channel, ds_slim, db_table, append=TRUE, rownames=FALSE, fast=TRUE, varTypes=var_types)
-RODBC::odbcClose(channel); rm(channel)
+OuhscMunge::upload_sqls_odbc(
+  d               = ds_slim,
+  schema_name     = "redcap_private",
+  table_name      = "tbl_credential",
+  dsn_name        = "auxiliary_security",
+  create_table    = FALSE,
+  clear_table     = TRUE,
+  transaction     = TRUE,
+  verbose         = TRUE
+)
 
 (elapsed_duration <-  Sys.time() - start_time) #0.6026149 secs 2016-08-29.
 rm(db_table, column_info, var_types, start_time, elapsed_duration)

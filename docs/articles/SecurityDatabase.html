@@ -281,7 +281,7 @@
 <a class="sourceLine" id="cb3-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co"># ---- load-packages -----------------------------------------------------------</span></a>
 <a class="sourceLine" id="cb3-6" data-line-number="6"><span class="kw">library</span>(magrittr)</a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="kw">requireNamespace</span>(<span class="st">"RODBC"</span>)</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="kw">requireNamespace</span>(<span class="st">"odbc"</span>)</a>
 <a class="sourceLine" id="cb3-8" data-line-number="8"><span class="kw">requireNamespace</span>(<span class="st">"dplyr"</span>)</a>
 <a class="sourceLine" id="cb3-9" data-line-number="9"><span class="kw">requireNamespace</span>(<span class="st">"readr"</span>)</a>
 <a class="sourceLine" id="cb3-10" data-line-number="10"><span class="kw">requireNamespace</span>(<span class="st">"tibble"</span>)</a>
@@ -313,15 +313,15 @@
 <a class="sourceLine" id="cb3-36" data-line-number="36"><span class="co"># ---- load-data ---------------------------------------------------------------</span></a>
 <a class="sourceLine" id="cb3-37" data-line-number="37"></a>
 <a class="sourceLine" id="cb3-38" data-line-number="38"><span class="co"># Load the credentials from the first instance.</span></a>
-<a class="sourceLine" id="cb3-39" data-line-number="39">channel &lt;-<span class="st"> </span>RODBC<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/RODBC/topics/odbcConnect">odbcConnect</a></span>(<span class="st">"redcap-production"</span>) <span class="co"># odbcGetInfo(channel)</span></a>
-<a class="sourceLine" id="cb3-40" data-line-number="40">ds_prod &lt;-<span class="st"> </span>RODBC<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/RODBC/topics/sqlQuery">sqlQuery</a></span>(channel, <span class="dt">query=</span>sql, <span class="dt">stringsAsFactors=</span>F)</a>
-<a class="sourceLine" id="cb3-41" data-line-number="41">RODBC<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/RODBC/topics/odbcClose">odbcClose</a></span>(channel); <span class="kw">rm</span>(channel)</a>
+<a class="sourceLine" id="cb3-39" data-line-number="39">channel &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/DBI/topics/dbConnect">dbConnect</a></span>(odbc<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/odbc/topics/odbc">odbc</a></span>(), <span class="dt">dsn=</span><span class="st">"redcap-production"</span>) </a>
+<a class="sourceLine" id="cb3-40" data-line-number="40">ds_prod &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/DBI/topics/dbGetQuery">dbGetQuery</a></span>(channel, sql)</a>
+<a class="sourceLine" id="cb3-41" data-line-number="41">DBI<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/DBI/topics/dbDisconnect">dbDisconnect</a></span>(channel); <span class="kw">rm</span>(channel)</a>
 <a class="sourceLine" id="cb3-42" data-line-number="42"></a>
 <a class="sourceLine" id="cb3-43" data-line-number="43"><span class="co"># Load the credentials from the second instance.</span></a>
 <a class="sourceLine" id="cb3-44" data-line-number="44"><span class="co">#   Duplicate or remove this block, dependending on the number of instances.</span></a>
-<a class="sourceLine" id="cb3-45" data-line-number="45">channel &lt;-<span class="st"> </span>RODBC<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/RODBC/topics/odbcConnect">odbcConnect</a></span>(<span class="st">"redcap-dev"</span>) <span class="co"># odbcGetInfo(channel)</span></a>
-<a class="sourceLine" id="cb3-46" data-line-number="46">ds_dev  &lt;-<span class="st"> </span>RODBC<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/RODBC/topics/sqlQuery">sqlQuery</a></span>(channel, <span class="dt">query=</span>sql, <span class="dt">stringsAsFactors=</span>F)</a>
-<a class="sourceLine" id="cb3-47" data-line-number="47">RODBC<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/RODBC/topics/odbcClose">odbcClose</a></span>(channel); <span class="kw">rm</span>(channel, sql)</a>
+<a class="sourceLine" id="cb3-45" data-line-number="45">channel &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/DBI/topics/dbConnect">dbConnect</a></span>(odbc<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/odbc/topics/odbc">odbc</a></span>(), <span class="dt">dsn=</span><span class="st">"redcap-dev"</span>)</a>
+<a class="sourceLine" id="cb3-46" data-line-number="46">ds_dev  &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/DBI/topics/dbGetQuery">dbGetQuery</a></span>(channel, sql)</a>
+<a class="sourceLine" id="cb3-47" data-line-number="47">DBI<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/DBI/topics/dbDisconnect">dbDisconnect</a></span>(channel); <span class="kw">rm</span>(channel)</a>
 <a class="sourceLine" id="cb3-48" data-line-number="48"></a>
 <a class="sourceLine" id="cb3-49" data-line-number="49"><span class="co"># Assert these variables contain valid datasets (instead of a character error message), and</span></a>
 <a class="sourceLine" id="cb3-50" data-line-number="50"><span class="co">#   that at least some rows were returned.</span></a>
@@ -384,19 +384,19 @@
 <a class="sourceLine" id="cb3-107" data-line-number="107"></a>
 <a class="sourceLine" id="cb3-108" data-line-number="108"><span class="co"># ---- upload-to-db-credential ------------------------------------------------------------</span></a>
 <a class="sourceLine" id="cb3-109" data-line-number="109"></a>
-<a class="sourceLine" id="cb3-110" data-line-number="110"><span class="co">#Upload to SQL Server through ODBC.</span></a>
-<a class="sourceLine" id="cb3-111" data-line-number="111">(start_time &lt;-<span class="st"> </span><span class="kw">Sys.time</span>())</a>
+<a class="sourceLine" id="cb3-110" data-line-number="110"><span class="cf">if</span>( <span class="op">!</span><span class="kw">require</span>(OuhscMunge) ) </a>
+<a class="sourceLine" id="cb3-111" data-line-number="111">  <span class="kw">stop</span>(<span class="st">'The `OuhscMunge` package needs to be installed with `devtools::install_github("OuhscBbmc/OuhscMunge")`.'</span>)</a>
 <a class="sourceLine" id="cb3-112" data-line-number="112"></a>
-<a class="sourceLine" id="cb3-113" data-line-number="113">db_table         &lt;-<span class="st"> "redcap_private.tbl_credential"</span></a>
-<a class="sourceLine" id="cb3-114" data-line-number="114">channel          &lt;-<span class="st"> </span>RODBC<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/RODBC/topics/odbcConnect">odbcConnect</a></span>(<span class="st">"auxiliary_security"</span>) <span class="co">#getSqlTypeInfo("Microsoft SQL Server") #;odbcGetInfo(channel)</span></a>
-<a class="sourceLine" id="cb3-115" data-line-number="115"></a>
-<a class="sourceLine" id="cb3-116" data-line-number="116">column_info      &lt;-<span class="st"> </span>RODBC<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/RODBC/topics/sqlColumns">sqlColumns</a></span>(channel, db_table)</a>
-<a class="sourceLine" id="cb3-117" data-line-number="117">var_types        &lt;-<span class="st"> </span><span class="kw">as.character</span>(column_info<span class="op">$</span>TYPE_NAME)</a>
-<a class="sourceLine" id="cb3-118" data-line-number="118"><span class="kw">names</span>(var_types) &lt;-<span class="st"> </span><span class="kw">as.character</span>(column_info<span class="op">$</span>COLUMN_NAME)  <span class="co">#var_types</span></a>
-<a class="sourceLine" id="cb3-119" data-line-number="119"></a>
-<a class="sourceLine" id="cb3-120" data-line-number="120">RODBC<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/RODBC/topics/sqlDrop">sqlClear</a></span>(channel, db_table)</a>
-<a class="sourceLine" id="cb3-121" data-line-number="121">RODBC<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/RODBC/topics/sqlSave">sqlSave</a></span>(channel, ds_slim, db_table, <span class="dt">append=</span><span class="ot">TRUE</span>, <span class="dt">rownames=</span><span class="ot">FALSE</span>, <span class="dt">fast=</span><span class="ot">TRUE</span>, <span class="dt">varTypes=</span>var_types)</a>
-<a class="sourceLine" id="cb3-122" data-line-number="122">RODBC<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/RODBC/topics/odbcClose">odbcClose</a></span>(channel); <span class="kw">rm</span>(channel)</a>
+<a class="sourceLine" id="cb3-113" data-line-number="113">OuhscMunge<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/OuhscMunge/topics/upload_sqls_odbc">upload_sqls_odbc</a></span>(</a>
+<a class="sourceLine" id="cb3-114" data-line-number="114">  <span class="dt">d               =</span> ds_slim,</a>
+<a class="sourceLine" id="cb3-115" data-line-number="115">  <span class="dt">schema_name     =</span> <span class="st">"redcap_private"</span>,</a>
+<a class="sourceLine" id="cb3-116" data-line-number="116">  <span class="dt">table_name      =</span> <span class="st">"tbl_credential"</span>,</a>
+<a class="sourceLine" id="cb3-117" data-line-number="117">  <span class="dt">dsn_name        =</span> <span class="st">"auxiliary_security"</span>,</a>
+<a class="sourceLine" id="cb3-118" data-line-number="118">  <span class="dt">create_table    =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb3-119" data-line-number="119">  <span class="dt">clear_table     =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb3-120" data-line-number="120">  <span class="dt">transaction     =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb3-121" data-line-number="121">  <span class="dt">verbose         =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb3-122" data-line-number="122">)</a>
 <a class="sourceLine" id="cb3-123" data-line-number="123"></a>
 <a class="sourceLine" id="cb3-124" data-line-number="124">(elapsed_duration &lt;-<span class="st">  </span><span class="kw">Sys.time</span>() <span class="op">-</span><span class="st"> </span>start_time) <span class="co">#0.6026149 secs 2016-08-29.</span></a>
 <a class="sourceLine" id="cb3-125" data-line-number="125"><span class="kw">rm</span>(db_table, column_info, var_types, start_time, elapsed_duration)</a></code></pre></div>
