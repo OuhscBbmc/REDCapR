@@ -4,9 +4,9 @@
 \alias{redcap_metadata_read}
 \title{Export the metadata of a REDCap project.}
 \usage{
-redcap_metadata_read(redcap_uri, token, forms = NULL, forms_collapsed = "",
-  fields = NULL, fields_collapsed = "", verbose = TRUE,
-  config_options = NULL)
+redcap_metadata_read(redcap_uri, token, forms = NULL,
+  forms_collapsed = "", fields = NULL, fields_collapsed = "",
+  verbose = TRUE, config_options = NULL)
 }
 \arguments{
 \item{redcap_uri}{The URI (uniform resource identifier) of the REDCap project.  Required.}
