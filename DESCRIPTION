@@ -57,5 +57,6 @@ Remotes:
 License: GPL-2
 LazyData: TRUE
 VignetteBuilder: knitr
+Encoding: UTF-8
 RoxygenNote: 6.1.0
 Roxygen: list(markdown = TRUE)
