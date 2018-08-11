@@ -19,11 +19,11 @@ This database contains the tokens and other sensitive content (such as passwords
 Create a DSN on each client
 ========================================
 
-After executing the SQL code in an existing database, create an ODBC [DSN](http://en.wikipedia.org/wiki/Data_source_name) on *each* client machine that calls the database.  Download the most recent drivers (as of Aug 2016, the [most recent version is 13.1](https://msdn.microsoft.com/library/mt703139.aspx) for Windows and Linux, then run the wizard.  Many values in the wizard will remain at the default values.  Here are the important ones to change.
+After executing the SQL code in an existing database, create an ODBC [DSN](http://en.wikipedia.org/wiki/Data_source_name) on *each* client machine that calls the database.  Download the most recent drivers (as of Aug 2018, the [most recent version is 17](https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server) for Windows and Linux, then run the wizard.  Many values in the wizard will remain at the default values.  Here are the important ones to change.
 
 1. Set the DSN's `name` field to whatever is used in the repository's R code.
 2. Set the authenticity method to `Integrated Windows authentication`.
-3. Set the `default database` to the name of the database that containing the tokens *i.e.*, corresponding to the SQL code below in the example).
+3. Set the `default database` to the name of the database that containing the tokens (*e.g.*, corresponding to `auxiliary_security` in the SQL code below in the example).
 
 
 Note
@@ -35,7 +35,7 @@ We use Microsoft SQL Server, because that fits our University's infrastructure t
 Create Database
 ========================================
 
-This SQL code is run once inside an existing database to establish the schemas, table, and stored procedure used by `REDCapR::retrieve_credential_mssql()`.
+This SQL code is run once inside an existing database to establish the schemas, table, and stored procedure used by `REDCapR::retrieve_credential_mssql()`.  In this example, we've arbitrarily called the database `auxiliary_security`.
 
 ```sql
 ------- SQL code to create necessary components in a Microsoft SQL Sever database -------
@@ -78,18 +78,19 @@ GO
 -- Notice it should a different (and more permissive) schema than the table.
 --
 CREATE PROCEDURE [redcap].[prc_credential]
-  -- Add the parameters for the stored procedure here
-
   @project_id smallint,
-  @instance varchar(30)
+  @instance   varchar(30)
 AS
 BEGIN
-  -- SET NOCOUNT ON added to prevent extra result sets from
-  -- interfering with SELECT statements.
   SET NOCOUNT ON;
 
   SELECT username, project_id, token, redcap_uri FROM [redcap_private].[tbl_credential]
-  WHERE username=system_user AND project_id=@project_id AND instance=@instance
+  WHERE
+    username   = system_user -- The username from the server's OS.
+    AND
+    project_id = @project_id -- Restricts to the desired REDCap project.
+    AND
+    instance   = @instance   -- System accommodates multiple REDCap instances.
 END
 ```
 
@@ -97,23 +98,23 @@ END
 Create user credentials to the auxiliary database
 ========================================
 
-Add a user's LDAP account to the `SecurityAuxiliary` database so that they can query the tables to retrieve their API.
+Add a user's LDAP account to the `auxiliary_security` database so that they can query the tables to retrieve their API.
 
 Notice that this only gives the permissions to retrieve the token.  You must still:
 1. grant them API privileges to each appropriate REDCap project, and
-2. copy the API from the REDCap database into the  SecurityAuxiliary database.
+2. copy the API from the REDCap database into the `auxiliary_security` database.
 
-In the future `REDCapR` may expose a function that allows the user to perform the second step (through a stored procedure).
+In the future ,`REDCapR` may expose a function that allows the user to perform the second step (through a stored procedure).
 
-Also, do not give typical users authorization for the 'redcap_private' schema.  The current system allows the to view only their own tokens.
+Only database admins should have authorization for the 'redcap_private' schema.  Typical users should not be authorized for this schema.  The current system allows typical users to view only their own tokens.
 
 ```sql
 -----------------------------------------------------------------------
--- Add a OUHSC's user account to the auxiliary_security database so that they can query the tables to retrieve their API.
+-- Add a user account to the auxiliary_security database so that they can query the tables to retrieve their API.
 -- Notice that this only gives the permissions to retrieve the token.  You must still:
 --   1) grant them API privileges to each appropriate REDCap project, and
 --   2) copy the API from the REDCap database into the  auxiliary_security database.
--- Also, do not give typical users authorization for the 'redcap_private' schema.  The current system allows the to view only their own tokens.
+-- Also, do not give typical users authorization for the 'redcap_private' schema.  The current system allows them to view only their own tokens.
 -----------------------------------------------------------------------
 
 -- STEP #1: Declare the user name.  If everything runs correctly, this should be the only piece of code that you need to modify.
@@ -139,7 +140,7 @@ DECLARE @login_count AS INT; SET @login_count = (SELECT COUNT(*) AS login_count 
 print 'Logins matching desired name should equal 1.  It equals: ' + CONVERT(varchar, @login_count); print ''
 
 -----------------------------------------------------------------------
--- STEP #3: Create a user account for the *data base*, after switching the database under focus to auxiliary_security.
+-- STEP #3: Create a user account for the *database*, after switching the database under focus to auxiliary_security.
 print 'Step #3 executing....'
 USE [auxiliary_security]
 DECLARE @sql_create_user nvarchar(max)
@@ -186,11 +187,11 @@ print 'Step #5 executed'; print ''
 
 Transfer Credentials
 ========================================
-Manually transfer tokens to the auxiliary server becomes unmanageable as your institution's collection of API users grows.  This script demonstrates how to progamatically transfer all tokens from multiple REDCap instances on your network.  The basic steps are:
+Manually transferring tokens to the auxiliary server becomes unmanageable as your institution's collection of API users grows.  This script demonstrates how to progamatically transfer all tokens from multiple REDCap instances on your network.  The basic steps are:
 
-1. Read from the MySQL database underneath each REDCap instance.
+1. Read from the MySQL database(s) underneath each REDCap instance on your campus.
 1. Combine & groom the credentials.
-1. Upload to SQL Server.
+1. Upload to SQL Server (called `auxiliary_security` here).
 
 ```r
 rm(list=ls(all=TRUE)) #Clear the memory for any variables set from any previous runs.
@@ -212,13 +213,13 @@ requireNamespace("checkmate")
 #   (https://msdn.microsoft.com/en-us/library/ms179930.aspx)
 ldap_prefix <- "OUHSC\\"
 
-#Create a SQL statement for each REDCap instance.  Only the `instance` value should change.
+# Create a SQL statement for each REDCap instance.  Only the `instance` value should change.
 sql <- "
   SELECT username, project_id, api_token
   FROM redcap_user_rights
   WHERE api_token IS NOT NULL"
 
-#Update this ad-hoc CSV.  Each row should represent one REDCap instance.
+# Update this ad-hoc CSV.  Each row should represent one REDCap instance.
 #   Choose any casual name for the first variable, consistent with the `tweak-data` chunk below.
 #   Enter the exact URL for the second variable.
 ds_url <- readr::read_csv(paste(
@@ -231,7 +232,7 @@ sep="\n"))
 # ---- load-data ---------------------------------------------------------------
 
 # Load the credentials from the first instance.
-channel <- DBI::dbConnect(odbc::odbc(), dsn="redcap-production") 
+channel <- DBI::dbConnect(odbc::odbc(), dsn="redcap-production")
 ds_prod <- DBI::dbGetQuery(channel, sql)
 DBI::dbDisconnect(channel); rm(channel)
 
@@ -247,14 +248,13 @@ DBI::dbDisconnect(channel); rm(channel)
 checkmate::assert_data_frame(ds_bbmc, min.rows=5)
 checkmate::assert_data_frame(ds_dev , min.rows=5)
 
-
 # ---- tweak-data --------------------------------------------------------------
 
-#Label each instance, so they're distinguishable later.  Add/remove lines, depending on the number of campus instances
+# Label each instance, so they're distinguishable later.  Add/remove lines, depending on the number of campus instances
 ds_prod$instance <- "production"
 ds_dev$instance  <- "dev"
 
-#Combine the token collection from each instance.  Then prefix the username and include the URL of each instance.
+# Combine the token collection from each instance.  Then prefix the username and include the URL of each instance.
 ds <- ds_prod %>%
   dplyr::union(ds_dev) %>%                                     # Add/remove unions, based on the number of REDCap instances.
   dplyr::select_(
@@ -274,6 +274,7 @@ rm(ds_prod, ds_dev, ds_url)
 
 
 # ---- verify-values -----------------------------------------------------------
+
 # devtools::install_github("OuhscBbmc/OuhscMunge"); OuhscMunge::verify_value_headstart(ds)
 # Assert that the dataset is well-behaved.
 checkmate::assert_integer(  ds$id         , any.missing=F , lower=1, upper=2^31-1 , unique=T)
@@ -302,7 +303,7 @@ rm(columns_to_write)
 
 # ---- upload-to-db-credential ------------------------------------------------------------
 
-if( !require(OuhscMunge) ) 
+if( !require(OuhscMunge) )
   stop('The `OuhscMunge` package needs to be installed with `devtools::install_github("OuhscBbmc/OuhscMunge")`.')
 
 OuhscMunge::upload_sqls_odbc(
@@ -324,4 +325,4 @@ rm(db_table, column_info, var_types, start_time, elapsed_duration)
 Document Info
 ========================================
 
-This document is primarily based on REDCap version 6.11.5, and was last updated 2016-08-30.  A development version of the document is available on GitHub: https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html
+This document is primarily based on REDCap version 8.4.0, and was last updated 2018-08-10.  A development version of the document is available on GitHub: https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html
