@@ -4,7 +4,8 @@
 \alias{redcap_variables}
 \title{Enumerate the exported variables.}
 \usage{
-redcap_variables(redcap_uri, token, verbose = TRUE, config_options = NULL)
+redcap_variables(redcap_uri, token, verbose = TRUE,
+  config_options = NULL)
 }
 \arguments{
 \item{redcap_uri}{The URI (uniform resource identifier) of the REDCap project.  Required.}
