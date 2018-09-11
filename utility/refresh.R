@@ -14,7 +14,7 @@ devtools::run_examples(); #dev.off() #This overwrites the NAMESPACE file too
 # devtools::run_examples(, "redcap_read.Rd")
 test_results_checked <- devtools::test()
 test_results_checked <- devtools::test(filter = "read-oneshot-eav")
-test_results_checked <- devtools::test(filter = "retrieve-credential-mssql$")
+test_results_checked <- devtools::test(filter = "next-free.*$")
 # testthat::test_dir("./tests/")
 test_results_not_checked <- testthat::test_dir("./tests/manual/")
 
