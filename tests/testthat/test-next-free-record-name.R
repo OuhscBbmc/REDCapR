@@ -13,20 +13,49 @@ test_that("Smoke Test", {
   )
 })
 
-test_that("Version Successful", {
+test_that("Numeric ID", {
   testthat::skip_on_cran()
   expected <- "6"
   observed <- redcap_next_free_record_name(redcap_uri=credential$redcap_uri, token=credential$token)
 
   expect_equal(observed, expected)
 })
-#
-# test_that("Version Unuccessful --bad token", {
-#   testthat::skip_on_cran()
-#   expect_message(
-#     actual <- redcap_version(redcap_uri=credential$redcap_uri, token="0000008476645C4E5F03428B8AC3AA7C")
-#   )
-#
-#   expected <- package_version("0.0.0")
-#   expect_equal(actual, expected)
-# })
+
+test_that("Arm", {
+  testthat::skip_on_cran()
+  credential_arm <- REDCapR::retrieve_credential_local(
+    path_credential = system.file("misc/example.credentials", package="REDCapR"),
+    project_id      = 212
+  )
+
+  expected <- "305"
+  observed <- redcap_next_free_record_name(redcap_uri=credential_arm$redcap_uri, token=credential_arm$token)
+
+  expect_equal(observed, expected)
+})
+
+test_that("Character ID", {
+  testthat::skip_on_cran()
+  credential_character <- REDCapR::retrieve_credential_local(
+    path_credential = system.file("misc/example.credentials", package="REDCapR"),
+    project_id      = 998
+  )
+
+  expected <- "1"
+  observed <- redcap_next_free_record_name(redcap_uri=credential_character$redcap_uri, token=credential_character$token)
+
+  expect_equal(observed, expected)
+})
+
+test_that("DAG", {
+  testthat::skip_on_cran()
+  credential_dag <- REDCapR::retrieve_credential_local(
+    path_credential = system.file("misc/example.credentials", package="REDCapR"),
+    project_id      = 999
+  )
+
+  expected <- "331-3"
+  observed <- redcap_next_free_record_name(redcap_uri=credential_dag$redcap_uri, token=credential_dag$token)
+
+  expect_equal(observed, expected)
+})
