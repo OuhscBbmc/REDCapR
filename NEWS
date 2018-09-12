@@ -8,6 +8,7 @@ Version 0.10 (to be released)
 ------------------------------------------------------------------------------
 Minor New Features:
 * export survey time-stamps optionally (Issue #159)
+* `redcap_next_free_record_name()`: API call for 'Generate Next Record Name', which returns the next available record ID (Issue #237)
 * `redcap_read()` and `redcap_read_oneshot()` allow the user to specify if all variables
   should be returned with the `character` data type.  The default is to allow `readr::read_csv()` to guess the data type. (#194)
 * `redcap_read_oneshot()` allows use to specify how many rows should be considered when `readr::read_csv()` guesses the data type. (#194)

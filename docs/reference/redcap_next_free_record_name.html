@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Collection of REDCap-specific constants — constant • REDCapR</title>
+<title>Determine free available record ID — redcap_next_free_record_name • REDCapR</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -36,9 +36,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="Collection of REDCap-specific constants — constant" />
+<meta property="og:title" content="Determine free available record ID — redcap_next_free_record_name" />
 
-<meta property="og:description" content="Collection of constants defined by the REDCap developers." />
+<meta property="og:description" content="Determines the next available record ID." />
 
 <meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -132,64 +132,63 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Collection of REDCap-specific constants</h1>
-    <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/R/constant.R'><code>R/constant.R</code></a></small>
-    <div class="hidden name"><code>constant.Rd</code></div>
+    <h1>Determine free available record ID</h1>
+    <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-next-free-record-name.R'><code>R/redcap-next-free-record-name.R</code></a></small>
+    <div class="hidden name"><code>redcap_next_free_record_name.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Collection of constants defined by the REDCap developers.</p>
+    <p>Determines the next available record ID.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>constant</span>(<span class='no'>name</span>, <span class='kw'>simplify</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>redcap_next_free_record_name</span>(<span class='no'>redcap_uri</span>, <span class='no'>token</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>name</th>
-      <td><p>Name of constant.  Required character.</p></td>
+      <th>redcap_uri</th>
+      <td><p>The URI (uniform resource identifier) of the REDCap project.  Required.</p></td>
     </tr>
     <tr>
-      <th>simplify</th>
-      <td><p>Simplifies the vector of values to a common data-type, if possible.  Passed to the <code>simplify</code> parameter of <code><a href='http://www.rdocumentation.org/packages/base/topics/lapply'>base::sapply()</a></code>.</p></td>
+      <th>token</th>
+      <td><p>The user-specific string that serves as the password for a project.  Required.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>A boolean value indicating if <code>message</code>s should be printed to the R console during the operation.  The verbose output might contain sensitive information (<em>e.g.</em> PHI), so turn this off if the output might be visible somewhere public. Optional.</p></td>
+    </tr>
+    <tr>
+      <th>config_options</th>
+      <td><p>A list of options to pass to <code>POST</code> method in the <code>httr</code> package.  See the details below.  Optional.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The constant's value.  Currently all are single integers, but that could be expanded in the future.</p>
+    <p>a <code><a href='http://www.rdocumentation.org/packages/base/topics/character'>base::character</a></code> vector of either length 1 (if successful) or length 0 (if not successful).</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The current constants relate to the 'complete' variable at the end of each form.</p><ul>
-<li><p><code>form_incomplete</code>: 0L (<em>i.e.</em>, an integer)</p></li>
-<li><p><code>form_unverified</code>: 1L</p></li>
-<li><p><code>form_complete</code>: 2L</p></li>
-</ul>
-    <p>To add more, please for and edit the
-<a href='https://github.com/OuhscBbmc/REDCapR/blob/master/R/constant.R'>constant.R</a>
-on GitHub and submit a pull request.  For instructions, please see
-<a href='https://help.github.com/articles/editing-files-in-another-user-s-repository/'>Editing files in another user's repository</a>
-in the GitHub documentation.</p>
+    <p>If the API call is unsuccessful, a value of <code>character(0)</code> will be returned (<em>i.e.</em>, an empty vector).
+This ensures that a the function will always return an object of class <code><a href='http://www.rdocumentation.org/packages/base/topics/character'>base::character</a></code>.</p>
+    
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p><strong>Documentation in REDCap 8.4.0</strong></p>
+<p>To be used by projects with record auto-numbering enabled, this method exports the next potential record ID for a project. It generates the next record name by determining the current maximum numerical record ID and then incrementing it by one.</p>
+<p>Note: This method does not create a new record, but merely determines what the next record name would be.</p>
+<p>If using Data Access Groups (DAGs) in the project, this method accounts for the special formatting of the record name for users in DAGs (e.g., DAG-ID); in this case, it only assigns the next value for ID for all numbers inside a DAG. For example, if a DAG has a corresponding DAG number of 223 wherein records 223-1 and 223-2 already exist, then the next record will be 223-3 if the API user belongs to the DAG that has DAG number 223. (The DAG number is auto-assigned by REDCap for each DAG when the DAG is first created.) When generating a new record name in a DAG, the method considers all records in the entire project when determining the maximum record ID, including those that might have been originally created in that DAG but then later reassigned to another DAG.</p>
+<p>Note: This method functions the same even for projects that do not have record auto-numbering enabled.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='st'>"form_incomplete"</span>)  <span class='co'># Returns 0L</span></div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='st'>"form_unverified"</span>)  <span class='co'># Returns 1L</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='st'>"form_complete"</span>)    <span class='co'># Returns 2L</span></div><div class='output co'>#&gt; [1] 2</div><div class='input'>
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='fu'>c</span>(<span class='st'>"form_complete"</span>, <span class='st'>"form_complete"</span>, <span class='st'>"form_incomplete"</span>)) <span class='co'># Returns c(2L, 2L, 0L)</span></div><div class='output co'>#&gt; [1] 2 2 0</div><div class='input'>
-</div><span class='co'># NOT RUN {</span>
-<span class='co'># The following line returns an error:</span>
-<span class='co'>#     Assertion on 'name' failed: Must be a subset of</span>
-<span class='co'>#     {'form_complete','form_incomplete','form_unverified'},</span>
-<span class='co'>#     but is {'bad-name'}.</span>
-
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='st'>"bad-name"</span>)    <span class='co'># Returns an error</span>
-
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='fu'>c</span>(<span class='st'>"form_complete"</span>, <span class='st'>"bad-name"</span>)) <span class='co'># Returns an error</span>
-<span class='co'># }</span></pre>
+    <pre class="examples"><div class='input'><span class='no'>uri</span>      <span class='kw'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class='no'>token</span>    <span class='kw'>&lt;-</span> <span class='st'>"9A81268476645C4E5F03428B8AC3AA7B"</span>
+<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/redcap_next_free_record_name'>redcap_next_free_record_name</a></span>(<span class='kw'>redcap_uri</span><span class='kw'>=</span><span class='no'>uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>) <span class='co'># Should return "6"</span></div><div class='output co'>#&gt; <span class='message'>The next free record name in REDCap was successfully determined in 0.3 seconds.  The http status code was 200.  It is 6.</span></div><div class='output co'>#&gt; [1] "6"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -199,13 +198,11 @@ in the GitHub documentation.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#note">Note</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
-
-    <h2>Author</h2>
-    
-Will Beasley
 
   </div>
 </div>
