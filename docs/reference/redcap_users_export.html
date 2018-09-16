@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Validate and sanitize the user's REDCap token. — sanitize_token • REDCapR</title>
+<title>List authorized users. — redcap_users_export • REDCapR</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -36,10 +36,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="Validate and sanitize the user's REDCap token. — sanitize_token" />
+<meta property="og:title" content="List authorized users. — redcap_users_export" />
 
-<meta property="og:description" content="Verifies the token is nonmissing and conforms to the legal pattern of a 32-character hexadecimal value.
-Trailing line endings are removed." />
+<meta property="og:description" content="List users authorized for a project." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -131,42 +130,77 @@ Trailing line endings are removed." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Validate and sanitize the user's REDCap token.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/R/sanitize-token.R'><code>R/sanitize-token.R</code></a></small>
-    <div class="hidden name"><code>sanitize_token.Rd</code></div>
+    <h1>List authorized users.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-users-export.R'><code>R/redcap-users-export.R</code></a></small>
+    <div class="hidden name"><code>redcap_users_export.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Verifies the token is nonmissing and conforms to the legal pattern of a 32-character hexadecimal value.
-Trailing line endings are removed.</p>
+    <p>List users authorized for a project.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>sanitize_token</span>(<span class='no'>token</span>)</pre>
+    <pre class="usage"><span class='fu'>redcap_users_export</span>(<span class='no'>redcap_uri</span>, <span class='no'>token</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>redcap_uri</th>
+      <td><p>The URI (uniform resource identifier) of the REDCap project.  Required.</p></td>
+    </tr>
+    <tr>
       <th>token</th>
-      <td><p>The REDCap token. Required.</p></td>
+      <td><p>The user-specific string that serves as the password for a project.  Required.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>A boolean value indicating if <code>message</code>s should be printed to the R console during the operation.  The verbose output might contain sensitive information (<em>e.g.</em> PHI), so turn this off if the output might be visible somewhere public. Optional.</p></td>
+    </tr>
+    <tr>
+      <th>config_options</th>
+      <td><p>A list of options to pass to <code>POST</code> method in the <code>httr</code> package.  See the details below.  Optional.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The token, without a terminal newline character.</p>
+    <p>a <code><a href='http://www.rdocumentation.org/packages/utils/topics/packageDescription'>utils::packageVersion</a></code>.</p>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Contact your institution's REDCap administrator for more informationa about your project-specific token.</p>
+    <p><em>From the REDCap 8.4.0 Documentation</em>:
+This method allows you to export the list of users for a project,
+including their user privileges and also email address, first name, and last name.
+Note: If the user has been assigned to a user role, it will return the user with
+the role's defined privileges.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>secret_token_1</span> <span class='kw'>&lt;-</span> <span class='st'>"12345678901234567890123456ABCDEF"</span>
-<span class='no'>secret_token_2</span> <span class='kw'>&lt;-</span> <span class='st'>"12345678901234567890123456ABCDEF\n"</span>
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/sanitize_token'>sanitize_token</a></span>(<span class='no'>secret_token_1</span>)</div><div class='output co'>#&gt; [1] "12345678901234567890123456ABCDEF"</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/sanitize_token'>sanitize_token</a></span>(<span class='no'>secret_token_2</span>)</div><div class='output co'>#&gt; [1] "12345678901234567890123456ABCDEF"</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>uri</span>      <span class='kw'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class='no'>token</span>    <span class='kw'>&lt;-</span> <span class='st'>"06DEFB601F9B46847DAA9DF0CFA951B4"</span>
+<span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/redcap_users_export'>redcap_users_export</a></span>(<span class='kw'>redcap_uri</span><span class='kw'>=</span><span class='no'>uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>)</div><div class='output co'>#&gt; <span class='message'>The REDCap users were successfully exported in 0.3 seconds.  The http status code was 200.</span></div><div class='input'><span class='no'>result</span>$<span class='no'>data_user</span></div><div class='output co'>#&gt; # A tibble: 3 x 31
+#&gt;   username email firstname lastname expiration data_access_gro… data_access_gro…
+#&gt;   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;    &lt;date&gt;     &lt;chr&gt;            &lt;chr&gt;           
+#&gt; 1 dwells   donn… Donna     Wells    2025-09-03 dagb             332             
+#&gt; 2 unittes… wibe… Unit Test PHI Free NA         daga             331             
+#&gt; 3 wbeasle… will… Will      Beasley… NA         &lt;NA&gt;             &lt;NA&gt;            
+#&gt; # ... with 24 more variables: design &lt;lgl&gt;, user_rights &lt;lgl&gt;,
+#&gt; #   data_access_groups &lt;lgl&gt;, data_export &lt;chr&gt;, reports &lt;lgl&gt;,
+#&gt; #   stats_and_charts &lt;lgl&gt;, manage_survey_participants &lt;lgl&gt;, calendar &lt;lgl&gt;,
+#&gt; #   data_import_tool &lt;lgl&gt;, data_comparison_tool &lt;lgl&gt;, logging &lt;lgl&gt;,
+#&gt; #   file_repository &lt;lgl&gt;, data_quality_create &lt;lgl&gt;,
+#&gt; #   data_quality_execute &lt;lgl&gt;, api_export &lt;lgl&gt;, api_import &lt;lgl&gt;,
+#&gt; #   mobile_app &lt;lgl&gt;, mobile_app_download_data &lt;lgl&gt;, record_create &lt;lgl&gt;,
+#&gt; #   record_rename &lt;lgl&gt;, record_delete &lt;lgl&gt;, lock_records_all_forms &lt;lgl&gt;,
+#&gt; #   lock_records &lt;lgl&gt;, lock_records_customization &lt;lgl&gt;</div><div class='input'><span class='no'>result</span>$<span class='no'>data_user_form</span></div><div class='output co'>#&gt; # A tibble: 3 x 3
+#&gt;   username        form_name    permission
+#&gt;   &lt;chr&gt;           &lt;chr&gt;        &lt;lgl&gt;     
+#&gt; 1 dwells          demographics TRUE      
+#&gt; 2 unittestphifree demographics TRUE      
+#&gt; 3 wbeasleya       demographics TRUE      </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -179,10 +213,6 @@ Trailing line endings are removed.</p>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
-
-    <h2>Author</h2>
-    
-Hao Zhu, Benjamin Nutter, Will Beasley
 
   </div>
 </div>
