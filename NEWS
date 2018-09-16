@@ -16,6 +16,7 @@ Minor New Features:
 * `read_metadata()` always returns `character` vectors for all variables.  With readr 1.2.0, some column were returned differently than before.  (#193)
 * 'raw_or_label_headers' now supported (Thanks Hatem Hosny - hatemhosny, #183 & #203)
 * 'export_checkbox_labels' now supported (#186)
+* `redcap_users_export()` now included (#163)
 * 'forms' now supported for `redcap_read()`, `redcap_read_oneshot()`, & `redcap_read_oneshot_eav()`(#206).  It was already implemented for `redcap_metadata_read()`.
 * If no records are affected, a zero-length *character* vector is returned (instead of sometimes a zero-length *numeric* vector)  (#212)
 * New function (called `constants()`) easily exposes REDCap-specific constants.  (#217)
@@ -28,7 +29,7 @@ Minor New Features:
 Modified Internals:
 * All interaction with the REDCap server goes through the new `kernal_api()` function, which uses the 'httr' and 'curl' packages underneath.  Until now, each function called those packages directly. (#213)
 * When converting REDCap's CSV to R's data.frame, `readr::read_csv()` is used instead of `utils::read.csv()` (Issue #127).
-* updated to readr 1.2.0 (#200).  This changed how some data variables were assigned a data types
+* updated to readr 1.2.0 (#200).  This changed how some data variables were assigned a data types.
 * uses `odbc` package to retrieve credentials from the token server.  Remove RODBC and RODBCext (#188).  Thanks to @krlmlr for error checking advice in https://stackoverflow.com/a/50419403/1082435.
 * `data.table::rbindlist()` replaced by `dplyr::bind_rows()`
 * the checkmate package inspects most function parameters now (instead of `testit::assert()` and `base:stop()` ) (#190 & #208).

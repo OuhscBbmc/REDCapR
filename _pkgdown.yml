@@ -48,6 +48,7 @@ reference:
     contents:
       - redcap_next_free_record_name
       - redcap_metadata_read
+      - redcap_users_export
       - redcap_variables
       - redcap_version
 
