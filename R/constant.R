@@ -10,10 +10,32 @@
 #' @return The constant's value.  Currently all are single integers, but that could be expanded in the future.
 #'
 #' @details
+#' **Form Completeness**
+#'
 #' The current constants relate to the 'complete' variable at the end of each form.
-#'   * `form_incomplete`: 0L (*i.e.*, an integer)
-#'   * `form_unverified`: 1L
-#'   * `form_complete`: 2L
+#' * `form_incomplete`: 0L (*i.e.*, an integer)
+#' * `form_unverified`: 1L
+#' * `form_complete`: 2L
+#'
+#' **Data Export Rights**
+#'
+#' See https://your-server/redcap/api/help/?content=exp_users
+#' * `data_export_rights_no_access`    : 0L
+#' * `data_export_rights_deidentified` : 1L
+#' * `data_export_rights_full`         : 2L
+#'
+#' **Form Rights**
+#'
+#' See https://your-server/redcap/api/help/?content=exp_users
+#' * `form_rights_no_access`    : 0L
+#' * `form_rights_readonly`     : 2L
+#' * `form_rights_readwrite`    : 1L
+#'
+#' **Access Rights**
+#'
+#' See https://your-server/redcap/api/help/?content=exp_users
+#' * `access_no`    = 0L
+#' * `access_yes`   = 1L
 #'
 #' To add more, please for and edit the
 #' [constant.R](https://github.com/OuhscBbmc/REDCapR/blob/master/R/constant.R)
@@ -29,24 +51,19 @@
 #' REDCapR::constant("form_unverified")  # Returns 1L
 #' REDCapR::constant("form_complete"  )  # Returns 2L
 #'
-#' # Adapt for your institution's server:
-#' #   https://bbmc.ouhsc.edu/redcap/api/help/?content=exp_users
 #' REDCapR::constant("data_export_rights_no_access"   )  # Returns 0L
 #' REDCapR::constant("data_export_rights_deidentified")  # Returns 1L
 #' REDCapR::constant("data_export_rights_full"        )  # Returns 2L
 #'
-#' # Adapt for your institution's server:
-#' #   https://bbmc.ouhsc.edu/redcap/api/help/?content=exp_users
 #' REDCapR::constant("form_rights_no_access")  # Returns 0L
 #' REDCapR::constant("form_rights_readonly" )  # Returns 1L
 #' REDCapR::constant("form_rights_readwrite")  # Returns 2L
 #'
-#' # Adapt for your institution's server:
-#' #   https://bbmc.ouhsc.edu/redcap/api/help/?content=exp_users
 #' REDCapR::constant("access_no" )  # Returns 0L
 #' REDCapR::constant("access_yes")  # Returns 1L
 #'
 #' REDCapR::constant(c("form_complete", "form_complete", "form_incomplete")) # Returns c(2L, 2L, 0L)
+#' REDCapR::constant(c("form_rights_no_access", "form_rights_readonly", "form_rights_readwrite")) # Returns c(0L, 1L, 2L)
 #'
 #' \dontrun{
 #' # The following line returns an error:
@@ -88,8 +105,8 @@ constant_list <- list(
 
   # https://bbmc.ouhsc.edu/redcap/api/help/?content=exp_users
   form_rights_no_access    = 0L,
-  form_rights_readonly     = 1L,
-  form_rights_readwrite    = 2L,
+  form_rights_readonly     = 2L,
+  form_rights_readwrite    = 1L,  # Notice this order is flipped from what might be expected.
 
   # https://bbmc.ouhsc.edu/redcap/api/help/?content=exp_users
   access_no    = 0L,

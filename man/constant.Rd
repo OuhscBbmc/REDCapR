@@ -18,11 +18,39 @@ The constant's value.  Currently all are single integers, but that could be expa
 Collection of constants defined by the REDCap developers.
 }
 \details{
+\strong{Form Completeness}
+
 The current constants relate to the 'complete' variable at the end of each form.
 \itemize{
 \item \code{form_incomplete}: 0L (\emph{i.e.}, an integer)
 \item \code{form_unverified}: 1L
 \item \code{form_complete}: 2L
+}
+
+\strong{Data Export Rights}
+
+See https://your-server/redcap/api/help/?content=exp_users
+\itemize{
+\item \code{data_export_rights_no_access}    : 0L
+\item \code{data_export_rights_deidentified} : 1L
+\item \code{data_export_rights_full}         : 2L
+}
+
+\strong{Form Rights}
+
+See https://your-server/redcap/api/help/?content=exp_users
+\itemize{
+\item \code{form_rights_no_access}    : 0L
+\item \code{form_rights_readonly}     : 2L
+\item \code{form_rights_readwrite}    : 1L
+}
+
+\strong{Access Rights}
+
+See https://your-server/redcap/api/help/?content=exp_users
+\itemize{
+\item \code{access_no}    = 0L
+\item \code{access_yes}   = 1L
 }
 
 To add more, please for and edit the
@@ -35,9 +63,21 @@ in the GitHub documentation.
 
 REDCapR::constant("form_incomplete")  # Returns 0L
 REDCapR::constant("form_unverified")  # Returns 1L
-REDCapR::constant("form_complete")    # Returns 2L
+REDCapR::constant("form_complete"  )  # Returns 2L
+
+REDCapR::constant("data_export_rights_no_access"   )  # Returns 0L
+REDCapR::constant("data_export_rights_deidentified")  # Returns 1L
+REDCapR::constant("data_export_rights_full"        )  # Returns 2L
+
+REDCapR::constant("form_rights_no_access")  # Returns 0L
+REDCapR::constant("form_rights_readonly" )  # Returns 1L
+REDCapR::constant("form_rights_readwrite")  # Returns 2L
+
+REDCapR::constant("access_no" )  # Returns 0L
+REDCapR::constant("access_yes")  # Returns 1L
 
 REDCapR::constant(c("form_complete", "form_complete", "form_incomplete")) # Returns c(2L, 2L, 0L)
+REDCapR::constant(c("form_rights_no_access", "form_rights_readonly", "form_rights_readwrite")) # Returns c(0L, 1L, 2L)
 
 \dontrun{
 # The following line returns an error:
