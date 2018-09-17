@@ -92,15 +92,18 @@ redcap_users_export <- function( redcap_uri, token, verbose=TRUE, config_options
         ds_user_form <- ds_combined %>%
           dplyr::select_("username", "forms") %>%
           tidyr::separate_rows(.data$forms, sep=",") %>%
-          tidyr::separate_(
-            col     = "forms",
-            into    = c("form_name", "permission"),
-            sep     = ":",
-            convert = FALSE
-          ) %>%
+          # tidyr::separate_(
+          #   col     = "form",
+          #   into    = c("form_name", "permission"),
+          #   sep     = ":",
+          #   convert = FALSE
+          # ) %>%
           dplyr::mutate(
+            form_name   = sub("^(\\w+):([0-2])$", "\\1", .data$forms),
+            permission  = sub("^(\\w+):([0-2])$", "\\2", .data$forms),
             permission  = as.logical(as.integer(.data$permission))
-          )
+          ) %>%
+          dplyr::select_("-forms")
       },
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
     )
