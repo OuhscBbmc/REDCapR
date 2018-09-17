@@ -2,7 +2,7 @@
 % Please edit documentation in R/redcap-column-sanitize.R
 \name{redcap_column_sanitize}
 \alias{redcap_column_sanitize}
-\title{Sanitize to adhere to REDCap character encoding requirements.}
+\title{Sanitize to adhere to REDCap character encoding requirements}
 \usage{
 redcap_column_sanitize(d, column_names = colnames(d),
   encoding_initial = "latin1", substitution_character = "?")

@@ -8,7 +8,7 @@
 #'
 #' validate_field_names( field_names, stop_on_error )
 #'
-#' @title Inspect a [base::data.frame()] to anticipate problems before writing to a REDCap project.
+#' @title Inspect a [base::data.frame()] to anticipate problems before writing to a REDCap project
 #'
 #' @description This set of functions inspect a [base::data.frame()] to anticipate problems before writing with REDCap's API.
 #'
@@ -24,7 +24,8 @@
 #' * `suggestion`: A *potential* solution to the concern.
 #'
 #' @details
-#' All functions listed in the Usage section above inspect a specific aspect of the dataset.  The [validate_for_write()] function executes all
+#' All functions listed in the Usage section above inspect a specific aspect of the dataset.
+#' The [validate_for_write()] function executes all
 #' these individual validation checks.  It allows the client to check everything with one call.
 #'
 #' @author Will Beasley
@@ -48,7 +49,7 @@ validate_no_logical <- function( data_types, stop_on_error=FALSE ) {
   # indices <- which(sapply(d, class)=="logical")
   indices <- which(data_types=="logical")
 
-  if( length(indices) == 0 ) {
+  if( length(indices) == 0L ) {
     tibble::tibble(
       field_name         = character(0),
       field_index        = integer(0),

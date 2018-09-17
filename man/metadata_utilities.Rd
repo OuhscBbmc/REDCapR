@@ -4,7 +4,7 @@
 \alias{metadata_utilities}
 \alias{regex_named_captures}
 \alias{checkbox_choices}
-\title{Manipulate and interpret the metadata of a REDCap project.}
+\title{Manipulate and interpret the metadata of a REDCap project}
 \usage{
 regex_named_captures(pattern, text, perl = TRUE)
 
@@ -15,9 +15,11 @@ checkbox_choices(select_choices)
 
 \item{text}{The text to apply the regex against.  Required.}
 
-\item{perl}{Indicates if perl-compatible regexps should be used.  Default is \code{TRUE}. Optional.}
+\item{perl}{Indicates if perl-compatible regexps should be used.
+Default is \code{TRUE}. Optional.}
 
-\item{select_choices}{The text containing the choices that should be parsed to determine the \code{id} and \code{label} values.  Required.}
+\item{select_choices}{The text containing the choices that should be parsed
+to determine the \code{id} and \code{label} values.  Required.}
 }
 \value{
 Currently, a \code{\link[base:data.frame]{base::data.frame()}} is returned a row for each match, and a column for each \emph{named} group within a match.  For the \code{retrieve_checkbox_choices()} function, the columns will be.

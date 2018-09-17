@@ -1,7 +1,7 @@
 #' @name retrieve_credential
 #' @aliases retrieve_credential_local retrieve_credential_mssql
 #' @export retrieve_credential_local retrieve_credential_mssql
-#' @title Read a token and other credentials from a (non-REDCap) database or file.
+#' @title Read a token and other credentials from a (non-REDCap) database or file
 #'
 #' @description These functions are not essential to calling the REDCap API, but instead are functions that help manage tokens securely.
 #'
@@ -23,7 +23,7 @@
 #' @param dsn A [DSN](http://en.wikipedia.org/wiki/Data_source_name) on the local machine that points to the desired MSSQL database. Required.
 #' @param channel An *optional* connection handle as returned by [DBI::dbConnect()].  See Details below. Optional.
 #'
-#' @return A list of the following elements
+#' @return A list of the following elements:
 #' * `redcap_uri`: The URI of the REDCap Server.
 #' * `username`: Username.
 #' * `project_id`: The ID assigned to the project withing REDCap.

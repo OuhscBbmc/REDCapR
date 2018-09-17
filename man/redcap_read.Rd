@@ -2,7 +2,7 @@
 % Please edit documentation in R/redcap-read.R
 \name{redcap_read}
 \alias{redcap_read}
-\title{Read records from a REDCap project in subsets, and stacks them together before returning a \code{\link[base:data.frame]{base::data.frame()}}.}
+\title{Read records from a REDCap project in subsets, and stacks them together before returning a \code{\link[base:data.frame]{base::data.frame()}}}
 \usage{
 redcap_read(batch_size = 100L, interbatch_delay = 0.5,
   continue_on_error = FALSE, redcap_uri, token, records = NULL,
@@ -62,7 +62,7 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
 \item{id_position}{The column position of the variable that unique identifies the subject.  This defaults to the first variable in the dataset.}
 }
 \value{
-Currently, a list is returned with the following elements,
+Currently, a list is returned with the following elements:
 \itemize{
 \item \code{data}: An R \code{\link[base:data.frame]{base::data.frame()}} of the desired records and columns.
 \item \code{success}: A boolean value indicating if the operation was apparently successful.

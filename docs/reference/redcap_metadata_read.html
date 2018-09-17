@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Export the metadata of a REDCap project. — redcap_metadata_read • REDCapR</title>
+<title>Export the metadata of a REDCap project — redcap_metadata_read • REDCapR</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -36,9 +36,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="Export the metadata of a REDCap project. — redcap_metadata_read" />
+<meta property="og:title" content="Export the metadata of a REDCap project — redcap_metadata_read" />
 
-<meta property="og:description" content="Export the metadata (as a data dictionary) of a REDCap project as a base::data.frame().
+<meta property="og:description" content="Export the metadata (as a data dictionary) of a REDCap project as a
+base::data.frame().
 Each row in the data dictionary corresponds to one field in the project's dataset." />
 <meta name="twitter:card" content="summary" />
 
@@ -131,14 +132,15 @@ Each row in the data dictionary corresponds to one field in the project's datase
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Export the metadata of a REDCap project.</h1>
+    <h1>Export the metadata of a REDCap project</h1>
     <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-metadata-read.R'><code>R/redcap-metadata-read.R</code></a></small>
     <div class="hidden name"><code>redcap_metadata_read.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Export the metadata (as a data dictionary) of a REDCap project as a <code><a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>base::data.frame()</a></code>.
+    <p>Export the metadata (as a data dictionary) of a REDCap project as a
+<code><a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>base::data.frame()</a></code>.
 Each row in the data dictionary corresponds to one field in the project's dataset.</p>
     
     </div>
@@ -186,7 +188,7 @@ Each row in the data dictionary corresponds to one field in the project's datase
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Currently, a list is returned with the following elements,</p><ul>
+    <p>Currently, a list is returned with the following elements:</p><ul>
 <li><p><code>data</code>: An R <code><a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>base::data.frame()</a></code> of the desired records and columns.</p></li>
 <li><p><code>success</code>: A boolean value indicating if the operation was apparently successful.</p></li>
 <li><p><code>status_codes</code>: A collection of <a href='http://en.wikipedia.org/wiki/List_of_HTTP_status_codes'>http status codes</a>, separated by semicolons.  There is one code for each batch attempted.</p></li>

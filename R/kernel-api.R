@@ -1,7 +1,7 @@
 #' @name kernel_api
 #' @title REDCapR internal function for calling the REDCap API
 #'
-#' @description This function is used by other functions to read and write values
+#' @description This function is used by other functions to read and write values.
 #'
 #' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
 #' @param post_body List of contents expected by the REDCap API.  Required.

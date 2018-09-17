@@ -2,7 +2,7 @@
 % Please edit documentation in R/redcap-users-export.R
 \name{redcap_users_export}
 \alias{redcap_users_export}
-\title{List authorized users.}
+\title{List authorized users}
 \usage{
 redcap_users_export(redcap_uri, token, verbose = TRUE,
   config_options = NULL)
@@ -23,16 +23,18 @@ a \code{\link[utils:packageDescription]{utils::packageVersion}}.
 List users authorized for a project.
 }
 \note{
-\emph{From the REDCap 8.4.0 Documentation}:
+\strong{Documentation in REDCap 8.4.0}
+
 This method allows you to export the list of users for a project,
 including their user privileges and also email address, first name, and last name.
+
 Note: If the user has been assigned to a user role, it will return the user with
 the role's defined privileges.
 }
 \examples{
 uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
 token    <- "06DEFB601F9B46847DAA9DF0CFA951B4"
-result <- REDCapR::redcap_users_export(redcap_uri=uri, token=token)
+result   <- REDCapR::redcap_users_export(redcap_uri=uri, token=token)
 result$data_user
 result$data_user_form
 }

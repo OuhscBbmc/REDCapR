@@ -2,7 +2,7 @@
 % Please edit documentation in R/redcap-write-oneshot.R
 \name{redcap_write_oneshot}
 \alias{redcap_write_oneshot}
-\title{Write/Import records to a REDCap project.}
+\title{Write/Import records to a REDCap project}
 \usage{
 redcap_write_oneshot(ds, redcap_uri, token, verbose = TRUE,
   config_options = NULL)
@@ -19,7 +19,7 @@ redcap_write_oneshot(ds, redcap_uri, token, verbose = TRUE,
 \item{config_options}{A list of options to pass to \code{\link[httr:POST]{httr::POST()}} method in the 'httr' package.  See the details in \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}} Optional.}
 }
 \value{
-Currently, a list is returned with the following elements,
+Currently, a list is returned with the following elements:
 \itemize{
 \item \code{success}: A boolean value indicating if the operation was apparently successful.
 \item \code{status_code}: The \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code} of the operation.

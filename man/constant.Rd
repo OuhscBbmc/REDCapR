@@ -9,10 +9,12 @@ constant(name, simplify = TRUE)
 \arguments{
 \item{name}{Name of constant.  Required character.}
 
-\item{simplify}{Simplifies the vector of values to a common data-type, if possible.  Passed to the \code{simplify} parameter of \code{\link[base:sapply]{base::sapply()}}.}
+\item{simplify}{Simplifies the vector of values to a common data-type, if possible.
+Passed to the \code{simplify} parameter of \code{\link[base:sapply]{base::sapply()}}.}
 }
 \value{
-The constant's value.  Currently all are single integers, but that could be expanded in the future.
+The constant's value.  Currently all are single integers,
+but that could be expanded in the future.
 }
 \description{
 Collection of constants defined by the REDCap developers.

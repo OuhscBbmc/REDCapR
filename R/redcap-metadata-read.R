@@ -1,9 +1,10 @@
 #' @name redcap_metadata_read
 #' @export redcap_metadata_read
-#' @title Export the metadata of a REDCap project.
+#' @title Export the metadata of a REDCap project
 #'
-#' @description Export the metadata (as a data dictionary) of a REDCap project as a [base::data.frame()].
-#' Each row in the data dictionary corresponds to one field in the project's dataset.
+#' @description Export the metadata (as a data dictionary) of a REDCap project as a
+#'   [base::data.frame()].
+#'   Each row in the data dictionary corresponds to one field in the project's dataset.
 #'
 #' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
 #' @param token The user-specific string that serves as the password for a project.  Required.
@@ -14,7 +15,7 @@
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details in [redcap_read_oneshot()]. Optional.
 #'
-#' @return Currently, a list is returned with the following elements,
+#' @return Currently, a list is returned with the following elements:
 #'
 #' * `data`: An R [base::data.frame()] of the desired records and columns.
 #' * `success`: A boolean value indicating if the operation was apparently successful.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/redcap-download-file-oneshot.R
 \name{redcap_download_file_oneshot}
 \alias{redcap_download_file_oneshot}
-\title{Download a file from a REDCap project record.}
+\title{Download a file from a REDCap project record}
 \usage{
 redcap_download_file_oneshot(file_name = NULL, directory = NULL,
   overwrite = FALSE, redcap_uri, token, record, field, event = "",
@@ -44,7 +44,7 @@ Currently, a list is returned with the following elements,
 }
 }
 \description{
-This function uses REDCap's API to download a file
+This function uses REDCap's API to download a file.
 }
 \details{
 Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See \code{\link[=validate_for_write]{validate_for_write()}} for a helper function that checks for some common important conflicts.

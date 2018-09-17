@@ -2,7 +2,7 @@
 % Please edit documentation in R/sanitize-token.R
 \name{sanitize_token}
 \alias{sanitize_token}
-\title{Validate and sanitize the user's REDCap token.}
+\title{Validate and sanitize the user's REDCap token}
 \usage{
 sanitize_token(token)
 }

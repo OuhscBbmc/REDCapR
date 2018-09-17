@@ -2,7 +2,7 @@
 % Please edit documentation in R/redcap-upload-file-oneshot.R
 \name{redcap_upload_file_oneshot}
 \alias{redcap_upload_file_oneshot}
-\title{Upload a file into to a REDCap project record.}
+\title{Upload a file into to a REDCap project record}
 \usage{
 redcap_upload_file_oneshot(file_name, record, redcap_uri, token, field,
   event = "", verbose = TRUE, config_options = NULL)
@@ -25,7 +25,7 @@ redcap_upload_file_oneshot(file_name, record, redcap_uri, token, field,
 \item{config_options}{A list of options to pass to \code{POST} method in the \code{httr} package.  See the details below.  Optional.}
 }
 \value{
-Currently, a list is returned with the following elements,
+Currently, a list is returned with the following elements:
 \itemize{
 \item \code{success}: A boolean value indicating if the operation was apparently successful.
 \item \code{status_code}: The \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code} of the operation.
@@ -80,7 +80,5 @@ https://community.projectredcap.org/articles/462/api-examples.html). If you do n
 for the wiki, please ask your campus REDCap administrator to send you the static material.
 }
 \author{
-Will Beasley
-
-John J. Aponte
+Will Beasley, John J. Aponte
 }

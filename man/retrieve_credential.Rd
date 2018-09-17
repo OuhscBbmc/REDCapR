@@ -4,7 +4,7 @@
 \alias{retrieve_credential}
 \alias{retrieve_credential_local}
 \alias{retrieve_credential_mssql}
-\title{Read a token and other credentials from a (non-REDCap) database or file.}
+\title{Read a token and other credentials from a (non-REDCap) database or file}
 \usage{
 retrieve_credential_local(
   path_credential, project_id, check_url=TRUE,
@@ -32,7 +32,7 @@ retrieve_credential_mssql(
 \item{channel}{An \emph{optional} connection handle as returned by \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.  See Details below. Optional.}
 }
 \value{
-A list of the following elements
+A list of the following elements:
 \itemize{
 \item \code{redcap_uri}: The URI of the REDCap Server.
 \item \code{username}: Username.

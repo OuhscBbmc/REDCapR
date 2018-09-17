@@ -17,7 +17,7 @@ kernel_api(redcap_uri, post_body, config_options)
 A \link[utils:packageVersion]{utils::packageVersion}.
 }
 \description{
-This function is used by other functions to read and write values
+This function is used by other functions to read and write values.
 }
 \details{
 If the API call is unsuccessful, a value of \code{base::package_version("0.0.0")} will be returned.

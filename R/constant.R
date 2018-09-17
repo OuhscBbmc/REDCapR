@@ -5,11 +5,15 @@
 #' @description Collection of constants defined by the REDCap developers.
 #'
 #' @param name Name of constant.  Required character.
-#' @param simplify Simplifies the vector of values to a common data-type, if possible.  Passed to the `simplify` parameter of [base::sapply()].
+#' @param simplify Simplifies the vector of values to a common data-type, if possible.
+#'   Passed to the `simplify` parameter of [base::sapply()].
 #'
-#' @return The constant's value.  Currently all are single integers, but that could be expanded in the future.
+#' @return The constant's value.  Currently all are single integers,
+#'   but that could be expanded in the future.
 #'
 #' @details
+#` Constants have the following groupings.
+#'
 #' **Form Completeness**
 #'
 #' The current constants relate to the 'complete' variable at the end of each form.

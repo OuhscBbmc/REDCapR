@@ -1,8 +1,8 @@
 #' @name redcap_download_file_oneshot
 #' @export redcap_download_file_oneshot
-#' @title Download a file from a REDCap project record.
+#' @title Download a file from a REDCap project record
 #'
-#' @description This function uses REDCap's API to download a file
+#' @description This function uses REDCap's API to download a file.
 #'
 #' @param file_name The name of the file where the downloaded file is saved.
 #'   If empty the original name of the file will be used and saved in the default directory.  Optional.

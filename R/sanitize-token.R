@@ -1,7 +1,7 @@
 #' @name sanitize_token
 #' @export
 #'
-#' @title Validate and sanitize the user's REDCap token.
+#' @title Validate and sanitize the user's REDCap token
 #'
 #' @description Verifies the token is nonmissing and conforms to the legal pattern of a 32-character hexadecimal value.
 #' Trailing line endings are removed.

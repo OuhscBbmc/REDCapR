@@ -2,7 +2,7 @@
 % Please edit documentation in R/redcap-write.R
 \name{redcap_write}
 \alias{redcap_write}
-\title{Write/Import records to a REDCap project.}
+\title{Write/Import records to a REDCap project}
 \usage{
 redcap_write(ds_to_write, batch_size = 100L, interbatch_delay = 0.5,
   continue_on_error = FALSE, redcap_uri, token, verbose = TRUE,
@@ -26,7 +26,7 @@ redcap_write(ds_to_write, batch_size = 100L, interbatch_delay = 0.5,
 \item{config_options}{A list of options to pass to \code{POST} method in the \code{httr} package.  See the details in \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}}. Optional.}
 }
 \value{
-Currently, a list is returned with the following elements,
+Currently, a list is returned with the following elements:
 \itemize{
 \item \code{success}: A boolean value indicating if the operation was apparently successful.
 \item \code{status_code}: The \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code} of the operation.

@@ -1,6 +1,6 @@
 #' @name redcap_users_export
 #' @export
-#' @title List authorized users.
+#' @title List authorized users
 #'
 #' @description List users authorized for a project.
 #'
@@ -10,17 +10,19 @@
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below.  Optional.
 #'
 #' @note
-#' *From the REDCap 8.4.0 Documentation*:
-#' This method allows you to export the list of users for a project,
-#' including their user privileges and also email address, first name, and last name.
-#' Note: If the user has been assigned to a user role, it will return the user with
-#' the role's defined privileges.
+#' **Documentation in REDCap 8.4.0**
+#'
+#' > This method allows you to export the list of users for a project,
+#' > including their user privileges and also email address, first name, and last name.
+#'
+#' > Note: If the user has been assigned to a user role, it will return the user with
+#' >the role's defined privileges.
 #'
 #' @return a \code{\link[utils:packageDescription]{utils::packageVersion}}.
 #' @examples
 #' uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token    <- "06DEFB601F9B46847DAA9DF0CFA951B4"
-#' result <- REDCapR::redcap_users_export(redcap_uri=uri, token=token)
+#' result   <- REDCapR::redcap_users_export(redcap_uri=uri, token=token)
 #' result$data_user
 #' result$data_user_form
 

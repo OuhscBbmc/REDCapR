@@ -2,7 +2,7 @@
 % Please edit documentation in R/redcap-variables.R
 \name{redcap_variables}
 \alias{redcap_variables}
-\title{Enumerate the exported variables.}
+\title{Enumerate the exported variables}
 \usage{
 redcap_variables(redcap_uri, token, verbose = TRUE,
   config_options = NULL)
