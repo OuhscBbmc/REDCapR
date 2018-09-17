@@ -1,4 +1,3 @@
-#' @name redcap_version
 #' @title Determine version of REDCap instance
 #'
 #' @description This function uses REDCap's API to query its version.

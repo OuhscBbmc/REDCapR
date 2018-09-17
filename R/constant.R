@@ -1,5 +1,3 @@
-#' @name constant
-#'
 #' @title Collection of REDCap-specific constants
 #'
 #' @description Collection of constants defined by the REDCap developers.

@@ -1,4 +1,3 @@
-#' @name kernel_api
 #' @title REDCapR internal function for calling the REDCap API
 #'
 #' @description This function is used by other functions to read and write values.

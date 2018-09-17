@@ -1,6 +1,5 @@
 #' @name validate
 #' @aliases validate_for_write validate_no_logical validate_field_names
-#' @export validate_for_write validate_no_logical validate_field_names
 #' @usage
 #' validate_for_write( d )
 #'
@@ -42,6 +41,7 @@
 #' )
 #' REDCapR::validate_for_write(d = d)
 
+#' @export
 validate_no_logical <- function( data_types, stop_on_error=FALSE ) {
   checkmate::assert_character(data_types, any.missing=F, min.len=1, min.chars=2)
   checkmate::assert_logical(stop_on_error, any.missing=F, len=1)
@@ -68,6 +68,7 @@ validate_no_logical <- function( data_types, stop_on_error=FALSE ) {
   }
 }
 
+#' @export
 validate_field_names <- function( field_names, stop_on_error=FALSE ) {
   checkmate::assert_character(field_names, any.missing=F, null.ok=T, min.len=1, min.chars=2)
   checkmate::assert_logical(stop_on_error, any.missing=F, len=1)
@@ -94,6 +95,7 @@ validate_field_names <- function( field_names, stop_on_error=FALSE ) {
   }
 }
 
+#' @export
 validate_for_write <- function( d ) {
   checkmate::assert_data_frame(d, any.missing=F)
 

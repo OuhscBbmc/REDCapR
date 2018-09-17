@@ -1,4 +1,3 @@
-#' @name redcap_metadata_read
 #' @title Export the metadata of a REDCap project
 #'
 #' @description Export the metadata (as a data dictionary) of a REDCap project as a

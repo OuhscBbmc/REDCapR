@@ -1,4 +1,3 @@
-#' @name redcap_download_file_oneshot
 #' @title Download a file from a REDCap project record
 #'
 #' @description This function uses REDCap's API to download a file.

@@ -1,4 +1,3 @@
-#' @name redcap_read_oneshot_eav
 #' @title Read/Export records from a REDCap project --still in development
 #'
 #' @description This function uses REDCap's API to select and return data.  This function is still in development.

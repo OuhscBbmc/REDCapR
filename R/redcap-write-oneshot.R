@@ -1,4 +1,3 @@
-#' @name redcap_write_oneshot
 #' @title Write/Import records to a REDCap project
 #'
 #' @description This function uses REDCap's API to select and return data.

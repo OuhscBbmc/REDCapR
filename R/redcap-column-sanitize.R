@@ -1,4 +1,3 @@
-#' @name redcap_column_sanitize
 #' @title Sanitize to adhere to REDCap character encoding requirements
 #'
 #' @description Replace non-ASCII characters with legal characters that won't cause problems when writing to a REDCap project.

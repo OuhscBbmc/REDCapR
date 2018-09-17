@@ -1,4 +1,3 @@
-#' @name redcap_next_free_record_name
 #' @title Determine free available record ID
 #'
 #' @description Determines the next available record ID.

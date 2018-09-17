@@ -1,4 +1,3 @@
-#' @name redcap_variables
 #' @title Enumerate the exported variables
 #'
 #' @description This function calls the 'exportFieldNames' function of the REDCap API.

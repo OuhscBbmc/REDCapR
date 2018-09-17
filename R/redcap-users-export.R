@@ -1,4 +1,3 @@
-#' @name redcap_users_export
 #' @title List authorized users
 #'
 #' @description List users authorized for a project.

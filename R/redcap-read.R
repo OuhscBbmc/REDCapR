@@ -1,4 +1,3 @@
-#' @name redcap_read
 #' @title Read records from a REDCap project in subsets, and stacks them together before returning a [base::data.frame()]
 #'
 #' @description From an external perspective, this function is similar to [redcap_read_oneshot()].  The internals
