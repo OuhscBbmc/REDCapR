@@ -77,7 +77,11 @@ REDCapR::constant("access_no" )  # Returns 0L
 REDCapR::constant("access_yes")  # Returns 1L
 
 REDCapR::constant(c("form_complete", "form_complete", "form_incomplete")) # Returns c(2L, 2L, 0L)
-REDCapR::constant(c("form_rights_no_access", "form_rights_readonly", "form_rights_readwrite")) # Returns c(0L, 1L, 2L)
+REDCapR::constant(c(
+  "form_rights_no_access",
+  "form_rights_readonly",
+  "form_rights_readwrite"
+)) # Returns c(0L, 1L, 2L)
 
 \dontrun{
 # The following line returns an error:

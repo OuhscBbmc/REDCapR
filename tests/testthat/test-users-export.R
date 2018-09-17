@@ -47,8 +47,10 @@ test_that("with DAGs", {
   expected_data_user_form <- structure(
     list(username = c("dwells", "unittestphifree", "wbeasleya"
     ), form_name = c("demographics", "demographics", "demographics"
-    ), permission = c(TRUE, TRUE, TRUE)), class = c("tbl_df", "tbl",
-    "data.frame"), row.names = c(NA, -3L)
+    ), permission_id = c(1L, 1L, 1L), permission = structure(c(3L,
+    3L, 3L), .Label = c("No Access", "Read Only", "Read/Write"), class = c("ordered",
+    "factor"))), class = c("tbl_df", "tbl", "data.frame"), row.names = c(NA,
+    -3L)
   )
 
   expect_message(
@@ -96,8 +98,10 @@ test_that("with DAGs", {
     list(username = c("unittestphifree", "unittestphifree",
     "unittestphifree", "wbeasleya", "wbeasleya", "wbeasleya"), form_name = c("demographics",
     "health", "race_and_ethnicity", "demographics", "health", "race_and_ethnicity"
-    ), permission = c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE)), class = c("tbl_df",
-    "tbl", "data.frame"), row.names = c(NA, -6L)
+    ), permission_id = c(1L, 1L, 1L, 1L, 1L, 1L), permission = structure(c(3L,
+    3L, 3L, 3L, 3L, 3L), .Label = c("No Access", "Read Only", "Read/Write"
+    ), class = c("ordered", "factor"))), class = c("tbl_df", "tbl",
+    "data.frame"), row.names = c(NA, -6L)
   )
 
   expect_message(
