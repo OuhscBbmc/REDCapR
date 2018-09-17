@@ -19,25 +19,27 @@
 #'
 #' **Data Export Rights**
 #'
-#' See https://your-server/redcap/api/help/?content=exp_users
+#' See https://your-server/redcap/api/help/?content=exp_users.
 #' * `data_export_rights_no_access`    : 0L
 #' * `data_export_rights_deidentified` : 1L
 #' * `data_export_rights_full`         : 2L
 #'
 #' **Form Rights**
 #'
-#' See https://your-server/redcap/api/help/?content=exp_users
+#' See https://your-server/redcap/api/help/?content=exp_users.
+#' The order of these digits may be unexpected.
+#'
 #' * `form_rights_no_access`    : 0L
 #' * `form_rights_readonly`     : 2L
 #' * `form_rights_readwrite`    : 1L
 #'
 #' **Access Rights**
 #'
-#' See https://your-server/redcap/api/help/?content=exp_users
-#' * `access_no`    = 0L
-#' * `access_yes`   = 1L
+#' See https://your-server/redcap/api/help/?content=exp_users.
+#' * `access_no`    : 0L
+#' * `access_yes`   : 1L
 #'
-#' To add more, please for and edit the
+#' To add more, please for and edit
 #' [constant.R](https://github.com/OuhscBbmc/REDCapR/blob/master/R/constant.R)
 #' on GitHub and submit a pull request.  For instructions, please see
 #' [Editing files in another user's repository](https://help.github.com/articles/editing-files-in-another-user-s-repository/)
