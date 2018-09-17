@@ -1,5 +1,4 @@
 #' @name redcap_metadata_read
-#' @export redcap_metadata_read
 #' @title Export the metadata of a REDCap project
 #'
 #' @description Export the metadata (as a data dictionary) of a REDCap project as a
@@ -45,6 +44,7 @@
 #' REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 #' }
 
+#' @export
 redcap_metadata_read <- function(
   redcap_uri,
   token,

@@ -1,5 +1,4 @@
 #' @name redcap_version
-#' @export
 #' @title Determine version of REDCap instance
 #'
 #' @description This function uses REDCap's API to query its version.
@@ -19,6 +18,7 @@
 #' token    <- "9A81268476645C4E5F03428B8AC3AA7B"
 #' REDCapR::redcap_version(redcap_uri=uri, token=token)
 
+#' @export
 redcap_version <- function( redcap_uri, token, verbose=TRUE, config_options=NULL ) {
   version_error <- base::package_version("0.0.0")
 

@@ -1,5 +1,4 @@
 #' @name redcap_variables
-#' @export
 #' @title Enumerate the exported variables
 #'
 #' @description This function calls the 'exportFieldNames' function of the REDCap API.
@@ -35,7 +34,8 @@
 #' token       <- "9A81268476645C4E5F03428B8AC3AA7B"
 #' ds_variable <- REDCapR::redcap_variables(redcap_uri=uri, token=token)$data
 #' }
-#'
+
+#' @export
 redcap_variables <- function(
   redcap_uri,
   token,

@@ -1,5 +1,4 @@
 #' @name redcap_write
-#' @export redcap_write
 #' @title Write/Import records to a REDCap project
 #'
 #' @description This function uses REDCap's APIs to select and return data.
@@ -72,6 +71,8 @@
 #' result_write <- REDCapR::redcap_write(ds=ds1, redcap_uri=uri, token=token)
 #' result_write$raw_text
 #' }
+
+#' @export
 redcap_write <- function(
   ds_to_write,
   batch_size          = 100L,

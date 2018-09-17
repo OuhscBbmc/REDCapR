@@ -1,5 +1,4 @@
 #' @name redcap_read_oneshot_eav
-# @export redcap_read_oneshot_eav
 #' @title Read/Export records from a REDCap project --still in development
 #'
 #' @description This function uses REDCap's API to select and return data.  This function is still in development.
@@ -83,6 +82,7 @@
 #' )$data
 #'}
 
+# @export  # Not currently exported.
 redcap_read_oneshot_eav <- function(
   redcap_uri,
   token,

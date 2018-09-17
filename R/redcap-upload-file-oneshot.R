@@ -1,5 +1,4 @@
 #' @name redcap_upload_file_oneshot
-#' @export redcap_upload_file_oneshot
 #' @title Upload a file into to a REDCap project record
 #'
 #' @description This function uses REDCap's API to upload a file.
@@ -61,6 +60,7 @@
 #' }
 #' }
 
+#' @export
 redcap_upload_file_oneshot <- function(
   file_name,
   record,

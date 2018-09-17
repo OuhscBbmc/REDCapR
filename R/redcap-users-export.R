@@ -1,5 +1,4 @@
 #' @name redcap_users_export
-#' @export
 #' @title List authorized users
 #'
 #' @description List users authorized for a project.
@@ -26,6 +25,7 @@
 #' result$data_user
 #' result$data_user_form
 
+#' @export
 redcap_users_export <- function( redcap_uri, token, verbose=TRUE, config_options=NULL ) {
   # version_error <- base::package_version("0.0.0")
 

@@ -1,5 +1,4 @@
 #' @name redcap_write_oneshot
-#' @export redcap_write_oneshot
 #' @title Write/Import records to a REDCap project
 #'
 #' @description This function uses REDCap's API to select and return data.
@@ -61,8 +60,9 @@
 #' result_write   <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=token)
 #' result_write$raw_text
 #' }
-#'
 
+
+#' @export
 redcap_write_oneshot <- function(
   ds,
   redcap_uri,

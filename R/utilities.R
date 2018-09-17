@@ -1,6 +1,4 @@
 #' @name replace_nas_with_explicit
-## We're intentionally not exporting this function.
-#'
 #' @title Create explicit factor level for missing values
 #'
 #' @description Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertently ignored.
@@ -25,6 +23,7 @@
 #' @examples
 #' library(REDCapR) #Load the package into the current R session.
 
+## We're intentionally not exporting this function.
 replace_nas_with_explicit <- function( scores, new_na_label="Unknown", create_factor=FALSE, add_unknown_level=FALSE) {
 
   if( create_factor & !is.factor(scores) ) {
@@ -48,8 +47,6 @@ replace_nas_with_explicit <- function( scores, new_na_label="Unknown", create_fa
 
 
 #' @name collapse_vector
-## We're intentionally not exporting this function.
-#'
 #' @title Collapse a vector of values into a single string when necessary.
 #'
 #' @description REDCap's API frequently specifies a series of values separated by commas.
@@ -69,6 +66,7 @@ replace_nas_with_explicit <- function( scores, new_na_label="Unknown", create_fa
 #' REDCapR:::collapse_vector(elements=letters, collapsed=NULL)
 #' REDCapR:::collapse_vector(elements=NULL, collapsed="4,5,6")
 
+## We're intentionally not exporting this function.
 collapse_vector <- function( elements, collapsed ) {
   checkmate::assert_character(collapsed, len=1, any.missing=T, null.ok=T)
 
@@ -85,13 +83,15 @@ collapse_vector <- function( elements, collapsed ) {
   return( collapsed )
 }
 
+## We're intentionally not exporting this function.
 filter_logic_prepare <- function( filter_logic ) {
   # This is an empty string if `filter_logic` is NULL.
-  if( all(nchar(filter_logic)==0) )
+  if( all(nchar(filter_logic)==0L) )
     filter_logic <- dplyr::if_else(is.null(filter_logic), "", filter_logic)
   return( filter_logic )
 }
 
+## We're intentionally not exporting this function.
 verbose_prepare <- function( verbose ) {
   ifelse(!is.null(verbose), verbose, getOption("verbose"))
 }

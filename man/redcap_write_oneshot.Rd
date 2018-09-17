@@ -70,7 +70,6 @@ ds1$telephone  <- sprintf("(405) 111-\%1$i\%1$i\%1$i\%1$i", seq_len(nrow(ds1)))
 result_write   <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=token)
 result_write$raw_text
 }
-
 }
 \references{
 The official documentation can be found on the 'API Help Page' and 'API Examples' pages

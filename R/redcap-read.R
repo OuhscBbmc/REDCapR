@@ -1,5 +1,4 @@
 #' @name redcap_read
-#' @export redcap_read
 #' @title Read records from a REDCap project in subsets, and stacks them together before returning a [base::data.frame()]
 #'
 #' @description From an external perspective, this function is similar to [redcap_read_oneshot()].  The internals
@@ -70,6 +69,7 @@
 #' REDCapR::redcap_read(batch_size=2, redcap_uri=uri, token=token)
 #' }
 
+#' @export
 redcap_read <- function(
   batch_size                    = 100L,
   interbatch_delay              = 0.5,

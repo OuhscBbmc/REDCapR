@@ -1,5 +1,4 @@
 #' @name redcap_next_free_record_name
-#' @export
 #' @title Determine free available record ID
 #'
 #' @description Determines the next available record ID.
@@ -28,6 +27,7 @@
 #' token    <- "9A81268476645C4E5F03428B8AC3AA7B"
 #' REDCapR::redcap_next_free_record_name(redcap_uri=uri, token=token) # Should return "6"
 
+#' @export
 redcap_next_free_record_name <- function( redcap_uri, token, verbose=TRUE, config_options=NULL ) {
   value_error       <- character(0)
 

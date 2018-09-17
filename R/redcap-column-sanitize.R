@@ -1,5 +1,4 @@
 #' @name redcap_column_sanitize
-#' @export redcap_column_sanitize
 #' @title Sanitize to adhere to REDCap character encoding requirements
 #'
 #' @description Replace non-ASCII characters with legal characters that won't cause problems when writing to a REDCap project.
@@ -30,6 +29,7 @@
 #' # Typical examples are not shown because they require non-ASCII encoding,
 #' #   which makes the package documentation less portable.
 
+#' @export
 redcap_column_sanitize <- function(
   d,
   column_names            = colnames(d),

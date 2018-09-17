@@ -1,5 +1,4 @@
 #' @name create_batch_glossary
-#' @export create_batch_glossary
 #' @title Creates a [base::data.frame()] that help batching long-running read and writes
 #'
 #' @description The function returns a [base::data.frame()] that other functions use to separate long-running
@@ -38,6 +37,7 @@
 #' )
 #' REDCapR::create_batch_glossary(nrow(d), batch_size=40)
 
+#' @export
 create_batch_glossary <- function( row_count, batch_size ) {
   checkmate::assert_integerish(row_count , any.missing=F, len=1L, lower=1L)
   checkmate::assert_integerish(batch_size, any.missing=F, len=1L, lower=1L)

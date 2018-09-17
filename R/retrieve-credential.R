@@ -1,6 +1,5 @@
 #' @name retrieve_credential
 #' @aliases retrieve_credential_local retrieve_credential_mssql
-#' @export retrieve_credential_local retrieve_credential_mssql
 #' @title Read a token and other credentials from a (non-REDCap) database or file
 #'
 #' @description These functions are not essential to calling the REDCap API, but instead are functions that help manage tokens securely.
@@ -48,6 +47,7 @@
 #' (p1  <- REDCapR::retrieve_credential_local(path, 153L))
 #' (p2  <- REDCapR::retrieve_credential_local(path, 212L))
 
+#' @export
 retrieve_credential_local <- function(
   path_credential,
   project_id,
@@ -129,6 +129,7 @@ retrieve_credential_local <- function(
   return( credential )
 }
 
+#' @export
 retrieve_credential_mssql <- function(
   project_id,
   instance,
