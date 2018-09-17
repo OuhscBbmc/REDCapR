@@ -13,7 +13,7 @@ vignette: >
 Troubleshooting REDCap API Calls
 ==================================================================
 
-There are many links in the pipeline between your institution's [REDCap](http://www.project-redcap.org/) server and the API user.  When the end result is unsuccessful, this document should help narrow the location of the possible problem.  The first two sections will be relevant to almost any language interacting with the API.  The remaining sections are possibly relevant only to your language (eg, Python, R, SAS, bash), or your software library ([redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) in R and [PyCap](http://pycap.readthedocs.org/en/latest/) in Python).
+There are many links in the pipeline between your institution's [REDCap](http://www.project-redcap.org/) server and the API user.  When the end result is unsuccessful, this document should help narrow the location of the possible problem.  The first two sections will be relevant to almost any language interacting with the API.  The remaining sections are possibly relevant only to your language (*e.g.*, Python, R, SAS, bash), or your software library ([redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) in R and [PyCap](http://pycap.readthedocs.org/en/latest/) in Python).
 
 Server Configuration and Authorization
 ------------------------------------------------------------------
@@ -41,7 +41,7 @@ This first group of checks primarily focuses on the server and the logins accoun
 Language Agnostic API
 ------------------------------------------------------------------
 
-This section group examines potential problems that occur after it leaves a working server, but before it is handled by their programming language (eg, Python and R).  [Postman](http://www.getpostman.com/) is a Chrome plugin recommended by [several](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ) [people](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ) that makes troubleshooting much more efficient.
+This section group examines potential problems that occur after it leaves a working server, but before it is handled by their programming language (*e.g.*, Python and R).  [Postman](http://www.getpostman.com/) is a Chrome plugin recommended by [several](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ) [people](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ) that makes troubleshooting much more efficient.
 
 <img src="./images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>
 
@@ -157,7 +157,7 @@ There are several ways to call REDCap's API from [R](https://cran.r-project.org/
     )
     ```
 
-1. **Can the user query an *entire* project using RCurl?** There are two advantages of trying a subset of the data.  First, small datasets avoid the time-out errors that plague large datasets.  Second, it may avoid problematic values being passed through the pipeline.  If the current check fails but the previous check succeedes, then experiment with different expanses of records and fields.  This should help determine which values are causing the problems, or if there's simply too much data being pulled in one pass.
+1. **Can the user query an *entire* project using RCurl?** There are two advantages of trying a subset of the data.  First, small datasets avoid the time-out errors that plague large datasets.  Second, it may avoid problematic values being passed through the pipeline.  If the current check fails but the previous check succeeds, then experiment with different expanses of records and fields.  This should help determine which values are causing the problems, or if there's simply too much data being pulled in one pass.
 
     If the desired dataset is too large, consider if you can prune unnecessary records or fields.  If not, one solution is to pull smaller, multiple batches using the API, then reassemble them.  The [`redcap_read()` function](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html) in [REDCapR](https://ouhscbbmc.github.io/REDCapR/) does this automatically, and allows the user to specify a `batch_size`.
 
@@ -354,7 +354,7 @@ Importing into REDCap from R
 
 Troubleshooting import operations is trickier than export operations for two major reasons.  First, the database potentially persists your *import* mistakes.  In contrast, repeatedly *exporting* data won't affect subsequent reads.  Considering cloning the REDCap project for testing until the problem is resolved.  Remember to create a new token (because they're not automatically created when projects are cloned, even when users are copied), and to modify your code's token to point to the new testing clone.
 
- The second reason why importing can be trickier is because the schema (eg, the names and data types) of your local dataset must match the project's schema.  This section will be expanded in the future.  Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project's schema and dataset.  Also, consider exporting the dataset to your machine, and look for differences.  Note that you cannot import calculated fields into REDCap.
+ The second reason why importing can be trickier is because the schema (*e.g.*, the names and data types) of your local dataset must match the project's schema.  This section will be expanded in the future.  Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project's schema and dataset.  Also, consider exporting the dataset to your machine, and look for differences.  Note that you cannot import calculated fields into REDCap.
 
 1. **Can the user import the *entire* project?**
 
@@ -363,7 +363,7 @@ Troubleshooting import operations is trickier than export operations for two maj
 Other software for communication and automation with REDCap
 ------------------------------------------------------------------
 
-REDCap is used in many enviroments, and it's not surprising that a lot of libraries have been developed that cater to different scenarios and languages.  An active list is maintained at [REDCap-Tools](http://redcap-tools.github.io/projects/).  In an entry needs to be added, please notify us; instructions are found at the bottom of the page.
+REDCap is used in many environments, and it's not surprising that a lot of libraries have been developed that cater to different scenarios and languages.  An active list is maintained at [REDCap-Tools](http://redcap-tools.github.io/projects/).  In an entry needs to be added, please notify us; instructions are found at the bottom of the page.
 
 <!--
 **Actively developed in the past two years**
@@ -383,9 +383,9 @@ Other good resources
     ```
     http://<*your server name*>/redcap/api/help
     ```
-* If you have access to the REDCap wiki, some newer examples might exist at <https://community.projectredcap.org/articles/462/api-examples.html>.  The official documentation can be found on the `API Help Page` and `API Examples' pages on the REDCap wiki (ie, <https://community.projectredcap.org/articles/456/api-documentation.html> and <https://community.projectredcap.org/articles/462/api-examples.html>). If you do not have an account for the wiki, please ask your campus REDCap administrator to send you the static material.
+* If you have access to the REDCap wiki, some newer examples might exist at <https://community.projectredcap.org/articles/462/api-examples.html>.  The official documentation can be found on the `API Help Page` and `API Examples' pages on the REDCap wiki (*i.e.*, <https://community.projectredcap.org/articles/456/api-documentation.html> and <https://community.projectredcap.org/articles/462/api-examples.html>). If you do not have an account for the wiki, please ask your campus REDCap administrator to send you the static material.
 * Scott Burns, the primary developer of [PyCap](https://github.com/redcap-tools/PyCap) has a good intro at http://sburns.org/2013/07/22/intro-to-redcap-api.html
-* Bejamin Nutter, the primary developer of [redcapAPI](https://github.com/nutterb/redcapAPI/wiki) has a good wiki at https://github.com/nutterb/redcapAPI/wiki
+* Benjamin Nutter, the primary developer of [redcapAPI](https://github.com/nutterb/redcapAPI/wiki) has a good wiki at https://github.com/nutterb/redcapAPI/wiki
 * In addition to this troubleshooting document, REDCapR has a [vignette](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) that covers its basic operations.
 
 Document Info

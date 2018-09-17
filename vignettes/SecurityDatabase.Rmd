@@ -185,7 +185,7 @@ print 'Step #5 executed'; print ''
 
 Transfer Credentials
 ========================================
-Manually transferring tokens to the auxiliary server becomes unmanageable as your institution's collection of API users grows.  This script demonstrates how to progamatically transfer all tokens from multiple REDCap instances.  The basic steps are:
+Manually transferring tokens to the auxiliary server becomes unmanageable as your institution's collection of API users grows.  This script demonstrates how to programmatically transfer all tokens from multiple REDCap instances.  The basic steps are:
 
 1. Read from the MySQL database(s) underneath each REDCap instance on your campus.
 1. Combine & groom the credentials.

@@ -29,7 +29,7 @@ The current constants relate to the 'complete' variable at the end of each form.
 
 \strong{Data Export Rights}
 
-See https://your-server/redcap/api/help/?content=exp_users
+See https://your-server/redcap/api/help/?content=exp_users.
 \itemize{
 \item \code{data_export_rights_no_access}    : 0L
 \item \code{data_export_rights_deidentified} : 1L
@@ -38,7 +38,8 @@ See https://your-server/redcap/api/help/?content=exp_users
 
 \strong{Form Rights}
 
-See https://your-server/redcap/api/help/?content=exp_users
+See https://your-server/redcap/api/help/?content=exp_users.
+The order of these digits may be unexpected.
 \itemize{
 \item \code{form_rights_no_access}    : 0L
 \item \code{form_rights_readonly}     : 2L
@@ -47,13 +48,13 @@ See https://your-server/redcap/api/help/?content=exp_users
 
 \strong{Access Rights}
 
-See https://your-server/redcap/api/help/?content=exp_users
+See https://your-server/redcap/api/help/?content=exp_users.
 \itemize{
-\item \code{access_no}    = 0L
-\item \code{access_yes}   = 1L
+\item \code{access_no}    : 0L
+\item \code{access_yes}   : 1L
 }
 
-To add more, please for and edit the
+To add more, please for and edit
 \href{https://github.com/OuhscBbmc/REDCapR/blob/master/R/constant.R}{constant.R}
 on GitHub and submit a pull request.  For instructions, please see
 \href{https://help.github.com/articles/editing-files-in-another-user-s-repository/}{Editing files in another user's repository}

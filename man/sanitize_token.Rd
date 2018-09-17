@@ -17,7 +17,7 @@ Verifies the token is nonmissing and conforms to the legal pattern of a 32-chara
 Trailing line endings are removed.
 }
 \note{
-Contact your institution's REDCap administrator for more informationa about your project-specific token.
+Contact your institution's REDCap administrator for more information about your project-specific token.
 }
 \examples{
 secret_token_1 <- "12345678901234567890123456ABCDEF"

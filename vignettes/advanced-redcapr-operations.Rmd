@@ -60,7 +60,7 @@ token_longitudinal    <- "0434F0E9CF53ED0587847AB6E51DE762"
 ```
 
 ## Converting from tall/long to wide
-*Disclaimer*: Occasionally we're asked for a longitudinal dataset to be converted from a "long/tall format" (where  typically each row is one observation for a participant) to a "wide format" (where each row is on participant).  Usually we advise against it.  Besides all the database benefits of a long structure, a wide structure restricts your options with the stat routine.  No modern longitudinal analysis procedures (eg, growth curve models or multilevel/hierarchical models) accept wide.  You're pretty much stuck with repeated measures anova, which is very inflexible for real-world medical-ish analyses.  It requires a patient to have a measurement at every time point; otherwise the anova excludes the patient entirely.
+*Disclaimer*: Occasionally we're asked for a longitudinal dataset to be converted from a "long/tall format" (where  typically each row is one observation for a participant) to a "wide format" (where each row is on participant).  Usually we advise against it.  Besides all the database benefits of a long structure, a wide structure restricts your options with the stat routine.  No modern longitudinal analysis procedures (*e.g.*, growth curve models or multilevel/hierarchical models) accept wide.  You're pretty much stuck with repeated measures anova, which is very inflexible for real-world medical-ish analyses.  It requires a patient to have a measurement at every time point; otherwise the anova excludes the patient entirely.
 
 However we like going wide to produce visual tables for publications, and here's one way to do it in R. First retrieve the dataset from REDCap.
 ```{r retrieve-longitudinal, results='hold'}
@@ -74,7 +74,7 @@ ds_long %>%
   dplyr::select(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)
 ```
 
-When widening only one variable (eg, `pmq1`), the code's pretty simple:
+When widening only one variable (*e.g.*, `pmq1`), the code's pretty simple:
 ```{r widen-simple, results='hold'}
 ds_wide <- ds_long %>% 
   dplyr::select(study_id, redcap_event_name, pmq1) %>% 
@@ -83,7 +83,7 @@ ds_wide <- ds_long %>%
 ds_wide
 ```
 
-When widening more than one variable (eg, `pmq1` - `pmq4`), it's usually easiest to go even longer/taller (eg, `ds_eav`) before reversing direction and going wide:
+When widening more than one variable (*e.g.*, `pmq1` - `pmq4`), it's usually easiest to go even longer/taller (*e.g.*, `ds_eav`) before reversing direction and going wide:
 
 ```{r widen-typical}
 pattern <- "^(\\w+?)_arm_(\\d)$"

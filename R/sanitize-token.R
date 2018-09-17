@@ -10,7 +10,7 @@
 #'
 #' @return The token, without a terminal newline character.
 #'
-#' @note Contact your institution's REDCap administrator for more informationa about your project-specific token.
+#' @note Contact your institution's REDCap administrator for more information about your project-specific token.
 #'
 #' @author Hao Zhu, Benjamin Nutter, Will Beasley
 #'

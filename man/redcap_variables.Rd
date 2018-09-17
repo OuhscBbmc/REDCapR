@@ -19,7 +19,7 @@ redcap_variables(redcap_uri, token, verbose = TRUE,
 \value{
 Currently, a list is returned with the following elements,
 \itemize{
-\item \code{data}: An R \code{\link[base:data.frame]{base::data.frame()}} where each row represents one column in the readl dataset.
+\item \code{data}: An R \code{\link[base:data.frame]{base::data.frame()}} where each row represents one column in the REDCap dataset.
 \item \code{success}: A boolean value indicating if the operation was apparently successful.
 \item \code{status_code}: The \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code} of the operation.
 \item \code{outcome_message}: A human readable string indicating the operation's outcome.
@@ -47,7 +47,7 @@ ds_variable <- REDCapR::redcap_variables(redcap_uri=uri, token=token)$data
 }
 \references{
 The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and
+on the REDCap wiki (\emph{i.e.}, https://community.projectredcap.org/articles/456/api-documentation.html and
 https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
 for the wiki, please ask your campus REDCap administrator to send you the static material.
 }

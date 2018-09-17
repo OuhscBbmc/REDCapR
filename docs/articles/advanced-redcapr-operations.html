@@ -121,7 +121,7 @@
 <div id="converting-from-talllong-to-wide" class="section level2">
 <h2 class="hasAnchor">
 <a href="#converting-from-talllong-to-wide" class="anchor"></a>Converting from tall/long to wide</h2>
-<p><em>Disclaimer</em>: Occasionally we’re asked for a longitudinal dataset to be converted from a “long/tall format” (where typically each row is one observation for a participant) to a “wide format” (where each row is on participant). Usually we advise against it. Besides all the database benefits of a long structure, a wide structure restricts your options with the stat routine. No modern longitudinal analysis procedures (eg, growth curve models or multilevel/hierarchical models) accept wide. You’re pretty much stuck with repeated measures anova, which is very inflexible for real-world medical-ish analyses. It requires a patient to have a measurement at every time point; otherwise the anova excludes the patient entirely.</p>
+<p><em>Disclaimer</em>: Occasionally we’re asked for a longitudinal dataset to be converted from a “long/tall format” (where typically each row is one observation for a participant) to a “wide format” (where each row is on participant). Usually we advise against it. Besides all the database benefits of a long structure, a wide structure restricts your options with the stat routine. No modern longitudinal analysis procedures (<em>e.g.</em>, growth curve models or multilevel/hierarchical models) accept wide. You’re pretty much stuck with repeated measures anova, which is very inflexible for real-world medical-ish analyses. It requires a patient to have a measurement at every time point; otherwise the anova excludes the patient entirely.</p>
 <p>However we like going wide to produce visual tables for publications, and here’s one way to do it in R. First retrieve the dataset from REDCap.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(magrittr); </a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">requireNamespace</span>(<span class="st">"dplyr"</span>))</a>
@@ -129,7 +129,7 @@
 <a class="sourceLine" id="cb2-4" data-line-number="4">events_to_retain  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"dose_1_arm_1"</span>, <span class="st">"visit_1_arm_1"</span>, <span class="st">"dose_2_arm_1"</span>, <span class="st">"visit_2_arm_1"</span>)</a>
 <a class="sourceLine" id="cb2-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb2-6" data-line-number="6">ds_long &lt;-<span class="st"> </span>REDCapR<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/REDCapR/topics/redcap_read_oneshot">redcap_read_oneshot</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token_longitudinal)<span class="op">$</span>data</a></code></pre></div>
-<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">ds_long <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)</a></code></pre></div>
 <pre><code>#&gt;    study_id        redcap_event_name pmq1 pmq2 pmq3 pmq4
@@ -151,7 +151,7 @@
 #&gt; 16      304        first_visit_arm_2    2    0    0    0
 #&gt; 17      304        final_visit_arm_2   NA   NA   NA   NA
 #&gt; 18      304 deadline_to_return_arm_2   NA   NA   NA   NA</code></pre>
-<p>When widening only one variable (eg, <code>pmq1</code>), the code’s pretty simple:</p>
+<p>When widening only one variable (<em>e.g.</em>, <code>pmq1</code>), the code’s pretty simple:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">ds_wide &lt;-<span class="st"> </span>ds_long <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(study_id, redcap_event_name, pmq1) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(redcap_event_name <span class="op">%in%</span><span class="st"> </span>events_to_retain) <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -160,7 +160,7 @@
 <pre><code>#&gt;   study_id dose_1_arm_1 dose_2_arm_1 visit_1_arm_1 visit_2_arm_1
 #&gt; 1      100            2            3             1             0
 #&gt; 2      220            0            1             0             3</code></pre>
-<p>When widening more than one variable (eg, <code>pmq1</code> - <code>pmq4</code>), it’s usually easiest to go even longer/taller (eg, <code>ds_eav</code>) before reversing direction and going wide:</p>
+<p>When widening more than one variable (<em>e.g.</em>, <code>pmq1</code> - <code>pmq4</code>), it’s usually easiest to go even longer/taller (<em>e.g.</em>, <code>ds_eav</code>) before reversing direction and going wide:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">pattern &lt;-<span class="st"> "^(</span><span class="ch">\\</span><span class="st">w+?)_arm_(</span><span class="ch">\\</span><span class="st">d)$"</span></a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb8-3" data-line-number="3">ds_eav &lt;-<span class="st"> </span>ds_long <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -229,7 +229,7 @@
 <a class="sourceLine" id="cb12-7" data-line-number="7">    <span class="dt">config_options =</span> config_options</a>
 <a class="sourceLine" id="cb12-8" data-line-number="8">  )<span class="op">$</span>data</a>
 <a class="sourceLine" id="cb12-9" data-line-number="9">}</a></code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <p>Force the connection to use SSL=3 (which is not preferred, and possibly insecure).</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">config_options &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">sslversion=</span><span class="dv">3</span>)</a>
 <a class="sourceLine" id="cb14-2" data-line-number="2">ds_ssl_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(</a>
@@ -237,14 +237,14 @@
 <a class="sourceLine" id="cb14-4" data-line-number="4">  <span class="dt">token          =</span> token_simple,</a>
 <a class="sourceLine" id="cb14-5" data-line-number="5">  <span class="dt">config_options =</span> config_options</a>
 <a class="sourceLine" id="cb14-6" data-line-number="6">)<span class="op">$</span>data</a></code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">config_options &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb16-2" data-line-number="2">ds_no_ssl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(</a>
 <a class="sourceLine" id="cb16-3" data-line-number="3">   <span class="dt">redcap_uri     =</span> uri,</a>
 <a class="sourceLine" id="cb16-4" data-line-number="4">   <span class="dt">token          =</span> token_simple,</a>
 <a class="sourceLine" id="cb16-5" data-line-number="5">   <span class="dt">config_options =</span> config_options</a>
 <a class="sourceLine" id="cb16-6" data-line-number="6">)<span class="op">$</span>data</a></code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 1.6 seconds.  The http status code was 200.</code></pre>
 </div>
 <div id="session-information" class="section level2">
 <h2 class="hasAnchor">
@@ -304,7 +304,7 @@
 #&gt;  R6            2.2.2       2017-06-17 CRAN (R 3.5.1)                  
 #&gt;  Rcpp          0.12.18     2018-07-23 CRAN (R 3.5.1)                  
 #&gt;  readr         1.2.0       2018-09-16 Github (tidyverse/readr@a19ffac)
-#&gt;  REDCapR     * 0.9.10.9001 2018-09-16 local                           
+#&gt;  REDCapR     * 0.9.10.9001 2018-09-17 local                           
 #&gt;  rlang         0.2.2       2018-08-16 CRAN (R 3.5.1)                  
 #&gt;  rmarkdown     1.10        2018-06-11 CRAN (R 3.5.1)                  
 #&gt;  roxygen2      6.1.0       2018-07-27 CRAN (R 3.5.1)                  
@@ -324,7 +324,7 @@
 #&gt;  withr         2.1.2       2018-03-15 CRAN (R 3.5.1)                  
 #&gt;  xml2          1.2.0       2018-01-24 cran (@1.2.0)                   
 #&gt;  yaml          2.2.0       2018-07-25 CRAN (R 3.5.1)</code></pre>
-</details><p>Report rendered by wibeasley at 2018-09-16, 15:53 -0500 in 3 seconds.</p>
+</details><p>Report rendered by wibeasley at 2018-09-16, 22:55 -0500 in 4 seconds.</p>
 </div>
   </div>
 
