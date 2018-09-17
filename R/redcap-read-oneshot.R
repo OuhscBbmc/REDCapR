@@ -160,7 +160,9 @@ redcap_read_oneshot <- function(
     try (
       {
         # ds <- utils::read.csv(text=raw_text, stringsAsFactors=FALSE)
-        ds <- readr::read_csv(file=kernel$raw_text, col_types=col_types, guess_max=guess_max) %>%
+        ds <-
+          kernel$raw_text %>%
+          readr::read_csv(file=., col_types=col_types, guess_max=guess_max) %>%
           as.data.frame()
       }, #Convert the raw text to a dataset.
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.

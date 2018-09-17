@@ -170,7 +170,8 @@ redcap_read_oneshot_eav <- function(
       {
         ds_eav <- readr::read_csv(kernel$raw_text)
 
-        ds_metadata_expanded <- ds_metadata %>%
+        ds_metadata_expanded <-
+          ds_metadata %>%
           dplyr::select_("field_name", "select_choices_or_calculations", "field_type") %>%
           dplyr::mutate(
             is_checkbox   = (.data$field_type=="checkbox"),
@@ -186,7 +187,8 @@ redcap_read_oneshot_eav <- function(
           ) %>%
           tibble::as_tibble()
 
-        distinct_checkboxes <- ds_metadata_expanded %>%
+        distinct_checkboxes <-
+          ds_metadata_expanded %>%
           dplyr::filter_("is_checkbox") %>%
           dplyr::pull(.data$field_name)
 
@@ -198,7 +200,8 @@ redcap_read_oneshot_eav <- function(
             event_id   = dplyr::distinct(ds_eav, .data$event_id)
           )
 
-        variables_to_keep <- ds_metadata_expanded %>%
+        variables_to_keep <-
+          ds_metadata_expanded %>%
           dplyr::select(.data$field_name) %>%
           dplyr::union(
             ds_variable %>%
@@ -208,7 +211,8 @@ redcap_read_oneshot_eav <- function(
           dplyr::pull(.data$field_name) %>%
           rev()
 
-        ds_eav_2 <- ds_eav %>%
+        ds_eav_2 <-
+          ds_eav %>%
           dplyr::left_join(
             ds_metadata %>%
               dplyr::select_("field_name", "field_type"),
@@ -223,14 +227,16 @@ redcap_read_oneshot_eav <- function(
           )
 
         . <- NULL # For the sake of avoiding an R CMD check note.
-        ds <- ds_eav_2 %>%
+        ds <-
+          ds_eav_2 %>%
           dplyr::select_("-field_type") %>%
           # dplyr::select_("-redcap_repeat_instance") %>%           # TODO: need a good fix for repeats
           # tidyr::drop_na(event_id) %>%                            # TODO: need a good fix for repeats
           tidyr::spread_(key="field_name", value="value") %>%
           dplyr::select_(.data=., .dots=intersect(variables_to_keep, colnames(.)))
 
-        ds_2 <- ds %>%
+        ds_2 <-
+          ds %>%
           dplyr::mutate_if(is.character, type.convert) %>%
           dplyr::mutate_if(is.factor   , as.character)
       }, #Convert the raw text to a dataset.

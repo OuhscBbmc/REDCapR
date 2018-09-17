@@ -87,10 +87,12 @@ redcap_users_export <- function( redcap_uri, token, verbose=TRUE, config_options
         # Remove the readr's `spec` attribute about the column names & types.
         attr(ds_combined, "spec") <- NULL
 
-        ds_user <- ds_combined %>%
+        ds_user <-
+          ds_combined %>%
           dplyr::select_("-forms")
 
-        ds_user_form <- ds_combined %>%
+        ds_user_form <-
+          ds_combined %>%
           dplyr::select_("username", "forms") %>%
           tidyr::separate_rows(.data$forms, sep=",") %>%
           # tidyr::separate_(
