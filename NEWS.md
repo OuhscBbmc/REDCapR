@@ -100,14 +100,14 @@ Version 0.6 (Developed 2014-10-29 through 2014-11-03)
 ==========================================================
 
 ### New Features
-* The `config_options` in the `httr` package are exposed to the REDCapR user.  See issues #55 & #58; thanks to @rparrish and @nutterb for their contributions (https://github.com/OuhscBbmc/REDCapR/issues/55 & https://github.com/OuhscBbmc/REDCapR/issues/58).
+* The `config_options` in the httr package are exposed to the REDCapR user.  See issues #55 & #58; thanks to @rparrish and @nutterb for their contributions (https://github.com/OuhscBbmc/REDCapR/issues/55 & https://github.com/OuhscBbmc/REDCapR/issues/58).
 
 
 Version 0.5 (Developed 2014-09-20 through 2014-10-19)
 ==========================================================
 
 ### New Features
-* `redcap_metadata_read` are tested and public.
+* `redcap_metadata_read()` are tested and public.
 
 ### Minor Updates
 * Test suite now uses `testthat::skip_on_cran()` before any call involving OUHSC's REDCap server.
@@ -118,19 +118,19 @@ Version 0.4 (Developed 2014-09-01 through 2014-09-20)
 ==========================================================
 
 ### New Features
-* `redcap_write` and `redcap_write_oneshot` are now tested and public.
-* `redcap_write` and `redcap_write_oneshot` are now tested and public.
-* `redcap_download_file_oneshot` function contributed by John Aponte (@johnaponte; Pull request #35)
-* `redcap_upload_file_oneshot` function contributed by @johnaponte (Pull request #34)
+* `redcap_write()` and `redcap_write_oneshot()` are now tested and public.
+* `redcap_write()` and `redcap_write_oneshot()` are now tested and public.
+* `redcap_download_file_oneshot()` function contributed by John Aponte (@johnaponte; Pull request #35)
+* `redcap_upload_file_oneshot()` function contributed by @johnaponte (Pull request #34)
 * Users can specify if an operation should continue after an error occurs on a batch read or write.  Regardless of their choice, more debugging output is written to the console if `verbose==TRUE`.  Follows advice of @johnaponte, Benjamin Nutter (@nutterb), and Rollie Parrish (@rparrish). Closes #43.
 
 ### Breaking Changes
-* The `records_collapsed` default empty value is now an empty string (ie, "") instead of NULL.  This applies when `records_collapsed` is either a parameter, or a returned value.
+* The `records_collapsed` default empty value is now an empty string (*i.e.*, `""`) instead of `NULL`.  This applies when `records_collapsed` is either a parameter, or a returned value.
 
 ### Updates
-* By default, the SSL certs come from the `httr` package.  However, REDCapR will continue to maintain a copy in case httr's version on CRAN gets out of date.
+* By default, the SSL certs come from the httr package.  However, REDCapR will continue to maintain a copy in case httr's version on CRAN gets out of date.
 * The tests are split into two collections: one that's run by the CRAN checks, and the other run manually.  [Thanks, Gabor Csardi](http://stackoverflow.com/questions/25595487/testthat-pattern-for-long-running-tests).  Any test with a dependency outside the package code (especially the REDCap test projects) is run manually so changes to the test databases won't affect the success of building the previous version on CRAN.
-* Corrected typo in `redcap_download_file_oneshot()` documentation, but Andrew Peters (@ARPeters; Pull request #45).
+* Corrected typo in `redcap_download_file_oneshot()` documentation, thanks to Andrew Peters (@ARPeters #45).
 
 
 Version 0.3 (Developed 2014-07-03 through 2014-09-01)
@@ -152,14 +152,14 @@ Version 0.2 (Developed 2014-01-14 through 2014-07-02)
 
 ### New Features
 * Added `redcap_column_sanitize()` function to address non-ASCII characters
-* Added `redcap_write` (as an internal function).
-* The `redcap_project` object reduces repeatedly passing parameters like the server URL, the user token, and the SSL cert location.
+* Added `redcap_write()` (as an internal function).
+* The `redcap_project()` object reduces repeatedly passing parameters like the server URL, the user token, and the SSL cert location.
 
 ### Updates
 * New Mozilla SSL Certification Bundles released on cURL (released 2013-12-05; http://curl.haxx.se/ca/cacert.pem)
-* Renamed `redcap_read_batch`  to `redcap_read`. These changes reflect our suggestion that reads should typically be batched.
-* Renamed `redcap_read` to `redcap_read_oneshot`
-* Renamed `redcap_write` to `redcap_write_oneshot` (which is an internal function).
+* Renamed `redcap_read_batch()`  to `redcap_read()`. These changes reflect our suggestion that reads should typically be batched.
+* Renamed `redcap_read()` to `redcap_read_oneshot()`
+* Renamed `redcap_write()` to `redcap_write_oneshot()` (which is an internal function).
 * Small renames to parameters
 
 
@@ -167,13 +167,13 @@ Version 0.1 (Developed 2013-11-26 through 2014-01-14)
 ==========================================================
 
 ### New Features
-* Introduces redcap_read and redcap_read_batch with documentation
+* Introduces `redcap_read()` and `redcap_read_batch()` with documentation
 * SSL verify peer by default, using cert file included in package
 * Initial submission to GitHub
 
 ### Enhancements
-* redcap_read takes parameter for raw_or_label (Thanks Rollie Parrish #3)
-* redcap_read takes parameter for export_data_access_groups (Thanks Rollie Parrish #4)
+* `redcap_read()` takes parameter for `raw_or_label` (Thanks Rollie Parrish #3)
+* `redcap_read()` takes parameter for `export_data_access_groups` thanks to Rollie Parrish (@rparrish #4)
 
 GitHub Commits and Releases
 ==========================================================
