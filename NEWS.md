@@ -53,7 +53,7 @@ Version 0.9.8 (Released 2017-05-18)
 * Adapted to new 2.4 version of curl (see #154)
 
 
-Versions 0.9.4 through 0.9.6 (Developed 2015-08-26 through 2017-09-09)
+Versions 0.9.7 (Released 2017-09-09)
 ==========================================================
 
 ### New Features
@@ -68,14 +68,14 @@ Versions 0.9.4 through 0.9.6 (Developed 2015-08-26 through 2017-09-09)
 * A few more instances of validating input parameters to read functions. (Issue #8).
 
 
-Versions 0.9.3 (Developed 2015-08-25)
+Versions 0.9.3 (Released 2015-08-25)
 ==========================================================
 
 ### Minor Updates
 * The `retrieve-token()` tests now account for the (OS X) builds where the RODBC package isn't available.
 
 
-Versions 0.9 & 0.8 (Developed 2015-01-15 through 2015-08-14)
+Versions 0.9.0 (Released 2015-08-14)
 ==========================================================
 
 ### New Features
@@ -89,21 +89,21 @@ Versions 0.9 & 0.8 (Developed 2015-01-15 through 2015-08-14)
 * `retrieve_token_mssql()` uses regexes to validate parameters
 
 
-Version 0.7 (Developed 2014-12-17 through 2014-12-17)
+Version 0.7-1 (Released 2014-12-17)
 ==========================================================
 
 ### New Features
 * Updated for Version 6.0.x of REDCap (which introduced a lot of improvements to API behavior).
 
 
-Version 0.6 (Developed 2014-10-29 through 2014-11-03)
+Version 0.6 (Released 2014-11-03)
 ==========================================================
 
 ### New Features
 * The `config_options` in the httr package are exposed to the REDCapR user.  See issues #55 & #58; thanks to @rparrish and @nutterb for their contributions (https://github.com/OuhscBbmc/REDCapR/issues/55 & https://github.com/OuhscBbmc/REDCapR/issues/58).
 
 
-Version 0.5 (Developed 2014-09-20 through 2014-10-19)
+Version 0.5 (Released 2014-10-19)
 ==========================================================
 
 ### New Features
@@ -114,7 +114,7 @@ Version 0.5 (Developed 2014-09-20 through 2014-10-19)
 * Vignette example of subsetting, conditioned on a 2nd variable's value.
 
 
-Version 0.4 (Developed 2014-09-01 through 2014-09-20)
+Version 0.4-28 (Released 2014-09-20)
 ==========================================================
 
 ### New Features
@@ -133,7 +133,7 @@ Version 0.4 (Developed 2014-09-01 through 2014-09-20)
 * Corrected typo in `redcap_download_file_oneshot()` documentation, thanks to Andrew Peters (@ARPeters #45).
 
 
-Version 0.3 (Developed 2014-07-03 through 2014-09-01)
+Version 0.3 (Released 2014-09-01)
 ==========================================================
 
 ### New Features
@@ -147,7 +147,7 @@ Version 0.3 (Developed 2014-07-03 through 2014-09-01)
  * Correct batch reads with longitudinal schema #27
 
 
-Version 0.2 (Developed 2014-01-14 through 2014-07-02)
+Version 0.2 (Released 2014-07-02)
 ==========================================================
 
 ### New Features
@@ -163,7 +163,7 @@ Version 0.2 (Developed 2014-01-14 through 2014-07-02)
 * Small renames to parameters
 
 
-Version 0.1 (Developed 2013-11-26 through 2014-01-14)
+Version 0.1 (Released 2014-01-14)
 ==========================================================
 
 ### New Features
