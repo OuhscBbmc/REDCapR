@@ -50,7 +50,6 @@
 #' @author Will Beasley
 #'
 #' @examples
-#'
 #' REDCapR::constant("form_incomplete")  # Returns 0L
 #' REDCapR::constant("form_unverified")  # Returns 1L
 #' REDCapR::constant("form_complete"  )  # Returns 2L

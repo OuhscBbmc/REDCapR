@@ -26,8 +26,9 @@
 #'
 #' @details
 #' Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See [validate_for_write()] for a helper function that checks for some common important conflicts.
-#' @author Will Beasley
-#' @author John J. Aponte
+#'
+#' @author Will Beasley, John J. Aponte
+#'
 #' @references The official documentation can be found on the 'API Help Page' and 'API Examples' pages
 #' on the REDCap wiki (*i.e.*, https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account

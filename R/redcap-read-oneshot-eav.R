@@ -34,10 +34,6 @@
 #' * `elapsed_seconds`: The duration of the function.
 #' * `raw_text`: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
 #'
-#' @importFrom magrittr %>%
-#' @importFrom utils type.convert
-#' @importFrom rlang .data
-#'
 #' @details
 #' The full list of configuration options accepted by the `httr` package is viewable by executing [httr::httr_options()].  The `httr`
 #' package and documentation is available at https://cran.r-project.org/package=httr.
@@ -49,8 +45,8 @@
 #'
 #' As of REDCap 6.14.3, this field is not exported in the EAV API call.
 #'
-#'
 #' @author Will Beasley
+#'
 #' @references The official documentation can be found on the 'API Help Page' and 'API Examples' pages
 #' on the REDCap wiki (*i.e.*, https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
@@ -81,6 +77,9 @@
 #' )$data
 #'}
 
+#' @importFrom magrittr %>%
+#' @importFrom utils type.convert
+#' @importFrom rlang .data
 # @export  # Not currently exported.
 redcap_read_oneshot_eav <- function(
   redcap_uri,

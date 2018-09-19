@@ -7,6 +7,8 @@
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below.  Optional.
 #'
+#' @return a \code{\link[base:character]{base::character}} vector of either length 1 (if successful) or length 0 (if not successful).
+#'
 #' @details If the API call is unsuccessful, a value of `character(0)` will be returned (*i.e.*, an empty vector).
 #' This ensures that a the function will always return an object of class \code{\link[base:character]{base::character}}.
 #'
@@ -20,7 +22,6 @@
 #' >
 #' > Note: This method functions the same even for projects that do not have record auto-numbering enabled.
 #'
-#' @return a \code{\link[base:character]{base::character}} vector of either length 1 (if successful) or length 0 (if not successful).
 #' @examples
 #' uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token    <- "9A81268476645C4E5F03428B8AC3AA7B"

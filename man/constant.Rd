@@ -63,7 +63,6 @@ on GitHub and submit a pull request.  For instructions, please see
 in the GitHub documentation.
 }
 \examples{
-
 REDCapR::constant("form_incomplete")  # Returns 0L
 REDCapR::constant("form_unverified")  # Returns 1L
 REDCapR::constant("form_complete"  )  # Returns 2L

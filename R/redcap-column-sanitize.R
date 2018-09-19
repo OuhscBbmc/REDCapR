@@ -6,7 +6,9 @@
 #' @param column_names An array of `character` values indicating the names of the variables to sanitize.  Optional.
 #' @param encoding_initial An array of `character` values indicating the names of the variables to sanitize.  Optional.
 #' @param substitution_character The `character` value that replaces characters that were unable to be appropriately matched.
+#'
 #' @return A [base::data.frame()] with same columns, but whose character values have been sanitized.
+#'
 #' @details
 #' Letters like an accented 'A' are replaced with a plain 'A'.
 #'

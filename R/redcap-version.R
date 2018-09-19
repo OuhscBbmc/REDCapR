@@ -7,11 +7,12 @@
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below.  Optional.
 #'
+#' @return a \code{\link[utils:packageDescription]{utils::packageVersion}}.
+#'
 #' @details If the API call is unsuccessful, a value of `base::package_version("0.0.0")` will be returned.
 #' This ensures that a the function will always return an object of class \code{\link[base:numeric_version]{base::package_version}}.
 #' It guarantees the value can always be used in [utils::compareVersion()].
 #'
-#' @return a \code{\link[utils:packageDescription]{utils::packageVersion}}.
 #' @examples
 #' uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token    <- "9A81268476645C4E5F03428B8AC3AA7B"

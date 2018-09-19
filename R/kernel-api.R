@@ -6,11 +6,12 @@
 #' @param post_body List of contents expected by the REDCap API.  Required.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below.  Optional.
 #'
+#' @return A [utils::packageVersion].
+#'
 #' @details If the API call is unsuccessful, a value of `base::package_version("0.0.0")` will be returned.
 #' This ensures that a the function will always return an object of class [base::package_version].
 #' It guarantees the value can always be used in [utils::compareVersion()].
 #'
-#' @return A [utils::packageVersion].
 #' @examples
 #' config_options <- NULL
 #' uri            <- "https://bbmc.ouhsc.edu/redcap/api/"

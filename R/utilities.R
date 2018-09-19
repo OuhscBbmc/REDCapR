@@ -1,7 +1,8 @@
 #' @name replace_nas_with_explicit
 #' @title Create explicit factor level for missing values
 #'
-#' @description Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertently ignored.
+#' @description Missing values are converted to a factor level.
+#' This explicit assignment can reduce the chances that missing values are inadvertently ignored.
 #' It also allows the presence of a missing to become a predictor in models.
 #'
 #' @param scores An array of values, ideally either factor or character. Required

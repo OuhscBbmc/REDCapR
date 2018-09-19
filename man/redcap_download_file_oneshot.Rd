@@ -93,7 +93,5 @@ https://community.projectredcap.org/articles/462/api-examples.html). If you do n
 for the wiki, please ask your campus REDCap administrator to send you the static material.
 }
 \author{
-Will Beasley
-
-John J. Aponte
+Will Beasley, John J. Aponte
 }

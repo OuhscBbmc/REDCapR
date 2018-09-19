@@ -7,6 +7,8 @@
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below.  Optional.
 #'
+#' @return a \code{\link[utils:packageDescription]{utils::packageVersion}}.
+#'
 #' @note
 #' **Documentation in REDCap 8.4.0**
 #'
@@ -16,7 +18,6 @@
 #' > Note: If the user has been assigned to a user role, it will return the user with
 #' >the role's defined privileges.
 #'
-#' @return a \code{\link[utils:packageDescription]{utils::packageVersion}}.
 #' @examples
 #' uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token    <- "06DEFB601F9B46847DAA9DF0CFA951B4"

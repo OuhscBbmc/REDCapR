@@ -42,6 +42,7 @@
 #'
 #' If you do not pass in this export_data_access_groups value, it will default to `FALSE`. The following is from the API help page for version 5.2.3: This flag is only viable if the user whose token is being used to make the API request is *not* in a data access group. If the user is in a group, then this flag will revert to its default value.
 #' @author Will Beasley
+#'
 #' @references The official documentation can be found on the 'API Help Page' and 'API Examples' pages
 #' on the REDCap wiki (*i.e.*, https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
@@ -72,6 +73,7 @@
 #' )$data
 #' }
 
+#' @importFrom magrittr %>%
 #' @export
 redcap_read_oneshot <- function(
   redcap_uri,
@@ -159,10 +161,9 @@ redcap_read_oneshot <- function(
     col_types <- if( guess_type ) NULL else readr::cols(.default=readr::col_character())
     try (
       {
-        # ds <- utils::read.csv(text=raw_text, stringsAsFactors=FALSE)
         ds <-
           kernel$raw_text %>%
-          readr::read_csv(file=., col_types=col_types, guess_max=guess_max) %>%
+          readr::read_csv(col_types=col_types, guess_max=guess_max) %>%
           as.data.frame()
       }, #Convert the raw text to a dataset.
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.

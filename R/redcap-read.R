@@ -40,6 +40,7 @@
 #' * `fields_collapsed`: The desired field names, collapsed into a single string, separated by commas.
 #' * `filter_logic`: The filter statement passed as an argument.
 #' * `elapsed_seconds`: The duration of the function.
+#'
 #' @details
 #' Specifically, it internally uses multiple calls to [redcap_read_oneshot()] to select and return data.
 #' Initially, only primary key is queried through the REDCap API.  The long list is then subsetted into partitions,
