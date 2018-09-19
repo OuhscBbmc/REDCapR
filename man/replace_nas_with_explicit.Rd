@@ -2,7 +2,7 @@
 % Please edit documentation in R/utilities.R
 \name{replace_nas_with_explicit}
 \alias{replace_nas_with_explicit}
-\title{Create explicit factor level for missing values.}
+\title{Create explicit factor level for missing values}
 \usage{
 replace_nas_with_explicit(scores, new_na_label = "Unknown",
   create_factor = FALSE, add_unknown_level = FALSE)
@@ -17,14 +17,17 @@ replace_nas_with_explicit(scores, new_na_label = "Unknown",
 \item{add_unknown_level}{Should a new factor level be created?  (Specify \code{TRUE} if it already exists.)   Defaults to \code{FALSE}.}
 }
 \value{
-An array of values, where the \code{NA} values are now a factor level, with the label specified by the \code{new_na_label} value.
+An array of values, where the \code{NA} values are now a factor level,
+with the label specified by the \code{new_na_label} value.
 }
 \description{
-Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertently ignored.
+Missing values are converted to a factor level.
+This explicit assignment can reduce the chances that missing values are inadvertently ignored.
 It also allows the presence of a missing to become a predictor in models.
 }
 \note{
-The \code{create_factor} parameter is respected only if \code{scores} isn't already a factor.  Otherwise, levels without any values would be lost.
+The \code{create_factor} parameter is respected only if \code{scores} isn't already a factor.
+Otherwise, levels without any values would be lost.
 
 A \code{stop} error will be thrown if the operation fails to convert all the \code{NA} values.
 }

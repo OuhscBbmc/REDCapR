@@ -9,15 +9,19 @@ constant(name, simplify = TRUE)
 \arguments{
 \item{name}{Name of constant.  Required character.}
 
-\item{simplify}{Simplifies the vector of values to a common data-type, if possible.  Passed to the \code{simplify} parameter of \code{\link[base:sapply]{base::sapply()}}.}
+\item{simplify}{Simplifies the vector of values to a common data-type, if possible.
+Passed to the \code{simplify} parameter of \code{\link[base:sapply]{base::sapply()}}.}
 }
 \value{
-The constant's value.  Currently all are single integers, but that could be expanded in the future.
+The constant's value.  Currently all are single integers,
+but that could be expanded in the future.
 }
 \description{
 Collection of constants defined by the REDCap developers.
 }
 \details{
+\strong{Form Completeness}
+
 The current constants relate to the 'complete' variable at the end of each form.
 \itemize{
 \item \code{form_incomplete}: 0L (\emph{i.e.}, an integer)
@@ -25,19 +29,61 @@ The current constants relate to the 'complete' variable at the end of each form.
 \item \code{form_complete}: 2L
 }
 
-To add more, please for and edit the
+\strong{Data Export Rights}
+
+See https://your-server/redcap/api/help/?content=exp_users.
+\itemize{
+\item \code{data_export_rights_no_access}    : 0L
+\item \code{data_export_rights_deidentified} : 1L
+\item \code{data_export_rights_full}         : 2L
+}
+
+\strong{Form Rights}
+
+See https://your-server/redcap/api/help/?content=exp_users.
+The order of these digits may be unexpected.
+\itemize{
+\item \code{form_rights_no_access}    : 0L
+\item \code{form_rights_readonly}     : 2L
+\item \code{form_rights_readwrite}    : 1L
+}
+
+\strong{Access Rights}
+
+See https://your-server/redcap/api/help/?content=exp_users.
+\itemize{
+\item \code{access_no}    : 0L
+\item \code{access_yes}   : 1L
+}
+
+To add more, please for and edit
 \href{https://github.com/OuhscBbmc/REDCapR/blob/master/R/constant.R}{constant.R}
 on GitHub and submit a pull request.  For instructions, please see
 \href{https://help.github.com/articles/editing-files-in-another-user-s-repository/}{Editing files in another user's repository}
 in the GitHub documentation.
 }
 \examples{
-
 REDCapR::constant("form_incomplete")  # Returns 0L
 REDCapR::constant("form_unverified")  # Returns 1L
-REDCapR::constant("form_complete")    # Returns 2L
+REDCapR::constant("form_complete"  )  # Returns 2L
+
+REDCapR::constant("data_export_rights_no_access"   )  # Returns 0L
+REDCapR::constant("data_export_rights_deidentified")  # Returns 1L
+REDCapR::constant("data_export_rights_full"        )  # Returns 2L
+
+REDCapR::constant("form_rights_no_access")  # Returns 0L
+REDCapR::constant("form_rights_readonly" )  # Returns 1L
+REDCapR::constant("form_rights_readwrite")  # Returns 2L
+
+REDCapR::constant("access_no" )  # Returns 0L
+REDCapR::constant("access_yes")  # Returns 1L
 
 REDCapR::constant(c("form_complete", "form_complete", "form_incomplete")) # Returns c(2L, 2L, 0L)
+REDCapR::constant(c(
+  "form_rights_no_access",
+  "form_rights_readonly",
+  "form_rights_readwrite"
+)) # Returns c(0L, 1L, 2L)
 
 \dontrun{
 # The following line returns an error:

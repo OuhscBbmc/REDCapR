@@ -1,6 +1,4 @@
-#' @name redcap_write_oneshot
-#' @export redcap_write_oneshot
-#' @title Write/Import records to a REDCap project.
+#' @title Write/Import records to a REDCap project
 #'
 #' @description This function uses REDCap's API to select and return data.
 #'
@@ -10,7 +8,7 @@
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to [httr::POST()] method in the 'httr' package.  See the details in [redcap_read_oneshot()] Optional.
 #'
-#' @return Currently, a list is returned with the following elements,
+#' @return Currently, a list is returned with the following elements:
 #' * `success`: A boolean value indicating if the operation was apparently successful.
 #' * `status_code`: The [http status code](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes) of the operation.
 #' * `outcome_message`: A human readable string indicating the operation's outcome.
@@ -21,9 +19,11 @@
 #'
 #' @details
 #' Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See [validate_for_write()] for a helper function that checks for some common important conflicts.
+#'
 #' @author Will Beasley
+#'
 #' @references The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-#' on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and
+#' on the REDCap wiki (*i.e.*, https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
 #' for the wiki, please ask your campus REDCap administrator to send you the static material.
 #'
@@ -61,8 +61,8 @@
 #' result_write   <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=token)
 #' result_write$raw_text
 #' }
-#'
 
+#' @export
 redcap_write_oneshot <- function(
   ds,
   redcap_uri,

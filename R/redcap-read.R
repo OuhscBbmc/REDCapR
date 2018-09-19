@@ -1,6 +1,4 @@
-#' @name redcap_read
-#' @export redcap_read
-#' @title Read records from a REDCap project in subsets, and stacks them together before returning a [base::data.frame()].
+#' @title Read records from a REDCap project in subsets, and stacks them together before returning a [base::data.frame()]
 #'
 #' @description From an external perspective, this function is similar to [redcap_read_oneshot()].  The internals
 #' differ in that `redcap_read` retrieves subsets of the data, and then combines them before returning
@@ -33,7 +31,7 @@
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details in `redcap_read_oneshot()` Optional.
 #' @param id_position  The column position of the variable that unique identifies the subject.  This defaults to the first variable in the dataset.
 #'
-#' @return Currently, a list is returned with the following elements,
+#' @return Currently, a list is returned with the following elements:
 #' * `data`: An R [base::data.frame()] of the desired records and columns.
 #' * `success`: A boolean value indicating if the operation was apparently successful.
 #' * `status_codes`: A collection of [http status codes](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes), separated by semicolons.  There is one code for each batch attempted.
@@ -42,6 +40,7 @@
 #' * `fields_collapsed`: The desired field names, collapsed into a single string, separated by commas.
 #' * `filter_logic`: The filter statement passed as an argument.
 #' * `elapsed_seconds`: The duration of the function.
+#'
 #' @details
 #' Specifically, it internally uses multiple calls to [redcap_read_oneshot()] to select and return data.
 #' Initially, only primary key is queried through the REDCap API.  The long list is then subsetted into partitions,
@@ -59,7 +58,7 @@
 #'
 #' @author Will Beasley
 #' @references The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-#' on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and
+#' on the REDCap wiki (*i.e.*, https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
 #' for the wiki, please ask your campus REDCap administrator to send you the static material.
 #'
@@ -70,6 +69,7 @@
 #' REDCapR::redcap_read(batch_size=2, redcap_uri=uri, token=token)
 #' }
 
+#' @export
 redcap_read <- function(
   batch_size                    = 100L,
   interbatch_delay              = 0.5,

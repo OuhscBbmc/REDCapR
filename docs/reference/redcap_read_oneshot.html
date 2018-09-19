@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read/Export records from a REDCap project. — redcap_read_oneshot • REDCapR</title>
+<title>Read/Export records from a REDCap project — redcap_read_oneshot • REDCapR</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -36,11 +36,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="Read/Export records from a REDCap project. — redcap_read_oneshot" />
+<meta property="og:title" content="Read/Export records from a REDCap project — redcap_read_oneshot" />
 
 <meta property="og:description" content="This function uses REDCap's API to select and return data." />
-
-<meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -92,9 +90,6 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
-    </li>
-    <li>
       <a href="../articles/BasicREDCapROperations.html">Basic REDCapR Operations</a>
     </li>
     <li>
@@ -103,7 +98,13 @@
     <li>
       <a href="../articles/TroubleshootingApiCalls.html">Troubleshooting REDCap API Calls</a>
     </li>
+    <li>
+      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
+    </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -132,7 +133,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read/Export records from a REDCap project.</h1>
+    <h1>Read/Export records from a REDCap project</h1>
     <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-read-oneshot.R'><code>R/redcap-read-oneshot.R</code></a></small>
     <div class="hidden name"><code>redcap_read_oneshot.Rd</code></div>
     </div>
@@ -239,7 +240,7 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Currently, a list is returned with the following elements,</p><ul>
+    <p>Currently, a list is returned with the following elements:</p><ul>
 <li><p><code>data</code>: An R <code><a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>base::data.frame()</a></code> of the desired records and columns.</p></li>
 <li><p><code>success</code>: A boolean value indicating if the operation was apparently successful.</p></li>
 <li><p><code>status_code</code>: The <a href='http://en.wikipedia.org/wiki/List_of_HTTP_status_codes'>http status code</a> of the operation.</p></li>
@@ -261,7 +262,7 @@ package and documentation is available at https://cran.r-project.org/package=htt
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and
+on the REDCap wiki (<em>i.e.</em>, https://community.projectredcap.org/articles/456/api-documentation.html and
 https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
 for the wiki, please ask your campus REDCap administrator to send you the static material.</p>
     

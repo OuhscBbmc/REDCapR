@@ -1,8 +1,6 @@
-#' @name redcap_download_file_oneshot
-#' @export redcap_download_file_oneshot
-#' @title Download a file from a REDCap project record.
+#' @title Download a file from a REDCap project record
 #'
-#' @description This function uses REDCap's API to download a file
+#' @description This function uses REDCap's API to download a file.
 #'
 #' @param file_name The name of the file where the downloaded file is saved.
 #'   If empty the original name of the file will be used and saved in the default directory.  Optional.
@@ -28,10 +26,11 @@
 #'
 #' @details
 #' Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See [validate_for_write()] for a helper function that checks for some common important conflicts.
-#' @author Will Beasley
-#' @author John J. Aponte
+#'
+#' @author Will Beasley, John J. Aponte
+#'
 #' @references The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-#' on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and
+#' on the REDCap wiki (*i.e.*, https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
 #' for the wiki, please ask your campus REDCap administrator to send you the static material.
 #'
@@ -72,6 +71,7 @@
 #' base::unlink(relative_name)
 #' }
 
+#' @export
 redcap_download_file_oneshot <- function(
   file_name       = NULL,
   directory       = NULL,

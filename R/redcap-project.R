@@ -2,7 +2,7 @@
 #' @export redcap_project
 #' @importFrom methods new
 #'
-#' @title A `Reference Class` to make later calls to REDCap more convenient.
+#' @title A `Reference Class` to make later calls to REDCap more convenient
 #'
 #' @description This `Reference Class` represents a REDCap project.
 #' Once some values are set that are specific to a REDCap project (such as the URI and token),

@@ -1,6 +1,4 @@
-#' @name redcap_read_oneshot_eav
-# @export redcap_read_oneshot_eav
-#' @title Read/Export records from a REDCap project --still in development.
+#' @title Read/Export records from a REDCap project --still in development
 #'
 #' @description This function uses REDCap's API to select and return data.  This function is still in development.
 #'
@@ -25,7 +23,7 @@
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below. Optional.
 #'
-#' @return Currently, a list is returned with the following elements,
+#' @return Currently, a list is returned with the following elements:
 #' * `data`: An R [base::data.frame()] of the desired records and columns.
 #' * `success`: A boolean value indicating if the operation was apparently successful.
 #' * `status_code`: The [http status code](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes) of the operation.
@@ -35,10 +33,6 @@
 #' * `filter_logic`: The filter statement passed as an argument.
 #' * `elapsed_seconds`: The duration of the function.
 #' * `raw_text`: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
-#'
-#' @importFrom magrittr %>%
-#' @importFrom utils type.convert
-#' @importFrom rlang .data
 #'
 #' @details
 #' The full list of configuration options accepted by the `httr` package is viewable by executing [httr::httr_options()].  The `httr`
@@ -51,10 +45,10 @@
 #'
 #' As of REDCap 6.14.3, this field is not exported in the EAV API call.
 #'
-#'
 #' @author Will Beasley
+#'
 #' @references The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-#' on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and
+#' on the REDCap wiki (*i.e.*, https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
 #' for the wiki, please ask your campus REDCap administrator to send you the static material.
 #'
@@ -83,6 +77,10 @@
 #' )$data
 #'}
 
+#' @importFrom magrittr %>%
+#' @importFrom utils type.convert
+#' @importFrom rlang .data
+# @export  # Not currently exported.
 redcap_read_oneshot_eav <- function(
   redcap_uri,
   token,
@@ -171,7 +169,8 @@ redcap_read_oneshot_eav <- function(
       {
         ds_eav <- readr::read_csv(kernel$raw_text)
 
-        ds_metadata_expanded <- ds_metadata %>%
+        ds_metadata_expanded <-
+          ds_metadata %>%
           dplyr::select_("field_name", "select_choices_or_calculations", "field_type") %>%
           dplyr::mutate(
             is_checkbox   = (.data$field_type=="checkbox"),
@@ -187,7 +186,8 @@ redcap_read_oneshot_eav <- function(
           ) %>%
           tibble::as_tibble()
 
-        distinct_checkboxes <- ds_metadata_expanded %>%
+        distinct_checkboxes <-
+          ds_metadata_expanded %>%
           dplyr::filter_("is_checkbox") %>%
           dplyr::pull(.data$field_name)
 
@@ -199,7 +199,8 @@ redcap_read_oneshot_eav <- function(
             event_id   = dplyr::distinct(ds_eav, .data$event_id)
           )
 
-        variables_to_keep <- ds_metadata_expanded %>%
+        variables_to_keep <-
+          ds_metadata_expanded %>%
           dplyr::select(.data$field_name) %>%
           dplyr::union(
             ds_variable %>%
@@ -209,7 +210,8 @@ redcap_read_oneshot_eav <- function(
           dplyr::pull(.data$field_name) %>%
           rev()
 
-        ds_eav_2 <- ds_eav %>%
+        ds_eav_2 <-
+          ds_eav %>%
           dplyr::left_join(
             ds_metadata %>%
               dplyr::select_("field_name", "field_type"),
@@ -224,14 +226,16 @@ redcap_read_oneshot_eav <- function(
           )
 
         . <- NULL # For the sake of avoiding an R CMD check note.
-        ds <- ds_eav_2 %>%
+        ds <-
+          ds_eav_2 %>%
           dplyr::select_("-field_type") %>%
           # dplyr::select_("-redcap_repeat_instance") %>%           # TODO: need a good fix for repeats
           # tidyr::drop_na(event_id) %>%                            # TODO: need a good fix for repeats
           tidyr::spread_(key="field_name", value="value") %>%
           dplyr::select_(.data=., .dots=intersect(variables_to_keep, colnames(.)))
 
-        ds_2 <- ds %>%
+        ds_2 <-
+          ds %>%
           dplyr::mutate_if(is.character, type.convert) %>%
           dplyr::mutate_if(is.factor   , as.character)
       }, #Convert the raw text to a dataset.

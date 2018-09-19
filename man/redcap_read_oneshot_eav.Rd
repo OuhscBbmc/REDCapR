@@ -2,7 +2,7 @@
 % Please edit documentation in R/redcap-read-oneshot-eav.R
 \name{redcap_read_oneshot_eav}
 \alias{redcap_read_oneshot_eav}
-\title{Read/Export records from a REDCap project --still in development.}
+\title{Read/Export records from a REDCap project --still in development}
 \usage{
 redcap_read_oneshot_eav(redcap_uri, token, records = NULL,
   records_collapsed = "", fields = NULL, fields_collapsed = "",
@@ -45,7 +45,7 @@ redcap_read_oneshot_eav(redcap_uri, token, records = NULL,
 \item{config_options}{A list of options to pass to \code{POST} method in the \code{httr} package.  See the details below. Optional.}
 }
 \value{
-Currently, a list is returned with the following elements,
+Currently, a list is returned with the following elements:
 \itemize{
 \item \code{data}: An R \code{\link[base:data.frame]{base::data.frame()}} of the desired records and columns.
 \item \code{success}: A boolean value indicating if the operation was apparently successful.
@@ -99,7 +99,7 @@ ds_some_fields_v1 <- redcap_read_oneshot_eav(
 }
 \references{
 The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and
+on the REDCap wiki (\emph{i.e.}, https://community.projectredcap.org/articles/456/api-documentation.html and
 https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
 for the wiki, please ask your campus REDCap administrator to send you the static material.
 }

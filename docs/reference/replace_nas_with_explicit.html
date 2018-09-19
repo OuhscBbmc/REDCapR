@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create explicit factor level for missing values. — replace_nas_with_explicit • REDCapR</title>
+<title>Create explicit factor level for missing values — replace_nas_with_explicit • REDCapR</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -36,12 +36,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="Create explicit factor level for missing values. — replace_nas_with_explicit" />
+<meta property="og:title" content="Create explicit factor level for missing values — replace_nas_with_explicit" />
 
-<meta property="og:description" content="Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertently ignored.
+<meta property="og:description" content="Missing values are converted to a factor level.
+This explicit assignment can reduce the chances that missing values are inadvertently ignored.
 It also allows the presence of a missing to become a predictor in models." />
-
-<meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -93,9 +92,6 @@ It also allows the presence of a missing to become a predictor in models." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
-    </li>
-    <li>
       <a href="../articles/BasicREDCapROperations.html">Basic REDCapR Operations</a>
     </li>
     <li>
@@ -104,7 +100,13 @@ It also allows the presence of a missing to become a predictor in models." />
     <li>
       <a href="../articles/TroubleshootingApiCalls.html">Troubleshooting REDCap API Calls</a>
     </li>
+    <li>
+      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
+    </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -133,14 +135,15 @@ It also allows the presence of a missing to become a predictor in models." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create explicit factor level for missing values.</h1>
+    <h1>Create explicit factor level for missing values</h1>
     <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/R/utilities.R'><code>R/utilities.R</code></a></small>
     <div class="hidden name"><code>replace_nas_with_explicit.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertently ignored.
+    <p>Missing values are converted to a factor level.
+This explicit assignment can reduce the chances that missing values are inadvertently ignored.
 It also allows the presence of a missing to become a predictor in models.</p>
     
     </div>
@@ -171,11 +174,13 @@ It also allows the presence of a missing to become a predictor in models.</p>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An array of values, where the <code>NA</code> values are now a factor level, with the label specified by the <code>new_na_label</code> value.</p>
+    <p>An array of values, where the <code>NA</code> values are now a factor level,
+with the label specified by the <code>new_na_label</code> value.</p>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>The <code>create_factor</code> parameter is respected only if <code>scores</code> isn't already a factor.  Otherwise, levels without any values would be lost.</p>
+    <p>The <code>create_factor</code> parameter is respected only if <code>scores</code> isn't already a factor.
+Otherwise, levels without any values would be lost.</p>
 <p>A <code>stop</code> error will be thrown if the operation fails to convert all the <code>NA</code> values.</p>
     
 

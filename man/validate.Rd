@@ -5,7 +5,7 @@
 \alias{validate_no_logical}
 \alias{validate_for_write}
 \alias{validate_field_names}
-\title{Inspect a \code{\link[base:data.frame]{base::data.frame()}} to anticipate problems before writing to a REDCap project.}
+\title{Inspect a \code{\link[base:data.frame]{base::data.frame()}} to anticipate problems before writing to a REDCap project}
 \usage{
 validate_for_write( d )
 
@@ -35,7 +35,8 @@ A \code{\link[tibble:tibble]{tibble::tibble()}}, where each potential violation 
 This set of functions inspect a \code{\link[base:data.frame]{base::data.frame()}} to anticipate problems before writing with REDCap's API.
 }
 \details{
-All functions listed in the Usage section above inspect a specific aspect of the dataset.  The \code{\link[=validate_for_write]{validate_for_write()}} function executes all
+All functions listed in the Usage section above inspect a specific aspect of the dataset.
+The \code{\link[=validate_for_write]{validate_for_write()}} function executes all
 these individual validation checks.  It allows the client to check everything with one call.
 }
 \examples{
@@ -48,7 +49,7 @@ REDCapR::validate_for_write(d = d)
 }
 \references{
 The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and
+on the REDCap wiki (\emph{i.e.}, https://community.projectredcap.org/articles/456/api-documentation.html and
 https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
 for the wiki, please ask your campus REDCap administrator to send you the static material.
 }

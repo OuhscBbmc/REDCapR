@@ -2,7 +2,7 @@
 % Please edit documentation in R/create-batch-glossary.R
 \name{create_batch_glossary}
 \alias{create_batch_glossary}
-\title{Creates a \code{\link[base:data.frame]{base::data.frame()}} that help batching long-running read and writes.}
+\title{Creates a \code{\link[base:data.frame]{base::data.frame()}} that help batching long-running read and writes}
 \usage{
 create_batch_glossary(row_count, batch_size)
 }

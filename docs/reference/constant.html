@@ -39,8 +39,6 @@
 <meta property="og:title" content="Collection of REDCap-specific constants — constant" />
 
 <meta property="og:description" content="Collection of constants defined by the REDCap developers." />
-
-<meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -92,9 +90,6 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
-    </li>
-    <li>
       <a href="../articles/BasicREDCapROperations.html">Basic REDCapR Operations</a>
     </li>
     <li>
@@ -103,7 +98,13 @@
     <li>
       <a href="../articles/TroubleshootingApiCalls.html">Troubleshooting REDCap API Calls</a>
     </li>
+    <li>
+      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
+    </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -154,22 +155,43 @@
     </tr>
     <tr>
       <th>simplify</th>
-      <td><p>Simplifies the vector of values to a common data-type, if possible.  Passed to the <code>simplify</code> parameter of <code><a href='http://www.rdocumentation.org/packages/base/topics/lapply'>base::sapply()</a></code>.</p></td>
+      <td><p>Simplifies the vector of values to a common data-type, if possible.
+Passed to the <code>simplify</code> parameter of <code><a href='http://www.rdocumentation.org/packages/base/topics/lapply'>base::sapply()</a></code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The constant's value.  Currently all are single integers, but that could be expanded in the future.</p>
+    <p>The constant's value.  Currently all are single integers,
+but that could be expanded in the future.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The current constants relate to the 'complete' variable at the end of each form.</p><ul>
+    <p><strong>Form Completeness</strong></p>
+<p>The current constants relate to the 'complete' variable at the end of each form.</p><ul>
 <li><p><code>form_incomplete</code>: 0L (<em>i.e.</em>, an integer)</p></li>
 <li><p><code>form_unverified</code>: 1L</p></li>
 <li><p><code>form_complete</code>: 2L</p></li>
 </ul>
-    <p>To add more, please for and edit the
+    <p><strong>Data Export Rights</strong></p>
+<p>See https://your-server/redcap/api/help/?content=exp_users.</p><ul>
+<li><p><code>data_export_rights_no_access</code>    : 0L</p></li>
+<li><p><code>data_export_rights_deidentified</code> : 1L</p></li>
+<li><p><code>data_export_rights_full</code>         : 2L</p></li>
+</ul>
+    <p><strong>Form Rights</strong></p>
+<p>See https://your-server/redcap/api/help/?content=exp_users.
+The order of these digits may be unexpected.</p><ul>
+<li><p><code>form_rights_no_access</code>    : 0L</p></li>
+<li><p><code>form_rights_readonly</code>     : 2L</p></li>
+<li><p><code>form_rights_readwrite</code>    : 1L</p></li>
+</ul>
+    <p><strong>Access Rights</strong></p>
+<p>See https://your-server/redcap/api/help/?content=exp_users.</p><ul>
+<li><p><code>access_no</code>    : 0L</p></li>
+<li><p><code>access_yes</code>   : 1L</p></li>
+</ul>
+    <p>To add more, please for and edit
 <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/R/constant.R'>constant.R</a>
 on GitHub and submit a pull request.  For instructions, please see
 <a href='https://help.github.com/articles/editing-files-in-another-user-s-repository/'>Editing files in another user's repository</a>
@@ -177,9 +199,15 @@ in the GitHub documentation.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='st'>"form_incomplete"</span>)  <span class='co'># Returns 0L</span></div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='st'>"form_unverified"</span>)  <span class='co'># Returns 1L</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='st'>"form_complete"</span>)    <span class='co'># Returns 2L</span></div><div class='output co'>#&gt; [1] 2</div><div class='input'>
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='fu'>c</span>(<span class='st'>"form_complete"</span>, <span class='st'>"form_complete"</span>, <span class='st'>"form_incomplete"</span>)) <span class='co'># Returns c(2L, 2L, 0L)</span></div><div class='output co'>#&gt; [1] 2 2 0</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='st'>"form_incomplete"</span>)  <span class='co'># Returns 0L</span></div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='st'>"form_unverified"</span>)  <span class='co'># Returns 1L</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='st'>"form_complete"</span>  )  <span class='co'># Returns 2L</span></div><div class='output co'>#&gt; [1] 2</div><div class='input'>
+<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='st'>"data_export_rights_no_access"</span>   )  <span class='co'># Returns 0L</span></div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='st'>"data_export_rights_deidentified"</span>)  <span class='co'># Returns 1L</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='st'>"data_export_rights_full"</span>        )  <span class='co'># Returns 2L</span></div><div class='output co'>#&gt; [1] 2</div><div class='input'>
+<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='st'>"form_rights_no_access"</span>)  <span class='co'># Returns 0L</span></div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='st'>"form_rights_readonly"</span> )  <span class='co'># Returns 1L</span></div><div class='output co'>#&gt; [1] 2</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='st'>"form_rights_readwrite"</span>)  <span class='co'># Returns 2L</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'>
+<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='st'>"access_no"</span> )  <span class='co'># Returns 0L</span></div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='st'>"access_yes"</span>)  <span class='co'># Returns 1L</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'>
+<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='fu'>c</span>(<span class='st'>"form_complete"</span>, <span class='st'>"form_complete"</span>, <span class='st'>"form_incomplete"</span>)) <span class='co'># Returns c(2L, 2L, 0L)</span></div><div class='output co'>#&gt; [1] 2 2 0</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/constant'>constant</a></span>(<span class='fu'>c</span>(
+  <span class='st'>"form_rights_no_access"</span>,
+  <span class='st'>"form_rights_readonly"</span>,
+  <span class='st'>"form_rights_readwrite"</span>
+)) <span class='co'># Returns c(0L, 1L, 2L)</span></div><div class='output co'>#&gt; [1] 0 2 1</div><div class='input'>
 </div><span class='co'># NOT RUN {</span>
 <span class='co'># The following line returns an error:</span>
 <span class='co'>#     Assertion on 'name' failed: Must be a subset of</span>

@@ -13,7 +13,6 @@
 <link href="../docsearch.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Troubleshooting REDCap API Calls">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -55,9 +54,6 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
-    </li>
-    <li>
       <a href="../articles/BasicREDCapROperations.html">Basic REDCapR Operations</a>
     </li>
     <li>
@@ -66,7 +62,13 @@
     <li>
       <a href="../articles/TroubleshootingApiCalls.html">Troubleshooting REDCap API Calls</a>
     </li>
+    <li>
+      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
+    </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -96,7 +98,7 @@
     <div class="page-header toc-ignore">
       <h1>Troubleshooting REDCap API Calls</h1>
             
-            <h4 class="date">2018-08-10</h4>
+            <h4 class="date">2018-09-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/TroubleshootingApiCalls.Rmd"><code>vignettes/TroubleshootingApiCalls.Rmd</code></a></small>
       <div class="hidden name"><code>TroubleshootingApiCalls.Rmd</code></div>
@@ -108,7 +110,7 @@
 <div id="troubleshooting-redcap-api-calls" class="section level1">
 <h1 class="hasAnchor">
 <a href="#troubleshooting-redcap-api-calls" class="anchor"></a>Troubleshooting REDCap API Calls</h1>
-<p>There are many links in the pipeline between your institution’s <a href="http://www.project-redcap.org/">REDCap</a> server and the API user. When the end result is unsuccessful, this document should help narrow the location of the possible problem. The first two sections will be relevant to almost any language interacting with the API. The remaining sections are possibly relevant only to your language (eg, Python, R, SAS, bash), or your software library (<a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> in R and <a href="http://pycap.readthedocs.org/en/latest/">PyCap</a> in Python).</p>
+<p>There are many links in the pipeline between your institution’s <a href="http://www.project-redcap.org/">REDCap</a> server and the API user. When the end result is unsuccessful, this document should help narrow the location of the possible problem. The first two sections will be relevant to almost any language interacting with the API. The remaining sections are possibly relevant only to your language (<em>e.g.</em>, Python, R, SAS, bash), or your software library (<a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> in R and <a href="http://pycap.readthedocs.org/en/latest/">PyCap</a> in Python).</p>
 <div id="server-configuration-and-authorization" class="section level2">
 <h2 class="hasAnchor">
 <a href="#server-configuration-and-authorization" class="anchor"></a>Server Configuration and Authorization</h2>
@@ -134,7 +136,7 @@
 <div id="language-agnostic-api" class="section level2">
 <h2 class="hasAnchor">
 <a href="#language-agnostic-api" class="anchor"></a>Language Agnostic API</h2>
-<p>This section group examines potential problems that occur after it leaves a working server, but before it is handled by their programming language (eg, Python and R). <a href="http://www.getpostman.com/">Postman</a> is a Chrome plugin recommended by <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ">several</a> <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ">people</a> that makes troubleshooting much more efficient.</p>
+<p>This section group examines potential problems that occur after it leaves a working server, but before it is handled by their programming language (<em>e.g.</em>, Python and R). <a href="http://www.getpostman.com/">Postman</a> is a Chrome plugin recommended by <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ">several</a> <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ">people</a> that makes troubleshooting much more efficient.</p>
 <p><img src="images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"></p>
 <ol style="list-style-type: decimal">
 <li>
@@ -228,7 +230,7 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <a class="sourceLine" id="cb5-17" data-line-number="17">)</a></code></pre></div>
 </li>
 <li>
-<p><strong>Can the user query an <em>entire</em> project using RCurl?</strong> There are two advantages of trying a subset of the data. First, small datasets avoid the time-out errors that plague large datasets. Second, it may avoid problematic values being passed through the pipeline. If the current check fails but the previous check succeedes, then experiment with different expanses of records and fields. This should help determine which values are causing the problems, or if there’s simply too much data being pulled in one pass.</p>
+<p><strong>Can the user query an <em>entire</em> project using RCurl?</strong> There are two advantages of trying a subset of the data. First, small datasets avoid the time-out errors that plague large datasets. Second, it may avoid problematic values being passed through the pipeline. If the current check fails but the previous check succeeds, then experiment with different expanses of records and fields. This should help determine which values are causing the problems, or if there’s simply too much data being pulled in one pass.</p>
 <p>If the desired dataset is too large, consider if you can prune unnecessary records or fields. If not, one solution is to pull smaller, multiple batches using the API, then reassemble them. The <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code><a href="../reference/redcap_read.html">redcap_read()</a></code> function</a> in <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> does this automatically, and allows the user to specify a <code>batch_size</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">redcap_uri                  &lt;-<span class="st"> "https://the.urlofyourinsitution.edu/api/"</span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">token                       &lt;-<span class="st"> "your-secret-token"</span></a>
@@ -306,7 +308,7 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <h2 class="hasAnchor">
 <a href="#importing-into-redcap-from-r" class="anchor"></a>Importing into REDCap from R</h2>
 <p>Troubleshooting import operations is trickier than export operations for two major reasons. First, the database potentially persists your <em>import</em> mistakes. In contrast, repeatedly <em>exporting</em> data won’t affect subsequent reads. Considering cloning the REDCap project for testing until the problem is resolved. Remember to create a new token (because they’re not automatically created when projects are cloned, even when users are copied), and to modify your code’s token to point to the new testing clone.</p>
-<p>The second reason why importing can be trickier is because the schema (eg, the names and data types) of your local dataset must match the project’s schema. This section will be expanded in the future. Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project’s schema and dataset. Also, consider exporting the dataset to your machine, and look for differences. Note that you cannot import calculated fields into REDCap.</p>
+<p>The second reason why importing can be trickier is because the schema (<em>e.g.</em>, the names and data types) of your local dataset must match the project’s schema. This section will be expanded in the future. Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project’s schema and dataset. Also, consider exporting the dataset to your machine, and look for differences. Note that you cannot import calculated fields into REDCap.</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Can the user import the <em>entire</em> project?</strong></p></li>
 <li><p><strong>Can the user import a <em>subset</em> of the project?</strong></p></li>
@@ -315,7 +317,7 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <div id="other-software-for-communication-and-automation-with-redcap" class="section level2">
 <h2 class="hasAnchor">
 <a href="#other-software-for-communication-and-automation-with-redcap" class="anchor"></a>Other software for communication and automation with REDCap</h2>
-<p>REDCap is used in many enviroments, and it’s not surprising that a lot of libraries have been developed that cater to different scenarios and languages. An active list is maintained at <a href="http://redcap-tools.github.io/projects/">REDCap-Tools</a>. In an entry needs to be added, please notify us; instructions are found at the bottom of the page.</p>
+<p>REDCap is used in many environments, and it’s not surprising that a lot of libraries have been developed that cater to different scenarios and languages. An active list is maintained at <a href="http://redcap-tools.github.io/projects/">REDCap-Tools</a>. In an entry needs to be added, please notify us; instructions are found at the bottom of the page.</p>
 <!--
 **Actively developed in the past two years**
 
@@ -333,10 +335,10 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <ul>
 <li>The basic API documentation is available on your REDCap server, typically at <code>http://&lt;*your server name*&gt;/redcap/api/help</code>
 </li>
-<li>If you have access to the REDCap wiki, some newer examples might exist at <a href="https://community.projectredcap.org/articles/462/api-examples.html" class="uri">https://community.projectredcap.org/articles/462/api-examples.html</a>. The official documentation can be found on the <code>API Help Page</code> and `API Examples’ pages on the REDCap wiki (ie, <a href="https://community.projectredcap.org/articles/456/api-documentation.html" class="uri">https://community.projectredcap.org/articles/456/api-documentation.html</a> and <a href="https://community.projectredcap.org/articles/462/api-examples.html" class="uri">https://community.projectredcap.org/articles/462/api-examples.html</a>). If you do not have an account for the wiki, please ask your campus REDCap administrator to send you the static material.</li>
+<li>If you have access to the REDCap wiki, some newer examples might exist at <a href="https://community.projectredcap.org/articles/462/api-examples.html" class="uri">https://community.projectredcap.org/articles/462/api-examples.html</a>. The official documentation can be found on the <code>API Help Page</code> and `API Examples’ pages on the REDCap wiki (<em>i.e.</em>, <a href="https://community.projectredcap.org/articles/456/api-documentation.html" class="uri">https://community.projectredcap.org/articles/456/api-documentation.html</a> and <a href="https://community.projectredcap.org/articles/462/api-examples.html" class="uri">https://community.projectredcap.org/articles/462/api-examples.html</a>). If you do not have an account for the wiki, please ask your campus REDCap administrator to send you the static material.</li>
 <li>Scott Burns, the primary developer of <a href="https://github.com/redcap-tools/PyCap">PyCap</a> has a good intro at <a href="http://sburns.org/2013/07/22/intro-to-redcap-api.html" class="uri">http://sburns.org/2013/07/22/intro-to-redcap-api.html</a>
 </li>
-<li>Bejamin Nutter, the primary developer of <a href="https://github.com/nutterb/redcapAPI/wiki">redcapAPI</a> has a good wiki at <a href="https://github.com/nutterb/redcapAPI/wiki" class="uri">https://github.com/nutterb/redcapAPI/wiki</a>
+<li>Benjamin Nutter, the primary developer of <a href="https://github.com/nutterb/redcapAPI/wiki">redcapAPI</a> has a good wiki at <a href="https://github.com/nutterb/redcapAPI/wiki" class="uri">https://github.com/nutterb/redcapAPI/wiki</a>
 </li>
 <li>In addition to this troubleshooting document, REDCapR has a <a href="https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html">vignette</a> that covers its basic operations.</li>
 </ul>

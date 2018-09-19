@@ -53,7 +53,8 @@ ds_eav <- readr::read_csv(raw_text)
 
 # ---- tweak-data --------------------------------------------------------------
 
-ds_metadata_expanded <- ds_metadata %>%
+ds_metadata_expanded <-
+  ds_metadata %>%
   dplyr::select(field_name, select_choices_or_calculations, field_type) %>%
   dplyr::mutate(
     is_checkbox  = (field_type=="checkbox"),
@@ -69,7 +70,8 @@ ds_metadata_expanded <- ds_metadata %>%
   ) %>%
   tibble::as_tibble()
 
-ds_possible_checkbox_rows <- ds_metadata_expanded %>%
+ds_possible_checkbox_rows <-
+  ds_metadata_expanded %>%
   dplyr::filter(is_checkbox) %>%
   .[["field_name"]] %>%
   tidyr::crossing(
@@ -81,7 +83,8 @@ ds_possible_checkbox_rows <- ds_metadata_expanded %>%
 # ds_metadata %>%
 #   dplyr::filter(field_type %in% c("calc", "file")) %>%
 #   dplyr::select_("field_name")
-variables_to_keep <- ds_metadata_expanded %>%
+variables_to_keep <-
+  ds_metadata_expanded %>%
   dplyr::select(field_name) %>%
   dplyr::union(
     ds_variable %>%
@@ -91,7 +94,8 @@ variables_to_keep <- ds_metadata_expanded %>%
   .[["field_name"]] %>%
   rev()
 
-ds_eav_2 <- ds_eav %>%
+ds_eav_2 <-
+  ds_eav %>%
   dplyr::left_join(
     ds_metadata %>%
       dplyr::select(field_name, field_type),
@@ -105,12 +109,14 @@ ds_eav_2 <- ds_eav %>%
     value      = dplyr::if_else(!is.na(field_type) & (field_type=="checkbox"), as.character(!is.na(value))                        , value     )
   )
 
-ds <- ds_eav_2 %>%
+ds <-
+  ds_eav_2 %>%
   dplyr::select(-field_type) %>%
   tidyr::spread(key=field_name, value=value) %>%
   dplyr::select_(.dots=variables_to_keep)
 
-ds_2 <- ds %>%
+ds_2 <-
+  ds %>%
   dplyr::mutate_if(is.character, type.convert) %>%
   dplyr::mutate_if(is.factor   , as.character)
 
@@ -150,4 +156,3 @@ setdiff(colnames(ds_2), colnames(ds_expected))
 #     .cols = dplyr::vars(dplyr::one_of(checkboxes)),
 #     .funs = function(x) !is.na(x)                       # If there's any value, then it's TRUE.  Missingness is converted to FALSE.
 #   )
-

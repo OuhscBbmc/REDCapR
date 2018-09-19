@@ -1,6 +1,4 @@
-#' @name redcap_write
-#' @export redcap_write
-#' @title Write/Import records to a REDCap project.
+#' @title Write/Import records to a REDCap project
 #'
 #' @description This function uses REDCap's APIs to select and return data.
 #'
@@ -13,7 +11,7 @@
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details in [redcap_read_oneshot()]. Optional.
 #'
-#' @return Currently, a list is returned with the following elements,
+#' @return Currently, a list is returned with the following elements:
 #' * `success`: A boolean value indicating if the operation was apparently successful.
 #' * `status_code`: The [http status code](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes) of the operation.
 #' * `outcome_message`: A human readable string indicating the operation's outcome.
@@ -33,8 +31,9 @@
 #' * in the 'Data Exports' radio buttons, select 'Full Data Set'.
 #'
 #' @author Will Beasley
+#'
 #' @references The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-#' on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and
+#' on the REDCap wiki (*i.e.*, https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
 #' for the wiki, please ask your campus REDCap administrator to send you the static material.
 #'
@@ -72,6 +71,8 @@
 #' result_write <- REDCapR::redcap_write(ds=ds1, redcap_uri=uri, token=token)
 #' result_write$raw_text
 #' }
+
+#' @export
 redcap_write <- function(
   ds_to_write,
   batch_size          = 100L,

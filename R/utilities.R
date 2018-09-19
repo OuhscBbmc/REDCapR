@@ -1,9 +1,8 @@
 #' @name replace_nas_with_explicit
-## We're intentionally not exporting this function.
+#' @title Create explicit factor level for missing values
 #'
-#' @title Create explicit factor level for missing values.
-#'
-#' @description Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertently ignored.
+#' @description Missing values are converted to a factor level.
+#' This explicit assignment can reduce the chances that missing values are inadvertently ignored.
 #' It also allows the presence of a missing to become a predictor in models.
 #'
 #' @param scores An array of values, ideally either factor or character. Required
@@ -11,10 +10,12 @@
 #' @param create_factor Converts `scores` into a factor, if it isn't one already.   Defaults to `FALSE`.
 #' @param add_unknown_level Should a new factor level be created?  (Specify `TRUE` if it already exists.)   Defaults to `FALSE`.
 #'
-#' @return An array of values, where the `NA` values are now a factor level, with the label specified by the `new_na_label` value.
+#' @return An array of values, where the `NA` values are now a factor level,
+#'   with the label specified by the `new_na_label` value.
 #'
 #' @note
-#' The `create_factor` parameter is respected only if `scores` isn't already a factor.  Otherwise, levels without any values would be lost.
+#' The `create_factor` parameter is respected only if `scores` isn't already a factor.
+#'   Otherwise, levels without any values would be lost.
 #'
 #' A `stop` error will be thrown if the operation fails to convert all the `NA` values.
 #'
@@ -23,6 +24,7 @@
 #' @examples
 #' library(REDCapR) #Load the package into the current R session.
 
+## We're intentionally not exporting this function.
 replace_nas_with_explicit <- function( scores, new_na_label="Unknown", create_factor=FALSE, add_unknown_level=FALSE) {
 
   if( create_factor & !is.factor(scores) ) {
@@ -46,8 +48,6 @@ replace_nas_with_explicit <- function( scores, new_na_label="Unknown", create_fa
 
 
 #' @name collapse_vector
-## We're intentionally not exporting this function.
-#'
 #' @title Collapse a vector of values into a single string when necessary.
 #'
 #' @description REDCap's API frequently specifies a series of values separated by commas.
@@ -67,6 +67,7 @@ replace_nas_with_explicit <- function( scores, new_na_label="Unknown", create_fa
 #' REDCapR:::collapse_vector(elements=letters, collapsed=NULL)
 #' REDCapR:::collapse_vector(elements=NULL, collapsed="4,5,6")
 
+## We're intentionally not exporting this function.
 collapse_vector <- function( elements, collapsed ) {
   checkmate::assert_character(collapsed, len=1, any.missing=T, null.ok=T)
 
@@ -83,13 +84,15 @@ collapse_vector <- function( elements, collapsed ) {
   return( collapsed )
 }
 
+## We're intentionally not exporting this function.
 filter_logic_prepare <- function( filter_logic ) {
   # This is an empty string if `filter_logic` is NULL.
-  if( all(nchar(filter_logic)==0) )
+  if( all(nchar(filter_logic)==0L) )
     filter_logic <- dplyr::if_else(is.null(filter_logic), "", filter_logic)
   return( filter_logic )
 }
 
+## We're intentionally not exporting this function.
 verbose_prepare <- function( verbose ) {
   ifelse(!is.null(verbose), verbose, getOption("verbose"))
 }

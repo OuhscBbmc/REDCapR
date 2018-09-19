@@ -17,7 +17,7 @@ test_that("Good Credentials", {
   expected_longitudinal_username       <- "myusername"
   expected_longitudinal_project_id     <- pid_longitudinal
   expected_longitudinal_token          <- "0434F0E9CF53ED0587847AB6E51DE762"
-  expected_longitudinal_comment        <- "longitudinal (read-only) test project"
+  expected_longitudinal_comment        <- "longitudinal (read-only) ARM test project"
 
   expected_write_redcap_uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
   expected_write_username       <- "myusername"

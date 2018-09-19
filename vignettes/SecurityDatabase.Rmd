@@ -23,7 +23,7 @@ After executing the SQL code in an existing database, create an ODBC [DSN](http:
 
 1. Set the DSN's `name` field to whatever is used in the repository's R code.
 2. Set the authenticity method to `Integrated Windows authentication`.
-3. Set the `default database` to the name of the database that containing the tokens 
+3. Set the `default database` to the name of the database that containing the tokens
 
 In our code below, both DSN and database are named  `auxiliary_security`.
 
@@ -185,7 +185,7 @@ print 'Step #5 executed'; print ''
 
 Transfer Credentials
 ========================================
-Manually transferring tokens to the auxiliary server becomes unmanageable as your institution's collection of API users grows.  This script demonstrates how to progamatically transfer all tokens from multiple REDCap instances.  The basic steps are:
+Manually transferring tokens to the auxiliary server becomes unmanageable as your institution's collection of API users grows.  This script demonstrates how to programmatically transfer all tokens from multiple REDCap instances.  The basic steps are:
 
 1. Read from the MySQL database(s) underneath each REDCap instance on your campus.
 1. Combine & groom the credentials.
@@ -285,7 +285,8 @@ ds_production$instance <- name_production
 ds_dev$instance        <- name_dev
 
 # Stack the token collection from each instance.  Then prefix the username and include the URL of each instance.
-ds <- ds_production %>%
+ds <-
+  ds_production %>%
   dplyr::union(ds_dev) %>%                                # Remove union if the dev instance isn't included.
   tibble::as_tibble() %>%
   dplyr::select(

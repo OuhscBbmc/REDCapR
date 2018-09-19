@@ -38,9 +38,6 @@
 
 <meta property="og:title" content="Function reference" />
 
-<meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png" />
-<meta name="twitter:card" content="summary" />
-
 
 
 <!-- mathjax -->
@@ -90,9 +87,6 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
-    </li>
-    <li>
       <a href="../articles/BasicREDCapROperations.html">Basic REDCapR Operations</a>
     </li>
     <li>
@@ -101,7 +95,13 @@
     <li>
       <a href="../articles/TroubleshootingApiCalls.html">Troubleshooting REDCap API Calls</a>
     </li>
+    <li>
+      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
+    </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -153,43 +153,43 @@
         <td>
           <p><code><a href="redcap_read.html">redcap_read()</a></code> </p>
         </td>
-        <td><p>Read records from a REDCap project in subsets, and stacks them together before returning a <code><a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>base::data.frame()</a></code>.</p></td>
+        <td><p>Read records from a REDCap project in subsets, and stacks them together before returning a <code><a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>base::data.frame()</a></code></p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="redcap_read_oneshot.html">redcap_read_oneshot()</a></code> </p>
         </td>
-        <td><p>Read/Export records from a REDCap project.</p></td>
+        <td><p>Read/Export records from a REDCap project</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="redcap_read_oneshot_eav.html">redcap_read_oneshot_eav()</a></code> </p>
         </td>
-        <td><p>Read/Export records from a REDCap project --still in development.</p></td>
+        <td><p>Read/Export records from a REDCap project --still in development</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="redcap_write.html">redcap_write()</a></code> </p>
         </td>
-        <td><p>Write/Import records to a REDCap project.</p></td>
+        <td><p>Write/Import records to a REDCap project</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="redcap_write_oneshot.html">redcap_write_oneshot()</a></code> </p>
         </td>
-        <td><p>Write/Import records to a REDCap project.</p></td>
+        <td><p>Write/Import records to a REDCap project</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="redcap_download_file_oneshot.html">redcap_download_file_oneshot()</a></code> </p>
         </td>
-        <td><p>Download a file from a REDCap project record.</p></td>
+        <td><p>Download a file from a REDCap project record</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="redcap_upload_file_oneshot.html">redcap_upload_file_oneshot()</a></code> </p>
         </td>
-        <td><p>Upload a file into to a REDCap project record.</p></td>
+        <td><p>Upload a file into to a REDCap project record</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -201,15 +201,27 @@
       <tr>
         
         <td>
+          <p><code><a href="redcap_next_free_record_name.html">redcap_next_free_record_name()</a></code> </p>
+        </td>
+        <td><p>Determine free available record ID</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="redcap_metadata_read.html">redcap_metadata_read()</a></code> </p>
         </td>
-        <td><p>Export the metadata of a REDCap project.</p></td>
+        <td><p>Export the metadata of a REDCap project</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="redcap_users_export.html">redcap_users_export()</a></code> </p>
+        </td>
+        <td><p>List authorized users</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="redcap_variables.html">redcap_variables()</a></code> </p>
         </td>
-        <td><p>Enumerate the exported variables.</p></td>
+        <td><p>Enumerate the exported variables</p></td>
       </tr><tr>
         
         <td>
@@ -235,7 +247,7 @@
         <td>
           <p><code><a href="redcap_project.html">redcap_project</a></code> </p>
         </td>
-        <td><p>A <code>Reference Class</code> to make later calls to REDCap more convenient.</p></td>
+        <td><p>A <code>Reference Class</code> to make later calls to REDCap more convenient</p></td>
       </tr><tr>
         
         <td>
@@ -255,7 +267,7 @@
         <td>
           <p><code><a href="retrieve_credential.html">retrieve_credential_local()</a></code> <code><a href="retrieve_credential.html">retrieve_credential_mssql()</a></code> </p>
         </td>
-        <td><p>Read a token and other credentials from a (non-REDCap) database or file.</p></td>
+        <td><p>Read a token and other credentials from a (non-REDCap) database or file</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -281,37 +293,37 @@
         <td>
           <p><code><a href="create_batch_glossary.html">create_batch_glossary()</a></code> </p>
         </td>
-        <td><p>Creates a <code><a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>base::data.frame()</a></code> that help batching long-running read and writes.</p></td>
+        <td><p>Creates a <code><a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>base::data.frame()</a></code> that help batching long-running read and writes</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="metadata_utilities.html">regex_named_captures()</a></code> <code><a href="metadata_utilities.html">checkbox_choices()</a></code> </p>
         </td>
-        <td><p>Manipulate and interpret the metadata of a REDCap project.</p></td>
+        <td><p>Manipulate and interpret the metadata of a REDCap project</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="redcap_column_sanitize.html">redcap_column_sanitize()</a></code> </p>
         </td>
-        <td><p>Sanitize to adhere to REDCap character encoding requirements.</p></td>
+        <td><p>Sanitize to adhere to REDCap character encoding requirements</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="replace_nas_with_explicit.html">replace_nas_with_explicit()</a></code> </p>
         </td>
-        <td><p>Create explicit factor level for missing values.</p></td>
+        <td><p>Create explicit factor level for missing values</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="sanitize_token.html">sanitize_token()</a></code> </p>
         </td>
-        <td><p>Validate and sanitize the user's REDCap token.</p></td>
+        <td><p>Validate and sanitize the user's REDCap token</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="validate.html">validate_for_write()</a></code> <code><a href="validate.html">validate_no_logical()</a></code> <code><a href="validate.html">validate_field_names()</a></code> </p>
         </td>
-        <td><p>Inspect a <code><a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>base::data.frame()</a></code> to anticipate problems before writing to a REDCap project.</p></td>
+        <td><p>Inspect a <code><a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>base::data.frame()</a></code> to anticipate problems before writing to a REDCap project</p></td>
       </tr>
     </tbody>
     </table>

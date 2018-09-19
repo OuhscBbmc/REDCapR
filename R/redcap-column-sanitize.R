@@ -1,6 +1,4 @@
-#' @name redcap_column_sanitize
-#' @export redcap_column_sanitize
-#' @title Sanitize to adhere to REDCap character encoding requirements.
+#' @title Sanitize to adhere to REDCap character encoding requirements
 #'
 #' @description Replace non-ASCII characters with legal characters that won't cause problems when writing to a REDCap project.
 #'
@@ -8,7 +6,9 @@
 #' @param column_names An array of `character` values indicating the names of the variables to sanitize.  Optional.
 #' @param encoding_initial An array of `character` values indicating the names of the variables to sanitize.  Optional.
 #' @param substitution_character The `character` value that replaces characters that were unable to be appropriately matched.
+#'
 #' @return A [base::data.frame()] with same columns, but whose character values have been sanitized.
+#'
 #' @details
 #' Letters like an accented 'A' are replaced with a plain 'A'.
 #'
@@ -30,6 +30,7 @@
 #' # Typical examples are not shown because they require non-ASCII encoding,
 #' #   which makes the package documentation less portable.
 
+#' @export
 redcap_column_sanitize <- function(
   d,
   column_names            = colnames(d),

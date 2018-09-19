@@ -1,7 +1,4 @@
-#' @name sanitize_token
-#' @export
-#'
-#' @title Validate and sanitize the user's REDCap token.
+#' @title Validate and sanitize the user's REDCap token
 #'
 #' @description Verifies the token is nonmissing and conforms to the legal pattern of a 32-character hexadecimal value.
 #' Trailing line endings are removed.
@@ -10,7 +7,7 @@
 #'
 #' @return The token, without a terminal newline character.
 #'
-#' @note Contact your institution's REDCap administrator for more informationa about your project-specific token.
+#' @note Contact your institution's REDCap administrator for more information about your project-specific token.
 #'
 #' @author Hao Zhu, Benjamin Nutter, Will Beasley
 #'
@@ -20,6 +17,7 @@
 #' REDCapR::sanitize_token(secret_token_1)
 #' REDCapR::sanitize_token(secret_token_2)
 
+#' @export
 sanitize_token <- function( token ) {
   pattern <- "^([0-9A-F]{32})(?:\\n)?$"
 

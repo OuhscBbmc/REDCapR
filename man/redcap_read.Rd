@@ -2,7 +2,7 @@
 % Please edit documentation in R/redcap-read.R
 \name{redcap_read}
 \alias{redcap_read}
-\title{Read records from a REDCap project in subsets, and stacks them together before returning a \code{\link[base:data.frame]{base::data.frame()}}.}
+\title{Read records from a REDCap project in subsets, and stacks them together before returning a \code{\link[base:data.frame]{base::data.frame()}}}
 \usage{
 redcap_read(batch_size = 100L, interbatch_delay = 0.5,
   continue_on_error = FALSE, redcap_uri, token, records = NULL,
@@ -62,7 +62,7 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
 \item{id_position}{The column position of the variable that unique identifies the subject.  This defaults to the first variable in the dataset.}
 }
 \value{
-Currently, a list is returned with the following elements,
+Currently, a list is returned with the following elements:
 \itemize{
 \item \code{data}: An R \code{\link[base:data.frame]{base::data.frame()}} of the desired records and columns.
 \item \code{success}: A boolean value indicating if the operation was apparently successful.
@@ -106,7 +106,7 @@ REDCapR::redcap_read(batch_size=2, redcap_uri=uri, token=token)
 }
 \references{
 The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and
+on the REDCap wiki (\emph{i.e.}, https://community.projectredcap.org/articles/456/api-documentation.html and
 https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
 for the wiki, please ask your campus REDCap administrator to send you the static material.
 }

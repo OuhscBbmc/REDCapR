@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Inspect a <code><a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>base::data.frame()</a></code> to anticipate problems before writing to a REDCap project. — validate • REDCapR</title>
+<title>Inspect a <code><a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>base::data.frame()</a></code> to anticipate problems before writing to a REDCap project — validate • REDCapR</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -36,11 +36,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="Inspect a <code><a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>base::data.frame()</a></code> to anticipate problems before writing to a REDCap project. — validate" />
+<meta property="og:title" content="Inspect a <code><a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>base::data.frame()</a></code> to anticipate problems before writing to a REDCap project — validate" />
 
 <meta property="og:description" content="This set of functions inspect a base::data.frame() to anticipate problems before writing with REDCap's API." />
-
-<meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -92,9 +90,6 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
-    </li>
-    <li>
       <a href="../articles/BasicREDCapROperations.html">Basic REDCapR Operations</a>
     </li>
     <li>
@@ -103,7 +98,13 @@
     <li>
       <a href="../articles/TroubleshootingApiCalls.html">Troubleshooting REDCap API Calls</a>
     </li>
+    <li>
+      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
+    </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -132,7 +133,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Inspect a <code><a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>base::data.frame()</a></code> to anticipate problems before writing to a REDCap project.</h1>
+    <h1>Inspect a <code><a href='http://www.rdocumentation.org/packages/base/topics/data.frame'>base::data.frame()</a></code> to anticipate problems before writing to a REDCap project</h1>
     <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/R/validate.R'><code>R/validate.R</code></a></small>
     <div class="hidden name"><code>validate.Rd</code></div>
     </div>
@@ -182,13 +183,14 @@
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>All functions listed in the Usage section above inspect a specific aspect of the dataset.  The <code>validate_for_write()</code> function executes all
+    <p>All functions listed in the Usage section above inspect a specific aspect of the dataset.
+The <code>validate_for_write()</code> function executes all
 these individual validation checks.  It allows the client to check everything with one call.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and
+on the REDCap wiki (<em>i.e.</em>, https://community.projectredcap.org/articles/456/api-documentation.html and
 https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
 for the wiki, please ask your campus REDCap administrator to send you the static material.</p>
     
@@ -202,8 +204,8 @@ for the wiki, please ask your campus REDCap administrator to send you the static
 <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/REDCapR/topics/validate'>validate_for_write</a></span>(<span class='kw'>d</span> <span class='kw'>=</span> <span class='no'>d</span>)</div><div class='output co'>#&gt; # A tibble: 2 x 4
 #&gt;   field_name   field_index concern                  suggestion                 
 #&gt;   &lt;chr&gt;              &lt;int&gt; &lt;chr&gt;                    &lt;chr&gt;                      
-#&gt; 1 flag_logical           2 The REDCap API does not~ Convert the variable with ~
-#&gt; 2 flag_Upperc~           3 A REDCap project does n~ Change the uppercase lette~</div></pre>
+#&gt; 1 flag_logical           2 The REDCap API does not… Convert the variable with …
+#&gt; 2 flag_Upperc…           3 A REDCap project does n… Change the uppercase lette…</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

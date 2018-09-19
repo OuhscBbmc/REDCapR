@@ -1,14 +1,16 @@
 #' @name metadata_utilities
 #' @aliases regex_named_captures checkbox_choices
 #'
-#' @title Manipulate and interpret the metadata of a REDCap project.
+#' @title Manipulate and interpret the metadata of a REDCap project
 #'
 #' @description A collection of functions that assists handling REDCap project metadata.
 #'
 #' @param pattern The regular expression pattern.  Required.
 #' @param text The text to apply the regex against.  Required.
-#' @param select_choices The text containing the choices that should be parsed to determine the `id` and `label` values.  Required.
-#' @param perl Indicates if perl-compatible regexps should be used.  Default is `TRUE`. Optional.
+#' @param select_choices The text containing the choices that should be parsed
+#'   to determine the `id` and `label` values.  Required.
+#' @param perl Indicates if perl-compatible regexps should be used.
+#'   Default is `TRUE`. Optional.
 #'
 #' @return Currently, a [base::data.frame()] is returned a row for each match, and a column for each *named* group within a match.  For the `retrieve_checkbox_choices()` function, the columns will be.
 #' * `id`: The numeric value assigned to each choice (in the data dictionary).

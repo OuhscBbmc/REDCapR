@@ -1,6 +1,4 @@
-#' @name redcap_read_oneshot
-#' @export redcap_read_oneshot
-#' @title Read/Export records from a REDCap project.
+#' @title Read/Export records from a REDCap project
 #'
 #' @description This function uses REDCap's API to select and return data.
 #'
@@ -27,7 +25,7 @@
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below. Optional.
 #'
-#' @return Currently, a list is returned with the following elements,
+#' @return Currently, a list is returned with the following elements:
 #' * `data`: An R [base::data.frame()] of the desired records and columns.
 #' * `success`: A boolean value indicating if the operation was apparently successful.
 #' * `status_code`: The [http status code](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes) of the operation.
@@ -44,8 +42,9 @@
 #'
 #' If you do not pass in this export_data_access_groups value, it will default to `FALSE`. The following is from the API help page for version 5.2.3: This flag is only viable if the user whose token is being used to make the API request is *not* in a data access group. If the user is in a group, then this flag will revert to its default value.
 #' @author Will Beasley
+#'
 #' @references The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-#' on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and
+#' on the REDCap wiki (*i.e.*, https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
 #' for the wiki, please ask your campus REDCap administrator to send you the static material.
 #'
@@ -74,6 +73,8 @@
 #' )$data
 #' }
 
+#' @importFrom magrittr %>%
+#' @export
 redcap_read_oneshot <- function(
   redcap_uri,
   token,
@@ -160,8 +161,9 @@ redcap_read_oneshot <- function(
     col_types <- if( guess_type ) NULL else readr::cols(.default=readr::col_character())
     try (
       {
-        # ds <- utils::read.csv(text=raw_text, stringsAsFactors=FALSE)
-        ds <- readr::read_csv(file=kernel$raw_text, col_types=col_types, guess_max=guess_max) %>%
+        ds <-
+          kernel$raw_text %>%
+          readr::read_csv(col_types=col_types, guess_max=guess_max) %>%
           as.data.frame()
       }, #Convert the raw text to a dataset.
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
