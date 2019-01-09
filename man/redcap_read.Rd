@@ -41,7 +41,7 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
 
 \item{events_collapsed}{A single string, where the desired event names are separated by commas.  Optional.}
 
-\item{raw_or_label}{A string (either 'raw\code{or 'label' that specifies whether to export the raw coded values or the labels for the options of multiple choice fields. Default is}'raw'`.}
+\item{raw_or_label}{A string (either 'raw\code{or 'label' that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is}'raw'`.}
 
 \item{raw_or_label_headers}{A string (either \code{'raw'} or \code{'label'} that specifies for the CSV headers whether to export the variable/field names (raw) or the field labels (label).  Default is \code{'raw'}.}
 
