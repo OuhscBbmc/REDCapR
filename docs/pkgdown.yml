@@ -1,11 +1,11 @@
-pandoc: 2.2.1
-pkgdown: 1.1.0
+pandoc: 2.3.1
+pkgdown: 1.3.0
 pkgdown_sha: ~
 articles:
+  advanced-redcapr-operations: advanced-redcapr-operations.html
   BasicREDCapROperations: BasicREDCapROperations.html
   SecurityDatabase: SecurityDatabase.html
   TroubleshootingApiCalls: TroubleshootingApiCalls.html
-  advanced-redcapr-operations: advanced-redcapr-operations.html
 urls:
   reference: https://ouhscbbmc.github.io/REDCapR/reference
   article: https://ouhscbbmc.github.io/REDCapR/articles
