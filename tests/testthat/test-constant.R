@@ -101,3 +101,33 @@ test_that("constant_to_access", {
   observed <- constant_to_access(c(0, 1, 1, 0, NA))
   expect_equal(observed, expected)
 })
+
+
+# ---- constant-to-* errors -----------------------------------------------------------
+test_that("constant_to_form_completion-error", {
+  expect_error(
+    constant_to_form_completion(NULL),
+    "^The value to recode must be a character, integer, or floating point.  It was `NULL`\\.$",
+  )
+})
+
+test_that("constant_to_form_rights-error", {
+  expect_error(
+    constant_to_form_rights(NULL),
+    "^The value to recode must be a character, integer, or floating point.  It was `NULL`\\.$",
+  )
+})
+
+test_that("constant_to_export_rights-error", {
+  expect_error(
+    constant_to_export_rights(NULL),
+    "^The value to recode must be a character, integer, or floating point.  It was `NULL`\\.$",
+  )
+})
+
+test_that("constant_to_access-error", {
+  expect_error(
+    constant_to_access(NULL),
+    "^The value to recode must be a character, integer, or floating point.  It was `NULL`\\.$",
+  )
+})
