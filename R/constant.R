@@ -1,3 +1,5 @@
+#' @name constant
+#' @aliases constant translate_form_completion translate_form_rights translate_export_rights translate_access
 #' @title Collection of REDCap-specific constants
 #'
 #' @description Collection of constants defined by the REDCap developers.
@@ -19,7 +21,7 @@
 #' * `form_unverified`: 1L
 #' * `form_complete`: 2L
 #'
-#' **Data Export Rights**
+#' **Export Rights**
 #'
 #' See https://your-server/redcap/api/help/?content=exp_users.
 #' * `data_export_rights_no_access`    : 0L
@@ -72,6 +74,12 @@
 #'   "form_rights_readwrite"
 #' )) # Returns c(0L, 1L, 2L)
 #'
+#'
+#' translate_form_completion( c(0, 2, 1, 2, NA))
+#' translate_form_rights(     c(0, 2, 1, 2, NA))
+#' translate_export_rights(   c(0, 2, 1, 2, NA))
+#' translate_access(          c(0, 1, 1, 0, NA))
+#'
 #' \dontrun{
 #' # The following line returns an error:
 #' #     Assertion on 'name' failed: Must be a subset of
@@ -97,6 +105,55 @@ constant <- function( name, simplify=TRUE ) {
     simplify  = simplify
   )
 }
+
+#' @export
+translate_form_completion <- function( x ) {
+  if( !inherits(x, "character") & !is.numeric(x) ) {
+    stop("The value to recode must be a character, integer, or floating point.  It was `", class(x), "`.")
+  }
+
+  x      <- dplyr::coalesce(as.character(x), "-1")
+  levels <- c(-1L, REDCapR::constant("form_incomplete"), REDCapR::constant("form_unverified"), REDCapR::constant("form_complete"))
+  labels <- c("unknown", "incomplete", "unverified", "complete")
+  factor(as.character(x), levels, labels)
+}
+
+#' @export
+translate_form_rights <- function( x ) {
+  if( !inherits(x, "character") & !is.numeric(x) ) {
+    stop("The value to recode must be a character, integer, or floating point.  It was `", class(x), "`.")
+  }
+
+  x      <- dplyr::coalesce(as.character(x), "-1")
+  levels <- c(-1L, REDCapR::constant("form_rights_no_access"), REDCapR::constant("form_rights_readonly" ), REDCapR::constant("form_rights_readwrite"))
+  labels <- c("unknown", "no_access", "readonly", "readwrite")
+  factor(as.character(x), levels, labels)
+}
+
+#' @export
+translate_export_rights <- function( x ) {
+  if( !inherits(x, "character") & !is.numeric(x) ) {
+    stop("The value to recode must be a character, integer, or floating point.  It was `", class(x), "`.")
+  }
+
+  x      <- dplyr::coalesce(as.character(x), "-1")
+  levels <- c(-1L, REDCapR::constant("data_export_rights_no_access"), REDCapR::constant("data_export_rights_deidentified"), REDCapR::constant("data_export_rights_full"))
+  labels <- c("unknown", "no_access", "deidentified", "rights_full")
+  factor(as.character(x), levels, labels)
+}
+
+#' @export
+translate_access <- function( x ) {
+  if( !inherits(x, "character") & !is.numeric(x) ) {
+    stop("The value to recode must be a character, integer, or floating point.  It was `", class(x), "`.")
+  }
+
+  x      <- dplyr::coalesce(as.character(x), "-1")
+  levels <- c(-1L, REDCapR::constant("access_no"), REDCapR::constant("access_yes"))
+  labels <- c("unknown", "no", "yes")
+  factor(as.character(x), levels, labels)
+}
+
 
 # To add REDCap-specific constants, modify the list below.
 #     This list is intentionally not exported.

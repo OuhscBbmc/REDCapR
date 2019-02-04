@@ -73,6 +73,29 @@ test_that("NA simplify", {
   expect_error(
     constant("form_complete", simplify=NA_character_),
     "^Assertion on 'simplify' failed: Contains missing values.*$"
-
   )
+})
+
+test_that("translate_form_completion", {
+  expected <- structure(c(2L, 4L, 3L, 4L, 1L), .Label = c("unknown", "incomplete", "unverified", "complete"), class = "factor")
+  observed <- translate_form_completion(c(0, 2, 1, 2, NA))
+  expect_equal(observed, expected)
+})
+
+test_that("translate_form_rights", {
+  expected <- structure(c(2L, 4L, 3L, 4L, 1L), .Label = c("unknown", "incomplete", "unverified", "complete"), class = "factor")
+  observed <- translate_form_rights(c(0, 2, 1, 2, NA))
+  expect_equal(observed, expected)
+})
+
+test_that("translate_export_rights", {
+  expected <- structure(c(2L, 4L, 3L, 4L, 1L), .Label = c("unknown", "incomplete", "unverified", "complete"), class = "factor")
+  observed <- translate_export_rights(c(0, 2, 1, 2, NA))
+  expect_equal(observed, expected)
+})
+
+test_that("translate_access", {
+  expected <- structure(c(2L, 4L, 3L, 4L, 1L), .Label = c("unknown", "incomplete", "unverified", "complete"), class = "factor")
+  observed <- translate_access(c(0, 1, 1, 0, NA))
+  expect_equal(observed, expected)
 })

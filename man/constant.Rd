@@ -2,6 +2,10 @@
 % Please edit documentation in R/constant.R
 \name{constant}
 \alias{constant}
+\alias{translate_form_completion}
+\alias{translate_form_rights}
+\alias{translate_export_rights}
+\alias{translate_access}
 \title{Collection of REDCap-specific constants}
 \usage{
 constant(name, simplify = TRUE)
@@ -29,7 +33,7 @@ The current constants relate to the 'complete' variable at the end of each form.
 \item \code{form_complete}: 2L
 }
 
-\strong{Data Export Rights}
+\strong{Export Rights}
 
 See https://your-server/redcap/api/help/?content=exp_users.
 \itemize{
@@ -84,6 +88,12 @@ REDCapR::constant(c(
   "form_rights_readonly",
   "form_rights_readwrite"
 )) # Returns c(0L, 1L, 2L)
+
+
+translate_form_completion(c(0, 2, 1, 2, NA))
+translate_rights_export(c(0, 2, 1, 2, NA))
+translate_rights_form(c(0, 2, 1, 2, NA))
+translate_access(c(0, 2, 1, 2, NA))
 
 \dontrun{
 # The following line returns an error:
