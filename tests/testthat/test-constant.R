@@ -76,26 +76,28 @@ test_that("NA simplify", {
   )
 })
 
-test_that("translate_form_completion", {
+
+# ---- constant-to-* -----------------------------------------------------------
+test_that("constant_to_form_completion", {
   expected <- structure(c(1L, 3L, 2L, 3L, 4L), .Label = c("incomplete", "unverified", "complete", "unknown"), class = "factor")
-  observed <- translate_form_completion(c(0, 2, 1, 2, NA))
+  observed <- constant_to_form_completion(c(0, 2, 1, 2, NA))
   expect_equal(observed, expected)
 })
 
-test_that("translate_form_rights", {
+test_that("constant_to_form_rights", {
   expected <- structure(c(1L, 4L, 3L, 2L, 5L), .Label = c("no_access", "readonly", "edit_form", "edit_survey", "unknown"), class = "factor")
-  observed <- translate_form_rights(c(0, 3, 1, 2, NA))
+  observed <- constant_to_form_rights(c(0, 3, 1, 2, NA))
   expect_equal(observed, expected)
 })
 
-test_that("translate_export_rights", {
+test_that("constant_to_export_rights", {
   expected <- structure(c(1L, 3L, 2L, 3L, 4L), .Label = c("no_access", "deidentified", "rights_full", "unknown"), class = "factor")
-  observed <- translate_export_rights(c(0, 2, 1, 2, NA))
+  observed <- constant_to_export_rights(c(0, 2, 1, 2, NA))
   expect_equal(observed, expected)
 })
 
-test_that("translate_access", {
+test_that("constant_to_access", {
   expected <- structure(c(1L, 2L, 2L, 1L, 3L), .Label = c("no", "yes", "unknown"), class = "factor")
-  observed <- translate_access(c(0, 1, 1, 0, NA))
+  observed <- constant_to_access(c(0, 1, 1, 0, NA))
   expect_equal(observed, expected)
 })

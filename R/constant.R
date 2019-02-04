@@ -1,5 +1,5 @@
 #' @name constant
-#' @aliases constant translate_form_completion translate_form_rights translate_export_rights translate_access
+#' @aliases constant constant_to_form_completion constant_to_form_rights constant_to_export_rights constant_to_access
 #' @title Collection of REDCap-specific constants
 #'
 #' @description Collection of constants defined by the REDCap developers.
@@ -78,10 +78,10 @@
 #' )) # Returns c(0L, 2L, 1L, 3L)
 #'
 #'
-#' translate_form_completion( c(0, 2, 1, 2, NA))
-#' translate_form_rights(     c(0, 2, 1, 2, NA))
-#' translate_export_rights(   c(0, 2, 1, 3, NA))
-#' translate_access(          c(0, 1, 1, 0, NA))
+#' constant_to_form_completion( c(0, 2, 1, 2, NA))
+#' constant_to_form_rights(     c(0, 2, 1, 2, NA))
+#' constant_to_export_rights(   c(0, 2, 1, 3, NA))
+#' constant_to_access(          c(0, 1, 1, 0, NA))
 #'
 #' \dontrun{
 #' # The following line returns an error:
@@ -110,7 +110,7 @@ constant <- function( name, simplify=TRUE ) {
 }
 
 #' @export
-translate_form_completion <- function( x ) {
+constant_to_form_completion <- function( x ) {
   if( !inherits(x, "character") & !is.numeric(x) ) {
     stop("The value to recode must be a character, integer, or floating point.  It was `", class(x), "`.")
   }
@@ -122,7 +122,7 @@ translate_form_completion <- function( x ) {
 }
 
 #' @export
-translate_form_rights <- function( x ) {
+constant_to_form_rights <- function( x ) {
   if( !inherits(x, "character") & !is.numeric(x) ) {
     stop("The value to recode must be a character, integer, or floating point.  It was `", class(x), "`.")
   }
@@ -134,7 +134,7 @@ translate_form_rights <- function( x ) {
 }
 
 #' @export
-translate_export_rights <- function( x ) {
+constant_to_export_rights <- function( x ) {
   if( !inherits(x, "character") & !is.numeric(x) ) {
     stop("The value to recode must be a character, integer, or floating point.  It was `", class(x), "`.")
   }
@@ -146,7 +146,7 @@ translate_export_rights <- function( x ) {
 }
 
 #' @export
-translate_access <- function( x ) {
+constant_to_access <- function( x ) {
   if( !inherits(x, "character") & !is.numeric(x) ) {
     stop("The value to recode must be a character, integer, or floating point.  It was `", class(x), "`.")
   }
