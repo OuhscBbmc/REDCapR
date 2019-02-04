@@ -48,8 +48,8 @@ test_that("with DAGs", {
     list(username = c("dwells", "unittestphifree", "wbeasleya"
     ), form_name = c("demographics", "demographics", "demographics"
     ), permission_id = c(1L, 1L, 1L), permission = structure(c(3L,
-    3L, 3L), .Label = c("No Access", "Read Only", "Read/Write"), class = c("ordered",
-    "factor"))), class = c("tbl_df", "tbl", "data.frame"), row.names = c(NA,
+    3L, 3L), .Label = c("no_access", "readonly", "edit_form", "edit_survey", "unknown"), class = c("factor")))
+    , class = c("tbl_df", "tbl", "data.frame"), row.names = c(NA,
     -3L)
   )
 
@@ -99,8 +99,8 @@ test_that("with DAGs", {
     "unittestphifree", "wbeasleya", "wbeasleya", "wbeasleya"), form_name = c("demographics",
     "health", "race_and_ethnicity", "demographics", "health", "race_and_ethnicity"
     ), permission_id = c(1L, 1L, 1L, 1L, 1L, 1L), permission = structure(c(3L,
-    3L, 3L, 3L, 3L, 3L), .Label = c("No Access", "Read Only", "Read/Write"
-    ), class = c("ordered", "factor"))), class = c("tbl_df", "tbl",
+    3L, 3L, 3L, 3L, 3L), .Label = c("no_access", "readonly", "edit_form",
+    "edit_survey", "unknown"), class = "factor")), class = c("tbl_df", "tbl",
     "data.frame"), row.names = c(NA, -6L)
   )
 

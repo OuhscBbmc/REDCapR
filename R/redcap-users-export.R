@@ -106,13 +106,14 @@ redcap_users_export <- function( redcap_uri, token, verbose=TRUE, config_options
             form_name     = sub("^(\\w+):([0-2])$", "\\1", .data$forms),
             permission_id = sub("^(\\w+):([0-2])$", "\\2", .data$forms),
             permission_id = as.integer(.data$permission_id),
-            permission    = factor(
-              .data$permission_id,
-              # levels      = c(0L          , 2L          , 1L          ),
-              levels      = REDCapR::constant(c("form_rights_no_access", "form_rights_readonly", "form_rights_readwrite")) ,
-              labels      = c("No Access" , "Read Only" , "Read/Write"),
-              ordered     = TRUE
-            )
+            permission    = translate_form_rights(.data$permission_id)
+            #   translate_form_rights(
+            #   .data$permission_id,
+            #   # levels      = c(0L          , 2L          , 1L          ),
+            #   levels      = REDCapR::constant(c("form_rights_no_access", "form_rights_readonly", "form_rights_edit_form", "form_rights_edit_survey")) ,
+            #   labels      = c("No Access" , "Read Only" , "Read/Write"),
+            #   ordered     = TRUE
+            # )
 
           ) %>%
           dplyr::select_("-forms")

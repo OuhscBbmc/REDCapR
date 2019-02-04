@@ -35,7 +35,8 @@
 #'
 #' * `form_rights_no_access`    : 0L
 #' * `form_rights_readonly`     : 2L
-#' * `form_rights_readwrite`    : 1L
+#' * `form_rights_edit_form`    : 1L
+#' * `form_rights_edit_survey`  : 3L
 #'
 #' **Access Rights**
 #'
@@ -60,9 +61,10 @@
 #' REDCapR::constant("data_export_rights_deidentified")  # Returns 1L
 #' REDCapR::constant("data_export_rights_full"        )  # Returns 2L
 #'
-#' REDCapR::constant("form_rights_no_access")  # Returns 0L
-#' REDCapR::constant("form_rights_readonly" )  # Returns 2L --Notice the order
-#' REDCapR::constant("form_rights_readwrite")  # Returns 1L
+#' REDCapR::constant("form_rights_no_access")     # Returns 0L
+#' REDCapR::constant("form_rights_readonly" )     # Returns 2L --Notice the order
+#' REDCapR::constant("form_rights_edit_form")     # Returns 1L
+#' REDCapR::constant("form_rights_edit_survey")   # Returns 3L
 #'
 #' REDCapR::constant("access_no" )  # Returns 0L
 #' REDCapR::constant("access_yes")  # Returns 1L
@@ -71,8 +73,9 @@
 #' REDCapR::constant(c(
 #'   "form_rights_no_access",
 #'   "form_rights_readonly",
-#'   "form_rights_readwrite"
-#' )) # Returns c(0L, 1L, 2L)
+#'   "form_rights_edit_form",
+#'   "form_rights_edit_survey"
+#' )) # Returns c(0L, 2L, 1L, 3L)
 #'
 #'
 #' translate_form_completion( c(0, 2, 1, 2, NA))
@@ -125,8 +128,8 @@ translate_form_rights <- function( x ) {
   }
 
   x      <- dplyr::coalesce(as.character(x), "255")
-  levels <- c(REDCapR::constant("form_rights_no_access"), REDCapR::constant("form_rights_readonly" ), REDCapR::constant("form_rights_readwrite"), "255")
-  labels <- c("no_access", "readonly", "readwrite", "unknown")
+  levels <- c(REDCapR::constant("form_rights_no_access"), REDCapR::constant("form_rights_readonly" ), REDCapR::constant("form_rights_edit_form"), REDCapR::constant("form_rights_edit_survey"), "255")
+  labels <- c("no_access", "readonly", "edit_form", "edit_survey", "unknown")
   factor(as.character(x), levels, labels)
 }
 
@@ -170,7 +173,8 @@ constant_list <- list(
   # https://bbmc.ouhsc.edu/redcap/api/help/?content=exp_users
   form_rights_no_access    = 0L,
   form_rights_readonly     = 2L,
-  form_rights_readwrite    = 1L,  # Notice this order is flipped from what might be expected.
+  form_rights_edit_form    = 1L,  # Notice this order is flipped from what might be expected.
+  form_rights_edit_survey  = 3L,
 
   # https://bbmc.ouhsc.edu/redcap/api/help/?content=exp_users
   access_no    = 0L,

@@ -83,8 +83,8 @@ test_that("translate_form_completion", {
 })
 
 test_that("translate_form_rights", {
-  expected <- structure(c(1L, 2L, 3L, NA, 4L), .Label = c("no_access", "readonly", "readwrite", "unknown"), class = "factor")
-  observed <- translate_form_rights(c(0, 2, 1, 3, NA))
+  expected <- structure(c(1L, 4L, 3L, 2L, 5L), .Label = c("no_access", "readonly", "edit_form", "edit_survey", "unknown"), class = "factor")
+  observed <- translate_form_rights(c(0, 3, 1, 2, NA))
   expect_equal(observed, expected)
 })
 

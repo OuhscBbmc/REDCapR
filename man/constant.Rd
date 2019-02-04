@@ -49,7 +49,8 @@ The order of these digits may be unexpected.
 \itemize{
 \item \code{form_rights_no_access}    : 0L
 \item \code{form_rights_readonly}     : 2L
-\item \code{form_rights_readwrite}    : 1L
+\item \code{form_rights_edit_form}    : 1L
+\item \code{form_rights_edit_survey}  : 3L
 }
 
 \strong{Access Rights}
@@ -75,9 +76,10 @@ REDCapR::constant("data_export_rights_no_access"   )  # Returns 0L
 REDCapR::constant("data_export_rights_deidentified")  # Returns 1L
 REDCapR::constant("data_export_rights_full"        )  # Returns 2L
 
-REDCapR::constant("form_rights_no_access")  # Returns 0L
-REDCapR::constant("form_rights_readonly" )  # Returns 2L --Notice the order
-REDCapR::constant("form_rights_readwrite")  # Returns 1L
+REDCapR::constant("form_rights_no_access")     # Returns 0L
+REDCapR::constant("form_rights_readonly" )     # Returns 2L --Notice the order
+REDCapR::constant("form_rights_edit_form")     # Returns 1L
+REDCapR::constant("form_rights_edit_survey")   # Returns 3L
 
 REDCapR::constant("access_no" )  # Returns 0L
 REDCapR::constant("access_yes")  # Returns 1L
@@ -86,13 +88,14 @@ REDCapR::constant(c("form_complete", "form_complete", "form_incomplete")) # Retu
 REDCapR::constant(c(
   "form_rights_no_access",
   "form_rights_readonly",
-  "form_rights_readwrite"
-)) # Returns c(0L, 1L, 2L)
+  "form_rights_edit_form",
+  "form_rights_edit_survey"
+)) # Returns c(0L, 2L, 1L, 3L)
 
 
 translate_form_completion( c(0, 2, 1, 2, NA))
 translate_form_rights(     c(0, 2, 1, 2, NA))
-translate_export_rights(   c(0, 2, 1, 2, NA))
+translate_export_rights(   c(0, 2, 1, 3, NA))
 translate_access(          c(0, 1, 1, 0, NA))
 
 \dontrun{
