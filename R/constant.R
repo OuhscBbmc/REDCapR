@@ -77,7 +77,7 @@
 #'
 #' translate_form_completion( c(0, 2, 1, 2, NA))
 #' translate_form_rights(     c(0, 2, 1, 2, NA))
-#' translate_export_rights(   c(0, 2, 1, 2, NA))
+#' translate_export_rights(   c(0, 2, 1, 3, NA))
 #' translate_access(          c(0, 1, 1, 0, NA))
 #'
 #' \dontrun{
@@ -112,9 +112,9 @@ translate_form_completion <- function( x ) {
     stop("The value to recode must be a character, integer, or floating point.  It was `", class(x), "`.")
   }
 
-  x      <- dplyr::coalesce(as.character(x), "-1")
-  levels <- c(-1L, REDCapR::constant("form_incomplete"), REDCapR::constant("form_unverified"), REDCapR::constant("form_complete"))
-  labels <- c("unknown", "incomplete", "unverified", "complete")
+  x      <- dplyr::coalesce(as.character(x), "255")
+  levels <- c(REDCapR::constant("form_incomplete"), REDCapR::constant("form_unverified"), REDCapR::constant("form_complete"), "255")
+  labels <- c("incomplete", "unverified", "complete", "unknown")
   factor(as.character(x), levels, labels)
 }
 
@@ -124,9 +124,9 @@ translate_form_rights <- function( x ) {
     stop("The value to recode must be a character, integer, or floating point.  It was `", class(x), "`.")
   }
 
-  x      <- dplyr::coalesce(as.character(x), "-1")
-  levels <- c(-1L, REDCapR::constant("form_rights_no_access"), REDCapR::constant("form_rights_readonly" ), REDCapR::constant("form_rights_readwrite"))
-  labels <- c("unknown", "no_access", "readonly", "readwrite")
+  x      <- dplyr::coalesce(as.character(x), "255")
+  levels <- c(REDCapR::constant("form_rights_no_access"), REDCapR::constant("form_rights_readonly" ), REDCapR::constant("form_rights_readwrite"), "255")
+  labels <- c("no_access", "readonly", "readwrite", "unknown")
   factor(as.character(x), levels, labels)
 }
 
@@ -136,9 +136,9 @@ translate_export_rights <- function( x ) {
     stop("The value to recode must be a character, integer, or floating point.  It was `", class(x), "`.")
   }
 
-  x      <- dplyr::coalesce(as.character(x), "-1")
-  levels <- c(-1L, REDCapR::constant("data_export_rights_no_access"), REDCapR::constant("data_export_rights_deidentified"), REDCapR::constant("data_export_rights_full"))
-  labels <- c("unknown", "no_access", "deidentified", "rights_full")
+  x      <- dplyr::coalesce(as.character(x), "255")
+  levels <- c(REDCapR::constant("data_export_rights_no_access"), REDCapR::constant("data_export_rights_deidentified"), REDCapR::constant("data_export_rights_full"), "255")
+  labels <- c("no_access", "deidentified", "rights_full", "unknown")
   factor(as.character(x), levels, labels)
 }
 
@@ -148,9 +148,9 @@ translate_access <- function( x ) {
     stop("The value to recode must be a character, integer, or floating point.  It was `", class(x), "`.")
   }
 
-  x      <- dplyr::coalesce(as.character(x), "-1")
-  levels <- c(-1L, REDCapR::constant("access_no"), REDCapR::constant("access_yes"))
-  labels <- c("unknown", "no", "yes")
+  x      <- dplyr::coalesce(as.character(x), "255")
+  levels <- c(REDCapR::constant("access_no"), REDCapR::constant("access_yes"), "255")
+  labels <- c("no", "yes", "unknown")
   factor(as.character(x), levels, labels)
 }
 

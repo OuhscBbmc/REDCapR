@@ -90,10 +90,10 @@ REDCapR::constant(c(
 )) # Returns c(0L, 1L, 2L)
 
 
-translate_form_completion(c(0, 2, 1, 2, NA))
-translate_rights_export(c(0, 2, 1, 2, NA))
-translate_rights_form(c(0, 2, 1, 2, NA))
-translate_access(c(0, 2, 1, 2, NA))
+translate_form_completion( c(0, 2, 1, 2, NA))
+translate_form_rights(     c(0, 2, 1, 2, NA))
+translate_export_rights(   c(0, 2, 1, 2, NA))
+translate_access(          c(0, 1, 1, 0, NA))
 
 \dontrun{
 # The following line returns an error:
