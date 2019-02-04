@@ -72,8 +72,8 @@ REDCapR::constant("data_export_rights_deidentified")  # Returns 1L
 REDCapR::constant("data_export_rights_full"        )  # Returns 2L
 
 REDCapR::constant("form_rights_no_access")  # Returns 0L
-REDCapR::constant("form_rights_readonly" )  # Returns 1L
-REDCapR::constant("form_rights_readwrite")  # Returns 2L
+REDCapR::constant("form_rights_readonly" )  # Returns 2L --Notice the order
+REDCapR::constant("form_rights_readwrite")  # Returns 1L
 
 REDCapR::constant("access_no" )  # Returns 0L
 REDCapR::constant("access_yes")  # Returns 1L
