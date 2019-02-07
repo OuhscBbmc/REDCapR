@@ -2,6 +2,10 @@
 % Please edit documentation in R/constant.R
 \name{constant}
 \alias{constant}
+\alias{constant_to_form_completion}
+\alias{constant_to_form_rights}
+\alias{constant_to_export_rights}
+\alias{constant_to_access}
 \title{Collection of REDCap-specific constants}
 \usage{
 constant(name, simplify = TRUE)
@@ -29,7 +33,7 @@ The current constants relate to the 'complete' variable at the end of each form.
 \item \code{form_complete}: 2L
 }
 
-\strong{Data Export Rights}
+\strong{Export Rights}
 
 See https://your-server/redcap/api/help/?content=exp_users.
 \itemize{
@@ -45,7 +49,8 @@ The order of these digits may be unexpected.
 \itemize{
 \item \code{form_rights_no_access}    : 0L
 \item \code{form_rights_readonly}     : 2L
-\item \code{form_rights_readwrite}    : 1L
+\item \code{form_rights_edit_form}    : 1L
+\item \code{form_rights_edit_survey}  : 3L
 }
 
 \strong{Access Rights}
@@ -71,9 +76,10 @@ REDCapR::constant("data_export_rights_no_access"   )  # Returns 0L
 REDCapR::constant("data_export_rights_deidentified")  # Returns 1L
 REDCapR::constant("data_export_rights_full"        )  # Returns 2L
 
-REDCapR::constant("form_rights_no_access")  # Returns 0L
-REDCapR::constant("form_rights_readonly" )  # Returns 1L
-REDCapR::constant("form_rights_readwrite")  # Returns 2L
+REDCapR::constant("form_rights_no_access")     # Returns 0L
+REDCapR::constant("form_rights_readonly" )     # Returns 2L --Notice the order
+REDCapR::constant("form_rights_edit_form")     # Returns 1L
+REDCapR::constant("form_rights_edit_survey")   # Returns 3L
 
 REDCapR::constant("access_no" )  # Returns 0L
 REDCapR::constant("access_yes")  # Returns 1L
@@ -82,8 +88,15 @@ REDCapR::constant(c("form_complete", "form_complete", "form_incomplete")) # Retu
 REDCapR::constant(c(
   "form_rights_no_access",
   "form_rights_readonly",
-  "form_rights_readwrite"
-)) # Returns c(0L, 1L, 2L)
+  "form_rights_edit_form",
+  "form_rights_edit_survey"
+)) # Returns c(0L, 2L, 1L, 3L)
+
+
+constant_to_form_completion( c(0, 2, 1, 2, NA))
+constant_to_form_rights(     c(0, 2, 1, 2, NA))
+constant_to_export_rights(   c(0, 2, 1, 3, NA))
+constant_to_access(          c(0, 1, 1, 0, NA))
 
 \dontrun{
 # The following line returns an error:
