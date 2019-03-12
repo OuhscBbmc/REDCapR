@@ -11,8 +11,8 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
   events_collapsed = "", raw_or_label = "raw",
   raw_or_label_headers = "raw", export_checkbox_label = FALSE,
   export_survey_fields = FALSE, export_data_access_groups = FALSE,
-  filter_logic = "", guess_type = TRUE, verbose = TRUE,
-  config_options = NULL, id_position = 1L)
+  filter_logic = "", guess_type = TRUE, guess_max = 1000L,
+  verbose = TRUE, config_options = NULL, id_position = 1L)
 }
 \arguments{
 \item{batch_size}{The maximum number of subject records a single batch should contain.  The default is 100.}
@@ -54,6 +54,8 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
 \item{filter_logic}{String of logic text (e.g., \code{[gender] = 'male'}) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.}
 
 \item{guess_type}{A boolean value indicating if all columns should be returned as character.  If true, \code{\link[readr:read_csv]{readr::read_csv()}} guesses the intended data type for each column.}
+
+\item{guess_max}{A positive integer passed to \code{\link[readr:read_csv]{readr::read_csv()}} \strong{per batch} that specifies the maximum number of records to use for guessing column types.}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.}
 

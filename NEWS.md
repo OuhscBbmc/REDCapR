@@ -23,9 +23,10 @@ Version 0.10 (to be released)
 * If no records are affected, a zero-length *character* vector is returned (instead of sometimes a zero-length *numeric* vector)  (#212)
 * New function (called `constants()`) easily exposes REDCap-specific constants.  (#217)
 * `id_position` allows user to specify if the record_id isn't in the first position (#207).  However, we recommend that all REDCap projects keep this important variable first in the data dictionary.
-* Link to new secure Zenodo DOI resolver (katrinleinweber #191)
+* Link to new secure Zenodo DOI resolver (@katrinleinweber #191)
 * parameters in `redcap_read()` and `redcap_read_oneshot()` are more consistent with the order in raw REDCap API. (#204)
 * When the `verbose` parameter is NULL, then the value from getOption("verbose") is used. (#215)
+* `guess_max` parameter provided in `redcap_read()` (no longer just `redcap_read_oneshot()`).  Suggested by @isaactpetersen in #245.
 * Documentation website constructed with pkgdown (#224).
 
 ### Modified Internals
