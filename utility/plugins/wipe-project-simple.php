@@ -37,7 +37,8 @@ $HtmlPage->PrintHeaderExt();
 </p> 
 <?php 
 
-db_query("DELETE FROM redcapv3.redcap_data WHERE project_id=666;"); 
+// Change '-666' to the project you want to wipe out.
+db_query("DELETE FROM redcapv3.redcap_data WHERE project_id=-666;"); 
  
 // OPTIONAL: Display the footer 
 $HtmlPage->PrintFooterExt(); 
