@@ -53,21 +53,25 @@ test_that("All Records -Default", {
 
 test_that("Bad URI", {
   testthat::skip_on_cran()
-  bad_uri <- "google.com"
+  bad_uri <- "https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"
   expected_data_frame <- structure(list(), .Names = character(0), row.names = integer(0), class = "data.frame")
 
-  expected_outcome_message <- "The REDCapR variable retrieval was not successful\\..+?Error 405 \\(Method Not Allowed\\).+"
+  # Windows gives a different message than Travis/Linux
+  expected_outcome_message <- "(https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com|Couldn't resolve host 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com')"
+  # "The REDCapR variable retrieval was not successful\\..+?Error 405 \\(Method Not Allowed\\).+"
    # expected_outcome_message <- "(?s)The REDCapR variable retrieval was not successful\\..+?.+"
 
-  expect_message(
-    returned_object <- redcap_variables(redcap_uri=bad_uri, token=credential$token),
-    regexp = expected_outcome_message
+  expect_error(
+    returned_object <- redcap_variables(redcap_uri=bad_uri, token=credential$token)#,
+    # regexp = expected_outcome_message
   )
-  expected_outcome_message <- paste0("(?s)", expected_outcome_message)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected=405L)
-  # expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
-  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
-  expect_false(returned_object$success)
+  # Now thean error is thrown with a bad URI.
+  # expected_outcome_message <- paste0("(?s)", expected_outcome_message)
+  #
+  # expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  # expect_equal(returned_object$status_code, expected=405L)
+  # # expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
+  # expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  # expect_false(returned_object$success)
 })
