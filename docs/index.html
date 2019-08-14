@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.10.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.10.9003</span>
       </span>
     </div>
 
@@ -131,9 +131,9 @@
 <a href="#installation-and-documentation" class="anchor"></a>Installation and Documentation</h3>
 <p>The <em>release</em> version can be installed from <a href="https://cran.r-project.org/package=REDCapR">CRAN</a>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"REDCapR"</span>)</a></code></pre></div>
-<p>The <em>development</em> version can be installed from <a href="https://github.com/OuhscBbmc/REDCapR">GitHub</a> after installing the <code>devtools</code> package.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"devtools"</span>) <span class="co"># Run this line if the 'devtools' package isn't installed already.</span></a>
-<a class="sourceLine" id="cb4-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="dt">repo=</span><span class="st">"OuhscBbmc/REDCapR"</span>)</a></code></pre></div>
+<p>The <em>development</em> version can be installed from <a href="https://github.com/OuhscBbmc/REDCapR">GitHub</a> after installing the <code>remotes</code> package.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"remotes"</span>) <span class="co"># Run this line if the 'remotes' package isn't installed already.</span></a>
+<a class="sourceLine" id="cb4-2" title="2">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="dt">repo=</span><span class="st">"OuhscBbmc/REDCapR"</span>)</a></code></pre></div>
 <p>The <a href="https://ouhscbbmc.github.io/REDCapR">ouhscbbmc.github.io/REDCapR</a> site describes the package functions, and includes documents involving <a href="https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html">basic operations</a>, <a href="https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.html">advanced operations</a>, <a href="https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html">token security</a>, and <a href="https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html">troubleshooting</a>.</p>
 <p>Also checkout the other packages that exist for communicating with REDCap, which are listed in the <a href="http://redcap-tools.github.io/projects/">REDCap Tools</a> directory.</p>
 </div>

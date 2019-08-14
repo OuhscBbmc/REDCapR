@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.10.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.10.9003</span>
       </span>
     </div>
 
@@ -100,7 +100,7 @@
     <div class="page-header toc-ignore">
       <h1>Troubleshooting REDCap API Calls</h1>
             
-            <h4 class="date">2019-02-04</h4>
+            <h4 class="date">2019-08-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/TroubleshootingApiCalls.Rmd"><code>vignettes/TroubleshootingApiCalls.Rmd</code></a></small>
       <div class="hidden name"><code>TroubleshootingApiCalls.Rmd</code></div>
@@ -203,11 +203,11 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <a class="sourceLine" id="cb4-7" title="7">  <span class="dt">exportDataAccessGroups      =</span> <span class="st">'true'</span></a>
 <a class="sourceLine" id="cb4-8" title="8">)</a>
 <a class="sourceLine" id="cb4-9" title="9"></a>
-<a class="sourceLine" id="cb4-10" title="10">raw_text &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/httr/topics/POST">POST</a></span>(</a>
+<a class="sourceLine" id="cb4-10" title="10">raw_text &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="https://httr.r-lib.org/reference/POST.html">POST</a></span>(</a>
 <a class="sourceLine" id="cb4-11" title="11">  <span class="dt">url                         =</span> redcap_uri,</a>
 <a class="sourceLine" id="cb4-12" title="12">  <span class="dt">body                        =</span> post_body,</a>
-<a class="sourceLine" id="cb4-13" title="13">  <span class="dt">config                      =</span> httr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/httr/topics/config">config</a></span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>),</a>
-<a class="sourceLine" id="cb4-14" title="14">  httr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/httr/topics/verbose">verbose</a></span>() <span class="co">#Remove this line to suppress the frequent console updates.</span></a>
+<a class="sourceLine" id="cb4-13" title="13">  <span class="dt">config                      =</span> httr<span class="op">::</span><span class="kw"><a href="https://httr.r-lib.org/reference/config.html">config</a></span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>),</a>
+<a class="sourceLine" id="cb4-14" title="14">  httr<span class="op">::</span><span class="kw"><a href="https://httr.r-lib.org/reference/verbose.html">verbose</a></span>() <span class="co">#Remove this line to suppress the frequent console updates.</span></a>
 <a class="sourceLine" id="cb4-15" title="15">)</a></code></pre></div>
 </li>
 <li>

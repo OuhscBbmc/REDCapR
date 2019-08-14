@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.10.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.10.9003</span>
       </span>
     </div>
 
@@ -167,10 +167,14 @@
 <li>New function (called <code>constants()</code>) easily exposes REDCap-specific constants. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/217'>#217</a>)</li>
 <li>
 <code>id_position</code> allows user to specify if the record_id isn’t in the first position (<a href='https://github.com/OuhscBbmc/REDCapR/issues/207'>#207</a>). However, we recommend that all REDCap projects keep this important variable first in the data dictionary.</li>
-<li>Link to new secure Zenodo DOI resolver (katrinleinweber <a href='https://github.com/OuhscBbmc/REDCapR/issues/191'>#191</a>)</li>
+<li>Link to new secure Zenodo DOI resolver (<a href='https://github.com/katrinleinweber'>@katrinleinweber</a> <a href='https://github.com/OuhscBbmc/REDCapR/issues/191'>#191</a>)</li>
 <li>parameters in <code><a href="../reference/redcap_read.html">redcap_read()</a></code> and <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code> are more consistent with the order in raw REDCap API. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/204'>#204</a>)</li>
 <li>When the <code>verbose</code> parameter is NULL, then the value from getOption(“verbose”) is used. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/215'>#215</a>)</li>
+<li>
+<code>guess_max</code> parameter provided in <code><a href="../reference/redcap_read.html">redcap_read()</a></code> (no longer just <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code>). Suggested by <a href='https://github.com/isaactpetersen'>@isaactpetersen</a> in <a href='https://github.com/OuhscBbmc/REDCapR/issues/245'>#245</a>.</li>
 <li>Documentation website constructed with pkgdown (<a href='https://github.com/OuhscBbmc/REDCapR/issues/224'>#224</a>).</li>
+<li>
+<code><a href="../reference/redcap_variables.html">redcap_variables()</a></code> now throws an error when passed a bad URI (commit e542155639bbb7).</li>
 </ul>
 </div>
 <div id="modified-internals" class="section level3">

@@ -28,6 +28,7 @@ Version 0.10 (to be released)
 * When the `verbose` parameter is NULL, then the value from getOption("verbose") is used. (#215)
 * `guess_max` parameter provided in `redcap_read()` (no longer just `redcap_read_oneshot()`).  Suggested by @isaactpetersen in #245.
 * Documentation website constructed with pkgdown (#224).
+* `redcap_variables()` now throws an error when passed a bad URI (commit e542155639bbb7).
 
 ### Modified Internals
 * All interaction with the REDCap server goes through the new `kernal_api()` function, which uses the 'httr' and 'curl' packages underneath.  Until now, each function called those packages directly. (#213)

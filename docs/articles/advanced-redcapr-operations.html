@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.10.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.10.9003</span>
       </span>
     </div>
 
@@ -100,7 +100,7 @@
     <div class="page-header toc-ignore">
       <h1>Advanced REDCapR Operations</h1>
             
-            <h4 class="date">2019-02-04</h4>
+            <h4 class="date">2019-08-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/advanced-redcapr-operations.Rmd"><code>vignettes/advanced-redcapr-operations.Rmd</code></a></small>
       <div class="hidden name"><code>advanced-redcapr-operations.Rmd</code></div>
@@ -244,14 +244,14 @@
 <a class="sourceLine" id="cb14-4" title="4">  <span class="dt">token          =</span> token_simple,</a>
 <a class="sourceLine" id="cb14-5" title="5">  <span class="dt">config_options =</span> config_options</a>
 <a class="sourceLine" id="cb14-6" title="6">)<span class="op">$</span>data</a></code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">config_options &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb16-2" title="2">ds_no_ssl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(</a>
 <a class="sourceLine" id="cb16-3" title="3">   <span class="dt">redcap_uri     =</span> uri,</a>
 <a class="sourceLine" id="cb16-4" title="4">   <span class="dt">token          =</span> token_simple,</a>
 <a class="sourceLine" id="cb16-5" title="5">   <span class="dt">config_options =</span> config_options</a>
 <a class="sourceLine" id="cb16-6" title="6">)<span class="op">$</span>data</a></code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 </div>
 <div id="session-information" class="section level2">
 <h2 class="hasAnchor">
@@ -260,7 +260,7 @@
 <details><p><summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary></p>
 <pre><code>#&gt; - Session info ----------------------------------------------------------
 #&gt;  setting  value                                      
-#&gt;  version  R version 3.5.2 Patched (2019-01-07 r75958)
+#&gt;  version  R version 3.6.1 Patched (2019-08-12 r76979)
 #&gt;  os       Windows &gt;= 8 x64                           
 #&gt;  system   x86_64, mingw32                            
 #&gt;  ui       RTerm                                      
@@ -268,77 +268,77 @@
 #&gt;  collate  English_United States.1252                 
 #&gt;  ctype    English_United States.1252                 
 #&gt;  tz       America/Chicago                            
-#&gt;  date     2019-02-04                                 
+#&gt;  date     2019-08-14                                 
 #&gt; 
 #&gt; - Packages --------------------------------------------------------------
-#&gt;  package     * version     date       lib source                        
-#&gt;  assertthat    0.2.0       2017-04-11 [1] CRAN (R 3.5.0)                
-#&gt;  backports     1.1.3       2018-12-14 [1] CRAN (R 3.5.1)                
-#&gt;  bindr         0.1.1       2018-03-13 [1] CRAN (R 3.5.0)                
-#&gt;  bindrcpp    * 0.2.2       2018-03-29 [1] CRAN (R 3.5.0)                
-#&gt;  callr         3.1.1       2018-12-21 [1] CRAN (R 3.5.2)                
-#&gt;  checkmate     1.9.1       2019-01-15 [1] CRAN (R 3.5.2)                
-#&gt;  cli           1.0.1       2018-09-25 [1] CRAN (R 3.5.1)                
-#&gt;  colorspace    1.4-0       2019-01-13 [1] CRAN (R 3.5.2)                
-#&gt;  commonmark    1.7         2018-12-01 [1] CRAN (R 3.5.1)                
-#&gt;  crayon        1.3.4       2017-09-16 [1] CRAN (R 3.5.0)                
-#&gt;  curl          3.3         2019-01-10 [1] CRAN (R 3.5.2)                
-#&gt;  desc          1.2.0       2018-05-01 [1] CRAN (R 3.5.0)                
-#&gt;  devtools      2.0.1       2018-10-26 [1] CRAN (R 3.5.2)                
-#&gt;  digest        0.6.18      2018-10-10 [1] CRAN (R 3.5.1)                
-#&gt;  dplyr         0.7.8       2018-11-10 [1] CRAN (R 3.5.1)                
-#&gt;  evaluate      0.12        2018-10-09 [1] CRAN (R 3.5.1)                
-#&gt;  fs            1.2.6       2018-08-23 [1] CRAN (R 3.5.1)                
-#&gt;  glue          1.3.0       2018-07-17 [1] CRAN (R 3.5.1)                
-#&gt;  hms           0.4.2.9001  2018-08-09 [1] Github (tidyverse/hms@979286f)
-#&gt;  htmltools     0.3.6       2017-04-28 [1] CRAN (R 3.5.0)                
-#&gt;  httr          1.4.0       2018-12-11 [1] CRAN (R 3.5.1)                
-#&gt;  kableExtra    1.0.1       2019-01-22 [1] CRAN (R 3.5.2)                
-#&gt;  knitr       * 1.21        2018-12-10 [1] CRAN (R 3.5.1)                
-#&gt;  magrittr    * 1.5         2014-11-22 [1] CRAN (R 3.5.0)                
-#&gt;  MASS          7.3-51.1    2018-11-01 [3] CRAN (R 3.5.2)                
-#&gt;  memoise       1.1.0       2017-04-21 [1] CRAN (R 3.5.0)                
-#&gt;  munsell       0.5.0       2018-06-12 [1] CRAN (R 3.5.0)                
-#&gt;  pillar        1.3.1       2018-12-15 [1] CRAN (R 3.5.1)                
-#&gt;  pkgbuild      1.0.2       2018-10-16 [1] CRAN (R 3.5.1)                
-#&gt;  pkgconfig     2.0.2       2018-08-16 [1] CRAN (R 3.5.1)                
-#&gt;  pkgdown       1.3.0       2018-12-07 [1] CRAN (R 3.5.1)                
-#&gt;  pkgload       1.0.2       2018-10-29 [1] CRAN (R 3.5.1)                
-#&gt;  prettyunits   1.0.2       2015-07-13 [1] CRAN (R 3.5.0)                
-#&gt;  processx      3.2.1       2018-12-05 [1] CRAN (R 3.5.1)                
-#&gt;  ps            1.3.0       2018-12-21 [1] CRAN (R 3.5.2)                
-#&gt;  purrr         0.3.0       2019-01-27 [1] CRAN (R 3.5.2)                
-#&gt;  R6            2.3.0       2018-10-04 [1] CRAN (R 3.5.1)                
-#&gt;  Rcpp          1.0.0       2018-11-07 [1] CRAN (R 3.5.1)                
-#&gt;  readr         1.3.1       2018-12-21 [1] CRAN (R 3.5.2)                
-#&gt;  REDCapR     * 0.9.10.9001 2019-01-10 [1] local                         
-#&gt;  remotes       2.0.2       2018-10-30 [1] CRAN (R 3.5.1)                
-#&gt;  rlang         0.3.1       2019-01-08 [1] CRAN (R 3.5.2)                
-#&gt;  rmarkdown     1.11        2018-12-08 [1] CRAN (R 3.5.1)                
-#&gt;  roxygen2      6.1.1       2018-11-07 [1] CRAN (R 3.5.1)                
-#&gt;  rprojroot     1.3-2       2018-01-03 [1] CRAN (R 3.5.0)                
-#&gt;  rstudioapi    0.9.0       2019-01-09 [1] CRAN (R 3.5.1)                
-#&gt;  rvest         0.3.2       2016-06-17 [1] CRAN (R 3.5.0)                
-#&gt;  scales        1.0.0.9000  2019-01-11 [1] local                         
-#&gt;  sessioninfo   1.1.1       2018-11-05 [1] CRAN (R 3.5.1)                
-#&gt;  stringi       1.2.4       2018-07-20 [1] CRAN (R 3.5.1)                
-#&gt;  stringr       1.3.1       2018-05-10 [1] CRAN (R 3.5.0)                
-#&gt;  testthat      2.0.1       2018-10-13 [1] CRAN (R 3.5.1)                
-#&gt;  tibble        2.0.1       2019-01-12 [1] CRAN (R 3.5.2)                
-#&gt;  tidyr         0.8.2       2018-10-28 [1] CRAN (R 3.5.1)                
-#&gt;  tidyselect    0.2.5       2018-10-11 [1] CRAN (R 3.5.1)                
-#&gt;  usethis       1.4.0       2018-08-14 [1] CRAN (R 3.5.1)                
-#&gt;  viridisLite   0.3.0       2018-02-01 [1] CRAN (R 3.5.0)                
-#&gt;  webshot       0.5.1       2018-09-28 [1] CRAN (R 3.5.1)                
-#&gt;  withr         2.1.2       2018-03-15 [1] CRAN (R 3.5.0)                
-#&gt;  xfun          0.4         2018-10-23 [1] CRAN (R 3.5.1)                
-#&gt;  xml2          1.2.0       2018-01-24 [1] CRAN (R 3.5.0)                
-#&gt;  yaml          2.2.0       2018-07-25 [1] CRAN (R 3.5.1)                
+#&gt;  package     * version     date       lib source        
+#&gt;  assertthat    0.2.1       2019-03-21 [1] CRAN (R 3.6.0)
+#&gt;  backports     1.1.4       2019-04-10 [1] CRAN (R 3.6.0)
+#&gt;  callr         3.3.1       2019-07-18 [1] CRAN (R 3.6.1)
+#&gt;  checkmate     1.9.4       2019-07-04 [1] CRAN (R 3.6.1)
+#&gt;  cli           1.1.0       2019-03-19 [1] CRAN (R 3.6.0)
+#&gt;  colorspace    1.4-1       2019-03-18 [1] CRAN (R 3.6.0)
+#&gt;  commonmark    1.7         2018-12-01 [1] CRAN (R 3.6.0)
+#&gt;  crayon        1.3.4       2017-09-16 [1] CRAN (R 3.6.0)
+#&gt;  curl          4.0         2019-07-22 [1] CRAN (R 3.6.1)
+#&gt;  desc          1.2.0       2018-05-01 [1] CRAN (R 3.6.0)
+#&gt;  devtools      2.1.0       2019-07-06 [1] CRAN (R 3.6.1)
+#&gt;  digest        0.6.20      2019-07-04 [1] CRAN (R 3.6.1)
+#&gt;  dplyr         0.8.3       2019-07-04 [1] CRAN (R 3.6.1)
+#&gt;  evaluate      0.14        2019-05-28 [1] CRAN (R 3.6.0)
+#&gt;  fs            1.3.1       2019-05-06 [1] CRAN (R 3.6.0)
+#&gt;  glue          1.3.1       2019-03-12 [1] CRAN (R 3.6.0)
+#&gt;  hms           0.5.0       2019-07-09 [1] CRAN (R 3.6.1)
+#&gt;  htmltools     0.3.6       2017-04-28 [1] CRAN (R 3.6.0)
+#&gt;  httr          1.4.1       2019-08-05 [1] CRAN (R 3.6.1)
+#&gt;  kableExtra    1.1.0       2019-03-16 [1] CRAN (R 3.6.0)
+#&gt;  knitr       * 1.24        2019-08-08 [1] CRAN (R 3.6.1)
+#&gt;  magrittr    * 1.5         2014-11-22 [1] CRAN (R 3.6.0)
+#&gt;  MASS          7.3-51.4    2019-03-31 [3] CRAN (R 3.6.1)
+#&gt;  memoise       1.1.0       2017-04-21 [1] CRAN (R 3.6.0)
+#&gt;  munsell       0.5.0       2018-06-12 [1] CRAN (R 3.6.0)
+#&gt;  pillar        1.4.2       2019-06-29 [1] CRAN (R 3.6.1)
+#&gt;  pkgbuild      1.0.4       2019-08-05 [1] CRAN (R 3.6.1)
+#&gt;  pkgconfig     2.0.2       2018-08-16 [1] CRAN (R 3.6.0)
+#&gt;  pkgdown       1.3.0       2018-12-07 [1] CRAN (R 3.6.0)
+#&gt;  pkgload       1.0.2       2018-10-29 [1] CRAN (R 3.6.0)
+#&gt;  prettyunits   1.0.2       2015-07-13 [1] CRAN (R 3.6.0)
+#&gt;  processx      3.4.1       2019-07-18 [1] CRAN (R 3.6.1)
+#&gt;  ps            1.3.0       2018-12-21 [1] CRAN (R 3.6.0)
+#&gt;  purrr         0.3.2       2019-03-15 [1] CRAN (R 3.6.0)
+#&gt;  R6            2.4.0       2019-02-14 [1] CRAN (R 3.6.0)
+#&gt;  Rcpp          1.0.2       2019-07-25 [1] CRAN (R 3.6.1)
+#&gt;  readr         1.3.1       2018-12-21 [1] CRAN (R 3.6.0)
+#&gt;  REDCapR     * 0.9.10.9001 2019-08-14 [1] local         
+#&gt;  remotes       2.1.0       2019-06-24 [1] CRAN (R 3.6.1)
+#&gt;  rlang         0.4.0       2019-06-25 [1] CRAN (R 3.6.1)
+#&gt;  rmarkdown     1.14        2019-07-12 [1] CRAN (R 3.6.1)
+#&gt;  roxygen2      6.1.1       2018-11-07 [1] CRAN (R 3.6.0)
+#&gt;  rprojroot     1.3-2       2018-01-03 [1] CRAN (R 3.6.0)
+#&gt;  rstudioapi    0.10        2019-03-19 [1] CRAN (R 3.6.0)
+#&gt;  rvest         0.3.4       2019-05-15 [1] CRAN (R 3.6.0)
+#&gt;  scales        1.0.0       2018-08-09 [1] CRAN (R 3.6.0)
+#&gt;  sessioninfo   1.1.1       2018-11-05 [1] CRAN (R 3.6.0)
+#&gt;  stringi       1.4.3       2019-03-12 [1] CRAN (R 3.6.0)
+#&gt;  stringr       1.4.0       2019-02-10 [1] CRAN (R 3.6.0)
+#&gt;  testthat      2.2.1       2019-07-25 [1] CRAN (R 3.6.1)
+#&gt;  tibble        2.1.3       2019-06-06 [1] CRAN (R 3.6.0)
+#&gt;  tidyr         0.8.3       2019-03-01 [1] CRAN (R 3.6.0)
+#&gt;  tidyselect    0.2.5       2018-10-11 [1] CRAN (R 3.6.0)
+#&gt;  usethis       1.5.1       2019-07-04 [1] CRAN (R 3.6.1)
+#&gt;  vctrs         0.2.0       2019-07-05 [1] CRAN (R 3.6.1)
+#&gt;  viridisLite   0.3.0       2018-02-01 [1] CRAN (R 3.6.0)
+#&gt;  webshot       0.5.1       2018-09-28 [1] CRAN (R 3.6.0)
+#&gt;  withr         2.1.2       2018-03-15 [1] CRAN (R 3.6.0)
+#&gt;  xfun          0.8         2019-06-25 [1] CRAN (R 3.6.1)
+#&gt;  xml2          1.2.2       2019-08-09 [1] CRAN (R 3.6.1)
+#&gt;  yaml          2.2.0       2018-07-25 [1] CRAN (R 3.6.0)
+#&gt;  zeallot       0.1.0       2018-01-28 [1] CRAN (R 3.6.0)
 #&gt; 
 #&gt; [1] D:/Projects/RLibraries
-#&gt; [2] D:/Users/Will/Documents/R/win-library/3.5
-#&gt; [3] C:/Program Files/R/R-3.5.2patched/library</code></pre>
-</details><p>Report rendered by Will at 2019-02-04, 14:55 -0600 in 3 seconds.</p>
+#&gt; [2] D:/Users/Will/Documents/R/win-library/3.6
+#&gt; [3] C:/Program Files/R/R-3.6.1patched/library</code></pre>
+</details><p>Report rendered by Will at 2019-08-14, 16:08 -0500 in 3 seconds.</p>
 </div>
   </div>
 
