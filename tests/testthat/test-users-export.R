@@ -47,7 +47,7 @@ test_that("with DAGs", {
   expected_data_user_form <- structure(
     list(username = c("dwells", "unittestphifree", "wbeasleya"
     ), form_name = c("demographics", "demographics", "demographics"
-    ), permission_id = c(1L, 1L, 1L), permission = structure(c(3L,
+    ), permission_id = c(0L, 1L, 1L), permission = structure(c(1L,
     3L, 3L), .Label = c("no_access", "readonly", "edit_form", "edit_survey", "unknown"), class = c("factor")))
     , class = c("tbl_df", "tbl", "data.frame"), row.names = c(NA,
     -3L)
