@@ -19,7 +19,7 @@ test_that("Version Successful", {
     actual <- redcap_version(redcap_uri=credential$redcap_uri, token=credential$token)
   )
 
-  expected <- package_version("8.4.0")
+  expected <- package_version("9.0.0")
   expect_equal(actual, expected)
 })
 
