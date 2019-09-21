@@ -9,6 +9,7 @@ README.html$
 
 documentation-peek.pdf
 documentation-for-developers/
+pkgdown/
 playgrounds/
 utility/
 ^\.travis\.yml$
