@@ -19,3 +19,4 @@ utility/
 ^.*\.o$
 ^_pkgdown\.yml$
 ^docs$
+^CRAN-RELEASE$
