@@ -58,7 +58,7 @@
 #' token    <- "9A81268476645C4E5F03428B8AC3AA7B"
 #'
 #' #Return all records and all variables.
-#' ds <- REDCapR::redcap_read_oneshot_eav(redcap_uri=uri, token=token)$data
+#' ds <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=uri, token=token)$data
 #'
 #' #Return only records with IDs of 1 and 3
 #' desired_records_v1 <- c(1, 3)
@@ -171,15 +171,15 @@ redcap_read_oneshot_eav <- function(
 
         ds_metadata_expanded <-
           ds_metadata %>%
-          dplyr::select_("field_name", "select_choices_or_calculations", "field_type") %>%
+          dplyr::select(.data$field_name, .data$select_choices_or_calculations, .data$field_type) %>%
           dplyr::mutate(
             is_checkbox   = (.data$field_type=="checkbox"),
             ids           = dplyr::if_else(.data$is_checkbox, .data$select_choices_or_calculations, "1"),
             ids           = gsub("(\\d+),.+?(\\||$)", "\\1", .data$ids),
             ids           = strsplit(.data$ids, " ")
           ) %>%
-          dplyr::select_("-select_choices_or_calculations", "-field_type") %>%
-          tidyr::unnest_("ids") %>%
+          dplyr::select(-.data$select_choices_or_calculations, -.data$field_type) %>%
+          tidyr::unnest(.data$ids) %>%
           dplyr::transmute(
             .data$is_checkbox,
             field_name          = dplyr::if_else(.data$is_checkbox, paste0(.data$field_name, "___", .data$ids), .data$field_name)
@@ -188,15 +188,15 @@ redcap_read_oneshot_eav <- function(
 
         distinct_checkboxes <-
           ds_metadata_expanded %>%
-          dplyr::filter_("is_checkbox") %>%
+          dplyr::filter(.data$is_checkbox) %>%
           dplyr::pull(.data$field_name)
 
         ds_possible_checkbox_rows  <-
           tidyr::crossing(
             field_name = distinct_checkboxes,
-            record     = dplyr::distinct(ds_eav, .data$record),
+            record     = unique(ds_eav$record),
             field_type = "checkbox",
-            event_id   = dplyr::distinct(ds_eav, .data$event_id)
+            event_id   =  unique(ds_eav$event_id)
           )
 
         variables_to_keep <-
@@ -204,7 +204,7 @@ redcap_read_oneshot_eav <- function(
           dplyr::select(.data$field_name) %>%
           dplyr::union(
             ds_variable %>%
-              dplyr::select_("field_name" = "export_field_name") %>%
+              dplyr::select(field_name = .data$export_field_name) %>%
               dplyr::filter(grepl("^\\w+?_complete$", .data$field_name))
           ) %>%
           dplyr::pull(.data$field_name) %>%
@@ -214,7 +214,7 @@ redcap_read_oneshot_eav <- function(
           ds_eav %>%
           dplyr::left_join(
             ds_metadata %>%
-              dplyr::select_("field_name", "field_type"),
+              dplyr::select(.data$field_name, .data$field_type),
             by = "field_name"
           ) %>%
           dplyr::mutate(
@@ -228,11 +228,11 @@ redcap_read_oneshot_eav <- function(
         . <- NULL # For the sake of avoiding an R CMD check note.
         ds <-
           ds_eav_2 %>%
-          dplyr::select_("-field_type") %>%
-          # dplyr::select_("-redcap_repeat_instance") %>%           # TODO: need a good fix for repeats
+          dplyr::select(-.data$field_type) %>%
+          # dplyr::select(-.data$redcap_repeat_instance) %>%        # TODO: need a good fix for repeats
           # tidyr::drop_na(event_id) %>%                            # TODO: need a good fix for repeats
-          tidyr::spread_(key="field_name", value="value") %>%
-          dplyr::select_(.data=., .dots=intersect(variables_to_keep, colnames(.)))
+          tidyr::spread(key=.data$field_name, value=.data$value) %>%
+          dplyr::select(.data=., !! intersect(variables_to_keep, colnames(.)))
 
         ds_2 <-
           ds %>%

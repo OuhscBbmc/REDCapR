@@ -23,34 +23,32 @@ test_that("with DAGs", {
   testthat::skip_on_cran()
   expected_outcome_message <- "The REDCap users were successfully exported in \\d+(\\.\\d+\\W|\\W)seconds\\.  The http status code was 200\\."
   expected_data_user <- structure(
-    list(username = c("dwells", "unittestphifree", "wbeasleya"
-    ), email = c("donna-wells@ouhsc.edu", "wibeasley@hotmail.com",
-    "william-beasley@ouhsc.edu"), firstname = c("Donna", "Unit Test",
-    "Will"), lastname = c("Wells", "PHI Free", "Beasley_A"), expiration = structure(c(20334,
-    NA, NA), class = "Date"), data_access_group = c("dagb", "daga",
-    NA), data_access_group_id = c("332", "331", NA), design = c(FALSE,
-    FALSE, TRUE), user_rights = c(FALSE, FALSE, TRUE), data_access_groups = c(FALSE,
-    FALSE, TRUE), data_export = c("2", "1", "1"), reports = c(FALSE,
-    FALSE, TRUE), stats_and_charts = c(FALSE, FALSE, TRUE), manage_survey_participants = c(TRUE,
-    TRUE, TRUE), calendar = c(FALSE, FALSE, TRUE), data_import_tool = c(FALSE,
-    FALSE, TRUE), data_comparison_tool = c(FALSE, FALSE, TRUE), logging = c(FALSE,
-    FALSE, TRUE), file_repository = c(FALSE, FALSE, TRUE), data_quality_create = c(FALSE,
-    FALSE, TRUE), data_quality_execute = c(FALSE, FALSE, TRUE), api_export = c(FALSE,
-    TRUE, TRUE), api_import = c(FALSE, FALSE, TRUE), mobile_app = c(FALSE,
-    FALSE, TRUE), mobile_app_download_data = c(FALSE, FALSE, TRUE
-    ), record_create = c(FALSE, FALSE, TRUE), record_rename = c(FALSE,
-    FALSE, FALSE), record_delete = c(FALSE, FALSE, FALSE), lock_records_all_forms = c(FALSE,
-    FALSE, FALSE), lock_records = c(FALSE, FALSE, FALSE), lock_records_customization = c(FALSE,
-    FALSE, FALSE)), row.names = c(NA, -3L), class = c("tbl_df", "tbl",
-    "data.frame")
+    list(username = c("unittestphifree", "wbeasleya"),
+    email = c("wibeasley@hotmail.com", "william-beasley@ouhsc.edu"
+    ), firstname = c("Unit Test", "Will"), lastname = c("PHI Free",
+    "Beasley_A"), expiration = structure(c(NA_real_, NA_real_
+    ), class = "Date"), data_access_group = c("daga", NA), data_access_group_id = c("331",
+    NA), design = c(FALSE, TRUE), user_rights = c(FALSE, TRUE
+    ), data_access_groups = c(FALSE, TRUE), data_export = c("1",
+    "1"), reports = c(FALSE, TRUE), stats_and_charts = c(FALSE,
+    TRUE), manage_survey_participants = c(TRUE, TRUE), calendar = c(FALSE,
+    TRUE), data_import_tool = c(FALSE, TRUE), data_comparison_tool = c(FALSE,
+    TRUE), logging = c(FALSE, TRUE), file_repository = c(FALSE,
+    TRUE), data_quality_create = c(FALSE, TRUE), data_quality_execute = c(FALSE,
+    TRUE), api_export = c(TRUE, TRUE), api_import = c(FALSE,
+    TRUE), mobile_app = c(FALSE, TRUE), mobile_app_download_data = c(FALSE,
+    TRUE), record_create = c(FALSE, TRUE), record_rename = c(FALSE,
+    FALSE), record_delete = c(FALSE, FALSE), lock_records_all_forms = c(FALSE,
+    FALSE), lock_records = c(FALSE, FALSE), lock_records_customization = c(FALSE,
+    FALSE)), class = c("spec_tbl_df", "tbl_df", "tbl", "data.frame"
+    ), row.names = c(NA, -2L)
   )
   expected_data_user_form <- structure(
-    list(username = c("dwells", "unittestphifree", "wbeasleya"
-    ), form_name = c("demographics", "demographics", "demographics"
-    ), permission_id = c(0L, 1L, 1L), permission = structure(c(1L,
-    3L, 3L), .Label = c("no_access", "readonly", "edit_form", "edit_survey", "unknown"), class = c("factor")))
-    , class = c("tbl_df", "tbl", "data.frame"), row.names = c(NA,
-    -3L)
+    list(username = c("unittestphifree", "wbeasleya"),
+    form_name = c("demographics", "demographics"), permission_id = c(1L,
+    1L), permission = structure(c(3L, 3L), .Label = c("no_access",
+    "readonly", "edit_form", "edit_survey", "unknown"), class = "factor")), class = c("tbl_df",
+    "tbl", "data.frame"), row.names = c(NA, -2L)
   )
 
   expect_message(

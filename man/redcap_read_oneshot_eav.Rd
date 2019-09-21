@@ -78,7 +78,7 @@ uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
 token    <- "9A81268476645C4E5F03428B8AC3AA7B"
 
 #Return all records and all variables.
-ds <- REDCapR::redcap_read_oneshot_eav(redcap_uri=uri, token=token)$data
+ds <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=uri, token=token)$data
 
 #Return only records with IDs of 1 and 3
 desired_records_v1 <- c(1, 3)
