@@ -229,10 +229,10 @@ redcap_read_oneshot_eav <- function(
         ds <-
           ds_eav_2 %>%
           dplyr::select(-.data$field_type) %>%
-          # dplyr::select_("-redcap_repeat_instance") %>%           # TODO: need a good fix for repeats
+          # dplyr::select(-.data$redcap_repeat_instance) %>%        # TODO: need a good fix for repeats
           # tidyr::drop_na(event_id) %>%                            # TODO: need a good fix for repeats
           tidyr::spread(key=.data$field_name, value=.data$value) %>%
-          dplyr::select_(.data=., .dots=intersect(variables_to_keep, colnames(.)))
+          dplyr::select(.data=., !! intersect(variables_to_keep, colnames(.)))
 
         ds_2 <-
           ds %>%
