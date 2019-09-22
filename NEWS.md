@@ -5,7 +5,7 @@ In the future:
 * `redcap_read()` and `redcap_read_oneshot()` allows caller to specify data types for columns.
 
 
-Version 0.10 (to be released)
+Version 0.10 (Released 2019-09-22)
 ==========================================================
 
 ### Minor New Features
@@ -39,6 +39,7 @@ Version 0.10 (to be released)
 * the checkmate package inspects most function parameters now (instead of `testit::assert()` and `base:stop()` ) (#190 & #208).
 * `collapse_vector()` is refactored and tested (#209)
 * remove dependency on `pkgload` package (#218)
+* Update Markdown syntax to new formatting problems (#253)
 
 ### Deprecated Features
 * `retrieve_token_mssql()`, because `retrieve_credential_mssql()` is more general and more useful.

@@ -74,6 +74,7 @@ This section group examines potential problems that occur after it leaves a work
 1. **Can an user query the API successfully with Postman with the their own token?** The values they enter should be exactly the same as those entered in the previous step.  A failure here (assuming the previous step was successful) suggests a network or firewall issue.  If the server is behind your institution's firewall, verify the user is connecting successfully through the VPN.
 
 1. **Can a user query the API with cURL?**  [cURL](http://curl.haxx.se/docs/manpage.html) is a command line tool that's underneath a lot of libraries.  If it's installed correctly on your location machine, it can be executed from the terminal or command line.
+
     ```shell
     curl -X POST -H "Cache-Control: no-cache" -F "token=9A81268476645C4E5F03428B8AC3AA7B" -F "content=record" -F "format=csv" "https://bbmc.ouhsc.edu/redcap/api/"
     ```
@@ -189,18 +190,21 @@ Exporting from REDCap to R, using REDCapR
 If you're not using REDCapR, you can skip this section and proceed to 'Importing into REDCap from R' below.
 
 1. **Is REDCapR installed on the user's machine?** Currently the easiest way to install REDCapR is with the [devtools](https://github.com/hadley/devtools).  The follow code installs devtools, then installs REDCapR.
+
     ```r
     install.packages("devtools", repos="http://cran.rstudio.com")
-    devtools::install_github(repo="OuhscBbmc/REDCapR")
+    remotes::install_github(repo="OuhscBbmc/REDCapR")
     ```
 
 1. **Does REDCapR load successfully on the user's machine?** If so, running `library(REDCapR)` should produce the following output if you're starting with a fresh session of R:
+
     ```r
     library(REDCapR)
     ## Loading required package: REDCapR
     ```
 
 1. **Can the user export from an example project?** This is the same fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/) as in the previous section.
+
     ```r
     library(REDCapR) #Load the package into the current R session.
     uri   <- "https://bbmc.ouhsc.edu/redcap/api/"
@@ -209,6 +213,7 @@ If you're not using REDCapR, you can skip this section and proceed to 'Importing
     ```
 
     The previous code should produce similar output.  Notice there are five rows and the columns will wrap around if your console window is too narrow.
+    
     ```
     5 records and 1 columns were read from REDCap in 0.41 seconds.
     Starting to read 5 records  at 2014-06-27 17:19:49
@@ -245,6 +250,7 @@ If you're not using REDCapR, you can skip this section and proceed to 'Importing
     ```
 
 1. **Can the user export from their own project?** The code is similar to the previous check, but the `uri` and `token` values will need to be modified.
+
     ```r
     library(REDCapR) #Load the package into the current R session, if you haven't already.
     redcap_uri       <- "https://the.urlofyourinsitution.edu/api/"
@@ -253,6 +259,7 @@ If you're not using REDCapR, you can skip this section and proceed to 'Importing
     ```
 
     Alternatively, a `redcap_project` object can be declared initially, which makes subsequent calls cleaner when the token and url are required only the when the object is declared.
+    
     ```r
     library(REDCapR) #Load the package into the current R session, if you haven't already.
     uri               <- "https://bbmc.ouhsc.edu/redcap/api/"
@@ -279,23 +286,27 @@ Exporting from REDCap to R, using redcapAPI
 If you're not using redcapAPI, you can skip this section and proceed to 'Importing into REDCap from R' below.  More specific discussion about `redcapAPI` can be found at the [package's wiki](https://github.com/nutterb/redcapAPI/wiki).
 
 1. **Is redcapAPI installed on the user's machine?** Currently, the easiest way to install `redcapAPI` is from CRAN.
+
     ```r
     install.packages("redcapAPI")
     ```
 
     Developmental versions may be available on GitHub.
+
     ```r
     install.packages("devtools", repos="http://cran.rstudio.com")
-    devtools::install_github(repo="nutterb/redcapAPI")
+    remotes::install_github(repo="nutterb/redcapAPI")
     ```
 
 1. **Does redcapAPI load successfully on the user's machine?** If so, running `library(redcapAPI)` should produce the following output if you're starting with a fresh session of R:
+
     ```r
     library(redcapAPI)
     ## Loading required package: redcapAPI
     ```
 
 1. **Can the user export from an example project?** This is the same fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/) as in the previous section.
+ 
     ```r
     library(redcapAPI) #Load the package into the current R session.
     rcon <- redcapConnection(
@@ -306,6 +317,7 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
     ```
 
     The previous code should produce similar output.  Notice there are five rows and the columns will wrap around if your console window is too narrow.
+ 
     ```
     record_id name_first name_last                                 address      telephone               email
     1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232 (432) 456-4848     nutty@mouse.com
@@ -337,6 +349,7 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
     ```
 
 1. **Can the user export from their own project?** The code is similar to the previous check, but the `uri` and `token` values will need to be modified.
+
     ``` r
     library(redcapAPI) #Load the package into the current R session, if you haven't already.
     rcon <- redcapConnection(
@@ -380,9 +393,11 @@ Other good resources
 ------------------------------------------------------------------
 
 * The basic API documentation is available on your REDCap server, typically at
+
     ```
     http://<*your server name*>/redcap/api/help
     ```
+
 * If you have access to the REDCap wiki, some newer examples might exist at <https://community.projectredcap.org/articles/462/api-examples.html>.  The official documentation can be found on the `API Help Page` and `API Examples' pages on the REDCap wiki (*i.e.*, <https://community.projectredcap.org/articles/456/api-documentation.html> and <https://community.projectredcap.org/articles/462/api-examples.html>). If you do not have an account for the wiki, please ask your campus REDCap administrator to send you the static material.
 * Scott Burns, the primary developer of [PyCap](https://github.com/redcap-tools/PyCap) has a good intro at http://sburns.org/2013/07/22/intro-to-redcap-api.html
 * Benjamin Nutter, the primary developer of [redcapAPI](https://github.com/nutterb/redcapAPI/wiki) has a good wiki at https://github.com/nutterb/redcapAPI/wiki

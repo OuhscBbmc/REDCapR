@@ -22,5 +22,5 @@ test_results_not_checked <- testthat::test_dir("./tests/manual/")
 devtools::check(cran=T)
 # devtools::check_rhub(email="wibeasley@hotmail.com")
 # devtools::check_win_devel() # CRAN submission policies encourage the development version
-# devtools::revdep_check(pkg="REDCapR", recursive=TRUE)
+# devtools::revdepcheck(recursive=TRUE)
 # devtools::release(check=FALSE) #Careful, the last question ultimately uploads it to CRAN, where you can't delete/reverse your decision.
