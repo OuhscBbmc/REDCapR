@@ -5,6 +5,10 @@ In the future:
 * `redcap_read()` and `redcap_read_oneshot()` allows caller to specify data types for columns.
 
 
+Version 0.11 (Released ?)
+==========================================================
+* 'checkmate' package is now imported, not suggested (Thanks @dtenenba, #255)
+
 Version 0.10 (Released 2019-09-22)
 ==========================================================
 
