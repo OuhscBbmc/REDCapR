@@ -211,7 +211,7 @@ redcap_read <- function(
       export_data_access_groups   = export_data_access_groups,
       filter_logic                = filter_logic,
 
-      guess_type                  = guess_type,
+      guess_type                  = FALSE,
       guess_max                   = guess_max,
       verbose                     = verbose,
       config_options              = config_options
@@ -236,6 +236,12 @@ redcap_read <- function(
 
   # ds_stacked               <- as.data.frame(data.table::rbindlist(lst_batch))
   ds_stacked               <- as.data.frame(dplyr::bind_rows(lst_batch))
+
+  if( guess_type ) {
+    ds_stacked <-
+      ds_stacked %>%
+      readr::type_convert()
+  }
 
   elapsed_seconds          <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
   status_code_combined     <- paste(lst_status_code    , collapse="; ")

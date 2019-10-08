@@ -7,7 +7,13 @@ In the future:
 
 Version 0.11 (Released ?)
 ==========================================================
+
+### Minor New Features
+* use [`reader::type_convert()`](https://readr.tidyverse.org/reference/type_convert.html) *after* all the batches are stacked on top of each other.  This way, batches cannot have incompatible data types as they're combined. (#257)
+
+### Corrections
 * 'checkmate' package is now imported, not suggested (Thanks @dtenenba, #255)
+
 
 Version 0.10 (Released 2019-09-22)
 ==========================================================
