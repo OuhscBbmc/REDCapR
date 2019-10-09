@@ -20,7 +20,8 @@
 #' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is `FALSE`. See the details below.
 #' @param filter_logic String of logic text (e.g., `[gender] = 'male'`) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.
 #'
-#' @param guess_type A boolean value indicating if all columns should be returned as character.  If false, [readr::read_csv()] guesses the intended data type for each column.
+#' @param col_types A [readr::cols()] object passed internally to [readr::read_csv()].  Optional.
+#' @param guess_type A boolean value indicating if all columns should be returned as character.  If false, [readr::read_csv()] guesses the intended data type for each column.  Ignored if `col_types` is not null.
 #' @param guess_max A positive integer passed to [readr::read_csv()] that specifies the maximum number of records to use for guessing column types.
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below. Optional.
@@ -71,6 +72,24 @@
 #'    token      = token,
 #'    fields     = desired_fields_v1
 #' )$data
+#'
+#'
+#' # Specify the column types.
+#' col_types <- readr::cols(
+#'   record_id  = readr::col_integer(),
+#'   race___1   = readr::col_logical(),
+#'   race___2   = readr::col_logical(),
+#'   race___3   = readr::col_logical(),
+#'   race___4   = readr::col_logical(),
+#'   race___5   = readr::col_logical(),
+#'   race___6   = readr::col_logical()
+#' )
+#' ds_col_types <- REDCapR::redcap_read_oneshot(
+#'    redcap_uri = uri,
+#'    token      = token,
+#'    col_types  = col_types
+#' )$data
+#'
 #' }
 
 #' @importFrom magrittr %>%
@@ -90,6 +109,7 @@ redcap_read_oneshot <- function(
   export_data_access_groups     = FALSE,
   filter_logic                  = "",
 
+  col_types                     = NULL,
   guess_type                    = TRUE,
   guess_max                     = 1000L,
   verbose                       = TRUE,
@@ -158,7 +178,11 @@ redcap_read_oneshot <- function(
   kernel <- kernel_api(redcap_uri, post_body, config_options)
 
   if( kernel$success ) {
-    col_types <- if( guess_type ) NULL else readr::cols(.default=readr::col_character())
+    col_types <-
+      if( !is.null(col_types) ) col_types
+      else if( guess_type )     NULL
+      else                      readr::cols(.default=readr::col_character())
+
     try (
       {
         ds <-
