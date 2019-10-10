@@ -7,7 +7,18 @@ In the future:
 
 Version 0.11 (Released ?)
 ==========================================================
+
+
+### New Features
+
+* It's now possible to specify the exact `col_types` (a [`readr::cols`](https://readr.tidyverse.org/reference/cols.html) object) that is passed to `readr::read_csv()` inside [`redcap_read_oneshot()`](https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-read-oneshot.R). (#258)
+
+* [`reader::type_convert()`](https://readr.tidyverse.org/reference/type_convert.html) is used *after* all the batches are stacked on top of each other.  This way, batches cannot have incompatible data types as they're combined. (#257; thanks @isaactpetersen #245)
+
+### Corrections
+
 * 'checkmate' package is now imported, not suggested (Thanks @dtenenba, #255)
+
 
 Version 0.10 (Released 2019-09-22)
 ==========================================================

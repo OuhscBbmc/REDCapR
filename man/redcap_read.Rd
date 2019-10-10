@@ -11,8 +11,9 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
   events_collapsed = "", raw_or_label = "raw",
   raw_or_label_headers = "raw", export_checkbox_label = FALSE,
   export_survey_fields = FALSE, export_data_access_groups = FALSE,
-  filter_logic = "", guess_type = TRUE, guess_max = 1000L,
-  verbose = TRUE, config_options = NULL, id_position = 1L)
+  filter_logic = "", col_types = NULL, guess_type = TRUE,
+  guess_max = 1000L, verbose = TRUE, config_options = NULL,
+  id_position = 1L)
 }
 \arguments{
 \item{batch_size}{The maximum number of subject records a single batch should contain.  The default is 100.}
@@ -52,6 +53,8 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
 \item{export_data_access_groups}{A boolean value that specifies whether or not to export the \code{redcap_data_access_group} field when data access groups are utilized in the project. Default is \code{FALSE}. See the details below.}
 
 \item{filter_logic}{String of logic text (e.g., \code{[gender] = 'male'}) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.}
+
+\item{col_types}{A \code{\link[readr:cols]{readr::cols()}} object passed internally to \code{\link[readr:read_csv]{readr::read_csv()}}.  Optional.}
 
 \item{guess_type}{A boolean value indicating if all columns should be returned as character.  If true, \code{\link[readr:read_csv]{readr::read_csv()}} guesses the intended data type for each column.}
 
@@ -103,7 +106,25 @@ For \code{\link[=redcap_read]{redcap_read()}} to function properly, the user mus
 \dontrun{
 uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
 token   <- "9A81268476645C4E5F03428B8AC3AA7B"
-REDCapR::redcap_read(batch_size=2, redcap_uri=uri, token=token)
+REDCapR::redcap_read(batch_size=2, redcap_uri=uri, token=token)$data
+
+# Specify the column types.
+col_types <- readr::cols(
+  record_id  = readr::col_integer(),
+  race___1   = readr::col_logical(),
+  race___2   = readr::col_logical(),
+  race___3   = readr::col_logical(),
+  race___4   = readr::col_logical(),
+  race___5   = readr::col_logical(),
+  race___6   = readr::col_logical()
+)
+REDCapR::redcap_read(
+  redcap_uri = uri,
+  token      = token,
+  col_types  = col_types,
+  batch_size = 2
+)$data
+
 }
 }
 \references{

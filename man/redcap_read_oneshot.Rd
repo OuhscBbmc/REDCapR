@@ -10,8 +10,8 @@ redcap_read_oneshot(redcap_uri, token, records = NULL,
   events_collapsed = "", raw_or_label = "raw",
   raw_or_label_headers = "raw", export_checkbox_label = FALSE,
   export_survey_fields = FALSE, export_data_access_groups = FALSE,
-  filter_logic = "", guess_type = TRUE, guess_max = 1000L,
-  verbose = TRUE, config_options = NULL)
+  filter_logic = "", col_types = NULL, guess_type = TRUE,
+  guess_max = 1000L, verbose = TRUE, config_options = NULL)
 }
 \arguments{
 \item{redcap_uri}{The URI (uniform resource identifier) of the REDCap project.  Required.}
@@ -46,7 +46,9 @@ redcap_read_oneshot(redcap_uri, token, records = NULL,
 
 \item{filter_logic}{String of logic text (e.g., \code{[gender] = 'male'}) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.}
 
-\item{guess_type}{A boolean value indicating if all columns should be returned as character.  If false, \code{\link[readr:read_csv]{readr::read_csv()}} guesses the intended data type for each column.}
+\item{col_types}{A \code{\link[readr:cols]{readr::cols()}} object passed internally to \code{\link[readr:read_csv]{readr::read_csv()}}.  Optional.}
+
+\item{guess_type}{A boolean value indicating if all columns should be returned as character.  If false, \code{\link[readr:read_csv]{readr::read_csv()}} guesses the intended data type for each column.  Ignored if \code{col_types} is not null.}
 
 \item{guess_max}{A positive integer passed to \code{\link[readr:read_csv]{readr::read_csv()}} that specifies the maximum number of records to use for guessing column types.}
 
@@ -100,6 +102,24 @@ ds_some_fields_v1 <- REDCapR::redcap_read_oneshot(
    token      = token,
    fields     = desired_fields_v1
 )$data
+
+
+# Specify the column types.
+col_types <- readr::cols(
+  record_id  = readr::col_integer(),
+  race___1   = readr::col_logical(),
+  race___2   = readr::col_logical(),
+  race___3   = readr::col_logical(),
+  race___4   = readr::col_logical(),
+  race___5   = readr::col_logical(),
+  race___6   = readr::col_logical()
+)
+ds_col_types <- REDCapR::redcap_read_oneshot(
+   redcap_uri = uri,
+   token      = token,
+   col_types  = col_types
+)$data
+
 }
 }
 \references{

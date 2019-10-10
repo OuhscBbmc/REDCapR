@@ -26,6 +26,7 @@
 #' @param export_data_access_groups A boolean value that specifies whether or not to export the `redcap_data_access_group` field when data access groups are utilized in the project. Default is `FALSE`. See the details below.
 #' @param filter_logic String of logic text (e.g., `[gender] = 'male'`) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.
 #'
+#' @param col_types A [readr::cols()] object passed internally to [readr::read_csv()].  Optional.
 #' @param guess_type A boolean value indicating if all columns should be returned as character.  If true, [readr::read_csv()] guesses the intended data type for each column.
 #' @param guess_max A positive integer passed to [readr::read_csv()] **per batch** that specifies the maximum number of records to use for guessing column types.
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
@@ -67,7 +68,25 @@
 #' \dontrun{
 #' uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token   <- "9A81268476645C4E5F03428B8AC3AA7B"
-#' REDCapR::redcap_read(batch_size=2, redcap_uri=uri, token=token)
+#' REDCapR::redcap_read(batch_size=2, redcap_uri=uri, token=token)$data
+#'
+#' # Specify the column types.
+#' col_types <- readr::cols(
+#'   record_id  = readr::col_integer(),
+#'   race___1   = readr::col_logical(),
+#'   race___2   = readr::col_logical(),
+#'   race___3   = readr::col_logical(),
+#'   race___4   = readr::col_logical(),
+#'   race___5   = readr::col_logical(),
+#'   race___6   = readr::col_logical()
+#' )
+#' REDCapR::redcap_read(
+#'   redcap_uri = uri,
+#'   token      = token,
+#'   col_types  = col_types,
+#'   batch_size = 2
+#' )$data
+#'
 #' }
 
 #' @export
@@ -89,6 +108,7 @@ redcap_read <- function(
   export_data_access_groups     = FALSE,
   filter_logic                  = "",
 
+  col_types                     = NULL,
   guess_type                    = TRUE,
   guess_max                     = 1000L,
   verbose                       = TRUE,
@@ -211,7 +231,8 @@ redcap_read <- function(
       export_data_access_groups   = export_data_access_groups,
       filter_logic                = filter_logic,
 
-      guess_type                  = guess_type,
+      col_types                   = col_types,
+      guess_type                  = FALSE,
       guess_max                   = guess_max,
       verbose                     = verbose,
       config_options              = config_options
@@ -234,8 +255,13 @@ redcap_read <- function(
     rm(read_result) #Admittedly overkill defensiveness.
   }
 
-  # ds_stacked               <- as.data.frame(data.table::rbindlist(lst_batch))
   ds_stacked               <- as.data.frame(dplyr::bind_rows(lst_batch))
+
+  if( is.null(col_types) && guess_type ) {
+    ds_stacked <-
+      ds_stacked %>%
+      readr::type_convert()
+  }
 
   elapsed_seconds          <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
   status_code_combined     <- paste(lst_status_code    , collapse="; ")
@@ -246,6 +272,7 @@ redcap_read <- function(
     success             = success_combined,
     status_codes        = status_code_combined,
     outcome_messages    = outcome_message_combined,
+    # data_types          = data_types,
     records_collapsed   = records_collapsed,
     fields_collapsed    = fields_collapsed,
     forms_collapsed     = forms_collapsed,
