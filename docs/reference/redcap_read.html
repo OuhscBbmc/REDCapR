@@ -109,6 +109,9 @@ redcap_read_oneshot() when returning large datasets that could tie up the server
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
+    </li>
+    <li>
       <a href="../articles/BasicREDCapROperations.html">Basic REDCapR Operations</a>
     </li>
     <li>
@@ -116,9 +119,6 @@ redcap_read_oneshot() when returning large datasets that could tie up the server
     </li>
     <li>
       <a href="../articles/TroubleshootingApiCalls.html">Troubleshooting REDCap API Calls</a>
-    </li>
-    <li>
-      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
     </li>
   </ul>
 </li>
@@ -171,8 +171,9 @@ differ in that <code>redcap_read</code> retrieves subsets of the data, and then 
   <span class='kw'>events_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>raw_or_label</span> <span class='kw'>=</span> <span class='st'>"raw"</span>,
   <span class='kw'>raw_or_label_headers</span> <span class='kw'>=</span> <span class='st'>"raw"</span>, <span class='kw'>export_checkbox_label</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>export_survey_fields</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>export_data_access_groups</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>filter_logic</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>guess_type</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>guess_max</span> <span class='kw'>=</span> <span class='fl'>1000L</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>id_position</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</pre>
+  <span class='kw'>filter_logic</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>col_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>guess_type</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>guess_max</span> <span class='kw'>=</span> <span class='fl'>1000L</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>id_position</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -254,6 +255,10 @@ differ in that <code>redcap_read</code> retrieves subsets of the data, and then 
       <td><p>String of logic text (e.g., <code>[gender] = 'male'</code>) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.</p></td>
     </tr>
     <tr>
+      <th>col_types</th>
+      <td><p>A <code><a href='https://readr.tidyverse.org/reference/cols.html'>readr::cols()</a></code> object passed internally to <code><a href='https://readr.tidyverse.org/reference/read_delim.html'>readr::read_csv()</a></code>.  Optional.</p></td>
+    </tr>
+    <tr>
       <th>guess_type</th>
       <td><p>A boolean value indicating if all columns should be returned as character.  If true, <code><a href='https://readr.tidyverse.org/reference/read_delim.html'>readr::read_csv()</a></code> guesses the intended data type for each column.</p></td>
     </tr>
@@ -314,7 +319,25 @@ for the wiki, please ask your campus REDCap administrator to send you the static
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='no'>uri</span>     <span class='kw'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
 <span class='no'>token</span>   <span class='kw'>&lt;-</span> <span class='st'>"9A81268476645C4E5F03428B8AC3AA7B"</span>
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/redcap_read.html'>redcap_read</a></span>(<span class='kw'>batch_size</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>redcap_uri</span><span class='kw'>=</span><span class='no'>uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>)
+<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/redcap_read.html'>redcap_read</a></span>(<span class='kw'>batch_size</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>redcap_uri</span><span class='kw'>=</span><span class='no'>uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>)$<span class='no'>data</span>
+
+<span class='co'># Specify the column types.</span>
+<span class='no'>col_types</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/cols.html'>cols</a></span>(
+  <span class='kw'>record_id</span>  <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_integer</a></span>(),
+  <span class='kw'>race___1</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>(),
+  <span class='kw'>race___2</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>(),
+  <span class='kw'>race___3</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>(),
+  <span class='kw'>race___4</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>(),
+  <span class='kw'>race___5</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>(),
+  <span class='kw'>race___6</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>()
+)
+<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/redcap_read.html'>redcap_read</a></span>(
+  <span class='kw'>redcap_uri</span> <span class='kw'>=</span> <span class='no'>uri</span>,
+  <span class='kw'>token</span>      <span class='kw'>=</span> <span class='no'>token</span>,
+  <span class='kw'>col_types</span>  <span class='kw'>=</span> <span class='no'>col_types</span>,
+  <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>2</span>
+)$<span class='no'>data</span>
+
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -7,6 +7,8 @@ vignette: >
   %\VignetteIndexEntry{Troubleshooting REDCap API Calls}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
+# resource_files:
+#   - images/EmailVerified.png
 ---
 
 
@@ -28,22 +30,38 @@ This first group of checks primarily focuses on the server and the logins accoun
 
 1. **Has the user verified their account by responding to the automated email sent to them?** This can be verified in the `Browse Users` section of your server's `Control Center`.  For each email address they've entered, there should be a green 'Verified' label and icon.
 
-    <img src="./images/EmailVerified.png" alt="EmailVerified" style="width: 400px;"/>
-
+    ```{r EmailVerified, echo=FALSE, out.extra='style="fig.width=400px"'}
+    knitr::include_graphics("images/EmailVerified.png")
+    ```
+    
+    <!--<img src="./images/EmailVerified.png" alt="EmailVerified" style="width: 400px;"/>-->
+  
 1. **Has the user been granted the desired import and/or export permissions?** This can be verified in the `User Rights` section or in the `API` section (and it's `Manage All Project Tokens` tab) within the project.  Alternatively, it can be verified in the `API Tokens` section of the server's `Control Center`.
 
-    <img src="./images/ApiPrivilegeDashboard.png" alt="ApiPrivilegeDashboard" style="width: 600px;"/>
+    ```{r ApiPrivilegeDashboard, echo=FALSE, out.extra='style="fig.width=600px"'}
+    knitr::include_graphics("images/ApiPrivilegeDashboard.png")
+    ```
+    
+    <!--<img src="./images/ApiPrivilegeDashboard.png" alt="ApiPrivilegeDashboard" style="width: 600px;"/>-->
 
 1. **Are they using the correct token?** This can be verified in the `API` section (and it's `Manage All Project Tokens` tab) within the project.  Click the magnifying glass icon in the user's row.  Alternatively, it can be verified in the `API Tokens` section of the server's `Control Center`.
 
-    <img src="./images/MagnifyingGlass.png" alt="MagnifyingGlass" style="width: 550px;"/>
+    ```{r MagnifyingGlass, echo=FALSE, out.extra='style="fig.width=550px"'}
+    knitr::include_graphics("images/MagnifyingGlass.png")
+    ```
 
+    <!--<img src="./images/MagnifyingGlass.png" alt="MagnifyingGlass" style="width: 550px;"/>-->
+    
 Language Agnostic API
 ------------------------------------------------------------------
 
 This section group examines potential problems that occur after it leaves a working server, but before it is handled by their programming language (*e.g.*, Python and R).  [Postman](http://www.getpostman.com/) is a Chrome plugin recommended by [several](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ) [people](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ) that makes troubleshooting much more efficient.
 
-<img src="./images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>
+```{r PostmanScreenshot, echo=FALSE, out.extra='style="fig.width=800px"'}
+knitr::include_graphics("images/PostmanScreenshot.png")
+```
+
+<!--<img src="./images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>-->
 
 1. **Is Postman installed and operating correctly?**
  If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/).  The url is `https://bbmc.ouhsc.edu/redcap/api/`.  There are three key-value pairs: (1) the 'token' is `9A81268476645C4E5F03428B8AC3AA7B`, (2) the 'content' is `record`, and (3) the 'format' should be `CSV`.  When checking your own server, the token value should change, but the content and format should not.  It should return five records in a CSV format.  The 'status' should be `200 OK`.  The result should look roughly like this.  Notice the line breaks were included in the text values themselves.
@@ -406,4 +424,4 @@ Other good resources
 Document Info
 ------------------------------------------------------------------
 
-This document is primarily based on REDCap version 6.0.2 and was last updated 2018-07-09.  A development version of the document is available on GitHub: https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html.
+This document is primarily based on REDCap version 6.0.2 and was last updated 2019-10-13.  A development version of the document is available on GitHub: https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html.
