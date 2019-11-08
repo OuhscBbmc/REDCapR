@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9002</span>
       </span>
     </div>
 
@@ -106,9 +106,6 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
-    </li>
-    <li>
       <a href="../articles/BasicREDCapROperations.html">Basic REDCapR Operations</a>
     </li>
     <li>
@@ -116,6 +113,9 @@
     </li>
     <li>
       <a href="../articles/TroubleshootingApiCalls.html">Troubleshooting REDCap API Calls</a>
+    </li>
+    <li>
+      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
     </li>
   </ul>
 </li>
@@ -237,7 +237,7 @@ for the wiki, please ask your campus REDCap administrator to send you the static
 <span class='no'>token</span>   <span class='kw'>&lt;-</span> <span class='st'>"D70F9ACD1EDD6F151C6EA78683944E98"</span> <span class='co'>#pid=213</span>
 <span class='no'>record</span>  <span class='kw'>&lt;-</span> <span class='fl'>1</span>
 <span class='no'>field</span>   <span class='kw'>&lt;-</span> <span class='st'>"mugshot"</span>
-<span class='co'># event &lt;- "" # only for longitudinal events</span>
+<span class='co'># event &lt;- "" # only for longitudinal projects</span>
 
 <span class='no'>result_1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/redcap_download_file_oneshot.html'>redcap_download_file_oneshot</a></span>(
   <span class='kw'>record</span>        <span class='kw'>=</span> <span class='no'>record</span>,
