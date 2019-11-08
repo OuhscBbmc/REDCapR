@@ -220,15 +220,15 @@ redcap_read_oneshot <- function(
       # ds <- base::as.data.frame(ds)
 
       kernel$raw_text   <- "" # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
-    } else {
+    } else { # nocov start
       kernel$success   <- FALSE #Override the 'success' determination from the http status code.
       ds               <- data.frame() #Return an empty data.frame
       outcome_message  <- paste0("The REDCap read failed.  The http status code was ", kernel$status_code, ".  The 'raw_text' returned was '", kernel$raw_text, "'.")
-    }
+    } # nocov stop
   } else {
     ds                 <- data.frame() #Return an empty data.frame
     outcome_message    <- if( any(grepl(kernel$regex_empty, kernel$raw_text)) ) {
-      "The REDCapR read/export operation was not successful.  The returned dataset was empty."
+      "The REDCapR read/export operation was not successful.  The returned dataset was empty."  # nocov
     } else {
       paste0("The REDCapR read/export operation was not successful.  The error message was:\n",  kernel$raw_text)
     }

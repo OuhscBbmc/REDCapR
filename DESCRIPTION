@@ -36,6 +36,7 @@ Imports:
     tibble (>= 1.4.0),
     tidyr (>= 0.7.0)
 Suggests:
+    covr,
     DBI (>= 0.7.0),
     devtools (>= 1.13.0),
     kableExtra,

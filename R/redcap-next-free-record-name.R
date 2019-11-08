@@ -61,14 +61,14 @@ redcap_next_free_record_name <- function( redcap_uri, token, verbose=TRUE, confi
         kernel$status_code, ".  It is ", value, "."
       )
 
-    } else {
+    } else { # nocov start
       value          <- value_error
       outcome_message  <- paste0("The REDCap determination of the next free record id failed.  The http status code was ", kernel$status_code, ".  The 'raw_text' returned was '", kernel$raw_text, "'.")
     }
   } else {
     value          <- value_error
     outcome_message  <- paste0("The REDCap determination of the next free record id failed.  The error message was:\n",  kernel$raw_text)
-  }
+  }  # nocov stop
 
   if( verbose )
     message(outcome_message)

@@ -3,7 +3,8 @@
 populate_project_simple <- function( batch = FALSE ) {
   checkmate::assert_logical(batch, any.missing=F, len=1)
 
-  if( !requireNamespace("testthat") ) stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.")
+  if( !requireNamespace("testthat") )
+    stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.") # nocov
 
   #Declare the server & user information
   # uri <- "https://www.redcapplugins.org/api/"
@@ -50,7 +51,8 @@ populate_project_simple <- function( batch = FALSE ) {
   return( list(is_success=returned_object$success, redcap_project=project) )
 }
 clear_project_simple <- function( verbose = TRUE ) {
-  if( !requireNamespace("testthat") ) stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.")
+  if( !requireNamespace("testthat") )
+    stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.") # nocov
   pathDeleteTestRecord <- "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_simple.php"
 
   # httr::url_ok(pathDeleteTestRecord)
@@ -68,7 +70,8 @@ clean_start_simple <- function( batch = FALSE, delay_in_seconds = 1 ) {
   checkmate::assert_logical( batch            , any.missing=F, len=1)
   checkmate::assert_numeric( delay_in_seconds , any.missing=F, len=1, lower=0)
 
-  if( !requireNamespace("testthat") ) stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.")
+  if( !requireNamespace("testthat") )
+    stop("The function REDCapR:::populate_project_simple() cannot run if the `testthat` package is not installed.  Please install it and try again.") # nocov
   testthat::expect_message(
     clear_result <- clear_project_simple(),
     regexp = "clear_project_simple success: TRUE."
