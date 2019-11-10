@@ -101,13 +101,18 @@ redcap_upload_file_oneshot <- function(
   kernel <- kernel_api(redcap_uri, post_body, config_options)
 
   if( kernel$success ) {
-    outcome_message         <- paste0("file uploaded to REDCap in ",  round(kernel$elapsed_seconds, 1), " seconds.")
+    outcome_message         <- sprintf(
+      "file uploaded to REDCap in %0.1f seconds.",
+      kernel$elapsed_seconds
+    )
+    # outcome_message         <- paste0("file uploaded to REDCap in ",  round(kernel$elapsed_seconds, 1), " seconds.")
     records_affected_count  <- 1L
     record_id               <- as.character(record)
     kernel$raw_text         <- ""
   } else { #If the returned content wasn't recognized as valid IDs, then
     raw_text                <- kernel$raw_text
     outcome_message         <- paste0("file NOT uploaded ")
+    outcome_message         <- "file NOT uploaded "
     records_affected_count  <- 0L
     record_id               <- character(0) # Return an empty vector.
   }
