@@ -1,5 +1,4 @@
 library(testthat)
-context("Write Batch")
 
 test_that("Smoke Test", {
   testthat::skip_on_cran()

@@ -1,5 +1,4 @@
 library(testthat)
-context("Next Free Record Name")
 
 credential <- REDCapR::retrieve_credential_local(
   path_credential = system.file("misc/example.credentials", package="REDCapR"),

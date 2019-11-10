@@ -1,5 +1,4 @@
 library(testthat)
-context("Validate data frame for writing to REDCap")
 
 ds_bad <- data.frame(
   record_id = 1:4,

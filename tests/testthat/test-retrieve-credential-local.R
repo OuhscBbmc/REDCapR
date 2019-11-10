@@ -1,5 +1,4 @@
 library(testthat)
-context("Retrieve Credentials Local")
 
 path               <- system.file("misc/example.credentials", package="REDCapR")
 pid_read           <- 153L #This project is for testing only reading from the server.

@@ -1,5 +1,4 @@
 library(testthat)
-context("Write Oneshot")
 
 test_that("Smoke Test", {
   testthat::skip_on_cran()

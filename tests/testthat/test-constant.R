@@ -1,5 +1,4 @@
 library(testthat)
-context("Constant")
 
 test_that("scalar w/ simplify", {
   expect_equal(object= constant("form_incomplete"    ), expected=0L)

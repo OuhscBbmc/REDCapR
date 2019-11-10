@@ -1,5 +1,4 @@
 library(testthat)
-context("Sanitize Token")
 
 test_that("sanitize token w/o line endings", {
   secret_token <- "12345678901234567890123456ABCDEF"
