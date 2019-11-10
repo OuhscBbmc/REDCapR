@@ -1,5 +1,4 @@
 library(testthat)
-"Metadata Read")
 
 credential <- REDCapR::retrieve_credential_local(
   path_credential = system.file("misc/example.credentials", package="REDCapR"),
