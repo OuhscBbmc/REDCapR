@@ -1,5 +1,4 @@
 library(testthat)
-context("collapse_vector")
 
 test_that("both NULL", {
   elements  <- NULL

@@ -1,5 +1,4 @@
 library(testthat)
-context("Project Object")
 
 test_that("Smoke Test", {
   testthat::skip_on_cran()

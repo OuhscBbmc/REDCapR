@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9002</span>
       </span>
     </div>
 
@@ -106,9 +106,6 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
-    </li>
-    <li>
       <a href="../articles/BasicREDCapROperations.html">Basic REDCapR Operations</a>
     </li>
     <li>
@@ -116,6 +113,9 @@
     </li>
     <li>
       <a href="../articles/TroubleshootingApiCalls.html">Troubleshooting REDCap API Calls</a>
+    </li>
+    <li>
+      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
     </li>
   </ul>
 </li>
@@ -194,7 +194,7 @@ It guarantees the value can always be used in <code><a href='https://rdrr.io/r/u
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>uri</span>      <span class='kw'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
 <span class='no'>token</span>    <span class='kw'>&lt;-</span> <span class='st'>"9A81268476645C4E5F03428B8AC3AA7B"</span>
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/redcap_version.html'>redcap_version</a></span>(<span class='kw'>redcap_uri</span><span class='kw'>=</span><span class='no'>uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>)</div><div class='output co'>#&gt; <span class='message'>The REDCap version was successfully determined in 0.1 seconds.  The http status code was 200.  It is 9.0.0.</span></div><div class='output co'>#&gt; [1] '9.0.0'</div></pre>
+<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/redcap_version.html'>redcap_version</a></span>(<span class='kw'>redcap_uri</span><span class='kw'>=</span><span class='no'>uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>)</div><div class='output co'>#&gt; <span class='message'>The REDCap version was successfully determined in 0.2 seconds.  The http status code was 200.  It is 9.0.0.</span></div><div class='output co'>#&gt; [1] ‘9.0.0’</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

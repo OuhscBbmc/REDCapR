@@ -122,22 +122,34 @@ redcap_users_export <- function( redcap_uri, token, verbose=TRUE, config_options
     )
 
     if( exists("ds_user") & inherits(ds_user, "data.frame") ) {
-      outcome_message <- paste0(
-        "The REDCap users were successfully exported in ",
-        round(kernel$elapsed_seconds, 1), " seconds.  The http status code was ",
-        kernel$status_code, "."
+      outcome_message <- sprintf(
+        "The REDCap users were successfully exported in %0.1f seconds.  The http status code was %i.",
+        kernel$elapsed_seconds,
+        kernel$status_code
+      )
+      outcome_message <- sprintf(
+        "The REDCap users were successfully exported in %0.1f seconds.  The http status code was %i.",
+        kernel$elapsed_seconds,
+        kernel$status_code
       )
       kernel$raw_text   <- "" # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
     } else {
       kernel$success   <- FALSE #Override the 'success' determination from the http status code.
       ds_user          <- data.frame() #Return an empty data.frame
       ds_user_form     <- data.frame() #Return an empty data.frame
-      outcome_message  <- paste0("The REDCap user export failed.  The http status code was ", kernel$status_code, ".  The 'raw_text' returned was '", kernel$raw_text, "'.")
+      outcome_message  <- sprintf(
+        "The REDCap user export failed.  The http status code was %i.  The 'raw_text' returned was '%s'.",
+        kernel$status_code,
+        kernel$raw_text
+      )
     }
   } else {
     ds_user          <- data.frame() #Return an empty data.frame
     ds_user_form     <- data.frame() #Return an empty data.frame
-    outcome_message  <- paste0("The REDCap user export failed.  The error message was:\n",  kernel$raw_text)
+    outcome_message  <- sprintf(
+      "The REDCap user export failed.  The error message was:\n%s",
+      kernel$raw_text
+    )
   }
 
   if( verbose )

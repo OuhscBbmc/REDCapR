@@ -1,5 +1,4 @@
 library(testthat)
-context("Read Superwide")
 
 credential <- REDCapR::retrieve_credential_local(
   path_credential = system.file("misc/example.credentials", package="REDCapR"),

@@ -1,16 +1,15 @@
-#' @title Download a file from a REDCap project record
+#' @title Download REDCap Instruments
 #'
-#' @description This function uses REDCap's API to download a file.
+#' @description Download instruments as a pdf, with or without responses.
 #'
-#' @param file_name The name of the file where the downloaded file is saved.
-#'   If empty the original name of the file will be used and saved in the default directory.  Optional.
-#' @param directory The directory where the file is saved. By default current directory. Optional
-#' @param overwrite Boolean value indicating if existing files should be overwritten. Optional
+#' @param file_name The name of the file where the downloaded pdf is saved. Optional.
+#' @param directory The directory where the file is saved. By default current directory. Optional.
+#' @param overwrite Boolean value indicating if existing files should be overwritten. Optional.
 #' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
 #' @param token The user-specific string that serves as the password for a project.  Required.
-#' @param record The record ID where the file is to be imported. Required
-#' @param field The name of the field where the file is saved in REDCap. Required
-#' @param event The name of the event where the file is saved in REDCap. Optional
+#' @param record The record ID of the instrument(s).  If empty, the responses are blank.  Optional.
+#' @param instrument The instrument(s) to download.  If empty, all instruments are returned.  Optional.
+#' @param event The unique event name. For a longitudinal project, if record is not blank and event is blank, it will return data for all events from that record. If record is not blank and event is not blank, it will return data only for the specified event from that record. Optional.
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  Optional.
 #' @param config_options  A list of options to pass to [httr::POST()] method in the 'httr' package.  See the details below. Optional.
 #'
@@ -18,8 +17,7 @@
 #' * `success`: A boolean value indicating if the operation was apparently successful.
 #' * `status_code`: The [http status code](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes) of the operation.
 #' * `outcome_message`: A human readable string indicating the operation's outcome.
-#' * `records_affected_count`: The number of records inserted or updated.
-#' * `affected_ids`: The subject IDs of the inserted or updated records.
+#' * `record_id`: The record_id of the instrument.
 #' * `elapsed_seconds`: The duration of the function.
 #' * `raw_text`: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
 #' * `file_name`: The name of the file persisted to disk. This is useful if the name stored in REDCap is used (which is the default).
@@ -27,7 +25,7 @@
 #' @details
 #' Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See [validate_for_write()] for a helper function that checks for some common important conflicts.
 #'
-#' @author Will Beasley, John J. Aponte
+#' @author Will Beasley
 #'
 #' @references The official documentation can be found on the 'API Help Page' and 'API Examples' pages
 #' on the REDCap wiki (*i.e.*, https://community.projectredcap.org/articles/456/api-documentation.html and
@@ -38,48 +36,44 @@
 #' \dontrun{
 #' uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token   <- "D70F9ACD1EDD6F151C6EA78683944E98" #pid=213
-#' record  <- 1
-#' field   <- "mugshot"
 #' # event <- "" # only for longitudinal projects
 #'
-#' result_1 <- REDCapR::redcap_download_file_oneshot(
-#'   record        = record,
-#'   field         = field,
-#'   redcap_uri    = uri,
-#'   token         = token
-#' )
-#' base::unlink("mugshot-1.jpg")
-#'
-#' (full_name <- base::tempfile(pattern="mugshot", fileext=".jpg"))
-#' result_2   <- REDCapR::redcap_download_file_oneshot(
+#' (full_name <- base::temp(pattern="instruments-all-records-all", fileext=".pdf"))
+#' result_1   <- REDCapR::redcap_download_instrument(
 #'   file_name     = full_name,
-#'   record        = record,
-#'   field         = field,
 #'   redcap_uri    = uri,
 #'   token         = token
 #' )
 #' base::unlink(full_name)
 #'
-#' (relative_name <- "ssss.jpg")
-#' result_3 <- REDCapR::redcap_download_file_oneshot(
-#'   file_name    = relative_name,
-#'   record       = record,
-#'   field        = field,
-#'   redcap_uri   = uri,
-#'   token        = token
+#' (full_name <- base::tempfile(pattern="instruments-all-record-1-", fileext=".pdf"))
+#' result_2   <- REDCapR::redcap_download_instrument(
+#'   record        = 5,
+#'   file_name     = full_name,
+#'   redcap_uri    = uri,
+#'   token         = token
 #' )
-#' base::unlink(relative_name)
+#' base::unlink(full_name)
+#' (full_name <- base::tempfile(pattern="instrument-1-record-1-", fileext=".pdf"))
+#' result_3   <- REDCapR::redcap_download_instrument(
+#'   record        = 5,
+#'   instrument    = "health",
+#'   file_name     = full_name,
+#'   redcap_uri    = uri,
+#'   token         = token
+#' )
+#' base::unlink(full_name)
 #' }
 
 #' @export
-redcap_download_file_oneshot <- function(
+redcap_download_instrument <- function(
   file_name       = NULL,
   directory       = NULL,
   overwrite       = FALSE,
   redcap_uri,
   token,
-  record,
-  field,
+  record          = character(0),
+  instrument      = "",
   event           = "",
   verbose         = TRUE,
   config_options  = NULL
@@ -93,15 +87,14 @@ redcap_download_file_oneshot <- function(
 
   post_body <- list(
     token         = token,
-    content       = 'file',
-    action        = 'export',
+    content       = 'pdf',
     record        = record,
-    field         = field,
-    # event         = event,
+    instrument    = instrument,
+    event         = event,
     returnFormat  = 'csv'
   )
 
-  if( 0L < nchar(event)  ) post_body$event <- event
+  if( 0L < nchar(event) ) post_body$event   <- event
 
   # This is the first of two important lines in the function.
   #   It retrieves the information from the server and stores it in RAM.
@@ -111,9 +104,10 @@ redcap_download_file_oneshot <- function(
     result_header <- kernel$result_headers$`content-type`
 
     if( missing(file_name) | is.null(file_name) ) {
+      file_name <- "instruments.pdf"
       #process the content-type to get the file name
-      regex_matches <- regmatches(kernel$result_headers, regexpr("name=.*", kernel$result_headers))
-      file_name     <- gsub(pattern='(name=.)|(")', replacement="", x=regex_matches)
+      # regex_matches <- regmatches(kernel$result_headers, regexpr("name=.*", kernel$result_headers))
+      # file_name     <- gsub(pattern='(name=.)|(")', replacement="", x=regex_matches)
     }
 
     file_path <- if( missing(directory) & is.null(directory) ) {
@@ -143,7 +137,6 @@ redcap_download_file_oneshot <- function(
     record_id               <- as.character(record)
     kernel$raw_text         <- ""  # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
   } else { #If the operation was unsuccessful, then...
-    # kernel$status_code      <- NA_integer_
     outcome_message         <- "file NOT downloaded."
     records_affected_count  <- 0L
     record_id               <- character(0) # Return an empty vector.
@@ -158,8 +151,7 @@ redcap_download_file_oneshot <- function(
     success                  = kernel$success,
     status_code              = kernel$status_code,
     outcome_message          = outcome_message,
-    records_affected_count   = records_affected_count,
-    affected_ids             = record_id,
+    record_id                = record_id,
     elapsed_seconds          = kernel$elapsed_seconds,
     raw_text                 = kernel$raw_text,
     file_name                = file_name,

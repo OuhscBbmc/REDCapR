@@ -52,7 +52,7 @@ kernel_api <- function( redcap_uri, post_body, config_options ) {
     any(grepl(regex_cannot_connect, raw_text)) |
     any(grepl(regex_empty         , raw_text))
   ) {
-    success     <- FALSE # Overwrite the success flag if the raw_text is bad.
+    success     <- FALSE # Overwrite the success flag if the raw_text is bad.  # nocov
   }
 
   return( list(

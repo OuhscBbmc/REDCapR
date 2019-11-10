@@ -1,5 +1,4 @@
 library(testthat)
-context("Read Errors")
 
 test_that("One Shot: Bad Uri -Not HTTPS", {
   expected_message_411 <- "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\"http://www.w3.org/TR/html4/strict.dtd\">\n<HTML><HEAD><TITLE>Length Required</TITLE>\n<META HTTP-EQUIV=\"Content-Type\" Content=\"text/html; charset=us-ascii\"></HEAD>\n<BODY><h2>Length Required</h2>\n<hr><p>HTTP Error 411. The request must be chunked or have a content length.</p>\n</BODY></HTML>\n"

@@ -1,5 +1,4 @@
 library(testthat)
-context("FileOneshot")
 
 # Since the project data is wiped clean at the start of each function,
 # the upload & download calls are tested by one function.

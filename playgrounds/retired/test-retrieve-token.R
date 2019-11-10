@@ -1,5 +1,4 @@
 library(testthat)
-context("Retrieve Token")
 
 test_that("Missing DSN & Channel", {
   testthat::skip_if_not_installed(pkg="RODBC"); testthat::skip_if_not_installed(pkg="RODBCext")

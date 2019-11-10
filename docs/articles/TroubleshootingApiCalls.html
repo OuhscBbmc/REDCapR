@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9002</span>
       </span>
     </div>
 
@@ -63,9 +63,6 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
-    </li>
-    <li>
       <a href="../articles/BasicREDCapROperations.html">Basic REDCapR Operations</a>
     </li>
     <li>
@@ -73,6 +70,9 @@
     </li>
     <li>
       <a href="../articles/TroubleshootingApiCalls.html">Troubleshooting REDCap API Calls</a>
+    </li>
+    <li>
+      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
     </li>
   </ul>
 </li>
@@ -108,7 +108,7 @@
     <div class="page-header toc-ignore">
       <h1>Troubleshooting REDCap API Calls</h1>
             
-            <h4 class="date">2019-10-13</h4>
+            <h4 class="date">2019-11-08</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/TroubleshootingApiCalls.Rmd"><code>vignettes/TroubleshootingApiCalls.Rmd</code></a></small>
       <div class="hidden name"><code>TroubleshootingApiCalls.Rmd</code></div>
@@ -132,17 +132,17 @@
 <li>
 <p><strong>Has the user verified their account by responding to the automated email sent to them?</strong> This can be verified in the <code>Browse Users</code> section of your server’s <code>Control Center</code>. For each email address they’ve entered, there should be a green ‘Verified’ label and icon.</p>
 <p><img src="images/EmailVerified.png" width="252" style="fig.width=400px"></p>
-<p><!--<img src="C:/Users/wbeasley/Documents/bbmc-internal/REDCapR/vignettes/images/EmailVerified.png" alt="EmailVerified" style="width: 400px;"/>--></p>
+<p><!--<img src="/home/wibeasley/Documents/OuhscBbmc/redcap/REDCapR/vignettes/images/EmailVerified.png" alt="EmailVerified" style="width: 400px;"/>--></p>
 </li>
 <li>
 <p><strong>Has the user been granted the desired import and/or export permissions?</strong> This can be verified in the <code>User Rights</code> section or in the <code>API</code> section (and it’s <code>Manage All Project Tokens</code> tab) within the project. Alternatively, it can be verified in the <code>API Tokens</code> section of the server’s <code>Control Center</code>.</p>
 <p><img src="images/ApiPrivilegeDashboard.png" width="316" style="fig.width=600px"></p>
-<p><!--<img src="C:/Users/wbeasley/Documents/bbmc-internal/REDCapR/vignettes/images/ApiPrivilegeDashboard.png" alt="ApiPrivilegeDashboard" style="width: 600px;"/>--></p>
+<p><!--<img src="/home/wibeasley/Documents/OuhscBbmc/redcap/REDCapR/vignettes/images/ApiPrivilegeDashboard.png" alt="ApiPrivilegeDashboard" style="width: 600px;"/>--></p>
 </li>
 <li>
 <p><strong>Are they using the correct token?</strong> This can be verified in the <code>API</code> section (and it’s <code>Manage All Project Tokens</code> tab) within the project. Click the magnifying glass icon in the user’s row. Alternatively, it can be verified in the <code>API Tokens</code> section of the server’s <code>Control Center</code>.</p>
 <p><img src="images/MagnifyingGlass.png" width="291" style="fig.width=550px"></p>
-<p><!--<img src="C:/Users/wbeasley/Documents/bbmc-internal/REDCapR/vignettes/images/MagnifyingGlass.png" alt="MagnifyingGlass" style="width: 550px;"/>--></p>
+<p><!--<img src="/home/wibeasley/Documents/OuhscBbmc/redcap/REDCapR/vignettes/images/MagnifyingGlass.png" alt="MagnifyingGlass" style="width: 550px;"/>--></p>
 </li>
 </ol>
 </div>
@@ -151,7 +151,7 @@
 <a href="#language-agnostic-api" class="anchor"></a>Language Agnostic API</h2>
 <p>This section group examines potential problems that occur after it leaves a working server, but before it is handled by their programming language (<em>e.g.</em>, Python and R). <a href="http://www.getpostman.com/">Postman</a> is a Chrome plugin recommended by <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ">several</a> <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ">people</a> that makes troubleshooting much more efficient.</p>
 <p><img src="images/PostmanScreenshot.png" width="574" style="fig.width=800px"></p>
-<!--<img src="C:/Users/wbeasley/Documents/bbmc-internal/REDCapR/vignettes/images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>-->
+<!--<img src="/home/wibeasley/Documents/OuhscBbmc/redcap/REDCapR/vignettes/images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>-->
 <ol style="list-style-type: decimal">
 <li>
 <p><strong>Is Postman installed and operating correctly?</strong> If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a>. The url is <code>https://bbmc.ouhsc.edu/redcap/api/</code>. There are three key-value pairs: (1) the ‘token’ is <code>9A81268476645C4E5F03428B8AC3AA7B</code>, (2) the ‘content’ is <code>record</code>, and (3) the ‘format’ should be <code>CSV</code>. When checking your own server, the token value should change, but the content and format should not. It should return five records in a CSV format. The ‘status’ should be <code>200 OK</code>. The result should look roughly like this. Notice the line breaks were included in the text values themselves.</p>
@@ -188,84 +188,84 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <ol style="list-style-type: decimal">
 <li>
 <p><strong>Is httr installed on the user’s local machine?</strong> If so, running <code><a href="https://rdrr.io/r/base/library.html">library(httr)</a></code> should not produce any error messages if you’re starting with a fresh session of R:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(httr)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(httr)</span></code></pre></div>
 </li>
 <li><p><strong>Does the user have the most recent version of httr?</strong> There are several ways to do this, but the easiest is probably to run <code><a href="https://rdrr.io/r/utils/update.packages.html">update.packages(ask=FALSE, repos="http://cran.rstudio.com")</a></code>. The optional argument <code>ask</code> prevents the user from needing to respond ‘Y’ to each outdated package.</p></li>
 <li>
 <p><strong>Can the user query a <em>test</em> project using httr?</strong> Both the <a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> packages employ something similar to the following function in <a href="https://cran.r-project.org/package=httr">httr</a>. If you’re curious, here is the relevant source code for <a href="https://github.com/nutterb/redcapAPI/blob/master/R/exportRecords.R">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-read-oneshot.R">REDCapR</a>.</p>
 <p>If this check fails, consider attempting again with the uri and token used above in the Postman example.</p>
 <p>This check avoids checking the SSL certificate in order to simplify the troubleshooting. SSL verification is supported by default in the <a href="http://pycap.readthedocs.org/en/latest/">PyCap</a>, <a href="https://github.com/nutterb/redcapAPI">redcapAPI</a>, and <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> packages.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">redcap_uri &lt;-<span class="st"> "https://bbmc.ouhsc.edu/redcap/api/"</span></a>
-<a class="sourceLine" id="cb4-2" title="2">token      &lt;-<span class="st"> "9A81268476645C4E5F03428B8AC3AA7B"</span></a>
-<a class="sourceLine" id="cb4-3" title="3"></a>
-<a class="sourceLine" id="cb4-4" title="4">raw_text &lt;-<span class="st"> </span>RCurl<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RCurl/man/postForm.html">postForm</a></span>(</a>
-<a class="sourceLine" id="cb4-5" title="5">  <span class="dt">uri                         =</span> redcap_uri</a>
-<a class="sourceLine" id="cb4-6" title="6">  , <span class="dt">token                     =</span> token</a>
-<a class="sourceLine" id="cb4-7" title="7">  , <span class="dt">content                   =</span> <span class="st">'record'</span></a>
-<a class="sourceLine" id="cb4-8" title="8">  , <span class="dt">format                    =</span> <span class="st">'csv'</span></a>
-<a class="sourceLine" id="cb4-9" title="9">  , <span class="dt">type                      =</span> <span class="st">'flat'</span></a>
-<a class="sourceLine" id="cb4-10" title="10">  , <span class="dt">rawOrLabel                =</span> <span class="st">'raw'</span></a>
-<a class="sourceLine" id="cb4-11" title="11">  , <span class="dt">exportDataAccessGroups    =</span> <span class="st">'true'</span></a>
-<a class="sourceLine" id="cb4-12" title="12">  , <span class="dt">.opts                     =</span> RCurl<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RCurl/man/curlOptions.html">curlOptions</a></span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb4-13" title="13">)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>redcap_uri &lt;-<span class="st"> "https://bbmc.ouhsc.edu/redcap/api/"</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>token      &lt;-<span class="st"> "9A81268476645C4E5F03428B8AC3AA7B"</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a>raw_text &lt;-<span class="st"> </span>RCurl<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RCurl/man/postForm.html">postForm</a></span>(</span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="dt">uri                         =</span> redcap_uri</span>
+<span id="cb4-6"><a href="#cb4-6"></a>  , <span class="dt">token                     =</span> token</span>
+<span id="cb4-7"><a href="#cb4-7"></a>  , <span class="dt">content                   =</span> <span class="st">'record'</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>  , <span class="dt">format                    =</span> <span class="st">'csv'</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>  , <span class="dt">type                      =</span> <span class="st">'flat'</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>  , <span class="dt">rawOrLabel                =</span> <span class="st">'raw'</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>  , <span class="dt">exportDataAccessGroups    =</span> <span class="st">'true'</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>  , <span class="dt">.opts                     =</span> RCurl<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RCurl/man/curlOptions.html">curlOptions</a></span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)</span>
+<span id="cb4-13"><a href="#cb4-13"></a>)</span></code></pre></div>
 <p>Alternatively, you can try using the <a href="https://cran.r-project.org/package=httr"><code>httr</code></a> package, which uses <code>RCurl</code> underneath. <a href="https://github.com/OuhscBbmc/REDCapR"><code>REDCapR</code></a> and a recent fork of <a href="https://github.com/nutterb/redcap"><code>redcap</code></a> actually uses <code>httr</code> directly, instead of <code>RCurl</code>. As of 2014-07-06, this works with the Windows 8 version for <a href="http://curl.haxx.se/libcurl/">libcurl</a> (which is underneath `RCurl), but not with some Linux versions; in this case pass the location of the SSL cert file.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">post_body &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(</a>
-<a class="sourceLine" id="cb5-2" title="2">  <span class="dt">token                       =</span> token,</a>
-<a class="sourceLine" id="cb5-3" title="3">  <span class="dt">content                     =</span> <span class="st">'record'</span>,</a>
-<a class="sourceLine" id="cb5-4" title="4">  <span class="dt">format                      =</span> <span class="st">'csv'</span>,</a>
-<a class="sourceLine" id="cb5-5" title="5">  <span class="dt">type                        =</span> <span class="st">'flat'</span>,</a>
-<a class="sourceLine" id="cb5-6" title="6">  <span class="dt">rawOrLabel                  =</span> <span class="st">'raw'</span>,</a>
-<a class="sourceLine" id="cb5-7" title="7">  <span class="dt">exportDataAccessGroups      =</span> <span class="st">'true'</span></a>
-<a class="sourceLine" id="cb5-8" title="8">)</a>
-<a class="sourceLine" id="cb5-9" title="9"></a>
-<a class="sourceLine" id="cb5-10" title="10">raw_text &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="https://httr.r-lib.org/reference/POST.html">POST</a></span>(</a>
-<a class="sourceLine" id="cb5-11" title="11">  <span class="dt">url                         =</span> redcap_uri,</a>
-<a class="sourceLine" id="cb5-12" title="12">  <span class="dt">body                        =</span> post_body,</a>
-<a class="sourceLine" id="cb5-13" title="13">  <span class="dt">config                      =</span> httr<span class="op">::</span><span class="kw"><a href="https://httr.r-lib.org/reference/config.html">config</a></span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>),</a>
-<a class="sourceLine" id="cb5-14" title="14">  httr<span class="op">::</span><span class="kw"><a href="https://httr.r-lib.org/reference/verbose.html">verbose</a></span>() <span class="co">#Remove this line to suppress the frequent console updates.</span></a>
-<a class="sourceLine" id="cb5-15" title="15">)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>post_body &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(</span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="dt">token                       =</span> token,</span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="dt">content                     =</span> <span class="st">'record'</span>,</span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="dt">format                      =</span> <span class="st">'csv'</span>,</span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="dt">type                        =</span> <span class="st">'flat'</span>,</span>
+<span id="cb5-6"><a href="#cb5-6"></a>  <span class="dt">rawOrLabel                  =</span> <span class="st">'raw'</span>,</span>
+<span id="cb5-7"><a href="#cb5-7"></a>  <span class="dt">exportDataAccessGroups      =</span> <span class="st">'true'</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>)</span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a>raw_text &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="https://httr.r-lib.org/reference/POST.html">POST</a></span>(</span>
+<span id="cb5-11"><a href="#cb5-11"></a>  <span class="dt">url                         =</span> redcap_uri,</span>
+<span id="cb5-12"><a href="#cb5-12"></a>  <span class="dt">body                        =</span> post_body,</span>
+<span id="cb5-13"><a href="#cb5-13"></a>  <span class="dt">config                      =</span> httr<span class="op">::</span><span class="kw"><a href="https://httr.r-lib.org/reference/config.html">config</a></span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>),</span>
+<span id="cb5-14"><a href="#cb5-14"></a>  httr<span class="op">::</span><span class="kw"><a href="https://httr.r-lib.org/reference/verbose.html">verbose</a></span>() <span class="co">#Remove this line to suppress the frequent console updates.</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>)</span></code></pre></div>
 </li>
 <li>
 <p><strong>Can the user query a <em>subset</em> of <em>their</em> project using RCurl?</strong> This step is like the previous one, but with two differences. First, it’s using their REDCap project (instead of the test project). Second, it pulls fewer records, and a smaller collection of fields. Subsetting can help troubleshoot by avoiding (and thus identifying) cells with problematic values.</p>
 <p>Notice this call to <code><a href="https://rdrr.io/pkg/RCurl/man/postForm.html">RCurl::postForm()</a></code> now passes values to the <code>records</code> and <code>fields</code> parameters. Also notice the value is a <em>single</em> long string, rather a <em>vector</em> of shorter strings (which is more natural to most R users).</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">redcap_uri         &lt;-<span class="st"> "https://the.urlofyourinsitution.edu/api/"</span></a>
-<a class="sourceLine" id="cb6-2" title="2">token              &lt;-<span class="st"> "your-secret-token"</span></a>
-<a class="sourceLine" id="cb6-3" title="3">records_collapsed  &lt;-<span class="st"> "1,2,3"</span>                             <span class="co"># Assumes dataset contains ID values of 1-3.</span></a>
-<a class="sourceLine" id="cb6-4" title="4">fields_collapsed   &lt;-<span class="st"> "record_id,name_first,name_last"</span>    <span class="co"># Assumes dataset contains these variables.</span></a>
-<a class="sourceLine" id="cb6-5" title="5"></a>
-<a class="sourceLine" id="cb6-6" title="6">raw_text &lt;-<span class="st"> </span>RCurl<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RCurl/man/postForm.html">postForm</a></span>(</a>
-<a class="sourceLine" id="cb6-7" title="7">  <span class="dt">uri                          =</span> redcap_uri</a>
-<a class="sourceLine" id="cb6-8" title="8">  , <span class="dt">token                      =</span> token</a>
-<a class="sourceLine" id="cb6-9" title="9">  , <span class="dt">content                    =</span> <span class="st">'record'</span></a>
-<a class="sourceLine" id="cb6-10" title="10">  , <span class="dt">format                     =</span> <span class="st">'csv'</span></a>
-<a class="sourceLine" id="cb6-11" title="11">  , <span class="dt">type                       =</span> <span class="st">'flat'</span></a>
-<a class="sourceLine" id="cb6-12" title="12">  , <span class="dt">rawOrLabel                 =</span> <span class="st">'raw'</span></a>
-<a class="sourceLine" id="cb6-13" title="13">  , <span class="dt">exportDataAccessGroups     =</span> <span class="st">'true'</span></a>
-<a class="sourceLine" id="cb6-14" title="14">  , <span class="dt">records                    =</span> records_collapsed</a>
-<a class="sourceLine" id="cb6-15" title="15">  , <span class="dt">fields                     =</span> fields_collapsed</a>
-<a class="sourceLine" id="cb6-16" title="16">  , <span class="dt">.opts                      =</span> RCurl<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RCurl/man/curlOptions.html">curlOptions</a></span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb6-17" title="17">)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>redcap_uri         &lt;-<span class="st"> "https://the.urlofyourinsitution.edu/api/"</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>token              &lt;-<span class="st"> "your-secret-token"</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>records_collapsed  &lt;-<span class="st"> "1,2,3"</span>                             <span class="co"># Assumes dataset contains ID values of 1-3.</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>fields_collapsed   &lt;-<span class="st"> "record_id,name_first,name_last"</span>    <span class="co"># Assumes dataset contains these variables.</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a>raw_text &lt;-<span class="st"> </span>RCurl<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RCurl/man/postForm.html">postForm</a></span>(</span>
+<span id="cb6-7"><a href="#cb6-7"></a>  <span class="dt">uri                          =</span> redcap_uri</span>
+<span id="cb6-8"><a href="#cb6-8"></a>  , <span class="dt">token                      =</span> token</span>
+<span id="cb6-9"><a href="#cb6-9"></a>  , <span class="dt">content                    =</span> <span class="st">'record'</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>  , <span class="dt">format                     =</span> <span class="st">'csv'</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>  , <span class="dt">type                       =</span> <span class="st">'flat'</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a>  , <span class="dt">rawOrLabel                 =</span> <span class="st">'raw'</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a>  , <span class="dt">exportDataAccessGroups     =</span> <span class="st">'true'</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>  , <span class="dt">records                    =</span> records_collapsed</span>
+<span id="cb6-15"><a href="#cb6-15"></a>  , <span class="dt">fields                     =</span> fields_collapsed</span>
+<span id="cb6-16"><a href="#cb6-16"></a>  , <span class="dt">.opts                      =</span> RCurl<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RCurl/man/curlOptions.html">curlOptions</a></span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)</span>
+<span id="cb6-17"><a href="#cb6-17"></a>)</span></code></pre></div>
 </li>
 <li>
 <p><strong>Can the user query an <em>entire</em> project using RCurl?</strong> There are two advantages of trying a subset of the data. First, small datasets avoid the time-out errors that plague large datasets. Second, it may avoid problematic values being passed through the pipeline. If the current check fails but the previous check succeeds, then experiment with different expanses of records and fields. This should help determine which values are causing the problems, or if there’s simply too much data being pulled in one pass.</p>
 <p>If the desired dataset is too large, consider if you can prune unnecessary records or fields. If not, one solution is to pull smaller, multiple batches using the API, then reassemble them. The <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code><a href="../reference/redcap_read.html">redcap_read()</a></code> function</a> in <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> does this automatically, and allows the user to specify a <code>batch_size</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">redcap_uri                  &lt;-<span class="st"> "https://the.urlofyourinsitution.edu/api/"</span></a>
-<a class="sourceLine" id="cb7-2" title="2">token                       &lt;-<span class="st"> "your-secret-token"</span></a>
-<a class="sourceLine" id="cb7-3" title="3">records_collapsed           &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb7-4" title="4">fields_collapsed            &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb7-5" title="5"></a>
-<a class="sourceLine" id="cb7-6" title="6">raw_text &lt;-<span class="st"> </span>RCurl<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RCurl/man/postForm.html">postForm</a></span>(</a>
-<a class="sourceLine" id="cb7-7" title="7">  <span class="dt">uri                        =</span> redcap_uri</a>
-<a class="sourceLine" id="cb7-8" title="8">  , <span class="dt">token                    =</span> token</a>
-<a class="sourceLine" id="cb7-9" title="9">  , <span class="dt">content                  =</span> <span class="st">'record'</span></a>
-<a class="sourceLine" id="cb7-10" title="10">  , <span class="dt">format                   =</span> <span class="st">'csv'</span></a>
-<a class="sourceLine" id="cb7-11" title="11">  , <span class="dt">type                     =</span> <span class="st">'flat'</span></a>
-<a class="sourceLine" id="cb7-12" title="12">  , <span class="dt">rawOrLabel               =</span> <span class="st">'raw'</span></a>
-<a class="sourceLine" id="cb7-13" title="13">  , <span class="dt">exportDataAccessGroups   =</span> <span class="st">'true'</span></a>
-<a class="sourceLine" id="cb7-14" title="14">  , <span class="dt">records                  =</span> records_collapsed</a>
-<a class="sourceLine" id="cb7-15" title="15">  , <span class="dt">fields                   =</span> fields_collapsed</a>
-<a class="sourceLine" id="cb7-16" title="16">  , <span class="dt">.opts                    =</span> RCurl<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RCurl/man/curlOptions.html">curlOptions</a></span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb7-17" title="17">)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>redcap_uri                  &lt;-<span class="st"> "https://the.urlofyourinsitution.edu/api/"</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>token                       &lt;-<span class="st"> "your-secret-token"</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>records_collapsed           &lt;-<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>fields_collapsed            &lt;-<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a>raw_text &lt;-<span class="st"> </span>RCurl<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RCurl/man/postForm.html">postForm</a></span>(</span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="dt">uri                        =</span> redcap_uri</span>
+<span id="cb7-8"><a href="#cb7-8"></a>  , <span class="dt">token                    =</span> token</span>
+<span id="cb7-9"><a href="#cb7-9"></a>  , <span class="dt">content                  =</span> <span class="st">'record'</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>  , <span class="dt">format                   =</span> <span class="st">'csv'</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>  , <span class="dt">type                     =</span> <span class="st">'flat'</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a>  , <span class="dt">rawOrLabel               =</span> <span class="st">'raw'</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>  , <span class="dt">exportDataAccessGroups   =</span> <span class="st">'true'</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>  , <span class="dt">records                  =</span> records_collapsed</span>
+<span id="cb7-15"><a href="#cb7-15"></a>  , <span class="dt">fields                   =</span> fields_collapsed</span>
+<span id="cb7-16"><a href="#cb7-16"></a>  , <span class="dt">.opts                    =</span> RCurl<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RCurl/man/curlOptions.html">curlOptions</a></span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)</span>
+<span id="cb7-17"><a href="#cb7-17"></a>)</span></code></pre></div>
 </li>
 </ol>
 </div>
@@ -277,20 +277,20 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <ol style="list-style-type: decimal">
 <li>
 <p><strong>Is REDCapR installed on the user’s machine?</strong> Currently the easiest way to install REDCapR is with the <a href="https://github.com/hadley/devtools">devtools</a>. The follow code installs devtools, then installs REDCapR.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>, <span class="dt">repos=</span><span class="st">"http://cran.rstudio.com"</span>)</a>
-<a class="sourceLine" id="cb8-2" title="2">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="dt">repo=</span><span class="st">"OuhscBbmc/REDCapR"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>, <span class="dt">repos=</span><span class="st">"http://cran.rstudio.com"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a>remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="dt">repo=</span><span class="st">"OuhscBbmc/REDCapR"</span>)</span></code></pre></div>
 </li>
 <li>
 <p><strong>Does REDCapR load successfully on the user’s machine?</strong> If so, running <code><a href="https://rdrr.io/r/base/library.html">library(REDCapR)</a></code> should produce the following output if you’re starting with a fresh session of R:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(REDCapR)</a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="co">## Loading required package: REDCapR</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(REDCapR)</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="co">## Loading required package: REDCapR</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Can the user export from an example project?</strong> This is the same fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a> as in the previous section.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(REDCapR) <span class="co">#Load the package into the current R session.</span></a>
-<a class="sourceLine" id="cb10-2" title="2">uri   &lt;-<span class="st"> "https://bbmc.ouhsc.edu/redcap/api/"</span></a>
-<a class="sourceLine" id="cb10-3" title="3">token &lt;-<span class="st"> "9A81268476645C4E5F03428B8AC3AA7B"</span></a>
-<a class="sourceLine" id="cb10-4" title="4"><span class="kw"><a href="../reference/redcap_read.html">redcap_read</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)<span class="op">$</span>data</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(REDCapR) <span class="co">#Load the package into the current R session.</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>uri   &lt;-<span class="st"> "https://bbmc.ouhsc.edu/redcap/api/"</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>token &lt;-<span class="st"> "9A81268476645C4E5F03428B8AC3AA7B"</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="kw"><a href="../reference/redcap_read.html">redcap_read</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)<span class="op">$</span>data</span></code></pre></div>
 <p>The previous code should produce similar output. Notice there are five rows and the columns will wrap around if your console window is too narrow.</p>
 <pre><code>5 records and 1 columns were read from REDCap in 0.41 seconds.
 Starting to read 5 records  at 2014-06-27 17:19:49
@@ -327,23 +327,23 @@ Reading batch 1 of 1, with ids 1 through 5.
 </li>
 <li>
 <p><strong>Can the user export from their own project?</strong> The code is similar to the previous check, but the <code>uri</code> and <code>token</code> values will need to be modified.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(REDCapR) <span class="co">#Load the package into the current R session, if you haven't already.</span></a>
-<a class="sourceLine" id="cb12-2" title="2">redcap_uri       &lt;-<span class="st"> "https://the.urlofyourinsitution.edu/api/"</span></a>
-<a class="sourceLine" id="cb12-3" title="3">token            &lt;-<span class="st"> "your-secret-token"</span></a>
-<a class="sourceLine" id="cb12-4" title="4"><span class="kw"><a href="../reference/redcap_read.html">redcap_read</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)<span class="op">$</span>data</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(REDCapR) <span class="co">#Load the package into the current R session, if you haven't already.</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>redcap_uri       &lt;-<span class="st"> "https://the.urlofyourinsitution.edu/api/"</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>token            &lt;-<span class="st"> "your-secret-token"</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="kw"><a href="../reference/redcap_read.html">redcap_read</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)<span class="op">$</span>data</span></code></pre></div>
 <p>Alternatively, a <code>redcap_project</code> object can be declared initially, which makes subsequent calls cleaner when the token and url are required only the when the object is declared.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(REDCapR) <span class="co">#Load the package into the current R session, if you haven't already.</span></a>
-<a class="sourceLine" id="cb13-2" title="2">uri               &lt;-<span class="st"> "https://bbmc.ouhsc.edu/redcap/api/"</span></a>
-<a class="sourceLine" id="cb13-3" title="3">token             &lt;-<span class="st"> "9A81268476645C4E5F03428B8AC3AA7B"</span></a>
-<a class="sourceLine" id="cb13-4" title="4">project           &lt;-<span class="st"> </span>redcap_project<span class="op">$</span><span class="kw">new</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)</a>
-<a class="sourceLine" id="cb13-5" title="5"></a>
-<a class="sourceLine" id="cb13-6" title="6">ds_three_columns  &lt;-<span class="st"> </span>project<span class="op">$</span><span class="kw">read</span>(<span class="dt">fields=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"record_id"</span>, <span class="st">"sex"</span>, <span class="st">"age"</span>))<span class="op">$</span>data</a>
-<a class="sourceLine" id="cb13-7" title="7"></a>
-<a class="sourceLine" id="cb13-8" title="8">ids_of_males      &lt;-<span class="st"> </span>ds_three_columns<span class="op">$</span>record_id[ds_three_columns<span class="op">$</span>sex<span class="op">==</span><span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb13-9" title="9">ids_of_minors     &lt;-<span class="st"> </span>ds_three_columns<span class="op">$</span>record_id[ds_three_columns<span class="op">$</span>age <span class="op">&lt;</span><span class="st"> </span><span class="dv">18</span>]</a>
-<a class="sourceLine" id="cb13-10" title="10"></a>
-<a class="sourceLine" id="cb13-11" title="11">ds_males          &lt;-<span class="st"> </span>project<span class="op">$</span><span class="kw">read</span>(<span class="dt">records=</span>ids_of_males, <span class="dt">batch_size=</span><span class="dv">2</span>)<span class="op">$</span>data</a>
-<a class="sourceLine" id="cb13-12" title="12">ds_minors         &lt;-<span class="st"> </span>project<span class="op">$</span><span class="kw">read</span>(<span class="dt">records=</span>ids_of_minors)<span class="op">$</span>data</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(REDCapR) <span class="co">#Load the package into the current R session, if you haven't already.</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>uri               &lt;-<span class="st"> "https://bbmc.ouhsc.edu/redcap/api/"</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>token             &lt;-<span class="st"> "9A81268476645C4E5F03428B8AC3AA7B"</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>project           &lt;-<span class="st"> </span>redcap_project<span class="op">$</span><span class="kw">new</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)</span>
+<span id="cb13-5"><a href="#cb13-5"></a></span>
+<span id="cb13-6"><a href="#cb13-6"></a>ds_three_columns  &lt;-<span class="st"> </span>project<span class="op">$</span><span class="kw">read</span>(<span class="dt">fields=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"record_id"</span>, <span class="st">"sex"</span>, <span class="st">"age"</span>))<span class="op">$</span>data</span>
+<span id="cb13-7"><a href="#cb13-7"></a></span>
+<span id="cb13-8"><a href="#cb13-8"></a>ids_of_males      &lt;-<span class="st"> </span>ds_three_columns<span class="op">$</span>record_id[ds_three_columns<span class="op">$</span>sex<span class="op">==</span><span class="dv">1</span>]</span>
+<span id="cb13-9"><a href="#cb13-9"></a>ids_of_minors     &lt;-<span class="st"> </span>ds_three_columns<span class="op">$</span>record_id[ds_three_columns<span class="op">$</span>age <span class="op">&lt;</span><span class="st"> </span><span class="dv">18</span>]</span>
+<span id="cb13-10"><a href="#cb13-10"></a></span>
+<span id="cb13-11"><a href="#cb13-11"></a>ds_males          &lt;-<span class="st"> </span>project<span class="op">$</span><span class="kw">read</span>(<span class="dt">records=</span>ids_of_males, <span class="dt">batch_size=</span><span class="dv">2</span>)<span class="op">$</span>data</span>
+<span id="cb13-12"><a href="#cb13-12"></a>ds_minors         &lt;-<span class="st"> </span>project<span class="op">$</span><span class="kw">read</span>(<span class="dt">records=</span>ids_of_minors)<span class="op">$</span>data</span></code></pre></div>
 </li>
 <li><p><strong>Is the export operation still unsuccessful using REDCapR?</strong> If so the “Can the user query a <em>entire</em> REDCap project using RCurl?” check succeeded, but the REDCapR checks did not, consider posting a new <a href="https://github.com/OuhscBbmc/REDCapR/issues">GitHub issue</a> to the package developers.</p></li>
 </ol>
@@ -356,24 +356,24 @@ Reading batch 1 of 1, with ids 1 through 5.
 <ol style="list-style-type: decimal">
 <li>
 <p><strong>Is redcapAPI installed on the user’s machine?</strong> Currently, the easiest way to install <code>redcapAPI</code> is from CRAN.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"redcapAPI"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"redcapAPI"</span>)</span></code></pre></div>
 <p>Developmental versions may be available on GitHub.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>, <span class="dt">repos=</span><span class="st">"http://cran.rstudio.com"</span>)</a>
-<a class="sourceLine" id="cb15-2" title="2">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="dt">repo=</span><span class="st">"nutterb/redcapAPI"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>, <span class="dt">repos=</span><span class="st">"http://cran.rstudio.com"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2"></a>remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="dt">repo=</span><span class="st">"nutterb/redcapAPI"</span>)</span></code></pre></div>
 </li>
 <li>
 <p><strong>Does redcapAPI load successfully on the user’s machine?</strong> If so, running <code><a href="https://rdrr.io/r/base/library.html">library(redcapAPI)</a></code> should produce the following output if you’re starting with a fresh session of R:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(redcapAPI)</a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="co">## Loading required package: redcapAPI</span></a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(redcapAPI)</span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="co">## Loading required package: redcapAPI</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Can the user export from an example project?</strong> This is the same fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a> as in the previous section.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(redcapAPI) <span class="co">#Load the package into the current R session.</span></a>
-<a class="sourceLine" id="cb17-2" title="2">rcon &lt;-<span class="st"> </span><span class="kw">redcapConnection</span>(</a>
-<a class="sourceLine" id="cb17-3" title="3">  <span class="dt">url   =</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>,</a>
-<a class="sourceLine" id="cb17-4" title="4">  <span class="dt">token =</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></a>
-<a class="sourceLine" id="cb17-5" title="5">)</a>
-<a class="sourceLine" id="cb17-6" title="6"><span class="kw">exportRecords</span>(rcon)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(redcapAPI) <span class="co">#Load the package into the current R session.</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>rcon &lt;-<span class="st"> </span><span class="kw">redcapConnection</span>(</span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="dt">url   =</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>,</span>
+<span id="cb17-4"><a href="#cb17-4"></a>  <span class="dt">token =</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a>)</span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="kw">exportRecords</span>(rcon)</span></code></pre></div>
 <p>The previous code should produce similar output. Notice there are five rows and the columns will wrap around if your console window is too narrow.</p>
 <pre><code>record_id name_first name_last                                 address      telephone               email
 1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232 (432) 456-4848     nutty@mouse.com
@@ -405,12 +405,12 @@ demographics_complete
 </li>
 <li>
 <p><strong>Can the user export from their own project?</strong> The code is similar to the previous check, but the <code>uri</code> and <code>token</code> values will need to be modified.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(redcapAPI) <span class="co">#Load the package into the current R session, if you haven't already.</span></a>
-<a class="sourceLine" id="cb19-2" title="2">rcon &lt;-<span class="st"> </span><span class="kw">redcapConnection</span>(</a>
-<a class="sourceLine" id="cb19-3" title="3">  <span class="dt">url   =</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>, <span class="co"># Adapt this to your server.</span></a>
-<a class="sourceLine" id="cb19-4" title="4">  <span class="dt">token =</span> <span class="st">"your-secret-token"</span>                         <span class="co"># Adapt this to your user's token.</span></a>
-<a class="sourceLine" id="cb19-5" title="5">)</a>
-<a class="sourceLine" id="cb19-6" title="6"><span class="kw">exportRecords</span>(rcon)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(redcapAPI) <span class="co">#Load the package into the current R session, if you haven't already.</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>rcon &lt;-<span class="st"> </span><span class="kw">redcapConnection</span>(</span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="dt">url   =</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>, <span class="co"># Adapt this to your server.</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>  <span class="dt">token =</span> <span class="st">"your-secret-token"</span>                         <span class="co"># Adapt this to your user's token.</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>)</span>
+<span id="cb19-6"><a href="#cb19-6"></a><span class="kw">exportRecords</span>(rcon)</span></code></pre></div>
 </li>
 <li><p><strong>Is the export operation still unsuccessful using redcapAPI?</strong> If so the “Can the user query a <em>entire</em> REDCap project using RCurl?” check succeeded, but the redcapAPI checks did not, consider posting a new <a href="https://github.com/nutterb/redcapAPI/issues">GitHub issue</a> to the package developers.</p></li>
 </ol>

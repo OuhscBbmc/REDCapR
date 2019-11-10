@@ -1,5 +1,4 @@
 library(testthat)
-context("Metadata Utilities")
 
 test_that("Named Captures", {
   pattern_checkboxes <- "(?<=\\A| \\| )(?<id>\\d{1,}), (?<label>[\x20-\x7B\x7D-\x7E]{1,})(?= \\| |\\Z)"

@@ -195,7 +195,7 @@ redcap_read <- function(
   uniqueIDs <- sort(unique(initial_call$data[[id_position]]))
 
   if( all(nchar(uniqueIDs)==32L) )
-    warn_hash_record_id()
+    warn_hash_record_id()  # nocov
 
   ds_glossary            <- REDCapR::create_batch_glossary(row_count=length(uniqueIDs), batch_size=batch_size)
   lst_batch              <- NULL
@@ -242,11 +242,11 @@ redcap_read <- function(
     lst_outcome_message[[i]]  <- read_result$outcome_message
 
     if( !read_result$success ) {
-      error_message <- paste0("The `redcap_read()` call failed on iteration ", i, ".")
+      error_message <- paste0("The `redcap_read()` call failed on iteration ", i, ".")  # nocov start
       error_message <- paste(error_message, ifelse(!verbose, "Set the `verbose` parameter to TRUE and rerun for additional information.", ""))
 
       if( continue_on_error ) warning(error_message)
-      else stop(error_message)
+      else stop(error_message) # nocov stop
     }
 
     lst_batch[[i]]   <- read_result$data

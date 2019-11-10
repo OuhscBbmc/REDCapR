@@ -47,19 +47,26 @@ redcap_version <- function( redcap_uri, token, verbose=TRUE, config_options=NULL
 
     # if( exists("version") & inherits(version, "character") ) {
     if( exists("version") & inherits(version, "package_version") ) {
-      outcome_message <- paste0(
-        "The REDCap version was successfully determined in ",
-        round(kernel$elapsed_seconds, 1), " seconds.  The http status code was ",
-        kernel$status_code, ".  It is ", version, "."
+      outcome_message <- sprintf(
+        "The REDCap version was successfully determined in %0.1f seconds. The http status code was %i.  Is is %s.",
+        kernel$elapsed_seconds,
+        kernel$status_code,
+        version
       )
-
     } else {
       version          <- version_error
-      outcome_message  <- paste0("The REDCap version determination failed.  The http status code was ", kernel$status_code, ".  The 'raw_text' returned was '", kernel$raw_text, "'.")
+      outcome_message  <- sprintf(
+        "The REDCap version determination failed.  The http status code was %s.  The 'raw_text' returned was '%s'.",
+        kernel$status_code,
+        kernel$raw_text
+      )
     }
   } else {
     version          <- version_error
-    outcome_message  <- paste0("The REDCap version determination failed.  The error message was:\n",  kernel$raw_text)
+    outcome_message  <- sprintf(
+      "The REDCap version determination failed.  The error message was:\n%s",
+      kernel$raw_text
+    )
   }
 
   if( verbose )

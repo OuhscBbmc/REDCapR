@@ -1,5 +1,4 @@
 library(testthat)
-context("Create Batch Glossary")
 
 ExpectedColumnNames <- c("id", "start_index", "stop_index", "index_pretty", "start_index_pretty",
                          "stop_index_pretty", "label") #dput(colnames(dsResult))

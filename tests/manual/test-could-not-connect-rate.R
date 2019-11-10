@@ -1,8 +1,7 @@
 library(testthat)
 
-###########
-context("Estimate 'Could Not Connect' Rate")
-###########
+context("Estimate 'Could Not Connect' Rate.")
+
 uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 # uri <- "https://bbmc.ouhsc.edu/redcap/api/api2.php"
 # uri <- "https://bbmc.ouhsc.edu/redcap/api/dx.php"
@@ -20,7 +19,7 @@ record_read_error_count <- 0L
 for( i in seq_len(record_read_count) ) {
   returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, verbose=FALSE)
   message(i, ": ", returned_object$elapsed_seconds, " -", returned_object$raw_text)
-  
+
   if( any(grepl(pattern="combination could not connect to the MySQL server", returned_object$raw_text)) )
     record_read_error_count <- record_read_error_count + 1L
 }
@@ -34,17 +33,17 @@ if( file_read_count > 0 )
 
 file_read_error_count <- 0L
 for( i in seq_len(file_read_count) ) {
-  
+
   tryCatch({
     returned_object <- redcap_download_file_oneshot(record=1L, field="mugshot", verbose = FALSE,
                                                     redcap_uri=start_clean_result$redcap_project$redcap_uri, token=start_clean_result$redcap_project$token)
-    
+
     expect_true(file.exists(returned_object$file_name), "The downloaded file should exist.")
     }, finally = base::unlink("mugshot-1.jpg")
   )
-  
+
   message(i, ": ", returned_object$elapsed_seconds, " -", returned_object$raw_text)
-  
+
   if( any(grepl(pattern="combination could not connect to the MySQL server", returned_object$raw_text)) )
     file_read_error_count <- file_read_error_count + 1L
 }

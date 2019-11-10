@@ -1,5 +1,4 @@
 library(testthat)
-context("Replace NAs")
 
 test_that("replace_nas_character_standard", {
   a <- letters
