@@ -94,7 +94,7 @@ redcap_download_instrument <- function(
     returnFormat  = 'csv'
   )
 
-  if( nchar(event ) > 0 ) post_body$event   <- event
+  if( 0L < nchar(event) ) post_body$event   <- event
 
   # This is the first of two important lines in the function.
   #   It retrieves the information from the server and stores it in RAM.
@@ -143,7 +143,7 @@ redcap_download_instrument <- function(
     outcome_message         <- "file NOT downloaded."
     records_affected_count  <- 0L
     record_id               <- character(0) # Return an empty vector.
-    raw_text                <- kernel$raw_text
+    # kernel$raw_text
     file_path               <- character(0)
   }
 

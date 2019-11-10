@@ -95,7 +95,7 @@ redcap_upload_file_oneshot <- function(
     returnFormat   = 'csv'
   )
 
-  if( nchar(event ) > 0 ) post_body$event  <- event
+  if( 0L < nchar(event) ) post_body$event  <- event
 
   # This is the important line that communicates with the REDCap server.
   kernel <- kernel_api(redcap_uri, post_body, config_options)
@@ -110,8 +110,7 @@ redcap_upload_file_oneshot <- function(
     record_id               <- as.character(record)
     kernel$raw_text         <- ""
   } else { #If the returned content wasn't recognized as valid IDs, then
-    raw_text                <- kernel$raw_text
-    outcome_message         <- paste0("file NOT uploaded ")
+    # kernel$raw_text
     outcome_message         <- "file NOT uploaded "
     records_affected_count  <- 0L
     record_id               <- character(0) # Return an empty vector.

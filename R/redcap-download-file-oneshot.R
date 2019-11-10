@@ -101,7 +101,7 @@ redcap_download_file_oneshot <- function(
     returnFormat  = 'csv'
   )
 
-  if( nchar(event ) > 0 ) post_body$event   <- event
+  if( 0L < nchar(event)  ) post_body$event <- event
 
   # This is the first of two important lines in the function.
   #   It retrieves the information from the server and stores it in RAM.
@@ -146,10 +146,11 @@ redcap_download_file_oneshot <- function(
     record_id               <- as.character(record)
     kernel$raw_text         <- ""  # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
   } else { #If the operation was unsuccessful, then...
+    # kernel$status_code      <- NA_integer_
     outcome_message         <- "file NOT downloaded."
     records_affected_count  <- 0L
     record_id               <- character(0) # Return an empty vector.
-    raw_text                <- kernel$raw_text
+    # kernel$raw_text
     file_path               <- character(0)
   }
 

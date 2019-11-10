@@ -169,10 +169,10 @@ redcap_read_oneshot <- function(
     # record, fields, forms & events are specified below
   )
 
-  if( nchar(records_collapsed) > 0 ) post_body$records  <- records_collapsed
-  if( nchar(fields_collapsed ) > 0 ) post_body$fields   <- fields_collapsed
-  if( nchar(forms_collapsed  ) > 0 ) post_body$forms    <- forms_collapsed
-  if( nchar(events_collapsed ) > 0 ) post_body$events   <- events_collapsed
+  if( 0L < nchar(records_collapsed) ) post_body$records  <- records_collapsed
+  if( 0L < nchar(fields_collapsed ) ) post_body$fields   <- fields_collapsed
+  if( 0L < nchar(forms_collapsed  ) ) post_body$forms    <- forms_collapsed
+  if( 0L < nchar(events_collapsed ) ) post_body$events   <- events_collapsed
 
   # This is the important line that communicates with the REDCap server.
   kernel <- kernel_api(redcap_uri, post_body, config_options)
