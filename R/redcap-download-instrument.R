@@ -132,10 +132,7 @@ redcap_download_instrument <- function(
       kernel$elapsed_seconds,
       file_path
     )
-    # outcome_message <- paste0(
-    #   result_header, " successfully downloaded in " ,
-    #   round(kernel$elapsed_seconds, 1), " seconds, and saved as ", file_path, "."
-    # )
+
     records_affected_count  <- length(record)
     record_id               <- as.character(record)
     kernel$raw_text         <- ""  # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.

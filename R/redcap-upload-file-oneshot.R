@@ -105,7 +105,6 @@ redcap_upload_file_oneshot <- function(
       "file uploaded to REDCap in %0.1f seconds.",
       kernel$elapsed_seconds
     )
-    # outcome_message         <- paste0("file uploaded to REDCap in ",  round(kernel$elapsed_seconds, 1), " seconds.")
     records_affected_count  <- 1L
     record_id               <- as.character(record)
     kernel$raw_text         <- ""

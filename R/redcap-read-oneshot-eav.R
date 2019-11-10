@@ -250,11 +250,6 @@ redcap_read_oneshot_eav <- function(
         kernel$elapsed_seconds,
         kernel$status_code
       )
-      # outcome_message <- paste0(
-      #   format(  nrow(ds), big.mark=",", scientific=FALSE, trim=TRUE), " records and ",
-      #   format(length(ds), big.mark=",", scientific=FALSE, trim=TRUE), " columns were read from REDCap in ",
-      #   round(kernel$elapsed_seconds, 1), " seconds.  The http status code was ", kernel$status_code, "."
-      # )
 
       kernel$raw_text   <- "" # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
     } else {

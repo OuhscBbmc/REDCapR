@@ -132,16 +132,13 @@ redcap_download_file_oneshot <- function(
     #  It persists/converts the information in RAM to a file.
     writeBin(httr::content(kernel$result, as="raw"), con=file_path)
 
-    # outcome_message <- paste0(
-    #   result_header, " successfully downloaded in " ,
-    #   round(kernel$elapsed_seconds, 1), " seconds, and saved as ", file_path, "."
-    # )
     outcome_message <- sprintf(
       "%s successfully downloaded in %0.1f seconds, and saved as %s." ,
       result_header,
       kernel$elapsed_seconds,
       file_path
     )
+
     records_affected_count  <- length(record)
     record_id               <- as.character(record)
     kernel$raw_text         <- ""  # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
