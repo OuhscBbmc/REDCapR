@@ -172,7 +172,7 @@ differ in that <code>redcap_read</code> retrieves subsets of the data, and then 
   <span class='kw'>raw_or_label_headers</span> <span class='kw'>=</span> <span class='st'>"raw"</span>, <span class='kw'>export_checkbox_label</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>export_survey_fields</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>export_data_access_groups</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>filter_logic</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>col_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>guess_type</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>guess_max</span> <span class='kw'>=</span> <span class='fl'>1000L</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>guess_max</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>id_position</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -264,7 +264,7 @@ differ in that <code>redcap_read</code> retrieves subsets of the data, and then 
     </tr>
     <tr>
       <th>guess_max</th>
-      <td><p>A positive integer passed to <code><a href='https://readr.tidyverse.org/reference/read_delim.html'>readr::read_csv()</a></code> <strong>per batch</strong> that specifies the maximum number of records to use for guessing column types.</p></td>
+      <td><p>Deprecated.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
