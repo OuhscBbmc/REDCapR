@@ -70,7 +70,8 @@
 #' @param config_options  A list of options to pass to `POST` method in the
 #' `httr` package.  See the details in `redcap_read_oneshot()` Optional.
 #' @param id_position  The column position of the variable that unique
-#' identifies the subject.  This defaults to the first variable in the dataset.
+#' identifies the subject (typically `record_id`).
+#' This defaults to the first variable in the dataset.
 #'
 #' @return Currently, a list is returned with the following elements:
 #' * `data`: An R [base::data.frame()] of the desired records and columns.
@@ -162,32 +163,31 @@ redcap_read <- function(
   id_position                   = 1L
 ) {
 
-  checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
-  checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(redcap_uri                , any.missing=F,     len=1, pattern="^.{1,}$")
+  checkmate::assert_character(token                     , any.missing=F,     len=1, pattern="^.{1,}$")
   checkmate::assert_atomic(  records                    , any.missing=T, min.len=0)
-  checkmate::assert_character(records_collapsed         , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
+  checkmate::assert_character(records_collapsed         , any.missing=T,     len=1, pattern="^.{0,}$", null.ok=T)
   checkmate::assert_character(fields                    , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
-  checkmate::assert_character(fields_collapsed          , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
+  checkmate::assert_character(fields_collapsed          , any.missing=T,     len=1, pattern="^.{0,}$", null.ok=T)
   checkmate::assert_character(forms                     , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
-  checkmate::assert_character(forms_collapsed           , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
+  checkmate::assert_character(forms_collapsed           , any.missing=T,     len=1, pattern="^.{0,}$", null.ok=T)
   checkmate::assert_character(events                    , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
-  checkmate::assert_character(events_collapsed          , any.missing=T, len=1, pattern="^.{0,}$", null.ok=T)
-  checkmate::assert_character(raw_or_label              , any.missing=F, len=1)
+  checkmate::assert_character(events_collapsed          , any.missing=T,     len=1, pattern="^.{0,}$", null.ok=T)
+  checkmate::assert_character(raw_or_label              , any.missing=F,     len=1)
   checkmate::assert_subset(   raw_or_label              , c("raw", "label"))
-  checkmate::assert_character(raw_or_label_headers      , any.missing=F, len=1)
+  checkmate::assert_character(raw_or_label_headers      , any.missing=F,     len=1)
   checkmate::assert_subset(   raw_or_label_headers      , c("raw", "label"))
-  checkmate::assert_logical(  export_checkbox_label     , any.missing=F, len=1)
+  checkmate::assert_logical(  export_checkbox_label     , any.missing=F,     len=1)
   # placeholder: returnFormat
-  checkmate::assert_logical(  export_survey_fields      , any.missing=F, len=1)
-  checkmate::assert_logical(  export_data_access_groups , any.missing=F, len=1)
+  checkmate::assert_logical(  export_survey_fields      , any.missing=F,     len=1)
+  checkmate::assert_logical(  export_data_access_groups , any.missing=F,     len=1)
   #
-  checkmate::assert_logical(  guess_type                , any.missing=F, len=1)
+  checkmate::assert_logical(  guess_type                , any.missing=F,     len=1)
 
   if (!is.null(guess_max)) warning("The `guess_max` parameter in `REDCapR::redcap_read()` is deprecated.")
-  # checkmate::assert_integerish(guess_max                , any.missing=F, len=1, lower=1)
-  checkmate::assert_logical(  verbose                   , any.missing=F, len=1, null.ok=T)
-  checkmate::assert_list(     config_options            , any.missing=T, len=1, null.ok=T)
-  checkmate::assert_integer(  id_position               , any.missing=F, len=1, lower=1L)
+  checkmate::assert_logical(  verbose                   , any.missing=F,     len=1, null.ok=T)
+  checkmate::assert_list(     config_options            , any.missing=T,     len=1, null.ok=T)
+  checkmate::assert_integer(  id_position               , any.missing=F,     len=1, lower=1L)
 
   validate_field_names(fields)
 

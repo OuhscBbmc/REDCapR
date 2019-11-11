@@ -101,7 +101,8 @@ be visible somewhere public. Optional.}
 \code{httr} package.  See the details in \code{redcap_read_oneshot()} Optional.}
 
 \item{id_position}{The column position of the variable that unique
-identifies the subject.  This defaults to the first variable in the dataset.}
+identifies the subject (typically \code{record_id}).
+This defaults to the first variable in the dataset.}
 }
 \value{
 Currently, a list is returned with the following elements:
