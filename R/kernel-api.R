@@ -40,7 +40,9 @@ kernel_api <- function( redcap_uri, post_body, config_options ) {
 
   status_code           <- result$status
   success               <- (status_code==200L)
-  raw_text              <- as.character(httr::content(result, "text"))
+  # raw_text              <- as.character(httr::content(result, as = "text"))
+  raw_text              <- as.character(httr::content(result, as = "text", type = "text/csv"))
+  # raw_text              <- as.character(httr::content(result, as = "parsed", type = "text/csv"))
   raw_text              <- gsub("\r\n", "\n", raw_text) # Convert all line-endings to linux-style
   elapsed_seconds       <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
 
