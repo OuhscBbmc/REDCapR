@@ -28,7 +28,7 @@
 #'
 #' @param col_types A [readr::cols()] object passed internally to [readr::read_csv()].  Optional.
 #' @param guess_type A boolean value indicating if all columns should be returned as character.  If true, [readr::read_csv()] guesses the intended data type for each column.
-#' @param guess_max A positive integer passed to [readr::read_csv()] **per batch** that specifies the maximum number of records to use for guessing column types.
+#' @param guess_max Deprecated.
 #' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details in `redcap_read_oneshot()` Optional.
 #' @param id_position  The column position of the variable that unique identifies the subject.  This defaults to the first variable in the dataset.
@@ -110,7 +110,7 @@ redcap_read <- function(
 
   col_types                     = NULL,
   guess_type                    = TRUE,
-  guess_max                     = 1000L,
+  guess_max                     = NULL, # Deprecated parameter
   verbose                       = TRUE,
   config_options                = NULL,
   id_position                   = 1L
@@ -136,7 +136,9 @@ redcap_read <- function(
   checkmate::assert_logical(  export_data_access_groups , any.missing=F, len=1)
   #
   checkmate::assert_logical(  guess_type                , any.missing=F, len=1)
-  checkmate::assert_integerish(guess_max                , any.missing=F, len=1, lower=1)
+
+  if( !is.null(guess_max) ) warning("The `guess_max` parameter in `REDCapR::redcap_read()` is deprecated.")
+  # checkmate::assert_integerish(guess_max                , any.missing=F, len=1, lower=1)
   checkmate::assert_logical(  verbose                   , any.missing=F, len=1, null.ok=T)
   checkmate::assert_list(     config_options            , any.missing=T, len=1, null.ok=T)
   checkmate::assert_integer(  id_position               , any.missing=F, len=1, lower=1L)
@@ -233,7 +235,7 @@ redcap_read <- function(
 
       col_types                   = col_types,
       guess_type                  = FALSE,
-      guess_max                   = guess_max,
+      # guess_max                   = guess_max, # Not used, because guess_type is FALSE
       verbose                     = verbose,
       config_options              = config_options
     )

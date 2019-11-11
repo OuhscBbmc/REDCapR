@@ -12,7 +12,7 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
   raw_or_label_headers = "raw", export_checkbox_label = FALSE,
   export_survey_fields = FALSE, export_data_access_groups = FALSE,
   filter_logic = "", col_types = NULL, guess_type = TRUE,
-  guess_max = 1000L, verbose = TRUE, config_options = NULL,
+  guess_max = NULL, verbose = TRUE, config_options = NULL,
   id_position = 1L)
 }
 \arguments{
@@ -58,7 +58,7 @@ redcap_read(batch_size = 100L, interbatch_delay = 0.5,
 
 \item{guess_type}{A boolean value indicating if all columns should be returned as character.  If true, \code{\link[readr:read_csv]{readr::read_csv()}} guesses the intended data type for each column.}
 
-\item{guess_max}{A positive integer passed to \code{\link[readr:read_csv]{readr::read_csv()}} \strong{per batch} that specifies the maximum number of records to use for guessing column types.}
+\item{guess_max}{Deprecated.}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.}
 
