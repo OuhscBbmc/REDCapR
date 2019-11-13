@@ -4,12 +4,24 @@
 \alias{redcap_read_oneshot_eav}
 \title{Read/Export records from a REDCap project --still in development}
 \usage{
-redcap_read_oneshot_eav(redcap_uri, token, records = NULL,
-  records_collapsed = "", fields = NULL, fields_collapsed = "",
-  forms = NULL, forms_collapsed = "", events = NULL,
-  events_collapsed = "", raw_or_label = "raw",
-  raw_or_label_headers = "raw", export_data_access_groups = FALSE,
-  filter_logic = "", verbose = TRUE, config_options = NULL)
+redcap_read_oneshot_eav(
+  redcap_uri,
+  token,
+  records = NULL,
+  records_collapsed = "",
+  fields = NULL,
+  fields_collapsed = "",
+  forms = NULL,
+  forms_collapsed = "",
+  events = NULL,
+  events_collapsed = "",
+  raw_or_label = "raw",
+  raw_or_label_headers = "raw",
+  export_data_access_groups = FALSE,
+  filter_logic = "",
+  verbose = TRUE,
+  config_options = NULL
+)
 }
 \arguments{
 \item{redcap_uri}{The URI (uniform resource identifier) of the REDCap
@@ -54,7 +66,7 @@ specifies for the CSV headers whether to export the variable/field names
 not to export the \code{redcap_data_access_group} field when data access groups
 are utilized in the project. Default is \code{FALSE}. See the details below.}
 
-\item{filter_logic}{String of logic text (e.g., \code{[gender] = 'male'}) for
+\item{filter_logic}{String of logic text (e.g., \verb{[gender] = 'male'}) for
 filtering the data to be returned by this API method, in which the API
 will only return the records (or record-events, if a longitudinal project)
 where the logic evaluates as TRUE.   An blank/empty string returns all

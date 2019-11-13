@@ -4,8 +4,13 @@
 \alias{redcap_write_oneshot}
 \title{Write/Import records to a REDCap project}
 \usage{
-redcap_write_oneshot(ds, redcap_uri, token, verbose = TRUE,
-  config_options = NULL)
+redcap_write_oneshot(
+  ds,
+  redcap_uri,
+  token,
+  verbose = TRUE,
+  config_options = NULL
+)
 }
 \arguments{
 \item{ds}{The \code{\link[base:data.frame]{base::data.frame()}} to be imported into the REDCap project.  Required.}
@@ -50,7 +55,7 @@ ds1$telephone
 # [1] "(432) 456-4848" "(234) 234-2343" "(433) 435-9865" "(987) 654-3210" "(333) 333-4444"
 
 # Manipulate a field in the dataset in a VALID way
-ds1$telephone  <- sprintf("(405) 321-\%1$i\%1$i\%1$i\%1$i", seq_len(nrow(ds1)))
+ds1$telephone  <- sprintf("(405) 321-%1$i%1$i%1$i%1$i", seq_len(nrow(ds1)))
 
 ds1 <- ds1[1:3, ]
 ds1$age        <- NULL; ds1$bmi <- NULL #Drop the calculated fields before writing.
@@ -64,7 +69,7 @@ ds2$telephone
 # [1] "(405) 321-1111" "(405) 321-2222" "(405) 321-3333" "(987) 654-3210" "(333) 333-4444"
 
 # Manipulate a field in the dataset in an INVALID way.  A US exchange can't be '111'.
-ds1$telephone  <- sprintf("(405) 111-\%1$i\%1$i\%1$i\%1$i", seq_len(nrow(ds1)))
+ds1$telephone  <- sprintf("(405) 111-%1$i%1$i%1$i%1$i", seq_len(nrow(ds1)))
 
 # This next line will throw an error.
 result_write   <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=token)

@@ -4,8 +4,13 @@
 \alias{kernel_api}
 \title{REDCapR internal function for calling the REDCap API}
 \usage{
-kernel_api(redcap_uri, post_body, config_options, encoding = "UTF-8",
-  content_type = "text/csv")
+kernel_api(
+  redcap_uri,
+  post_body,
+  config_options,
+  encoding = "UTF-8",
+  content_type = "text/csv"
+)
 }
 \arguments{
 \item{redcap_uri}{The URI (uniform resource identifier) of the REDCap
