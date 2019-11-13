@@ -158,9 +158,16 @@
     <p>This function uses REDCap's APIs to select and return data.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>redcap_write</span>(<span class='no'>ds_to_write</span>, <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>100L</span>, <span class='kw'>interbatch_delay</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>continue_on_error</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>redcap_uri</span>, <span class='no'>token</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>redcap_write</span>(
+  <span class='no'>ds_to_write</span>,
+  <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>100L</span>,
+  <span class='kw'>interbatch_delay</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+  <span class='kw'>continue_on_error</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>redcap_uri</span>,
+  <span class='no'>token</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -230,39 +237,7 @@ https://community.projectredcap.org/articles/462/api-examples.html). If you do n
 for the wiki, please ask your campus REDCap administrator to send you the static material.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'>#Define some constants</span>
-<span class='no'>uri</span>           <span class='kw'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class='no'>token</span>         <span class='kw'>&lt;-</span> <span class='st'>"D70F9ACD1EDD6F151C6EA78683944E98"</span>
-
-<span class='co'># Read the dataset for the first time.</span>
-<span class='no'>result_read1</span>  <span class='kw'>&lt;-</span> <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/redcap_read_oneshot.html'>redcap_read_oneshot</a></span>(<span class='kw'>redcap_uri</span><span class='kw'>=</span><span class='no'>uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>)
-<span class='no'>ds1</span>           <span class='kw'>&lt;-</span> <span class='no'>result_read1</span>$<span class='no'>data</span>
-<span class='no'>ds1</span>$<span class='no'>telephone</span>
-<span class='co'># The line above returns something like this (depending on its previous state).</span>
-<span class='co'># [1] "(432) 456-4848" "(234) 234-2343" "(433) 435-9865" "(987) 654-3210" "(333) 333-4444"</span>
-
-<span class='co'># Manipulate a field in the dataset in a VALID way</span>
-<span class='no'>ds1</span>$<span class='no'>telephone</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='st'>"(405) 321-%1$i%1$i%1$i%1$i"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>ds1</span>)))
-
-<span class='no'>ds1</span> <span class='kw'>&lt;-</span> <span class='no'>ds1</span>[<span class='fl'>1</span>:<span class='fl'>3</span>, ]
-<span class='no'>ds1</span>$<span class='no'>age</span>       <span class='kw'>&lt;-</span> <span class='kw'>NULL</span>; <span class='no'>ds1</span>$<span class='no'>bmi</span> <span class='kw'>&lt;-</span> <span class='kw'>NULL</span> <span class='co'>#Drop the calculated fields before writing.</span>
-<span class='no'>result_write</span>  <span class='kw'>&lt;-</span> <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/redcap_write.html'>redcap_write</a></span>(<span class='kw'>ds</span><span class='kw'>=</span><span class='no'>ds1</span>, <span class='kw'>redcap_uri</span><span class='kw'>=</span><span class='no'>uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>)
-
-<span class='co'># Read the dataset for the second time.</span>
-<span class='no'>result_read2</span>  <span class='kw'>&lt;-</span> <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/redcap_read_oneshot.html'>redcap_read_oneshot</a></span>(<span class='kw'>redcap_uri</span><span class='kw'>=</span><span class='no'>uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>)
-<span class='no'>ds2</span>           <span class='kw'>&lt;-</span> <span class='no'>result_read2</span>$<span class='no'>data</span>
-<span class='no'>ds2</span>$<span class='no'>telephone</span>
-<span class='co'># The line above returns something like this.  Notice only the first three lines changed.</span>
-<span class='co'># [1] "(405) 321-1111" "(405) 321-2222" "(405) 321-3333" "(987) 654-3210" "(333) 333-4444"</span>
-
-<span class='co'># Manipulate a field in the dataset in an INVALID way.  A US exchange can't be '111'.</span>
-<span class='no'>ds1</span>$<span class='no'>telephone</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='st'>"(405) 111-%1$i%1$i%1$i%1$i"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>ds1</span>)))
-
-<span class='co'># This next line will throw an error.</span>
-<span class='no'>result_write</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/redcap_write.html'>redcap_write</a></span>(<span class='kw'>ds</span><span class='kw'>=</span><span class='no'>ds1</span>, <span class='kw'>redcap_uri</span><span class='kw'>=</span><span class='no'>uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>)
-<span class='no'>result_write</span>$<span class='no'>raw_text</span>
-}</div></pre>
+    <pre class="examples"></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

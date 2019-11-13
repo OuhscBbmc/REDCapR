@@ -142,7 +142,7 @@
 <span id="cb2-4"><a href="#cb2-4"></a>events_to_retain  &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"dose_1_arm_1"</span>, <span class="st">"visit_1_arm_1"</span>, <span class="st">"dose_2_arm_1"</span>, <span class="st">"visit_2_arm_1"</span>)</span>
 <span id="cb2-5"><a href="#cb2-5"></a></span>
 <span id="cb2-6"><a href="#cb2-6"></a>ds_long &lt;-<span class="st"> </span>REDCapR<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/REDCapR/man/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token_longitudinal)<span class="op">$</span>data</span></code></pre></div>
-<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.7 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.6 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>ds_long <span class="op">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)</span></code></pre></div>
 <pre><code>#&gt;    study_id        redcap_event_name pmq1 pmq2 pmq3 pmq4
@@ -217,18 +217,14 @@
 #&gt; 1      100   1           2           2           1           1           3
 #&gt; 2      220   1           0           1           0           2           1
 #&gt; 3      304   2           0           1           0           0          NA
-#&gt;   dose_2_pmq2 dose_2_pmq3 dose_2_pmq4 visit_1_pmq1 visit_1_pmq2
-#&gt; 1           1           0           0            1            0
-#&gt; 2           2           0           1            0            3
-#&gt; 3          NA          NA          NA            2            0
-#&gt;   visit_1_pmq3 visit_1_pmq4 visit_2_pmq1 visit_2_pmq2 visit_2_pmq3
-#&gt; 1            0            0            0            1            0
-#&gt; 2            1            0            3            4            1
-#&gt; 3            0            0           NA           NA           NA
-#&gt;   visit_2_pmq4
-#&gt; 1            0
-#&gt; 2            0
-#&gt; 3           NA</code></pre>
+#&gt;   dose_2_pmq2 dose_2_pmq3 dose_2_pmq4 visit_1_pmq1 visit_1_pmq2 visit_1_pmq3
+#&gt; 1           1           0           0            1            0            0
+#&gt; 2           2           0           1            0            3            1
+#&gt; 3          NA          NA          NA            2            0            0
+#&gt;   visit_1_pmq4 visit_2_pmq1 visit_2_pmq2 visit_2_pmq3 visit_2_pmq4
+#&gt; 1            0            0            1            0            0
+#&gt; 2            0            3            4            1            0
+#&gt; 3            0           NA           NA           NA           NA</code></pre>
 </div>
 <div id="ssl-options" class="section level2">
 <h2 class="hasAnchor">
@@ -252,7 +248,7 @@
 <span id="cb14-4"><a href="#cb14-4"></a>  <span class="dt">token          =</span> token_simple,</span>
 <span id="cb14-5"><a href="#cb14-5"></a>  <span class="dt">config_options =</span> config_options</span>
 <span id="cb14-6"><a href="#cb14-6"></a>)<span class="op">$</span>data</span></code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>config_options &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)</span>
 <span id="cb16-2"><a href="#cb16-2"></a>ds_no_ssl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(</span>
 <span id="cb16-3"><a href="#cb16-3"></a>   <span class="dt">redcap_uri     =</span> uri,</span>
@@ -266,7 +262,7 @@
 <a href="#session-information" class="anchor"></a>Session Information</h2>
 <p>For the sake of documentation and reproducibility, the current report was rendered in the following environment. Click the line below to expand.</p>
 <details><p><summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary></p>
-<pre><code>#&gt; ─ Session info ──────────────────────────────────────────────────────────
+<pre><code>#&gt; ─ Session info ───────────────────────────────────────────────────────────────
 #&gt;  setting  value                       
 #&gt;  version  R version 3.6.1 (2019-07-05)
 #&gt;  os       Ubuntu 18.04.3 LTS          
@@ -278,7 +274,7 @@
 #&gt;  tz       America/Chicago             
 #&gt;  date     2019-11-13                  
 #&gt; 
-#&gt; ─ Packages ──────────────────────────────────────────────────────────────
+#&gt; ─ Packages ───────────────────────────────────────────────────────────────────
 #&gt;  package     * version     date       lib source        
 #&gt;  assertthat    0.2.1       2019-03-21 [2] CRAN (R 3.6.0)
 #&gt;  backports     1.1.5       2019-10-02 [2] CRAN (R 3.6.1)
@@ -300,7 +296,7 @@
 #&gt;  htmltools     0.4.0       2019-10-04 [2] CRAN (R 3.6.1)
 #&gt;  httr          1.4.1       2019-08-05 [2] CRAN (R 3.6.1)
 #&gt;  kableExtra    1.1.0.9001  2019-05-18 [2] local         
-#&gt;  knitr       * 1.25        2019-09-18 [2] CRAN (R 3.6.1)
+#&gt;  knitr       * 1.26        2019-11-12 [2] CRAN (R 3.6.1)
 #&gt;  lifecycle     0.1.0       2019-08-01 [2] CRAN (R 3.6.1)
 #&gt;  magrittr    * 1.5         2014-11-22 [2] CRAN (R 3.6.0)
 #&gt;  MASS          7.3-51.4    2019-04-26 [2] CRAN (R 3.6.0)
@@ -315,7 +311,7 @@
 #&gt;  processx      3.4.1       2019-07-18 [2] CRAN (R 3.6.1)
 #&gt;  ps            1.3.0       2018-12-21 [2] CRAN (R 3.6.0)
 #&gt;  purrr         0.3.3       2019-10-18 [2] CRAN (R 3.6.1)
-#&gt;  R6            2.4.0       2019-02-14 [2] CRAN (R 3.6.0)
+#&gt;  R6            2.4.1       2019-11-12 [2] CRAN (R 3.6.1)
 #&gt;  Rcpp          1.0.3       2019-11-08 [2] CRAN (R 3.6.1)
 #&gt;  readr         1.3.1.9000  2019-10-09 [2] local         
 #&gt;  REDCapR     * 0.10.2.9002 2019-11-13 [1] local         
@@ -338,17 +334,17 @@
 #&gt;  viridisLite   0.3.0       2018-02-01 [2] CRAN (R 3.6.0)
 #&gt;  webshot       0.5.1       2018-09-28 [2] CRAN (R 3.6.0)
 #&gt;  withr         2.1.2       2018-03-15 [2] CRAN (R 3.6.0)
-#&gt;  xfun          0.10        2019-10-01 [2] CRAN (R 3.6.1)
+#&gt;  xfun          0.11        2019-11-12 [2] CRAN (R 3.6.1)
 #&gt;  xml2          1.2.2       2019-08-09 [2] CRAN (R 3.6.1)
 #&gt;  yaml          2.2.0       2018-07-25 [2] CRAN (R 3.6.0)
 #&gt;  zeallot       0.1.0       2018-01-28 [2] CRAN (R 3.6.0)
 #&gt; 
-#&gt; [1] /tmp/RtmpiL95dE/temp_libpath79ad4a82c005
+#&gt; [1] /tmp/RtmpRHpLB7/temp_libpath1d4f1b860ffd
 #&gt; [2] /home/wibeasley/R/x86_64-pc-linux-gnu-library/3.6
 #&gt; [3] /usr/local/lib/R/site-library
 #&gt; [4] /usr/lib/R/site-library
 #&gt; [5] /usr/lib/R/library</code></pre>
-</details><p>Report rendered by wibeasley at 2019-11-13, 00:01 -0600 in 4 seconds.</p>
+</details><p>Report rendered by wibeasley at 2019-11-13, 10:15 -0600 in 4 seconds.</p>
 </div>
   </div>
 
