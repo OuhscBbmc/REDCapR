@@ -319,7 +319,8 @@ be visible somewhere public. Optional.</p></td>
     <tr>
       <th>id_position</th>
       <td><p>The column position of the variable that unique
-identifies the subject.  This defaults to the first variable in the dataset.</p></td>
+identifies the subject (typically <code>record_id</code>).
+This defaults to the first variable in the dataset.</p></td>
     </tr>
     </table>
 
@@ -327,11 +328,18 @@ identifies the subject.  This defaults to the first variable in the dataset.</p>
 
     <p>Currently, a list is returned with the following elements:</p><ul>
 <li><p><code>data</code>: An R <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> of the desired records and columns.</p></li>
-<li><p><code>success</code>: A boolean value indicating if the operation was apparently successful.</p></li>
-<li><p><code>status_codes</code>: A collection of <a href='http://en.wikipedia.org/wiki/List_of_HTTP_status_codes'>http status codes</a>, separated by semicolons.  There is one code for each batch attempted.</p></li>
-<li><p><code>outcome_messages</code>: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.</p></li>
-<li><p><code>records_collapsed</code>: The desired records IDs, collapsed into a single string, separated by commas.</p></li>
-<li><p><code>fields_collapsed</code>: The desired field names, collapsed into a single string, separated by commas.</p></li>
+<li><p><code>success</code>: A boolean value indicating if the operation was apparently
+successful.</p></li>
+<li><p><code>status_codes</code>: A collection of
+<a href='http://en.wikipedia.org/wiki/List_of_HTTP_status_codes'>http status codes</a>,
+separated by semicolons.  There is one code for each batch attempted.</p></li>
+<li><p><code>outcome_messages</code>: A collection of human readable strings indicating the
+operations' semicolons.  There is one code for each batch attempted.  In an
+unsuccessful operation, it should contain diagnostic information.</p></li>
+<li><p><code>records_collapsed</code>: The desired records IDs, collapsed into a single
+string, separated by commas.</p></li>
+<li><p><code>fields_collapsed</code>: The desired field names, collapsed into a single
+string, separated by commas.</p></li>
 <li><p><code>filter_logic</code>: The filter statement passed as an argument.</p></li>
 <li><p><code>elapsed_seconds</code>: The duration of the function.</p></li>
 </ul>

@@ -49,7 +49,8 @@
 
 
 <meta property="og:title" content="Manipulate and interpret the metadata of a REDCap project — metadata_utilities" />
-<meta property="og:description" content="A collection of functions that assists handling REDCap project metadata." />
+<meta property="og:description" content="A collection of functions that assists handling REDCap
+project metadata." />
 <meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -155,7 +156,8 @@
     </div>
 
     <div class="ref-description">
-    <p>A collection of functions that assists handling REDCap project metadata.</p>
+    <p>A collection of functions that assists handling REDCap
+project metadata.</p>
     </div>
 
     <pre class="usage"><span class='fu'>regex_named_captures</span>(<span class='no'>pattern</span>, <span class='no'>text</span>, <span class='kw'>perl</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
@@ -187,23 +189,32 @@ to determine the <code>id</code> and <code>label</code> values.  Required.</p></
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Currently, a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> is returned a row for each match, and a column for each <em>named</em> group within a match.  For the <code>retrieve_checkbox_choices()</code> function, the columns will be.</p><ul>
+    <p>Currently, a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> is returned a row for each match,
+and a column for each <em>named</em> group within a match.  For the
+<code>retrieve_checkbox_choices()</code> function, the columns will be.</p><ul>
 <li><p><code>id</code>: The numeric value assigned to each choice (in the data dictionary).</p></li>
 <li><p><code>label</code>: The label assigned to each choice (in the data dictionary).</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The <code>regex_named_captures()</code> function is general, and not specific to REDCap; it accepts any arbitrary regular expression.
+    <p>The <code>regex_named_captures()</code> function is general, and not specific to
+REDCap; it accepts any arbitrary regular expression.
 It returns a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> with as many columns as named matches.</p>
-<p>The <code>checkbox_choices()</code> function is specialized, and accommodates the "select choices" for a <em>single</em> REDCap checkbox group (where multiple boxes can be selected).
-It returns a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> with two columns, one for the numeric id and one for the text label.</p>
+<p>The <code>checkbox_choices()</code> function is specialized, and accommodates the
+"select choices" for a <em>single</em> REDCap checkbox group (where multiple boxes
+can be selected).  It returns a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> with two columns, one
+for the numeric id and one for the text label.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>See the official documentation for permissible characters in a checkbox label. <em>I'm bluffing here, because I don't know where this is located.  If you know, please tell me.</em></p>
+    <p>See the official documentation for permissible characters in a
+checkbox label.
+<em>I'm bluffing here, because I don't know where this islocated.
+If you know, please tell me.</em></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>#The weird ranges are to avoid the pipe character; PCRE doesn't support character negation.</span>
+    <pre class="examples"><div class='input'><span class='co'># The weird ranges are to avoid the pipe character;</span>
+<span class='co'>#   PCRE doesn't support character negation.</span>
 <span class='no'>pattern_boxes</span> <span class='kw'>&lt;-</span> <span class='st'>"(?&lt;=\\A| \\| )(?&lt;id&gt;\\d{1,}), (?&lt;label&gt;[\x20-\x7B\x7D-\x7E]{1,})(?= \\| |\\Z)"</span>
 
 <span class='no'>choices_1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(
@@ -214,7 +225,7 @@ It returns a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.f
   <span class='st'>"5, White | "</span>,
   <span class='st'>"6, Unknown / Not Reported"</span>)
 
-<span class='co'>#This calls the general function, and requires the correct regex pattern.</span>
+<span class='co'># This calls the general function, and requires the correct regex pattern.</span>
 <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/metadata_utilities.html'>regex_named_captures</a></span>(<span class='kw'>pattern</span><span class='kw'>=</span><span class='no'>pattern_boxes</span>, <span class='kw'>text</span><span class='kw'>=</span><span class='no'>choices_1</span>)</div><div class='output co'>#&gt;   id                                     label
 #&gt; 1  1             American Indian/Alaska Native
 #&gt; 2  2                                     Asian
@@ -222,7 +233,7 @@ It returns a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.f
 #&gt; 4  4                 Black or African American
 #&gt; 5  5                                     White
 #&gt; 6  6                    Unknown / Not Reported</div><div class='input'>
-<span class='co'>#This function is designed specifically for the checkbox values.</span>
+<span class='co'># This function is designed specifically for the checkbox values.</span>
 <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/metadata_utilities.html'>checkbox_choices</a></span>(<span class='kw'>select_choices</span><span class='kw'>=</span><span class='no'>choices_1</span>)</div><div class='output co'>#&gt;   id                                     label
 #&gt; 1  1             American Indian/Alaska Native
 #&gt; 2  2                                     Asian

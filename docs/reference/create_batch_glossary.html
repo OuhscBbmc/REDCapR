@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Creates a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> that help batching long-running read and writes — create_batch_glossary • REDCapR</title>
+<title>Creates a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> that help batching long-running
+read and writes — create_batch_glossary • REDCapR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,10 +49,13 @@
 
 
 
-<meta property="og:title" content="Creates a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> that help batching long-running read and writes — create_batch_glossary" />
-<meta property="og:description" content="The function returns a base::data.frame() that other functions use to separate long-running
-read and write REDCap calls into multiple, smaller REDCap calls.  The goal is to (1) reduce the chance of time-outs,
-and (2) introduce little breaks between batches so that the server isn't continually tied up." />
+<meta property="og:title" content="Creates a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> that help batching long-running
+read and writes — create_batch_glossary" />
+<meta property="og:description" content="The function returns a base::data.frame() that other
+functions use to separate long-running read and write REDCap calls into
+multiple, smaller REDCap calls.  The goal is to (1) reduce the chance of
+time-outs, and (2) introduce little breaks between batches so that the
+server isn't continually tied up." />
 <meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -151,15 +155,18 @@ and (2) introduce little breaks between batches so that the server isn't continu
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Creates a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> that help batching long-running read and writes</h1>
+    <h1>Creates a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> that help batching long-running
+read and writes</h1>
     <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/R/create-batch-glossary.R'><code>R/create-batch-glossary.R</code></a></small>
     <div class="hidden name"><code>create_batch_glossary.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The function returns a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> that other functions use to separate long-running
-read and write REDCap calls into multiple, smaller REDCap calls.  The goal is to (1) reduce the chance of time-outs,
-and (2) introduce little breaks between batches so that the server isn't continually tied up.</p>
+    <p>The function returns a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> that other
+functions use to separate long-running read and write REDCap calls into
+multiple, smaller REDCap calls.  The goal is to (1) reduce the chance of
+time-outs, and (2) introduce little breaks between batches so that the
+server isn't continually tied up.</p>
     </div>
 
     <pre class="usage"><span class='fu'>create_batch_glossary</span>(<span class='no'>row_count</span>, <span class='no'>batch_size</span>)</pre>
@@ -173,26 +180,32 @@ and (2) introduce little breaks between batches so that the server isn't continu
     </tr>
     <tr>
       <th>batch_size</th>
-      <td><p>The maximum number of subject records a single batch should contain.</p></td>
+      <td><p>The maximum number of subject records a single batch
+should contain.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Currently, a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> is returned with the following columns,</p><ul>
+    <p>Currently, a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> is returned with the following
+columns,</p><ul>
 <li><p><code>id</code>: an <code>integer</code> that uniquely identifies the batch, starting at <code>1</code>.</p></li>
 <li><p><code>start_index</code>: the index of the first row in the batch. <code>integer</code>.</p></li>
 <li><p><code>stop_index</code>: the index of the last row in the batch. <code>integer</code>.</p></li>
 <li><p><code>id_pretty</code>: a <code>character</code> representation of <code>id</code>, but padded with zeros.</p></li>
-<li><p><code>start_index</code>: a <code>character</code> representation of <code>start_index</code>, but padded with zeros.</p></li>
-<li><p><code>stop_index</code>: a <code>character</code> representation of <code>stop_index</code>, but padded with zeros.</p></li>
-<li><p><code>label</code>: a <code>character</code> concatenation of <code>id_pretty</code>, <code>start_index</code>, and <code>stop_index_pretty</code>.</p></li>
+<li><p><code>start_index</code>: a <code>character</code> representation of <code>start_index</code>, but padded
+with zeros.</p></li>
+<li><p><code>stop_index</code>: a <code>character</code> representation of <code>stop_index</code>, but padded
+with zeros.</p></li>
+<li><p><code>label</code>: a <code>character</code> concatenation of <code>id_pretty</code>, <code>start_index</code>, and
+<code>stop_index_pretty</code>.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function can also assist splitting and saving a large <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> to disk as smaller files (such as a .csv).
-The padded columns allow the OS to sort the batches/files in sequential order.</p>
+    <p>This function can also assist splitting and saving a large
+<code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> to disk as smaller files (such as a .csv).  The
+padded columns allow the OS to sort the batches/files in sequential order.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>See <code><a href='redcap_read.html'>redcap_read()</a></code> for a function that uses <code>create_batch_gloassary</code>.</p></div>
