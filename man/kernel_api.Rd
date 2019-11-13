@@ -4,7 +4,8 @@
 \alias{kernel_api}
 \title{REDCapR internal function for calling the REDCap API}
 \usage{
-kernel_api(redcap_uri, post_body, config_options)
+kernel_api(redcap_uri, post_body, config_options, encoding = "UTF-8",
+  content_type = "text/csv")
 }
 \arguments{
 \item{redcap_uri}{The URI (uniform resource identifier) of the REDCap project.  Required.}
@@ -12,6 +13,10 @@ kernel_api(redcap_uri, post_body, config_options)
 \item{post_body}{List of contents expected by the REDCap API.  Required.}
 
 \item{config_options}{A list of options to pass to \code{POST} method in the \code{httr} package.  See the details below.  Optional.}
+
+\item{encoding}{The encoding value passed to \code{\link[httr:content]{httr::content()}}.  Defaults to 'UTF-8'.}
+
+\item{content_type}{The MIME value passed to \code{\link[httr:content]{httr::content()}}.  Defaults to 'text/csv'.}
 }
 \value{
 A \link[utils:packageVersion]{utils::packageVersion}.

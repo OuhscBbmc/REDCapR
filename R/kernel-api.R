@@ -5,6 +5,8 @@
 #' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
 #' @param post_body List of contents expected by the REDCap API.  Required.
 #' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below.  Optional.
+#' @param encoding  The encoding value passed to [httr::content()].  Defaults to 'UTF-8'.
+#' @param content_type The MIME value passed to [httr::content()].  Defaults to 'text/csv'.
 #'
 #' @return A [utils::packageVersion].
 #'
@@ -28,7 +30,13 @@
 #' read.csv(text=kernel$raw_text, stringsAsFactors=FALSE)
 #' as.list(read.csv(text=kernel$raw_text, stringsAsFactors=FALSE))
 
-kernel_api <- function( redcap_uri, post_body, config_options ) {
+kernel_api <- function(
+  redcap_uri,
+  post_body,
+  config_options,
+  encoding            = "UTF-8",
+  content_type        = "text/csv"
+  ) {
 
   start_time <- Sys.time()
 
@@ -40,7 +48,14 @@ kernel_api <- function( redcap_uri, post_body, config_options ) {
 
   status_code           <- result$status
   success               <- (status_code==200L)
-  raw_text              <- as.character(httr::content(result, "text"))
+  # raw_text              <- as.character(httr::content(result, as = "text"))
+  raw_text              <- httr::content(
+    x           = result,
+    as          = "text",
+    encoding    = encoding,     # UTF-8 is the default parameter value (above)
+    type        = content_type  # text/csv is the default parameter value (above)
+  )
+
   raw_text              <- gsub("\r\n", "\n", raw_text) # Convert all line-endings to linux-style
   elapsed_seconds       <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
 

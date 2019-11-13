@@ -13,8 +13,8 @@ constant(name, simplify = TRUE)
 \arguments{
 \item{name}{Name of constant.  Required character.}
 
-\item{simplify}{Simplifies the vector of values to a common data-type, if possible.
-Passed to the \code{simplify} parameter of \code{\link[base:sapply]{base::sapply()}}.}
+\item{simplify}{Simplifies the vector of values to a common data-type,
+if possible. Passed to the \code{simplify} parameter of \code{\link[base:sapply]{base::sapply()}}.}
 }
 \value{
 The constant's value.  Currently all are single integers,
@@ -26,7 +26,8 @@ Collection of constants defined by the REDCap developers.
 \details{
 \strong{Form Completeness}
 
-The current constants relate to the 'complete' variable at the end of each form.
+The current constants relate to the 'complete' variable at the
+end of each form.
 \itemize{
 \item \code{form_incomplete}: 0L (\emph{i.e.}, an integer)
 \item \code{form_unverified}: 1L
@@ -64,7 +65,7 @@ See https://your-server/redcap/api/help/?content=exp_users.
 To add more, please for and edit
 \href{https://github.com/OuhscBbmc/REDCapR/blob/master/R/constant.R}{constant.R}
 on GitHub and submit a pull request.  For instructions, please see
-\href{https://help.github.com/articles/editing-files-in-another-user-s-repository/}{Editing files in another user's repository}
+\href{https://help.github.com/articles/editing-files-in-another-user-s-repository/}{Editing files in another user's repository} # nolint
 in the GitHub documentation.
 }
 \examples{
@@ -76,15 +77,19 @@ REDCapR::constant("data_export_rights_no_access"   )  # Returns 0L
 REDCapR::constant("data_export_rights_deidentified")  # Returns 1L
 REDCapR::constant("data_export_rights_full"        )  # Returns 2L
 
-REDCapR::constant("form_rights_no_access")     # Returns 0L
-REDCapR::constant("form_rights_readonly" )     # Returns 2L --Notice the order
-REDCapR::constant("form_rights_edit_form")     # Returns 1L
-REDCapR::constant("form_rights_edit_survey")   # Returns 3L
+REDCapR::constant("form_rights_no_access")   # Returns 0L
+REDCapR::constant("form_rights_readonly" )   # Returns 2L --Notice the order
+REDCapR::constant("form_rights_edit_form")   # Returns 1L
+REDCapR::constant("form_rights_edit_survey") # Returns 3L
 
 REDCapR::constant("access_no" )  # Returns 0L
 REDCapR::constant("access_yes")  # Returns 1L
 
-REDCapR::constant(c("form_complete", "form_complete", "form_incomplete")) # Returns c(2L, 2L, 0L)
+REDCapR::constant(c(
+  "form_complete",
+  "form_complete",
+  "form_incomplete"
+)) # Returns c(2L, 2L, 0L)
 REDCapR::constant(c(
   "form_rights_no_access",
   "form_rights_readonly",

@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read records from a REDCap project in subsets, and stacks them together before returning a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> — redcap_read • REDCapR</title>
+<title>Read records from a REDCap project in subsets, and stacks them
+together before returning a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> — redcap_read • REDCapR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,11 +49,14 @@
 
 
 
-<meta property="og:title" content="Read records from a REDCap project in subsets, and stacks them together before returning a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> — redcap_read" />
-<meta property="og:description" content="From an external perspective, this function is similar to redcap_read_oneshot().  The internals
-differ in that redcap_read retrieves subsets of the data, and then combines them before returning
-(among other objects) a single base::data.frame().  This function can be more appropriate than
-redcap_read_oneshot() when returning large datasets that could tie up the server." />
+<meta property="og:title" content="Read records from a REDCap project in subsets, and stacks them
+together before returning a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> — redcap_read" />
+<meta property="og:description" content="From an external perspective, this function is similar to
+redcap_read_oneshot().  The internals differ in that redcap_read
+retrieves subsets of the data, and then combines them before returning
+(among other objects) a single base::data.frame().  This function can
+be more appropriate than redcap_read_oneshot() when returning large
+datasets that could tie up the server." />
 <meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -152,16 +156,19 @@ redcap_read_oneshot() when returning large datasets that could tie up the server
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read records from a REDCap project in subsets, and stacks them together before returning a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code></h1>
+    <h1>Read records from a REDCap project in subsets, and stacks them
+together before returning a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code></h1>
     <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-read.R'><code>R/redcap-read.R</code></a></small>
     <div class="hidden name"><code>redcap_read.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>From an external perspective, this function is similar to <code><a href='redcap_read_oneshot.html'>redcap_read_oneshot()</a></code>.  The internals
-differ in that <code>redcap_read</code> retrieves subsets of the data, and then combines them before returning
-(among other objects) a single <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code>.  This function can be more appropriate than
-<code><a href='redcap_read_oneshot.html'>redcap_read_oneshot()</a></code> when returning large datasets that could tie up the server.</p>
+    <p>From an external perspective, this function is similar to
+<code><a href='redcap_read_oneshot.html'>redcap_read_oneshot()</a></code>.  The internals differ in that <code>redcap_read</code>
+retrieves subsets of the data, and then combines them before returning
+(among other objects) a single <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code>.  This function can
+be more appropriate than <code><a href='redcap_read_oneshot.html'>redcap_read_oneshot()</a></code> when returning large
+datasets that could tie up the server.</p>
     </div>
 
     <pre class="usage"><span class='fu'>redcap_read</span>(<span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>100L</span>, <span class='kw'>interbatch_delay</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
@@ -172,7 +179,7 @@ differ in that <code>redcap_read</code> retrieves subsets of the data, and then 
   <span class='kw'>raw_or_label_headers</span> <span class='kw'>=</span> <span class='st'>"raw"</span>, <span class='kw'>export_checkbox_label</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>export_survey_fields</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>export_data_access_groups</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>filter_logic</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>col_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>guess_type</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>guess_max</span> <span class='kw'>=</span> <span class='fl'>1000L</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>guess_max</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>id_position</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -180,103 +187,139 @@ differ in that <code>redcap_read</code> retrieves subsets of the data, and then 
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>batch_size</th>
-      <td><p>The maximum number of subject records a single batch should contain.  The default is 100.</p></td>
+      <td><p>The maximum number of subject records a single batch
+should contain.  The default is 100.</p></td>
     </tr>
     <tr>
       <th>interbatch_delay</th>
-      <td><p>The number of seconds the function will wait before requesting a new subset from REDCap. The default is 0.5 seconds.</p></td>
+      <td><p>The number of seconds the function will wait
+before requesting a new subset from REDCap. The default is 0.5 seconds.</p></td>
     </tr>
     <tr>
       <th>continue_on_error</th>
-      <td><p>If an error occurs while reading, should records in subsequent batches be attempted.  The default is <code>FALSE</code>, which prevents subsequent batches from running.  Required.</p></td>
+      <td><p>If an error occurs while reading, should records
+in subsequent batches be attempted.  The default is <code>FALSE</code>, which prevents
+subsequent batches from running.  Required.</p></td>
     </tr>
     <tr>
       <th>redcap_uri</th>
-      <td><p>The URI (uniform resource identifier) of the REDCap project.  Required.</p></td>
+      <td><p>The URI (uniform resource identifier) of the REDCap
+project.  Required.</p></td>
     </tr>
     <tr>
       <th>token</th>
-      <td><p>The user-specific string that serves as the password for a project.  Required.</p></td>
+      <td><p>The user-specific string that serves as the password for a
+project.  Required.</p></td>
     </tr>
     <tr>
       <th>records</th>
-      <td><p>An array, where each element corresponds to the ID of a desired record.  Optional.</p></td>
+      <td><p>An array, where each element corresponds to the ID of a
+desired record.  Optional.</p></td>
     </tr>
     <tr>
       <th>records_collapsed</th>
-      <td><p>A single string, where the desired ID values are separated by commas.  Optional.</p></td>
+      <td><p>A single string, where the desired ID values are
+separated by commas.  Optional.</p></td>
     </tr>
     <tr>
       <th>fields</th>
-      <td><p>An array, where each element corresponds to a desired project field.  Optional.</p></td>
+      <td><p>An array, where each element corresponds to a desired project
+field.  Optional.</p></td>
     </tr>
     <tr>
       <th>fields_collapsed</th>
-      <td><p>A single string, where the desired field names are separated by commas.  Optional.</p></td>
+      <td><p>A single string, where the desired field names are
+separated by commas.  Optional.</p></td>
     </tr>
     <tr>
       <th>forms</th>
-      <td><p>An array, where each element corresponds to a desired project form.  Optional.</p></td>
+      <td><p>An array, where each element corresponds to a desired project
+form.  Optional.</p></td>
     </tr>
     <tr>
       <th>forms_collapsed</th>
-      <td><p>A single string, where the desired form names are separated by commas.  Optional.</p></td>
+      <td><p>A single string, where the desired form names are
+separated by commas.  Optional.</p></td>
     </tr>
     <tr>
       <th>events</th>
-      <td><p>An array, where each element corresponds to a desired project event.  Optional.</p></td>
+      <td><p>An array, where each element corresponds to a desired project
+event.  Optional.</p></td>
     </tr>
     <tr>
       <th>events_collapsed</th>
-      <td><p>A single string, where the desired event names are separated by commas.  Optional.</p></td>
+      <td><p>A single string, where the desired event names are
+separated by commas.  Optional.</p></td>
     </tr>
     <tr>
       <th>raw_or_label</th>
-      <td><p>A string (either 'raw<code>or 'label' that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is</code>'raw'`.</p></td>
+      <td><p>A string (either <code>'raw'</code> or <code>'label'</code> that specifies
+whether to export the raw coded values or the labels for the options of
+multiple choice fields.  Default is <code>'raw'</code>.</p></td>
     </tr>
     <tr>
       <th>raw_or_label_headers</th>
-      <td><p>A string (either <code>'raw'</code> or <code>'label'</code> that specifies for the CSV headers whether to export the variable/field names (raw) or the field labels (label).  Default is <code>'raw'</code>.</p></td>
+      <td><p>A string (either <code>'raw'</code> or <code>'label'</code> that
+specifies for the CSV headers whether to export the variable/field names
+(raw) or the field labels (label).  Default is <code>'raw'</code>.</p></td>
     </tr>
     <tr>
       <th>export_checkbox_label</th>
-      <td><p>specifies the format of checkbox field values specifically when exporting the data as labels.  If <code>raw_or_label</code> is <code>'label'</code> and <code>export_checkbox_label</code> is TRUE, the values will be the text displayed to the users.  Otherwise, the values will be 0/1.</p></td>
+      <td><p>specifies the format of checkbox field values
+specifically when exporting the data as labels.  If <code>raw_or_label</code> is
+<code>'label'</code> and <code>export_checkbox_label</code> is TRUE, the values will be the text
+displayed to the users.  Otherwise, the values will be 0/1.</p></td>
     </tr>
     <tr>
       <th>export_survey_fields</th>
-      <td><p>A boolean that specifies whether to export the survey identifier field (e.g., 'redcap_survey_identifier') or survey timestamp fields (e.g., instrument+'_timestamp') .</p></td>
+      <td><p>A boolean that specifies whether to export the
+survey identifier field (e.g., 'redcap_survey_identifier') or survey
+timestamp fields (e.g., instrument+'_timestamp') .</p></td>
     </tr>
     <tr>
       <th>export_data_access_groups</th>
-      <td><p>A boolean value that specifies whether or not to export the <code>redcap_data_access_group</code> field when data access groups are utilized in the project. Default is <code>FALSE</code>. See the details below.</p></td>
+      <td><p>A boolean value that specifies whether or
+not to export the <code>redcap_data_access_group</code> field when data access groups
+are utilized in the project. Default is <code>FALSE</code>. See the details below.</p></td>
     </tr>
     <tr>
       <th>filter_logic</th>
-      <td><p>String of logic text (e.g., <code>[gender] = 'male'</code>) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.</p></td>
+      <td><p>String of logic text (e.g., <code>[gender] = 'male'</code>) for
+filtering the data to be returned by this API method, in which the API
+will only return the records (or record-events, if a longitudinal project)
+where the logic evaluates as TRUE.   An blank/empty string returns all records.</p></td>
     </tr>
     <tr>
       <th>col_types</th>
-      <td><p>A <code><a href='https://readr.tidyverse.org/reference/cols.html'>readr::cols()</a></code> object passed internally to <code><a href='https://readr.tidyverse.org/reference/read_delim.html'>readr::read_csv()</a></code>.  Optional.</p></td>
+      <td><p>A <code><a href='https://readr.tidyverse.org/reference/cols.html'>readr::cols()</a></code> object passed internally to
+<code><a href='https://readr.tidyverse.org/reference/read_delim.html'>readr::read_csv()</a></code>.  Optional.</p></td>
     </tr>
     <tr>
       <th>guess_type</th>
-      <td><p>A boolean value indicating if all columns should be returned as character.  If true, <code><a href='https://readr.tidyverse.org/reference/read_delim.html'>readr::read_csv()</a></code> guesses the intended data type for each column.</p></td>
+      <td><p>A boolean value indicating if all columns should be
+returned as character.  If true, <code><a href='https://readr.tidyverse.org/reference/read_delim.html'>readr::read_csv()</a></code> guesses the intended
+data type for each column.</p></td>
     </tr>
     <tr>
       <th>guess_max</th>
-      <td><p>A positive integer passed to <code><a href='https://readr.tidyverse.org/reference/read_delim.html'>readr::read_csv()</a></code> <strong>per batch</strong> that specifies the maximum number of records to use for guessing column types.</p></td>
+      <td><p>Deprecated.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>A boolean value indicating if <code>message</code>s should be printed to the R console during the operation.  The verbose output might contain sensitive information (<em>e.g.</em> PHI), so turn this off if the output might be visible somewhere public. Optional.</p></td>
+      <td><p>A boolean value indicating if <code>message</code>s should be printed
+to the R console during the operation.  The verbose output might contain
+sensitive information (<em>e.g.</em> PHI), so turn this off if the output might
+be visible somewhere public. Optional.</p></td>
     </tr>
     <tr>
       <th>config_options</th>
-      <td><p>A list of options to pass to <code>POST</code> method in the <code>httr</code> package.  See the details in <code><a href='redcap_read_oneshot.html'>redcap_read_oneshot()</a></code> Optional.</p></td>
+      <td><p>A list of options to pass to <code>POST</code> method in the
+<code>httr</code> package.  See the details in <code><a href='redcap_read_oneshot.html'>redcap_read_oneshot()</a></code> Optional.</p></td>
     </tr>
     <tr>
       <th>id_position</th>
-      <td><p>The column position of the variable that unique identifies the subject.  This defaults to the first variable in the dataset.</p></td>
+      <td><p>The column position of the variable that unique
+identifies the subject.  This defaults to the first variable in the dataset.</p></td>
     </tr>
     </table>
 
@@ -295,14 +338,18 @@ differ in that <code>redcap_read</code> retrieves subsets of the data, and then 
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Specifically, it internally uses multiple calls to <code><a href='redcap_read_oneshot.html'>redcap_read_oneshot()</a></code> to select and return data.
-Initially, only primary key is queried through the REDCap API.  The long list is then subsetted into partitions,
-whose sizes are determined by the <code>batch_size</code> parameter.  REDCap is then queried for all variables of
-the subset's subjects.  This is repeated for each subset, before returning a unified <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code>.</p>
-<p>The function allows a delay between calls, which allows the server to attend to other users' requests.</p>
-<p>For <code>redcap_read()</code> to function properly, the user must have Export permissions for the
-'Full Data Set'.  Users with only 'De-Identified' export privileges can still use
-<code>redcap_read_oneshot</code>.  To grant the appropriate permissions:</p><ul>
+    <p>Specifically, it internally uses multiple calls to <code><a href='redcap_read_oneshot.html'>redcap_read_oneshot()</a></code>
+to select and return data.  Initially, only primary key is queried through
+the REDCap API.  The long list is then subsetted into partitions, whose
+sizes are determined by the <code>batch_size</code> parameter.  REDCap is then
+queried for all variables of the subset's subjects.  This is repeated for
+each subset, before returning a unified <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code>.</p>
+<p>The function allows a delay between calls, which allows the server to
+attend to other users' requests.</p>
+<p>For <code>redcap_read()</code> to function properly, the user must have Export
+permissions for the 'Full Data Set'.  Users with only 'De-Identified'
+export privileges can still use <code>redcap_read_oneshot</code>.  To grant the
+appropriate permissions:</p><ul>
 <li><p>go to 'User Rights' in the REDCap project site,</p></li>
 <li><p>select the desired user, and then select 'Edit User Privileges',</p></li>
 <li><p>in the 'Data Exports' radio buttons, select 'Full Data Set'.</p></li>
@@ -310,10 +357,13 @@ the subset's subjects.  This is repeated for each subset, before returning a uni
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-on the REDCap wiki (<em>i.e.</em>, https://community.projectredcap.org/articles/456/api-documentation.html and
-https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
-for the wiki, please ask your campus REDCap administrator to send you the static material.</p>
+    <p>The official documentation can be found on the 'API Help Page'
+and 'API Examples' pages on the REDCap wiki (<em>i.e.</em>,
+https://community.projectredcap.org/articles/456/api-documentation.html
+and
+https://community.projectredcap.org/articles/462/api-examples.html).
+If you do not have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {

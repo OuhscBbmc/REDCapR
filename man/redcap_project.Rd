@@ -3,18 +3,21 @@
 \docType{class}
 \name{redcap_project}
 \alias{redcap_project}
-\title{A \code{Reference Class} to make later calls to REDCap more convenient}
+\title{A Reference Class to make later calls to REDCap more convenient}
 \description{
 This \code{Reference Class} represents a REDCap project.
-Once some values are set that are specific to a REDCap project (such as the URI and token),
-later calls are less verbose (such as reading and writing data).  The functionality
+Once some values are set that are specific to a REDCap project
+(such as the URI and token), later calls are less verbose
+(such as reading and writing data).
 }
 \section{Fields}{
 
 \describe{
-\item{\code{redcap_uri}}{The URI (uniform resource identifier) of the REDCap project.  Required.}
+\item{\code{redcap_uri}}{The URI (uniform resource identifier) of the
+REDCap project.  Required.}
 
-\item{\code{token}}{token The user-specific string that serves as the password for a project.  Required.}
+\item{\code{token}}{token The user-specific string that serves as the
+password for a project.  Required.}
 }}
 
 \section{Methods}{
@@ -40,22 +43,23 @@ token   <- "D70F9ACD1EDD6F151C6EA78683944E98"
 project <- REDCapR::redcap_project$new(redcap_uri=uri, token=token)
 ds_all  <- project$read()
 
-#Demonstrate how repeated calls are more concise when the token and url aren't always passed.
-ds_three_columns <- project$read(fields=c("record_id", "sex", "height"))$data
+# Demonstrate how repeated calls are more concise when the token and
+#   url aren't always passed.
+ds_skinny <- project$read(fields=c("record_id", "sex", "height"))$data
 
-ids_of_males vv <- ds_three_columns$record_id[ds_three_columns$sex==1]
-ids_of_shorties <- ds_three_columns$record_id[ds_three_columns$height < 40]
+ids_of_males vv <- ds_skinny$record_id[ds_skinny$sex==1]
+ids_of_shorties <- ds_skinny$record_id[ds_skinny$height < 40]
 
 ds_males        <- project$read(records=ids_of_males, batch_size=2)$data
 ds_shorties     <- project$read(records=ids_of_shorties)$data
 
 #Switch the Genders
-sex_original         <- ds_three_columns$sex
-ds_three_columns$sex <- (1 - ds_three_columns$sex)
-project$write(ds_three_columns)
+sex_original   <- ds_skinny$sex
+ds_skinny$sex  <- (1 - ds_skinny$sex)
+project$write(ds_skinny)
 
 #Switch the Genders back
-ds_three_columns$sex <- sex_original
-project$write(ds_three_columns)
+ds_skinny$sex <- sex_original
+project$write(ds_skinny)
 }
 }
