@@ -56,7 +56,6 @@
 #' filtering the data to be returned by this API method, in which the API
 #' will only return the records (or record-events, if a longitudinal project)
 #' where the logic evaluates as TRUE.   An blank/empty string returns all records.
-#'
 #' @param col_types A [readr::cols()] object passed internally to
 #' [readr::read_csv()].  Optional.
 #' @param guess_type A boolean value indicating if all columns should be
@@ -75,11 +74,18 @@
 #'
 #' @return Currently, a list is returned with the following elements:
 #' * `data`: An R [base::data.frame()] of the desired records and columns.
-#' * `success`: A boolean value indicating if the operation was apparently successful.
-#' * `status_codes`: A collection of [http status codes](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes), separated by semicolons.  There is one code for each batch attempted.
-#' * `outcome_messages`: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.
-#' * `records_collapsed`: The desired records IDs, collapsed into a single string, separated by commas.
-#' * `fields_collapsed`: The desired field names, collapsed into a single string, separated by commas.
+#' * `success`: A boolean value indicating if the operation was apparently
+#' successful.
+#' * `status_codes`: A collection of
+#' [http status codes](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes),
+#' separated by semicolons.  There is one code for each batch attempted.
+#' * `outcome_messages`: A collection of human readable strings indicating the
+#' operations' semicolons.  There is one code for each batch attempted.  In an
+#' unsuccessful operation, it should contain diagnostic information.
+#' * `records_collapsed`: The desired records IDs, collapsed into a single
+#' string, separated by commas.
+#' * `fields_collapsed`: The desired field names, collapsed into a single
+#' string, separated by commas.
 #' * `filter_logic`: The filter statement passed as an argument.
 #' * `elapsed_seconds`: The duration of the function.
 #'
@@ -327,7 +333,7 @@ redcap_read <- function(
   status_code_combined     <- paste(lst_status_code    , collapse="; ")
   outcome_message_combined <- paste(lst_outcome_message, collapse="; ")
 
-  return( list(
+  list(
     data                = ds_stacked,
     success             = success_combined,
     status_codes        = status_code_combined,
@@ -339,7 +345,7 @@ redcap_read <- function(
     events_collapsed    = events_collapsed,
     filter_logic        = filter_logic,
     elapsed_seconds     = elapsed_seconds
-  ) )
+  )
 }
 
 warn_hash_record_id <- function( )  {

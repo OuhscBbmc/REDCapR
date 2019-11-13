@@ -108,11 +108,18 @@ This defaults to the first variable in the dataset.}
 Currently, a list is returned with the following elements:
 \itemize{
 \item \code{data}: An R \code{\link[base:data.frame]{base::data.frame()}} of the desired records and columns.
-\item \code{success}: A boolean value indicating if the operation was apparently successful.
-\item \code{status_codes}: A collection of \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes}, separated by semicolons.  There is one code for each batch attempted.
-\item \code{outcome_messages}: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.
-\item \code{records_collapsed}: The desired records IDs, collapsed into a single string, separated by commas.
-\item \code{fields_collapsed}: The desired field names, collapsed into a single string, separated by commas.
+\item \code{success}: A boolean value indicating if the operation was apparently
+successful.
+\item \code{status_codes}: A collection of
+\href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes},
+separated by semicolons.  There is one code for each batch attempted.
+\item \code{outcome_messages}: A collection of human readable strings indicating the
+operations' semicolons.  There is one code for each batch attempted.  In an
+unsuccessful operation, it should contain diagnostic information.
+\item \code{records_collapsed}: The desired records IDs, collapsed into a single
+string, separated by commas.
+\item \code{fields_collapsed}: The desired field names, collapsed into a single
+string, separated by commas.
 \item \code{filter_logic}: The filter statement passed as an argument.
 \item \code{elapsed_seconds}: The duration of the function.
 }

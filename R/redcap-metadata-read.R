@@ -151,7 +151,7 @@ redcap_metadata_read <- function(
   if (verbose)
     message(outcome_message)
 
-  return(list(
+  list(
     data               = ds,
     success            = kernel$success,
     status_code        = kernel$status_code,
@@ -160,5 +160,5 @@ redcap_metadata_read <- function(
     fields_collapsed   = fields_collapsed,
     elapsed_seconds    = kernel$elapsed_seconds,
     raw_text           = kernel$raw_text
-  ))
+  )
 }
