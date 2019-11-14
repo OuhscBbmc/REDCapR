@@ -90,7 +90,7 @@ datasets that could tie up the server." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9003</span>
       </span>
     </div>
 
@@ -171,16 +171,33 @@ be more appropriate than <code><a href='redcap_read_oneshot.html'>redcap_read_on
 datasets that could tie up the server.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>redcap_read</span>(<span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>100L</span>, <span class='kw'>interbatch_delay</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>continue_on_error</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>redcap_uri</span>, <span class='no'>token</span>, <span class='kw'>records</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>records_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>fields</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fields_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>forms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>forms_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>events</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>events_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>raw_or_label</span> <span class='kw'>=</span> <span class='st'>"raw"</span>,
-  <span class='kw'>raw_or_label_headers</span> <span class='kw'>=</span> <span class='st'>"raw"</span>, <span class='kw'>export_checkbox_label</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>export_survey_fields</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>export_data_access_groups</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>filter_logic</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>col_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>guess_type</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>guess_max</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>id_position</span> <span class='kw'>=</span> <span class='fl'>1L</span>)</pre>
+    <pre class="usage"><span class='fu'>redcap_read</span>(
+  <span class='kw'>batch_size</span> <span class='kw'>=</span> <span class='fl'>100L</span>,
+  <span class='kw'>interbatch_delay</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+  <span class='kw'>continue_on_error</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>redcap_uri</span>,
+  <span class='no'>token</span>,
+  <span class='kw'>records</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>records_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>fields</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>fields_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>forms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>forms_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>events</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>events_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>raw_or_label</span> <span class='kw'>=</span> <span class='st'>"raw"</span>,
+  <span class='kw'>raw_or_label_headers</span> <span class='kw'>=</span> <span class='st'>"raw"</span>,
+  <span class='kw'>export_checkbox_label</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>export_survey_fields</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>export_data_access_groups</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>filter_logic</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>col_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>guess_type</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>guess_max</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>id_position</span> <span class='kw'>=</span> <span class='fl'>1L</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -319,7 +336,8 @@ be visible somewhere public. Optional.</p></td>
     <tr>
       <th>id_position</th>
       <td><p>The column position of the variable that unique
-identifies the subject.  This defaults to the first variable in the dataset.</p></td>
+identifies the subject (typically <code>record_id</code>).
+This defaults to the first variable in the dataset.</p></td>
     </tr>
     </table>
 
@@ -327,11 +345,18 @@ identifies the subject.  This defaults to the first variable in the dataset.</p>
 
     <p>Currently, a list is returned with the following elements:</p><ul>
 <li><p><code>data</code>: An R <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> of the desired records and columns.</p></li>
-<li><p><code>success</code>: A boolean value indicating if the operation was apparently successful.</p></li>
-<li><p><code>status_codes</code>: A collection of <a href='http://en.wikipedia.org/wiki/List_of_HTTP_status_codes'>http status codes</a>, separated by semicolons.  There is one code for each batch attempted.</p></li>
-<li><p><code>outcome_messages</code>: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.</p></li>
-<li><p><code>records_collapsed</code>: The desired records IDs, collapsed into a single string, separated by commas.</p></li>
-<li><p><code>fields_collapsed</code>: The desired field names, collapsed into a single string, separated by commas.</p></li>
+<li><p><code>success</code>: A boolean value indicating if the operation was apparently
+successful.</p></li>
+<li><p><code>status_codes</code>: A collection of
+<a href='http://en.wikipedia.org/wiki/List_of_HTTP_status_codes'>http status codes</a>,
+separated by semicolons.  There is one code for each batch attempted.</p></li>
+<li><p><code>outcome_messages</code>: A collection of human readable strings indicating the
+operations' semicolons.  There is one code for each batch attempted.  In an
+unsuccessful operation, it should contain diagnostic information.</p></li>
+<li><p><code>records_collapsed</code>: The desired records IDs, collapsed into a single
+string, separated by commas.</p></li>
+<li><p><code>fields_collapsed</code>: The desired field names, collapsed into a single
+string, separated by commas.</p></li>
 <li><p><code>filter_logic</code>: The filter statement passed as an argument.</p></li>
 <li><p><code>elapsed_seconds</code>: The duration of the function.</p></li>
 </ul>

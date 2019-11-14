@@ -49,7 +49,8 @@
 
 
 <meta property="og:title" content="Read/Export records from a REDCap project --still in development — redcap_read_oneshot_eav" />
-<meta property="og:description" content="This function uses REDCap's API to select and return data.  This function is still in development." />
+<meta property="og:description" content="This function uses REDCap's API to select and return data.
+This function is still in development." />
 <meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -83,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9003</span>
       </span>
     </div>
 
@@ -155,82 +156,119 @@
     </div>
 
     <div class="ref-description">
-    <p>This function uses REDCap's API to select and return data.  This function is still in development.</p>
+    <p>This function uses REDCap's API to select and return data.
+This function is still in development.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>redcap_read_oneshot_eav</span>(<span class='no'>redcap_uri</span>, <span class='no'>token</span>, <span class='kw'>records</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>records_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>fields</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fields_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>forms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>forms_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>events</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>events_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>raw_or_label</span> <span class='kw'>=</span> <span class='st'>"raw"</span>,
-  <span class='kw'>raw_or_label_headers</span> <span class='kw'>=</span> <span class='st'>"raw"</span>, <span class='kw'>export_data_access_groups</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>filter_logic</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>redcap_read_oneshot_eav</span>(
+  <span class='no'>redcap_uri</span>,
+  <span class='no'>token</span>,
+  <span class='kw'>records</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>records_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>fields</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>fields_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>forms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>forms_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>events</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>events_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>raw_or_label</span> <span class='kw'>=</span> <span class='st'>"raw"</span>,
+  <span class='kw'>raw_or_label_headers</span> <span class='kw'>=</span> <span class='st'>"raw"</span>,
+  <span class='kw'>export_data_access_groups</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>filter_logic</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>redcap_uri</th>
-      <td><p>The URI (uniform resource identifier) of the REDCap project.  Required.</p></td>
+      <td><p>The URI (uniform resource identifier) of the REDCap
+project.  Required.</p></td>
     </tr>
     <tr>
       <th>token</th>
-      <td><p>The user-specific string that serves as the password for a project.  Required.</p></td>
+      <td><p>The user-specific string that serves as the password for a
+project.  Required.</p></td>
     </tr>
     <tr>
       <th>records</th>
-      <td><p>An array, where each element corresponds to the ID of a desired record.  Optional.</p></td>
+      <td><p>An array, where each element corresponds to the ID of a
+desired record.  Optional.</p></td>
     </tr>
     <tr>
       <th>records_collapsed</th>
-      <td><p>A single string, where the desired ID values are separated by commas.  Optional.</p></td>
+      <td><p>A single string, where the desired ID values
+are separated by commas.  Optional.</p></td>
     </tr>
     <tr>
       <th>fields</th>
-      <td><p>An array, where each element corresponds to a desired project field.  Optional.</p></td>
+      <td><p>An array, where each element corresponds to a desired
+project field.  Optional.</p></td>
     </tr>
     <tr>
       <th>fields_collapsed</th>
-      <td><p>A single string, where the desired field names are separated by commas.  Optional.</p></td>
+      <td><p>A single string, where the desired field names
+are separated by commas.  Optional.</p></td>
     </tr>
     <tr>
       <th>forms</th>
-      <td><p>An array, where each element corresponds to a desired project field.  Optional.</p></td>
+      <td><p>An array, where each element corresponds to a desired project
+field.  Optional.</p></td>
     </tr>
     <tr>
       <th>forms_collapsed</th>
-      <td><p>A single string, where the desired form names are separated by commas.  Optional.</p></td>
+      <td><p>A single string, where the desired form names are
+separated by commas.  Optional.</p></td>
     </tr>
     <tr>
       <th>events</th>
-      <td><p>An array, where each element corresponds to a desired project event.  Optional.</p></td>
+      <td><p>An array, where each element corresponds to a desired project
+event.  Optional.</p></td>
     </tr>
     <tr>
       <th>events_collapsed</th>
-      <td><p>A single string, where the desired event names are separated by commas.  Optional.</p></td>
+      <td><p>A single string, where the desired event names are
+separated by commas.  Optional.</p></td>
     </tr>
     <tr>
       <th>raw_or_label</th>
-      <td><p>A string (either <code>'raw'</code> or <code>'label'</code> that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is <code>'raw'</code>.</p></td>
+      <td><p>A string (either <code>'raw'</code> or <code>'label'</code> that specifies
+whether to export the raw coded values or the labels for the options of
+multiple choice fields.  Default is <code>'raw'</code>.</p></td>
     </tr>
     <tr>
       <th>raw_or_label_headers</th>
-      <td><p>A string (either <code>'raw'</code> or <code>'label'</code> that specifies for the CSV headers whether to export the variable/field names (raw) or the field labels (label).  Default is <code>'raw'</code>.</p></td>
+      <td><p>A string (either <code>'raw'</code> or <code>'label'</code> that
+specifies for the CSV headers whether to export the variable/field names
+(raw) or the field labels (label).  Default is <code>'raw'</code>.</p></td>
     </tr>
     <tr>
       <th>export_data_access_groups</th>
-      <td><p>A boolean value that specifies whether or not to export the <code>redcap_data_access_group</code> field when data access groups are utilized in the project. Default is <code>FALSE</code>. See the details below.</p></td>
+      <td><p>A boolean value that specifies whether or
+not to export the <code>redcap_data_access_group</code> field when data access groups
+are utilized in the project. Default is <code>FALSE</code>. See the details below.</p></td>
     </tr>
     <tr>
       <th>filter_logic</th>
-      <td><p>String of logic text (e.g., <code>[gender] = 'male'</code>) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.</p></td>
+      <td><p>String of logic text (e.g., <code>[gender] = 'male'</code>) for
+filtering the data to be returned by this API method, in which the API
+will only return the records (or record-events, if a longitudinal project)
+where the logic evaluates as TRUE.   An blank/empty string returns all
+records.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>A boolean value indicating if <code>message</code>s should be printed to the R console during the operation.  The verbose output might contain sensitive information (<em>e.g.</em> PHI), so turn this off if the output might be visible somewhere public. Optional.</p></td>
+      <td><p>A boolean value indicating if <code>message</code>s should be printed
+to the R console during the operation.  The verbose output might contain
+sensitive information (<em>e.g.</em> PHI), so turn this off if the output might
+be visible somewhere public. Optional.</p></td>
     </tr>
     <tr>
       <th>config_options</th>
-      <td><p>A list of options to pass to <code>POST</code> method in the <code>httr</code> package.  See the details below. Optional.</p></td>
+      <td><p>A list of options to pass to <code>POST</code> method in the
+<code>httr</code> package.  See the details below. Optional.</p></td>
     </tr>
     </table>
 
@@ -238,31 +276,45 @@
 
     <p>Currently, a list is returned with the following elements:</p><ul>
 <li><p><code>data</code>: An R <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> of the desired records and columns.</p></li>
-<li><p><code>success</code>: A boolean value indicating if the operation was apparently successful.</p></li>
-<li><p><code>status_code</code>: The <a href='http://en.wikipedia.org/wiki/List_of_HTTP_status_codes'>http status code</a> of the operation.</p></li>
-<li><p><code>outcome_message</code>: A human readable string indicating the operation's outcome.</p></li>
-<li><p><code>records_collapsed</code>: The desired records IDs, collapsed into a single string, separated by commas.</p></li>
-<li><p><code>fields_collapsed</code>: The desired field names, collapsed into a single string, separated by commas.</p></li>
+<li><p><code>success</code>: A boolean value indicating if the operation was apparently
+successful.</p></li>
+<li><p><code>status_code</code>: The
+<a href='http://en.wikipedia.org/wiki/List_of_HTTP_status_codes'>http status code</a>
+of the operation.</p></li>
+<li><p><code>outcome_message</code>: A human readable string indicating the operation's
+outcome.</p></li>
+<li><p><code>records_collapsed</code>: The desired records IDs, collapsed into a single
+string, separated by commas.</p></li>
+<li><p><code>fields_collapsed</code>: The desired field names, collapsed into a single
+string, separated by commas.</p></li>
 <li><p><code>filter_logic</code>: The filter statement passed as an argument.</p></li>
 <li><p><code>elapsed_seconds</code>: The duration of the function.</p></li>
-<li><p><code>raw_text</code>: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the <code>raw_text</code> is returned as an empty string to save RAM.</p></li>
+<li><p><code>raw_text</code>: If an operation is NOT successful, the text returned by
+REDCap.  If an operation is successful, the <code>raw_text</code> is returned as an
+empty string to save RAM.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The full list of configuration options accepted by the <code>httr</code> package is viewable by executing <code><a href='https://httr.r-lib.org/reference/httr_options.html'>httr::httr_options()</a></code>.  The <code>httr</code>
-package and documentation is available at https://cran.r-project.org/package=httr.</p>
-<p>If you do not pass in this export_data_access_groups value, it will default to <code>FALSE</code>.
-The following is from the API help page for version 5.2.3:
-This flag is only viable if the user whose token is being used to make the API request is <em>not</em>
-in a data access group. If the user is in a group, then this flag will revert to its default value.</p>
+    <p>The full list of configuration options accepted by the <code>httr</code> package is
+viewable by executing <code><a href='https://httr.r-lib.org/reference/httr_options.html'>httr::httr_options()</a></code>.  The <code>httr</code>
+package and documentation is available at
+https://cran.r-project.org/package=httr.</p>
+<p>If you do not pass in this export_data_access_groups value, it will
+default to <code>FALSE</code>. The following is from the API help page for version
+5.2.3:
+This flag is only viable if the user whose token is being used to make
+the API request is <em>not</em> in a data access group. If the user is in a
+group, then this flag will revert to its default value.</p>
 <p>As of REDCap 6.14.3, this field is not exported in the EAV API call.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-on the REDCap wiki (<em>i.e.</em>, https://community.projectredcap.org/articles/456/api-documentation.html and
-https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
-for the wiki, please ask your campus REDCap administrator to send you the static material.</p>
+    <p>The official documentation can be found on the 'API Help Page'
+and 'API Examples' pages on the REDCap wiki (<em>i.e.</em>,
+https://community.projectredcap.org/articles/456/api-documentation.html and
+https://community.projectredcap.org/articles/462/api-examples.html).
+If you do not have an account for the wiki, please ask your campus
+REDCap administrator to send you the static material.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {

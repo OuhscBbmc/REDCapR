@@ -4,37 +4,57 @@
 \alias{redcap_write_oneshot}
 \title{Write/Import records to a REDCap project}
 \usage{
-redcap_write_oneshot(ds, redcap_uri, token, verbose = TRUE,
-  config_options = NULL)
+redcap_write_oneshot(
+  ds,
+  redcap_uri,
+  token,
+  verbose = TRUE,
+  config_options = NULL
+)
 }
 \arguments{
-\item{ds}{The \code{\link[base:data.frame]{base::data.frame()}} to be imported into the REDCap project.  Required.}
+\item{ds}{The \code{\link[base:data.frame]{base::data.frame()}} to be imported into the REDCap project.
+Required.}
 
-\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap project.  Required.}
+\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap
+project.  Required.}
 
-\item{token}{The user-specific string that serves as the password for a project.  Required.}
+\item{token}{The user-specific string that serves as the password for a
+project.  Required.}
 
-\item{verbose}{A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.}
+\item{verbose}{A boolean value indicating if \code{message}s should be printed
+to the R console during the operation.  The verbose output might contain
+sensitive information (\emph{e.g.} PHI), so turn this off if the output might
+be visible somewhere public. Optional.}
 
-\item{config_options}{A list of options to pass to \code{\link[httr:POST]{httr::POST()}} method in the 'httr' package.  See the details in \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}} Optional.}
+\item{config_options}{A list of options to pass to \code{\link[httr:POST]{httr::POST()}} method
+in the 'httr' package.  See the details in \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}} Optional.}
 }
 \value{
 Currently, a list is returned with the following elements:
 \itemize{
-\item \code{success}: A boolean value indicating if the operation was apparently successful.
-\item \code{status_code}: The \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code} of the operation.
-\item \code{outcome_message}: A human readable string indicating the operation's outcome.
+\item \code{success}: A boolean value indicating if the operation was apparently
+successful.
+\item \code{status_code}: The
+\href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code}
+of the operation.
+\item \code{outcome_message}: A human readable string indicating the operation's
+outcome.
 \item \code{records_affected_count}: The number of records inserted or updated.
 \item \code{affected_ids}: The subject IDs of the inserted or updated records.
 \item \code{elapsed_seconds}: The duration of the function.
-\item \code{raw_text}: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the \code{raw_text} is returned as an empty string to save RAM.
+\item \code{raw_text}: If an operation is NOT successful, the text returned by
+REDCap.  If an operation is successful, the \code{raw_text} is returned as an
+empty string to save RAM.
 }
 }
 \description{
 This function uses REDCap's API to select and return data.
 }
 \details{
-Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See \code{\link[=validate_for_write]{validate_for_write()}} for a helper function that checks for some common important conflicts.
+Currently, the function doesn't modify any variable types to conform to
+REDCap's supported variables.  See \code{\link[=validate_for_write]{validate_for_write()}} for a helper
+function that checks for some common important conflicts.
 }
 \examples{
 \dontrun{
@@ -46,11 +66,9 @@ token          <- "D70F9ACD1EDD6F151C6EA78683944E98"
 result_read1   <- REDCapR::redcap_read_oneshot(redcap_uri=uri, token=token)
 ds1            <- result_read1$data
 ds1$telephone
-# The line above returns something like this (depending on its previous state).
-# [1] "(432) 456-4848" "(234) 234-2343" "(433) 435-9865" "(987) 654-3210" "(333) 333-4444"
 
 # Manipulate a field in the dataset in a VALID way
-ds1$telephone  <- sprintf("(405) 321-\%1$i\%1$i\%1$i\%1$i", seq_len(nrow(ds1)))
+ds1$telephone  <- paste0("(405) 321-000", seq_len(nrow(ds1)))
 
 ds1 <- ds1[1:3, ]
 ds1$age        <- NULL; ds1$bmi <- NULL #Drop the calculated fields before writing.
@@ -60,11 +78,9 @@ result_write   <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=to
 result_read2   <- REDCapR::redcap_read_oneshot(redcap_uri=uri, token=token)
 ds2            <- result_read2$data
 ds2$telephone
-# The line above returns something like this.  Notice only the first three lines changed.
-# [1] "(405) 321-1111" "(405) 321-2222" "(405) 321-3333" "(987) 654-3210" "(333) 333-4444"
 
 # Manipulate a field in the dataset in an INVALID way.  A US exchange can't be '111'.
-ds1$telephone  <- sprintf("(405) 111-\%1$i\%1$i\%1$i\%1$i", seq_len(nrow(ds1)))
+ds1$telephone  <- paste0("(405) 321-000", seq_len(nrow(ds1)))
 
 # This next line will throw an error.
 result_write   <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=token)
@@ -72,10 +88,12 @@ result_write$raw_text
 }
 }
 \references{
-The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-on the REDCap wiki (\emph{i.e.}, https://community.projectredcap.org/articles/456/api-documentation.html and
-https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
-for the wiki, please ask your campus REDCap administrator to send you the static material.
+The official documentation can be found on the 'API Help Page'
+and 'API Examples' pages on the REDCap wiki (\emph{i.e.},
+https://community.projectredcap.org/articles/456/api-documentation.html and
+https://community.projectredcap.org/articles/462/api-examples.html).
+If you do not have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.
 }
 \author{
 Will Beasley

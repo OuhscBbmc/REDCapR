@@ -4,8 +4,16 @@
 \alias{redcap_upload_file_oneshot}
 \title{Upload a file into to a REDCap project record}
 \usage{
-redcap_upload_file_oneshot(file_name, record, redcap_uri, token, field,
-  event = "", verbose = TRUE, config_options = NULL)
+redcap_upload_file_oneshot(
+  file_name,
+  record,
+  redcap_uri,
+  token,
+  field,
+  event = "",
+  verbose = TRUE,
+  config_options = NULL
+)
 }
 \arguments{
 \item{file_name}{The name of the relative or full file to be uploaded into the REDCap project.  Required.}

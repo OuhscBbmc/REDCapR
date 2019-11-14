@@ -4,10 +4,18 @@
 \alias{redcap_download_instrument}
 \title{Download REDCap Instruments}
 \usage{
-redcap_download_instrument(file_name = NULL, directory = NULL,
-  overwrite = FALSE, redcap_uri, token, record = character(0),
-  instrument = "", event = "", verbose = TRUE,
-  config_options = NULL)
+redcap_download_instrument(
+  file_name = NULL,
+  directory = NULL,
+  overwrite = FALSE,
+  redcap_uri,
+  token,
+  record = character(0),
+  instrument = "",
+  event = "",
+  verbose = TRUE,
+  config_options = NULL
+)
 }
 \arguments{
 \item{file_name}{The name of the file where the downloaded pdf is saved. Optional.}

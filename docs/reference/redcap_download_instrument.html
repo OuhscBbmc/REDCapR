@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9003</span>
       </span>
     </div>
 
@@ -158,10 +158,18 @@
     <p>Download instruments as a pdf, with or without responses.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>redcap_download_instrument</span>(<span class='kw'>file_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>directory</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>redcap_uri</span>, <span class='no'>token</span>, <span class='kw'>record</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(<span class='fl'>0</span>),
-  <span class='kw'>instrument</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>event</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>redcap_download_instrument</span>(
+  <span class='kw'>file_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>directory</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>redcap_uri</span>,
+  <span class='no'>token</span>,
+  <span class='kw'>record</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(<span class='fl'>0</span>),
+  <span class='kw'>instrument</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>event</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

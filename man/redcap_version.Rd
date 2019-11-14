@@ -4,8 +4,7 @@
 \alias{redcap_version}
 \title{Determine version of REDCap instance}
 \usage{
-redcap_version(redcap_uri, token, verbose = TRUE,
-  config_options = NULL)
+redcap_version(redcap_uri, token, verbose = TRUE, config_options = NULL)
 }
 \arguments{
 \item{redcap_uri}{The URI (uniform resource identifier) of the REDCap project.  Required.}

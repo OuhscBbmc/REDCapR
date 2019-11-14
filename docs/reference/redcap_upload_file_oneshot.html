@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9003</span>
       </span>
     </div>
 
@@ -158,8 +158,16 @@
     <p>This function uses REDCap's API to upload a file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>redcap_upload_file_oneshot</span>(<span class='no'>file_name</span>, <span class='no'>record</span>, <span class='no'>redcap_uri</span>, <span class='no'>token</span>, <span class='no'>field</span>,
-  <span class='kw'>event</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>redcap_upload_file_oneshot</span>(
+  <span class='no'>file_name</span>,
+  <span class='no'>record</span>,
+  <span class='no'>redcap_uri</span>,
+  <span class='no'>token</span>,
+  <span class='no'>field</span>,
+  <span class='kw'>event</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

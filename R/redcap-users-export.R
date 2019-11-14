@@ -12,11 +12,13 @@
 #' @note
 #' **Documentation in REDCap 8.4.0**
 #'
-#' > This method allows you to export the list of users for a project,
-#' > including their user privileges and also email address, first name, and last name.
+#' ```
+#' This method allows you to export the list of users for a project,
+#' including their user privileges and also email address, first name, and last name.
 #'
-#' > Note: If the user has been assigned to a user role, it will return the user with
-#' >the role's defined privileges.
+#' Note: If the user has been assigned to a user role, it will return the user with
+#' the role's defined privileges.
+#' ```
 #'
 #' @examples
 #' uri      <- "https://bbmc.ouhsc.edu/redcap/api/"

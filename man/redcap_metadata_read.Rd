@@ -4,51 +4,78 @@
 \alias{redcap_metadata_read}
 \title{Export the metadata of a REDCap project}
 \usage{
-redcap_metadata_read(redcap_uri, token, forms = NULL,
-  forms_collapsed = "", fields = NULL, fields_collapsed = "",
-  verbose = TRUE, config_options = NULL)
+redcap_metadata_read(
+  redcap_uri,
+  token,
+  forms = NULL,
+  forms_collapsed = "",
+  fields = NULL,
+  fields_collapsed = "",
+  verbose = TRUE,
+  config_options = NULL
+)
 }
 \arguments{
-\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap project.  Required.}
+\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap
+project.  Required.}
 
-\item{token}{The user-specific string that serves as the password for a project.  Required.}
+\item{token}{The user-specific string that serves as the password for a
+project.  Required.}
 
-\item{forms}{An array, where each element corresponds to the REDCap form of the desired fields.  Optional.}
+\item{forms}{An array, where each element corresponds to the REDCap form
+of the desired fields.  Optional.}
 
-\item{forms_collapsed}{A single string, where the desired forms are separated by commas.  Optional.}
+\item{forms_collapsed}{A single string, where the desired forms are
+separated by commas.  Optional.}
 
-\item{fields}{An array, where each element corresponds to a desired project field.  Optional.}
+\item{fields}{An array, where each element corresponds to a desired project
+field.  Optional.}
 
-\item{fields_collapsed}{A single string, where the desired field names are separated by commas.  Optional.}
+\item{fields_collapsed}{A single string, where the desired field names are
+separated by commas.  Optional.}
 
-\item{verbose}{A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.}
+\item{verbose}{A boolean value indicating if \code{message}s should be printed
+to the R console during the operation.  The verbose output might contain
+sensitive information (\emph{e.g.} PHI), so turn this off if the output might
+be visible somewhere public. Optional.}
 
-\item{config_options}{A list of options to pass to \code{POST} method in the \code{httr} package.  See the details in \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}}. Optional.}
+\item{config_options}{A list of options to pass to \code{POST} method in the
+\code{httr} package.  See the details in \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}}. Optional.}
 }
 \value{
 Currently, a list is returned with the following elements:
 \itemize{
 \item \code{data}: An R \code{\link[base:data.frame]{base::data.frame()}} of the desired records and columns.
-\item \code{success}: A boolean value indicating if the operation was apparently successful.
-\item \code{status_codes}: A collection of \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes}, separated by semicolons.  There is one code for each batch attempted.
-\item \code{outcome_messages}: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.
-\item \code{forms_collapsed}: The desired records IDs, collapsed into a single string, separated by commas.
-\item \code{fields_collapsed}: The desired field names, collapsed into a single string, separated by commas.
+\item \code{success}: A boolean value indicating if the operation was apparently
+successful.
+\item \code{status_codes}: A collection of
+\href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes},
+separated by semicolons.  There is one code for each batch attempted.
+\item \code{outcome_messages}: A collection of human readable strings indicating the
+operations' semicolons.  There is one code for each batch attempted.  In an
+unsuccessful operation, it should contain diagnostic information.
+\item \code{forms_collapsed}: The desired records IDs, collapsed into a single
+string, separated by commas.
+\item \code{fields_collapsed}: The desired field names, collapsed into a single
+string, separated by commas.
 \item \code{elapsed_seconds}: The duration of the function.
 }
 }
 \description{
-Export the metadata (as a data dictionary) of a REDCap project as a
-\code{\link[base:data.frame]{base::data.frame()}}.
-Each row in the data dictionary corresponds to one field in the project's dataset.
+Export the metadata (as a data dictionary) of a REDCap project
+as a \code{\link[base:data.frame]{base::data.frame()}}. Each row in the data dictionary corresponds to
+one field in the project's dataset.
 }
 \details{
-Specifically, it internally uses multiple calls to \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}} to select and return data.
-Initially, only primary key is queried through the REDCap API.  The long list is then subsetted into partitions,
-whose sizes are determined by the \code{batch_size} parameter.  REDCap is then queried for all variables of
-the subset's subjects.  This is repeated for each subset, before returning a unified \code{\link[base:data.frame]{base::data.frame()}}.
+Specifically, it internally uses multiple calls to \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}}
+to select and return data.  Initially, only primary key is queried through
+the REDCap API.  The long list is then subsetted into partitions, whose
+sizes are determined by the \code{batch_size} parameter.  REDCap is then queried
+for all variables of the subset's subjects.  This is repeated for each
+subset, before returning a unified \code{\link[base:data.frame]{base::data.frame()}}.
 
-The function allows a delay between calls, which allows the server to attend to other users' requests.
+The function allows a delay between calls, which allows the server to
+attend to other users' requests.
 }
 \examples{
 \dontrun{
@@ -58,10 +85,12 @@ REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 }
 }
 \references{
-The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-on the REDCap wiki (\emph{i.e.}, https://community.projectredcap.org/articles/456/api-documentation.html and
-https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
-for the wiki, please ask your campus REDCap administrator to send you the static material.
+The official documentation can be found on the 'API Help Page'
+and 'API Examples' pages on the REDCap wiki (\emph{i.e.},
+https://community.projectredcap.org/articles/456/api-documentation.html and
+https://community.projectredcap.org/articles/462/api-examples.html).
+If you do not have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.
 }
 \author{
 Will Beasley

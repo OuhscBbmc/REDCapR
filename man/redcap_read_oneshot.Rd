@@ -4,80 +4,140 @@
 \alias{redcap_read_oneshot}
 \title{Read/Export records from a REDCap project}
 \usage{
-redcap_read_oneshot(redcap_uri, token, records = NULL,
-  records_collapsed = "", fields = NULL, fields_collapsed = "",
-  forms = NULL, forms_collapsed = "", events = NULL,
-  events_collapsed = "", raw_or_label = "raw",
-  raw_or_label_headers = "raw", export_checkbox_label = FALSE,
-  export_survey_fields = FALSE, export_data_access_groups = FALSE,
-  filter_logic = "", col_types = NULL, guess_type = TRUE,
-  guess_max = 1000L, verbose = TRUE, config_options = NULL)
+redcap_read_oneshot(
+  redcap_uri,
+  token,
+  records = NULL,
+  records_collapsed = "",
+  fields = NULL,
+  fields_collapsed = "",
+  forms = NULL,
+  forms_collapsed = "",
+  events = NULL,
+  events_collapsed = "",
+  raw_or_label = "raw",
+  raw_or_label_headers = "raw",
+  export_checkbox_label = FALSE,
+  export_survey_fields = FALSE,
+  export_data_access_groups = FALSE,
+  filter_logic = "",
+  col_types = NULL,
+  guess_type = TRUE,
+  guess_max = 1000L,
+  verbose = TRUE,
+  config_options = NULL
+)
 }
 \arguments{
-\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap project.  Required.}
+\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap
+project.  Required.}
 
-\item{token}{The user-specific string that serves as the password for a project.  Required.}
+\item{token}{The user-specific string that serves as the password for a
+project.  Required.}
 
-\item{records}{An array, where each element corresponds to the ID of a desired record.  Optional.}
+\item{records}{An array, where each element corresponds to the ID of a
+desired record.  Optional.}
 
-\item{records_collapsed}{A single string, where the desired ID values are separated by commas.  Optional.}
+\item{records_collapsed}{A single string, where the desired ID values
+are separated by commas.  Optional.}
 
-\item{fields}{An array, where each element corresponds to a desired project field.  Optional.}
+\item{fields}{An array, where each element corresponds to a desired project
+field.  Optional.}
 
-\item{fields_collapsed}{A single string, where the desired field names are separated by commas.  Optional.}
+\item{fields_collapsed}{A single string, where the desired field names are
+separated by commas.  Optional.}
 
-\item{forms}{An array, where each element corresponds to a desired project form.  Optional.}
+\item{forms}{An array, where each element corresponds to a desired project
+form.  Optional.}
 
-\item{forms_collapsed}{A single string, where the desired form names are separated by commas.  Optional.}
+\item{forms_collapsed}{A single string, where the desired form names are
+separated by commas.  Optional.}
 
-\item{events}{An array, where each element corresponds to a desired project event.  Optional.}
+\item{events}{An array, where each element corresponds to a desired project
+event.  Optional.}
 
-\item{events_collapsed}{A single string, where the desired event names are separated by commas.  Optional.}
+\item{events_collapsed}{A single string, where the desired event names are
+separated by commas.  Optional.}
 
-\item{raw_or_label}{A string (either \code{'raw'} or \code{'label'}) that specifies whether to export the raw coded values or the labels for the options of multiple choice fields.  Default is \code{'raw'}.}
+\item{raw_or_label}{A string (either \code{'raw'} or \code{'label'}) that specifies
+whether to export the raw coded values or the labels for the options of
+multiple choice fields.  Default is \code{'raw'}.}
 
-\item{raw_or_label_headers}{A string (either \code{'raw'} or \code{'label'} that specifies for the CSV headers whether to export the variable/field names (raw) or the field labels (label).  Default is \code{'raw'}.}
+\item{raw_or_label_headers}{A string (either \code{'raw'} or \code{'label'} that
+specifies for the CSV headers whether to export the variable/field names
+(raw) or the field labels (label).  Default is \code{'raw'}.}
 
-\item{export_checkbox_label}{specifies the format of checkbox field values specifically when exporting the data as labels.  If \code{raw_or_label} is \code{'label'} and \code{export_checkbox_label} is TRUE, the values will be the text displayed to the users.  Otherwise, the values will be 0/1.}
+\item{export_checkbox_label}{specifies the format of checkbox field values
+specifically when exporting the data as labels.  If \code{raw_or_label} is
+\code{'label'} and \code{export_checkbox_label} is TRUE, the values will be the text
+displayed to the users.  Otherwise, the values will be 0/1.}
 
-\item{export_survey_fields}{A boolean that specifies whether to export the survey identifier field (e.g., 'redcap_survey_identifier') or survey timestamp fields (e.g., instrument+'_timestamp') .}
+\item{export_survey_fields}{A boolean that specifies whether to export the
+survey identifier field (e.g., 'redcap_survey_identifier') or survey
+timestamp fields (e.g., instrument+'_timestamp') .}
 
-\item{export_data_access_groups}{A boolean value that specifies whether or not to export the \code{redcap_data_access_group} field when data access groups are utilized in the project. Default is \code{FALSE}. See the details below.}
+\item{export_data_access_groups}{A boolean value that specifies whether or
+not to export the \code{redcap_data_access_group} field when data access groups
+are utilized in the project. Default is \code{FALSE}. See the details below.}
 
-\item{filter_logic}{String of logic text (e.g., \code{[gender] = 'male'}) for filtering the data to be returned by this API method, in which the API will only return the records (or record-events, if a longitudinal project) where the logic evaluates as TRUE.   An blank/empty string returns all records.}
+\item{filter_logic}{String of logic text (e.g., \verb{[gender] = 'male'}) for
+filtering the data to be returned by this API method, in which the API will
+only return the records (or record-events, if a longitudinal project) where
+the logic evaluates as TRUE.   An blank/empty string returns all records.}
 
-\item{col_types}{A \code{\link[readr:cols]{readr::cols()}} object passed internally to \code{\link[readr:read_csv]{readr::read_csv()}}.  Optional.}
+\item{col_types}{A \code{\link[readr:cols]{readr::cols()}} object passed internally to
+\code{\link[readr:read_csv]{readr::read_csv()}}.  Optional.}
 
-\item{guess_type}{A boolean value indicating if all columns should be returned as character.  If false, \code{\link[readr:read_csv]{readr::read_csv()}} guesses the intended data type for each column.  Ignored if \code{col_types} is not null.}
+\item{guess_type}{A boolean value indicating if all columns should be
+returned as character.  If false, \code{\link[readr:read_csv]{readr::read_csv()}} guesses the intended
+data type for each column.  Ignored if \code{col_types} is not null.}
 
-\item{guess_max}{A positive integer passed to \code{\link[readr:read_csv]{readr::read_csv()}} that specifies the maximum number of records to use for guessing column types.}
+\item{guess_max}{A positive integer passed to \code{\link[readr:read_csv]{readr::read_csv()}} that
+specifies the maximum number of records to use for guessing column types.}
 
-\item{verbose}{A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.}
+\item{verbose}{A boolean value indicating if \code{message}s should be printed
+to the R console during the operation.  The verbose output might contain
+sensitive information (\emph{e.g.} PHI), so turn this off if the output might
+be visible somewhere public. Optional.}
 
-\item{config_options}{A list of options to pass to \code{POST} method in the \code{httr} package.  See the details below. Optional.}
+\item{config_options}{A list of options to pass to \code{POST} method in the
+\code{httr} package.  See the details below. Optional.}
 }
 \value{
 Currently, a list is returned with the following elements:
 \itemize{
 \item \code{data}: An R \code{\link[base:data.frame]{base::data.frame()}} of the desired records and columns.
-\item \code{success}: A boolean value indicating if the operation was apparently successful.
-\item \code{status_code}: The \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code} of the operation.
-\item \code{outcome_message}: A human readable string indicating the operation's outcome.
-\item \code{records_collapsed}: The desired records IDs, collapsed into a single string, separated by commas.
-\item \code{fields_collapsed}: The desired field names, collapsed into a single string, separated by commas.
+\item \code{success}: A boolean value indicating if the operation was apparently
+successful.
+\item \code{status_code}: The
+\href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code}
+of the operation.
+\item \code{outcome_message}: A human readable string indicating the operation's
+outcome.
+\item \code{records_collapsed}: The desired records IDs, collapsed into a single
+string, separated by commas.
+\item \code{fields_collapsed}: The desired field names, collapsed into a single
+string, separated by commas.
 \item \code{filter_logic}: The filter statement passed as an argument.
 \item \code{elapsed_seconds}: The duration of the function.
-\item \code{raw_text}: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the \code{raw_text} is returned as an empty string to save RAM.
+\item \code{raw_text}: If an operation is NOT successful, the text returned by
+REDCap.  If an operation is successful, the \code{raw_text} is returned as an
+empty string to save RAM.
 }
 }
 \description{
 This function uses REDCap's API to select and return data.
 }
 \details{
-The full list of configuration options accepted by the \code{httr} package is viewable by executing \code{\link[httr:httr_options]{httr::httr_options()}}.  The \code{httr}
-package and documentation is available at https://cran.r-project.org/package=httr.
+The full list of configuration options accepted by the \code{httr} package is
+viewable by executing \code{\link[httr:httr_options]{httr::httr_options()}}.  The \code{httr} package and
+documentation is available at https://cran.r-project.org/package=httr.
 
-If you do not pass in this export_data_access_groups value, it will default to \code{FALSE}. The following is from the API help page for version 5.2.3: This flag is only viable if the user whose token is being used to make the API request is \emph{not} in a data access group. If the user is in a group, then this flag will revert to its default value.
+If you do not pass in this export_data_access_groups value, it will default
+to \code{FALSE}. The following is from the API help page for version 5.2.3:
+This flag is only viable if the user whose token is being used to make the
+API request is \emph{not} in a data access group. If the user is in a group,
+then this flag will revert to its default value.
 }
 \examples{
 \dontrun{
@@ -123,10 +183,12 @@ ds_col_types <- REDCapR::redcap_read_oneshot(
 }
 }
 \references{
-The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-on the REDCap wiki (\emph{i.e.}, https://community.projectredcap.org/articles/456/api-documentation.html and
-https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
-for the wiki, please ask your campus REDCap administrator to send you the static material.
+The official documentation can be found on the 'API Help Page'
+and 'API Examples' pages on the REDCap wiki (\emph{i.e.},
+https://community.projectredcap.org/articles/456/api-documentation.html and
+https://community.projectredcap.org/articles/462/api-examples.html).
+If you do not have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.
 }
 \author{
 Will Beasley

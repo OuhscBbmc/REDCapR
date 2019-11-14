@@ -5,7 +5,7 @@
 \alias{redcap_project}
 \title{A Reference Class to make later calls to REDCap more convenient}
 \description{
-This \code{Reference Class} represents a REDCap project.
+This \verb{Reference Class} represents a REDCap project.
 Once some values are set that are specific to a REDCap project
 (such as the URI and token), later calls are less verbose
 (such as reading and writing data).
@@ -23,17 +23,37 @@ password for a project.  Required.}
 \section{Methods}{
 
 \describe{
-\item{\code{read(batch_size = 100L, interbatch_delay = 0, records = NULL,
-  records_collapsed = "", fields = NULL, fields_collapsed = "",
-  forms = NULL, forms_collapsed = "", events = NULL,
-  events_collapsed = "", raw_or_label = "raw",
-  raw_or_label_headers = "raw", export_checkbox_label = FALSE,
-  export_survey_fields = FALSE, export_data_access_groups = FALSE,
-  filter_logic = "", guess_type = TRUE, guess_max = 1000L,
-  verbose = TRUE, config_options = NULL)}}{Exports records from a REDCap project.}
+\item{\code{read(
+  batch_size = 100L,
+  interbatch_delay = 0,
+  records = NULL,
+  records_collapsed = "",
+  fields = NULL,
+  fields_collapsed = "",
+  forms = NULL,
+  forms_collapsed = "",
+  events = NULL,
+  events_collapsed = "",
+  raw_or_label = "raw",
+  raw_or_label_headers = "raw",
+  export_checkbox_label = FALSE,
+  export_survey_fields = FALSE,
+  export_data_access_groups = FALSE,
+  filter_logic = "",
+  guess_type = TRUE,
+  guess_max = 1000L,
+  verbose = TRUE,
+  config_options = NULL
+)}}{Exports records from a REDCap project.}
 
-\item{\code{write(ds_to_write, batch_size = 100L, interbatch_delay = 0,
-  continue_on_error = FALSE, verbose = TRUE, config_options = NULL)}}{Imports records to a REDCap project.}
+\item{\code{write(
+  ds_to_write,
+  batch_size = 100L,
+  interbatch_delay = 0,
+  continue_on_error = FALSE,
+  verbose = TRUE,
+  config_options = NULL
+)}}{Imports records to a REDCap project.}
 }}
 
 \examples{
@@ -47,7 +67,7 @@ ds_all  <- project$read()
 #   url aren't always passed.
 ds_skinny <- project$read(fields=c("record_id", "sex", "height"))$data
 
-ids_of_males vv <- ds_skinny$record_id[ds_skinny$sex==1]
+ids_of_males    <- ds_skinny$record_id[ds_skinny$sex==1]
 ids_of_shorties <- ds_skinny$record_id[ds_skinny$height < 40]
 
 ds_males        <- project$read(records=ids_of_males, batch_size=2)$data

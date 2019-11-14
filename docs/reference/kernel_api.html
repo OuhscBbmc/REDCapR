@@ -49,7 +49,8 @@
 
 
 <meta property="og:title" content="REDCapR internal function for calling the REDCap API — kernel_api" />
-<meta property="og:description" content="This function is used by other functions to read and write values." />
+<meta property="og:description" content="This function is used by other functions to read and write
+values." />
 <meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -83,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9003</span>
       </span>
     </div>
 
@@ -155,17 +156,25 @@
     </div>
 
     <div class="ref-description">
-    <p>This function is used by other functions to read and write values.</p>
+    <p>This function is used by other functions to read and write
+values.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>kernel_api</span>(<span class='no'>redcap_uri</span>, <span class='no'>post_body</span>, <span class='no'>config_options</span>)</pre>
+    <pre class="usage"><span class='fu'>kernel_api</span>(
+  <span class='no'>redcap_uri</span>,
+  <span class='no'>post_body</span>,
+  <span class='no'>config_options</span>,
+  <span class='kw'>encoding</span> <span class='kw'>=</span> <span class='st'>"UTF-8"</span>,
+  <span class='kw'>content_type</span> <span class='kw'>=</span> <span class='st'>"text/csv"</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>redcap_uri</th>
-      <td><p>The URI (uniform resource identifier) of the REDCap project.  Required.</p></td>
+      <td><p>The URI (uniform resource identifier) of the REDCap
+project.  Required.</p></td>
     </tr>
     <tr>
       <th>post_body</th>
@@ -173,7 +182,18 @@
     </tr>
     <tr>
       <th>config_options</th>
-      <td><p>A list of options to pass to <code>POST</code> method in the <code>httr</code> package.  See the details below.  Optional.</p></td>
+      <td><p>A list of options to pass to <code>POST</code> method in the
+<code>httr</code> package.  See the details below.  Optional.</p></td>
+    </tr>
+    <tr>
+      <th>encoding</th>
+      <td><p>The encoding value passed to <code><a href='https://httr.r-lib.org/reference/content.html'>httr::content()</a></code>.  Defaults
+to 'UTF-8'.</p></td>
+    </tr>
+    <tr>
+      <th>content_type</th>
+      <td><p>The MIME value passed to <code><a href='https://httr.r-lib.org/reference/content.html'>httr::content()</a></code>.  Defaults
+to 'text/csv'.</p></td>
     </tr>
     </table>
 
@@ -182,8 +202,9 @@
     <p>A <a href='https://rdrr.io/r/utils/packageDescription.html'>utils::packageVersion</a>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>If the API call is unsuccessful, a value of <code><a href='https://rdrr.io/r/base/numeric_version.html'>base::package_version("0.0.0")</a></code> will be returned.
-This ensures that a the function will always return an object of class <a href='https://rdrr.io/r/base/numeric_version.html'>base::package_version</a>.
+    <p>If the API call is unsuccessful, a value of
+<code><a href='https://rdrr.io/r/base/numeric_version.html'>base::package_version("0.0.0")</a></code> will be returned.  This ensures that a
+the function will always return an object of class <a href='https://rdrr.io/r/base/numeric_version.html'>base::package_version</a>.
 It guarantees the value can always be used in <code><a href='https://rdrr.io/r/utils/compareVersion.html'>utils::compareVersion()</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -199,7 +220,7 @@ It guarantees the value can always be used in <code><a href='https://rdrr.io/r/u
 
 <span class='co'># Consume the results in a few different ways.</span>
 <span class='no'>kernel</span>$<span class='no'>result</span></div><div class='output co'>#&gt; Response [https://bbmc.ouhsc.edu/redcap/api/]
-#&gt;   Date: 2019-11-11 15:33
+#&gt;   Date: 2019-11-14 06:51
 #&gt;   Status: 200
 #&gt;   Content-Type: text/csv; charset=utf-8
 #&gt;   Size: 557 B

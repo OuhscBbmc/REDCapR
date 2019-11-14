@@ -5,16 +5,33 @@
 \title{Read records from a REDCap project in subsets, and stacks them
 together before returning a \code{\link[base:data.frame]{base::data.frame()}}}
 \usage{
-redcap_read(batch_size = 100L, interbatch_delay = 0.5,
-  continue_on_error = FALSE, redcap_uri, token, records = NULL,
-  records_collapsed = "", fields = NULL, fields_collapsed = "",
-  forms = NULL, forms_collapsed = "", events = NULL,
-  events_collapsed = "", raw_or_label = "raw",
-  raw_or_label_headers = "raw", export_checkbox_label = FALSE,
-  export_survey_fields = FALSE, export_data_access_groups = FALSE,
-  filter_logic = "", col_types = NULL, guess_type = TRUE,
-  guess_max = NULL, verbose = TRUE, config_options = NULL,
-  id_position = 1L)
+redcap_read(
+  batch_size = 100L,
+  interbatch_delay = 0.5,
+  continue_on_error = FALSE,
+  redcap_uri,
+  token,
+  records = NULL,
+  records_collapsed = "",
+  fields = NULL,
+  fields_collapsed = "",
+  forms = NULL,
+  forms_collapsed = "",
+  events = NULL,
+  events_collapsed = "",
+  raw_or_label = "raw",
+  raw_or_label_headers = "raw",
+  export_checkbox_label = FALSE,
+  export_survey_fields = FALSE,
+  export_data_access_groups = FALSE,
+  filter_logic = "",
+  col_types = NULL,
+  guess_type = TRUE,
+  guess_max = NULL,
+  verbose = TRUE,
+  config_options = NULL,
+  id_position = 1L
+)
 }
 \arguments{
 \item{batch_size}{The maximum number of subject records a single batch
@@ -78,7 +95,7 @@ timestamp fields (e.g., instrument+'_timestamp') .}
 not to export the \code{redcap_data_access_group} field when data access groups
 are utilized in the project. Default is \code{FALSE}. See the details below.}
 
-\item{filter_logic}{String of logic text (e.g., \code{[gender] = 'male'}) for
+\item{filter_logic}{String of logic text (e.g., \verb{[gender] = 'male'}) for
 filtering the data to be returned by this API method, in which the API
 will only return the records (or record-events, if a longitudinal project)
 where the logic evaluates as TRUE.   An blank/empty string returns all records.}
@@ -108,11 +125,18 @@ This defaults to the first variable in the dataset.}
 Currently, a list is returned with the following elements:
 \itemize{
 \item \code{data}: An R \code{\link[base:data.frame]{base::data.frame()}} of the desired records and columns.
-\item \code{success}: A boolean value indicating if the operation was apparently successful.
-\item \code{status_codes}: A collection of \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes}, separated by semicolons.  There is one code for each batch attempted.
-\item \code{outcome_messages}: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.
-\item \code{records_collapsed}: The desired records IDs, collapsed into a single string, separated by commas.
-\item \code{fields_collapsed}: The desired field names, collapsed into a single string, separated by commas.
+\item \code{success}: A boolean value indicating if the operation was apparently
+successful.
+\item \code{status_codes}: A collection of
+\href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes},
+separated by semicolons.  There is one code for each batch attempted.
+\item \code{outcome_messages}: A collection of human readable strings indicating the
+operations' semicolons.  There is one code for each batch attempted.  In an
+unsuccessful operation, it should contain diagnostic information.
+\item \code{records_collapsed}: The desired records IDs, collapsed into a single
+string, separated by commas.
+\item \code{fields_collapsed}: The desired field names, collapsed into a single
+string, separated by commas.
 \item \code{filter_logic}: The filter statement passed as an argument.
 \item \code{elapsed_seconds}: The duration of the function.
 }

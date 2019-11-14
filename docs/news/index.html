@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9003</span>
       </span>
     </div>
 
@@ -156,12 +156,27 @@
 <h1 class="page-header">
 <a href="#version-011-released-" class="anchor"></a>Version 0.11 (Released ?)<small> Unreleased </small>
 </h1>
+<div id="breaking-changes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking Changes</h3>
+<ul>
+<li>A possible, but unlikely, breaking change is that <code><a href="../reference/kernel_api.html">kernel_api()</a></code> defaults to “text/csv” and UTF-8 encoding. Formerly, the function would decide on the content-type and encoding. More details are below in the ‘Stability Features’ subsection.</li>
+</ul>
+</div>
 <div id="new-features" class="section level3">
 <h3 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>New Features</h3>
 <ul>
 <li><p>It’s now possible to specify the exact <code>col_types</code> (a <a href="https://readr.tidyverse.org/reference/cols.html"><code><a href="https://readr.tidyverse.org/reference/cols.html">readr::cols</a></code></a> object) that is passed to <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> inside <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-read-oneshot.R"><code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code></a>. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/258'>#258</a>)</p></li>
 <li><p><a href="https://readr.tidyverse.org/reference/type_convert.html"><code>reader::type_convert()</code></a> is used <em>after</em> all the batches are stacked on top of each other. This way, batches cannot have incompatible data types as they’re combined. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/257'>#257</a>; thanks <a href='https://github.com/isaactpetersen'>@isaactpetersen</a> <a href='https://github.com/OuhscBbmc/REDCapR/issues/245'>#245</a>) Consequently, the <code>guess_max</code> parameter in <code><a href="../reference/redcap_read.html">redcap_read()</a></code> no longer serves a purpose, and has been soft-deprecated. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/267'>#267</a>)</p></li>
+</ul>
+</div>
+<div id="stability-features" class="section level3">
+<h3 class="hasAnchor">
+<a href="#stability-features" class="anchor"></a>Stability Features</h3>
+<ul>
+<li><p><code><a href="https://httr.r-lib.org/reference/content.html">httr::content()</a></code> (which is inside <code><a href="../reference/kernel_api.html">kernel_api()</a></code>) now processes the returned value as “text/csv”, by default. This should prevent strange characters from tricking the process as the internal variable <code>raw_text</code> is being formed. See the [httr::content()<code>](https://httr.r-lib.org/reference/content.html) documentation for a list of possible values for the</code>content_type` parameter. (Thanks to great debugging by <a href='https://github.com/vortexing'>@vortexing</a>, <a href='https://github.com/OuhscBbmc/REDCapR/issues/269'>#269</a>)</p></li>
+<li><p>Similarly, <code><a href="../reference/kernel_api.html">kernel_api()</a></code> now has an <code>encoding</code> parameter, which defaults to “UTF-8”. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/270'>#270</a>)</p></li>
 </ul>
 </div>
 <div id="corrections" class="section level3">
@@ -381,9 +396,9 @@
 <li>Users can specify if an operation should continue after an error occurs on a batch read or write. Regardless of their choice, more debugging output is written to the console if <code>verbose==TRUE</code>. Follows advice of <a href='https://github.com/johnaponte'>@johnaponte</a>, Benjamin Nutter (<a href='https://github.com/nutterb'>@nutterb</a>), and Rollie Parrish (<a href='https://github.com/rparrish'>@rparrish</a>). Closes <a href='https://github.com/OuhscBbmc/REDCapR/issues/43'>#43</a>.</li>
 </ul>
 </div>
-<div id="breaking-changes" class="section level3">
+<div id="breaking-changes-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#breaking-changes" class="anchor"></a>Breaking Changes</h3>
+<a href="#breaking-changes-1" class="anchor"></a>Breaking Changes</h3>
 <ul>
 <li>The <code>records_collapsed</code> default empty value is now an empty string (<em>i.e.</em>, <code>""</code>) instead of <code>NULL</code>. This applies when <code>records_collapsed</code> is either a parameter, or a returned value.</li>
 </ul>

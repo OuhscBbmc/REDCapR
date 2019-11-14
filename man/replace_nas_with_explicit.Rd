@@ -4,8 +4,12 @@
 \alias{replace_nas_with_explicit}
 \title{Create explicit factor level for missing values}
 \usage{
-replace_nas_with_explicit(scores, new_na_label = "Unknown",
-  create_factor = FALSE, add_unknown_level = FALSE)
+replace_nas_with_explicit(
+  scores,
+  new_na_label = "Unknown",
+  create_factor = FALSE,
+  add_unknown_level = FALSE
+)
 }
 \arguments{
 \item{scores}{An array of values, ideally either factor or character. Required}

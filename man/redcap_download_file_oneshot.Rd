@@ -4,9 +4,18 @@
 \alias{redcap_download_file_oneshot}
 \title{Download a file from a REDCap project record}
 \usage{
-redcap_download_file_oneshot(file_name = NULL, directory = NULL,
-  overwrite = FALSE, redcap_uri, token, record, field, event = "",
-  verbose = TRUE, config_options = NULL)
+redcap_download_file_oneshot(
+  file_name = NULL,
+  directory = NULL,
+  overwrite = FALSE,
+  redcap_uri,
+  token,
+  record,
+  field,
+  event = "",
+  verbose = TRUE,
+  config_options = NULL
+)
 }
 \arguments{
 \item{file_name}{The name of the file where the downloaded file is saved.

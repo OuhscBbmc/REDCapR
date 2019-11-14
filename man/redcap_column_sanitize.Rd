@@ -4,8 +4,12 @@
 \alias{redcap_column_sanitize}
 \title{Sanitize to adhere to REDCap character encoding requirements}
 \usage{
-redcap_column_sanitize(d, column_names = colnames(d),
-  encoding_initial = "latin1", substitution_character = "?")
+redcap_column_sanitize(
+  d,
+  column_names = colnames(d),
+  encoding_initial = "latin1",
+  substitution_character = "?"
+)
 }
 \arguments{
 \item{d}{The \code{\link[base:data.frame]{base::data.frame()}} containing the dataset used to update the REDCap project.  Required.}
@@ -26,7 +30,7 @@ Replace non-ASCII characters with legal characters that won't cause problems whe
 Letters like an accented 'A' are replaced with a plain 'A'.
 
 This is a thin wrapper around \code{\link[base:iconv]{base::iconv()}}.
-The \code{ASCII//TRANSLIT} option does the actual transliteration work.  As of \code{R 3.1.0}, the OSes use similar,
+The \verb{ASCII//TRANSLIT} option does the actual transliteration work.  As of \verb{R 3.1.0}, the OSes use similar,
 but different, versions to convert the characters.  Be aware of this in case you notice OS-dependent differences.
 }
 \examples{

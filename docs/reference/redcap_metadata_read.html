@@ -49,9 +49,9 @@
 
 
 <meta property="og:title" content="Export the metadata of a REDCap project — redcap_metadata_read" />
-<meta property="og:description" content="Export the metadata (as a data dictionary) of a REDCap project as a
-base::data.frame().
-Each row in the data dictionary corresponds to one field in the project's dataset." />
+<meta property="og:description" content="Export the metadata (as a data dictionary) of a REDCap project
+as a base::data.frame(). Each row in the data dictionary corresponds to
+one field in the project's dataset." />
 <meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -85,7 +85,7 @@ Each row in the data dictionary corresponds to one field in the project's datase
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9003</span>
       </span>
     </div>
 
@@ -157,49 +157,66 @@ Each row in the data dictionary corresponds to one field in the project's datase
     </div>
 
     <div class="ref-description">
-    <p>Export the metadata (as a data dictionary) of a REDCap project as a
-<code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code>.
-Each row in the data dictionary corresponds to one field in the project's dataset.</p>
+    <p>Export the metadata (as a data dictionary) of a REDCap project
+as a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code>. Each row in the data dictionary corresponds to
+one field in the project's dataset.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>redcap_metadata_read</span>(<span class='no'>redcap_uri</span>, <span class='no'>token</span>, <span class='kw'>forms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>forms_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>fields</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fields_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>redcap_metadata_read</span>(
+  <span class='no'>redcap_uri</span>,
+  <span class='no'>token</span>,
+  <span class='kw'>forms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>forms_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>fields</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>fields_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>redcap_uri</th>
-      <td><p>The URI (uniform resource identifier) of the REDCap project.  Required.</p></td>
+      <td><p>The URI (uniform resource identifier) of the REDCap
+project.  Required.</p></td>
     </tr>
     <tr>
       <th>token</th>
-      <td><p>The user-specific string that serves as the password for a project.  Required.</p></td>
+      <td><p>The user-specific string that serves as the password for a
+project.  Required.</p></td>
     </tr>
     <tr>
       <th>forms</th>
-      <td><p>An array, where each element corresponds to the REDCap form of the desired fields.  Optional.</p></td>
+      <td><p>An array, where each element corresponds to the REDCap form
+of the desired fields.  Optional.</p></td>
     </tr>
     <tr>
       <th>forms_collapsed</th>
-      <td><p>A single string, where the desired forms are separated by commas.  Optional.</p></td>
+      <td><p>A single string, where the desired forms are
+separated by commas.  Optional.</p></td>
     </tr>
     <tr>
       <th>fields</th>
-      <td><p>An array, where each element corresponds to a desired project field.  Optional.</p></td>
+      <td><p>An array, where each element corresponds to a desired project
+field.  Optional.</p></td>
     </tr>
     <tr>
       <th>fields_collapsed</th>
-      <td><p>A single string, where the desired field names are separated by commas.  Optional.</p></td>
+      <td><p>A single string, where the desired field names are
+separated by commas.  Optional.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>A boolean value indicating if <code>message</code>s should be printed to the R console during the operation.  The verbose output might contain sensitive information (<em>e.g.</em> PHI), so turn this off if the output might be visible somewhere public. Optional.</p></td>
+      <td><p>A boolean value indicating if <code>message</code>s should be printed
+to the R console during the operation.  The verbose output might contain
+sensitive information (<em>e.g.</em> PHI), so turn this off if the output might
+be visible somewhere public. Optional.</p></td>
     </tr>
     <tr>
       <th>config_options</th>
-      <td><p>A list of options to pass to <code>POST</code> method in the <code>httr</code> package.  See the details in <code><a href='redcap_read_oneshot.html'>redcap_read_oneshot()</a></code>. Optional.</p></td>
+      <td><p>A list of options to pass to <code>POST</code> method in the
+<code>httr</code> package.  See the details in <code><a href='redcap_read_oneshot.html'>redcap_read_oneshot()</a></code>. Optional.</p></td>
     </tr>
     </table>
 
@@ -207,27 +224,39 @@ Each row in the data dictionary corresponds to one field in the project's datase
 
     <p>Currently, a list is returned with the following elements:</p><ul>
 <li><p><code>data</code>: An R <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> of the desired records and columns.</p></li>
-<li><p><code>success</code>: A boolean value indicating if the operation was apparently successful.</p></li>
-<li><p><code>status_codes</code>: A collection of <a href='http://en.wikipedia.org/wiki/List_of_HTTP_status_codes'>http status codes</a>, separated by semicolons.  There is one code for each batch attempted.</p></li>
-<li><p><code>outcome_messages</code>: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.</p></li>
-<li><p><code>forms_collapsed</code>: The desired records IDs, collapsed into a single string, separated by commas.</p></li>
-<li><p><code>fields_collapsed</code>: The desired field names, collapsed into a single string, separated by commas.</p></li>
+<li><p><code>success</code>: A boolean value indicating if the operation was apparently
+successful.</p></li>
+<li><p><code>status_codes</code>: A collection of
+<a href='http://en.wikipedia.org/wiki/List_of_HTTP_status_codes'>http status codes</a>,
+separated by semicolons.  There is one code for each batch attempted.</p></li>
+<li><p><code>outcome_messages</code>: A collection of human readable strings indicating the
+operations' semicolons.  There is one code for each batch attempted.  In an
+unsuccessful operation, it should contain diagnostic information.</p></li>
+<li><p><code>forms_collapsed</code>: The desired records IDs, collapsed into a single
+string, separated by commas.</p></li>
+<li><p><code>fields_collapsed</code>: The desired field names, collapsed into a single
+string, separated by commas.</p></li>
 <li><p><code>elapsed_seconds</code>: The duration of the function.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Specifically, it internally uses multiple calls to <code><a href='redcap_read_oneshot.html'>redcap_read_oneshot()</a></code> to select and return data.
-Initially, only primary key is queried through the REDCap API.  The long list is then subsetted into partitions,
-whose sizes are determined by the <code>batch_size</code> parameter.  REDCap is then queried for all variables of
-the subset's subjects.  This is repeated for each subset, before returning a unified <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code>.</p>
-<p>The function allows a delay between calls, which allows the server to attend to other users' requests.</p>
+    <p>Specifically, it internally uses multiple calls to <code><a href='redcap_read_oneshot.html'>redcap_read_oneshot()</a></code>
+to select and return data.  Initially, only primary key is queried through
+the REDCap API.  The long list is then subsetted into partitions, whose
+sizes are determined by the <code>batch_size</code> parameter.  REDCap is then queried
+for all variables of the subset's subjects.  This is repeated for each
+subset, before returning a unified <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code>.</p>
+<p>The function allows a delay between calls, which allows the server to
+attend to other users' requests.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-on the REDCap wiki (<em>i.e.</em>, https://community.projectredcap.org/articles/456/api-documentation.html and
-https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
-for the wiki, please ask your campus REDCap administrator to send you the static material.</p>
+    <p>The official documentation can be found on the 'API Help Page'
+and 'API Examples' pages on the REDCap wiki (<em>i.e.</em>,
+https://community.projectredcap.org/articles/456/api-documentation.html and
+https://community.projectredcap.org/articles/462/api-examples.html).
+If you do not have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {

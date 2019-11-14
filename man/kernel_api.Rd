@@ -4,29 +4,40 @@
 \alias{kernel_api}
 \title{REDCapR internal function for calling the REDCap API}
 \usage{
-kernel_api(redcap_uri, post_body, config_options, encoding = "UTF-8",
-  content_type = "text/csv")
+kernel_api(
+  redcap_uri,
+  post_body,
+  config_options,
+  encoding = "UTF-8",
+  content_type = "text/csv"
+)
 }
 \arguments{
-\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap project.  Required.}
+\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap
+project.  Required.}
 
 \item{post_body}{List of contents expected by the REDCap API.  Required.}
 
-\item{config_options}{A list of options to pass to \code{POST} method in the \code{httr} package.  See the details below.  Optional.}
+\item{config_options}{A list of options to pass to \code{POST} method in the
+\code{httr} package.  See the details below.  Optional.}
 
-\item{encoding}{The encoding value passed to \code{\link[httr:content]{httr::content()}}.  Defaults to 'UTF-8'.}
+\item{encoding}{The encoding value passed to \code{\link[httr:content]{httr::content()}}.  Defaults
+to 'UTF-8'.}
 
-\item{content_type}{The MIME value passed to \code{\link[httr:content]{httr::content()}}.  Defaults to 'text/csv'.}
+\item{content_type}{The MIME value passed to \code{\link[httr:content]{httr::content()}}.  Defaults
+to 'text/csv'.}
 }
 \value{
 A \link[utils:packageVersion]{utils::packageVersion}.
 }
 \description{
-This function is used by other functions to read and write values.
+This function is used by other functions to read and write
+values.
 }
 \details{
-If the API call is unsuccessful, a value of \code{base::package_version("0.0.0")} will be returned.
-This ensures that a the function will always return an object of class \link[base:package_version]{base::package_version}.
+If the API call is unsuccessful, a value of
+\code{base::package_version("0.0.0")} will be returned.  This ensures that a
+the function will always return an object of class \link[base:package_version]{base::package_version}.
 It guarantees the value can always be used in \code{\link[utils:compareVersion]{utils::compareVersion()}}.
 }
 \examples{
