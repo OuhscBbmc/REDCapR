@@ -2,30 +2,47 @@
 #'
 #' @description This function uses REDCap's API to select and return data.
 #'
-#' @param ds The [base::data.frame()] to be imported into the REDCap project.  Required.
-#' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
-#' @param token The user-specific string that serves as the password for a project.  Required.
-#' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
-#' @param config_options  A list of options to pass to [httr::POST()] method in the 'httr' package.  See the details in [redcap_read_oneshot()] Optional.
+#' @param ds The [base::data.frame()] to be imported into the REDCap project.
+#' Required.
+#' @param redcap_uri The URI (uniform resource identifier) of the REDCap
+#' project.  Required.
+#' @param token The user-specific string that serves as the password for a
+#' project.  Required.
+#' @param verbose A boolean value indicating if `message`s should be printed
+#' to the R console during the operation.  The verbose output might contain
+#' sensitive information (*e.g.* PHI), so turn this off if the output might
+#' be visible somewhere public. Optional.
+#' @param config_options  A list of options to pass to [httr::POST()] method
+#' in the 'httr' package.  See the details in [redcap_read_oneshot()] Optional.
 #'
 #' @return Currently, a list is returned with the following elements:
-#' * `success`: A boolean value indicating if the operation was apparently successful.
-#' * `status_code`: The [http status code](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes) of the operation.
-#' * `outcome_message`: A human readable string indicating the operation's outcome.
+#' * `success`: A boolean value indicating if the operation was apparently
+#' successful.
+#' * `status_code`: The
+#' [http status code](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
+#' of the operation.
+#' * `outcome_message`: A human readable string indicating the operation's
+#' outcome.
 #' * `records_affected_count`: The number of records inserted or updated.
 #' * `affected_ids`: The subject IDs of the inserted or updated records.
 #' * `elapsed_seconds`: The duration of the function.
-#' * `raw_text`: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the `raw_text` is returned as an empty string to save RAM.
+#' * `raw_text`: If an operation is NOT successful, the text returned by
+#' REDCap.  If an operation is successful, the `raw_text` is returned as an
+#' empty string to save RAM.
 #'
 #' @details
-#' Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See [validate_for_write()] for a helper function that checks for some common important conflicts.
+#' Currently, the function doesn't modify any variable types to conform to
+#' REDCap's supported variables.  See [validate_for_write()] for a helper
+#' function that checks for some common important conflicts.
 #'
 #' @author Will Beasley
 #'
-#' @references The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-#' on the REDCap wiki (*i.e.*, https://community.projectredcap.org/articles/456/api-documentation.html and
-#' https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
-#' for the wiki, please ask your campus REDCap administrator to send you the static material.
+#' @references The official documentation can be found on the 'API Help Page'
+#' and 'API Examples' pages on the REDCap wiki (*i.e.*,
+#' https://community.projectredcap.org/articles/456/api-documentation.html and
+#' https://community.projectredcap.org/articles/462/api-examples.html).
+#' If you do not have an account for the wiki, please ask your campus REDCap
+#' administrator to send you the static material.
 #'
 #' @examples
 #' \dontrun{
@@ -74,36 +91,44 @@ redcap_write_oneshot <- function(
   # TODO: automatically convert boolean/logical class to integer/bit class
   csv_elements <- NULL #This prevents the R CHECK NOTE: 'No visible binding for global variable Note in R CMD check';  Also see  if( getRversion() >= "2.15.1" )    utils::globalVariables(names=c("csv_elements")) #http://stackoverflow.com/questions/8096313/no-visible-binding-for-global-variable-note-in-r-cmd-check; http://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
 
-  checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
-  checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(redcap_uri, any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(token     , any.missing=F, len=1, pattern="^.{1,}$")
 
   token   <- sanitize_token(token)
   verbose <- verbose_prepare(verbose)
 
-  con     <-  base::textConnection(object='csv_elements', open='w', local=TRUE)
-  utils::write.csv(ds, con, row.names = FALSE, na="")
+  con     <-  base::textConnection(
+    object  = "csv_elements",
+    open    = "w",
+    local   = TRUE
+  )
+  utils::write.csv(ds, con, row.names = FALSE, na = "")
   close(con)
 
-  csv     <- paste(csv_elements, collapse="\n")
+  csv     <- paste(csv_elements, collapse = "\n")
   rm(csv_elements, con)
 
   post_body <- list(
     token     = token,
-    content   = 'record',
-    format    = 'csv',
-    type      = 'flat',
+    content   = "record",
+    format    = "csv",
+    type      = "flat",
 
     #These next values separate the import from the export API call
+    #overwriteBehavior:
+    #  *normal* - blank/empty values will be ignored [default];
+    #  *overwrite* - blank/empty values are valid and will overwrite data
+
     data                = csv,
-    overwriteBehavior   = 'overwrite', #overwriteBehavior: *normal* - blank/empty values will be ignored [default]; *overwrite* - blank/empty values are valid and will overwrite data
-    returnContent       = 'ids',
-    returnFormat        = 'csv'
+    overwriteBehavior   = "overwrite",
+    returnContent       = "ids",
+    returnFormat        = "csv"
   )
 
   # This is the important line that communicates with the REDCap server.
   kernel <- kernel_api(redcap_uri, post_body, config_options)
 
-  if( kernel$success ) {
+  if (kernel$success) {
     elements               <- unlist(strsplit(kernel$raw_text, split="\\n"))
     affected_ids           <- as.character(elements[-1])
     records_affected_count <- length(affected_ids)
@@ -124,10 +149,10 @@ redcap_write_oneshot <- function(
     )
   }
 
-  if( verbose )
+  if (verbose)
     message(outcome_message)
 
-  return( list(
+  list(
     success                   = kernel$success,
     status_code               = kernel$status_code,
     outcome_message           = outcome_message,
@@ -135,37 +160,5 @@ redcap_write_oneshot <- function(
     affected_ids              = affected_ids,
     elapsed_seconds           = kernel$elapsed_seconds,
     raw_text                  = kernel$raw_text
-  ))
+  )
 }
-
-# #Define some constants
-# uri  <- "https://bbmc.ouhsc.edu/redcap/api/"
-# token <- "D70F9ACD1EDD6F151C6EA78683944E98"
-#
-# # Read the dataset for the first time.
-# result_read1 <- redcap_read_oneshot(redcap_uri=uri, token=token)
-# ds1 <- result_read1$data
-# ds1$telephone
-# # The line above returns something like this (depending on its previous state).
-# # [1] "(432) 456-4848" "(234) 234-2343" "(433) 435-9865" "(987) 654-3210" "(333) 333-4444"
-#
-# # Manipulate a field in the dataset in a VALID way
-# ds1$telephone <- sprintf("(405) 321-%1$i%1$i%1$i%1$i", seq_len(nrow(ds1)))
-#
-# ds1 <- ds1[1:3, ]
-# ds1$age <- NULL; ds1$bmi <- NULL #Drop the calculated fields before writing.
-# result_write <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=token)
-#
-# # Read the dataset for the second time.
-# result_read2 <- redcap_read_oneshot(redcap_uri=uri, token=token)
-# ds2 <- result_read2$data
-# ds2$telephone
-# # The line above returns something like this.  Notice only the first three lines changed.
-# # [1] "(405) 321-1111" "(405) 321-2222" "(405) 321-3333" "(987) 654-3210" "(333) 333-4444"
-#
-# # Manipulate a field in the dataset in an INVALID way.  A US exchange can't be '111'.
-# ds1$telephone <- sprintf("(405) 111-%1$i%1$i%1$i%1$i", seq_len(nrow(ds1)))
-#
-# # This next line will throw an error.
-# result_write <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=token)
-# result_write$raw_text

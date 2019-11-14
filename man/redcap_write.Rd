@@ -16,28 +16,43 @@ redcap_write(
 )
 }
 \arguments{
-\item{ds_to_write}{The \code{\link[base:data.frame]{base::data.frame()}} to be imported into the REDCap project.  Required.}
+\item{ds_to_write}{The \code{\link[base:data.frame]{base::data.frame()}} to be imported into the REDCap
+project.  Required.}
 
-\item{batch_size}{The maximum number of subject records a single batch should contain.  The default is 100.}
+\item{batch_size}{The maximum number of subject records a single batch
+should contain.  The default is 100.}
 
-\item{interbatch_delay}{The number of seconds the function will wait before requesting a new subset from REDCap. The default is 0.5 seconds.}
+\item{interbatch_delay}{The number of seconds the function will wait before
+requesting a new subset from REDCap. The default is 0.5 seconds.}
 
-\item{continue_on_error}{If an error occurs while writing, should records in subsequent batches be attempted.  The default is \code{FALSE}, which prevents subsequent batches from running.  Required.}
+\item{continue_on_error}{If an error occurs while writing, should records
+in subsequent batches be attempted.  The default is \code{FALSE}, which prevents
+subsequent batches from running.  Required.}
 
-\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap project.  Required.}
+\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap
+project.  Required.}
 
-\item{token}{The user-specific string that serves as the password for a project.  Required.}
+\item{token}{The user-specific string that serves as the password for a
+project.  Required.}
 
-\item{verbose}{A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.}
+\item{verbose}{A boolean value indicating if \code{message}s should be printed
+to the R console during the operation.  The verbose output might contain
+sensitive information (\emph{e.g.} PHI), so turn this off if the output might
+be visible somewhere public. Optional.}
 
-\item{config_options}{A list of options to pass to \code{POST} method in the \code{httr} package.  See the details in \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}}. Optional.}
+\item{config_options}{A list of options to pass to \code{POST} method in the
+\code{httr} package.  See the details in \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}}. Optional.}
 }
 \value{
 Currently, a list is returned with the following elements:
 \itemize{
-\item \code{success}: A boolean value indicating if the operation was apparently successful.
-\item \code{status_code}: The \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code} of the operation.
-\item \code{outcome_message}: A human readable string indicating the operation's outcome.
+\item \code{success}: A boolean value indicating if the operation was apparently
+successful.
+\item \code{status_code}: The
+\href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code}
+of the operation.
+\item \code{outcome_message}: A human readable string indicating the operation's
+outcome.
 \item \code{records_affected_count}: The number of records inserted or updated.
 \item \code{affected_ids}: The subject IDs of the inserted or updated records.
 \item \code{elapsed_seconds}: The duration of the function.
@@ -47,12 +62,15 @@ Currently, a list is returned with the following elements:
 This function uses REDCap's APIs to select and return data.
 }
 \details{
-Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.
-See \code{\link[=validate_for_write]{validate_for_write()}} for a helper function that checks for some common important conflicts.
+Currently, the function doesn't modify any variable types to conform to
+REDCap's supported variables.
+See \code{\link[=validate_for_write]{validate_for_write()}} for a helper function that checks for some
+common important conflicts.
 
-For \code{redcap_write} to function properly, the user must have Export permissions for the
-'Full Data Set'.  Users with only 'De-Identified' export privileges can still use
-\code{\link[=redcap_write_oneshot]{redcap_write_oneshot()}}.  To grant the appropriate permissions:
+For \code{redcap_write} to function properly, the user must have Export
+permissions for the 'Full Data Set'.  Users with only 'De-Identified'
+export privileges can still use \code{\link[=redcap_write_oneshot]{redcap_write_oneshot()}}.  To grant
+the appropriate permissions:
 \itemize{
 \item go to 'User Rights' in the REDCap project site,
 \item select the desired user, and then select 'Edit User Privileges',
@@ -95,10 +113,12 @@ result_write$raw_text
 }
 }
 \references{
-The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-on the REDCap wiki (\emph{i.e.}, https://community.projectredcap.org/articles/456/api-documentation.html and
-https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
-for the wiki, please ask your campus REDCap administrator to send you the static material.
+The official documentation can be found on the 'API Help
+Page' and 'API Examples' pages on the REDCap wiki (\emph{i.e.},
+https://community.projectredcap.org/articles/456/api-documentation.html and
+https://community.projectredcap.org/articles/462/api-examples.html).
+If you do not have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.
 }
 \author{
 Will Beasley
