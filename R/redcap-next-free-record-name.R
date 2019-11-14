@@ -13,13 +13,13 @@
 #' @param config_options  A list of options to pass to `POST` method in the
 #' `httr` package.  See the details below.  Optional.
 #'
-#' @return a \code{\link[base:character]{base::character}} vector of either
+#' @return a [base::character] vector of either
 #' length 1 (if successful) or length 0 (if not successful).
 #'
 #' @details If the API call is unsuccessful, a value of `character(0)` will
 #' be returned (*i.e.*, an empty vector).  This ensures that a the function
 #' will always return an object of class
-#' [base:character].
+#' [base::character].
 #'
 #' @note
 #' **Documentation in REDCap 8.4.0**

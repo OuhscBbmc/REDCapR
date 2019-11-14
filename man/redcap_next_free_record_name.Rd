@@ -27,7 +27,7 @@ be visible somewhere public. Optional.}
 \code{httr} package.  See the details below.  Optional.}
 }
 \value{
-a \code{\link[base:character]{base::character}} vector of either
+a \link[base:character]{base::character} vector of either
 length 1 (if successful) or length 0 (if not successful).
 }
 \description{
@@ -37,7 +37,7 @@ Determines the next available record ID.
 If the API call is unsuccessful, a value of \code{character(0)} will
 be returned (\emph{i.e.}, an empty vector).  This ensures that a the function
 will always return an object of class
-\link{base:character}.
+\link[base:character]{base::character}.
 }
 \note{
 \strong{Documentation in REDCap 8.4.0}
