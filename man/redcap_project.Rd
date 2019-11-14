@@ -67,7 +67,7 @@ ds_all  <- project$read()
 #   url aren't always passed.
 ds_skinny <- project$read(fields=c("record_id", "sex", "height"))$data
 
-ids_of_males vv <- ds_skinny$record_id[ds_skinny$sex==1]
+ids_of_males    <- ds_skinny$record_id[ds_skinny$sex==1]
 ids_of_shorties <- ds_skinny$record_id[ds_skinny$height < 40]
 
 ds_males        <- project$read(records=ids_of_males, batch_size=2)$data
