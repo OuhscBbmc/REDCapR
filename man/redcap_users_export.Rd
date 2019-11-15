@@ -7,26 +7,33 @@
 redcap_users_export(redcap_uri, token, verbose = TRUE, config_options = NULL)
 }
 \arguments{
-\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap project.  Required.}
+\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap
+project.  Required.}
 
-\item{token}{The user-specific string that serves as the password for a project.  Required.}
+\item{token}{The user-specific string that serves as the password for a
+project.  Required.}
 
-\item{verbose}{A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.}
+\item{verbose}{A boolean value indicating if \code{message}s should be printed
+to the R console during the operation.  The verbose output might contain
+sensitive information (\emph{e.g.} PHI), so turn this off if the output might
+be visible somewhere public. Optional.}
 
-\item{config_options}{A list of options to pass to \code{POST} method in the \code{httr} package.  See the details below.  Optional.}
+\item{config_options}{A list of options to pass to \code{POST} method in the
+\code{httr} package.  See the details below.  Optional.}
 }
 \value{
-a \code{\link[utils:packageDescription]{utils::packageVersion}}.
+a \link[utils:packageDescription]{utils::packageDescription}.
 }
 \description{
 List users authorized for a project.
 }
 \note{
 \strong{Documentation in REDCap 8.4.0}\preformatted{This method allows you to export the list of users for a project,
-including their user privileges and also email address, first name, and last name.
+including their user privileges and also email address, first name,
+and last name.
 
-Note: If the user has been assigned to a user role, it will return the user with
-the role's defined privileges.
+Note: If the user has been assigned to a user role, it will return
+the user with the role's defined privileges.
 }
 }
 \examples{

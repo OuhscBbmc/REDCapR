@@ -240,7 +240,7 @@
 <span id="cb12-7"><a href="#cb12-7"></a>    <span class="dt">config_options =</span> config_options</span>
 <span id="cb12-8"><a href="#cb12-8"></a>  )<span class="op">$</span>data</span>
 <span id="cb12-9"><a href="#cb12-9"></a>}</span></code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <p>Force the connection to use SSL=3 (which is not preferred, and possibly insecure).</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>config_options &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">sslversion=</span><span class="dv">3</span>)</span>
 <span id="cb14-2"><a href="#cb14-2"></a>ds_ssl_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(</span>
@@ -248,7 +248,7 @@
 <span id="cb14-4"><a href="#cb14-4"></a>  <span class="dt">token          =</span> token_simple,</span>
 <span id="cb14-5"><a href="#cb14-5"></a>  <span class="dt">config_options =</span> config_options</span>
 <span id="cb14-6"><a href="#cb14-6"></a>)<span class="op">$</span>data</span></code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>config_options &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)</span>
 <span id="cb16-2"><a href="#cb16-2"></a>ds_no_ssl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(</span>
 <span id="cb16-3"><a href="#cb16-3"></a>   <span class="dt">redcap_uri     =</span> uri,</span>
@@ -339,12 +339,12 @@
 #&gt;  yaml          2.2.0       2018-07-25 [2] CRAN (R 3.6.0)
 #&gt;  zeallot       0.1.0       2018-01-28 [2] CRAN (R 3.6.0)
 #&gt; 
-#&gt; [1] /tmp/RtmpORt0do/temp_libpath63f1126511cb
+#&gt; [1] /tmp/Rtmprl4QwC/temp_libpath69641ea04ce5
 #&gt; [2] /home/wibeasley/R/x86_64-pc-linux-gnu-library/3.6
 #&gt; [3] /usr/local/lib/R/site-library
 #&gt; [4] /usr/lib/R/site-library
 #&gt; [5] /usr/lib/R/library</code></pre>
-</details><p>Report rendered by wibeasley at 2019-11-14, 22:17 -0600 in 4 seconds.</p>
+</details><p>Report rendered by wibeasley at 2019-11-14, 22:59 -0600 in 6 seconds.</p>
 </div>
   </div>
 

@@ -7,34 +7,50 @@
 redcap_variables(redcap_uri, token, verbose = TRUE, config_options = NULL)
 }
 \arguments{
-\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap project.  Required.}
+\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap
+project.  Required.}
 
-\item{token}{The user-specific string that serves as the password for a project.  Required.}
+\item{token}{The user-specific string that serves as the password for a
+project.  Required.}
 
-\item{verbose}{A boolean value indicating if \code{message}s should be printed to the R console during the operation.  The verbose output might contain sensitive information (\emph{e.g.} PHI), so turn this off if the output might be visible somewhere public. Optional.}
+\item{verbose}{A boolean value indicating if \code{message}s should be printed
+to the R console during the operation.  The verbose output might contain
+sensitive information (\emph{e.g.} PHI), so turn this off if the output might
+be visible somewhere public. Optional.}
 
-\item{config_options}{A list of options to pass to \code{POST} method in the \code{httr} package.  See the details below. Optional.}
+\item{config_options}{A list of options to pass to \code{POST} method in the
+\code{httr} package.  See the details below. Optional.}
 }
 \value{
 Currently, a list is returned with the following elements,
 \itemize{
-\item \code{data}: An R \code{\link[base:data.frame]{base::data.frame()}} where each row represents one column in the REDCap dataset.
-\item \code{success}: A boolean value indicating if the operation was apparently successful.
-\item \code{status_code}: The \href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code} of the operation.
-\item \code{outcome_message}: A human readable string indicating the operation's outcome.
+\item \code{data}: An R \code{\link[base:data.frame]{base::data.frame()}} where each row represents one column
+in the REDCap dataset.
+\item \code{success}: A boolean value indicating if the operation was apparently
+successful.
+\item \code{status_code}: The
+\href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code}
+of the operation.
+\item \code{outcome_message}: A human readable string indicating the operation's
+outcome.
 \item \code{elapsed_seconds}: The duration of the function.
-\item \code{raw_text}: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the \code{raw_text} is returned as an empty string to save RAM.
+\item \code{raw_text}: If an operation is NOT successful, the text returned by
+REDCap.  If an operation is successful, the \code{raw_text} is returned as an
+empty string to save RAM.
 }
 }
 \description{
-This function calls the 'exportFieldNames' function of the REDCap API.
+This function calls the 'exportFieldNames' function of the
+REDCap API.
 }
 \details{
-The full list of configuration options accepted by the \code{httr} package is viewable by executing \code{\link[httr:httr_options]{httr::httr_options()}}.  The \code{httr}
-package and documentation is available at https://cran.r-project.org/package=httr.
+The full list of configuration options accepted by the \code{httr} package is
+viewable by executing \code{\link[httr:httr_options]{httr::httr_options()}}.  The \code{httr} package and
+documentation is available at https://cran.r-project.org/package=httr.
 
-As of REDCap version 6.14.2, three variable types are \emph{not} returned in this call:
-calculated, file, and descriptive.  All variables returned are writable/uploadable.
+As of REDCap version 6.14.2, three variable types are \emph{not} returned in
+this call: calculated, file, and descriptive.  All variables returned are
+writable/uploadable.
 }
 \examples{
 \dontrun{
@@ -44,10 +60,12 @@ ds_variable <- REDCapR::redcap_variables(redcap_uri=uri, token=token)$data
 }
 }
 \references{
-The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-on the REDCap wiki (\emph{i.e.}, https://community.projectredcap.org/articles/456/api-documentation.html and
-https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
-for the wiki, please ask your campus REDCap administrator to send you the static material.
+The official documentation can be found on the 'API Help Page'
+and 'API Examples' pages on the REDCap wiki (\emph{i.e.},
+https://community.projectredcap.org/articles/456/api-documentation.html and
+https://community.projectredcap.org/articles/462/api-examples.html).
+If you do not have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.
 }
 \author{
 Will Beasley

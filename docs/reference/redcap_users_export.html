@@ -165,32 +165,39 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>redcap_uri</th>
-      <td><p>The URI (uniform resource identifier) of the REDCap project.  Required.</p></td>
+      <td><p>The URI (uniform resource identifier) of the REDCap
+project.  Required.</p></td>
     </tr>
     <tr>
       <th>token</th>
-      <td><p>The user-specific string that serves as the password for a project.  Required.</p></td>
+      <td><p>The user-specific string that serves as the password for a
+project.  Required.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>A boolean value indicating if <code>message</code>s should be printed to the R console during the operation.  The verbose output might contain sensitive information (<em>e.g.</em> PHI), so turn this off if the output might be visible somewhere public. Optional.</p></td>
+      <td><p>A boolean value indicating if <code>message</code>s should be printed
+to the R console during the operation.  The verbose output might contain
+sensitive information (<em>e.g.</em> PHI), so turn this off if the output might
+be visible somewhere public. Optional.</p></td>
     </tr>
     <tr>
       <th>config_options</th>
-      <td><p>A list of options to pass to <code>POST</code> method in the <code>httr</code> package.  See the details below.  Optional.</p></td>
+      <td><p>A list of options to pass to <code>POST</code> method in the
+<code>httr</code> package.  See the details below.  Optional.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a <code><a href='https://rdrr.io/r/utils/packageDescription.html'>utils::packageVersion</a></code>.</p>
+    <p>a <a href='https://rdrr.io/r/utils/packageDescription.html'>utils::packageDescription</a>.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p><strong>Documentation in REDCap 8.4.0</strong></p><pre>This method allows you to export the list of users for a project,
-including their user privileges and also email address, first name, and last name.
+including their user privileges and also email address, first name,
+and last name.
 
-Note: If the user has been assigned to a user role, it will return the user with
-the role's defined privileges.
+Note: If the user has been assigned to a user role, it will return
+the user with the role's defined privileges.
 </pre>
 
 

@@ -174,7 +174,8 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>file_name</th>
-      <td><p>The name of the relative or full file to be uploaded into the REDCap project.  Required.</p></td>
+      <td><p>The name of the relative or full file to be uploaded into
+the REDCap project.  Required.</p></td>
     </tr>
     <tr>
       <th>record</th>
@@ -182,79 +183,104 @@
     </tr>
     <tr>
       <th>redcap_uri</th>
-      <td><p>The URI (uniform resource identifier) of the REDCap project.  Required.</p></td>
+      <td><p>The URI (uniform resource identifier) of the REDCap
+project.  Required.</p></td>
     </tr>
     <tr>
       <th>token</th>
-      <td><p>The user-specific string that serves as the password for a project.  Required.</p></td>
+      <td><p>The user-specific string that serves as the password for a
+project.  Required.</p></td>
     </tr>
     <tr>
       <th>field</th>
-      <td><p>The name of the field where the file is saved in REDCap.  Required</p></td>
+      <td><p>The name of the field where the file is saved in REDCap.
+Required</p></td>
     </tr>
     <tr>
       <th>event</th>
-      <td><p>The name of the event where the file is saved in REDCap.  Optional</p></td>
+      <td><p>The name of the event where the file is saved in REDCap.
+Optional</p></td>
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>A boolean value indicating if <code>message</code>s should be printed to the R console during the operation.  Optional.</p></td>
+      <td><p>A boolean value indicating if <code>message</code>s should be printed
+to the R console during the operation.  Optional.</p></td>
     </tr>
     <tr>
       <th>config_options</th>
-      <td><p>A list of options to pass to <code>POST</code> method in the <code>httr</code> package.  See the details below.  Optional.</p></td>
+      <td><p>A list of options to pass to <code>POST</code> method in the
+<code>httr</code> package.  See the details below.  Optional.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Currently, a list is returned with the following elements:</p><ul>
-<li><p><code>success</code>: A boolean value indicating if the operation was apparently successful.</p></li>
-<li><p><code>status_code</code>: The <a href='http://en.wikipedia.org/wiki/List_of_HTTP_status_codes'>http status code</a> of the operation.</p></li>
-<li><p><code>outcome_message</code>: A human readable string indicating the operation's outcome.</p></li>
+<li><p><code>success</code>: A boolean value indicating if the operation was apparently
+successful.</p></li>
+<li><p><code>status_code</code>: The
+<a href='http://en.wikipedia.org/wiki/List_of_HTTP_status_codes'>http status code</a>
+of the operation.</p></li>
+<li><p><code>outcome_message</code>: A human readable string indicating the operation's
+outcome.</p></li>
 <li><p><code>records_affected_count</code>: The number of records inserted or updated.</p></li>
 <li><p><code>affected_ids</code>: The subject IDs of the inserted or updated records.</p></li>
 <li><p><code>elapsed_seconds</code>: The duration of the function.</p></li>
-<li><p><code>raw_text</code>: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the <code>raw_text</code> is returned as an empty string to save RAM.</p></li>
+<li><p><code>raw_text</code>: If an operation is NOT successful, the text returned by
+REDCap.  If an operation is successful, the <code>raw_text</code> is returned as
+an empty string to save RAM.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See <code><a href='validate.html'>validate_for_write()</a></code> for a helper function that checks for some common important conflicts.</p>
+    <p>Currently, the function doesn't modify any variable types to conform to
+REDCap's supported variables.  See <code><a href='validate.html'>validate_for_write()</a></code> for a helper
+function that checks for some common important conflicts.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-on the REDCap wiki (ie, https://community.projectredcap.org/articles/456/api-documentation.html and
-https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
-for the wiki, please ask your campus REDCap administrator to send you the static material.</p>
+    <p>The official documentation can be found on the 'API Help Page'
+and 'API Examples' pages on the REDCap wiki (ie,
+https://community.projectredcap.org/articles/456/api-documentation.html and
+https://community.projectredcap.org/articles/462/api-examples.html).
+If you do not have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'>#Define some constants</span>
-<span class='no'>uri</span>       <span class='kw'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class='no'>token</span>     <span class='kw'>&lt;-</span> <span class='st'>"D70F9ACD1EDD6F151C6EA78683944E98"</span> <span class='co'>#For the simple project (pid 213)</span>
-<span class='no'>field</span>     <span class='kw'>&lt;-</span> <span class='st'>"mugshot"</span>
-<span class='no'>event</span>     <span class='kw'>&lt;-</span> <span class='st'>""</span> <span class='co'># only for longitudinal events</span>
+<span class='co'># Define some constants</span>
+<span class='no'>uri</span>    <span class='kw'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class='no'>token</span>  <span class='kw'>&lt;-</span> <span class='st'>"D70F9ACD1EDD6F151C6EA78683944E98"</span> <span class='co'># The simple project -pid 213</span>
+<span class='no'>field</span>  <span class='kw'>&lt;-</span> <span class='st'>"mugshot"</span>
+<span class='no'>event</span>  <span class='kw'>&lt;-</span> <span class='st'>""</span> <span class='co'># only for longitudinal events</span>
 
 <span class='co'>#Upload a single image file.</span>
 <span class='no'>record</span>    <span class='kw'>&lt;-</span> <span class='fl'>1</span>
 <span class='no'>file_path</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"test-data/mugshot-1.jpg"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"REDCapR"</span>)
 
 <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/redcap_upload_file_oneshot.html'>redcap_upload_file_oneshot</a></span>(
-  <span class='kw'>file_name</span>  <span class='kw'>=</span> <span class='no'>file_path</span>, <span class='kw'>record</span><span class='kw'>=</span><span class='no'>record</span>, <span class='kw'>field</span><span class='kw'>=</span><span class='no'>field</span>,
-  <span class='kw'>redcap_uri</span> <span class='kw'>=</span> <span class='no'>redcap_uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>
+  <span class='kw'>file_name</span>  <span class='kw'>=</span> <span class='no'>file_path</span>,
+  <span class='kw'>record</span>     <span class='kw'>=</span> <span class='no'>record</span>,
+  <span class='kw'>field</span>      <span class='kw'>=</span> <span class='no'>field</span>,
+  <span class='kw'>redcap_uri</span> <span class='kw'>=</span> <span class='no'>redcap_uri</span>,
+  <span class='kw'>token</span>      <span class='kw'>=</span> <span class='no'>token</span>
 )
 
 <span class='co'>#Upload a collection of five images.</span>
 <span class='no'>records</span>    <span class='kw'>&lt;-</span> <span class='fl'>1</span>:<span class='fl'>5</span>
-<span class='no'>file_paths</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"test-data/mugshot-"</span>, <span class='no'>records</span>, <span class='st'>".jpg"</span>), <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"REDCapR"</span>)
+<span class='no'>file_paths</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(
+  <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"test-data/mugshot-"</span>, <span class='no'>records</span>, <span class='st'>".jpg"</span>),
+  <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"REDCapR"</span>
+)
 
-<span class='kw'>for</span>( <span class='no'>i</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_along</a></span>(<span class='no'>records</span>) ) {
+<span class='kw'>for</span> (<span class='no'>i</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_along</a></span>(<span class='no'>records</span>)) {
   <span class='no'>record</span>    <span class='kw'>&lt;-</span> <span class='no'>records</span>[<span class='no'>i</span>]
   <span class='no'>file_path</span> <span class='kw'>&lt;-</span> <span class='no'>file_paths</span>[<span class='no'>i</span>]
   <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/redcap_upload_file_oneshot.html'>redcap_upload_file_oneshot</a></span>(
-    <span class='kw'>file_name</span>  <span class='kw'>=</span> <span class='no'>file_path</span>, <span class='kw'>record</span><span class='kw'>=</span><span class='no'>record</span>, <span class='kw'>field</span><span class='kw'>=</span><span class='no'>field</span>,
-    <span class='kw'>redcap_uri</span> <span class='kw'>=</span> <span class='no'>redcap_uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>
+    <span class='kw'>file_name</span>  <span class='kw'>=</span> <span class='no'>file_path</span>,
+    <span class='kw'>record</span>     <span class='kw'>=</span> <span class='no'>record</span>,
+    <span class='kw'>field</span>      <span class='kw'>=</span> <span class='no'>field</span>,
+    <span class='kw'>redcap_uri</span> <span class='kw'>=</span> <span class='no'>redcap_uri</span>,
+    <span class='kw'>token</span>      <span class='kw'>=</span> <span class='no'>token</span>
   )
 }
 }</div></pre>

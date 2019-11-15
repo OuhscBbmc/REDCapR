@@ -2,22 +2,29 @@
 #'
 #' @description List users authorized for a project.
 #'
-#' @param redcap_uri The URI (uniform resource identifier) of the REDCap project.  Required.
-#' @param token The user-specific string that serves as the password for a project.  Required.
-#' @param verbose A boolean value indicating if `message`s should be printed to the R console during the operation.  The verbose output might contain sensitive information (*e.g.* PHI), so turn this off if the output might be visible somewhere public. Optional.
-#' @param config_options  A list of options to pass to `POST` method in the `httr` package.  See the details below.  Optional.
+#' @param redcap_uri The URI (uniform resource identifier) of the REDCap
+#' project.  Required.
+#' @param token The user-specific string that serves as the password for a
+#' project.  Required.
+#' @param verbose A boolean value indicating if `message`s should be printed
+#' to the R console during the operation.  The verbose output might contain
+#' sensitive information (*e.g.* PHI), so turn this off if the output might
+#' be visible somewhere public. Optional.
+#' @param config_options  A list of options to pass to `POST` method in the
+#' `httr` package.  See the details below.  Optional.
 #'
-#' @return a \code{\link[utils:packageDescription]{utils::packageVersion}}.
+#' @return a [utils::packageDescription].
 #'
 #' @note
 #' **Documentation in REDCap 8.4.0**
 #'
 #' ```
 #' This method allows you to export the list of users for a project,
-#' including their user privileges and also email address, first name, and last name.
+#' including their user privileges and also email address, first name,
+#' and last name.
 #'
-#' Note: If the user has been assigned to a user role, it will return the user with
-#' the role's defined privileges.
+#' Note: If the user has been assigned to a user role, it will return
+#' the user with the role's defined privileges.
 #' ```
 #'
 #' @examples
@@ -28,19 +35,22 @@
 #' result$data_user_form
 
 #' @export
-redcap_users_export <- function( redcap_uri, token, verbose=TRUE, config_options=NULL ) {
-  # version_error <- base::package_version("0.0.0")
-
-  checkmate::assert_character(redcap_uri                , any.missing=F, len=1, pattern="^.{1,}$")
-  checkmate::assert_character(token                     , any.missing=F, len=1, pattern="^.{1,}$")
+redcap_users_export <- function(
+  redcap_uri,
+  token,
+  verbose         = TRUE,
+  config_options  = NULL
+) {
+  checkmate::assert_character(redcap_uri , any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(token      , any.missing=F, len=1, pattern="^.{1,}$")
 
   token   <- sanitize_token(token)
   verbose <- verbose_prepare(verbose)
 
   post_body <- list(
-    token                   = token,
-    content                 = 'user',
-    format                  = 'csv'
+    token    = token,
+    content  = "user",
+    format   = "csv"
   )
 
   col_types <- readr::cols(
@@ -81,11 +91,13 @@ redcap_users_export <- function( redcap_uri, token, verbose=TRUE, config_options
   # This is the important line that communicates with the REDCap server.
   kernel <- kernel_api(redcap_uri, post_body, config_options)
 
-  if( kernel$success ) {
-    try (
-      {
-        # readr::spec_csv(kernel$raw_text)
-        ds_combined <- readr::read_csv(file=kernel$raw_text, col_types=col_types)
+  if (kernel$success) {
+    try(
+      { # readr::spec_csv(kernel$raw_text)
+        ds_combined <- readr::read_csv(
+          file      = kernel$raw_text,
+          col_types = col_types
+        )
 
         # Remove the readr's `spec` attribute about the column names & types.
         attr(ds_combined, "spec") <- NULL
@@ -97,7 +109,7 @@ redcap_users_export <- function( redcap_uri, token, verbose=TRUE, config_options
         ds_user_form <-
           ds_combined %>%
           dplyr::select(.data$username, .data$forms) %>%
-          tidyr::separate_rows(.data$forms, sep=",") %>%
+          tidyr::separate_rows(.data$forms, sep = ",") %>%
           # tidyr::separate_(
           #   col     = "form",
           #   into    = c("form_name", "permission"),
@@ -116,14 +128,15 @@ redcap_users_export <- function( redcap_uri, token, verbose=TRUE, config_options
             #   labels      = c("No Access" , "Read Only" , "Read/Write"),
             #   ordered     = TRUE
             # )
-
           ) %>%
           dplyr::select(-.data$forms)
       },
-      silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
+      silent = TRUE
+      # Don't print the warning in the try block.  Print it below, where it's
+      #   under the control of the caller.
     )
 
-    if( exists("ds_user") & inherits(ds_user, "data.frame") ) {
+    if (exists("ds_user") & inherits(ds_user, "data.frame")) {
       outcome_message <- sprintf(
         "The REDCap users were successfully exported in %0.1f seconds.  The http status code was %i.",
         kernel$elapsed_seconds,
@@ -134,11 +147,14 @@ redcap_users_export <- function( redcap_uri, token, verbose=TRUE, config_options
         kernel$elapsed_seconds,
         kernel$status_code
       )
-      kernel$raw_text   <- "" # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
+      kernel$raw_text   <- ""
+      # If an operation is successful, the `raw_text` is no longer returned
+      #   to save RAM.  The content is not really necessary with httr's
+      #   status message exposed.
     } else {
-      kernel$success   <- FALSE #Override the 'success' determination from the http status code.
-      ds_user          <- data.frame() #Return an empty data.frame
-      ds_user_form     <- data.frame() #Return an empty data.frame
+      kernel$success   <- FALSE # Override the 'success' http status code.
+      ds_user          <- data.frame() # Return an empty data.frame
+      ds_user_form     <- data.frame() # Return an empty data.frame
       outcome_message  <- sprintf(
         "The REDCap user export failed.  The http status code was %i.  The 'raw_text' returned was '%s'.",
         kernel$status_code,
@@ -146,18 +162,18 @@ redcap_users_export <- function( redcap_uri, token, verbose=TRUE, config_options
       )
     }
   } else {
-    ds_user          <- data.frame() #Return an empty data.frame
-    ds_user_form     <- data.frame() #Return an empty data.frame
+    ds_user          <- data.frame() # Return an empty data.frame
+    ds_user_form     <- data.frame() # Return an empty data.frame
     outcome_message  <- sprintf(
       "The REDCap user export failed.  The error message was:\n%s",
       kernel$raw_text
     )
   }
 
-  if( verbose )
+  if (verbose)
     message(outcome_message)
 
-  return( list(
+  list(
     data_user          = ds_user,
     data_user_form     = ds_user_form,
     success            = kernel$success,
@@ -165,5 +181,5 @@ redcap_users_export <- function( redcap_uri, token, verbose=TRUE, config_options
     outcome_message    = outcome_message,
     elapsed_seconds    = kernel$elapsed_seconds,
     raw_text           = kernel$raw_text
-  ) )
+  )
 }

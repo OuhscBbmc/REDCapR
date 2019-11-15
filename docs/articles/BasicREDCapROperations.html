@@ -137,11 +137,11 @@
 <p>If no information is passed about the desired records or fields, then the entire data set is returned. Only two parameters are required, <code>redcap_uri</code> and <code>token</code>. Unless the <code>verbose</code> parameter is set to <code>FALSE</code>, a message will be printed on the R console with the number of records and fields returned.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">#Return all records and all variables.</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a>ds_all_rows_all_fields &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read.html">redcap_read</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)<span class="op">$</span>data</span></code></pre></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.7 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2019-11-14 22:17:20.</code></pre>
+<pre><code>Starting to read 5 records  at 2019-11-14 22:58:23.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 24 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>Parsed with column specification:
 cols(
   .default = col_double(),
@@ -205,11 +205,11 @@ cols(
 <span id="cb13-5"><a href="#cb13-5"></a>   <span class="dt">token      =</span> token, </span>
 <span id="cb13-6"><a href="#cb13-6"></a>   <span class="dt">records    =</span> desired_records_v1</span>
 <span id="cb13-7"><a href="#cb13-7"></a>)<span class="op">$</span>data</span></code></pre></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2019-11-14 22:17:22.</code></pre>
+<pre><code>Starting to read 2 records  at 2019-11-14 22:58:24.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
-<pre><code>2 records and 24 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>Parsed with column specification:
 cols(
   .default = col_double(),
@@ -231,8 +231,8 @@ cols(
 <span id="cb21-6"><a href="#cb21-6"></a>   <span class="dt">records_collapsed =</span> desired_records_v2</span>
 <span id="cb21-7"><a href="#cb21-7"></a>)<span class="op">$</span>data</span></code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2019-11-14 22:17:23.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2019-11-14 22:58:26.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>Parsed with column specification:
@@ -278,9 +278,9 @@ cols(
 <span id="cb31-7"><a href="#cb31-7"></a>)<span class="op">$</span>data</span></code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2019-11-14 22:17:25.</code></pre>
+<pre><code>Starting to read 5 records  at 2019-11-14 22:58:27.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
 <pre><code>Parsed with column specification:
 cols(
   record_id = col_double(),
@@ -295,8 +295,8 @@ cols(
 <span id="cb38-6"><a href="#cb38-6"></a>   <span class="dt">fields_collapsed =</span> desired_fields_v2</span>
 <span id="cb38-7"><a href="#cb38-7"></a>)<span class="op">$</span>data</span></code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2019-11-14 22:17:26.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2019-11-14 22:58:29.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>Parsed with column specification:
@@ -325,9 +325,9 @@ cols(
 <span id="cb47-6"><a href="#cb47-6"></a>   <span class="dt">token      =</span> token, </span>
 <span id="cb47-7"><a href="#cb47-7"></a>   <span class="dt">fields     =</span> desired_fields_v3</span>
 <span id="cb47-8"><a href="#cb47-8"></a>)<span class="op">$</span>data</span></code></pre></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2019-11-14 22:17:28.</code></pre>
+<pre><code>Starting to read 5 records  at 2019-11-14 22:58:31.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
 <pre><code>Parsed with column specification:
@@ -359,9 +359,9 @@ cols(
 <span id="cb58-6"><a href="#cb58-6"></a>   <span class="dt">token      =</span> token, </span>
 <span id="cb58-7"><a href="#cb58-7"></a>   <span class="dt">records    =</span> desired_records_v3</span>
 <span id="cb58-8"><a href="#cb58-8"></a>)<span class="op">$</span>data</span></code></pre></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2019-11-14 22:17:29.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2019-11-14 22:58:33.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>Parsed with column specification:
@@ -418,7 +418,7 @@ cols(
 <span id="cb68-6"><a href="#cb68-6"></a>)</span></code></pre></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2019-11-14 22:17:31.</code></pre>
+<pre><code>Starting to read 5 records  at 2019-11-14 22:58:34.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>Parsed with column specification:
@@ -461,7 +461,7 @@ $filter_logic
 [1] ""
 
 $elapsed_seconds
-[1] 1.503978</code></pre>
+[1] 1.513411</code></pre>
 </div>
 </div>
 <div id="session-information" class="section level2">
@@ -544,12 +544,12 @@ $elapsed_seconds
  yaml          2.2.0       2018-07-25 [2] CRAN (R 3.6.0)
  zeallot       0.1.0       2018-01-28 [2] CRAN (R 3.6.0)
 
-[1] /tmp/RtmpORt0do/temp_libpath63f1126511cb
+[1] /tmp/Rtmprl4QwC/temp_libpath69641ea04ce5
 [2] /home/wibeasley/R/x86_64-pc-linux-gnu-library/3.6
 [3] /usr/local/lib/R/site-library
 [4] /usr/lib/R/site-library
 [5] /usr/lib/R/library</code></pre>
-</details><p>Report rendered by wibeasley at 2019-11-14, 22:17 -0600 in 15 seconds.</p>
+</details><p>Report rendered by wibeasley at 2019-11-14, 22:58 -0600 in 17 seconds.</p>
 </div>
   </div>
 

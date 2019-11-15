@@ -1,11 +1,5 @@
 # These functions are not exported.
 
-#' populate_project_simple()
-#' populate_project_simple(batch = TRUE)
-#' clear_project_simple()
-#' clean_start_simple()
-#' clean_start_simple(batch = TRUE)
-
 populate_project_simple <- function(batch = FALSE) {
   checkmate::assert_logical(batch, any.missing = F, len = 1)
 
@@ -158,3 +152,9 @@ upload_file_simple <- function(redcap_uri, token = token) {
     )
   }
 }
+
+# populate_project_simple()
+# populate_project_simple(batch = TRUE)
+# clear_project_simple()
+# clean_start_simple()
+# clean_start_simple(batch = TRUE)
