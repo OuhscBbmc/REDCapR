@@ -6,6 +6,8 @@ options(device = deviceType) #http://support.rstudio.org/help/discussions/proble
 devtools::document()
 devtools::check_man() #Should return NULL
 devtools::build_vignettes()
+
+devtools::document()
 pkgdown::clean_site()
 pkgdown::build_site()
 system("R CMD Rd2pdf --no-preview --force --output=./documentation-peek.pdf ." )
@@ -14,7 +16,7 @@ devtools::run_examples(); #dev.off() #This overwrites the NAMESPACE file too
 # devtools::run_examples(, "redcap_read.Rd")
 test_results_checked <- devtools::test()
 test_results_checked <- devtools::test(filter = "read-oneshot-eav")
-test_results_checked <- devtools::test(filter = "users.*$")
+test_results_checked <- devtools::test(filter = "metadata-read")
 # testthat::test_dir("./tests/")
 test_results_not_checked <- testthat::test_dir("./tests/manual/")
 
