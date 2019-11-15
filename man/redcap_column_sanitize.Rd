@@ -12,38 +12,44 @@ redcap_column_sanitize(
 )
 }
 \arguments{
-\item{d}{The \code{\link[base:data.frame]{base::data.frame()}} containing the dataset used to update the REDCap project.  Required.}
+\item{d}{The \code{\link[base:data.frame]{base::data.frame()}} containing the dataset used to update
+the REDCap project.  Required.}
 
-\item{column_names}{An array of \code{character} values indicating the names of the variables to sanitize.  Optional.}
+\item{column_names}{An array of \code{character} values indicating the names of
+the variables to sanitize.  Optional.}
 
-\item{encoding_initial}{An array of \code{character} values indicating the names of the variables to sanitize.  Optional.}
+\item{encoding_initial}{An array of \code{character} values indicating the names
+of the variables to sanitize.  Optional.}
 
-\item{substitution_character}{The \code{character} value that replaces characters that were unable to be appropriately matched.}
+\item{substitution_character}{The \code{character} value that replaces characters
+that were unable to be appropriately matched.}
 }
 \value{
-A \code{\link[base:data.frame]{base::data.frame()}} with same columns, but whose character values have been sanitized.
+A \code{\link[base:data.frame]{base::data.frame()}} with same columns, but whose character values
+have been sanitized.
 }
 \description{
-Replace non-ASCII characters with legal characters that won't cause problems when writing to a REDCap project.
+Replace non-ASCII characters with legal characters that won't
+cause problems when writing to a REDCap project.
 }
 \details{
 Letters like an accented 'A' are replaced with a plain 'A'.
 
 This is a thin wrapper around \code{\link[base:iconv]{base::iconv()}}.
-The \verb{ASCII//TRANSLIT} option does the actual transliteration work.  As of \verb{R 3.1.0}, the OSes use similar,
-but different, versions to convert the characters.  Be aware of this in case you notice OS-dependent differences.
+The \verb{ASCII//TRANSLIT} option does the actual transliteration work.  As of
+\verb{R 3.1.0}, the OSes use similar, but different, versions to convert the
+characters.  Be aware of this in case you notice OS-dependent differences.
 }
 \examples{
-dirty <- data.frame(id=1:3, names=c("Ekstr\\xf8m", "J\\xf6reskog", "bi\\xdfchen Z\\xfcrcher"))
-REDCapR::redcap_column_sanitize(dirty)
-# Produces the dataset:
-#  id            names
-#1  1          Ekstr?m
-#2  2         Joreskog
-#3  3 bisschen Zurcher
-
 # Typical examples are not shown because they require non-ASCII encoding,
 #   which makes the package documentation less portable.
+
+dirty <- data.frame(
+  id     = 1:3,
+  names  = c("Ekstr\\xf8m", "J\\xf6reskog", "bi\\xdfchen Z\\xfcrcher")
+)
+
+REDCapR::redcap_column_sanitize(dirty)
 }
 \author{
 Will Beasley

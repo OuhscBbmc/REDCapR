@@ -177,23 +177,28 @@
     <tr>
       <th>file_name</th>
       <td><p>The name of the file where the downloaded file is saved.
-If empty the original name of the file will be used and saved in the default directory.  Optional.</p></td>
+If empty the original name of the file will be used and saved in the
+default directory.  Optional.</p></td>
     </tr>
     <tr>
       <th>directory</th>
-      <td><p>The directory where the file is saved. By default current directory. Optional</p></td>
+      <td><p>The directory where the file is saved. By default current
+directory. Optional</p></td>
     </tr>
     <tr>
       <th>overwrite</th>
-      <td><p>Boolean value indicating if existing files should be overwritten. Optional</p></td>
+      <td><p>Boolean value indicating if existing files should be
+overwritten. Optional</p></td>
     </tr>
     <tr>
       <th>redcap_uri</th>
-      <td><p>The URI (uniform resource identifier) of the REDCap project.  Required.</p></td>
+      <td><p>The URI (uniform resource identifier) of the REDCap
+project.  Required.</p></td>
     </tr>
     <tr>
       <th>token</th>
-      <td><p>The user-specific string that serves as the password for a project.  Required.</p></td>
+      <td><p>The user-specific string that serves as the password for a
+project.  Required.</p></td>
     </tr>
     <tr>
       <th>record</th>
@@ -201,44 +206,59 @@ If empty the original name of the file will be used and saved in the default dir
     </tr>
     <tr>
       <th>field</th>
-      <td><p>The name of the field where the file is saved in REDCap. Required</p></td>
+      <td><p>The name of the field where the file is saved in REDCap.
+Required</p></td>
     </tr>
     <tr>
       <th>event</th>
-      <td><p>The name of the event where the file is saved in REDCap. Optional</p></td>
+      <td><p>The name of the event where the file is saved in REDCap.
+Optional</p></td>
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>A boolean value indicating if <code>message</code>s should be printed to the R console during the operation.  Optional.</p></td>
+      <td><p>A boolean value indicating if <code>message</code>s should be printed
+to the R console during the operation.  Optional.</p></td>
     </tr>
     <tr>
       <th>config_options</th>
-      <td><p>A list of options to pass to <code><a href='https://httr.r-lib.org/reference/POST.html'>httr::POST()</a></code> method in the 'httr' package.  See the details below. Optional.</p></td>
+      <td><p>A list of options to pass to <code><a href='https://httr.r-lib.org/reference/POST.html'>httr::POST()</a></code> method
+in the 'httr' package.  See the details below. Optional.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Currently, a list is returned with the following elements,</p><ul>
-<li><p><code>success</code>: A boolean value indicating if the operation was apparently successful.</p></li>
-<li><p><code>status_code</code>: The <a href='http://en.wikipedia.org/wiki/List_of_HTTP_status_codes'>http status code</a> of the operation.</p></li>
-<li><p><code>outcome_message</code>: A human readable string indicating the operation's outcome.</p></li>
+<li><p><code>success</code>: A boolean value indicating if the operation was apparently
+successful.</p></li>
+<li><p><code>status_code</code>: The
+<a href='http://en.wikipedia.org/wiki/List_of_HTTP_status_codes'>http status code</a>
+of the operation.</p></li>
+<li><p><code>outcome_message</code>: A human readable string indicating the operation's
+outcome.</p></li>
 <li><p><code>records_affected_count</code>: The number of records inserted or updated.</p></li>
 <li><p><code>affected_ids</code>: The subject IDs of the inserted or updated records.</p></li>
 <li><p><code>elapsed_seconds</code>: The duration of the function.</p></li>
-<li><p><code>raw_text</code>: If an operation is NOT successful, the text returned by REDCap.  If an operation is successful, the <code>raw_text</code> is returned as an empty string to save RAM.</p></li>
-<li><p><code>file_name</code>: The name of the file persisted to disk. This is useful if the name stored in REDCap is used (which is the default).</p></li>
+<li><p><code>raw_text</code>: If an operation is NOT successful, the text returned by
+REDCap.  If an operation is successful, the <code>raw_text</code> is returned as an
+empty string to save RAM.</p></li>
+<li><p><code>file_name</code>: The name of the file persisted to disk. This is useful if
+the name stored in REDCap is used (which is the default).</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Currently, the function doesn't modify any variable types to conform to REDCap's supported variables.  See <code><a href='validate.html'>validate_for_write()</a></code> for a helper function that checks for some common important conflicts.</p>
+    <p>Currently, the function doesn't modify any variable types to conform to
+REDCap's supported variables.  See <code><a href='validate.html'>validate_for_write()</a></code> for a helper
+function that checks for some common important conflicts.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-on the REDCap wiki (<em>i.e.</em>, https://community.projectredcap.org/articles/456/api-documentation.html and
-https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
-for the wiki, please ask your campus REDCap administrator to send you the static material.</p>
+    <p>The official documentation can be found on the 'API Help Page'
+and 'API Examples' pages on the REDCap wiki (<em>i.e.</em>,
+https://community.projectredcap.org/articles/456/api-documentation.html and
+https://community.projectredcap.org/articles/462/api-examples.html).
+If you do not have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {

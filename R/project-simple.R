@@ -1,13 +1,11 @@
 # These functions are not exported.
 
-#' @examples
-#' \dontrun{
 #' populate_project_simple()
 #' populate_project_simple(batch = TRUE)
 #' clear_project_simple()
 #' clean_start_simple()
 #' clean_start_simple(batch = TRUE)
-#' }
+
 populate_project_simple <- function(batch = FALSE) {
   checkmate::assert_logical(batch, any.missing = F, len = 1)
 
