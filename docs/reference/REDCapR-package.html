@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>R utilities for interacting with a REDCap data system <a href='http://www.project-redcap.org/'>http://www.project-redcap.org/</a> — REDCapR-package • REDCapR</title>
+<title>R utilities for interacting with a REDCap data system
+<a href='http://www.project-redcap.org/'>http://www.project-redcap.org/</a> — REDCapR-package • REDCapR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,16 +49,37 @@
 
 
 
-<meta property="og:title" content="R utilities for interacting with a REDCap data system <a href='http://www.project-redcap.org/'>http://www.project-redcap.org/</a> — REDCapR-package" />
-<meta property="og:description" content="Comprehensive documentation is also available at https://ouhscbbmc.github.io/REDCapR/.
-Much of this package has been developed to support the needs of the following projects.  We appreciate the support.
-OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting (MIECHV) Project. HRSA/ACF D89MC23154.  David Bard, PI, OUHSC; 2011-2015.
-Independent Evaluation of the State of OK MIECHV Evidence Based Home Visitation Project, NIH-sponsored collaboration with OSDH. David Bard, PI, OUHSC; 2015-2017.
-OSDH ParentPRO Pilot Evaluation, federally-sponsored collaboration with OSDH.  David Bard, PI, OUHSC; 2015-2017.
-Title IV-E Waiver Project, HRSA/MCHB-sponsored collaboration with OKDHS; David Bard, PI, OUHSC; 2014-2017.
-Integrative Analysis of Longitudinal Studies of Aging (IALSA), sponsored by NIH 5P01AG043362.  Scott Hofer, PI, University of Victoria; Will Beasley, PI of site-award, OUHSC; 2013-2018.
-Oklahoma Shared Clinical and Translational Resources, sponsored by NIH NIGMS; U54 GM104938. Judith A. James, PI, OUHSC; 2013-2018.
-Additional Institutional Support from OUHSC Dept of Pediatrics; 2013-2017.
+<meta property="og:title" content="R utilities for interacting with a REDCap data system
+<a href='http://www.project-redcap.org/'>http://www.project-redcap.org/</a> — REDCapR-package" />
+<meta property="og:description" content="Comprehensive documentation is also available at
+https://ouhscbbmc.github.io/REDCapR/.
+Much of this package has been developed to support the needs of the
+following projects.  We appreciate the support.
+OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive
+Maternal, Infant, and Early Childhood Home Visiting
+(MIECHV) Project.
+HRSA/ACF D89MC23154.
+David Bard, PI, OUHSC; 2011-2015.
+Independent Evaluation of the State of OK MIECHV Evidence Based Home
+Visitation Project, NIH-sponsored collaboration with
+OSDH.
+David Bard, PI, OUHSC; 2015-2017.
+OSDH ParentPRO Pilot Evaluation, federally-sponsored collaboration with
+OSDH.
+David Bard, PI, OUHSC; 2015-2017.
+Title IV-E Waiver Project, HRSA/MCHB-sponsored
+collaboration with OKDHS;
+David Bard, PI, OUHSC; 2014-2017.
+Integrative Analysis of Longitudinal Studies of Aging (IALSA), sponsored
+by NIH 5P01AG043362.
+Scott Hofer, PI, University of Victoria;
+Will Beasley, PI of site-award, OUHSC; 2013-2018.
+Oklahoma Shared Clinical and Translational Resources, sponsored by
+NIH NIGMS; U54 GM104938.
+Judith A. James, PI, OUHSC; 2013-2018.
+Additional Institutional Support from OUHSC
+Dept of Pediatrics;
+2013-2017.
 
 " />
 <meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png" />
@@ -159,21 +181,42 @@ Additional Institutional Support from OUHSC Dept of Pediatrics; 2013-2017.
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>R utilities for interacting with a REDCap data system <a href='http://www.project-redcap.org/'>http://www.project-redcap.org/</a></h1>
+    <h1>R utilities for interacting with a REDCap data system
+<a href='http://www.project-redcap.org/'>http://www.project-redcap.org/</a></h1>
     <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/R/REDCapR-package.R'><code>R/REDCapR-package.R</code></a></small>
     <div class="hidden name"><code>REDCapR-package.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Comprehensive documentation is also available at https://ouhscbbmc.github.io/REDCapR/.</p>
-<p>Much of this package has been developed to support the needs of the following projects.  We appreciate the support.</p><ul>
-<li><p><em>OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting (<a href='http://mchb.hrsa.gov/programs/homevisiting/'>MIECHV</a>) Project</em>. <a href='https://perf-data.hrsa.gov/mchb/DGISReports/Abstract/AbstractDetails.aspx?Source=TVIS&amp;GrantNo=D89MC23154&amp;FY=2012'>HRSA/ACF D89MC23154</a>.  David Bard, PI, OUHSC; 2011-2015.</p></li>
-<li><p><em>Independent Evaluation of the State of OK MIECHV Evidence Based Home Visitation Project</em>, <a href='https://www.nih.gov/'>NIH</a>-sponsored collaboration with <a href='https://www.ok.gov/health/'>OSDH</a>. David Bard, PI, OUHSC; 2015-2017.</p></li>
-<li><p><em>OSDH ParentPRO Pilot Evaluation</em>, federally-sponsored collaboration with <a href='https://www.ok.gov/health/'>OSDH</a>.  David Bard, PI, OUHSC; 2015-2017.</p></li>
-<li><p><em>Title IV-E Waiver Project</em>, <a href='http://mchb.hrsa.gov/'>HRSA/MCHB</a>-sponsored collaboration with <a href='http://www.okdhs.org/'>OKDHS</a>; David Bard, PI, OUHSC; 2014-2017.</p></li>
-<li><p><em>Integrative Analysis of Longitudinal Studies of Aging (IALSA)</em>, sponsored by <a href='http://grantome.com/grant/NIH/P01-AG043362'>NIH 5P01AG043362</a>.  Scott Hofer, PI, University of Victoria; Will Beasley, PI of site-award, OUHSC; 2013-2018.</p></li>
-<li><p><em>Oklahoma Shared Clinical and Translational Resources</em>, sponsored by <a href='http://grantome.com/grant/NIH/U54-GM104938'>NIH NIGMS; U54 GM104938</a>. Judith A. James, PI, OUHSC; 2013-2018.</p></li>
-<li><p>Additional Institutional Support from OUHSC <a href='https://www.oumedicine.com/department-of-pediatrics'>Dept of Pediatrics</a>; 2013-2017.</p></li>
+    <p>Comprehensive documentation is also available at
+https://ouhscbbmc.github.io/REDCapR/.</p>
+<p>Much of this package has been developed to support the needs of the
+following projects.  We appreciate the support.</p><ul>
+<li><p><em>OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive
+Maternal, Infant, and Early Childhood Home Visiting
+(<a href='http://mchb.hrsa.gov/programs/homevisiting/'>MIECHV</a>) Project</em>.
+<a href='https://perf-data.hrsa.gov/mchb/DGISReports/Abstract/AbstractDetails.aspx?Source=TVIS&amp;GrantNo=D89MC23154&amp;FY=2012'>HRSA/ACF D89MC23154</a>.
+David Bard, PI, OUHSC; 2011-2015.</p></li>
+<li><p><em>Independent Evaluation of the State of OK MIECHV Evidence Based Home
+Visitation Project</em>, <a href='https://www.nih.gov/'>NIH</a>-sponsored collaboration with
+<a href='https://www.ok.gov/health/'>OSDH</a>.
+David Bard, PI, OUHSC; 2015-2017.</p></li>
+<li><p><em>OSDH ParentPRO Pilot Evaluation</em>, federally-sponsored collaboration with
+<a href='https://www.ok.gov/health/'>OSDH</a>.
+David Bard, PI, OUHSC; 2015-2017.</p></li>
+<li><p><em>Title IV-E Waiver Project</em>, <a href='http://mchb.hrsa.gov/'>HRSA/MCHB</a>-sponsored
+collaboration with <a href='http://www.okdhs.org/'>OKDHS</a>;
+David Bard, PI, OUHSC; 2014-2017.</p></li>
+<li><p><em>Integrative Analysis of Longitudinal Studies of Aging (IALSA)</em>, sponsored
+by <a href='http://grantome.com/grant/NIH/P01-AG043362'>NIH 5P01AG043362</a>.
+Scott Hofer, PI, University of Victoria;
+Will Beasley, PI of site-award, OUHSC; 2013-2018.</p></li>
+<li><p><em>Oklahoma Shared Clinical and Translational Resources</em>, sponsored by
+<a href='http://grantome.com/grant/NIH/U54-GM104938'>NIH NIGMS; U54 GM104938</a>.
+Judith A. James, PI, OUHSC; 2013-2018.</p></li>
+<li><p>Additional Institutional Support from OUHSC
+<a href='https://www.oumedicine.com/department-of-pediatrics'>Dept of Pediatrics</a>;
+2013-2017.</p></li>
 </ul>
 
     </div>
@@ -182,15 +225,19 @@ Additional Institutional Support from OUHSC Dept of Pediatrics; 2013-2017.
 
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>The release version is available through <a href='https://cran.r-project.org/package=REDCapR'>CRAN</a> by
-running <code><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages('REDCapR')</a></code>.
-The most recent development version is available through <a href='https://github.com/OuhscBbmc/REDCapR'>GitHub</a> by
-running
-<code><a href='https://rdrr.io/pkg/devtools/man/remote-reexports.html'>devtools::install_github('OuhscBbmc/REDCapR')</a></code>
-(make sure <a href='https://cran.r-project.org/package=devtools'>devtools</a> is already installed).
-If you're having trouble with the package, please install the development version.  If this doesn't solve
-your problem, please create a <a href='https://github.com/OuhscBbmc/REDCapR/issues'>new issue</a>, or email Will.</p>
-<p>See REDCapR's advanced vignette for information and examples for overriding the default SSL options.</p>
+    <p>The release version is available through
+<a href='https://cran.r-project.org/package=REDCapR'>CRAN</a> by running
+<code><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages('REDCapR')</a></code>.
+The most recent development version is available through
+<a href='https://github.com/OuhscBbmc/REDCapR'>GitHub</a> by running
+<code><a href='https://rdrr.io/pkg/remotes/man/install_github.html'>remotes::install_github('OuhscBbmc/REDCapR')</a></code>
+(make sure <a href='https://cran.r-project.org/package=remotes'>remotes</a>
+is already installed).
+If you're having trouble with the package, please install the development
+version. If this doesn't solve your problem, please create a
+<a href='https://github.com/OuhscBbmc/REDCapR/issues'>new issue</a>, or email Will.</p>
+<p>See REDCapR's advanced vignette for information and examples for overriding
+the default SSL options.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
@@ -198,8 +245,8 @@ your problem, please create a <a href='https://github.com/OuhscBbmc/REDCapR/issu
 <span class='fu'><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></span>(<span class='st'>'REDCapR'</span>)
 
 <span class='co'># Install/update REDCapR with the development version from GitHub</span>
-<span class='co'>#install.packages('devtools') #Uncomment if `devtools` isn't installed already.</span>
-<span class='kw pkg'>devtools</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/devtools/man/remote-reexports.html'>install_github</a></span>(<span class='st'>'OuhscBbmc/REDCapR'</span>)
+<span class='co'># install.packages('remotes') # Uncomment if `remotes` isn't installed.</span>
+<span class='kw pkg'>remotes</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/remotes/man/install_github.html'>install_github</a></span>(<span class='st'>'OuhscBbmc/REDCapR'</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
