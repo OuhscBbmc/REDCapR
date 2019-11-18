@@ -5,7 +5,8 @@
 \alias{validate_no_logical}
 \alias{validate_for_write}
 \alias{validate_field_names}
-\title{Inspect a \code{\link[base:data.frame]{base::data.frame()}} to anticipate problems before writing to a REDCap project}
+\title{Inspect a \code{\link[base:data.frame]{base::data.frame()}} to anticipate problems before
+writing to a REDCap project}
 \usage{
 validate_for_write( d )
 
@@ -14,30 +15,38 @@ validate_no_logical( data_types, stop_on_error )
 validate_field_names( field_names, stop_on_error )
 }
 \arguments{
-\item{data_types}{The data types of the \code{\link[base:data.frame]{base::data.frame()}} corresponding to the REDCap project.}
+\item{data_types}{The data types of the \code{\link[base:data.frame]{base::data.frame()}} corresponding
+to the REDCap project.}
 
-\item{stop_on_error}{If \code{TRUE}, an error is thrown for violations.  Otherwise, a dataset summarizing the problems is returned.}
+\item{stop_on_error}{If \code{TRUE}, an error is thrown for violations.
+Otherwise, a dataset summarizing the problems is returned.}
 
-\item{d}{The \code{\link[base:data.frame]{base::data.frame()}} containing the dataset used to update the REDCap project.}
+\item{d}{The \code{\link[base:data.frame]{base::data.frame()}} containing the dataset used to update
+the REDCap project.}
 
 \item{field_names}{The names of the fields/variables in the REDCap project.}
 }
 \value{
-A \code{\link[tibble:tibble]{tibble::tibble()}}, where each potential violation is a row.  The two columns are:
+A \code{\link[tibble:tibble]{tibble::tibble()}}, where each potential violation is a row.
+The two columns are:
 \itemize{
-\item \code{field_name}: The name of the \code{\link[base:data.frame]{base::data.frame()}} that might cause problems during the upload.
-\item \code{field_index}: The position of the field.  (For example, a value of '1' indicates the first column, while a '3' indicates the third column.)
+\item \code{field_name}: The name of the \code{\link[base:data.frame]{base::data.frame()}} that might cause
+problems during the upload.
+\item \code{field_index}: The position of the field.  (For example, a value of
+'1' indicates the first column, while a '3' indicates the third column.)
 \item \code{concern}: A description of the problem potentially caused by the \code{field}.
 \item \code{suggestion}: A \emph{potential} solution to the concern.
 }
 }
 \description{
-This set of functions inspect a \code{\link[base:data.frame]{base::data.frame()}} to anticipate problems before writing with REDCap's API.
+This set of functions inspect a \code{\link[base:data.frame]{base::data.frame()}} to
+anticipate problems before writing with REDCap's API.
 }
 \details{
-All functions listed in the Usage section above inspect a specific aspect of the dataset.
-The \code{\link[=validate_for_write]{validate_for_write()}} function executes all
-these individual validation checks.  It allows the client to check everything with one call.
+All functions listed in the Usage section above inspect a specific aspect
+of the dataset.  The \code{\link[=validate_for_write]{validate_for_write()}} function executes all these
+individual validation checks.  It allows the client to check everything
+with one call.
 }
 \examples{
 d <- data.frame(
@@ -48,10 +57,12 @@ d <- data.frame(
 REDCapR::validate_for_write(d = d)
 }
 \references{
-The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-on the REDCap wiki (\emph{i.e.}, https://community.projectredcap.org/articles/456/api-documentation.html and
-https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
-for the wiki, please ask your campus REDCap administrator to send you the static material.
+The official documentation can be found on the 'API Help Page'
+and 'API Examples' pages on the REDCap wiki (\emph{i.e.},
+https://community.projectredcap.org/articles/456/api-documentation.html and
+https://community.projectredcap.org/articles/462/api-examples.html).
+If you do not have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.
 }
 \author{
 Will Beasley

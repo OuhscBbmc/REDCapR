@@ -12,13 +12,17 @@ replace_nas_with_explicit(
 )
 }
 \arguments{
-\item{scores}{An array of values, ideally either factor or character. Required}
+\item{scores}{An array of values, ideally either factor or character.
+Required}
 
-\item{new_na_label}{The factor label assigned to the missing value.  Defaults to \code{Unknown}.}
+\item{new_na_label}{The factor label assigned to the missing value.
+Defaults to \code{Unknown}.}
 
-\item{create_factor}{Converts \code{scores} into a factor, if it isn't one already.   Defaults to \code{FALSE}.}
+\item{create_factor}{Converts \code{scores} into a factor, if it isn't one
+already. Defaults to \code{FALSE}.}
 
-\item{add_unknown_level}{Should a new factor level be created?  (Specify \code{TRUE} if it already exists.)   Defaults to \code{FALSE}.}
+\item{add_unknown_level}{Should a new factor level be created?
+(Specify \code{TRUE} if it already exists.)   Defaults to \code{FALSE}.}
 }
 \value{
 An array of values, where the \code{NA} values are now a factor level,
@@ -26,14 +30,16 @@ with the label specified by the \code{new_na_label} value.
 }
 \description{
 Missing values are converted to a factor level.
-This explicit assignment can reduce the chances that missing values are inadvertently ignored.
-It also allows the presence of a missing to become a predictor in models.
+This explicit assignment can reduce the chances that missing values
+are inadvertently ignored. It also allows the presence of a missing
+to become a predictor in models.
 }
 \note{
-The \code{create_factor} parameter is respected only if \code{scores} isn't already a factor.
-Otherwise, levels without any values would be lost.
+The \code{create_factor} parameter is respected only if \code{scores} isn't already
+a factor. Otherwise, levels without any values would be lost.
 
-A \code{stop} error will be thrown if the operation fails to convert all the \code{NA} values.
+A \code{stop} error will be thrown if the operation fails to convert all the
+\code{NA} values.
 }
 \examples{
 library(REDCapR) #Load the package into the current R session.

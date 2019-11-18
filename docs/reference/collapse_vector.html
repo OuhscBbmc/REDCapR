@@ -49,9 +49,11 @@
 
 
 <meta property="og:title" content="Collapse a vector of values into a single string when necessary. — collapse_vector" />
-<meta property="og:description" content="REDCap's API frequently specifies a series of values separated by commas.
-In the R world, it's easier to keep these values as separate elements in a vector.
-This functions squashes them together in a single character element (presumably right before the return value is passed to the API)" />
+<meta property="og:description" content="REDCap's API frequently specifies a series of values
+separated by commas.
+In the R world, it's easier to keep these values as separate elements in a
+vector. This functions squashes them together in a single character element
+(presumably right before the return value is passed to the API)" />
 <meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -157,9 +159,11 @@ This functions squashes them together in a single character element (presumably 
     </div>
 
     <div class="ref-description">
-    <p>REDCap's API frequently specifies a series of values separated by commas.
-In the R world, it's easier to keep these values as separate elements in a vector.
-This functions squashes them together in a single character element (presumably right before the return value is passed to the API)</p>
+    <p>REDCap's API frequently specifies a series of values
+separated by commas.
+In the R world, it's easier to keep these values as separate elements in a
+vector. This functions squashes them together in a single character element
+(presumably right before the return value is passed to the API)</p>
     </div>
 
     <pre class="usage"><span class='fu'>collapse_vector</span>(<span class='no'>elements</span>, <span class='no'>collapsed</span>)</pre>
@@ -173,13 +177,15 @@ This functions squashes them together in a single character element (presumably 
     </tr>
     <tr>
       <th>collapsed</th>
-      <td><p>A single character element, where the values are separated by commas.  Can be <code>NULL</code>.  Required.</p></td>
+      <td><p>A single character element, where the values are separated
+by commas.  Can be <code>NULL</code>.  Required.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A single character element, where the values are separated by commas.  Can be blank. (<em>i.e.</em>, <code>""</code>).</p>
+    <p>A single character element, where the values are separated by
+commas.  Can be blank. (<em>i.e.</em>, <code>""</code>).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>REDCapR</span>) <span class='co'>#Load the package into the current R session.</span>

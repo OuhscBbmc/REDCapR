@@ -50,8 +50,9 @@
 
 <meta property="og:title" content="Create explicit factor level for missing values — replace_nas_with_explicit" />
 <meta property="og:description" content="Missing values are converted to a factor level.
-This explicit assignment can reduce the chances that missing values are inadvertently ignored.
-It also allows the presence of a missing to become a predictor in models." />
+This explicit assignment can reduce the chances that missing values
+are inadvertently ignored. It also allows the presence of a missing
+to become a predictor in models." />
 <meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -158,8 +159,9 @@ It also allows the presence of a missing to become a predictor in models." />
 
     <div class="ref-description">
     <p>Missing values are converted to a factor level.
-This explicit assignment can reduce the chances that missing values are inadvertently ignored.
-It also allows the presence of a missing to become a predictor in models.</p>
+This explicit assignment can reduce the chances that missing values
+are inadvertently ignored. It also allows the presence of a missing
+to become a predictor in models.</p>
     </div>
 
     <pre class="usage"><span class='fu'>replace_nas_with_explicit</span>(
@@ -174,19 +176,23 @@ It also allows the presence of a missing to become a predictor in models.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>scores</th>
-      <td><p>An array of values, ideally either factor or character. Required</p></td>
+      <td><p>An array of values, ideally either factor or character.
+Required</p></td>
     </tr>
     <tr>
       <th>new_na_label</th>
-      <td><p>The factor label assigned to the missing value.  Defaults to <code>Unknown</code>.</p></td>
+      <td><p>The factor label assigned to the missing value.
+Defaults to <code>Unknown</code>.</p></td>
     </tr>
     <tr>
       <th>create_factor</th>
-      <td><p>Converts <code>scores</code> into a factor, if it isn't one already.   Defaults to <code>FALSE</code>.</p></td>
+      <td><p>Converts <code>scores</code> into a factor, if it isn't one
+already. Defaults to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>add_unknown_level</th>
-      <td><p>Should a new factor level be created?  (Specify <code>TRUE</code> if it already exists.)   Defaults to <code>FALSE</code>.</p></td>
+      <td><p>Should a new factor level be created?
+(Specify <code>TRUE</code> if it already exists.)   Defaults to <code>FALSE</code>.</p></td>
     </tr>
     </table>
 
@@ -196,9 +202,10 @@ It also allows the presence of a missing to become a predictor in models.</p>
 with the label specified by the <code>new_na_label</code> value.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>The <code>create_factor</code> parameter is respected only if <code>scores</code> isn't already a factor.
-Otherwise, levels without any values would be lost.</p>
-<p>A <code>stop</code> error will be thrown if the operation fails to convert all the <code>NA</code> values.</p>
+    <p>The <code>create_factor</code> parameter is respected only if <code>scores</code> isn't already
+a factor. Otherwise, levels without any values would be lost.</p>
+<p>A <code>stop</code> error will be thrown if the operation fails to convert all the
+<code>NA</code> values.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>REDCapR</span>) <span class='co'>#Load the package into the current R session.</span></div></pre>

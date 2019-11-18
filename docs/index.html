@@ -115,33 +115,33 @@
 <a href="#redcapr-" class="anchor"></a><a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> <img src="reference/figures/logo.png" align="right" width="130">
 </h1></div>
 <p>We’ve been using R with <a href="https://projectredcap.org/">REDCap</a>’s API since 2012 and have developed <a href="https://github.com/OuhscBbmc/REDCapR"><code>REDCapR</code></a>. Before encapsulating these functions in a package, we were replicating 50+ lines of code to contact REDCap and robustly transform the returned <a href="https://en.wikipedia.org/wiki/Comma-separated_values">csv</a> into an R <code>data.frame</code>; it took twice that much to implement batching. All this can be done in one call to <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code><a href="reference/redcap_read.html">redcap_read()</a></code></a>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>ds &lt;-<span class="st"> </span><span class="kw"><a href="reference/redcap_read.html">redcap_read</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)<span class="op">$</span>data</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">ds &lt;-<span class="st"> </span><span class="kw"><a href="reference/redcap_read.html">redcap_read</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)<span class="op">$</span>data</a></code></pre></div>
 <p>The <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code><a href="reference/redcap_read.html">redcap_read()</a></code></a> function also accepts values for subsetting/filtering the records and fields. Here are two examples; the first selects only a portion of the rows, while the second selects only a portion of the columns. Documentation for the additional 20+ functions are found at <a href="https://ouhscbbmc.github.io/REDCapR/reference/">ouhscbbmc.github.io/REDCapR/reference</a>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Return only records with IDs of 1 and 4</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>desired_records &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">4</span>)</span>
-<span id="cb2-3"><a href="#cb2-3"></a>ds_some_rows &lt;-<span class="st"> </span><span class="kw"><a href="reference/redcap_read.html">redcap_read</a></span>(</span>
-<span id="cb2-4"><a href="#cb2-4"></a>  <span class="dt">redcap_uri   =</span> uri,</span>
-<span id="cb2-5"><a href="#cb2-5"></a>  <span class="dt">token        =</span> token,</span>
-<span id="cb2-6"><a href="#cb2-6"></a>  <span class="dt">records      =</span> desired_records</span>
-<span id="cb2-7"><a href="#cb2-7"></a>)<span class="op">$</span>data</span>
-<span id="cb2-8"><a href="#cb2-8"></a></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="co"># Return only the fields record_id, name_first, and age</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a>desired_fields &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"record_id"</span>, <span class="st">"name_first"</span>, <span class="st">"age"</span>)</span>
-<span id="cb2-11"><a href="#cb2-11"></a>ds_some_fields &lt;-<span class="st"> </span><span class="kw"><a href="reference/redcap_read.html">redcap_read</a></span>(</span>
-<span id="cb2-12"><a href="#cb2-12"></a>  <span class="dt">redcap_uri  =</span> uri,</span>
-<span id="cb2-13"><a href="#cb2-13"></a>  <span class="dt">token       =</span> token,</span>
-<span id="cb2-14"><a href="#cb2-14"></a>  <span class="dt">fields      =</span> desired_fields</span>
-<span id="cb2-15"><a href="#cb2-15"></a>)<span class="op">$</span>data</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Return only records with IDs of 1 and 4</span></a>
+<a class="sourceLine" id="cb2-2" title="2">desired_records &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb2-3" title="3">ds_some_rows &lt;-<span class="st"> </span><span class="kw"><a href="reference/redcap_read.html">redcap_read</a></span>(</a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="dt">redcap_uri   =</span> uri,</a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="dt">token        =</span> token,</a>
+<a class="sourceLine" id="cb2-6" title="6">  <span class="dt">records      =</span> desired_records</a>
+<a class="sourceLine" id="cb2-7" title="7">)<span class="op">$</span>data</a>
+<a class="sourceLine" id="cb2-8" title="8"></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="co"># Return only the fields record_id, name_first, and age</span></a>
+<a class="sourceLine" id="cb2-10" title="10">desired_fields &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"record_id"</span>, <span class="st">"name_first"</span>, <span class="st">"age"</span>)</a>
+<a class="sourceLine" id="cb2-11" title="11">ds_some_fields &lt;-<span class="st"> </span><span class="kw"><a href="reference/redcap_read.html">redcap_read</a></span>(</a>
+<a class="sourceLine" id="cb2-12" title="12">  <span class="dt">redcap_uri  =</span> uri,</a>
+<a class="sourceLine" id="cb2-13" title="13">  <span class="dt">token       =</span> token,</a>
+<a class="sourceLine" id="cb2-14" title="14">  <span class="dt">fields      =</span> desired_fields</a>
+<a class="sourceLine" id="cb2-15" title="15">)<span class="op">$</span>data</a></code></pre></div>
 <p>The <code>REDCapR</code> package includes the SSL certificate retrieved by <a href="https://github.com/r-lib/httr/blob/master/R/utils.r"><code>httr::find_cert_bundle()</code></a>. Your REDCap server’s identity is always verified, unless the setting is overridden (alternative certificates can also be provided).</p>
 <p>To keep our maintenance efforts manageable, the package implements only the REDCap API functions that have been requested. If there’s a feature that would help your projects, please tell us in a new issue in REDCapR’s <a href="https://github.com/OuhscBbmc/REDCapR/issues">GitHub repository</a>. A <a href="https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html">troubleshooting</a> document helps diagnose issues with the API.</p>
 <div id="installation-and-documentation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#installation-and-documentation" class="anchor"></a>Installation and Documentation</h3>
 <p>The <em>release</em> version can be installed from <a href="https://cran.r-project.org/package=REDCapR">CRAN</a>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"REDCapR"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"REDCapR"</span>)</a></code></pre></div>
 <p>The <em>development</em> version can be installed from <a href="https://github.com/OuhscBbmc/REDCapR">GitHub</a> after installing the <code>remotes</code> package.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>) <span class="co"># Run this line if the 'remotes' package isn't installed already.</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="dt">repo=</span><span class="st">"OuhscBbmc/REDCapR"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>) <span class="co"># Run this line if the 'remotes' package isn't installed already.</span></a>
+<a class="sourceLine" id="cb4-2" title="2">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="dt">repo=</span><span class="st">"OuhscBbmc/REDCapR"</span>)</a></code></pre></div>
 <p>The <a href="https://ouhscbbmc.github.io/REDCapR">ouhscbbmc.github.io/REDCapR</a> site describes the package functions, and includes documents involving <a href="https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html">basic operations</a>, <a href="https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.html">advanced operations</a>, <a href="https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html">token security</a>, and <a href="https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html">troubleshooting</a>.</p>
 <p>Also checkout the other packages that exist for communicating with REDCap, which are listed in the <a href="http://redcap-tools.github.io/projects/">REDCap Tools</a> directory.</p>
 </div>

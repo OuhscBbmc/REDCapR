@@ -24,7 +24,7 @@ test_that("validate_for_write_no_errors", {
 test_that("validate_field_names -stop on error", {
   expect_error(
     validate_no_logical(sapply(ds_bad, class), stop_on_error = TRUE),
-    "1 field\\(s\\) were logical/boolean.  The REDCap API does not automatically convert boolean values to 0/1 values.  Convert the variable with the `as.integer\\(\\)` function."
+    "1 field\\(s\\) were logical/boolean. The REDCap API does not automatically convert boolean values to 0/1 values.  Convert the variable with the `as.integer\\(\\)` function."
   )
 })
 
