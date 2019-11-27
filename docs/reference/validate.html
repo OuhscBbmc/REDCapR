@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Inspect a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> to anticipate problems before writing to a REDCap project — validate • REDCapR</title>
+<title>Inspect a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> to anticipate problems before
+writing to a REDCap project — validate • REDCapR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,8 +49,10 @@
 
 
 
-<meta property="og:title" content="Inspect a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> to anticipate problems before writing to a REDCap project — validate" />
-<meta property="og:description" content="This set of functions inspect a base::data.frame() to anticipate problems before writing with REDCap's API." />
+<meta property="og:title" content="Inspect a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> to anticipate problems before
+writing to a REDCap project — validate" />
+<meta property="og:description" content="This set of functions inspect a base::data.frame() to
+anticipate problems before writing with REDCap's API." />
 <meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -149,13 +152,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Inspect a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> to anticipate problems before writing to a REDCap project</h1>
+    <h1>Inspect a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> to anticipate problems before
+writing to a REDCap project</h1>
     <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/R/validate.R'><code>R/validate.R</code></a></small>
     <div class="hidden name"><code>validate.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This set of functions inspect a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> to anticipate problems before writing with REDCap's API.</p>
+    <p>This set of functions inspect a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> to
+anticipate problems before writing with REDCap's API.</p>
     </div>
 
     <pre class="usage"><span class='fu'>validate_for_write</span>( <span class='no'>d</span> )
@@ -169,15 +174,18 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data_types</th>
-      <td><p>The data types of the <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> corresponding to the REDCap project.</p></td>
+      <td><p>The data types of the <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> corresponding
+to the REDCap project.</p></td>
     </tr>
     <tr>
       <th>stop_on_error</th>
-      <td><p>If <code>TRUE</code>, an error is thrown for violations.  Otherwise, a dataset summarizing the problems is returned.</p></td>
+      <td><p>If <code>TRUE</code>, an error is thrown for violations.
+Otherwise, a dataset summarizing the problems is returned.</p></td>
     </tr>
     <tr>
       <th>d</th>
-      <td><p>The <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> containing the dataset used to update the REDCap project.</p></td>
+      <td><p>The <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> containing the dataset used to update
+the REDCap project.</p></td>
     </tr>
     <tr>
       <th>field_names</th>
@@ -187,24 +195,30 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code>, where each potential violation is a row.  The two columns are:</p><ul>
-<li><p><code>field_name</code>: The name of the <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> that might cause problems during the upload.</p></li>
-<li><p><code>field_index</code>: The position of the field.  (For example, a value of '1' indicates the first column, while a '3' indicates the third column.)</p></li>
+    <p>A <code><a href='https://rdrr.io/pkg/tibble/man/tibble.html'>tibble::tibble()</a></code>, where each potential violation is a row.
+The two columns are:</p><ul>
+<li><p><code>field_name</code>: The name of the <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> that might cause
+problems during the upload.</p></li>
+<li><p><code>field_index</code>: The position of the field.  (For example, a value of
+'1' indicates the first column, while a '3' indicates the third column.)</p></li>
 <li><p><code>concern</code>: A description of the problem potentially caused by the <code>field</code>.</p></li>
 <li><p><code>suggestion</code>: A <em>potential</em> solution to the concern.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>All functions listed in the Usage section above inspect a specific aspect of the dataset.
-The <code>validate_for_write()</code> function executes all
-these individual validation checks.  It allows the client to check everything with one call.</p>
+    <p>All functions listed in the Usage section above inspect a specific aspect
+of the dataset.  The <code>validate_for_write()</code> function executes all these
+individual validation checks.  It allows the client to check everything
+with one call.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>The official documentation can be found on the 'API Help Page' and 'API Examples' pages
-on the REDCap wiki (<em>i.e.</em>, https://community.projectredcap.org/articles/456/api-documentation.html and
-https://community.projectredcap.org/articles/462/api-examples.html). If you do not have an account
-for the wiki, please ask your campus REDCap administrator to send you the static material.</p>
+    <p>The official documentation can be found on the 'API Help Page'
+and 'API Examples' pages on the REDCap wiki (<em>i.e.</em>,
+https://community.projectredcap.org/articles/456/api-documentation.html and
+https://community.projectredcap.org/articles/462/api-examples.html).
+If you do not have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(

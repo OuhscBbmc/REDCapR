@@ -49,7 +49,8 @@
 
 
 <meta property="og:title" content="Sanitize to adhere to REDCap character encoding requirements — redcap_column_sanitize" />
-<meta property="og:description" content="Replace non-ASCII characters with legal characters that won't cause problems when writing to a REDCap project." />
+<meta property="og:description" content="Replace non-ASCII characters with legal characters that won't
+cause problems when writing to a REDCap project." />
 <meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -155,7 +156,8 @@
     </div>
 
     <div class="ref-description">
-    <p>Replace non-ASCII characters with legal characters that won't cause problems when writing to a REDCap project.</p>
+    <p>Replace non-ASCII characters with legal characters that won't
+cause problems when writing to a REDCap project.</p>
     </div>
 
     <pre class="usage"><span class='fu'>redcap_column_sanitize</span>(
@@ -170,46 +172,51 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>d</th>
-      <td><p>The <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> containing the dataset used to update the REDCap project.  Required.</p></td>
+      <td><p>The <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> containing the dataset used to update
+the REDCap project.  Required.</p></td>
     </tr>
     <tr>
       <th>column_names</th>
-      <td><p>An array of <code>character</code> values indicating the names of the variables to sanitize.  Optional.</p></td>
+      <td><p>An array of <code>character</code> values indicating the names of
+the variables to sanitize.  Optional.</p></td>
     </tr>
     <tr>
       <th>encoding_initial</th>
-      <td><p>An array of <code>character</code> values indicating the names of the variables to sanitize.  Optional.</p></td>
+      <td><p>An array of <code>character</code> values indicating the names
+of the variables to sanitize.  Optional.</p></td>
     </tr>
     <tr>
       <th>substitution_character</th>
-      <td><p>The <code>character</code> value that replaces characters that were unable to be appropriately matched.</p></td>
+      <td><p>The <code>character</code> value that replaces characters
+that were unable to be appropriately matched.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> with same columns, but whose character values have been sanitized.</p>
+    <p>A <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> with same columns, but whose character values
+have been sanitized.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Letters like an accented 'A' are replaced with a plain 'A'.</p>
 <p>This is a thin wrapper around <code><a href='https://rdrr.io/r/base/iconv.html'>base::iconv()</a></code>.
-The <code>ASCII//TRANSLIT</code> option does the actual transliteration work.  As of <code>R 3.1.0</code>, the OSes use similar,
-but different, versions to convert the characters.  Be aware of this in case you notice OS-dependent differences.</p>
+The <code>ASCII//TRANSLIT</code> option does the actual transliteration work.  As of
+<code>R 3.1.0</code>, the OSes use similar, but different, versions to convert the
+characters.  Be aware of this in case you notice OS-dependent differences.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>dirty</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>id</span><span class='kw'>=</span><span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>names</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Ekstr\xf8m"</span>, <span class='st'>"J\xf6reskog"</span>, <span class='st'>"bi\xdfchen Z\xfcrcher"</span>))
+    <pre class="examples"><div class='input'><span class='co'># Typical examples are not shown because they require non-ASCII encoding,</span>
+<span class='co'>#   which makes the package documentation less portable.</span>
+
+<span class='no'>dirty</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
+  <span class='kw'>id</span>     <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
+  <span class='kw'>names</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Ekstr\xf8m"</span>, <span class='st'>"J\xf6reskog"</span>, <span class='st'>"bi\xdfchen Z\xfcrcher"</span>)
+)
+
 <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/redcap_column_sanitize.html'>redcap_column_sanitize</a></span>(<span class='no'>dirty</span>)</div><div class='output co'>#&gt;   id            names
 #&gt; 1  1          Ekstrom
 #&gt; 2  2         Joreskog
-#&gt; 3  3 bisschen Zurcher</div><div class='input'># Produces the dataset:
-#  id            names
-#1  1          Ekstr?m
-#2  2         Joreskog
-#3  3 bisschen Zurcher
-
-# Typical examples are not shown because they require non-ASCII encoding,
-#   which makes the package documentation less portable.
-</div></pre>
+#&gt; 3  3 bisschen Zurcher</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

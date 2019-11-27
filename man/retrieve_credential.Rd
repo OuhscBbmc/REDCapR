@@ -8,11 +8,17 @@
 database or file}
 \usage{
 retrieve_credential_local(
-  path_credential, project_id, check_url=TRUE,
-  check_username=FALSE, check_token_pattern=TRUE
+  path_credential,
+  project_id,
+  check_url            = TRUE,
+  check_username       = FALSE,
+  check_token_pattern  = TRUE
 )
 retrieve_credential_mssql(
-  project_id, instance, dsn, channel=NULL
+  project_id,
+  instance,
+  dsn,
+  channel    = NULL
 )
 }
 \arguments{
@@ -24,8 +30,8 @@ allows the user to store tokens to multiple REDCap projects in one file.
 Required}
 
 \item{check_url}{A \code{logical} value indicates if the url in the credential
-file should be checked to have approximately the correct form.
-Defaults to TRUE.}
+file should be checked to have approximately the correct form.  Defaults
+to TRUE.}
 
 \item{check_username}{A \code{logical} value indicates if the username in the
 credential file should be checked against the username returned by R.
@@ -60,7 +66,7 @@ but instead are functions that help manage tokens securely.
 }
 \details{
 If the database elements are created with the script provided in package's
-"Security Database" vignette, the default values will work.
+'Security Database' vignette, the default values will work.
 }
 \note{
 Although we strongly encourage storing all the tokens on a central server
@@ -72,7 +78,7 @@ would like help adapting this approach to your infrastructure.
 }
 \examples{
 # ---- Local File Example ----------------------------
-path <- system.file("misc/example.credentials", package="REDCapR")
+path <- system.file("misc/example.credentials", package = "REDCapR")
 (p1  <- REDCapR::retrieve_credential_local(path, 153L))
 (p2  <- REDCapR::retrieve_credential_local(path, 212L))
 }

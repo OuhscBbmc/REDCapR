@@ -4,19 +4,25 @@
 #' database or file
 #'
 #' @description These functions are not essential to calling the REDCap API,
-#' but instead are functions that help manage tokens securely.
+#'  but instead are functions that help manage tokens securely.
 #'
 #' @usage
 #' retrieve_credential_local(
-#'   path_credential, project_id, check_url=TRUE,
-#'   check_username=FALSE, check_token_pattern=TRUE
+#'   path_credential,
+#'   project_id,
+#'   check_url            = TRUE,
+#'   check_username       = FALSE,
+#'   check_token_pattern  = TRUE
 #' )
 #' retrieve_credential_mssql(
-#'   project_id, instance, dsn, channel=NULL
+#'   project_id,
+#'   instance,
+#'   dsn,
+#'   channel    = NULL
 #' )
 #'
 #' @param path_credential The file path to the CSV containing the credentials.
-#' Required.
+#'  Required.
 #' @param project_id The ID assigned to the project withing REDCap.  This
 #' allows the user to store tokens to multiple REDCap projects in one file.
 #' Required
@@ -24,8 +30,8 @@
 #' campus.  This allows one credential system to accommodate multiple
 #' instances on campus.  Required
 #' @param check_url A `logical` value indicates if the url in the credential
-#' file should be checked to have approximately the correct form.
-#' Defaults to TRUE.
+#' file should be checked to have approximately the correct form.  Defaults
+#' to TRUE.
 #' @param check_username A `logical` value indicates if the username in the
 #' credential file should be checked against the username returned by R.
 #' Defaults to FALSE.
@@ -45,7 +51,7 @@
 #'
 #' @details
 #' If the database elements are created with the script provided in package's
-#' "Security Database" vignette, the default values will work.
+#' 'Security Database' vignette, the default values will work.
 #'
 #' @note
 #' Although we strongly encourage storing all the tokens on a central server
@@ -59,7 +65,7 @@
 #'
 #' @examples
 #' # ---- Local File Example ----------------------------
-#' path <- system.file("misc/example.credentials", package="REDCapR")
+#' path <- system.file("misc/example.credentials", package = "REDCapR")
 #' (p1  <- REDCapR::retrieve_credential_local(path, 153L))
 #' (p2  <- REDCapR::retrieve_credential_local(path, 212L))
 
@@ -72,8 +78,8 @@ retrieve_credential_local <- function(
   check_token_pattern      = TRUE
 ) {
 
-  checkmate::assert_character(path_credential   , any.missing=F, len=1, pattern="^.{1,}$")
-  checkmate::assert_file_exists(path_credential                                          )
+  checkmate::assert_character(path_credential  , any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_file_exists(path_credential                                         )
 
   col_types <- readr::cols_only(
     redcap_uri    = readr::col_character(),
@@ -111,8 +117,10 @@ retrieve_credential_local <- function(
 
   # Check that one and only one record matches the project id.
   if (nrow(ds_credential) == 0L) {
-    stop("The project_id was not found in the csv credential file.")
-  } else if (1L < nrow(ds_credential)) {
+    stop(
+      "The project_id was not found in the csv credential file."
+    )
+  } else if (nrow(ds_credential) > 1) {
     stop(
       "More than one matching project_id was found in the csv credential ",
       "file.  There should be only one."
@@ -164,8 +172,8 @@ retrieve_credential_local <- function(
 retrieve_credential_mssql <- function(
   project_id,
   instance,
-  dsn                      = NULL,
-  channel                  = NULL
+  dsn         = NULL,
+  channel     = NULL
 ) {
 
   if (!requireNamespace("DBI") )  stop("The function REDCapR::retrieve_credential_mssql() cannot run if the `DBI` package is not installed.  Please install it and try again.")
@@ -234,8 +242,8 @@ retrieve_credential_mssql <- function(
       DBI::dbBind(result, input)
       d_credential  <- DBI::dbFetch(result)
     }, finally = {
-      if (!is.null(result))       DBI::dbClearResult(result)
-      if (close_channel_on_exit)  DBI::dbDisconnect(channel)
+      if (!is.null(result))      DBI::dbClearResult(result)
+      if (close_channel_on_exit) DBI::dbDisconnect(channel)
     }
   )
 
