@@ -40,10 +40,10 @@ test_that("Super-wide", {
 
 test_that("Problematic Dictionary", {
   testthat::skip_on_cran()
-  expected_outcome_message <- "The data dictionary describing 2 fields was read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\.  The http status code was 200\\."
-  expected_row_count    <- 2L
+  expected_outcome_message <- "The data dictionary describing 3 fields was read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\.  The http status code was 200\\."
+  expected_row_count    <- 3L
   expected_column_count <- 18L
-  expected_na_cells     <- 27L
+  expected_na_cells     <- 40L
 
   expect_message(
     regexp           = expected_outcome_message,
