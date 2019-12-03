@@ -107,9 +107,6 @@ cause problems when writing to a REDCap project." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
-    </li>
-    <li>
       <a href="../articles/BasicREDCapROperations.html">Basic REDCapR Operations</a>
     </li>
     <li>
@@ -117,6 +114,9 @@ cause problems when writing to a REDCap project." />
     </li>
     <li>
       <a href="../articles/TroubleshootingApiCalls.html">Troubleshooting REDCap API Calls</a>
+    </li>
+    <li>
+      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
     </li>
   </ul>
 </li>
@@ -213,10 +213,10 @@ characters.  Be aware of this in case you notice OS-dependent differences.</p>
   <span class='kw'>names</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Ekstr\xf8m"</span>, <span class='st'>"J\xf6reskog"</span>, <span class='st'>"bi\xdfchen Z\xfcrcher"</span>)
 )
 
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/redcap_column_sanitize.html'>redcap_column_sanitize</a></span>(<span class='no'>dirty</span>)</div><div class='output co'>#&gt;   id           names
-#&gt; 1  1         Ekstrom
-#&gt; 2  2        Joreskog
-#&gt; 3  3 bi?chen Zurcher</div></pre>
+<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/redcap_column_sanitize.html'>redcap_column_sanitize</a></span>(<span class='no'>dirty</span>)</div><div class='output co'>#&gt;   id            names
+#&gt; 1  1          Ekstrom
+#&gt; 2  2         Joreskog
+#&gt; 3  3 bisschen Zurcher</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
