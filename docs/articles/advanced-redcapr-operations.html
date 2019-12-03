@@ -108,7 +108,7 @@
     <div class="page-header toc-ignore">
       <h1>Advanced REDCapR Operations</h1>
             
-            <h4 class="date">2019-12-02</h4>
+            <h4 class="date">2019-12-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/advanced-redcapr-operations.Rmd"><code>vignettes/advanced-redcapr-operations.Rmd</code></a></small>
       <div class="hidden name"><code>advanced-redcapr-operations.Rmd</code></div>
@@ -118,7 +118,7 @@
     
     
 <p>This vignette covers the the less-typical uses of <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> to interact with <a href="http://www.project-redcap.org/">REDCap</a> through its API.</p>
-<div id="nextsteps" class="section level2 emphasized">
+<div id="nextsteps" class="section level2">
 <h2 class="hasAnchor">
 <a href="#nextsteps" class="anchor"></a>Next Steps</h2>
 </div>
@@ -136,15 +136,15 @@
 <a href="#converting-from-talllong-to-wide" class="anchor"></a>Converting from tall/long to wide</h2>
 <p><em>Disclaimer</em>: Occasionally we’re asked for a longitudinal dataset to be converted from a “long/tall format” (where typically each row is one observation for a participant) to a “wide format” (where each row is on participant). Usually we advise against it. Besides all the database benefits of a long structure, a wide structure restricts your options with the stat routine. No modern longitudinal analysis procedures (<em>e.g.</em>, growth curve models or multilevel/hierarchical models) accept wide. You’re pretty much stuck with repeated measures anova, which is very inflexible for real-world medical-ish analyses. It requires a patient to have a measurement at every time point; otherwise the anova excludes the patient entirely.</p>
 <p>However we like going wide to produce visual tables for publications, and here’s one way to do it in R. First retrieve the dataset from REDCap.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(magrittr);</a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"dplyr"</span>))</a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="kw"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"tidyr"</span>))</a>
-<a class="sourceLine" id="cb2-4" title="4">events_to_retain  &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"dose_1_arm_1"</span>, <span class="st">"visit_1_arm_1"</span>, <span class="st">"dose_2_arm_1"</span>, <span class="st">"visit_2_arm_1"</span>)</a>
-<a class="sourceLine" id="cb2-5" title="5"></a>
-<a class="sourceLine" id="cb2-6" title="6">ds_long &lt;-<span class="st"> </span>REDCapR<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/REDCapR/man/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token_longitudinal)<span class="op">$</span>data</a></code></pre></div>
-<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">ds_long <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(magrittr);</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"dplyr"</span>))</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"tidyr"</span>))</span>
+<span id="cb2-4"><a href="#cb2-4"></a>events_to_retain  &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"dose_1_arm_1"</span>, <span class="st">"visit_1_arm_1"</span>, <span class="st">"dose_2_arm_1"</span>, <span class="st">"visit_2_arm_1"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a>ds_long &lt;-<span class="st"> </span>REDCapR<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/REDCapR/man/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token_longitudinal)<span class="op">$</span>data</span></code></pre></div>
+<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>ds_long <span class="op">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)</span></code></pre></div>
 <pre><code>#&gt;    study_id        redcap_event_name pmq1 pmq2 pmq3 pmq4
 #&gt; 1       100         enrollment_arm_1   NA   NA   NA   NA
 #&gt; 2       100             dose_1_arm_1    2    2    1    1
@@ -231,15 +231,15 @@
 <a href="#ssl-options" class="anchor"></a>SSL Options</h2>
 <p>The official <a href="http://curl.haxx.se">cURL site</a> discusses the process of using SSL to verify the server being connected to.</p>
 <p>Use the SSL cert file that come with the <code>openssl</code> package.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">cert_location &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"cacert.pem"</span>, <span class="dt">package=</span><span class="st">"openssl"</span>)</a>
-<a class="sourceLine" id="cb12-2" title="2"><span class="cf">if</span>( <span class="kw"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span>(cert_location) ) {</a>
-<a class="sourceLine" id="cb12-3" title="3">  config_options         &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">cainfo=</span>cert_location)</a>
-<a class="sourceLine" id="cb12-4" title="4">  ds_different_cert_file &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(</a>
-<a class="sourceLine" id="cb12-5" title="5">    <span class="dt">redcap_uri     =</span> uri,</a>
-<a class="sourceLine" id="cb12-6" title="6">    <span class="dt">token          =</span> token_simple,</a>
-<a class="sourceLine" id="cb12-7" title="7">    <span class="dt">config_options =</span> config_options</a>
-<a class="sourceLine" id="cb12-8" title="8">  )<span class="op">$</span>data</a>
-<a class="sourceLine" id="cb12-9" title="9">}</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>cert_location &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"cacert.pem"</span>, <span class="dt">package=</span><span class="st">"openssl"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="cf">if</span>( <span class="kw"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span>(cert_location) ) {</span>
+<span id="cb12-3"><a href="#cb12-3"></a>  config_options         &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">cainfo=</span>cert_location)</span>
+<span id="cb12-4"><a href="#cb12-4"></a>  ds_different_cert_file &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(</span>
+<span id="cb12-5"><a href="#cb12-5"></a>    <span class="dt">redcap_uri     =</span> uri,</span>
+<span id="cb12-6"><a href="#cb12-6"></a>    <span class="dt">token          =</span> token_simple,</span>
+<span id="cb12-7"><a href="#cb12-7"></a>    <span class="dt">config_options =</span> config_options</span>
+<span id="cb12-8"><a href="#cb12-8"></a>  )<span class="op">$</span>data</span>
+<span id="cb12-9"><a href="#cb12-9"></a>}</span></code></pre></div>
 <pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
 <p>Force the connection to use SSL=3 (which is not preferred, and possibly insecure).</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">config_options &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">sslversion=</span><span class="dv">3</span>)</a>
@@ -262,87 +262,89 @@
 <a href="#session-information" class="anchor"></a>Session Information</h2>
 <p>For the sake of documentation and reproducibility, the current report was rendered in the following environment. Click the line below to expand.</p>
 <details><p><summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary></p>
-<pre><code>#&gt; - Session info ---------------------------------------------------------------
-#&gt;  setting  value                                      
-#&gt;  version  R version 3.6.1 Patched (2019-08-12 r76979)
-#&gt;  os       Windows 10 x64                             
-#&gt;  system   x86_64, mingw32                            
-#&gt;  ui       RTerm                                      
-#&gt;  language (EN)                                       
-#&gt;  collate  English_United States.1252                 
-#&gt;  ctype    English_United States.1252                 
-#&gt;  tz       America/Chicago                            
-#&gt;  date     2019-12-02                                 
+<pre><code>#&gt; ─ Session info ───────────────────────────────────────────────────────────────
+#&gt;  setting  value                       
+#&gt;  version  R version 3.6.1 (2019-07-05)
+#&gt;  os       Ubuntu 19.10                
+#&gt;  system   x86_64, linux-gnu           
+#&gt;  ui       X11                         
+#&gt;  language (EN)                        
+#&gt;  collate  en_US.UTF-8                 
+#&gt;  ctype    en_US.UTF-8                 
+#&gt;  tz       America/Chicago             
+#&gt;  date     2019-12-03                  
 #&gt; 
-#&gt; - Packages -------------------------------------------------------------------
-#&gt;  package     * version     date       lib source                         
-#&gt;  assertthat    0.2.1       2019-03-21 [2] CRAN (R 3.6.0)                 
-#&gt;  backports     1.1.5       2019-10-02 [2] CRAN (R 3.6.1)                 
-#&gt;  callr         3.3.2       2019-09-22 [2] CRAN (R 3.6.1)                 
-#&gt;  checkmate     2.0.0       2019-11-25 [2] Github (mllg/checkmate@36d4347)
-#&gt;  cli           1.1.0       2019-03-19 [2] CRAN (R 3.6.0)                 
-#&gt;  colorspace    1.4-1       2019-03-18 [2] CRAN (R 3.6.0)                 
-#&gt;  crayon        1.3.4       2017-09-16 [2] CRAN (R 3.6.0)                 
-#&gt;  curl          4.2         2019-09-24 [2] CRAN (R 3.6.1)                 
-#&gt;  desc          1.2.0       2018-05-01 [2] CRAN (R 3.6.0)                 
-#&gt;  devtools      2.2.1       2019-09-24 [2] CRAN (R 3.6.1)                 
-#&gt;  digest        0.6.23      2019-11-23 [2] CRAN (R 3.6.1)                 
-#&gt;  dplyr         0.8.3       2019-07-04 [2] CRAN (R 3.6.1)                 
-#&gt;  ellipsis      0.3.0       2019-09-20 [2] CRAN (R 3.6.1)                 
-#&gt;  evaluate      0.14        2019-05-28 [2] CRAN (R 3.6.0)                 
-#&gt;  fs            1.3.1       2019-05-06 [2] CRAN (R 3.6.0)                 
-#&gt;  glue          1.3.1       2019-03-12 [2] CRAN (R 3.6.0)                 
-#&gt;  hms           0.5.2       2019-10-30 [2] CRAN (R 3.6.1)                 
-#&gt;  htmltools     0.4.0       2019-10-04 [2] CRAN (R 3.6.1)                 
-#&gt;  httr          1.4.1       2019-08-05 [2] CRAN (R 3.6.1)                 
-#&gt;  kableExtra    1.1.0       2019-03-16 [2] CRAN (R 3.6.0)                 
-#&gt;  knitr       * 1.26        2019-11-12 [2] CRAN (R 3.6.1)                 
-#&gt;  lifecycle     0.1.0       2019-08-01 [2] CRAN (R 3.6.1)                 
-#&gt;  magrittr    * 1.5         2014-11-22 [2] CRAN (R 3.6.0)                 
-#&gt;  MASS          7.3-51.4    2019-03-31 [3] CRAN (R 3.6.1)                 
-#&gt;  memoise       1.1.0       2017-04-21 [2] CRAN (R 3.6.0)                 
-#&gt;  munsell       0.5.0       2018-06-12 [2] CRAN (R 3.6.0)                 
-#&gt;  pillar        1.4.2       2019-06-29 [2] CRAN (R 3.6.0)                 
-#&gt;  pkgbuild      1.0.6       2019-10-09 [2] CRAN (R 3.6.1)                 
-#&gt;  pkgconfig     2.0.3       2019-09-22 [2] CRAN (R 3.6.1)                 
-#&gt;  pkgdown       1.4.1       2019-09-15 [2] CRAN (R 3.6.1)                 
-#&gt;  pkgload       1.0.2       2018-10-29 [2] CRAN (R 3.6.0)                 
-#&gt;  prettyunits   1.0.2       2015-07-13 [2] CRAN (R 3.6.0)                 
-#&gt;  processx      3.4.1       2019-07-18 [2] CRAN (R 3.6.1)                 
-#&gt;  ps            1.3.0       2018-12-21 [2] CRAN (R 3.6.0)                 
-#&gt;  purrr         0.3.3       2019-10-18 [2] CRAN (R 3.6.1)                 
-#&gt;  R6            2.4.1       2019-11-12 [2] CRAN (R 3.6.1)                 
-#&gt;  Rcpp          1.0.3       2019-11-08 [2] CRAN (R 3.6.1)                 
-#&gt;  readr         1.3.1       2018-12-21 [2] CRAN (R 3.6.0)                 
-#&gt;  REDCapR     * 0.10.2.9003 2019-12-03 [1] local                          
-#&gt;  remotes       2.1.0       2019-06-24 [2] CRAN (R 3.6.0)                 
-#&gt;  rlang         0.4.2       2019-11-23 [2] CRAN (R 3.6.1)                 
-#&gt;  rmarkdown     1.18        2019-11-27 [2] CRAN (R 3.6.1)                 
-#&gt;  rprojroot     1.3-2       2018-01-03 [2] CRAN (R 3.6.0)                 
-#&gt;  rstudioapi    0.10        2019-03-19 [2] CRAN (R 3.6.0)                 
-#&gt;  rvest         0.3.5       2019-11-08 [2] CRAN (R 3.6.1)                 
-#&gt;  scales        1.1.0       2019-11-18 [2] CRAN (R 3.6.1)                 
-#&gt;  sessioninfo   1.1.1       2018-11-05 [2] CRAN (R 3.6.0)                 
-#&gt;  stringi       1.4.3       2019-03-12 [2] CRAN (R 3.6.0)                 
-#&gt;  stringr       1.4.0       2019-02-10 [2] CRAN (R 3.6.0)                 
-#&gt;  testthat      2.3.1       2019-12-01 [2] CRAN (R 3.6.1)                 
-#&gt;  tibble        2.1.3       2019-06-06 [2] CRAN (R 3.6.0)                 
-#&gt;  tidyr         1.0.0       2019-09-11 [2] CRAN (R 3.6.1)                 
-#&gt;  tidyselect    0.2.5       2018-10-11 [2] CRAN (R 3.6.0)                 
-#&gt;  usethis       1.5.1       2019-07-04 [2] CRAN (R 3.6.1)                 
-#&gt;  vctrs         0.2.0       2019-07-05 [2] CRAN (R 3.6.0)                 
-#&gt;  viridisLite   0.3.0       2018-02-01 [2] CRAN (R 3.6.0)                 
-#&gt;  webshot       0.5.2       2019-11-22 [2] CRAN (R 3.6.1)                 
-#&gt;  withr         2.1.2       2018-03-15 [2] CRAN (R 3.6.0)                 
-#&gt;  xfun          0.11        2019-11-12 [2] CRAN (R 3.6.1)                 
-#&gt;  xml2          1.2.2       2019-08-09 [2] CRAN (R 3.6.1)                 
-#&gt;  yaml          2.2.0       2018-07-25 [2] CRAN (R 3.6.0)                 
-#&gt;  zeallot       0.1.0       2018-01-28 [2] CRAN (R 3.6.0)                 
+#&gt; ─ Packages ───────────────────────────────────────────────────────────────────
+#&gt;  package     * version     date       lib source        
+#&gt;  assertthat    0.2.1       2019-03-21 [2] CRAN (R 3.6.1)
+#&gt;  backports     1.1.5       2019-10-02 [2] CRAN (R 3.6.1)
+#&gt;  callr         3.3.2       2019-09-22 [2] CRAN (R 3.6.1)
+#&gt;  checkmate     2.0.0       2019-12-03 [2] local         
+#&gt;  cli           1.1.0       2019-03-19 [2] CRAN (R 3.6.1)
+#&gt;  colorspace    1.4-1       2019-03-18 [2] CRAN (R 3.6.1)
+#&gt;  crayon        1.3.4       2017-09-16 [2] CRAN (R 3.6.1)
+#&gt;  curl          4.3         2019-12-02 [2] CRAN (R 3.6.1)
+#&gt;  desc          1.2.0       2018-05-01 [2] CRAN (R 3.6.1)
+#&gt;  devtools      2.2.1       2019-09-24 [2] CRAN (R 3.6.1)
+#&gt;  digest        0.6.23      2019-11-23 [2] CRAN (R 3.6.1)
+#&gt;  dplyr         0.8.3       2019-07-04 [2] CRAN (R 3.6.1)
+#&gt;  ellipsis      0.3.0       2019-09-20 [2] CRAN (R 3.6.1)
+#&gt;  evaluate      0.14        2019-05-28 [2] CRAN (R 3.6.1)
+#&gt;  fs            1.3.1       2019-05-06 [2] CRAN (R 3.6.1)
+#&gt;  glue          1.3.1       2019-03-12 [2] CRAN (R 3.6.1)
+#&gt;  hms           0.5.2       2019-10-30 [2] CRAN (R 3.6.1)
+#&gt;  htmltools     0.4.0       2019-10-04 [2] CRAN (R 3.6.1)
+#&gt;  httr          1.4.1       2019-08-05 [2] CRAN (R 3.6.1)
+#&gt;  kableExtra    1.1.0       2019-03-16 [2] CRAN (R 3.6.1)
+#&gt;  knitr       * 1.26        2019-11-12 [2] CRAN (R 3.6.1)
+#&gt;  lifecycle     0.1.0       2019-08-01 [2] CRAN (R 3.6.1)
+#&gt;  magrittr    * 1.5         2014-11-22 [2] CRAN (R 3.6.1)
+#&gt;  MASS          7.3-51.4    2019-04-26 [5] CRAN (R 3.6.1)
+#&gt;  memoise       1.1.0       2017-04-21 [2] CRAN (R 3.6.1)
+#&gt;  munsell       0.5.0       2018-06-12 [2] CRAN (R 3.6.1)
+#&gt;  pillar        1.4.2       2019-06-29 [2] CRAN (R 3.6.1)
+#&gt;  pkgbuild      1.0.6       2019-10-09 [2] CRAN (R 3.6.1)
+#&gt;  pkgconfig     2.0.3       2019-09-22 [2] CRAN (R 3.6.1)
+#&gt;  pkgdown       1.4.1       2019-09-15 [2] CRAN (R 3.6.1)
+#&gt;  pkgload       1.0.2       2018-10-29 [2] CRAN (R 3.6.1)
+#&gt;  prettyunits   1.0.2       2015-07-13 [2] CRAN (R 3.6.1)
+#&gt;  processx      3.4.1       2019-07-18 [2] CRAN (R 3.6.1)
+#&gt;  ps            1.3.0       2018-12-21 [2] CRAN (R 3.6.1)
+#&gt;  purrr         0.3.3       2019-10-18 [2] CRAN (R 3.6.1)
+#&gt;  R6            2.4.1       2019-11-12 [2] CRAN (R 3.6.1)
+#&gt;  Rcpp          1.0.3       2019-11-08 [2] CRAN (R 3.6.1)
+#&gt;  readr         1.3.1       2018-12-21 [2] CRAN (R 3.6.1)
+#&gt;  REDCapR     * 0.10.2.9003 2019-12-03 [1] local         
+#&gt;  remotes       2.1.0       2019-06-24 [2] CRAN (R 3.6.1)
+#&gt;  rlang         0.4.2       2019-11-23 [2] CRAN (R 3.6.1)
+#&gt;  rmarkdown     1.18        2019-11-27 [2] CRAN (R 3.6.1)
+#&gt;  rprojroot     1.3-2       2018-01-03 [2] CRAN (R 3.6.1)
+#&gt;  rstudioapi    0.10        2019-03-19 [2] CRAN (R 3.6.1)
+#&gt;  rvest         0.3.5       2019-11-08 [2] CRAN (R 3.6.1)
+#&gt;  scales        1.1.0       2019-11-18 [2] CRAN (R 3.6.1)
+#&gt;  sessioninfo   1.1.1       2018-11-05 [2] CRAN (R 3.6.1)
+#&gt;  stringi       1.4.3       2019-03-12 [2] CRAN (R 3.6.1)
+#&gt;  stringr       1.4.0       2019-02-10 [2] CRAN (R 3.6.1)
+#&gt;  testthat      2.3.1       2019-12-01 [2] CRAN (R 3.6.1)
+#&gt;  tibble        2.1.3       2019-06-06 [2] CRAN (R 3.6.1)
+#&gt;  tidyr         1.0.0       2019-09-11 [2] CRAN (R 3.6.1)
+#&gt;  tidyselect    0.2.5       2018-10-11 [2] CRAN (R 3.6.1)
+#&gt;  usethis       1.5.1       2019-07-04 [2] CRAN (R 3.6.1)
+#&gt;  vctrs         0.2.0       2019-07-05 [2] CRAN (R 3.6.1)
+#&gt;  viridisLite   0.3.0       2018-02-01 [2] CRAN (R 3.6.1)
+#&gt;  webshot       0.5.2       2019-11-22 [2] CRAN (R 3.6.1)
+#&gt;  withr         2.1.2       2018-03-15 [2] CRAN (R 3.6.1)
+#&gt;  xfun          0.11        2019-11-12 [2] CRAN (R 3.6.1)
+#&gt;  xml2          1.2.2       2019-08-09 [2] CRAN (R 3.6.1)
+#&gt;  yaml          2.2.0       2018-07-25 [2] CRAN (R 3.6.1)
+#&gt;  zeallot       0.1.0       2018-01-28 [2] CRAN (R 3.6.1)
 #&gt; 
-#&gt; [1] C:/Users/wbeasley/AppData/Local/Temp/RtmpMNymun/temp_libpath16b865336d8a
-#&gt; [2] C:/Users/wbeasley/Documents/R/win-library/3.6
-#&gt; [3] C:/Program Files/R/R-3.6.1patched/library</code></pre>
-</details><p>Report rendered by WBEASLEY at 2019-12-02, 20:24 -0600 in 5 seconds.</p>
+#&gt; [1] /tmp/RtmpjgRWKL/temp_libpath46075833d08b
+#&gt; [2] /home/wibeasley/R/x86_64-pc-linux-gnu-library/3.6
+#&gt; [3] /usr/local/lib/R/site-library
+#&gt; [4] /usr/lib/R/site-library
+#&gt; [5] /usr/lib/R/library</code></pre>
+</details><p>Report rendered by wibeasley at 2019-12-03, 17:25 -0600 in 4 seconds.</p>
 </div>
   </div>
 
