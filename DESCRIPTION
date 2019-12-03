@@ -49,5 +49,5 @@ License: GPL-2
 LazyData: TRUE
 VignetteBuilder: knitr
 Encoding: UTF-8
-RoxygenNote: 7.0.0
+RoxygenNote: 7.0.2
 Roxygen: list(markdown = TRUE)

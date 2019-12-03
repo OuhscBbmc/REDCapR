@@ -63,6 +63,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
+    </li>
+    <li>
       <a href="../articles/BasicREDCapROperations.html">Basic REDCapR Operations</a>
     </li>
     <li>
@@ -70,9 +73,6 @@
     </li>
     <li>
       <a href="../articles/TroubleshootingApiCalls.html">Troubleshooting REDCap API Calls</a>
-    </li>
-    <li>
-      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
     </li>
   </ul>
 </li>
@@ -108,7 +108,7 @@
     <div class="page-header toc-ignore">
       <h1>Troubleshooting REDCap API Calls</h1>
             
-            <h4 class="date">2019-11-17</h4>
+            <h4 class="date">2019-12-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/TroubleshootingApiCalls.Rmd"><code>vignettes/TroubleshootingApiCalls.Rmd</code></a></small>
       <div class="hidden name"><code>TroubleshootingApiCalls.Rmd</code></div>
@@ -132,17 +132,17 @@
 <li>
 <p><strong>Has the user verified their account by responding to the automated email sent to them?</strong> This can be verified in the <code>Browse Users</code> section of your server’s <code>Control Center</code>. For each email address they’ve entered, there should be a green ‘Verified’ label and icon.</p>
 <p><img src="images/EmailVerified.png" width="252" style="fig.width=400px"></p>
-<p><!--<img src="/home/wibeasley/Documents/ouhsc/r-packages/REDCapR/vignettes/images/EmailVerified.png" alt="EmailVerified" style="width: 400px;"/>--></p>
+<p><!--<img src="C:/Users/wbeasley/Documents/bbmc-internal/REDCapR/vignettes/images/EmailVerified.png" alt="EmailVerified" style="width: 400px;"/>--></p>
 </li>
 <li>
 <p><strong>Has the user been granted the desired import and/or export permissions?</strong> This can be verified in the <code>User Rights</code> section or in the <code>API</code> section (and it’s <code>Manage All Project Tokens</code> tab) within the project. Alternatively, it can be verified in the <code>API Tokens</code> section of the server’s <code>Control Center</code>.</p>
 <p><img src="images/ApiPrivilegeDashboard.png" width="316" style="fig.width=600px"></p>
-<p><!--<img src="/home/wibeasley/Documents/ouhsc/r-packages/REDCapR/vignettes/images/ApiPrivilegeDashboard.png" alt="ApiPrivilegeDashboard" style="width: 600px;"/>--></p>
+<p><!--<img src="C:/Users/wbeasley/Documents/bbmc-internal/REDCapR/vignettes/images/ApiPrivilegeDashboard.png" alt="ApiPrivilegeDashboard" style="width: 600px;"/>--></p>
 </li>
 <li>
 <p><strong>Are they using the correct token?</strong> This can be verified in the <code>API</code> section (and it’s <code>Manage All Project Tokens</code> tab) within the project. Click the magnifying glass icon in the user’s row. Alternatively, it can be verified in the <code>API Tokens</code> section of the server’s <code>Control Center</code>.</p>
 <p><img src="images/MagnifyingGlass.png" width="291" style="fig.width=550px"></p>
-<p><!--<img src="/home/wibeasley/Documents/ouhsc/r-packages/REDCapR/vignettes/images/MagnifyingGlass.png" alt="MagnifyingGlass" style="width: 550px;"/>--></p>
+<p><!--<img src="C:/Users/wbeasley/Documents/bbmc-internal/REDCapR/vignettes/images/MagnifyingGlass.png" alt="MagnifyingGlass" style="width: 550px;"/>--></p>
 </li>
 </ol>
 </div>
@@ -151,7 +151,7 @@
 <a href="#language-agnostic-api" class="anchor"></a>Language Agnostic API</h2>
 <p>This section group examines potential problems that occur after it leaves a working server, but before it is handled by their programming language (<em>e.g.</em>, Python and R). <a href="http://www.getpostman.com/">Postman</a> is a Chrome plugin recommended by <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ">several</a> <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ">people</a> that makes troubleshooting much more efficient.</p>
 <p><img src="images/PostmanScreenshot.png" width="574" style="fig.width=800px"></p>
-<!--<img src="/home/wibeasley/Documents/ouhsc/r-packages/REDCapR/vignettes/images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>-->
+<!--<img src="C:/Users/wbeasley/Documents/bbmc-internal/REDCapR/vignettes/images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>-->
 <ol style="list-style-type: decimal">
 <li>
 <p><strong>Is Postman installed and operating correctly?</strong> If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a>. The url is <code>https://bbmc.ouhsc.edu/redcap/api/</code>. There are three key-value pairs: (1) the ‘token’ is <code>9A81268476645C4E5F03428B8AC3AA7B</code>, (2) the ‘content’ is <code>record</code>, and (3) the ‘format’ should be <code>CSV</code>. When checking your own server, the token value should change, but the content and format should not. It should return five records in a CSV format. The ‘status’ should be <code>200 OK</code>. The result should look roughly like this. Notice the line breaks were included in the text values themselves.</p>
@@ -198,7 +198,7 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">redcap_uri &lt;-<span class="st"> "https://bbmc.ouhsc.edu/redcap/api/"</span></a>
 <a class="sourceLine" id="cb4-2" title="2">token      &lt;-<span class="st"> "9A81268476645C4E5F03428B8AC3AA7B"</span></a>
 <a class="sourceLine" id="cb4-3" title="3"></a>
-<a class="sourceLine" id="cb4-4" title="4">raw_text &lt;-<span class="st"> </span>RCurl<span class="op">::</span><span class="kw">postForm</span>(</a>
+<a class="sourceLine" id="cb4-4" title="4">raw_text &lt;-<span class="st"> </span>RCurl<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RCurl/man/postForm.html">postForm</a></span>(</a>
 <a class="sourceLine" id="cb4-5" title="5">  <span class="dt">uri                         =</span> redcap_uri</a>
 <a class="sourceLine" id="cb4-6" title="6">  , <span class="dt">token                     =</span> token</a>
 <a class="sourceLine" id="cb4-7" title="7">  , <span class="dt">content                   =</span> <span class="st">'record'</span></a>
@@ -206,7 +206,7 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <a class="sourceLine" id="cb4-9" title="9">  , <span class="dt">type                      =</span> <span class="st">'flat'</span></a>
 <a class="sourceLine" id="cb4-10" title="10">  , <span class="dt">rawOrLabel                =</span> <span class="st">'raw'</span></a>
 <a class="sourceLine" id="cb4-11" title="11">  , <span class="dt">exportDataAccessGroups    =</span> <span class="st">'true'</span></a>
-<a class="sourceLine" id="cb4-12" title="12">  , <span class="dt">.opts                     =</span> RCurl<span class="op">::</span><span class="kw">curlOptions</span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb4-12" title="12">  , <span class="dt">.opts                     =</span> RCurl<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RCurl/man/curlOptions.html">curlOptions</a></span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb4-13" title="13">)</a></code></pre></div>
 <p>Alternatively, you can try using the <a href="https://cran.r-project.org/package=httr"><code>httr</code></a> package, which uses <code>RCurl</code> underneath. <a href="https://github.com/OuhscBbmc/REDCapR"><code>REDCapR</code></a> and a recent fork of <a href="https://github.com/nutterb/redcap"><code>redcap</code></a> actually uses <code>httr</code> directly, instead of <code>RCurl</code>. As of 2014-07-06, this works with the Windows 8 version for <a href="http://curl.haxx.se/libcurl/">libcurl</a> (which is underneath `RCurl), but not with some Linux versions; in this case pass the location of the SSL cert file.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">post_body &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(</a>
@@ -227,13 +227,13 @@ He had a gold watch chain and a black mustache",2</code></pre>
 </li>
 <li>
 <p><strong>Can the user query a <em>subset</em> of <em>their</em> project using RCurl?</strong> This step is like the previous one, but with two differences. First, it’s using their REDCap project (instead of the test project). Second, it pulls fewer records, and a smaller collection of fields. Subsetting can help troubleshoot by avoiding (and thus identifying) cells with problematic values.</p>
-<p>Notice this call to <code>RCurl::postForm()</code> now passes values to the <code>records</code> and <code>fields</code> parameters. Also notice the value is a <em>single</em> long string, rather a <em>vector</em> of shorter strings (which is more natural to most R users).</p>
+<p>Notice this call to <code><a href="https://rdrr.io/pkg/RCurl/man/postForm.html">RCurl::postForm()</a></code> now passes values to the <code>records</code> and <code>fields</code> parameters. Also notice the value is a <em>single</em> long string, rather a <em>vector</em> of shorter strings (which is more natural to most R users).</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">redcap_uri         &lt;-<span class="st"> "https://the.urlofyourinsitution.edu/api/"</span></a>
 <a class="sourceLine" id="cb6-2" title="2">token              &lt;-<span class="st"> "your-secret-token"</span></a>
 <a class="sourceLine" id="cb6-3" title="3">records_collapsed  &lt;-<span class="st"> "1,2,3"</span>                             <span class="co"># Assumes dataset contains ID values of 1-3.</span></a>
 <a class="sourceLine" id="cb6-4" title="4">fields_collapsed   &lt;-<span class="st"> "record_id,name_first,name_last"</span>    <span class="co"># Assumes dataset contains these variables.</span></a>
 <a class="sourceLine" id="cb6-5" title="5"></a>
-<a class="sourceLine" id="cb6-6" title="6">raw_text &lt;-<span class="st"> </span>RCurl<span class="op">::</span><span class="kw">postForm</span>(</a>
+<a class="sourceLine" id="cb6-6" title="6">raw_text &lt;-<span class="st"> </span>RCurl<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RCurl/man/postForm.html">postForm</a></span>(</a>
 <a class="sourceLine" id="cb6-7" title="7">  <span class="dt">uri                          =</span> redcap_uri</a>
 <a class="sourceLine" id="cb6-8" title="8">  , <span class="dt">token                      =</span> token</a>
 <a class="sourceLine" id="cb6-9" title="9">  , <span class="dt">content                    =</span> <span class="st">'record'</span></a>
@@ -243,7 +243,7 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <a class="sourceLine" id="cb6-13" title="13">  , <span class="dt">exportDataAccessGroups     =</span> <span class="st">'true'</span></a>
 <a class="sourceLine" id="cb6-14" title="14">  , <span class="dt">records                    =</span> records_collapsed</a>
 <a class="sourceLine" id="cb6-15" title="15">  , <span class="dt">fields                     =</span> fields_collapsed</a>
-<a class="sourceLine" id="cb6-16" title="16">  , <span class="dt">.opts                      =</span> RCurl<span class="op">::</span><span class="kw">curlOptions</span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb6-16" title="16">  , <span class="dt">.opts                      =</span> RCurl<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RCurl/man/curlOptions.html">curlOptions</a></span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb6-17" title="17">)</a></code></pre></div>
 </li>
 <li>
@@ -254,7 +254,7 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <a class="sourceLine" id="cb7-3" title="3">records_collapsed           &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
 <a class="sourceLine" id="cb7-4" title="4">fields_collapsed            &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
 <a class="sourceLine" id="cb7-5" title="5"></a>
-<a class="sourceLine" id="cb7-6" title="6">raw_text &lt;-<span class="st"> </span>RCurl<span class="op">::</span><span class="kw">postForm</span>(</a>
+<a class="sourceLine" id="cb7-6" title="6">raw_text &lt;-<span class="st"> </span>RCurl<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RCurl/man/postForm.html">postForm</a></span>(</a>
 <a class="sourceLine" id="cb7-7" title="7">  <span class="dt">uri                        =</span> redcap_uri</a>
 <a class="sourceLine" id="cb7-8" title="8">  , <span class="dt">token                    =</span> token</a>
 <a class="sourceLine" id="cb7-9" title="9">  , <span class="dt">content                  =</span> <span class="st">'record'</span></a>
@@ -264,7 +264,7 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <a class="sourceLine" id="cb7-13" title="13">  , <span class="dt">exportDataAccessGroups   =</span> <span class="st">'true'</span></a>
 <a class="sourceLine" id="cb7-14" title="14">  , <span class="dt">records                  =</span> records_collapsed</a>
 <a class="sourceLine" id="cb7-15" title="15">  , <span class="dt">fields                   =</span> fields_collapsed</a>
-<a class="sourceLine" id="cb7-16" title="16">  , <span class="dt">.opts                    =</span> RCurl<span class="op">::</span><span class="kw">curlOptions</span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb7-16" title="16">  , <span class="dt">.opts                    =</span> RCurl<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RCurl/man/curlOptions.html">curlOptions</a></span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb7-17" title="17">)</a></code></pre></div>
 </li>
 </ol>
@@ -448,11 +448,9 @@ demographics_complete
 <p>The basic API documentation is available on your REDCap server, typically at</p>
 <pre><code>http://&lt;*your server name*&gt;/redcap/api/help</code></pre>
 </li>
-<li>If you have access to the REDCap wiki, some newer examples might exist at <a href="https://community.projectredcap.org/articles/462/api-examples.html" class="uri">https://community.projectredcap.org/articles/462/api-examples.html</a>. The official documentation can be found on the <code>API Help Page</code> and `API Examples’ pages on the REDCap wiki (<em>i.e.</em>, <a href="https://community.projectredcap.org/articles/456/api-documentation.html" class="uri">https://community.projectredcap.org/articles/456/api-documentation.html</a> and <a href="https://community.projectredcap.org/articles/462/api-examples.html" class="uri">https://community.projectredcap.org/articles/462/api-examples.html</a>). If you do not have an account for the wiki, please ask your campus REDCap administrator to send you the static material.</li>
-<li>Scott Burns, the primary developer of <a href="https://github.com/redcap-tools/PyCap">PyCap</a> has a good intro at <a href="http://sburns.org/2013/07/22/intro-to-redcap-api.html" class="uri">http://sburns.org/2013/07/22/intro-to-redcap-api.html</a>
-</li>
-<li>Benjamin Nutter, the primary developer of <a href="https://github.com/nutterb/redcapAPI/wiki">redcapAPI</a> has a good wiki at <a href="https://github.com/nutterb/redcapAPI/wiki" class="uri">https://github.com/nutterb/redcapAPI/wiki</a>
-</li>
+<li><p>If you have access to the REDCap wiki, some newer examples might exist at <a href="https://community.projectredcap.org/articles/462/api-examples.html" class="uri">https://community.projectredcap.org/articles/462/api-examples.html</a>. The official documentation can be found on the <code>API Help Page</code> and `API Examples’ pages on the REDCap wiki (<em>i.e.</em>, <a href="https://community.projectredcap.org/articles/456/api-documentation.html" class="uri">https://community.projectredcap.org/articles/456/api-documentation.html</a> and <a href="https://community.projectredcap.org/articles/462/api-examples.html" class="uri">https://community.projectredcap.org/articles/462/api-examples.html</a>). If you do not have an account for the wiki, please ask your campus REDCap administrator to send you the static material.</p></li>
+<li><p>Scott Burns, the primary developer of <a href="https://github.com/redcap-tools/PyCap">PyCap</a> has a good intro at <a href="http://sburns.org/2013/07/22/intro-to-redcap-api.html" class="uri">http://sburns.org/2013/07/22/intro-to-redcap-api.html</a></p></li>
+<li><p>Benjamin Nutter, the primary developer of <a href="https://github.com/nutterb/redcapAPI/wiki">redcapAPI</a> has a good wiki at <a href="https://github.com/nutterb/redcapAPI/wiki" class="uri">https://github.com/nutterb/redcapAPI/wiki</a></p></li>
 <li><p>In addition to this troubleshooting document, REDCapR has a <a href="https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html">vignette</a> that covers its basic operations.</p></li>
 </ul>
 </div>

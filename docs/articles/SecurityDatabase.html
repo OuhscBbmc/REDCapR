@@ -63,6 +63,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
+    </li>
+    <li>
       <a href="../articles/BasicREDCapROperations.html">Basic REDCapR Operations</a>
     </li>
     <li>
@@ -70,9 +73,6 @@
     </li>
     <li>
       <a href="../articles/TroubleshootingApiCalls.html">Troubleshooting REDCap API Calls</a>
-    </li>
-    <li>
-      <a href="../articles/advanced-redcapr-operations.html">Advanced REDCapR Operations</a>
     </li>
   </ul>
 </li>
@@ -108,7 +108,7 @@
     <div class="page-header toc-ignore">
       <h1>Security Database</h1>
             
-            <h4 class="date">2019-11-17</h4>
+            <h4 class="date">2019-12-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/SecurityDatabase.Rmd"><code>vignettes/SecurityDatabase.Rmd</code></a></small>
       <div class="hidden name"><code>SecurityDatabase.Rmd</code></div>
@@ -344,7 +344,7 @@
 <a class="sourceLine" id="cb3-54" title="54"><span class="st">"</span></a>
 <a class="sourceLine" id="cb3-55" title="55"></a>
 <a class="sourceLine" id="cb3-56" title="56"><span class="co"># Update this ad-hoc CSV.  Each row should represent one REDCap instance.</span></a>
-<a class="sourceLine" id="cb3-57" title="57">ds_url &lt;-<span class="st"> </span>tibble<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/tibble/man/tribble.html">tribble</a></span>(</a>
+<a class="sourceLine" id="cb3-57" title="57">ds_url &lt;-<span class="st"> </span>tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span>(</a>
 <a class="sourceLine" id="cb3-58" title="58">  <span class="op">~</span>instance         , <span class="op">~</span>redcap_uri,</a>
 <a class="sourceLine" id="cb3-59" title="59">  name_production   , uri_production,</a>
 <a class="sourceLine" id="cb3-60" title="60">  name_dev          , uri_dev</a>
@@ -384,7 +384,7 @@
 <a class="sourceLine" id="cb3-94" title="94">ds &lt;-</a>
 <a class="sourceLine" id="cb3-95" title="95"><span class="st">  </span>ds_production <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb3-96" title="96"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/setops.html">union</a></span>(ds_dev) <span class="op">%&gt;%</span><span class="st">                                </span><span class="co"># Remove union if the dev instance isn't included.</span></a>
-<a class="sourceLine" id="cb3-97" title="97"><span class="st">  </span>tibble<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/tibble/man/as_tibble.html">as_tibble</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-97" title="97"><span class="st">  </span>tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb3-98" title="98"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(</a>
 <a class="sourceLine" id="cb3-99" title="99">    <span class="dt">username             =</span> username,</a>
 <a class="sourceLine" id="cb3-100" title="100">    <span class="dt">project_id           =</span> project_id,</a>
@@ -396,7 +396,7 @@
 <a class="sourceLine" id="cb3-106" title="106">  ) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb3-107" title="107"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>( ds_url, <span class="dt">by=</span><span class="st">"instance"</span>) <span class="op">%&gt;%</span><span class="st">            </span><span class="co"># Include the instance URL.</span></a>
 <a class="sourceLine" id="cb3-108" title="108"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span>(instance, project_id, username) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-109" title="109"><span class="st">  </span>tibble<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/tibble/man/rownames.html">rowid_to_column</a></span>(<span class="st">"id"</span>)                           <span class="co"># For the sake of a clustered primary key.</span></a>
+<a class="sourceLine" id="cb3-109" title="109"><span class="st">  </span>tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/rownames.html">rowid_to_column</a></span>(<span class="st">"id"</span>)                           <span class="co"># For the sake of a clustered primary key.</span></a>
 <a class="sourceLine" id="cb3-110" title="110"></a>
 <a class="sourceLine" id="cb3-111" title="111"><span class="kw"><a href="https://rdrr.io/r/base/rm.html">rm</a></span>(ds_production, ds_dev, ds_url)</a>
 <a class="sourceLine" id="cb3-112" title="112"><span class="kw"><a href="https://rdrr.io/r/base/rm.html">rm</a></span>(name_production, name_dev)</a>

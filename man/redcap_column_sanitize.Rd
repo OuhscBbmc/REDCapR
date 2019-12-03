@@ -46,7 +46,7 @@ characters.  Be aware of this in case you notice OS-dependent differences.
 
 dirty <- data.frame(
   id     = 1:3,
-  names  = c("Ekstr\\xf8m", "J\\xf6reskog", "bi\\xdfchen Z\\xfcrcher")
+  names  = c("Ekstr\xf8m", "J\xf6reskog", "bi\xdfchen Z\xfcrcher")
 )
 
 REDCapR::redcap_column_sanitize(dirty)
