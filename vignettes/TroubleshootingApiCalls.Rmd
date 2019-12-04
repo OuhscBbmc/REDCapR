@@ -410,6 +410,8 @@ Troubleshooting import operations is trickier than export operations for two maj
 
  The second reason why importing can be trickier is because the schema (*e.g.*, the names and data types) of your local dataset must match the project's schema.  This section will be expanded in the future.  Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project's schema and dataset.  Also, consider exporting the dataset to your machine, and look for differences.  Note that you cannot import calculated fields into REDCap.
 
+1. **Does the dataset pass [`REDCapR::validate_for_write()`](https://ouhscbbmc.github.io/REDCapR/reference/validate.html)?**  The `REDCapR::validate_for_write()` inspects a data.frame to anticipate problems before writing with REDCap's API.  The reference manual contains specifics of the validation checks.
+
 1. **Can the user import the *entire* project?**
 
 1. **Can the user import a *subset* of the project?**
