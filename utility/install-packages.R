@@ -5,18 +5,15 @@
 #If anyone encounters a package that should be on there, please add it to `./utility/package_dependency_list.csv`
 
 #Clear memory from previous runs.
-base::rm(list=base::ls(all=TRUE))
+base::rm(list=base::ls(all.names=TRUE))
 
-path_csv <- "./utility/package-dependency-list.csv"
+path_csv <- "utility/package-dependency-list.csv"
 
 if( !file.exists(path_csv)) {
   base::stop("The path `", path_csv, "` was not found.  Make sure the working directory is set to the root of the repository.")
 }
 
-if( !base::requireNamespace("devtools") ) {
-  utils::install.packages("devtools", repos="http://cran.rstudio.com")
-}
+if( !base::requireNamespace("devtools") ) utils::install.packages("devtools")
+devtools::source_gist("2c5e7459b88ec28b9e8fa0c695b15ee3", filename="package-janitor-bbmc.R")
 
-devtools::install_github("OuhscBbmc/OuhscMunge")
-
-OuhscMunge:::package_janitor(path_csv)
+package_janitor_remote(path_csv)
