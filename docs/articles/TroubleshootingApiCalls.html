@@ -154,6 +154,10 @@
 <!--<img src="/home/wibeasley/Documents/redcap/REDCapR/vignettes/images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>-->
 <ol style="list-style-type: decimal">
 <li>
+<p><strong>Is the API Playground producing the expected result?</strong> REDCap’s “API Playground” holds your hand by (a) offering a dropdown list of API methods available to your REDCap instance, and (b) presenting a series of dropdown boxes appropriate for the selected method. Find it through the API link visible in the left margin of REDCap. When you’ve completed the inputs, click ‘Execute’ to view the plain-text returned by the server.</p>
+<p>At the bottom of the playground page, the interface attempts to translate your speciifc API call to different languages, like Python and R. These suggestions are usually correct, but inspect it critically, as you would for any auto-generated script.</p>
+</li>
+<li>
 <p><strong>Is Postman installed and operating correctly?</strong> If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a>. The url is <code>https://bbmc.ouhsc.edu/redcap/api/</code>. There are three key-value pairs: (1) the ‘token’ is <code>9A81268476645C4E5F03428B8AC3AA7B</code>, (2) the ‘content’ is <code>record</code>, and (3) the ‘format’ should be <code>CSV</code>. When checking your own server, the token value should change, but the content and format should not. It should return five records in a CSV format. The ‘status’ should be <code>200 OK</code>. The result should look roughly like this. Notice the line breaks were included in the text values themselves.</p>
 <pre><code>record_id,name_first,name_last,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete
 "1","Nutmeg","Nutmouse","14 Rose Cottage St.
@@ -272,12 +276,12 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <div id="exporting-from-redcap-to-r-using-redcapr" class="section level2">
 <h2 class="hasAnchor">
 <a href="#exporting-from-redcap-to-r-using-redcapr" class="anchor"></a>Exporting from REDCap to R, using REDCapR</h2>
-<p><a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> is a package that uses <a href="http://curl.haxx.se/">cURL</a> (via <a href="https://github.com/hadley/httr">httr</a>) to communicate with REDCap, and wraps convenience functions around it to reduce the size and complexity of the user’s code. The package’s basic functions are <a href="https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html">demonstrated in a vignette</a> and are documented in its <a href="https://ouhscbbmc.github.io/REDCapR/">reference manual</a> (a downloadable <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/documentation-peek.pdf">pdf</a> of the functions are also available).</p>
+<p><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> is a package that uses <a href="http://curl.haxx.se/">cURL</a> (via <a href="https://httr.r-lib.org/">httr</a>) to communicate with REDCap, and wraps convenience functions around it to reduce the size and complexity of the user’s code. The package’s basic functions are <a href="https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html">demonstrated in a vignette</a> and are documented in its <a href="https://ouhscbbmc.github.io/REDCapR/reference">reference manual</a>.</p>
 <p>If you’re not using REDCapR, you can skip this section and proceed to ‘Importing into REDCap from R’ below.</p>
 <ol style="list-style-type: decimal">
 <li>
-<p><strong>Is REDCapR installed on the user’s machine?</strong> Currently the easiest way to install REDCapR is with the <a href="https://github.com/hadley/devtools">devtools</a>. The follow code installs devtools, then installs REDCapR.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>, <span class="dt">repos=</span><span class="st">"http://cran.rstudio.com"</span>)</span>
+<p><strong>Is the latest version of REDCapR installed on the user’s machine?</strong> Currently the easiest way to install REDCapR is with the <a href="https://remotes.r-lib.org/">remotes</a> package. The following code installs remotes, then installs REDCapR. The CRAN version of REDCapR is updated only a few times a year, while the code below will download the latest stable version.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>, <span class="dt">repos=</span><span class="st">"https://cran.rstudio.com"</span>)</span>
 <span id="cb8-2"><a href="#cb8-2"></a>remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="dt">repo=</span><span class="st">"OuhscBbmc/REDCapR"</span>)</span></code></pre></div>
 </li>
 <li>
@@ -326,24 +330,32 @@ Reading batch 1 of 1, with ids 1 through 5.
 5                     2</code></pre>
 </li>
 <li>
-<p><strong>Can the user export from their own project?</strong> The code is similar to the previous check, but the <code>uri</code> and <code>token</code> values will need to be modified.</p>
+<p><strong>Can the user export their data diciontary?</strong> Sometimes the problem exists within the metadata/dictionary, instead of the actual data values. Verify the structure and content of this specific project is interpretable by your local environment.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(REDCapR) <span class="co">#Load the package into the current R session, if you haven't already.</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a>redcap_uri       &lt;-<span class="st"> "https://the.urlofyourinsitution.edu/api/"</span></span>
 <span id="cb12-3"><a href="#cb12-3"></a>token            &lt;-<span class="st"> "your-secret-token"</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="kw"><a href="../reference/redcap_read.html">redcap_read</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)<span class="op">$</span>data</span></code></pre></div>
-<p>Alternatively, a <code>redcap_project</code> object can be declared initially, which makes subsequent calls cleaner when the token and url are required only the when the object is declared.</p>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="kw"><a href="../reference/redcap_metadata_read.html">redcap_metadata_read</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)</span></code></pre></div>
+<p>If this fails, see “Problems in the project’s metadata/dictionary.” under <a href="#gotchas-agnostic">Gotchas</a> below.</p>
+</li>
+<li>
+<p><strong>Can the user export from their own project?</strong> The code is similar to the previous check, but the <code>uri</code> and <code>token</code> values will need to be modified.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(REDCapR) <span class="co">#Load the package into the current R session, if you haven't already.</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>uri               &lt;-<span class="st"> "https://bbmc.ouhsc.edu/redcap/api/"</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a>token             &lt;-<span class="st"> "9A81268476645C4E5F03428B8AC3AA7B"</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a>project           &lt;-<span class="st"> </span>redcap_project<span class="op">$</span><span class="kw">new</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)</span>
-<span id="cb13-5"><a href="#cb13-5"></a></span>
-<span id="cb13-6"><a href="#cb13-6"></a>ds_three_columns  &lt;-<span class="st"> </span>project<span class="op">$</span><span class="kw">read</span>(<span class="dt">fields=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"record_id"</span>, <span class="st">"sex"</span>, <span class="st">"age"</span>))<span class="op">$</span>data</span>
-<span id="cb13-7"><a href="#cb13-7"></a></span>
-<span id="cb13-8"><a href="#cb13-8"></a>ids_of_males      &lt;-<span class="st"> </span>ds_three_columns<span class="op">$</span>record_id[ds_three_columns<span class="op">$</span>sex<span class="op">==</span><span class="dv">1</span>]</span>
-<span id="cb13-9"><a href="#cb13-9"></a>ids_of_minors     &lt;-<span class="st"> </span>ds_three_columns<span class="op">$</span>record_id[ds_three_columns<span class="op">$</span>age <span class="op">&lt;</span><span class="st"> </span><span class="dv">18</span>]</span>
-<span id="cb13-10"><a href="#cb13-10"></a></span>
-<span id="cb13-11"><a href="#cb13-11"></a>ds_males          &lt;-<span class="st"> </span>project<span class="op">$</span><span class="kw">read</span>(<span class="dt">records=</span>ids_of_males, <span class="dt">batch_size=</span><span class="dv">2</span>)<span class="op">$</span>data</span>
-<span id="cb13-12"><a href="#cb13-12"></a>ds_minors         &lt;-<span class="st"> </span>project<span class="op">$</span><span class="kw">read</span>(<span class="dt">records=</span>ids_of_minors)<span class="op">$</span>data</span></code></pre></div>
+<span id="cb13-2"><a href="#cb13-2"></a>redcap_uri       &lt;-<span class="st"> "https://the.urlofyourinsitution.edu/api/"</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>token            &lt;-<span class="st"> "your-secret-token"</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="kw"><a href="../reference/redcap_read.html">redcap_read</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)<span class="op">$</span>data</span></code></pre></div>
+<p>Alternatively, a <code>redcap_project</code> object can be declared initially, which makes subsequent calls cleaner when the token and url are required only the when the object is declared.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(REDCapR) <span class="co">#Load the package into the current R session, if you haven't already.</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>uri               &lt;-<span class="st"> "https://bbmc.ouhsc.edu/redcap/api/"</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>token             &lt;-<span class="st"> "9A81268476645C4E5F03428B8AC3AA7B"</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>project           &lt;-<span class="st"> </span>redcap_project<span class="op">$</span><span class="kw">new</span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)</span>
+<span id="cb14-5"><a href="#cb14-5"></a></span>
+<span id="cb14-6"><a href="#cb14-6"></a>ds_three_columns  &lt;-<span class="st"> </span>project<span class="op">$</span><span class="kw">read</span>(<span class="dt">fields=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"record_id"</span>, <span class="st">"sex"</span>, <span class="st">"age"</span>))<span class="op">$</span>data</span>
+<span id="cb14-7"><a href="#cb14-7"></a></span>
+<span id="cb14-8"><a href="#cb14-8"></a>ids_of_males      &lt;-<span class="st"> </span>ds_three_columns<span class="op">$</span>record_id[ds_three_columns<span class="op">$</span>sex<span class="op">==</span><span class="dv">1</span>]</span>
+<span id="cb14-9"><a href="#cb14-9"></a>ids_of_minors     &lt;-<span class="st"> </span>ds_three_columns<span class="op">$</span>record_id[ds_three_columns<span class="op">$</span>age <span class="op">&lt;</span><span class="st"> </span><span class="dv">18</span>]</span>
+<span id="cb14-10"><a href="#cb14-10"></a></span>
+<span id="cb14-11"><a href="#cb14-11"></a>ds_males          &lt;-<span class="st"> </span>project<span class="op">$</span><span class="kw">read</span>(<span class="dt">records=</span>ids_of_males, <span class="dt">batch_size=</span><span class="dv">2</span>)<span class="op">$</span>data</span>
+<span id="cb14-12"><a href="#cb14-12"></a>ds_minors         &lt;-<span class="st"> </span>project<span class="op">$</span><span class="kw">read</span>(<span class="dt">records=</span>ids_of_minors)<span class="op">$</span>data</span></code></pre></div>
 </li>
 <li><p><strong>Is the export operation still unsuccessful using REDCapR?</strong> If so the “Can the user query a <em>entire</em> REDCap project using RCurl?” check succeeded, but the REDCapR checks did not, consider posting a new <a href="https://github.com/OuhscBbmc/REDCapR/issues">GitHub issue</a> to the package developers.</p></li>
 </ol>
@@ -351,29 +363,29 @@ Reading batch 1 of 1, with ids 1 through 5.
 <div id="exporting-from-redcap-to-r-using-redcapapi" class="section level2">
 <h2 class="hasAnchor">
 <a href="#exporting-from-redcap-to-r-using-redcapapi" class="anchor"></a>Exporting from REDCap to R, using redcapAPI</h2>
-<p><a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> is a package that uses <a href="http://curl.haxx.se/">cURL</a> (via <a href="https://github.com/hadley/httr">httr</a>) to communicate with REDCap, and wraps convenience functions around it to reduce the size and complexity of the user’s code.</p>
+<p><a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> is a package that uses <a href="http://curl.haxx.se/">cURL</a> (via <a href="https://httr.r-lib.org/">httr</a>) to communicate with REDCap, and wraps convenience functions around it to reduce the size and complexity of the user’s code.</p>
 <p>If you’re not using redcapAPI, you can skip this section and proceed to ‘Importing into REDCap from R’ below. More specific discussion about <code>redcapAPI</code> can be found at the <a href="https://github.com/nutterb/redcapAPI/wiki">package’s wiki</a>.</p>
 <ol style="list-style-type: decimal">
 <li>
 <p><strong>Is redcapAPI installed on the user’s machine?</strong> Currently, the easiest way to install <code>redcapAPI</code> is from CRAN.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"redcapAPI"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"redcapAPI"</span>)</span></code></pre></div>
 <p>Developmental versions may be available on GitHub.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>, <span class="dt">repos=</span><span class="st">"http://cran.rstudio.com"</span>)</span>
-<span id="cb15-2"><a href="#cb15-2"></a>remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="dt">repo=</span><span class="st">"nutterb/redcapAPI"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>, <span class="dt">repos=</span><span class="st">"http://cran.rstudio.com"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2"></a>remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="dt">repo=</span><span class="st">"nutterb/redcapAPI"</span>)</span></code></pre></div>
 </li>
 <li>
 <p><strong>Does redcapAPI load successfully on the user’s machine?</strong> If so, running <code><a href="https://rdrr.io/r/base/library.html">library(redcapAPI)</a></code> should produce the following output if you’re starting with a fresh session of R:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(redcapAPI)</span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="co">## Loading required package: redcapAPI</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(redcapAPI)</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="co">## Loading required package: redcapAPI</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Can the user export from an example project?</strong> This is the same fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a> as in the previous section.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(redcapAPI) <span class="co">#Load the package into the current R session.</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a>rcon &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/redcapAPI/man/redcapConnection.html">redcapConnection</a></span>(</span>
-<span id="cb17-3"><a href="#cb17-3"></a>  <span class="dt">url   =</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>,</span>
-<span id="cb17-4"><a href="#cb17-4"></a>  <span class="dt">token =</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a>)</span>
-<span id="cb17-6"><a href="#cb17-6"></a><span class="kw"><a href="https://rdrr.io/pkg/redcapAPI/man/exportRecords.html">exportRecords</a></span>(rcon)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(redcapAPI) <span class="co">#Load the package into the current R session.</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>rcon &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/redcapAPI/man/redcapConnection.html">redcapConnection</a></span>(</span>
+<span id="cb18-3"><a href="#cb18-3"></a>  <span class="dt">url   =</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>,</span>
+<span id="cb18-4"><a href="#cb18-4"></a>  <span class="dt">token =</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a>)</span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="kw"><a href="https://rdrr.io/pkg/redcapAPI/man/exportRecords.html">exportRecords</a></span>(rcon)</span></code></pre></div>
 <p>The previous code should produce similar output. Notice there are five rows and the columns will wrap around if your console window is too narrow.</p>
 <pre><code>record_id name_first name_last                                 address      telephone               email
 1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232 (432) 456-4848     nutty@mouse.com
@@ -404,13 +416,21 @@ demographics_complete
 5                     2</code></pre>
 </li>
 <li>
+<p><strong>Can the user export their data diciontary?</strong> Sometimes the problem exists within the metadata/dictionary, instead of the actual data values. Verify the structure and content of this specific project is interpretable by your local environment.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(redcapAPI) <span class="co">#Load the package into the current R session, if you haven't already.</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>redcap_uri       &lt;-<span class="st"> "https://the.urlofyourinsitution.edu/api/"</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>token            &lt;-<span class="st"> "your-secret-token"</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="kw"><a href="https://rdrr.io/pkg/redcapAPI/man/exportMetaData.html">exportMetaData</a></span>(rcon)</span></code></pre></div>
+<p>If this fails, see “Problems in the project’s metadata/dictionary.” under <a href="#gotchas-agnostic">Gotchas</a> below.</p>
+</li>
+<li>
 <p><strong>Can the user export from their own project?</strong> The code is similar to the previous check, but the <code>uri</code> and <code>token</code> values will need to be modified.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(redcapAPI) <span class="co">#Load the package into the current R session, if you haven't already.</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>rcon &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/redcapAPI/man/redcapConnection.html">redcapConnection</a></span>(</span>
-<span id="cb19-3"><a href="#cb19-3"></a>  <span class="dt">url   =</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>, <span class="co"># Adapt this to your server.</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a>  <span class="dt">token =</span> <span class="st">"your-secret-token"</span>                         <span class="co"># Adapt this to your user's token.</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a>)</span>
-<span id="cb19-6"><a href="#cb19-6"></a><span class="kw"><a href="https://rdrr.io/pkg/redcapAPI/man/exportRecords.html">exportRecords</a></span>(rcon)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(redcapAPI) <span class="co">#Load the package into the current R session, if you haven't already.</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>rcon &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/redcapAPI/man/redcapConnection.html">redcapConnection</a></span>(</span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="dt">url   =</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>, <span class="co"># Adapt this to your server.</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a>  <span class="dt">token =</span> <span class="st">"your-secret-token"</span>                         <span class="co"># Adapt this to your user's token.</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a>)</span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="kw"><a href="https://rdrr.io/pkg/redcapAPI/man/exportRecords.html">exportRecords</a></span>(rcon)</span></code></pre></div>
 </li>
 <li><p><strong>Is the export operation still unsuccessful using redcapAPI?</strong> If so the “Can the user query a <em>entire</em> REDCap project using RCurl?” check succeeded, but the redcapAPI checks did not, consider posting a new <a href="https://github.com/nutterb/redcapAPI/issues">GitHub issue</a> to the package developers.</p></li>
 </ol>
@@ -425,20 +445,34 @@ demographics_complete
 <li><p><strong>Can the user import a <em>subset</em> of the project?</strong></p></li>
 </ol>
 </div>
+<div id="gotchas-agnostic" class="section level2">
+<h2 class="hasAnchor">
+<a href="#gotchas-agnostic" class="anchor"></a>Common Language-Agnostic Gotchas</h2>
+<ol style="list-style-type: decimal">
+<li>
+<p><strong>Problems in the project’s metadata/dictionary.</strong> If exporting the metadata fails (<em>e.g.</em>, <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_read.html"><code><a href="../reference/redcap_metadata_read.html">REDCapR::redcap_metadata_read()</a></code></a> and <a href="https://rdrr.io/github/nutterb/redcapAPI/man/exportMetaData.html"><code><a href="https://rdrr.io/pkg/redcapAPI/man/exportMetaData.html">redcapAPI::exportMetaData()</a></code></a>), manually download the data dictionary from the REDCap browser. Inspect the plain text closely in a text editor like <a href="https://atom.io/">Atom</a> or <a href="https://code.visualstudio.com/">Visual Studio Code</a>; avoid programs like Excel because they tend to interpet, align, and decorate the values, which sometimes masks problems. Scrutinize all elements, but especially look for nonstandard characters. <em>See the next bullet.</em></p>
+<p>Some API libraries test that problematic elements of a project are handled correctly. If you encounter an element that causes problems, please consider</p>
+<ol style="list-style-type: decimal">
+<li><p>creating a new GitHub Issue that describes the problem (<em>e.g.</em>, <a href="https://github.com/OuhscBbmc/REDCapR/issues">REDCapR</a>, <a href="https://github.com/nutterb/redcapAPI/issues">redcapAPI</a>, <a href="https://github.com/iuredcap/phpcap/issues">phpcap</a>).</p></li>
+<li><p>in the issue, attach the problematic fields of your data dictionary. If you’re uncomfortable sharing your dictionary with the world, consider emailing it to developer. Because it’s just the data dictionary, no PHI should be included.</p></li>
+</ol>
+<p>If the package developer can’t find a way to gracefully adapt, they’ll at least try to provide a better error message.</p>
+</li>
+<li><p><strong>Identify problematic characters.</strong> This is a special case of the previous bulletLook for fancy characters that might not be interpreted smoothly. For instance, when editing the data dictionary in Excel, sometimes <em>straight</em> quotes are converted to <em>curly</em> quotes. This might cause a problem later, when your API client tries to interpet the character using the wrong encoding. All ASCII characters appear to be interpreted smoothly</p></li>
+</ol>
+</div>
+<div id="general-troubleshooting-advice" class="section level2">
+<h2 class="hasAnchor">
+<a href="#general-troubleshooting-advice" class="anchor"></a>General Troubleshooting Advice</h2>
+<ol style="list-style-type: decimal">
+<li><p><strong>Simplify.</strong> Elminate potential sources of problems by cumulatively. For example, reduce the columns &amp; records that you read/write.</p></li>
+<li><p><strong>Start fresh.</strong> If that’s not feasible, start a new project and gradually add elements from the original project. Identify the problematic element by testing the API call after each addition.</p></li>
+</ol>
+</div>
 <div id="other-software-for-communication-and-automation-with-redcap" class="section level2">
 <h2 class="hasAnchor">
 <a href="#other-software-for-communication-and-automation-with-redcap" class="anchor"></a>Other software for communication and automation with REDCap</h2>
 <p>REDCap is used in many environments, and it’s not surprising that a lot of libraries have been developed that cater to different scenarios and languages. An active list is maintained at <a href="http://redcap-tools.github.io/projects/">REDCap-Tools</a>. In an entry needs to be added, please notify us; instructions are found at the bottom of the page.</p>
-<!--
-**Actively developed in the past two years**
-
-1. [`PyCap`](https://github.com/redcap-tools/PyCap): "PyCap is an interface to the REDCap Application Programming Interface (API). PyCap is designed to be a minimal interface exposing all required and optional API parameters." (Written in Python primarily by Scott Burns, formerly with Vanderbilt, now at [Stratasan](http://www.stratasan.com/).)
-1. [`redcap`](https://github.com/jeffreyhorner/redcap): "R interface to REDCap." (Written in R primarily by Jeffrey Horner.  The last commit was Feb 2013)
-1. [`redcapAPI`](https://github.com/nutterb/redcapAPI): This is the most actively-developed fork of the library above. (Written in R primarily by Benjamin Nutter at the Cleveland Clinic Foundation.)
-1. [`REDCapR`](https://github.com/OuhscBbmc/REDCapR): "R Utilities for interacting with a REDCap data system." (Written in R primarily by Will Beasley, and the [OUHSC BBMC](http://ouhsc.edu/bbmc/).)
-1. [`redcap-repeat`](https://github.com/cbmi/redcap-repeat): "Script for REDCap data dictionaries to support repeating fields and groups of fields." (Written in Python primarily by Jeff Max at CHOP's [CBMI](https://github.com/cbmi)).
-1. [`django-redcap`](https://github.com/cbmi/django-redcap): "Utilities for porting REDCap projects to and from Django models." (Written in Python primarily by 'dmegahan at CHOP's [CBMI](https://github.com/cbmi)).
--->
 </div>
 <div id="other-good-resources" class="section level2">
 <h2 class="hasAnchor">
@@ -457,7 +491,7 @@ demographics_complete
 <div id="document-info" class="section level2">
 <h2 class="hasAnchor">
 <a href="#document-info" class="anchor"></a>Document Info</h2>
-<p>This document is primarily based on REDCap version 6.0.2 and was last updated 2019-10-13. A development version of the document is available on GitHub: <a href="https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html" class="uri">https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html</a>.</p>
+<p>This document is primarily based on REDCap version 6.0.2 and was last updated 2019-12-03. A development version of the document is available on GitHub: <a href="https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html" class="uri">https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html</a>.</p>
 </div>
 </div>
   </div>
@@ -477,6 +511,8 @@ demographics_complete
       <li><a href="#exporting-from-redcap-to-r-using-redcapr">Exporting from REDCap to R, using REDCapR</a></li>
       <li><a href="#exporting-from-redcap-to-r-using-redcapapi">Exporting from REDCap to R, using redcapAPI</a></li>
       <li><a href="#importing-into-redcap-from-r">Importing into REDCap from R</a></li>
+      <li><a href="#gotchas-agnostic">Common Language-Agnostic Gotchas</a></li>
+      <li><a href="#general-troubleshooting-advice">General Troubleshooting Advice</a></li>
       <li><a href="#other-software-for-communication-and-automation-with-redcap">Other software for communication and automation with REDCap</a></li>
       <li><a href="#other-good-resources">Other good resources</a></li>
       <li><a href="#document-info">Document Info</a></li>
