@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9004</span>
       </span>
     </div>
 
@@ -108,7 +108,7 @@
     <div class="page-header toc-ignore">
       <h1>Security Database</h1>
             
-            <h4 class="date">2019-12-03</h4>
+            <h4 class="date">2019-12-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/SecurityDatabase.Rmd"><code>vignettes/SecurityDatabase.Rmd</code></a></small>
       <div class="hidden name"><code>SecurityDatabase.Rmd</code></div>
@@ -407,12 +407,12 @@
 <span id="cb3-117"><a href="#cb3-117"></a></span>
 <span id="cb3-118"><a href="#cb3-118"></a><span class="co"># Assert that the dataset is well-behaved.</span></span>
 <span id="cb3-119"><a href="#cb3-119"></a><span class="co"># OuhscMunge::verify_value_headstart(ds)</span></span>
-<span id="cb3-120"><a href="#cb3-120"></a>checkmate<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/checkmate/man/checkInteger.html">assert_integer</a></span>(  ds<span class="op">$</span>id         , <span class="dt">any.missing=</span>F, <span class="dt">lower=</span><span class="dv">1</span>, <span class="dt">upper=</span>.Machine<span class="op">$</span>integer.max, <span class="dt">unique=</span>T)</span>
-<span id="cb3-121"><a href="#cb3-121"></a>checkmate<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/checkmate/man/checkCharacter.html">assert_character</a></span>(ds<span class="op">$</span>username   , <span class="dt">any.missing=</span>F, <span class="dt">pattern=</span><span class="st">"^.{1,255}$"</span>                         )</span>
-<span id="cb3-122"><a href="#cb3-122"></a>checkmate<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/checkmate/man/checkInteger.html">assert_integer</a></span>(  ds<span class="op">$</span>project_id , <span class="dt">any.missing=</span>F, <span class="dt">lower=</span><span class="dv">1</span>, <span class="dt">upper=</span>.Machine<span class="op">$</span>integer.max          )</span>
-<span id="cb3-123"><a href="#cb3-123"></a>checkmate<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/checkmate/man/checkCharacter.html">assert_character</a></span>(ds<span class="op">$</span>token      , <span class="dt">any.missing=</span>F, <span class="dt">pattern=</span><span class="st">"^[A-Z0-9]{32}$"</span>           , <span class="dt">unique=</span>T)</span>
-<span id="cb3-124"><a href="#cb3-124"></a>checkmate<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/checkmate/man/checkCharacter.html">assert_character</a></span>(ds<span class="op">$</span>instance   , <span class="dt">any.missing=</span>F, <span class="dt">pattern=</span><span class="st">"^.{1,255}$"</span>                         )</span>
-<span id="cb3-125"><a href="#cb3-125"></a>checkmate<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/checkmate/man/checkCharacter.html">assert_character</a></span>(ds<span class="op">$</span>redcap_uri , <span class="dt">any.missing=</span>F, <span class="dt">pattern=</span><span class="st">"^.{1,255}$"</span>                         )</span>
+<span id="cb3-120"><a href="#cb3-120"></a>checkmate<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/checkmate/man/checkInteger.html">assert_integer</a></span>(  ds<span class="op">$</span>id         , <span class="dt">any.missing=</span><span class="ot">FALSE</span>, <span class="dt">lower=</span><span class="dv">1</span>, <span class="dt">upper=</span>.Machine<span class="op">$</span>integer.max, <span class="dt">unique=</span><span class="ot">TRUE</span>)</span>
+<span id="cb3-121"><a href="#cb3-121"></a>checkmate<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/checkmate/man/checkCharacter.html">assert_character</a></span>(ds<span class="op">$</span>username   , <span class="dt">any.missing=</span><span class="ot">FALSE</span>, <span class="dt">pattern=</span><span class="st">"^.{1,255}$"</span>                         )</span>
+<span id="cb3-122"><a href="#cb3-122"></a>checkmate<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/checkmate/man/checkInteger.html">assert_integer</a></span>(  ds<span class="op">$</span>project_id , <span class="dt">any.missing=</span><span class="ot">FALSE</span>, <span class="dt">lower=</span><span class="dv">1</span>, <span class="dt">upper=</span>.Machine<span class="op">$</span>integer.max          )</span>
+<span id="cb3-123"><a href="#cb3-123"></a>checkmate<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/checkmate/man/checkCharacter.html">assert_character</a></span>(ds<span class="op">$</span>token      , <span class="dt">any.missing=</span><span class="ot">FALSE</span>, <span class="dt">pattern=</span><span class="st">"^[A-Z0-9]{32}$"</span>           , <span class="dt">unique=</span><span class="ot">TRUE</span>)</span>
+<span id="cb3-124"><a href="#cb3-124"></a>checkmate<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/checkmate/man/checkCharacter.html">assert_character</a></span>(ds<span class="op">$</span>instance   , <span class="dt">any.missing=</span><span class="ot">FALSE</span>, <span class="dt">pattern=</span><span class="st">"^.{1,255}$"</span>                         )</span>
+<span id="cb3-125"><a href="#cb3-125"></a>checkmate<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/checkmate/man/checkCharacter.html">assert_character</a></span>(ds<span class="op">$</span>redcap_uri , <span class="dt">any.missing=</span><span class="ot">FALSE</span>, <span class="dt">pattern=</span><span class="st">"^.{1,255}$"</span>                         )</span>
 <span id="cb3-126"><a href="#cb3-126"></a></span>
 <span id="cb3-127"><a href="#cb3-127"></a>testit<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/testit/man/assert.html">assert</a></span>(</span>
 <span id="cb3-128"><a href="#cb3-128"></a>  <span class="st">"The `username` x `project_id` x `instance` must be unique."</span>,</span>

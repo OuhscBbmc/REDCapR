@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9004</span>
       </span>
     </div>
 
@@ -156,11 +156,12 @@
 <h1 class="page-header">
 <a href="#version-011-released-" class="anchor"></a>Version 0.11 (Released ?)<small> Unreleased </small>
 </h1>
-<div id="breaking-changes" class="section level3">
+<div id="breaking-changes-possible-but-unlikely" class="section level3">
 <h3 class="hasAnchor">
-<a href="#breaking-changes" class="anchor"></a>Breaking Changes</h3>
+<a href="#breaking-changes-possible-but-unlikely" class="anchor"></a>Breaking Changes (possible, but unlikely)</h3>
 <ul>
-<li>A possible, but unlikely, breaking change is that <code><a href="../reference/kernel_api.html">kernel_api()</a></code> defaults to “text/csv” and UTF-8 encoding. Formerly, the function would decide on the content-type and encoding. More details are below in the ‘Stability Features’ subsection.</li>
+<li><p><a href="https://ouhscbbmc.github.io/REDCapR/reference/kernel_api.html"><code><a href="../reference/kernel_api.html">kernel_api()</a></code></a> defaults to “text/csv” and UTF-8 encoding. Formerly, the function would decide on the content-type and encoding. More details are below in the ‘Stability Features’ subsection.</p></li>
+<li><p><a href="https://ouhscbbmc.github.io/REDCapR/reference/constant.html"><code><a href="../reference/constant.html">constant()</a></code></a> no longer accepts <code>simplify</code> as an options. An integer vector is always returned. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/280'>#280</a>)</p></li>
 </ul>
 </div>
 <div id="new-features" class="section level3">
@@ -396,9 +397,9 @@
 <li>Users can specify if an operation should continue after an error occurs on a batch read or write. Regardless of their choice, more debugging output is written to the console if <code>verbose==TRUE</code>. Follows advice of <a href='https://github.com/johnaponte'>@johnaponte</a>, Benjamin Nutter (<a href='https://github.com/nutterb'>@nutterb</a>), and Rollie Parrish (<a href='https://github.com/rparrish'>@rparrish</a>). Closes <a href='https://github.com/OuhscBbmc/REDCapR/issues/43'>#43</a>.</li>
 </ul>
 </div>
-<div id="breaking-changes-1" class="section level3">
+<div id="breaking-changes" class="section level3">
 <h3 class="hasAnchor">
-<a href="#breaking-changes-1" class="anchor"></a>Breaking Changes</h3>
+<a href="#breaking-changes" class="anchor"></a>Breaking Changes</h3>
 <ul>
 <li>The <code>records_collapsed</code> default empty value is now an empty string (<em>i.e.</em>, <code>""</code>) instead of <code>NULL</code>. This applies when <code>records_collapsed</code> is either a parameter, or a returned value.</li>
 </ul>
