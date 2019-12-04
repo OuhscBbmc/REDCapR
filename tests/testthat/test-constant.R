@@ -1,26 +1,14 @@
 library(testthat)
 
-test_that("scalar w/ simplify", {
+test_that("scalar", {
   expect_equal(object= constant("form_incomplete"    ), expected=0L)
   expect_equal(object= constant("form_unverified"    ), expected=1L)
   expect_equal(object= constant("form_complete"      ), expected=2L)
 })
 
-test_that("scalar w/o simplify", {
-  expect_equal(object= constant("form_incomplete"    , simplify=TRUE), expected=0L)
-  expect_equal(object= constant("form_unverified"    , simplify=TRUE), expected=1L)
-  expect_equal(object= constant("form_complete"      , simplify=TRUE), expected=2L)
-})
-
-test_that("vector w/ simplify", {
+test_that("vector", {
   expected <- c(2L, 2L, 0L)
-  observed <- constant(c("form_complete", "form_complete", "form_incomplete"), simplify=TRUE)
-  expect_equal(observed, expected)
-})
-
-test_that("vector w/o simplify", {
-  expected <- list(2L, 2L, 0L)
-  observed <- constant(c("form_complete", "form_complete", "form_incomplete"), simplify=FALSE)
+  observed <- constant(c("form_complete", "form_complete", "form_incomplete"))
   expect_equal(observed, expected)
 })
 
@@ -52,28 +40,6 @@ test_that("missing name", {
   )
 })
 
-test_that("bad simplify", {
-  # expected_error_message <- "Assertion on 'simplify' failed: Must be of type 'logical', not 'character'."
-  expect_error(
-    constant("form_complete", simplify="aa"),
-    "^Assertion on 'simplify' failed: Must be of type 'logical', not 'character'\\.$"
-  )
-})
-test_that("missing simplify", {
-  # expected_error_message <- "Assertion on 'simplify' failed: Must be of type 'logical', not 'NULL'. "
-  expect_error(
-    constant("form_complete", simplify=NULL),
-    "^Assertion on 'simplify' failed: Must be of type 'logical', not 'NULL'\\.$"
-  )
-})
-test_that("NA simplify", {
-  # newer version of checkmate: "Assertion on 'simplify' failed: Contains missing values (element 1)."
-  # older version of checkmate: "Assertion on 'simplify' failed: Contains missing values."
-  expect_error(
-    constant("form_complete", simplify=NA_character_),
-    "^Assertion on 'simplify' failed: Contains missing values.*$"
-  )
-})
 
 
 # ---- constant-to-* -----------------------------------------------------------

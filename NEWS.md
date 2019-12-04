@@ -8,11 +8,11 @@ In the future:
 Version 0.11 (Released ?)
 ==========================================================
 
-### Breaking Changes
+### Breaking Changes (possible, but unlikely)
 
-* A possible, but unlikely, breaking change is that `kernel_api()` defaults to "text/csv" and UTF-8 encoding.  Formerly, the function would decide on the content-type and encoding.  More details are below in the 'Stability Features' subsection.
+* [`kernel_api()`](https://ouhscbbmc.github.io/REDCapR/reference/kernel_api.html) defaults to "text/csv" and UTF-8 encoding.  Formerly, the function would decide on the content-type and encoding.  More details are below in the 'Stability Features' subsection.
 
-* 
+* [`constant()`](https://ouhscbbmc.github.io/REDCapR/reference/constant.html) no longer accepts `simplify` as an options.  An integer vector is always returned.  (#280)
 
 ### New Features
 

@@ -8,13 +8,10 @@
 \alias{constant_to_access}
 \title{Collection of REDCap-specific constants}
 \usage{
-constant(name, simplify = TRUE)
+constant(name)
 }
 \arguments{
 \item{name}{Name of constant.  Required character.}
-
-\item{simplify}{Simplifies the vector of values to a common data-type,
-if possible. Passed to the \code{simplify} parameter of \code{\link[base:sapply]{base::sapply()}}.}
 }
 \value{
 The constant's value.  Currently all are single integers,
