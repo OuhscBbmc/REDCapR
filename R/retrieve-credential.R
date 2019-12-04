@@ -78,7 +78,7 @@ retrieve_credential_local <- function(
   check_token_pattern      = TRUE
 ) {
 
-  checkmate::assert_character(path_credential  , any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(path_credential  , any.missing=FALSE, len=1, pattern="^.{1,}$")
   checkmate::assert_file_exists(path_credential                                         )
 
   col_types <- readr::cols_only(

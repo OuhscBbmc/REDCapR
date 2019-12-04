@@ -97,8 +97,8 @@ clear_project_simple <- function(verbose = TRUE) {
 }
 
 clean_start_simple <- function(batch = FALSE, delay_in_seconds = 1) {
-  checkmate::assert_logical(batch           , any.missing=F, len=1)
-  checkmate::assert_numeric(delay_in_seconds, any.missing=F, len=1, lower=0)
+  checkmate::assert_logical(batch           , any.missing=FALSE, len=1)
+  checkmate::assert_numeric(delay_in_seconds, any.missing=FALSE, len=1, lower=0)
 
   if (!requireNamespace("testthat")) {
     # nocov start
@@ -126,8 +126,8 @@ clean_start_simple <- function(batch = FALSE, delay_in_seconds = 1) {
 }
 
 upload_file_simple <- function(redcap_uri, token = token) {
-  checkmate::assert_character(redcap_uri, any.missing=F, len=1, min.chars = 5)
-  checkmate::assert_character(token     , any.missing=F, len=1, pattern="^\\w{32}$")
+  checkmate::assert_character(redcap_uri, any.missing=FALSE, len=1, min.chars = 5)
+  checkmate::assert_character(token     , any.missing=FALSE, len=1, pattern="^\\w{32}$")
 
   records <- 1:5
   file_paths <- system.file(

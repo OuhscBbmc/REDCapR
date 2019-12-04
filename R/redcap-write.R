@@ -101,8 +101,8 @@ redcap_write <- function(
 ) {
 
   start_time <- base::Sys.time()
-  checkmate::assert_character(redcap_uri, any.missing=F, len=1, pattern="^.{1,}$")
-  checkmate::assert_character(token     , any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(redcap_uri, any.missing=FALSE, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(token     , any.missing=FALSE, len=1, pattern="^.{1,}$")
 
   token   <- sanitize_token(token)
   verbose <- verbose_prepare(verbose)
@@ -119,7 +119,7 @@ redcap_write <- function(
 
   message(sprintf(
     "Starting to update %s records to be written at %s.",
-    format(nrow(ds_to_write), big.mark = ",", scientific = F, trim = T),
+    format(nrow(ds_to_write), big.mark = ",", scientific = F, trim = TRUE),
     Sys.time()
   ))
   for (i in seq_along(ds_glossary$id)) {

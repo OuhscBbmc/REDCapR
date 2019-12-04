@@ -47,8 +47,8 @@
 
 #' @export
 create_batch_glossary <- function(row_count, batch_size) {
-  checkmate::assert_integerish(row_count , any.missing=F, len=1L, lower=1L)
-  checkmate::assert_integerish(batch_size, any.missing=F, len=1L, lower=1L)
+  checkmate::assert_integerish(row_count , any.missing=FALSE, len=1L, lower=1L)
+  checkmate::assert_integerish(batch_size, any.missing=FALSE, len=1L, lower=1L)
 
   start_index <- base::seq.int(from=1, to=row_count, by=batch_size)
 

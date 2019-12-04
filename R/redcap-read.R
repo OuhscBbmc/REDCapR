@@ -169,31 +169,31 @@ redcap_read <- function(
   id_position                   = 1L
 ) {
 
-  checkmate::assert_character(redcap_uri                , any.missing=F,     len=1, pattern="^.{1,}$")
-  checkmate::assert_character(token                     , any.missing=F,     len=1, pattern="^.{1,}$")
-  checkmate::assert_atomic(  records                    , any.missing=T, min.len=0)
-  checkmate::assert_character(records_collapsed         , any.missing=T,     len=1, pattern="^.{0,}$", null.ok=T)
-  checkmate::assert_character(fields                    , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
-  checkmate::assert_character(fields_collapsed          , any.missing=T,     len=1, pattern="^.{0,}$", null.ok=T)
-  checkmate::assert_character(forms                     , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
-  checkmate::assert_character(forms_collapsed           , any.missing=T,     len=1, pattern="^.{0,}$", null.ok=T)
-  checkmate::assert_character(events                    , any.missing=T, min.len=1, pattern="^.{1,}$", null.ok=T)
-  checkmate::assert_character(events_collapsed          , any.missing=T,     len=1, pattern="^.{0,}$", null.ok=T)
-  checkmate::assert_character(raw_or_label              , any.missing=F,     len=1)
+  checkmate::assert_character(redcap_uri                , any.missing=FALSE,     len=1, pattern="^.{1,}$")
+  checkmate::assert_character(token                     , any.missing=FALSE,     len=1, pattern="^.{1,}$")
+  checkmate::assert_atomic(  records                    , any.missing=TRUE, min.len=0)
+  checkmate::assert_character(records_collapsed         , any.missing=TRUE ,     len=1, pattern="^.{0,}$", null.ok=TRUE)
+  checkmate::assert_character(fields                    , any.missing=TRUE , min.len=1, pattern="^.{1,}$", null.ok=TRUE)
+  checkmate::assert_character(fields_collapsed          , any.missing=TRUE ,     len=1, pattern="^.{0,}$", null.ok=TRUE)
+  checkmate::assert_character(forms                     , any.missing=TRUE , min.len=1, pattern="^.{1,}$", null.ok=TRUE)
+  checkmate::assert_character(forms_collapsed           , any.missing=TRUE ,     len=1, pattern="^.{0,}$", null.ok=TRUE)
+  checkmate::assert_character(events                    , any.missing=TRUE , min.len=1, pattern="^.{1,}$", null.ok=TRUE)
+  checkmate::assert_character(events_collapsed          , any.missing=TRUE ,     len=1, pattern="^.{0,}$", null.ok=TRUE)
+  checkmate::assert_character(raw_or_label              , any.missing=FALSE,     len=1)
   checkmate::assert_subset(   raw_or_label              , c("raw", "label"))
-  checkmate::assert_character(raw_or_label_headers      , any.missing=F,     len=1)
+  checkmate::assert_character(raw_or_label_headers      , any.missing=FALSE,     len=1)
   checkmate::assert_subset(   raw_or_label_headers      , c("raw", "label"))
-  checkmate::assert_logical(  export_checkbox_label     , any.missing=F,     len=1)
+  checkmate::assert_logical(  export_checkbox_label     , any.missing=FALSE,     len=1)
   # placeholder: returnFormat
-  checkmate::assert_logical(  export_survey_fields      , any.missing=F,     len=1)
-  checkmate::assert_logical(  export_data_access_groups , any.missing=F,     len=1)
+  checkmate::assert_logical(  export_survey_fields      , any.missing=FALSE,     len=1)
+  checkmate::assert_logical(  export_data_access_groups , any.missing=FALSE,     len=1)
   #
-  checkmate::assert_logical(  guess_type                , any.missing=F,     len=1)
+  checkmate::assert_logical(  guess_type                , any.missing=FALSE,     len=1)
 
   if (!is.null(guess_max)) warning("The `guess_max` parameter in `REDCapR::redcap_read()` is deprecated.")
-  checkmate::assert_logical(  verbose                   , any.missing=F,     len=1, null.ok=T)
-  checkmate::assert_list(     config_options            , any.missing=T,     len=1, null.ok=T)
-  checkmate::assert_integer(  id_position               , any.missing=F,     len=1, lower=1L)
+  checkmate::assert_logical(  verbose                   , any.missing=FALSE,     len=1, null.ok=TRUE)
+  checkmate::assert_list(     config_options            , any.missing=TRUE ,     len=1, null.ok=TRUE)
+  checkmate::assert_integer(  id_position               , any.missing=FALSE,     len=1, lower=1L)
 
   validate_field_names(fields)
 
@@ -258,7 +258,7 @@ redcap_read <- function(
   lst_outcome_message    <- NULL
   success_combined       <- TRUE
 
-  message("Starting to read ", format(length(unique_ids), big.mark=",", scientific=F, trim=T), " records  at ", Sys.time(), ".")
+  message("Starting to read ", format(length(unique_ids), big.mark=",", scientific=FALSE, trim=TRUE), " records  at ", Sys.time(), ".")
   for (i in ds_glossary$id) {
     selected_index  <- seq(from=ds_glossary$start_index[i], to=ds_glossary$stop_index[i])
     selected_ids    <- unique_ids[selected_index]

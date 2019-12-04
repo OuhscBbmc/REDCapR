@@ -87,8 +87,8 @@ redcap_write_oneshot <- function(
   # TODO: automatically convert boolean/logical class to integer/bit class
   csv_elements <- NULL #This prevents the R CHECK NOTE: 'No visible binding for global variable Note in R CMD check';  Also see  if( getRversion() >= "2.15.1" )    utils::globalVariables(names=c("csv_elements")) #http://stackoverflow.com/questions/8096313/no-visible-binding-for-global-variable-note-in-r-cmd-check; http://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
 
-  checkmate::assert_character(redcap_uri, any.missing=F, len=1, pattern="^.{1,}$")
-  checkmate::assert_character(token     , any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(redcap_uri, any.missing=FALSE, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(token     , any.missing=FALSE, len=1, pattern="^.{1,}$")
 
   token   <- sanitize_token(token)
   verbose <- verbose_prepare(verbose)

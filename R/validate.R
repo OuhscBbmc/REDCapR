@@ -59,8 +59,8 @@
 
 #' @export
 validate_no_logical <- function(data_types, stop_on_error = FALSE) {
-  checkmate::assert_character(data_types, any.missing=F, min.len=1, min.chars=2)
-  checkmate::assert_logical(stop_on_error, any.missing=F, len=1)
+  checkmate::assert_character(data_types, any.missing=FALSE, min.len=1, min.chars=2)
+  checkmate::assert_logical(stop_on_error, any.missing=FALSE, len=1)
 
   indices <- which(data_types == "logical")
 
@@ -90,8 +90,8 @@ validate_no_logical <- function(data_types, stop_on_error = FALSE) {
 
 #' @export
 validate_field_names <- function(field_names, stop_on_error = FALSE) {
-  checkmate::assert_character(field_names, any.missing=F, null.ok=T, min.len=1, min.chars=2)
-  checkmate::assert_logical(stop_on_error, any.missing=F, len=1)
+  checkmate::assert_character(field_names, any.missing=FALSE, null.ok=TRUE, min.len=1, min.chars=2)
+  checkmate::assert_logical(stop_on_error, any.missing=FALSE, len=1)
 
   pattern <- "^[0-9a-z_]+$"
 

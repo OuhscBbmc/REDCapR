@@ -11,7 +11,7 @@ test_that("One Shot: Bad Uri -Not HTTPS", {
   credential$redcap_uri <- "http://bbmc.ouhsc.edu/redcap/api/" #Not HTTPS
 
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T)
+    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, verbose=TRUE)
   )
 
   expect_equal(returned_object$data, expected=data.frame(), label="An empty data.frame should be returned.")
@@ -33,7 +33,7 @@ test_that("One Shot: Bad Uri -wrong address", {
   credential$redcap_uri <- "https://bbmc.ouhsc.edu/redcap/apiFFFFFFFFFFFFFF/" #Wrong url
 
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T)
+    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, verbose=TRUE)
   )
 
   expect_equal(returned_object$data, expected=data.frame(), label="An empty data.frame should be returned.")
@@ -54,7 +54,7 @@ test_that("Batch: Bad Uri -Not HTTPS", {
   credential$redcap_uri <- "http://bbmc.ouhsc.edu/redcap/api/" #Not HTTPS
 
   expect_message(
-    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T)
+    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, verbose=TRUE)
   )
 
   expect_equal(returned_object$data, expected=data.frame(), label="An empty data.frame should be returned.")
@@ -75,7 +75,7 @@ test_that("Batch: Bad Uri -wrong address", {
   credential$redcap_uri <- "https://bbmc.ouhsc.edu/redcappppp/apiFFFFFFFFFFFFFF/" #Wrong url
 
   expect_message(
-    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T)
+    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, verbose=TRUE)
   )
 
   expect_equal(returned_object$data, expected=data.frame(), label="An empty data.frame should be returned.")

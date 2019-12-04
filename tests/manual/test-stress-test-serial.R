@@ -42,7 +42,7 @@ expected_outcome_message <- "5 records and 24 columns were read from REDCap in \
 
 for( i in seq_len(read_count) ) {
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="raw", verbose=T),
+    returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="raw", verbose=TRUE),
     regexp = expected_outcome_message
   )
 

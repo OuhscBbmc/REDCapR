@@ -8,7 +8,7 @@ credential <- REDCapR::retrieve_credential_local(
 test_that("Russian Recruit", {
   testthat::skip_on_cran()
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, verbose=T)
+    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, verbose=TRUE)
   )
 
   d <- returned_object$data
@@ -29,7 +29,7 @@ test_that("Russian Recruit", {
 # test_that("Russian Encoded", {
 #   testthat::skip_on_cran()
 #   expect_message(
-#     returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, verbose=T)
+#     returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, verbose=TRUE)
 #   )
 #
 #   d <- returned_object$data

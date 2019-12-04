@@ -7,20 +7,20 @@ test_that("scalar w/ simplify", {
 })
 
 test_that("scalar w/o simplify", {
-  expect_equal(object= constant("form_incomplete"    , simplify=T), expected=0L)
-  expect_equal(object= constant("form_unverified"    , simplify=T), expected=1L)
-  expect_equal(object= constant("form_complete"      , simplify=T), expected=2L)
+  expect_equal(object= constant("form_incomplete"    , simplify=TRUE), expected=0L)
+  expect_equal(object= constant("form_unverified"    , simplify=TRUE), expected=1L)
+  expect_equal(object= constant("form_complete"      , simplify=TRUE), expected=2L)
 })
 
 test_that("vector w/ simplify", {
   expected <- c(2L, 2L, 0L)
-  observed <- constant(c("form_complete", "form_complete", "form_incomplete"), simplify=T)
+  observed <- constant(c("form_complete", "form_complete", "form_incomplete"), simplify=TRUE)
   expect_equal(observed, expected)
 })
 
 test_that("vector w/o simplify", {
   expected <- list(2L, 2L, 0L)
-  observed <- constant(c("form_complete", "form_complete", "form_incomplete"), simplify=F)
+  observed <- constant(c("form_complete", "form_complete", "form_incomplete"), simplify=FALSE)
   expect_equal(observed, expected)
 })
 

@@ -6,6 +6,7 @@ options(device = deviceType) #http://support.rstudio.org/help/discussions/proble
 devtools::document()
 devtools::check_man() #Should return NULL
 devtools::build_vignettes()
+goodpractice::gp()
 
 devtools::document()
 pkgdown::clean_site()
@@ -22,7 +23,7 @@ test_results_checked <- devtools::test(filter = "validate.*$")
 test_results_not_checked <- testthat::test_dir("./tests/manual/")
 
 # devtools::check(force_suggests = FALSE)
-devtools::check(cran=T)
+devtools::check(cran=TRUE)
 # devtools::check_rhub(email="wibeasley@hotmail.com")
 # devtools::check_win_devel() # CRAN submission policies encourage the development version
 # devtools::revdepcheck(recursive=TRUE)
