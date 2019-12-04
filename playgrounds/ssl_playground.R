@@ -80,7 +80,7 @@ rcurl_raw <- RCurl::postForm(
   , rawOrLabel = 'raw'
   , exportDataAccessGroups = 'true'
   , .opts = RCurl::curlOptions(cainfo = system.file("ssl-certs/mozilla-ca-root.crt", package="REDCapR"))
-  # , .opts = RCurl::curlOptions(ssl.verifypeer=F, verbose=TRUE)
+  # , .opts = RCurl::curlOptions(ssl.verifypeer=F)
 )
 rcurl_raw
 

@@ -7,7 +7,7 @@ credential <- REDCapR::retrieve_credential_local(
 
 test_that("smoke test", {
   testthat::skip_on_cran()
-  returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token, verbose=TRUE)
+  returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token)
 })
 test_that("default", {
   testthat::skip_on_cran()
@@ -45,7 +45,7 @@ test_that("default", {
 
   expect_message(
     regexp           = expected_outcome_message,
-    returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token, verbose=TRUE)
+    returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token)
   )
 
   expect_equal(returned_object$data, expected=expected_data_frame) # dput(returned_object$data)
@@ -139,7 +139,7 @@ test_that("raw", {
 
   expect_message(
     regexp           = expected_outcome_message,
-    returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="raw", verbose=TRUE)
+    returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="raw")
   )
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
@@ -187,7 +187,7 @@ test_that("raw and DAG", {
 
   expect_message(
     regexp           = expected_outcome_message,
-    returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="raw", export_data_access_groups=TRUE, verbose=TRUE)
+    returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="raw", export_data_access_groups=TRUE)
   )
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
@@ -237,7 +237,7 @@ test_that("label and DAG", {
 
   expect_message(
     regexp           = expected_outcome_message,
-    returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups=TRUE, verbose=TRUE)
+    returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups=TRUE)
   )
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
@@ -322,7 +322,7 @@ test_that("filter - numeric", {
   filter <- "[age] >= 61"
   expect_message(
     regexp           = expected_outcome_message,
-    returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token, verbose=TRUE, filter_logic=filter)
+    returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token, filter_logic=filter)
   )
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
@@ -354,7 +354,7 @@ test_that("filter - character", {
   filter <- "[name_first] = 'John Lee'"
   expect_message(
     regexp           = expected_outcome_message,
-    returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token, verbose=TRUE, filter_logic=filter)
+    returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token, filter_logic=filter)
   )
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)

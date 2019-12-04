@@ -9,7 +9,7 @@ credential <- REDCapR::retrieve_credential_local(
 test_that("smoke test", {
   testthat::skip_on_cran()
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, verbose=TRUE)
+    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token)
   )
 })
 
@@ -22,7 +22,7 @@ test_that("correct dimensions -oneshot", {
 
   expect_message(
     regexp           = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, verbose=TRUE)
+    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token)
   )
 
   expect_equal(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
@@ -47,7 +47,7 @@ test_that("correct dimensions -batch", {
 
   expect_message(
     regexp           = expected_outcome_message,
-    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, verbose=TRUE)
+    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token)
   )
 
   expect_equal(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)

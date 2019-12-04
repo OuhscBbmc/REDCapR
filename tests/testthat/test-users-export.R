@@ -13,8 +13,8 @@ credential_2 <- REDCapR::retrieve_credential_local(
 test_that("smoke test", {
   testthat::skip_on_cran()
   expect_message({
-    returned_object_1 <- redcap_users_export(redcap_uri=credential_1$redcap_uri, token=credential_1$token, verbose=TRUE)
-    returned_object_2 <- redcap_users_export(redcap_uri=credential_2$redcap_uri, token=credential_2$token, verbose=TRUE)
+    returned_object_1 <- redcap_users_export(redcap_uri=credential_1$redcap_uri, token=credential_1$token)
+    returned_object_2 <- redcap_users_export(redcap_uri=credential_2$redcap_uri, token=credential_2$token)
   })
 })
 
@@ -52,7 +52,7 @@ test_that("with DAGs", {
 
   expect_message(
     regexp           = expected_outcome_message,
-    returned_object <- redcap_users_export(redcap_uri=credential_1$redcap_uri, token=credential_1$token, verbose=TRUE)
+    returned_object <- redcap_users_export(redcap_uri=credential_1$redcap_uri, token=credential_1$token)
   )
 
   expect_equivalent(returned_object$data_user     , expected=expected_data_user     , label="The returned data.frame should be correct") # dput(returned_object$data_user);
@@ -103,7 +103,7 @@ test_that("with DAGs", {
 
   expect_message(
     regexp           = expected_outcome_message,
-    returned_object <- redcap_users_export(redcap_uri=credential_2$redcap_uri, token=credential_2$token, verbose=TRUE)
+    returned_object <- redcap_users_export(redcap_uri=credential_2$redcap_uri, token=credential_2$token)
   )
 
   expect_equivalent(returned_object$data_user     , expected=expected_data_user     , label="The returned data.frame should be correct") # dput(returned_object$data_user);
