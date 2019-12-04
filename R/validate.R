@@ -124,7 +124,7 @@ validate_for_write <- function(d) {
   checkmate::assert_data_frame(d, any.missing = FALSE)
 
   lst_concerns <- list(
-    validate_no_logical(sapply(d, class)),
+    validate_no_logical(vapply(d, class, character(1))),
     validate_field_names(colnames(d))
   )
 
