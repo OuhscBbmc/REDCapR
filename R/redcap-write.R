@@ -119,7 +119,7 @@ redcap_write <- function(
 
   message(sprintf(
     "Starting to update %s records to be written at %s.",
-    format(nrow(ds_to_write), big.mark = ",", scientific = F, trim = TRUE),
+    format(nrow(ds_to_write), big.mark = ",", scientific = FALSE, trim = TRUE),
     Sys.time()
   ))
   for (i in seq_along(ds_glossary$id)) {

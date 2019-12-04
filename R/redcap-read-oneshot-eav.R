@@ -296,8 +296,8 @@ redcap_read_oneshot_eav <- function(
     if (ifelse(exists("ds_2"), inherits(ds_2, "data.frame"), FALSE)) {
       outcome_message <- sprintf(
         "%s records and %s columns were read from REDCap in %0.1f seconds.  The http status code was %i.",
-        format(  nrow(ds), big.mark = ",", scientific = F, trim = TRUE),
-        format(length(ds), big.mark = ",", scientific = F, trim = TRUE),
+        format(  nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE),
+        format(length(ds), big.mark = ",", scientific = FALSE, trim = TRUE),
         kernel$elapsed_seconds,
         kernel$status_code
       )

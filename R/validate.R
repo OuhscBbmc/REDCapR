@@ -121,7 +121,7 @@ validate_field_names <- function(field_names, stop_on_error = FALSE) {
 
 #' @export
 validate_for_write <- function(d) {
-  checkmate::assert_data_frame(d, any.missing = F)
+  checkmate::assert_data_frame(d, any.missing = FALSE)
 
   lst_concerns <- list(
     validate_no_logical(sapply(d, class)),
