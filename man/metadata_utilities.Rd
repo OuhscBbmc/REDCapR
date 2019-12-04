@@ -47,7 +47,7 @@ for the numeric id and one for the text label.
 \examples{
 # The weird ranges are to avoid the pipe character;
 #   PCRE doesn't support character negation.
-pattern_boxes <- "(?<=\\\\A| \\\\| )(?<id>\\\\d{1,}), (?<label>[\\x20-\\x7B\\x7D-\\x7E]{1,})(?= \\\\| |\\\\Z)"
+pattern_boxes <- "(?<=\\\\A| \\\\| )(?<id>\\\\d{1,}), (?<label>[\x20-\x7B\x7D-\x7E]{1,})(?= \\\\| |\\\\Z)"
 
 choices_1 <- paste0(
   "1, American Indian/Alaska Native | ",

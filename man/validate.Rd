@@ -47,6 +47,22 @@ All functions listed in the Usage section above inspect a specific aspect
 of the dataset.  The \code{\link[=validate_for_write]{validate_for_write()}} function executes all these
 individual validation checks.  It allows the client to check everything
 with one call.
+
+Currently it verifies that the dataset
+\itemize{
+\item does not contain
+\href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/logical.html}{logical}
+values (because REDCap typically wants \code{0}/\code{1} values instead of
+\code{FALSE}/\code{TRUE}).
+\item starts with a lowercase letter, and subsequent optional characters are a
+sequence of (a) lowercase letters, (b) digits 0-9, and/or (c) underscores.
+(The exact regex is \verb{^[a-z][0-9a-z_]*$}.)
+}
+
+If you encounter additional types of problems when attempting to write to
+REDCap, please tell us by creating a
+\href{https://github.com/OuhscBbmc/REDCapR/issues}{new issue}, and we'll
+incoporate a new validation check into this function.
 }
 \examples{
 d <- data.frame(

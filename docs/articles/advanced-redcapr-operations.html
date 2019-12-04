@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9004</span>
       </span>
     </div>
 
@@ -108,7 +108,7 @@
     <div class="page-header toc-ignore">
       <h1>Advanced REDCapR Operations</h1>
             
-            <h4 class="date">2019-11-17</h4>
+            <h4 class="date">2019-12-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/advanced-redcapr-operations.Rmd"><code>vignettes/advanced-redcapr-operations.Rmd</code></a></small>
       <div class="hidden name"><code>advanced-redcapr-operations.Rmd</code></div>
@@ -118,7 +118,7 @@
     
     
 <p>This vignette covers the the less-typical uses of <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> to interact with <a href="http://www.project-redcap.org/">REDCap</a> through its API.</p>
-<div id="nextsteps" class="section level2 emphasized">
+<div id="nextsteps" class="section level2">
 <h2 class="hasAnchor">
 <a href="#nextsteps" class="anchor"></a>Next Steps</h2>
 </div>
@@ -126,25 +126,25 @@
 <h2 class="hasAnchor">
 <a href="#set-project-wide-values-" class="anchor"></a>Set project-wide values.</h2>
 <p>There is some information that is specific to a REDCap project, as opposed to an individual operation. This includes the (1) uri of the server, and the (2) token for the user’s project. This is hosted on a machine used in REDCapR’s public test suite, so you can run this example from any computer. Unless tests are running.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(REDCapR) <span class="co">#Load the package into the current R session.</span></a>
-<a class="sourceLine" id="cb1-2" title="2">uri                   &lt;-<span class="st"> "https://bbmc.ouhsc.edu/redcap/api/"</span></a>
-<a class="sourceLine" id="cb1-3" title="3">token_simple          &lt;-<span class="st"> "9A81268476645C4E5F03428B8AC3AA7B"</span></a>
-<a class="sourceLine" id="cb1-4" title="4">token_longitudinal    &lt;-<span class="st"> "0434F0E9CF53ED0587847AB6E51DE762"</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(REDCapR) <span class="co">#Load the package into the current R session.</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>uri                   &lt;-<span class="st"> "https://bbmc.ouhsc.edu/redcap/api/"</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>token_simple          &lt;-<span class="st"> "9A81268476645C4E5F03428B8AC3AA7B"</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>token_longitudinal    &lt;-<span class="st"> "0434F0E9CF53ED0587847AB6E51DE762"</span></span></code></pre></div>
 </div>
 <div id="converting-from-talllong-to-wide" class="section level2">
 <h2 class="hasAnchor">
 <a href="#converting-from-talllong-to-wide" class="anchor"></a>Converting from tall/long to wide</h2>
 <p><em>Disclaimer</em>: Occasionally we’re asked for a longitudinal dataset to be converted from a “long/tall format” (where typically each row is one observation for a participant) to a “wide format” (where each row is on participant). Usually we advise against it. Besides all the database benefits of a long structure, a wide structure restricts your options with the stat routine. No modern longitudinal analysis procedures (<em>e.g.</em>, growth curve models or multilevel/hierarchical models) accept wide. You’re pretty much stuck with repeated measures anova, which is very inflexible for real-world medical-ish analyses. It requires a patient to have a measurement at every time point; otherwise the anova excludes the patient entirely.</p>
 <p>However we like going wide to produce visual tables for publications, and here’s one way to do it in R. First retrieve the dataset from REDCap.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(magrittr);</a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"dplyr"</span>))</a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="kw"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"tidyr"</span>))</a>
-<a class="sourceLine" id="cb2-4" title="4">events_to_retain  &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"dose_1_arm_1"</span>, <span class="st">"visit_1_arm_1"</span>, <span class="st">"dose_2_arm_1"</span>, <span class="st">"visit_2_arm_1"</span>)</a>
-<a class="sourceLine" id="cb2-5" title="5"></a>
-<a class="sourceLine" id="cb2-6" title="6">ds_long &lt;-<span class="st"> </span>REDCapR<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/REDCapR/man/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token_longitudinal)<span class="op">$</span>data</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(magrittr);</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"dplyr"</span>))</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"tidyr"</span>))</span>
+<span id="cb2-4"><a href="#cb2-4"></a>events_to_retain  &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"dose_1_arm_1"</span>, <span class="st">"visit_1_arm_1"</span>, <span class="st">"dose_2_arm_1"</span>, <span class="st">"visit_2_arm_1"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a>ds_long &lt;-<span class="st"> </span>REDCapR<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/REDCapR/man/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token_longitudinal)<span class="op">$</span>data</span></code></pre></div>
 <pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.6 seconds.  The http status code was 200.</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">ds_long <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>ds_long <span class="op">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)</span></code></pre></div>
 <pre><code>#&gt;    study_id        redcap_event_name pmq1 pmq2 pmq3 pmq4
 #&gt; 1       100         enrollment_arm_1   NA   NA   NA   NA
 #&gt; 2       100             dose_1_arm_1    2    2    1    1
@@ -165,38 +165,38 @@
 #&gt; 17      304        final_visit_arm_2   NA   NA   NA   NA
 #&gt; 18      304 deadline_to_return_arm_2   NA   NA   NA   NA</code></pre>
 <p>When widening only one variable (<em>e.g.</em>, <code>pmq1</code>), the code’s pretty simple:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">ds_wide &lt;-</a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="st">  </span>ds_long <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(study_id, redcap_event_name, pmq1) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(redcap_event_name <span class="op">%in%</span><span class="st"> </span>events_to_retain) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span>(<span class="dt">key=</span>redcap_event_name, <span class="dt">value=</span>pmq1)</a>
-<a class="sourceLine" id="cb6-6" title="6">ds_wide</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>ds_wide &lt;-</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span>ds_long <span class="op">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(study_id, redcap_event_name, pmq1) <span class="op">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(redcap_event_name <span class="op">%in%</span><span class="st"> </span>events_to_retain) <span class="op">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span>(<span class="dt">key=</span>redcap_event_name, <span class="dt">value=</span>pmq1)</span>
+<span id="cb6-6"><a href="#cb6-6"></a>ds_wide</span></code></pre></div>
 <pre><code>#&gt;   study_id dose_1_arm_1 dose_2_arm_1 visit_1_arm_1 visit_2_arm_1
 #&gt; 1      100            2            3             1             0
 #&gt; 2      220            0            1             0             3</code></pre>
 <p>When widening more than one variable (<em>e.g.</em>, <code>pmq1</code> - <code>pmq4</code>), it’s usually easiest to go even longer/taller (<em>e.g.</em>, <code>ds_eav</code>) before reversing direction and going wide:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">pattern &lt;-<span class="st"> "^(</span><span class="ch">\\</span><span class="st">w+?)_arm_(</span><span class="ch">\\</span><span class="st">d)$"</span></a>
-<a class="sourceLine" id="cb8-2" title="2"></a>
-<a class="sourceLine" id="cb8-3" title="3">ds_eav &lt;-<span class="st"> </span>ds_long <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-4" title="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(</a>
-<a class="sourceLine" id="cb8-6" title="6">    <span class="dt">event      =</span> <span class="kw"><a href="https://rdrr.io/r/base/grep.html">sub</a></span>(pattern, <span class="st">"</span><span class="ch">\\</span><span class="st">1"</span>, redcap_event_name),</a>
-<a class="sourceLine" id="cb8-7" title="7">    <span class="dt">arm        =</span> <span class="kw"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/grep.html">sub</a></span>(pattern, <span class="st">"</span><span class="ch">\\</span><span class="st">2"</span>, redcap_event_name))</a>
-<a class="sourceLine" id="cb8-8" title="8">  ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-9" title="9"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(study_id, event, arm, pmq1, pmq2, pmq3, pmq4) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-10" title="10"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span>(<span class="dt">key=</span>key, <span class="dt">value=</span>value, pmq1, pmq2, pmq3, pmq4) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-11" title="11"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="op">!</span>(event <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(</a>
-<a class="sourceLine" id="cb8-12" title="12">    <span class="st">"enrollment"</span>, <span class="st">"final_visit"</span>, <span class="st">"deadline_to_return"</span>, <span class="st">"deadline_to_opt_ou"</span>)</a>
-<a class="sourceLine" id="cb8-13" title="13">  )) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-14" title="14"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>( <span class="co"># Simulate correcting for mismatched names across arms:</span></a>
-<a class="sourceLine" id="cb8-15" title="15">    <span class="dt">event =</span> dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span>(event, <span class="st">"first_dose"</span>=<span class="st">"dose_1"</span>, <span class="st">"first_visit"</span>=<span class="st">"visit_1"</span>),</a>
-<a class="sourceLine" id="cb8-16" title="16">    <span class="dt">key =</span> <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(event, <span class="st">"_"</span>, key)</a>
-<a class="sourceLine" id="cb8-17" title="17">  ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-18" title="18"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span>event)</a>
-<a class="sourceLine" id="cb8-19" title="19"></a>
-<a class="sourceLine" id="cb8-20" title="20"><span class="co"># Show the first 10 rows of the EAV table.</span></a>
-<a class="sourceLine" id="cb8-21" title="21">ds_eav <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-22" title="22"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>pattern &lt;-<span class="st"> "^(</span><span class="ch">\\</span><span class="st">w+?)_arm_(</span><span class="ch">\\</span><span class="st">d)$"</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a>ds_eav &lt;-<span class="st"> </span>ds_long <span class="op">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4) <span class="op">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(</span>
+<span id="cb8-6"><a href="#cb8-6"></a>    <span class="dt">event      =</span> <span class="kw"><a href="https://rdrr.io/r/base/grep.html">sub</a></span>(pattern, <span class="st">"</span><span class="ch">\\</span><span class="st">1"</span>, redcap_event_name),</span>
+<span id="cb8-7"><a href="#cb8-7"></a>    <span class="dt">arm        =</span> <span class="kw"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/grep.html">sub</a></span>(pattern, <span class="st">"</span><span class="ch">\\</span><span class="st">2"</span>, redcap_event_name))</span>
+<span id="cb8-8"><a href="#cb8-8"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(study_id, event, arm, pmq1, pmq2, pmq3, pmq4) <span class="op">%&gt;%</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span>(<span class="dt">key=</span>key, <span class="dt">value=</span>value, pmq1, pmq2, pmq3, pmq4) <span class="op">%&gt;%</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="op">!</span>(event <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(</span>
+<span id="cb8-12"><a href="#cb8-12"></a>    <span class="st">"enrollment"</span>, <span class="st">"final_visit"</span>, <span class="st">"deadline_to_return"</span>, <span class="st">"deadline_to_opt_ou"</span>)</span>
+<span id="cb8-13"><a href="#cb8-13"></a>  )) <span class="op">%&gt;%</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>( <span class="co"># Simulate correcting for mismatched names across arms:</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a>    <span class="dt">event =</span> dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span>(event, <span class="st">"first_dose"</span>=<span class="st">"dose_1"</span>, <span class="st">"first_visit"</span>=<span class="st">"visit_1"</span>),</span>
+<span id="cb8-16"><a href="#cb8-16"></a>    <span class="dt">key =</span> <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(event, <span class="st">"_"</span>, key)</span>
+<span id="cb8-17"><a href="#cb8-17"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span>event)</span>
+<span id="cb8-19"><a href="#cb8-19"></a></span>
+<span id="cb8-20"><a href="#cb8-20"></a><span class="co"># Show the first 10 rows of the EAV table.</span></span>
+<span id="cb8-21"><a href="#cb8-21"></a>ds_eav <span class="op">%&gt;%</span></span>
+<span id="cb8-22"><a href="#cb8-22"></a><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>#&gt;    study_id arm          key value
 #&gt; 1       100   1  dose_1_pmq1     2
 #&gt; 2       100   1 visit_1_pmq1     1
@@ -208,11 +208,11 @@
 #&gt; 8       220   1 visit_2_pmq1     3
 #&gt; 9       304   2  dose_1_pmq1     0
 #&gt; 10      304   2 visit_1_pmq1     2</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co"># Spread the EAV to wide.</span></a>
-<a class="sourceLine" id="cb10-2" title="2">ds_wide &lt;-</a>
-<a class="sourceLine" id="cb10-3" title="3"><span class="st">  </span>ds_eav <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb10-4" title="4"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span>(<span class="dt">key=</span>key, <span class="dt">value=</span>value)</a>
-<a class="sourceLine" id="cb10-5" title="5">ds_wide</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Spread the EAV to wide.</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>ds_wide &lt;-</span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="st">  </span>ds_eav <span class="op">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span>(<span class="dt">key=</span>key, <span class="dt">value=</span>value)</span>
+<span id="cb10-5"><a href="#cb10-5"></a>ds_wide</span></code></pre></div>
 <pre><code>#&gt;   study_id arm dose_1_pmq1 dose_1_pmq2 dose_1_pmq3 dose_1_pmq4 dose_2_pmq1
 #&gt; 1      100   1           2           2           1           1           3
 #&gt; 2      220   1           0           1           0           2           1
@@ -231,31 +231,47 @@
 <a href="#ssl-options" class="anchor"></a>SSL Options</h2>
 <p>The official <a href="http://curl.haxx.se">cURL site</a> discusses the process of using SSL to verify the server being connected to.</p>
 <p>Use the SSL cert file that come with the <code>openssl</code> package.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">cert_location &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"cacert.pem"</span>, <span class="dt">package=</span><span class="st">"openssl"</span>)</a>
-<a class="sourceLine" id="cb12-2" title="2"><span class="cf">if</span>( <span class="kw"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span>(cert_location) ) {</a>
-<a class="sourceLine" id="cb12-3" title="3">  config_options         &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">cainfo=</span>cert_location)</a>
-<a class="sourceLine" id="cb12-4" title="4">  ds_different_cert_file &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(</a>
-<a class="sourceLine" id="cb12-5" title="5">    <span class="dt">redcap_uri     =</span> uri,</a>
-<a class="sourceLine" id="cb12-6" title="6">    <span class="dt">token          =</span> token_simple,</a>
-<a class="sourceLine" id="cb12-7" title="7">    <span class="dt">config_options =</span> config_options</a>
-<a class="sourceLine" id="cb12-8" title="8">  )<span class="op">$</span>data</a>
-<a class="sourceLine" id="cb12-9" title="9">}</a></code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>cert_location &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"cacert.pem"</span>, <span class="dt">package=</span><span class="st">"openssl"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="cf">if</span>( <span class="kw"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span>(cert_location) ) {</span>
+<span id="cb12-3"><a href="#cb12-3"></a>  config_options         &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">cainfo=</span>cert_location)</span>
+<span id="cb12-4"><a href="#cb12-4"></a>  ds_different_cert_file &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(</span>
+<span id="cb12-5"><a href="#cb12-5"></a>    <span class="dt">redcap_uri     =</span> uri,</span>
+<span id="cb12-6"><a href="#cb12-6"></a>    <span class="dt">token          =</span> token_simple,</span>
+<span id="cb12-7"><a href="#cb12-7"></a>    <span class="dt">config_options =</span> config_options</span>
+<span id="cb12-8"><a href="#cb12-8"></a>  )<span class="op">$</span>data</span>
+<span id="cb12-9"><a href="#cb12-9"></a>}</span></code></pre></div>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
 <p>Force the connection to use SSL=3 (which is not preferred, and possibly insecure).</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">config_options &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">sslversion=</span><span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb14-2" title="2">ds_ssl_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(</a>
-<a class="sourceLine" id="cb14-3" title="3">  <span class="dt">redcap_uri     =</span> uri,</a>
-<a class="sourceLine" id="cb14-4" title="4">  <span class="dt">token          =</span> token_simple,</a>
-<a class="sourceLine" id="cb14-5" title="5">  <span class="dt">config_options =</span> config_options</a>
-<a class="sourceLine" id="cb14-6" title="6">)<span class="op">$</span>data</a></code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">config_options &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb16-2" title="2">ds_no_ssl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(</a>
-<a class="sourceLine" id="cb16-3" title="3">   <span class="dt">redcap_uri     =</span> uri,</a>
-<a class="sourceLine" id="cb16-4" title="4">   <span class="dt">token          =</span> token_simple,</a>
-<a class="sourceLine" id="cb16-5" title="5">   <span class="dt">config_options =</span> config_options</a>
-<a class="sourceLine" id="cb16-6" title="6">)<span class="op">$</span>data</a></code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>config_options &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">sslversion=</span><span class="dv">3</span>)</span>
+<span id="cb14-2"><a href="#cb14-2"></a>ds_ssl_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(</span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="dt">redcap_uri     =</span> uri,</span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="dt">token          =</span> token_simple,</span>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="dt">config_options =</span> config_options</span>
+<span id="cb14-6"><a href="#cb14-6"></a>)<span class="op">$</span>data</span></code></pre></div>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>config_options &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)</span>
+<span id="cb16-2"><a href="#cb16-2"></a>ds_no_ssl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(</span>
+<span id="cb16-3"><a href="#cb16-3"></a>   <span class="dt">redcap_uri     =</span> uri,</span>
+<span id="cb16-4"><a href="#cb16-4"></a>   <span class="dt">token          =</span> token_simple,</span>
+<span id="cb16-5"><a href="#cb16-5"></a>   <span class="dt">config_options =</span> config_options</span>
+<span id="cb16-6"><a href="#cb16-6"></a>)<span class="op">$</span>data</span></code></pre></div>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+</div>
+<div id="convert-spss-output-to-redcap-data-dictionary" class="section level2">
+<h2 class="hasAnchor">
+<a href="#convert-spss-output-to-redcap-data-dictionary" class="anchor"></a>Convert SPSS Output to REDCap data dictionary</h2>
+<p>The solution <a href="https://stackoverflow.com/a/51013678/1082435" class="uri">https://stackoverflow.com/a/51013678/1082435</a> converts levels specified in SPSS output like</p>
+<pre><code>SEX       0 Male
+          1 Female
+
+LANGUAGE  1 English
+          2 Spanish
+          3 Other
+          6 Unknown</code></pre>
+<p>to a dropdown choices in a REDCap data dictionary like</p>
+<pre class="csv"><code>Variable Values                                     
+SEX      0, Male | 1, Female                            
+LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 </div>
 <div id="session-information" class="section level2">
 <h2 class="hasAnchor">
@@ -268,25 +284,25 @@
 #&gt;  os       Ubuntu 19.10                
 #&gt;  system   x86_64, linux-gnu           
 #&gt;  ui       X11                         
-#&gt;  language en_US                       
+#&gt;  language (EN)                        
 #&gt;  collate  en_US.UTF-8                 
 #&gt;  ctype    en_US.UTF-8                 
 #&gt;  tz       America/Chicago             
-#&gt;  date     2019-11-17                  
+#&gt;  date     2019-12-04                  
 #&gt; 
 #&gt; ─ Packages ───────────────────────────────────────────────────────────────────
 #&gt;  package     * version     date       lib source        
 #&gt;  assertthat    0.2.1       2019-03-21 [2] CRAN (R 3.6.1)
 #&gt;  backports     1.1.5       2019-10-02 [2] CRAN (R 3.6.1)
 #&gt;  callr         3.3.2       2019-09-22 [2] CRAN (R 3.6.1)
-#&gt;  checkmate     1.9.4       2019-07-04 [2] CRAN (R 3.6.1)
+#&gt;  checkmate     2.0.0       2019-12-03 [2] local         
 #&gt;  cli           1.1.0       2019-03-19 [2] CRAN (R 3.6.1)
 #&gt;  colorspace    1.4-1       2019-03-18 [2] CRAN (R 3.6.1)
 #&gt;  crayon        1.3.4       2017-09-16 [2] CRAN (R 3.6.1)
-#&gt;  curl          4.2         2019-09-24 [2] CRAN (R 3.6.1)
+#&gt;  curl          4.3         2019-12-02 [2] CRAN (R 3.6.1)
 #&gt;  desc          1.2.0       2018-05-01 [2] CRAN (R 3.6.1)
 #&gt;  devtools      2.2.1       2019-09-24 [2] CRAN (R 3.6.1)
-#&gt;  digest        0.6.22      2019-10-21 [2] CRAN (R 3.6.1)
+#&gt;  digest        0.6.23      2019-11-23 [2] CRAN (R 3.6.1)
 #&gt;  dplyr         0.8.3       2019-07-04 [2] CRAN (R 3.6.1)
 #&gt;  ellipsis      0.3.0       2019-09-20 [2] CRAN (R 3.6.1)
 #&gt;  evaluate      0.14        2019-05-28 [2] CRAN (R 3.6.1)
@@ -314,37 +330,37 @@
 #&gt;  R6            2.4.1       2019-11-12 [2] CRAN (R 3.6.1)
 #&gt;  Rcpp          1.0.3       2019-11-08 [2] CRAN (R 3.6.1)
 #&gt;  readr         1.3.1       2018-12-21 [2] CRAN (R 3.6.1)
-#&gt;  REDCapR     * 0.10.2.9003 2019-11-18 [1] local         
+#&gt;  REDCapR     * 0.10.2.9004 2019-12-04 [1] local         
 #&gt;  remotes       2.1.0       2019-06-24 [2] CRAN (R 3.6.1)
-#&gt;  rlang         0.4.1       2019-10-24 [2] CRAN (R 3.6.1)
-#&gt;  rmarkdown     1.17        2019-11-13 [2] CRAN (R 3.6.1)
+#&gt;  rlang         0.4.2       2019-11-23 [2] CRAN (R 3.6.1)
+#&gt;  rmarkdown     1.18        2019-11-27 [2] CRAN (R 3.6.1)
 #&gt;  rprojroot     1.3-2       2018-01-03 [2] CRAN (R 3.6.1)
 #&gt;  rstudioapi    0.10        2019-03-19 [2] CRAN (R 3.6.1)
 #&gt;  rvest         0.3.5       2019-11-08 [2] CRAN (R 3.6.1)
-#&gt;  scales        1.0.0       2018-08-09 [2] CRAN (R 3.6.1)
+#&gt;  scales        1.1.0       2019-11-18 [2] CRAN (R 3.6.1)
 #&gt;  sessioninfo   1.1.1       2018-11-05 [2] CRAN (R 3.6.1)
 #&gt;  stringi       1.4.3       2019-03-12 [2] CRAN (R 3.6.1)
 #&gt;  stringr       1.4.0       2019-02-10 [2] CRAN (R 3.6.1)
-#&gt;  testthat      2.3.0       2019-11-05 [2] CRAN (R 3.6.1)
+#&gt;  testthat      2.3.1       2019-12-01 [2] CRAN (R 3.6.1)
 #&gt;  tibble        2.1.3       2019-06-06 [2] CRAN (R 3.6.1)
 #&gt;  tidyr         1.0.0       2019-09-11 [2] CRAN (R 3.6.1)
 #&gt;  tidyselect    0.2.5       2018-10-11 [2] CRAN (R 3.6.1)
 #&gt;  usethis       1.5.1       2019-07-04 [2] CRAN (R 3.6.1)
 #&gt;  vctrs         0.2.0       2019-07-05 [2] CRAN (R 3.6.1)
 #&gt;  viridisLite   0.3.0       2018-02-01 [2] CRAN (R 3.6.1)
-#&gt;  webshot       0.5.1       2018-09-28 [2] CRAN (R 3.6.1)
+#&gt;  webshot       0.5.2       2019-11-22 [2] CRAN (R 3.6.1)
 #&gt;  withr         2.1.2       2018-03-15 [2] CRAN (R 3.6.1)
 #&gt;  xfun          0.11        2019-11-12 [2] CRAN (R 3.6.1)
 #&gt;  xml2          1.2.2       2019-08-09 [2] CRAN (R 3.6.1)
 #&gt;  yaml          2.2.0       2018-07-25 [2] CRAN (R 3.6.1)
 #&gt;  zeallot       0.1.0       2018-01-28 [2] CRAN (R 3.6.1)
 #&gt; 
-#&gt; [1] /tmp/Rtmp6rD7eg/temp_libpath19fd5bcd9d18
+#&gt; [1] /tmp/Rtmp3488GV/temp_libpath7aa05b77bef
 #&gt; [2] /home/wibeasley/R/x86_64-pc-linux-gnu-library/3.6
 #&gt; [3] /usr/local/lib/R/site-library
 #&gt; [4] /usr/lib/R/site-library
 #&gt; [5] /usr/lib/R/library</code></pre>
-</details><p>Report rendered by wibeasley at 2019-11-17, 18:15 -0600 in 4 seconds.</p>
+</details><p>Report rendered by wibeasley at 2019-12-04, 00:32 -0600 in 5 seconds.</p>
 </div>
   </div>
 
@@ -358,6 +374,7 @@
       <li><a href="#set-project-wide-values-">Set project-wide values.</a></li>
       <li><a href="#converting-from-talllong-to-wide">Converting from tall/long to wide</a></li>
       <li><a href="#ssl-options">SSL Options</a></li>
+      <li><a href="#convert-spss-output-to-redcap-data-dictionary">Convert SPSS Output to REDCap data dictionary</a></li>
       <li><a href="#session-information">Session Information</a></li>
       </ul>
 </div>

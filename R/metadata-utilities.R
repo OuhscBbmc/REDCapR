@@ -72,9 +72,9 @@
 #' @export
 regex_named_captures <- function(pattern, text, perl=TRUE) {
 
-  checkmate::assert_character(pattern, any.missing=F, min.chars=0L, len=1)
-  checkmate::assert_character(text   , any.missing=F, min.chars=0L, len=1)
-  checkmate::assert_logical(  perl   , any.missing=F)
+  checkmate::assert_character(pattern, any.missing=FALSE, min.chars=0L, len=1)
+  checkmate::assert_character(text   , any.missing=FALSE, min.chars=0L, len=1)
+  checkmate::assert_logical(  perl   , any.missing=FALSE)
 
   match <- gregexpr(pattern, text, perl = perl)[[1]]
   capture_names <- attr(match, "capture.names")
@@ -101,7 +101,7 @@ regex_named_captures <- function(pattern, text, perl=TRUE) {
 #' @rdname metadata_utilities
 #' @export
 checkbox_choices <- function(select_choices) {
-  checkmate::assert_character(select_choices, any.missing=F, len=1, min.chars=1)
+  checkmate::assert_character(select_choices, any.missing=FALSE, len=1, min.chars=1)
 
   # The weird ranges are to avoid the pipe character;
   #   PCRE doesn't support character negation.

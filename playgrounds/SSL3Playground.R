@@ -26,7 +26,7 @@ RCurl_raw <- RCurl::postForm(
 #     , type = 'flat'
 #     , rawOrLabel = 'raw'
 #     , exportDataAccessGroups = 'true'
-    , .opts = RCurl::curlOptions(ssl.verifypeer=F, verbose=TRUE)
+    , .opts = RCurl::curlOptions(ssl.verifypeer=F)
 )
 
 RCurl_raw
@@ -65,4 +65,4 @@ redcap_API_data <- exportRecords(rcon)
 redcap_API_data
 
 library(REDCapR)
-REDCapR_data <- redcap_read_oneshot(redcap_uri=redcap_uri, token=token, sslversion=NULL, verbose=TRUE)
+REDCapR_data <- redcap_read_oneshot(redcap_uri=redcap_uri, token=token, sslversion=NULL)

@@ -153,6 +153,28 @@ ds_no_ssl <- redcap_read_oneshot(
 )$data
 ```
 
+## Convert SPSS Output to REDCap data dictionary
+
+The solution https://stackoverflow.com/a/51013678/1082435 converts levels specified in SPSS output like 
+
+```
+SEX       0 Male
+          1 Female
+
+LANGUAGE  1 English
+          2 Spanish
+          3 Other
+          6 Unknown
+```
+
+to a dropdown choices in a REDCap data dictionary like
+
+```csv
+Variable Values                                     
+SEX      0, Male | 1, Female                            
+LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown
+```
+
 
 ## Session Information
 For the sake of documentation and reproducibility, the current report was rendered in the following environment.  Click the line below to expand.

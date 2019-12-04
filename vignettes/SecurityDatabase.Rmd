@@ -311,12 +311,12 @@ rm(ldap_prefix)
 
 # Assert that the dataset is well-behaved.
 # OuhscMunge::verify_value_headstart(ds)
-checkmate::assert_integer(  ds$id         , any.missing=F, lower=1, upper=.Machine$integer.max, unique=T)
-checkmate::assert_character(ds$username   , any.missing=F, pattern="^.{1,255}$"                         )
-checkmate::assert_integer(  ds$project_id , any.missing=F, lower=1, upper=.Machine$integer.max          )
-checkmate::assert_character(ds$token      , any.missing=F, pattern="^[A-Z0-9]{32}$"           , unique=T)
-checkmate::assert_character(ds$instance   , any.missing=F, pattern="^.{1,255}$"                         )
-checkmate::assert_character(ds$redcap_uri , any.missing=F, pattern="^.{1,255}$"                         )
+checkmate::assert_integer(  ds$id         , any.missing=FALSE, lower=1, upper=.Machine$integer.max, unique=TRUE)
+checkmate::assert_character(ds$username   , any.missing=FALSE, pattern="^.{1,255}$"                         )
+checkmate::assert_integer(  ds$project_id , any.missing=FALSE, lower=1, upper=.Machine$integer.max          )
+checkmate::assert_character(ds$token      , any.missing=FALSE, pattern="^[A-Z0-9]{32}$"           , unique=TRUE)
+checkmate::assert_character(ds$instance   , any.missing=FALSE, pattern="^.{1,255}$"                         )
+checkmate::assert_character(ds$redcap_uri , any.missing=FALSE, pattern="^.{1,255}$"                         )
 
 testit::assert(
   "The `username` x `project_id` x `instance` must be unique.",

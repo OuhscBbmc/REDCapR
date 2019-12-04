@@ -40,6 +40,20 @@
 #' individual validation checks.  It allows the client to check everything
 #' with one call.
 #'
+#' Currently it verifies that the dataset
+#' * does not contain
+#' [logical](https://stat.ethz.ch/R-manual/R-devel/library/base/html/logical.html)
+#' values (because REDCap typically wants `0`/`1` values instead of
+#' `FALSE`/`TRUE`).
+#' * starts with a lowercase letter, and subsequent optional characters are a
+#' sequence of (a) lowercase letters, (b) digits 0-9, and/or (c) underscores.
+#' (The exact regex is `^[a-z][0-9a-z_]*$`.)
+#'
+#' If you encounter additional types of problems when attempting to write to
+#' REDCap, please tell us by creating a
+#' [new issue](https://github.com/OuhscBbmc/REDCapR/issues), and we'll
+#' incoporate a new validation check into this function.
+#'
 #' @author Will Beasley
 #'
 #' @references The official documentation can be found on the 'API Help Page'
@@ -59,8 +73,8 @@
 
 #' @export
 validate_no_logical <- function(data_types, stop_on_error = FALSE) {
-  checkmate::assert_character(data_types, any.missing=F, min.len=1, min.chars=2)
-  checkmate::assert_logical(stop_on_error, any.missing=F, len=1)
+  checkmate::assert_character(data_types, any.missing=FALSE, min.len=1, min.chars=2)
+  checkmate::assert_logical(stop_on_error, any.missing=FALSE, len=1)
 
   indices <- which(data_types == "logical")
 
@@ -90,10 +104,10 @@ validate_no_logical <- function(data_types, stop_on_error = FALSE) {
 
 #' @export
 validate_field_names <- function(field_names, stop_on_error = FALSE) {
-  checkmate::assert_character(field_names, any.missing=F, null.ok=T, min.len=1, min.chars=2)
-  checkmate::assert_logical(stop_on_error, any.missing=F, len=1)
+  checkmate::assert_character(field_names, any.missing=FALSE, null.ok=TRUE, min.len=1, min.chars=2)
+  checkmate::assert_logical(stop_on_error, any.missing=FALSE, len=1)
 
-  pattern <- "^[0-9a-z_]+$"
+  pattern <- "^[a-z][0-9a-z_]*$"
 
   indices <- which(!grepl(pattern, x = field_names, perl = TRUE))
   if (length(indices) == 0) {
@@ -121,10 +135,10 @@ validate_field_names <- function(field_names, stop_on_error = FALSE) {
 
 #' @export
 validate_for_write <- function(d) {
-  checkmate::assert_data_frame(d, any.missing = F)
+  checkmate::assert_data_frame(d, any.missing = FALSE)
 
   lst_concerns <- list(
-    validate_no_logical(sapply(d, class)),
+    validate_no_logical(vapply(d, class, character(1))),
     validate_field_names(colnames(d))
   )
 

@@ -89,7 +89,7 @@ replace_nas_with_explicit <- function(
 
 ## We're intentionally not exporting this function.
 collapse_vector <- function(elements, collapsed) {
-  checkmate::assert_character(collapsed, len=1, any.missing=T, null.ok=T)
+  checkmate::assert_character(collapsed, len=1, any.missing=TRUE, null.ok=TRUE)
 
   if ((is.null(collapsed) | length(collapsed) == 0L) | all(nchar(collapsed) == 0L)) {
 

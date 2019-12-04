@@ -90,7 +90,7 @@ datasets that could tie up the server." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9004</span>
       </span>
     </div>
 
@@ -308,13 +308,13 @@ where the logic evaluates as TRUE.   An blank/empty string returns all records.<
     </tr>
     <tr>
       <th>col_types</th>
-      <td><p>A <code><a href='https://rdrr.io/pkg/readr/man/cols.html'>readr::cols()</a></code> object passed internally to
-<code><a href='https://rdrr.io/pkg/readr/man/read_delim.html'>readr::read_csv()</a></code>.  Optional.</p></td>
+      <td><p>A <code><a href='https://readr.tidyverse.org/reference/cols.html'>readr::cols()</a></code> object passed internally to
+<code><a href='https://readr.tidyverse.org/reference/read_delim.html'>readr::read_csv()</a></code>.  Optional.</p></td>
     </tr>
     <tr>
       <th>guess_type</th>
       <td><p>A boolean value indicating if all columns should be
-returned as character.  If true, <code><a href='https://rdrr.io/pkg/readr/man/read_delim.html'>readr::read_csv()</a></code> guesses the intended
+returned as character.  If true, <code><a href='https://readr.tidyverse.org/reference/read_delim.html'>readr::read_csv()</a></code> guesses the intended
 data type for each column.</p></td>
     </tr>
     <tr>
@@ -397,14 +397,14 @@ administrator to send you the static material.</p>
 <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/redcap_read.html'>redcap_read</a></span>(<span class='kw'>batch_size</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>redcap_uri</span><span class='kw'>=</span><span class='no'>uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>)$<span class='no'>data</span>
 
 <span class='co'># Specify the column types.</span>
-<span class='no'>col_types</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/readr/man/cols.html'>cols</a></span>(
-  <span class='kw'>record_id</span>  <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/readr/man/parse_atomic.html'>col_integer</a></span>(),
-  <span class='kw'>race___1</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/readr/man/parse_atomic.html'>col_logical</a></span>(),
-  <span class='kw'>race___2</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/readr/man/parse_atomic.html'>col_logical</a></span>(),
-  <span class='kw'>race___3</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/readr/man/parse_atomic.html'>col_logical</a></span>(),
-  <span class='kw'>race___4</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/readr/man/parse_atomic.html'>col_logical</a></span>(),
-  <span class='kw'>race___5</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/readr/man/parse_atomic.html'>col_logical</a></span>(),
-  <span class='kw'>race___6</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/readr/man/parse_atomic.html'>col_logical</a></span>()
+<span class='no'>col_types</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/cols.html'>cols</a></span>(
+  <span class='kw'>record_id</span>  <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_integer</a></span>(),
+  <span class='kw'>race___1</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>(),
+  <span class='kw'>race___2</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>(),
+  <span class='kw'>race___3</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>(),
+  <span class='kw'>race___4</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>(),
+  <span class='kw'>race___5</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>(),
+  <span class='kw'>race___6</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>()
 )
 <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/redcap_read.html'>redcap_read</a></span>(
   <span class='kw'>redcap_uri</span> <span class='kw'>=</span> <span class='no'>uri</span>,

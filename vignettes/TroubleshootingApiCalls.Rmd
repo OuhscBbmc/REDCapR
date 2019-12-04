@@ -63,8 +63,11 @@ knitr::include_graphics("images/PostmanScreenshot.png")
 
 <!--<img src="./images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>-->
 
-1. **Is Postman installed and operating correctly?**
- If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/).  The url is `https://bbmc.ouhsc.edu/redcap/api/`.  There are three key-value pairs: (1) the 'token' is `9A81268476645C4E5F03428B8AC3AA7B`, (2) the 'content' is `record`, and (3) the 'format' should be `CSV`.  When checking your own server, the token value should change, but the content and format should not.  It should return five records in a CSV format.  The 'status' should be `200 OK`.  The result should look roughly like this.  Notice the line breaks were included in the text values themselves.
+1. **Is the API Playground producing the expected result?**  REDCap's "API Playground" holds your hand by (a) offering a dropdown list of API methods available to your REDCap instance, and (b) presenting a series of dropdown boxes appropriate for the selected method. Find it through the API link visible in the left margin of REDCap.  When you've completed the inputs, click 'Execute' to view the plain-text returned by the server.
+
+    At the bottom of the playground page, the interface attempts to translate your speciifc API call to different languages, like Python and R.  These suggestions are usually correct, but  inspect it critically, as you would for any auto-generated script.
+
+1. **Is Postman installed and operating correctly?**  If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/).  The url is `https://bbmc.ouhsc.edu/redcap/api/`.  There are three key-value pairs: (1) the 'token' is `9A81268476645C4E5F03428B8AC3AA7B`, (2) the 'content' is `record`, and (3) the 'format' should be `CSV`.  When checking your own server, the token value should change, but the content and format should not.  It should return five records in a CSV format.  The 'status' should be `200 OK`.  The result should look roughly like this.  Notice the line breaks were included in the text values themselves.
 
     ```
     record_id,name_first,name_last,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete
@@ -203,14 +206,14 @@ There are several ways to call REDCap's API from [R](https://cran.r-project.org/
 Exporting from REDCap to R, using REDCapR
 ------------------------------------------------------------------
 
-[REDCapR](https://github.com/OuhscBbmc/REDCapR) is a package that uses [cURL](http://curl.haxx.se/) (via [httr](https://github.com/hadley/httr)) to communicate with REDCap, and wraps convenience functions around it to reduce the size and complexity of the user's code.  The package's basic functions are [demonstrated in a vignette](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) and are documented in its [reference manual](https://ouhscbbmc.github.io/REDCapR/) (a downloadable [pdf](https://github.com/OuhscBbmc/REDCapR/blob/master/documentation-peek.pdf) of the functions are also available).
+[REDCapR](https://ouhscbbmc.github.io/REDCapR/) is a package that uses [cURL](http://curl.haxx.se/) (via [httr](https://httr.r-lib.org/)) to communicate with REDCap, and wraps convenience functions around it to reduce the size and complexity of the user's code.  The package's basic functions are [demonstrated in a vignette](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) and are documented in its [reference manual](https://ouhscbbmc.github.io/REDCapR/reference).
 
 If you're not using REDCapR, you can skip this section and proceed to 'Importing into REDCap from R' below.
 
-1. **Is REDCapR installed on the user's machine?** Currently the easiest way to install REDCapR is with the [devtools](https://github.com/hadley/devtools).  The follow code installs devtools, then installs REDCapR.
+1. **Is the latest version of REDCapR installed on the user's machine?** Currently the easiest way to install REDCapR is with the [remotes](https://remotes.r-lib.org/) package.  The following code installs remotes, then installs REDCapR.  The CRAN version of REDCapR is updated only a few times a year, while the code below will download the latest stable version.
 
     ```r
-    install.packages("devtools", repos="http://cran.rstudio.com")
+    install.packages("remotes", repos="https://cran.rstudio.com")
     remotes::install_github(repo="OuhscBbmc/REDCapR")
     ```
 
@@ -267,6 +270,17 @@ If you're not using REDCapR, you can skip this section and proceed to 'Importing
     5                     2
     ```
 
+1. **Can the user export their data diciontary?** Sometimes the problem exists within the metadata/dictionary, instead of the actual data values.  Verify the structure and content of this specific project is interpretable by your local environment.
+
+    ```r
+    library(REDCapR) #Load the package into the current R session, if you haven't already.
+    redcap_uri       <- "https://the.urlofyourinsitution.edu/api/"
+    token            <- "your-secret-token"
+    redcap_metadata_read(redcap_uri=uri, token=token)
+    ```
+
+   If this fails, see "Problems in the project's metadata/dictionary." under [Gotchas](#gotchas-agnostic) below.
+    
 1. **Can the user export from their own project?** The code is similar to the previous check, but the `uri` and `token` values will need to be modified.
 
     ```r
@@ -293,13 +307,12 @@ If you're not using REDCapR, you can skip this section and proceed to 'Importing
     ds_minors         <- project$read(records=ids_of_minors)$data
     ```
 
-1. **Is the export operation still unsuccessful using REDCapR?**
- If so the "Can the user query a *entire* REDCap project using RCurl?" check succeeded, but the REDCapR checks did not, consider posting a new [GitHub issue](https://github.com/OuhscBbmc/REDCapR/issues) to the package developers.
+1. **Is the export operation still unsuccessful using REDCapR?**  If so the "Can the user query a *entire* REDCap project using RCurl?" check succeeded, but the REDCapR checks did not, consider posting a new [GitHub issue](https://github.com/OuhscBbmc/REDCapR/issues) to the package developers.
 
 Exporting from REDCap to R, using redcapAPI
 ------------------------------------------------------------------
 
-[redcapAPI](https://github.com/nutterb/redcapAPI) is a package that uses [cURL](http://curl.haxx.se/) (via [httr](https://github.com/hadley/httr)) to communicate with REDCap, and wraps convenience functions around it to reduce the size and complexity of the user's code.
+[redcapAPI](https://github.com/nutterb/redcapAPI) is a package that uses [cURL](http://curl.haxx.se/) (via [httr](https://httr.r-lib.org/)) to communicate with REDCap, and wraps convenience functions around it to reduce the size and complexity of the user's code.
 
 If you're not using redcapAPI, you can skip this section and proceed to 'Importing into REDCap from R' below.  More specific discussion about `redcapAPI` can be found at the [package's wiki](https://github.com/nutterb/redcapAPI/wiki).
 
@@ -312,7 +325,7 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
     Developmental versions may be available on GitHub.
 
     ```r
-    install.packages("devtools", repos="http://cran.rstudio.com")
+    install.packages("remotes", repos="http://cran.rstudio.com")
     remotes::install_github(repo="nutterb/redcapAPI")
     ```
 
@@ -365,7 +378,17 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
     4                     2
     5                     2
     ```
+1. **Can the user export their data diciontary?** Sometimes the problem exists within the metadata/dictionary, instead of the actual data values.  Verify the structure and content of this specific project is interpretable by your local environment.
 
+    ```r
+    library(redcapAPI) #Load the package into the current R session, if you haven't already.
+    redcap_uri       <- "https://the.urlofyourinsitution.edu/api/"
+    token            <- "your-secret-token"
+    exportMetaData(rcon)
+    ```
+
+   If this fails, see "Problems in the project's metadata/dictionary." under [Gotchas](#gotchas-agnostic) below.
+    
 1. **Can the user export from their own project?** The code is similar to the previous check, but the `uri` and `token` values will need to be modified.
 
     ``` r
@@ -387,25 +410,43 @@ Troubleshooting import operations is trickier than export operations for two maj
 
  The second reason why importing can be trickier is because the schema (*e.g.*, the names and data types) of your local dataset must match the project's schema.  This section will be expanded in the future.  Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project's schema and dataset.  Also, consider exporting the dataset to your machine, and look for differences.  Note that you cannot import calculated fields into REDCap.
 
+1. **Does the dataset pass [`REDCapR::validate_for_write()`](https://ouhscbbmc.github.io/REDCapR/reference/validate.html)?**  The `REDCapR::validate_for_write()` inspects a data.frame to anticipate problems before writing with REDCap's API.  The reference manual contains specifics of the validation checks.
+
 1. **Can the user import the *entire* project?**
 
 1. **Can the user import a *subset* of the project?**
+
+
+Common Language-Agnostic Gotchas  {#gotchas-agnostic}
+------------------------------------------------------------------
+
+1. **Problems in the project's metadata/dictionary.**  If exporting the metadata fails (*e.g.*, [`REDCapR::redcap_metadata_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_read.html) and [`redcapAPI::exportMetaData()`](https://rdrr.io/github/nutterb/redcapAPI/man/exportMetaData.html)), manually download the data dictionary from the REDCap browser.  Inspect the plain text closely in a text editor like [Atom](https://atom.io/) or [Visual Studio Code](https://code.visualstudio.com/); avoid programs like Excel because they tend to interpet, align, and decorate the values, which sometimes masks problems.  Scrutinize all elements, but especially look for nonstandard characters.  *See the next bullet.*
+
+    Some API libraries test that problematic elements of a project are handled correctly.  If you encounter an element that causes problems, please consider 
+
+    1. creating a new GitHub Issue that describes the problem (*e.g.*, [REDCapR](https://github.com/OuhscBbmc/REDCapR/issues), [redcapAPI](https://github.com/nutterb/redcapAPI/issues), [phpcap](https://github.com/iuredcap/phpcap/issues)).
+        
+    1. in the issue, attach the problematic fields of your data dictionary.  If you're uncomfortable sharing your dictionary with the world, consider emailing it to developer.  Because it's just the data dictionary, no PHI should be included.
+
+    If the package developer can't find a way to gracefully adapt, they'll at least try to provide a better error message.
+
+    
+1. **Identify problematic characters.** This is a special case of the previous bulletLook for fancy characters that might not be interpreted smoothly.  For instance, when editing the data dictionary in Excel, sometimes *straight* quotes are converted to *curly* quotes.  This might cause a problem later, when your API client tries to interpet the character using the wrong encoding. All ASCII characters appear to be interpreted smoothly
+
+
+General Troubleshooting Advice
+------------------------------------------------------------------
+
+1. **Simplify.**  Elminate potential sources of problems by cumulatively.  For example, reduce the columns & records that you read/write.  
+
+1. **Start fresh.**  If that's not feasible, start a new project and gradually add elements from the original project.  Identify the problematic element by testing the API call after each addition.
+
 
 Other software for communication and automation with REDCap
 ------------------------------------------------------------------
 
 REDCap is used in many environments, and it's not surprising that a lot of libraries have been developed that cater to different scenarios and languages.  An active list is maintained at [REDCap-Tools](http://redcap-tools.github.io/projects/).  In an entry needs to be added, please notify us; instructions are found at the bottom of the page.
 
-<!--
-**Actively developed in the past two years**
-
-1. [`PyCap`](https://github.com/redcap-tools/PyCap): "PyCap is an interface to the REDCap Application Programming Interface (API). PyCap is designed to be a minimal interface exposing all required and optional API parameters." (Written in Python primarily by Scott Burns, formerly with Vanderbilt, now at [Stratasan](http://www.stratasan.com/).)
-1. [`redcap`](https://github.com/jeffreyhorner/redcap): "R interface to REDCap." (Written in R primarily by Jeffrey Horner.  The last commit was Feb 2013)
-1. [`redcapAPI`](https://github.com/nutterb/redcapAPI): This is the most actively-developed fork of the library above. (Written in R primarily by Benjamin Nutter at the Cleveland Clinic Foundation.)
-1. [`REDCapR`](https://github.com/OuhscBbmc/REDCapR): "R Utilities for interacting with a REDCap data system." (Written in R primarily by Will Beasley, and the [OUHSC BBMC](http://ouhsc.edu/bbmc/).)
-1. [`redcap-repeat`](https://github.com/cbmi/redcap-repeat): "Script for REDCap data dictionaries to support repeating fields and groups of fields." (Written in Python primarily by Jeff Max at CHOP's [CBMI](https://github.com/cbmi)).
-1. [`django-redcap`](https://github.com/cbmi/django-redcap): "Utilities for porting REDCap projects to and from Django models." (Written in Python primarily by 'dmegahan at CHOP's [CBMI](https://github.com/cbmi)).
--->
 
 Other good resources
 ------------------------------------------------------------------
@@ -424,4 +465,4 @@ Other good resources
 Document Info
 ------------------------------------------------------------------
 
-This document is primarily based on REDCap version 6.0.2 and was last updated 2019-10-13.  A development version of the document is available on GitHub: https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html.
+This document is primarily based on REDCap version 6.0.2 and was last updated 2019-12-03.  A development version of the document is available on GitHub: https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html.

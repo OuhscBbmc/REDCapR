@@ -79,8 +79,8 @@ redcap_metadata_read <- function(
   config_options    = NULL
 ) {
 
-  checkmate::assert_character(redcap_uri  , any.missing=F, len=1, pattern="^.{1,}$")
-  checkmate::assert_character(token       , any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(redcap_uri  , any.missing=FALSE, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(token       , any.missing=FALSE, len=1, pattern="^.{1,}$")
 
   token               <- sanitize_token(token)
   fields_collapsed    <- collapse_vector(fields   , fields_collapsed)

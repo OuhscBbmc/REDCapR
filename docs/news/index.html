@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9004</span>
       </span>
     </div>
 
@@ -156,18 +156,19 @@
 <h1 class="page-header">
 <a href="#version-011-released-" class="anchor"></a>Version 0.11 (Released ?)<small> Unreleased </small>
 </h1>
-<div id="breaking-changes" class="section level3">
+<div id="breaking-changes-possible-but-unlikely" class="section level3">
 <h3 class="hasAnchor">
-<a href="#breaking-changes" class="anchor"></a>Breaking Changes</h3>
+<a href="#breaking-changes-possible-but-unlikely" class="anchor"></a>Breaking Changes (possible, but unlikely)</h3>
 <ul>
-<li>A possible, but unlikely, breaking change is that <code><a href="../reference/kernel_api.html">kernel_api()</a></code> defaults to “text/csv” and UTF-8 encoding. Formerly, the function would decide on the content-type and encoding. More details are below in the ‘Stability Features’ subsection.</li>
+<li><p><a href="https://ouhscbbmc.github.io/REDCapR/reference/kernel_api.html"><code><a href="../reference/kernel_api.html">kernel_api()</a></code></a> defaults to “text/csv” and UTF-8 encoding. Formerly, the function would decide on the content-type and encoding. More details are below in the ‘Stability Features’ subsection.</p></li>
+<li><p><a href="https://ouhscbbmc.github.io/REDCapR/reference/constant.html"><code><a href="../reference/constant.html">constant()</a></code></a> no longer accepts <code>simplify</code> as an options. An integer vector is always returned. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/280'>#280</a>)</p></li>
 </ul>
 </div>
 <div id="new-features" class="section level3">
 <h3 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>New Features</h3>
 <ul>
-<li><p>It’s now possible to specify the exact <code>col_types</code> (a <a href="https://readr.tidyverse.org/reference/cols.html"><code><a href="https://rdrr.io/pkg/readr/man/cols.html">readr::cols</a></code></a> object) that is passed to <code><a href="https://rdrr.io/pkg/readr/man/read_delim.html">readr::read_csv()</a></code> inside <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-read-oneshot.R"><code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code></a>. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/258'>#258</a>)</p></li>
+<li><p>It’s now possible to specify the exact <code>col_types</code> (a <a href="https://readr.tidyverse.org/reference/cols.html"><code><a href="https://readr.tidyverse.org/reference/cols.html">readr::cols</a></code></a> object) that is passed to <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> inside <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-read-oneshot.R"><code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code></a>. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/258'>#258</a>)</p></li>
 <li><p><a href="https://readr.tidyverse.org/reference/type_convert.html"><code>reader::type_convert()</code></a> is used <em>after</em> all the batches are stacked on top of each other. This way, batches cannot have incompatible data types as they’re combined. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/257'>#257</a>; thanks <a href='https://github.com/isaactpetersen'>@isaactpetersen</a> <a href='https://github.com/OuhscBbmc/REDCapR/issues/245'>#245</a>) Consequently, the <code>guess_max</code> parameter in <code><a href="../reference/redcap_read.html">redcap_read()</a></code> no longer serves a purpose, and has been soft-deprecated. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/267'>#267</a>)</p></li>
 </ul>
 </div>
@@ -199,9 +200,9 @@
 <li>
 <code><a href="../reference/redcap_next_free_record_name.html">redcap_next_free_record_name()</a></code>: API call for ‘Generate Next Record Name’, which returns the next available record ID (Issue <a href='https://github.com/OuhscBbmc/REDCapR/issues/237'>#237</a>)</li>
 <li>
-<code><a href="../reference/redcap_read.html">redcap_read()</a></code> and <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code> allow the user to specify if all variables should be returned with the <code>character</code> data type. The default is to allow <code><a href="https://rdrr.io/pkg/readr/man/read_delim.html">readr::read_csv()</a></code> to guess the data type. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/194'>#194</a>)</li>
+<code><a href="../reference/redcap_read.html">redcap_read()</a></code> and <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code> allow the user to specify if all variables should be returned with the <code>character</code> data type. The default is to allow <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> to guess the data type. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/194'>#194</a>)</li>
 <li>
-<code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code> allows use to specify how many rows should be considered when <code><a href="https://rdrr.io/pkg/readr/man/read_delim.html">readr::read_csv()</a></code> guesses the data type. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/194'>#194</a>)</li>
+<code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code> allows use to specify how many rows should be considered when <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> guesses the data type. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/194'>#194</a>)</li>
 <li>
 <code><a href="../reference/redcap_read.html">redcap_read()</a></code>, <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code>, and <code><a href="../reference/redcap_read_oneshot_eav.html">redcap_read_oneshot_eav()</a></code> always return Linux-style line endings (ie <code>\n</code>) instead of Windows style line endings (ie, <code>\r\n</code>) on all OSes. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/198'>#198</a>)</li>
 <li>
@@ -230,7 +231,7 @@
 <a href="#modified-internals" class="anchor"></a>Modified Internals</h3>
 <ul>
 <li>All interaction with the REDCap server goes through the new <code>kernal_api()</code> function, which uses the ‘httr’ and ‘curl’ packages underneath. Until now, each function called those packages directly. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/213'>#213</a>)</li>
-<li>When converting REDCap’s CSV to R’s data.frame, <code><a href="https://rdrr.io/pkg/readr/man/read_delim.html">readr::read_csv()</a></code> is used instead of <code><a href="https://rdrr.io/r/utils/read.table.html">utils::read.csv()</a></code> (Issue <a href='https://github.com/OuhscBbmc/REDCapR/issues/127'>#127</a>).</li>
+<li>When converting REDCap’s CSV to R’s data.frame, <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> is used instead of <code><a href="https://rdrr.io/r/utils/read.table.html">utils::read.csv()</a></code> (Issue <a href='https://github.com/OuhscBbmc/REDCapR/issues/127'>#127</a>).</li>
 <li>updated to readr 1.2.0 (<a href='https://github.com/OuhscBbmc/REDCapR/issues/200'>#200</a>). This changed how some data variables were assigned a data types.</li>
 <li>uses <code>odbc</code> package to retrieve credentials from the token server. Remove RODBC and RODBCext (<a href='https://github.com/OuhscBbmc/REDCapR/issues/188'>#188</a>). Thanks to <a href='https://github.com/krlmlr'>@krlmlr</a> for error checking advice in <a href="https://stackoverflow.com/a/50419403/1082435" class="uri">https://stackoverflow.com/a/50419403/1082435</a>.</li>
 <li>
@@ -291,7 +292,7 @@
 <a href="#minor-updates" class="anchor"></a>Minor Updates</h3>
 <ul>
 <li>When combining batches into a single data.frame, <code><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html">data.table::rbindlist()</a></code> is used. This should prevent errors with the first batch’s data type (for a column) isn’t compatible with a later batch. For instance, this occurs when the first batch has only integers for <code>record_id</code>, but a subsequent batch has values like <code>aa-test-aa</code>. The variable for the combined dataset should be a character. (Issue <a href='https://github.com/OuhscBbmc/REDCapR/issues/128'>#128</a> &amp; <a href="http://stackoverflow.com/questions/39377370/bind-rows-of-different-data-types" class="uri">http://stackoverflow.com/questions/39377370/bind-rows-of-different-data-types</a>; Thanks <a href='https://github.com/arunsrinivasan'>@arunsrinivasan</a>)</li>
-<li>Uses the <code>dplyr</code> package instead of <code>plyr</code>. This shouldn’t affect callers, because immediately before returning the data, <code><a href="../reference/redcap_read.html">REDCapR::redcap_read()</a></code> coerces the <code><a href="https://rdrr.io/pkg/tibble/man/tibble.html">tibble::tibble</a></code> (which was formerly called <code><a href="https://dplyr.tidyverse.org/reference/tbl_df.html">dplyr::tbl_df</a></code>) back to a vanilla <code>data.frame</code> with <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code>.</li>
+<li>Uses the <code>dplyr</code> package instead of <code>plyr</code>. This shouldn’t affect callers, because immediately before returning the data, <code><a href="../reference/redcap_read.html">REDCapR::redcap_read()</a></code> coerces the <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble::tibble</a></code> (which was formerly called <code><a href="https://dplyr.tidyverse.org/reference/tbl_df.html">dplyr::tbl_df</a></code>) back to a vanilla <code>data.frame</code> with <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code>.</li>
 <li>A few more instances of validating input parameters to read functions. (Issue <a href='https://github.com/OuhscBbmc/REDCapR/issues/8'>#8</a>).</li>
 </ul>
 </div>
@@ -396,9 +397,9 @@
 <li>Users can specify if an operation should continue after an error occurs on a batch read or write. Regardless of their choice, more debugging output is written to the console if <code>verbose==TRUE</code>. Follows advice of <a href='https://github.com/johnaponte'>@johnaponte</a>, Benjamin Nutter (<a href='https://github.com/nutterb'>@nutterb</a>), and Rollie Parrish (<a href='https://github.com/rparrish'>@rparrish</a>). Closes <a href='https://github.com/OuhscBbmc/REDCapR/issues/43'>#43</a>.</li>
 </ul>
 </div>
-<div id="breaking-changes-1" class="section level3">
+<div id="breaking-changes" class="section level3">
 <h3 class="hasAnchor">
-<a href="#breaking-changes-1" class="anchor"></a>Breaking Changes</h3>
+<a href="#breaking-changes" class="anchor"></a>Breaking Changes</h3>
 <ul>
 <li>The <code>records_collapsed</code> default empty value is now an empty string (<em>i.e.</em>, <code>""</code>) instead of <code>NULL</code>. This applies when <code>records_collapsed</code> is either a parameter, or a returned value.</li>
 </ul>

@@ -22,7 +22,7 @@ test_that("replace_nas_factor_standard", {
                         .Label = c(letters, "Unknown"),
                         class = "factor")
 
-  a <- REDCapR:::replace_nas_with_explicit(a, create_factor=F, add_unknown_level=T)
+  a <- REDCapR:::replace_nas_with_explicit(a, create_factor=FALSE, add_unknown_level=TRUE)
   expect_equal(a, expected, label="The correct letters should have been replaced.")
   expect_equal(class(a), "factor", "The returned array should be a converted factor.")
 })
@@ -36,7 +36,7 @@ test_that("replace_nas_factor_create_not_existing", {
                         .Label = c("a", "b", "d", "e", "g", "i", "j", "k", "l",  "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "z", "Unknown"),
                         class = "factor")
 
-  a <- REDCapR:::replace_nas_with_explicit(a, create_factor=T, add_unknown_level=T)
+  a <- REDCapR:::replace_nas_with_explicit(a, create_factor=TRUE, add_unknown_level=TRUE)
   expect_equal(a, expected, label="The correct letters should have been replaced.")
   expect_equal(class(a), "factor", "The returned array should be a converted factor.")
 })
@@ -50,7 +50,7 @@ test_that("replace_nas_factor_create_already_existing", {
                         .Label = c(letters, "Unknown"),
                         class = "factor")
 
-  a <- REDCapR:::replace_nas_with_explicit(a, create_factor=T, add_unknown_level=T)
+  a <- REDCapR:::replace_nas_with_explicit(a, create_factor=TRUE, add_unknown_level=TRUE)
   expect_equal(a, expected, label="The correct letters should have been replaced.")
   expect_equal(class(a), "factor", "The returned array should be a converted factor.")
 })
@@ -64,7 +64,7 @@ test_that("replace_nas_factor_not_yet", {
                 "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "Unknown", "z")
 
   expect_error(
-    REDCapR:::replace_nas_with_explicit(a, add_unknown_level=T)
+    REDCapR:::replace_nas_with_explicit(a, add_unknown_level=TRUE)
     , regexp = "The `replace_nas_with_explicit\\(\\)` function cannot add a level to `scores` when it is not a factor\\.  Consider setting `create_factor=TRUE`\\."
   )
 })

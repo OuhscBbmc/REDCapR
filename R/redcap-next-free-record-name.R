@@ -66,8 +66,8 @@ redcap_next_free_record_name <- function(
 ) {
   value_error       <- character(0)
 
-  checkmate::assert_character(redcap_uri, any.missing=F, len=1, pattern="^.{1,}$")
-  checkmate::assert_character(token     , any.missing=F, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(redcap_uri, any.missing=FALSE, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(token     , any.missing=FALSE, len=1, pattern="^.{1,}$")
 
   token   <- sanitize_token(token)
   verbose <- verbose_prepare(verbose)

@@ -23,7 +23,7 @@ about your project-specific token.
 }
 \examples{
 secret_token_1 <- "12345678901234567890123456ABCDEF"
-secret_token_2 <- "12345678901234567890123456ABCDEF\\n"
+secret_token_2 <- "12345678901234567890123456ABCDEF\n"
 REDCapR::sanitize_token(secret_token_1)
 REDCapR::sanitize_token(secret_token_2)
 }

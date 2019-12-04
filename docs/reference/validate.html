@@ -86,7 +86,7 @@ anticipate problems before writing with REDCap's API." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9004</span>
       </span>
     </div>
 
@@ -195,7 +195,7 @@ the REDCap project.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code><a href='https://rdrr.io/pkg/tibble/man/tibble.html'>tibble::tibble()</a></code>, where each potential violation is a row.
+    <p>A <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code>, where each potential violation is a row.
 The two columns are:</p><ul>
 <li><p><code>field_name</code>: The name of the <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> that might cause
 problems during the upload.</p></li>
@@ -211,6 +211,20 @@ problems during the upload.</p></li>
 of the dataset.  The <code>validate_for_write()</code> function executes all these
 individual validation checks.  It allows the client to check everything
 with one call.</p>
+<p>Currently it verifies that the dataset</p><ul>
+<li><p>does not contain
+<a href='https://stat.ethz.ch/R-manual/R-devel/library/base/html/logical.html'>logical</a>
+values (because REDCap typically wants <code>0</code>/<code>1</code> values instead of
+<code>FALSE</code>/<code>TRUE</code>).</p></li>
+<li><p>starts with a lowercase letter, and subsequent optional characters are a
+sequence of (a) lowercase letters, (b) digits 0-9, and/or (c) underscores.
+(The exact regex is <code>^[a-z][0-9a-z_]*$</code>.)</p></li>
+</ul>
+
+<p>If you encounter additional types of problems when attempting to write to
+REDCap, please tell us by creating a
+<a href='https://github.com/OuhscBbmc/REDCapR/issues'>new issue</a>, and we'll
+incoporate a new validation check into this function.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>The official documentation can be found on the 'API Help Page'

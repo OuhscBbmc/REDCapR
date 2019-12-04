@@ -6,8 +6,6 @@
 #' @description Collection of constants defined by the REDCap developers.
 #'
 #' @param name Name of constant.  Required character.
-#' @param simplify Simplifies the vector of values to a common data-type,
-#' if possible. Passed to the `simplify` parameter of [base::sapply()].
 #'
 #' @return The constant's value.  Currently all are single integers,
 #'   but that could be expanded in the future.
@@ -101,16 +99,15 @@
 #' }
 
 #' @export
-constant <- function(name, simplify=TRUE) {
-  checkmate::assert_character(name, any.missing = F, min.chars = 1L)
-  checkmate::assert_subset(name, names(constant_list), empty.ok = F)
-  checkmate::assert_logical(simplify, any.missing = F, len = 1L)
+constant <- function(name) {
+  checkmate::assert_character(name, any.missing = FALSE, min.chars = 1L)
+  checkmate::assert_subset(name, names(constant_list), empty.ok = FALSE)
 
-  sapply(
+  vapply(
     X         = name,
     FUN       = function(x) constant_list[[x]],
     USE.NAMES = FALSE,
-    simplify  = simplify
+    FUN.VALUE = integer(1)
   )
 }
 
