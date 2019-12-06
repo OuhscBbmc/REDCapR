@@ -52,6 +52,8 @@ knit_print.data.frame = function(x, ...) {
 ## Set project-wide values.
 There is some information that is specific to a REDCap project, as opposed to an individual operation.  This includes the (1) uri of the server, and the (2) token for the user's project.  This is hosted on a machine used in REDCapR's public test suite, so you can run this example from any computer.  Unless tests are running.
 
+*Other than PHI-free demos, we strongly suggest storing tokens securely and avoiding hard-coding them like below.  Our recommendation is to store tokens [in a database](https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html).  If that is not feasible for your institution, consider storing them in a secured csv and retrieving with [`REDCapR::retrieve_credential_local()`](https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html).*
+
 ```{r project_values}
 library(REDCapR) #Load the package into the current R session.
 uri                   <- "https://bbmc.ouhsc.edu/redcap/api/"
@@ -60,9 +62,11 @@ token_longitudinal    <- "0434F0E9CF53ED0587847AB6E51DE762"
 ```
 
 ## Converting from tall/long to wide
+
 *Disclaimer*: Occasionally we're asked for a longitudinal dataset to be converted from a "long/tall format" (where  typically each row is one observation for a participant) to a "wide format" (where each row is on participant).  Usually we advise against it.  Besides all the database benefits of a long structure, a wide structure restricts your options with the stat routine.  No modern longitudinal analysis procedures (*e.g.*, growth curve models or multilevel/hierarchical models) accept wide.  You're pretty much stuck with repeated measures anova, which is very inflexible for real-world medical-ish analyses.  It requires a patient to have a measurement at every time point; otherwise the anova excludes the patient entirely.
 
 However we like going wide to produce visual tables for publications, and here's one way to do it in R. First retrieve the dataset from REDCap.
+
 ```{r retrieve-longitudinal, results='hold'}
 library(magrittr);
 suppressPackageStartupMessages(requireNamespace("dplyr"))
@@ -90,22 +94,46 @@ ds_wide <-
 ds_wide
 ```
 
-When widening more than one variable (*e.g.*, `pmq1` - `pmq4`), it's usually easiest to go even longer/taller (*e.g.*, `ds_eav`) before reversing direction and going wide.  This example contains the additional wrinkle that the REDCap event names "first_dose" and "first_visit" are renamed "dose_1" and "visit_1", which wlil help all the values be dose and visit values be proper numbers.
+In some scenarios, multiple variables (*e.g.*, `pmq1` - `pmq4`) can be widened in a single `tidyr::pivot_wider()` operation.  This example contains the additional wrinkle that the REDCap event names "first_dose" and "first_visit" are renamed "dose_1" and "visit_1", which wlil help all the values be dose and visit values be proper numbers.
 
 ```{r widen-typical}
 pattern <- "^(\\w+?)_arm_(\\d)$"
+ds_wide <- 
+  ds_long %>%
+  dplyr::select(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4) %>%
+  dplyr::mutate(
+    event = sub(pattern, "\\1", redcap_event_name),
+    event = dplyr::recode(event, "first_dose"="dose_1", "first_visit"="visit_1"),
+    arm   = as.integer(sub(pattern, "\\2", redcap_event_name))
+  ) %>%
+  dplyr::select(study_id, event, arm, pmq1, pmq2, pmq3, pmq4) %>%
+  dplyr::filter(!(event %in% c(
+    "enrollment", "final_visit", "deadline_to_return", "deadline_to_opt_ou")
+  )) %>%
+  tidyr::pivot_wider(
+    id_cols     = c(study_id, arm),
+    names_from  = event,
+    values_from = c(pmq1, pmq2, pmq3, pmq4)
+  )
 
+ds_wide
+```
+
+However, in other widening scenarios, it can be easier to go even longer/taller (*e.g.*, `ds_eav`) before reversing direction and going wide.  
+
+```{r widen-long-first}
 ds_eav <- 
   ds_long %>%
   dplyr::select(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4) %>%
   dplyr::mutate(
-    event      = sub(pattern, "\\1", redcap_event_name),
-    arm        = as.integer(sub(pattern, "\\2", redcap_event_name))
+    event = sub(pattern, "\\1", redcap_event_name),
+    event = dplyr::recode(event, "first_dose"="dose_1", "first_visit"="visit_1"),
+    arm   = as.integer(sub(pattern, "\\2", redcap_event_name))
   ) %>%
   dplyr::select(study_id, event, arm, pmq1, pmq2, pmq3, pmq4) %>%
   tidyr::pivot_longer(
-    cols = c(pmq1, pmq2, pmq3, pmq4),
-    names_to = "key",
+    cols      = c(pmq1, pmq2, pmq3, pmq4),
+    names_to  = "key",
     values_to = "value"
   ) %>% 
   # For old versions of tidyr that predate `pivot_wider()`:
@@ -114,8 +142,7 @@ ds_eav <-
     "enrollment", "final_visit", "deadline_to_return", "deadline_to_opt_ou")
   )) %>%
   dplyr::mutate( # Simulate correcting for mismatched names across arms:
-    event = dplyr::recode(event, "first_dose"="dose_1", "first_visit"="visit_1"),
-    key = paste0(event, "_", key)
+    key = paste0(key, "_", event)
   ) %>%
   dplyr::select(-event)
   
@@ -124,7 +151,7 @@ ds_eav %>%
   head(10)
 
 # Spread the EAV to wide.
-ds_wide <-
+ds_wide_2 <-
   ds_eav %>%
   tidyr::pivot_wider(
     id_cols     = c(study_id, arm),
@@ -133,8 +160,10 @@ ds_wide <-
   )
   # For old versions of tidyr that predate `pivot_wider()`:
   # tidyr::spread(key=key, value=value)
-ds_wide
+ds_wide_2
 ```
+
+Lots of packages and documentation exist.  Our current preference is the [tidyverse approach](https://tidyr.tidyverse.org/articles/pivot.html) to pivoting, but the [data.table approach](https://www.r-bloggers.com/creating-blazing-fast-pivot-tables-from-r-with-data-table-now-with-subtotals-using-grouping-sets/) is worth considering if you're comfortable with that package.  This [Stack Overflow post](https://stackoverflow.com/questions/10589693/convert-data-from-long-format-to-wide-format-with-multiple-measure-columns/) describes several ways.  We recommend against the [reshape](https://CRAN.R-project.org/package=reshape) and [reshape2](https://CRAN.R-project.org/package=reshape2) packages, because their developers have replaced them with the [tidyr](https://CRAN.R-project.org/package=tidyr) funtions described above. 
 
 
 ## SSL Options
