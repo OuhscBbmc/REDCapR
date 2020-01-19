@@ -2,10 +2,13 @@ library(testthat)
 
 context("Estimate 'Could Not Connect' Rate.")
 
-uri <- "https://bbmc.ouhsc.edu/redcap/api/"
-# uri <- "https://bbmc.ouhsc.edu/redcap/api/api2.php"
-# uri <- "https://bbmc.ouhsc.edu/redcap/api/dx.php"
-token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account on pid=153.
+# Declare the server & user information
+credential <- REDCapR::retrieve_credential_local(
+  path_credential = system.file("misc/example.credentials", package="REDCapR"),
+  project_id      = 153L
+)
+uri <- credential$redcap_uri
+token <- credential$token
 
 record_read_count <- 2000L
 record_write_count <- 200L
