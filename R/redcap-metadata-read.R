@@ -129,7 +129,8 @@ redcap_metadata_read <- function(
       #   to save RAM.  The content is not really necessary with httr's status
       #   message exposed.
       kernel$raw_text   <- ""
-    } else { # nocov start
+    } else {
+      # nocov start
       # Override the 'success' determination from the http status code
       #   and return an empty data.frame.
       kernel$success    <- FALSE
@@ -139,7 +140,8 @@ redcap_metadata_read <- function(
         kernel$status_code,
         kernel$raw_text
       )
-    }       # nocov stop
+      # nocov stop
+    }
   } else {
     ds                  <- data.frame() #Return an empty data.frame
     outcome_message     <- sprintf(

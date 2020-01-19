@@ -312,7 +312,8 @@ redcap_read <- function(
       )
 
       if (continue_on_error) warning(error_message)
-      else stop(error_message) # nocov stop
+      else stop(error_message)
+      # nocov stop
     }
 
     lst_batch[[i]]   <- read_result$data
