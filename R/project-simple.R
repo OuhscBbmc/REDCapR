@@ -4,10 +4,12 @@ populate_project_simple <- function(batch = FALSE) {
   checkmate::assert_logical(batch, any.missing = FALSE, len = 1)
 
   if (!requireNamespace("testthat")) {
+    # nocov start
     stop(
       "The function REDCapR:::populate_project_simple() cannot run if the ",
       "`testthat` package is not installed.  Please install it and try again."
     )
+    # nocov end
   }
 
   # Declare the server & user information
@@ -71,10 +73,12 @@ populate_project_simple <- function(batch = FALSE) {
 }
 clear_project_simple <- function(verbose = TRUE) {
   if (!requireNamespace("testthat")) {
+    # nocov start
     stop(
       "The function REDCapR:::populate_project_simple() cannot run if the ",
       "`testthat` package is not installed.  Please install it and try again."
     )
+    # nocov end
   }
   path_delete_test_record <-
     "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_simple.php"
@@ -103,7 +107,7 @@ clean_start_simple <- function(batch = FALSE, delay_in_seconds = 1) {
       "The function REDCapR:::populate_project_simple() cannot run if the ",
       "`testthat` package is not installed.  Please install it and try again."
     )
-    # nocov stop
+    # nocov end
   }
   testthat::expect_message(
     clear_result <- clear_project_simple(),

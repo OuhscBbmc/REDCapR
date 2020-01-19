@@ -297,6 +297,7 @@ redcap_read <- function(
     lst_outcome_message[[i]]  <- read_result$outcome_message
 
     if (!read_result$success) {
+      # nocov start
       error_message <- sprintf(
         "The `redcap_read()` call failed on iteration %i.",
         i
@@ -312,6 +313,7 @@ redcap_read <- function(
 
       if (continue_on_error) warning(error_message)
       else stop(error_message)
+      # nocov end
     }
 
     lst_batch[[i]]   <- read_result$data
