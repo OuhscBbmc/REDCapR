@@ -98,23 +98,19 @@ redcap_next_free_record_name <- function(
       )
 
     } else {
-      # nocov start
       value          <- value_error
       outcome_message  <- sprintf(
         "The REDCap determination of the next free record id failed.  The http status code was %i.  The 'raw_text' returned was '%s'.",
         kernel$status_code,
         kernel$raw_text
       )
-      # nocov stop
     }
   } else {
-    # nocov start
     value          <- value_error
     outcome_message  <- sprintf(
       "The REDCap determination of the next free record id failed.  The error message was:\n%s",
       kernel$raw_text
     )
-    # nocov stop
   }
 
   if (verbose)

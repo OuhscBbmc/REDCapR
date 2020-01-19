@@ -4,20 +4,19 @@ populate_project_simple <- function(batch = FALSE) {
   checkmate::assert_logical(batch, any.missing = FALSE, len = 1)
 
   if (!requireNamespace("testthat")) {
-    # nocov start
     stop(
       "The function REDCapR:::populate_project_simple() cannot run if the ",
       "`testthat` package is not installed.  Please install it and try again."
     )
-    # nocov stop
   }
 
   # Declare the server & user information
-  uri <- "https://bbmc.ouhsc.edu/redcap/api/"
-
-  # token <- "D96029BFCE8FFE76737BFC33C2BCC72E" #For `UnitTestPhiFree` account and the simple project (pid 27) on Vandy's test server.
-  # token <- "9A81268476645C4E5F03428B8AC3AA7B" #For `UnitTestPhiFree` account and the simple project (pid 153)
-  token <- "D70F9ACD1EDD6F151C6EA78683944E98" #For `UnitTestPhiFree` account and the simple project (pid 213)
+  credential <- REDCapR::retrieve_credential_local(
+    path_credential = system.file("misc/example.credentials", package="REDCapR"),
+    project_id      = 213L
+  )
+  uri <- credential$redcap_uri
+  token <- credential$token
 
   project <- REDCapR::redcap_project$new(redcap_uri = uri, token = token)
   path_in_simple <- system.file(
@@ -72,12 +71,10 @@ populate_project_simple <- function(batch = FALSE) {
 }
 clear_project_simple <- function(verbose = TRUE) {
   if (!requireNamespace("testthat")) {
-    # nocov start
     stop(
       "The function REDCapR:::populate_project_simple() cannot run if the ",
       "`testthat` package is not installed.  Please install it and try again."
     )
-    # nocov stop
   }
   path_delete_test_record <-
     "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_simple.php"
