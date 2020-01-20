@@ -16,7 +16,6 @@ dictionary_to_write <- readr::read_csv(path_in, col_types = readr::cols(.default
 test_that("Metadata Write", {
   testthat::skip_on_cran()
 
-  # Import the dictionary into the REDCap project
   testthat::expect_message(
     returned_object <-
       REDCapR::redcap_metadata_write(
@@ -36,7 +35,6 @@ test_that("Metadata Write", {
 test_that("Metadata Writen -Error", {
   testthat::skip_on_cran()
 
-  # Import the dictionary into the REDCap project
   testthat::expect_message(
     returned_object <-
       REDCapR::redcap_metadata_write(

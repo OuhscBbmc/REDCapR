@@ -81,7 +81,6 @@ test_that("bad token -Error", {
   testthat::skip_on_cran()
   expected_outcome_message <- "ERROR: You do not have permissions to use the API"
 
-  # Import the dictionary into the REDCap project
   testthat::expect_message(
     returned_object <-
       redcap_variables(

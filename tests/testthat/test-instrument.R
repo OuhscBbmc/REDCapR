@@ -77,7 +77,6 @@ test_that("bad token -Error", {
   testthat::skip_on_cran()
   expected_outcome_message <- "file NOT downloaded."
 
-  # Import the dictionary into the REDCap project
   testthat::expect_message(
     returned_object <-
       redcap_download_instrument(
