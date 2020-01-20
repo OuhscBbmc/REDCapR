@@ -201,6 +201,52 @@ test_that("Full Directory Specific", {
   expect_true(start_time <= info_actual$atime, label="The downloaded file's last access time should not precede this function's start time.")
 })
 
+
+test_that("download file conflict -Error", {
+  testthat::skip_on_cran()
+
+  record <- 2
+  field <- "mugshot"
+
+  expected_outcome_message_1  <- '; name="mugshot-2\\.jpg" successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as mugshot-2.jpg'
+  expected_outcome_message_2  <- 'The operation was halted because the file `mugshot-2\\.jpg` already exists and `overwrite` is FALSE\\.  Please check the directory if you believe this is a mistake\\.'
+
+  tryCatch({
+    # The first run should work.
+    expect_message(
+      returned_object_1 <- redcap_download_file_oneshot(
+        record        = record,
+        field         = field,
+        redcap_uri    = credential$redcap_uri,
+        token         = credential$token,
+      ),
+      regexp = expected_outcome_message_1
+    )
+    Sys.sleep(delay_after_download_file)
+
+    #Test the values of the returned object.
+    expect_true(returned_object_1$success)
+    expect_equal(returned_object_1$status_code, expected=200L)
+
+    # The second run should fail (b/c the file already exists).
+    expect_error(
+      returned_object_2 <- redcap_download_file_oneshot(
+        record        = record,
+        field         = field,
+        redcap_uri    = credential$redcap_uri,
+        token         = credential$token,
+        overwrite     = FALSE
+      ),
+      regexp = expected_outcome_message_2
+    )
+    Sys.sleep(delay_after_download_file)
+
+    expect_false(exists("returned_object_2"))
+
+  }, finally = base::unlink(returned_object_1$file_name)
+  )
+})
+
 test_that("Download Error --bad field name", {
   testthat::skip_on_cran()
 
