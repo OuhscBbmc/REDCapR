@@ -52,3 +52,5 @@ for( i in seq_len(file_read_count) ) {
 }
 message("File read error rate: ", file_read_error_count/file_read_count)
 rm(i, returned_object, file_read_count, file_read_error_count)
+
+rm(credential)

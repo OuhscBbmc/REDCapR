@@ -58,3 +58,5 @@ test_that("DAG", {
 
   expect_equal(observed, expected)
 })
+
+rm(credential)

@@ -26,7 +26,7 @@ test_that("default", {
     comments = c("Character in a book, with some guessing", "A mouse character from a good book",
     "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), mugshot = 7610:7614, race___1 = c(FALSE, FALSE, FALSE,
+    ), mugshot = c(197977L, 197978L, 197979L, 198002L, 198021L), race___1 = c(FALSE, FALSE, FALSE,
     FALSE, TRUE), race___2 = c(FALSE, FALSE, FALSE, TRUE, FALSE
     ), race___3 = c(FALSE, TRUE, FALSE, FALSE, FALSE), race___4 = c(FALSE,
     FALSE, TRUE, FALSE, FALSE), race___5 = c(TRUE, TRUE, TRUE,
@@ -45,7 +45,10 @@ test_that("default", {
 
   expect_message(
     regexp           = expected_outcome_message,
-    returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token)
+    returned_object <- REDCapR:::redcap_read_oneshot_eav(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token
+    )
   )
 
   expect_equal(returned_object$data, expected=expected_data_frame) # dput(returned_object$data)
@@ -120,7 +123,7 @@ test_that("raw", {
     comments = c("Character in a book, with some guessing", "A mouse character from a good book",
     "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), mugshot = 7610:7614, race___1 = c(FALSE, FALSE, FALSE,
+    ), mugshot = c(197977L, 197978L, 197979L, 198002L, 198021L), race___1 = c(FALSE, FALSE, FALSE,
     FALSE, TRUE), race___2 = c(FALSE, FALSE, FALSE, TRUE, FALSE
     ), race___3 = c(FALSE, TRUE, FALSE, FALSE, FALSE), race___4 = c(FALSE,
     FALSE, TRUE, FALSE, FALSE), race___5 = c(TRUE, TRUE, TRUE,
@@ -168,7 +171,7 @@ test_that("raw and DAG", {
     comments = c("Character in a book, with some guessing", "A mouse character from a good book",
     "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), mugshot = 7610:7614, race___1 = c(FALSE, FALSE, FALSE,
+    ), mugshot = c(197977L, 197978L, 197979L, 198002L, 198021L), race___1 = c(FALSE, FALSE, FALSE,
     FALSE, TRUE), race___2 = c(FALSE, FALSE, FALSE, TRUE, FALSE
     ), race___3 = c(FALSE, TRUE, FALSE, FALSE, FALSE), race___4 = c(FALSE,
     FALSE, TRUE, FALSE, FALSE), race___5 = c(TRUE, TRUE, TRUE,
@@ -216,7 +219,7 @@ test_that("label and DAG", {
     24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing",
     "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), mugshot = 7610:7614, race___1 = c(FALSE, FALSE, FALSE, FALSE,
+    ), mugshot = c(197977L, 197978L, 197979L, 198002L, 198021L), race___1 = c(FALSE, FALSE, FALSE, FALSE,
     FALSE), race___2 = c(FALSE, FALSE, FALSE, FALSE, FALSE), race___3 = c(FALSE,
     FALSE, FALSE, FALSE, FALSE), race___4 = c(FALSE, FALSE, FALSE,
     FALSE, FALSE), race___5 = c(FALSE, FALSE, FALSE, FALSE, FALSE
@@ -266,7 +269,7 @@ test_that("label header", {
     comments = c("Character in a book, with some guessing", "A mouse character from a good book",
     "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), mugshot = 7610:7614, race___1 = c(FALSE, FALSE, FALSE,
+    ), mugshot = c(197977L, 197978L, 197979L, 198002L, 198021L), race___1 = c(FALSE, FALSE, FALSE,
     FALSE, TRUE), race___2 = c(FALSE, FALSE, FALSE, TRUE, FALSE
     ), race___3 = c(FALSE, TRUE, FALSE, FALSE, FALSE), race___4 = c(FALSE,
     FALSE, TRUE, FALSE, FALSE), race___5 = c(TRUE, TRUE, TRUE,
@@ -306,7 +309,7 @@ test_that("filter - numeric", {
     ), dob = c("1934-04-09", "1952-11-02"), age = c(80L, 61L), sex = c(1L,
     0L), height = c(180L, 165L), weight = c(80L, 54L), bmi = c(24.7,
     19.8), comments = c("completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail"
-    ), mugshot = 7612:7613, race___1 = c(FALSE, FALSE), race___2 = c(FALSE,
+    ), mugshot = c(197979L, 198002L), race___1 = c(FALSE, FALSE), race___2 = c(FALSE,
     TRUE), race___3 = c(FALSE, FALSE), race___4 = c(TRUE, FALSE),
     race___5 = c(TRUE, TRUE), race___6 = c(FALSE, FALSE), ethnicity = 0:1,
     demographics_complete = c(2L, 2L), health_complete = c(2L,
@@ -340,7 +343,7 @@ test_that("filter - character", {
     address = "Hotel Suite\nNew Orleans LA, 70115", telephone = "(405) 321-5555",
     email = "left@hippocket.com", dob = "1955-04-15", age = 59L,
     sex = 1L, height = 193.04, weight = 104L, bmi = 27.9, comments = "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache",
-    mugshot = 7614L, race___1 = TRUE, race___2 = FALSE, race___3 = FALSE,
+    mugshot = 198021L, race___1 = TRUE, race___2 = FALSE, race___3 = FALSE,
     race___4 = FALSE, race___5 = FALSE, race___6 = TRUE, ethnicity = 2L,
     demographics_complete = 2L, health_complete = 0L, race_and_ethnicity_complete = 2L), .Names = c("record_id",
     "name_first", "name_last", "address", "telephone", "email", "dob",
@@ -366,3 +369,5 @@ test_that("filter - character", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
+
+rm(credential)

@@ -161,3 +161,7 @@ test_that("Metadata Normal", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
+
+rm(credential           )
+rm(credential_super_wide)
+rm(credential_problem   )

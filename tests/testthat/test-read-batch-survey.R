@@ -80,3 +80,5 @@ test_that("All Records -Default", {
   expect_true(nchar(returned_object2$filter_logic)==0L, "A filter was not specified.")
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
+
+rm(credential)

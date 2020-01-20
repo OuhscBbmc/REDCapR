@@ -74,3 +74,5 @@ test_that("Bad URI", {
   # expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   # expect_false(returned_object$success)
 })
+
+rm(credential)

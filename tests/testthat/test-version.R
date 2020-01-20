@@ -31,3 +31,5 @@ test_that("Version Unuccessful --bad token", {
   expected <- package_version("0.0.0")
   expect_equal(actual, expected)
 })
+
+rm(credential)

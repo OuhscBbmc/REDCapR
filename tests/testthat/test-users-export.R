@@ -113,3 +113,5 @@ test_that("with DAGs", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
+
+rm(credential_1, credential_2)

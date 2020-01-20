@@ -1,18 +1,21 @@
 library(testthat)
 
-# Since the project data is wiped clean at the start of each function,
-# the upload & download calls are tested by one function.
-
-delay_after_download_file <- 1.0 #In seconds
+delay_after_download_file <- 1.0 # In seconds
+credential <- REDCapR::retrieve_credential_local(
+  path_credential = system.file("misc/example.credentials", package="REDCapR"),
+  project_id      = 153L
+)
 
 test_that("NameComesFromREDCap", {
   testthat::skip_on_cran()
-  start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
-  project <- start_clean_result$redcap_project
 
   expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
+    returned_object <- redcap_read_oneshot(
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token,
+      raw_or_label  = "raw"
+    ),
     regexp = expected_outcome_message
   )
 
@@ -24,11 +27,15 @@ test_that("NameComesFromREDCap", {
   field <- "mugshot"
 
   expected_outcome_message <- '; name="mugshot-1\\.jpg" successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as mugshot-1.jpg'
-  # ; name="mugshot-1.jpg" successfully downloaded in 0.7 seconds, and saved as mugshot-1.jpg
 
   tryCatch({
     expect_message(
-      returned_object <- redcap_download_file_oneshot(record=record, field=field, redcap_uri=start_clean_result$redcap_project$redcap_uri, token=start_clean_result$redcap_project$token),
+      returned_object <- redcap_download_file_oneshot(
+        record        = record,
+        field         = field,
+        redcap_uri    = credential$redcap_uri,
+        token         = credential$token,
+      ),
       regexp = expected_outcome_message
     )
     Sys.sleep(delay_after_download_file)
@@ -59,12 +66,14 @@ test_that("NameComesFromREDCap", {
 
 test_that("FullPathSpecified", {
   testthat::skip_on_cran()
-  start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
-  project <- start_clean_result$redcap_project
 
   expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
+    returned_object <- redcap_read_oneshot(
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token,
+      raw_or_label  = "raw"
+    ),
     regexp = expected_outcome_message
   )
 
@@ -79,7 +88,13 @@ test_that("FullPathSpecified", {
   (full_name <- base::tempfile(pattern="mugshot", fileext=".jpg"))
   tryCatch({
     expect_message(
-      returned_object <- redcap_download_file_oneshot(file_name=full_name, record=record, field=field, redcap_uri=start_clean_result$redcap_project$redcap_uri, token=start_clean_result$redcap_project$token),
+      returned_object <- redcap_download_file_oneshot(
+        file_name     = full_name,
+        record        = record,
+        field         = field,
+        redcap_uri    = credential$redcap_uri,
+        token         = credential$token,
+      ),
       regexp = expected_outcome_message
     )
     Sys.sleep(delay_after_download_file)
@@ -110,12 +125,14 @@ test_that("FullPathSpecified", {
 
 test_that("RelativePath", {
   testthat::skip_on_cran()
-  start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
-  project <- start_clean_result$redcap_project
 
   expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
+    returned_object <- redcap_read_oneshot(
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token,
+      raw_or_label  = "raw"
+    ),
     regexp = expected_outcome_message
   )
 
@@ -130,7 +147,13 @@ test_that("RelativePath", {
   (relative_name <- "ssss.jpg")
   tryCatch({
     expect_message(
-      returned_object <- redcap_download_file_oneshot(file_name=relative_name, record=record, field=field, redcap_uri=start_clean_result$redcap_project$redcap_uri, token=start_clean_result$redcap_project$token),
+      returned_object <- redcap_download_file_oneshot(
+        file_name   = relative_name,
+        record      = record,
+        field       = field,
+        redcap_uri  = credential$redcap_uri,
+        token       = credential$token
+      ),
       regexp = expected_outcome_message
     )
     Sys.sleep(delay_after_download_file)
@@ -161,12 +184,14 @@ test_that("RelativePath", {
 
 test_that("Full Directory Specific", {
   testthat::skip_on_cran()
-  start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
-  project <- start_clean_result$redcap_project
 
   expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
+    returned_object <- redcap_read_oneshot(
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token,
+      raw_or_label  = "raw"
+    ),
     regexp = expected_outcome_message
   )
 
@@ -181,8 +206,13 @@ test_that("Full Directory Specific", {
 
   tryCatch({
     expect_message(
-      returned_object <- redcap_download_file_oneshot(directory=directory, record=record, field=field, redcap_uri=start_clean_result$redcap_project$redcap_uri, token=start_clean_result$redcap_project$token),
-      # returned_object <- redcap_download_file_oneshot(record=record, field=field, redcap_uri=start_clean_result$redcap_project$redcap_uri, token=start_clean_result$redcap_project$token),
+      returned_object <- redcap_download_file_oneshot(
+        directory   = directory,
+        record      = record,
+        field       = field,
+        redcap_uri  = credential$redcap_uri,
+        token       = credential$token
+      ),
       regexp = expected_outcome_message
     )
     Sys.sleep(delay_after_download_file)
@@ -213,12 +243,14 @@ test_that("Full Directory Specific", {
 
 test_that("Download Error --bad field name", {
   testthat::skip_on_cran()
-  start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
-  project <- start_clean_result$redcap_project
 
   expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
+    returned_object <- redcap_read_oneshot(
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token,
+      raw_or_label  = "raw"
+    ),
     regexp = expected_outcome_message
   )
 
@@ -234,8 +266,13 @@ test_that("Download Error --bad field name", {
 
   tryCatch({
     expect_message(
-      returned_object <- redcap_download_file_oneshot(directory=directory, record=record, field=field, redcap_uri=start_clean_result$redcap_project$redcap_uri, token=start_clean_result$redcap_project$token),
-      # returned_object <- redcap_download_file_oneshot(record=record, field=field, redcap_uri=start_clean_result$redcap_project$redcap_uri, token=start_clean_result$redcap_project$token),
+      returned_object <- redcap_download_file_oneshot(
+        directory     = directory,
+        record        = record,
+        field         = field,
+        redcap_uri    = credential$redcap_uri,
+        token         = credential$token,
+      ),
       regexp = expected_outcome_message
     )
     Sys.sleep(delay_after_download_file)
@@ -254,3 +291,5 @@ test_that("Download Error --bad field name", {
   expect_equivalent(returned_object$raw_text, expected=expected_raw_text) # dput(returned_object$raw_text)
   expect_null(returned_object$file_name, label="The name of the downloaded file should be correct.")
 })
+
+rm(credential)

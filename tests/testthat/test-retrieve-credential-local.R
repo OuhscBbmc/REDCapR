@@ -150,3 +150,7 @@ test_that("Bad URI", {
     )
   )
 })
+
+rm(credential_read         )
+rm(credential_longitudinal )
+rm(credential_write        )

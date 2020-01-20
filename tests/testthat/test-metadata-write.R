@@ -52,3 +52,5 @@ test_that("Metadata Writen -Error", {
   testthat::expect_equal(returned_object$field_count, 0L)
   testthat::expect_equal(returned_object$raw_text, "ERROR: You do not have permissions to use the API")
 })
+
+rm(credential)

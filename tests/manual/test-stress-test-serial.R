@@ -7,8 +7,6 @@ credential <- REDCapR::retrieve_credential_local(
   path_credential = system.file("misc/example.credentials", package="REDCapR"),
   project_id      = 153L
 )
-uri <- credential$redcap_uri
-token <- credential$token
 
 read_count <- 2000L
 file_count <- 200L
@@ -47,7 +45,11 @@ expected_outcome_message <- "5 records and 24 columns were read from REDCap in \
 
 for( i in seq_len(read_count) ) {
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="raw"),
+    returned_object <- redcap_read_oneshot(
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token,
+      raw_or_label  = "raw"
+    ),
     regexp = expected_outcome_message
   )
 
@@ -115,3 +117,5 @@ for( i in seq_len(file_count) ) {
   expect_more_than(info_actual$atime, expected=start_time, label="The downloaded file's last access time should not precede this function's start time.")
   message(i, ": ", returned_object$elapsed_seconds)
 }
+
+rm(credential)
