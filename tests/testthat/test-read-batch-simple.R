@@ -735,4 +735,16 @@ test_that("filter - character", {
   expect_true(returned_object$success)
 })
 
+test_that("bad token -Error", {
+  testthat::skip_on_cran()
+
+  expected_outcome_message <- "The REDCapR read/export operation was not successful\\."
+  expect_message(
+    regexp           = expected_outcome_message,
+    redcap_read(
+      redcap_uri    = credential$redcap_uri,
+      token         = "BAD00000000000000000000000000000"
+    )
+  )
+})
 rm(credential, project)

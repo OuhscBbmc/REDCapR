@@ -8,7 +8,11 @@ credential <- REDCapR::retrieve_credential_local(
 test_that("smoke test", {
   testthat::skip_on_cran()
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token)
+    returned_object <-
+      redcap_read_oneshot(
+        redcap_uri    = credential$redcap_uri,
+        token         = credential$token
+      )
   )
 })
 test_that("default", {
@@ -968,4 +972,20 @@ test_that("filter - character", {
   expect_true(returned_object$success)
 })
 
+test_that("bad token -Error", {
+  testthat::skip_on_cran()
+  expected_outcome_message <- "The REDCapR read/export operation was not successful\\."
+
+  expect_message(
+    returned_object <-
+      redcap_read_oneshot(
+        redcap_uri    = credential$redcap_uri,
+        token         = "BAD00000000000000000000000000000"
+      ),
+    expected_outcome_message
+  )
+  testthat::expect_false(returned_object$success)
+  testthat::expect_equal(returned_object$status_code, 403L)
+  testthat::expect_equal(returned_object$raw_text, "ERROR: You do not have permissions to use the API")
+})
 rm(credential)

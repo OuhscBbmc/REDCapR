@@ -4,6 +4,7 @@ credential <- REDCapR::retrieve_credential_local(
   path_credential = system.file("misc/example.credentials", package="REDCapR"),
   project_id      = 153L
 )
+delay_after_download_file <- 1.0 # In seconds
 
 test_that("download instrument", {
   testthat::skip_on_cran()

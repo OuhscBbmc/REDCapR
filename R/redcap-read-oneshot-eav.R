@@ -207,6 +207,15 @@ redcap_read_oneshot_eav <- function(
   # This is the important line that communicates with the REDCap server.
   kernel      <- kernel_api(redcap_uri, post_body, config_options)
 
+  if (!kernel$success) {
+    error_message     <- sprintf(
+      "The REDCapR record export operation was not successful.  The error message was:\n%s",
+      kernel$raw_text
+    )
+    stop(error_message)
+  }
+
+
   ds_metadata <-
     REDCapR::redcap_metadata_read(
       redcap_uri,

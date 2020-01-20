@@ -369,5 +369,17 @@ test_that("filter - character", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
+test_that("bad token -Error", {
+  testthat::skip_on_cran()
+
+  expected_outcome_message <- "The REDCapR record export operation was not successful\\."
+  expect_error(
+    regexp           = expected_outcome_message,
+    REDCapR:::redcap_read_oneshot_eav(
+      redcap_uri    = credential$redcap_uri,
+      token         = "BAD00000000000000000000000000000"
+    )
+  )
+})
 
 rm(credential)
