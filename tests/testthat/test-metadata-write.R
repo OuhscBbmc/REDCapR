@@ -25,12 +25,11 @@ test_that("Metadata Write", {
         token       = credential$token,
         verbose     = TRUE
       ),
-    "0 records were written to REDCap in \\d{1,2}\\.\\d seconds."
+    "16 fields were written to REDCap in \\d{1,2}\\.\\d seconds."
   )
 
   testthat::expect_true(returned_object$success)
   testthat::expect_equal(returned_object$status_code, 200L)
-  testthat::expect_equal(returned_object$records_affected_count, 0L)
-  testthat::expect_equal(returned_object$affected_ids, character(0))
+  testthat::expect_equal(returned_object$field_count, 16L)
   testthat::expect_equal(returned_object$raw_text, "")
 })

@@ -41,8 +41,7 @@ of the operation.
 \item \code{outcome_message}: A human readable string indicating the operation's
 outcome.
 \item \code{records_affected_count}: The number of records inserted or updated.
-\item \code{affected_ids}: The subject IDs of the inserted or updated records.
-\item \code{elapsed_seconds}: The duration of the function.
+\item \code{field_count}: Number of fields imported.
 \item \code{raw_text}: If an operation is NOT successful, the text returned by
 REDCap.  If an operation is successful, the \code{raw_text} is returned as an
 empty string to save RAM.
@@ -86,6 +85,7 @@ ds1$telephone  <- paste0("(405) 321-000", seq_len(nrow(ds1)))
 result_write   <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=token)
 result_write$raw_text
 }
+
 }
 \references{
 The official documentation can be found on the 'API Help Page'

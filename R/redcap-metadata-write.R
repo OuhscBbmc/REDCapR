@@ -24,8 +24,7 @@
 #' * `outcome_message`: A human readable string indicating the operation's
 #' outcome.
 #' * `records_affected_count`: The number of records inserted or updated.
-#' * `affected_ids`: The subject IDs of the inserted or updated records.
-#' * `elapsed_seconds`: The duration of the function.
+#' * `field_count`: Number of fields imported.
 #' * `raw_text`: If an operation is NOT successful, the text returned by
 #' REDCap.  If an operation is successful, the `raw_text` is returned as an
 #' empty string to save RAM.
@@ -74,10 +73,8 @@
 #' result_write   <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=token)
 #' result_write$raw_text
 #' }
-
-#' @export
 #'
-
+#' @export
 redcap_metadata_write <- function(
   ds,
   redcap_uri,
@@ -85,8 +82,6 @@ redcap_metadata_write <- function(
   verbose         = TRUE,
   config_options  = NULL
 ) {
-
-  # TODO: automatically convert boolean/logical class to integer/bit class
   csv_elements <- NULL #This prevents the R CHECK NOTE: 'No visible binding for global variable Note in R CMD check';  Also see  if( getRversion() >= "2.15.1" )    utils::globalVariables(names=c("csv_elements")) #http://stackoverflow.com/questions/8096313/no-visible-binding-for-global-variable-note-in-r-cmd-check; http://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
 
   checkmate::assert_character(redcap_uri, any.missing=F, len=1, pattern="^.{1,}$")
@@ -110,16 +105,7 @@ redcap_metadata_write <- function(
     token     = token,
     content   = "metadata",
     format    = "csv",
-    type      = "flat",
-
-    #These next values separate the import from the export API call
-    #overwriteBehavior:
-    #  *normal* - blank/empty values will be ignored [default];
-    #  *overwrite* - blank/empty values are valid and will overwrite data
-
     data                = csv,
-    overwriteBehavior   = "overwrite",
-    returnContent       = "ids",
     returnFormat        = "csv"
   )
 
@@ -127,20 +113,17 @@ redcap_metadata_write <- function(
   kernel <- kernel_api(redcap_uri, post_body, config_options)
 
   if (kernel$success) {
-    elements               <- unlist(strsplit(kernel$raw_text, split="\\n"))
-    affected_ids           <- as.character(elements[-1])
-    records_affected_count <- length(affected_ids)
-    outcome_message        <- sprintf(
-      "%s records were written to REDCap in %0.1f seconds.",
-      format(records_affected_count, big.mark = ",", scientific = FALSE, trim = TRUE),
+    field_count           <- as.integer(kernel$raw_text)
+    outcome_message       <- sprintf(
+      "%s fields were written to REDCap in %0.1f seconds.",
+      format(field_count, big.mark = ",", scientific = FALSE, trim = TRUE),
       kernel$elapsed_seconds
     )
 
-    #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
+    # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
     kernel$raw_text <- ""
-  } else { #If the returned content wasn't recognized as valid IDs, then
-    affected_ids           <- character(0) # Return an empty array
-    records_affected_count <- NA_integer_
+  } else { # If the returned content wasn't recognized as a valid integer, then
+    field_count            <- 0L
     outcome_message        <- sprintf(
       "The REDCapR write/import operation was not successful.  The error message was:\n%s",
       kernel$raw_text
@@ -154,10 +137,8 @@ redcap_metadata_write <- function(
     success                   = kernel$success,
     status_code               = kernel$status_code,
     outcome_message           = outcome_message,
-    records_affected_count    = records_affected_count,
-    affected_ids              = affected_ids,
+    field_count               = field_count,
     elapsed_seconds           = kernel$elapsed_seconds,
     raw_text                  = kernel$raw_text
   )
 }
-
