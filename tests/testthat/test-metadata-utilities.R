@@ -14,7 +14,7 @@ test_that("Named Captures", {
   expect_equal(dsBoxes, expected=dsExpected, label="The returned data.frame should be correct") #dput(dsBoxes)
 })
 
-test_that("Named Captures", {
+test_that("checkbox choices", {
   pattern_checkboxes <- "(?<=\\A| \\| )(?<id>\\d{1,}), (?<label>[\x20-\x7B\x7D-\x7E]{1,})(?= \\| |\\Z)"
 
   choices_1 <- "1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported"

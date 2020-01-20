@@ -13,7 +13,7 @@ credential_problem <- REDCapR::retrieve_credential_local(
   project_id      = 1425
 )
 
-test_that("Metadata Smoke Test", {
+test_that("Metadata Read Smoke Test", {
   testthat::skip_on_cran()
   expect_message(
     returned_object <- redcap_metadata_read(redcap_uri=credential$redcap_uri, token=credential$token)
