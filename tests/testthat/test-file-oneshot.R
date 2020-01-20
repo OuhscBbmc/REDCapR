@@ -9,16 +9,6 @@ credential <- REDCapR::retrieve_credential_local(
 test_that("NameComesFromREDCap", {
   testthat::skip_on_cran()
 
-  expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
-  expect_message(
-    returned_object <- redcap_read_oneshot(
-      redcap_uri    = credential$redcap_uri,
-      token         = credential$token,
-      raw_or_label  = "raw"
-    ),
-    regexp = expected_outcome_message
-  )
-
   # start_time <- Sys.time() - lubridate::seconds(1) #Knock off a second in case there's small time imprecisions
   start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
   path_of_expected <- system.file("test-data/mugshot-1.jpg", package="REDCapR")
@@ -66,16 +56,6 @@ test_that("NameComesFromREDCap", {
 
 test_that("FullPathSpecified", {
   testthat::skip_on_cran()
-
-  expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
-  expect_message(
-    returned_object <- redcap_read_oneshot(
-      redcap_uri    = credential$redcap_uri,
-      token         = credential$token,
-      raw_or_label  = "raw"
-    ),
-    regexp = expected_outcome_message
-  )
 
   start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
   path_of_expected <- system.file("test-data/mugshot-2.jpg", package="REDCapR")
@@ -126,16 +106,6 @@ test_that("FullPathSpecified", {
 test_that("RelativePath", {
   testthat::skip_on_cran()
 
-  expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
-  expect_message(
-    returned_object <- redcap_read_oneshot(
-      redcap_uri    = credential$redcap_uri,
-      token         = credential$token,
-      raw_or_label  = "raw"
-    ),
-    regexp = expected_outcome_message
-  )
-
   start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
   path_of_expected <- system.file("test-data/mugshot-3.jpg", package="REDCapR")
   info_expected <- file.info(path_of_expected)
@@ -185,16 +155,6 @@ test_that("RelativePath", {
 test_that("Full Directory Specific", {
   testthat::skip_on_cran()
 
-  expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
-  expect_message(
-    returned_object <- redcap_read_oneshot(
-      redcap_uri    = credential$redcap_uri,
-      token         = credential$token,
-      raw_or_label  = "raw"
-    ),
-    regexp = expected_outcome_message
-  )
-
   start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
   path_of_expected <- system.file("test-data/mugshot-3.jpg", package="REDCapR")
   directory <- getwd()#  base::tempfile()
@@ -243,16 +203,6 @@ test_that("Full Directory Specific", {
 
 test_that("Download Error --bad field name", {
   testthat::skip_on_cran()
-
-  expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
-  expect_message(
-    returned_object <- redcap_read_oneshot(
-      redcap_uri    = credential$redcap_uri,
-      token         = credential$token,
-      raw_or_label  = "raw"
-    ),
-    regexp = expected_outcome_message
-  )
 
   start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
   path_of_expected <- system.file("test-data/mugshot-3.jpg", package="REDCapR")
