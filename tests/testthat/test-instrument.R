@@ -35,4 +35,23 @@ test_that("download instrument", {
   expect_equal(returned_object$file_name, "instruments.pdf", label="The name of the downloaded file should be correct.")
 })
 
+test_that("bad token -Error", {
+  testthat::skip_on_cran()
+  expected_outcome_message <- "file NOT downloaded."
+
+  # Import the dictionary into the REDCap project
+  testthat::expect_message(
+    returned_object <-
+      redcap_download_instrument(
+        redcap_uri  = credential$redcap_uri,
+        token       = "BAD00000000000000000000000000000"
+      ),
+    expected_outcome_message
+  )
+
+  testthat::expect_false(returned_object$success)
+  testthat::expect_equal(returned_object$status_code, 403L)
+  testthat::expect_equal(returned_object$raw_text, "ERROR: You do not have permissions to use the API")
+})
+
 rm(credential)

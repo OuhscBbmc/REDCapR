@@ -292,4 +292,57 @@ test_that("Download Error --bad field name", {
   expect_null(returned_object$file_name, label="The name of the downloaded file should be correct.")
 })
 
+test_that("download w/ bad token -Error", {
+  testthat::skip_on_cran()
+  expected_outcome_message <- "file NOT downloaded."
+
+  # Import the dictionary into the REDCap project
+  testthat::expect_message(
+    returned_object <-
+      redcap_download_file_oneshot(
+        record        = 1,
+        field         = "mugshot",
+        redcap_uri  = credential$redcap_uri,
+        token       = "BAD00000000000000000000000000000"
+      ),
+    expected_outcome_message
+  )
+
+  testthat::expect_false(returned_object$success)
+  testthat::expect_equal(returned_object$status_code, 403L)
+  testthat::expect_equal(returned_object$raw_text, "ERROR: You do not have permissions to use the API")
+})
+
+test_that("upload w/ bad token -Error", {
+  testthat::skip_on_cran()
+  expected_outcome_message <- "file NOT uploaded."
+
+  credential_upload <- REDCapR::retrieve_credential_local(
+    path_credential = system.file("misc/example.credentials", package="REDCapR"),
+    project_id      = 213L
+  )
+
+  file_path <- system.file(
+    "test-data/mugshot-5.jpg",
+    package = "REDCapR"
+  )
+
+  # Import the dictionary into the REDCap project
+  testthat::expect_message(
+    returned_object <-
+      redcap_upload_file_oneshot(
+        file_name   = file_path,
+        record      = 1,
+        field       = "mugshot",
+        redcap_uri  = credential_upload$redcap_uri,
+        token       = "BAD00000000000000000000000000000"
+      ),
+    expected_outcome_message
+  )
+
+  testthat::expect_false(returned_object$success)
+  testthat::expect_equal(returned_object$status_code, 403L)
+  testthat::expect_equal(returned_object$raw_text, "ERROR: You do not have permissions to use the API")
+})
+
 rm(credential)

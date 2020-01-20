@@ -66,7 +66,7 @@ test_that("with DAGs", {
   # expect_equal_to_reference(returned_object$data, file=system.file("test-data/project-simple/variations/default.rds", package="REDCapR"))
   # expect_equal_to_reference(returned_object$data, file="./test-data/project-simple/variations/default.rds")
 })
-test_that("with DAGs", {
+test_that("without DAGs", {
   testthat::skip_on_cran()
   expected_outcome_message <- "The REDCap users were successfully exported in \\d+(\\.\\d+\\W|\\W)seconds\\.  The http status code was 200\\."
   expected_data_user <- structure(
@@ -112,6 +112,24 @@ test_that("with DAGs", {
   expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+})
+test_that("bad token -Error", {
+  testthat::skip_on_cran()
+  expected_outcome_message <- "ERROR: You do not have permissions to use the API"
+
+  # Import the dictionary into the REDCap project
+  testthat::expect_message(
+    returned_object <-
+      REDCapR::redcap_users_export(
+        redcap_uri  = credential_2$redcap_uri,
+        token       = "BAD00000000000000000000000000000"
+      ),
+    expected_outcome_message
+  )
+
+  testthat::expect_false(returned_object$success)
+  testthat::expect_equal(returned_object$status_code, 403L)
+  testthat::expect_equal(returned_object$raw_text, expected_outcome_message)
 })
 
 rm(credential_1, credential_2)

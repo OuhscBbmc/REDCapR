@@ -61,7 +61,10 @@ test_that("Bad URI", {
    # expected_outcome_message <- "(?s)The REDCapR variable retrieval was not successful\\..+?.+"
 
   expect_error(
-    returned_object <- redcap_variables(redcap_uri=bad_uri, token=credential$token)#,
+    returned_object <- redcap_variables(
+      redcap_uri  = bad_uri,
+      token       = credential$token
+      )#,
     # regexp = expected_outcome_message
   )
 
@@ -73,6 +76,24 @@ test_that("Bad URI", {
   # # expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
   # expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   # expect_false(returned_object$success)
+})
+test_that("bad token -Error", {
+  testthat::skip_on_cran()
+  expected_outcome_message <- "ERROR: You do not have permissions to use the API"
+
+  # Import the dictionary into the REDCap project
+  testthat::expect_message(
+    returned_object <-
+      redcap_variables(
+        redcap_uri  = credential$redcap_uri,
+        token       = "BAD00000000000000000000000000000"
+      ),
+    expected_outcome_message
+  )
+
+  testthat::expect_false(returned_object$success)
+  testthat::expect_equal(returned_object$status_code, 403L)
+  testthat::expect_equal(returned_object$raw_text, expected_outcome_message)
 })
 
 rm(credential)
