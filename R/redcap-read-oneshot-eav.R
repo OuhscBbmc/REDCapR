@@ -258,8 +258,7 @@ redcap_read_oneshot_eav <- function(
               dplyr::select(field_name = .data$export_field_name) %>%
               dplyr::filter(grepl("^\\w+?_complete$", .data$field_name))
           ) %>%
-          dplyr::pull(.data$field_name) %>%
-          rev()
+          dplyr::pull(.data$field_name) #%>% rev()
 
         ds_eav_2 <-
           ds_eav %>%
