@@ -2,7 +2,7 @@
 % Please edit documentation in R/redcap-metadata-write.R
 \name{redcap_metadata_write}
 \alias{redcap_metadata_write}
-\title{Write/Import records to a REDCap project}
+\title{Import metadata}
 \usage{
 redcap_metadata_write(
   ds,
@@ -40,58 +40,48 @@ successful.
 of the operation.
 \item \code{outcome_message}: A human readable string indicating the operation's
 outcome.
-\item \code{records_affected_count}: The number of records inserted or updated.
 \item \code{field_count}: Number of fields imported.
+\item \code{elapsed_seconds}: The duration of the function.
 \item \code{raw_text}: If an operation is NOT successful, the text returned by
 REDCap.  If an operation is successful, the \code{raw_text} is returned as an
 empty string to save RAM.
 }
 }
 \description{
-This function uses REDCap's API to select and return data.
-}
-\details{
-Currently, the function doesn't modify any variable types to conform to
-REDCap's supported variables.  See \code{\link[=validate_for_write]{validate_for_write()}} for a helper
-function that checks for some common important conflicts.
+Import metadata (\emph{i.e.}, data dictionary)
+into a project. Because of this method's destructive nature,
+it works for only projects in Development status.
 }
 \examples{
 \dontrun{
-#Define some constants
+# Please don't run this example without changing the token to
+point to your server.  It could interfere with our testing suite.
 uri            <- "https://bbmc.ouhsc.edu/redcap/api/"
-token          <- "D70F9ACD1EDD6F151C6EA78683944E98"
+token          <- "457C24AB91B7FCF5B1A7DA67E70E24C7"
 
-# Read the dataset for the first time.
-result_read1   <- REDCapR::redcap_read_oneshot(redcap_uri=uri, token=token)
-ds1            <- result_read1$data
-ds1$telephone
+# Read in the dictionary in R's memory from a csv file.
+ds_to_write <-
+  readr::read_csv(
+    file = system.file(
+      "test-data/project-simple/simple-metadata.csv",
+      package = "REDCapR"
+    ),
+    col_types = readr::cols(.default = readr::col_character())
+  )
+ds_to_write
 
-# Manipulate a field in the dataset in a VALID way
-ds1$telephone  <- paste0("(405) 321-000", seq_len(nrow(ds1)))
-
-ds1 <- ds1[1:3, ]
-ds1$age        <- NULL; ds1$bmi <- NULL #Drop the calculated fields before writing.
-result_write   <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=token)
-
-# Read the dataset for the second time.
-result_read2   <- REDCapR::redcap_read_oneshot(redcap_uri=uri, token=token)
-ds2            <- result_read2$data
-ds2$telephone
-
-# Manipulate a field in the dataset in an INVALID way.  A US exchange can't be '111'.
-ds1$telephone  <- paste0("(405) 321-000", seq_len(nrow(ds1)))
-
-# This next line will throw an error.
-result_write   <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=token)
-result_write$raw_text
+# Import the dictionary into the REDCap project
+REDCapR::redcap_metadata_write(
+  ds          = ds_to_write,
+  redcap_uri  = uri,
+  token       = token
+)
 }
 
 }
 \references{
 The official documentation can be found on the 'API Help Page'
-and 'API Examples' pages on the REDCap wiki (\emph{i.e.},
-https://community.projectredcap.org/articles/456/api-documentation.html and
-https://community.projectredcap.org/articles/462/api-examples.html).
+and 'API Examples' pages on the REDCap wiki.
 If you do not have an account for the wiki, please ask your campus REDCap
 administrator to send you the static material.
 }
