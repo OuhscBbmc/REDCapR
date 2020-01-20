@@ -20,6 +20,8 @@ Version 0.11 (Released ?)
 
 * [`reader::type_convert()`](https://readr.tidyverse.org/reference/type_convert.html) is used *after* all the batches are stacked on top of each other.  This way, batches cannot have incompatible data types as they're combined. (#257; thanks @isaactpetersen #245)  Consequently, the `guess_max` parameter in `redcap_read()` no longer serves a purpose, and has been soft-deprecated. (#267)
 
+* [`redcap_metadata_write()`](https://readr.tidyverse.org/reference/redcap_metadata_write.html) writes to the project's metadata. (#274, @felixetorres) 
+
 ### Stability Features
 
 * `httr::content()` (which is inside `kernel_api()`) now processes the returned value as "text/csv", by default.  This should prevent strange characters from tricking the process as the internal variable `raw_text` is being formed. See the [httr::content()`](https://httr.r-lib.org/reference/content.html) documentation for a list of possible values for the `content_type` parameter.  (Thanks to great debugging by @vortexing, #269)
