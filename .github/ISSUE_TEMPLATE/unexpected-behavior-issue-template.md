@@ -13,7 +13,7 @@ Please provide a clear and concise description of the scenario and the behavior.
 **Troubleshooter Results**
 Please carefully reread the [Troubleshooting Vignette](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html) and thoroughly describe which part(s) doesn't work.  Many people have contributed to this document; it is likely that it will help precisely identify the location of the problem, which will help us respond with better advice.
 
-If you have advice for improving the [Troubleshooter](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html) or [this issue template](), we'd love to hear about it.
+If you have advice for improving the [Troubleshooter](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html) or [this issue template](https://github.com/OuhscBbmc/REDCapR/blob/master/.github/ISSUE_TEMPLATE/unexpected-behavior-issue-template.md), we'd love to hear about it.
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.
