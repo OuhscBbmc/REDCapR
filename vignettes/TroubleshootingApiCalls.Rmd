@@ -33,15 +33,15 @@ This first group of checks primarily focuses on the server and the logins accoun
     ```{r EmailVerified, echo=FALSE, out.extra='style="fig.width=400px"'}
     knitr::include_graphics("images/EmailVerified.png")
     ```
-    
+
     <!--<img src="./images/EmailVerified.png" alt="EmailVerified" style="width: 400px;"/>-->
-  
+
 1. **Has the user been granted the desired import and/or export permissions?** This can be verified in the `User Rights` section or in the `API` section (and it's `Manage All Project Tokens` tab) within the project.  Alternatively, it can be verified in the `API Tokens` section of the server's `Control Center`.
 
     ```{r ApiPrivilegeDashboard, echo=FALSE, out.extra='style="fig.width=600px"'}
     knitr::include_graphics("images/ApiPrivilegeDashboard.png")
     ```
-    
+
     <!--<img src="./images/ApiPrivilegeDashboard.png" alt="ApiPrivilegeDashboard" style="width: 600px;"/>-->
 
 1. **Are they using the correct token?** This can be verified in the `API` section (and it's `Manage All Project Tokens` tab) within the project.  Click the magnifying glass icon in the user's row.  Alternatively, it can be verified in the `API Tokens` section of the server's `Control Center`.
@@ -51,7 +51,7 @@ This first group of checks primarily focuses on the server and the logins accoun
     ```
 
     <!--<img src="./images/MagnifyingGlass.png" alt="MagnifyingGlass" style="width: 550px;"/>-->
-    
+
 Language Agnostic API
 ------------------------------------------------------------------
 
@@ -120,7 +120,7 @@ There are several ways to call REDCap's API from [R](https://cran.r-project.org/
     ```r
     redcap_uri <- "https://bbmc.ouhsc.edu/redcap/api/"
     token      <- "9A81268476645C4E5F03428B8AC3AA7B"
-    
+
     post_body <- list(
       token           = token,
       content         = 'record',
@@ -133,12 +133,12 @@ There are several ways to call REDCap's API from [R](https://cran.r-project.org/
       body            = post_body,
       httr::verbose() # Remove this line to suppress the console updates.
     )
-    
+
     raw_text
     ```
-    
+
     Alternatively, you can try using the [RCurl](https://cran.r-project.org/package=RCurl) package.
-    
+
     ```r
     raw_text <- RCurl::postForm(
       uri             = redcap_uri
@@ -157,7 +157,7 @@ There are several ways to call REDCap's API from [R](https://cran.r-project.org/
     ```r
     redcap_uri         <- "https://the.urlofyourinsitution.edu/api/"
     token              <- "your-secret-token"
-    
+
     records_collapsed  <- "1,2,3"                             # Assumes dataset contains ID values of 1-3.
     fields_collapsed   <- "record_id,name_first,name_last"    # Assumes dataset contains these variables.
 
@@ -175,7 +175,7 @@ There are several ways to call REDCap's API from [R](https://cran.r-project.org/
       body            = post_body,
       httr::verbose() # Remove this line to suppress the console updates.
     )
-    
+
     raw_text
     ```
 
@@ -186,7 +186,7 @@ There are several ways to call REDCap's API from [R](https://cran.r-project.org/
     ```r
     redcap_uri                  <- "https://the.urlofyourinsitution.edu/api/"
     token                       <- "your-secret-token"
-    
+
     records_collapsed           <- NULL
     fields_collapsed            <- NULL
 
@@ -204,7 +204,7 @@ There are several ways to call REDCap's API from [R](https://cran.r-project.org/
       body            = post_body,
       httr::verbose() # Remove this line to suppress the console updates.
     )
-    
+
     raw_text
     ```
 
@@ -241,7 +241,7 @@ If you're not using REDCapR, you can skip this section and proceed to "Exporting
     ```
 
    If this fails, see "Problems in the project's metadata/dictionary." under [Gotchas](#gotchas-agnostic) below.
-   
+
 1. **Can the user export from an example project?** This is the same fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/) as in the previous section.
 
     ```r
@@ -252,7 +252,7 @@ If you're not using REDCapR, you can skip this section and proceed to "Exporting
     ```
 
     The previous code should produce similar output.  Notice there are five rows and the columns will wrap around if your console window is too narrow.
-    
+
     ```
     5 records and 1 columns were read from REDCap in 0.41 seconds.
     Starting to read 5 records  at 2014-06-27 17:19:49
@@ -298,7 +298,7 @@ If you're not using REDCapR, you can skip this section and proceed to "Exporting
     ```
 
     Alternatively, a `redcap_project` object can be declared initially, which makes subsequent calls cleaner when the token and url are required only the when the object is declared.
-    
+
     ```r
     library(REDCapR) # Load the package into the current R session, if you haven't already.
     uri               <- "https://bbmc.ouhsc.edu/redcap/api/"
@@ -355,9 +355,9 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
     ```
 
    If this fails, see "Problems in the project's metadata/dictionary." under [Gotchas](#gotchas-agnostic) below.
-   
+
 1. **Can the user export from an example project?** This is the same fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/) as in the previous section.
- 
+
     ```r
     library(redcapAPI) # Load the package into the current R session.
     rcon <- redcapConnection(
@@ -368,7 +368,7 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
     ```
 
     The previous code should produce similar output.  Notice there are five rows and the columns will wrap around if your console window is too narrow.
- 
+
     ```
     record_id name_first name_last                                 address      telephone               email
     1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232 (432) 456-4848     nutty@mouse.com
@@ -398,7 +398,7 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
     4                     2
     5                     2
     ```
-    
+
 1. **Can the user export from their own project?** The code is similar to the previous check, but the `uri` and `token` values will need to be modified.
 
     ``` r
@@ -432,22 +432,22 @@ Common Language-Agnostic Gotchas  {#gotchas-agnostic}
 
 1. **Problems in the project's metadata/dictionary.**  If exporting the metadata fails (*e.g.*, [`REDCapR::redcap_metadata_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_read.html) and [`redcapAPI::exportMetaData()`](https://rdrr.io/github/nutterb/redcapAPI/man/exportMetaData.html)), manually download the data dictionary from the REDCap browser.  Inspect the plain text closely in a text editor like [Atom](https://atom.io/) or [Visual Studio Code](https://code.visualstudio.com/); avoid programs like Excel that tend to interpet, align, and decorate the values, which sometimes masks problems.  Scrutinize all elements, but especially look for nonstandard characters.  *See the next bullet.*
 
-    Some API libraries test that problematic elements of a project are handled correctly.  If you encounter an element that causes problems, please consider 
+    Some API libraries test that problematic elements of a project are handled correctly.  If you encounter an element that causes problems, please consider
 
     1. creating a new GitHub Issue that describes the problem (*e.g.*, [REDCapR](https://github.com/OuhscBbmc/REDCapR/issues), [redcapAPI](https://github.com/nutterb/redcapAPI/issues), [phpcap](https://github.com/iuredcap/phpcap/issues)).
-        
+
     1. in the issue, attach the problematic fields of your data dictionary.  If you're uncomfortable sharing your dictionary with the world, consider emailing it to developer.  Because it's just the data dictionary, no PHI should be included.
 
     If the package developer can't find a way to gracefully adapt, they'll at least try to provide a better error message.
 
-    
+
 1. **Identify problematic characters.** This is a special case of the previous bullet.  Look for fancy characters that might not be interpreted smoothly.  For instance, when editing the data dictionary in Excel, sometimes *straight* quotes are converted to *curly* quotes.  This might cause a problem later, when your API client tries to interpet the character using the wrong encoding. All ASCII characters in REDCap dictionaries appear to be interpreted smoothly.
 
 
 General Troubleshooting Advice
 ------------------------------------------------------------------
 
-1. **Simplify.**  Eliminate potential sources of problems by cumulatively.  For example, reduce the columns & records that you read/write.  
+1. **Simplify.**  Eliminate potential sources of problems by cumulatively.  For example, reduce the columns & records that you read/write.
 
 1. **Start fresh.**  If that's not feasible, start a new project and gradually add elements from the original project.  Identify the problematic element by testing the API call after each addition.
 
