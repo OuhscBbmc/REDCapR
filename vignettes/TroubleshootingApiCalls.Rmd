@@ -65,7 +65,7 @@ knitr::include_graphics("images/PostmanScreenshot.png")
 
 1. **Is the API Playground producing the expected result?**  REDCap's "API Playground" holds your hand by (a) offering a dropdown list of API methods available to your REDCap instance, and (b) presenting a series of dropdown boxes appropriate for the selected method. Find it through the API link visible in the left margin of REDCap.  When you've completed the inputs, click 'Execute' to view the plain-text returned by the server.
 
-    At the bottom of the playground page, the interface attempts to translate your speciifc API call to different languages, like Python and R.  These suggestions are usually correct, but  inspect it critically, as you would for any auto-generated script.
+    At the bottom of the playground page, the interface attempts to translate your specific API call to different languages, like Python and R.  These suggestions are usually correct, but  inspect it critically, as you would for any auto-generated script.
 
 1. **Is Postman installed and operating correctly?**  If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/).  The url is `https://bbmc.ouhsc.edu/redcap/api/`.  There are three key-value pairs: (1) the 'token' is `9A81268476645C4E5F03428B8AC3AA7B`, (2) the 'content' is `record`, and (3) the 'format' should be `CSV`.  When checking your own server, the token value should change, but the content and format should not.  It should return five records in a CSV format.  The 'status' should be `200 OK`.  The result should look roughly like this.  Notice the line breaks were included in the text values themselves.
 
@@ -270,7 +270,7 @@ If you're not using REDCapR, you can skip this section and proceed to 'Importing
     5                     2
     ```
 
-1. **Can the user export their data diciontary?** Sometimes the problem exists within the metadata/dictionary, instead of the actual data values.  Verify the structure and content of this specific project is interpretable by your local environment.
+1. **Can the user export their data dictionary?** Sometimes the problem exists within the metadata/dictionary, instead of the actual data values.  Verify the structure and content of this specific project is interpretable by your local environment.
 
     ```r
     library(REDCapR) #Load the package into the current R session, if you haven't already.
@@ -431,13 +431,13 @@ Common Language-Agnostic Gotchas  {#gotchas-agnostic}
     If the package developer can't find a way to gracefully adapt, they'll at least try to provide a better error message.
 
     
-1. **Identify problematic characters.** This is a special case of the previous bulletLook for fancy characters that might not be interpreted smoothly.  For instance, when editing the data dictionary in Excel, sometimes *straight* quotes are converted to *curly* quotes.  This might cause a problem later, when your API client tries to interpet the character using the wrong encoding. All ASCII characters appear to be interpreted smoothly
+1. **Identify problematic characters.** This is a special case of the previous bullet.  Look for fancy characters that might not be interpreted smoothly.  For instance, when editing the data dictionary in Excel, sometimes *straight* quotes are converted to *curly* quotes.  This might cause a problem later, when your API client tries to interpet the character using the wrong encoding. All ASCII characters in REDCap dictionaries appear to be interpreted smoothly.
 
 
 General Troubleshooting Advice
 ------------------------------------------------------------------
 
-1. **Simplify.**  Elminate potential sources of problems by cumulatively.  For example, reduce the columns & records that you read/write.  
+1. **Simplify.**  Eliminate potential sources of problems by cumulatively.  For example, reduce the columns & records that you read/write.  
 
 1. **Start fresh.**  If that's not feasible, start a new project and gradually add elements from the original project.  Identify the problematic element by testing the API call after each addition.
 

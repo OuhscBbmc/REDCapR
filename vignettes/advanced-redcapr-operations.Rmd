@@ -94,7 +94,7 @@ ds_wide <-
 ds_wide
 ```
 
-In some scenarios, multiple variables (*e.g.*, `pmq1` - `pmq4`) can be widened in a single `tidyr::pivot_wider()` operation.  This example contains the additional wrinkle that the REDCap event names "first_dose" and "first_visit" are renamed "dose_1" and "visit_1", which wlil help all the values be dose and visit values be proper numbers.
+In some scenarios, multiple variables (*e.g.*, `pmq1` - `pmq4`) can be widened in a single `tidyr::pivot_wider()` operation.  This example contains the additional wrinkle that the REDCap event names "first_dose" and "first_visit" are renamed "dose_1" and "visit_1", which will help all the values be dose and visit values be proper numbers.
 
 ```{r widen-typical}
 pattern <- "^(\\w+?)_arm_(\\d)$"
@@ -163,7 +163,7 @@ ds_wide_2 <-
 ds_wide_2
 ```
 
-Lots of packages and documentation exist.  Our current preference is the [tidyverse approach](https://tidyr.tidyverse.org/articles/pivot.html) to pivoting, but the [data.table approach](https://www.r-bloggers.com/creating-blazing-fast-pivot-tables-from-r-with-data-table-now-with-subtotals-using-grouping-sets/) is worth considering if you're comfortable with that package.  This [Stack Overflow post](https://stackoverflow.com/questions/10589693/convert-data-from-long-format-to-wide-format-with-multiple-measure-columns/) describes several ways.  We recommend against the [reshape](https://CRAN.R-project.org/package=reshape) and [reshape2](https://CRAN.R-project.org/package=reshape2) packages, because their developers have replaced them with the [tidyr](https://CRAN.R-project.org/package=tidyr) funtions described above. 
+Lots of packages and documentation exist.  Our current preference is the [tidyverse approach](https://tidyr.tidyverse.org/articles/pivot.html) to pivoting, but the [data.table approach](https://www.r-bloggers.com/creating-blazing-fast-pivot-tables-from-r-with-data-table-now-with-subtotals-using-grouping-sets/) is worth considering if you're comfortable with that package.  This [Stack Overflow post](https://stackoverflow.com/questions/10589693/convert-data-from-long-format-to-wide-format-with-multiple-measure-columns/) describes several ways.  We recommend against the [reshape](https://CRAN.R-project.org/package=reshape) and [reshape2](https://CRAN.R-project.org/package=reshape2) packages, because their developers have replaced them with the [tidyr](https://CRAN.R-project.org/package=tidyr) functions described above. 
 
 
 ## SSL Options

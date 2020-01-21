@@ -70,7 +70,7 @@ sequence of (a) lowercase letters, (b) digits 0-9, and/or (c) underscores.
 If you encounter additional types of problems when attempting to write to
 REDCap, please tell us by creating a
 \href{https://github.com/OuhscBbmc/REDCapR/issues}{new issue}, and we'll
-incoporate a new validation check into this function.
+incorporate a new validation check into this function.
 }
 \examples{
 d <- data.frame(

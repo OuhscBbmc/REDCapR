@@ -81,7 +81,7 @@ REDCapR::regex_named_captures(pattern=pattern_boxes, text=choices_3)
 \references{
 See the official documentation for permissible characters in a
 checkbox label.
-\emph{I'm bluffing here, because I don't know where this islocated.
+\emph{I'm bluffing here, because I don't know where this is located.
 If you know, please tell me.}
 }
 \author{

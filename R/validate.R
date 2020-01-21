@@ -59,7 +59,7 @@
 #' If you encounter additional types of problems when attempting to write to
 #' REDCap, please tell us by creating a
 #' [new issue](https://github.com/OuhscBbmc/REDCapR/issues), and we'll
-#' incoporate a new validation check into this function.
+#' incorporate a new validation check into this function.
 #'
 #' @author Will Beasley
 #'
