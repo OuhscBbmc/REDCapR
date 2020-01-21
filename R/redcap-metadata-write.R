@@ -1,4 +1,4 @@
-#' @title Import metadata
+#' @title Import metadata of a REDCap project
 #'
 #' @description
 #' Import metadata (*i.e.*, data dictionary)

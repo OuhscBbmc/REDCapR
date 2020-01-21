@@ -14,7 +14,7 @@
 #'
 #' validate_field_names_collapsed( field_names_collapsed, stop_on_error = FALSE )
 #'
-#' @title Inspect a [base::data.frame()] to anticipate problems before
+#' @title Inspect a dataset to anticipate problems before
 #' writing to a REDCap project
 #'
 #' @description This set of functions inspect a [base::data.frame()] to

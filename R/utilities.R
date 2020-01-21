@@ -64,7 +64,7 @@ replace_nas_with_explicit <- function(
 
 
 #' @name collapse_vector
-#' @title Collapse a vector of values into a single string when necessary.
+#' @title Collapse a vector of values into a single string when necessary
 #'
 #' @description REDCap's API frequently specifies a series of values
 #' separated by commas.
