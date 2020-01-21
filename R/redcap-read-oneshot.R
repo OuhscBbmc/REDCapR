@@ -289,6 +289,7 @@ redcap_read_oneshot <- function(
       #   message exposed.
       kernel$raw_text   <- ""
     } else { # ds doesn't exist as a data.frame.
+      # nocov start
       # Override the 'success' determination from the http status code.
       #   and return an empty data.frame.
       kernel$success   <- FALSE
@@ -298,6 +299,7 @@ redcap_read_oneshot <- function(
         kernel$status_code,
         kernel$raw_text
       )
+      # nocov end
     }
   } else { # kernel fails
     ds              <- data.frame() #Return an empty data.frame

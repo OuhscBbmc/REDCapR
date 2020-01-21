@@ -100,6 +100,7 @@ redcap_variables <- function(
       #   to save RAM.  The content is not really necessary with httr's status
       #   message exposed.
     } else {
+      # nocov start
       kernel$success  <- FALSE # Override the 'success' http status code.
       ds              <- data.frame() #Return an empty data.frame
 
@@ -108,6 +109,7 @@ redcap_variables <- function(
         kernel$status_code,
         kernel$raw_text
       )
+      # nocov end
     }
   } else {
     ds              <- data.frame() #Return an empty data.frame
