@@ -231,6 +231,17 @@ If you're not using REDCapR, you can skip this section and proceed to "Exporting
     # Loading required package: REDCapR
     ```
 
+1. **Can the user export their data dictionary?** Sometimes the problem exists within the metadata/dictionary, instead of the actual data values.  Verify the structure and content of this specific project is interpretable by your local environment.
+
+    ```r
+    library(REDCapR) # Load the package into the current R session, if you haven't already.
+    redcap_uri       <- "https://the.urlofyourinsitution.edu/api/"
+    token            <- "your-secret-token"
+    redcap_metadata_read(redcap_uri = uri, token = token)
+    ```
+
+   If this fails, see "Problems in the project's metadata/dictionary." under [Gotchas](#gotchas-agnostic) below.
+   
 1. **Can the user export from an example project?** This is the same fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/) as in the previous section.
 
     ```r
@@ -277,17 +288,6 @@ If you're not using REDCapR, you can skip this section and proceed to "Exporting
     5                     2
     ```
 
-1. **Can the user export their data dictionary?** Sometimes the problem exists within the metadata/dictionary, instead of the actual data values.  Verify the structure and content of this specific project is interpretable by your local environment.
-
-    ```r
-    library(REDCapR) # Load the package into the current R session, if you haven't already.
-    redcap_uri       <- "https://the.urlofyourinsitution.edu/api/"
-    token            <- "your-secret-token"
-    redcap_metadata_read(redcap_uri = uri, token = token)
-    ```
-
-   If this fails, see "Problems in the project's metadata/dictionary." under [Gotchas](#gotchas-agnostic) below.
-    
 1. **Can the user export from their own project?** The code is similar to the previous check, but the `uri` and `token` values will need to be modified.
 
     ```r
@@ -345,6 +345,17 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
     # Loading required package: redcapAPI
     ```
 
+1. **Can the user export their data diciontary?** Sometimes the problem exists within the metadata/dictionary, instead of the actual data values.  Verify the structure and content of this specific project is interpretable by your local environment.
+
+    ```r
+    library(redcapAPI) # Load the package into the current R session, if you haven't already.
+    redcap_uri       <- "https://the.urlofyourinsitution.edu/api/"
+    token            <- "your-secret-token"
+    exportMetaData(rcon)
+    ```
+
+   If this fails, see "Problems in the project's metadata/dictionary." under [Gotchas](#gotchas-agnostic) below.
+   
 1. **Can the user export from an example project?** This is the same fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/) as in the previous section.
  
     ```r
@@ -387,16 +398,6 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
     4                     2
     5                     2
     ```
-1. **Can the user export their data diciontary?** Sometimes the problem exists within the metadata/dictionary, instead of the actual data values.  Verify the structure and content of this specific project is interpretable by your local environment.
-
-    ```r
-    library(redcapAPI) # Load the package into the current R session, if you haven't already.
-    redcap_uri       <- "https://the.urlofyourinsitution.edu/api/"
-    token            <- "your-secret-token"
-    exportMetaData(rcon)
-    ```
-
-   If this fails, see "Problems in the project's metadata/dictionary." under [Gotchas](#gotchas-agnostic) below.
     
 1. **Can the user export from their own project?** The code is similar to the previous check, but the `uri` and `token` values will need to be modified.
 
