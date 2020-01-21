@@ -3,7 +3,7 @@
 \name{redcap_read}
 \alias{redcap_read}
 \title{Read records from a REDCap project in subsets, and stacks them
-together before returning a \code{\link[base:data.frame]{base::data.frame()}}}
+together before returning a dataset}
 \usage{
 redcap_read(
   batch_size = 100L,

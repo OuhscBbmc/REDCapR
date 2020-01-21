@@ -2,7 +2,7 @@
 % Please edit documentation in R/utilities.R
 \name{collapse_vector}
 \alias{collapse_vector}
-\title{Collapse a vector of values into a single string when necessary.}
+\title{Collapse a vector of values into a single string when necessary}
 \usage{
 collapse_vector(elements, collapsed)
 }

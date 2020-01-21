@@ -2,7 +2,7 @@
 % Please edit documentation in R/redcap-metadata-write.R
 \name{redcap_metadata_write}
 \alias{redcap_metadata_write}
-\title{Import metadata}
+\title{Import metadata of a REDCap project}
 \usage{
 redcap_metadata_write(
   ds,

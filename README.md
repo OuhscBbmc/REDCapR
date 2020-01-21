@@ -86,7 +86,7 @@ Thanks,
 | :--- | :----- |
 | [License](https://choosealicense.com/) | [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html) |
 | [CRAN Version](https://cran.r-project.org/package=REDCapR) | [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/REDCapR)](https://cran.r-project.org/package=REDCapR) |
-| [CRAN Rate](http://cranlogs.r-pkg.org/) | ![CRANPace](http://cranlogs.r-pkg.org/badges/REDCapR) |
+| [CRAN Rate](http://cranlogs.r-pkg.org/) | ![CRAN Pace](http://cranlogs.r-pkg.org/badges/REDCapR) |
 | [Zenodo Archive](https://zenodo.org/search?ln=en&p=redcapr) | [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.61990.svg)](https://doi.org/10.5281/zenodo.61990) |
 | [Production Doc](https://www.rdocumentation.org/) | [![Rdoc](http://www.rdocumentation.org/badges/version/REDCapR)](http://www.rdocumentation.org/packages/REDCapR) |
 | [Development Doc](https://www.rdocumentation.org/) | [![Rdoc](https://img.shields.io/badge/pkgdown-GitHub.io-orange.svg?longCache=true&style=style=for-the-badge)](https://ouhscbbmc.github.io/REDCapR/) |

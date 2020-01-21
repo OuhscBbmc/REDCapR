@@ -6,7 +6,7 @@
 \alias{validate_for_write}
 \alias{validate_field_names}
 \alias{validate_field_names_collapsed}
-\title{Inspect a \code{\link[base:data.frame]{base::data.frame()}} to anticipate problems before
+\title{Inspect a dataset to anticipate problems before
 writing to a REDCap project}
 \usage{
 validate_for_write( d )
