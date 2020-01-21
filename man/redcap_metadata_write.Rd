@@ -55,7 +55,7 @@ it works for only projects in Development status.
 \examples{
 \dontrun{
 # Please don't run this example without changing the token to
-point to your server.  It could interfere with our testing suite.
+# point to your server.  It could interfere with our testing suite.
 uri            <- "https://bbmc.ouhsc.edu/redcap/api/"
 token          <- "457C24AB91B7FCF5B1A7DA67E70E24C7"
 
