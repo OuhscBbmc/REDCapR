@@ -167,7 +167,9 @@ anticipate problems before writing with REDCap's API.</p>
 
 <span class='fu'>validate_no_logical</span>( <span class='no'>data_types</span>, <span class='no'>stop_on_error</span> )
 
-<span class='fu'>validate_field_names</span>( <span class='no'>field_names</span>, <span class='no'>stop_on_error</span> )</pre>
+<span class='fu'>validate_field_names</span>( <span class='no'>field_names</span>, <span class='kw'>stop_on_error</span> <span class='kw'>=</span> <span class='fl'>FALSE</span> )
+
+<span class='fu'>validate_field_names_collapsed</span>( <span class='no'>field_names_collapsed</span>, <span class='kw'>stop_on_error</span> <span class='kw'>=</span> <span class='fl'>FALSE</span> )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -189,7 +191,14 @@ the REDCap project.</p></td>
     </tr>
     <tr>
       <th>field_names</th>
-      <td><p>The names of the fields/variables in the REDCap project.</p></td>
+      <td><p>The names of the fields/variables in the REDCap project.
+Each field is an individual element in the character vector.</p></td>
+    </tr>
+    <tr>
+      <th>field_names_collapsed</th>
+      <td><p>The names of the fields/variables in the
+REDCap project.  All fields are combined in a single vector element,
+separated by commas.</p></td>
     </tr>
     </table>
 
@@ -224,7 +233,7 @@ sequence of (a) lowercase letters, (b) digits 0-9, and/or (c) underscores.
 <p>If you encounter additional types of problems when attempting to write to
 REDCap, please tell us by creating a
 <a href='https://github.com/OuhscBbmc/REDCapR/issues'>new issue</a>, and we'll
-incoporate a new validation check into this function.</p>
+incorporate a new validation check into this function.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>The official documentation can be found on the 'API Help Page'
