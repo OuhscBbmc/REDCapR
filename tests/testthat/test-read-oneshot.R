@@ -82,7 +82,10 @@ test_that("default", {
 
   expect_message(
     regexp           = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token)
+    returned_object <- redcap_read_oneshot(
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token
+    )
   )
 
   expect_equivalent(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
@@ -93,7 +96,7 @@ test_that("default", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
-  system.file("misc/example.credentials", package="REDCapR")
+  # system.file("misc/example.credentials", package="REDCapR")
 
   # expect_equal_to_reference(returned_object$data, file=system.file("test-data/project-simple/variations/default.rds", package="REDCapR"))
   # expect_equal_to_reference(returned_object$data, file="./test-data/project-simple/variations/default.rds")

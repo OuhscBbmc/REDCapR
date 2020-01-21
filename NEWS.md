@@ -2,8 +2,7 @@ Upcoming Versions
 ==========================================================
 
 In the future:
-* `redcap_read()` and `redcap_read_oneshot()` allows caller to specify data types for columns.
-
+...
 
 Version 0.11 (Released ?)
 ==========================================================
@@ -27,6 +26,10 @@ Version 0.11 (Released ?)
 * `httr::content()` (which is inside `kernel_api()`) now processes the returned value as "text/csv", by default.  This should prevent strange characters from tricking the process as the internal variable `raw_text` is being formed. See the [httr::content()`](https://httr.r-lib.org/reference/content.html) documentation for a list of possible values for the `content_type` parameter.  (Thanks to great debugging by @vortexing, #269)
 
 * Similarly, `kernel_api()` now has an `encoding` parameter, which defaults to "UTF-8".  (#270)
+
+### Minor Enhancements
+
+* check for bad field names passed to the read records functions (#288)
 
 ### Corrections
 

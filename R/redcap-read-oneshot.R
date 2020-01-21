@@ -202,11 +202,18 @@ redcap_read_oneshot <- function(
   filter_logic        <- filter_logic_prepare(filter_logic)
   verbose             <- verbose_prepare(verbose)
 
-  if (any(grepl("[A-Z]", fields_collapsed)))
+  if (any(grepl("[A-Z]", fields_collapsed))) {
     warning(
       "The fields passed to REDCap appear to have at least uppercase letter. ",
       "REDCap variable names are snake case."
     )
+  }
+  if (any(grepl("\\b_", fields_collapsed))) {
+    warning(
+      "The fields passed to REDCap appear to start with an underscore, ",
+      "which is illegal for REDCap."
+    )
+  }
 
   post_body <- list(
     token                   = token,
