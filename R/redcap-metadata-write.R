@@ -32,7 +32,6 @@
 #' REDCap.  If an operation is successful, the `raw_text` is returned as an
 #' empty string to save RAM.
 #'
-#'
 #' @author Will Beasley
 #'
 #' @references The official documentation can be found on the 'API Help Page'

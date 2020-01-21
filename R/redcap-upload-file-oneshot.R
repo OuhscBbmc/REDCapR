@@ -103,6 +103,10 @@ redcap_upload_file_oneshot <- function(
   checkmate::assert_file_exists(file_name                                          )
   checkmate::assert_character(redcap_uri  , any.missing=FALSE, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token       , any.missing=FALSE, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(field       , any.missing=FALSE, len=1, pattern="^.{1,}$")
+  validate_field_names(field, stop_on_error = TRUE)
+  checkmate::assert_character(event       , any.missing=FALSE, len=1, pattern="^.{0,}$")
+  checkmate::assert_logical(  verbose     , any.missing=FALSE)
 
   token   <- sanitize_token(token)
   verbose <- verbose_prepare(verbose)

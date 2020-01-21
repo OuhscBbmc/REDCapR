@@ -105,8 +105,17 @@ redcap_download_file_oneshot <- function(
   config_options  = NULL
 ) {
 
+  checkmate::assert_character(file_name , null.ok   = TRUE , len=1, pattern="^.{1,}$")
+  checkmate::assert_character(directory , null.ok   = TRUE , len=1, pattern="^.{1,}$")
+  checkmate::assert_logical(  overwrite , any.missing=FALSE)
   checkmate::assert_character(redcap_uri, any.missing=FALSE, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token     , any.missing=FALSE, len=1, pattern="^.{1,}$")
+  record  <- as.character(record)
+  checkmate::assert_character(record    , any.missing=FALSE, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(field     , any.missing=FALSE, len=1, pattern="^.{1,}$")
+  validate_field_names(field, stop_on_error = TRUE)
+  checkmate::assert_character(event     , any.missing=FALSE, len=1, pattern="^.{0,}$")
+  checkmate::assert_logical(  verbose   , any.missing=FALSE)
 
   token   <- sanitize_token(token)
   verbose <- verbose_prepare(verbose)

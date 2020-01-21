@@ -192,7 +192,7 @@ redcap_read_oneshot <- function(
   checkmate::assert_logical(  verbose                   , any.missing=FALSE, len=1, null.ok=TRUE)
   checkmate::assert_list(     config_options            , any.missing=TRUE , len=1, null.ok=TRUE)
 
-  validate_field_names(fields)
+  validate_field_names(fields, stop_on_error = TRUE)
 
   token               <- sanitize_token(token)
   records_collapsed   <- collapse_vector(records  , records_collapsed)
@@ -202,18 +202,8 @@ redcap_read_oneshot <- function(
   filter_logic        <- filter_logic_prepare(filter_logic)
   verbose             <- verbose_prepare(verbose)
 
-  if (any(grepl("[A-Z]", fields_collapsed))) {
-    warning(
-      "The fields passed to REDCap appear to have at least uppercase letter. ",
-      "REDCap variable names are snake case."
-    )
-  }
-  if (any(grepl("\\b_", fields_collapsed))) {
-    warning(
-      "The fields passed to REDCap appear to start with an underscore, ",
-      "which is illegal for REDCap."
-    )
-  }
+  if (1L <= nchar(fields_collapsed) )
+    validate_field_names_collapsed(fields_collapsed, stop_on_error = TRUE)
 
   post_body <- list(
     token                   = token,

@@ -3,13 +3,16 @@
 #' validate_for_write
 #' validate_no_logical
 #' validate_field_names
+#' validate_field_names_collapsed
 #'
 #' @usage
 #' validate_for_write( d )
 #'
 #' validate_no_logical( data_types, stop_on_error )
 #'
-#' validate_field_names( field_names, stop_on_error )
+#' validate_field_names( field_names, stop_on_error = FALSE )
+#'
+#' validate_field_names_collapsed( field_names_collapsed, stop_on_error = FALSE )
 #'
 #' @title Inspect a [base::data.frame()] to anticipate problems before
 #' writing to a REDCap project
@@ -22,6 +25,10 @@
 #' @param data_types The data types of the [base::data.frame()] corresponding
 #'  to the REDCap project.
 #' @param field_names The names of the fields/variables in the REDCap project.
+#' Each field is an individual element in the character vector.
+#' @param field_names_collapsed  The names of the fields/variables in the
+#' REDCap project.  All fields are combined in a single vector element,
+#' separated by commas.
 #' @param stop_on_error If `TRUE`, an error is thrown for violations.
 #' Otherwise, a dataset summarizing the problems is returned.
 #'
@@ -121,7 +128,8 @@ validate_field_names <- function(field_names, stop_on_error = FALSE) {
     stop(
       length(indices),
       " field name(s) violated the naming rules.  Only digits, lowercase ",
-      "letters, and underscores are allowed."
+      "letters, and underscores are allowed.  The variable must start with ",
+      "a letter."
     )
   } else {
     tibble::tibble(
@@ -131,6 +139,11 @@ validate_field_names <- function(field_names, stop_on_error = FALSE) {
       suggestion         = "Change the uppercase letters to lowercase, potentially with `base::tolower()`."
     )
   }
+}
+#' @export
+validate_field_names_collapsed <- function(field_names_collapsed, stop_on_error = FALSE) {
+  field_names <- trimws(unlist(strsplit(field_names_collapsed, ",")))
+  validate_field_names(field_names = field_names, stop_on_error = stop_on_error)
 }
 
 #' @export
