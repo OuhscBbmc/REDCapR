@@ -15,7 +15,7 @@ vignette: >
 Troubleshooting REDCap API Calls
 ==================================================================
 
-There are many links in the pipeline between your institution's [REDCap](http://www.project-redcap.org/) server and the API user.  When the end result is unsuccessful, this document should help narrow the location of the possible problem.  The first two sections will be relevant to almost any language interacting with the API.  The remaining sections are possibly relevant only to your language (*e.g.*, Python, R, SAS, bash), or your software library ([redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) in R and [PyCap](http://pycap.readthedocs.org/en/latest/) in Python).
+There are many links in the pipeline between your institution's [REDCap](http://www.project-redcap.org/) server and the API user.  When the end result is unsuccessful, this document should help narrow the location of the possible problem.  The first two sections will be relevant to almost any language interacting with the API.  The remaining sections are possibly relevant only to your language (*e.g.*, Python, R, PHP, SAS, bash), or your software library such as ([redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://ouhscbbmc.github.io/REDCapR) in R, [phpcap](https://github.com/iuredcap/phpcap) in PHP, and [PyCap](http://pycap.readthedocs.org/en/latest/) in Python).
 
 Server Configuration and Authorization
 ------------------------------------------------------------------
@@ -103,134 +103,141 @@ knitr::include_graphics("images/PostmanScreenshot.png")
 Exporting from REDCap to R
 ------------------------------------------------------------------
 
-There are several ways to call REDCap's API from [R](https://cran.r-project.org/).  The packages [redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) both rely on the [httr](https://cran.r-project.org/package=httr) package, which calls the [curl](https://cran.r-project.org/package=curl) package.
+There are several ways to call REDCap's API from [R](https://cran.r-project.org/).  The packages [redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) both rely on the [httr](https://cran.r-project.org/package=httr) package, which calls the [curl](https://cran.r-project.org/package=curl) package, which calls [cURL](http://curl.haxx.se/docs/manpage.html).
 
 1. **Is httr installed on the user's local machine?** If so, running `library(httr)` should not produce any error messages if you're starting with a fresh session of R:
 
     ```r
-    > library(httr)
+    library(httr)
     ```
 
-1. **Does the user have the most recent version of httr?** There are several ways to do this, but the easiest is probably to run `update.packages(ask=FALSE, repos="http://cran.rstudio.com")`.  The optional argument `ask` prevents the user from needing to respond 'Y' to each outdated package.
+1. **Does the user have the most recent version of httr?** There are several ways to do this, but the easiest is probably to run `update.packages(ask = FALSE, repos = "https://cran.rstudio.com")`.  The optional argument `ask` prevents the user from needing to respond 'Y' to each outdated package.
 
 1. **Can the user query a *test* project using httr?** Both the [redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) packages employ something similar to the following function in [httr](https://cran.r-project.org/package=httr).  If you're curious, here is the relevant source code for [redcapAPI](https://github.com/nutterb/redcapAPI/blob/master/R/exportRecords.R) and [REDCapR](https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-read-oneshot.R).
 
-    If this check fails, consider attempting again with the uri and token used above in the Postman example.
-
-    This check avoids checking the SSL certificate in order to simplify the troubleshooting.  SSL verification is supported by default in the [PyCap](http://pycap.readthedocs.org/en/latest/), [redcapAPI](https://github.com/nutterb/redcapAPI), and [REDCapR](https://github.com/OuhscBbmc/REDCapR) packages.
+    If this check fails, consider attempting again with the url and token used above in the Postman example.
 
     ```r
     redcap_uri <- "https://bbmc.ouhsc.edu/redcap/api/"
     token      <- "9A81268476645C4E5F03428B8AC3AA7B"
-
-    raw_text <- RCurl::postForm(
-      uri                         = redcap_uri
-      , token                     = token
-      , content                   = 'record'
-      , format                    = 'csv'
-      , type                      = 'flat'
-      , rawOrLabel                = 'raw'
-      , exportDataAccessGroups    = 'true'
-      , .opts                     = RCurl::curlOptions(ssl.verifypeer=FALSE)
-    )
-    ```
-
-    Alternatively, you can try using the [`httr`](https://cran.r-project.org/package=httr) package, which uses `RCurl` underneath.  [`REDCapR`](https://github.com/OuhscBbmc/REDCapR) and a recent fork of [`redcap`](https://github.com/nutterb/redcap) actually uses `httr` directly, instead of `RCurl`.  As of 2014-07-06, this works with the Windows 8 version for [libcurl](http://curl.haxx.se/libcurl/) (which is underneath `RCurl), but not with some Linux versions; in this case pass the location of the SSL cert file.
-
-    ```r
+    
     post_body <- list(
-      token                       = token,
-      content                     = 'record',
-      format                      = 'csv',
-      type                        = 'flat',
-      rawOrLabel                  = 'raw',
-      exportDataAccessGroups      = 'true'
+      token           = token,
+      content         = 'record',
+      format          = 'csv',
+      type            = 'flat'
     )
 
     raw_text <- httr::POST(
-      url                         = redcap_uri,
-      body                        = post_body,
-      config                      = httr::config(ssl.verifypeer=FALSE),
-      httr::verbose() #Remove this line to suppress the frequent console updates.
+      url             = redcap_uri,
+      body            = post_body,
+      httr::verbose() # Remove this line to suppress the console updates.
+    )
+    
+    raw_text
+    ```
+    
+    Alternatively, you can try using the [RCurl](https://cran.r-project.org/package=RCurl) package.
+    
+    ```r
+    raw_text <- RCurl::postForm(
+      uri             = redcap_uri
+      , token         = token
+      , content       = 'record'
+      , format        = 'csv'
+      , type          = 'flat'
     )
     ```
 
-1. **Can the user query a *subset* of *their* project using RCurl?** This step is like the previous one, but with two differences.  First, it's using their REDCap project (instead of the test project).  Second, it pulls fewer records, and a smaller collection of fields.  Subsetting can help troubleshoot by avoiding (and thus identifying) cells with problematic values.
 
-    Notice this call to `RCurl::postForm()` now passes values to the `records` and `fields` parameters.  Also notice the value is a *single* long string, rather a *vector* of shorter strings (which is more natural to most R users).
+1. **Can the user query a *subset* of *their* project using httr?** This step is like the previous one, but with two differences.  First, it's using their REDCap project (instead of the test project).  Second, it pulls fewer records, and a smaller collection of fields.  Subsetting can help troubleshoot by avoiding (and thus identifying) cells with problematic values.
+
+    Notice this call now passes values to the `records` and `fields` parameters.  Also notice each value is a *single* long string (rather a *vector* of shorter strings, which is more natural to most R users).
 
     ```r
     redcap_uri         <- "https://the.urlofyourinsitution.edu/api/"
     token              <- "your-secret-token"
+    
     records_collapsed  <- "1,2,3"                             # Assumes dataset contains ID values of 1-3.
     fields_collapsed   <- "record_id,name_first,name_last"    # Assumes dataset contains these variables.
 
-    raw_text <- RCurl::postForm(
-      uri                          = redcap_uri
-      , token                      = token
-      , content                    = 'record'
-      , format                     = 'csv'
-      , type                       = 'flat'
-      , rawOrLabel                 = 'raw'
-      , exportDataAccessGroups     = 'true'
-      , records                    = records_collapsed
-      , fields                     = fields_collapsed
-      , .opts                      = RCurl::curlOptions(ssl.verifypeer=FALSE)
+    post_body <- list(
+      token           = token,
+      content         = 'record',
+      format          = 'csv',
+      type            = 'flat',
+      records         = records_collapsed,
+      fields          = fields_collapsed
     )
+
+    raw_text <- httr::POST(
+      url             = redcap_uri,
+      body            = post_body,
+      httr::verbose() # Remove this line to suppress the console updates.
+    )
+    
+    raw_text
     ```
 
-1. **Can the user query an *entire* project using RCurl?** There are two advantages of trying a subset of the data.  First, small datasets avoid the time-out errors that plague large datasets.  Second, it may avoid problematic values being passed through the pipeline.  If the current check fails but the previous check succeeds, then experiment with different expanses of records and fields.  This should help determine which values are causing the problems, or if there's simply too much data being pulled in one pass.
+1. **Can the user query an *entire* project using httr?** There are two advantages of trying a subset of the data.  First, small datasets avoid the time-out errors that plague large datasets.  Second, it may avoid problematic values being passed through the pipeline.  If the current check fails but the previous check succeeds, then experiment with different expanses of records and fields.  This should help determine which values are causing the problems, or if there's simply too much data being pulled in one pass.
 
     If the desired dataset is too large, consider if you can prune unnecessary records or fields.  If not, one solution is to pull smaller, multiple batches using the API, then reassemble them.  The [`redcap_read()` function](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html) in [REDCapR](https://ouhscbbmc.github.io/REDCapR/) does this automatically, and allows the user to specify a `batch_size`.
 
     ```r
     redcap_uri                  <- "https://the.urlofyourinsitution.edu/api/"
     token                       <- "your-secret-token"
+    
     records_collapsed           <- NULL
     fields_collapsed            <- NULL
 
-    raw_text <- RCurl::postForm(
-      uri                        = redcap_uri
-      , token                    = token
-      , content                  = 'record'
-      , format                   = 'csv'
-      , type                     = 'flat'
-      , rawOrLabel               = 'raw'
-      , exportDataAccessGroups   = 'true'
-      , records                  = records_collapsed
-      , fields                   = fields_collapsed
-      , .opts                    = RCurl::curlOptions(ssl.verifypeer=FALSE)
+    post_body <- list(
+      token           = token,
+      content         = 'record',
+      format          = 'csv',
+      type            = 'flat',
+      records         = records_collapsed,
+      fields          = fields_collapsed
     )
+
+    raw_text <- httr::POST(
+      url             = redcap_uri,
+      body            = post_body,
+      httr::verbose() # Remove this line to suppress the console updates.
+    )
+    
+    raw_text
     ```
 
 Exporting from REDCap to R, using REDCapR
 ------------------------------------------------------------------
 
-[REDCapR](https://ouhscbbmc.github.io/REDCapR/) is a package that uses [cURL](http://curl.haxx.se/) (via [httr](https://httr.r-lib.org/)) to communicate with REDCap, and wraps convenience functions around it to reduce the size and complexity of the user's code.  The package's basic functions are [demonstrated in a vignette](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) and are documented in its [reference manual](https://ouhscbbmc.github.io/REDCapR/reference).
+[REDCapR](https://ouhscbbmc.github.io/REDCapR/) wraps convenience functions around [httr](https://httr.r-lib.org/) to reduce the size and complexity of the user's code.  The package's basic functions are [demonstrated in a vignette](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) and are documented in its [reference manual](https://ouhscbbmc.github.io/REDCapR/reference).
 
-If you're not using REDCapR, you can skip this section and proceed to 'Importing into REDCap from R' below.
+If you're not using REDCapR, you can skip this section and proceed to "Exporting from REDCap to R, using redcapAPI" or "Importing into REDCap from R" below.
+
+[REDCapR](https://ouhscbbmc.github.io/REDCapR/) and [redcapAPI](https://github.com/nutterb/redcapAPI) are different R packages, but the developers collaborate with each other and share advice.
 
 1. **Is the latest version of REDCapR installed on the user's machine?** Currently the easiest way to install REDCapR is with the [remotes](https://remotes.r-lib.org/) package.  The following code installs remotes, then installs REDCapR.  The CRAN version of REDCapR is updated only a few times a year, while the code below will download the latest stable version.
 
     ```r
-    install.packages("remotes", repos="https://cran.rstudio.com")
-    remotes::install_github(repo="OuhscBbmc/REDCapR")
+    install.packages("remotes", repos = "https://cran.rstudio.com")
+    remotes::install_github(repo = "OuhscBbmc/REDCapR")
     ```
 
 1. **Does REDCapR load successfully on the user's machine?** If so, running `library(REDCapR)` should produce the following output if you're starting with a fresh session of R:
 
     ```r
     library(REDCapR)
-    ## Loading required package: REDCapR
+    # Loading required package: REDCapR
     ```
 
 1. **Can the user export from an example project?** This is the same fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/) as in the previous section.
 
     ```r
-    library(REDCapR) #Load the package into the current R session.
+    library(REDCapR) # Load the package into the current R session.
     uri   <- "https://bbmc.ouhsc.edu/redcap/api/"
     token <- "9A81268476645C4E5F03428B8AC3AA7B"
-    redcap_read(redcap_uri=uri, token=token)$data
+    redcap_read(redcap_uri = uri, token = token)$data
     ```
 
     The previous code should produce similar output.  Notice there are five rows and the columns will wrap around if your console window is too narrow.
@@ -273,10 +280,10 @@ If you're not using REDCapR, you can skip this section and proceed to 'Importing
 1. **Can the user export their data dictionary?** Sometimes the problem exists within the metadata/dictionary, instead of the actual data values.  Verify the structure and content of this specific project is interpretable by your local environment.
 
     ```r
-    library(REDCapR) #Load the package into the current R session, if you haven't already.
+    library(REDCapR) # Load the package into the current R session, if you haven't already.
     redcap_uri       <- "https://the.urlofyourinsitution.edu/api/"
     token            <- "your-secret-token"
-    redcap_metadata_read(redcap_uri=uri, token=token)
+    redcap_metadata_read(redcap_uri = uri, token = token)
     ```
 
    If this fails, see "Problems in the project's metadata/dictionary." under [Gotchas](#gotchas-agnostic) below.
@@ -284,37 +291,39 @@ If you're not using REDCapR, you can skip this section and proceed to 'Importing
 1. **Can the user export from their own project?** The code is similar to the previous check, but the `uri` and `token` values will need to be modified.
 
     ```r
-    library(REDCapR) #Load the package into the current R session, if you haven't already.
+    library(REDCapR) # Load the package into the current R session, if you haven't already.
     redcap_uri       <- "https://the.urlofyourinsitution.edu/api/"
     token            <- "your-secret-token"
-    redcap_read(redcap_uri=uri, token=token)$data
+    redcap_read(redcap_uri = uri, token = token)$data
     ```
 
     Alternatively, a `redcap_project` object can be declared initially, which makes subsequent calls cleaner when the token and url are required only the when the object is declared.
     
     ```r
-    library(REDCapR) #Load the package into the current R session, if you haven't already.
+    library(REDCapR) # Load the package into the current R session, if you haven't already.
     uri               <- "https://bbmc.ouhsc.edu/redcap/api/"
     token             <- "9A81268476645C4E5F03428B8AC3AA7B"
-    project           <- redcap_project$new(redcap_uri=uri, token=token)
+    project           <- redcap_project$new(redcap_uri = uri, token = token)
 
-    ds_three_columns  <- project$read(fields=c("record_id", "sex", "age"))$data
+    ds_three_columns  <- project$read(fields = c("record_id", "sex", "age"))$data
 
-    ids_of_males      <- ds_three_columns$record_id[ds_three_columns$sex==1]
+    ids_of_males      <- ds_three_columns$record_id[ds_three_columns$sex == 1]
     ids_of_minors     <- ds_three_columns$record_id[ds_three_columns$age < 18]
 
-    ds_males          <- project$read(records=ids_of_males, batch_size=2)$data
-    ds_minors         <- project$read(records=ids_of_minors)$data
+    ds_males          <- project$read(records = ids_of_males, batch_size = 2)$data
+    ds_minors         <- project$read(records = ids_of_minors)$data
     ```
 
-1. **Is the export operation still unsuccessful using REDCapR?**  If so the "Can the user query a *entire* REDCap project using RCurl?" check succeeded, but the REDCapR checks did not, consider posting a new [GitHub issue](https://github.com/OuhscBbmc/REDCapR/issues) to the package developers.
+1. **Is the export operation still unsuccessful using REDCapR?**  If so the "Can the user query a *entire* REDCap project using httr?" check succeeded, but the REDCapR checks did not, consider posting a new [GitHub issue](https://github.com/OuhscBbmc/REDCapR/issues) to the package developers.
 
 Exporting from REDCap to R, using redcapAPI
 ------------------------------------------------------------------
-
-[redcapAPI](https://github.com/nutterb/redcapAPI) is a package that uses [cURL](http://curl.haxx.se/) (via [httr](https://httr.r-lib.org/)) to communicate with REDCap, and wraps convenience functions around it to reduce the size and complexity of the user's code.
+[httr](https://httr.r-lib.org/)
+[redcapAPI](https://github.com/nutterb/redcapAPI) wraps convenience functions around [httr](https://httr.r-lib.org/) to reduce the size and complexity of the user's code.
 
 If you're not using redcapAPI, you can skip this section and proceed to 'Importing into REDCap from R' below.  More specific discussion about `redcapAPI` can be found at the [package's wiki](https://github.com/nutterb/redcapAPI/wiki).
+
+[redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://ouhscbbmc.github.io/REDCapR/) are different packages, but the developers collaborate with each other and share advice.
 
 1. **Is redcapAPI installed on the user's machine?** Currently, the easiest way to install `redcapAPI` is from CRAN.
 
@@ -325,21 +334,21 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
     Developmental versions may be available on GitHub.
 
     ```r
-    install.packages("remotes", repos="http://cran.rstudio.com")
-    remotes::install_github(repo="nutterb/redcapAPI")
+    install.packages("remotes", repos = "http://cran.rstudio.com")
+    remotes::install_github(repo = "nutterb/redcapAPI")
     ```
 
 1. **Does redcapAPI load successfully on the user's machine?** If so, running `library(redcapAPI)` should produce the following output if you're starting with a fresh session of R:
 
     ```r
     library(redcapAPI)
-    ## Loading required package: redcapAPI
+    # Loading required package: redcapAPI
     ```
 
 1. **Can the user export from an example project?** This is the same fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/) as in the previous section.
  
     ```r
-    library(redcapAPI) #Load the package into the current R session.
+    library(redcapAPI) # Load the package into the current R session.
     rcon <- redcapConnection(
       url   = "https://bbmc.ouhsc.edu/redcap/api/",
       token = "9A81268476645C4E5F03428B8AC3AA7B"
@@ -381,7 +390,7 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
 1. **Can the user export their data diciontary?** Sometimes the problem exists within the metadata/dictionary, instead of the actual data values.  Verify the structure and content of this specific project is interpretable by your local environment.
 
     ```r
-    library(redcapAPI) #Load the package into the current R session, if you haven't already.
+    library(redcapAPI) # Load the package into the current R session, if you haven't already.
     redcap_uri       <- "https://the.urlofyourinsitution.edu/api/"
     token            <- "your-secret-token"
     exportMetaData(rcon)
@@ -392,7 +401,7 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
 1. **Can the user export from their own project?** The code is similar to the previous check, but the `uri` and `token` values will need to be modified.
 
     ``` r
-    library(redcapAPI) #Load the package into the current R session, if you haven't already.
+    library(redcapAPI) # Load the package into the current R session, if you haven't already.
     rcon <- redcapConnection(
       url   = "https://the.urlofyourinsitution.edu/api/", # Adapt this to your server.
       token = "your-secret-token"                         # Adapt this to your user's token.
@@ -400,7 +409,7 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
     exportRecords(rcon)
     ```
 
-1. **Is the export operation still unsuccessful using redcapAPI?** If so the "Can the user query a *entire* REDCap project using RCurl?" check succeeded, but the redcapAPI checks did not, consider posting a new [GitHub issue](https://github.com/nutterb/redcapAPI/issues) to the package developers.
+1. **Is the export operation still unsuccessful using redcapAPI?** If so the "Can the user query a *entire* REDCap project using httr?" check succeeded, but the redcapAPI checks did not, consider posting a new [GitHub issue](https://github.com/nutterb/redcapAPI/issues) to the package developers.
 
 
 Importing into REDCap from R
@@ -408,7 +417,7 @@ Importing into REDCap from R
 
 Troubleshooting import operations is trickier than export operations for two major reasons.  First, the database potentially persists your *import* mistakes.  In contrast, repeatedly *exporting* data won't affect subsequent reads.  Considering cloning the REDCap project for testing until the problem is resolved.  Remember to create a new token (because they're not automatically created when projects are cloned, even when users are copied), and to modify your code's token to point to the new testing clone.
 
- The second reason why importing can be trickier is because the schema (*e.g.*, the names and data types) of your local dataset must match the project's schema.  This section will be expanded in the future.  Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project's schema and dataset.  Also, consider exporting the dataset to your machine, and look for differences.  Note that you cannot import calculated fields into REDCap.
+The second reason why importing can be trickier is because the schema (*e.g.*, the names and data types) of your local dataset must match the project's schema.  Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project's schema and dataset.  Also, consider exporting the dataset to your machine, and look for differences.  Note that you cannot import calculated fields into REDCap.
 
 1. **Does the dataset pass [`REDCapR::validate_for_write()`](https://ouhscbbmc.github.io/REDCapR/reference/validate.html)?**  The `REDCapR::validate_for_write()` inspects a data.frame to anticipate problems before writing with REDCap's API.  The reference manual contains specifics of the validation checks.
 
@@ -420,7 +429,7 @@ Troubleshooting import operations is trickier than export operations for two maj
 Common Language-Agnostic Gotchas  {#gotchas-agnostic}
 ------------------------------------------------------------------
 
-1. **Problems in the project's metadata/dictionary.**  If exporting the metadata fails (*e.g.*, [`REDCapR::redcap_metadata_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_read.html) and [`redcapAPI::exportMetaData()`](https://rdrr.io/github/nutterb/redcapAPI/man/exportMetaData.html)), manually download the data dictionary from the REDCap browser.  Inspect the plain text closely in a text editor like [Atom](https://atom.io/) or [Visual Studio Code](https://code.visualstudio.com/); avoid programs like Excel because they tend to interpet, align, and decorate the values, which sometimes masks problems.  Scrutinize all elements, but especially look for nonstandard characters.  *See the next bullet.*
+1. **Problems in the project's metadata/dictionary.**  If exporting the metadata fails (*e.g.*, [`REDCapR::redcap_metadata_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_read.html) and [`redcapAPI::exportMetaData()`](https://rdrr.io/github/nutterb/redcapAPI/man/exportMetaData.html)), manually download the data dictionary from the REDCap browser.  Inspect the plain text closely in a text editor like [Atom](https://atom.io/) or [Visual Studio Code](https://code.visualstudio.com/); avoid programs like Excel that tend to interpet, align, and decorate the values, which sometimes masks problems.  Scrutinize all elements, but especially look for nonstandard characters.  *See the next bullet.*
 
     Some API libraries test that problematic elements of a project are handled correctly.  If you encounter an element that causes problems, please consider 
 
@@ -460,9 +469,9 @@ Other good resources
 * If you have access to the REDCap wiki, some newer examples might exist at <https://community.projectredcap.org/articles/462/api-examples.html>.  The official documentation can be found on the `API Help Page` and `API Examples' pages on the REDCap wiki (*i.e.*, <https://community.projectredcap.org/articles/456/api-documentation.html> and <https://community.projectredcap.org/articles/462/api-examples.html>). If you do not have an account for the wiki, please ask your campus REDCap administrator to send you the static material.
 * Scott Burns, the primary developer of [PyCap](https://github.com/redcap-tools/PyCap) has a good intro at http://sburns.org/2013/07/22/intro-to-redcap-api.html
 * Benjamin Nutter, the primary developer of [redcapAPI](https://github.com/nutterb/redcapAPI/wiki) has a good wiki at https://github.com/nutterb/redcapAPI/wiki
-* In addition to this troubleshooting document, REDCapR has a [vignette](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) that covers its basic operations.
+* In addition to this troubleshooting document, REDCapR has vignettes that covers its  [basic](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) and [advanced](https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.html) operations.
 
 Document Info
 ------------------------------------------------------------------
 
-This document is primarily based on REDCap version 6.0.2 and was last updated 2019-12-03.  A development version of the document is available on GitHub: https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html.
+This document is primarily based on REDCap version 6.0.2 and was last updated 2020-01-21.  A development version of the document is available on GitHub: https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html.
