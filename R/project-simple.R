@@ -12,15 +12,12 @@ populate_project_simple <- function(batch = FALSE) {
     # nocov end
   }
 
-  # Declare the server & user information
-  credential <- REDCapR::retrieve_credential_local(
-    path_credential = system.file("misc/example.credentials", package="REDCapR"),
-    project_id      = 213L
-  )
-  uri <- credential$redcap_uri
-  token <- credential$token
+  credential  <- retrieve_credential_testing(213L)
 
-  project <- REDCapR::redcap_project$new(redcap_uri = uri, token = token)
+  project <- REDCapR::redcap_project$new(
+    redcap_uri    = credential$redcap_uri,
+    token         = credential$token
+  )
   path_in_simple <- system.file(
     "test-data/project-simple/simple-data.csv",
     package = "REDCapR"
@@ -45,15 +42,15 @@ populate_project_simple <- function(batch = FALSE) {
     returned_object <- if (batch) {
       REDCapR::redcap_write(
         ds          = ds_to_write,
-        redcap_uri  = uri,
-        token       = token,
+        redcap_uri  = project$redcap_uri,
+        token       = project$token,
         verbose     = TRUE
       )
     } else {
       REDCapR::redcap_write_oneshot(
         ds          = ds_to_write,
-        redcap_uri  = uri,
-        token       = token,
+        redcap_uri  = project$redcap_uri,
+        token       = project$token,
         verbose     = TRUE
       )
     }
@@ -61,7 +58,10 @@ populate_project_simple <- function(batch = FALSE) {
 
   # If uploading the data was successful, then upload the image files.
   if (returned_object$success) {
-    upload_file_simple(redcap_uri = uri, token = token)
+    upload_file_simple(
+      redcap_uri    = project$redcap_uri,
+      token         = project$token
+    )
   }
 
   # Print a message and return a boolean value

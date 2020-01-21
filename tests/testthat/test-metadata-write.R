@@ -1,10 +1,6 @@
 library(testthat)
 
-# Declare the server & user information
-credential <- REDCapR::retrieve_credential_local(
-  path_credential = system.file("misc/example.credentials", package="REDCapR"),
-  project_id      = 1490L
-)
+credential  <- retrieve_credential_testing(1490L)
 
 # Read in the dictionary in R's memory from a csv file.
 path_in <- system.file(

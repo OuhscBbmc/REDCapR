@@ -1,17 +1,8 @@
 library(testthat)
 
-credential <- REDCapR::retrieve_credential_local(
-  path_credential = system.file("misc/example.credentials", package="REDCapR"),
-  project_id      = 153
-)
-credential_super_wide <- REDCapR::retrieve_credential_local(
-  path_credential = system.file("misc/example.credentials", package="REDCapR"),
-  project_id      = 753
-)
-credential_problem <- REDCapR::retrieve_credential_local(
-  path_credential = system.file("misc/example.credentials", package="REDCapR"),
-  project_id      = 1425
-)
+credential            <- retrieve_credential_testing()
+credential_super_wide <- retrieve_credential_testing(753L)
+credential_problem    <- retrieve_credential_testing(1425L)
 
 test_that("Metadata Read Smoke Test", {
   testthat::skip_on_cran()
