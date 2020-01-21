@@ -202,11 +202,18 @@ redcap_read_oneshot <- function(
   filter_logic        <- filter_logic_prepare(filter_logic)
   verbose             <- verbose_prepare(verbose)
 
-  if (any(grepl("[A-Z]", fields_collapsed)))
+  if (any(grepl("[A-Z]", fields_collapsed))) {
     warning(
       "The fields passed to REDCap appear to have at least uppercase letter. ",
       "REDCap variable names are snake case."
     )
+  }
+  if (any(grepl("\\b_", fields_collapsed))) {
+    warning(
+      "The fields passed to REDCap appear to start with an underscore, ",
+      "which is illegal for REDCap."
+    )
+  }
 
   post_body <- list(
     token                   = token,
@@ -282,9 +289,9 @@ redcap_read_oneshot <- function(
       #   message exposed.
       kernel$raw_text   <- ""
     } else { # ds doesn't exist as a data.frame.
+      # nocov start
       # Override the 'success' determination from the http status code.
       #   and return an empty data.frame.
-      # nocov start
       kernel$success   <- FALSE
       ds               <- data.frame()
       outcome_message  <- sprintf(
@@ -292,7 +299,7 @@ redcap_read_oneshot <- function(
         kernel$status_code,
         kernel$raw_text
       )
-      # nocov stop
+      # nocov end
     }
   } else { # kernel fails
     ds              <- data.frame() #Return an empty data.frame

@@ -43,3 +43,5 @@ test_that("Russian Recruit", {
 #   iconv(d$recruitment_other, "latin1", "ASCII", sub = "byte")
 #   expect_equal(d$recruitment_other, expected)
 # })
+
+rm(credential)

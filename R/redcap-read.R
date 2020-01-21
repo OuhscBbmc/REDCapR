@@ -214,6 +214,14 @@ redcap_read <- function(
     config_options     = config_options
   )
 
+  # if (!metadata$success) {
+  #   error_message     <- sprintf(
+  #     "The REDCapR record export operation was not successful.  The error message was:\n%s",
+  #     metadata$raw_text
+  #   )
+  #   stop(error_message)
+  # }
+
   initial_call <- REDCapR::redcap_read_oneshot(
     redcap_uri         = redcap_uri,
     token              = token,
@@ -312,7 +320,8 @@ redcap_read <- function(
       )
 
       if (continue_on_error) warning(error_message)
-      else stop(error_message) # nocov stop
+      else stop(error_message)
+      # nocov end
     }
 
     lst_batch[[i]]   <- read_result$data

@@ -165,3 +165,5 @@ test_that("filter - character", {
   expect_equal(returned_object2$filter_logic, filter, "The filter was not correct.")
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
+
+rm(credential, project, directory_relative)

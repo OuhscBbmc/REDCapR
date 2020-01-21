@@ -181,11 +181,18 @@ redcap_read_oneshot_eav <- function(
   filter_logic        <- filter_logic_prepare(filter_logic)
   verbose             <- verbose_prepare(verbose)
 
-  if (any(grepl("[A-Z]", fields_collapsed)))
+  if (any(grepl("[A-Z]", fields_collapsed))) {
     warning(
       "The fields passed to REDCap appear to have at least uppercase letter. ",
       "REDCap variable names are snake case."
     )
+  }
+  if (any(grepl("\\b_", fields_collapsed))) {
+    warning(
+      "The fields passed to REDCap appear to start with an underscore, ",
+      "which is illegal for REDCap."
+    )
+  }
 
   post_body <- list(
     token                   = token,
@@ -206,6 +213,15 @@ redcap_read_oneshot_eav <- function(
 
   # This is the important line that communicates with the REDCap server.
   kernel      <- kernel_api(redcap_uri, post_body, config_options)
+
+  if (!kernel$success) {
+    error_message     <- sprintf(
+      "The REDCapR record export operation was not successful.  The error message was:\n%s",
+      kernel$raw_text
+    )
+    stop(error_message)
+  }
+
 
   ds_metadata <-
     REDCapR::redcap_metadata_read(
@@ -258,8 +274,7 @@ redcap_read_oneshot_eav <- function(
               dplyr::select(field_name = .data$export_field_name) %>%
               dplyr::filter(grepl("^\\w+?_complete$", .data$field_name))
           ) %>%
-          dplyr::pull(.data$field_name) %>%
-          rev()
+          dplyr::pull(.data$field_name) #%>% rev()
 
         ds_eav_2 <-
           ds_eav %>%

@@ -1,20 +1,22 @@
 library(testthat)
 
-# Since the project data is wiped clean at the start of each function,
-# the upload & download calls are tested by one function.
+credential <- REDCapR::retrieve_credential_local(
+  path_credential = system.file("misc/example.credentials", package="REDCapR"),
+  project_id      = 153L
+)
+delay_after_download_file <- 1.0 # In seconds
 
-delay_after_download_file <- 1.0 #In seconds
-
-test_that("default-name", {
+test_that("download instrument", {
   testthat::skip_on_cran()
-  start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
-  project <- start_clean_result$redcap_project
 
   expected_outcome_message <- "Preparing to download the file `.+`."
 
   tryCatch({
     expect_message(
-      returned_object <- redcap_download_instrument(redcap_uri=project$redcap_uri, token=project$token),
+      returned_object <- redcap_download_instrument(
+        redcap_uri  = credential$redcap_uri,
+        token       = credential$token
+      ),
       regexp = expected_outcome_message
     )
   }, finally = base::unlink(returned_object$file_name)
@@ -32,14 +34,62 @@ test_that("default-name", {
   expect_true(returned_object$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
   expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
   expect_equal(returned_object$file_name, "instruments.pdf", label="The name of the downloaded file should be correct.")
-
-  # #Test the values of the file.
-  # expect_equal(info_actual$size, expected=info_expected$size, label="The size of the downloaded file should match.")
-  # expect_false(info_actual$isdir, "The downloaded file should not be a directory.")
-  # # expect_equal(as.character(info_actual$mode), expected=as.character(info_expected$mode), label="The mode/permissions of the downloaded file should match.")
-  # expect_true(start_time <= info_actual$mtime, label="The downloaded file's modification time should not precede this function's start time.")
-  # expect_true(start_time <= info_actual$ctime, label="The downloaded file's last change time should not precede this function's start time.")
-  # expect_true(start_time <= info_actual$atime, label="The downloaded file's last access time should not precede this function's start time.")
 })
 
+test_that("download instrument conflict -Error", {
+  testthat::skip_on_cran()
 
+  expected_outcome_message_1  <- '*text/html; charset=UTF-8 successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as instruments\\.pdf'
+  expected_outcome_message_2  <- 'The operation was halted because the file `instruments\\.pdf`\\s+already exists and `overwrite` is FALSE\\.  Please check the directory if you believe this is a mistake\\.'
+
+  tryCatch({
+    # The first run should work.
+    expect_message(
+      returned_object_1 <- redcap_download_instrument(
+        redcap_uri    = credential$redcap_uri,
+        token         = credential$token,
+      ),
+      regexp = expected_outcome_message_1
+    )
+    Sys.sleep(delay_after_download_file)
+
+    #Test the values of the returned object.
+    expect_true(returned_object_1$success)
+    expect_equal(returned_object_1$status_code, expected=200L)
+
+    # The second run should fail (b/c the file already exists).
+    expect_error(
+      returned_object_2 <- redcap_download_instrument(
+        redcap_uri    = credential$redcap_uri,
+        token         = credential$token,
+        overwrite     = FALSE
+      ),
+      regexp = expected_outcome_message_2
+    )
+    Sys.sleep(delay_after_download_file)
+
+    expect_false(exists("returned_object_2"))
+
+  }, finally = base::unlink(returned_object_1$file_name)
+  )
+})
+
+test_that("bad token -Error", {
+  testthat::skip_on_cran()
+  expected_outcome_message <- "file NOT downloaded."
+
+  testthat::expect_message(
+    returned_object <-
+      redcap_download_instrument(
+        redcap_uri  = credential$redcap_uri,
+        token       = "BAD00000000000000000000000000000"
+      ),
+    expected_outcome_message
+  )
+
+  testthat::expect_false(returned_object$success)
+  testthat::expect_equal(returned_object$status_code, 403L)
+  testthat::expect_equal(returned_object$raw_text, "ERROR: You do not have permissions to use the API")
+})
+
+rm(credential)

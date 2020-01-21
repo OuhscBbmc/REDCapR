@@ -1034,3 +1034,5 @@ test_that("default", {
   # expect_equal_to_reference(returned_object$data, file=system.file("test-data/project-simple/variations/default.rds", package="REDCapR"))
   # expect_equal_to_reference(returned_object$data, file="./test-data/project-simple/variations/default.rds")
 })
+
+rm(credential)

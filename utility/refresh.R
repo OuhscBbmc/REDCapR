@@ -5,7 +5,17 @@ options(device = deviceType) #http://support.rstudio.org/help/discussions/proble
 devtools::document()
 devtools::check_man() #Should return NULL
 devtools::build_vignettes()
-(gp <- goodpractice::gp())
+
+checks_to_exclude <- c(
+  "covr",
+  "lintr_line_length_linter"
+)
+gp <-
+  goodpractice::all_checks() %>%
+  purrr::discard(~(. %in% checks_to_exclude)) %>%
+  goodpractice::gp(checks = .)
+goodpractice::results(gp)
+gp
 
 devtools::document()
 pkgdown::clean_site()
@@ -16,6 +26,7 @@ devtools::run_examples(); #dev.off() #This overwrites the NAMESPACE file too
 # devtools::run_examples(, "redcap_read.Rd")
 test_results_checked <- devtools::test()
 test_results_checked <- devtools::test(filter = "read-oneshot-eav")
+test_results_checked <- devtools::test(filter = "metadata-write")
 test_results_checked <- devtools::test(filter = "validate.*$")
 
 # testthat::test_dir("./tests/")

@@ -139,7 +139,7 @@ redcap_metadata_read <- function(
         kernel$status_code,
         kernel$raw_text
       )
-    }       # nocov stop
+    }       # nocov end
   } else {
     ds                  <- data.frame() #Return an empty data.frame
     outcome_message     <- sprintf(

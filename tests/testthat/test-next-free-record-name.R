@@ -54,7 +54,26 @@ test_that("DAG", {
   )
 
   expected <- "331-3"
-  observed <- redcap_next_free_record_name(redcap_uri=credential_dag$redcap_uri, token=credential_dag$token)
+  observed <- redcap_next_free_record_name(
+    redcap_uri        = credential_dag$redcap_uri,
+    token             = credential_dag$token
+  )
 
   expect_equal(observed, expected)
 })
+
+test_that("bad token -Error", {
+  testthat::skip_on_cran()
+  expected_outcome_message <- "The REDCap determination of the next free record id failed\\."
+
+  expect_message(
+    observed <-
+      redcap_next_free_record_name(
+        redcap_uri    = credential$redcap_uri,
+        token         = "BAD00000000000000000000000000000"
+      ),
+    expected_outcome_message
+  )
+  testthat::expect_equal(observed, character(0))
+})
+rm(credential)

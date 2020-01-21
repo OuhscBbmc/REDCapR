@@ -28,8 +28,8 @@ David Bard, PI, OUHSC; 2015-2017.
 \item \emph{Title IV-E Waiver Project}, \href{http://mchb.hrsa.gov/}{HRSA/MCHB}-sponsored
 collaboration with \href{http://www.okdhs.org/}{OKDHS};
 David Bard, PI, OUHSC; 2014-2017.
-\item \emph{Integrative Analysis of Longitudinal Studies of Aging (IALSA)}, sponsored
-by \href{http://grantome.com/grant/NIH/P01-AG043362}{NIH 5P01AG043362}.
+\item \emph{Integrative Analysis of Longitudinal Studies of Aging (IALSA)},
+sponsored by \href{http://grantome.com/grant/NIH/P01-AG043362}{NIH 5P01AG043362}.
 Scott Hofer, PI, University of Victoria;
 Will Beasley, PI of site-award, OUHSC; 2013-2018.
 \item \emph{Oklahoma Shared Clinical and Translational Resources}, sponsored by

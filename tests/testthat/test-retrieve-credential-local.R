@@ -22,7 +22,7 @@ test_that("Good Credentials", {
   expected_write_username       <- "myusername"
   expected_write_project_id     <- pid_write
   expected_write_token          <- "D70F9ACD1EDD6F151C6EA78683944E98"
-  expected_write_comment        <- "simple write test project"
+  expected_write_comment        <- "simple write data"
 
   credential_read         <- REDCapR::retrieve_credential_local(path, pid_read)
   credential_longitudinal <- REDCapR::retrieve_credential_local(path, pid_longitudinal)
@@ -150,3 +150,7 @@ test_that("Bad URI", {
     )
   )
 })
+
+rm(credential_read         )
+rm(credential_longitudinal )
+rm(credential_write        )

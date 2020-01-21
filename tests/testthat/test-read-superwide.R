@@ -5,7 +5,6 @@ credential <- REDCapR::retrieve_credential_local(
   project_id      = 753
 )
 
-
 test_that("smoke test", {
   testthat::skip_on_cran()
   expect_message(
@@ -61,3 +60,5 @@ test_that("correct dimensions -batch", {
   expect_true(  returned_object$filter_logic=="", "A filter was not specified.")
   expect_match( returned_object$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
+
+rm(credential)
