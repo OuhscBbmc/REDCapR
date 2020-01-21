@@ -45,7 +45,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9005</span>
       </span>
     </div>
 
@@ -110,9 +110,9 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="redcapr" class="section level1">
+<div id="redcapr-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#redcapr" class="anchor"></a><a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> <img src="reference/figures/logo.png" align="right" width="130">
+<a href="#redcapr-" class="anchor"></a><a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> <img src="reference/figures/logo.png" align="right" width="130">
 </h1></div>
 <p>We’ve been using R with <a href="https://projectredcap.org/">REDCap</a>’s API since 2012 and have developed <a href="https://github.com/OuhscBbmc/REDCapR"><code>REDCapR</code></a>. Before encapsulating these functions in a package, we were replicating 50+ lines of code to contact REDCap and robustly transform the returned <a href="https://en.wikipedia.org/wiki/Comma-separated_values">csv</a> into an R <code>data.frame</code>; it took twice that much to implement batching. All this can be done in one call to <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code><a href="reference/redcap_read.html">redcap_read()</a></code></a>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>ds &lt;-<span class="st"> </span><span class="kw"><a href="reference/redcap_read.html">redcap_read</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token)<span class="op">$</span>data</span></code></pre></div>
@@ -181,6 +181,7 @@
 <th align="center"><a href="https://travis-ci.org/OuhscBbmc/REDCapR/builds">Travis-CI</a></th>
 <th align="center"><a href="https://ci.appveyor.com/project/wibeasley/redcapr/history">AppVeyor</a></th>
 <th align="center"><a href="https://coveralls.io/r/OuhscBbmc/REDCapR">Coveralls</a></th>
+<th align="center"><a href="https://codecov.io/gh/OuhscBbmc/REDCapR">Codecov</a></th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -188,17 +189,20 @@
 <td align="center"><a href="https://travis-ci.org/OuhscBbmc/REDCapR"><img src="https://travis-ci.org/OuhscBbmc/REDCapR.svg?branch=master" alt="Build Status"></a></td>
 <td align="center"><a href="https://ci.appveyor.com/project/wibeasley/redcapr/branch/master"><img src="https://ci.appveyor.com/api/projects/status/0i41tn0n2jo4pd2k/branch/master?svg=true" alt="Build status"></a></td>
 <td align="center"><a href="https://coveralls.io/github/OuhscBbmc/REDCapR?branch=master"><img src="https://coveralls.io/repos/github/OuhscBbmc/REDCapR/badge.svg?branch=master" alt="Coverage Status"></a></td>
+<td align="center"><a href="https://codecov.io/gh/OuhscBbmc/REDCapR"><img src="https://codecov.io/gh/OuhscBbmc/REDCapR/branch/master/graph/badge.svg" alt="codecov"></a></td>
 </tr>
 <tr class="even">
 <td align="left"><a href="https://github.com/OuhscBbmc/REDCapR/tree/dev">Dev</a></td>
 <td align="center"><a href="https://travis-ci.org/OuhscBbmc/REDCapR"><img src="https://travis-ci.org/OuhscBbmc/REDCapR.svg?branch=dev" alt="Build Status"></a></td>
 <td align="center"><a href="https://ci.appveyor.com/project/wibeasley/redcapr/branch/dev"><img src="https://ci.appveyor.com/api/projects/status/0i41tn0n2jo4pd2k/branch/dev?svg=true" alt="Build status"></a></td>
 <td align="center"><a href="https://coveralls.io/github/OuhscBbmc/REDCapR?branch=dev"><img src="https://coveralls.io/repos/github/OuhscBbmc/REDCapR/badge.svg?branch=dev" alt="Coverage Status"></a></td>
+<td align="center"><a href="https://codecov.io/gh/OuhscBbmc/REDCapR/branch/dev"><img src="https://codecov.io/gh/OuhscBbmc/REDCapR/branch/dev/graph/badge.svg" alt="codecov"></a></td>
 </tr>
 <tr class="odd">
 <td align="left"></td>
 <td align="center"><em>Ubuntu LTS</em></td>
 <td align="center"><em>Windows Server</em></td>
+<td align="center"><em>Test Coverage</em></td>
 <td align="center"><em>Test Coverage</em></td>
 </tr>
 </tbody>

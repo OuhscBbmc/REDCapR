@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Export the metadata of a REDCap project — redcap_metadata_read • REDCapR</title>
+<title>Import metadata — redcap_metadata_write • REDCapR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,10 +48,10 @@
 
 
 
-<meta property="og:title" content="Export the metadata of a REDCap project — redcap_metadata_read" />
-<meta property="og:description" content="Export the metadata (as a data dictionary) of a REDCap project
-as a base::data.frame(). Each row in the data dictionary corresponds to
-one field in the project's dataset." />
+<meta property="og:title" content="Import metadata — redcap_metadata_write" />
+<meta property="og:description" content="Import metadata (i.e., data dictionary)
+into a project. Because of this method's destructive nature,
+it works for only projects in Development status." />
 <meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -151,24 +151,21 @@ one field in the project's dataset." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Export the metadata of a REDCap project</h1>
-    <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-metadata-read.R'><code>R/redcap-metadata-read.R</code></a></small>
-    <div class="hidden name"><code>redcap_metadata_read.Rd</code></div>
+    <h1>Import metadata</h1>
+    <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-metadata-write.R'><code>R/redcap-metadata-write.R</code></a></small>
+    <div class="hidden name"><code>redcap_metadata_write.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Export the metadata (as a data dictionary) of a REDCap project
-as a <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code>. Each row in the data dictionary corresponds to
-one field in the project's dataset.</p>
+    <p>Import metadata (<em>i.e.</em>, data dictionary)
+into a project. Because of this method's destructive nature,
+it works for only projects in Development status.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>redcap_metadata_read</span>(
+    <pre class="usage"><span class='fu'>redcap_metadata_write</span>(
+  <span class='no'>ds</span>,
   <span class='no'>redcap_uri</span>,
   <span class='no'>token</span>,
-  <span class='kw'>forms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>forms_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>fields</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>fields_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>,
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
@@ -176,6 +173,11 @@ one field in the project's dataset.</p>
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>ds</th>
+      <td><p>The <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> to be imported into the REDCap project.
+Required.</p></td>
+    </tr>
     <tr>
       <th>redcap_uri</th>
       <td><p>The URI (uniform resource identifier) of the REDCap
@@ -187,26 +189,6 @@ project.  Required.</p></td>
 project.  Required.</p></td>
     </tr>
     <tr>
-      <th>forms</th>
-      <td><p>An array, where each element corresponds to the REDCap form
-of the desired fields.  Optional.</p></td>
-    </tr>
-    <tr>
-      <th>forms_collapsed</th>
-      <td><p>A single string, where the desired forms are
-separated by commas.  Optional.</p></td>
-    </tr>
-    <tr>
-      <th>fields</th>
-      <td><p>An array, where each element corresponds to a desired project
-field.  Optional.</p></td>
-    </tr>
-    <tr>
-      <th>fields_collapsed</th>
-      <td><p>A single string, where the desired field names are
-separated by commas.  Optional.</p></td>
-    </tr>
-    <tr>
       <th>verbose</th>
       <td><p>A boolean value indicating if <code>message</code>s should be printed
 to the R console during the operation.  The verbose output might contain
@@ -215,62 +197,43 @@ be visible somewhere public. Optional.</p></td>
     </tr>
     <tr>
       <th>config_options</th>
-      <td><p>A list of options to pass to <code>POST</code> method in the
-<code>httr</code> package.  See the details in <code><a href='redcap_read_oneshot.html'>redcap_read_oneshot()</a></code>. Optional.</p></td>
+      <td><p>A list of options to pass to <code><a href='https://httr.r-lib.org/reference/POST.html'>httr::POST()</a></code> method
+in the 'httr' package.  See the details in <code><a href='redcap_read_oneshot.html'>redcap_read_oneshot()</a></code> Optional.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Currently, a list is returned with the following elements:</p><ul>
-<li><p><code>data</code>: An R <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code> of the desired records and columns.</p></li>
 <li><p><code>success</code>: A boolean value indicating if the operation was apparently
 successful.</p></li>
-<li><p><code>status_codes</code>: A collection of
-<a href='http://en.wikipedia.org/wiki/List_of_HTTP_status_codes'>http status codes</a>,
-separated by semicolons.  There is one code for each batch attempted.</p></li>
-<li><p><code>outcome_messages</code>: A collection of human readable strings indicating the
-operations' semicolons.  There is one code for each batch attempted.  In an
-unsuccessful operation, it should contain diagnostic information.</p></li>
-<li><p><code>forms_collapsed</code>: The desired records IDs, collapsed into a single
-string, separated by commas.</p></li>
-<li><p><code>fields_collapsed</code>: The desired field names, collapsed into a single
-string, separated by commas.</p></li>
+<li><p><code>status_code</code>: The
+<a href='http://en.wikipedia.org/wiki/List_of_HTTP_status_codes'>http status code</a>
+of the operation.</p></li>
+<li><p><code>outcome_message</code>: A human readable string indicating the operation's
+outcome.</p></li>
+<li><p><code>field_count</code>: Number of fields imported.</p></li>
 <li><p><code>elapsed_seconds</code>: The duration of the function.</p></li>
+<li><p><code>raw_text</code>: If an operation is NOT successful, the text returned by
+REDCap.  If an operation is successful, the <code>raw_text</code> is returned as an
+empty string to save RAM.</p></li>
 </ul>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Specifically, it internally uses multiple calls to <code><a href='redcap_read_oneshot.html'>redcap_read_oneshot()</a></code>
-to select and return data.  Initially, only primary key is queried through
-the REDCap API.  The long list is then subsetted into partitions, whose
-sizes are determined by the <code>batch_size</code> parameter.  REDCap is then queried
-for all variables of the subset's subjects.  This is repeated for each
-subset, before returning a unified <code><a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame()</a></code>.</p>
-<p>The function allows a delay between calls, which allows the server to
-attend to other users' requests.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>The official documentation can be found on the 'API Help Page'
-and 'API Examples' pages on the REDCap wiki (<em>i.e.</em>,
-https://community.projectredcap.org/articles/456/api-documentation.html and
-https://community.projectredcap.org/articles/462/api-examples.html).
+and 'API Examples' pages on the REDCap wiki.
 If you do not have an account for the wiki, please ask your campus REDCap
 administrator to send you the static material.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>uri</span>   <span class='kw'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class='no'>token</span> <span class='kw'>&lt;-</span> <span class='st'>"9A81268476645C4E5F03428B8AC3AA7B"</span>
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/redcap_metadata_read.html'>redcap_metadata_read</a></span>(<span class='kw'>redcap_uri</span><span class='kw'>=</span><span class='no'>uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>)
-}</div></pre>
+    <pre class="examples"></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
       <li><a href="#references">References</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
