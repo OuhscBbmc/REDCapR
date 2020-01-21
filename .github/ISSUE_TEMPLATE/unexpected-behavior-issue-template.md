@@ -8,7 +8,7 @@ assignees: ''
 ---
 
 **Describe the behavior**
-Please provide a clear and concise description of the scenario and the behavior.  *Be careful not to include tokens, [PHI](https://en.wikipedia.org/wiki/Protected_health_information), or other information that should not be public!*
+Please provide a clear and concise description of the scenario and the behavior.  *Be careful not to include tokens, PHI (protected health information), or other information that should not be public!*
 
 **Troubleshooter Results**
 Please carefully reread the [Troubleshooting Vignette](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html) and thoroughly describe which part(s) doesn't work.  Many people have contributed to this document; it is likely that it will help precisely identify the location of the problem, which will help us respond with better advice.
@@ -30,4 +30,4 @@ If applicable, add screenshots to help explain your problem.
 **Additional context**
 Add any other context about the problem here.
 
-*Remember, don't include tokens, [PHI](https://en.wikipedia.org/wiki/Protected_health_information), or other information that should not be public.*
+*Remember, don't include tokens, PHI, or other information that should not be public.*
