@@ -1,9 +1,6 @@
 library(testthat)
 
-credential <- REDCapR::retrieve_credential_local(
-  path_credential = system.file("misc/example.credentials", package="REDCapR"),
-  project_id      = 268
-)
+credential  <- retrieve_credential_testing(268L)
 
 test_that("Russian Recruit", {
   testthat::skip_on_cran()

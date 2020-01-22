@@ -1,4 +1,4 @@
-#' @title Creates a [base::data.frame()] that help batching long-running
+#' @title Creates a dataset that help batching long-running
 #' read and writes
 #'
 #' @description The function returns a [base::data.frame()] that other

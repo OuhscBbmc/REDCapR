@@ -227,7 +227,30 @@ If you do not have an account for the wiki, please ask your campus REDCap
 administrator to send you the static material.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># Please don't run this example without changing the token to</span>
+<span class='co'># point to your server.  It could interfere with our testing suite.</span>
+<span class='no'>uri</span>            <span class='kw'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class='no'>token</span>          <span class='kw'>&lt;-</span> <span class='st'>"457C24AB91B7FCF5B1A7DA67E70E24C7"</span>
+
+<span class='co'># Read in the dictionary in R's memory from a csv file.</span>
+<span class='no'>ds_to_write</span> <span class='kw'>&lt;-</span>
+  <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span>(
+    <span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(
+      <span class='st'>"test-data/project-simple/simple-metadata.csv"</span>,
+      <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"REDCapR"</span>
+    ),
+    <span class='kw'>col_types</span> <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/cols.html'>cols</a></span>(<span class='kw'>.default</span> <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_character</a></span>())
+  )
+<span class='no'>ds_to_write</span>
+
+<span class='co'># Import the dictionary into the REDCap project</span>
+<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/redcap_metadata_write.html'>redcap_metadata_write</a></span>(
+  <span class='kw'>ds</span>          <span class='kw'>=</span> <span class='no'>ds_to_write</span>,
+  <span class='kw'>redcap_uri</span>  <span class='kw'>=</span> <span class='no'>uri</span>,
+  <span class='kw'>token</span>       <span class='kw'>=</span> <span class='no'>token</span>
+)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

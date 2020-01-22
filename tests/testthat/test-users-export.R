@@ -1,14 +1,7 @@
 library(testthat)
 
-credential_1 <- REDCapR::retrieve_credential_local(
-  path_credential = system.file("misc/example.credentials", package="REDCapR"),
-  project_id      = 999
-)
-
-credential_2 <- REDCapR::retrieve_credential_local(
-  path_credential = system.file("misc/example.credentials", package="REDCapR"),
-  project_id      = 153
-)
+credential_1  <- retrieve_credential_testing(999L)
+credential_2  <- retrieve_credential_testing()
 
 test_that("smoke test", {
   testthat::skip_on_cran()
@@ -61,7 +54,6 @@ test_that("with DAGs", {
   expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
-  # system.file("misc/example.credentials", package="REDCapR")
 
   # expect_equal_to_reference(returned_object$data, file=system.file("test-data/project-simple/variations/default.rds", package="REDCapR"))
   # expect_equal_to_reference(returned_object$data, file="./test-data/project-simple/variations/default.rds")

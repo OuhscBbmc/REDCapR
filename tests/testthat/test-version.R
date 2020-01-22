@@ -1,9 +1,6 @@
 library(testthat)
 
-credential <- REDCapR::retrieve_credential_local(
-  path_credential = system.file("misc/example.credentials", package="REDCapR"),
-  project_id      = 153
-)
+credential  <- retrieve_credential_testing()
 
 test_that("Smoke Test", {
   testthat::skip_on_cran()

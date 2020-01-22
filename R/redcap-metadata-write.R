@@ -1,4 +1,4 @@
-#' @title Import metadata
+#' @title Import metadata of a REDCap project
 #'
 #' @description
 #' Import metadata (*i.e.*, data dictionary)
@@ -32,7 +32,6 @@
 #' REDCap.  If an operation is successful, the `raw_text` is returned as an
 #' empty string to save RAM.
 #'
-#'
 #' @author Will Beasley
 #'
 #' @references The official documentation can be found on the 'API Help Page'
@@ -43,7 +42,7 @@
 #' @examples
 #' \dontrun{
 #' # Please don't run this example without changing the token to
-#' point to your server.  It could interfere with our testing suite.
+#' # point to your server.  It could interfere with our testing suite.
 #' uri            <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token          <- "457C24AB91B7FCF5B1A7DA67E70E24C7"
 #'

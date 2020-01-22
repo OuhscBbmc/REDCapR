@@ -5,14 +5,17 @@
 \alias{validate_no_logical}
 \alias{validate_for_write}
 \alias{validate_field_names}
-\title{Inspect a \code{\link[base:data.frame]{base::data.frame()}} to anticipate problems before
+\alias{validate_field_names_collapsed}
+\title{Inspect a dataset to anticipate problems before
 writing to a REDCap project}
 \usage{
 validate_for_write( d )
 
 validate_no_logical( data_types, stop_on_error )
 
-validate_field_names( field_names, stop_on_error )
+validate_field_names( field_names, stop_on_error = FALSE )
+
+validate_field_names_collapsed( field_names_collapsed, stop_on_error = FALSE )
 }
 \arguments{
 \item{data_types}{The data types of the \code{\link[base:data.frame]{base::data.frame()}} corresponding
@@ -24,7 +27,12 @@ Otherwise, a dataset summarizing the problems is returned.}
 \item{d}{The \code{\link[base:data.frame]{base::data.frame()}} containing the dataset used to update
 the REDCap project.}
 
-\item{field_names}{The names of the fields/variables in the REDCap project.}
+\item{field_names}{The names of the fields/variables in the REDCap project.
+Each field is an individual element in the character vector.}
+
+\item{field_names_collapsed}{The names of the fields/variables in the
+REDCap project.  All fields are combined in a single vector element,
+separated by commas.}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}}, where each potential violation is a row.
@@ -62,7 +70,7 @@ sequence of (a) lowercase letters, (b) digits 0-9, and/or (c) underscores.
 If you encounter additional types of problems when attempting to write to
 REDCap, please tell us by creating a
 \href{https://github.com/OuhscBbmc/REDCapR/issues}{new issue}, and we'll
-incoporate a new validation check into this function.
+incorporate a new validation check into this function.
 }
 \examples{
 d <- data.frame(

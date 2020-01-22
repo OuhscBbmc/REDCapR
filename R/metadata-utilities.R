@@ -32,7 +32,7 @@
 #' @author Will Beasley
 #' @references See the official documentation for permissible characters in a
 #' checkbox label.
-#' *I'm bluffing here, because I don't know where this islocated.
+#' *I'm bluffing here, because I don't know where this is located.
 #' If you know, please tell me.*
 #'
 #' @examples

@@ -1,5 +1,5 @@
 #' @title Read records from a REDCap project in subsets, and stacks them
-#' together before returning a [base::data.frame()]
+#' together before returning a dataset
 #'
 #' @description From an external perspective, this function is similar to
 #' [redcap_read_oneshot()].  The internals differ in that `redcap_read`
@@ -195,7 +195,7 @@ redcap_read <- function(
   checkmate::assert_list(     config_options            , any.missing=TRUE ,     len=1, null.ok=TRUE)
   checkmate::assert_integer(  id_position               , any.missing=FALSE,     len=1, lower=1L)
 
-  validate_field_names(fields)
+  validate_field_names(fields, stop_on_error = TRUE)
 
   token               <- sanitize_token(token)
   records_collapsed   <- collapse_vector(records  , records_collapsed)
@@ -204,6 +204,9 @@ redcap_read <- function(
   events_collapsed    <- collapse_vector(events   , events_collapsed)
   filter_logic        <- filter_logic_prepare(filter_logic)
   verbose             <- verbose_prepare(verbose)
+
+  if (1L <= nchar(fields_collapsed) )
+    validate_field_names_collapsed(fields_collapsed, stop_on_error = TRUE)
 
   start_time <- Sys.time()
 

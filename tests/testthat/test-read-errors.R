@@ -1,9 +1,6 @@
 library(testthat)
 
-credential <- REDCapR::retrieve_credential_local(
-  path_credential = system.file("misc/example.credentials", package="REDCapR"),
-  project_id      = 153
-)
+credential  <- retrieve_credential_testing()
 
 test_that("One Shot: Bad Uri -Not HTTPS", {
   expected_message_411 <- "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\"http://www.w3.org/TR/html4/strict.dtd\">\n<HTML><HEAD><TITLE>Length Required</TITLE>\n<META HTTP-EQUIV=\"Content-Type\" Content=\"text/html; charset=us-ascii\"></HEAD>\n<BODY><h2>Length Required</h2>\n<hr><p>HTTP Error 411. The request must be chunked or have a content length.</p>\n</BODY></HTML>\n"
@@ -102,57 +99,6 @@ test_that("guess_max deprecated -warn", {
       redcap_uri    = credential$redcap_uri,
       token         = credential$token,
       guess_max     = 100
-    )
-  )
-})
-
-test_that("read-flat -uppercase fields -warn", {
-  expected_outcome_message <- "The fields passed to REDCap appear to have at least uppercase letter\\. REDCap variable names are snake case\\."
-
-  expect_warning(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(
-      redcap_uri    = credential$redcap_uri,
-      token         = credential$token,
-      fields        = c("record_ID")
-    )
-  )
-})
-
-test_that("read-flat -start w/ underscore -warn", {
-  expected_outcome_message <- "The fields passed to REDCap appear to start with an underscore, which is illegal for REDCap\\."
-
-  expect_warning(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(
-      redcap_uri    = credential$redcap_uri,
-      token         = credential$token,
-      fields        = c("_record_id")
-    )
-  )
-})
-
-test_that("read-eav -uppercase fields -warn", {
-  expected_outcome_message <- "The fields passed to REDCap appear to have at least uppercase letter\\. REDCap variable names are snake case\\."
-
-  expect_warning(
-    regexp           = expected_outcome_message,
-    returned_object <- REDCapR:::redcap_read_oneshot_eav(
-      redcap_uri    = credential$redcap_uri,
-      token         = credential$token,
-      fields        = c("record_ID")
-    )
-  )
-})
-test_that("read-eav -start w/ underscore -warn", {
-  expected_outcome_message <- "The fields passed to REDCap appear to start with an underscore, which is illegal for REDCap\\."
-
-  expect_warning(
-    regexp           = expected_outcome_message,
-    returned_object <- REDCapR:::redcap_read_oneshot_eav(
-      redcap_uri    = credential$redcap_uri,
-      token         = credential$token,
-      fields        = c("_record_id")
     )
   )
 })

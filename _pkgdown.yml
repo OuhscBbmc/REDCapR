@@ -49,6 +49,7 @@ reference:
       - redcap_download_instrument
       - redcap_next_free_record_name
       - redcap_metadata_read
+      - redcap_metadata_write
       - redcap_users_export
       - redcap_variables
       - redcap_version

@@ -2,14 +2,10 @@ library(testthat)
 
 context("Stress Test - Serial")
 
-# Declare the server & user information
-credential <- REDCapR::retrieve_credential_local(
-  path_credential = system.file("misc/example.credentials", package="REDCapR"),
-  project_id      = 153L
-)
+credential <- retrieve_credential_testing()
 
 read_count <- 2000L
-file_count <- 200L
+file_count <-  200L
 
 # Read ---------------------------------------------------
 message("\n========\nRead")
@@ -73,7 +69,11 @@ for( i in seq_len(file_count) ) {
 
   expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
+    returned_object <- redcap_read_oneshot(
+      redcap_uri      = project$redcap_uri,
+      token           = project$token,
+      raw_or_label    = "raw"
+    ),
     regexp = expected_outcome_message
   )
 
@@ -90,7 +90,12 @@ for( i in seq_len(file_count) ) {
 
   tryCatch({
     expect_message(
-      returned_object <- redcap_download_file_oneshot(record=record, field=field, redcap_uri=start_clean_result$redcap_project$redcap_uri, token=start_clean_result$redcap_project$token),
+      returned_object <- redcap_download_file_oneshot(
+        record        = record,
+        field         = field,
+        redcap_uri    = start_clean_result$redcap_project$redcap_uri,
+        token         = start_clean_result$redcap_project$token
+      ),
       regexp = expected_outcome_message
     )
     info_actual <- file.info(returned_object$file_name)
