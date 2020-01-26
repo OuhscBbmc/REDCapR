@@ -2,6 +2,7 @@
 ^doc$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.github$
 ^\.gitignore$
 ^\.travis.yml$
 ^cran-comments\.md$
