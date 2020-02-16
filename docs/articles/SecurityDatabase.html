@@ -103,12 +103,12 @@
 
       
 
-      </header><script src="SecurityDatabase_files/jquery-1.11.3/jquery.min.js"></script><script src="SecurityDatabase_files/elevate-section-attrs-2.0/elevate-section-attrs.js"></script><div class="row">
+      </header><script src="SecurityDatabase_files/header-attrs-2.1/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Security Database</h1>
             
-            <h4 class="date">2020-01-21</h4>
+            <h4 class="date">2020-02-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/SecurityDatabase.Rmd"><code>vignettes/SecurityDatabase.Rmd</code></a></small>
       <div class="hidden name"><code>SecurityDatabase.Rmd</code></div>
@@ -357,14 +357,14 @@
 <span id="cb3-67"><a href="#cb3-67"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span>
 <span id="cb3-68"><a href="#cb3-68"></a></span>
 <span id="cb3-69"><a href="#cb3-69"></a><span class="co"># Load the credentials from the first/production REDCap instance.</span></span>
-<span id="cb3-70"><a href="#cb3-70"></a>cnn_production  &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span>(odbc<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/odbc/man/odbc.html">odbc</a></span>(), <span class="dt">dsn=</span>dsn_production)</span>
-<span id="cb3-71"><a href="#cb3-71"></a>ds_production   &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw"><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html">dbGetQuery</a></span>(cnn_production, sql)</span>
-<span id="cb3-72"><a href="#cb3-72"></a>DBI<span class="op">::</span><span class="kw"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html">dbDisconnect</a></span>(cnn_production); <span class="kw"><a href="https://rdrr.io/r/base/rm.html">rm</a></span>(cnn_production, dsn_production)</span>
+<span id="cb3-70"><a href="#cb3-70"></a>cnn_production  &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DBI/man/dbConnect.html">dbConnect</a></span>(odbc<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/odbc/man/odbc.html">odbc</a></span>(), <span class="dt">dsn=</span>dsn_production)</span>
+<span id="cb3-71"><a href="#cb3-71"></a>ds_production   &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DBI/man/dbGetQuery.html">dbGetQuery</a></span>(cnn_production, sql)</span>
+<span id="cb3-72"><a href="#cb3-72"></a>DBI<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DBI/man/dbDisconnect.html">dbDisconnect</a></span>(cnn_production); <span class="kw"><a href="https://rdrr.io/r/base/rm.html">rm</a></span>(cnn_production, dsn_production)</span>
 <span id="cb3-73"><a href="#cb3-73"></a></span>
 <span id="cb3-74"><a href="#cb3-74"></a><span class="co"># Load the credentials from the second/dev REDCap instance.</span></span>
-<span id="cb3-75"><a href="#cb3-75"></a>cnn_dev         &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span>(odbc<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/odbc/man/odbc.html">odbc</a></span>(), <span class="dt">dsn=</span>dsn_dev)</span>
-<span id="cb3-76"><a href="#cb3-76"></a>ds_dev          &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw"><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html">dbGetQuery</a></span>(cnn_dev, sql)</span>
-<span id="cb3-77"><a href="#cb3-77"></a>DBI<span class="op">::</span><span class="kw"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html">dbDisconnect</a></span>(cnn_dev); <span class="kw"><a href="https://rdrr.io/r/base/rm.html">rm</a></span>(cnn_dev, dsn_dev)</span>
+<span id="cb3-75"><a href="#cb3-75"></a>cnn_dev         &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DBI/man/dbConnect.html">dbConnect</a></span>(odbc<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/odbc/man/odbc.html">odbc</a></span>(), <span class="dt">dsn=</span>dsn_dev)</span>
+<span id="cb3-76"><a href="#cb3-76"></a>ds_dev          &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DBI/man/dbGetQuery.html">dbGetQuery</a></span>(cnn_dev, sql)</span>
+<span id="cb3-77"><a href="#cb3-77"></a>DBI<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DBI/man/dbDisconnect.html">dbDisconnect</a></span>(cnn_dev); <span class="kw"><a href="https://rdrr.io/r/base/rm.html">rm</a></span>(cnn_dev, dsn_dev)</span>
 <span id="cb3-78"><a href="#cb3-78"></a></span>
 <span id="cb3-79"><a href="#cb3-79"></a><span class="kw"><a href="https://rdrr.io/r/base/rm.html">rm</a></span>(sql)</span>
 <span id="cb3-80"><a href="#cb3-80"></a></span>

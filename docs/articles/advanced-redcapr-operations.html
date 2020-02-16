@@ -103,12 +103,12 @@
 
       
 
-      </header><script src="advanced-redcapr-operations_files/jquery-1.11.3/jquery.min.js"></script><script src="advanced-redcapr-operations_files/elevate-section-attrs-2.0/elevate-section-attrs.js"></script><div class="row">
+      </header><script src="advanced-redcapr-operations_files/header-attrs-2.1/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Advanced REDCapR Operations</h1>
             
-            <h4 class="date">2020-01-21</h4>
+            <h4 class="date">2020-02-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/advanced-redcapr-operations.Rmd"><code>vignettes/advanced-redcapr-operations.Rmd</code></a></small>
       <div class="hidden name"><code>advanced-redcapr-operations.Rmd</code></div>
@@ -143,7 +143,7 @@
 <span id="cb2-4"><a href="#cb2-4"></a>events_to_retain  &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"dose_1_arm_1"</span>, <span class="st">"visit_1_arm_1"</span>, <span class="st">"dose_2_arm_1"</span>, <span class="st">"visit_2_arm_1"</span>)</span>
 <span id="cb2-5"><a href="#cb2-5"></a></span>
 <span id="cb2-6"><a href="#cb2-6"></a>ds_long &lt;-<span class="st"> </span>REDCapR<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/REDCapR/man/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token_longitudinal)<span class="op">$</span>data</span></code></pre></div>
-<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 1.6 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 1.7 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>ds_long <span class="op">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)</span></code></pre></div>
 <pre><code>#&gt;    study_id        redcap_event_name pmq1 pmq2 pmq3 pmq4
@@ -292,7 +292,7 @@
 <span id="cb14-7"><a href="#cb14-7"></a>    <span class="dt">config_options =</span> config_options</span>
 <span id="cb14-8"><a href="#cb14-8"></a>  )<span class="op">$</span>data</span>
 <span id="cb14-9"><a href="#cb14-9"></a>}</span></code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <p>Force the connection to use SSL=3 (which is not preferred, and possibly insecure).</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>config_options &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">sslversion=</span><span class="dv">3</span>)</span>
 <span id="cb16-2"><a href="#cb16-2"></a>ds_ssl_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(</span>
@@ -300,7 +300,7 @@
 <span id="cb16-4"><a href="#cb16-4"></a>  <span class="dt">token          =</span> token_simple,</span>
 <span id="cb16-5"><a href="#cb16-5"></a>  <span class="dt">config_options =</span> config_options</span>
 <span id="cb16-6"><a href="#cb16-6"></a>)<span class="op">$</span>data</span></code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>config_options &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">ssl.verifypeer=</span><span class="ot">FALSE</span>)</span>
 <span id="cb18-2"><a href="#cb18-2"></a>ds_no_ssl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(</span>
 <span id="cb18-3"><a href="#cb18-3"></a>   <span class="dt">redcap_uri     =</span> uri,</span>
@@ -340,13 +340,13 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 #&gt;  collate  en_US.UTF-8                 
 #&gt;  ctype    en_US.UTF-8                 
 #&gt;  tz       America/Chicago             
-#&gt;  date     2020-01-21                  
+#&gt;  date     2020-02-15                  
 #&gt; 
 #&gt; ─ Packages ───────────────────────────────────────────────────────────────────
 #&gt;  package     * version     date       lib source        
 #&gt;  assertthat    0.2.1       2019-03-21 [2] CRAN (R 3.6.1)
 #&gt;  backports     1.1.5       2019-10-02 [2] CRAN (R 3.6.1)
-#&gt;  callr         3.4.0       2019-12-09 [2] CRAN (R 3.6.1)
+#&gt;  callr         3.4.2       2020-02-12 [2] CRAN (R 3.6.2)
 #&gt;  checkmate     2.0.0       2019-12-03 [2] local         
 #&gt;  cli           2.0.1       2020-01-08 [2] CRAN (R 3.6.1)
 #&gt;  colorspace    1.4-1       2019-03-18 [2] CRAN (R 3.6.1)
@@ -354,8 +354,8 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 #&gt;  curl          4.3         2019-12-02 [2] CRAN (R 3.6.1)
 #&gt;  desc          1.2.0       2018-05-01 [2] CRAN (R 3.6.1)
 #&gt;  devtools      2.2.1       2019-09-24 [2] CRAN (R 3.6.1)
-#&gt;  digest        0.6.23      2019-11-23 [2] CRAN (R 3.6.1)
-#&gt;  dplyr         0.8.3       2019-07-04 [2] CRAN (R 3.6.1)
+#&gt;  digest        0.6.24      2020-02-12 [2] CRAN (R 3.6.2)
+#&gt;  dplyr         0.8.4       2020-01-31 [2] CRAN (R 3.6.2)
 #&gt;  ellipsis      0.3.0       2019-09-20 [2] CRAN (R 3.6.1)
 #&gt;  evaluate      0.14        2019-05-28 [2] CRAN (R 3.6.1)
 #&gt;  fansi         0.4.1       2020-01-08 [2] CRAN (R 3.6.1)
@@ -365,7 +365,7 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 #&gt;  htmltools     0.4.0       2019-10-04 [2] CRAN (R 3.6.1)
 #&gt;  httr          1.4.1       2019-08-05 [2] CRAN (R 3.6.1)
 #&gt;  kableExtra    1.1.0       2019-03-16 [2] CRAN (R 3.6.1)
-#&gt;  knitr       * 1.27        2020-01-16 [2] CRAN (R 3.6.1)
+#&gt;  knitr       * 1.28        2020-02-06 [2] CRAN (R 3.6.2)
 #&gt;  lifecycle     0.1.0       2019-08-01 [2] CRAN (R 3.6.1)
 #&gt;  magrittr    * 1.5         2014-11-22 [2] CRAN (R 3.6.1)
 #&gt;  MASS          7.3-51.5    2019-12-20 [5] CRAN (R 3.6.2)
@@ -376,19 +376,19 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 #&gt;  pkgconfig     2.0.3       2019-09-22 [2] CRAN (R 3.6.1)
 #&gt;  pkgdown       1.4.1       2019-09-15 [2] CRAN (R 3.6.1)
 #&gt;  pkgload       1.0.2       2018-10-29 [2] CRAN (R 3.6.1)
-#&gt;  prettyunits   1.1.0       2020-01-09 [2] CRAN (R 3.6.1)
-#&gt;  processx      3.4.1       2019-07-18 [2] CRAN (R 3.6.1)
-#&gt;  ps            1.3.0       2018-12-21 [2] CRAN (R 3.6.1)
+#&gt;  prettyunits   1.1.1       2020-01-24 [2] CRAN (R 3.6.2)
+#&gt;  processx      3.4.2       2020-02-09 [2] CRAN (R 3.6.2)
+#&gt;  ps            1.3.2       2020-02-13 [2] CRAN (R 3.6.2)
 #&gt;  purrr         0.3.3       2019-10-18 [2] CRAN (R 3.6.1)
 #&gt;  R6            2.4.1       2019-11-12 [2] CRAN (R 3.6.1)
 #&gt;  Rcpp          1.0.3       2019-11-08 [2] CRAN (R 3.6.1)
 #&gt;  readr         1.3.1       2018-12-21 [2] CRAN (R 3.6.1)
-#&gt;  REDCapR     * 0.10.2.9005 2020-01-21 [1] local         
-#&gt;  remotes       2.1.0       2019-06-24 [2] CRAN (R 3.6.1)
-#&gt;  rlang         0.4.2       2019-11-23 [2] CRAN (R 3.6.1)
-#&gt;  rmarkdown     2.0         2019-12-12 [2] CRAN (R 3.6.1)
+#&gt;  REDCapR     * 0.10.2.9005 2020-02-16 [1] local         
+#&gt;  remotes       2.1.1       2020-02-15 [2] CRAN (R 3.6.2)
+#&gt;  rlang         0.4.4       2020-01-28 [2] CRAN (R 3.6.2)
+#&gt;  rmarkdown     2.1         2020-01-20 [2] CRAN (R 3.6.2)
 #&gt;  rprojroot     1.3-2       2018-01-03 [2] CRAN (R 3.6.1)
-#&gt;  rstudioapi    0.10        2019-03-19 [2] CRAN (R 3.6.1)
+#&gt;  rstudioapi    0.11        2020-02-07 [2] CRAN (R 3.6.2)
 #&gt;  rvest         0.3.5       2019-11-08 [2] CRAN (R 3.6.1)
 #&gt;  scales        1.1.0       2019-11-18 [2] CRAN (R 3.6.1)
 #&gt;  sessioninfo   1.1.1       2018-11-05 [2] CRAN (R 3.6.1)
@@ -396,25 +396,24 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 #&gt;  stringr       1.4.0       2019-02-10 [2] CRAN (R 3.6.1)
 #&gt;  testthat      2.3.1       2019-12-01 [2] CRAN (R 3.6.1)
 #&gt;  tibble        2.1.3       2019-06-06 [2] CRAN (R 3.6.1)
-#&gt;  tidyr         1.0.0       2019-09-11 [2] CRAN (R 3.6.1)
-#&gt;  tidyselect    0.2.5       2018-10-11 [2] CRAN (R 3.6.1)
+#&gt;  tidyr         1.0.2       2020-01-24 [2] CRAN (R 3.6.2)
+#&gt;  tidyselect    1.0.0       2020-01-27 [2] CRAN (R 3.6.2)
 #&gt;  usethis       1.5.1       2019-07-04 [2] CRAN (R 3.6.1)
 #&gt;  utf8          1.1.4       2018-05-24 [2] CRAN (R 3.6.1)
-#&gt;  vctrs         0.2.1       2019-12-17 [2] CRAN (R 3.6.1)
+#&gt;  vctrs         0.2.2       2020-01-24 [2] CRAN (R 3.6.2)
 #&gt;  viridisLite   0.3.0       2018-02-01 [2] CRAN (R 3.6.1)
 #&gt;  webshot       0.5.2       2019-11-22 [2] CRAN (R 3.6.1)
 #&gt;  withr         2.1.2       2018-03-15 [2] CRAN (R 3.6.1)
 #&gt;  xfun          0.12        2020-01-13 [2] CRAN (R 3.6.1)
 #&gt;  xml2          1.2.2       2019-08-09 [2] CRAN (R 3.6.1)
-#&gt;  yaml          2.2.0       2018-07-25 [2] CRAN (R 3.6.1)
-#&gt;  zeallot       0.1.0       2018-01-28 [2] CRAN (R 3.6.1)
+#&gt;  yaml          2.2.1       2020-02-01 [2] CRAN (R 3.6.2)
 #&gt; 
-#&gt; [1] /tmp/RtmpyJ4et7/temp_libpath12c023e3e1ee
+#&gt; [1] /tmp/Rtmp13zzLy/temp_libpath655390797b5
 #&gt; [2] /home/wibeasley/R/x86_64-pc-linux-gnu-library/3.6
 #&gt; [3] /usr/local/lib/R/site-library
 #&gt; [4] /usr/lib/R/site-library
 #&gt; [5] /usr/lib/R/library</code></pre>
-</details><p>Report rendered by wibeasley at 2020-01-21, 13:05 -0600 in 6 seconds.</p>
+</details><p>Report rendered by wibeasley at 2020-02-15, 22:19 -0600 in 5 seconds.</p>
 </div>
   </div>
 

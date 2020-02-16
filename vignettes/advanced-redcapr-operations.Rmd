@@ -8,7 +8,7 @@ output:
 vignette: >
   %\VignetteIndexEntry{Advanced REDCapR Operations}
   %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
 ---
 
 This vignette covers the the less-typical uses of [REDCapR](https://github.com/OuhscBbmc/REDCapR) to interact with [REDCap](http://www.project-redcap.org/) through its API.

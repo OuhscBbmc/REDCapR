@@ -6,7 +6,7 @@ output:
 vignette: >
   %\VignetteIndexEntry{Basic REDCapR Operations}
   %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
 ---
 
 This vignette covers the the basic functions exposed by the [`httr`](https://github.com/hadley/httr) and [`curl`](https://cran.r-project.org/package=curl) packages which allow you to interact with [REDCap](http://www.project-redcap.org/) through its API.
@@ -193,4 +193,3 @@ report_render_duration_in_seconds <- round(as.numeric(difftime(Sys.time(), repor
 ```
 
 Report rendered by `r Sys.info()["user"]` at `r strftime(Sys.time(), "%Y-%m-%d, %H:%M %z")` in `r report_render_duration_in_seconds` seconds.
-

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Determine free available record ID — redcap_next_free_record_name • REDCapR</title>
+<title>Download a file from a REDCap project record — redcap_survey_link_export_oneshot • REDCapR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,8 +48,8 @@
 
 
 
-<meta property="og:title" content="Determine free available record ID — redcap_next_free_record_name" />
-<meta property="og:description" content="Determines the next available record ID." />
+<meta property="og:title" content="Download a file from a REDCap project record — redcap_survey_link_export_oneshot" />
+<meta property="og:description" content="This function uses REDCap's API to download a file." />
 <meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -149,18 +149,21 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Determine free available record ID</h1>
-    <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-next-free-record-name.R'><code>R/redcap-next-free-record-name.R</code></a></small>
-    <div class="hidden name"><code>redcap_next_free_record_name.Rd</code></div>
+    <h1>Download a file from a REDCap project record</h1>
+    <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-survey-link-export-oneshot.R'><code>R/redcap-survey-link-export-oneshot.R</code></a></small>
+    <div class="hidden name"><code>redcap_survey_link_export_oneshot.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Determines the next available record ID.</p>
+    <p>This function uses REDCap's API to download a file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>redcap_next_free_record_name</span>(
+    <pre class="usage"><span class='fu'>redcap_survey_link_export_oneshot</span>(
   <span class='no'>redcap_uri</span>,
   <span class='no'>token</span>,
+  <span class='no'>record</span>,
+  <span class='no'>instrument</span>,
+  <span class='kw'>event</span> <span class='kw'>=</span> <span class='st'>""</span>,
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
@@ -179,61 +182,84 @@ project.  Required.</p></td>
 project.  Required.</p></td>
     </tr>
     <tr>
+      <th>record</th>
+      <td><p>The record ID where the file is to be imported. Required</p></td>
+    </tr>
+    <tr>
+      <th>instrument</th>
+      <td><p>The name of the instrument associated with the
+survey link.  Required</p></td>
+    </tr>
+    <tr>
+      <th>event</th>
+      <td><p>The name of the event where the file is saved in REDCap.
+Optional</p></td>
+    </tr>
+    <tr>
       <th>verbose</th>
       <td><p>A boolean value indicating if <code>message</code>s should be printed
-to the R console during the operation.  The verbose output might contain
-sensitive information (<em>e.g.</em> PHI), so turn this off if the output might
-be visible somewhere public. Optional.</p></td>
+to the R console during the operation.  Optional.</p></td>
     </tr>
     <tr>
       <th>config_options</th>
-      <td><p>A list of options to pass to <code>POST</code> method in the
-<code>httr</code> package.  See the details below.  Optional.</p></td>
+      <td><p>A list of options to pass to <code><a href='https://httr.r-lib.org/reference/POST.html'>httr::POST()</a></code> method
+in the 'httr' package.  See the details below. Optional.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a <a href='https://rdrr.io/r/base/character.html'>base::character</a> vector of either
-length 1 (if successful) or length 0 (if not successful).</p>
+    <p>Currently, a list is returned with the following elements,</p><ul>
+<li><p><code>success</code>: A boolean value indicating if the operation was apparently
+successful.</p></li>
+<li><p><code>status_code</code>: The
+<a href='http://en.wikipedia.org/wiki/List_of_HTTP_status_codes'>http status code</a>
+of the operation.</p></li>
+<li><p><code>outcome_message</code>: A human readable string indicating the operation's
+outcome.</p></li>
+<li><p><code>records_affected_count</code>: The number of records inserted or updated.</p></li>
+<li><p><code>affected_ids</code>: The subject IDs of the inserted or updated records.</p></li>
+<li><p><code>elapsed_seconds</code>: The duration of the function.</p></li>
+<li><p><code>raw_text</code>: If an operation is NOT successful, the text returned by
+REDCap.  If an operation is successful, the <code>raw_text</code> is returned as an
+empty string to save RAM.</p></li>
+<li><p><code>file_name</code>: The name of the file persisted to disk. This is useful if
+the name stored in REDCap is used (which is the default).</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>If the API call is unsuccessful, a value of <code><a href='https://rdrr.io/r/base/character.html'>character(0)</a></code> will
-be returned (<em>i.e.</em>, an empty vector).  This ensures that a the function
-will always return an object of class
-<a href='https://rdrr.io/r/base/character.html'>base::character</a>.</p>
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+    <p>Currently, the function doesn't modify any variable types to conform to
+REDCap's supported variables.  See <code><a href='validate.html'>validate_for_write()</a></code> for a helper
+function that checks for some common important conflicts.</p>
+<p><strong>Permissions Required</strong>
+To use this method, you must have API Export privileges in the project.
+(As stated in the 9.0.0 documentation.)</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><strong>Documentation in REDCap 8.4.0</strong></p>
-<p>To be used by projects with record auto-numbering enabled, this method
-exports the next potential record ID for a project. It generates the next
-record name by determining the current maximum numerical record ID and then
-incrementing it by one.</p><pre>Note: This method does not create a new record, but merely determines what
-the next record name would be.
-
-If using Data Access Groups (DAGs) in the project, this method accounts for
-the special formatting of the record name for users in DAGs (e.g., DAG-ID);
-in this case, it only assigns the next value for ID for all numbers inside
-a DAG. For example, if a DAG has a corresponding DAG number of 223 wherein
-records 223-1 and 223-2 already exist, then the next record will be 223-3
-if the API user belongs to the DAG that has DAG number 223. (The DAG number
-is auto-assigned by REDCap for each DAG when the DAG is first created.)
-
-When generating a new record name in a DAG, the method considers all records
-in the entire project when determining the maximum record ID, including
-those that might have been originally created in that DAG but then later
-reassigned to another DAG.
-
-Note: This method functions the same even for projects that do not have
-record auto-numbering enabled.
-</pre>
-
+    <p>The official documentation can be found on the 'API Help Page'
+and 'API Examples' pages on the REDCap wiki (<em>i.e.</em>,
+https://community.projectredcap.org/articles/456/api-documentation.html and
+https://community.projectredcap.org/articles/462/api-examples.html).
+If you do not have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>uri</span>      <span class='kw'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class='no'>token</span>    <span class='kw'>&lt;-</span> <span class='st'>"9A81268476645C4E5F03428B8AC3AA7B"</span>
-<span class='co'># Returns 6</span>
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/redcap_next_free_record_name.html'>redcap_next_free_record_name</a></span>(<span class='kw'>redcap_uri</span> <span class='kw'>=</span> <span class='no'>uri</span>, <span class='kw'>token</span> <span class='kw'>=</span> <span class='no'>token</span>)</div><div class='output co'>#&gt; <span class='message'>The next free record name in REDCap was successfully determined in 0.4 seconds.  The http status code was 200.  Is is 6.</span></div><div class='output co'>#&gt; [1] "6"</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>uri</span>     <span class='kw'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class='no'>token</span>   <span class='kw'>&lt;-</span> <span class='st'>"8FA9A6BDAE2C0B5DD3CB472DD8E8918C"</span> <span class='co'>#pid=817</span>
+<span class='no'>record</span>  <span class='kw'>&lt;-</span> <span class='fl'>1</span>
+<span class='no'>instrument</span>   <span class='kw'>&lt;-</span> <span class='st'>"participant_morale_questionnaire"</span>
+<span class='co'># event &lt;- "" # only for longitudinal projects</span>
+
+<span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/REDCapR/man/redcap_survey_link_export_oneshot.html'>redcap_survey_link_export_oneshot</a></span>(
+  <span class='kw'>record</span>         <span class='kw'>=</span> <span class='no'>record</span>,
+  <span class='kw'>instrument</span>     <span class='kw'>=</span> <span class='no'>instrument</span>,
+  <span class='kw'>redcap_uri</span>     <span class='kw'>=</span> <span class='no'>uri</span>,
+  <span class='kw'>token</span>          <span class='kw'>=</span> <span class='no'>token</span>
+)
+<span class='no'>result</span>$<span class='no'>survey_link</span>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -241,10 +267,12 @@ record auto-numbering enabled.
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
       <li><a href="#details">Details</a></li>
-      <li><a href="#note">Note</a></li>
+      <li><a href="#references">References</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
+    <h2>Author</h2>
+    <p>Will Beasley</p>
   </div>
 </div>
 
