@@ -120,8 +120,7 @@ Common Gotchas  {#gotchas-agnostic}
 
     If the package developer can't find a way to gracefully adapt, they'll at least try to provide a better error message.
 
-1. **Identify problematic characters.** This is a special case of the previous bullet.  Look for fancy characters that might not be interpreted smoothly.  For instance, when editing the data dictionary in Excel, sometimes *straight* quotes are converted to *curly* quotes.  This might cause a problem later, when your API client tries to interpet the character using the wrong encoding. All ASCII characters in REDCap dictionaries appear to be interpreted smoothly.
-
+1. **Identify problematic characters.** This is a special case of the previous bullet.  Look for fancy characters that might not be interpreted smoothly.  For instance, when editing the data dictionary in Excel, sometimes *straight* quotes are converted to *curly* quotes.  This might cause a problem later, when your API client tries to interpret the character using the wrong encoding. All ASCII characters in REDCap dictionaries appear to be interpreted smoothly.
 
 R
 ==================================================================
@@ -235,7 +234,6 @@ There are several ways to call REDCap's API from [R](https://cran.r-project.org/
 
 If all these checks pass, proceed to the next section.  If not, start by consulting your REDCap administrator.
 
-
 Reading with the REDCapR Package
 ------------------------------------------------------------------
 
@@ -346,7 +344,6 @@ If you're not using REDCapR, you can skip this section and proceed to "Exporting
 
 If one of these checks fail, please start by consulting your REDCap administrator.
 
-
 Reading with the redcapAPI Package
 ------------------------------------------------------------------
 
@@ -377,7 +374,7 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
     # Loading required package: redcapAPI
     ```
 
-1. **Can you export their data dictiontary?** Sometimes the problem exists within the metadata/dictionary, instead of the actual data values.  Verify the structure and content of this specific project is interpretable by your local environment.
+1. **Can you export their data dictionary?** Sometimes the problem exists within the metadata/dictionary, instead of the actual data values.  Verify the structure and content of this specific project is interpretable by your local environment.
 
     ```r
     library(redcapAPI) # Load the package into the current R session, if you haven't already.
@@ -446,7 +443,6 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
 
 If one of these checks fail, please start by consulting your REDCap administrator.
 
-
 Writing
 ------------------------------------------------------------------
 
@@ -462,7 +458,6 @@ The second reason why importing can be trickier is because the schema (*e.g.*, t
 
 If one of these checks fail, please start by consulting your REDCap administrator.
 
-
 General Information
 ==================================================================
 
@@ -472,7 +467,6 @@ Troubleshooting Strategies
 1. **Simplify.**  Eliminate potential sources of problems by cumulatively.  For example, reduce the columns & records that you read/write.
 
 1. **Start fresh.**  If that's not feasible, start a new REDCap project and gradually add elements from the original project.  Identify the problematic element by testing the API call after each addition.
-
 
 Resources
 ------------------------------------------------------------------
@@ -489,7 +483,6 @@ Resources
 * Scott Burns, the primary developer of [PyCap](https://github.com/redcap-tools/PyCap) has a good intro at http://sburns.org/2013/07/22/intro-to-redcap-api.html
 * Benjamin Nutter, the primary developer of [redcapAPI](https://github.com/nutterb/redcapAPI/wiki) has a good wiki at https://github.com/nutterb/redcapAPI/wiki
 * In addition to this troubleshooting document, REDCapR has vignettes that covers its  [basic](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) and [advanced](https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.html) operations.
-
 
 Document Info
 ------------------------------------------------------------------

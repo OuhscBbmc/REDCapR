@@ -5,6 +5,7 @@
 ^\.github$
 ^\.gitignore$
 ^\.travis.yml$
+^\.vscode$
 ^cran-comments\.md$
 README.html$
 
