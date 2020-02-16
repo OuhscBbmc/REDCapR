@@ -103,12 +103,12 @@
 
       
 
-      </header><script src="TroubleshootingApiCalls_files/jquery-1.11.3/jquery.min.js"></script><script src="TroubleshootingApiCalls_files/elevate-section-attrs-2.0/elevate-section-attrs.js"></script><div class="row">
+      </header><script src="TroubleshootingApiCalls_files/header-attrs-2.1/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Troubleshooting REDCap API Calls</h1>
             
-            <h4 class="date">2020-01-21</h4>
+            <h4 class="date">2020-02-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/TroubleshootingApiCalls.Rmd"><code>vignettes/TroubleshootingApiCalls.Rmd</code></a></small>
       <div class="hidden name"><code>TroubleshootingApiCalls.Rmd</code></div>
@@ -117,10 +117,10 @@
 
     
     
-<div id="troubleshooting-redcap-api-calls" class="section level1">
-<h1 class="hasAnchor">
-<a href="#troubleshooting-redcap-api-calls" class="anchor"></a>Troubleshooting REDCap API Calls</h1>
 <p>There are many links in the pipeline between your institution’s <a href="http://www.project-redcap.org/">REDCap</a> server and the API user. When the end result is unsuccessful, this document should help narrow the location of the possible problem. The first two sections will be relevant to almost any language interacting with the API. The remaining sections are possibly relevant only to your language (<em>e.g.</em>, Python, R, PHP, SAS, bash), or your software library such as (<a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> and <a href="https://ouhscbbmc.github.io/REDCapR">REDCapR</a> in R, <a href="https://github.com/iuredcap/phpcap">phpcap</a> in PHP, and <a href="http://pycap.readthedocs.org/en/latest/">PyCap</a> in Python).</p>
+<div id="language-agnostic" class="section level1">
+<h1 class="hasAnchor">
+<a href="#language-agnostic" class="anchor"></a>Language Agnostic</h1>
 <div id="server-configuration-and-authorization" class="section level2">
 <h2 class="hasAnchor">
 <a href="#server-configuration-and-authorization" class="anchor"></a>Server Configuration and Authorization</h2>
@@ -129,7 +129,7 @@
 <li>
 <p><strong>Do you have an account for the <em>server</em>?</strong> This can be verified in the <code>Browse Users</code> section of the server’s <code>Control Center</code>.</p>
 <ul>
-<li><p>If you’re a REDCap admin, put yourself in the user’s postion –does the user have an account?</p></li>
+<li><p>If you’re a REDCap admin, put yourself in the user’s position –does the user have an account?</p></li>
 <li><p>If you’re a typical user, you may have to consult with your institution’s REDCap administrator for some of these checks.</p></li>
 </ul>
 </li>
@@ -153,9 +153,9 @@
 </ol>
 <p>If all these checks pass, proceed to the next section. If not, start by consulting with your REDCap administrator.</p>
 </div>
-<div id="language-agnostic-api" class="section level2">
+<div id="api" class="section level2">
 <h2 class="hasAnchor">
-<a href="#language-agnostic-api" class="anchor"></a>Language Agnostic API</h2>
+<a href="#api" class="anchor"></a>API</h2>
 <p>This section examines potential problems that occur after data leaves a working server, but before it is handled by their programming language (<em>e.g.</em>, Python and R). <a href="http://www.getpostman.com/">Postman</a> is a Chrome plugin recommended by <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ">several</a> <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ">people</a> that makes troubleshooting much more efficient.</p>
 <p><img src="images/PostmanScreenshot.png" width="574" style="fig.width=800px"></p>
 <!--<img src="/home/wibeasley/Documents/redcap/REDCapR/vignettes/images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>-->
@@ -166,7 +166,7 @@
 </li>
 <li>
 <p><strong>Is Postman installed and operating correctly?</strong> If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a>. The url is <code>https://bbmc.ouhsc.edu/redcap/api/</code>. There are three key-value pairs: (1) the ‘token’ is <code>9A81268476645C4E5F03428B8AC3AA7B</code>, (2) the ‘content’ is <code>record</code>, and (3) the ‘format’ should be <code>CSV</code>. When checking your own server, the token value should change, but the content and format should not. It should return five records in a CSV format. The ‘status’ should be <code>200 OK</code>. The result should look roughly like this. Notice the line breaks were included in the text values themselves.</p>
-<pre><code>record_id,name_first,name_last,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete
+<pre class="csv"><code>record_id,name_first,name_last,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete
 "1","Nutmeg","Nutmouse","14 Rose Cottage St.
 Kenning UK, 323232","(432) 456-4848","nutty@mouse.com","2003-08-30",10,1,2,0,5,1,400,"Character in a book, with some guessing",2
 "2","Tumtum","Nutmouse","14 Rose Cottage Blvd.
@@ -193,9 +193,29 @@ He had a gold watch chain and a black mustache",2</code></pre>
 </ol>
 <p>If all these checks pass, proceed to the next section. If not, start by consulting with your REDCap administrator.</p>
 </div>
-<div id="exporting-from-redcap-to-r" class="section level2">
+<div id="gotchas-agnostic" class="section level2">
 <h2 class="hasAnchor">
-<a href="#exporting-from-redcap-to-r" class="anchor"></a>Exporting from REDCap to R</h2>
+<a href="#gotchas-agnostic" class="anchor"></a>Common Gotchas</h2>
+<ol style="list-style-type: decimal">
+<li>
+<p><strong>Problems in the project’s metadata/dictionary.</strong> If exporting the metadata fails (<em>e.g.</em>, <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_read.html"><code><a href="../reference/redcap_metadata_read.html">REDCapR::redcap_metadata_read()</a></code></a> and <a href="https://rdrr.io/github/nutterb/redcapAPI/man/exportMetaData.html"><code><a href="https://rdrr.io/pkg/redcapAPI/man/exportMetaData.html">redcapAPI::exportMetaData()</a></code></a>), manually download the data dictionary from the REDCap browser. Inspect the plain text closely in a text editor like <a href="https://atom.io/">Atom</a> or <a href="https://code.visualstudio.com/">Visual Studio Code</a>; avoid programs like Excel that tend to interpret, align, and decorate the values, which sometimes masks problems. Scrutinize all elements, but especially look for nonstandard characters. <em>See the next bullet.</em></p>
+<p>Some API libraries test that problematic elements of a project are handled correctly. If you encounter an element that causes problems, please consider</p>
+<ol style="list-style-type: decimal">
+<li><p>creating a new GitHub Issue that describes the problem (<em>e.g.</em>, <a href="https://github.com/OuhscBbmc/REDCapR/issues">REDCapR</a>, <a href="https://github.com/nutterb/redcapAPI/issues">redcapAPI</a>, <a href="https://github.com/iuredcap/phpcap/issues">phpcap</a>).</p></li>
+<li><p>in the issue, attach the problematic fields of your data dictionary. If you’re uncomfortable sharing your dictionary with the world, consider emailing it to developer. Because it’s just the data dictionary, no PHI should be included.</p></li>
+</ol>
+<p>If the package developer can’t find a way to gracefully adapt, they’ll at least try to provide a better error message.</p>
+</li>
+<li><p><strong>Identify problematic characters.</strong> This is a special case of the previous bullet. Look for fancy characters that might not be interpreted smoothly. For instance, when editing the data dictionary in Excel, sometimes <em>straight</em> quotes are converted to <em>curly</em> quotes. This might cause a problem later, when your API client tries to interpet the character using the wrong encoding. All ASCII characters in REDCap dictionaries appear to be interpreted smoothly.</p></li>
+</ol>
+</div>
+</div>
+<div id="r" class="section level1">
+<h1 class="hasAnchor">
+<a href="#r" class="anchor"></a>R</h1>
+<div id="reading-without-a-package" class="section level2">
+<h2 class="hasAnchor">
+<a href="#reading-without-a-package" class="anchor"></a>Reading without a Package</h2>
 <p>There are several ways to call REDCap’s API from <a href="https://cran.r-project.org/">R</a>. The packages <a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> both rely on the <a href="https://cran.r-project.org/package=httr">httr</a> package, which calls the <a href="https://cran.r-project.org/package=curl">curl</a> package, which calls <a href="http://curl.haxx.se/docs/manpage.html">cURL</a>.</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -287,9 +307,9 @@ He had a gold watch chain and a black mustache",2</code></pre>
 </ol>
 <p>If all these checks pass, proceed to the next section. If not, start by consulting your REDCap administrator.</p>
 </div>
-<div id="exporting-from-redcap-to-r-using-redcapr" class="section level2">
+<div id="reading-with-the-redcapr-package" class="section level2">
 <h2 class="hasAnchor">
-<a href="#exporting-from-redcap-to-r-using-redcapr" class="anchor"></a>Exporting from REDCap to R, using REDCapR</h2>
+<a href="#reading-with-the-redcapr-package" class="anchor"></a>Reading with the REDCapR Package</h2>
 <p><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> wraps convenience functions around <a href="https://httr.r-lib.org/">httr</a> to reduce the size and complexity of the user’s code. The package’s basic functions are <a href="https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html">demonstrated in a vignette</a> and are documented in its <a href="https://ouhscbbmc.github.io/REDCapR/reference">reference manual</a>.</p>
 <p>If you’re not using REDCapR, you can skip this section and proceed to “Exporting from REDCap to R, using redcapAPI” or “Importing into REDCap from R” below.</p>
 <p><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> and <a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> are different R packages, but the developers collaborate with each other and share advice.</p>
@@ -297,7 +317,7 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <li>
 <p><strong>Is the latest version of REDCapR installed on your machine?</strong> Currently the easiest way to install REDCapR is with the <a href="https://remotes.r-lib.org/">remotes</a> package. The following code installs remotes, then installs REDCapR. The CRAN version of REDCapR is updated only a few times a year, while the code below will download the latest stable version.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>, <span class="dt">repos =</span> <span class="st">"https://cran.rstudio.com"</span>)</span>
-<span id="cb8-2"><a href="#cb8-2"></a>remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="dt">repo =</span> <span class="st">"OuhscBbmc/REDCapR"</span>)</span></code></pre></div>
+<span id="cb8-2"><a href="#cb8-2"></a>remotes<span class="op">::</span><span class="kw"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="dt">repo =</span> <span class="st">"OuhscBbmc/REDCapR"</span>)</span></code></pre></div>
 </li>
 <li>
 <p><strong>Does REDCapR load successfully on your machine?</strong> If so, running <code><a href="https://rdrr.io/r/base/library.html">library(REDCapR)</a></code> should produce the following output if you’re starting with a fresh session of R:</p>
@@ -319,38 +339,38 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <span id="cb11-3"><a href="#cb11-3"></a>token &lt;-<span class="st"> "9A81268476645C4E5F03428B8AC3AA7B"</span></span>
 <span id="cb11-4"><a href="#cb11-4"></a><span class="kw"><a href="../reference/redcap_read.html">redcap_read</a></span>(<span class="dt">redcap_uri =</span> uri, <span class="dt">token =</span> token)<span class="op">$</span>data</span></code></pre></div>
 <p>The previous code should produce similar output. Notice there are five rows and the columns will wrap around if your console window is too narrow.</p>
-<pre><code>5 records and 1 columns were read from REDCap in 0.41 seconds.
-Starting to read 5 records  at 2014-06-27 17:19:49
-Reading batch 1 of 1, with ids 1 through 5.
-5 records and 16 columns were read from REDCap in 0.42 seconds.
-
-  record_id name_first name_last                                 address      telephone               email
-1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232 (432) 456-4848     nutty@mouse.com
-2         2     Tumtum  Nutmouse 14 Rose Cottage Blvd.\nKenning UK 34243 (234) 234-2343    tummy@mouse.comm
-3         3     Marcus      Wood          243 Hill St.\nGuthrie OK 73402 (433) 435-9865        mw@mwood.net
-4         4      Trudy       DAG          342 Elm\nDuncanville TX, 75116 (987) 654-3210 peroxide@blonde.com
-5         5   John Lee    Walker      Hotel Suite\nNew Orleans LA, 70115 (333) 333-4444  left@hippocket.com
-
-         dob age ethnicity race sex height weight   bmi
-1 2003-08-30  10         1    2   0   5.00      1 400.0
-2 2003-03-10  10         1    6   1   6.00      1 277.8
-3 1934-04-09  79         0    4   1 180.00     80  24.7
-4 1952-11-02  61         1    4   0 165.00     54  19.8
-5 1955-04-15  58         1    4   1 193.04    104  27.9
-
-                                                                                                     comments
-1                                                                     Character in a book, with some guessing
-2                                                                          A mouse character from a good book
-3                                                                                          completely made up
-4 This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail
-5                 Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache
-
-  demographics_complete
-1                     2
-2                     2
-3                     2
-4                     2
-5                     2</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="dv">5</span> records and <span class="dv">1</span> columns were read from REDCap <span class="cf">in</span> <span class="fl">0.41</span> seconds.</span>
+<span id="cb12-2"><a href="#cb12-2"></a>Starting to read <span class="dv">5</span> records  at <span class="dv">2014-06-27</span> <span class="dv">17</span><span class="op">:</span><span class="dv">19</span><span class="op">:</span><span class="dv">49</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>Reading batch <span class="dv">1</span> of <span class="dv">1</span>, with ids <span class="dv">1</span> through <span class="fl">5.</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="dv">5</span> records and <span class="dv">16</span> columns were read from REDCap <span class="cf">in</span> <span class="fl">0.42</span> seconds.</span>
+<span id="cb12-5"><a href="#cb12-5"></a></span>
+<span id="cb12-6"><a href="#cb12-6"></a>  record_id name_first name_last                                 address      telephone               email</span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="dv">1</span>         <span class="dv">1</span>     Nutmeg  Nutmouse <span class="dv">14</span> Rose Cottage St.\nKenning UK, <span class="dv">323232</span> (<span class="dv">432</span>) <span class="dv">456-4848</span>     nutty<span class="op">@</span>mouse.com</span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="dv">2</span>         <span class="dv">2</span>     Tumtum  Nutmouse <span class="dv">14</span> Rose Cottage Blvd.\nKenning UK <span class="dv">34243</span> (<span class="dv">234</span>) <span class="dv">234-2343</span>    tummy<span class="op">@</span>mouse.comm</span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="dv">3</span>         <span class="dv">3</span>     Marcus      Wood          <span class="dv">243</span> Hill St.\nGuthrie OK <span class="dv">73402</span> (<span class="dv">433</span>) <span class="dv">435-9865</span>        mw<span class="op">@</span>mwood.net</span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="dv">4</span>         <span class="dv">4</span>      Trudy       DAG          <span class="dv">342</span> Elm\nDuncanville TX, <span class="dv">75116</span> (<span class="dv">987</span>) <span class="dv">654-3210</span> peroxide<span class="op">@</span>blonde.com</span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="dv">5</span>         <span class="dv">5</span>   John Lee    Walker      Hotel Suite\nNew Orleans LA, <span class="dv">70115</span> (<span class="dv">333</span>) <span class="dv">333-4444</span>  left<span class="op">@</span>hippocket.com</span>
+<span id="cb12-12"><a href="#cb12-12"></a></span>
+<span id="cb12-13"><a href="#cb12-13"></a>         dob age ethnicity race sex height weight   bmi</span>
+<span id="cb12-14"><a href="#cb12-14"></a><span class="dv">1</span> <span class="dv">2003-08-30</span>  <span class="dv">10</span>         <span class="dv">1</span>    <span class="dv">2</span>   <span class="dv">0</span>   <span class="fl">5.00</span>      <span class="dv">1</span> <span class="fl">400.0</span></span>
+<span id="cb12-15"><a href="#cb12-15"></a><span class="dv">2</span> <span class="dv">2003-03-10</span>  <span class="dv">10</span>         <span class="dv">1</span>    <span class="dv">6</span>   <span class="dv">1</span>   <span class="fl">6.00</span>      <span class="dv">1</span> <span class="fl">277.8</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a><span class="dv">3</span> <span class="dv">1934-04-09</span>  <span class="dv">79</span>         <span class="dv">0</span>    <span class="dv">4</span>   <span class="dv">1</span> <span class="fl">180.00</span>     <span class="dv">80</span>  <span class="fl">24.7</span></span>
+<span id="cb12-17"><a href="#cb12-17"></a><span class="dv">4</span> <span class="dv">1952-11-02</span>  <span class="dv">61</span>         <span class="dv">1</span>    <span class="dv">4</span>   <span class="dv">0</span> <span class="fl">165.00</span>     <span class="dv">54</span>  <span class="fl">19.8</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a><span class="dv">5</span> <span class="dv">1955-04-15</span>  <span class="dv">58</span>         <span class="dv">1</span>    <span class="dv">4</span>   <span class="dv">1</span> <span class="fl">193.04</span>    <span class="dv">104</span>  <span class="fl">27.9</span></span>
+<span id="cb12-19"><a href="#cb12-19"></a></span>
+<span id="cb12-20"><a href="#cb12-20"></a>                                                                                                     comments</span>
+<span id="cb12-21"><a href="#cb12-21"></a><span class="dv">1</span>                                                                     Character <span class="cf">in</span> a book, with some guessing</span>
+<span id="cb12-22"><a href="#cb12-22"></a><span class="dv">2</span>                                                                          A mouse character from a good book</span>
+<span id="cb12-23"><a href="#cb12-23"></a><span class="dv">3</span>                                                                                          completely made up</span>
+<span id="cb12-24"><a href="#cb12-24"></a><span class="dv">4</span> This record doesn<span class="st">'t have a DAG assigned</span><span class="ch">\n\n</span><span class="st">So call up Trudy on the telephone</span><span class="ch">\n</span><span class="st">Send her a letter in the mail</span></span>
+<span id="cb12-25"><a href="#cb12-25"></a><span class="st">5                 Had a hand for trouble and a eye for cash</span><span class="ch">\n\n</span><span class="st">He had a gold watch chain and a black mustache</span></span>
+<span id="cb12-26"><a href="#cb12-26"></a></span>
+<span id="cb12-27"><a href="#cb12-27"></a><span class="st">  demographics_complete</span></span>
+<span id="cb12-28"><a href="#cb12-28"></a><span class="st">1                     2</span></span>
+<span id="cb12-29"><a href="#cb12-29"></a><span class="st">2                     2</span></span>
+<span id="cb12-30"><a href="#cb12-30"></a><span class="st">3                     2</span></span>
+<span id="cb12-31"><a href="#cb12-31"></a><span class="st">4                     2</span></span>
+<span id="cb12-32"><a href="#cb12-32"></a><span class="st">5                     2</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Can you export from your own project?</strong> The code is similar to the previous check, but the <code>uri</code> and <code>token</code> values will need to be modified.</p>
@@ -376,9 +396,9 @@ Reading batch 1 of 1, with ids 1 through 5.
 </ol>
 <p>If one of these checks fail, please start by consulting your REDCap administrator.</p>
 </div>
-<div id="exporting-from-redcap-to-r-using-redcapapi" class="section level2">
+<div id="reading-with-the-redcapapi-package" class="section level2">
 <h2 class="hasAnchor">
-<a href="#exporting-from-redcap-to-r-using-redcapapi" class="anchor"></a>Exporting from REDCap to R, using redcapAPI</h2>
+<a href="#reading-with-the-redcapapi-package" class="anchor"></a>Reading with the redcapAPI Package</h2>
 <p><a href="https://httr.r-lib.org/">httr</a> <a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> wraps convenience functions around <a href="https://httr.r-lib.org/">httr</a> to reduce the size and complexity of the user’s code.</p>
 <p>If you’re not using redcapAPI, you can skip this section and proceed to ‘Importing into REDCap from R’ below. More specific discussion about <code>redcapAPI</code> can be found at the <a href="https://github.com/nutterb/redcapAPI/wiki">package’s wiki</a>.</p>
 <p><a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> and <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> are different packages, but the developers collaborate with each other and share advice.</p>
@@ -388,7 +408,7 @@ Reading batch 1 of 1, with ids 1 through 5.
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"redcapAPI"</span>)</span></code></pre></div>
 <p>Developmental versions may be available on GitHub.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>, <span class="dt">repos =</span> <span class="st">"http://cran.rstudio.com"</span>)</span>
-<span id="cb16-2"><a href="#cb16-2"></a>remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="dt">repo =</span> <span class="st">"nutterb/redcapAPI"</span>)</span></code></pre></div>
+<span id="cb16-2"><a href="#cb16-2"></a>remotes<span class="op">::</span><span class="kw"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="dt">repo =</span> <span class="st">"nutterb/redcapAPI"</span>)</span></code></pre></div>
 </li>
 <li>
 <p><strong>Does redcapAPI load successfully on your machine?</strong> If so, running <code><a href="https://rdrr.io/r/base/library.html">library(redcapAPI)</a></code> should produce the following output if you’re starting with a fresh session of R:</p>
@@ -412,33 +432,33 @@ Reading batch 1 of 1, with ids 1 through 5.
 <span id="cb19-5"><a href="#cb19-5"></a>)</span>
 <span id="cb19-6"><a href="#cb19-6"></a><span class="kw"><a href="https://rdrr.io/pkg/redcapAPI/man/exportRecords.html">exportRecords</a></span>(rcon)</span></code></pre></div>
 <p>The previous code should produce similar output. Notice there are five rows and the columns will wrap around if your console window is too narrow.</p>
-<pre><code>record_id name_first name_last                                 address      telephone               email
-1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232 (432) 456-4848     nutty@mouse.com
-2         2     Tumtum  Nutmouse 14 Rose Cottage Blvd.\nKenning UK 34243 (234) 234-2343    tummy@mouse.comm
-3         3     Marcus      Wood          243 Hill St.\nGuthrie OK 73402 (433) 435-9865        mw@mwood.net
-4         4      Trudy       DAG          342 Elm\nDuncanville TX, 75116 (987) 654-3210 peroxide@blonde.com
-5         5   John Lee    Walker      Hotel Suite\nNew Orleans LA, 70115 (333) 333-4444  left@hippocket.com
-
-       dob age ethnicity race sex height weight   bmi
-1 2003-08-30  10         1    2   0   5.00      1 400.0
-2 2003-03-10  10         1    6   1   6.00      1 277.8
-3 1934-04-09  79         0    4   1 180.00     80  24.7
-4 1952-11-02  61         1    4   0 165.00     54  19.8
-5 1955-04-15  58         1    4   1 193.04    104  27.9
-
-                                                                                                   comments
-1                                                                     Character in a book, with some guessing
-2                                                                          A mouse character from a good book
-3                                                                                          completely made up
-4 This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail
-5                 Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache
-
-demographics_complete
-1                     2
-2                     2
-3                     2
-4                     2
-5                     2</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>record_id name_first name_last                                 address      telephone               email</span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="dv">1</span>         <span class="dv">1</span>     Nutmeg  Nutmouse <span class="dv">14</span> Rose Cottage St.\nKenning UK, <span class="dv">323232</span> (<span class="dv">432</span>) <span class="dv">456-4848</span>     nutty<span class="op">@</span>mouse.com</span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="dv">2</span>         <span class="dv">2</span>     Tumtum  Nutmouse <span class="dv">14</span> Rose Cottage Blvd.\nKenning UK <span class="dv">34243</span> (<span class="dv">234</span>) <span class="dv">234-2343</span>    tummy<span class="op">@</span>mouse.comm</span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="dv">3</span>         <span class="dv">3</span>     Marcus      Wood          <span class="dv">243</span> Hill St.\nGuthrie OK <span class="dv">73402</span> (<span class="dv">433</span>) <span class="dv">435-9865</span>        mw<span class="op">@</span>mwood.net</span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="dv">4</span>         <span class="dv">4</span>      Trudy       DAG          <span class="dv">342</span> Elm\nDuncanville TX, <span class="dv">75116</span> (<span class="dv">987</span>) <span class="dv">654-3210</span> peroxide<span class="op">@</span>blonde.com</span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="dv">5</span>         <span class="dv">5</span>   John Lee    Walker      Hotel Suite\nNew Orleans LA, <span class="dv">70115</span> (<span class="dv">333</span>) <span class="dv">333-4444</span>  left<span class="op">@</span>hippocket.com</span>
+<span id="cb20-7"><a href="#cb20-7"></a></span>
+<span id="cb20-8"><a href="#cb20-8"></a>       dob age ethnicity race sex height weight   bmi</span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="dv">1</span> <span class="dv">2003-08-30</span>  <span class="dv">10</span>         <span class="dv">1</span>    <span class="dv">2</span>   <span class="dv">0</span>   <span class="fl">5.00</span>      <span class="dv">1</span> <span class="fl">400.0</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a><span class="dv">2</span> <span class="dv">2003-03-10</span>  <span class="dv">10</span>         <span class="dv">1</span>    <span class="dv">6</span>   <span class="dv">1</span>   <span class="fl">6.00</span>      <span class="dv">1</span> <span class="fl">277.8</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a><span class="dv">3</span> <span class="dv">1934-04-09</span>  <span class="dv">79</span>         <span class="dv">0</span>    <span class="dv">4</span>   <span class="dv">1</span> <span class="fl">180.00</span>     <span class="dv">80</span>  <span class="fl">24.7</span></span>
+<span id="cb20-12"><a href="#cb20-12"></a><span class="dv">4</span> <span class="dv">1952-11-02</span>  <span class="dv">61</span>         <span class="dv">1</span>    <span class="dv">4</span>   <span class="dv">0</span> <span class="fl">165.00</span>     <span class="dv">54</span>  <span class="fl">19.8</span></span>
+<span id="cb20-13"><a href="#cb20-13"></a><span class="dv">5</span> <span class="dv">1955-04-15</span>  <span class="dv">58</span>         <span class="dv">1</span>    <span class="dv">4</span>   <span class="dv">1</span> <span class="fl">193.04</span>    <span class="dv">104</span>  <span class="fl">27.9</span></span>
+<span id="cb20-14"><a href="#cb20-14"></a></span>
+<span id="cb20-15"><a href="#cb20-15"></a>                                                                                                   comments</span>
+<span id="cb20-16"><a href="#cb20-16"></a><span class="dv">1</span>                                                                     Character <span class="cf">in</span> a book, with some guessing</span>
+<span id="cb20-17"><a href="#cb20-17"></a><span class="dv">2</span>                                                                          A mouse character from a good book</span>
+<span id="cb20-18"><a href="#cb20-18"></a><span class="dv">3</span>                                                                                          completely made up</span>
+<span id="cb20-19"><a href="#cb20-19"></a><span class="dv">4</span> This record doesn<span class="st">'t have a DAG assigned</span><span class="ch">\n\n</span><span class="st">So call up Trudy on the telephone</span><span class="ch">\n</span><span class="st">Send her a letter in the mail</span></span>
+<span id="cb20-20"><a href="#cb20-20"></a><span class="st">5                 Had a hand for trouble and a eye for cash</span><span class="ch">\n\n</span><span class="st">He had a gold watch chain and a black mustache</span></span>
+<span id="cb20-21"><a href="#cb20-21"></a></span>
+<span id="cb20-22"><a href="#cb20-22"></a><span class="st">demographics_complete</span></span>
+<span id="cb20-23"><a href="#cb20-23"></a><span class="st">1                     2</span></span>
+<span id="cb20-24"><a href="#cb20-24"></a><span class="st">2                     2</span></span>
+<span id="cb20-25"><a href="#cb20-25"></a><span class="st">3                     2</span></span>
+<span id="cb20-26"><a href="#cb20-26"></a><span class="st">4                     2</span></span>
+<span id="cb20-27"><a href="#cb20-27"></a><span class="st">5                     2</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Can you export your own project?</strong> The code is similar to the previous check, but the <code>uri</code> and <code>token</code> values will need to be modified.</p>
@@ -453,9 +473,9 @@ demographics_complete
 </ol>
 <p>If one of these checks fail, please start by consulting your REDCap administrator.</p>
 </div>
-<div id="importing-into-redcap-from-r" class="section level2">
+<div id="writing" class="section level2">
 <h2 class="hasAnchor">
-<a href="#importing-into-redcap-from-r" class="anchor"></a>Importing into REDCap from R</h2>
+<a href="#writing" class="anchor"></a>Writing</h2>
 <p>Troubleshooting import operations is trickier than export operations for two major reasons. First, the database potentially persists your <em>import</em> mistakes. In contrast, repeatedly <em>exporting</em> data won’t affect subsequent reads. Considering cloning the REDCap project for testing until the problem is resolved. Remember to create a new token (because they’re not automatically created when projects are cloned, even when users are copied), and to modify your code’s token to point to the new testing clone.</p>
 <p>The second reason why importing can be trickier is because the schema (<em>e.g.</em>, the names and data types) of your local dataset must match the project’s schema. Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project’s schema and dataset. Also, consider exporting the dataset to your machine, and look for differences. Note that you cannot import calculated fields into REDCap.</p>
 <ol style="list-style-type: decimal">
@@ -465,39 +485,23 @@ demographics_complete
 </ol>
 <p>If one of these checks fail, please start by consulting your REDCap administrator.</p>
 </div>
-<div id="gotchas-agnostic" class="section level2">
-<h2 class="hasAnchor">
-<a href="#gotchas-agnostic" class="anchor"></a>Common Language-Agnostic Gotchas</h2>
-<ol style="list-style-type: decimal">
-<li>
-<p><strong>Problems in the project’s metadata/dictionary.</strong> If exporting the metadata fails (<em>e.g.</em>, <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_read.html"><code><a href="../reference/redcap_metadata_read.html">REDCapR::redcap_metadata_read()</a></code></a> and <a href="https://rdrr.io/github/nutterb/redcapAPI/man/exportMetaData.html"><code><a href="https://rdrr.io/pkg/redcapAPI/man/exportMetaData.html">redcapAPI::exportMetaData()</a></code></a>), manually download the data dictionary from the REDCap browser. Inspect the plain text closely in a text editor like <a href="https://atom.io/">Atom</a> or <a href="https://code.visualstudio.com/">Visual Studio Code</a>; avoid programs like Excel that tend to interpret, align, and decorate the values, which sometimes masks problems. Scrutinize all elements, but especially look for nonstandard characters. <em>See the next bullet.</em></p>
-<p>Some API libraries test that problematic elements of a project are handled correctly. If you encounter an element that causes problems, please consider</p>
-<ol style="list-style-type: decimal">
-<li><p>creating a new GitHub Issue that describes the problem (<em>e.g.</em>, <a href="https://github.com/OuhscBbmc/REDCapR/issues">REDCapR</a>, <a href="https://github.com/nutterb/redcapAPI/issues">redcapAPI</a>, <a href="https://github.com/iuredcap/phpcap/issues">phpcap</a>).</p></li>
-<li><p>in the issue, attach the problematic fields of your data dictionary. If you’re uncomfortable sharing your dictionary with the world, consider emailing it to developer. Because it’s just the data dictionary, no PHI should be included.</p></li>
-</ol>
-<p>If the package developer can’t find a way to gracefully adapt, they’ll at least try to provide a better error message.</p>
-</li>
-<li><p><strong>Identify problematic characters.</strong> This is a special case of the previous bullet. Look for fancy characters that might not be interpreted smoothly. For instance, when editing the data dictionary in Excel, sometimes <em>straight</em> quotes are converted to <em>curly</em> quotes. This might cause a problem later, when your API client tries to interpet the character using the wrong encoding. All ASCII characters in REDCap dictionaries appear to be interpreted smoothly.</p></li>
-</ol>
 </div>
-<div id="general-troubleshooting-advice" class="section level2">
+<div id="general-information" class="section level1">
+<h1 class="hasAnchor">
+<a href="#general-information" class="anchor"></a>General Information</h1>
+<div id="troubleshooting-strategies" class="section level2">
 <h2 class="hasAnchor">
-<a href="#general-troubleshooting-advice" class="anchor"></a>General Troubleshooting Advice</h2>
+<a href="#troubleshooting-strategies" class="anchor"></a>Troubleshooting Strategies</h2>
 <ol style="list-style-type: decimal">
 <li><p><strong>Simplify.</strong> Eliminate potential sources of problems by cumulatively. For example, reduce the columns &amp; records that you read/write.</p></li>
-<li><p><strong>Start fresh.</strong> If that’s not feasible, start a new project and gradually add elements from the original project. Identify the problematic element by testing the API call after each addition.</p></li>
+<li><p><strong>Start fresh.</strong> If that’s not feasible, start a new REDCap project and gradually add elements from the original project. Identify the problematic element by testing the API call after each addition.</p></li>
 </ol>
 </div>
-<div id="other-software-for-communication-and-automation-with-redcap" class="section level2">
+<div id="resources" class="section level2">
 <h2 class="hasAnchor">
-<a href="#other-software-for-communication-and-automation-with-redcap" class="anchor"></a>Other software for communication and automation with REDCap</h2>
-<p>REDCap is used in many environments, and it’s not surprising that a lot of libraries have been developed to cater to different scenarios and languages. An active list is maintained at <a href="http://redcap-tools.github.io/projects/">REDCap-Tools</a>. In an entry needs to be added, please notify us; instructions are found at the bottom of the page.</p>
-</div>
-<div id="other-good-resources" class="section level2">
-<h2 class="hasAnchor">
-<a href="#other-good-resources" class="anchor"></a>Other good resources</h2>
+<a href="#resources" class="anchor"></a>Resources</h2>
 <ul>
+<li><p>REDCap is used in many environments, and it’s not surprising that a lot of libraries have been developed to cater to different scenarios and languages. An active list is maintained at <a href="http://redcap-tools.github.io/projects/">REDCap-Tools</a>. In an entry needs to be added, please notify us; instructions are found at the bottom of the page.</p></li>
 <li>
 <p>The basic API documentation is available on your REDCap server, typically at</p>
 <pre><code>http://&lt;*your server name*&gt;/redcap/api/help</code></pre>
@@ -523,18 +527,27 @@ demographics_complete
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li>
-<a href="#troubleshooting-redcap-api-calls">Troubleshooting REDCap API Calls</a>
+<a href="#language-agnostic">Language Agnostic</a>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#server-configuration-and-authorization">Server Configuration and Authorization</a></li>
-      <li><a href="#language-agnostic-api">Language Agnostic API</a></li>
-      <li><a href="#exporting-from-redcap-to-r">Exporting from REDCap to R</a></li>
-      <li><a href="#exporting-from-redcap-to-r-using-redcapr">Exporting from REDCap to R, using REDCapR</a></li>
-      <li><a href="#exporting-from-redcap-to-r-using-redcapapi">Exporting from REDCap to R, using redcapAPI</a></li>
-      <li><a href="#importing-into-redcap-from-r">Importing into REDCap from R</a></li>
-      <li><a href="#gotchas-agnostic">Common Language-Agnostic Gotchas</a></li>
-      <li><a href="#general-troubleshooting-advice">General Troubleshooting Advice</a></li>
-      <li><a href="#other-software-for-communication-and-automation-with-redcap">Other software for communication and automation with REDCap</a></li>
-      <li><a href="#other-good-resources">Other good resources</a></li>
+      <li><a href="#api">API</a></li>
+      <li><a href="#gotchas-agnostic">Common Gotchas</a></li>
+      </ul>
+</li>
+      <li>
+<a href="#r">R</a>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#reading-without-a-package">Reading without a Package</a></li>
+      <li><a href="#reading-with-the-redcapr-package">Reading with the REDCapR Package</a></li>
+      <li><a href="#reading-with-the-redcapapi-package">Reading with the redcapAPI Package</a></li>
+      <li><a href="#writing">Writing</a></li>
+      </ul>
+</li>
+      <li>
+<a href="#general-information">General Information</a>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#troubleshooting-strategies">Troubleshooting Strategies</a></li>
+      <li><a href="#resources">Resources</a></li>
       <li><a href="#document-info">Document Info</a></li>
       </ul>
 </li>
