@@ -151,14 +151,23 @@ datasets that could tie up the server.
 }
 \details{
 Specifically, it internally uses multiple calls to \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}}
-to select and return data.  Initially, only primary key is queried through
-the REDCap API.  The long list is then subsetted into partitions, whose
-sizes are determined by the \code{batch_size} parameter.  REDCap is then
+to select and return data.  Initially, only the primary key is queried
+through the REDCap API.  The long list is then subsetted into batches,
+whose sizes are determined by the \code{batch_size} parameter.  REDCap is then
 queried for all variables of the subset's subjects.  This is repeated for
 each subset, before returning a unified \code{\link[base:data.frame]{base::data.frame()}}.
 
 The function allows a delay between calls, which allows the server to
-attend to other users' requests.
+attend to other users' requests (such as the users entering data in a
+browser).  In other words, a delay between batches does not bog down
+the webserver when exporting/importing a large dataset.
+
+A second benefit is less RAM is required on the webserver.  Because
+each batch is smaller than the entire dataset, the webserver
+tackles more managably sized objects in memory.  Consider batching
+if you encounter the error\preformatted{ERROR: REDCap ran out of server memory. The request cannot be processed.
+Please try importing/exporting a smaller amount of data.
+}
 
 For \code{\link[=redcap_read]{redcap_read()}} to function properly, the user must have Export
 permissions for the 'Full Data Set'.  Users with only 'De-Identified'
