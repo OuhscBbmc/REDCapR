@@ -5,7 +5,7 @@ output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Security Database}
   %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
 ---
 
 Description
@@ -44,8 +44,8 @@ This SQL code is run once inside an existing database to establish the schemas, 
 
 -----------------------------------------------------------------------
 -- Create two schemas.
--- The first scehma is accessible by all REDCap API users.
--- The second scehma is restricted to administrators.
+-- The first schema is accessible by all REDCap API users.
+-- The second schema is restricted to administrators.
 --
 CREATE SCHEMA [redcap]
 CREATE SCHEMA [redcap_private]
@@ -53,40 +53,33 @@ GO
 
 -----------------------------------------------------------------------
 -- Create a table to contain the token
---
-CREATE TABLE [redcap_private].[tbl_credential](
-  id            smallint        NOT NULL,
-  username      varchar(30)     NOT NULL,
-  project_id    smallint        NOT NULL,
-  instance      varchar(30)     NOT NULL,
-  token         char(32)        NOT NULL,
-  redcap_uri    varchar(255)    NOT NULL,
- CONSTRAINT [PK_credential] PRIMARY KEY CLUSTERED
-(
-  [id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
+CREATE TABLE redcap_private.tbl_credential (
+  id            smallint        primary key,
+  username      varchar(30)     not null,
+  project_id    smallint        not null,
+  instance      varchar(30)     not null,
+  token         char(32)        not null,
+  redcap_uri    varchar(255)    not null
+)
 
-CREATE UNIQUE NONCLUSTERED INDEX [IX_tbl_credential_unique] ON [redcap_private].[tbl_credential]
-(
-  instance        ASC,
-  project_id      ASC,
-  username        ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-GO
+CREATE UNIQUE NONCLUSTERED INDEX IX_tbl_credential_unique ON redcap_private.tbl_credential (
+  instance        asc,
+  project_id      asc,
+  username        asc
+)
 
 -----------------------------------------------------------------------
 -- Create a stored procedure for users to call to retrieve the token.
 -- Notice it should a different (and more permissive) schema than the table.
 --
-CREATE PROCEDURE [redcap].[prc_credential]
+CREATE PROCEDURE redcap.prc_credential
   @project_id smallint,
   @instance   varchar(30)
 AS
 BEGIN
   SET NOCOUNT ON;
 
-  SELECT username, project_id, token, redcap_uri FROM [redcap_private].[tbl_credential]
+  SELECT username, project_id, token, redcap_uri FROM redcap_private.tbl_credential
   WHERE
     username   = system_user -- The username from the server's OS.
     AND
@@ -95,7 +88,6 @@ BEGIN
     instance   = @instance   -- System accommodates multiple REDCap instances.
 END
 ```
-
 
 Create user credentials to the auxiliary database
 ========================================
@@ -197,8 +189,8 @@ rm(list=ls(all=TRUE)) #Clear the memory for any variables set from any previous 
 # ---- load-sources ------------------------------------------------------------
 
 # ---- load-packages -----------------------------------------------------------
-if( !require(OuhscMunge) )
-  stop('The `OuhscMunge` package needs to be installed with `devtools::install_github("OuhscBbmc/OuhscMunge")`.')
+if (!require(OuhscMunge))
+  stop('The `OuhscMunge` package needs to be installed with `remotes::install_github("OuhscBbmc/OuhscMunge")`.')
 
 testit::assert(
   "The `OuhscMunge` package should meet a minimal version.",
@@ -213,7 +205,7 @@ requireNamespace("readr")
 requireNamespace("tibble")
 requireNamespace("testit")
 requireNamespace("checkmate")
-requireNamespace("OuhscMunge")  # devtools::install_github("OuhscBbmc/OuhscMunge")
+requireNamespace("OuhscMunge")  # remotes::install_github("OuhscBbmc/OuhscMunge")
 
 
 # ---- declare-globals ---------------------------------------------------------
@@ -290,13 +282,13 @@ ds <-
   dplyr::union(ds_dev) %>%                                # Remove union if the dev instance isn't included.
   tibble::as_tibble() %>%
   dplyr::select(
-    username             = username,
-    project_id           = project_id,
-    instance             = instance,
-    token                = api_token
+    username        = username,
+    project_id      = project_id,
+    instance        = instance,
+    token           = api_token
   ) %>%
   dplyr::mutate(
-    username             = paste0(ldap_prefix, username), # Qualify for the Active Directory.
+    username        = paste0(ldap_prefix, username), # Qualify for the Active Directory.
   ) %>%
   dplyr::left_join( ds_url, by="instance") %>%            # Include the instance URL.
   dplyr::arrange(instance, project_id, username) %>%

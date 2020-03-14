@@ -6,27 +6,25 @@ output:
 vignette: >
   %\VignetteIndexEntry{Troubleshooting REDCap API Calls}
   %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
 # resource_files:
 #   - images/EmailVerified.png
 ---
 
-
-Troubleshooting REDCap API Calls
-==================================================================
-
 There are many links in the pipeline between your institution's [REDCap](http://www.project-redcap.org/) server and the API user.  When the end result is unsuccessful, this document should help narrow the location of the possible problem.  The first two sections will be relevant to almost any language interacting with the API.  The remaining sections are possibly relevant only to your language (*e.g.*, Python, R, PHP, SAS, bash), or your software library such as ([redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://ouhscbbmc.github.io/REDCapR) in R, [phpcap](https://github.com/iuredcap/phpcap) in PHP, and [PyCap](http://pycap.readthedocs.org/en/latest/) in Python).
 
+Language Agnostic
+==================================================================
 
 Server Configuration and Authorization
 ------------------------------------------------------------------
 
 This first group of checks primarily focuses on the server and the logins accounts.  Unlike later sections, REDCap administrator privileges are necessary for most of these checks.
 
-1. **Do you have an account for the *server*?**  This can be verified in the `Browse Users` section of the server's `Control Center`.  
+1. **Do you have an account for the *server*?**  This can be verified in the `Browse Users` section of the server's `Control Center`.
 
-    * If you're a REDCap admin, put yourself in the user's postion --does the user have an account?
-    
+    * If you're a REDCap admin, put yourself in the user's position --does the user have an account?
+
     * If you're a typical user, you may have to consult with your institution's REDCap administrator for some of these checks.
 
 1. **Do you have permissions for the specific *project*?** This can be verified in the `User Rights` section within the project.  Notice that it's possible (but ultimately not useful) to have an account here, but not with the server, so don't skip the previous step.
@@ -56,11 +54,10 @@ This first group of checks primarily focuses on the server and the logins accoun
     ```
 
     <!--<img src="./images/MagnifyingGlass.png" alt="MagnifyingGlass" style="width: 550px;"/>-->
-  
+
 If all these checks pass, proceed to the next section.  If not, start by consulting with your REDCap administrator.
 
-
-Language Agnostic API
+API
 ------------------------------------------------------------------
 
 This section examines potential problems that occur after data leaves a working server, but before it is handled by their programming language (*e.g.*, Python and R).  [Postman](http://www.getpostman.com/) is a Chrome plugin recommended by [several](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ) [people](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ) that makes troubleshooting much more efficient.
@@ -77,7 +74,7 @@ knitr::include_graphics("images/PostmanScreenshot.png")
 
 1. **Is Postman installed and operating correctly?**  If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/).  The url is `https://bbmc.ouhsc.edu/redcap/api/`.  There are three key-value pairs: (1) the 'token' is `9A81268476645C4E5F03428B8AC3AA7B`, (2) the 'content' is `record`, and (3) the 'format' should be `CSV`.  When checking your own server, the token value should change, but the content and format should not.  It should return five records in a CSV format.  The 'status' should be `200 OK`.  The result should look roughly like this.  Notice the line breaks were included in the text values themselves.
 
-    ```
+    ```csv
     record_id,name_first,name_last,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete
     "1","Nutmeg","Nutmouse","14 Rose Cottage St.
     Kenning UK, 323232","(432) 456-4848","nutty@mouse.com","2003-08-30",10,1,2,0,5,1,400,"Character in a book, with some guessing",2
@@ -110,8 +107,25 @@ knitr::include_graphics("images/PostmanScreenshot.png")
 
 If all these checks pass, proceed to the next section.  If not, start by consulting with your REDCap administrator.
 
+Common Gotchas  {#gotchas-agnostic}
+------------------------------------------------------------------
 
-Exporting from REDCap to R
+1. **Problems in the project's metadata/dictionary.**  If exporting the metadata fails (*e.g.*, [`REDCapR::redcap_metadata_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_read.html) and [`redcapAPI::exportMetaData()`](https://rdrr.io/github/nutterb/redcapAPI/man/exportMetaData.html)), manually download the data dictionary from the REDCap browser.  Inspect the plain text closely in a text editor like [Atom](https://atom.io/) or [Visual Studio Code](https://code.visualstudio.com/); avoid programs like Excel that tend to interpret, align, and decorate the values, which sometimes masks problems.  Scrutinize all elements, but especially look for nonstandard characters.  *See the next bullet.*
+
+    Some API libraries test that problematic elements of a project are handled correctly.  If you encounter an element that causes problems, please consider
+
+    1. creating a new GitHub Issue that describes the problem (*e.g.*, [REDCapR](https://github.com/OuhscBbmc/REDCapR/issues), [redcapAPI](https://github.com/nutterb/redcapAPI/issues), [phpcap](https://github.com/iuredcap/phpcap/issues)).
+
+    1. in the issue, attach the problematic fields of your data dictionary.  If you're uncomfortable sharing your dictionary with the world, consider emailing it to developer.  Because it's just the data dictionary, no PHI should be included.
+
+    If the package developer can't find a way to gracefully adapt, they'll at least try to provide a better error message.
+
+1. **Identify problematic characters.** This is a special case of the previous bullet.  Look for fancy characters that might not be interpreted smoothly.  For instance, when editing the data dictionary in Excel, sometimes *straight* quotes are converted to *curly* quotes.  This might cause a problem later, when your API client tries to interpret the character using the wrong encoding. All ASCII characters in REDCap dictionaries appear to be interpreted smoothly.
+
+R
+==================================================================
+
+Reading without a Package
 ------------------------------------------------------------------
 
 There are several ways to call REDCap's API from [R](https://cran.r-project.org/).  The packages [redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://github.com/OuhscBbmc/REDCapR) both rely on the [httr](https://cran.r-project.org/package=httr) package, which calls the [curl](https://cran.r-project.org/package=curl) package, which calls [cURL](http://curl.haxx.se/docs/manpage.html).
@@ -220,8 +234,7 @@ There are several ways to call REDCap's API from [R](https://cran.r-project.org/
 
 If all these checks pass, proceed to the next section.  If not, start by consulting your REDCap administrator.
 
-
-Exporting from REDCap to R, using REDCapR
+Reading with the REDCapR Package
 ------------------------------------------------------------------
 
 [REDCapR](https://ouhscbbmc.github.io/REDCapR/) wraps convenience functions around [httr](https://httr.r-lib.org/) to reduce the size and complexity of the user's code.  The package's basic functions are [demonstrated in a vignette](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) and are documented in its [reference manual](https://ouhscbbmc.github.io/REDCapR/reference).
@@ -266,7 +279,7 @@ If you're not using REDCapR, you can skip this section and proceed to "Exporting
 
     The previous code should produce similar output.  Notice there are five rows and the columns will wrap around if your console window is too narrow.
 
-    ```
+    ```r
     5 records and 1 columns were read from REDCap in 0.41 seconds.
     Starting to read 5 records  at 2014-06-27 17:19:49
     Reading batch 1 of 1, with ids 1 through 5.
@@ -331,9 +344,9 @@ If you're not using REDCapR, you can skip this section and proceed to "Exporting
 
 If one of these checks fail, please start by consulting your REDCap administrator.
 
-
-Exporting from REDCap to R, using redcapAPI
+Reading with the redcapAPI Package
 ------------------------------------------------------------------
+
 [httr](https://httr.r-lib.org/)
 [redcapAPI](https://github.com/nutterb/redcapAPI) wraps convenience functions around [httr](https://httr.r-lib.org/) to reduce the size and complexity of the user's code.
 
@@ -361,7 +374,7 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
     # Loading required package: redcapAPI
     ```
 
-1. **Can you export their data dictiontary?** Sometimes the problem exists within the metadata/dictionary, instead of the actual data values.  Verify the structure and content of this specific project is interpretable by your local environment.
+1. **Can you export their data dictionary?** Sometimes the problem exists within the metadata/dictionary, instead of the actual data values.  Verify the structure and content of this specific project is interpretable by your local environment.
 
     ```r
     library(redcapAPI) # Load the package into the current R session, if you haven't already.
@@ -385,7 +398,7 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
 
     The previous code should produce similar output.  Notice there are five rows and the columns will wrap around if your console window is too narrow.
 
-    ```
+    ```r
     record_id name_first name_last                                 address      telephone               email
     1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232 (432) 456-4848     nutty@mouse.com
     2         2     Tumtum  Nutmouse 14 Rose Cottage Blvd.\nKenning UK 34243 (234) 234-2343    tummy@mouse.comm
@@ -430,8 +443,7 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
 
 If one of these checks fail, please start by consulting your REDCap administrator.
 
-
-Importing into REDCap from R
+Writing
 ------------------------------------------------------------------
 
 Troubleshooting import operations is trickier than export operations for two major reasons.  First, the database potentially persists your *import* mistakes.  In contrast, repeatedly *exporting* data won't affect subsequent reads.  Considering cloning the REDCap project for testing until the problem is resolved.  Remember to create a new token (because they're not automatically created when projects are cloned, even when users are copied), and to modify your code's token to point to the new testing clone.
@@ -446,39 +458,20 @@ The second reason why importing can be trickier is because the schema (*e.g.*, t
 
 If one of these checks fail, please start by consulting your REDCap administrator.
 
+General Information
+==================================================================
 
-Common Language-Agnostic Gotchas  {#gotchas-agnostic}
-------------------------------------------------------------------
-
-1. **Problems in the project's metadata/dictionary.**  If exporting the metadata fails (*e.g.*, [`REDCapR::redcap_metadata_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_read.html) and [`redcapAPI::exportMetaData()`](https://rdrr.io/github/nutterb/redcapAPI/man/exportMetaData.html)), manually download the data dictionary from the REDCap browser.  Inspect the plain text closely in a text editor like [Atom](https://atom.io/) or [Visual Studio Code](https://code.visualstudio.com/); avoid programs like Excel that tend to interpret, align, and decorate the values, which sometimes masks problems.  Scrutinize all elements, but especially look for nonstandard characters.  *See the next bullet.*
-
-    Some API libraries test that problematic elements of a project are handled correctly.  If you encounter an element that causes problems, please consider
-
-    1. creating a new GitHub Issue that describes the problem (*e.g.*, [REDCapR](https://github.com/OuhscBbmc/REDCapR/issues), [redcapAPI](https://github.com/nutterb/redcapAPI/issues), [phpcap](https://github.com/iuredcap/phpcap/issues)).
-
-    1. in the issue, attach the problematic fields of your data dictionary.  If you're uncomfortable sharing your dictionary with the world, consider emailing it to developer.  Because it's just the data dictionary, no PHI should be included.
-
-    If the package developer can't find a way to gracefully adapt, they'll at least try to provide a better error message.
-
-1. **Identify problematic characters.** This is a special case of the previous bullet.  Look for fancy characters that might not be interpreted smoothly.  For instance, when editing the data dictionary in Excel, sometimes *straight* quotes are converted to *curly* quotes.  This might cause a problem later, when your API client tries to interpet the character using the wrong encoding. All ASCII characters in REDCap dictionaries appear to be interpreted smoothly.
-
-
-General Troubleshooting Advice
+Troubleshooting Strategies
 ------------------------------------------------------------------
 
 1. **Simplify.**  Eliminate potential sources of problems by cumulatively.  For example, reduce the columns & records that you read/write.
 
-1. **Start fresh.**  If that's not feasible, start a new project and gradually add elements from the original project.  Identify the problematic element by testing the API call after each addition.
+1. **Start fresh.**  If that's not feasible, start a new REDCap project and gradually add elements from the original project.  Identify the problematic element by testing the API call after each addition.
 
-
-Other software for communication and automation with REDCap
+Resources
 ------------------------------------------------------------------
 
-REDCap is used in many environments, and it's not surprising that a lot of libraries have been developed to cater to different scenarios and languages.  An active list is maintained at [REDCap-Tools](http://redcap-tools.github.io/projects/).  In an entry needs to be added, please notify us; instructions are found at the bottom of the page.
-
-
-Other good resources
-------------------------------------------------------------------
+* REDCap is used in many environments, and it's not surprising that a lot of libraries have been developed to cater to different scenarios and languages.   An active list is maintained at [REDCap-Tools](http://redcap-tools.github.io/projects/).  In an entry needs to be added, please notify us; instructions are found at the bottom of the page.
 
 * The basic API documentation is available on your REDCap server, typically at
 
@@ -490,7 +483,6 @@ Other good resources
 * Scott Burns, the primary developer of [PyCap](https://github.com/redcap-tools/PyCap) has a good intro at http://sburns.org/2013/07/22/intro-to-redcap-api.html
 * Benjamin Nutter, the primary developer of [redcapAPI](https://github.com/nutterb/redcapAPI/wiki) has a good wiki at https://github.com/nutterb/redcapAPI/wiki
 * In addition to this troubleshooting document, REDCapR has vignettes that covers its  [basic](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) and [advanced](https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.html) operations.
-
 
 Document Info
 ------------------------------------------------------------------

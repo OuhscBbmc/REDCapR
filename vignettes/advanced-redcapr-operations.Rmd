@@ -8,11 +8,10 @@ output:
 vignette: >
   %\VignetteIndexEntry{Advanced REDCapR Operations}
   %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
 ---
 
 This vignette covers the the less-typical uses of [REDCapR](https://github.com/OuhscBbmc/REDCapR) to interact with [REDCap](http://www.project-redcap.org/) through its API.
-
 
 ```{r set_options, echo=FALSE, results='hide'}
 report_render_start_time <- Sys.time()
@@ -23,7 +22,6 @@ suppressPackageStartupMessages(requireNamespace("kableExtra"))
 
 opts_chunk$set(
   comment = "#>",
-  # collapse = TRUE,
   tidy    = FALSE
 )
 
@@ -44,12 +42,15 @@ knit_print.data.frame = function(x, ...) {
     c("", "", .) %>%
     paste(collapse = "\n") %>%
     asis_output()
-
 }
 ```
-## Next Steps {#nextsteps .emphasized}
 
-## Set project-wide values.
+Next Steps {#nextsteps .emphasized}
+==================================================================
+
+Set project-wide values
+==================================================================
+
 There is some information that is specific to a REDCap project, as opposed to an individual operation.  This includes the (1) uri of the server, and the (2) token for the user's project.  This is hosted on a machine used in REDCapR's public test suite, so you can run this example from any computer.  Unless tests are running.
 
 *Other than PHI-free demos, we strongly suggest storing tokens securely and avoiding hard-coding them like below.  Our recommendation is to store tokens [in a database](https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html).  If that is not feasible for your institution, consider storing them in a secured csv and retrieving with [`REDCapR::retrieve_credential_local()`](https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html).*
@@ -61,7 +62,8 @@ token_simple          <- "9A81268476645C4E5F03428B8AC3AA7B"
 token_longitudinal    <- "0434F0E9CF53ED0587847AB6E51DE762"
 ```
 
-## Converting from tall/long to wide
+Converting from tall/long to wide
+==================================================================
 
 *Disclaimer*: Occasionally we're asked for a longitudinal dataset to be converted from a "long/tall format" (where  typically each row is one observation for a participant) to a "wide format" (where each row is on participant).  Usually we advise against it.  Besides all the database benefits of a long structure, a wide structure restricts your options with the stat routine.  No modern longitudinal analysis procedures (*e.g.*, growth curve models or multilevel/hierarchical models) accept wide.  You're pretty much stuck with repeated measures anova, which is very inflexible for real-world medical-ish analyses.  It requires a patient to have a measurement at every time point; otherwise the anova excludes the patient entirely.
 
@@ -73,12 +75,13 @@ suppressPackageStartupMessages(requireNamespace("dplyr"))
 suppressPackageStartupMessages(requireNamespace("tidyr"))
 events_to_retain  <- c("dose_1_arm_1", "visit_1_arm_1", "dose_2_arm_1", "visit_2_arm_1")
 
-ds_long <- REDCapR::redcap_read_oneshot(redcap_uri=uri, token=token_longitudinal)$data
+ds_long <- REDCapR::redcap_read_oneshot(redcap_uri = uri, token = token_longitudinal)$data
 ds_long %>%
   dplyr::select(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)
 ```
 
 When widening only one variable (*e.g.*, `pmq1`), the code's pretty simple:
+
 ```{r widen-simple, results='hold'}
 ds_wide <-
   ds_long %>%
@@ -127,7 +130,7 @@ ds_eav <-
   dplyr::select(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4) %>%
   dplyr::mutate(
     event = sub(pattern, "\\1", redcap_event_name),
-    event = dplyr::recode(event, "first_dose"="dose_1", "first_visit"="visit_1"),
+    event = dplyr::recode(event, "first_dose" = "dose_1", "first_visit" = "visit_1"),
     arm   = as.integer(sub(pattern, "\\2", redcap_event_name))
   ) %>%
   dplyr::select(study_id, event, arm, pmq1, pmq2, pmq3, pmq4) %>%
@@ -165,17 +168,52 @@ ds_wide_2
 
 Lots of packages and documentation exist.  Our current preference is the [tidyverse approach](https://tidyr.tidyverse.org/articles/pivot.html) to pivoting, but the [data.table approach](https://www.r-bloggers.com/creating-blazing-fast-pivot-tables-from-r-with-data-table-now-with-subtotals-using-grouping-sets/) is worth considering if you're comfortable with that package.  This [Stack Overflow post](https://stackoverflow.com/questions/10589693/convert-data-from-long-format-to-wide-format-with-multiple-measure-columns/) describes several ways.  We recommend against the [reshape](https://CRAN.R-project.org/package=reshape) and [reshape2](https://CRAN.R-project.org/package=reshape2) packages, because their developers have replaced them with the [tidyr](https://CRAN.R-project.org/package=tidyr) functions described above.
 
+Query the Underlying MySQL Database
+==================================================================
 
-## SSL Options
+If you require a feature that is not available from your instance's API, first upgrade your institution's REDcap instance and see if the feature has been added recently.  Second, check if someone has released the desired API-like features as an [REDCap External Module](https://redcap.vanderbilt.edu/consortium/modules/).
+
+Third, you may need to query the database underneath REDCap's web server.  The [Transfer Credentials](https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html#transfer-credentials) section of the [Security Database Vignette](https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html#transfer-credentials) provides a complete example of using R to query the MySQL database through odbc.
+
+We find it's best to develop the query in [MySQL Workbench](https://www.mysql.com/products/workbench/), then copy the code to R (or alternatively, use [`OuhscMunge::execute_sql_file()`](https://ouhscbbmc.github.io/OuhscMunge/reference/execute_sql_file.html)).
+
+Here is an example that retrieves the `first_submit_time`, which is helpful if you need a timestamp from surveys that were not marked as completed.  Replace '444' with your pid, and 1001 through 1003 with the desired events.
+
+```sql
+SELECT 
+  p.participant_id      as participant_survey_id
+  ,r.record             as record_id
+  ,p.event_id
+  ,e.descrip            as event_name
+  ,r.first_submit_time
+  ,r.completion_time
+  
+  -- ,p.*
+  -- ,r.*
+FROM redcapv3.redcap_surveys_participants     as p
+  left  join redcapv3.redcap_surveys_response as r on p.participant_id = r.participant_id
+  left  join redcapv3.redcap_events_metadata  as e on p.event_id       = e.event_id
+where 
+  p.survey_id = 444
+  and
+  p.event_id in (
+    1001, -- start of the year
+    1002, -- mid term
+    1003  -- end of year
+  )
+```
+
+SSL Options
+==================================================================
 
 The official [cURL site](http://curl.haxx.se) discusses the process of using SSL to verify the server being connected to.
 
 Use the SSL cert file that come with the `openssl` package.
 
 ```{r}
-cert_location <- system.file("cacert.pem", package="openssl")
-if( file.exists(cert_location) ) {
-  config_options         <- list(cainfo=cert_location)
+cert_location <- system.file("cacert.pem", package = "openssl")
+if (file.exists(cert_location)) {
+  config_options         <- list(cainfo = cert_location)
   ds_different_cert_file <- redcap_read_oneshot(
     redcap_uri     = uri,
     token          = token_simple,
@@ -186,22 +224,23 @@ if( file.exists(cert_location) ) {
 
 Force the connection to use SSL=3 (which is not preferred, and possibly insecure).
 ```{r}
-config_options <- list(sslversion=3)
+config_options <- list(sslversion = 3)
 ds_ssl_3 <- redcap_read_oneshot(
   redcap_uri     = uri,
   token          = token_simple,
   config_options = config_options
 )$data
 
-config_options <- list(ssl.verifypeer=FALSE)
+config_options <- list(ssl.verifypeer = FALSE)
 ds_no_ssl <- redcap_read_oneshot(
-   redcap_uri     = uri,
-   token          = token_simple,
-   config_options = config_options
+  redcap_uri     = uri,
+  token          = token_simple,
+  config_options = config_options
 )$data
 ```
 
-## Convert SPSS Output to REDCap data dictionary
+Convert SPSS Output to REDCap data dictionary
+==================================================================
 
 The solution https://stackoverflow.com/a/51013678/1082435 converts levels specified in SPSS output like
 
@@ -223,14 +262,15 @@ SEX      0, Male | 1, Female
 LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown
 ```
 
+Session Information
+==================================================================
 
-## Session Information
 For the sake of documentation and reproducibility, the current report was rendered in the following environment.  Click the line below to expand.
 
 <details>
   <summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary>
 ```{r session-info, echo=FALSE}
-if( requireNamespace("devtools", quietly = TRUE) ) {
+if (requireNamespace("sessioninfo", quietly = TRUE)) {
   sessioninfo::session_info()
 } else {
   sessionInfo()
@@ -239,7 +279,7 @@ if( requireNamespace("devtools", quietly = TRUE) ) {
 </details>
 
 ```{r session-duration, echo=FALSE}
-report_render_duration_in_seconds <- round(as.numeric(difftime(Sys.time(), report_render_start_time, units="secs")))
+report_render_duration_in_seconds <- round(as.numeric(difftime(Sys.time(), report_render_start_time, units = "secs")))
 ```
 
 Report rendered by `r Sys.info()["user"]` at `r strftime(Sys.time(), "%Y-%m-%d, %H:%M %z")` in `r report_render_duration_in_seconds` seconds.

@@ -126,7 +126,7 @@ redcap_variables <- function(
   if( verbose )
     message(outcome_message)
 
-   list(
+  list(
     data                = ds,
     success             = kernel$success,
     status_code         = kernel$status_code,

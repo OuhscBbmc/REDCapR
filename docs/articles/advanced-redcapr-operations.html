@@ -103,12 +103,12 @@
 
       
 
-      </header><script src="advanced-redcapr-operations_files/jquery-1.11.3/jquery.min.js"></script><script src="advanced-redcapr-operations_files/elevate-section-attrs-2.0/elevate-section-attrs.js"></script><div class="row">
+      </header><script src="advanced-redcapr-operations_files/header-attrs-2.1/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Advanced REDCapR Operations</h1>
             
-            <h4 class="date">2020-01-21</h4>
+            <h4 class="date">2020-03-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/advanced-redcapr-operations.Rmd"><code>vignettes/advanced-redcapr-operations.Rmd</code></a></small>
       <div class="hidden name"><code>advanced-redcapr-operations.Rmd</code></div>
@@ -118,13 +118,13 @@
     
     
 <p>This vignette covers the the less-typical uses of <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> to interact with <a href="http://www.project-redcap.org/">REDCap</a> through its API.</p>
-<div id="nextsteps" class="section level2 emphasized">
-<h2 class="hasAnchor">
-<a href="#nextsteps" class="anchor"></a>Next Steps</h2>
+<div id="nextsteps" class="section level1 emphasized">
+<h1 class="hasAnchor">
+<a href="#nextsteps" class="anchor"></a>Next Steps</h1>
 </div>
-<div id="set-project-wide-values-" class="section level2">
-<h2 class="hasAnchor">
-<a href="#set-project-wide-values-" class="anchor"></a>Set project-wide values.</h2>
+<div id="set-project-wide-values" class="section level1">
+<h1 class="hasAnchor">
+<a href="#set-project-wide-values" class="anchor"></a>Set project-wide values</h1>
 <p>There is some information that is specific to a REDCap project, as opposed to an individual operation. This includes the (1) uri of the server, and the (2) token for the user’s project. This is hosted on a machine used in REDCapR’s public test suite, so you can run this example from any computer. Unless tests are running.</p>
 <p><em>Other than PHI-free demos, we strongly suggest storing tokens securely and avoiding hard-coding them like below. Our recommendation is to store tokens <a href="https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html">in a database</a>. If that is not feasible for your institution, consider storing them in a secured csv and retrieving with <a href="https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html"><code><a href="../reference/retrieve_credential.html">REDCapR::retrieve_credential_local()</a></code></a>.</em></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(REDCapR) <span class="co">#Load the package into the current R session.</span></span>
@@ -132,9 +132,9 @@
 <span id="cb1-3"><a href="#cb1-3"></a>token_simple          &lt;-<span class="st"> "9A81268476645C4E5F03428B8AC3AA7B"</span></span>
 <span id="cb1-4"><a href="#cb1-4"></a>token_longitudinal    &lt;-<span class="st"> "0434F0E9CF53ED0587847AB6E51DE762"</span></span></code></pre></div>
 </div>
-<div id="converting-from-talllong-to-wide" class="section level2">
-<h2 class="hasAnchor">
-<a href="#converting-from-talllong-to-wide" class="anchor"></a>Converting from tall/long to wide</h2>
+<div id="converting-from-talllong-to-wide" class="section level1">
+<h1 class="hasAnchor">
+<a href="#converting-from-talllong-to-wide" class="anchor"></a>Converting from tall/long to wide</h1>
 <p><em>Disclaimer</em>: Occasionally we’re asked for a longitudinal dataset to be converted from a “long/tall format” (where typically each row is one observation for a participant) to a “wide format” (where each row is on participant). Usually we advise against it. Besides all the database benefits of a long structure, a wide structure restricts your options with the stat routine. No modern longitudinal analysis procedures (<em>e.g.</em>, growth curve models or multilevel/hierarchical models) accept wide. You’re pretty much stuck with repeated measures anova, which is very inflexible for real-world medical-ish analyses. It requires a patient to have a measurement at every time point; otherwise the anova excludes the patient entirely.</p>
 <p>However we like going wide to produce visual tables for publications, and here’s one way to do it in R. First retrieve the dataset from REDCap.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(magrittr);</span>
@@ -143,7 +143,7 @@
 <span id="cb2-4"><a href="#cb2-4"></a>events_to_retain  &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"dose_1_arm_1"</span>, <span class="st">"visit_1_arm_1"</span>, <span class="st">"dose_2_arm_1"</span>, <span class="st">"visit_2_arm_1"</span>)</span>
 <span id="cb2-5"><a href="#cb2-5"></a></span>
 <span id="cb2-6"><a href="#cb2-6"></a>ds_long &lt;-<span class="st"> </span>REDCapR<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/REDCapR/man/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(<span class="dt">redcap_uri=</span>uri, <span class="dt">token=</span>token_longitudinal)<span class="op">$</span>data</span></code></pre></div>
-<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 1.6 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.6 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>ds_long <span class="op">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)</span></code></pre></div>
 <pre><code>#&gt;    study_id        redcap_event_name pmq1 pmq2 pmq3 pmq4
@@ -278,9 +278,9 @@
 #&gt; #   pmq2_visit_2 &lt;dbl&gt;, pmq3_visit_2 &lt;dbl&gt;, pmq4_visit_2 &lt;dbl&gt;</code></pre>
 <p>Lots of packages and documentation exist. Our current preference is the <a href="https://tidyr.tidyverse.org/articles/pivot.html">tidyverse approach</a> to pivoting, but the <a href="https://www.r-bloggers.com/creating-blazing-fast-pivot-tables-from-r-with-data-table-now-with-subtotals-using-grouping-sets/">data.table approach</a> is worth considering if you’re comfortable with that package. This <a href="https://stackoverflow.com/questions/10589693/convert-data-from-long-format-to-wide-format-with-multiple-measure-columns/">Stack Overflow post</a> describes several ways. We recommend against the <a href="https://CRAN.R-project.org/package=reshape">reshape</a> and <a href="https://CRAN.R-project.org/package=reshape2">reshape2</a> packages, because their developers have replaced them with the <a href="https://CRAN.R-project.org/package=tidyr">tidyr</a> functions described above.</p>
 </div>
-<div id="ssl-options" class="section level2">
-<h2 class="hasAnchor">
-<a href="#ssl-options" class="anchor"></a>SSL Options</h2>
+<div id="ssl-options" class="section level1">
+<h1 class="hasAnchor">
+<a href="#ssl-options" class="anchor"></a>SSL Options</h1>
 <p>The official <a href="http://curl.haxx.se">cURL site</a> discusses the process of using SSL to verify the server being connected to.</p>
 <p>Use the SSL cert file that come with the <code>openssl</code> package.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>cert_location &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"cacert.pem"</span>, <span class="dt">package=</span><span class="st">"openssl"</span>)</span>
@@ -292,7 +292,7 @@
 <span id="cb14-7"><a href="#cb14-7"></a>    <span class="dt">config_options =</span> config_options</span>
 <span id="cb14-8"><a href="#cb14-8"></a>  )<span class="op">$</span>data</span>
 <span id="cb14-9"><a href="#cb14-9"></a>}</span></code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <p>Force the connection to use SSL=3 (which is not preferred, and possibly insecure).</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>config_options &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">sslversion=</span><span class="dv">3</span>)</span>
 <span id="cb16-2"><a href="#cb16-2"></a>ds_ssl_<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(</span>
@@ -307,11 +307,11 @@
 <span id="cb18-4"><a href="#cb18-4"></a>   <span class="dt">token          =</span> token_simple,</span>
 <span id="cb18-5"><a href="#cb18-5"></a>   <span class="dt">config_options =</span> config_options</span>
 <span id="cb18-6"><a href="#cb18-6"></a>)<span class="op">$</span>data</span></code></pre></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 </div>
-<div id="convert-spss-output-to-redcap-data-dictionary" class="section level2">
-<h2 class="hasAnchor">
-<a href="#convert-spss-output-to-redcap-data-dictionary" class="anchor"></a>Convert SPSS Output to REDCap data dictionary</h2>
+<div id="convert-spss-output-to-redcap-data-dictionary" class="section level1">
+<h1 class="hasAnchor">
+<a href="#convert-spss-output-to-redcap-data-dictionary" class="anchor"></a>Convert SPSS Output to REDCap data dictionary</h1>
 <p>The solution <a href="https://stackoverflow.com/a/51013678/1082435" class="uri">https://stackoverflow.com/a/51013678/1082435</a> converts levels specified in SPSS output like</p>
 <pre><code>SEX       0 Male
           1 Female
@@ -325,14 +325,43 @@ LANGUAGE  1 English
 SEX      0, Male | 1, Female
 LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 </div>
-<div id="session-information" class="section level2">
-<h2 class="hasAnchor">
-<a href="#session-information" class="anchor"></a>Session Information</h2>
+<div id="query-the-underlying-mysql-database" class="section level1">
+<h1 class="hasAnchor">
+<a href="#query-the-underlying-mysql-database" class="anchor"></a>Query the Underlying MySQL Database</h1>
+<p>If you require a feature that is not available from your instance’s API, first upgrade your institution’s REDcap instance and see if the feature has been added recently. Second, check if someone has released the desired API-like features as an <a href="https://redcap.vanderbilt.edu/consortium/modules/">REDCap External Module</a>.</p>
+<p>Third, you may need to query the database underneath REDCap’s web server. The <a href="https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html#transfer-credentials">Transfer Credentials</a> section of the <a href="https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html#transfer-credentials">Security Database Vignette</a> provides a complete example of using R to query the MySQL database through odbc.</p>
+<p>We find it’s best to develop the query in <a href="https://www.mysql.com/products/workbench/">MySQL Workbench</a>, then copy the code to R (or alternatively, use <a href="https://ouhscbbmc.github.io/OuhscMunge/reference/execute_sql_file.html"><code><a href="https://rdrr.io/pkg/OuhscMunge/man/execute_sql_file.html">OuhscMunge::execute_sql_file()</a></code></a>).</p>
+<p>Here is an example that retrieves the <code>first_submit_time</code>, which is helpful if you need a timestamp from surveys that were not marked as completed. Replace ‘444’ with your pid, and 1001 through 1003 with the desired events.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb22-2"><a href="#cb22-2"></a>  p.participant_id      <span class="kw">as</span> participant_survey_id</span>
+<span id="cb22-3"><a href="#cb22-3"></a>  ,r.<span class="dt">record</span>             <span class="kw">as</span> record_id</span>
+<span id="cb22-4"><a href="#cb22-4"></a>  ,p.event_id</span>
+<span id="cb22-5"><a href="#cb22-5"></a>  ,e.descrip            <span class="kw">as</span> event_name</span>
+<span id="cb22-6"><a href="#cb22-6"></a>  ,r.first_submit_time</span>
+<span id="cb22-7"><a href="#cb22-7"></a>  ,r.completion_time</span>
+<span id="cb22-8"><a href="#cb22-8"></a>  </span>
+<span id="cb22-9"><a href="#cb22-9"></a>  <span class="co">-- ,p.*</span></span>
+<span id="cb22-10"><a href="#cb22-10"></a>  <span class="co">-- ,r.*</span></span>
+<span id="cb22-11"><a href="#cb22-11"></a><span class="kw">FROM</span> redcapv3.redcap_surveys_participants     <span class="kw">as</span> p</span>
+<span id="cb22-12"><a href="#cb22-12"></a>  <span class="kw">left</span>  <span class="kw">join</span> redcapv3.redcap_surveys_response <span class="kw">as</span> r <span class="kw">on</span> p.participant_id <span class="op">=</span> r.participant_id</span>
+<span id="cb22-13"><a href="#cb22-13"></a>  <span class="kw">left</span>  <span class="kw">join</span> redcapv3.redcap_events_metadata  <span class="kw">as</span> e <span class="kw">on</span> p.event_id       <span class="op">=</span> e.event_id</span>
+<span id="cb22-14"><a href="#cb22-14"></a><span class="kw">where</span> </span>
+<span id="cb22-15"><a href="#cb22-15"></a>  p.survey_id <span class="op">=</span> <span class="dv">444</span></span>
+<span id="cb22-16"><a href="#cb22-16"></a>  <span class="kw"><a href="https://rdrr.io/pkg/magrittr/man/aliases.html">and</a></span></span>
+<span id="cb22-17"><a href="#cb22-17"></a>  p.event_id <span class="kw"><a href="https://rdrr.io/r/base/Control.html">in</a></span> (</span>
+<span id="cb22-18"><a href="#cb22-18"></a>    <span class="dv">1001</span>, <span class="co">-- start of the year</span></span>
+<span id="cb22-19"><a href="#cb22-19"></a>    <span class="dv">1002</span>, <span class="co">-- mid term</span></span>
+<span id="cb22-20"><a href="#cb22-20"></a>    <span class="dv">1003</span>  <span class="co">-- end of year</span></span>
+<span id="cb22-21"><a href="#cb22-21"></a>  )</span></code></pre></div>
+</div>
+<div id="session-information" class="section level1">
+<h1 class="hasAnchor">
+<a href="#session-information" class="anchor"></a>Session Information</h1>
 <p>For the sake of documentation and reproducibility, the current report was rendered in the following environment. Click the line below to expand.</p>
 <details><p><summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary></p>
 <pre><code>#&gt; ─ Session info ───────────────────────────────────────────────────────────────
 #&gt;  setting  value                       
-#&gt;  version  R version 3.6.2 (2019-12-12)
+#&gt;  version  R version 3.6.3 (2020-02-29)
 #&gt;  os       Ubuntu 19.10                
 #&gt;  system   x86_64, linux-gnu           
 #&gt;  ui       X11                         
@@ -340,33 +369,33 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 #&gt;  collate  en_US.UTF-8                 
 #&gt;  ctype    en_US.UTF-8                 
 #&gt;  tz       America/Chicago             
-#&gt;  date     2020-01-21                  
+#&gt;  date     2020-03-13                  
 #&gt; 
 #&gt; ─ Packages ───────────────────────────────────────────────────────────────────
 #&gt;  package     * version     date       lib source        
 #&gt;  assertthat    0.2.1       2019-03-21 [2] CRAN (R 3.6.1)
 #&gt;  backports     1.1.5       2019-10-02 [2] CRAN (R 3.6.1)
-#&gt;  callr         3.4.0       2019-12-09 [2] CRAN (R 3.6.1)
+#&gt;  callr         3.4.2       2020-02-12 [2] CRAN (R 3.6.2)
 #&gt;  checkmate     2.0.0       2019-12-03 [2] local         
-#&gt;  cli           2.0.1       2020-01-08 [2] CRAN (R 3.6.1)
+#&gt;  cli           2.0.2       2020-02-28 [2] CRAN (R 3.6.2)
 #&gt;  colorspace    1.4-1       2019-03-18 [2] CRAN (R 3.6.1)
 #&gt;  crayon        1.3.4       2017-09-16 [2] CRAN (R 3.6.1)
 #&gt;  curl          4.3         2019-12-02 [2] CRAN (R 3.6.1)
 #&gt;  desc          1.2.0       2018-05-01 [2] CRAN (R 3.6.1)
-#&gt;  devtools      2.2.1       2019-09-24 [2] CRAN (R 3.6.1)
-#&gt;  digest        0.6.23      2019-11-23 [2] CRAN (R 3.6.1)
-#&gt;  dplyr         0.8.3       2019-07-04 [2] CRAN (R 3.6.1)
+#&gt;  devtools      2.2.2       2020-02-17 [2] CRAN (R 3.6.2)
+#&gt;  digest        0.6.25      2020-02-23 [2] CRAN (R 3.6.2)
+#&gt;  dplyr         0.8.5       2020-03-07 [2] CRAN (R 3.6.3)
 #&gt;  ellipsis      0.3.0       2019-09-20 [2] CRAN (R 3.6.1)
 #&gt;  evaluate      0.14        2019-05-28 [2] CRAN (R 3.6.1)
 #&gt;  fansi         0.4.1       2020-01-08 [2] CRAN (R 3.6.1)
-#&gt;  fs            1.3.1       2019-05-06 [2] CRAN (R 3.6.1)
-#&gt;  glue          1.3.1       2019-03-12 [2] CRAN (R 3.6.1)
+#&gt;  fs            1.3.2       2020-03-05 [2] CRAN (R 3.6.3)
+#&gt;  glue          1.3.2       2020-03-12 [2] CRAN (R 3.6.3)
 #&gt;  hms           0.5.3       2020-01-08 [2] CRAN (R 3.6.1)
 #&gt;  htmltools     0.4.0       2019-10-04 [2] CRAN (R 3.6.1)
 #&gt;  httr          1.4.1       2019-08-05 [2] CRAN (R 3.6.1)
 #&gt;  kableExtra    1.1.0       2019-03-16 [2] CRAN (R 3.6.1)
-#&gt;  knitr       * 1.27        2020-01-16 [2] CRAN (R 3.6.1)
-#&gt;  lifecycle     0.1.0       2019-08-01 [2] CRAN (R 3.6.1)
+#&gt;  knitr       * 1.28        2020-02-06 [2] CRAN (R 3.6.2)
+#&gt;  lifecycle     0.2.0       2020-03-06 [2] CRAN (R 3.6.3)
 #&gt;  magrittr    * 1.5         2014-11-22 [2] CRAN (R 3.6.1)
 #&gt;  MASS          7.3-51.5    2019-12-20 [5] CRAN (R 3.6.2)
 #&gt;  memoise       1.1.0       2017-04-21 [2] CRAN (R 3.6.1)
@@ -376,45 +405,44 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 #&gt;  pkgconfig     2.0.3       2019-09-22 [2] CRAN (R 3.6.1)
 #&gt;  pkgdown       1.4.1       2019-09-15 [2] CRAN (R 3.6.1)
 #&gt;  pkgload       1.0.2       2018-10-29 [2] CRAN (R 3.6.1)
-#&gt;  prettyunits   1.1.0       2020-01-09 [2] CRAN (R 3.6.1)
-#&gt;  processx      3.4.1       2019-07-18 [2] CRAN (R 3.6.1)
-#&gt;  ps            1.3.0       2018-12-21 [2] CRAN (R 3.6.1)
+#&gt;  prettyunits   1.1.1       2020-01-24 [2] CRAN (R 3.6.2)
+#&gt;  processx      3.4.2       2020-02-09 [2] CRAN (R 3.6.2)
+#&gt;  ps            1.3.2       2020-02-13 [2] CRAN (R 3.6.2)
 #&gt;  purrr         0.3.3       2019-10-18 [2] CRAN (R 3.6.1)
 #&gt;  R6            2.4.1       2019-11-12 [2] CRAN (R 3.6.1)
 #&gt;  Rcpp          1.0.3       2019-11-08 [2] CRAN (R 3.6.1)
 #&gt;  readr         1.3.1       2018-12-21 [2] CRAN (R 3.6.1)
-#&gt;  REDCapR     * 0.10.2.9005 2020-01-21 [1] local         
-#&gt;  remotes       2.1.0       2019-06-24 [2] CRAN (R 3.6.1)
-#&gt;  rlang         0.4.2       2019-11-23 [2] CRAN (R 3.6.1)
-#&gt;  rmarkdown     2.0         2019-12-12 [2] CRAN (R 3.6.1)
+#&gt;  REDCapR     * 0.10.2.9005 2020-03-14 [1] local         
+#&gt;  remotes       2.1.1       2020-02-15 [2] CRAN (R 3.6.2)
+#&gt;  rlang         0.4.5       2020-03-01 [2] CRAN (R 3.6.2)
+#&gt;  rmarkdown     2.1         2020-01-20 [2] CRAN (R 3.6.2)
 #&gt;  rprojroot     1.3-2       2018-01-03 [2] CRAN (R 3.6.1)
-#&gt;  rstudioapi    0.10        2019-03-19 [2] CRAN (R 3.6.1)
+#&gt;  rstudioapi    0.11        2020-02-07 [2] CRAN (R 3.6.2)
 #&gt;  rvest         0.3.5       2019-11-08 [2] CRAN (R 3.6.1)
 #&gt;  scales        1.1.0       2019-11-18 [2] CRAN (R 3.6.1)
 #&gt;  sessioninfo   1.1.1       2018-11-05 [2] CRAN (R 3.6.1)
-#&gt;  stringi       1.4.5       2020-01-11 [2] CRAN (R 3.6.1)
+#&gt;  stringi       1.4.6       2020-02-17 [2] CRAN (R 3.6.2)
 #&gt;  stringr       1.4.0       2019-02-10 [2] CRAN (R 3.6.1)
-#&gt;  testthat      2.3.1       2019-12-01 [2] CRAN (R 3.6.1)
+#&gt;  testthat      2.3.2       2020-03-02 [2] CRAN (R 3.6.3)
 #&gt;  tibble        2.1.3       2019-06-06 [2] CRAN (R 3.6.1)
-#&gt;  tidyr         1.0.0       2019-09-11 [2] CRAN (R 3.6.1)
-#&gt;  tidyselect    0.2.5       2018-10-11 [2] CRAN (R 3.6.1)
+#&gt;  tidyr         1.0.2       2020-01-24 [2] CRAN (R 3.6.2)
+#&gt;  tidyselect    1.0.0       2020-01-27 [2] CRAN (R 3.6.2)
 #&gt;  usethis       1.5.1       2019-07-04 [2] CRAN (R 3.6.1)
 #&gt;  utf8          1.1.4       2018-05-24 [2] CRAN (R 3.6.1)
-#&gt;  vctrs         0.2.1       2019-12-17 [2] CRAN (R 3.6.1)
+#&gt;  vctrs         0.2.4       2020-03-10 [2] CRAN (R 3.6.3)
 #&gt;  viridisLite   0.3.0       2018-02-01 [2] CRAN (R 3.6.1)
 #&gt;  webshot       0.5.2       2019-11-22 [2] CRAN (R 3.6.1)
 #&gt;  withr         2.1.2       2018-03-15 [2] CRAN (R 3.6.1)
 #&gt;  xfun          0.12        2020-01-13 [2] CRAN (R 3.6.1)
-#&gt;  xml2          1.2.2       2019-08-09 [2] CRAN (R 3.6.1)
-#&gt;  yaml          2.2.0       2018-07-25 [2] CRAN (R 3.6.1)
-#&gt;  zeallot       0.1.0       2018-01-28 [2] CRAN (R 3.6.1)
+#&gt;  xml2          1.2.5       2020-03-11 [2] CRAN (R 3.6.3)
+#&gt;  yaml          2.2.1       2020-02-01 [2] CRAN (R 3.6.2)
 #&gt; 
-#&gt; [1] /tmp/RtmpyJ4et7/temp_libpath12c023e3e1ee
+#&gt; [1] /tmp/Rtmp830zQN/temp_libpath1f7158fa5947
 #&gt; [2] /home/wibeasley/R/x86_64-pc-linux-gnu-library/3.6
 #&gt; [3] /usr/local/lib/R/site-library
 #&gt; [4] /usr/lib/R/site-library
 #&gt; [5] /usr/lib/R/library</code></pre>
-</details><p>Report rendered by wibeasley at 2020-01-21, 13:05 -0600 in 6 seconds.</p>
+</details><p>Report rendered by wibeasley at 2020-03-13, 20:40 -0500 in 4 seconds.</p>
 </div>
   </div>
 
@@ -425,10 +453,11 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#nextsteps">Next Steps</a></li>
-      <li><a href="#set-project-wide-values-">Set project-wide values.</a></li>
+      <li><a href="#set-project-wide-values">Set project-wide values</a></li>
       <li><a href="#converting-from-talllong-to-wide">Converting from tall/long to wide</a></li>
       <li><a href="#ssl-options">SSL Options</a></li>
       <li><a href="#convert-spss-output-to-redcap-data-dictionary">Convert SPSS Output to REDCap data dictionary</a></li>
+      <li><a href="#query-the-underlying-mysql-database">Query the Underlying MySQL Database</a></li>
       <li><a href="#session-information">Session Information</a></li>
       </ul>
 </div>
