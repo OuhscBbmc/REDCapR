@@ -228,6 +228,43 @@ SEX      0, Male | 1, Female
 LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown
 ```
 
+
+
+Query the Underlying MySQL Database
+==================================================================
+
+If you require a feature that is not available from your instance's API, first upgrade your institution's REDcap instance and see if the feature has been added recently.  Second, check if someone has released the desired API-like features as an [REDCap External Module](https://redcap.vanderbilt.edu/consortium/modules/).
+
+Third, you may need to query the database underneath REDCap's web server.  The [Transfer Credentials](https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html#transfer-credentials) section of the [Security Database Vignette](https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html#transfer-credentials) provides a complete example of using R to query the MySQL database through odbc.
+
+We find it's best to develop the query in [MySQL Workbench](https://www.mysql.com/products/workbench/), then copy the code to R (or alternatively, use [`OuhscMunge::execute_sql_file()`](https://ouhscbbmc.github.io/OuhscMunge/reference/execute_sql_file.html)).
+
+Here is an example that retrieves the `first_submit_time`, which is helpful if you need a timestamp from surveys that were not marked as completed.  Replace '444' with your pid, and 1001 through 1003 with the desired events.
+
+```sql
+SELECT 
+  p.participant_id      as participant_survey_id
+  ,r.record             as record_id
+  ,p.event_id
+  ,e.descrip            as event_name
+  ,r.first_submit_time
+  ,r.completion_time
+  
+  -- ,p.*
+  -- ,r.*
+FROM redcapv3.redcap_surveys_participants     as p
+  left  join redcapv3.redcap_surveys_response as r on p.participant_id = r.participant_id
+  left  join redcapv3.redcap_events_metadata  as e on p.event_id       = e.event_id
+where 
+  p.survey_id = 444
+  and
+  p.event_id in (
+    1001, -- start of the year
+    1002, -- mid term
+    1003  -- end of year
+  )
+```
+
 Session Information
 ==================================================================
 
