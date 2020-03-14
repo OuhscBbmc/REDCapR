@@ -189,8 +189,8 @@ rm(list=ls(all=TRUE)) #Clear the memory for any variables set from any previous 
 # ---- load-sources ------------------------------------------------------------
 
 # ---- load-packages -----------------------------------------------------------
-if( !require(OuhscMunge) )
-  stop('The `OuhscMunge` package needs to be installed with `devtools::install_github("OuhscBbmc/OuhscMunge")`.')
+if (!require(OuhscMunge))
+  stop('The `OuhscMunge` package needs to be installed with `remotes::install_github("OuhscBbmc/OuhscMunge")`.')
 
 testit::assert(
   "The `OuhscMunge` package should meet a minimal version.",
@@ -205,7 +205,7 @@ requireNamespace("readr")
 requireNamespace("tibble")
 requireNamespace("testit")
 requireNamespace("checkmate")
-requireNamespace("OuhscMunge")  # devtools::install_github("OuhscBbmc/OuhscMunge")
+requireNamespace("OuhscMunge")  # remotes::install_github("OuhscBbmc/OuhscMunge")
 
 
 # ---- declare-globals ---------------------------------------------------------

@@ -22,7 +22,6 @@ suppressPackageStartupMessages(requireNamespace("kableExtra"))
 
 opts_chunk$set(
   comment = "#>",
-  # collapse = TRUE,
   tidy    = FALSE
 )
 
@@ -76,7 +75,7 @@ suppressPackageStartupMessages(requireNamespace("dplyr"))
 suppressPackageStartupMessages(requireNamespace("tidyr"))
 events_to_retain  <- c("dose_1_arm_1", "visit_1_arm_1", "dose_2_arm_1", "visit_2_arm_1")
 
-ds_long <- REDCapR::redcap_read_oneshot(redcap_uri=uri, token=token_longitudinal)$data
+ds_long <- REDCapR::redcap_read_oneshot(redcap_uri = uri, token = token_longitudinal)$data
 ds_long %>%
   dplyr::select(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)
 ```
@@ -131,7 +130,7 @@ ds_eav <-
   dplyr::select(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4) %>%
   dplyr::mutate(
     event = sub(pattern, "\\1", redcap_event_name),
-    event = dplyr::recode(event, "first_dose"="dose_1", "first_visit"="visit_1"),
+    event = dplyr::recode(event, "first_dose" = "dose_1", "first_visit" = "visit_1"),
     arm   = as.integer(sub(pattern, "\\2", redcap_event_name))
   ) %>%
   dplyr::select(study_id, event, arm, pmq1, pmq2, pmq3, pmq4) %>%
@@ -177,9 +176,9 @@ The official [cURL site](http://curl.haxx.se) discusses the process of using SSL
 Use the SSL cert file that come with the `openssl` package.
 
 ```{r}
-cert_location <- system.file("cacert.pem", package="openssl")
-if( file.exists(cert_location) ) {
-  config_options         <- list(cainfo=cert_location)
+cert_location <- system.file("cacert.pem", package = "openssl")
+if (file.exists(cert_location)) {
+  config_options         <- list(cainfo = cert_location)
   ds_different_cert_file <- redcap_read_oneshot(
     redcap_uri     = uri,
     token          = token_simple,
@@ -190,18 +189,18 @@ if( file.exists(cert_location) ) {
 
 Force the connection to use SSL=3 (which is not preferred, and possibly insecure).
 ```{r}
-config_options <- list(sslversion=3)
+config_options <- list(sslversion = 3)
 ds_ssl_3 <- redcap_read_oneshot(
   redcap_uri     = uri,
   token          = token_simple,
   config_options = config_options
 )$data
 
-config_options <- list(ssl.verifypeer=FALSE)
+config_options <- list(ssl.verifypeer = FALSE)
 ds_no_ssl <- redcap_read_oneshot(
-   redcap_uri     = uri,
-   token          = token_simple,
-   config_options = config_options
+  redcap_uri     = uri,
+  token          = token_simple,
+  config_options = config_options
 )$data
 ```
 
@@ -227,8 +226,6 @@ Variable Values
 SEX      0, Male | 1, Female
 LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown
 ```
-
-
 
 Query the Underlying MySQL Database
 ==================================================================
@@ -273,7 +270,7 @@ For the sake of documentation and reproducibility, the current report was render
 <details>
   <summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary>
 ```{r session-info, echo=FALSE}
-if( requireNamespace("devtools", quietly = TRUE) ) {
+if (requireNamespace("sessioninfo", quietly = TRUE)) {
   sessioninfo::session_info()
 } else {
   sessionInfo()
@@ -282,7 +279,7 @@ if( requireNamespace("devtools", quietly = TRUE) ) {
 </details>
 
 ```{r session-duration, echo=FALSE}
-report_render_duration_in_seconds <- round(as.numeric(difftime(Sys.time(), report_render_start_time, units="secs")))
+report_render_duration_in_seconds <- round(as.numeric(difftime(Sys.time(), report_render_start_time, units = "secs")))
 ```
 
 Report rendered by `r Sys.info()["user"]` at `r strftime(Sys.time(), "%Y-%m-%d, %H:%M %z")` in `r report_render_duration_in_seconds` seconds.
