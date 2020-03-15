@@ -18,6 +18,13 @@
 #' Required
 #' @param event The name of the event where the file is saved in REDCap.
 #' Optional
+#' @param repeat_instrument The name of the instrument that is repeating
+#' for a given event.
+#' Optional
+#' @param repeat_instance (only for projects with repeating instruments/events)
+#' The repeat instance number of the repeating event (if longitudinal) or the
+#' repeating instrument (if classic or longitudinal). Default value is '1'.
+#' Optional
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  Optional.
 #' @param config_options  A list of options to pass to [httr::POST()] method
