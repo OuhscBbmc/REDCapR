@@ -31,7 +31,6 @@ test_that("All Records -Default", {
     "collector"))), .Names = c("cols", "default"), class = "col_spec")
   )
 
-
   expected_outcome_message <- "23 variable metadata records were read from REDCap in \\d\\.\\d seconds\\.  The http status code was 200\\.(\\n)?"
 
   expect_message(

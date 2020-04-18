@@ -17,7 +17,6 @@ test_that("Smoke Test", {
   )
 })
 
-
 test_that("Vanilla", {
   testthat::skip_on_cran()
 
