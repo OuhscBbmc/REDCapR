@@ -60,7 +60,7 @@ content(httr_raw, type = "text")
 #   url = redcap_uri,
 #   body = post_body#,
 #   # config = config(ssl_verifypeer=FALSE)
-#   # config = httr::config(ssl.verifypeer=F)
+#   # config = httr::config(ssl.verifypeer=FALSE)
 #   #httr::verbose()
 # )
 # httr_raw
@@ -80,7 +80,7 @@ rcurl_raw <- RCurl::postForm(
   , rawOrLabel = 'raw'
   , exportDataAccessGroups = 'true'
   , .opts = RCurl::curlOptions(cainfo = system.file("ssl-certs/mozilla-ca-root.crt", package="REDCapR"))
-  # , .opts = RCurl::curlOptions(ssl.verifypeer=F)
+  # , .opts = RCurl::curlOptions(ssl.verifypeer=FALSE)
 )
 rcurl_raw
 
@@ -92,8 +92,8 @@ redcapr_data$data
 ##########################################################################
 library(redcapAPI) # devtools::install_github("nutterb/redcapAPI")
 # rcon <- redcapAPI::redcapConnection(url=redcap_uri, token=token, config = list())
-# rcon <- redcapAPI::redcapConnection(url=redcap_uri, token=token, config = list(ssl_verifypeer=F))
-# rcon <- redcapAPI::redcapConnection(url=redcap_uri, token=token, config = httr::config(ssl_verifypeer=F))
+# rcon <- redcapAPI::redcapConnection(url=redcap_uri, token=token, config = list(ssl_verifypeer=FALSE))
+# rcon <- redcapAPI::redcapConnection(url=redcap_uri, token=token, config = httr::config(ssl_verifypeer=FALSE))
 # rcon <- redcapAPI::redcapConnection(url=redcap_uri, token=token, config = httr::config())
 rcon <- redcapAPI::redcapConnection(url=redcap_uri, token=token)
 redcapAPI::exportRecords(rcon)
