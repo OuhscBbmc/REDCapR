@@ -2,7 +2,7 @@ library(testthat)
 
 ds_bad <- data.frame(
   record_id = 1:4,
-  bad_logical = c(T, T, F, T),
+  bad_logical = c(TRUE, TRUE, FALSE, TRUE),
   bad_Uppercase = c(4, 6, 8, 2)
 )
 ds_good <- data.frame(

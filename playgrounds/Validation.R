@@ -3,7 +3,7 @@ library(REDCapR)
 
 dfBad <- data.frame(
   record_id = 1:4,
-  bad_logical = c(T, T, F, T),
+  bad_logical = c(TRUE, TRUE, FALSE, TRUE),
   UpperCase = c(4, 6, 8, 2)
 )
 validate_for_write(d = dfBad)
@@ -48,7 +48,7 @@ v <- validate_for_write(dfGood)
 
 dfSoso <- data.frame(
   record_id = 1:4,
-  bad_logical = c(T, T, T, F),
+  bad_logical = c(TRUE, TRUE, TRUE, FALSE),
   no_uppercase = c(4, 6, 8, 2)
 )
 v <- validate_for_write(dfSoso)
