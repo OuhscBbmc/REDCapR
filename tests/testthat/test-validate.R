@@ -2,7 +2,7 @@ library(testthat)
 
 ds_bad <- data.frame(
   record_id = 1:4,
-  bad_logical = c(T, T, F, T),
+  bad_logical = c(TRUE, TRUE, FALSE, TRUE),
   bad_Uppercase = c(4, 6, 8, 2)
 )
 ds_good <- data.frame(
@@ -32,7 +32,7 @@ test_that("validate_no_logical -concern dataset", {
   ds <- validate_no_logical(vapply(ds_bad, class, character(1)))
   expect_equal(object=nrow(ds), expected=1, info="One logical field should be flagged")
   expect_equal(object=ds$field_name, expected="bad_logical")
-  expect_equal(object=ds$field_index, expected=2)
+  expect_equal(object=unname(ds$field_index), expected=2)
 })
 
 test_that("validate_field_names -stop on error", {

@@ -266,7 +266,7 @@ If you're not using REDCapR, you can skip this section and proceed to "Exporting
     redcap_metadata_read(redcap_uri = uri, token = token)
     ```
 
-   If this fails, see "Problems in the project's metadata/dictionary." under [Gotchas](#gotchas-agnostic) below.
+   If this fails, see "Problems in the project's metadata/dictionary" under [Common Gotchas](#gotchas-agnostic) above.  A problematic data dictionary may produce the error `Error in inherits(ds, "data.frame") : object 'ds' not found` when calling `REDCapR::redcap_metadata_read()`.
 
 1. **Can you export from an example project?** This is the same fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/) as in the previous section.
 
@@ -383,7 +383,7 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
     exportMetaData(rcon)
     ```
 
-   If this fails, see "Problems in the project's metadata/dictionary." under [Gotchas](#gotchas-agnostic) below.
+   If this fails, see "Problems in the project's metadata/dictionary." under [Gotchas](#gotchas-agnostic) above
 
 1. **Can you export from an example project?** This is the same fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/) as in the previous section.
 

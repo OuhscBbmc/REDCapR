@@ -139,13 +139,13 @@ setdiff(colnames(ds_2), colnames(ds_expected))
 #   .[["field_name"]] %>%
 #   sort()
 
-# strsplit(ds_meta_checkbox$select_choices_or_calculations[[1]], split="\\s*\\|\\s*", perl=F)[[1]]
+# strsplit(ds_meta_checkbox$select_choices_or_calculations[[1]], split="\\s*\\|\\s*", perl=FALSE)[[1]]
 
 # checkbox_ids <-
 #   ds_meta_checkbox$select_choices_or_calculations[1] %>%
-#   strsplit( split="\\s*\\|\\s*", perl=F) %>%
+#   strsplit( split="\\s*\\|\\s*", perl=FALSE) %>%
 #   .[[1]] %>%
-#   gsub("(\\d{1,}),\\s*.+", "\\1", ., perl=T) %>%
+#   gsub("(\\d{1,}),\\s*.+", "\\1", ., perl=TRUE) %>%
 #   as.integer()
 #
 # ds_meta_checkbox$select_choices_or_calculations %>%

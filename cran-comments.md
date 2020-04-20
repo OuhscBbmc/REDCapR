@@ -1,8 +1,6 @@
 Description
 -----------------------------------------------
-This submission includes new features and also addresses some (soon-to-be) breaking changes in the libraries underneath.
-
-I have fixed the three points described in your previous response (documented in [our issue](https://github.com/OuhscBbmc/REDCapR/issues/253)).  For the first point, I fixed some markdown syntax so  the API's url is correctly interpreted.  I'm sorry the test builds below didn't uncover the last two.
+This submission includes new features and also addresses a recent breaking change from tibble 3.0.0 (https://github.com/OuhscBbmc/REDCapR/issues/302).
 
 Thank you for taking the time to review my submission, and please tell me if there's something else I should do for CRAN.  -Will Beasley
 
@@ -10,15 +8,15 @@ Thank you for taking the time to review my submission, and please tell me if the
 Test environments
 -----------------------------------------------
 
-1. Local Ubuntu, R 3.6.1 patched
-1. Local Win8, R 3.6.1 patched
+1. Local Ubuntu, R 3.6.3 patched
+1. Local Win8, R 4.0.0 RC
 1. r-hub
-    1. [Ubuntu Linux 16.04 LTS, R-release, GCC](https://builder.r-hub.io/status/REDCapR_0.10.1.tar.gz-ffc36a958fe44f3fb3263929670f8138)
-    1. [Fedora Linux, R-devel, clang, gfortran](https://builder.r-hub.io/status/REDCapR_0.10.1.tar.gz-2e2bed0d3cda44429a8f830c2b9d8e92)
-    1. [Windows Server](https://builder.r-hub.io/status/REDCapR_0.10.1.tar.gz-0c79ee0f9b3e49f7b381348e9f7283b0)
-1. [win-builder](https://win-builder.r-project.org/a9ub2IBAb24W), development version.
+    1. [Ubuntu Linux 16.04 LTS, R-release, GCC](https://builder.r-hub.io/status/REDCapR_0.10.2.9006.tar.gz-71151f2f04454bc18c16430e5d62610b)
+    1. [Fedora Linux, R-devel, clang, gfortran](https://builder.r-hub.io/status/REDCapR_0.10.2.9006.tar.gz-2f619028b765442f9dc1c34373443d2a)
+    1. [Windows Server](https://builder.r-hub.io/status/REDCapR_0.10.2.9006.tar.gz-80133501925a411da4c3cf3be8205e29)
+1. [win-builder](https://win-builder.r-project.org/xYyWrC1uFjXH), development version.
 1. [Travis CI](https://travis-ci.org/OuhscBbmc/REDCapR), Ubuntu 14.04 LTS
-1. [AppVeyor](https://ci.appveyor.com/project/wibeasley/REDCapR), Windows Server 2012
+1. [AppVeyor](https://ci.appveyor.com/project/wibeasley/REDCapR), Windows Server 2012 R2
 
 
 R CMD check results

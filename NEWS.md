@@ -4,7 +4,7 @@ Upcoming Versions
 In the future:
 ...
 
-Version 0.11 (Released ?)
+Version 0.11 (Released 2020-04-20)
 ==========================================================
 
 ### Breaking Changes (possible, but unlikely)
@@ -25,7 +25,7 @@ Version 0.11 (Released ?)
 
 ### Stability Features
 
-* `httr::content()` (which is inside `kernel_api()`) now processes the returned value as "text/csv", by default.  This should prevent strange characters from tricking the process as the internal variable `raw_text` is being formed. See the [httr::content()`](https://httr.r-lib.org/reference/content.html) documentation for a list of possible values for the `content_type` parameter.  (Thanks to great debugging by @vortexing, #269)
+* `httr::content()` (which is inside `kernel_api()`) now processes the returned value as "text/csv", by default.  This should prevent strange characters from tricking the process as the internal variable `raw_text` is being formed. See the [httr::content()`](https://httr.r-lib.org/reference/content.html) documentation for a list of possible values for the `content_type` parameter.  (Thanks to great debugging by @vortexing #269, @sybandrew #272, & @begavett, #290)
 
 * Similarly, `kernel_api()` now has an `encoding` parameter, which defaults to "UTF-8".  (#270)
 

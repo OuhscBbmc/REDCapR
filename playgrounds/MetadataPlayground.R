@@ -23,7 +23,7 @@ pattern_checkboxes <- "(?<=\\A| \\| )(?<id>\\d{1,}), (?<label>[\x21-\x7B\x7D-\x7
 #   capture_names <- attr(match, "capture.names")
 #   d <- as.data.frame(matrix(NA, nrow=length(attr(match, "match.length")), ncol=length(capture_names)))
 #   colnames(d) <- capture_names
-#   
+#
 #   for( column_name in colnames(d) ) {
 #     d[, column_name] <- mapply( function (start, len) substr(choices, start, start+len-1),
 #                                 attr(match, "capture.start")[, column_name],
@@ -44,8 +44,8 @@ regex_named_captures(pattern=pattern_checkboxes, text=choices)
 
 # checkbox_choices <- function( select_choices ) {
 #   #The weird ranges are to avoid the pipe character; PCRE doesn't support character negation.
-#   pattern_checkboxes <- "(?<=\\A| \\| )(?<id>\\d{1,}), (?<label>[\x21-\x7B\x7D-\x7E ]{1,})(?= \\| |\\Z)" 
-#   
+#   pattern_checkboxes <- "(?<=\\A| \\| )(?<id>\\d{1,}), (?<label>[\x21-\x7B\x7D-\x7E ]{1,})(?= \\| |\\Z)"
+#
 #   d <- regex_named_captures(pattern=pattern_checkboxes, text=select_choices)
 #   return( d )
 # }
@@ -56,8 +56,8 @@ checkbox_choices(select_choices=choices)
 
 pattern_id <- "(?<=\\A| \\| )(?<id>\\d{1,}), [\\w ]{1,}(?= \\| |\\Z)"
 pattern_label <- "(?<=\\A| \\| )\\d{1,}, ([\\w ]{1,})(?= \\| |\\Z)"
-match_id <- gregexpr(pattern_id, choices, perl=T)[[1]]
-match_label <- gregexpr(pattern_label, choices, perl=T)[[1]]
+match_id <- gregexpr(pattern_id, choices, perl=TRUE)[[1]]
+match_label <- gregexpr(pattern_label, choices, perl=TRUE)[[1]]
 
 ids <- mapply(function (start, len) as.integer(substr(choices, start, start+len-1)),
                  attr(match, "capture.start")[, "id"],
@@ -86,24 +86,24 @@ labels <- mapply(function (start, len) substr(choices, start, start+len-1),
 
 # r <- regmatches(choices, gregexpr("(?<=\\A| \\| )(?<id>\\d{1,}), (?<label>[\\w ]{1,})(?=( | )|\\Z)", choices, perl=TRUE))
 # str(r)
-# 
-# 
+#
+#
 # matches <- gregexpr("(?<=\\A| \\| )(?<id>\\d{1,}), (?<label>[\\w ]{1,})(?=( | )|\\Z)", choices, perl=TRUE);
 # result <- lapply(matches, function(m) attr(m, "capture.start")[,1])
 # for (i in 1:length(result))
 # #   attr(result[[i]], "match.length") <- attr(matches[[i]], "capture.length")[,1]
 #   attr(result[[i]], "match.length") <- attr(matches[[i]], "capture.length")[,2]
 # regmatches(choices, result)
-# 
+#
 # str(result)
-# 
+#
 # r <- regmatches(choices, gregexpr("(?<=\\A| \\| )(?<id>\\d{1,}), (?<label>[\\w ]{1,})(?=( | )|\\Z)", choices, perl=TRUE));
 # str(r)
-# 
-# 
+#
+#
 
-gregexpr(pattern_id, choices, perl=T)
-gregexpr(pattern_label, choices, perl=T)
+gregexpr(pattern_id, choices, perl=TRUE)
+gregexpr(pattern_label, choices, perl=TRUE)
 
 #This function is adapted from https://stat.ethz.ch/R-manual/R-devel/library/base/html/grep.html
 parse.one <- function(res, result) {

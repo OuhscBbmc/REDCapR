@@ -26,7 +26,7 @@ RCurl_raw <- RCurl::postForm(
 #     , type = 'flat'
 #     , rawOrLabel = 'raw'
 #     , exportDataAccessGroups = 'true'
-    , .opts = RCurl::curlOptions(ssl.verifypeer=F)
+    , .opts = RCurl::curlOptions(ssl.verifypeer=FALSE)
 )
 
 RCurl_raw
@@ -50,8 +50,8 @@ httr_raw <- httr::POST(
     url = redcap_uri,
     body = post_body#,
     # config = config(ssl_verifypeer=FALSE)
-   # config = httr::config(ssl.verifypeer=F)
-    #httr::verbose() 
+   # config = httr::config(ssl.verifypeer=FALSE)
+    #httr::verbose()
 )
 httr_raw
 content(httr_raw)
@@ -59,7 +59,7 @@ content(httr_raw)
 # devtools::install_github("nutterb/redcapAPI")
 # install.packages("redcapAPI")
 library(redcapAPI)
-rcon <- redcapConnection(url=redcap_uri, token=token, config = list(ssl.verifypeer=F))
+rcon <- redcapConnection(url=redcap_uri, token=token, config = list(ssl.verifypeer=FALSE))
 redcap_API_data <- exportRecords(rcon)
 
 redcap_API_data
