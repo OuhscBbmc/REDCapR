@@ -48,9 +48,9 @@ test_that("N100B100", {
 
   dsResult <- REDCapR::create_batch_glossary(row_count=rowCount, batch_size=batchSize) # dput(dsResult)
   dsExpected <- structure(list(id = 1L, start_index = 1, stop_index = 100, index_pretty = "1",
-                               start_index_pretty = "001", stop_index_pretty = "100", label = "1_001_100"), .Names = c("id",
-                                                                                                                       "start_index", "stop_index", "index_pretty", "start_index_pretty",
-                                                                                                                       "stop_index_pretty", "label"), row.names = c(NA, -1L), class = "data.frame")
+    start_index_pretty = "001", stop_index_pretty = "100", label = "1_001_100"), .Names = c("id",
+    "start_index", "stop_index", "index_pretty", "start_index_pretty",
+    "stop_index_pretty", "label"), row.names = c(NA, -1L), class = "data.frame")
 
   expect_equal(object=nrow(dsResult), expected=expectedGlossaryCount, info="The number of batches should be correct.")
   expect_equal(object=colnames(dsResult), expected=ExpectedColumnNames, info="The column names should be correct.")
@@ -64,13 +64,13 @@ test_that("N50B10", {
 
   dsResult <- REDCapR::create_batch_glossary(row_count=rowCount, batch_size=batchSize) # dput(dsResult)
   dsExpected <- structure(list(id = 1:5, start_index = c(1, 11, 21, 31, 41),
-                               stop_index = c(10, 20, 30, 40, 50), index_pretty = c("1",
-                                                                                    "2", "3", "4", "5"), start_index_pretty = c("01", "11", "21",
-                                                                                                                                "31", "41"), stop_index_pretty = c("10", "20", "30", "40",
-                                                                                                                                                                   "50"), label = c("1_01_10", "2_11_20", "3_21_30", "4_31_40",
-                                                                                                                                                                                    "5_41_50")), .Names = c("id", "start_index", "stop_index",
-                                                                                                                                                                                                            "index_pretty", "start_index_pretty", "stop_index_pretty", "label"
-                                                                                                                                                                                    ), row.names = c(NA, -5L), class = "data.frame")
+    stop_index = c(10, 20, 30, 40, 50), index_pretty = c("1",
+    "2", "3", "4", "5"), start_index_pretty = c("01", "11", "21",
+    "31", "41"), stop_index_pretty = c("10", "20", "30", "40",
+    "50"), label = c("1_01_10", "2_11_20", "3_21_30", "4_31_40",
+    "5_41_50")), .Names = c("id", "start_index", "stop_index",
+    "index_pretty", "start_index_pretty", "stop_index_pretty", "label"
+    ), row.names = c(NA, -5L), class = "data.frame")
   expect_equal(object=nrow(dsResult), expected=expectedGlossaryCount, info="The number of batches should be correct.")
   expect_equal(object=colnames(dsResult), expected=ExpectedColumnNames, info="The column names should be correct.")
   expect_equal(object=dsResult, expected=dsExpected, info="The returned batch glossary should be correct.")

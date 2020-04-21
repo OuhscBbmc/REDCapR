@@ -15,14 +15,14 @@
 #' * *OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive
 #' Maternal, Infant, and Early Childhood Home Visiting
 #' ([MIECHV](http://mchb.hrsa.gov/programs/homevisiting/)) Project*.
-#' [HRSA/ACF D89MC23154](https://perf-data.hrsa.gov/mchb/DGISReports/Abstract/AbstractDetails.aspx?Source=TVIS&GrantNo=D89MC23154&FY=2012).
+#' [HRSA/ACF D89MC23154](https://grants6.hrsa.gov/MCHB/DGISReports/Abstract/AbstractDetails.aspx?cbAbstractSummary=D89MC23154_2012_NonResearch_4).
 #' David Bard, PI, OUHSC; 2011-2015.
 #' * *Independent Evaluation of the State of OK MIECHV Evidence Based Home
 #' Visitation Project*, [NIH](https://www.nih.gov/)-sponsored collaboration
-#' with [OSDH](https://www.ok.gov/health/).
+#' with [OSDH](https://ok.gov/health/).
 #' David Bard, PI, OUHSC; 2015-2017.
 #' * *OSDH ParentPRO Pilot Evaluation*, federally-sponsored collaboration
-#' with [OSDH](https://www.ok.gov/health/).
+#' with [OSDH](https://ok.gov/health/).
 #' David Bard, PI, OUHSC; 2015-2017.
 #' * *Title IV-E Waiver Project*, [HRSA/MCHB](http://mchb.hrsa.gov/)-sponsored
 #' collaboration with [OKDHS](http://www.okdhs.org/);

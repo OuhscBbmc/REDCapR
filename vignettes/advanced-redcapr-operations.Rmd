@@ -171,7 +171,7 @@ Lots of packages and documentation exist.  Our current preference is the [tidyve
 Query the Underlying MySQL Database
 ==================================================================
 
-If you require a feature that is not available from your instance's API, first upgrade your institution's REDcap instance and see if the feature has been added recently.  Second, check if someone has released the desired API-like features as an [REDCap External Module](https://redcap.vanderbilt.edu/consortium/modules/).
+If you require a feature that is not available from your instance's API, first upgrade your institution's REDCap instance and see if the feature has been added recently.  Second, check if someone has released the desired API-like features as an [REDCap External Module](https://redcap.vanderbilt.edu/consortium/modules/).
 
 Third, you may need to query the database underneath REDCap's web server.  The [Transfer Credentials](https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html#transfer-credentials) section of the [Security Database Vignette](https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html#transfer-credentials) provides a complete example of using R to query the MySQL database through odbc.
 

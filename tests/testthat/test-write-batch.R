@@ -105,7 +105,7 @@ test_that("Write Batch -Update One Field", {
 
   #Change some values
   returned_object1$data$address <- 1000 + seq_len(nrow(returned_object1$data))
-  REDCapR::redcap_write(ds=returned_object1$data, redcap_uri=project$redcap_uri, token=project$token)
+  REDCapR::redcap_write(returned_object1$data, redcap_uri=project$redcap_uri, token=project$token)
 
   expect_message(
     returned_object2 <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
@@ -196,7 +196,7 @@ test_that("Write Batch -Update Two Fields", {
   #Change some values
   returned_object1$data$address <- 1000 + seq_len(nrow(returned_object1$data))
   returned_object1$data$telephone <- sprintf("(405) 321-%1$i%1$i%1$i%1$i", seq_len(nrow(returned_object1$data)))
-  REDCapR::redcap_write(ds=returned_object1$data, redcap_uri=project$redcap_uri, token=project$token)
+  REDCapR::redcap_write(returned_object1$data, redcap_uri=project$redcap_uri, token=project$token)
 
   expect_message(
     returned_object2 <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
@@ -291,6 +291,6 @@ test_that("Write Batch -Bad URI", {
   returned_object1$data$telephone <- sprintf("(405) 321-%1$i%1$i%1$i%1$i", seq_len(nrow(returned_object1$data)))
 
   expect_error(
-    REDCapR::redcap_write(ds=returned_object1$data, redcap_uri=bad_uri, token=project$token)
+    REDCapR::redcap_write(returned_object1$data, redcap_uri=bad_uri, token=project$token)
   )
 })
