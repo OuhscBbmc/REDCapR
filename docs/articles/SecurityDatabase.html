@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9006</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0</span>
       </span>
     </div>
 
@@ -90,7 +90,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Security Database</h1>
             
-            <h4 class="date">2020-04-19</h4>
+            <h4 class="date">2020-04-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/SecurityDatabase.Rmd"><code>vignettes/SecurityDatabase.Rmd</code></a></small>
       <div class="hidden name"><code>SecurityDatabase.Rmd</code></div>
@@ -291,7 +291,73 @@ requireNamespace("OuhscMunge")  # remotes::install_github("OuhscBbmc/OuhscMunge"
 # This file assume your campus has two REDCap instances.
 # Modify each (a) database name, (b) REDCap URL, and (c) DSN name.
 
-name_production %
+name_production &lt;- "production"
+name_dev        &lt;- "dev"
+
+uri_production  &lt;- "https://redcap-production.ouhsc.edu/redcap/api/",
+uri_dev         &lt;- "https://redcap-dev.ouhsc.edu/redcap/api/"
+
+dsn_production  &lt;- "redcap-production"
+dsn_dev         &lt;- "redcap-dev"
+dsn_source      &lt;- "auxiliary_security" # The DSN of the token server.
+
+# The Activity Directory name that should precede each username.
+#   This should correspond with the result of SQL Server's `SYSTEM_USER` function
+#   (https://msdn.microsoft.com/en-us/library/ms179930.aspx)
+ldap_prefix &lt;- "OUHSC\\"
+
+####
+# Nothing below this line should need to change, assuming:
+# 1. the vignette was followed exactly (https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html),
+# 2. your campus has exactly two REDCap instances.
+
+# SQL sent to the MySQL database underneath each REDCap instance.
+sql &lt;- "
+  SELECT username, project_id, api_token
+  FROM redcap_user_rights
+  WHERE api_token IS NOT NULL
+"
+
+# Update this ad-hoc CSV.  Each row should represent one REDCap instance.
+ds_url &lt;- tibble::tribble(
+  ~instance         , ~redcap_uri,
+  name_production   , uri_production,
+  name_dev          , uri_dev
+)
+
+# Remove variables that aren't used below.
+rm(uri_production, uri_dev)
+
+
+# ---- load-data ---------------------------------------------------------------
+
+# Load the credentials from the first/production REDCap instance.
+cnn_production  &lt;- DBI::dbConnect(odbc::odbc(), dsn=dsn_production)
+ds_production   &lt;- DBI::dbGetQuery(cnn_production, sql)
+DBI::dbDisconnect(cnn_production); rm(cnn_production, dsn_production)
+
+# Load the credentials from the second/dev REDCap instance.
+cnn_dev         &lt;- DBI::dbConnect(odbc::odbc(), dsn=dsn_dev)
+ds_dev          &lt;- DBI::dbGetQuery(cnn_dev, sql)
+DBI::dbDisconnect(cnn_dev); rm(cnn_dev, dsn_dev)
+
+rm(sql)
+
+# Assert these are valid datasets and contain at least 5 rows.
+#   Adjust '5' to smaller value if necessary.  It's just to catch blatant retrieval problems.
+checkmate::assert_data_frame(ds_production, min.rows=5)
+checkmate::assert_data_frame(ds_dev       , min.rows=5)
+
+
+# ---- tweak-data --------------------------------------------------------------
+
+# Label each instance, so they're distinguishable later.
+ds_production$instance &lt;- name_production
+ds_dev$instance        &lt;- name_dev
+
+# Stack the token collection from each instance.  Then prefix the username and include the URL of each instance.
+ds &lt;-
+  ds_production %&gt;%
   dplyr::union(ds_dev) %&gt;%                                # Remove union if the dev instance isn't included.
   tibble::as_tibble() %&gt;%
   dplyr::select(
@@ -334,7 +400,24 @@ testit::assert("At least 10 tokens should be ready to write." , 10L &lt;= nrow(d
 # ---- specify-columns-to-upload -----------------------------------------------
 
 # Dictate the exact columns and order that will be uploaded.
-columns_to_write </pre></body></html></div>
+columns_to_write &lt;- c("id", "username", "project_id", "instance", "token", "redcap_uri")
+ds_slim          &lt;- ds[, columns_to_write]
+rm(columns_to_write)
+
+
+# ---- upload-to-db ------------------------------------------------------------------
+
+OuhscMunge::upload_sqls_odbc(
+  d               = ds_slim,
+  schema_name     = "redcap_private",
+  table_name      = "tbl_credential",
+  dsn_name        = dsn_source,
+  create_table    = FALSE,
+  clear_table     = TRUE,
+  transaction     = TRUE,
+  verbose         = TRUE
+)
+# Uploading 252 tokens takes 0.004 minutes.</pre></body></html></div>
 </div>
 <div id="document-info" class="section level1">
 <h1 class="hasAnchor">
@@ -358,7 +441,7 @@ columns_to_write </pre></body></html></div>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

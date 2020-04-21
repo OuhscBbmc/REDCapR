@@ -85,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9006</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0</span>
       </span>
     </div>
 
@@ -145,7 +145,7 @@
 <h3 class="hasAnchor">
 <a href="#breaking-changes-possible-but-unlikely" class="anchor"></a>Breaking Changes (possible, but unlikely)</h3>
 <ul>
-<li><p><a href="https://ouhscbbmc.github.io/REDCapR/reference/kernel_api.html"><code><a href="../reference/kernel_api.html">kernel_api()</a></code></a> defaults to âtext/csvâ and UTF-8 encoding. Formerly, the function would decide on the content-type and encoding. More details are below in the âStability Featuresâ subsection.</p></li>
+<li><p><a href="https://ouhscbbmc.github.io/REDCapR/reference/kernel_api.html"><code><a href="../reference/kernel_api.html">kernel_api()</a></code></a> defaults to “text/csv” and UTF-8 encoding. Formerly, the function would decide on the content-type and encoding. More details are below in the ‘Stability Features’ subsection.</p></li>
 <li><p><a href="https://ouhscbbmc.github.io/REDCapR/reference/constant.html"><code><a href="../reference/constant.html">constant()</a></code></a> no longer accepts <code>simplify</code> as an options. An integer vector is always returned. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/280'>#280</a>)</p></li>
 </ul>
 </div>
@@ -153,18 +153,18 @@
 <h3 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>New Features</h3>
 <ul>
-<li><p>Itâs now possible to specify the exact <code>col_types</code> (a <a href="https://readr.tidyverse.org/reference/cols.html"><code><a href="https://readr.tidyverse.org/reference/cols.html">readr::cols</a></code></a> object) that is passed to <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> inside <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-read-oneshot.R"><code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code></a>. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/258'>#258</a>)</p></li>
-<li><p><a href="https://readr.tidyverse.org/reference/type_convert.html"><code>reader::type_convert()</code></a> is used <em>after</em> all the batches are stacked on top of each other. This way, batches cannot have incompatible data types as theyâre combined. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/257'>#257</a>; thanks <a href='https://github.com/isaactpetersen'>@isaactpetersen</a> <a href='https://github.com/OuhscBbmc/REDCapR/issues/245'>#245</a>) Consequently, the <code>guess_max</code> parameter in <code><a href="../reference/redcap_read.html">redcap_read()</a></code> no longer serves a purpose, and has been soft-deprecated. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/267'>#267</a>)</p></li>
-<li><p><a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_write.html"><code><a href="../reference/redcap_metadata_write.html">redcap_metadata_write()</a></code></a> writes to the projectâs metadata. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/274'>#274</a>, <a href='https://github.com/felixetorres'>@felixetorres</a>)</p></li>
-<li><p><a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_survey_link_export_oneshot.html"><code><a href="../reference/redcap_survey_link_export_oneshot.html">redcap_survey_link_export_oneshot()</a></code></a> retrieves the URL to a specific recordâs suvey (<em>e.g.</em>, â<a href="https://bbmc.ouhsc.edu/redcap/surveys/?s=8KuzSLMHf6" class="uri">https://bbmc.ouhsc.edu/redcap/surveys/?s=8KuzSLMHf6</a>â) (<a href='https://github.com/OuhscBbmc/REDCapR/issues/293'>#293</a>)</p></li>
+<li><p>It’s now possible to specify the exact <code>col_types</code> (a <a href="https://readr.tidyverse.org/reference/cols.html"><code><a href="https://readr.tidyverse.org/reference/cols.html">readr::cols</a></code></a> object) that is passed to <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> inside <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-read-oneshot.R"><code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code></a>. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/258'>#258</a>)</p></li>
+<li><p><a href="https://readr.tidyverse.org/reference/type_convert.html"><code>reader::type_convert()</code></a> is used <em>after</em> all the batches are stacked on top of each other. This way, batches cannot have incompatible data types as they’re combined. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/257'>#257</a>; thanks <a href='https://github.com/isaactpetersen'>@isaactpetersen</a> <a href='https://github.com/OuhscBbmc/REDCapR/issues/245'>#245</a>) Consequently, the <code>guess_max</code> parameter in <code><a href="../reference/redcap_read.html">redcap_read()</a></code> no longer serves a purpose, and has been soft-deprecated. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/267'>#267</a>)</p></li>
+<li><p><a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_write.html"><code><a href="../reference/redcap_metadata_write.html">redcap_metadata_write()</a></code></a> writes to the project’s metadata. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/274'>#274</a>, <a href='https://github.com/felixetorres'>@felixetorres</a>)</p></li>
+<li><p><a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_survey_link_export_oneshot.html"><code><a href="../reference/redcap_survey_link_export_oneshot.html">redcap_survey_link_export_oneshot()</a></code></a> retrieves the URL to a specific record’s suvey (<em>e.g.</em>, “<a href="https://bbmc.ouhsc.edu/redcap/surveys/?s=8KuzSLMHf6" class="uri">https://bbmc.ouhsc.edu/redcap/surveys/?s=8KuzSLMHf6</a>”) (<a href='https://github.com/OuhscBbmc/REDCapR/issues/293'>#293</a>)</p></li>
 </ul>
 </div>
 <div id="stability-features" class="section level3">
 <h3 class="hasAnchor">
 <a href="#stability-features" class="anchor"></a>Stability Features</h3>
 <ul>
-<li><p><code><a href="https://httr.r-lib.org/reference/content.html">httr::content()</a></code> (which is inside <code><a href="../reference/kernel_api.html">kernel_api()</a></code>) now processes the returned value as âtext/csvâ, by default. This should prevent strange characters from tricking the process as the internal variable <code>raw_text</code> is being formed. See the [httr::content()<code>](https://httr.r-lib.org/reference/content.html) documentation for a list of possible values for the</code>content_type` parameter. (Thanks to great debugging by <a href='https://github.com/vortexing'>@vortexing</a> <a href='https://github.com/OuhscBbmc/REDCapR/issues/269'>#269</a>, <a href='https://github.com/sybandrew'>@sybandrew</a> <a href='https://github.com/OuhscBbmc/REDCapR/issues/272'>#272</a>, &amp; <a href='https://github.com/begavett'>@begavett</a>, <a href='https://github.com/OuhscBbmc/REDCapR/issues/290'>#290</a>)</p></li>
-<li><p>Similarly, <code><a href="../reference/kernel_api.html">kernel_api()</a></code> now has an <code>encoding</code> parameter, which defaults to âUTF-8â. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/270'>#270</a>)</p></li>
+<li><p><code><a href="https://httr.r-lib.org/reference/content.html">httr::content()</a></code> (which is inside <code><a href="../reference/kernel_api.html">kernel_api()</a></code>) now processes the returned value as “text/csv”, by default. This should prevent strange characters from tricking the process as the internal variable <code>raw_text</code> is being formed. See the [httr::content()<code>](https://httr.r-lib.org/reference/content.html) documentation for a list of possible values for the</code>content_type` parameter. (Thanks to great debugging by <a href='https://github.com/vortexing'>@vortexing</a> <a href='https://github.com/OuhscBbmc/REDCapR/issues/269'>#269</a>, <a href='https://github.com/sybandrew'>@sybandrew</a> <a href='https://github.com/OuhscBbmc/REDCapR/issues/272'>#272</a>, &amp; <a href='https://github.com/begavett'>@begavett</a>, <a href='https://github.com/OuhscBbmc/REDCapR/issues/290'>#290</a>)</p></li>
+<li><p>Similarly, <code><a href="../reference/kernel_api.html">kernel_api()</a></code> now has an <code>encoding</code> parameter, which defaults to “UTF-8”. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/270'>#270</a>)</p></li>
 </ul>
 </div>
 <div id="minor-enhancements" class="section level3">
@@ -178,7 +178,7 @@
 <h3 class="hasAnchor">
 <a href="#corrections" class="anchor"></a>Corrections</h3>
 <ul>
-<li>âcheckmateâ package is now imported, not suggested (Thanks <a href='https://github.com/dtenenba'>@dtenenba</a>, <a href='https://github.com/OuhscBbmc/REDCapR/issues/255'>#255</a>)</li>
+<li>‘checkmate’ package is now imported, not suggested (Thanks <a href='https://github.com/dtenenba'>@dtenenba</a>, <a href='https://github.com/OuhscBbmc/REDCapR/issues/255'>#255</a>)</li>
 </ul>
 </div>
 </div>
@@ -192,7 +192,7 @@
 <ul>
 <li>export survey time-stamps optionally (Issue <a href='https://github.com/OuhscBbmc/REDCapR/issues/159'>#159</a>)</li>
 <li>
-<code><a href="../reference/redcap_next_free_record_name.html">redcap_next_free_record_name()</a></code>: API call for âGenerate Next Record Nameâ, which returns the next available record ID (Issue <a href='https://github.com/OuhscBbmc/REDCapR/issues/237'>#237</a>)</li>
+<code><a href="../reference/redcap_next_free_record_name.html">redcap_next_free_record_name()</a></code>: API call for ‘Generate Next Record Name’, which returns the next available record ID (Issue <a href='https://github.com/OuhscBbmc/REDCapR/issues/237'>#237</a>)</li>
 <li>
 <code><a href="../reference/redcap_read.html">redcap_read()</a></code> and <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code> allow the user to specify if all variables should be returned with the <code>character</code> data type. The default is to allow <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> to guess the data type. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/194'>#194</a>)</li>
 <li>
@@ -201,18 +201,18 @@
 <code><a href="../reference/redcap_read.html">redcap_read()</a></code>, <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code>, and <code><a href="../reference/redcap_read_oneshot_eav.html">redcap_read_oneshot_eav()</a></code> always return Linux-style line endings (ie <code>\n</code>) instead of Windows style line endings (ie, <code>\r\n</code>) on all OSes. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/198'>#198</a>)</li>
 <li>
 <code>read_metadata()</code> always returns <code>character</code> vectors for all variables. With readr 1.2.0, some column were returned differently than before. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/193'>#193</a>)</li>
-<li>âraw_or_label_headersâ now supported (Thanks Hatem Hosny - hatemhosny, <a href='https://github.com/OuhscBbmc/REDCapR/issues/183'>#183</a> &amp; <a href='https://github.com/OuhscBbmc/REDCapR/issues/203'>#203</a>)</li>
-<li>âexport_checkbox_labelsâ now supported (<a href='https://github.com/OuhscBbmc/REDCapR/issues/186'>#186</a>)</li>
+<li>‘raw_or_label_headers’ now supported (Thanks Hatem Hosny - hatemhosny, <a href='https://github.com/OuhscBbmc/REDCapR/issues/183'>#183</a> &amp; <a href='https://github.com/OuhscBbmc/REDCapR/issues/203'>#203</a>)</li>
+<li>‘export_checkbox_labels’ now supported (<a href='https://github.com/OuhscBbmc/REDCapR/issues/186'>#186</a>)</li>
 <li>
 <code><a href="../reference/redcap_users_export.html">redcap_users_export()</a></code> now included (<a href='https://github.com/OuhscBbmc/REDCapR/issues/163'>#163</a>)</li>
-<li>âformsâ now supported for <code><a href="../reference/redcap_read.html">redcap_read()</a></code>, <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code>, &amp; <code><a href="../reference/redcap_read_oneshot_eav.html">redcap_read_oneshot_eav()</a></code>(<a href='https://github.com/OuhscBbmc/REDCapR/issues/206'>#206</a>). It was already implemented for <code><a href="../reference/redcap_metadata_read.html">redcap_metadata_read()</a></code>.</li>
+<li>‘forms’ now supported for <code><a href="../reference/redcap_read.html">redcap_read()</a></code>, <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code>, &amp; <code><a href="../reference/redcap_read_oneshot_eav.html">redcap_read_oneshot_eav()</a></code>(<a href='https://github.com/OuhscBbmc/REDCapR/issues/206'>#206</a>). It was already implemented for <code><a href="../reference/redcap_metadata_read.html">redcap_metadata_read()</a></code>.</li>
 <li>If no records are affected, a zero-length <em>character</em> vector is returned (instead of sometimes a zero-length <em>numeric</em> vector) (<a href='https://github.com/OuhscBbmc/REDCapR/issues/212'>#212</a>)</li>
 <li>New function (called <code>constants()</code>) easily exposes REDCap-specific constants. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/217'>#217</a>)</li>
 <li>
-<code>id_position</code> allows user to specify if the record_id isnât in the first position (<a href='https://github.com/OuhscBbmc/REDCapR/issues/207'>#207</a>). However, we recommend that all REDCap projects keep this important variable first in the data dictionary.</li>
+<code>id_position</code> allows user to specify if the record_id isn’t in the first position (<a href='https://github.com/OuhscBbmc/REDCapR/issues/207'>#207</a>). However, we recommend that all REDCap projects keep this important variable first in the data dictionary.</li>
 <li>Link to new secure Zenodo DOI resolver (<a href='https://github.com/katrinleinweber'>@katrinleinweber</a> <a href='https://github.com/OuhscBbmc/REDCapR/issues/191'>#191</a>)</li>
 <li>parameters in <code><a href="../reference/redcap_read.html">redcap_read()</a></code> and <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code> are more consistent with the order in raw REDCap API. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/204'>#204</a>)</li>
-<li>When the <code>verbose</code> parameter is NULL, then the value from getOption(âverboseâ) is used. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/215'>#215</a>)</li>
+<li>When the <code>verbose</code> parameter is NULL, then the value from getOption(“verbose”) is used. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/215'>#215</a>)</li>
 <li>
 <code>guess_max</code> parameter provided in <code><a href="../reference/redcap_read.html">redcap_read()</a></code> (no longer just <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code>). Suggested by <a href='https://github.com/isaactpetersen'>@isaactpetersen</a> in <a href='https://github.com/OuhscBbmc/REDCapR/issues/245'>#245</a>.</li>
 <li>Documentation website constructed with pkgdown (<a href='https://github.com/OuhscBbmc/REDCapR/issues/224'>#224</a>).</li>
@@ -224,8 +224,8 @@
 <h3 class="hasAnchor">
 <a href="#modified-internals" class="anchor"></a>Modified Internals</h3>
 <ul>
-<li>All interaction with the REDCap server goes through the new <code>kernal_api()</code> function, which uses the âhttrâ and âcurlâ packages underneath. Until now, each function called those packages directly. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/213'>#213</a>)</li>
-<li>When converting REDCapâs CSV to Râs data.frame, <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> is used instead of <code><a href="https://rdrr.io/r/utils/read.table.html">utils::read.csv()</a></code> (Issue <a href='https://github.com/OuhscBbmc/REDCapR/issues/127'>#127</a>).</li>
+<li>All interaction with the REDCap server goes through the new <code>kernal_api()</code> function, which uses the ‘httr’ and ‘curl’ packages underneath. Until now, each function called those packages directly. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/213'>#213</a>)</li>
+<li>When converting REDCap’s CSV to R’s data.frame, <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> is used instead of <code><a href="https://rdrr.io/r/utils/read.table.html">utils::read.csv()</a></code> (Issue <a href='https://github.com/OuhscBbmc/REDCapR/issues/127'>#127</a>).</li>
 <li>updated to readr 1.2.0 (<a href='https://github.com/OuhscBbmc/REDCapR/issues/200'>#200</a>). This changed how some data variables were assigned a data types.</li>
 <li>uses <code>odbc</code> package to retrieve credentials from the token server. Remove RODBC and RODBCext (<a href='https://github.com/OuhscBbmc/REDCapR/issues/188'>#188</a>). Thanks to <a href='https://github.com/krlmlr'>@krlmlr</a> for error checking advice in <a href="https://stackoverflow.com/a/50419403/1082435" class="uri">https://stackoverflow.com/a/50419403/1082435</a>.</li>
 <li>
@@ -285,8 +285,8 @@
 <h3 class="hasAnchor">
 <a href="#minor-updates" class="anchor"></a>Minor Updates</h3>
 <ul>
-<li>When combining batches into a single data.frame, <code><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html">data.table::rbindlist()</a></code> is used. This should prevent errors with the first batchâs data type (for a column) isnât compatible with a later batch. For instance, this occurs when the first batch has only integers for <code>record_id</code>, but a subsequent batch has values like <code>aa-test-aa</code>. The variable for the combined dataset should be a character. (Issue <a href='https://github.com/OuhscBbmc/REDCapR/issues/128'>#128</a> &amp; <a href="http://stackoverflow.com/questions/39377370/bind-rows-of-different-data-types" class="uri">http://stackoverflow.com/questions/39377370/bind-rows-of-different-data-types</a>; Thanks <a href='https://github.com/arunsrinivasan'>@arunsrinivasan</a>)</li>
-<li>Uses the <code>dplyr</code> package instead of <code>plyr</code>. This shouldnât affect callers, because immediately before returning the data, <code><a href="../reference/redcap_read.html">REDCapR::redcap_read()</a></code> coerces the <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble::tibble</a></code> (which was formerly called <code><a href="https://dplyr.tidyverse.org/reference/tbl_df.html">dplyr::tbl_df</a></code>) back to a vanilla <code>data.frame</code> with <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code>.</li>
+<li>When combining batches into a single data.frame, <code><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html">data.table::rbindlist()</a></code> is used. This should prevent errors with the first batch’s data type (for a column) isn’t compatible with a later batch. For instance, this occurs when the first batch has only integers for <code>record_id</code>, but a subsequent batch has values like <code>aa-test-aa</code>. The variable for the combined dataset should be a character. (Issue <a href='https://github.com/OuhscBbmc/REDCapR/issues/128'>#128</a> &amp; <a href="http://stackoverflow.com/questions/39377370/bind-rows-of-different-data-types" class="uri">http://stackoverflow.com/questions/39377370/bind-rows-of-different-data-types</a>; Thanks <a href='https://github.com/arunsrinivasan'>@arunsrinivasan</a>)</li>
+<li>Uses the <code>dplyr</code> package instead of <code>plyr</code>. This shouldn’t affect callers, because immediately before returning the data, <code><a href="../reference/redcap_read.html">REDCapR::redcap_read()</a></code> coerces the <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble::tibble</a></code> (which was formerly called <code><a href="https://dplyr.tidyverse.org/reference/tbl_df.html">dplyr::tbl_df</a></code>) back to a vanilla <code>data.frame</code> with <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code>.</li>
 <li>A few more instances of validating input parameters to read functions. (Issue <a href='https://github.com/OuhscBbmc/REDCapR/issues/8'>#8</a>).</li>
 </ul>
 </div>
@@ -299,7 +299,7 @@
 <h3 class="hasAnchor">
 <a href="#minor-updates-1" class="anchor"></a>Minor Updates</h3>
 <ul>
-<li>The <code>retrieve-token()</code> tests now account for the (OS X) builds where the RODBC package isnât available.</li>
+<li>The <code>retrieve-token()</code> tests now account for the (OS X) builds where the RODBC package isn’t available.</li>
 </ul>
 </div>
 </div>
@@ -320,7 +320,7 @@
 <ul>
 <li>Uses <code>requireNamespace()</code> instead of <code>require()</code>.</li>
 <li>By default, uses the SSL cert files used by httr, which by default, uses those packaged with R.</li>
-<li>Added warning if it appears <code>readcap_read()</code> is being used without âFull Data Setâ export privileges. The problem involves the record IDs are hashed.</li>
+<li>Added warning if it appears <code>readcap_read()</code> is being used without ‘Full Data Set’ export privileges. The problem involves the record IDs are hashed.</li>
 <li>Reconnected code that reads only the <code>id_position</code> in the first stage of batching. The metadata needed to be read before that, after the updates for REDCap Version 6.0.x.</li>
 <li>
 <code>retrieve_token_mssql()</code> uses regexes to validate parameters</li>
@@ -367,8 +367,8 @@
 <h3 class="hasAnchor">
 <a href="#minor-updates-3" class="anchor"></a>Minor Updates</h3>
 <ul>
-<li>Test suite now uses <code><a href="https://testthat.r-lib.org/reference/skip.html">testthat::skip_on_cran()</a></code> before any call involving OUHSCâs REDCap server.</li>
-<li>Vignette example of subsetting, conditioned on a 2nd variableâs value.</li>
+<li>Test suite now uses <code><a href="https://testthat.r-lib.org/reference/skip.html">testthat::skip_on_cran()</a></code> before any call involving OUHSC’s REDCap server.</li>
+<li>Vignette example of subsetting, conditioned on a 2nd variable’s value.</li>
 </ul>
 </div>
 </div>
@@ -402,8 +402,8 @@
 <h3 class="hasAnchor">
 <a href="#updates" class="anchor"></a>Updates</h3>
 <ul>
-<li>By default, the SSL certs come from the httr package. However, REDCapR will continue to maintain a copy in case httrâs version on CRAN gets out of date.</li>
-<li>The tests are split into two collections: one thatâs run by the CRAN checks, and the other run manually. <a href="http://stackoverflow.com/questions/25595487/testthat-pattern-for-long-running-tests">Thanks, Gabor Csardi</a>. Any test with a dependency outside the package code (especially the REDCap test projects) is run manually so changes to the test databases wonât affect the success of building the previous version on CRAN.</li>
+<li>By default, the SSL certs come from the httr package. However, REDCapR will continue to maintain a copy in case httr’s version on CRAN gets out of date.</li>
+<li>The tests are split into two collections: one that’s run by the CRAN checks, and the other run manually. <a href="http://stackoverflow.com/questions/25595487/testthat-pattern-for-long-running-tests">Thanks, Gabor Csardi</a>. Any test with a dependency outside the package code (especially the REDCap test projects) is run manually so changes to the test databases won’t affect the success of building the previous version on CRAN.</li>
 <li>Corrected typo in <code><a href="../reference/redcap_download_file_oneshot.html">redcap_download_file_oneshot()</a></code> documentation, thanks to Andrew Peters (<a href='https://github.com/ARPeters'>@ARPeters</a> <a href='https://github.com/OuhscBbmc/REDCapR/issues/45'>#45</a>).</li>
 </ul>
 </div>
@@ -423,8 +423,8 @@
 <h3 class="hasAnchor">
 <a href="#updates-1" class="anchor"></a>Updates</h3>
 <ul>
-<li>Renamed the former <code>status_message</code> to <code>outcome_message</code>. This is because the message associated with http code returned is conventionally called the âstatus messagesâ (eg, OK, Forbidden, Not Found).</li>
-<li>If an operation is successful, the <code>raw_text</code> value (which was formerly called <code>raw_csv</code>) is returned as an empty string to save RAM. Itâs not really necessary with httrâs status message exposed.</li>
+<li>Renamed the former <code>status_message</code> to <code>outcome_message</code>. This is because the message associated with http code returned is conventionally called the ‘status messages’ (eg, OK, Forbidden, Not Found).</li>
+<li>If an operation is successful, the <code>raw_text</code> value (which was formerly called <code>raw_csv</code>) is returned as an empty string to save RAM. It’s not really necessary with httr’s status message exposed.</li>
 </ul>
 </div>
 <div id="bug-fixes-1" class="section level3">
@@ -502,7 +502,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
