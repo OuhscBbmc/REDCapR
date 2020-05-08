@@ -90,7 +90,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Troubleshooting REDCap API Calls</h1>
             
-            <h4 class="date">2020-04-21</h4>
+            <h4 class="date">2020-05-08</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/TroubleshootingApiCalls.Rmd"><code>vignettes/TroubleshootingApiCalls.Rmd</code></a></small>
       <div class="hidden name"><code>TroubleshootingApiCalls.Rmd</code></div>
@@ -120,17 +120,17 @@
 <li>
 <p><strong>Have you verified your account by responding to the automated email sent to them?</strong> This can be verified in the <code>Browse Users</code> section of your server’s <code>Control Center</code>. (Talk to your REDCap admin.) For each email address you’ve entered, there should be a green ‘Verified’ label and icon.</p>
 <p><img src="images/EmailVerified.png" width="252" style="fig.width=400px"></p>
-<p><!--<img src="/home/wibeasley/Documents/redcap/REDCapR/vignettes/images/EmailVerified.png" alt="EmailVerified" style="width: 400px;"/>--></p>
+<p><!--<img src="/home/wibeasley/Documents/bbmc/REDCapR/vignettes/images/EmailVerified.png" alt="EmailVerified" style="width: 400px;"/>--></p>
 </li>
 <li>
 <p><strong>Have you been granted the desired import and/or export permissions?</strong> This can be verified in the <code>User Rights</code> section or in the <code>API</code> section (and it’s <code>Manage All Project Tokens</code> tab) within the project. Alternatively, it can be verified in the <code>API Tokens</code> section of the server’s <code>Control Center</code>.</p>
 <p><img src="images/ApiPrivilegeDashboard.png" width="316" style="fig.width=600px"></p>
-<p><!--<img src="/home/wibeasley/Documents/redcap/REDCapR/vignettes/images/ApiPrivilegeDashboard.png" alt="ApiPrivilegeDashboard" style="width: 600px;"/>--></p>
+<p><!--<img src="/home/wibeasley/Documents/bbmc/REDCapR/vignettes/images/ApiPrivilegeDashboard.png" alt="ApiPrivilegeDashboard" style="width: 600px;"/>--></p>
 </li>
 <li>
 <p><strong>Are you using the correct token?</strong> This can be verified in the <code>API</code> section (and it’s <code>Manage All Project Tokens</code> tab) within the project. Click the magnifying glass icon in the user’s row. Alternatively, it can be verified in the <code>API Tokens</code> section of the server’s <code>Control Center</code>.</p>
 <p><img src="images/MagnifyingGlass.png" width="291" style="fig.width=550px"></p>
-<p><!--<img src="/home/wibeasley/Documents/redcap/REDCapR/vignettes/images/MagnifyingGlass.png" alt="MagnifyingGlass" style="width: 550px;"/>--></p>
+<p><!--<img src="/home/wibeasley/Documents/bbmc/REDCapR/vignettes/images/MagnifyingGlass.png" alt="MagnifyingGlass" style="width: 550px;"/>--></p>
 </li>
 </ol>
 <p>If all these checks pass, proceed to the next section. If not, start by consulting with your REDCap administrator.</p>
@@ -140,7 +140,7 @@
 <a href="#api" class="anchor"></a>API</h2>
 <p>This section examines potential problems that occur after data leaves a working server, but before it is handled by their programming language (<em>e.g.</em>, Python and R). <a href="http://www.getpostman.com/">Postman</a> is a Chrome plugin recommended by <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ">several</a> <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ">people</a> that makes troubleshooting much more efficient.</p>
 <p><img src="images/PostmanScreenshot.png" width="574" style="fig.width=800px"></p>
-<!--<img src="/home/wibeasley/Documents/redcap/REDCapR/vignettes/images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>-->
+<!--<img src="/home/wibeasley/Documents/bbmc/REDCapR/vignettes/images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>-->
 <ol style="list-style-type: decimal">
 <li>
 <p><strong>Is the API Playground producing the expected result?</strong> REDCap’s “API Playground” holds your hand by (a) offering a dropdown list of API methods available to your REDCap instance, and (b) presenting a series of dropdown boxes appropriate for the selected method. Find it through the API link visible in the left margin of REDCap. When you’ve completed the inputs, click ‘Execute’ to view the plain-text returned by the server.</p>
@@ -180,7 +180,7 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <a href="#gotchas-agnostic" class="anchor"></a>Common Gotchas</h2>
 <ol style="list-style-type: decimal">
 <li>
-<p><strong>Problems in the project’s metadata/dictionary.</strong> If exporting the metadata fails (<em>e.g.</em>, <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_read.html"><code><a href="../reference/redcap_metadata_read.html">REDCapR::redcap_metadata_read()</a></code></a> and <a href="https://rdrr.io/github/nutterb/redcapAPI/man/exportMetaData.html"><code><a href="https://rdrr.io/pkg/redcapAPI/man/exportMetaData.html">redcapAPI::exportMetaData()</a></code></a>), manually download the data dictionary from the REDCap browser. Inspect the plain text closely in a text editor like <a href="https://atom.io/">Atom</a> or <a href="https://code.visualstudio.com/">Visual Studio Code</a>; avoid programs like Excel that tend to interpret, align, and decorate the values, which sometimes masks problems. Scrutinize all elements, but especially look for nonstandard characters. <em>See the next bullet.</em></p>
+<p><strong>Problems in the project’s metadata/dictionary.</strong> If exporting the metadata fails (<em>e.g.</em>, <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_read.html"><code><a href="../reference/redcap_metadata_read.html">REDCapR::redcap_metadata_read()</a></code></a> and <a href="https://rdrr.io/github/nutterb/redcapAPI/man/exportMetaData.html"><code>redcapAPI::exportMetaData()</code></a>), manually download the data dictionary from the REDCap browser. Inspect the plain text closely in a text editor like <a href="https://atom.io/">Atom</a> or <a href="https://code.visualstudio.com/">Visual Studio Code</a>; avoid programs like Excel that tend to interpret, align, and decorate the values, which sometimes masks problems. Scrutinize all elements, but especially look for nonstandard characters. <em>See the next bullet.</em></p>
 <p>Some API libraries test that problematic elements of a project are handled correctly. If you encounter an element that causes problems, please consider</p>
 <ol style="list-style-type: decimal">
 <li><p>creating a new GitHub Issue that describes the problem (<em>e.g.</em>, <a href="https://github.com/OuhscBbmc/REDCapR/issues">REDCapR</a>, <a href="https://github.com/nutterb/redcapAPI/issues">redcapAPI</a>, <a href="https://github.com/iuredcap/phpcap/issues">phpcap</a>).</p></li>
@@ -402,17 +402,17 @@ Reading batch 1 of 1, with ids 1 through 5.
 <div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">redcapAPI</span>) <span class="co"># Load the package into the current R session, if you haven't already.</span>
 <span class="no">redcap_uri</span>       <span class="kw">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>
 <span class="no">token</span>            <span class="kw">&lt;-</span> <span class="st">"your-secret-token"</span>
-<span class="fu"><a href="https://rdrr.io/pkg/redcapAPI/man/exportMetaData.html">exportMetaData</a></span>(<span class="no">rcon</span>)</pre></body></html></div>
+<span class="fu">exportMetaData</span>(<span class="no">rcon</span>)</pre></body></html></div>
 <p>If this fails, see “Problems in the project’s metadata/dictionary.” under <a href="#gotchas-agnostic">Gotchas</a> above</p>
 </li>
 <li>
 <p><strong>Can you export from an example project?</strong> This is the same fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a> as in the previous section.</p>
 <div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">redcapAPI</span>) <span class="co"># Load the package into the current R session.</span>
-<span class="no">rcon</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/redcapAPI/man/redcapConnection.html">redcapConnection</a></span>(
+<span class="no">rcon</span> <span class="kw">&lt;-</span> <span class="fu">redcapConnection</span>(
   <span class="kw">url</span>   <span class="kw">=</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>,
   <span class="kw">token</span> <span class="kw">=</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span>
 )
-<span class="fu"><a href="https://rdrr.io/pkg/redcapAPI/man/exportRecords.html">exportRecords</a></span>(<span class="no">rcon</span>)</pre></body></html></div>
+<span class="fu">exportRecords</span>(<span class="no">rcon</span>)</pre></body></html></div>
 <p>The previous code should produce similar output. Notice there are five rows and the columns will wrap around if your console window is too narrow.</p>
 <div class="sourceCode" id="cb20"><html><body><pre class="r">record_id name_first name_last                                 address      telephone               email
 1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232 (432) 456-4848     nutty@mouse.com
@@ -445,11 +445,11 @@ demographics_complete
 <li>
 <p><strong>Can you export your own project?</strong> The code is similar to the previous check, but the <code>uri</code> and <code>token</code> values will need to be modified.</p>
 <div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">redcapAPI</span>) <span class="co"># Load the package into the current R session, if you haven't already.</span>
-<span class="no">rcon</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/redcapAPI/man/redcapConnection.html">redcapConnection</a></span>(
+<span class="no">rcon</span> <span class="kw">&lt;-</span> <span class="fu">redcapConnection</span>(
   <span class="kw">url</span>   <span class="kw">=</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>, <span class="co"># Adapt this to your server.</span>
   <span class="kw">token</span> <span class="kw">=</span> <span class="st">"your-secret-token"</span>                         <span class="co"># Adapt this to your user's token.</span>
 )
-<span class="fu"><a href="https://rdrr.io/pkg/redcapAPI/man/exportRecords.html">exportRecords</a></span>(<span class="no">rcon</span>)</pre></body></html></div>
+<span class="fu">exportRecords</span>(<span class="no">rcon</span>)</pre></body></html></div>
 </li>
 <li><p><strong>Is the export operation still unsuccessful using redcapAPI?</strong> If so the “Can the user query a <em>entire</em> REDCap project using httr?” check succeeded, but the redcapAPI checks did not, consider posting a new <a href="https://github.com/nutterb/redcapAPI/issues">GitHub issue</a> to the package developers.</p></li>
 </ol>
