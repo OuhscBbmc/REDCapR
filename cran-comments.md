@@ -2,6 +2,8 @@ Description
 -----------------------------------------------
 This submission includes new features and also addresses a recent breaking change from tibble 3.0.0 (https://github.com/OuhscBbmc/REDCapR/issues/302).
 
+After the first submission, I've changed the links to the HRSA and Health Dept sites.  I guess there is some problem with redirection.  Although the health dept sites work in my browser, they're still returning useful sites in a browser.  I've tried a few variations fo rht eurl that work in a browser, but still get flagged by win-builder.
+
 Thank you for taking the time to review my submission, and please tell me if there's something else I should do for CRAN.  -Will Beasley
 
 
@@ -22,7 +24,9 @@ Test environments
 R CMD check results
 -----------------------------------------------
 
-* No ERRORs, WARNINGs, or NOTEs on any builds.
+* No ERRORs or WARNINGson any builds.
+
+* Two notes are returned for Health Dept sites, but they work in a browser.
 
 
 Downstream dependencies

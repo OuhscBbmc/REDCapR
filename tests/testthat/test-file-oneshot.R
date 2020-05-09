@@ -62,7 +62,7 @@ test_that("FullPathSpecified", {
 
   expected_outcome_message <- '; name="mugshot-2\\.jpg" successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as .+\\.jpg'
 
-  (full_name <- base::tempfile(pattern="mugshot", fileext=".jpg"))
+  full_name <- base::tempfile(pattern="mugshot", fileext=".jpg")
   tryCatch({
     expect_message(
       returned_object <- redcap_download_file_oneshot(

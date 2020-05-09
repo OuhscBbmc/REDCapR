@@ -104,7 +104,7 @@
 #'
 #' A second benefit is less RAM is required on the webserver.  Because
 #' each batch is smaller than the entire dataset, the webserver
-#' tackles more managably sized objects in memory.  Consider batching
+#' tackles more manageably sized objects in memory.  Consider batching
 #' if you encounter the error
 #'
 #' ```

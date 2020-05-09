@@ -45,7 +45,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.2.9006</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0</span>
       </span>
     </div>
 
@@ -96,7 +96,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#redcapr-" class="anchor"></a><a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> <img src="reference/figures/logo.png" align="right" width="130">
 </h1></div>
-<p>Weâve been using R with <a href="https://projectredcap.org/">REDCap</a>âs API since 2012 and have developed <a href="https://github.com/OuhscBbmc/REDCapR"><code>REDCapR</code></a>. Before encapsulating these functions in a package, we were replicating 50+ lines of code to contact REDCap and robustly transform the returned <a href="https://en.wikipedia.org/wiki/Comma-separated_values">csv</a> into an R <code>data.frame</code>; it took twice that much to implement batching. All this can be done in one call to <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code><a href="reference/redcap_read.html">redcap_read()</a></code></a>:</p>
+<p>We’ve been using R with <a href="https://projectredcap.org/">REDCap</a>’s API since 2012 and have developed <a href="https://github.com/OuhscBbmc/REDCapR"><code>REDCapR</code></a>. Before encapsulating these functions in a package, we were replicating 50+ lines of code to contact REDCap and robustly transform the returned <a href="https://en.wikipedia.org/wiki/Comma-separated_values">csv</a> into an R <code>data.frame</code>; it took twice that much to implement batching. All this can be done in one call to <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code><a href="reference/redcap_read.html">redcap_read()</a></code></a>:</p>
 <div class="sourceCode" id="cb1"><pre class="r"><span class="no">ds</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/redcap_read.html">redcap_read</a></span>(<span class="kw">redcap_uri</span><span class="kw">=</span><span class="no">uri</span>, <span class="kw">token</span><span class="kw">=</span><span class="no">token</span>)$<span class="no">data</span></pre></div>
 <p>The <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code><a href="reference/redcap_read.html">redcap_read()</a></code></a> function also accepts values for subsetting/filtering the records and fields. Here are two examples; the first selects only a portion of the rows, while the second selects only a portion of the columns. Documentation for the additional 20+ functions are found at <a href="https://ouhscbbmc.github.io/REDCapR/reference/">ouhscbbmc.github.io/REDCapR/reference</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="r"><span class="co"># Return only records with IDs of 1 and 4</span>
@@ -114,8 +114,8 @@
   <span class="kw">token</span>       <span class="kw">=</span> <span class="no">token</span>,
   <span class="kw">fields</span>      <span class="kw">=</span> <span class="no">desired_fields</span>
 )$<span class="no">data</span></pre></div>
-<p>The <code>REDCapR</code> package includes the SSL certificate retrieved by <a href="https://github.com/r-lib/httr/blob/master/R/utils.r"><code>httr::find_cert_bundle()</code></a>. Your REDCap serverâs identity is always verified, unless the setting is overridden (alternative certificates can also be provided).</p>
-<p>To keep our maintenance efforts manageable, the package implements only the REDCap API functions that have been requested. If thereâs a feature that would help your projects, please tell us in a new issue in REDCapRâs <a href="https://github.com/OuhscBbmc/REDCapR/issues">GitHub repository</a>. A <a href="https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html">troubleshooting</a> document helps diagnose issues with the API.</p>
+<p>The <code>REDCapR</code> package includes the SSL certificate retrieved by <a href="https://github.com/r-lib/httr/blob/master/R/utils.r"><code>httr::find_cert_bundle()</code></a>. Your REDCap server’s identity is always verified, unless the setting is overridden (alternative certificates can also be provided).</p>
+<p>To keep our maintenance efforts manageable, the package implements only the REDCap API functions that have been requested. If there’s a feature that would help your projects, please tell us in a new issue in REDCapR’s <a href="https://github.com/OuhscBbmc/REDCapR/issues">GitHub repository</a>. A <a href="https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html">troubleshooting</a> document helps diagnose issues with the API.</p>
 <div id="installation-and-documentation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#installation-and-documentation" class="anchor"></a>Installation and Documentation</h3>
@@ -130,20 +130,20 @@
 <div id="collaborative-development" class="section level3">
 <h3 class="hasAnchor">
 <a href="#collaborative-development" class="anchor"></a>Collaborative Development</h3>
-<p>We encourage input and collaboration. If youâre familiar with GitHub and R packages, feel free to submit a <a href="https://github.com/OuhscBbmc/REDCapR/pulls">pull request</a>. If youâd like to report a bug or make a suggestion, please create a GitHub <a href="https://github.com/OuhscBbmc/REDCapR/issues">issue</a>; issues are a usually a good place to ask public questions too. However, feel free to email Will (<a href="mailto:wibeasley@hotmail.com" class="email">wibeasley@hotmail.com</a>). Please note that this project is released with a <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/CONDUCT.md">Contributor Code of Conduct</a>; by participating in this project you agree to abide by its terms. We have some starting material described in the <a href="https://github.com/OuhscBbmc/REDCapR/tree/master/documentation-for-developers"><code>./documentation-for-developers/</code></a> directory.</p>
-<p>Weâd like to thank the following developers for their <a href="https://github.com/OuhscBbmc/REDCapR/issues?q=is%3Aissue+is%3Aclosed">advice</a> and <a href="https://github.com/OuhscBbmc/REDCapR/graphs/contributors">code contributions</a>: <a href="https://github.com/nutterb">Benjamin Nutter</a>, <a href="https://github.com/rparrish">Rollie Parrish</a>, <a href="https://github.com/sburns">Scott Burns</a>, <a href="https://github.com/johnaponte">John Aponte</a>, <a href="https://github.com/ARPeters">Andrew Peters</a>, and <a href="https://github.com/haozhu233">Hao Zhu</a>.</p>
+<p>We encourage input and collaboration. If you’re familiar with GitHub and R packages, feel free to submit a <a href="https://github.com/OuhscBbmc/REDCapR/pulls">pull request</a>. If you’d like to report a bug or make a suggestion, please create a GitHub <a href="https://github.com/OuhscBbmc/REDCapR/issues">issue</a>; issues are a usually a good place to ask public questions too. However, feel free to email Will (<a href="mailto:wibeasley@hotmail.com" class="email">wibeasley@hotmail.com</a>). Please note that this project is released with a <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/CONDUCT.md">Contributor Code of Conduct</a>; by participating in this project you agree to abide by its terms. We have some starting material described in the <a href="https://github.com/OuhscBbmc/REDCapR/tree/master/documentation-for-developers"><code>./documentation-for-developers/</code></a> directory.</p>
+<p>We’d like to thank the following developers for their <a href="https://github.com/OuhscBbmc/REDCapR/issues?q=is%3Aissue+is%3Aclosed">advice</a> and <a href="https://github.com/OuhscBbmc/REDCapR/graphs/contributors">code contributions</a>: <a href="https://github.com/nutterb">Benjamin Nutter</a>, <a href="https://github.com/rparrish">Rollie Parrish</a>, <a href="https://github.com/sburns">Scott Burns</a>, <a href="https://github.com/johnaponte">John Aponte</a>, <a href="https://github.com/ARPeters">Andrew Peters</a>, and <a href="https://github.com/haozhu233">Hao Zhu</a>.</p>
 </div>
 <div id="funders" class="section level3">
 <h3 class="hasAnchor">
 <a href="#funders" class="anchor"></a>Funders</h3>
-<p>Much of this package has been developed to support the needs of the following projects. We appreciate the support. (So far) the primary developers of REDCapR are the external evaluators for <a href="https://www.ok.gov/health/Community_&amp;_Family_Health/Family_Support_and_Prevention_Service/MIECHV_Program_-_Federal_Home_Visiting_Grant/MIECHV_Program_Resources/index.html">Oklahomaâs MIECHV</a> program. See the preliminary CQI reports (many of which use REDCapR) at <a href="http://ouhscbbmc.github.io/MReportingPublic/" class="uri">http://ouhscbbmc.github.io/MReportingPublic/</a>.</p>
+<p>Much of this package has been developed to support the needs of the following projects. We appreciate the support. (So far) the primary developers of REDCapR are the external evaluators for <a href="https://www.ok.gov/health/Family_Health/Family_Support_and_Prevention_Service/index.html">Oklahoma’s MIECHV</a> program. See the preliminary CQI reports (many of which use REDCapR) at <a href="http://ouhscbbmc.github.io/MReportingPublic/" class="uri">http://ouhscbbmc.github.io/MReportingPublic/</a>.</p>
 <ul>
 <li>
-<em>OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting (<a href="http://mchb.hrsa.gov/programs/homevisiting/">MIECHV</a>) Project</em>. <a href="https://perf-data.hrsa.gov/mchb/DGISReports/Abstract/AbstractDetails.aspx?Source=TVIS&amp;GrantNo=D89MC23154&amp;FY=2012">HRSA/ACF D89MC23154</a>. David Bard, PI, OUHSC; 2011-2015.</li>
+<em>OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting (<a href="http://mchb.hrsa.gov/programs/homevisiting/">MIECHV</a>) Project</em>. <a href="https://grants6.hrsa.gov/MCHB/DGISReports/Abstract/AbstractDetails.aspx?cbAbstractSummary=D89MC23154_2012_NonResearch_4">HRSA/ACF D89MC23154</a>. David Bard, PI, OUHSC; 2011-2015.</li>
 <li>
-<em>Independent Evaluation of the State of OK MIECHV Evidence Based Home Visitation Project</em>, <a href="https://www.nih.gov/">NIH</a>-sponsored collaboration with <a href="https://www.ok.gov/health/">OSDH</a>. David Bard, PI, OUHSC; 2015-2017.</li>
+<em>Independent Evaluation of the State of OK MIECHV Evidence Based Home Visitation Project</em>, <a href="https://www.nih.gov/">NIH</a>-sponsored collaboration with <a href="https://ok.gov/health/">OSDH</a>. David Bard, PI, OUHSC; 2015-2017.</li>
 <li>
-<em>OSDH ParentPRO Pilot Evaluation</em>, federally-sponsored collaboration with <a href="https://www.ok.gov/health/">OSDH</a>. David Bard, PI, OUHSC; 2015-2017.</li>
+<em>OSDH ParentPRO Pilot Evaluation</em>, federally-sponsored collaboration with <a href="https://ok.gov/health/">OSDH</a>. David Bard, PI, OUHSC; 2015-2017.</li>
 <li>
 <em>Title IV-E Waiver Project</em>, <a href="http://mchb.hrsa.gov/">HRSA/MCHB</a>-sponsored collaboration with <a href="http://www.okdhs.org/">OKDHS</a>; David Bard, PI, OUHSC; 2014-2017.</li>
 <li>
@@ -260,7 +260,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
