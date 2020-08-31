@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9000</span>
       </span>
     </div>
 
@@ -85,12 +85,12 @@
 
       
 
-      </header><script src="BasicREDCapROperations_files/header-attrs-2.1/header-attrs.js"></script><div class="row">
+      </header><script src="BasicREDCapROperations_files/header-attrs-2.3/header-attrs.js"></script><script src="BasicREDCapROperations_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Basic REDCapR Operations</h1>
             
-            <h4 class="date">2020-05-08</h4>
+            <h4 class="date">2020-08-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/BasicREDCapROperations.Rmd"><code>vignettes/BasicREDCapROperations.Rmd</code></a></small>
       <div class="hidden name"><code>BasicREDCapROperations.Rmd</code></div>
@@ -120,10 +120,10 @@
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co"># Return all records and all variables.</span>
 <span class="no">ds_all_rows_all_fields</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span>(<span class="kw">redcap_uri</span> <span class="kw">=</span> <span class="no">uri</span>, <span class="kw">token</span> <span class="kw">=</span> <span class="no">token</span>)$<span class="no">data</span></pre></body></html></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2020-05-08 13:37:39.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2020-08-30 23:45:09.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>Parsed with column specification:
 cols(
   .default = col_double(),
@@ -187,9 +187,9 @@ cols(
   <span class="kw">token</span>      <span class="kw">=</span> <span class="no">token</span>,
   <span class="kw">records</span>    <span class="kw">=</span> <span class="no">desired_records_v1</span>
 )$<span class="no">data</span></pre></body></html></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2020-05-08 13:37:40.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2020-08-30 23:45:10.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>Parsed with column specification:
@@ -213,8 +213,8 @@ cols(
   <span class="kw">records_collapsed</span> <span class="kw">=</span> <span class="no">desired_records_v2</span>
 )$<span class="no">data</span></pre></body></html></div>
 <pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2020-05-08 13:37:41.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2020-08-30 23:45:12.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>Parsed with column specification:
@@ -258,11 +258,11 @@ cols(
   <span class="kw">token</span>      <span class="kw">=</span> <span class="no">token</span>,
   <span class="kw">fields</span>     <span class="kw">=</span> <span class="no">desired_fields_v1</span>
 )$<span class="no">data</span></pre></body></html></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2020-05-08 13:37:43.</code></pre>
+<pre><code>Starting to read 5 records  at 2020-08-30 23:45:13.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>Parsed with column specification:
 cols(
   record_id = col_double(),
@@ -276,11 +276,11 @@ cols(
   <span class="kw">token</span>            <span class="kw">=</span> <span class="no">token</span>,
   <span class="kw">fields_collapsed</span> <span class="kw">=</span> <span class="no">desired_fields_v2</span>
 )$<span class="no">data</span></pre></body></html></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2020-05-08 13:37:44.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2020-08-30 23:45:14.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>Parsed with column specification:
 cols(
   record_id = col_double(),
@@ -307,11 +307,11 @@ cols(
   <span class="kw">token</span>      <span class="kw">=</span> <span class="no">token</span>,
   <span class="kw">fields</span>     <span class="kw">=</span> <span class="no">desired_fields_v3</span>
 )$<span class="no">data</span></pre></body></html></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2020-05-08 13:37:45.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2020-08-30 23:45:16.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>Parsed with column specification:
 cols(
   record_id = col_double(),
@@ -341,11 +341,11 @@ cols(
   <span class="kw">token</span>      <span class="kw">=</span> <span class="no">token</span>,
   <span class="kw">records</span>    <span class="kw">=</span> <span class="no">desired_records_v3</span>
 )$<span class="no">data</span></pre></body></html></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2020-05-08 13:37:46.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2020-08-30 23:45:17.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).</code></pre>
-<pre><code>2 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 24 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>Parsed with column specification:
 cols(
   .default = col_double(),
@@ -398,11 +398,11 @@ cols(
   <span class="kw">token</span>      <span class="kw">=</span> <span class="no">token</span>,
   <span class="kw">fields</span>     <span class="kw">=</span> <span class="no">desired_fields_v1</span>
 )</pre></body></html></div>
-<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2020-05-08 13:37:48.</code></pre>
+<pre><code>The data dictionary describing 16 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2020-08-30 23:45:19.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>Parsed with column specification:
 cols(
   record_id = col_double(),
@@ -425,7 +425,7 @@ $status_codes
 [1] "200"
 
 $outcome_messages
-[1] "5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200."
+[1] "5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200."
 
 $records_collapsed
 [1] ""
@@ -443,7 +443,7 @@ $filter_logic
 [1] ""
 
 $elapsed_seconds
-[1] 1.132106</code></pre>
+[1] 1.394976</code></pre>
 </div>
 </div>
 <div id="session-information" class="section level1">
@@ -453,76 +453,77 @@ $elapsed_seconds
 <details><p><summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary></p>
 <pre><code>─ Session info ───────────────────────────────────────────────────────────────
  setting  value                       
- version  R version 3.6.3 (2020-02-29)
- os       Ubuntu 20.04 LTS            
+ version  R version 4.0.2 (2020-06-22)
+ os       Ubuntu 20.04.1 LTS          
  system   x86_64, linux-gnu           
  ui       X11                         
  language (EN)                        
  collate  en_US.UTF-8                 
  ctype    en_US.UTF-8                 
  tz       America/Chicago             
- date     2020-05-08                  
+ date     2020-08-30                  
 
 ─ Packages ───────────────────────────────────────────────────────────────────
- package     * version  date       lib source        
- assertthat    0.2.1    2019-03-21 [2] CRAN (R 3.6.2)
- backports     1.1.6    2020-04-05 [2] CRAN (R 3.6.3)
- checkmate     2.0.0    2020-02-06 [2] CRAN (R 3.6.2)
- cli           2.0.2    2020-02-28 [2] CRAN (R 3.6.3)
- colorspace    1.4-1    2019-03-18 [2] CRAN (R 3.6.2)
- crayon        1.3.4    2017-09-16 [2] CRAN (R 3.6.2)
- curl          4.3      2019-12-02 [2] CRAN (R 3.6.2)
- desc          1.2.0    2018-05-01 [2] CRAN (R 3.6.2)
- digest        0.6.25   2020-02-23 [2] CRAN (R 3.6.2)
- dplyr         0.8.5    2020-03-07 [2] CRAN (R 3.6.3)
- ellipsis      0.3.0    2019-09-20 [2] CRAN (R 3.6.2)
- evaluate      0.14     2019-05-28 [2] CRAN (R 3.6.2)
- fansi         0.4.1    2020-01-08 [2] CRAN (R 3.6.2)
- fs            1.4.1    2020-04-04 [2] CRAN (R 3.6.3)
- glue          1.4.0    2020-04-03 [2] CRAN (R 3.6.3)
- hms           0.5.3    2020-01-08 [2] CRAN (R 3.6.2)
- htmltools     0.4.0    2019-10-04 [2] CRAN (R 3.6.2)
- httr          1.4.1    2019-08-05 [2] CRAN (R 3.6.2)
- kableExtra    1.1.0    2019-03-16 [2] CRAN (R 3.6.2)
- knitr       * 1.28     2020-02-06 [2] CRAN (R 3.6.2)
- lifecycle     0.2.0    2020-03-06 [2] CRAN (R 3.6.3)
- magrittr    * 1.5      2014-11-22 [2] CRAN (R 3.6.2)
- MASS          7.3-51.6 2020-04-26 [5] CRAN (R 3.6.3)
- memoise       1.1.0    2017-04-21 [2] CRAN (R 3.6.2)
- munsell       0.5.0    2018-06-12 [2] CRAN (R 3.6.2)
- pillar        1.4.4    2020-05-05 [2] CRAN (R 3.6.3)
- pkgconfig     2.0.3    2019-09-22 [2] CRAN (R 3.6.2)
- pkgdown       1.5.1    2020-04-09 [2] CRAN (R 3.6.3)
- purrr         0.3.4    2020-04-17 [2] CRAN (R 3.6.3)
- R6            2.4.1    2019-11-12 [2] CRAN (R 3.6.2)
- Rcpp          1.0.4.6  2020-04-09 [2] CRAN (R 3.6.3)
- readr         1.3.1    2018-12-21 [2] CRAN (R 3.6.2)
- REDCapR     * 0.11.0   2020-05-08 [1] local         
- rlang         0.4.6    2020-05-02 [2] CRAN (R 3.6.3)
- rmarkdown     2.1      2020-01-20 [2] CRAN (R 3.6.2)
- rprojroot     1.3-2    2018-01-03 [2] CRAN (R 3.6.2)
- rstudioapi    0.11     2020-02-07 [2] CRAN (R 3.6.2)
- rvest         0.3.5    2019-11-08 [2] CRAN (R 3.6.2)
- scales        1.1.0    2019-11-18 [2] CRAN (R 3.6.2)
- sessioninfo   1.1.1    2018-11-05 [2] CRAN (R 3.6.2)
- stringi       1.4.6    2020-02-17 [2] CRAN (R 3.6.2)
- stringr       1.4.0    2019-02-10 [2] CRAN (R 3.6.2)
- tibble        3.0.1    2020-04-20 [2] CRAN (R 3.6.3)
- tidyselect    1.0.0    2020-01-27 [2] CRAN (R 3.6.2)
- vctrs         0.2.4    2020-03-10 [2] CRAN (R 3.6.3)
- viridisLite   0.3.0    2018-02-01 [2] CRAN (R 3.6.2)
- webshot       0.5.2    2019-11-22 [2] CRAN (R 3.6.2)
- withr         2.2.0    2020-04-20 [2] CRAN (R 3.6.3)
- xfun          0.13     2020-04-13 [2] CRAN (R 3.6.3)
- xml2          1.3.2    2020-04-23 [2] CRAN (R 3.6.3)
- yaml          2.2.1    2020-02-01 [2] CRAN (R 3.6.2)
+ package     * version     date       lib source        
+ assertthat    0.2.1       2019-03-21 [2] CRAN (R 4.0.0)
+ backports     1.1.9       2020-08-24 [2] CRAN (R 4.0.2)
+ checkmate     2.0.0       2020-02-06 [2] CRAN (R 4.0.0)
+ cli           2.0.2       2020-02-28 [2] CRAN (R 4.0.0)
+ colorspace    1.4-1       2019-03-18 [2] CRAN (R 4.0.0)
+ crayon        1.3.4       2017-09-16 [2] CRAN (R 4.0.0)
+ curl          4.3         2019-12-02 [2] CRAN (R 4.0.0)
+ desc          1.2.0       2018-05-01 [2] CRAN (R 4.0.0)
+ digest        0.6.25      2020-02-23 [2] CRAN (R 4.0.0)
+ dplyr         1.0.2       2020-08-18 [2] CRAN (R 4.0.2)
+ ellipsis      0.3.1       2020-05-15 [2] CRAN (R 4.0.0)
+ evaluate      0.14        2019-05-28 [2] CRAN (R 4.0.0)
+ fansi         0.4.1       2020-01-08 [2] CRAN (R 4.0.0)
+ fs            1.5.0       2020-07-31 [2] CRAN (R 4.0.2)
+ generics      0.0.2       2018-11-29 [2] CRAN (R 4.0.0)
+ glue          1.4.2       2020-08-27 [2] CRAN (R 4.0.2)
+ hms           0.5.3       2020-01-08 [2] CRAN (R 4.0.0)
+ htmltools     0.5.0       2020-06-16 [2] CRAN (R 4.0.1)
+ httr          1.4.2       2020-07-20 [2] CRAN (R 4.0.2)
+ kableExtra    1.2.1       2020-08-27 [2] CRAN (R 4.0.2)
+ knitr       * 1.29        2020-06-23 [2] CRAN (R 4.0.1)
+ lifecycle     0.2.0       2020-03-06 [2] CRAN (R 4.0.0)
+ magrittr    * 1.5         2014-11-22 [2] CRAN (R 4.0.0)
+ MASS          7.3-52      2020-08-18 [5] CRAN (R 4.0.2)
+ memoise       1.1.0       2017-04-21 [2] CRAN (R 4.0.0)
+ munsell       0.5.0       2018-06-12 [2] CRAN (R 4.0.0)
+ pillar        1.4.6       2020-07-10 [2] CRAN (R 4.0.2)
+ pkgconfig     2.0.3       2019-09-22 [2] CRAN (R 4.0.0)
+ pkgdown       1.5.1       2020-04-09 [2] CRAN (R 4.0.0)
+ purrr         0.3.4       2020-04-17 [2] CRAN (R 4.0.0)
+ R6            2.4.1       2019-11-12 [2] CRAN (R 4.0.0)
+ Rcpp          1.0.5       2020-07-06 [2] CRAN (R 4.0.2)
+ readr         1.3.1       2018-12-21 [2] CRAN (R 4.0.0)
+ REDCapR     * 0.11.0.9000 2020-08-31 [1] local         
+ rlang         0.4.7       2020-07-09 [2] CRAN (R 4.0.2)
+ rmarkdown     2.3         2020-06-18 [2] CRAN (R 4.0.1)
+ rprojroot     1.3-2       2018-01-03 [2] CRAN (R 4.0.0)
+ rstudioapi    0.11        2020-02-07 [2] CRAN (R 4.0.0)
+ rvest         0.3.6       2020-07-25 [2] CRAN (R 4.0.2)
+ scales        1.1.1       2020-05-11 [2] CRAN (R 4.0.0)
+ sessioninfo   1.1.1       2018-11-05 [2] CRAN (R 4.0.0)
+ stringi       1.4.6       2020-02-17 [2] CRAN (R 4.0.0)
+ stringr       1.4.0       2019-02-10 [2] CRAN (R 4.0.0)
+ tibble        3.0.3       2020-07-10 [2] CRAN (R 4.0.2)
+ tidyselect    1.1.0       2020-05-11 [2] CRAN (R 4.0.0)
+ vctrs         0.3.4       2020-08-29 [2] CRAN (R 4.0.2)
+ viridisLite   0.3.0       2018-02-01 [2] CRAN (R 4.0.0)
+ webshot       0.5.2       2019-11-22 [2] CRAN (R 4.0.0)
+ withr         2.2.0       2020-04-20 [2] CRAN (R 4.0.0)
+ xfun          0.16        2020-07-24 [2] CRAN (R 4.0.2)
+ xml2          1.3.2       2020-04-23 [2] CRAN (R 4.0.0)
+ yaml          2.2.1       2020-02-01 [2] CRAN (R 4.0.0)
 
-[1] /tmp/RtmpZTK1eV/temp_libpath3c0452160ce1
-[2] /home/wibeasley/R/x86_64-pc-linux-gnu-library/3.6
+[1] /tmp/RtmpMEjWQM/temp_libpath5d9be6e9232eb
+[2] /home/wibeasley/R/x86_64-pc-linux-gnu-library/4.0
 [3] /usr/local/lib/R/site-library
 [4] /usr/lib/R/site-library
 [5] /usr/lib/R/library</code></pre>
-</details><p>Report rendered by wibeasley at 2020-05-08, 13:37 -0500 in 11 seconds.</p>
+</details><p>Report rendered by wibeasley at 2020-08-30, 23:45 -0500 in 13 seconds.</p>
 </div>
   </div>
 
