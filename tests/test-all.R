@@ -2,4 +2,5 @@
 library(testthat)
 library(REDCapR)
 
+# source("R/helpers-testing.R")
 testthat::test_check("REDCapR")

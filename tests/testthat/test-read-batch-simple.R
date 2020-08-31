@@ -28,34 +28,55 @@ test_that("smoke test", {
 })
 test_that("default", {
   testthat::skip_on_cran()
-  expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
-    "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
-    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
+  expected_data_frame <- structure(list(record_id = c(1, 2, 3, 4, 5), name_first = c("Nutmeg",
+    "Tumtum", "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse",
+    "Nutmouse", "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
     "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402",
     "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
     ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333",
     "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com",
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = structure(c(12294, 12121, -13051, -6269, -5375), class = "Date"),
-    age = c(11L, 11L, 80L, 61L, 59L), sex = c(0L, 1L, 1L, 0L,
-    1L), demographics_complete = c(2L, 2L, 2L, 2L, 2L), height = c(7,
-    6, 180, 165, 193.04), weight = c(1L, 1L, 80L, 54L, 104L),
-    bmi = c(204.1, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing",
-    "A mouse character from a good book", "completely made up",
-    "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
+    age = c(11, 11, 80, 61, 59), sex = c(0, 1, 1, 0, 1), demographics_complete = c(2,
+    2, 2, 2, 2), height = c(7, 6, 180, 165, 193.04), weight = c(1,
+    1, 80, 54, 104), bmi = c(204.1, 277.8, 24.7, 19.8, 27.9),
+    comments = c("Character in a book, with some guessing", "A mouse character from a good book",
+    "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
     ), mugshot = c("[document]", "[document]", "[document]",
-    "[document]", "[document]"), health_complete = c(1L, 0L,
-    2L, 2L, 0L), race___1 = c(0L, 0L, 0L, 0L, 1L), race___2 = c(0L,
-    0L, 0L, 1L, 0L), race___3 = c(0L, 1L, 0L, 0L, 0L), race___4 = c(0L,
-    0L, 1L, 0L, 0L), race___5 = c(1L, 1L, 1L, 1L, 0L), race___6 = c(0L,
-    0L, 0L, 0L, 1L), ethnicity = c(1L, 1L, 0L, 1L, 2L), race_and_ethnicity_complete = c(2L,
-    0L, 2L, 2L, 2L)), .Names = c("record_id", "name_first", "name_last",
-    "address", "telephone", "email", "dob", "age", "sex", "demographics_complete",
-    "height", "weight", "bmi", "comments", "mugshot", "health_complete",
-    "race___1", "race___2", "race___3", "race___4", "race___5", "race___6",
-    "ethnicity", "race_and_ethnicity_complete"), row.names = c(NA,
-    -5L), class = "data.frame")
+    "[document]", "[document]"), health_complete = c(1, 0, 2,
+    2, 0), race___1 = c(0, 0, 0, 0, 1), race___2 = c(0, 0, 0,
+    1, 0), race___3 = c(0, 1, 0, 0, 0), race___4 = c(0, 0, 1,
+    0, 0), race___5 = c(1, 1, 1, 1, 0), race___6 = c(0, 0, 0,
+    0, 1), ethnicity = c(1, 1, 0, 1, 2), race_and_ethnicity_complete = c(2,
+    0, 2, 2, 2)), row.names = c(NA, -5L), spec = structure(list(
+    cols = list(record_id = structure(list(), class = c("collector_character",
+    "collector")), name_first = structure(list(), class = c("collector_character",
+    "collector")), name_last = structure(list(), class = c("collector_character",
+    "collector")), address = structure(list(), class = c("collector_character",
+    "collector")), telephone = structure(list(), class = c("collector_character",
+    "collector")), email = structure(list(), class = c("collector_character",
+    "collector")), dob = structure(list(), class = c("collector_character",
+    "collector")), age = structure(list(), class = c("collector_character",
+    "collector")), sex = structure(list(), class = c("collector_character",
+    "collector")), demographics_complete = structure(list(), class = c("collector_character",
+    "collector")), height = structure(list(), class = c("collector_character",
+    "collector")), weight = structure(list(), class = c("collector_character",
+    "collector")), bmi = structure(list(), class = c("collector_character",
+    "collector")), comments = structure(list(), class = c("collector_character",
+    "collector")), mugshot = structure(list(), class = c("collector_character",
+    "collector")), health_complete = structure(list(), class = c("collector_character",
+    "collector")), race___1 = structure(list(), class = c("collector_character",
+    "collector")), race___2 = structure(list(), class = c("collector_character",
+    "collector")), race___3 = structure(list(), class = c("collector_character",
+    "collector")), race___4 = structure(list(), class = c("collector_character",
+    "collector")), race___5 = structure(list(), class = c("collector_character",
+    "collector")), race___6 = structure(list(), class = c("collector_character",
+    "collector")), ethnicity = structure(list(), class = c("collector_character",
+    "collector")), race_and_ethnicity_complete = structure(list(), class = c("collector_character",
+    "collector"))), default = structure(list(), class = c("collector_character",
+    "collector")), skip = 1), class = "col_spec"), class = "data.frame")
+
   expected_outcome_message <- "\\d+ records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   ###########################
@@ -122,8 +143,33 @@ test_that("col_types", {
     FALSE, FALSE), race___4 = c(FALSE, FALSE, TRUE, FALSE, FALSE
     ), race___5 = c(TRUE, TRUE, TRUE, TRUE, FALSE), race___6 = c(FALSE,
     FALSE, FALSE, FALSE, TRUE), ethnicity = c(1, 1, 0, 1, 2),
-    race_and_ethnicity_complete = c(2, 0, 2, 2, 2)), row.names = c(NA,
-    -5L), class = "data.frame"
+    race_and_ethnicity_complete = c(2, 0, 2, 2, 2)), class = "data.frame", row.names = c(NA,
+    -5L), spec = structure(list(cols = list(record_id = structure(list(), class = c("collector_integer",
+    "collector")), name_first = structure(list(), class = c("collector_character",
+    "collector")), name_last = structure(list(), class = c("collector_character",
+    "collector")), address = structure(list(), class = c("collector_character",
+    "collector")), telephone = structure(list(), class = c("collector_character",
+    "collector")), email = structure(list(), class = c("collector_character",
+    "collector")), dob = structure(list(format = ""), class = c("collector_date",
+    "collector")), age = structure(list(), class = c("collector_double",
+    "collector")), sex = structure(list(), class = c("collector_double",
+    "collector")), demographics_complete = structure(list(), class = c("collector_double",
+    "collector")), height = structure(list(), class = c("collector_double",
+    "collector")), weight = structure(list(), class = c("collector_double",
+    "collector")), bmi = structure(list(), class = c("collector_double",
+    "collector")), comments = structure(list(), class = c("collector_character",
+    "collector")), mugshot = structure(list(), class = c("collector_character",
+    "collector")), health_complete = structure(list(), class = c("collector_double",
+    "collector")), race___1 = structure(list(), class = c("collector_logical",
+    "collector")), race___2 = structure(list(), class = c("collector_logical",
+    "collector")), race___3 = structure(list(), class = c("collector_logical",
+    "collector")), race___4 = structure(list(), class = c("collector_logical",
+    "collector")), race___5 = structure(list(), class = c("collector_logical",
+    "collector")), race___6 = structure(list(), class = c("collector_logical",
+    "collector")), ethnicity = structure(list(), class = c("collector_double",
+    "collector")), race_and_ethnicity_complete = structure(list(), class = c("collector_double",
+    "collector"))), default = structure(list(), class = c("collector_guess",
+    "collector")), skip = 1), class = "col_spec")
   )
 
   expected_outcome_message <- "\\d+ records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
@@ -133,7 +179,7 @@ test_that("col_types", {
     returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, col_types=col_types, batch_size=2)
   )
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ) # dput(returned_object$data)
   expect_true( returned_object$success)
   expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
   expect_true( returned_object$records_collapsed=="", "A subset of records was not requested.")
@@ -145,7 +191,7 @@ test_that("col_types", {
 test_that("specify forms", {
   testthat::skip_on_cran()
   desired_forms <- c("demographics", "race_and_ethnicity")
-  expected_data_frame <-structure(
+  expected_data_frame <- structure(
     list(record_id = c(1, 2, 3, 4, 5), name_first = c("Nutmeg",
     "Tumtum", "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse",
     "Nutmouse", "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
@@ -160,11 +206,27 @@ test_that("specify forms", {
     0, 0, 1, 0), race___3 = c(0, 1, 0, 0, 0), race___4 = c(0,
     0, 1, 0, 0), race___5 = c(1, 1, 1, 1, 0), race___6 = c(0,
     0, 0, 0, 1), ethnicity = c(1, 1, 0, 1, 2), race_and_ethnicity_complete = c(2,
-    0, 2, 2, 2)), .Names = c("record_id", "name_first", "name_last",
-    "address", "telephone", "email", "dob", "age", "sex", "demographics_complete",
-    "race___1", "race___2", "race___3", "race___4", "race___5", "race___6",
-    "ethnicity", "race_and_ethnicity_complete"), row.names = c(NA,
-    -5L), class = "data.frame"
+    0, 2, 2, 2)), row.names = c(NA, -5L), spec = structure(list(
+    cols = list(record_id = structure(list(), class = c("collector_character",
+    "collector")), name_first = structure(list(), class = c("collector_character",
+    "collector")), name_last = structure(list(), class = c("collector_character",
+    "collector")), address = structure(list(), class = c("collector_character",
+    "collector")), telephone = structure(list(), class = c("collector_character",
+    "collector")), email = structure(list(), class = c("collector_character",
+    "collector")), dob = structure(list(), class = c("collector_character",
+    "collector")), age = structure(list(), class = c("collector_character",
+    "collector")), sex = structure(list(), class = c("collector_character",
+    "collector")), demographics_complete = structure(list(), class = c("collector_character",
+    "collector")), race___1 = structure(list(), class = c("collector_character",
+    "collector")), race___2 = structure(list(), class = c("collector_character",
+    "collector")), race___3 = structure(list(), class = c("collector_character",
+    "collector")), race___4 = structure(list(), class = c("collector_character",
+    "collector")), race___5 = structure(list(), class = c("collector_character",
+    "collector")), race___6 = structure(list(), class = c("collector_character",
+    "collector")), ethnicity = structure(list(), class = c("collector_character",
+    "collector")), race_and_ethnicity_complete = structure(list(), class = c("collector_character",
+    "collector"))), default = structure(list(), class = c("collector_character",
+    "collector")), skip = 1), class = "col_spec"), class = "data.frame"
   )
   expected_outcome_message <- "\\d+ records and 18 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
@@ -200,71 +262,89 @@ test_that("specify forms", {
 test_that("raw", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(
-    list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
-    "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
-    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
+    list(record_id = c(1, 2, 3, 4, 5), name_first = c("Nutmeg",
+    "Tumtum", "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse",
+    "Nutmouse", "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
     "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402",
     "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
     ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333",
     "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com",
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = structure(c(12294, 12121, -13051, -6269, -5375), class = "Date"),
-    age = c(11L, 11L, 80L, 61L, 59L), sex = c(0L, 1L, 1L, 0L,
-    1L), demographics_complete = c(2L, 2L, 2L, 2L, 2L), height = c(7,
-    6, 180, 165, 193.04), weight = c(1L, 1L, 80L, 54L, 104L),
-    bmi = c(204.1, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing",
-    "A mouse character from a good book", "completely made up",
-    "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
+    age = c(11, 11, 80, 61, 59), sex = c(0, 1, 1, 0, 1), demographics_complete = c(2,
+    2, 2, 2, 2), height = c(7, 6, 180, 165, 193.04), weight = c(1,
+    1, 80, 54, 104), bmi = c(204.1, 277.8, 24.7, 19.8, 27.9),
+    comments = c("Character in a book, with some guessing", "A mouse character from a good book",
+    "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
     ), mugshot = c("[document]", "[document]", "[document]",
-    "[document]", "[document]"), health_complete = c(1L, 0L,
-    2L, 2L, 0L), race___1 = c(0L, 0L, 0L, 0L, 1L), race___2 = c(0L,
-    0L, 0L, 1L, 0L), race___3 = c(0L, 1L, 0L, 0L, 0L), race___4 = c(0L,
-    0L, 1L, 0L, 0L), race___5 = c(1L, 1L, 1L, 1L, 0L), race___6 = c(0L,
-    0L, 0L, 0L, 1L), ethnicity = c(1L, 1L, 0L, 1L, 2L), race_and_ethnicity_complete = c(2L,
-    0L, 2L, 2L, 2L)), .Names = c("record_id", "name_first", "name_last",
-    "address", "telephone", "email", "dob", "age", "sex", "demographics_complete",
-    "height", "weight", "bmi", "comments", "mugshot", "health_complete",
-    "race___1", "race___2", "race___3", "race___4", "race___5", "race___6",
-    "ethnicity", "race_and_ethnicity_complete"), row.names = c(NA,
-    -5L), class = "data.frame"
-  )
+    "[document]", "[document]"), health_complete = c(1, 0, 2,
+    2, 0), race___1 = c(0, 0, 0, 0, 1), race___2 = c(0, 0, 0,
+    1, 0), race___3 = c(0, 1, 0, 0, 0), race___4 = c(0, 0, 1,
+    0, 0), race___5 = c(1, 1, 1, 1, 0), race___6 = c(0, 0, 0,
+    0, 1), ethnicity = c(1, 1, 0, 1, 2), race_and_ethnicity_complete = c(2,
+    0, 2, 2, 2)), row.names = c(NA, -5L), spec = structure(list(
+    cols = list(record_id = structure(list(), class = c("collector_character",
+    "collector")), name_first = structure(list(), class = c("collector_character",
+    "collector")), name_last = structure(list(), class = c("collector_character",
+    "collector")), address = structure(list(), class = c("collector_character",
+    "collector")), telephone = structure(list(), class = c("collector_character",
+    "collector")), email = structure(list(), class = c("collector_character",
+    "collector")), dob = structure(list(), class = c("collector_character",
+    "collector")), age = structure(list(), class = c("collector_character",
+    "collector")), sex = structure(list(), class = c("collector_character",
+    "collector")), demographics_complete = structure(list(), class = c("collector_character",
+    "collector")), height = structure(list(), class = c("collector_character",
+    "collector")), weight = structure(list(), class = c("collector_character",
+    "collector")), bmi = structure(list(), class = c("collector_character",
+    "collector")), comments = structure(list(), class = c("collector_character",
+    "collector")), mugshot = structure(list(), class = c("collector_character",
+    "collector")), health_complete = structure(list(), class = c("collector_character",
+    "collector")), race___1 = structure(list(), class = c("collector_character",
+    "collector")), race___2 = structure(list(), class = c("collector_character",
+    "collector")), race___3 = structure(list(), class = c("collector_character",
+    "collector")), race___4 = structure(list(), class = c("collector_character",
+    "collector")), race___5 = structure(list(), class = c("collector_character",
+    "collector")), race___6 = structure(list(), class = c("collector_character",
+    "collector")), ethnicity = structure(list(), class = c("collector_character",
+    "collector")), race_and_ethnicity_complete = structure(list(), class = c("collector_character",
+    "collector"))), default = structure(list(), class = c("collector_character",
+    "collector")), skip = 1), class = "col_spec"), class = "data.frame")
 
-  expected_outcome_message <- "\\d+ records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+    expected_outcome_message <- "\\d+ records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  ###########################
-  ## Default Batch size
-  expect_message(
+    ###########################
+    ## Default Batch size
+    expect_message(
     regexp            = expected_outcome_message,
     returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token)
-  )
-  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
-  expect_true(returned_object1$success)
-  expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
-  expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
-  expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
-  expect_true(returned_object1$filter_logic=="", "A filter was not specified.")
-  expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+    )
+    expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
+    expect_true(returned_object1$success)
+    expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
+    expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
+    expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
+    expect_true(returned_object1$filter_logic=="", "A filter was not specified.")
+    expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 
-  ###########################
-  ## Tiny Batch size
-  expect_message(
+    ###########################
+    ## Tiny Batch size
+    expect_message(
     regexp            = expected_outcome_message,
     returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, batch_size=2)
-  )
+    )
 
-  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
-  expect_true(returned_object2$success)
-  expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
-  expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
-  expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
-  expect_true(returned_object2$filter_logic=="", "A filter was not specified.")
-  expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
-})
-test_that("raw and DAG", {
-  testthat::skip_on_cran()
-  expected_data_frame <- structure(
-    list(record_id = 1:5, redcap_data_access_group = c("dag_1",
+    expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
+    expect_true(returned_object2$success)
+    expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
+    expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
+    expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
+    expect_true(returned_object2$filter_logic=="", "A filter was not specified.")
+    expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+    })
+    test_that("raw and DAG", {
+    testthat::skip_on_cran()
+    expected_data_frame <- structure(list(record_id = c(1, 2, 3, 4, 5), redcap_data_access_group = c("dag_1",
     "dag_1", "dag_1", NA, "dag_2"), name_first = c("Nutmeg", "Tumtum",
     "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
     "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
@@ -274,26 +354,48 @@ test_that("raw and DAG", {
     "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com",
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = structure(c(12294, 12121, -13051, -6269, -5375), class = "Date"),
-    age = c(11L, 11L, 80L, 61L, 59L), sex = c(0L, 1L, 1L, 0L,
-    1L), demographics_complete = c(2L, 2L, 2L, 2L, 2L), height = c(7,
-    6, 180, 165, 193.04), weight = c(1L, 1L, 80L, 54L, 104L),
-    bmi = c(204.1, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing",
-    "A mouse character from a good book", "completely made up",
-    "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
+    age = c(11, 11, 80, 61, 59), sex = c(0, 1, 1, 0, 1), demographics_complete = c(2,
+    2, 2, 2, 2), height = c(7, 6, 180, 165, 193.04), weight = c(1,
+    1, 80, 54, 104), bmi = c(204.1, 277.8, 24.7, 19.8, 27.9),
+    comments = c("Character in a book, with some guessing", "A mouse character from a good book",
+    "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
     ), mugshot = c("[document]", "[document]", "[document]",
-    "[document]", "[document]"), health_complete = c(1L, 0L,
-    2L, 2L, 0L), race___1 = c(0L, 0L, 0L, 0L, 1L), race___2 = c(0L,
-    0L, 0L, 1L, 0L), race___3 = c(0L, 1L, 0L, 0L, 0L), race___4 = c(0L,
-    0L, 1L, 0L, 0L), race___5 = c(1L, 1L, 1L, 1L, 0L), race___6 = c(0L,
-    0L, 0L, 0L, 1L), ethnicity = c(1L, 1L, 0L, 1L, 2L), race_and_ethnicity_complete = c(2L,
-    0L, 2L, 2L, 2L)), .Names = c("record_id", "redcap_data_access_group",
-    "name_first", "name_last", "address", "telephone", "email", "dob",
-    "age", "sex", "demographics_complete", "height", "weight", "bmi",
-    "comments", "mugshot", "health_complete", "race___1", "race___2",
-    "race___3", "race___4", "race___5", "race___6", "ethnicity",
-    "race_and_ethnicity_complete"), row.names = c(NA, -5L), class = "data.frame"
+    "[document]", "[document]"), health_complete = c(1, 0, 2,
+    2, 0), race___1 = c(0, 0, 0, 0, 1), race___2 = c(0, 0, 0,
+    1, 0), race___3 = c(0, 1, 0, 0, 0), race___4 = c(0, 0, 1,
+    0, 0), race___5 = c(1, 1, 1, 1, 0), race___6 = c(0, 0, 0,
+    0, 1), ethnicity = c(1, 1, 0, 1, 2), race_and_ethnicity_complete = c(2,
+    0, 2, 2, 2)), row.names = c(NA, -5L), spec = structure(list(
+    cols = list(record_id = structure(list(), class = c("collector_character",
+    "collector")), redcap_data_access_group = structure(list(), class = c("collector_character",
+    "collector")), name_first = structure(list(), class = c("collector_character",
+    "collector")), name_last = structure(list(), class = c("collector_character",
+    "collector")), address = structure(list(), class = c("collector_character",
+    "collector")), telephone = structure(list(), class = c("collector_character",
+    "collector")), email = structure(list(), class = c("collector_character",
+    "collector")), dob = structure(list(), class = c("collector_character",
+    "collector")), age = structure(list(), class = c("collector_character",
+    "collector")), sex = structure(list(), class = c("collector_character",
+    "collector")), demographics_complete = structure(list(), class = c("collector_character",
+    "collector")), height = structure(list(), class = c("collector_character",
+    "collector")), weight = structure(list(), class = c("collector_character",
+    "collector")), bmi = structure(list(), class = c("collector_character",
+    "collector")), comments = structure(list(), class = c("collector_character",
+    "collector")), mugshot = structure(list(), class = c("collector_character",
+    "collector")), health_complete = structure(list(), class = c("collector_character",
+    "collector")), race___1 = structure(list(), class = c("collector_character",
+    "collector")), race___2 = structure(list(), class = c("collector_character",
+    "collector")), race___3 = structure(list(), class = c("collector_character",
+    "collector")), race___4 = structure(list(), class = c("collector_character",
+    "collector")), race___5 = structure(list(), class = c("collector_character",
+    "collector")), race___6 = structure(list(), class = c("collector_character",
+    "collector")), ethnicity = structure(list(), class = c("collector_character",
+    "collector")), race_and_ethnicity_complete = structure(list(), class = c("collector_character",
+    "collector"))), default = structure(list(), class = c("collector_character",
+    "collector")), skip = 1), class = "col_spec"), class = "data.frame"
   )
+
   expected_outcome_message <- "\\d+ records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   ###########################
@@ -328,7 +430,7 @@ test_that("raw and DAG", {
 test_that("label and DAG -one single batch", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(
-    list(record_id = 1:5, redcap_data_access_group = c("dag_1",
+    list(record_id = c(1, 2, 3, 4, 5), redcap_data_access_group = c("dag_1",
     "dag_1", "dag_1", NA, "dag_2"), name_first = c("Nutmeg", "Tumtum",
     "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
     "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
@@ -338,11 +440,11 @@ test_that("label and DAG -one single batch", {
     "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com",
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = structure(c(12294, 12121, -13051, -6269, -5375), class = "Date"),
-    age = c(11L, 11L, 80L, 61L, 59L), sex = c("Female", "Male",
-    "Male", "Female", "Male"), demographics_complete = c("Complete",
+    age = c(11, 11, 80, 61, 59), sex = c("Female", "Male", "Male",
+    "Female", "Male"), demographics_complete = c("Complete",
     "Complete", "Complete", "Complete", "Complete"), height = c(7,
-    6, 180, 165, 193.04), weight = c(1L, 1L, 80L, 54L, 104L),
-    bmi = c(204.1, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing",
+    6, 180, 165, 193.04), weight = c(1, 1, 80, 54, 104), bmi = c(204.1,
+    277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing",
     "A mouse character from a good book", "completely made up",
     "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
@@ -357,13 +459,34 @@ test_that("label and DAG -one single batch", {
     "Unchecked", "Unchecked", "Unchecked", "Checked"), ethnicity = c("NOT Hispanic or Latino",
     "NOT Hispanic or Latino", "Unknown / Not Reported", "NOT Hispanic or Latino",
     "Hispanic or Latino"), race_and_ethnicity_complete = c("Complete",
-    "Incomplete", "Complete", "Complete", "Complete")), .Names = c("record_id",
-    "redcap_data_access_group", "name_first", "name_last", "address",
-    "telephone", "email", "dob", "age", "sex", "demographics_complete",
-    "height", "weight", "bmi", "comments", "mugshot", "health_complete",
-    "race___1", "race___2", "race___3", "race___4", "race___5", "race___6",
-    "ethnicity", "race_and_ethnicity_complete"), row.names = c(NA,
-    -5L), class = "data.frame"
+    "Incomplete", "Complete", "Complete", "Complete")), row.names = c(NA,
+    -5L), spec = structure(list(cols = list(record_id = structure(list(), class = c("collector_character",
+    "collector")), redcap_data_access_group = structure(list(), class = c("collector_character",
+    "collector")), name_first = structure(list(), class = c("collector_character",
+    "collector")), name_last = structure(list(), class = c("collector_character",
+    "collector")), address = structure(list(), class = c("collector_character",
+    "collector")), telephone = structure(list(), class = c("collector_character",
+    "collector")), email = structure(list(), class = c("collector_character",
+    "collector")), dob = structure(list(), class = c("collector_character",
+    "collector")), age = structure(list(), class = c("collector_character",
+    "collector")), sex = structure(list(), class = c("collector_character",
+    "collector")), demographics_complete = structure(list(), class = c("collector_character",
+    "collector")), height = structure(list(), class = c("collector_character",
+    "collector")), weight = structure(list(), class = c("collector_character",
+    "collector")), bmi = structure(list(), class = c("collector_character",
+    "collector")), comments = structure(list(), class = c("collector_character",
+    "collector")), mugshot = structure(list(), class = c("collector_character",
+    "collector")), health_complete = structure(list(), class = c("collector_character",
+    "collector")), race___1 = structure(list(), class = c("collector_character",
+    "collector")), race___2 = structure(list(), class = c("collector_character",
+    "collector")), race___3 = structure(list(), class = c("collector_character",
+    "collector")), race___4 = structure(list(), class = c("collector_character",
+    "collector")), race___5 = structure(list(), class = c("collector_character",
+    "collector")), race___6 = structure(list(), class = c("collector_character",
+    "collector")), ethnicity = structure(list(), class = c("collector_character",
+    "collector")), race_and_ethnicity_complete = structure(list(), class = c("collector_character",
+    "collector"))), default = structure(list(), class = c("collector_character",
+    "collector")), skip = 1), class = "col_spec"), class = "data.frame"
   )
   expected_outcome_message <- "\\d+ records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
@@ -384,7 +507,7 @@ test_that("label and DAG -one single batch", {
 test_that("label and DAG -three tiny batches", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(
-    list(record_id = 1:5, redcap_data_access_group = c("dag_1",
+    list(record_id = c(1, 2, 3, 4, 5), redcap_data_access_group = c("dag_1",
     "dag_1", "dag_1", NA, "dag_2"), name_first = c("Nutmeg", "Tumtum",
     "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
     "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
@@ -394,11 +517,11 @@ test_that("label and DAG -three tiny batches", {
     "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com",
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = structure(c(12294, 12121, -13051, -6269, -5375), class = "Date"),
-    age = c(11L, 11L, 80L, 61L, 59L), sex = c("Female", "Male",
-    "Male", "Female", "Male"), demographics_complete = c("Complete",
+    age = c(11, 11, 80, 61, 59), sex = c("Female", "Male", "Male",
+    "Female", "Male"), demographics_complete = c("Complete",
     "Complete", "Complete", "Complete", "Complete"), height = c(7,
-    6, 180, 165, 193.04), weight = c(1L, 1L, 80L, 54L, 104L),
-    bmi = c(204.1, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing",
+    6, 180, 165, 193.04), weight = c(1, 1, 80, 54, 104), bmi = c(204.1,
+    277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing",
     "A mouse character from a good book", "completely made up",
     "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
@@ -413,14 +536,36 @@ test_that("label and DAG -three tiny batches", {
     "Unchecked", "Unchecked", "Unchecked", "Checked"), ethnicity = c("NOT Hispanic or Latino",
     "NOT Hispanic or Latino", "Unknown / Not Reported", "NOT Hispanic or Latino",
     "Hispanic or Latino"), race_and_ethnicity_complete = c("Complete",
-    "Incomplete", "Complete", "Complete", "Complete")), .Names = c("record_id",
-    "redcap_data_access_group", "name_first", "name_last", "address",
-    "telephone", "email", "dob", "age", "sex", "demographics_complete",
-    "height", "weight", "bmi", "comments", "mugshot", "health_complete",
-    "race___1", "race___2", "race___3", "race___4", "race___5", "race___6",
-    "ethnicity", "race_and_ethnicity_complete"), row.names = c(NA,
-    -5L), class = "data.frame"
+    "Incomplete", "Complete", "Complete", "Complete")), row.names = c(NA,
+    -5L), spec = structure(list(cols = list(record_id = structure(list(), class = c("collector_character",
+    "collector")), redcap_data_access_group = structure(list(), class = c("collector_character",
+    "collector")), name_first = structure(list(), class = c("collector_character",
+    "collector")), name_last = structure(list(), class = c("collector_character",
+    "collector")), address = structure(list(), class = c("collector_character",
+    "collector")), telephone = structure(list(), class = c("collector_character",
+    "collector")), email = structure(list(), class = c("collector_character",
+    "collector")), dob = structure(list(), class = c("collector_character",
+    "collector")), age = structure(list(), class = c("collector_character",
+    "collector")), sex = structure(list(), class = c("collector_character",
+    "collector")), demographics_complete = structure(list(), class = c("collector_character",
+    "collector")), height = structure(list(), class = c("collector_character",
+    "collector")), weight = structure(list(), class = c("collector_character",
+    "collector")), bmi = structure(list(), class = c("collector_character",
+    "collector")), comments = structure(list(), class = c("collector_character",
+    "collector")), mugshot = structure(list(), class = c("collector_character",
+    "collector")), health_complete = structure(list(), class = c("collector_character",
+    "collector")), race___1 = structure(list(), class = c("collector_character",
+    "collector")), race___2 = structure(list(), class = c("collector_character",
+    "collector")), race___3 = structure(list(), class = c("collector_character",
+    "collector")), race___4 = structure(list(), class = c("collector_character",
+    "collector")), race___5 = structure(list(), class = c("collector_character",
+    "collector")), race___6 = structure(list(), class = c("collector_character",
+    "collector")), ethnicity = structure(list(), class = c("collector_character",
+    "collector")), race_and_ethnicity_complete = structure(list(), class = c("collector_character",
+    "collector"))), default = structure(list(), class = c("collector_character",
+    "collector")), skip = 1), class = "col_spec"), class = "data.frame"
   )
+
   expected_outcome_message <- "\\d+ records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   ###########################
@@ -429,7 +574,7 @@ test_that("label and DAG -three tiny batches", {
     regexp            = expected_outcome_message,
     returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups=TRUE, batch_size=2)
   )
-  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
+  expect_equal(as.data.frame(tibble::as_tibble(returned_object2$data)), expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
   expect_true(returned_object2$success)
   expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
@@ -440,20 +585,20 @@ test_that("label and DAG -three tiny batches", {
 test_that("label", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(
-    list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
-    "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
-    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
+    list(record_id = c(1, 2, 3, 4, 5), name_first = c("Nutmeg",
+    "Tumtum", "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse",
+    "Nutmouse", "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
     "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402",
     "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
     ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333",
     "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com",
     "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
     ), dob = structure(c(12294, 12121, -13051, -6269, -5375), class = "Date"),
-    age = c(11L, 11L, 80L, 61L, 59L), sex = c("Female", "Male",
-    "Male", "Female", "Male"), demographics_complete = c("Complete",
+    age = c(11, 11, 80, 61, 59), sex = c("Female", "Male", "Male",
+    "Female", "Male"), demographics_complete = c("Complete",
     "Complete", "Complete", "Complete", "Complete"), height = c(7,
-    6, 180, 165, 193.04), weight = c(1L, 1L, 80L, 54L, 104L),
-    bmi = c(204.1, 277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing",
+    6, 180, 165, 193.04), weight = c(1, 1, 80, 54, 104), bmi = c(204.1,
+    277.8, 24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing",
     "A mouse character from a good book", "completely made up",
     "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
@@ -468,12 +613,33 @@ test_that("label", {
     "Unchecked", "Unchecked", "Unchecked", "Checked"), ethnicity = c("NOT Hispanic or Latino",
     "NOT Hispanic or Latino", "Unknown / Not Reported", "NOT Hispanic or Latino",
     "Hispanic or Latino"), race_and_ethnicity_complete = c("Complete",
-    "Incomplete", "Complete", "Complete", "Complete")), .Names = c("record_id",
-    "name_first", "name_last", "address", "telephone", "email", "dob",
-    "age", "sex", "demographics_complete", "height", "weight", "bmi",
-    "comments", "mugshot", "health_complete", "race___1", "race___2",
-    "race___3", "race___4", "race___5", "race___6", "ethnicity",
-    "race_and_ethnicity_complete"), row.names = c(NA, -5L), class = "data.frame"
+    "Incomplete", "Complete", "Complete", "Complete")), row.names = c(NA,
+    -5L), spec = structure(list(cols = list(record_id = structure(list(), class = c("collector_character",
+    "collector")), name_first = structure(list(), class = c("collector_character",
+    "collector")), name_last = structure(list(), class = c("collector_character",
+    "collector")), address = structure(list(), class = c("collector_character",
+    "collector")), telephone = structure(list(), class = c("collector_character",
+    "collector")), email = structure(list(), class = c("collector_character",
+    "collector")), dob = structure(list(), class = c("collector_character",
+    "collector")), age = structure(list(), class = c("collector_character",
+    "collector")), sex = structure(list(), class = c("collector_character",
+    "collector")), demographics_complete = structure(list(), class = c("collector_character",
+    "collector")), height = structure(list(), class = c("collector_character",
+    "collector")), weight = structure(list(), class = c("collector_character",
+    "collector")), bmi = structure(list(), class = c("collector_character",
+    "collector")), comments = structure(list(), class = c("collector_character",
+    "collector")), mugshot = structure(list(), class = c("collector_character",
+    "collector")), health_complete = structure(list(), class = c("collector_character",
+    "collector")), race___1 = structure(list(), class = c("collector_character",
+    "collector")), race___2 = structure(list(), class = c("collector_character",
+    "collector")), race___3 = structure(list(), class = c("collector_character",
+    "collector")), race___4 = structure(list(), class = c("collector_character",
+    "collector")), race___5 = structure(list(), class = c("collector_character",
+    "collector")), race___6 = structure(list(), class = c("collector_character",
+    "collector")), ethnicity = structure(list(), class = c("collector_character",
+    "collector")), race_and_ethnicity_complete = structure(list(), class = c("collector_character",
+    "collector"))), default = structure(list(), class = c("collector_character",
+    "collector")), skip = 1), class = "col_spec"), class = "data.frame"
   )
 
   expected_outcome_message <- "\\d+ records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
@@ -624,12 +790,33 @@ test_that("export_checkbox_label", {
     ), ethnicity = c("NOT Hispanic or Latino", "NOT Hispanic or Latino",
     "Unknown / Not Reported", "NOT Hispanic or Latino", "Hispanic or Latino"
     ), race_and_ethnicity_complete = c("Complete", "Incomplete",
-    "Complete", "Complete", "Complete")), .Names = c("record_id",
-    "name_first", "name_last", "address", "telephone", "email", "dob",
-    "age", "sex", "demographics_complete", "height", "weight", "bmi",
-    "comments", "mugshot", "health_complete", "race___1", "race___2",
-    "race___3", "race___4", "race___5", "race___6", "ethnicity",
-    "race_and_ethnicity_complete"), row.names = c(NA, -5L), class = "data.frame"
+    "Complete", "Complete", "Complete")), row.names = c(NA, -5L
+    ), spec = structure(list(cols = list(record_id = structure(list(), class = c("collector_character",
+    "collector")), name_first = structure(list(), class = c("collector_character",
+    "collector")), name_last = structure(list(), class = c("collector_character",
+    "collector")), address = structure(list(), class = c("collector_character",
+    "collector")), telephone = structure(list(), class = c("collector_character",
+    "collector")), email = structure(list(), class = c("collector_character",
+    "collector")), dob = structure(list(), class = c("collector_character",
+    "collector")), age = structure(list(), class = c("collector_character",
+    "collector")), sex = structure(list(), class = c("collector_character",
+    "collector")), demographics_complete = structure(list(), class = c("collector_character",
+    "collector")), height = structure(list(), class = c("collector_character",
+    "collector")), weight = structure(list(), class = c("collector_character",
+    "collector")), bmi = structure(list(), class = c("collector_character",
+    "collector")), comments = structure(list(), class = c("collector_character",
+    "collector")), mugshot = structure(list(), class = c("collector_character",
+    "collector")), health_complete = structure(list(), class = c("collector_character",
+    "collector")), race___1 = structure(list(), class = c("collector_character",
+    "collector")), race___2 = structure(list(), class = c("collector_character",
+    "collector")), race___3 = structure(list(), class = c("collector_character",
+    "collector")), race___4 = structure(list(), class = c("collector_character",
+    "collector")), race___5 = structure(list(), class = c("collector_character",
+    "collector")), race___6 = structure(list(), class = c("collector_character",
+    "collector")), ethnicity = structure(list(), class = c("collector_character",
+    "collector")), race_and_ethnicity_complete = structure(list(), class = c("collector_character",
+    "collector"))), default = structure(list(), class = c("collector_character",
+    "collector")), skip = 1), class = "col_spec"), class = "data.frame"
   )
   expected_outcome_message <- "\\d+ records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
@@ -664,23 +851,45 @@ test_that("export_checkbox_label", {
 test_that("filter - numeric", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(
-    list(record_id = 3:4, name_first = c("Marcus", "Trudy"
-    ), name_last = c("Wood", "DAG"), address = c("243 Hill St.\nGuthrie OK 73402",
+    list(record_id = c(3, 4), name_first = c("Marcus",
+    "Trudy"), name_last = c("Wood", "DAG"), address = c("243 Hill St.\nGuthrie OK 73402",
     "342 Elm\nDuncanville TX, 75116"), telephone = c("(405) 321-3333",
     "(405) 321-4444"), email = c("mw@mwood.net", "peroxide@blonde.com"
-    ), dob = structure(c(-13051, -6269), class = "Date"), age = c(80L,
-    61L), sex = c(1L, 0L), demographics_complete = c(2L, 2L), height = c(180L,
-    165L), weight = c(80L, 54L), bmi = c(24.7, 19.8), comments = c("completely made up",
+    ), dob = structure(c(-13051, -6269), class = "Date"), age = c(80,
+    61), sex = c(1, 0), demographics_complete = c(2, 2), height = c(180,
+    165), weight = c(80, 54), bmi = c(24.7, 19.8), comments = c("completely made up",
     "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail"
-    ), mugshot = c("[document]", "[document]"), health_complete = c(2L,
-    2L), race___1 = c(0L, 0L), race___2 = 0:1, race___3 = c(0L, 0L
-    ), race___4 = c(1L, 0L), race___5 = c(1L, 1L), race___6 = c(0L,
-    0L), ethnicity = 0:1, race_and_ethnicity_complete = c(2L, 2L)), .Names = c("record_id",
-    "name_first", "name_last", "address", "telephone", "email", "dob",
-    "age", "sex", "demographics_complete", "height", "weight", "bmi",
-    "comments", "mugshot", "health_complete", "race___1", "race___2",
-    "race___3", "race___4", "race___5", "race___6", "ethnicity",
-    "race_and_ethnicity_complete"), row.names = c(NA, -2L), class = "data.frame"
+    ), mugshot = c("[document]", "[document]"), health_complete = c(2,
+    2), race___1 = c(0, 0), race___2 = c(0, 1), race___3 = c(0, 0
+    ), race___4 = c(1, 0), race___5 = c(1, 1), race___6 = c(0, 0),
+    ethnicity = c(0, 1), race_and_ethnicity_complete = c(2, 2
+    )), row.names = c(NA, -2L), spec = structure(list(cols = list(
+    record_id = structure(list(), class = c("collector_character",
+    "collector")), name_first = structure(list(), class = c("collector_character",
+    "collector")), name_last = structure(list(), class = c("collector_character",
+    "collector")), address = structure(list(), class = c("collector_character",
+    "collector")), telephone = structure(list(), class = c("collector_character",
+    "collector")), email = structure(list(), class = c("collector_character",
+    "collector")), dob = structure(list(), class = c("collector_character",
+    "collector")), age = structure(list(), class = c("collector_character",
+    "collector")), sex = structure(list(), class = c("collector_character",
+    "collector")), demographics_complete = structure(list(), class = c("collector_character",
+    "collector")), height = structure(list(), class = c("collector_character",
+    "collector")), weight = structure(list(), class = c("collector_character",
+    "collector")), bmi = structure(list(), class = c("collector_character",
+    "collector")), comments = structure(list(), class = c("collector_character",
+    "collector")), mugshot = structure(list(), class = c("collector_character",
+    "collector")), health_complete = structure(list(), class = c("collector_character",
+    "collector")), race___1 = structure(list(), class = c("collector_character",
+    "collector")), race___2 = structure(list(), class = c("collector_character",
+    "collector")), race___3 = structure(list(), class = c("collector_character",
+    "collector")), race___4 = structure(list(), class = c("collector_character",
+    "collector")), race___5 = structure(list(), class = c("collector_character",
+    "collector")), race___6 = structure(list(), class = c("collector_character",
+    "collector")), ethnicity = structure(list(), class = c("collector_character",
+    "collector")), race_and_ethnicity_complete = structure(list(), class = c("collector_character",
+    "collector"))), default = structure(list(), class = c("collector_character",
+    "collector")), skip = 1), class = "col_spec"), class = "data.frame"
   )
 
   expected_outcome_message <- "2 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
@@ -701,19 +910,40 @@ test_that("filter - numeric", {
 test_that("filter - character", {
   testthat::skip_on_cran()
   expected_data_frame <- structure(
-    list(record_id = 5L, name_first = "John Lee", name_last = "Walker",
+    list(record_id = 5, name_first = "John Lee", name_last = "Walker",
     address = "Hotel Suite\nNew Orleans LA, 70115", telephone = "(405) 321-5555",
     email = "left@hippocket.com", dob = structure(-5375, class = "Date"),
-    age = 59L, sex = 1L, demographics_complete = 2L, height = 193.04,
-    weight = 104L, bmi = 27.9, comments = "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache",
-    mugshot = "[document]", health_complete = 0L, race___1 = 1L,
-    race___2 = 0L, race___3 = 0L, race___4 = 0L, race___5 = 0L,
-    race___6 = 1L, ethnicity = 2L, race_and_ethnicity_complete = 2L), .Names = c("record_id",
-    "name_first", "name_last", "address", "telephone", "email", "dob",
-    "age", "sex", "demographics_complete", "height", "weight", "bmi",
-    "comments", "mugshot", "health_complete", "race___1", "race___2",
-    "race___3", "race___4", "race___5", "race___6", "ethnicity",
-    "race_and_ethnicity_complete"), row.names = c(NA, -1L), class = "data.frame"
+    age = 59, sex = 1, demographics_complete = 2, height = 193.04,
+    weight = 104, bmi = 27.9, comments = "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache",
+    mugshot = "[document]", health_complete = 0, race___1 = 1,
+    race___2 = 0, race___3 = 0, race___4 = 0, race___5 = 0, race___6 = 1,
+    ethnicity = 2, race_and_ethnicity_complete = 2), row.names = c(NA,
+    -1L), spec = structure(list(cols = list(record_id = structure(list(), class = c("collector_character",
+    "collector")), name_first = structure(list(), class = c("collector_character",
+    "collector")), name_last = structure(list(), class = c("collector_character",
+    "collector")), address = structure(list(), class = c("collector_character",
+    "collector")), telephone = structure(list(), class = c("collector_character",
+    "collector")), email = structure(list(), class = c("collector_character",
+    "collector")), dob = structure(list(), class = c("collector_character",
+    "collector")), age = structure(list(), class = c("collector_character",
+    "collector")), sex = structure(list(), class = c("collector_character",
+    "collector")), demographics_complete = structure(list(), class = c("collector_character",
+    "collector")), height = structure(list(), class = c("collector_character",
+    "collector")), weight = structure(list(), class = c("collector_character",
+    "collector")), bmi = structure(list(), class = c("collector_character",
+    "collector")), comments = structure(list(), class = c("collector_character",
+    "collector")), mugshot = structure(list(), class = c("collector_character",
+    "collector")), health_complete = structure(list(), class = c("collector_character",
+    "collector")), race___1 = structure(list(), class = c("collector_character",
+    "collector")), race___2 = structure(list(), class = c("collector_character",
+    "collector")), race___3 = structure(list(), class = c("collector_character",
+    "collector")), race___4 = structure(list(), class = c("collector_character",
+    "collector")), race___5 = structure(list(), class = c("collector_character",
+    "collector")), race___6 = structure(list(), class = c("collector_character",
+    "collector")), ethnicity = structure(list(), class = c("collector_character",
+    "collector")), race_and_ethnicity_complete = structure(list(), class = c("collector_character",
+    "collector"))), default = structure(list(), class = c("collector_character",
+    "collector")), skip = 1), class = "col_spec"), class = "data.frame"
   )
 
   expected_outcome_message <- "1 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."

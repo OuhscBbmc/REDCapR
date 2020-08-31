@@ -108,7 +108,7 @@ test_that("Metadata Normal", {
     "field_note", "text_validation_type_or_show_slider_number", "text_validation_min",
     "text_validation_max", "identifier", "branching_logic", "required_field",
     "custom_alignment", "question_number", "matrix_group_name", "matrix_ranking",
-    "field_annotation"), row.names = c(NA, -16L), class = c("tbl_df",
+    "field_annotation"), row.names = c(NA, -16L), class = c("spec_tbl_df", "tbl_df",
     "tbl", "data.frame"), spec = structure(list(cols = structure(list(
     field_name = structure(list(), class = c("collector_character",
     "collector")), form_name = structure(list(), class = c("collector_character",

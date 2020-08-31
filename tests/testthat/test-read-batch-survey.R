@@ -1,6 +1,5 @@
 library(testthat)
 
-
 credential          <- retrieve_credential_testing(817L)
 project             <- redcap_project$new(redcap_uri=credential$redcap_uri, token=credential$token)
 directory_relative  <- "test-data/project-survey/expected"

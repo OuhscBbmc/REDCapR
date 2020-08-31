@@ -22,7 +22,7 @@ test_that("All Records -Default", {
     "health_complete", "race___1", "race___2", "race___3", "race___4",
     "race___5", "race___6", "ethnicity", "race_and_ethnicity_complete"
     )), .Names = c("original_field_name", "choice_value", "export_field_name"
-    ), row.names = c(NA, -23L), class = c("tbl_df", "tbl", "data.frame"
+    ), row.names = c(NA, -23L), class = c("spec_tbl_df", "tbl_df", "tbl", "data.frame"
     ), spec = structure(list(cols = structure(list(original_field_name = structure(list(), class = c("collector_character",
     "collector")), choice_value = structure(list(), class = c("collector_double",
     "collector")), export_field_name = structure(list(), class = c("collector_character",

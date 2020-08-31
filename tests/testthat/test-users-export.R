@@ -39,7 +39,7 @@ test_that("with DAGs", {
     list(username = c("unittestphifree", "wbeasleya"),
     form_name = c("demographics", "demographics"), permission_id = c(1L,
     1L), permission = structure(c(3L, 3L), .Label = c("no_access",
-    "readonly", "edit_form", "edit_survey", "unknown"), class = "factor")), class = c("tbl_df",
+    "readonly", "edit_form", "edit_survey", "unknown"), class = "factor")), class = c("spec_tbl_df", "tbl_df",
     "tbl", "data.frame"), row.names = c(NA, -2L)
   )
 
@@ -80,7 +80,7 @@ test_that("without DAGs", {
     FALSE), record_create = c(TRUE, TRUE), record_rename = c(FALSE,
     FALSE), record_delete = c(FALSE, FALSE), lock_records_all_forms = c(FALSE,
     FALSE), lock_records = c(FALSE, FALSE), lock_records_customization = c(FALSE,
-    FALSE)), row.names = c(NA, -2L), class = c("tbl_df", "tbl",
+    FALSE)), row.names = c(NA, -2L), class = c("spec_tbl_df", "tbl_df", "tbl",
     "data.frame")
   )
   expected_data_user_form <- structure(
@@ -89,7 +89,7 @@ test_that("without DAGs", {
     "health", "race_and_ethnicity", "demographics", "health", "race_and_ethnicity"
     ), permission_id = c(1L, 1L, 1L, 1L, 1L, 1L), permission = structure(c(3L,
     3L, 3L, 3L, 3L, 3L), .Label = c("no_access", "readonly", "edit_form",
-    "edit_survey", "unknown"), class = "factor")), class = c("tbl_df", "tbl",
+    "edit_survey", "unknown"), class = "factor")), class = c("spec_tbl_df", "tbl_df", "tbl",
     "data.frame"), row.names = c(NA, -6L)
   )
 
