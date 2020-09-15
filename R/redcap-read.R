@@ -204,7 +204,7 @@ redcap_read <- function(
 
   if (!is.null(guess_max)) warning("The `guess_max` parameter in `REDCapR::redcap_read()` is deprecated.")
   checkmate::assert_logical(  verbose                   , any.missing=FALSE,     len=1, null.ok=TRUE)
-  checkmate::assert_list(     config_options            , any.missing=TRUE ,     len=1, null.ok=TRUE)
+  checkmate::assert_list(     config_options            , any.missing=TRUE ,            null.ok=TRUE)
   checkmate::assert_integer(  id_position               , any.missing=FALSE,     len=1, lower=1L)
 
   validate_field_names(fields, stop_on_error = TRUE)
