@@ -5,3 +5,15 @@ retrieve_credential_testing <- function(project_id = 153L) {
     project_id      = project_id
   )
 }
+
+save_expected <- function (o, path) {
+  path <- file.path("inst", path)
+  dput(o, path)
+}
+
+retrieve_expected <- function (path) {
+  full_path   <- system.file(path, package = "REDCapR")
+  if (!file.exists(full_path))
+    stop("The expected file `", full_path, "` was not found.")
+  dget(full_path)
+}
