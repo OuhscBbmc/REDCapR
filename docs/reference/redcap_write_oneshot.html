@@ -86,7 +86,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9001</span>
       </span>
     </div>
 
@@ -144,11 +144,12 @@
     </div>
 
     <pre class="usage"><span class='fu'>redcap_write_oneshot</span>(
-  <span class='no'>ds</span>,
-  <span class='no'>redcap_uri</span>,
-  <span class='no'>token</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+  <span class='kw'>ds</span>,
+  <span class='kw'>redcap_uri</span>,
+  <span class='kw'>token</span>,
+  convert_logical_to_integer = <span class='fl'>FALSE</span>,
+  verbose = <span class='fl'>TRUE</span>,
+  config_options = <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -168,6 +169,13 @@ project.  Required.</p></td>
       <th>token</th>
       <td><p>The user-specific string that serves as the password for a
 project.  Required.</p></td>
+    </tr>
+    <tr>
+      <th>convert_logical_to_integer</th>
+      <td><p>If <code>TRUE</code>, all <a href='https://rdrr.io/r/base/logical.html'>base::logical</a> columns
+in <code>ds</code> are cast to an integer before uploading to REDCap.
+Boolean values are typically represented as 0/1 in REDCap radio buttons.
+Optional.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -214,37 +222,41 @@ https://community.projectredcap.org/articles/456/api-documentation.html and
 https://community.projectredcap.org/articles/462/api-examples.html).
 If you do not have an account for the wiki, please ask your campus REDCap
 administrator to send you the static material.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Will Beasley</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'>#Define some constants</span>
-<span class='no'>uri</span>            <span class='kw'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class='no'>token</span>          <span class='kw'>&lt;-</span> <span class='st'>"D70F9ACD1EDD6F151C6EA78683944E98"</span>
+<span class='kw'>uri</span>            <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class='kw'>token</span>          <span class='op'>&lt;-</span> <span class='st'>"D70F9ACD1EDD6F151C6EA78683944E98"</span>
 
 <span class='co'># Read the dataset for the first time.</span>
-<span class='no'>result_read1</span>   <span class='kw'>&lt;-</span> <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='redcap_read_oneshot.html'>redcap_read_oneshot</a></span>(<span class='kw'>redcap_uri</span><span class='kw'>=</span><span class='no'>uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>)
-<span class='no'>ds1</span>            <span class='kw'>&lt;-</span> <span class='no'>result_read1</span>$<span class='no'>data</span>
-<span class='no'>ds1</span>$<span class='no'>telephone</span>
+<span class='kw'>result_read1</span>   <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='fu'><a href='redcap_read_oneshot.html'>redcap_read_oneshot</a></span>(redcap_uri=<span class='kw'>uri</span>, token=<span class='kw'>token</span>)
+<span class='kw'>ds1</span>            <span class='op'>&lt;-</span> <span class='kw'>result_read1</span><span class='op'>$</span><span class='kw'>data</span>
+<span class='kw'>ds1</span><span class='op'>$</span><span class='kw'>telephone</span>
 
 <span class='co'># Manipulate a field in the dataset in a VALID way</span>
-<span class='no'>ds1</span>$<span class='no'>telephone</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"(405) 321-000"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>ds1</span>)))
+<span class='kw'>ds1</span><span class='op'>$</span><span class='kw'>telephone</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"(405) 321-000"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='kw'>ds1</span>)))
 
-<span class='no'>ds1</span> <span class='kw'>&lt;-</span> <span class='no'>ds1</span>[<span class='fl'>1</span>:<span class='fl'>3</span>, ]
-<span class='no'>ds1</span>$<span class='no'>age</span>        <span class='kw'>&lt;-</span> <span class='kw'>NULL</span>; <span class='no'>ds1</span>$<span class='no'>bmi</span> <span class='kw'>&lt;-</span> <span class='kw'>NULL</span> <span class='co'>#Drop the calculated fields before writing.</span>
-<span class='no'>result_write</span>   <span class='kw'>&lt;-</span> <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>redcap_write_oneshot</span>(<span class='kw'>ds</span><span class='kw'>=</span><span class='no'>ds1</span>, <span class='kw'>redcap_uri</span><span class='kw'>=</span><span class='no'>uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>)
+<span class='kw'>ds1</span> <span class='op'>&lt;-</span> <span class='kw'>ds1</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, ]
+<span class='kw'>ds1</span><span class='op'>$</span><span class='kw'>age</span>        <span class='op'>&lt;-</span> <span class='kw'>NULL</span>; <span class='kw'>ds1</span><span class='op'>$</span><span class='kw'>bmi</span> <span class='op'>&lt;-</span> <span class='kw'>NULL</span> <span class='co'>#Drop the calculated fields before writing.</span>
+<span class='kw'>result_write</span>   <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='fu'>redcap_write_oneshot</span>(ds=<span class='kw'>ds1</span>, redcap_uri=<span class='kw'>uri</span>, token=<span class='kw'>token</span>)
 
 <span class='co'># Read the dataset for the second time.</span>
-<span class='no'>result_read2</span>   <span class='kw'>&lt;-</span> <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'><a href='redcap_read_oneshot.html'>redcap_read_oneshot</a></span>(<span class='kw'>redcap_uri</span><span class='kw'>=</span><span class='no'>uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>)
-<span class='no'>ds2</span>            <span class='kw'>&lt;-</span> <span class='no'>result_read2</span>$<span class='no'>data</span>
-<span class='no'>ds2</span>$<span class='no'>telephone</span>
+<span class='kw'>result_read2</span>   <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='fu'><a href='redcap_read_oneshot.html'>redcap_read_oneshot</a></span>(redcap_uri=<span class='kw'>uri</span>, token=<span class='kw'>token</span>)
+<span class='kw'>ds2</span>            <span class='op'>&lt;-</span> <span class='kw'>result_read2</span><span class='op'>$</span><span class='kw'>data</span>
+<span class='kw'>ds2</span><span class='op'>$</span><span class='kw'>telephone</span>
 
 <span class='co'># Manipulate a field in the dataset in an INVALID way.  A US exchange can't be '111'.</span>
-<span class='no'>ds1</span>$<span class='no'>telephone</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"(405) 321-000"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>ds1</span>)))
+<span class='kw'>ds1</span><span class='op'>$</span><span class='kw'>telephone</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"(405) 321-000"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='kw'>ds1</span>)))
 
 <span class='co'># This next line will throw an error.</span>
-<span class='no'>result_write</span>   <span class='kw'>&lt;-</span> <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>redcap_write_oneshot</span>(<span class='kw'>ds</span><span class='kw'>=</span><span class='no'>ds1</span>, <span class='kw'>redcap_uri</span><span class='kw'>=</span><span class='no'>uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>)
-<span class='no'>result_write</span>$<span class='no'>raw_text</span>
-}</div></pre>
+<span class='kw'>result_write</span>   <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='fu'>redcap_write_oneshot</span>(ds=<span class='kw'>ds1</span>, redcap_uri=<span class='kw'>uri</span>, token=<span class='kw'>token</span>)
+<span class='kw'>result_write</span><span class='op'>$</span><span class='kw'>raw_text</span>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -260,7 +272,7 @@ administrator to send you the static material.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

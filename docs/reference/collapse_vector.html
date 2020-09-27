@@ -90,7 +90,7 @@ vector. This functions squashes them together in a single character element
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9001</span>
       </span>
     </div>
 
@@ -151,7 +151,7 @@ vector. This functions squashes them together in a single character element
 (presumably right before the return value is passed to the API)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>collapse_vector</span>(<span class='no'>elements</span>, <span class='no'>collapsed</span>)</pre>
+    <pre class="usage"><span class='fu'>collapse_vector</span>(<span class='kw'>elements</span>, <span class='kw'>collapsed</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -171,10 +171,16 @@ by commas.  Can be <code>NULL</code>.  Required.</p></td>
 
     <p>A single character element, where the values are separated by
 commas.  Can be blank. (<em>i.e.</em>, <code>""</code>).</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Will Beasley</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>REDCapR</span>) <span class='co'>#Load the package into the current R session.</span>
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>:::</span><span class='fu'>collapse_vector</span>(<span class='kw'>elements</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>collapsed</span><span class='kw'>=</span><span class='kw'>NULL</span>)</div><div class='output co'>#&gt; [1] ""</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>:::</span><span class='fu'>collapse_vector</span>(<span class='kw'>elements</span><span class='kw'>=</span><span class='no'>letters</span>, <span class='kw'>collapsed</span><span class='kw'>=</span><span class='kw'>NULL</span>)</div><div class='output co'>#&gt; [1] "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z"</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>:::</span><span class='fu'>collapse_vector</span>(<span class='kw'>elements</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>collapsed</span><span class='kw'>=</span><span class='st'>"4,5,6"</span>)</div><div class='output co'>#&gt; [1] "4,5,6"</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/OuhscBbmc/REDCapR'>REDCapR</a></span>) <span class='co'>#Load the package into the current R session.</span>
+<span class='kw'>REDCapR</span>:::<span class='fu'>collapse_vector</span>(elements=<span class='kw'>NULL</span>, collapsed=<span class='kw'>NULL</span>)
+</div><div class='output co'>#&gt; [1] ""</div><div class='input'><span class='kw'>REDCapR</span>:::<span class='fu'>collapse_vector</span>(elements=<span class='kw'>letters</span>, collapsed=<span class='kw'>NULL</span>)
+</div><div class='output co'>#&gt; [1] "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z"</div><div class='input'><span class='kw'>REDCapR</span>:::<span class='fu'>collapse_vector</span>(elements=<span class='kw'>NULL</span>, collapsed=<span class='st'>"4,5,6"</span>)
+</div><div class='output co'>#&gt; [1] "4,5,6"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -190,7 +196,7 @@ commas.  Can be blank. (<em>i.e.</em>, <code>""</code>).</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

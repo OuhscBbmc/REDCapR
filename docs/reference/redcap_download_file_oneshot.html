@@ -86,7 +86,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9001</span>
       </span>
     </div>
 
@@ -144,18 +144,18 @@
     </div>
 
     <pre class="usage"><span class='fu'>redcap_download_file_oneshot</span>(
-  <span class='kw'>file_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>directory</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>redcap_uri</span>,
-  <span class='no'>token</span>,
-  <span class='no'>record</span>,
-  <span class='no'>field</span>,
-  <span class='kw'>event</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>repeat_instrument</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>repeat_instance</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+  file_name = <span class='kw'>NULL</span>,
+  directory = <span class='kw'>NULL</span>,
+  overwrite = <span class='fl'>FALSE</span>,
+  <span class='kw'>redcap_uri</span>,
+  <span class='kw'>token</span>,
+  <span class='kw'>record</span>,
+  <span class='kw'>field</span>,
+  event = <span class='st'>""</span>,
+  repeat_instrument = <span class='kw'>NULL</span>,
+  repeat_instance = <span class='kw'>NULL</span>,
+  verbose = <span class='fl'>TRUE</span>,
+  config_options = <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -259,43 +259,47 @@ https://community.projectredcap.org/articles/456/api-documentation.html and
 https://community.projectredcap.org/articles/462/api-examples.html).
 If you do not have an account for the wiki, please ask your campus REDCap
 administrator to send you the static material.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Will Beasley, John J. Aponte</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>uri</span>     <span class='kw'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class='no'>token</span>   <span class='kw'>&lt;-</span> <span class='st'>"D70F9ACD1EDD6F151C6EA78683944E98"</span> <span class='co'>#pid=213</span>
-<span class='no'>record</span>  <span class='kw'>&lt;-</span> <span class='fl'>1</span>
-<span class='no'>field</span>   <span class='kw'>&lt;-</span> <span class='st'>"mugshot"</span>
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>uri</span>     <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class='kw'>token</span>   <span class='op'>&lt;-</span> <span class='st'>"D70F9ACD1EDD6F151C6EA78683944E98"</span> <span class='co'>#pid=213</span>
+<span class='kw'>record</span>  <span class='op'>&lt;-</span> <span class='fl'>1</span>
+<span class='kw'>field</span>   <span class='op'>&lt;-</span> <span class='st'>"mugshot"</span>
 <span class='co'># event &lt;- "" # only for longitudinal projects</span>
 
-<span class='no'>result_1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>redcap_download_file_oneshot</span>(
-  <span class='kw'>record</span>        <span class='kw'>=</span> <span class='no'>record</span>,
-  <span class='kw'>field</span>         <span class='kw'>=</span> <span class='no'>field</span>,
-  <span class='kw'>redcap_uri</span>    <span class='kw'>=</span> <span class='no'>uri</span>,
-  <span class='kw'>token</span>         <span class='kw'>=</span> <span class='no'>token</span>
+<span class='kw'>result_1</span> <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='fu'>redcap_download_file_oneshot</span>(
+  record        = <span class='kw'>record</span>,
+  field         = <span class='kw'>field</span>,
+  redcap_uri    = <span class='kw'>uri</span>,
+  token         = <span class='kw'>token</span>
 )
-<span class='kw pkg'>base</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='st'>"mugshot-1.jpg"</span>)
+<span class='kw'>base</span>::<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='st'>"mugshot-1.jpg"</span>)
 
-(<span class='no'>full_name</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>base</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(<span class='kw'>pattern</span><span class='kw'>=</span><span class='st'>"mugshot"</span>, <span class='kw'>fileext</span><span class='kw'>=</span><span class='st'>".jpg"</span>))
-<span class='no'>result_2</span>   <span class='kw'>&lt;-</span> <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>redcap_download_file_oneshot</span>(
-  <span class='kw'>file_name</span>     <span class='kw'>=</span> <span class='no'>full_name</span>,
-  <span class='kw'>record</span>        <span class='kw'>=</span> <span class='no'>record</span>,
-  <span class='kw'>field</span>         <span class='kw'>=</span> <span class='no'>field</span>,
-  <span class='kw'>redcap_uri</span>    <span class='kw'>=</span> <span class='no'>uri</span>,
-  <span class='kw'>token</span>         <span class='kw'>=</span> <span class='no'>token</span>
+(<span class='kw'>full_name</span> <span class='op'>&lt;-</span> <span class='kw'>base</span>::<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(pattern=<span class='st'>"mugshot"</span>, fileext=<span class='st'>".jpg"</span>))
+<span class='kw'>result_2</span>   <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='fu'>redcap_download_file_oneshot</span>(
+  file_name     = <span class='kw'>full_name</span>,
+  record        = <span class='kw'>record</span>,
+  field         = <span class='kw'>field</span>,
+  redcap_uri    = <span class='kw'>uri</span>,
+  token         = <span class='kw'>token</span>
 )
-<span class='kw pkg'>base</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='no'>full_name</span>)
+<span class='kw'>base</span>::<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='kw'>full_name</span>)
 
-(<span class='no'>relative_name</span> <span class='kw'>&lt;-</span> <span class='st'>"ssss.jpg"</span>)
-<span class='no'>result_3</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>redcap_download_file_oneshot</span>(
-  <span class='kw'>file_name</span>    <span class='kw'>=</span> <span class='no'>relative_name</span>,
-  <span class='kw'>record</span>       <span class='kw'>=</span> <span class='no'>record</span>,
-  <span class='kw'>field</span>        <span class='kw'>=</span> <span class='no'>field</span>,
-  <span class='kw'>redcap_uri</span>   <span class='kw'>=</span> <span class='no'>uri</span>,
-  <span class='kw'>token</span>        <span class='kw'>=</span> <span class='no'>token</span>
+(<span class='kw'>relative_name</span> <span class='op'>&lt;-</span> <span class='st'>"ssss.jpg"</span>)
+<span class='kw'>result_3</span> <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='fu'>redcap_download_file_oneshot</span>(
+  file_name    = <span class='kw'>relative_name</span>,
+  record       = <span class='kw'>record</span>,
+  field        = <span class='kw'>field</span>,
+  redcap_uri   = <span class='kw'>uri</span>,
+  token        = <span class='kw'>token</span>
 )
-<span class='kw pkg'>base</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='no'>relative_name</span>)
-}</div></pre>
+<span class='kw'>base</span>::<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='kw'>relative_name</span>)
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -311,7 +315,7 @@ administrator to send you the static material.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

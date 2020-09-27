@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9001</span>
       </span>
     </div>
 
@@ -90,7 +90,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Security Database</h1>
             
-            <h4 class="date">2020-08-30</h4>
+            <h4 class="date">2020-09-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/SecurityDatabase.Rmd"><code>vignettes/SecurityDatabase.Rmd</code></a></small>
       <div class="hidden name"><code>SecurityDatabase.Rmd</code></div>
@@ -263,161 +263,161 @@
 <li>Combine &amp; groom the credentials.</li>
 <li>Upload to SQL Server (called <code>auxiliary_security</code> here).</li>
 </ol>
-<div class="sourceCode" id="cb3"><html><body><pre class="r">rm(list=ls(all=TRUE)) #Clear the memory for any variables set from any previous runs.
-
-# ---- load-sources ------------------------------------------------------------
-
-# ---- load-packages -----------------------------------------------------------
-if (!require(OuhscMunge))
-  stop('The `OuhscMunge` package needs to be installed with `remotes::install_github("OuhscBbmc/OuhscMunge")`.')
-
-testit::assert(
-  "The `OuhscMunge` package should meet a minimal version.",
-  compareVersion( as.character(packageVersion("OuhscMunge")), "0.1.9.9009") &gt;= 0L
-)
-
-library(magrittr)
-requireNamespace("DBI")
-requireNamespace("odbc")
-requireNamespace("dplyr")
-requireNamespace("readr")
-requireNamespace("tibble")
-requireNamespace("testit")
-requireNamespace("checkmate")
-requireNamespace("OuhscMunge")  # remotes::install_github("OuhscBbmc/OuhscMunge")
-
-
-# ---- declare-globals ---------------------------------------------------------
-# This file assume your campus has two REDCap instances.
-# Modify each (a) database name, (b) REDCap URL, and (c) DSN name.
-
-name_production &lt;- "production"
-name_dev        &lt;- "dev"
-
-uri_production  &lt;- "https://redcap-production.ouhsc.edu/redcap/api/",
-uri_dev         &lt;- "https://redcap-dev.ouhsc.edu/redcap/api/"
-
-dsn_production  &lt;- "redcap-production"
-dsn_dev         &lt;- "redcap-dev"
-dsn_source      &lt;- "auxiliary_security" # The DSN of the token server.
-
-# The Activity Directory name that should precede each username.
-#   This should correspond with the result of SQL Server's `SYSTEM_USER` function
-#   (https://msdn.microsoft.com/en-us/library/ms179930.aspx)
-ldap_prefix &lt;- "OUHSC\\"
-
-####
-# Nothing below this line should need to change, assuming:
-# 1. the vignette was followed exactly (https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html),
-# 2. your campus has exactly two REDCap instances.
-
-# SQL sent to the MySQL database underneath each REDCap instance.
-sql &lt;- "
-  SELECT username, project_id, api_token
-  FROM redcap_user_rights
-  WHERE api_token IS NOT NULL
-"
-
-# Update this ad-hoc CSV.  Each row should represent one REDCap instance.
-ds_url &lt;- tibble::tribble(
-  ~instance         , ~redcap_uri,
-  name_production   , uri_production,
-  name_dev          , uri_dev
-)
-
-# Remove variables that aren't used below.
-rm(uri_production, uri_dev)
-
-
-# ---- load-data ---------------------------------------------------------------
-
-# Load the credentials from the first/production REDCap instance.
-cnn_production  &lt;- DBI::dbConnect(odbc::odbc(), dsn=dsn_production)
-ds_production   &lt;- DBI::dbGetQuery(cnn_production, sql)
-DBI::dbDisconnect(cnn_production); rm(cnn_production, dsn_production)
-
-# Load the credentials from the second/dev REDCap instance.
-cnn_dev         &lt;- DBI::dbConnect(odbc::odbc(), dsn=dsn_dev)
-ds_dev          &lt;- DBI::dbGetQuery(cnn_dev, sql)
-DBI::dbDisconnect(cnn_dev); rm(cnn_dev, dsn_dev)
-
-rm(sql)
-
-# Assert these are valid datasets and contain at least 5 rows.
-#   Adjust '5' to smaller value if necessary.  It's just to catch blatant retrieval problems.
-checkmate::assert_data_frame(ds_production, min.rows=5)
-checkmate::assert_data_frame(ds_dev       , min.rows=5)
-
-
-# ---- tweak-data --------------------------------------------------------------
-
-# Label each instance, so they're distinguishable later.
-ds_production$instance &lt;- name_production
-ds_dev$instance        &lt;- name_dev
-
-# Stack the token collection from each instance.  Then prefix the username and include the URL of each instance.
-ds &lt;-
-  ds_production %&gt;%
-  dplyr::union(ds_dev) %&gt;%                                # Remove union if the dev instance isn't included.
-  tibble::as_tibble() %&gt;%
-  dplyr::select(
-    username        = username,
-    project_id      = project_id,
-    instance        = instance,
-    token           = api_token
-  ) %&gt;%
-  dplyr::mutate(
-    username        = paste0(ldap_prefix, username), # Qualify for the Active Directory.
-  ) %&gt;%
-  dplyr::left_join( ds_url, by="instance") %&gt;%            # Include the instance URL.
-  dplyr::arrange(instance, project_id, username) %&gt;%
-  tibble::rowid_to_column("id")                           # For the sake of a clustered primary key.
-
-rm(ds_production, ds_dev, ds_url)
-rm(name_production, name_dev)
-rm(ldap_prefix)
-
-
-# ---- verify-values -----------------------------------------------------------
-
-# Assert that the dataset is well-behaved.
-# OuhscMunge::verify_value_headstart(ds)
-checkmate::assert_integer(  ds$id         , any.missing=FALSE, lower=1, upper=.Machine$integer.max, unique=TRUE)
-checkmate::assert_character(ds$username   , any.missing=FALSE, pattern="^.{1,255}$"                         )
-checkmate::assert_integer(  ds$project_id , any.missing=FALSE, lower=1, upper=.Machine$integer.max          )
-checkmate::assert_character(ds$token      , any.missing=FALSE, pattern="^[A-Z0-9]{32}$"           , unique=TRUE)
-checkmate::assert_character(ds$instance   , any.missing=FALSE, pattern="^.{1,255}$"                         )
-checkmate::assert_character(ds$redcap_uri , any.missing=FALSE, pattern="^.{1,255}$"                         )
-
-testit::assert(
-  "The `username` x `project_id` x `instance` must be unique.",
-  sum(duplicated(paste0(ds$username, "-", ds$project_id, "-", ds$instance))) == 0L
-)
-
-testit::assert("At least 10 tokens should be ready to write." , 10L &lt;= nrow(ds))
-
-
-# ---- specify-columns-to-upload -----------------------------------------------
-
-# Dictate the exact columns and order that will be uploaded.
-columns_to_write &lt;- c("id", "username", "project_id", "instance", "token", "redcap_uri")
-ds_slim          &lt;- ds[, columns_to_write]
-rm(columns_to_write)
-
-
-# ---- upload-to-db ------------------------------------------------------------------
-
-OuhscMunge::upload_sqls_odbc(
-  d               = ds_slim,
-  schema_name     = "redcap_private",
-  table_name      = "tbl_credential",
-  dsn_name        = dsn_source,
-  create_table    = FALSE,
-  clear_table     = TRUE,
-  transaction     = TRUE,
-  verbose         = TRUE
-)
-# Uploading 252 tokens takes 0.004 minutes.</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>(<span class="dt">all=</span><span class="ot">TRUE</span>)) <span class="co">#Clear the memory for any variables set from any previous runs.</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co"># ---- load-sources ------------------------------------------------------------</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># ---- load-packages -----------------------------------------------------------</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(OuhscMunge))</span>
+<span id="cb3-7"><a href="#cb3-7"></a>  <span class="kw">stop</span>(<span class="st">'The `OuhscMunge` package needs to be installed with `remotes::install_github("OuhscBbmc/OuhscMunge")`.'</span>)</span>
+<span id="cb3-8"><a href="#cb3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9"></a>testit<span class="op">::</span><span class="kw">assert</span>(</span>
+<span id="cb3-10"><a href="#cb3-10"></a>  <span class="st">"The `OuhscMunge` package should meet a minimal version."</span>,</span>
+<span id="cb3-11"><a href="#cb3-11"></a>  <span class="kw">compareVersion</span>( <span class="kw">as.character</span>(<span class="kw">packageVersion</span>(<span class="st">"OuhscMunge"</span>)), <span class="st">"0.1.9.9009"</span>) <span class="op">&gt;=</span><span class="st"> </span>0L</span>
+<span id="cb3-12"><a href="#cb3-12"></a>)</span>
+<span id="cb3-13"><a href="#cb3-13"></a></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="kw">library</span>(magrittr)</span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="kw">requireNamespace</span>(<span class="st">"DBI"</span>)</span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="kw">requireNamespace</span>(<span class="st">"odbc"</span>)</span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="kw">requireNamespace</span>(<span class="st">"dplyr"</span>)</span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="kw">requireNamespace</span>(<span class="st">"readr"</span>)</span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="kw">requireNamespace</span>(<span class="st">"tibble"</span>)</span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="kw">requireNamespace</span>(<span class="st">"testit"</span>)</span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="kw">requireNamespace</span>(<span class="st">"checkmate"</span>)</span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="kw">requireNamespace</span>(<span class="st">"OuhscMunge"</span>)  <span class="co"># remotes::install_github("OuhscBbmc/OuhscMunge")</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a></span>
+<span id="cb3-24"><a href="#cb3-24"></a></span>
+<span id="cb3-25"><a href="#cb3-25"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
+<span id="cb3-26"><a href="#cb3-26"></a><span class="co"># This file assume your campus has two REDCap instances.</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a><span class="co"># Modify each (a) database name, (b) REDCap URL, and (c) DSN name.</span></span>
+<span id="cb3-28"><a href="#cb3-28"></a></span>
+<span id="cb3-29"><a href="#cb3-29"></a>name_production &lt;-<span class="st"> "production"</span></span>
+<span id="cb3-30"><a href="#cb3-30"></a>name_dev        &lt;-<span class="st"> "dev"</span></span>
+<span id="cb3-31"><a href="#cb3-31"></a></span>
+<span id="cb3-32"><a href="#cb3-32"></a>uri_production  &lt;-<span class="st"> "https://redcap-production.ouhsc.edu/redcap/api/"</span>,</span>
+<span id="cb3-33"><a href="#cb3-33"></a>uri_dev         &lt;-<span class="st"> "https://redcap-dev.ouhsc.edu/redcap/api/"</span></span>
+<span id="cb3-34"><a href="#cb3-34"></a></span>
+<span id="cb3-35"><a href="#cb3-35"></a>dsn_production  &lt;-<span class="st"> "redcap-production"</span></span>
+<span id="cb3-36"><a href="#cb3-36"></a>dsn_dev         &lt;-<span class="st"> "redcap-dev"</span></span>
+<span id="cb3-37"><a href="#cb3-37"></a>dsn_source      &lt;-<span class="st"> "auxiliary_security"</span> <span class="co"># The DSN of the token server.</span></span>
+<span id="cb3-38"><a href="#cb3-38"></a></span>
+<span id="cb3-39"><a href="#cb3-39"></a><span class="co"># The Activity Directory name that should precede each username.</span></span>
+<span id="cb3-40"><a href="#cb3-40"></a><span class="co">#   This should correspond with the result of SQL Server's `SYSTEM_USER` function</span></span>
+<span id="cb3-41"><a href="#cb3-41"></a><span class="co">#   (https://msdn.microsoft.com/en-us/library/ms179930.aspx)</span></span>
+<span id="cb3-42"><a href="#cb3-42"></a>ldap_prefix &lt;-<span class="st"> "OUHSC</span><span class="ch">\\</span><span class="st">"</span></span>
+<span id="cb3-43"><a href="#cb3-43"></a></span>
+<span id="cb3-44"><a href="#cb3-44"></a><span class="co">####</span></span>
+<span id="cb3-45"><a href="#cb3-45"></a><span class="co"># Nothing below this line should need to change, assuming:</span></span>
+<span id="cb3-46"><a href="#cb3-46"></a><span class="co"># 1. the vignette was followed exactly (https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html),</span></span>
+<span id="cb3-47"><a href="#cb3-47"></a><span class="co"># 2. your campus has exactly two REDCap instances.</span></span>
+<span id="cb3-48"><a href="#cb3-48"></a></span>
+<span id="cb3-49"><a href="#cb3-49"></a><span class="co"># SQL sent to the MySQL database underneath each REDCap instance.</span></span>
+<span id="cb3-50"><a href="#cb3-50"></a>sql &lt;-<span class="st"> "</span></span>
+<span id="cb3-51"><a href="#cb3-51"></a><span class="st">  SELECT username, project_id, api_token</span></span>
+<span id="cb3-52"><a href="#cb3-52"></a><span class="st">  FROM redcap_user_rights</span></span>
+<span id="cb3-53"><a href="#cb3-53"></a><span class="st">  WHERE api_token IS NOT NULL</span></span>
+<span id="cb3-54"><a href="#cb3-54"></a><span class="st">"</span></span>
+<span id="cb3-55"><a href="#cb3-55"></a></span>
+<span id="cb3-56"><a href="#cb3-56"></a><span class="co"># Update this ad-hoc CSV.  Each row should represent one REDCap instance.</span></span>
+<span id="cb3-57"><a href="#cb3-57"></a>ds_url &lt;-<span class="st"> </span>tibble<span class="op">::</span><span class="kw">tribble</span>(</span>
+<span id="cb3-58"><a href="#cb3-58"></a>  <span class="op">~</span>instance         , <span class="op">~</span>redcap_uri,</span>
+<span id="cb3-59"><a href="#cb3-59"></a>  name_production   , uri_production,</span>
+<span id="cb3-60"><a href="#cb3-60"></a>  name_dev          , uri_dev</span>
+<span id="cb3-61"><a href="#cb3-61"></a>)</span>
+<span id="cb3-62"><a href="#cb3-62"></a></span>
+<span id="cb3-63"><a href="#cb3-63"></a><span class="co"># Remove variables that aren't used below.</span></span>
+<span id="cb3-64"><a href="#cb3-64"></a><span class="kw">rm</span>(uri_production, uri_dev)</span>
+<span id="cb3-65"><a href="#cb3-65"></a></span>
+<span id="cb3-66"><a href="#cb3-66"></a></span>
+<span id="cb3-67"><a href="#cb3-67"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span>
+<span id="cb3-68"><a href="#cb3-68"></a></span>
+<span id="cb3-69"><a href="#cb3-69"></a><span class="co"># Load the credentials from the first/production REDCap instance.</span></span>
+<span id="cb3-70"><a href="#cb3-70"></a>cnn_production  &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(odbc<span class="op">::</span><span class="kw">odbc</span>(), <span class="dt">dsn=</span>dsn_production)</span>
+<span id="cb3-71"><a href="#cb3-71"></a>ds_production   &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(cnn_production, sql)</span>
+<span id="cb3-72"><a href="#cb3-72"></a>DBI<span class="op">::</span><span class="kw">dbDisconnect</span>(cnn_production); <span class="kw">rm</span>(cnn_production, dsn_production)</span>
+<span id="cb3-73"><a href="#cb3-73"></a></span>
+<span id="cb3-74"><a href="#cb3-74"></a><span class="co"># Load the credentials from the second/dev REDCap instance.</span></span>
+<span id="cb3-75"><a href="#cb3-75"></a>cnn_dev         &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(odbc<span class="op">::</span><span class="kw">odbc</span>(), <span class="dt">dsn=</span>dsn_dev)</span>
+<span id="cb3-76"><a href="#cb3-76"></a>ds_dev          &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(cnn_dev, sql)</span>
+<span id="cb3-77"><a href="#cb3-77"></a>DBI<span class="op">::</span><span class="kw">dbDisconnect</span>(cnn_dev); <span class="kw">rm</span>(cnn_dev, dsn_dev)</span>
+<span id="cb3-78"><a href="#cb3-78"></a></span>
+<span id="cb3-79"><a href="#cb3-79"></a><span class="kw">rm</span>(sql)</span>
+<span id="cb3-80"><a href="#cb3-80"></a></span>
+<span id="cb3-81"><a href="#cb3-81"></a><span class="co"># Assert these are valid datasets and contain at least 5 rows.</span></span>
+<span id="cb3-82"><a href="#cb3-82"></a><span class="co">#   Adjust '5' to smaller value if necessary.  It's just to catch blatant retrieval problems.</span></span>
+<span id="cb3-83"><a href="#cb3-83"></a>checkmate<span class="op">::</span><span class="kw">assert_data_frame</span>(ds_production, <span class="dt">min.rows=</span><span class="dv">5</span>)</span>
+<span id="cb3-84"><a href="#cb3-84"></a>checkmate<span class="op">::</span><span class="kw">assert_data_frame</span>(ds_dev       , <span class="dt">min.rows=</span><span class="dv">5</span>)</span>
+<span id="cb3-85"><a href="#cb3-85"></a></span>
+<span id="cb3-86"><a href="#cb3-86"></a></span>
+<span id="cb3-87"><a href="#cb3-87"></a><span class="co"># ---- tweak-data --------------------------------------------------------------</span></span>
+<span id="cb3-88"><a href="#cb3-88"></a></span>
+<span id="cb3-89"><a href="#cb3-89"></a><span class="co"># Label each instance, so they're distinguishable later.</span></span>
+<span id="cb3-90"><a href="#cb3-90"></a>ds_production<span class="op">$</span>instance &lt;-<span class="st"> </span>name_production</span>
+<span id="cb3-91"><a href="#cb3-91"></a>ds_dev<span class="op">$</span>instance        &lt;-<span class="st"> </span>name_dev</span>
+<span id="cb3-92"><a href="#cb3-92"></a></span>
+<span id="cb3-93"><a href="#cb3-93"></a><span class="co"># Stack the token collection from each instance.  Then prefix the username and include the URL of each instance.</span></span>
+<span id="cb3-94"><a href="#cb3-94"></a>ds &lt;-</span>
+<span id="cb3-95"><a href="#cb3-95"></a><span class="st">  </span>ds_production <span class="op">%&gt;%</span></span>
+<span id="cb3-96"><a href="#cb3-96"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">union</span>(ds_dev) <span class="op">%&gt;%</span><span class="st">                                </span><span class="co"># Remove union if the dev instance isn't included.</span></span>
+<span id="cb3-97"><a href="#cb3-97"></a><span class="st">  </span>tibble<span class="op">::</span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></span>
+<span id="cb3-98"><a href="#cb3-98"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(</span>
+<span id="cb3-99"><a href="#cb3-99"></a>    <span class="dt">username        =</span> username,</span>
+<span id="cb3-100"><a href="#cb3-100"></a>    <span class="dt">project_id      =</span> project_id,</span>
+<span id="cb3-101"><a href="#cb3-101"></a>    <span class="dt">instance        =</span> instance,</span>
+<span id="cb3-102"><a href="#cb3-102"></a>    <span class="dt">token           =</span> api_token</span>
+<span id="cb3-103"><a href="#cb3-103"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb3-104"><a href="#cb3-104"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(</span>
+<span id="cb3-105"><a href="#cb3-105"></a>    <span class="dt">username        =</span> <span class="kw">paste0</span>(ldap_prefix, username), <span class="co"># Qualify for the Active Directory.</span></span>
+<span id="cb3-106"><a href="#cb3-106"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb3-107"><a href="#cb3-107"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">left_join</span>( ds_url, <span class="dt">by=</span><span class="st">"instance"</span>) <span class="op">%&gt;%</span><span class="st">            </span><span class="co"># Include the instance URL.</span></span>
+<span id="cb3-108"><a href="#cb3-108"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">arrange</span>(instance, project_id, username) <span class="op">%&gt;%</span></span>
+<span id="cb3-109"><a href="#cb3-109"></a><span class="st">  </span>tibble<span class="op">::</span><span class="kw">rowid_to_column</span>(<span class="st">"id"</span>)                           <span class="co"># For the sake of a clustered primary key.</span></span>
+<span id="cb3-110"><a href="#cb3-110"></a></span>
+<span id="cb3-111"><a href="#cb3-111"></a><span class="kw">rm</span>(ds_production, ds_dev, ds_url)</span>
+<span id="cb3-112"><a href="#cb3-112"></a><span class="kw">rm</span>(name_production, name_dev)</span>
+<span id="cb3-113"><a href="#cb3-113"></a><span class="kw">rm</span>(ldap_prefix)</span>
+<span id="cb3-114"><a href="#cb3-114"></a></span>
+<span id="cb3-115"><a href="#cb3-115"></a></span>
+<span id="cb3-116"><a href="#cb3-116"></a><span class="co"># ---- verify-values -----------------------------------------------------------</span></span>
+<span id="cb3-117"><a href="#cb3-117"></a></span>
+<span id="cb3-118"><a href="#cb3-118"></a><span class="co"># Assert that the dataset is well-behaved.</span></span>
+<span id="cb3-119"><a href="#cb3-119"></a><span class="co"># OuhscMunge::verify_value_headstart(ds)</span></span>
+<span id="cb3-120"><a href="#cb3-120"></a>checkmate<span class="op">::</span><span class="kw">assert_integer</span>(  ds<span class="op">$</span>id         , <span class="dt">any.missing=</span><span class="ot">FALSE</span>, <span class="dt">lower=</span><span class="dv">1</span>, <span class="dt">upper=</span>.Machine<span class="op">$</span>integer.max, <span class="dt">unique=</span><span class="ot">TRUE</span>)</span>
+<span id="cb3-121"><a href="#cb3-121"></a>checkmate<span class="op">::</span><span class="kw">assert_character</span>(ds<span class="op">$</span>username   , <span class="dt">any.missing=</span><span class="ot">FALSE</span>, <span class="dt">pattern=</span><span class="st">"^.{1,255}$"</span>                         )</span>
+<span id="cb3-122"><a href="#cb3-122"></a>checkmate<span class="op">::</span><span class="kw">assert_integer</span>(  ds<span class="op">$</span>project_id , <span class="dt">any.missing=</span><span class="ot">FALSE</span>, <span class="dt">lower=</span><span class="dv">1</span>, <span class="dt">upper=</span>.Machine<span class="op">$</span>integer.max          )</span>
+<span id="cb3-123"><a href="#cb3-123"></a>checkmate<span class="op">::</span><span class="kw">assert_character</span>(ds<span class="op">$</span>token      , <span class="dt">any.missing=</span><span class="ot">FALSE</span>, <span class="dt">pattern=</span><span class="st">"^[A-Z0-9]{32}$"</span>           , <span class="dt">unique=</span><span class="ot">TRUE</span>)</span>
+<span id="cb3-124"><a href="#cb3-124"></a>checkmate<span class="op">::</span><span class="kw">assert_character</span>(ds<span class="op">$</span>instance   , <span class="dt">any.missing=</span><span class="ot">FALSE</span>, <span class="dt">pattern=</span><span class="st">"^.{1,255}$"</span>                         )</span>
+<span id="cb3-125"><a href="#cb3-125"></a>checkmate<span class="op">::</span><span class="kw">assert_character</span>(ds<span class="op">$</span>redcap_uri , <span class="dt">any.missing=</span><span class="ot">FALSE</span>, <span class="dt">pattern=</span><span class="st">"^.{1,255}$"</span>                         )</span>
+<span id="cb3-126"><a href="#cb3-126"></a></span>
+<span id="cb3-127"><a href="#cb3-127"></a>testit<span class="op">::</span><span class="kw">assert</span>(</span>
+<span id="cb3-128"><a href="#cb3-128"></a>  <span class="st">"The `username` x `project_id` x `instance` must be unique."</span>,</span>
+<span id="cb3-129"><a href="#cb3-129"></a>  <span class="kw">sum</span>(<span class="kw">duplicated</span>(<span class="kw">paste0</span>(ds<span class="op">$</span>username, <span class="st">"-"</span>, ds<span class="op">$</span>project_id, <span class="st">"-"</span>, ds<span class="op">$</span>instance))) <span class="op">==</span><span class="st"> </span>0L</span>
+<span id="cb3-130"><a href="#cb3-130"></a>)</span>
+<span id="cb3-131"><a href="#cb3-131"></a></span>
+<span id="cb3-132"><a href="#cb3-132"></a>testit<span class="op">::</span><span class="kw">assert</span>(<span class="st">"At least 10 tokens should be ready to write."</span> , 10L <span class="op">&lt;=</span><span class="st"> </span><span class="kw">nrow</span>(ds))</span>
+<span id="cb3-133"><a href="#cb3-133"></a></span>
+<span id="cb3-134"><a href="#cb3-134"></a></span>
+<span id="cb3-135"><a href="#cb3-135"></a><span class="co"># ---- specify-columns-to-upload -----------------------------------------------</span></span>
+<span id="cb3-136"><a href="#cb3-136"></a></span>
+<span id="cb3-137"><a href="#cb3-137"></a><span class="co"># Dictate the exact columns and order that will be uploaded.</span></span>
+<span id="cb3-138"><a href="#cb3-138"></a>columns_to_write &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"id"</span>, <span class="st">"username"</span>, <span class="st">"project_id"</span>, <span class="st">"instance"</span>, <span class="st">"token"</span>, <span class="st">"redcap_uri"</span>)</span>
+<span id="cb3-139"><a href="#cb3-139"></a>ds_slim          &lt;-<span class="st"> </span>ds[, columns_to_write]</span>
+<span id="cb3-140"><a href="#cb3-140"></a><span class="kw">rm</span>(columns_to_write)</span>
+<span id="cb3-141"><a href="#cb3-141"></a></span>
+<span id="cb3-142"><a href="#cb3-142"></a></span>
+<span id="cb3-143"><a href="#cb3-143"></a><span class="co"># ---- upload-to-db ------------------------------------------------------------------</span></span>
+<span id="cb3-144"><a href="#cb3-144"></a></span>
+<span id="cb3-145"><a href="#cb3-145"></a>OuhscMunge<span class="op">::</span><span class="kw">upload_sqls_odbc</span>(</span>
+<span id="cb3-146"><a href="#cb3-146"></a>  <span class="dt">d               =</span> ds_slim,</span>
+<span id="cb3-147"><a href="#cb3-147"></a>  <span class="dt">schema_name     =</span> <span class="st">"redcap_private"</span>,</span>
+<span id="cb3-148"><a href="#cb3-148"></a>  <span class="dt">table_name      =</span> <span class="st">"tbl_credential"</span>,</span>
+<span id="cb3-149"><a href="#cb3-149"></a>  <span class="dt">dsn_name        =</span> dsn_source,</span>
+<span id="cb3-150"><a href="#cb3-150"></a>  <span class="dt">create_table    =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb3-151"><a href="#cb3-151"></a>  <span class="dt">clear_table     =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb3-152"><a href="#cb3-152"></a>  <span class="dt">transaction     =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb3-153"><a href="#cb3-153"></a>  <span class="dt">verbose         =</span> <span class="ot">TRUE</span></span>
+<span id="cb3-154"><a href="#cb3-154"></a>)</span>
+<span id="cb3-155"><a href="#cb3-155"></a><span class="co"># Uploading 252 tokens takes 0.004 minutes.</span></span></code></pre></div>
 </div>
 <div id="document-info" class="section level1">
 <h1 class="hasAnchor">
@@ -441,7 +441,7 @@ OuhscMunge::upload_sqls_odbc(
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

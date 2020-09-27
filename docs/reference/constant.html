@@ -86,7 +86,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9001</span>
       </span>
     </div>
 
@@ -143,7 +143,7 @@
     <p>Collection of constants defined by the REDCap developers.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>constant</span>(<span class='no'>name</span>)</pre>
+    <pre class="usage"><span class='fu'>constant</span>(<span class='kw'>name</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -195,38 +195,60 @@ The order of these digits may be unexpected.</p><ul>
 on GitHub and submit a pull request.  For instructions, please see
 <a href='https://help.github.com/articles/editing-files-in-another-user-s-repository/'>Editing files in another user's repository</a> # nolint
 in the GitHub documentation.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Will Beasley</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>constant</span>(<span class='st'>"form_incomplete"</span>)  <span class='co'># Returns 0L</span></div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>constant</span>(<span class='st'>"form_unverified"</span>)  <span class='co'># Returns 1L</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>constant</span>(<span class='st'>"form_complete"</span>  )  <span class='co'># Returns 2L</span></div><div class='output co'>#&gt; [1] 2</div><div class='input'>
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>constant</span>(<span class='st'>"data_export_rights_no_access"</span>   )  <span class='co'># Returns 0L</span></div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>constant</span>(<span class='st'>"data_export_rights_deidentified"</span>)  <span class='co'># Returns 1L</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>constant</span>(<span class='st'>"data_export_rights_full"</span>        )  <span class='co'># Returns 2L</span></div><div class='output co'>#&gt; [1] 2</div><div class='input'>
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>constant</span>(<span class='st'>"form_rights_no_access"</span>)   <span class='co'># Returns 0L</span></div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>constant</span>(<span class='st'>"form_rights_readonly"</span> )   <span class='co'># Returns 2L --Notice the order</span></div><div class='output co'>#&gt; [1] 2</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>constant</span>(<span class='st'>"form_rights_edit_form"</span>)   <span class='co'># Returns 1L</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>constant</span>(<span class='st'>"form_rights_edit_survey"</span>) <span class='co'># Returns 3L</span></div><div class='output co'>#&gt; [1] 3</div><div class='input'>
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>constant</span>(<span class='st'>"access_no"</span> )  <span class='co'># Returns 0L</span></div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>constant</span>(<span class='st'>"access_yes"</span>)  <span class='co'># Returns 1L</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'>
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>constant</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
+    <pre class="examples"><div class='input'><span class='kw'>REDCapR</span>::<span class='fu'>constant</span>(<span class='st'>"form_incomplete"</span>)  <span class='co'># Returns 0L</span>
+</div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='kw'>REDCapR</span>::<span class='fu'>constant</span>(<span class='st'>"form_unverified"</span>)  <span class='co'># Returns 1L</span>
+</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='kw'>REDCapR</span>::<span class='fu'>constant</span>(<span class='st'>"form_complete"</span>  )  <span class='co'># Returns 2L</span>
+</div><div class='output co'>#&gt; [1] 2</div><div class='input'>
+<span class='kw'>REDCapR</span>::<span class='fu'>constant</span>(<span class='st'>"data_export_rights_no_access"</span>   )  <span class='co'># Returns 0L</span>
+</div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='kw'>REDCapR</span>::<span class='fu'>constant</span>(<span class='st'>"data_export_rights_deidentified"</span>)  <span class='co'># Returns 1L</span>
+</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='kw'>REDCapR</span>::<span class='fu'>constant</span>(<span class='st'>"data_export_rights_full"</span>        )  <span class='co'># Returns 2L</span>
+</div><div class='output co'>#&gt; [1] 2</div><div class='input'>
+<span class='kw'>REDCapR</span>::<span class='fu'>constant</span>(<span class='st'>"form_rights_no_access"</span>)   <span class='co'># Returns 0L</span>
+</div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='kw'>REDCapR</span>::<span class='fu'>constant</span>(<span class='st'>"form_rights_readonly"</span> )   <span class='co'># Returns 2L --Notice the order</span>
+</div><div class='output co'>#&gt; [1] 2</div><div class='input'><span class='kw'>REDCapR</span>::<span class='fu'>constant</span>(<span class='st'>"form_rights_edit_form"</span>)   <span class='co'># Returns 1L</span>
+</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='kw'>REDCapR</span>::<span class='fu'>constant</span>(<span class='st'>"form_rights_edit_survey"</span>) <span class='co'># Returns 3L</span>
+</div><div class='output co'>#&gt; [1] 3</div><div class='input'>
+<span class='kw'>REDCapR</span>::<span class='fu'>constant</span>(<span class='st'>"access_no"</span> )  <span class='co'># Returns 0L</span>
+</div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='kw'>REDCapR</span>::<span class='fu'>constant</span>(<span class='st'>"access_yes"</span>)  <span class='co'># Returns 1L</span>
+</div><div class='output co'>#&gt; [1] 1</div><div class='input'>
+<span class='kw'>REDCapR</span>::<span class='fu'>constant</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
   <span class='st'>"form_complete"</span>,
   <span class='st'>"form_complete"</span>,
   <span class='st'>"form_incomplete"</span>
-)) <span class='co'># Returns c(2L, 2L, 0L)</span></div><div class='output co'>#&gt; [1] 2 2 0</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>constant</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
+)) <span class='co'># Returns c(2L, 2L, 0L)</span>
+</div><div class='output co'>#&gt; [1] 2 2 0</div><div class='input'><span class='kw'>REDCapR</span>::<span class='fu'>constant</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
   <span class='st'>"form_rights_no_access"</span>,
   <span class='st'>"form_rights_readonly"</span>,
   <span class='st'>"form_rights_edit_form"</span>,
   <span class='st'>"form_rights_edit_survey"</span>
-)) <span class='co'># Returns c(0L, 2L, 1L, 3L)</span></div><div class='output co'>#&gt; [1] 0 2 1 3</div><div class='input'>
+)) <span class='co'># Returns c(0L, 2L, 1L, 3L)</span>
+</div><div class='output co'>#&gt; [1] 0 2 1 3</div><div class='input'>
 
-<span class='fu'>constant_to_form_completion</span>( <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>NA</span>))</div><div class='output co'>#&gt; [1] incomplete complete   unverified complete   unknown   
-#&gt; Levels: incomplete unverified complete unknown</div><div class='input'><span class='fu'>constant_to_form_rights</span>(     <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>NA</span>))</div><div class='output co'>#&gt; [1] no_access readonly  edit_form readonly  unknown  
-#&gt; Levels: no_access readonly edit_form edit_survey unknown</div><div class='input'><span class='fu'>constant_to_export_rights</span>(   <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>NA</span>))</div><div class='output co'>#&gt; [1] no_access    rights_full  deidentified &lt;NA&gt;         unknown     
-#&gt; Levels: no_access deidentified rights_full unknown</div><div class='input'><span class='fu'>constant_to_access</span>(          <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>NA</span>))</div><div class='output co'>#&gt; [1] no      yes     yes     no      unknown
+<span class='fu'>constant_to_form_completion</span>( <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>NA</span>))
+</div><div class='output co'>#&gt; [1] incomplete complete   unverified complete   unknown   
+#&gt; Levels: incomplete unverified complete unknown</div><div class='input'><span class='fu'>constant_to_form_rights</span>(     <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>NA</span>))
+</div><div class='output co'>#&gt; [1] no_access readonly  edit_form readonly  unknown  
+#&gt; Levels: no_access readonly edit_form edit_survey unknown</div><div class='input'><span class='fu'>constant_to_export_rights</span>(   <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>NA</span>))
+</div><div class='output co'>#&gt; [1] no_access    rights_full  deidentified &lt;NA&gt;         unknown     
+#&gt; Levels: no_access deidentified rights_full unknown</div><div class='input'><span class='fu'>constant_to_access</span>(          <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>NA</span>))
+</div><div class='output co'>#&gt; [1] no      yes     yes     no      unknown
 #&gt; Levels: no yes unknown</div><div class='input'>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># The following line returns an error:</span>
 <span class='co'>#     Assertion on 'name' failed: Must be a subset of</span>
 <span class='co'>#     {'form_complete','form_incomplete','form_unverified'},</span>
 <span class='co'>#     but is {'bad-name'}.</span>
 
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>constant</span>(<span class='st'>"bad-name"</span>)    <span class='co'># Returns an error</span>
+<span class='kw'>REDCapR</span>::<span class='fu'>constant</span>(<span class='st'>"bad-name"</span>)    <span class='co'># Returns an error</span>
 
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>constant</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"form_complete"</span>, <span class='st'>"bad-name"</span>)) <span class='co'># Returns an error</span>
-}</div></pre>
+<span class='kw'>REDCapR</span>::<span class='fu'>constant</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"form_complete"</span>, <span class='st'>"bad-name"</span>)) <span class='co'># Returns an error</span>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -242,7 +264,7 @@ in the GitHub documentation.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

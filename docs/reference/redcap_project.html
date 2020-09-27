@@ -89,7 +89,7 @@ Once some values are set that are specific to a REDCap project
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9001</span>
       </span>
     </div>
 
@@ -155,7 +155,7 @@ Once some values are set that are specific to a REDCap project
 
     
 
-<dl'>
+<dl>
 <dt><code>redcap_uri</code></dt><dd><p>The URI (uniform resource identifier) of the
 REDCap project.  Required.</p></dd>
 
@@ -167,7 +167,7 @@ password for a project.  Required.</p></dd>
 
     
 
-<dl'>
+<dl>
 <dt><code>read(
   batch_size = 100L,
   interbatch_delay = 0,
@@ -203,31 +203,32 @@ password for a project.  Required.</p></dd>
 </dl>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>uri</span>     <span class='kw'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class='no'>token</span>   <span class='kw'>&lt;-</span> <span class='st'>"D70F9ACD1EDD6F151C6EA78683944E98"</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>project</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='no'>redcap_project</span>$<span class='fu'>new</span>(<span class='kw'>redcap_uri</span><span class='kw'>=</span><span class='no'>uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>)
-<span class='no'>ds_all</span>  <span class='kw'>&lt;-</span> <span class='no'>project</span>$<span class='fu'>read</span>()
+    <pre class="examples"><div class='input'><span class='kw'>uri</span>     <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class='kw'>token</span>   <span class='op'>&lt;-</span> <span class='st'>"D70F9ACD1EDD6F151C6EA78683944E98"</span>
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>project</span> <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='kw'>redcap_project</span><span class='op'>$</span><span class='fu'>new</span>(redcap_uri=<span class='kw'>uri</span>, token=<span class='kw'>token</span>)
+<span class='kw'>ds_all</span>  <span class='op'>&lt;-</span> <span class='kw'>project</span><span class='op'>$</span><span class='fu'>read</span>()
 
 <span class='co'># Demonstrate how repeated calls are more concise when the token and</span>
 <span class='co'>#   url aren't always passed.</span>
-<span class='no'>ds_skinny</span> <span class='kw'>&lt;-</span> <span class='no'>project</span>$<span class='fu'>read</span>(<span class='kw'>fields</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"record_id"</span>, <span class='st'>"sex"</span>, <span class='st'>"height"</span>))$<span class='no'>data</span>
+<span class='kw'>ds_skinny</span> <span class='op'>&lt;-</span> <span class='kw'>project</span><span class='op'>$</span><span class='fu'>read</span>(fields=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"record_id"</span>, <span class='st'>"sex"</span>, <span class='st'>"height"</span>))<span class='op'>$</span><span class='kw'>data</span>
 
-<span class='no'>ids_of_males</span>    <span class='kw'>&lt;-</span> <span class='no'>ds_skinny</span>$<span class='no'>record_id</span>[<span class='no'>ds_skinny</span>$<span class='no'>sex</span><span class='kw'>==</span><span class='fl'>1</span>]
-<span class='no'>ids_of_shorties</span> <span class='kw'>&lt;-</span> <span class='no'>ds_skinny</span>$<span class='no'>record_id</span>[<span class='no'>ds_skinny</span>$<span class='no'>height</span> <span class='kw'>&lt;</span> <span class='fl'>40</span>]
+<span class='kw'>ids_of_males</span>    <span class='op'>&lt;-</span> <span class='kw'>ds_skinny</span><span class='op'>$</span><span class='kw'>record_id</span>[<span class='kw'>ds_skinny</span><span class='op'>$</span><span class='kw'>sex</span><span class='op'>==</span><span class='fl'>1</span>]
+<span class='kw'>ids_of_shorties</span> <span class='op'>&lt;-</span> <span class='kw'>ds_skinny</span><span class='op'>$</span><span class='kw'>record_id</span>[<span class='kw'>ds_skinny</span><span class='op'>$</span><span class='kw'>height</span> <span class='op'>&lt;</span> <span class='fl'>40</span>]
 
-<span class='no'>ds_males</span>        <span class='kw'>&lt;-</span> <span class='no'>project</span>$<span class='fu'>read</span>(<span class='kw'>records</span><span class='kw'>=</span><span class='no'>ids_of_males</span>, <span class='kw'>batch_size</span><span class='kw'>=</span><span class='fl'>2</span>)$<span class='no'>data</span>
-<span class='no'>ds_shorties</span>     <span class='kw'>&lt;-</span> <span class='no'>project</span>$<span class='fu'>read</span>(<span class='kw'>records</span><span class='kw'>=</span><span class='no'>ids_of_shorties</span>)$<span class='no'>data</span>
+<span class='kw'>ds_males</span>        <span class='op'>&lt;-</span> <span class='kw'>project</span><span class='op'>$</span><span class='fu'>read</span>(records=<span class='kw'>ids_of_males</span>, batch_size=<span class='fl'>2</span>)<span class='op'>$</span><span class='kw'>data</span>
+<span class='kw'>ds_shorties</span>     <span class='op'>&lt;-</span> <span class='kw'>project</span><span class='op'>$</span><span class='fu'>read</span>(records=<span class='kw'>ids_of_shorties</span>)<span class='op'>$</span><span class='kw'>data</span>
 
 <span class='co'>#Switch the Genders</span>
-<span class='no'>sex_original</span>   <span class='kw'>&lt;-</span> <span class='no'>ds_skinny</span>$<span class='no'>sex</span>
-<span class='no'>ds_skinny</span>$<span class='no'>sex</span>  <span class='kw'>&lt;-</span> (<span class='fl'>1</span> - <span class='no'>ds_skinny</span>$<span class='no'>sex</span>)
-<span class='no'>project</span>$<span class='fu'><a href='https://rdrr.io/r/base/write.html'>write</a></span>(<span class='no'>ds_skinny</span>)
+<span class='kw'>sex_original</span>   <span class='op'>&lt;-</span> <span class='kw'>ds_skinny</span><span class='op'>$</span><span class='kw'>sex</span>
+<span class='kw'>ds_skinny</span><span class='op'>$</span><span class='kw'>sex</span>  <span class='op'>&lt;-</span> (<span class='fl'>1</span> <span class='op'>-</span> <span class='kw'>ds_skinny</span><span class='op'>$</span><span class='kw'>sex</span>)
+<span class='kw'>project</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/write.html'>write</a></span>(<span class='kw'>ds_skinny</span>)
 
 <span class='co'>#Switch the Genders back</span>
-<span class='no'>ds_skinny</span>$<span class='no'>sex</span> <span class='kw'>&lt;-</span> <span class='no'>sex_original</span>
-<span class='no'>project</span>$<span class='fu'><a href='https://rdrr.io/r/base/write.html'>write</a></span>(<span class='no'>ds_skinny</span>)
-}</div></pre>
+<span class='kw'>ds_skinny</span><span class='op'>$</span><span class='kw'>sex</span> <span class='op'>&lt;-</span> <span class='kw'>sex_original</span>
+<span class='kw'>project</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/write.html'>write</a></span>(<span class='kw'>ds_skinny</span>)
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -243,7 +244,7 @@ password for a project.  Required.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
