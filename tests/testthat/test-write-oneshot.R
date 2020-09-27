@@ -11,7 +11,7 @@ test_that("Write One Shot -Insert", {
   start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
   project <- start_clean_result$redcap_project
 
-  expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message(
     returned_object <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
     regexp = expected_outcome_message
@@ -94,7 +94,7 @@ test_that("Write One Shot -Update One Field", {
   start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
   project <- start_clean_result$redcap_project
 
-  expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message(
     returned_object1 <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
     regexp = expected_outcome_message
@@ -184,7 +184,7 @@ test_that("Write One Shot -Update Two Fields", {
   start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
   project <- start_clean_result$redcap_project
 
-  expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message(
     returned_object1 <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
     regexp = expected_outcome_message

@@ -11,7 +11,7 @@ test_that("Write Batch -Insert", {
   start_clean_result <- REDCapR:::clean_start_simple(batch=TRUE)
   project <- start_clean_result$redcap_project
 
-  expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message(
     returned_object <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
     regexp = expected_outcome_message
@@ -94,7 +94,7 @@ test_that("Write Batch -Update One Field", {
   start_clean_result <- REDCapR:::clean_start_simple(batch=TRUE)
   project <- start_clean_result$redcap_project
 
-  expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message(
     returned_object1 <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
     regexp = expected_outcome_message
@@ -275,7 +275,7 @@ test_that("Write Batch -Bad URI", {
   start_clean_result <- REDCapR:::clean_start_simple(batch=TRUE)
   project <- start_clean_result$redcap_project
 
-  expected_outcome_message_1 <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message_1 <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expected_outcome_message_2 <- "The REDCapR write/import operation was not successful."
 
   expect_message(

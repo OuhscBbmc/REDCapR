@@ -300,7 +300,7 @@ test_that("label-header", {
   path_expected <- "test-data/specific-redcapr/read-batch-simple/label-header.R"
 
   expected_warning <- "Duplicated column names deduplicated: 'Complete\\?' => 'Complete\\?_1' \\[16\\], 'Complete\\?' => 'Complete\\?_2' \\[25\\]"
-  expected_outcome_message <- "5 records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   expect_warning(
     regexp = expected_warning,

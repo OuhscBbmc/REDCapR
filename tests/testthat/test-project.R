@@ -14,7 +14,7 @@ test_that("read-insert-and-update", {
   start_clean_result <- REDCapR:::clean_start_simple(batch=TRUE)
   project <- start_clean_result$redcap_project
 
-  expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message(
     returned_object1 <- project$read(raw_or_label="raw"),
     regexp = expected_outcome_message
@@ -28,7 +28,7 @@ test_that("read-insert-and-update", {
   returned_object1$data$telephone <- sprintf("(405) 321-%1$i%1$i%1$i%1$i", seq_len(nrow(returned_object1$data)))
   project$write(ds=returned_object1$data)
 
-  expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message(
     returned_object2 <- project$read(raw_or_label="raw"),
 #     returned_object2 <- REDCapR::redcap_read(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
