@@ -21,7 +21,9 @@ Version 0.11 (Released 2020-04-20)
 
 * [`redcap_metadata_write()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_write.html) writes to the project's metadata. (#274, @felixetorres) 
 
-* [`redcap_survey_link_export_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_survey_link_export_oneshot.html) retrieves the URL to a specific record's suvey (*e.g.*, "https://bbmc.ouhsc.edu/redcap/surveys/?s=8KuzSLMHf6") (#293)
+* [`redcap_survey_link_export_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_survey_link_export_oneshot.html) retrieves the URL to a specific record's survey (*e.g.*, "https://bbmc.ouhsc.edu/redcap/surveys/?s=8KuzSLMHf6") (#293)
+
+* `convert_logical_to_integer` is a new parameter for [`redcap_write()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_write.html) and [`redcap_write_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_write_oneshot.html). If `TRUE`, all [base::logical] columns in `ds` are cast to an integer before uploading to REDCap.  Boolean values are typically represented as 0/1 in REDCap radio buttons.  Defaults to `FALSE` to maintain backwards compatibility. (#305)
 
 ### Stability Features
 
@@ -35,8 +37,9 @@ Version 0.11 (Released 2020-04-20)
 
 ### Corrections
 
-* 'checkmate' package is now imported, not suggested (Thanks @dtenenba, #255)
+* 'checkmate' package is now imported, not suggested (Thanks @dtenenba, #255).
 
+* Allow more than one `httr::config()` parameter to be passed (Thanks @BastienRance, #307).
 
 Version 0.10 (Released 2019-09-22)
 ==========================================================

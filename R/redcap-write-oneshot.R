@@ -8,6 +8,10 @@
 #' project.  Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
+#' @param convert_logical_to_integer If `TRUE`, all [base::logical] columns
+#' in `ds` are cast to an integer before uploading to REDCap.
+#' Boolean values are typically represented as 0/1 in REDCap radio buttons.
+#' Optional.
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  The verbose output might contain
 #' sensitive information (*e.g.* PHI), so turn this off if the output might
@@ -80,11 +84,11 @@ redcap_write_oneshot <- function(
   ds,
   redcap_uri,
   token,
+  convert_logical_to_integer    = FALSE,
   verbose         = TRUE,
   config_options  = NULL
 ) {
 
-  # TODO: automatically convert boolean/logical class to integer/bit class
   csv_elements <- NULL #This prevents the R CHECK NOTE: 'No visible binding for global variable Note in R CMD check';  Also see  if( getRversion() >= "2.15.1" )    utils::globalVariables(names=c("csv_elements")) #http://stackoverflow.com/questions/8096313/no-visible-binding-for-global-variable-note-in-r-cmd-check; http://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
 
   checkmate::assert_character(redcap_uri, any.missing=FALSE, len=1, pattern="^.{1,}$")
@@ -92,6 +96,12 @@ redcap_write_oneshot <- function(
 
   token   <- sanitize_token(token)
   verbose <- verbose_prepare(verbose)
+
+  if (convert_logical_to_integer) {
+    ds <-
+      ds %>%
+      dplyr::mutate_if(is.logical, as.integer)
+  }
 
   con     <-  base::textConnection(
     object  = "csv_elements",
