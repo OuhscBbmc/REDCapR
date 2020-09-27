@@ -142,11 +142,11 @@ redcap_download_file_oneshot <- function(
   if (0L < nchar(event)) post_body$event <- event
 
   if (!is.null(repeat_instrument)) {
-      if (is.null(repeat_instance)) {
-          stop("You must specify repeat_instance when specified repeat_instrement");
-      }
-      post_body$repeat_instrument <- repeat_instrument
-      post_body$repeat_instance   <- repeat_instance
+    if (is.null(repeat_instance)) {
+      stop("You must specify repeat_instance when specified repeat_instrement")
+    }
+    post_body$repeat_instrument <- repeat_instrument
+    post_body$repeat_instance   <- repeat_instance
   }
 
   # This is the first of two important lines in the function.

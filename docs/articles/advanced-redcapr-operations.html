@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9001</span>
       </span>
     </div>
 
@@ -85,12 +85,12 @@
 
       
 
-      </header><script src="advanced-redcapr-operations_files/header-attrs-2.1/header-attrs.js"></script><div class="row">
+      </header><script src="advanced-redcapr-operations_files/header-attrs-2.3/header-attrs.js"></script><script src="advanced-redcapr-operations_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Advanced REDCapR Operations</h1>
             
-            <h4 class="date">2020-05-08</h4>
+            <h4 class="date">2020-09-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/advanced-redcapr-operations.Rmd"><code>vignettes/advanced-redcapr-operations.Rmd</code></a></small>
       <div class="hidden name"><code>advanced-redcapr-operations.Rmd</code></div>
@@ -108,26 +108,32 @@
 <h1 class="hasAnchor">
 <a href="#set-project-wide-values" class="anchor"></a>Set project-wide values</h1>
 <p>There is some information that is specific to a REDCap project, as opposed to an individual operation. This includes the (1) uri of the server, and the (2) token for the user’s project. This is hosted on a machine used in REDCapR’s public test suite, so you can run this example from any computer. Unless tests are running.</p>
-<p><em>Other than PHI-free demos, we strongly suggest storing tokens securely and avoiding hard-coding them like below. Our recommendation is to store tokens <a href="https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html">in a database</a>. If that is not feasible for your institution, consider storing them in a secured csv and retrieving with <a href="https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html"><code><a href="../reference/retrieve_credential.html">REDCapR::retrieve_credential_local()</a></code></a>.</em></p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">REDCapR</span>) <span class="co">#Load the package into the current R session.</span>
-<span class="no">uri</span>                   <span class="kw">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class="no">token_simple</span>          <span class="kw">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span>
-<span class="no">token_longitudinal</span>    <span class="kw">&lt;-</span> <span class="st">"0434F0E9CF53ED0587847AB6E51DE762"</span></pre></body></html></div>
+<p><em>Other than PHI-free demos, we strongly suggest storing tokens securely and avoiding hard-coding them like below. Our recommendation is to store tokens <a href="https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html">in a database</a>. If that is not feasible for your institution, consider storing them in a secured csv and retrieving with <a href="https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html"><code>REDCapR::retrieve_credential_local()</code></a>.</em></p>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a></span>) <span class="co">#Load the package into the current R session.</span>
+<span class="kw">uri</span>                   <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class="kw">token_simple</span>          <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span>
+<span class="kw">token_longitudinal</span>    <span class="op">&lt;-</span> <span class="st">"0434F0E9CF53ED0587847AB6E51DE762"</span>
+</pre></div>
 </div>
 <div id="converting-from-talllong-to-wide" class="section level1">
 <h1 class="hasAnchor">
 <a href="#converting-from-talllong-to-wide" class="anchor"></a>Converting from tall/long to wide</h1>
 <p><em>Disclaimer</em>: Occasionally we’re asked for a longitudinal dataset to be converted from a “long/tall format” (where typically each row is one observation for a participant) to a “wide format” (where each row is on participant). Usually we advise against it. Besides all the database benefits of a long structure, a wide structure restricts your options with the stat routine. No modern longitudinal analysis procedures (<em>e.g.</em>, growth curve models or multilevel/hierarchical models) accept wide. You’re pretty much stuck with repeated measures anova, which is very inflexible for real-world medical-ish analyses. It requires a patient to have a measurement at every time point; otherwise the anova excludes the patient entirely.</p>
 <p>However we like going wide to produce visual tables for publications, and here’s one way to do it in R. First retrieve the dataset from REDCap.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magrittr</span>);
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">magrittr</span>);
 <span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"dplyr"</span>))
 <span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"tidyr"</span>))
-<span class="no">events_to_retain</span>  <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"dose_1_arm_1"</span>, <span class="st">"visit_1_arm_1"</span>, <span class="st">"dose_2_arm_1"</span>, <span class="st">"visit_2_arm_1"</span>)
+<span class="kw">events_to_retain</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"dose_1_arm_1"</span>, <span class="st">"visit_1_arm_1"</span>, <span class="st">"dose_2_arm_1"</span>, <span class="st">"visit_2_arm_1"</span>)
 
-<span class="no">ds_long</span> <span class="kw">&lt;-</span> <span class="kw pkg">REDCapR</span><span class="kw ns">::</span><span class="fu"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(<span class="kw">redcap_uri</span> <span class="kw">=</span> <span class="no">uri</span>, <span class="kw">token</span> <span class="kw">=</span> <span class="no">token_longitudinal</span>)$<span class="no">data</span></pre></body></html></div>
-<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">ds_long</span> <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">study_id</span>, <span class="no">redcap_event_name</span>, <span class="no">pmq1</span>, <span class="no">pmq2</span>, <span class="no">pmq3</span>, <span class="no">pmq4</span>)</pre></body></html></div>
+<span class="kw">ds_long</span> <span class="op">&lt;-</span> <span class="kw">REDCapR</span>::<span class="fu"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(redcap_uri = <span class="kw">uri</span>, token = <span class="kw">token_longitudinal</span>)<span class="op">$</span><span class="kw">data</span>
+</pre></div>
+<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="kw">ds_long</span> <span class="op">%&gt;%</span>
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="kw">study_id</span>, <span class="kw">redcap_event_name</span>, <span class="kw">pmq1</span>, <span class="kw">pmq2</span>, <span class="kw">pmq3</span>, <span class="kw">pmq4</span>)
+</pre></div>
 <pre><code>#&gt;    study_id        redcap_event_name pmq1 pmq2 pmq3 pmq4
 #&gt; 1       100         enrollment_arm_1   NA   NA   NA   NA
 #&gt; 2       100             dose_1_arm_1    2    2    1    1
@@ -148,44 +154,48 @@
 #&gt; 17      304        final_visit_arm_2   NA   NA   NA   NA
 #&gt; 18      304 deadline_to_return_arm_2   NA   NA   NA   NA</code></pre>
 <p>When widening only one variable (<em>e.g.</em>, <code>pmq1</code>), the code’s pretty simple:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">ds_wide</span> <span class="kw">&lt;-</span>
-  <span class="no">ds_long</span> <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">study_id</span>, <span class="no">redcap_event_name</span>, <span class="no">pmq1</span>) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">redcap_event_name</span> <span class="kw">%in%</span> <span class="no">events_to_retain</span>) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">tidyr</span><span class="kw ns">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span>(
-    <span class="kw">id_cols</span>     <span class="kw">=</span> <span class="no">study_id</span>,
-    <span class="kw">names_from</span>  <span class="kw">=</span> <span class="no">redcap_event_name</span>,
-    <span class="kw">values_from</span> <span class="kw">=</span> <span class="no">pmq1</span>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="kw">ds_wide</span> <span class="op">&lt;-</span>
+  <span class="kw">ds_long</span> <span class="op">%&gt;%</span>
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="kw">study_id</span>, <span class="kw">redcap_event_name</span>, <span class="kw">pmq1</span>) <span class="op">%&gt;%</span>
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw">redcap_event_name</span> <span class="op">%in%</span> <span class="kw">events_to_retain</span>) <span class="op">%&gt;%</span>
+  <span class="kw">tidyr</span>::<span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span>(
+    id_cols     = <span class="kw">study_id</span>,
+    names_from  = <span class="kw">redcap_event_name</span>,
+    values_from = <span class="kw">pmq1</span>
   )
   <span class="co"># For old versions of tidyr that predate `pivot_wider()`:</span>
   <span class="co"># tidyr::spread(key=redcap_event_name, value=pmq1)</span>
-<span class="no">ds_wide</span></pre></body></html></div>
+<span class="kw">ds_wide</span>
+</pre></div>
 <pre><code>#&gt; # A tibble: 2 x 5
 #&gt;   study_id dose_1_arm_1 visit_1_arm_1 dose_2_arm_1 visit_2_arm_1
 #&gt;      &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;
 #&gt; 1      100            2             1            3             0
 #&gt; 2      220            0             0            1             3</code></pre>
 <p>In some scenarios, multiple variables (<em>e.g.</em>, <code>pmq1</code> - <code>pmq4</code>) can be widened in a single <code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">tidyr::pivot_wider()</a></code> operation. This example contains the additional wrinkle that the REDCap event names “first_dose” and “first_visit” are renamed “dose_1” and “visit_1”, which will help all the values be dose and visit values be proper numbers.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">pattern</span> <span class="kw">&lt;-</span> <span class="st">"^(\\w+?)_arm_(\\d)$"</span>
-<span class="no">ds_wide</span> <span class="kw">&lt;-</span>
-  <span class="no">ds_long</span> <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">study_id</span>, <span class="no">redcap_event_name</span>, <span class="no">pmq1</span>, <span class="no">pmq2</span>, <span class="no">pmq3</span>, <span class="no">pmq4</span>) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
-    <span class="kw">event</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span>(<span class="no">pattern</span>, <span class="st">"\\1"</span>, <span class="no">redcap_event_name</span>),
-    <span class="kw">event</span> <span class="kw">=</span> <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span>(<span class="no">event</span>, <span class="st">"first_dose"</span><span class="kw">=</span><span class="st">"dose_1"</span>, <span class="st">"first_visit"</span><span class="kw">=</span><span class="st">"visit_1"</span>),
-    <span class="kw">arm</span>   <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span>(<span class="no">pattern</span>, <span class="st">"\\2"</span>, <span class="no">redcap_event_name</span>))
-  ) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">study_id</span>, <span class="no">event</span>, <span class="no">arm</span>, <span class="no">pmq1</span>, <span class="no">pmq2</span>, <span class="no">pmq3</span>, <span class="no">pmq4</span>) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(!(<span class="no">event</span> <span class="kw">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="kw">pattern</span> <span class="op">&lt;-</span> <span class="st">"^(\\w+?)_arm_(\\d)$"</span>
+<span class="kw">ds_wide</span> <span class="op">&lt;-</span>
+  <span class="kw">ds_long</span> <span class="op">%&gt;%</span>
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="kw">study_id</span>, <span class="kw">redcap_event_name</span>, <span class="kw">pmq1</span>, <span class="kw">pmq2</span>, <span class="kw">pmq3</span>, <span class="kw">pmq4</span>) <span class="op">%&gt;%</span>
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
+    event = <span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span>(<span class="kw">pattern</span>, <span class="st">"\\1"</span>, <span class="kw">redcap_event_name</span>),
+    event = <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span>(<span class="kw">event</span>, <span class="st">"first_dose"</span>=<span class="st">"dose_1"</span>, <span class="st">"first_visit"</span>=<span class="st">"visit_1"</span>),
+    arm   = <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span>(<span class="kw">pattern</span>, <span class="st">"\\2"</span>, <span class="kw">redcap_event_name</span>))
+  ) <span class="op">%&gt;%</span>
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="kw">study_id</span>, <span class="kw">event</span>, <span class="kw">arm</span>, <span class="kw">pmq1</span>, <span class="kw">pmq2</span>, <span class="kw">pmq3</span>, <span class="kw">pmq4</span>) <span class="op">%&gt;%</span>
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="op">!</span>(<span class="kw">event</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
     <span class="st">"enrollment"</span>, <span class="st">"final_visit"</span>, <span class="st">"deadline_to_return"</span>, <span class="st">"deadline_to_opt_ou"</span>)
-  )) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">tidyr</span><span class="kw ns">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span>(
-    <span class="kw">id_cols</span>     <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">study_id</span>, <span class="no">arm</span>),
-    <span class="kw">names_from</span>  <span class="kw">=</span> <span class="no">event</span>,
-    <span class="kw">values_from</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">pmq1</span>, <span class="no">pmq2</span>, <span class="no">pmq3</span>, <span class="no">pmq4</span>)
+  )) <span class="op">%&gt;%</span>
+  <span class="kw">tidyr</span>::<span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span>(
+    id_cols     = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">study_id</span>, <span class="kw">arm</span>),
+    names_from  = <span class="kw">event</span>,
+    values_from = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">pmq1</span>, <span class="kw">pmq2</span>, <span class="kw">pmq3</span>, <span class="kw">pmq4</span>)
   )
 
-<span class="no">ds_wide</span></pre></body></html></div>
+<span class="kw">ds_wide</span>
+</pre></div>
 <pre><code>#&gt; # A tibble: 3 x 18
 #&gt;   study_id   arm pmq1_dose_1 pmq1_visit_1 pmq1_dose_2 pmq1_visit_2 pmq2_dose_1
 #&gt;      &lt;dbl&gt; &lt;int&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;
@@ -197,33 +207,35 @@
 #&gt; #   pmq3_dose_2 &lt;dbl&gt;, pmq3_visit_2 &lt;dbl&gt;, pmq4_dose_1 &lt;dbl&gt;,
 #&gt; #   pmq4_visit_1 &lt;dbl&gt;, pmq4_dose_2 &lt;dbl&gt;, pmq4_visit_2 &lt;dbl&gt;</code></pre>
 <p>However, in other widening scenarios, it can be easier to go even longer/taller (<em>e.g.</em>, <code>ds_eav</code>) before reversing direction and going wide.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">ds_eav</span> <span class="kw">&lt;-</span>
-  <span class="no">ds_long</span> <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">study_id</span>, <span class="no">redcap_event_name</span>, <span class="no">pmq1</span>, <span class="no">pmq2</span>, <span class="no">pmq3</span>, <span class="no">pmq4</span>) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
-    <span class="kw">event</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span>(<span class="no">pattern</span>, <span class="st">"\\1"</span>, <span class="no">redcap_event_name</span>),
-    <span class="kw">event</span> <span class="kw">=</span> <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span>(<span class="no">event</span>, <span class="st">"first_dose"</span> <span class="kw">=</span> <span class="st">"dose_1"</span>, <span class="st">"first_visit"</span> <span class="kw">=</span> <span class="st">"visit_1"</span>),
-    <span class="kw">arm</span>   <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span>(<span class="no">pattern</span>, <span class="st">"\\2"</span>, <span class="no">redcap_event_name</span>))
-  ) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">study_id</span>, <span class="no">event</span>, <span class="no">arm</span>, <span class="no">pmq1</span>, <span class="no">pmq2</span>, <span class="no">pmq3</span>, <span class="no">pmq4</span>) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">tidyr</span><span class="kw ns">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span>(
-    <span class="kw">cols</span>      <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">pmq1</span>, <span class="no">pmq2</span>, <span class="no">pmq3</span>, <span class="no">pmq4</span>),
-    <span class="kw">names_to</span>  <span class="kw">=</span> <span class="st">"key"</span>,
-    <span class="kw">values_to</span> <span class="kw">=</span> <span class="st">"value"</span>
-  ) <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="kw">ds_eav</span> <span class="op">&lt;-</span>
+  <span class="kw">ds_long</span> <span class="op">%&gt;%</span>
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="kw">study_id</span>, <span class="kw">redcap_event_name</span>, <span class="kw">pmq1</span>, <span class="kw">pmq2</span>, <span class="kw">pmq3</span>, <span class="kw">pmq4</span>) <span class="op">%&gt;%</span>
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
+    event = <span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span>(<span class="kw">pattern</span>, <span class="st">"\\1"</span>, <span class="kw">redcap_event_name</span>),
+    event = <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span>(<span class="kw">event</span>, <span class="st">"first_dose"</span> = <span class="st">"dose_1"</span>, <span class="st">"first_visit"</span> = <span class="st">"visit_1"</span>),
+    arm   = <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span>(<span class="kw">pattern</span>, <span class="st">"\\2"</span>, <span class="kw">redcap_event_name</span>))
+  ) <span class="op">%&gt;%</span>
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="kw">study_id</span>, <span class="kw">event</span>, <span class="kw">arm</span>, <span class="kw">pmq1</span>, <span class="kw">pmq2</span>, <span class="kw">pmq3</span>, <span class="kw">pmq4</span>) <span class="op">%&gt;%</span>
+  <span class="kw">tidyr</span>::<span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span>(
+    cols      = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">pmq1</span>, <span class="kw">pmq2</span>, <span class="kw">pmq3</span>, <span class="kw">pmq4</span>),
+    names_to  = <span class="st">"key"</span>,
+    values_to = <span class="st">"value"</span>
+  ) <span class="op">%&gt;%</span>
   <span class="co"># For old versions of tidyr that predate `pivot_wider()`:</span>
   <span class="co"># tidyr::gather(key=key, value=value, pmq1, pmq2, pmq3, pmq4) %&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(!(<span class="no">event</span> <span class="kw">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="op">!</span>(<span class="kw">event</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
     <span class="st">"enrollment"</span>, <span class="st">"final_visit"</span>, <span class="st">"deadline_to_return"</span>, <span class="st">"deadline_to_opt_ou"</span>)
-  )) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>( <span class="co"># Simulate correcting for mismatched names across arms:</span>
-    <span class="kw">key</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">key</span>, <span class="st">"_"</span>, <span class="no">event</span>)
-  ) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(-<span class="no">event</span>)
+  )) <span class="op">%&gt;%</span>
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>( <span class="co"># Simulate correcting for mismatched names across arms:</span>
+    key = <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="kw">key</span>, <span class="st">"_"</span>, <span class="kw">event</span>)
+  ) <span class="op">%&gt;%</span>
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span><span class="kw">event</span>)
 
 <span class="co"># Show the first 10 rows of the EAV table.</span>
-<span class="no">ds_eav</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fl">10</span>)</pre></body></html></div>
+<span class="kw">ds_eav</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fl">10</span>)
+</pre></div>
 <pre><code>#&gt; # A tibble: 10 x 4
 #&gt;    study_id   arm key          value
 #&gt;       &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;        &lt;dbl&gt;
@@ -237,17 +249,19 @@
 #&gt;  8      100     1 pmq4_visit_1     0
 #&gt;  9      100     1 pmq1_dose_2      3
 #&gt; 10      100     1 pmq2_dose_2      1</code></pre>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="co"># Spread the EAV to wide.</span>
-<span class="no">ds_wide_2</span> <span class="kw">&lt;-</span>
-  <span class="no">ds_eav</span> <span class="kw">%&gt;%</span>
-  <span class="kw pkg">tidyr</span><span class="kw ns">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span>(
-    <span class="kw">id_cols</span>     <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">study_id</span>, <span class="no">arm</span>),
-    <span class="kw">names_from</span>  <span class="kw">=</span> <span class="no">key</span>,
-    <span class="kw">values_from</span> <span class="kw">=</span> <span class="no">value</span>
+<div class="sourceCode" id="cb12"><pre class="downlit">
+<span class="co"># Spread the EAV to wide.</span>
+<span class="kw">ds_wide_2</span> <span class="op">&lt;-</span>
+  <span class="kw">ds_eav</span> <span class="op">%&gt;%</span>
+  <span class="kw">tidyr</span>::<span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span>(
+    id_cols     = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">study_id</span>, <span class="kw">arm</span>),
+    names_from  = <span class="kw">key</span>,
+    values_from = <span class="kw">value</span>
   )
   <span class="co"># For old versions of tidyr that predate `pivot_wider()`:</span>
   <span class="co"># tidyr::spread(key=key, value=value)</span>
-<span class="no">ds_wide_2</span></pre></body></html></div>
+<span class="kw">ds_wide_2</span>
+</pre></div>
 <pre><code>#&gt; # A tibble: 3 x 18
 #&gt;   study_id   arm pmq1_dose_1 pmq2_dose_1 pmq3_dose_1 pmq4_dose_1 pmq1_visit_1
 #&gt;      &lt;dbl&gt; &lt;int&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;
@@ -265,7 +279,7 @@
 <a href="#query-the-underlying-mysql-database" class="anchor"></a>Query the Underlying MySQL Database</h1>
 <p>If you require a feature that is not available from your instance’s API, first upgrade your institution’s REDCap instance and see if the feature has been added recently. Second, check if someone has released the desired API-like features as an <a href="https://redcap.vanderbilt.edu/consortium/modules/">REDCap External Module</a>.</p>
 <p>Third, you may need to query the database underneath REDCap’s web server. The <a href="https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html#transfer-credentials">Transfer Credentials</a> section of the <a href="https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html#transfer-credentials">Security Database Vignette</a> provides a complete example of using R to query the MySQL database through odbc.</p>
-<p>We find it’s best to develop the query in <a href="https://www.mysql.com/products/workbench/">MySQL Workbench</a>, then copy the code to R (or alternatively, use <a href="https://ouhscbbmc.github.io/OuhscMunge/reference/execute_sql_file.html"><code><a href="https://rdrr.io/pkg/OuhscMunge/man/execute_sql_file.html">OuhscMunge::execute_sql_file()</a></code></a>).</p>
+<p>We find it’s best to develop the query in <a href="https://www.mysql.com/products/workbench/">MySQL Workbench</a>, then copy the code to R (or alternatively, use <a href="https://ouhscbbmc.github.io/OuhscMunge/reference/execute_sql_file.html"><code>OuhscMunge::execute_sql_file()</code></a>).</p>
 <p>Here is an example that retrieves the <code>first_submit_time</code>, which is helpful if you need a timestamp from surveys that were not marked as completed. Replace ‘444’ with your pid, and 1001 through 1003 with the desired events.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">SELECT</span> </span>
 <span id="cb14-2"><a href="#cb14-2"></a>  p.participant_id      <span class="kw">as</span> participant_survey_id</span>
@@ -294,31 +308,37 @@
 <a href="#ssl-options" class="anchor"></a>SSL Options</h1>
 <p>The official <a href="http://curl.haxx.se">cURL site</a> discusses the process of using SSL to verify the server being connected to.</p>
 <p>Use the SSL cert file that come with the <code>openssl</code> package.</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">cert_location</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"cacert.pem"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"openssl"</span>)
-<span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span>(<span class="no">cert_location</span>)) {
-  <span class="no">config_options</span>         <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">cainfo</span> <span class="kw">=</span> <span class="no">cert_location</span>)
-  <span class="no">ds_different_cert_file</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(
-    <span class="kw">redcap_uri</span>     <span class="kw">=</span> <span class="no">uri</span>,
-    <span class="kw">token</span>          <span class="kw">=</span> <span class="no">token_simple</span>,
-    <span class="kw">config_options</span> <span class="kw">=</span> <span class="no">config_options</span>
-  )$<span class="no">data</span>
-}</pre></body></html></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<div class="sourceCode" id="cb15"><pre class="downlit">
+<span class="kw">cert_location</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"cacert.pem"</span>, package = <span class="st">"openssl"</span>)
+<span class="co">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span>(<span class="kw">cert_location</span>)) {
+  <span class="kw">config_options</span>         <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(cainfo = <span class="kw">cert_location</span>)
+  <span class="kw">ds_different_cert_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(
+    redcap_uri     = <span class="kw">uri</span>,
+    token          = <span class="kw">token_simple</span>,
+    config_options = <span class="kw">config_options</span>
+  )<span class="op">$</span><span class="kw">data</span>
+}
+</pre></div>
+<pre><code>#&gt; 5 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <p>Force the connection to use SSL=3 (which is not preferred, and possibly insecure).</p>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">config_options</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">sslversion</span> <span class="kw">=</span> <span class="fl">3</span>)
-<span class="no">ds_ssl_3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(
-  <span class="kw">redcap_uri</span>     <span class="kw">=</span> <span class="no">uri</span>,
-  <span class="kw">token</span>          <span class="kw">=</span> <span class="no">token_simple</span>,
-  <span class="kw">config_options</span> <span class="kw">=</span> <span class="no">config_options</span>
-)$<span class="no">data</span></pre></body></html></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="no">config_options</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">ssl.verifypeer</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
-<span class="no">ds_no_ssl</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(
-  <span class="kw">redcap_uri</span>     <span class="kw">=</span> <span class="no">uri</span>,
-  <span class="kw">token</span>          <span class="kw">=</span> <span class="no">token_simple</span>,
-  <span class="kw">config_options</span> <span class="kw">=</span> <span class="no">config_options</span>
-)$<span class="no">data</span></pre></body></html></div>
-<pre><code>#&gt; 5 records and 24 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<div class="sourceCode" id="cb17"><pre class="downlit">
+<span class="kw">config_options</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(sslversion = <span class="fl">3</span>)
+<span class="kw">ds_ssl_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(
+  redcap_uri     = <span class="kw">uri</span>,
+  token          = <span class="kw">token_simple</span>,
+  config_options = <span class="kw">config_options</span>
+)<span class="op">$</span><span class="kw">data</span>
+</pre></div>
+<pre><code>#&gt; 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<div class="sourceCode" id="cb19"><pre class="downlit">
+<span class="kw">config_options</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(ssl.verifypeer = <span class="fl">FALSE</span>)
+<span class="kw">ds_no_ssl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span>(
+  redcap_uri     = <span class="kw">uri</span>,
+  token          = <span class="kw">token_simple</span>,
+  config_options = <span class="kw">config_options</span>
+)<span class="op">$</span><span class="kw">data</span>
+</pre></div>
+<pre><code>#&gt; 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 </div>
 <div id="convert-spss-output-to-redcap-data-dictionary" class="section level1">
 <h1 class="hasAnchor">
@@ -343,78 +363,81 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 <details><p><summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary></p>
 <pre><code>#&gt; ─ Session info ───────────────────────────────────────────────────────────────
 #&gt;  setting  value                       
-#&gt;  version  R version 3.6.3 (2020-02-29)
-#&gt;  os       Ubuntu 20.04 LTS            
+#&gt;  version  R version 4.0.2 (2020-06-22)
+#&gt;  os       Ubuntu 20.04.1 LTS          
 #&gt;  system   x86_64, linux-gnu           
 #&gt;  ui       X11                         
 #&gt;  language (EN)                        
 #&gt;  collate  en_US.UTF-8                 
 #&gt;  ctype    en_US.UTF-8                 
 #&gt;  tz       America/Chicago             
-#&gt;  date     2020-05-08                  
+#&gt;  date     2020-09-27                  
 #&gt; 
 #&gt; ─ Packages ───────────────────────────────────────────────────────────────────
-#&gt;  package     * version  date       lib source        
-#&gt;  assertthat    0.2.1    2019-03-21 [2] CRAN (R 3.6.2)
-#&gt;  backports     1.1.6    2020-04-05 [2] CRAN (R 3.6.3)
-#&gt;  checkmate     2.0.0    2020-02-06 [2] CRAN (R 3.6.2)
-#&gt;  cli           2.0.2    2020-02-28 [2] CRAN (R 3.6.3)
-#&gt;  colorspace    1.4-1    2019-03-18 [2] CRAN (R 3.6.2)
-#&gt;  crayon        1.3.4    2017-09-16 [2] CRAN (R 3.6.2)
-#&gt;  curl          4.3      2019-12-02 [2] CRAN (R 3.6.2)
-#&gt;  desc          1.2.0    2018-05-01 [2] CRAN (R 3.6.2)
-#&gt;  digest        0.6.25   2020-02-23 [2] CRAN (R 3.6.2)
-#&gt;  dplyr         0.8.5    2020-03-07 [2] CRAN (R 3.6.3)
-#&gt;  ellipsis      0.3.0    2019-09-20 [2] CRAN (R 3.6.2)
-#&gt;  evaluate      0.14     2019-05-28 [2] CRAN (R 3.6.2)
-#&gt;  fansi         0.4.1    2020-01-08 [2] CRAN (R 3.6.2)
-#&gt;  fs            1.4.1    2020-04-04 [2] CRAN (R 3.6.3)
-#&gt;  glue          1.4.0    2020-04-03 [2] CRAN (R 3.6.3)
-#&gt;  hms           0.5.3    2020-01-08 [2] CRAN (R 3.6.2)
-#&gt;  htmltools     0.4.0    2019-10-04 [2] CRAN (R 3.6.2)
-#&gt;  httr          1.4.1    2019-08-05 [2] CRAN (R 3.6.2)
-#&gt;  kableExtra    1.1.0    2019-03-16 [2] CRAN (R 3.6.2)
-#&gt;  knitr       * 1.28     2020-02-06 [2] CRAN (R 3.6.2)
-#&gt;  lifecycle     0.2.0    2020-03-06 [2] CRAN (R 3.6.3)
-#&gt;  magrittr    * 1.5      2014-11-22 [2] CRAN (R 3.6.2)
-#&gt;  MASS          7.3-51.6 2020-04-26 [5] CRAN (R 3.6.3)
-#&gt;  memoise       1.1.0    2017-04-21 [2] CRAN (R 3.6.2)
-#&gt;  munsell       0.5.0    2018-06-12 [2] CRAN (R 3.6.2)
-#&gt;  pillar        1.4.4    2020-05-05 [2] CRAN (R 3.6.3)
-#&gt;  pkgconfig     2.0.3    2019-09-22 [2] CRAN (R 3.6.2)
-#&gt;  pkgdown       1.5.1    2020-04-09 [2] CRAN (R 3.6.3)
-#&gt;  purrr         0.3.4    2020-04-17 [2] CRAN (R 3.6.3)
-#&gt;  R6            2.4.1    2019-11-12 [2] CRAN (R 3.6.2)
-#&gt;  Rcpp          1.0.4.6  2020-04-09 [2] CRAN (R 3.6.3)
-#&gt;  readr         1.3.1    2018-12-21 [2] CRAN (R 3.6.2)
-#&gt;  REDCapR     * 0.11.0   2020-05-08 [1] local         
-#&gt;  rlang         0.4.6    2020-05-02 [2] CRAN (R 3.6.3)
-#&gt;  rmarkdown     2.1      2020-01-20 [2] CRAN (R 3.6.2)
-#&gt;  rprojroot     1.3-2    2018-01-03 [2] CRAN (R 3.6.2)
-#&gt;  rstudioapi    0.11     2020-02-07 [2] CRAN (R 3.6.2)
-#&gt;  rvest         0.3.5    2019-11-08 [2] CRAN (R 3.6.2)
-#&gt;  scales        1.1.0    2019-11-18 [2] CRAN (R 3.6.2)
-#&gt;  sessioninfo   1.1.1    2018-11-05 [2] CRAN (R 3.6.2)
-#&gt;  stringi       1.4.6    2020-02-17 [2] CRAN (R 3.6.2)
-#&gt;  stringr       1.4.0    2019-02-10 [2] CRAN (R 3.6.2)
-#&gt;  tibble        3.0.1    2020-04-20 [2] CRAN (R 3.6.3)
-#&gt;  tidyr         1.0.3    2020-05-07 [2] CRAN (R 3.6.3)
-#&gt;  tidyselect    1.0.0    2020-01-27 [2] CRAN (R 3.6.2)
-#&gt;  utf8          1.1.4    2018-05-24 [2] CRAN (R 3.6.2)
-#&gt;  vctrs         0.2.4    2020-03-10 [2] CRAN (R 3.6.3)
-#&gt;  viridisLite   0.3.0    2018-02-01 [2] CRAN (R 3.6.2)
-#&gt;  webshot       0.5.2    2019-11-22 [2] CRAN (R 3.6.2)
-#&gt;  withr         2.2.0    2020-04-20 [2] CRAN (R 3.6.3)
-#&gt;  xfun          0.13     2020-04-13 [2] CRAN (R 3.6.3)
-#&gt;  xml2          1.3.2    2020-04-23 [2] CRAN (R 3.6.3)
-#&gt;  yaml          2.2.1    2020-02-01 [2] CRAN (R 3.6.2)
+#&gt;  package     * version     date       lib source        
+#&gt;  assertthat    0.2.1       2019-03-21 [2] CRAN (R 4.0.0)
+#&gt;  backports     1.1.10      2020-09-15 [2] CRAN (R 4.0.2)
+#&gt;  checkmate     2.0.0       2020-02-06 [2] CRAN (R 4.0.0)
+#&gt;  cli           2.0.2       2020-02-28 [2] CRAN (R 4.0.0)
+#&gt;  colorspace    1.4-1       2019-03-18 [2] CRAN (R 4.0.0)
+#&gt;  cpp11         0.2.1       2020-08-11 [2] CRAN (R 4.0.2)
+#&gt;  crayon        1.3.4       2017-09-16 [2] CRAN (R 4.0.0)
+#&gt;  curl          4.3         2019-12-02 [2] CRAN (R 4.0.0)
+#&gt;  desc          1.2.0       2018-05-01 [2] CRAN (R 4.0.0)
+#&gt;  digest        0.6.25      2020-02-23 [2] CRAN (R 4.0.0)
+#&gt;  dplyr         1.0.2       2020-08-18 [2] CRAN (R 4.0.2)
+#&gt;  ellipsis      0.3.1       2020-05-15 [2] CRAN (R 4.0.0)
+#&gt;  evaluate      0.14        2019-05-28 [2] CRAN (R 4.0.0)
+#&gt;  fansi         0.4.1       2020-01-08 [2] CRAN (R 4.0.0)
+#&gt;  fs            1.5.0       2020-07-31 [2] CRAN (R 4.0.2)
+#&gt;  generics      0.0.2       2018-11-29 [2] CRAN (R 4.0.0)
+#&gt;  glue          1.4.2       2020-08-27 [2] CRAN (R 4.0.2)
+#&gt;  hms           0.5.3       2020-01-08 [2] CRAN (R 4.0.0)
+#&gt;  htmltools     0.5.0       2020-06-16 [2] CRAN (R 4.0.1)
+#&gt;  httr          1.4.2       2020-07-20 [2] CRAN (R 4.0.2)
+#&gt;  kableExtra    1.2.1       2020-08-27 [2] CRAN (R 4.0.2)
+#&gt;  knitr       * 1.29        2020-06-23 [2] CRAN (R 4.0.1)
+#&gt;  lifecycle     0.2.0       2020-03-06 [2] CRAN (R 4.0.0)
+#&gt;  magrittr    * 1.5         2014-11-22 [2] CRAN (R 4.0.0)
+#&gt;  memoise       1.1.0       2017-04-21 [2] CRAN (R 4.0.0)
+#&gt;  munsell       0.5.0       2018-06-12 [2] CRAN (R 4.0.0)
+#&gt;  pillar        1.4.6       2020-07-10 [2] CRAN (R 4.0.2)
+#&gt;  pkgconfig     2.0.3       2019-09-22 [2] CRAN (R 4.0.0)
+#&gt;  pkgdown       1.6.1       2020-09-12 [2] CRAN (R 4.0.2)
+#&gt;  purrr         0.3.4       2020-04-17 [2] CRAN (R 4.0.0)
+#&gt;  R6            2.4.1       2019-11-12 [2] CRAN (R 4.0.0)
+#&gt;  ragg          0.3.1       2020-07-03 [2] CRAN (R 4.0.2)
+#&gt;  Rcpp          1.0.5       2020-07-06 [2] CRAN (R 4.0.2)
+#&gt;  readr         1.3.1       2018-12-21 [2] CRAN (R 4.0.0)
+#&gt;  REDCapR     * 0.11.0.9001 2020-09-27 [1] local         
+#&gt;  rlang         0.4.7       2020-07-09 [2] CRAN (R 4.0.2)
+#&gt;  rmarkdown     2.3         2020-06-18 [2] CRAN (R 4.0.1)
+#&gt;  rprojroot     1.3-2       2018-01-03 [2] CRAN (R 4.0.0)
+#&gt;  rstudioapi    0.11        2020-02-07 [2] CRAN (R 4.0.0)
+#&gt;  rvest         0.3.6       2020-07-25 [2] CRAN (R 4.0.2)
+#&gt;  scales        1.1.1       2020-05-11 [2] CRAN (R 4.0.0)
+#&gt;  sessioninfo   1.1.1       2018-11-05 [2] CRAN (R 4.0.0)
+#&gt;  stringi       1.5.3       2020-09-09 [2] CRAN (R 4.0.2)
+#&gt;  stringr       1.4.0       2019-02-10 [2] CRAN (R 4.0.0)
+#&gt;  systemfonts   0.3.1       2020-09-08 [2] CRAN (R 4.0.2)
+#&gt;  tibble        3.0.3       2020-07-10 [2] CRAN (R 4.0.2)
+#&gt;  tidyr         1.1.2       2020-08-27 [2] CRAN (R 4.0.2)
+#&gt;  tidyselect    1.1.0       2020-05-11 [2] CRAN (R 4.0.0)
+#&gt;  utf8          1.1.4       2018-05-24 [2] CRAN (R 4.0.0)
+#&gt;  vctrs         0.3.4       2020-08-29 [2] CRAN (R 4.0.2)
+#&gt;  viridisLite   0.3.0       2018-02-01 [2] CRAN (R 4.0.0)
+#&gt;  webshot       0.5.2       2019-11-22 [2] CRAN (R 4.0.0)
+#&gt;  withr         2.2.0       2020-04-20 [2] CRAN (R 4.0.0)
+#&gt;  xfun          0.17        2020-09-09 [2] CRAN (R 4.0.2)
+#&gt;  xml2          1.3.2       2020-04-23 [2] CRAN (R 4.0.0)
+#&gt;  yaml          2.2.1       2020-02-01 [2] CRAN (R 4.0.0)
 #&gt; 
-#&gt; [1] /tmp/RtmpZTK1eV/temp_libpath3c0452160ce1
-#&gt; [2] /home/wibeasley/R/x86_64-pc-linux-gnu-library/3.6
+#&gt; [1] /tmp/RtmplSyH5i/temp_libpath1257c712b0a54
+#&gt; [2] /home/wibeasley/R/x86_64-pc-linux-gnu-library/4.0
 #&gt; [3] /usr/local/lib/R/site-library
 #&gt; [4] /usr/lib/R/site-library
 #&gt; [5] /usr/lib/R/library</code></pre>
-</details><p>Report rendered by wibeasley at 2020-05-08, 13:37 -0500 in 2 seconds.</p>
+</details><p>Report rendered by wibeasley at 2020-09-27, 17:39 -0500 in 5 seconds.</p>
 </div>
   </div>
 
@@ -433,7 +456,7 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

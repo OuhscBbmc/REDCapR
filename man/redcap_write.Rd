@@ -11,6 +11,7 @@ redcap_write(
   continue_on_error = FALSE,
   redcap_uri,
   token,
+  convert_logical_to_integer = FALSE,
   verbose = TRUE,
   config_options = NULL
 )
@@ -34,6 +35,11 @@ project.  Required.}
 
 \item{token}{The user-specific string that serves as the password for a
 project.  Required.}
+
+\item{convert_logical_to_integer}{If \code{TRUE}, all \link[base:logical]{base::logical} columns
+in \code{ds} are cast to an integer before uploading to REDCap.
+Boolean values are typically represented as 0/1 in REDCap radio buttons.
+Optional.}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed
 to the R console during the operation.  The verbose output might contain

@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9001</span>
       </span>
     </div>
 
@@ -85,12 +85,12 @@
 
       
 
-      </header><script src="TroubleshootingApiCalls_files/header-attrs-2.1/header-attrs.js"></script><div class="row">
+      </header><script src="TroubleshootingApiCalls_files/header-attrs-2.3/header-attrs.js"></script><script src="TroubleshootingApiCalls_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Troubleshooting REDCap API Calls</h1>
             
-            <h4 class="date">2020-05-08</h4>
+            <h4 class="date">2020-09-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/TroubleshootingApiCalls.Rmd"><code>vignettes/TroubleshootingApiCalls.Rmd</code></a></small>
       <div class="hidden name"><code>TroubleshootingApiCalls.Rmd</code></div>
@@ -120,17 +120,17 @@
 <li>
 <p><strong>Have you verified your account by responding to the automated email sent to them?</strong> This can be verified in the <code>Browse Users</code> section of your server’s <code>Control Center</code>. (Talk to your REDCap admin.) For each email address you’ve entered, there should be a green ‘Verified’ label and icon.</p>
 <p><img src="images/EmailVerified.png" width="252" style="fig.width=400px"></p>
-<p><!--<img src="/home/wibeasley/Documents/bbmc/REDCapR/vignettes/images/EmailVerified.png" alt="EmailVerified" style="width: 400px;"/>--></p>
+<p><!--<img src="/home/wibeasley/Documents/redcap/REDCapR/vignettes/images/EmailVerified.png" alt="EmailVerified" style="width: 400px;"/>--></p>
 </li>
 <li>
 <p><strong>Have you been granted the desired import and/or export permissions?</strong> This can be verified in the <code>User Rights</code> section or in the <code>API</code> section (and it’s <code>Manage All Project Tokens</code> tab) within the project. Alternatively, it can be verified in the <code>API Tokens</code> section of the server’s <code>Control Center</code>.</p>
 <p><img src="images/ApiPrivilegeDashboard.png" width="316" style="fig.width=600px"></p>
-<p><!--<img src="/home/wibeasley/Documents/bbmc/REDCapR/vignettes/images/ApiPrivilegeDashboard.png" alt="ApiPrivilegeDashboard" style="width: 600px;"/>--></p>
+<p><!--<img src="/home/wibeasley/Documents/redcap/REDCapR/vignettes/images/ApiPrivilegeDashboard.png" alt="ApiPrivilegeDashboard" style="width: 600px;"/>--></p>
 </li>
 <li>
 <p><strong>Are you using the correct token?</strong> This can be verified in the <code>API</code> section (and it’s <code>Manage All Project Tokens</code> tab) within the project. Click the magnifying glass icon in the user’s row. Alternatively, it can be verified in the <code>API Tokens</code> section of the server’s <code>Control Center</code>.</p>
 <p><img src="images/MagnifyingGlass.png" width="291" style="fig.width=550px"></p>
-<p><!--<img src="/home/wibeasley/Documents/bbmc/REDCapR/vignettes/images/MagnifyingGlass.png" alt="MagnifyingGlass" style="width: 550px;"/>--></p>
+<p><!--<img src="/home/wibeasley/Documents/redcap/REDCapR/vignettes/images/MagnifyingGlass.png" alt="MagnifyingGlass" style="width: 550px;"/>--></p>
 </li>
 </ol>
 <p>If all these checks pass, proceed to the next section. If not, start by consulting with your REDCap administrator.</p>
@@ -140,7 +140,7 @@
 <a href="#api" class="anchor"></a>API</h2>
 <p>This section examines potential problems that occur after data leaves a working server, but before it is handled by their programming language (<em>e.g.</em>, Python and R). <a href="http://www.getpostman.com/">Postman</a> is a Chrome plugin recommended by <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ">several</a> <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ">people</a> that makes troubleshooting much more efficient.</p>
 <p><img src="images/PostmanScreenshot.png" width="574" style="fig.width=800px"></p>
-<!--<img src="/home/wibeasley/Documents/bbmc/REDCapR/vignettes/images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>-->
+<!--<img src="/home/wibeasley/Documents/redcap/REDCapR/vignettes/images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>-->
 <ol style="list-style-type: decimal">
 <li>
 <p><strong>Is the API Playground producing the expected result?</strong> REDCap’s “API Playground” holds your hand by (a) offering a dropdown list of API methods available to your REDCap instance, and (b) presenting a series of dropdown boxes appropriate for the selected method. Find it through the API link visible in the left margin of REDCap. When you’ve completed the inputs, click ‘Execute’ to view the plain-text returned by the server.</p>
@@ -180,7 +180,7 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <a href="#gotchas-agnostic" class="anchor"></a>Common Gotchas</h2>
 <ol style="list-style-type: decimal">
 <li>
-<p><strong>Problems in the project’s metadata/dictionary.</strong> If exporting the metadata fails (<em>e.g.</em>, <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_read.html"><code><a href="../reference/redcap_metadata_read.html">REDCapR::redcap_metadata_read()</a></code></a> and <a href="https://rdrr.io/github/nutterb/redcapAPI/man/exportMetaData.html"><code>redcapAPI::exportMetaData()</code></a>), manually download the data dictionary from the REDCap browser. Inspect the plain text closely in a text editor like <a href="https://atom.io/">Atom</a> or <a href="https://code.visualstudio.com/">Visual Studio Code</a>; avoid programs like Excel that tend to interpret, align, and decorate the values, which sometimes masks problems. Scrutinize all elements, but especially look for nonstandard characters. <em>See the next bullet.</em></p>
+<p><strong>Problems in the project’s metadata/dictionary.</strong> If exporting the metadata fails (<em>e.g.</em>, <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_read.html"><code>REDCapR::redcap_metadata_read()</code></a> and <a href="https://rdrr.io/github/nutterb/redcapAPI/man/exportMetaData.html"><code>redcapAPI::exportMetaData()</code></a>), manually download the data dictionary from the REDCap browser. Inspect the plain text closely in a text editor like <a href="https://atom.io/">Atom</a> or <a href="https://code.visualstudio.com/">Visual Studio Code</a>; avoid programs like Excel that tend to interpret, align, and decorate the values, which sometimes masks problems. Scrutinize all elements, but especially look for nonstandard characters. <em>See the next bullet.</em></p>
 <p>Some API libraries test that problematic elements of a project are handled correctly. If you encounter an element that causes problems, please consider</p>
 <ol style="list-style-type: decimal">
 <li><p>creating a new GitHub Issue that describes the problem (<em>e.g.</em>, <a href="https://github.com/OuhscBbmc/REDCapR/issues">REDCapR</a>, <a href="https://github.com/nutterb/redcapAPI/issues">redcapAPI</a>, <a href="https://github.com/iuredcap/phpcap/issues">phpcap</a>).</p></li>
@@ -201,90 +201,100 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <p>There are several ways to call REDCap’s API from <a href="https://cran.r-project.org/">R</a>. The packages <a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> both rely on the <a href="https://cran.r-project.org/package=httr">httr</a> package, which calls the <a href="https://cran.r-project.org/package=curl">curl</a> package, which calls <a href="http://curl.haxx.se/docs/manpage.html">cURL</a>.</p>
 <ol style="list-style-type: decimal">
 <li>
-<p><strong>Is httr installed on the user’s local machine?</strong> If so, running <code><a href="https://httr.r-lib.org/reference">library(httr)</a></code> should not produce any error messages if you’re starting with a fresh session of R:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">httr</span>)</pre></body></html></div>
+<p><strong>Is httr installed on the user’s local machine?</strong> If so, running <code><a href="https://httr.r-lib.org">library(httr)</a></code> should not produce any error messages if you’re starting with a fresh session of R:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://httr.r-lib.org">httr</a></span>)
+</pre></div>
 </li>
 <li><p><strong>Do you have the most recent version of httr?</strong> There are several ways to do this, but the easiest is probably to run <code><a href="https://rdrr.io/r/utils/update.packages.html">update.packages(ask = FALSE, repos = "https://cran.rstudio.com")</a></code>. The optional argument <code>ask</code> prevents the user from needing to respond ‘Y’ to each outdated package.</p></li>
 <li>
 <p><strong>Can you query a <em>test</em> project using httr?</strong> Both the <a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> packages employ something similar to the following function in <a href="https://cran.r-project.org/package=httr">httr</a>. If you’re curious, here is the relevant source code for <a href="https://github.com/nutterb/redcapAPI/blob/master/R/exportRecords.R">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-read-oneshot.R">REDCapR</a>.</p>
 <p>If this check fails, consider attempting again with the url and token used above in the Postman example.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">redcap_uri</span> <span class="kw">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class="no">token</span>      <span class="kw">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="kw">redcap_uri</span> <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class="kw">token</span>      <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span>
 
-<span class="no">post_body</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-  <span class="kw">token</span>           <span class="kw">=</span> <span class="no">token</span>,
-  <span class="kw">content</span>         <span class="kw">=</span> <span class="st">'record'</span>,
-  <span class="kw">format</span>          <span class="kw">=</span> <span class="st">'csv'</span>,
-  <span class="kw">type</span>            <span class="kw">=</span> <span class="st">'flat'</span>
+<span class="kw">post_body</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
+  token           = <span class="kw">token</span>,
+  content         = <span class="st">'record'</span>,
+  format          = <span class="st">'csv'</span>,
+  type            = <span class="st">'flat'</span>
 )
 
-<span class="no">raw_text</span> <span class="kw">&lt;-</span> <span class="kw pkg">httr</span><span class="kw ns">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/POST.html">POST</a></span>(
-  <span class="kw">url</span>             <span class="kw">=</span> <span class="no">redcap_uri</span>,
-  <span class="kw">body</span>            <span class="kw">=</span> <span class="no">post_body</span>,
-  <span class="kw pkg">httr</span><span class="kw ns">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/verbose.html">verbose</a></span>() <span class="co"># Remove this line to suppress the console updates.</span>
+<span class="kw">raw_text</span> <span class="op">&lt;-</span> <span class="kw">httr</span>::<span class="fu"><a href="https://httr.r-lib.org/reference/POST.html">POST</a></span>(
+  url             = <span class="kw">redcap_uri</span>,
+  body            = <span class="kw">post_body</span>,
+  <span class="kw">httr</span>::<span class="fu"><a href="https://httr.r-lib.org/reference/verbose.html">verbose</a></span>() <span class="co"># Remove this line to suppress the console updates.</span>
 )
 
-<span class="no">raw_text</span></pre></body></html></div>
+<span class="kw">raw_text</span>
+</pre></div>
 <p>Alternatively, you can try using the <a href="https://cran.r-project.org/package=RCurl">RCurl</a> package, which has been mostly replaced by httr in packages developed since 2014.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">raw_text</span> <span class="kw">&lt;-</span> <span class="kw pkg">RCurl</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/RCurl/man/postForm.html">postForm</a></span>(
-  <span class="kw">uri</span>             <span class="kw">=</span> <span class="no">redcap_uri</span>
-  , <span class="kw">token</span>         <span class="kw">=</span> <span class="no">token</span>
-  , <span class="kw">content</span>       <span class="kw">=</span> <span class="st">'record'</span>
-  , <span class="kw">format</span>        <span class="kw">=</span> <span class="st">'csv'</span>
-  , <span class="kw">type</span>          <span class="kw">=</span> <span class="st">'flat'</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="kw">raw_text</span> <span class="op">&lt;-</span> <span class="kw">RCurl</span>::<span class="fu">postForm</span>(
+  uri             = <span class="kw">redcap_uri</span>
+  , token         = <span class="kw">token</span>
+  , content       = <span class="st">'record'</span>
+  , format        = <span class="st">'csv'</span>
+  , type          = <span class="st">'flat'</span>
+)
+</pre></div>
 </li>
 <li>
 <p><strong>Can you query a <em>subset</em> of <em>your</em> project using httr?</strong> This step is like the previous one, but with two differences. First, it’s using your REDCap project (instead of the test project). Second, it pulls fewer records, and a smaller collection of fields. Subsetting can help troubleshoot by avoiding (and thus identifying) cells with problematic values.</p>
 <p>Notice this call now passes values to the <code>records</code> and <code>fields</code> parameters. Also notice each value is a <em>single</em> long string (rather a <em>vector</em> of shorter strings, which is more natural to most R users).</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">redcap_uri</span>         <span class="kw">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>
-<span class="no">token</span>              <span class="kw">&lt;-</span> <span class="st">"your-secret-token"</span>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="kw">redcap_uri</span>         <span class="op">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>
+<span class="kw">token</span>              <span class="op">&lt;-</span> <span class="st">"your-secret-token"</span>
 
-<span class="no">records_collapsed</span>  <span class="kw">&lt;-</span> <span class="st">"1,2,3"</span>                             <span class="co"># Assumes dataset contains ID values of 1-3.</span>
-<span class="no">fields_collapsed</span>   <span class="kw">&lt;-</span> <span class="st">"record_id,name_first,name_last"</span>    <span class="co"># Assumes dataset contains these variables.</span>
+<span class="kw">records_collapsed</span>  <span class="op">&lt;-</span> <span class="st">"1,2,3"</span>                             <span class="co"># Assumes dataset contains ID values of 1-3.</span>
+<span class="kw">fields_collapsed</span>   <span class="op">&lt;-</span> <span class="st">"record_id,name_first,name_last"</span>    <span class="co"># Assumes dataset contains these variables.</span>
 
-<span class="no">post_body</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-  <span class="kw">token</span>           <span class="kw">=</span> <span class="no">token</span>,
-  <span class="kw">content</span>         <span class="kw">=</span> <span class="st">'record'</span>,
-  <span class="kw">format</span>          <span class="kw">=</span> <span class="st">'csv'</span>,
-  <span class="kw">type</span>            <span class="kw">=</span> <span class="st">'flat'</span>,
-  <span class="kw">records</span>         <span class="kw">=</span> <span class="no">records_collapsed</span>,
-  <span class="kw">fields</span>          <span class="kw">=</span> <span class="no">fields_collapsed</span>
+<span class="kw">post_body</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
+  token           = <span class="kw">token</span>,
+  content         = <span class="st">'record'</span>,
+  format          = <span class="st">'csv'</span>,
+  type            = <span class="st">'flat'</span>,
+  records         = <span class="kw">records_collapsed</span>,
+  fields          = <span class="kw">fields_collapsed</span>
 )
 
-<span class="no">raw_text</span> <span class="kw">&lt;-</span> <span class="kw pkg">httr</span><span class="kw ns">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/POST.html">POST</a></span>(
-  <span class="kw">url</span>             <span class="kw">=</span> <span class="no">redcap_uri</span>,
-  <span class="kw">body</span>            <span class="kw">=</span> <span class="no">post_body</span>,
-  <span class="kw pkg">httr</span><span class="kw ns">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/verbose.html">verbose</a></span>() <span class="co"># Remove this line to suppress the console updates.</span>
+<span class="kw">raw_text</span> <span class="op">&lt;-</span> <span class="kw">httr</span>::<span class="fu"><a href="https://httr.r-lib.org/reference/POST.html">POST</a></span>(
+  url             = <span class="kw">redcap_uri</span>,
+  body            = <span class="kw">post_body</span>,
+  <span class="kw">httr</span>::<span class="fu"><a href="https://httr.r-lib.org/reference/verbose.html">verbose</a></span>() <span class="co"># Remove this line to suppress the console updates.</span>
 )
 
-<span class="no">raw_text</span></pre></body></html></div>
+<span class="kw">raw_text</span>
+</pre></div>
 </li>
 <li>
 <p><strong>Can you query an <em>entire</em> project using httr?</strong> There are two advantages of trying a subset of the data. First, small datasets avoid the time-out errors that plague large datasets. Second, it may avoid problematic values being passed through the pipeline. If the current check fails but the previous check succeeds, then experiment with different expanses of records and fields. This should help determine which values are causing the problems, or if there’s simply too much data being pulled in one pass.</p>
-<p>If the desired dataset is too large, consider if you can prune unnecessary records or fields. If not, one solution is to pull smaller, multiple batches using the API, then reassemble them. The <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code><a href="../reference/redcap_read.html">redcap_read()</a></code> function</a> in <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> does this automatically, and allows the user to specify a <code>batch_size</code>.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">redcap_uri</span>                  <span class="kw">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>
-<span class="no">token</span>                       <span class="kw">&lt;-</span> <span class="st">"your-secret-token"</span>
+<p>If the desired dataset is too large, consider if you can prune unnecessary records or fields. If not, one solution is to pull smaller, multiple batches using the API, then reassemble them. The <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code>redcap_read()</code> function</a> in <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> does this automatically, and allows the user to specify a <code>batch_size</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="kw">redcap_uri</span>                  <span class="op">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>
+<span class="kw">token</span>                       <span class="op">&lt;-</span> <span class="st">"your-secret-token"</span>
 
-<span class="no">records_collapsed</span>           <span class="kw">&lt;-</span> <span class="kw">NULL</span>
-<span class="no">fields_collapsed</span>            <span class="kw">&lt;-</span> <span class="kw">NULL</span>
+<span class="kw">records_collapsed</span>           <span class="op">&lt;-</span> <span class="kw">NULL</span>
+<span class="kw">fields_collapsed</span>            <span class="op">&lt;-</span> <span class="kw">NULL</span>
 
-<span class="no">post_body</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-  <span class="kw">token</span>           <span class="kw">=</span> <span class="no">token</span>,
-  <span class="kw">content</span>         <span class="kw">=</span> <span class="st">'record'</span>,
-  <span class="kw">format</span>          <span class="kw">=</span> <span class="st">'csv'</span>,
-  <span class="kw">type</span>            <span class="kw">=</span> <span class="st">'flat'</span>,
-  <span class="kw">records</span>         <span class="kw">=</span> <span class="no">records_collapsed</span>,
-  <span class="kw">fields</span>          <span class="kw">=</span> <span class="no">fields_collapsed</span>
+<span class="kw">post_body</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
+  token           = <span class="kw">token</span>,
+  content         = <span class="st">'record'</span>,
+  format          = <span class="st">'csv'</span>,
+  type            = <span class="st">'flat'</span>,
+  records         = <span class="kw">records_collapsed</span>,
+  fields          = <span class="kw">fields_collapsed</span>
 )
 
-<span class="no">raw_text</span> <span class="kw">&lt;-</span> <span class="kw pkg">httr</span><span class="kw ns">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/POST.html">POST</a></span>(
-  <span class="kw">url</span>             <span class="kw">=</span> <span class="no">redcap_uri</span>,
-  <span class="kw">body</span>            <span class="kw">=</span> <span class="no">post_body</span>,
-  <span class="kw pkg">httr</span><span class="kw ns">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/verbose.html">verbose</a></span>() <span class="co"># Remove this line to suppress the console updates.</span>
+<span class="kw">raw_text</span> <span class="op">&lt;-</span> <span class="kw">httr</span>::<span class="fu"><a href="https://httr.r-lib.org/reference/POST.html">POST</a></span>(
+  url             = <span class="kw">redcap_uri</span>,
+  body            = <span class="kw">post_body</span>,
+  <span class="kw">httr</span>::<span class="fu"><a href="https://httr.r-lib.org/reference/verbose.html">verbose</a></span>() <span class="co"># Remove this line to suppress the console updates.</span>
 )
 
-<span class="no">raw_text</span></pre></body></html></div>
+<span class="kw">raw_text</span>
+</pre></div>
 </li>
 </ol>
 <p>If all these checks pass, proceed to the next section. If not, start by consulting your REDCap administrator.</p>
@@ -298,81 +308,93 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <ol style="list-style-type: decimal">
 <li>
 <p><strong>Is the latest version of REDCapR installed on your machine?</strong> Currently the easiest way to install REDCapR is with the <a href="https://remotes.r-lib.org/">remotes</a> package. The following code installs remotes, then installs REDCapR. The CRAN version of REDCapR is updated only a few times a year, while the code below will download the latest stable version.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>, <span class="kw">repos</span> <span class="kw">=</span> <span class="st">"https://cran.rstudio.com"</span>)
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="kw">repo</span> <span class="kw">=</span> <span class="st">"OuhscBbmc/REDCapR"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>, repos = <span class="st">"https://cran.rstudio.com"</span>)
+<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(repo = <span class="st">"OuhscBbmc/REDCapR"</span>)
+</pre></div>
 </li>
 <li>
-<p><strong>Does REDCapR load successfully on your machine?</strong> If so, running <code><a href="https://rdrr.io/pkg/REDCapR/man">library(REDCapR)</a></code> should produce the following output if you’re starting with a fresh session of R:</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">REDCapR</span>)
-<span class="co"># Loading required package: REDCapR</span></pre></body></html></div>
+<p><strong>Does REDCapR load successfully on your machine?</strong> If so, running <code><a href="https://github.com/OuhscBbmc/REDCapR">library(REDCapR)</a></code> should produce the following output if you’re starting with a fresh session of R:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a></span>)
+<span class="co"># Loading required package: REDCapR</span>
+</pre></div>
 </li>
 <li>
 <p><strong>Can you export their data dictionary?</strong> Sometimes the problem exists within the metadata/dictionary, instead of the actual data values. Verify the structure and content of this specific project is interpretable by your local environment.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">REDCapR</span>) <span class="co"># Load the package into the current R session, if you haven't already.</span>
-<span class="no">redcap_uri</span>       <span class="kw">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>
-<span class="no">token</span>            <span class="kw">&lt;-</span> <span class="st">"your-secret-token"</span>
-<span class="fu"><a href="../reference/redcap_metadata_read.html">redcap_metadata_read</a></span>(<span class="kw">redcap_uri</span> <span class="kw">=</span> <span class="no">uri</span>, <span class="kw">token</span> <span class="kw">=</span> <span class="no">token</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a></span>) <span class="co"># Load the package into the current R session, if you haven't already.</span>
+<span class="kw">redcap_uri</span>       <span class="op">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>
+<span class="kw">token</span>            <span class="op">&lt;-</span> <span class="st">"your-secret-token"</span>
+<span class="fu"><a href="../reference/redcap_metadata_read.html">redcap_metadata_read</a></span>(redcap_uri = <span class="kw">uri</span>, token = <span class="kw">token</span>)
+</pre></div>
 <p>If this fails, see “Problems in the project’s metadata/dictionary” under <a href="#gotchas-agnostic">Common Gotchas</a> above. A problematic data dictionary may produce the error <code>Error in inherits(ds, "data.frame") : object 'ds' not found</code> when calling <code><a href="../reference/redcap_metadata_read.html">REDCapR::redcap_metadata_read()</a></code>.</p>
 </li>
 <li>
 <p><strong>Can you export from an example project?</strong> This is the same fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a> as in the previous section.</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">REDCapR</span>) <span class="co"># Load the package into the current R session.</span>
-<span class="no">uri</span>   <span class="kw">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class="no">token</span> <span class="kw">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span>
-<span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span>(<span class="kw">redcap_uri</span> <span class="kw">=</span> <span class="no">uri</span>, <span class="kw">token</span> <span class="kw">=</span> <span class="no">token</span>)$<span class="no">data</span></pre></body></html></div>
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a></span>) <span class="co"># Load the package into the current R session.</span>
+<span class="kw">uri</span>   <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class="kw">token</span> <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span>
+<span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span>(redcap_uri = <span class="kw">uri</span>, token = <span class="kw">token</span>)<span class="op">$</span><span class="kw">data</span>
+</pre></div>
 <p>The previous code should produce similar output. Notice there are five rows and the columns will wrap around if your console window is too narrow.</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r">5 records and 1 columns were read from REDCap in 0.41 seconds.
-Starting to read 5 records  at 2014-06-27 17:19:49
-Reading batch 1 of 1, with ids 1 through 5.
-5 records and 16 columns were read from REDCap in 0.42 seconds.
-
-  record_id name_first name_last                                 address      telephone               email
-1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232 (432) 456-4848     nutty@mouse.com
-2         2     Tumtum  Nutmouse 14 Rose Cottage Blvd.\nKenning UK 34243 (234) 234-2343    tummy@mouse.comm
-3         3     Marcus      Wood          243 Hill St.\nGuthrie OK 73402 (433) 435-9865        mw@mwood.net
-4         4      Trudy       DAG          342 Elm\nDuncanville TX, 75116 (987) 654-3210 peroxide@blonde.com
-5         5   John Lee    Walker      Hotel Suite\nNew Orleans LA, 70115 (333) 333-4444  left@hippocket.com
-
-         dob age ethnicity race sex height weight   bmi
-1 2003-08-30  10         1    2   0   5.00      1 400.0
-2 2003-03-10  10         1    6   1   6.00      1 277.8
-3 1934-04-09  79         0    4   1 180.00     80  24.7
-4 1952-11-02  61         1    4   0 165.00     54  19.8
-5 1955-04-15  58         1    4   1 193.04    104  27.9
-
-                                                                                                     comments
-1                                                                     Character in a book, with some guessing
-2                                                                          A mouse character from a good book
-3                                                                                          completely made up
-4 This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail
-5                 Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache
-
-  demographics_complete
-1                     2
-2                     2
-3                     2
-4                     2
-5                     2</pre></body></html></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="dv">5</span> records and <span class="dv">1</span> columns were read from REDCap <span class="cf">in</span> <span class="fl">0.41</span> seconds.</span>
+<span id="cb12-2"><a href="#cb12-2"></a>Starting to read <span class="dv">5</span> records  at <span class="dv">2014-06-27</span> <span class="dv">17</span><span class="op">:</span><span class="dv">19</span><span class="op">:</span><span class="dv">49</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>Reading batch <span class="dv">1</span> of <span class="dv">1</span>, with ids <span class="dv">1</span> through <span class="fl">5.</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="dv">5</span> records and <span class="dv">16</span> columns were read from REDCap <span class="cf">in</span> <span class="fl">0.42</span> seconds.</span>
+<span id="cb12-5"><a href="#cb12-5"></a></span>
+<span id="cb12-6"><a href="#cb12-6"></a>  record_id name_first name_last                                 address      telephone               email</span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="dv">1</span>         <span class="dv">1</span>     Nutmeg  Nutmouse <span class="dv">14</span> Rose Cottage St.\nKenning UK, <span class="dv">323232</span> (<span class="dv">432</span>) <span class="dv">456-4848</span>     nutty<span class="op">@</span>mouse.com</span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="dv">2</span>         <span class="dv">2</span>     Tumtum  Nutmouse <span class="dv">14</span> Rose Cottage Blvd.\nKenning UK <span class="dv">34243</span> (<span class="dv">234</span>) <span class="dv">234-2343</span>    tummy<span class="op">@</span>mouse.comm</span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="dv">3</span>         <span class="dv">3</span>     Marcus      Wood          <span class="dv">243</span> Hill St.\nGuthrie OK <span class="dv">73402</span> (<span class="dv">433</span>) <span class="dv">435-9865</span>        mw<span class="op">@</span>mwood.net</span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="dv">4</span>         <span class="dv">4</span>      Trudy       DAG          <span class="dv">342</span> Elm\nDuncanville TX, <span class="dv">75116</span> (<span class="dv">987</span>) <span class="dv">654-3210</span> peroxide<span class="op">@</span>blonde.com</span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="dv">5</span>         <span class="dv">5</span>   John Lee    Walker      Hotel Suite\nNew Orleans LA, <span class="dv">70115</span> (<span class="dv">333</span>) <span class="dv">333-4444</span>  left<span class="op">@</span>hippocket.com</span>
+<span id="cb12-12"><a href="#cb12-12"></a></span>
+<span id="cb12-13"><a href="#cb12-13"></a>         dob age ethnicity race sex height weight   bmi</span>
+<span id="cb12-14"><a href="#cb12-14"></a><span class="dv">1</span> <span class="dv">2003-08-30</span>  <span class="dv">10</span>         <span class="dv">1</span>    <span class="dv">2</span>   <span class="dv">0</span>   <span class="fl">5.00</span>      <span class="dv">1</span> <span class="fl">400.0</span></span>
+<span id="cb12-15"><a href="#cb12-15"></a><span class="dv">2</span> <span class="dv">2003-03-10</span>  <span class="dv">10</span>         <span class="dv">1</span>    <span class="dv">6</span>   <span class="dv">1</span>   <span class="fl">6.00</span>      <span class="dv">1</span> <span class="fl">277.8</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a><span class="dv">3</span> <span class="dv">1934-04-09</span>  <span class="dv">79</span>         <span class="dv">0</span>    <span class="dv">4</span>   <span class="dv">1</span> <span class="fl">180.00</span>     <span class="dv">80</span>  <span class="fl">24.7</span></span>
+<span id="cb12-17"><a href="#cb12-17"></a><span class="dv">4</span> <span class="dv">1952-11-02</span>  <span class="dv">61</span>         <span class="dv">1</span>    <span class="dv">4</span>   <span class="dv">0</span> <span class="fl">165.00</span>     <span class="dv">54</span>  <span class="fl">19.8</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a><span class="dv">5</span> <span class="dv">1955-04-15</span>  <span class="dv">58</span>         <span class="dv">1</span>    <span class="dv">4</span>   <span class="dv">1</span> <span class="fl">193.04</span>    <span class="dv">104</span>  <span class="fl">27.9</span></span>
+<span id="cb12-19"><a href="#cb12-19"></a></span>
+<span id="cb12-20"><a href="#cb12-20"></a>                                                                                                     comments</span>
+<span id="cb12-21"><a href="#cb12-21"></a><span class="dv">1</span>                                                                     Character <span class="cf">in</span> a book, with some guessing</span>
+<span id="cb12-22"><a href="#cb12-22"></a><span class="dv">2</span>                                                                          A mouse character from a good book</span>
+<span id="cb12-23"><a href="#cb12-23"></a><span class="dv">3</span>                                                                                          completely made up</span>
+<span id="cb12-24"><a href="#cb12-24"></a><span class="dv">4</span> This record doesn<span class="st">'t have a DAG assigned</span><span class="ch">\n\n</span><span class="st">So call up Trudy on the telephone</span><span class="ch">\n</span><span class="st">Send her a letter in the mail</span></span>
+<span id="cb12-25"><a href="#cb12-25"></a><span class="st">5                 Had a hand for trouble and a eye for cash</span><span class="ch">\n\n</span><span class="st">He had a gold watch chain and a black mustache</span></span>
+<span id="cb12-26"><a href="#cb12-26"></a></span>
+<span id="cb12-27"><a href="#cb12-27"></a><span class="st">  demographics_complete</span></span>
+<span id="cb12-28"><a href="#cb12-28"></a><span class="st">1                     2</span></span>
+<span id="cb12-29"><a href="#cb12-29"></a><span class="st">2                     2</span></span>
+<span id="cb12-30"><a href="#cb12-30"></a><span class="st">3                     2</span></span>
+<span id="cb12-31"><a href="#cb12-31"></a><span class="st">4                     2</span></span>
+<span id="cb12-32"><a href="#cb12-32"></a><span class="st">5                     2</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Can you export from your own project?</strong> The code is similar to the previous check, but the <code>uri</code> and <code>token</code> values will need to be modified.</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">REDCapR</span>) <span class="co"># Load the package into the current R session, if you haven't already.</span>
-<span class="no">redcap_uri</span>       <span class="kw">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>
-<span class="no">token</span>            <span class="kw">&lt;-</span> <span class="st">"your-secret-token"</span>
-<span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span>(<span class="kw">redcap_uri</span> <span class="kw">=</span> <span class="no">uri</span>, <span class="kw">token</span> <span class="kw">=</span> <span class="no">token</span>)$<span class="no">data</span></pre></body></html></div>
+<div class="sourceCode" id="cb13"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a></span>) <span class="co"># Load the package into the current R session, if you haven't already.</span>
+<span class="kw">redcap_uri</span>       <span class="op">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>
+<span class="kw">token</span>            <span class="op">&lt;-</span> <span class="st">"your-secret-token"</span>
+<span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span>(redcap_uri = <span class="kw">uri</span>, token = <span class="kw">token</span>)<span class="op">$</span><span class="kw">data</span>
+</pre></div>
 <p>Alternatively, a <code>redcap_project</code> object can be declared initially, which makes subsequent calls cleaner when the token and url are required only the when the object is declared.</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">REDCapR</span>) <span class="co"># Load the package into the current R session, if you haven't already.</span>
-<span class="no">uri</span>               <span class="kw">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class="no">token</span>             <span class="kw">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span>
-<span class="no">project</span>           <span class="kw">&lt;-</span> <span class="no">redcap_project</span>$<span class="fu">new</span>(<span class="kw">redcap_uri</span> <span class="kw">=</span> <span class="no">uri</span>, <span class="kw">token</span> <span class="kw">=</span> <span class="no">token</span>)
+<div class="sourceCode" id="cb14"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a></span>) <span class="co"># Load the package into the current R session, if you haven't already.</span>
+<span class="kw">uri</span>               <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class="kw">token</span>             <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span>
+<span class="kw">project</span>           <span class="op">&lt;-</span> <span class="kw">redcap_project</span><span class="op">$</span><span class="fu">new</span>(redcap_uri = <span class="kw">uri</span>, token = <span class="kw">token</span>)
 
-<span class="no">ds_three_columns</span>  <span class="kw">&lt;-</span> <span class="no">project</span>$<span class="fu">read</span>(<span class="kw">fields</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"record_id"</span>, <span class="st">"sex"</span>, <span class="st">"age"</span>))$<span class="no">data</span>
+<span class="kw">ds_three_columns</span>  <span class="op">&lt;-</span> <span class="kw">project</span><span class="op">$</span><span class="fu">read</span>(fields = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"record_id"</span>, <span class="st">"sex"</span>, <span class="st">"age"</span>))<span class="op">$</span><span class="kw">data</span>
 
-<span class="no">ids_of_males</span>      <span class="kw">&lt;-</span> <span class="no">ds_three_columns</span>$<span class="no">record_id</span>[<span class="no">ds_three_columns</span>$<span class="no">sex</span> <span class="kw">==</span> <span class="fl">1</span>]
-<span class="no">ids_of_minors</span>     <span class="kw">&lt;-</span> <span class="no">ds_three_columns</span>$<span class="no">record_id</span>[<span class="no">ds_three_columns</span>$<span class="no">age</span> <span class="kw">&lt;</span> <span class="fl">18</span>]
+<span class="kw">ids_of_males</span>      <span class="op">&lt;-</span> <span class="kw">ds_three_columns</span><span class="op">$</span><span class="kw">record_id</span>[<span class="kw">ds_three_columns</span><span class="op">$</span><span class="kw">sex</span> <span class="op">==</span> <span class="fl">1</span>]
+<span class="kw">ids_of_minors</span>     <span class="op">&lt;-</span> <span class="kw">ds_three_columns</span><span class="op">$</span><span class="kw">record_id</span>[<span class="kw">ds_three_columns</span><span class="op">$</span><span class="kw">age</span> <span class="op">&lt;</span> <span class="fl">18</span>]
 
-<span class="no">ds_males</span>          <span class="kw">&lt;-</span> <span class="no">project</span>$<span class="fu">read</span>(<span class="kw">records</span> <span class="kw">=</span> <span class="no">ids_of_males</span>, <span class="kw">batch_size</span> <span class="kw">=</span> <span class="fl">2</span>)$<span class="no">data</span>
-<span class="no">ds_minors</span>         <span class="kw">&lt;-</span> <span class="no">project</span>$<span class="fu">read</span>(<span class="kw">records</span> <span class="kw">=</span> <span class="no">ids_of_minors</span>)$<span class="no">data</span></pre></body></html></div>
+<span class="kw">ds_males</span>          <span class="op">&lt;-</span> <span class="kw">project</span><span class="op">$</span><span class="fu">read</span>(records = <span class="kw">ids_of_males</span>, batch_size = <span class="fl">2</span>)<span class="op">$</span><span class="kw">data</span>
+<span class="kw">ds_minors</span>         <span class="op">&lt;-</span> <span class="kw">project</span><span class="op">$</span><span class="fu">read</span>(records = <span class="kw">ids_of_minors</span>)<span class="op">$</span><span class="kw">data</span>
+</pre></div>
 </li>
 <li><p><strong>Is the export operation still unsuccessful using REDCapR?</strong> If so the “Can the user query a <em>entire</em> REDCap project using httr?” check succeeded, but the REDCapR checks did not, consider posting a new <a href="https://github.com/OuhscBbmc/REDCapR/issues">GitHub issue</a> to the package developers.</p></li>
 </ol>
@@ -387,69 +409,81 @@ Reading batch 1 of 1, with ids 1 through 5.
 <ol style="list-style-type: decimal">
 <li>
 <p><strong>Is redcapAPI installed on your machine?</strong> Currently, the easiest way to install <code>redcapAPI</code> is from CRAN.</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"redcapAPI"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb15"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"redcapAPI"</span>)
+</pre></div>
 <p>Developmental versions may be available on GitHub.</p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>, <span class="kw">repos</span> <span class="kw">=</span> <span class="st">"http://cran.rstudio.com"</span>)
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="kw">repo</span> <span class="kw">=</span> <span class="st">"nutterb/redcapAPI"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb16"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>, repos = <span class="st">"http://cran.rstudio.com"</span>)
+<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(repo = <span class="st">"nutterb/redcapAPI"</span>)
+</pre></div>
 </li>
 <li>
-<p><strong>Does redcapAPI load successfully on your machine?</strong> If so, running <code><a href="https://rdrr.io/pkg/redcapAPI/man">library(redcapAPI)</a></code> should produce the following output if you’re starting with a fresh session of R:</p>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">redcapAPI</span>)
-<span class="co"># Loading required package: redcapAPI</span></pre></body></html></div>
+<p><strong>Does redcapAPI load successfully on your machine?</strong> If so, running <code>library(redcapAPI)</code> should produce the following output if you’re starting with a fresh session of R:</p>
+<div class="sourceCode" id="cb17"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">redcapAPI</span>)
+<span class="co"># Loading required package: redcapAPI</span>
+</pre></div>
 </li>
 <li>
 <p><strong>Can you export their data dictionary?</strong> Sometimes the problem exists within the metadata/dictionary, instead of the actual data values. Verify the structure and content of this specific project is interpretable by your local environment.</p>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">redcapAPI</span>) <span class="co"># Load the package into the current R session, if you haven't already.</span>
-<span class="no">redcap_uri</span>       <span class="kw">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>
-<span class="no">token</span>            <span class="kw">&lt;-</span> <span class="st">"your-secret-token"</span>
-<span class="fu">exportMetaData</span>(<span class="no">rcon</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb18"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">redcapAPI</span>) <span class="co"># Load the package into the current R session, if you haven't already.</span>
+<span class="kw">redcap_uri</span>       <span class="op">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>
+<span class="kw">token</span>            <span class="op">&lt;-</span> <span class="st">"your-secret-token"</span>
+<span class="fu">exportMetaData</span>(<span class="kw">rcon</span>)
+</pre></div>
 <p>If this fails, see “Problems in the project’s metadata/dictionary.” under <a href="#gotchas-agnostic">Gotchas</a> above</p>
 </li>
 <li>
 <p><strong>Can you export from an example project?</strong> This is the same fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a> as in the previous section.</p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">redcapAPI</span>) <span class="co"># Load the package into the current R session.</span>
-<span class="no">rcon</span> <span class="kw">&lt;-</span> <span class="fu">redcapConnection</span>(
-  <span class="kw">url</span>   <span class="kw">=</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>,
-  <span class="kw">token</span> <span class="kw">=</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span>
+<div class="sourceCode" id="cb19"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">redcapAPI</span>) <span class="co"># Load the package into the current R session.</span>
+<span class="kw">rcon</span> <span class="op">&lt;-</span> <span class="fu">redcapConnection</span>(
+  url   = <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>,
+  token = <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span>
 )
-<span class="fu">exportRecords</span>(<span class="no">rcon</span>)</pre></body></html></div>
+<span class="fu">exportRecords</span>(<span class="kw">rcon</span>)
+</pre></div>
 <p>The previous code should produce similar output. Notice there are five rows and the columns will wrap around if your console window is too narrow.</p>
-<div class="sourceCode" id="cb20"><html><body><pre class="r">record_id name_first name_last                                 address      telephone               email
-1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232 (432) 456-4848     nutty@mouse.com
-2         2     Tumtum  Nutmouse 14 Rose Cottage Blvd.\nKenning UK 34243 (234) 234-2343    tummy@mouse.comm
-3         3     Marcus      Wood          243 Hill St.\nGuthrie OK 73402 (433) 435-9865        mw@mwood.net
-4         4      Trudy       DAG          342 Elm\nDuncanville TX, 75116 (987) 654-3210 peroxide@blonde.com
-5         5   John Lee    Walker      Hotel Suite\nNew Orleans LA, 70115 (333) 333-4444  left@hippocket.com
-
-       dob age ethnicity race sex height weight   bmi
-1 2003-08-30  10         1    2   0   5.00      1 400.0
-2 2003-03-10  10         1    6   1   6.00      1 277.8
-3 1934-04-09  79         0    4   1 180.00     80  24.7
-4 1952-11-02  61         1    4   0 165.00     54  19.8
-5 1955-04-15  58         1    4   1 193.04    104  27.9
-
-                                                                                                   comments
-1                                                                     Character in a book, with some guessing
-2                                                                          A mouse character from a good book
-3                                                                                          completely made up
-4 This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail
-5                 Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache
-
-demographics_complete
-1                     2
-2                     2
-3                     2
-4                     2
-5                     2</pre></body></html></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>record_id name_first name_last                                 address      telephone               email</span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="dv">1</span>         <span class="dv">1</span>     Nutmeg  Nutmouse <span class="dv">14</span> Rose Cottage St.\nKenning UK, <span class="dv">323232</span> (<span class="dv">432</span>) <span class="dv">456-4848</span>     nutty<span class="op">@</span>mouse.com</span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="dv">2</span>         <span class="dv">2</span>     Tumtum  Nutmouse <span class="dv">14</span> Rose Cottage Blvd.\nKenning UK <span class="dv">34243</span> (<span class="dv">234</span>) <span class="dv">234-2343</span>    tummy<span class="op">@</span>mouse.comm</span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="dv">3</span>         <span class="dv">3</span>     Marcus      Wood          <span class="dv">243</span> Hill St.\nGuthrie OK <span class="dv">73402</span> (<span class="dv">433</span>) <span class="dv">435-9865</span>        mw<span class="op">@</span>mwood.net</span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="dv">4</span>         <span class="dv">4</span>      Trudy       DAG          <span class="dv">342</span> Elm\nDuncanville TX, <span class="dv">75116</span> (<span class="dv">987</span>) <span class="dv">654-3210</span> peroxide<span class="op">@</span>blonde.com</span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="dv">5</span>         <span class="dv">5</span>   John Lee    Walker      Hotel Suite\nNew Orleans LA, <span class="dv">70115</span> (<span class="dv">333</span>) <span class="dv">333-4444</span>  left<span class="op">@</span>hippocket.com</span>
+<span id="cb20-7"><a href="#cb20-7"></a></span>
+<span id="cb20-8"><a href="#cb20-8"></a>       dob age ethnicity race sex height weight   bmi</span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="dv">1</span> <span class="dv">2003-08-30</span>  <span class="dv">10</span>         <span class="dv">1</span>    <span class="dv">2</span>   <span class="dv">0</span>   <span class="fl">5.00</span>      <span class="dv">1</span> <span class="fl">400.0</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a><span class="dv">2</span> <span class="dv">2003-03-10</span>  <span class="dv">10</span>         <span class="dv">1</span>    <span class="dv">6</span>   <span class="dv">1</span>   <span class="fl">6.00</span>      <span class="dv">1</span> <span class="fl">277.8</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a><span class="dv">3</span> <span class="dv">1934-04-09</span>  <span class="dv">79</span>         <span class="dv">0</span>    <span class="dv">4</span>   <span class="dv">1</span> <span class="fl">180.00</span>     <span class="dv">80</span>  <span class="fl">24.7</span></span>
+<span id="cb20-12"><a href="#cb20-12"></a><span class="dv">4</span> <span class="dv">1952-11-02</span>  <span class="dv">61</span>         <span class="dv">1</span>    <span class="dv">4</span>   <span class="dv">0</span> <span class="fl">165.00</span>     <span class="dv">54</span>  <span class="fl">19.8</span></span>
+<span id="cb20-13"><a href="#cb20-13"></a><span class="dv">5</span> <span class="dv">1955-04-15</span>  <span class="dv">58</span>         <span class="dv">1</span>    <span class="dv">4</span>   <span class="dv">1</span> <span class="fl">193.04</span>    <span class="dv">104</span>  <span class="fl">27.9</span></span>
+<span id="cb20-14"><a href="#cb20-14"></a></span>
+<span id="cb20-15"><a href="#cb20-15"></a>                                                                                                   comments</span>
+<span id="cb20-16"><a href="#cb20-16"></a><span class="dv">1</span>                                                                     Character <span class="cf">in</span> a book, with some guessing</span>
+<span id="cb20-17"><a href="#cb20-17"></a><span class="dv">2</span>                                                                          A mouse character from a good book</span>
+<span id="cb20-18"><a href="#cb20-18"></a><span class="dv">3</span>                                                                                          completely made up</span>
+<span id="cb20-19"><a href="#cb20-19"></a><span class="dv">4</span> This record doesn<span class="st">'t have a DAG assigned</span><span class="ch">\n\n</span><span class="st">So call up Trudy on the telephone</span><span class="ch">\n</span><span class="st">Send her a letter in the mail</span></span>
+<span id="cb20-20"><a href="#cb20-20"></a><span class="st">5                 Had a hand for trouble and a eye for cash</span><span class="ch">\n\n</span><span class="st">He had a gold watch chain and a black mustache</span></span>
+<span id="cb20-21"><a href="#cb20-21"></a></span>
+<span id="cb20-22"><a href="#cb20-22"></a><span class="st">demographics_complete</span></span>
+<span id="cb20-23"><a href="#cb20-23"></a><span class="st">1                     2</span></span>
+<span id="cb20-24"><a href="#cb20-24"></a><span class="st">2                     2</span></span>
+<span id="cb20-25"><a href="#cb20-25"></a><span class="st">3                     2</span></span>
+<span id="cb20-26"><a href="#cb20-26"></a><span class="st">4                     2</span></span>
+<span id="cb20-27"><a href="#cb20-27"></a><span class="st">5                     2</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Can you export your own project?</strong> The code is similar to the previous check, but the <code>uri</code> and <code>token</code> values will need to be modified.</p>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">redcapAPI</span>) <span class="co"># Load the package into the current R session, if you haven't already.</span>
-<span class="no">rcon</span> <span class="kw">&lt;-</span> <span class="fu">redcapConnection</span>(
-  <span class="kw">url</span>   <span class="kw">=</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>, <span class="co"># Adapt this to your server.</span>
-  <span class="kw">token</span> <span class="kw">=</span> <span class="st">"your-secret-token"</span>                         <span class="co"># Adapt this to your user's token.</span>
+<div class="sourceCode" id="cb21"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">redcapAPI</span>) <span class="co"># Load the package into the current R session, if you haven't already.</span>
+<span class="kw">rcon</span> <span class="op">&lt;-</span> <span class="fu">redcapConnection</span>(
+  url   = <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>, <span class="co"># Adapt this to your server.</span>
+  token = <span class="st">"your-secret-token"</span>                         <span class="co"># Adapt this to your user's token.</span>
 )
-<span class="fu">exportRecords</span>(<span class="no">rcon</span>)</pre></body></html></div>
+<span class="fu">exportRecords</span>(<span class="kw">rcon</span>)
+</pre></div>
 </li>
 <li><p><strong>Is the export operation still unsuccessful using redcapAPI?</strong> If so the “Can the user query a <em>entire</em> REDCap project using httr?” check succeeded, but the redcapAPI checks did not, consider posting a new <a href="https://github.com/nutterb/redcapAPI/issues">GitHub issue</a> to the package developers.</p></li>
 </ol>
@@ -461,7 +495,7 @@ demographics_complete
 <p>Troubleshooting import operations is trickier than export operations for two major reasons. First, the database potentially persists your <em>import</em> mistakes. In contrast, repeatedly <em>exporting</em> data won’t affect subsequent reads. Considering cloning the REDCap project for testing until the problem is resolved. Remember to create a new token (because they’re not automatically created when projects are cloned, even when users are copied), and to modify your code’s token to point to the new testing clone.</p>
 <p>The second reason why importing can be trickier is because the schema (<em>e.g.</em>, the names and data types) of your local dataset must match the project’s schema. Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project’s schema and dataset. Also, consider exporting the dataset to your machine, and look for differences. Note that you cannot import calculated fields into REDCap.</p>
 <ol style="list-style-type: decimal">
-<li><p><strong>Does the dataset pass <a href="https://ouhscbbmc.github.io/REDCapR/reference/validate.html"><code><a href="../reference/validate.html">REDCapR::validate_for_write()</a></code></a>?</strong> The <code><a href="../reference/validate.html">REDCapR::validate_for_write()</a></code> inspects a data.frame to anticipate problems before writing with REDCap’s API. The reference manual contains specifics of the validation checks.</p></li>
+<li><p><strong>Does the dataset pass <a href="https://ouhscbbmc.github.io/REDCapR/reference/validate.html"><code>REDCapR::validate_for_write()</code></a>?</strong> The <code><a href="../reference/validate.html">REDCapR::validate_for_write()</a></code> inspects a data.frame to anticipate problems before writing with REDCap’s API. The reference manual contains specifics of the validation checks.</p></li>
 <li><p><strong>Can you import the <em>entire</em> project?</strong></p></li>
 <li><p><strong>Can you import a <em>subset</em> of the project?</strong></p></li>
 </ol>
@@ -517,7 +551,7 @@ demographics_complete
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

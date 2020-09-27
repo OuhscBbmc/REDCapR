@@ -86,13 +86,13 @@ only return the records (or record-events, if a longitudinal project) where
 the logic evaluates as TRUE.   An blank/empty string returns all records.}
 
 \item{col_types}{A \code{\link[readr:cols]{readr::cols()}} object passed internally to
-\code{\link[readr:read_csv]{readr::read_csv()}}.  Optional.}
+\code{\link[readr:read_delim]{readr::read_csv()}}.  Optional.}
 
 \item{guess_type}{A boolean value indicating if all columns should be
-returned as character.  If false, \code{\link[readr:read_csv]{readr::read_csv()}} guesses the intended
+returned as character.  If false, \code{\link[readr:read_delim]{readr::read_csv()}} guesses the intended
 data type for each column.  Ignored if \code{col_types} is not null.}
 
-\item{guess_max}{A positive integer passed to \code{\link[readr:read_csv]{readr::read_csv()}} that
+\item{guess_max}{A positive integer passed to \code{\link[readr:read_delim]{readr::read_csv()}} that
 specifies the maximum number of records to use for guessing column types.}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed

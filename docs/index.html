@@ -45,7 +45,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9001</span>
       </span>
     </div>
 
@@ -96,34 +96,42 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#redcapr-" class="anchor"></a><a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> <img src="reference/figures/logo.png" align="right" width="130">
 </h1></div>
-<p>We’ve been using R with <a href="https://projectredcap.org/">REDCap</a>’s API since 2012 and have developed <a href="https://github.com/OuhscBbmc/REDCapR"><code>REDCapR</code></a>. Before encapsulating these functions in a package, we were replicating 50+ lines of code to contact REDCap and robustly transform the returned <a href="https://en.wikipedia.org/wiki/Comma-separated_values">csv</a> into an R <code>data.frame</code>; it took twice that much to implement batching. All this can be done in one call to <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code><a href="reference/redcap_read.html">redcap_read()</a></code></a>:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="no">ds</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/redcap_read.html">redcap_read</a></span>(<span class="kw">redcap_uri</span><span class="kw">=</span><span class="no">uri</span>, <span class="kw">token</span><span class="kw">=</span><span class="no">token</span>)$<span class="no">data</span></pre></div>
-<p>The <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code><a href="reference/redcap_read.html">redcap_read()</a></code></a> function also accepts values for subsetting/filtering the records and fields. Here are two examples; the first selects only a portion of the rows, while the second selects only a portion of the columns. Documentation for the additional 20+ functions are found at <a href="https://ouhscbbmc.github.io/REDCapR/reference/">ouhscbbmc.github.io/REDCapR/reference</a>.</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="co"># Return only records with IDs of 1 and 4</span>
-<span class="no">desired_records</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">4</span>)
-<span class="no">ds_some_rows</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/redcap_read.html">redcap_read</a></span>(
-  <span class="kw">redcap_uri</span>   <span class="kw">=</span> <span class="no">uri</span>,
-  <span class="kw">token</span>        <span class="kw">=</span> <span class="no">token</span>,
-  <span class="kw">records</span>      <span class="kw">=</span> <span class="no">desired_records</span>
-)$<span class="no">data</span>
+<p>We’ve been using R with <a href="https://projectredcap.org/">REDCap</a>’s API since 2012 and have developed <a href="https://github.com/OuhscBbmc/REDCapR"><code>REDCapR</code></a>. Before encapsulating these functions in a package, we were replicating 50+ lines of code to contact REDCap and robustly transform the returned <a href="https://en.wikipedia.org/wiki/Comma-separated_values">csv</a> into an R <code>data.frame</code>; it took twice that much to implement batching. All this can be done in one call to <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code>redcap_read()</code></a>:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="kw">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/redcap_read.html">redcap_read</a></span>(redcap_uri=<span class="kw">uri</span>, token=<span class="kw">token</span>)<span class="op">$</span><span class="kw">data</span>
+</pre></div>
+<p>The <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code>redcap_read()</code></a> function also accepts values for subsetting/filtering the records and fields. Here are two examples; the first selects only a portion of the rows, while the second selects only a portion of the columns. Documentation for the additional 20+ functions are found at <a href="https://ouhscbbmc.github.io/REDCapR/reference/">ouhscbbmc.github.io/REDCapR/reference</a>.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="co"># Return only records with IDs of 1 and 4</span>
+<span class="kw">desired_records</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">4</span>)
+<span class="kw">ds_some_rows</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/redcap_read.html">redcap_read</a></span>(
+  redcap_uri   = <span class="kw">uri</span>,
+  token        = <span class="kw">token</span>,
+  records      = <span class="kw">desired_records</span>
+)<span class="op">$</span><span class="kw">data</span>
 
 <span class="co"># Return only the fields record_id, name_first, and age</span>
-<span class="no">desired_fields</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"record_id"</span>, <span class="st">"name_first"</span>, <span class="st">"age"</span>)
-<span class="no">ds_some_fields</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/redcap_read.html">redcap_read</a></span>(
-  <span class="kw">redcap_uri</span>  <span class="kw">=</span> <span class="no">uri</span>,
-  <span class="kw">token</span>       <span class="kw">=</span> <span class="no">token</span>,
-  <span class="kw">fields</span>      <span class="kw">=</span> <span class="no">desired_fields</span>
-)$<span class="no">data</span></pre></div>
+<span class="kw">desired_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"record_id"</span>, <span class="st">"name_first"</span>, <span class="st">"age"</span>)
+<span class="kw">ds_some_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/redcap_read.html">redcap_read</a></span>(
+  redcap_uri  = <span class="kw">uri</span>,
+  token       = <span class="kw">token</span>,
+  fields      = <span class="kw">desired_fields</span>
+)<span class="op">$</span><span class="kw">data</span>
+</pre></div>
 <p>The <code>REDCapR</code> package includes the SSL certificate retrieved by <a href="https://github.com/r-lib/httr/blob/master/R/utils.r"><code>httr::find_cert_bundle()</code></a>. Your REDCap server’s identity is always verified, unless the setting is overridden (alternative certificates can also be provided).</p>
 <p>To keep our maintenance efforts manageable, the package implements only the REDCap API functions that have been requested. If there’s a feature that would help your projects, please tell us in a new issue in REDCapR’s <a href="https://github.com/OuhscBbmc/REDCapR/issues">GitHub repository</a>. A <a href="https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html">troubleshooting</a> document helps diagnose issues with the API.</p>
 <div id="installation-and-documentation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#installation-and-documentation" class="anchor"></a>Installation and Documentation</h3>
 <p>The <em>release</em> version can be installed from <a href="https://cran.r-project.org/package=REDCapR">CRAN</a>.</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"REDCapR"</span>)</pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"REDCapR"</span>)
+</pre></div>
 <p>The <em>development</em> version can be installed from <a href="https://github.com/OuhscBbmc/REDCapR">GitHub</a> after installing the <code>remotes</code> package.</p>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>) <span class="co"># Run this line if the 'remotes' package isn't installed already.</span>
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="kw">repo</span><span class="kw">=</span><span class="st">"OuhscBbmc/REDCapR"</span>)</pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>) <span class="co"># Run this line if the 'remotes' package isn't installed already.</span>
+<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(repo=<span class="st">"OuhscBbmc/REDCapR"</span>)
+</pre></div>
 <p>The <a href="https://ouhscbbmc.github.io/REDCapR">ouhscbbmc.github.io/REDCapR</a> site describes the package functions, and includes documents involving <a href="https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html">basic operations</a>, <a href="https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.html">advanced operations</a>, <a href="https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html">token security</a>, and <a href="https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html">troubleshooting</a>.</p>
 <p>Also checkout the other packages that exist for communicating with REDCap, which are listed in the <a href="http://redcap-tools.github.io/projects/">REDCap Tools</a> directory.</p>
 </div>
@@ -260,7 +268,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

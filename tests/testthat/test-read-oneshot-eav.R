@@ -1,6 +1,7 @@
 library(testthat)
 
 credential  <- retrieve_credential_testing()
+update_expectation  <- FALSE
 
 test_that("smoke test", {
   testthat::skip_on_cran()
@@ -8,37 +9,8 @@ test_that("smoke test", {
 })
 test_that("default", {
   testthat::skip_on_cran()
-  expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
-    "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
-    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
-    "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402",
-    "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
-    ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333",
-    "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com",
-    "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
-    ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02",
-    "1955-04-15"), age = c(11L, 11L, 80L, 61L, 59L), sex = c(0L,
-    1L, 1L, 0L, 1L), height = c(7, 6, 180, 165, 193.04), weight = c(1L,
-    1L, 80L, 54L, 104L), bmi = c(204.1, 277.8, 24.7, 19.8, 27.9),
-    comments = c("Character in a book, with some guessing", "A mouse character from a good book",
-    "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
-    "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), mugshot = c(197977L, 197978L, 197979L, 198002L, 198021L), race___1 = c(FALSE, FALSE, FALSE,
-    FALSE, TRUE), race___2 = c(FALSE, FALSE, FALSE, TRUE, FALSE
-    ), race___3 = c(FALSE, TRUE, FALSE, FALSE, FALSE), race___4 = c(FALSE,
-    FALSE, TRUE, FALSE, FALSE), race___5 = c(TRUE, TRUE, TRUE,
-    TRUE, FALSE), race___6 = c(FALSE, FALSE, FALSE, FALSE, TRUE
-    ), ethnicity = c(1L, 1L, 0L, 1L, 2L), demographics_complete = c(2L,
-    2L, 2L, 2L, 2L), health_complete = c(1L, 0L, 2L, 2L, 0L),
-    race_and_ethnicity_complete = c(2L, 0L, 2L, 2L, 2L)), .Names = c("record_id",
-    "name_first", "name_last", "address", "telephone", "email", "dob",
-    "age", "sex", "height", "weight", "bmi", "comments", "mugshot",
-    "race___1", "race___2", "race___3", "race___4", "race___5", "race___6",
-    "ethnicity", "demographics_complete", "health_complete", "race_and_ethnicity_complete"
-    ), class = c("tbl_df", "tbl", "data.frame"), row.names = c(NA,
-    -5L))
-
-  expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  path_expected <- "test-data/specific-redcapr/read-oneshot-eav/default.R"
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   expect_message(
     regexp           = expected_outcome_message,
@@ -47,6 +19,9 @@ test_that("default", {
       token       = credential$token
     )
   )
+
+  if (update_expectation) save_expected(returned_object$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
 
   expect_equal(returned_object$data, expected=expected_data_frame) # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
@@ -59,38 +34,19 @@ test_that("default", {
   #expect_equal_to_reference(returned_object$data, file=system.file("test-data/project-simple/variations/default.rds", package="REDCapR"))
   #expect_equal_to_reference(returned_object$data, file="./test-data/project-simple/variations/default.rds")
 })
-test_that("specify forms", {
+test_that("specify-forms", {
   testthat::skip_on_cran()
+  path_expected <- "test-data/specific-redcapr/read-oneshot-eav/specify-forms.R"
   desired_forms <- c("demographics", "race_and_ethnicity")
-  expected_data_frame <-structure(
-    list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
-    "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
-    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
-    "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402",
-    "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
-    ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333",
-    "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com",
-    "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
-    ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02",
-    "1955-04-15"), age = c(11L, 11L, 80L, 61L, 59L), sex = c(0L,
-    1L, 1L, 0L, 1L), race___1 = c(FALSE, FALSE, FALSE, FALSE, TRUE
-    ), race___2 = c(FALSE, FALSE, FALSE, TRUE, FALSE), race___3 = c(FALSE,
-    TRUE, FALSE, FALSE, FALSE), race___4 = c(FALSE, FALSE, TRUE,
-    FALSE, FALSE), race___5 = c(TRUE, TRUE, TRUE, TRUE, FALSE), race___6 = c(FALSE,
-    FALSE, FALSE, FALSE, TRUE), ethnicity = c(1L, 1L, 0L, 1L, 2L),
-    demographics_complete = c(2L, 2L, 2L, 2L, 2L), race_and_ethnicity_complete = c(2L,
-    0L, 2L, 2L, 2L)), .Names = c("record_id", "name_first", "name_last",
-    "address", "telephone", "email", "dob", "age", "sex", "race___1",
-    "race___2", "race___3", "race___4", "race___5", "race___6", "ethnicity",
-    "demographics_complete", "race_and_ethnicity_complete"), class = c("tbl_df",
-    "tbl", "data.frame"), row.names = c(NA, -5L)
-  )
-  expected_outcome_message <- "5 records and 18 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   expect_message(
     regexp           = expected_outcome_message,
     returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token, forms=desired_forms)
   )
+
+  if (update_expectation) save_expected(returned_object$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
 
   expect_equal(returned_object$data, expected=expected_data_frame) # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
@@ -105,43 +61,17 @@ test_that("specify forms", {
 })
 test_that("raw", {
   testthat::skip_on_cran()
-  expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
-    "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
-    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
-    "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402",
-    "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
-    ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333",
-    "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com",
-    "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
-    ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02",
-    "1955-04-15"), age = c(11L, 11L, 80L, 61L, 59L), sex = c(0L,
-    1L, 1L, 0L, 1L), height = c(7, 6, 180, 165, 193.04), weight = c(1L,
-    1L, 80L, 54L, 104L), bmi = c(204.1, 277.8, 24.7, 19.8, 27.9),
-    comments = c("Character in a book, with some guessing", "A mouse character from a good book",
-    "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
-    "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), mugshot = c(197977L, 197978L, 197979L, 198002L, 198021L), race___1 = c(FALSE, FALSE, FALSE,
-    FALSE, TRUE), race___2 = c(FALSE, FALSE, FALSE, TRUE, FALSE
-    ), race___3 = c(FALSE, TRUE, FALSE, FALSE, FALSE), race___4 = c(FALSE,
-    FALSE, TRUE, FALSE, FALSE), race___5 = c(TRUE, TRUE, TRUE,
-    TRUE, FALSE), race___6 = c(FALSE, FALSE, FALSE, FALSE, TRUE
-    ), ethnicity = c(1L, 1L, 0L, 1L, 2L), demographics_complete = c(2L,
-    2L, 2L, 2L, 2L), health_complete = c(1L, 0L, 2L, 2L, 0L),
-    race_and_ethnicity_complete = c(2L, 0L, 2L, 2L, 2L)), .Names = c("record_id",
-    "name_first", "name_last", "address", "telephone", "email", "dob",
-    "age", "sex", "height", "weight", "bmi", "comments", "mugshot",
-    "race___1", "race___2", "race___3", "race___4", "race___5", "race___6",
-    "ethnicity", "demographics_complete", "health_complete", "race_and_ethnicity_complete"
-    ), class = c("tbl_df", "tbl", "data.frame"), row.names = c(NA,
-    -5L))
-
-  expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  path_expected <- "test-data/specific-redcapr/read-oneshot-eav/raw.R"
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   expect_message(
     regexp           = expected_outcome_message,
     returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="raw")
   )
 
+  if (update_expectation) save_expected(returned_object$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
+
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
@@ -151,45 +81,19 @@ test_that("raw", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
-test_that("raw and DAG", {
+test_that("raw-and-dag", {
   testthat::skip_on_cran()
-  expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
-    "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
-    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
-    "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402",
-    "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
-    ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333",
-    "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com",
-    "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
-    ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02",
-    "1955-04-15"), age = c(11L, 11L, 80L, 61L, 59L), sex = c(0L,
-    1L, 1L, 0L, 1L), height = c(7, 6, 180, 165, 193.04), weight = c(1L,
-    1L, 80L, 54L, 104L), bmi = c(204.1, 277.8, 24.7, 19.8, 27.9),
-    comments = c("Character in a book, with some guessing", "A mouse character from a good book",
-    "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
-    "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), mugshot = c(197977L, 197978L, 197979L, 198002L, 198021L), race___1 = c(FALSE, FALSE, FALSE,
-    FALSE, TRUE), race___2 = c(FALSE, FALSE, FALSE, TRUE, FALSE
-    ), race___3 = c(FALSE, TRUE, FALSE, FALSE, FALSE), race___4 = c(FALSE,
-    FALSE, TRUE, FALSE, FALSE), race___5 = c(TRUE, TRUE, TRUE,
-    TRUE, FALSE), race___6 = c(FALSE, FALSE, FALSE, FALSE, TRUE
-    ), ethnicity = c(1L, 1L, 0L, 1L, 2L), demographics_complete = c(2L,
-    2L, 2L, 2L, 2L), health_complete = c(1L, 0L, 2L, 2L, 0L),
-    race_and_ethnicity_complete = c(2L, 0L, 2L, 2L, 2L)), .Names = c("record_id",
-    "name_first", "name_last", "address", "telephone", "email", "dob",
-    "age", "sex", "height", "weight", "bmi", "comments", "mugshot",
-    "race___1", "race___2", "race___3", "race___4", "race___5", "race___6",
-    "ethnicity", "demographics_complete", "health_complete", "race_and_ethnicity_complete"
-    ), class = c("tbl_df", "tbl", "data.frame"), row.names = c(NA,
-    -5L))
-
-  expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  path_expected <- "test-data/specific-redcapr/read-oneshot-eav/raw-and-dag.R"
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   expect_message(
     regexp           = expected_outcome_message,
     returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="raw", export_data_access_groups=TRUE)
   )
 
+  if (update_expectation) save_expected(returned_object$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
+
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
@@ -199,47 +103,19 @@ test_that("raw and DAG", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
-test_that("label and DAG", {
+test_that("label-and-dag", {
   testthat::skip_on_cran()
-  expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
-    "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
-    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
-    "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402",
-    "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
-    ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333",
-    "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com",
-    "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
-    ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02",
-    "1955-04-15"), age = c(11L, 11L, 80L, 61L, 59L), sex = c("Female",
-    "Male", "Male", "Female", "Male"), height = c(7, 6, 180, 165,
-    193.04), weight = c(1L, 1L, 80L, 54L, 104L), bmi = c(204.1, 277.8,
-    24.7, 19.8, 27.9), comments = c("Character in a book, with some guessing",
-    "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
-    "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), mugshot = c(197977L, 197978L, 197979L, 198002L, 198021L), race___1 = c(FALSE, FALSE, FALSE, FALSE,
-    FALSE), race___2 = c(FALSE, FALSE, FALSE, FALSE, FALSE), race___3 = c(FALSE,
-    FALSE, FALSE, FALSE, FALSE), race___4 = c(FALSE, FALSE, FALSE,
-    FALSE, FALSE), race___5 = c(FALSE, FALSE, FALSE, FALSE, FALSE
-    ), race___6 = c(FALSE, FALSE, FALSE, FALSE, FALSE), ethnicity = c("NOT Hispanic or Latino",
-    "NOT Hispanic or Latino", "Unknown / Not Reported", "NOT Hispanic or Latino",
-    "Hispanic or Latino"), demographics_complete = c("Complete",
-    "Complete", "Complete", "Complete", "Complete"), health_complete = c("Unverified",
-    "Incomplete", "Complete", "Complete", "Incomplete"), race_and_ethnicity_complete = c("Complete",
-    "Incomplete", "Complete", "Complete", "Complete")), .Names = c("record_id",
-    "name_first", "name_last", "address", "telephone", "email", "dob",
-    "age", "sex", "height", "weight", "bmi", "comments", "mugshot",
-    "race___1", "race___2", "race___3", "race___4", "race___5", "race___6",
-    "ethnicity", "demographics_complete", "health_complete", "race_and_ethnicity_complete"
-    ), class = c("tbl_df", "tbl", "data.frame"), row.names = c(NA,
-    -5L))
-
-  expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  path_expected <- "test-data/specific-redcapr/read-oneshot-eav/label-and-dag.R"
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   expect_message(
     regexp           = expected_outcome_message,
     returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups=TRUE)
   )
 
+  if (update_expectation) save_expected(returned_object$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
+
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
@@ -249,44 +125,19 @@ test_that("label and DAG", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
-test_that("label header", {
+test_that("label-header", {
   testthat::skip_on_cran()
-  expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
-    "Marcus", "Trudy", "John Lee"), name_last = c("Nutmouse", "Nutmouse",
-    "Wood", "DAG", "Walker"), address = c("14 Rose Cottage St.\nKenning UK, 323232",
-    "14 Rose Cottage Blvd.\nKenning UK 34243", "243 Hill St.\nGuthrie OK 73402",
-    "342 Elm\nDuncanville TX, 75116", "Hotel Suite\nNew Orleans LA, 70115"
-    ), telephone = c("(405) 321-1111", "(405) 321-2222", "(405) 321-3333",
-    "(405) 321-4444", "(405) 321-5555"), email = c("nutty@mouse.com",
-    "tummy@mouse.comm", "mw@mwood.net", "peroxide@blonde.com", "left@hippocket.com"
-    ), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02",
-    "1955-04-15"), age = c(11L, 11L, 80L, 61L, 59L), sex = c(0L,
-    1L, 1L, 0L, 1L), height = c(7, 6, 180, 165, 193.04), weight = c(1L,
-    1L, 80L, 54L, 104L), bmi = c(204.1, 277.8, 24.7, 19.8, 27.9),
-    comments = c("Character in a book, with some guessing", "A mouse character from a good book",
-    "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail",
-    "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), mugshot = c(197977L, 197978L, 197979L, 198002L, 198021L), race___1 = c(FALSE, FALSE, FALSE,
-    FALSE, TRUE), race___2 = c(FALSE, FALSE, FALSE, TRUE, FALSE
-    ), race___3 = c(FALSE, TRUE, FALSE, FALSE, FALSE), race___4 = c(FALSE,
-    FALSE, TRUE, FALSE, FALSE), race___5 = c(TRUE, TRUE, TRUE,
-    TRUE, FALSE), race___6 = c(FALSE, FALSE, FALSE, FALSE, TRUE
-    ), ethnicity = c(1L, 1L, 0L, 1L, 2L), demographics_complete = c(2L,
-    2L, 2L, 2L, 2L), health_complete = c(1L, 0L, 2L, 2L, 0L),
-    race_and_ethnicity_complete = c(2L, 0L, 2L, 2L, 2L)), .Names = c("record_id",
-    "name_first", "name_last", "address", "telephone", "email", "dob",
-    "age", "sex", "height", "weight", "bmi", "comments", "mugshot",
-    "race___1", "race___2", "race___3", "race___4", "race___5", "race___6",
-    "ethnicity", "demographics_complete", "health_complete", "race_and_ethnicity_complete"
-    ), class = c("tbl_df", "tbl", "data.frame"), row.names = c(NA,
-    -5L))
+  path_expected <- "test-data/specific-redcapr/read-oneshot-eav/label-header.R"
 
-  expected_outcome_message <- "5 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   expect_message(
     regexp           = expected_outcome_message,
     returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label_headers="label")
   )
+
+  if (update_expectation) save_expected(returned_object$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
 
   expect_equivalent(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
@@ -297,33 +148,19 @@ test_that("label header", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
-test_that("filter - numeric", {
+test_that("filter-numeric", {
   testthat::skip_on_cran()
-  expected_data_frame <- structure(list(record_id = 3:4, name_first = c("Marcus", "Trudy"
-    ), name_last = c("Wood", "DAG"), address = c("243 Hill St.\nGuthrie OK 73402",
-    "342 Elm\nDuncanville TX, 75116"), telephone = c("(405) 321-3333",
-    "(405) 321-4444"), email = c("mw@mwood.net", "peroxide@blonde.com"
-    ), dob = c("1934-04-09", "1952-11-02"), age = c(80L, 61L), sex = c(1L,
-    0L), height = c(180L, 165L), weight = c(80L, 54L), bmi = c(24.7,
-    19.8), comments = c("completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail"
-    ), mugshot = c(197979L, 198002L), race___1 = c(FALSE, FALSE), race___2 = c(FALSE,
-    TRUE), race___3 = c(FALSE, FALSE), race___4 = c(TRUE, FALSE),
-    race___5 = c(TRUE, TRUE), race___6 = c(FALSE, FALSE), ethnicity = 0:1,
-    demographics_complete = c(2L, 2L), health_complete = c(2L,
-    2L), race_and_ethnicity_complete = c(2L, 2L)), .Names = c("record_id",
-    "name_first", "name_last", "address", "telephone", "email", "dob",
-    "age", "sex", "height", "weight", "bmi", "comments", "mugshot",
-    "race___1", "race___2", "race___3", "race___4", "race___5", "race___6",
-    "ethnicity", "demographics_complete", "health_complete", "race_and_ethnicity_complete"
-    ), class = c("tbl_df", "tbl", "data.frame"), row.names = c(NA,
-    -2L))
+  path_expected <- "test-data/specific-redcapr/read-oneshot-eav/filter-numeric.R"
 
-  expected_outcome_message <- "2 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   filter <- "[age] >= 61"
   expect_message(
     regexp           = expected_outcome_message,
     returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token, filter_logic=filter)
   )
+
+  if (update_expectation) save_expected(returned_object$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
@@ -334,28 +171,22 @@ test_that("filter - numeric", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
-test_that("filter - character", {
+test_that("filter-character", {
   testthat::skip_on_cran()
-  expected_data_frame <- structure(list(record_id = 5L, name_first = "John Lee", name_last = "Walker",
-    address = "Hotel Suite\nNew Orleans LA, 70115", telephone = "(405) 321-5555",
-    email = "left@hippocket.com", dob = "1955-04-15", age = 59L,
-    sex = 1L, height = 193.04, weight = 104L, bmi = 27.9, comments = "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache",
-    mugshot = 198021L, race___1 = TRUE, race___2 = FALSE, race___3 = FALSE,
-    race___4 = FALSE, race___5 = FALSE, race___6 = TRUE, ethnicity = 2L,
-    demographics_complete = 2L, health_complete = 0L, race_and_ethnicity_complete = 2L), .Names = c("record_id",
-    "name_first", "name_last", "address", "telephone", "email", "dob",
-    "age", "sex", "height", "weight", "bmi", "comments", "mugshot",
-    "race___1", "race___2", "race___3", "race___4", "race___5", "race___6",
-    "ethnicity", "demographics_complete", "health_complete", "race_and_ethnicity_complete"
-    ), class = c("tbl_df", "tbl", "data.frame"), row.names = c(NA,
-    -1L))
+  path_expected <- "test-data/specific-redcapr/read-oneshot-eav/filter-character.R"
 
-  expected_outcome_message <- "1 records and 24 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  if (update_expectation) save_expected(returned_object$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
+
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   filter <- "[name_first] = 'John Lee'"
   expect_message(
     regexp           = expected_outcome_message,
     returned_object <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=credential$redcap_uri, token=credential$token, filter_logic=filter)
   )
+
+  if (update_expectation) save_expected(returned_object$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)

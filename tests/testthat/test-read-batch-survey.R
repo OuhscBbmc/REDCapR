@@ -1,11 +1,10 @@
 library(testthat)
 
-
 credential          <- retrieve_credential_testing(817L)
 project             <- redcap_project$new(redcap_uri=credential$redcap_uri, token=credential$token)
-directory_relative  <- "test-data/project-survey/expected"
+update_expectation  <- FALSE
 
-test_that("Smoke Test", {
+test_that("smoke", {
   testthat::skip_on_cran()
 
   #Static method w/ default batch size
@@ -25,27 +24,21 @@ test_that("Smoke Test", {
   )
 })
 
-test_that("SO example for data.frame retreival", {
-  file_name <- "dummy.rds"
-  path_qualified <- system.file(directory_relative, file_name, package="REDCapR")
+test_that("so-example-data-frame-retrieval", {
+  path_expected <- "test-data/project-survey/expected/so-example-data-frame-retrieval.R"
 
   actual <- data.frame(a=1:5, b=6:10) # saveRDS(actual, file.path("./inst", directory_relative, file_name))
-  expect_true(file.exists(path_qualified), "The saved data.frame should be retrieved from disk.")
-  expected <- readRDS(path_qualified)
-  expect_equal(actual, expected, label="The returned data.frame should be correct")
+
+  if (update_expectation) save_expected(actual, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
+
+  expect_equal(actual, expected_data_frame, label="The returned data.frame should be correct")
 })
 
-test_that("All Records -Default", {
+test_that("default", {
   testthat::skip_on_cran()
-
-  file_name <- "default.rds"
-  path_qualified <- system.file(directory_relative, file_name, package="REDCapR")
-
+  path_expected <- "test-data/project-survey/expected/default.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
-
-  # saveRDS(returned_object1$data, file.path("./inst", directory_relative, file_name), compress="xz")
-  expected_data_frame <- readRDS(path_qualified)
-  # expected_data_frame <- eval(parse(path_expected), enclos = new.env()) #dput(returned_object1$data, file=path_expected)
 
   ###########################
   ## Default Batch size
@@ -53,6 +46,10 @@ test_that("All Records -Default", {
     regexp            = expected_outcome_message,
     returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, export_survey_fields=TRUE)
   )
+
+  if (update_expectation) save_expected(returned_object1$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
+
   expect_equivalent(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
   expect_true(all(!is.na(returned_object1$data$prescreening_survey_timestamp)))
   expect_true(returned_object1$success)
@@ -79,4 +76,4 @@ test_that("All Records -Default", {
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
 
-rm(credential)
+rm(credential, update_expectation)

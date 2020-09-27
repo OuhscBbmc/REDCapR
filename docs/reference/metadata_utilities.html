@@ -87,7 +87,7 @@ project metadata." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9001</span>
       </span>
     </div>
 
@@ -145,9 +145,9 @@ project metadata." />
 project metadata.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>regex_named_captures</span>(<span class='no'>pattern</span>, <span class='no'>text</span>, <span class='kw'>perl</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'>regex_named_captures</span>(<span class='kw'>pattern</span>, <span class='kw'>text</span>, perl = <span class='fl'>TRUE</span>)
 
-<span class='fu'>checkbox_choices</span>(<span class='no'>select_choices</span>)</pre>
+<span class='fu'>checkbox_choices</span>(<span class='kw'>select_choices</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -196,13 +196,16 @@ for the numeric id and one for the text label.</p>
 checkbox label.
 <em>I'm bluffing here, because I don't know where this is located.
 If you know, please tell me.</em></p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Will Beasley</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># The weird ranges are to avoid the pipe character;</span>
 <span class='co'>#   PCRE doesn't support character negation.</span>
-<span class='no'>pattern_boxes</span> <span class='kw'>&lt;-</span> <span class='st'>"(?&lt;=\\A| \\| )(?&lt;id&gt;\\d{1,}), (?&lt;label&gt;[\x20-\x7B\x7D-\x7E]{1,})(?= \\| |\\Z)"</span>
+<span class='kw'>pattern_boxes</span> <span class='op'>&lt;-</span> <span class='st'>"(?&lt;=\\A| \\| )(?&lt;id&gt;\\d{1,}), (?&lt;label&gt;[\x20-\x7B\x7D-\x7E]{1,})(?= \\| |\\Z)"</span>
 
-<span class='no'>choices_1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(
+<span class='kw'>choices_1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(
   <span class='st'>"1, American Indian/Alaska Native | "</span>,
   <span class='st'>"2, Asian | "</span>,
   <span class='st'>"3, Native Hawaiian or Other Pacific Islander | "</span>,
@@ -211,7 +214,8 @@ If you know, please tell me.</em></p>
   <span class='st'>"6, Unknown / Not Reported"</span>)
 
 <span class='co'># This calls the general function, and requires the correct regex pattern.</span>
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>regex_named_captures</span>(<span class='kw'>pattern</span><span class='kw'>=</span><span class='no'>pattern_boxes</span>, <span class='kw'>text</span><span class='kw'>=</span><span class='no'>choices_1</span>)</div><div class='output co'>#&gt;   id                                     label
+<span class='kw'>REDCapR</span>::<span class='fu'>regex_named_captures</span>(pattern=<span class='kw'>pattern_boxes</span>, text=<span class='kw'>choices_1</span>)
+</div><div class='output co'>#&gt;   id                                     label
 #&gt; 1  1             American Indian/Alaska Native
 #&gt; 2  2                                     Asian
 #&gt; 3  3 Native Hawaiian or Other Pacific Islander
@@ -219,27 +223,29 @@ If you know, please tell me.</em></p>
 #&gt; 5  5                                     White
 #&gt; 6  6                    Unknown / Not Reported</div><div class='input'>
 <span class='co'># This function is designed specifically for the checkbox values.</span>
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>checkbox_choices</span>(<span class='kw'>select_choices</span><span class='kw'>=</span><span class='no'>choices_1</span>)</div><div class='output co'>#&gt;   id                                     label
+<span class='kw'>REDCapR</span>::<span class='fu'>checkbox_choices</span>(select_choices=<span class='kw'>choices_1</span>)
+</div><div class='output co'>#&gt;   id                                     label
 #&gt; 1  1             American Indian/Alaska Native
 #&gt; 2  2                                     Asian
 #&gt; 3  3 Native Hawaiian or Other Pacific Islander
 #&gt; 4  4                 Black or African American
 #&gt; 5  5                                     White
 #&gt; 6  6                    Unknown / Not Reported</div><div class='input'>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>uri</span>         <span class='kw'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class='no'>token</span>       <span class='kw'>&lt;-</span> <span class='st'>"9A81268476645C4E5F03428B8AC3AA7B"</span>
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>uri</span>         <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class='kw'>token</span>       <span class='op'>&lt;-</span> <span class='st'>"9A81268476645C4E5F03428B8AC3AA7B"</span>
 
-<span class='no'>ds_metadata</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='redcap_metadata_read.html'>redcap_metadata_read</a></span>(<span class='kw'>redcap_uri</span><span class='kw'>=</span><span class='no'>uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>)$<span class='no'>data</span>
-<span class='no'>choices_2</span>   <span class='kw'>&lt;-</span> <span class='no'>ds_metadata</span>[<span class='no'>ds_metadata</span>$<span class='no'>field_name</span><span class='kw'>==</span><span class='st'>"race"</span>, <span class='st'>"select_choices_or_calculations"</span>]
+<span class='kw'>ds_metadata</span> <span class='op'>&lt;-</span> <span class='fu'><a href='redcap_metadata_read.html'>redcap_metadata_read</a></span>(redcap_uri=<span class='kw'>uri</span>, token=<span class='kw'>token</span>)<span class='op'>$</span><span class='kw'>data</span>
+<span class='kw'>choices_2</span>   <span class='op'>&lt;-</span> <span class='kw'>ds_metadata</span>[<span class='kw'>ds_metadata</span><span class='op'>$</span><span class='kw'>field_name</span><span class='op'>==</span><span class='st'>"race"</span>, <span class='st'>"select_choices_or_calculations"</span>]
 
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>regex_named_captures</span>(<span class='kw'>pattern</span><span class='kw'>=</span><span class='no'>pattern_boxes</span>, <span class='kw'>text</span><span class='kw'>=</span><span class='no'>choices_2</span>)
+<span class='kw'>REDCapR</span>::<span class='fu'>regex_named_captures</span>(pattern=<span class='kw'>pattern_boxes</span>, text=<span class='kw'>choices_2</span>)
 }
 
-<span class='no'>path_3</span>         <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='kw'>package</span><span class='kw'>=</span><span class='st'>"REDCapR"</span>, <span class='st'>"test-data/project-simple/simple-metadata.csv"</span>)
-<span class='no'>ds_metadata_3</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span>(<span class='no'>path_3</span>, <span class='kw'>stringsAsFactors</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-<span class='no'>choices_3</span>      <span class='kw'>&lt;-</span> <span class='no'>ds_metadata_3</span>[<span class='no'>ds_metadata_3</span>$<span class='no'>field_name</span><span class='kw'>==</span><span class='st'>"race"</span>, <span class='st'>"select_choices_or_calculations"</span>]
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>regex_named_captures</span>(<span class='kw'>pattern</span><span class='kw'>=</span><span class='no'>pattern_boxes</span>, <span class='kw'>text</span><span class='kw'>=</span><span class='no'>choices_3</span>)</div><div class='output co'>#&gt;   id                                     label
+<span class='kw'>path_3</span>         <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(package=<span class='st'>"REDCapR"</span>, <span class='st'>"test-data/project-simple/simple-metadata.csv"</span>)
+<span class='kw'>ds_metadata_3</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span>(<span class='kw'>path_3</span>, stringsAsFactors=<span class='fl'>FALSE</span>)
+<span class='kw'>choices_3</span>      <span class='op'>&lt;-</span> <span class='kw'>ds_metadata_3</span>[<span class='kw'>ds_metadata_3</span><span class='op'>$</span><span class='kw'>field_name</span><span class='op'>==</span><span class='st'>"race"</span>, <span class='st'>"select_choices_or_calculations"</span>]
+<span class='kw'>REDCapR</span>::<span class='fu'>regex_named_captures</span>(pattern=<span class='kw'>pattern_boxes</span>, text=<span class='kw'>choices_3</span>)
+</div><div class='output co'>#&gt;   id                                     label
 #&gt; 1  1             American Indian/Alaska Native
 #&gt; 2  2                                     Asian
 #&gt; 3  3 Native Hawaiian or Other Pacific Islander
@@ -261,7 +267,7 @@ If you know, please tell me.</em></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

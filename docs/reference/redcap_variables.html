@@ -87,7 +87,7 @@ REDCap API." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9001</span>
       </span>
     </div>
 
@@ -145,7 +145,7 @@ REDCap API." />
 REDCap API.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>redcap_variables</span>(<span class='no'>redcap_uri</span>, <span class='no'>token</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>redcap_variables</span>(<span class='kw'>redcap_uri</span>, <span class='kw'>token</span>, verbose = <span class='fl'>TRUE</span>, config_options = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -208,13 +208,17 @@ https://community.projectredcap.org/articles/456/api-documentation.html and
 https://community.projectredcap.org/articles/462/api-examples.html).
 If you do not have an account for the wiki, please ask your campus REDCap
 administrator to send you the static material.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Will Beasley</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>uri</span>         <span class='kw'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class='no'>token</span>       <span class='kw'>&lt;-</span> <span class='st'>"9A81268476645C4E5F03428B8AC3AA7B"</span>
-<span class='no'>ds_variable</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>redcap_variables</span>(<span class='kw'>redcap_uri</span><span class='kw'>=</span><span class='no'>uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>)$<span class='no'>data</span>
-}</div></pre>
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>uri</span>         <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class='kw'>token</span>       <span class='op'>&lt;-</span> <span class='st'>"9A81268476645C4E5F03428B8AC3AA7B"</span>
+<span class='kw'>ds_variable</span> <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='fu'>redcap_variables</span>(redcap_uri=<span class='kw'>uri</span>, token=<span class='kw'>token</span>)<span class='op'>$</span><span class='kw'>data</span>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -230,7 +234,7 @@ administrator to send you the static material.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

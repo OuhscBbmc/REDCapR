@@ -86,7 +86,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9001</span>
       </span>
     </div>
 
@@ -143,7 +143,7 @@
     <p>This function uses REDCap's API to query its version.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>redcap_version</span>(<span class='no'>redcap_uri</span>, <span class='no'>token</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>redcap_version</span>(<span class='kw'>redcap_uri</span>, <span class='kw'>token</span>, verbose = <span class='fl'>TRUE</span>, config_options = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -184,9 +184,10 @@ This ensures that a the function will always return an object of class
 <code><a href='https://rdrr.io/r/utils/compareVersion.html'>utils::compareVersion()</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>uri</span>      <span class='kw'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class='no'>token</span>    <span class='kw'>&lt;-</span> <span class='st'>"9A81268476645C4E5F03428B8AC3AA7B"</span>
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>redcap_version</span>(<span class='kw'>redcap_uri</span> <span class='kw'>=</span> <span class='no'>uri</span>, <span class='kw'>token</span> <span class='kw'>=</span> <span class='no'>token</span>)</div><div class='output co'>#&gt; <span class='message'>The REDCap version was successfully determined in 0.2 seconds. The http status code was 200.  Is is 9.0.0.</span></div><div class='output co'>#&gt; [1] ‘9.0.0’</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>uri</span>      <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class='kw'>token</span>    <span class='op'>&lt;-</span> <span class='st'>"9A81268476645C4E5F03428B8AC3AA7B"</span>
+<span class='kw'>REDCapR</span>::<span class='fu'>redcap_version</span>(redcap_uri = <span class='kw'>uri</span>, token = <span class='kw'>token</span>)
+</div><div class='output co'>#&gt; <span class='message'>The REDCap version was successfully determined in 0.2 seconds. The http status code was 200.  Is is 9.0.0.</span></div><div class='output co'>#&gt; [1] ‘9.0.0’</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -202,7 +203,7 @@ This ensures that a the function will always return an object of class
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

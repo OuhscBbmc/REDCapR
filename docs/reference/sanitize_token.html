@@ -88,7 +88,7 @@ Trailing line endings are removed." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9001</span>
       </span>
     </div>
 
@@ -147,7 +147,7 @@ pattern of a 32-character hexadecimal value.
 Trailing line endings are removed.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sanitize_token</span>(<span class='no'>token</span>)</pre>
+    <pre class="usage"><span class='fu'>sanitize_token</span>(<span class='kw'>token</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -165,11 +165,16 @@ Trailing line endings are removed.</p>
 
     <p>Contact your institution's REDCap administrator for more information
 about your project-specific token.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Hao Zhu, Benjamin Nutter, Will Beasley</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>secret_token_1</span> <span class='kw'>&lt;-</span> <span class='st'>"12345678901234567890123456ABCDEF"</span>
-<span class='no'>secret_token_2</span> <span class='kw'>&lt;-</span> <span class='st'>"12345678901234567890123456ABCDEF\n"</span>
-<span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>sanitize_token</span>(<span class='no'>secret_token_1</span>)</div><div class='output co'>#&gt; [1] "12345678901234567890123456ABCDEF"</div><div class='input'><span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>sanitize_token</span>(<span class='no'>secret_token_2</span>)</div><div class='output co'>#&gt; [1] "12345678901234567890123456ABCDEF"</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>secret_token_1</span> <span class='op'>&lt;-</span> <span class='st'>"12345678901234567890123456ABCDEF"</span>
+<span class='kw'>secret_token_2</span> <span class='op'>&lt;-</span> <span class='st'>"12345678901234567890123456ABCDEF\n"</span>
+<span class='kw'>REDCapR</span>::<span class='fu'>sanitize_token</span>(<span class='kw'>secret_token_1</span>)
+</div><div class='output co'>#&gt; [1] "12345678901234567890123456ABCDEF"</div><div class='input'><span class='kw'>REDCapR</span>::<span class='fu'>sanitize_token</span>(<span class='kw'>secret_token_2</span>)
+</div><div class='output co'>#&gt; [1] "12345678901234567890123456ABCDEF"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -185,7 +190,7 @@ about your project-specific token.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

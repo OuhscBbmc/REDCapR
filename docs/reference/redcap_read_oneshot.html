@@ -86,7 +86,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9001</span>
       </span>
     </div>
 
@@ -144,27 +144,27 @@
     </div>
 
     <pre class="usage"><span class='fu'>redcap_read_oneshot</span>(
-  <span class='no'>redcap_uri</span>,
-  <span class='no'>token</span>,
-  <span class='kw'>records</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>records_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>fields</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>fields_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>forms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>forms_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>events</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>events_collapsed</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>raw_or_label</span> <span class='kw'>=</span> <span class='st'>"raw"</span>,
-  <span class='kw'>raw_or_label_headers</span> <span class='kw'>=</span> <span class='st'>"raw"</span>,
-  <span class='kw'>export_checkbox_label</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>export_survey_fields</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>export_data_access_groups</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>filter_logic</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>col_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>guess_type</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>guess_max</span> <span class='kw'>=</span> <span class='fl'>1000L</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>config_options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+  <span class='kw'>redcap_uri</span>,
+  <span class='kw'>token</span>,
+  records = <span class='kw'>NULL</span>,
+  records_collapsed = <span class='st'>""</span>,
+  fields = <span class='kw'>NULL</span>,
+  fields_collapsed = <span class='st'>""</span>,
+  forms = <span class='kw'>NULL</span>,
+  forms_collapsed = <span class='st'>""</span>,
+  events = <span class='kw'>NULL</span>,
+  events_collapsed = <span class='st'>""</span>,
+  raw_or_label = <span class='st'>"raw"</span>,
+  raw_or_label_headers = <span class='st'>"raw"</span>,
+  export_checkbox_label = <span class='fl'>FALSE</span>,
+  export_survey_fields = <span class='fl'>FALSE</span>,
+  export_data_access_groups = <span class='fl'>FALSE</span>,
+  filter_logic = <span class='st'>""</span>,
+  col_types = <span class='kw'>NULL</span>,
+  guess_type = <span class='fl'>TRUE</span>,
+  guess_max = <span class='fl'>1000L</span>,
+  verbose = <span class='fl'>TRUE</span>,
+  config_options = <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -328,49 +328,53 @@ https://community.projectredcap.org/articles/456/api-documentation.html and
 https://community.projectredcap.org/articles/462/api-examples.html).
 If you do not have an account for the wiki, please ask your campus REDCap
 administrator to send you the static material.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Will Beasley</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>uri</span>      <span class='kw'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class='no'>token</span>    <span class='kw'>&lt;-</span> <span class='st'>"9A81268476645C4E5F03428B8AC3AA7B"</span>
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>uri</span>      <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class='kw'>token</span>    <span class='op'>&lt;-</span> <span class='st'>"9A81268476645C4E5F03428B8AC3AA7B"</span>
 
 <span class='co'>#Return all records and all variables.</span>
-<span class='no'>ds</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>redcap_read_oneshot</span>(<span class='kw'>redcap_uri</span><span class='kw'>=</span><span class='no'>uri</span>, <span class='kw'>token</span><span class='kw'>=</span><span class='no'>token</span>)$<span class='no'>data</span>
+<span class='kw'>ds</span> <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='fu'>redcap_read_oneshot</span>(redcap_uri=<span class='kw'>uri</span>, token=<span class='kw'>token</span>)<span class='op'>$</span><span class='kw'>data</span>
 
 <span class='co'>#Return only records with IDs of 1 and 3</span>
-<span class='no'>desired_records_v1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>)
-<span class='no'>ds_some_rows_v1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>redcap_read_oneshot</span>(
-   <span class='kw'>redcap_uri</span> <span class='kw'>=</span> <span class='no'>uri</span>,
-   <span class='kw'>token</span>      <span class='kw'>=</span> <span class='no'>token</span>,
-   <span class='kw'>records</span>    <span class='kw'>=</span> <span class='no'>desired_records_v1</span>
-)$<span class='no'>data</span>
+<span class='kw'>desired_records_v1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>)
+<span class='kw'>ds_some_rows_v1</span> <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='fu'>redcap_read_oneshot</span>(
+   redcap_uri = <span class='kw'>uri</span>,
+   token      = <span class='kw'>token</span>,
+   records    = <span class='kw'>desired_records_v1</span>
+)<span class='op'>$</span><span class='kw'>data</span>
 
 <span class='co'>#Return only the fields record_id, name_first, and age</span>
-<span class='no'>desired_fields_v1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"record_id"</span>, <span class='st'>"name_first"</span>, <span class='st'>"age"</span>)
-<span class='no'>ds_some_fields_v1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>redcap_read_oneshot</span>(
-   <span class='kw'>redcap_uri</span> <span class='kw'>=</span> <span class='no'>uri</span>,
-   <span class='kw'>token</span>      <span class='kw'>=</span> <span class='no'>token</span>,
-   <span class='kw'>fields</span>     <span class='kw'>=</span> <span class='no'>desired_fields_v1</span>
-)$<span class='no'>data</span>
+<span class='kw'>desired_fields_v1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"record_id"</span>, <span class='st'>"name_first"</span>, <span class='st'>"age"</span>)
+<span class='kw'>ds_some_fields_v1</span> <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='fu'>redcap_read_oneshot</span>(
+   redcap_uri = <span class='kw'>uri</span>,
+   token      = <span class='kw'>token</span>,
+   fields     = <span class='kw'>desired_fields_v1</span>
+)<span class='op'>$</span><span class='kw'>data</span>
 
 
 <span class='co'># Specify the column types.</span>
-<span class='no'>col_types</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/cols.html'>cols</a></span>(
-  <span class='kw'>record_id</span>  <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_integer</a></span>(),
-  <span class='kw'>race___1</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>(),
-  <span class='kw'>race___2</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>(),
-  <span class='kw'>race___3</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>(),
-  <span class='kw'>race___4</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>(),
-  <span class='kw'>race___5</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>(),
-  <span class='kw'>race___6</span>   <span class='kw'>=</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>()
+<span class='kw'>col_types</span> <span class='op'>&lt;-</span> <span class='kw'>readr</span>::<span class='fu'><a href='https://readr.tidyverse.org/reference/cols.html'>cols</a></span>(
+  record_id  = <span class='kw'>readr</span>::<span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_integer</a></span>(),
+  race___1   = <span class='kw'>readr</span>::<span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>(),
+  race___2   = <span class='kw'>readr</span>::<span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>(),
+  race___3   = <span class='kw'>readr</span>::<span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>(),
+  race___4   = <span class='kw'>readr</span>::<span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>(),
+  race___5   = <span class='kw'>readr</span>::<span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>(),
+  race___6   = <span class='kw'>readr</span>::<span class='fu'><a href='https://readr.tidyverse.org/reference/parse_atomic.html'>col_logical</a></span>()
 )
-<span class='no'>ds_col_types</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>REDCapR</span><span class='kw ns'>::</span><span class='fu'>redcap_read_oneshot</span>(
-   <span class='kw'>redcap_uri</span> <span class='kw'>=</span> <span class='no'>uri</span>,
-   <span class='kw'>token</span>      <span class='kw'>=</span> <span class='no'>token</span>,
-   <span class='kw'>col_types</span>  <span class='kw'>=</span> <span class='no'>col_types</span>
-)$<span class='no'>data</span>
+<span class='kw'>ds_col_types</span> <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='fu'>redcap_read_oneshot</span>(
+   redcap_uri = <span class='kw'>uri</span>,
+   token      = <span class='kw'>token</span>,
+   col_types  = <span class='kw'>col_types</span>
+)<span class='op'>$</span><span class='kw'>data</span>
 
-}</div></pre>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -386,7 +390,7 @@ administrator to send you the static material.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

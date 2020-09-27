@@ -85,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9001</span>
       </span>
     </div>
 
@@ -145,18 +145,19 @@
 <h3 class="hasAnchor">
 <a href="#breaking-changes-possible-but-unlikely" class="anchor"></a>Breaking Changes (possible, but unlikely)</h3>
 <ul>
-<li><p><a href="https://ouhscbbmc.github.io/REDCapR/reference/kernel_api.html"><code><a href="../reference/kernel_api.html">kernel_api()</a></code></a> defaults to “text/csv” and UTF-8 encoding. Formerly, the function would decide on the content-type and encoding. More details are below in the ‘Stability Features’ subsection.</p></li>
-<li><p><a href="https://ouhscbbmc.github.io/REDCapR/reference/constant.html"><code><a href="../reference/constant.html">constant()</a></code></a> no longer accepts <code>simplify</code> as an options. An integer vector is always returned. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/280'>#280</a>)</p></li>
+<li><p><a href="https://ouhscbbmc.github.io/REDCapR/reference/kernel_api.html"><code>kernel_api()</code></a> defaults to “text/csv” and UTF-8 encoding. Formerly, the function would decide on the content-type and encoding. More details are below in the ‘Stability Features’ subsection.</p></li>
+<li><p><a href="https://ouhscbbmc.github.io/REDCapR/reference/constant.html"><code>constant()</code></a> no longer accepts <code>simplify</code> as an options. An integer vector is always returned. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/280'>#280</a>)</p></li>
 </ul>
 </div>
 <div id="new-features" class="section level3">
 <h3 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>New Features</h3>
 <ul>
-<li><p>It’s now possible to specify the exact <code>col_types</code> (a <a href="https://readr.tidyverse.org/reference/cols.html"><code><a href="https://readr.tidyverse.org/reference/cols.html">readr::cols</a></code></a> object) that is passed to <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> inside <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-read-oneshot.R"><code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code></a>. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/258'>#258</a>)</p></li>
+<li><p>It’s now possible to specify the exact <code>col_types</code> (a <a href="https://readr.tidyverse.org/reference/cols.html"><code>readr::cols</code></a> object) that is passed to <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> inside <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-read-oneshot.R"><code>redcap_read_oneshot()</code></a>. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/258'>#258</a>)</p></li>
 <li><p><a href="https://readr.tidyverse.org/reference/type_convert.html"><code>reader::type_convert()</code></a> is used <em>after</em> all the batches are stacked on top of each other. This way, batches cannot have incompatible data types as they’re combined. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/257'>#257</a>; thanks <a href='https://github.com/isaactpetersen'>@isaactpetersen</a> <a href='https://github.com/OuhscBbmc/REDCapR/issues/245'>#245</a>) Consequently, the <code>guess_max</code> parameter in <code><a href="../reference/redcap_read.html">redcap_read()</a></code> no longer serves a purpose, and has been soft-deprecated. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/267'>#267</a>)</p></li>
-<li><p><a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_write.html"><code><a href="../reference/redcap_metadata_write.html">redcap_metadata_write()</a></code></a> writes to the project’s metadata. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/274'>#274</a>, <a href='https://github.com/felixetorres'>@felixetorres</a>)</p></li>
-<li><p><a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_survey_link_export_oneshot.html"><code><a href="../reference/redcap_survey_link_export_oneshot.html">redcap_survey_link_export_oneshot()</a></code></a> retrieves the URL to a specific record’s suvey (<em>e.g.</em>, “<a href="https://bbmc.ouhsc.edu/redcap/surveys/?s=8KuzSLMHf6" class="uri">https://bbmc.ouhsc.edu/redcap/surveys/?s=8KuzSLMHf6</a>”) (<a href='https://github.com/OuhscBbmc/REDCapR/issues/293'>#293</a>)</p></li>
+<li><p><a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_write.html"><code>redcap_metadata_write()</code></a> writes to the project’s metadata. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/274'>#274</a>, <a href='https://github.com/felixetorres'>@felixetorres</a>)</p></li>
+<li><p><a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_survey_link_export_oneshot.html"><code>redcap_survey_link_export_oneshot()</code></a> retrieves the URL to a specific record’s survey (<em>e.g.</em>, “<a href="https://bbmc.ouhsc.edu/redcap/surveys/?s=8KuzSLMHf6" class="uri">https://bbmc.ouhsc.edu/redcap/surveys/?s=8KuzSLMHf6</a>”) (<a href='https://github.com/OuhscBbmc/REDCapR/issues/293'>#293</a>)</p></li>
+<li><p><code>convert_logical_to_integer</code> is a new parameter for <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_write.html"><code>redcap_write()</code></a> and <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_write_oneshot.html"><code>redcap_write_oneshot()</code></a>. If <code>TRUE</code>, all [base::logical] columns in <code>ds</code> are cast to an integer before uploading to REDCap. Boolean values are typically represented as 0/1 in REDCap radio buttons. Defaults to <code>FALSE</code> to maintain backwards compatibility. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/305'>#305</a>)</p></li>
 </ul>
 </div>
 <div id="stability-features" class="section level3">
@@ -178,7 +179,8 @@
 <h3 class="hasAnchor">
 <a href="#corrections" class="anchor"></a>Corrections</h3>
 <ul>
-<li>‘checkmate’ package is now imported, not suggested (Thanks <a href='https://github.com/dtenenba'>@dtenenba</a>, <a href='https://github.com/OuhscBbmc/REDCapR/issues/255'>#255</a>)</li>
+<li><p>‘checkmate’ package is now imported, not suggested (Thanks <a href='https://github.com/dtenenba'>@dtenenba</a>, <a href='https://github.com/OuhscBbmc/REDCapR/issues/255'>#255</a>).</p></li>
+<li><p>Allow more than one <code><a href="https://httr.r-lib.org/reference/config.html">httr::config()</a></code> parameter to be passed (Thanks <a href='https://github.com/BastienRance'>@BastienRance</a>, <a href='https://github.com/OuhscBbmc/REDCapR/issues/307'>#307</a>).</p></li>
 </ul>
 </div>
 </div>
@@ -502,7 +504,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -26,8 +26,8 @@ pkgdown::build_site()
 devtools::run_examples(); #dev.off() #This overwrites the NAMESPACE file too
 # devtools::run_examples(, "redcap_read.Rd")
 test_results_checked <- devtools::test()
-test_results_checked <- devtools::test(filter = "read-oneshot-eav")
-test_results_checked <- devtools::test(filter = "metadata-write")
+test_results_checked <- devtools::test(filter = "read-batch-sim.*")
+test_results_checked <- devtools::test(filter = "metadata-read")
 test_results_checked <- devtools::test(filter = "validate.*$")
 
 # testthat::test_dir("./tests/")

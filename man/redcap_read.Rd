@@ -101,10 +101,10 @@ will only return the records (or record-events, if a longitudinal project)
 where the logic evaluates as TRUE.   An blank/empty string returns all records.}
 
 \item{col_types}{A \code{\link[readr:cols]{readr::cols()}} object passed internally to
-\code{\link[readr:read_csv]{readr::read_csv()}}.  Optional.}
+\code{\link[readr:read_delim]{readr::read_csv()}}.  Optional.}
 
 \item{guess_type}{A boolean value indicating if all columns should be
-returned as character.  If true, \code{\link[readr:read_csv]{readr::read_csv()}} guesses the intended
+returned as character.  If true, \code{\link[readr:read_delim]{readr::read_csv()}} guesses the intended
 data type for each column.}
 
 \item{guess_max}{Deprecated.}

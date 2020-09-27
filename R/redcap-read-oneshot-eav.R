@@ -168,7 +168,7 @@ redcap_read_oneshot_eav <- function(
   # placeholder: checkmate::assert_logical(  guess_type                , any.missing=FALSE, len=1)
   # placeholder: checkmate::assert_integerish(guess_max                , any.missing=FALSE, len=1, lower=1)
   checkmate::assert_logical(  verbose                   , any.missing=FALSE, len=1, null.ok=TRUE)
-  checkmate::assert_list(     config_options            , any.missing=TRUE , len=1, null.ok=TRUE)
+  checkmate::assert_list(     config_options            , any.missing=TRUE ,        null.ok=TRUE)
 
   validate_field_names(fields, stop_on_error = TRUE)
 

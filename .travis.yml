@@ -1,9 +1,8 @@
 # Travis's native R Image (http://docs.travis-ci.com/user/languages/r/)
-sudo:                false
 language:            r
 cache:               packages
 warnings_are_errors: true
-dist:                trusty
+dist:                focal
 r:
   - release
 # - devel
