@@ -323,14 +323,13 @@ test_that("label-header", {
 test_that("export_checkbox_label", {
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/read-batch-simple/export_checkbox_label.R"
-
   expected_outcome_message <- "\\d+ records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   ###########################
   ## Default Batch size
   expect_message(
     regexp            = expected_outcome_message,
-    returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_checkbox_label=TRUE)
+    returned_object1  <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_checkbox_label=TRUE)
   )
 
   if (update_expectation) save_expected(returned_object1$data, path_expected)
@@ -360,7 +359,7 @@ test_that("export_checkbox_label", {
 })
 test_that("filter-numeric", {
   testthat::skip_on_cran()
-  path_expected <- "/test-data/specific-redcapr/read-batch-simple/filter-numeric.R"
+  path_expected <- "test-data/specific-redcapr/read-batch-simple/filter-numeric.R"
   expected_outcome_message <- "2 records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   filter <- "[age] >= 61"
 
@@ -382,7 +381,7 @@ test_that("filter-numeric", {
 })
 test_that("filter-character", {
   testthat::skip_on_cran()
-  path_expected <- "/test-data/specific-redcapr/read-batch-simple/filter-character.R"
+  path_expected <- "test-data/specific-redcapr/read-batch-simple/filter-character.R"
   expected_outcome_message <- "1 records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   filter <- "[name_first] = 'John Lee'"
@@ -415,4 +414,5 @@ test_that("error-bad-token", {
     )
   )
 })
-rm(credential, project, update_expectation)
+rm(credential, project)
+rm(update_expectation)

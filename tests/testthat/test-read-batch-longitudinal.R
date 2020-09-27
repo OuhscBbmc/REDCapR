@@ -80,7 +80,6 @@ test_that("All Records -Default", {
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
 
-
 test_that("filter - numeric", {
   testthat::skip_on_cran()
 
