@@ -14,14 +14,13 @@ structure(list(record_id = c("1", "2", "3", "4", "5"), name_first = c("Nutmeg",
 "27.9"), comments = c("Character in a book, with some guessing", 
 "A mouse character from a good book", "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
 "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-), mugshot = c("[document]", "[document]", "[document]", "[document]", 
-"[document]"), health_complete = c("1", "0", "2", "2", "0"), 
-    race___1 = c("0", "0", "0", "0", "1"), race___2 = c("0", 
-    "0", "0", "1", "0"), race___3 = c("0", "1", "0", "0", "0"
-    ), race___4 = c("0", "0", "1", "0", "0"), race___5 = c("1", 
-    "1", "1", "1", "0"), race___6 = c("0", "0", "0", "0", "1"
-    ), ethnicity = c("1", "1", "0", "1", "2"), interpreter_needed = c("0", 
-    "0", "1", NA, "0"), race_and_ethnicity_complete = c("2", 
+), mugshot = c("mugshot-1.jpg", "mugshot-2.jpg", "mugshot-3.jpg", 
+"mugshot-4.jpg", "mugshot-5.jpg"), health_complete = c("1", "0", 
+"2", "2", "0"), race___1 = c("0", "0", "0", "0", "1"), race___2 = c("0", 
+"0", "0", "1", "0"), race___3 = c("0", "1", "0", "0", "0"), race___4 = c("0", 
+"0", "1", "0", "0"), race___5 = c("1", "1", "1", "1", "0"), race___6 = c("0", 
+"0", "0", "0", "1"), ethnicity = c("1", "1", "0", "1", "2"), 
+    interpreter_needed = c("0", "0", "1", NA, "0"), race_and_ethnicity_complete = c("2", 
     "0", "2", "2", "2")), class = "data.frame", row.names = c(NA, 
 -5L), spec = structure(list(cols = list(record_id = structure(list(), class = c("collector_character", 
 "collector")), name_first = structure(list(), class = c("collector_character", 
@@ -49,4 +48,4 @@ structure(list(record_id = c("1", "2", "3", "4", "5"), name_first = c("Nutmeg",
 "collector")), interpreter_needed = structure(list(), class = c("collector_character", 
 "collector")), race_and_ethnicity_complete = structure(list(), class = c("collector_character", 
 "collector"))), default = structure(list(), class = c("collector_character", 
-"collector")), skip = 1), class = "col_spec"))
+"collector")), skip = 1L), class = "col_spec"))
