@@ -21,7 +21,7 @@ test_that("version-successful", {
     )
   )
 
-  expected <- package_version("9.0.0")
+  expected <- package_version("10.5.1")
   expect_equal(actual, expected)
 })
 
