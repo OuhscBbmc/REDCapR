@@ -2,7 +2,7 @@ library(testthat)
 
 context("Stress Test - Serial")
 
-credential <- REDCapR:::retrieve_credential_testing()
+credential <- retrieve_credential_testing()
 
 read_count <- 2000L
 file_count <-  200L

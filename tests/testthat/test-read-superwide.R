@@ -1,6 +1,6 @@
 library(testthat)
 
-credential  <- REDCapR:::retrieve_credential_testing(753L)
+credential  <- retrieve_credential_testing(753L)
 
 test_that("smoke test", {
   testthat::skip_on_cran()

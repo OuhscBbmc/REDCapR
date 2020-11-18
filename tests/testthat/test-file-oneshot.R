@@ -1,6 +1,6 @@
 library(testthat)
 
-credential <- REDCapR:::retrieve_credential_testing()
+credential <- retrieve_credential_testing()
 delay_after_download_file <- 1.0 # In seconds
 
 test_that("NameComesFromREDCap", {
@@ -309,7 +309,7 @@ test_that("upload w/ bad token -Error", {
   testthat::skip_on_cran()
   expected_outcome_message <- "file NOT uploaded."
 
-  credential_upload <- REDCapR:::retrieve_credential_testing(213L)
+  credential_upload <- retrieve_credential_testing(213L)
 
   file_path <- system.file(
     "test-data/mugshot-5.jpg",

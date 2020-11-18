@@ -1,6 +1,6 @@
 library(testthat)
 
-credential  <- REDCapR:::retrieve_credential_testing(1490L)
+credential  <- retrieve_credential_testing(1490L)
 
 # Read in the dictionary in R's memory from a csv file.
 path_in <- system.file(

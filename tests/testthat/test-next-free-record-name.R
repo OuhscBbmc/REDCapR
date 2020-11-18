@@ -1,6 +1,6 @@
 library(testthat)
 
-credential  <- REDCapR:::retrieve_credential_testing()
+credential  <- retrieve_credential_testing()
 
 test_that("Smoke Test", {
   testthat::skip_on_cran()
@@ -20,7 +20,7 @@ test_that("Numeric ID", {
 test_that("Arm", {
   testthat::skip_on_cran()
 
-  credential_arm  <- REDCapR:::retrieve_credential_testing(212L)
+  credential_arm  <- retrieve_credential_testing(212L)
 
   expected <- "305"
   observed <- redcap_next_free_record_name(
@@ -34,7 +34,7 @@ test_that("Arm", {
 test_that("Character ID", {
   testthat::skip_on_cran()
 
-  credential_character <- REDCapR:::retrieve_credential_testing(998L)
+  credential_character <- retrieve_credential_testing(998L)
 
   expected <- "1"
   observed <- redcap_next_free_record_name(
@@ -48,7 +48,7 @@ test_that("Character ID", {
 test_that("DAG", {
   testthat::skip_on_cran()
 
-  credential_dag <- REDCapR:::retrieve_credential_testing(999L)
+  credential_dag <- retrieve_credential_testing(999L)
 
   expected <- "331-3"
   observed <- redcap_next_free_record_name(

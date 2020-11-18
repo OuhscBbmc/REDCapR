@@ -1,6 +1,6 @@
 library(testthat)
 
-credential <- REDCapR:::retrieve_credential_testing()
+credential <- retrieve_credential_testing()
 delay_after_download_file <- 1.0 # In seconds
 
 test_that("download instrument", {

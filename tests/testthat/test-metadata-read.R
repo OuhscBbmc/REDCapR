@@ -1,8 +1,8 @@
 library(testthat)
 
-credential            <- REDCapR:::retrieve_credential_testing()
-credential_super_wide <- REDCapR:::retrieve_credential_testing(753L)
-credential_problem    <- REDCapR:::retrieve_credential_testing(1425L)
+credential            <- retrieve_credential_testing()
+credential_super_wide <- retrieve_credential_testing(753L)
+credential_problem    <- retrieve_credential_testing(1425L)
 update_expectation    <- FALSE
 
 test_that("Metadata Read Smoke Test", {

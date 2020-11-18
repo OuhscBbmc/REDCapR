@@ -2,7 +2,7 @@ library(testthat)
 
 context("Estimate 'Could Not Connect' Rate.")
 
-credential <- REDCapR:::retrieve_credential_testing()
+credential <- retrieve_credential_testing()
 
 record_read_count   <- 2000L
 record_write_count  <-  200L

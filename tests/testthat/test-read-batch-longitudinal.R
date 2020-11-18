@@ -1,8 +1,8 @@
 library(testthat)
 
-credential          <- REDCapR:::retrieve_credential_testing(212L)
+credential          <- retrieve_credential_testing(212L)
 project             <- redcap_project$new(redcap_uri=credential$redcap_uri, token=credential$token)
-update_expectation  <- FALSE
+update_expectation  <- TRUE
 
 
 test_that("smoke", {
@@ -134,7 +134,7 @@ test_that("filter-character", {
     returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, filter_logic=filter)
   )
 
-    if (update_expectation) save_expected(returned_object1$data, path_expected)
+  if (update_expectation) save_expected(returned_object1$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
   expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
