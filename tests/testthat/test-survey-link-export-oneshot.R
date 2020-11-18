@@ -1,6 +1,6 @@
 library(testthat)
 
-credential   <- retrieve_credential_testing(817L)
+credential   <- REDCapR:::retrieve_credential_testing(817L)
 record       <- 1
 instrument   <- "participant_morale_questionnaire"
 

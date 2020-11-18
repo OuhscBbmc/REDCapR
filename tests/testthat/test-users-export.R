@@ -1,7 +1,7 @@
 library(testthat)
 
-credential_1  <- retrieve_credential_testing(999L)
-credential_2  <- retrieve_credential_testing()
+credential_1  <- REDCapR:::retrieve_credential_testing(999L)
+credential_2  <- REDCapR:::retrieve_credential_testing()
 update_expectation  <- FALSE
 
 test_that("smoke test", {
