@@ -32,11 +32,11 @@ test_that("default", {
 
 test_that("Bad URI", {
   testthat::skip_on_cran()
-  bad_uri <- "https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"
+  bad_uri <- "https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"
   expected_data_frame <- structure(list(), .Names = character(0), row.names = integer(0), class = "data.frame")
 
   # Windows gives a different message than Travis/Linux
-  expected_outcome_message <- "(https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com|Couldn't resolve host 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com')"
+  expected_outcome_message <- "(https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com|Couldn't resolve host 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com')"
   # "The REDCapR variable retrieval was not successful\\..+?Error 405 \\(Method Not Allowed\\).+"
    # expected_outcome_message <- "(?s)The REDCapR variable retrieval was not successful\\..+?.+"
 
