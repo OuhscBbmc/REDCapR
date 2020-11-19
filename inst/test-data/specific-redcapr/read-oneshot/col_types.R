@@ -13,14 +13,14 @@ structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
     comments = c("Character in a book, with some guessing", "A mouse character from a good book", 
     "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), mugshot = c("[document]", "[document]", "[document]", 
-    "[document]", "[document]"), health_complete = c(1, 0, 2, 
-    2, 0), race___1 = c(FALSE, FALSE, FALSE, FALSE, TRUE), race___2 = c(FALSE, 
-    FALSE, FALSE, TRUE, FALSE), race___3 = c(FALSE, TRUE, FALSE, 
-    FALSE, FALSE), race___4 = c(FALSE, FALSE, TRUE, FALSE, FALSE
-    ), race___5 = c(TRUE, TRUE, TRUE, TRUE, FALSE), race___6 = c(FALSE, 
-    FALSE, FALSE, FALSE, TRUE), ethnicity = c(1, 1, 0, 1, 2), 
-    interpreter_needed = c(0, 0, 1, NA, 0), race_and_ethnicity_complete = c(2, 
+    ), mugshot = c("mugshot-1.jpg", "mugshot-2.jpg", "mugshot-3.jpg", 
+    "mugshot-4.jpg", "mugshot-5.jpg"), health_complete = c(1, 
+    0, 2, 2, 0), race___1 = c(FALSE, FALSE, FALSE, FALSE, TRUE
+    ), race___2 = c(FALSE, FALSE, FALSE, TRUE, FALSE), race___3 = c(FALSE, 
+    TRUE, FALSE, FALSE, FALSE), race___4 = c(FALSE, FALSE, TRUE, 
+    FALSE, FALSE), race___5 = c(TRUE, TRUE, TRUE, TRUE, FALSE
+    ), race___6 = c(FALSE, FALSE, FALSE, FALSE, TRUE), ethnicity = c(1, 
+    1, 0, 1, 2), interpreter_needed = c(0, 0, 1, NA, 0), race_and_ethnicity_complete = c(2, 
     0, 2, 2, 2)), class = "data.frame", row.names = c(NA, -5L
 ), spec = structure(list(cols = list(record_id = structure(list(), class = c("collector_integer", 
 "collector")), name_first = structure(list(), class = c("collector_character", 
@@ -48,4 +48,4 @@ structure(list(record_id = 1:5, name_first = c("Nutmeg", "Tumtum",
 "collector")), interpreter_needed = structure(list(), class = c("collector_double", 
 "collector")), race_and_ethnicity_complete = structure(list(), class = c("collector_double", 
 "collector"))), default = structure(list(), class = c("collector_guess", 
-"collector")), skip = 1), class = "col_spec"))
+"collector")), skip = 1L), class = "col_spec"))

@@ -320,7 +320,7 @@
 <h3 class="hasAnchor">
 <a href="#minor-updates-2" class="anchor"></a>Minor Updates</h3>
 <ul>
-<li>Uses <code>requireNamespace()</code> instead of <code>require()</code>.</li>
+<li>Uses <code><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace()</a></code> instead of <code><a href="https://rdrr.io/r/base/library.html">require()</a></code>.</li>
 <li>By default, uses the SSL cert files used by httr, which by default, uses those packaged with R.</li>
 <li>Added warning if it appears <code>readcap_read()</code> is being used without ‘Full Data Set’ export privileges. The problem involves the record IDs are hashed.</li>
 <li>Reconnected code that reads only the <code>id_position</code> in the first stage of batching. The metadata needed to be read before that, after the updates for REDCap Version 6.0.x.</li>

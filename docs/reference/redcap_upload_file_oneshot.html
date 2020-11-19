@@ -143,16 +143,16 @@
     <p>This function uses REDCap's API to upload a file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>redcap_upload_file_oneshot</span>(
-  <span class='kw'>file_name</span>,
-  <span class='kw'>record</span>,
-  <span class='kw'>redcap_uri</span>,
-  <span class='kw'>token</span>,
-  <span class='kw'>field</span>,
-  event = <span class='st'>""</span>,
-  verbose = <span class='fl'>TRUE</span>,
-  config_options = <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>redcap_upload_file_oneshot</span><span class='op'>(</span>
+  <span class='va'>file_name</span>,
+  <span class='va'>record</span>,
+  <span class='va'>redcap_uri</span>,
+  <span class='va'>token</span>,
+  <span class='va'>field</span>,
+  event <span class='op'>=</span> <span class='st'>""</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  config_options <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -234,44 +234,44 @@ administrator to send you the static material.</p>
     <p>Will Beasley, John J. Aponte</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># Define some constants</span>
-<span class='kw'>uri</span>    <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class='kw'>token</span>  <span class='op'>&lt;-</span> <span class='st'>"D70F9ACD1EDD6F151C6EA78683944E98"</span> <span class='co'># The simple project -pid 213</span>
-<span class='kw'>field</span>  <span class='op'>&lt;-</span> <span class='st'>"mugshot"</span>
-<span class='kw'>event</span>  <span class='op'>&lt;-</span> <span class='st'>""</span> <span class='co'># only for longitudinal events</span>
+<span class='va'>uri</span>    <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class='va'>token</span>  <span class='op'>&lt;-</span> <span class='st'>"D70F9ACD1EDD6F151C6EA78683944E98"</span> <span class='co'># The simple project -pid 213</span>
+<span class='va'>field</span>  <span class='op'>&lt;-</span> <span class='st'>"mugshot"</span>
+<span class='va'>event</span>  <span class='op'>&lt;-</span> <span class='st'>""</span> <span class='co'># only for longitudinal events</span>
 
 <span class='co'>#Upload a single image file.</span>
-<span class='kw'>record</span>    <span class='op'>&lt;-</span> <span class='fl'>1</span>
-<span class='kw'>file_path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"test-data/mugshot-1.jpg"</span>, package=<span class='st'>"REDCapR"</span>)
+<span class='va'>record</span>    <span class='op'>&lt;-</span> <span class='fl'>1</span>
+<span class='va'>file_path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"test-data/mugshot-1.jpg"</span>, package<span class='op'>=</span><span class='st'>"REDCapR"</span><span class='op'>)</span>
 
-<span class='kw'>REDCapR</span>::<span class='fu'>redcap_upload_file_oneshot</span>(
-  file_name  = <span class='kw'>file_path</span>,
-  record     = <span class='kw'>record</span>,
-  field      = <span class='kw'>field</span>,
-  redcap_uri = <span class='kw'>redcap_uri</span>,
-  token      = <span class='kw'>token</span>
-)
+<span class='fu'>REDCapR</span><span class='fu'>::</span><span class='fu'>redcap_upload_file_oneshot</span><span class='op'>(</span>
+  file_name  <span class='op'>=</span> <span class='va'>file_path</span>,
+  record     <span class='op'>=</span> <span class='va'>record</span>,
+  field      <span class='op'>=</span> <span class='va'>field</span>,
+  redcap_uri <span class='op'>=</span> <span class='va'>redcap_uri</span>,
+  token      <span class='op'>=</span> <span class='va'>token</span>
+<span class='op'>)</span>
 
 <span class='co'>#Upload a collection of five images.</span>
-<span class='kw'>records</span>    <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>
-<span class='kw'>file_paths</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(
-  <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"test-data/mugshot-"</span>, <span class='kw'>records</span>, <span class='st'>".jpg"</span>),
-  package=<span class='st'>"REDCapR"</span>
-)
+<span class='va'>records</span>    <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>
+<span class='va'>file_paths</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"test-data/mugshot-"</span>, <span class='va'>records</span>, <span class='st'>".jpg"</span><span class='op'>)</span>,
+  package<span class='op'>=</span><span class='st'>"REDCapR"</span>
+<span class='op'>)</span>
 
-<span class='co'>for</span> (<span class='kw'>i</span> <span class='co'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_along</a></span>(<span class='kw'>records</span>)) {
-  <span class='kw'>record</span>    <span class='op'>&lt;-</span> <span class='kw'>records</span>[<span class='kw'>i</span>]
-  <span class='kw'>file_path</span> <span class='op'>&lt;-</span> <span class='kw'>file_paths</span>[<span class='kw'>i</span>]
-  <span class='kw'>REDCapR</span>::<span class='fu'>redcap_upload_file_oneshot</span>(
-    file_name  = <span class='kw'>file_path</span>,
-    record     = <span class='kw'>record</span>,
-    field      = <span class='kw'>field</span>,
-    redcap_uri = <span class='kw'>redcap_uri</span>,
-    token      = <span class='kw'>token</span>
-  )
-}
-}
+<span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_along</a></span><span class='op'>(</span><span class='va'>records</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>record</span>    <span class='op'>&lt;-</span> <span class='va'>records</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span>
+  <span class='va'>file_path</span> <span class='op'>&lt;-</span> <span class='va'>file_paths</span><span class='op'>[</span><span class='va'>i</span><span class='op'>]</span>
+  <span class='fu'>REDCapR</span><span class='fu'>::</span><span class='fu'>redcap_upload_file_oneshot</span><span class='op'>(</span>
+    file_name  <span class='op'>=</span> <span class='va'>file_path</span>,
+    record     <span class='op'>=</span> <span class='va'>record</span>,
+    field      <span class='op'>=</span> <span class='va'>field</span>,
+    redcap_uri <span class='op'>=</span> <span class='va'>redcap_uri</span>,
+    token      <span class='op'>=</span> <span class='va'>token</span>
+  <span class='op'>)</span>
+<span class='op'>}</span>
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

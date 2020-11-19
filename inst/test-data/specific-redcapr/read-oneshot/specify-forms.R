@@ -34,4 +34,4 @@ structure(list(record_id = c(1, 2, 3, 4, 5), name_first = c("Nutmeg",
     "collector")), interpreter_needed = structure(list(), class = c("collector_double", 
     "collector")), race_and_ethnicity_complete = structure(list(), class = c("collector_double", 
     "collector"))), default = structure(list(), class = c("collector_guess", 
-    "collector")), skip = 1), class = "col_spec"))
+    "collector")), skip = 1L), class = "col_spec"))

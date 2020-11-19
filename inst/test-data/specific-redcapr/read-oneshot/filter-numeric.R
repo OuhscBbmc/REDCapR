@@ -6,7 +6,7 @@ structure(list(record_id = c(3, 4), name_first = c("Marcus",
 61), sex = c(1, 0), demographics_complete = c(2, 2), height = c(180, 
 165), weight = c(80, 54), bmi = c(24.7, 19.8), comments = c("completely made up", 
 "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail"
-), mugshot = c("[document]", "[document]"), health_complete = c(2, 
+), mugshot = c("mugshot-3.jpg", "mugshot-4.jpg"), health_complete = c(2, 
 2), race___1 = c(0, 0), race___2 = c(0, 1), race___3 = c(0, 0
 ), race___4 = c(1, 0), race___5 = c(1, 1), race___6 = c(0, 0), 
     ethnicity = c(0, 1), interpreter_needed = c(1, NA), race_and_ethnicity_complete = c(2, 
@@ -37,4 +37,4 @@ structure(list(record_id = c(3, 4), name_first = c("Marcus",
     "collector")), interpreter_needed = structure(list(), class = c("collector_double", 
     "collector")), race_and_ethnicity_complete = structure(list(), class = c("collector_double", 
     "collector"))), default = structure(list(), class = c("collector_guess", 
-    "collector")), skip = 1), class = "col_spec"))
+    "collector")), skip = 1L), class = "col_spec"))

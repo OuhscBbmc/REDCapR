@@ -145,7 +145,7 @@ REDCap API." />
 REDCap API.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>redcap_variables</span>(<span class='kw'>redcap_uri</span>, <span class='kw'>token</span>, verbose = <span class='fl'>TRUE</span>, config_options = <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>redcap_variables</span><span class='op'>(</span><span class='va'>redcap_uri</span>, <span class='va'>token</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span>, config_options <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -213,11 +213,11 @@ administrator to send you the static material.</p>
     <p>Will Beasley</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='kw'>uri</span>         <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class='kw'>token</span>       <span class='op'>&lt;-</span> <span class='st'>"9A81268476645C4E5F03428B8AC3AA7B"</span>
-<span class='kw'>ds_variable</span> <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='fu'>redcap_variables</span>(redcap_uri=<span class='kw'>uri</span>, token=<span class='kw'>token</span>)<span class='op'>$</span><span class='kw'>data</span>
-}
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>uri</span>         <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class='va'>token</span>       <span class='op'>&lt;-</span> <span class='st'>"9A81268476645C4E5F03428B8AC3AA7B"</span>
+<span class='va'>ds_variable</span> <span class='op'>&lt;-</span> <span class='fu'>REDCapR</span><span class='fu'>::</span><span class='fu'>redcap_variables</span><span class='op'>(</span>redcap_uri<span class='op'>=</span><span class='va'>uri</span>, token<span class='op'>=</span><span class='va'>token</span><span class='op'>)</span><span class='op'>$</span><span class='va'>data</span>
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

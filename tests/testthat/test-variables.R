@@ -22,9 +22,9 @@ test_that("default", {
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equivalent(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
-  expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
+  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
@@ -32,11 +32,11 @@ test_that("default", {
 
 test_that("Bad URI", {
   testthat::skip_on_cran()
-  bad_uri <- "https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"
+  bad_uri <- "https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"
   expected_data_frame <- structure(list(), .Names = character(0), row.names = integer(0), class = "data.frame")
 
   # Windows gives a different message than Travis/Linux
-  expected_outcome_message <- "(https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com|Couldn't resolve host 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com')"
+  expected_outcome_message <- "(https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com|Couldn't resolve host 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com')"
   # "The REDCapR variable retrieval was not successful\\..+?Error 405 \\(Method Not Allowed\\).+"
    # expected_outcome_message <- "(?s)The REDCapR variable retrieval was not successful\\..+?.+"
 
@@ -53,7 +53,7 @@ test_that("Bad URI", {
   #
   # expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   # expect_equal(returned_object$status_code, expected=405L)
-  # # expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
+  # # expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   # expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   # expect_false(returned_object$success)
 })

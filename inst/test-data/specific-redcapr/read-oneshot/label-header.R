@@ -14,9 +14,9 @@ structure(list(`Study ID` = c(1, 2, 3, 4, 5), `First Name` = c("Nutmeg",
     Comments = c("Character in a book, with some guessing", "A mouse character from a good book", 
     "completely made up", "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), Mugshot = c("[document]", "[document]", "[document]", 
-    "[document]", "[document]"), `Complete?_1` = c(1, 0, 2, 2, 
-    0), `Race (Select all that apply) (choice=American Indian/Alaska Native)` = c(0, 
+    ), Mugshot = c("mugshot-1.jpg", "mugshot-2.jpg", "mugshot-3.jpg", 
+    "mugshot-4.jpg", "mugshot-5.jpg"), `Complete?_1` = c(1, 0, 
+    2, 2, 0), `Race (Select all that apply) (choice=American Indian/Alaska Native)` = c(0, 
     0, 0, 0, 1), `Race (Select all that apply) (choice=Asian)` = c(0, 
     0, 0, 1, 0), `Race (Select all that apply) (choice=Native Hawaiian or Other Pacific Islander)` = c(0, 
     1, 0, 0, 0), `Race (Select all that apply) (choice=Black or African American)` = c(0, 
@@ -50,4 +50,4 @@ structure(list(`Study ID` = c(1, 2, 3, 4, 5), `First Name` = c("Nutmeg",
 "collector")), `Are interpreter services requested?` = structure(list(), class = c("collector_double", 
 "collector")), `Complete?_2` = structure(list(), class = c("collector_double", 
 "collector"))), default = structure(list(), class = c("collector_guess", 
-"collector")), skip = 1), class = "col_spec"))
+"collector")), skip = 1L), class = "col_spec"))

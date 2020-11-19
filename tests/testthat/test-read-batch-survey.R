@@ -50,7 +50,7 @@ test_that("default", {
   if (update_expectation) save_expected(returned_object1$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equivalent(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
+  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object1$data)
   expect_true(all(!is.na(returned_object1$data$prescreening_survey_timestamp)))
   expect_true(returned_object1$success)
   expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)

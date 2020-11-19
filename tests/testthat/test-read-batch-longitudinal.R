@@ -101,7 +101,7 @@ test_that("filter-numeric", {
   expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
-  expect_equal(returned_object1$filter_logic, filter, "The filter was not correct.")
+  expect_equal(returned_object1$filter_logic, filter)
   expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 
   ###########################
@@ -116,7 +116,7 @@ test_that("filter-numeric", {
   expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
-  expect_equal(returned_object1$filter_logic, filter, "The filter was not correct.")
+  expect_equal(returned_object1$filter_logic, filter)
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
 
@@ -134,7 +134,7 @@ test_that("filter-character", {
     returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, filter_logic=filter)
   )
 
-    if (update_expectation) save_expected(returned_object1$data, path_expected)
+  if (update_expectation) save_expected(returned_object1$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
   expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
@@ -142,7 +142,7 @@ test_that("filter-character", {
   expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
-  expect_equal(returned_object1$filter_logic, filter, "The filter was not correct.")
+  expect_equal(returned_object1$filter_logic, filter)
   expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 
   ###########################
@@ -157,7 +157,7 @@ test_that("filter-character", {
   expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
-  expect_equal(returned_object2$filter_logic, filter, "The filter was not correct.")
+  expect_equal(returned_object2$filter_logic, filter)
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
 

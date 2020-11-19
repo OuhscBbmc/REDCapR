@@ -30,10 +30,10 @@ test_that("with-dags", {
   expected_data_user      <- retrieve_expected(path_expected_user     )
   expected_data_user_form <- retrieve_expected(path_expected_user_form)
 
-  expect_equivalent(returned_object$data_user     , expected=expected_data_user     , label="The returned data.frame should be correct") # dput(returned_object$data_user);
-  expect_equivalent(returned_object$data_user_form, expected=expected_data_user_form, label="The returned data.frame should be correct") # dput(returned_object$data_user_form)
+  expect_equal(returned_object$data_user     , expected=expected_data_user     , label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data_user);
+  expect_equal(returned_object$data_user_form, expected=expected_data_user_form, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data_user_form)
   expect_equal(returned_object$status_code, expected=200L)
-  expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
+  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
@@ -55,10 +55,10 @@ test_that("without DAGs", {
   expected_data_user      <- retrieve_expected(path_expected_user     )
   expected_data_user_form <- retrieve_expected(path_expected_user_form)
 
-  expect_equivalent(returned_object$data_user     , expected=expected_data_user     , label="The returned data.frame should be correct") # dput(returned_object$data_user);
-  expect_equivalent(returned_object$data_user_form, expected=expected_data_user_form, label="The returned data.frame should be correct") # dput(returned_object$data_user_form)
+  expect_equal(returned_object$data_user     , expected=expected_data_user     , label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data_user);
+  expect_equal(returned_object$data_user_form, expected=expected_data_user_form, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data_user_form)
   expect_equal(returned_object$status_code, expected=200L)
-  expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
+  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })

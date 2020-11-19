@@ -15,8 +15,8 @@ structure(list(record_id = c(1, 2, 3, 4, 5), name_first = c("Nutmeg",
     "A mouse character from a good book", "completely made up", 
     "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache"
-    ), mugshot = c("[document]", "[document]", "[document]", 
-    "[document]", "[document]"), health_complete = c("Unverified", 
+    ), mugshot = c("mugshot-1.jpg", "mugshot-2.jpg", "mugshot-3.jpg", 
+    "mugshot-4.jpg", "mugshot-5.jpg"), health_complete = c("Unverified", 
     "Incomplete", "Complete", "Complete", "Incomplete"), race___1 = c(NA, 
     NA, NA, NA, "American Indian/Alaska Native"), race___2 = c(NA, 
     NA, NA, "Asian", NA), race___3 = c(NA, "Native Hawaiian or Other Pacific Islander", 
@@ -54,4 +54,4 @@ structure(list(record_id = c(1, 2, 3, 4, 5), name_first = c("Nutmeg",
 "collector")), interpreter_needed = structure(list(), class = c("collector_logical", 
 "collector")), race_and_ethnicity_complete = structure(list(), class = c("collector_character", 
 "collector"))), default = structure(list(), class = c("collector_guess", 
-"collector")), skip = 1), class = "col_spec"))
+"collector")), skip = 1L), class = "col_spec"))

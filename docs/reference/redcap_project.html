@@ -203,31 +203,31 @@ password for a project.  Required.</p></dd>
 </dl>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>uri</span>     <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class='kw'>token</span>   <span class='op'>&lt;-</span> <span class='st'>"D70F9ACD1EDD6F151C6EA78683944E98"</span>
-<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='kw'>project</span> <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='kw'>redcap_project</span><span class='op'>$</span><span class='fu'>new</span>(redcap_uri=<span class='kw'>uri</span>, token=<span class='kw'>token</span>)
-<span class='kw'>ds_all</span>  <span class='op'>&lt;-</span> <span class='kw'>project</span><span class='op'>$</span><span class='fu'>read</span>()
+    <pre class="examples"><div class='input'><span class='va'>uri</span>     <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class='va'>token</span>   <span class='op'>&lt;-</span> <span class='st'>"D70F9ACD1EDD6F151C6EA78683944E98"</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>project</span> <span class='op'>&lt;-</span> <span class='fu'>REDCapR</span><span class='fu'>::</span><span class='va'>redcap_project</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>redcap_uri<span class='op'>=</span><span class='va'>uri</span>, token<span class='op'>=</span><span class='va'>token</span><span class='op'>)</span>
+<span class='va'>ds_all</span>  <span class='op'>&lt;-</span> <span class='va'>project</span><span class='op'>$</span><span class='fu'>read</span><span class='op'>(</span><span class='op'>)</span>
 
 <span class='co'># Demonstrate how repeated calls are more concise when the token and</span>
 <span class='co'>#   url aren't always passed.</span>
-<span class='kw'>ds_skinny</span> <span class='op'>&lt;-</span> <span class='kw'>project</span><span class='op'>$</span><span class='fu'>read</span>(fields=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"record_id"</span>, <span class='st'>"sex"</span>, <span class='st'>"height"</span>))<span class='op'>$</span><span class='kw'>data</span>
+<span class='va'>ds_skinny</span> <span class='op'>&lt;-</span> <span class='va'>project</span><span class='op'>$</span><span class='fu'>read</span><span class='op'>(</span>fields<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"record_id"</span>, <span class='st'>"sex"</span>, <span class='st'>"height"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>$</span><span class='va'>data</span>
 
-<span class='kw'>ids_of_males</span>    <span class='op'>&lt;-</span> <span class='kw'>ds_skinny</span><span class='op'>$</span><span class='kw'>record_id</span>[<span class='kw'>ds_skinny</span><span class='op'>$</span><span class='kw'>sex</span><span class='op'>==</span><span class='fl'>1</span>]
-<span class='kw'>ids_of_shorties</span> <span class='op'>&lt;-</span> <span class='kw'>ds_skinny</span><span class='op'>$</span><span class='kw'>record_id</span>[<span class='kw'>ds_skinny</span><span class='op'>$</span><span class='kw'>height</span> <span class='op'>&lt;</span> <span class='fl'>40</span>]
+<span class='va'>ids_of_males</span>    <span class='op'>&lt;-</span> <span class='va'>ds_skinny</span><span class='op'>$</span><span class='va'>record_id</span><span class='op'>[</span><span class='va'>ds_skinny</span><span class='op'>$</span><span class='va'>sex</span><span class='op'>==</span><span class='fl'>1</span><span class='op'>]</span>
+<span class='va'>ids_of_shorties</span> <span class='op'>&lt;-</span> <span class='va'>ds_skinny</span><span class='op'>$</span><span class='va'>record_id</span><span class='op'>[</span><span class='va'>ds_skinny</span><span class='op'>$</span><span class='va'>height</span> <span class='op'>&lt;</span> <span class='fl'>40</span><span class='op'>]</span>
 
-<span class='kw'>ds_males</span>        <span class='op'>&lt;-</span> <span class='kw'>project</span><span class='op'>$</span><span class='fu'>read</span>(records=<span class='kw'>ids_of_males</span>, batch_size=<span class='fl'>2</span>)<span class='op'>$</span><span class='kw'>data</span>
-<span class='kw'>ds_shorties</span>     <span class='op'>&lt;-</span> <span class='kw'>project</span><span class='op'>$</span><span class='fu'>read</span>(records=<span class='kw'>ids_of_shorties</span>)<span class='op'>$</span><span class='kw'>data</span>
+<span class='va'>ds_males</span>        <span class='op'>&lt;-</span> <span class='va'>project</span><span class='op'>$</span><span class='fu'>read</span><span class='op'>(</span>records<span class='op'>=</span><span class='va'>ids_of_males</span>, batch_size<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>$</span><span class='va'>data</span>
+<span class='va'>ds_shorties</span>     <span class='op'>&lt;-</span> <span class='va'>project</span><span class='op'>$</span><span class='fu'>read</span><span class='op'>(</span>records<span class='op'>=</span><span class='va'>ids_of_shorties</span><span class='op'>)</span><span class='op'>$</span><span class='va'>data</span>
 
 <span class='co'>#Switch the Genders</span>
-<span class='kw'>sex_original</span>   <span class='op'>&lt;-</span> <span class='kw'>ds_skinny</span><span class='op'>$</span><span class='kw'>sex</span>
-<span class='kw'>ds_skinny</span><span class='op'>$</span><span class='kw'>sex</span>  <span class='op'>&lt;-</span> (<span class='fl'>1</span> <span class='op'>-</span> <span class='kw'>ds_skinny</span><span class='op'>$</span><span class='kw'>sex</span>)
-<span class='kw'>project</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/write.html'>write</a></span>(<span class='kw'>ds_skinny</span>)
+<span class='va'>sex_original</span>   <span class='op'>&lt;-</span> <span class='va'>ds_skinny</span><span class='op'>$</span><span class='va'>sex</span>
+<span class='va'>ds_skinny</span><span class='op'>$</span><span class='va'>sex</span>  <span class='op'>&lt;-</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>-</span> <span class='va'>ds_skinny</span><span class='op'>$</span><span class='va'>sex</span><span class='op'>)</span>
+<span class='va'>project</span><span class='op'>$</span><span class='fu'>write</span><span class='op'>(</span><span class='va'>ds_skinny</span><span class='op'>)</span>
 
 <span class='co'>#Switch the Genders back</span>
-<span class='kw'>ds_skinny</span><span class='op'>$</span><span class='kw'>sex</span> <span class='op'>&lt;-</span> <span class='kw'>sex_original</span>
-<span class='kw'>project</span><span class='op'>$</span><span class='fu'><a href='https://rdrr.io/r/base/write.html'>write</a></span>(<span class='kw'>ds_skinny</span>)
-}
+<span class='va'>ds_skinny</span><span class='op'>$</span><span class='va'>sex</span> <span class='op'>&lt;-</span> <span class='va'>sex_original</span>
+<span class='va'>project</span><span class='op'>$</span><span class='fu'>write</span><span class='op'>(</span><span class='va'>ds_skinny</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

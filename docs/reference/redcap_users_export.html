@@ -143,7 +143,7 @@
     <p>List users authorized for a project.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>redcap_users_export</span>(<span class='kw'>redcap_uri</span>, <span class='kw'>token</span>, verbose = <span class='fl'>TRUE</span>, config_options = <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>redcap_users_export</span><span class='op'>(</span><span class='va'>redcap_uri</span>, <span class='va'>token</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span>, config_options <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -187,10 +187,10 @@ the user with the role's defined privileges.
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>uri</span>      <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class='kw'>token</span>    <span class='op'>&lt;-</span> <span class='st'>"06DEFB601F9B46847DAA9DF0CFA951B4"</span>
-<span class='kw'>result</span>   <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='fu'>redcap_users_export</span>(redcap_uri=<span class='kw'>uri</span>, token=<span class='kw'>token</span>)
-</div><div class='output co'>#&gt; <span class='message'>The REDCap users were successfully exported in 0.2 seconds.  The http status code was 200.</span></div><div class='input'><span class='kw'>result</span><span class='op'>$</span><span class='kw'>data_user</span>
+    <pre class="examples"><div class='input'><span class='va'>uri</span>      <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class='va'>token</span>    <span class='op'>&lt;-</span> <span class='st'>"06DEFB601F9B46847DAA9DF0CFA951B4"</span>
+<span class='va'>result</span>   <span class='op'>&lt;-</span> <span class='fu'>REDCapR</span><span class='fu'>::</span><span class='fu'>redcap_users_export</span><span class='op'>(</span>redcap_uri<span class='op'>=</span><span class='va'>uri</span>, token<span class='op'>=</span><span class='va'>token</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>The REDCap users were successfully exported in 0.3 seconds.  The http status code was 200.</span></div><div class='input'><span class='va'>result</span><span class='op'>$</span><span class='va'>data_user</span>
 </div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 31</span><span>
 #&gt;   username email firstname lastname expiration data_access_gro… data_access_gro…
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
@@ -204,7 +204,7 @@ the user with the role's defined privileges.
 #&gt; </span><span style='color: #555555;'>#   data_quality_execute </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>, api_export </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>, api_import </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   mobile_app </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>, mobile_app_download_data </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>, record_create </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   record_rename </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>, record_delete </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>, lock_records_all_forms </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   lock_records </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>, lock_records_customization </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span></div><div class='input'><span class='kw'>result</span><span class='op'>$</span><span class='kw'>data_user_form</span>
+#&gt; </span><span style='color: #555555;'>#   lock_records </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>, lock_records_customization </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span></div><div class='input'><span class='va'>result</span><span class='op'>$</span><span class='va'>data_user_form</span>
 </div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 2 x 4</span><span>
 #&gt;   username        form_name    permission_id permission
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>     

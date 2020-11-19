@@ -145,13 +145,13 @@ values." />
 values.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>kernel_api</span>(
-  <span class='kw'>redcap_uri</span>,
-  <span class='kw'>post_body</span>,
-  <span class='kw'>config_options</span>,
-  encoding = <span class='st'>"UTF-8"</span>,
-  content_type = <span class='st'>"text/csv"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>kernel_api</span><span class='op'>(</span>
+  <span class='va'>redcap_uri</span>,
+  <span class='va'>post_body</span>,
+  <span class='va'>config_options</span>,
+  encoding <span class='op'>=</span> <span class='st'>"UTF-8"</span>,
+  content_type <span class='op'>=</span> <span class='st'>"text/csv"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -193,25 +193,25 @@ the function will always return an object of class <a href='https://rdrr.io/r/ba
 It guarantees the value can always be used in <code><a href='https://rdrr.io/r/utils/compareVersion.html'>utils::compareVersion()</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>config_options</span> <span class='op'>&lt;-</span> <span class='kw'>NULL</span>
-<span class='kw'>uri</span>            <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class='kw'>token</span>          <span class='op'>&lt;-</span> <span class='st'>"9A81268476645C4E5F03428B8AC3AA7B"</span>
-<span class='kw'>post_body</span>      <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-  token    = <span class='kw'>token</span>,
-  content  = <span class='st'>'project'</span>,
-  format   = <span class='st'>'csv'</span>
-)
-<span class='kw'>kernel</span> <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>:::<span class='fu'>kernel_api</span>(<span class='kw'>uri</span>, <span class='kw'>post_body</span>, <span class='kw'>config_options</span>)
+    <pre class="examples"><div class='input'><span class='va'>config_options</span> <span class='op'>&lt;-</span> <span class='cn'>NULL</span>
+<span class='va'>uri</span>            <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class='va'>token</span>          <span class='op'>&lt;-</span> <span class='st'>"9A81268476645C4E5F03428B8AC3AA7B"</span>
+<span class='va'>post_body</span>      <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+  token    <span class='op'>=</span> <span class='va'>token</span>,
+  content  <span class='op'>=</span> <span class='st'>'project'</span>,
+  format   <span class='op'>=</span> <span class='st'>'csv'</span>
+<span class='op'>)</span>
+<span class='va'>kernel</span> <span class='op'>&lt;-</span> <span class='fu'>REDCapR</span><span class='fu'>:::</span><span class='fu'>kernel_api</span><span class='op'>(</span><span class='va'>uri</span>, <span class='va'>post_body</span>, <span class='va'>config_options</span><span class='op'>)</span>
 
 <span class='co'># Consume the results in a few different ways.</span>
-<span class='kw'>kernel</span><span class='op'>$</span><span class='kw'>result</span>
+<span class='va'>kernel</span><span class='op'>$</span><span class='va'>result</span>
 </div><div class='output co'>#&gt; Response [https://bbmc.ouhsc.edu/redcap/api/]
-#&gt;   Date: 2020-09-27 22:39
+#&gt;   Date: 2020-11-19 05:49
 #&gt;   Status: 200
 #&gt;   Content-Type: text/csv; charset=utf-8
-#&gt;   Size: 557 B
+#&gt;   Size: 595 B
 #&gt; project_id,project_title,creation_time,production_time,in_production,project_...
-#&gt; 153,"REDCapR Target Simple Static -see https://github.com/OuhscBbmc/REDCapR",...</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span>(text=<span class='kw'>kernel</span><span class='op'>$</span><span class='kw'>raw_text</span>, stringsAsFactors=<span class='fl'>FALSE</span>)
+#&gt; 153,"REDCapR Target Simple Static -see https://github.com/OuhscBbmc/REDCapR",...</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span>text<span class='op'>=</span><span class='va'>kernel</span><span class='op'>$</span><span class='va'>raw_text</span>, stringsAsFactors<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   project_id
 #&gt; 1        153
 #&gt;                                                            project_title
@@ -220,16 +220,16 @@ It guarantees the value can always be used in <code><a href='https://rdrr.io/r/u
 #&gt; 1 2013-11-29 15:58:20              NA             0          English       0
 #&gt;   purpose_other project_notes custom_record_label secondary_unique_field
 #&gt; 1            NA            NA                  NA                     NA
-#&gt;   is_longitudinal surveys_enabled scheduling_enabled
-#&gt; 1               0               0                  0
-#&gt;   record_autonumbering_enabled randomization_enabled ddp_enabled
-#&gt; 1                            1                     0           0
-#&gt;   project_irb_number project_grant_number project_pi_firstname
-#&gt; 1                 NA                   NA                   NA
-#&gt;   project_pi_lastname display_today_now_button
-#&gt; 1                  NA                        1
-#&gt;   has_repeating_instruments_or_events
-#&gt; 1                                   0</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span>(<span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span>(text=<span class='kw'>kernel</span><span class='op'>$</span><span class='kw'>raw_text</span>, stringsAsFactors=<span class='fl'>FALSE</span>))
+#&gt;   is_longitudinal has_repeating_instruments_or_events surveys_enabled
+#&gt; 1               0                                   0               0
+#&gt;   scheduling_enabled record_autonumbering_enabled randomization_enabled
+#&gt; 1                  0                            1                     0
+#&gt;   ddp_enabled project_irb_number project_grant_number project_pi_firstname
+#&gt; 1           0                 NA                   NA                   NA
+#&gt;   project_pi_lastname display_today_now_button missing_data_codes
+#&gt; 1                  NA                        1                 NA
+#&gt;   external_modules
+#&gt; 1               NA</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span>text<span class='op'>=</span><span class='va'>kernel</span><span class='op'>$</span><span class='va'>raw_text</span>, stringsAsFactors<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $project_id
 #&gt; [1] 153
 #&gt; 
@@ -266,6 +266,9 @@ It guarantees the value can always be used in <code><a href='https://rdrr.io/r/u
 #&gt; $is_longitudinal
 #&gt; [1] 0
 #&gt; 
+#&gt; $has_repeating_instruments_or_events
+#&gt; [1] 0
+#&gt; 
 #&gt; $surveys_enabled
 #&gt; [1] 0
 #&gt; 
@@ -296,8 +299,11 @@ It guarantees the value can always be used in <code><a href='https://rdrr.io/r/u
 #&gt; $display_today_now_button
 #&gt; [1] 1
 #&gt; 
-#&gt; $has_repeating_instruments_or_events
-#&gt; [1] 0
+#&gt; $missing_data_codes
+#&gt; [1] NA
+#&gt; 
+#&gt; $external_modules
+#&gt; [1] NA
 #&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
