@@ -45,7 +45,7 @@ populate_project_simple <- function(batch = FALSE) {
         redcap_uri  = project$redcap_uri,
         token       = project$token,
         verbose     = TRUE,
-        convert_logical_to_integer = T
+        convert_logical_to_integer = TRUE
       )
     } else {
       REDCapR::redcap_write_oneshot(
@@ -53,7 +53,7 @@ populate_project_simple <- function(batch = FALSE) {
         redcap_uri  = project$redcap_uri,
         token       = project$token,
         verbose     = TRUE,
-        convert_logical_to_integer = T
+        convert_logical_to_integer = TRUE
       )
     }
   )
