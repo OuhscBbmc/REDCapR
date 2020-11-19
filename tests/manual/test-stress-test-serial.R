@@ -1,7 +1,5 @@
 library(testthat)
 
-context("Stress Test - Serial")
-
 credential <- retrieve_credential_testing()
 
 read_count <- 2000L
