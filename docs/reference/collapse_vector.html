@@ -151,7 +151,7 @@ vector. This functions squashes them together in a single character element
 (presumably right before the return value is passed to the API)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>collapse_vector</span>(<span class='kw'>elements</span>, <span class='kw'>collapsed</span>)</pre>
+    <pre class="usage"><span class='fu'>collapse_vector</span><span class='op'>(</span><span class='va'>elements</span>, <span class='va'>collapsed</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -176,10 +176,10 @@ commas.  Can be blank. (<em>i.e.</em>, <code>""</code>).</p>
     <p>Will Beasley</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/OuhscBbmc/REDCapR'>REDCapR</a></span>) <span class='co'>#Load the package into the current R session.</span>
-<span class='kw'>REDCapR</span>:::<span class='fu'>collapse_vector</span>(elements=<span class='kw'>NULL</span>, collapsed=<span class='kw'>NULL</span>)
-</div><div class='output co'>#&gt; [1] ""</div><div class='input'><span class='kw'>REDCapR</span>:::<span class='fu'>collapse_vector</span>(elements=<span class='kw'>letters</span>, collapsed=<span class='kw'>NULL</span>)
-</div><div class='output co'>#&gt; [1] "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z"</div><div class='input'><span class='kw'>REDCapR</span>:::<span class='fu'>collapse_vector</span>(elements=<span class='kw'>NULL</span>, collapsed=<span class='st'>"4,5,6"</span>)
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/OuhscBbmc/REDCapR'>REDCapR</a></span><span class='op'>)</span> <span class='co'>#Load the package into the current R session.</span>
+<span class='fu'>REDCapR</span><span class='fu'>:::</span><span class='fu'>collapse_vector</span><span class='op'>(</span>elements<span class='op'>=</span><span class='cn'>NULL</span>, collapsed<span class='op'>=</span><span class='cn'>NULL</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] ""</div><div class='input'><span class='fu'>REDCapR</span><span class='fu'>:::</span><span class='fu'>collapse_vector</span><span class='op'>(</span>elements<span class='op'>=</span><span class='va'>letters</span>, collapsed<span class='op'>=</span><span class='cn'>NULL</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z"</div><div class='input'><span class='fu'>REDCapR</span><span class='fu'>:::</span><span class='fu'>collapse_vector</span><span class='op'>(</span>elements<span class='op'>=</span><span class='cn'>NULL</span>, collapsed<span class='op'>=</span><span class='st'>"4,5,6"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "4,5,6"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

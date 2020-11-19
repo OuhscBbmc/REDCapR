@@ -143,14 +143,14 @@
     <p>This function uses REDCap's API to select and return data.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>redcap_write_oneshot</span>(
-  <span class='kw'>ds</span>,
-  <span class='kw'>redcap_uri</span>,
-  <span class='kw'>token</span>,
-  convert_logical_to_integer = <span class='fl'>FALSE</span>,
-  verbose = <span class='fl'>TRUE</span>,
-  config_options = <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>redcap_write_oneshot</span><span class='op'>(</span>
+  <span class='va'>ds</span>,
+  <span class='va'>redcap_uri</span>,
+  <span class='va'>token</span>,
+  convert_logical_to_integer <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  config_options <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -227,35 +227,35 @@ administrator to send you the static material.</p>
     <p>Will Beasley</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'>#Define some constants</span>
-<span class='kw'>uri</span>            <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class='kw'>token</span>          <span class='op'>&lt;-</span> <span class='st'>"D70F9ACD1EDD6F151C6EA78683944E98"</span>
+<span class='va'>uri</span>            <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class='va'>token</span>          <span class='op'>&lt;-</span> <span class='st'>"D70F9ACD1EDD6F151C6EA78683944E98"</span>
 
 <span class='co'># Read the dataset for the first time.</span>
-<span class='kw'>result_read1</span>   <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='fu'><a href='redcap_read_oneshot.html'>redcap_read_oneshot</a></span>(redcap_uri=<span class='kw'>uri</span>, token=<span class='kw'>token</span>)
-<span class='kw'>ds1</span>            <span class='op'>&lt;-</span> <span class='kw'>result_read1</span><span class='op'>$</span><span class='kw'>data</span>
-<span class='kw'>ds1</span><span class='op'>$</span><span class='kw'>telephone</span>
+<span class='va'>result_read1</span>   <span class='op'>&lt;-</span> <span class='fu'>REDCapR</span><span class='fu'>::</span><span class='fu'><a href='redcap_read_oneshot.html'>redcap_read_oneshot</a></span><span class='op'>(</span>redcap_uri<span class='op'>=</span><span class='va'>uri</span>, token<span class='op'>=</span><span class='va'>token</span><span class='op'>)</span>
+<span class='va'>ds1</span>            <span class='op'>&lt;-</span> <span class='va'>result_read1</span><span class='op'>$</span><span class='va'>data</span>
+<span class='va'>ds1</span><span class='op'>$</span><span class='va'>telephone</span>
 
 <span class='co'># Manipulate a field in the dataset in a VALID way</span>
-<span class='kw'>ds1</span><span class='op'>$</span><span class='kw'>telephone</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"(405) 321-000"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='kw'>ds1</span>)))
+<span class='va'>ds1</span><span class='op'>$</span><span class='va'>telephone</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"(405) 321-000"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>ds1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='kw'>ds1</span> <span class='op'>&lt;-</span> <span class='kw'>ds1</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, ]
-<span class='kw'>ds1</span><span class='op'>$</span><span class='kw'>age</span>        <span class='op'>&lt;-</span> <span class='kw'>NULL</span>; <span class='kw'>ds1</span><span class='op'>$</span><span class='kw'>bmi</span> <span class='op'>&lt;-</span> <span class='kw'>NULL</span> <span class='co'>#Drop the calculated fields before writing.</span>
-<span class='kw'>result_write</span>   <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='fu'>redcap_write_oneshot</span>(ds=<span class='kw'>ds1</span>, redcap_uri=<span class='kw'>uri</span>, token=<span class='kw'>token</span>)
+<span class='va'>ds1</span> <span class='op'>&lt;-</span> <span class='va'>ds1</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, <span class='op'>]</span>
+<span class='va'>ds1</span><span class='op'>$</span><span class='va'>age</span>        <span class='op'>&lt;-</span> <span class='cn'>NULL</span>; <span class='va'>ds1</span><span class='op'>$</span><span class='va'>bmi</span> <span class='op'>&lt;-</span> <span class='cn'>NULL</span> <span class='co'>#Drop the calculated fields before writing.</span>
+<span class='va'>result_write</span>   <span class='op'>&lt;-</span> <span class='fu'>REDCapR</span><span class='fu'>::</span><span class='fu'>redcap_write_oneshot</span><span class='op'>(</span>ds<span class='op'>=</span><span class='va'>ds1</span>, redcap_uri<span class='op'>=</span><span class='va'>uri</span>, token<span class='op'>=</span><span class='va'>token</span><span class='op'>)</span>
 
 <span class='co'># Read the dataset for the second time.</span>
-<span class='kw'>result_read2</span>   <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='fu'><a href='redcap_read_oneshot.html'>redcap_read_oneshot</a></span>(redcap_uri=<span class='kw'>uri</span>, token=<span class='kw'>token</span>)
-<span class='kw'>ds2</span>            <span class='op'>&lt;-</span> <span class='kw'>result_read2</span><span class='op'>$</span><span class='kw'>data</span>
-<span class='kw'>ds2</span><span class='op'>$</span><span class='kw'>telephone</span>
+<span class='va'>result_read2</span>   <span class='op'>&lt;-</span> <span class='fu'>REDCapR</span><span class='fu'>::</span><span class='fu'><a href='redcap_read_oneshot.html'>redcap_read_oneshot</a></span><span class='op'>(</span>redcap_uri<span class='op'>=</span><span class='va'>uri</span>, token<span class='op'>=</span><span class='va'>token</span><span class='op'>)</span>
+<span class='va'>ds2</span>            <span class='op'>&lt;-</span> <span class='va'>result_read2</span><span class='op'>$</span><span class='va'>data</span>
+<span class='va'>ds2</span><span class='op'>$</span><span class='va'>telephone</span>
 
 <span class='co'># Manipulate a field in the dataset in an INVALID way.  A US exchange can't be '111'.</span>
-<span class='kw'>ds1</span><span class='op'>$</span><span class='kw'>telephone</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"(405) 321-000"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='kw'>ds1</span>)))
+<span class='va'>ds1</span><span class='op'>$</span><span class='va'>telephone</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"(405) 321-000"</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>ds1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># This next line will throw an error.</span>
-<span class='kw'>result_write</span>   <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='fu'>redcap_write_oneshot</span>(ds=<span class='kw'>ds1</span>, redcap_uri=<span class='kw'>uri</span>, token=<span class='kw'>token</span>)
-<span class='kw'>result_write</span><span class='op'>$</span><span class='kw'>raw_text</span>
-}
+<span class='va'>result_write</span>   <span class='op'>&lt;-</span> <span class='fu'>REDCapR</span><span class='fu'>::</span><span class='fu'>redcap_write_oneshot</span><span class='op'>(</span>ds<span class='op'>=</span><span class='va'>ds1</span>, redcap_uri<span class='op'>=</span><span class='va'>uri</span>, token<span class='op'>=</span><span class='va'>token</span><span class='op'>)</span>
+<span class='va'>result_write</span><span class='op'>$</span><span class='va'>raw_text</span>
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

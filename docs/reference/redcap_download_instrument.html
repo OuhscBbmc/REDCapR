@@ -143,18 +143,18 @@
     <p>Download instruments as a pdf, with or without responses.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>redcap_download_instrument</span>(
-  file_name = <span class='kw'>NULL</span>,
-  directory = <span class='kw'>NULL</span>,
-  overwrite = <span class='fl'>FALSE</span>,
-  <span class='kw'>redcap_uri</span>,
-  <span class='kw'>token</span>,
-  record = <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(<span class='fl'>0</span>),
-  instrument = <span class='st'>""</span>,
-  event = <span class='st'>""</span>,
-  verbose = <span class='fl'>TRUE</span>,
-  config_options = <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>redcap_download_instrument</span><span class='op'>(</span>
+  file_name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  directory <span class='op'>=</span> <span class='cn'>NULL</span>,
+  overwrite <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>redcap_uri</span>,
+  <span class='va'>token</span>,
+  record <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span>,
+  instrument <span class='op'>=</span> <span class='st'>""</span>,
+  event <span class='op'>=</span> <span class='st'>""</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  config_options <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -250,37 +250,37 @@ administrator to send you the static material.</p>
     <p>Will Beasley</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='kw'>uri</span>     <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class='kw'>token</span>   <span class='op'>&lt;-</span> <span class='st'>"D70F9ACD1EDD6F151C6EA78683944E98"</span> <span class='co'>#pid=213</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>uri</span>     <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class='va'>token</span>   <span class='op'>&lt;-</span> <span class='st'>"D70F9ACD1EDD6F151C6EA78683944E98"</span> <span class='co'>#pid=213</span>
 <span class='co'># event &lt;- "" # only for longitudinal projects</span>
 
-(<span class='kw'>full_name</span> <span class='op'>&lt;-</span> <span class='kw'>base</span>::<span class='fu'>temp</span>(pattern=<span class='st'>"instruments-all-records-all"</span>, fileext=<span class='st'>".pdf"</span>))
-<span class='kw'>result_1</span>   <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='fu'>redcap_download_instrument</span>(
-  file_name     = <span class='kw'>full_name</span>,
-  redcap_uri    = <span class='kw'>uri</span>,
-  token         = <span class='kw'>token</span>
-)
-<span class='kw'>base</span>::<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='kw'>full_name</span>)
+<span class='op'>(</span><span class='va'>full_name</span> <span class='op'>&lt;-</span> <span class='fu'>base</span><span class='fu'>::</span><span class='fu'>temp</span><span class='op'>(</span>pattern<span class='op'>=</span><span class='st'>"instruments-all-records-all"</span>, fileext<span class='op'>=</span><span class='st'>".pdf"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>result_1</span>   <span class='op'>&lt;-</span> <span class='fu'>REDCapR</span><span class='fu'>::</span><span class='fu'>redcap_download_instrument</span><span class='op'>(</span>
+  file_name     <span class='op'>=</span> <span class='va'>full_name</span>,
+  redcap_uri    <span class='op'>=</span> <span class='va'>uri</span>,
+  token         <span class='op'>=</span> <span class='va'>token</span>
+<span class='op'>)</span>
+<span class='fu'>base</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span><span class='op'>(</span><span class='va'>full_name</span><span class='op'>)</span>
 
-(<span class='kw'>full_name</span> <span class='op'>&lt;-</span> <span class='kw'>base</span>::<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(pattern=<span class='st'>"instruments-all-record-1-"</span>, fileext=<span class='st'>".pdf"</span>))
-<span class='kw'>result_2</span>   <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='fu'>redcap_download_instrument</span>(
-  record        = <span class='fl'>5</span>,
-  file_name     = <span class='kw'>full_name</span>,
-  redcap_uri    = <span class='kw'>uri</span>,
-  token         = <span class='kw'>token</span>
-)
-<span class='kw'>base</span>::<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='kw'>full_name</span>)
-(<span class='kw'>full_name</span> <span class='op'>&lt;-</span> <span class='kw'>base</span>::<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(pattern=<span class='st'>"instrument-1-record-1-"</span>, fileext=<span class='st'>".pdf"</span>))
-<span class='kw'>result_3</span>   <span class='op'>&lt;-</span> <span class='kw'>REDCapR</span>::<span class='fu'>redcap_download_instrument</span>(
-  record        = <span class='fl'>5</span>,
-  instrument    = <span class='st'>"health"</span>,
-  file_name     = <span class='kw'>full_name</span>,
-  redcap_uri    = <span class='kw'>uri</span>,
-  token         = <span class='kw'>token</span>
-)
-<span class='kw'>base</span>::<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='kw'>full_name</span>)
-}
+<span class='op'>(</span><span class='va'>full_name</span> <span class='op'>&lt;-</span> <span class='fu'>base</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span>pattern<span class='op'>=</span><span class='st'>"instruments-all-record-1-"</span>, fileext<span class='op'>=</span><span class='st'>".pdf"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>result_2</span>   <span class='op'>&lt;-</span> <span class='fu'>REDCapR</span><span class='fu'>::</span><span class='fu'>redcap_download_instrument</span><span class='op'>(</span>
+  record        <span class='op'>=</span> <span class='fl'>5</span>,
+  file_name     <span class='op'>=</span> <span class='va'>full_name</span>,
+  redcap_uri    <span class='op'>=</span> <span class='va'>uri</span>,
+  token         <span class='op'>=</span> <span class='va'>token</span>
+<span class='op'>)</span>
+<span class='fu'>base</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span><span class='op'>(</span><span class='va'>full_name</span><span class='op'>)</span>
+<span class='op'>(</span><span class='va'>full_name</span> <span class='op'>&lt;-</span> <span class='fu'>base</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span>pattern<span class='op'>=</span><span class='st'>"instrument-1-record-1-"</span>, fileext<span class='op'>=</span><span class='st'>".pdf"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>result_3</span>   <span class='op'>&lt;-</span> <span class='fu'>REDCapR</span><span class='fu'>::</span><span class='fu'>redcap_download_instrument</span><span class='op'>(</span>
+  record        <span class='op'>=</span> <span class='fl'>5</span>,
+  instrument    <span class='op'>=</span> <span class='st'>"health"</span>,
+  file_name     <span class='op'>=</span> <span class='va'>full_name</span>,
+  redcap_uri    <span class='op'>=</span> <span class='va'>uri</span>,
+  token         <span class='op'>=</span> <span class='va'>token</span>
+<span class='op'>)</span>
+<span class='fu'>base</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span><span class='op'>(</span><span class='va'>full_name</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
