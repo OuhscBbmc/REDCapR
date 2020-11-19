@@ -101,7 +101,7 @@ test_that("filter-numeric", {
   expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
-  expect_equal(returned_object1$filter_logic, filter, "The filter was not correct.")
+  expect_equal(returned_object1$filter_logic, filter)
   expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 
   ###########################
@@ -116,7 +116,7 @@ test_that("filter-numeric", {
   expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
-  expect_equal(returned_object1$filter_logic, filter, "The filter was not correct.")
+  expect_equal(returned_object1$filter_logic, filter)
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
 
@@ -142,7 +142,7 @@ test_that("filter-character", {
   expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
-  expect_equal(returned_object1$filter_logic, filter, "The filter was not correct.")
+  expect_equal(returned_object1$filter_logic, filter)
   expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 
   ###########################
@@ -157,7 +157,7 @@ test_that("filter-character", {
   expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
-  expect_equal(returned_object2$filter_logic, filter, "The filter was not correct.")
+  expect_equal(returned_object2$filter_logic, filter)
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
 
