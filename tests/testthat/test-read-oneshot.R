@@ -70,9 +70,6 @@ test_that("col_types", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
-
-  # expect_equal_to_reference(returned_object$data, file=system.file("test-data/project-simple/variations/default.rds", package="REDCapR"))
-  # expect_equal_to_reference(returned_object$data, file="./test-data/project-simple/variations/default.rds")
 })
 test_that("specify-forms", {
   testthat::skip_on_cran()
@@ -96,8 +93,6 @@ test_that("specify-forms", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
-  #expect_equal_to_reference(returned_object$data, file=system.file("test-data/project-simple/variations/default.rds", package="REDCapR"))
-  #expect_equal_to_reference(returned_object$data, file="./test-data/project-simple/variations/default.rds")
 })
 test_that("force-character-type", {
   testthat::skip_on_cran()
@@ -120,8 +115,6 @@ test_that("force-character-type", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
-  #expect_equal_to_reference(returned_object$data, file=system.file("test-data/project-simple/variations/default.rds", package="REDCapR"))
-  #expect_equal_to_reference(returned_object$data, file="./test-data/project-simple/variations/default.rds")
 })
 test_that("raw", {
   testthat::skip_on_cran()

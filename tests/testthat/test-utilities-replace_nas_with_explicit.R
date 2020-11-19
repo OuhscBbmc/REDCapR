@@ -12,7 +12,7 @@ test_that("replace_nas_character_standard", {
 
   a <- REDCapR:::replace_nas_with_explicit(a)
   expect_equal(a, expected, label="The correct letters should have been replaced.")
-  expect_equal(class(a), "character")
+  expect_type(a, "character")
 })
 
 test_that("replace_nas_factor_standard", {
