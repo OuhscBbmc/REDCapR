@@ -51,7 +51,7 @@ for( i in seq_len(read_count) ) {
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
-  expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
+  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
@@ -110,7 +110,7 @@ for( i in seq_len(file_count) ) {
   expect_equal(returned_object$records_affected_count, 1L)
   expect_equal(returned_object$affected_ids, 1L)
   expect_true(returned_object$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
-  expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
+  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_equal(returned_object$file_name, "mugshot-1.jpg", label="The name of the downloaded file should be correct.")
 
   #Test the values of the file.

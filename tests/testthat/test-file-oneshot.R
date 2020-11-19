@@ -13,17 +13,18 @@ test_that("NameComesFromREDCap", {
   record <- 1
   field <- "mugshot"
 
-  expected_outcome_message <- '; name="mugshot-1\\.jpg" successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as mugshot-1.jpg'
+  expected_outcome_message <- '^(Preparing to download the file `mugshot-1.jpg`\\.|.+; name="mugshot-1\\.jpg" successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as mugshot-1.jpg)'
 
+  expected_outcome_message <- ".+"
   tryCatch({
-    expect_message(
+    capture_messages(
       returned_object <- redcap_download_file_oneshot(
         record        = record,
         field         = field,
         redcap_uri    = credential$redcap_uri,
-        token         = credential$token,
-      ),
-      regexp = expected_outcome_message
+        token         = credential$token
+      )#,
+      # regexp = NA #expected_outcome_message
     )
     Sys.sleep(delay_after_download_file)
 
@@ -39,7 +40,7 @@ test_that("NameComesFromREDCap", {
   expect_equal(returned_object$records_affected_count, 1L)
   expect_equal(returned_object$affected_ids, "1")
   expect_true(returned_object$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
-  expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
+  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_equal(returned_object$file_name, "mugshot-1.jpg", label="The name of the downloaded file should be correct.")
 
   #Test the values of the file.
@@ -88,7 +89,7 @@ test_that("FullPathSpecified", {
   expect_equal(returned_object$records_affected_count, 1L)
   expect_equal(returned_object$affected_ids, "2")
   expect_true(returned_object$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
-  expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
+  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_equal(returned_object$file_name, full_name, label="The name of the downloaded file should be correct.")
 
   #Test the values of the file.
@@ -137,7 +138,7 @@ test_that("RelativePath", {
   expect_equal(returned_object$records_affected_count, 1L)
   expect_equal(returned_object$affected_ids, "3")
   expect_true(returned_object$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
-  expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
+  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_equal(returned_object$file_name, relative_name, label="The name of the downloaded file should be correct.")
 
   #Test the values of the file.
@@ -186,7 +187,7 @@ test_that("Full Directory Specific", {
   expect_equal(returned_object$records_affected_count, 1L)
   expect_equal(returned_object$affected_ids, "3")
   expect_true(returned_object$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
-  expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
+  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_equal(returned_object$file_name, returned_object$file_name, label="The name of the downloaded file should be correct.")
 
   #Test the values of the file.
@@ -281,7 +282,7 @@ test_that("Download Error --bad field name", {
   expect_equal(returned_object$records_affected_count, 0L)
   expect_equal(returned_object$affected_ids, character(0))
   expect_true(returned_object$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
-  expect_equivalent(returned_object$raw_text, expected=expected_raw_text) # dput(returned_object$raw_text)
+  expect_equal(returned_object$raw_text, expected=expected_raw_text, ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_null(returned_object$file_name, label="The name of the downloaded file should be correct.")
 })
 

@@ -26,7 +26,7 @@ test_that("correct dimensions -oneshot", {
   expect_false(any(is.na(returned_object$data)))
 
   expect_equal(returned_object$status_code, expected=200L)
-  expect_equivalent(returned_object$raw_text, expected="") # dput(returned_object$raw_text)
+  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
