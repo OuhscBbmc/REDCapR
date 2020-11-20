@@ -11,6 +11,7 @@ redcap_write(
   continue_on_error = FALSE,
   redcap_uri,
   token,
+  overwrite_with_blanks = TRUE,
   convert_logical_to_integer = FALSE,
   verbose = TRUE,
   config_options = NULL
@@ -35,6 +36,14 @@ project.  Required.}
 
 \item{token}{The user-specific string that serves as the password for a
 project.  Required.}
+
+\item{overwrite_with_blanks}{A boolean value indicating if
+blank/\code{NA} values in the R \link[base:data.frame]{base::data.frame}
+will overwrite data on the server.
+This is the default behavior for REDCapR,
+which essentially deletes the cell's value
+If \code{FALSE}, blank/\code{NA} values in the \link[base:data.frame]{base::data.frame}
+will be ignored.  Optional.}
 
 \item{convert_logical_to_integer}{If \code{TRUE}, all \link[base:logical]{base::logical} columns
 in \code{ds} are cast to an integer before uploading to REDCap.

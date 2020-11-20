@@ -8,6 +8,13 @@
 #' project.  Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
+#' @param overwrite_with_blanks A boolean value indicating if
+#' blank/`NA` values in the R [base::data.frame]
+#' will overwrite data on the server.
+#' This is the default behavior for REDCapR,
+#' which essentially deletes the cell's value
+#' If `FALSE`, blank/`NA` values in the [base::data.frame]
+#' will be ignored.  Optional.
 #' @param convert_logical_to_integer If `TRUE`, all [base::logical] columns
 #' in `ds` are cast to an integer before uploading to REDCap.
 #' Boolean values are typically represented as 0/1 in REDCap radio buttons.
@@ -84,6 +91,7 @@ redcap_write_oneshot <- function(
   ds,
   redcap_uri,
   token,
+  overwrite_with_blanks         = TRUE,
   convert_logical_to_integer    = FALSE,
   verbose         = TRUE,
   config_options  = NULL
@@ -96,6 +104,7 @@ redcap_write_oneshot <- function(
 
   token   <- sanitize_token(token)
   verbose <- verbose_prepare(verbose)
+  overwrite_with_blanks <- dplyr::if_else(overwrite_with_blanks, "overwrite", "normal")
 
   if (convert_logical_to_integer) {
     ds <-
@@ -126,7 +135,7 @@ redcap_write_oneshot <- function(
     #  *overwrite* - blank/empty values are valid and will overwrite data
 
     data                = csv,
-    overwriteBehavior   = "overwrite",
+    overwriteBehavior   = overwrite_with_blanks,
     returnContent       = "ids",
     returnFormat        = "csv"
   )

@@ -15,6 +15,13 @@
 #' project.  Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
+#' @param overwrite_with_blanks A boolean value indicating if
+#' blank/`NA` values in the R [base::data.frame]
+#' will overwrite data on the server.
+#' This is the default behavior for REDCapR,
+#' which essentially deletes the cell's value
+#' If `FALSE`, blank/`NA` values in the [base::data.frame]
+#' will be ignored.  Optional.
 #' @param convert_logical_to_integer If `TRUE`, all [base::logical] columns
 #' in `ds` are cast to an integer before uploading to REDCap.
 #' Boolean values are typically represented as 0/1 in REDCap radio buttons.
@@ -100,6 +107,7 @@ redcap_write <- function(
   continue_on_error   = FALSE,
   redcap_uri,
   token,
+  overwrite_with_blanks      = TRUE,
   convert_logical_to_integer = FALSE,
   verbose             = TRUE,
   config_options      = NULL
@@ -146,6 +154,7 @@ redcap_write <- function(
       ds               = ds_to_write[selected_indices, ],
       redcap_uri       = redcap_uri,
       token            = token,
+      overwrite_with_blanks = overwrite_with_blanks,
       convert_logical_to_integer = convert_logical_to_integer,
       verbose          = verbose,
       config_options   = config_options

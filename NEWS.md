@@ -4,6 +4,13 @@ Upcoming Versions
 In the future:
 ...
 
+Version 0.12 (Unreleased on CRAN)
+==========================================================
+
+### Minor Enhancements
+
+* Toggle ability to overwrite with blank/NA cells (suggested by @auricap, #315)
+
 Version 0.11 (Released 2020-04-20)
 ==========================================================
 
