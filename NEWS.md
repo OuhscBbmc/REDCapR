@@ -9,7 +9,19 @@ Version 0.12 (Unreleased on CRAN)
 
 ### Minor Enhancements
 
-* Toggle ability to overwrite with blank/NA cells (suggested by @auricap, #315)
+* When writing records to the server, the functions `redcap_write()` and `redcap_write_oneshot()` have a new parameter that converts R's `logical`/boolean columns to integers.  This meshes well with T/F and Y/N items that are coded as 1/0 underneath. The default will be FALSE, so it doesn't break existing code. (#305)
+* When writing records to the server, the functions `redcap_write()` and `redcap_write_oneshot()` can toggle the ability to overwrite with blank/NA cells (suggested by @auricap, #315)
+
+### Stability Features
+
+* update for newer version of testthat -v3.0.0 (#312)
+* update for newer version of readr (#313)
+* update for newer version of REDCap on test server (#310)
+* save expected datasets as files -instead of included in the actual test code (#308)
+
+### Corrections & Bug Fixes
+
+* Accepts more than one `config_option` element.  (Proposed by @BastienRance)
 
 Version 0.11 (Released 2020-04-20)
 ==========================================================
