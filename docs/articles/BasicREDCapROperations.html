@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9002</span>
       </span>
     </div>
 
@@ -85,13 +85,13 @@
 
       
 
-      </header><script src="BasicREDCapROperations_files/header-attrs-2.5/header-attrs.js"></script><script src="BasicREDCapROperations_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="BasicREDCapROperations_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+      </header><script src="BasicREDCapROperations_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="BasicREDCapROperations_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
 <script src="BasicREDCapROperations_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Basic REDCapR Operations</h1>
             
-            <h4 class="date">2020-11-18</h4>
+            <h4 class="date">2020-11-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/BasicREDCapROperations.Rmd"><code>vignettes/BasicREDCapROperations.Rmd</code></a></small>
       <div class="hidden name"><code>BasicREDCapROperations.Rmd</code></div>
@@ -122,13 +122,13 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Return all records and all variables.</span>
 <span class="va">ds_all_rows_all_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2020-11-18 23:48:29.</code></pre>
+<pre><code>Starting to read 5 records  at 2020-11-20 12:52:06.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
-── Column specification ────────────────────────────────────────────────────────
+-- Column specification --------------------------------------------------------
 cols(
   .default = col_double(),
   name_first = col_character(),
@@ -140,7 +140,7 @@ cols(
   comments = col_character(),
   mugshot = col_character()
 )
-ℹ Use `spec()` for the full column specifications.</code></pre>
+i Use `spec()` for the full column specifications.</code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds_all_rows_all_fields</span> <span class="co"># Inspect the returned dataset</span></code></pre></div>
 <pre><code>  record_id name_first name_last                                 address
@@ -193,13 +193,13 @@ cols(
   token      <span class="op">=</span> <span class="va">token</span>,
   records    <span class="op">=</span> <span class="va">desired_records_v1</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2020-11-18 23:48:31.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2020-11-20 12:52:07.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
-── Column specification ────────────────────────────────────────────────────────
+-- Column specification --------------------------------------------------------
 cols(
   .default = col_double(),
   name_first = col_character(),
@@ -211,7 +211,7 @@ cols(
   comments = col_character(),
   mugshot = col_character()
 )
-ℹ Use `spec()` for the full column specifications.</code></pre>
+i Use `spec()` for the full column specifications.</code></pre>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Return only records with IDs of 1 and 3 (alternate way)</span>
 <span class="va">desired_records_v2</span> <span class="op">&lt;-</span> <span class="st">"1, 3"</span>
@@ -222,11 +222,11 @@ cols(
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2020-11-18 23:48:32.</code></pre>
+<pre><code>Starting to read 2 records  at 2020-11-20 12:52:09.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
-<pre><code>2 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
-── Column specification ────────────────────────────────────────────────────────
+-- Column specification --------------------------------------------------------
 cols(
   .default = col_double(),
   name_first = col_character(),
@@ -238,7 +238,7 @@ cols(
   comments = col_character(),
   mugshot = col_character()
 )
-ℹ Use `spec()` for the full column specifications.</code></pre>
+i Use `spec()` for the full column specifications.</code></pre>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds_some_rows_v2</span> <span class="co"># Inspect the returned dataset</span></code></pre></div>
 <pre><code>  record_id name_first name_last                                 address
@@ -271,11 +271,11 @@ cols(
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2020-11-18 23:48:33.</code></pre>
+<pre><code>Starting to read 5 records  at 2020-11-20 12:52:10.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
-── Column specification ────────────────────────────────────────────────────────
+-- Column specification --------------------------------------------------------
 cols(
   record_id = col_double(),
   name_first = col_character(),
@@ -291,11 +291,11 @@ cols(
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2020-11-18 23:48:35.</code></pre>
+<pre><code>Starting to read 5 records  at 2020-11-20 12:52:11.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
-── Column specification ────────────────────────────────────────────────────────
+-- Column specification --------------------------------------------------------
 cols(
   record_id = col_double(),
   name_first = col_character(),
@@ -323,13 +323,13 @@ cols(
   token      <span class="op">=</span> <span class="va">token</span>,
   fields     <span class="op">=</span> <span class="va">desired_fields_v3</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2020-11-18 23:48:36.</code></pre>
+<pre><code>Starting to read 5 records  at 2020-11-20 12:52:12.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
-── Column specification ────────────────────────────────────────────────────────
+-- Column specification --------------------------------------------------------
 cols(
   record_id = col_double(),
   dob = col_date(format = ""),
@@ -362,12 +362,12 @@ cols(
   records    <span class="op">=</span> <span class="va">desired_records_v3</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2020-11-18 23:48:37.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2020-11-20 12:52:14.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).</code></pre>
-<pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>
-── Column specification ────────────────────────────────────────────────────────
+-- Column specification --------------------------------------------------------
 cols(
   .default = col_double(),
   name_first = col_character(),
@@ -379,7 +379,7 @@ cols(
   comments = col_character(),
   mugshot = col_character()
 )
-ℹ Use `spec()` for the full column specifications.</code></pre>
+i Use `spec()` for the full column specifications.</code></pre>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds_some_rows_v3</span> <span class="co">#Examine the results.</span></code></pre></div>
 <pre><code>  record_id name_first name_last                            address
@@ -422,12 +422,12 @@ cols(
   fields     <span class="op">=</span> <span class="va">desired_fields_v1</span>
 <span class="op">)</span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2020-11-18 23:48:39.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2020-11-20 12:52:15.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>
-── Column specification ────────────────────────────────────────────────────────
+-- Column specification --------------------------------------------------------
 cols(
   record_id = col_double(),
   name_first = col_character(),
@@ -450,7 +450,7 @@ $status_codes
 [1] "200"
 
 $outcome_messages
-[1] "5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200."
+[1] "5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200."
 
 $records_collapsed
 [1] ""
@@ -468,7 +468,7 @@ $filter_logic
 [1] ""
 
 $elapsed_seconds
-[1] 1.237175</code></pre>
+[1] 1.365607</code></pre>
 </div>
 </div>
 <div id="session-information" class="section level1">
@@ -476,25 +476,25 @@ $elapsed_seconds
 <a href="#session-information" class="anchor"></a>Session Information</h1>
 <p>For the sake of documentation and reproducibility, the current report was rendered in the following environment. Click the line below to expand.</p>
 <details><p><summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary></p>
-<pre><code>─ Session info ───────────────────────────────────────────────────────────────
- setting  value                       
- version  R version 4.0.3 (2020-10-10)
- os       Ubuntu 20.04.1 LTS          
- system   x86_64, linux-gnu           
- ui       X11                         
- language (EN)                        
- collate  en_US.UTF-8                 
- ctype    en_US.UTF-8                 
- tz       America/Chicago             
- date     2020-11-18                  
+<pre><code>- Session info ---------------------------------------------------------------
+ setting  value                                      
+ version  R version 4.0.3 Patched (2020-11-17 r79439)
+ os       Windows &gt;= 8 x64                           
+ system   x86_64, mingw32                            
+ ui       RTerm                                      
+ language (EN)                                       
+ collate  English_United States.1252                 
+ ctype    English_United States.1252                 
+ tz       America/Chicago                            
+ date     2020-11-20                                 
 
-─ Packages ───────────────────────────────────────────────────────────────────
+- Packages -------------------------------------------------------------------
  package     * version     date       lib source        
  assertthat    0.2.1       2019-03-21 [2] CRAN (R 4.0.0)
- backports     1.2.0       2020-11-02 [2] CRAN (R 4.0.3)
+ backports     1.2.0       2020-11-02 [2] CRAN (R 4.0.2)
  checkmate     2.0.0       2020-02-06 [2] CRAN (R 4.0.0)
- cli           2.1.0       2020-10-12 [2] CRAN (R 4.0.3)
- colorspace    2.0-0       2020-11-11 [2] CRAN (R 4.0.3)
+ cli           2.1.0       2020-10-12 [2] CRAN (R 4.0.2)
+ colorspace    2.0-0       2020-11-11 [2] CRAN (R 4.0.2)
  crayon        1.3.4       2017-09-16 [2] CRAN (R 4.0.0)
  curl          4.3         2019-12-02 [2] CRAN (R 4.0.0)
  desc          1.2.0       2018-05-01 [2] CRAN (R 4.0.0)
@@ -504,10 +504,10 @@ $elapsed_seconds
  evaluate      0.14        2019-05-28 [2] CRAN (R 4.0.0)
  fansi         0.4.1       2020-01-08 [2] CRAN (R 4.0.0)
  fs            1.5.0       2020-07-31 [2] CRAN (R 4.0.2)
- generics      0.1.0       2020-10-31 [2] CRAN (R 4.0.3)
+ generics      0.1.0       2020-10-31 [2] CRAN (R 4.0.2)
  glue          1.4.2       2020-08-27 [2] CRAN (R 4.0.2)
  hms           0.5.3       2020-01-08 [2] CRAN (R 4.0.0)
- htmltools     0.5.0       2020-06-16 [2] CRAN (R 4.0.1)
+ htmltools     0.5.0       2020-06-16 [2] CRAN (R 4.0.0)
  httr          1.4.2       2020-07-20 [2] CRAN (R 4.0.2)
  kableExtra    1.3.1       2020-10-22 [2] CRAN (R 4.0.3)
  knitr       * 1.30        2020-09-22 [2] CRAN (R 4.0.2)
@@ -518,38 +518,38 @@ $elapsed_seconds
  pillar        1.4.6       2020-07-10 [2] CRAN (R 4.0.2)
  pkgconfig     2.0.3       2019-09-22 [2] CRAN (R 4.0.0)
  pkgdown       1.6.1       2020-09-12 [2] CRAN (R 4.0.2)
+ ps            1.4.0       2020-10-07 [2] CRAN (R 4.0.2)
  purrr         0.3.4       2020-04-17 [2] CRAN (R 4.0.0)
- R6            2.5.0       2020-10-28 [2] CRAN (R 4.0.3)
- ragg          0.4.0       2020-10-05 [2] CRAN (R 4.0.3)
- readr         1.4.0       2020-10-05 [2] CRAN (R 4.0.3)
- REDCapR     * 0.11.0.9001 2020-11-19 [1] local         
- rlang         0.4.8       2020-10-08 [2] CRAN (R 4.0.3)
+ R6            2.5.0       2020-10-28 [2] CRAN (R 4.0.2)
+ ragg          0.4.0       2020-10-05 [2] CRAN (R 4.0.2)
+ readr         1.4.0       2020-10-05 [2] CRAN (R 4.0.2)
+ REDCapR     * 0.11.0.9001 2020-11-20 [2] local         
+ rlang         0.4.8       2020-10-08 [2] CRAN (R 4.0.2)
  rmarkdown     2.5         2020-10-21 [2] CRAN (R 4.0.3)
- rprojroot     2.0.2       2020-11-15 [2] CRAN (R 4.0.3)
- rstudioapi    0.13        2020-11-12 [2] CRAN (R 4.0.3)
+ rprojroot     2.0.2       2020-11-15 [2] CRAN (R 4.0.2)
+ rstudioapi    0.13        2020-11-12 [2] CRAN (R 4.0.2)
  rvest         0.3.6       2020-07-25 [2] CRAN (R 4.0.2)
  scales        1.1.1       2020-05-11 [2] CRAN (R 4.0.0)
  sessioninfo   1.1.1       2018-11-05 [2] CRAN (R 4.0.0)
  stringi       1.5.3       2020-09-09 [2] CRAN (R 4.0.2)
  stringr       1.4.0       2019-02-10 [2] CRAN (R 4.0.0)
  systemfonts   0.3.2       2020-09-29 [2] CRAN (R 4.0.2)
- textshaping   0.2.1       2020-11-13 [2] CRAN (R 4.0.3)
- tibble        3.0.4       2020-10-12 [2] CRAN (R 4.0.3)
+ textshaping   0.2.1       2020-11-13 [2] CRAN (R 4.0.2)
+ tibble        3.0.4       2020-10-12 [2] CRAN (R 4.0.2)
  tidyselect    1.1.0       2020-05-11 [2] CRAN (R 4.0.0)
  vctrs         0.3.5       2020-11-17 [2] CRAN (R 4.0.3)
  viridisLite   0.3.0       2018-02-01 [2] CRAN (R 4.0.0)
  webshot       0.5.2       2019-11-22 [2] CRAN (R 4.0.0)
  withr         2.3.0       2020-09-22 [2] CRAN (R 4.0.2)
- xfun          0.19        2020-10-30 [2] CRAN (R 4.0.3)
+ xfun          0.19        2020-10-30 [2] CRAN (R 4.0.2)
  xml2          1.3.2       2020-04-23 [2] CRAN (R 4.0.0)
  yaml          2.2.1       2020-02-01 [2] CRAN (R 4.0.0)
 
-[1] /tmp/Rtmpt2XpuI/temp_libpath121ae8d5abc1
-[2] /home/wibeasley/R/x86_64-pc-linux-gnu-library/4.0
-[3] /usr/local/lib/R/site-library
-[4] /usr/lib/R/site-library
-[5] /usr/lib/R/library</code></pre>
-</details><p>Report rendered by wibeasley at 2020-11-18, 23:48 -0600 in 14 seconds.</p>
+[1] C:/Users/Will/AppData/Local/Temp/RtmpInICQg/temp_libpath52d035f0f28
+[2] D:/Projects/RLibraries
+[3] D:/Users/Will/Documents/R/win-library/4.0
+[4] C:/Program Files/R/R-4.0.3patched/library</code></pre>
+</details><p>Report rendered by Will at 2020-11-20, 12:52 -0600 in 13 seconds.</p>
 </div>
   </div>
 

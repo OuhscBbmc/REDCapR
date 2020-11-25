@@ -85,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9002</span>
       </span>
     </div>
 
@@ -137,6 +137,36 @@
       <small>Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="version-012-unreleased-on-cran" class="section level1">
+<h1 class="page-header" data-toc-text="0.12">
+<a href="#version-012-unreleased-on-cran" class="anchor"></a>Version 0.12 (Unreleased on CRAN)<small> Unreleased </small>
+</h1>
+<div id="minor-enhancements" class="section level3">
+<h3 class="hasAnchor">
+<a href="#minor-enhancements" class="anchor"></a>Minor Enhancements</h3>
+<ul>
+<li>When writing records to the server, the functions <code><a href="../reference/redcap_write.html">redcap_write()</a></code> and <code><a href="../reference/redcap_write_oneshot.html">redcap_write_oneshot()</a></code> have a new parameter that converts R’s <code>logical</code>/boolean columns to integers. This meshes well with T/F and Y/N items that are coded as 1/0 underneath. The default will be FALSE, so it doesn’t break existing code. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/305'>#305</a>)</li>
+<li>When writing records to the server, the functions <code><a href="../reference/redcap_write.html">redcap_write()</a></code> and <code><a href="../reference/redcap_write_oneshot.html">redcap_write_oneshot()</a></code> can toggle the ability to overwrite with blank/NA cells (suggested by <a href='https://github.com/auricap'>@auricap</a>, <a href='https://github.com/OuhscBbmc/REDCapR/issues/315'>#315</a>)</li>
+</ul>
+</div>
+<div id="stability-features" class="section level3">
+<h3 class="hasAnchor">
+<a href="#stability-features" class="anchor"></a>Stability Features</h3>
+<ul>
+<li>update for newer version of testthat -v3.0.0 (<a href='https://github.com/OuhscBbmc/REDCapR/issues/312'>#312</a>)</li>
+<li>update for newer version of readr (<a href='https://github.com/OuhscBbmc/REDCapR/issues/313'>#313</a>)</li>
+<li>update for newer version of REDCap on test server (<a href='https://github.com/OuhscBbmc/REDCapR/issues/310'>#310</a>)</li>
+<li>save expected datasets as files -instead of included in the actual test code (<a href='https://github.com/OuhscBbmc/REDCapR/issues/308'>#308</a>)</li>
+</ul>
+</div>
+<div id="corrections--bug-fixes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#corrections--bug-fixes" class="anchor"></a>Corrections &amp; Bug Fixes</h3>
+<ul>
+<li>Accepts more than one <code>config_option</code> element. (Proposed by <a href='https://github.com/BastienRance'>@BastienRance</a>)</li>
+</ul>
+</div>
+</div>
     <div id="version-011-released-2020-04-20" class="section level1">
 <h1 class="page-header" data-toc-text="0.11">
 <a href="#version-011-released-2020-04-20" class="anchor"></a>Version 0.11 (Released 2020-04-20)<small> Unreleased </small>
@@ -160,17 +190,17 @@
 <li><p><code>convert_logical_to_integer</code> is a new parameter for <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_write.html"><code>redcap_write()</code></a> and <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_write_oneshot.html"><code>redcap_write_oneshot()</code></a>. If <code>TRUE</code>, all [base::logical] columns in <code>ds</code> are cast to an integer before uploading to REDCap. Boolean values are typically represented as 0/1 in REDCap radio buttons. Defaults to <code>FALSE</code> to maintain backwards compatibility. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/305'>#305</a>)</p></li>
 </ul>
 </div>
-<div id="stability-features" class="section level3">
+<div id="stability-features-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#stability-features" class="anchor"></a>Stability Features</h3>
+<a href="#stability-features-1" class="anchor"></a>Stability Features</h3>
 <ul>
 <li><p><code><a href="https://httr.r-lib.org/reference/content.html">httr::content()</a></code> (which is inside <code><a href="../reference/kernel_api.html">kernel_api()</a></code>) now processes the returned value as “text/csv”, by default. This should prevent strange characters from tricking the process as the internal variable <code>raw_text</code> is being formed. See the [httr::content()<code>](https://httr.r-lib.org/reference/content.html) documentation for a list of possible values for the</code>content_type` parameter. (Thanks to great debugging by <a href='https://github.com/vortexing'>@vortexing</a> <a href='https://github.com/OuhscBbmc/REDCapR/issues/269'>#269</a>, <a href='https://github.com/sybandrew'>@sybandrew</a> <a href='https://github.com/OuhscBbmc/REDCapR/issues/272'>#272</a>, &amp; <a href='https://github.com/begavett'>@begavett</a>, <a href='https://github.com/OuhscBbmc/REDCapR/issues/290'>#290</a>)</p></li>
 <li><p>Similarly, <code><a href="../reference/kernel_api.html">kernel_api()</a></code> now has an <code>encoding</code> parameter, which defaults to “UTF-8”. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/270'>#270</a>)</p></li>
 </ul>
 </div>
-<div id="minor-enhancements" class="section level3">
+<div id="minor-enhancements-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-enhancements" class="anchor"></a>Minor Enhancements</h3>
+<a href="#minor-enhancements-1" class="anchor"></a>Minor Enhancements</h3>
 <ul>
 <li>check for bad field names passed to the read records functions (<a href='https://github.com/OuhscBbmc/REDCapR/issues/288'>#288</a>)</li>
 </ul>
@@ -231,7 +261,7 @@
 <li>updated to readr 1.2.0 (<a href='https://github.com/OuhscBbmc/REDCapR/issues/200'>#200</a>). This changed how some data variables were assigned a data types.</li>
 <li>uses <code>odbc</code> package to retrieve credentials from the token server. Remove RODBC and RODBCext (<a href='https://github.com/OuhscBbmc/REDCapR/issues/188'>#188</a>). Thanks to <a href='https://github.com/krlmlr'>@krlmlr</a> for error checking advice in <a href="https://stackoverflow.com/a/50419403/1082435" class="uri">https://stackoverflow.com/a/50419403/1082435</a>.</li>
 <li>
-<code><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html">data.table::rbindlist()</a></code> replaced by <code><a href="https://dplyr.tidyverse.org/reference/bind.html">dplyr::bind_rows()</a></code>
+<code><a href="https://rdrr.io/pkg/data.table/man/rbindlist.html">data.table::rbindlist()</a></code> replaced by <code><a href="https://dplyr.tidyverse.org/reference/bind.html">dplyr::bind_rows()</a></code>
 </li>
 <li>the checkmate package inspects most function parameters now (instead of <code><a href="https://rdrr.io/pkg/testit/man/assert.html">testit::assert()</a></code> and <code>base:stop()</code> ) (<a href='https://github.com/OuhscBbmc/REDCapR/issues/190'>#190</a> &amp; <a href='https://github.com/OuhscBbmc/REDCapR/issues/208'>#208</a>).</li>
 <li>
@@ -287,7 +317,7 @@
 <h3 class="hasAnchor">
 <a href="#minor-updates" class="anchor"></a>Minor Updates</h3>
 <ul>
-<li>When combining batches into a single data.frame, <code><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html">data.table::rbindlist()</a></code> is used. This should prevent errors with the first batch’s data type (for a column) isn’t compatible with a later batch. For instance, this occurs when the first batch has only integers for <code>record_id</code>, but a subsequent batch has values like <code>aa-test-aa</code>. The variable for the combined dataset should be a character. (Issue <a href='https://github.com/OuhscBbmc/REDCapR/issues/128'>#128</a> &amp; <a href="http://stackoverflow.com/questions/39377370/bind-rows-of-different-data-types" class="uri">http://stackoverflow.com/questions/39377370/bind-rows-of-different-data-types</a>; Thanks <a href='https://github.com/arunsrinivasan'>@arunsrinivasan</a>)</li>
+<li>When combining batches into a single data.frame, <code><a href="https://rdrr.io/pkg/data.table/man/rbindlist.html">data.table::rbindlist()</a></code> is used. This should prevent errors with the first batch’s data type (for a column) isn’t compatible with a later batch. For instance, this occurs when the first batch has only integers for <code>record_id</code>, but a subsequent batch has values like <code>aa-test-aa</code>. The variable for the combined dataset should be a character. (Issue <a href='https://github.com/OuhscBbmc/REDCapR/issues/128'>#128</a> &amp; <a href="http://stackoverflow.com/questions/39377370/bind-rows-of-different-data-types" class="uri">http://stackoverflow.com/questions/39377370/bind-rows-of-different-data-types</a>; Thanks <a href='https://github.com/arunsrinivasan'>@arunsrinivasan</a>)</li>
 <li>Uses the <code>dplyr</code> package instead of <code>plyr</code>. This shouldn’t affect callers, because immediately before returning the data, <code><a href="../reference/redcap_read.html">REDCapR::redcap_read()</a></code> coerces the <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble::tibble</a></code> (which was formerly called <code><a href="https://dplyr.tidyverse.org/reference/tbl_df.html">dplyr::tbl_df</a></code>) back to a vanilla <code>data.frame</code> with <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code>.</li>
 <li>A few more instances of validating input parameters to read functions. (Issue <a href='https://github.com/OuhscBbmc/REDCapR/issues/8'>#8</a>).</li>
 </ul>

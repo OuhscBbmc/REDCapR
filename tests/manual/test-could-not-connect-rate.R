@@ -1,7 +1,5 @@
 library(testthat)
 
-context("Estimate 'Could Not Connect' Rate.")
-
 credential <- retrieve_credential_testing()
 
 record_read_count   <- 2000L

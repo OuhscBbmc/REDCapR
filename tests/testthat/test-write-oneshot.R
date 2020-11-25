@@ -114,3 +114,85 @@ test_that("two-fields", {
   expect_match(returned_object2$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object2$success)
 })
+
+test_that("overwrite-false", {
+  testthat::skip_on_cran()
+  path_expected <- "test-data/specific-redcapr/write-oneshot/default.R"
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+
+  start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
+  project <- start_clean_result$redcap_project
+
+  expect_message(
+    returned_object1 <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
+    regexp = expected_outcome_message
+  )
+  #Remove the calculated fields
+  returned_object1$data$bmi <- NULL
+  returned_object1$data$age <- NULL
+
+  # Blanks and NAs should NOT overwrite the cells
+  returned_object1$data$address   <- NA_character_
+  returned_object1$data$telephone <- ""
+  REDCapR::redcap_write_oneshot(ds=returned_object1$data, redcap_uri=project$redcap_uri, token=project$token, overwrite_with_blanks = F)
+
+  expect_message(
+    returned_object2 <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
+    regexp = expected_outcome_message
+  )
+  #Remove the calculated fields
+  returned_object2$data$bmi <- NULL
+  returned_object2$data$age <- NULL
+
+  # Nothing should have changed, so reuse the default datasets
+  expected_data_frame <- retrieve_expected(path_expected)
+
+  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
+  expect_equal(returned_object2$status_code, expected=200L)
+  expect_equal(returned_object2$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object2$raw_text)
+  expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_match(returned_object2$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true(returned_object2$success)
+})
+
+test_that("overwrite-true", {
+  testthat::skip_on_cran()
+  path_expected <- "test-data/specific-redcapr/write-oneshot/overwrite-true.R"
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+
+  start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
+  project <- start_clean_result$redcap_project
+
+  expect_message(
+    returned_object1 <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
+    regexp = expected_outcome_message
+  )
+  #Remove the calculated fields
+  returned_object1$data$bmi <- NULL
+  returned_object1$data$age <- NULL
+
+  # Blanks and NAs should NOT overwrite the cells
+  returned_object1$data$address   <- NA_character_
+  returned_object1$data$telephone <- ""
+  REDCapR::redcap_write_oneshot(ds=returned_object1$data, redcap_uri=project$redcap_uri, token=project$token, overwrite_with_blanks = T)
+
+  expect_message(
+    returned_object2 <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
+    regexp = expected_outcome_message
+  )
+  #Remove the calculated fields
+  returned_object2$data$bmi <- NULL
+  returned_object2$data$age <- NULL
+
+  if (update_expectation) save_expected(returned_object2$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
+
+  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
+  expect_equal(returned_object2$status_code, expected=200L)
+  expect_equal(returned_object2$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object2$raw_text)
+  expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_match(returned_object2$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true(returned_object2$success)
+})
