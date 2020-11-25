@@ -86,7 +86,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9002</span>
       </span>
     </div>
 
@@ -150,6 +150,7 @@
   continue_on_error <span class='op'>=</span> <span class='cn'>FALSE</span>,
   <span class='va'>redcap_uri</span>,
   <span class='va'>token</span>,
+  overwrite_with_blanks <span class='op'>=</span> <span class='cn'>TRUE</span>,
   convert_logical_to_integer <span class='op'>=</span> <span class='cn'>FALSE</span>,
   verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
   config_options <span class='op'>=</span> <span class='cn'>NULL</span>
@@ -188,6 +189,16 @@ project.  Required.</p></td>
       <th>token</th>
       <td><p>The user-specific string that serves as the password for a
 project.  Required.</p></td>
+    </tr>
+    <tr>
+      <th>overwrite_with_blanks</th>
+      <td><p>A boolean value indicating if
+blank/<code>NA</code> values in the R <a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame</a>
+will overwrite data on the server.
+This is the default behavior for REDCapR,
+which essentially deletes the cell's value
+If <code>FALSE</code>, blank/<code>NA</code> values in the <a href='https://rdrr.io/r/base/data.frame.html'>base::data.frame</a>
+will be ignored.  Optional.</p></td>
     </tr>
     <tr>
       <th>convert_logical_to_integer</th>

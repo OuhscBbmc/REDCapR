@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9002</span>
       </span>
     </div>
 
@@ -85,13 +85,13 @@
 
       
 
-      </header><script src="TroubleshootingApiCalls_files/header-attrs-2.5/header-attrs.js"></script><script src="TroubleshootingApiCalls_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="TroubleshootingApiCalls_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+      </header><script src="TroubleshootingApiCalls_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="TroubleshootingApiCalls_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
 <script src="TroubleshootingApiCalls_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Troubleshooting REDCap API Calls</h1>
             
-            <h4 class="date">2020-11-18</h4>
+            <h4 class="date">2020-11-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/TroubleshootingApiCalls.Rmd"><code>vignettes/TroubleshootingApiCalls.Rmd</code></a></small>
       <div class="hidden name"><code>TroubleshootingApiCalls.Rmd</code></div>
@@ -121,17 +121,17 @@
 <li>
 <p><strong>Have you verified your account by responding to the automated email sent to them?</strong> This can be verified in the <code>Browse Users</code> section of your server’s <code>Control Center</code>. (Talk to your REDCap admin.) For each email address you’ve entered, there should be a green ‘Verified’ label and icon.</p>
 <p><img src="images/EmailVerified.png" width="252" style="fig.width=400px"></p>
-<p><!--<img src="/home/wibeasley/Documents/redcap/REDCapR/vignettes/images/EmailVerified.png" alt="EmailVerified" style="width: 400px;"/>--></p>
+<p><!--<img src="D:/Projects/Ouhsc/Bbmc/redcap/REDCapR/vignettes/images/EmailVerified.png" alt="EmailVerified" style="width: 400px;"/>--></p>
 </li>
 <li>
 <p><strong>Have you been granted the desired import and/or export permissions?</strong> This can be verified in the <code>User Rights</code> section or in the <code>API</code> section (and it’s <code>Manage All Project Tokens</code> tab) within the project. Alternatively, it can be verified in the <code>API Tokens</code> section of the server’s <code>Control Center</code>.</p>
 <p><img src="images/ApiPrivilegeDashboard.png" width="316" style="fig.width=600px"></p>
-<p><!--<img src="/home/wibeasley/Documents/redcap/REDCapR/vignettes/images/ApiPrivilegeDashboard.png" alt="ApiPrivilegeDashboard" style="width: 600px;"/>--></p>
+<p><!--<img src="D:/Projects/Ouhsc/Bbmc/redcap/REDCapR/vignettes/images/ApiPrivilegeDashboard.png" alt="ApiPrivilegeDashboard" style="width: 600px;"/>--></p>
 </li>
 <li>
 <p><strong>Are you using the correct token?</strong> This can be verified in the <code>API</code> section (and it’s <code>Manage All Project Tokens</code> tab) within the project. Click the magnifying glass icon in the user’s row. Alternatively, it can be verified in the <code>API Tokens</code> section of the server’s <code>Control Center</code>.</p>
 <p><img src="images/MagnifyingGlass.png" width="291" style="fig.width=550px"></p>
-<p><!--<img src="/home/wibeasley/Documents/redcap/REDCapR/vignettes/images/MagnifyingGlass.png" alt="MagnifyingGlass" style="width: 550px;"/>--></p>
+<p><!--<img src="D:/Projects/Ouhsc/Bbmc/redcap/REDCapR/vignettes/images/MagnifyingGlass.png" alt="MagnifyingGlass" style="width: 550px;"/>--></p>
 </li>
 </ol>
 <p>If all these checks pass, proceed to the next section. If not, start by consulting with your REDCap administrator.</p>
@@ -141,7 +141,7 @@
 <a href="#api" class="anchor"></a>API</h2>
 <p>This section examines potential problems that occur after data leaves a working server, but before it is handled by their programming language (<em>e.g.</em>, Python and R). <a href="http://www.getpostman.com/">Postman</a> is a Chrome plugin recommended by <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ">several</a> <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ">people</a> that makes troubleshooting much more efficient.</p>
 <p><img src="images/PostmanScreenshot.png" width="574" style="fig.width=800px"></p>
-<!--<img src="/home/wibeasley/Documents/redcap/REDCapR/vignettes/images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>-->
+<!--<img src="D:/Projects/Ouhsc/Bbmc/redcap/REDCapR/vignettes/images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>-->
 <ol style="list-style-type: decimal">
 <li>
 <p><strong>Is the API Playground producing the expected result?</strong> REDCap’s “API Playground” holds your hand by (a) offering a dropdown list of API methods available to your REDCap instance, and (b) presenting a series of dropdown boxes appropriate for the selected method. Find it through the API link visible in the left margin of REDCap. When you’ve completed the inputs, click ‘Execute’ to view the plain-text returned by the server.</p>
