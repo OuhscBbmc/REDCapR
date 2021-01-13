@@ -76,7 +76,7 @@ test_that("Single Batch: writing with read-only privileges --contiue on error", 
     result <- REDCapR::redcap_write(ds=mtcars, redcap_uri=credential$redcap_uri, token=credential$token, continue_on_error=TRUE)
   ))
 
-  expect_true( result$success)
+  expect_false(result$success)
   expect_equal(result$status_code, expected="403")
   expect_equal(result$outcome_message, expected_message)
   expect_equal( result$records_affected_count, 0L)
@@ -97,7 +97,7 @@ test_that("Many Batches: writing with read-only privileges --contiue on error", 
     result <- REDCapR::redcap_write(ds=mtcars, redcap_uri=credential$redcap_uri, token=credential$token, continue_on_error=TRUE, batch_size=10)
   ))))
 
-  expect_true( result$success)
+  expect_false(result$success)
   expect_equal(result$status_code, expected="403; 403; 403; 403")
   expect_match(result$outcome_message, expected_message)
   expect_equal( result$records_affected_count, 0L)
@@ -110,3 +110,4 @@ test_that("Many Batches: writing with read-only privileges --contiue on error", 
 
 # playground:
 # REDCapR::redcap_write(ds=mtcars, redcap_uri="https://bbmc.ouhsc.edu/redcap/api/", token="9A81268476645C4E5F03428B8AC3AA7B", continue_on_error=TRUE)
+# REDCapR::redcap_write(ds=mtcars, redcap_uri="https://bbmc.ouhsc.edu/redcap/redcap_v10.5.1/api/", token="9A81268476645C4E5F03428B8AC3AA7B", continue_on_error=TRUE)

@@ -340,7 +340,7 @@ redcap_read <- function(
     }
 
     lst_batch[[i]]   <- read_result$data
-    success_combined <- success_combined | read_result$success
+    success_combined <- success_combined & read_result$success
 
     rm(read_result) #Admittedly overkill defensiveness.
   }

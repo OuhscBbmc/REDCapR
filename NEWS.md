@@ -21,7 +21,8 @@ Version 0.12 (Unreleased on CRAN)
 
 ### Corrections & Bug Fixes
 
-* Accepts more than one `config_option` element.  (Proposed by @BastienRance)
+* Accepts more than one `config_option` element.  (Proposed by @BastienRance, #307)
+* Fixed calculation of `success` value returned by `redcap_read()` and `redcap_write()` when the parameter `continue_on_error` is true.  (Bug found by @llrs, #317)
 
 Version 0.11 (Released 2020-04-20)
 ==========================================================

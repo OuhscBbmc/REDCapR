@@ -172,7 +172,7 @@ redcap_write <- function(
     }
 
     affected_ids     <- c(affected_ids, write_result$affected_ids)
-    success_combined <- success_combined | write_result$success
+    success_combined <- success_combined & write_result$success
 
     rm(write_result) #Admittedly overkill defensiveness.
   }
