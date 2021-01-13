@@ -110,3 +110,4 @@ test_that("Many Batches: writing with read-only privileges --contiue on error", 
 
 # playground:
 # REDCapR::redcap_write(ds=mtcars, redcap_uri="https://bbmc.ouhsc.edu/redcap/api/", token="9A81268476645C4E5F03428B8AC3AA7B", continue_on_error=TRUE)
+# REDCapR::redcap_write(ds=mtcars, redcap_uri="https://bbmc.ouhsc.edu/redcap/redcap_v10.5.1/api/", token="9A81268476645C4E5F03428B8AC3AA7B", continue_on_error=TRUE)
