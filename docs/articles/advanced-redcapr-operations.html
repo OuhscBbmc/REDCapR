@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.1.9003</span>
       </span>
     </div>
 
@@ -48,7 +48,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -65,7 +65,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/OuhscBbmc/REDCapR/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -85,13 +85,12 @@
 
       
 
-      </header><script src="advanced-redcapr-operations_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="advanced-redcapr-operations_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="advanced-redcapr-operations_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="advanced-redcapr-operations_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Advanced REDCapR Operations</h1>
             
-            <h4 class="date">2020-11-20</h4>
+            <h4 class="date">2021-01-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/advanced-redcapr-operations.Rmd"><code>vignettes/advanced-redcapr-operations.Rmd</code></a></small>
       <div class="hidden name"><code>advanced-redcapr-operations.Rmd</code></div>
@@ -128,7 +127,7 @@
 <span class="va">events_to_retain</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"dose_1_arm_1"</span>, <span class="st">"visit_1_arm_1"</span>, <span class="st">"dose_2_arm_1"</span>, <span class="st">"visit_2_arm_1"</span><span class="op">)</span>
 
 <span class="va">ds_long</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token_longitudinal</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
-<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>#&gt; 18 records and 125 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds_long</span> <span class="op">%&gt;%</span>
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">study_id</span>, <span class="va">redcap_event_name</span>, <span class="va">pmq1</span>, <span class="va">pmq2</span>, <span class="va">pmq3</span>, <span class="va">pmq4</span><span class="op">)</span></code></pre></div>
@@ -362,28 +361,29 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 #&gt;  collate  English_United States.1252                 
 #&gt;  ctype    English_United States.1252                 
 #&gt;  tz       America/Chicago                            
-#&gt;  date     2020-11-20                                 
+#&gt;  date     2021-01-19                                 
 #&gt; 
 #&gt; - Packages -------------------------------------------------------------------
 #&gt;  package     * version     date       lib source        
 #&gt;  assertthat    0.2.1       2019-03-21 [2] CRAN (R 4.0.0)
-#&gt;  backports     1.2.0       2020-11-02 [2] CRAN (R 4.0.2)
+#&gt;  backports     1.2.1       2020-12-09 [2] CRAN (R 4.0.3)
 #&gt;  checkmate     2.0.0       2020-02-06 [2] CRAN (R 4.0.0)
-#&gt;  cli           2.1.0       2020-10-12 [2] CRAN (R 4.0.2)
+#&gt;  cli           2.2.0       2020-11-20 [2] CRAN (R 4.0.3)
 #&gt;  colorspace    2.0-0       2020-11-11 [2] CRAN (R 4.0.2)
 #&gt;  crayon        1.3.4       2017-09-16 [2] CRAN (R 4.0.0)
 #&gt;  curl          4.3         2019-12-02 [2] CRAN (R 4.0.0)
+#&gt;  DBI           1.1.1       2021-01-15 [2] CRAN (R 4.0.3)
 #&gt;  desc          1.2.0       2018-05-01 [2] CRAN (R 4.0.0)
 #&gt;  digest        0.6.27      2020-10-24 [2] CRAN (R 4.0.3)
-#&gt;  dplyr         1.0.2       2020-08-18 [2] CRAN (R 4.0.2)
+#&gt;  dplyr         1.0.3       2021-01-15 [2] CRAN (R 4.0.3)
 #&gt;  ellipsis      0.3.1       2020-05-15 [2] CRAN (R 4.0.0)
 #&gt;  evaluate      0.14        2019-05-28 [2] CRAN (R 4.0.0)
-#&gt;  fansi         0.4.1       2020-01-08 [2] CRAN (R 4.0.0)
+#&gt;  fansi         0.4.2       2021-01-15 [2] CRAN (R 4.0.3)
 #&gt;  fs            1.5.0       2020-07-31 [2] CRAN (R 4.0.2)
 #&gt;  generics      0.1.0       2020-10-31 [2] CRAN (R 4.0.2)
 #&gt;  glue          1.4.2       2020-08-27 [2] CRAN (R 4.0.2)
-#&gt;  hms           0.5.3       2020-01-08 [2] CRAN (R 4.0.0)
-#&gt;  htmltools     0.5.0       2020-06-16 [2] CRAN (R 4.0.0)
+#&gt;  hms           1.0.0       2021-01-13 [2] CRAN (R 4.0.3)
+#&gt;  htmltools     0.5.1       2021-01-12 [2] CRAN (R 4.0.3)
 #&gt;  httr          1.4.2       2020-07-20 [2] CRAN (R 4.0.2)
 #&gt;  kableExtra    1.3.1       2020-10-22 [2] CRAN (R 4.0.3)
 #&gt;  knitr       * 1.30        2020-09-22 [2] CRAN (R 4.0.2)
@@ -391,16 +391,16 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 #&gt;  magrittr    * 2.0.1       2020-11-17 [2] CRAN (R 4.0.3)
 #&gt;  memoise       1.1.0       2017-04-21 [2] CRAN (R 4.0.0)
 #&gt;  munsell       0.5.0       2018-06-12 [2] CRAN (R 4.0.0)
-#&gt;  pillar        1.4.6       2020-07-10 [2] CRAN (R 4.0.2)
+#&gt;  pillar        1.4.7       2020-11-20 [2] CRAN (R 4.0.3)
 #&gt;  pkgconfig     2.0.3       2019-09-22 [2] CRAN (R 4.0.0)
 #&gt;  pkgdown       1.6.1       2020-09-12 [2] CRAN (R 4.0.2)
 #&gt;  purrr         0.3.4       2020-04-17 [2] CRAN (R 4.0.0)
 #&gt;  R6            2.5.0       2020-10-28 [2] CRAN (R 4.0.2)
-#&gt;  ragg          0.4.0       2020-10-05 [2] CRAN (R 4.0.2)
-#&gt;  readr         1.4.0       2020-10-05 [2] CRAN (R 4.0.2)
-#&gt;  REDCapR     * 0.11.0.9001 2020-11-20 [2] local         
-#&gt;  rlang         0.4.8       2020-10-08 [2] CRAN (R 4.0.2)
-#&gt;  rmarkdown     2.5         2020-10-21 [2] CRAN (R 4.0.3)
+#&gt;  ragg          0.4.1       2021-01-11 [2] CRAN (R 4.0.3)
+#&gt;  readr         1.4.0       2020-10-05 [2] CRAN (R 4.0.3)
+#&gt;  REDCapR     * 0.11.1.9003 2021-01-19 [1] local         
+#&gt;  rlang         0.4.10      2020-12-30 [2] CRAN (R 4.0.3)
+#&gt;  rmarkdown     2.6         2020-12-14 [2] CRAN (R 4.0.3)
 #&gt;  rprojroot     2.0.2       2020-11-15 [2] CRAN (R 4.0.2)
 #&gt;  rstudioapi    0.13        2020-11-12 [2] CRAN (R 4.0.2)
 #&gt;  rvest         0.3.6       2020-07-25 [2] CRAN (R 4.0.2)
@@ -410,23 +410,23 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 #&gt;  stringr       1.4.0       2019-02-10 [2] CRAN (R 4.0.0)
 #&gt;  systemfonts   0.3.2       2020-09-29 [2] CRAN (R 4.0.2)
 #&gt;  textshaping   0.2.1       2020-11-13 [2] CRAN (R 4.0.2)
-#&gt;  tibble        3.0.4       2020-10-12 [2] CRAN (R 4.0.2)
+#&gt;  tibble        3.0.5       2021-01-15 [2] CRAN (R 4.0.3)
 #&gt;  tidyr         1.1.2       2020-08-27 [2] CRAN (R 4.0.2)
 #&gt;  tidyselect    1.1.0       2020-05-11 [2] CRAN (R 4.0.0)
 #&gt;  utf8          1.1.4       2018-05-24 [2] CRAN (R 4.0.0)
-#&gt;  vctrs         0.3.5       2020-11-17 [2] CRAN (R 4.0.3)
+#&gt;  vctrs         0.3.6       2020-12-17 [2] CRAN (R 4.0.3)
 #&gt;  viridisLite   0.3.0       2018-02-01 [2] CRAN (R 4.0.0)
 #&gt;  webshot       0.5.2       2019-11-22 [2] CRAN (R 4.0.0)
-#&gt;  withr         2.3.0       2020-09-22 [2] CRAN (R 4.0.2)
-#&gt;  xfun          0.19        2020-10-30 [2] CRAN (R 4.0.2)
+#&gt;  withr         2.4.0       2021-01-16 [2] CRAN (R 4.0.3)
+#&gt;  xfun          0.20        2021-01-06 [2] CRAN (R 4.0.3)
 #&gt;  xml2          1.3.2       2020-04-23 [2] CRAN (R 4.0.0)
 #&gt;  yaml          2.2.1       2020-02-01 [2] CRAN (R 4.0.0)
 #&gt; 
-#&gt; [1] C:/Users/Will/AppData/Local/Temp/RtmpInICQg/temp_libpath52d035f0f28
+#&gt; [1] C:/Users/Will/AppData/Local/Temp/Rtmpy0Mrxx/temp_libpath1bd06cf737c
 #&gt; [2] D:/Projects/RLibraries
 #&gt; [3] D:/Users/Will/Documents/R/win-library/4.0
 #&gt; [4] C:/Program Files/R/R-4.0.3patched/library</code></pre>
-</details><p>Report rendered by Will at 2020-11-20, 12:52 -0600 in 4 seconds.</p>
+</details><p>Report rendered by Will at 2021-01-19, 14:38 -0600 in 4 seconds.</p>
 </div>
   </div>
 

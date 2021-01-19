@@ -6,7 +6,7 @@ articles:
   BasicREDCapROperations: BasicREDCapROperations.html
   SecurityDatabase: SecurityDatabase.html
   TroubleshootingApiCalls: TroubleshootingApiCalls.html
-last_built: 2020-11-20T18:51Z
+last_built: 2021-01-19T20:38Z
 urls:
   reference: https://ouhscbbmc.github.io/REDCapR/reference
   article: https://ouhscbbmc.github.io/REDCapR/articles
