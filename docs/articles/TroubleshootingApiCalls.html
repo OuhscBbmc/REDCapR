@@ -135,9 +135,9 @@
 </ol>
 <p>If all these checks pass, proceed to the next section. If not, start by consulting with your REDCap administrator.</p>
 </div>
-<div id="api" class="section level2">
+<div id="reading" class="section level2">
 <h2 class="hasAnchor">
-<a href="#api" class="anchor"></a>API</h2>
+<a href="#reading" class="anchor"></a>Reading</h2>
 <p>This section examines potential problems that occur after data leaves a working server, but before it is handled by their programming language (<em>e.g.</em>, Python and R). <a href="http://www.getpostman.com/">Postman</a> is a Chrome plugin recommended by <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ">several</a> <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ">people</a> that makes troubleshooting much more efficient.</p>
 <p><img src="images/PostmanScreenshot.png" width="574" style="fig.width=800px"></p>
 <!--<img src="/home/wibeasley/Documents/bbmc/REDCapR/vignettes/images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>-->
@@ -173,7 +173,106 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <pre class="shell"><code>curl -X POST -H "Cache-Control: no-cache" -F "token=9A81268476645C4E5F03428B8AC3AA7B" -F "content=record" -F "format=csv" "https://bbmc.ouhsc.edu/redcap/api/"</code></pre>
 </li>
 </ol>
-<p>If all these checks pass, proceed to the next section. If not, start by consulting with your REDCap administrator.</p>
+<p>If all these checks pass, proceed to the next section. If not, start by consulting with your REDCap administrator. If that fails, consider creating a GitHub issue for your package (<em>e.g.</em>, <a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> and <a href="https://ouhscbbmc.github.io/REDCapR">REDCapR</a> in R, <a href="https://github.com/iuredcap/phpcap">phpcap</a> in PHP, and <a href="http://pycap.readthedocs.org/en/latest/">PyCap</a> in Python).</p>
+</div>
+<div id="writing" class="section level2">
+<h2 class="hasAnchor">
+<a href="#writing" class="anchor"></a>Writing</h2>
+<p>Troubleshooting import operations is trickier than export operations for two major reasons. First, the database potentially persists your <em>import</em> mistakes. In contrast, repeatedly <em>exporting</em> data won’t affect subsequent reads. Considering cloning the REDCap project for testing until the problem is resolved. Remember to create a new token (because they’re not automatically created when projects are cloned, even when users are copied), and to modify your code’s token to point to the new testing clone.</p>
+<p>The second reason why importing can be trickier is because the schema (<em>e.g.</em>, the names and data types) of your local dataset must match the project’s schema. Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project’s schema and dataset. Also, consider exporting the dataset to your machine, and look for differences. Note that you cannot import calculated fields into REDCap.</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Does the dataset pass <a href="https://ouhscbbmc.github.io/REDCapR/reference/validate.html"><code>REDCapR::validate_for_write()</code></a>?</strong> The <code><a href="../reference/validate.html">REDCapR::validate_for_write()</a></code> inspects a data.frame to anticipate problems before writing with REDCap’s API. The reference manual contains specifics of the validation checks.</p></li>
+<li><p><strong>Can you import a <em>small subset</em> of the project?</strong> For instance, just the <code>record_id</code> column.</p></li>
+<li>
+<p><strong>Can you export the dataset and then import it <em>without any modifications</em></strong>?</p>
+<p>For instance, using REDCapR: First, manually complete ~10 example record in the web browser, and then export/download the records with <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read_oneshot.html"><code>REDCapR::redcap_read_oneshot()</code></a> to a <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html"><code>data.frame</code></a>. (If you have longitudinal or repeating instruments, make sure your examples cover those dimensions adequately) Second, can you successfully upload that same <code>data.frame</code> (without modification) with <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_write_oneshot.html"><code>REDCapR::redcap_write_oneshot()</code></a>?</p>
+<p>If so, that dataset will provide a template for how you structure the real dataset and assign values. If not, that is a helpful piece of troubleshooting.</p>
+</li>
+<li>
+<p><strong>Is the longitudinal and/or repeating structure correct?</strong> Three variables are frequently misspecified: <code>redcap_event_name</code> (for longitudinal projects) and <code>redcap_repeat_instrument</code> &amp; <code>redcap_repeat_instance</code> (for repeating instruments). The values for these variables are clearer to understand once you complete the step above and inspect the layout.</p>
+<p>For longitudinal projects: Example values for <code>redcap_event_name</code> are “admission_1_arm_1”, “admission_2_arm_1”, and “admission_3_arm_1”. (Notice the "_arm_1" suffix is used even if arms are not specified in your project.)</p>
+<p>For projects with repeating instruments: Examples values for <code>redcap_repeat_instrument</code> are “lab”, “vitals”, and “medication”; these instrument names are specified in the REDCap Designer. Example values for <code>redcap_repeat_instance</code> are “1”, “2”, “3”, “4”, and “5”; this is a consecutive sequence within a participant’s longitudinal event.</p>
+<p>If participant 101 has two lab results, one vitals record, and three medications, the dataset structure might be:</p>
+<table class="table">
+<colgroup>
+<col width="11%">
+<col width="26%">
+<col width="24%">
+<col width="12%">
+<col width="7%">
+<col width="7%">
+<col width="12%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">record_id</th>
+<th align="center">redcap_repeat_instrument</th>
+<th align="center">redcap_repeat_instance</th>
+<th align="center">lab_result</th>
+<th align="center">pulse</th>
+<th align="center">o2</th>
+<th align="center">admin_date</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">101</td>
+<td align="center">lab</td>
+<td align="center">1</td>
+<td align="center">positive</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">101</td>
+<td align="center">lab</td>
+<td align="center">2</td>
+<td align="center">negative</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="center">101</td>
+<td align="center">vitals</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">72</td>
+<td align="center">98</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">101</td>
+<td align="center">medication</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">2021-02-01</td>
+</tr>
+<tr class="odd">
+<td align="center">101</td>
+<td align="center">medication</td>
+<td align="center">2</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">2021-02-02</td>
+</tr>
+<tr class="even">
+<td align="center">101</td>
+<td align="center">medication</td>
+<td align="center">3</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">2021-02-03</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p><strong>Can you import the <em>entire</em> project?</strong> Can all columns be written for all rows?</p></li>
+</ol>
+<p>If one of these checks fail, please start by consulting your REDCap administrator.</p>
 </div>
 <div id="gotchas-agnostic" class="section level2">
 <h2 class="hasAnchor">
@@ -469,18 +568,6 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <span class="fu">exportRecords</span><span class="op">(</span><span class="va">rcon</span><span class="op">)</span></code></pre></div>
 </li>
 <li><p><strong>Is the export operation still unsuccessful using redcapAPI?</strong> If so the “Can the user query a <em>entire</em> REDCap project using httr?” check succeeded, but the redcapAPI checks did not, consider posting a new <a href="https://github.com/nutterb/redcapAPI/issues">GitHub issue</a> to the package developers.</p></li>
-</ol>
-<p>If one of these checks fail, please start by consulting your REDCap administrator.</p>
-</div>
-<div id="writing" class="section level2">
-<h2 class="hasAnchor">
-<a href="#writing" class="anchor"></a>Writing</h2>
-<p>Troubleshooting import operations is trickier than export operations for two major reasons. First, the database potentially persists your <em>import</em> mistakes. In contrast, repeatedly <em>exporting</em> data won’t affect subsequent reads. Considering cloning the REDCap project for testing until the problem is resolved. Remember to create a new token (because they’re not automatically created when projects are cloned, even when users are copied), and to modify your code’s token to point to the new testing clone.</p>
-<p>The second reason why importing can be trickier is because the schema (<em>e.g.</em>, the names and data types) of your local dataset must match the project’s schema. Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project’s schema and dataset. Also, consider exporting the dataset to your machine, and look for differences. Note that you cannot import calculated fields into REDCap.</p>
-<ol style="list-style-type: decimal">
-<li><p><strong>Does the dataset pass <a href="https://ouhscbbmc.github.io/REDCapR/reference/validate.html"><code>REDCapR::validate_for_write()</code></a>?</strong> The <code><a href="../reference/validate.html">REDCapR::validate_for_write()</a></code> inspects a data.frame to anticipate problems before writing with REDCap’s API. The reference manual contains specifics of the validation checks.</p></li>
-<li><p><strong>Can you import the <em>entire</em> project?</strong></p></li>
-<li><p><strong>Can you import a <em>subset</em> of the project?</strong></p></li>
 </ol>
 <p>If one of these checks fail, please start by consulting your REDCap administrator.</p>
 </div>
