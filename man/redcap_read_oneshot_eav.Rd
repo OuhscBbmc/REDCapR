@@ -19,6 +19,8 @@ redcap_read_oneshot_eav(
   raw_or_label_headers = "raw",
   export_data_access_groups = FALSE,
   filter_logic = "",
+  date_range_begin = "",
+  date_range_end = "",
   verbose = TRUE,
   config_options = NULL
 )
@@ -71,6 +73,16 @@ filtering the data to be returned by this API method, in which the API
 will only return the records (or record-events, if a longitudinal project)
 where the logic evaluates as TRUE.   An blank/empty string returns all
 records.}
+
+\item{date_range_begin}{To return only records that have been created or
+modified \emph{after} a given date/time, provide a timestamp in the format
+YYYY-MM-DD HH:MM:SS (e.g., '2017-01-01 00:00:00'). If not specified,
+it will assume no begin time.}
+
+\item{date_range_end}{To return only records that have been created or
+modified \emph{before} a given date/time, provide a timestamp in the format
+YYYY-MM-DD HH:MM:SS (e.g., '2017-01-01 00:00:00'). If not specified,
+it will use the current server time.}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed
 to the R console during the operation.  The verbose output might contain

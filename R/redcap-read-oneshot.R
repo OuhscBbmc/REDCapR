@@ -43,6 +43,14 @@
 #' filtering the data to be returned by this API method, in which the API will
 #' only return the records (or record-events, if a longitudinal project) where
 #' the logic evaluates as TRUE.   An blank/empty string returns all records.
+#' @param date_range_begin To return only records that have been created or
+#' modified *after* a given date/time, provide a timestamp in the format
+#' YYYY-MM-DD HH:MM:SS (e.g., '2017-01-01 00:00:00'). If not specified,
+#' it will assume no begin time.
+#' @param date_range_end To return only records that have been created or
+#' modified *before* a given date/time, provide a timestamp in the format
+#' YYYY-MM-DD HH:MM:SS (e.g., '2017-01-01 00:00:00'). If not specified,
+#' it will use the current server time.
 #' @param col_types A [readr::cols()] object passed internally to
 #' [readr::read_csv()].  Optional.
 #' @param guess_type A boolean value indicating if all columns should be
@@ -159,6 +167,8 @@ redcap_read_oneshot <- function(
   export_survey_fields          = FALSE,
   export_data_access_groups     = FALSE,
   filter_logic                  = "",
+  date_range_begin              = "",
+  date_range_end                = "",
 
   col_types                     = NULL,
   guess_type                    = TRUE,
@@ -186,6 +196,8 @@ redcap_read_oneshot <- function(
   checkmate::assert_logical(  export_survey_fields      , any.missing=FALSE, len=1)
   checkmate::assert_logical(  export_data_access_groups , any.missing=FALSE, len=1)
   checkmate::assert_character(filter_logic              , any.missing=FALSE, len=1, pattern="^.{0,}$")
+  checkmate::assert_character(date_range_begin          , any.missing=TRUE , len=1, pattern="^([0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}|)$", null.ok=TRUE)
+  checkmate::assert_character(date_range_end            , any.missing=TRUE , len=1, pattern="^([0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}|)$", null.ok=TRUE)
   #
   checkmate::assert_logical(  guess_type                , any.missing=FALSE, len=1)
   checkmate::assert_integerish(guess_max                , any.missing=FALSE, len=1, lower=1)
@@ -216,7 +228,9 @@ redcap_read_oneshot <- function(
     # placeholder: returnFormat
     exportSurveyFields      = tolower(as.character(export_survey_fields)),
     exportDataAccessGroups  = tolower(as.character(export_data_access_groups)),
-    filterLogic             = filter_logic
+    filterLogic             = filter_logic,
+    dateRangeBegin          = date_range_begin,
+    dateRangeEnd            = date_range_end
     # record, fields, forms & events are specified below
   )
 
@@ -316,6 +330,8 @@ redcap_read_oneshot <- function(
     forms_collapsed    = forms_collapsed,
     events_collapsed   = events_collapsed,
     filter_logic       = filter_logic,
+    date_range_begin   = date_range_begin,
+    date_range_end     = date_range_end,
     elapsed_seconds    = kernel$elapsed_seconds,
     raw_text           = kernel$raw_text
   )
