@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.1.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.1.9004</span>
       </span>
     </div>
 
@@ -85,12 +85,12 @@
 
       
 
-      </header><script src="TroubleshootingApiCalls_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="TroubleshootingApiCalls_files/header-attrs-2.7/header-attrs.js"></script><script src="TroubleshootingApiCalls_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Troubleshooting REDCap API Calls</h1>
             
-            <h4 class="date">2021-01-19</h4>
+            <h4 class="date">2021-03-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/TroubleshootingApiCalls.Rmd"><code>vignettes/TroubleshootingApiCalls.Rmd</code></a></small>
       <div class="hidden name"><code>TroubleshootingApiCalls.Rmd</code></div>
@@ -120,17 +120,17 @@
 <li>
 <p><strong>Have you verified your account by responding to the automated email sent to them?</strong> This can be verified in the <code>Browse Users</code> section of your server’s <code>Control Center</code>. (Talk to your REDCap admin.) For each email address you’ve entered, there should be a green ‘Verified’ label and icon.</p>
 <p><img src="images/EmailVerified.png" width="252" style="fig.width=400px"></p>
-<p><!--<img src="D:/Projects/Ouhsc/Bbmc/redcap/REDCapR/vignettes/images/EmailVerified.png" alt="EmailVerified" style="width: 400px;"/>--></p>
+<p><!--<img src="/home/wibeasley/Documents/bbmc/REDCapR/vignettes/images/EmailVerified.png" alt="EmailVerified" style="width: 400px;"/>--></p>
 </li>
 <li>
 <p><strong>Have you been granted the desired import and/or export permissions?</strong> This can be verified in the <code>User Rights</code> section or in the <code>API</code> section (and it’s <code>Manage All Project Tokens</code> tab) within the project. Alternatively, it can be verified in the <code>API Tokens</code> section of the server’s <code>Control Center</code>.</p>
 <p><img src="images/ApiPrivilegeDashboard.png" width="316" style="fig.width=600px"></p>
-<p><!--<img src="D:/Projects/Ouhsc/Bbmc/redcap/REDCapR/vignettes/images/ApiPrivilegeDashboard.png" alt="ApiPrivilegeDashboard" style="width: 600px;"/>--></p>
+<p><!--<img src="/home/wibeasley/Documents/bbmc/REDCapR/vignettes/images/ApiPrivilegeDashboard.png" alt="ApiPrivilegeDashboard" style="width: 600px;"/>--></p>
 </li>
 <li>
 <p><strong>Are you using the correct token?</strong> This can be verified in the <code>API</code> section (and it’s <code>Manage All Project Tokens</code> tab) within the project. Click the magnifying glass icon in the user’s row. Alternatively, it can be verified in the <code>API Tokens</code> section of the server’s <code>Control Center</code>.</p>
 <p><img src="images/MagnifyingGlass.png" width="291" style="fig.width=550px"></p>
-<p><!--<img src="D:/Projects/Ouhsc/Bbmc/redcap/REDCapR/vignettes/images/MagnifyingGlass.png" alt="MagnifyingGlass" style="width: 550px;"/>--></p>
+<p><!--<img src="/home/wibeasley/Documents/bbmc/REDCapR/vignettes/images/MagnifyingGlass.png" alt="MagnifyingGlass" style="width: 550px;"/>--></p>
 </li>
 </ol>
 <p>If all these checks pass, proceed to the next section. If not, start by consulting with your REDCap administrator.</p>
@@ -140,7 +140,7 @@
 <a href="#api" class="anchor"></a>API</h2>
 <p>This section examines potential problems that occur after data leaves a working server, but before it is handled by their programming language (<em>e.g.</em>, Python and R). <a href="http://www.getpostman.com/">Postman</a> is a Chrome plugin recommended by <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ">several</a> <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ">people</a> that makes troubleshooting much more efficient.</p>
 <p><img src="images/PostmanScreenshot.png" width="574" style="fig.width=800px"></p>
-<!--<img src="D:/Projects/Ouhsc/Bbmc/redcap/REDCapR/vignettes/images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>-->
+<!--<img src="/home/wibeasley/Documents/bbmc/REDCapR/vignettes/images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>-->
 <ol style="list-style-type: decimal">
 <li>
 <p><strong>Is the API Playground producing the expected result?</strong> REDCap’s “API Playground” holds your hand by (a) offering a dropdown list of API methods available to your REDCap instance, and (b) presenting a series of dropdown boxes appropriate for the selected method. Find it through the API link visible in the left margin of REDCap. When you’ve completed the inputs, click ‘Execute’ to view the plain-text returned by the server.</p>
@@ -229,7 +229,7 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <span class="va">raw_text</span></code></pre></div>
 <p>Alternatively, you can try using the <a href="https://cran.r-project.org/package=RCurl">RCurl</a> package, which has been mostly replaced by httr in packages developed since 2014.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">raw_text</span> <span class="op">&lt;-</span> <span class="fu">RCurl</span><span class="fu">::</span><span class="fu">postForm</span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">raw_text</span> <span class="op">&lt;-</span> <span class="fu">RCurl</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RCurl/man/postForm.html">postForm</a></span><span class="op">(</span>
   uri             <span class="op">=</span> <span class="va">redcap_uri</span>
   , token         <span class="op">=</span> <span class="va">token</span>
   , content       <span class="op">=</span> <span class="st">'record'</span>
@@ -330,38 +330,38 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <span class="va">token</span> <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span>
 <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
 <p>The previous code should produce similar output. Notice there are five rows and the columns will wrap around if your console window is too narrow.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="dv">5</span> records and <span class="dv">1</span> columns were read from REDCap <span class="cf">in</span> <span class="fl">0.41</span> seconds.</span>
-<span id="cb12-2"><a href="#cb12-2"></a>Starting to read <span class="dv">5</span> records  at <span class="dv">2014-06-27</span> <span class="dv">17</span><span class="op">:</span><span class="dv">19</span><span class="op">:</span><span class="dv">49</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>Reading batch <span class="dv">1</span> of <span class="dv">1</span>, with ids <span class="dv">1</span> through <span class="fl">5.</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="dv">5</span> records and <span class="dv">16</span> columns were read from REDCap <span class="cf">in</span> <span class="fl">0.42</span> seconds.</span>
-<span id="cb12-5"><a href="#cb12-5"></a></span>
-<span id="cb12-6"><a href="#cb12-6"></a>  record_id name_first name_last                                 address      telephone               email</span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="dv">1</span>         <span class="dv">1</span>     Nutmeg  Nutmouse <span class="dv">14</span> Rose Cottage St.\nKenning UK, <span class="dv">323232</span> (<span class="dv">432</span>) <span class="dv">456-4848</span>     nutty<span class="op">@</span>mouse.com</span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="dv">2</span>         <span class="dv">2</span>     Tumtum  Nutmouse <span class="dv">14</span> Rose Cottage Blvd.\nKenning UK <span class="dv">34243</span> (<span class="dv">234</span>) <span class="dv">234-2343</span>    tummy<span class="op">@</span>mouse.comm</span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="dv">3</span>         <span class="dv">3</span>     Marcus      Wood          <span class="dv">243</span> Hill St.\nGuthrie OK <span class="dv">73402</span> (<span class="dv">433</span>) <span class="dv">435-9865</span>        mw<span class="op">@</span>mwood.net</span>
-<span id="cb12-10"><a href="#cb12-10"></a><span class="dv">4</span>         <span class="dv">4</span>      Trudy       DAG          <span class="dv">342</span> Elm\nDuncanville TX, <span class="dv">75116</span> (<span class="dv">987</span>) <span class="dv">654-3210</span> peroxide<span class="op">@</span>blonde.com</span>
-<span id="cb12-11"><a href="#cb12-11"></a><span class="dv">5</span>         <span class="dv">5</span>   John Lee    Walker      Hotel Suite\nNew Orleans LA, <span class="dv">70115</span> (<span class="dv">333</span>) <span class="dv">333-4444</span>  left<span class="op">@</span>hippocket.com</span>
-<span id="cb12-12"><a href="#cb12-12"></a></span>
-<span id="cb12-13"><a href="#cb12-13"></a>         dob age ethnicity race sex height weight   bmi</span>
-<span id="cb12-14"><a href="#cb12-14"></a><span class="dv">1</span> <span class="dv">2003-08-30</span>  <span class="dv">10</span>         <span class="dv">1</span>    <span class="dv">2</span>   <span class="dv">0</span>   <span class="fl">5.00</span>      <span class="dv">1</span> <span class="fl">400.0</span></span>
-<span id="cb12-15"><a href="#cb12-15"></a><span class="dv">2</span> <span class="dv">2003-03-10</span>  <span class="dv">10</span>         <span class="dv">1</span>    <span class="dv">6</span>   <span class="dv">1</span>   <span class="fl">6.00</span>      <span class="dv">1</span> <span class="fl">277.8</span></span>
-<span id="cb12-16"><a href="#cb12-16"></a><span class="dv">3</span> <span class="dv">1934-04-09</span>  <span class="dv">79</span>         <span class="dv">0</span>    <span class="dv">4</span>   <span class="dv">1</span> <span class="fl">180.00</span>     <span class="dv">80</span>  <span class="fl">24.7</span></span>
-<span id="cb12-17"><a href="#cb12-17"></a><span class="dv">4</span> <span class="dv">1952-11-02</span>  <span class="dv">61</span>         <span class="dv">1</span>    <span class="dv">4</span>   <span class="dv">0</span> <span class="fl">165.00</span>     <span class="dv">54</span>  <span class="fl">19.8</span></span>
-<span id="cb12-18"><a href="#cb12-18"></a><span class="dv">5</span> <span class="dv">1955-04-15</span>  <span class="dv">58</span>         <span class="dv">1</span>    <span class="dv">4</span>   <span class="dv">1</span> <span class="fl">193.04</span>    <span class="dv">104</span>  <span class="fl">27.9</span></span>
-<span id="cb12-19"><a href="#cb12-19"></a></span>
-<span id="cb12-20"><a href="#cb12-20"></a>                                                                                                     comments</span>
-<span id="cb12-21"><a href="#cb12-21"></a><span class="dv">1</span>                                                                     Character <span class="cf">in</span> a book, with some guessing</span>
-<span id="cb12-22"><a href="#cb12-22"></a><span class="dv">2</span>                                                                          A mouse character from a good book</span>
-<span id="cb12-23"><a href="#cb12-23"></a><span class="dv">3</span>                                                                                          completely made up</span>
-<span id="cb12-24"><a href="#cb12-24"></a><span class="dv">4</span> This record doesn<span class="st">'t have a DAG assigned</span><span class="ch">\n\n</span><span class="st">So call up Trudy on the telephone</span><span class="ch">\n</span><span class="st">Send her a letter in the mail</span></span>
-<span id="cb12-25"><a href="#cb12-25"></a><span class="st">5                 Had a hand for trouble and a eye for cash</span><span class="ch">\n\n</span><span class="st">He had a gold watch chain and a black mustache</span></span>
-<span id="cb12-26"><a href="#cb12-26"></a></span>
-<span id="cb12-27"><a href="#cb12-27"></a><span class="st">  demographics_complete</span></span>
-<span id="cb12-28"><a href="#cb12-28"></a><span class="st">1                     2</span></span>
-<span id="cb12-29"><a href="#cb12-29"></a><span class="st">2                     2</span></span>
-<span id="cb12-30"><a href="#cb12-30"></a><span class="st">3                     2</span></span>
-<span id="cb12-31"><a href="#cb12-31"></a><span class="st">4                     2</span></span>
-<span id="cb12-32"><a href="#cb12-32"></a><span class="st">5                     2</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="dv">5</span> records and <span class="dv">1</span> columns were read from REDCap <span class="cf">in</span> <span class="fl">0.41</span> seconds.</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a>Starting to read <span class="dv">5</span> records  at <span class="dv">2014-06-27</span> <span class="dv">17</span><span class="op">:</span><span class="dv">19</span><span class="op">:</span><span class="dv">49</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a>Reading batch <span class="dv">1</span> of <span class="dv">1</span>, with ids <span class="dv">1</span> through <span class="fl">5.</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true"></a><span class="dv">5</span> records and <span class="dv">16</span> columns were read from REDCap <span class="cf">in</span> <span class="fl">0.42</span> seconds.</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true"></a>  record_id name_first name_last                                 address      telephone               email</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true"></a><span class="dv">1</span>         <span class="dv">1</span>     Nutmeg  Nutmouse <span class="dv">14</span> Rose Cottage St.\nKenning UK, <span class="dv">323232</span> (<span class="dv">432</span>) <span class="dv">456-4848</span>     nutty<span class="op">@</span>mouse.com</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true"></a><span class="dv">2</span>         <span class="dv">2</span>     Tumtum  Nutmouse <span class="dv">14</span> Rose Cottage Blvd.\nKenning UK <span class="dv">34243</span> (<span class="dv">234</span>) <span class="dv">234-2343</span>    tummy<span class="op">@</span>mouse.comm</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true"></a><span class="dv">3</span>         <span class="dv">3</span>     Marcus      Wood          <span class="dv">243</span> Hill St.\nGuthrie OK <span class="dv">73402</span> (<span class="dv">433</span>) <span class="dv">435-9865</span>        mw<span class="op">@</span>mwood.net</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true"></a><span class="dv">4</span>         <span class="dv">4</span>      Trudy       DAG          <span class="dv">342</span> Elm\nDuncanville TX, <span class="dv">75116</span> (<span class="dv">987</span>) <span class="dv">654-3210</span> peroxide<span class="op">@</span>blonde.com</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true"></a><span class="dv">5</span>         <span class="dv">5</span>   John Lee    Walker      Hotel Suite\nNew Orleans LA, <span class="dv">70115</span> (<span class="dv">333</span>) <span class="dv">333-4444</span>  left<span class="op">@</span>hippocket.com</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true"></a>         dob age ethnicity race sex height weight   bmi</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true"></a><span class="dv">1</span> <span class="dv">2003-08-30</span>  <span class="dv">10</span>         <span class="dv">1</span>    <span class="dv">2</span>   <span class="dv">0</span>   <span class="fl">5.00</span>      <span class="dv">1</span> <span class="fl">400.0</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true"></a><span class="dv">2</span> <span class="dv">2003-03-10</span>  <span class="dv">10</span>         <span class="dv">1</span>    <span class="dv">6</span>   <span class="dv">1</span>   <span class="fl">6.00</span>      <span class="dv">1</span> <span class="fl">277.8</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true"></a><span class="dv">3</span> <span class="dv">1934-04-09</span>  <span class="dv">79</span>         <span class="dv">0</span>    <span class="dv">4</span>   <span class="dv">1</span> <span class="fl">180.00</span>     <span class="dv">80</span>  <span class="fl">24.7</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true"></a><span class="dv">4</span> <span class="dv">1952-11-02</span>  <span class="dv">61</span>         <span class="dv">1</span>    <span class="dv">4</span>   <span class="dv">0</span> <span class="fl">165.00</span>     <span class="dv">54</span>  <span class="fl">19.8</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true"></a><span class="dv">5</span> <span class="dv">1955-04-15</span>  <span class="dv">58</span>         <span class="dv">1</span>    <span class="dv">4</span>   <span class="dv">1</span> <span class="fl">193.04</span>    <span class="dv">104</span>  <span class="fl">27.9</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true"></a>                                                                                                     comments</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true"></a><span class="dv">1</span>                                                                     Character <span class="cf">in</span> a book, with some guessing</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true"></a><span class="dv">2</span>                                                                          A mouse character from a good book</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true"></a><span class="dv">3</span>                                                                                          completely made up</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true"></a><span class="dv">4</span> This record doesn<span class="st">'t have a DAG assigned</span><span class="ch">\n\n</span><span class="st">So call up Trudy on the telephone</span><span class="ch">\n</span><span class="st">Send her a letter in the mail</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true"></a><span class="st">5                 Had a hand for trouble and a eye for cash</span><span class="ch">\n\n</span><span class="st">He had a gold watch chain and a black mustache</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true"></a></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true"></a><span class="st">  demographics_complete</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true"></a><span class="st">1                     2</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true"></a><span class="st">2                     2</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true"></a><span class="st">3                     2</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true"></a><span class="st">4                     2</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true"></a><span class="st">5                     2</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Can you export from your own project?</strong> The code is similar to the previous check, but the <code>uri</code> and <code>token</code> values will need to be modified.</p>
@@ -430,33 +430,33 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <span class="op">)</span>
 <span class="fu">exportRecords</span><span class="op">(</span><span class="va">rcon</span><span class="op">)</span></code></pre></div>
 <p>The previous code should produce similar output. Notice there are five rows and the columns will wrap around if your console window is too narrow.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>record_id name_first name_last                                 address      telephone               email</span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="dv">1</span>         <span class="dv">1</span>     Nutmeg  Nutmouse <span class="dv">14</span> Rose Cottage St.\nKenning UK, <span class="dv">323232</span> (<span class="dv">432</span>) <span class="dv">456-4848</span>     nutty<span class="op">@</span>mouse.com</span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="dv">2</span>         <span class="dv">2</span>     Tumtum  Nutmouse <span class="dv">14</span> Rose Cottage Blvd.\nKenning UK <span class="dv">34243</span> (<span class="dv">234</span>) <span class="dv">234-2343</span>    tummy<span class="op">@</span>mouse.comm</span>
-<span id="cb20-4"><a href="#cb20-4"></a><span class="dv">3</span>         <span class="dv">3</span>     Marcus      Wood          <span class="dv">243</span> Hill St.\nGuthrie OK <span class="dv">73402</span> (<span class="dv">433</span>) <span class="dv">435-9865</span>        mw<span class="op">@</span>mwood.net</span>
-<span id="cb20-5"><a href="#cb20-5"></a><span class="dv">4</span>         <span class="dv">4</span>      Trudy       DAG          <span class="dv">342</span> Elm\nDuncanville TX, <span class="dv">75116</span> (<span class="dv">987</span>) <span class="dv">654-3210</span> peroxide<span class="op">@</span>blonde.com</span>
-<span id="cb20-6"><a href="#cb20-6"></a><span class="dv">5</span>         <span class="dv">5</span>   John Lee    Walker      Hotel Suite\nNew Orleans LA, <span class="dv">70115</span> (<span class="dv">333</span>) <span class="dv">333-4444</span>  left<span class="op">@</span>hippocket.com</span>
-<span id="cb20-7"><a href="#cb20-7"></a></span>
-<span id="cb20-8"><a href="#cb20-8"></a>       dob age ethnicity race sex height weight   bmi</span>
-<span id="cb20-9"><a href="#cb20-9"></a><span class="dv">1</span> <span class="dv">2003-08-30</span>  <span class="dv">10</span>         <span class="dv">1</span>    <span class="dv">2</span>   <span class="dv">0</span>   <span class="fl">5.00</span>      <span class="dv">1</span> <span class="fl">400.0</span></span>
-<span id="cb20-10"><a href="#cb20-10"></a><span class="dv">2</span> <span class="dv">2003-03-10</span>  <span class="dv">10</span>         <span class="dv">1</span>    <span class="dv">6</span>   <span class="dv">1</span>   <span class="fl">6.00</span>      <span class="dv">1</span> <span class="fl">277.8</span></span>
-<span id="cb20-11"><a href="#cb20-11"></a><span class="dv">3</span> <span class="dv">1934-04-09</span>  <span class="dv">79</span>         <span class="dv">0</span>    <span class="dv">4</span>   <span class="dv">1</span> <span class="fl">180.00</span>     <span class="dv">80</span>  <span class="fl">24.7</span></span>
-<span id="cb20-12"><a href="#cb20-12"></a><span class="dv">4</span> <span class="dv">1952-11-02</span>  <span class="dv">61</span>         <span class="dv">1</span>    <span class="dv">4</span>   <span class="dv">0</span> <span class="fl">165.00</span>     <span class="dv">54</span>  <span class="fl">19.8</span></span>
-<span id="cb20-13"><a href="#cb20-13"></a><span class="dv">5</span> <span class="dv">1955-04-15</span>  <span class="dv">58</span>         <span class="dv">1</span>    <span class="dv">4</span>   <span class="dv">1</span> <span class="fl">193.04</span>    <span class="dv">104</span>  <span class="fl">27.9</span></span>
-<span id="cb20-14"><a href="#cb20-14"></a></span>
-<span id="cb20-15"><a href="#cb20-15"></a>                                                                                                   comments</span>
-<span id="cb20-16"><a href="#cb20-16"></a><span class="dv">1</span>                                                                     Character <span class="cf">in</span> a book, with some guessing</span>
-<span id="cb20-17"><a href="#cb20-17"></a><span class="dv">2</span>                                                                          A mouse character from a good book</span>
-<span id="cb20-18"><a href="#cb20-18"></a><span class="dv">3</span>                                                                                          completely made up</span>
-<span id="cb20-19"><a href="#cb20-19"></a><span class="dv">4</span> This record doesn<span class="st">'t have a DAG assigned</span><span class="ch">\n\n</span><span class="st">So call up Trudy on the telephone</span><span class="ch">\n</span><span class="st">Send her a letter in the mail</span></span>
-<span id="cb20-20"><a href="#cb20-20"></a><span class="st">5                 Had a hand for trouble and a eye for cash</span><span class="ch">\n\n</span><span class="st">He had a gold watch chain and a black mustache</span></span>
-<span id="cb20-21"><a href="#cb20-21"></a></span>
-<span id="cb20-22"><a href="#cb20-22"></a><span class="st">demographics_complete</span></span>
-<span id="cb20-23"><a href="#cb20-23"></a><span class="st">1                     2</span></span>
-<span id="cb20-24"><a href="#cb20-24"></a><span class="st">2                     2</span></span>
-<span id="cb20-25"><a href="#cb20-25"></a><span class="st">3                     2</span></span>
-<span id="cb20-26"><a href="#cb20-26"></a><span class="st">4                     2</span></span>
-<span id="cb20-27"><a href="#cb20-27"></a><span class="st">5                     2</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a>record_id name_first name_last                                 address      telephone               email</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true"></a><span class="dv">1</span>         <span class="dv">1</span>     Nutmeg  Nutmouse <span class="dv">14</span> Rose Cottage St.\nKenning UK, <span class="dv">323232</span> (<span class="dv">432</span>) <span class="dv">456-4848</span>     nutty<span class="op">@</span>mouse.com</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true"></a><span class="dv">2</span>         <span class="dv">2</span>     Tumtum  Nutmouse <span class="dv">14</span> Rose Cottage Blvd.\nKenning UK <span class="dv">34243</span> (<span class="dv">234</span>) <span class="dv">234-2343</span>    tummy<span class="op">@</span>mouse.comm</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true"></a><span class="dv">3</span>         <span class="dv">3</span>     Marcus      Wood          <span class="dv">243</span> Hill St.\nGuthrie OK <span class="dv">73402</span> (<span class="dv">433</span>) <span class="dv">435-9865</span>        mw<span class="op">@</span>mwood.net</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true"></a><span class="dv">4</span>         <span class="dv">4</span>      Trudy       DAG          <span class="dv">342</span> Elm\nDuncanville TX, <span class="dv">75116</span> (<span class="dv">987</span>) <span class="dv">654-3210</span> peroxide<span class="op">@</span>blonde.com</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true"></a><span class="dv">5</span>         <span class="dv">5</span>   John Lee    Walker      Hotel Suite\nNew Orleans LA, <span class="dv">70115</span> (<span class="dv">333</span>) <span class="dv">333-4444</span>  left<span class="op">@</span>hippocket.com</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true"></a>       dob age ethnicity race sex height weight   bmi</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true"></a><span class="dv">1</span> <span class="dv">2003-08-30</span>  <span class="dv">10</span>         <span class="dv">1</span>    <span class="dv">2</span>   <span class="dv">0</span>   <span class="fl">5.00</span>      <span class="dv">1</span> <span class="fl">400.0</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true"></a><span class="dv">2</span> <span class="dv">2003-03-10</span>  <span class="dv">10</span>         <span class="dv">1</span>    <span class="dv">6</span>   <span class="dv">1</span>   <span class="fl">6.00</span>      <span class="dv">1</span> <span class="fl">277.8</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true"></a><span class="dv">3</span> <span class="dv">1934-04-09</span>  <span class="dv">79</span>         <span class="dv">0</span>    <span class="dv">4</span>   <span class="dv">1</span> <span class="fl">180.00</span>     <span class="dv">80</span>  <span class="fl">24.7</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true"></a><span class="dv">4</span> <span class="dv">1952-11-02</span>  <span class="dv">61</span>         <span class="dv">1</span>    <span class="dv">4</span>   <span class="dv">0</span> <span class="fl">165.00</span>     <span class="dv">54</span>  <span class="fl">19.8</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true"></a><span class="dv">5</span> <span class="dv">1955-04-15</span>  <span class="dv">58</span>         <span class="dv">1</span>    <span class="dv">4</span>   <span class="dv">1</span> <span class="fl">193.04</span>    <span class="dv">104</span>  <span class="fl">27.9</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true"></a></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true"></a>                                                                                                   comments</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true"></a><span class="dv">1</span>                                                                     Character <span class="cf">in</span> a book, with some guessing</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true"></a><span class="dv">2</span>                                                                          A mouse character from a good book</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true"></a><span class="dv">3</span>                                                                                          completely made up</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true"></a><span class="dv">4</span> This record doesn<span class="st">'t have a DAG assigned</span><span class="ch">\n\n</span><span class="st">So call up Trudy on the telephone</span><span class="ch">\n</span><span class="st">Send her a letter in the mail</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true"></a><span class="st">5                 Had a hand for trouble and a eye for cash</span><span class="ch">\n\n</span><span class="st">He had a gold watch chain and a black mustache</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true"></a></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true"></a><span class="st">demographics_complete</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true"></a><span class="st">1                     2</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true"></a><span class="st">2                     2</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true"></a><span class="st">3                     2</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true"></a><span class="st">4                     2</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true"></a><span class="st">5                     2</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Can you export your own project?</strong> The code is similar to the previous check, but the <code>uri</code> and <code>token</code> values will need to be modified.</p>

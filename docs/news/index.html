@@ -85,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.1.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.1.9004</span>
       </span>
     </div>
 
@@ -147,6 +147,7 @@
 <ul>
 <li>When writing records to the server, the functions <code><a href="../reference/redcap_write.html">redcap_write()</a></code> and <code><a href="../reference/redcap_write_oneshot.html">redcap_write_oneshot()</a></code> have a new parameter that converts R’s <code>logical</code>/boolean columns to integers. This meshes well with T/F and Y/N items that are coded as 1/0 underneath. The default will be FALSE, so it doesn’t break existing code. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/305'>#305</a>)</li>
 <li>When writing records to the server, the functions <code><a href="../reference/redcap_write.html">redcap_write()</a></code> and <code><a href="../reference/redcap_write_oneshot.html">redcap_write_oneshot()</a></code> can toggle the ability to overwrite with blank/NA cells (suggested by <a href='https://github.com/auricap'>@auricap</a>, <a href='https://github.com/OuhscBbmc/REDCapR/issues/315'>#315</a>)</li>
+<li>The functions <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code>, <code><a href="../reference/redcap_read.html">redcap_read()</a></code>, &amp; <code><a href="../reference/redcap_read_oneshot_eav.html">redcap_read_oneshot_eav()</a></code> now support the parameters <code>datetime_range_begin</code> and <code>datetime_range_end</code>. The are passed to the REDCap parameters <code>dateRangeBegin</code> and <code>dateRangeEnd</code>, which restricts records returned, based on their last modified date in the server. (Thanks <a href='https://github.com/pbchase'>@pbchase</a>, <a href='https://github.com/OuhscBbmc/REDCapR/issues/321'>#321</a> &amp; <a href='https://github.com/OuhscBbmc/REDCapR/issues/323'>#323</a>.)</li>
 </ul>
 </div>
 <div id="stability-features" class="section level3">
@@ -262,7 +263,7 @@
 <li>updated to readr 1.2.0 (<a href='https://github.com/OuhscBbmc/REDCapR/issues/200'>#200</a>). This changed how some data variables were assigned a data types.</li>
 <li>uses <code>odbc</code> package to retrieve credentials from the token server. Remove RODBC and RODBCext (<a href='https://github.com/OuhscBbmc/REDCapR/issues/188'>#188</a>). Thanks to <a href='https://github.com/krlmlr'>@krlmlr</a> for error checking advice in <a href="https://stackoverflow.com/a/50419403/1082435" class="uri">https://stackoverflow.com/a/50419403/1082435</a>.</li>
 <li>
-<code><a href="https://rdrr.io/pkg/data.table/man/rbindlist.html">data.table::rbindlist()</a></code> replaced by <code><a href="https://dplyr.tidyverse.org/reference/bind.html">dplyr::bind_rows()</a></code>
+<code><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html">data.table::rbindlist()</a></code> replaced by <code><a href="https://dplyr.tidyverse.org/reference/bind.html">dplyr::bind_rows()</a></code>
 </li>
 <li>the checkmate package inspects most function parameters now (instead of <code><a href="https://rdrr.io/pkg/testit/man/assert.html">testit::assert()</a></code> and <code>base:stop()</code> ) (<a href='https://github.com/OuhscBbmc/REDCapR/issues/190'>#190</a> &amp; <a href='https://github.com/OuhscBbmc/REDCapR/issues/208'>#208</a>).</li>
 <li>
@@ -318,7 +319,7 @@
 <h3 class="hasAnchor">
 <a href="#minor-updates" class="anchor"></a>Minor Updates</h3>
 <ul>
-<li>When combining batches into a single data.frame, <code><a href="https://rdrr.io/pkg/data.table/man/rbindlist.html">data.table::rbindlist()</a></code> is used. This should prevent errors with the first batch’s data type (for a column) isn’t compatible with a later batch. For instance, this occurs when the first batch has only integers for <code>record_id</code>, but a subsequent batch has values like <code>aa-test-aa</code>. The variable for the combined dataset should be a character. (Issue <a href='https://github.com/OuhscBbmc/REDCapR/issues/128'>#128</a> &amp; <a href="http://stackoverflow.com/questions/39377370/bind-rows-of-different-data-types" class="uri">http://stackoverflow.com/questions/39377370/bind-rows-of-different-data-types</a>; Thanks <a href='https://github.com/arunsrinivasan'>@arunsrinivasan</a>)</li>
+<li>When combining batches into a single data.frame, <code><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html">data.table::rbindlist()</a></code> is used. This should prevent errors with the first batch’s data type (for a column) isn’t compatible with a later batch. For instance, this occurs when the first batch has only integers for <code>record_id</code>, but a subsequent batch has values like <code>aa-test-aa</code>. The variable for the combined dataset should be a character. (Issue <a href='https://github.com/OuhscBbmc/REDCapR/issues/128'>#128</a> &amp; <a href="http://stackoverflow.com/questions/39377370/bind-rows-of-different-data-types" class="uri">http://stackoverflow.com/questions/39377370/bind-rows-of-different-data-types</a>; Thanks <a href='https://github.com/arunsrinivasan'>@arunsrinivasan</a>)</li>
 <li>Uses the <code>dplyr</code> package instead of <code>plyr</code>. This shouldn’t affect callers, because immediately before returning the data, <code><a href="../reference/redcap_read.html">REDCapR::redcap_read()</a></code> coerces the <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble::tibble</a></code> (which was formerly called <code><a href="https://dplyr.tidyverse.org/reference/tbl_df.html">dplyr::tbl_df</a></code>) back to a vanilla <code>data.frame</code> with <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code>.</li>
 <li>A few more instances of validating input parameters to read functions. (Issue <a href='https://github.com/OuhscBbmc/REDCapR/issues/8'>#8</a>).</li>
 </ul>
