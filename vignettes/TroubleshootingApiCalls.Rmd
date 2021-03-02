@@ -105,7 +105,7 @@ knitr::include_graphics("images/PostmanScreenshot.png")
     curl -X POST -H "Cache-Control: no-cache" -F "token=9A81268476645C4E5F03428B8AC3AA7B" -F "content=record" -F "format=csv" "https://bbmc.ouhsc.edu/redcap/api/"
     ```
 
-If all these checks pass, proceed to the next section.  If not, start by consulting with your REDCap administrator.
+If all these checks pass, proceed to the next section.  If not, start by consulting with your REDCap administrator.  If that fails, consider creating a GitHub issue for your package (*e.g.*, [redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://ouhscbbmc.github.io/REDCapR) in R, [phpcap](https://github.com/iuredcap/phpcap) in PHP, and [PyCap](http://pycap.readthedocs.org/en/latest/) in Python).
 
 Writing
 ------------------------------------------------------------------
@@ -116,9 +116,32 @@ The second reason why importing can be trickier is because the schema (*e.g.*, t
 
 1. **Does the dataset pass [`REDCapR::validate_for_write()`](https://ouhscbbmc.github.io/REDCapR/reference/validate.html)?**  The `REDCapR::validate_for_write()` inspects a data.frame to anticipate problems before writing with REDCap's API.  The reference manual contains specifics of the validation checks.
 
-1. **Can you import a *subset* of the project?**
+1. **Can you import a *small subset* of the project?**  For instance, just the `record_id` column.
 
-1. **Can you import the *entire* project?**
+1. **Can you export the dataset and then import it *without any modifications***?  
+
+    For instance, using REDCapR: First, manually complete ~10 example record in the web browser, and then export/download the records with [`REDCapR::redcap_read_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read_oneshot.html) to a [`data.frame`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html).  (If you have longitudinal or repeating instruments, make sure your examples cover those dimensions adequately) Second, can you successfully upload that same `data.frame` (without modification) with [`REDCapR::redcap_write_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_write_oneshot.html)?  
+    
+    If so, that dataset will provide a template for how you structure the real dataset and assign values.  If not, that is a helpful piece of troubleshooting.  
+
+1. **Is the longitudinal and/or repeating structure correct?**  Three variables  are frequently misspecified: `redcap_event_name` (for longitudinal projects) and  `redcap_repeat_instrument` & `redcap_repeat_instance` (for repeating instruments).  The values for these variables are clearer to understand once you complete the step above and inspect the layout.  
+
+    For longitudinal projects: Example values for `redcap_event_name` are "admission_1_arm_1",  "admission_2_arm_1", and  "admission_3_arm_1".  (Notice the "_arm_1" suffix is used even if arms are not specified in your project.)
+
+    For projects with repeating instruments: Examples values for `redcap_repeat_instrument` are "lab", "vitals", and "medication"; these instrument names are specified in the REDCap Designer. Example values for `redcap_repeat_instance` are "1", "2", "3", "4", and "5"; this is a consecutive sequence within a participant's longitudinal event.
+    
+    If participant 101 has two lab results, one vitals record, and three medications, the dataset structure might be:
+    
+    | record_id | redcap_repeat_instrument | redcap_repeat_instance | lab_result | pulse | o2    | admin_date |
+    |:---------:|:------------------------:|:----------------------:|:----------:|:-----:|:-----:|:----------:|
+    | 101       | lab                      | 1                      | positive   |       |       |            |
+    | 101       | lab                      | 2                      | negative   |       |       |            |
+    | 101       | vitals                   | 1                      |            | 72    | 98    |            |
+    | 101       | medication               | 1                      |            |       |       | 2021-02-01 |
+    | 101       | medication               | 2                      |            |       |       | 2021-02-02 |
+    | 101       | medication               | 3                      |            |       |       | 2021-02-03 |
+
+1. **Can you import the *entire* project?**  Can all columns be written for all rows?
 
 If one of these checks fail, please start by consulting your REDCap administrator.
 
