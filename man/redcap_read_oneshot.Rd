@@ -21,8 +21,8 @@ redcap_read_oneshot(
   export_survey_fields = FALSE,
   export_data_access_groups = FALSE,
   filter_logic = "",
-  date_range_begin = "",
-  date_range_end = "",
+  date_range_begin = as.POSIXct(NA),
+  date_range_end = as.POSIXct(NA),
   col_types = NULL,
   guess_type = TRUE,
   guess_max = 1000L,
@@ -88,14 +88,16 @@ only return the records (or record-events, if a longitudinal project) where
 the logic evaluates as TRUE.   An blank/empty string returns all records.}
 
 \item{date_range_begin}{To return only records that have been created or
-modified \emph{after} a given date/time, provide a timestamp in the format
-YYYY-MM-DD HH:MM:SS (e.g., '2017-01-01 00:00:00'). If not specified,
-it will assume no begin time.}
+modified \emph{after} a given datetime, provide a
+\href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/as.POSIXlt.html}{POSIXct}
+value.
+If not specified, REDCap will assume no begin time.}
 
 \item{date_range_end}{To return only records that have been created or
-modified \emph{before} a given date/time, provide a timestamp in the format
-YYYY-MM-DD HH:MM:SS (e.g., '2017-01-01 00:00:00'). If not specified,
-it will use the current server time.}
+modified \emph{before} a given datetime, provide a
+\href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/as.POSIXlt.html}{POSIXct}
+value.
+If not specified, REDCap will assume no end time.}
 
 \item{col_types}{A \code{\link[readr:cols]{readr::cols()}} object passed internally to
 \code{\link[readr:read_delim]{readr::read_csv()}}.  Optional.}
