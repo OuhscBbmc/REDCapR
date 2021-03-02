@@ -25,8 +25,8 @@ redcap_read(
   export_survey_fields = FALSE,
   export_data_access_groups = FALSE,
   filter_logic = "",
-  date_range_begin = as.POSIXct(NA),
-  date_range_end = as.POSIXct(NA),
+  datetime_range_begin = as.POSIXct(NA),
+  datetime_range_end = as.POSIXct(NA),
   col_types = NULL,
   guess_type = TRUE,
   guess_max = NULL,
@@ -102,13 +102,13 @@ filtering the data to be returned by this API method, in which the API
 will only return the records (or record-events, if a longitudinal project)
 where the logic evaluates as TRUE.   An blank/empty string returns all records.}
 
-\item{date_range_begin}{To return only records that have been created or
+\item{datetime_range_begin}{To return only records that have been created or
 modified \emph{after} a given datetime, provide a
 \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/as.POSIXlt.html}{POSIXct}
 value.
 If not specified, REDCap will assume no begin time.}
 
-\item{date_range_end}{To return only records that have been created or
+\item{datetime_range_end}{To return only records that have been created or
 modified \emph{before} a given datetime, provide a
 \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/as.POSIXlt.html}{POSIXct}
 value.

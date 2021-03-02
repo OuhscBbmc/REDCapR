@@ -207,8 +207,8 @@ test_that("date-range", {
       REDCapR:::redcap_read_oneshot_eav(
         redcap_uri        = credential$redcap_uri,
         token             = credential$token,
-        date_range_begin  = start,
-        date_range_end    = stop
+        datetime_range_begin  = start,
+        datetime_range_end    = stop
       )
   )
 
