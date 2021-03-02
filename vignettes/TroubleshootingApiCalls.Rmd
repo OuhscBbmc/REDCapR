@@ -57,7 +57,7 @@ This first group of checks primarily focuses on the server and the logins accoun
 
 If all these checks pass, proceed to the next section.  If not, start by consulting with your REDCap administrator.
 
-API
+Reading
 ------------------------------------------------------------------
 
 This section examines potential problems that occur after data leaves a working server, but before it is handled by their programming language (*e.g.*, Python and R).  [Postman](http://www.getpostman.com/) is a Chrome plugin recommended by [several](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ) [people](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ) that makes troubleshooting much more efficient.
@@ -106,6 +106,21 @@ knitr::include_graphics("images/PostmanScreenshot.png")
     ```
 
 If all these checks pass, proceed to the next section.  If not, start by consulting with your REDCap administrator.
+
+Writing
+------------------------------------------------------------------
+
+Troubleshooting import operations is trickier than export operations for two major reasons.  First, the database potentially persists your *import* mistakes.  In contrast, repeatedly *exporting* data won't affect subsequent reads.  Considering cloning the REDCap project for testing until the problem is resolved.  Remember to create a new token (because they're not automatically created when projects are cloned, even when users are copied), and to modify your code's token to point to the new testing clone.
+
+The second reason why importing can be trickier is because the schema (*e.g.*, the names and data types) of your local dataset must match the project's schema.  Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project's schema and dataset.  Also, consider exporting the dataset to your machine, and look for differences.  Note that you cannot import calculated fields into REDCap.
+
+1. **Does the dataset pass [`REDCapR::validate_for_write()`](https://ouhscbbmc.github.io/REDCapR/reference/validate.html)?**  The `REDCapR::validate_for_write()` inspects a data.frame to anticipate problems before writing with REDCap's API.  The reference manual contains specifics of the validation checks.
+
+1. **Can you import a *subset* of the project?**
+
+1. **Can you import the *entire* project?**
+
+If one of these checks fail, please start by consulting your REDCap administrator.
 
 Common Gotchas  {#gotchas-agnostic}
 ------------------------------------------------------------------
@@ -440,21 +455,6 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
     ```
 
 1. **Is the export operation still unsuccessful using redcapAPI?** If so the "Can the user query a *entire* REDCap project using httr?" check succeeded, but the redcapAPI checks did not, consider posting a new [GitHub issue](https://github.com/nutterb/redcapAPI/issues) to the package developers.
-
-If one of these checks fail, please start by consulting your REDCap administrator.
-
-Writing
-------------------------------------------------------------------
-
-Troubleshooting import operations is trickier than export operations for two major reasons.  First, the database potentially persists your *import* mistakes.  In contrast, repeatedly *exporting* data won't affect subsequent reads.  Considering cloning the REDCap project for testing until the problem is resolved.  Remember to create a new token (because they're not automatically created when projects are cloned, even when users are copied), and to modify your code's token to point to the new testing clone.
-
-The second reason why importing can be trickier is because the schema (*e.g.*, the names and data types) of your local dataset must match the project's schema.  Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project's schema and dataset.  Also, consider exporting the dataset to your machine, and look for differences.  Note that you cannot import calculated fields into REDCap.
-
-1. **Does the dataset pass [`REDCapR::validate_for_write()`](https://ouhscbbmc.github.io/REDCapR/reference/validate.html)?**  The `REDCapR::validate_for_write()` inspects a data.frame to anticipate problems before writing with REDCap's API.  The reference manual contains specifics of the validation checks.
-
-1. **Can you import the *entire* project?**
-
-1. **Can you import a *subset* of the project?**
 
 If one of these checks fail, please start by consulting your REDCap administrator.
 
