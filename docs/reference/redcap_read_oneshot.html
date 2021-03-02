@@ -86,7 +86,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.1.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.1.9004</span>
       </span>
     </div>
 
@@ -160,6 +160,8 @@
   export_survey_fields <span class='op'>=</span> <span class='cn'>FALSE</span>,
   export_data_access_groups <span class='op'>=</span> <span class='cn'>FALSE</span>,
   filter_logic <span class='op'>=</span> <span class='st'>""</span>,
+  datetime_range_begin <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span><span class='op'>(</span><span class='cn'>NA</span><span class='op'>)</span>,
+  datetime_range_end <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span><span class='op'>(</span><span class='cn'>NA</span><span class='op'>)</span>,
   col_types <span class='op'>=</span> <span class='cn'>NULL</span>,
   guess_type <span class='op'>=</span> <span class='cn'>TRUE</span>,
   guess_max <span class='op'>=</span> <span class='fl'>1000L</span>,
@@ -257,6 +259,22 @@ are utilized in the project. Default is <code>FALSE</code>. See the details belo
 filtering the data to be returned by this API method, in which the API will
 only return the records (or record-events, if a longitudinal project) where
 the logic evaluates as TRUE.   An blank/empty string returns all records.</p></td>
+    </tr>
+    <tr>
+      <th>datetime_range_begin</th>
+      <td><p>To return only records that have been created or
+modified <em>after</em> a given datetime, provide a
+<a href='https://stat.ethz.ch/R-manual/R-devel/library/base/html/as.POSIXlt.html'>POSIXct</a>
+value.
+If not specified, REDCap will assume no begin time.</p></td>
+    </tr>
+    <tr>
+      <th>datetime_range_end</th>
+      <td><p>To return only records that have been created or
+modified <em>before</em> a given datetime, provide a
+<a href='https://stat.ethz.ch/R-manual/R-devel/library/base/html/as.POSIXlt.html'>POSIXct</a>
+value.
+If not specified, REDCap will assume no end time.</p></td>
     </tr>
     <tr>
       <th>col_types</th>

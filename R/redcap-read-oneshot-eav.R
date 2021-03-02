@@ -40,6 +40,18 @@
 #' will only return the records (or record-events, if a longitudinal project)
 #' where the logic evaluates as TRUE.   An blank/empty string returns all
 #' records.
+#' @param datetime_range_begin To return only records that have been created or
+#' modified *after* a given datetime, provide a
+#' [POSIXct]
+#' (https://stat.ethz.ch/R-manual/R-devel/library/base/html/as.POSIXlt.html)
+#' value.
+#' If not specified, REDCap will assume no begin time.
+#' @param datetime_range_end To return only records that have been created or
+#' modified *before* a given datetime, provide a
+#' [POSIXct]
+#' (https://stat.ethz.ch/R-manual/R-devel/library/base/html/as.POSIXlt.html)
+#' value.
+#' If not specified, REDCap will assume no end time.
 #'
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  The verbose output might contain
@@ -138,6 +150,8 @@ redcap_read_oneshot_eav <- function(
   # placeholder: export_survey_fields
   export_data_access_groups     = FALSE,
   filter_logic                  = "",
+  datetime_range_begin          = as.POSIXct(NA),
+  datetime_range_end            = as.POSIXct(NA),
 
   # placeholder: guess_type
   # placeholder: guess_max
@@ -164,7 +178,9 @@ redcap_read_oneshot_eav <- function(
   # placeholder: export_survey_fields
   checkmate::assert_logical(  export_data_access_groups , any.missing=FALSE, len=1)
   checkmate::assert_character(filter_logic              , any.missing=FALSE, len=1, pattern="^.{0,}$")
-  #
+  checkmate::assert_posixct(  datetime_range_begin      , any.missing=TRUE , len=1, null.ok=TRUE)
+  checkmate::assert_posixct(  datetime_range_end        , any.missing=TRUE , len=1, null.ok=TRUE)
+
   # placeholder: checkmate::assert_logical(  guess_type                , any.missing=FALSE, len=1)
   # placeholder: checkmate::assert_integerish(guess_max                , any.missing=FALSE, len=1, lower=1)
   checkmate::assert_logical(  verbose                   , any.missing=FALSE, len=1, null.ok=TRUE)
@@ -179,6 +195,8 @@ redcap_read_oneshot_eav <- function(
   events_collapsed    <- collapse_vector(events   , events_collapsed)
   export_data_access_groups <- ifelse(export_data_access_groups, "true", "false")
   filter_logic        <- filter_logic_prepare(filter_logic)
+  datetime_range_begin<- dplyr::coalesce(strftime(datetime_range_begin, "%Y-%m-%d %H:%M:%S"), "")
+  datetime_range_end  <- dplyr::coalesce(strftime(datetime_range_end  , "%Y-%m-%d %H:%M:%S"), "")
   verbose             <- verbose_prepare(verbose)
 
   if (1L <= nchar(fields_collapsed) )
@@ -192,7 +210,9 @@ redcap_read_oneshot_eav <- function(
     rawOrLabel              = raw_or_label,
     rawOrLabelHeaders       = raw_or_label_headers,
     exportDataAccessGroups  = export_data_access_groups,
-    filterLogic             = filter_logic
+    filterLogic             = filter_logic,
+    dateRangeBegin          = datetime_range_begin,
+    dateRangeEnd            = datetime_range_end
     # record, fields, forms & events are specified below
   )
 
@@ -340,6 +360,8 @@ redcap_read_oneshot_eav <- function(
     records_collapsed  = records_collapsed,
     fields_collapsed   = fields_collapsed,
     filter_logic       = filter_logic,
+    datetime_range_begin= datetime_range_begin,
+    datetime_range_end  = datetime_range_end,
     events_collapsed   = events_collapsed,
     elapsed_seconds    = kernel$elapsed_seconds,
     raw_text           = kernel$raw_text

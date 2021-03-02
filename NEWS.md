@@ -11,6 +11,7 @@ Version 0.12 (Unreleased on CRAN)
 
 * When writing records to the server, the functions `redcap_write()` and `redcap_write_oneshot()` have a new parameter that converts R's `logical`/boolean columns to integers.  This meshes well with T/F and Y/N items that are coded as 1/0 underneath. The default will be FALSE, so it doesn't break existing code. (#305)
 * When writing records to the server, the functions `redcap_write()` and `redcap_write_oneshot()` can toggle the ability to overwrite with blank/NA cells (suggested by @auricap, #315)
+* The functions `redcap_read_oneshot()`, `redcap_read()`, & `redcap_read_oneshot_eav()` now support the parameters `datetime_range_begin` and `datetime_range_end`.  The are passed to the REDCap parameters `dateRangeBegin` and `dateRangeEnd`, which restricts records returned, based on their last modified date in the server.  (Thanks @pbchase, #321 & #323.)
 
 ### Stability Features
 
