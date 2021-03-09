@@ -24,9 +24,13 @@ jobs:
         run: |
           install.packages(c("remotes", "rcmdcheck"))
           remotes::install_deps(dependencies = TRUE)
+          remotes::install_cran("covr")
         shell: Rscript {0}
       - name: Check
         run: |
           options(crayon.enabled = TRUE)
           rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
+        shell: Rscript {0}
+      - name: Test coverage
+        run: covr::codecov()
         shell: Rscript {0}
