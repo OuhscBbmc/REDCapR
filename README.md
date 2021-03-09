@@ -76,11 +76,11 @@ Thanks,
 
 ### Build Status and Package Characteristics
 
-| [Branch](https://github.com/OuhscBbmc/REDCapR) | [GitHub Actions](https://github.com/OuhscBbmc/REDCapR/actions) | [Coveralls](https://coveralls.io/r/OuhscBbmc/REDCapR) | [Codecov](https://codecov.io/gh/OuhscBbmc/REDCapR) |
-| :----- | :---------------------------: | :-----------------------------: | :-------: |
-| [Master](https://github.com/OuhscBbmc/REDCapR/tree/master) | [![R-CMD-check](https://github.com/OuhscBbmc/REDCapR/workflows/R-CMD-check/badge.svg?branch=master)](https://github.com/OuhscBbmc/REDCapR/actions) | [![Coverage Status](https://coveralls.io/repos/github/OuhscBbmc/REDCapR/badge.svg?branch=master)](https://coveralls.io/github/OuhscBbmc/REDCapR?branch=master) | [![codecov](https://codecov.io/gh/OuhscBbmc/REDCapR/branch/master/graph/badge.svg)](https://codecov.io/gh/OuhscBbmc/REDCapR) |
-| [Dev](https://github.com/OuhscBbmc/REDCapR/tree/dev) | [![R-CMD-check](https://github.com/OuhscBbmc/REDCapR/workflows/R-CMD-check/badge.svg?branch=dev)](https://github.com/OuhscBbmc/REDCapR/actions) | [![Coverage Status](https://coveralls.io/repos/github/OuhscBbmc/REDCapR/badge.svg?branch=dev)](https://coveralls.io/github/OuhscBbmc/REDCapR?branch=dev) | [![codecov](https://codecov.io/gh/OuhscBbmc/REDCapR/branch/dev/graph/badge.svg)](https://codecov.io/gh/OuhscBbmc/REDCapR/branch/dev) |
-| | *Ubuntu LTS* | *Test Coverage* | *Test Coverage* |
+| [Branch](https://github.com/OuhscBbmc/REDCapR) | [GitHub Actions](https://github.com/OuhscBbmc/REDCapR/actions) | [Codecov](https://codecov.io/gh/OuhscBbmc/REDCapR) |
+| :----- | :---------------------------: | :-------: |
+| [Master](https://github.com/OuhscBbmc/REDCapR/tree/master) | [![R-CMD-check](https://github.com/OuhscBbmc/REDCapR/workflows/R-CMD-check/badge.svg?branch=master)](https://github.com/OuhscBbmc/REDCapR/actions) |  [![codecov](https://codecov.io/gh/OuhscBbmc/REDCapR/branch/master/graph/badge.svg)](https://codecov.io/gh/OuhscBbmc/REDCapR) |
+| [Dev](https://github.com/OuhscBbmc/REDCapR/tree/dev) | [![R-CMD-check](https://github.com/OuhscBbmc/REDCapR/workflows/R-CMD-check/badge.svg?branch=dev)](https://github.com/OuhscBbmc/REDCapR/actions) | [![codecov](https://codecov.io/gh/OuhscBbmc/REDCapR/branch/dev/graph/badge.svg)](https://codecov.io/gh/OuhscBbmc/REDCapR/branch/dev) |
+| | *Ubuntu Latest* | *Test Coverage* |
 
 | Key | Value |
 | :--- | :----- |
