@@ -76,7 +76,9 @@ displayed to the users.  Otherwise, the values will be 0/1.}
 
 \item{export_survey_fields}{A boolean that specifies whether to export the
 survey identifier field (e.g., 'redcap_survey_identifier') or survey
-timestamp fields (e.g., instrument+'_timestamp') .}
+timestamp fields (e.g., instrument+'_timestamp').
+The timestamp outputs reflect the survey's \emph{completion} time
+(according to the time and timezone of the REDCap server.)}
 
 \item{export_data_access_groups}{A boolean value that specifies whether or
 not to export the \code{redcap_data_access_group} field when data access groups

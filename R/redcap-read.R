@@ -48,7 +48,9 @@
 #  placeholder: returnFormat
 #' @param export_survey_fields A boolean that specifies whether to export the
 #' survey identifier field (e.g., 'redcap_survey_identifier') or survey
-#' timestamp fields (e.g., instrument+'_timestamp') .
+#' timestamp fields (e.g., instrument+'_timestamp').
+#' The timestamp outputs reflect the survey's *completion* time
+#' (according to the time and timezone of the REDCap server.)
 #' @param export_data_access_groups A boolean value that specifies whether or
 #' not to export the `redcap_data_access_group` field when data access groups
 #' are utilized in the project. Default is `FALSE`. See the details below.
