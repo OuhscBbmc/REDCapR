@@ -90,7 +90,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Advanced REDCapR Operations</h1>
             
-            <h4 class="date">2021-03-09</h4>
+            <h4 class="date">2021-04-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/advanced-redcapr-operations.Rmd"><code>vignettes/advanced-redcapr-operations.Rmd</code></a></small>
       <div class="hidden name"><code>advanced-redcapr-operations.Rmd</code></div>
@@ -353,7 +353,7 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 <details><p><summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary></p>
 <pre><code>#&gt; ─ Session info ───────────────────────────────────────────────────────────────
 #&gt;  setting  value                       
-#&gt;  version  R version 4.0.4 (2021-02-15)
+#&gt;  version  R version 4.0.5 (2021-03-31)
 #&gt;  os       macOS Catalina 10.15.7      
 #&gt;  system   x86_64, darwin17.0          
 #&gt;  ui       X11                         
@@ -361,15 +361,14 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 #&gt;  collate  en_US.UTF-8                 
 #&gt;  ctype    en_US.UTF-8                 
 #&gt;  tz       UTC                         
-#&gt;  date     2021-03-09                  
+#&gt;  date     2021-04-13                  
 #&gt; 
 #&gt; ─ Packages ───────────────────────────────────────────────────────────────────
 #&gt;  package     * version     date       lib source        
-#&gt;  assertthat    0.2.1       2019-03-21 [1] CRAN (R 4.0.2)
 #&gt;  backports     1.2.1       2020-12-09 [1] CRAN (R 4.0.2)
 #&gt;  cachem        1.0.4       2021-02-13 [1] CRAN (R 4.0.2)
 #&gt;  checkmate     2.0.0       2020-02-06 [1] CRAN (R 4.0.2)
-#&gt;  cli           2.3.1       2021-02-23 [1] CRAN (R 4.0.2)
+#&gt;  cli           2.4.0       2021-04-05 [1] CRAN (R 4.0.2)
 #&gt;  colorspace    2.0-0       2020-11-11 [1] CRAN (R 4.0.2)
 #&gt;  crayon        1.4.1       2021-02-08 [1] CRAN (R 4.0.2)
 #&gt;  curl          4.3         2019-12-02 [1] CRAN (R 4.0.1)
@@ -392,42 +391,42 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 #&gt;  magrittr    * 2.0.1       2020-11-17 [1] CRAN (R 4.0.2)
 #&gt;  memoise       2.0.0       2021-01-26 [1] CRAN (R 4.0.2)
 #&gt;  munsell       0.5.0       2018-06-12 [1] CRAN (R 4.0.2)
-#&gt;  pillar        1.5.1       2021-03-05 [1] CRAN (R 4.0.2)
+#&gt;  pillar        1.6.0       2021-04-13 [1] CRAN (R 4.0.5)
 #&gt;  pkgconfig     2.0.3       2019-09-22 [1] CRAN (R 4.0.2)
 #&gt;  pkgdown       1.6.1       2020-09-12 [1] CRAN (R 4.0.2)
 #&gt;  ps            1.6.0       2021-02-28 [1] CRAN (R 4.0.2)
 #&gt;  purrr         0.3.4       2020-04-17 [1] CRAN (R 4.0.2)
 #&gt;  R6            2.5.0       2020-10-28 [1] CRAN (R 4.0.2)
-#&gt;  ragg          1.1.1       2021-02-25 [1] CRAN (R 4.0.2)
+#&gt;  ragg          1.1.2       2021-03-17 [1] CRAN (R 4.0.2)
 #&gt;  readr         1.4.0       2020-10-05 [1] CRAN (R 4.0.2)
-#&gt;  REDCapR     * 0.11.1.9004 2021-03-09 [1] local         
+#&gt;  REDCapR     * 0.11.1.9004 2021-04-13 [1] local         
 #&gt;  rlang         0.4.10      2020-12-30 [1] CRAN (R 4.0.2)
 #&gt;  rmarkdown     2.7         2021-02-19 [1] CRAN (R 4.0.2)
 #&gt;  rprojroot     2.0.2       2020-11-15 [1] CRAN (R 4.0.2)
 #&gt;  rstudioapi    0.13        2020-11-12 [1] CRAN (R 4.0.2)
-#&gt;  rvest         0.3.6       2020-07-25 [1] CRAN (R 4.0.2)
+#&gt;  rvest         1.0.0       2021-03-09 [1] CRAN (R 4.0.2)
 #&gt;  scales        1.1.1       2020-05-11 [1] CRAN (R 4.0.2)
 #&gt;  sessioninfo   1.1.1       2018-11-05 [1] CRAN (R 4.0.2)
 #&gt;  stringi       1.5.3       2020-09-09 [1] CRAN (R 4.0.2)
 #&gt;  stringr       1.4.0       2019-02-10 [1] CRAN (R 4.0.2)
 #&gt;  svglite       2.0.0       2021-02-20 [1] CRAN (R 4.0.2)
 #&gt;  systemfonts   1.0.1       2021-02-09 [1] CRAN (R 4.0.2)
-#&gt;  textshaping   0.3.1       2021-02-22 [1] CRAN (R 4.0.2)
+#&gt;  textshaping   0.3.3       2021-03-16 [1] CRAN (R 4.0.2)
 #&gt;  tibble        3.1.0       2021-02-25 [1] CRAN (R 4.0.2)
 #&gt;  tidyr         1.1.3       2021-03-03 [1] CRAN (R 4.0.2)
 #&gt;  tidyselect    1.1.0       2020-05-11 [1] CRAN (R 4.0.2)
-#&gt;  utf8          1.1.4       2018-05-24 [1] CRAN (R 4.0.2)
-#&gt;  vctrs         0.3.6       2020-12-17 [1] CRAN (R 4.0.2)
-#&gt;  viridisLite   0.3.0       2018-02-01 [1] CRAN (R 4.0.1)
+#&gt;  utf8          1.2.1       2021-03-12 [1] CRAN (R 4.0.2)
+#&gt;  vctrs         0.3.7       2021-03-29 [1] CRAN (R 4.0.2)
+#&gt;  viridisLite   0.4.0       2021-04-13 [1] CRAN (R 4.0.5)
 #&gt;  webshot       0.5.2       2019-11-22 [1] CRAN (R 4.0.2)
 #&gt;  withr         2.4.1       2021-01-26 [1] CRAN (R 4.0.2)
-#&gt;  xfun          0.21        2021-02-10 [1] CRAN (R 4.0.2)
+#&gt;  xfun          0.22        2021-03-11 [1] CRAN (R 4.0.2)
 #&gt;  xml2          1.3.2       2020-04-23 [1] CRAN (R 4.0.2)
 #&gt;  yaml          2.2.1       2020-02-01 [1] CRAN (R 4.0.2)
 #&gt; 
 #&gt; [1] /Users/runner/work/_temp/Library
 #&gt; [2] /Library/Frameworks/R.framework/Versions/4.0/Resources/library</code></pre>
-</details><p>Report rendered by runner at 2021-03-09, 08:40 +0000 in 4 seconds.</p>
+</details><p>Report rendered by runner at 2021-04-13, 23:33 +0000 in 4 seconds.</p>
 </div>
   </div>
 
