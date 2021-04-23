@@ -7,6 +7,7 @@
 redcap_metadata_read(
   redcap_uri,
   token,
+  format = "csv",
   forms = NULL,
   forms_collapsed = "",
   fields = NULL,
@@ -21,6 +22,8 @@ project.  Required.}
 
 \item{token}{The user-specific string that serves as the password for a
 project.  Required.}
+
+\item{format}{Format to download the metadata in. The default is "csv".}
 
 \item{forms}{An array, where each element corresponds to the REDCap form
 of the desired fields.  Optional.}
