@@ -19,6 +19,7 @@
 #' project.  Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
+#' @param format Format to download the metadata in. The default is "csv".
 #' @param records An array, where each element corresponds to the ID of a
 #' desired record.  Optional.
 #' @param records_collapsed A single string, where the desired ID values are
@@ -173,6 +174,7 @@ redcap_read <- function(
   continue_on_error             = FALSE,
   redcap_uri,
   token,
+  format                        = "csv",
   records                       = NULL, records_collapsed = "",
   fields                        = NULL, fields_collapsed  = "",
   forms                         = NULL, forms_collapsed   = "",
@@ -242,7 +244,8 @@ redcap_read <- function(
     redcap_uri         = redcap_uri,
     token              = token,
     verbose            = verbose,
-    config_options     = config_options
+    config_options     = config_options,
+    format             = format
   )
 
   # if (!metadata$success) {

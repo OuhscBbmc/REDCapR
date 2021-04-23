@@ -8,6 +8,7 @@
 #' project.  Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
+#' @param format Format to download the metadata in. The default is "csv".
 #' @param forms An array, where each element corresponds to the REDCap form
 #' of the desired fields.  Optional.
 #' @param forms_collapsed A single string, where the desired forms are
@@ -71,6 +72,7 @@
 redcap_metadata_read <- function(
   redcap_uri,
   token,
+  format            = "csv",
   forms             = NULL,
   forms_collapsed   = "",
   fields            = NULL,
@@ -95,7 +97,7 @@ redcap_metadata_read <- function(
   post_body <- list(
     token    = token,
     content  = "metadata",
-    format   = "csv",
+    format   = format,
     forms    = forms_collapsed,
     fields   = fields_collapsed
   )
@@ -112,11 +114,17 @@ redcap_metadata_read <- function(
 
     try(
       # Convert the raw text to a dataset.
-      ds <-
-        readr::read_csv(
-          kernel$raw_text,
-          col_types = col_types
-        ),
+      if (format == "csv") {
+        ds <-
+          readr::read_csv(
+            kernel$raw_text,
+            col_types = col_types
+          )
+      } else if (format == "json") {
+          json_df <- jsonlite::fromJSON(kernel$raw_text)
+          json_tibble <- tibble::as_tibble(json_df)
+          ds <- dplyr::mutate_all(json_tibble, ~ dplyr::na_if(.x, ""))
+      },
       # Don't print the warning in the try block.  Print it below,
       #   where it's under the control of the caller.
       silent = TRUE
