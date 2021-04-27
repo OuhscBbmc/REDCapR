@@ -1,56 +1,32 @@
-requireNamespace("RODBC")
-requireNamespace("RODBCext")
-
 retrieve_credential_mssql2 <- function(
   dsn = "BbmcSecurity",
   instance = "bbmc",
-  project_id = 404,
-  channel = NULL,
-  schema_name = "[redcap]",
-  procedure_name = "[prc_credential]",
-  variable_name_project = "@RedcapProjectName",
-  field_name_token = "Token"
+  project_id = 404
   ) {
 
-
-  # sql <- base::sprintf("EXEC %s.%s %s = '%s'", schema_name, procedure_name, variable_name_project, project_name)
-  #sql <- "EXEC [redcap].[prc_credential] @project_id = ?, @instance = ?"
   sql <- "EXEC [redcap].[prc_credential] @project_id = ?, @instance = ?"
-  # sql <- "EXEC [Redcap].[prc_credential] @project_id = 302, @instance = 'bbmc'
-  # , schema_name, procedure_name, variable_name_project, project_name)
+  input <- list(project_id = project_id, instance = instance)
+  # sql <- "EXEC [redcap].[prc_credential] @project_id = ?, @instance = 'bbmc'"
+  # input <- list(project_id = project_id)
+  # sql <- "EXEC [redcap].[prc_credential] @project_id = 404, @instance = 'bbmc'"
+  # input <- list(project_id)
+  channel <- DBI::dbConnect(odbc::odbc(), dsn = dsn)
+browser()
 
-  if( base::missing(channel) | base::is.null(channel) ) {
-    #channel <- RODBC::odbcConnect(dsn=dsn)
-    channel <- DBI::dbConnect(odbc::odbc(), dsn=dsn)
-    close_channel_on_exit <- TRUE
-  } else {
-    close_channel_on_exit <- FALSE
-  }
-
-  # d_input <- data.frame(
-  #   project_id         = project_id,
-  #   instance           = instance,
-  #   stringsAsFactors   = FALSE
-  # )
-
-  input <- list(
-    project_id         = project_id,
-    instance           = instance
-  )
 
 
   base::tryCatch(
     expr = {
-      # d_credential <- RODBCext::sqlExecute(channel, sql, d_input, fetch=TRUE, stringsAsFactors=FALSE)
-      result <- DBI::dbSendQuery(channel, sql)
-      DBI::dbBind(result, input)
-      d_credential <- DBI::dbFetch(result)
-      DBI::dbClearResult(result)
+      # d_credential  <- DBI::dbGetQuery(conn = channel, statement = sql, params = input, n = 1L)
 
+
+      result        <- DBI::dbSendQuery(channel, sql)
+      DBI::dbBind(result, input)
+      # d_credential  <- DBI::dbFetch(result)
+      d_credential  <- DBI::dbFetch(result, n = 1L)
     }, finally = {
-      if( close_channel_on_exit )
-        #RODBC::odbcClose(channel)
-        DBI::dbDisconnect(channel);
+      if (!is.null(result))      DBI::dbClearResult(result)
+      DBI::dbDisconnect(channel)
     }
   )
 
