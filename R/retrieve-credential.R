@@ -238,11 +238,12 @@ retrieve_credential_mssql <- function(
 
   base::tryCatch(
     expr = {
-      result        <- DBI::dbSendQuery(channel, sql)
-      DBI::dbBind(result, input)
-      d_credential  <- DBI::dbFetch(result)
+      d_credential  <- DBI::dbGetQuery(channel, sql, params = input)
+      # result        <- DBI::dbSendQuery(channel, sql)
+      # DBI::dbBind(result, input)
+      # d_credential  <- DBI::dbFetch(result, n = 1L)
     }, finally = {
-      if (!is.null(result))      DBI::dbClearResult(result)
+      # if (!is.null(result))      DBI::dbClearResult(result)
       if (close_channel_on_exit) DBI::dbDisconnect(channel)
     }
   )
