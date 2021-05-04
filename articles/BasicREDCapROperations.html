@@ -90,7 +90,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Basic REDCapR Operations</h1>
             
-            <h4 class="date">2021-04-13</h4>
+            <h4 class="date">2021-05-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/BasicREDCapROperations.Rmd"><code>vignettes/BasicREDCapROperations.Rmd</code></a></small>
       <div class="hidden name"><code>BasicREDCapROperations.Rmd</code></div>
@@ -121,11 +121,11 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Return all records and all variables.</span>
 <span class="va">ds_all_rows_all_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2021-04-13 23:33:29.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2021-05-04 18:34:01.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
 ── Column specification ────────────────────────────────────────────────────────
 cols(
@@ -192,11 +192,11 @@ cols(
   token      <span class="op">=</span> <span class="va">token</span>,
   records    <span class="op">=</span> <span class="va">desired_records_v1</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2021-04-13 23:33:31.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2021-05-04 18:34:02.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
-<pre><code>2 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
 ── Column specification ────────────────────────────────────────────────────────
 cols(
@@ -220,10 +220,10 @@ cols(
   records_collapsed <span class="op">=</span> <span class="va">desired_records_v2</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2021-04-13 23:33:32.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2021-05-04 18:34:04.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
-<pre><code>2 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
 ── Column specification ────────────────────────────────────────────────────────
 cols(
@@ -268,11 +268,11 @@ cols(
   token      <span class="op">=</span> <span class="va">token</span>,
   fields     <span class="op">=</span> <span class="va">desired_fields_v1</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2021-04-13 23:33:34.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2021-05-04 18:34:05.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
 ── Column specification ────────────────────────────────────────────────────────
 cols(
@@ -289,8 +289,8 @@ cols(
   fields_collapsed <span class="op">=</span> <span class="va">desired_fields_v2</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2021-04-13 23:33:35.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2021-05-04 18:34:07.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -322,11 +322,11 @@ cols(
   token      <span class="op">=</span> <span class="va">token</span>,
   fields     <span class="op">=</span> <span class="va">desired_fields_v3</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.8 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2021-04-13 23:33:37.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2021-05-04 18:34:08.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
 ── Column specification ────────────────────────────────────────────────────────
 cols(
@@ -361,10 +361,10 @@ cols(
   records    <span class="op">=</span> <span class="va">desired_records_v3</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2021-04-13 23:33:38.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2021-05-04 18:34:10.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).</code></pre>
-<pre><code>2 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
 ── Column specification ────────────────────────────────────────────────────────
 cols(
@@ -420,9 +420,9 @@ cols(
   token      <span class="op">=</span> <span class="va">token</span>,
   fields     <span class="op">=</span> <span class="va">desired_fields_v1</span>
 <span class="op">)</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2021-04-13 23:33:40.</code></pre>
+<pre><code>Starting to read 5 records  at 2021-05-04 18:34:11.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -473,7 +473,7 @@ $datetime_range_end
 [1] NA
 
 $elapsed_seconds
-[1] 1.347004</code></pre>
+[1] 1.430225</code></pre>
 </div>
 </div>
 <div id="session-information" class="section level1">
@@ -491,21 +491,21 @@ $elapsed_seconds
  collate  en_US.UTF-8                 
  ctype    en_US.UTF-8                 
  tz       UTC                         
- date     2021-04-13                  
+ date     2021-05-04                  
 
 ─ Packages ───────────────────────────────────────────────────────────────────
  package     * version     date       lib source        
  backports     1.2.1       2020-12-09 [1] CRAN (R 4.0.2)
  cachem        1.0.4       2021-02-13 [1] CRAN (R 4.0.2)
  checkmate     2.0.0       2020-02-06 [1] CRAN (R 4.0.2)
- cli           2.4.0       2021-04-05 [1] CRAN (R 4.0.2)
- colorspace    2.0-0       2020-11-11 [1] CRAN (R 4.0.2)
+ cli           2.5.0       2021-04-26 [1] CRAN (R 4.0.2)
+ colorspace    2.0-1       2021-05-04 [1] CRAN (R 4.0.5)
  crayon        1.4.1       2021-02-08 [1] CRAN (R 4.0.2)
- curl          4.3         2019-12-02 [1] CRAN (R 4.0.1)
+ curl          4.3.1       2021-04-30 [1] CRAN (R 4.0.2)
  desc          1.3.0       2021-03-05 [1] CRAN (R 4.0.2)
  digest        0.6.27      2020-10-24 [1] CRAN (R 4.0.2)
  dplyr         1.0.5       2021-03-05 [1] CRAN (R 4.0.2)
- ellipsis      0.3.1       2020-05-15 [1] CRAN (R 4.0.2)
+ ellipsis      0.3.2       2021-04-29 [1] CRAN (R 4.0.2)
  evaluate      0.14        2019-05-28 [1] CRAN (R 4.0.1)
  fansi         0.4.2       2021-01-15 [1] CRAN (R 4.0.2)
  fastmap       1.1.0       2021-01-25 [1] CRAN (R 4.0.2)
@@ -516,12 +516,12 @@ $elapsed_seconds
  htmltools     0.5.1.1     2021-01-22 [1] CRAN (R 4.0.2)
  httr          1.4.2       2020-07-20 [1] CRAN (R 4.0.2)
  kableExtra    1.3.4       2021-02-20 [1] CRAN (R 4.0.2)
- knitr       * 1.31        2021-01-27 [1] CRAN (R 4.0.2)
+ knitr       * 1.33        2021-04-24 [1] CRAN (R 4.0.2)
  lifecycle     1.0.0       2021-02-15 [1] CRAN (R 4.0.2)
  magrittr    * 2.0.1       2020-11-17 [1] CRAN (R 4.0.2)
  memoise       2.0.0       2021-01-26 [1] CRAN (R 4.0.2)
  munsell       0.5.0       2018-06-12 [1] CRAN (R 4.0.2)
- pillar        1.6.0       2021-04-13 [1] CRAN (R 4.0.5)
+ pillar        1.6.0       2021-04-13 [1] CRAN (R 4.0.2)
  pkgconfig     2.0.3       2019-09-22 [1] CRAN (R 4.0.2)
  pkgdown       1.6.1       2020-09-12 [1] CRAN (R 4.0.2)
  ps            1.6.0       2021-02-28 [1] CRAN (R 4.0.2)
@@ -529,8 +529,8 @@ $elapsed_seconds
  R6            2.5.0       2020-10-28 [1] CRAN (R 4.0.2)
  ragg          1.1.2       2021-03-17 [1] CRAN (R 4.0.2)
  readr         1.4.0       2020-10-05 [1] CRAN (R 4.0.2)
- REDCapR     * 0.11.1.9004 2021-04-13 [1] local         
- rlang         0.4.10      2020-12-30 [1] CRAN (R 4.0.2)
+ REDCapR     * 0.11.1.9004 2021-05-04 [1] local         
+ rlang         0.4.11      2021-04-30 [1] CRAN (R 4.0.2)
  rmarkdown     2.7         2021-02-19 [1] CRAN (R 4.0.2)
  rprojroot     2.0.2       2020-11-15 [1] CRAN (R 4.0.2)
  rstudioapi    0.13        2020-11-12 [1] CRAN (R 4.0.2)
@@ -542,20 +542,20 @@ $elapsed_seconds
  svglite       2.0.0       2021-02-20 [1] CRAN (R 4.0.2)
  systemfonts   1.0.1       2021-02-09 [1] CRAN (R 4.0.2)
  textshaping   0.3.3       2021-03-16 [1] CRAN (R 4.0.2)
- tibble        3.1.0       2021-02-25 [1] CRAN (R 4.0.2)
- tidyselect    1.1.0       2020-05-11 [1] CRAN (R 4.0.2)
+ tibble        3.1.1       2021-04-18 [1] CRAN (R 4.0.2)
+ tidyselect    1.1.1       2021-04-30 [1] CRAN (R 4.0.2)
  utf8          1.2.1       2021-03-12 [1] CRAN (R 4.0.2)
- vctrs         0.3.7       2021-03-29 [1] CRAN (R 4.0.2)
- viridisLite   0.4.0       2021-04-13 [1] CRAN (R 4.0.5)
+ vctrs         0.3.8       2021-04-29 [1] CRAN (R 4.0.2)
+ viridisLite   0.4.0       2021-04-13 [1] CRAN (R 4.0.2)
  webshot       0.5.2       2019-11-22 [1] CRAN (R 4.0.2)
- withr         2.4.1       2021-01-26 [1] CRAN (R 4.0.2)
+ withr         2.4.2       2021-04-18 [1] CRAN (R 4.0.2)
  xfun          0.22        2021-03-11 [1] CRAN (R 4.0.2)
  xml2          1.3.2       2020-04-23 [1] CRAN (R 4.0.2)
  yaml          2.2.1       2020-02-01 [1] CRAN (R 4.0.2)
 
 [1] /Users/runner/work/_temp/Library
 [2] /Library/Frameworks/R.framework/Versions/4.0/Resources/library</code></pre>
-</details><p>Report rendered by runner at 2021-04-13, 23:33 +0000 in 14 seconds.</p>
+</details><p>Report rendered by runner at 2021-05-04, 18:34 +0000 in 13 seconds.</p>
 </div>
   </div>
 
