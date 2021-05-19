@@ -7,6 +7,9 @@
 #' project.  Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
+#' @param meta_data_file File path of the metadata file. If it does not exist,
+#' the file is downloaded using the API and saved at the specified file path.
+#' The default is "data/data-dictionary.csv".
 #' @param records An array, where each element corresponds to the ID of a
 #' desired record.  Optional.
 #' @param records_collapsed A single string, where the desired ID values
@@ -135,6 +138,7 @@
 redcap_read_oneshot_eav <- function(
   redcap_uri,
   token,
+  meta_data_file                = "data/data-dictionary.csv",
   records                       = NULL,
   records_collapsed             = "",
   fields                        = NULL,
@@ -237,6 +241,7 @@ redcap_read_oneshot_eav <- function(
     REDCapR::redcap_metadata_read(
       redcap_uri,
       token,
+      meta_data_file = meta_data_file,
       forms_collapsed = forms_collapsed
     )$data
   ds_variable <- REDCapR::redcap_variables(redcap_uri, token)$data
