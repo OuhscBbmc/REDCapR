@@ -7,7 +7,8 @@
 redcap_metadata_read(
   redcap_uri,
   token,
-  format = "csv",
+  format = "json",
+  meta_data_file = fs::path("data", "data-dictionary.csv"),
   forms = NULL,
   forms_collapsed = "",
   fields = NULL,
@@ -23,7 +24,11 @@ project.  Required.}
 \item{token}{The user-specific string that serves as the password for a
 project.  Required.}
 
-\item{format}{Format to download the metadata in. The default is "csv".}
+\item{format}{Format to download the metadata in. The default is "json".}
+
+\item{meta_data_file}{File path of the metadata file. If it does not exist,
+the file is downloaded using the API and saved at the specified file path.
+The default is "data/data-dictionary.csv".}
 
 \item{forms}{An array, where each element corresponds to the REDCap form
 of the desired fields.  Optional.}

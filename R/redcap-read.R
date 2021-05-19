@@ -32,8 +32,6 @@
 #' separated by commas.  Optional.
 #' @param forms An array, where each element corresponds to a desired project
 #' form.  Optional.
-#' @param forms_collapsed A single string, where the desired form names are
-#' separated by commas.  Optional.
 #' @param events An array, where each element corresponds to a desired project
 #' event.  Optional.
 #' @param events_collapsed A single string, where the desired event names are
@@ -179,7 +177,7 @@ redcap_read <- function(
   meta_data_file                = "data/data-dictionary.csv",
   records                       = NULL, records_collapsed = "",
   fields                        = NULL, fields_collapsed  = "",
-  forms                         = NULL, forms_collapsed   = "",
+  forms                         = NULL,
   events                        = NULL, events_collapsed  = "",
   raw_or_label                  = "raw",
   raw_or_label_headers          = "raw",
@@ -206,7 +204,6 @@ redcap_read <- function(
   checkmate::assert_character(fields                    , any.missing=TRUE , min.len=1, pattern="^.{1,}$", null.ok=TRUE)
   checkmate::assert_character(fields_collapsed          , any.missing=TRUE ,     len=1, pattern="^.{0,}$", null.ok=TRUE)
   checkmate::assert_character(forms                     , any.missing=TRUE , min.len=1, pattern="^.{1,}$", null.ok=TRUE)
-  checkmate::assert_character(forms_collapsed           , any.missing=TRUE ,     len=1, pattern="^.{0,}$", null.ok=TRUE)
   checkmate::assert_character(events                    , any.missing=TRUE , min.len=1, pattern="^.{1,}$", null.ok=TRUE)
   checkmate::assert_character(events_collapsed          , any.missing=TRUE ,     len=1, pattern="^.{0,}$", null.ok=TRUE)
   checkmate::assert_character(raw_or_label              , any.missing=FALSE,     len=1)
@@ -230,25 +227,31 @@ redcap_read <- function(
   validate_field_names(fields, stop_on_error = TRUE)
 
   token               <- sanitize_token(token)
-  records_collapsed   <- collapse_vector(records  , records_collapsed)
-  fields_collapsed    <- collapse_vector(fields   , fields_collapsed)
-  forms_collapsed     <- collapse_vector(forms    , forms_collapsed)
-  events_collapsed    <- collapse_vector(events   , events_collapsed)
-  filter_logic        <- filter_logic_prepare(filter_logic)
-  verbose             <- verbose_prepare(verbose)
-
-  if (1L <= nchar(fields_collapsed) )
-    validate_field_names_collapsed(fields_collapsed, stop_on_error = TRUE)
 
   start_time <- Sys.time()
 
   metadata <- REDCapR::redcap_metadata_read(
     redcap_uri         = redcap_uri,
     token              = token,
+    meta_data_file     = meta_data_file,
     verbose            = verbose,
-    config_options     = config_options,
-    format             = format
+    config_options     = config_options
   )
+
+  fields_from_forms <- metadata$data %>%
+    dplyr::filter(form_name %in% forms) %>%
+    dplyr::pull(field_name)
+  fields <- c(fields, fields_from_forms)
+  fields
+
+  records_collapsed   <- collapse_vector(records  , records_collapsed)
+  fields_collapsed    <- collapse_vector(fields   , fields_collapsed)
+  events_collapsed    <- collapse_vector(events   , events_collapsed)
+  filter_logic        <- filter_logic_prepare(filter_logic)
+  verbose             <- verbose_prepare(verbose)
+
+  if (1L <= nchar(fields_collapsed) )
+    validate_field_names_collapsed(fields_collapsed, stop_on_error = TRUE)
 
   # if (!metadata$success) {
   #   error_message     <- sprintf(
@@ -263,7 +266,6 @@ redcap_read <- function(
     token              = token,
     records_collapsed  = records_collapsed,
     fields_collapsed   = metadata$data$field_name[id_position],
-    forms_collapsed    = forms_collapsed,
     events_collapsed   = events_collapsed,
     filter_logic       = filter_logic,
     datetime_range_begin   = datetime_range_begin,
@@ -281,7 +283,6 @@ redcap_read <- function(
       data                  = data.frame(),
       records_collapsed     = "failed in initial batch call",
       fields_collapsed      = "failed in initial batch call",
-      forms_collapsed       = "failed in initial batch call",
       events_collapsed      = "failed in initial batch call",
       filter_logic          = "failed in initial batch call",
       datetime_range_begin  = "failed in initial batch call",
@@ -325,7 +326,6 @@ redcap_read <- function(
       records                     = selected_ids,
       fields_collapsed            = fields_collapsed,
       events_collapsed            = events_collapsed,
-      forms_collapsed             = forms_collapsed,
       raw_or_label                = raw_or_label,
       raw_or_label_headers        = raw_or_label_headers,
       export_checkbox_label       = export_checkbox_label,
@@ -392,7 +392,6 @@ redcap_read <- function(
     # data_types          = data_types,
     records_collapsed   = records_collapsed,
     fields_collapsed    = fields_collapsed,
-    forms_collapsed     = forms_collapsed,
     events_collapsed    = events_collapsed,
     filter_logic        = filter_logic,
     datetime_range_begin= datetime_range_begin,
