@@ -19,6 +19,7 @@
 #' project.  Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
+#' @param format Format to download the metadata in. The default is "csv".
 #' @param meta_data_file File path of the metadata file. If it does not exist,
 #' the file is downloaded using the API and saved at the specified file path.
 #' The default is "data/data-dictionary.csv".
@@ -174,6 +175,7 @@ redcap_read <- function(
   continue_on_error             = FALSE,
   redcap_uri,
   token,
+  format                        = "csv",
   meta_data_file                = "data/data-dictionary.csv",
   records                       = NULL, records_collapsed = "",
   fields                        = NULL, fields_collapsed  = "",
@@ -233,6 +235,7 @@ redcap_read <- function(
   metadata <- REDCapR::redcap_metadata_read(
     redcap_uri         = redcap_uri,
     token              = token,
+    format             = format,
     meta_data_file     = meta_data_file,
     verbose            = verbose,
     config_options     = config_options
