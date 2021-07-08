@@ -1,0 +1,105 @@
+---
+title: "Typical REDCap Workflow for a Data Analyst"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Typical REDCap Workflow for a Data Analyst}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  tidy    = FALSE
+)
+```
+
+```{r setup}
+library(REDCapR)
+```
+
+Pre-requisites
+===================================
+
+Verify REDCapR is installed
+-------------------------
+
+First confirm that the REDCapR package is installed on your local machine.
+```{r pre-req}
+requireNamespace("REDCapR")
+```
+
+If this call fails, follow the installation instructions on the [REDCapR](https://ouhscbbmc.github.io/REDCapR) webpage.
+
+
+Verify REDCap Access
+-------------------------
+
+Talk to your institution's REDCap administrator to ensure you have
+
+* access to the REDCap server
+* access to the specific REDCap project
+* an API token with appropriate privileges ot the specific REDCap project.
+
+Review Codebook
+-------------------------
+
+Before developing any REDCap or analysis code, take 10+ minutes to discuss the project with the investigator and to read the codebook.  The link to open codebook is near the top left corner, under the "Project Home and Design" banner.  Spending time to learn the details and context of the dataset will save you time later and improve the quality of the research.
+
+
+Retrieve Protected Token
+===================================
+
+The REDCap API token is essentially a combination of your personal password and the ID of the specific project you're requesting data from.  Protect it like any other password to a [PHI](https://www.hhs.gov/answers/hipaa/what-is-phi/index.html) dataset.  Never hard-code the password directly in an R file (unless it is a demonstration REDCap project that does not have PHI).
+
+Instead, we suggest storing the token in a location that can be accessed only by you.  We have two recommendations.
+
+Security Method 1: Token File
+-------------------------
+
+The basic goals are (a) separate the secret values from the R file into a dedicated file and (b) secure the dedicated file.
+
+The [`retrieve_credential_local()`](https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html) function in the [REDCapR](https://ouhscbbmc.github.io/REDCapR) package reads relevant information from a csv and loads them into R.
+
+The plain-text file might look like this:
+
+
+```csv
+redcap_uri,username,project_id,token,comment
+"https://ou.edu/redcap/api/","myusername","153","9A81268476645C4E5F03428B8AC3AA7B","simple"
+"https://ou.edu/redcap/api/","myusername","212","0434F0E9CF53ED0587847AB6E51DE762","longitudinal"
+"https://ou.edu/redcap/api/","myusername","213","D70F9ACD1EDD6F151C6EA78683944E98","simple write data"
+```
+
+To retrieve the credentials for project 153
+
+```{r retrieve-credential}
+path_credential <- system.file("misc/example.credentials", package = "REDCapR")
+credential  <- REDCapR::retrieve_credential_local(
+  path_credential = path_credential, 
+  project_id      = 153L
+)
+
+credential
+```
+
+Security Method 2: Token Server
+-------------------------
+
+Our preferred method involves saving the tokens in a separate database that uses something like Active Directory to authenticate requests.  This method is described in detail in the [Security Database](https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html) vignette.  
+
+This approach realistically requires someone in your institution to have at least basic database administration experience. 
+
+Read Data: Unstructured Approach 
+===================================
+
+
+Read Data: Structured Approach 
+===================================
+
+
+Notes
+===================================
+
+This vignette was originally designed for a 2021 R/Medicine REDCap workshop with [Peter Higgins](https://research.medicine.umich.edu/department/staff/peter-higgins-md-phd), [Amanda Miller](https://coloradosph.cuanschutz.edu/resources/directory/directory-profile/Miller-Amanda-UCD6000053152), and [Kenneth McLean](https://twitter.com/kennethmclean92).
