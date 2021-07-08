@@ -51,7 +51,7 @@ Before developing any REDCap or analysis code, take 10+ minutes to discuss the p
 Retrieve Protected Token
 ===================================
 
-The REDCap API token is essentially a combination of your personal password and the ID of the specific project you're requesting data from.  Protect it like any other password to a [PHI](https://www.hhs.gov/answers/hipaa/what-is-phi/index.html) dataset.  Never hard-code the password directly in an R file (unless it is a demonstration REDCap project that does not have PHI).
+The REDCap API token is essentially a combination of your personal password and the ID of the specific project you're requesting data from.  Protect it like any other password to a PHI (protected health information](https://www.hhs.gov/answers/hipaa/what-is-phi/index.html)) dataset.  For a project with PHI, **never hard-code the password directly in an R file**.
 
 Instead, we suggest storing the token in a location that can be accessed only by you.  We have two recommendations.
 
@@ -72,17 +72,19 @@ redcap_uri,username,project_id,token,comment
 "https://ou.edu/redcap/api/","myusername","213","D70F9ACD1EDD6F151C6EA78683944E98","simple write data"
 ```
 
-To retrieve the credentials for project 153
+To retrieve the credentials for the first project listed above, pass the value of "153" to `project_id`.
 
 ```{r retrieve-credential}
 path_credential <- system.file("misc/example.credentials", package = "REDCapR")
 credential  <- REDCapR::retrieve_credential_local(
   path_credential = path_credential, 
-  project_id      = 153L
+  project_id      = 153
 )
 
 credential
 ```
+
+Compared to the method below, this one is less secure but easier to establish.
 
 Security Method 2: Token Server
 -------------------------
@@ -95,9 +97,41 @@ Read Data: Unstructured Approach
 ===================================
 
 
+```{r unstructured}
+ds_1 <- 
+  REDCapR::redcap_read(
+    redcap_uri  = credential$redcap_uri, 
+    token       = credential$token
+  )$data
+
+ds_1
+```
+
+Read Data: Choosing Columns and Rows
+===================================
+
+When you read a dataset for the first time, you probably haven't decided which columns are needed so it makes sense to retrieve them all.  As you gain familiarity with the data and with the analytic objectives consider being more selective with the variables and rows transported from the remote server to your local machine.  
+
+Performance advantages include:
+
+1. A server is almost always more efficient filtering than a language like R or Python.
+1. REDCap's PHP code retrieves less data from the database and translates less to a text format (like csv or json).
+1. Fewer bytes are transmitted across your network.
+1. Your local machine will have better performance, because R has a smaller dataset to manage.
+1. Your brain doesn't have to look past unnecessary columns.
+1. Your R code doesn't have filter what the server already removed.
+1. Highly-sensitive PHI columns that are unnecessary for an analysis remain on the server.
+
 Read Data: Structured Approach 
 ===================================
 
+
+
+Next Steps
+===================================
+
+Create an Arch for reuse
+-------------------------
 
 Notes
 ===================================
