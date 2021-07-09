@@ -24,6 +24,7 @@ articles:
     desc: >
       These vignettes provide an introduction to REDCapR.
     contents:
+      - workflow-read
       - BasicREDCapROperations
       - SecurityDatabase
       - TroubleshootingApiCalls
