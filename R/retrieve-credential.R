@@ -21,6 +21,14 @@
 #'   channel    = NULL
 #' )
 #'
+#' create_credential_local(
+#'   path_credential,
+#'   project_id,
+#'   check_url            = TRUE,
+#'   check_username       = FALSE,
+#'   check_token_pattern  = TRUE
+#' )
+#'
 #' @param path_credential The file path to the CSV containing the credentials.
 #'  Required.
 #' @param project_id The ID assigned to the project withing REDCap.  This
@@ -42,7 +50,8 @@
 #' @param channel An *optional* connection handle as returned by
 #' [DBI::dbConnect()].  See Details below. Optional.
 #'
-#' @return A list of the following elements:
+#' @return A list of the following elements are returned from
+#' `retrieve_credential_local()` and `retrieve_credential_mssql()`:
 #' * `redcap_uri`: The URI of the REDCap Server.
 #' * `username`: Username.
 #' * `project_id`: The ID assigned to the project withing REDCap.
@@ -135,8 +144,30 @@ retrieve_credential_local <- function(
     )
   }
 
+  credential_local_validation(
+    redcap_uri              = credential$redcap_uri,
+    token                   = credential$token,
+    username                = credential$username,
+    check_url               = check_url,
+    check_username          = check_username,
+    check_token_pattern     = check_token_pattern
+  )
+
+  credential
+}
+
+# Privately-scoped function
+credential_local_validation <- function (
+  redcap_uri,
+  token,
+  username,
+  check_url                = TRUE,
+  check_username           = FALSE,
+  check_token_pattern      = TRUE
+
+) {
   # Progress through the optional checks
-  if (check_url & !grepl("https://", credential$redcap_uri, perl = TRUE)) {
+  if (check_url & !grepl("https://", redcap_uri, perl = TRUE)) {
     error_message_username <- paste(
       "The REDCap URL does not reference an https address.  First check",
       "that the URL is correct, and then consider using SSL to encrypt",
@@ -145,7 +176,7 @@ retrieve_credential_local <- function(
     )
     stop(error_message_username)
 
-  } else if (check_username & (Sys.info()["user"] != credential$username)) {
+  } else if (check_username & (Sys.info()["user"] != username)) {
     error_message_username <- paste(
       "The username (according to R's `Sys.info()['user']` doesn't match the",
       "username in the credentials file.  This is a friendly check, and",
@@ -155,7 +186,7 @@ retrieve_credential_local <- function(
     )
     stop(error_message_username)
 
-  } else if (check_token_pattern & !grepl("[A-F0-9]{32}", credential$token, perl = TRUE)) {
+  } else if (check_token_pattern & !grepl("[A-F0-9]{32}", token, perl = TRUE)) {
     error_message_token <- paste(
       "A REDCap token should be a string of 32 digits and uppercase",
       "characters.  The retrieved value was not.",
@@ -164,8 +195,6 @@ retrieve_credential_local <- function(
     )
     stop(error_message_token)
   }
-
-  credential
 }
 
 #' @export
