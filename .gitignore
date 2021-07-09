@@ -9,9 +9,13 @@ doc
 
 # produced vignettes
 vignettes/*.html
+vignettes/*.R
 vignettes/*.pdf
 # README htmls in any folder
 README.html
 # The devtools zip is downloaded when the package is updating itself.  If it's not deleted, there's no reason to commit it to the repository.
 devtools.zip
 docs
+inst/doc
+/doc/
+/Meta/
