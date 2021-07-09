@@ -69,8 +69,6 @@ The basic goals are (a) separate the secret values from the R file into a dedica
 
 The [`retrieve_credential_local()`](https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html) function in the [REDCapR](https://ouhscbbmc.github.io/REDCapR) package loads relevant information from a csv into R.  The plain-text file might look like this:
 
- * TODO: create REDCapR function that creates a dummy csv
-
 ```csv
 redcap_uri,username,project_id,token,comment
 "https://ou.edu/redcap/api/","myusername",153,9A81268476645C4E5F03428B8AC3AA7B,"simple"
@@ -89,6 +87,8 @@ credential  <- REDCapR::retrieve_credential_local(
 
 credential
 ```
+
+A credential file is already created for this vignette.  In your next real project, call [`create_credential_local()`](https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html) to start a well-formed csv file that can contain tokens.
 
 Compared to the method below, this one is less secure but easier to establish.
 
