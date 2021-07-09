@@ -16,11 +16,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(REDCapR)
-```
 
-Pre-requisites
+Part 1 - Pre-requisites
 ===================================
 
 Verify REDCapR is installed
@@ -36,22 +33,32 @@ requireNamespace("REDCapR")
 Verify REDCap Access
 -------------------------
 
-Talk to your institution's REDCap administrator to ensure you have
+Check with your institution's REDCap administrator to ensure you have
 
-* access to the REDCap server,
-* access to the specific REDCap project, and
-* an API token with appropriate privileges ot the specific REDCap project.
+1. access to the REDCap server,
+1. access to the specific REDCap project, and
+1. an API token with appropriate privileges to the specific REDCap project.
+
+This might be the first time you've ever needed to request a token, and your institution may have a formal process for API approval.  Your REDCap admin help.
+
+For this vignette, we'll use a fake dataset hosted at "https://ou.edu/redcap/api/" and accessible with the token "9A81268476645C4E5F03428B8AC3AA7B".
 
 Review Codebook
 -------------------------
 
-Before developing any REDCap or analysis code, take 10+ minutes to discuss the project with the investigator and to read the codebook.  The codebook link is near the top left corner of the REDCap project page, under the "Project Home and Design" banner.  Learning the details and context of the dataset will save you time later and improve the quality of the research.
+Before developing any REDCap or analysis code, spend at least 10 minutes to review the codebook, whose link is near the top left corner of the REDCap project page, under the "Project Home and Design" heading.  Learning the details will save you time later and improve the quality of the research.
+
+If you're new to the project, meet with the investigator for at least 30 minutes to learn the context, collection process, and idiosyncrasies of the dataset.  During that conversation, develop a plan for grooming the dataset to be ready for analysis.  This is part of the standard advice that the analyst's involvement should start early in the investigation's life span.
 
 
-Retrieve Protected Token
+Part 2 - Retrieve Protected Token
 ===================================
 
-The REDCap API token is essentially a combination of a personal password and the ID of the specific project you're requesting data from.  Protect it like any other password to a PHI (protected health information](https://www.hhs.gov/answers/hipaa/what-is-phi/index.html)) dataset.  For a project with PHI, **never hard-code the password directly in an R file**.
+The REDCap API token is essentially a combination of a personal password and the ID of the specific project you're requesting data from.  Protect it like any other password to PHI ([protected health information](https://www.hhs.gov/answers/hipaa/what-is-phi/index.html)).  For a project with PHI, **never hard-code the password directly in an R file**.  In other words, no PHI project should be accessed with an R file that includes the line
+
+```r
+my_secret_token <- "9A81268476645C4E5F03428B8AC3AA7B"
+```
 
 Instead, we suggest storing the token in a location that can be accessed only by you.  We have two recommendations.
 
@@ -61,6 +68,8 @@ Security Method 1: Token File
 The basic goals are (a) separate the secret values from the R file into a dedicated file and (b) secure the dedicated file.  If using a git repository, prevent the file from being committed with an entry in  [`.gitignore`](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files).
 
 The [`retrieve_credential_local()`](https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html) function in the [REDCapR](https://ouhscbbmc.github.io/REDCapR) package loads relevant information from a csv into R.  The plain-text file might look like this:
+
+ * TODO: create REDCapR function that creates a dummy csv
 
 ```csv
 redcap_uri,username,project_id,token,comment
@@ -90,7 +99,7 @@ Our preferred method involves saving the tokens in a separate database that uses
 
 This approach realistically requires someone in your institution to have at least basic database administration experience. 
 
-Read Data: Unstructured Approach 
+Part 3 - Read Data: Unstructured Approach 
 ===================================
 
 The `redcap_uri` and `token` fields are the only required arguments of [`REDCapR::redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html); both are in the credential object created in the previous section.
@@ -115,7 +124,9 @@ hist(ds_1$weight)
 summary(ds_1)
 ```
 
-Read Data: Choosing Columns and Rows
+*Pause here in the workshop for a few minutes.  Raise hand if you're having trouble.*
+
+Part 4 - Read Data: Choosing Columns and Rows
 ===================================
 
 When you read a dataset for the first time, you probably haven't decided which columns are needed so it makes sense to retrieve everything.  As you gain familiarity with the data and with the analytic objectives, consider being more selective with the variables and rows transported from the remote server to your local machine.  
@@ -156,10 +167,10 @@ A more useful operation to limit rows is passing an expression to filter the rec
 ```{r choose-records-filter}
 # Return only records with a birth date after January 2003
 REDCapR::redcap_read(
-  redcap_uri  = credential$redcap_uri,
-  token       = credential$token,
-  filter      = "'2003-01-01' < [dob]",
-  verbose     = FALSE
+  redcap_uri    = credential$redcap_uri,
+  token         = credential$token,
+  filter_logic  = "'2003-01-01' < [dob]",
+  verbose       = FALSE
 )$data
 ```
 
@@ -180,7 +191,7 @@ REDCapR::redcap_read(
 )$data
 ```
 
-Read Data: Structured Approach 
+Part 5 - Read Data: Structured Approach 
 ===================================
 
 As the automation of your scripts matures and institutional resources depend on its output, its output should be stable.  One way to make it more predictable is to specify the column names *and* the column data types.  In the previous example, notice that R (specifically [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html)) made its best guess and reported it in the "Column specification" section.
@@ -234,7 +245,7 @@ REDCapR::redcap_read(
 ```
 
 
-Next Steps
+Part 6 - Next Steps
 ===================================
 
 Other REDCapR Resources
@@ -245,8 +256,8 @@ In addition to documentation [for each function](https://ouhscbbmc.github.io/RED
 Create an Arch for Reuse
 -------------------------
 
-When multiple R files use REDCapR call the same REDCap dataset, consider refactoring your scripts so that extraction code is written once, and called by the multiple analysis files.  This "arch" pattern is described in slides 9-16 of the [2014 REDCapCon presentation]( 
-https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/Publications/Presentation-2014-09-REDCapCon/LiterateProgrammingPatternsAndPracticesWithREDCap.pptx), "Literate Programming Patterns and Practices for Continuous Quality Improvement (CQI)".
+When multiple R files use REDCapR call the same REDCap dataset, consider refactoring your scripts so that extraction code is written once, and called by the multiple analysis files.  This "arch" pattern is described in slides 9-16 of the 2014 [REDCapCon](https://projectredcap.org/about/redcapcon/) presentation, [Literate Programming Patterns and Practices for Continuous Quality Improvement (CQI)]( 
+https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/Publications/Presentation-2014-09-REDCapCon/LiterateProgrammingPatternsAndPracticesWithREDCap.pptx).
 
 Batching
 -------------------------
@@ -257,4 +268,4 @@ Writing to the Server
 Notes
 ===================================
 
-This vignette was originally designed for a 2021 R/Medicine REDCap workshop with [Peter Higgins](https://research.medicine.umich.edu/department/staff/peter-higgins-md-phd), [Amanda Miller](https://coloradosph.cuanschutz.edu/resources/directory/directory-profile/Miller-Amanda-UCD6000053152), and [Kenneth McLean](https://twitter.com/kennethmclean92).
+This vignette was originally designed for a 2021 R/Medicine REDCap workshop with [Peter Higgins](http://www.med.umich.edu/higginslab/), [Amanda Miller](https://coloradosph.cuanschutz.edu/resources/directory/directory-profile/Miller-Amanda-UCD6000053152), and [Kenneth McLean](https://twitter.com/kennethmclean92).
