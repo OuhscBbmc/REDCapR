@@ -1,5 +1,6 @@
 ---
 title: "Typical REDCap Workflow for a Data Analyst"
+author: Will Beasley & Geneva Marshall, [Biomedical & Behavior Methodology Core](https://ouhsc.edu/bbmc/team/), OUHSC Pediatrics
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Typical REDCap Workflow for a Data Analyst}
@@ -25,12 +26,11 @@ Pre-requisites
 Verify REDCapR is installed
 -------------------------
 
-First confirm that the REDCapR package is installed on your local machine.
+First confirm that the REDCapR package is installed on your local machine.  If not, the following line will throw the error `Loading required namespace: REDCapR.  Failed with error: ‘there is no package called ‘REDCapR’’`.  If this call fails, follow the installation instructions on the [REDCapR](https://ouhscbbmc.github.io/REDCapR) webpage.
+
 ```{r pre-req}
 requireNamespace("REDCapR")
 ```
-
-If this call fails, follow the installation instructions on the [REDCapR](https://ouhscbbmc.github.io/REDCapR) webpage.
 
 
 Verify REDCap Access
@@ -38,38 +38,35 @@ Verify REDCap Access
 
 Talk to your institution's REDCap administrator to ensure you have
 
-* access to the REDCap server
-* access to the specific REDCap project
+* access to the REDCap server,
+* access to the specific REDCap project, and
 * an API token with appropriate privileges ot the specific REDCap project.
 
 Review Codebook
 -------------------------
 
-Before developing any REDCap or analysis code, take 10+ minutes to discuss the project with the investigator and to read the codebook.  The link to open codebook is near the top left corner, under the "Project Home and Design" banner.  Spending time to learn the details and context of the dataset will save you time later and improve the quality of the research.
+Before developing any REDCap or analysis code, take 10+ minutes to discuss the project with the investigator and to read the codebook.  The codebook link is near the top left corner of the REDCap project page, under the "Project Home and Design" banner.  Learning the details and context of the dataset will save you time later and improve the quality of the research.
 
 
 Retrieve Protected Token
 ===================================
 
-The REDCap API token is essentially a combination of your personal password and the ID of the specific project you're requesting data from.  Protect it like any other password to a PHI (protected health information](https://www.hhs.gov/answers/hipaa/what-is-phi/index.html)) dataset.  For a project with PHI, **never hard-code the password directly in an R file**.
+The REDCap API token is essentially a combination of a personal password and the ID of the specific project you're requesting data from.  Protect it like any other password to a PHI (protected health information](https://www.hhs.gov/answers/hipaa/what-is-phi/index.html)) dataset.  For a project with PHI, **never hard-code the password directly in an R file**.
 
 Instead, we suggest storing the token in a location that can be accessed only by you.  We have two recommendations.
 
 Security Method 1: Token File
 -------------------------
 
-The basic goals are (a) separate the secret values from the R file into a dedicated file and (b) secure the dedicated file.
+The basic goals are (a) separate the secret values from the R file into a dedicated file and (b) secure the dedicated file.  If using a git repository, prevent the file from being committed with an entry in  [`.gitignore`](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files).
 
-The [`retrieve_credential_local()`](https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html) function in the [REDCapR](https://ouhscbbmc.github.io/REDCapR) package reads relevant information from a csv and loads them into R.
-
-The plain-text file might look like this:
-
+The [`retrieve_credential_local()`](https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html) function in the [REDCapR](https://ouhscbbmc.github.io/REDCapR) package loads relevant information from a csv into R.  The plain-text file might look like this:
 
 ```csv
 redcap_uri,username,project_id,token,comment
-"https://ou.edu/redcap/api/","myusername","153","9A81268476645C4E5F03428B8AC3AA7B","simple"
-"https://ou.edu/redcap/api/","myusername","212","0434F0E9CF53ED0587847AB6E51DE762","longitudinal"
-"https://ou.edu/redcap/api/","myusername","213","D70F9ACD1EDD6F151C6EA78683944E98","simple write data"
+"https://ou.edu/redcap/api/","myusername",153,9A81268476645C4E5F03428B8AC3AA7B,"simple"
+"https://ou.edu/redcap/api/","myusername",212,0434F0E9CF53ED0587847AB6E51DE762,"longitudinal"
+"https://ou.edu/redcap/api/","myusername",213,D70F9ACD1EDD6F151C6EA78683944E98,"write data"
 ```
 
 To retrieve the credentials for the first project listed above, pass the value of "153" to `project_id`.
@@ -96,41 +93,165 @@ This approach realistically requires someone in your institution to have at leas
 Read Data: Unstructured Approach 
 ===================================
 
+The `redcap_uri` and `token` fields are the only required arguments of [`REDCapR::redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html); both are in the credential object created in the previous section.
 
-```{r unstructured}
+
+```{r unstructured-1}
 ds_1 <- 
   REDCapR::redcap_read(
     redcap_uri  = credential$redcap_uri, 
     token       = credential$token
   )$data
+```
 
+
+At this point, the data.frame `ds_1` has everything you need to start analyzing the project.
+
+```{r unstructured-2}
 ds_1
+
+hist(ds_1$weight)
+
+summary(ds_1)
 ```
 
 Read Data: Choosing Columns and Rows
 ===================================
 
-When you read a dataset for the first time, you probably haven't decided which columns are needed so it makes sense to retrieve them all.  As you gain familiarity with the data and with the analytic objectives consider being more selective with the variables and rows transported from the remote server to your local machine.  
+When you read a dataset for the first time, you probably haven't decided which columns are needed so it makes sense to retrieve everything.  As you gain familiarity with the data and with the analytic objectives, consider being more selective with the variables and rows transported from the remote server to your local machine.  
 
-Performance advantages include:
+Advantages include:
 
 1. A server is almost always more efficient filtering than a language like R or Python.
-1. REDCap's PHP code retrieves less data from the database and translates less to a text format (like csv or json).
+1. REDCap's PHP code retrieves less data from REDCap's database and translates less to a text format (like csv or json).
 1. Fewer bytes are transmitted across your network.
 1. Your local machine will have better performance, because R has a smaller dataset to manage.
 1. Your brain doesn't have to look past unnecessary columns.
 1. Your R code doesn't have filter what the server already removed.
 1. Highly-sensitive PHI columns that are unnecessary for an analysis remain on the server.
 
+
+Specify Record IDs
+-------------------------
+
+The most basic operation to limit rows is passing the exact record identifiers.
+
+```{r choose-records}
+# Return only records with IDs of 1 and 4
+desired_records <- c(1, 4)
+REDCapR::redcap_read(
+  redcap_uri  = credential$redcap_uri,
+  token       = credential$token,
+  records     = desired_records,
+  verbose     = FALSE
+)$data
+```
+
+
+Specify Row Filter
+-------------------------
+
+A more useful operation to limit rows is passing an expression to filter the records before returning.  See your server's documentation for the syntax rules of the filter statements.  Remember to enclose your variable names in square brackets.
+
+```{r choose-records-filter}
+# Return only records with a birth date after January 2003
+REDCapR::redcap_read(
+  redcap_uri  = credential$redcap_uri,
+  token       = credential$token,
+  filter      = "'2003-01-01' < [dob]",
+  verbose     = FALSE
+)$data
+```
+
+
+Specify Column Names
+-------------------------
+
+Limit the returned fields by passing a vector of the desired names.
+
+```{r choose-fields}
+# Return only the fields record_id, name_first, and age
+desired_fields <- c("record_id", "name_first", "age")
+REDCapR::redcap_read(
+  redcap_uri  = credential$redcap_uri,
+  token       = credential$token,
+  fields      = desired_fields,
+  verbose     = FALSE
+)$data
+```
+
 Read Data: Structured Approach 
 ===================================
 
+As the automation of your scripts matures and institutional resources depend on its output, its output should be stable.  One way to make it more predictable is to specify the column names *and* the column data types.  In the previous example, notice that R (specifically [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html)) made its best guess and reported it in the "Column specification" section.
+
+In the following example, REDCapR passes `col_types` to [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html)) as it converts the plain-text output returned from REDCap into an R [`data.frame`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html). 
+
+When readr sees a column with values like 1, 2, 3, and 4, it will make the reasonable guess that the column should be a double precision floating-point data type.  However we [recommend using the simplest data type reasonable](https://ouhscbbmc.github.io/data-science-practices-1/coding.html#coding-simplify-types) because a simpler data type is less likely contain unintended values and it's typically faster, consumes less memory, and translates more cleanly across platforms.  As specifically for identifiers like `record_id` specify either an integer or character.
+
+
+Specify Column Names & Types
+-------------------------
+
+```{r col_types} 
+# Specify the column types.
+desired_fields <- c("record_id", "race")
+col_types <- readr::cols(
+  record_id  = readr::col_integer(),
+  race___1   = readr::col_logical(),
+  race___2   = readr::col_logical(),
+  race___3   = readr::col_logical(),
+  race___4   = readr::col_logical(),
+  race___5   = readr::col_logical(),
+  race___6   = readr::col_logical()
+)
+REDCapR::redcap_read(
+  redcap_uri  = credential$redcap_uri,
+  token       = credential$token,
+  fields      = desired_fields,
+  verbose     = FALSE,
+  col_types   = col_types
+)$data
+```
+
+
+Specify Everything is a Character
+-------------------------
+
+REDCap internally stores every value as a string.  To accept full responsibility of the data types, tell [`readr::cols()`](https://readr.tidyverse.org/reference/cols.html) to keep them as strings.
+
+```{r col_types-string} 
+# Specify the column types.
+desired_fields <- c("record_id", "race")
+col_types <- readr::cols(.default = readr::col_character())
+REDCapR::redcap_read(
+  redcap_uri  = credential$redcap_uri,
+  token       = credential$token,
+  fields      = desired_fields,
+  verbose     = FALSE,
+  col_types   = col_types
+)$data
+```
 
 
 Next Steps
 ===================================
 
-Create an Arch for reuse
+Other REDCapR Resources
+-------------------------
+
+In addition to documentation [for each function](https://ouhscbbmc.github.io/REDCapR/reference) the REDCapR package contains a handful of [vignettes](https://ouhscbbmc.github.io/REDCapR/articles) including a troubleshooting guide.
+
+Create an Arch for Reuse
+-------------------------
+
+When multiple R files use REDCapR call the same REDCap dataset, consider refactoring your scripts so that extraction code is written once, and called by the multiple analysis files.  This "arch" pattern is described in slides 9-16 of the [2014 REDCapCon presentation]( 
+https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/Publications/Presentation-2014-09-REDCapCon/LiterateProgrammingPatternsAndPracticesWithREDCap.pptx), "Literate Programming Patterns and Practices for Continuous Quality Improvement (CQI)".
+
+Batching
+-------------------------
+
+Writing to the Server
 -------------------------
 
 Notes
