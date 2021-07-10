@@ -13,6 +13,7 @@ Version 0.12 (Unreleased on CRAN)
 * When writing records to the server, the functions `redcap_write()` and `redcap_write_oneshot()` can toggle the ability to overwrite with blank/NA cells (suggested by @auricap, #315)
 * The functions `redcap_read_oneshot()`, `redcap_read()`, & `redcap_read_oneshot_eav()` now support the parameters `datetime_range_begin` and `datetime_range_end`.  The are passed to the REDCap parameters `dateRangeBegin` and `dateRangeEnd`, which restricts records returned, based on their last modified date in the server.  (Thanks @pbchase, #321 & #323.)
 * Better documentation about the `export_survey_fields` parameter in the functions `redcap_read()` & `redcap_read_oneshot()`.  (Thanks @isaactpetersen, #333)
+* New vignette [Typical REDCap Workflow for a Data Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html) developed to support a workshop for the 2021 [R/Medicine Conference](https://r-medicine.org/) (#332, with  @higgi13425, @kamclean, & Amanda Miller)
 * New function [`create_credential_local()`](https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html) starts a well-formed csv file that can contain tokens. (#340, after conversations with @higgi13425 & @kamclean.)
 
 ### Stability Features
