@@ -4,6 +4,7 @@
 \alias{retrieve_credential}
 \alias{retrieve_credential_local}
 \alias{retrieve_credential_mssql}
+\alias{create_credential_local}
 \title{Read a token and other credentials from a (non-REDCap)
 database or file}
 \usage{
@@ -14,11 +15,16 @@ retrieve_credential_local(
   check_username       = FALSE,
   check_token_pattern  = TRUE
 )
+
 retrieve_credential_mssql(
   project_id,
   instance,
   dsn,
   channel    = NULL
+)
+
+create_credential_local(
+  path_credential
 )
 }
 \arguments{
@@ -51,13 +57,15 @@ local machine that points to the desired MSSQL database. Required.}
 \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.  See Details below. Optional.}
 }
 \value{
-A list of the following elements:
+A list of the following elements are returned from
+\code{retrieve_credential_local()} and \code{retrieve_credential_mssql()}:
 \itemize{
 \item \code{redcap_uri}: The URI of the REDCap Server.
 \item \code{username}: Username.
-\item \code{project_id}: The ID assigned to the project withing REDCap.
+\item \code{project_id}: The ID assigned to the project within REDCap.
 \item \code{token}: The token to pass to the REDCap server
-\item \code{comment}: An optional string.
+\item \code{comment}: An optional string that is ignored by REDCapR
+but can be helpful for humans.
 }
 }
 \description{
@@ -67,6 +75,28 @@ but instead are functions that help manage tokens securely.
 \details{
 If the database elements are created with the script provided in package's
 'Security Database' vignette, the default values will work.
+
+The \code{create_credential_local()} function copies a
+\href{https://github.com/OuhscBbmc/REDCapR/blob/master/inst/misc/skeleton.credentials}{static file}
+to the location specified in the \code{path_credential} argument.
+Each record represents one accessible project per user.
+Follow these steps to adapt to your desired REDCap project(s):
+\enumerate{
+\item Modify the credential file for the REDCap API with a text editor
+like \href{https://notepad-plus-plus.org/}{Notepad++},
+\href{https://code.visualstudio.com/}{Visual Studio Code}, or
+\href{https://www.nano-editor.org/}{nano}.
+Replace existing records with the information from your projects.
+Delete the remaining example records.
+\item Make sure that the file (with the sensitive password-like) tokens
+is stored securely!
+\item Contact your REDCap admin to request the URI & token and
+discuss institutional policies.
+\item Ask your institution's IT security team for their recommendation
+\item For more info, see https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html
+and https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html
+\item Double-check the file is secured and not accessible by other users.
+}
 }
 \note{
 Although we strongly encourage storing all the tokens on a central server
@@ -81,6 +111,17 @@ would like help adapting this approach to your infrastructure.
 path <- system.file("misc/example.credentials", package = "REDCapR")
 (p1  <- REDCapR::retrieve_credential_local(path, 153L))
 (p2  <- REDCapR::retrieve_credential_local(path, 212L))
+
+
+\dontrun{
+# Create a skeleton of the local credential file to modify
+path_demo <- base::tempfile(pattern = "temp", fileext = ".credentials")
+
+create_credential_local(path_demo)
+
+base::unlink(path_demo) # This is just a demo; don't delete the real file!
+}
+
 }
 \author{
 Will Beasley

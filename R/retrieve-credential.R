@@ -1,5 +1,5 @@
 #' @name retrieve_credential
-#' @aliases retrieve_credential_local retrieve_credential_mssql
+#' @aliases retrieve_credential_local retrieve_credential_mssql create_credential_local
 #' @title Read a token and other credentials from a (non-REDCap)
 #' database or file
 #'
@@ -14,11 +14,16 @@
 #'   check_username       = FALSE,
 #'   check_token_pattern  = TRUE
 #' )
+#'
 #' retrieve_credential_mssql(
 #'   project_id,
 #'   instance,
 #'   dsn,
 #'   channel    = NULL
+#' )
+#'
+#' create_credential_local(
+#'   path_credential
 #' )
 #'
 #' @param path_credential The file path to the CSV containing the credentials.
@@ -42,16 +47,39 @@
 #' @param channel An *optional* connection handle as returned by
 #' [DBI::dbConnect()].  See Details below. Optional.
 #'
-#' @return A list of the following elements:
+#' @return A list of the following elements are returned from
+#' `retrieve_credential_local()` and `retrieve_credential_mssql()`:
 #' * `redcap_uri`: The URI of the REDCap Server.
 #' * `username`: Username.
-#' * `project_id`: The ID assigned to the project withing REDCap.
+#' * `project_id`: The ID assigned to the project within REDCap.
 #' * `token`: The token to pass to the REDCap server
-#' * `comment`: An optional string.
+#' * `comment`: An optional string that is ignored by REDCapR
+#'   but can be helpful for humans.
 #'
 #' @details
 #' If the database elements are created with the script provided in package's
 #' 'Security Database' vignette, the default values will work.
+#'
+#' The `create_credential_local()` function copies a
+#' [static file](https://github.com/OuhscBbmc/REDCapR/blob/master/inst/misc/skeleton.credentials)
+#' to the location specified in the `path_credential` argument.
+#' Each record represents one accessible project per user.
+#' Follow these steps to adapt to your desired REDCap project(s):
+#' 1. Modify the credential file for the REDCap API with a text editor
+#'    like [Notepad++](https://notepad-plus-plus.org/),
+#'    [Visual Studio Code](https://code.visualstudio.com/), or
+#'    [nano](https://www.nano-editor.org/).
+#'    Replace existing records with the information from your projects.
+#'    Delete the remaining example records.
+#' 2. Make sure that the file (with the sensitive password-like) tokens
+#'    is stored securely!
+#' 3. Contact your REDCap admin to request the URI & token and
+#'    discuss institutional policies.
+#' 4. Ask your institution's IT security team for their recommendation
+#     securing the file.
+#' 5. For more info, see https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html
+#'    and https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html
+#' 6. Double-check the file is secured and not accessible by other users.
 #'
 #' @note
 #' Although we strongly encourage storing all the tokens on a central server
@@ -68,7 +96,17 @@
 #' path <- system.file("misc/example.credentials", package = "REDCapR")
 #' (p1  <- REDCapR::retrieve_credential_local(path, 153L))
 #' (p2  <- REDCapR::retrieve_credential_local(path, 212L))
-
+#'
+#'
+#' \dontrun{
+#' # Create a skeleton of the local credential file to modify
+#' path_demo <- base::tempfile(pattern = "temp", fileext = ".credentials")
+#'
+#' create_credential_local(path_demo)
+#'
+#' base::unlink(path_demo) # This is just a demo; don't delete the real file!
+#' }
+#'
 #' @export
 retrieve_credential_local <- function(
   path_credential,
@@ -135,8 +173,30 @@ retrieve_credential_local <- function(
     )
   }
 
+  credential_local_validation(
+    redcap_uri              = credential$redcap_uri,
+    token                   = credential$token,
+    username                = credential$username,
+    check_url               = check_url,
+    check_username          = check_username,
+    check_token_pattern     = check_token_pattern
+  )
+
+  credential
+}
+
+# Privately-scoped function
+credential_local_validation <- function (
+  redcap_uri,
+  token,
+  username,
+  check_url                = TRUE,
+  check_username           = FALSE,
+  check_token_pattern      = TRUE
+
+) {
   # Progress through the optional checks
-  if (check_url & !grepl("https://", credential$redcap_uri, perl = TRUE)) {
+  if (check_url & !grepl("https://", redcap_uri, perl = TRUE)) {
     error_message_username <- paste(
       "The REDCap URL does not reference an https address.  First check",
       "that the URL is correct, and then consider using SSL to encrypt",
@@ -145,7 +205,7 @@ retrieve_credential_local <- function(
     )
     stop(error_message_username)
 
-  } else if (check_username & (Sys.info()["user"] != credential$username)) {
+  } else if (check_username & (Sys.info()["user"] != username)) {
     error_message_username <- paste(
       "The username (according to R's `Sys.info()['user']` doesn't match the",
       "username in the credentials file.  This is a friendly check, and",
@@ -155,7 +215,7 @@ retrieve_credential_local <- function(
     )
     stop(error_message_username)
 
-  } else if (check_token_pattern & !grepl("[A-F0-9]{32}", credential$token, perl = TRUE)) {
+  } else if (check_token_pattern & !grepl("[A-F0-9]{32}", token, perl = TRUE)) {
     error_message_token <- paste(
       "A REDCap token should be a string of 32 digits and uppercase",
       "characters.  The retrieved value was not.",
@@ -164,8 +224,40 @@ retrieve_credential_local <- function(
     )
     stop(error_message_token)
   }
+}
 
-  credential
+# system.file("misc/vignette.css", package="REDCapR")
+# system.file("misc/example.credentials", package="REDCapR")
+
+
+#' @export
+create_credential_local <- function (path_credential) {
+  path_source <- system.file(
+    "misc/example.credentials",
+    package   = "REDCapR"
+    # mustWork  = TRUE
+  )
+
+  if (!base::file.exists(path_source))
+    stop("The skeleton credential file was not found at `", path_source, "`.") # nocov
+
+  if (base::file.exists(path_credential))
+    stop("A credential file already exists at `", path_source, "`.")
+
+  if (!base::dir.exists(base::dirname(path_credential)))
+    base::dir.create(base::dirname(path_credential))
+
+  success <-
+    base::file.copy(
+      from        = path_source,
+      to          = path_credential,
+      overwrite   = FALSE
+    )
+
+  if (!success)
+    stop("The credential file could not be created at `", path_source, "`.") # nocov
+
+  success
 }
 
 #' @export
