@@ -92,6 +92,7 @@ Delete the remaining example records.
 is stored securely!
 \item Contact your REDCap admin to request the URI & token and
 discuss institutional policies.
+\item Ask your institution's IT security team for their recommendation
 \item For more info, see https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html
 and https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html
 \item Double-check the file is secured and not accessible by other users.

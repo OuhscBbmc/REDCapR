@@ -75,9 +75,11 @@
 #'    is stored securely!
 #' 3. Contact your REDCap admin to request the URI & token and
 #'    discuss institutional policies.
-#' 4. For more info, see https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html
+#' 4. Ask your institution's IT security team for their recommendation
+#     securing the file.
+#' 5. For more info, see https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html
 #'    and https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html
-#' 5. Double-check the file is secured and not accessible by other users.
+#' 6. Double-check the file is secured and not accessible by other users.
 #'
 #' @note
 #' Although we strongly encourage storing all the tokens on a central server

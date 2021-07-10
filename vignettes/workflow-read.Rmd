@@ -39,9 +39,18 @@ Check with your institution's REDCap administrator to ensure you have
 1. access to the specific REDCap project, and
 1. an API token with appropriate privileges to the specific REDCap project.
 
-This might be the first time you've ever needed to request a token, and your institution may have a formal process for API approval.  Your REDCap admin help.
+This might be the first time you've ever needed to request a token, and your institution may have a formal process for API approval.  Your REDCap admin can help.
 
 For this vignette, we'll use a fake dataset hosted at "https://ou.edu/redcap/api/" and accessible with the token "9A81268476645C4E5F03428B8AC3AA7B".
+
+Note to REDCap Admins:
+
+> For [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html) to function properly, the user must have Export permissions for the 'Full Data Set'. Users with only 'De-Identified' export privileges can still use [`redcap_read_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read_oneshot.html). To grant the appropriate permissions:
+>
+> * go to 'User Rights' in the REDCap project site,
+> * select the desired user, and then select 'Edit User Privileges',
+> * in the 'Data Exports' radio buttons, select 'Full Data Set'.
+
 
 Review Codebook
 -------------------------
@@ -60,12 +69,12 @@ The REDCap API token is essentially a combination of a personal password and the
 my_secret_token <- "9A81268476645C4E5F03428B8AC3AA7B"
 ```
 
-Instead, we suggest storing the token in a location that can be accessed only by you.  We have two recommendations.
+Instead, we suggest storing the token in a location that can be accessed by only you.  We have two recommendations.
 
 Security Method 1: Token File
 -------------------------
 
-The basic goals are (a) separate the secret values from the R file into a dedicated file and (b) secure the dedicated file.  If using a git repository, prevent the file from being committed with an entry in  [`.gitignore`](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files).
+The basic goals are (a) separate the secret values from the R file into a dedicated file and (b) secure the dedicated file.  If using a git repository, prevent the file from being committed with an entry in  [`.gitignore`](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files).  Ask your institution's IT security team for their recommendation.
 
 The [`retrieve_credential_local()`](https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html) function in the [REDCapR](https://ouhscbbmc.github.io/REDCapR) package loads relevant information from a csv into R.  The plain-text file might look like this:
 
@@ -259,11 +268,21 @@ Create an Arch for Reuse
 When multiple R files use REDCapR call the same REDCap dataset, consider refactoring your scripts so that extraction code is written once, and called by the multiple analysis files.  This "arch" pattern is described in slides 9-16 of the 2014 [REDCapCon](https://projectredcap.org/about/redcapcon/) presentation, [Literate Programming Patterns and Practices for Continuous Quality Improvement (CQI)]( 
 https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/Publications/Presentation-2014-09-REDCapCon/LiterateProgrammingPatternsAndPracticesWithREDCap.pptx).
 
+Downstream Reproducible Reports
+-------------------------
+
+Once the dataset is in R, take advantage of all the reproducible research tools available.  Tomorrow, [R/Medicine](https://r-medicine.org/) has a workshop on this topic using the exciting new [Quarto](https://quarto.org/) program that's similar to R Markdown.  Also see the relevant [R/Medicine 2020 presentation videos](https://www.youtube.com/playlist?list=PL4IzsxWztPdljYo7uE5G_R2PtYw3fUReo).  And of course, [any book by Yihui Xie and colleagues](https://www.amazon.com/Yihui-Xie/e/B00E9CQJGY?ref=sr_ntt_srch_lnk_1&qid=1625895927&sr=1-1).
+
+
 Batching
 -------------------------
 
+By default, `REDCapR::redcap_read()` requests datasets of 100 patients as a time, and stacks the resulting subsets together before returning a data.frame.  This can be adjusted to improve performance; see the 'Details' section of [`REDCapR::redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html).
+
 Writing to the Server
 -------------------------
+
+Reading record data is only one API capability.  REDCapR [exposes 20+ API functions]([`REDCapR::redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html)), such as reading metadata, retrieving survey links, and writing records back to REDCap.  This last operation is relevant in  [Kenneth McLean](https://twitter.com/kennethmclean92)'s presentation following a five-minute break. 
 
 Notes
 ===================================
