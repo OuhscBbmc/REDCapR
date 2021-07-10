@@ -99,43 +99,56 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR">REDCapR</a></span><span class="op">)</span></code></pre></div>
-<div id="pre-requisites" class="section level1">
+<div id="part-1---pre-requisites" class="section level1">
 <h1 class="hasAnchor">
-<a href="#pre-requisites" class="anchor"></a>Pre-requisites</h1>
+<a href="#part-1---pre-requisites" class="anchor"></a>Part 1 - Pre-requisites</h1>
 <div id="verify-redcapr-is-installed" class="section level2">
 <h2 class="hasAnchor">
 <a href="#verify-redcapr-is-installed" class="anchor"></a>Verify REDCapR is installed</h2>
 <p>First confirm that the REDCapR package is installed on your local machine. If not, the following line will throw the error <code>Loading required namespace: REDCapR.  Failed with error: ‘there is no package called ‘REDCapR’’</code>. If this call fails, follow the installation instructions on the <a href="https://ouhscbbmc.github.io/REDCapR">REDCapR</a> webpage.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"REDCapR"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"REDCapR"</span><span class="op">)</span>
+<span class="co">#&gt; Loading required namespace: REDCapR</span></code></pre></div>
 </div>
 <div id="verify-redcap-access" class="section level2">
 <h2 class="hasAnchor">
 <a href="#verify-redcap-access" class="anchor"></a>Verify REDCap Access</h2>
-<p>Talk to your institution’s REDCap administrator to ensure you have</p>
-<ul>
+<p>Check with your institution’s REDCap administrator to ensure you have</p>
+<ol style="list-style-type: decimal">
 <li>access to the REDCap server,</li>
 <li>access to the specific REDCap project, and</li>
-<li>an API token with appropriate privileges ot the specific REDCap project.</li>
+<li>an API token with appropriate privileges to the specific REDCap project.</li>
+</ol>
+<p>This might be the first time you’ve ever needed to request a token, and your institution may have a formal process for API approval. Your REDCap admin can help.</p>
+<p>For this vignette, we’ll use a fake dataset hosted at “<a href="https://ou.edu/redcap/api/" class="uri">https://ou.edu/redcap/api/</a>” and accessible with the token “9A81268476645C4E5F03428B8AC3AA7B”.</p>
+<p>Note to REDCap Admins:</p>
+<blockquote>
+<p>For <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code>redcap_read()</code></a> to function properly, the user must have Export permissions for the ‘Full Data Set’. Users with only ‘De-Identified’ export privileges can still use <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read_oneshot.html"><code>redcap_read_oneshot()</code></a>. To grant the appropriate permissions:</p>
+<ul>
+<li>go to ‘User Rights’ in the REDCap project site,</li>
+<li>select the desired user, and then select ‘Edit User Privileges’,</li>
+<li>in the ‘Data Exports’ radio buttons, select ‘Full Data Set’.</li>
 </ul>
+</blockquote>
 </div>
 <div id="review-codebook" class="section level2">
 <h2 class="hasAnchor">
 <a href="#review-codebook" class="anchor"></a>Review Codebook</h2>
-<p>Before developing any REDCap or analysis code, take 10+ minutes to discuss the project with the investigator and to read the codebook. The codebook link is near the top left corner of the REDCap project page, under the “Project Home and Design” banner. Learning the details and context of the dataset will save you time later and improve the quality of the research.</p>
+<p>Before developing any REDCap or analysis code, spend at least 10 minutes to review the codebook, whose link is near the top left corner of the REDCap project page, under the “Project Home and Design” heading. Learning the details will save you time later and improve the quality of the research.</p>
+<p>If you’re new to the project, meet with the investigator for at least 30 minutes to learn the context, collection process, and idiosyncrasies of the dataset. During that conversation, develop a plan for grooming the dataset to be ready for analysis. This is part of the standard advice that the analyst’s involvement should start early in the investigation’s life span.</p>
 </div>
 </div>
-<div id="retrieve-protected-token" class="section level1">
+<div id="part-2---retrieve-protected-token" class="section level1">
 <h1 class="hasAnchor">
-<a href="#retrieve-protected-token" class="anchor"></a>Retrieve Protected Token</h1>
-<p>The REDCap API token is essentially a combination of a personal password and the ID of the specific project you’re requesting data from. Protect it like any other password to a PHI (protected health information](<a href="https://www.hhs.gov/answers/hipaa/what-is-phi/index.html" class="uri">https://www.hhs.gov/answers/hipaa/what-is-phi/index.html</a>)) dataset. For a project with PHI, <strong>never hard-code the password directly in an R file</strong>.</p>
-<p>Instead, we suggest storing the token in a location that can be accessed only by you. We have two recommendations.</p>
+<a href="#part-2---retrieve-protected-token" class="anchor"></a>Part 2 - Retrieve Protected Token</h1>
+<p>The REDCap API token is essentially a combination of a personal password and the ID of the specific project you’re requesting data from. Protect it like any other password to PHI (<a href="https://www.hhs.gov/answers/hipaa/what-is-phi/index.html">protected health information</a>). For a project with PHI, <strong>never hard-code the password directly in an R file</strong>. In other words, no PHI project should be accessed with an R file that includes the line</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">my_secret_token</span> <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></code></pre></div>
+<p>Instead, we suggest storing the token in a location that can be accessed by only you. We have two recommendations.</p>
 <div id="security-method-1-token-file" class="section level2">
 <h2 class="hasAnchor">
 <a href="#security-method-1-token-file" class="anchor"></a>Security Method 1: Token File</h2>
-<p>The basic goals are (a) separate the secret values from the R file into a dedicated file and (b) secure the dedicated file. If using a git repository, prevent the file from being committed with an entry in <a href="https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files"><code>.gitignore</code></a>.</p>
+<p>The basic goals are (a) separate the secret values from the R file into a dedicated file and (b) secure the dedicated file. If using a git repository, prevent the file from being committed with an entry in <a href="https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files"><code>.gitignore</code></a>. Ask your institution’s IT security team for their recommendation.</p>
 <p>The <a href="https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html"><code>retrieve_credential_local()</code></a> function in the <a href="https://ouhscbbmc.github.io/REDCapR">REDCapR</a> package loads relevant information from a csv into R. The plain-text file might look like this:</p>
 <pre class="csv"><code>redcap_uri,username,project_id,token,comment
 "https://ou.edu/redcap/api/","myusername",153,9A81268476645C4E5F03428B8AC3AA7B,"simple"
@@ -164,6 +177,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $comment</span>
 <span class="co">#&gt; [1] "simple static (read-only) test project"</span></code></pre></div>
+<p>A credential file is already created for this vignette. In your next real project, call <a href="https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html"><code>create_credential_local()</code></a> to start a well-formed csv file that can contain tokens.</p>
 <p>Compared to the method below, this one is less secure but easier to establish.</p>
 </div>
 <div id="security-method-2-token-server" class="section level2">
@@ -173,9 +187,9 @@
 <p>This approach realistically requires someone in your institution to have at least basic database administration experience.</p>
 </div>
 </div>
-<div id="read-data-unstructured-approach" class="section level1">
+<div id="part-3---read-data-unstructured-approach" class="section level1">
 <h1 class="hasAnchor">
-<a href="#read-data-unstructured-approach" class="anchor"></a>Read Data: Unstructured Approach</h1>
+<a href="#part-3---read-data-unstructured-approach" class="anchor"></a>Part 3 - Read Data: Unstructured Approach</h1>
 <p>The <code>redcap_uri</code> and <code>token</code> fields are the only required arguments of <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code>REDCapR::redcap_read()</code></a>; both are in the credential object created in the previous section.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds_1</span> <span class="op">&lt;-</span> 
@@ -183,9 +197,9 @@
     redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>, 
     token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>
   <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</span>
-<span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-09 07:14:41.</span>
+<span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.5 seconds.  The http status code was 200.</span>
+<span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-07-10 06:35:16.</span>
 <span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span>
 <span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</span>
 <span class="co">#&gt; </span>
@@ -295,10 +309,11 @@
 <span class="co">#&gt;  3rd Qu.:0.0   3rd Qu.:1   3rd Qu.:0.25       3rd Qu.:2.0                </span>
 <span class="co">#&gt;  Max.   :1.0   Max.   :2   Max.   :1.00       Max.   :2.0                </span>
 <span class="co">#&gt;                            NA's   :1</span></code></pre></div>
+<p><em>Pause here in the workshop for a few minutes. Raise hand if you’re having trouble.</em></p>
 </div>
-<div id="read-data-choosing-columns-and-rows" class="section level1">
+<div id="part-4---read-data-choosing-columns-and-rows" class="section level1">
 <h1 class="hasAnchor">
-<a href="#read-data-choosing-columns-and-rows" class="anchor"></a>Read Data: Choosing Columns and Rows</h1>
+<a href="#part-4---read-data-choosing-columns-and-rows" class="anchor"></a>Part 4 - Read Data: Choosing Columns and Rows</h1>
 <p>When you read a dataset for the first time, you probably haven’t decided which columns are needed so it makes sense to retrieve everything. As you gain familiarity with the data and with the analytic objectives, consider being more selective with the variables and rows transported from the remote server to your local machine.</p>
 <p>Advantages include:</p>
 <ol style="list-style-type: decimal">
@@ -323,7 +338,7 @@
   records     <span class="op">=</span> <span class="va">desired_records</span>,
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 2 records  at 2021-07-09 07:14:43.</span>
+<span class="co">#&gt; Starting to read 2 records  at 2021-07-10 06:35:19.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -364,12 +379,12 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Return only records with a birth date after January 2003</span>
 <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
-  redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,
-  token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,
-  filter      <span class="op">=</span> <span class="st">"'2003-01-01' &lt; [dob]"</span>,
-  verbose     <span class="op">=</span> <span class="cn">FALSE</span>
+  redcap_uri    <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,
+  token         <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,
+  filter_logic  <span class="op">=</span> <span class="st">"'2003-01-01' &lt; [dob]"</span>,
+  verbose       <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 2 records  at 2021-07-09 07:14:45.</span>
+<span class="co">#&gt; Starting to read 2 records  at 2021-07-10 06:35:21.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -413,7 +428,7 @@
   fields      <span class="op">=</span> <span class="va">desired_fields</span>,
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-09 07:14:46.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-07-10 06:35:23.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -429,9 +444,9 @@
 <span class="co">#&gt; 5         5   John Lee  59</span></code></pre></div>
 </div>
 </div>
-<div id="read-data-structured-approach" class="section level1">
+<div id="part-5---read-data-structured-approach" class="section level1">
 <h1 class="hasAnchor">
-<a href="#read-data-structured-approach" class="anchor"></a>Read Data: Structured Approach</h1>
+<a href="#part-5---read-data-structured-approach" class="anchor"></a>Part 5 - Read Data: Structured Approach</h1>
 <p>As the automation of your scripts matures and institutional resources depend on its output, its output should be stable. One way to make it more predictable is to specify the column names <em>and</em> the column data types. In the previous example, notice that R (specifically <a href="https://readr.tidyverse.org/reference/read_delim.html"><code>readr::read_csv()</code></a>) made its best guess and reported it in the “Column specification” section.</p>
 <p>In the following example, REDCapR passes <code>col_types</code> to <a href="https://readr.tidyverse.org/reference/read_delim.html"><code>readr::read_csv()</code></a>) as it converts the plain-text output returned from REDCap into an R <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html"><code>data.frame</code></a>.</p>
 <p>When readr sees a column with values like 1, 2, 3, and 4, it will make the reasonable guess that the column should be a double precision floating-point data type. However we <a href="https://ouhscbbmc.github.io/data-science-practices-1/coding.html#coding-simplify-types">recommend using the simplest data type reasonable</a> because a simpler data type is less likely contain unintended values and it’s typically faster, consumes less memory, and translates more cleanly across platforms. As specifically for identifiers like <code>record_id</code> specify either an integer or character.</p>
@@ -457,7 +472,7 @@
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>,
   col_types   <span class="op">=</span> <span class="va">col_types</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-09 07:14:47.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-07-10 06:35:24.</span>
 <span class="co">#&gt;   record_id race___1 race___2 race___3 race___4 race___5 race___6</span>
 <span class="co">#&gt; 1         1    FALSE    FALSE    FALSE    FALSE     TRUE    FALSE</span>
 <span class="co">#&gt; 2         2    FALSE    FALSE     TRUE    FALSE     TRUE    FALSE</span>
@@ -480,7 +495,7 @@
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>,
   col_types   <span class="op">=</span> <span class="va">col_types</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-09 07:14:49.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-07-10 06:35:26.</span>
 <span class="co">#&gt;   record_id race___1 race___2 race___3 race___4 race___5 race___6</span>
 <span class="co">#&gt; 1         1        0        0        0        0        1        0</span>
 <span class="co">#&gt; 2         2        0        0        1        0        1        0</span>
@@ -489,9 +504,9 @@
 <span class="co">#&gt; 5         5        1        0        0        0        0        1</span></code></pre></div>
 </div>
 </div>
-<div id="next-steps" class="section level1">
+<div id="part-6---next-steps" class="section level1">
 <h1 class="hasAnchor">
-<a href="#next-steps" class="anchor"></a>Next Steps</h1>
+<a href="#part-6---next-steps" class="anchor"></a>Part 6 - Next Steps</h1>
 <div id="other-redcapr-resources" class="section level2">
 <h2 class="hasAnchor">
 <a href="#other-redcapr-resources" class="anchor"></a>Other REDCapR Resources</h2>
@@ -500,21 +515,28 @@
 <div id="create-an-arch-for-reuse" class="section level2">
 <h2 class="hasAnchor">
 <a href="#create-an-arch-for-reuse" class="anchor"></a>Create an Arch for Reuse</h2>
-<p>When multiple R files use REDCapR call the same REDCap dataset, consider refactoring your scripts so that extraction code is written once, and called by the multiple analysis files. This “arch” pattern is described in slides 9-16 of the <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/Publications/Presentation-2014-09-REDCapCon/LiterateProgrammingPatternsAndPracticesWithREDCap.pptx">2014 REDCapCon presentation</a>, “Literate Programming Patterns and Practices for Continuous Quality Improvement (CQI)”.</p>
+<p>When multiple R files use REDCapR call the same REDCap dataset, consider refactoring your scripts so that extraction code is written once, and called by the multiple analysis files. This “arch” pattern is described in slides 9-16 of the 2014 <a href="https://projectredcap.org/about/redcapcon/">REDCapCon</a> presentation, <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/Publications/Presentation-2014-09-REDCapCon/LiterateProgrammingPatternsAndPracticesWithREDCap.pptx">Literate Programming Patterns and Practices for Continuous Quality Improvement (CQI)</a>.</p>
+</div>
+<div id="downstream-reproducible-reports" class="section level2">
+<h2 class="hasAnchor">
+<a href="#downstream-reproducible-reports" class="anchor"></a>Downstream Reproducible Reports</h2>
+<p>Once the dataset is in R, take advantage of all the reproducible research tools available. Tomorrow, <a href="https://r-medicine.org/">R/Medicine</a> has a workshop on this topic using the exciting new <a href="https://quarto.org/">Quarto</a> program that’s similar to R Markdown. Also see the relevant <a href="https://www.youtube.com/playlist?list=PL4IzsxWztPdljYo7uE5G_R2PtYw3fUReo">R/Medicine 2020 presentation videos</a>. And of course, <a href="https://www.amazon.com/Yihui-Xie/e/B00E9CQJGY?ref=sr_ntt_srch_lnk_1&amp;qid=1625895927&amp;sr=1-1">any book by Yihui Xie and colleagues</a>.</p>
 </div>
 <div id="batching" class="section level2">
 <h2 class="hasAnchor">
 <a href="#batching" class="anchor"></a>Batching</h2>
+<p>By default, <code><a href="../reference/redcap_read.html">REDCapR::redcap_read()</a></code> requests datasets of 100 patients as a time, and stacks the resulting subsets together before returning a data.frame. This can be adjusted to improve performance; see the ‘Details’ section of <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code>REDCapR::redcap_read()</code></a>.</p>
 </div>
 <div id="writing-to-the-server" class="section level2">
 <h2 class="hasAnchor">
 <a href="#writing-to-the-server" class="anchor"></a>Writing to the Server</h2>
+<p>Reading record data is only one API capability. REDCapR <a href="%5B%60REDCapR::redcap_read()%60%5D(https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html)">exposes 20+ API functions</a>, such as reading metadata, retrieving survey links, and writing records back to REDCap. This last operation is relevant in <a href="https://twitter.com/kennethmclean92">Kenneth McLean</a>’s presentation following a five-minute break.</p>
 </div>
 </div>
 <div id="notes" class="section level1">
 <h1 class="hasAnchor">
 <a href="#notes" class="anchor"></a>Notes</h1>
-<p>This vignette was originally designed for a 2021 R/Medicine REDCap workshop with <a href="https://research.medicine.umich.edu/department/staff/peter-higgins-md-phd">Peter Higgins</a>, <a href="https://coloradosph.cuanschutz.edu/resources/directory/directory-profile/Miller-Amanda-UCD6000053152">Amanda Miller</a>, and <a href="https://twitter.com/kennethmclean92">Kenneth McLean</a>.</p>
+<p>This vignette was originally designed for a 2021 R/Medicine REDCap workshop with <a href="http://www.med.umich.edu/higginslab/">Peter Higgins</a>, <a href="https://coloradosph.cuanschutz.edu/resources/directory/directory-profile/Miller-Amanda-UCD6000053152">Amanda Miller</a>, and <a href="https://twitter.com/kennethmclean92">Kenneth McLean</a>.</p>
 </div>
   </div>
 
