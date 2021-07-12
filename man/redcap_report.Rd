@@ -87,35 +87,52 @@ documentation is available at https://cran.r-project.org/package=httr.
 }
 \examples{
 \dontrun{
-uri        <- "https://bbmc.ouhsc.edu/redcap/api/"
-token      <- "9A81268476645C4E5F03428B8AC3AA7B"
-report_id  <- 5980L
+uri          <- "https://bbmc.ouhsc.edu/redcap/api/"
+token        <- "9A81268476645C4E5F03428B8AC3AA7B"
+report_1_id  <- 5980L
+report_2_id  <- 6431L
 
-#Return all records and all variables.
-ds <-
+# Return all records and all variables.
+ds_1a <-
   REDCapR::redcap_report(
     redcap_uri = uri,
     token      = token,
-    report_id  = report_id
+    report_id  = report_1_id
   )$data
 
 
 # Specify the column types.
-col_types <- readr::cols(
+col_types_1 <- readr::cols(
   record_id          = readr::col_integer(),
   height             = readr::col_double(),
   health_complete    = readr::col_integer(),
   address            = readr::col_character(),
   ethnicity          = readr::col_integer()
 )
-ds_col_types <-
+ds_1b <-
   REDCapR::redcap_report(
     redcap_uri = uri,
     token      = token,
-    report_id  = report_id,
-    col_types  = col_types
+    report_id  = report_1_id,
+    col_types  = col_types_1
   )$data
 
+
+# Return condensed checkboxes Report option:
+#   "Combine checkbox options into single column of only the checked-off
+#   options (will be formatted as a text field when exported to
+#   stats packages)"
+col_types_2 <- readr::cols(
+  record_id          = readr::col_integer(),
+  race               = readr::col_character()
+)
+ds_2 <-
+  REDCapR::redcap_report(
+    redcap_uri = uri,
+    token      = token,
+    report_id  = report_2_id,
+    col_types  = col_types_2
+  )$data
 }
 }
 \references{
