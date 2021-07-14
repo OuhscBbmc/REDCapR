@@ -12,9 +12,9 @@ checks_to_exclude <- c(
   "lintr_line_length_linter"
 )
 gp <-
-  goodpractice::all_checks() %>%
-  purrr::discard(~(. %in% checks_to_exclude)) %>%
-  goodpractice::gp(checks = .)
+  goodpractice::all_checks() |>
+  purrr::discard(~(. %in% checks_to_exclude)) |>
+  goodpractice::gp()
 goodpractice::results(gp)
 gp
 
@@ -27,7 +27,7 @@ devtools::run_examples(); #dev.off() #This overwrites the NAMESPACE file too
 # devtools::run_examples(, "redcap_read.Rd")
 test_results_checked <- devtools::test()
 test_results_checked <- devtools::test(filter = "create-credential-local")
-test_results_checked <- devtools::test(filter = "write-error")
+test_results_checked <- devtools::test(filter = "report")
 test_results_checked <- devtools::test(filter = "validate.*$")
 
 # testthat::test_dir("./tests/")
