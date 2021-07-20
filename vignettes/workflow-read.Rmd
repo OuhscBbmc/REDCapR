@@ -1,6 +1,6 @@
 ---
 title: "Typical REDCap Workflow for a Data Analyst"
-author: Will Beasley & Geneva Marshall, [Biomedical & Behavior Methodology Core](https://ouhsc.edu/bbmc/team/), OUHSC Pediatrics
+author: Will Beasley, Geneva Marshall, & Thomas Wilson, [Biomedical & Behavior Methodology Core](https://ouhsc.edu/bbmc/team/), OUHSC Pediatrics
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Typical REDCap Workflow for a Data Analyst}
@@ -41,7 +41,7 @@ Check with your institution's REDCap administrator to ensure you have
 
 This might be the first time you've ever needed to request a token, and your institution may have a formal process for API approval.  Your REDCap admin can help.
 
-For this vignette, we'll use a fake dataset hosted at "https://ou.edu/redcap/api/" and accessible with the token "9A81268476645C4E5F03428B8AC3AA7B".
+For this vignette, we'll use a fake dataset hosted at "https://bbmc.ouhsc.edu/redcap/api/" and accessible with the token "9A81268476645C4E5F03428B8AC3AA7B".
 
 Note to REDCap Admins:
 
@@ -80,9 +80,9 @@ The [`retrieve_credential_local()`](https://ouhscbbmc.github.io/REDCapR/referenc
 
 ```csv
 redcap_uri,username,project_id,token,comment
-"https://ou.edu/redcap/api/","myusername",153,9A81268476645C4E5F03428B8AC3AA7B,"simple"
-"https://ou.edu/redcap/api/","myusername",212,0434F0E9CF53ED0587847AB6E51DE762,"longitudinal"
-"https://ou.edu/redcap/api/","myusername",213,D70F9ACD1EDD6F151C6EA78683944E98,"write data"
+"https://bbmc.ouhsc.edu/redcap/api/","myusername",153,9A81268476645C4E5F03428B8AC3AA7B,"simple"
+"https://bbmc.ouhsc.edu/redcap/api/","myusername",212,0434F0E9CF53ED0587847AB6E51DE762,"longitudinal"
+"https://bbmc.ouhsc.edu/redcap/api/","myusername",213,D70F9ACD1EDD6F151C6EA78683944E98,"write data"
 ```
 
 To retrieve the credentials for the first project listed above, pass the value of "153" to `project_id`.
@@ -260,7 +260,7 @@ Part 6 - Next Steps
 Other REDCapR Resources
 -------------------------
 
-In addition to documentation [for each function](https://ouhscbbmc.github.io/REDCapR/reference) the REDCapR package contains a handful of [vignettes](https://ouhscbbmc.github.io/REDCapR/articles) including a troubleshooting guide.
+In addition to documentation [for each function](https://ouhscbbmc.github.io/REDCapR/reference) the REDCapR package contains a handful of [vignettes](https://ouhscbbmc.github.io/REDCapR/articles) including a [troubleshooting guide](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html).
 
 Create an Arch for Reuse
 -------------------------
@@ -277,7 +277,7 @@ Once the dataset is in R, take advantage of all the reproducible research tools 
 Batching
 -------------------------
 
-By default, `REDCapR::redcap_read()` requests datasets of 100 patients as a time, and stacks the resulting subsets together before returning a data.frame.  This can be adjusted to improve performance; see the 'Details' section of [`REDCapR::redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html).
+By default, `REDCapR::redcap_read()` requests datasets of 100 patients as a time, and stacks the resulting subsets together before returning a data.frame.  This can be adjusted to improve performance; the 'Details' section of [`REDCapR::redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html#details) discusses the trade offs.
 
 Writing to the Server
 -------------------------

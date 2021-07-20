@@ -102,7 +102,7 @@
 #' * `elapsed_seconds`: The duration of the function.
 #'
 #' @details
-#' Specifically, it internally uses multiple calls to [redcap_read_oneshot()]
+#' [redcap_read()] internally uses multiple calls to [redcap_read_oneshot()]
 #' to select and return data.  Initially, only the primary key is queried
 #' through the REDCap API.  The long list is then subsetted into batches,
 #' whose sizes are determined by the `batch_size` parameter.  REDCap is then
@@ -117,7 +117,7 @@
 #' A second benefit is less RAM is required on the webserver.  Because
 #' each batch is smaller than the entire dataset, the webserver
 #' tackles more manageably sized objects in memory.  Consider batching
-#' if you encounter the error
+#' if you encounter the error:
 #'
 #' ```
 #' ERROR: REDCap ran out of server memory. The request cannot be processed.

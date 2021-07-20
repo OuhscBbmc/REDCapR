@@ -166,7 +166,7 @@ be more appropriate than \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()
 datasets that could tie up the server.
 }
 \details{
-Specifically, it internally uses multiple calls to \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}}
+\code{\link[=redcap_read]{redcap_read()}} internally uses multiple calls to \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}}
 to select and return data.  Initially, only the primary key is queried
 through the REDCap API.  The long list is then subsetted into batches,
 whose sizes are determined by the \code{batch_size} parameter.  REDCap is then
@@ -181,7 +181,7 @@ the webserver when exporting/importing a large dataset.
 A second benefit is less RAM is required on the webserver.  Because
 each batch is smaller than the entire dataset, the webserver
 tackles more manageably sized objects in memory.  Consider batching
-if you encounter the error\preformatted{ERROR: REDCap ran out of server memory. The request cannot be processed.
+if you encounter the error:\preformatted{ERROR: REDCap ran out of server memory. The request cannot be processed.
 Please try importing/exporting a smaller amount of data.
 }
 
