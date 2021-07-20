@@ -368,7 +368,7 @@ string, separated by commas.</p></li>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Specifically, it internally uses multiple calls to <code><a href='redcap_read_oneshot.html'>redcap_read_oneshot()</a></code>
+    <p><code>redcap_read()</code> internally uses multiple calls to <code><a href='redcap_read_oneshot.html'>redcap_read_oneshot()</a></code>
 to select and return data.  Initially, only the primary key is queried
 through the REDCap API.  The long list is then subsetted into batches,
 whose sizes are determined by the <code>batch_size</code> parameter.  REDCap is then
@@ -381,7 +381,7 @@ the webserver when exporting/importing a large dataset.</p>
 <p>A second benefit is less RAM is required on the webserver.  Because
 each batch is smaller than the entire dataset, the webserver
 tackles more manageably sized objects in memory.  Consider batching
-if you encounter the error</p><pre>ERROR: REDCap ran out of server memory. The request cannot be processed.
+if you encounter the error:</p><pre>ERROR: REDCap ran out of server memory. The request cannot be processed.
 Please try importing/exporting a smaller amount of data.
 </pre>
 

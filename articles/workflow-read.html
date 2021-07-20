@@ -89,7 +89,7 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Typical REDCap Workflow for a Data Analyst</h1>
-                        <h4 class="author">Will Beasley &amp; Geneva Marshall, <a href="https://ouhsc.edu/bbmc/team/">Biomedical &amp; Behavior Methodology Core</a>, OUHSC Pediatrics</h4>
+                        <h4 class="author">Will Beasley, Geneva Marshall, &amp; Thomas Wilson, <a href="https://ouhsc.edu/bbmc/team/">Biomedical &amp; Behavior Methodology Core</a>, OUHSC Pediatrics</h4>
             
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/workflow-read.Rmd"><code>vignettes/workflow-read.Rmd</code></a></small>
@@ -120,7 +120,7 @@
 <li>an API token with appropriate privileges to the specific REDCap project.</li>
 </ol>
 <p>This might be the first time you’ve ever needed to request a token, and your institution may have a formal process for API approval. Your REDCap admin can help.</p>
-<p>For this vignette, we’ll use a fake dataset hosted at “<a href="https://ou.edu/redcap/api/" class="uri">https://ou.edu/redcap/api/</a>” and accessible with the token “9A81268476645C4E5F03428B8AC3AA7B”.</p>
+<p>For this vignette, we’ll use a fake dataset hosted at “<a href="https://bbmc.ouhsc.edu/redcap/api/" class="uri">https://bbmc.ouhsc.edu/redcap/api/</a>” and accessible with the token “9A81268476645C4E5F03428B8AC3AA7B”.</p>
 <p>Note to REDCap Admins:</p>
 <blockquote>
 <p>For <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code>redcap_read()</code></a> to function properly, the user must have Export permissions for the ‘Full Data Set’. Users with only ‘De-Identified’ export privileges can still use <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read_oneshot.html"><code>redcap_read_oneshot()</code></a>. To grant the appropriate permissions:</p>
@@ -151,9 +151,9 @@
 <p>The basic goals are (a) separate the secret values from the R file into a dedicated file and (b) secure the dedicated file. If using a git repository, prevent the file from being committed with an entry in <a href="https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files"><code>.gitignore</code></a>. Ask your institution’s IT security team for their recommendation.</p>
 <p>The <a href="https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html"><code>retrieve_credential_local()</code></a> function in the <a href="https://ouhscbbmc.github.io/REDCapR">REDCapR</a> package loads relevant information from a csv into R. The plain-text file might look like this:</p>
 <pre class="csv"><code>redcap_uri,username,project_id,token,comment
-"https://ou.edu/redcap/api/","myusername",153,9A81268476645C4E5F03428B8AC3AA7B,"simple"
-"https://ou.edu/redcap/api/","myusername",212,0434F0E9CF53ED0587847AB6E51DE762,"longitudinal"
-"https://ou.edu/redcap/api/","myusername",213,D70F9ACD1EDD6F151C6EA78683944E98,"write data"</code></pre>
+"https://bbmc.ouhsc.edu/redcap/api/","myusername",153,9A81268476645C4E5F03428B8AC3AA7B,"simple"
+"https://bbmc.ouhsc.edu/redcap/api/","myusername",212,0434F0E9CF53ED0587847AB6E51DE762,"longitudinal"
+"https://bbmc.ouhsc.edu/redcap/api/","myusername",213,D70F9ACD1EDD6F151C6EA78683944E98,"write data"</code></pre>
 <p>To retrieve the credentials for the first project listed above, pass the value of “153” to <code>project_id</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">path_credential</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"misc/example.credentials"</span>, package <span class="op">=</span> <span class="st">"REDCapR"</span><span class="op">)</span>
@@ -198,8 +198,15 @@
     token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>
   <span class="op">)</span><span class="op">$</span><span class="va">data</span>
 <span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</span>
-<span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-14 05:42:52.</span>
+<span class="co">#&gt; Rows: 5 Columns: 1</span>
+<span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; Delimiter: ","</span>
+<span class="co">#&gt; dbl (1): record_id</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
+<span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-07-20 16:53:57.</span>
 <span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span>
 <span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</span>
 <span class="co">#&gt; </span>
@@ -338,7 +345,14 @@
   records     <span class="op">=</span> <span class="va">desired_records</span>,
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 2 records  at 2021-07-14 05:42:54.</span>
+<span class="co">#&gt; Rows: 2 Columns: 1</span>
+<span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; Delimiter: ","</span>
+<span class="co">#&gt; dbl (1): record_id</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
+<span class="co">#&gt; Starting to read 2 records  at 2021-07-20 16:53:59.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -384,7 +398,14 @@
   filter_logic  <span class="op">=</span> <span class="st">"'2003-01-01' &lt; [dob]"</span>,
   verbose       <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 2 records  at 2021-07-14 05:42:56.</span>
+<span class="co">#&gt; Rows: 2 Columns: 1</span>
+<span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; Delimiter: ","</span>
+<span class="co">#&gt; dbl (1): record_id</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
+<span class="co">#&gt; Starting to read 2 records  at 2021-07-20 16:54:00.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -428,7 +449,14 @@
   fields      <span class="op">=</span> <span class="va">desired_fields</span>,
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-14 05:42:57.</span>
+<span class="co">#&gt; Rows: 5 Columns: 1</span>
+<span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; Delimiter: ","</span>
+<span class="co">#&gt; dbl (1): record_id</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-07-20 16:54:02.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -472,7 +500,14 @@
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>,
   col_types   <span class="op">=</span> <span class="va">col_types</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-14 05:42:59.</span>
+<span class="co">#&gt; Rows: 5 Columns: 1</span>
+<span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; Delimiter: ","</span>
+<span class="co">#&gt; dbl (1): record_id</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-07-20 16:54:03.</span>
 <span class="co">#&gt;   record_id race___1 race___2 race___3 race___4 race___5 race___6</span>
 <span class="co">#&gt; 1         1    FALSE    FALSE    FALSE    FALSE     TRUE    FALSE</span>
 <span class="co">#&gt; 2         2    FALSE    FALSE     TRUE    FALSE     TRUE    FALSE</span>
@@ -495,7 +530,14 @@
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>,
   col_types   <span class="op">=</span> <span class="va">col_types</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-14 05:43:00.</span>
+<span class="co">#&gt; Rows: 5 Columns: 1</span>
+<span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; Delimiter: ","</span>
+<span class="co">#&gt; dbl (1): record_id</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-07-20 16:54:05.</span>
 <span class="co">#&gt;   record_id race___1 race___2 race___3 race___4 race___5 race___6</span>
 <span class="co">#&gt; 1         1        0        0        0        0        1        0</span>
 <span class="co">#&gt; 2         2        0        0        1        0        1        0</span>
@@ -510,7 +552,7 @@
 <div id="other-redcapr-resources" class="section level2">
 <h2 class="hasAnchor">
 <a href="#other-redcapr-resources" class="anchor"></a>Other REDCapR Resources</h2>
-<p>In addition to documentation <a href="https://ouhscbbmc.github.io/REDCapR/reference">for each function</a> the REDCapR package contains a handful of <a href="https://ouhscbbmc.github.io/REDCapR/articles">vignettes</a> including a troubleshooting guide.</p>
+<p>In addition to documentation <a href="https://ouhscbbmc.github.io/REDCapR/reference">for each function</a> the REDCapR package contains a handful of <a href="https://ouhscbbmc.github.io/REDCapR/articles">vignettes</a> including a <a href="https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html">troubleshooting guide</a>.</p>
 </div>
 <div id="create-an-arch-for-reuse" class="section level2">
 <h2 class="hasAnchor">
@@ -525,7 +567,7 @@
 <div id="batching" class="section level2">
 <h2 class="hasAnchor">
 <a href="#batching" class="anchor"></a>Batching</h2>
-<p>By default, <code><a href="../reference/redcap_read.html">REDCapR::redcap_read()</a></code> requests datasets of 100 patients as a time, and stacks the resulting subsets together before returning a data.frame. This can be adjusted to improve performance; see the ‘Details’ section of <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code>REDCapR::redcap_read()</code></a>.</p>
+<p>By default, <code><a href="../reference/redcap_read.html">REDCapR::redcap_read()</a></code> requests datasets of 100 patients as a time, and stacks the resulting subsets together before returning a data.frame. This can be adjusted to improve performance; the ‘Details’ section of <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html#details"><code>REDCapR::redcap_read()</code></a> discusses the trade offs.</p>
 </div>
 <div id="writing-to-the-server" class="section level2">
 <h2 class="hasAnchor">
