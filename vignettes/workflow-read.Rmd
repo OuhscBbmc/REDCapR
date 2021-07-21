@@ -42,7 +42,7 @@ Check with your institution's REDCap administrator to ensure you have
 
 This might be the first time you've ever needed to request a token, and your institution may have a formal process for API approval.  Your REDCap admin can help.
 
-For this vignette, we'll use a fake dataset hosted at "https://bbmc.ouhsc.edu/redcap/api/" and accessible with the token "9A81268476645C4E5F03428B8AC3AA7B".
+For this vignette, we'll use a fake dataset hosted at `https://bbmc.ouhsc.edu/redcap/api/` and accessible with the token "9A81268476645C4E5F03428B8AC3AA7B".
 
 Note to REDCap Admins:
 
@@ -283,7 +283,7 @@ By default, `REDCapR::redcap_read()` requests datasets of 100 patients as a time
 Writing to the Server
 -------------------------
 
-Reading record data is only one API capability.  REDCapR [exposes 20+ API functions]([`REDCapR::redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html)), such as reading metadata, retrieving survey links, and writing records back to REDCap.  This last operation is relevant in  [Kenneth McLean](https://twitter.com/kennethmclean92)'s presentation following a five-minute break. 
+Reading record data is only one API capability.  REDCapR [exposes 20+ API functions](https://ouhscbbmc.github.io/REDCapR/reference/), such as reading metadata, retrieving survey links, and writing records back to REDCap.  This last operation is relevant in  [Kenneth McLean](https://twitter.com/kennethmclean92)'s presentation following a five-minute break. 
 
 Notes
 ===================================
