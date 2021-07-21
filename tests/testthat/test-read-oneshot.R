@@ -204,7 +204,7 @@ test_that("label", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
-# This test is removed because the vroom version adds digits to makethe columns unique
+# This test is removed because the vroom version adds digits to make the columns unique
 # test_that("label-header", {
 #   testthat::skip_on_cran()
 #   path_expected <- "test-data/specific-redcapr/read-oneshot/label-header.R"
