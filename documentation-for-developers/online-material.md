@@ -2,7 +2,7 @@ List of Online Material
 ==============================================
 
 This is a running list of material we've seen online describing how to connect to REDCap with R (not necessarily with the API).  If you've read or written something you'd like included, please tell us, or just edit the markdown file yourself.
-* [Intro to the REDCap API](https://sburns.org/2013/07/22/intro-to-redcap-api.html): A tutorial by Scott S Burns, 2013-07-22
+* [Intro to the REDCap API](http://sburns.org/2013/07/22/intro-to-redcap-api.html): A tutorial by Scott S Burns, 2013-07-22
 * [Improving Research through Advanced REDCap Interfaces](https://github.com/sburns/advanced-redcap-interfaces/blob/master/slides.md). By Scott S Burns, 2013-04-18
 * [REDCap and DDI Exporting Data and Metadata with the API](https://hdl.handle.net/1808/11047) By Larry Hoyle & Ada Van Roekel, 2013-04-03
 * [REDCapCustomReports](https://github.com/jeffreyhorner/REDCapCustomReports): REDCapCustomReports is a REDCap module for creating custom PDF reports written in the R language. By Jeffrey Horner, started 2013-02-15.
