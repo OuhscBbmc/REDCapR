@@ -45,7 +45,7 @@ Currently, a list is returned with the following elements:
 \item \code{success}: A boolean value indicating if the operation was apparently
 successful.
 \item \code{status_code}: The
-\href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code}
+\href{https://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code}
 of the operation.
 \item \code{outcome_message}: A human readable string indicating the operation's
 outcome.

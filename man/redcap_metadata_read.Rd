@@ -49,7 +49,7 @@ Currently, a list is returned with the following elements:
 \item \code{success}: A boolean value indicating if the operation was apparently
 successful.
 \item \code{status_codes}: A collection of
-\href{http://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes},
+\href{https://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes},
 separated by semicolons.  There is one code for each batch attempted.
 \item \code{outcome_messages}: A collection of human readable strings indicating the
 operations' semicolons.  There is one code for each batch attempted.  In an

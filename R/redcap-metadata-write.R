@@ -22,7 +22,7 @@
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
 #' * `status_code`: The
-#' [http status code](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
+#' [http status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
 #' of the operation.
 #' * `outcome_message`: A human readable string indicating the operation's
 #' outcome.
@@ -73,7 +73,7 @@ redcap_metadata_write <- function(
   verbose         = TRUE,
   config_options  = NULL
 ) {
-  csv_elements <- NULL #This prevents the R CHECK NOTE: 'No visible binding for global variable Note in R CMD check';  Also see  if( getRversion() >= "2.15.1" )    utils::globalVariables(names=c("csv_elements")) #http://stackoverflow.com/questions/8096313/no-visible-binding-for-global-variable-note-in-r-cmd-check; http://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
+  csv_elements <- NULL #This prevents the R CHECK NOTE: 'No visible binding for global variable Note in R CMD check';  Also see  if( getRversion() >= "2.15.1" )    utils::globalVariables(names=c("csv_elements")) #https://stackoverflow.com/questions/8096313/no-visible-binding-for-global-variable-note-in-r-cmd-check; https://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
 
   checkmate::assert_character(redcap_uri, any.missing = FALSE, len = 1, pattern = "^.{1,}$")
   checkmate::assert_character(token     , any.missing = FALSE, len = 1, pattern = "^.{1,}$")

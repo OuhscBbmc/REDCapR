@@ -70,7 +70,7 @@ labels <- mapply(function (start, len) substr(choices, start, start+len-1),
 
 
 
-#http://stackoverflow.com/questions/952275/regex-group-capture-in-r
+#https://stackoverflow.com/questions/952275/regex-group-capture-in-r
 ids <- mapply(function (start, len) as.integer(substr(choices, start, start+len-1)),
                  attr(match_id, "capture.start")[, 1],
                  attr(match_id, "capture.length")[, 1]

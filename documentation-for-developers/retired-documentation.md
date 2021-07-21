@@ -25,7 +25,7 @@ sudo yum install R-RODBC unixODBC-devel
 
 
 ### SVN
-SVN is necessary if you want to commit to R-Forge (otherwise, just download the release version from CRAN and the development version from [GitHub](https://github.com/OuhscBbmc/REDCapR)).  When a directory is deleted, using the command line to first [update](http://stackoverflow.com/questions/87950/how-do-you-overcome-the-svn-out-of-date-error) and then [delete](http://svnbook.red-bean.com/en/1.2/svn.ref.svn.c.delete.html) works for me.
+SVN is necessary if you want to commit to R-Forge (otherwise, just download the release version from CRAN and the development version from [GitHub](https://github.com/OuhscBbmc/REDCapR)).  When a directory is deleted, using the command line to first [update](https://stackoverflow.com/questions/87950/how-do-you-overcome-the-svn-out-of-date-error) and then [delete](https://svnbook.red-bean.com/en/1.2/svn.ref.svn.c.delete.html) works for me.
 ```
 $ svn update doc
 

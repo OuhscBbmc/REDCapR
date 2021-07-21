@@ -10,7 +10,7 @@ template:
 home:
   links:
 #  - text: Ask a question
-#    href: http://discourse.mc-stan.org/
+#    href: https://discourse.mc-stan.org/
 
 development:
   mode: release

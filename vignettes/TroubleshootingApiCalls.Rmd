@@ -11,7 +11,7 @@ vignette: >
 #   - images/EmailVerified.png
 ---
 
-There are many links in the pipeline between your institution's [REDCap](http://www.project-redcap.org/) server and the API user.  When the end result is unsuccessful, this document should help narrow the location of the possible problem.  The first two sections will be relevant to almost any language interacting with the API.  The remaining sections are possibly relevant only to your language (*e.g.*, Python, R, PHP, SAS, bash), or your software library such as ([redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://ouhscbbmc.github.io/REDCapR) in R, [phpcap](https://github.com/iuredcap/phpcap) in PHP, and [PyCap](http://pycap.readthedocs.org/en/latest/) in Python).
+There are many links in the pipeline between your institution's [REDCap](https://www.project-redcap.org/) server and the API user.  When the end result is unsuccessful, this document should help narrow the location of the possible problem.  The first two sections will be relevant to almost any language interacting with the API.  The remaining sections are possibly relevant only to your language (*e.g.*, Python, R, PHP, SAS, bash), or your software library such as ([redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://ouhscbbmc.github.io/REDCapR) in R, [phpcap](https://github.com/iuredcap/phpcap) in PHP, and [PyCap](https://pycap.readthedocs.org/en/latest/) in Python).
 
 Language Agnostic
 ==================================================================
@@ -60,7 +60,7 @@ If all these checks pass, proceed to the next section.  If not, start by consult
 Reading
 ------------------------------------------------------------------
 
-This section examines potential problems that occur after data leaves a working server, but before it is handled by their programming language (*e.g.*, Python and R).  [Postman](http://www.getpostman.com/) is a Chrome plugin recommended by [several](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ) [people](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ) that makes troubleshooting much more efficient.
+This section examines potential problems that occur after data leaves a working server, but before it is handled by their programming language (*e.g.*, Python and R).  [Postman](https://www.getpostman.com/) is a Chrome plugin recommended by [several](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ) [people](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ) that makes troubleshooting much more efficient.
 
 ```{r PostmanScreenshot, echo=FALSE, out.extra='style="fig.width=800px"'}
 knitr::include_graphics("images/PostmanScreenshot.png")
@@ -72,7 +72,7 @@ knitr::include_graphics("images/PostmanScreenshot.png")
 
     At the bottom of the playground page, the interface attempts to translate your specific API call to different languages, like Python and R.  These suggestions are usually correct, but  inspect it critically, as you would for any auto-generated script.
 
-1. **Is Postman installed and operating correctly?**  If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/).  The url is `https://bbmc.ouhsc.edu/redcap/api/`.  There are three key-value pairs: (1) the 'token' is `9A81268476645C4E5F03428B8AC3AA7B`, (2) the 'content' is `record`, and (3) the 'format' should be `CSV`.  When checking your own server, the token value should change, but the content and format should not.  It should return five records in a CSV format.  The 'status' should be `200 OK`.  The result should look roughly like this.  Notice the line breaks were included in the text values themselves.
+1. **Is Postman installed and operating correctly?**  If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the [OUHSC BBMC](https://ouhsc.edu/bbmc/).  The url is `https://bbmc.ouhsc.edu/redcap/api/`.  There are three key-value pairs: (1) the 'token' is `9A81268476645C4E5F03428B8AC3AA7B`, (2) the 'content' is `record`, and (3) the 'format' should be `CSV`.  When checking your own server, the token value should change, but the content and format should not.  It should return five records in a CSV format.  The 'status' should be `200 OK`.  The result should look roughly like this.  Notice the line breaks were included in the text values themselves.
 
     ```csv
     record_id,name_first,name_last,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete
@@ -95,7 +95,7 @@ knitr::include_graphics("images/PostmanScreenshot.png")
 
 1. **Can an administrator query the API successfully with Postman with the admin token?** As an administrator, create an account for yourself, and verify that your token works on your server and project.
 
-1. **Can an administrator query the API successfully with Postman with the user's token?** Use [Postman](http://www.getpostman.com/) as before, but replace your token with the user's token.  Once the whole problem is solved, reissue new API tokens to both you and the user.
+1. **Can an administrator query the API successfully with Postman with the user's token?** Use [Postman](https://www.getpostman.com/) as before, but replace your token with the user's token.  Once the whole problem is solved, reissue new API tokens to both you and the user.
 
 1. **Can a user query the API successfully with Postman with the their own token?** The values you enter should be exactly the same as those entered in the previous step.  A failure here (assuming the previous step was successful) suggests a network or firewall issue.  If the server is behind your institution's firewall, verify the you are connecting successfully through the VPN.
 
@@ -105,7 +105,7 @@ knitr::include_graphics("images/PostmanScreenshot.png")
     curl -X POST -H "Cache-Control: no-cache" -F "token=9A81268476645C4E5F03428B8AC3AA7B" -F "content=record" -F "format=csv" "https://bbmc.ouhsc.edu/redcap/api/"
     ```
 
-If all these checks pass, proceed to the next section.  If not, start by consulting with your REDCap administrator.  If that fails, consider creating a GitHub issue for your package (*e.g.*, [redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://ouhscbbmc.github.io/REDCapR) in R, [phpcap](https://github.com/iuredcap/phpcap) in PHP, and [PyCap](http://pycap.readthedocs.org/en/latest/) in Python).
+If all these checks pass, proceed to the next section.  If not, start by consulting with your REDCap administrator.  If that fails, consider creating a GitHub issue for your package (*e.g.*, [redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://ouhscbbmc.github.io/REDCapR) in R, [phpcap](https://github.com/iuredcap/phpcap) in PHP, and [PyCap](https://pycap.readthedocs.org/en/latest/) in Python).
 
 Writing
 ------------------------------------------------------------------
@@ -306,7 +306,7 @@ If you're not using REDCapR, you can skip this section and proceed to "Exporting
 
    If this fails, see "Problems in the project's metadata/dictionary" under [Common Gotchas](#gotchas-agnostic) above.  A problematic data dictionary may produce the error `Error in inherits(ds, "data.frame") : object 'ds' not found` when calling `REDCapR::redcap_metadata_read()`.
 
-1. **Can you export from an example project?** This is the same fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/) as in the previous section.
+1. **Can you export from an example project?** This is the same fake data hosted by the [OUHSC BBMC](https://ouhsc.edu/bbmc/) as in the previous section.
 
     ```r
     library(REDCapR) # Load the package into the current R session.
@@ -401,7 +401,7 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
     Developmental versions may be available on GitHub.
 
     ```r
-    install.packages("remotes", repos = "http://cran.rstudio.com")
+    install.packages("remotes", repos = "https://cran.rstudio.com")
     remotes::install_github(repo = "nutterb/redcapAPI")
     ```
 
@@ -423,7 +423,7 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
 
    If this fails, see "Problems in the project's metadata/dictionary." under [Gotchas](#gotchas-agnostic) above
 
-1. **Can you export from an example project?** This is the same fake data hosted by the [OUHSC BBMC](http://ouhsc.edu/bbmc/) as in the previous section.
+1. **Can you export from an example project?** This is the same fake data hosted by the [OUHSC BBMC](https://ouhsc.edu/bbmc/) as in the previous section.
 
     ```r
     library(redcapAPI) # Load the package into the current R session.
@@ -494,16 +494,16 @@ Troubleshooting Strategies
 Resources
 ------------------------------------------------------------------
 
-* REDCap is used in many environments, and it's not surprising that a lot of libraries have been developed to cater to different scenarios and languages.   An active list is maintained at [REDCap-Tools](http://redcap-tools.github.io/projects/).  In an entry needs to be added, please notify us; instructions are found at the bottom of the page.
+* REDCap is used in many environments, and it's not surprising that a lot of libraries have been developed to cater to different scenarios and languages.   An active list is maintained at [REDCap-Tools](https://redcap-tools.github.io/projects/).  In an entry needs to be added, please notify us; instructions are found at the bottom of the page.
 
 * The basic API documentation is available on your REDCap server, typically at
 
     ```
-    http://<*your server name*>/redcap/api/help
+    https://<*your server name*>/redcap/api/help
     ```
 
 * If you have access to the REDCap wiki, some newer examples might exist at <https://community.projectredcap.org/articles/462/api-examples.html>.  The official documentation can be found on the `API Help Page` and `API Examples' pages on the REDCap wiki (*i.e.*, <https://community.projectredcap.org/articles/456/api-documentation.html> and <https://community.projectredcap.org/articles/462/api-examples.html>). If you do not have an account for the wiki, please ask your campus REDCap administrator to send you the static material.
-* Scott Burns, the primary developer of [PyCap](https://github.com/redcap-tools/PyCap) has a good intro at http://sburns.org/2013/07/22/intro-to-redcap-api.html
+* Scott Burns, the primary developer of [PyCap](https://github.com/redcap-tools/PyCap) has a good intro at https://sburns.org/2013/07/22/intro-to-redcap-api.html
 * Benjamin Nutter, the primary developer of [redcapAPI](https://github.com/nutterb/redcapAPI/wiki) has a good wiki at https://github.com/nutterb/redcapAPI/wiki
 * In addition to this troubleshooting document, REDCapR has vignettes that covers its  [basic](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) and [advanced](https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.html) operations.
 

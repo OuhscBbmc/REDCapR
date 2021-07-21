@@ -13,7 +13,7 @@ redcap_uri <- "https://www.redcapplugins.org/api/"
 token <- "D96029BFCE8FFE76737BFC33C2BCC72E" #For `UnitTestPhiFree` account and the simple project (pid 27) on Vandy's test server.
 
 # SO post:
-# http://stackoverflow.com/questions/15347233/ssl-certificate-failed-for-twitter-in-r
+# https://stackoverflow.com/questions/15347233/ssl-certificate-failed-for-twitter-in-r
 cert_location <- system.file("cacert.pem", package="openssl")
 file.exists(cert_location)
 
@@ -68,7 +68,7 @@ content(httr_raw, type = "text")
 
 ##########################################################################
 library(RCurl)
-# SO post: http://stackoverflow.com/questions/15347233/ssl-certificate-failed-for-twitter-in-r
+# SO post: https://stackoverflow.com/questions/15347233/ssl-certificate-failed-for-twitter-in-r
 file.exists(system.file("ssl-certs/mozilla-ca-root.crt", package="REDCapR"))
 
 rcurl_raw <- RCurl::postForm(
