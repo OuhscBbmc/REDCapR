@@ -114,8 +114,9 @@ redcap_metadata_read <- function(
       # Convert the raw text to a dataset.
       ds <-
         readr::read_csv(
-          kernel$raw_text,
-          col_types = col_types
+          file            = I(kernel$raw_text),
+          col_types       = col_types,
+          show_col_types  = FALSE
         ),
       # Don't print the warning in the try block.  Print it below,
       #   where it's under the control of the caller.

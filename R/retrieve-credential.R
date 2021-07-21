@@ -128,9 +128,10 @@ retrieve_credential_local <- function(
   )
 
   ds_credentials <- readr::read_csv(
-    file      = path_credential,
-    col_types = col_types,
-    comment   = "#"
+    file            = path_credential,
+    col_types       = col_types,
+    comment         = "#",
+    show_col_types  = FALSE
   )
 
   # Check that it's a data.frame with valid variable names

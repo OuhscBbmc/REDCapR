@@ -244,7 +244,11 @@ redcap_read_oneshot_eav <- function(
   if (kernel$success) {
     try (
       {
-        ds_eav <- readr::read_csv(kernel$raw_text)
+        ds_eav <-
+          readr::read_csv(
+            file            = I(kernel$raw_text),
+            show_col_types  = FALSE
+          )
 
         ds_metadata_expanded <-
           ds_metadata %>%
@@ -312,7 +316,7 @@ redcap_read_oneshot_eav <- function(
 
         ds_2 <-
           ds %>%
-          dplyr::mutate_if(is.character, type.convert) %>%
+          dplyr::mutate_if(is.character, ~type.convert(., as.is = FALSE)) %>%
           dplyr::mutate_if(is.factor   , as.character)
       }, #Convert the raw text to a dataset.
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.

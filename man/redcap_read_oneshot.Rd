@@ -150,7 +150,10 @@ viewable by executing \code{\link[httr:httr_options]{httr::httr_options()}}.  Th
 documentation is available at https://cran.r-project.org/package=httr.
 
 If you do not pass in this \code{export_data_access_groups} value, it will default
-to \code{FALSE}. The following is from the API help page for version 10.5.1:This flag is only viable if the user whose token is being used to make theAPI request is not in a data access group. If the user is in a group,then this flag will revert to its default value.
+to \code{FALSE}. The following is from the API help page for version 10.5.1:
+\emph{This flag is only viable if the user whose token is being used to make the
+API request is \emph{not} in a data access group. If the user is in a group,
+then this flag will revert to its default value}.
 }
 \examples{
 \dontrun{

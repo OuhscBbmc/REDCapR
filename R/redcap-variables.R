@@ -80,7 +80,11 @@ redcap_variables <- function(
   if (kernel$success) {
     try(
       {
-        ds <- readr::read_csv(file = kernel$raw_text)
+        ds <-
+          readr::read_csv(
+            file            = I(kernel$raw_text),
+            show_col_types  = FALSE
+          )
       }, #Convert the raw text to a dataset.
       silent = TRUE
       # Don't print the warning in the try block.  Print it below, where

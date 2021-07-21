@@ -95,9 +95,9 @@
 #'
 #' If you do not pass in this `export_data_access_groups` value, it will default
 #' to `FALSE`. The following is from the API help page for version 10.5.1:
-#' >This flag is only viable if the user whose token is being used to make the
+#' *This flag is only viable if the user whose token is being used to make the
 #' API request is *not* in a data access group. If the user is in a group,
-#' then this flag will revert to its default value.
+#' then this flag will revert to its default value*.
 #'
 #' @author Will Beasley
 #'
@@ -257,8 +257,12 @@ redcap_read_oneshot <- function(
     try(
       # Convert the raw text to a dataset.
       ds <-
-        kernel$raw_text %>%
-        readr::read_csv(col_types = col_types, guess_max = guess_max) %>%
+        readr::read_csv(
+          file            = I(kernel$raw_text),
+          col_types       = col_types,
+          guess_max       = guess_max,
+          show_col_types  = FALSE
+        ) %>%
         as.data.frame(),
 
       # Don't print the warning in the try block.  Print it below,
