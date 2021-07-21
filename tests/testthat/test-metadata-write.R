@@ -7,7 +7,12 @@ path_in <- system.file(
   "test-data/project-simple/simple-metadata.csv",
   package = "REDCapR"
 )
-dictionary_to_write <- readr::read_csv(path_in, col_types = readr::cols(.default = readr::col_character()))
+dictionary_to_write <-
+  readr::read_csv(
+    file            = path_in,
+    col_types       = readr::cols(.default = readr::col_character()),
+    show_col_types  = FALSE
+  )
 
 test_that("Metadata Write", {
   testthat::skip_on_cran()

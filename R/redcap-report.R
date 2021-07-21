@@ -168,8 +168,12 @@ redcap_report <- function(
     try(
       # Convert the raw text to a dataset.
       ds <-
-        kernel$raw_text %>%
-        readr::read_csv(col_types = col_types, guess_max = guess_max) %>%
+        readr::read_csv(
+          file            = I(kernel$raw_text),
+          col_types       = col_types,
+          guess_max       = guess_max,
+          show_col_types  = FALSE
+        ) %>%
         as.data.frame(),
 
       # Don't print the warning in the try block.  Print it below,

@@ -95,8 +95,9 @@ redcap_users_export <- function(
     try(
       { # readr::spec_csv(kernel$raw_text)
         ds_combined <- readr::read_csv(
-          file      = kernel$raw_text,
-          col_types = col_types
+          file            = I(kernel$raw_text),
+          col_types       = col_types,
+          show_col_types  = FALSE
         )
 
         # Remove the readr's `spec` attribute about the column names & types.

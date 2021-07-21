@@ -244,7 +244,11 @@ redcap_read_oneshot_eav <- function(
   if (kernel$success) {
     try (
       {
-        ds_eav <- readr::read_csv(kernel$raw_text)
+        ds_eav <-
+          readr::read_csv(
+            file            = I(kernel$raw_text),
+            show_col_types  = FALSE
+          )
 
         ds_metadata_expanded <-
           ds_metadata %>%
