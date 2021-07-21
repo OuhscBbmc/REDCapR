@@ -45,7 +45,7 @@ The *development* version can be installed from [GitHub](https://github.com/Ouhs
 install.packages("remotes") # Run this line if the 'remotes' package isn't installed already.
 remotes::install_github(repo="OuhscBbmc/REDCapR")
 ```
-The  [ouhscbbmc.github.io/REDCapR](https://ouhscbbmc.github.io/REDCapR) site describes the package functions, and includes documents involving [basic operations](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html), [advanced operations](https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.html), [token security](https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html), and
+The  [ouhscbbmc.github.io/REDCapR](https://ouhscbbmc.github.io/REDCapR/ site describes the package functions, and includes documents involving [basic operations](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html), [advanced operations](https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.html), [token security](https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html), and
 [troubleshooting](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html).
 
 Also checkout the other packages that exist for communicating with REDCap, which are listed in the [REDCap Tools](https://redcap-tools.github.io/projects/) directory.
@@ -60,10 +60,10 @@ We'd like to thank the following developers for their [advice](https://github.co
 
 Much of this package has been developed to support the needs of the following projects.  We appreciate the support.  (So far) the primary developers of REDCapR are the external evaluators for [Oklahoma's MIECHV](https://oklahoma.gov/health/family-health/family-support-and-prevention-service.html) program.  See the preliminary CQI reports (many of which use REDCapR) at https://ouhscbbmc.github.io/MReportingPublic/.
 
-* *OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting ([MIECHV](https://mchb.hrsa.gov/programs/homevisiting/)) Project*. HRSA/ACF D89MC23154.  David Bard, PI, OUHSC; 2011-2015.
+* *OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting ([MIECHV](https://mchb.hrsa.gov/maternal-child-health-initiatives/home-visiting-overview)) Project*. HRSA/ACF D89MC23154.  David Bard, PI, OUHSC; 2011-2015.
 * *Independent Evaluation of the State of OK MIECHV Evidence Based Home Visitation Project*, [NIH](https://www.nih.gov/)-sponsored collaboration with [OSDH](https://oklahoma.gov/health.html). David Bard, PI, OUHSC; 2015-2017.
 * *OSDH ParentPRO Pilot Evaluation*, federally-sponsored collaboration with [OSDH](https://oklahoma.gov/health.html).  David Bard, PI, OUHSC; 2015-2017.
-* *Title IV-E Waiver Project*, [HRSA/MCHB](https://mchb.hrsa.gov/)-sponsored collaboration with [OKDHS](https://www.okdhs.org/); David Bard, PI, OUHSC; 2014-2017.
+* *Title IV-E Waiver Project*, [HRSA/MCHB](https://mchb.hrsa.gov/)-sponsored collaboration with [OKDHS](https://oklahoma.gov/okdhs.html); David Bard, PI, OUHSC; 2014-2017.
 * *Integrative Analysis of Longitudinal Studies of Aging (IALSA)*, sponsored by [NIH 5P01AG043362](https://grantome.com/grant/NIH/P01-AG043362).  Scott Hofer, PI, University of Victoria; Will Beasley, PI of site-award, OUHSC; 2013-2018.
 * *Oklahoma Shared Clinical and Translational Resources*, sponsored by [NIH NIGMS; U54 GM104938](https://grantome.com/grant/NIH/U54-GM104938). Judith A. James, PI, OUHSC; 2013-2018.
 * *Oklahoma Shared Clinical and Translational Resources*, sponsored by [NIH U54GM104938](https://hsrproject.nlm.nih.gov/view_hsrproj_record/20204379); 2020-2021.
@@ -71,9 +71,9 @@ Much of this package has been developed to support the needs of the following pr
 
 Thanks,
 [Will Beasley](https://www.researchgate.net/profile/William-Beasley-5), David Bard, & Thomas Wilson<br/>
-[University of Oklahoma Health Sciences Center](https://ouhsc.edu/),
+[University of Oklahoma Health Sciences Center](https://www.ouhsc.edu/),
 [Department of Pediatrics](https://medicine.ouhsc.edu/Academic-Departments/Pediatrics),
-[Biomedical & Behavioral Research Core](https://ouhsc.edu/BBMC/).
+[Biomedical & Behavioral Research Core](https://www.ouhsc.edu/BBMC/).
 
 ### Build Status and Package Characteristics
 

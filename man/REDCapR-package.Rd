@@ -15,18 +15,18 @@ following projects.  We appreciate the support.
 \itemize{
 \item \emph{OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive
 Maternal, Infant, and Early Childhood Home Visiting
-(\href{https://mchb.hrsa.gov/programs/homevisiting/}{MIECHV}) Project}.
-\href{https://grants6.hrsa.gov/MCHB/DGISReports/Abstract/AbstractDetails.aspx?cbAbstractSummary=D89MC23154_2012_NonResearch_4}{HRSA/ACF D89MC23154}.
+(\href{https://mchb.hrsa.gov/maternal-child-health-initiatives/home-visiting-overview}{MIECHV}) Project}.
+HRSA/ACF D89MC23154.
 David Bard, PI, OUHSC; 2011-2015.
 \item \emph{Independent Evaluation of the State of OK MIECHV Evidence Based Home
 Visitation Project}, \href{https://www.nih.gov/}{NIH}-sponsored collaboration
-with \href{https://ok.gov/health/}{OSDH}.
+with \href{https://oklahoma.gov/health.html}{OSDH}.
 David Bard, PI, OUHSC; 2015-2017.
 \item \emph{OSDH ParentPRO Pilot Evaluation}, federally-sponsored collaboration
-with \href{https://ok.gov/health/}{OSDH}.
+with \href{https://oklahoma.gov/health.html}{OSDH}.
 David Bard, PI, OUHSC; 2015-2017.
 \item \emph{Title IV-E Waiver Project}, \href{https://mchb.hrsa.gov/}{HRSA/MCHB}-sponsored
-collaboration with \href{https://www.okdhs.org/}{OKDHS};
+collaboration with \href{https://oklahoma.gov/okdhs.html}{OKDHS};
 David Bard, PI, OUHSC; 2014-2017.
 \item \emph{Integrative Analysis of Longitudinal Studies of Aging (IALSA)},
 sponsored by \href{https://grantome.com/grant/NIH/P01-AG043362}{NIH 5P01AG043362}.
