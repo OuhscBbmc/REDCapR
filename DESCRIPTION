@@ -44,7 +44,6 @@ Suggests:
     sessioninfo (>= 1.1.1),
     testthat (>= 3.0)
 License: GPL-2
-LazyData: TRUE
 VignetteBuilder: knitr
 Encoding: UTF-8
 RoxygenNote: 7.1.1
