@@ -66,7 +66,8 @@ Much of this package has been developed to support the needs of the following pr
 * *Title IV-E Waiver Project*, [HRSA/MCHB](http://mchb.hrsa.gov/)-sponsored collaboration with [OKDHS](http://www.okdhs.org/); David Bard, PI, OUHSC; 2014-2017.
 * *Integrative Analysis of Longitudinal Studies of Aging (IALSA)*, sponsored by [NIH 5P01AG043362](http://grantome.com/grant/NIH/P01-AG043362).  Scott Hofer, PI, University of Victoria; Will Beasley, PI of site-award, OUHSC; 2013-2018.
 * *Oklahoma Shared Clinical and Translational Resources*, sponsored by [NIH NIGMS; U54 GM104938](http://grantome.com/grant/NIH/U54-GM104938). Judith A. James, PI, OUHSC; 2013-2018.
-* Additional Institutional Support from OUHSC [Dept of Pediatrics](https://www.oumedicine.com/department-of-pediatrics); 2013-2017.
+* *Oklahoma Shared Clinical and Translational Resources*, sponsored by [NIH U54GM104938](https://hsrproject.nlm.nih.gov/view_hsrproj_record/20204379); 2020-2021.
+* Additional Institutional Support from OUHSC [Dept of Pediatrics](https://www.oumedicine.com/department-of-pediatrics); 2013-2021.
 
 Thanks,
 [Will Beasley](https://www.researchgate.net/profile/William_Beasley2), David Bard, & Thomas Wilson<br/>
@@ -86,7 +87,7 @@ Thanks,
 | :--- | :----- |
 | [License](https://choosealicense.com/) | [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html) |
 | [CRAN Version](https://cran.r-project.org/package=REDCapR) | [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/REDCapR)](https://cran.r-project.org/package=REDCapR) |
-| [CRAN Rate](http://cranlogs.r-pkg.org/) | ![CRAN Pace](http://cranlogs.r-pkg.org/badges/REDCapR) |
+| [CRAN Rate](https://cranlogs.r-pkg.org/) | ![CRAN Pace](https://cranlogs.r-pkg.org/badges/REDCapR) |
 | [Zenodo Archive](https://zenodo.org/search?ln=en&p=redcapr) | [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.61990.svg)](https://doi.org/10.5281/zenodo.61990) |
 | [Production Doc](https://www.rdocumentation.org/) | [![Rdoc](http://www.rdocumentation.org/badges/version/REDCapR)](http://www.rdocumentation.org/packages/REDCapR) |
 | [Development Doc](https://www.rdocumentation.org/) | [![Rdoc](https://img.shields.io/badge/pkgdown-GitHub.io-orange.svg?longCache=true&style=style=for-the-badge)](https://ouhscbbmc.github.io/REDCapR/) |

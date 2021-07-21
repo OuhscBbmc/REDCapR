@@ -288,3 +288,5 @@ Notes
 ===================================
 
 This vignette was originally designed for a 2021 R/Medicine REDCap workshop with [Peter Higgins](http://www.med.umich.edu/higginslab/), [Amanda Miller](https://coloradosph.cuanschutz.edu/resources/directory/directory-profile/Miller-Amanda-UCD6000053152), and [Kenneth McLean](https://twitter.com/kennethmclean92).
+
+This work was made possible in part by the NIH grant [U54GM104938](https://hsrproject.nlm.nih.gov/view_hsrproj_record/20204379) to the [Oklahoma Shared Clinical and Translational Resource)](http://osctr.ouhsc.edu).

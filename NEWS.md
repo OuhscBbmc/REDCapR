@@ -4,8 +4,10 @@ Upcoming Versions
 In the future:
 ...
 
-Version 0.12 (Unreleased on CRAN)
+Version 1.0 (released 2021-07-21)
 ==========================================================
+
+The package has been stable for years and should be reflected in the major version number.
 
 ### Minor Enhancements
 
@@ -20,7 +22,8 @@ Version 0.12 (Unreleased on CRAN)
 ### Stability Features
 
 * update for newer version of testthat -v3.0.0 (#312)
-* update for newer version of readr (#313)
+* update for newer version of readr 2.0.0 (#343)
+* update for newer version of readr 1.4.0 (#313)
 * update for newer version of REDCap on test server (#310)
 * save expected datasets as files -instead of included in the actual test code (#308)
 
