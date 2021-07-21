@@ -316,7 +316,7 @@ redcap_read_oneshot_eav <- function(
 
         ds_2 <-
           ds %>%
-          dplyr::mutate_if(is.character, type.convert) %>%
+          dplyr::mutate_if(is.character, ~type.convert(., as.is = FALSE)) %>%
           dplyr::mutate_if(is.factor   , as.character)
       }, #Convert the raw text to a dataset.
       silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
