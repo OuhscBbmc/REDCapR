@@ -13,9 +13,9 @@ Test environments
 1. Local Ubuntu, R 4.1.0 patched
 1. Local Win8, R 4.1.0 patched
 1. R-hub
-    1. [Ubuntu Linux 20.04 LTS, R-release, GCC](https://builder.r-hub.io/status/REDCapR_1.0.0.tar.gz-07f6c48b71b24a0c8764a11732d1075e)
-    1. [Fedora Linux, R-devel, clang, gfortran](https://builder.r-hub.io/status/REDCapR_1.0.0.tar.gz-26dba71e01de40f6b99e85abf366bea4)
-    1. [Windows Server](https://builder.r-hub.io/status/REDCapR_0.10.2.9006.tar.gz-80133501925a411da4c3cf3be8205e29)
+    1. [Ubuntu Linux 20.04 LTS, R-release, GCC](https://builder.r-hub.io/status/REDCapR_1.0.0.tar.gz-d554cfab8fed4acba83ca159d2a14a7b)
+    1. [Fedora Linux, R-devel, clang, gfortran](https://builder.r-hub.io/status/REDCapR_1.0.0.tar.gz-80a6d6b66bb84847b61d31f6029f5628)
+    1. [Windows Server](https://builder.r-hub.io/status/REDCapR_1.0.0.tar.gz-b5b0cb95fb4746f9b354071b89caaafa)
 1. [win-builder](https://win-builder.r-project.org/BwNz2bnHxuse), development version.
 1. [GiHub Actions](https://github.com/OuhscBbmc/REDCapR/actions), Ubuntu 20.04 LTS
 
