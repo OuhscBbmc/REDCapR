@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.1.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.1.9005</span>
       </span>
     </div>
 
@@ -90,7 +90,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Basic REDCapR Operations</h1>
             
-            <h4 class="date">2021-07-20</h4>
+            <h4 class="date">2021-07-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/BasicREDCapROperations.Rmd"><code>vignettes/BasicREDCapROperations.Rmd</code></a></small>
       <div class="hidden name"><code>BasicREDCapROperations.Rmd</code></div>
@@ -122,15 +122,8 @@
 <code class="sourceCode R"><span class="co"># Return all records and all variables.</span>
 <span class="va">ds_all_rows_all_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
-<pre><code>Rows: 5 Columns: 1</code></pre>
-<pre><code>── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-dbl (1): record_id</code></pre>
-<pre><code>
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2021-07-20 16:53:26.</code></pre>
+<pre><code>Starting to read 5 records  at 2021-07-21 13:35:33.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -147,7 +140,7 @@ cols(
   mugshot = col_character()
 )
 ℹ Use `spec()` for the full column specifications.</code></pre>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds_all_rows_all_fields</span> <span class="co"># Inspect the returned dataset</span></code></pre></div>
 <pre><code>  record_id name_first name_last                                 address
 1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232
@@ -191,7 +184,7 @@ cols(
 <a href="#read-a-subset-of-the-records" class="anchor"></a>Read a subset of the records</h2>
 <p>If only a subset of the <strong>records</strong> is desired, the two approaches are shown below. The first is to pass an array (where each element is an ID) to the <code>records</code> parameter. The second is to pass a single string (where the elements are separated by commas) to the <code>records_collapsed</code> parameter.</p>
 <p>The first format is more natural for more R users. The second format is what is expected by the REDCap API. If a value for <code>records</code> is specified, but <code>records_collapsed</code> is not specified, then <code>redcap_read_oneshot</code> automatically converts the array into the format needed by the API.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Return only records with IDs of 1 and 3</span>
 <span class="va">desired_records_v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">ds_some_rows_v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
@@ -200,49 +193,8 @@ cols(
   records    <span class="op">=</span> <span class="va">desired_records_v1</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Rows: 2 Columns: 1</code></pre>
-<pre><code>── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-dbl (1): record_id</code></pre>
-<pre><code>
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2021-07-20 16:53:28.</code></pre>
-<pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
-<pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>
-── Column specification ────────────────────────────────────────────────────────
-cols(
-  .default = col_double(),
-  name_first = col_character(),
-  name_last = col_character(),
-  address = col_character(),
-  telephone = col_character(),
-  email = col_character(),
-  dob = col_date(format = ""),
-  comments = col_character(),
-  mugshot = col_character()
-)
-ℹ Use `spec()` for the full column specifications.</code></pre>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Return only records with IDs of 1 and 3 (alternate way)</span>
-<span class="va">desired_records_v2</span> <span class="op">&lt;-</span> <span class="st">"1, 3"</span>
-<span class="va">ds_some_rows_v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
-  redcap_uri        <span class="op">=</span> <span class="va">uri</span>,
-  token             <span class="op">=</span> <span class="va">token</span>,
-  records_collapsed <span class="op">=</span> <span class="va">desired_records_v2</span>
-<span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Rows: 2 Columns: 1</code></pre>
-<pre><code>── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-dbl (1): record_id</code></pre>
-<pre><code>
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2021-07-20 16:53:29.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2021-07-21 13:35:35.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -259,7 +211,34 @@ cols(
   mugshot = col_character()
 )
 ℹ Use `spec()` for the full column specifications.</code></pre>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Return only records with IDs of 1 and 3 (alternate way)</span>
+<span class="va">desired_records_v2</span> <span class="op">&lt;-</span> <span class="st">"1, 3"</span>
+<span class="va">ds_some_rows_v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
+  redcap_uri        <span class="op">=</span> <span class="va">uri</span>,
+  token             <span class="op">=</span> <span class="va">token</span>,
+  records_collapsed <span class="op">=</span> <span class="va">desired_records_v2</span>
+<span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2021-07-21 13:35:37.</code></pre>
+<pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
+<pre><code>2 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>
+── Column specification ────────────────────────────────────────────────────────
+cols(
+  .default = col_double(),
+  name_first = col_character(),
+  name_last = col_character(),
+  address = col_character(),
+  telephone = col_character(),
+  email = col_character(),
+  dob = col_date(format = ""),
+  comments = col_character(),
+  mugshot = col_character()
+)
+ℹ Use `spec()` for the full column specifications.</code></pre>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds_some_rows_v2</span> <span class="co"># Inspect the returned dataset</span></code></pre></div>
 <pre><code>  record_id name_first name_last                                 address
 1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232
@@ -281,7 +260,7 @@ cols(
 <h2 class="hasAnchor">
 <a href="#read-a-subset-of-the-fields" class="anchor"></a>Read a subset of the fields</h2>
 <p>If only a subset of the <strong>fields</strong> is desired, then two approaches exist. The first is to pass an array (where each element is an field) to the <code>fields</code> parameter. The second is to pass a single string (where the elements are separated by commas) to the <code>fields_collapsed</code> parameter. Like with <code>records</code> and <code>records_collapsed</code> described above, this function converts the more natural format (<em>i.e.</em>, <code>fields</code>) to the format required by the API (<em>ie</em>, <code>fields_collapsed</code>) if <code>fields</code> is specified and <code>fields_collapsed</code> is not.</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Return only the fields record_id, name_first, and age</span>
 <span class="va">desired_fields_v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"name_first"</span>, <span class="st">"age"</span><span class="op">)</span>
 <span class="va">ds_some_fields_v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
@@ -289,16 +268,9 @@ cols(
   token      <span class="op">=</span> <span class="va">token</span>,
   fields     <span class="op">=</span> <span class="va">desired_fields_v1</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Rows: 5 Columns: 1</code></pre>
-<pre><code>── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-dbl (1): record_id</code></pre>
-<pre><code>
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2021-07-20 16:53:31.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2021-07-21 13:35:39.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -308,7 +280,7 @@ cols(
   name_first = col_character(),
   age = col_double()
 )</code></pre>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Return only the fields record_id, name_first, and age (alternate way)</span>
 <span class="va">desired_fields_v2</span> <span class="op">&lt;-</span> <span class="st">"record_id, name_first, age"</span>
 <span class="va">ds_some_fields_v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
@@ -316,18 +288,11 @@ cols(
   token            <span class="op">=</span> <span class="va">token</span>,
   fields_collapsed <span class="op">=</span> <span class="va">desired_fields_v2</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Rows: 5 Columns: 1</code></pre>
-<pre><code>── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-dbl (1): record_id</code></pre>
-<pre><code>
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2021-07-20 16:53:32.</code></pre>
+<pre><code>Starting to read 5 records  at 2021-07-21 13:35:40.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>
 ── Column specification ────────────────────────────────────────────────────────
 cols(
@@ -335,7 +300,7 @@ cols(
   name_first = col_character(),
   age = col_double()
 )</code></pre>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds_some_fields_v2</span> <span class="co">#Inspect the returned dataset</span></code></pre></div>
 <pre><code>  record_id name_first age
 1         1     Nutmeg  11
@@ -348,7 +313,7 @@ cols(
 <h2 class="hasAnchor">
 <a href="#read-a-subset-of-records-conditioned-on-the-values-in-some-variables" class="anchor"></a>Read a subset of records, conditioned on the values in some variables</h2>
 <p>The two techniques above can be combined when your datasets are large and you don’t want to pull records with certain values. Suppose you want to select subjects from the previous dataset <em>if</em> the were born before 1960 and their weight was over 70kg. Two calls to the server are required. The <strong>first call</strong> to REDCap pulls all the records, but for only three columns: <code>record_id</code>, <code>dob</code>, and <code>weight</code>. From this subset, identify the records that you want to pull all the data for; in this case, the desired <code>record_id</code> values are <code>3</code> &amp; <code>5</code>. The <strong>second call</strong> to REDCap pulls all the columns, but only for the identified records.</p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">######</span>
 <span class="co">## Step 1: First call to REDCap</span>
 <span class="va">desired_fields_v3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"dob"</span>, <span class="st">"weight"</span><span class="op">)</span>
@@ -357,16 +322,9 @@ cols(
   token      <span class="op">=</span> <span class="va">token</span>,
   fields     <span class="op">=</span> <span class="va">desired_fields_v3</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Rows: 5 Columns: 1</code></pre>
-<pre><code>── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-dbl (1): record_id</code></pre>
-<pre><code>
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2021-07-20 16:53:34.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2021-07-21 13:35:42.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -376,7 +334,7 @@ cols(
   dob = col_date(format = ""),
   weight = col_double()
 )</code></pre>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds_some_fields_v3</span> <span class="co">#Examine the these three variables.</span></code></pre></div>
 <pre><code>  record_id        dob weight
 1         1 2003-08-30      1
@@ -384,7 +342,7 @@ cols(
 3         3 1934-04-09     80
 4         4 1952-11-02     54
 5         5 1955-04-15    104</code></pre>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">######</span>
 <span class="co">## Step 2: identify desired records, based on age &amp; weight</span>
 <span class="va">before_1960</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">ds_some_fields_v3</span><span class="op">$</span><span class="va">dob</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1960-01-01"</span><span class="op">)</span><span class="op">)</span>
@@ -393,7 +351,7 @@ cols(
 
 <span class="va">desired_records_v3</span> <span class="co">#Peek at IDs of the identified records</span></code></pre></div>
 <pre><code>[1] 3 5</code></pre>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">######</span>
 <span class="co">## Step 3: second call to REDCap</span>
 <span class="co">#Return only records that met the age &amp; weight criteria.</span>
@@ -403,17 +361,10 @@ cols(
   records    <span class="op">=</span> <span class="va">desired_records_v3</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Rows: 2 Columns: 1</code></pre>
-<pre><code>── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-dbl (1): record_id</code></pre>
-<pre><code>
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2021-07-20 16:53:35.</code></pre>
+<pre><code>Starting to read 2 records  at 2021-07-21 13:35:43.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).</code></pre>
-<pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>
 ── Column specification ────────────────────────────────────────────────────────
 cols(
@@ -428,7 +379,7 @@ cols(
   mugshot = col_character()
 )
 ℹ Use `spec()` for the full column specifications.</code></pre>
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds_some_rows_v3</span> <span class="co">#Examine the results.</span></code></pre></div>
 <pre><code>  record_id name_first name_last                            address
 1         3     Marcus      Wood     243 Hill St.\nGuthrie OK 73402
@@ -462,25 +413,18 @@ cols(
 <li>The <code>fields_collapsed</code> fields passed to the API. This shows which field subsets, if any, were requested.</li>
 <li>The <code>elapsed_seconds</code> measures the duration of the call.</li>
 </ol>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Return only the fields record_id, name_first, and age</span>
 <span class="va">all_information</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
   redcap_uri <span class="op">=</span> <span class="va">uri</span>,
   token      <span class="op">=</span> <span class="va">token</span>,
   fields     <span class="op">=</span> <span class="va">desired_fields_v1</span>
 <span class="op">)</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Rows: 5 Columns: 1</code></pre>
-<pre><code>── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-dbl (1): record_id</code></pre>
-<pre><code>
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2021-07-20 16:53:37.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2021-07-21 13:35:45.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>
 ── Column specification ────────────────────────────────────────────────────────
 cols(
@@ -488,7 +432,7 @@ cols(
   name_first = col_character(),
   age = col_double()
 )</code></pre>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">all_information</span> <span class="co">#Inspect the additional information</span></code></pre></div>
 <pre><code>$data
   record_id name_first age
@@ -505,7 +449,7 @@ $status_codes
 [1] "200"
 
 $outcome_messages
-[1] "5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200."
+[1] "5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200."
 
 $records_collapsed
 [1] ""
@@ -529,7 +473,7 @@ $datetime_range_end
 [1] NA
 
 $elapsed_seconds
-[1] 1.415308</code></pre>
+[1] 1.479728</code></pre>
 </div>
 </div>
 <div id="session-information" class="section level1">
@@ -547,7 +491,7 @@ $elapsed_seconds
  collate  en_US.UTF-8                 
  ctype    en_US.UTF-8                 
  tz       UTC                         
- date     2021-07-20                  
+ date     2021-07-21                  
 
 ─ Packages ───────────────────────────────────────────────────────────────────
  package     * version     date       lib source        
@@ -586,7 +530,7 @@ $elapsed_seconds
  R6            2.5.0       2020-10-28 [1] CRAN (R 4.1.0)
  ragg          1.1.3       2021-06-09 [1] CRAN (R 4.1.0)
  readr         2.0.0       2021-07-20 [1] CRAN (R 4.1.0)
- REDCapR     * 0.11.1.9004 2021-07-20 [1] local         
+ REDCapR     * 0.11.1.9005 2021-07-21 [1] local         
  rlang         0.4.11      2021-04-30 [1] CRAN (R 4.1.0)
  rmarkdown     2.9         2021-06-15 [1] CRAN (R 4.1.0)
  rprojroot     2.0.2       2020-11-15 [1] CRAN (R 4.1.0)
@@ -601,7 +545,7 @@ $elapsed_seconds
  textshaping   0.3.5       2021-06-09 [1] CRAN (R 4.1.0)
  tibble        3.1.2       2021-05-16 [1] CRAN (R 4.1.0)
  tidyselect    1.1.1       2021-04-30 [1] CRAN (R 4.1.0)
- tzdb          0.1.1       2021-04-22 [1] CRAN (R 4.1.0)
+ tzdb          0.1.2       2021-07-20 [1] CRAN (R 4.1.0)
  utf8          1.2.1       2021-03-12 [1] CRAN (R 4.1.0)
  vctrs         0.3.8       2021-04-29 [1] CRAN (R 4.1.0)
  viridisLite   0.4.0       2021-04-13 [1] CRAN (R 4.1.0)
@@ -614,7 +558,7 @@ $elapsed_seconds
 
 [1] /Users/runner/work/_temp/Library
 [2] /Library/Frameworks/R.framework/Versions/4.1/Resources/library</code></pre>
-</details><p>Report rendered by runner at 2021-07-20, 16:53 +0000 in 14 seconds.</p>
+</details><p>Report rendered by runner at 2021-07-21, 13:35 +0000 in 15 seconds.</p>
 </div>
   </div>
 

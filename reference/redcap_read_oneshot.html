@@ -86,7 +86,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.1.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.1.9005</span>
       </span>
     </div>
 
@@ -336,7 +336,10 @@ empty string to save RAM.</p></li>
 viewable by executing <code><a href='https://httr.r-lib.org/reference/httr_options.html'>httr::httr_options()</a></code>.  The <code>httr</code> package and
 documentation is available at https://cran.r-project.org/package=httr.</p>
 <p>If you do not pass in this <code>export_data_access_groups</code> value, it will default
-to <code>FALSE</code>. The following is from the API help page for version 10.5.1:This flag is only viable if the user whose token is being used to make theAPI request is not in a data access group. If the user is in a group,then this flag will revert to its default value.</p>
+to <code>FALSE</code>. The following is from the API help page for version 10.5.1:
+<em>This flag is only viable if the user whose token is being used to make the
+API request is <em>not</em> in a data access group. If the user is in a group,
+then this flag will revert to its default value</em>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>The official documentation can be found on the 'API Help Page'
