@@ -2,8 +2,7 @@
 title: "Typical REDCap Workflow for a Data Analyst"
 author: Will Beasley, Geneva Marshall, & Thomas Wilson, [Biomedical & Behavior Methodology Core](https://www.ouhsc.edu/bbmc/team/), OUHSC Pediatrics
 output: 
-  rmarkdown::html_vignette:
-    md_extensions: -autolink_bare_uris
+  rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Typical REDCap Workflow for a Data Analyst}
   %\VignetteEngine{knitr::rmarkdown}
