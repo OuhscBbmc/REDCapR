@@ -12,19 +12,21 @@ Test environments
 
 1. Local Ubuntu, R 4.1.0 patched
 1. Local Win8, R 4.1.0 patched
-1. r-hub
-    1. [Ubuntu Linux 16.04 LTS, R-release, GCC](https://builder.r-hub.io/status/REDCapR_0.10.2.9006.tar.gz-71151f2f04454bc18c16430e5d62610b)
-    1. [Fedora Linux, R-devel, clang, gfortran](https://builder.r-hub.io/status/REDCapR_0.10.2.9006.tar.gz-2f619028b765442f9dc1c34373443d2a)
+1. R-hub
+    1. [Ubuntu Linux 20.04 LTS, R-release, GCC](https://builder.r-hub.io/status/REDCapR_1.0.0.tar.gz-07f6c48b71b24a0c8764a11732d1075e)
+    1. [Fedora Linux, R-devel, clang, gfortran](https://builder.r-hub.io/status/REDCapR_1.0.0.tar.gz-26dba71e01de40f6b99e85abf366bea4)
     1. [Windows Server](https://builder.r-hub.io/status/REDCapR_0.10.2.9006.tar.gz-80133501925a411da4c3cf3be8205e29)
-1. [win-builder](https://win-builder.r-project.org/xYyWrC1uFjXH), development version.
+1. [win-builder](https://win-builder.r-project.org/BwNz2bnHxuse), development version.
 1. [GiHub Actions](https://github.com/OuhscBbmc/REDCapR/actions), Ubuntu 20.04 LTS
 
 R CMD check results
 -----------------------------------------------
 
 * No ERRORs or WARNINGs on any builds.
+  * One ignorable exception:  the win-builder and Windows Server R-hub builds don't yet have the newest version of readr.  I see they're using 1.4.0 and returns the error "Package required and available but unsuitable version: 'readr'".  But it runs well on my two local Windows machines.
+  * A second ignorable exception: R-hub refers to Bioconductor, which REDCapR doesn't use: "Error : Bioconductor does not yet build and check packages for R version 4.2;"
 
-* Two notes are returned for Health Dept sites, but they work in a browser.
+* A NOTE is returned for the Zenodo.org URL being possibly invalid.  It resolves in a browser, but is takes a while; I'm guessing their website's slow today.
 
 Downstream dependencies
 -----------------------------------------------
