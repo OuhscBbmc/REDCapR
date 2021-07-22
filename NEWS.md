@@ -1,8 +1,9 @@
 Upcoming Versions
 ==========================================================
 
-In the future:
-...
+### Minor Enhacements
+
+* `sanitize_token()` no longer fails with lowercase characters (#347)
 
 Version 1.0 (released 2021-07-21)
 ==========================================================

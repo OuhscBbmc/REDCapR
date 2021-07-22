@@ -22,6 +22,7 @@
 #' @export
 sanitize_token <- function(token) {
   pattern <- "^([0-9A-F]{32})(?:\\n)?$"
+  token <- toupper(token)
 
   if (is.na(token)) {
     stop(
