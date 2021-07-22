@@ -45,5 +45,6 @@ test_that("sanitize token - lowercase (#347)", {
   sanitize_token(secret_token)
 
   returned <- REDCapR::sanitize_token(secret_token)
-  expect_equal(returned, toupper(secret_token))
+  # No change
+  expect_equal(returned, secret_token)
 })
