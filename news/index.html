@@ -85,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.1.9005</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -137,10 +137,11 @@
       <small>Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="version-012-unreleased-on-cran" class="section level1">
-<h1 class="page-header" data-toc-text="0.12">
-<a href="#version-012-unreleased-on-cran" class="anchor"></a>Version 0.12 (Unreleased on CRAN)<small> Unreleased </small>
+    <div id="version-10-released-2021-07-21" class="section level1">
+<h1 class="page-header" data-toc-text="1.0">
+<a href="#version-10-released-2021-07-21" class="anchor"></a>Version 1.0 (released 2021-07-21)<small> Unreleased </small>
 </h1>
+<p>The package has been stable for years and should be reflected in the major version number.</p>
 <div id="minor-enhancements" class="section level3">
 <h3 class="hasAnchor">
 <a href="#minor-enhancements" class="anchor"></a>Minor Enhancements</h3>
@@ -159,7 +160,8 @@
 <a href="#stability-features" class="anchor"></a>Stability Features</h3>
 <ul>
 <li>update for newer version of testthat -v3.0.0 (<a href='https://github.com/OuhscBbmc/REDCapR/issues/312'>#312</a>)</li>
-<li>update for newer version of readr (<a href='https://github.com/OuhscBbmc/REDCapR/issues/313'>#313</a>)</li>
+<li>update for newer version of readr 2.0.0 (<a href='https://github.com/OuhscBbmc/REDCapR/issues/343'>#343</a>)</li>
+<li>update for newer version of readr 1.4.0 (<a href='https://github.com/OuhscBbmc/REDCapR/issues/313'>#313</a>)</li>
 <li>update for newer version of REDCap on test server (<a href='https://github.com/OuhscBbmc/REDCapR/issues/310'>#310</a>)</li>
 <li>save expected datasets as files -instead of included in the actual test code (<a href='https://github.com/OuhscBbmc/REDCapR/issues/308'>#308</a>)</li>
 </ul>
@@ -323,7 +325,7 @@
 <h3 class="hasAnchor">
 <a href="#minor-updates" class="anchor"></a>Minor Updates</h3>
 <ul>
-<li>When combining batches into a single data.frame, <code>data.table::rbindlist()</code> is used. This should prevent errors with the first batch’s data type (for a column) isn’t compatible with a later batch. For instance, this occurs when the first batch has only integers for <code>record_id</code>, but a subsequent batch has values like <code>aa-test-aa</code>. The variable for the combined dataset should be a character. (Issue <a href='https://github.com/OuhscBbmc/REDCapR/issues/128'>#128</a> &amp; <a href="http://stackoverflow.com/questions/39377370/bind-rows-of-different-data-types" class="uri">http://stackoverflow.com/questions/39377370/bind-rows-of-different-data-types</a>; Thanks <a href='https://github.com/arunsrinivasan'>@arunsrinivasan</a>)</li>
+<li>When combining batches into a single data.frame, <code>data.table::rbindlist()</code> is used. This should prevent errors with the first batch’s data type (for a column) isn’t compatible with a later batch. For instance, this occurs when the first batch has only integers for <code>record_id</code>, but a subsequent batch has values like <code>aa-test-aa</code>. The variable for the combined dataset should be a character. (Issue <a href='https://github.com/OuhscBbmc/REDCapR/issues/128'>#128</a> &amp; <a href="https://stackoverflow.com/questions/39377370/bind-rows-of-different-data-types" class="uri">https://stackoverflow.com/questions/39377370/bind-rows-of-different-data-types</a>; Thanks <a href='https://github.com/arunsrinivasan'>@arunsrinivasan</a>)</li>
 <li>Uses the <code>dplyr</code> package instead of <code>plyr</code>. This shouldn’t affect callers, because immediately before returning the data, <code><a href="../reference/redcap_read.html">REDCapR::redcap_read()</a></code> coerces the <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble::tibble</a></code> (which was formerly called <code><a href="https://dplyr.tidyverse.org/reference/tbl_df.html">dplyr::tbl_df</a></code>) back to a vanilla <code>data.frame</code> with <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code>.</li>
 <li>A few more instances of validating input parameters to read functions. (Issue <a href='https://github.com/OuhscBbmc/REDCapR/issues/8'>#8</a>).</li>
 </ul>
@@ -441,7 +443,7 @@
 <a href="#updates" class="anchor"></a>Updates</h3>
 <ul>
 <li>By default, the SSL certs come from the httr package. However, REDCapR will continue to maintain a copy in case httr’s version on CRAN gets out of date.</li>
-<li>The tests are split into two collections: one that’s run by the CRAN checks, and the other run manually. <a href="http://stackoverflow.com/questions/25595487/testthat-pattern-for-long-running-tests">Thanks, Gabor Csardi</a>. Any test with a dependency outside the package code (especially the REDCap test projects) is run manually so changes to the test databases won’t affect the success of building the previous version on CRAN.</li>
+<li>The tests are split into two collections: one that’s run by the CRAN checks, and the other run manually. <a href="https://stackoverflow.com/questions/25595487/testthat-pattern-for-long-running-tests">Thanks, Gabor Csardi</a>. Any test with a dependency outside the package code (especially the REDCap test projects) is run manually so changes to the test databases won’t affect the success of building the previous version on CRAN.</li>
 <li>Corrected typo in <code><a href="../reference/redcap_download_file_oneshot.html">redcap_download_file_oneshot()</a></code> documentation, thanks to Andrew Peters (<a href='https://github.com/ARPeters'>@ARPeters</a> <a href='https://github.com/OuhscBbmc/REDCapR/issues/45'>#45</a>).</li>
 </ul>
 </div>
@@ -490,7 +492,7 @@
 <h3 class="hasAnchor">
 <a href="#updates-2" class="anchor"></a>Updates</h3>
 <ul>
-<li>New Mozilla SSL Certification Bundles released on cURL (released 2013-12-05; <a href="http://curl.haxx.se/ca/cacert.pem" class="uri">http://curl.haxx.se/ca/cacert.pem</a>)</li>
+<li>New Mozilla SSL Certification Bundles released on cURL (released 2013-12-05)</li>
 <li>Renamed <code>redcap_read_batch()</code> to <code><a href="../reference/redcap_read.html">redcap_read()</a></code>. These changes reflect our suggestion that reads should typically be batched.</li>
 <li>Renamed <code><a href="../reference/redcap_read.html">redcap_read()</a></code> to <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code>
 </li>

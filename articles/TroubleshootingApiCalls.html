@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.1.9005</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -90,7 +90,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Troubleshooting REDCap API Calls</h1>
             
-            <h4 class="date">2021-07-21</h4>
+            <h4 class="date">2021-07-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/TroubleshootingApiCalls.Rmd"><code>vignettes/TroubleshootingApiCalls.Rmd</code></a></small>
       <div class="hidden name"><code>TroubleshootingApiCalls.Rmd</code></div>
@@ -99,7 +99,7 @@
 
     
     
-<p>There are many links in the pipeline between your institution’s <a href="http://www.project-redcap.org/">REDCap</a> server and the API user. When the end result is unsuccessful, this document should help narrow the location of the possible problem. The first two sections will be relevant to almost any language interacting with the API. The remaining sections are possibly relevant only to your language (<em>e.g.</em>, Python, R, PHP, SAS, bash), or your software library such as (<a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> and <a href="https://ouhscbbmc.github.io/REDCapR">REDCapR</a> in R, <a href="https://github.com/iuredcap/phpcap">phpcap</a> in PHP, and <a href="http://pycap.readthedocs.org/en/latest/">PyCap</a> in Python).</p>
+<p>There are many links in the pipeline between your institution’s <a href="https://www.project-redcap.org/">REDCap</a> server and the API user. When the end result is unsuccessful, this document should help narrow the location of the possible problem. The first two sections will be relevant to almost any language interacting with the API. The remaining sections are possibly relevant only to your language (<em>e.g.</em>, Python, R, PHP, SAS, bash), or your software library such as <a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> and <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> in R, <a href="https://github.com/iuredcap/phpcap">phpcap</a> in PHP, and <a href="https://pycap.readthedocs.io/en/latest/">PyCap</a> in Python).</p>
 <div id="language-agnostic" class="section level1">
 <h1 class="hasAnchor">
 <a href="#language-agnostic" class="anchor"></a>Language Agnostic</h1>
@@ -138,7 +138,7 @@
 <div id="reading" class="section level2">
 <h2 class="hasAnchor">
 <a href="#reading" class="anchor"></a>Reading</h2>
-<p>This section examines potential problems that occur after data leaves a working server, but before it is handled by their programming language (<em>e.g.</em>, Python and R). <a href="http://www.getpostman.com/">Postman</a> is a Chrome plugin recommended by <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ">several</a> <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ">people</a> that makes troubleshooting much more efficient.</p>
+<p>This section examines potential problems that occur after data leaves a working server, but before it is handled by their programming language (<em>e.g.</em>, Python and R). <a href="https://www.postman.com/">Postman</a> is a Chrome plugin recommended by <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ">several</a> <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ">people</a> that makes troubleshooting much more efficient.</p>
 <p><img src="images/PostmanScreenshot.png" style="fig.width=800px"></p>
 <!--<img src="/Users/runner/work/REDCapR/REDCapR/vignettes/images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>-->
 <ol style="list-style-type: decimal">
@@ -147,7 +147,7 @@
 <p>At the bottom of the playground page, the interface attempts to translate your specific API call to different languages, like Python and R. These suggestions are usually correct, but inspect it critically, as you would for any auto-generated script.</p>
 </li>
 <li>
-<p><strong>Is Postman installed and operating correctly?</strong> If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a>. The url is <code>https://bbmc.ouhsc.edu/redcap/api/</code>. There are three key-value pairs: (1) the ‘token’ is <code>9A81268476645C4E5F03428B8AC3AA7B</code>, (2) the ‘content’ is <code>record</code>, and (3) the ‘format’ should be <code>CSV</code>. When checking your own server, the token value should change, but the content and format should not. It should return five records in a CSV format. The ‘status’ should be <code>200 OK</code>. The result should look roughly like this. Notice the line breaks were included in the text values themselves.</p>
+<p><strong>Is Postman installed and operating correctly?</strong> If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the <a href="https://www.ouhsc.edu/bbmc/">OUHSC BBMC</a>. The url is <code>https://bbmc.ouhsc.edu/redcap/api/</code>. There are three key-value pairs: (1) the ‘token’ is <code>9A81268476645C4E5F03428B8AC3AA7B</code>, (2) the ‘content’ is <code>record</code>, and (3) the ‘format’ should be <code>CSV</code>. When checking your own server, the token value should change, but the content and format should not. It should return five records in a CSV format. The ‘status’ should be <code>200 OK</code>. The result should look roughly like this. Notice the line breaks were included in the text values themselves.</p>
 <pre class="csv"><code>record_id,name_first,name_last,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete
 "1","Nutmeg","Nutmouse","14 Rose Cottage St.
 Kenning UK, 323232","(432) 456-4848","nutty@mouse.com","2003-08-30",10,1,2,0,5,1,400,"Character in a book, with some guessing",2
@@ -166,14 +166,14 @@ New Orleans LA, 70115","(333) 333-4444","left@hippocket.com","1955-04-15",58,1,4
 He had a gold watch chain and a black mustache",2</code></pre>
 </li>
 <li><p><strong>Can an administrator query the API successfully with Postman with the admin token?</strong> As an administrator, create an account for yourself, and verify that your token works on your server and project.</p></li>
-<li><p><strong>Can an administrator query the API successfully with Postman with the user’s token?</strong> Use <a href="http://www.getpostman.com/">Postman</a> as before, but replace your token with the user’s token. Once the whole problem is solved, reissue new API tokens to both you and the user.</p></li>
+<li><p><strong>Can an administrator query the API successfully with Postman with the user’s token?</strong> Use <a href="https://www.postman.com/">Postman</a> as before, but replace your token with the user’s token. Once the whole problem is solved, reissue new API tokens to both you and the user.</p></li>
 <li><p><strong>Can a user query the API successfully with Postman with the their own token?</strong> The values you enter should be exactly the same as those entered in the previous step. A failure here (assuming the previous step was successful) suggests a network or firewall issue. If the server is behind your institution’s firewall, verify the you are connecting successfully through the VPN.</p></li>
 <li>
-<p><strong>Can a user query the API with cURL?</strong> <a href="http://curl.haxx.se/docs/manpage.html">cURL</a> is a command line tool that’s underneath a lot of libraries. If it’s installed correctly on your location machine, it can be executed from the terminal or command line.</p>
+<p><strong>Can a user query the API with cURL?</strong> <a href="https://curl.se/">cURL</a> is a command line tool that’s underneath a lot of libraries. If it’s installed correctly on your location machine, it can be executed from the terminal or command line.</p>
 <pre class="shell"><code>curl -X POST -H "Cache-Control: no-cache" -F "token=9A81268476645C4E5F03428B8AC3AA7B" -F "content=record" -F "format=csv" "https://bbmc.ouhsc.edu/redcap/api/"</code></pre>
 </li>
 </ol>
-<p>If all these checks pass, proceed to the next section. If not, start by consulting with your REDCap administrator. If that fails, consider creating a GitHub issue for your package (<em>e.g.</em>, <a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> and <a href="https://ouhscbbmc.github.io/REDCapR">REDCapR</a> in R, <a href="https://github.com/iuredcap/phpcap">phpcap</a> in PHP, and <a href="http://pycap.readthedocs.org/en/latest/">PyCap</a> in Python).</p>
+<p>If all these checks pass, proceed to the next section. If not, start by consulting with your REDCap administrator. If that fails, consider creating a GitHub issue for your package (<em>e.g.</em>, <a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> and <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> in R, <a href="https://github.com/iuredcap/phpcap">phpcap</a> in PHP, and <a href="https://pycap.readthedocs.io/en/latest/">PyCap</a> in Python).</p>
 </div>
 <div id="writing" class="section level2">
 <h2 class="hasAnchor">
@@ -297,7 +297,7 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <div id="reading-without-a-package" class="section level2">
 <h2 class="hasAnchor">
 <a href="#reading-without-a-package" class="anchor"></a>Reading without a Package</h2>
-<p>There are several ways to call REDCap’s API from <a href="https://cran.r-project.org/">R</a>. The packages <a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> both rely on the <a href="https://cran.r-project.org/package=httr">httr</a> package, which calls the <a href="https://cran.r-project.org/package=curl">curl</a> package, which calls <a href="http://curl.haxx.se/docs/manpage.html">cURL</a>.</p>
+<p>There are several ways to call REDCap’s API from <a href="https://cran.r-project.org/">R</a>. The packages <a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR">REDCapR</a> both rely on the <a href="https://cran.r-project.org/package=httr">httr</a> package, which calls the <a href="https://cran.r-project.org/package=curl">curl</a> package, which calls <a href="https://curl.se/">cURL</a>.</p>
 <ol style="list-style-type: decimal">
 <li>
 <p><strong>Is httr installed on the user’s local machine?</strong> If so, running <code><a href="https://httr.r-lib.org/">library(httr)</a></code> should not produce any error messages if you’re starting with a fresh session of R:</p>
@@ -396,7 +396,7 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <div id="reading-with-the-redcapr-package" class="section level2">
 <h2 class="hasAnchor">
 <a href="#reading-with-the-redcapr-package" class="anchor"></a>Reading with the REDCapR Package</h2>
-<p><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> wraps convenience functions around <a href="https://httr.r-lib.org/">httr</a> to reduce the size and complexity of the user’s code. The package’s basic functions are <a href="https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html">demonstrated in a vignette</a> and are documented in its <a href="https://ouhscbbmc.github.io/REDCapR/reference">reference manual</a>.</p>
+<p><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> wraps convenience functions around <a href="https://httr.r-lib.org/">httr</a> to reduce the size and complexity of the user’s code. The package’s basic functions are <a href="https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html">demonstrated in a vignette</a> and are documented in its [reference manual](<a href="https://ouhscbbmc.github.io/REDCapR/reference/" class="uri">https://ouhscbbmc.github.io/REDCapR/reference/</a>.</p>
 <p>If you’re not using REDCapR, you can skip this section and proceed to “Exporting from REDCap to R, using redcapAPI” or “Importing into REDCap from R” below.</p>
 <p><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> and <a href="https://github.com/nutterb/redcapAPI">redcapAPI</a> are different R packages, but the developers collaborate with each other and share advice.</p>
 <ol style="list-style-type: decimal">
@@ -407,24 +407,24 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"OuhscBbmc/REDCapR"</span><span class="op">)</span></code></pre></div>
 </li>
 <li>
-<p><strong>Does REDCapR load successfully on your machine?</strong> If so, running <code><a href="https://ouhscbbmc.github.io/REDCapR">library(REDCapR)</a></code> should produce the following output if you’re starting with a fresh session of R:</p>
+<p><strong>Does REDCapR load successfully on your machine?</strong> If so, running <code><a href="https://ouhscbbmc.github.io/REDCapR/">library(REDCapR)</a></code> should produce the following output if you’re starting with a fresh session of R:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR">REDCapR</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span>
 <span class="co"># Loading required package: REDCapR</span></code></pre></div>
 </li>
 <li>
 <p><strong>Can you export their data dictionary?</strong> Sometimes the problem exists within the metadata/dictionary, instead of the actual data values. Verify the structure and content of this specific project is interpretable by your local environment.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session, if you haven't already.</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session, if you haven't already.</span>
 <span class="va">redcap_uri</span>       <span class="op">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>
 <span class="va">token</span>            <span class="op">&lt;-</span> <span class="st">"your-secret-token"</span>
 <span class="fu"><a href="../reference/redcap_metadata_read.html">redcap_metadata_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span></code></pre></div>
 <p>If this fails, see “Problems in the project’s metadata/dictionary” under <a href="#gotchas-agnostic">Common Gotchas</a> above. A problematic data dictionary may produce the error <code>Error in inherits(ds, "data.frame") : object 'ds' not found</code> when calling <code><a href="../reference/redcap_metadata_read.html">REDCapR::redcap_metadata_read()</a></code>.</p>
 </li>
 <li>
-<p><strong>Can you export from an example project?</strong> This is the same fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a> as in the previous section.</p>
+<p><strong>Can you export from an example project?</strong> This is the same fake data hosted by the <a href="https://www.ouhsc.edu/bbmc/">OUHSC BBMC</a> as in the previous section.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session.</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session.</span>
 <span class="va">uri</span>   <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>
 <span class="va">token</span> <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span>
 <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
@@ -465,13 +465,13 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <li>
 <p><strong>Can you export from your own project?</strong> The code is similar to the previous check, but the <code>uri</code> and <code>token</code> values will need to be modified.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session, if you haven't already.</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session, if you haven't already.</span>
 <span class="va">redcap_uri</span>       <span class="op">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>
 <span class="va">token</span>            <span class="op">&lt;-</span> <span class="st">"your-secret-token"</span>
 <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
 <p>Alternatively, a <code>redcap_project</code> object can be declared initially, which makes subsequent calls cleaner when the token and url are required only the when the object is declared.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session, if you haven't already.</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session, if you haven't already.</span>
 <span class="va">uri</span>               <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>
 <span class="va">token</span>             <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span>
 <span class="va">project</span>           <span class="op">&lt;-</span> <span class="va"><a href="../reference/redcap_project.html">redcap_project</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span>
@@ -501,7 +501,7 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"redcapAPI"</span><span class="op">)</span></code></pre></div>
 <p>Developmental versions may be available on GitHub.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span>, repos <span class="op">=</span> <span class="st">"http://cran.rstudio.com"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span>, repos <span class="op">=</span> <span class="st">"https://cran.rstudio.com"</span><span class="op">)</span>
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"nutterb/redcapAPI"</span><span class="op">)</span></code></pre></div>
 </li>
 <li>
@@ -520,7 +520,7 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <p>If this fails, see “Problems in the project’s metadata/dictionary.” under <a href="#gotchas-agnostic">Gotchas</a> above</p>
 </li>
 <li>
-<p><strong>Can you export from an example project?</strong> This is the same fake data hosted by the <a href="http://ouhsc.edu/bbmc/">OUHSC BBMC</a> as in the previous section.</p>
+<p><strong>Can you export from an example project?</strong> This is the same fake data hosted by the <a href="https://www.ouhsc.edu/bbmc/">OUHSC BBMC</a> as in the previous section.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">redcapAPI</span><span class="op">)</span> <span class="co"># Load the package into the current R session.</span>
 <span class="va">rcon</span> <span class="op">&lt;-</span> <span class="fu">redcapConnection</span><span class="op">(</span>
@@ -587,10 +587,10 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <h2 class="hasAnchor">
 <a href="#resources" class="anchor"></a>Resources</h2>
 <ul>
-<li><p>REDCap is used in many environments, and it’s not surprising that a lot of libraries have been developed to cater to different scenarios and languages. An active list is maintained at <a href="http://redcap-tools.github.io/projects/">REDCap-Tools</a>. In an entry needs to be added, please notify us; instructions are found at the bottom of the page.</p></li>
+<li><p>REDCap is used in many environments, and it’s not surprising that a lot of libraries have been developed to cater to different scenarios and languages. An active list is maintained at <a href="https://redcap-tools.github.io/projects/">REDCap-Tools</a>. In an entry needs to be added, please notify us; instructions are found at the bottom of the page.</p></li>
 <li>
 <p>The basic API documentation is available on your REDCap server, typically at</p>
-<pre><code>http://&lt;*your server name*&gt;/redcap/api/help</code></pre>
+<pre><code>https://&lt;*your server name*&gt;/redcap/api/help</code></pre>
 </li>
 <li><p>If you have access to the REDCap wiki, some newer examples might exist at <a href="https://community.projectredcap.org/articles/462/api-examples.html" class="uri">https://community.projectredcap.org/articles/462/api-examples.html</a>. The official documentation can be found on the <code>API Help Page</code> and `API Examples’ pages on the REDCap wiki (<em>i.e.</em>, <a href="https://community.projectredcap.org/articles/456/api-documentation.html" class="uri">https://community.projectredcap.org/articles/456/api-documentation.html</a> and <a href="https://community.projectredcap.org/articles/462/api-examples.html" class="uri">https://community.projectredcap.org/articles/462/api-examples.html</a>). If you do not have an account for the wiki, please ask your campus REDCap administrator to send you the static material.</p></li>
 <li><p>Scott Burns, the primary developer of <a href="https://github.com/redcap-tools/PyCap">PyCap</a> has a good intro at <a href="http://sburns.org/2013/07/22/intro-to-redcap-api.html" class="uri">http://sburns.org/2013/07/22/intro-to-redcap-api.html</a></p></li>

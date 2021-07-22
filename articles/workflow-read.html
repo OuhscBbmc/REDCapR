@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.1.9005</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -89,7 +89,7 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Typical REDCap Workflow for a Data Analyst</h1>
-                        <h4 class="author">Will Beasley, Geneva Marshall, &amp; Thomas Wilson, <a href="https://ouhsc.edu/bbmc/team/">Biomedical &amp; Behavior Methodology Core</a>, OUHSC Pediatrics</h4>
+                        <h4 class="author">Will Beasley, Geneva Marshall, &amp; Thomas Wilson, <a href="https://www.ouhsc.edu/bbmc/team/">Biomedical &amp; Behavior Methodology Core</a>, OUHSC Pediatrics</h4>
             
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/workflow-read.Rmd"><code>vignettes/workflow-read.Rmd</code></a></small>
@@ -105,7 +105,7 @@
 <div id="verify-redcapr-is-installed" class="section level2">
 <h2 class="hasAnchor">
 <a href="#verify-redcapr-is-installed" class="anchor"></a>Verify REDCapR is installed</h2>
-<p>First confirm that the REDCapR package is installed on your local machine. If not, the following line will throw the error <code>Loading required namespace: REDCapR.  Failed with error: ‘there is no package called ‘REDCapR’’</code>. If this call fails, follow the installation instructions on the <a href="https://ouhscbbmc.github.io/REDCapR">REDCapR</a> webpage.</p>
+<p>First confirm that the REDCapR package is installed on your local machine. If not, the following line will throw the error <code>Loading required namespace: REDCapR.  Failed with error: ‘there is no package called ‘REDCapR’’</code>. If this call fails, follow the installation instructions on the [REDCapR](<a href="https://ouhscbbmc.github.io/REDCapR/" class="uri">https://ouhscbbmc.github.io/REDCapR/</a> webpage.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"REDCapR"</span><span class="op">)</span>
 <span class="co">#&gt; Loading required namespace: REDCapR</span></code></pre></div>
@@ -120,10 +120,10 @@
 <li>an API token with appropriate privileges to the specific REDCap project.</li>
 </ol>
 <p>This might be the first time you’ve ever needed to request a token, and your institution may have a formal process for API approval. Your REDCap admin can help.</p>
-<p>For this vignette, we’ll use a fake dataset hosted at “<a href="https://bbmc.ouhsc.edu/redcap/api/" class="uri">https://bbmc.ouhsc.edu/redcap/api/</a>” and accessible with the token “9A81268476645C4E5F03428B8AC3AA7B”.</p>
+<p>For this vignette, we’ll use a fake dataset hosted at <code>https://bbmc.ouhsc.edu/redcap/api/</code> and accessible with the token “9A81268476645C4E5F03428B8AC3AA7B”.</p>
 <p>Note to REDCap Admins:</p>
 <blockquote>
-<p>For <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code>redcap_read()</code></a> to function properly, the user must have Export permissions for the ‘Full Data Set’. Users with only ‘De-Identified’ export privileges can still use <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read_oneshot.html"><code>redcap_read_oneshot()</code></a>. To grant the appropriate permissions:</p>
+<p>For <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code>REDCapR::redcap_read()</code></a> to function properly, the user must have Export permissions for the ‘Full Data Set’. Users with only ‘De-Identified’ export privileges can still use <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read_oneshot.html"><code>REDCapR::redcap_read_oneshot()</code></a>. To grant the appropriate permissions:</p>
 <ul>
 <li>go to ‘User Rights’ in the REDCap project site,</li>
 <li>select the desired user, and then select ‘Edit User Privileges’,</li>
@@ -149,7 +149,7 @@
 <h2 class="hasAnchor">
 <a href="#security-method-1-token-file" class="anchor"></a>Security Method 1: Token File</h2>
 <p>The basic goals are (a) separate the secret values from the R file into a dedicated file and (b) secure the dedicated file. If using a git repository, prevent the file from being committed with an entry in <a href="https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files"><code>.gitignore</code></a>. Ask your institution’s IT security team for their recommendation.</p>
-<p>The <a href="https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html"><code>retrieve_credential_local()</code></a> function in the <a href="https://ouhscbbmc.github.io/REDCapR">REDCapR</a> package loads relevant information from a csv into R. The plain-text file might look like this:</p>
+<p>The <a href="https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html"><code>retrieve_credential_local()</code></a> function in the [REDCapR](<a href="https://ouhscbbmc.github.io/REDCapR/" class="uri">https://ouhscbbmc.github.io/REDCapR/</a> package loads relevant information from a csv into R. The plain-text file might look like this:</p>
 <pre class="csv"><code>redcap_uri,username,project_id,token,comment
 "https://bbmc.ouhsc.edu/redcap/api/","myusername",153,9A81268476645C4E5F03428B8AC3AA7B,"simple"
 "https://bbmc.ouhsc.edu/redcap/api/","myusername",212,0434F0E9CF53ED0587847AB6E51DE762,"longitudinal"
@@ -199,9 +199,9 @@
   <span class="op">)</span><span class="op">$</span><span class="va">data</span>
 <span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.5 seconds.  The http status code was 200.</span>
 <span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-21 13:36:09.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-07-22 03:01:55.</span>
 <span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span>
-<span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</span>
+<span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -338,7 +338,7 @@
   records     <span class="op">=</span> <span class="va">desired_records</span>,
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 2 records  at 2021-07-21 13:36:12.</span>
+<span class="co">#&gt; Starting to read 2 records  at 2021-07-22 03:01:57.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -384,7 +384,7 @@
   filter_logic  <span class="op">=</span> <span class="st">"'2003-01-01' &lt; [dob]"</span>,
   verbose       <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 2 records  at 2021-07-21 13:36:14.</span>
+<span class="co">#&gt; Starting to read 2 records  at 2021-07-22 03:01:59.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -428,7 +428,7 @@
   fields      <span class="op">=</span> <span class="va">desired_fields</span>,
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-21 13:36:15.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-07-22 03:02:01.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -472,7 +472,7 @@
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>,
   col_types   <span class="op">=</span> <span class="va">col_types</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-21 13:36:17.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-07-22 03:02:02.</span>
 <span class="co">#&gt;   record_id race___1 race___2 race___3 race___4 race___5 race___6</span>
 <span class="co">#&gt; 1         1    FALSE    FALSE    FALSE    FALSE     TRUE    FALSE</span>
 <span class="co">#&gt; 2         2    FALSE    FALSE     TRUE    FALSE     TRUE    FALSE</span>
@@ -495,7 +495,7 @@
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>,
   col_types   <span class="op">=</span> <span class="va">col_types</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-21 13:36:19.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-07-22 03:02:04.</span>
 <span class="co">#&gt;   record_id race___1 race___2 race___3 race___4 race___5 race___6</span>
 <span class="co">#&gt; 1         1        0        0        0        0        1        0</span>
 <span class="co">#&gt; 2         2        0        0        1        0        1        0</span>
@@ -510,7 +510,7 @@
 <div id="other-redcapr-resources" class="section level2">
 <h2 class="hasAnchor">
 <a href="#other-redcapr-resources" class="anchor"></a>Other REDCapR Resources</h2>
-<p>In addition to documentation <a href="https://ouhscbbmc.github.io/REDCapR/reference">for each function</a> the REDCapR package contains a handful of <a href="https://ouhscbbmc.github.io/REDCapR/articles">vignettes</a> including a <a href="https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html">troubleshooting guide</a>.</p>
+<p>In addition to documentation [for each function](<a href="https://ouhscbbmc.github.io/REDCapR/reference/" class="uri">https://ouhscbbmc.github.io/REDCapR/reference/</a> the REDCapR package contains a handful of [vignettes](<a href="https://ouhscbbmc.github.io/REDCapR/articles/" class="uri">https://ouhscbbmc.github.io/REDCapR/articles/</a> including a <a href="https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html">troubleshooting guide</a>.</p>
 </div>
 <div id="create-an-arch-for-reuse" class="section level2">
 <h2 class="hasAnchor">
@@ -530,13 +530,14 @@
 <div id="writing-to-the-server" class="section level2">
 <h2 class="hasAnchor">
 <a href="#writing-to-the-server" class="anchor"></a>Writing to the Server</h2>
-<p>Reading record data is only one API capability. REDCapR <a href="%5B%60REDCapR::redcap_read()%60%5D(https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html)">exposes 20+ API functions</a>, such as reading metadata, retrieving survey links, and writing records back to REDCap. This last operation is relevant in <a href="https://twitter.com/kennethmclean92">Kenneth McLean</a>’s presentation following a five-minute break.</p>
+<p>Reading record data is only one API capability. REDCapR <a href="https://ouhscbbmc.github.io/REDCapR/reference/">exposes 20+ API functions</a>, such as reading metadata, retrieving survey links, and writing records back to REDCap. This last operation is relevant in <a href="https://twitter.com/kennethmclean92">Kenneth McLean</a>’s presentation following a five-minute break.</p>
 </div>
 </div>
 <div id="notes" class="section level1">
 <h1 class="hasAnchor">
 <a href="#notes" class="anchor"></a>Notes</h1>
-<p>This vignette was originally designed for a 2021 R/Medicine REDCap workshop with <a href="http://www.med.umich.edu/higginslab/">Peter Higgins</a>, <a href="https://coloradosph.cuanschutz.edu/resources/directory/directory-profile/Miller-Amanda-UCD6000053152">Amanda Miller</a>, and <a href="https://twitter.com/kennethmclean92">Kenneth McLean</a>.</p>
+<p>This vignette was originally designed for a 2021 R/Medicine REDCap workshop with <a href="https://www.med.umich.edu/higginslab/">Peter Higgins</a>, <a href="https://coloradosph.cuanschutz.edu/resources/directory/directory-profile/Miller-Amanda-UCD6000053152">Amanda Miller</a>, and <a href="https://twitter.com/kennethmclean92">Kenneth McLean</a>.</p>
+<p>This work was made possible in part by the NIH grant <a href="https://hsrproject.nlm.nih.gov/view_hsrproj_record/20204379">U54GM104938</a> to the <a href="http://osctr.ouhsc.edu">Oklahoma Shared Clinical and Translational Resource)</a>.</p>
 </div>
   </div>
 
