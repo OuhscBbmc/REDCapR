@@ -137,14 +137,14 @@
       <small>Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="version-10-released-2021-07-21" class="section level1">
-<h1 class="page-header" data-toc-text="1.0">
-<a href="#version-10-released-2021-07-21" class="anchor"></a>Version 1.0 (released 2021-07-21)<small> Unreleased </small>
+    <div id="version-100-released-2021-07-21" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.0">
+<a href="#version-100-released-2021-07-21" class="anchor"></a>Version 1.0.0 (released 2021-07-21)<small> 2021-07-22 </small>
 </h1>
 <p>The package has been stable for years and should be reflected in the major version number.</p>
-<div id="minor-enhancements" class="section level3">
+<div id="minor-enhancements-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-enhancements" class="anchor"></a>Minor Enhancements</h3>
+<a href="#minor-enhancements-1" class="anchor"></a>Minor Enhancements</h3>
 <ul>
 <li>When writing records to the server, the functions <code><a href="../reference/redcap_write.html">redcap_write()</a></code> and <code><a href="../reference/redcap_write_oneshot.html">redcap_write_oneshot()</a></code> have a new parameter that converts R’s <code>logical</code>/boolean columns to integers. This meshes well with T/F and Y/N items that are coded as 1/0 underneath. The default will be FALSE (ie, the integers are not converted by default), so it doesn’t break existing code. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/305'>#305</a>)</li>
 <li>When writing records to the server, the functions <code><a href="../reference/redcap_write.html">redcap_write()</a></code> and <code><a href="../reference/redcap_write_oneshot.html">redcap_write_oneshot()</a></code> can toggle the ability to overwrite with blank/NA cells (suggested by <a href='https://github.com/auricap'>@auricap</a>, <a href='https://github.com/OuhscBbmc/REDCapR/issues/315'>#315</a>)</li>
@@ -175,9 +175,9 @@
 </ul>
 </div>
 </div>
-    <div id="version-011-released-2020-04-20" class="section level1">
-<h1 class="page-header" data-toc-text="0.11">
-<a href="#version-011-released-2020-04-20" class="anchor"></a>Version 0.11 (Released 2020-04-20)<small> Unreleased </small>
+    <div id="version-0110-released-2020-04-20" class="section level1">
+<h1 class="page-header" data-toc-text="0.11.0">
+<a href="#version-0110-released-2020-04-20" class="anchor"></a>Version 0.11.0 (Released 2020-04-20)<small> 2020-04-21 </small>
 </h1>
 <div id="breaking-changes-possible-but-unlikely" class="section level3">
 <h3 class="hasAnchor">
@@ -206,9 +206,9 @@
 <li><p>Similarly, <code><a href="../reference/kernel_api.html">kernel_api()</a></code> now has an <code>encoding</code> parameter, which defaults to “UTF-8”. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/270'>#270</a>)</p></li>
 </ul>
 </div>
-<div id="minor-enhancements-1" class="section level3">
+<div id="minor-enhancements-2" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-enhancements-1" class="anchor"></a>Minor Enhancements</h3>
+<a href="#minor-enhancements-2" class="anchor"></a>Minor Enhancements</h3>
 <ul>
 <li>check for bad field names passed to the read records functions (<a href='https://github.com/OuhscBbmc/REDCapR/issues/288'>#288</a>)</li>
 </ul>
@@ -222,9 +222,9 @@
 </ul>
 </div>
 </div>
-    <div id="version-010-released-2019-09-22" class="section level1">
-<h1 class="page-header" data-toc-text="0.10">
-<a href="#version-010-released-2019-09-22" class="anchor"></a>Version 0.10 (Released 2019-09-22)<small> Unreleased </small>
+    <div id="version-0102-released-2019-09-22" class="section level1">
+<h1 class="page-header" data-toc-text="0.10.2">
+<a href="#version-0102-released-2019-09-22" class="anchor"></a>Version 0.10.2 (Released 2019-09-22)<small> 2019-09-23 </small>
 </h1>
 <div id="minor-new-features" class="section level3">
 <h3 class="hasAnchor">
@@ -408,7 +408,7 @@
 <a href="#minor-updates-3" class="anchor"></a>Minor Updates</h3>
 <ul>
 <li>Test suite now uses <code><a href="https://testthat.r-lib.org/reference/skip.html">testthat::skip_on_cran()</a></code> before any call involving OUHSC’s REDCap server.</li>
-<li>Vignette example of subsetting, conditioned on a 2nd variable’s value.</li>
+<li>Vignette example of subsetting, conditioned on a second variable’s value.</li>
 </ul>
 </div>
 </div>

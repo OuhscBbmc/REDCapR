@@ -99,13 +99,24 @@
 
     
     
+<p>The REDCap API facilitates repetitive tasks. If you’re sure you’ll download and analyze a project only once, then it may make sense to avoid the API and download a CSV through the browser.</p>
+<p>But that single-shot scenario almost never happens in my life:</p>
+<ol style="list-style-type: decimal">
+<li>the patient dataset is updated with relevant &amp; fresh information daily, or</li>
+<li>you run it on a different computer a few months later, or <em>and this is the heart of reproducibility:</em>
+</li>
+<li>you want someone else to be able to unambiguously &amp; effortlessly produce the same analysis.</li>
+</ol>
+<p>Instead of telling your students or colleagues “first go to REDCap, then go to project 55, then clicks”Data Exports“, then click”Export Data“, then download these files, then move the files to this these subdirectories, and finally convert them to this format before you run these models” …say it with a few lines of REDCapR code.</p>
+<p>For people running your code on their machines …the API is so integrated and responsive that they may not even realize their computer is connecting to the outside world. If they’re not looking closely, they may think it’s a dataset that’s included locally in a package they’ve already installed.</p>
+<p>For beginners, most of the work is related to passing security credentials …which is something that is a reality of working with PHI.</p>
 <div id="part-1---pre-requisites" class="section level1">
 <h1 class="hasAnchor">
 <a href="#part-1---pre-requisites" class="anchor"></a>Part 1 - Pre-requisites</h1>
 <div id="verify-redcapr-is-installed" class="section level2">
 <h2 class="hasAnchor">
 <a href="#verify-redcapr-is-installed" class="anchor"></a>Verify REDCapR is installed</h2>
-<p>First confirm that the REDCapR package is installed on your local machine. If not, the following line will throw the error <code>Loading required namespace: REDCapR.  Failed with error: ‘there is no package called ‘REDCapR’’</code>. If this call fails, follow the installation instructions on the [REDCapR](<a href="https://ouhscbbmc.github.io/REDCapR/" class="uri">https://ouhscbbmc.github.io/REDCapR/</a> webpage.</p>
+<p>First confirm that the REDCapR package is installed on your local machine. If not, the following line will throw the error <code>Loading required namespace: REDCapR.  Failed with error: ‘there is no package called ‘REDCapR’’</code>. If this call fails, follow the installation instructions on the <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> webpage.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"REDCapR"</span><span class="op">)</span>
 <span class="co">#&gt; Loading required namespace: REDCapR</span></code></pre></div>
@@ -149,7 +160,7 @@
 <h2 class="hasAnchor">
 <a href="#security-method-1-token-file" class="anchor"></a>Security Method 1: Token File</h2>
 <p>The basic goals are (a) separate the secret values from the R file into a dedicated file and (b) secure the dedicated file. If using a git repository, prevent the file from being committed with an entry in <a href="https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files"><code>.gitignore</code></a>. Ask your institution’s IT security team for their recommendation.</p>
-<p>The <a href="https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html"><code>retrieve_credential_local()</code></a> function in the [REDCapR](<a href="https://ouhscbbmc.github.io/REDCapR/" class="uri">https://ouhscbbmc.github.io/REDCapR/</a> package loads relevant information from a csv into R. The plain-text file might look like this:</p>
+<p>The <a href="https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html"><code>retrieve_credential_local()</code></a> function in the <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> package loads relevant information from a csv into R. The plain-text file might look like this:</p>
 <pre class="csv"><code>redcap_uri,username,project_id,token,comment
 "https://bbmc.ouhsc.edu/redcap/api/","myusername",153,9A81268476645C4E5F03428B8AC3AA7B,"simple"
 "https://bbmc.ouhsc.edu/redcap/api/","myusername",212,0434F0E9CF53ED0587847AB6E51DE762,"longitudinal"
@@ -197,9 +208,9 @@
     redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>, 
     token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>
   <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.5 seconds.  The http status code was 200.</span>
-<span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-22 19:09:44.</span>
+<span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.7 seconds.  The http status code was 200.</span>
+<span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-07-22 23:46:05.</span>
 <span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span>
 <span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</span>
 <span class="co">#&gt; </span>
@@ -308,7 +319,28 @@
 <span class="co">#&gt;  Mean   :0.2   Mean   :1   Mean   :0.25       Mean   :1.6                </span>
 <span class="co">#&gt;  3rd Qu.:0.0   3rd Qu.:1   3rd Qu.:0.25       3rd Qu.:2.0                </span>
 <span class="co">#&gt;  Max.   :1.0   Max.   :2   Max.   :1.00       Max.   :2.0                </span>
-<span class="co">#&gt;                            NA's   :1</span></code></pre></div>
+<span class="co">#&gt;                            NA's   :1</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">age</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">bmi</span>, data <span class="op">=</span> <span class="va">ds_1</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt; lm(formula = age ~ 1 + sex + bmi, data = ds_1)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residuals:</span>
+<span class="co">#&gt;       1       2       3       4       5 </span>
+<span class="co">#&gt;  -2.491   1.954   9.132   2.491 -11.086 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;             Estimate Std. Error t value Pr(&gt;|t|)  </span>
+<span class="co">#&gt; (Intercept) 63.34496    8.89980   7.118   0.0192 *</span>
+<span class="co">#&gt; sex         13.55626    9.62958   1.408   0.2945  </span>
+<span class="co">#&gt; bmi         -0.24426    0.04337  -5.632   0.0301 *</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residual standard error: 10.55 on 2 degrees of freedom</span>
+<span class="co">#&gt; Multiple R-squared:  0.9442, Adjusted R-squared:  0.8884 </span>
+<span class="co">#&gt; F-statistic: 16.92 on 2 and 2 DF,  p-value: 0.05581</span></code></pre></div>
 <p><em>Pause here in the workshop for a few minutes. Raise hand if you’re having trouble.</em></p>
 </div>
 <div id="part-4---read-data-choosing-columns-and-rows" class="section level1">
@@ -338,7 +370,7 @@
   records     <span class="op">=</span> <span class="va">desired_records</span>,
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 2 records  at 2021-07-22 19:09:46.</span>
+<span class="co">#&gt; Starting to read 2 records  at 2021-07-22 23:46:07.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -384,7 +416,7 @@
   filter_logic  <span class="op">=</span> <span class="st">"'2003-01-01' &lt; [dob]"</span>,
   verbose       <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 2 records  at 2021-07-22 19:09:47.</span>
+<span class="co">#&gt; Starting to read 2 records  at 2021-07-22 23:46:09.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -428,7 +460,7 @@
   fields      <span class="op">=</span> <span class="va">desired_fields</span>,
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-22 19:09:49.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-07-22 23:46:11.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -472,7 +504,7 @@
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>,
   col_types   <span class="op">=</span> <span class="va">col_types</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-22 19:09:51.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-07-22 23:46:13.</span>
 <span class="co">#&gt;   record_id race___1 race___2 race___3 race___4 race___5 race___6</span>
 <span class="co">#&gt; 1         1    FALSE    FALSE    FALSE    FALSE     TRUE    FALSE</span>
 <span class="co">#&gt; 2         2    FALSE    FALSE     TRUE    FALSE     TRUE    FALSE</span>
@@ -495,7 +527,7 @@
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>,
   col_types   <span class="op">=</span> <span class="va">col_types</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-22 19:09:52.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-07-22 23:46:15.</span>
 <span class="co">#&gt;   record_id race___1 race___2 race___3 race___4 race___5 race___6</span>
 <span class="co">#&gt; 1         1        0        0        0        0        1        0</span>
 <span class="co">#&gt; 2         2        0        0        1        0        1        0</span>
@@ -510,7 +542,7 @@
 <div id="other-redcapr-resources" class="section level2">
 <h2 class="hasAnchor">
 <a href="#other-redcapr-resources" class="anchor"></a>Other REDCapR Resources</h2>
-<p>In addition to documentation [for each function](<a href="https://ouhscbbmc.github.io/REDCapR/reference/" class="uri">https://ouhscbbmc.github.io/REDCapR/reference/</a> the REDCapR package contains a handful of [vignettes](<a href="https://ouhscbbmc.github.io/REDCapR/articles/" class="uri">https://ouhscbbmc.github.io/REDCapR/articles/</a> including a <a href="https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html">troubleshooting guide</a>.</p>
+<p>In addition to documentation <a href="https://ouhscbbmc.github.io/REDCapR/reference/">for each function</a> the REDCapR package contains a handful of [vignettes](<a href="https://ouhscbbmc.github.io/REDCapR/articles/" class="uri">https://ouhscbbmc.github.io/REDCapR/articles/</a> including a <a href="https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html">troubleshooting guide</a>.</p>
 </div>
 <div id="create-an-arch-for-reuse" class="section level2">
 <h2 class="hasAnchor">

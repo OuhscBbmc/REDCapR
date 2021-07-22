@@ -55,7 +55,9 @@
 <meta property="og:title" content="Validate and sanitize the user's REDCap token — sanitize_token" />
 <meta property="og:description" content="Verifies the token is nonmissing and conforms to the legal
 pattern of a 32-character hexadecimal value.
-Trailing line endings are removed." />
+Each character must be an (a) digit 0-9, (b) uppercase letter A-F, or
+(c) lowercase letter a-f.
+#' Trailing line endings are removed." />
 <meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.svg" />
 
 
@@ -144,7 +146,9 @@ Trailing line endings are removed." />
     <div class="ref-description">
     <p>Verifies the token is nonmissing and conforms to the legal
 pattern of a 32-character hexadecimal value.
-Trailing line endings are removed.</p>
+Each character must be an (a) digit 0-9, (b) uppercase letter A-F, or
+(c) lowercase letter a-f.
+#' Trailing line endings are removed.</p>
     </div>
 
     <pre class="usage"><span class='fu'>sanitize_token</span><span class='op'>(</span><span class='va'>token</span><span class='op'>)</span></pre>
@@ -167,14 +171,16 @@ Trailing line endings are removed.</p>
 about your project-specific token.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-    <p>Hao Zhu, Benjamin Nutter, Will Beasley</p>
+    <p>Hao Zhu, Benjamin Nutter, Will Beasley, Jordan Mark Barbone</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>secret_token_1</span> <span class='op'>&lt;-</span> <span class='st'>"12345678901234567890123456ABCDEF"</span>
 <span class='va'>secret_token_2</span> <span class='op'>&lt;-</span> <span class='st'>"12345678901234567890123456ABCDEF\n"</span>
+<span class='va'>secret_token_3</span> <span class='op'>&lt;-</span> <span class='st'>"12345678901234567890123456abcdef"</span>
 <span class='fu'>REDCapR</span><span class='fu'>::</span><span class='fu'>sanitize_token</span><span class='op'>(</span><span class='va'>secret_token_1</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "12345678901234567890123456ABCDEF"</div><div class='input'><span class='fu'>REDCapR</span><span class='fu'>::</span><span class='fu'>sanitize_token</span><span class='op'>(</span><span class='va'>secret_token_2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "12345678901234567890123456ABCDEF"</div></pre>
+</div><div class='output co'>#&gt; [1] "12345678901234567890123456ABCDEF"</div><div class='input'><span class='fu'>REDCapR</span><span class='fu'>::</span><span class='fu'>sanitize_token</span><span class='op'>(</span><span class='va'>secret_token_3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "12345678901234567890123456abcdef"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
