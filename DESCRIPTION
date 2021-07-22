@@ -35,6 +35,7 @@ Imports:
     tibble (>= 2.0),
     tidyr (>= 1.0)
 Suggests:
+    spelling,
     covr (>= 3.4),
     DBI (>= 1.1),
     kableExtra (>= 1.0),
@@ -49,3 +50,4 @@ Encoding: UTF-8
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
+Language: en-US
