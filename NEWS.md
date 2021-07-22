@@ -1,11 +1,11 @@
 Upcoming Versions
 ==========================================================
 
-### Minor Enhacements
+### Minor Enhancements
 
-* `sanitize_token()` no longer fails with lowercase characters (#347)
+* `sanitize_token()` now allows lowercase characters --in addition to uppercase characters & digits  (#347, @jmbarbone)
 
-Version 1.0 (released 2021-07-21)
+Version 1.0.0 (released 2021-07-21)
 ==========================================================
 
 The package has been stable for years and should be reflected in the major version number.
@@ -33,7 +33,7 @@ The package has been stable for years and should be reflected in the major versi
 * Accepts more than one `config_option` element.  (Proposed by @BastienRance, #307)
 * Fixed calculation of `success` value returned by `redcap_read()` and `redcap_write()` when the parameter `continue_on_error` is true.  (Bug found by @llrs, #317)
 
-Version 0.11 (Released 2020-04-20)
+Version 0.11.0 (Released 2020-04-20)
 ==========================================================
 
 ### Breaking Changes (possible, but unlikely)
@@ -70,7 +70,7 @@ Version 0.11 (Released 2020-04-20)
 
 * Allow more than one `httr::config()` parameter to be passed (Thanks @BastienRance, #307).
 
-Version 0.10 (Released 2019-09-22)
+Version 0.10.2 (Released 2019-09-22)
 ==========================================================
 
 ### Minor New Features
