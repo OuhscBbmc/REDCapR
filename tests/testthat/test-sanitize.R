@@ -39,3 +39,12 @@ test_that("sanitize token -empty", {
     regexp    = "The token is an empty string, not a valid 32-character hexademical value\\."
   )
 })
+
+test_that("sanitize token - lowercase (#347)", {
+  secret_token <- "12345678901234567890123456abcdef"
+  sanitize_token(secret_token)
+
+  returned <- REDCapR::sanitize_token(secret_token)
+  # No change
+  expect_equal(returned, secret_token)
+})
