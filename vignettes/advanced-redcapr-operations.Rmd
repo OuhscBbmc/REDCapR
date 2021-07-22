@@ -27,7 +27,7 @@ opts_chunk$set(
 
 # knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
 knit_print.data.frame = function(x, ...) {
-  # Adapted from https://cran.r-project.org/web/packages/knitr/vignettes/knit_print.html
+  # See https://cran.r-project.org/package=knitr/vignettes/knit_print.html
 
   x %>%
     # rmarkdown::print.paged_df() %>%
