@@ -13,7 +13,6 @@ DSN's
 De
 Dev
 EAV
-Funders
 Gabor
 HRSA
 Hatem
@@ -26,7 +25,6 @@ MIECHV
 MSSQL
 NIGMS
 NotFound
-ODBC
 OKDHS
 OSDH
 OUHSC
@@ -46,8 +44,6 @@ RODBCext
 Rdoc
 SSL
 SecurityDatabase
-Translational
-URI
 VPN
 Xie
 Yihui
@@ -65,6 +61,7 @@ dropdown
 eg
 ethz
 exportFieldNames
+funders
 getOption
 github
 hatemhosny
@@ -101,6 +98,7 @@ schemas
 testthat
 tidyr
 tidyverse
+translational
 uploadable
 uri
 webserver
