@@ -1,7 +1,7 @@
 [REDCapR](https://github.com/OuhscBbmc/REDCapR)  <img src="man/figures/logo.png" align="right" width="130" />
 =======
 
-We’ve been using R with [REDCap](https://projectredcap.org/)’s API since 2012 and have developed   [`REDCapR`](https://github.com/OuhscBbmc/REDCapR).  Before encapsulating these functions in a package, we were replicating 50+ lines of code to contact REDCap and robustly transform the returned [csv](https://en.wikipedia.org/wiki/Comma-separated_values) into an R `data.frame`; it took twice that much to implement batching.  All this can be done in one call to [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html):
+We’ve been using R with [REDCap](https://projectredcap.org/)'s API since 2012 and have developed   [`REDCapR`](https://github.com/OuhscBbmc/REDCapR).  Before encapsulating these functions in a package, we were replicating 50+ lines of code to contact REDCap and robustly transform the returned [csv](https://en.wikipedia.org/wiki/Comma-separated_values) into an R `data.frame`; it took twice that much to implement batching.  All this can be done in one call to [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html):
 
 ```r
 ds <- redcap_read(redcap_uri=uri, token=token)$data

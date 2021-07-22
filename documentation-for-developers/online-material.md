@@ -9,4 +9,4 @@ This is a running list of material we've seen online describing how to connect t
 * [Parsing back to 'messy' API strcuture](https://stackoverflow.com/questions/12393004/parsing-back-to-messy-api-strcuture): StackOverflow question by Eric Fail, 2012-12-12
 * [redcap](https://github.com/jeffreyhorner/redcap): R interface to REDCap by Jeffrey Horner, started 2012-04-26.
 * [R Tip - Directly Access the REDCap API from R](https://plus.google.com/+ThomasRehman/posts/U3fVCTV4EdQ) (which was moved to [here](https://www.thomasrehman.net/2011/07/14/r-tip-directly-access-the-redcap-api-from-r/)) by [Thomas Rehman](https://plus.google.com/+ThomasRehman/posts), 2011-07-14
-* [Using R and REDCap’s API to Generate Custom Project Reports](https://www.ctspedia.org/wiki/pub/CTSpedia/ReproducibleResearchMethodology/REDCap.Day.2011.TerriScott.pdf) 2011 REDCap Days
+* [Using R and REDCap's API to Generate Custom Project Reports](https://www.ctspedia.org/wiki/pub/CTSpedia/ReproducibleResearchMethodology/REDCap.Day.2011.TerriScott.pdf) 2011 REDCap Days

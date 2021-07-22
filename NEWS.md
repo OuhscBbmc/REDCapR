@@ -179,7 +179,7 @@ Version 0.5 (Released 2014-10-19)
 
 ### Minor Updates
 * Test suite now uses `testthat::skip_on_cran()` before any call involving OUHSC's REDCap server.
-* Vignette example of subsetting, conditioned on a 2nd variable's value.
+* Vignette example of subsetting, conditioned on a second variable's value.
 
 
 Version 0.4-28 (Released 2014-09-20)
