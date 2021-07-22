@@ -2,7 +2,7 @@ rm(list=ls(all=TRUE))  #Clear the variables from previous runs.
 
 library(httr)
 
-redcap_uri <- "http://www.redcapplugins.org/redcap_v6.5.0/API/"
+redcap_uri <- "https://www.redcapplugins.org/redcap_v6.5.0/API/"
 token <- "D96029BFCE8FFE76737BFC33C2BCC72E" #For `UnitTestPhiFree` account and the simple project (pid 27) on Vandy's test server.
 
 
@@ -45,7 +45,7 @@ result$headers$statusmessage
 raw_text <- httr::content(result, "text")
 
 result <- httr::POST(
-  url    = "http://httpbin.org/post",
+  url    = "https://httpbin.org/post",
   body   = "A simple text string",
   config = httr::config(ssl_verifypeer=FALSE)
 )
@@ -150,4 +150,4 @@ RCurl::httpGET(url = "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/no_auth_test
 
 cert_location <- system.file("cacert.pem", package="openssl")
 file.exists(cert_location)
-httr::url_ok("http://bbmc.ouhsc.edu/redcap/plugins/redcapr/no_auth_test.php", config=list(cainfo=cert_location, sslversion=3))
+httr::url_ok("https://bbmc.ouhsc.edu/redcap/plugins/redcapr/no_auth_test.php", config=list(cainfo=cert_location, sslversion=3))

@@ -89,7 +89,7 @@
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
 #' * `status_codes`: A collection of
-#' [http status codes](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes),
+#' [http status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes),
 #' separated by semicolons.  There is one code for each batch attempted.
 #' * `outcome_messages`: A collection of human readable strings indicating the
 #' operations' semicolons.  There is one code for each batch attempted.  In an

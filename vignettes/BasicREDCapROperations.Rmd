@@ -9,7 +9,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-This vignette covers the the basic functions exposed by the [`httr`](https://github.com/hadley/httr) and [`curl`](https://cran.r-project.org/package=curl) packages which allow you to interact with [REDCap](http://www.project-redcap.org/) through its API.
+This vignette covers the the basic functions exposed by the [`httr`](https://github.com/r-lib/httr) and [`curl`](https://cran.r-project.org/package=curl) packages which allow you to interact with [REDCap](https://www.project-redcap.org/) through its API.
 
 Reading REDCap Data
 ==================================================================
@@ -28,7 +28,7 @@ opts_chunk$set(
 )
 
 knit_print.data.frame = function(x, ...) {
-  # Adapted from https://cran.r-project.org/web/packages/knitr/vignettes/knit_print.html
+  # See https://cran.r-project.org/package=knitr/vignettes/knit_print.html
   # res = paste(c("", "", kable(x)), collapse = "\n")
   # asis_output(res)
   x %>%
@@ -171,7 +171,7 @@ The examples above have shown only the resulting `data.frame`, by specifying `$d
 
 1. The `data` object has the `data.frame`, as in the previous examples.
 1. The `success` boolean value indicates if `redcap_read_oneshot` believes the operation completed as intended.
-1. The `status_codes` is a collection of [http status codes](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes), separated by semicolons.  There is one code for each batch attempted.
+1. The `status_codes` is a collection of [http status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes), separated by semicolons.  There is one code for each batch attempted.
 1. The `outcome_messages`: A collection of human readable strings indicating the operations' semicolons.  There is one code for each batch attempted.  In an unsuccessful operation, it should contain diagnostic information.
 1. The `records_collapsed` field passed to the API.  This shows which record subsets, if any, were requested.
 1. The `fields_collapsed` fields passed to the API.  This shows which field subsets, if any, were requested.

@@ -13,7 +13,7 @@ token <- "D96029BFCE8FFE76737BFC33C2BCC72E" #For `UnitTestPhiFree` account and t
 library(RCurl)
 
 # SO post:
-# http://stackoverflow.com/questions/15347233/ssl-certificate-failed-for-twitter-in-r
+# https://stackoverflow.com/questions/15347233/ssl-certificate-failed-for-twitter-in-r
 cert_location <- system.file("cacert.pem", package="openssl")
 file.exists(cert_location)
 options(RCurlOptions = list(cainfo=cert_location))

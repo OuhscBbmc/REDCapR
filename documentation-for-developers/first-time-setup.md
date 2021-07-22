@@ -4,18 +4,18 @@ These notes are to hep potential REDCapR contributors get their development mach
 Install the [latest version](https://cran.r-project.org/bin/windows/base/) of R.  Before a version is submitted to CRAN, the CRAN maintainers prefer you use the [patched](https://cran.r-project.org/bin/windows/base/rpatched.html) version of R, or even the [development](https://cran.r-project.org/bin/windows/base/rdevel.html) version.  These links point to the windows versions.  If you're running Linux, you probably already know how to get the right version, and there's not a simply URL I can link to.
 
 ### RStudio
-Although other R IDEs are available, using [RStudio](http://www.rstudio.com/ide/download/desktop) will be easier when developing REDCapR, since that the major link of the tool chain I'm used to.
+Although other R IDEs are available, using [RStudio](https://www.rstudio.com/ide/download/desktop) will be easier when developing REDCapR, since that the major link of the tool chain I'm used to.
 
 ### Rtools
 [Rtools](https://cran.r-project.org/bin/windows/Rtools/) is the main thing that builds and checks the package being developed.  CRAN maintainers like you to run the most recent version.
 
 ### LaTeX  software
-For Windows, the consensus seemed to be [MiKTeX](http://miktex.org/download).  The full version is huge, and contains almost every possible package (LaTeX has a package system similar to R and Linux).  If you install something other than the full version, and a document requires a package you don't have, it will simply prompt you to download it.
+For Windows, the consensus seemed to be [MiKTeX](https://miktex.org/download).  The full version is huge, and contains almost every possible package (LaTeX has a package system similar to R and Linux).  If you install something other than the full version, and a document requires a package you don't have, it will simply prompt you to download it.
 
 ### qpdf
-[qpdf](http://sourceforge.net/projects/qpdf/) is a command line tool that R BUILD calls.  You'll never call it directly.  It is used to make see if the documentation pdfs can be further compressed to save additional space.  For Windows, download the zipped file from sourceforge and copy it into a permanent location (eg, in the `/Program Files/` directory.)  
+[qpdf](https://sourceforge.net/projects/qpdf/) is a command line tool that R BUILD calls.  You'll never call it directly.  It is used to make see if the documentation pdfs can be further compressed to save additional space.  For Windows, download the zipped file from sourceforge and copy it into a permanent location (eg, in the `/Program Files/` directory.)  
 
-The location of the `bin` directory should be added to the OS's "PATH" environmental variable, so the executable can be found. At the time of this writing, I added `C:\Program Files\qpdf-5.0.1\bin;`.  Make sure a semicolon is separating it from all the stuff before it in the PATH variable.  Make sure the version number (eg, "5.0.1") matches the version of your current installation. *Apparently I needed to reboot my computer for the new path entry to be recognized (see [a stack exchanage explanation for tedious details](http://serverfault.com/a/557669)); restarting RStudio didn't work.*
+The location of the `bin` directory should be added to the OS's "PATH" environmental variable, so the executable can be found. At the time of this writing, I added `C:\Program Files\qpdf-5.0.1\bin;`.  Make sure a semicolon is separating it from all the stuff before it in the PATH variable.  Make sure the version number (eg, "5.0.1") matches the version of your current installation. *Apparently I needed to reboot my computer for the new path entry to be recognized (see [a stack exchanage explanation for tedious details](https://serverfault.com/a/557669)); restarting RStudio didn't work.*
 
 If you don't install qpdf correctly, you'll likely receive the error message `WARNING 'qpdf' is needed for checks on size reduction of PDFs` when running R CHECK with the `--as-cran-` option.
 
@@ -31,7 +31,7 @@ sudo apt-get install texinfo
 sudo apt-get install texlive
 sudo apt-get install texlive-fonts-extra
 ```
-See [texi2dvi missing](https://github.com/yihui/knitr/issues/214) and [textlive-fonts-extra](http://tex.stackexchange.com/questions/125274/error-font-ts1-zi4r-at-540-not-found) for installing.  See the [R CMD Rd2pdf](http://stackoverflow.com/questions/10819959/diagnosing-r-package-build-warning-latex-errors-when-creating-pdf-version) for getting better error messages than R CMD check.
+See [texi2dvi missing](https://github.com/yihui/knitr/issues/214) and [textlive-fonts-extra](https://tex.stackexchange.com/questions/125274/error-font-ts1-zi4r-at-540-not-found) for installing.  See the [R CMD Rd2pdf](https://stackoverflow.com/questions/10819959/diagnosing-r-package-build-warning-latex-errors-when-creating-pdf-version) for getting better error messages than R CMD check.
 
 
 ### Help me add more to this

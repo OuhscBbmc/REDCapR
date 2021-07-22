@@ -5,7 +5,7 @@
 #'
 #' @description This function will soon be deprecated; please transition to [retrieve_token_mssql()]. These functions are not essential to calling the REDCap API, but instead are functions that help manage tokens securely.
 #'
-#' @param dsn A [DSN](http://en.wikipedia.org/wiki/Data_source_name) on the local machine that points to the desired MSSQL database. Required.
+#' @param dsn A [DSN](https://en.wikipedia.org/wiki/Data_source_name) on the local machine that points to the desired MSSQL database. Required.
 #' @param project_name The friendly/shortened name given to the REDCap project in the MSSQL table.  Notice this isn't necessarily the same name used by REDCap. Required
 #' @param channel An *optional* connection handle as returned by [RODBC::odbcConnect()].  See Details below. Optional.
 

@@ -4,8 +4,10 @@ Upcoming Versions
 In the future:
 ...
 
-Version 0.12 (Unreleased on CRAN)
+Version 1.0 (released 2021-07-21)
 ==========================================================
+
+The package has been stable for years and should be reflected in the major version number.
 
 ### Minor Enhancements
 
@@ -20,7 +22,8 @@ Version 0.12 (Unreleased on CRAN)
 ### Stability Features
 
 * update for newer version of testthat -v3.0.0 (#312)
-* update for newer version of readr (#313)
+* update for newer version of readr 2.0.0 (#343)
+* update for newer version of readr 1.4.0 (#313)
 * update for newer version of REDCap on test server (#310)
 * save expected datasets as files -instead of included in the actual test code (#308)
 
@@ -127,7 +130,7 @@ Versions 0.9.7 (Released 2017-09-09)
 * Remove line breaks from token (Thanks @haozhu233 in issues #103 & #104)
 
 ### Minor Updates
-* When combining batches into a single data.frame, `data.table::rbindlist()` is used.  This should prevent errors with the first batch's data type (for a column) isn't compatible with a later batch.  For instance, this occurs when the first batch has only integers for `record_id`, but a subsequent batch has values like `aa-test-aa`.  The variable for the combined dataset should be a character. (Issue #128 & http://stackoverflow.com/questions/39377370/bind-rows-of-different-data-types; Thanks @arunsrinivasan)
+* When combining batches into a single data.frame, `data.table::rbindlist()` is used.  This should prevent errors with the first batch's data type (for a column) isn't compatible with a later batch.  For instance, this occurs when the first batch has only integers for `record_id`, but a subsequent batch has values like `aa-test-aa`.  The variable for the combined dataset should be a character. (Issue #128 & https://stackoverflow.com/questions/39377370/bind-rows-of-different-data-types; Thanks @arunsrinivasan)
 * Uses the `dplyr` package instead of `plyr`.  This shouldn't affect callers, because immediately before returning the data, `REDCapR::redcap_read()` coerces the `tibble::tibble` (which was formerly called `dplyr::tbl_df`) back to a vanilla `data.frame` with `as.data.frame()`.
 * A few more instances of validating input parameters to read functions. (Issue #8).
 
@@ -193,7 +196,7 @@ Version 0.4-28 (Released 2014-09-20)
 
 ### Updates
 * By default, the SSL certs come from the httr package.  However, REDCapR will continue to maintain a copy in case httr's version on CRAN gets out of date.
-* The tests are split into two collections: one that's run by the CRAN checks, and the other run manually.  [Thanks, Gabor Csardi](http://stackoverflow.com/questions/25595487/testthat-pattern-for-long-running-tests).  Any test with a dependency outside the package code (especially the REDCap test projects) is run manually so changes to the test databases won't affect the success of building the previous version on CRAN.
+* The tests are split into two collections: one that's run by the CRAN checks, and the other run manually.  [Thanks, Gabor Csardi](https://stackoverflow.com/questions/25595487/testthat-pattern-for-long-running-tests).  Any test with a dependency outside the package code (especially the REDCap test projects) is run manually so changes to the test databases won't affect the success of building the previous version on CRAN.
 * Corrected typo in `redcap_download_file_oneshot()` documentation, thanks to Andrew Peters (@ARPeters #45).
 
 
@@ -220,7 +223,7 @@ Version 0.2 (Released 2014-07-02)
 * The `redcap_project()` object reduces repeatedly passing parameters like the server URL, the user token, and the SSL cert location.
 
 ### Updates
-* New Mozilla SSL Certification Bundles released on cURL (released 2013-12-05; http://curl.haxx.se/ca/cacert.pem)
+* New Mozilla SSL Certification Bundles released on cURL (released 2013-12-05)
 * Renamed `redcap_read_batch()`  to `redcap_read()`. These changes reflect our suggestion that reads should typically be batched.
 * Renamed `redcap_read()` to `redcap_read_oneshot()`
 * Renamed `redcap_write()` to `redcap_write_oneshot()` (which is an internal function).

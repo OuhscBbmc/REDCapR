@@ -11,7 +11,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-This vignette covers the the less-typical uses of [REDCapR](https://github.com/OuhscBbmc/REDCapR) to interact with [REDCap](http://www.project-redcap.org/) through its API.
+This vignette covers the the less-typical uses of [REDCapR](https://github.com/OuhscBbmc/REDCapR) to interact with [REDCap](https://www.project-redcap.org/) through its API.
 
 ```{r set_options, echo=FALSE, results='hide'}
 report_render_start_time <- Sys.time()
@@ -27,7 +27,7 @@ opts_chunk$set(
 
 # knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
 knit_print.data.frame = function(x, ...) {
-  # Adapted from https://cran.r-project.org/web/packages/knitr/vignettes/knit_print.html
+  # See https://cran.r-project.org/package=knitr/vignettes/knit_print.html
 
   x %>%
     # rmarkdown::print.paged_df() %>%
@@ -166,7 +166,7 @@ ds_wide_2 <-
 ds_wide_2
 ```
 
-Lots of packages and documentation exist.  Our current preference is the [tidyverse approach](https://tidyr.tidyverse.org/articles/pivot.html) to pivoting, but the [data.table approach](https://www.r-bloggers.com/creating-blazing-fast-pivot-tables-from-r-with-data-table-now-with-subtotals-using-grouping-sets/) is worth considering if you're comfortable with that package.  This [Stack Overflow post](https://stackoverflow.com/questions/10589693/convert-data-from-long-format-to-wide-format-with-multiple-measure-columns/) describes several ways.  We recommend against the [reshape](https://CRAN.R-project.org/package=reshape) and [reshape2](https://CRAN.R-project.org/package=reshape2) packages, because their developers have replaced them with the [tidyr](https://CRAN.R-project.org/package=tidyr) functions described above.
+Lots of packages and documentation exist.  Our current preference is the [tidyverse approach](https://tidyr.tidyverse.org/articles/pivot.html) to pivoting, but the [data.table approach](https://www.r-bloggers.com/2019/03/creating-blazing-fast-pivot-tables-from-r-with-data-table-now-with-subtotals-using-grouping-sets/) is worth considering if you're comfortable with that package.  This [Stack Overflow post](https://stackoverflow.com/questions/10589693/convert-data-from-long-format-to-wide-format-with-multiple-measure-columns/) describes several ways.  We recommend against the [reshape](https://CRAN.R-project.org/package=reshape) and [reshape2](https://CRAN.R-project.org/package=reshape2) packages, because their developers have replaced them with the [tidyr](https://CRAN.R-project.org/package=tidyr) functions described above.
 
 Query the Underlying MySQL Database
 ==================================================================
@@ -206,7 +206,7 @@ where
 SSL Options
 ==================================================================
 
-The official [cURL site](http://curl.haxx.se) discusses the process of using SSL to verify the server being connected to.
+The official [cURL site](https://curl.se/) discusses the process of using SSL to verify the server being connected to.
 
 Use the SSL cert file that come with the `openssl` package.
 

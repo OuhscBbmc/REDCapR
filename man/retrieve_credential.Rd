@@ -50,7 +50,7 @@ credential file is a 32-character hexadecimal string.  Defaults to FALSE.}
 campus.  This allows one credential system to accommodate multiple
 instances on campus.  Required}
 
-\item{dsn}{A \href{http://en.wikipedia.org/wiki/Data_source_name}{DSN} on the
+\item{dsn}{A \href{https://en.wikipedia.org/wiki/Data_source_name}{DSN} on the
 local machine that points to the desired MSSQL database. Required.}
 
 \item{channel}{An \emph{optional} connection handle as returned by

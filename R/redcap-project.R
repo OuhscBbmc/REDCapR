@@ -131,5 +131,5 @@ redcap_project <- setRefClass(
   ) #End methods list
 ) #End class
 
-# http://adv-r.had.co.nz/OO-essentials.html # nolint
-# http://stackoverflow.com/questions/21875596/mapping-a-c-sharp-class-definition-to-an-r-reference-class-definition # nolint
+# https://adv-r.had.co.nz/OO-essentials.html # nolint
+# https://stackoverflow.com/questions/21875596/mapping-a-c-sharp-class-definition-to-an-r-reference-class-definition # nolint

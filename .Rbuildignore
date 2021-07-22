@@ -24,3 +24,4 @@ utility/
 ^CRAN-RELEASE$
 ^codecov\.yml$
 ^pkgdown$
+^LICENSE\.md$

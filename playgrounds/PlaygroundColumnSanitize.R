@@ -21,7 +21,7 @@
 
 redcap_column_sanitize <- function( d, column_names=colnames(d) ) {
   #Demote unicode characters to ASCII
-  old_characters <- base::c("ÄÁÀÂÇÉÈÊËÍÎÏÑÓÖÔØÚÜÙÛŸÝ") #Pasted from http://www.periodni.com/unicode_utf-8_encoding.html
+  old_characters <- base::c("ÄÁÀÂÇÉÈÊËÍÎÏÑÓÖÔØÚÜÙÛŸÝ") #Pasted from https://www.periodni.com/unicode_utf-8_encoding.html
   new_characters <- base::c("AAAACEEEEIIINOOOOUUUUYY")
   old_characters <- base::paste0(old_characters, base::tolower(old_characters))
   new_characters <- base::paste0(new_characters, base::tolower(new_characters))
