@@ -275,7 +275,7 @@ If all these checks pass, proceed to the next section.  If not, start by consult
 Reading with the REDCapR Package
 ------------------------------------------------------------------
 
-[REDCapR](https://ouhscbbmc.github.io/REDCapR/) wraps convenience functions around [httr](https://httr.r-lib.org/) to reduce the size and complexity of the user's code.  The package's basic functions are [demonstrated in a vignette](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) and are documented in its [reference manual](https://ouhscbbmc.github.io/REDCapR/reference/.
+[REDCapR](https://ouhscbbmc.github.io/REDCapR/) wraps convenience functions around [httr](https://httr.r-lib.org/) to reduce the size and complexity of the user's code.  The package's basic functions are [demonstrated in a vignette](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) and are documented in its [reference manual](https://ouhscbbmc.github.io/REDCapR/reference/).
 
 If you're not using REDCapR, you can skip this section and proceed to "Exporting from REDCap to R, using redcapAPI" or "Importing into REDCap from R" below.
 

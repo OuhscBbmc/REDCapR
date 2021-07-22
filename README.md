@@ -1,7 +1,7 @@
 [REDCapR](https://github.com/OuhscBbmc/REDCapR)  <img src="man/figures/logo.png" align="right" width="130" />
 =======
 
-We’ve been using R with [REDCap](https://projectredcap.org/)’s API since 2012 and have developed   [`REDCapR`](https://github.com/OuhscBbmc/REDCapR).  Before encapsulating these functions in a package, we were replicating 50+ lines of code to contact REDCap and robustly transform the returned [csv](https://en.wikipedia.org/wiki/Comma-separated_values) into an R `data.frame`; it took twice that much to implement batching.  All this can be done in one call to [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html):
+We’ve been using R with [REDCap](https://projectredcap.org/)'s API since 2012 and have developed   [`REDCapR`](https://github.com/OuhscBbmc/REDCapR).  Before encapsulating these functions in a package, we were replicating 50+ lines of code to contact REDCap and robustly transform the returned [csv](https://en.wikipedia.org/wiki/Comma-separated_values) into an R `data.frame`; it took twice that much to implement batching.  All this can be done in one call to [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html):
 
 ```r
 ds <- redcap_read(redcap_uri=uri, token=token)$data
@@ -45,7 +45,7 @@ The *development* version can be installed from [GitHub](https://github.com/Ouhs
 install.packages("remotes") # Run this line if the 'remotes' package isn't installed already.
 remotes::install_github(repo="OuhscBbmc/REDCapR")
 ```
-The  [ouhscbbmc.github.io/REDCapR](https://ouhscbbmc.github.io/REDCapR/ site describes the package functions, and includes documents involving [basic operations](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html), [advanced operations](https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.html), [token security](https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html), and
+The  [ouhscbbmc.github.io/REDCapR](https://ouhscbbmc.github.io/REDCapR/) site describes the package functions, and includes documents involving [basic operations](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html), [advanced operations](https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.html), [token security](https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html), and
 [troubleshooting](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html).
 
 Also checkout the other packages that exist for communicating with REDCap, which are listed in the [REDCap Tools](https://redcap-tools.github.io/projects/) directory.

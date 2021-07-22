@@ -2,6 +2,9 @@ rm(list=ls(all.names=TRUE))
 deviceType <- ifelse(R.version$os=="linux-gnu", "X11", "windows")
 options(device = deviceType) #https://support.rstudio.org/help/discussions/problems/80-error-in-function-only-one-rstudio-graphics-device-is-permitted
 
+spelling::spell_check_package()
+# spelling::update_wordlist()
+
 devtools::document()
 devtools::check_man() #Should return NULL
 devtools::clean_vignettes()
