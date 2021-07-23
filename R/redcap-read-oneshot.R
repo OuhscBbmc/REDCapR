@@ -254,21 +254,22 @@ redcap_read_oneshot <- function(
       else if (guess_type)     NULL
       else                     readr::cols(.default = readr::col_character())
 
-    try(
+    # try(
       # Convert the raw text to a dataset.
       ds <-
         readr::read_csv(
-          file            = I(kernel$raw_text),
+          file            = kernel$raw_text,
+          # file            = I(kernel$raw_text),
           col_types       = col_types,
           guess_max       = guess_max,
           show_col_types  = FALSE
-        ) %>%
-        as.data.frame(),
-
-      # Don't print the warning in the try block.  Print it below,
-      #   where it's under the control of the caller.
-      silent = TRUE
-    )
+        ) #%>%
+    #     as.data.frame(),
+    #
+    #   # Don't print the warning in the try block.  Print it below,
+    #   #   where it's under the control of the caller.
+    #   silent = TRUE
+    # )
 
     if (exists("ds") & inherits(ds, "data.frame")) {
       outcome_message <- sprintf(
