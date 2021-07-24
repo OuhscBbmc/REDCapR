@@ -276,7 +276,7 @@ Part 6 - Next Steps
 Other REDCapR Resources
 -------------------------
 
-In addition to documentation [for each function](https://ouhscbbmc.github.io/REDCapR/reference/) the REDCapR package contains a handful of [vignettes](https://ouhscbbmc.github.io/REDCapR/articles/ including a [troubleshooting guide](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html).
+In addition to documentation [for each function](https://ouhscbbmc.github.io/REDCapR/reference/) the REDCapR package contains a handful of [vignettes](https://ouhscbbmc.github.io/REDCapR/articles/) including a [troubleshooting guide](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html).
 
 Create an Arch for Reuse
 -------------------------
