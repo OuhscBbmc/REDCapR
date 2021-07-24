@@ -208,11 +208,11 @@
     redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>, 
     token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>
   <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.7 seconds.  The http status code was 200.</span>
-<span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-22 23:46:05.</span>
+<span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</span>
+<span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-07-24 06:18:47.</span>
 <span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span>
-<span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</span>
+<span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -370,7 +370,7 @@
   records     <span class="op">=</span> <span class="va">desired_records</span>,
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 2 records  at 2021-07-22 23:46:07.</span>
+<span class="co">#&gt; Starting to read 2 records  at 2021-07-24 06:18:49.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -416,7 +416,7 @@
   filter_logic  <span class="op">=</span> <span class="st">"'2003-01-01' &lt; [dob]"</span>,
   verbose       <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 2 records  at 2021-07-22 23:46:09.</span>
+<span class="co">#&gt; Starting to read 2 records  at 2021-07-24 06:18:51.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -460,7 +460,7 @@
   fields      <span class="op">=</span> <span class="va">desired_fields</span>,
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-22 23:46:11.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-07-24 06:18:52.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -504,7 +504,7 @@
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>,
   col_types   <span class="op">=</span> <span class="va">col_types</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-22 23:46:13.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-07-24 06:18:54.</span>
 <span class="co">#&gt;   record_id race___1 race___2 race___3 race___4 race___5 race___6</span>
 <span class="co">#&gt; 1         1    FALSE    FALSE    FALSE    FALSE     TRUE    FALSE</span>
 <span class="co">#&gt; 2         2    FALSE    FALSE     TRUE    FALSE     TRUE    FALSE</span>
@@ -527,7 +527,7 @@
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>,
   col_types   <span class="op">=</span> <span class="va">col_types</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-22 23:46:15.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-07-24 06:18:55.</span>
 <span class="co">#&gt;   record_id race___1 race___2 race___3 race___4 race___5 race___6</span>
 <span class="co">#&gt; 1         1        0        0        0        0        1        0</span>
 <span class="co">#&gt; 2         2        0        0        1        0        1        0</span>
@@ -542,7 +542,7 @@
 <div id="other-redcapr-resources" class="section level2">
 <h2 class="hasAnchor">
 <a href="#other-redcapr-resources" class="anchor"></a>Other REDCapR Resources</h2>
-<p>In addition to documentation <a href="https://ouhscbbmc.github.io/REDCapR/reference/">for each function</a> the REDCapR package contains a handful of [vignettes](<a href="https://ouhscbbmc.github.io/REDCapR/articles/" class="uri">https://ouhscbbmc.github.io/REDCapR/articles/</a> including a <a href="https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html">troubleshooting guide</a>.</p>
+<p>In addition to documentation <a href="https://ouhscbbmc.github.io/REDCapR/reference/">for each function</a> the REDCapR package contains a handful of <a href="https://ouhscbbmc.github.io/REDCapR/articles/">vignettes</a> including a <a href="https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html">troubleshooting guide</a>.</p>
 </div>
 <div id="create-an-arch-for-reuse" class="section level2">
 <h2 class="hasAnchor">
