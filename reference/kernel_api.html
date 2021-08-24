@@ -206,10 +206,10 @@ It guarantees the value can always be used in <code><a href='https://rdrr.io/r/u
 <span class='co'># Consume the results in a few different ways.</span>
 <span class='va'>kernel</span><span class='op'>$</span><span class='va'>result</span>
 </div><div class='output co'>#&gt; Response [https://bbmc.ouhsc.edu/redcap/api/]
-#&gt;   Date: 2021-07-24 06:18
+#&gt;   Date: 2021-08-24 14:39
 #&gt;   Status: 200
 #&gt;   Content-Type: text/csv; charset=utf-8
-#&gt;   Size: 615 B
+#&gt;   Size: 645 B
 #&gt; project_id,project_title,creation_time,production_time,in_production,project_...
 #&gt; 153,"REDCapR Target Simple Static -see https://github.com/OuhscBbmc/REDCapR",...</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span>text<span class='op'>=</span><span class='va'>kernel</span><span class='op'>$</span><span class='va'>raw_text</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   project_id
@@ -228,8 +228,8 @@ It guarantees the value can always be used in <code><a href='https://rdrr.io/r/u
 #&gt; 1           0                 NA                   NA                   NA
 #&gt;   project_pi_lastname display_today_now_button missing_data_codes
 #&gt; 1                  NA                        1                 NA
-#&gt;       external_modules
-#&gt; 1 cross_project_piping</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span>text<span class='op'>=</span><span class='va'>kernel</span><span class='op'>$</span><span class='va'>raw_text</span><span class='op'>)</span><span class='op'>)</span>
+#&gt;                                   external_modules
+#&gt; 1 cross_project_piping,date_validation_action_tags</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span>text<span class='op'>=</span><span class='va'>kernel</span><span class='op'>$</span><span class='va'>raw_text</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $project_id
 #&gt; [1] 153
 #&gt; 
@@ -303,7 +303,7 @@ It guarantees the value can always be used in <code><a href='https://rdrr.io/r/u
 #&gt; [1] NA
 #&gt; 
 #&gt; $external_modules
-#&gt; [1] "cross_project_piping"
+#&gt; [1] "cross_project_piping,date_validation_action_tags"
 #&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

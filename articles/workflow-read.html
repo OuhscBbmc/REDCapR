@@ -99,7 +99,7 @@
 
     
     
-<p>The REDCap API facilitates repetitive tasks. If you’re sure you’ll download and analyze a project only once, then it may make sense to avoid the API and download a CSV through the browser.</p>
+<p>The REDCap API facilitates repetitive tasks. If you’re sure you’ll download and analyze a project only once, then it may make sense to avoid the API and instead download a CSV through the browser.</p>
 <p>But that single-shot scenario almost never happens in my life:</p>
 <ol style="list-style-type: decimal">
 <li>the patient dataset is updated with relevant &amp; fresh information daily, or</li>
@@ -107,7 +107,7 @@
 </li>
 <li>you want someone else to be able to unambiguously &amp; effortlessly produce the same analysis.</li>
 </ol>
-<p>Instead of telling your students or colleagues “first go to REDCap, then go to project 55, then clicks”Data Exports“, then click”Export Data“, then download these files, then move the files to this these subdirectories, and finally convert them to this format before you run these models” …say it with a few lines of REDCapR code.</p>
+<p>Instead of telling your students or colleagues “first go to REDCap, then go to project 55, then click”Data Exports“, then click”Export Data“, then download these files, then move the files to this subdirectory, and finally convert them to this format before you run these models” …say it with a few lines of R code.</p>
 <p>For people running your code on their machines …the API is so integrated and responsive that they may not even realize their computer is connecting to the outside world. If they’re not looking closely, they may think it’s a dataset that’s included locally in a package they’ve already installed.</p>
 <p>For beginners, most of the work is related to passing security credentials …which is something that is a reality of working with PHI.</p>
 <div id="part-1---pre-requisites" class="section level1">
@@ -119,7 +119,10 @@
 <p>First confirm that the REDCapR package is installed on your local machine. If not, the following line will throw the error <code>Loading required namespace: REDCapR.  Failed with error: ‘there is no package called ‘REDCapR’’</code>. If this call fails, follow the installation instructions on the <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> webpage.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"REDCapR"</span><span class="op">)</span>
-<span class="co">#&gt; Loading required namespace: REDCapR</span></code></pre></div>
+<span class="co">#&gt; Loading required namespace: REDCapR</span>
+
+<span class="co"># If this fails, run `install.packages("REDCapR")` or `remotes::install_github(repo="OuhscBbmc/REDCapR")`</span></code></pre></div>
+<p>If you’re a workshop attendee, you can use this vignette to copy snippets of code to your local machine to follow along with the examples: <a href="https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html" class="uri">https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html</a>.</p>
 </div>
 <div id="verify-redcap-access" class="section level2">
 <h2 class="hasAnchor">
@@ -208,11 +211,11 @@
     redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>, 
     token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>
   <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</span>
-<span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-24 06:18:47.</span>
+<span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.5 seconds.  The http status code was 200.</span>
+<span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-08-24 14:40:38.</span>
 <span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span>
-<span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -370,7 +373,7 @@
   records     <span class="op">=</span> <span class="va">desired_records</span>,
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 2 records  at 2021-07-24 06:18:49.</span>
+<span class="co">#&gt; Starting to read 2 records  at 2021-08-24 14:40:40.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -407,7 +410,7 @@
 <div id="specify-row-filter" class="section level2">
 <h2 class="hasAnchor">
 <a href="#specify-row-filter" class="anchor"></a>Specify Row Filter</h2>
-<p>A more useful operation to limit rows is passing an expression to filter the records before returning. See your server’s documentation for the syntax rules of the filter statements. Remember to enclose your variable names in square brackets.</p>
+<p>A more useful operation to limit rows is passing an expression to filter the records before returning. See your server’s documentation for the syntax rules of the filter statements. Remember to enclose your variable names in square brackets. Also be aware of differences between strings and numbers.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Return only records with a birth date after January 2003</span>
 <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
@@ -416,7 +419,7 @@
   filter_logic  <span class="op">=</span> <span class="st">"'2003-01-01' &lt; [dob]"</span>,
   verbose       <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 2 records  at 2021-07-24 06:18:51.</span>
+<span class="co">#&gt; Starting to read 2 records  at 2021-08-24 14:40:42.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -460,7 +463,7 @@
   fields      <span class="op">=</span> <span class="va">desired_fields</span>,
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-24 06:18:52.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-08-24 14:40:44.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -504,7 +507,7 @@
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>,
   col_types   <span class="op">=</span> <span class="va">col_types</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-24 06:18:54.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-08-24 14:40:45.</span>
 <span class="co">#&gt;   record_id race___1 race___2 race___3 race___4 race___5 race___6</span>
 <span class="co">#&gt; 1         1    FALSE    FALSE    FALSE    FALSE     TRUE    FALSE</span>
 <span class="co">#&gt; 2         2    FALSE    FALSE     TRUE    FALSE     TRUE    FALSE</span>
@@ -527,7 +530,7 @@
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>,
   col_types   <span class="op">=</span> <span class="va">col_types</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-07-24 06:18:55.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2021-08-24 14:40:47.</span>
 <span class="co">#&gt;   record_id race___1 race___2 race___3 race___4 race___5 race___6</span>
 <span class="co">#&gt; 1         1        0        0        0        0        1        0</span>
 <span class="co">#&gt; 2         2        0        0        1        0        1        0</span>

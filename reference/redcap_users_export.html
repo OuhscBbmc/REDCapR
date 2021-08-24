@@ -192,19 +192,17 @@ the user with the role's defined privileges.
 <span class='va'>result</span>   <span class='op'>&lt;-</span> <span class='fu'>REDCapR</span><span class='fu'>::</span><span class='fu'>redcap_users_export</span><span class='op'>(</span>redcap_uri<span class='op'>=</span><span class='va'>uri</span>, token<span class='op'>=</span><span class='va'>token</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>The REDCap users were successfully exported in 0.3 seconds.  The http status code was 200.</span></div><div class='input'><span class='va'>result</span><span class='op'>$</span><span class='va'>data_user</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 × 31</span>
-#&gt;   username email firstname lastname expiration data_access_gro… data_access_gro…
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;date&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           
-#&gt; <span style='color: #BCBCBC;'>1</span> unittes… wibe… Unit Test PHI Free <span style='color: #BB0000;'>NA</span>         daga             331             
-#&gt; <span style='color: #BCBCBC;'>2</span> wbeasle… will… Will      Beasley… <span style='color: #BB0000;'>NA</span>         <span style='color: #BB0000;'>NA</span>               <span style='color: #BB0000;'>NA</span>              
+#&gt;   username        email firstname lastname expiration data_access_gro… data_access_gro…
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;date&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           
+#&gt; <span style='color: #BCBCBC;'>1</span> unittestphifree wibe… Unit Test PHI Free <span style='color: #BB0000;'>NA</span>         daga             331             
+#&gt; <span style='color: #BCBCBC;'>2</span> wbeasleya       will… Will      Beasley… <span style='color: #BB0000;'>NA</span>         <span style='color: #BB0000;'>NA</span>               <span style='color: #BB0000;'>NA</span>              
 #&gt; <span style='color: #949494;'># … with 24 more variables: design &lt;lgl&gt;, user_rights &lt;lgl&gt;,</span>
 #&gt; <span style='color: #949494;'>#   data_access_groups &lt;lgl&gt;, data_export &lt;chr&gt;, reports &lt;lgl&gt;,</span>
 #&gt; <span style='color: #949494;'>#   stats_and_charts &lt;lgl&gt;, manage_survey_participants &lt;lgl&gt;, calendar &lt;lgl&gt;,</span>
 #&gt; <span style='color: #949494;'>#   data_import_tool &lt;lgl&gt;, data_comparison_tool &lt;lgl&gt;, logging &lt;lgl&gt;,</span>
 #&gt; <span style='color: #949494;'>#   file_repository &lt;lgl&gt;, data_quality_create &lt;lgl&gt;,</span>
 #&gt; <span style='color: #949494;'>#   data_quality_execute &lt;lgl&gt;, api_export &lt;lgl&gt;, api_import &lt;lgl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   mobile_app &lt;lgl&gt;, mobile_app_download_data &lt;lgl&gt;, record_create &lt;lgl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   record_rename &lt;lgl&gt;, record_delete &lt;lgl&gt;, lock_records_all_forms &lt;lgl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   lock_records &lt;lgl&gt;, lock_records_customization &lt;lgl&gt;</span></div><div class='input'><span class='va'>result</span><span class='op'>$</span><span class='va'>data_user_form</span>
+#&gt; <span style='color: #949494;'>#   mobile_app &lt;lgl&gt;, mobile_app_download_data &lt;lgl&gt;, record_create &lt;lgl&gt;, …</span></div><div class='input'><span class='va'>result</span><span class='op'>$</span><span class='va'>data_user_form</span>
 </div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 × 4</span>
 #&gt;   username        form_name    permission_id permission
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>     
