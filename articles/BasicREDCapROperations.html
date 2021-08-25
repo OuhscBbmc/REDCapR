@@ -90,7 +90,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Basic REDCapR Operations</h1>
             
-            <h4 class="date">2021-08-24</h4>
+            <h4 class="date">2021-08-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/BasicREDCapROperations.Rmd"><code>vignettes/BasicREDCapROperations.Rmd</code></a></small>
       <div class="hidden name"><code>BasicREDCapROperations.Rmd</code></div>
@@ -121,11 +121,11 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Return all records and all variables.</span>
 <span class="va">ds_all_rows_all_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2021-08-24 14:40:01.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2021-08-25 03:42:00.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
 ── Column specification ────────────────────────────────────────────────────────
 cols(
@@ -192,9 +192,9 @@ cols(
   token      <span class="op">=</span> <span class="va">token</span>,
   records    <span class="op">=</span> <span class="va">desired_records_v1</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2021-08-24 14:40:03.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2021-08-25 03:42:02.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -219,9 +219,9 @@ cols(
   token             <span class="op">=</span> <span class="va">token</span>,
   records_collapsed <span class="op">=</span> <span class="va">desired_records_v2</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2021-08-24 14:40:05.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2021-08-25 03:42:03.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -269,10 +269,10 @@ cols(
   fields     <span class="op">=</span> <span class="va">desired_fields_v1</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2021-08-24 14:40:06.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2021-08-25 03:42:05.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
 ── Column specification ────────────────────────────────────────────────────────
 cols(
@@ -289,8 +289,8 @@ cols(
   fields_collapsed <span class="op">=</span> <span class="va">desired_fields_v2</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2021-08-24 14:40:08.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2021-08-25 03:42:06.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -323,8 +323,8 @@ cols(
   fields     <span class="op">=</span> <span class="va">desired_fields_v3</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2021-08-24 14:40:09.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2021-08-25 03:42:08.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -360,9 +360,9 @@ cols(
   token      <span class="op">=</span> <span class="va">token</span>,
   records    <span class="op">=</span> <span class="va">desired_records_v3</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2021-08-24 14:40:11.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2021-08-25 03:42:09.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -421,10 +421,10 @@ cols(
   fields     <span class="op">=</span> <span class="va">desired_fields_v1</span>
 <span class="op">)</span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2021-08-24 14:40:13.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2021-08-25 03:42:11.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
 ── Column specification ────────────────────────────────────────────────────────
 cols(
@@ -449,7 +449,7 @@ $status_codes
 [1] "200"
 
 $outcome_messages
-[1] "5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200."
+[1] "5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200."
 
 $records_collapsed
 [1] ""
@@ -473,7 +473,7 @@ $datetime_range_end
 [1] NA
 
 $elapsed_seconds
-[1] 1.500549</code></pre>
+[1] 1.463455</code></pre>
 </div>
 </div>
 <div id="session-information" class="section level1">
@@ -491,7 +491,7 @@ $elapsed_seconds
  collate  en_US.UTF-8                 
  ctype    en_US.UTF-8                 
  tz       UTC                         
- date     2021-08-24                  
+ date     2021-08-25                  
 
 ─ Packages ───────────────────────────────────────────────────────────────────
  package     * version date       lib source        
@@ -530,7 +530,7 @@ $elapsed_seconds
  R6            2.5.1   2021-08-19 [1] CRAN (R 4.1.0)
  ragg          1.1.3   2021-06-09 [1] CRAN (R 4.1.0)
  readr         2.0.1   2021-08-10 [1] CRAN (R 4.1.0)
- REDCapR     * 1.0.0   2021-08-24 [1] local         
+ REDCapR     * 1.0.0   2021-08-25 [1] local         
  rlang         0.4.11  2021-04-30 [1] CRAN (R 4.1.0)
  rmarkdown     2.10    2021-08-06 [1] CRAN (R 4.1.0)
  rprojroot     2.0.2   2020-11-15 [1] CRAN (R 4.1.0)
@@ -558,7 +558,7 @@ $elapsed_seconds
 
 [1] /Users/runner/work/_temp/Library
 [2] /Library/Frameworks/R.framework/Versions/4.1/Resources/library</code></pre>
-</details><p>Report rendered by runner at 2021-08-24, 14:40 +0000 in 15 seconds.</p>
+</details><p>Report rendered by runner at 2021-08-25, 03:42 +0000 in 13 seconds.</p>
 </div>
   </div>
 
