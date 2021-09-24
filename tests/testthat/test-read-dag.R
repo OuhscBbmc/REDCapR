@@ -11,8 +11,8 @@ test_that("smoke test", {
 })
 test_that("default", {
   testthat::skip_on_cran()
-  path_expected <- "test-data/specific-redcapr/read-clinical-trial/default.R"
-  expected_outcome_message <- "500 records and 13 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  path_expected <- "test-data/specific-redcapr/read-dag/assigned-to-dag-a.R"
+  expected_outcome_message <- "2 records and 16 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   expect_message(
     regexp           = expected_outcome_message,
