@@ -3,6 +3,7 @@ library(testthat)
 pid_read           <- 153L #This project is for testing only reading from the server.
 
 test_that("Missing DSN", {
+  testthat::skip_on_cran()
   testthat::skip_if_not_installed(pkg="odbc")
   expected_message <- "The 'dsn' parameter can be missing only if a 'channel' has been passed to 'retrieve_credential_mssql'."
 
@@ -13,6 +14,7 @@ test_that("Missing DSN", {
 })
 
 test_that("Bad project ID", {
+  testthat::skip_on_cran()
   testthat::skip_if_not_installed(pkg="odbc")
   expected_message <- "The 'project_id' parameter must contain at least one digit, and only digits."
 
@@ -24,6 +26,7 @@ test_that("Bad project ID", {
 })
 
 test_that("Bad instance name", {
+  testthat::skip_on_cran()
   testthat::skip_if_not_installed(pkg="odbc")
   expected_message <- "The 'instance' parameter must contain only letters, numbers, and underscores.  It may optionally be enclosed in square brackets."
 
@@ -47,6 +50,7 @@ test_that("Bad instance name", {
 })
 
 test_that("pid wrong length", {
+  testthat::skip_on_cran()
   testthat::skip_if_not_installed(pkg="odbc")
   expected_message <- "The `project_id` parameter should contain exactly one element."
 
@@ -63,6 +67,7 @@ test_that("pid wrong length", {
   )
 })
 test_that("instance wrong length", {
+  testthat::skip_on_cran()
   testthat::skip_if_not_installed(pkg="odbc")
   expected_message <- "The `instance` parameter should contain exactly one element."
 
@@ -79,6 +84,7 @@ test_that("instance wrong length", {
   )
 })
 test_that("dsn wrong length", {
+  testthat::skip_on_cran()
   testthat::skip_if_not_installed(pkg="odbc")
   expected_message <- "The `dsn` parameter should contain at most one element."
 
@@ -90,6 +96,7 @@ test_that("dsn wrong length", {
 })
 
 test_that("bad type: project_id", {
+  testthat::skip_on_cran()
   testthat::skip_if_not_installed(pkg="odbc")
   expected_message <- "The `project_id` parameter be an integer type.  Either append an `L` to the number, or cast with `as.integer\\(\\)`."
 
@@ -106,6 +113,7 @@ test_that("bad type: project_id", {
   )
 })
 test_that("bad type: instance", {
+  testthat::skip_on_cran()
   testthat::skip_if_not_installed(pkg="odbc")
   expected_message <- "The `instance` parameter be a character type.  Either enclose in quotes, or cast with `as.character\\(\\)`."
 
@@ -122,6 +130,7 @@ test_that("bad type: instance", {
   )
 })
 test_that("bad type: DSN name", {
+  testthat::skip_on_cran()
   testthat::skip_if_not_installed(pkg="odbc")
   expected_message <- "The `dsn` parameter be a character type, or missing or NULL.  Either enclose in quotes, or cast with `as.character\\(\\)`."
 
@@ -139,6 +148,7 @@ test_that("bad type: DSN name", {
 })
 
 test_that("bad type: channel ", {
+  testthat::skip_on_cran()
   testthat::skip_if_not_installed(pkg="odbc")
   expected_message <- "The `channel` parameter be a `DBIConnection` type, or NULL."
 
