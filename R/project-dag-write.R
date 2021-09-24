@@ -1,45 +1,45 @@
 # These functions are not exported.
 
-populate_project_simple <- function(batch = FALSE) {
+populate_project_dag_write <- function(batch = FALSE) {
   checkmate::assert_logical(batch, any.missing = FALSE, len = 1)
 
   if (!requireNamespace("testthat")) {
     # nocov start
     stop(
-      "The function REDCapR:::populate_project_simple() cannot run if the ",
+      "The function REDCapR:::populate_project_dag_write() cannot run if the ",
       "`testthat` package is not installed.  Please install it and try again."
     )
     # nocov end
   }
 
-  credential  <- retrieve_credential_testing(213L)
+  credential  <- retrieve_credential_testing(2545L)
 
   project <- REDCapR::redcap_project$new(
     redcap_uri    = credential$redcap_uri,
     token         = credential$token
   )
-  path_in_simple <- system.file(
-    "test-data/project-simple/simple-data.csv",
+  path_in_dag <- system.file(
+    "test-data/project-dag/dag-data.csv",
     package = "REDCapR"
   )
 
   # Write the file to disk (necessary only when you wanted to change the data).  Don't uncomment; just run manually.
   # returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="raw")
-  # utils::write.csv(returned_object$data, file="./inst/test-data/project-simple/simple-data.csv", row.names=FALSE)
+  # utils::write.csv(returned_object$data, file="./inst/test-data/project-dag/dag-data.csv", row.names=FALSE)
   # returned_object_metadata <- redcap_metadata_read(redcap_uri=uri, token=token)
-  # utils::write.csv(returned_object_metadata$data, file="./inst/test-data/project-simple/simple-metadata.csv", row.names=FALSE)
+  # utils::write.csv(returned_object_metadata$data, file="./inst/test-data/project-dag/dag-metadata.csv", row.names=FALSE)
 
   # Read in the data in R's memory from a csv file.
   ds_to_write <-
     readr::read_csv(
-      path_in_simple,
+      path_in_dag,
       show_col_types = FALSE
     )
-  # ds_to_write <- utils::read.csv(file="./inst/test-data/project-simple/simple-data.csv", stringsAsFactors=FALSE)
+  # ds_to_write <- utils::read.csv(file="./inst/test-data/project-dag/dag-data.csv", stringsAsFactors=FALSE)
 
   # Remove the calculated variables.
-  ds_to_write$age <- NULL
-  ds_to_write$bmi <- NULL
+  ds_to_write$last_name <- NULL
+  # ds_to_write$bmi <- NULL
 
   # Import the data into the REDCap project
   testthat::expect_message(
@@ -64,7 +64,7 @@ populate_project_simple <- function(batch = FALSE) {
 
   # If uploading the data was successful, then upload the image files.
   if (returned_object$success) {
-    upload_file_simple(
+    upload_file_dag(
       redcap_uri    = project$redcap_uri,
       token         = project$token
     )
@@ -72,22 +72,22 @@ populate_project_simple <- function(batch = FALSE) {
 
   # Print a message and return a boolean value
   base::message(base::sprintf(
-    "populate_project_simple success: %s.",
+    "populate_project_dag_write success: %s.",
     returned_object$success
   ))
   list(is_success = returned_object$success, redcap_project = project)
 }
-clear_project_simple <- function(verbose = TRUE) {
+clear_project_dag_write <- function(verbose = TRUE) {
   if (!requireNamespace("testthat")) {
     # nocov start
     stop(
-      "The function REDCapR:::populate_project_simple() cannot run if the ",
+      "The function REDCapR:::populate_project_dag_write() cannot run if the ",
       "`testthat` package is not installed.  Please install it and try again."
     )
     # nocov end
   }
   path_delete_test_record <-
-    "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_simple.php"
+    "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_dag_write.php"
 
   # Returns a boolean value if successful
   was_successful <- !httr::http_error(path_delete_test_record)
@@ -95,7 +95,7 @@ clear_project_simple <- function(verbose = TRUE) {
   # Print a message and return a boolean value
   if (verbose) {
     base::message(base::sprintf(
-      "clear_project_simple success: %s.",
+      "clear_project_dag_write success: %s.",
       was_successful
     ))
   }
@@ -103,36 +103,36 @@ clear_project_simple <- function(verbose = TRUE) {
   was_successful
 }
 
-clean_start_simple <- function(batch = FALSE, delay_in_seconds = 1) {
+clean_start_dag_write <- function(batch = FALSE, delay_in_seconds = 1) {
   checkmate::assert_logical(batch           , any.missing=FALSE, len=1)
   checkmate::assert_numeric(delay_in_seconds, any.missing=FALSE, len=1, lower=0)
 
   if (!requireNamespace("testthat")) {
     # nocov start
     stop(
-      "The function REDCapR:::populate_project_simple() cannot run if the ",
+      "The function REDCapR:::populate_project_dag_write() cannot run if the ",
       "`testthat` package is not installed.  Please install it and try again."
     )
     # nocov end
   }
   testthat::expect_message(
-    clear_result <- clear_project_simple(),
-    regexp = "clear_project_simple success: TRUE."
+    clear_result <- clear_project_dag_write(),
+    regexp = "clear_project_dag_write success: TRUE."
   )
-  testthat::expect_true(clear_result, "Clearing the results from the simple project should be successful.")
+  testthat::expect_true(clear_result, "Clearing the results from the dag_write project should be successful.")
   base::Sys.sleep(delay_in_seconds) #Pause after deleting records.
 
   testthat::expect_message(
-    populate_result <- populate_project_simple(batch = batch),
-    regexp = "populate_project_simple success: TRUE."
+    populate_result <- populate_project_dag_write(batch = batch),
+    regexp = "populate_project_dag_write success: TRUE."
   )
-  testthat::expect_true(populate_result$is_success, "Population of the simple project should be successful.")
+  testthat::expect_true(populate_result$is_success, "Population of the dag_write project should be successful.")
   base::Sys.sleep(delay_in_seconds) #Pause after writing records.
 
   populate_result
 }
 
-upload_file_simple <- function(redcap_uri, token = token) {
+upload_file_dag_write <- function(redcap_uri, token = token) {
   checkmate::assert_character(redcap_uri, any.missing=FALSE, len=1, min.chars = 5)
   checkmate::assert_character(token     , any.missing=FALSE, len=1, pattern="^\\w{32}$")
 
@@ -160,8 +160,8 @@ upload_file_simple <- function(redcap_uri, token = token) {
   }
 }
 
-# populate_project_simple()
-# populate_project_simple(batch = TRUE)
-# clear_project_simple()
-# clean_start_simple()
-# clean_start_simple(batch = TRUE)
+# populate_project_dag_write()
+# populate_project_dag_write(batch = TRUE)
+# clear_project_dag_write()
+# clean_start_dag_write()
+# clean_start_dag_write(batch = TRUE)
