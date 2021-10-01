@@ -62,13 +62,13 @@ populate_project_dag_write <- function(batch = FALSE) {
     }
   )
 
-  # If uploading the data was successful, then upload the image files.
-  if (returned_object$success) {
-    upload_file_dag(
-      redcap_uri    = project$redcap_uri,
-      token         = project$token
-    )
-  }
+  # # If uploading the data was successful, then upload the image files.
+  # if (returned_object$success) {
+  #   upload_file_dag(
+  #     redcap_uri    = project$redcap_uri,
+  #     token         = project$token
+  #   )
+  # }
 
   # Print a message and return a boolean value
   base::message(base::sprintf(
@@ -132,33 +132,33 @@ clean_start_dag_write <- function(batch = FALSE, delay_in_seconds = 1) {
   populate_result
 }
 
-upload_file_dag_write <- function(redcap_uri, token = token) {
-  checkmate::assert_character(redcap_uri, any.missing=FALSE, len=1, min.chars = 5)
-  checkmate::assert_character(token     , any.missing=FALSE, len=1, pattern="^\\w{32}$")
+# upload_file_dag_write <- function(redcap_uri, token = token) {
+#   checkmate::assert_character(redcap_uri, any.missing=FALSE, len=1, min.chars = 5)
+#   checkmate::assert_character(token     , any.missing=FALSE, len=1, pattern="^\\w{32}$")
 
-  records <- 1:5
-  file_paths <- system.file(
-    paste0("test-data/mugshot-", records, ".jpg"),
-    package = "REDCapR"
-  )
+#   records <- 1:5
+#   file_paths <- system.file(
+#     paste0("test-data/mugshot-", records, ".jpg"),
+#     package = "REDCapR"
+#   )
 
-  field <- "mugshot"
-  # event <- "" # only for longitudinal events
+#   field <- "mugshot"
+#   # event <- "" # only for longitudinal events
 
-  token <- sanitize_token(token)
+#   token <- sanitize_token(token)
 
-  for (i in seq_along(records)) {
-    record    <- records[i]
-    file_path <- file_paths[i]
-    redcap_upload_file_oneshot(
-      file_name   = file_path,
-      record      = record,
-      field       = field,
-      redcap_uri  = redcap_uri,
-      token       = token
-    )
-  }
-}
+#   for (i in seq_along(records)) {
+#     record    <- records[i]
+#     file_path <- file_paths[i]
+#     redcap_upload_file_oneshot(
+#       file_name   = file_path,
+#       record      = record,
+#       field       = field,
+#       redcap_uri  = redcap_uri,
+#       token       = token
+#     )
+#   }
+# }
 
 # populate_project_dag_write()
 # populate_project_dag_write(batch = TRUE)
