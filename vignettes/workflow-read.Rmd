@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-The REDCap API facilitates repetitive tasks.  If you're sure you'll download and analyze a project only once, then it may make sense to avoid the API and download a CSV through the browser. 
+The REDCap API facilitates repetitive tasks.  If you're sure you'll download and analyze a project only once, then it may make sense to avoid the API and instead download a CSV through the browser. 
 
 But that single-shot scenario almost never happens in my life: 
 
@@ -25,7 +25,7 @@ But that single-shot scenario almost never happens in my life:
 1. you run it on a different computer a few months later, or *and this is the heart of reproducibility:*
 1. you want someone else to be able to unambiguously & effortlessly produce the same analysis.
 
-Instead of telling your students or colleagues "first go to REDCap, then go to project 55, then clicks "Data Exports", then click "Export Data", then download these files, then move the files to this these subdirectories, and finally convert them to this format before you run these models" ...say it with a few lines of REDCapR code.
+Instead of telling your students or colleagues "first go to REDCap, then go to project 55, then click "Data Exports", then click "Export Data", then download these files, then move the files to this subdirectory, and finally convert them to this format before you run these models" ...say it with a few lines of R code.
 
 For people running your code on their machines ...the API is so integrated and responsive that they may not even realize their computer is connecting to the outside world. If they're not looking closely, they may think it's a dataset that's included locally in a package they've already installed.
 
@@ -41,8 +41,11 @@ First confirm that the REDCapR package is installed on your local machine.  If n
 
 ```{r pre-req}
 requireNamespace("REDCapR")
-```
 
+# If this fails, run `install.packages("REDCapR")` or `remotes::install_github(repo="OuhscBbmc/REDCapR")`
+```
+ 
+If you're a workshop attendee, you can use this vignette to copy snippets of code to your local machine to follow along with the examples: <https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html>.
 
 Verify REDCap Access
 -------------------------
@@ -187,7 +190,7 @@ REDCapR::redcap_read(
 Specify Row Filter
 -------------------------
 
-A more useful operation to limit rows is passing an expression to filter the records before returning.  See your server's documentation for the syntax rules of the filter statements.  Remember to enclose your variable names in square brackets.
+A more useful operation to limit rows is passing an expression to filter the records before returning.  See your server's documentation for the syntax rules of the filter statements.  Remember to enclose your variable names in square brackets.  Also be aware of differences between strings and numbers.
 
 ```{r choose-records-filter}
 # Return only records with a birth date after January 2003
@@ -276,7 +279,7 @@ Part 6 - Next Steps
 Other REDCapR Resources
 -------------------------
 
-In addition to documentation [for each function](https://ouhscbbmc.github.io/REDCapR/reference/) the REDCapR package contains a handful of [vignettes](https://ouhscbbmc.github.io/REDCapR/articles/ including a [troubleshooting guide](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html).
+In addition to documentation [for each function](https://ouhscbbmc.github.io/REDCapR/reference/) the REDCapR package contains a handful of [vignettes](https://ouhscbbmc.github.io/REDCapR/articles/) including a [troubleshooting guide](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html).
 
 Create an Arch for Reuse
 -------------------------

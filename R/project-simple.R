@@ -126,7 +126,7 @@ clean_start_simple <- function(batch = FALSE, delay_in_seconds = 1) {
     populate_result <- populate_project_simple(batch = batch),
     regexp = "populate_project_simple success: TRUE."
   )
-  testthat::expect_true(populate_result$is_success, "Population the the simple project should be successful.")
+  testthat::expect_true(populate_result$is_success, "Population of the simple project should be successful.")
   base::Sys.sleep(delay_in_seconds) #Pause after writing records.
 
   populate_result
