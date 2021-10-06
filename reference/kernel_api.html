@@ -87,7 +87,7 @@ values." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9000</span>
       </span>
     </div>
 
@@ -201,110 +201,15 @@ It guarantees the value can always be used in <code><a href='https://rdrr.io/r/u
   content  <span class='op'>=</span> <span class='st'>'project'</span>,
   format   <span class='op'>=</span> <span class='st'>'csv'</span>
 <span class='op'>)</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='va'>kernel</span> <span class='op'>&lt;-</span> <span class='fu'>REDCapR</span><span class='fu'>:::</span><span class='fu'>kernel_api</span><span class='op'>(</span><span class='va'>uri</span>, <span class='va'>post_body</span>, <span class='va'>config_options</span><span class='op'>)</span>
 
 <span class='co'># Consume the results in a few different ways.</span>
 <span class='va'>kernel</span><span class='op'>$</span><span class='va'>result</span>
-</div><div class='output co'>#&gt; Response [https://bbmc.ouhsc.edu/redcap/api/]
-#&gt;   Date: 2021-10-05 02:25
-#&gt;   Status: 200
-#&gt;   Content-Type: text/csv; charset=utf-8
-#&gt;   Size: 645 B
-#&gt; project_id,project_title,creation_time,production_time,in_production,project_...
-#&gt; 153,"REDCapR Target Simple Static -see https://github.com/OuhscBbmc/REDCapR",...</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span>text<span class='op'>=</span><span class='va'>kernel</span><span class='op'>$</span><span class='va'>raw_text</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   project_id
-#&gt; 1        153
-#&gt;                                                            project_title
-#&gt; 1 REDCapR Target Simple Static -see https://github.com/OuhscBbmc/REDCapR
-#&gt;         creation_time production_time in_production project_language purpose
-#&gt; 1 2013-11-29 15:58:20              NA             0          English       0
-#&gt;   purpose_other project_notes custom_record_label secondary_unique_field
-#&gt; 1            NA            NA                  NA                     NA
-#&gt;   is_longitudinal has_repeating_instruments_or_events surveys_enabled
-#&gt; 1               0                                   0               0
-#&gt;   scheduling_enabled record_autonumbering_enabled randomization_enabled
-#&gt; 1                  0                            1                     0
-#&gt;   ddp_enabled project_irb_number project_grant_number project_pi_firstname
-#&gt; 1           0                 NA                   NA                   NA
-#&gt;   project_pi_lastname display_today_now_button missing_data_codes
-#&gt; 1                  NA                        1                 NA
-#&gt;                                   external_modules
-#&gt; 1 cross_project_piping,date_validation_action_tags</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span>text<span class='op'>=</span><span class='va'>kernel</span><span class='op'>$</span><span class='va'>raw_text</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $project_id
-#&gt; [1] 153
-#&gt; 
-#&gt; $project_title
-#&gt; [1] "REDCapR Target Simple Static -see https://github.com/OuhscBbmc/REDCapR"
-#&gt; 
-#&gt; $creation_time
-#&gt; [1] "2013-11-29 15:58:20"
-#&gt; 
-#&gt; $production_time
-#&gt; [1] NA
-#&gt; 
-#&gt; $in_production
-#&gt; [1] 0
-#&gt; 
-#&gt; $project_language
-#&gt; [1] "English"
-#&gt; 
-#&gt; $purpose
-#&gt; [1] 0
-#&gt; 
-#&gt; $purpose_other
-#&gt; [1] NA
-#&gt; 
-#&gt; $project_notes
-#&gt; [1] NA
-#&gt; 
-#&gt; $custom_record_label
-#&gt; [1] NA
-#&gt; 
-#&gt; $secondary_unique_field
-#&gt; [1] NA
-#&gt; 
-#&gt; $is_longitudinal
-#&gt; [1] 0
-#&gt; 
-#&gt; $has_repeating_instruments_or_events
-#&gt; [1] 0
-#&gt; 
-#&gt; $surveys_enabled
-#&gt; [1] 0
-#&gt; 
-#&gt; $scheduling_enabled
-#&gt; [1] 0
-#&gt; 
-#&gt; $record_autonumbering_enabled
-#&gt; [1] 1
-#&gt; 
-#&gt; $randomization_enabled
-#&gt; [1] 0
-#&gt; 
-#&gt; $ddp_enabled
-#&gt; [1] 0
-#&gt; 
-#&gt; $project_irb_number
-#&gt; [1] NA
-#&gt; 
-#&gt; $project_grant_number
-#&gt; [1] NA
-#&gt; 
-#&gt; $project_pi_firstname
-#&gt; [1] NA
-#&gt; 
-#&gt; $project_pi_lastname
-#&gt; [1] NA
-#&gt; 
-#&gt; $display_today_now_button
-#&gt; [1] 1
-#&gt; 
-#&gt; $missing_data_codes
-#&gt; [1] NA
-#&gt; 
-#&gt; $external_modules
-#&gt; [1] "cross_project_piping,date_validation_action_tags"
-#&gt; </div></pre>
+<span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span>text<span class='op'>=</span><span class='va'>kernel</span><span class='op'>$</span><span class='va'>raw_text</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span>text<span class='op'>=</span><span class='va'>kernel</span><span class='op'>$</span><span class='va'>raw_text</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
