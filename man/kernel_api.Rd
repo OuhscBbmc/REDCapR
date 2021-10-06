@@ -49,10 +49,12 @@ post_body      <- list(
   content  = 'project',
   format   = 'csv'
 )
+\dontrun{
 kernel <- REDCapR:::kernel_api(uri, post_body, config_options)
 
 # Consume the results in a few different ways.
 kernel$result
 read.csv(text=kernel$raw_text)
 as.list(read.csv(text=kernel$raw_text))
+}
 }

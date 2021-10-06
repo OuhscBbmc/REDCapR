@@ -6,7 +6,7 @@ Description: Encapsulates functions to streamline calls from R to the REDCap
     University.  The Application Programming Interface (API) offers an avenue
     to access and modify data programmatically, improving the capacity for
     literate and reproducible programming.
-Version: 1.0.0
+Version: 1.0.9000
 Authors@R: c(person("Will", "Beasley", role = c("aut", "cre"), email =
     "wibeasley@hotmail.com", comment = c(ORCID = "0000-0002-5613-5006")),
     person("David", "Bard", role = "ctb"),
@@ -47,7 +47,7 @@ Suggests:
 License: MIT + file LICENSE
 VignetteBuilder: knitr
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
 Language: en-US

@@ -3,7 +3,8 @@ Upcoming Versions
 
 ### Minor Enhancements
 
-* `sanitize_token()` now allows lowercase characters --in addition to uppercase characters & digits  (#347, @jmbarbone)
+* `sanitize_token()` now allows lowercase characters --in addition to uppercase characters & digits. (#347, @jmbarbone)
+* Include a few more `testthat::skip_on_cran()` calls to comply with CRAN's ["fail gracefully"](https://cran.r-project.org/web/packages/policies.html) policy.  Similarly, skip remaining examples that depend on external resources. (#352)
 
 Version 1.0.0 (released 2021-07-21)
 ==========================================================
