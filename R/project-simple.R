@@ -35,7 +35,7 @@ populate_project_simple <- function(batch = FALSE) {
       path_in_simple,
       show_col_types = FALSE
     )
-  # ds_to_write <- utils::read.csv(file="./inst/test-data/project-simple/simple-data.csv", stringsAsFactors=FALSE)
+  # ds_to_write <- utils::read.csv(file="./inst/test-data/project-simple/simple-data.csv")
 
   # Remove the calculated variables.
   ds_to_write$age <- NULL

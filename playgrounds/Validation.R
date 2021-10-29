@@ -39,8 +39,7 @@ data.frame(
   field_name = colnames(df)[flag],
   field_index = indices,
   concern = "The REDCap API does not automatically convert boolean values to 0/1 values.",
-  suggestion = "Convert the variable with the `as.integer()` function .",
-  stringsAsFactors = FALSE
+  suggestion = "Convert the variable with the `as.integer()` function ."
 )
 
 v <- validate_no_logical(dfGood)

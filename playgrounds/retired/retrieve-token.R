@@ -90,8 +90,7 @@ retrieve_token_mssql <- function(
   sql <- "EXEC [redcap].[prcToken] @RedcapProjectName = ?"
 
   d_input <- data.frame(
-    RedcapProjectName  = project_name,
-    stringsAsFactors   = FALSE
+    RedcapProjectName  = project_name
   )
 
   if( base::missing(channel) | base::is.null(channel) ) {
@@ -106,7 +105,7 @@ retrieve_token_mssql <- function(
 
   base::tryCatch(
     expr = {
-      token <- RODBCext::sqlExecute(channel, sql, d_input, fetch=TRUE, stringsAsFactors=FALSE)$Token[1]
+      token <- RODBCext::sqlExecute(channel, sql, d_input, fetch=TRUE)$Token[1]
     }, finally = {
       if( close_channel_on_exit ) RODBC::odbcClose(channel)
     }

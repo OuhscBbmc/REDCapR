@@ -36,7 +36,7 @@ populate_project_dag_write <- function(batch = FALSE) {
       path_in_dag,
       show_col_types = FALSE
     )
-  # ds_to_write <- utils::read.csv(file="./inst/test-data/project-dag/dag-data.csv", stringsAsFactors=FALSE)
+  # ds_to_write <- utils::read.csv(file="./inst/test-data/project-dag/dag-data.csv")
 
   # Remove the calculated variables.
   ds_to_write$last_name <- NULL

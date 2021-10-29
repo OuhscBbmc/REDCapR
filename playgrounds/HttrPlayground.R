@@ -51,7 +51,7 @@ result <- httr::POST(
 )
 httr::content(result, "text")
 
-ds <- utils::read.csv(text=raw_text, stringsAsFactors=FALSE) #Convert the raw text to a dataset.
+ds <- utils::read.csv(text=raw_text) #Convert the raw text to a dataset.
 
 #
 # raw_text2 <- RCurl::postForm(
@@ -66,7 +66,7 @@ ds <- utils::read.csv(text=raw_text, stringsAsFactors=FALSE) #Convert the raw te
 #   , fields = fields_collapsed
 #   , .opts = RCurl::curlOptions(ssl.verifypeer = FALSE)
 # )
-# ds2 <- utils::read.csv(text=raw_text2, stringsAsFactors=FALSE) #Convert the raw text to a dataset.
+# ds2 <- utils::read.csv(text=raw_text2) #Convert the raw text to a dataset.
 
 # result <- redcap_read_oneshot(redcap_uri="https://bbmc.ouhsc.edu/redcap/api/", token = "9A81268476645C4E5F03428B8AC3AA7B")
 # dput(result$data)
