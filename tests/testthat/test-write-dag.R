@@ -52,3 +52,40 @@ test_that("default", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
+
+test_that("reassign subject to a different dag", {
+  testthat::skip_on_cran()
+
+  # Step 1: Initialize the project
+  start_clean_result <- REDCapR:::clean_start_dag_write(batch=FALSE)
+  url                <- start_clean_result$redcap_project$redcap_uri
+  token_for_admin    <- start_clean_result$redcap_project$token
+  token_for_dag_user <- "C79DB3836373478986928303B52E74DF"
+
+  # Step 2a: Retrieve the dataset as admin.  The 3 subjects' DAGs are 'daga', 'daga', & 'dagb'
+  ds_admin_1  <- redcap_read_oneshot(url, token_for_admin, export_data_access_groups=T)$data
+  expect_equal(nrow(ds_admin_1), 3L)
+  expect_equal(ds_admin_1$record_id               , c("331-1", "331-2", "332-3"))
+  expect_equal(ds_admin_1$redcap_data_access_group, c("daga", "daga", "dagb"   ))
+
+  # Step 2b: Retrieve the dataset as user. Only the first two subjects are visible to DAG-A users initially.
+  ds_user_1   <- redcap_read_oneshot(url, token_for_dag_user)$data
+  expect_equal(nrow(ds_user_1), 2L)
+  expect_equal(ds_user_1$record_id, c("331-1", "331-2"))
+
+  #Step 3: Reassign the 2nd subject and upload to server
+  ds_admin_1$redcap_data_access_group[2] <- "dagb"
+  redcap_write_oneshot(ds_admin_1, url, token_for_admin)
+
+  # Step 4a: Retrieve the dataset as admin.  Should the 2nd row automatically change from '331-2' to '332-2'?
+  ds_admin_2  <- redcap_read_oneshot(url, token_for_admin, export_data_access_groups=T)$data
+  expect_equal(nrow(ds_admin_2), 3L)
+  expect_equal(ds_admin_2$record_id               , c("331-1", "331-2", "332-3"))
+  # expect_equal(ds_admin_2$record_id               , c("331-1", "332-2", "332-3"))
+  expect_equal(ds_admin_2$redcap_data_access_group, c("daga", "dagb", "dagb"   ))
+
+  # Step 4b: Retrieve the dataset as user. Now only one subject is visible to DAG-A users.
+  ds_user_2   <- redcap_read_oneshot(url, token_for_dag_user)$data
+  expect_equal(nrow(ds_user_2), 1L)
+  expect_equal(ds_user_2$record_id, c("331-1"))
+})
