@@ -162,12 +162,13 @@ datasets that could tie up the server.</p>
   continue_on_error <span class='op'>=</span> <span class='cn'>FALSE</span>,
   <span class='va'>redcap_uri</span>,
   <span class='va'>token</span>,
+  format <span class='op'>=</span> <span class='st'>"csv"</span>,
+  meta_data_file <span class='op'>=</span> <span class='st'>"data/data-dictionary.csv"</span>,
   records <span class='op'>=</span> <span class='cn'>NULL</span>,
   records_collapsed <span class='op'>=</span> <span class='st'>""</span>,
   fields <span class='op'>=</span> <span class='cn'>NULL</span>,
   fields_collapsed <span class='op'>=</span> <span class='st'>""</span>,
   forms <span class='op'>=</span> <span class='cn'>NULL</span>,
-  forms_collapsed <span class='op'>=</span> <span class='st'>""</span>,
   events <span class='op'>=</span> <span class='cn'>NULL</span>,
   events_collapsed <span class='op'>=</span> <span class='st'>""</span>,
   raw_or_label <span class='op'>=</span> <span class='st'>"raw"</span>,
@@ -216,6 +217,16 @@ project.  Required.</p></td>
 project.  Required.</p></td>
     </tr>
     <tr>
+      <th>format</th>
+      <td><p>Format to download the metadata in. The default is "csv".</p></td>
+    </tr>
+    <tr>
+      <th>meta_data_file</th>
+      <td><p>File path of the metadata file. If it does not exist,
+the file is downloaded using the API and saved at the specified file path.
+The default is "data/data-dictionary.csv".</p></td>
+    </tr>
+    <tr>
       <th>records</th>
       <td><p>An array, where each element corresponds to the ID of a
 desired record.  Optional.</p></td>
@@ -239,11 +250,6 @@ separated by commas.  Optional.</p></td>
       <th>forms</th>
       <td><p>An array, where each element corresponds to a desired project
 form.  Optional.</p></td>
-    </tr>
-    <tr>
-      <th>forms_collapsed</th>
-      <td><p>A single string, where the desired form names are
-separated by commas.  Optional.</p></td>
     </tr>
     <tr>
       <th>events</th>
