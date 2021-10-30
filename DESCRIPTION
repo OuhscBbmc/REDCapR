@@ -27,7 +27,6 @@ Depends:
 Imports:
     checkmate (>= 2.0),
     dplyr (>= 1.0),
-    fs (>= 1.5.0),
     httr (>= 1.4.0),
     magrittr (>= 1.5),
     methods,

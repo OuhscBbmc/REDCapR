@@ -11,12 +11,12 @@ redcap_read(
   continue_on_error = FALSE,
   redcap_uri,
   token,
-  meta_data_file = "data/data-dictionary.csv",
   records = NULL,
   records_collapsed = "",
   fields = NULL,
   fields_collapsed = "",
   forms = NULL,
+  forms_collapsed = "",
   events = NULL,
   events_collapsed = "",
   raw_or_label = "raw",
@@ -52,10 +52,6 @@ project.  Required.}
 \item{token}{The user-specific string that serves as the password for a
 project.  Required.}
 
-\item{meta_data_file}{File path of the metadata file. If it does not exist,
-the file is downloaded using the API and saved at the specified file path.
-The default is "data/data-dictionary.csv".}
-
 \item{records}{An array, where each element corresponds to the ID of a
 desired record.  Optional.}
 
@@ -70,6 +66,9 @@ separated by commas.  Optional.}
 
 \item{forms}{An array, where each element corresponds to a desired project
 form.  Optional.}
+
+\item{forms_collapsed}{A single string, where the desired form names are
+separated by commas.  Optional.}
 
 \item{events}{An array, where each element corresponds to a desired project
 event.  Optional.}
