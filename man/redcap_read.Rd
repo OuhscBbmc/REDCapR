@@ -11,6 +11,7 @@ redcap_read(
   continue_on_error = FALSE,
   redcap_uri,
   token,
+  format = "csv",
   meta_data_file = "data/data-dictionary.csv",
   records = NULL,
   records_collapsed = "",
@@ -51,6 +52,8 @@ project.  Required.}
 
 \item{token}{The user-specific string that serves as the password for a
 project.  Required.}
+
+\item{format}{Format to download the metadata in. The default is "csv".}
 
 \item{meta_data_file}{File path of the metadata file. If it does not exist,
 the file is downloaded using the API and saved at the specified file path.

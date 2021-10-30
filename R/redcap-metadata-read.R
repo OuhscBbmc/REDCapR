@@ -125,7 +125,7 @@ redcap_metadata_read <- function(
               file            = I(kernel$raw_text),
               col_types       = col_types,
               show_col_types  = FALSE
-            ),
+            )
         } else if (format == "json") {
             json_df <- jsonlite::fromJSON(kernel$raw_text)
             json_tibble <- tibble::as_tibble(json_df)
