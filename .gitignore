@@ -19,3 +19,9 @@ docs
 inst/doc
 /doc/
 /Meta/
+
+renv/
+
+.Rprofile
+
+renv.lock

@@ -8,6 +8,10 @@
 #' project.  Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
+#' @param format Format to download the metadata in. The default is "json".
+#' @param meta_data_file File path of the metadata file. If it does not exist,
+#' the file is downloaded using the API and saved at the specified file path.
+#' The default is "data/data-dictionary.csv".
 #' @param forms An array, where each element corresponds to the REDCap form
 #' of the desired fields.  Optional.
 #' @param forms_collapsed A single string, where the desired forms are
@@ -71,6 +75,8 @@
 redcap_metadata_read <- function(
   redcap_uri,
   token,
+  format            = "json",
+  meta_data_file    = fs::path("data", "data-dictionary.csv"),
   forms             = NULL,
   forms_collapsed   = "",
   fields            = NULL,
@@ -92,79 +98,122 @@ redcap_metadata_read <- function(
   if (1L <= nchar(fields_collapsed) )
     validate_field_names_collapsed(fields_collapsed, stop_on_error = TRUE)
 
-  post_body <- list(
-    token    = token,
-    content  = "metadata",
-    format   = "csv",
-    forms    = forms_collapsed,
-    fields   = fields_collapsed
-  )
-
-  # This is the important line that communicates with the REDCap server.
-  kernel <- kernel_api(redcap_uri, post_body, config_options)
-
-  if (kernel$success) {
-    col_types <-
-      readr::cols(
-        field_name  = readr::col_character(),
-        .default    = readr::col_character()
-      )
-
-    try(
-      # Convert the raw text to a dataset.
-      ds <-
-        readr::read_csv(
-          file            = I(kernel$raw_text),
-          col_types       = col_types,
-          show_col_types  = FALSE
-        ),
-      # Don't print the warning in the try block.  Print it below,
-      #   where it's under the control of the caller.
-      silent = TRUE
+  if (!fs::file_exists(meta_data_file)) {
+    post_body <- list(
+      token    = token,
+      content  = "metadata",
+      format   = format,
+      forms    = forms_collapsed,
+      fields   = fields_collapsed
     )
 
-    if (exists("ds") & inherits(ds, "data.frame")) {
-      outcome_message <- sprintf(
-        "The data dictionary describing %s fields was read from REDCap in %0.1f seconds.  The http status code was %i.",
-        format(nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE),
-        kernel$elapsed_seconds,
-        kernel$status_code
+    # This is the important line that communicates with the REDCap server.
+    kernel <- kernel_api(redcap_uri, post_body, config_options)
+
+    if (kernel$success) {
+      col_types <-
+        readr::cols(
+          field_name  = readr::col_character(),
+          .default    = readr::col_character()
+        )
+
+      try(
+        # Convert the raw text to a dataset.
+        if (format == "csv") {
+          ds <-
+            readr::read_csv(
+              file            = I(kernel$raw_text),
+              col_types       = col_types,
+              show_col_types  = FALSE
+            ),
+        } else if (format == "json") {
+            json_df <- jsonlite::fromJSON(kernel$raw_text)
+            json_tibble <- tibble::as_tibble(json_df)
+            ds <- dplyr::mutate_all(json_tibble, ~ dplyr::na_if(.x, ""))
+        },
+        # Don't print the warning in the try block.  Print it below,
+        #   where it's under the control of the caller.
+        silent = TRUE
       )
 
-      # If an operation is successful, the `raw_text` is no longer returned
-      #   to save RAM.  The content is not really necessary with httr's status
-      #   message exposed.
-      kernel$raw_text   <- ""
-    } else { # nocov start
-      # Override the 'success' determination from the http status code
-      #   and return an empty data.frame.
-      kernel$success    <- FALSE
-      ds                <- data.frame()
-      outcome_message   <- sprintf(
-        "The REDCap metadata export failed.  The http status code was %i.  The 'raw_text' returned was '%s'.",
-        kernel$status_code,
+
+      if (exists("ds") & inherits(ds, "data.frame")) {
+        outcome_message <- sprintf(
+          "The data dictionary describing %s fields was read from REDCap in %0.1f seconds.  The http status code was %i.",
+          format(nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE),
+          kernel$elapsed_seconds,
+          kernel$status_code
+        )
+        # If an operation is successful, the `raw_text` is no longer returned
+        #   to save RAM.  The content is not really necessary with httr's status
+        #   message exposed.
+        kernel$raw_text   <- ""
+
+        # write metadata to file
+        if (!fs::dir_exists(fs::path_dir(meta_data_file))) {
+          fs::dir_create(fs::path_dir(meta_data_file))
+        }
+        readr::write_csv(
+          ds,
+          meta_data_file,
+          na = ""
+        )
+      } else { # nocov start
+        # Override the 'success' determination from the http status code
+        #   and return an empty data.frame.
+        kernel$success    <- FALSE
+        ds                <- data.frame()
+        outcome_message   <- sprintf(
+          "The REDCap metadata export failed.  The http status code was %i.  The 'raw_text' returned was '%s'.",
+          kernel$status_code,
+          kernel$raw_text
+        )
+      }       # nocov end
+    } else {
+      ds                  <- data.frame() #Return an empty data.frame
+      outcome_message     <- sprintf(
+        "The REDCapR metadata export operation was not successful.  The error message was:\n%s",
         kernel$raw_text
       )
-    }       # nocov end
+    }
+
+    if (verbose)
+      message(outcome_message)
+
+    list(
+      data               = ds,
+      success            = kernel$success,
+      status_code        = kernel$status_code,
+      outcome_message    = outcome_message,
+      forms_collapsed    = forms_collapsed,
+      fields_collapsed   = fields_collapsed,
+      elapsed_seconds    = kernel$elapsed_seconds,
+      raw_text           = kernel$raw_text
+    )
   } else {
-    ds                  <- data.frame() #Return an empty data.frame
-    outcome_message     <- sprintf(
-      "The REDCapR metadata export operation was not successful.  The error message was:\n%s",
-      kernel$raw_text
+    col_types <- readr::cols(
+        field_name  = readr::col_character(),
+        .default    = readr::col_character()
+    )
+
+    ds <- readr::read_csv(
+        meta_data_file,
+        col_types = col_types
+    )
+
+    outcome_message <- sprintf(
+      "The data dictionary describing %s fields was read from file %s.",
+      format(nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE),
+      meta_data_file
+    )
+
+    if (verbose)
+      message(outcome_message)
+
+    list(
+      data               = ds,
+      forms_collapsed    = forms_collapsed,
+      fields_collapsed   = fields_collapsed
     )
   }
-
-  if (verbose)
-    message(outcome_message)
-
-  list(
-    data               = ds,
-    success            = kernel$success,
-    status_code        = kernel$status_code,
-    outcome_message    = outcome_message,
-    forms_collapsed    = forms_collapsed,
-    fields_collapsed   = fields_collapsed,
-    elapsed_seconds    = kernel$elapsed_seconds,
-    raw_text           = kernel$raw_text
-  )
 }

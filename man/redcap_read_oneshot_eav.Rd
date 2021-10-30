@@ -7,6 +7,7 @@
 redcap_read_oneshot_eav(
   redcap_uri,
   token,
+  meta_data_file = "data/data-dictionary.csv",
   records = NULL,
   records_collapsed = "",
   fields = NULL,
@@ -31,6 +32,10 @@ project.  Required.}
 
 \item{token}{The user-specific string that serves as the password for a
 project.  Required.}
+
+\item{meta_data_file}{File path of the metadata file. If it does not exist,
+the file is downloaded using the API and saved at the specified file path.
+The default is "data/data-dictionary.csv".}
 
 \item{records}{An array, where each element corresponds to the ID of a
 desired record.  Optional.}
