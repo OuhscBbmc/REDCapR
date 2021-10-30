@@ -148,7 +148,6 @@ This function is still in development.</p>
     <pre class="usage"><span class='fu'>redcap_read_oneshot_eav</span><span class='op'>(</span>
   <span class='va'>redcap_uri</span>,
   <span class='va'>token</span>,
-  meta_data_file <span class='op'>=</span> <span class='st'>"data/data-dictionary.csv"</span>,
   records <span class='op'>=</span> <span class='cn'>NULL</span>,
   records_collapsed <span class='op'>=</span> <span class='st'>""</span>,
   fields <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -179,12 +178,6 @@ project.  Required.</p></td>
       <th>token</th>
       <td><p>The user-specific string that serves as the password for a
 project.  Required.</p></td>
-    </tr>
-    <tr>
-      <th>meta_data_file</th>
-      <td><p>File path of the metadata file. If it does not exist,
-the file is downloaded using the API and saved at the specified file path.
-The default is "data/data-dictionary.csv".</p></td>
     </tr>
     <tr>
       <th>records</th>

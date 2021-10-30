@@ -150,8 +150,6 @@ one field in the project's dataset.</p>
     <pre class="usage"><span class='fu'>redcap_metadata_read</span><span class='op'>(</span>
   <span class='va'>redcap_uri</span>,
   <span class='va'>token</span>,
-  format <span class='op'>=</span> <span class='st'>"json"</span>,
-  meta_data_file <span class='op'>=</span> <span class='fu'>fs</span><span class='fu'>::</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span><span class='op'>(</span><span class='st'>"data"</span>, <span class='st'>"data-dictionary.csv"</span><span class='op'>)</span>,
   forms <span class='op'>=</span> <span class='cn'>NULL</span>,
   forms_collapsed <span class='op'>=</span> <span class='st'>""</span>,
   fields <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -172,16 +170,6 @@ project.  Required.</p></td>
       <th>token</th>
       <td><p>The user-specific string that serves as the password for a
 project.  Required.</p></td>
-    </tr>
-    <tr>
-      <th>format</th>
-      <td><p>Format to download the metadata in. The default is "json".</p></td>
-    </tr>
-    <tr>
-      <th>meta_data_file</th>
-      <td><p>File path of the metadata file. If it does not exist,
-the file is downloaded using the API and saved at the specified file path.
-The default is "data/data-dictionary.csv".</p></td>
     </tr>
     <tr>
       <th>forms</th>
