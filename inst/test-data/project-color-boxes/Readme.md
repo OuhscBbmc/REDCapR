@@ -35,7 +35,7 @@ Here's some (slightly modified) code that Benjamin wrote for Issue #51:
 > post_result_all <- httr::POST(url=url, body=list(token=token, content='record', format='csv', rawOrLabel='label', fields='id, color'))
 > (csv_all <- as.character(post_result_all))
 [1] "id,color___r,color___g,color___b,color___p\n\"1\",\"Red\",\"\",\"\",\"\"\n\"2\",\"\",\"\",\"Blue\",\"\"\n\"3\",\"\",\"Green\",\"Blue\",\"\"\n\"4\",\"\",\"\",\"\",\"\"\n"
-> (ds_all <- read.csv(textConnection(csv_all), stringsAsFactors=FALSE))
+> (ds_all <- read.csv(textConnection(csv_all)))
   id color___r color___g color___b color___p
 1  1       Red                            NA
 2  2                          Blue        NA
@@ -45,7 +45,7 @@ Here's some (slightly modified) code that Benjamin wrote for Issue #51:
 > post_result_some <- httr::POST(url=url, body=list(token=token, content='record', format='csv', rawOrLabel='label', fields='id, color', records='2,3,4'))
 > (csv_some <- as.character(post_result_some))
 [1] "id,color___r,color___g,color___b,color___p\n\"2\",\"\",\"\",\"Blue\",\"\"\n\"3\",\"\",\"Green\",\"Blue\",\"\"\n\"4\",\"\",\"\",\"\",\"\"\n"
-> (ds_some <- read.csv(textConnection(csv_some), stringsAsFactors=FALSE))
+> (ds_some <- read.csv(textConnection(csv_some)))
   id color___r color___g color___b color___p
 1  2        NA                Blue        NA
 2  3        NA     Green      Blue        NA

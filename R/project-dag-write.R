@@ -13,6 +13,7 @@ populate_project_dag_write <- function(batch = FALSE) {
   }
 
   credential  <- retrieve_credential_testing(2545L)
+  # credential$token <- "123CA040BDA500E5CADB144D610FA3D0"
 
   project <- REDCapR::redcap_project$new(
     redcap_uri    = credential$redcap_uri,
@@ -35,14 +36,17 @@ populate_project_dag_write <- function(batch = FALSE) {
       path_in_dag,
       show_col_types = FALSE
     )
-  # ds_to_write <- utils::read.csv(file="./inst/test-data/project-dag/dag-data.csv", stringsAsFactors=FALSE)
+  # ds_to_write <- utils::read.csv(file="./inst/test-data/project-dag/dag-data.csv")
 
   # Remove the calculated variables.
   ds_to_write$last_name <- NULL
   # ds_to_write$bmi <- NULL
 
+  # ds_to_write$record_id <- sub("^\\d+-(\\d+)$", "\\1",  ds_to_write$record_id)
+  # ds_to_write$redcap_data_access_group <- NULL
+
   # Import the data into the REDCap project
-  testthat::expect_message(
+  # testthat::expect_message(
     returned_object <- if (batch) {
       REDCapR::redcap_write(
         ds          = ds_to_write,
@@ -52,15 +56,15 @@ populate_project_dag_write <- function(batch = FALSE) {
         convert_logical_to_integer = TRUE
       )
     } else {
-      REDCapR::redcap_write_oneshot(
-        ds          = ds_to_write,
-        redcap_uri  = project$redcap_uri,
-        token       = project$token,
-        verbose     = TRUE,
-        convert_logical_to_integer = TRUE
-      )
+        REDCapR::redcap_write_oneshot(
+          ds          = ds_to_write,
+          redcap_uri  = project$redcap_uri,
+          token       = project$token,
+          verbose     = TRUE,
+          convert_logical_to_integer = TRUE
+        )
     }
-  )
+  # )
 
   # # If uploading the data was successful, then upload the image files.
   # if (returned_object$success) {

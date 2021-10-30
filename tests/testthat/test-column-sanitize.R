@@ -1,7 +1,7 @@
 library(testthat)
 
 test_that("dry_run", {
-  dirty <- data.frame(id=seq_along(letters), names=letters, stringsAsFactors=FALSE) #These aren't really dirty.  And should have no conversion problems
+  dirty <- data.frame(id=seq_along(letters), names=letters) #These aren't really dirty.  And should have no conversion problems
 
   expected <- structure(list(id = as.character(1:26), names = letters),
                         .Names = c("id", "names"), row.names = c(NA, -26L), class = "data.frame")
