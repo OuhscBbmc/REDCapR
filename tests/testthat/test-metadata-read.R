@@ -2,6 +2,7 @@ library(testthat)
 
 credential            <- retrieve_credential_testing()
 credential_super_wide <- retrieve_credential_testing(753L)
+credential_super_wide_2<-retrieve_credential_testing(2593L)
 credential_problem    <- retrieve_credential_testing(1425L)
 update_expectation    <- FALSE
 
@@ -23,6 +24,23 @@ test_that("Super-wide", {
   expect_message(
     regexp           = expected_outcome_message,
     returned_object <- redcap_metadata_read(redcap_uri=credential_super_wide$redcap_uri, token=credential_super_wide$token)
+  )
+
+  expect_equal(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
+  expect_equal(ncol(returned_object$data), expected=expected_column_count)
+  expect_equal(sum(is.na(returned_object$data)), expected=expected_na_cells)
+})
+
+test_that("Super-wide 2", {
+  testthat::skip_on_cran()
+  expected_outcome_message <- "The data dictionary describing 5,751 fields was read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\.  The http status code was 200\\."
+  expected_row_count    <- 5751L
+  expected_column_count <- 18L
+  expected_na_cells     <- 63750L
+
+  expect_message(
+    regexp           = expected_outcome_message,
+    returned_object <- redcap_metadata_read(redcap_uri=credential_super_wide_2$redcap_uri, token=credential_super_wide_2$token)
   )
 
   expect_equal(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
@@ -72,5 +90,6 @@ test_that("normal", {
 
 rm(credential           )
 rm(credential_super_wide)
+rm(credential_super_wide_2)
 rm(credential_problem   )
 rm(update_expectation)
