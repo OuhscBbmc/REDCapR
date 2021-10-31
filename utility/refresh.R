@@ -18,7 +18,10 @@ checks_to_exclude <- c(
 gp <-
   goodpractice::all_checks() |>
   purrr::discard(~(. %in% checks_to_exclude)) |>
-  goodpractice::gp()
+  {
+    \(checks)
+    goodpractice::gp(checks = checks)
+  }()
 goodpractice::results(gp)
 gp
 
