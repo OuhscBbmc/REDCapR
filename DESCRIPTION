@@ -28,6 +28,7 @@ Imports:
     checkmate (>= 2.0),
     dplyr (>= 1.0),
     httr (>= 1.4.0),
+    jsonlite,
     magrittr (>= 1.5),
     methods,
     readr (>= 2.0),

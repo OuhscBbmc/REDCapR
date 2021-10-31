@@ -36,7 +36,7 @@ test_that("Super-wide 2", {
   expected_outcome_message <- "The data dictionary describing 5,751 fields was read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\.  The http status code was 200\\."
   expected_row_count    <- 5751L
   expected_column_count <- 18L
-  expected_na_cells     <- 63750L
+  expected_na_cells     <- 63511L
 
   expect_message(
     regexp           = expected_outcome_message,

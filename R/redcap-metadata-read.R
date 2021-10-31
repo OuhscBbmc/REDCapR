@@ -8,7 +8,6 @@
 #' project.  Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
-#' @param format Format to download the metadata in. The default is "csv".
 #' @param forms An array, where each element corresponds to the REDCap form
 #' of the desired fields.  Optional.
 #' @param forms_collapsed A single string, where the desired forms are
@@ -68,11 +67,11 @@
 #' REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 #' }
 
+#' @importFrom magrittr %>%
 #' @export
 redcap_metadata_read <- function(
   redcap_uri,
   token,
-  format            = "csv",
   forms             = NULL,
   forms_collapsed   = "",
   fields            = NULL,
@@ -97,7 +96,7 @@ redcap_metadata_read <- function(
   post_body <- list(
     token    = token,
     content  = "metadata",
-    format   = format,
+    format   = "json",
     forms    = forms_collapsed,
     fields   = fields_collapsed
   )
@@ -106,18 +105,18 @@ redcap_metadata_read <- function(
   kernel <- kernel_api(redcap_uri, post_body, config_options)
 
   if (kernel$success) {
-    col_types <-
-      readr::cols(
-        field_name  = readr::col_character(),
-        .default    = readr::col_character()
-      )
-
     try(
-      # Convert the raw text to a dataset.
       {
-        json_df <- jsonlite::fromJSON(kernel$raw_text)
-        json_tibble <- tibble::as_tibble(json_df)
-        ds <- dplyr::mutate_all(json_tibble, ~ dplyr::na_if(.x, ""))
+        # Convert the raw text to a dataset.
+        ds <-
+          kernel$raw_text %>%
+          jsonlite::fromJSON(
+            flatten = TRUE
+          ) %>%
+          tibble::as_tibble() %>%
+          dplyr::mutate_all(
+            ~dplyr::na_if(.x, "")
+          )
       },
       # Don't print the warning in the try block.  Print it below,
       #   where it's under the control of the caller.
