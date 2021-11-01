@@ -354,7 +354,7 @@ redcap_read_oneshot_eav <- function(
         kernel$raw_text
       )
     }
-    # nocov start
+    # nocov end
   }
 
   if (verbose)
