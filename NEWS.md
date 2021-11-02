@@ -4,7 +4,13 @@ Upcoming Versions
 ### Minor Enhancements
 
 * `sanitize_token()` now allows lowercase characters --in addition to uppercase characters & digits. (#347, @jmbarbone)
+* `redcap_metadata_read()` now uses json (instead of csv) to transfer the dictionary between server & client.  This accommodates super-wide dictionaries with 35k+ variables.  The user shouldn't notice a difference, and still will receive a data.frame. (#335, @januz & @datalorax)
 * Include a few more `testthat::skip_on_cran()` calls to comply with CRAN's ["fail gracefully"](https://cran.r-project.org/web/packages/policies.html) policy.  Similarly, skip remaining examples that depend on external resources. (#352)
+
+### Test Suite 
+
+* Added two more dictionaries that are super wide -5k & 35k variables  (#335 & #360, @januz & @datalorax)
+* Read, modify, & read projects with DAGs (#353, daniela.wolkersdorfer, #353)
 
 Version 1.0.0 (released 2021-07-21)
 ==========================================================
