@@ -6,9 +6,7 @@ on:
       # Ignore the pkgdown pages.
       - 'gh-pages'
   pull_request:
-    branches:
-      - main
-      - master
+    branches: [main, master]
 
 name: R-CMD-check
 
@@ -16,10 +14,14 @@ jobs:
   R-CMD-check:
     runs-on: ${{ matrix.os }}
 
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
 
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest]
         include:
@@ -28,14 +30,17 @@ jobs:
         # include:
         # - os: ubuntu-latest
         # - os: macos-latest
-        #   ONLYREADTESTS: true
+        #   ONLY_READ_TESTS: true
 
     steps:
       - uses: actions/checkout@v2
 
-      - uses: r-lib/actions/setup-r@v1
+      - uses: r-lib/actions/setup-pandoc@v1
 
-      - uses: r-lib/actions/setup-pandoc@master
+      - uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: ${{ matrix.config.r }}
+          use-public-rspm: true
 
       - uses: r-lib/actions/setup-r-dependencies@v1
         with:
