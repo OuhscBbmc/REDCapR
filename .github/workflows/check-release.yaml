@@ -14,12 +14,25 @@ name: R-CMD-check
 
 jobs:
   R-CMD-check:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        include:
+        - os: ubuntu-latest
+        # os: [ubuntu-latest, macos-latest]
+        # include:
+        # - os: ubuntu-latest
+        # - os: macos-latest
+        #   ONLYREADTESTS: true
+
     steps:
       - uses: actions/checkout@v2
-      
+
       - uses: r-lib/actions/setup-r@v1
 
       - uses: r-lib/actions/setup-pandoc@master
