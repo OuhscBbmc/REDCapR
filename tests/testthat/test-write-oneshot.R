@@ -3,12 +3,16 @@ update_expectation  <- FALSE
 
 test_that("Smoke Test", {
   testthat::skip_on_cran()
+  skip_if_onlyread()
+
   start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
   project <- start_clean_result$redcap_project
 })
 
 test_that("default", {
   testthat::skip_on_cran()
+  skip_if_onlyread()
+
   path_expected <- "test-data/specific-redcapr/write-oneshot/default.R"
   start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
   project <- start_clean_result$redcap_project
@@ -37,6 +41,8 @@ test_that("default", {
 
 test_that("one-field", {
   testthat::skip_on_cran()
+  skip_if_onlyread()
+
   path_expected <- "test-data/specific-redcapr/write-oneshot/one-field.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
@@ -77,6 +83,8 @@ test_that("one-field", {
 
 test_that("two-fields", {
   testthat::skip_on_cran()
+  skip_if_onlyread()
+
   path_expected <- "test-data/specific-redcapr/write-oneshot/two-fields.R"
   start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
   project <- start_clean_result$redcap_project
@@ -117,6 +125,8 @@ test_that("two-fields", {
 
 test_that("overwrite-false", {
   testthat::skip_on_cran()
+  skip_if_onlyread()
+
   path_expected <- "test-data/specific-redcapr/write-oneshot/default.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
@@ -158,6 +168,8 @@ test_that("overwrite-false", {
 
 test_that("overwrite-true", {
   testthat::skip_on_cran()
+  skip_if_onlyread()
+
   path_expected <- "test-data/specific-redcapr/write-oneshot/overwrite-true.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
