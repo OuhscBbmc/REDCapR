@@ -44,20 +44,19 @@ jobs:
         with:
           extra-packages: rcmdcheck
 
-      - name: Session info
-        run: |
-          options(width = 100)
-          pkgs <- installed.packages()[, "Package"]
-          sessioninfo::session_info(pkgs, include_base = TRUE)
-        shell: Rscript {0}
+      # - name: Session info
+      #   run: |
+      #     options(width = 100)
+      #     pkgs <- installed.packages()[, "Package"]
+      #     sessioninfo::session_info(pkgs, include_base = TRUE)
+      #   shell: Rscript {0}
 
-      - name: Check
-        env:
-          _R_CHECK_CRAN_INCOMING_: false
-        run: |
-          options(crayon.enabled = TRUE)
-          rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
-        shell: Rscript {0}
+      - uses: r-lib/actions/check-r-package@v1
+
+      - name: Show testthat output
+        if: always()
+        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
+        shell: bash
 
       - name: Test coverage
         run: covr::codecov()
