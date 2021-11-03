@@ -40,8 +40,8 @@ jobs:
           use-public-rspm: true
 
       - uses: r-lib/actions/setup-r-dependencies@v1
-        with:
-          extra-packages: rcmdcheck
+        # with:
+        #   extra-packages: rcmdcheck
 
       - name: Session info
         run: |
