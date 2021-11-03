@@ -41,8 +41,8 @@ jobs:
 
       # - uses: r-lib/actions/setup-r-dependencies@v1
       - uses: r-lib/actions/setup-r-dependencies@pak1
-        # with:
-        #   extra-packages: rcmdcheck
+        with:
+          extra-packages: rcmdcheck
 
       - name: Session info
         run: |
