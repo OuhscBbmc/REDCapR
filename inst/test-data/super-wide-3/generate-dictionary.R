@@ -39,6 +39,13 @@ ds <-
     `Identifier?`       = dplyr::if_else(variable_index %% 4 == 0L, "y", ""),
     `Required Field?`   = dplyr::if_else(variable_index %% 2 == 0L & `Field Type` != "descriptive", "y", ""),
     `Custom Alignment`  = dplyr::if_else(variable_index %% 5 == 0L, "RH", ""),
+  ) |>
+  dplyr::mutate(
+    `Field Annotation`    = dplyr::if_else(variable_index %%  6 == 0L, " @READONLY", ""),
+    `Field Annotation`    = dplyr::if_else(variable_index %%  7 == 0L, " @HIDDEN", ""),
+    `Field Annotation`    = dplyr::if_else(variable_index %%  8 == 0L, " @SHARED", ""),
+    `Field Annotation`    = dplyr::if_else(variable_index %%  9 == 0L, " @DEFAULT='-1'", ""),
+    `Field Annotation`    = dplyr::if_else(variable_index %% 10 == 0L, " @NOW", ""),
   )
 
 ds$variable_index <- NULL # Drop before writing to disk.
