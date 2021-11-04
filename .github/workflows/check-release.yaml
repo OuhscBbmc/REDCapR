@@ -21,11 +21,10 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
-        include:
-        - os: ubuntu-latest
-        - os: macos-latest
-          ONLY_READ_TESTS: true
+        config:
+          - {os: ubuntu-latest,  r: 'release'}
+          - {os: macOS-latest,   r: 'release', http-user-agent: 'release', ONLY_READ_TESTS: true}
+          # - {os: windows-latest, r: 'release'}
         # os: [ubuntu-latest]
         # include:
         # - os: ubuntu-latest
@@ -37,6 +36,9 @@ jobs:
 
       - uses: r-lib/actions/setup-r@v1
         with:
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+          ONLY_READ_TESTS: ${{ matrix.config.ONLY_READ_TESTS }}
           use-public-rspm: true
 
       - uses: r-lib/actions/setup-r-dependencies@v1
@@ -44,6 +46,8 @@ jobs:
           extra-packages: rcmdcheck
 
       - uses: r-lib/actions/check-r-package@v1
+        with:
+          ONLY_READ_TESTS: ${{ matrix.config.ONLY_READ_TESTS }}
 
       - name: Show testthat output
         if: always()
