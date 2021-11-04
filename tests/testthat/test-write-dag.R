@@ -3,12 +3,16 @@ update_expectation  <- FALSE
 
 test_that("Smoke Test", {
   testthat::skip_on_cran()
+  skip_if_onlyread()
+
   start_clean_result <- REDCapR:::clean_start_dag_write(batch=FALSE)
   project <- start_clean_result$redcap_project
 })
 
 test_that("default", {
   testthat::skip_on_cran()
+  skip_if_onlyread()
+
   path_expected_before <- "test-data/specific-redcapr/write-dag/before.R"
   path_expected_after  <- "test-data/specific-redcapr/write-dag/after.R"
   start_clean_result <- REDCapR:::clean_start_dag_write(batch=FALSE)
@@ -55,6 +59,7 @@ test_that("default", {
 
 test_that("reassign subject to a different dag", {
   testthat::skip_on_cran()
+  skip_if_onlyread()
 
   # Step 1: Initialize the project
   start_clean_result <- REDCapR:::clean_start_dag_write(batch=FALSE)

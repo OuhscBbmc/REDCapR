@@ -67,12 +67,14 @@ redcap_version <- function(
         version
       )
     } else {
+      # nocov start
       version          <- version_error
       outcome_message  <- sprintf(
         "The REDCap version determination failed.  The http status code was %s.  The 'raw_text' returned was '%s'.",
         kernel$status_code,
         kernel$raw_text
       )
+      # nocov end
     }
   } else {
     version          <- version_error

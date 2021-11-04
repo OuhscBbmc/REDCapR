@@ -333,6 +333,7 @@ redcap_read_oneshot_eav <- function(
 
       kernel$raw_text   <- "" # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
     } else {
+      # nocov start
       kernel$success    <- FALSE #Override the 'success' determination from the http status code.
       ds_2              <- tibble::tibble() #Return an empty data.frame
       outcome_message   <- sprintf(
@@ -340,8 +341,10 @@ redcap_read_oneshot_eav <- function(
         kernel$status_code,
         kernel$raw_text
       )
+      # nocov end
     }
   } else {
+    # nocov start
     ds_2            <- tibble::tibble() #Return an empty data.frame
     outcome_message <- if (any(grepl(kernel$regex_empty, kernel$raw_text))) {
       "The REDCapR read/export operation was not successful.  The returned dataset was empty."
@@ -351,6 +354,7 @@ redcap_read_oneshot_eav <- function(
         kernel$raw_text
       )
     }
+    # nocov end
   }
 
   if (verbose)

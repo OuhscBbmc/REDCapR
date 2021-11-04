@@ -67,6 +67,7 @@
 #' REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 #' }
 
+#' @importFrom magrittr %>%
 #' @export
 redcap_metadata_read <- function(
   redcap_uri,
@@ -95,7 +96,7 @@ redcap_metadata_read <- function(
   post_body <- list(
     token    = token,
     content  = "metadata",
-    format   = "csv",
+    format   = "json",
     forms    = forms_collapsed,
     fields   = fields_collapsed
   )
@@ -104,20 +105,19 @@ redcap_metadata_read <- function(
   kernel <- kernel_api(redcap_uri, post_body, config_options)
 
   if (kernel$success) {
-    col_types <-
-      readr::cols(
-        field_name  = readr::col_character(),
-        .default    = readr::col_character()
-      )
-
     try(
-      # Convert the raw text to a dataset.
-      ds <-
-        readr::read_csv(
-          file            = I(kernel$raw_text),
-          col_types       = col_types,
-          show_col_types  = FALSE
-        ),
+      {
+        # Convert the raw text to a dataset.
+        ds <-
+          kernel$raw_text %>%
+          jsonlite::fromJSON(
+            flatten = TRUE
+          ) %>%
+          tibble::as_tibble() %>%
+          dplyr::mutate_all(
+            ~dplyr::na_if(.x, "")
+          )
+      },
       # Don't print the warning in the try block.  Print it below,
       #   where it's under the control of the caller.
       silent = TRUE

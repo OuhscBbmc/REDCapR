@@ -4,6 +4,8 @@ update_expectation  <- FALSE
 
 test_that("One Shot: writing with read-only privileges", {
   testthat::skip_on_cran()
+  skip_if_onlyread()
+
   credential  <- retrieve_credential_testing(project_id = 153L) # read-only
   # expect_message(
   #   returned_object1 <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="raw")
@@ -35,6 +37,8 @@ test_that("One Shot: writing with read-only privileges", {
 
 test_that("Single Batch: writing with read-only privileges", {
   testthat::skip_on_cran()
+  skip_if_onlyread()
+
   credential  <- retrieve_credential_testing(project_id = 153L) # read-only
 
   expected_message    <- "The REDCapR write/import operation was not successful.  The error message was:\nERROR: You do not have API Import/Update privileges"
@@ -54,6 +58,8 @@ test_that("Single Batch: writing with read-only privileges", {
 
 test_that("Many Batches: writing with read-only privileges", {
   testthat::skip_on_cran()
+  skip_if_onlyread()
+
   credential  <- retrieve_credential_testing(project_id = 153L) # read-only
 
   expected_message    <- "The REDCapR write/import operation was not successful.  The error message was:\nERROR: You do not have API Import/Update privileges"
@@ -72,6 +78,8 @@ test_that("Many Batches: writing with read-only privileges", {
 
 test_that("Single Batch: writing with read-only privileges --contiue on error", {
   testthat::skip_on_cran()
+  skip_if_onlyread()
+
   credential  <- retrieve_credential_testing(project_id = 153L) # read-only
 
   expected_message    <- "The REDCapR write/import operation was not successful.  The error message was:\nERROR: You do not have API Import/Update privileges"
@@ -94,6 +102,8 @@ test_that("Single Batch: writing with read-only privileges --contiue on error", 
 
 test_that("Many Batches: writing with read-only privileges --contiue on error", {
   testthat::skip_on_cran()
+  skip_if_onlyread()
+
   credential  <- retrieve_credential_testing(project_id = 153L) # read-only
 
   expected_message    <- "The REDCapR write/import operation was not successful.  The error message was:\nERROR: You do not have API Import/Update privileges"

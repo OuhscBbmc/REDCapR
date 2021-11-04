@@ -4,12 +4,16 @@ update_expectation  <- FALSE
 
 test_that("Smoke Test", {
   testthat::skip_on_cran()
+  skip_if_onlyread()
+
   start_clean_result <- REDCapR:::clean_start_simple(batch=TRUE)
   project <- start_clean_result$redcap_project
 })
 
 test_that("default", {
   testthat::skip_on_cran()
+  skip_if_onlyread()
+
   path_expected <- "test-data/specific-redcapr/write-batch/default.R"
   start_clean_result <- REDCapR:::clean_start_simple(batch=TRUE)
   project <- start_clean_result$redcap_project
@@ -37,7 +41,9 @@ test_that("default", {
 })
 
 test_that("update-one-field", {
-  testthat::skip_on_cran()
+  testthat::skip_on_cran
+  skip_if_onlyread()
+
   path_expected <- "test-data/specific-redcapr/write-batch/update-one-field.R"
   start_clean_result <- REDCapR:::clean_start_simple(batch=TRUE)
   project <- start_clean_result$redcap_project
@@ -77,6 +83,8 @@ test_that("update-one-field", {
 
 test_that("update-two-fields", {
   testthat::skip_on_cran()
+  skip_if_onlyread()
+
   path_expected <- "test-data/specific-redcapr/write-batch/update-two-fields.R"
   start_clean_result <- REDCapR:::clean_start_simple(batch=TRUE)
   project <- start_clean_result$redcap_project
@@ -116,6 +124,8 @@ test_that("update-two-fields", {
 })
 test_that("Write Batch -Bad URI", {
   testthat::skip_on_cran()
+  skip_if_onlyread()
+
   bad_uri <- "google.com"
   start_clean_result <- REDCapR:::clean_start_simple(batch=TRUE)
   project <- start_clean_result$redcap_project
