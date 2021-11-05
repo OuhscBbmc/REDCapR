@@ -44,7 +44,7 @@ test_that("default", {
 
 test_that("batch size 3", {
   testthat::skip_on_cran()
-  path_expected <- "test-data/specific-redcapr/read-batch-repeating-sparse/batch-size-3.R"
+  path_expected <- "test-data/specific-redcapr/read-batch-repeating-sparse/default.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   expect_message(
@@ -57,7 +57,7 @@ test_that("batch size 3", {
       )
   )
 
-  if (update_expectation) save_expected(returned_object$data, path_expected)
+  # if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
@@ -72,7 +72,7 @@ test_that("batch size 3", {
 
 test_that("batch size 2", {
   testthat::skip_on_cran()
-  path_expected <- "test-data/specific-redcapr/read-batch-repeating-sparse/batch-szie-2.R"
+  path_expected <- "test-data/specific-redcapr/read-batch-repeating-sparse/default.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   expect_message(
@@ -85,7 +85,7 @@ test_that("batch size 2", {
       )
   )
 
-  if (update_expectation) save_expected(returned_object$data, path_expected)
+  # if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
@@ -100,7 +100,7 @@ test_that("batch size 2", {
 
 test_that("batch size 1", {
   testthat::skip_on_cran()
-  path_expected <- "test-data/specific-redcapr/read-batch-repeating-sparse/batch-size-1.R"
+  path_expected <- "test-data/specific-redcapr/read-batch-repeating-sparse/default.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   expect_message(
@@ -113,7 +113,7 @@ test_that("batch size 1", {
       )
   )
 
-  if (update_expectation) save_expected(returned_object$data, path_expected)
+  # if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
