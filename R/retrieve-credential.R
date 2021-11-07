@@ -12,7 +12,8 @@
 #'   project_id,
 #'   check_url            = TRUE,
 #'   check_username       = FALSE,
-#'   check_token_pattern  = TRUE
+#'   check_token_pattern  = TRUE,
+#'   username             = NA_character_
 #' )
 #'
 #' retrieve_credential_mssql(
@@ -37,6 +38,7 @@
 #' @param check_url A `logical` value indicates if the url in the credential
 #' file should be checked to have approximately the correct form.  Defaults
 #' to TRUE.
+#' [REDCapR::retrieve_credential_local()].
 #' @param check_username A `logical` value indicates if the username in the
 #' credential file should be checked against the username returned by R.
 #' Defaults to FALSE.
@@ -46,6 +48,8 @@
 #' local machine that points to the desired MSSQL database. Required.
 #' @param channel An *optional* connection handle as returned by
 #' [DBI::dbConnect()].  See Details below. Optional.
+#' @param username A character value used to retrieve a credential.
+#' See the Notes below. Optional.
 #'
 #' @return A list of the following elements are returned from
 #' `retrieve_credential_local()` and `retrieve_credential_mssql()`:
@@ -82,12 +86,24 @@
 #' 6. Double-check the file is secured and not accessible by other users.
 #'
 #' @note
+#'
+#' *Storing credentials on a server is preferred*
+#'
 #' Although we strongly encourage storing all the tokens on a central server
 #' (*e.g.*, see the `retrieve_credential_mssql()` function and the
 #' "SecurityDatabase" vignette), there are times when this approach is not
 #' feasible and the token must be stored locally.  Please contact us
 #' if your institution is using something other than SQL Server, and
 #' would like help adapting this approach to your infrastructure.
+#'
+#' *Stored credentials locally*
+#'
+#' When storing credentials locally, typically the credential file
+#' should be dedicated to just one user. Occasionally it makes sense to store
+#' tokens for multiple users --usually it's for the purpose of testing.
+#'
+#' The `username` field is connected only in the local credential file.
+#' It does not need to be the same as the official username in REDCap.
 #'
 #' @author Will Beasley
 #'
@@ -113,11 +129,13 @@ retrieve_credential_local <- function(
   project_id,
   check_url                = TRUE,
   check_username           = FALSE,
-  check_token_pattern      = TRUE
+  check_token_pattern      = TRUE,
+  username                 = NA_character_
 ) {
 
   checkmate::assert_character(path_credential  , any.missing=FALSE, len=1, pattern="^.{1,}$")
   checkmate::assert_file_exists(path_credential                                         )
+  checkmate::assert_character(username         , any.missing=TRUE, len=1, pattern="^.{1,}$")
 
   col_types <- readr::cols_only(
     redcap_uri    = readr::col_character(),
@@ -153,6 +171,11 @@ retrieve_credential_local <- function(
 
   # Select only the records with a matching project id.
   ds_credential <- ds_credentials[ds_credentials$project_id == project_id, ]
+
+  # If specified, select only the records with a matching username.
+  if (!is.na(username)) {
+    ds_credential <- ds_credentials[ds_credentials$username == username, ]
+  }
 
   # Check that one and only one record matches the project id.
   if (nrow(ds_credential) == 0L) {

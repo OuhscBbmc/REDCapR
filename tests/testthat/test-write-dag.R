@@ -1,5 +1,10 @@
 library(testthat)
 update_expectation  <- FALSE
+credential_admin  <- retrieve_credential_testing(2545L, "admin")
+credential_user   <- retrieve_credential_testing(2545L, "user-dag1")
+url               <- credential_admin$redcap_uri
+
+testthat::expect_equal(url,  credential_user$redcap_uri)
 
 test_that("Smoke Test", {
   testthat::skip_on_cran()
@@ -17,11 +22,10 @@ test_that("default", {
   path_expected_after  <- "test-data/specific-redcapr/write-dag/after.R"
   start_clean_result <- REDCapR:::clean_start_dag_write(batch=FALSE)
   project <- start_clean_result$redcap_project
-  token_for_dag_user <- "C79DB3836373478986928303B52E74DF"
 
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message(
-    returned_object <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=token_for_dag_user),
+    returned_object <- redcap_read_oneshot(url, credential_user$token),
     regexp = expected_outcome_message
   )
 
@@ -42,8 +46,8 @@ test_that("default", {
   # ds_updated$record_id <- sub("^\\d+-(\\d+)$", "\\1",  ds_updated$record_id)
   # ds_updated$redcap_data_access_group <- NULL
 
-  redcap_write_oneshot(ds_updated, project$redcap_uri, token_for_dag_user)
-  returned_object <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token)
+  redcap_write_oneshot(ds_updated, url, credential_user$token)
+  returned_object <- redcap_read_oneshot(url, credential_admin$token)
 
   if (update_expectation) save_expected(returned_object$data, path_expected_after)
   expected_data_frame <- retrieve_expected(path_expected_after)
@@ -63,34 +67,34 @@ test_that("reassign subject to a different dag", {
 
   # Step 1: Initialize the project
   start_clean_result <- REDCapR:::clean_start_dag_write(batch=FALSE)
-  url                <- start_clean_result$redcap_project$redcap_uri
-  token_for_admin    <- start_clean_result$redcap_project$token
-  token_for_dag_user <- "C79DB3836373478986928303B52E74DF"
+  # url                <- start_clean_result$redcap_project$redcap_uri
+  # token_for_admin    <- start_clean_result$redcap_project$token
+  # token_for_dag_user <- "C79DB3836373478986928303B52E74DF"
 
   # Step 2a: Retrieve the dataset as admin.  The 3 subjects' DAGs are 'daga', 'daga', & 'dagb'
-  ds_admin_1  <- redcap_read_oneshot(url, token_for_admin, export_data_access_groups=T)$data
+  ds_admin_1  <- redcap_read_oneshot(url, credential_admin$token, export_data_access_groups=T)$data
   expect_equal(nrow(ds_admin_1), 3L)
   expect_equal(ds_admin_1$record_id               , c("331-1", "331-2", "332-3"))
   expect_equal(ds_admin_1$redcap_data_access_group, c("daga", "daga", "dagb"   ))
 
   # Step 2b: Retrieve the dataset as user. Only the first two subjects are visible to DAG-A users initially.
-  ds_user_1   <- redcap_read_oneshot(url, token_for_dag_user)$data
+  ds_user_1   <- redcap_read_oneshot(url, credential_user$token)$data
   expect_equal(nrow(ds_user_1), 2L)
   expect_equal(ds_user_1$record_id, c("331-1", "331-2"))
 
   #Step 3: Reassign the 2nd subject and upload to server
   ds_admin_1$redcap_data_access_group[2] <- "dagb"
-  redcap_write_oneshot(ds_admin_1, url, token_for_admin)
+  redcap_write_oneshot(ds_admin_1, url, credential_admin$token)
 
   # Step 4a: Retrieve the dataset as admin.  Should the 2nd row automatically change from '331-2' to '332-2'?
-  ds_admin_2  <- redcap_read_oneshot(url, token_for_admin, export_data_access_groups=T)$data
+  ds_admin_2  <- redcap_read_oneshot(url, credential_admin$token, export_data_access_groups=T)$data
   expect_equal(nrow(ds_admin_2), 3L)
   expect_equal(ds_admin_2$record_id               , c("331-1", "331-2", "332-3"))
   # expect_equal(ds_admin_2$record_id               , c("331-1", "332-2", "332-3"))
   expect_equal(ds_admin_2$redcap_data_access_group, c("daga", "dagb", "dagb"   ))
 
   # Step 4b: Retrieve the dataset as user. Now only one subject is visible to DAG-A users.
-  ds_user_2   <- redcap_read_oneshot(url, token_for_dag_user)$data
+  ds_user_2   <- redcap_read_oneshot(url, credential_user$token)$data
   expect_equal(nrow(ds_user_2), 1L)
   expect_equal(ds_user_2$record_id, c("331-1"))
 })

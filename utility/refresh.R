@@ -32,9 +32,10 @@ pkgdown::build_site()
 
 devtools::run_examples(); #dev.off() #This overwrites the NAMESPACE file too
 # devtools::run_examples(, "redcap_read.Rd")
+# pkgload::load_all()
 test_results_checked <- devtools::test()
 test_results_checked <- devtools::test(filter = "column")
-test_results_checked <- devtools::test(filter = "validate.*$")
+test_results_checked <- devtools::test(filter = "write-dag")
 withr::local_envvar(ONLYREADTESTS = "true")
 test_results_checked <- devtools::test(filter = "write-batch")
 

@@ -13,7 +13,8 @@ retrieve_credential_local(
   project_id,
   check_url            = TRUE,
   check_username       = FALSE,
-  check_token_pattern  = TRUE
+  check_token_pattern  = TRUE,
+  username             = NA_character_
 )
 
 retrieve_credential_mssql(
@@ -37,7 +38,8 @@ Required}
 
 \item{check_url}{A \code{logical} value indicates if the url in the credential
 file should be checked to have approximately the correct form.  Defaults
-to TRUE.}
+to TRUE.
+\code{\link[=retrieve_credential_local]{retrieve_credential_local()}}.}
 
 \item{check_username}{A \code{logical} value indicates if the username in the
 credential file should be checked against the username returned by R.
@@ -45,6 +47,9 @@ Defaults to FALSE.}
 
 \item{check_token_pattern}{A \code{logical} value indicates if the token in the
 credential file is a 32-character hexadecimal string.  Defaults to FALSE.}
+
+\item{username}{A character value used to retrieve a credential.
+See the Notes below. Optional.}
 
 \item{instance}{The casual name associated with the REDCap instance on
 campus.  This allows one credential system to accommodate multiple
@@ -99,12 +104,23 @@ and https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html
 }
 }
 \note{
+\emph{Storing credentials on a server is preferred}
+
 Although we strongly encourage storing all the tokens on a central server
 (\emph{e.g.}, see the \code{retrieve_credential_mssql()} function and the
 "SecurityDatabase" vignette), there are times when this approach is not
 feasible and the token must be stored locally.  Please contact us
 if your institution is using something other than SQL Server, and
 would like help adapting this approach to your infrastructure.
+
+\emph{Stored credentials locally}
+
+When storing credentials locally, typically the credential file
+should be dedicated to just one user. Occasionally it makes sense to store
+tokens for multiple users --usually it's for the purpose of testing.
+
+The \code{username} field is connected only in the local credential file.
+It does not need to be the same as the official username in REDCap.
 }
 \examples{
 # ---- Local File Example ----------------------------

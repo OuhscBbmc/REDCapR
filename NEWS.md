@@ -6,6 +6,7 @@ Upcoming Versions
 * `sanitize_token()` now allows lowercase characters --in addition to uppercase characters & digits. (#347, @jmbarbone)
 * `redcap_metadata_read()` now uses json (instead of csv) to transfer the dictionary between server & client.  This accommodates super-wide dictionaries with 35k+ variables.  The user shouldn't notice a difference, and still will receive a data.frame. (#335, @januz & @datalorax)
 * Include a few more `testthat::skip_on_cran()` calls to comply with CRAN's ["fail gracefully"](https://cran.r-project.org/web/packages/policies.html) policy.  Similarly, skip remaining examples that depend on external resources. (#352)
+* `retrieve_credential_local()` can now user `username` to identify the desired credential row (#364)
 
 ### Test Suite 
 
