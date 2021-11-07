@@ -74,6 +74,8 @@
 #' returned as character.  If true, [readr::read_csv()] guesses the intended
 #' data type for each column.
 #' @param guess_max Deprecated.
+#' @param http_response_encoding  The encoding value passed to
+#' [httr::content()].  Defaults to 'UTF-8'.
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  The verbose output might contain
 #' sensitive information (*e.g.* PHI), so turn this off if the output might
@@ -190,6 +192,7 @@ redcap_read <- function(
   col_types                     = NULL,
   guess_type                    = TRUE,
   guess_max                     = NULL, # Deprecated parameter
+  http_response_encoding        = "UTF-8",
   verbose                       = TRUE,
   config_options                = NULL,
   id_position                   = 1L
@@ -217,8 +220,10 @@ redcap_read <- function(
   checkmate::assert_posixct(  datetime_range_end        , any.missing=TRUE , len=1, null.ok=TRUE)
 
   checkmate::assert_logical(  guess_type                , any.missing=FALSE,     len=1)
-
   if (!is.null(guess_max)) warning("The `guess_max` parameter in `REDCapR::redcap_read()` is deprecated.")
+
+  checkmate::assert_character(http_response_encoding    , any.missing=FALSE,     len=1)
+
   checkmate::assert_logical(  verbose                   , any.missing=FALSE,     len=1, null.ok=TRUE)
   checkmate::assert_list(     config_options            , any.missing=TRUE ,            null.ok=TRUE)
   checkmate::assert_integer(  id_position               , any.missing=FALSE,     len=1, lower=1L)
@@ -264,6 +269,7 @@ redcap_read <- function(
     datetime_range_begin   = datetime_range_begin,
     datetime_range_end     = datetime_range_end,
     guess_type         = guess_type,
+    http_response_encoding = http_response_encoding,
     verbose            = verbose,
     config_options     = config_options
   )
@@ -334,6 +340,7 @@ redcap_read <- function(
       col_types                   = col_types,
       guess_type                  = FALSE,
       # guess_max                   = guess_max, # Not used, because guess_type is FALSE
+      http_response_encoding      = http_response_encoding,
       verbose                     = verbose,
       config_options              = config_options
     )

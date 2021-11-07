@@ -7,6 +7,7 @@ Upcoming Versions
 * `redcap_metadata_read()` now uses json (instead of csv) to transfer the dictionary between server & client.  This accommodates super-wide dictionaries with 35k+ variables.  The user shouldn't notice a difference, and still will receive a data.frame. (#335, @januz & @datalorax)
 * Include a few more `testthat::skip_on_cran()` calls to comply with CRAN's ["fail gracefully"](https://cran.r-project.org/web/packages/policies.html) policy.  Similarly, skip remaining examples that depend on external resources. (#352)
 * `retrieve_credential_local()` can now user `username` to identify the desired credential row (#364)
+* `redcap_read()` and `redcap_read_oneshot()` gain the `http_response_encoding` parameter that's passed to [`httr::content()`](https://httr.r-lib.org/reference/content.html).  The default value remains "UTF-8".  (#354, @lrasmus)
 
 ### Test Suite 
 

@@ -30,6 +30,7 @@ redcap_read(
   col_types = NULL,
   guess_type = TRUE,
   guess_max = NULL,
+  http_response_encoding = "UTF-8",
   verbose = TRUE,
   config_options = NULL,
   id_position = 1L
@@ -124,6 +125,9 @@ returned as character.  If true, \code{\link[readr:read_delim]{readr::read_csv()
 data type for each column.}
 
 \item{guess_max}{Deprecated.}
+
+\item{http_response_encoding}{The encoding value passed to
+\code{\link[httr:content]{httr::content()}}.  Defaults to 'UTF-8'.}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed
 to the R console during the operation.  The verbose output might contain
