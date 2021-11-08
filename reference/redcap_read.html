@@ -181,6 +181,7 @@ datasets that could tie up the server.</p>
   col_types <span class='op'>=</span> <span class='cn'>NULL</span>,
   guess_type <span class='op'>=</span> <span class='cn'>TRUE</span>,
   guess_max <span class='op'>=</span> <span class='cn'>NULL</span>,
+  http_response_encoding <span class='op'>=</span> <span class='st'>"UTF-8"</span>,
   verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
   config_options <span class='op'>=</span> <span class='cn'>NULL</span>,
   id_position <span class='op'>=</span> <span class='fl'>1L</span>
@@ -325,6 +326,11 @@ data type for each column.</p></td>
     <tr>
       <th>guess_max</th>
       <td><p>Deprecated.</p></td>
+    </tr>
+    <tr>
+      <th>http_response_encoding</th>
+      <td><p>The encoding value passed to
+<code><a href='https://httr.r-lib.org/reference/content.html'>httr::content()</a></code>.  Defaults to 'UTF-8'.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
