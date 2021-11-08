@@ -12,8 +12,7 @@ populate_project_dag_write <- function(batch = FALSE) {
     # nocov end
   }
 
-  credential  <- retrieve_credential_testing(2545L)
-  # credential$token <- "123CA040BDA500E5CADB144D610FA3D0"
+  credential  <- retrieve_credential_testing(2545L, "admin")
 
   project <- REDCapR::redcap_project$new(
     redcap_uri    = credential$redcap_uri,

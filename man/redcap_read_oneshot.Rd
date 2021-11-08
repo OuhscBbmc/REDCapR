@@ -26,6 +26,7 @@ redcap_read_oneshot(
   col_types = NULL,
   guess_type = TRUE,
   guess_max = 1000L,
+  http_response_encoding = "UTF-8",
   verbose = TRUE,
   config_options = NULL
 )
@@ -110,6 +111,9 @@ data type for each column.  Ignored if \code{col_types} is not null.}
 
 \item{guess_max}{A positive integer passed to \code{\link[readr:read_delim]{readr::read_csv()}} that
 specifies the maximum number of records to use for guessing column types.}
+
+\item{http_response_encoding}{The encoding value passed to
+\code{\link[httr:content]{httr::content()}}.  Defaults to 'UTF-8'.}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed
 to the R console during the operation.  The verbose output might contain
