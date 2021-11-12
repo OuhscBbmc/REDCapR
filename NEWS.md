@@ -8,6 +8,7 @@ Upcoming Versions
 * Include a few more `testthat::skip_on_cran()` calls to comply with CRAN's ["fail gracefully"](https://cran.r-project.org/web/packages/policies.html) policy.  Similarly, skip remaining examples that depend on external resources. (#352)
 * `retrieve_credential_local()` can now user `username` to identify the desired credential row (#364)
 * `redcap_read()` and `redcap_read_oneshot()` gain the `http_response_encoding` parameter that's passed to [`httr::content()`](https://httr.r-lib.org/reference/content.html).  The default value remains "UTF-8".  (#354, @lrasmus)
+* Accommodate single-character REDCap variable names (#367 & #368, @daynefiler)
 
 ### Test Suite 
 
