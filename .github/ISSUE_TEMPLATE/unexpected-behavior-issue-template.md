@@ -7,6 +7,8 @@ assignees: ''
 
 ---
 
+*!! Note about security !! If your question/issue involves sensitive information, please do not post it in this public location.  You might assist someone in compromising your institution's server or network.  The [REDCap Community](https://community.projectredcap.org/spaces/20/index.html) is the appropriate forum.  Please ask your institution's REDCap administrator to post a question on this site, with the tags [api](https://community.projectredcap.org/topics/337/api.html) and [redcapr](https://community.projectredcap.org/topics/23921/redcapr.html).*
+
 Thank you for taking the time to file an issue.  Here are some suggestions for writing your issue that should let us respond and help you more quickly.
 
 **Troubleshooter**: Please carefully reread the [Troubleshooting Vignette](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html) and thoroughly describe which parts don't work.  
