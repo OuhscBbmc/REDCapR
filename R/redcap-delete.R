@@ -114,6 +114,7 @@ redcap_delete <- function(
       "The REDCapR delete operation was not successful.  The error message was:\n%s",
       kernel$raw_text
     )
+    stop(outcome_message)
   }
 
   if (verbose)

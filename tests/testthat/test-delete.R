@@ -46,23 +46,21 @@ test_that("single-arm-four-records", {
   expect_true(returned_object2$success)
 })
 
+test_that("no-delete-permissions", {
+  testthat::skip_on_cran()
+  skip_if_onlyread()
+  credential  <- retrieve_credential_testing(213L) # Write-project, but  no privileges for deleting records
 
-# test_that("single-arm-four-records", {
-#   testthat::skip_on_cran()
-#   skip_if_onlyread()
-#   credential  <- retrieve_credential_testing(213L) # Write-project, but  no privileges for deleting records
-#
-#   records_to_delete <- 1
-#
-#   expected_outcome_message <- "You do not have Delete Record privileges"
-#   expect_error(
-#     returned_object1 <-
-#       redcap_delete(
-#         redcap_uri        = credential$redcap_uri,
-#         token             = credential$token,
-#         records_to_delete = records_to_delete
-#       )#,
-#     # regexp = expected_outcome_message
-#   )
-#
-# })
+  records_to_delete <- 1
+
+  expected_outcome_message <- "The REDCapR delete operation was not successful.  The error message was:.+You do not have Delete Record privileges"
+  expect_error(
+    returned_object1 <-
+      redcap_delete(
+        redcap_uri        = credential$redcap_uri,
+        token             = credential$token,
+        records_to_delete = records_to_delete
+      ),
+    regexp = expected_outcome_message
+  )
+})
