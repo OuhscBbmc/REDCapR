@@ -8,6 +8,11 @@
 #' project.  Required.
 #' @param records_to_delete A character vector of the project's `record_id`
 #' values to delete.  Required.
+#' @param arm_of_records_to_delete A single integer reflecting the arm
+#' containing the records to be deleted.  If the REDCap project has multiple
+#' arms and no value is passed, then all arms are cleared of the
+#' specified `record_id`s.  Leave it as NULL if the project has no arms and
+#' is not longitudinal.
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  The verbose output might contain
 #' sensitive information (*e.g.* PHI), so turn this off if the output might
@@ -60,6 +65,7 @@ redcap_delete <- function(
   redcap_uri,
   token,
   records_to_delete,
+  arm_of_records_to_delete = NULL,
   verbose         = TRUE,
   config_options  = NULL
 ) {
@@ -67,6 +73,7 @@ redcap_delete <- function(
   checkmate::assert_character(redcap_uri, any.missing=FALSE, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token     , any.missing=FALSE, len=1, pattern="^.{1,}$")
   checkmate::assert_vector(records_to_delete, any.missing = FALSE, min.len = 1)
+  checkmate::assert_integer(arm_of_records_to_delete, any.missing=FALSE, null.ok = TRUE, len=1, lower = 1)
 
   token   <- sanitize_token(token)
   verbose <- verbose_prepare(verbose)
@@ -86,12 +93,21 @@ redcap_delete <- function(
       sprintf("records[%i]", seq_along(records_to_delete) - 1)
     )
 
+  arm_list <-
+    if (is.null(arm_of_records_to_delete)) {
+      NULL # A null object here is essentially ignored when constructing `post_body` below.
+    } else {
+      list(arm = arm_of_records_to_delete)
+    }
+
+
   post_body <- c(
     list(
       token     = token,
       content   = "record",
       action    = "delete"
     ),
+    arm_list,
     records_to_delete
   )
 

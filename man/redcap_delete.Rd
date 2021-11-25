@@ -8,6 +8,7 @@ redcap_delete(
   redcap_uri,
   token,
   records_to_delete,
+  arm_of_records_to_delete = NULL,
   verbose = TRUE,
   config_options = NULL
 )
@@ -21,6 +22,12 @@ project.  Required.}
 
 \item{records_to_delete}{A character vector of the project's \code{record_id}
 values to delete.  Required.}
+
+\item{arm_of_records_to_delete}{A single integer reflecting the arm
+containing the records to be deleted.  If the REDCap project has multiple
+arms and no value is passed, then all arms are cleared of the
+specified \code{record_id}s.  Leave it as NULL if the project has no arms and
+is not longitudinal.}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed
 to the R console during the operation.  The verbose output might contain
