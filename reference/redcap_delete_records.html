@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Determine free available record ID — redcap_next_free_record_name • REDCapR</title>
+<title>Delete one ore more records from REDCap — redcap_delete_records • REDCapR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -52,8 +52,8 @@
 
 
 
-<meta property="og:title" content="Determine free available record ID — redcap_next_free_record_name" />
-<meta property="og:description" content="Determines the next available record ID." />
+<meta property="og:title" content="Delete one ore more records from REDCap — redcap_delete_records" />
+<meta property="og:description" content="Delete existing records by their ID from REDCap." />
 <meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.svg" />
 
 
@@ -134,18 +134,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Determine free available record ID</h1>
-    <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-next-free-record-name.R'><code>R/redcap-next-free-record-name.R</code></a></small>
-    <div class="hidden name"><code>redcap_next_free_record_name.Rd</code></div>
+    <h1>Delete one ore more records from REDCap</h1>
+    <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-delete-records.R'><code>R/redcap-delete-records.R</code></a></small>
+    <div class="hidden name"><code>redcap_delete_records.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Determines the next available record ID.</p>
+    <p>Delete existing records by their ID from REDCap.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>redcap_next_free_record_name</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>redcap_delete_records</span><span class='op'>(</span>
   <span class='va'>redcap_uri</span>,
   <span class='va'>token</span>,
+  <span class='va'>record_ids</span>,
   verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
   config_options <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre>
@@ -164,6 +165,11 @@ project.  Required.</p></td>
 project.  Required.</p></td>
     </tr>
     <tr>
+      <th>record_ids</th>
+      <td><p>A single record id or an array of ids to delete.
+Make sure these ids exist in REDCap.</p></td>
+    </tr>
+    <tr>
       <th>verbose</th>
       <td><p>A boolean value indicating if <code>message</code>s should be printed
 to the R console during the operation.  The verbose output might contain
@@ -173,53 +179,26 @@ be visible somewhere public. Optional.</p></td>
     <tr>
       <th>config_options</th>
       <td><p>A list of options to pass to <code>POST</code> method in the
-<code>httr</code> package.  See the details below.  Optional.</p></td>
+<code>httr</code> package.  See the details in <code><a href='redcap_read_oneshot.html'>redcap_read_oneshot()</a></code>. Optional.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a <a href='https://rdrr.io/r/base/character.html'>base::character</a> vector of either
-length 1 (if successful) or length 0 (if not successful).</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <p>The number of records deleted.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-    <p>If the API call is unsuccessful, a value of <code><a href='https://rdrr.io/r/base/character.html'>character(0)</a></code> will
-be returned (<em>i.e.</em>, an empty vector).  This ensures that a the function
-will always return an object of class
-<a href='https://rdrr.io/r/base/character.html'>base::character</a>.</p>
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
-
-    <p><strong>Documentation in REDCap 8.4.0</strong></p>
-<p>To be used by projects with record auto-numbering enabled, this method
-exports the next potential record ID for a project. It generates the next
-record name by determining the current maximum numerical record ID and then
-incrementing it by one.</p><pre>Note: This method does not create a new record, but merely determines what
-the next record name would be.
-
-If using Data Access Groups (DAGs) in the project, this method accounts for
-the special formatting of the record name for users in DAGs (e.g., DAG-ID);
-in this case, it only assigns the next value for ID for all numbers inside
-a DAG. For example, if a DAG has a corresponding DAG number of 223 wherein
-records 223-1 and 223-2 already exist, then the next record will be 223-3
-if the API user belongs to the DAG that has DAG number 223. (The DAG number
-is auto-assigned by REDCap for each DAG when the DAG is first created.)
-
-When generating a new record name in a DAG, the method considers all records
-in the entire project when determining the maximum record ID, including
-those that might have been originally created in that DAG but then later
-reassigned to another DAG.
-
-Note: This method functions the same even for projects that do not have
-record auto-numbering enabled.
-</pre>
-
+    <p>Jonathan Mang</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>uri</span>      <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class='va'>token</span>    <span class='op'>&lt;-</span> <span class='st'>"9A81268476645C4E5F03428B8AC3AA7B"</span>
-<span class='co'># Returns 6</span>
-<span class='fu'>REDCapR</span><span class='fu'>::</span><span class='fu'>redcap_next_free_record_name</span><span class='op'>(</span>redcap_uri <span class='op'>=</span> <span class='va'>uri</span>, token <span class='op'>=</span> <span class='va'>token</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>The next free record name in REDCap was successfully determined in 0.8 seconds.  The http status code was 200.  Is is 6.</span></div><div class='output co'>#&gt; [1] "6"</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>uri</span>   <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
+<span class='va'>token</span> <span class='op'>&lt;-</span> <span class='st'>"9A81268476645C4E5F03428B8AC3AA7B"</span>
+<span class='fu'>redcap_delete_records</span><span class='op'>(</span>redcap_uri <span class='op'>=</span> <span class='va'>redcap_uri</span>,
+                     token <span class='op'>=</span> <span class='va'>token</span>,
+                     record_ids <span class='op'>=</span> <span class='va'>record_ids</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
