@@ -34,8 +34,8 @@ to the R console during the operation.  The verbose output might contain
 sensitive information (\emph{e.g.} PHI), so turn this off if the output might
 be visible somewhere public. Optional.}
 
-\item{config_options}{A list of options to pass to \code{\link[httr:POST]{httr::POST()}} method
-in the 'httr' package.  See the details in \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}} Optional.}
+\item{config_options}{A list of options to pass to \code{POST} method in the
+\code{httr} package.  See the details in \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}}. Optional.}
 }
 \value{
 Currently, a list is returned with the following elements:
@@ -55,7 +55,7 @@ empty string to save RAM.
 }
 }
 \description{
-This function uses REDCap's API to delete the specified records.
+Delete existing records by their ID from REDCap.
 }
 \details{
 REDCap requires that at least one \code{record_id} value be passed to
@@ -83,5 +83,5 @@ If you do not have an account for the wiki, please ask your campus REDCap
 administrator to send you the static material.
 }
 \author{
-Will Beasley
+Jonathan Mang, Will Beasley
 }

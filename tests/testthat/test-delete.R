@@ -100,7 +100,7 @@ test_that("no-delete-permissions", {
 
   records_to_delete <- 1
 
-  expected_outcome_message <- "The REDCapR delete operation was not successful.  The error message was:.+You do not have Delete Record privileges"
+  expected_outcome_message <- "The REDCapR record deletion failed. The http status code was 403. The error message was:.+You do not have Delete Record privileges"
   expect_error(
     returned_object1 <-
       redcap_delete(

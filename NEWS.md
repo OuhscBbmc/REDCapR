@@ -1,6 +1,10 @@
 Upcoming Versions
 ==========================================================
 
+### New Features
+
+* `redcap_delete()` deletes a vector of records.  (Thanks @joundso, #372, #373)
+
 ### Minor Enhancements
 
 * `sanitize_token()` now allows lowercase characters --in addition to uppercase characters & digits. (#347, @jmbarbone)

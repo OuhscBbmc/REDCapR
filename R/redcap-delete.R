@@ -1,6 +1,6 @@
 #' @title Delete records in a REDCap project
 #'
-#' @description This function uses REDCap's API to delete the specified records.
+#' @description Delete existing records by their ID from REDCap.
 #'
 #' @param redcap_uri The URI (uniform resource identifier) of the REDCap
 #' project.  Required.
@@ -13,12 +13,8 @@
 #' arms and no value is passed, then all arms are cleared of the
 #' specified `record_id`s.  Leave it as NULL if the project has no arms and
 #' is not longitudinal.
-#' @param verbose A boolean value indicating if `message`s should be printed
-#' to the R console during the operation.  The verbose output might contain
-#' sensitive information (*e.g.* PHI), so turn this off if the output might
-#' be visible somewhere public. Optional.
-#' @param config_options  A list of options to pass to [httr::POST()] method
-#' in the 'httr' package.  See the details in [redcap_read_oneshot()] Optional.
+#'
+#' @inheritParams redcap_metadata_read
 #'
 #' @return Currently, a list is returned with the following elements:
 #' * `success`: A boolean value indicating if the operation was apparently
@@ -38,7 +34,7 @@
 #' REDCap requires that at least one `record_id` value be passed to
 #' the delete call.
 #'
-#' @author Will Beasley
+#' @author Jonathan Mang, Will Beasley
 #'
 #' @references The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
@@ -111,26 +107,60 @@ redcap_delete <- function(
     records_to_delete
   )
 
-  # This is the important line that communicates with the REDCap server.
-  kernel <- kernel_api(redcap_uri, post_body, config_options)
+  try(
+    {
+      # This is the important line that communicates with the REDCap server.
+      kernel <- kernel_api(redcap_uri, post_body, config_options)
+    },
+    # Don't print the warning in the try block.  Print it below,
+    #   where it's under the control of the caller.
+    silent = TRUE
+  )
 
-  if (kernel$success) {
-    records_affected_count <- as.integer(kernel$raw_text)
-    outcome_message        <- sprintf(
-      "%s records were deleted from REDCap in %0.1f seconds.",
-      format(records_affected_count, big.mark = ",", scientific = FALSE, trim = TRUE),
-      kernel$elapsed_seconds
-    )
+  if (exists("kernel")) {
+    if (kernel$success) {
+      records_affected_count <- as.integer(kernel$raw_text)
+      outcome_message <- sprintf(
+        paste(
+          "The %s records were deleted from REDCap in %0.1f seconds.",
+          "The http status code was %i."
+        ),
+        format(
+          records_affected_count,
+          big.mark = ",",
+          scientific = FALSE,
+          trim = TRUE
+        ),
+        kernel$elapsed_seconds,
+        kernel$status_code
+      )
 
-    #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
-    kernel$raw_text <- ""
-  } else { #If the returned content wasn't recognized as valid IDs, then
-    records_affected_count <- 0
-    outcome_message        <- sprintf(
-      "The REDCapR delete operation was not successful.  The error message was:\n%s",
+      #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
+      kernel$raw_text <- ""
+    } else {
+      records_affected_count <- 0
+        error_message <- sprintf(
+          paste(
+            "The REDCapR record deletion failed.",
+            "The http status code was %i.",
+            "The error message was: '%s'."
+          ),
+          kernel$status_code,
+          kernel$raw_text
+        )
+      stop(error_message)
+    }
+  } else {
+    # nocov start
+    error_message     <- sprintf(
+      paste(
+        "The REDCapR record deletion was not successful.",
+        "The error message was:\n%s"
+      ),
       kernel$raw_text
     )
-    stop(outcome_message)
+    stop(error_message)
+    # nocov end
   }
 
   if (verbose)
