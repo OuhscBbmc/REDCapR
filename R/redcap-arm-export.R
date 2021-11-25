@@ -131,6 +131,7 @@ redcap_arm_export <- function(
         arm_name   = character(0)
       )
     } else {
+      # nocov start
         error_message <- sprintf(
           paste(
             "The REDCapR arm export failed.",
@@ -141,16 +142,11 @@ redcap_arm_export <- function(
           kernel$raw_text
         )
       stop(error_message)
+      # nocov end
     }
   } else {
     # nocov start
-    error_message     <- sprintf(
-      paste(
-        "The REDCapR arm export failed",
-        "The error message was:\n%s"
-      ),
-      kernel$raw_text
-    )
+    error_message <- sprintf("The REDCapR arm export failed. The error message was:\n%s.", kernel$raw_text)
     stop(error_message)
     # nocov end
   }
