@@ -24,10 +24,9 @@ project.  Required.}
 values to delete.  Required.}
 
 \item{arm_of_records_to_delete}{A single integer reflecting the arm
-containing the records to be deleted.  If the REDCap project has multiple
-arms and no value is passed, then all arms are cleared of the
-specified \code{record_id}s.  Leave it as NULL if the project has no arms and
-is not longitudinal.}
+containing the records to be deleted.  Leave it as NULL if the project
+has no arms and is not longitudinal. Required if the REDCap project
+has arms.  See Details below.}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed
 to the R console during the operation.  The verbose output might contain
@@ -60,18 +59,36 @@ Delete existing records by their ID from REDCap.
 \details{
 REDCap requires that at least one \code{record_id} value be passed to
 the delete call.
+
+When the project has arms, REDCapR has stricter requirements than REDCap.
+If the REDCap project has arms, a value must be passed to
+\code{arm_of_records_to_delete}.  This is a different behavior than calling
+the server through cURL --which if no  arm number is specified,
+then all arms are cleared of the specified \code{record_id}s.
+
+Note that all longitudinal projects technically have arms, even if
+only one arm is defined.  Therefore a value of \code{arm_number} must be
+specified for all longitudinal projects.
 }
 \examples{
 \dontrun{
-#Define some constants
-uri            <- "https://bbmc.ouhsc.edu/redcap/api/"
-token          <- "D70F9ACD1EDD6F151C6EA78683944E98"
+records_to_delete <- c(102, 103, 105, 120)
 
-# Read the dataset for the first time.
-result_read1   <- REDCapR::redcap_delete(redcap_uri=uri, token=token)
-ds1            <- result_read1$data
-ds1$telephone
+# Deleting from a non-longitudinal project with no defined arms:
+REDCapR::redcap_delete(
+  redcap_uri               = uri,
+  token                    = token,
+  records_to_delete        = records_to_delete,
+)
 
+# Deleting from a project that has arms or is longitudinal:
+arm_number <- 2L # Not the arm name
+REDCapR::redcap_delete(
+  redcap_uri               = uri,
+  token                    = token,
+  records_to_delete        = records_to_delete,
+  arm_of_records_to_delete = arm_number
+)
 }
 }
 \references{
