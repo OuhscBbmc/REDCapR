@@ -9,10 +9,9 @@
 #' @param records_to_delete A character vector of the project's `record_id`
 #' values to delete.  Required.
 #' @param arm_of_records_to_delete A single integer reflecting the arm
-#' containing the records to be deleted.  If the REDCap project has multiple
-#' arms and no value is passed, then all arms are cleared of the
-#' specified `record_id`s.  Leave it as NULL if the project has no arms and
-#' is not longitudinal.
+#' containing the records to be deleted.  Leave it as NULL if the project
+#' has no arms and is not longitudinal. Required if the REDCap project
+#' has arms.  See Details below.
 #'
 #' @inheritParams redcap_metadata_read
 #'
@@ -33,6 +32,13 @@
 #' @details
 #' REDCap requires that at least one `record_id` value be passed to
 #' the delete call.
+#'
+#' When the project has arms, REDCapR has stricter requirement than REDCap.
+#' If the REDCap project has arms, a value must be passed to
+#' `arm_of_records_to_delete`.  This is a different behavior than calling
+#' the server through cURL --which if the project has arms and no
+#' arm number is specified, then all arms are cleared of the
+#' specified `record_id`s.
 #'
 #' @author Jonathan Mang, Will Beasley
 #'
@@ -76,18 +82,19 @@ redcap_delete <- function(
   records_to_delete <- as.character(records_to_delete)
   checkmate::assert_character(records_to_delete, any.missing = FALSE, min.len = 1)
 
-  # record_string <-
-  #   sprintf(
-  #     "'records[%i]': '%s'",
-  #     seq_along(records_to_delete) - 1,
-  #     records_to_delete
-  #   ) #%>%
-  #   # paste(collapse = ",")
   records_to_delete <-
     stats::setNames(
       records_to_delete,
       sprintf("records[%i]", seq_along(records_to_delete) - 1)
     )
+
+  arms_call <- redcap_arm_export(redcap_uri, token, verbose = FALSE, config_options)
+
+  if (arms_call$has_arms & is.null(arm_of_records_to_delete)) {
+    stop("This REDCap project has arms.  Please specify which arm contains the records to be deleted.")
+  } else if (!arms_call$has_arms & !is.null(arm_of_records_to_delete)) {
+    stop("This REDCap project does not have arms, but `arm_of_records_to_delete` is not NULL.")
+  }
 
   arm_list <-
     if (is.null(arm_of_records_to_delete)) {
@@ -95,7 +102,6 @@ redcap_delete <- function(
     } else {
       list(arm = arm_of_records_to_delete)
     }
-
 
   post_body <- c(
     list(

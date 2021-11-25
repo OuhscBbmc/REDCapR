@@ -102,12 +102,68 @@ test_that("no-delete-permissions", {
 
   expected_outcome_message <- "The REDCapR record deletion failed. The http status code was 403. The error message was:.+You do not have Delete Record privileges"
   expect_error(
-    returned_object1 <-
-      redcap_delete(
-        redcap_uri        = credential$redcap_uri,
-        token             = credential$token,
-        records_to_delete = records_to_delete
-      ),
+    redcap_delete(
+      redcap_uri        = credential$redcap_uri,
+      token             = credential$token,
+      records_to_delete = records_to_delete
+    ),
+    regexp = expected_outcome_message
+  )
+})
+
+test_that("Delete records that don't exist", {
+  testthat::skip_on_cran()
+  skip_if_onlyread()
+  credential  <- retrieve_credential_testing(2626L)
+
+  records_to_delete <- 1
+
+  expected_outcome_message <- "The REDCapR record deletion failed. The http status code was 400\\..+One or more of the records provided cannot be deleted because they do not exist in the project. The following records do not exist: 1"
+  expect_error(
+    redcap_delete(
+      redcap_uri        = credential$redcap_uri,
+      token             = credential$token,
+      records_to_delete = records_to_delete
+    ),
+    regexp = expected_outcome_message
+  )
+})
+
+test_that("unnecessarily specify arm", {
+  testthat::skip_on_cran()
+  skip_if_onlyread()
+  credential  <- retrieve_credential_testing(2626L) # This project has no arms
+
+  records_to_delete <- 101
+  arm_number        <- 1L
+
+  expected_outcome_message <- "This REDCap project does not have arms, but `arm_of_records_to_delete` is not NULL\\."
+  expect_error(
+    redcap_delete(
+      redcap_uri        = credential$redcap_uri,
+      token             = credential$token,
+      records_to_delete = records_to_delete,
+      arm_of_records_to_delete = arm_number
+    ),
+    regexp = expected_outcome_message
+  )
+})
+
+test_that("unspecified required arm", {
+  testthat::skip_on_cran()
+  skip_if_onlyread()
+  credential  <- retrieve_credential_testing(2627L) # This project has three arms
+
+  records_to_delete <- 101
+  arm_number        <- 1L
+
+  expected_outcome_message <- "This REDCap project has arms.  Please specify which arm contains the records to be deleted\\."
+  expect_error(
+    redcap_delete(
+      redcap_uri        = credential$redcap_uri,
+      token             = credential$token,
+      records_to_delete = records_to_delete
+    ),
     regexp = expected_outcome_message
   )
 })
