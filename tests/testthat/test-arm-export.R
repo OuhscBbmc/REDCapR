@@ -69,11 +69,35 @@ test_that("delete-single-arm", {
   expect_false(returned_object$success)
 })
 
-test_that("Delete Longitudinal Two Arms", {
+test_that("Longitudinal Two Arms", {
   testthat::skip_on_cran()
   credential  <- retrieve_credential_testing(212L)
 
   path_expected <- "test-data/project-longitudinal/arm.csv"
+  expected_data_frame <- read_arms(path_expected)
+
+  expected_outcome_message <- "The list of arms was retrieved from the REDCap project in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expect_message(
+    returned_object <-
+      redcap_arm_export(
+        redcap_uri        = credential$redcap_uri,
+        token             = credential$token
+      ),
+    regexp = expected_outcome_message
+  )
+
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
+  expect_equal(returned_object$status_code, expected=200L)
+  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object2$raw_text)
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true(returned_object$success)
+})
+
+test_that("Longitudinal Single Arm", {
+  testthat::skip_on_cran()
+  credential  <- retrieve_credential_testing(2629L)
+
+  path_expected <- "test-data/longitudinal-single-arm/arm.csv"
   expected_data_frame <- read_arms(path_expected)
 
   expected_outcome_message <- "The list of arms was retrieved from the REDCap project in \\d+(\\.\\d+\\W|\\W)seconds\\."
