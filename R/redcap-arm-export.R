@@ -58,6 +58,7 @@
 #' result_2$data
 #' }
 
+#' @importFrom rlang .data
 #' @export
 redcap_arm_export <- function(
   redcap_uri,
@@ -108,8 +109,8 @@ redcap_arm_export <- function(
       d <-
         readr::read_csv(I(kernel$raw_text), col_types = col_types) %>%
         dplyr::select(
-          arm_number  = arm_num,
-          arm_name    = name
+          arm_number  = .data$arm_num,
+          arm_name    = .data$name
         )
 
       #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
