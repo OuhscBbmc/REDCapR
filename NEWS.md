@@ -4,6 +4,7 @@ Upcoming Versions
 ### New Features
 
 * `redcap_delete()` deletes a vector of records.  (Thanks @joundso, #372, #373)
+* `redcap_arm_export()` retrieves a list of REDCap project arms.  (#375)
 
 ### Minor Enhancements
 
