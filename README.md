@@ -27,7 +27,7 @@ ds_some_fields <- redcap_read(
 )$data
 ```
 
-The `REDCapR` package includes the SSL certificate retrieved by [`httr::find_cert_bundle()`](https://github.com/r-lib/httr/blob/master/R/utils.r).  Your REDCap server's identity is always verified, unless the setting is overridden (alternative certificates can also be provided).
+The `REDCapR` package includes the SSL certificate retrieved by [`httr::find_cert_bundle()`](https://github.com/r-lib/httr/blob/main/R/utils.r).  Your REDCap server's identity is always verified, unless the setting is overridden (alternative certificates can also be provided).
 
 To keep our maintenance efforts manageable, the package implements only the REDCap API functions that have been requested.  If there's a feature that would help your projects, please tell us in a new issue in REDCapR's [GitHub repository](https://github.com/OuhscBbmc/REDCapR/issues).  A [troubleshooting](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html) document helps diagnose issues with the API.
 
@@ -52,7 +52,7 @@ Also checkout the other packages that exist for communicating with REDCap, which
 
 
 ### Collaborative Development
-We encourage input and collaboration.  If you're familiar with GitHub and R packages, feel free to submit a [pull request](https://github.com/OuhscBbmc/REDCapR/pulls).  If you'd like to report a bug or make a suggestion, please create a GitHub [issue](https://github.com/OuhscBbmc/REDCapR/issues); issues are a usually a good place to ask public questions too.  However, feel free to email Will (<wibeasley@hotmail.com>).  Please note that this project is released with a [Contributor Code of Conduct](https://github.com/OuhscBbmc/REDCapR/blob/master/CONDUCT.md); by participating in this project you agree to abide by its terms.  We have some starting material described in the [`./documentation-for-developers/`](https://github.com/OuhscBbmc/REDCapR/tree/master/documentation-for-developers) directory.
+We encourage input and collaboration.  If you're familiar with GitHub and R packages, feel free to submit a [pull request](https://github.com/OuhscBbmc/REDCapR/pulls).  If you'd like to report a bug or make a suggestion, please create a GitHub [issue](https://github.com/OuhscBbmc/REDCapR/issues); issues are a usually a good place to ask public questions too.  However, feel free to email Will (<wibeasley@hotmail.com>).  Please note that this project is released with a [Contributor Code of Conduct](https://github.com/OuhscBbmc/REDCapR/blob/main/CONDUCT.md); by participating in this project you agree to abide by its terms.  We have some starting material described in the [`./documentation-for-developers/`](https://github.com/OuhscBbmc/REDCapR/tree/main/documentation-for-developers) directory.
 
 We'd like to thank the following developers for their [advice](https://github.com/OuhscBbmc/REDCapR/issues?q=is%3Aissue+is%3Aclosed) and [code contributions](https://github.com/OuhscBbmc/REDCapR/graphs/contributors): [Benjamin Nutter](https://github.com/nutterb), [Rollie Parrish](https://github.com/rparrish), [Scott Burns](https://github.com/sburns), [John Aponte](https://github.com/johnaponte), [Andrew Peters](https://github.com/ARPeters), and [Hao Zhu](https://github.com/haozhu233).
 
@@ -79,7 +79,7 @@ Thanks,
 
 | [Branch](https://github.com/OuhscBbmc/REDCapR) | [GitHub Actions](https://github.com/OuhscBbmc/REDCapR/actions) | [Codecov](https://codecov.io/gh/OuhscBbmc/REDCapR) |
 | :----- | :---------------------------: | :-------: |
-| [Master](https://github.com/OuhscBbmc/REDCapR/tree/master) | [![R-CMD-check](https://github.com/OuhscBbmc/REDCapR/workflows/R-CMD-check/badge.svg?branch=master)](https://github.com/OuhscBbmc/REDCapR/actions) |  [![codecov](https://codecov.io/gh/OuhscBbmc/REDCapR/branch/master/graph/badge.svg)](https://codecov.io/gh/OuhscBbmc/REDCapR) |
+| [Main](https://github.com/OuhscBbmc/REDCapR/tree/main) | [![R-CMD-check](https://github.com/OuhscBbmc/REDCapR/workflows/R-CMD-check/badge.svg?branch=main)](https://github.com/OuhscBbmc/REDCapR/actions) |  [![codecov](https://codecov.io/gh/OuhscBbmc/REDCapR/branch/main/graph/badge.svg)](https://codecov.io/gh/OuhscBbmc/REDCapR) |
 | [Dev](https://github.com/OuhscBbmc/REDCapR/tree/dev) | [![R-CMD-check](https://github.com/OuhscBbmc/REDCapR/workflows/R-CMD-check/badge.svg?branch=dev)](https://github.com/OuhscBbmc/REDCapR/actions) | [![codecov](https://codecov.io/gh/OuhscBbmc/REDCapR/branch/dev/graph/badge.svg)](https://codecov.io/gh/OuhscBbmc/REDCapR/branch/dev) |
 | | *Ubuntu Latest* | *Test Coverage* |
 
