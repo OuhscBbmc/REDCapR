@@ -5,7 +5,7 @@ update_expectation  <- FALSE
 
 test_that("default-mismatched", {
   testthat::skip_on_cran()
-  path_expected <- "test-data/decimal-comma/default-mismatched.R"
+  path_expected <- "test-data/decimal-comma-and-dot/default-mismatched.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   expect_message(
