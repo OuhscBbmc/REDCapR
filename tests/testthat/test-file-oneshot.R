@@ -199,7 +199,6 @@ test_that("Full Directory Specific", {
   expect_true(start_time <= info_actual$atime, label="The downloaded file's last access time should not precede this function's start time.")
 })
 
-
 test_that("download file conflict -Error", {
   testthat::skip_on_cran()
 
