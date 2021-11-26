@@ -22,10 +22,13 @@
     <loc>https://ouhscbbmc.github.io/REDCapR/reference/metadata_utilities.html</loc>
   </url>
   <url>
+    <loc>https://ouhscbbmc.github.io/REDCapR/reference/redcap_arm_export.html</loc>
+  </url>
+  <url>
     <loc>https://ouhscbbmc.github.io/REDCapR/reference/redcap_column_sanitize.html</loc>
   </url>
   <url>
-    <loc>https://ouhscbbmc.github.io/REDCapR/reference/redcap_delete_records.html</loc>
+    <loc>https://ouhscbbmc.github.io/REDCapR/reference/redcap_delete.html</loc>
   </url>
   <url>
     <loc>https://ouhscbbmc.github.io/REDCapR/reference/redcap_download_file_oneshot.html</loc>

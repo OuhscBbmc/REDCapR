@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>List authorized users — redcap_users_export • REDCapR</title>
+<title>Delete records in a REDCap project — redcap_delete • REDCapR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -52,8 +52,8 @@
 
 
 
-<meta property="og:title" content="List authorized users — redcap_users_export" />
-<meta property="og:description" content="List users authorized for a project." />
+<meta property="og:title" content="Delete records in a REDCap project — redcap_delete" />
+<meta property="og:description" content="Delete existing records by their ID from REDCap." />
 <meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.svg" />
 
 
@@ -134,16 +134,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>List authorized users</h1>
-    <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-users-export.R'><code>R/redcap-users-export.R</code></a></small>
-    <div class="hidden name"><code>redcap_users_export.Rd</code></div>
+    <h1>Delete records in a REDCap project</h1>
+    <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-delete.R'><code>R/redcap-delete.R</code></a></small>
+    <div class="hidden name"><code>redcap_delete.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>List users authorized for a project.</p>
+    <p>Delete existing records by their ID from REDCap.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>redcap_users_export</span><span class='op'>(</span><span class='va'>redcap_uri</span>, <span class='va'>token</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span>, config_options <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>redcap_delete</span><span class='op'>(</span>
+  <span class='va'>redcap_uri</span>,
+  <span class='va'>token</span>,
+  <span class='va'>records_to_delete</span>,
+  arm_of_records_to_delete <span class='op'>=</span> <span class='cn'>NULL</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  config_options <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -159,6 +166,18 @@ project.  Required.</p></td>
 project.  Required.</p></td>
     </tr>
     <tr>
+      <th>records_to_delete</th>
+      <td><p>A character vector of the project's <code>record_id</code>
+values to delete.  Required.</p></td>
+    </tr>
+    <tr>
+      <th>arm_of_records_to_delete</th>
+      <td><p>A single integer reflecting the arm
+containing the records to be deleted.  Leave it as NULL if the project
+has no arms and is not longitudinal. Required if the REDCap project
+has arms.  See Details below.</p></td>
+    </tr>
+    <tr>
       <th>verbose</th>
       <td><p>A boolean value indicating if <code>message</code>s should be printed
 to the R console during the operation.  The verbose output might contain
@@ -168,46 +187,72 @@ be visible somewhere public. Optional.</p></td>
     <tr>
       <th>config_options</th>
       <td><p>A list of options to pass to <code>POST</code> method in the
-<code>httr</code> package.  See the details below.  Optional.</p></td>
+<code>httr</code> package.  See the details in <code><a href='redcap_read_oneshot.html'>redcap_read_oneshot()</a></code>. Optional.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a <a href='https://rdrr.io/r/utils/packageDescription.html'>utils::packageDescription</a>.</p>
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+    <p>Currently, a list is returned with the following elements:</p><ul>
+<li><p><code>success</code>: A boolean value indicating if the operation was apparently
+successful.</p></li>
+<li><p><code>status_code</code>: The
+<a href='https://en.wikipedia.org/wiki/List_of_HTTP_status_codes'>http status code</a>
+of the operation.</p></li>
+<li><p><code>outcome_message</code>: A human readable string indicating the operation's
+outcome.</p></li>
+<li><p><code>records_affected_count</code>: The number of records inserted or updated.</p></li>
+<li><p><code>elapsed_seconds</code>: The duration of the function.</p></li>
+<li><p><code>raw_text</code>: If an operation is NOT successful, the text returned by
+REDCap.  If an operation is successful, the <code>raw_text</code> is returned as an
+empty string to save RAM.</p></li>
+</ul>
 
-    <p><strong>Documentation in REDCap 8.4.0</strong></p><pre>This method allows you to export the list of users for a project,
-including their user privileges and also email address, first name,
-and last name.
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-Note: If the user has been assigned to a user role, it will return
-the user with the role's defined privileges.
-</pre>
+    <p>REDCap requires that at least one <code>record_id</code> value be passed to
+the delete call.</p>
+<p>When the project has arms, REDCapR has stricter requirements than REDCap.
+If the REDCap project has arms, a value must be passed to
+<code>arm_of_records_to_delete</code>.  This is a different behavior than calling
+the server through cURL --which if no  arm number is specified,
+then all arms are cleared of the specified <code>record_id</code>s.</p>
+<p>Note that all longitudinal projects technically have arms, even if
+only one arm is defined.  Therefore a value of <code>arm_number</code> must be
+specified for all longitudinal projects.</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
+    <p>The official documentation can be found on the 'API Help Page'
+and 'API Examples' pages on the REDCap wiki (<em>i.e.</em>,
+https://community.projectredcap.org/articles/456/api-documentation.html and
+https://community.projectredcap.org/articles/462/api-examples.html).
+If you do not have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Jonathan Mang, Will Beasley</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>uri</span>      <span class='op'>&lt;-</span> <span class='st'>"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class='va'>token</span>    <span class='op'>&lt;-</span> <span class='st'>"06DEFB601F9B46847DAA9DF0CFA951B4"</span>
-<span class='va'>result</span>   <span class='op'>&lt;-</span> <span class='fu'>REDCapR</span><span class='fu'>::</span><span class='fu'>redcap_users_export</span><span class='op'>(</span>redcap_uri<span class='op'>=</span><span class='va'>uri</span>, token<span class='op'>=</span><span class='va'>token</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>The REDCap users were successfully exported in 0.2 seconds.  The http status code was 200.</span></div><div class='input'><span class='va'>result</span><span class='op'>$</span><span class='va'>data_user</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 × 31</span>
-#&gt;   username email firstname lastname expiration data_access_gro… data_access_gro…
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;date&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           
-#&gt; <span style='color: #BCBCBC;'>1</span> unittes… wibe… Unit Test PHI Free <span style='color: #BB0000;'>NA</span>         daga             331             
-#&gt; <span style='color: #BCBCBC;'>2</span> wbeasle… will… Will      Beasley… <span style='color: #BB0000;'>NA</span>         <span style='color: #BB0000;'>NA</span>               <span style='color: #BB0000;'>NA</span>              
-#&gt; <span style='color: #949494;'># … with 24 more variables: design &lt;lgl&gt;, user_rights &lt;lgl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   data_access_groups &lt;lgl&gt;, data_export &lt;chr&gt;, reports &lt;lgl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   stats_and_charts &lt;lgl&gt;, manage_survey_participants &lt;lgl&gt;, calendar &lt;lgl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   data_import_tool &lt;lgl&gt;, data_comparison_tool &lt;lgl&gt;, logging &lt;lgl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   file_repository &lt;lgl&gt;, data_quality_create &lt;lgl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   data_quality_execute &lt;lgl&gt;, api_export &lt;lgl&gt;, api_import &lt;lgl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   mobile_app &lt;lgl&gt;, mobile_app_download_data &lt;lgl&gt;, record_create &lt;lgl&gt;, …</span></div><div class='input'><span class='va'>result</span><span class='op'>$</span><span class='va'>data_user_form</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 × 4</span>
-#&gt;   username        form_name    permission_id permission
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>           <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>     
-#&gt; <span style='color: #BCBCBC;'>1</span> unittestphifree demographics             1 edit_form 
-#&gt; <span style='color: #BCBCBC;'>2</span> wbeasleya       demographics             1 edit_form </div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>records_to_delete</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>102</span>, <span class='fl'>103</span>, <span class='fl'>105</span>, <span class='fl'>120</span><span class='op'>)</span>
+
+<span class='co'># Deleting from a non-longitudinal project with no defined arms:</span>
+<span class='fu'>REDCapR</span><span class='fu'>::</span><span class='fu'>redcap_delete</span><span class='op'>(</span>
+  redcap_uri               <span class='op'>=</span> <span class='va'>uri</span>,
+  token                    <span class='op'>=</span> <span class='va'>token</span>,
+  records_to_delete        <span class='op'>=</span> <span class='va'>records_to_delete</span>,
+<span class='op'>)</span>
+
+<span class='co'># Deleting from a project that has arms or is longitudinal:</span>
+<span class='va'>arm_number</span> <span class='op'>&lt;-</span> <span class='fl'>2L</span> <span class='co'># Not the arm name</span>
+<span class='fu'>REDCapR</span><span class='fu'>::</span><span class='fu'>redcap_delete</span><span class='op'>(</span>
+  redcap_uri               <span class='op'>=</span> <span class='va'>uri</span>,
+  token                    <span class='op'>=</span> <span class='va'>token</span>,
+  records_to_delete        <span class='op'>=</span> <span class='va'>records_to_delete</span>,
+  arm_of_records_to_delete <span class='op'>=</span> <span class='va'>arm_number</span>
+<span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -187,9 +187,9 @@
 <li><p><a href="https://ouhscbbmc.github.io/REDCapR/reference/constant.html"><code>constant()</code></a> no longer accepts <code>simplify</code> as an options. An integer vector is always returned. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/280'>#280</a>)</p></li>
 </ul>
 </div>
-<div id="new-features" class="section level3">
+<div id="new-features-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New Features</h3>
+<a href="#new-features-1" class="anchor"></a>New Features</h3>
 <ul>
 <li><p>It’s now possible to specify the exact <code>col_types</code> (a <a href="https://readr.tidyverse.org/reference/cols.html"><code>readr::cols</code></a> object) that is passed to <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> inside <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-read-oneshot.R"><code>redcap_read_oneshot()</code></a>. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/258'>#258</a>)</p></li>
 <li><p><a href="https://readr.tidyverse.org/reference/type_convert.html"><code>reader::type_convert()</code></a> is used <em>after</em> all the batches are stacked on top of each other. This way, batches cannot have incompatible data types as they’re combined. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/257'>#257</a>; thanks <a href='https://github.com/isaactpetersen'>@isaactpetersen</a> <a href='https://github.com/OuhscBbmc/REDCapR/issues/245'>#245</a>) Consequently, the <code>guess_max</code> parameter in <code><a href="../reference/redcap_read.html">redcap_read()</a></code> no longer serves a purpose, and has been soft-deprecated. (<a href='https://github.com/OuhscBbmc/REDCapR/issues/267'>#267</a>)</p></li>
@@ -291,9 +291,9 @@
 <h1 class="page-header" data-toc-text="0.9.8">
 <a href="#version-098-released-2017-05-18" class="anchor"></a>Version 0.9.8 (Released 2017-05-18)<small> 2017-05-18 </small>
 </h1>
-<div id="new-features-1" class="section level3">
+<div id="new-features-2" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-features-1" class="anchor"></a>New Features</h3>
+<a href="#new-features-2" class="anchor"></a>New Features</h3>
 <ul>
 <li>Enumerate the exported variables. with <code><a href="../reference/redcap_variables.html">redcap_variables()</a></code>.</li>
 <li>Experimental EAV export in <code><a href="../reference/redcap_read_oneshot_eav.html">redcap_read_oneshot_eav()</a></code>, which can be accessed with a triple colon (ie, <code><a href="../reference/redcap_read_oneshot_eav.html">REDCapR::redcap_read_oneshot_eav()</a></code>).</li>
@@ -311,9 +311,9 @@
 <h1 class="page-header" data-toc-text="0.9.7">
 <a href="#versions-097-released-2017-09-09" class="anchor"></a>Versions 0.9.7 (Released 2017-09-09)<small> 2016-09-09 </small>
 </h1>
-<div id="new-features-2" class="section level3">
+<div id="new-features-3" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-features-2" class="anchor"></a>New Features</h3>
+<a href="#new-features-3" class="anchor"></a>New Features</h3>
 <ul>
 <li>Support for filtering logic in <code><a href="../reference/redcap_read.html">redcap_read()</a></code> and <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code> (PR <a href='https://github.com/OuhscBbmc/REDCapR/issues/126'>#126</a>)</li>
 <li>New functions <code><a href="../reference/retrieve_credential.html">retrieve_credential_mssql()</a></code> and <code><a href="../reference/retrieve_credential.html">retrieve_credential_local()</a></code>. These transition from storing &amp; retrieving just the token (ie, <code>retrieve_token_mssql()</code>) to storing &amp; retrieving more information. <code><a href="../reference/retrieve_credential.html">retrieve_credential_local()</a></code> facilitates a standard way of storing tokens locally, which should make it easier to follow practices of keeping it off the repository.</li>
@@ -347,9 +347,9 @@
 <h1 class="page-header" data-toc-text="0.9.0">
 <a href="#versions-090-released-2015-08-14" class="anchor"></a>Versions 0.9.0 (Released 2015-08-14)<small> 2015-08-15 </small>
 </h1>
-<div id="new-features-3" class="section level3">
+<div id="new-features-4" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-features-3" class="anchor"></a>New Features</h3>
+<a href="#new-features-4" class="anchor"></a>New Features</h3>
 <ul>
 <li>Adapted for version 1.0.0 of httr (which is now based on the <code>curl</code> package, instead of <code>RCurl</code>).</li>
 </ul>
@@ -371,9 +371,9 @@
 <h1 class="page-header" data-toc-text="0.7-1">
 <a href="#version-07-1-released-2014-12-17" class="anchor"></a>Version 0.7-1 (Released 2014-12-17)<small> 2014-12-18 </small>
 </h1>
-<div id="new-features-4" class="section level3">
+<div id="new-features-5" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-features-4" class="anchor"></a>New Features</h3>
+<a href="#new-features-5" class="anchor"></a>New Features</h3>
 <ul>
 <li>Updated for Version 6.0.x of REDCap (which introduced a lot of improvements to API behavior).</li>
 </ul>
@@ -383,9 +383,9 @@
 <h1 class="page-header" data-toc-text="0.6">
 <a href="#version-06-released-2014-11-03" class="anchor"></a>Version 0.6 (Released 2014-11-03)<small> Unreleased </small>
 </h1>
-<div id="new-features-5" class="section level3">
+<div id="new-features-6" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-features-5" class="anchor"></a>New Features</h3>
+<a href="#new-features-6" class="anchor"></a>New Features</h3>
 <ul>
 <li>The <code>config_options</code> in the httr package are exposed to the REDCapR user. See issues <a href='https://github.com/OuhscBbmc/REDCapR/issues/55'>#55</a> &amp; <a href='https://github.com/OuhscBbmc/REDCapR/issues/58'>#58</a>; thanks to <a href='https://github.com/rparrish'>@rparrish</a> and <a href='https://github.com/nutterb'>@nutterb</a> for their contributions (<a href="https://github.com/OuhscBbmc/REDCapR/issues/55" class="uri">https://github.com/OuhscBbmc/REDCapR/issues/55</a> &amp; <a href="https://github.com/OuhscBbmc/REDCapR/issues/58" class="uri">https://github.com/OuhscBbmc/REDCapR/issues/58</a>).</li>
 </ul>
@@ -395,9 +395,9 @@
 <h1 class="page-header" data-toc-text="0.5">
 <a href="#version-05-released-2014-10-19" class="anchor"></a>Version 0.5 (Released 2014-10-19)<small> Unreleased </small>
 </h1>
-<div id="new-features-6" class="section level3">
+<div id="new-features-7" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-features-6" class="anchor"></a>New Features</h3>
+<a href="#new-features-7" class="anchor"></a>New Features</h3>
 <ul>
 <li>
 <code><a href="../reference/redcap_metadata_read.html">redcap_metadata_read()</a></code> are tested and public.</li>
@@ -416,9 +416,9 @@
 <h1 class="page-header" data-toc-text="0.4-28">
 <a href="#version-04-28-released-2014-09-20" class="anchor"></a>Version 0.4-28 (Released 2014-09-20)<small> 2014-09-20 </small>
 </h1>
-<div id="new-features-7" class="section level3">
+<div id="new-features-8" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-features-7" class="anchor"></a>New Features</h3>
+<a href="#new-features-8" class="anchor"></a>New Features</h3>
 <ul>
 <li>
 <code><a href="../reference/redcap_write.html">redcap_write()</a></code> and <code><a href="../reference/redcap_write_oneshot.html">redcap_write_oneshot()</a></code> are now tested and public.</li>
@@ -452,9 +452,9 @@
 <h1 class="page-header" data-toc-text="0.3">
 <a href="#version-03-released-2014-09-01" class="anchor"></a>Version 0.3 (Released 2014-09-01)<small> Unreleased </small>
 </h1>
-<div id="new-features-8" class="section level3">
+<div id="new-features-9" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-features-8" class="anchor"></a>New Features</h3>
+<a href="#new-features-9" class="anchor"></a>New Features</h3>
 <ul>
 <li>Relies on the <code>httr</code> package, which provides benefits like the status code message can be captured (eg, 200-OK, 403-Forbidden, 404-NotFound). See <a href="https://cran.r-project.org/package=httr" class="uri">https://cran.r-project.org/package=httr</a>.</li>
 </ul>
@@ -479,9 +479,9 @@
 <h1 class="page-header" data-toc-text="0.2">
 <a href="#version-02-released-2014-07-02" class="anchor"></a>Version 0.2 (Released 2014-07-02)<small> Unreleased </small>
 </h1>
-<div id="new-features-9" class="section level3">
+<div id="new-features-10" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-features-9" class="anchor"></a>New Features</h3>
+<a href="#new-features-10" class="anchor"></a>New Features</h3>
 <ul>
 <li>Added <code><a href="../reference/redcap_column_sanitize.html">redcap_column_sanitize()</a></code> function to address non-ASCII characters</li>
 <li>Added <code><a href="../reference/redcap_write.html">redcap_write()</a></code> (as an internal function).</li>
@@ -505,9 +505,9 @@
 <h1 class="page-header" data-toc-text="0.1">
 <a href="#version-01-released-2014-01-14" class="anchor"></a>Version 0.1 (Released 2014-01-14)<small> Unreleased </small>
 </h1>
-<div id="new-features-10" class="section level3">
+<div id="new-features-11" class="section level3">
 <h3 class="hasAnchor">
-<a href="#new-features-10" class="anchor"></a>New Features</h3>
+<a href="#new-features-11" class="anchor"></a>New Features</h3>
 <ul>
 <li>Introduces <code><a href="../reference/redcap_read.html">redcap_read()</a></code> and <code>redcap_read_batch()</code> with documentation</li>
 <li>SSL verify peer by default, using cert file included in package</li>
