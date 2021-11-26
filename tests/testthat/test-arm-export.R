@@ -117,4 +117,19 @@ test_that("Longitudinal Single Arm", {
   expect_true(returned_object$success)
 })
 
+test_that("Bad Token", {
+  testthat::skip_on_cran()
+  credential  <- retrieve_credential_testing(2629L)
+  bad_token   <- "1234567890ABCDEF1234567890ABCDEF"
+
+  expected_error_message <- "The REDCapR arm export failed\\. The http status code was 403. The error message was: 'ERROR: You do not have permissions to use the API'"
+  expect_error(
+    redcap_arm_export(
+      redcap_uri        = credential$redcap_uri,
+      token             = bad_token
+    ),
+    regexp = expected_error_message
+  )
+})
+
 rm(read_arms, empty_data_frame)

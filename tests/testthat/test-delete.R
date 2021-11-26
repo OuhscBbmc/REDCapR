@@ -167,3 +167,20 @@ test_that("unspecified required arm", {
     regexp = expected_outcome_message
   )
 })
+
+test_that("Bad Token", {
+  testthat::skip_on_cran()
+  credential  <- retrieve_credential_testing(153L)
+  bad_token   <- "1234567890ABCDEF1234567890ABCDEF"
+  records_to_delete <- 101
+
+  expected_error_message <- "The REDCapR arm export failed\\. The http status code was 403. The error message was: 'ERROR: You do not have permissions to use the API'"
+  expect_error(
+    redcap_delete(
+      redcap_uri        = credential$redcap_uri,
+      token             = bad_token,
+      records_to_delete = records_to_delete
+    ),
+    regexp = expected_error_message
+  )
+})
