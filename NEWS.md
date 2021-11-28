@@ -3,8 +3,9 @@ Upcoming Versions
 
 ### New Features
 
-* `redcap_delete()` deletes a vector of records.  (Thanks @joundso, #372, #373)
-* `redcap_arm_export()` retrieves a list of REDCap project arms.  (#375)
+* New `redcap_delete()` function.  It deletes a vector of records.  (Thanks @joundso, #372, #373)
+* New `redcap_arm_export()` function.  It retrieves a list of REDCap project arms.  (#375)
+* `redcap_read()` and `redcap_read_oneshot()` accept a new `locale` parameter that specifies date, time, and number formats, like using a comma as the decimal separator.  It is a [`readr::locale`](https://readr.tidyverse.org/reference/locale.html) object.  (#377, suggested by @joundso)
 
 ### Minor Enhancements
 

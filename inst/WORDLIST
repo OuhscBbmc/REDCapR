@@ -39,13 +39,13 @@ ParentPRO
 Pre
 PyCap
 RCurl
+RDoc
 REDCap
 REDCap's
 REDCapCon
 REDCapR's
 RODBC
 RODBCext
-Rdoc
 SSL
 SecurityDatabase
 Translational
@@ -96,6 +96,7 @@ pid
 pkgdown
 programmatically
 projectredcap
+rdoc
 readr
 redcapAPI
 regexes

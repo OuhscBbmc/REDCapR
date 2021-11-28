@@ -27,6 +27,7 @@ redcap_read_oneshot(
   guess_type = TRUE,
   guess_max = 1000L,
   http_response_encoding = "UTF-8",
+  locale = readr::default_locale(),
   verbose = TRUE,
   config_options = NULL
 )
@@ -114,6 +115,10 @@ specifies the maximum number of records to use for guessing column types.}
 
 \item{http_response_encoding}{The encoding value passed to
 \code{\link[httr:content]{httr::content()}}.  Defaults to 'UTF-8'.}
+
+\item{locale}{a \code{\link[readr:locale]{readr::locale()}} object to specify preferences like
+number, date, and time formats.  This object is passed to
+\code{\link[readr:read_delim]{readr::read_csv()}}.  Defaults to \code{\link[readr:locale]{readr::default_locale()}}.}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed
 to the R console during the operation.  The verbose output might contain
