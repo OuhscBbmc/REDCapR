@@ -214,6 +214,7 @@ redcap_read_oneshot <- function(
   checkmate::assert_integerish(guess_max                , any.missing=FALSE, len=1, lower=1)
   checkmate::assert_character(http_response_encoding    , any.missing=FALSE,     len=1)
 
+  checkmate::assert_class(    locale, "locale"          , null.ok = FALSE)
   checkmate::assert_logical(  verbose                   , any.missing=FALSE, len=1, null.ok=TRUE)
   checkmate::assert_list(     config_options            , any.missing=TRUE ,        null.ok=TRUE)
 
