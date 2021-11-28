@@ -102,3 +102,30 @@ d_dots <-
 testit::assert(d_dots$height == d_expected$height)
 testit::assert(d_dots$weight == d_expected$weight)
 testit::assert(d_dots$bmi    == d_expected$bmi   )
+
+
+
+d_dots_null <-
+  readr::read_csv(
+    file = I(s_dots),
+    locale    = readr::default_locale(),
+    col_types = col_types_dots
+  )
+
+testit::assert(d_dots_null$height == d_expected$height)
+testit::assert(d_dots_null$weight == d_expected$weight)
+testit::assert(d_dots_null$bmi    == d_expected$bmi   )
+
+
+
+# # ---- using validation from dictionary ----------------------------------------
+# url <- "https://bbmc.ouhsc.edu/redcap/api/"
+# token <- "33DDFEF1D68EE5A5119DDF06C602430E"
+#
+# m <- REDCapR::redcap_metadata_read(url, token)$data
+#
+# m |>
+#   dplyr::select(
+#     field_name,
+#
+#   )

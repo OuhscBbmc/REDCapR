@@ -76,6 +76,9 @@
 #' @param guess_max Deprecated.
 #' @param http_response_encoding  The encoding value passed to
 #' [httr::content()].  Defaults to 'UTF-8'.
+#' @param locale a [readr::locale()] object to specify preferences like
+#' number, date, and time formats.  This object is passed to
+#' [`readr::read_csv()`].  Defaults to [readr::default_locale()].
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  The verbose output might contain
 #' sensitive information (*e.g.* PHI), so turn this off if the output might
@@ -193,6 +196,7 @@ redcap_read <- function(
   guess_type                    = TRUE,
   guess_max                     = NULL, # Deprecated parameter
   http_response_encoding        = "UTF-8",
+  locale                        = readr::default_locale(),
   verbose                       = TRUE,
   config_options                = NULL,
   id_position                   = 1L
@@ -270,6 +274,7 @@ redcap_read <- function(
     datetime_range_end     = datetime_range_end,
     guess_type         = guess_type,
     http_response_encoding = http_response_encoding,
+    locale             = locale,
     verbose            = verbose,
     config_options     = config_options
   )
@@ -341,6 +346,7 @@ redcap_read <- function(
       guess_type                  = FALSE,
       # guess_max                   = guess_max, # Not used, because guess_type is FALSE
       http_response_encoding      = http_response_encoding,
+      locale                      = locale,
       verbose                     = verbose,
       config_options              = config_options
     )
@@ -379,7 +385,9 @@ redcap_read <- function(
   if (is.null(col_types) && guess_type) {
     ds_stacked <-
       ds_stacked %>%
-      readr::type_convert()
+      readr::type_convert(
+        locale = locale
+      )
   }
 
   elapsed_seconds          <- as.numeric(difftime( Sys.time(), start_time, units="secs"))

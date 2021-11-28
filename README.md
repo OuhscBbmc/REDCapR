@@ -89,5 +89,5 @@ Thanks,
 | [CRAN Version](https://cran.r-project.org/package=REDCapR) | [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/REDCapR)](https://cran.r-project.org/package=REDCapR) |
 | [CRAN Rate](https://cranlogs.r-pkg.org/) | ![CRAN Pace](https://cranlogs.r-pkg.org/badges/REDCapR) |
 | [Zenodo Archive](https://zenodo.org/search?ln=en&p=redcapr) | [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.61990.svg)](https://doi.org/10.5281/zenodo.61990) |
-| [Production Doc](https://www.rdocumentation.org/) | [![rdoc](https://api.rdocumentation.org/badges/version/REDCapR)](https://www.rdocumentation.org/packages/REDCapR) |
-| [Development Doc](https://www.rdocumentation.org/) | [![Rdoc](https://img.shields.io/badge/pkgdown-GitHub.io-orange.svg?longCache=true&style=style=for-the-badge)](https://ouhscbbmc.github.io/REDCapR/) |
+| [Production Doc](https://www.rdocumentation.org/) | [![RDoc](https://api.rdocumentation.org/badges/version/REDCapR)](https://www.rdocumentation.org/packages/REDCapR) |
+| [Development Doc](https://ouhscbbmc.github.io/REDCapR/) | [![rdoc](https://img.shields.io/badge/pkgdown-GitHub.io-orange.svg?longCache=true&style=style=for-the-badge)](https://ouhscbbmc.github.io/REDCapR/) |
