@@ -28,14 +28,14 @@ d$study_comments <- NULL # wordy cells throw off visibility
 d$vob7           <- NULL # wordy cells throw off visibility
 d$vob14          <- NULL # wordy cells throw off visibility
 
-ds_mapping_validation_name <-
-  tibble::tribble(
-    ~validation_name, ~fx_export,
-    "number", '\\(x) readr::parse_number(x)',
-    "number_comma_decimal", '\\(x) readr::parse_number(x, locale = readr::locale(decimal_mark = ","))',
-    "phone", '\\(x) readr::parse_character(x)',
-    "date_ymd", '\\(x) readr::parse_date(x)',
-  )
+# ds_mapping_validation_name <-
+#   tibble::tribble(
+#     ~validation_name, ~fx_export,
+#     "number", '\\(x) readr::parse_number(x)',
+#     "number_comma_decimal", '\\(x) readr::parse_number(x, locale = readr::locale(decimal_mark = ","))',
+#     "phone", '\\(x) readr::parse_character(x)',
+#     "date_ymd", '\\(x) readr::parse_date(x)',
+#   )
 
 ds_mapping_validation_name <-
   "misc/validation-transformation.yml" |>
@@ -61,7 +61,6 @@ fxs <-
       nm  = x$field_name
     )
   }()
-
 
 for (variable in names(fxs)) {
   fx <- base::eval(base::parse(text = fxs[[variable]]))
