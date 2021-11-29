@@ -37,6 +37,12 @@ ds_mapping_validation_name <-
     "date_ymd", '\\(x) readr::parse_date(x)',
   )
 
+ds_mapping_validation_name <-
+  "misc/validation-transformation.yml" |>
+  system.file(package = "REDCapR") |>
+  yaml::yaml.load_file() |>
+  purrr::map_df(tibble::as_tibble)
+
 f <- eval(parse(text = ds_mapping_validation_name$fx_export[3]))
 f("234,01")
 
