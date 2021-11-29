@@ -182,6 +182,7 @@ datasets that could tie up the server.</p>
   guess_type <span class='op'>=</span> <span class='cn'>TRUE</span>,
   guess_max <span class='op'>=</span> <span class='cn'>NULL</span>,
   http_response_encoding <span class='op'>=</span> <span class='st'>"UTF-8"</span>,
+  locale <span class='op'>=</span> <span class='fu'>readr</span><span class='fu'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/locale.html'>default_locale</a></span><span class='op'>(</span><span class='op'>)</span>,
   verbose <span class='op'>=</span> <span class='cn'>TRUE</span>,
   config_options <span class='op'>=</span> <span class='cn'>NULL</span>,
   id_position <span class='op'>=</span> <span class='fl'>1L</span>
@@ -331,6 +332,12 @@ data type for each column.</p></td>
       <th>http_response_encoding</th>
       <td><p>The encoding value passed to
 <code><a href='https://httr.r-lib.org/reference/content.html'>httr::content()</a></code>.  Defaults to 'UTF-8'.</p></td>
+    </tr>
+    <tr>
+      <th>locale</th>
+      <td><p>a <code><a href='https://readr.tidyverse.org/reference/locale.html'>readr::locale()</a></code> object to specify preferences like
+number, date, and time formats.  This object is passed to
+<code><a href='https://readr.tidyverse.org/reference/read_delim.html'>readr::read_csv()</a></code>.  Defaults to <code><a href='https://readr.tidyverse.org/reference/locale.html'>readr::default_locale()</a></code>.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
