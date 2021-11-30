@@ -32,7 +32,7 @@ d$vob14          <- NULL # wordy cells throw off visibility
 #   tibble::tribble(
 #     ~validation_name, ~fx_export,
 #     "number", '\\(x) readr::parse_number(x)',
-#     "number_comma_decimal", '\\(x) readr::parse_number(x, locale = readr::locale(decimal_mark = ","))',
+#     "number_comma_decimal", '\\(x) readr::parse_number(x, locale = readr::locale(decimal_mark = ,\n))',
 #     "phone", '\\(x) readr::parse_character(x)',
 #     "date_ymd", '\\(x) readr::parse_date(x)',
 #   )
@@ -42,6 +42,8 @@ ds_mapping_validation_name <-
   system.file(package = "REDCapR") |>
   yaml::yaml.load_file() |>
   purrr::map_df(tibble::as_tibble)
+
+ds_mapping_validation_name
 
 f <- eval(parse(text = ds_mapping_validation_name$fx_export[3]))
 f("234,01")
@@ -62,3 +64,57 @@ for (variable in names(fxs)) {
   d[[variable]] <- fx(d[[variable]])
 }
 d
+
+
+# ---- create-project-for-testing ----------------------------------------------
+# ds_dictionary <-
+ds_mapping_validation_name |>
+  dplyr::select(
+    field_name    = validation_name,
+    field_label   = validation_label,
+  ) |>
+  dplyr::mutate(
+    form_name     = "form_1",
+    section_header                              = "",
+    field_type                                  = "text",
+    select_choices_or_calculations              = "",
+    field_note                                  = "",
+    text_validation_type_or_show_slider_number  = field_name,
+    text_validation_min                         = "",
+    text_validation_max                         = "",
+    identifier                                  = "",
+    branching_logic                             = "",
+    required_field                              = "",
+    custom_alignment                            = "",
+    question_number                             = "",
+    matrix_group_name                           = "",
+    matrix_ranking                              = "",
+    field_annotation                            = "",
+  ) |>
+  dplyr::select(
+    field_name,
+    form_name,
+    section_header,
+    field_type,
+    field_label,
+    select_choices_or_calculations,
+    field_note,
+    text_validation_type_or_show_slider_number,
+    text_validation_min,
+    text_validation_max,
+    identifier,
+    branching_logic,
+    required_field,
+    custom_alignment,
+    question_number,
+    matrix_group_name,
+    matrix_ranking,
+    field_annotation,
+  ) |>
+  readr::write_csv("inst/test-data/validation-types-v1/dictionary.csv")
+
+ds_mapping_validation_name$validation_name |>
+  paste(collapse=",") |>
+  readr::write_file("inst/test-data/validation-types-v1/data.csv")
+
+
