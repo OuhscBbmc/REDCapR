@@ -54,14 +54,9 @@ fxs <-
   ) |>
   dplyr::left_join(ds_mapping_validation_name, by = "validation_name") |>
   tidyr::drop_na(fx_export) |>
-  {
-    \(x)
-    rlang::set_names(
-      x   = x$fx_export,
-      nm  = x$field_name
-    )
-  }()
+  dplyr::pull(fx_export, name = field_name)
 
+d <- tibble::as_tibble(d)
 for (variable in names(fxs)) {
   fx <- base::eval(base::parse(text = fxs[[variable]]))
   d[[variable]] <- fx(d[[variable]])
