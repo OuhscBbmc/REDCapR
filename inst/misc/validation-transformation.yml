@@ -5,7 +5,7 @@
 -
   validation_name    : date_dmy
   validation_label   : Date (D-M-Y)
-  fx_export          : \(x) readr::parse_date(x)
+  fx_export          : \(x) readr::parse_date(x, format = "%d-%m-%Y")
 -
   validation_name    : date_mdy
   validation_label   : Date (M-D-Y)
