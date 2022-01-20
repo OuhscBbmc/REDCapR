@@ -1,0 +1,140 @@
+-
+  validation_name    : alpha_only
+  validation_label   : Letters only
+  fx_export          : \(x) readr::parse_character(x)
+-
+  validation_name    : date_dmy
+  validation_label   : Date (D-M-Y)
+  fx_export          : \(x) readr::parse_date(x, format = "%d-%m-%Y")
+-
+  validation_name    : date_mdy
+  validation_label   : Date (M-D-Y)
+  fx_export          : \(x) readr::parse_date(x)
+-
+  validation_name    : date_ymd
+  validation_label   : Date (Y-M-D)
+  fx_export          : \(x) readr::parse_date(x)
+-
+  validation_name    : datetime_dmy
+  validation_label   : Datetime (D-M-Y H:M)
+  fx_export          : \(x) readr::parse_datetime(x)
+-
+  validation_name    : datetime_mdy
+  validation_label   : Datetime (M-D-Y H:M)
+  fx_export          : \(x) readr::parse_datetime(x)
+-
+  validation_name    : datetime_seconds_dmy
+  validation_label   : Datetime w/ seconds (D-M-Y H:M:S)
+  fx_export          : \(x) readr::parse_datetime(x)
+-
+  validation_name    : datetime_seconds_mdy
+  validation_label   : Datetime w/ seconds (M-D-Y H:M:S)
+  fx_export          : \(x) readr::parse_datetime(x)
+-
+  validation_name    : datetime_seconds_ymd
+  validation_label   : Datetime w/ seconds (Y-M-D H:M:S)
+  fx_export          : \(x) readr::parse_datetime(x)
+-
+  validation_name    : datetime_ymd
+  validation_label   : Datetime (Y-M-D H:M)
+  fx_export          : \(x) readr::parse_datetime(x)
+-
+  validation_name    : email
+  validation_label   : Email
+  fx_export          : \(x) readr::parse_character(x)
+-
+  validation_name    : integer
+  validation_label   : Integer
+  fx_export          : \(x) readr::parse_integer(x)
+-
+  validation_name    : mrn_10d
+  validation_label   : MRN (10 digits)
+  fx_export          : \(x) readr::parse_character(x)
+-
+  validation_name    : mrn_generic
+  validation_label   : MRN (generic)
+  fx_export          : \(x) readr::parse_character(x)
+-
+  validation_name    : number
+  validation_label   : Number
+  fx_export          : \(x) readr::parse_number(x)
+-
+  validation_name    : number_1dp
+  validation_label   : Number (1 decimal place)
+  fx_export          : \(x) readr::parse_number(x)
+-
+  validation_name    : number_1dp_comma_decimal
+  validation_label   : Number (1 decimal place - comma as decimal)
+  fx_export          : \(x) readr::parse_number(x, locale = readr::locale(decimal_mark = ","))
+-
+  validation_name    : number_2dp
+  validation_label   : Number (2 decimal places)
+  fx_export          : \(x) readr::parse_number(x)
+-
+  validation_name    : number_2dp_comma_decimal
+  validation_label   : Number (2 decimal places - comma as decimal)
+  fx_export          : \(x) readr::parse_number(x, locale = readr::locale(decimal_mark = ","))
+-
+  validation_name    : number_3dp
+  validation_label   : Number (3 decimal places)
+  fx_export          : \(x) readr::parse_number(x)
+-
+  validation_name    : number_3dp_comma_decimal
+  validation_label   : Number (3 decimal places - comma as decimal)
+  fx_export          : \(x) readr::parse_number(x, locale = readr::locale(decimal_mark = ","))
+-
+  validation_name    : number_4dp
+  validation_label   : Number (4 decimal places)
+  fx_export          : \(x) readr::parse_number(x, locale = readr::locale(decimal_mark = ","))
+-
+  validation_name    : number_4dp_comma_decimal
+  validation_label   : Number (4 decimal places - comma as decimal)
+  fx_export          : \(x) readr::parse_number(x, locale = readr::locale(decimal_mark = ","))
+-
+  validation_name    : number_comma_decimal
+  validation_label   : Number (comma as decimal)
+  fx_export          : \(x) readr::parse_number(x)
+-
+  validation_name    : phone
+  validation_label   : Phone (North America)
+  fx_export          : \(x) readr::parse_character(x)
+-
+  validation_name    : phone_australia
+  validation_label   : Phone (Australia)
+  fx_export          : \(x) readr::parse_character(x)
+-
+  validation_name    : postalcode_australia
+  validation_label   : Postal Code (Australia)
+  fx_export          : \(x) readr::parse_character(x)
+-
+  validation_name    : postalcode_canada
+  validation_label   : Postal Code (Canada)
+  fx_export          : \(x) readr::parse_character(x)
+-
+  validation_name    : postalcode_french
+  validation_label   : Code Postal 5 characters (France)
+  fx_export          : \(x) readr::parse_character(x)
+-
+  validation_name    : postalcode_germany
+  validation_label   : Postal Code (Germany)
+  fx_export          : \(x) readr::parse_character(x)
+-
+  validation_name    : ssn
+  validation_label   : Social Security Number (U.S.)
+  fx_export          : \(x) readr::parse_character(x)
+-
+  validation_name    : time
+  validation_label   : Time (HH:MM)
+  fx_export          : \(x) readr::parse_time(x)
+-
+  validation_name    : time_mm_ss
+  validation_label   : Time (MM:SS)
+  fx_export          : \(x) readr::parse_time(x)
+-
+  validation_name    : vmrn
+  validation_label   : Vanderbilt MRN
+  fx_export          : \(x) readr::parse_character(x)
+-
+  validation_name    : zipcode
+  validation_label   : Zipcode (U.S.)
+  fx_export          : \(x) readr::parse_character(x)
