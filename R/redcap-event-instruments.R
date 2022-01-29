@@ -72,7 +72,7 @@ redcap_event_instruments <- function(
 
   post_body <- list(
     token     = token,
-    content   = "instrument",
+    content   = "formEventMapping",
     format    = "csv",
     'arms[0]' = collapse_vector(arms, NULL)
   )
