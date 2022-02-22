@@ -51,9 +51,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' uri         <- "https://bbmc.ouhsc.edu/redcap/api/"
-#' token       <- "9A81268476645C4E5F03428B8AC3AA7B"
-#' ds_variable <- REDCapR::redcap_instruments(redcap_uri=uri, token=token)$data
+#' uri           <- "https://bbmc.ouhsc.edu/redcap/api/"
+#' token         <- "9A81268476645C4E5F03428B8AC3AA7B"
+#' ds_instrument <- REDCapR::redcap_instruments(redcap_uri=uri, token=token)$data
 #' }
 
 #' @export
@@ -76,6 +76,11 @@ redcap_instruments <- function(
     format    = "csv"
   )
 
+  col_types = readr::cols(
+    instrument_name   = readr::col_character(),
+    instrument_label  = readr::col_character()
+  )
+
   # This is the important line that communicates with the REDCap server.
   kernel <- kernel_api(redcap_uri, post_body, config_options)
 
@@ -85,7 +90,7 @@ redcap_instruments <- function(
         ds <-
           readr::read_csv(
             file            = I(kernel$raw_text),
-            show_col_types  = FALSE
+            col_types       = col_types
           )
       }, #Convert the raw text to a dataset.
       silent = TRUE

@@ -30,7 +30,6 @@ test_that("default", {
   expect_true(returned_object$success)
 })
 
-
 test_that("Bad URI", {
   testthat::skip_on_cran()
   bad_uri <- "https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"
