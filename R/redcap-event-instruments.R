@@ -76,6 +76,11 @@ redcap_event_instruments <- function(
     'arms[0]' = collapse_vector(arms, NULL)
   )
 
+  col_types = readr::cols(
+    arm_num           = readr::col_integer(),
+    unique_event_name = readr::col_character(),
+    form              = readr::col_character()
+  )
 
   # This is the important line that communicates with the REDCap server.
   kernel <- kernel_api(redcap_uri, post_body, config_options)
@@ -86,7 +91,7 @@ redcap_event_instruments <- function(
         ds <-
           readr::read_csv(
             file            = I(kernel$raw_text),
-            show_col_types  = FALSE
+            col_types       = col_types
           )
       }, #Convert the raw text to a dataset.
       silent = TRUE
