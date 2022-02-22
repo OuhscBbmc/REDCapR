@@ -28,6 +28,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -47,12 +49,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -64,7 +60,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/OuhscBbmc/REDCapR/">
+  <a href="https://github.com/OuhscBbmc/REDCapR/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -89,10 +85,10 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Typical REDCap Workflow for a Data Analyst</h1>
-                        <h4 class="author">Will Beasley, Geneva Marshall, &amp; Thomas Wilson, <a href="https://www.ouhsc.edu/bbmc/team/">Biomedical &amp; Behavior Methodology Core</a>, OUHSC Pediatrics</h4>
+                        <h4 data-toc-skip class="author">Will Beasley, Geneva Marshall, &amp; Thomas Wilson, <a href="https://www.ouhsc.edu/bbmc/team/" class="external-link">Biomedical &amp; Behavior Methodology Core</a>, OUHSC Pediatrics</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/workflow-read.Rmd"><code>vignettes/workflow-read.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/HEAD/vignettes/workflow-read.Rmd" class="external-link"><code>vignettes/workflow-read.Rmd</code></a></small>
       <div class="hidden name"><code>workflow-read.Rmd</code></div>
 
     </div>
@@ -110,23 +106,23 @@
 <p>Instead of telling your students or colleagues “first go to REDCap, then go to project 55, then click”Data Exports“, then click”Export Data“, then download these files, then move the files to this subdirectory, and finally convert them to this format before you run these models” …say it with a few lines of R code.</p>
 <p>For people running your code on their machines …the API is so integrated and responsive that they may not even realize their computer is connecting to the outside world. If they’re not looking closely, they may think it’s a dataset that’s included locally in a package they’ve already installed.</p>
 <p>For beginners, most of the work is related to passing security credentials …which is something that is a reality of working with PHI.</p>
-<div id="part-1---pre-requisites" class="section level1">
-<h1 class="hasAnchor">
-<a href="#part-1---pre-requisites" class="anchor"></a>Part 1 - Pre-requisites</h1>
-<div id="verify-redcapr-is-installed" class="section level2">
-<h2 class="hasAnchor">
-<a href="#verify-redcapr-is-installed" class="anchor"></a>Verify REDCapR is installed</h2>
+<div class="section level2">
+<h2 id="part-1---pre-requisites">Part 1 - Pre-requisites<a class="anchor" aria-label="anchor" href="#part-1---pre-requisites"></a>
+</h2>
+<div class="section level3">
+<h3 id="verify-redcapr-is-installed">Verify REDCapR is installed<a class="anchor" aria-label="anchor" href="#verify-redcapr-is-installed"></a>
+</h3>
 <p>First confirm that the REDCapR package is installed on your local machine. If not, the following line will throw the error <code>Loading required namespace: REDCapR.  Failed with error: ‘there is no package called ‘REDCapR’’</code>. If this call fails, follow the installation instructions on the <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> webpage.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"REDCapR"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"REDCapR"</span><span class="op">)</span>
 <span class="co">#&gt; Loading required namespace: REDCapR</span>
 
 <span class="co"># If this fails, run `install.packages("REDCapR")` or `remotes::install_github(repo="OuhscBbmc/REDCapR")`</span></code></pre></div>
 <p>If you’re a workshop attendee, you can use this vignette to copy snippets of code to your local machine to follow along with the examples: <a href="https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html" class="uri">https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html</a>.</p>
 </div>
-<div id="verify-redcap-access" class="section level2">
-<h2 class="hasAnchor">
-<a href="#verify-redcap-access" class="anchor"></a>Verify REDCap Access</h2>
+<div class="section level3">
+<h3 id="verify-redcap-access">Verify REDCap Access<a class="anchor" aria-label="anchor" href="#verify-redcap-access"></a>
+</h3>
 <p>Check with your institution’s REDCap administrator to ensure you have</p>
 <ol style="list-style-type: decimal">
 <li>access to the REDCap server,</li>
@@ -145,24 +141,24 @@
 </ul>
 </blockquote>
 </div>
-<div id="review-codebook" class="section level2">
-<h2 class="hasAnchor">
-<a href="#review-codebook" class="anchor"></a>Review Codebook</h2>
+<div class="section level3">
+<h3 id="review-codebook">Review Codebook<a class="anchor" aria-label="anchor" href="#review-codebook"></a>
+</h3>
 <p>Before developing any REDCap or analysis code, spend at least 10 minutes to review the codebook, whose link is near the top left corner of the REDCap project page, under the “Project Home and Design” heading. Learning the details will save you time later and improve the quality of the research.</p>
 <p>If you’re new to the project, meet with the investigator for at least 30 minutes to learn the context, collection process, and idiosyncrasies of the dataset. During that conversation, develop a plan for grooming the dataset to be ready for analysis. This is part of the standard advice that the analyst’s involvement should start early in the investigation’s life span.</p>
 </div>
 </div>
-<div id="part-2---retrieve-protected-token" class="section level1">
-<h1 class="hasAnchor">
-<a href="#part-2---retrieve-protected-token" class="anchor"></a>Part 2 - Retrieve Protected Token</h1>
-<p>The REDCap API token is essentially a combination of a personal password and the ID of the specific project you’re requesting data from. Protect it like any other password to PHI (<a href="https://www.hhs.gov/answers/hipaa/what-is-phi/index.html">protected health information</a>). For a project with PHI, <strong>never hard-code the password directly in an R file</strong>. In other words, no PHI project should be accessed with an R file that includes the line</p>
+<div class="section level2">
+<h2 id="part-2---retrieve-protected-token">Part 2 - Retrieve Protected Token<a class="anchor" aria-label="anchor" href="#part-2---retrieve-protected-token"></a>
+</h2>
+<p>The REDCap API token is essentially a combination of a personal password and the ID of the specific project you’re requesting data from. Protect it like any other password to PHI (<a href="https://www.hhs.gov/answers/hipaa/what-is-phi/index.html" class="external-link">protected health information</a>). For a project with PHI, <strong>never hard-code the password directly in an R file</strong>. In other words, no PHI project should be accessed with an R file that includes the line</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">my_secret_token</span> <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></code></pre></div>
 <p>Instead, we suggest storing the token in a location that can be accessed by only you. We have two recommendations.</p>
-<div id="security-method-1-token-file" class="section level2">
-<h2 class="hasAnchor">
-<a href="#security-method-1-token-file" class="anchor"></a>Security Method 1: Token File</h2>
-<p>The basic goals are (a) separate the secret values from the R file into a dedicated file and (b) secure the dedicated file. If using a git repository, prevent the file from being committed with an entry in <a href="https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files"><code>.gitignore</code></a>. Ask your institution’s IT security team for their recommendation.</p>
+<div class="section level3">
+<h3 id="security-method-1-token-file">Security Method 1: Token File<a class="anchor" aria-label="anchor" href="#security-method-1-token-file"></a>
+</h3>
+<p>The basic goals are (a) separate the secret values from the R file into a dedicated file and (b) secure the dedicated file. If using a git repository, prevent the file from being committed with an entry in <a href="https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files" class="external-link"><code>.gitignore</code></a>. Ask your institution’s IT security team for their recommendation.</p>
 <p>The <a href="https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html"><code>retrieve_credential_local()</code></a> function in the <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> package loads relevant information from a csv into R. The plain-text file might look like this:</p>
 <pre class="csv"><code>redcap_uri,username,project_id,token,comment
 "https://bbmc.ouhsc.edu/redcap/api/","myusername",153,9A81268476645C4E5F03428B8AC3AA7B,"simple"
@@ -170,7 +166,7 @@
 "https://bbmc.ouhsc.edu/redcap/api/","myusername",213,D70F9ACD1EDD6F151C6EA78683944E98,"write data"</code></pre>
 <p>To retrieve the credentials for the first project listed above, pass the value of “153” to <code>project_id</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">path_credential</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"misc/example.credentials"</span>, package <span class="op">=</span> <span class="st">"REDCapR"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">path_credential</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"misc/example.credentials"</span>, package <span class="op">=</span> <span class="st">"REDCapR"</span><span class="op">)</span>
 <span class="va">credential</span>  <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/retrieve_credential.html">retrieve_credential_local</a></span><span class="op">(</span>
   path_credential <span class="op">=</span> <span class="va">path_credential</span>, 
   project_id      <span class="op">=</span> <span class="fl">153</span>
@@ -194,16 +190,16 @@
 <p>A credential file is already created for this vignette. In your next real project, call <a href="https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html"><code>create_credential_local()</code></a> to start a well-formed csv file that can contain tokens.</p>
 <p>Compared to the method below, this one is less secure but easier to establish.</p>
 </div>
-<div id="security-method-2-token-server" class="section level2">
-<h2 class="hasAnchor">
-<a href="#security-method-2-token-server" class="anchor"></a>Security Method 2: Token Server</h2>
+<div class="section level3">
+<h3 id="security-method-2-token-server">Security Method 2: Token Server<a class="anchor" aria-label="anchor" href="#security-method-2-token-server"></a>
+</h3>
 <p>Our preferred method involves saving the tokens in a separate database that uses something like Active Directory to authenticate requests. This method is described in detail in the <a href="https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html">Security Database</a> vignette.</p>
 <p>This approach realistically requires someone in your institution to have at least basic database administration experience.</p>
 </div>
 </div>
-<div id="part-3---read-data-unstructured-approach" class="section level1">
-<h1 class="hasAnchor">
-<a href="#part-3---read-data-unstructured-approach" class="anchor"></a>Part 3 - Read Data: Unstructured Approach</h1>
+<div class="section level2">
+<h2 id="part-3---read-data-unstructured-approach">Part 3 - Read Data: Unstructured Approach<a class="anchor" aria-label="anchor" href="#part-3---read-data-unstructured-approach"></a>
+</h2>
 <p>The <code>redcap_uri</code> and <code>token</code> fields are the only required arguments of <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code>REDCapR::redcap_read()</code></a>; both are in the credential object created in the previous section.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds_1</span> <span class="op">&lt;-</span> 
@@ -212,24 +208,24 @@
     token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>
   <span class="op">)</span><span class="op">$</span><span class="va">data</span>
 <span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</span>
-<span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-11-29 05:45:23.</span>
+<span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2022-02-22 23:46:48.</span>
 <span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span>
 <span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
 <span class="co">#&gt; cols(</span>
 <span class="co">#&gt;   .default = col_double(),</span>
-<span class="co">#&gt;   name_first = col_character(),</span>
-<span class="co">#&gt;   name_last = col_character(),</span>
-<span class="co">#&gt;   address = col_character(),</span>
-<span class="co">#&gt;   telephone = col_character(),</span>
-<span class="co">#&gt;   email = col_character(),</span>
-<span class="co">#&gt;   dob = col_date(format = ""),</span>
-<span class="co">#&gt;   comments = col_character(),</span>
-<span class="co">#&gt;   mugshot = col_character()</span>
+<span class="co">#&gt;   name_first = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="co">#&gt;   name_last = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="co">#&gt;   address = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="co">#&gt;   telephone = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="co">#&gt;   email = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="co">#&gt;   dob = <span style="color: #0000BB;">col_date(format = "")</span>,</span>
+<span class="co">#&gt;   comments = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="co">#&gt;   mugshot = <span style="color: #BB0000;">col_character()</span></span>
 <span class="co">#&gt; )</span>
-<span class="co">#&gt; ℹ Use `spec()` for the full column specifications.</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` for the full column specifications.</span></code></pre></div>
 <p>At this point, the data.frame <code>ds_1</code> has everything you need to start analyzing the project.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds_1</span>
@@ -270,11 +266,11 @@
 <span class="co">#&gt; 4        0         1                 NA                           2</span>
 <span class="co">#&gt; 5        1         2                  0                           2</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">ds_1</span><span class="op">$</span><span class="va">weight</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">ds_1</span><span class="op">$</span><span class="va">weight</span><span class="op">)</span></code></pre></div>
 <p><img src="workflow-read_files/figure-html/unstructured-2-1.png" width="700"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">ds_1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">ds_1</span><span class="op">)</span>
 <span class="co">#&gt;    record_id  name_first         name_last           address         </span>
 <span class="co">#&gt;  Min.   :1   Length:5           Length:5           Length:5          </span>
 <span class="co">#&gt;  1st Qu.:2   Class :character   Class :character   Class :character  </span>
@@ -324,7 +320,7 @@
 <span class="co">#&gt;  Max.   :1.0   Max.   :2   Max.   :1.00       Max.   :2.0                </span>
 <span class="co">#&gt;                            NA's   :1</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">age</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">bmi</span>, data <span class="op">=</span> <span class="va">ds_1</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">age</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">bmi</span>, data <span class="op">=</span> <span class="va">ds_1</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
 <span class="co">#&gt; lm(formula = age ~ 1 + sex + bmi, data = ds_1)</span>
@@ -346,9 +342,9 @@
 <span class="co">#&gt; F-statistic: 16.92 on 2 and 2 DF,  p-value: 0.05581</span></code></pre></div>
 <p><em>Pause here in the workshop for a few minutes. Raise hand if you’re having trouble.</em></p>
 </div>
-<div id="part-4---read-data-choosing-columns-and-rows" class="section level1">
-<h1 class="hasAnchor">
-<a href="#part-4---read-data-choosing-columns-and-rows" class="anchor"></a>Part 4 - Read Data: Choosing Columns and Rows</h1>
+<div class="section level2">
+<h2 id="part-4---read-data-choosing-columns-and-rows">Part 4 - Read Data: Choosing Columns and Rows<a class="anchor" aria-label="anchor" href="#part-4---read-data-choosing-columns-and-rows"></a>
+</h2>
 <p>When you read a dataset for the first time, you probably haven’t decided which columns are needed so it makes sense to retrieve everything. As you gain familiarity with the data and with the analytic objectives, consider being more selective with the variables and rows transported from the remote server to your local machine.</p>
 <p>Advantages include:</p>
 <ol style="list-style-type: decimal">
@@ -360,34 +356,34 @@
 <li>Your R code doesn’t have filter what the server already removed.</li>
 <li>Highly-sensitive PHI columns that are unnecessary for an analysis remain on the server.</li>
 </ol>
-<div id="specify-record-ids" class="section level2">
-<h2 class="hasAnchor">
-<a href="#specify-record-ids" class="anchor"></a>Specify Record IDs</h2>
+<div class="section level3">
+<h3 id="specify-record-ids">Specify Record IDs<a class="anchor" aria-label="anchor" href="#specify-record-ids"></a>
+</h3>
 <p>The most basic operation to limit rows is passing the exact record identifiers.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Return only records with IDs of 1 and 4</span>
-<span class="va">desired_records</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span>
+<span class="va">desired_records</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span>
 <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
   redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,
   token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,
   records     <span class="op">=</span> <span class="va">desired_records</span>,
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 2 records  at 2021-11-29 05:45:25.</span>
+<span class="co">#&gt; Starting to read 2 records  at 2022-02-22 23:46:51.</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
 <span class="co">#&gt; cols(</span>
 <span class="co">#&gt;   .default = col_double(),</span>
-<span class="co">#&gt;   name_first = col_character(),</span>
-<span class="co">#&gt;   name_last = col_character(),</span>
-<span class="co">#&gt;   address = col_character(),</span>
-<span class="co">#&gt;   telephone = col_character(),</span>
-<span class="co">#&gt;   email = col_character(),</span>
-<span class="co">#&gt;   dob = col_date(format = ""),</span>
-<span class="co">#&gt;   comments = col_character(),</span>
-<span class="co">#&gt;   mugshot = col_character()</span>
+<span class="co">#&gt;   name_first = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="co">#&gt;   name_last = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="co">#&gt;   address = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="co">#&gt;   telephone = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="co">#&gt;   email = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="co">#&gt;   dob = <span style="color: #0000BB;">col_date(format = "")</span>,</span>
+<span class="co">#&gt;   comments = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="co">#&gt;   mugshot = <span style="color: #BB0000;">col_character()</span></span>
 <span class="co">#&gt; )</span>
-<span class="co">#&gt; ℹ Use `spec()` for the full column specifications.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` for the full column specifications.</span>
 <span class="co">#&gt;   record_id name_first name_last                                 address</span>
 <span class="co">#&gt; 1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232</span>
 <span class="co">#&gt; 2         4      Trudy       DAG          342 Elm\nDuncanville TX, 75116</span>
@@ -407,9 +403,9 @@
 <span class="co">#&gt; 1        0         1                  0                           2</span>
 <span class="co">#&gt; 2        0         1                 NA                           2</span></code></pre></div>
 </div>
-<div id="specify-row-filter" class="section level2">
-<h2 class="hasAnchor">
-<a href="#specify-row-filter" class="anchor"></a>Specify Row Filter</h2>
+<div class="section level3">
+<h3 id="specify-row-filter">Specify Row Filter<a class="anchor" aria-label="anchor" href="#specify-row-filter"></a>
+</h3>
 <p>A more useful operation to limit rows is passing an expression to filter the records before returning. See your server’s documentation for the syntax rules of the filter statements. Remember to enclose your variable names in square brackets. Also be aware of differences between strings and numbers.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Return only records with a birth date after January 2003</span>
@@ -419,21 +415,21 @@
   filter_logic  <span class="op">=</span> <span class="st">"'2003-01-01' &lt; [dob]"</span>,
   verbose       <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 2 records  at 2021-11-29 05:45:27.</span>
+<span class="co">#&gt; Starting to read 2 records  at 2022-02-22 23:46:52.</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
 <span class="co">#&gt; cols(</span>
 <span class="co">#&gt;   .default = col_double(),</span>
-<span class="co">#&gt;   name_first = col_character(),</span>
-<span class="co">#&gt;   name_last = col_character(),</span>
-<span class="co">#&gt;   address = col_character(),</span>
-<span class="co">#&gt;   telephone = col_character(),</span>
-<span class="co">#&gt;   email = col_character(),</span>
-<span class="co">#&gt;   dob = col_date(format = ""),</span>
-<span class="co">#&gt;   comments = col_character(),</span>
-<span class="co">#&gt;   mugshot = col_character()</span>
+<span class="co">#&gt;   name_first = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="co">#&gt;   name_last = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="co">#&gt;   address = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="co">#&gt;   telephone = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="co">#&gt;   email = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="co">#&gt;   dob = <span style="color: #0000BB;">col_date(format = "")</span>,</span>
+<span class="co">#&gt;   comments = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="co">#&gt;   mugshot = <span style="color: #BB0000;">col_character()</span></span>
 <span class="co">#&gt; )</span>
-<span class="co">#&gt; ℹ Use `spec()` for the full column specifications.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` for the full column specifications.</span>
 <span class="co">#&gt;   record_id name_first name_last                                 address</span>
 <span class="co">#&gt; 1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232</span>
 <span class="co">#&gt; 2         2     Tumtum  Nutmouse 14 Rose Cottage Blvd.\nKenning UK 34243</span>
@@ -450,26 +446,26 @@
 <span class="co">#&gt; 1         1                  0                           2</span>
 <span class="co">#&gt; 2         1                  0                           0</span></code></pre></div>
 </div>
-<div id="specify-column-names" class="section level2">
-<h2 class="hasAnchor">
-<a href="#specify-column-names" class="anchor"></a>Specify Column Names</h2>
+<div class="section level3">
+<h3 id="specify-column-names">Specify Column Names<a class="anchor" aria-label="anchor" href="#specify-column-names"></a>
+</h3>
 <p>Limit the returned fields by passing a vector of the desired names.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Return only the fields record_id, name_first, and age</span>
-<span class="va">desired_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"name_first"</span>, <span class="st">"age"</span><span class="op">)</span>
+<span class="va">desired_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"name_first"</span>, <span class="st">"age"</span><span class="op">)</span>
 <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
   redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,
   token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,
   fields      <span class="op">=</span> <span class="va">desired_fields</span>,
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-11-29 05:45:28.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2022-02-22 23:46:54.</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
 <span class="co">#&gt; cols(</span>
-<span class="co">#&gt;   record_id = col_double(),</span>
-<span class="co">#&gt;   name_first = col_character(),</span>
-<span class="co">#&gt;   age = col_double()</span>
+<span class="co">#&gt;   record_id = <span style="color: #00BB00;">col_double()</span>,</span>
+<span class="co">#&gt;   name_first = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="co">#&gt;   age = <span style="color: #00BB00;">col_double()</span></span>
 <span class="co">#&gt; )</span>
 <span class="co">#&gt;   record_id name_first age</span>
 <span class="co">#&gt; 1         1     Nutmeg  11</span>
@@ -479,26 +475,26 @@
 <span class="co">#&gt; 5         5   John Lee  59</span></code></pre></div>
 </div>
 </div>
-<div id="part-5---read-data-structured-approach" class="section level1">
-<h1 class="hasAnchor">
-<a href="#part-5---read-data-structured-approach" class="anchor"></a>Part 5 - Read Data: Structured Approach</h1>
-<p>As the automation of your scripts matures and institutional resources depend on its output, its output should be stable. One way to make it more predictable is to specify the column names <em>and</em> the column data types. In the previous example, notice that R (specifically <a href="https://readr.tidyverse.org/reference/read_delim.html"><code>readr::read_csv()</code></a>) made its best guess and reported it in the “Column specification” section.</p>
-<p>In the following example, REDCapR passes <code>col_types</code> to <a href="https://readr.tidyverse.org/reference/read_delim.html"><code>readr::read_csv()</code></a>) as it converts the plain-text output returned from REDCap into an R <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html"><code>data.frame</code></a>.</p>
-<p>When readr sees a column with values like 1, 2, 3, and 4, it will make the reasonable guess that the column should be a double precision floating-point data type. However we <a href="https://ouhscbbmc.github.io/data-science-practices-1/coding.html#coding-simplify-types">recommend using the simplest data type reasonable</a> because a simpler data type is less likely contain unintended values and it’s typically faster, consumes less memory, and translates more cleanly across platforms. As specifically for identifiers like <code>record_id</code> specify either an integer or character.</p>
-<div id="specify-column-names-types" class="section level2">
-<h2 class="hasAnchor">
-<a href="#specify-column-names-types" class="anchor"></a>Specify Column Names &amp; Types</h2>
+<div class="section level2">
+<h2 id="part-5---read-data-structured-approach">Part 5 - Read Data: Structured Approach<a class="anchor" aria-label="anchor" href="#part-5---read-data-structured-approach"></a>
+</h2>
+<p>As the automation of your scripts matures and institutional resources depend on its output, its output should be stable. One way to make it more predictable is to specify the column names <em>and</em> the column data types. In the previous example, notice that R (specifically <a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link"><code>readr::read_csv()</code></a>) made its best guess and reported it in the “Column specification” section.</p>
+<p>In the following example, REDCapR passes <code>col_types</code> to <a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link"><code>readr::read_csv()</code></a>) as it converts the plain-text output returned from REDCap into an R <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html" class="external-link"><code>data.frame</code></a>.</p>
+<p>When readr sees a column with values like 1, 2, 3, and 4, it will make the reasonable guess that the column should be a double precision floating-point data type. However we <a href="https://ouhscbbmc.github.io/data-science-practices-1/coding.html#coding-simplify-types" class="external-link">recommend using the simplest data type reasonable</a> because a simpler data type is less likely contain unintended values and it’s typically faster, consumes less memory, and translates more cleanly across platforms. As specifically for identifiers like <code>record_id</code> specify either an integer or character.</p>
+<div class="section level3">
+<h3 id="specify-column-names-types">Specify Column Names &amp; Types<a class="anchor" aria-label="anchor" href="#specify-column-names-types"></a>
+</h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Specify the column types.</span>
-<span class="va">desired_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"race"</span><span class="op">)</span>
-<span class="va">col_types</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html">cols</a></span><span class="op">(</span>
-  record_id  <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_integer</a></span><span class="op">(</span><span class="op">)</span>,
-  race___1   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_logical</a></span><span class="op">(</span><span class="op">)</span>,
-  race___2   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_logical</a></span><span class="op">(</span><span class="op">)</span>,
-  race___3   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_logical</a></span><span class="op">(</span><span class="op">)</span>,
-  race___4   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_logical</a></span><span class="op">(</span><span class="op">)</span>,
-  race___5   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_logical</a></span><span class="op">(</span><span class="op">)</span>,
-  race___6   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_logical</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">desired_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"race"</span><span class="op">)</span>
+<span class="va">col_types</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">cols</a></span><span class="op">(</span>
+  record_id  <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_integer</a></span><span class="op">(</span><span class="op">)</span>,
+  race___1   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,
+  race___2   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,
+  race___3   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,
+  race___4   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,
+  race___5   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,
+  race___6   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>
 <span class="op">)</span>
 <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
   redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,
@@ -507,7 +503,7 @@
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>,
   col_types   <span class="op">=</span> <span class="va">col_types</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-11-29 05:45:30.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2022-02-22 23:46:55.</span>
 <span class="co">#&gt;   record_id race___1 race___2 race___3 race___4 race___5 race___6</span>
 <span class="co">#&gt; 1         1    FALSE    FALSE    FALSE    FALSE     TRUE    FALSE</span>
 <span class="co">#&gt; 2         2    FALSE    FALSE     TRUE    FALSE     TRUE    FALSE</span>
@@ -515,14 +511,14 @@
 <span class="co">#&gt; 4         4    FALSE     TRUE    FALSE    FALSE     TRUE    FALSE</span>
 <span class="co">#&gt; 5         5     TRUE    FALSE    FALSE    FALSE    FALSE     TRUE</span></code></pre></div>
 </div>
-<div id="specify-everything-is-a-character" class="section level2">
-<h2 class="hasAnchor">
-<a href="#specify-everything-is-a-character" class="anchor"></a>Specify Everything is a Character</h2>
-<p>REDCap internally stores every value as a string. To accept full responsibility of the data types, tell <a href="https://readr.tidyverse.org/reference/cols.html"><code>readr::cols()</code></a> to keep them as strings.</p>
+<div class="section level3">
+<h3 id="specify-everything-is-a-character">Specify Everything is a Character<a class="anchor" aria-label="anchor" href="#specify-everything-is-a-character"></a>
+</h3>
+<p>REDCap internally stores every value as a string. To accept full responsibility of the data types, tell <a href="https://readr.tidyverse.org/reference/cols.html" class="external-link"><code>readr::cols()</code></a> to keep them as strings.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Specify the column types.</span>
-<span class="va">desired_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"race"</span><span class="op">)</span>
-<span class="va">col_types</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html">cols</a></span><span class="op">(</span>.default <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_character</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<span class="va">desired_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"race"</span><span class="op">)</span>
+<span class="va">col_types</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">cols</a></span><span class="op">(</span>.default <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_character</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
   redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,
   token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,
@@ -530,7 +526,7 @@
   verbose     <span class="op">=</span> <span class="cn">FALSE</span>,
   col_types   <span class="op">=</span> <span class="va">col_types</span>
 <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2021-11-29 05:45:31.</span>
+<span class="co">#&gt; Starting to read 5 records  at 2022-02-22 23:46:57.</span>
 <span class="co">#&gt;   record_id race___1 race___2 race___3 race___4 race___5 race___6</span>
 <span class="co">#&gt; 1         1        0        0        0        0        1        0</span>
 <span class="co">#&gt; 2         2        0        0        1        0        1        0</span>
@@ -539,40 +535,40 @@
 <span class="co">#&gt; 5         5        1        0        0        0        0        1</span></code></pre></div>
 </div>
 </div>
-<div id="part-6---next-steps" class="section level1">
-<h1 class="hasAnchor">
-<a href="#part-6---next-steps" class="anchor"></a>Part 6 - Next Steps</h1>
-<div id="other-redcapr-resources" class="section level2">
-<h2 class="hasAnchor">
-<a href="#other-redcapr-resources" class="anchor"></a>Other REDCapR Resources</h2>
+<div class="section level2">
+<h2 id="part-6---next-steps">Part 6 - Next Steps<a class="anchor" aria-label="anchor" href="#part-6---next-steps"></a>
+</h2>
+<div class="section level3">
+<h3 id="other-redcapr-resources">Other REDCapR Resources<a class="anchor" aria-label="anchor" href="#other-redcapr-resources"></a>
+</h3>
 <p>In addition to documentation <a href="https://ouhscbbmc.github.io/REDCapR/reference/">for each function</a> the REDCapR package contains a handful of <a href="https://ouhscbbmc.github.io/REDCapR/articles/">vignettes</a> including a <a href="https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html">troubleshooting guide</a>.</p>
 </div>
-<div id="create-an-arch-for-reuse" class="section level2">
-<h2 class="hasAnchor">
-<a href="#create-an-arch-for-reuse" class="anchor"></a>Create an Arch for Reuse</h2>
-<p>When multiple R files use REDCapR call the same REDCap dataset, consider refactoring your scripts so that extraction code is written once, and called by the multiple analysis files. This “arch” pattern is described in slides 9-16 of the 2014 <a href="https://projectredcap.org/about/redcapcon/">REDCapCon</a> presentation, <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/Publications/Presentation-2014-09-REDCapCon/LiterateProgrammingPatternsAndPracticesWithREDCap.pptx">Literate Programming Patterns and Practices for Continuous Quality Improvement (CQI)</a>.</p>
+<div class="section level3">
+<h3 id="create-an-arch-for-reuse">Create an Arch for Reuse<a class="anchor" aria-label="anchor" href="#create-an-arch-for-reuse"></a>
+</h3>
+<p>When multiple R files use REDCapR call the same REDCap dataset, consider refactoring your scripts so that extraction code is written once, and called by the multiple analysis files. This “arch” pattern is described in slides 9-16 of the 2014 <a href="https://projectredcap.org/about/redcapcon/" class="external-link">REDCapCon</a> presentation, <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/Publications/Presentation-2014-09-REDCapCon/LiterateProgrammingPatternsAndPracticesWithREDCap.pptx" class="external-link">Literate Programming Patterns and Practices for Continuous Quality Improvement (CQI)</a>.</p>
 </div>
-<div id="downstream-reproducible-reports" class="section level2">
-<h2 class="hasAnchor">
-<a href="#downstream-reproducible-reports" class="anchor"></a>Downstream Reproducible Reports</h2>
-<p>Once the dataset is in R, take advantage of all the reproducible research tools available. Tomorrow, <a href="https://r-medicine.org/">R/Medicine</a> has a workshop on this topic using the exciting new <a href="https://quarto.org/">Quarto</a> program that’s similar to R Markdown. Also see the relevant <a href="https://www.youtube.com/playlist?list=PL4IzsxWztPdljYo7uE5G_R2PtYw3fUReo">R/Medicine 2020 presentation videos</a>. And of course, <a href="https://www.amazon.com/Yihui-Xie/e/B00E9CQJGY?ref=sr_ntt_srch_lnk_1&amp;qid=1625895927&amp;sr=1-1">any book by Yihui Xie and colleagues</a>.</p>
+<div class="section level3">
+<h3 id="downstream-reproducible-reports">Downstream Reproducible Reports<a class="anchor" aria-label="anchor" href="#downstream-reproducible-reports"></a>
+</h3>
+<p>Once the dataset is in R, take advantage of all the reproducible research tools available. Tomorrow, <a href="https://r-medicine.org/" class="external-link">R/Medicine</a> has a workshop on this topic using the exciting new <a href="https://quarto.org/" class="external-link">Quarto</a> program that’s similar to R Markdown. Also see the relevant <a href="https://www.youtube.com/playlist?list=PL4IzsxWztPdljYo7uE5G_R2PtYw3fUReo" class="external-link">R/Medicine 2020 presentation videos</a>. And of course, <a href="https://www.amazon.com/Yihui-Xie/e/B00E9CQJGY?ref=sr_ntt_srch_lnk_1&amp;qid=1625895927&amp;sr=1-1" class="external-link">any book by Yihui Xie and colleagues</a>.</p>
 </div>
-<div id="batching" class="section level2">
-<h2 class="hasAnchor">
-<a href="#batching" class="anchor"></a>Batching</h2>
+<div class="section level3">
+<h3 id="batching">Batching<a class="anchor" aria-label="anchor" href="#batching"></a>
+</h3>
 <p>By default, <code><a href="../reference/redcap_read.html">REDCapR::redcap_read()</a></code> requests datasets of 100 patients as a time, and stacks the resulting subsets together before returning a data.frame. This can be adjusted to improve performance; the ‘Details’ section of <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html#details"><code>REDCapR::redcap_read()</code></a> discusses the trade offs.</p>
 </div>
-<div id="writing-to-the-server" class="section level2">
-<h2 class="hasAnchor">
-<a href="#writing-to-the-server" class="anchor"></a>Writing to the Server</h2>
-<p>Reading record data is only one API capability. REDCapR <a href="https://ouhscbbmc.github.io/REDCapR/reference/">exposes 20+ API functions</a>, such as reading metadata, retrieving survey links, and writing records back to REDCap. This last operation is relevant in <a href="https://twitter.com/kennethmclean92">Kenneth McLean</a>’s presentation following a five-minute break.</p>
+<div class="section level3">
+<h3 id="writing-to-the-server">Writing to the Server<a class="anchor" aria-label="anchor" href="#writing-to-the-server"></a>
+</h3>
+<p>Reading record data is only one API capability. REDCapR <a href="https://ouhscbbmc.github.io/REDCapR/reference/">exposes 20+ API functions</a>, such as reading metadata, retrieving survey links, and writing records back to REDCap. This last operation is relevant in <a href="https://twitter.com/kennethmclean92" class="external-link">Kenneth McLean</a>’s presentation following a five-minute break.</p>
 </div>
 </div>
-<div id="notes" class="section level1">
-<h1 class="hasAnchor">
-<a href="#notes" class="anchor"></a>Notes</h1>
-<p>This vignette was originally designed for a 2021 R/Medicine REDCap workshop with <a href="https://www.med.umich.edu/higginslab/">Peter Higgins</a>, <a href="https://coloradosph.cuanschutz.edu/resources/directory/directory-profile/Miller-Amanda-UCD6000053152">Amanda Miller</a>, and <a href="https://twitter.com/kennethmclean92">Kenneth McLean</a>.</p>
-<p>This work was made possible in part by the NIH grant <a href="https://hsrproject.nlm.nih.gov/view_hsrproj_record/20204379">U54GM104938</a> to the <a href="http://osctr.ouhsc.edu">Oklahoma Shared Clinical and Translational Resource)</a>.</p>
+<div class="section level2">
+<h2 id="notes">Notes<a class="anchor" aria-label="anchor" href="#notes"></a>
+</h2>
+<p>This vignette was originally designed for a 2021 R/Medicine REDCap workshop with <a href="https://www.med.umich.edu/higginslab/" class="external-link">Peter Higgins</a>, <a href="https://coloradosph.cuanschutz.edu/resources/directory/directory-profile/Miller-Amanda-UCD6000053152" class="external-link">Amanda Miller</a>, and <a href="https://twitter.com/kennethmclean92" class="external-link">Kenneth McLean</a>.</p>
+<p>This work was made possible in part by the NIH grant <a href="https://hsrproject.nlm.nih.gov/view_hsrproj_record/20204379" class="external-link">U54GM104938</a> to the <a href="http://osctr.ouhsc.edu" class="external-link">Oklahoma Shared Clinical and Translational Resource)</a>.</p>
 </div>
   </div>
 
@@ -587,11 +583,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Will Beasley.</p>
+  <p></p>
+<p>Developed by Will Beasley.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>

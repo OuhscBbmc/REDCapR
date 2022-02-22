@@ -1,7 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://ouhscbbmc.github.io/REDCapR/404.html</loc>
+  </url>
+  <url>
+    <loc>https://ouhscbbmc.github.io/REDCapR/CONDUCT.html</loc>
+  </url>
+  <url>
+    <loc>https://ouhscbbmc.github.io/REDCapR/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://ouhscbbmc.github.io/REDCapR/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html</loc>
+  </url>
+  <url>
+    <loc>https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html</loc>
+  </url>
+  <url>
+    <loc>https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html</loc>
+  </url>
+  <url>
+    <loc>https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.html</loc>
+  </url>
+  <url>
+    <loc>https://ouhscbbmc.github.io/REDCapR/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html</loc>
+  </url>
+  <url>
+    <loc>https://ouhscbbmc.github.io/REDCapR/authors.html</loc>
+  </url>
+  <url>
     <loc>https://ouhscbbmc.github.io/REDCapR/index.html</loc>
+  </url>
+  <url>
+    <loc>https://ouhscbbmc.github.io/REDCapR/news/index.html</loc>
   </url>
   <url>
     <loc>https://ouhscbbmc.github.io/REDCapR/reference/REDCapR-package.html</loc>
@@ -14,6 +50,9 @@
   </url>
   <url>
     <loc>https://ouhscbbmc.github.io/REDCapR/reference/create_batch_glossary.html</loc>
+  </url>
+  <url>
+    <loc>https://ouhscbbmc.github.io/REDCapR/reference/index.html</loc>
   </url>
   <url>
     <loc>https://ouhscbbmc.github.io/REDCapR/reference/kernel_api.html</loc>
@@ -92,20 +131,5 @@
   </url>
   <url>
     <loc>https://ouhscbbmc.github.io/REDCapR/reference/validate.html</loc>
-  </url>
-  <url>
-    <loc>https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html</loc>
-  </url>
-  <url>
-    <loc>https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html</loc>
-  </url>
-  <url>
-    <loc>https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html</loc>
-  </url>
-  <url>
-    <loc>https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.html</loc>
-  </url>
-  <url>
-    <loc>https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html</loc>
   </url>
 </urlset>
