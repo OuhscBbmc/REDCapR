@@ -1,7 +1,13 @@
 #' @title Enumerate the instruments (forms)
 #'
-#' @description This function calls the 'instrument' function of the
-#' REDCap API.
+#' @description Export a list of the data collection instruments for a
+#' project. This includes their unique instrument name as seen in the
+#' second column of the Data Dictionary, as well as each instrument's
+#' corresponding instrument label, which is seen on a project's left-hand
+#' menu when entering data. The instruments will be ordered according to
+#' their order in the project.
+#' (Copied from "Export Instruments (Data Entry Forms)" method of
+#' REDCap API documentation, v.10.5.1)
 #'
 #' @param redcap_uri The URI (uniform resource identifier) of the REDCap
 #' project.  Required.
@@ -34,11 +40,7 @@
 #' viewable by executing [httr::httr_options()].  The `httr` package and
 #' documentation is available at https://cran.r-project.org/package=httr.
 #'
-#' As of REDCap version 6.14.2, three variable types are *not* returned in
-#' this call: calculated, file, and descriptive.  All variables returned are
-#' writable/uploadable.
-#'
-#' @author Will Beasley
+#' @author Victor Castro, Will Beasley
 #'
 #' @references The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,

@@ -48,8 +48,6 @@ test_that("Bad URI", {
     )#,
     # regexp = expected_outcome_message
   )
-
-
 })
 
 test_that("bad token -Error", {

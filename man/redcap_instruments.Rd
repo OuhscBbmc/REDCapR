@@ -40,17 +40,19 @@ empty string to save RAM.
 }
 }
 \description{
-This function calls the 'instrument' function of the
-REDCap API.
+Export a list of the data collection instruments for a
+project. This includes their unique instrument name as seen in the
+second column of the Data Dictionary, as well as each instrument's
+corresponding instrument label, which is seen on a project's left-hand
+menu when entering data. The instruments will be ordered according to
+their order in the project.
+(Copied from "Export Instruments (Data Entry Forms)" method of
+REDCap API documentation, v.10.5.1)
 }
 \details{
 The full list of configuration options accepted by the \code{httr} package is
 viewable by executing \code{\link[httr:httr_options]{httr::httr_options()}}.  The \code{httr} package and
 documentation is available at https://cran.r-project.org/package=httr.
-
-As of REDCap version 6.14.2, three variable types are \emph{not} returned in
-this call: calculated, file, and descriptive.  All variables returned are
-writable/uploadable.
 }
 \examples{
 \dontrun{
@@ -68,5 +70,5 @@ If you do not have an account for the wiki, please ask your campus REDCap
 administrator to send you the static material.
 }
 \author{
-Will Beasley
+Victor Castro, Will Beasley
 }

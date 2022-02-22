@@ -1,7 +1,10 @@
 #' @title Enumerate the instruments to event mappings
 #'
-#' @description This function calls the 'formEventMapping' function of the
-#' REDCap API.
+#' @description Export the instrument-event mappings for a project
+#' (i.e., how the data collection instruments are designated for certain
+#' events in a longitudinal project).
+#' (Copied from "Export Instrument-Event Mappings" method of
+#' REDCap API documentation, v.10.5.1)
 #'
 #' @param redcap_uri The URI (uniform resource identifier) of the REDCap
 #' project.  Required.
@@ -35,11 +38,7 @@
 #' viewable by executing [httr::httr_options()].  The `httr` package and
 #' documentation is available at https://cran.r-project.org/package=httr.
 #'
-#' As of REDCap version 6.14.2, three variable types are *not* returned in
-#' this call: calculated, file, and descriptive.  All variables returned are
-#' writable/uploadable.
-#'
-#' @author Will Beasley
+#' @author Victor Castro, Will Beasley
 #'
 #' @references The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
@@ -50,16 +49,16 @@
 #'
 #' @examples
 #' \dontrun{
-#' uri         <- "https://bbmc.ouhsc.edu/redcap/api/"
-#' token       <- "9A81268476645C4E5F03428B8AC3AA7B"
-#' ds_variable <- REDCapR::redcap_event_instruments(redcap_uri=uri, token=token)$data
+#' uri                 <- "https://bbmc.ouhsc.edu/redcap/api/"
+#' token               <- "0434F0E9CF53ED0587847AB6E51DE762"
+#' ds_event_instrument <- REDCapR::redcap_event_instruments(redcap_uri=uri, token=token)$data
 #' }
 
 #' @export
 redcap_event_instruments <- function(
   redcap_uri,
   token,
-  arms              = c('1'),
+  arms              = c("1"),
   verbose           = TRUE,
   config_options    = NULL
 ) {

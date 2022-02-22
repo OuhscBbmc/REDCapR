@@ -48,23 +48,22 @@ empty string to save RAM.
 }
 }
 \description{
-This function calls the 'formEventMapping' function of the
-REDCap API.
+Export the instrument-event mappings for a project
+(i.e., how the data collection instruments are designated for certain
+events in a longitudinal project).
+(Copied from "Export Instrument-Event Mappings" method of
+REDCap API documentation, v.10.5.1)
 }
 \details{
 The full list of configuration options accepted by the \code{httr} package is
 viewable by executing \code{\link[httr:httr_options]{httr::httr_options()}}.  The \code{httr} package and
 documentation is available at https://cran.r-project.org/package=httr.
-
-As of REDCap version 6.14.2, three variable types are \emph{not} returned in
-this call: calculated, file, and descriptive.  All variables returned are
-writable/uploadable.
 }
 \examples{
 \dontrun{
-uri         <- "https://bbmc.ouhsc.edu/redcap/api/"
-token       <- "9A81268476645C4E5F03428B8AC3AA7B"
-ds_variable <- REDCapR::redcap_event_instruments(redcap_uri=uri, token=token)$data
+uri                 <- "https://bbmc.ouhsc.edu/redcap/api/"
+token               <- "0434F0E9CF53ED0587847AB6E51DE762"
+ds_event_instrument <- REDCapR::redcap_event_instruments(redcap_uri=uri, token=token)$data
 }
 }
 \references{
@@ -76,5 +75,5 @@ If you do not have an account for the wiki, please ask your campus REDCap
 administrator to send you the static material.
 }
 \author{
-Will Beasley
+Victor Castro, Will Beasley
 }
