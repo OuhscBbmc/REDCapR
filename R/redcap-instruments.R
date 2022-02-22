@@ -76,7 +76,7 @@ redcap_instruments <- function(
     format    = "csv"
   )
 
-  col_types = readr::cols(
+  col_types <- readr::cols(
     instrument_name   = readr::col_character(),
     instrument_label  = readr::col_character()
   )

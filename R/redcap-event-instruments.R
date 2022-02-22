@@ -76,7 +76,7 @@ redcap_event_instruments <- function(
     'arms[0]' = collapse_vector(arms, NULL)
   )
 
-  col_types = readr::cols(
+  col_types <- readr::cols(
     arm_num           = readr::col_integer(),
     unique_event_name = readr::col_character(),
     form              = readr::col_character()
