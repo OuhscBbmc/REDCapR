@@ -69,6 +69,9 @@ https://community.projectredcap.org/articles/462/api-examples.html).
 If you do not have an account for the wiki, please ask your campus REDCap
 administrator to send you the static material.
 }
+\seealso{
+\code{\link[=redcap_event_instruments]{redcap_event_instruments()}}
+}
 \author{
 Victor Castro, Will Beasley
 }

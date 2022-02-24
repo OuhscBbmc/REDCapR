@@ -49,6 +49,8 @@
 #' If you do not have an account for the wiki, please ask your campus REDCap
 #' administrator to send you the static material.
 #'
+#' @seealso [redcap_event_instruments()]
+#'
 #' @examples
 #' \dontrun{
 #' uri           <- "https://bbmc.ouhsc.edu/redcap/api/"
