@@ -1,18 +1,18 @@
 Description
 ===============================================
 
-This submission includes new features and also addresses a few minor tests breaking from yesterday's readr 2.0 release (<https://github.com/OuhscBbmc/REDCapR/issues/343>).
+This submission is primarily to address a unit test that is lacking a `testthat::skip_on_cran()` call.  It also includes a few new features.
 
-There is a [single existing CRAN daily note](https://cran.rstudio.com/web/checks/check_results_REDCapR.html); it has been addressed (ie, 'LazyData' is specified without a 'data' directory).
+Periodically there is a [single CRAN daily note](https://cran.rstudio.com/web/checks/check_results_REDCapR.html); it has been addressed (<https://github.com/OuhscBbmc/REDCapR/issues/352>).
 
 Thank you for taking the time to review my submission, and please tell me if there's something else I should do for CRAN.  -Will Beasley
 
 Test environments
 -----------------------------------------------
 
-1. Local Ubuntu, R 4.1.0 patched
-1. Local Win8, R 4.1.0 patched
-1. Local Win10, R 4.1.0 patched
+1. Local Ubuntu, R 4.1.2 patched
+1. Local Win8, R 4.1.2 patched
+1. Local Win10, R 4.1.2 patched
 1. R-hub
     1. [Ubuntu Linux 20.04 LTS, R-release, GCC](https://builder.r-hub.io/status/REDCapR_1.0.0.tar.gz-d554cfab8fed4acba83ca159d2a14a7b)
     1. [Fedora Linux, R-devel, clang, gfortran](https://builder.r-hub.io/status/REDCapR_1.0.0.tar.gz-80a6d6b66bb84847b61d31f6029f5628)

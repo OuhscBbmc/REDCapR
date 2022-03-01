@@ -51,6 +51,8 @@ reference:
       - redcap_arm_export
       - redcap_delete
       - redcap_download_instrument
+      - redcap_event_instruments
+      - redcap_instruments
       - redcap_next_free_record_name
       - redcap_metadata_read
       - redcap_metadata_write
