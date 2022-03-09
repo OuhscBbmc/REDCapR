@@ -27,6 +27,7 @@ redcap_read(
   filter_logic = "",
   datetime_range_begin = as.POSIXct(NA),
   datetime_range_end = as.POSIXct(NA),
+  export_blankforgray_form_status = FALSE,
   col_types = NULL,
   guess_type = TRUE,
   guess_max = NULL,
@@ -117,6 +118,13 @@ modified \emph{before} a given datetime, provide a
 \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/as.POSIXlt.html}{POSIXct}
 value.
 If not specified, REDCap will assume no end time.}
+
+\item{export_blankforgray_form_status}{A boolean value that specifies whether
+or not to export blank values for instrument complete status fields that have
+a gray status icon. All instrument complete status fields having a gray icon
+can be exported either as a blank value or as "0" (Incomplete). Blank values
+are recommended in a data export if the data will be re-imported into a
+REDCap project. Default is \code{FALSE}.}
 
 \item{col_types}{A \code{\link[readr:cols]{readr::cols()}} object passed internally to
 \code{\link[readr:read_delim]{readr::read_csv()}}.  Optional.}
