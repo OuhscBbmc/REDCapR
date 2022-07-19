@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9002</span>
       </span>
     </div>
 
@@ -61,7 +61,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">redcap_users_export</span><span class="op">(</span><span class="va">redcap_uri</span>, <span class="va">token</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>, config_options <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">redcap_users_export</span><span class="op">(</span><span class="va">redcap_uri</span>, <span class="va">token</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>, config_options <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -69,59 +69,68 @@
     <dl><dt>redcap_uri</dt>
 <dd><p>The URI (uniform resource identifier) of the REDCap
 project.  Required.</p></dd>
+
+
 <dt>token</dt>
 <dd><p>The user-specific string that serves as the password for a
 project.  Required.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>A boolean value indicating if <code>message</code>s should be printed
 to the R console during the operation.  The verbose output might contain
 sensitive information (<em>e.g.</em> PHI), so turn this off if the output might
 be visible somewhere public. Optional.</p></dd>
+
+
 <dt>config_options</dt>
 <dd><p>A list of options to pass to <code>POST</code> method in the
 <code>httr</code> package.  See the details below.  Optional.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a <a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">utils::packageDescription</a>.</p>
+    
+
+<p>a <a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">utils::packageDescription</a>.</p>
     </div>
     <div id="note">
     <h2>Note</h2>
-    <p><strong>Documentation in REDCap 8.4.0</strong></p><div class="sourceCode"><pre><code>This method allows you to export the list of users for a project,
-including their user privileges and also email address, first name,
-and last name.
-
-Note: If the user has been assigned to a user role, it will return
-the user with the role's defined privileges.
-</code></pre></div>
-
+    <p><strong>Documentation in REDCap 8.4.0</strong></p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a>This method allows you to export the list of users <span class="cf">for</span> a project,</span>
+<span id="cb1-2"><a href="#cb1-2"></a>including their user privileges and also email address, first name,</span>
+<span id="cb1-3"><a href="#cb1-3"></a>and last name.</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a>Note<span class="op">:</span><span class="st"> </span>If the user has been assigned to a user role, it will return</span>
+<span id="cb1-6"><a href="#cb1-6"></a>the user with the role<span class="st">'s defined privileges.</span></span></code></pre><p></p></div>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">uri</span>      <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span>
-<span class="r-in"><span class="va">token</span>    <span class="op">&lt;-</span> <span class="st">"06DEFB601F9B46847DAA9DF0CFA951B4"</span></span>
-<span class="r-in"><span class="va">result</span>   <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_users_export</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">uri</span>      <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
+<span class="r-in"><span><span class="va">token</span>    <span class="op">&lt;-</span> <span class="st">"06DEFB601F9B46847DAA9DF0CFA951B4"</span></span></span>
+<span class="r-in"><span><span class="va">result</span>   <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_users_export</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The REDCap users were successfully exported in 0.2 seconds.  The http status code was 200.</span>
-<span class="r-in"><span class="va">result</span><span class="op">$</span><span class="va">data_user</span></span>
+<span class="r-in"><span><span class="va">result</span><span class="op">$</span><span class="va">data_user</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 31</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   username email firstname lastname expiration data_access_gro… data_access_gro…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> unittes… wibe… Unit Test PHI Free <span style="color: #BB0000;">NA</span>         daga             331             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> wbeasle… will… Will      Beasley… <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>               <span style="color: #BB0000;">NA</span>              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 24 more variables: design &lt;lgl&gt;, user_rights &lt;lgl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   data_access_groups &lt;lgl&gt;, data_export &lt;chr&gt;, reports &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   username       email first…¹ lastn…² expiration data_…³ data_…⁴ design user_…⁵</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> unittestphifr… wibe… Unit T… PHI Fr… <span style="color: #BB0000;">NA</span>         daga    331     FALSE  FALSE  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> wbeasleya      will… Will    Beasle… <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      TRUE   TRUE   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 22 more variables: data_access_groups &lt;lgl&gt;, reports &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   stats_and_charts &lt;lgl&gt;, manage_survey_participants &lt;lgl&gt;, calendar &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   data_import_tool &lt;lgl&gt;, data_comparison_tool &lt;lgl&gt;, logging &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   file_repository &lt;lgl&gt;, data_quality_create &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   data_quality_execute &lt;lgl&gt;, api_export &lt;lgl&gt;, api_import &lt;lgl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mobile_app &lt;lgl&gt;, mobile_app_download_data &lt;lgl&gt;, record_create &lt;lgl&gt;, …</span></span>
-<span class="r-in"><span class="va">result</span><span class="op">$</span><span class="va">data_user_form</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mobile_app &lt;lgl&gt;, mobile_app_download_data &lt;lgl&gt;, record_create &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   record_rename &lt;lgl&gt;, record_delete &lt;lgl&gt;, lock_records_all_forms &lt;lgl&gt;, …</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span>
+<span class="r-in"><span><span class="va">result</span><span class="op">$</span><span class="va">data_user_form</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   username        form_name    permission_id permission</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> unittestphifree demographics             1 edit_form </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> wbeasleya       demographics             1 edit_form </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> wbeasleya       <span style="color: #BB0000;">NA</span>                      <span style="color: #BB0000;">NA</span> unknown   </span>
 </code></pre></div>
     </div>
   </div>
@@ -136,7 +145,7 @@ the user with the role's defined privileges.
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

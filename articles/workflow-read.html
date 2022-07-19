@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9002</span>
       </span>
     </div>
 
@@ -114,10 +114,10 @@
 </h3>
 <p>First confirm that the REDCapR package is installed on your local machine. If not, the following line will throw the error <code>Loading required namespace: REDCapR.  Failed with error: ‘there is no package called ‘REDCapR’’</code>. If this call fails, follow the installation instructions on the <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> webpage.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"REDCapR"</span><span class="op">)</span>
-<span class="co">#&gt; Loading required namespace: REDCapR</span>
-
-<span class="co"># If this fails, run `install.packages("REDCapR")` or `remotes::install_github(repo="OuhscBbmc/REDCapR")`</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"REDCapR"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Loading required namespace: REDCapR</span></span>
+<span></span>
+<span><span class="co"># If this fails, run `install.packages("REDCapR")` or `remotes::install_github(repo="OuhscBbmc/REDCapR")`</span></span></code></pre></div>
 <p>If you’re a workshop attendee, you can use this vignette to copy snippets of code to your local machine to follow along with the examples: <a href="https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html" class="uri">https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html</a>.</p>
 </div>
 <div class="section level3">
@@ -153,7 +153,7 @@
 </h2>
 <p>The REDCap API token is essentially a combination of a personal password and the ID of the specific project you’re requesting data from. Protect it like any other password to PHI (<a href="https://www.hhs.gov/answers/hipaa/what-is-phi/index.html" class="external-link">protected health information</a>). For a project with PHI, <strong>never hard-code the password directly in an R file</strong>. In other words, no PHI project should be accessed with an R file that includes the line</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">my_secret_token</span> <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">my_secret_token</span> <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span></code></pre></div>
 <p>Instead, we suggest storing the token in a location that can be accessed by only you. We have two recommendations.</p>
 <div class="section level3">
 <h3 id="security-method-1-token-file">Security Method 1: Token File<a class="anchor" aria-label="anchor" href="#security-method-1-token-file"></a>
@@ -166,27 +166,27 @@
 "https://bbmc.ouhsc.edu/redcap/api/","myusername",213,D70F9ACD1EDD6F151C6EA78683944E98,"write data"</code></pre>
 <p>To retrieve the credentials for the first project listed above, pass the value of “153” to <code>project_id</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">path_credential</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"misc/example.credentials"</span>, package <span class="op">=</span> <span class="st">"REDCapR"</span><span class="op">)</span>
-<span class="va">credential</span>  <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/retrieve_credential.html">retrieve_credential_local</a></span><span class="op">(</span>
-  path_credential <span class="op">=</span> <span class="va">path_credential</span>, 
-  project_id      <span class="op">=</span> <span class="fl">153</span>
-<span class="op">)</span>
-
-<span class="va">credential</span>
-<span class="co">#&gt; $redcap_uri</span>
-<span class="co">#&gt; [1] "https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $username</span>
-<span class="co">#&gt; [1] "myusername"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $project_id</span>
-<span class="co">#&gt; [1] 153</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $token</span>
-<span class="co">#&gt; [1] "9A81268476645C4E5F03428B8AC3AA7B"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $comment</span>
-<span class="co">#&gt; [1] "simple static (read-only) test project"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">path_credential</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"misc/example.credentials"</span>, package <span class="op">=</span> <span class="st">"REDCapR"</span><span class="op">)</span></span>
+<span><span class="va">credential</span>  <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/retrieve_credential.html">retrieve_credential_local</a></span><span class="op">(</span></span>
+<span>  path_credential <span class="op">=</span> <span class="va">path_credential</span>, </span>
+<span>  project_id      <span class="op">=</span> <span class="fl">153</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">credential</span></span>
+<span><span class="co">#&gt; $redcap_uri</span></span>
+<span><span class="co">#&gt; [1] "https://bbmc.ouhsc.edu/redcap/api/"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $username</span></span>
+<span><span class="co">#&gt; [1] "myusername"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $project_id</span></span>
+<span><span class="co">#&gt; [1] 153</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $token</span></span>
+<span><span class="co">#&gt; [1] "9A81268476645C4E5F03428B8AC3AA7B"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $comment</span></span>
+<span><span class="co">#&gt; [1] "simple static (read-only) test project"</span></span></code></pre></div>
 <p>A credential file is already created for this vignette. In your next real project, call <a href="https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html"><code>create_credential_local()</code></a> to start a well-formed csv file that can contain tokens.</p>
 <p>Compared to the method below, this one is less secure but easier to establish.</p>
 </div>
@@ -202,144 +202,144 @@
 </h2>
 <p>The <code>redcap_uri</code> and <code>token</code> fields are the only required arguments of <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code>REDCapR::redcap_read()</code></a>; both are in the credential object created in the previous section.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds_1</span> <span class="op">&lt;-</span> 
-  <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
-    redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>, 
-    token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>
-  <span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.5 seconds.  The http status code was 200.</span>
-<span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</span>
-<span class="co">#&gt; Starting to read 5 records  at 2022-02-24 16:16:09.</span>
-<span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span>
-<span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
-<span class="co">#&gt; cols(</span>
-<span class="co">#&gt;   .default = col_double(),</span>
-<span class="co">#&gt;   name_first = <span style="color: #BB0000;">col_character()</span>,</span>
-<span class="co">#&gt;   name_last = <span style="color: #BB0000;">col_character()</span>,</span>
-<span class="co">#&gt;   address = <span style="color: #BB0000;">col_character()</span>,</span>
-<span class="co">#&gt;   telephone = <span style="color: #BB0000;">col_character()</span>,</span>
-<span class="co">#&gt;   email = <span style="color: #BB0000;">col_character()</span>,</span>
-<span class="co">#&gt;   dob = <span style="color: #0000BB;">col_date(format = "")</span>,</span>
-<span class="co">#&gt;   comments = <span style="color: #BB0000;">col_character()</span>,</span>
-<span class="co">#&gt;   mugshot = <span style="color: #BB0000;">col_character()</span></span>
-<span class="co">#&gt; )</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` for the full column specifications.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ds_1</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span></span>
+<span>    redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>, </span>
+<span>    token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span></span>
+<span>  <span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
+<span><span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; Starting to read 5 records  at 2022-07-19 20:06:03.</span></span>
+<span><span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span></span>
+<span><span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; cols(</span></span>
+<span><span class="co">#&gt;   .default = col_double(),</span></span>
+<span><span class="co">#&gt;   name_first = <span style="color: #BB0000;">col_character()</span>,</span></span>
+<span><span class="co">#&gt;   name_last = <span style="color: #BB0000;">col_character()</span>,</span></span>
+<span><span class="co">#&gt;   address = <span style="color: #BB0000;">col_character()</span>,</span></span>
+<span><span class="co">#&gt;   telephone = <span style="color: #BB0000;">col_character()</span>,</span></span>
+<span><span class="co">#&gt;   email = <span style="color: #BB0000;">col_character()</span>,</span></span>
+<span><span class="co">#&gt;   dob = <span style="color: #0000BB;">col_date(format = "")</span>,</span></span>
+<span><span class="co">#&gt;   comments = <span style="color: #BB0000;">col_character()</span>,</span></span>
+<span><span class="co">#&gt;   mugshot = <span style="color: #BB0000;">col_character()</span></span></span>
+<span><span class="co">#&gt; )</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` for the full column specifications.</span></span></code></pre></div>
 <p>At this point, the data.frame <code>ds_1</code> has everything you need to start analyzing the project.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds_1</span>
-<span class="co">#&gt;   record_id name_first name_last                                 address</span>
-<span class="co">#&gt; 1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232</span>
-<span class="co">#&gt; 2         2     Tumtum  Nutmouse 14 Rose Cottage Blvd.\nKenning UK 34243</span>
-<span class="co">#&gt; 3         3     Marcus      Wood          243 Hill St.\nGuthrie OK 73402</span>
-<span class="co">#&gt; 4         4      Trudy       DAG          342 Elm\nDuncanville TX, 75116</span>
-<span class="co">#&gt; 5         5   John Lee    Walker      Hotel Suite\nNew Orleans LA, 70115</span>
-<span class="co">#&gt;        telephone               email        dob age sex demographics_complete</span>
-<span class="co">#&gt; 1 (405) 321-1111     nutty@mouse.com 2003-08-30  11   0                     2</span>
-<span class="co">#&gt; 2 (405) 321-2222    tummy@mouse.comm 2003-03-10  11   1                     2</span>
-<span class="co">#&gt; 3 (405) 321-3333        mw@mwood.net 1934-04-09  80   1                     2</span>
-<span class="co">#&gt; 4 (405) 321-4444 peroxide@blonde.com 1952-11-02  61   0                     2</span>
-<span class="co">#&gt; 5 (405) 321-5555  left@hippocket.com 1955-04-15  59   1                     2</span>
-<span class="co">#&gt;   height weight   bmi</span>
-<span class="co">#&gt; 1   7.00      1 204.1</span>
-<span class="co">#&gt; 2   6.00      1 277.8</span>
-<span class="co">#&gt; 3 180.00     80  24.7</span>
-<span class="co">#&gt; 4 165.00     54  19.8</span>
-<span class="co">#&gt; 5 193.04    104  27.9</span>
-<span class="co">#&gt;                                                                                                      comments</span>
-<span class="co">#&gt; 1                                                                     Character in a book, with some guessing</span>
-<span class="co">#&gt; 2                                                                          A mouse character from a good book</span>
-<span class="co">#&gt; 3                                                                                          completely made up</span>
-<span class="co">#&gt; 4 This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail</span>
-<span class="co">#&gt; 5                 Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache</span>
-<span class="co">#&gt;         mugshot health_complete race___1 race___2 race___3 race___4 race___5</span>
-<span class="co">#&gt; 1 mugshot-1.jpg               1        0        0        0        0        1</span>
-<span class="co">#&gt; 2 mugshot-2.jpg               0        0        0        1        0        1</span>
-<span class="co">#&gt; 3 mugshot-3.jpg               2        0        0        0        1        1</span>
-<span class="co">#&gt; 4 mugshot-4.jpg               2        0        1        0        0        1</span>
-<span class="co">#&gt; 5 mugshot-5.jpg               0        1        0        0        0        0</span>
-<span class="co">#&gt;   race___6 ethnicity interpreter_needed race_and_ethnicity_complete</span>
-<span class="co">#&gt; 1        0         1                  0                           2</span>
-<span class="co">#&gt; 2        0         1                  0                           0</span>
-<span class="co">#&gt; 3        0         0                  1                           2</span>
-<span class="co">#&gt; 4        0         1                 NA                           2</span>
-<span class="co">#&gt; 5        1         2                  0                           2</span>
-
-<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">ds_1</span><span class="op">$</span><span class="va">weight</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ds_1</span></span>
+<span><span class="co">#&gt;   record_id name_first name_last                                 address</span></span>
+<span><span class="co">#&gt; 1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232</span></span>
+<span><span class="co">#&gt; 2         2     Tumtum  Nutmouse 14 Rose Cottage Blvd.\nKenning UK 34243</span></span>
+<span><span class="co">#&gt; 3         3     Marcus      Wood          243 Hill St.\nGuthrie OK 73402</span></span>
+<span><span class="co">#&gt; 4         4      Trudy       DAG          342 Elm\nDuncanville TX, 75116</span></span>
+<span><span class="co">#&gt; 5         5   John Lee    Walker      Hotel Suite\nNew Orleans LA, 70115</span></span>
+<span><span class="co">#&gt;        telephone               email        dob age sex demographics_complete</span></span>
+<span><span class="co">#&gt; 1 (405) 321-1111     nutty@mouse.com 2003-08-30  11   0                     2</span></span>
+<span><span class="co">#&gt; 2 (405) 321-2222    tummy@mouse.comm 2003-03-10  11   1                     2</span></span>
+<span><span class="co">#&gt; 3 (405) 321-3333        mw@mwood.net 1934-04-09  80   1                     2</span></span>
+<span><span class="co">#&gt; 4 (405) 321-4444 peroxide@blonde.com 1952-11-02  61   0                     2</span></span>
+<span><span class="co">#&gt; 5 (405) 321-5555  left@hippocket.com 1955-04-15  59   1                     2</span></span>
+<span><span class="co">#&gt;   height weight   bmi</span></span>
+<span><span class="co">#&gt; 1   7.00      1 204.1</span></span>
+<span><span class="co">#&gt; 2   6.00      1 277.8</span></span>
+<span><span class="co">#&gt; 3 180.00     80  24.7</span></span>
+<span><span class="co">#&gt; 4 165.00     54  19.8</span></span>
+<span><span class="co">#&gt; 5 193.04    104  27.9</span></span>
+<span><span class="co">#&gt;                                                                                                      comments</span></span>
+<span><span class="co">#&gt; 1                                                                     Character in a book, with some guessing</span></span>
+<span><span class="co">#&gt; 2                                                                          A mouse character from a good book</span></span>
+<span><span class="co">#&gt; 3                                                                                          completely made up</span></span>
+<span><span class="co">#&gt; 4 This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail</span></span>
+<span><span class="co">#&gt; 5                 Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache</span></span>
+<span><span class="co">#&gt;         mugshot health_complete race___1 race___2 race___3 race___4 race___5</span></span>
+<span><span class="co">#&gt; 1 mugshot-1.jpg               1        0        0        0        0        1</span></span>
+<span><span class="co">#&gt; 2 mugshot-2.jpg               0        0        0        1        0        1</span></span>
+<span><span class="co">#&gt; 3 mugshot-3.jpg               2        0        0        0        1        1</span></span>
+<span><span class="co">#&gt; 4 mugshot-4.jpg               2        0        1        0        0        1</span></span>
+<span><span class="co">#&gt; 5 mugshot-5.jpg               0        1        0        0        0        0</span></span>
+<span><span class="co">#&gt;   race___6 ethnicity interpreter_needed race_and_ethnicity_complete</span></span>
+<span><span class="co">#&gt; 1        0         1                  0                           2</span></span>
+<span><span class="co">#&gt; 2        0         1                  0                           0</span></span>
+<span><span class="co">#&gt; 3        0         0                  1                           2</span></span>
+<span><span class="co">#&gt; 4        0         1                 NA                           2</span></span>
+<span><span class="co">#&gt; 5        1         2                  0                           2</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">ds_1</span><span class="op">$</span><span class="va">weight</span><span class="op">)</span></span></code></pre></div>
 <p><img src="workflow-read_files/figure-html/unstructured-2-1.png" width="700"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">ds_1</span><span class="op">)</span>
-<span class="co">#&gt;    record_id  name_first         name_last           address         </span>
-<span class="co">#&gt;  Min.   :1   Length:5           Length:5           Length:5          </span>
-<span class="co">#&gt;  1st Qu.:2   Class :character   Class :character   Class :character  </span>
-<span class="co">#&gt;  Median :3   Mode  :character   Mode  :character   Mode  :character  </span>
-<span class="co">#&gt;  Mean   :3                                                           </span>
-<span class="co">#&gt;  3rd Qu.:4                                                           </span>
-<span class="co">#&gt;  Max.   :5                                                           </span>
-<span class="co">#&gt;                                                                      </span>
-<span class="co">#&gt;   telephone            email                dob                  age      </span>
-<span class="co">#&gt;  Length:5           Length:5           Min.   :1934-04-09   Min.   :11.0  </span>
-<span class="co">#&gt;  Class :character   Class :character   1st Qu.:1952-11-02   1st Qu.:11.0  </span>
-<span class="co">#&gt;  Mode  :character   Mode  :character   Median :1955-04-15   Median :59.0  </span>
-<span class="co">#&gt;                                        Mean   :1969-11-06   Mean   :44.4  </span>
-<span class="co">#&gt;                                        3rd Qu.:2003-03-10   3rd Qu.:61.0  </span>
-<span class="co">#&gt;                                        Max.   :2003-08-30   Max.   :80.0  </span>
-<span class="co">#&gt;                                                                           </span>
-<span class="co">#&gt;       sex      demographics_complete     height          weight   </span>
-<span class="co">#&gt;  Min.   :0.0   Min.   :2             Min.   :  6.0   Min.   :  1  </span>
-<span class="co">#&gt;  1st Qu.:0.0   1st Qu.:2             1st Qu.:  7.0   1st Qu.:  1  </span>
-<span class="co">#&gt;  Median :1.0   Median :2             Median :165.0   Median : 54  </span>
-<span class="co">#&gt;  Mean   :0.6   Mean   :2             Mean   :110.2   Mean   : 48  </span>
-<span class="co">#&gt;  3rd Qu.:1.0   3rd Qu.:2             3rd Qu.:180.0   3rd Qu.: 80  </span>
-<span class="co">#&gt;  Max.   :1.0   Max.   :2             Max.   :193.0   Max.   :104  </span>
-<span class="co">#&gt;                                                                   </span>
-<span class="co">#&gt;       bmi          comments           mugshot          health_complete</span>
-<span class="co">#&gt;  Min.   : 19.8   Length:5           Length:5           Min.   :0      </span>
-<span class="co">#&gt;  1st Qu.: 24.7   Class :character   Class :character   1st Qu.:0      </span>
-<span class="co">#&gt;  Median : 27.9   Mode  :character   Mode  :character   Median :1      </span>
-<span class="co">#&gt;  Mean   :110.9                                         Mean   :1      </span>
-<span class="co">#&gt;  3rd Qu.:204.1                                         3rd Qu.:2      </span>
-<span class="co">#&gt;  Max.   :277.8                                         Max.   :2      </span>
-<span class="co">#&gt;                                                                       </span>
-<span class="co">#&gt;     race___1      race___2      race___3      race___4      race___5  </span>
-<span class="co">#&gt;  Min.   :0.0   Min.   :0.0   Min.   :0.0   Min.   :0.0   Min.   :0.0  </span>
-<span class="co">#&gt;  1st Qu.:0.0   1st Qu.:0.0   1st Qu.:0.0   1st Qu.:0.0   1st Qu.:1.0  </span>
-<span class="co">#&gt;  Median :0.0   Median :0.0   Median :0.0   Median :0.0   Median :1.0  </span>
-<span class="co">#&gt;  Mean   :0.2   Mean   :0.2   Mean   :0.2   Mean   :0.2   Mean   :0.8  </span>
-<span class="co">#&gt;  3rd Qu.:0.0   3rd Qu.:0.0   3rd Qu.:0.0   3rd Qu.:0.0   3rd Qu.:1.0  </span>
-<span class="co">#&gt;  Max.   :1.0   Max.   :1.0   Max.   :1.0   Max.   :1.0   Max.   :1.0  </span>
-<span class="co">#&gt;                                                                       </span>
-<span class="co">#&gt;     race___6     ethnicity interpreter_needed race_and_ethnicity_complete</span>
-<span class="co">#&gt;  Min.   :0.0   Min.   :0   Min.   :0.00       Min.   :0.0                </span>
-<span class="co">#&gt;  1st Qu.:0.0   1st Qu.:1   1st Qu.:0.00       1st Qu.:2.0                </span>
-<span class="co">#&gt;  Median :0.0   Median :1   Median :0.00       Median :2.0                </span>
-<span class="co">#&gt;  Mean   :0.2   Mean   :1   Mean   :0.25       Mean   :1.6                </span>
-<span class="co">#&gt;  3rd Qu.:0.0   3rd Qu.:1   3rd Qu.:0.25       3rd Qu.:2.0                </span>
-<span class="co">#&gt;  Max.   :1.0   Max.   :2   Max.   :1.00       Max.   :2.0                </span>
-<span class="co">#&gt;                            NA's   :1</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">age</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">bmi</span>, data <span class="op">=</span> <span class="va">ds_1</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Call:</span>
-<span class="co">#&gt; lm(formula = age ~ 1 + sex + bmi, data = ds_1)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Residuals:</span>
-<span class="co">#&gt;       1       2       3       4       5 </span>
-<span class="co">#&gt;  -2.491   1.954   9.132   2.491 -11.086 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;             Estimate Std. Error t value Pr(&gt;|t|)  </span>
-<span class="co">#&gt; (Intercept) 63.34496    8.89980   7.118   0.0192 *</span>
-<span class="co">#&gt; sex         13.55626    9.62958   1.408   0.2945  </span>
-<span class="co">#&gt; bmi         -0.24426    0.04337  -5.632   0.0301 *</span>
-<span class="co">#&gt; ---</span>
-<span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Residual standard error: 10.55 on 2 degrees of freedom</span>
-<span class="co">#&gt; Multiple R-squared:  0.9442, Adjusted R-squared:  0.8884 </span>
-<span class="co">#&gt; F-statistic: 16.92 on 2 and 2 DF,  p-value: 0.05581</span></code></pre></div>
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">ds_1</span><span class="op">)</span></span>
+<span><span class="co">#&gt;    record_id  name_first         name_last           address         </span></span>
+<span><span class="co">#&gt;  Min.   :1   Length:5           Length:5           Length:5          </span></span>
+<span><span class="co">#&gt;  1st Qu.:2   Class :character   Class :character   Class :character  </span></span>
+<span><span class="co">#&gt;  Median :3   Mode  :character   Mode  :character   Mode  :character  </span></span>
+<span><span class="co">#&gt;  Mean   :3                                                           </span></span>
+<span><span class="co">#&gt;  3rd Qu.:4                                                           </span></span>
+<span><span class="co">#&gt;  Max.   :5                                                           </span></span>
+<span><span class="co">#&gt;                                                                      </span></span>
+<span><span class="co">#&gt;   telephone            email                dob                  age      </span></span>
+<span><span class="co">#&gt;  Length:5           Length:5           Min.   :1934-04-09   Min.   :11.0  </span></span>
+<span><span class="co">#&gt;  Class :character   Class :character   1st Qu.:1952-11-02   1st Qu.:11.0  </span></span>
+<span><span class="co">#&gt;  Mode  :character   Mode  :character   Median :1955-04-15   Median :59.0  </span></span>
+<span><span class="co">#&gt;                                        Mean   :1969-11-06   Mean   :44.4  </span></span>
+<span><span class="co">#&gt;                                        3rd Qu.:2003-03-10   3rd Qu.:61.0  </span></span>
+<span><span class="co">#&gt;                                        Max.   :2003-08-30   Max.   :80.0  </span></span>
+<span><span class="co">#&gt;                                                                           </span></span>
+<span><span class="co">#&gt;       sex      demographics_complete     height          weight   </span></span>
+<span><span class="co">#&gt;  Min.   :0.0   Min.   :2             Min.   :  6.0   Min.   :  1  </span></span>
+<span><span class="co">#&gt;  1st Qu.:0.0   1st Qu.:2             1st Qu.:  7.0   1st Qu.:  1  </span></span>
+<span><span class="co">#&gt;  Median :1.0   Median :2             Median :165.0   Median : 54  </span></span>
+<span><span class="co">#&gt;  Mean   :0.6   Mean   :2             Mean   :110.2   Mean   : 48  </span></span>
+<span><span class="co">#&gt;  3rd Qu.:1.0   3rd Qu.:2             3rd Qu.:180.0   3rd Qu.: 80  </span></span>
+<span><span class="co">#&gt;  Max.   :1.0   Max.   :2             Max.   :193.0   Max.   :104  </span></span>
+<span><span class="co">#&gt;                                                                   </span></span>
+<span><span class="co">#&gt;       bmi          comments           mugshot          health_complete</span></span>
+<span><span class="co">#&gt;  Min.   : 19.8   Length:5           Length:5           Min.   :0      </span></span>
+<span><span class="co">#&gt;  1st Qu.: 24.7   Class :character   Class :character   1st Qu.:0      </span></span>
+<span><span class="co">#&gt;  Median : 27.9   Mode  :character   Mode  :character   Median :1      </span></span>
+<span><span class="co">#&gt;  Mean   :110.9                                         Mean   :1      </span></span>
+<span><span class="co">#&gt;  3rd Qu.:204.1                                         3rd Qu.:2      </span></span>
+<span><span class="co">#&gt;  Max.   :277.8                                         Max.   :2      </span></span>
+<span><span class="co">#&gt;                                                                       </span></span>
+<span><span class="co">#&gt;     race___1      race___2      race___3      race___4      race___5  </span></span>
+<span><span class="co">#&gt;  Min.   :0.0   Min.   :0.0   Min.   :0.0   Min.   :0.0   Min.   :0.0  </span></span>
+<span><span class="co">#&gt;  1st Qu.:0.0   1st Qu.:0.0   1st Qu.:0.0   1st Qu.:0.0   1st Qu.:1.0  </span></span>
+<span><span class="co">#&gt;  Median :0.0   Median :0.0   Median :0.0   Median :0.0   Median :1.0  </span></span>
+<span><span class="co">#&gt;  Mean   :0.2   Mean   :0.2   Mean   :0.2   Mean   :0.2   Mean   :0.8  </span></span>
+<span><span class="co">#&gt;  3rd Qu.:0.0   3rd Qu.:0.0   3rd Qu.:0.0   3rd Qu.:0.0   3rd Qu.:1.0  </span></span>
+<span><span class="co">#&gt;  Max.   :1.0   Max.   :1.0   Max.   :1.0   Max.   :1.0   Max.   :1.0  </span></span>
+<span><span class="co">#&gt;                                                                       </span></span>
+<span><span class="co">#&gt;     race___6     ethnicity interpreter_needed race_and_ethnicity_complete</span></span>
+<span><span class="co">#&gt;  Min.   :0.0   Min.   :0   Min.   :0.00       Min.   :0.0                </span></span>
+<span><span class="co">#&gt;  1st Qu.:0.0   1st Qu.:1   1st Qu.:0.00       1st Qu.:2.0                </span></span>
+<span><span class="co">#&gt;  Median :0.0   Median :1   Median :0.00       Median :2.0                </span></span>
+<span><span class="co">#&gt;  Mean   :0.2   Mean   :1   Mean   :0.25       Mean   :1.6                </span></span>
+<span><span class="co">#&gt;  3rd Qu.:0.0   3rd Qu.:1   3rd Qu.:0.25       3rd Qu.:2.0                </span></span>
+<span><span class="co">#&gt;  Max.   :1.0   Max.   :2   Max.   :1.00       Max.   :2.0                </span></span>
+<span><span class="co">#&gt;                            NA's   :1</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">age</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">bmi</span>, data <span class="op">=</span> <span class="va">ds_1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; lm(formula = age ~ 1 + sex + bmi, data = ds_1)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Residuals:</span></span>
+<span><span class="co">#&gt;       1       2       3       4       5 </span></span>
+<span><span class="co">#&gt;  -2.491   1.954   9.132   2.491 -11.086 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Coefficients:</span></span>
+<span><span class="co">#&gt;             Estimate Std. Error t value Pr(&gt;|t|)  </span></span>
+<span><span class="co">#&gt; (Intercept) 63.34496    8.89980   7.118   0.0192 *</span></span>
+<span><span class="co">#&gt; sex         13.55626    9.62958   1.408   0.2945  </span></span>
+<span><span class="co">#&gt; bmi         -0.24426    0.04337  -5.632   0.0301 *</span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Residual standard error: 10.55 on 2 degrees of freedom</span></span>
+<span><span class="co">#&gt; Multiple R-squared:  0.9442, Adjusted R-squared:  0.8884 </span></span>
+<span><span class="co">#&gt; F-statistic: 16.92 on 2 and 2 DF,  p-value: 0.05581</span></span></code></pre></div>
 <p><em>Pause here in the workshop for a few minutes. Raise hand if you’re having trouble.</em></p>
 </div>
 <div class="section level2">
@@ -361,118 +361,118 @@
 </h3>
 <p>The most basic operation to limit rows is passing the exact record identifiers.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Return only records with IDs of 1 and 4</span>
-<span class="va">desired_records</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span>
-<span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
-  redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,
-  token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,
-  records     <span class="op">=</span> <span class="va">desired_records</span>,
-  verbose     <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 2 records  at 2022-02-24 16:16:11.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
-<span class="co">#&gt; cols(</span>
-<span class="co">#&gt;   .default = col_double(),</span>
-<span class="co">#&gt;   name_first = <span style="color: #BB0000;">col_character()</span>,</span>
-<span class="co">#&gt;   name_last = <span style="color: #BB0000;">col_character()</span>,</span>
-<span class="co">#&gt;   address = <span style="color: #BB0000;">col_character()</span>,</span>
-<span class="co">#&gt;   telephone = <span style="color: #BB0000;">col_character()</span>,</span>
-<span class="co">#&gt;   email = <span style="color: #BB0000;">col_character()</span>,</span>
-<span class="co">#&gt;   dob = <span style="color: #0000BB;">col_date(format = "")</span>,</span>
-<span class="co">#&gt;   comments = <span style="color: #BB0000;">col_character()</span>,</span>
-<span class="co">#&gt;   mugshot = <span style="color: #BB0000;">col_character()</span></span>
-<span class="co">#&gt; )</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` for the full column specifications.</span>
-<span class="co">#&gt;   record_id name_first name_last                                 address</span>
-<span class="co">#&gt; 1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232</span>
-<span class="co">#&gt; 2         4      Trudy       DAG          342 Elm\nDuncanville TX, 75116</span>
-<span class="co">#&gt;        telephone               email        dob age sex demographics_complete</span>
-<span class="co">#&gt; 1 (405) 321-1111     nutty@mouse.com 2003-08-30  11   0                     2</span>
-<span class="co">#&gt; 2 (405) 321-4444 peroxide@blonde.com 1952-11-02  61   0                     2</span>
-<span class="co">#&gt;   height weight   bmi</span>
-<span class="co">#&gt; 1      7      1 204.1</span>
-<span class="co">#&gt; 2    165     54  19.8</span>
-<span class="co">#&gt;                                                                                                      comments</span>
-<span class="co">#&gt; 1                                                                     Character in a book, with some guessing</span>
-<span class="co">#&gt; 2 This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail</span>
-<span class="co">#&gt;         mugshot health_complete race___1 race___2 race___3 race___4 race___5</span>
-<span class="co">#&gt; 1 mugshot-1.jpg               1        0        0        0        0        1</span>
-<span class="co">#&gt; 2 mugshot-4.jpg               2        0        1        0        0        1</span>
-<span class="co">#&gt;   race___6 ethnicity interpreter_needed race_and_ethnicity_complete</span>
-<span class="co">#&gt; 1        0         1                  0                           2</span>
-<span class="co">#&gt; 2        0         1                 NA                           2</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Return only records with IDs of 1 and 4</span></span>
+<span><span class="va">desired_records</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span></span>
+<span>  redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,</span>
+<span>  token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,</span>
+<span>  records     <span class="op">=</span> <span class="va">desired_records</span>,</span>
+<span>  verbose     <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
+<span><span class="co">#&gt; Starting to read 2 records  at 2022-07-19 20:06:05.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; cols(</span></span>
+<span><span class="co">#&gt;   .default = col_double(),</span></span>
+<span><span class="co">#&gt;   name_first = <span style="color: #BB0000;">col_character()</span>,</span></span>
+<span><span class="co">#&gt;   name_last = <span style="color: #BB0000;">col_character()</span>,</span></span>
+<span><span class="co">#&gt;   address = <span style="color: #BB0000;">col_character()</span>,</span></span>
+<span><span class="co">#&gt;   telephone = <span style="color: #BB0000;">col_character()</span>,</span></span>
+<span><span class="co">#&gt;   email = <span style="color: #BB0000;">col_character()</span>,</span></span>
+<span><span class="co">#&gt;   dob = <span style="color: #0000BB;">col_date(format = "")</span>,</span></span>
+<span><span class="co">#&gt;   comments = <span style="color: #BB0000;">col_character()</span>,</span></span>
+<span><span class="co">#&gt;   mugshot = <span style="color: #BB0000;">col_character()</span></span></span>
+<span><span class="co">#&gt; )</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` for the full column specifications.</span></span>
+<span><span class="co">#&gt;   record_id name_first name_last                                 address</span></span>
+<span><span class="co">#&gt; 1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232</span></span>
+<span><span class="co">#&gt; 2         4      Trudy       DAG          342 Elm\nDuncanville TX, 75116</span></span>
+<span><span class="co">#&gt;        telephone               email        dob age sex demographics_complete</span></span>
+<span><span class="co">#&gt; 1 (405) 321-1111     nutty@mouse.com 2003-08-30  11   0                     2</span></span>
+<span><span class="co">#&gt; 2 (405) 321-4444 peroxide@blonde.com 1952-11-02  61   0                     2</span></span>
+<span><span class="co">#&gt;   height weight   bmi</span></span>
+<span><span class="co">#&gt; 1      7      1 204.1</span></span>
+<span><span class="co">#&gt; 2    165     54  19.8</span></span>
+<span><span class="co">#&gt;                                                                                                      comments</span></span>
+<span><span class="co">#&gt; 1                                                                     Character in a book, with some guessing</span></span>
+<span><span class="co">#&gt; 2 This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail</span></span>
+<span><span class="co">#&gt;         mugshot health_complete race___1 race___2 race___3 race___4 race___5</span></span>
+<span><span class="co">#&gt; 1 mugshot-1.jpg               1        0        0        0        0        1</span></span>
+<span><span class="co">#&gt; 2 mugshot-4.jpg               2        0        1        0        0        1</span></span>
+<span><span class="co">#&gt;   race___6 ethnicity interpreter_needed race_and_ethnicity_complete</span></span>
+<span><span class="co">#&gt; 1        0         1                  0                           2</span></span>
+<span><span class="co">#&gt; 2        0         1                 NA                           2</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="specify-row-filter">Specify Row Filter<a class="anchor" aria-label="anchor" href="#specify-row-filter"></a>
 </h3>
 <p>A more useful operation to limit rows is passing an expression to filter the records before returning. See your server’s documentation for the syntax rules of the filter statements. Remember to enclose your variable names in square brackets. Also be aware of differences between strings and numbers.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Return only records with a birth date after January 2003</span>
-<span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
-  redcap_uri    <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,
-  token         <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,
-  filter_logic  <span class="op">=</span> <span class="st">"'2003-01-01' &lt; [dob]"</span>,
-  verbose       <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 2 records  at 2022-02-24 16:16:13.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
-<span class="co">#&gt; cols(</span>
-<span class="co">#&gt;   .default = col_double(),</span>
-<span class="co">#&gt;   name_first = <span style="color: #BB0000;">col_character()</span>,</span>
-<span class="co">#&gt;   name_last = <span style="color: #BB0000;">col_character()</span>,</span>
-<span class="co">#&gt;   address = <span style="color: #BB0000;">col_character()</span>,</span>
-<span class="co">#&gt;   telephone = <span style="color: #BB0000;">col_character()</span>,</span>
-<span class="co">#&gt;   email = <span style="color: #BB0000;">col_character()</span>,</span>
-<span class="co">#&gt;   dob = <span style="color: #0000BB;">col_date(format = "")</span>,</span>
-<span class="co">#&gt;   comments = <span style="color: #BB0000;">col_character()</span>,</span>
-<span class="co">#&gt;   mugshot = <span style="color: #BB0000;">col_character()</span></span>
-<span class="co">#&gt; )</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` for the full column specifications.</span>
-<span class="co">#&gt;   record_id name_first name_last                                 address</span>
-<span class="co">#&gt; 1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232</span>
-<span class="co">#&gt; 2         2     Tumtum  Nutmouse 14 Rose Cottage Blvd.\nKenning UK 34243</span>
-<span class="co">#&gt;        telephone            email        dob age sex demographics_complete</span>
-<span class="co">#&gt; 1 (405) 321-1111  nutty@mouse.com 2003-08-30  11   0                     2</span>
-<span class="co">#&gt; 2 (405) 321-2222 tummy@mouse.comm 2003-03-10  11   1                     2</span>
-<span class="co">#&gt;   height weight   bmi                                comments       mugshot</span>
-<span class="co">#&gt; 1      7      1 204.1 Character in a book, with some guessing mugshot-1.jpg</span>
-<span class="co">#&gt; 2      6      1 277.8      A mouse character from a good book mugshot-2.jpg</span>
-<span class="co">#&gt;   health_complete race___1 race___2 race___3 race___4 race___5 race___6</span>
-<span class="co">#&gt; 1               1        0        0        0        0        1        0</span>
-<span class="co">#&gt; 2               0        0        0        1        0        1        0</span>
-<span class="co">#&gt;   ethnicity interpreter_needed race_and_ethnicity_complete</span>
-<span class="co">#&gt; 1         1                  0                           2</span>
-<span class="co">#&gt; 2         1                  0                           0</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Return only records with a birth date after January 2003</span></span>
+<span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span></span>
+<span>  redcap_uri    <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,</span>
+<span>  token         <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,</span>
+<span>  filter_logic  <span class="op">=</span> <span class="st">"'2003-01-01' &lt; [dob]"</span>,</span>
+<span>  verbose       <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
+<span><span class="co">#&gt; Starting to read 2 records  at 2022-07-19 20:06:06.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; cols(</span></span>
+<span><span class="co">#&gt;   .default = col_double(),</span></span>
+<span><span class="co">#&gt;   name_first = <span style="color: #BB0000;">col_character()</span>,</span></span>
+<span><span class="co">#&gt;   name_last = <span style="color: #BB0000;">col_character()</span>,</span></span>
+<span><span class="co">#&gt;   address = <span style="color: #BB0000;">col_character()</span>,</span></span>
+<span><span class="co">#&gt;   telephone = <span style="color: #BB0000;">col_character()</span>,</span></span>
+<span><span class="co">#&gt;   email = <span style="color: #BB0000;">col_character()</span>,</span></span>
+<span><span class="co">#&gt;   dob = <span style="color: #0000BB;">col_date(format = "")</span>,</span></span>
+<span><span class="co">#&gt;   comments = <span style="color: #BB0000;">col_character()</span>,</span></span>
+<span><span class="co">#&gt;   mugshot = <span style="color: #BB0000;">col_character()</span></span></span>
+<span><span class="co">#&gt; )</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` for the full column specifications.</span></span>
+<span><span class="co">#&gt;   record_id name_first name_last                                 address</span></span>
+<span><span class="co">#&gt; 1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232</span></span>
+<span><span class="co">#&gt; 2         2     Tumtum  Nutmouse 14 Rose Cottage Blvd.\nKenning UK 34243</span></span>
+<span><span class="co">#&gt;        telephone            email        dob age sex demographics_complete</span></span>
+<span><span class="co">#&gt; 1 (405) 321-1111  nutty@mouse.com 2003-08-30  11   0                     2</span></span>
+<span><span class="co">#&gt; 2 (405) 321-2222 tummy@mouse.comm 2003-03-10  11   1                     2</span></span>
+<span><span class="co">#&gt;   height weight   bmi                                comments       mugshot</span></span>
+<span><span class="co">#&gt; 1      7      1 204.1 Character in a book, with some guessing mugshot-1.jpg</span></span>
+<span><span class="co">#&gt; 2      6      1 277.8      A mouse character from a good book mugshot-2.jpg</span></span>
+<span><span class="co">#&gt;   health_complete race___1 race___2 race___3 race___4 race___5 race___6</span></span>
+<span><span class="co">#&gt; 1               1        0        0        0        0        1        0</span></span>
+<span><span class="co">#&gt; 2               0        0        0        1        0        1        0</span></span>
+<span><span class="co">#&gt;   ethnicity interpreter_needed race_and_ethnicity_complete</span></span>
+<span><span class="co">#&gt; 1         1                  0                           2</span></span>
+<span><span class="co">#&gt; 2         1                  0                           0</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="specify-column-names">Specify Column Names<a class="anchor" aria-label="anchor" href="#specify-column-names"></a>
 </h3>
 <p>Limit the returned fields by passing a vector of the desired names.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Return only the fields record_id, name_first, and age</span>
-<span class="va">desired_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"name_first"</span>, <span class="st">"age"</span><span class="op">)</span>
-<span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
-  redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,
-  token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,
-  fields      <span class="op">=</span> <span class="va">desired_fields</span>,
-  verbose     <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2022-02-24 16:16:14.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
-<span class="co">#&gt; cols(</span>
-<span class="co">#&gt;   record_id = <span style="color: #00BB00;">col_double()</span>,</span>
-<span class="co">#&gt;   name_first = <span style="color: #BB0000;">col_character()</span>,</span>
-<span class="co">#&gt;   age = <span style="color: #00BB00;">col_double()</span></span>
-<span class="co">#&gt; )</span>
-<span class="co">#&gt;   record_id name_first age</span>
-<span class="co">#&gt; 1         1     Nutmeg  11</span>
-<span class="co">#&gt; 2         2     Tumtum  11</span>
-<span class="co">#&gt; 3         3     Marcus  80</span>
-<span class="co">#&gt; 4         4      Trudy  61</span>
-<span class="co">#&gt; 5         5   John Lee  59</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Return only the fields record_id, name_first, and age</span></span>
+<span><span class="va">desired_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"name_first"</span>, <span class="st">"age"</span><span class="op">)</span></span>
+<span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span></span>
+<span>  redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,</span>
+<span>  token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,</span>
+<span>  fields      <span class="op">=</span> <span class="va">desired_fields</span>,</span>
+<span>  verbose     <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
+<span><span class="co">#&gt; Starting to read 5 records  at 2022-07-19 20:06:08.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; cols(</span></span>
+<span><span class="co">#&gt;   record_id = <span style="color: #00BB00;">col_double()</span>,</span></span>
+<span><span class="co">#&gt;   name_first = <span style="color: #BB0000;">col_character()</span>,</span></span>
+<span><span class="co">#&gt;   age = <span style="color: #00BB00;">col_double()</span></span></span>
+<span><span class="co">#&gt; )</span></span>
+<span><span class="co">#&gt;   record_id name_first age</span></span>
+<span><span class="co">#&gt; 1         1     Nutmeg  11</span></span>
+<span><span class="co">#&gt; 2         2     Tumtum  11</span></span>
+<span><span class="co">#&gt; 3         3     Marcus  80</span></span>
+<span><span class="co">#&gt; 4         4      Trudy  61</span></span>
+<span><span class="co">#&gt; 5         5   John Lee  59</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -485,54 +485,54 @@
 <h3 id="specify-column-names-types">Specify Column Names &amp; Types<a class="anchor" aria-label="anchor" href="#specify-column-names-types"></a>
 </h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Specify the column types.</span>
-<span class="va">desired_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"race"</span><span class="op">)</span>
-<span class="va">col_types</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">cols</a></span><span class="op">(</span>
-  record_id  <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_integer</a></span><span class="op">(</span><span class="op">)</span>,
-  race___1   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,
-  race___2   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,
-  race___3   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,
-  race___4   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,
-  race___5   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,
-  race___6   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">)</span>
-<span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
-  redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,
-  token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,
-  fields      <span class="op">=</span> <span class="va">desired_fields</span>,
-  verbose     <span class="op">=</span> <span class="cn">FALSE</span>,
-  col_types   <span class="op">=</span> <span class="va">col_types</span>
-<span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2022-02-24 16:16:16.</span>
-<span class="co">#&gt;   record_id race___1 race___2 race___3 race___4 race___5 race___6</span>
-<span class="co">#&gt; 1         1    FALSE    FALSE    FALSE    FALSE     TRUE    FALSE</span>
-<span class="co">#&gt; 2         2    FALSE    FALSE     TRUE    FALSE     TRUE    FALSE</span>
-<span class="co">#&gt; 3         3    FALSE    FALSE    FALSE     TRUE     TRUE    FALSE</span>
-<span class="co">#&gt; 4         4    FALSE     TRUE    FALSE    FALSE     TRUE    FALSE</span>
-<span class="co">#&gt; 5         5     TRUE    FALSE    FALSE    FALSE    FALSE     TRUE</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Specify the column types.</span></span>
+<span><span class="va">desired_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"race"</span><span class="op">)</span></span>
+<span><span class="va">col_types</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">cols</a></span><span class="op">(</span></span>
+<span>  record_id  <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_integer</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  race___1   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  race___2   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  race___3   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  race___4   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  race___5   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  race___6   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span></span>
+<span>  redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,</span>
+<span>  token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,</span>
+<span>  fields      <span class="op">=</span> <span class="va">desired_fields</span>,</span>
+<span>  verbose     <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  col_types   <span class="op">=</span> <span class="va">col_types</span></span>
+<span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
+<span><span class="co">#&gt; Starting to read 5 records  at 2022-07-19 20:06:09.</span></span>
+<span><span class="co">#&gt;   record_id race___1 race___2 race___3 race___4 race___5 race___6</span></span>
+<span><span class="co">#&gt; 1         1    FALSE    FALSE    FALSE    FALSE     TRUE    FALSE</span></span>
+<span><span class="co">#&gt; 2         2    FALSE    FALSE     TRUE    FALSE     TRUE    FALSE</span></span>
+<span><span class="co">#&gt; 3         3    FALSE    FALSE    FALSE     TRUE     TRUE    FALSE</span></span>
+<span><span class="co">#&gt; 4         4    FALSE     TRUE    FALSE    FALSE     TRUE    FALSE</span></span>
+<span><span class="co">#&gt; 5         5     TRUE    FALSE    FALSE    FALSE    FALSE     TRUE</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="specify-everything-is-a-character">Specify Everything is a Character<a class="anchor" aria-label="anchor" href="#specify-everything-is-a-character"></a>
 </h3>
 <p>REDCap internally stores every value as a string. To accept full responsibility of the data types, tell <a href="https://readr.tidyverse.org/reference/cols.html" class="external-link"><code>readr::cols()</code></a> to keep them as strings.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Specify the column types.</span>
-<span class="va">desired_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"race"</span><span class="op">)</span>
-<span class="va">col_types</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">cols</a></span><span class="op">(</span>.default <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_character</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
-  redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,
-  token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,
-  fields      <span class="op">=</span> <span class="va">desired_fields</span>,
-  verbose     <span class="op">=</span> <span class="cn">FALSE</span>,
-  col_types   <span class="op">=</span> <span class="va">col_types</span>
-<span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="co">#&gt; Starting to read 5 records  at 2022-02-24 16:16:17.</span>
-<span class="co">#&gt;   record_id race___1 race___2 race___3 race___4 race___5 race___6</span>
-<span class="co">#&gt; 1         1        0        0        0        0        1        0</span>
-<span class="co">#&gt; 2         2        0        0        1        0        1        0</span>
-<span class="co">#&gt; 3         3        0        0        0        1        1        0</span>
-<span class="co">#&gt; 4         4        0        1        0        0        1        0</span>
-<span class="co">#&gt; 5         5        1        0        0        0        0        1</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Specify the column types.</span></span>
+<span><span class="va">desired_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"race"</span><span class="op">)</span></span>
+<span><span class="va">col_types</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">cols</a></span><span class="op">(</span>.default <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_character</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span></span>
+<span>  redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,</span>
+<span>  token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,</span>
+<span>  fields      <span class="op">=</span> <span class="va">desired_fields</span>,</span>
+<span>  verbose     <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  col_types   <span class="op">=</span> <span class="va">col_types</span></span>
+<span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
+<span><span class="co">#&gt; Starting to read 5 records  at 2022-07-19 20:06:10.</span></span>
+<span><span class="co">#&gt;   record_id race___1 race___2 race___3 race___4 race___5 race___6</span></span>
+<span><span class="co">#&gt; 1         1        0        0        0        0        1        0</span></span>
+<span><span class="co">#&gt; 2         2        0        0        1        0        1        0</span></span>
+<span><span class="co">#&gt; 3         3        0        0        0        1        1        0</span></span>
+<span><span class="co">#&gt; 4         4        0        1        0        0        1        0</span></span>
+<span><span class="co">#&gt; 5         5        1        0        0        0        0        1</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -589,7 +589,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

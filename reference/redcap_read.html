@@ -24,7 +24,7 @@ datasets that could tie up the server."><meta property="og:image" content="https
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9002</span>
       </span>
     </div>
 
@@ -74,37 +74,37 @@ datasets that could tie up the server.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">redcap_read</span><span class="op">(</span>
-  batch_size <span class="op">=</span> <span class="fl">100L</span>,
-  interbatch_delay <span class="op">=</span> <span class="fl">0.5</span>,
-  continue_on_error <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">redcap_uri</span>,
-  <span class="va">token</span>,
-  records <span class="op">=</span> <span class="cn">NULL</span>,
-  records_collapsed <span class="op">=</span> <span class="st">""</span>,
-  fields <span class="op">=</span> <span class="cn">NULL</span>,
-  fields_collapsed <span class="op">=</span> <span class="st">""</span>,
-  forms <span class="op">=</span> <span class="cn">NULL</span>,
-  forms_collapsed <span class="op">=</span> <span class="st">""</span>,
-  events <span class="op">=</span> <span class="cn">NULL</span>,
-  events_collapsed <span class="op">=</span> <span class="st">""</span>,
-  raw_or_label <span class="op">=</span> <span class="st">"raw"</span>,
-  raw_or_label_headers <span class="op">=</span> <span class="st">"raw"</span>,
-  export_checkbox_label <span class="op">=</span> <span class="cn">FALSE</span>,
-  export_survey_fields <span class="op">=</span> <span class="cn">FALSE</span>,
-  export_data_access_groups <span class="op">=</span> <span class="cn">FALSE</span>,
-  filter_logic <span class="op">=</span> <span class="st">""</span>,
-  datetime_range_begin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span>,
-  datetime_range_end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span>,
-  col_types <span class="op">=</span> <span class="cn">NULL</span>,
-  guess_type <span class="op">=</span> <span class="cn">TRUE</span>,
-  guess_max <span class="op">=</span> <span class="cn">NULL</span>,
-  http_response_encoding <span class="op">=</span> <span class="st">"UTF-8"</span>,
-  locale <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/locale.html" class="external-link">default_locale</a></span><span class="op">(</span><span class="op">)</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-  config_options <span class="op">=</span> <span class="cn">NULL</span>,
-  id_position <span class="op">=</span> <span class="fl">1L</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">redcap_read</span><span class="op">(</span></span>
+<span>  batch_size <span class="op">=</span> <span class="fl">100L</span>,</span>
+<span>  interbatch_delay <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  continue_on_error <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">redcap_uri</span>,</span>
+<span>  <span class="va">token</span>,</span>
+<span>  records <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  records_collapsed <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  fields <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fields_collapsed <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  forms <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  forms_collapsed <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  events <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  events_collapsed <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  raw_or_label <span class="op">=</span> <span class="st">"raw"</span>,</span>
+<span>  raw_or_label_headers <span class="op">=</span> <span class="st">"raw"</span>,</span>
+<span>  export_checkbox_label <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  export_survey_fields <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  export_data_access_groups <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  filter_logic <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  datetime_range_begin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span>,</span>
+<span>  datetime_range_end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span>,</span>
+<span>  col_types <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  guess_type <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  guess_max <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  http_response_encoding <span class="op">=</span> <span class="st">"UTF-8"</span>,</span>
+<span>  locale <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/locale.html" class="external-link">default_locale</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  config_options <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  id_position <span class="op">=</span> <span class="fl">1L</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -112,115 +112,174 @@ datasets that could tie up the server.</p>
     <dl><dt>batch_size</dt>
 <dd><p>The maximum number of subject records a single batch
 should contain.  The default is 100.</p></dd>
+
+
 <dt>interbatch_delay</dt>
 <dd><p>The number of seconds the function will wait
 before requesting a new subset from REDCap. The default is 0.5 seconds.</p></dd>
+
+
 <dt>continue_on_error</dt>
 <dd><p>If an error occurs while reading, should records
 in subsequent batches be attempted.  The default is <code>FALSE</code>, which prevents
 subsequent batches from running.  Required.</p></dd>
+
+
 <dt>redcap_uri</dt>
 <dd><p>The URI (uniform resource identifier) of the REDCap
 project.  Required.</p></dd>
+
+
 <dt>token</dt>
 <dd><p>The user-specific string that serves as the password for a
 project.  Required.</p></dd>
+
+
 <dt>records</dt>
 <dd><p>An array, where each element corresponds to the ID of a
 desired record.  Optional.</p></dd>
+
+
 <dt>records_collapsed</dt>
 <dd><p>A single string, where the desired ID values are
 separated by commas.  Optional.</p></dd>
+
+
 <dt>fields</dt>
 <dd><p>An array, where each element corresponds to a desired project
 field.  Optional.</p></dd>
+
+
 <dt>fields_collapsed</dt>
 <dd><p>A single string, where the desired field names are
 separated by commas.  Optional.</p></dd>
+
+
 <dt>forms</dt>
 <dd><p>An array, where each element corresponds to a desired project
 form.  Optional.</p></dd>
+
+
 <dt>forms_collapsed</dt>
 <dd><p>A single string, where the desired form names are
 separated by commas.  Optional.</p></dd>
+
+
 <dt>events</dt>
 <dd><p>An array, where each element corresponds to a desired project
 event.  Optional.</p></dd>
+
+
 <dt>events_collapsed</dt>
 <dd><p>A single string, where the desired event names are
 separated by commas.  Optional.</p></dd>
+
+
 <dt>raw_or_label</dt>
 <dd><p>A string (either <code>'raw'</code> or <code>'label'</code> that specifies
 whether to export the raw coded values or the labels for the options of
 multiple choice fields.  Default is <code>'raw'</code>.</p></dd>
+
+
 <dt>raw_or_label_headers</dt>
 <dd><p>A string (either <code>'raw'</code> or <code>'label'</code> that
 specifies for the CSV headers whether to export the variable/field names
 (raw) or the field labels (label).  Default is <code>'raw'</code>.</p></dd>
+
+
 <dt>export_checkbox_label</dt>
 <dd><p>specifies the format of checkbox field values
 specifically when exporting the data as labels.  If <code>raw_or_label</code> is
 <code>'label'</code> and <code>export_checkbox_label</code> is TRUE, the values will be the text
 displayed to the users.  Otherwise, the values will be 0/1.</p></dd>
+
+
 <dt>export_survey_fields</dt>
 <dd><p>A boolean that specifies whether to export the
 survey identifier field (e.g., 'redcap_survey_identifier') or survey
 timestamp fields (e.g., instrument+'_timestamp').
 The timestamp outputs reflect the survey's <em>completion</em> time
 (according to the time and timezone of the REDCap server.)</p></dd>
+
+
 <dt>export_data_access_groups</dt>
 <dd><p>A boolean value that specifies whether or
 not to export the <code>redcap_data_access_group</code> field when data access groups
 are utilized in the project. Default is <code>FALSE</code>. See the details below.</p></dd>
+
+
 <dt>filter_logic</dt>
 <dd><p>String of logic text (e.g., <code>[gender] = 'male'</code>) for
 filtering the data to be returned by this API method, in which the API
 will only return the records (or record-events, if a longitudinal project)
 where the logic evaluates as TRUE.   An blank/empty string returns all records.</p></dd>
+
+
 <dt>datetime_range_begin</dt>
 <dd><p>To return only records that have been created or
 modified <em>after</em> a given datetime, provide a
 <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/as.POSIXlt.html" class="external-link">POSIXct</a>
 value.
 If not specified, REDCap will assume no begin time.</p></dd>
+
+
 <dt>datetime_range_end</dt>
 <dd><p>To return only records that have been created or
 modified <em>before</em> a given datetime, provide a
 <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/as.POSIXlt.html" class="external-link">POSIXct</a>
 value.
 If not specified, REDCap will assume no end time.</p></dd>
+
+
 <dt>col_types</dt>
 <dd><p>A <code><a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">readr::cols()</a></code> object passed internally to
 <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_csv()</a></code>.  Optional.</p></dd>
+
+
 <dt>guess_type</dt>
 <dd><p>A boolean value indicating if all columns should be
 returned as character.  If true, <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_csv()</a></code> guesses the intended
 data type for each column.</p></dd>
+
+
 <dt>guess_max</dt>
 <dd><p>Deprecated.</p></dd>
+
+
 <dt>http_response_encoding</dt>
 <dd><p>The encoding value passed to
 <code><a href="https://httr.r-lib.org/reference/content.html" class="external-link">httr::content()</a></code>.  Defaults to 'UTF-8'.</p></dd>
+
+
 <dt>locale</dt>
 <dd><p>a <code><a href="https://readr.tidyverse.org/reference/locale.html" class="external-link">readr::locale()</a></code> object to specify preferences like
 number, date, and time formats.  This object is passed to
 <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_csv()</a></code>.  Defaults to <code><a href="https://readr.tidyverse.org/reference/locale.html" class="external-link">readr::default_locale()</a></code>.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>A boolean value indicating if <code>message</code>s should be printed
 to the R console during the operation.  The verbose output might contain
 sensitive information (<em>e.g.</em> PHI), so turn this off if the output might
 be visible somewhere public. Optional.</p></dd>
+
+
 <dt>config_options</dt>
 <dd><p>A list of options to pass to <code>POST</code> method in the
 <code>httr</code> package.  See the details in <code><a href="redcap_read_oneshot.html">redcap_read_oneshot()</a></code> Optional.</p></dd>
+
+
 <dt>id_position</dt>
 <dd><p>The column position of the variable that unique
 identifies the subject (typically <code>record_id</code>).
 This defaults to the first variable in the dataset.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Currently, a list is returned with the following elements:</p><ul><li><p><code>data</code>: An R <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> of the desired records and columns.</p></li>
+    
+
+<p>Currently, a list is returned with the following elements:</p><ul><li><p><code>data</code>: An R <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> of the desired records and columns.</p></li>
 <li><p><code>success</code>: A boolean value indicating if the operation was apparently
 successful.</p></li>
 <li><p><code>status_codes</code>: A collection of
@@ -251,10 +310,9 @@ the webserver when exporting/importing a large dataset.</p>
 <p>A second benefit is less RAM is required on the webserver.  Because
 each batch is smaller than the entire dataset, the webserver
 tackles more manageably sized objects in memory.  Consider batching
-if you encounter the error:</p><div class="sourceCode"><pre><code>ERROR: REDCap ran out of server memory. The request cannot be processed.
-Please try importing/exporting a smaller amount of data.
-</code></pre></div>
-
+if you encounter the error:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a>ERROR<span class="op">:</span><span class="st"> </span>REDCap ran out of server memory. The request cannot be processed.</span>
+<span id="cb1-2"><a href="#cb1-2"></a>Please try importing<span class="op">/</span>exporting a smaller amount of data.</span></code></pre><p></p></div>
 <p>For <code>redcap_read()</code> to function properly, the user must have Export
 permissions for the 'Full Data Set'.  Users with only 'De-Identified'
 export privileges can still use <code>redcap_read_oneshot</code>.  To grant the
@@ -279,29 +337,29 @@ administrator to send you the static material.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">uri</span>     <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span>
-<span class="r-in"><span class="va">token</span>   <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_read</span><span class="op">(</span>batch_size<span class="op">=</span><span class="fl">2</span>, redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Specify the column types.</span></span>
-<span class="r-in"><span class="va">col_types</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">cols</a></span><span class="op">(</span></span>
-<span class="r-in">  record_id  <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_integer</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">  race___1   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">  race___2   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">  race___3   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">  race___4   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">  race___5   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">  race___6   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_read</span><span class="op">(</span></span>
-<span class="r-in">  redcap_uri <span class="op">=</span> <span class="va">uri</span>,</span>
-<span class="r-in">  token      <span class="op">=</span> <span class="va">token</span>,</span>
-<span class="r-in">  col_types  <span class="op">=</span> <span class="va">col_types</span>,</span>
-<span class="r-in">  batch_size <span class="op">=</span> <span class="fl">2</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">uri</span>     <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
+<span class="r-in"><span><span class="va">token</span>   <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_read</span><span class="op">(</span>batch_size<span class="op">=</span><span class="fl">2</span>, redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Specify the column types.</span></span></span>
+<span class="r-in"><span><span class="va">col_types</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">cols</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  record_id  <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_integer</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  race___1   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  race___2   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  race___3   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  race___4   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  race___5   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  race___6   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_read</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  redcap_uri <span class="op">=</span> <span class="va">uri</span>,</span></span>
+<span class="r-in"><span>  token      <span class="op">=</span> <span class="va">token</span>,</span></span>
+<span class="r-in"><span>  col_types  <span class="op">=</span> <span class="va">col_types</span>,</span></span>
+<span class="r-in"><span>  batch_size <span class="op">=</span> <span class="fl">2</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -316,7 +374,7 @@ administrator to send you the static material.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -19,7 +19,7 @@ it works for only projects in Development status."><meta property="og:image" con
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9002</span>
       </span>
     </div>
 
@@ -65,13 +65,13 @@ it works for only projects in Development status.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">redcap_metadata_write</span><span class="op">(</span>
-  <span class="va">ds</span>,
-  <span class="va">redcap_uri</span>,
-  <span class="va">token</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-  config_options <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">redcap_metadata_write</span><span class="op">(</span></span>
+<span>  <span class="va">ds</span>,</span>
+<span>  <span class="va">redcap_uri</span>,</span>
+<span>  <span class="va">token</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  config_options <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -79,24 +79,35 @@ it works for only projects in Development status.</p>
     <dl><dt>ds</dt>
 <dd><p>The <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> to be imported into the REDCap project.
 Required.</p></dd>
+
+
 <dt>redcap_uri</dt>
 <dd><p>The URI (uniform resource identifier) of the REDCap
 project.  Required.</p></dd>
+
+
 <dt>token</dt>
 <dd><p>The user-specific string that serves as the password for a
 project.  Required.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>A boolean value indicating if <code>message</code>s should be printed
 to the R console during the operation.  The verbose output might contain
 sensitive information (<em>e.g.</em> PHI), so turn this off if the output might
 be visible somewhere public. Optional.</p></dd>
+
+
 <dt>config_options</dt>
 <dd><p>A list of options to pass to <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code> method
 in the 'httr' package.  See the details in <code><a href="redcap_read_oneshot.html">redcap_read_oneshot()</a></code> Optional.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Currently, a list is returned with the following elements:</p><ul><li><p><code>success</code>: A boolean value indicating if the operation was apparently
+    
+
+<p>Currently, a list is returned with the following elements:</p><ul><li><p><code>success</code>: A boolean value indicating if the operation was apparently
 successful.</p></li>
 <li><p><code>status_code</code>: The
 <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" class="external-link">http status code</a>
@@ -123,31 +134,31 @@ administrator to send you the static material.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># Please don't run this example without changing the token to</span></span>
-<span class="r-in"><span class="co"># point to your server.  It could interfere with our testing suite.</span></span>
-<span class="r-in"><span class="va">uri</span>            <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span>
-<span class="r-in"><span class="va">token</span>          <span class="op">&lt;-</span> <span class="st">"457C24AB91B7FCF5B1A7DA67E70E24C7"</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Read in the dictionary in R's memory from a csv file.</span></span>
-<span class="r-in"><span class="va">ds_to_write</span> <span class="op">&lt;-</span></span>
-<span class="r-in">  <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span></span>
-<span class="r-in">    file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span>
-<span class="r-in">      <span class="st">"test-data/project-simple/simple-metadata.csv"</span>,</span>
-<span class="r-in">      package <span class="op">=</span> <span class="st">"REDCapR"</span></span>
-<span class="r-in">    <span class="op">)</span>,</span>
-<span class="r-in">    col_types <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">cols</a></span><span class="op">(</span>.default <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_character</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="va">ds_to_write</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Import the dictionary into the REDCap project</span></span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_metadata_write</span><span class="op">(</span></span>
-<span class="r-in">  ds          <span class="op">=</span> <span class="va">ds_to_write</span>,</span>
-<span class="r-in">  redcap_uri  <span class="op">=</span> <span class="va">uri</span>,</span>
-<span class="r-in">  token       <span class="op">=</span> <span class="va">token</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># Please don't run this example without changing the token to</span></span></span>
+<span class="r-in"><span><span class="co"># point to your server.  It could interfere with our testing suite.</span></span></span>
+<span class="r-in"><span><span class="va">uri</span>            <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
+<span class="r-in"><span><span class="va">token</span>          <span class="op">&lt;-</span> <span class="st">"457C24AB91B7FCF5B1A7DA67E70E24C7"</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Read in the dictionary in R's memory from a csv file.</span></span></span>
+<span class="r-in"><span><span class="va">ds_to_write</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="st">"test-data/project-simple/simple-metadata.csv"</span>,</span></span>
+<span class="r-in"><span>      package <span class="op">=</span> <span class="st">"REDCapR"</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span>,</span></span>
+<span class="r-in"><span>    col_types <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">cols</a></span><span class="op">(</span>.default <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_character</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ds_to_write</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Import the dictionary into the REDCap project</span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_metadata_write</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  ds          <span class="op">=</span> <span class="va">ds_to_write</span>,</span></span>
+<span class="r-in"><span>  redcap_uri  <span class="op">=</span> <span class="va">uri</span>,</span></span>
+<span class="r-in"><span>  token       <span class="op">=</span> <span class="va">token</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -162,7 +173,7 @@ administrator to send you the static material.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9002</span>
       </span>
     </div>
 
@@ -86,7 +86,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Basic REDCapR Operations</h1>
             
-            <h4 data-toc-skip class="date">2022-02-24</h4>
+            <h4 data-toc-skip class="date">2022-07-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/HEAD/vignettes/BasicREDCapROperations.Rmd" class="external-link"><code>vignettes/BasicREDCapROperations.Rmd</code></a></small>
       <div class="hidden name"><code>BasicREDCapROperations.Rmd</code></div>
@@ -100,28 +100,28 @@
 <h2 id="reading-redcap-data">Reading REDCap Data<a class="anchor" aria-label="anchor" href="#reading-redcap-data"></a>
 </h2>
 <p>The function <code>redcap_read_oneshot</code> uses the <a href="https://cran.r-project.org/package=httr" class="external-link"><code>httr</code></a> package to call the REDCap API.</p>
-<pre><code><span class="co">## Loading required namespace: kableExtra</span></code></pre>
+<pre><code><span><span class="co">## Loading required namespace: kableExtra</span></span></code></pre>
 <div class="section level3">
 <h3 id="set-project-wide-values">Set project-wide values<a class="anchor" aria-label="anchor" href="#set-project-wide-values"></a>
 </h3>
 <p>There is some information that is specific to the REDCap project, as opposed to an individual operation. This includes the (1) uri of the server, and the (2) token for the user’s project.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session.</span>
-<span class="va">uri</span>   <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class="va">token</span> <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span> <span class="co"># `UnitTestPhiFree` user and simple project (pid 153)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session.</span></span>
+<span><span class="va">uri</span>   <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span>
+<span><span class="va">token</span> <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span> <span class="co"># `UnitTestPhiFree` user and simple project (pid 153)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="read-all-records-and-fields">Read all records and fields<a class="anchor" aria-label="anchor" href="#read-all-records-and-fields"></a>
 </h3>
 <p>If no information is passed about the desired records or fields, then the entire data set is returned. Only two parameters are required, <code>redcap_uri</code> and <code>token</code>. Unless the <code>verbose</code> parameter is set to <code>FALSE</code>, a message will be printed on the R console with the number of records and fields returned.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Return all records and all variables.</span>
-<span class="va">ds_all_rows_all_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
+<code class="sourceCode R"><span><span class="co"># Return all records and all variables.</span></span>
+<span><span class="va">ds_all_rows_all_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-02-24 16:15:39.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-07-19 20:05:20.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
  [36m── [39m  [1mColumn specification [22m  [36m──────────────────────────────────────────────────────── [39m
 cols(
@@ -137,7 +137,7 @@ cols(
 )
  [36mℹ [39m Use `spec()` for the full column specifications.</code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds_all_rows_all_fields</span> <span class="co"># Inspect the returned dataset</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ds_all_rows_all_fields</span> <span class="co"># Inspect the returned dataset</span></span></code></pre></div>
 <pre><code>  record_id name_first name_last                                 address
 1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232
 2         2     Tumtum  Nutmouse 14 Rose Cottage Blvd.\nKenning UK 34243
@@ -181,16 +181,16 @@ cols(
 <p>If only a subset of the <strong>records</strong> is desired, the two approaches are shown below. The first is to pass an array (where each element is an ID) to the <code>records</code> parameter. The second is to pass a single string (where the elements are separated by commas) to the <code>records_collapsed</code> parameter.</p>
 <p>The first format is more natural for more R users. The second format is what is expected by the REDCap API. If a value for <code>records</code> is specified, but <code>records_collapsed</code> is not specified, then <code>redcap_read_oneshot</code> automatically converts the array into the format needed by the API.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Return only records with IDs of 1 and 3</span>
-<span class="va">desired_records_v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>
-<span class="va">ds_some_rows_v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
-  redcap_uri <span class="op">=</span> <span class="va">uri</span>,
-  token      <span class="op">=</span> <span class="va">token</span>,
-  records    <span class="op">=</span> <span class="va">desired_records_v1</span>
-<span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Return only records with IDs of 1 and 3</span></span>
+<span><span class="va">desired_records_v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">ds_some_rows_v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span></span>
+<span>  redcap_uri <span class="op">=</span> <span class="va">uri</span>,</span>
+<span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
+<span>  records    <span class="op">=</span> <span class="va">desired_records_v1</span></span>
+<span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2022-02-24 16:15:40.</code></pre>
+<pre><code>Starting to read 2 records  at 2022-07-19 20:05:21.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -208,16 +208,16 @@ cols(
 )
  [36mℹ [39m Use `spec()` for the full column specifications.</code></pre>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Return only records with IDs of 1 and 3 (alternate way)</span>
-<span class="va">desired_records_v2</span> <span class="op">&lt;-</span> <span class="st">"1, 3"</span>
-<span class="va">ds_some_rows_v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
-  redcap_uri        <span class="op">=</span> <span class="va">uri</span>,
-  token             <span class="op">=</span> <span class="va">token</span>,
-  records_collapsed <span class="op">=</span> <span class="va">desired_records_v2</span>
-<span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<code class="sourceCode R"><span><span class="co"># Return only records with IDs of 1 and 3 (alternate way)</span></span>
+<span><span class="va">desired_records_v2</span> <span class="op">&lt;-</span> <span class="st">"1, 3"</span></span>
+<span><span class="va">ds_some_rows_v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span></span>
+<span>  redcap_uri        <span class="op">=</span> <span class="va">uri</span>,</span>
+<span>  token             <span class="op">=</span> <span class="va">token</span>,</span>
+<span>  records_collapsed <span class="op">=</span> <span class="va">desired_records_v2</span></span>
+<span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
 <pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2022-02-24 16:15:42.</code></pre>
+<pre><code>Starting to read 2 records  at 2022-07-19 20:05:22.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -235,7 +235,7 @@ cols(
 )
  [36mℹ [39m Use `spec()` for the full column specifications.</code></pre>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds_some_rows_v2</span> <span class="co"># Inspect the returned dataset</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ds_some_rows_v2</span> <span class="co"># Inspect the returned dataset</span></span></code></pre></div>
 <pre><code>  record_id name_first name_last                                 address
 1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232
 2         3     Marcus      Wood          243 Hill St.\nGuthrie OK 73402
@@ -257,16 +257,16 @@ cols(
 </h3>
 <p>If only a subset of the <strong>fields</strong> is desired, then two approaches exist. The first is to pass an array (where each element is an field) to the <code>fields</code> parameter. The second is to pass a single string (where the elements are separated by commas) to the <code>fields_collapsed</code> parameter. Like with <code>records</code> and <code>records_collapsed</code> described above, this function converts the more natural format (<em>i.e.</em>, <code>fields</code>) to the format required by the API (<em>ie</em>, <code>fields_collapsed</code>) if <code>fields</code> is specified and <code>fields_collapsed</code> is not.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#Return only the fields record_id, name_first, and age</span>
-<span class="va">desired_fields_v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"name_first"</span>, <span class="st">"age"</span><span class="op">)</span>
-<span class="va">ds_some_fields_v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
-  redcap_uri <span class="op">=</span> <span class="va">uri</span>,
-  token      <span class="op">=</span> <span class="va">token</span>,
-  fields     <span class="op">=</span> <span class="va">desired_fields_v1</span>
-<span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<code class="sourceCode R"><span><span class="co">#Return only the fields record_id, name_first, and age</span></span>
+<span><span class="va">desired_fields_v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"name_first"</span>, <span class="st">"age"</span><span class="op">)</span></span>
+<span><span class="va">ds_some_fields_v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span></span>
+<span>  redcap_uri <span class="op">=</span> <span class="va">uri</span>,</span>
+<span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
+<span>  fields     <span class="op">=</span> <span class="va">desired_fields_v1</span></span>
+<span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-02-24 16:15:43.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-07-19 20:05:24.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -277,16 +277,16 @@ cols(
   age =  [32mcol_double() [39m
 )</code></pre>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#Return only the fields record_id, name_first, and age (alternate way)</span>
-<span class="va">desired_fields_v2</span> <span class="op">&lt;-</span> <span class="st">"record_id, name_first, age"</span>
-<span class="va">ds_some_fields_v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
-  redcap_uri       <span class="op">=</span> <span class="va">uri</span>,
-  token            <span class="op">=</span> <span class="va">token</span>,
-  fields_collapsed <span class="op">=</span> <span class="va">desired_fields_v2</span>
-<span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-02-24 16:15:44.</code></pre>
+<code class="sourceCode R"><span><span class="co">#Return only the fields record_id, name_first, and age (alternate way)</span></span>
+<span><span class="va">desired_fields_v2</span> <span class="op">&lt;-</span> <span class="st">"record_id, name_first, age"</span></span>
+<span><span class="va">ds_some_fields_v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span></span>
+<span>  redcap_uri       <span class="op">=</span> <span class="va">uri</span>,</span>
+<span>  token            <span class="op">=</span> <span class="va">token</span>,</span>
+<span>  fields_collapsed <span class="op">=</span> <span class="va">desired_fields_v2</span></span>
+<span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-07-19 20:05:25.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -297,7 +297,7 @@ cols(
   age =  [32mcol_double() [39m
 )</code></pre>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds_some_fields_v2</span> <span class="co">#Inspect the returned dataset</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ds_some_fields_v2</span> <span class="co">#Inspect the returned dataset</span></span></code></pre></div>
 <pre><code>  record_id name_first age
 1         1     Nutmeg  11
 2         2     Tumtum  11
@@ -310,19 +310,19 @@ cols(
 </h3>
 <p>The two techniques above can be combined when your datasets are large and you don’t want to pull records with certain values. Suppose you want to select subjects from the previous dataset <em>if</em> the were born before 1960 and their weight was over 70kg. Two calls to the server are required. The <strong>first call</strong> to REDCap pulls all the records, but for only three columns: <code>record_id</code>, <code>dob</code>, and <code>weight</code>. From this subset, identify the records that you want to pull all the data for; in this case, the desired <code>record_id</code> values are <code>3</code> &amp; <code>5</code>. The <strong>second call</strong> to REDCap pulls all the columns, but only for the identified records.</p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">######</span>
-<span class="co">## Step 1: First call to REDCap</span>
-<span class="va">desired_fields_v3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"dob"</span>, <span class="st">"weight"</span><span class="op">)</span>
-<span class="va">ds_some_fields_v3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
-  redcap_uri <span class="op">=</span> <span class="va">uri</span>,
-  token      <span class="op">=</span> <span class="va">token</span>,
-  fields     <span class="op">=</span> <span class="va">desired_fields_v3</span>
-<span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-02-24 16:15:46.</code></pre>
+<code class="sourceCode R"><span><span class="co">######</span></span>
+<span><span class="co">## Step 1: First call to REDCap</span></span>
+<span><span class="va">desired_fields_v3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"dob"</span>, <span class="st">"weight"</span><span class="op">)</span></span>
+<span><span class="va">ds_some_fields_v3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span></span>
+<span>  redcap_uri <span class="op">=</span> <span class="va">uri</span>,</span>
+<span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
+<span>  fields     <span class="op">=</span> <span class="va">desired_fields_v3</span></span>
+<span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-07-19 20:05:26.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
  [36m── [39m  [1mColumn specification [22m  [36m──────────────────────────────────────────────────────── [39m
 cols(
@@ -331,7 +331,7 @@ cols(
   weight =  [32mcol_double() [39m
 )</code></pre>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds_some_fields_v3</span> <span class="co">#Examine the these three variables.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ds_some_fields_v3</span> <span class="co">#Examine the these three variables.</span></span></code></pre></div>
 <pre><code>  record_id        dob weight
 1         1 2003-08-30      1
 2         2 2003-03-10      1
@@ -339,28 +339,28 @@ cols(
 4         4 1952-11-02     54
 5         5 1955-04-15    104</code></pre>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">######</span>
-<span class="co">## Step 2: identify desired records, based on age &amp; weight</span>
-<span class="va">before_1960</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">ds_some_fields_v3</span><span class="op">$</span><span class="va">dob</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"1960-01-01"</span><span class="op">)</span><span class="op">)</span>
-<span class="va">heavier_than_70_kg</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">ds_some_fields_v3</span><span class="op">$</span><span class="va">weight</span> <span class="op">&gt;</span> <span class="fl">70</span><span class="op">)</span>
-<span class="va">desired_records_v3</span> <span class="op">&lt;-</span> <span class="va">ds_some_fields_v3</span><span class="op">[</span><span class="va">before_1960</span> <span class="op">&amp;</span> <span class="va">heavier_than_70_kg</span>, <span class="op">]</span><span class="op">$</span><span class="va">record_id</span>
-
-<span class="va">desired_records_v3</span> <span class="co">#Peek at IDs of the identified records</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">######</span></span>
+<span><span class="co">## Step 2: identify desired records, based on age &amp; weight</span></span>
+<span><span class="va">before_1960</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">ds_some_fields_v3</span><span class="op">$</span><span class="va">dob</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"1960-01-01"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">heavier_than_70_kg</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">ds_some_fields_v3</span><span class="op">$</span><span class="va">weight</span> <span class="op">&gt;</span> <span class="fl">70</span><span class="op">)</span></span>
+<span><span class="va">desired_records_v3</span> <span class="op">&lt;-</span> <span class="va">ds_some_fields_v3</span><span class="op">[</span><span class="va">before_1960</span> <span class="op">&amp;</span> <span class="va">heavier_than_70_kg</span>, <span class="op">]</span><span class="op">$</span><span class="va">record_id</span></span>
+<span></span>
+<span><span class="va">desired_records_v3</span> <span class="co">#Peek at IDs of the identified records</span></span></code></pre></div>
 <pre><code>[1] 3 5</code></pre>
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">######</span>
-<span class="co">## Step 3: second call to REDCap</span>
-<span class="co">#Return only records that met the age &amp; weight criteria.</span>
-<span class="va">ds_some_rows_v3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
-  redcap_uri <span class="op">=</span> <span class="va">uri</span>,
-  token      <span class="op">=</span> <span class="va">token</span>,
-  records    <span class="op">=</span> <span class="va">desired_records_v3</span>
-<span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2022-02-24 16:15:47.</code></pre>
+<code class="sourceCode R"><span><span class="co">######</span></span>
+<span><span class="co">## Step 3: second call to REDCap</span></span>
+<span><span class="co">#Return only records that met the age &amp; weight criteria.</span></span>
+<span><span class="va">ds_some_rows_v3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span></span>
+<span>  redcap_uri <span class="op">=</span> <span class="va">uri</span>,</span>
+<span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
+<span>  records    <span class="op">=</span> <span class="va">desired_records_v3</span></span>
+<span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2022-07-19 20:05:27.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).</code></pre>
-<pre><code>2 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
  [36m── [39m  [1mColumn specification [22m  [36m──────────────────────────────────────────────────────── [39m
 cols(
@@ -376,7 +376,7 @@ cols(
 )
  [36mℹ [39m Use `spec()` for the full column specifications.</code></pre>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds_some_rows_v3</span> <span class="co">#Examine the results.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ds_some_rows_v3</span> <span class="co">#Examine the results.</span></span></code></pre></div>
 <pre><code>  record_id name_first name_last                            address
 1         3     Marcus      Wood     243 Hill St.\nGuthrie OK 73402
 2         5   John Lee    Walker Hotel Suite\nNew Orleans LA, 70115
@@ -410,15 +410,15 @@ cols(
 <li>The <code>elapsed_seconds</code> measures the duration of the call.</li>
 </ol>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#Return only the fields record_id, name_first, and age</span>
-<span class="va">all_information</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>
-  redcap_uri <span class="op">=</span> <span class="va">uri</span>,
-  token      <span class="op">=</span> <span class="va">token</span>,
-  fields     <span class="op">=</span> <span class="va">desired_fields_v1</span>
-<span class="op">)</span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<code class="sourceCode R"><span><span class="co">#Return only the fields record_id, name_first, and age</span></span>
+<span><span class="va">all_information</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span></span>
+<span>  redcap_uri <span class="op">=</span> <span class="va">uri</span>,</span>
+<span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
+<span>  fields     <span class="op">=</span> <span class="va">desired_fields_v1</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-02-24 16:15:49.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-07-19 20:05:29.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -429,7 +429,7 @@ cols(
   age =  [32mcol_double() [39m
 )</code></pre>
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">all_information</span> <span class="co">#Inspect the additional information</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">all_information</span> <span class="co">#Inspect the additional information</span></span></code></pre></div>
 <pre><code>$data
   record_id name_first age
 1         1     Nutmeg  11
@@ -469,7 +469,7 @@ $datetime_range_end
 [1] NA
 
 $elapsed_seconds
-[1] 1.223889</code></pre>
+[1] 1.127901</code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -479,89 +479,89 @@ $elapsed_seconds
 <details><p><summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary></p>
 <pre><code> [1m [36m─ Session info ─────────────────────────────────────────────────────────────── [39m [22m
   [3m [90msetting  [39m [23m  [3m [90mvalue [39m [23m
- version  R version 4.1.2 (2021-11-01)
- os       macOS Big Sur 10.16
+ version  R version 4.2.1 (2022-06-23)
+ os       macOS Big Sur ... 10.16
  system   x86_64, darwin17.0
  ui       X11
  language en
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       UTC
- date     2022-02-24
+ date     2022-07-19
  pandoc   2.7.3 @ /usr/local/bin/ (via rmarkdown)
 
  [1m [36m─ Packages ─────────────────────────────────────────────────────────────────── [39m [22m
   [3m [90mpackage     [39m [23m  [3m [90m* [39m [23m  [3m [90mversion  [39m [23m  [3m [90mdate (UTC) [39m [23m  [3m [90mlib [39m [23m  [3m [90msource [39m [23m
- backports     1.4.1     [90m2021-12-13 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- bit           4.0.4     [90m2020-08-04 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- bit64         4.0.5     [90m2020-08-30 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- bslib         0.3.1     [90m2021-10-06 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- cachem        1.0.6     [90m2021-08-19 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- checkmate     2.0.0     [90m2020-02-06 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- cli           3.2.0     [90m2022-02-14 [39m  [90m[1] [39m  [90mCRAN (R 4.1.2) [39m
- colorspace    2.0-3     [90m2022-02-21 [39m  [90m[1] [39m  [90mCRAN (R 4.1.2) [39m
- crayon        1.5.0     [90m2022-02-14 [39m  [90m[1] [39m  [90mCRAN (R 4.1.2) [39m
- curl          4.3.2     [90m2021-06-23 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- desc          1.4.0     [90m2021-09-28 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- digest        0.6.29    [90m2021-12-01 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- dplyr         1.0.8     [90m2022-02-08 [39m  [90m[1] [39m  [90mCRAN (R 4.1.2) [39m
- ellipsis      0.3.2     [90m2021-04-29 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- evaluate      0.15      [90m2022-02-18 [39m  [90m[1] [39m  [90mCRAN (R 4.1.2) [39m
- fansi         1.0.2     [90m2022-01-14 [39m  [90m[1] [39m  [90mCRAN (R 4.1.2) [39m
- fastmap       1.1.0     [90m2021-01-25 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- fs            1.5.2     [90m2021-12-08 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- generics      0.1.2     [90m2022-01-31 [39m  [90m[1] [39m  [90mCRAN (R 4.1.2) [39m
- glue          1.6.2     [90m2022-02-24 [39m  [90m[1] [39m  [90mCRAN (R 4.1.2) [39m
- hms           1.1.1     [90m2021-09-26 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- htmltools     0.5.2     [90m2021-08-25 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- httr          1.4.2     [90m2020-07-20 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- jquerylib     0.1.4     [90m2021-04-26 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- jsonlite      1.8.0     [90m2022-02-22 [39m  [90m[1] [39m  [90mCRAN (R 4.1.2) [39m
- kableExtra    1.3.4     [90m2021-02-20 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- knitr       * 1.37      [90m2021-12-16 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- lifecycle     1.0.1     [90m2021-09-24 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- magrittr    * 2.0.2     [90m2022-01-26 [39m  [90m[1] [39m  [90mCRAN (R 4.1.2) [39m
- memoise       2.0.1     [90m2021-11-26 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- munsell       0.5.0     [90m2018-06-12 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- pillar        1.7.0     [90m2022-02-01 [39m  [90m[1] [39m  [90mCRAN (R 4.1.2) [39m
- pkgconfig     2.0.3     [90m2019-09-22 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- pkgdown       2.0.2     [90m2022-01-13 [39m  [90m[1] [39m  [90mCRAN (R 4.1.2) [39m
- purrr         0.3.4     [90m2020-04-17 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- R6            2.5.1     [90m2021-08-19 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- ragg          1.2.1     [90m2021-12-06 [39m  [90m[1] [39m  [90mCRAN (R 4.1.2) [39m
- readr         2.1.2     [90m2022-01-30 [39m  [90m[1] [39m  [90mCRAN (R 4.1.2) [39m
- REDCapR     *  [1m [35m1.0.9000 [39m [22m  [90m2022-02-24 [39m  [90m[1] [39m  [1m [35mlocal [39m [22m
- rlang         1.0.1     [90m2022-02-03 [39m  [90m[1] [39m  [90mCRAN (R 4.1.2) [39m
- rmarkdown     2.11      [90m2021-09-14 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- rprojroot     2.0.2     [90m2020-11-15 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- rstudioapi    0.13      [90m2020-11-12 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- rvest         1.0.2     [90m2021-10-16 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- sass          0.4.0     [90m2021-05-12 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- scales        1.1.1     [90m2020-05-11 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- sessioninfo   1.2.2     [90m2021-12-06 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- stringi       1.7.6     [90m2021-11-29 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- stringr       1.4.0     [90m2019-02-10 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- svglite       2.1.0     [90m2022-02-03 [39m  [90m[1] [39m  [90mCRAN (R 4.1.2) [39m
- systemfonts   1.0.4     [90m2022-02-11 [39m  [90m[1] [39m  [90mCRAN (R 4.1.2) [39m
- textshaping   0.3.6     [90m2021-10-13 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- tibble        3.1.6     [90m2021-11-07 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- tidyselect    1.1.2     [90m2022-02-21 [39m  [90m[1] [39m  [90mCRAN (R 4.1.2) [39m
- tzdb          0.2.0     [90m2021-10-27 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- utf8          1.2.2     [90m2021-07-24 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- vctrs         0.3.8     [90m2021-04-29 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- viridisLite   0.4.0     [90m2021-04-13 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- vroom         1.5.7     [90m2021-11-30 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- webshot       0.5.2     [90m2019-11-22 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- withr         2.4.3     [90m2021-11-30 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- xfun          0.29      [90m2021-12-14 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- xml2          1.3.3     [90m2021-11-30 [39m  [90m[1] [39m  [90mCRAN (R 4.1.0) [39m
- yaml          2.3.5     [90m2022-02-21 [39m  [90m[1] [39m  [90mCRAN (R 4.1.2) [39m
+ backports     1.4.1     [90m2021-12-13 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ bit           4.0.4     [90m2020-08-04 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ bit64         4.0.5     [90m2020-08-30 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ bslib         0.4.0     [90m2022-07-16 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ cachem        1.0.6     [90m2021-08-19 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ checkmate     2.1.0     [90m2022-04-21 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ cli           3.3.0     [90m2022-04-25 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ colorspace    2.0-3     [90m2022-02-21 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ crayon        1.5.1     [90m2022-03-26 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ curl          4.3.2     [90m2021-06-23 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ desc          1.4.1     [90m2022-03-06 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ digest        0.6.29    [90m2021-12-01 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ dplyr         1.0.9     [90m2022-04-28 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ ellipsis      0.3.2     [90m2021-04-29 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ evaluate      0.15      [90m2022-02-18 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ fansi         1.0.3     [90m2022-03-24 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ fastmap       1.1.0     [90m2021-01-25 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ fs            1.5.2     [90m2021-12-08 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ generics      0.1.3     [90m2022-07-05 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ glue          1.6.2     [90m2022-02-24 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ hms           1.1.1     [90m2021-09-26 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ htmltools     0.5.3     [90m2022-07-18 [39m  [90m[1] [39m  [90mCRAN (R 4.2.1) [39m
+ httr          1.4.3     [90m2022-05-04 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ jquerylib     0.1.4     [90m2021-04-26 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ jsonlite      1.8.0     [90m2022-02-22 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ kableExtra    1.3.4     [90m2021-02-20 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ knitr       * 1.39      [90m2022-04-26 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ lifecycle     1.0.1     [90m2021-09-24 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ magrittr    * 2.0.3     [90m2022-03-30 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ memoise       2.0.1     [90m2021-11-26 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ munsell       0.5.0     [90m2018-06-12 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ pillar        1.8.0     [90m2022-07-18 [39m  [90m[1] [39m  [90mCRAN (R 4.2.1) [39m
+ pkgconfig     2.0.3     [90m2019-09-22 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ pkgdown       2.0.6     [90m2022-07-16 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ purrr         0.3.4     [90m2020-04-17 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ R6            2.5.1     [90m2021-08-19 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ ragg          1.2.2     [90m2022-02-21 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ readr         2.1.2     [90m2022-01-30 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ REDCapR     *  [1m [35m1.0.9002 [39m [22m  [90m2022-07-19 [39m  [90m[1] [39m  [1m [35mlocal [39m [22m
+ rlang         1.0.4     [90m2022-07-12 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ rmarkdown     2.14      [90m2022-04-25 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ rprojroot     2.0.3     [90m2022-04-02 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ rstudioapi    0.13      [90m2020-11-12 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ rvest         1.0.2     [90m2021-10-16 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ sass          0.4.2     [90m2022-07-16 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ scales        1.2.0     [90m2022-04-13 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ sessioninfo   1.2.2     [90m2021-12-06 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ stringi       1.7.8     [90m2022-07-11 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ stringr       1.4.0     [90m2019-02-10 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ svglite       2.1.0     [90m2022-02-03 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ systemfonts   1.0.4     [90m2022-02-11 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ textshaping   0.3.6     [90m2021-10-13 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ tibble        3.1.7     [90m2022-05-03 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ tidyselect    1.1.2     [90m2022-02-21 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ tzdb          0.3.0     [90m2022-03-28 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ utf8          1.2.2     [90m2021-07-24 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ vctrs         0.4.1     [90m2022-04-13 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ viridisLite   0.4.0     [90m2021-04-13 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ vroom         1.5.7     [90m2021-11-30 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ webshot       0.5.3     [90m2022-04-14 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ withr         2.5.0     [90m2022-03-03 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ xfun          0.31      [90m2022-05-10 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ xml2          1.3.3     [90m2021-11-30 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ yaml          2.3.5     [90m2022-02-21 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
 
  [90m [1] /Users/runner/work/_temp/Library [39m
- [90m [2] /Library/Frameworks/R.framework/Versions/4.1/Resources/library [39m
+ [90m [2] /Library/Frameworks/R.framework/Versions/4.2/Resources/library [39m
 
  [1m [36m────────────────────────────────────────────────────────────────────────────── [39m [22m</code></pre>
-</details><p>Report rendered by runner at 2022-02-24, 16:15 +0000 in 13 seconds.</p>
+</details><p>Report rendered by runner at 2022-07-19, 20:05 +0000 in 12 seconds.</p>
 </div>
   </div>
 
@@ -582,7 +582,7 @@ $elapsed_seconds
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

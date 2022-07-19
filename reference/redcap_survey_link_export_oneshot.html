@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9002</span>
       </span>
     </div>
 
@@ -61,15 +61,15 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">redcap_survey_link_export_oneshot</span><span class="op">(</span>
-  <span class="va">redcap_uri</span>,
-  <span class="va">token</span>,
-  <span class="va">record</span>,
-  <span class="va">instrument</span>,
-  event <span class="op">=</span> <span class="st">""</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-  config_options <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">redcap_survey_link_export_oneshot</span><span class="op">(</span></span>
+<span>  <span class="va">redcap_uri</span>,</span>
+<span>  <span class="va">token</span>,</span>
+<span>  <span class="va">record</span>,</span>
+<span>  <span class="va">instrument</span>,</span>
+<span>  event <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  config_options <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -77,27 +77,42 @@
     <dl><dt>redcap_uri</dt>
 <dd><p>The URI (uniform resource identifier) of the REDCap
 project.  Required.</p></dd>
+
+
 <dt>token</dt>
 <dd><p>The user-specific string that serves as the password for a
 project.  Required.</p></dd>
+
+
 <dt>record</dt>
 <dd><p>The record ID where the file is to be imported. Required</p></dd>
+
+
 <dt>instrument</dt>
 <dd><p>The name of the instrument associated with the
 survey link.  Required</p></dd>
+
+
 <dt>event</dt>
 <dd><p>The name of the event where the file is saved in REDCap.
 Optional</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>A boolean value indicating if <code>message</code>s should be printed
 to the R console during the operation.  Optional.</p></dd>
+
+
 <dt>config_options</dt>
 <dd><p>A list of options to pass to <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code> method
 in the 'httr' package.  See the details below. Optional.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Currently, a list is returned with the following elements,</p><ul><li><p><code>success</code>: A boolean value indicating if the operation was apparently
+    
+
+<p>Currently, a list is returned with the following elements,</p><ul><li><p><code>success</code>: A boolean value indicating if the operation was apparently
 successful.</p></li>
 <li><p><code>status_code</code>: The
 <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" class="external-link">http status code</a>
@@ -138,21 +153,21 @@ administrator to send you the static material.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">uri</span>     <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span>
-<span class="r-in"><span class="va">token</span>   <span class="op">&lt;-</span> <span class="st">"8FA9A6BDAE2C0B5DD3CB472DD8E8918C"</span> <span class="co">#pid=817</span></span>
-<span class="r-in"><span class="va">record</span>  <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span class="r-in"><span class="va">instrument</span>   <span class="op">&lt;-</span> <span class="st">"participant_morale_questionnaire"</span></span>
-<span class="r-in"><span class="co"># event &lt;- "" # only for longitudinal projects</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_survey_link_export_oneshot</span><span class="op">(</span></span>
-<span class="r-in">  record         <span class="op">=</span> <span class="va">record</span>,</span>
-<span class="r-in">  instrument     <span class="op">=</span> <span class="va">instrument</span>,</span>
-<span class="r-in">  redcap_uri     <span class="op">=</span> <span class="va">uri</span>,</span>
-<span class="r-in">  token          <span class="op">=</span> <span class="va">token</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">result</span><span class="op">$</span><span class="va">survey_link</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">uri</span>     <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
+<span class="r-in"><span><span class="va">token</span>   <span class="op">&lt;-</span> <span class="st">"8FA9A6BDAE2C0B5DD3CB472DD8E8918C"</span> <span class="co">#pid=817</span></span></span>
+<span class="r-in"><span><span class="va">record</span>  <span class="op">&lt;-</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span><span class="va">instrument</span>   <span class="op">&lt;-</span> <span class="st">"participant_morale_questionnaire"</span></span></span>
+<span class="r-in"><span><span class="co"># event &lt;- "" # only for longitudinal projects</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_survey_link_export_oneshot</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  record         <span class="op">=</span> <span class="va">record</span>,</span></span>
+<span class="r-in"><span>  instrument     <span class="op">=</span> <span class="va">instrument</span>,</span></span>
+<span class="r-in"><span>  redcap_uri     <span class="op">=</span> <span class="va">uri</span>,</span></span>
+<span class="r-in"><span>  token          <span class="op">=</span> <span class="va">token</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">result</span><span class="op">$</span><span class="va">survey_link</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -167,7 +182,7 @@ administrator to send you the static material.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -18,7 +18,7 @@ project metadata."><meta property="og:image" content="https://ouhscbbmc.github.i
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9002</span>
       </span>
     </div>
 
@@ -63,27 +63,36 @@ project metadata.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">regex_named_captures</span><span class="op">(</span><span class="va">pattern</span>, <span class="va">text</span>, perl <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="fu">checkbox_choices</span><span class="op">(</span><span class="va">select_choices</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">regex_named_captures</span><span class="op">(</span><span class="va">pattern</span>, <span class="va">text</span>, perl <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">checkbox_choices</span><span class="op">(</span><span class="va">select_choices</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>pattern</dt>
 <dd><p>The regular expression pattern.  Required.</p></dd>
+
+
 <dt>text</dt>
 <dd><p>The text to apply the regex against.  Required.</p></dd>
+
+
 <dt>perl</dt>
 <dd><p>Indicates if perl-compatible regexps should be used.
 Default is <code>TRUE</code>. Optional.</p></dd>
+
+
 <dt>select_choices</dt>
 <dd><p>The text containing the choices that should be parsed
 to determine the <code>id</code> and <code>label</code> values.  Required.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Currently, a <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> is returned a row for each match,
+    
+
+<p>Currently, a <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> is returned a row for each match,
 and a column for each <em>named</em> group within a match.  For the
 <code>retrieve_checkbox_choices()</code> function, the columns will be.</p><ul><li><p><code>id</code>: The numeric value assigned to each choice (in the data dictionary).</p></li>
 <li><p><code>label</code>: The label assigned to each choice (in the data dictionary).</p></li>
@@ -112,20 +121,20 @@ If you know, please tell me.</em></p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># The weird ranges are to avoid the pipe character;</span></span>
-<span class="r-in"><span class="co">#   PCRE doesn't support character negation.</span></span>
-<span class="r-in"><span class="va">pattern_boxes</span> <span class="op">&lt;-</span> <span class="st">"(?&lt;=\\A| \\| )(?&lt;id&gt;\\d{1,}), (?&lt;label&gt;[\x20-\x7B\x7D-\x7E]{1,})(?= \\| |\\Z)"</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">choices_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="st">"1, American Indian/Alaska Native | "</span>,</span>
-<span class="r-in">  <span class="st">"2, Asian | "</span>,</span>
-<span class="r-in">  <span class="st">"3, Native Hawaiian or Other Pacific Islander | "</span>,</span>
-<span class="r-in">  <span class="st">"4, Black or African American | "</span>,</span>
-<span class="r-in">  <span class="st">"5, White | "</span>,</span>
-<span class="r-in">  <span class="st">"6, Unknown / Not Reported"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># This calls the general function, and requires the correct regex pattern.</span></span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">regex_named_captures</span><span class="op">(</span>pattern<span class="op">=</span><span class="va">pattern_boxes</span>, text<span class="op">=</span><span class="va">choices_1</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># The weird ranges are to avoid the pipe character;</span></span></span>
+<span class="r-in"><span><span class="co">#   PCRE doesn't support character negation.</span></span></span>
+<span class="r-in"><span><span class="va">pattern_boxes</span> <span class="op">&lt;-</span> <span class="st">"(?&lt;=\\A| \\| )(?&lt;id&gt;\\d{1,}), (?&lt;label&gt;[\x20-\x7B\x7D-\x7E]{1,})(?= \\| |\\Z)"</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">choices_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"1, American Indian/Alaska Native | "</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"2, Asian | "</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"3, Native Hawaiian or Other Pacific Islander | "</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"4, Black or African American | "</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"5, White | "</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"6, Unknown / Not Reported"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># This calls the general function, and requires the correct regex pattern.</span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">regex_named_captures</span><span class="op">(</span>pattern<span class="op">=</span><span class="va">pattern_boxes</span>, text<span class="op">=</span><span class="va">choices_1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   id                                     label</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  1             American Indian/Alaska Native</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  2                                     Asian</span>
@@ -133,9 +142,9 @@ If you know, please tell me.</em></p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4  4                 Black or African American</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5  5                                     White</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6  6                    Unknown / Not Reported</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># This function is designed specifically for the checkbox values.</span></span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">checkbox_choices</span><span class="op">(</span>select_choices<span class="op">=</span><span class="va">choices_1</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># This function is designed specifically for the checkbox values.</span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">checkbox_choices</span><span class="op">(</span>select_choices<span class="op">=</span><span class="va">choices_1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   id                                     label</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  1             American Indian/Alaska Native</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  2                                     Asian</span>
@@ -143,21 +152,21 @@ If you know, please tell me.</em></p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4  4                 Black or African American</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5  5                                     White</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6  6                    Unknown / Not Reported</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">uri</span>         <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span>
-<span class="r-in"><span class="va">token</span>       <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">ds_metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="redcap_metadata_read.html">redcap_metadata_read</a></span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span class="r-in"><span class="va">choices_2</span>   <span class="op">&lt;-</span> <span class="va">ds_metadata</span><span class="op">[</span><span class="va">ds_metadata</span><span class="op">$</span><span class="va">field_name</span><span class="op">==</span><span class="st">"race"</span>, <span class="st">"select_choices_or_calculations"</span><span class="op">]</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">regex_named_captures</span><span class="op">(</span>pattern<span class="op">=</span><span class="va">pattern_boxes</span>, text<span class="op">=</span><span class="va">choices_2</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">path_3</span>         <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>package<span class="op">=</span><span class="st">"REDCapR"</span>, <span class="st">"test-data/project-simple/simple-metadata.csv"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ds_metadata_3</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="va">path_3</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">choices_3</span>      <span class="op">&lt;-</span> <span class="va">ds_metadata_3</span><span class="op">[</span><span class="va">ds_metadata_3</span><span class="op">$</span><span class="va">field_name</span><span class="op">==</span><span class="st">"race"</span>, <span class="st">"select_choices_or_calculations"</span><span class="op">]</span></span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">regex_named_captures</span><span class="op">(</span>pattern<span class="op">=</span><span class="va">pattern_boxes</span>, text<span class="op">=</span><span class="va">choices_3</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">uri</span>         <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
+<span class="r-in"><span><span class="va">token</span>       <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">ds_metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="redcap_metadata_read.html">redcap_metadata_read</a></span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
+<span class="r-in"><span><span class="va">choices_2</span>   <span class="op">&lt;-</span> <span class="va">ds_metadata</span><span class="op">[</span><span class="va">ds_metadata</span><span class="op">$</span><span class="va">field_name</span><span class="op">==</span><span class="st">"race"</span>, <span class="st">"select_choices_or_calculations"</span><span class="op">]</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">regex_named_captures</span><span class="op">(</span>pattern<span class="op">=</span><span class="va">pattern_boxes</span>, text<span class="op">=</span><span class="va">choices_2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">path_3</span>         <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>package<span class="op">=</span><span class="st">"REDCapR"</span>, <span class="st">"test-data/project-simple/simple-metadata.csv"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ds_metadata_3</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="va">path_3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">choices_3</span>      <span class="op">&lt;-</span> <span class="va">ds_metadata_3</span><span class="op">[</span><span class="va">ds_metadata_3</span><span class="op">$</span><span class="va">field_name</span><span class="op">==</span><span class="st">"race"</span>, <span class="st">"select_choices_or_calculations"</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">regex_named_captures</span><span class="op">(</span>pattern<span class="op">=</span><span class="va">pattern_boxes</span>, text<span class="op">=</span><span class="va">choices_3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   id                                     label</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  1             American Indian/Alaska Native</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  2                                     Asian</span>
@@ -179,7 +188,7 @@ If you know, please tell me.</em></p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

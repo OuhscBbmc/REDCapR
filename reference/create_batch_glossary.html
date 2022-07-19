@@ -23,7 +23,7 @@ server isn't continually tied up."><meta property="og:image" content="https://ou
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9002</span>
       </span>
     </div>
 
@@ -72,20 +72,25 @@ server isn't continually tied up.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">create_batch_glossary</span><span class="op">(</span><span class="va">row_count</span>, <span class="va">batch_size</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">create_batch_glossary</span><span class="op">(</span><span class="va">row_count</span>, <span class="va">batch_size</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>row_count</dt>
 <dd><p>The number records in the large dataset, before it's split.</p></dd>
+
+
 <dt>batch_size</dt>
 <dd><p>The maximum number of subject records a single batch
 should contain.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Currently, a <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> is returned with the following
+    
+
+<p>Currently, a <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> is returned with the following
 columns,</p><ul><li><p><code>id</code>: an <code>integer</code> that uniquely identifies the batch, starting at <code>1</code>.</p></li>
 <li><p><code>start_index</code>: the index of the first row in the batch. <code>integer</code>.</p></li>
 <li><p><code>stop_index</code>: the index of the last row in the batch. <code>integer</code>.</p></li>
@@ -114,14 +119,14 @@ padded columns allow the OS to sort the batches/files in sequential order.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">create_batch_glossary</span><span class="op">(</span><span class="fl">100</span>, <span class="fl">50</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">create_batch_glossary</span><span class="op">(</span><span class="fl">100</span>, <span class="fl">50</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   id start_index stop_index index_pretty start_index_pretty stop_index_pretty</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  1           1         50            1                001               050</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  2          51        100            2                051               100</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       label</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 1_001_050</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 2_051_100</span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">create_batch_glossary</span><span class="op">(</span><span class="fl">100</span>, <span class="fl">25</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">create_batch_glossary</span><span class="op">(</span><span class="fl">100</span>, <span class="fl">25</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   id start_index stop_index index_pretty start_index_pretty stop_index_pretty</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  1           1         25            1                001               025</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  2          26         50            2                026               050</span>
@@ -132,7 +137,7 @@ padded columns allow the OS to sort the batches/files in sequential order.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 2_026_050</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3 3_051_075</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4 4_076_100</span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">create_batch_glossary</span><span class="op">(</span><span class="fl">100</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">create_batch_glossary</span><span class="op">(</span><span class="fl">100</span>, <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    id start_index stop_index index_pretty start_index_pretty stop_index_pretty</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   1           1          3           01                001               003</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2   2           4          6           02                004               006</span>
@@ -203,12 +208,12 @@ padded columns allow the OS to sort the batches/files in sequential order.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 32 32_094_096</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 33 33_097_099</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 34 34_100_100</span>
-<span class="r-in"><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span class="r-in">  record_id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span>,</span>
-<span class="r-in">  iv        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">4</span>, size<span class="op">=</span><span class="fl">100</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span class="r-in">  dv        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">create_batch_glossary</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, batch_size<span class="op">=</span><span class="fl">40</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  record_id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span>,</span></span>
+<span class="r-in"><span>  iv        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">4</span>, size<span class="op">=</span><span class="fl">100</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  dv        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">create_batch_glossary</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, batch_size<span class="op">=</span><span class="fl">40</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   id start_index stop_index index_pretty start_index_pretty stop_index_pretty</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  1           1         40            1                001               040</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  2          41         80            2                041               080</span>
@@ -231,7 +236,7 @@ padded columns allow the OS to sort the batches/files in sequential order.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

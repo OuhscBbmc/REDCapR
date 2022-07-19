@@ -19,7 +19,7 @@ one field in the project's dataset."><meta property="og:image" content="https://
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9002</span>
       </span>
     </div>
 
@@ -65,16 +65,16 @@ one field in the project's dataset.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">redcap_metadata_read</span><span class="op">(</span>
-  <span class="va">redcap_uri</span>,
-  <span class="va">token</span>,
-  forms <span class="op">=</span> <span class="cn">NULL</span>,
-  forms_collapsed <span class="op">=</span> <span class="st">""</span>,
-  fields <span class="op">=</span> <span class="cn">NULL</span>,
-  fields_collapsed <span class="op">=</span> <span class="st">""</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-  config_options <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">redcap_metadata_read</span><span class="op">(</span></span>
+<span>  <span class="va">redcap_uri</span>,</span>
+<span>  <span class="va">token</span>,</span>
+<span>  forms <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  forms_collapsed <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  fields <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fields_collapsed <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  config_options <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -82,33 +82,50 @@ one field in the project's dataset.</p>
     <dl><dt>redcap_uri</dt>
 <dd><p>The URI (uniform resource identifier) of the REDCap
 project.  Required.</p></dd>
+
+
 <dt>token</dt>
 <dd><p>The user-specific string that serves as the password for a
 project.  Required.</p></dd>
+
+
 <dt>forms</dt>
 <dd><p>An array, where each element corresponds to the REDCap form
 of the desired fields.  Optional.</p></dd>
+
+
 <dt>forms_collapsed</dt>
 <dd><p>A single string, where the desired forms are
 separated by commas.  Optional.</p></dd>
+
+
 <dt>fields</dt>
 <dd><p>An array, where each element corresponds to a desired project
 field.  Optional.</p></dd>
+
+
 <dt>fields_collapsed</dt>
 <dd><p>A single string, where the desired field names are
 separated by commas.  Optional.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>A boolean value indicating if <code>message</code>s should be printed
 to the R console during the operation.  The verbose output might contain
 sensitive information (<em>e.g.</em> PHI), so turn this off if the output might
 be visible somewhere public. Optional.</p></dd>
+
+
 <dt>config_options</dt>
 <dd><p>A list of options to pass to <code>POST</code> method in the
 <code>httr</code> package.  See the details in <code><a href="redcap_read_oneshot.html">redcap_read_oneshot()</a></code>. Optional.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Currently, a list is returned with the following elements:</p><ul><li><p><code>data</code>: An R <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> of the desired records and columns.</p></li>
+    
+
+<p>Currently, a list is returned with the following elements:</p><ul><li><p><code>data</code>: An R <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> of the desired records and columns.</p></li>
 <li><p><code>success</code>: A boolean value indicating if the operation was apparently
 successful.</p></li>
 <li><p><code>status_codes</code>: A collection of
@@ -150,11 +167,11 @@ administrator to send you the static material.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">uri</span>   <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span>
-<span class="r-in"><span class="va">token</span> <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_metadata_read</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">uri</span>   <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
+<span class="r-in"><span><span class="va">token</span> <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_metadata_read</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -169,7 +186,7 @@ administrator to send you the static material.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

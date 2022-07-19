@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9002</span>
       </span>
     </div>
 
@@ -61,17 +61,20 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">constant</span><span class="op">(</span><span class="va">name</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">constant</span><span class="op">(</span><span class="va">name</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>name</dt>
 <dd><p>Name of constant.  Required character.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The constant's value.  Currently all are single integers,
+    
+
+<p>The constant's value.  Currently all are single integers,
 but that could be expanded in the future.</p>
     </div>
     <div id="details">
@@ -107,72 +110,72 @@ in the GitHub documentation.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"form_incomplete"</span><span class="op">)</span>  <span class="co"># Returns 0L</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"form_incomplete"</span><span class="op">)</span>  <span class="co"># Returns 0L</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"form_unverified"</span><span class="op">)</span>  <span class="co"># Returns 1L</span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"form_unverified"</span><span class="op">)</span>  <span class="co"># Returns 1L</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"form_complete"</span>  <span class="op">)</span>  <span class="co"># Returns 2L</span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"form_complete"</span>  <span class="op">)</span>  <span class="co"># Returns 2L</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"data_export_rights_no_access"</span>   <span class="op">)</span>  <span class="co"># Returns 0L</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"data_export_rights_no_access"</span>   <span class="op">)</span>  <span class="co"># Returns 0L</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"data_export_rights_deidentified"</span><span class="op">)</span>  <span class="co"># Returns 1L</span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"data_export_rights_deidentified"</span><span class="op">)</span>  <span class="co"># Returns 1L</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"data_export_rights_full"</span>        <span class="op">)</span>  <span class="co"># Returns 2L</span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"data_export_rights_full"</span>        <span class="op">)</span>  <span class="co"># Returns 2L</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"form_rights_no_access"</span><span class="op">)</span>   <span class="co"># Returns 0L</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"form_rights_no_access"</span><span class="op">)</span>   <span class="co"># Returns 0L</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"form_rights_readonly"</span> <span class="op">)</span>   <span class="co"># Returns 2L --Notice the order</span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"form_rights_readonly"</span> <span class="op">)</span>   <span class="co"># Returns 2L --Notice the order</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"form_rights_edit_form"</span><span class="op">)</span>   <span class="co"># Returns 1L</span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"form_rights_edit_form"</span><span class="op">)</span>   <span class="co"># Returns 1L</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"form_rights_edit_survey"</span><span class="op">)</span> <span class="co"># Returns 3L</span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"form_rights_edit_survey"</span><span class="op">)</span> <span class="co"># Returns 3L</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"access_no"</span> <span class="op">)</span>  <span class="co"># Returns 0L</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"access_no"</span> <span class="op">)</span>  <span class="co"># Returns 0L</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"access_yes"</span><span class="op">)</span>  <span class="co"># Returns 1L</span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"access_yes"</span><span class="op">)</span>  <span class="co"># Returns 1L</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="st">"form_complete"</span>,</span>
-<span class="r-in">  <span class="st">"form_complete"</span>,</span>
-<span class="r-in">  <span class="st">"form_incomplete"</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">)</span> <span class="co"># Returns c(2L, 2L, 0L)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"form_complete"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"form_complete"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"form_incomplete"</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span> <span class="co"># Returns c(2L, 2L, 0L)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 2 0</span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="st">"form_rights_no_access"</span>,</span>
-<span class="r-in">  <span class="st">"form_rights_readonly"</span>,</span>
-<span class="r-in">  <span class="st">"form_rights_edit_form"</span>,</span>
-<span class="r-in">  <span class="st">"form_rights_edit_survey"</span></span>
-<span class="r-in"><span class="op">)</span><span class="op">)</span> <span class="co"># Returns c(0L, 2L, 1L, 3L)</span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"form_rights_no_access"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"form_rights_readonly"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"form_rights_edit_form"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"form_rights_edit_survey"</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span> <span class="co"># Returns c(0L, 2L, 1L, 3L)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0 2 1 3</span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">constant_to_form_completion</span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">constant_to_form_completion</span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] incomplete complete   unverified complete   unknown   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Levels: incomplete unverified complete unknown</span>
-<span class="r-in"><span class="fu">constant_to_form_rights</span><span class="op">(</span>     <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">constant_to_form_rights</span><span class="op">(</span>     <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] no_access readonly  edit_form readonly  unknown  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Levels: no_access readonly edit_form edit_survey unknown</span>
-<span class="r-in"><span class="fu">constant_to_export_rights</span><span class="op">(</span>   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">3</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">constant_to_export_rights</span><span class="op">(</span>   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">3</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] no_access    rights_full  deidentified &lt;NA&gt;         unknown     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Levels: no_access deidentified rights_full unknown</span>
-<span class="r-in"><span class="fu">constant_to_access</span><span class="op">(</span>          <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">constant_to_access</span><span class="op">(</span>          <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] no      yes     yes     no      unknown</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Levels: no yes unknown</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># The following line returns an error:</span></span>
-<span class="r-in"><span class="co">#     Assertion on 'name' failed: Must be a subset of</span></span>
-<span class="r-in"><span class="co">#     {'form_complete','form_incomplete','form_unverified'},</span></span>
-<span class="r-in"><span class="co">#     but is {'bad-name'}.</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"bad-name"</span><span class="op">)</span>    <span class="co"># Returns an error</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"form_complete"</span>, <span class="st">"bad-name"</span><span class="op">)</span><span class="op">)</span> <span class="co"># Returns an error</span></span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># The following line returns an error:</span></span></span>
+<span class="r-in"><span><span class="co">#     Assertion on 'name' failed: Must be a subset of</span></span></span>
+<span class="r-in"><span><span class="co">#     {'form_complete','form_incomplete','form_unverified'},</span></span></span>
+<span class="r-in"><span><span class="co">#     but is {'bad-name'}.</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="st">"bad-name"</span><span class="op">)</span>    <span class="co"># Returns an error</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">constant</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"form_complete"</span>, <span class="st">"bad-name"</span><span class="op">)</span><span class="op">)</span> <span class="co"># Returns an error</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -187,7 +190,7 @@ in the GitHub documentation.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

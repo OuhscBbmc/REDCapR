@@ -18,7 +18,7 @@ values."><meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9002</span>
       </span>
     </div>
 
@@ -63,13 +63,13 @@ values.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">kernel_api</span><span class="op">(</span>
-  <span class="va">redcap_uri</span>,
-  <span class="va">post_body</span>,
-  <span class="va">config_options</span>,
-  encoding <span class="op">=</span> <span class="st">"UTF-8"</span>,
-  content_type <span class="op">=</span> <span class="st">"text/csv"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">kernel_api</span><span class="op">(</span></span>
+<span>  <span class="va">redcap_uri</span>,</span>
+<span>  <span class="va">post_body</span>,</span>
+<span>  <span class="va">config_options</span>,</span>
+<span>  encoding <span class="op">=</span> <span class="st">"UTF-8"</span>,</span>
+<span>  content_type <span class="op">=</span> <span class="st">"text/csv"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -77,21 +77,32 @@ values.</p>
     <dl><dt>redcap_uri</dt>
 <dd><p>The URI (uniform resource identifier) of the REDCap
 project.  Required.</p></dd>
+
+
 <dt>post_body</dt>
 <dd><p>List of contents expected by the REDCap API.  Required.</p></dd>
+
+
 <dt>config_options</dt>
 <dd><p>A list of options to pass to <code>POST</code> method in the
 <code>httr</code> package.  See the details below.  Optional.</p></dd>
+
+
 <dt>encoding</dt>
 <dd><p>The encoding value passed to <code><a href="https://httr.r-lib.org/reference/content.html" class="external-link">httr::content()</a></code>.  Defaults
 to 'UTF-8'.</p></dd>
+
+
 <dt>content_type</dt>
 <dd><p>The MIME value passed to <code><a href="https://httr.r-lib.org/reference/content.html" class="external-link">httr::content()</a></code>.  Defaults
 to 'text/csv'.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">utils::packageVersion</a>.</p>
+    
+
+<p>A <a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">utils::packageVersion</a>.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -103,22 +114,22 @@ It guarantees the value can always be used in <code><a href="https://rdrr.io/r/u
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">config_options</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
-<span class="r-in"><span class="va">uri</span>            <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span>
-<span class="r-in"><span class="va">token</span>          <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span>
-<span class="r-in"><span class="va">post_body</span>      <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span class="r-in">  token    <span class="op">=</span> <span class="va">token</span>,</span>
-<span class="r-in">  content  <span class="op">=</span> <span class="st">'project'</span>,</span>
-<span class="r-in">  format   <span class="op">=</span> <span class="st">'csv'</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">kernel</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">:::</span><span class="fu">kernel_api</span><span class="op">(</span><span class="va">uri</span>, <span class="va">post_body</span>, <span class="va">config_options</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Consume the results in a few different ways.</span></span>
-<span class="r-in"><span class="va">kernel</span><span class="op">$</span><span class="va">result</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span>text<span class="op">=</span><span class="va">kernel</span><span class="op">$</span><span class="va">raw_text</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span>text<span class="op">=</span><span class="va">kernel</span><span class="op">$</span><span class="va">raw_text</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">config_options</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span></span>
+<span class="r-in"><span><span class="va">uri</span>            <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
+<span class="r-in"><span><span class="va">token</span>          <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span></span>
+<span class="r-in"><span><span class="va">post_body</span>      <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  token    <span class="op">=</span> <span class="va">token</span>,</span></span>
+<span class="r-in"><span>  content  <span class="op">=</span> <span class="st">'project'</span>,</span></span>
+<span class="r-in"><span>  format   <span class="op">=</span> <span class="st">'csv'</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">kernel</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">:::</span><span class="fu">kernel_api</span><span class="op">(</span><span class="va">uri</span>, <span class="va">post_body</span>, <span class="va">config_options</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Consume the results in a few different ways.</span></span></span>
+<span class="r-in"><span><span class="va">kernel</span><span class="op">$</span><span class="va">result</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span>text<span class="op">=</span><span class="va">kernel</span><span class="op">$</span><span class="va">raw_text</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span>text<span class="op">=</span><span class="va">kernel</span><span class="op">$</span><span class="va">raw_text</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -133,7 +144,7 @@ It guarantees the value can always be used in <code><a href="https://rdrr.io/r/u
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

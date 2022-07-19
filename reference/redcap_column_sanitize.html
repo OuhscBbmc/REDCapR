@@ -18,7 +18,7 @@ cause problems when writing to a REDCap project."><meta property="og:image" cont
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9002</span>
       </span>
     </div>
 
@@ -63,12 +63,12 @@ cause problems when writing to a REDCap project.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">redcap_column_sanitize</span><span class="op">(</span>
-  <span class="va">d</span>,
-  column_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>,
-  encoding_initial <span class="op">=</span> <span class="st">"latin1"</span>,
-  substitution_character <span class="op">=</span> <span class="st">"?"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">redcap_column_sanitize</span><span class="op">(</span></span>
+<span>  <span class="va">d</span>,</span>
+<span>  column_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>,</span>
+<span>  encoding_initial <span class="op">=</span> <span class="st">"latin1"</span>,</span>
+<span>  substitution_character <span class="op">=</span> <span class="st">"?"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -76,19 +76,28 @@ cause problems when writing to a REDCap project.</p>
     <dl><dt>d</dt>
 <dd><p>The <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> containing the dataset used to update
 the REDCap project.  Required.</p></dd>
+
+
 <dt>column_names</dt>
 <dd><p>An array of <code>character</code> values indicating the names of
 the variables to sanitize.  Optional.</p></dd>
+
+
 <dt>encoding_initial</dt>
 <dd><p>An array of <code>character</code> values indicating the names
 of the variables to sanitize.  Optional.</p></dd>
+
+
 <dt>substitution_character</dt>
 <dd><p>The <code>character</code> value that replaces characters
 that were unable to be appropriately matched.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> with same columns, but whose character values
+    
+
+<p>A <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> with same columns, but whose character values
 have been sanitized.</p>
     </div>
     <div id="details">
@@ -106,15 +115,15 @@ characters.  Be aware of this in case you notice OS-dependent differences.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Typical examples are not shown because they require non-ASCII encoding,</span></span>
-<span class="r-in"><span class="co">#   which makes the package documentation less portable.</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">dirty</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span class="r-in">  id     <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,</span>
-<span class="r-in">  names  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Ekstr\xf8m"</span>, <span class="st">"J\xf6reskog"</span>, <span class="st">"bi\xdfchen Z\xfcrcher"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_column_sanitize</span><span class="op">(</span><span class="va">dirty</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Typical examples are not shown because they require non-ASCII encoding,</span></span></span>
+<span class="r-in"><span><span class="co">#   which makes the package documentation less portable.</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">dirty</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  id     <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,</span></span>
+<span class="r-in"><span>  names  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Ekstr\xf8m"</span>, <span class="st">"J\xf6reskog"</span>, <span class="st">"bi\xdfchen Z\xfcrcher"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_column_sanitize</span><span class="op">(</span><span class="va">dirty</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   id             names</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  1           Ekstrom</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  2         J"oreskog</span>
@@ -133,7 +142,7 @@ characters.  Be aware of this in case you notice OS-dependent differences.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

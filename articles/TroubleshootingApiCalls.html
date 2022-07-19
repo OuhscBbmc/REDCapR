@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9002</span>
       </span>
     </div>
 
@@ -86,7 +86,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Troubleshooting REDCap API Calls</h1>
             
-            <h4 data-toc-skip class="date">2022-02-24</h4>
+            <h4 data-toc-skip class="date">2022-07-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/HEAD/vignettes/TroubleshootingApiCalls.Rmd" class="external-link"><code>vignettes/TroubleshootingApiCalls.Rmd</code></a></small>
       <div class="hidden name"><code>TroubleshootingApiCalls.Rmd</code></div>
@@ -298,93 +298,93 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <li>
 <p><strong>Is httr installed on the user’s local machine?</strong> If so, running <code><a href="https://httr.r-lib.org/" class="external-link">library(httr)</a></code> should not produce any error messages if you’re starting with a fresh session of R:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/" class="external-link">httr</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/" class="external-link">httr</a></span><span class="op">)</span></span></code></pre></div>
 </li>
 <li><p><strong>Do you have the most recent version of httr?</strong> There are several ways to do this, but the easiest is probably to run <code>update.packages(ask = FALSE, repos = "https://cran.rstudio.com")</code>. The optional argument <code>ask</code> prevents the user from needing to respond ‘Y’ to each outdated package.</p></li>
 <li>
 <p><strong>Can you query a <em>test</em> project using httr?</strong> Both the <a href="https://github.com/nutterb/redcapAPI" class="external-link">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR" class="external-link">REDCapR</a> packages employ something similar to the following function in <a href="https://cran.r-project.org/package=httr" class="external-link">httr</a>. If you’re curious, here is the relevant source code for <a href="https://github.com/nutterb/redcapAPI/blob/master/R/exportRecords.R" class="external-link">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-read-oneshot.R" class="external-link">REDCapR</a>.</p>
 <p>If this check fails, consider attempting again with the url and token used above in the Postman example.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">redcap_uri</span> <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class="va">token</span>      <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span>
-
-<span class="va">post_body</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
-  token           <span class="op">=</span> <span class="va">token</span>,
-  content         <span class="op">=</span> <span class="st">'record'</span>,
-  format          <span class="op">=</span> <span class="st">'csv'</span>,
-  type            <span class="op">=</span> <span class="st">'flat'</span>
-<span class="op">)</span>
-
-<span class="va">raw_text</span> <span class="op">&lt;-</span> <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">POST</a></span><span class="op">(</span>
-  url             <span class="op">=</span> <span class="va">redcap_uri</span>,
-  body            <span class="op">=</span> <span class="va">post_body</span>,
-  <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/verbose.html" class="external-link">verbose</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># Remove this line to suppress the console updates.</span>
-<span class="op">)</span>
-
-<span class="va">raw_text</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">redcap_uri</span> <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span>
+<span><span class="va">token</span>      <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span>
+<span></span>
+<span><span class="va">post_body</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  token           <span class="op">=</span> <span class="va">token</span>,</span>
+<span>  content         <span class="op">=</span> <span class="st">'record'</span>,</span>
+<span>  format          <span class="op">=</span> <span class="st">'csv'</span>,</span>
+<span>  type            <span class="op">=</span> <span class="st">'flat'</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">raw_text</span> <span class="op">&lt;-</span> <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">POST</a></span><span class="op">(</span></span>
+<span>  url             <span class="op">=</span> <span class="va">redcap_uri</span>,</span>
+<span>  body            <span class="op">=</span> <span class="va">post_body</span>,</span>
+<span>  <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/verbose.html" class="external-link">verbose</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># Remove this line to suppress the console updates.</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">raw_text</span></span></code></pre></div>
 <p>Alternatively, you can try using the <a href="https://cran.r-project.org/package=RCurl" class="external-link">RCurl</a> package, which has been mostly replaced by httr in packages developed since 2014.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">raw_text</span> <span class="op">&lt;-</span> <span class="fu">RCurl</span><span class="fu">::</span><span class="fu">postForm</span><span class="op">(</span>
-  uri             <span class="op">=</span> <span class="va">redcap_uri</span>
-  , token         <span class="op">=</span> <span class="va">token</span>
-  , content       <span class="op">=</span> <span class="st">'record'</span>
-  , format        <span class="op">=</span> <span class="st">'csv'</span>
-  , type          <span class="op">=</span> <span class="st">'flat'</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">raw_text</span> <span class="op">&lt;-</span> <span class="fu">RCurl</span><span class="fu">::</span><span class="fu">postForm</span><span class="op">(</span></span>
+<span>  uri             <span class="op">=</span> <span class="va">redcap_uri</span></span>
+<span>  , token         <span class="op">=</span> <span class="va">token</span></span>
+<span>  , content       <span class="op">=</span> <span class="st">'record'</span></span>
+<span>  , format        <span class="op">=</span> <span class="st">'csv'</span></span>
+<span>  , type          <span class="op">=</span> <span class="st">'flat'</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Can you query a <em>subset</em> of <em>your</em> project using httr?</strong> This step is like the previous one, but with two differences. First, it’s using your REDCap project (instead of the test project). Second, it pulls fewer records, and a smaller collection of fields. Subsetting can help troubleshoot by avoiding (and thus identifying) cells with problematic values.</p>
 <p>Notice this call now passes values to the <code>records</code> and <code>fields</code> parameters. Also notice each value is a <em>single</em> long string (rather a <em>vector</em> of shorter strings, which is more natural to most R users).</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">redcap_uri</span>         <span class="op">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>
-<span class="va">token</span>              <span class="op">&lt;-</span> <span class="st">"your-secret-token"</span>
-
-<span class="va">records_collapsed</span>  <span class="op">&lt;-</span> <span class="st">"1,2,3"</span>                             <span class="co"># Assumes dataset contains ID values of 1-3.</span>
-<span class="va">fields_collapsed</span>   <span class="op">&lt;-</span> <span class="st">"record_id,name_first,name_last"</span>    <span class="co"># Assumes dataset contains these variables.</span>
-
-<span class="va">post_body</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
-  token           <span class="op">=</span> <span class="va">token</span>,
-  content         <span class="op">=</span> <span class="st">'record'</span>,
-  format          <span class="op">=</span> <span class="st">'csv'</span>,
-  type            <span class="op">=</span> <span class="st">'flat'</span>,
-  records         <span class="op">=</span> <span class="va">records_collapsed</span>,
-  fields          <span class="op">=</span> <span class="va">fields_collapsed</span>
-<span class="op">)</span>
-
-<span class="va">raw_text</span> <span class="op">&lt;-</span> <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">POST</a></span><span class="op">(</span>
-  url             <span class="op">=</span> <span class="va">redcap_uri</span>,
-  body            <span class="op">=</span> <span class="va">post_body</span>,
-  <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/verbose.html" class="external-link">verbose</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># Remove this line to suppress the console updates.</span>
-<span class="op">)</span>
-
-<span class="va">raw_text</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">redcap_uri</span>         <span class="op">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span></span>
+<span><span class="va">token</span>              <span class="op">&lt;-</span> <span class="st">"your-secret-token"</span></span>
+<span></span>
+<span><span class="va">records_collapsed</span>  <span class="op">&lt;-</span> <span class="st">"1,2,3"</span>                             <span class="co"># Assumes dataset contains ID values of 1-3.</span></span>
+<span><span class="va">fields_collapsed</span>   <span class="op">&lt;-</span> <span class="st">"record_id,name_first,name_last"</span>    <span class="co"># Assumes dataset contains these variables.</span></span>
+<span></span>
+<span><span class="va">post_body</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  token           <span class="op">=</span> <span class="va">token</span>,</span>
+<span>  content         <span class="op">=</span> <span class="st">'record'</span>,</span>
+<span>  format          <span class="op">=</span> <span class="st">'csv'</span>,</span>
+<span>  type            <span class="op">=</span> <span class="st">'flat'</span>,</span>
+<span>  records         <span class="op">=</span> <span class="va">records_collapsed</span>,</span>
+<span>  fields          <span class="op">=</span> <span class="va">fields_collapsed</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">raw_text</span> <span class="op">&lt;-</span> <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">POST</a></span><span class="op">(</span></span>
+<span>  url             <span class="op">=</span> <span class="va">redcap_uri</span>,</span>
+<span>  body            <span class="op">=</span> <span class="va">post_body</span>,</span>
+<span>  <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/verbose.html" class="external-link">verbose</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># Remove this line to suppress the console updates.</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">raw_text</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Can you query an <em>entire</em> project using httr?</strong> There are two advantages of trying a subset of the data. First, small datasets avoid the time-out errors that plague large datasets. Second, it may avoid problematic values being passed through the pipeline. If the current check fails but the previous check succeeds, then experiment with different expanses of records and fields. This should help determine which values are causing the problems, or if there’s simply too much data being pulled in one pass.</p>
 <p>If the desired dataset is too large, consider if you can prune unnecessary records or fields. If not, one solution is to pull smaller, multiple batches using the API, then reassemble them. The <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code>redcap_read()</code> function</a> in <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> does this automatically, and allows the user to specify a <code>batch_size</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">redcap_uri</span>                  <span class="op">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>
-<span class="va">token</span>                       <span class="op">&lt;-</span> <span class="st">"your-secret-token"</span>
-
-<span class="va">records_collapsed</span>           <span class="op">&lt;-</span> <span class="cn">NULL</span>
-<span class="va">fields_collapsed</span>            <span class="op">&lt;-</span> <span class="cn">NULL</span>
-
-<span class="va">post_body</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
-  token           <span class="op">=</span> <span class="va">token</span>,
-  content         <span class="op">=</span> <span class="st">'record'</span>,
-  format          <span class="op">=</span> <span class="st">'csv'</span>,
-  type            <span class="op">=</span> <span class="st">'flat'</span>,
-  records         <span class="op">=</span> <span class="va">records_collapsed</span>,
-  fields          <span class="op">=</span> <span class="va">fields_collapsed</span>
-<span class="op">)</span>
-
-<span class="va">raw_text</span> <span class="op">&lt;-</span> <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">POST</a></span><span class="op">(</span>
-  url             <span class="op">=</span> <span class="va">redcap_uri</span>,
-  body            <span class="op">=</span> <span class="va">post_body</span>,
-  <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/verbose.html" class="external-link">verbose</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># Remove this line to suppress the console updates.</span>
-<span class="op">)</span>
-
-<span class="va">raw_text</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">redcap_uri</span>                  <span class="op">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span></span>
+<span><span class="va">token</span>                       <span class="op">&lt;-</span> <span class="st">"your-secret-token"</span></span>
+<span></span>
+<span><span class="va">records_collapsed</span>           <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
+<span><span class="va">fields_collapsed</span>            <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
+<span></span>
+<span><span class="va">post_body</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  token           <span class="op">=</span> <span class="va">token</span>,</span>
+<span>  content         <span class="op">=</span> <span class="st">'record'</span>,</span>
+<span>  format          <span class="op">=</span> <span class="st">'csv'</span>,</span>
+<span>  type            <span class="op">=</span> <span class="st">'flat'</span>,</span>
+<span>  records         <span class="op">=</span> <span class="va">records_collapsed</span>,</span>
+<span>  fields          <span class="op">=</span> <span class="va">fields_collapsed</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">raw_text</span> <span class="op">&lt;-</span> <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">POST</a></span><span class="op">(</span></span>
+<span>  url             <span class="op">=</span> <span class="va">redcap_uri</span>,</span>
+<span>  body            <span class="op">=</span> <span class="va">post_body</span>,</span>
+<span>  <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/verbose.html" class="external-link">verbose</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># Remove this line to suppress the console updates.</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">raw_text</span></span></code></pre></div>
 </li>
 </ol>
 <p>If all these checks pass, proceed to the next section. If not, start by consulting your REDCap administrator.</p>
@@ -399,31 +399,31 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <li>
 <p><strong>Is the latest version of REDCapR installed on your machine?</strong> Currently the easiest way to install REDCapR is with the <a href="https://remotes.r-lib.org/" class="external-link">remotes</a> package. The following code installs remotes, then installs REDCapR. The CRAN version of REDCapR is updated only a few times a year, while the code below will download the latest stable version.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span>, repos <span class="op">=</span> <span class="st">"https://cran.rstudio.com"</span><span class="op">)</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"OuhscBbmc/REDCapR"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span>, repos <span class="op">=</span> <span class="st">"https://cran.rstudio.com"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"OuhscBbmc/REDCapR"</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Does REDCapR load successfully on your machine?</strong> If so, running <code><a href="https://ouhscbbmc.github.io/REDCapR/">library(REDCapR)</a></code> should produce the following output if you’re starting with a fresh session of R:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span>
-<span class="co"># Loading required package: REDCapR</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span></span>
+<span><span class="co"># Loading required package: REDCapR</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Can you export their data dictionary?</strong> Sometimes the problem exists within the metadata/dictionary, instead of the actual data values. Verify the structure and content of this specific project is interpretable by your local environment.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session, if you haven't already.</span>
-<span class="va">redcap_uri</span>       <span class="op">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>
-<span class="va">token</span>            <span class="op">&lt;-</span> <span class="st">"your-secret-token"</span>
-<span class="fu"><a href="../reference/redcap_metadata_read.html">redcap_metadata_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session, if you haven't already.</span></span>
+<span><span class="va">redcap_uri</span>       <span class="op">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span></span>
+<span><span class="va">token</span>            <span class="op">&lt;-</span> <span class="st">"your-secret-token"</span></span>
+<span><span class="fu"><a href="../reference/redcap_metadata_read.html">redcap_metadata_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span></span></code></pre></div>
 <p>If this fails, see “Problems in the project’s metadata/dictionary” under <a href="#gotchas-agnostic">Common Gotchas</a> above. A problematic data dictionary may produce the error <code>Error in inherits(ds, "data.frame") : object 'ds' not found</code> when calling <code><a href="../reference/redcap_metadata_read.html">REDCapR::redcap_metadata_read()</a></code>.</p>
 </li>
 <li>
 <p><strong>Can you export from an example project?</strong> This is the same fake data hosted by the <a href="https://www.ouhsc.edu/bbmc/" class="external-link">OUHSC BBMC</a> as in the previous section.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session.</span>
-<span class="va">uri</span>   <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class="va">token</span> <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span>
-<span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session.</span></span>
+<span><span class="va">uri</span>   <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span>
+<span><span class="va">token</span> <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span>
+<span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
 <p>The previous code should produce similar output. Notice there are five rows and the columns will wrap around if your console window is too narrow.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="dv">5</span> records and <span class="dv">1</span> columns were read from REDCap <span class="cf">in</span> <span class="fl">0.41</span> seconds.</span>
 <span id="cb12-2"><a href="#cb12-2"></a>Starting to read <span class="dv">5</span> records  at <span class="dv">2014-06-27</span> <span class="dv">17</span><span class="op">:</span><span class="dv">19</span><span class="op">:</span><span class="dv">49</span></span>
@@ -461,24 +461,24 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <li>
 <p><strong>Can you export from your own project?</strong> The code is similar to the previous check, but the <code>uri</code> and <code>token</code> values will need to be modified.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session, if you haven't already.</span>
-<span class="va">redcap_uri</span>       <span class="op">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>
-<span class="va">token</span>            <span class="op">&lt;-</span> <span class="st">"your-secret-token"</span>
-<span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session, if you haven't already.</span></span>
+<span><span class="va">redcap_uri</span>       <span class="op">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span></span>
+<span><span class="va">token</span>            <span class="op">&lt;-</span> <span class="st">"your-secret-token"</span></span>
+<span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
 <p>Alternatively, a <code>redcap_project</code> object can be declared initially, which makes subsequent calls cleaner when the token and url are required only the when the object is declared.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session, if you haven't already.</span>
-<span class="va">uri</span>               <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>
-<span class="va">token</span>             <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span>
-<span class="va">project</span>           <span class="op">&lt;-</span> <span class="va"><a href="../reference/redcap_project.html">redcap_project</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span>
-
-<span class="va">ds_three_columns</span>  <span class="op">&lt;-</span> <span class="va">project</span><span class="op">$</span><span class="fu">read</span><span class="op">(</span>fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"sex"</span>, <span class="st">"age"</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">data</span>
-
-<span class="va">ids_of_males</span>      <span class="op">&lt;-</span> <span class="va">ds_three_columns</span><span class="op">$</span><span class="va">record_id</span><span class="op">[</span><span class="va">ds_three_columns</span><span class="op">$</span><span class="va">sex</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span>
-<span class="va">ids_of_minors</span>     <span class="op">&lt;-</span> <span class="va">ds_three_columns</span><span class="op">$</span><span class="va">record_id</span><span class="op">[</span><span class="va">ds_three_columns</span><span class="op">$</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fl">18</span><span class="op">]</span>
-
-<span class="va">ds_males</span>          <span class="op">&lt;-</span> <span class="va">project</span><span class="op">$</span><span class="fu">read</span><span class="op">(</span>records <span class="op">=</span> <span class="va">ids_of_males</span>, batch_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">$</span><span class="va">data</span>
-<span class="va">ds_minors</span>         <span class="op">&lt;-</span> <span class="va">project</span><span class="op">$</span><span class="fu">read</span><span class="op">(</span>records <span class="op">=</span> <span class="va">ids_of_minors</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session, if you haven't already.</span></span>
+<span><span class="va">uri</span>               <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span>
+<span><span class="va">token</span>             <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span>
+<span><span class="va">project</span>           <span class="op">&lt;-</span> <span class="va"><a href="../reference/redcap_project.html">redcap_project</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ds_three_columns</span>  <span class="op">&lt;-</span> <span class="va">project</span><span class="op">$</span><span class="fu">read</span><span class="op">(</span>fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"sex"</span>, <span class="st">"age"</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
+<span></span>
+<span><span class="va">ids_of_males</span>      <span class="op">&lt;-</span> <span class="va">ds_three_columns</span><span class="op">$</span><span class="va">record_id</span><span class="op">[</span><span class="va">ds_three_columns</span><span class="op">$</span><span class="va">sex</span> <span class="op">==</span> <span class="fl">1</span><span class="op">]</span></span>
+<span><span class="va">ids_of_minors</span>     <span class="op">&lt;-</span> <span class="va">ds_three_columns</span><span class="op">$</span><span class="va">record_id</span><span class="op">[</span><span class="va">ds_three_columns</span><span class="op">$</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fl">18</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">ds_males</span>          <span class="op">&lt;-</span> <span class="va">project</span><span class="op">$</span><span class="fu">read</span><span class="op">(</span>records <span class="op">=</span> <span class="va">ids_of_males</span>, batch_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
+<span><span class="va">ds_minors</span>         <span class="op">&lt;-</span> <span class="va">project</span><span class="op">$</span><span class="fu">read</span><span class="op">(</span>records <span class="op">=</span> <span class="va">ids_of_minors</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
 </li>
 <li><p><strong>Is the export operation still unsuccessful using REDCapR?</strong> If so the “Can the user query a <em>entire</em> REDCap project using httr?” check succeeded, but the REDCapR checks did not, consider posting a new <a href="https://github.com/OuhscBbmc/REDCapR/issues" class="external-link">GitHub issue</a> to the package developers.</p></li>
 </ol>
@@ -494,36 +494,36 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <li>
 <p><strong>Is redcapAPI installed on your machine?</strong> Currently, the easiest way to install <code>redcapAPI</code> is from CRAN.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"redcapAPI"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"redcapAPI"</span><span class="op">)</span></span></code></pre></div>
 <p>Developmental versions may be available on GitHub.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span>, repos <span class="op">=</span> <span class="st">"https://cran.rstudio.com"</span><span class="op">)</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"nutterb/redcapAPI"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span>, repos <span class="op">=</span> <span class="st">"https://cran.rstudio.com"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"nutterb/redcapAPI"</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Does redcapAPI load successfully on your machine?</strong> If so, running <code><a href="https://github.com/nutterb/redcapAPI/wiki" class="external-link">library(redcapAPI)</a></code> should produce the following output if you’re starting with a fresh session of R:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nutterb/redcapAPI/wiki" class="external-link">redcapAPI</a></span><span class="op">)</span>
-<span class="co"># Loading required package: redcapAPI</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nutterb/redcapAPI/wiki" class="external-link">redcapAPI</a></span><span class="op">)</span></span>
+<span><span class="co"># Loading required package: redcapAPI</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Can you export their data dictionary?</strong> Sometimes the problem exists within the metadata/dictionary, instead of the actual data values. Verify the structure and content of this specific project is interpretable by your local environment.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nutterb/redcapAPI/wiki" class="external-link">redcapAPI</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session, if you haven't already.</span>
-<span class="va">redcap_uri</span>       <span class="op">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>
-<span class="va">token</span>            <span class="op">&lt;-</span> <span class="st">"your-secret-token"</span>
-<span class="fu">exportMetaData</span><span class="op">(</span><span class="va">rcon</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nutterb/redcapAPI/wiki" class="external-link">redcapAPI</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session, if you haven't already.</span></span>
+<span><span class="va">redcap_uri</span>       <span class="op">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span></span>
+<span><span class="va">token</span>            <span class="op">&lt;-</span> <span class="st">"your-secret-token"</span></span>
+<span><span class="fu">exportMetaData</span><span class="op">(</span><span class="va">rcon</span><span class="op">)</span></span></code></pre></div>
 <p>If this fails, see “Problems in the project’s metadata/dictionary.” under <a href="#gotchas-agnostic">Gotchas</a> above</p>
 </li>
 <li>
 <p><strong>Can you export from an example project?</strong> This is the same fake data hosted by the <a href="https://www.ouhsc.edu/bbmc/" class="external-link">OUHSC BBMC</a> as in the previous section.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nutterb/redcapAPI/wiki" class="external-link">redcapAPI</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session.</span>
-<span class="va">rcon</span> <span class="op">&lt;-</span> <span class="fu">redcapConnection</span><span class="op">(</span>
-  url   <span class="op">=</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>,
-  token <span class="op">=</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span>
-<span class="op">)</span>
-<span class="fu">exportRecords</span><span class="op">(</span><span class="va">rcon</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nutterb/redcapAPI/wiki" class="external-link">redcapAPI</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session.</span></span>
+<span><span class="va">rcon</span> <span class="op">&lt;-</span> <span class="fu">redcapConnection</span><span class="op">(</span></span>
+<span>  url   <span class="op">=</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>,</span>
+<span>  token <span class="op">=</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu">exportRecords</span><span class="op">(</span><span class="va">rcon</span><span class="op">)</span></span></code></pre></div>
 <p>The previous code should produce similar output. Notice there are five rows and the columns will wrap around if your console window is too narrow.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>record_id name_first name_last                                 address      telephone               email</span>
 <span id="cb20-2"><a href="#cb20-2"></a><span class="dv">1</span>         <span class="dv">1</span>     Nutmeg  Nutmouse <span class="dv">14</span> Rose Cottage St.\nKenning UK, <span class="dv">323232</span> (<span class="dv">432</span>) <span class="dv">456-4848</span>     nutty<span class="op">@</span>mouse.com</span>
@@ -556,12 +556,12 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <li>
 <p><strong>Can you export your own project?</strong> The code is similar to the previous check, but the <code>uri</code> and <code>token</code> values will need to be modified.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nutterb/redcapAPI/wiki" class="external-link">redcapAPI</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session, if you haven't already.</span>
-<span class="va">rcon</span> <span class="op">&lt;-</span> <span class="fu">redcapConnection</span><span class="op">(</span>
-  url   <span class="op">=</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>, <span class="co"># Adapt this to your server.</span>
-  token <span class="op">=</span> <span class="st">"your-secret-token"</span>                         <span class="co"># Adapt this to your user's token.</span>
-<span class="op">)</span>
-<span class="fu">exportRecords</span><span class="op">(</span><span class="va">rcon</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nutterb/redcapAPI/wiki" class="external-link">redcapAPI</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session, if you haven't already.</span></span>
+<span><span class="va">rcon</span> <span class="op">&lt;-</span> <span class="fu">redcapConnection</span><span class="op">(</span></span>
+<span>  url   <span class="op">=</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span>, <span class="co"># Adapt this to your server.</span></span>
+<span>  token <span class="op">=</span> <span class="st">"your-secret-token"</span>                         <span class="co"># Adapt this to your user's token.</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu">exportRecords</span><span class="op">(</span><span class="va">rcon</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li><p><strong>Is the export operation still unsuccessful using redcapAPI?</strong> If so the “Can the user query a <em>entire</em> REDCap project using httr?” check succeeded, but the redcapAPI checks did not, consider posting a new <a href="https://github.com/nutterb/redcapAPI/issues" class="external-link">GitHub issue</a> to the package developers.</p></li>
 </ol>
@@ -619,7 +619,7 @@ He had a gold watch chain and a black mustache",2</code></pre>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

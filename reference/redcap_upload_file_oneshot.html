@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9002</span>
       </span>
     </div>
 
@@ -61,16 +61,16 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">redcap_upload_file_oneshot</span><span class="op">(</span>
-  <span class="va">file_name</span>,
-  <span class="va">record</span>,
-  <span class="va">redcap_uri</span>,
-  <span class="va">token</span>,
-  <span class="va">field</span>,
-  event <span class="op">=</span> <span class="st">""</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-  config_options <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">redcap_upload_file_oneshot</span><span class="op">(</span></span>
+<span>  <span class="va">file_name</span>,</span>
+<span>  <span class="va">record</span>,</span>
+<span>  <span class="va">redcap_uri</span>,</span>
+<span>  <span class="va">token</span>,</span>
+<span>  <span class="va">field</span>,</span>
+<span>  event <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  config_options <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -78,30 +78,47 @@
     <dl><dt>file_name</dt>
 <dd><p>The name of the relative or full file to be uploaded into
 the REDCap project.  Required.</p></dd>
+
+
 <dt>record</dt>
 <dd><p>The record ID where the file is to be imported.  Required</p></dd>
+
+
 <dt>redcap_uri</dt>
 <dd><p>The URI (uniform resource identifier) of the REDCap
 project.  Required.</p></dd>
+
+
 <dt>token</dt>
 <dd><p>The user-specific string that serves as the password for a
 project.  Required.</p></dd>
+
+
 <dt>field</dt>
 <dd><p>The name of the field where the file is saved in REDCap.
 Required</p></dd>
+
+
 <dt>event</dt>
 <dd><p>The name of the event where the file is saved in REDCap.
 Optional</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>A boolean value indicating if <code>message</code>s should be printed
 to the R console during the operation.  Optional.</p></dd>
+
+
 <dt>config_options</dt>
 <dd><p>A list of options to pass to <code>POST</code> method in the
 <code>httr</code> package.  See the details below.  Optional.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Currently, a list is returned with the following elements:</p><ul><li><p><code>success</code>: A boolean value indicating if the operation was apparently
+    
+
+<p>Currently, a list is returned with the following elements:</p><ul><li><p><code>success</code>: A boolean value indicating if the operation was apparently
 successful.</p></li>
 <li><p><code>status_code</code>: The
 <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" class="external-link">http status code</a>
@@ -137,44 +154,44 @@ administrator to send you the static material.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># Define some constants</span></span>
-<span class="r-in"><span class="va">uri</span>    <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span>
-<span class="r-in"><span class="va">token</span>  <span class="op">&lt;-</span> <span class="st">"D70F9ACD1EDD6F151C6EA78683944E98"</span> <span class="co"># The simple project -pid 213</span></span>
-<span class="r-in"><span class="va">field</span>  <span class="op">&lt;-</span> <span class="st">"mugshot"</span></span>
-<span class="r-in"><span class="va">event</span>  <span class="op">&lt;-</span> <span class="st">""</span> <span class="co"># only for longitudinal events</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">#Upload a single image file.</span></span>
-<span class="r-in"><span class="va">record</span>    <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span class="r-in"><span class="va">file_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"test-data/mugshot-1.jpg"</span>, package<span class="op">=</span><span class="st">"REDCapR"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_upload_file_oneshot</span><span class="op">(</span></span>
-<span class="r-in">  file_name  <span class="op">=</span> <span class="va">file_path</span>,</span>
-<span class="r-in">  record     <span class="op">=</span> <span class="va">record</span>,</span>
-<span class="r-in">  field      <span class="op">=</span> <span class="va">field</span>,</span>
-<span class="r-in">  redcap_uri <span class="op">=</span> <span class="va">redcap_uri</span>,</span>
-<span class="r-in">  token      <span class="op">=</span> <span class="va">token</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">#Upload a collection of five images.</span></span>
-<span class="r-in"><span class="va">records</span>    <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span></span>
-<span class="r-in"><span class="va">file_paths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"test-data/mugshot-"</span>, <span class="va">records</span>, <span class="st">".jpg"</span><span class="op">)</span>,</span>
-<span class="r-in">  package<span class="op">=</span><span class="st">"REDCapR"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along</a></span><span class="op">(</span><span class="va">records</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">record</span>    <span class="op">&lt;-</span> <span class="va">records</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span>
-<span class="r-in">  <span class="va">file_path</span> <span class="op">&lt;-</span> <span class="va">file_paths</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span>
-<span class="r-in">  <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_upload_file_oneshot</span><span class="op">(</span></span>
-<span class="r-in">    file_name  <span class="op">=</span> <span class="va">file_path</span>,</span>
-<span class="r-in">    record     <span class="op">=</span> <span class="va">record</span>,</span>
-<span class="r-in">    field      <span class="op">=</span> <span class="va">field</span>,</span>
-<span class="r-in">    redcap_uri <span class="op">=</span> <span class="va">redcap_uri</span>,</span>
-<span class="r-in">    token      <span class="op">=</span> <span class="va">token</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># Define some constants</span></span></span>
+<span class="r-in"><span><span class="va">uri</span>    <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
+<span class="r-in"><span><span class="va">token</span>  <span class="op">&lt;-</span> <span class="st">"D70F9ACD1EDD6F151C6EA78683944E98"</span> <span class="co"># The simple project -pid 213</span></span></span>
+<span class="r-in"><span><span class="va">field</span>  <span class="op">&lt;-</span> <span class="st">"mugshot"</span></span></span>
+<span class="r-in"><span><span class="va">event</span>  <span class="op">&lt;-</span> <span class="st">""</span> <span class="co"># only for longitudinal events</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#Upload a single image file.</span></span></span>
+<span class="r-in"><span><span class="va">record</span>    <span class="op">&lt;-</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span><span class="va">file_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"test-data/mugshot-1.jpg"</span>, package<span class="op">=</span><span class="st">"REDCapR"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_upload_file_oneshot</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  file_name  <span class="op">=</span> <span class="va">file_path</span>,</span></span>
+<span class="r-in"><span>  record     <span class="op">=</span> <span class="va">record</span>,</span></span>
+<span class="r-in"><span>  field      <span class="op">=</span> <span class="va">field</span>,</span></span>
+<span class="r-in"><span>  redcap_uri <span class="op">=</span> <span class="va">redcap_uri</span>,</span></span>
+<span class="r-in"><span>  token      <span class="op">=</span> <span class="va">token</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#Upload a collection of five images.</span></span></span>
+<span class="r-in"><span><span class="va">records</span>    <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span></span></span>
+<span class="r-in"><span><span class="va">file_paths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"test-data/mugshot-"</span>, <span class="va">records</span>, <span class="st">".jpg"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  package<span class="op">=</span><span class="st">"REDCapR"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along</a></span><span class="op">(</span><span class="va">records</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">record</span>    <span class="op">&lt;-</span> <span class="va">records</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span></span>
+<span class="r-in"><span>  <span class="va">file_path</span> <span class="op">&lt;-</span> <span class="va">file_paths</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span></span>
+<span class="r-in"><span>  <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_upload_file_oneshot</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    file_name  <span class="op">=</span> <span class="va">file_path</span>,</span></span>
+<span class="r-in"><span>    record     <span class="op">=</span> <span class="va">record</span>,</span></span>
+<span class="r-in"><span>    field      <span class="op">=</span> <span class="va">field</span>,</span></span>
+<span class="r-in"><span>    redcap_uri <span class="op">=</span> <span class="va">redcap_uri</span>,</span></span>
+<span class="r-in"><span>    token      <span class="op">=</span> <span class="va">token</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -189,7 +206,7 @@ administrator to send you the static material.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

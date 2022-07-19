@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9002</span>
       </span>
     </div>
 
@@ -61,12 +61,12 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">redcap_next_free_record_name</span><span class="op">(</span>
-  <span class="va">redcap_uri</span>,
-  <span class="va">token</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-  config_options <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">redcap_next_free_record_name</span><span class="op">(</span></span>
+<span>  <span class="va">redcap_uri</span>,</span>
+<span>  <span class="va">token</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  config_options <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -74,21 +74,30 @@
     <dl><dt>redcap_uri</dt>
 <dd><p>The URI (uniform resource identifier) of the REDCap
 project.  Required.</p></dd>
+
+
 <dt>token</dt>
 <dd><p>The user-specific string that serves as the password for a
 project.  Required.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>A boolean value indicating if <code>message</code>s should be printed
 to the R console during the operation.  The verbose output might contain
 sensitive information (<em>e.g.</em> PHI), so turn this off if the output might
 be visible somewhere public. Optional.</p></dd>
+
+
 <dt>config_options</dt>
 <dd><p>A list of options to pass to <code>POST</code> method in the
 <code>httr</code> package.  See the details below.  Optional.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a <a href="https://rdrr.io/r/base/character.html" class="external-link">base::character</a> vector of either
+    
+
+<p>a <a href="https://rdrr.io/r/base/character.html" class="external-link">base::character</a> vector of either
 length 1 (if successful) or length 0 (if not successful).</p>
     </div>
     <div id="details">
@@ -104,35 +113,34 @@ will always return an object of class
 <p>To be used by projects with record auto-numbering enabled, this method
 exports the next potential record ID for a project. It generates the next
 record name by determining the current maximum numerical record ID and then
-incrementing it by one.</p><div class="sourceCode"><pre><code>Note: This method does not create a new record, but merely determines what
-the next record name would be.
-
-If using Data Access Groups (DAGs) in the project, this method accounts for
-the special formatting of the record name for users in DAGs (e.g., DAG-ID);
-in this case, it only assigns the next value for ID for all numbers inside
-a DAG. For example, if a DAG has a corresponding DAG number of 223 wherein
-records 223-1 and 223-2 already exist, then the next record will be 223-3
-if the API user belongs to the DAG that has DAG number 223. (The DAG number
-is auto-assigned by REDCap for each DAG when the DAG is first created.)
-
-When generating a new record name in a DAG, the method considers all records
-in the entire project when determining the maximum record ID, including
-those that might have been originally created in that DAG but then later
-reassigned to another DAG.
-
-Note: This method functions the same even for projects that do not have
-record auto-numbering enabled.
-</code></pre></div>
-
+incrementing it by one.</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a>Note<span class="op">:</span><span class="st"> </span>This method does not create a new record, but merely determines what</span>
+<span id="cb1-2"><a href="#cb1-2"></a>the <span class="cf">next</span> record name would be.</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>If using Data Access <span class="kw">Groups</span> (DAGs) <span class="cf">in</span> the project, this method accounts <span class="cf">for</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>the special formatting of the record name <span class="cf">for</span> users <span class="cf">in</span> <span class="kw">DAGs</span> (e.g., DAG<span class="op">-</span>ID);</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="cf">in</span> this case, it only assigns the <span class="cf">next</span> value <span class="cf">for</span> ID <span class="cf">for</span> all numbers inside</span>
+<span id="cb1-7"><a href="#cb1-7"></a>a DAG. For example, <span class="cf">if</span> a DAG has a corresponding DAG number of <span class="dv">223</span> wherein</span>
+<span id="cb1-8"><a href="#cb1-8"></a>records <span class="dv">223-1</span> and <span class="dv">223-2</span> already exist, then the <span class="cf">next</span> record will be <span class="dv">223-3</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="cf">if</span> the API user belongs to the DAG that has DAG number <span class="fl">223.</span> (The DAG number</span>
+<span id="cb1-10"><a href="#cb1-10"></a>is auto<span class="op">-</span>assigned by REDCap <span class="cf">for</span> each DAG when the DAG is first created.)</span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a>When generating a new record name <span class="cf">in</span> a DAG, the method considers all records</span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="cf">in</span> the entire project when determining the maximum record ID, including</span>
+<span id="cb1-14"><a href="#cb1-14"></a>those that might have been originally created <span class="cf">in</span> that DAG but then later</span>
+<span id="cb1-15"><a href="#cb1-15"></a>reassigned to another DAG.</span>
+<span id="cb1-16"><a href="#cb1-16"></a></span>
+<span id="cb1-17"><a href="#cb1-17"></a>Note<span class="op">:</span><span class="st"> </span>This method functions the same even <span class="cf">for</span> projects that do not have</span>
+<span id="cb1-18"><a href="#cb1-18"></a>record auto<span class="op">-</span>numbering enabled.</span></code></pre><p></p></div>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">uri</span>      <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span>
-<span class="r-in"><span class="va">token</span>    <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span>
-<span class="r-in"><span class="co"># Returns 6</span></span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_next_free_record_name</span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The next free record name in REDCap was successfully determined in 0.6 seconds.  The http status code was 200.  Is is 6.</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">uri</span>      <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
+<span class="r-in"><span><span class="va">token</span>    <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span></span>
+<span class="r-in"><span><span class="co"># Returns 6</span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_next_free_record_name</span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The next free record name in REDCap was successfully determined in 0.4 seconds.  The http status code was 200.  Is is 6.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "6"</span>
 </code></pre></div>
     </div>
@@ -148,7 +156,7 @@ record auto-numbering enabled.
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

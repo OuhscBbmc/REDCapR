@@ -18,7 +18,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9002</span>
       </span>
     </div>
 
@@ -63,19 +63,19 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">redcap_report</span><span class="op">(</span>
-  <span class="va">redcap_uri</span>,
-  <span class="va">token</span>,
-  <span class="va">report_id</span>,
-  raw_or_label <span class="op">=</span> <span class="st">"raw"</span>,
-  raw_or_label_headers <span class="op">=</span> <span class="st">"raw"</span>,
-  export_checkbox_label <span class="op">=</span> <span class="cn">FALSE</span>,
-  col_types <span class="op">=</span> <span class="cn">NULL</span>,
-  guess_type <span class="op">=</span> <span class="cn">TRUE</span>,
-  guess_max <span class="op">=</span> <span class="fl">1000L</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-  config_options <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">redcap_report</span><span class="op">(</span></span>
+<span>  <span class="va">redcap_uri</span>,</span>
+<span>  <span class="va">token</span>,</span>
+<span>  <span class="va">report_id</span>,</span>
+<span>  raw_or_label <span class="op">=</span> <span class="st">"raw"</span>,</span>
+<span>  raw_or_label_headers <span class="op">=</span> <span class="st">"raw"</span>,</span>
+<span>  export_checkbox_label <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  col_types <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  guess_type <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  guess_max <span class="op">=</span> <span class="fl">1000L</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  config_options <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -83,47 +83,70 @@
     <dl><dt>redcap_uri</dt>
 <dd><p>The URI (uniform resource identifier) of the REDCap
 project.  Required.</p></dd>
+
+
 <dt>token</dt>
 <dd><p>The user-specific string that serves as the password for a
 project.  Required.</p></dd>
+
+
 <dt>report_id</dt>
 <dd><p>A single integer, provided next to the report name on the
 report list page.  Required.</p></dd>
+
+
 <dt>raw_or_label</dt>
 <dd><p>A string (either <code>'raw'</code> or <code>'label'</code>) that specifies
 whether to export the raw coded values or the labels for the options of
 multiple choice fields.  Default is <code>'raw'</code>.</p></dd>
+
+
 <dt>raw_or_label_headers</dt>
 <dd><p>A string (either <code>'raw'</code> or <code>'label'</code> that
 specifies for the CSV headers whether to export the variable/field names
 (raw) or the field labels (label).  Default is <code>'raw'</code>.</p></dd>
+
+
 <dt>export_checkbox_label</dt>
 <dd><p>specifies the format of checkbox field values
 specifically when exporting the data as labels.  If <code>raw_or_label</code> is
 <code>'label'</code> and <code>export_checkbox_label</code> is TRUE, the values will be the text
 displayed to the users.  Otherwise, the values will be 0/1.</p></dd>
+
+
 <dt>col_types</dt>
 <dd><p>A <code><a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">readr::cols()</a></code> object passed internally to
 <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_csv()</a></code>.  Optional.</p></dd>
+
+
 <dt>guess_type</dt>
 <dd><p>A boolean value indicating if all columns should be
 returned as character.  If false, <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_csv()</a></code> guesses the intended
 data type for each column.  Ignored if <code>col_types</code> is not null.</p></dd>
+
+
 <dt>guess_max</dt>
 <dd><p>A positive integer passed to <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_csv()</a></code> that
 specifies the maximum number of records to use for guessing column types.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>A boolean value indicating if <code>message</code>s should be printed
 to the R console during the operation.  The verbose output might contain
 sensitive information (<em>e.g.</em> PHI), so turn this off if the output might
 be visible somewhere public. Optional.</p></dd>
+
+
 <dt>config_options</dt>
 <dd><p>A list of options to pass to <code>POST</code> method in the
 <code>httr</code> package.  See the details below. Optional.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Currently, a list is returned with the following elements:</p><ul><li><p><code>data</code>: An R <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> of the desired records and columns.</p></li>
+    
+
+<p>Currently, a list is returned with the following elements:</p><ul><li><p><code>data</code>: An R <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> of the desired records and columns.</p></li>
 <li><p><code>success</code>: A boolean value indicating if the operation was apparently
 successful.</p></li>
 <li><p><code>status_code</code>: The
@@ -158,54 +181,54 @@ administrator to send you the static material.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">uri</span>          <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span>
-<span class="r-in"><span class="va">token</span>        <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span>
-<span class="r-in"><span class="va">report_1_id</span>  <span class="op">&lt;-</span> <span class="fl">5980L</span></span>
-<span class="r-in"><span class="va">report_2_id</span>  <span class="op">&lt;-</span> <span class="fl">6431L</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Return all records and all variables.</span></span>
-<span class="r-in"><span class="va">ds_1a</span> <span class="op">&lt;-</span></span>
-<span class="r-in">  <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_report</span><span class="op">(</span></span>
-<span class="r-in">    redcap_uri <span class="op">=</span> <span class="va">uri</span>,</span>
-<span class="r-in">    token      <span class="op">=</span> <span class="va">token</span>,</span>
-<span class="r-in">    report_id  <span class="op">=</span> <span class="va">report_1_id</span></span>
-<span class="r-in">  <span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Specify the column types.</span></span>
-<span class="r-in"><span class="va">col_types_1</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">cols</a></span><span class="op">(</span></span>
-<span class="r-in">  record_id          <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_integer</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">  height             <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_double</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">  health_complete    <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_integer</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">  address            <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_character</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">  ethnicity          <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_integer</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">ds_1b</span> <span class="op">&lt;-</span></span>
-<span class="r-in">  <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_report</span><span class="op">(</span></span>
-<span class="r-in">    redcap_uri <span class="op">=</span> <span class="va">uri</span>,</span>
-<span class="r-in">    token      <span class="op">=</span> <span class="va">token</span>,</span>
-<span class="r-in">    report_id  <span class="op">=</span> <span class="va">report_1_id</span>,</span>
-<span class="r-in">    col_types  <span class="op">=</span> <span class="va">col_types_1</span></span>
-<span class="r-in">  <span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Return condensed checkboxes Report option:</span></span>
-<span class="r-in"><span class="co">#   "Combine checkbox options into single column of only the checked-off</span></span>
-<span class="r-in"><span class="co">#   options (will be formatted as a text field when exported to</span></span>
-<span class="r-in"><span class="co">#   stats packages)"</span></span>
-<span class="r-in"><span class="va">col_types_2</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">cols</a></span><span class="op">(</span></span>
-<span class="r-in">  record_id          <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_integer</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span class="r-in">  race               <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_character</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">ds_2</span> <span class="op">&lt;-</span></span>
-<span class="r-in">  <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_report</span><span class="op">(</span></span>
-<span class="r-in">    redcap_uri <span class="op">=</span> <span class="va">uri</span>,</span>
-<span class="r-in">    token      <span class="op">=</span> <span class="va">token</span>,</span>
-<span class="r-in">    report_id  <span class="op">=</span> <span class="va">report_2_id</span>,</span>
-<span class="r-in">    col_types  <span class="op">=</span> <span class="va">col_types_2</span></span>
-<span class="r-in">  <span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">uri</span>          <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
+<span class="r-in"><span><span class="va">token</span>        <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span></span>
+<span class="r-in"><span><span class="va">report_1_id</span>  <span class="op">&lt;-</span> <span class="fl">5980L</span></span></span>
+<span class="r-in"><span><span class="va">report_2_id</span>  <span class="op">&lt;-</span> <span class="fl">6431L</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Return all records and all variables.</span></span></span>
+<span class="r-in"><span><span class="va">ds_1a</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_report</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    redcap_uri <span class="op">=</span> <span class="va">uri</span>,</span></span>
+<span class="r-in"><span>    token      <span class="op">=</span> <span class="va">token</span>,</span></span>
+<span class="r-in"><span>    report_id  <span class="op">=</span> <span class="va">report_1_id</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Specify the column types.</span></span></span>
+<span class="r-in"><span><span class="va">col_types_1</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">cols</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  record_id          <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_integer</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  height             <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_double</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  health_complete    <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_integer</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  address            <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_character</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  ethnicity          <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_integer</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ds_1b</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_report</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    redcap_uri <span class="op">=</span> <span class="va">uri</span>,</span></span>
+<span class="r-in"><span>    token      <span class="op">=</span> <span class="va">token</span>,</span></span>
+<span class="r-in"><span>    report_id  <span class="op">=</span> <span class="va">report_1_id</span>,</span></span>
+<span class="r-in"><span>    col_types  <span class="op">=</span> <span class="va">col_types_1</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Return condensed checkboxes Report option:</span></span></span>
+<span class="r-in"><span><span class="co">#   "Combine checkbox options into single column of only the checked-off</span></span></span>
+<span class="r-in"><span><span class="co">#   options (will be formatted as a text field when exported to</span></span></span>
+<span class="r-in"><span><span class="co">#   stats packages)"</span></span></span>
+<span class="r-in"><span><span class="va">col_types_2</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">cols</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  record_id          <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_integer</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  race               <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_character</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ds_2</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_report</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    redcap_uri <span class="op">=</span> <span class="va">uri</span>,</span></span>
+<span class="r-in"><span>    token      <span class="op">=</span> <span class="va">token</span>,</span></span>
+<span class="r-in"><span>    report_id  <span class="op">=</span> <span class="va">report_2_id</span>,</span></span>
+<span class="r-in"><span>    col_types  <span class="op">=</span> <span class="va">col_types_2</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -220,7 +243,7 @@ administrator to send you the static material.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

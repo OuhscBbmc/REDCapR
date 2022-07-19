@@ -21,7 +21,7 @@ Each character must be an (a) digit 0-9, (b) uppercase letter A-F, or
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9002</span>
       </span>
     </div>
 
@@ -69,17 +69,20 @@ Each character must be an (a) digit 0-9, (b) uppercase letter A-F, or
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">sanitize_token</span><span class="op">(</span><span class="va">token</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sanitize_token</span><span class="op">(</span><span class="va">token</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>token</dt>
 <dd><p>The REDCap token. Required.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The token, without a terminal newline character.</p>
+    
+
+<p>The token, without a terminal newline character.</p>
     </div>
     <div id="note">
     <h2>Note</h2>
@@ -93,14 +96,14 @@ about your project-specific token.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">secret_token_1</span> <span class="op">&lt;-</span> <span class="st">"12345678901234567890123456ABCDEF"</span></span>
-<span class="r-in"><span class="va">secret_token_2</span> <span class="op">&lt;-</span> <span class="st">"12345678901234567890123456ABCDEF\n"</span></span>
-<span class="r-in"><span class="va">secret_token_3</span> <span class="op">&lt;-</span> <span class="st">"12345678901234567890123456abcdef"</span></span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">sanitize_token</span><span class="op">(</span><span class="va">secret_token_1</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">secret_token_1</span> <span class="op">&lt;-</span> <span class="st">"12345678901234567890123456ABCDEF"</span></span></span>
+<span class="r-in"><span><span class="va">secret_token_2</span> <span class="op">&lt;-</span> <span class="st">"12345678901234567890123456ABCDEF\n"</span></span></span>
+<span class="r-in"><span><span class="va">secret_token_3</span> <span class="op">&lt;-</span> <span class="st">"12345678901234567890123456abcdef"</span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">sanitize_token</span><span class="op">(</span><span class="va">secret_token_1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "12345678901234567890123456ABCDEF"</span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">sanitize_token</span><span class="op">(</span><span class="va">secret_token_2</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">sanitize_token</span><span class="op">(</span><span class="va">secret_token_2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "12345678901234567890123456ABCDEF"</span>
-<span class="r-in"><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">sanitize_token</span><span class="op">(</span><span class="va">secret_token_3</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">sanitize_token</span><span class="op">(</span><span class="va">secret_token_3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "12345678901234567890123456abcdef"</span>
 </code></pre></div>
     </div>
@@ -116,7 +119,7 @@ about your project-specific token.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
