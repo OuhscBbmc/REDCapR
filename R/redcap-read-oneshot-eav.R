@@ -250,6 +250,10 @@ redcap_read_oneshot_eav <- function(
             show_col_types  = FALSE
           )
 
+        if (!"event_id" %in% colnames(ds_eav)) {
+          ds_eav$event_id <- "dummy_1"
+        }
+
         ds_metadata_expanded <-
           ds_metadata %>%
           dplyr::select(.data$field_name, .data$select_choices_or_calculations, .data$field_type) %>%
