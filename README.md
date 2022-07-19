@@ -66,7 +66,7 @@ Much of this package has been developed to support the needs of the following pr
 * *Title IV-E Waiver Project*, [HRSA/MCHB](https://mchb.hrsa.gov/)-sponsored collaboration with [OKDHS](https://oklahoma.gov/okdhs.html); David Bard, PI, OUHSC; 2014-2017.
 * *Integrative Analysis of Longitudinal Studies of Aging (IALSA)*, sponsored by [NIH 5P01AG043362](https://grantome.com/grant/NIH/P01-AG043362).  Scott Hofer, PI, University of Victoria; Will Beasley, PI of site-award, OUHSC; 2013-2018.
 * *Oklahoma Shared Clinical and Translational Resources*, sponsored by [NIH NIGMS; U54 GM104938](https://grantome.com/grant/NIH/U54-GM104938). Judith A. James, PI, OUHSC; 2013-2018.
-* *Oklahoma Shared Clinical and Translational Resources*, sponsored by [NIH U54GM104938](https://hsrproject.nlm.nih.gov/view_hsrproj_record/20204379); 2020-2021.
+* *Oklahoma Shared Clinical and Translational Resources*, sponsored by [NIH U54GM104938](https://taggs.hhs.gov/Detail/AwardDetail?arg_AwardNum=U54GM104938&arg_ProgOfficeCode=127); 2020-2021.
 * Additional Institutional Support from OUHSC [Dept of Pediatrics](https://medicine.ouhsc.edu/Academic-Departments/Pediatrics); 2013-2021.
 
 Thanks,
@@ -77,10 +77,10 @@ Thanks,
 
 ### Build Status and Package Characteristics
 
-| [Branch](https://github.com/OuhscBbmc/REDCapR) | [GitHub Actions](https://github.com/OuhscBbmc/REDCapR/actions) | [Codecov](https://codecov.io/gh/OuhscBbmc/REDCapR) |
+| [Branch](https://github.com/OuhscBbmc/REDCapR) | [GitHub Actions](https://github.com/OuhscBbmc/REDCapR/actions) | [Codecov](https://app.codecov.io/gh/OuhscBbmc/REDCapR) |
 | :----- | :---------------------------: | :-------: |
-| [Main](https://github.com/OuhscBbmc/REDCapR/tree/main) | [![R-CMD-check](https://github.com/OuhscBbmc/REDCapR/workflows/R-CMD-check/badge.svg?branch=main)](https://github.com/OuhscBbmc/REDCapR/actions) |  [![codecov](https://codecov.io/gh/OuhscBbmc/REDCapR/branch/main/graph/badge.svg)](https://codecov.io/gh/OuhscBbmc/REDCapR) |
-| [Dev](https://github.com/OuhscBbmc/REDCapR/tree/dev) | [![R-CMD-check](https://github.com/OuhscBbmc/REDCapR/workflows/R-CMD-check/badge.svg?branch=dev)](https://github.com/OuhscBbmc/REDCapR/actions) | [![codecov](https://codecov.io/gh/OuhscBbmc/REDCapR/branch/dev/graph/badge.svg)](https://codecov.io/gh/OuhscBbmc/REDCapR/branch/dev) |
+| [Main](https://github.com/OuhscBbmc/REDCapR/tree/main) | [![R-CMD-check](https://github.com/OuhscBbmc/REDCapR/workflows/R-CMD-check/badge.svg?branch=main)](https://github.com/OuhscBbmc/REDCapR/actions) |  [![codecov](https://codecov.io/gh/OuhscBbmc/REDCapR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/OuhscBbmc/REDCapR/branch/main) |
+| [Dev](https://github.com/OuhscBbmc/REDCapR/tree/dev) | [![R-CMD-check](https://github.com/OuhscBbmc/REDCapR/workflows/R-CMD-check/badge.svg?branch=dev)](https://github.com/OuhscBbmc/REDCapR/actions) | [![codecov](https://codecov.io/gh/OuhscBbmc/REDCapR/branch/dev/graph/badge.svg)](https://app.codecov.io/gh/OuhscBbmc/REDCapR/branch/dev) |
 | | *Ubuntu Latest* | *Test Coverage* |
 
 | Key | Value |

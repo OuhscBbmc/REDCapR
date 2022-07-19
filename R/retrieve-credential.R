@@ -298,14 +298,16 @@ retrieve_credential_mssql <- function(
   regex_pattern_1 <- "^\\d+$"
   regex_pattern_2 <- "^\\[*[a-zA-Z0-9_]+\\]*$"
 
-  if (class(project_id)  != "integer") {
+  if (!inherits(project_id, "integer")) {
     stop(
-      "The `project_id` parameter be an integer type.  Either append an `L` ",
+      "The `project_id` parameter should be an integer type.  ",
+      "Either append an `L` ",
       "to the number, or cast with `as.integer()`."
     )
-  } else if (class(instance)  != "character") {
+  } else if (!inherits(instance, "character")) {
     stop(
-      "The `instance` parameter be a character type.  Either enclose in ",
+      "The `instance` parameter should be a character type.  ",
+      "Either enclose in ",
       "quotes, or cast with `as.character()`."
     )
   } else if (!(base::missing(dsn) | base::is.null(dsn)) & !(class(dsn) %in% c("character"))) {

@@ -28,13 +28,15 @@ a \link[utils:packageDescription]{utils::packageDescription}.
 List users authorized for a project.
 }
 \note{
-\strong{Documentation in REDCap 8.4.0}\preformatted{This method allows you to export the list of users for a project,
+\strong{Documentation in REDCap 8.4.0}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{This method allows you to export the list of users for a project,
 including their user privileges and also email address, first name,
 and last name.
 
 Note: If the user has been assigned to a user role, it will return
 the user with the role's defined privileges.
-}
+}\if{html}{\out{</div>}}
 }
 \examples{
 uri      <- "https://bbmc.ouhsc.edu/redcap/api/"

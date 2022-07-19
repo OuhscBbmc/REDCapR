@@ -64,7 +64,7 @@ redcap_users_export <- function(
     design                        = readr::col_logical(),
     user_rights                   = readr::col_logical(),
     data_access_groups            = readr::col_logical(),
-    data_export                   = readr::col_character(),
+    # data_export                   = readr::col_character(), # dropped sometime between 10.5.1 and 12.5.2
     reports                       = readr::col_logical(),
     stats_and_charts              = readr::col_logical(),
     manage_survey_participants    = readr::col_logical(),
@@ -85,7 +85,8 @@ redcap_users_export <- function(
     lock_records_all_forms        = readr::col_logical(),
     lock_records                  = readr::col_logical(),
     lock_records_customization    = readr::col_logical(),
-    forms                         = readr::col_character()
+    forms                         = readr::col_character(),
+    forms_export                  = readr::col_character(),  # Added sometime between 10.5.1 and 12.5.2
   )
 
   # This is the important line that communicates with the REDCap server.
