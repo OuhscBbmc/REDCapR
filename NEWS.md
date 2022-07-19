@@ -17,6 +17,9 @@ Upcoming Versions
 * `retrieve_credential_local()` can now user `username` to identify the desired credential row (#364)
 * `redcap_read()` and `redcap_read_oneshot()` gain the `http_response_encoding` parameter that's passed to [`httr::content()`](https://httr.r-lib.org/reference/content.html).  The default value remains "UTF-8".  (#354, @lrasmus)
 * Accommodate single-character REDCap variable names (#367 & #368, @daynefiler)
+* Modify  `redcap_users_export()` (which calls REDCap's user export).  The API dropped the `data_export` variable and added the `forms_export` variable. (#396)
+* For `redcap_read_oneshot_eav()`: if the project isn't longitudinal, a dummy value for `event_id` is used internally (#396)
+* For the testing server & projects, the http errors are a little different, so the testing code was adjusted (#396)
 * Set `httr::user_agent`, following the advice of its vignette (#397)
 
 ### Test Suite 
