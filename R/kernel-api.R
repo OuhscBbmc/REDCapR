@@ -46,12 +46,21 @@ kernel_api <- function(
   content_type        = "text/csv"
   ) {
 
+  checkmate::assert_character(redcap_uri    , len = 1, any.missing = FALSE, null.ok = FALSE)
+  checkmate::assert_character(encoding      , len = 1, any.missing = FALSE, null.ok = FALSE)
+  checkmate::assert_character(content_type  , len = 1, any.missing = FALSE, null.ok = FALSE)
+
   start_time <- Sys.time()
+
+  # if (httr::http_error(redcap_uri)) {
+  #   stop("The url `", redcap_uri, "` is not found or throws an error.")
+  # }
 
   result <- httr::POST(
     url     = redcap_uri,
     body    = post_body,
-    config  = config_options
+    config  = config_options,
+    httr::user_agent("OuhscBbmc/REDCapR")
   )
 
   status_code           <- result$status

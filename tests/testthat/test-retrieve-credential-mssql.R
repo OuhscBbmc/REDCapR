@@ -98,7 +98,7 @@ test_that("dsn wrong length", {
 test_that("bad type: project_id", {
   testthat::skip_on_cran()
   testthat::skip_if_not_installed(pkg="odbc")
-  expected_message <- "The `project_id` parameter be an integer type.  Either append an `L` to the number, or cast with `as.integer\\(\\)`."
+  expected_message <- "The `project_id` parameter should be an integer type.  Either append an `L` to the number, or cast with `as.integer\\(\\)`."
 
   #character
   expect_error(
@@ -115,7 +115,7 @@ test_that("bad type: project_id", {
 test_that("bad type: instance", {
   testthat::skip_on_cran()
   testthat::skip_if_not_installed(pkg="odbc")
-  expected_message <- "The `instance` parameter be a character type.  Either enclose in quotes, or cast with `as.character\\(\\)`."
+  expected_message <- "The `instance` parameter should be a character type.  Either enclose in quotes, or cast with `as.character\\(\\)`."
 
   #integer
   expect_error(
