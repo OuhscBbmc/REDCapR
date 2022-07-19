@@ -59,7 +59,8 @@ kernel_api <- function(
   result <- httr::POST(
     url     = redcap_uri,
     body    = post_body,
-    config  = config_options
+    config  = config_options,
+    httr::user_agent("OuhscBbmc/REDCapR")
   )
 
   status_code           <- result$status
