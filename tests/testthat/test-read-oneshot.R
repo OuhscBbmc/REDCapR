@@ -73,7 +73,7 @@ test_that("col_types", {
 })
 test_that("specify-records", {
   testthat::skip_on_cran()
-  path_expected <- "test-data/specific-redcapr/read-oneshot/specify-records"
+  path_expected <- "test-data/specific-redcapr/read-oneshot/specify-records.R"
   desired_records <- c(1L, 3L, 4L)
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
@@ -96,7 +96,7 @@ test_that("specify-records", {
 })
 test_that("specify-records-zero-length", {
   testthat::skip_on_cran()
-  path_expected <- "test-data/specific-redcapr/read-oneshot/specify-records-zero-length"
+  path_expected <- "test-data/specific-redcapr/read-oneshot/specify-records-zero-length.R"
   desired_records <- c()
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
@@ -119,7 +119,7 @@ test_that("specify-records-zero-length", {
 })
 test_that("specify-fields", {
   testthat::skip_on_cran()
-  path_expected <- "test-data/specific-redcapr/read-oneshot/specify-fields"
+  path_expected <- "test-data/specific-redcapr/read-oneshot/specify-fields.R"
   desired_fields <- c("record_id", "name_first", "name_last", "age")
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
@@ -142,7 +142,7 @@ test_that("specify-fields", {
 })
 test_that("specify-fields-zero-length", {
   testthat::skip_on_cran()
-  path_expected <- "test-data/specific-redcapr/read-oneshot/specify-fields-zero-length"
+  path_expected <- "test-data/specific-redcapr/read-oneshot/specify-fields-zero-length.R"
   desired_fields <- c()
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
