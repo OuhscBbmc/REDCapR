@@ -529,7 +529,7 @@ test_that("date-range", {
       )
   )
 
-  if (update_expectation) save_expected(returned_object$data, path_expected_default)
+  expected_data_frame <- retrieve_expected(path_expected_default)
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected="200")
