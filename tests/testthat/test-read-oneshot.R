@@ -97,7 +97,7 @@ test_that("specify-records", {
 test_that("specify-records-zero-length", {
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/read-oneshot/specify-records-zero-length"
-  desired_fields <- c()
+  desired_records <- c()
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   expect_message(
