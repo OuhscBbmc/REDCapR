@@ -184,6 +184,27 @@ test_that("specify-fields-zero-length", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
+test_that("specify-records-and-fields-zero-length", {
+  testthat::skip_on_cran()
+  desired_records <- c()
+  desired_fields <- c()
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+
+  expect_message(
+    regexp           = expected_outcome_message,
+    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, records=desired_records, fields=desired_fields, batch_size=2)
+  )
+
+  expected_data_frame <- retrieve_expected(path_expected_default)
+
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
+  expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_true(returned_object$filter_logic=="", "A filter was not specified.")
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true(returned_object$success)
+})
 
 test_that("specify-forms", {
   testthat::skip_on_cran()
