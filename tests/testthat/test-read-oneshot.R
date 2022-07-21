@@ -71,6 +71,52 @@ test_that("col_types", {
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
+test_that("specify-records", {
+  testthat::skip_on_cran()
+  path_expected <- "test-data/specific-redcapr/read-oneshot/specify-records"
+  desired_records <- c(1L, 3L, 4L)
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+
+  expect_message(
+    regexp           = expected_outcome_message,
+    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, records=desired_records)
+  )
+
+  if (update_expectation) save_expected(returned_object$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
+
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_equal(returned_object$status_code, expected=200L)
+  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_true(returned_object$records_collapsed==paste(desired_records, collapse=","))
+  expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_true(returned_object$filter_logic=="", "A filter was not specified.")
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true(returned_object$success)
+})
+test_that("specify-records-zero-length", {
+  testthat::skip_on_cran()
+  path_expected <- "test-data/specific-redcapr/read-oneshot/specify-records-zero-length"
+  desired_fields <- c()
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+
+  expect_message(
+    regexp           = expected_outcome_message,
+    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, records=desired_records)
+  )
+
+  if (update_expectation) save_expected(returned_object$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
+
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_equal(returned_object$status_code, expected=200L)
+  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_true(returned_object$records_collapsed==paste(desired_records, collapse=","))
+  expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_true(returned_object$filter_logic=="", "A filter was not specified.")
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true(returned_object$success)
+})
 test_that("specify-fields", {
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/read-oneshot/specify-fields"
