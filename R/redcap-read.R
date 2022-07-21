@@ -391,6 +391,17 @@ redcap_read <- function(
       )
   }
 
+  unique_ids_actual <- sort(unique(ds_stacked[[id_position]]))
+  ids_missing_rows  <- setdiff(unique_ids, unique_ids_actual)
+
+  if (0L < length(ids_missing_rows)) {
+    warning(sprintf(
+      "There are %i subject(s) that are missing rows in the final dataset.\nCheck for funny values that could trip up REDCap's PHP code:\n%s.",
+      length(ids_missing_rows),
+      paste(ids_missing_rows, collapse="; ")
+    ))
+  }
+
   elapsed_seconds          <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
   status_code_combined     <- paste(lst_status_code    , collapse="; ")
   outcome_message_combined <- paste(lst_outcome_message, collapse="; ")
