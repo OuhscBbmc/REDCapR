@@ -3,6 +3,7 @@ library(testthat)
 credential  <- retrieve_credential_testing()
 project     <- redcap_project$new(redcap_uri=credential$redcap_uri, token=credential$token)
 update_expectation  <- FALSE
+path_expected_default <- "test-data/specific-redcapr/read-batch-simple/default.R"
 
 test_that("smoke test", {
   testthat::skip_on_cran()
@@ -29,7 +30,6 @@ test_that("smoke test", {
 })
 test_that("default", {
   testthat::skip_on_cran()
-  path_expected <- "test-data/specific-redcapr/read-batch-simple/default.R"
   expected_outcome_message <- "\\d+ records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   ###########################
@@ -39,8 +39,8 @@ test_that("default", {
     returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token)
   )
 
-  if (update_expectation) save_expected(returned_object1$data, path_expected)
-  expected_data_frame <- retrieve_expected(path_expected)
+  if (update_expectation) save_expected(returned_object1$data, path_expected_default)
+  expected_data_frame <- retrieve_expected(path_expected_default)
 
   expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
   expect_true(returned_object1$success)
@@ -493,7 +493,6 @@ test_that("filter-character", {
 
 test_that("date-range", {
   testthat::skip_on_cran()
-  path_expected <- "test-data/specific-redcapr/read-batch-simple/default.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   start <- as.POSIXct(strptime("2018-08-01 03:00", "%Y-%m-%d %H:%M"))
@@ -509,8 +508,7 @@ test_that("date-range", {
       )
   )
 
-  if (update_expectation) save_expected(returned_object$data, path_expected)
-  expected_data_frame <- retrieve_expected(path_expected)
+  if (update_expectation) save_expected(returned_object$data, path_expected_default)
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected="200")

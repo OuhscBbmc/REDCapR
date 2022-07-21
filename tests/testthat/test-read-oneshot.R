@@ -2,6 +2,7 @@ library(testthat)
 
 credential  <- retrieve_credential_testing()
 update_expectation  <- FALSE
+path_expected_default <- "test-data/specific-redcapr/read-oneshot/default.R"
 
 test_that("smoke test", {
   testthat::skip_on_cran()
@@ -15,7 +16,6 @@ test_that("smoke test", {
 })
 test_that("default", {
   testthat::skip_on_cran()
-  path_expected <- "test-data/specific-redcapr/read-oneshot/default.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   expect_message(
@@ -26,8 +26,8 @@ test_that("default", {
     )
   )
 
-  if (update_expectation) save_expected(returned_object$data, path_expected)
-  expected_data_frame <- retrieve_expected(path_expected)
+  if (update_expectation) save_expected(returned_object$data, path_expected_default)
+  expected_data_frame <- retrieve_expected(path_expected_default)
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
@@ -395,7 +395,6 @@ test_that("filter-character", {
 
 test_that("date-range", {
   testthat::skip_on_cran()
-  path_expected <- "test-data/specific-redcapr/read-oneshot/default.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   start <- as.POSIXct(strptime("2018-08-01 03:00", "%Y-%m-%d %H:%M"))
@@ -411,8 +410,7 @@ test_that("date-range", {
       )
   )
 
-  if (update_expectation) save_expected(returned_object$data, path_expected)
-  expected_data_frame <- retrieve_expected(path_expected)
+  if (update_expectation) save_expected(returned_object$data, path_expected_default)
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
