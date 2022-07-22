@@ -99,8 +99,7 @@ REDCapR::redcap_write(
   batch_size  = 1
 )
 
-# readr::write_csv(ds, "inst/test-data/super-wide-3/super-wide-3-dictionary.csv")
-REDCapR:::redcap_read_oneshot_eav(
-  redcap_uri  = credential$redcap_uri,
-  token       = credential$token
-)$data
+# REDCapR:::redcap_read_oneshot_eav(
+#   redcap_uri  = credential$redcap_uri,
+#   token       = credential$token
+# )$data
