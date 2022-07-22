@@ -325,11 +325,11 @@ redcap_read <- function(
         min(selected_ids), " through ", max(selected_ids),
         " (ie, ", length(selected_ids), " unique subject records)."
       )
-      message(
-        "\nReading batch ", i, " of ", nrow(ds_glossary), ", with subjects ",
-        paste(selected_ids, collapse = ','),
-        "\n(ie, ", length(selected_ids), " unique subject records)."
-      )
+      # message(
+      #   "\nReading batch ", i, " of ", nrow(ds_glossary), ", with subjects ",
+      #   paste(selected_ids, collapse = ','),
+      #   "\n(ie, ", length(selected_ids), " unique subject records)."
+      # )
     }
     read_result <- REDCapR::redcap_read_oneshot(
       redcap_uri                  = redcap_uri,
@@ -400,10 +400,10 @@ redcap_read <- function(
   ids_missing_rows  <- setdiff(unique_ids, unique_ids_actual)
 
   if (0L < length(ids_missing_rows)) {
-    warning(sprintf(
+    stop(sprintf(
       "There are %i subject(s) that are missing rows in the final dataset.\nCheck for funny values that could trip up REDCap's PHP code:\n%s.",
       length(ids_missing_rows),
-      paste(ids_missing_rows, collapse="; ")
+      paste(ids_missing_rows, collapse=",")
     ))
   }
 
