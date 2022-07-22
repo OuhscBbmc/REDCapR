@@ -303,7 +303,7 @@ redcap_read <- function(
   # Continue as intended if the initial query succeeded. --------------------
   unique_ids <- sort(unique(initial_call$data[[id_position]]))
 
-  if (all(nchar(unique_ids)==32L))
+  if (0L < length(unique_ids) & all(nchar(unique_ids)==32L))
     warn_hash_record_id()  # nocov
 
   ds_glossary            <- REDCapR::create_batch_glossary(row_count=length(unique_ids), batch_size=batch_size)
