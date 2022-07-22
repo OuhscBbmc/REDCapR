@@ -325,6 +325,11 @@ redcap_read <- function(
         min(selected_ids), " through ", max(selected_ids),
         " (ie, ", length(selected_ids), " unique subject records)."
       )
+      message(
+        "\nReading batch ", i, " of ", nrow(ds_glossary), ", with subjects ",
+        paste(selected_ids, collapse = ';'),
+        "\n(ie, ", length(selected_ids), " unique subject records)."
+      )
     }
     read_result <- REDCapR::redcap_read_oneshot(
       redcap_uri                  = redcap_uri,
