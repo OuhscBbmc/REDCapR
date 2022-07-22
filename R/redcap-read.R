@@ -400,8 +400,21 @@ redcap_read <- function(
   ids_missing_rows  <- setdiff(unique_ids, unique_ids_actual)
 
   if (0L < length(ids_missing_rows)) {
+    message_template <-
+      paste0(
+        "There are %i subject(s) that are missing rows in the returned dataset. ",
+        "REDCap's PHP code is likely trying to process too much text in one bite.\n\n",
+        "Common solutions this problem are:\n",
+        "  - specifying only the records you need (w/ `records`)\n",
+        "  - specifying only the fields you need (w/ `fields`)\n",
+        "  - specifying only the forms you need (w/ `forms`)\n",
+        "  - specifying a subset w/ `filter_logic`\n",
+        "  - reduce `batch_size`\n\n",
+        "The missing ids are:\n",
+        "%s."
+      )
     stop(sprintf(
-      "There are %i subject(s) that are missing rows in the final dataset.\nCheck for funny values that could trip up REDCap's PHP code:\n%s.",
+      message_template,
       length(ids_missing_rows),
       paste(ids_missing_rows, collapse=",")
     ))
