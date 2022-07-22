@@ -327,7 +327,7 @@ redcap_read <- function(
       )
       message(
         "\nReading batch ", i, " of ", nrow(ds_glossary), ", with subjects ",
-        paste(selected_ids, collapse = ';'),
+        paste(selected_ids, collapse = ','),
         "\n(ie, ", length(selected_ids), " unique subject records)."
       )
     }
