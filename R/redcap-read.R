@@ -268,7 +268,7 @@ redcap_read <- function(
     token              = token,
     records_collapsed  = records_collapsed,
     fields_collapsed   = metadata$data$field_name[id_position],
-    forms_collapsed    = forms_collapsed,
+    # forms_collapsed    = forms_collapsed,
     events_collapsed   = events_collapsed,
     filter_logic       = filter_logic,
     datetime_range_begin   = datetime_range_begin,
