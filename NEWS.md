@@ -8,6 +8,7 @@ Upcoming Versions
 * `redcap_read()` and `redcap_read_oneshot()` accept a new `locale` parameter that specifies date, time, and number formats, like using a comma as the decimal separator.  It is a [`readr::locale`](https://readr.tidyverse.org/reference/locale.html) object.  (#377, suggested by @joundso)
 * New `redcap_instruments()` function exports a list of the data collection instruments for a project.  (#381, @vcastro)
 * New `redcap_event_instruments()` function exports the instrument-event mappings for a project (i.e., how the data collection instruments are designated for certain events in a longitudinal project)..  (#381, @vcastro)
+* New detection when REDCap has trouble with a large request and drops records. (#400 w/ @TimMonahan)
 
 ### Minor Enhancements
 
@@ -20,7 +21,7 @@ Upcoming Versions
 * Modify  `redcap_users_export()` (which calls REDCap's user export).  The API dropped the `data_export` variable and added the `forms_export` variable. (#396)
 * For `redcap_read_oneshot_eav()`: if the project isn't longitudinal, a dummy value for `event_id` is used internally (#396)
 * For the testing server & projects, the http errors are a little different, so the testing code was adjusted (#396)
-* Set `httr::user_agent`, following the advice of its vignette (#397)
+* Set `httr::user_agent`, following the advice of httr's vignette (#397)
 
 ### Test Suite 
 
