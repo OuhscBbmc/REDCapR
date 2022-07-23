@@ -45,12 +45,11 @@
 #' \dontrun{
 #' uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token   <- "9A81268476645C4E5F03428B8AC3AA7B"
-#' REDCapR::redcap_read_dag(redcap_uri=uri, token=token)$data
-#'
+#' REDCapR::redcap_dag_read(redcap_uri=uri, token=token)$data
 #' }
 
 #' @export
-redcap_read_dag <- function(
+redcap_dag_read <- function(
   redcap_uri,
   token,
   http_response_encoding        = "UTF-8",
