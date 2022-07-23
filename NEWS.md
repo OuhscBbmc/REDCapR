@@ -8,6 +8,7 @@ Upcoming Versions
 * `redcap_read()` and `redcap_read_oneshot()` accept a new `locale` parameter that specifies date, time, and number formats, like using a comma as the decimal separator.  It is a [`readr::locale`](https://readr.tidyverse.org/reference/locale.html) object.  (#377, suggested by @joundso)
 * New `redcap_instruments()` function exports a list of the data collection instruments for a project.  (#381, @vcastro)
 * New `redcap_event_instruments()` function exports the instrument-event mappings for a project (i.e., how the data collection instruments are designated for certain events in a longitudinal project)..  (#381, @vcastro)
+* New `redcap_dag_read()` function returns the Data Access Groups for a project (#382, @joundso)
 * New detection when REDCap has trouble with a large request and drops records. (#400 w/ @TimMonahan)
 
 ### Minor Enhancements
@@ -23,7 +24,7 @@ Upcoming Versions
 * For the testing server & projects, the http errors are a little different, so the testing code was adjusted (#396)
 * Set `httr::user_agent`, following the advice of httr's vignette (#397)
 
-### Test Suite 
+### Test Suite
 
 * Added two more dictionaries that are super wide -5k & 35k variables  (#335 & #360, @januz & @datalorax)
 * Read, modify, & read projects with DAGs (#353, daniela.wolkersdorfer, #353)
@@ -71,7 +72,7 @@ Version 0.11.0 (Released 2020-04-20)
 
 * [`reader::type_convert()`](https://readr.tidyverse.org/reference/type_convert.html) is used *after* all the batches are stacked on top of each other.  This way, batches cannot have incompatible data types as they're combined. (#257; thanks @isaactpetersen #245)  Consequently, the `guess_max` parameter in `redcap_read()` no longer serves a purpose, and has been soft-deprecated. (#267)
 
-* [`redcap_metadata_write()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_write.html) writes to the project's metadata. (#274, @felixetorres) 
+* [`redcap_metadata_write()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_write.html) writes to the project's metadata. (#274, @felixetorres)
 
 * [`redcap_survey_link_export_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_survey_link_export_oneshot.html) retrieves the URL to a specific record's survey (*e.g.*, "https://bbmc.ouhsc.edu/redcap/surveys/?s=8KuzSLMHf6") (#293)
 
