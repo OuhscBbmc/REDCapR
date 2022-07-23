@@ -11,9 +11,6 @@ retrieve_credential_mssql2 <- function(
   # sql <- "EXEC [redcap].[prc_credential] @project_id = 404, @instance = 'bbmc'"
   # input <- list(project_id)
   channel <- DBI::dbConnect(odbc::odbc(), dsn = dsn)
-# browser()
-
-
 
   base::tryCatch(
     expr = {
