@@ -47,7 +47,7 @@
 #' To add more, please for and edit
 #' [constant.R](https://github.com/OuhscBbmc/REDCapR/blob/master/R/constant.R)
 #' on GitHub and submit a pull request.  For instructions, please see
-#' [Editing files in another user's repository](https://help.github.com/articles/editing-files-in-another-user-s-repository/) # nolint
+#' [Editing files in another user's repository](https://docs.github.com/articles/editing-files-in-another-user-s-repository/) # nolint
 #' in the GitHub documentation.
 #'
 #' @author Will Beasley
