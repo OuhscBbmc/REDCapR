@@ -16,7 +16,7 @@ Test environments
     1. [Ubuntu Linux 20.04 LTS, R-release, GCC](https://builder.r-hub.io/status/REDCapR_1.1.0.tar.gz-65720cf9ae694996b81294e2ade39175)
     1. [Fedora Linux, R-devel, clang, gfortran](https://builder.r-hub.io/status/REDCapR_1.1.0.tar.gz-dfbf2b851e0c48aeaaf8e85c9c34c332)
     1. [Windows Server](https://builder.r-hub.io/status/REDCapR_1.1.0.tar.gz-6fe170ebb60e41469336c822ca3465da)
-1. [win-builder](https://win-builder.r-project.org/BwNz2bnHxuse), development version.
+1. [win-builder](https://win-builder.r-project.org/h66QMt5KzueV), development version.
 1. [GiHub Actions](https://github.com/OuhscBbmc/REDCapR/actions), Ubuntu 20.04 LTS
 
 R CMD check results
@@ -51,7 +51,6 @@ R CMD check results
 Downstream dependencies
 -----------------------------------------------
 
-No downstream packages are affected.  The two packages that depends/imports/suggests REDCapR passes checks with `revdepcheck::revdep_check()`.  Results: https://github.com/OuhscBbmc/REDCapR/blob/master/revdep/cran.md
+No downstream packages are affected.  The package that depends/imports/suggests REDCapR passes checks with `revdepcheck::revdep_check()`.  Results: https://github.com/OuhscBbmc/REDCapR/blob/main/revdep/cran.md
 
-    * [codified](https://CRAN.R-project.org/package=codified)
-    * [ReviewR](https://CRAN.R-project.org/package=ReviewR)
+* [ReviewR](https://CRAN.R-project.org/package=ReviewR)
