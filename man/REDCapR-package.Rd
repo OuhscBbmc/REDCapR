@@ -29,7 +29,7 @@ David Bard, PI, OUHSC; 2015-2017.
 collaboration with \href{https://oklahoma.gov/okdhs.html}{OKDHS};
 David Bard, PI, OUHSC; 2014-2017.
 \item \emph{Integrative Analysis of Longitudinal Studies of Aging (IALSA)},
-sponsored by \href{https://grantome.com/grant/NIH/P01-AG043362}{NIH 5P01AG043362}.
+sponsored by \href{https://grantome.com/grant/NIH/P01-AG043362-05}{NIH 5P01AG043362}.
 Scott Hofer, PI, University of Victoria;
 Will Beasley, PI of site-award, OUHSC; 2013-2018.
 \item \emph{Oklahoma Shared Clinical and Translational Resources}, sponsored by
