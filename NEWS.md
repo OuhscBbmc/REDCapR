@@ -1,4 +1,4 @@
-Upcoming Versions
+Version 1.1.0 (released 2022-08-10)
 ==========================================================
 
 ### New Features
@@ -41,7 +41,7 @@ The package has been stable for years and should be reflected in the major versi
 * The functions `redcap_read_oneshot()`, `redcap_read()`, & `redcap_read_oneshot_eav()` now support the parameters `datetime_range_begin` and `datetime_range_end`.  The are passed to the REDCap parameters `dateRangeBegin` and `dateRangeEnd`, which restricts records returned, based on their last modified date in the server.  (Thanks @pbchase, #321 & #323.)
 * Better documentation about the `export_survey_fields` parameter in the functions `redcap_read()` & `redcap_read_oneshot()`.  (Thanks @isaactpetersen, #333)
 * New function [`redcap_report()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_report.html) export records that populate a REDCap report. (#326.)
-* New vignette [Typical REDCap Workflow for a Data Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html) developed to support a workshop for the 2021 [R/Medicine Conference](https://r-medicine.org/) (#332, with  @higgi13425, @kamclean, & Amanda Miller)
+* New vignette [Typical REDCap Workflow for a Data Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html) developed to support a workshop for the 2021 [R/Medicine Conference](https://events.linuxfoundation.org/r-medicine/) (#332, with  @higgi13425, @kamclean, & Amanda Miller)
 * New function [`create_credential_local()`](https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html) starts a well-formed csv file that can contain tokens. (#340, after conversations with @higgi13425 & @kamclean.)
 
 ### Stability Features
@@ -267,8 +267,9 @@ Version 0.1 (Released 2014-01-14)
 * `redcap_read()` takes parameter for `raw_or_label` (Thanks Rollie Parrish #3)
 * `redcap_read()` takes parameter for `export_data_access_groups` thanks to Rollie Parrish (@rparrish #4)
 
-GitHub Commits and Releases
-==========================================================
+----------------------------------------
 
-* For a detailed change log, please see https://github.com/OuhscBbmc/REDCapR/commits/master.
+GitHub Commits and Releases
+
+* For a detailed change log, please see https://github.com/OuhscBbmc/REDCapR/commits/main.
 * For a list of the major releases, please see https://github.com/OuhscBbmc/REDCapR/releases.
