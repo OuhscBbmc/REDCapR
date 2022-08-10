@@ -161,7 +161,7 @@ documentation is available at https://cran.r-project.org/package=httr.
 If you do not pass in this \code{export_data_access_groups} value, it will default
 to \code{FALSE}. The following is from the API help page for version 10.5.1:
 \emph{This flag is only viable if the user whose token is being used to make the
-API request is \emph{not} in a data access group. If the user is in a group,
+API request is \strong{not} in a data access group. If the user is in a group,
 then this flag will revert to its default value}.
 }
 \examples{
