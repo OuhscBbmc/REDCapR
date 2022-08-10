@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -56,6 +56,42 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="1.1.0" id="version-110-released-2022-08-10">Version 1.1.0 (released 2022-08-10)<a class="anchor" aria-label="anchor" href="#version-110-released-2022-08-10"></a></h2>
+<div class="section level4">
+<h4 id="new-features-1-1-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-1-1-0"></a></h4>
+<ul><li>New <code><a href="../reference/redcap_delete.html">redcap_delete()</a></code> function. It deletes a vector of records. (Thanks <a href="https://github.com/joundso" class="external-link">@joundso</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/372" class="external-link">#372</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/373" class="external-link">#373</a>)</li>
+<li>New <code><a href="../reference/redcap_arm_export.html">redcap_arm_export()</a></code> function. It retrieves a list of REDCap project arms. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/375" class="external-link">#375</a>)</li>
+<li>
+<code><a href="../reference/redcap_read.html">redcap_read()</a></code> and <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code> accept a new <code>locale</code> parameter that specifies date, time, and number formats, like using a comma as the decimal separator. It is a <a href="https://readr.tidyverse.org/reference/locale.html" class="external-link"><code>readr::locale</code></a> object. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/377" class="external-link">#377</a>, suggested by <a href="https://github.com/joundso" class="external-link">@joundso</a>)</li>
+<li>New <code><a href="../reference/redcap_instruments.html">redcap_instruments()</a></code> function exports a list of the data collection instruments for a project. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/381" class="external-link">#381</a>, <a href="https://github.com/vcastro" class="external-link">@vcastro</a>)</li>
+<li>New <code><a href="../reference/redcap_event_instruments.html">redcap_event_instruments()</a></code> function exports the instrument-event mappings for a project (i.e., how the data collection instruments are designated for certain events in a longitudinal project).. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/381" class="external-link">#381</a>, <a href="https://github.com/vcastro" class="external-link">@vcastro</a>)</li>
+<li>New <code><a href="../reference/redcap_dag_read.html">redcap_dag_read()</a></code> function returns the Data Access Groups for a project (<a href="https://github.com/OuhscBbmc/REDCapR/issues/382" class="external-link">#382</a>, <a href="https://github.com/joundso" class="external-link">@joundso</a>)</li>
+<li>New detection when REDCap has trouble with a large request and drops records. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/400" class="external-link">#400</a> w/ <a href="https://github.com/TimMonahan" class="external-link">@TimMonahan</a>)</li>
+</ul></div>
+<div class="section level4">
+<h4 id="minor-enhancements-1-1-0">Minor Enhancements<a class="anchor" aria-label="anchor" href="#minor-enhancements-1-1-0"></a></h4>
+<ul><li>
+<code><a href="../reference/sanitize_token.html">sanitize_token()</a></code> now allows lowercase characters –in addition to uppercase characters &amp; digits. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/347" class="external-link">#347</a>, <a href="https://github.com/jmbarbone" class="external-link">@jmbarbone</a>)</li>
+<li>
+<code><a href="../reference/redcap_metadata_read.html">redcap_metadata_read()</a></code> now uses json (instead of csv) to transfer the dictionary between server &amp; client. This accommodates super-wide dictionaries with 35k+ variables. The user shouldn’t notice a difference, and still will receive a data.frame. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/335" class="external-link">#335</a>, <a href="https://github.com/januz" class="external-link">@januz</a> &amp; <a href="https://github.com/datalorax" class="external-link">@datalorax</a>)</li>
+<li>Include a few more <code><a href="https://testthat.r-lib.org/reference/skip.html" class="external-link">testthat::skip_on_cran()</a></code> calls to comply with CRAN’s <a href="https://cran.r-project.org/web/packages/policies.html" class="external-link">“fail gracefully”</a> policy. Similarly, skip remaining examples that depend on external resources. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/352" class="external-link">#352</a>)</li>
+<li>
+<code><a href="../reference/retrieve_credential.html">retrieve_credential_local()</a></code> can now user <code>username</code> to identify the desired credential row (<a href="https://github.com/OuhscBbmc/REDCapR/issues/364" class="external-link">#364</a>)</li>
+<li>
+<code><a href="../reference/redcap_read.html">redcap_read()</a></code> and <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code> gain the <code>http_response_encoding</code> parameter that’s passed to <a href="https://httr.r-lib.org/reference/content.html" class="external-link"><code>httr::content()</code></a>. The default value remains “UTF-8”. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/354" class="external-link">#354</a>, <a href="https://github.com/lrasmus" class="external-link">@lrasmus</a>)</li>
+<li>Accommodate single-character REDCap variable names (<a href="https://github.com/OuhscBbmc/REDCapR/issues/367" class="external-link">#367</a> &amp; <a href="https://github.com/OuhscBbmc/REDCapR/issues/368" class="external-link">#368</a>, <a href="https://github.com/daynefiler" class="external-link">@daynefiler</a>)</li>
+<li>Modify <code><a href="../reference/redcap_users_export.html">redcap_users_export()</a></code> (which calls REDCap’s user export). The API dropped the <code>data_export</code> variable and added the <code>forms_export</code> variable. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/396" class="external-link">#396</a>)</li>
+<li>For <code><a href="../reference/redcap_read_oneshot_eav.html">redcap_read_oneshot_eav()</a></code>: if the project isn’t longitudinal, a dummy value for <code>event_id</code> is used internally (<a href="https://github.com/OuhscBbmc/REDCapR/issues/396" class="external-link">#396</a>)</li>
+<li>For the testing server &amp; projects, the http errors are a little different, so the testing code was adjusted (<a href="https://github.com/OuhscBbmc/REDCapR/issues/396" class="external-link">#396</a>)</li>
+<li>Set <code><a href="https://httr.r-lib.org/reference/user_agent.html" class="external-link">httr::user_agent</a></code>, following the advice of httr’s vignette (<a href="https://github.com/OuhscBbmc/REDCapR/issues/397" class="external-link">#397</a>)</li>
+</ul></div>
+<div class="section level4">
+<h4 id="test-suite-1-1-0">Test Suite<a class="anchor" aria-label="anchor" href="#test-suite-1-1-0"></a></h4>
+<ul><li>Added two more dictionaries that are super wide -5k &amp; 35k variables (<a href="https://github.com/OuhscBbmc/REDCapR/issues/335" class="external-link">#335</a> &amp; <a href="https://github.com/OuhscBbmc/REDCapR/issues/360" class="external-link">#360</a>, <a href="https://github.com/januz" class="external-link">@januz</a> &amp; <a href="https://github.com/datalorax" class="external-link">@datalorax</a>)</li>
+<li>Read, modify, &amp; read projects with DAGs (<a href="https://github.com/OuhscBbmc/REDCapR/issues/353" class="external-link">#353</a>, daniela.wolkersdorfer, <a href="https://github.com/OuhscBbmc/REDCapR/issues/353" class="external-link">#353</a>)</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.0" id="version-100-released-2021-07-21">Version 1.0.0 (released 2021-07-21)<small>2021-07-22</small><a class="anchor" aria-label="anchor" href="#version-100-released-2021-07-21"></a></h2>
 <p>The package has been stable for years and should be reflected in the major version number.</p>
 <div class="section level4">
@@ -65,7 +101,7 @@
 <li>The functions <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code>, <code><a href="../reference/redcap_read.html">redcap_read()</a></code>, &amp; <code><a href="../reference/redcap_read_oneshot_eav.html">redcap_read_oneshot_eav()</a></code> now support the parameters <code>datetime_range_begin</code> and <code>datetime_range_end</code>. The are passed to the REDCap parameters <code>dateRangeBegin</code> and <code>dateRangeEnd</code>, which restricts records returned, based on their last modified date in the server. (Thanks <a href="https://github.com/pbchase" class="external-link">@pbchase</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/321" class="external-link">#321</a> &amp; <a href="https://github.com/OuhscBbmc/REDCapR/issues/323" class="external-link">#323</a>.)</li>
 <li>Better documentation about the <code>export_survey_fields</code> parameter in the functions <code><a href="../reference/redcap_read.html">redcap_read()</a></code> &amp; <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code>. (Thanks <a href="https://github.com/isaactpetersen" class="external-link">@isaactpetersen</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/333" class="external-link">#333</a>)</li>
 <li>New function <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_report.html"><code>redcap_report()</code></a> export records that populate a REDCap report. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/326" class="external-link">#326</a>.)</li>
-<li>New vignette <a href="https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html">Typical REDCap Workflow for a Data Analyst</a> developed to support a workshop for the 2021 <a href="https://r-medicine.org/" class="external-link">R/Medicine Conference</a> (<a href="https://github.com/OuhscBbmc/REDCapR/issues/332" class="external-link">#332</a>, with <a href="https://github.com/higgi13425" class="external-link">@higgi13425</a>, <a href="https://github.com/kamclean" class="external-link">@kamclean</a>, &amp; Amanda Miller)</li>
+<li>New vignette <a href="https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html">Typical REDCap Workflow for a Data Analyst</a> developed to support a workshop for the 2021 <a href="https://events.linuxfoundation.org/r-medicine/" class="external-link">R/Medicine Conference</a> (<a href="https://github.com/OuhscBbmc/REDCapR/issues/332" class="external-link">#332</a>, with <a href="https://github.com/higgi13425" class="external-link">@higgi13425</a>, <a href="https://github.com/kamclean" class="external-link">@kamclean</a>, &amp; Amanda Miller)</li>
 <li>New function <a href="https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html"><code>create_credential_local()</code></a> starts a well-formed csv file that can contain tokens. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/340" class="external-link">#340</a>, after conversations with <a href="https://github.com/higgi13425" class="external-link">@higgi13425</a> &amp; <a href="https://github.com/kamclean" class="external-link">@kamclean</a>.)</li>
 </ul></div>
 <div class="section level4">
@@ -269,6 +305,9 @@
 <code><a href="../reference/redcap_read.html">redcap_read()</a></code> takes parameter for <code>raw_or_label</code> (Thanks Rollie Parrish <a href="https://github.com/OuhscBbmc/REDCapR/issues/3" class="external-link">#3</a>)</li>
 <li>
 <code><a href="../reference/redcap_read.html">redcap_read()</a></code> takes parameter for <code>export_data_access_groups</code> thanks to Rollie Parrish (<a href="https://github.com/rparrish" class="external-link">@rparrish</a> <a href="https://github.com/OuhscBbmc/REDCapR/issues/4" class="external-link">#4</a>)</li>
+</ul><hr><p>GitHub Commits and Releases</p>
+<ul><li>For a detailed change log, please see <a href="https://github.com/OuhscBbmc/REDCapR/commits/main" class="external-link uri">https://github.com/OuhscBbmc/REDCapR/commits/main</a>.</li>
+<li>For a list of the major releases, please see <a href="https://github.com/OuhscBbmc/REDCapR/releases" class="external-link uri">https://github.com/OuhscBbmc/REDCapR/releases</a>.</li>
 </ul></div>
 </div>
   </div>

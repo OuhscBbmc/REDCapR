@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -86,7 +86,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Basic REDCapR Operations</h1>
             
-            <h4 data-toc-skip class="date">2022-07-22</h4>
+            <h4 data-toc-skip class="date">2022-08-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/HEAD/vignettes/BasicREDCapROperations.Rmd" class="external-link"><code>vignettes/BasicREDCapROperations.Rmd</code></a></small>
       <div class="hidden name"><code>BasicREDCapROperations.Rmd</code></div>
@@ -117,9 +117,9 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Return all records and all variables.</span></span>
 <span><span class="va">ds_all_rows_all_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-07-22 23:47:47.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-08-10 16:20:24.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -188,11 +188,11 @@ cols(
 <span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  records    <span class="op">=</span> <span class="va">desired_records_v1</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2022-07-22 23:47:48.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2022-08-10 16:20:25.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
-<pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
 <pre><code>
  [36m── [39m  [1mColumn specification [22m  [36m──────────────────────────────────────────────────────── [39m
 cols(
@@ -215,9 +215,9 @@ cols(
 <span>  token             <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  records_collapsed <span class="op">=</span> <span class="va">desired_records_v2</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2022-07-22 23:47:49.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2022-08-10 16:20:27.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -264,11 +264,11 @@ cols(
 <span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  fields     <span class="op">=</span> <span class="va">desired_fields_v1</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-07-22 23:47:51.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-08-10 16:20:28.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
 <pre><code>
  [36m── [39m  [1mColumn specification [22m  [36m──────────────────────────────────────────────────────── [39m
 cols(
@@ -284,11 +284,11 @@ cols(
 <span>  token            <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  fields_collapsed <span class="op">=</span> <span class="va">desired_fields_v2</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-07-22 23:47:52.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-08-10 16:20:29.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
 <pre><code>
  [36m── [39m  [1mColumn specification [22m  [36m──────────────────────────────────────────────────────── [39m
 cols(
@@ -318,11 +318,11 @@ cols(
 <span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  fields     <span class="op">=</span> <span class="va">desired_fields_v3</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-07-22 23:47:53.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-08-10 16:20:30.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
 <pre><code>
  [36m── [39m  [1mColumn specification [22m  [36m──────────────────────────────────────────────────────── [39m
 cols(
@@ -356,11 +356,11 @@ cols(
 <span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  records    <span class="op">=</span> <span class="va">desired_records_v3</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2022-07-22 23:47:54.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2022-08-10 16:20:31.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).</code></pre>
-<pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
 <pre><code>
  [36m── [39m  [1mColumn specification [22m  [36m──────────────────────────────────────────────────────── [39m
 cols(
@@ -416,11 +416,11 @@ cols(
 <span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  fields     <span class="op">=</span> <span class="va">desired_fields_v1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-07-22 23:47:56.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-08-10 16:20:32.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
 <pre><code>
  [36m── [39m  [1mColumn specification [22m  [36m──────────────────────────────────────────────────────── [39m
 cols(
@@ -445,7 +445,7 @@ $status_codes
 [1] "200"
 
 $outcome_messages
-[1] "5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200."
+[1] "5 records and 3 columns were read from REDCap in 0.1 seconds.  The http status code was 200."
 
 $records_collapsed
 [1] ""
@@ -469,7 +469,7 @@ $datetime_range_end
 [1] NA
 
 $elapsed_seconds
-[1] 1.210075</code></pre>
+[1] 1.075311</code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -487,81 +487,81 @@ $elapsed_seconds
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       UTC
- date     2022-07-22
+ date     2022-08-10
  pandoc   2.7.3 @ /usr/local/bin/ (via rmarkdown)
 
  [1m [36m─ Packages ─────────────────────────────────────────────────────────────────── [39m [22m
-  [3m [90mpackage     [39m [23m  [3m [90m* [39m [23m  [3m [90mversion  [39m [23m  [3m [90mdate (UTC) [39m [23m  [3m [90mlib [39m [23m  [3m [90msource [39m [23m
- backports     1.4.1     [90m2021-12-13 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- bit           4.0.4     [90m2020-08-04 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- bit64         4.0.5     [90m2020-08-30 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- bslib         0.4.0     [90m2022-07-16 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- cachem        1.0.6     [90m2021-08-19 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- checkmate     2.1.0     [90m2022-04-21 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- cli           3.3.0     [90m2022-04-25 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- colorspace    2.0-3     [90m2022-02-21 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- crayon        1.5.1     [90m2022-03-26 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- curl          4.3.2     [90m2021-06-23 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- desc          1.4.1     [90m2022-03-06 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- digest        0.6.29    [90m2021-12-01 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- dplyr         1.0.9     [90m2022-04-28 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- ellipsis      0.3.2     [90m2021-04-29 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- evaluate      0.15      [90m2022-02-18 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- fansi         1.0.3     [90m2022-03-24 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- fastmap       1.1.0     [90m2021-01-25 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- fs            1.5.2     [90m2021-12-08 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- generics      0.1.3     [90m2022-07-05 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- glue          1.6.2     [90m2022-02-24 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- hms           1.1.1     [90m2021-09-26 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- htmltools     0.5.3     [90m2022-07-18 [39m  [90m[1] [39m  [90mCRAN (R 4.2.1) [39m
- httr          1.4.3     [90m2022-05-04 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- jquerylib     0.1.4     [90m2021-04-26 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- jsonlite      1.8.0     [90m2022-02-22 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- kableExtra    1.3.4     [90m2021-02-20 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- knitr       * 1.39      [90m2022-04-26 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- lifecycle     1.0.1     [90m2021-09-24 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- magrittr    * 2.0.3     [90m2022-03-30 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- memoise       2.0.1     [90m2021-11-26 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- munsell       0.5.0     [90m2018-06-12 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- pillar        1.8.0     [90m2022-07-18 [39m  [90m[1] [39m  [90mCRAN (R 4.2.1) [39m
- pkgconfig     2.0.3     [90m2019-09-22 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- pkgdown       2.0.6     [90m2022-07-16 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- purrr         0.3.4     [90m2020-04-17 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- R6            2.5.1     [90m2021-08-19 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- ragg          1.2.2     [90m2022-02-21 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- readr         2.1.2     [90m2022-01-30 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- REDCapR     *  [1m [35m1.0.9002 [39m [22m  [90m2022-07-22 [39m  [90m[1] [39m  [1m [35mlocal [39m [22m
- rlang         1.0.4     [90m2022-07-12 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- rmarkdown     2.14      [90m2022-04-25 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- rprojroot     2.0.3     [90m2022-04-02 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- rstudioapi    0.13      [90m2020-11-12 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- rvest         1.0.2     [90m2021-10-16 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- sass          0.4.2     [90m2022-07-16 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- scales        1.2.0     [90m2022-04-13 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- sessioninfo   1.2.2     [90m2021-12-06 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- stringi       1.7.8     [90m2022-07-11 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- stringr       1.4.0     [90m2019-02-10 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- svglite       2.1.0     [90m2022-02-03 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- systemfonts   1.0.4     [90m2022-02-11 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- textshaping   0.3.6     [90m2021-10-13 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- tibble        3.1.8     [90m2022-07-22 [39m  [90m[1] [39m  [90mCRAN (R 4.2.1) [39m
- tidyselect    1.1.2     [90m2022-02-21 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- tzdb          0.3.0     [90m2022-03-28 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- utf8          1.2.2     [90m2021-07-24 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- vctrs         0.4.1     [90m2022-04-13 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- viridisLite   0.4.0     [90m2021-04-13 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- vroom         1.5.7     [90m2021-11-30 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- webshot       0.5.3     [90m2022-04-14 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- withr         2.5.0     [90m2022-03-03 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- xfun          0.31      [90m2022-05-10 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- xml2          1.3.3     [90m2021-11-30 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- yaml          2.3.5     [90m2022-02-21 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+  [3m [90mpackage     [39m [23m  [3m [90m* [39m [23m  [3m [90mversion [39m [23m  [3m [90mdate (UTC) [39m [23m  [3m [90mlib [39m [23m  [3m [90msource [39m [23m
+ backports     1.4.1    [90m2021-12-13 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ bit           4.0.4    [90m2020-08-04 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ bit64         4.0.5    [90m2020-08-30 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ bslib         0.4.0    [90m2022-07-16 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ cachem        1.0.6    [90m2021-08-19 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ checkmate     2.1.0    [90m2022-04-21 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ cli           3.3.0    [90m2022-04-25 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ colorspace    2.0-3    [90m2022-02-21 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ crayon        1.5.1    [90m2022-03-26 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ curl          4.3.2    [90m2021-06-23 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ desc          1.4.1    [90m2022-03-06 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ digest        0.6.29   [90m2021-12-01 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ dplyr         1.0.9    [90m2022-04-28 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ ellipsis      0.3.2    [90m2021-04-29 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ evaluate      0.16     [90m2022-08-09 [39m  [90m[1] [39m  [90mCRAN (R 4.2.1) [39m
+ fansi         1.0.3    [90m2022-03-24 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ fastmap       1.1.0    [90m2021-01-25 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ fs            1.5.2    [90m2021-12-08 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ generics      0.1.3    [90m2022-07-05 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ glue          1.6.2    [90m2022-02-24 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ hms           1.1.1    [90m2021-09-26 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ htmltools     0.5.3    [90m2022-07-18 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ httr          1.4.3    [90m2022-05-04 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ jquerylib     0.1.4    [90m2021-04-26 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ jsonlite      1.8.0    [90m2022-02-22 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ kableExtra    1.3.4    [90m2021-02-20 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ knitr       * 1.39     [90m2022-04-26 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ lifecycle     1.0.1    [90m2021-09-24 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ magrittr    * 2.0.3    [90m2022-03-30 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ memoise       2.0.1    [90m2021-11-26 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ munsell       0.5.0    [90m2018-06-12 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ pillar        1.8.0    [90m2022-07-18 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ pkgconfig     2.0.3    [90m2019-09-22 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ pkgdown       2.0.6    [90m2022-07-16 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ purrr         0.3.4    [90m2020-04-17 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ R6            2.5.1    [90m2021-08-19 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ ragg          1.2.2    [90m2022-02-21 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ readr         2.1.2    [90m2022-01-30 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ REDCapR     * 1.1.0    [90m2022-08-10 [39m  [90m[1] [39m  [1m [35mlocal [39m [22m
+ rlang         1.0.4    [90m2022-07-12 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ rmarkdown     2.14     [90m2022-04-25 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ rprojroot     2.0.3    [90m2022-04-02 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ rstudioapi    0.13     [90m2020-11-12 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ rvest         1.0.2    [90m2021-10-16 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ sass          0.4.2    [90m2022-07-16 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ scales        1.2.0    [90m2022-04-13 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ sessioninfo   1.2.2    [90m2021-12-06 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ stringi       1.7.8    [90m2022-07-11 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ stringr       1.4.0    [90m2019-02-10 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ svglite       2.1.0    [90m2022-02-03 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ systemfonts   1.0.4    [90m2022-02-11 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ textshaping   0.3.6    [90m2021-10-13 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ tibble        3.1.8    [90m2022-07-22 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ tidyselect    1.1.2    [90m2022-02-21 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ tzdb          0.3.0    [90m2022-03-28 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ utf8          1.2.2    [90m2021-07-24 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ vctrs         0.4.1    [90m2022-04-13 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ viridisLite   0.4.0    [90m2021-04-13 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ vroom         1.5.7    [90m2021-11-30 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ webshot       0.5.3    [90m2022-04-14 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ withr         2.5.0    [90m2022-03-03 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ xfun          0.32     [90m2022-08-10 [39m  [90m[1] [39m  [90mCRAN (R 4.2.1) [39m
+ xml2          1.3.3    [90m2021-11-30 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
+ yaml          2.3.5    [90m2022-02-21 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
 
  [90m [1] /Users/runner/work/_temp/Library [39m
  [90m [2] /Library/Frameworks/R.framework/Versions/4.2/Resources/library [39m
 
  [1m [36m────────────────────────────────────────────────────────────────────────────── [39m [22m</code></pre>
-</details><p>Report rendered by runner at 2022-07-22, 23:47 +0000 in 12 seconds.</p>
+</details><p>Report rendered by runner at 2022-08-10, 16:20 +0000 in 11 seconds.</p>
 </div>
   </div>
 
