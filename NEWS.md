@@ -1,4 +1,4 @@
-Upcoming Versions
+Version 1.1.0 (released 2022-08-10)
 ==========================================================
 
 ### New Features
