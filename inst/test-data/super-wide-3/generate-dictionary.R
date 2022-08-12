@@ -1,4 +1,5 @@
 
+# variable_count  <- 12L # A multiple of the field types
 variable_count  <- 35004L # A multiple of the field types
 field_types     <- c("text", "radio", "checkbox", "notes", "text", "descriptive")
 choices         <- c("", "1, Yup | 2, Nope | 3, Other", "1, Yup | 2, Nope | 3, Other", "", "", "")
@@ -9,7 +10,7 @@ cycle_count     <- variable_count %/% cycle_length
 
 section_header_template <- '<div class="rich-text-field-label"><p style="text-align: center;"><span style="color: #000080;">Please answer the following questions in form_%04i</span></p></div>'
 
-ds <-
+ds_dictionary <-
   tibble::tibble(
     `Variable / Field Name` = c("record_id", sprintf("variable_%05i", 1L + seq_len(variable_count - 1L))),
     `Form Name`                                   = NA_character_,
@@ -50,7 +51,7 @@ ds <-
   )
 
 # Get a label with things that could potentially mess up JSON if the parser is poor.
-ds$`Field Label`[2] <-
+ds_dictionary$`Field Label`[2] <-
   '
     <span lang="en">{Name of University} is one part of a super awesome study.
 
@@ -65,6 +66,40 @@ ds$`Field Label`[2] <-
     ¿Tiene alguna pregunta sobre lo que implica el estudio?</span>"
   '
 
-ds$variable_index <- NULL # Drop before writing to disk.
+ds_dictionary$variable_index <- NULL # Drop before writing to disk.
 
-readr::write_csv(ds, "inst/test-data/super-wide-3/super-wide-3-dictionary.csv")
+readr::write_csv(ds_dictionary, "inst/test-data/super-wide-3/super-wide-3-dictionary.csv")
+
+
+ds_dictionary_slim <-
+  ds_dictionary |>
+  dplyr::filter(`Field Type` %in% c("text", "radio", "notes")) |>
+  dplyr::filter(`Text Validation Type OR Show Slider Number` != "date_ymd")
+
+row_count <- 20
+# ds <-
+#   ds_dictionary$`Variable / Field Name` |>
+#   purrr::map_dfc(~paste0(.x, "--", 1:row_count), ) |>
+#   magrittr::set_colnames(ds_dictionary$`Variable / Field Name`)# |>
+#   # readr::write_csv("inst/test-data/super-wide-3/super-wide-3.csv")
+ds <-
+  matrix(rep(1, row_count * nrow(ds_dictionary_slim)), nrow = row_count) |>
+  tibble::as_tibble() |>
+  magrittr::set_colnames(ds_dictionary_slim$`Variable / Field Name`) |>
+  dplyr::mutate(
+    record_id = seq_len(dplyr::n())
+  )
+
+# takes ~10 min to upload
+credential <- retrieve_credential_testing(2597L)
+REDCapR::redcap_write(
+  ds          = ds,
+  redcap_uri  = credential$redcap_uri,
+  token       = credential$token,
+  batch_size  = 1
+)
+
+# REDCapR:::redcap_read_oneshot_eav(
+#   redcap_uri  = credential$redcap_uri,
+#   token       = credential$token
+# )$data

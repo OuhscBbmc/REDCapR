@@ -27,7 +27,7 @@ opts_chunk$set(
   tidy    = FALSE
 )
 
-knit_print.data.frame = function(x, ...) {
+knit_print.data.frame <- function(x, ...) {
   # See https://cran.r-project.org/package=knitr/vignettes/knit_print.html
   # res = paste(c("", "", kable(x)), collapse = "\n")
   # asis_output(res)

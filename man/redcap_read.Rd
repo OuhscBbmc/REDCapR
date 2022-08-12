@@ -190,9 +190,11 @@ the webserver when exporting/importing a large dataset.
 A second benefit is less RAM is required on the webserver.  Because
 each batch is smaller than the entire dataset, the webserver
 tackles more manageably sized objects in memory.  Consider batching
-if you encounter the error:\preformatted{ERROR: REDCap ran out of server memory. The request cannot be processed.
+if you encounter the error:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{ERROR: REDCap ran out of server memory. The request cannot be processed.
 Please try importing/exporting a smaller amount of data.
-}
+}\if{html}{\out{</div>}}
 
 For \code{\link[=redcap_read]{redcap_read()}} to function properly, the user must have Export
 permissions for the 'Full Data Set'.  Users with only 'De-Identified'

@@ -1,0 +1,169 @@
+#' @title Read data access groups from a REDCap project
+#'
+#' @description This function reads all available data access groups from
+#'   REDCap an returns them as a [base::data.frame()].
+#'
+#' @param redcap_uri The URI (uniform resource identifier) of the REDCap
+#' project.  Required.
+#' @param token The user-specific string that serves as the password for a
+#' project.  Required.
+#' @param http_response_encoding  The encoding value passed to
+#' [httr::content()].  Defaults to 'UTF-8'.
+#' @param locale a [readr::locale()] object to specify preferences like
+#' number, date, and time formats.  This object is passed to
+#' [`readr::read_csv()`].  Defaults to [readr::default_locale()].
+#' @param verbose A boolean value indicating if `message`s should be printed
+#' to the R console during the operation.  The verbose output might contain
+#' sensitive information (*e.g.* PHI), so turn this off if the output might
+#' be visible somewhere public. Optional.
+#' @param config_options  A list of options to pass to `POST` method in the
+#' `httr` package.
+#'
+#' @return Currently, a list is returned with the following elements:
+#' * `data`: An R [base::data.frame()] of all data access groups of the project.
+#' * `success`: A boolean value indicating if the operation was apparently
+#' successful.
+#' * `status_codes`: A collection of
+#' [http status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes),
+#' separated by semicolons.  There is one code for each batch attempted.
+#' * `outcome_messages`: A collection of human readable strings indicating the
+#' operations' semicolons.  There is one code for each batch attempted.  In an
+#' unsuccessful operation, it should contain diagnostic information.
+#' * `elapsed_seconds`: The duration of the function.
+#'
+#'
+#' @author Jonathan M. Mang
+#' @references The official documentation can be found on the 'API Help Page'
+#' and 'API Examples' pages on the REDCap wiki (*i.e.*,
+#' https://community.projectredcap.org/articles/456/api-documentation.html
+#' and
+#' https://community.projectredcap.org/articles/462/api-examples.html).
+#' If you do not have an account for the wiki, please ask your campus REDCap
+#' administrator to send you the static material.
+#'
+#' @examples
+#' \dontrun{
+#' uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
+#' token   <- "9A81268476645C4E5F03428B8AC3AA7B"
+#' REDCapR::redcap_dag_read(redcap_uri=uri, token=token)$data
+#' }
+
+#' @export
+redcap_dag_read <- function(
+  redcap_uri,
+  token,
+  http_response_encoding        = "UTF-8",
+  locale                        = readr::default_locale(),
+  verbose                       = TRUE,
+  config_options                = NULL
+) {
+  checkmate::assert_character(redcap_uri                , any.missing=FALSE,     len=1, pattern="^.{1,}$")
+  checkmate::assert_character(token                     , any.missing=FALSE,     len=1, pattern="^.{1,}$")
+  checkmate::assert_character(http_response_encoding    , any.missing=FALSE,     len=1)
+  checkmate::assert_class(    locale, "locale"          , null.ok = FALSE)
+
+  checkmate::assert_logical(  verbose                   , any.missing=FALSE,     len=1, null.ok=TRUE)
+  checkmate::assert_list(     config_options            , any.missing=TRUE ,            null.ok=TRUE)
+
+
+  token               <- sanitize_token(token)
+  verbose             <- verbose_prepare(verbose)
+
+  post_body <- list(
+    token                   = token,
+    content                 = "dag",
+    format                  = "csv"
+  )
+
+  # This is the important line that communicates with the REDCap server.
+  kernel <- kernel_api(
+    redcap_uri      = redcap_uri,
+    post_body       = post_body,
+    config_options  = config_options,
+    encoding        = http_response_encoding
+  )
+
+  if (kernel$success) {
+    try(
+      # Convert the raw text to a dataset.
+      ds <-
+        readr::read_csv(
+          file            = I(kernel$raw_text),
+          locale          = locale,
+          show_col_types  = FALSE
+        ) %>%
+        as.data.frame(),
+
+      # Don't print the warning in the try block.  Print it below,
+      #   where it's under the control of the caller.
+      silent = TRUE
+    )
+
+    if (exists("ds") & inherits(ds, "data.frame")) {
+      outcome_message <- sprintf(
+        "%s data access groups were read from REDCap in %0.1f seconds.  The http status code was %i.",
+        format(  nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE),
+        kernel$elapsed_seconds,
+        kernel$status_code
+      )
+
+      # ds <- dplyr::mutate_if(
+      #   ds,
+      #   is.character,
+      #   function(x) dplyr::coalesce(x, "") #Replace NAs with blanks
+      # )
+      #
+      # ds <- dplyr::mutate_if(
+      #   ds,
+      #   is.character,
+      #   function( x ) gsub("\r\n", "\n", x, perl=TRUE)
+      # )
+      # ds <- dplyr::mutate_if(
+      #   ds,
+      #   function( x) inherits(x, "Date"),
+      #   as.character
+      # )
+      #
+      # ds <- base::as.data.frame(ds)
+
+      # If an operation is successful, the `raw_text` is no longer returned to
+      #   save RAM.  The content is not really necessary with httr's status
+      #   message exposed.
+      kernel$raw_text   <- ""
+    } else { # ds doesn't exist as a data.frame.
+      # nocov start
+      # Override the 'success' determination from the http status code.
+      #   and return an empty data.frame.
+      kernel$success   <- FALSE
+      ds               <- data.frame()
+      outcome_message  <- sprintf(
+        "The REDCap read failed.  The http status code was %i.  The 'raw_text' returned was '%s'.",
+        kernel$status_code,
+        kernel$raw_text
+      )
+      # nocov end
+    }
+  } else { # kernel fails
+    ds              <- data.frame() #Return an empty data.frame
+    outcome_message <- if (any(grepl(kernel$regex_empty, kernel$raw_text))) {
+      "The REDCapR read/export operation was not successful.  The returned dataset was empty."  # nocov
+    } else {
+      sprintf(
+        "The REDCapR read/export operation was not successful.  The error message was:\n%s",
+        kernel$raw_text
+      )
+    }
+  }
+
+  if (verbose)
+    message(outcome_message)
+
+  list(
+    data               = ds,
+    success            = kernel$success,
+    status_code        = kernel$status_code,
+    outcome_message    = outcome_message,
+    elapsed_seconds    = kernel$elapsed_seconds,
+    raw_text           = kernel$raw_text
+  )
+}

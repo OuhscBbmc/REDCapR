@@ -25,3 +25,4 @@ utility/
 ^codecov\.yml$
 ^pkgdown$
 ^LICENSE\.md$
+^CRAN-SUBMISSION$

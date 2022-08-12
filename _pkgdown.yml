@@ -49,6 +49,7 @@ reference:
       Accessing other information from the REDCap project or server.
     contents:
       - redcap_arm_export
+      - redcap_dag_read
       - redcap_delete
       - redcap_download_instrument
       - redcap_event_instruments

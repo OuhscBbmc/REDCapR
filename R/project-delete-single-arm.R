@@ -1,6 +1,7 @@
 # These functions are not exported.
 
 populate_project_delete_single_arm <- function() {
+
   if (!requireNamespace("testthat")) {
     # nocov start
     stop(

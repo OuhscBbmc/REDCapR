@@ -268,7 +268,7 @@ redcap_read <- function(
     token              = token,
     records_collapsed  = records_collapsed,
     fields_collapsed   = metadata$data$field_name[id_position],
-    forms_collapsed    = forms_collapsed,
+    # forms_collapsed    = forms_collapsed,
     events_collapsed   = events_collapsed,
     filter_logic       = filter_logic,
     datetime_range_begin   = datetime_range_begin,
@@ -303,7 +303,7 @@ redcap_read <- function(
   # Continue as intended if the initial query succeeded. --------------------
   unique_ids <- sort(unique(initial_call$data[[id_position]]))
 
-  if (all(nchar(unique_ids)==32L))
+  if (0L < length(unique_ids) & all(nchar(unique_ids)==32L))
     warn_hash_record_id()  # nocov
 
   ds_glossary            <- REDCapR::create_batch_glossary(row_count=length(unique_ids), batch_size=batch_size)
@@ -325,6 +325,11 @@ redcap_read <- function(
         min(selected_ids), " through ", max(selected_ids),
         " (ie, ", length(selected_ids), " unique subject records)."
       )
+      # message(
+      #   "\nReading batch ", i, " of ", nrow(ds_glossary), ", with subjects ",
+      #   paste(selected_ids, collapse = ','),
+      #   "\n(ie, ", length(selected_ids), " unique subject records)."
+      # )
     }
     read_result <- REDCapR::redcap_read_oneshot(
       redcap_uri                  = redcap_uri,
@@ -389,6 +394,30 @@ redcap_read <- function(
       readr::type_convert(
         locale = locale
       )
+  }
+
+  unique_ids_actual <- sort(unique(ds_stacked[[id_position]]))
+  ids_missing_rows  <- setdiff(unique_ids, unique_ids_actual)
+
+  if (0L < length(ids_missing_rows)) {
+    message_template <-
+      paste0(
+        "There are %i subject(s) that are missing rows in the returned dataset. ",
+        "REDCap's PHP code is likely trying to process too much text in one bite.\n\n",
+        "Common solutions this problem are:\n",
+        "  - specifying only the records you need (w/ `records`)\n",
+        "  - specifying only the fields you need (w/ `fields`)\n",
+        "  - specifying only the forms you need (w/ `forms`)\n",
+        "  - specifying a subset w/ `filter_logic`\n",
+        "  - reduce `batch_size`\n\n",
+        "The missing ids are:\n",
+        "%s."
+      )
+    stop(sprintf(
+      message_template,
+      length(ids_missing_rows),
+      paste(ids_missing_rows, collapse=",")
+    ))
   }
 
   elapsed_seconds          <- as.numeric(difftime( Sys.time(), start_time, units="secs"))

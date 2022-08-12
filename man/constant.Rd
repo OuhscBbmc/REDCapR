@@ -62,7 +62,7 @@ See https://your-server/redcap/api/help/?content=exp_users.
 To add more, please for and edit
 \href{https://github.com/OuhscBbmc/REDCapR/blob/master/R/constant.R}{constant.R}
 on GitHub and submit a pull request.  For instructions, please see
-\href{https://help.github.com/articles/editing-files-in-another-user-s-repository/}{Editing files in another user's repository} # nolint
+\href{https://docs.github.com/articles/editing-files-in-another-user-s-repository/}{Editing files in another user's repository} # nolint
 in the GitHub documentation.
 }
 \examples{
