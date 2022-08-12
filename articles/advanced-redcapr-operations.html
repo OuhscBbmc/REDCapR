@@ -86,7 +86,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Advanced REDCapR Operations</h1>
             
-            <h4 data-toc-skip class="date">2022-08-10</h4>
+            <h4 data-toc-skip class="date">2022-08-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/HEAD/vignettes/advanced-redcapr-operations.Rmd" class="external-link"><code>vignettes/advanced-redcapr-operations.Rmd</code></a></small>
       <div class="hidden name"><code>advanced-redcapr-operations.Rmd</code></div>
@@ -320,7 +320,7 @@
 <span>  token          <span class="op">=</span> <span class="va">token_simple</span>,</span>
 <span>  config_options <span class="op">=</span> <span class="va">config_options</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span></code></pre>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">config_options</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ssl.verifypeer <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">ds_no_ssl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span><span class="op">(</span></span>
@@ -328,7 +328,7 @@
 <span>  token          <span class="op">=</span> <span class="va">token_simple</span>,</span>
 <span>  config_options <span class="op">=</span> <span class="va">config_options</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="convert-spss-output-to-redcap-data-dictionary">Convert SPSS Output to REDCap data dictionary<a class="anchor" aria-label="anchor" href="#convert-spss-output-to-redcap-data-dictionary"></a>
@@ -361,7 +361,7 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 <span><span class="co">#&gt;  collate  en_US.UTF-8</span></span>
 <span><span class="co">#&gt;  ctype    en_US.UTF-8</span></span>
 <span><span class="co">#&gt;  tz       UTC</span></span>
-<span><span class="co">#&gt;  date     2022-08-10</span></span>
+<span><span class="co">#&gt;  date     2022-08-12</span></span>
 <span><span class="co">#&gt;  pandoc   2.7.3 @ /usr/local/bin/ (via rmarkdown)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Packages ───────────────────────────────────────────────────────────────────</span></span></span>
@@ -404,7 +404,7 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 <span><span class="co">#&gt;  R6            2.5.1   <span style="color: #555555;">2021-08-19</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  ragg          1.2.2   <span style="color: #555555;">2022-02-21</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  readr         2.1.2   <span style="color: #555555;">2022-01-30</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  REDCapR     * 1.1.0   <span style="color: #555555;">2022-08-10</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
+<span><span class="co">#&gt;  REDCapR     * 1.1.0   <span style="color: #555555;">2022-08-12</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
 <span><span class="co">#&gt;  rlang         1.0.4   <span style="color: #555555;">2022-07-12</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  rmarkdown     2.14    <span style="color: #555555;">2022-04-25</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  rprojroot     2.0.3   <span style="color: #555555;">2022-04-02</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
@@ -436,7 +436,7 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 <span><span class="co">#&gt; <span style="color: #555555;"> [2] /Library/Frameworks/R.framework/Versions/4.2/Resources/library</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">──────────────────────────────────────────────────────────────────────────────</span></span></span></code></pre>
-</details><p>Report rendered by runner at 2022-08-10, 16:20 +0000 in 3 seconds.</p>
+</details><p>Report rendered by runner at 2022-08-12, 20:29 +0000 in 3 seconds.</p>
 </div>
   </div>
 
