@@ -57,6 +57,7 @@ Zenodo
 anova
 api
 bbb
+bbmc
 cURL
 codebook
 codecov
@@ -65,10 +66,10 @@ csv
 daniela
 datetime
 dropdown
+edu
 eg
 ethz
 exportFieldNames
-formEventMapping
 getOption
 github
 hatemhosny
@@ -88,6 +89,7 @@ nano
 nolint
 nonmissing
 odbc
+ouhsc
 ouhscbbmc
 packageDescription
 packageVersion
