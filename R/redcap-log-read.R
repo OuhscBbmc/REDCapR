@@ -7,8 +7,22 @@
 #' project.  Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
-#' @param record A record to limit to.
-#' @param user A user name to limit to.
+#' @param log_begin_date Return the events occurring after midnight of this
+#' date.
+#' Defaults to the past week; this default mimics the behavior in the browser
+#' and also reduces the strain on your server.
+#' @param log_end_date Return the events occurring before 24:00 of this date.
+#' Defaults to today.
+#' @param record Return the events belonging only to specific record
+#' (referring to an existing record name).
+#' Defaults to `NULL` which returns
+#' logging activity related to all records.
+#' If a record value passed, it must be a single value.
+#' @param user Return the events belonging only to specific user
+#' (referring to an existing username).
+#' Defaults to `NULL` which returns
+#' logging activity related to all users.
+#' If a user value passed, it must be a single value.
 #' @param http_response_encoding  The encoding value passed to
 #' [httr::content()].  Defaults to 'UTF-8'.
 #' @param locale a [readr::locale()] object to specify preferences like
@@ -33,8 +47,7 @@
 #' unsuccessful operation, it should contain diagnostic information.
 #' * `elapsed_seconds`: The duration of the function.
 #'
-#'
-#' @author Jonathan M. Mang
+#' @author Jonathan M. Mang, Will Beasley
 #' @references The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html
@@ -55,19 +68,29 @@
 #'   REDCapR::redcap_log_read(
 #'     redcap_uri     = uri,
 #'     token          = token,
-#'     log_begin_time = as.Date("2020-08-10"),
-#'     log_end_time   = as.Date("2020-08-10")
+#'     log_begin_date = as.Date("2020-08-10"),
+#'     log_end_date   = as.Date("2020-08-10")
 #'   )$data
 #' head(ds_one_day)
 #'
+#' ds_one_day_single_record_single_user <-
+#'   REDCapR::redcap_log_read(
+#'     redcap_uri     = uri,
+#'     token          = token,
+#'     log_begin_date = as.Date("2021-07-11"),
+#'     log_end_date   = as.Date("2021-07-11"),
+#'     record         = as.character(3),
+#'     user           = "unittestphifree"
+#'   )$data
+#' head(ds_one_day_single_record_single_user)
 #' }
 
 #' @export
 redcap_log_read <- function(
   redcap_uri,
   token,
-  log_begin_time                = Sys.Date() - 7L,
-  log_end_time                  = Sys.Date(),
+  log_begin_date                = Sys.Date() - 7L,
+  log_end_date                  = Sys.Date(),
   record = NULL,
   user = NULL,
   http_response_encoding        = "UTF-8",
@@ -77,9 +100,9 @@ redcap_log_read <- function(
 ) {
   checkmate::assert_character(redcap_uri                , any.missing=FALSE,     len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=FALSE,     len=1, pattern="^.{1,}$")
-  checkmate::check_date(      log_begin_time            , any.missing = FALSE, len = 1)
-  checkmate::check_date(      log_end_time              , any.missing = FALSE, len = 1)
-  checkmate::check_character(record, null.ok = TRUE, len = 1, any.missing = FALSE)
+  checkmate::check_date(      log_begin_date            , any.missing = FALSE, len = 1)
+  checkmate::check_date(      log_end_date              , any.missing = FALSE, len = 1)
+  checkmate::check_character(record                     , any.missing = FALSE, len = 1, null.ok = TRUE)
   checkmate::check_character(user, null.ok = TRUE, len = 1, any.missing = FALSE)
 
   checkmate::assert_character(http_response_encoding    , any.missing=FALSE,     len=1)
@@ -87,18 +110,17 @@ redcap_log_read <- function(
   checkmate::assert_logical(  verbose                   , any.missing=FALSE,     len=1, null.ok=TRUE)
   checkmate::assert_list(     config_options            , any.missing=TRUE ,            null.ok=TRUE)
 
-
   token               <- sanitize_token(token)
   verbose             <- verbose_prepare(verbose)
-  log_begin_time      <- strftime(log_begin_time    , "%Y-%m-%d 00:00")
-  log_end_time        <- strftime(log_end_time      , "%Y-%m-%d 24:00")
+  log_begin_datetime  <- strftime(log_begin_date    , "%Y-%m-%d 00:00")
+  log_end_datetime    <- strftime(log_end_date      , "%Y-%m-%d 24:00")
 
   post_body <- list(
     token                   = token,
     content                 = "log",
     format                  = "csv",
-    beginTime               = log_begin_time,
-    endTime                 = log_end_time,
+    beginTime               = log_begin_datetime,
+    endTime                 = log_end_datetime,
     record = record,
     user = user
   )

@@ -7,8 +7,8 @@
 redcap_log_read(
   redcap_uri,
   token,
-  log_begin_time = Sys.Date() - 7L,
-  log_end_time = Sys.Date(),
+  log_begin_date = Sys.Date() - 7L,
+  log_end_date = Sys.Date(),
   record = NULL,
   user = NULL,
   http_response_encoding = "UTF-8",
@@ -24,9 +24,24 @@ project.  Required.}
 \item{token}{The user-specific string that serves as the password for a
 project.  Required.}
 
-\item{record}{A record to limit to.}
+\item{log_begin_date}{Return the events occurring after midnight of this date.
+Defaults to the past week; this default mimics the behavior in the browser and
+also reduces the strain on your server.}
 
-\item{user}{A user name to limit to.}
+\item{log_end_date}{Return the events occurring before 24:00 of this date.
+Defaults to today.}
+
+\item{record}{Return the events belonging only to specific record
+(referring to an existing record name).
+Defaults to \code{NULL} which returns
+logging activity related to all records.
+If a record value passed, it must be a single value.}
+
+\item{user}{Return the events belonging only to specific user
+(referring to an existing username).
+Defaults to \code{NULL} which returns
+logging activity related to all users.
+If a user value passed, it must be a single value.}
 
 \item{http_response_encoding}{The encoding value passed to
 \code{\link[httr:content]{httr::content()}}.  Defaults to 'UTF-8'.}
@@ -76,9 +91,18 @@ ds_one_day <-
     token          = token,
     log_begin_time = as.Date("2020-08-10"),
     log_end_time   = as.Date("2020-08-10")
-)$data
+  )$data
 head(ds_one_day)
 
+ds_one_day_single_record <-
+  REDCapR::redcap_log_read(
+    redcap_uri     = uri,
+    token          = token,
+    log_begin_time = as.Date("2021-07-11"),
+    log_end_time   = as.Date("2021-07-11"),
+    record         = as.character(3)
+  )$data
+head(ds_one_day)
 }
 }
 \references{
