@@ -91,24 +91,24 @@ redcap_log_read <- function(
   token,
   log_begin_date                = Sys.Date() - 7L,
   log_end_date                  = Sys.Date(),
-  record = NULL,
-  user = NULL,
+  record                        = NULL,
+  user                          = NULL,
   http_response_encoding        = "UTF-8",
   locale                        = readr::default_locale(),
   verbose                       = TRUE,
   config_options                = NULL
 ) {
-  checkmate::assert_character(redcap_uri                , any.missing=FALSE,     len=1, pattern="^.{1,}$")
-  checkmate::assert_character(token                     , any.missing=FALSE,     len=1, pattern="^.{1,}$")
-  checkmate::check_date(      log_begin_date            , any.missing = FALSE, len = 1)
-  checkmate::check_date(      log_end_date              , any.missing = FALSE, len = 1)
-  checkmate::check_character(record                     , any.missing = FALSE, len = 1, null.ok = TRUE)
-  checkmate::check_character(user, null.ok = TRUE, len = 1, any.missing = FALSE)
+  checkmate::assert_character(redcap_uri                , any.missing = FALSE, len = 1, pattern = "^.{1,}$")
+  checkmate::assert_character(token                     , any.missing = FALSE, len = 1, pattern = "^.{1,}$")
+  checkmate::assert_date(     log_begin_date            , any.missing = FALSE, len = 1)
+  checkmate::assert_date(     log_end_date              , any.missing = FALSE, len = 1)
+  checkmate::assert_character(record                    , any.missing = FALSE, len = 1, null.ok = TRUE)
+  checkmate::assert_character(user                      , any.missing = FALSE, len = 1, null.ok = TRUE)
 
-  checkmate::assert_character(http_response_encoding    , any.missing=FALSE,     len=1)
-  checkmate::assert_class(    locale, "locale"          , null.ok = FALSE)
-  checkmate::assert_logical(  verbose                   , any.missing=FALSE,     len=1, null.ok=TRUE)
-  checkmate::assert_list(     config_options            , any.missing=TRUE ,            null.ok=TRUE)
+  checkmate::assert_character(http_response_encoding    , any.missing=FALSE,   len = 1)
+  checkmate::assert_class(    locale, classes = "locale", null.ok = FALSE)
+  checkmate::assert_logical(  verbose                   , any.missing=FALSE,   len = 1, null.ok = TRUE)
+  checkmate::assert_list(     config_options            , any.missing=TRUE ,            null.ok = TRUE)
 
   token               <- sanitize_token(token)
   verbose             <- verbose_prepare(verbose)
@@ -121,8 +121,8 @@ redcap_log_read <- function(
     format                  = "csv",
     beginTime               = log_begin_datetime,
     endTime                 = log_end_datetime,
-    record = record,
-    user = user
+    record                  = record,
+    user                    = user
   )
 
   # This is the important line that communicates with the REDCap server.

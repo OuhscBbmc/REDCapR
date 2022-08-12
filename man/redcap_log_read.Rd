@@ -24,9 +24,10 @@ project.  Required.}
 \item{token}{The user-specific string that serves as the password for a
 project.  Required.}
 
-\item{log_begin_date}{Return the events occurring after midnight of this date.
-Defaults to the past week; this default mimics the behavior in the browser and
-also reduces the strain on your server.}
+\item{log_begin_date}{Return the events occurring after midnight of this
+date.
+Defaults to the past week; this default mimics the behavior in the browser
+and also reduces the strain on your server.}
 
 \item{log_end_date}{Return the events occurring before 24:00 of this date.
 Defaults to today.}
@@ -89,20 +90,21 @@ ds_one_day <-
   REDCapR::redcap_log_read(
     redcap_uri     = uri,
     token          = token,
-    log_begin_time = as.Date("2020-08-10"),
-    log_end_time   = as.Date("2020-08-10")
+    log_begin_date = as.Date("2020-08-10"),
+    log_end_date   = as.Date("2020-08-10")
   )$data
 head(ds_one_day)
 
-ds_one_day_single_record <-
+ds_one_day_single_record_single_user <-
   REDCapR::redcap_log_read(
     redcap_uri     = uri,
     token          = token,
-    log_begin_time = as.Date("2021-07-11"),
-    log_end_time   = as.Date("2021-07-11"),
-    record         = as.character(3)
+    log_begin_date = as.Date("2021-07-11"),
+    log_end_date   = as.Date("2021-07-11"),
+    record         = as.character(3),
+    user           = "unittestphifree"
   )$data
-head(ds_one_day)
+head(ds_one_day_single_record_single_user)
 }
 }
 \references{
@@ -115,5 +117,5 @@ If you do not have an account for the wiki, please ask your campus REDCap
 administrator to send you the static material.
 }
 \author{
-Jonathan M. Mang
+Jonathan M. Mang, Will Beasley
 }

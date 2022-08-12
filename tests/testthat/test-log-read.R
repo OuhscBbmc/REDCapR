@@ -25,8 +25,8 @@ test_that("2020-08-10", {
       REDCapR::redcap_log_read(
         redcap_uri     = uri,
         token          = token,
-        log_begin_time = as.Date("2020-08-10"),
-        log_end_time   = as.Date("2020-08-10")
+        log_begin_date = as.Date("2020-08-10"),
+        log_end_date   = as.Date("2020-08-10")
       )
   )
 
