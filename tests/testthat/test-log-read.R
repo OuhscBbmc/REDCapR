@@ -23,8 +23,8 @@ test_that("2020-08-10", {
     regexp          = expected_outcome_message,
     returned_object <-
       REDCapR::redcap_log_read(
-        redcap_uri     = uri,
-        token          = token,
+        redcap_uri     = credential$redcap_uri,
+        token          = credential$token,
         log_begin_date = as.Date("2020-08-10"),
         log_end_date   = as.Date("2020-08-10")
       )
@@ -49,8 +49,8 @@ test_that("2020-08-10-api-export", {
     regexp          = expected_outcome_message,
     returned_object <-
       REDCapR::redcap_log_read(
-        redcap_uri     = uri,
-        token          = token,
+        redcap_uri     = credential$redcap_uri,
+        token          = credential$token,
         log_begin_date = as.Date("2020-08-10"),
         log_end_date   = as.Date("2020-08-10")
       )
@@ -74,8 +74,8 @@ test_that("2021-07-11-record3-user", {
     regexp          = expected_outcome_message,
     returned_object <-
         REDCapR::redcap_log_read(
-          redcap_uri     = uri,
-          token          = token,
+          redcap_uri     = credential$redcap_uri,
+          token          = credential$token,
           log_begin_date = as.Date("2021-07-11"),
           log_end_date   = as.Date("2021-07-11"),
           record         = as.character(3),
