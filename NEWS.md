@@ -5,6 +5,10 @@ Upcoming Release
 
 * New `redcap_log_read()` function.  Exports a project's log.  (Thanks @joundso, #383, #320)
 
+### Minor Enhancements
+
+* Better documentation for the server url (suggested by @sutzig #395)
+
 Version 1.1.0 (released 2022-08-10)
 ==========================================================
 
