@@ -45,9 +45,20 @@
 #'
 #' @examples
 #' \dontrun{
-#' uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
-#' token   <- "9A81268476645C4E5F03428B8AC3AA7B"
-#' REDCapR::redcap_log_read(redcap_uri=uri, token=token)$data
+#' uri          <- "https://bbmc.ouhsc.edu/redcap/api/"
+#' token        <- "9A81268476645C4E5F03428B8AC3AA7B"
+#'
+#' ds_last_week <- REDCapR::redcap_log_read(redcap_uri=uri, token=token)$data
+#' head(ds_last_week)
+#'
+#' ds_one_day <-
+#'   REDCapR::redcap_log_read(
+#'     redcap_uri     = uri,
+#'     token          = token,
+#'     log_begin_time = as.Date("2020-08-10"),
+#'     log_end_time   = as.Date("2020-08-10")
+#'   )$data
+#' head(ds_one_day)
 #'
 #' }
 
@@ -55,6 +66,8 @@
 redcap_log_read <- function(
   redcap_uri,
   token,
+  log_begin_time                = Sys.Date() - 7L,
+  log_end_time                  = Sys.Date(),
   record = NULL,
   user = NULL,
   http_response_encoding        = "UTF-8",
@@ -64,8 +77,11 @@ redcap_log_read <- function(
 ) {
   checkmate::assert_character(redcap_uri                , any.missing=FALSE,     len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=FALSE,     len=1, pattern="^.{1,}$")
+  checkmate::check_date(      log_begin_time            , any.missing = FALSE, len = 1)
+  checkmate::check_date(      log_end_time              , any.missing = FALSE, len = 1)
   checkmate::check_character(record, null.ok = TRUE, len = 1, any.missing = FALSE)
   checkmate::check_character(user, null.ok = TRUE, len = 1, any.missing = FALSE)
+
   checkmate::assert_character(http_response_encoding    , any.missing=FALSE,     len=1)
   checkmate::assert_class(    locale, "locale"          , null.ok = FALSE)
   checkmate::assert_logical(  verbose                   , any.missing=FALSE,     len=1, null.ok=TRUE)
@@ -74,11 +90,15 @@ redcap_log_read <- function(
 
   token               <- sanitize_token(token)
   verbose             <- verbose_prepare(verbose)
+  log_begin_time      <- strftime(log_begin_time    , "%Y-%m-%d 00:00")
+  log_end_time        <- strftime(log_end_time      , "%Y-%m-%d 24:00")
 
   post_body <- list(
     token                   = token,
     content                 = "log",
     format                  = "csv",
+    beginTime               = log_begin_time,
+    endTime                 = log_end_time,
     record = record,
     user = user
   )
@@ -115,25 +135,6 @@ redcap_log_read <- function(
         kernel$status_code
       )
 
-      # ds <- dplyr::mutate_if(
-      #   ds,
-      #   is.character,
-      #   function(x) dplyr::coalesce(x, "") #Replace NAs with blanks
-      # )
-      #
-      # ds <- dplyr::mutate_if(
-      #   ds,
-      #   is.character,
-      #   function( x ) gsub("\r\n", "\n", x, perl=TRUE)
-      # )
-      # ds <- dplyr::mutate_if(
-      #   ds,
-      #   function( x) inherits(x, "Date"),
-      #   as.character
-      # )
-      #
-      # ds <- base::as.data.frame(ds)
-
       # If an operation is successful, the `raw_text` is no longer returned to
       #   save RAM.  The content is not really necessary with httr's status
       #   message exposed.
@@ -145,7 +146,7 @@ redcap_log_read <- function(
       kernel$success   <- FALSE
       ds               <- data.frame()
       outcome_message  <- sprintf(
-        "The REDCap read failed.  The http status code was %i.  The 'raw_text' returned was '%s'.",
+        "The REDCap log export failed.  The http status code was %i.  The 'raw_text' returned was '%s'.",
         kernel$status_code,
         kernel$raw_text
       )
@@ -154,10 +155,10 @@ redcap_log_read <- function(
   } else { # kernel fails
     ds              <- data.frame() #Return an empty data.frame
     outcome_message <- if (any(grepl(kernel$regex_empty, kernel$raw_text))) {
-      "The REDCapR read/export operation was not successful.  The returned dataset was empty."  # nocov
+      "The REDCapR log export operation was not successful.  The returned dataset was empty."  # nocov
     } else {
       sprintf(
-        "The REDCapR read/export operation was not successful.  The error message was:\n%s",
+        "The REDCapR log export operation was not successful.  The error message was:\n%s",
         kernel$raw_text
       )
     }

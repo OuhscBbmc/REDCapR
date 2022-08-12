@@ -7,6 +7,8 @@
 redcap_log_read(
   redcap_uri,
   token,
+  log_begin_time = Sys.Date() - 7L,
+  log_end_time = Sys.Date(),
   record = NULL,
   user = NULL,
   http_response_encoding = "UTF-8",
@@ -62,9 +64,20 @@ REDCap an returns them as a \code{\link[base:data.frame]{base::data.frame()}}.
 }
 \examples{
 \dontrun{
-uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
-token   <- "9A81268476645C4E5F03428B8AC3AA7B"
-REDCapR::redcap_log_read(redcap_uri=uri, token=token)$data
+uri          <- "https://bbmc.ouhsc.edu/redcap/api/"
+token        <- "9A81268476645C4E5F03428B8AC3AA7B"
+
+ds_last_week <- REDCapR::redcap_log_read(redcap_uri=uri, token=token)$data
+head(ds_last_week)
+
+ds_one_day <-
+  REDCapR::redcap_log_read(
+    redcap_uri     = uri,
+    token          = token,
+    log_begin_time = as.Date("2020-08-10"),
+    log_end_time   = as.Date("2020-08-10")
+)$data
+head(ds_one_day)
 
 }
 }
