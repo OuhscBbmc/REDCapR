@@ -8,7 +8,7 @@ structure(list(username = c("unittestphifree", "wbeasleya"),
     data_access_groups = c(FALSE, TRUE), reports = c(TRUE, TRUE
     ), stats_and_charts = c(TRUE, TRUE), manage_survey_participants = c(TRUE, 
     TRUE), calendar = c(TRUE, TRUE), data_import_tool = c(FALSE, 
-    TRUE), data_comparison_tool = c(FALSE, TRUE), logging = c(FALSE, 
+    TRUE), data_comparison_tool = c(FALSE, TRUE), logging = c(TRUE, 
     TRUE), file_repository = c(TRUE, TRUE), data_quality_create = c(FALSE, 
     TRUE), data_quality_execute = c(FALSE, TRUE), api_export = c(TRUE, 
     FALSE), api_import = c(FALSE, FALSE), mobile_app = c(FALSE, 
