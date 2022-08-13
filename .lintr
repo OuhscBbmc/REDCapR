@@ -1,0 +1,11 @@
+linters: linters_with_defaults(
+    line_length_linter(250),
+    object_length_linter(50),
+    commas_linter = NULL,
+    commented_code_linter = NULL,
+    infix_spaces_linter = NULL,
+    spaces_inside_linter = NULL
+  )
+exclusions: list(
+    "inst"
+  )
