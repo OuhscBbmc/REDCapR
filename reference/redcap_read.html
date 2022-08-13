@@ -24,7 +24,7 @@ datasets that could tie up the server."><meta property="og:image" content="https
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.9001</span>
       </span>
     </div>
 
@@ -126,8 +126,11 @@ subsequent batches from running.  Required.</p></dd>
 
 
 <dt>redcap_uri</dt>
-<dd><p>The URI (uniform resource identifier) of the REDCap
-project.  Required.</p></dd>
+<dd><p>The
+<a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier" class="external-link">uri</a>/url
+of the REDCap server
+typically formatted as "https://server.org/apps/redcap/api/".
+Required.</p></dd>
 
 
 <dt>token</dt>
@@ -340,9 +343,11 @@ administrator to send you the static material.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="va">uri</span>     <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
 <span class="r-in"><span><span class="va">token</span>   <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Return the entire dataset</span></span></span>
 <span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_read</span><span class="op">(</span>batch_size<span class="op">=</span><span class="fl">2</span>, redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Specify the column types.</span></span></span>
+<span class="r-in"><span><span class="co"># Return a subset of columns while also specifying the column types.</span></span></span>
 <span class="r-in"><span><span class="va">col_types</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">cols</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  record_id  <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_integer</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  race___1   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_logical</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
