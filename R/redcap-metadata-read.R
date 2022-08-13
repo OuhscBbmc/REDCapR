@@ -4,8 +4,11 @@
 #' as a [base::data.frame()]. Each row in the data dictionary corresponds to
 #' one field in the project's dataset.
 #'
-#' @param redcap_uri The URI (uniform resource identifier) of the REDCap
-#' project.  Required.
+#' @param redcap_uri The
+#' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
+#' of the REDCap server
+#' typically formatted as "https://server.org/apps/redcap/api/".
+#' Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
 #' @param forms An array, where each element corresponds to the REDCap form

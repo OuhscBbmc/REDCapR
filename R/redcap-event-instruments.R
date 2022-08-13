@@ -6,8 +6,11 @@
 #' (Copied from "Export Instrument-Event Mappings" method of
 #' REDCap API documentation, v.10.5.1)
 #'
-#' @param redcap_uri The URI (uniform resource identifier) of the REDCap
-#' project.  Required.
+#' @param redcap_uri The
+#' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
+#' of the REDCap server
+#' typically formatted as "https://server.org/apps/redcap/api/".
+#' Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
 #' @param arms A character string of arms to retrieve.  (Default: '1')

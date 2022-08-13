@@ -3,8 +3,11 @@
 #' @description This function is used by other functions to read and write
 #' values.
 #'
-#' @param redcap_uri The URI (uniform resource identifier) of the REDCap
-#' project.  Required.
+#' @param redcap_uri The
+#' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
+#' of the REDCap server
+#' typically formatted as "https://server.org/apps/redcap/api/".
+#' Required.
 #' @param post_body List of contents expected by the REDCap API.  Required.
 #' @param config_options  A list of options to pass to `POST` method in the
 #' `httr` package.  See the details below.  Optional.

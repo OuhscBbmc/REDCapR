@@ -72,6 +72,8 @@ knitr::include_graphics("images/PostmanScreenshot.png")
 
     At the bottom of the playground page, the interface attempts to translate your specific API call to different languages, like Python and R.  These suggestions are usually correct, but  inspect it critically, as you would for any auto-generated script.
 
+1. **Is the URL/URI correct?**  Notice the url typically resembles https://bbmc.ouhsc.edu/redcap/api/> and *not* <https://bbmc.ouhsc.edu/> (even if <https://bbmc.ouhsc.edu/> redirects to <https://bbmc.ouhsc.edu/redcap>).
+
 1. **Is Postman installed and operating correctly?**  If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the [OUHSC BBMC](https://www.ouhsc.edu/bbmc/).  The url is `https://bbmc.ouhsc.edu/redcap/api/`.  There are three key-value pairs: (1) the 'token' is `9A81268476645C4E5F03428B8AC3AA7B`, (2) the 'content' is `record`, and (3) the 'format' should be `CSV`.  When checking your own server, the token value should change, but the content and format should not.  It should return five records in a CSV format.  The 'status' should be `200 OK`.  The result should look roughly like this.  Notice the line breaks were included in the text values themselves.
 
     ```csv

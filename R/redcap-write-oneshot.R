@@ -4,8 +4,11 @@
 #'
 #' @param ds The [base::data.frame()] to be imported into the REDCap project.
 #' Required.
-#' @param redcap_uri The URI (uniform resource identifier) of the REDCap
-#' project.  Required.
+#' @param redcap_uri The
+#' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
+#' of the REDCap server
+#' typically formatted as "https://server.org/apps/redcap/api/".
+#' Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
 #' @param overwrite_with_blanks A boolean value indicating if

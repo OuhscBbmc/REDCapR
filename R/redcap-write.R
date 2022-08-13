@@ -11,8 +11,11 @@
 #' @param continue_on_error If an error occurs while writing, should records
 #' in subsequent batches be attempted.  The default is `FALSE`, which prevents
 #' subsequent batches from running.  Required.
-#' @param redcap_uri The URI (uniform resource identifier) of the REDCap
-#' project.  Required.
+#' @param redcap_uri The
+#' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
+#' of the REDCap server
+#' typically formatted as "https://server.org/apps/redcap/api/".
+#' Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
 #' @param overwrite_with_blanks A boolean value indicating if

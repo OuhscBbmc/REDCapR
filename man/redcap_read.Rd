@@ -48,8 +48,11 @@ before requesting a new subset from REDCap. The default is 0.5 seconds.}
 in subsequent batches be attempted.  The default is \code{FALSE}, which prevents
 subsequent batches from running.  Required.}
 
-\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap
-project.  Required.}
+\item{redcap_uri}{The
+\href{https://en.wikipedia.org/wiki/Uniform_Resource_Identifier}{uri}/url
+of the REDCap server
+typically formatted as "https://server.org/apps/redcap/api/".
+Required.}
 
 \item{token}{The user-specific string that serves as the password for a
 project.  Required.}
@@ -210,9 +213,11 @@ appropriate permissions:
 \dontrun{
 uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
 token   <- "9A81268476645C4E5F03428B8AC3AA7B"
+
+# Return the entire dataset
 REDCapR::redcap_read(batch_size=2, redcap_uri=uri, token=token)$data
 
-# Specify the column types.
+# Return a subset of columns while also specifying the column types.
 col_types <- readr::cols(
   record_id  = readr::col_integer(),
   race___1   = readr::col_logical(),
