@@ -242,7 +242,7 @@ redcap_read_oneshot_eav <- function(
   ds_variable <- REDCapR::redcap_variables(redcap_uri, token)$data
 
   if (kernel$success) {
-    try (
+    try(
       {
         ds_eav <-
           readr::read_csv(

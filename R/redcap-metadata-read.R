@@ -90,7 +90,7 @@ redcap_metadata_read <- function(
   forms_collapsed     <- collapse_vector(forms    , forms_collapsed)
   verbose             <- verbose_prepare(verbose)
 
-  if (1L <= nchar(fields_collapsed) )
+  if (1L <= nchar(fields_collapsed))
     validate_field_names_collapsed(fields_collapsed, stop_on_error = TRUE)
 
   post_body <- list(
@@ -123,7 +123,7 @@ redcap_metadata_read <- function(
       silent = TRUE
     )
 
-    if (exists("ds") & inherits(ds, "data.frame")) {
+    if (exists("ds") && inherits(ds, "data.frame")) {
       outcome_message <- sprintf(
         "The data dictionary describing %s fields was read from REDCap in %0.1f seconds.  The http status code was %i.",
         format(nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE),

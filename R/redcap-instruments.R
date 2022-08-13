@@ -100,7 +100,7 @@ redcap_instruments <- function(
       #    it's under the control of the caller.
     )
 
-    if (exists("ds") & inherits(ds, "data.frame")) {
+    if (exists("ds") && inherits(ds, "data.frame")) {
       outcome_message <- sprintf(
         "%s instrument metadata records were read from REDCap in %0.1f seconds.  The http status code was %i.",
         format(nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE),
@@ -136,7 +136,7 @@ redcap_instruments <- function(
     }
   }
 
-  if( verbose )
+  if (verbose)
     message(outcome_message)
 
   list(

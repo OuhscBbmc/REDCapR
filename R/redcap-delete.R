@@ -101,9 +101,9 @@ redcap_delete <- function(
 
   arms_call <- redcap_arm_export(redcap_uri, token, verbose = FALSE, config_options)
 
-  if (arms_call$has_arms & is.null(arm_of_records_to_delete)) {
+  if (arms_call$has_arms && is.null(arm_of_records_to_delete)) {
     stop("This REDCap project has arms.  Please specify which arm contains the records to be deleted.")
-  } else if (!arms_call$has_arms & !is.null(arm_of_records_to_delete)) {
+  } else if (!arms_call$has_arms && !is.null(arm_of_records_to_delete)) {
     stop("This REDCap project does not have arms, but `arm_of_records_to_delete` is not NULL.")
   }
 

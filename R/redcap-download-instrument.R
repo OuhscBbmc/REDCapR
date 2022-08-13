@@ -131,11 +131,11 @@ redcap_download_instrument <- function(
   if (kernel$success) {
     result_header <- kernel$result_headers$`content-type`
 
-    if (missing(file_name) | is.null(file_name)) {
+    if (missing(file_name) || is.null(file_name)) {
       file_name <- "instruments.pdf"
     }
 
-    file_path <- if (missing(directory) & is.null(directory)) {
+    file_path <- if (missing(directory) && is.null(directory)) {
       file_name # Use relative path.
     } else {
       file.path(directory, file_name) #Qualify the file with its full path.
@@ -144,7 +144,7 @@ redcap_download_instrument <- function(
     if (verbose)
       message("Preparing to download the file `", file_path, "`.")
 
-    if (!overwrite & file.exists(file_path)) {
+    if (!overwrite && file.exists(file_path)) {
       stop(
         "The operation was halted because the file `",
         file_path, "`
