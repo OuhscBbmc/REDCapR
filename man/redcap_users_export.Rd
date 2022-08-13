@@ -7,8 +7,11 @@
 redcap_users_export(redcap_uri, token, verbose = TRUE, config_options = NULL)
 }
 \arguments{
-\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap
-project.  Required.}
+\item{redcap_uri}{The
+\href{https://en.wikipedia.org/wiki/Uniform_Resource_Identifier}{uri}/url
+of the REDCap server
+typically formatted as "https://server.org/apps/redcap/api/".
+Required.}
 
 \item{token}{The user-specific string that serves as the password for a
 project.  Required.}
@@ -28,13 +31,15 @@ a \link[utils:packageDescription]{utils::packageDescription}.
 List users authorized for a project.
 }
 \note{
-\strong{Documentation in REDCap 8.4.0}\preformatted{This method allows you to export the list of users for a project,
+\strong{Documentation in REDCap 8.4.0}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{This method allows you to export the list of users for a project,
 including their user privileges and also email address, first name,
 and last name.
 
 Note: If the user has been assigned to a user role, it will return
 the user with the role's defined privileges.
-}
+}\if{html}{\out{</div>}}
 }
 \examples{
 uri      <- "https://bbmc.ouhsc.edu/redcap/api/"

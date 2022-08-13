@@ -21,8 +21,11 @@ the REDCap project.  Required.}
 
 \item{record}{The record ID where the file is to be imported.  Required}
 
-\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap
-project.  Required.}
+\item{redcap_uri}{The
+\href{https://en.wikipedia.org/wiki/Uniform_Resource_Identifier}{uri}/url
+of the REDCap server
+typically formatted as "https://server.org/apps/redcap/api/".
+Required.}
 
 \item{token}{The user-specific string that serves as the password for a
 project.  Required.}

@@ -7,8 +7,11 @@
 redcap_instruments(redcap_uri, token, verbose = TRUE, config_options = NULL)
 }
 \arguments{
-\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap
-project.  Required.}
+\item{redcap_uri}{The
+\href{https://en.wikipedia.org/wiki/Uniform_Resource_Identifier}{uri}/url
+of the REDCap server
+typically formatted as "https://server.org/apps/redcap/api/".
+Required.}
 
 \item{token}{The user-specific string that serves as the password for a
 project.  Required.}
@@ -68,6 +71,9 @@ https://community.projectredcap.org/articles/456/api-documentation.html and
 https://community.projectredcap.org/articles/462/api-examples.html).
 If you do not have an account for the wiki, please ask your campus REDCap
 administrator to send you the static material.
+}
+\seealso{
+\code{\link[=redcap_event_instruments]{redcap_event_instruments()}}
 }
 \author{
 Victor Castro, Will Beasley

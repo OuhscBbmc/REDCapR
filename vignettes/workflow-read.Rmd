@@ -107,7 +107,7 @@ To retrieve the credentials for the first project listed above, pass the value o
 ```{r retrieve-credential}
 path_credential <- system.file("misc/example.credentials", package = "REDCapR")
 credential  <- REDCapR::retrieve_credential_local(
-  path_credential = path_credential, 
+  path_credential = path_credential,
   project_id      = 153
 )
 
@@ -132,9 +132,9 @@ The `redcap_uri` and `token` fields are the only required arguments of [`REDCapR
 
 
 ```{r unstructured-1}
-ds_1 <- 
+ds_1 <-
   REDCapR::redcap_read(
-    redcap_uri  = credential$redcap_uri, 
+    redcap_uri  = credential$redcap_uri,
     token       = credential$token
   )$data
 ```
@@ -290,7 +290,7 @@ https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/Publications/
 Downstream Reproducible Reports
 -------------------------
 
-Once the dataset is in R, take advantage of all the reproducible research tools available.  Tomorrow, [R/Medicine](https://r-medicine.org/) has a workshop on this topic using the exciting new [Quarto](https://quarto.org/) program that's similar to R Markdown.  Also see the relevant [R/Medicine 2020 presentation videos](https://www.youtube.com/playlist?list=PL4IzsxWztPdljYo7uE5G_R2PtYw3fUReo).  And of course, [any book by Yihui Xie and colleagues](https://www.amazon.com/Yihui-Xie/e/B00E9CQJGY?ref=sr_ntt_srch_lnk_1&qid=1625895927&sr=1-1).
+Once the dataset is in R, take advantage of all the reproducible research tools available.  Tomorrow, [R/Medicine](https://events.linuxfoundation.org/r-medicine/) has a workshop on this topic using the exciting new [Quarto](https://quarto.org/) program that's similar to R Markdown.  Also see the relevant [R/Medicine 2020 presentation videos](https://www.youtube.com/playlist?list=PL4IzsxWztPdljYo7uE5G_R2PtYw3fUReo).  And of course, [any book by Yihui Xie and colleagues](https://www.amazon.com/Yihui-Xie/e/B00E9CQJGY?ref=sr_ntt_srch_lnk_1&qid=1625895927&sr=1-1).
 
 
 Batching
@@ -308,4 +308,4 @@ Notes
 
 This vignette was originally designed for a 2021 R/Medicine REDCap workshop with [Peter Higgins](https://www.med.umich.edu/higginslab/), [Amanda Miller](https://coloradosph.cuanschutz.edu/resources/directory/directory-profile/Miller-Amanda-UCD6000053152), and [Kenneth McLean](https://twitter.com/kennethmclean92).
 
-This work was made possible in part by the NIH grant [U54GM104938](https://hsrproject.nlm.nih.gov/view_hsrproj_record/20204379) to the [Oklahoma Shared Clinical and Translational Resource)](http://osctr.ouhsc.edu).
+This work was made possible in part by the NIH grant [U54GM104938](https://taggs.hhs.gov/Detail/AwardDetail?arg_AwardNum=U54GM104938&arg_ProgOfficeCode=127) to the [Oklahoma Shared Clinical and Translational Resource)](http://osctr.ouhsc.edu).

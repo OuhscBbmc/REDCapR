@@ -3,6 +3,7 @@ library(testthat)
 credential  <- retrieve_credential_testing()
 project     <- redcap_project$new(redcap_uri=credential$redcap_uri, token=credential$token)
 update_expectation  <- FALSE
+path_expected_default <- "test-data/specific-redcapr/read-batch-simple/default.R"
 
 test_that("smoke test", {
   testthat::skip_on_cran()
@@ -29,7 +30,6 @@ test_that("smoke test", {
 })
 test_that("default", {
   testthat::skip_on_cran()
-  path_expected <- "test-data/specific-redcapr/read-batch-simple/default.R"
   expected_outcome_message <- "\\d+ records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   ###########################
@@ -39,8 +39,8 @@ test_that("default", {
     returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token)
   )
 
-  if (update_expectation) save_expected(returned_object1$data, path_expected)
-  expected_data_frame <- retrieve_expected(path_expected)
+  if (update_expectation) save_expected(returned_object1$data, path_expected_default)
+  expected_data_frame <- retrieve_expected(path_expected_default)
 
   expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
   expect_true(returned_object1$success)
@@ -95,6 +95,115 @@ test_that("col_types", {
   expect_true( returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_true( returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+})
+test_that("specify-records", {
+  testthat::skip_on_cran()
+  path_expected <- "test-data/specific-redcapr/read-batch-simple/specify-records.R"
+  desired_records <- c(1L, 3L, 4L)
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+
+  expect_message(
+    regexp           = expected_outcome_message,
+    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, records=desired_records, batch_size=2)
+  )
+
+  if (update_expectation) save_expected(returned_object$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
+
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
+  expect_true(returned_object$records_collapsed==paste(desired_records, collapse=","))
+  expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_true(returned_object$filter_logic=="", "A filter was not specified.")
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true(returned_object$success)
+})
+test_that("specify-records-zero-length", {
+  testthat::skip_on_cran()
+  path_expected <- "test-data/specific-redcapr/read-batch-simple/specify-records-zero-length.R"
+  desired_records <- c()
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+
+  expect_message(
+    regexp           = expected_outcome_message,
+    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, records=desired_records, batch_size=2)
+  )
+
+  if (update_expectation) save_expected(returned_object$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
+
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
+  expect_true(returned_object$records_collapsed==paste(desired_records, collapse=","))
+  expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_true(returned_object$filter_logic=="", "A filter was not specified.")
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true(returned_object$success)
+})
+test_that("specify-fields", {
+  testthat::skip_on_cran()
+  path_expected <- "test-data/specific-redcapr/read-batch-simple/specify-fields.R"
+  desired_fields <- c("record_id", "name_first", "name_last", "age")
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+
+  expect_message(
+    regexp           = expected_outcome_message,
+    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, fields=desired_fields, batch_size=2)
+  )
+
+  if (update_expectation) save_expected(returned_object$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
+
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
+  expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object$fields_collapsed==paste(desired_fields, collapse=","))
+  expect_true(returned_object$filter_logic=="", "A filter was not specified.")
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true(returned_object$success)
+})
+test_that("specify-fields-zero-length", {
+  testthat::skip_on_cran()
+  path_expected <- "test-data/specific-redcapr/read-batch-simple/specify-fields-zero-length.R"
+  desired_fields <- c()
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+
+  expect_message(
+    regexp           = expected_outcome_message,
+    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, fields=desired_fields, batch_size=2)
+  )
+
+  if (update_expectation) save_expected(returned_object$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
+
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
+  expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object$fields_collapsed==paste(desired_fields, collapse=","))
+  expect_true(returned_object$filter_logic=="", "A filter was not specified.")
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true(returned_object$success)
+})
+test_that("specify-records-and-fields-zero-length", {
+  testthat::skip_on_cran()
+  desired_records <- c()
+  desired_fields <- c()
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+
+  expect_message(
+    regexp           = expected_outcome_message,
+    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, records=desired_records, fields=desired_fields, batch_size=2)
+  )
+
+  expected_data_frame <- retrieve_expected(path_expected_default)
+
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
+  expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_true(returned_object$filter_logic=="", "A filter was not specified.")
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true(returned_object$success)
 })
 
 test_that("specify-forms", {
@@ -405,7 +514,6 @@ test_that("filter-character", {
 
 test_that("date-range", {
   testthat::skip_on_cran()
-  path_expected <- "test-data/specific-redcapr/read-batch-simple/default.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   start <- as.POSIXct(strptime("2018-08-01 03:00", "%Y-%m-%d %H:%M"))
@@ -421,8 +529,7 @@ test_that("date-range", {
       )
   )
 
-  if (update_expectation) save_expected(returned_object$data, path_expected)
-  expected_data_frame <- retrieve_expected(path_expected)
+  expected_data_frame <- retrieve_expected(path_expected_default)
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected="200")

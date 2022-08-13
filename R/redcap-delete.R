@@ -2,8 +2,11 @@
 #'
 #' @description Delete existing records by their ID from REDCap.
 #'
-#' @param redcap_uri The URI (uniform resource identifier) of the REDCap
-#' project.  Required.
+#' @param redcap_uri The
+#' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
+#' of the REDCap server
+#' typically formatted as "https://server.org/apps/redcap/api/".
+#' Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
 #' @param records_to_delete A character vector of the project's `record_id`
@@ -101,9 +104,9 @@ redcap_delete <- function(
 
   arms_call <- redcap_arm_export(redcap_uri, token, verbose = FALSE, config_options)
 
-  if (arms_call$has_arms & is.null(arm_of_records_to_delete)) {
+  if (arms_call$has_arms && is.null(arm_of_records_to_delete)) {
     stop("This REDCap project has arms.  Please specify which arm contains the records to be deleted.")
-  } else if (!arms_call$has_arms & !is.null(arm_of_records_to_delete)) {
+  } else if (!arms_call$has_arms && !is.null(arm_of_records_to_delete)) {
     stop("This REDCap project does not have arms, but `arm_of_records_to_delete` is not NULL.")
   }
 

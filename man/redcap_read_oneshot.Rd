@@ -34,8 +34,11 @@ redcap_read_oneshot(
 )
 }
 \arguments{
-\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap
-project.  Required.}
+\item{redcap_uri}{The
+\href{https://en.wikipedia.org/wiki/Uniform_Resource_Identifier}{uri}/url
+of the REDCap server
+typically formatted as "https://server.org/apps/redcap/api/".
+Required.}
 
 \item{token}{The user-specific string that serves as the password for a
 project.  Required.}
@@ -169,7 +172,7 @@ documentation is available at https://cran.r-project.org/package=httr.
 If you do not pass in this \code{export_data_access_groups} value, it will default
 to \code{FALSE}. The following is from the API help page for version 10.5.1:
 \emph{This flag is only viable if the user whose token is being used to make the
-API request is \emph{not} in a data access group. If the user is in a group,
+API request is \strong{not} in a data access group. If the user is in a group,
 then this flag will revert to its default value}.
 }
 \examples{

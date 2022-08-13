@@ -49,11 +49,15 @@ reference:
       Accessing other information from the REDCap project or server.
     contents:
       - redcap_arm_export
+      - redcap_dag_read
       - redcap_delete
       - redcap_download_instrument
-      - redcap_next_free_record_name
+      - redcap_event_instruments
+      - redcap_instruments
+      - redcap_log_read
       - redcap_metadata_read
       - redcap_metadata_write
+      - redcap_next_free_record_name
       - redcap_survey_link_export_oneshot
       - redcap_users_export
       - redcap_variables

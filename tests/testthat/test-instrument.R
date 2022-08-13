@@ -36,8 +36,8 @@ test_that("download instrument", {
 test_that("download instrument conflict -Error", {
   testthat::skip_on_cran()
 
-  expected_outcome_message_1  <- '*text/html; charset=UTF-8 successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as instruments\\.pdf'
-  expected_outcome_message_2  <- 'The operation was halted because the file `instruments\\.pdf`\\s+already exists and `overwrite` is FALSE\\.  Please check the directory if you believe this is a mistake\\.'
+  expected_outcome_message_1  <- "*text/html; charset=UTF-8 successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as instruments\\.pdf"
+  expected_outcome_message_2  <- "The operation was halted because the file `instruments\\.pdf`\\s+already exists and `overwrite` is FALSE\\.  Please check the directory if you believe this is a mistake\\."
 
   tryCatch({
     # The first run should work.

@@ -1,6 +1,6 @@
 library(testthat)
 
-read_arms <- function (path) {
+read_arms <- function(path) {
   full_path   <- system.file(path, package = "REDCapR")
   if (!file.exists(full_path))
     stop("The expected file `", full_path, "` was not found.")  # nocov
@@ -12,8 +12,8 @@ read_arms <- function (path) {
   full_path |>
     readr::read_csv(col_types = col_types) %>%
     dplyr::select(
-      arm_number  = arm_num,
-      arm_name    = name
+      arm_number  = .data$arm_num,
+      arm_name    = .data$name
     )
 }
 

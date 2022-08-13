@@ -1,4 +1,15 @@
-Upcoming Versions
+Upcoming Release
+==========================================================
+
+### New Features
+
+* New `redcap_log_read()` function.  Exports a project's log.  (Thanks @joundso, #383, #320)
+
+### Minor Enhancements
+
+* Better documentation for the server url (suggested by @sutzig #395)
+
+Version 1.1.0 (released 2022-08-10)
 ==========================================================
 
 ### New Features
@@ -8,7 +19,8 @@ Upcoming Versions
 * `redcap_read()` and `redcap_read_oneshot()` accept a new `locale` parameter that specifies date, time, and number formats, like using a comma as the decimal separator.  It is a [`readr::locale`](https://readr.tidyverse.org/reference/locale.html) object.  (#377, suggested by @joundso)
 * New `redcap_instruments()` function exports a list of the data collection instruments for a project.  (#381, @vcastro)
 * New `redcap_event_instruments()` function exports the instrument-event mappings for a project (i.e., how the data collection instruments are designated for certain events in a longitudinal project)..  (#381, @vcastro)
-
+* New `redcap_dag_read()` function returns the Data Access Groups for a project (#382, @joundso)
+* New detection when REDCap has trouble with a large request and drops records. (#400 w/ @TimMonahan)
 
 ### Minor Enhancements
 
@@ -18,8 +30,12 @@ Upcoming Versions
 * `retrieve_credential_local()` can now user `username` to identify the desired credential row (#364)
 * `redcap_read()` and `redcap_read_oneshot()` gain the `http_response_encoding` parameter that's passed to [`httr::content()`](https://httr.r-lib.org/reference/content.html).  The default value remains "UTF-8".  (#354, @lrasmus)
 * Accommodate single-character REDCap variable names (#367 & #368, @daynefiler)
+* Modify  `redcap_users_export()` (which calls REDCap's user export).  The API dropped the `data_export` variable and added the `forms_export` variable. (#396)
+* For `redcap_read_oneshot_eav()`: if the project isn't longitudinal, a dummy value for `event_id` is used internally (#396)
+* For the testing server & projects, the http errors are a little different, so the testing code was adjusted (#396)
+* Set `httr::user_agent`, following the advice of httr's vignette (#397)
 
-### Test Suite 
+### Test Suite
 
 * Added two more dictionaries that are super wide -5k & 35k variables  (#335 & #360, @januz & @datalorax)
 * Read, modify, & read projects with DAGs (#353, daniela.wolkersdorfer, #353)
@@ -36,7 +52,7 @@ The package has been stable for years and should be reflected in the major versi
 * The functions `redcap_read_oneshot()`, `redcap_read()`, & `redcap_read_oneshot_eav()` now support the parameters `datetime_range_begin` and `datetime_range_end`.  The are passed to the REDCap parameters `dateRangeBegin` and `dateRangeEnd`, which restricts records returned, based on their last modified date in the server.  (Thanks @pbchase, #321 & #323.)
 * Better documentation about the `export_survey_fields` parameter in the functions `redcap_read()` & `redcap_read_oneshot()`.  (Thanks @isaactpetersen, #333)
 * New function [`redcap_report()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_report.html) export records that populate a REDCap report. (#326.)
-* New vignette [Typical REDCap Workflow for a Data Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html) developed to support a workshop for the 2021 [R/Medicine Conference](https://r-medicine.org/) (#332, with  @higgi13425, @kamclean, & Amanda Miller)
+* New vignette [Typical REDCap Workflow for a Data Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html) developed to support a workshop for the 2021 [R/Medicine Conference](https://events.linuxfoundation.org/r-medicine/) (#332, with  @higgi13425, @kamclean, & Amanda Miller)
 * New function [`create_credential_local()`](https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html) starts a well-formed csv file that can contain tokens. (#340, after conversations with @higgi13425 & @kamclean.)
 
 ### Stability Features
@@ -67,7 +83,7 @@ Version 0.11.0 (Released 2020-04-20)
 
 * [`reader::type_convert()`](https://readr.tidyverse.org/reference/type_convert.html) is used *after* all the batches are stacked on top of each other.  This way, batches cannot have incompatible data types as they're combined. (#257; thanks @isaactpetersen #245)  Consequently, the `guess_max` parameter in `redcap_read()` no longer serves a purpose, and has been soft-deprecated. (#267)
 
-* [`redcap_metadata_write()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_write.html) writes to the project's metadata. (#274, @felixetorres) 
+* [`redcap_metadata_write()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_write.html) writes to the project's metadata. (#274, @felixetorres)
 
 * [`redcap_survey_link_export_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_survey_link_export_oneshot.html) retrieves the URL to a specific record's survey (*e.g.*, "https://bbmc.ouhsc.edu/redcap/surveys/?s=8KuzSLMHf6") (#293)
 
@@ -262,8 +278,9 @@ Version 0.1 (Released 2014-01-14)
 * `redcap_read()` takes parameter for `raw_or_label` (Thanks Rollie Parrish #3)
 * `redcap_read()` takes parameter for `export_data_access_groups` thanks to Rollie Parrish (@rparrish #4)
 
-GitHub Commits and Releases
-==========================================================
+----------------------------------------
 
-* For a detailed change log, please see https://github.com/OuhscBbmc/REDCapR/commits/master.
+GitHub Commits and Releases
+
+* For a detailed change log, please see https://github.com/OuhscBbmc/REDCapR/commits/main.
 * For a list of the major releases, please see https://github.com/OuhscBbmc/REDCapR/releases.

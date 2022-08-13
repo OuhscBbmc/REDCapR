@@ -27,28 +27,27 @@ opts_chunk$set(
   tidy    = FALSE
 )
 
-knit_print.data.frame = function(x, ...) {
-  # See https://cran.r-project.org/package=knitr/vignettes/knit_print.html
-  # res = paste(c("", "", kable(x)), collapse = "\n")
-  # asis_output(res)
-  x %>%
-    # dplyr::mutate_if(
-    #   is.character,
-    #   function( s ) gsub("\\n", "<br/>", s)
-    # ) %>%
-    kable(
-      col.names = gsub("_", " ", colnames(.)),
-      format    = "html"
-    ) %>%
-    kableExtra::kable_styling(
-      bootstrap_options = c("striped", "hover", "condensed", "responsive"),
-      full_width        = FALSE
-    ) %>%
-    c("", "", .) %>%
-    paste(collapse = "\n") %>%
-    asis_output()
-
-}
+# knit_print.data.frame <- function(x, ...) {
+#   # See https://cran.r-project.org/package=knitr/vignettes/knit_print.html
+#   # res = paste(c("", "", kable(x)), collapse = "\n")
+#   # asis_output(res)
+#   x %>%
+#     # dplyr::mutate_if(
+#     #   is.character,
+#     #   function( s ) gsub("\\n", "<br/>", s)
+#     # ) %>%
+#     kable(
+#       col.names = gsub("_", " ", colnames(.)),
+#       format    = "html"
+#     ) %>%
+#     kableExtra::kable_styling(
+#       bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+#       full_width        = FALSE
+#     ) %>%
+#     c("", "", .) %>%
+#     paste(collapse = "\n") %>%
+#     asis_output()
+# }
 # options(markdown.HTML.header = system.file("misc/vignette.css", package = "REDCapR"))
 # options(width=120) #So the output is 50% wider than the default.
 ```
@@ -204,7 +203,7 @@ if (requireNamespace("sessioninfo", quietly = TRUE)) {
 </details>
 
 ```{r session-duration, echo=FALSE}
-report_render_duration_in_seconds <- round(as.numeric(difftime(Sys.time(), report_render_start_time, units = "secs")))
+report_render_duration <- round(as.numeric(difftime(Sys.time(), report_render_start_time, units = "secs")))
 ```
 
-Report rendered by `r Sys.info()["user"]` at `r strftime(Sys.time(), "%Y-%m-%d, %H:%M %z")` in `r report_render_duration_in_seconds` seconds.
+Report rendered by `r Sys.info()["user"]` at `r strftime(Sys.time(), "%Y-%m-%d, %H:%M %z")` in `r report_render_duration` seconds.

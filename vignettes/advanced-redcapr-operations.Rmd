@@ -26,23 +26,23 @@ opts_chunk$set(
 )
 
 # knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
-knit_print.data.frame = function(x, ...) {
-  # See https://cran.r-project.org/package=knitr/vignettes/knit_print.html
-
-  x %>%
-    # rmarkdown::print.paged_df() %>%
-    kable(
-      col.names = gsub("_", " ", colnames(.)),
-      format = "html"
-    ) %>%
-    kableExtra::kable_styling(
-      bootstrap_options = c("striped", "hover", "condensed", "responsive"),
-      full_width        = FALSE
-    ) %>%
-    c("", "", .) %>%
-    paste(collapse = "\n") %>%
-    asis_output()
-}
+# knit_print.data.frame <- function(x, ...) {
+#   # See https://cran.r-project.org/package=knitr/vignettes/knit_print.html
+# 
+#   x %>%
+#     # rmarkdown::print.paged_df() %>%
+#     kable(
+#       col.names = gsub("_", " ", colnames(.)),
+#       format = "html"
+#     ) %>%
+#     kableExtra::kable_styling(
+#       bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+#       full_width        = FALSE
+#     ) %>%
+#     c("", "", .) %>%
+#     paste(collapse = "\n") %>%
+#     asis_output()
+# }
 ```
 
 Next Steps {#nextsteps .emphasized}
@@ -70,7 +70,7 @@ Converting from tall/long to wide
 However we like going wide to produce visual tables for publications, and here's one way to do it in R. First retrieve the dataset from REDCap.
 
 ```{r retrieve-longitudinal, results='hold'}
-library(magrittr);
+library(magrittr)
 suppressPackageStartupMessages(requireNamespace("dplyr"))
 suppressPackageStartupMessages(requireNamespace("tidyr"))
 events_to_retain  <- c("dose_1_arm_1", "visit_1_arm_1", "dose_2_arm_1", "visit_2_arm_1")

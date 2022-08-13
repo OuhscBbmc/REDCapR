@@ -2,8 +2,11 @@
 #'
 #' @description This function uses REDCap's API to select and return data.
 #'
-#' @param redcap_uri The URI (uniform resource identifier) of the REDCap
-#' project.  Required.
+#' @param redcap_uri The
+#' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
+#' of the REDCap server
+#' typically formatted as "https://server.org/apps/redcap/api/".
+#' Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
 #' @param records An array, where each element corresponds to the ID of a
@@ -108,7 +111,7 @@
 #' If you do not pass in this `export_data_access_groups` value, it will default
 #' to `FALSE`. The following is from the API help page for version 10.5.1:
 #' *This flag is only viable if the user whose token is being used to make the
-#' API request is *not* in a data access group. If the user is in a group,
+#' API request is **not** in a data access group. If the user is in a group,
 #' then this flag will revert to its default value*.
 #'
 #' @author Will Beasley
@@ -296,7 +299,7 @@ redcap_read_oneshot <- function(
       silent = TRUE
     )
 
-    if (exists("ds") & inherits(ds, "data.frame")) {
+    if (exists("ds") && inherits(ds, "data.frame")) {
       outcome_message <- sprintf(
         "%s records and %s columns were read from REDCap in %0.1f seconds.  The http status code was %i.",
         format(  nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE),

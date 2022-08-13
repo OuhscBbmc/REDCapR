@@ -3,8 +3,11 @@
 #' @description This function calls the 'exportFieldNames' function of the
 #' REDCap API.
 #'
-#' @param redcap_uri The URI (uniform resource identifier) of the REDCap
-#' project.  Required.
+#' @param redcap_uri The
+#' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
+#' of the REDCap server
+#' typically formatted as "https://server.org/apps/redcap/api/".
+#' Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
 #' @param verbose A boolean value indicating if `message`s should be printed
@@ -91,7 +94,7 @@ redcap_variables <- function(
       #    it's under the control of the caller.
     )
 
-    if (exists("ds") & inherits(ds, "data.frame")) {
+    if (exists("ds") && inherits(ds, "data.frame")) {
       outcome_message <- sprintf(
         "%s variable metadata records were read from REDCap in %0.1f seconds.  The http status code was %i.",
         format(nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE),
@@ -127,7 +130,7 @@ redcap_variables <- function(
     }
   }
 
-  if( verbose )
+  if (verbose)
     message(outcome_message)
 
   list(

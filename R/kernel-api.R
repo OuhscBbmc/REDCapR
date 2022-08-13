@@ -3,8 +3,11 @@
 #' @description This function is used by other functions to read and write
 #' values.
 #'
-#' @param redcap_uri The URI (uniform resource identifier) of the REDCap
-#' project.  Required.
+#' @param redcap_uri The
+#' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
+#' of the REDCap server
+#' typically formatted as "https://server.org/apps/redcap/api/".
+#' Required.
 #' @param post_body List of contents expected by the REDCap API.  Required.
 #' @param config_options  A list of options to pass to `POST` method in the
 #' `httr` package.  See the details below.  Optional.
@@ -46,12 +49,21 @@ kernel_api <- function(
   content_type        = "text/csv"
   ) {
 
+  checkmate::assert_character(redcap_uri    , len = 1, any.missing = FALSE, null.ok = FALSE)
+  checkmate::assert_character(encoding      , len = 1, any.missing = FALSE, null.ok = FALSE)
+  checkmate::assert_character(content_type  , len = 1, any.missing = FALSE, null.ok = FALSE)
+
   start_time <- Sys.time()
+
+  # if (httr::http_error(redcap_uri)) {
+  #   stop("The url `", redcap_uri, "` is not found or throws an error.")
+  # }
 
   result <- httr::POST(
     url     = redcap_uri,
     body    = post_body,
-    config  = config_options
+    config  = config_options,
+    httr::user_agent("OuhscBbmc/REDCapR")
   )
 
   status_code           <- result$status
@@ -74,7 +86,7 @@ kernel_api <- function(
 
   # Overwrite the success flag if the raw_text is bad.
   if (
-    any(grepl(regex_cannot_connect, raw_text)) |
+    any(grepl(regex_cannot_connect, raw_text)) ||
     any(grepl(regex_empty         , raw_text))
   ) {
     success     <- FALSE  # nocov

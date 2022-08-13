@@ -13,8 +13,11 @@ kernel_api(
 )
 }
 \arguments{
-\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap
-project.  Required.}
+\item{redcap_uri}{The
+\href{https://en.wikipedia.org/wiki/Uniform_Resource_Identifier}{uri}/url
+of the REDCap server
+typically formatted as "https://server.org/apps/redcap/api/".
+Required.}
 
 \item{post_body}{List of contents expected by the REDCap API.  Required.}
 

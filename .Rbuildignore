@@ -14,6 +14,7 @@ documentation-for-developers/
 pkgdown/
 playgrounds/
 utility/
+^\.lintr$
 ^\.travis\.yml$
 ^appveyor\.yml$
 ^revdep$
@@ -25,3 +26,4 @@ utility/
 ^codecov\.yml$
 ^pkgdown$
 ^LICENSE\.md$
+^CRAN-SUBMISSION$

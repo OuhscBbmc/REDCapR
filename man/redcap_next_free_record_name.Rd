@@ -12,8 +12,11 @@ redcap_next_free_record_name(
 )
 }
 \arguments{
-\item{redcap_uri}{The URI (uniform resource identifier) of the REDCap
-project.  Required.}
+\item{redcap_uri}{The
+\href{https://en.wikipedia.org/wiki/Uniform_Resource_Identifier}{uri}/url
+of the REDCap server
+typically formatted as "https://server.org/apps/redcap/api/".
+Required.}
 
 \item{token}{The user-specific string that serves as the password for a
 project.  Required.}
@@ -45,7 +48,9 @@ will always return an object of class
 To be used by projects with record auto-numbering enabled, this method
 exports the next potential record ID for a project. It generates the next
 record name by determining the current maximum numerical record ID and then
-incrementing it by one.\preformatted{Note: This method does not create a new record, but merely determines what
+incrementing it by one.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Note: This method does not create a new record, but merely determines what
 the next record name would be.
 
 If using Data Access Groups (DAGs) in the project, this method accounts for
@@ -63,7 +68,7 @@ reassigned to another DAG.
 
 Note: This method functions the same even for projects that do not have
 record auto-numbering enabled.
-}
+}\if{html}{\out{</div>}}
 }
 \examples{
 uri      <- "https://bbmc.ouhsc.edu/redcap/api/"

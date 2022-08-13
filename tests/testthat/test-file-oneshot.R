@@ -206,7 +206,7 @@ test_that("download file conflict -Error", {
   field <- "mugshot"
 
   expected_outcome_message_1  <- '; name="mugshot-2\\.jpg" successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as mugshot-2.jpg'
-  expected_outcome_message_2  <- 'The operation was halted because the file `mugshot-2\\.jpg` already exists and `overwrite` is FALSE\\.  Please check the directory if you believe this is a mistake\\.'
+  expected_outcome_message_2  <- "The operation was halted because the file `mugshot-2\\.jpg` already exists and `overwrite` is FALSE\\.  Please check the directory if you believe this is a mistake\\."
 
   tryCatch({
     # The first run should work.
@@ -254,7 +254,7 @@ test_that("Download Error --bad field name", {
   record <- 3
   field <- "mugshotttttt"
 
-  expected_outcome_message <- 'file NOT downloaded'
+  expected_outcome_message <- "file NOT downloaded"
   expected_raw_text        <- "ERROR: The field 'mugshotttttt' does not exist or is not a 'file' field"
 
   tryCatch({

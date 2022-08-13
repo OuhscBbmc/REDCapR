@@ -4,6 +4,8 @@ options(device = deviceType) #https://support.rstudio.org/help/discussions/probl
 
 spelling::spell_check_package()
 # spelling::update_wordlist()
+lintr::lint_package()
+urlchecker::url_check(); urlchecker::url_update()
 
 devtools::document()
 devtools::check_man() #Should return NULL
@@ -34,15 +36,13 @@ devtools::run_examples(); #dev.off() #This overwrites the NAMESPACE file too
 # devtools::run_examples(, "redcap_read.Rd")
 # pkgload::load_all()
 test_results_checked <- devtools::test()
-test_results_checked <- devtools::test(filter = "read-decimal-comma")
-test_results_checked <- devtools::test(filter = "delete")
+test_results_checked <- devtools::test(filter = "read-batch-simple")
+test_results_checked <- devtools::test(filter = "^log")
 withr::local_envvar(ONLYREADTESTS = "true")
 test_results_checked <- devtools::test(filter = "write-batch")
 
 # testthat::test_dir("./tests/")
 test_results_not_checked <- testthat::test_dir("./tests/manual/")
-
-urlchecker::url_check(); urlchecker::url_update()
 
 # devtools::check(force_suggests = FALSE)
 devtools::check(cran=TRUE)

@@ -21,8 +21,9 @@ test_that("version-successful", {
     )
   )
 
-  expected <- package_version("10.5.1")
-  expect_equal(actual, expected)
+  expected <- package_version("12.5.5")
+  version_good <- (expected <= actual)
+  expect_true(version_good)
 })
 
 test_that("version-unuccessful-bad-token", {

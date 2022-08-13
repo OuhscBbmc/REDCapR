@@ -47,7 +47,7 @@
 #' To add more, please for and edit
 #' [constant.R](https://github.com/OuhscBbmc/REDCapR/blob/master/R/constant.R)
 #' on GitHub and submit a pull request.  For instructions, please see
-#' [Editing files in another user's repository](https://help.github.com/articles/editing-files-in-another-user-s-repository/) # nolint
+#' [Editing files in another user's repository](https://docs.github.com/articles/editing-files-in-another-user-s-repository/) # nolint
 #' in the GitHub documentation.
 #'
 #' @author Will Beasley
@@ -113,7 +113,7 @@ constant <- function(name) {
 
 #' @export
 constant_to_form_completion <- function(x) {
-  if (!inherits(x, "character") & !is.numeric(x)) {
+  if (!inherits(x, "character") && !is.numeric(x)) {
     stop(
       "The value to recode must be a character, integer, or floating point.  ",
       "It was `",
@@ -135,7 +135,7 @@ constant_to_form_completion <- function(x) {
 
 #' @export
 constant_to_form_rights <- function(x) {
-  if (!inherits(x, "character") & !is.numeric(x)) {
+  if (!inherits(x, "character") && !is.numeric(x)) {
     stop(
       "The value to recode must be a character, integer, or floating point.  ",
       "It was `",
@@ -158,7 +158,7 @@ constant_to_form_rights <- function(x) {
 
 #' @export
 constant_to_export_rights <- function(x) {
-  if (!inherits(x, "character") & !is.numeric(x)) {
+  if (!inherits(x, "character") && !is.numeric(x)) {
     stop(
       "The value to recode must be a character, integer, or floating point.  ",
       "It was `",
@@ -180,7 +180,7 @@ constant_to_export_rights <- function(x) {
 
 #' @export
 constant_to_access <- function(x) {
-  if (!inherits(x, "character") & !is.numeric(x)) {
+  if (!inherits(x, "character") && !is.numeric(x)) {
     stop(
       "The value to recode must be a character, integer, or floating point.  ",
       "It was `",

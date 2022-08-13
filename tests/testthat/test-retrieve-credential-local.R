@@ -136,7 +136,13 @@ test_that("Conflicting rows", {
 })
 
 test_that("Bad URI", {
-  expected_message <- "The REDCap URL does not reference an https address.  First check that the URL is correct, and then consider using SSL to encrypt the REDCap webserver.  Set the `check_url` parameter to FALSE if you're sure you have the correct file & file contents."
+  expected_message <-
+    paste0(
+      "The REDCap URL does not reference an https address.  ",
+      "First check that the URL is correct, and then consider using SSL to ",
+      "encrypt the REDCap webserver.  Set the `check_url` parameter to FALSE ",
+      "if you're sure you have the correct file & file contents."
+    )
 
   expect_error(
     regexp = expected_message,

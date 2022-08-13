@@ -9,8 +9,11 @@
 #' directory. Optional
 #' @param overwrite Boolean value indicating if existing files should be
 #' overwritten. Optional
-#' @param redcap_uri The URI (uniform resource identifier) of the REDCap
-#' project.  Required.
+#' @param redcap_uri The
+#' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
+#' of the REDCap server
+#' typically formatted as "https://server.org/apps/redcap/api/".
+#' Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
 #' @param record The record ID where the file is to be imported. Required
@@ -156,7 +159,7 @@ redcap_download_file_oneshot <- function(
   if (kernel$success) {
     result_header <- kernel$result_headers$`content-type`
 
-    if (missing(file_name) | is.null(file_name)) {
+    if (missing(file_name) || is.null(file_name)) {
       # process the content-type to get the file name
       regex_matches <- regmatches(
         kernel$result_headers,
@@ -170,7 +173,7 @@ redcap_download_file_oneshot <- function(
       )
     }
 
-    file_path <- if (missing(directory) & is.null(directory)) {
+    file_path <- if (missing(directory) && is.null(directory)) {
       file_name #Use relative path.
     } else {
       file.path(directory, file_name) #Qualify the file with its full path.
@@ -179,7 +182,7 @@ redcap_download_file_oneshot <- function(
     if (verbose)
       message("Preparing to download the file `", file_path, "`.")
 
-    if (!overwrite & file.exists(file_path)) {
+    if (!overwrite && file.exists(file_path)) {
       stop(
         "The operation was halted because the file `",
         file_path,
