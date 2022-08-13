@@ -91,7 +91,7 @@ test_that("dsn wrong length", {
   #too many
   expect_error(
     regexp = expected_message,
-    REDCapR::retrieve_credential_mssql(pid_read, instance='dev', dsn = character(2))
+    REDCapR::retrieve_credential_mssql(pid_read, instance = "dev", dsn = character(2))
   )
 })
 

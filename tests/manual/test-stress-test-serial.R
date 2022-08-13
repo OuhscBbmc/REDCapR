@@ -37,7 +37,7 @@ expected_data_frame <- structure(list(record_id = 1:5, name_first = c("Nutmeg", 
 
 expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-for( i in seq_len(read_count) ) {
+for (i in seq_len(read_count)) {
   expect_message(
     returned_object <- redcap_read_oneshot(
       redcap_uri    = credential$redcap_uri,
@@ -61,7 +61,7 @@ for( i in seq_len(read_count) ) {
 
 # File ---------------------------------------------------
 message("\n========\nFile")
-for( i in seq_len(file_count) ) {
+for (i in seq_len(file_count)) {
   start_clean_result <- REDCapR:::clean_start_simple(batch=FALSE)
   project <- start_clean_result$redcap_project
 

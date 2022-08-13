@@ -72,7 +72,7 @@ test_that("reassign subject to a different dag", {
   # token_for_dag_user <- "C79DB3836373478986928303B52E74DF"
 
   # Step 2a: Retrieve the dataset as admin.  The 3 subjects' DAGs are 'daga', 'daga', & 'dagb'
-  ds_admin_1  <- redcap_read_oneshot(url, credential_admin$token, export_data_access_groups=T)$data
+  ds_admin_1  <- redcap_read_oneshot(url, credential_admin$token, export_data_access_groups = TRUE)$data
   expect_equal(nrow(ds_admin_1), 3L)
   expect_equal(ds_admin_1$record_id               , c("331-1", "331-2", "332-3"))
   expect_equal(ds_admin_1$redcap_data_access_group, c("daga", "daga", "dagb"   ))
@@ -87,7 +87,7 @@ test_that("reassign subject to a different dag", {
   redcap_write_oneshot(ds_admin_1, url, credential_admin$token)
 
   # Step 4a: Retrieve the dataset as admin.  Should the 2nd row automatically change from '331-2' to '332-2'?
-  ds_admin_2  <- redcap_read_oneshot(url, credential_admin$token, export_data_access_groups=T)$data
+  ds_admin_2  <- redcap_read_oneshot(url, credential_admin$token, export_data_access_groups = TRUE)$data
   expect_equal(nrow(ds_admin_2), 3L)
   expect_equal(ds_admin_2$record_id               , c("331-1", "331-2", "332-3"))
   # expect_equal(ds_admin_2$record_id               , c("331-1", "332-2", "332-3"))
