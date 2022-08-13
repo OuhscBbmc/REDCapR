@@ -15,8 +15,11 @@
 #' @param continue_on_error If an error occurs while reading, should records
 #' in subsequent batches be attempted.  The default is `FALSE`, which prevents
 #' subsequent batches from running.  Required.
-#' @param redcap_uri The URI (uniform resource identifier) of the REDCap
-#' project.  Required.
+#' @param redcap_uri The
+#' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
+#' of the REDCap server
+#' typically formatted as "https://server.org/apps/redcap/api/".
+#' Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
 #' @param records An array, where each element corresponds to the ID of a
@@ -150,9 +153,11 @@
 #' \dontrun{
 #' uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token   <- "9A81268476645C4E5F03428B8AC3AA7B"
+#'
+#' # Return the entire dataset
 #' REDCapR::redcap_read(batch_size=2, redcap_uri=uri, token=token)$data
 #'
-#' # Specify the column types.
+#' # Return a subset of columns while also specifying the column types.
 #' col_types <- readr::cols(
 #'   record_id  = readr::col_integer(),
 #'   race___1   = readr::col_logical(),
@@ -303,7 +308,7 @@ redcap_read <- function(
   # Continue as intended if the initial query succeeded. --------------------
   unique_ids <- sort(unique(initial_call$data[[id_position]]))
 
-  if (0L < length(unique_ids) & all(nchar(unique_ids)==32L))
+  if (0L < length(unique_ids) && all(nchar(unique_ids)==32L))
     warn_hash_record_id()  # nocov
 
   ds_glossary            <- REDCapR::create_batch_glossary(row_count=length(unique_ids), batch_size=batch_size)

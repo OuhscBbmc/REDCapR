@@ -3,8 +3,11 @@
 #' @description This function uses REDCap's API to select and return data.
 #' This function is still in development.
 #'
-#' @param redcap_uri The URI (uniform resource identifier) of the REDCap
-#' project.  Required.
+#' @param redcap_uri The
+#' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
+#' of the REDCap server
+#' typically formatted as "https://server.org/apps/redcap/api/".
+#' Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
 #' @param records An array, where each element corresponds to the ID of a
@@ -242,7 +245,7 @@ redcap_read_oneshot_eav <- function(
   ds_variable <- REDCapR::redcap_variables(redcap_uri, token)$data
 
   if (kernel$success) {
-    try (
+    try(
       {
         ds_eav <-
           readr::read_csv(

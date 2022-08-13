@@ -6,8 +6,11 @@
 #' (Copied from "Export Instrument-Event Mappings" method of
 #' REDCap API documentation, v.10.5.1)
 #'
-#' @param redcap_uri The URI (uniform resource identifier) of the REDCap
-#' project.  Required.
+#' @param redcap_uri The
+#' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
+#' of the REDCap server
+#' typically formatted as "https://server.org/apps/redcap/api/".
+#' Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
 #' @param arms A character string of arms to retrieve.  (Default: '1')
@@ -75,7 +78,7 @@ redcap_event_instruments <- function(
     token     = token,
     content   = "formEventMapping",
     format    = "csv",
-    'arms[0]' = collapse_vector(arms, NULL)
+    "arms[0]" = collapse_vector(arms, NULL)
   )
 
   col_types <- readr::cols(
@@ -101,7 +104,7 @@ redcap_event_instruments <- function(
       #    it's under the control of the caller.
     )
 
-    if (exists("ds") & inherits(ds, "data.frame")) {
+    if (exists("ds") && inherits(ds, "data.frame")) {
       outcome_message <- sprintf(
         "%s event instrument metadata records were read from REDCap in %0.1f seconds.  The http status code was %i.",
         format(nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE),
@@ -137,7 +140,7 @@ redcap_event_instruments <- function(
     }
   }
 
-  if( verbose )
+  if (verbose)
     message(outcome_message)
 
   list(

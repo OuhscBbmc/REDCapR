@@ -23,12 +23,12 @@ test_that("sanitize_last_names", {
   observed <- REDCapR::redcap_column_sanitize(dirty)$names
 
   #The different OSes can have subtly different conversions, b/c they're based on different underlying conversion libraries.
-  if( Sys.info()["sysname"]=="Windows" ) {
+  if (Sys.info()["sysname"] == "Windows") {
     expect_equal(observed, expected_windows, label="The sanitized values should be correct.")
-  } else if ( grepl("^Fedora", sessionInfo()$running) ) {
+  } else if (grepl("^Fedora", sessionInfo()$running)) {
     expect_equal(observed, expected_fedora, label="The sanitized values should be correct.")
   } else {
-    fits_ubuntu <- any(observed==expected_ubuntu_1 | observed==expected_ubuntu_2)
+    fits_ubuntu <- any(observed == expected_ubuntu_1 | observed == expected_ubuntu_2)
     expect_true(fits_ubuntu, label="One of the possible Ubuntu matches should be correct.")
   }
 

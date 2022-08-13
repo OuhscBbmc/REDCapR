@@ -461,4 +461,3 @@ test_that("bad token -Error", {
   testthat::expect_equal(returned_object$raw_text, "ERROR: You do not have permissions to use the API")
 })
 rm(credential)
-

@@ -2,8 +2,11 @@
 #'
 #' @description List users authorized for a project.
 #'
-#' @param redcap_uri The URI (uniform resource identifier) of the REDCap
-#' project.  Required.
+#' @param redcap_uri The
+#' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
+#' of the REDCap server
+#' typically formatted as "https://server.org/apps/redcap/api/".
+#' Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
 #' @param verbose A boolean value indicating if `message`s should be printed
@@ -138,7 +141,7 @@ redcap_users_export <- function(
       #   under the control of the caller.
     )
 
-    if (exists("ds_user") & inherits(ds_user, "data.frame")) {
+    if (exists("ds_user") && inherits(ds_user, "data.frame")) {
       outcome_message <- sprintf(
         "The REDCap users were successfully exported in %0.1f seconds.  The http status code was %i.",
         kernel$elapsed_seconds,

@@ -3,8 +3,11 @@
 #' @description Exports the data set of a report created on a project's
 #' 'Data Exports, Reports, and Stats' page.
 #'
-#' @param redcap_uri The URI (uniform resource identifier) of the REDCap
-#' project.  Required.
+#' @param redcap_uri The
+#' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
+#' of the REDCap server
+#' typically formatted as "https://server.org/apps/redcap/api/".
+#' Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
 #' @param report_id A single integer, provided next to the report name on the
@@ -181,7 +184,7 @@ redcap_report <- function(
       silent = TRUE
     )
 
-    if (exists("ds") & inherits(ds, "data.frame")) {
+    if (exists("ds") && inherits(ds, "data.frame")) {
       outcome_message <- sprintf(
         "%s records and %s columns were read from REDCap in %0.1f seconds.  The http status code was %i.",
         format(  nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE),

@@ -113,7 +113,7 @@ constant <- function(name) {
 
 #' @export
 constant_to_form_completion <- function(x) {
-  if (!inherits(x, "character") & !is.numeric(x)) {
+  if (!inherits(x, "character") && !is.numeric(x)) {
     stop(
       "The value to recode must be a character, integer, or floating point.  ",
       "It was `",
@@ -135,7 +135,7 @@ constant_to_form_completion <- function(x) {
 
 #' @export
 constant_to_form_rights <- function(x) {
-  if (!inherits(x, "character") & !is.numeric(x)) {
+  if (!inherits(x, "character") && !is.numeric(x)) {
     stop(
       "The value to recode must be a character, integer, or floating point.  ",
       "It was `",
@@ -158,7 +158,7 @@ constant_to_form_rights <- function(x) {
 
 #' @export
 constant_to_export_rights <- function(x) {
-  if (!inherits(x, "character") & !is.numeric(x)) {
+  if (!inherits(x, "character") && !is.numeric(x)) {
     stop(
       "The value to recode must be a character, integer, or floating point.  ",
       "It was `",
@@ -180,7 +180,7 @@ constant_to_export_rights <- function(x) {
 
 #' @export
 constant_to_access <- function(x) {
-  if (!inherits(x, "character") & !is.numeric(x)) {
+  if (!inherits(x, "character") && !is.numeric(x)) {
     stop(
       "The value to recode must be a character, integer, or floating point.  ",
       "It was `",

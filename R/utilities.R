@@ -38,7 +38,7 @@ replace_nas_with_explicit <- function(
   add_unknown_level = FALSE
 ) {
 
-  if (create_factor & !is.factor(scores)) {
+  if (create_factor && !is.factor(scores)) {
     scores <- factor(scores)
   }
 
@@ -91,7 +91,7 @@ replace_nas_with_explicit <- function(
 collapse_vector <- function(elements, collapsed) {
   checkmate::assert_character(collapsed, len=1, any.missing=TRUE, null.ok=TRUE)
 
-  if ((is.null(collapsed) | length(collapsed) == 0L) | all(nchar(collapsed) == 0L)) {
+  if ((is.null(collapsed) || length(collapsed) == 0L) || all(nchar(collapsed) == 0L)) {
 
     # This is an empty string if `elements` (eg, fields`) is NULL.
     collapsed <- dplyr::if_else(
@@ -113,6 +113,6 @@ filter_logic_prepare <- function(filter_logic) {
 }
 
 ## We're intentionally not exporting this function.
-verbose_prepare <- function (verbose) {
+verbose_prepare <- function(verbose) {
   ifelse(!is.null(verbose), verbose, getOption("verbose"))
 }

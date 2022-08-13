@@ -7,8 +7,11 @@
 #'
 #' @param ds The [base::data.frame()] to be imported into the REDCap project.
 #' Required.
-#' @param redcap_uri The URI (uniform resource identifier) of the REDCap
-#' project.  Required.
+#' @param redcap_uri The
+#' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
+#' of the REDCap server
+#' typically formatted as "https://server.org/apps/redcap/api/".
+#' Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
 #' @param verbose A boolean value indicating if `message`s should be printed
@@ -73,7 +76,10 @@ redcap_metadata_write <- function(
   verbose         = TRUE,
   config_options  = NULL
 ) {
-  csv_elements <- NULL #This prevents the R CHECK NOTE: 'No visible binding for global variable Note in R CMD check';  Also see  if( getRversion() >= "2.15.1" )    utils::globalVariables(names=c("csv_elements")) #https://stackoverflow.com/questions/8096313/no-visible-binding-for-global-variable-note-in-r-cmd-check; https://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
+  # This prevents the R CHECK NOTE: 'No visible binding for global variable Note in R CMD check';
+  # Also see  if( getRversion() >= "2.15.1" )    utils::globalVariables(names=c("csv_elements"))
+  # https://stackoverflow.com/questions/8096313/; https://stackoverflow.com/questions/9439256
+  csv_elements <- NULL
 
   checkmate::assert_character(redcap_uri, any.missing = FALSE, len = 1, pattern = "^.{1,}$")
   checkmate::assert_character(token     , any.missing = FALSE, len = 1, pattern = "^.{1,}$")
