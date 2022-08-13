@@ -59,11 +59,13 @@ create_batch_glossary <- function(row_count, batch_size) {
     )
   ds_batch$stop_index  <-
     base::mapply(
-      function(i) base::ifelse(
-        i < length(start_index),
-        start_index[i + 1L] - 1L,
-        row_count
-      ),
+      function(i) {
+        base::ifelse(
+          i < length(start_index),
+          start_index[i + 1L] - 1L,
+          row_count
+        )
+      },
       ds_batch$id
     )
 

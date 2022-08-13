@@ -97,7 +97,10 @@ redcap_write_oneshot <- function(
   config_options  = NULL
 ) {
 
-  csv_elements <- NULL #This prevents the R CHECK NOTE: 'No visible binding for global variable Note in R CMD check';  Also see  if( getRversion() >= "2.15.1" )    utils::globalVariables(names=c("csv_elements")) #https://stackoverflow.com/questions/8096313/no-visible-binding-for-global-variable-note-in-r-cmd-check; https://stackoverflow.com/questions/9439256
+  # This prevents the R CHECK NOTE: 'No visible binding for global variable Note in R CMD check';
+  # Also see  if( getRversion() >= "2.15.1" )    utils::globalVariables(names=c("csv_elements"))
+  # https://stackoverflow.com/questions/8096313/; https://stackoverflow.com/questions/9439256
+  csv_elements <- NULL
 
   checkmate::assert_character(redcap_uri, any.missing=FALSE, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token     , any.missing=FALSE, len=1, pattern="^.{1,}$")
