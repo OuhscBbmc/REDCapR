@@ -3,7 +3,23 @@
 pattern of a 32-character hexadecimal value.
 Each character must be an (a) digit 0-9, (b) uppercase letter A-F, or
 (c) lowercase letter a-f.
-#' Trailing line endings are removed."><meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.svg"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
+Trailing line endings are removed.
+A typical user does not call this function directly.  However functions like
+redcap_read() call it to provide a more informative
+error message to the user.
+Some institutions create their own tokens not the standard
+32-character hexadecimal value.  The pattern that validates their tokens
+can be specified with the system environmental variable
+REDCAP_TOKEN_PATTERN using
+base::Sys.setenv().
+For example, the following regex pattern captures a
+base64 encoded value with 40 characters:
+^([A-Za-z\\d+/\\+=]{40})$.
+See https://regexland.com/base64/ for alternative approaches to validate
+base64 values.
+If no pattern is specified, the default is 32-character hex token:
+^([0-9A-Fa-f]{32})(?:\\n)?$.  The important segment is contained in the
+first (and only) capturing group.  Any trailing newline character is removed."><meta property="og:image" content="https://ouhscbbmc.github.io/REDCapR/logo.svg"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
@@ -65,7 +81,23 @@ Each character must be an (a) digit 0-9, (b) uppercase letter A-F, or
 pattern of a 32-character hexadecimal value.
 Each character must be an (a) digit 0-9, (b) uppercase letter A-F, or
 (c) lowercase letter a-f.
-#' Trailing line endings are removed.</p>
+Trailing line endings are removed.</p>
+<p>A typical user does not call this function directly.  However functions like
+<a href="redcap_read"><code><a href="redcap_read.html">redcap_read()</a></code></a> call it to provide a more informative
+error message to the user.</p>
+<p>Some institutions create their own tokens not the standard
+32-character hexadecimal value.  The pattern that validates their tokens
+can be specified with the system environmental variable
+<code>REDCAP_TOKEN_PATTERN</code> using
+<a href="base::Sys.setenv"><code><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">base::Sys.setenv()</a></code></a>.</p>
+<p>For example, the following regex pattern captures a
+<a href="base64%20encoded%20value">base64 encoded value</a> with 40 characters:
+<code>^([A-Za-z\\d+/\\+=]{40})$</code>.
+See <a href="https://regexland.com/base64/" class="external-link">https://regexland.com/base64/</a> for alternative approaches to validate
+base64 values.</p>
+<p>If no pattern is specified, the default is 32-character hex token:
+<code>^([0-9A-Fa-f]{32})(?:\\n)?$</code>.  The important segment is contained in the
+first (and only) capturing group.  Any trailing newline character is removed.</p>
     </div>
 
     <div id="ref-usage">
@@ -105,6 +137,16 @@ about your project-specific token.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "12345678901234567890123456ABCDEF"</span>
 <span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">sanitize_token</span><span class="op">(</span><span class="va">secret_token_3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "12345678901234567890123456abcdef"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Some institutions use a token system that follows a different pattern</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"REDCAP_TOKEN_PATTERN"</span> <span class="op">=</span> <span class="st">"^([A-Za-z\\d+/\\+=]{10})$"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">secret_token_4</span> <span class="op">&lt;-</span> <span class="st">"abcde1234="</span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">sanitize_token</span><span class="op">(</span><span class="va">secret_token_4</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "abcde1234="</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"REDCAP_TOKEN_PATTERN"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "^([A-Za-z\\d+/\\+=]{10})$"</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.unsetenv</a></span><span class="op">(</span><span class="st">"REDCAP_TOKEN_PATTERN"</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>

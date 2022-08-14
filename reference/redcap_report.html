@@ -72,7 +72,7 @@
 <span>  export_checkbox_label <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  col_types <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  guess_type <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  guess_max <span class="op">=</span> <span class="fl">1000L</span>,</span>
+<span>  guess_max <span class="op">=</span> <span class="fl">1000</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  config_options <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -129,7 +129,8 @@ data type for each column.  Ignored if <code>col_types</code> is not null.</p></
 
 
 <dt>guess_max</dt>
-<dd><p>A positive integer passed to <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_csv()</a></code> that
+<dd><p>A positive <a href="https://rdrr.io/r/base/numeric.html" class="external-link">base::numeric</a> value
+passed to <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_csv()</a></code> that
 specifies the maximum number of records to use for guessing column types.</p></dd>
 
 
