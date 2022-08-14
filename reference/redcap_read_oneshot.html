@@ -80,6 +80,7 @@
 <span>  filter_logic <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  datetime_range_begin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span>,</span>
 <span>  datetime_range_end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span>,</span>
+<span>  blank_for_gray_form_status <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  col_types <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  guess_type <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  guess_max <span class="op">=</span> <span class="fl">1000L</span>,</span>
@@ -199,6 +200,15 @@ modified <em>before</em> a given datetime, provide a
 <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/as.POSIXlt.html" class="external-link">POSIXct</a>
 value.
 If not specified, REDCap will assume no end time.</p></dd>
+
+
+<dt>blank_for_gray_form_status</dt>
+<dd><p>A boolean value that specifies whether
+or not to export blank values for instrument complete status fields that have
+a gray status icon. All instrument complete status fields having a gray icon
+can be exported either as a blank value or as "0" (Incomplete). Blank values
+are recommended in a data export if the data will be re-imported into a
+REDCap project. Default is <code>FALSE</code>.</p></dd>
 
 
 <dt>col_types</dt>
