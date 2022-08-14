@@ -10,6 +10,7 @@ Upcoming Release
 ### Minor Enhancements
 
 * Better documentation for the server url (suggested by @sutzig #395)
+* `read_read_oneshot()`'s parameter `guess_max` now allows floating point values to support `readr::read_csv()` ability to accept a Inf value.  (Suggested by @eveyp, #392)
 
 Version 1.1.0 (released 2022-08-10)
 ==========================================================

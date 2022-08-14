@@ -70,7 +70,8 @@
 #' @param guess_type A boolean value indicating if all columns should be
 #' returned as character.  If false, [readr::read_csv()] guesses the intended
 #' data type for each column.  Ignored if `col_types` is not null.
-#' @param guess_max A positive integer passed to [readr::read_csv()] that
+#' @param guess_max A positive [base::numeric] value
+#' passed to [readr::read_csv()] that
 #' specifies the maximum number of records to use for guessing column types.
 #' @param http_response_encoding  The encoding value passed to
 #' [httr::content()].  Defaults to 'UTF-8'.
@@ -192,7 +193,7 @@ redcap_read_oneshot <- function(
 
   col_types                     = NULL,
   guess_type                    = TRUE,
-  guess_max                     = 1000L,
+  guess_max                     = 1000,
   http_response_encoding        = "UTF-8",
   locale                        = readr::default_locale(),
   verbose                       = TRUE,
@@ -223,7 +224,7 @@ redcap_read_oneshot <- function(
   checkmate::assert_logical( blank_for_gray_form_status , any.missing=FALSE, len=1)
 
   checkmate::assert_logical(  guess_type                , any.missing=FALSE, len=1)
-  checkmate::assert_integerish(guess_max                , any.missing=FALSE, len=1, lower=1)
+  checkmate::assert_numeric(   guess_max                , any.missing=FALSE, len=1, lower=1)
   checkmate::assert_character(http_response_encoding    , any.missing=FALSE,     len=1)
 
   checkmate::assert_class(    locale, "locale"          , null.ok = FALSE)
