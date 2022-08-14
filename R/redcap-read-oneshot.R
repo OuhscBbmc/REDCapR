@@ -58,6 +58,13 @@
 #' [POSIXct](https://stat.ethz.ch/R-manual/R-devel/library/base/html/as.POSIXlt.html)
 #' value.
 #' If not specified, REDCap will assume no end time.
+#' @param blank_for_gray_form_status A boolean value that specifies whether
+#' or not to export blank values for instrument complete status fields that have
+#' a gray status icon. All instrument complete status fields having a gray icon
+#' can be exported either as a blank value or as "0" (Incomplete). Blank values
+#' are recommended in a data export if the data will be re-imported into a
+#' REDCap project. Default is `FALSE`.
+#'
 #' @param col_types A [readr::cols()] object passed internally to
 #' [readr::read_csv()].  Optional.
 #' @param guess_type A boolean value indicating if all columns should be
@@ -181,6 +188,7 @@ redcap_read_oneshot <- function(
   filter_logic                  = "",
   datetime_range_begin          = as.POSIXct(NA),
   datetime_range_end            = as.POSIXct(NA),
+  blank_for_gray_form_status    = FALSE,
 
   col_types                     = NULL,
   guess_type                    = TRUE,
@@ -212,6 +220,7 @@ redcap_read_oneshot <- function(
   checkmate::assert_character(filter_logic              , any.missing=FALSE, len=1, pattern="^.{0,}$")
   checkmate::assert_posixct(  datetime_range_begin      , any.missing=TRUE , len=1, null.ok=TRUE)
   checkmate::assert_posixct(  datetime_range_end        , any.missing=TRUE , len=1, null.ok=TRUE)
+  checkmate::assert_logical( blank_for_gray_form_status , any.missing=FALSE, len=1)
 
   checkmate::assert_logical(  guess_type                , any.missing=FALSE, len=1)
   checkmate::assert_integerish(guess_max                , any.missing=FALSE, len=1, lower=1)
@@ -249,7 +258,8 @@ redcap_read_oneshot <- function(
     exportDataAccessGroups  = tolower(as.character(export_data_access_groups)),
     filterLogic             = filter_logic,
     dateRangeBegin          = datetime_range_begin,
-    dateRangeEnd            = datetime_range_end
+    dateRangeEnd            = datetime_range_end,
+    exportBlankForGrayFormStatus = blank_for_gray_form_status
     # record, fields, forms & events are specified below
   )
 
