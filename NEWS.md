@@ -5,6 +5,7 @@ Upcoming Release
 
 * New `redcap_log_read()` function.  Exports a project's log.  (Thanks @joundso, #383, #320)
 * New parameter `blank_for_gray_form_status` in the functions `redcap_read()`, `redcap_read_oneshot()`, and `redcap_read_oneshot_eav()`. (@greg-botwin, #386, #389)
+* `sanitized_token()` now accepts an alternative regex pattern.  (Suggested by @maeon & @michalkouril, #370)
 
 ### Minor Enhancements
 
