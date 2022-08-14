@@ -193,7 +193,7 @@ redcap_read_oneshot_eav <- function(
   checkmate::assert_logical( blank_for_gray_form_status , any.missing=FALSE, len=1)
 
   # placeholder: checkmate::assert_logical(  guess_type                , any.missing=FALSE, len=1)
-  # placeholder: checkmate::assert_integerish(guess_max                , any.missing=FALSE, len=1, lower=1)
+  # placeholder: checkmate::assert_numeric(  guess_max                , any.missing=FALSE, len=1, lower=1)
   checkmate::assert_logical(  verbose                   , any.missing=FALSE, len=1, null.ok=TRUE)
   checkmate::assert_list(     config_options            , any.missing=TRUE ,        null.ok=TRUE)
 

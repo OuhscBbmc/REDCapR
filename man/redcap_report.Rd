@@ -13,7 +13,7 @@ redcap_report(
   export_checkbox_label = FALSE,
   col_types = NULL,
   guess_type = TRUE,
-  guess_max = 1000L,
+  guess_max = 1000,
   verbose = TRUE,
   config_options = NULL
 )
@@ -51,7 +51,8 @@ displayed to the users.  Otherwise, the values will be 0/1.}
 returned as character.  If false, \code{\link[readr:read_delim]{readr::read_csv()}} guesses the intended
 data type for each column.  Ignored if \code{col_types} is not null.}
 
-\item{guess_max}{A positive integer passed to \code{\link[readr:read_delim]{readr::read_csv()}} that
+\item{guess_max}{A positive \link[base:numeric]{base::numeric} value
+passed to \code{\link[readr:read_delim]{readr::read_csv()}} that
 specifies the maximum number of records to use for guessing column types.}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed

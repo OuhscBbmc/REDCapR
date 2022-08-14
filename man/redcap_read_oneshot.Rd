@@ -26,7 +26,7 @@ redcap_read_oneshot(
   blank_for_gray_form_status = FALSE,
   col_types = NULL,
   guess_type = TRUE,
-  guess_max = 1000L,
+  guess_max = 1000,
   http_response_encoding = "UTF-8",
   locale = readr::default_locale(),
   verbose = TRUE,
@@ -121,7 +121,8 @@ REDCap project. Default is \code{FALSE}.}
 returned as character.  If false, \code{\link[readr:read_delim]{readr::read_csv()}} guesses the intended
 data type for each column.  Ignored if \code{col_types} is not null.}
 
-\item{guess_max}{A positive integer passed to \code{\link[readr:read_delim]{readr::read_csv()}} that
+\item{guess_max}{A positive \link[base:numeric]{base::numeric} value
+passed to \code{\link[readr:read_delim]{readr::read_csv()}} that
 specifies the maximum number of records to use for guessing column types.}
 
 \item{http_response_encoding}{The encoding value passed to
