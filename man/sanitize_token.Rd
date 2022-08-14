@@ -51,7 +51,7 @@ REDCapR::sanitize_token(secret_token_1)
 REDCapR::sanitize_token(secret_token_2)
 REDCapR::sanitize_token(secret_token_3)
 
-Some institutions use their own token system that follows a different pattern
+# Some institutions use a token system that follows a different pattern
 Sys.setenv("REDCAP_TOKEN_PATTERN" = "^([A-Za-z\\\\d+/\\\\+=]{10})$")
 
 secret_token_4 <- "abcde1234="
