@@ -425,7 +425,7 @@ test_that("blank-for-gray-status-true", {
     returned_object <- redcap_read_oneshot(
       redcap_uri    = credential_blank_for_gray$redcap_uri,
       token         = credential_blank_for_gray$token,
-      export_blankforgray_form_status = TRUE
+      blank_for_gray_form_status = TRUE
     )
   )
 
@@ -452,7 +452,7 @@ test_that("blank-for-gray-status-false", {
     returned_object <- redcap_read_oneshot(
       redcap_uri    = credential_blank_for_gray$redcap_uri,
       token         = credential_blank_for_gray$token,
-      export_blankforgray_form_status = FALSE
+      blank_for_gray_form_status = FALSE
     )
   )
 

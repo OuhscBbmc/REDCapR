@@ -21,7 +21,7 @@ redcap_read_oneshot_eav(
   filter_logic = "",
   datetime_range_begin = as.POSIXct(NA),
   datetime_range_end = as.POSIXct(NA),
-  export_blankforgray_form_status = FALSE,
+  blank_for_gray_form_status = FALSE,
   verbose = TRUE,
   config_options = NULL
 )
@@ -92,7 +92,7 @@ modified \emph{before} a given datetime, provide a
 value.
 If not specified, REDCap will assume no end time.}
 
-\item{export_blankforgray_form_status}{A boolean value that specifies whether
+\item{blank_for_gray_form_status}{A boolean value that specifies whether
 or not to export blank values for instrument complete status fields that have
 a gray status icon. All instrument complete status fields having a gray icon
 can be exported either as a blank value or as "0" (Incomplete). Blank values

@@ -55,7 +55,7 @@
 #' (https://stat.ethz.ch/R-manual/R-devel/library/base/html/as.POSIXlt.html)
 #' value.
 #' If not specified, REDCap will assume no end time.
-#' @param export_blankforgray_form_status A boolean value that specifies whether
+#' @param blank_for_gray_form_status A boolean value that specifies whether
 #' or not to export blank values for instrument complete status fields that have
 #' a gray status icon. All instrument complete status fields having a gray icon
 #' can be exported either as a blank value or as "0" (Incomplete). Blank values
@@ -161,7 +161,7 @@ redcap_read_oneshot_eav <- function(
   filter_logic                  = "",
   datetime_range_begin          = as.POSIXct(NA),
   datetime_range_end            = as.POSIXct(NA),
-  export_blankforgray_form_status = FALSE,
+  blank_for_gray_form_status    = FALSE,
 
   # placeholder: guess_type
   # placeholder: guess_max
@@ -190,7 +190,7 @@ redcap_read_oneshot_eav <- function(
   checkmate::assert_character(filter_logic              , any.missing=FALSE, len=1, pattern="^.{0,}$")
   checkmate::assert_posixct(  datetime_range_begin      , any.missing=TRUE , len=1, null.ok=TRUE)
   checkmate::assert_posixct(  datetime_range_end        , any.missing=TRUE , len=1, null.ok=TRUE)
-  checkmate::assert_logical(export_blankforgray_form_status , any.missing=FALSE, len=1)
+  checkmate::assert_logical( blank_for_gray_form_status , any.missing=FALSE, len=1)
 
   # placeholder: checkmate::assert_logical(  guess_type                , any.missing=FALSE, len=1)
   # placeholder: checkmate::assert_integerish(guess_max                , any.missing=FALSE, len=1, lower=1)
@@ -224,7 +224,7 @@ redcap_read_oneshot_eav <- function(
     filterLogic             = filter_logic,
     dateRangeBegin          = datetime_range_begin,
     dateRangeEnd            = datetime_range_end,
-    exportBlankForGrayFormStatus = export_blankforgray_form_status
+    exportBlankForGrayFormStatus = blank_for_gray_form_status
     # record, fields, forms & events are specified below
   )
 
