@@ -126,4 +126,3 @@ test_that("batch size 1", {
 })
 
 rm(credential)
-

@@ -71,7 +71,7 @@ redcap_project <- setRefClass(
       filter_logic                  = "",
 
       guess_type                    = TRUE,
-      guess_max                     = 1000L,
+      guess_max                     = 1000,
       verbose                       = TRUE,
       config_options                = NULL
     ) {

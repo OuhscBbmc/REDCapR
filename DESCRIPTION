@@ -25,7 +25,8 @@ Authors@R: c(person("Will", "Beasley", role = c("aut", "cre"), email =
     role = "ctb", email = "fetorres@ucsd.edu"), person("Philip", "Chase",
     role = "ctb", email = "pbc@ufl.edu"), person("Victor", "Castro",
     role = "ctb", email = "vcastro@mgh.harvard.edu",
-    comment = c(ORCID = '0000-0001-7390-6354')))
+    comment = c(ORCID = '0000-0001-7390-6354')), person("Greg", "Botwin",
+    role = "ctb"))
 URL: https://ouhscbbmc.github.io/REDCapR/, https://github.com/OuhscBbmc/REDCapR, https://www.ouhsc.edu/bbmc/, https://project-redcap.org
 BugReports: https://github.com/OuhscBbmc/REDCapR/issues
 Depends:

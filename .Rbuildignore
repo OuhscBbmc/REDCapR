@@ -14,7 +14,11 @@ documentation-for-developers/
 pkgdown/
 playgrounds/
 utility/
+
+^\.lintr$
+^\.markdownlint\.json$
 ^\.travis\.yml$
+^\.vscode$
 ^appveyor\.yml$
 ^revdep$
 ^CONDUCT\.md$

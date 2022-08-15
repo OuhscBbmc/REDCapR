@@ -62,7 +62,7 @@ redcap_version <- function(
       #   under the control of the caller.
     )
 
-    if (exists("version") & inherits(version, "package_version")) {
+    if (exists("version") && inherits(version, "package_version")) {
       outcome_message <- sprintf(
         "The REDCap version was successfully determined in %0.1f seconds. The http status code was %i.  Is is %s.",
         kernel$elapsed_seconds,

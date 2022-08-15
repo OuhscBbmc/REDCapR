@@ -23,9 +23,10 @@ redcap_read_oneshot(
   filter_logic = "",
   datetime_range_begin = as.POSIXct(NA),
   datetime_range_end = as.POSIXct(NA),
+  blank_for_gray_form_status = FALSE,
   col_types = NULL,
   guess_type = TRUE,
-  guess_max = 1000L,
+  guess_max = 1000,
   http_response_encoding = "UTF-8",
   locale = readr::default_locale(),
   verbose = TRUE,
@@ -106,6 +107,13 @@ modified \emph{before} a given datetime, provide a
 value.
 If not specified, REDCap will assume no end time.}
 
+\item{blank_for_gray_form_status}{A boolean value that specifies whether
+or not to export blank values for instrument complete status fields that have
+a gray status icon. All instrument complete status fields having a gray icon
+can be exported either as a blank value or as "0" (Incomplete). Blank values
+are recommended in a data export if the data will be re-imported into a
+REDCap project. Default is \code{FALSE}.}
+
 \item{col_types}{A \code{\link[readr:cols]{readr::cols()}} object passed internally to
 \code{\link[readr:read_delim]{readr::read_csv()}}.  Optional.}
 
@@ -113,7 +121,8 @@ If not specified, REDCap will assume no end time.}
 returned as character.  If false, \code{\link[readr:read_delim]{readr::read_csv()}} guesses the intended
 data type for each column.  Ignored if \code{col_types} is not null.}
 
-\item{guess_max}{A positive integer passed to \code{\link[readr:read_delim]{readr::read_csv()}} that
+\item{guess_max}{A positive \link[base:numeric]{base::numeric} value
+passed to \code{\link[readr:read_delim]{readr::read_csv()}} that
 specifies the maximum number of records to use for guessing column types.}
 
 \item{http_response_encoding}{The encoding value passed to

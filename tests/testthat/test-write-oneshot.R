@@ -144,7 +144,7 @@ test_that("overwrite-false", {
   # Blanks and NAs should NOT overwrite the cells
   returned_object1$data$address   <- NA_character_
   returned_object1$data$telephone <- ""
-  REDCapR::redcap_write_oneshot(ds=returned_object1$data, redcap_uri=project$redcap_uri, token=project$token, overwrite_with_blanks = F)
+  REDCapR::redcap_write_oneshot(ds=returned_object1$data, redcap_uri=project$redcap_uri, token=project$token, overwrite_with_blanks = FALSE)
 
   expect_message(
     returned_object2 <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),
@@ -187,7 +187,7 @@ test_that("overwrite-true", {
   # Blanks and NAs should NOT overwrite the cells
   returned_object1$data$address   <- NA_character_
   returned_object1$data$telephone <- ""
-  REDCapR::redcap_write_oneshot(ds=returned_object1$data, redcap_uri=project$redcap_uri, token=project$token, overwrite_with_blanks = T)
+  REDCapR::redcap_write_oneshot(ds=returned_object1$data, redcap_uri=project$redcap_uri, token=project$token, overwrite_with_blanks = TRUE)
 
   expect_message(
     returned_object2 <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token, raw_or_label="raw"),

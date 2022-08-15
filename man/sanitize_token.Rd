@@ -17,7 +17,27 @@ Verifies the token is nonmissing and conforms to the legal
 pattern of a 32-character hexadecimal value.
 Each character must be an (a) digit 0-9, (b) uppercase letter A-F, or
 (c) lowercase letter a-f.
-#' Trailing line endings are removed.
+Trailing line endings are removed.
+
+A typical user does not call this function directly.  However functions like
+\href{redcap_read}{\code{redcap_read()}} call it to provide a more informative
+error message to the user.
+
+Some institutions create their own tokens not the standard
+32-character hexadecimal value.  The pattern that validates their tokens
+can be specified with the system environmental variable
+\code{REDCAP_TOKEN_PATTERN} using
+\href{base::Sys.setenv}{\code{base::Sys.setenv()}}.
+
+For example, the following regex pattern captures a
+\url{base64 encoded value} with 40 characters:
+\verb{^([A-Za-z\\\\d+/\\\\+=]\{40\})$}.
+See \url{https://regexland.com/base64/} for alternative approaches to validate
+base64 values.
+
+If no pattern is specified, the default is 32-character hex token:
+\verb{^([0-9A-Fa-f]\{32\})(?:\\\\n)?$}.  The important segment is contained in the
+first (and only) capturing group.  Any trailing newline character is removed.
 }
 \note{
 Contact your institution's REDCap administrator for more information
@@ -30,6 +50,14 @@ secret_token_3 <- "12345678901234567890123456abcdef"
 REDCapR::sanitize_token(secret_token_1)
 REDCapR::sanitize_token(secret_token_2)
 REDCapR::sanitize_token(secret_token_3)
+
+# Some institutions use a token system that follows a different pattern
+Sys.setenv("REDCAP_TOKEN_PATTERN" = "^([A-Za-z\\\\d+/\\\\+=]{10})$")
+
+secret_token_4 <- "abcde1234="
+REDCapR::sanitize_token(secret_token_4)
+Sys.getenv("REDCAP_TOKEN_PATTERN")
+Sys.unsetenv("REDCAP_TOKEN_PATTERN")
 }
 \author{
 Hao Zhu, Benjamin Nutter, Will Beasley, Jordan Mark Barbone

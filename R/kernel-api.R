@@ -86,7 +86,7 @@ kernel_api <- function(
 
   # Overwrite the success flag if the raw_text is bad.
   if (
-    any(grepl(regex_cannot_connect, raw_text)) |
+    any(grepl(regex_cannot_connect, raw_text)) ||
     any(grepl(regex_empty         , raw_text))
   ) {
     success     <- FALSE  # nocov

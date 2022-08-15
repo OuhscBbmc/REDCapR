@@ -34,7 +34,6 @@
 #' unsuccessful operation, it should contain diagnostic information.
 #' * `elapsed_seconds`: The duration of the function.
 #'
-#'
 #' @author Jonathan M. Mang
 #' @references The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
@@ -102,32 +101,13 @@ redcap_dag_read <- function(
       silent = TRUE
     )
 
-    if (exists("ds") & inherits(ds, "data.frame")) {
+    if (exists("ds") && inherits(ds, "data.frame")) {
       outcome_message <- sprintf(
         "%s data access groups were read from REDCap in %0.1f seconds.  The http status code was %i.",
         format(  nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE),
         kernel$elapsed_seconds,
         kernel$status_code
       )
-
-      # ds <- dplyr::mutate_if(
-      #   ds,
-      #   is.character,
-      #   function(x) dplyr::coalesce(x, "") #Replace NAs with blanks
-      # )
-      #
-      # ds <- dplyr::mutate_if(
-      #   ds,
-      #   is.character,
-      #   function( x ) gsub("\r\n", "\n", x, perl=TRUE)
-      # )
-      # ds <- dplyr::mutate_if(
-      #   ds,
-      #   function( x) inherits(x, "Date"),
-      #   as.character
-      # )
-      #
-      # ds <- base::as.data.frame(ds)
 
       # If an operation is successful, the `raw_text` is no longer returned to
       #   save RAM.  The content is not really necessary with httr's status

@@ -28,7 +28,8 @@
 #' @param guess_type A boolean value indicating if all columns should be
 #' returned as character.  If false, [readr::read_csv()] guesses the intended
 #' data type for each column.  Ignored if `col_types` is not null.
-#' @param guess_max A positive integer passed to [readr::read_csv()] that
+#' @param guess_max A positive [base::numeric] value
+#' passed to [readr::read_csv()] that
 #' specifies the maximum number of records to use for guessing column types.
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  The verbose output might contain
@@ -127,7 +128,7 @@ redcap_report <- function(
 
   col_types                     = NULL,
   guess_type                    = TRUE,
-  guess_max                     = 1000L,
+  guess_max                     = 1000,
   verbose                       = TRUE,
   config_options                = NULL
 ) {
@@ -142,7 +143,7 @@ redcap_report <- function(
   checkmate::assert_logical(  export_checkbox_label     , any.missing=FALSE, len=1)
 
   checkmate::assert_logical(  guess_type                , any.missing=FALSE, len=1)
-  checkmate::assert_integerish(guess_max                , any.missing=FALSE, len=1, lower=1)
+  checkmate::assert_numeric(   guess_max                , any.missing=FALSE, len=1, lower=1)
   checkmate::assert_logical(  verbose                   , any.missing=FALSE, len=1, null.ok=TRUE)
   checkmate::assert_list(     config_options            , any.missing=TRUE ,        null.ok=TRUE)
 
@@ -184,7 +185,7 @@ redcap_report <- function(
       silent = TRUE
     )
 
-    if (exists("ds") & inherits(ds, "data.frame")) {
+    if (exists("ds") && inherits(ds, "data.frame")) {
       outcome_message <- sprintf(
         "%s records and %s columns were read from REDCap in %0.1f seconds.  The http status code was %i.",
         format(  nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE),

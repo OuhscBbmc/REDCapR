@@ -141,7 +141,7 @@ redcap_users_export <- function(
       #   under the control of the caller.
     )
 
-    if (exists("ds_user") & inherits(ds_user, "data.frame")) {
+    if (exists("ds_user") && inherits(ds_user, "data.frame")) {
       outcome_message <- sprintf(
         "The REDCap users were successfully exported in %0.1f seconds.  The http status code was %i.",
         kernel$elapsed_seconds,

@@ -41,7 +41,7 @@ password for a project.  Required.}
   export_data_access_groups = FALSE,
   filter_logic = "",
   guess_type = TRUE,
-  guess_max = 1000L,
+  guess_max = 1000,
   verbose = TRUE,
   config_options = NULL
 )}}{Exports records from a REDCap project.}
