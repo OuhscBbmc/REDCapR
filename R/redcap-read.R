@@ -82,7 +82,7 @@
 #' [readr::read_csv()].  Optional.
 #' @param guess_type A boolean value indicating if all columns should be
 #' returned as character.  If true, [readr::read_csv()] guesses the intended
-#' data type for each column.
+#' data type for each column.  Ignored if `col_types` is not null.
 #' @param guess_max Deprecated.
 #' @param http_response_encoding  The encoding value passed to
 #' [httr::content()].  Defaults to 'UTF-8'.

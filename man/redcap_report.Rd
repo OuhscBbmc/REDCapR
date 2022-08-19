@@ -48,7 +48,7 @@ displayed to the users.  Otherwise, the values will be 0/1.}
 \code{\link[readr:read_delim]{readr::read_csv()}}.  Optional.}
 
 \item{guess_type}{A boolean value indicating if all columns should be
-returned as character.  If false, \code{\link[readr:read_delim]{readr::read_csv()}} guesses the intended
+returned as character.  If true, \code{\link[readr:read_delim]{readr::read_csv()}} guesses the intended
 data type for each column.  Ignored if \code{col_types} is not null.}
 
 \item{guess_max}{A positive \link[base:numeric]{base::numeric} value

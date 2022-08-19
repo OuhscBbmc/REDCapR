@@ -26,7 +26,7 @@
 #' @param col_types A [readr::cols()] object passed internally to
 #' [readr::read_csv()].  Optional.
 #' @param guess_type A boolean value indicating if all columns should be
-#' returned as character.  If false, [readr::read_csv()] guesses the intended
+#' returned as character.  If true, [readr::read_csv()] guesses the intended
 #' data type for each column.  Ignored if `col_types` is not null.
 #' @param guess_max A positive [base::numeric] value
 #' passed to [readr::read_csv()] that
