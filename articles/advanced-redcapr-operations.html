@@ -86,7 +86,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Advanced REDCapR Operations</h1>
             
-            <h4 data-toc-skip class="date">2022-08-19</h4>
+            <h4 data-toc-skip class="date">2022-08-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/HEAD/vignettes/advanced-redcapr-operations.Rmd" class="external-link"><code>vignettes/advanced-redcapr-operations.Rmd</code></a></small>
       <div class="hidden name"><code>advanced-redcapr-operations.Rmd</code></div>
@@ -123,7 +123,7 @@
 <span><span class="va">events_to_retain</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dose_1_arm_1"</span>, <span class="st">"visit_1_arm_1"</span>, <span class="st">"dose_2_arm_1"</span>, <span class="st">"visit_2_arm_1"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ds_long</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token_longitudinal</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; 18 records and 125 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; 18 records and 125 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</span></span></code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">study_id</span>, <span class="va">redcap_event_name</span>, <span class="va">pmq1</span>, <span class="va">pmq2</span>, <span class="va">pmq3</span>, <span class="va">pmq4</span><span class="op">)</span></span></code></pre></div>
@@ -197,8 +197,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;">#   pmq3_dose_2 &lt;dbl&gt;, pmq3_visit_2 &lt;dbl&gt;, pmq4_dose_1 &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   pmq4_visit_1 &lt;dbl&gt;, pmq4_dose_2 &lt;dbl&gt;, pmq4_visit_2 &lt;dbl&gt;, and abbreviated</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   variable names ¹​pmq1_dose_1, ²​pmq1_visit_1, ³​pmq1_dose_2, ⁴​pmq1_visit_2,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁵​pmq2_dose_1, ⁶​pmq2_visit_1, ⁷​pmq2_dose_2, ⁸​pmq2_visit_2</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁵​pmq2_dose_1, ⁶​pmq2_visit_1, ⁷​pmq2_dose_2, ⁸​pmq2_visit_2</span></span></span></code></pre>
 <p>However, in other widening scenarios, it can be easier to go even longer/taller (<em>e.g.</em>, <code>ds_eav</code>) before reversing direction and going wide.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds_eav</span> <span class="op">&lt;-</span></span>
@@ -263,8 +262,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;">#   pmq3_dose_2 &lt;dbl&gt;, pmq4_dose_2 &lt;dbl&gt;, pmq1_visit_2 &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   pmq2_visit_2 &lt;dbl&gt;, pmq3_visit_2 &lt;dbl&gt;, pmq4_visit_2 &lt;dbl&gt;, and abbreviated</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   variable names ¹​pmq1_dose_1, ²​pmq2_dose_1, ³​pmq3_dose_1, ⁴​pmq4_dose_1,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁵​pmq1_visit_1, ⁶​pmq2_visit_1, ⁷​pmq3_visit_1, ⁸​pmq4_visit_1</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁵​pmq1_visit_1, ⁶​pmq2_visit_1, ⁷​pmq3_visit_1, ⁸​pmq4_visit_1</span></span></span></code></pre>
 <p>Lots of packages and documentation exist. Our current preference is the <a href="https://tidyr.tidyverse.org/articles/pivot.html" class="external-link">tidyverse approach</a> to pivoting, but the <a href="https://www.r-bloggers.com/2019/03/creating-blazing-fast-pivot-tables-from-r-with-data-table-now-with-subtotals-using-grouping-sets/" class="external-link">data.table approach</a> is worth considering if you’re comfortable with that package. This <a href="https://stackoverflow.com/questions/10589693/convert-data-from-long-format-to-wide-format-with-multiple-measure-columns/" class="external-link">Stack Overflow post</a> describes several ways. We recommend against the <a href="https://CRAN.R-project.org/package=reshape" class="external-link">reshape</a> and <a href="https://CRAN.R-project.org/package=reshape2" class="external-link">reshape2</a> packages, because their developers have replaced them with the <a href="https://CRAN.R-project.org/package=tidyr" class="external-link">tidyr</a> functions described above.</p>
 </div>
 <div class="section level2">
@@ -361,7 +359,7 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 <span><span class="co">#&gt;  collate  en_US.UTF-8</span></span>
 <span><span class="co">#&gt;  ctype    en_US.UTF-8</span></span>
 <span><span class="co">#&gt;  tz       UTC</span></span>
-<span><span class="co">#&gt;  date     2022-08-19</span></span>
+<span><span class="co">#&gt;  date     2022-08-22</span></span>
 <span><span class="co">#&gt;  pandoc   2.7.3 @ /usr/local/bin/ (via rmarkdown)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Packages ───────────────────────────────────────────────────────────────────</span></span></span>
@@ -386,7 +384,7 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 <span><span class="co">#&gt;  fs            1.5.2    <span style="color: #555555;">2021-12-08</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  generics      0.1.3    <span style="color: #555555;">2022-07-05</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  glue          1.6.2    <span style="color: #555555;">2022-02-24</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  hms           1.1.1    <span style="color: #555555;">2021-09-26</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
+<span><span class="co">#&gt;  hms           1.1.2    <span style="color: #555555;">2022-08-19</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  htmltools     0.5.3    <span style="color: #555555;">2022-07-18</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  httr          1.4.4    <span style="color: #555555;">2022-08-17</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.1)</span></span></span>
 <span><span class="co">#&gt;  jquerylib     0.1.4    <span style="color: #555555;">2021-04-26</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
@@ -397,24 +395,24 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 <span><span class="co">#&gt;  magrittr    * 2.0.3    <span style="color: #555555;">2022-03-30</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  memoise       2.0.1    <span style="color: #555555;">2021-11-26</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  munsell       0.5.0    <span style="color: #555555;">2018-06-12</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  pillar        1.8.0    <span style="color: #555555;">2022-07-18</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
+<span><span class="co">#&gt;  pillar        1.8.1    <span style="color: #555555;">2022-08-19</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  pkgconfig     2.0.3    <span style="color: #555555;">2019-09-22</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  pkgdown       2.0.6    <span style="color: #555555;">2022-07-16</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  purrr         0.3.4    <span style="color: #555555;">2020-04-17</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  R6            2.5.1    <span style="color: #555555;">2021-08-19</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  ragg          1.2.2    <span style="color: #555555;">2022-02-21</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  readr         2.1.2    <span style="color: #555555;">2022-01-30</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  REDCapR     * <span style="color: #BB00BB; font-weight: bold;">1.1.9001</span> <span style="color: #555555;">2022-08-19</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
+<span><span class="co">#&gt;  REDCapR     * <span style="color: #BB00BB; font-weight: bold;">1.1.9001</span> <span style="color: #555555;">2022-08-22</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
 <span><span class="co">#&gt;  rlang         1.0.4    <span style="color: #555555;">2022-07-12</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  rmarkdown     2.15     <span style="color: #555555;">2022-08-16</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  rprojroot     2.0.3    <span style="color: #555555;">2022-04-02</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  rstudioapi    0.13     <span style="color: #555555;">2020-11-12</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  rvest         1.0.2    <span style="color: #555555;">2021-10-16</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
+<span><span class="co">#&gt;  rvest         1.0.3    <span style="color: #555555;">2022-08-19</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  sass          0.4.2    <span style="color: #555555;">2022-07-16</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  scales        1.2.0    <span style="color: #555555;">2022-04-13</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
+<span><span class="co">#&gt;  scales        1.2.1    <span style="color: #555555;">2022-08-20</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  sessioninfo   1.2.2    <span style="color: #555555;">2021-12-06</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  stringi       1.7.8    <span style="color: #555555;">2022-07-11</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  stringr       1.4.0    <span style="color: #555555;">2019-02-10</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
+<span><span class="co">#&gt;  stringr       1.4.1    <span style="color: #555555;">2022-08-20</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.1)</span></span></span>
 <span><span class="co">#&gt;  svglite       2.1.0    <span style="color: #555555;">2022-02-03</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  systemfonts   1.0.4    <span style="color: #555555;">2022-02-11</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  textshaping   0.3.6    <span style="color: #555555;">2021-10-13</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
@@ -436,7 +434,7 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 <span><span class="co">#&gt; <span style="color: #555555;"> [2] /Library/Frameworks/R.framework/Versions/4.2/Resources/library</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">──────────────────────────────────────────────────────────────────────────────</span></span></span></code></pre>
-</details><p>Report rendered by runner at 2022-08-19, 02:19 +0000 in 3 seconds.</p>
+</details><p>Report rendered by runner at 2022-08-22, 02:30 +0000 in 3 seconds.</p>
 </div>
   </div>
 
