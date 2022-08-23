@@ -1,3 +1,6 @@
+
+#' @importFrom magrittr %>% stringr stringi textclean
+#' @export
 choose_dict_lang <- function(dict, lang = c("en")) {
   lang <- match.arg(lang)
 
@@ -8,7 +11,7 @@ choose_dict_lang <- function(dict, lang = c("en")) {
       '(?=<span lang=\"es\")|(?=<span lang=\'es\')',
       remove = FALSE
     ) |>
-    mutate(
+    dplyr::mutate(
       across(
         c(field_label_en, field_label_es),
         ~ textclean::replace_html(.x) |>
@@ -19,18 +22,18 @@ choose_dict_lang <- function(dict, lang = c("en")) {
 
   if (lang == "en") {
     dict <- dict |>
-      mutate(
+      dplyr::mutate(
         field_label_new = field_label_en,
 
       ) |>
-      select(- field_label_es  )
+      dplyr::select(- field_label_es  )
   } else if(lang == "es") {
     dict <- dict |>
-      mutate(
+      dplyr::mutate(
         field_label_new = field_label_es,
 
       ) |>
-      select(-field_label_en)
+      dplyr::select(-field_label_en)
   }
   }
 
@@ -53,12 +56,13 @@ choose_dict_lang <- function(dict, lang = c("en")) {
 #' file that save the error syntax and corresponding correct replacement.
 #'
 #' @return tibble. A data frame containing the cleaned data dictionary.
+#' @export
 clean_field_label <- function(dict) {
 
   # readr::read_csv(mapping_filepath)
   dict |>
     choose_dict_lang() |>
-    mutate(
+    dplyr::mutate(
       field_label_new = field_label_new |>
         stringr::str_remove_all("_x000D_") |>
         stringr::str_remove_all("&nbsp") |>
