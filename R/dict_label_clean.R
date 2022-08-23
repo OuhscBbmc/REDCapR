@@ -54,6 +54,8 @@ choose_dict_lang <- function(dict, lang = c("en","es")) {
 #' file that save the error syntax and corresponding correct replacement.
 #'
 #' @return tibble. A data frame containing the cleaned data dictionary.
+
+#' @export
 clean_field_label <- function(dict) {
 
   # readr::read_csv(mapping_filepath)
