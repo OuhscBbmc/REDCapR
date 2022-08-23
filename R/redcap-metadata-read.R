@@ -73,14 +73,14 @@
 #' @importFrom magrittr %>%
 #' @export
 redcap_metadata_read <- function(
-  redcap_uri,
-  token,
-  forms             = NULL,
-  forms_collapsed   = "",
-  fields            = NULL,
-  fields_collapsed  = "",
-  verbose           = TRUE,
-  config_options    = NULL
+    redcap_uri,
+    token,
+    forms             = NULL,
+    forms_collapsed   = "",
+    fields            = NULL,
+    fields_collapsed  = "",
+    verbose           = TRUE,
+    config_options    = NULL
 ) {
 
   checkmate::assert_character(redcap_uri  , any.missing=FALSE, len=1, pattern="^.{1,}$")
@@ -119,7 +119,8 @@ redcap_metadata_read <- function(
           tibble::as_tibble() %>%
           dplyr::mutate_all(
             ~dplyr::na_if(.x, "")
-          )
+          ) %>%
+          clean_field_label()
       },
       # Don't print the warning in the try block.  Print it below,
       #   where it's under the control of the caller.
