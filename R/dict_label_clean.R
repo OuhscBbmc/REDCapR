@@ -1,3 +1,4 @@
+#' @export
 choose_dict_lang <- function(dict, lang = c("en","es")) {
   lang <- match.arg(lang)
 
