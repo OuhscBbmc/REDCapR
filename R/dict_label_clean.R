@@ -1,5 +1,10 @@
-library(dplyr)
+#' @author   Amanda Lin Li
 
+#' @description Removes different unwanted html tags from field labels.
+#'
+#' @param s strings which may contain html tags
+#'
+#' @return  strings with html tags (if any) removed
 strip_html <- function(s) {
   tryCatch(
     {
@@ -15,7 +20,12 @@ strip_html <- function(s) {
   )
 }
 
-
+#' @description Separate `field_labels` mixed with English and Spanish,
+#' into `field_label_en` and `field_label_es`, respectively.
+#' And removes unwanted html tags and extra whitespaces.
+#'
+#' @param dict tibble. A dataframe containing a REDCap data dictionary
+#'
 choose_dict_lang <- function(dict, lang = c("en")) {
   lang <- match.arg(lang)
 
@@ -59,28 +69,13 @@ choose_dict_lang <- function(dict, lang = c("en")) {
   }
 }
 
-# Slightly change the formula so that the English and Spanish columns aren’t deleted at the end
-
-
-# dic_clean
-
-#' Clean Field Labels
+#
+#' @description  Clean Field Labels
 #'
-#' Removes different unwanted elements (e.g., special characters) from field
-#'   labels.
-#'   @Amanda: This probably has to be extended for more cases.
-#'
-#'   @Janosh, I also use purrr:reduce2 here.
-# .
 #' @param dict tibble. A data frame containing a REDCap data dictionary
-#'
-#' @param mapping_filepath string. A string containing the address of the `.csv`
-#' file that save the error syntax and corresponding correct replacement.
-#'
+
 #' @return tibble. A data frame containing the cleaned data dictionary.
 clean_field_label <- function(dict) {
-
-  # readr::read_csv(mapping_filepath)
   dict %>%
     choose_dict_lang() %>%
     dplyr::mutate(
