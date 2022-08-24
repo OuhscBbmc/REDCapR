@@ -25,8 +25,9 @@ strip_html <- function(s) {
 #' And removes unwanted html tags and extra whitespaces.
 #'
 #' @param dict tibble. A dataframe containing a REDCap data dictionary
+#' @param lang vector of string from where English or Spanish is selected
 #'
-choose_dict_lang <- function(dict, lang = c("en")) {
+choose_dict_lang <- function(dict, lang = c("es", "en")) {
   lang <- match.arg(lang)
 
   dict <- dict %>%
@@ -65,7 +66,7 @@ choose_dict_lang <- function(dict, lang = c("en")) {
       dplyr::mutate(
         field_label = field_label_es,
       ) %>%
-      dplyr::select(-field_label, -field_label_en)
+      dplyr::select(-field_label_es, -field_label_en)
   }
 }
 
@@ -73,11 +74,11 @@ choose_dict_lang <- function(dict, lang = c("en")) {
 #' @description  Clean Field Labels
 #'
 #' @param dict tibble. A data frame containing a REDCap data dictionary
-
+#' @param l string language option "en" == English, es == "Spanish"
 #' @return tibble. A data frame containing the cleaned data dictionary.
-clean_field_label <- function(dict) {
+clean_field_label <- function(dict, l = c("en")) {
   dict %>%
-    choose_dict_lang() %>%
+    choose_dict_lang(.,lang = l) %>%
     dplyr::mutate(
       field_label = field_label %>%
         sub(pattern = "_x000D_", replacement = "") %>%
@@ -88,3 +89,4 @@ clean_field_label <- function(dict) {
     )
 
 }
+
