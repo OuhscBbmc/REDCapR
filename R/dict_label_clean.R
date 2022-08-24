@@ -47,15 +47,15 @@ choose_dict_lang <- function(dict, lang = c("en")) {
   if (lang == "en") {
     dict <- dict %>%
       dplyr::mutate(
-        field_label_new = field_label_en,
+        field_label = field_label_en,
       ) %>%
-      dplyr::select(-field_label_en)
+      dplyr::select(-field_label_es, -field_label_en)
   } else if (lang == "es") {
     dict <- dict %>%
       dplyr::mutate(
-        field_label_new = field_label_es,
+        field_label = field_label_es,
       ) %>%
-      dplyr::select(-field_label_es)
+      dplyr::select(-field_label, -field_label_en)
   }
 }
 
@@ -84,11 +84,12 @@ clean_field_label <- function(dict) {
   dict %>%
     choose_dict_lang() %>%
     dplyr::mutate(
-      field_label_new = field_label_new %>%
-        sub(pattern = "_x000D_", replacement  = "") %>%
-        sub(pattern ="&nbsp", replacement  ="") %>%
+      field_label = field_label %>%
+        sub(pattern = "_x000D_", replacement = "") %>%
+        sub(pattern = "&nbsp", replacement = "") %>%
         gsub(pattern = " ,", replacement = ",") %>%
         # Amanda added
-        gsub(pattern = " \\.", replacement =".")
+        gsub(pattern = " \\.", replacement = ".")
     )
+
 }
