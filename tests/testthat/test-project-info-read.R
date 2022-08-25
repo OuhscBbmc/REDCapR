@@ -41,6 +41,42 @@ test_that("simple", {
   expect_true( returned_object$success)
 })
 
+test_that("all-test-projects", {
+  testthat::skip_on_cran()
+  path_expected <- "test-data/specific-redcapr/project-info-read/all-test-projects.R"
+  expected_outcome_message <- "\\d+ rows were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+
+  server_locale <- readr::locale(tz = "America/Chicago")
+
+  expect_message(
+    regexp          = expected_outcome_message,
+    returned_object <-
+      system.file("misc/example.credentials", package = "REDCapR") |>
+      readr::read_csv(
+        comment     = "#",
+        col_select  = c(redcap_uri, token),
+        col_types   = readr::cols(.default = readr::col_character()),
+      ) |>
+      dplyr::filter(32L == nchar(token)) |>
+      purrr::pmap_dfr(
+        REDCapR::redcap_project_info_read,
+        locale  = server_locale
+      )
+  )
+
+  if (update_expectation) {
+    attr(returned_object, which = "problems") <- NULL
+    save_expected(returned_object$data, path_expected)
+  }
+  expected_data_frame <- retrieve_expected(path_expected)
+
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_match(as.character(returned_object$status_code), regexp="200", perl=TRUE)
+  expect_match(returned_object$raw_text, regexp="", perl=TRUE) # dput(returned_object$raw_text)
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true( all(returned_object$success))
+})
+
 test_that("chicago", {
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/project-info-read/chicago.R"
