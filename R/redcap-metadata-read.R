@@ -119,9 +119,7 @@ redcap_metadata_read <- function(
           tibble::as_tibble() %>%
           dplyr::mutate_all(
             ~dplyr::na_if(.x, "")
-          ) %>%
-          clean_field_label()
-
+          )
       },
       # Don't print the warning in the try block.  Print it below,
       #   where it's under the control of the caller.
