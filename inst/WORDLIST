@@ -15,6 +15,7 @@ DSN's
 De
 Dev
 EAV
+EMs
 Funders
 Gabor
 HRSA
@@ -22,7 +23,6 @@ Hatem
 Hofer
 Hosny
 IALSA
-Kadauke
 LDAP
 MCHB
 MIECHV
@@ -49,6 +49,7 @@ RODBC
 RODBCext
 SSL
 SecurityDatabase
+Timezones
 Translational
 URI
 VPN
@@ -102,6 +103,7 @@ programmatically
 projectredcap
 rdoc
 readr
+readr's
 redcapAPI
 regexes
 reproducibility

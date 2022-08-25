@@ -72,7 +72,7 @@ if no timezone is specified.  Find your server's location listed in
 and then pass that to \code{redcap_project_info_read()}.  See the examples below
 
 For more timezone details see the
-\href{https://readr.tidyverse.org/articles/locales.html#timezones}{"Timezones"}
+\href{https://readr.tidyverse.org/articles/locales.html#timezones}{Timezones}
 section of readr's
 \href{https://readr.tidyverse.org/articles/locales.html}{locales} vignette.
 

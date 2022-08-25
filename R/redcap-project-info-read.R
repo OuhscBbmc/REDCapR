@@ -50,7 +50,7 @@
 #' and then pass that to `redcap_project_info_read()`.  See the examples below
 #'
 #' For more timezone details see the
-#' ["Timezones"](https://readr.tidyverse.org/articles/locales.html#timezones)
+#' [Timezones](https://readr.tidyverse.org/articles/locales.html#timezones)
 #' section of readr's
 #' [locales](https://readr.tidyverse.org/articles/locales.html) vignette.
 #'
