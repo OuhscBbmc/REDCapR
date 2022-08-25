@@ -64,6 +64,12 @@
 #' [REDCapR issue](https://github.com/OuhscBbmc/REDCapR/issues) and we'll
 #' expand the casting specifications.
 #'
+#' **External Modules**
+#'
+#' A project's `external_modules` cell contains all its approved EMs,
+#' separated by a column.  Consider using a function like
+#' [tidyr::separate_rows()] to create a long data structure.
+#'
 #' @author Will Beasley, Stephan Kadauke
 #' @references The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,

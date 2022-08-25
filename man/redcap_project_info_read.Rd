@@ -85,6 +85,12 @@ If the REDCap API adds a new column in the future,
 please alert us in a
 \href{https://github.com/OuhscBbmc/REDCapR/issues}{REDCapR issue} and we'll
 expand the casting specifications.
+
+\strong{External Modules}
+
+A project's \code{external_modules} cell contains all its approved EMs,
+separated by a column.  Consider using a function like
+\code{\link[tidyr:separate_rows]{tidyr::separate_rows()}} to create a long data structure.
 }
 \examples{
 \dontrun{
