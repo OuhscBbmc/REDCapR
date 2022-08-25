@@ -51,6 +51,7 @@ Suggests:
     kableExtra (>= 1.0),
     knitr (>= 1.18),
     odbc (>= 1.1.1),
+    purrr (>= 0.3.4),
     rmarkdown (>= 2.0),
     sessioninfo (>= 1.1.1),
     testthat (>= 3.0)
