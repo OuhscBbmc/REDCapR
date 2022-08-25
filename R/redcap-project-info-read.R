@@ -36,6 +36,21 @@
 #' unsuccessful operation, it should contain diagnostic information.
 #' * `elapsed_seconds`: The duration of the function.
 #'
+#' @details
+#' Several datetime variables are returned, such as the project's
+#' `creation_time`.  For the time to be meaningful, you'll need to set
+#' the time zone because this function uses [readr::read_csv()],
+#' which assigns
+#' [UTC](https://en.wikipedia.org/wiki/Coordinated_Universal_Time)
+#' if no timezone is specified.  Find your server's location listed in
+#' [base::OlsonNames()], and pass it to readr's [readr::locale()] function,
+#' and then pass that to `redcap_project_info_read()`.  See the examples below
+#'
+#' For more timezone details see the
+#' ["Timezones"](https://readr.tidyverse.org/articles/locales.html#timezones)
+#' section of readr's
+#' [locales](https://readr.tidyverse.org/articles/locales.html) vignette.
+#'
 #' @author Will Beasley, Stephan Kadauke
 #' @references The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
@@ -47,19 +62,36 @@
 #'
 #' @examples
 #' \dontrun{
+#' # Specify your project uri and token(s).
 #' uri                  <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token_simple         <- "9A81268476645C4E5F03428B8AC3AA7B"
 #' token_longitudinal   <- "0434F0E9CF53ED0587847AB6E51DE762"
 #'
+#' # ---- Simple examples
 #' d1 <- REDCapR::redcap_project_info_read(uri, token_simple      )$data
 #' View(d1)
 #'
 #' d2 <- REDCapR::redcap_project_info_read(uri, token_longitudinal)$data
 #' View(d2)
 #'
+#' # ---- Specify timezone
+#' # Specify the server's timezone, for example, US Central
+#' server_locale <- readr::locale(tz = "America/Chicago")
+#' d3 <-
+#'   REDCapR::redcap_project_info_read(
+#'     uri,
+#'     token_simple,
+#'     locale     = server_locale
+#'   )$data
+#' d3$creation_time
 #'
-#' # Stack all the projects on top of each other in a (nested) tibble
-#' #   (starting from a csv of REDCapR test projects).
+#' # Alternatively, set timezone to the client's location.
+#' client_locale <- readr::locale(tz = Sys.timezone())
+#'
+#' # ---- Inspect multiple projects in the same tibble
+#' # Stack all the projects on top of each other in a (nested) tibble,
+#' #   starting from a csv of REDCapR test projects.
+#' # The native pipes in this snippet require R 4.1+.
 #' d_all <-
 #'   system.file("misc/example.credentials", package = "REDCapR") |>
 #'   readr::read_csv(
@@ -68,7 +100,7 @@
 #'     col_types   = readr::cols(.default = readr::col_character())
 #'   ) |>
 #'   dplyr::filter(32L == nchar(token)) |>
-#'   purrr::pmap_dfr(REDCapR::redcap_project_info_read)
+#'   purrr::pmap_dfr(REDCapR::redcap_project_info_read, locale = server_locale)
 #'
 #' # Inspect values stored on the server.
 #' View(d_all$data)
