@@ -37,6 +37,9 @@
 #' * `elapsed_seconds`: The duration of the function.
 #'
 #' @details
+#'
+#' **Timezones**
+#'
 #' Several datetime variables are returned, such as the project's
 #' `creation_time`.  For the time to be meaningful, you'll need to set
 #' the time zone because this function uses [readr::read_csv()],
@@ -50,6 +53,16 @@
 #' ["Timezones"](https://readr.tidyverse.org/articles/locales.html#timezones)
 #' section of readr's
 #' [locales](https://readr.tidyverse.org/articles/locales.html) vignette.
+#'
+#' **Columns not yet added**
+#' This function casts columns into data types that we think are most natural to
+#' use.  For example, `in_production` is cast from a 0/1 to a
+#' boolean TRUE/FALSE.  All columns not (yet) recognized by REDCapR will be
+#' still be returned to the client, but cast as a character.
+#' If the REDCap API adds a new column in the future,
+#' please alert us in a
+#' [REDCapR issue](https://github.com/OuhscBbmc/REDCapR/issues) and we'll
+#' expand the casting specifications.
 #'
 #' @author Will Beasley, Stephan Kadauke
 #' @references The official documentation can be found on the 'API Help Page'
@@ -169,7 +182,8 @@ redcap_project_info_read <- function(
     display_today_now_button                = readr::col_logical(),
     missing_data_codes                      = readr::col_logical(),
     external_modules                        = readr::col_character(),
-    bypass_branching_erase_field_prompt     = readr::col_logical()
+    bypass_branching_erase_field_prompt     = readr::col_logical(),
+    .default                                = readr::col_character()
   )
 
   if (kernel$success) {

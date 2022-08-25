@@ -60,6 +60,8 @@ if surveys are enabled, the time the project was created and moved to
 production.  Returns a \code{\link[tibble:tibble]{tibble::tibble()}}.
 }
 \details{
+\strong{Timezones}
+
 Several datetime variables are returned, such as the project's
 \code{creation_time}.  For the time to be meaningful, you'll need to set
 the time zone because this function uses \code{\link[readr:read_delim]{readr::read_csv()}},
@@ -73,6 +75,16 @@ For more timezone details see the
 \href{https://readr.tidyverse.org/articles/locales.html#timezones}{"Timezones"}
 section of readr's
 \href{https://readr.tidyverse.org/articles/locales.html}{locales} vignette.
+
+\strong{Columns not yet added}
+This function casts columns into data types that we think are most natural to
+use.  For example, \code{in_production} is cast from a 0/1 to a
+boolean TRUE/FALSE.  All columns not (yet) recognized by REDCapR will be
+still be returned to the client, but cast as a character.
+If the REDCap API adds a new column in the future,
+please alert us in a
+\href{https://github.com/OuhscBbmc/REDCapR/issues}{REDCapR issue} and we'll
+expand the casting specifications.
 }
 \examples{
 \dontrun{
