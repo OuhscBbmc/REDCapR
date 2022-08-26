@@ -28,10 +28,7 @@ test_that("simple", {
       )
   )
 
-  if (update_expectation) {
-    attr(returned_object$data, which = "problems") <- NULL
-    save_expected(returned_object$data, path_expected)
-  }
+  if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
@@ -64,10 +61,7 @@ test_that("all-test-projects", {
       )
   )
 
-  if (update_expectation) {
-    attr(returned_object, which = "problems") <- NULL
-    save_expected(returned_object$data, path_expected)
-  }
+  if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
@@ -94,10 +88,7 @@ test_that("chicago", {
       )
   )
 
-  if (update_expectation) {
-    attr(returned_object$data, which = "problems") <- NULL
-    save_expected(returned_object$data, path_expected)
-  }
+  if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
