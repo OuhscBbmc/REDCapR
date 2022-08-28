@@ -33,7 +33,7 @@ d_meta <-
 # [1] "signature"   "file_upload" "descriptive"
 
 # Translate the four datasets into a single `readr:cols()` string printed to the console
-out <-
+meat <-
   d_var |>
   dplyr::select(
     field_name = export_field_name,
@@ -125,7 +125,7 @@ out <-
   dplyr::pull(.data$aligned)
 
 # Construct an explanation header that's aligned with the col_types output
-gaps <- unlist(gregexpr("[=#]", out[1]))
+gaps <- unlist(gregexpr("[=#]", meat[1]))
 header <- sprintf(
   "  # %-*s %-*s %s\n",
   gaps[1] - 4,
@@ -136,7 +136,8 @@ header <- sprintf(
 )
 
 # Sandwich the col_types output in between the opening+header and the closing
-out |>
+sandwich <-
+  meat |>
   paste(collapse = "\n") %>%
   # I'd prefer this approach, but the `.` is causing problems with R CMD check.
   paste0(
@@ -145,10 +146,14 @@ out |>
     header,
     .,
     "\n)\n"
-  ) |>
+  )
+
+sandwich |>
   cat()
 
-col_types <- readr::cols(
+col_types_1 <- evalq(str2expression(sandwich))
+
+col_types_2 <- readr::cols(
   # col_types <- readr::cols_only( # Use cols_only to restrict the retrieval to only these columns
   # [field]                     [readr col_type]                              [explanation for col_type]
   record_id                   = readr::col_integer()                      , # record_autonumbering is enabled for the project
@@ -202,6 +207,10 @@ col_types <- readr::cols(
   sql                         = readr::col_character()                    , # field_type is sql
   form_1_complete             = readr::col_integer()                      , # indicates completion status of form/instrument
 )
+identical(col_types_1, col_types_2)
 
-d <- REDCapR::redcap_read_oneshot(uri, token, col_types = col_types)$data
-readr::problems(d)
+d1 <- REDCapR::redcap_read_oneshot(uri, token, col_types = eval(str2expression(sandwich)))$data
+readr::problems(d1)
+
+d2 <- REDCapR::redcap_read_oneshot(uri, token, col_types = col_types_2)$data
+readr::problems(d2)
