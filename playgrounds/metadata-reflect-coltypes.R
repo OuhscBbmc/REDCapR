@@ -10,6 +10,9 @@ token <- "8F5313CAA266789F560D79EFCEE2E2F1" # 2634 - Validation Types
 
 d_var  <- REDCapR::redcap_variables(    uri, token, verbose = FALSE)$data
 d_meta <- REDCapR::redcap_metadata_read(uri, token, verbose = FALSE)$data
+d_inst <- REDCapR::redcap_instruments(  uri, token, verbose = FALSE)$data
+
+form_complete_boxes <- paste0(d_inst$instrument_name, "_complete")
 
 d_meta <-
   d_meta |>
@@ -30,14 +33,15 @@ d_var <-
   ) |>
   dplyr::left_join(d_meta, by = "field_name_original")
 
-
-
 out <-
   d_var |>
   dplyr::select(
     field_name,
     field_type,
     vt            = text_validation_type_or_show_slider_number,
+  ) |>
+  dplyr::mutate(
+    vt = dplyr::if_else(field_name %in% form_complete_boxes, "complete", vt),
   ) |>
   dplyr::mutate(
     response =
@@ -55,6 +59,7 @@ out <-
         field_type == "sql"               ~ paste0("col_character()"                      , "||field_type is sql"),
         field_type == "text" & is.na(vt)  ~ paste0("col_character()"                      , "||field_type is text and validation isn't set"),
         field_type == "text" & vt == ""   ~ paste0("col_character()"                      , "||field_type is text and validation isn't set"),
+        is.na(field_type) & vt == "complete" ~ paste0("col_integer()"                     , "||indicates completion status of form/instrument"),
         vt == "alpha_only"                ~ paste0("col_character()"                      , "||validation is 'alpha_only'"),
         vt == "date_dmy"                  ~ paste0("col_date()"                           , "||validation is 'date_dmy'"),
         vt == "date_mdy"                  ~ paste0("col_date()"                           , "||validation is 'date_mdy'"),
@@ -121,6 +126,18 @@ header <- sprintf(
   "[explanation for col_type]"
 )
 
+out |>
+  paste(collapse = "\n") %>%
+  # I'd prefer this approach, but the `.` is causing problems with R CMD check.
+  paste0(
+    "col_types <- readr::cols(\n",
+    "  # col_types <- readr::cols_only( # Use cols_only to restrict the retrieval to only these columns\n",
+    header,
+    .,
+    "\n)\n"
+  ) |>
+  cat()
+
 col_types <- readr::cols(
   # col_types <- readr::cols_only( # Use cols_only to restrict the retrieval to only these columns
   # [field]                     [readr col_type]                              [explanation for col_type]
@@ -173,7 +190,8 @@ col_types <- readr::cols(
   true_false                  = readr::col_logical()                      , # field_type is truefalse
   slider                      = readr::col_integer()                      , # field_type is slider
   sql                         = readr::col_character()                    , # field_type is sql
-  form_1_complete             = readr::col_character()                    , # validation doesn't have an associated col_type.  Tell us in a new REDCapR issue.
+  form_1_complete             = readr::col_integer()                      , # indicates completion status of form/instrument
 )
 
 d <- REDCapR::redcap_read_oneshot(uri, token, col_types = col_types)$data
+readr::problems(d)
