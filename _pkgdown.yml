@@ -38,9 +38,10 @@ reference:
       - redcap_read
       - redcap_read_oneshot
       - redcap_read_oneshot_eav
-      - redcap_report
       - redcap_write
       - redcap_write_oneshot
+      - redcap_delete
+      - redcap_report
       - redcap_download_file_oneshot
       - redcap_upload_file_oneshot
 
@@ -50,7 +51,6 @@ reference:
     contents:
       - redcap_arm_export
       - redcap_dag_read
-      - redcap_delete
       - redcap_download_instrument
       - redcap_event_instruments
       - redcap_instruments
