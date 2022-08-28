@@ -17,9 +17,14 @@ test_that("smoke", {
 test_that("dag-default", {
   testthat::skip_on_cran()
   expected_data <-
-    structure(list(data_access_group_name = c("dag_1", "dag_2"),
+    structure(
+      list(data_access_group_name = c("dag_1", "dag_2"),
       unique_group_name = c("dag_1", "dag_2")), row.names = c(NA,
-      -2L), class = "data.frame"
+      -2L), spec = structure(list(cols = list(data_access_group_name = structure(list(), class = c("collector_character",
+      "collector")), unique_group_name = structure(list(), class = c("collector_character",
+      "collector"))), default = structure(list(), class = c("collector_guess",
+      "collector")), delim = ","), class = "col_spec"), class = c("spec_tbl_df",
+      "tbl_df", "tbl", "data.frame")
     )
   expect_message(
     actual <- redcap_dag_read(
@@ -36,9 +41,13 @@ test_that("dag-default", {
 test_that("dag-default", {
   testthat::skip_on_cran()
   expected_data <-
-    structure(list(data_access_group_name = character(0),
-      unique_group_name = character(0)), row.names = integer(0),
-      class = "data.frame"
+    structure(
+      list(data_access_group_name = character(0), unique_group_name = character(0)), row.names = integer(0), spec = structure(list(
+      cols = list(data_access_group_name = structure(list(), class = c("collector_character",
+      "collector")), unique_group_name = structure(list(), class = c("collector_character",
+      "collector"))), default = structure(list(), class = c("collector_guess",
+      "collector")), delim = ","), class = "col_spec"), class = c("spec_tbl_df",
+      "tbl_df", "tbl", "data.frame")
     )
 
   expect_message(

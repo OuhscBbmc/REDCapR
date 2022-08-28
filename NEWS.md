@@ -1,6 +1,12 @@
 Upcoming Release
 ==========================================================
 
+### Possibly Breaking Changes
+
+* `redcap_read()`, `redcap_read_oneshot()`, `redcap_dag_read()`, `redcap_log_read()` and `redcap_report()` return a tibble instead of a data.frame.  (#415)
+
+    This should affect client code only if you expect a call like `ds[, 3]` to return a vector instead of a single-column data.frame/tibble.  One solution is to upcast the tibble to a data.frame (with something like `as.data.frame()`).  We recommend using an approach that works for both data.frames and tibbles, such as `ds[[3]]` or `dplyr::pull(ds, "gender")`.
+
 ### New Features
 
 * New `redcap_log_read()` function.  Exports a project's log.  (Thanks @joundso, #383, #320)
