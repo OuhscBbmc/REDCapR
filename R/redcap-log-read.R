@@ -144,8 +144,7 @@ redcap_log_read <- function(
           file            = I(kernel$raw_text),
           locale          = locale,
           show_col_types  = FALSE
-        ) %>%
-        as.data.frame(),
+        ),
 
       # Don't print the warning in the try block.  Print it below,
       #   where it's under the control of the caller.

@@ -177,8 +177,7 @@ redcap_report <- function(
           col_types       = col_types,
           guess_max       = guess_max,
           show_col_types  = FALSE
-        ) %>%
-        as.data.frame(),
+        ),
 
       # Don't print the warning in the try block.  Print it below,
       #   where it's under the control of the caller.

@@ -292,8 +292,7 @@ redcap_read_oneshot <- function(
           guess_max       = guess_max,
           locale          = locale,
           show_col_types  = FALSE
-        ) %>%
-        as.data.frame(),
+        ),
 
       # Don't print the warning in the try block.  Print it below,
       #   where it's under the control of the caller.
