@@ -65,7 +65,8 @@ out <-
         vt == "postalcode_germany"        ~ paste0("col_character()"                      , "||validation is 'postalcode_germany'"),
         vt == "ssn"                       ~ paste0("col_character()"                      , "||validation is 'ssn'"),
         vt == "time"                      ~ paste0("col_time(\"%H:%M\")"                  , "||validation is 'time'"),
-        vt == "time_mm_ss"                ~ paste0("col_time(\"%H:%M:%S\")"               , "||validation is 'time_mm_ss'"),
+        vt == "time_hh_mm_ss"             ~ paste0("col_time(\"%H:%M:%S\")"               , "||validation is 'time_hh_mm_ss'"),
+        vt == "time_mm_ss"                ~ paste0("col_time(\"%M:%S\")"                  , "||validation is 'time_mm_ss'"),
         vt == "vmrn"                      ~ paste0("col_character()"                      , "||validation is 'vmrn'"),
         vt == "zipcode"                   ~ paste0("col_character()"                      , "||validation is 'zipcode'"),
         TRUE                              ~ paste0("col_character()"                      , "||validation doesn't have an associated col_type.  Tell us in a new REDCapR issue. "),
@@ -110,9 +111,8 @@ out |>
   ) |>
   cat()
   # View()
-
-# col_types <- readr::cols(
-  col_types <- readr::cols_only( # Use cols_only to restrict the retrieval to only these columns
+col_types <- readr::cols(
+  # col_types <- readr::cols_only( # Use cols_only to restrict the retrieval to only these columns
   # [field]                     [readr col_type]                              [explanation for col_type]
   record_id                   = readr::col_character()                    , # field_type is text and validation isn't set
   alpha_only                  = readr::col_character()                    , # validation is 'alpha_only'
@@ -146,8 +146,9 @@ out |>
   postalcode_french           = readr::col_character()                    , # validation is 'postalcode_french'
   postalcode_germany          = readr::col_character()                    , # validation is 'postalcode_germany'
   ssn                         = readr::col_character()                    , # validation is 'ssn'
-  time                        = readr::col_time("%H:%M")                  , # validation is 'time'
-  time_mm_ss                  = readr::col_time("%H:%M:%S")               , # validation is 'time_mm_ss'
+  time_hh_mm                  = readr::col_time("%H:%M")                  , # validation is 'time'
+  time_hh_mm_ss               = readr::col_time("%H:%M:%S")               , # validation is 'time_hh_mm_ss'
+  time_mm_ss                  = readr::col_time("%M:%S")                  , # validation is 'time_mm_ss'
   vmrn                        = readr::col_character()                    , # validation is 'vmrn'
   zipcode                     = readr::col_character()                    , # validation is 'zipcode'
   text                        = readr::col_character()                    , # field_type is text and validation isn't set
