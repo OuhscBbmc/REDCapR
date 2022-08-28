@@ -8,10 +8,32 @@ token <- "F187271FC6FD72C3BFCE37990A6BF6A7" # 1400 - Repeating Instruments # 753
 token <- "221E86DABFEEA233067C6889991B7FBB" # 1425 - Potentially problematic dictionary
 token <- "8F5313CAA266789F560D79EFCEE2E2F1" # 2634 - Validation Types
 
-d_meta <- REDCapR::redcap_metadata_read(uri, token)$data
+d_var  <- REDCapR::redcap_variables(    uri, token, verbose = FALSE)$data
+d_meta <- REDCapR::redcap_metadata_read(uri, token, verbose = FALSE)$data
+
+d_meta <-
+  d_meta |>
+  dplyr::select(
+    field_name_original  = field_name,
+    field_type,
+    text_validation_type_or_show_slider_number,
+  )
+
+# setdiff(d_meta$field_name_original, d_var$original_field_name)
+# [1] "signature"   "file_upload" "descriptive"
+
+d_var <-
+  d_var |>
+  dplyr::select(
+    field_name = export_field_name,
+    field_name_original  = original_field_name
+  ) |>
+  dplyr::left_join(d_meta, by = "field_name_original")
+
+
 
 out <-
-  d_meta |>
+  d_var |>
   dplyr::select(
     field_name,
     field_type,
@@ -99,18 +121,6 @@ header <- sprintf(
   "[explanation for col_type]"
 )
 
-out |>
-  paste(collapse = "\n") %>%
-  # I'd prefer this approach, but the `.` is causing problems with R CMD check.
-  paste0(
-    "col_types <- readr::cols(\n",
-    "  # col_types <- readr::cols_only( # Use cols_only to restrict the retrieval to only these columns\n",
-    header,
-    .,
-    "\n)\n"
-  ) |>
-  cat()
-  # View()
 col_types <- readr::cols(
   # col_types <- readr::cols_only( # Use cols_only to restrict the retrieval to only these columns
   # [field]                     [readr col_type]                              [explanation for col_type]
@@ -156,14 +166,14 @@ col_types <- readr::cols(
   calculated                  = readr::col_character()                    , # field_type is calc
   dropdown                    = readr::col_integer()                      , # field_type is dropdown
   radio                       = readr::col_integer()                      , # field_type is radio
-  # checkbox                    = readr::col_logical()                      , # field_type is checkbox
+  checkbox___0                = readr::col_logical()                      , # field_type is checkbox
+  checkbox___1                = readr::col_logical()                      , # field_type is checkbox
+  checkbox___2                = readr::col_logical()                      , # field_type is checkbox
   yes_no                      = readr::col_logical()                      , # field_type is yesno
   true_false                  = readr::col_logical()                      , # field_type is truefalse
-  signature                   = readr::col_character()                    , # field_type is file
-  file_upload                 = readr::col_character()                    , # field_type is file
   slider                      = readr::col_integer()                      , # field_type is slider
-  # descriptive                 = readr::col_character()                    , # field_type is descriptive
   sql                         = readr::col_character()                    , # field_type is sql
+  form_1_complete             = readr::col_character()                    , # validation doesn't have an associated col_type.  Tell us in a new REDCapR issue.
 )
 
 d <- REDCapR::redcap_read_oneshot(uri, token, col_types = col_types)$data
