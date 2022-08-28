@@ -1,3 +1,4 @@
+rm(list = ls(all.names = TRUE))
 import::from("magrittr", "%>%")
 
 uri   <- "https://bbmc.ouhsc.edu/redcap/api/"
@@ -8,11 +9,15 @@ token <- "F187271FC6FD72C3BFCE37990A6BF6A7" # 1400 - Repeating Instruments # 753
 token <- "221E86DABFEEA233067C6889991B7FBB" # 1425 - Potentially problematic dictionary
 token <- "8F5313CAA266789F560D79EFCEE2E2F1" # 2634 - Validation Types
 
-d_var  <- REDCapR::redcap_variables(    uri, token, verbose = FALSE)$data
-d_meta <- REDCapR::redcap_metadata_read(uri, token, verbose = FALSE)$data
-d_inst <- REDCapR::redcap_instruments(  uri, token, verbose = FALSE)$data
+# Retrieve the info necessary to infer the likely data types
+d_var  <- REDCapR::redcap_variables(        uri, token, verbose = FALSE)$data
+d_meta <- REDCapR::redcap_metadata_read(    uri, token, verbose = FALSE)$data
+d_inst <- REDCapR::redcap_instruments(      uri, token, verbose = FALSE)$data
+d_proj <- REDCapR::redcap_project_info_read(uri, token, verbose = FALSE)$data
 
-form_complete_boxes <- paste0(d_inst$instrument_name, "_complete")
+.record_field        <- d_var$original_field_name[1]
+.autonumber          <- d_proj$record_autonumbering_enabled[1]
+.form_complete_boxes <- paste0(d_inst$instrument_name, "_complete")
 
 d_meta <-
   d_meta |>
@@ -41,11 +46,13 @@ out <-
     vt            = text_validation_type_or_show_slider_number,
   ) |>
   dplyr::mutate(
-    vt = dplyr::if_else(field_name %in% form_complete_boxes, "complete", vt),
+    vt          = dplyr::if_else(.data$field_name %in% .form_complete_boxes, "complete", vt),
+    autonumber  = (.autonumber & (.data$field_name == .record_field)),
   ) |>
   dplyr::mutate(
     response =
       dplyr::case_when(
+        autonumber                        ~ paste0("col_integer()"                        , "||record_autonumbering is enabled for the project"),
         field_type == "truefalse"         ~ paste0("col_logical()"                        , "||field_type is truefalse"),
         field_type == "yesno"             ~ paste0("col_logical()"                        , "||field_type is yesno"),
         field_type == "checkbox"          ~ paste0("col_logical()"                        , "||field_type is checkbox"),
@@ -141,7 +148,7 @@ out |>
 col_types <- readr::cols(
   # col_types <- readr::cols_only( # Use cols_only to restrict the retrieval to only these columns
   # [field]                     [readr col_type]                              [explanation for col_type]
-  record_id                   = readr::col_character()                    , # field_type is text and validation isn't set
+  record_id                   = readr::col_integer()                      , # record_autonumbering is enabled for the project
   alpha_only                  = readr::col_character()                    , # validation is 'alpha_only'
   date_dmy                    = readr::col_date()                         , # validation is 'date_dmy'
   date_mdy                    = readr::col_date()                         , # validation is 'date_mdy'
