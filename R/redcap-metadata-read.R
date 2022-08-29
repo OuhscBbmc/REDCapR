@@ -25,8 +25,6 @@
 #' be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the
 #' `httr` package.  See the details in [redcap_read_oneshot()]. Optional.
-#' @param field_label_es A boolean value indicating if separation between `English`
-#' and `Spanish` is needed
 #' @return Currently, a list is returned with the following elements:
 #'
 #' * `data`: An R [base::data.frame()] of the desired records and columns.
@@ -81,8 +79,7 @@ redcap_metadata_read <- function(
     fields            = NULL,
     fields_collapsed  = "",
     verbose           = TRUE,
-    config_options    = NULL,
-    field_label_es    = TRUE
+    config_options    = NULL
 
 ) {
 
@@ -123,11 +120,6 @@ redcap_metadata_read <- function(
           dplyr::mutate_all(
             ~dplyr::na_if(.x, "")
           )
-
-        if(field_label_es) {
-          ds <- ds %>%
-            clean_field_label(l = c("en"))
-        }
       },
       # Don't print the warning in the try block.  Print it below,
       #   where it's under the control of the caller.
