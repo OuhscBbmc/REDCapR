@@ -1,10 +1,12 @@
 #' @author   Amanda Lin Li
 
-#' @description Removes different unwanted html tags from field labels.
+#' @description Removes the unwanted html tags from field labels,
+#'  if there is any.
 #'
 #' @param s strings which may contain html tags
-#'
+
 #' @return  strings with html tags (if any) removed
+#'
 strip_html <- function(s) {
   tryCatch(
     {

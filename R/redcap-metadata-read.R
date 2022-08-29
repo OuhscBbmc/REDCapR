@@ -80,7 +80,9 @@ redcap_metadata_read <- function(
     fields            = NULL,
     fields_collapsed  = "",
     verbose           = TRUE,
-    config_options    = NULL
+    config_options    = NULL,
+    field_label_es    = TRUE
+
 ) {
 
   checkmate::assert_character(redcap_uri  , any.missing=FALSE, len=1, pattern="^.{1,}$")
@@ -120,6 +122,11 @@ redcap_metadata_read <- function(
           dplyr::mutate_all(
             ~dplyr::na_if(.x, "")
           )
+
+        if(field_label_es) {
+          ds <- ds %>%
+            clean_field_label(l = c("en"))
+        }
       },
       # Don't print the warning in the try block.  Print it below,
       #   where it's under the control of the caller.
