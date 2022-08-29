@@ -25,7 +25,8 @@
 #' be visible somewhere public. Optional.
 #' @param config_options  A list of options to pass to `POST` method in the
 #' `httr` package.  See the details in [redcap_read_oneshot()]. Optional.
-#'
+#' @param field_label_es A boolean value indicating if separation between `English`
+#' and `Spanish` is needed
 #' @return Currently, a list is returned with the following elements:
 #'
 #' * `data`: An R [base::data.frame()] of the desired records and columns.
