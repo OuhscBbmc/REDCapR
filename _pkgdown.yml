@@ -58,6 +58,7 @@ reference:
       - redcap_metadata_read
       - redcap_metadata_write
       - redcap_next_free_record_name
+      - redcap_project_info_read
       - redcap_survey_link_export_oneshot
       - redcap_users_export
       - redcap_variables

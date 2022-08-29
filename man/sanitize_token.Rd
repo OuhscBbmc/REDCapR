@@ -27,7 +27,7 @@ Some institutions create their own tokens not the standard
 32-character hexadecimal value.  The pattern that validates their tokens
 can be specified with the system environmental variable
 \code{REDCAP_TOKEN_PATTERN} using
-\href{base::Sys.setenv}{\code{base::Sys.setenv()}}.
+\link[base:Sys.setenv]{base::Sys.setenv}.
 
 For example, the following regex pattern captures a
 \url{base64 encoded value} with 40 characters:

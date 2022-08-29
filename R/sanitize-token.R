@@ -14,7 +14,7 @@
 #' 32-character hexadecimal value.  The pattern that validates their tokens
 #' can be specified with the system environmental variable
 #' `REDCAP_TOKEN_PATTERN` using
-#' [`base::Sys.setenv()`](base::Sys.setenv).
+#' [base::Sys.setenv].
 #'
 #' For example, the following regex pattern captures a
 #' [base64 encoded value]() with 40 characters:
