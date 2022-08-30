@@ -53,6 +53,10 @@
 #' \dontrun{
 #' uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
 #'
+#' # A simple project with a variety of types
+#' token    <- "9A81268476645C4E5F03428B8AC3AA7B" # 153 - Simple
+#' redcap_metadata_coltypes(uri, token)
+#'
 #' # This project includes every field type and validation type.
 #' #   It throws a warning that some fields use a comma for a decimal,
 #' #   while other fields use a period/dot as a decimal
@@ -227,8 +231,8 @@ redcap_metadata_coltypes <- function(
     paste(collapse = "\n") %>%
     # I'd prefer this approach, but the `.` is causing problems with R CMD check.
     paste0(
-      "col_types <- readr::cols(\n",
-      "  # col_types <- readr::cols_only( # Use cols_only to restrict the retrieval to only these columns\n",
+      "# col_types <- readr::cols_only( # Use `readr::cols_only()` to restrict the retrieval to only these columns\n",
+      "col_types <- readr::cols( # Use `readr::cols()` to include unspecified columns\n",
       header,
       .,
       "\n)\n"
@@ -253,21 +257,11 @@ redcap_metadata_coltypes <- function(
     )
   }
 
+  .col_types <- eval(str2expression(sandwich))
 
-
-  # list(
-  #   data               = ds,
-  #   success            = kernel$success,
-  #   status_code        = kernel$status_code,
-  #   outcome_message    = outcome_message,
-  #   records_collapsed  = records_collapsed,
-  #   fields_collapsed   = fields_collapsed,
-  #   forms_collapsed    = forms_collapsed,
-  #   events_collapsed   = events_collapsed,
-  #   filter_logic       = filter_logic,
-  #   datetime_range_begin   = datetime_range_begin,
-  #   datetime_range_end     = datetime_range_end,
-  #   elapsed_seconds    = kernel$elapsed_seconds,
-  #   raw_text           = kernel$raw_text
-  # )
+  list(
+    col_types          = .col_types,
+    success            = TRUE,
+    status_code        = 200
+  )
 }

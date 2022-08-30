@@ -66,6 +66,14 @@ documentation is available at https://cran.r-project.org/package=httr.
 \examples{
 \dontrun{
 uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
+
+# A simple project with a variety of types
+token    <- "9A81268476645C4E5F03428B8AC3AA7B" # 153 - Simple
+redcap_metadata_coltypes(uri, token)
+
+# This project includes every field type and validation type.
+#   It throws a warning that some fields use a comma for a decimal,
+#   while other fields use a period/dot as a decimal
 token    <- "8F5313CAA266789F560D79EFCEE2E2F1" # 2634 - Validation Types
 redcap_metadata_coltypes(uri, token)
 }
