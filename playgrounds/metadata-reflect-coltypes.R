@@ -56,8 +56,8 @@ meat <-
         field_type == "truefalse"         ~ paste0("col_logical()"                        , "~~field_type is truefalse"),
         field_type == "yesno"             ~ paste0("col_logical()"                        , "~~field_type is yesno"),
         field_type == "checkbox"          ~ paste0("col_logical()"                        , "~~field_type is checkbox"),
-        field_type == "radio"             ~ paste0("col_integer()"                        , "~~field_type is radio"),
-        field_type == "dropdown"          ~ paste0("col_integer()"                        , "~~field_type is dropdown"),
+        field_type == "radio"             ~ paste0("col_character()"                      , "~~field_type is radio"),
+        field_type == "dropdown"          ~ paste0("col_character()"                      , "~~field_type is dropdown"),
         field_type == "file"              ~ paste0("col_character()"                      , "~~field_type is file"),
         field_type == "notes"             ~ paste0("col_character()"                      , "~~field_type is note"),
         field_type == "slider"            ~ paste0("col_integer()"                        , "~~field_type is slider"),
@@ -151,7 +151,23 @@ sandwich <-
 sandwich |>
   cat()
 
-col_types_1 <- evalq(str2expression(sandwich))
+decimal_period_any <- any(d_meta$text_validation_type_or_show_slider_number %in% c("number", "number_1dp", "number_2dp", "number_3dp", "number_4dp" ))
+decimal_comma_any  <- any(d_meta$text_validation_type_or_show_slider_number %in% c("number_comma_decimal", "number_1dp_comma_decimal", "number_2dp_comma_decimal", "number_3dp_comma_decimal", "number_4dp_comma_decimal"))
+
+if (decimal_period_any && decimal_comma_any) {
+  warning(
+    "The metadata for the REDCap project has validation types ",
+    "for at least one field that specifies a comma for a decimal ",
+    "for at least one field that specifies a period for a decimal.  ",
+    "Mixing these two formats in the same proejct can cause confusion and problems.  ",
+    "Consider passing `readr::col_character()` for this field ",
+    "(to REDCapR's `col_types` parameter) and then convert the ",
+    "desired fields to R's numeric type.  ",
+    "The function `readr::parse_double()` is useful for this."
+  )
+}
+
+col_types_1 <- eval(str2expression(sandwich))
 
 col_types_2 <- readr::cols(
   # col_types <- readr::cols_only( # Use cols_only to restrict the retrieval to only these columns
@@ -196,8 +212,8 @@ col_types_2 <- readr::cols(
   text                        = readr::col_character()                    , # field_type is text and validation isn't set
   notes                       = readr::col_character()                    , # field_type is note
   calculated                  = readr::col_character()                    , # field_type is calc
-  dropdown                    = readr::col_integer()                      , # field_type is dropdown
-  radio                       = readr::col_integer()                      , # field_type is radio
+  dropdown                    = readr::col_character()                    , # field_type is dropdown
+  radio                       = readr::col_character()                    , # field_type is radio
   checkbox___0                = readr::col_logical()                      , # field_type is checkbox
   checkbox___1                = readr::col_logical()                      , # field_type is checkbox
   checkbox___2                = readr::col_logical()                      , # field_type is checkbox
@@ -211,6 +227,8 @@ identical(col_types_1, col_types_2)
 
 d1 <- REDCapR::redcap_read_oneshot(uri, token, col_types = eval(str2expression(sandwich)))$data
 readr::problems(d1)
+
+# col_types <- REDCapR::redcap_metadata_suggest(uri, token, col_types = col_types_2)$data
 
 d2 <- REDCapR::redcap_read_oneshot(uri, token, col_types = col_types_2)$data
 readr::problems(d2)
