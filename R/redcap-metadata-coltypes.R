@@ -88,10 +88,10 @@ redcap_metadata_coltypes <- function(
   verbose             <- verbose_prepare(verbose)
 
   # Retrieve the info necessary to infer the likely data types
-  d_var  <- REDCapR::redcap_variables(        uri, token, verbose = verbose)$data
-  d_meta <- REDCapR::redcap_metadata_read(    uri, token, verbose = verbose)$data
-  d_inst <- REDCapR::redcap_instruments(      uri, token, verbose = verbose)$data
-  d_proj <- REDCapR::redcap_project_info_read(uri, token, verbose = verbose)$data
+  d_var  <- REDCapR::redcap_variables(        redcap_uri, token, verbose = verbose)$data
+  d_meta <- REDCapR::redcap_metadata_read(    redcap_uri, token, verbose = verbose)$data
+  d_inst <- REDCapR::redcap_instruments(      redcap_uri, token, verbose = verbose)$data
+  d_proj <- REDCapR::redcap_project_info_read(redcap_uri, token, verbose = verbose)$data
 
   # Determine status of autonumbering, instrument complete status, and decimal mark
   .record_field         <- d_var$original_field_name[1]

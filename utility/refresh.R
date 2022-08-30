@@ -37,7 +37,7 @@ devtools::run_examples(); #dev.off() #This overwrites the NAMESPACE file too
 # pkgload::load_all()
 test_results_checked <- devtools::test()
 test_results_checked <- devtools::test(filter = "read-batch-simple")
-test_results_checked <- devtools::test(filter = "^log")
+test_results_checked <- devtools::test(filter = "^metadata-coltypes")
 withr::local_envvar(ONLYREADTESTS = "true")
 test_results_checked <- devtools::test(filter = "write-batch")
 
