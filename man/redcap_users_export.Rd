@@ -25,7 +25,22 @@ be visible somewhere public. Optional.}
 \code{httr} package.  See the details below.  Optional.}
 }
 \value{
-a \link[utils:packageDescription]{utils::packageDescription}.
+Currently, a list is returned with the following elements:
+\itemize{
+\item \code{data_user}: A \code{\link[tibble:tibble]{tibble::tibble()}} of all users associated with the project.
+One row represents one user.
+\item \code{data_user_form}: A \code{\link[tibble:tibble]{tibble::tibble()}} of permissions for users and forms.
+One row represents a unqiue user-by-form combination.
+\item \code{success}: A boolean value indicating if the operation was apparently
+successful.
+\item \code{status_codes}: A collection of
+\href{https://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status codes},
+separated by semicolons.  There is one code for each batch attempted.
+\item \code{outcome_messages}: A collection of human readable strings indicating the
+operations' semicolons.  There is one code for each batch attempted.  In an
+unsuccessful operation, it should contain diagnostic information.
+\item \code{elapsed_seconds}: The duration of the function.
+}
 }
 \description{
 List users authorized for a project.
