@@ -20,6 +20,10 @@ d_proj <- REDCapR::redcap_project_info_read(uri, token, verbose = FALSE)$data
 .autonumber          <- d_proj$record_autonumbering_enabled[1]
 .form_complete_boxes <- paste0(d_inst$instrument_name, "_complete")
 
+locale_current  <- readr::locale()
+decimal_period  <- (locale_current$decimal_mark == ".")
+decimal_comma   <- (locale_current$decimal_mark == ",")
+
 # Prepare metadata to be joined
 d_meta <-
   d_meta |>
@@ -81,16 +85,26 @@ meat <-
         vt == "integer"                   ~ paste0("col_integer()"                        , "~~validation is 'integer'"),
         vt == "mrn_10d"                   ~ paste0("col_character()"                      , "~~validation is 'mrn_10d'"),
         vt == "mrn_generic"               ~ paste0("col_character()"                      , "~~validation is 'mrn_generic'"),
-        vt == "number"                    ~ paste0("col_double()"                         , "~~validation is 'number'"),
-        vt == "number_1dp"                ~ paste0("col_double()"                         , "~~validation is 'number_1dp'"),
-        vt == "number_1dp_comma_decimal"  ~ paste0("col_double()"                         , "~~validation is 'number_1dp_comma_decimal'"),
-        vt == "number_2dp"                ~ paste0("col_double()"                         , "~~validation is 'number_2dp'"),
-        vt == "number_2dp_comma_decimal"  ~ paste0("col_double()"                         , "~~validation is 'number_2dp_comma_decimal'"),
-        vt == "number_3dp"                ~ paste0("col_double()"                         , "~~validation is 'number_3dp'"),
-        vt == "number_3dp_comma_decimal"  ~ paste0("col_double()"                         , "~~validation is 'number_3dp_comma_decimal'"),
-        vt == "number_4dp"                ~ paste0("col_double()"                         , "~~validation is 'number_4dp'"),
-        vt == "number_4dp_comma_decimal"  ~ paste0("col_double()"                         , "~~validation is 'number_4dp_comma_decimal'"),
-        vt == "number_comma_decimal"      ~ paste0("col_double()"                         , "~~validation is 'number_comma_decimal'"),
+        vt == "number"                    & decimal_period  ~ paste0("col_double()"         , "~~validation is 'number'"),
+        vt == "number_1dp"                & decimal_period  ~ paste0("col_double()"         , "~~validation is 'number_1dp'"),
+        vt == "number_2dp"                & decimal_period  ~ paste0("col_double()"         , "~~validation is 'number_2dp'"),
+        vt == "number_3dp"                & decimal_period  ~ paste0("col_double()"         , "~~validation is 'number_3dp'"),
+        vt == "number_4dp"                & decimal_period  ~ paste0("col_double()"         , "~~validation is 'number_4dp'"),
+        vt == "number"                    & decimal_comma   ~ paste0("col_double()"         , "~~locale's decimal mark is a comma, yet validation is 'number'"),
+        vt == "number_1dp"                & decimal_comma   ~ paste0("col_double()"         , "~~locale's decimal mark is a comma, yet validation is 'number_1dp'"),
+        vt == "number_2dp"                & decimal_comma   ~ paste0("col_double()"         , "~~locale's decimal mark is a comma, yet validation is 'number_2dp'"),
+        vt == "number_3dp"                & decimal_comma   ~ paste0("col_double()"         , "~~locale's decimal mark is a comma, yet validation is 'number_3dp'"),
+        vt == "number_4dp"                & decimal_comma   ~ paste0("col_double()"         , "~~locale's decimal mark is a comma, yet validation is 'number_4dp'"),
+        vt == "number_comma_decimal"      & decimal_comma   ~ paste0("col_double()"         , "~~validation is 'number_comma_decimal'"),
+        vt == "number_1dp_comma_decimal"  & decimal_comma   ~ paste0("col_double()"         , "~~validation is 'number_1dp_comma_decimal'"),
+        vt == "number_2dp_comma_decimal"  & decimal_comma   ~ paste0("col_double()"         , "~~validation is 'number_2dp_comma_decimal'"),
+        vt == "number_3dp_comma_decimal"  & decimal_comma   ~ paste0("col_double()"         , "~~validation is 'number_3dp_comma_decimal'"),
+        vt == "number_4dp_comma_decimal"  & decimal_comma   ~ paste0("col_double()"         , "~~validation is 'number_4dp_comma_decimal'"),
+        vt == "number_comma_decimal"      & decimal_period  ~ paste0("col_character()"      , "~~locale's decimal mark is a period, yet validation is 'number_comma_decimal'"),
+        vt == "number_1dp_comma_decimal"  & decimal_period  ~ paste0("col_character()"      , "~~locale's decimal mark is a period, yet validation is 'number_1dp_comma_decimal'"),
+        vt == "number_2dp_comma_decimal"  & decimal_period  ~ paste0("col_character()"      , "~~locale's decimal mark is a period, yet validation is 'number_2dp_comma_decimal'"),
+        vt == "number_3dp_comma_decimal"  & decimal_period  ~ paste0("col_character()"      , "~~locale's decimal mark is a period, yet validation is 'number_3dp_comma_decimal'"),
+        vt == "number_4dp_comma_decimal"  & decimal_period  ~ paste0("col_character()"      , "~~locale's decimal mark is a period, yet validation is 'number_4dp_comma_decimal'"),
         vt == "phone"                     ~ paste0("col_character()"                      , "~~validation is 'phone'"),
         vt == "phone_australia"           ~ paste0("col_character()"                      , "~~validation is 'phone_australia'"),
         vt == "postalcode_australia"      ~ paste0("col_character()"                      , "~~validation is 'postalcode_australia'"),
@@ -189,14 +203,14 @@ col_types_2 <- readr::cols(
   mrn_generic                 = readr::col_character()                    , # validation is 'mrn_generic'
   number                      = readr::col_double()                       , # validation is 'number'
   number_1dp                  = readr::col_double()                       , # validation is 'number_1dp'
-  number_1dp_comma_decimal    = readr::col_double()                       , # validation is 'number_1dp_comma_decimal'
   number_2dp                  = readr::col_double()                       , # validation is 'number_2dp'
-  number_2dp_comma_decimal    = readr::col_double()                       , # validation is 'number_2dp_comma_decimal'
   number_3dp                  = readr::col_double()                       , # validation is 'number_3dp'
-  number_3dp_comma_decimal    = readr::col_double()                       , # validation is 'number_3dp_comma_decimal'
   number_4dp                  = readr::col_double()                       , # validation is 'number_4dp'
-  number_4dp_comma_decimal    = readr::col_double()                       , # validation is 'number_4dp_comma_decimal'
-  number_comma_decimal        = readr::col_double()                       , # validation is 'number_comma_decimal'
+  number_comma_decimal        = readr::col_character()                    , # locale's decimal mark is a period, yet validation is 'number_comma_decimal'
+  number_1dp_comma_decimal    = readr::col_character()                    , # locale's decimal mark is a period, yet validation is 'number_1dp_comma_decimal'
+  number_2dp_comma_decimal    = readr::col_character()                    , # locale's decimal mark is a period, yet validation is 'number_2dp_comma_decimal'
+  number_3dp_comma_decimal    = readr::col_character()                    , # locale's decimal mark is a period, yet validation is 'number_3dp_comma_decimal'
+  number_4dp_comma_decimal    = readr::col_character()                    , # locale's decimal mark is a period, yet validation is 'number_4dp_comma_decimal'
   phone                       = readr::col_character()                    , # validation is 'phone'
   phone_australia             = readr::col_character()                    , # validation is 'phone_australia'
   postalcode_australia        = readr::col_character()                    , # validation is 'postalcode_australia'
