@@ -37,6 +37,8 @@ test_that("default", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 
 test_that("col_types", {
@@ -70,6 +72,8 @@ test_that("col_types", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("specify-records", {
   testthat::skip_on_cran()
@@ -93,6 +97,8 @@ test_that("specify-records", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("specify-records-zero-length", {
   testthat::skip_on_cran()
@@ -116,6 +122,8 @@ test_that("specify-records-zero-length", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("specify-fields", {
   testthat::skip_on_cran()
@@ -139,6 +147,8 @@ test_that("specify-fields", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("specify-fields-zero-length", {
   testthat::skip_on_cran()
@@ -162,6 +172,8 @@ test_that("specify-fields-zero-length", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("specify-records-and-fields-zero-length", {
   testthat::skip_on_cran()
@@ -184,6 +196,8 @@ test_that("specify-records-and-fields-zero-length", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("specify-forms", {
   testthat::skip_on_cran()
@@ -207,6 +221,8 @@ test_that("specify-forms", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("force-character-type", {
   testthat::skip_on_cran()
@@ -229,6 +245,8 @@ test_that("force-character-type", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("raw", {
   testthat::skip_on_cran()
@@ -251,6 +269,8 @@ test_that("raw", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("raw-and-dag", {
   testthat::skip_on_cran()
@@ -273,6 +293,8 @@ test_that("raw-and-dag", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("label-and-dag", {
   testthat::skip_on_cran()
@@ -295,6 +317,8 @@ test_that("label-and-dag", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("label", {
   testthat::skip_on_cran()
@@ -317,6 +341,8 @@ test_that("label", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 # This test is removed because the vroom version adds digits to make the columns unique
 # test_that("label-header", {
@@ -366,6 +392,8 @@ test_that("export_checkbox_label", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("filter-numeric", {
   testthat::skip_on_cran()
@@ -390,6 +418,8 @@ test_that("filter-numeric", {
   expect_equal(returned_object$filter_logic, filter)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("filter-character", {
   testthat::skip_on_cran()
@@ -413,6 +443,8 @@ test_that("filter-character", {
   expect_equal(returned_object$filter_logic, filter)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("blank-for-gray-status-true", {
   testthat::skip_on_cran()
@@ -440,6 +472,8 @@ test_that("blank-for-gray-status-true", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("blank-for-gray-status-false", {
   testthat::skip_on_cran()
@@ -467,6 +501,8 @@ test_that("blank-for-gray-status-false", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 
 test_that("date-range", {
@@ -496,6 +532,8 @@ test_that("date-range", {
   expect_equal(returned_object$filter_logic, "")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 
 test_that("guess_max-Inf", {
@@ -522,6 +560,8 @@ test_that("guess_max-Inf", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 
 test_that("bad token -Error", {
