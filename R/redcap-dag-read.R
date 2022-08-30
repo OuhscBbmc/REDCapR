@@ -1,7 +1,7 @@
 #' @title Read data access groups from a REDCap project
 #'
 #' @description This function reads all available data access groups from
-#'   REDCap an returns them as a [base::data.frame()].
+#'   REDCap an returns them as a [tibble::tibble()].
 #'
 #' @param redcap_uri The
 #' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
@@ -23,7 +23,7 @@
 #' `httr` package.
 #'
 #' @return Currently, a list is returned with the following elements:
-#' * `data`: An R [base::data.frame()] of all data access groups of the project.
+#' * `data`: A [tibble::tibble()] of all data access groups of the project.
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
 #' * `status_codes`: A collection of
@@ -117,7 +117,7 @@ redcap_dag_read <- function(
       # Override the 'success' determination from the http status code.
       #   and return an empty data.frame.
       kernel$success   <- FALSE
-      ds               <- data.frame()
+      ds               <- tibble::tibble()
       outcome_message  <- sprintf(
         "The REDCap read failed.  The http status code was %i.  The 'raw_text' returned was '%s'.",
         kernel$status_code,
@@ -126,7 +126,7 @@ redcap_dag_read <- function(
       # nocov end
     }
   } else { # kernel fails
-    ds              <- data.frame() #Return an empty data.frame
+    ds              <- tibble::tibble() # Return an empty data.frame
     outcome_message <- if (any(grepl(kernel$regex_empty, kernel$raw_text))) {
       "The REDCapR read/export operation was not successful.  The returned dataset was empty."  # nocov
     } else {

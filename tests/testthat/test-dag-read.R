@@ -36,6 +36,7 @@ test_that("dag-default", {
   expect_true( actual$success)
   expect_equal(actual$status_code, 200L)
   expect_equal(actual$data, expected_data)
+  expect_s3_class(actual$data, "tbl")
 })
 
 test_that("dag-default", {
@@ -60,6 +61,7 @@ test_that("dag-default", {
   expect_true( actual$success)
   expect_equal(actual$status_code, 200L)
   expect_equal(actual$data, expected_data)
+  expect_s3_class(actual$data, "tbl")
 })
 
 rm(credential_1)

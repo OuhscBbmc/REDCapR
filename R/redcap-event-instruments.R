@@ -22,7 +22,7 @@
 #' `httr` package.  See the details below. Optional.
 #'
 #' @return Currently, a list is returned with the following elements,
-#' * `data`: An R [base::data.frame()] where each row represents one column
+#' * `data`: A [tibble::tibble()] where each row represents one column
 #' in the REDCap dataset.
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
@@ -119,7 +119,7 @@ redcap_event_instruments <- function(
     } else {
       # nocov start
       kernel$success  <- FALSE # Override the 'success' http status code.
-      ds              <- data.frame() #Return an empty data.frame
+      ds              <- tibble::tibble() # Return an empty data.frame
 
       outcome_message <- sprintf(
         "The REDCap variable retrieval failed.  The http status code was %i.  The 'raw_text' returned was '%s'.",
@@ -129,7 +129,7 @@ redcap_event_instruments <- function(
       # nocov end
     }
   } else {
-    ds              <- data.frame() #Return an empty data.frame
+    ds              <- tibble::tibble() # Return an empty data.frame
     outcome_message <- if (any(grepl(kernel$regex_empty, kernel$raw_text))) {
       "The REDCapR read/export operation was not successful.  The returned dataset (of instrument-events) was empty."
     } else {

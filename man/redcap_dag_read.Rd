@@ -41,7 +41,7 @@ be visible somewhere public. Optional.}
 \value{
 Currently, a list is returned with the following elements:
 \itemize{
-\item \code{data}: An R \code{\link[base:data.frame]{base::data.frame()}} of all data access groups of the project.
+\item \code{data}: A \code{\link[tibble:tibble]{tibble::tibble()}} of all data access groups of the project.
 \item \code{success}: A boolean value indicating if the operation was apparently
 successful.
 \item \code{status_codes}: A collection of
@@ -55,7 +55,7 @@ unsuccessful operation, it should contain diagnostic information.
 }
 \description{
 This function reads all available data access groups from
-REDCap an returns them as a \code{\link[base:data.frame]{base::data.frame()}}.
+REDCap an returns them as a \code{\link[tibble:tibble]{tibble::tibble()}}.
 }
 \examples{
 \dontrun{

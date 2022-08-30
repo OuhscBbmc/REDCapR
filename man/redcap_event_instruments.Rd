@@ -35,7 +35,7 @@ be visible somewhere public. Optional.}
 \value{
 Currently, a list is returned with the following elements,
 \itemize{
-\item \code{data}: An R \code{\link[base:data.frame]{base::data.frame()}} where each row represents one column
+\item \code{data}: A \code{\link[tibble:tibble]{tibble::tibble()}} where each row represents one column
 in the REDCap dataset.
 \item \code{success}: A boolean value indicating if the operation was apparently
 successful.
