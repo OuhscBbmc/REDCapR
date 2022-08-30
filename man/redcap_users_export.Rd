@@ -30,7 +30,7 @@ Currently, a list is returned with the following elements:
 \item \code{data_user}: A \code{\link[tibble:tibble]{tibble::tibble()}} of all users associated with the project.
 One row represents one user.
 \item \code{data_user_form}: A \code{\link[tibble:tibble]{tibble::tibble()}} of permissions for users and forms.
-One row represents a unqiue user-by-form combination.
+One row represents a unique user-by-form combination.
 \item \code{success}: A boolean value indicating if the operation was apparently
 successful.
 \item \code{status_codes}: A collection of

@@ -20,7 +20,7 @@
 #' * `data_user`: A [tibble::tibble()] of all users associated with the project.
 #' One row represents one user.
 #' * `data_user_form`: A [tibble::tibble()] of permissions for users and forms.
-#' One row represents a unqiue user-by-form combination.
+#' One row represents a unique user-by-form combination.
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
 #' * `status_codes`: A collection of
