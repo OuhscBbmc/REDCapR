@@ -13,7 +13,7 @@
 #' @param perl Indicates if perl-compatible regexps should be used.
 #'   Default is `TRUE`. Optional.
 #'
-#' @return Currently, a [base::data.frame()] is returned a row for each match,
+#' @return Currently, a [tibble::tibble()] is returned a row for each match,
 #' and a column for each *named* group within a match.  For the
 #' `retrieve_checkbox_choices()` function, the columns will be.
 #' * `id`: The numeric value assigned to each choice (in the data dictionary).
@@ -22,12 +22,16 @@
 #' @details
 #' The [regex_named_captures()] function is general, and not specific to
 #' REDCap; it accepts any arbitrary regular expression.
-#' It returns a [base::data.frame()] with as many columns as named matches.
+#' It returns a [tibble::tibble()] with as many columns as named matches.
 #'
 #' The [checkbox_choices()] function is specialized, and accommodates the
 #' "select choices" for a *single* REDCap checkbox group (where multiple boxes
-#' can be selected).  It returns a [base::data.frame()] with two columns, one
+#' can be selected).  It returns a [tibble::tibble()] with two columns, one
 #' for the numeric id and one for the text label.
+#'
+#' The parse will probably fail if a label contains a pipe (*i.e.*, `|`),
+#' since that the delimiter REDCap uses to separate choices
+#' presented to the user.
 #'
 #' @author Will Beasley
 #' @references See the official documentation for permissible characters in a
@@ -59,7 +63,7 @@
 #' token       <- "9A81268476645C4E5F03428B8AC3AA7B"
 #'
 #' ds_metadata <- redcap_metadata_read(redcap_uri=uri, token=token)$data
-#' choices_2   <- ds_metadata[ds_metadata$field_name=="race", "select_choices_or_calculations"]
+#' choices_2   <- ds_metadata[ds_metadata$field_name=="race", ]$select_choices_or_calculations
 #'
 #' REDCapR::regex_named_captures(pattern=pattern_boxes, text=choices_2)
 #' }
@@ -70,15 +74,14 @@
 #' REDCapR::regex_named_captures(pattern=pattern_boxes, text=choices_3)
 
 #' @export
-regex_named_captures <- function(pattern, text, perl=TRUE) {
-
+regex_named_captures <- function(pattern, text, perl = TRUE) {
   checkmate::assert_character(pattern, any.missing=FALSE, min.chars=0L, len=1)
   checkmate::assert_character(text   , any.missing=FALSE, min.chars=0L, len=1)
   checkmate::assert_logical(  perl   , any.missing=FALSE)
 
   match <- gregexpr(pattern, text, perl = perl)[[1]]
   capture_names <- attr(match, "capture.names")
-  d <- as.data.frame(matrix(
+  d <- base::data.frame(matrix(
     data  = NA_character_,
     nrow  = length(attr(match, "match.length")),
     ncol  = length(capture_names)
@@ -95,7 +98,7 @@ regex_named_captures <- function(pattern, text, perl=TRUE) {
       attr(match, "capture.length")[, column_name]
     )
   }
-  d
+  tibble::as_tibble(d)
 }
 
 #' @rdname metadata_utilities

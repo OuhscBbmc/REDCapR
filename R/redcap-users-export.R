@@ -16,7 +16,20 @@
 #' @param config_options  A list of options to pass to `POST` method in the
 #' `httr` package.  See the details below.  Optional.
 #'
-#' @return a [utils::packageDescription].
+#' @return Currently, a list is returned with the following elements:
+#' * `data_user`: A [tibble::tibble()] of all users associated with the project.
+#' One row represents one user.
+#' * `data_user_form`: A [tibble::tibble()] of permissions for users and forms.
+#' One row represents a unique user-by-form combination.
+#' * `success`: A boolean value indicating if the operation was apparently
+#' successful.
+#' * `status_codes`: A collection of
+#' [http status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes),
+#' separated by semicolons.  There is one code for each batch attempted.
+#' * `outcome_messages`: A collection of human readable strings indicating the
+#' operations' semicolons.  There is one code for each batch attempted.  In an
+#' unsuccessful operation, it should contain diagnostic information.
+#' * `elapsed_seconds`: The duration of the function.
 #'
 #' @note
 #' **Documentation in REDCap 8.4.0**
@@ -31,11 +44,13 @@
 #' ```
 #'
 #' @examples
+#' \dontrun{
 #' uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token    <- "06DEFB601F9B46847DAA9DF0CFA951B4"
 #' result   <- REDCapR::redcap_users_export(redcap_uri=uri, token=token)
 #' result$data_user
 #' result$data_user_form
+#' }
 
 #' @export
 redcap_users_export <- function(
@@ -159,8 +174,8 @@ redcap_users_export <- function(
     } else {
       # nocov start
       kernel$success   <- FALSE # Override the 'success' http status code.
-      ds_user          <- data.frame() # Return an empty data.frame
-      ds_user_form     <- data.frame() # Return an empty data.frame
+      ds_user          <- tibble::tibble() # Return an empty data.frame
+      ds_user_form     <- tibble::tibble() # Return an empty data.frame
       outcome_message  <- sprintf(
         "The REDCap user export failed.  The http status code was %i.  The 'raw_text' returned was '%s'.",
         kernel$status_code,
@@ -169,8 +184,8 @@ redcap_users_export <- function(
       # nocov end
     }
   } else {
-    ds_user          <- data.frame() # Return an empty data.frame
-    ds_user_form     <- data.frame() # Return an empty data.frame
+    ds_user          <- tibble::tibble() # Return an empty data.frame
+    ds_user_form     <- tibble::tibble() # Return an empty data.frame
     outcome_message  <- sprintf(
       "The REDCap user export failed.  The error message was:\n%s",
       kernel$raw_text

@@ -32,7 +32,7 @@
 #' @author Will Beasley
 #'
 #' @seealso
-#' See [redcap_read()] for a function that uses `create_batch_gloassary`.
+#' See [redcap_read()] for a function that uses `create_batch_glossary`.
 #'
 #' @examples
 #' REDCapR::create_batch_glossary(100, 50)

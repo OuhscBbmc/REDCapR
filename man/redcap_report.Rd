@@ -66,7 +66,7 @@ be visible somewhere public. Optional.}
 \value{
 Currently, a list is returned with the following elements:
 \itemize{
-\item \code{data}: An R \code{\link[base:data.frame]{base::data.frame()}} of the desired records and columns.
+\item \code{data}: A \code{\link[tibble:tibble]{tibble::tibble()}} of the desired records and columns.
 \item \code{success}: A boolean value indicating if the operation was apparently
 successful.
 \item \code{status_code}: The

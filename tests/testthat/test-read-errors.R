@@ -41,12 +41,13 @@ test_that("One Shot: Bad Uri -wrong address", {
       )
   )
 
-  expect_equal(returned_object$data, expected=data.frame(), label="An empty data.frame should be returned.")
+  expect_equal(returned_object$data, expected=tibble::tibble(), label="An empty data.frame should be returned.", ignore_attr = TRUE)
   expect_equal(returned_object$status_code, expected=404L)
   expect_equal(returned_object$raw_text, expected=expected_message)
   expect_equal(returned_object$records_collapsed, "")
   expect_equal(returned_object$fields_collapsed, "")
   expect_false(returned_object$success)
+  expect_s3_class(returned_object$data, "tbl")
 })
 
 test_that("Batch: Bad Uri -Not HTTPS", {
@@ -84,12 +85,13 @@ test_that("Batch: Bad Uri -wrong address", {
     "The requested URL was not found on this server."
   )
 
-  expect_equal(returned_object$data, expected=data.frame(), label="An empty data.frame should be returned.")
+  expect_equal(returned_object$data, expected=data.frame(), label="An empty data.frame should be returned.", ignore_attr = TRUE)
   expect_equal(returned_object$status_code, expected=404L)
   expect_equal(returned_object$records_collapsed, "failed in initial batch call")
   expect_equal(returned_object$fields_collapsed, "failed in initial batch call")
   expect_equal(returned_object$outcome_messages, expected_message)
   expect_false(returned_object$success)
+  expect_s3_class(returned_object$data, "tbl")
 })
 
 test_that("hashed record -warn", {
