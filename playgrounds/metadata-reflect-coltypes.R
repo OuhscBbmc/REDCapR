@@ -26,7 +26,7 @@ decimal_comma   <- (locale_current$decimal_mark == ",")
 
 # Prepare metadata to be joined
 d_meta <-
-  d_meta |>
+  d_meta %>%
   dplyr::select(
     field_name_original  = field_name,
     field_type,
@@ -38,21 +38,21 @@ d_meta <-
 
 # Translate the four datasets into a single `readr:cols()` string printed to the console
 meat <-
-  d_var |>
+  d_var %>%
   dplyr::select(
     field_name = export_field_name,
     field_name_original  = original_field_name
-  ) |>
-  dplyr::left_join(d_meta, by = "field_name_original") |>
+  ) %>%
+  dplyr::left_join(d_meta, by = "field_name_original") %>%
   dplyr::select(
     field_name,
     field_type,
     vt            = text_validation_type_or_show_slider_number,
-  ) |>
+  ) %>%
   dplyr::mutate(
     vt          = dplyr::if_else(.data$field_name %in% .form_complete_boxes, "complete", vt),
     autonumber  = (.autonumber & (.data$field_name == .record_field)),
-  ) |>
+  ) %>%
   dplyr::mutate(
     response =
       dplyr::case_when(
@@ -119,7 +119,7 @@ meat <-
         vt == "zipcode"                                     ~ paste0("col_character()"                      , "~~validation is 'zipcode'"),
         TRUE                                                ~ paste0("col_character()"                      , "~~validation doesn't have an associated col_type.  Tell us in a new REDCapR issue. "),
       )
-  ) |>
+  ) %>%
   dplyr::mutate(
     # Retrieve the col_type and the explanation
     readr_col_type  = sub("^(col_.+)~~(.+)$", "\\1", .data$response),
@@ -133,9 +133,9 @@ meat <-
 
     # Pad the left side before appending the right side.
     aligned = sprintf("  %-*s = readr::%-*s, # %s", .data$padding1, .data$field_name, .data$padding2, .data$readr_col_type, .data$explanation)
-  ) |>
+  ) %>%
   # View()
-  # tibble::add_row(aligned = sprintf("  %-*s = readr::%-*s, # b/c %s", .data$padding1, .data$field_name, .data$padding2, .data$readr_col_type, .data$explanation)) |>
+  # tibble::add_row(aligned = sprintf("  %-*s = readr::%-*s, # b/c %s", .data$padding1, .data$field_name, .data$padding2, .data$readr_col_type, .data$explanation)) %>%
   dplyr::pull(.data$aligned)
 
 # Construct an explanation header that's aligned with the col_types output
@@ -151,7 +151,7 @@ header <- sprintf(
 
 # Sandwich the col_types output in between the opening+header and the closing
 sandwich <-
-  meat |>
+  meat %>%
   paste(collapse = "\n") %>%
   # I'd prefer this approach, but the `.` is causing problems with R CMD check.
   paste0(
@@ -162,7 +162,7 @@ sandwich <-
     "\n)\n"
   )
 
-sandwich |>
+sandwich %>%
   cat()
 
 decimal_period_any <- any(d_meta$text_validation_type_or_show_slider_number %in% c("number", "number_1dp", "number_2dp", "number_3dp", "number_4dp" ))
