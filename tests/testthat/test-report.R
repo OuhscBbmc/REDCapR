@@ -37,6 +37,8 @@ test_that("default", {
   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("col_types", {
   testthat::skip_on_cran()
@@ -70,6 +72,8 @@ test_that("col_types", {
   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("force-character-type", {
   testthat::skip_on_cran()
@@ -95,6 +99,8 @@ test_that("force-character-type", {
   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("raw", {
   testthat::skip_on_cran()
@@ -120,6 +126,8 @@ test_that("raw", {
   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 # This test is removed because the vroom version adds digits to make the columns unique
 # test_that("label-header", {
@@ -173,6 +181,8 @@ test_that("export_checkbox_label", {
   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 
 test_that("bad token -Error", {
