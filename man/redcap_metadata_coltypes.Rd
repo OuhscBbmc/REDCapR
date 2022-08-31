@@ -2,7 +2,7 @@
 % Please edit documentation in R/redcap-metadata-coltypes.R
 \name{redcap_metadata_coltypes}
 \alias{redcap_metadata_coltypes}
-\title{Read/Export records from a REDCap project}
+\title{Suggests a col_type for each field in a REDCap project}
 \usage{
 redcap_metadata_coltypes(
   redcap_uri,
@@ -39,26 +39,30 @@ be visible somewhere public. Optional.}
 \code{httr} package.  See the details below. Optional.}
 }
 \value{
-Currently, a list is returned with the following elements:
-\itemize{
-\item \code{data}: A \code{\link[tibble:tibble]{tibble::tibble()}} of the desired records and columns.
-\item \code{success}: A boolean value indicating if the operation was apparently
-successful.
-\item \code{status_code}: The
-\href{https://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code}
-of the operation.
-\item \code{outcome_message}: A human readable string indicating the operation's
-outcome.
-\item \code{elapsed_seconds}: The duration of the function.
-\item \code{raw_text}: If an operation is NOT successful, the text returned by
-REDCap.  If an operation is successful, the \code{raw_text} is returned as an
-empty string to save RAM.
-}
+A \code{\link[readr:cols]{readr::cols()}} object is returned, which can be
+passed to \code{\link[=redcap_read]{redcap_read()}} or \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}}.
+
+Additionally objected is printed to the console, see the Details below.
 }
 \description{
-This function uses REDCap's API to select and return data.
+This function inspects a REDCap project to
+determine a \code{\link[readr:cols]{readr::cols()}} object that is compatible with the
+the project's current definition.
 }
 \details{
+\code{redcap_metadata_coltypes()} returns a \code{\link[readr:cols]{readr::cols()}} object in two ways.
+First, a literal object is returned that can be passed to
+\code{\link[=redcap_read]{redcap_read()}} or \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}}.
+
+Second, the function acts as a code generator.
+It prints text to the console so that it can be copied
+and pasted into an R file.  This is useful to (a) document what
+fields and data types are expected, and (b) adjust those fields and
+data types if the defaults can be customized for your needs.
+For instance, you may choose to exclude some variables or tweak a
+data type (\emph{e.g.}, changing a patient's height from an integer to
+a double).
+
 The full list of configuration options accepted by the \code{httr} package is
 viewable by executing \code{\link[httr:httr_options]{httr::httr_options()}}.  The \code{httr} package and
 documentation is available at https://cran.r-project.org/package=httr.
@@ -67,15 +71,27 @@ documentation is available at https://cran.r-project.org/package=httr.
 \dontrun{
 uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
 
-# A simple project with a variety of types
-token    <- "9A81268476645C4E5F03428B8AC3AA7B" # 153 - Simple
-redcap_metadata_coltypes(uri, token)
+# A simple project
+token      <- "9A81268476645C4E5F03428B8AC3AA7B" # 153
+col_types  <- redcap_metadata_coltypes(uri, token)
+redcap_read_oneshot(uri, token, col_types = col_types)$data
 
-# This project includes every field type and validation type.
-#   It throws a warning that some fields use a comma for a decimal,
+# A longitudinal project
+token      <- "0434F0E9CF53ED0587847AB6E51DE762" # 212
+col_types  <- redcap_metadata_coltypes(uri, token)
+redcap_read_oneshot(uri, token, col_types = col_types)$data
+
+# A repeating instruments project
+token      <- "56F43A10D01D6578A46393394D76D88F" # 2603
+col_types  <- redcap_metadata_coltypes(uri, token)
+redcap_read_oneshot(uri, token, col_types = col_types)$data
+
+# A project with every field type and validation type.
+#   Notice It throws a warning that some fields use a comma for a decimal,
 #   while other fields use a period/dot as a decimal
-token    <- "8F5313CAA266789F560D79EFCEE2E2F1" # 2634 - Validation Types
-redcap_metadata_coltypes(uri, token)
+token      <- "8F5313CAA266789F560D79EFCEE2E2F1" # 2634 - Validation Types
+col_types  <- redcap_metadata_coltypes(uri, token)
+redcap_read_oneshot(uri, token, col_types = col_types)$data
 }
 }
 \references{
