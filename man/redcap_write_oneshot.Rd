@@ -75,7 +75,7 @@ REDCap's supported variables.  See \code{\link[=validate_for_write]{validate_for
 function that checks for some common important conflicts.
 }
 \examples{
-\dontrun{
+if (FALSE) {
 #Define some constants
 uri            <- "https://bbmc.ouhsc.edu/redcap/api/"
 token          <- "D70F9ACD1EDD6F151C6EA78683944E98"

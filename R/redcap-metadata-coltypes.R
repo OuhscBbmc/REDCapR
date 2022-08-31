@@ -1,6 +1,8 @@
-#' @title Read/Export records from a REDCap project
+#' @title Suggests a col_type for each field in a REDCap project
 #'
-#' @description This function uses REDCap's API to select and return data.
+#' @description This function inspects a REDCap project to
+#' determine a [readr::cols()] object that is compatible with the
+#' the project's current definition.
 #'
 #' @param redcap_uri The
 #' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
@@ -21,26 +23,90 @@
 #' @param config_options  A list of options to pass to `POST` method in the
 #' `httr` package.  See the details below. Optional.
 #'
-#' @return Currently, a list is returned with the following elements:
-#' * `data`: A [tibble::tibble()] of the desired records and columns.
-#' * `success`: A boolean value indicating if the operation was apparently
-#' successful.
-#' * `status_code`: The
-#' [http status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
-#' of the operation.
-#' * `outcome_message`: A human readable string indicating the operation's
-#' outcome.
-#' * `elapsed_seconds`: The duration of the function.
-#' * `raw_text`: If an operation is NOT successful, the text returned by
-#' REDCap.  If an operation is successful, the `raw_text` is returned as an
-#' empty string to save RAM.
+#' @return A [readr::cols()] object is returned, which can be
+#' passed to [redcap_read()] or [redcap_read_oneshot()].
+#'
+#' Additionally objected is printed to the console, see the Details below.
 #'
 #' @details
+#' `redcap_metadata_coltypes()` returns a [readr::cols()] object in two ways.
+#' First, a literal object is returned that can be passed to
+#' [redcap_read()] or [redcap_read_oneshot()].
+#'
+#' Second, the function acts as a code generator.
+#' It prints text to the console so that it can be copied
+#' and pasted into an R file.  This is useful to (a) document what
+#' fields and data types are expected, and (b) adjust those fields and
+#' data types if the defaults can be customized for your needs.
+#' For instance, you may choose to exclude some variables or tweak a
+#' data type (*e.g.*, changing a patient's height from an integer to
+#' a double).
+#'
+#' When printing to the console, each data type decision is accompanied
+#' by an explanation on the far right.  See the output from the
+#' examples below.  Please file an
+#' [issue](https://github.com/OuhscBbmc/REDCapR/issues) if you think
+#' something is too restrictive or can be improved.
+#'
+#' The overall heuristic is assign a data type down a waterfall of decisions:
+#'
+#' 1. Is the field built into REDCap? This includes
+#' an autonumber `record_id`,
+#' `redcap_event_name`, `redcap_repeat_instrument`, `redcap_repeat_instance`,
+#' and an instrument's completion status.
+#'
+#' 2. What is the field's type?  For example, sliders should be an
+#' [integer](https://stat.ethz.ch/R-manual/R-devel/library/base/html/integer.html),
+#' while check marks should be
+#' [logical](https://stat.ethz.ch/R-manual/R-devel/library/base/html/logical.html.
+#'
+#' 3. If the field type is "text", what is the validation type?
+#' For instance, a postal code should be a
+#' [character](https://stat.ethz.ch/R-manual/R-devel/library/base/html/character.html)
+#' (even though it looks like a number),
+#' a "mdy" should be cast to a
+#' [date](https://stat.ethz.ch/R-manual/R-devel/library/base/html/date.html),
+#' and a "number_2dp" should be cast to a
+#' [floating point](https://stat.ethz.ch/R-manual/R-devel/library/base/html/double.html)
+#'
+#' 4. If the field type or validation type is not recognized,
+#' the field will be cast to
+#' [character](https://stat.ethz.ch/R-manual/R-devel/library/base/html/character.html).
+#' This will happen when REDCap develops & releases a new type.
+#' If you see something like, "# validation doesn't have an associated col_type.
+#' Tell us in a new REDCapR issue", please make sure REDCapR is running the newest
+#' [GitHub release](https://ouhscbbmc.github.io/REDCapR/index.html#installation-and-documentation)
+#' and file a new [issue](https://github.com/OuhscBbmc/REDCapR/issues) if it's still not
+#' recognized.
+#'
+#' For details of the current implementation,
+#' the decision logic starts about half-way down in the
+#' [function's source code](https://github.com/OuhscBbmc/REDCapR/blob/HEAD/R/redcap-metadata-coltypes.R)
+#'
+#' **Validation does NOT Guarantee Conformity*
+#'
+#' If you're coming to REDCap from a database world, this will be unexpected.
+#' A validation type does NOT guarantee that all retrieved values will conform to
+#' complementary the data type.
+#' The validation setting affects only the values entered
+#' *after* the validation was set.
+#'
+#' For example, if values like "abcd" where entered in a field for a few months, then
+#' the project manager selected the "integer" validation option, all those
+#' "abcd" values remain untouched.
+#'
+#' This is one reason `redcap_metadata_coltypes` prints it suggestions to the console.
+#' It allows the developer to adjust the specifications to match the values
+#' returned by the API.  The the "abcd" scenario, consider (a) changing the type
+#' from `col_integer` to `col_character`, (b) excluding the trash values,
+#' then (c) in a [dplyr::mutate()] statement,
+#' use [readr::parse_integer()] to cast it to the desired type.
+#'
 #' The full list of configuration options accepted by the `httr` package is
 #' viewable by executing [httr::httr_options()].  The `httr` package and
 #' documentation is available at https://cran.r-project.org/package=httr.
 #'
-#' @author Will Beasley
+#' @author Will Beasley, Philip Chase
 #'
 #' @references The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
@@ -53,15 +119,27 @@
 #' \dontrun{
 #' uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
 #'
-#' # A simple project with a variety of types
-#' token    <- "9A81268476645C4E5F03428B8AC3AA7B" # 153 - Simple
-#' redcap_metadata_coltypes(uri, token)
+#' # A simple project
+#' token      <- "9A81268476645C4E5F03428B8AC3AA7B" # 153
+#' col_types  <- redcap_metadata_coltypes(uri, token)
+#' redcap_read_oneshot(uri, token, col_types = col_types)$data
 #'
-#' # This project includes every field type and validation type.
-#' #   It throws a warning that some fields use a comma for a decimal,
+#' # A longitudinal project
+#' token      <- "0434F0E9CF53ED0587847AB6E51DE762" # 212
+#' col_types  <- redcap_metadata_coltypes(uri, token)
+#' redcap_read_oneshot(uri, token, col_types = col_types)$data
+#'
+#' # A repeating instruments project
+#' token      <- "56F43A10D01D6578A46393394D76D88F" # 2603
+#' col_types  <- redcap_metadata_coltypes(uri, token)
+#' redcap_read_oneshot(uri, token, col_types = col_types)$data
+#'
+#' # A project with every field type and validation type.
+#' #   Notice It throws a warning that some fields use a comma for a decimal,
 #' #   while other fields use a period/dot as a decimal
-#' token    <- "8F5313CAA266789F560D79EFCEE2E2F1" # 2634 - Validation Types
-#' redcap_metadata_coltypes(uri, token)
+#' token      <- "8F5313CAA266789F560D79EFCEE2E2F1" # 2634 - Validation Types
+#' col_types  <- redcap_metadata_coltypes(uri, token)
+#' redcap_read_oneshot(uri, token, col_types = col_types)$data
 #' }
 
 #' @importFrom magrittr %>%
@@ -183,6 +261,7 @@ redcap_metadata_coltypes <- function(
           field_type == "event_name"                          ~ paste0("col_character()"                      , "~~longitudinal event_name"),
           field_type == "repeat_instrument"                   ~ paste0("col_character()"                      , "~~repeat_instrument"),
           field_type == "repeat_instance"                     ~ paste0("col_integer()"                        , "~~repeat_instance"),
+          field_type == "complete"                            ~ paste0("col_integer()"                        , "~~completion status of form/instrument"),
           field_type == "truefalse"                           ~ paste0("col_logical()"                        , "~~field_type is truefalse"),
           field_type == "yesno"                               ~ paste0("col_logical()"                        , "~~field_type is yesno"),
           field_type == "checkbox"                            ~ paste0("col_logical()"                        , "~~field_type is checkbox"),
@@ -196,7 +275,6 @@ redcap_metadata_coltypes <- function(
           field_type == "sql"                                 ~ paste0("col_character()"                      , "~~field_type is sql"),
           field_type == "text" & is.na(vt)                    ~ paste0("col_character()"                      , "~~field_type is text and validation isn't set"),
           field_type == "text" & vt == ""                     ~ paste0("col_character()"                      , "~~field_type is text and validation isn't set"),
-          is.na(field_type) & vt == "complete"                ~ paste0("col_integer()"                        , "~~indicates completion status of form/instrument"),
           vt == "alpha_only"                                  ~ paste0("col_character()"                      , "~~validation is 'alpha_only'"),
           vt == "date_dmy"                                    ~ paste0("col_date()"                           , "~~validation is 'date_dmy'"),
           vt == "date_mdy"                                    ~ paste0("col_date()"                           , "~~validation is 'date_mdy'"),

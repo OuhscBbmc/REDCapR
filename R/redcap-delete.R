@@ -56,7 +56,7 @@
 #' administrator to send you the static material.
 #'
 #' @examples
-#' \dontrun{
+#' if (FALSE) {
 #' records_to_delete <- c(102, 103, 105, 120)
 #'
 #' # Deleting from a non-longitudinal project with no defined arms:

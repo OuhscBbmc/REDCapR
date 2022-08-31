@@ -74,7 +74,7 @@ only one arm is defined.  Therefore a value of \code{arm_number} must be
 specified for all longitudinal projects.
 }
 \examples{
-\dontrun{
+if (FALSE) {
 records_to_delete <- c(102, 103, 105, 120)
 
 # Deleting from a non-longitudinal project with no defined arms:

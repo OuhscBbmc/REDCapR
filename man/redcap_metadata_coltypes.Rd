@@ -2,7 +2,7 @@
 % Please edit documentation in R/redcap-metadata-coltypes.R
 \name{redcap_metadata_coltypes}
 \alias{redcap_metadata_coltypes}
-\title{Read/Export records from a REDCap project}
+\title{Suggests a col_type for each field in a REDCap project}
 \usage{
 redcap_metadata_coltypes(
   redcap_uri,
@@ -39,26 +39,88 @@ be visible somewhere public. Optional.}
 \code{httr} package.  See the details below. Optional.}
 }
 \value{
-Currently, a list is returned with the following elements:
-\itemize{
-\item \code{data}: A \code{\link[tibble:tibble]{tibble::tibble()}} of the desired records and columns.
-\item \code{success}: A boolean value indicating if the operation was apparently
-successful.
-\item \code{status_code}: The
-\href{https://en.wikipedia.org/wiki/List_of_HTTP_status_codes}{http status code}
-of the operation.
-\item \code{outcome_message}: A human readable string indicating the operation's
-outcome.
-\item \code{elapsed_seconds}: The duration of the function.
-\item \code{raw_text}: If an operation is NOT successful, the text returned by
-REDCap.  If an operation is successful, the \code{raw_text} is returned as an
-empty string to save RAM.
-}
+A \code{\link[readr:cols]{readr::cols()}} object is returned, which can be
+passed to \code{\link[=redcap_read]{redcap_read()}} or \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}}.
+
+Additionally objected is printed to the console, see the Details below.
 }
 \description{
-This function uses REDCap's API to select and return data.
+This function inspects a REDCap project to
+determine a \code{\link[readr:cols]{readr::cols()}} object that is compatible with the
+the project's current definition.
 }
 \details{
+\code{redcap_metadata_coltypes()} returns a \code{\link[readr:cols]{readr::cols()}} object in two ways.
+First, a literal object is returned that can be passed to
+\code{\link[=redcap_read]{redcap_read()}} or \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}}.
+
+Second, the function acts as a code generator.
+It prints text to the console so that it can be copied
+and pasted into an R file.  This is useful to (a) document what
+fields and data types are expected, and (b) adjust those fields and
+data types if the defaults can be customized for your needs.
+For instance, you may choose to exclude some variables or tweak a
+data type (\emph{e.g.}, changing a patient's height from an integer to
+a double).
+
+When printing to the console, each data type decision is accompanied
+by an explanation on the far right.  See the output from the
+examples below.  Please file an
+\href{https://github.com/OuhscBbmc/REDCapR/issues}{issue} if you think
+something is too restrictive or can be improved.
+
+The overall heuristic is assign a data type down a waterfall of decisions:
+\enumerate{
+\item Is the field built into REDCap? This includes
+an autonumber \code{record_id},
+\code{redcap_event_name}, \code{redcap_repeat_instrument}, \code{redcap_repeat_instance},
+and an instrument's completion status.
+\item What is the field's type?  For example, sliders should be an
+\href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/integer.html}{integer},
+while check marks should be
+\link{logical}(https://stat.ethz.ch/R-manual/R-devel/library/base/html/logical.html.
+\item If the field type is "text", what is the validation type?
+For instance, a postal code should be a
+\href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/character.html}{character}
+(even though it looks like a number),
+a "mdy" should be cast to a
+\href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/date.html}{date},
+and a "number_2dp" should be cast to a
+\href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/double.html}{floating point}
+\item If the field type or validation type is not recognized,
+the field will be cast to
+\href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/character.html}{character}.
+This will happen when REDCap develops & releases a new type.
+If you see something like, "# validation doesn't have an associated col_type.
+Tell us in a new REDCapR issue", please make sure REDCapR is running the newest
+\href{https://ouhscbbmc.github.io/REDCapR/index.html#installation-and-documentation}{GitHub release}
+and file a new \href{https://github.com/OuhscBbmc/REDCapR/issues}{issue} if it's still not
+recognized.
+}
+
+For details of the current implementation,
+the decision logic starts about half-way down in the
+\href{https://github.com/OuhscBbmc/REDCapR/blob/HEAD/R/redcap-metadata-coltypes.R}{function's source code}
+
+*\emph{Validation does NOT Guarantee Conformity}
+
+If you're coming to REDCap from a database world, this will be unexpected.
+A validation type does NOT guarantee that all retrieved values will conform to
+complementary the data type.
+The validation setting affects only the values entered
+\emph{after} the validation was set.
+
+For example, if values like "abcd" where entered in a field for a few months, then
+the project manager selected the "integer" validation option, all those
+"abcd" values remain untouched.
+
+This is one reason \code{redcap_metadata_coltypes} prints it suggestions to the console.
+It allows the developer to adjust the specifications to match the values
+returned by the API.  The the "abcd" scenario, consider (a) changing the type
+from \code{col_integer} to \code{col_character}, (b) excluding the trash values,
+then (c) in a \code{\link[dplyr:mutate]{dplyr::mutate()}} statement,
+use \code{\link[readr:parse_atomic]{readr::parse_integer()}} to cast it to the desired type.
+
 The full list of configuration options accepted by the \code{httr} package is
 viewable by executing \code{\link[httr:httr_options]{httr::httr_options()}}.  The \code{httr} package and
 documentation is available at https://cran.r-project.org/package=httr.
@@ -67,15 +129,27 @@ documentation is available at https://cran.r-project.org/package=httr.
 \dontrun{
 uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
 
-# A simple project with a variety of types
-token    <- "9A81268476645C4E5F03428B8AC3AA7B" # 153 - Simple
-redcap_metadata_coltypes(uri, token)
+# A simple project
+token      <- "9A81268476645C4E5F03428B8AC3AA7B" # 153
+col_types  <- redcap_metadata_coltypes(uri, token)
+redcap_read_oneshot(uri, token, col_types = col_types)$data
 
-# This project includes every field type and validation type.
-#   It throws a warning that some fields use a comma for a decimal,
+# A longitudinal project
+token      <- "0434F0E9CF53ED0587847AB6E51DE762" # 212
+col_types  <- redcap_metadata_coltypes(uri, token)
+redcap_read_oneshot(uri, token, col_types = col_types)$data
+
+# A repeating instruments project
+token      <- "56F43A10D01D6578A46393394D76D88F" # 2603
+col_types  <- redcap_metadata_coltypes(uri, token)
+redcap_read_oneshot(uri, token, col_types = col_types)$data
+
+# A project with every field type and validation type.
+#   Notice It throws a warning that some fields use a comma for a decimal,
 #   while other fields use a period/dot as a decimal
-token    <- "8F5313CAA266789F560D79EFCEE2E2F1" # 2634 - Validation Types
-redcap_metadata_coltypes(uri, token)
+token      <- "8F5313CAA266789F560D79EFCEE2E2F1" # 2634 - Validation Types
+col_types  <- redcap_metadata_coltypes(uri, token)
+redcap_read_oneshot(uri, token, col_types = col_types)$data
 }
 }
 \references{
@@ -87,5 +161,5 @@ If you do not have an account for the wiki, please ask your campus REDCap
 administrator to send you the static material.
 }
 \author{
-Will Beasley
+Will Beasley, Philip Chase
 }
