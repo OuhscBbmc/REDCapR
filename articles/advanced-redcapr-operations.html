@@ -86,7 +86,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Advanced REDCapR Operations</h1>
             
-            <h4 data-toc-skip class="date">2022-08-26</h4>
+            <h4 data-toc-skip class="date">2022-08-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/HEAD/vignettes/advanced-redcapr-operations.Rmd" class="external-link"><code>vignettes/advanced-redcapr-operations.Rmd</code></a></small>
       <div class="hidden name"><code>advanced-redcapr-operations.Rmd</code></div>
@@ -127,25 +127,27 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">study_id</span>, <span class="va">redcap_event_name</span>, <span class="va">pmq1</span>, <span class="va">pmq2</span>, <span class="va">pmq3</span>, <span class="va">pmq4</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;    study_id        redcap_event_name pmq1 pmq2 pmq3 pmq4</span></span>
-<span><span class="co">#&gt; 1       100         enrollment_arm_1   NA   NA   NA   NA</span></span>
-<span><span class="co">#&gt; 2       100             dose_1_arm_1    2    2    1    1</span></span>
-<span><span class="co">#&gt; 3       100            visit_1_arm_1    1    0    0    0</span></span>
-<span><span class="co">#&gt; 4       100             dose_2_arm_1    3    1    0    0</span></span>
-<span><span class="co">#&gt; 5       100            visit_2_arm_1    0    1    0    0</span></span>
-<span><span class="co">#&gt; 6       100        final_visit_arm_1   NA   NA   NA   NA</span></span>
-<span><span class="co">#&gt; 7       220         enrollment_arm_1   NA   NA   NA   NA</span></span>
-<span><span class="co">#&gt; 8       220             dose_1_arm_1    0    1    0    2</span></span>
-<span><span class="co">#&gt; 9       220            visit_1_arm_1    0    3    1    0</span></span>
-<span><span class="co">#&gt; 10      220             dose_2_arm_1    1    2    0    1</span></span>
-<span><span class="co">#&gt; 11      220            visit_2_arm_1    3    4    1    0</span></span>
-<span><span class="co">#&gt; 12      220        final_visit_arm_1   NA   NA   NA   NA</span></span>
-<span><span class="co">#&gt; 13      304         enrollment_arm_2   NA   NA   NA   NA</span></span>
-<span><span class="co">#&gt; 14      304 deadline_to_opt_ou_arm_2   NA   NA   NA   NA</span></span>
-<span><span class="co">#&gt; 15      304         first_dose_arm_2    0    1    0    0</span></span>
-<span><span class="co">#&gt; 16      304        first_visit_arm_2    2    0    0    0</span></span>
-<span><span class="co">#&gt; 17      304        final_visit_arm_2   NA   NA   NA   NA</span></span>
-<span><span class="co">#&gt; 18      304 deadline_to_return_arm_2   NA   NA   NA   NA</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 18 × 6</span></span></span>
+<span><span class="co">#&gt;    study_id redcap_event_name         pmq1  pmq2  pmq3  pmq4</span></span>
+<span><span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>      100 enrollment_arm_1            <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>      100 dose_1_arm_1                 2     2     1     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>      100 visit_1_arm_1                1     0     0     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>      100 dose_2_arm_1                 3     1     0     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>      100 visit_2_arm_1                0     1     0     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>      100 final_visit_arm_1           <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>      220 enrollment_arm_1            <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>      220 dose_1_arm_1                 0     1     0     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>      220 visit_1_arm_1                0     3     1     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>      220 dose_2_arm_1                 1     2     0     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>      220 visit_2_arm_1                3     4     1     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>      220 final_visit_arm_1           <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>      304 enrollment_arm_2            <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>      304 deadline_to_opt_ou_arm_2    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>      304 first_dose_arm_2             0     1     0     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>      304 first_visit_arm_2            2     0     0     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>      304 final_visit_arm_2           <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span>      304 deadline_to_return_arm_2    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span></span></span></code></pre>
 <p>When widening only one variable (<em>e.g.</em>, <code>pmq1</code>), the code’s pretty simple:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds_wide</span> <span class="op">&lt;-</span></span>
@@ -272,20 +274,20 @@
 <p>Third, you may need to query the database underneath REDCap’s web server. The <a href="https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html#transfer-credentials">Transfer Credentials</a> section of the <a href="https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html#transfer-credentials">Security Database Vignette</a> provides a complete example of using R to query the MySQL database through odbc.</p>
 <p>We find it’s best to develop the query in <a href="https://www.mysql.com/products/workbench/" class="external-link">MySQL Workbench</a>, then copy the code to R (or alternatively, use <a href="https://ouhscbbmc.github.io/OuhscMunge/reference/execute_sql_file.html" class="external-link"><code>OuhscMunge::execute_sql_file()</code></a>).</p>
 <p>Here is an example that retrieves the <code>first_submit_time</code>, which is helpful if you need a timestamp from surveys that were not marked as completed. Replace ‘444’ with your pid, and 1001 through 1003 with the desired events.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">SELECT</span> </span>
+<div class="sourceCode" id="cb14"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">SELECT</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a>  p.participant_id      <span class="kw">as</span> participant_survey_id</span>
 <span id="cb14-3"><a href="#cb14-3"></a>  ,r.<span class="dt">record</span>             <span class="kw">as</span> record_id</span>
 <span id="cb14-4"><a href="#cb14-4"></a>  ,p.event_id</span>
 <span id="cb14-5"><a href="#cb14-5"></a>  ,e.descrip            <span class="kw">as</span> event_name</span>
 <span id="cb14-6"><a href="#cb14-6"></a>  ,r.first_submit_time</span>
 <span id="cb14-7"><a href="#cb14-7"></a>  ,r.completion_time</span>
-<span id="cb14-8"><a href="#cb14-8"></a>  </span>
+<span id="cb14-8"><a href="#cb14-8"></a></span>
 <span id="cb14-9"><a href="#cb14-9"></a>  <span class="co">-- ,p.*</span></span>
 <span id="cb14-10"><a href="#cb14-10"></a>  <span class="co">-- ,r.*</span></span>
 <span id="cb14-11"><a href="#cb14-11"></a><span class="kw">FROM</span> redcapv3.redcap_surveys_participants     <span class="kw">as</span> p</span>
 <span id="cb14-12"><a href="#cb14-12"></a>  <span class="kw">left</span>  <span class="kw">join</span> redcapv3.redcap_surveys_response <span class="kw">as</span> r <span class="kw">on</span> p.participant_id <span class="op">=</span> r.participant_id</span>
 <span id="cb14-13"><a href="#cb14-13"></a>  <span class="kw">left</span>  <span class="kw">join</span> redcapv3.redcap_events_metadata  <span class="kw">as</span> e <span class="kw">on</span> p.event_id       <span class="op">=</span> e.event_id</span>
-<span id="cb14-14"><a href="#cb14-14"></a><span class="kw">where</span> </span>
+<span id="cb14-14"><a href="#cb14-14"></a><span class="kw">WHERE</span></span>
 <span id="cb14-15"><a href="#cb14-15"></a>  p.survey_id <span class="op">=</span> <span class="dv">444</span></span>
 <span id="cb14-16"><a href="#cb14-16"></a>  <span class="kw">and</span></span>
 <span id="cb14-17"><a href="#cb14-17"></a>  p.event_id <span class="kw">in</span> (</span>
@@ -359,7 +361,7 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 <span><span class="co">#&gt;  collate  en_US.UTF-8</span></span>
 <span><span class="co">#&gt;  ctype    en_US.UTF-8</span></span>
 <span><span class="co">#&gt;  tz       UTC</span></span>
-<span><span class="co">#&gt;  date     2022-08-26</span></span>
+<span><span class="co">#&gt;  date     2022-08-31</span></span>
 <span><span class="co">#&gt;  pandoc   2.7.3 @ /usr/local/bin/ (via rmarkdown)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Packages ───────────────────────────────────────────────────────────────────</span></span></span>
@@ -402,7 +404,7 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 <span><span class="co">#&gt;  R6            2.5.1    <span style="color: #555555;">2021-08-19</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  ragg          1.2.2    <span style="color: #555555;">2022-02-21</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  readr         2.1.2    <span style="color: #555555;">2022-01-30</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  REDCapR     * <span style="color: #BB00BB; font-weight: bold;">1.1.9002</span> <span style="color: #555555;">2022-08-26</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
+<span><span class="co">#&gt;  REDCapR     * <span style="color: #BB00BB; font-weight: bold;">1.1.9002</span> <span style="color: #555555;">2022-08-31</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
 <span><span class="co">#&gt;  rlang         1.0.4    <span style="color: #555555;">2022-07-12</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  rmarkdown     2.16     <span style="color: #555555;">2022-08-24</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.1)</span></span></span>
 <span><span class="co">#&gt;  rprojroot     2.0.3    <span style="color: #555555;">2022-04-02</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
@@ -434,7 +436,7 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 <span><span class="co">#&gt; <span style="color: #555555;"> [2] /Library/Frameworks/R.framework/Versions/4.2/Resources/library</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">──────────────────────────────────────────────────────────────────────────────</span></span></span></code></pre>
-</details><p>Report rendered by runner at 2022-08-26, 05:23 +0000 in 4 seconds.</p>
+</details><p>Report rendered by runner at 2022-08-31, 11:42 +0000 in 3 seconds.</p>
 </div>
   </div>
 

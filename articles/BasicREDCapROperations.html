@@ -86,7 +86,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Basic REDCapR Operations</h1>
             
-            <h4 data-toc-skip class="date">2022-08-26</h4>
+            <h4 data-toc-skip class="date">2022-08-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/HEAD/vignettes/BasicREDCapROperations.Rmd" class="external-link"><code>vignettes/BasicREDCapROperations.Rmd</code></a></small>
       <div class="hidden name"><code>BasicREDCapROperations.Rmd</code></div>
@@ -117,11 +117,11 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Return all records and all variables.</span></span>
 <span><span class="va">ds_all_rows_all_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.5 seconds.  The http status code was 200.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-08-26 05:23:12.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-08-31 11:42:22.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 25 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
 <pre><code>
  [36m── [39m  [1mColumn specification [22m  [36m──────────────────────────────────────────────────────── [39m
 cols(
@@ -138,42 +138,20 @@ cols(
  [36mℹ [39m Use `spec()` for the full column specifications.</code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds_all_rows_all_fields</span> <span class="co"># Inspect the returned dataset</span></span></code></pre></div>
-<pre><code>  record_id name_first name_last                                 address
-1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232
-2         2     Tumtum  Nutmouse 14 Rose Cottage Blvd.\nKenning UK 34243
-3         3     Marcus      Wood          243 Hill St.\nGuthrie OK 73402
-4         4      Trudy       DAG          342 Elm\nDuncanville TX, 75116
-5         5   John Lee    Walker      Hotel Suite\nNew Orleans LA, 70115
-       telephone               email        dob age sex demographics_complete
-1 (405) 321-1111     nutty@mouse.com 2003-08-30  11   0                     2
-2 (405) 321-2222    tummy@mouse.comm 2003-03-10  11   1                     2
-3 (405) 321-3333        mw@mwood.net 1934-04-09  80   1                     2
-4 (405) 321-4444 peroxide@blonde.com 1952-11-02  61   0                     2
-5 (405) 321-5555  left@hippocket.com 1955-04-15  59   1                     2
-  height weight   bmi
-1   7.00      1 204.1
-2   6.00      1 277.8
-3 180.00     80  24.7
-4 165.00     54  19.8
-5 193.04    104  27.9
-                                                                                                     comments
-1                                                                     Character in a book, with some guessing
-2                                                                          A mouse character from a good book
-3                                                                                          completely made up
-4 This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail
-5                 Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache
-        mugshot health_complete race___1 race___2 race___3 race___4 race___5
-1 mugshot-1.jpg               1        0        0        0        0        1
-2 mugshot-2.jpg               0        0        0        1        0        1
-3 mugshot-3.jpg               2        0        0        0        1        1
-4 mugshot-4.jpg               2        0        1        0        0        1
-5 mugshot-5.jpg               0        1        0        0        0        0
-  race___6 ethnicity interpreter_needed race_and_ethnicity_complete
-1        0         1                  0                           2
-2        0         1                  0                           0
-3        0         0                  1                           2
-4        0         1                 NA                           2
-5        1         2                  0                           2</code></pre>
+<pre><code> [38;5;246m# A tibble: 5 × 25 [39m
+  record_id name_…¹ name_…² address telep…³ email dob          age   sex demog…⁴
+       [3m [38;5;246m&lt;dbl&gt; [39m [23m  [3m [38;5;246m&lt;chr&gt; [39m [23m    [3m [38;5;246m&lt;chr&gt; [39m [23m    [3m [38;5;246m&lt;chr&gt; [39m [23m    [3m [38;5;246m&lt;chr&gt; [39m [23m    [3m [38;5;246m&lt;chr&gt; [39m [23m  [3m [38;5;246m&lt;date&gt; [39m [23m      [3m [38;5;246m&lt;dbl&gt; [39m [23m  [3m [38;5;246m&lt;dbl&gt; [39m [23m    [3m [38;5;246m&lt;dbl&gt; [39m [23m
+ [38;5;250m1 [39m         1 Nutmeg  Nutmou…  [38;5;246m" [39m14 Ro… (405) … nutt… 2003-08-30    11     0       2
+ [38;5;250m2 [39m         2 Tumtum  Nutmou…  [38;5;246m" [39m14 Ro… (405) … tumm… 2003-03-10    11     1       2
+ [38;5;250m3 [39m         3 Marcus  Wood     [38;5;246m" [39m243 H… (405) … mw@m… 1934-04-09    80     1       2
+ [38;5;250m4 [39m         4 Trudy   DAG      [38;5;246m" [39m342 E… (405) … pero… 1952-11-02    61     0       2
+ [38;5;250m5 [39m         5 John L… Walker   [38;5;246m" [39mHotel… (405) … left… 1955-04-15    59     1       2
+ [38;5;246m# … with 15 more variables: height &lt;dbl&gt;, weight &lt;dbl&gt;, bmi &lt;dbl&gt;, [39m
+ [38;5;246m#   comments &lt;chr&gt;, mugshot &lt;chr&gt;, health_complete &lt;dbl&gt;, race___1 &lt;dbl&gt;, [39m
+ [38;5;246m#   race___2 &lt;dbl&gt;, race___3 &lt;dbl&gt;, race___4 &lt;dbl&gt;, race___5 &lt;dbl&gt;, [39m
+ [38;5;246m#   race___6 &lt;dbl&gt;, ethnicity &lt;dbl&gt;, interpreter_needed &lt;dbl&gt;, [39m
+ [38;5;246m#   race_and_ethnicity_complete &lt;dbl&gt;, and abbreviated variable names [39m
+ [38;5;246m#   ¹​name_first, ²​name_last, ³​telephone, ⁴​demographics_complete [39m</code></pre>
 </div>
 <div class="section level3">
 <h3 id="read-a-subset-of-the-records">Read a subset of the records<a class="anchor" aria-label="anchor" href="#read-a-subset-of-the-records"></a>
@@ -188,11 +166,11 @@ cols(
 <span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  records    <span class="op">=</span> <span class="va">desired_records_v1</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
 <pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2022-08-26 05:23:14.</code></pre>
+<pre><code>Starting to read 2 records  at 2022-08-31 11:42:24.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
-<pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
 <pre><code>
  [36m── [39m  [1mColumn specification [22m  [36m──────────────────────────────────────────────────────── [39m
 cols(
@@ -215,9 +193,9 @@ cols(
 <span>  token             <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  records_collapsed <span class="op">=</span> <span class="va">desired_records_v2</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
 <pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2022-08-26 05:23:15.</code></pre>
+<pre><code>Starting to read 2 records  at 2022-08-31 11:42:25.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -236,21 +214,17 @@ cols(
  [36mℹ [39m Use `spec()` for the full column specifications.</code></pre>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds_some_rows_v2</span> <span class="co"># Inspect the returned dataset</span></span></code></pre></div>
-<pre><code>  record_id name_first name_last                                 address
-1         1     Nutmeg  Nutmouse 14 Rose Cottage St.\nKenning UK, 323232
-2         3     Marcus      Wood          243 Hill St.\nGuthrie OK 73402
-       telephone           email        dob age sex demographics_complete
-1 (405) 321-1111 nutty@mouse.com 2003-08-30  11   0                     2
-2 (405) 321-3333    mw@mwood.net 1934-04-09  80   1                     2
-  height weight   bmi                                comments       mugshot
-1      7      1 204.1 Character in a book, with some guessing mugshot-1.jpg
-2    180     80  24.7                      completely made up mugshot-3.jpg
-  health_complete race___1 race___2 race___3 race___4 race___5 race___6
-1               1        0        0        0        0        1        0
-2               2        0        0        0        1        1        0
-  ethnicity interpreter_needed race_and_ethnicity_complete
-1         1                  0                           2
-2         0                  1                           2</code></pre>
+<pre><code> [38;5;246m# A tibble: 2 × 25 [39m
+  record_id name_…¹ name_…² address telep…³ email dob          age   sex demog…⁴
+       [3m [38;5;246m&lt;dbl&gt; [39m [23m  [3m [38;5;246m&lt;chr&gt; [39m [23m    [3m [38;5;246m&lt;chr&gt; [39m [23m    [3m [38;5;246m&lt;chr&gt; [39m [23m    [3m [38;5;246m&lt;chr&gt; [39m [23m    [3m [38;5;246m&lt;chr&gt; [39m [23m  [3m [38;5;246m&lt;date&gt; [39m [23m      [3m [38;5;246m&lt;dbl&gt; [39m [23m  [3m [38;5;246m&lt;dbl&gt; [39m [23m    [3m [38;5;246m&lt;dbl&gt; [39m [23m
+ [38;5;250m1 [39m         1 Nutmeg  Nutmou…  [38;5;246m" [39m14 Ro… (405) … nutt… 2003-08-30    11     0       2
+ [38;5;250m2 [39m         3 Marcus  Wood     [38;5;246m" [39m243 H… (405) … mw@m… 1934-04-09    80     1       2
+ [38;5;246m# … with 15 more variables: height &lt;dbl&gt;, weight &lt;dbl&gt;, bmi &lt;dbl&gt;, [39m
+ [38;5;246m#   comments &lt;chr&gt;, mugshot &lt;chr&gt;, health_complete &lt;dbl&gt;, race___1 &lt;dbl&gt;, [39m
+ [38;5;246m#   race___2 &lt;dbl&gt;, race___3 &lt;dbl&gt;, race___4 &lt;dbl&gt;, race___5 &lt;dbl&gt;, [39m
+ [38;5;246m#   race___6 &lt;dbl&gt;, ethnicity &lt;dbl&gt;, interpreter_needed &lt;dbl&gt;, [39m
+ [38;5;246m#   race_and_ethnicity_complete &lt;dbl&gt;, and abbreviated variable names [39m
+ [38;5;246m#   ¹​name_first, ²​name_last, ³​telephone, ⁴​demographics_complete [39m</code></pre>
 </div>
 <div class="section level3">
 <h3 id="read-a-subset-of-the-fields">Read a subset of the fields<a class="anchor" aria-label="anchor" href="#read-a-subset-of-the-fields"></a>
@@ -266,7 +240,7 @@ cols(
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-08-26 05:23:16.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-08-31 11:42:27.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -286,7 +260,7 @@ cols(
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-08-26 05:23:18.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-08-31 11:42:28.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -298,12 +272,14 @@ cols(
 )</code></pre>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds_some_fields_v2</span> <span class="co">#Inspect the returned dataset</span></span></code></pre></div>
-<pre><code>  record_id name_first age
-1         1     Nutmeg  11
-2         2     Tumtum  11
-3         3     Marcus  80
-4         4      Trudy  61
-5         5   John Lee  59</code></pre>
+<pre><code> [38;5;246m# A tibble: 5 × 3 [39m
+  record_id name_first   age
+       [3m [38;5;246m&lt;dbl&gt; [39m [23m  [3m [38;5;246m&lt;chr&gt; [39m [23m       [3m [38;5;246m&lt;dbl&gt; [39m [23m
+ [38;5;250m1 [39m         1 Nutmeg        11
+ [38;5;250m2 [39m         2 Tumtum        11
+ [38;5;250m3 [39m         3 Marcus        80
+ [38;5;250m4 [39m         4 Trudy         61
+ [38;5;250m5 [39m         5 John Lee      59</code></pre>
 </div>
 <div class="section level3">
 <h3 id="read-a-subset-of-records-conditioned-on-the-values-in-some-variables">Read a subset of records, conditioned on the values in some variables<a class="anchor" aria-label="anchor" href="#read-a-subset-of-records-conditioned-on-the-values-in-some-variables"></a>
@@ -318,9 +294,9 @@ cols(
 <span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  fields     <span class="op">=</span> <span class="va">desired_fields_v3</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-08-26 05:23:19.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-08-31 11:42:29.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -332,12 +308,14 @@ cols(
 )</code></pre>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds_some_fields_v3</span> <span class="co">#Examine the these three variables.</span></span></code></pre></div>
-<pre><code>  record_id        dob weight
-1         1 2003-08-30      1
-2         2 2003-03-10      1
-3         3 1934-04-09     80
-4         4 1952-11-02     54
-5         5 1955-04-15    104</code></pre>
+<pre><code> [38;5;246m# A tibble: 5 × 3 [39m
+  record_id dob        weight
+       [3m [38;5;246m&lt;dbl&gt; [39m [23m  [3m [38;5;246m&lt;date&gt; [39m [23m       [3m [38;5;246m&lt;dbl&gt; [39m [23m
+ [38;5;250m1 [39m         1 2003-08-30      1
+ [38;5;250m2 [39m         2 2003-03-10      1
+ [38;5;250m3 [39m         3 1934-04-09     80
+ [38;5;250m4 [39m         4 1952-11-02     54
+ [38;5;250m5 [39m         5 1955-04-15    104</code></pre>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">######</span></span>
 <span><span class="co">## Step 2: identify desired records, based on age &amp; weight</span></span>
@@ -358,7 +336,7 @@ cols(
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2022-08-26 05:23:20.</code></pre>
+<pre><code>Starting to read 2 records  at 2022-08-31 11:42:30.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -377,24 +355,17 @@ cols(
  [36mℹ [39m Use `spec()` for the full column specifications.</code></pre>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds_some_rows_v3</span> <span class="co">#Examine the results.</span></span></code></pre></div>
-<pre><code>  record_id name_first name_last                            address
-1         3     Marcus      Wood     243 Hill St.\nGuthrie OK 73402
-2         5   John Lee    Walker Hotel Suite\nNew Orleans LA, 70115
-       telephone              email        dob age sex demographics_complete
-1 (405) 321-3333       mw@mwood.net 1934-04-09  80   1                     2
-2 (405) 321-5555 left@hippocket.com 1955-04-15  59   1                     2
-  height weight  bmi
-1 180.00     80 24.7
-2 193.04    104 27.9
-                                                                                     comments
-1                                                                          completely made up
-2 Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache
-        mugshot health_complete race___1 race___2 race___3 race___4 race___5
-1 mugshot-3.jpg               2        0        0        0        1        1
-2 mugshot-5.jpg               0        1        0        0        0        0
-  race___6 ethnicity interpreter_needed race_and_ethnicity_complete
-1        0         0                  1                           2
-2        1         2                  0                           2</code></pre>
+<pre><code> [38;5;246m# A tibble: 2 × 25 [39m
+  record_id name_…¹ name_…² address telep…³ email dob          age   sex demog…⁴
+       [3m [38;5;246m&lt;dbl&gt; [39m [23m  [3m [38;5;246m&lt;chr&gt; [39m [23m    [3m [38;5;246m&lt;chr&gt; [39m [23m    [3m [38;5;246m&lt;chr&gt; [39m [23m    [3m [38;5;246m&lt;chr&gt; [39m [23m    [3m [38;5;246m&lt;chr&gt; [39m [23m  [3m [38;5;246m&lt;date&gt; [39m [23m      [3m [38;5;246m&lt;dbl&gt; [39m [23m  [3m [38;5;246m&lt;dbl&gt; [39m [23m    [3m [38;5;246m&lt;dbl&gt; [39m [23m
+ [38;5;250m1 [39m         3 Marcus  Wood     [38;5;246m" [39m243 H… (405) … mw@m… 1934-04-09    80     1       2
+ [38;5;250m2 [39m         5 John L… Walker   [38;5;246m" [39mHotel… (405) … left… 1955-04-15    59     1       2
+ [38;5;246m# … with 15 more variables: height &lt;dbl&gt;, weight &lt;dbl&gt;, bmi &lt;dbl&gt;, [39m
+ [38;5;246m#   comments &lt;chr&gt;, mugshot &lt;chr&gt;, health_complete &lt;dbl&gt;, race___1 &lt;dbl&gt;, [39m
+ [38;5;246m#   race___2 &lt;dbl&gt;, race___3 &lt;dbl&gt;, race___4 &lt;dbl&gt;, race___5 &lt;dbl&gt;, [39m
+ [38;5;246m#   race___6 &lt;dbl&gt;, ethnicity &lt;dbl&gt;, interpreter_needed &lt;dbl&gt;, [39m
+ [38;5;246m#   race_and_ethnicity_complete &lt;dbl&gt;, and abbreviated variable names [39m
+ [38;5;246m#   ¹​name_first, ²​name_last, ³​telephone, ⁴​demographics_complete [39m</code></pre>
 </div>
 <div class="section level3">
 <h3 id="additional-returned-information">Additional Returned Information<a class="anchor" aria-label="anchor" href="#additional-returned-information"></a>
@@ -417,8 +388,8 @@ cols(
 <span>  fields     <span class="op">=</span> <span class="va">desired_fields_v1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-08-26 05:23:22.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-08-31 11:42:32.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -431,12 +402,14 @@ cols(
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">all_information</span> <span class="co">#Inspect the additional information</span></span></code></pre></div>
 <pre><code>$data
-  record_id name_first age
-1         1     Nutmeg  11
-2         2     Tumtum  11
-3         3     Marcus  80
-4         4      Trudy  61
-5         5   John Lee  59
+ [38;5;246m# A tibble: 5 × 3 [39m
+  record_id name_first   age
+       [3m [38;5;246m&lt;dbl&gt; [39m [23m  [3m [38;5;246m&lt;chr&gt; [39m [23m       [3m [38;5;246m&lt;dbl&gt; [39m [23m
+ [38;5;250m1 [39m         1 Nutmeg        11
+ [38;5;250m2 [39m         2 Tumtum        11
+ [38;5;250m3 [39m         3 Marcus        80
+ [38;5;250m4 [39m         4 Trudy         61
+ [38;5;250m5 [39m         5 John Lee      59
 
 $success
 [1] TRUE
@@ -469,7 +442,7 @@ $datetime_range_end
 [1] NA
 
 $elapsed_seconds
-[1] 1.504305</code></pre>
+[1] 1.085226</code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -487,7 +460,7 @@ $elapsed_seconds
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       UTC
- date     2022-08-26
+ date     2022-08-31
  pandoc   2.7.3 @ /usr/local/bin/ (via rmarkdown)
 
  [1m [36m─ Packages ─────────────────────────────────────────────────────────────────── [39m [22m
@@ -530,7 +503,7 @@ $elapsed_seconds
  R6            2.5.1     [90m2021-08-19 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
  ragg          1.2.2     [90m2022-02-21 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
  readr         2.1.2     [90m2022-01-30 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- REDCapR     *  [1m [35m1.1.9002 [39m [22m  [90m2022-08-26 [39m  [90m[1] [39m  [1m [35mlocal [39m [22m
+ REDCapR     *  [1m [35m1.1.9002 [39m [22m  [90m2022-08-31 [39m  [90m[1] [39m  [1m [35mlocal [39m [22m
  rlang         1.0.4     [90m2022-07-12 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
  rmarkdown     2.16      [90m2022-08-24 [39m  [90m[1] [39m  [90mCRAN (R 4.2.1) [39m
  rprojroot     2.0.3     [90m2022-04-02 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
@@ -561,7 +534,7 @@ $elapsed_seconds
  [90m [2] /Library/Frameworks/R.framework/Versions/4.2/Resources/library [39m
 
  [1m [36m────────────────────────────────────────────────────────────────────────────── [39m [22m</code></pre>
-</details><p>Report rendered by runner at 2022-08-26, 05:23 +0000 in 14 seconds.</p>
+</details><p>Report rendered by runner at 2022-08-31, 11:42 +0000 in 12 seconds.</p>
 </div>
   </div>
 
