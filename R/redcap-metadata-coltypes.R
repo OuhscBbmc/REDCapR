@@ -115,6 +115,36 @@ redcap_metadata_coltypes <- function(
       vt          = NA_character_,
     )
 
+  d_again <-
+    tibble::tibble(
+      field_name  = character(0),
+      field_type  = character(0),
+      vt          = character(0),
+    )
+
+  if (d_proj$is_longitudinal[1]) {
+    d_again <-
+      d_again %>%
+      dplyr::union_all(
+        tibble::tibble(
+          field_name  = "redcap_event_name",
+          field_type  = "event_name",
+          vt          = NA_character_,
+        )
+      )
+  }
+  if (d_proj$has_repeating_instruments_or_events[1]) {
+    d_again <-
+      d_again %>%
+      dplyr::union_all(
+        tibble::tibble(
+          field_name  = c("redcap_repeat_instrument", "redcap_repeat_instance"),
+          field_type  = c("repeat_instrument"       , "repeat_instance"),
+          vt          = NA_character_,
+        )
+      )
+  }
+
   # Prepare metadata to be joined
   d_meta <-
     d_meta %>%
@@ -132,7 +162,8 @@ redcap_metadata_coltypes <- function(
       .data$field_name,
       .data$field_type,
       vt            = .data$text_validation_type_or_show_slider_number,
-    ) |>
+    ) %>%
+    tibble::add_row(d_again, .after = 1) %>%
     dplyr::union_all(d_complete)
 
   # setdiff(d_meta$field_name_original, d_var$original_field_name)
@@ -149,6 +180,9 @@ redcap_metadata_coltypes <- function(
       response =
         dplyr::case_when(
           autonumber                                          ~ paste0("col_integer()"                        , "~~record_autonumbering is enabled for the project"),
+          field_type == "event_name"                          ~ paste0("col_character()"                      , "~~longitudinal event_name"),
+          field_type == "repeat_instrument"                   ~ paste0("col_character()"                      , "~~repeat_instrument"),
+          field_type == "repeat_instance"                     ~ paste0("col_integer()"                        , "~~repeat_instance"),
           field_type == "truefalse"                           ~ paste0("col_logical()"                        , "~~field_type is truefalse"),
           field_type == "yesno"                               ~ paste0("col_logical()"                        , "~~field_type is yesno"),
           field_type == "checkbox"                            ~ paste0("col_logical()"                        , "~~field_type is checkbox"),

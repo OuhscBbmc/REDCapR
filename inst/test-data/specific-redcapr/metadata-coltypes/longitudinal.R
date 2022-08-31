@@ -1,4 +1,5 @@
 structure(list(cols = list(study_id = structure(list(), class = c("collector_character", 
+"collector")), redcap_event_name = structure(list(), class = c("collector_character", 
 "collector")), date_enrolled = structure(list(format = ""), class = c("collector_date", 
 "collector")), patient_document = structure(list(), class = c("collector_character", 
 "collector")), first_name = structure(list(), class = c("collector_character", 

@@ -3,11 +3,11 @@ import::from("magrittr", "%>%")
 
 uri   <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "9A81268476645C4E5F03428B8AC3AA7B" # 153
-# token <- "0434F0E9CF53ED0587847AB6E51DE762" # 212
+token <- "0434F0E9CF53ED0587847AB6E51DE762" # 212
 # token <- "CCB7E11837D41126D67C744F97389E04" # 753 - superwide
 # token <- "F187271FC6FD72C3BFCE37990A6BF6A7" # 1400 - Repeating Instruments # 753 - superwide
 # token <- "221E86DABFEEA233067C6889991B7FBB" # 1425 - Potentially problematic dictionary
-token <- "8F5313CAA266789F560D79EFCEE2E2F1" # 2634 - Validation Types
+# token <- "8F5313CAA266789F560D79EFCEE2E2F1" # 2634 - Validation Types
 
 # Retrieve the info necessary to infer the likely data types
 d_var  <- REDCapR::redcap_variables(        uri, token, verbose = FALSE)$data
@@ -39,6 +39,36 @@ d_complete <-
     vt          = NA_character_,
   )
 
+d_again <-
+  tibble::tibble(
+    field_name  = character(0),
+    field_type  = character(0),
+    vt          = character(0),
+  )
+
+if (d_proj$is_longitudinal[1]) {
+  d_again <-
+    d_again %>%
+    dplyr::union_all(
+      tibble::tibble(
+        field_name  = "redcap_event_name",
+        field_type  = "event_name",
+        vt          = NA_character_,
+      )
+    )
+}
+if (d_proj$has_repeating_instruments_or_events[1]) {
+  d_again <-
+    d_again %>%
+    dplyr::union_all(
+      tibble::tibble(
+        field_name  = c("redcap_repeat_instrument", "redcap_repeat_instance"),
+        field_type  = c("repeat_instrument"       , "repeat_instance"),
+        vt          = NA_character_,
+      )
+    )
+}
+
 # Prepare metadata to be joined
 d_meta <-
   d_meta %>%
@@ -56,7 +86,8 @@ d_meta <-
     field_name,
     field_type,
     vt            = text_validation_type_or_show_slider_number,
-  ) |>
+  ) %>%
+  tibble::add_row(d_again, .after = 1) %>%
   dplyr::union_all(d_complete)
 
 setdiff(d_meta$field_name, d_var$field_name)
@@ -74,6 +105,9 @@ meat <-
     response =
       dplyr::case_when(
         autonumber                                          ~ paste0("col_integer()"                        , "~~record_autonumbering is enabled for the project"),
+        field_type == "event_name"                          ~ paste0("col_character()"                      , "~~longitudinal event_name"),
+        field_type == "repeat_instrument"                   ~ paste0("col_character()"                      , "~~repeat_instrument"),
+        field_type == "repeat_instance"                     ~ paste0("col_integer()"                        , "~~repeat_instance"),
         field_type == "truefalse"                           ~ paste0("col_logical()"                        , "~~field_type is truefalse"),
         field_type == "yesno"                               ~ paste0("col_logical()"                        , "~~field_type is yesno"),
         field_type == "checkbox"                            ~ paste0("col_logical()"                        , "~~field_type is checkbox"),

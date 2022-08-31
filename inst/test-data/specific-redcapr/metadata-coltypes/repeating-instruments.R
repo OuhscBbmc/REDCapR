@@ -1,4 +1,6 @@
 structure(list(cols = list(record_id = structure(list(), class = c("collector_integer", 
+"collector")), redcap_repeat_instrument = structure(list(), class = c("collector_character", 
+"collector")), redcap_repeat_instance = structure(list(), class = c("collector_integer", 
 "collector")), date_enrolled = structure(list(format = ""), class = c("collector_date", 
 "collector")), first_name = structure(list(), class = c("collector_character", 
 "collector")), dob = structure(list(format = ""), class = c("collector_date", 
