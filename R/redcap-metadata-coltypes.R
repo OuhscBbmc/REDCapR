@@ -257,11 +257,5 @@ redcap_metadata_coltypes <- function(
     )
   }
 
-  .col_types <- eval(str2expression(sandwich))
-
-  list(
-    col_types          = .col_types,
-    success            = TRUE,
-    status_code        = 200
-  )
+  eval(str2expression(sandwich))
 }

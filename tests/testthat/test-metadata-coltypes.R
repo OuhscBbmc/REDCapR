@@ -17,17 +17,15 @@ test_that("simple", {
   expected_outcome_message <- "col_types <- readr::cols"
 
   expect_message(
-    regexp          = expected_outcome_message,
-    returned_object <- redcap_metadata_coltypes(credential$redcap_uri, credential$token)
+    regexp  = expected_outcome_message,
+    actual  <- redcap_metadata_coltypes(credential$redcap_uri, credential$token)
   )
 
-  if (update_expectation) save_expected(returned_object$col_types, path_expected)
+  if (update_expectation) save_expected(actual, path_expected)
   expected <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$col_types, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
-  expect_s3_class(returned_object$col_types, "col_spec")
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_true(returned_object$success)
+  expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_s3_class(actual, "col_spec")
 })
 
 test_that("longitudinal", {
@@ -37,15 +35,13 @@ test_that("longitudinal", {
   expected_outcome_message <- "col_types <- readr::cols"
 
   expect_message(
-    regexp          = expected_outcome_message,
-    returned_object <- redcap_metadata_coltypes(credential$redcap_uri, credential$token)
+    regexp  = expected_outcome_message,
+    actual  <- redcap_metadata_coltypes(credential$redcap_uri, credential$token)
   )
 
-  if (update_expectation) save_expected(returned_object$col_types, path_expected)
+  if (update_expectation) save_expected(actual, path_expected)
   expected <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$col_types, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
-  expect_s3_class(returned_object$col_types, "col_spec")
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_true(returned_object$success)
+  expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_s3_class(actual, "col_spec")
 })
