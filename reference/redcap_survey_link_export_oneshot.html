@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.9003</span>
       </span>
     </div>
 
@@ -156,7 +156,7 @@ administrator to send you the static material.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="va">uri</span>     <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
 <span class="r-in"><span><span class="va">token</span>   <span class="op">&lt;-</span> <span class="st">"8FA9A6BDAE2C0B5DD3CB472DD8E8918C"</span> <span class="co">#pid=817</span></span></span>
 <span class="r-in"><span><span class="va">record</span>  <span class="op">&lt;-</span> <span class="fl">1</span></span></span>
@@ -169,8 +169,11 @@ administrator to send you the static material.</p>
 <span class="r-in"><span>  redcap_uri     <span class="op">=</span> <span class="va">uri</span>,</span></span>
 <span class="r-in"><span>  token          <span class="op">=</span> <span class="va">token</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Preparing to export the survey link for the instrument `participant_morale_questionnaire`.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> exported the survey link in 0.4 seconds, for instrument `participant_morale_questionnaire`, record `1`.</span>
 <span class="r-in"><span><span class="va">result</span><span class="op">$</span><span class="va">survey_link</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://bbmc.ouhsc.edu/redcap/surveys/?s=8KuzSLMHf6"</span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>

@@ -20,7 +20,7 @@ production.  Returns a tibble::tibble()."><meta property="og:image" content="htt
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.9003</span>
       </span>
     </div>
 
@@ -176,18 +176,39 @@ administrator to send you the static material.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="co"># Specify your project uri and token(s).</span></span></span>
 <span class="r-in"><span><span class="va">uri</span>                  <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
 <span class="r-in"><span><span class="va">token_simple</span>         <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span></span>
 <span class="r-in"><span><span class="va">token_longitudinal</span>   <span class="op">&lt;-</span> <span class="st">"0434F0E9CF53ED0587847AB6E51DE762"</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># ---- Simple examples</span></span></span>
-<span class="r-in"><span><span class="va">d1</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_project_info_read</span><span class="op">(</span><span class="va">uri</span>, <span class="va">token_simple</span>      <span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/View.html" class="external-link">View</a></span><span class="op">(</span><span class="va">d1</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">d2</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_project_info_read</span><span class="op">(</span><span class="va">uri</span>, <span class="va">token_longitudinal</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/View.html" class="external-link">View</a></span><span class="op">(</span><span class="va">d2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_project_info_read</span><span class="op">(</span><span class="va">uri</span>, <span class="va">token_simple</span>      <span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 26</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   project_id project_t…¹ creation_time       production_time in_produc…² proje…³</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>        153 REDCapR Ta… 2013-11-29 <span style="color: #949494;">15:58:20</span> <span style="color: #BB0000;">NA</span>              FALSE       English</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 20 more variables: purpose &lt;int&gt;, purpose_other &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   project_notes &lt;chr&gt;, custom_record_label &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   secondary_unique_field &lt;chr&gt;, is_longitudinal &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   has_repeating_instruments_or_events &lt;lgl&gt;, surveys_enabled &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   scheduling_enabled &lt;lgl&gt;, record_autonumbering_enabled &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   randomization_enabled &lt;lgl&gt;, ddp_enabled &lt;lgl&gt;, project_irb_number &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   project_grant_number &lt;chr&gt;, project_pi_firstname &lt;chr&gt;, …</span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_project_info_read</span><span class="op">(</span><span class="va">uri</span>, <span class="va">token_longitudinal</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 26</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   project_id project_t…¹ creation_time       production_time in_produc…² proje…³</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>        212 REDCapR Ta… 2014-08-31 <span style="color: #949494;">13:07:55</span> <span style="color: #BB0000;">NA</span>              FALSE       English</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 20 more variables: purpose &lt;int&gt;, purpose_other &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   project_notes &lt;chr&gt;, custom_record_label &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   secondary_unique_field &lt;chr&gt;, is_longitudinal &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   has_repeating_instruments_or_events &lt;lgl&gt;, surveys_enabled &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   scheduling_enabled &lt;lgl&gt;, record_autonumbering_enabled &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   randomization_enabled &lt;lgl&gt;, ddp_enabled &lt;lgl&gt;, project_irb_number &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   project_grant_number &lt;chr&gt;, project_pi_firstname &lt;chr&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># ---- Specify timezone</span></span></span>
 <span class="r-in"><span><span class="co"># Specify the server's timezone, for example, US Central</span></span></span>
@@ -198,7 +219,9 @@ administrator to send you the static material.</p>
 <span class="r-in"><span>    <span class="va">token_simple</span>,</span></span>
 <span class="r-in"><span>    locale     <span class="op">=</span> <span class="va">server_locale</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-in"><span><span class="va">d3</span><span class="op">$</span><span class="va">creation_time</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2013-11-29 15:58:20 CST"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Alternatively, set timezone to the client's location.</span></span></span>
 <span class="r-in"><span><span class="va">client_locale</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/locale.html" class="external-link">locale</a></span><span class="op">(</span>tz <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/timezones.html" class="external-link">Sys.timezone</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -216,13 +239,82 @@ administrator to send you the static material.</p>
 <span class="r-in"><span>  <span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fl">32L</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/nchar.html" class="external-link">nchar</a></span><span class="op">(</span><span class="va">token</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">pmap_dfr</a></span><span class="op">(</span><span class="fu">REDCapR</span><span class="fu">::</span><span class="va">redcap_project_info_read</span>, locale <span class="op">=</span> <span class="va">server_locale</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.3 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.4 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Inspect values stored on the server.</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/View.html" class="external-link">View</a></span><span class="op">(</span><span class="va">d_all</span><span class="op">$</span><span class="va">data</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">d_all</span><span class="op">$</span><span class="va">data</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 28 × 26</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    project_id project_…¹ creation_time       production_time in_produc…² proje…³</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>        153 REDCapR T… 2013-11-29 <span style="color: #949494;">15:58:20</span> <span style="color: #BB0000;">NA</span>              FALSE       English</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>        212 REDCapR T… 2014-08-31 <span style="color: #949494;">13:07:55</span> <span style="color: #BB0000;">NA</span>              FALSE       English</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>        213 REDCapR T… 2014-08-31 <span style="color: #949494;">13:34:06</span> <span style="color: #BB0000;">NA</span>              FALSE       English</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>        268 REDCapR R… 2015-02-21 <span style="color: #949494;">12:18:27</span> <span style="color: #BB0000;">NA</span>              FALSE       English</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>        690 REDCapR T… 2017-08-21 <span style="color: #949494;">22:14:37</span> <span style="color: #BB0000;">NA</span>              FALSE       English</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>        691 REDCapR T… 2017-08-21 <span style="color: #949494;">22:24:45</span> <span style="color: #BB0000;">NA</span>              FALSE       English</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>        753 REDCapR T… 2017-12-01 <span style="color: #949494;">08:58:07</span> <span style="color: #BB0000;">NA</span>              FALSE       English</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>        817 REDCapR T… 2018-03-06 <span style="color: #949494;">15:46:24</span> <span style="color: #BB0000;">NA</span>              FALSE       English</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>        977 REDCap Ta… 2018-08-24 <span style="color: #949494;">11:30:21</span> <span style="color: #BB0000;">NA</span>              FALSE       English</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>        998 REDCapR T… 2018-09-11 <span style="color: #949494;">18:21:14</span> <span style="color: #BB0000;">NA</span>              FALSE       English</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 18 more rows, 20 more variables: purpose &lt;int&gt;, purpose_other &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   project_notes &lt;chr&gt;, custom_record_label &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   secondary_unique_field &lt;chr&gt;, is_longitudinal &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   has_repeating_instruments_or_events &lt;lgl&gt;, surveys_enabled &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   scheduling_enabled &lt;lgl&gt;, record_autonumbering_enabled &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   randomization_enabled &lt;lgl&gt;, ddp_enabled &lt;lgl&gt;, project_irb_number &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   project_grant_number &lt;chr&gt;, project_pi_firstname &lt;chr&gt;, …</span></span>
+<span class="r-in"><span><span class="co"># or: View(d_all$data)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Inspect everything returned, including values like the http status code.</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/View.html" class="external-link">View</a></span><span class="op">(</span><span class="va">d_all</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="va">d_all</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 28 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    data$pr…¹ $proj…² $creation_time      success statu…³ outco…⁴ elaps…⁵ raw_t…⁶</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>       153 REDCap… 2013-11-29 <span style="color: #949494;">15:58:20</span> TRUE        200 1 rows…   0.144 <span style="color: #949494;">""</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>       212 REDCap… 2014-08-31 <span style="color: #949494;">13:07:55</span> TRUE        200 1 rows…   0.151 <span style="color: #949494;">""</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>       213 REDCap… 2014-08-31 <span style="color: #949494;">13:34:06</span> TRUE        200 1 rows…   0.146 <span style="color: #949494;">""</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>       268 REDCap… 2015-02-21 <span style="color: #949494;">12:18:27</span> TRUE        200 1 rows…   0.177 <span style="color: #949494;">""</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>       690 REDCap… 2017-08-21 <span style="color: #949494;">22:14:37</span> TRUE        200 1 rows…   0.145 <span style="color: #949494;">""</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>       691 REDCap… 2017-08-21 <span style="color: #949494;">22:24:45</span> TRUE        200 1 rows…   0.146 <span style="color: #949494;">""</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>       753 REDCap… 2017-12-01 <span style="color: #949494;">08:58:07</span> TRUE        200 1 rows…   0.191 <span style="color: #949494;">""</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>       817 REDCap… 2018-03-06 <span style="color: #949494;">15:46:24</span> TRUE        200 1 rows…   0.144 <span style="color: #949494;">""</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>       977 REDCap… 2018-08-24 <span style="color: #949494;">11:30:21</span> TRUE        200 1 rows…   0.145 <span style="color: #949494;">""</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>       998 REDCap… 2018-09-11 <span style="color: #949494;">18:21:14</span> TRUE        200 1 rows…   0.146 <span style="color: #949494;">""</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 18 more rows, 23 more variables: data$production_time &lt;dttm&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   $in_production &lt;lgl&gt;, $project_language &lt;chr&gt;, $purpose &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   $purpose_other &lt;chr&gt;, $project_notes &lt;chr&gt;, $custom_record_label &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   $secondary_unique_field &lt;chr&gt;, $is_longitudinal &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   $has_repeating_instruments_or_events &lt;lgl&gt;, $surveys_enabled &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   $scheduling_enabled &lt;lgl&gt;, $record_autonumbering_enabled &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   $randomization_enabled &lt;lgl&gt;, $ddp_enabled &lt;lgl&gt;, …</span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>

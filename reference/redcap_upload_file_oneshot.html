@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.9003</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@ administrator to send you the static material.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="co"># Define some constants</span></span></span>
 <span class="r-in"><span><span class="va">uri</span>    <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
 <span class="r-in"><span><span class="va">token</span>  <span class="op">&lt;-</span> <span class="st">"D70F9ACD1EDD6F151C6EA78683944E98"</span> <span class="co"># The simple project -pid 213</span></span></span>
@@ -175,6 +175,7 @@ administrator to send you the static material.</p>
 <span class="r-in"><span>  redcap_uri <span class="op">=</span> <span class="va">redcap_uri</span>,</span></span>
 <span class="r-in"><span>  token      <span class="op">=</span> <span class="va">token</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in isTRUE(lhs):</span> object 'redcap_uri' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#Upload a collection of five images.</span></span></span>
 <span class="r-in"><span><span class="va">records</span>    <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span></span></span>
@@ -194,7 +195,8 @@ administrator to send you the static material.</p>
 <span class="r-in"><span>    token      <span class="op">=</span> <span class="va">token</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in isTRUE(lhs):</span> object 'redcap_uri' not found</span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>

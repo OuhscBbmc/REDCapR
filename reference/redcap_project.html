@@ -20,7 +20,7 @@ Once some values are set that are specific to a REDCap project
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.9003</span>
       </span>
     </div>
 
@@ -127,21 +127,94 @@ password for a project.  Required.</p></dd>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">uri</span>     <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
-<span class="r-in"><span><span class="va">token</span>   <span class="op">&lt;-</span> <span class="st">"D70F9ACD1EDD6F151C6EA78683944E98"</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">token</span>   <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span></span>
+<span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="va">project</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="va">redcap_project</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">ds_all</span>  <span class="op">&lt;-</span> <span class="va">project</span><span class="op">$</span><span class="fu">read</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting to read 5 records  at 2022-08-31 22:12:43.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> cols(</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   .default = col_double(),</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   name_first = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   name_last = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   address = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   telephone = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   email = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   dob = <span style="color: #0000BB;">col_date(format = "")</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   comments = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   mugshot = <span style="color: #BB0000;">col_character()</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> )</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Use `spec()` for the full column specifications.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Demonstrate how repeated calls are more concise when the token and</span></span></span>
 <span class="r-in"><span><span class="co">#   url aren't always passed.</span></span></span>
 <span class="r-in"><span><span class="va">ds_skinny</span> <span class="op">&lt;-</span> <span class="va">project</span><span class="op">$</span><span class="fu">read</span><span class="op">(</span>fields<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"sex"</span>, <span class="st">"height"</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting to read 5 records  at 2022-08-31 22:12:43.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> cols(</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   record_id = <span style="color: #00BB00;">col_double()</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   sex = <span style="color: #00BB00;">col_double()</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   height = <span style="color: #00BB00;">col_double()</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> )</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ids_of_males</span>    <span class="op">&lt;-</span> <span class="va">ds_skinny</span><span class="op">$</span><span class="va">record_id</span><span class="op">[</span><span class="va">ds_skinny</span><span class="op">$</span><span class="va">sex</span><span class="op">==</span><span class="fl">1</span><span class="op">]</span></span></span>
 <span class="r-in"><span><span class="va">ids_of_shorties</span> <span class="op">&lt;-</span> <span class="va">ds_skinny</span><span class="op">$</span><span class="va">record_id</span><span class="op">[</span><span class="va">ds_skinny</span><span class="op">$</span><span class="va">height</span> <span class="op">&lt;</span> <span class="fl">40</span><span class="op">]</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ds_males</span>        <span class="op">&lt;-</span> <span class="va">project</span><span class="op">$</span><span class="fu">read</span><span class="op">(</span>records<span class="op">=</span><span class="va">ids_of_males</span>, batch_size<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 3 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting to read 3 records  at 2022-08-31 22:12:44.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading batch 1 of 2, with subjects 2 through 3 (ie, 2 unique subject records).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading batch 2 of 2, with subjects 5 through 5 (ie, 1 unique subject records).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> cols(</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   .default = col_double(),</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   name_first = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   name_last = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   address = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   telephone = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   email = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   dob = <span style="color: #0000BB;">col_date(format = "")</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   comments = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   mugshot = <span style="color: #BB0000;">col_character()</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> )</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Use `spec()` for the full column specifications.</span>
 <span class="r-in"><span><span class="va">ds_shorties</span>     <span class="op">&lt;-</span> <span class="va">project</span><span class="op">$</span><span class="fu">read</span><span class="op">(</span>records<span class="op">=</span><span class="va">ids_of_shorties</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting to read 2 records  at 2022-08-31 22:12:45.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Reading batch 1 of 1, with subjects 1 through 2 (ie, 2 unique subject records).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> cols(</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   .default = col_double(),</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   name_first = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   name_last = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   address = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   telephone = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   email = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   dob = <span style="color: #0000BB;">col_date(format = "")</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   comments = <span style="color: #BB0000;">col_character()</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   mugshot = <span style="color: #BB0000;">col_character()</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> )</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Use `spec()` for the full column specifications.</span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co">#Switch the Genders</span></span></span>
 <span class="r-in"><span><span class="va">sex_original</span>   <span class="op">&lt;-</span> <span class="va">ds_skinny</span><span class="op">$</span><span class="va">sex</span></span></span>
 <span class="r-in"><span><span class="va">ds_skinny</span><span class="op">$</span><span class="va">sex</span>  <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">ds_skinny</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span></span></span>

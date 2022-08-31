@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.9003</span>
       </span>
     </div>
 
@@ -122,13 +122,31 @@ unsuccessful operation, it should contain diagnostic information.</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="va">uri</span>      <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
 <span class="r-in"><span><span class="va">token</span>    <span class="op">&lt;-</span> <span class="st">"06DEFB601F9B46847DAA9DF0CFA951B4"</span></span></span>
 <span class="r-in"><span><span class="va">result</span>   <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_users_export</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The REDCap users were successfully exported in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-in"><span><span class="va">result</span><span class="op">$</span><span class="va">data_user</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 31</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   username       email first…¹ lastn…² expiration data_…³ data_…⁴ design user_…⁵</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> unittestphifr… wibe… Unit T… PHI Fr… <span style="color: #BB0000;">NA</span>         daga    331     FALSE  FALSE  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> wbeasleya      will… Will    Beasle… <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      TRUE   TRUE   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 22 more variables: data_access_groups &lt;lgl&gt;, reports &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   stats_and_charts &lt;lgl&gt;, manage_survey_participants &lt;lgl&gt;, calendar &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   data_import_tool &lt;lgl&gt;, data_comparison_tool &lt;lgl&gt;, logging &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   file_repository &lt;lgl&gt;, data_quality_create &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   data_quality_execute &lt;lgl&gt;, api_export &lt;lgl&gt;, api_import &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mobile_app &lt;lgl&gt;, mobile_app_download_data &lt;lgl&gt;, record_create &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   record_rename &lt;lgl&gt;, record_delete &lt;lgl&gt;, lock_records_all_forms &lt;lgl&gt;, …</span></span>
 <span class="r-in"><span><span class="va">result</span><span class="op">$</span><span class="va">data_user_form</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   username        form_name    permission_id permission</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> unittestphifree demographics             1 edit_form </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> wbeasleya       <span style="color: #BB0000;">NA</span>                      <span style="color: #BB0000;">NA</span> unknown   </span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>
