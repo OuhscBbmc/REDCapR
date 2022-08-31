@@ -15,7 +15,7 @@ devtools::build_vignettes()
 
 checks_to_exclude <- c(
   "covr",
-  # "cyclocomp"#,
+  "cyclocomp",
   "lintr_line_length_linter"
 )
 gp <-

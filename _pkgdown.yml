@@ -55,6 +55,7 @@ reference:
       - redcap_event_instruments
       - redcap_instruments
       - redcap_log_read
+      - redcap_metadata_coltypes
       - redcap_metadata_read
       - redcap_metadata_write
       - redcap_next_free_record_name
