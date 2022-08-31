@@ -78,7 +78,7 @@ and an instrument's completion status.
 \item What is the field's type?  For example, sliders should be an
 \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/integer.html}{integer},
 while check marks should be
-\link{boolean}(https://stat.ethz.ch/R-manual/R-devel/library/base/html/logical.html.
+\link{logical}(https://stat.ethz.ch/R-manual/R-devel/library/base/html/logical.html.
 \item If the field type is "text", what is the validation type?
 For instance, a postal code should be a
 \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/character.html}{character}
@@ -101,6 +101,25 @@ recognized.
 For details of the current implementation,
 the decision logic starts about half-way down in the
 \href{https://github.com/OuhscBbmc/REDCapR/blob/HEAD/R/redcap-metadata-coltypes.R}{function's source code}
+
+*\emph{Validation does NOT Guarantee Conformity}
+
+If you're coming to REDCap from a database world, this will be unexpected.
+A validation type does NOT guarantee that all retrieved values will conform to
+complementary the data type.
+The validation setting affects only the values entered
+\emph{after} the validation was set.
+
+For example, if values like "abcd" where entered in a field for a few months, then
+the project manager selected the "integer" validation option, all those
+"abcd" values remain untouched.
+
+This is one reason \code{redcap_metadata_coltypes} prints it suggestions to the console.
+It allows the developer to adjust the specifications to match the values
+returned by the API.  The the "abcd" scenario, consider (a) changing the type
+from \code{col_integer} to \code{col_character}, (b) excluding the trash values,
+then (c) in a \code{\link[dplyr:mutate]{dplyr::mutate()}} statement,
+use \code{\link[readr:parse_atomic]{readr::parse_integer()}} to cast it to the desired type.
 
 The full list of configuration options accepted by the \code{httr} package is
 viewable by executing \code{\link[httr:httr_options]{httr::httr_options()}}.  The \code{httr} package and

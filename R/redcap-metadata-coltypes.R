@@ -58,7 +58,7 @@
 #' 2. What is the field's type?  For example, sliders should be an
 #' [integer](https://stat.ethz.ch/R-manual/R-devel/library/base/html/integer.html),
 #' while check marks should be
-#' [boolean](https://stat.ethz.ch/R-manual/R-devel/library/base/html/logical.html.
+#' [logical](https://stat.ethz.ch/R-manual/R-devel/library/base/html/logical.html.
 #'
 #' 3. If the field type is "text", what is the validation type?
 #' For instance, a postal code should be a
@@ -82,6 +82,25 @@
 #' For details of the current implementation,
 #' the decision logic starts about half-way down in the
 #' [function's source code](https://github.com/OuhscBbmc/REDCapR/blob/HEAD/R/redcap-metadata-coltypes.R)
+#'
+#' **Validation does NOT Guarantee Conformity*
+#'
+#' If you're coming to REDCap from a database world, this will be unexpected.
+#' A validation type does NOT guarantee that all retrieved values will conform to
+#' complementary the data type.
+#' The validation setting affects only the values entered
+#' *after* the validation was set.
+#'
+#' For example, if values like "abcd" where entered in a field for a few months, then
+#' the project manager selected the "integer" validation option, all those
+#' "abcd" values remain untouched.
+#'
+#' This is one reason `redcap_metadata_coltypes` prints it suggestions to the console.
+#' It allows the developer to adjust the specifications to match the values
+#' returned by the API.  The the "abcd" scenario, consider (a) changing the type
+#' from `col_integer` to `col_character`, (b) excluding the trash values,
+#' then (c) in a [dplyr::mutate()] statement,
+#' use [readr::parse_integer()] to cast it to the desired type.
 #'
 #' The full list of configuration options accepted by the `httr` package is
 #' viewable by executing [httr::httr_options()].  The `httr` package and

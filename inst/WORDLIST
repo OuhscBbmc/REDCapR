@@ -57,8 +57,10 @@ VPN
 Xie
 Yihui
 Zenodo
+abcd
 anova
 api
+autonumber
 bbb
 bbmc
 cURL
@@ -68,6 +70,7 @@ cran
 csv
 daniela
 datetime
+dp
 dropdown
 edu
 eg
@@ -87,6 +90,7 @@ io
 ish
 json
 manageably
+mdy
 misspecified
 nano
 nolint
@@ -94,7 +98,6 @@ nonmissing
 odbc
 ouhsc
 ouhscbbmc
-packageDescription
 packageVersion
 perl
 phpcap
