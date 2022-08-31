@@ -104,8 +104,8 @@ redcap_metadata_coltypes <- function(
   d_var <-
     d_var %>%
     dplyr::select(
-      field_name = export_field_name,
-      field_name_original  = original_field_name
+      field_name            = .data$export_field_name,
+      field_name_original   = .data$original_field_name
     )
 
   d_complete <-
@@ -119,19 +119,19 @@ redcap_metadata_coltypes <- function(
   d_meta <-
     d_meta %>%
     dplyr::select(
-      field_name_original  = field_name,
-      field_type,
-      text_validation_type_or_show_slider_number,
+      field_name_original  = .data$field_name,
+      .data$field_type,
+      .data$text_validation_type_or_show_slider_number,
     ) %>%
-    dplyr::filter(field_type != "descriptive") %>%
+    dplyr::filter(.data$field_type != "descriptive") %>%
     dplyr::left_join(d_var, by = "field_name_original") %>%
     dplyr::mutate(
-      field_name = dplyr::coalesce(field_name, field_name_original),
+      field_name = dplyr::coalesce(.data$field_name, .data$field_name_original),
     ) %>%
     dplyr::select(
-      field_name,
-      field_type,
-      vt            = text_validation_type_or_show_slider_number,
+      .data$field_name,
+      .data$field_type,
+      vt            = .data$text_validation_type_or_show_slider_number,
     ) |>
     dplyr::union_all(d_complete)
 
@@ -243,14 +243,12 @@ redcap_metadata_coltypes <- function(
 
   # Sandwich the col_types output in between the opening+header and the closing
   sandwich <-
-    meat %>%
-    paste(collapse = "\n") %>%
     # I'd prefer this approach, but the `.` is causing problems with R CMD check.
     paste0(
       "# col_types <- readr::cols_only( # Use `readr::cols_only()` to restrict the retrieval to only these columns\n",
       "col_types <- readr::cols( # Use `readr::cols()` to include unspecified columns\n",
       header,
-      .,
+      paste(meat, collapse = "\n") ,
       "\n)\n"
     )
 

@@ -168,14 +168,11 @@ header <- sprintf(
 
 # Sandwich the col_types output in between the opening+header and the closing
 sandwich <-
-  meat %>%
-  paste(collapse = "\n") %>%
-  # I'd prefer this approach, but the `.` is causing problems with R CMD check.
   paste0(
-    "col_types <- readr::cols(\n",
-    "  # col_types <- readr::cols_only( # Use cols_only to restrict the retrieval to only these columns\n",
+    "# col_types <- readr::cols_only( # Use `readr::cols_only()` to restrict the retrieval to only these columns\n",
+    "col_types <- readr::cols( # Use `readr::cols()` to include unspecified columns\n",
     header,
-    .,
+    paste(meat, collapse = "\n") ,
     "\n)\n"
   )
 
