@@ -58,7 +58,7 @@ password for a project.  Required.}
 
 \examples{
 uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
-token   <- "D70F9ACD1EDD6F151C6EA78683944E98"
+token   <- "9A81268476645C4E5F03428B8AC3AA7B"
 \dontrun{
 project <- REDCapR::redcap_project$new(redcap_uri=uri, token=token)
 ds_all  <- project$read()
@@ -73,6 +73,8 @@ ids_of_shorties <- ds_skinny$record_id[ds_skinny$height < 40]
 ds_males        <- project$read(records=ids_of_males, batch_size=2)$data
 ds_shorties     <- project$read(records=ids_of_shorties)$data
 
+}
+if (FALSE) {
 #Switch the Genders
 sex_original   <- ds_skinny$sex
 ds_skinny$sex  <- (1 - ds_skinny$sex)

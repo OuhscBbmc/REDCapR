@@ -100,11 +100,8 @@ token_simple         <- "9A81268476645C4E5F03428B8AC3AA7B"
 token_longitudinal   <- "0434F0E9CF53ED0587847AB6E51DE762"
 
 # ---- Simple examples
-d1 <- REDCapR::redcap_project_info_read(uri, token_simple      )$data
-View(d1)
-
-d2 <- REDCapR::redcap_project_info_read(uri, token_longitudinal)$data
-View(d2)
+REDCapR::redcap_project_info_read(uri, token_simple      )$data
+REDCapR::redcap_project_info_read(uri, token_longitudinal)$data
 
 # ---- Specify timezone
 # Specify the server's timezone, for example, US Central
@@ -135,10 +132,11 @@ d_all <-
   purrr::pmap_dfr(REDCapR::redcap_project_info_read, locale = server_locale)
 
 # Inspect values stored on the server.
-View(d_all$data)
+d_all$data
+# or: View(d_all$data)
 
 # Inspect everything returned, including values like the http status code.
-View(d_all)
+d_all
 }
 }
 \references{

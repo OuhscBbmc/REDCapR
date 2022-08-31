@@ -58,10 +58,10 @@ the default SSL options.
 \examples{
 \dontrun{
 # Install/update REDCapR with the release version from CRAN.
-install.packages('REDCapR')
+# install.packages('REDCapR')
 
 # Install/update REDCapR with the development version from GitHub
 # install.packages("remotes") # Uncomment if `remotes` isn't installed already.
-remotes::install_github('OuhscBbmc/REDCapR')
+# remotes::install_github('OuhscBbmc/REDCapR')
 }
 }

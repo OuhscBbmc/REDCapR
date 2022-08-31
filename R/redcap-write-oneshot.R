@@ -59,7 +59,7 @@
 #' administrator to send you the static material.
 #'
 #' @examples
-#' \dontrun{
+#' if (FALSE) {
 #' #Define some constants
 #' uri            <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token          <- "D70F9ACD1EDD6F151C6EA78683944E98"
