@@ -63,6 +63,45 @@ For instance, you may choose to exclude some variables or tweak a
 data type (\emph{e.g.}, changing a patient's height from an integer to
 a double).
 
+When printing to the console, each data type decision is accompanied
+by an explanation on the far right.  See the output from the
+examples below.  Please file an
+\href{https://github.com/OuhscBbmc/REDCapR/issues}{issue} if you think
+something is too restrictive or can be improved.
+
+The overall heuristic is assign a data type down a waterfall of decisions:
+\enumerate{
+\item Is the field built into REDCap? This includes
+an autonumber \code{record_id},
+\code{redcap_event_name}, \code{redcap_repeat_instrument}, \code{redcap_repeat_instance},
+and an instrument's completion status.
+\item What is the field's type?  For example, sliders should be an
+\href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/integer.html}{integer},
+while check marks should be
+\link{boolean}(https://stat.ethz.ch/R-manual/R-devel/library/base/html/logical.html.
+\item If the field type is "text", what is the validation type?
+For instance, a postal code should be a
+\href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/character.html}{character}
+(even though it looks like a number),
+a "mdy" should be cast to a
+\href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/date.html}{date},
+and a "number_2dp" should be cast to a
+\href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/double.html}{floating point}
+\item If the field type or validation type is not recognized,
+the field will be cast to
+\href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/character.html}{character}.
+This will happen when REDCap develops & releases a new type.
+If you see something like, "# validation doesn't have an associated col_type.
+Tell us in a new REDCapR issue", please make sure REDCapR is running the newest
+\href{https://ouhscbbmc.github.io/REDCapR/index.html#installation-and-documentation}{GitHub release}
+and file a new \href{https://github.com/OuhscBbmc/REDCapR/issues}{issue} if it's still not
+recognized.
+}
+
+For details of the current implementation,
+the decision logic starts about half-way down in the
+\href{https://github.com/OuhscBbmc/REDCapR/blob/HEAD/R/redcap-metadata-coltypes.R}{function's source code}
+
 The full list of configuration options accepted by the \code{httr} package is
 viewable by executing \code{\link[httr:httr_options]{httr::httr_options()}}.  The \code{httr} package and
 documentation is available at https://cran.r-project.org/package=httr.
@@ -103,5 +142,5 @@ If you do not have an account for the wiki, please ask your campus REDCap
 administrator to send you the static material.
 }
 \author{
-Will Beasley
+Will Beasley, Philip Chase
 }

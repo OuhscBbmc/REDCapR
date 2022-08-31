@@ -42,12 +42,52 @@
 #' data type (*e.g.*, changing a patient's height from an integer to
 #' a double).
 #'
+#' When printing to the console, each data type decision is accompanied
+#' by an explanation on the far right.  See the output from the
+#' examples below.  Please file an
+#' [issue](https://github.com/OuhscBbmc/REDCapR/issues) if you think
+#' something is too restrictive or can be improved.
+#'
+#' The overall heuristic is assign a data type down a waterfall of decisions:
+#'
+#' 1. Is the field built into REDCap? This includes
+#' an autonumber `record_id`,
+#' `redcap_event_name`, `redcap_repeat_instrument`, `redcap_repeat_instance`,
+#' and an instrument's completion status.
+#'
+#' 2. What is the field's type?  For example, sliders should be an
+#' [integer](https://stat.ethz.ch/R-manual/R-devel/library/base/html/integer.html),
+#' while check marks should be
+#' [boolean](https://stat.ethz.ch/R-manual/R-devel/library/base/html/logical.html.
+#'
+#' 3. If the field type is "text", what is the validation type?
+#' For instance, a postal code should be a
+#' [character](https://stat.ethz.ch/R-manual/R-devel/library/base/html/character.html)
+#' (even though it looks like a number),
+#' a "mdy" should be cast to a
+#' [date](https://stat.ethz.ch/R-manual/R-devel/library/base/html/date.html),
+#' and a "number_2dp" should be cast to a
+#' [floating point](https://stat.ethz.ch/R-manual/R-devel/library/base/html/double.html)
+#'
+#' 4. If the field type or validation type is not recognized,
+#' the field will be cast to
+#' [character](https://stat.ethz.ch/R-manual/R-devel/library/base/html/character.html).
+#' This will happen when REDCap develops & releases a new type.
+#' If you see something like, "# validation doesn't have an associated col_type.
+#' Tell us in a new REDCapR issue", please make sure REDCapR is running the newest
+#' [GitHub release](https://ouhscbbmc.github.io/REDCapR/index.html#installation-and-documentation)
+#' and file a new [issue](https://github.com/OuhscBbmc/REDCapR/issues) if it's still not
+#' recognized.
+#'
+#' For details of the current implementation,
+#' the decision logic starts about half-way down in the
+#' [function's source code](https://github.com/OuhscBbmc/REDCapR/blob/HEAD/R/redcap-metadata-coltypes.R)
 #'
 #' The full list of configuration options accepted by the `httr` package is
 #' viewable by executing [httr::httr_options()].  The `httr` package and
 #' documentation is available at https://cran.r-project.org/package=httr.
 #'
-#' @author Will Beasley
+#' @author Will Beasley, Philip Chase
 #'
 #' @references The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
