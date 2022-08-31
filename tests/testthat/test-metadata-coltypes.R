@@ -1,10 +1,10 @@
 library(testthat)
 
-credential  <- retrieve_credential_testing(2634L)
 update_expectation  <- FALSE
 
 test_that("smoke test", {
   testthat::skip_on_cran()
+  credential  <- retrieve_credential_testing(2634L)
   expect_warning(
     redcap_metadata_coltypes(credential$redcap_uri, credential$token)
   )
@@ -12,13 +12,13 @@ test_that("smoke test", {
 
 test_that("simple", {
   testthat::skip_on_cran()
-  credential_simple        <- retrieve_credential_testing()
+  credential               <- retrieve_credential_testing()
   path_expected            <- "test-data/specific-redcapr/metadata-coltypes/simple.R"
   expected_outcome_message <- "col_types <- readr::cols"
 
   expect_message(
     regexp          = expected_outcome_message,
-    returned_object <- redcap_metadata_coltypes(credential_simple$redcap_uri, credential_simple$token)
+    returned_object <- redcap_metadata_coltypes(credential$redcap_uri, credential$token)
   )
 
   if (update_expectation) save_expected(returned_object$col_types, path_expected)
@@ -32,13 +32,13 @@ test_that("simple", {
 
 test_that("longitudinal", {
   testthat::skip_on_cran()
-  credential_simple        <- retrieve_credential_testing(212L)
+  credential               <- retrieve_credential_testing(212L)
   path_expected            <- "test-data/specific-redcapr/metadata-coltypes/longitudinal.R"
   expected_outcome_message <- "col_types <- readr::cols"
 
   expect_message(
     regexp          = expected_outcome_message,
-    returned_object <- redcap_metadata_coltypes(credential_simple$redcap_uri, credential_simple$token)
+    returned_object <- redcap_metadata_coltypes(credential$redcap_uri, credential$token)
   )
 
   if (update_expectation) save_expected(returned_object$col_types, path_expected)
@@ -49,5 +49,3 @@ test_that("longitudinal", {
   expect_equal(returned_object$status_code, expected=200L)
   expect_true(returned_object$success)
 })
-
-rm(credential)
