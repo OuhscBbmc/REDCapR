@@ -3,10 +3,10 @@ import::from("magrittr", "%>%")
 
 uri   <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "9A81268476645C4E5F03428B8AC3AA7B" # 153
-token <- "0434F0E9CF53ED0587847AB6E51DE762" # 212
+# token <- "0434F0E9CF53ED0587847AB6E51DE762" # 212
 # token <- "CCB7E11837D41126D67C744F97389E04" # 753 - superwide
-token <- "F187271FC6FD72C3BFCE37990A6BF6A7" # 1400 - Repeating Instruments # 753 - superwide
-token <- "221E86DABFEEA233067C6889991B7FBB" # 1425 - Potentially problematic dictionary
+# token <- "F187271FC6FD72C3BFCE37990A6BF6A7" # 1400 - Repeating Instruments # 753 - superwide
+# token <- "221E86DABFEEA233067C6889991B7FBB" # 1425 - Potentially problematic dictionary
 token <- "8F5313CAA266789F560D79EFCEE2E2F1" # 2634 - Validation Types
 
 # Retrieve the info necessary to infer the likely data types
@@ -24,6 +24,21 @@ locale_current  <- readr::locale()
 decimal_period  <- (locale_current$decimal_mark == ".")
 decimal_comma   <- (locale_current$decimal_mark == ",")
 
+# Prepare var to be joined
+d_var <-
+  d_var %>%
+  dplyr::select(
+    field_name = export_field_name,
+    field_name_original  = original_field_name
+  )
+
+d_complete <-
+  tibble::tibble(
+    field_name  = .form_complete_boxes,
+    field_type  = "complete",
+    vt          = NA_character_,
+  )
+
 # Prepare metadata to be joined
 d_meta <-
   d_meta %>%
@@ -31,26 +46,28 @@ d_meta <-
     field_name_original  = field_name,
     field_type,
     text_validation_type_or_show_slider_number,
-  )
-
-# setdiff(d_meta$field_name_original, d_var$original_field_name)
-# [1] "signature"   "file_upload" "descriptive"
-
-# Translate the four datasets into a single `readr:cols()` string printed to the console
-meat <-
-  d_var %>%
-  dplyr::select(
-    field_name = export_field_name,
-    field_name_original  = original_field_name
   ) %>%
-  dplyr::left_join(d_meta, by = "field_name_original") %>%
+  dplyr::filter(field_type != "descriptive") %>%
+  dplyr::left_join(d_var, by = "field_name_original") %>%
+  dplyr::mutate(
+    field_name = dplyr::coalesce(field_name, field_name_original),
+  ) %>%
   dplyr::select(
     field_name,
     field_type,
     vt            = text_validation_type_or_show_slider_number,
-  ) %>%
+  ) |>
+  dplyr::union_all(d_complete)
+
+setdiff(d_meta$field_name, d_var$field_name)
+setdiff(d_var$field_name, d_meta$field_name)
+# [1] "signature"   "file_upload" "descriptive"
+
+# Translate the four datasets into a single `readr:cols()` string printed to the console
+meat <-
+  d_meta %>%
   dplyr::mutate(
-    vt          = dplyr::if_else(.data$field_name %in% .form_complete_boxes, "complete", vt),
+    # vt          = dplyr::if_else(.data$field_name %in% .form_complete_boxes, "complete", vt),
     autonumber  = (.autonumber & (.data$field_name == .record_field)),
   ) %>%
   dplyr::mutate(
@@ -70,7 +87,7 @@ meat <-
         field_type == "sql"                                 ~ paste0("col_character()"                      , "~~field_type is sql"),
         field_type == "text" & is.na(vt)                    ~ paste0("col_character()"                      , "~~field_type is text and validation isn't set"),
         field_type == "text" & vt == ""                     ~ paste0("col_character()"                      , "~~field_type is text and validation isn't set"),
-        is.na(field_type) & vt == "complete"                ~ paste0("col_integer()"                        , "~~indicates completion status of form/instrument"),
+        field_type == "complete"                            ~ paste0("col_integer()"                        , "~~indicates completion status of form/instrument"),
         vt == "alpha_only"                                  ~ paste0("col_character()"                      , "~~validation is 'alpha_only'"),
         vt == "date_dmy"                                    ~ paste0("col_date()"                           , "~~validation is 'date_dmy'"),
         vt == "date_mdy"                                    ~ paste0("col_date()"                           , "~~validation is 'date_mdy'"),
@@ -165,8 +182,8 @@ sandwich <-
 sandwich %>%
   cat()
 
-decimal_period_any <- any(d_meta$text_validation_type_or_show_slider_number %in% c("number", "number_1dp", "number_2dp", "number_3dp", "number_4dp" ))
-decimal_comma_any  <- any(d_meta$text_validation_type_or_show_slider_number %in% c("number_comma_decimal", "number_1dp_comma_decimal", "number_2dp_comma_decimal", "number_3dp_comma_decimal", "number_4dp_comma_decimal"))
+decimal_period_any <- any(d_meta$vt %in% c("number", "number_1dp", "number_2dp", "number_3dp", "number_4dp" ))
+decimal_comma_any  <- any(d_meta$vt %in% c("number_comma_decimal", "number_1dp_comma_decimal", "number_2dp_comma_decimal", "number_3dp_comma_decimal", "number_4dp_comma_decimal"))
 
 if (decimal_period_any && decimal_comma_any) {
   warning(

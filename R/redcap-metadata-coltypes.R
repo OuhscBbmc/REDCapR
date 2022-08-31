@@ -101,32 +101,48 @@ redcap_metadata_coltypes <- function(
   decimal_comma         <- (locale$decimal_mark == ",")
 
   # Prepare metadata to be joined
+  d_var <-
+    d_var %>%
+    dplyr::select(
+      field_name = export_field_name,
+      field_name_original  = original_field_name
+    )
+
+  d_complete <-
+    tibble::tibble(
+      field_name  = .form_complete_boxes,
+      field_type  = "complete",
+      vt          = NA_character_,
+    )
+
+  # Prepare metadata to be joined
   d_meta <-
     d_meta %>%
     dplyr::select(
       field_name_original  = field_name,
       field_type,
       text_validation_type_or_show_slider_number,
-    )
+    ) %>%
+    dplyr::filter(field_type != "descriptive") %>%
+    dplyr::left_join(d_var, by = "field_name_original") %>%
+    dplyr::mutate(
+      field_name = dplyr::coalesce(field_name, field_name_original),
+    ) %>%
+    dplyr::select(
+      field_name,
+      field_type,
+      vt            = text_validation_type_or_show_slider_number,
+    ) |>
+    dplyr::union_all(d_complete)
 
   # setdiff(d_meta$field_name_original, d_var$original_field_name)
   # [1] "signature"   "file_upload" "descriptive"
 
   # Translate the four datasets into a single `readr:cols()` string printed to the console
   meat <-
-    d_var %>%
-    dplyr::select(
-      field_name = export_field_name,
-      field_name_original  = original_field_name
-    ) %>%
-    dplyr::left_join(d_meta, by = "field_name_original") %>%
-    dplyr::select(
-      field_name,
-      field_type,
-      vt            = text_validation_type_or_show_slider_number,
-    ) %>%
+    d_meta %>%
     dplyr::mutate(
-      vt          = dplyr::if_else(.data$field_name %in% .form_complete_boxes, "complete", vt),
+      # vt          = dplyr::if_else(.data$field_name %in% .form_complete_boxes, "complete", vt),
       autonumber  = (.autonumber & (.data$field_name == .record_field)),
     ) %>%
     dplyr::mutate(
@@ -241,8 +257,8 @@ redcap_metadata_coltypes <- function(
   sandwich %>%
     message()
 
-  decimal_period_any <- any(d_meta$text_validation_type_or_show_slider_number %in% c("number", "number_1dp", "number_2dp", "number_3dp", "number_4dp" ))
-  decimal_comma_any  <- any(d_meta$text_validation_type_or_show_slider_number %in% c("number_comma_decimal", "number_1dp_comma_decimal", "number_2dp_comma_decimal", "number_3dp_comma_decimal", "number_4dp_comma_decimal"))
+  decimal_period_any <- any(d_meta$vt %in% c("number", "number_1dp", "number_2dp", "number_3dp", "number_4dp" ))
+  decimal_comma_any  <- any(d_meta$vt %in% c("number_comma_decimal", "number_1dp_comma_decimal", "number_2dp_comma_decimal", "number_3dp_comma_decimal", "number_4dp_comma_decimal"))
 
   if (decimal_period_any && decimal_comma_any) {
     warning(

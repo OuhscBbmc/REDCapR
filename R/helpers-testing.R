@@ -17,6 +17,15 @@ save_expected <- function(o, path) {
   dput(o, path)
   # nocov end
 }
+save_expected_2 <- function(o, path) {
+  # nocov start
+  attr(o, which = "problems") <- NULL
+  path <- file.path("inst", path)
+  if (!dir.exists(dirname(path))) dir.create(dirname(path), recursive = FALSE)
+
+  dput(o, path)
+  # nocov end
+}
 
 retrieve_expected <- function(path) {
   full_path   <- system.file(path, package = "REDCapR")

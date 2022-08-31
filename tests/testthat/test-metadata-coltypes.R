@@ -21,7 +21,7 @@ test_that("simple", {
     actual  <- redcap_metadata_coltypes(credential$redcap_uri, credential$token)
   )
 
-  if (update_expectation) save_expected(actual, path_expected)
+  if (update_expectation) save_expected_2(actual, path_expected)
   expected <- retrieve_expected(path_expected)
 
   expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
@@ -45,7 +45,7 @@ test_that("longitudinal", {
     actual  <- redcap_metadata_coltypes(credential$redcap_uri, credential$token)
   )
 
-  if (update_expectation) save_expected(actual, path_expected)
+  if (update_expectation) save_expected_2(actual, path_expected)
   expected <- retrieve_expected(path_expected)
 
   expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
@@ -69,7 +69,7 @@ test_that("repeating-instruments", {
     actual  <- redcap_metadata_coltypes(credential$redcap_uri, credential$token)
   )
 
-  if (update_expectation) save_expected(actual, path_expected)
+  if (update_expectation) save_expected_2(actual, path_expected)
   expected <- retrieve_expected(path_expected)
 
   expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
