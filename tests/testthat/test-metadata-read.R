@@ -30,6 +30,7 @@ test_that("Super-wide", {
   expect_equal(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
   expect_equal(ncol(returned_object$data), expected=expected_column_count)
   expect_equal(sum(is.na(returned_object$data)), expected=expected_na_cells)
+  expect_s3_class(returned_object$data, "tbl")
 })
 
 test_that("Super-wide 2", {
@@ -47,6 +48,7 @@ test_that("Super-wide 2", {
   expect_equal(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
   expect_equal(ncol(returned_object$data), expected=expected_column_count)
   expect_equal(sum(is.na(returned_object$data)), expected=expected_na_cells)
+  expect_s3_class(returned_object$data, "tbl")
 })
 
 test_that("Super-wide 3", {
@@ -64,6 +66,7 @@ test_that("Super-wide 3", {
   expect_equal(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
   expect_equal(ncol(returned_object$data), expected=expected_column_count)
   expect_equal(sum(is.na(returned_object$data)), expected=expected_na_cells)
+  expect_s3_class(returned_object$data, "tbl")
 })
 
 test_that("Problematic Dictionary", {
@@ -81,6 +84,7 @@ test_that("Problematic Dictionary", {
   expect_equal(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
   expect_equal(ncol(returned_object$data), expected=expected_column_count)
   expect_equal(sum(is.na(returned_object$data)), expected=expected_na_cells)
+  expect_s3_class(returned_object$data, "tbl")
 })
 
 test_that("normal", {
@@ -104,6 +108,7 @@ test_that("normal", {
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+  expect_s3_class(returned_object$data, "tbl")
 })
 
 rm(credential           )

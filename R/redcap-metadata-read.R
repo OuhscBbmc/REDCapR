@@ -1,7 +1,7 @@
 #' @title Export the metadata of a REDCap project
 #'
 #' @description Export the metadata (as a data dictionary) of a REDCap project
-#' as a [base::data.frame()]. Each row in the data dictionary corresponds to
+#' as a [tibble::tibble()]. Each row in the data dictionary corresponds to
 #' one field in the project's dataset.
 #'
 #' @param redcap_uri The
@@ -28,7 +28,7 @@
 #'
 #' @return Currently, a list is returned with the following elements:
 #'
-#' * `data`: An R [base::data.frame()] of the desired records and columns.
+#' * `data`: An R [tibble::tibble()] of the desired fields (as rows).
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
 #' * `status_codes`: A collection of
@@ -42,17 +42,6 @@
 #' * `fields_collapsed`: The desired field names, collapsed into a single
 #' string, separated by commas.
 #' * `elapsed_seconds`: The duration of the function.
-#'
-#' @details
-#' Specifically, it internally uses multiple calls to [redcap_read_oneshot()]
-#' to select and return data.  Initially, only primary key is queried through
-#' the REDCap API.  The long list is then subsetted into partitions, whose
-#' sizes are determined by the `batch_size` parameter.  REDCap is then queried
-#' for all variables of the subset's subjects.  This is repeated for each
-#' subset, before returning a unified [base::data.frame()].
-#'
-#' The function allows a delay between calls, which allows the server to
-#' attend to other users' requests.
 #'
 #' @author Will Beasley
 #'
@@ -142,7 +131,7 @@ redcap_metadata_read <- function(
       # Override the 'success' determination from the http status code
       #   and return an empty data.frame.
       kernel$success    <- FALSE
-      ds                <- data.frame()
+      ds                <- tibble::tibble()
       outcome_message   <- sprintf(
         "The REDCap metadata export failed.  The http status code was %i.  The 'raw_text' returned was '%s'.",
         kernel$status_code,
@@ -150,7 +139,7 @@ redcap_metadata_read <- function(
       )
     }       # nocov end
   } else {
-    ds                  <- data.frame() #Return an empty data.frame
+    ds                  <- tibble::tibble() # Return an empty data.frame
     outcome_message     <- sprintf(
       "The REDCapR metadata export operation was not successful.  The error message was:\n%s",
       kernel$raw_text

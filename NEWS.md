@@ -1,8 +1,15 @@
 Upcoming Release
 ==========================================================
 
+### Possibly Breaking Changes
+
+* `redcap_read()`, `redcap_read_oneshot()`, `redcap_dag_read()`, `redcap_log_read()` and `redcap_report()` return a tibble instead of a data.frame.  (#415)
+
+    This should affect client code only if you expect a call like `ds[, 3]` to return a vector instead of a single-column data.frame/tibble.  One solution is to upcast the tibble to a data.frame (with something like `as.data.frame()`).  We recommend using an approach that works for both data.frames and tibbles, such as `ds[[3]]` or `dplyr::pull(ds, "gender")`.
+
 ### New Features
 
+* New `redcap_metadata_coltypes()` function.  Inspects the fields types and validation text of each field to generate a suggested `readr::col_types` object that reflects the project's current data dictionary.  The object then can be passed to the `col_types` parameter of `redcap_read()` or `redcap_read_oneshot()`.  (Suggested and discussed with @pbchase, @nutterb, @skadauke, & others, #405 & #294)
 * New `redcap_log_read()` function.  Exports a project's log.  (Thanks @joundso, #383, #320)
 * New `redcap_project_info_read()` function.  Exports a project's information, such as its language and production status.  (Thanks @skadauke, #410)
 * New parameter `blank_for_gray_form_status` in the functions `redcap_read()`, `redcap_read_oneshot()`, and `redcap_read_oneshot_eav()`. (@greg-botwin, #386, #389)

@@ -10,7 +10,7 @@ retrieve_credential_testing <- function(project_id = 153L, username = NA_charact
 # This function isn't used during testing itself.  Just to create the expected file.
 save_expected <- function(o, path) {
   # nocov start
-  attr(returned_object$data, which = "problems") <- NULL
+  attr(o, which = "problems") <- NULL
   path <- file.path("inst", path)
   if (!dir.exists(dirname(path))) dir.create(dirname(path), recursive = FALSE)
 

@@ -70,7 +70,7 @@
 #' `httr` package.  See the details below. Optional.
 #'
 #' @return Currently, a list is returned with the following elements:
-#' * `data`: An R [base::data.frame()] of the desired records and columns.
+#' * `data`: A [tibble::tibble()] of the desired records and columns.
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
 #' * `status_code`: The
@@ -351,7 +351,7 @@ redcap_read_oneshot_eav <- function(
     } else {
       # nocov start
       kernel$success    <- FALSE #Override the 'success' determination from the http status code.
-      ds_2              <- tibble::tibble() #Return an empty data.frame
+      ds_2              <- tibble::tibble() # Return an empty data.frame
       outcome_message   <- sprintf(
         "The REDCap read failed.  The http status code was %s.  The 'raw_text' returned was '%s'.",
         kernel$status_code,
@@ -361,7 +361,7 @@ redcap_read_oneshot_eav <- function(
     }
   } else {
     # nocov start
-    ds_2            <- tibble::tibble() #Return an empty data.frame
+    ds_2            <- tibble::tibble() # Return an empty data.frame
     outcome_message <- if (any(grepl(kernel$regex_empty, kernel$raw_text))) {
       "The REDCapR read/export operation was not successful.  The returned dataset was empty."
     } else {

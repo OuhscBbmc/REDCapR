@@ -38,6 +38,8 @@ test_that("2020-08-10", {
   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 
 test_that("2020-08-10-api-export", {
@@ -64,6 +66,8 @@ test_that("2020-08-10-api-export", {
   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("2021-07-11-record3-user", {
   testthat::skip_on_cran()
@@ -91,6 +95,8 @@ test_that("2021-07-11-record3-user", {
   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
 })
 
 rm(credential)

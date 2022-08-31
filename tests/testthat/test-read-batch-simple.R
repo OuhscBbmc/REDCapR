@@ -42,13 +42,14 @@ test_that("default", {
   if (update_expectation) save_expected(returned_object1$data, path_expected_default)
   expected_data_frame <- retrieve_expected(path_expected_default)
 
-  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
+  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object1$data)
   expect_true(returned_object1$success)
   expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
   expect_true(returned_object1$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  expect_s3_class(returned_object1$data, "tbl")
 
   ###########################
   ## Tiny Batch size
@@ -57,13 +58,14 @@ test_that("default", {
     regexp = expected_outcome_message
   )
 
-  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
+  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
   expect_true(returned_object2$success)
   expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
   expect_true(returned_object2$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  expect_s3_class(returned_object2$data, "tbl")
 })
 test_that("col_types", {
   testthat::skip_on_cran()
@@ -88,13 +90,14 @@ test_that("col_types", {
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_true( returned_object$success)
   expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
   expect_true( returned_object$records_collapsed=="", "A subset of records was not requested.")
   expect_true( returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_true( returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("specify-records", {
   testthat::skip_on_cran()
@@ -117,6 +120,7 @@ test_that("specify-records", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("specify-records-zero-length", {
   testthat::skip_on_cran()
@@ -139,6 +143,7 @@ test_that("specify-records-zero-length", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("specify-fields", {
   testthat::skip_on_cran()
@@ -161,6 +166,7 @@ test_that("specify-fields", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("specify-fields-zero-length", {
   testthat::skip_on_cran()
@@ -183,6 +189,7 @@ test_that("specify-fields-zero-length", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("specify-records-and-fields-zero-length", {
   testthat::skip_on_cran()
@@ -204,6 +211,7 @@ test_that("specify-records-and-fields-zero-length", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+  expect_s3_class(returned_object$data, "tbl")
 })
 
 test_that("specify-forms", {
@@ -222,13 +230,14 @@ test_that("specify-forms", {
   if (update_expectation) save_expected(returned_object1$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
+  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object1$data)
   expect_true(returned_object1$success)
   expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
   expect_true(returned_object1$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  expect_s3_class(returned_object1$data, "tbl")
 
   ###########################
   ## Tiny Batch size
@@ -237,13 +246,14 @@ test_that("specify-forms", {
     regexp = expected_outcome_message
   )
 
-  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
+  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
   expect_true(returned_object2$success)
   expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
   expect_true(returned_object2$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  expect_s3_class(returned_object2$data, "tbl")
 })
 test_that("raw", {
   testthat::skip_on_cran()
@@ -260,13 +270,14 @@ test_that("raw", {
   if (update_expectation) save_expected(returned_object1$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
+  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object1$data)
   expect_true(returned_object1$success)
   expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
   expect_true(returned_object1$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  expect_s3_class(returned_object1$data, "tbl")
 
   ###########################
   ## Tiny Batch size
@@ -275,13 +286,14 @@ test_that("raw", {
     returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, batch_size=2)
   )
 
-  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
+  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
   expect_true(returned_object2$success)
   expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
   expect_true(returned_object2$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  expect_s3_class(returned_object2$data, "tbl")
 })
 test_that("raw-and-dag", {
   testthat::skip_on_cran()
@@ -298,13 +310,14 @@ test_that("raw-and-dag", {
   if (update_expectation) save_expected(returned_object1$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
+  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object1$data)
   expect_true(returned_object1$success)
   expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
   expect_true(returned_object1$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  expect_s3_class(returned_object1$data, "tbl")
 
   ###########################
   ## Tiny Batch size
@@ -313,13 +326,14 @@ test_that("raw-and-dag", {
     returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="raw", export_data_access_groups=TRUE, batch_size=2)
   )
 
-  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
+  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
   expect_true(returned_object2$success)
   expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
   expect_true(returned_object2$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  expect_s3_class(returned_object2$data, "tbl")
 })
 test_that("label-and-dag-one-single-batch", {
   testthat::skip_on_cran()
@@ -337,13 +351,14 @@ test_that("label-and-dag-one-single-batch", {
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object1$data)
   expect_true(returned_object$success)
   expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("label-and-dag-three-tiny-batches", {
   testthat::skip_on_cran()
@@ -359,13 +374,14 @@ test_that("label-and-dag-three-tiny-batches", {
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(as.data.frame(tibble::as_tibble(returned_object$data)), expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
+  expect_equal(as.data.frame(tibble::as_tibble(returned_object$data)), expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
   expect_true(returned_object$success)
   expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("label", {
   testthat::skip_on_cran()
@@ -382,13 +398,14 @@ test_that("label", {
   if (update_expectation) save_expected(returned_object1$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
+  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object1$data)
   expect_true(returned_object1$success)
   expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
   expect_true(returned_object1$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  expect_s3_class(returned_object1$data, "tbl")
 
   ###########################
   ## Tiny Batch size
@@ -397,12 +414,13 @@ test_that("label", {
     returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups=FALSE, batch_size=2)
   )
 
-  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
+  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
   expect_true(returned_object2$success)
   expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  expect_s3_class(returned_object2$data, "tbl")
 })
 # This test is removed because the vroom version adds digits to make the columns unique
 # test_that("label-header", {
@@ -445,13 +463,14 @@ test_that("export_checkbox_label", {
   if (update_expectation) save_expected(returned_object1$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object1$data)
+  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object1$data)
   expect_true(returned_object1$success)
   expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
   expect_true(returned_object1$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  expect_s3_class(returned_object1$data, "tbl")
 
   ###########################
   ## Tiny Batch size
@@ -460,12 +479,13 @@ test_that("export_checkbox_label", {
     returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_checkbox_label=TRUE, batch_size=2)
   )
 
-  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object2$data)
+  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
   expect_true(returned_object2$success)
   expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  expect_s3_class(returned_object2$data, "tbl")
 })
 test_that("filter-numeric", {
   testthat::skip_on_cran()
@@ -481,13 +501,14 @@ test_that("filter-numeric", {
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_equal(returned_object$filter_logic, filter)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("filter-character", {
   testthat::skip_on_cran()
@@ -503,13 +524,14 @@ test_that("filter-character", {
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_equal(returned_object$filter_logic, filter)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("blank-for-gray-status-true", {
   testthat::skip_on_cran()
@@ -536,6 +558,7 @@ test_that("blank-for-gray-status-true", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("blank-for-gray-status-false", {
   testthat::skip_on_cran()
@@ -562,6 +585,7 @@ test_that("blank-for-gray-status-false", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+  expect_s3_class(returned_object$data, "tbl")
 })
 
 test_that("date-range", {
@@ -590,6 +614,7 @@ test_that("date-range", {
   expect_equal(returned_object$filter_logic, "")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+  expect_s3_class(returned_object$data, "tbl")
 })
 
 test_that("error-bad-token", {

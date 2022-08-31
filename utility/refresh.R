@@ -1,10 +1,11 @@
-rm(list=ls(all.names=TRUE))
+rm(list = ls(all.names = TRUE))
 deviceType <- ifelse(R.version$os=="linux-gnu", "X11", "windows")
 options(device = deviceType) #https://support.rstudio.org/help/discussions/problems/80-error-in-function-only-one-rstudio-graphics-device-is-permitted
 
 spelling::spell_check_package()
 # spelling::update_wordlist()
 lintr::lint_package()
+lintr::lint("R/redcap-metadata-coltypes.R")
 urlchecker::url_check(); urlchecker::url_update()
 
 devtools::document()
@@ -14,7 +15,7 @@ devtools::build_vignettes()
 
 checks_to_exclude <- c(
   "covr",
-  # "cyclocomp"#,
+  "cyclocomp",
   "lintr_line_length_linter"
 )
 gp <-
@@ -37,7 +38,7 @@ devtools::run_examples(); #dev.off() #This overwrites the NAMESPACE file too
 # pkgload::load_all()
 test_results_checked <- devtools::test()
 test_results_checked <- devtools::test(filter = "read-batch-simple")
-test_results_checked <- devtools::test(filter = "^log")
+test_results_checked <- devtools::test(filter = "^metadata-coltypes")
 withr::local_envvar(ONLYREADTESTS = "true")
 test_results_checked <- devtools::test(filter = "write-batch")
 

@@ -46,6 +46,7 @@ test_that("correct dimensions -superwide 1 -oneshot", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
+  expect_s3_class(returned_object$data, "tbl")
 })
 test_that("correct dimensions -superwide 1 -batch", {
   testthat::skip_on_cran()
@@ -69,6 +70,7 @@ test_that("correct dimensions -superwide 1 -batch", {
   expect_true(  returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_true(  returned_object$filter_logic=="", "A filter was not specified.")
   expect_match( returned_object$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  expect_s3_class(returned_object$data, "tbl")
 })
 
 # test_that("correct dimensions -superwide 3 -oneshot", {

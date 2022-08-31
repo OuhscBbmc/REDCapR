@@ -180,20 +180,20 @@ We find it's best to develop the query in [MySQL Workbench](https://www.mysql.co
 Here is an example that retrieves the `first_submit_time`, which is helpful if you need a timestamp from surveys that were not marked as completed.  Replace '444' with your pid, and 1001 through 1003 with the desired events.
 
 ```sql
-SELECT 
+SELECT
   p.participant_id      as participant_survey_id
   ,r.record             as record_id
   ,p.event_id
   ,e.descrip            as event_name
   ,r.first_submit_time
   ,r.completion_time
-  
+
   -- ,p.*
   -- ,r.*
 FROM redcapv3.redcap_surveys_participants     as p
   left  join redcapv3.redcap_surveys_response as r on p.participant_id = r.participant_id
   left  join redcapv3.redcap_events_metadata  as e on p.event_id       = e.event_id
-where 
+WHERE
   p.survey_id = 444
   and
   p.event_id in (

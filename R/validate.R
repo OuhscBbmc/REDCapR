@@ -140,6 +140,7 @@ validate_field_names <- function(field_names, stop_on_error = FALSE) {
     )
   }
 }
+
 #' @export
 validate_field_names_collapsed <- function(field_names_collapsed, stop_on_error = FALSE) {
   field_names <- trimws(unlist(strsplit(field_names_collapsed, ",")))
@@ -156,7 +157,5 @@ validate_for_write <- function(d) {
   )
 
   # Vertically stack all the data.frames into a single data.frame
-  ds_concern <- dplyr::bind_rows(lst_concerns)
-
- ds_concern
+  dplyr::bind_rows(lst_concerns)
 }

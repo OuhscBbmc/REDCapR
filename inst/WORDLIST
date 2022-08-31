@@ -49,6 +49,7 @@ RODBC
 RODBCext
 SSL
 SecurityDatabase
+Sys
 Timezones
 Translational
 URI
@@ -108,9 +109,13 @@ redcapAPI
 regexes
 reproducibility
 schemas
+setenv
 testthat
+tibble
+tibbles
 tidyr
 tidyverse
+upcast
 uploadable
 uri
 webserver
