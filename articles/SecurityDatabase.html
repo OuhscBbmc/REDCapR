@@ -81,12 +81,12 @@
 
       
 
-      </header><script src="SecurityDatabase_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Security Database</h1>
             
-            <h4 data-toc-skip class="date">2022-08-31</h4>
+            <h4 data-toc-skip class="date">2022-09-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/HEAD/vignettes/SecurityDatabase.Rmd" class="external-link"><code>vignettes/SecurityDatabase.Rmd</code></a></small>
       <div class="hidden name"><code>SecurityDatabase.Rmd</code></div>
@@ -121,53 +121,53 @@
 <h2 id="create-database">Create Database<a class="anchor" aria-label="anchor" href="#create-database"></a>
 </h2>
 <p>This SQL code is run once inside an existing database to establish the schemas, table, and stored procedure used by <code><a href="../reference/retrieve_credential.html">REDCapR::retrieve_credential_mssql()</a></code>. In this example, we’ve arbitrarily called the database <code>auxiliary_security</code>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">------- SQL code to create necessary components in a Microsoft SQL Sever database -------</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="co">-----------------------------------------------------------------------</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="co">-- Create two schemas.</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="co">-- The first schema is accessible by all REDCap API users.</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="co">-- The second schema is restricted to administrators.</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="co">--</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">CREATE</span> <span class="kw">SCHEMA</span> [redcap]</span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="kw">CREATE</span> <span class="kw">SCHEMA</span> [redcap_private]</span>
-<span id="cb1-10"><a href="#cb1-10"></a>GO</span>
-<span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="co">-----------------------------------------------------------------------</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="co">-- Create a table to contain the token</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> redcap_private.tbl_credential (</span>
-<span id="cb1-15"><a href="#cb1-15"></a>  <span class="kw">id</span>            <span class="dt">smallint</span>        <span class="kw">primary</span> <span class="kw">key</span>,</span>
-<span id="cb1-16"><a href="#cb1-16"></a>  username      <span class="dt">varchar</span>(<span class="dv">30</span>)     <span class="kw">not</span> <span class="kw">null</span>,</span>
-<span id="cb1-17"><a href="#cb1-17"></a>  project_id    <span class="dt">smallint</span>        <span class="kw">not</span> <span class="kw">null</span>,</span>
-<span id="cb1-18"><a href="#cb1-18"></a>  <span class="kw">instance</span>      <span class="dt">varchar</span>(<span class="dv">30</span>)     <span class="kw">not</span> <span class="kw">null</span>,</span>
-<span id="cb1-19"><a href="#cb1-19"></a>  token         <span class="dt">char</span>(<span class="dv">32</span>)        <span class="kw">not</span> <span class="kw">null</span>,</span>
-<span id="cb1-20"><a href="#cb1-20"></a>  redcap_uri    <span class="dt">varchar</span>(<span class="dv">255</span>)    <span class="kw">not</span> <span class="kw">null</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a>)</span>
-<span id="cb1-22"><a href="#cb1-22"></a></span>
-<span id="cb1-23"><a href="#cb1-23"></a><span class="kw">CREATE</span> <span class="kw">UNIQUE</span> NONCLUSTERED <span class="kw">INDEX</span> IX_tbl_credential_unique <span class="kw">ON</span> redcap_private.tbl_credential (</span>
-<span id="cb1-24"><a href="#cb1-24"></a>  <span class="kw">instance</span>        <span class="kw">asc</span>,</span>
-<span id="cb1-25"><a href="#cb1-25"></a>  project_id      <span class="kw">asc</span>,</span>
-<span id="cb1-26"><a href="#cb1-26"></a>  username        <span class="kw">asc</span></span>
-<span id="cb1-27"><a href="#cb1-27"></a>)</span>
-<span id="cb1-28"><a href="#cb1-28"></a></span>
-<span id="cb1-29"><a href="#cb1-29"></a><span class="co">-----------------------------------------------------------------------</span></span>
-<span id="cb1-30"><a href="#cb1-30"></a><span class="co">-- Create a stored procedure for users to call to retrieve the token.</span></span>
-<span id="cb1-31"><a href="#cb1-31"></a><span class="co">-- Notice it should a different (and more permissive) schema than the table.</span></span>
-<span id="cb1-32"><a href="#cb1-32"></a><span class="co">--</span></span>
-<span id="cb1-33"><a href="#cb1-33"></a><span class="kw">CREATE</span> <span class="kw">PROCEDURE</span> redcap.prc_credential</span>
-<span id="cb1-34"><a href="#cb1-34"></a>  @project_id <span class="dt">smallint</span>,</span>
-<span id="cb1-35"><a href="#cb1-35"></a>  @instance   <span class="dt">varchar</span>(<span class="dv">30</span>)</span>
-<span id="cb1-36"><a href="#cb1-36"></a><span class="kw">AS</span></span>
-<span id="cb1-37"><a href="#cb1-37"></a><span class="cf">BEGIN</span></span>
-<span id="cb1-38"><a href="#cb1-38"></a>  <span class="kw">SET</span> NOCOUNT <span class="kw">ON</span>;</span>
-<span id="cb1-39"><a href="#cb1-39"></a></span>
-<span id="cb1-40"><a href="#cb1-40"></a>  <span class="kw">SELECT</span> username, project_id, token, redcap_uri <span class="kw">FROM</span> redcap_private.tbl_credential</span>
-<span id="cb1-41"><a href="#cb1-41"></a>  <span class="kw">WHERE</span></span>
-<span id="cb1-42"><a href="#cb1-42"></a>    username   <span class="op">=</span> system_user <span class="co">-- The username from the server's OS.</span></span>
-<span id="cb1-43"><a href="#cb1-43"></a>    <span class="kw">AND</span></span>
-<span id="cb1-44"><a href="#cb1-44"></a>    project_id <span class="op">=</span> @project_id <span class="co">-- Restricts to the desired REDCap project.</span></span>
-<span id="cb1-45"><a href="#cb1-45"></a>    <span class="kw">AND</span></span>
-<span id="cb1-46"><a href="#cb1-46"></a>    <span class="kw">instance</span>   <span class="op">=</span> @instance   <span class="co">-- System accommodates multiple REDCap instances.</span></span>
-<span id="cb1-47"><a href="#cb1-47"></a><span class="cf">END</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">------- SQL code to create necessary components in a Microsoft SQL Sever database -------</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">-----------------------------------------------------------------------</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- Create two schemas.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- The first schema is accessible by all REDCap API users.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">-- The second schema is restricted to administrators.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">--</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">SCHEMA</span> [redcap]</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">SCHEMA</span> [redcap_private]</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>GO</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">-----------------------------------------------------------------------</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">-- Create a table to contain the token</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> redcap_private.tbl_credential (</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">id</span>            <span class="dt">smallint</span>        <span class="kw">primary</span> <span class="kw">key</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  username      <span class="dt">varchar</span>(<span class="dv">30</span>)     <span class="kw">not</span> <span class="kw">null</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  project_id    <span class="dt">smallint</span>        <span class="kw">not</span> <span class="kw">null</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">instance</span>      <span class="dt">varchar</span>(<span class="dv">30</span>)     <span class="kw">not</span> <span class="kw">null</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  token         <span class="dt">char</span>(<span class="dv">32</span>)        <span class="kw">not</span> <span class="kw">null</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  redcap_uri    <span class="dt">varchar</span>(<span class="dv">255</span>)    <span class="kw">not</span> <span class="kw">null</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">UNIQUE</span> NONCLUSTERED <span class="kw">INDEX</span> IX_tbl_credential_unique <span class="kw">ON</span> redcap_private.tbl_credential (</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">instance</span>        <span class="kw">asc</span>,</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  project_id      <span class="kw">asc</span>,</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  username        <span class="kw">asc</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co">-----------------------------------------------------------------------</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">-- Create a stored procedure for users to call to retrieve the token.</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co">-- Notice it should a different (and more permissive) schema than the table.</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co">--</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">PROCEDURE</span> redcap.prc_credential</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  @project_id <span class="dt">smallint</span>,</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  @instance   <span class="dt">varchar</span>(<span class="dv">30</span>)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="cf">BEGIN</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SET</span> NOCOUNT <span class="kw">ON</span>;</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> username, project_id, token, redcap_uri <span class="kw">FROM</span> redcap_private.tbl_credential</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  <span class="kw">WHERE</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    username   <span class="op">=</span> system_user <span class="co">-- The username from the server's OS.</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    project_id <span class="op">=</span> @project_id <span class="co">-- Restricts to the desired REDCap project.</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="kw">instance</span>   <span class="op">=</span> @instance   <span class="co">-- System accommodates multiple REDCap instances.</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="cf">END</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="create-user-credentials-to-the-auxiliary-database">Create user credentials to the auxiliary database<a class="anchor" aria-label="anchor" href="#create-user-credentials-to-the-auxiliary-database"></a>
@@ -175,80 +175,80 @@
 <p>Add a user’s LDAP account to the <code>auxiliary_security</code> database so that they can query the tables to retrieve their API.</p>
 <p>Notice that this only gives the permissions to retrieve the token. You still must grant them API privileges to each appropriate REDCap project. The automation in the R file below will copy the API token from the MySQL database into the <code>auxiliary_security</code> database (see the ‘Transfer Credentials’ section).</p>
 <p>Only database admins should have authorization for the ‘redcap_private’ schema. Typical users should not be authorized for this schema. The current system allows typical users to view only their own tokens.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">-----------------------------------------------------------------------</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="co">-- Add a user account to the auxiliary_security database so that they can query the tables to retrieve their API.</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="co">-- Notice that this only gives the permissions to retrieve the token.  You must still:</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co">--   1) grant them API privileges to each appropriate REDCap project, and</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co">--   2) copy the API from the REDCap database into the  auxiliary_security database.</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="co">-- Also, do not give typical users authorization for the 'redcap_private' schema.  The current system allows them to view only their own tokens.</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co">-----------------------------------------------------------------------</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="co">-- STEP #1: Declare the user name.  If everything runs correctly, this should be the only piece of code that you need to modify.</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a>print <span class="st">'Step #1 executing....'</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="kw">USE</span> [<span class="kw">master</span>]</span>
-<span id="cb2-12"><a href="#cb2-12"></a>GO</span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="kw">DECLARE</span> @qualified_user_name <span class="dt">varchar</span>(<span class="dv">255</span>); <span class="kw">SET</span> @qualified_user_name <span class="op">=</span> <span class="st">'[OUHSC\lsuarez3]'</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a>print <span class="st">'Resulting login name: '</span> <span class="op">+</span> @qualified_user_name; print <span class="st">''</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a></span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="co">--EXEC sp_helplogins @LoginNamePattern=@qualified_user_name</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a><span class="co">--SELECT * FROM master..syslogins WHERE name = @qualified_user_name</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a><span class="co">--SELECT * FROM auxiliary_security.sys.sysusers</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="co">--SELECT * FROM sys.database_permissions</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a><span class="co">--SELECT * FROM sys.server_principals</span></span>
-<span id="cb2-21"><a href="#cb2-21"></a></span>
-<span id="cb2-22"><a href="#cb2-22"></a><span class="co">-----------------------------------------------------------------------</span></span>
-<span id="cb2-23"><a href="#cb2-23"></a><span class="co">-- STEP #2: Create a login for the *server*.</span></span>
-<span id="cb2-24"><a href="#cb2-24"></a>print <span class="st">'Step #2 executing....'</span></span>
-<span id="cb2-25"><a href="#cb2-25"></a><span class="kw">DECLARE</span> @sql_create_login <span class="dt">nvarchar</span>(<span class="fu">max</span>)</span>
-<span id="cb2-26"><a href="#cb2-26"></a><span class="kw">SET</span> @sql_create_login <span class="op">=</span> <span class="st">'CREATE LOGIN '</span> <span class="op">+</span> @qualified_user_name <span class="op">+</span> <span class="st">' FROM WINDOWS WITH DEFAULT_DATABASE=[auxiliary_security]'</span></span>
-<span id="cb2-27"><a href="#cb2-27"></a><span class="kw">EXECUTE</span> sp_executesql @sql_create_login</span>
-<span id="cb2-28"><a href="#cb2-28"></a><span class="kw">DECLARE</span> @login_count <span class="kw">AS</span> <span class="dt">INT</span>; <span class="kw">SET</span> @login_count <span class="op">=</span> (<span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> login_count <span class="kw">FROM</span> <span class="kw">master</span><span class="op">..</span>syslogins <span class="kw">WHERE</span> <span class="st">'['</span> <span class="op">+</span> loginname <span class="op">+</span> <span class="st">']'</span> <span class="op">=</span> @qualified_user_name)</span>
-<span id="cb2-29"><a href="#cb2-29"></a>print <span class="st">'Logins matching desired name should equal 1.  It equals: '</span> <span class="op">+</span> <span class="fu">CONVERT</span>(<span class="dt">varchar</span>, @login_count); print <span class="st">''</span></span>
-<span id="cb2-30"><a href="#cb2-30"></a></span>
-<span id="cb2-31"><a href="#cb2-31"></a><span class="co">-----------------------------------------------------------------------</span></span>
-<span id="cb2-32"><a href="#cb2-32"></a><span class="co">-- STEP #3: Create a user account for the *database*, after switching the database under focus to auxiliary_security.</span></span>
-<span id="cb2-33"><a href="#cb2-33"></a>print <span class="st">'Step #3 executing....'</span></span>
-<span id="cb2-34"><a href="#cb2-34"></a><span class="kw">USE</span> [auxiliary_security]</span>
-<span id="cb2-35"><a href="#cb2-35"></a><span class="kw">DECLARE</span> @sql_create_user <span class="dt">nvarchar</span>(<span class="fu">max</span>)</span>
-<span id="cb2-36"><a href="#cb2-36"></a><span class="kw">SET</span> @sql_create_user <span class="op">=</span> <span class="st">'CREATE USER '</span> <span class="op">+</span> @qualified_user_name <span class="op">+</span> <span class="st">' FOR LOGIN '</span> <span class="op">+</span> @qualified_user_name</span>
-<span id="cb2-37"><a href="#cb2-37"></a><span class="kw">EXECUTE</span> sp_executesql @sql_create_user</span>
-<span id="cb2-38"><a href="#cb2-38"></a><span class="kw">DECLARE</span> @user_count <span class="kw">AS</span> <span class="dt">INT</span>; <span class="kw">SET</span> @user_count <span class="op">=</span> (<span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> user_count <span class="kw">FROM</span> auxiliary_security.sys.sysusers <span class="kw">WHERE</span> <span class="st">'['</span> <span class="op">+</span> name <span class="op">+</span> <span class="st">']'</span> <span class="op">=</span> @qualified_user_name)</span>
-<span id="cb2-39"><a href="#cb2-39"></a>print <span class="st">'User accounts matching desired name should equal 1.  It equals: '</span> <span class="op">+</span> <span class="fu">CONVERT</span>(<span class="dt">varchar</span>, @user_count); print <span class="st">''</span></span>
-<span id="cb2-40"><a href="#cb2-40"></a></span>
-<span id="cb2-41"><a href="#cb2-41"></a><span class="co">-----------------------------------------------------------------------</span></span>
-<span id="cb2-42"><a href="#cb2-42"></a><span class="co">-- STEP #4: Grant appropriate privileges for the 'redcap' schema.</span></span>
-<span id="cb2-43"><a href="#cb2-43"></a>print <span class="st">'Step #4 executing....'</span></span>
-<span id="cb2-44"><a href="#cb2-44"></a><span class="kw">DECLARE</span> @sql_grant_schema_redcap <span class="dt">nvarchar</span>(<span class="fu">max</span>)</span>
-<span id="cb2-45"><a href="#cb2-45"></a><span class="kw">SET</span> @sql_grant_schema_redcap <span class="op">=</span> <span class="st">'GRANT EXECUTE ON SCHEMA::[redcap] TO '</span> <span class="op">+</span> @qualified_user_name</span>
-<span id="cb2-46"><a href="#cb2-46"></a><span class="kw">EXECUTE</span> sp_executesql @sql_grant_schema_redcap</span>
-<span id="cb2-47"><a href="#cb2-47"></a>print <span class="st">'Step #4 executed'</span>; print <span class="st">''</span></span>
-<span id="cb2-48"><a href="#cb2-48"></a></span>
-<span id="cb2-49"><a href="#cb2-49"></a><span class="co">-----------------------------------------------------------------------</span></span>
-<span id="cb2-50"><a href="#cb2-50"></a><span class="co">-- STEP #5: Grant appropriate privileges for the 'Security' schema.</span></span>
-<span id="cb2-51"><a href="#cb2-51"></a>print <span class="st">'Step #5 executing....'</span></span>
-<span id="cb2-52"><a href="#cb2-52"></a><span class="kw">DECLARE</span> @sql_grant_schema_security <span class="dt">nvarchar</span>(<span class="fu">max</span>)</span>
-<span id="cb2-53"><a href="#cb2-53"></a><span class="kw">SET</span> @sql_grant_schema_security <span class="op">=</span> <span class="st">'GRANT EXECUTE ON SCHEMA::[security] TO '</span> <span class="op">+</span> @qualified_user_name</span>
-<span id="cb2-54"><a href="#cb2-54"></a><span class="kw">EXECUTE</span> sp_executesql @sql_grant_schema_security</span>
-<span id="cb2-55"><a href="#cb2-55"></a>print <span class="st">'Step #5 executed'</span>; print <span class="st">''</span></span>
-<span id="cb2-56"><a href="#cb2-56"></a></span>
-<span id="cb2-57"><a href="#cb2-57"></a><span class="co">-----------------------------------------------------------------------</span></span>
-<span id="cb2-58"><a href="#cb2-58"></a><span class="co">-- OPTIONAL STEP: Delete the user from the database (the first line) and then the server (the second line).</span></span>
-<span id="cb2-59"><a href="#cb2-59"></a><span class="co">-- The person's other database user accounts (besides with the auxiliary_security database) will NOT be automatically deleted by these two lines.</span></span>
-<span id="cb2-60"><a href="#cb2-60"></a><span class="co">--USE [auxiliary_security]; DROP USER [OUHSC\lsuarez3]</span></span>
-<span id="cb2-61"><a href="#cb2-61"></a><span class="co">--USE [master]; DROP LOGIN [OUHSC\lsuarez3]</span></span>
-<span id="cb2-62"><a href="#cb2-62"></a></span>
-<span id="cb2-63"><a href="#cb2-63"></a><span class="co">-----------------------------------------------------------------------</span></span>
-<span id="cb2-64"><a href="#cb2-64"></a><span class="co">-- REFERENCES &amp; NOTES</span></span>
-<span id="cb2-65"><a href="#cb2-65"></a>  <span class="co">--The @qualified_user_name must have both (a) the 'OUHSC' domain qualification, and (b) the square brackets (to escape the backslash).</span></span>
-<span id="cb2-66"><a href="#cb2-66"></a>  <span class="co">--Using sp_executesql to add users: https://www.sqlservercentral.com/Forums/Topic497615-359-1.aspx</span></span>
-<span id="cb2-67"><a href="#cb2-67"></a>  <span class="co">--Check if a server login exists: https://stackoverflow.com/questions/37275/sql-query-for-logins</span></span>
-<span id="cb2-68"><a href="#cb2-68"></a>  <span class="co">--Retrieve database users: https://stackoverflow.com/questions/2445444/how-to-get-a-list-of-users-for-all-instances-databases</span></span>
-<span id="cb2-69"><a href="#cb2-69"></a>  <span class="co">--Concatenating strings: https://blog.sqlauthority.com/2010/11/25/sql-server-concat-function-in-sql-server-sql-concatenation/</span></span>
-<span id="cb2-70"><a href="#cb2-70"></a>  <span class="co">--DROP USER from database: https://msdn.microsoft.com/en-us/library/ms189438.aspx</span></span>
-<span id="cb2-71"><a href="#cb2-71"></a>  <span class="co">--DROP LOGIN from server: https://msdn.microsoft.com/en-us/library/ms188012.aspx</span></span>
-<span id="cb2-72"><a href="#cb2-72"></a>  <span class="co">--Declaring variables (eg, the username above): https://technet.microsoft.com/en-us/library/aa258839.aspx</span></span>
-<span id="cb2-73"><a href="#cb2-73"></a>  <span class="co">--A different (&amp; non-dynamic) way to establish a user: https://pic.dhe.ibm.com/infocenter/dmndhelp/v8r5m0/index.jsp?topic=%2Fcom.ibm.wbpm.imuc.sbpm.doc%2Ftopics%2Fdb_create_users_nd_aix.html</span></span>
-<span id="cb2-74"><a href="#cb2-74"></a>  <span class="co">--If the variable has to cross a 'GO' (which the current version of the script doesn't need): https://stackoverflow.com/questions/937336/is-there-a-way-to-persist-a-variable-across-a-go</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">-----------------------------------------------------------------------</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- Add a user account to the auxiliary_security database so that they can query the tables to retrieve their API.</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- Notice that this only gives the permissions to retrieve the token.  You must still:</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">--   1) grant them API privileges to each appropriate REDCap project, and</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">--   2) copy the API from the REDCap database into the  auxiliary_security database.</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">-- Also, do not give typical users authorization for the 'redcap_private' schema.  The current system allows them to view only their own tokens.</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">-----------------------------------------------------------------------</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">-- STEP #1: Declare the user name.  If everything runs correctly, this should be the only piece of code that you need to modify.</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>print <span class="st">'Step #1 executing....'</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">USE</span> [<span class="kw">master</span>]</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>GO</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="kw">DECLARE</span> @qualified_user_name <span class="dt">varchar</span>(<span class="dv">255</span>); <span class="kw">SET</span> @qualified_user_name <span class="op">=</span> <span class="st">'[OUHSC\lsuarez3]'</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>print <span class="st">'Resulting login name: '</span> <span class="op">+</span> @qualified_user_name; print <span class="st">''</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">--EXEC sp_helplogins @LoginNamePattern=@qualified_user_name</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">--SELECT * FROM master..syslogins WHERE name = @qualified_user_name</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">--SELECT * FROM auxiliary_security.sys.sysusers</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">--SELECT * FROM sys.database_permissions</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">--SELECT * FROM sys.server_principals</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co">-----------------------------------------------------------------------</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co">-- STEP #2: Create a login for the *server*.</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>print <span class="st">'Step #2 executing....'</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="kw">DECLARE</span> @sql_create_login <span class="dt">nvarchar</span>(<span class="fu">max</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="kw">SET</span> @sql_create_login <span class="op">=</span> <span class="st">'CREATE LOGIN '</span> <span class="op">+</span> @qualified_user_name <span class="op">+</span> <span class="st">' FROM WINDOWS WITH DEFAULT_DATABASE=[auxiliary_security]'</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="kw">EXECUTE</span> sp_executesql @sql_create_login</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="kw">DECLARE</span> @login_count <span class="kw">AS</span> <span class="dt">INT</span>; <span class="kw">SET</span> @login_count <span class="op">=</span> (<span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> login_count <span class="kw">FROM</span> <span class="kw">master</span><span class="op">..</span>syslogins <span class="kw">WHERE</span> <span class="st">'['</span> <span class="op">+</span> loginname <span class="op">+</span> <span class="st">']'</span> <span class="op">=</span> @qualified_user_name)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>print <span class="st">'Logins matching desired name should equal 1.  It equals: '</span> <span class="op">+</span> <span class="fu">CONVERT</span>(<span class="dt">varchar</span>, @login_count); print <span class="st">''</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co">-----------------------------------------------------------------------</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="co">-- STEP #3: Create a user account for the *database*, after switching the database under focus to auxiliary_security.</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>print <span class="st">'Step #3 executing....'</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="kw">USE</span> [auxiliary_security]</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="kw">DECLARE</span> @sql_create_user <span class="dt">nvarchar</span>(<span class="fu">max</span>)</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="kw">SET</span> @sql_create_user <span class="op">=</span> <span class="st">'CREATE USER '</span> <span class="op">+</span> @qualified_user_name <span class="op">+</span> <span class="st">' FOR LOGIN '</span> <span class="op">+</span> @qualified_user_name</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="kw">EXECUTE</span> sp_executesql @sql_create_user</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="kw">DECLARE</span> @user_count <span class="kw">AS</span> <span class="dt">INT</span>; <span class="kw">SET</span> @user_count <span class="op">=</span> (<span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> user_count <span class="kw">FROM</span> auxiliary_security.sys.sysusers <span class="kw">WHERE</span> <span class="st">'['</span> <span class="op">+</span> name <span class="op">+</span> <span class="st">']'</span> <span class="op">=</span> @qualified_user_name)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>print <span class="st">'User accounts matching desired name should equal 1.  It equals: '</span> <span class="op">+</span> <span class="fu">CONVERT</span>(<span class="dt">varchar</span>, @user_count); print <span class="st">''</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="co">-----------------------------------------------------------------------</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="co">-- STEP #4: Grant appropriate privileges for the 'redcap' schema.</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>print <span class="st">'Step #4 executing....'</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="kw">DECLARE</span> @sql_grant_schema_redcap <span class="dt">nvarchar</span>(<span class="fu">max</span>)</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="kw">SET</span> @sql_grant_schema_redcap <span class="op">=</span> <span class="st">'GRANT EXECUTE ON SCHEMA::[redcap] TO '</span> <span class="op">+</span> @qualified_user_name</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="kw">EXECUTE</span> sp_executesql @sql_grant_schema_redcap</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>print <span class="st">'Step #4 executed'</span>; print <span class="st">''</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="co">-----------------------------------------------------------------------</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="co">-- STEP #5: Grant appropriate privileges for the 'Security' schema.</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>print <span class="st">'Step #5 executing....'</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="kw">DECLARE</span> @sql_grant_schema_security <span class="dt">nvarchar</span>(<span class="fu">max</span>)</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="kw">SET</span> @sql_grant_schema_security <span class="op">=</span> <span class="st">'GRANT EXECUTE ON SCHEMA::[security] TO '</span> <span class="op">+</span> @qualified_user_name</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="kw">EXECUTE</span> sp_executesql @sql_grant_schema_security</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>print <span class="st">'Step #5 executed'</span>; print <span class="st">''</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="co">-----------------------------------------------------------------------</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="co">-- OPTIONAL STEP: Delete the user from the database (the first line) and then the server (the second line).</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="co">-- The person's other database user accounts (besides with the auxiliary_security database) will NOT be automatically deleted by these two lines.</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="co">--USE [auxiliary_security]; DROP USER [OUHSC\lsuarez3]</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="co">--USE [master]; DROP LOGIN [OUHSC\lsuarez3]</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="co">-----------------------------------------------------------------------</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="co">-- REFERENCES &amp; NOTES</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>  <span class="co">--The @qualified_user_name must have both (a) the 'OUHSC' domain qualification, and (b) the square brackets (to escape the backslash).</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>  <span class="co">--Using sp_executesql to add users: https://www.sqlservercentral.com/Forums/Topic497615-359-1.aspx</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>  <span class="co">--Check if a server login exists: https://stackoverflow.com/questions/37275/sql-query-for-logins</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>  <span class="co">--Retrieve database users: https://stackoverflow.com/questions/2445444/how-to-get-a-list-of-users-for-all-instances-databases</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>  <span class="co">--Concatenating strings: https://blog.sqlauthority.com/2010/11/25/sql-server-concat-function-in-sql-server-sql-concatenation/</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>  <span class="co">--DROP USER from database: https://msdn.microsoft.com/en-us/library/ms189438.aspx</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>  <span class="co">--DROP LOGIN from server: https://msdn.microsoft.com/en-us/library/ms188012.aspx</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>  <span class="co">--Declaring variables (eg, the username above): https://technet.microsoft.com/en-us/library/aa258839.aspx</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>  <span class="co">--A different (&amp; non-dynamic) way to establish a user: https://pic.dhe.ibm.com/infocenter/dmndhelp/v8r5m0/index.jsp?topic=%2Fcom.ibm.wbpm.imuc.sbpm.doc%2Ftopics%2Fdb_create_users_nd_aix.html</span></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>  <span class="co">--If the variable has to cross a 'GO' (which the current version of the script doesn't need): https://stackoverflow.com/questions/937336/is-there-a-way-to-persist-a-variable-across-a-go</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="transfer-credentials">Transfer Credentials<a class="anchor" aria-label="anchor" href="#transfer-credentials"></a>
@@ -259,161 +259,161 @@
 <li>Combine &amp; groom the credentials.</li>
 <li>Upload to SQL Server (called <code>auxiliary_security</code> here).</li>
 </ol>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>(<span class="dt">all=</span><span class="ot">TRUE</span>)) <span class="co">#Clear the memory for any variables set from any previous runs.</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="co"># ---- load-sources ------------------------------------------------------------</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># ---- load-packages -----------------------------------------------------------</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(OuhscMunge))</span>
-<span id="cb3-7"><a href="#cb3-7"></a>  <span class="kw">stop</span>(<span class="st">'The `OuhscMunge` package needs to be installed with `remotes::install_github("OuhscBbmc/OuhscMunge")`.'</span>)</span>
-<span id="cb3-8"><a href="#cb3-8"></a></span>
-<span id="cb3-9"><a href="#cb3-9"></a>testit<span class="op">::</span><span class="kw">assert</span>(</span>
-<span id="cb3-10"><a href="#cb3-10"></a>  <span class="st">"The `OuhscMunge` package should meet a minimal version."</span>,</span>
-<span id="cb3-11"><a href="#cb3-11"></a>  <span class="kw">compareVersion</span>( <span class="kw">as.character</span>(<span class="kw">packageVersion</span>(<span class="st">"OuhscMunge"</span>)), <span class="st">"0.1.9.9009"</span>) <span class="op">&gt;=</span><span class="st"> </span>0L</span>
-<span id="cb3-12"><a href="#cb3-12"></a>)</span>
-<span id="cb3-13"><a href="#cb3-13"></a></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="kw">library</span>(magrittr)</span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="kw">requireNamespace</span>(<span class="st">"DBI"</span>)</span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="kw">requireNamespace</span>(<span class="st">"odbc"</span>)</span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="kw">requireNamespace</span>(<span class="st">"dplyr"</span>)</span>
-<span id="cb3-18"><a href="#cb3-18"></a><span class="kw">requireNamespace</span>(<span class="st">"readr"</span>)</span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="kw">requireNamespace</span>(<span class="st">"tibble"</span>)</span>
-<span id="cb3-20"><a href="#cb3-20"></a><span class="kw">requireNamespace</span>(<span class="st">"testit"</span>)</span>
-<span id="cb3-21"><a href="#cb3-21"></a><span class="kw">requireNamespace</span>(<span class="st">"checkmate"</span>)</span>
-<span id="cb3-22"><a href="#cb3-22"></a><span class="kw">requireNamespace</span>(<span class="st">"OuhscMunge"</span>)  <span class="co"># remotes::install_github("OuhscBbmc/OuhscMunge")</span></span>
-<span id="cb3-23"><a href="#cb3-23"></a></span>
-<span id="cb3-24"><a href="#cb3-24"></a></span>
-<span id="cb3-25"><a href="#cb3-25"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
-<span id="cb3-26"><a href="#cb3-26"></a><span class="co"># This file assume your campus has two REDCap instances.</span></span>
-<span id="cb3-27"><a href="#cb3-27"></a><span class="co"># Modify each (a) database name, (b) REDCap URL, and (c) DSN name.</span></span>
-<span id="cb3-28"><a href="#cb3-28"></a></span>
-<span id="cb3-29"><a href="#cb3-29"></a>name_production &lt;-<span class="st"> "production"</span></span>
-<span id="cb3-30"><a href="#cb3-30"></a>name_dev        &lt;-<span class="st"> "dev"</span></span>
-<span id="cb3-31"><a href="#cb3-31"></a></span>
-<span id="cb3-32"><a href="#cb3-32"></a>uri_production  &lt;-<span class="st"> "https://redcap-production.ouhsc.edu/redcap/api/"</span>,</span>
-<span id="cb3-33"><a href="#cb3-33"></a>uri_dev         &lt;-<span class="st"> "https://redcap-dev.ouhsc.edu/redcap/api/"</span></span>
-<span id="cb3-34"><a href="#cb3-34"></a></span>
-<span id="cb3-35"><a href="#cb3-35"></a>dsn_production  &lt;-<span class="st"> "redcap-production"</span></span>
-<span id="cb3-36"><a href="#cb3-36"></a>dsn_dev         &lt;-<span class="st"> "redcap-dev"</span></span>
-<span id="cb3-37"><a href="#cb3-37"></a>dsn_source      &lt;-<span class="st"> "auxiliary_security"</span> <span class="co"># The DSN of the token server.</span></span>
-<span id="cb3-38"><a href="#cb3-38"></a></span>
-<span id="cb3-39"><a href="#cb3-39"></a><span class="co"># The Activity Directory name that should precede each username.</span></span>
-<span id="cb3-40"><a href="#cb3-40"></a><span class="co">#   This should correspond with the result of SQL Server's `SYSTEM_USER` function</span></span>
-<span id="cb3-41"><a href="#cb3-41"></a><span class="co">#   (https://msdn.microsoft.com/en-us/library/ms179930.aspx)</span></span>
-<span id="cb3-42"><a href="#cb3-42"></a>ldap_prefix &lt;-<span class="st"> "OUHSC</span><span class="ch">\\</span><span class="st">"</span></span>
-<span id="cb3-43"><a href="#cb3-43"></a></span>
-<span id="cb3-44"><a href="#cb3-44"></a><span class="co">####</span></span>
-<span id="cb3-45"><a href="#cb3-45"></a><span class="co"># Nothing below this line should need to change, assuming:</span></span>
-<span id="cb3-46"><a href="#cb3-46"></a><span class="co"># 1. the vignette was followed exactly (https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html),</span></span>
-<span id="cb3-47"><a href="#cb3-47"></a><span class="co"># 2. your campus has exactly two REDCap instances.</span></span>
-<span id="cb3-48"><a href="#cb3-48"></a></span>
-<span id="cb3-49"><a href="#cb3-49"></a><span class="co"># SQL sent to the MySQL database underneath each REDCap instance.</span></span>
-<span id="cb3-50"><a href="#cb3-50"></a>sql &lt;-<span class="st"> "</span></span>
-<span id="cb3-51"><a href="#cb3-51"></a><span class="st">  SELECT username, project_id, api_token</span></span>
-<span id="cb3-52"><a href="#cb3-52"></a><span class="st">  FROM redcap_user_rights</span></span>
-<span id="cb3-53"><a href="#cb3-53"></a><span class="st">  WHERE api_token IS NOT NULL</span></span>
-<span id="cb3-54"><a href="#cb3-54"></a><span class="st">"</span></span>
-<span id="cb3-55"><a href="#cb3-55"></a></span>
-<span id="cb3-56"><a href="#cb3-56"></a><span class="co"># Update this ad-hoc CSV.  Each row should represent one REDCap instance.</span></span>
-<span id="cb3-57"><a href="#cb3-57"></a>ds_url &lt;-<span class="st"> </span>tibble<span class="op">::</span><span class="kw">tribble</span>(</span>
-<span id="cb3-58"><a href="#cb3-58"></a>  <span class="op">~</span>instance         , <span class="op">~</span>redcap_uri,</span>
-<span id="cb3-59"><a href="#cb3-59"></a>  name_production   , uri_production,</span>
-<span id="cb3-60"><a href="#cb3-60"></a>  name_dev          , uri_dev</span>
-<span id="cb3-61"><a href="#cb3-61"></a>)</span>
-<span id="cb3-62"><a href="#cb3-62"></a></span>
-<span id="cb3-63"><a href="#cb3-63"></a><span class="co"># Remove variables that aren't used below.</span></span>
-<span id="cb3-64"><a href="#cb3-64"></a><span class="kw">rm</span>(uri_production, uri_dev)</span>
-<span id="cb3-65"><a href="#cb3-65"></a></span>
-<span id="cb3-66"><a href="#cb3-66"></a></span>
-<span id="cb3-67"><a href="#cb3-67"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span>
-<span id="cb3-68"><a href="#cb3-68"></a></span>
-<span id="cb3-69"><a href="#cb3-69"></a><span class="co"># Load the credentials from the first/production REDCap instance.</span></span>
-<span id="cb3-70"><a href="#cb3-70"></a>cnn_production  &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(odbc<span class="op">::</span><span class="kw">odbc</span>(), <span class="dt">dsn=</span>dsn_production)</span>
-<span id="cb3-71"><a href="#cb3-71"></a>ds_production   &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(cnn_production, sql)</span>
-<span id="cb3-72"><a href="#cb3-72"></a>DBI<span class="op">::</span><span class="kw">dbDisconnect</span>(cnn_production); <span class="kw">rm</span>(cnn_production, dsn_production)</span>
-<span id="cb3-73"><a href="#cb3-73"></a></span>
-<span id="cb3-74"><a href="#cb3-74"></a><span class="co"># Load the credentials from the second/dev REDCap instance.</span></span>
-<span id="cb3-75"><a href="#cb3-75"></a>cnn_dev         &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(odbc<span class="op">::</span><span class="kw">odbc</span>(), <span class="dt">dsn=</span>dsn_dev)</span>
-<span id="cb3-76"><a href="#cb3-76"></a>ds_dev          &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbGetQuery</span>(cnn_dev, sql)</span>
-<span id="cb3-77"><a href="#cb3-77"></a>DBI<span class="op">::</span><span class="kw">dbDisconnect</span>(cnn_dev); <span class="kw">rm</span>(cnn_dev, dsn_dev)</span>
-<span id="cb3-78"><a href="#cb3-78"></a></span>
-<span id="cb3-79"><a href="#cb3-79"></a><span class="kw">rm</span>(sql)</span>
-<span id="cb3-80"><a href="#cb3-80"></a></span>
-<span id="cb3-81"><a href="#cb3-81"></a><span class="co"># Assert these are valid datasets and contain at least 5 rows.</span></span>
-<span id="cb3-82"><a href="#cb3-82"></a><span class="co">#   Adjust '5' to smaller value if necessary.  It's just to catch blatant retrieval problems.</span></span>
-<span id="cb3-83"><a href="#cb3-83"></a>checkmate<span class="op">::</span><span class="kw">assert_data_frame</span>(ds_production, <span class="dt">min.rows=</span><span class="dv">5</span>)</span>
-<span id="cb3-84"><a href="#cb3-84"></a>checkmate<span class="op">::</span><span class="kw">assert_data_frame</span>(ds_dev       , <span class="dt">min.rows=</span><span class="dv">5</span>)</span>
-<span id="cb3-85"><a href="#cb3-85"></a></span>
-<span id="cb3-86"><a href="#cb3-86"></a></span>
-<span id="cb3-87"><a href="#cb3-87"></a><span class="co"># ---- tweak-data --------------------------------------------------------------</span></span>
-<span id="cb3-88"><a href="#cb3-88"></a></span>
-<span id="cb3-89"><a href="#cb3-89"></a><span class="co"># Label each instance, so they're distinguishable later.</span></span>
-<span id="cb3-90"><a href="#cb3-90"></a>ds_production<span class="op">$</span>instance &lt;-<span class="st"> </span>name_production</span>
-<span id="cb3-91"><a href="#cb3-91"></a>ds_dev<span class="op">$</span>instance        &lt;-<span class="st"> </span>name_dev</span>
-<span id="cb3-92"><a href="#cb3-92"></a></span>
-<span id="cb3-93"><a href="#cb3-93"></a><span class="co"># Stack the token collection from each instance.  Then prefix the username and include the URL of each instance.</span></span>
-<span id="cb3-94"><a href="#cb3-94"></a>ds &lt;-</span>
-<span id="cb3-95"><a href="#cb3-95"></a><span class="st">  </span>ds_production <span class="op">%&gt;%</span></span>
-<span id="cb3-96"><a href="#cb3-96"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">union</span>(ds_dev) <span class="op">%&gt;%</span><span class="st">                                </span><span class="co"># Remove union if the dev instance isn't included.</span></span>
-<span id="cb3-97"><a href="#cb3-97"></a><span class="st">  </span>tibble<span class="op">::</span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></span>
-<span id="cb3-98"><a href="#cb3-98"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(</span>
-<span id="cb3-99"><a href="#cb3-99"></a>    <span class="dt">username        =</span> username,</span>
-<span id="cb3-100"><a href="#cb3-100"></a>    <span class="dt">project_id      =</span> project_id,</span>
-<span id="cb3-101"><a href="#cb3-101"></a>    <span class="dt">instance        =</span> instance,</span>
-<span id="cb3-102"><a href="#cb3-102"></a>    <span class="dt">token           =</span> api_token</span>
-<span id="cb3-103"><a href="#cb3-103"></a>  ) <span class="op">%&gt;%</span></span>
-<span id="cb3-104"><a href="#cb3-104"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(</span>
-<span id="cb3-105"><a href="#cb3-105"></a>    <span class="dt">username        =</span> <span class="kw">paste0</span>(ldap_prefix, username), <span class="co"># Qualify for the Active Directory.</span></span>
-<span id="cb3-106"><a href="#cb3-106"></a>  ) <span class="op">%&gt;%</span></span>
-<span id="cb3-107"><a href="#cb3-107"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">left_join</span>( ds_url, <span class="dt">by=</span><span class="st">"instance"</span>) <span class="op">%&gt;%</span><span class="st">            </span><span class="co"># Include the instance URL.</span></span>
-<span id="cb3-108"><a href="#cb3-108"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">arrange</span>(instance, project_id, username) <span class="op">%&gt;%</span></span>
-<span id="cb3-109"><a href="#cb3-109"></a><span class="st">  </span>tibble<span class="op">::</span><span class="kw">rowid_to_column</span>(<span class="st">"id"</span>)                           <span class="co"># For the sake of a clustered primary key.</span></span>
-<span id="cb3-110"><a href="#cb3-110"></a></span>
-<span id="cb3-111"><a href="#cb3-111"></a><span class="kw">rm</span>(ds_production, ds_dev, ds_url)</span>
-<span id="cb3-112"><a href="#cb3-112"></a><span class="kw">rm</span>(name_production, name_dev)</span>
-<span id="cb3-113"><a href="#cb3-113"></a><span class="kw">rm</span>(ldap_prefix)</span>
-<span id="cb3-114"><a href="#cb3-114"></a></span>
-<span id="cb3-115"><a href="#cb3-115"></a></span>
-<span id="cb3-116"><a href="#cb3-116"></a><span class="co"># ---- verify-values -----------------------------------------------------------</span></span>
-<span id="cb3-117"><a href="#cb3-117"></a></span>
-<span id="cb3-118"><a href="#cb3-118"></a><span class="co"># Assert that the dataset is well-behaved.</span></span>
-<span id="cb3-119"><a href="#cb3-119"></a><span class="co"># OuhscMunge::verify_value_headstart(ds)</span></span>
-<span id="cb3-120"><a href="#cb3-120"></a>checkmate<span class="op">::</span><span class="kw">assert_integer</span>(  ds<span class="op">$</span>id         , <span class="dt">any.missing=</span><span class="ot">FALSE</span>, <span class="dt">lower=</span><span class="dv">1</span>, <span class="dt">upper=</span>.Machine<span class="op">$</span>integer.max, <span class="dt">unique=</span><span class="ot">TRUE</span>)</span>
-<span id="cb3-121"><a href="#cb3-121"></a>checkmate<span class="op">::</span><span class="kw">assert_character</span>(ds<span class="op">$</span>username   , <span class="dt">any.missing=</span><span class="ot">FALSE</span>, <span class="dt">pattern=</span><span class="st">"^.{1,255}$"</span>                         )</span>
-<span id="cb3-122"><a href="#cb3-122"></a>checkmate<span class="op">::</span><span class="kw">assert_integer</span>(  ds<span class="op">$</span>project_id , <span class="dt">any.missing=</span><span class="ot">FALSE</span>, <span class="dt">lower=</span><span class="dv">1</span>, <span class="dt">upper=</span>.Machine<span class="op">$</span>integer.max          )</span>
-<span id="cb3-123"><a href="#cb3-123"></a>checkmate<span class="op">::</span><span class="kw">assert_character</span>(ds<span class="op">$</span>token      , <span class="dt">any.missing=</span><span class="ot">FALSE</span>, <span class="dt">pattern=</span><span class="st">"^[A-Z0-9]{32}$"</span>           , <span class="dt">unique=</span><span class="ot">TRUE</span>)</span>
-<span id="cb3-124"><a href="#cb3-124"></a>checkmate<span class="op">::</span><span class="kw">assert_character</span>(ds<span class="op">$</span>instance   , <span class="dt">any.missing=</span><span class="ot">FALSE</span>, <span class="dt">pattern=</span><span class="st">"^.{1,255}$"</span>                         )</span>
-<span id="cb3-125"><a href="#cb3-125"></a>checkmate<span class="op">::</span><span class="kw">assert_character</span>(ds<span class="op">$</span>redcap_uri , <span class="dt">any.missing=</span><span class="ot">FALSE</span>, <span class="dt">pattern=</span><span class="st">"^.{1,255}$"</span>                         )</span>
-<span id="cb3-126"><a href="#cb3-126"></a></span>
-<span id="cb3-127"><a href="#cb3-127"></a>testit<span class="op">::</span><span class="kw">assert</span>(</span>
-<span id="cb3-128"><a href="#cb3-128"></a>  <span class="st">"The `username` x `project_id` x `instance` must be unique."</span>,</span>
-<span id="cb3-129"><a href="#cb3-129"></a>  <span class="kw">sum</span>(<span class="kw">duplicated</span>(<span class="kw">paste0</span>(ds<span class="op">$</span>username, <span class="st">"-"</span>, ds<span class="op">$</span>project_id, <span class="st">"-"</span>, ds<span class="op">$</span>instance))) <span class="op">==</span><span class="st"> </span>0L</span>
-<span id="cb3-130"><a href="#cb3-130"></a>)</span>
-<span id="cb3-131"><a href="#cb3-131"></a></span>
-<span id="cb3-132"><a href="#cb3-132"></a>testit<span class="op">::</span><span class="kw">assert</span>(<span class="st">"At least 10 tokens should be ready to write."</span> , 10L <span class="op">&lt;=</span><span class="st"> </span><span class="kw">nrow</span>(ds))</span>
-<span id="cb3-133"><a href="#cb3-133"></a></span>
-<span id="cb3-134"><a href="#cb3-134"></a></span>
-<span id="cb3-135"><a href="#cb3-135"></a><span class="co"># ---- specify-columns-to-upload -----------------------------------------------</span></span>
-<span id="cb3-136"><a href="#cb3-136"></a></span>
-<span id="cb3-137"><a href="#cb3-137"></a><span class="co"># Dictate the exact columns and order that will be uploaded.</span></span>
-<span id="cb3-138"><a href="#cb3-138"></a>columns_to_write &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"id"</span>, <span class="st">"username"</span>, <span class="st">"project_id"</span>, <span class="st">"instance"</span>, <span class="st">"token"</span>, <span class="st">"redcap_uri"</span>)</span>
-<span id="cb3-139"><a href="#cb3-139"></a>ds_slim          &lt;-<span class="st"> </span>ds[, columns_to_write]</span>
-<span id="cb3-140"><a href="#cb3-140"></a><span class="kw">rm</span>(columns_to_write)</span>
-<span id="cb3-141"><a href="#cb3-141"></a></span>
-<span id="cb3-142"><a href="#cb3-142"></a></span>
-<span id="cb3-143"><a href="#cb3-143"></a><span class="co"># ---- upload-to-db ------------------------------------------------------------------</span></span>
-<span id="cb3-144"><a href="#cb3-144"></a></span>
-<span id="cb3-145"><a href="#cb3-145"></a>OuhscMunge<span class="op">::</span><span class="kw">upload_sqls_odbc</span>(</span>
-<span id="cb3-146"><a href="#cb3-146"></a>  <span class="dt">d               =</span> ds_slim,</span>
-<span id="cb3-147"><a href="#cb3-147"></a>  <span class="dt">schema_name     =</span> <span class="st">"redcap_private"</span>,</span>
-<span id="cb3-148"><a href="#cb3-148"></a>  <span class="dt">table_name      =</span> <span class="st">"tbl_credential"</span>,</span>
-<span id="cb3-149"><a href="#cb3-149"></a>  <span class="dt">dsn_name        =</span> dsn_source,</span>
-<span id="cb3-150"><a href="#cb3-150"></a>  <span class="dt">create_table    =</span> <span class="ot">FALSE</span>,</span>
-<span id="cb3-151"><a href="#cb3-151"></a>  <span class="dt">clear_table     =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb3-152"><a href="#cb3-152"></a>  <span class="dt">transaction     =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb3-153"><a href="#cb3-153"></a>  <span class="dt">verbose         =</span> <span class="ot">TRUE</span></span>
-<span id="cb3-154"><a href="#cb3-154"></a>)</span>
-<span id="cb3-155"><a href="#cb3-155"></a><span class="co"># Uploading 252 tokens takes 0.004 minutes.</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>(<span class="at">all=</span><span class="cn">TRUE</span>)) <span class="co">#Clear the memory for any variables set from any previous runs.</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- load-sources ------------------------------------------------------------</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- load-packages -----------------------------------------------------------</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(OuhscMunge))</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stop</span>(<span class="st">'The `OuhscMunge` package needs to be installed with `remotes::install_github("OuhscBbmc/OuhscMunge")`.'</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>testit<span class="sc">::</span><span class="fu">assert</span>(</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The `OuhscMunge` package should meet a minimal version."</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">compareVersion</span>( <span class="fu">as.character</span>(<span class="fu">packageVersion</span>(<span class="st">"OuhscMunge"</span>)), <span class="st">"0.1.9.9009"</span>) <span class="sc">&gt;=</span> 0L</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">"DBI"</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">"odbc"</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">"dplyr"</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">"readr"</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">"tibble"</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">"testit"</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">"checkmate"</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">"OuhscMunge"</span>)  <span class="co"># remotes::install_github("OuhscBbmc/OuhscMunge")</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co"># This file assume your campus has two REDCap instances.</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Modify each (a) database name, (b) REDCap URL, and (c) DSN name.</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>name_production <span class="ot">&lt;-</span> <span class="st">"production"</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>name_dev        <span class="ot">&lt;-</span> <span class="st">"dev"</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>uri_production  <span class="ot">&lt;-</span> <span class="st">"https://redcap-production.ouhsc.edu/redcap/api/"</span>,</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>uri_dev         <span class="ot">&lt;-</span> <span class="st">"https://redcap-dev.ouhsc.edu/redcap/api/"</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>dsn_production  <span class="ot">&lt;-</span> <span class="st">"redcap-production"</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>dsn_dev         <span class="ot">&lt;-</span> <span class="st">"redcap-dev"</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>dsn_source      <span class="ot">&lt;-</span> <span class="st">"auxiliary_security"</span> <span class="co"># The DSN of the token server.</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="co"># The Activity Directory name that should precede each username.</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="co">#   This should correspond with the result of SQL Server's `SYSTEM_USER` function</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="co">#   (https://msdn.microsoft.com/en-us/library/ms179930.aspx)</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>ldap_prefix <span class="ot">&lt;-</span> <span class="st">"OUHSC</span><span class="sc">\\</span><span class="st">"</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="do">####</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Nothing below this line should need to change, assuming:</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. the vignette was followed exactly (https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html),</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. your campus has exactly two REDCap instances.</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="co"># SQL sent to the MySQL database underneath each REDCap instance.</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>sql <span class="ot">&lt;-</span> <span class="st">"</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="st">  SELECT username, project_id, api_token</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="st">  FROM redcap_user_rights</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="st">  WHERE api_token IS NOT NULL</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Update this ad-hoc CSV.  Each row should represent one REDCap instance.</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>ds_url <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>instance         , <span class="sc">~</span>redcap_uri,</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>  name_production   , uri_production,</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>  name_dev          , uri_dev</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove variables that aren't used below.</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(uri_production, uri_dev)</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the credentials from the first/production REDCap instance.</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>cnn_production  <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(odbc<span class="sc">::</span><span class="fu">odbc</span>(), <span class="at">dsn=</span>dsn_production)</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>ds_production   <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbGetQuery</span>(cnn_production, sql)</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbDisconnect</span>(cnn_production); <span class="fu">rm</span>(cnn_production, dsn_production)</span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the credentials from the second/dev REDCap instance.</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>cnn_dev         <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(odbc<span class="sc">::</span><span class="fu">odbc</span>(), <span class="at">dsn=</span>dsn_dev)</span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>ds_dev          <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbGetQuery</span>(cnn_dev, sql)</span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbDisconnect</span>(cnn_dev); <span class="fu">rm</span>(cnn_dev, dsn_dev)</span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(sql)</span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a><span class="co"># Assert these are valid datasets and contain at least 5 rows.</span></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a><span class="co">#   Adjust '5' to smaller value if necessary.  It's just to catch blatant retrieval problems.</span></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>checkmate<span class="sc">::</span><span class="fu">assert_data_frame</span>(ds_production, <span class="at">min.rows=</span><span class="dv">5</span>)</span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>checkmate<span class="sc">::</span><span class="fu">assert_data_frame</span>(ds_dev       , <span class="at">min.rows=</span><span class="dv">5</span>)</span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- tweak-data --------------------------------------------------------------</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a><span class="co"># Label each instance, so they're distinguishable later.</span></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>ds_production<span class="sc">$</span>instance <span class="ot">&lt;-</span> name_production</span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>ds_dev<span class="sc">$</span>instance        <span class="ot">&lt;-</span> name_dev</span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a><span class="co"># Stack the token collection from each instance.  Then prefix the username and include the URL of each instance.</span></span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span></span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>  ds_production <span class="sc">%&gt;%</span></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">union</span>(ds_dev) <span class="sc">%&gt;%</span>                                <span class="co"># Remove union if the dev instance isn't included.</span></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>  tibble<span class="sc">::</span><span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>    <span class="at">username        =</span> username,</span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>    <span class="at">project_id      =</span> project_id,</span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>    <span class="at">instance        =</span> instance,</span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>    <span class="at">token           =</span> api_token</span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>    <span class="at">username        =</span> <span class="fu">paste0</span>(ldap_prefix, username), <span class="co"># Qualify for the Active Directory.</span></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>( ds_url, <span class="at">by=</span><span class="st">"instance"</span>) <span class="sc">%&gt;%</span>            <span class="co"># Include the instance URL.</span></span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(instance, project_id, username) <span class="sc">%&gt;%</span></span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>  tibble<span class="sc">::</span><span class="fu">rowid_to_column</span>(<span class="st">"id"</span>)                           <span class="co"># For the sake of a clustered primary key.</span></span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(ds_production, ds_dev, ds_url)</span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(name_production, name_dev)</span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(ldap_prefix)</span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- verify-values -----------------------------------------------------------</span></span>
+<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a><span class="co"># Assert that the dataset is well-behaved.</span></span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a><span class="co"># OuhscMunge::verify_value_headstart(ds)</span></span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a>checkmate<span class="sc">::</span><span class="fu">assert_integer</span>(  ds<span class="sc">$</span>id         , <span class="at">any.missing=</span><span class="cn">FALSE</span>, <span class="at">lower=</span><span class="dv">1</span>, <span class="at">upper=</span>.Machine<span class="sc">$</span>integer.max, <span class="at">unique=</span><span class="cn">TRUE</span>)</span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a>checkmate<span class="sc">::</span><span class="fu">assert_character</span>(ds<span class="sc">$</span>username   , <span class="at">any.missing=</span><span class="cn">FALSE</span>, <span class="at">pattern=</span><span class="st">"^.{1,255}$"</span>                         )</span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a>checkmate<span class="sc">::</span><span class="fu">assert_integer</span>(  ds<span class="sc">$</span>project_id , <span class="at">any.missing=</span><span class="cn">FALSE</span>, <span class="at">lower=</span><span class="dv">1</span>, <span class="at">upper=</span>.Machine<span class="sc">$</span>integer.max          )</span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a>checkmate<span class="sc">::</span><span class="fu">assert_character</span>(ds<span class="sc">$</span>token      , <span class="at">any.missing=</span><span class="cn">FALSE</span>, <span class="at">pattern=</span><span class="st">"^[A-Z0-9]{32}$"</span>           , <span class="at">unique=</span><span class="cn">TRUE</span>)</span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a>checkmate<span class="sc">::</span><span class="fu">assert_character</span>(ds<span class="sc">$</span>instance   , <span class="at">any.missing=</span><span class="cn">FALSE</span>, <span class="at">pattern=</span><span class="st">"^.{1,255}$"</span>                         )</span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a>checkmate<span class="sc">::</span><span class="fu">assert_character</span>(ds<span class="sc">$</span>redcap_uri , <span class="at">any.missing=</span><span class="cn">FALSE</span>, <span class="at">pattern=</span><span class="st">"^.{1,255}$"</span>                         )</span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>testit<span class="sc">::</span><span class="fu">assert</span>(</span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The `username` x `project_id` x `instance` must be unique."</span>,</span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(<span class="fu">duplicated</span>(<span class="fu">paste0</span>(ds<span class="sc">$</span>username, <span class="st">"-"</span>, ds<span class="sc">$</span>project_id, <span class="st">"-"</span>, ds<span class="sc">$</span>instance))) <span class="sc">==</span> 0L</span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>testit<span class="sc">::</span><span class="fu">assert</span>(<span class="st">"At least 10 tokens should be ready to write."</span> , 10L <span class="sc">&lt;=</span> <span class="fu">nrow</span>(ds))</span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- specify-columns-to-upload -----------------------------------------------</span></span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a><span class="co"># Dictate the exact columns and order that will be uploaded.</span></span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a>columns_to_write <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"id"</span>, <span class="st">"username"</span>, <span class="st">"project_id"</span>, <span class="st">"instance"</span>, <span class="st">"token"</span>, <span class="st">"redcap_uri"</span>)</span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a>ds_slim          <span class="ot">&lt;-</span> ds[, columns_to_write]</span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(columns_to_write)</span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- upload-to-db ------------------------------------------------------------------</span></span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a>OuhscMunge<span class="sc">::</span><span class="fu">upload_sqls_odbc</span>(</span>
+<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a>  <span class="at">d               =</span> ds_slim,</span>
+<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a>  <span class="at">schema_name     =</span> <span class="st">"redcap_private"</span>,</span>
+<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a>  <span class="at">table_name      =</span> <span class="st">"tbl_credential"</span>,</span>
+<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a>  <span class="at">dsn_name        =</span> dsn_source,</span>
+<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a>  <span class="at">create_table    =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a>  <span class="at">clear_table     =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a>  <span class="at">transaction     =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose         =</span> <span class="cn">TRUE</span></span>
+<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a><span class="co"># Uploading 252 tokens takes 0.004 minutes.</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="document-info">Document Info<a class="anchor" aria-label="anchor" href="#document-info"></a>
