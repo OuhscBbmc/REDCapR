@@ -165,29 +165,19 @@ If you know, please tell me.</em></p>
 <span class="r-in"><span><span class="va">token</span>       <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ds_metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="redcap_metadata_read.html">redcap_metadata_read</a></span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The REDCapR metadata export operation was not successful.  The error message was:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     &lt;div style="font: normal 12px Verdana, Arial;padding:20px;border: 1px solid red;color: #800000;max-width: 600px;background: #FFE1E1;"&gt;</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>         &lt;div style="font-weight:bold;font-size:15px;padding-bottom:5px;"&gt;</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>             CRITICAL ERROR: REDCap server is offline!</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>         &lt;/div&gt;</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>         &lt;div&gt;</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>             For unknown reasons, REDCap cannot communicate with its database server, which may be offline. Please contact your</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>             local REDCap administrator to inform them of this issue immediately. If you are a REDCap administrator, then please see this</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>             &lt;a href="javascript:;" style="color:#000066;" onclick="document.getElementById('db_error_msg').style.display='block';"&gt;additional information&lt;/a&gt;.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>             We are sorry for any inconvenience.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>         &lt;/div&gt;</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>         &lt;div id="db_error_msg" style="display:none;color:#333;background:#fff;padding:5px 10px 10px;margin:20px 0;border:1px solid #bbb;"&gt;</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>             &lt;b&gt;Message for REDCap administrators:&lt;/b&gt;&lt;br/&gt;Your REDCap database connection file [/var/www/html/redcap/database.php] could not connect to the database server.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 					 Please check the connection values in that file ($hostname, $db, $username, $password)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 					 because they may be incorrect.        &lt;/div&gt;</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     &lt;/div&gt;</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 	</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-in"><span><span class="va">choices_2</span>   <span class="op">&lt;-</span> <span class="va">ds_metadata</span><span class="op">[</span><span class="va">ds_metadata</span><span class="op">$</span><span class="va">field_name</span><span class="op">==</span><span class="st">"race"</span>, <span class="op">]</span><span class="op">$</span><span class="va">select_choices_or_calculations</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Unknown or uninitialised column: `field_name`.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Unknown or uninitialised column: `select_choices_or_calculations`.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">regex_named_captures</span><span class="op">(</span>pattern<span class="op">=</span><span class="va">pattern_boxes</span>, text<span class="op">=</span><span class="va">choices_2</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in REDCapR::regex_named_captures(pattern = pattern_boxes, text = choices_2):</span> Assertion on 'text' failed: Must be of type 'character', not 'NULL'.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   id    label                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1     American Indian/Alaska Native            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2     Asian                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 3     Native Hawaiian or Other Pacific Islander</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 4     Black or African American                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 5     White                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 6     Unknown / Not Reported                   </span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">path_3</span>         <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>package<span class="op">=</span><span class="st">"REDCapR"</span>, <span class="st">"test-data/project-simple/simple-metadata.csv"</span><span class="op">)</span></span></span>
