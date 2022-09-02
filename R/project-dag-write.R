@@ -55,13 +55,13 @@ populate_project_dag_write <- function(batch = FALSE) {
         convert_logical_to_integer = TRUE
       )
     } else {
-        REDCapR::redcap_write_oneshot(
-          ds          = ds_to_write,
-          redcap_uri  = project$redcap_uri,
-          token       = project$token,
-          verbose     = TRUE,
-          convert_logical_to_integer = TRUE
-        )
+      REDCapR::redcap_write_oneshot(
+        ds          = ds_to_write,
+        redcap_uri  = project$redcap_uri,
+        token       = project$token,
+        verbose     = TRUE,
+        convert_logical_to_integer = TRUE
+      )
     }
   # )
 
@@ -80,6 +80,7 @@ populate_project_dag_write <- function(batch = FALSE) {
   ))
   list(is_success = returned_object$success, redcap_project = project)
 }
+
 clear_project_dag_write <- function(verbose = TRUE) {
   if (!requireNamespace("testthat")) {
     # nocov start

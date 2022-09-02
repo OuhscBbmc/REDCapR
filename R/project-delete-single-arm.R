@@ -1,7 +1,6 @@
 # These functions are not exported.
 
 populate_project_delete_single_arm <- function() {
-
   if (!requireNamespace("testthat")) {
     # nocov start
     stop(
@@ -53,6 +52,7 @@ populate_project_delete_single_arm <- function() {
   ))
   list(is_success = returned_object$success, redcap_project = project)
 }
+
 clear_project_delete_single_arm <- function(verbose = TRUE) {
   if (!requireNamespace("testthat")) {
     # nocov start

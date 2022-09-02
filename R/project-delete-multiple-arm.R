@@ -52,6 +52,7 @@ populate_project_delete_multiple_arm <- function() {
   ))
   list(is_success = returned_object$success, redcap_project = project)
 }
+
 clear_project_delete_multiple_arm <- function(verbose = TRUE) {
   if (!requireNamespace("testthat")) {
     # nocov start

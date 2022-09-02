@@ -77,6 +77,7 @@ populate_project_simple <- function(batch = FALSE) {
   ))
   list(is_success = returned_object$success, redcap_project = project)
 }
+
 clear_project_simple <- function(verbose = TRUE) {
   if (!requireNamespace("testthat")) {
     # nocov start

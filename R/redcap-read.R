@@ -180,7 +180,6 @@
 #'   col_types  = col_types,
 #'   batch_size = 2
 #' )$data
-#'
 #' }
 
 #' @export

@@ -71,7 +71,6 @@
 #' result$survey_link
 #' }
 
-
 #' @export
 redcap_survey_link_export_oneshot <- function(
   redcap_uri,
