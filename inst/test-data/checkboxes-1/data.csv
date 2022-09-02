@@ -1,0 +1,5 @@
+record_id,form_1_complete,check_one___1,check_one___2,check_one___3,check_one___4,check_two___a,check_two___b,check_two___c,check_two___d,check_two___e,desired_result,form_2_complete
+1,0,1,0,0,0,1,0,1,0,0,"Should have data for both checkbox items:    check_one:    - check_one___1 should be 1  - check_one___[2-4] should be 0    check_two:    - check_two___a should be 1  - check_two___c should be 1  - check_one___[b;d;e] should be 0    completion status should be 2",2
+2,0,0,0,0,0,0,1,0,1,0,"Should have data only for the second checkbox item:    check_one:    - check_one___[1-4] should be NA    check_two:    - check_two___b should be 1  - check_two___d should be 1  - check_one___[a;c;e] should be 0    completion status should be 1",0
+3,0,1,1,1,1,0,0,0,0,0,"Should have data for only the first checkbox item:    check_one:    - check_one___[1-4] should be 1    check_two:    - check_two___[a-e] should be NA  - check_two___c should be 1  - check_one___[b;d;e] should be 0    completion status should be 2",2
+4,0,0,0,0,0,0,0,0,0,0,,0
