@@ -137,8 +137,8 @@ to the R console during the operation.  The verbose output might contain
 sensitive information (\emph{e.g.} PHI), so turn this off if the output might
 be visible somewhere public. Optional.}
 
-\item{config_options}{A list of options to pass to \code{POST} method in the
-\code{httr} package.  See the details below. Optional.}
+\item{config_options}{A list of options passed to \code{\link[httr:POST]{httr::POST()}}.
+See details at \code{\link[httr:httr_options]{httr::httr_options()}}. Optional.}
 }
 \value{
 Currently, a list is returned with the following elements:
@@ -166,11 +166,7 @@ empty string to save RAM.
 This function uses REDCap's API to select and return data.
 }
 \details{
-The full list of configuration options accepted by the \code{httr} package is
-viewable by executing \code{\link[httr:httr_options]{httr::httr_options()}}.  The \code{httr} package and
-documentation is available at https://cran.r-project.org/package=httr.
-
-If you do not pass in this \code{export_data_access_groups} value, it will default
+If you do not pass an \code{export_data_access_groups} value, it will default
 to \code{FALSE}. The following is from the API help page for version 10.5.1:
 \emph{This flag is only viable if the user whose token is being used to make the
 API request is \strong{not} in a data access group. If the user is in a group,
@@ -200,7 +196,6 @@ ds_some_fields_v1 <- REDCapR::redcap_read_oneshot(
    fields     = desired_fields_v1
 )$data
 
-
 # Specify the column types.
 col_types <- readr::cols(
   record_id  = readr::col_integer(),
@@ -216,7 +211,6 @@ ds_col_types <- REDCapR::redcap_read_oneshot(
    token      = token,
    col_types  = col_types
 )$data
-
 }
 }
 \references{

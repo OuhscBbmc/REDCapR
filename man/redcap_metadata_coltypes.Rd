@@ -35,8 +35,8 @@ to the R console during the operation.  The verbose output might contain
 sensitive information (\emph{e.g.} PHI), so turn this off if the output might
 be visible somewhere public. Optional.}
 
-\item{config_options}{A list of options to pass to \code{POST} method in the
-\code{httr} package.  See the details below. Optional.}
+\item{config_options}{A list of options passed to \code{\link[httr:POST]{httr::POST()}}.
+See details at \code{\link[httr:httr_options]{httr::httr_options()}}. Optional.}
 }
 \value{
 A \code{\link[readr:cols]{readr::cols()}} object is returned, which can be
@@ -120,10 +120,6 @@ returned by the API.  The the "abcd" scenario, consider (a) changing the type
 from \code{col_integer} to \code{col_character}, (b) excluding the trash values,
 then (c) in a \code{\link[dplyr:mutate]{dplyr::mutate()}} statement,
 use \code{\link[readr:parse_atomic]{readr::parse_integer()}} to cast it to the desired type.
-
-The full list of configuration options accepted by the \code{httr} package is
-viewable by executing \code{\link[httr:httr_options]{httr::httr_options()}}.  The \code{httr} package and
-documentation is available at https://cran.r-project.org/package=httr.
 }
 \examples{
 \dontrun{

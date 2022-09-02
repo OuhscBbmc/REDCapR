@@ -88,13 +88,13 @@
 #' [httr::content()].  Defaults to 'UTF-8'.
 #' @param locale a [readr::locale()] object to specify preferences like
 #' number, date, and time formats.  This object is passed to
-#' [`readr::read_csv()`].  Defaults to [readr::default_locale()].
+#' [readr::read_csv()].  Defaults to [readr::default_locale()].
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  The verbose output might contain
 #' sensitive information (*e.g.* PHI), so turn this off if the output might
 #' be visible somewhere public. Optional.
-#' @param config_options  A list of options to pass to `POST` method in the
-#' `httr` package.  See the details in `redcap_read_oneshot()` Optional.
+#' @param config_options A list of options passed to [httr::POST()].
+#' See details at [httr::httr_options()]. Optional.
 #' @param id_position  The column position of the variable that unique
 #' identifies the subject (typically `record_id`).
 #' This defaults to the first variable in the dataset.

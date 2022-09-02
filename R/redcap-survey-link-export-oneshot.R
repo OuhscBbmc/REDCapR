@@ -16,8 +16,8 @@
 #' Optional
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  Optional.
-#' @param config_options  A list of options to pass to [httr::POST()] method
-#' in the 'httr' package.  See the details below. Optional.
+#' @param config_options A list of options passed to [httr::POST()].
+#' See details at [httr::httr_options()]. Optional.
 #'
 #' @return Currently, a list is returned with the following elements,
 #' * `success`: A boolean value indicating if the operation was apparently

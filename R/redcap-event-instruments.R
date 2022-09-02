@@ -18,8 +18,8 @@
 #' to the R console during the operation.  The verbose output might contain
 #' sensitive information (*e.g.* PHI), so turn this off if the output might
 #' be visible somewhere public. Optional.
-#' @param config_options A list of options to pass to `POST` method in the
-#' `httr` package.  See the details below. Optional.
+#' @param config_options A list of options passed to [httr::POST()].
+#' See details at [httr::httr_options()]. Optional.
 #'
 #' @return Currently, a list is returned with the following elements,
 #' * `data`: A [tibble::tibble()] where each row represents one column
@@ -35,11 +35,6 @@
 #' * `raw_text`: If an operation is NOT successful, the text returned by
 #' REDCap.  If an operation is successful, the `raw_text` is returned as an
 #' empty string to save RAM.
-#'
-#' @details
-#' The full list of configuration options accepted by the `httr` package is
-#' viewable by executing [httr::httr_options()].  The `httr` package and
-#' documentation is available at https://cran.r-project.org/package=httr.
 #'
 #' @author Victor Castro, Will Beasley
 #'

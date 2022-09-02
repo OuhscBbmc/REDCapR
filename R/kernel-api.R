@@ -9,8 +9,8 @@
 #' typically formatted as "https://server.org/apps/redcap/api/".
 #' Required.
 #' @param post_body List of contents expected by the REDCap API.  Required.
-#' @param config_options  A list of options to pass to `POST` method in the
-#' `httr` package.  See the details below.  Optional.
+#' @param config_options A list of options passed to [httr::POST()].
+#' See details at [httr::httr_options()]. Optional.
 #' @param encoding  The encoding value passed to [httr::content()].  Defaults
 #' to 'UTF-8'.
 #' @param content_type The MIME value passed to [httr::content()].  Defaults
