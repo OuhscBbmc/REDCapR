@@ -33,7 +33,9 @@ This first group of checks primarily focuses on the server and the logins accoun
 
 1. **Have you verified your account by responding to the automated email sent to them?** This can be verified in the `Browse Users` section of your server's `Control Center`.  (Talk to your REDCap admin.) For each email address you've entered, there should be a green 'Verified' label and icon.
 
-    ```{r EmailVerified, echo=FALSE, out.extra='style="fig.width=400px"'}
+    ```{r EmailVerified}
+    #| echo = FALSE, 
+    #| out.extra = 'style = "fig.width=400px"'
     knitr::include_graphics("images/EmailVerified.png")
     ```
 
@@ -41,7 +43,9 @@ This first group of checks primarily focuses on the server and the logins accoun
 
 1. **Have you been granted the desired import and/or export permissions?** This can be verified in the `User Rights` section or in the `API` section (and it's `Manage All Project Tokens` tab) within the project.  Alternatively, it can be verified in the `API Tokens` section of the server's `Control Center`.
 
-    ```{r ApiPrivilegeDashboard, echo=FALSE, out.extra='style="fig.width=600px"'}
+    ```{r ApiPrivilegeDashboard}
+    #| echo = FALSE, 
+    #| out.extra = 'style = "fig.width=600px"'
     knitr::include_graphics("images/ApiPrivilegeDashboard.png")
     ```
 
@@ -49,7 +53,9 @@ This first group of checks primarily focuses on the server and the logins accoun
 
 1. **Are you using the correct token?** This can be verified in the `API` section (and it's `Manage All Project Tokens` tab) within the project.  Click the magnifying glass icon in the user's row.  Alternatively, it can be verified in the `API Tokens` section of the server's `Control Center`.
 
-    ```{r MagnifyingGlass, echo=FALSE, out.extra='style="fig.width=550px"'}
+    ```{r MagnifyingGlass}
+    #| echo = FALSE, 
+    #| out.extra = 'style = "fig.width=550px"'
     knitr::include_graphics("images/MagnifyingGlass.png")
     ```
 
@@ -62,7 +68,9 @@ Reading
 
 This section examines potential problems that occur after data leaves a working server, but before it is handled by their programming language (*e.g.*, Python and R).  [Postman](https://www.postman.com/) is a Chrome plugin recommended by [several](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ) [people](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ) that makes troubleshooting much more efficient.
 
-```{r PostmanScreenshot, echo=FALSE, out.extra='style="fig.width=800px"'}
+```{r PostmanScreenshot}
+#| echo = FALSE, 
+#| out.extra = 'style = "fig.width=800px"'
 knitr::include_graphics("images/PostmanScreenshot.png")
 ```
 
