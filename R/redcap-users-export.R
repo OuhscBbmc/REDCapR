@@ -1,6 +1,8 @@
-#' @title List authorized users
+#' @title
+#' List authorized users
 #'
-#' @description List users authorized for a project.
+#' @description
+#' List users authorized for a project.
 #'
 #' @param redcap_uri The
 #' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
@@ -16,7 +18,8 @@
 #' @param config_options A list of options passed to [httr::POST()].
 #' See details at [httr::httr_options()]. Optional.
 #'
-#' @return Currently, a list is returned with the following elements:
+#' @return
+#; Currently, a list is returned with the following elements:
 #' * `data_user`: A [tibble::tibble()] of all users associated with the project.
 #' One row represents one user.
 #' * `data_user_form`: A [tibble::tibble()] of permissions for users and forms.

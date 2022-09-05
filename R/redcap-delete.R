@@ -1,6 +1,8 @@
-#' @title Delete records in a REDCap project
+#' @title
+#' Delete records in a REDCap project
 #'
-#' @description Delete existing records by their ID from REDCap.
+#' @description
+#' Delete existing records by their ID from REDCap.
 #'
 #' @param redcap_uri The
 #' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
@@ -18,7 +20,8 @@
 #'
 #' @inheritParams redcap_metadata_read
 #'
-#' @return Currently, a list is returned with the following elements:
+#' @return
+#' Currently, a list is returned with the following elements:
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
 #' * `status_code`: The
@@ -46,9 +49,11 @@
 #' only one arm is defined.  Therefore a value of `arm_number` must be
 #' specified for all longitudinal projects.
 #'
-#' @author Jonathan Mang, Will Beasley
+#' @author
+#' Jonathan Mang, Will Beasley
 #'
-#' @references The official documentation can be found on the 'API Help Page'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html).

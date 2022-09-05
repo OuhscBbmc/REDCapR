@@ -34,8 +34,7 @@ to 'text/csv'.}
 A \link[utils:packageDescription]{utils::packageVersion}.
 }
 \description{
-This function is used by other functions to read and write
-values.
+This function is used by other functions to read and write values.
 }
 \details{
 If the API call is unsuccessful, a value of

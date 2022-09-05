@@ -1,6 +1,8 @@
-#' @title Read/Export records from a REDCap project --still in development
+#' @title
+#' Read/Export records from a REDCap project --still in development
 #'
-#' @description This function uses REDCap's API to select and return data.
+#' @description
+#' This function uses REDCap's API to select and return data.
 #' This function is still in development.
 #'
 #' @param redcap_uri The
@@ -69,7 +71,8 @@
 #' @param config_options A list of options passed to [httr::POST()].
 #' See details at [httr::httr_options()]. Optional.
 #'
-#' @return Currently, a list is returned with the following elements:
+#' @return
+#' Currently, a list is returned with the following elements:
 #' * `data`: A [tibble::tibble()] of the desired records and columns.
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
@@ -89,7 +92,6 @@
 #' empty string to save RAM.
 #'
 #' @details
-#'
 #' If you do not pass in this export_data_access_groups value, it will
 #' default to `FALSE`. The following is from the API help page for version
 #' 5.2.3:
@@ -99,9 +101,11 @@
 #'
 #' As of REDCap 6.14.3, this field is not exported in the EAV API call.
 #'
-#' @author Will Beasley
+#' @author
+#' Will Beasley
 #'
-#' @references The official documentation can be found on the 'API Help Page'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html).
@@ -195,31 +199,31 @@ redcap_read_oneshot_eav <- function(
 
   validate_field_names(fields, stop_on_error = TRUE)
 
-  token               <- sanitize_token(token)
-  records_collapsed   <- collapse_vector(records  , records_collapsed)
-  fields_collapsed    <- collapse_vector(fields   , fields_collapsed)
-  forms_collapsed     <- collapse_vector(forms    , forms_collapsed)
-  events_collapsed    <- collapse_vector(events   , events_collapsed)
+  token                     <- sanitize_token(token)
+  records_collapsed         <- collapse_vector(records  , records_collapsed)
+  fields_collapsed          <- collapse_vector(fields   , fields_collapsed)
+  forms_collapsed           <- collapse_vector(forms    , forms_collapsed)
+  events_collapsed          <- collapse_vector(events   , events_collapsed)
   export_data_access_groups <- ifelse(export_data_access_groups, "true", "false")
-  filter_logic        <- filter_logic_prepare(filter_logic)
-  datetime_range_begin<- dplyr::coalesce(strftime(datetime_range_begin, "%Y-%m-%d %H:%M:%S"), "")
-  datetime_range_end  <- dplyr::coalesce(strftime(datetime_range_end  , "%Y-%m-%d %H:%M:%S"), "")
-  verbose             <- verbose_prepare(verbose)
+  filter_logic              <- filter_logic_prepare(filter_logic)
+  datetime_range_begin      <- dplyr::coalesce(strftime(datetime_range_begin, "%Y-%m-%d %H:%M:%S"), "")
+  datetime_range_end        <- dplyr::coalesce(strftime(datetime_range_end  , "%Y-%m-%d %H:%M:%S"), "")
+  verbose                   <- verbose_prepare(verbose)
 
   if (1L <= nchar(fields_collapsed) )
     validate_field_names_collapsed(fields_collapsed, stop_on_error = TRUE)
 
   post_body <- list(
-    token                   = token,
-    content                 = "record",
-    format                  = "csv",
-    type                    = "eav",
-    rawOrLabel              = raw_or_label,
-    rawOrLabelHeaders       = raw_or_label_headers,
-    exportDataAccessGroups  = export_data_access_groups,
-    filterLogic             = filter_logic,
-    dateRangeBegin          = datetime_range_begin,
-    dateRangeEnd            = datetime_range_end,
+    token                        = token,
+    content                      = "record",
+    format                       = "csv",
+    type                         = "eav",
+    rawOrLabel                   = raw_or_label,
+    rawOrLabelHeaders            = raw_or_label_headers,
+    exportDataAccessGroups       = export_data_access_groups,
+    filterLogic                  = filter_logic,
+    dateRangeBegin               = datetime_range_begin,
+    dateRangeEnd                 = datetime_range_end,
     exportBlankForGrayFormStatus = blank_for_gray_form_status
     # record, fields, forms & events are specified below
   )
@@ -330,8 +334,8 @@ redcap_read_oneshot_eav <- function(
           ds %>%
           dplyr::mutate_if(is.character, ~type.convert(., as.is = FALSE)) %>%
           dplyr::mutate_if(is.factor   , as.character)
-      }, #Convert the raw text to a dataset.
-      silent = TRUE #Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
+      },
+      silent = TRUE # Don't print the warning in the try block.  Print it below, where it's under the control of the caller.
     )
 
     if (ifelse(exists("ds_2"), inherits(ds_2, "data.frame"), FALSE)) {
@@ -346,7 +350,7 @@ redcap_read_oneshot_eav <- function(
       kernel$raw_text   <- "" # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
     } else {
       # nocov start
-      kernel$success    <- FALSE #Override the 'success' determination from the http status code.
+      kernel$success    <- FALSE # Override the 'success' determination from the http status code.
       ds_2              <- tibble::tibble() # Return an empty data.frame
       outcome_message   <- sprintf(
         "The REDCap read failed.  The http status code was %s.  The 'raw_text' returned was '%s'.",
@@ -373,17 +377,17 @@ redcap_read_oneshot_eav <- function(
     message(outcome_message)
 
   list(
-    data               = ds_2,
-    success            = kernel$success,
-    status_code        = kernel$status_code,
-    outcome_message    = outcome_message,
-    records_collapsed  = records_collapsed,
-    fields_collapsed   = fields_collapsed,
-    filter_logic       = filter_logic,
-    datetime_range_begin= datetime_range_begin,
-    datetime_range_end  = datetime_range_end,
-    events_collapsed   = events_collapsed,
-    elapsed_seconds    = kernel$elapsed_seconds,
-    raw_text           = kernel$raw_text
+    data                  = ds_2,
+    success               = kernel$success,
+    status_code           = kernel$status_code,
+    outcome_message       = outcome_message,
+    records_collapsed     = records_collapsed,
+    fields_collapsed      = fields_collapsed,
+    filter_logic          = filter_logic,
+    datetime_range_begin  = datetime_range_begin,
+    datetime_range_end    = datetime_range_end,
+    events_collapsed      = events_collapsed,
+    elapsed_seconds       = kernel$elapsed_seconds,
+    raw_text              = kernel$raw_text
   )
 }

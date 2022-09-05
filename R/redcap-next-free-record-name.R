@@ -1,6 +1,8 @@
-#' @title Determine free available record ID
+#' @title
+#' Determine free available record ID
 #'
-#' @description Determines the next available record ID.
+#' @description
+#' Determines the next available record ID.
 #'
 #' @param redcap_uri The
 #' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
@@ -16,10 +18,12 @@
 #' @param config_options A list of options passed to [httr::POST()].
 #' See details at [httr::httr_options()]. Optional.
 #'
-#' @return a [base::character] vector of either
+#' @return
+#' a [base::character] vector of either
 #' length 1 (if successful) or length 0 (if not successful).
 #'
-#' @details If the API call is unsuccessful, a value of `character(0)` will
+#' @details
+#' If the API call is unsuccessful, a value of `character(0)` will
 #' be returned (*i.e.*, an empty vector).  This ensures that a the function
 #' will always return an object of class
 #' [base::character].

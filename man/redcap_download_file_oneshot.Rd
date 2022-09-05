@@ -93,7 +93,7 @@ function that checks for some common important conflicts.
 \examples{
 \dontrun{
 uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
-token   <- "D70F9ACD1EDD6F151C6EA78683944E98" #pid=213
+token   <- "D70F9ACD1EDD6F151C6EA78683944E98" # pid=213
 record  <- 1
 field   <- "mugshot"
 # event <- "" # only for longitudinal projects
@@ -106,7 +106,7 @@ result_1 <- REDCapR::redcap_download_file_oneshot(
 )
 base::unlink("mugshot-1.jpg")
 
-(full_name <- base::tempfile(pattern="mugshot", fileext=".jpg"))
+(full_name <- base::tempfile(pattern="mugshot", fileext = ".jpg"))
 result_2   <- REDCapR::redcap_download_file_oneshot(
   file_name     = full_name,
   record        = record,

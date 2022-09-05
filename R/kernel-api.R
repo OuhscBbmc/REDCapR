@@ -1,7 +1,8 @@
-#' @title REDCapR internal function for calling the REDCap API
+#' @title
+#' REDCapR internal function for calling the REDCap API
 #'
-#' @description This function is used by other functions to read and write
-#' values.
+#' @description
+#' This function is used by other functions to read and write values.
 #'
 #' @param redcap_uri The
 #' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
@@ -16,9 +17,11 @@
 #' @param content_type The MIME value passed to [httr::content()].  Defaults
 #' to 'text/csv'.
 #'
-#' @return A [utils::packageVersion].
+#' @return
+#' A [utils::packageVersion].
 #'
-#' @details If the API call is unsuccessful, a value of
+#' @details
+#' If the API call is unsuccessful, a value of
 #' `base::package_version("0.0.0")` will be returned.  This ensures that a
 #' the function will always return an object of class [base::package_version].
 #' It guarantees the value can always be used in [utils::compareVersion()].
@@ -68,7 +71,6 @@ kernel_api <- function(
 
   status_code           <- result$status
   success               <- (status_code == 200L)
-  # raw_text              <- as.character(httr::content(result, as = "text"))
   raw_text              <- httr::content(
     x           = result,
     as          = "text",

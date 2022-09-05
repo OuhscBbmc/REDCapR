@@ -1,6 +1,8 @@
-#' @title Sanitize to adhere to REDCap character encoding requirements
+#' @title
+#' Sanitize to adhere to REDCap character encoding requirements
 #'
-#' @description Replace non-ASCII characters with legal characters that won't
+#' @description
+#' Replace non-ASCII characters with legal characters that won't
 #' cause problems when writing to a REDCap project.
 #'
 #' @param d The [base::data.frame()] containing the dataset used to update
@@ -23,7 +25,8 @@
 #' `R 3.1.0`, the OSes use similar, but different, versions to convert the
 #' characters.  Be aware of this in case you notice OS-dependent differences.
 #'
-#' @author Will Beasley
+#' @author
+#' Will Beasley
 #'
 #' @examples
 #' # Typical examples are not shown because they require non-ASCII encoding,

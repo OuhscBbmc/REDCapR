@@ -73,7 +73,7 @@ To use this method, you must have API Export privileges in the project.
 \examples{
 \dontrun{
 uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
-token   <- "8FA9A6BDAE2C0B5DD3CB472DD8E8918C" #pid=817
+token   <- "8FA9A6BDAE2C0B5DD3CB472DD8E8918C" # pid=817
 record  <- 1
 instrument   <- "participant_morale_questionnaire"
 # event <- "" # only for longitudinal projects

@@ -45,19 +45,19 @@ populate_project_simple <- function(batch = FALSE) {
   testthat::expect_message(
     returned_object <- if (batch) {
       REDCapR::redcap_write(
-        ds          = ds_to_write,
-        redcap_uri  = project$redcap_uri,
-        token       = project$token,
-        verbose     = TRUE,
-        convert_logical_to_integer = TRUE
+        ds                          = ds_to_write,
+        redcap_uri                  = project$redcap_uri,
+        token                       = project$token,
+        verbose                     = TRUE,
+        convert_logical_to_integer  = TRUE
       )
     } else {
       REDCapR::redcap_write_oneshot(
-        ds          = ds_to_write,
-        redcap_uri  = project$redcap_uri,
-        token       = project$token,
-        verbose     = TRUE,
-        convert_logical_to_integer = TRUE
+        ds                          = ds_to_write,
+        redcap_uri                  = project$redcap_uri,
+        token                       = project$token,
+        verbose                     = TRUE,
+        convert_logical_to_integer  = TRUE
       )
     }
   )

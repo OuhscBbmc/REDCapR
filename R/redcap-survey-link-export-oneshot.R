@@ -1,6 +1,8 @@
-#' @title Download a file from a REDCap project record
+#' @title
+#' Download a file from a REDCap project record
 #'
-#' @description This function uses REDCap's API to download a file.
+#' @description
+#' This function uses REDCap's API to download a file.
 #'
 #' @param redcap_uri The
 #' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
@@ -19,7 +21,8 @@
 #' @param config_options A list of options passed to [httr::POST()].
 #' See details at [httr::httr_options()]. Optional.
 #'
-#' @return Currently, a list is returned with the following elements,
+#' @return
+#' Currently, a list is returned with the following elements,
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
 #' * `status_code`: The
@@ -45,9 +48,11 @@
 #' To use this method, you must have API Export privileges in the project.
 #' (As stated in the 9.0.0 documentation.)
 #'
-#' @author Will Beasley
+#' @author
+#' Will Beasley
 #'
-#' @references The official documentation can be found on the 'API Help Page'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html).
@@ -57,7 +62,7 @@
 #' @examples
 #' \dontrun{
 #' uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
-#' token   <- "8FA9A6BDAE2C0B5DD3CB472DD8E8918C" #pid=817
+#' token   <- "8FA9A6BDAE2C0B5DD3CB472DD8E8918C" # pid=817
 #' record  <- 1
 #' instrument   <- "participant_morale_questionnaire"
 #' # event <- "" # only for longitudinal projects

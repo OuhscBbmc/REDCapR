@@ -76,9 +76,9 @@ token  <- "D70F9ACD1EDD6F151C6EA78683944E98" # The simple project -pid 213
 field  <- "mugshot"
 event  <- "" # only for longitudinal events
 
-#Upload a single image file.
+# Upload a single image file.
 record    <- 1
-file_path <- system.file("test-data/mugshot-1.jpg", package="REDCapR")
+file_path <- system.file("test-data/mugshot-1.jpg", package = "REDCapR")
 
 REDCapR::redcap_upload_file_oneshot(
   file_name  = file_path,
@@ -88,7 +88,7 @@ REDCapR::redcap_upload_file_oneshot(
   token      = token
 )
 
-#Upload a collection of five images.
+# Upload a collection of five images.
 records    <- 1:5
 file_paths <- system.file(
   paste0("test-data/mugshot-", records, ".jpg"),

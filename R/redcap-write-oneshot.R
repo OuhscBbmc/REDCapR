@@ -1,6 +1,8 @@
-#' @title Write/Import records to a REDCap project
+#' @title
+#' Write/Import records to a REDCap project
 #'
-#' @description This function uses REDCap's API to select and return data.
+#' @description
+#' This function uses REDCap's API to select and return data.
 #'
 #' @param ds The [base::data.frame()] to be imported into the REDCap project.
 #' Required.
@@ -29,7 +31,8 @@
 #' @param config_options A list of options passed to [httr::POST()].
 #' See details at [httr::httr_options()]. Optional.
 #'
-#' @return Currently, a list is returned with the following elements:
+#' @return
+#' Currently, a list is returned with the following elements:
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
 #' * `status_code`: The
@@ -49,9 +52,11 @@
 #' REDCap's supported variables.  See [validate_for_write()] for a helper
 #' function that checks for some common important conflicts.
 #'
-#' @author Will Beasley
+#' @author
+#' Will Beasley
 #'
-#' @references The official documentation can be found on the 'API Help Page'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html).
@@ -60,7 +65,7 @@
 #'
 #' @examples
 #' if (FALSE) {
-#' #Define some constants
+#' # Define some constants
 #' uri            <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token          <- "D70F9ACD1EDD6F151C6EA78683944E98"
 #'
@@ -96,8 +101,8 @@ redcap_write_oneshot <- function(
   token,
   overwrite_with_blanks         = TRUE,
   convert_logical_to_integer    = FALSE,
-  verbose         = TRUE,
-  config_options  = NULL
+  verbose                       = TRUE,
+  config_options                = NULL
 ) {
 
   # This prevents the R CHECK NOTE: 'No visible binding for global variable Note in R CMD check';
@@ -135,8 +140,8 @@ redcap_write_oneshot <- function(
     format    = "csv",
     type      = "flat",
 
-    #These next values separate the import from the export API call
-    #overwriteBehavior:
+    # These next values separate the import from the export API call
+    # overwriteBehavior:
     #  *normal* - blank/empty values will be ignored [default];
     #  *overwrite* - blank/empty values are valid and will overwrite data
 
@@ -159,9 +164,9 @@ redcap_write_oneshot <- function(
       kernel$elapsed_seconds
     )
 
-    #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
+    # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
     kernel$raw_text <- ""
-  } else { #If the returned content wasn't recognized as valid IDs, then
+  } else { # If the returned content wasn't recognized as valid IDs, then
     affected_ids           <- character(0) # Return an empty array
     records_affected_count <- NA_integer_
     outcome_message        <- sprintf(

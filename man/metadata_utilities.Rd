@@ -59,7 +59,8 @@ choices_1 <- paste0(
   "3, Native Hawaiian or Other Pacific Islander | ",
   "4, Black or African American | ",
   "5, White | ",
-  "6, Unknown / Not Reported")
+  "6, Unknown / Not Reported"
+)
 
 # This calls the general function, and requires the correct regex pattern.
 REDCapR::regex_named_captures(pattern=pattern_boxes, text=choices_1)

@@ -1,6 +1,8 @@
-#' @title Download a file from a REDCap project record
+#' @title
+#' Download a file from a REDCap project record
 #'
-#' @description This function uses REDCap's API to download a file.
+#' @description
+#' This function uses REDCap's API to download a file.
 #'
 #' @param file_name The name of the file where the downloaded file is saved.
 #' If empty the original name of the file will be used and saved in the
@@ -33,7 +35,8 @@
 #' @param config_options A list of options passed to [httr::POST()].
 #' See details at [httr::httr_options()]. Optional.
 #'
-#' @return Currently, a list is returned with the following elements,
+#' @return
+#' Currently, a list is returned with the following elements,
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
 #' * `status_code`: The
@@ -55,9 +58,11 @@
 #' REDCap's supported variables.  See [validate_for_write()] for a helper
 #' function that checks for some common important conflicts.
 #'
-#' @author Will Beasley, John J. Aponte
+#' @author
+#' Will Beasley, John J. Aponte
 #'
-#' @references The official documentation can be found on the 'API Help Page'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html).
@@ -67,7 +72,7 @@
 #' @examples
 #' \dontrun{
 #' uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
-#' token   <- "D70F9ACD1EDD6F151C6EA78683944E98" #pid=213
+#' token   <- "D70F9ACD1EDD6F151C6EA78683944E98" # pid=213
 #' record  <- 1
 #' field   <- "mugshot"
 #' # event <- "" # only for longitudinal projects
@@ -80,7 +85,7 @@
 #' )
 #' base::unlink("mugshot-1.jpg")
 #'
-#' (full_name <- base::tempfile(pattern="mugshot", fileext=".jpg"))
+#' (full_name <- base::tempfile(pattern="mugshot", fileext = ".jpg"))
 #' result_2   <- REDCapR::redcap_download_file_oneshot(
 #'   file_name     = full_name,
 #'   record        = record,
@@ -146,7 +151,7 @@ redcap_download_file_oneshot <- function(
 
   if (!is.null(repeat_instrument)) {
     if (is.null(repeat_instance)) {
-      stop("You must specify repeat_instance when specified repeat_instrement")
+      stop("You must specify repeat_instance when specified repeat_instrument")
     }
     post_body$repeat_instrument <- repeat_instrument
     post_body$repeat_instance   <- repeat_instance
@@ -174,9 +179,9 @@ redcap_download_file_oneshot <- function(
     }
 
     file_path <- if (missing(directory) && is.null(directory)) {
-      file_name #Use relative path.
+      file_name # Use relative path.
     } else {
-      file.path(directory, file_name) #Qualify the file with its full path.
+      file.path(directory, file_name) # Qualify the file with its full path.
     }
 
     if (verbose)
@@ -191,8 +196,8 @@ redcap_download_file_oneshot <- function(
       )
     }
 
-    #This is the second of two important lines in the function.
-    #  It persists/converts the information in RAM to a file.
+    # This is the second of two important lines in the function.
+    #   It persists/converts the information in RAM to a file.
     writeBin(httr::content(kernel$result, as = "raw"), con = file_path)
 
     outcome_message <- sprintf(

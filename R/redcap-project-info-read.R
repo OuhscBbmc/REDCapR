@@ -1,6 +1,8 @@
-#' @title Export project information.
+#' @title
+#' Export project information.
 #'
-#' @description This function exports some of the basic attributes of a given
+#' @description
+#' This function exports some of the basic attributes of a given
 #' REDCap project, such as the project's title, if it is longitudinal,
 #' if surveys are enabled, the time the project was created and moved to
 #' production.  Returns a [tibble::tibble()].
@@ -24,7 +26,8 @@
 #' @param config_options A list of options passed to [httr::POST()].
 #' See details at [httr::httr_options()]. Optional.
 #'
-#' @return Currently, a list is returned with the following elements:
+#' @return
+#' Currently, a list is returned with the following elements:
 #' * `data`: An R [tibble::tibble()] of all data access groups of the project.
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
@@ -37,7 +40,6 @@
 #' * `elapsed_seconds`: The duration of the function.
 #'
 #' @details
-#'
 #' **Timezones**
 #'
 #' Several datetime variables are returned, such as the project's
@@ -70,8 +72,11 @@
 #' separated by a column.  Consider using a function like
 #' [tidyr::separate_rows()] to create a long data structure.
 #'
-#' @author Will Beasley, Stephan Kadauke
-#' @references The official documentation can be found on the 'API Help Page'
+#' @author
+#' Will Beasley, Stephan Kadauke
+#'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html
 #' and
@@ -209,7 +214,7 @@ redcap_project_info_read <- function(
     if (exists("ds") && inherits(ds, "data.frame")) {
       outcome_message <- sprintf(
         "%s rows were read from REDCap in %0.1f seconds.  The http status code was %i.",
-        format(  nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE),
+        format(nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE),
         kernel$elapsed_seconds,
         kernel$status_code
       )

@@ -48,19 +48,19 @@ populate_project_dag_write <- function(batch = FALSE) {
   # testthat::expect_message(
     returned_object <- if (batch) {
       REDCapR::redcap_write(
-        ds          = ds_to_write,
-        redcap_uri  = project$redcap_uri,
-        token       = project$token,
-        verbose     = TRUE,
-        convert_logical_to_integer = TRUE
+        ds                          = ds_to_write,
+        redcap_uri                  = project$redcap_uri,
+        token                       = project$token,
+        verbose                     = TRUE,
+        convert_logical_to_integer  = TRUE
       )
     } else {
       REDCapR::redcap_write_oneshot(
-        ds          = ds_to_write,
-        redcap_uri  = project$redcap_uri,
-        token       = project$token,
-        verbose     = TRUE,
-        convert_logical_to_integer = TRUE
+        ds                          = ds_to_write,
+        redcap_uri                  = project$redcap_uri,
+        token                       = project$token,
+        verbose                     = TRUE,
+        convert_logical_to_integer  = TRUE
       )
     }
   # )
@@ -124,14 +124,14 @@ clean_start_dag_write <- function(batch = FALSE, delay_in_seconds = 1) {
     regexp = "clear_project_dag_write success: TRUE."
   )
   testthat::expect_true(clear_result, "Clearing the results from the dag_write project should be successful.")
-  base::Sys.sleep(delay_in_seconds) #Pause after deleting records.
+  base::Sys.sleep(delay_in_seconds) # Pause after deleting records.
 
   testthat::expect_message(
     populate_result <- populate_project_dag_write(batch = batch),
     regexp = "populate_project_dag_write success: TRUE."
   )
   testthat::expect_true(populate_result$is_success, "Population of the dag_write project should be successful.")
-  base::Sys.sleep(delay_in_seconds) #Pause after writing records.
+  base::Sys.sleep(delay_in_seconds) # Pause after writing records.
 
   populate_result
 }

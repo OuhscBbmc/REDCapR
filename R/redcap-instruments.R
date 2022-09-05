@@ -1,6 +1,8 @@
-#' @title Enumerate the instruments (forms)
+#' @title
+#' Enumerate the instruments (forms)
 #'
-#' @description Export a list of the data collection instruments for a
+#' @description
+#' Export a list of the data collection instruments for a
 #' project. This includes their unique instrument name as seen in the
 #' second column of the Data Dictionary, as well as each instrument's
 #' corresponding instrument label, which is seen on a project's left-hand
@@ -23,7 +25,8 @@
 #' @param config_options A list of options passed to [httr::POST()].
 #' See details at [httr::httr_options()]. Optional.
 #'
-#' @return Currently, a list is returned with the following elements,
+#' @return
+#' Currently, a list is returned with the following elements,
 #' * `data`: A [tibble::tibble()] where each row represents one column
 #' in the REDCap dataset.
 #' * `success`: A boolean value indicating if the operation was apparently
@@ -38,9 +41,11 @@
 #' REDCap.  If an operation is successful, the `raw_text` is returned as an
 #' empty string to save RAM.
 #'
-#' @author Victor Castro, Will Beasley
+#' @author
+#' Victor Castro, Will Beasley
 #'
-#' @references The official documentation can be found on the 'API Help Page'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html).
@@ -87,12 +92,13 @@ redcap_instruments <- function(
   if (kernel$success) {
     try(
       {
+        # Convert the raw text to a dataset.
         ds <-
           readr::read_csv(
             file            = I(kernel$raw_text),
             col_types       = col_types
           )
-      }, #Convert the raw text to a dataset.
+      },
       silent = TRUE
       # Don't print the warning in the try block.  Print it below, where
       #    it's under the control of the caller.

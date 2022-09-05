@@ -1,4 +1,6 @@
-#' @name validate
+#' @name
+#' validate
+#'
 #' @aliases
 #' validate_for_write
 #' validate_no_logical
@@ -14,10 +16,12 @@
 #'
 #' validate_field_names_collapsed( field_names_collapsed, stop_on_error = FALSE )
 #'
-#' @title Inspect a dataset to anticipate problems before
+#' @title
+#' Inspect a dataset to anticipate problems before
 #' writing to a REDCap project
 #'
-#' @description This set of functions inspect a [base::data.frame()] to
+#' @description
+#' This set of functions inspect a [base::data.frame()] to
 #' anticipate problems before writing with REDCap's API.
 #'
 #' @param d The [base::data.frame()] containing the dataset used to update
@@ -32,7 +36,8 @@
 #' @param stop_on_error If `TRUE`, an error is thrown for violations.
 #' Otherwise, a dataset summarizing the problems is returned.
 #'
-#' @return A [tibble::tibble()], where each potential violation is a row.
+#' @return
+#' A [tibble::tibble()], where each potential violation is a row.
 #' The two columns are:
 #' * `field_name`: The name of the [base::data.frame()] that might cause
 #' problems during the upload.
@@ -61,9 +66,11 @@
 #' [new issue](https://github.com/OuhscBbmc/REDCapR/issues), and we'll
 #' incorporate a new validation check into this function.
 #'
-#' @author Will Beasley
+#' @author
+#' Will Beasley
 #'
-#' @references The official documentation can be found on the 'API Help Page'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html).

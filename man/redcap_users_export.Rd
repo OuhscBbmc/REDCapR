@@ -25,7 +25,6 @@ be visible somewhere public. Optional.}
 See details at \code{\link[httr:httr_options]{httr::httr_options()}}. Optional.}
 }
 \value{
-Currently, a list is returned with the following elements:
 \itemize{
 \item \code{data_user}: A \code{\link[tibble:tibble]{tibble::tibble()}} of all users associated with the project.
 One row represents one user.

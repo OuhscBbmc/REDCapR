@@ -1,6 +1,8 @@
-#' @title Read/Export records from a REDCap project
+#' @title
+#' Read/Export records from a REDCap project
 #'
-#' @description This function uses REDCap's API to select and return data.
+#' @description
+#' This function uses REDCap's API to select and return data.
 #'
 #' @param redcap_uri The
 #' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
@@ -64,7 +66,6 @@
 #' can be exported either as a blank value or as "0" (Incomplete). Blank values
 #' are recommended in a data export if the data will be re-imported into a
 #' REDCap project. Default is `FALSE`.
-#'
 #' @param col_types A [readr::cols()] object passed internally to
 #' [readr::read_csv()].  Optional.
 #' @param guess_type A boolean value indicating if all columns should be
@@ -85,7 +86,8 @@
 #' @param config_options A list of options passed to [httr::POST()].
 #' See details at [httr::httr_options()]. Optional.
 #'
-#' @return Currently, a list is returned with the following elements:
+#' @return
+#' Currently, a list is returned with the following elements:
 #' * `data`: A [tibble::tibble()] of the desired records and columns.
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
@@ -105,16 +107,17 @@
 #' empty string to save RAM.
 #'
 #' @details
-#'
 #' If you do not pass an `export_data_access_groups` value, it will default
 #' to `FALSE`. The following is from the API help page for version 10.5.1:
 #' *This flag is only viable if the user whose token is being used to make the
 #' API request is **not** in a data access group. If the user is in a group,
 #' then this flag will revert to its default value*.
 #'
-#' @author Will Beasley
+#' @author
+#' Will Beasley
 #'
-#' @references The official documentation can be found on the 'API Help Page'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html).
@@ -126,23 +129,23 @@
 #' uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token    <- "9A81268476645C4E5F03428B8AC3AA7B"
 #'
-#' #Return all records and all variables.
+#' # Return all records and all variables.
 #' ds <- REDCapR::redcap_read_oneshot(redcap_uri=uri, token=token)$data
 #'
-#' #Return only records with IDs of 1 and 3
+#' # Return only records with IDs of 1 and 3
 #' desired_records_v1 <- c(1, 3)
 #' ds_some_rows_v1 <- REDCapR::redcap_read_oneshot(
-#'    redcap_uri = uri,
-#'    token      = token,
-#'    records    = desired_records_v1
+#'   redcap_uri = uri,
+#'   token      = token,
+#'   records    = desired_records_v1
 #' )$data
 #'
-#' #Return only the fields record_id, name_first, and age
+#' # Return only the fields record_id, name_first, and age
 #' desired_fields_v1 <- c("record_id", "name_first", "age")
 #' ds_some_fields_v1 <- REDCapR::redcap_read_oneshot(
-#'    redcap_uri = uri,
-#'    token      = token,
-#'    fields     = desired_fields_v1
+#'   redcap_uri = uri,
+#'   token      = token,
+#'   fields     = desired_fields_v1
 #' )$data
 #'
 #' # Specify the column types.
@@ -156,9 +159,9 @@
 #'   race___6   = readr::col_logical()
 #' )
 #' ds_col_types <- REDCapR::redcap_read_oneshot(
-#'    redcap_uri = uri,
-#'    token      = token,
-#'    col_types  = col_types
+#'   redcap_uri = uri,
+#'   token      = token,
+#'   col_types  = col_types
 #' )$data
 #' }
 
@@ -185,7 +188,6 @@ redcap_read_oneshot <- function(
   datetime_range_begin          = as.POSIXct(NA),
   datetime_range_end            = as.POSIXct(NA),
   blank_for_gray_form_status    = FALSE,
-
   col_types                     = NULL,
   guess_type                    = TRUE,
   guess_max                     = 1000,
@@ -303,25 +305,6 @@ redcap_read_oneshot <- function(
         kernel$status_code
       )
 
-      # ds <- dplyr::mutate_if(
-      #   ds,
-      #   is.character,
-      #   function(x) dplyr::coalesce(x, "") #Replace NAs with blanks
-      # )
-      #
-      # ds <- dplyr::mutate_if(
-      #   ds,
-      #   is.character,
-      #   function( x ) gsub("\r\n", "\n", x, perl=TRUE)
-      # )
-      # ds <- dplyr::mutate_if(
-      #   ds,
-      #   function( x) inherits(x, "Date"),
-      #   as.character
-      # )
-      #
-      # ds <- base::as.data.frame(ds)
-
       # If an operation is successful, the `raw_text` is no longer returned to
       #   save RAM.  The content is not really necessary with httr's status
       #   message exposed.
@@ -355,18 +338,18 @@ redcap_read_oneshot <- function(
     message(outcome_message)
 
   list(
-    data               = ds,
-    success            = kernel$success,
-    status_code        = kernel$status_code,
-    outcome_message    = outcome_message,
-    records_collapsed  = records_collapsed,
-    fields_collapsed   = fields_collapsed,
-    forms_collapsed    = forms_collapsed,
-    events_collapsed   = events_collapsed,
-    filter_logic       = filter_logic,
-    datetime_range_begin   = datetime_range_begin,
-    datetime_range_end     = datetime_range_end,
-    elapsed_seconds    = kernel$elapsed_seconds,
-    raw_text           = kernel$raw_text
+    data                    = ds,
+    success                 = kernel$success,
+    status_code             = kernel$status_code,
+    outcome_message         = outcome_message,
+    records_collapsed       = records_collapsed,
+    fields_collapsed        = fields_collapsed,
+    forms_collapsed         = forms_collapsed,
+    events_collapsed        = events_collapsed,
+    filter_logic            = filter_logic,
+    datetime_range_begin    = datetime_range_begin,
+    datetime_range_end      = datetime_range_end,
+    elapsed_seconds         = kernel$elapsed_seconds,
+    raw_text                = kernel$raw_text
   )
 }

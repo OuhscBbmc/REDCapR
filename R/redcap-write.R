@@ -1,6 +1,8 @@
-#' @title Write/Import records to a REDCap project
+#' @title
+#' Write/Import records to a REDCap project
 #'
-#' @description This function uses REDCap's APIs to select and return data.
+#' @description
+#' This function uses REDCap's APIs to select and return data.
 #'
 #' @param ds_to_write The [base::data.frame()] to be imported into the REDCap
 #' project.  Required.
@@ -36,7 +38,8 @@
 #' @param config_options A list of options passed to [httr::POST()].
 #' See details at [httr::httr_options()]. Optional.
 #'
-#' @return Currently, a list is returned with the following elements:
+#' @return
+#' Currently, a list is returned with the following elements:
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
 #' * `status_code`: The
@@ -62,9 +65,11 @@
 #' * select the desired user, and then select 'Edit User Privileges',
 #' * in the 'Data Exports' radio buttons, select 'Full Data Set'.
 #'
-#' @author Will Beasley
+#' @author
+#' Will Beasley
 #'
-#' @references The official documentation can be found on the 'API Help
+#' @references
+#' The official documentation can be found on the 'API Help
 #' Page' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html).
@@ -105,15 +110,15 @@
 #' @export
 redcap_write <- function(
   ds_to_write,
-  batch_size          = 100L,
-  interbatch_delay    = 0.5,
-  continue_on_error   = FALSE,
+  batch_size                  = 100L,
+  interbatch_delay            = 0.5,
+  continue_on_error           = FALSE,
   redcap_uri,
   token,
-  overwrite_with_blanks      = TRUE,
-  convert_logical_to_integer = FALSE,
-  verbose             = TRUE,
-  config_options      = NULL
+  overwrite_with_blanks       = TRUE,
+  convert_logical_to_integer  = FALSE,
+  verbose                     = TRUE,
+  config_options              = NULL
 ) {
 
   start_time <- base::Sys.time()
@@ -144,7 +149,7 @@ redcap_write <- function(
       to    = ds_glossary$stop_index[i]
     )
 
-    if (i > 0) Sys.sleep(time = interbatch_delay)
+    if (0L < i) Sys.sleep(time = interbatch_delay)
     message(sprintf(
       "Writing batch %i of %i, with indices %i through %i.",
       i,
@@ -154,13 +159,13 @@ redcap_write <- function(
     ))
 
     write_result <- REDCapR::redcap_write_oneshot(
-      ds               = ds_to_write[selected_indices, ],
-      redcap_uri       = redcap_uri,
-      token            = token,
-      overwrite_with_blanks = overwrite_with_blanks,
-      convert_logical_to_integer = convert_logical_to_integer,
-      verbose          = verbose,
-      config_options   = config_options
+      ds                          = ds_to_write[selected_indices, ],
+      redcap_uri                  = redcap_uri,
+      token                       = token,
+      overwrite_with_blanks       = overwrite_with_blanks,
+      convert_logical_to_integer  = convert_logical_to_integer,
+      verbose                     = verbose,
+      config_options              = config_options
     )
 
     lst_status_code[[i]]     <- write_result$status_code
@@ -177,7 +182,7 @@ redcap_write <- function(
     affected_ids     <- c(affected_ids, write_result$affected_ids)
     success_combined <- success_combined & write_result$success
 
-    rm(write_result) #Admittedly overkill defensiveness.
+    rm(write_result) # Admittedly overkill defensiveness.
   }
 
   elapsed_seconds          <- as.numeric(difftime( Sys.time(), start_time, units="secs"))

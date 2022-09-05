@@ -1,19 +1,24 @@
 #' @name metadata_utilities
-#' @aliases regex_named_captures checkbox_choices
 #'
-#' @title Manipulate and interpret the metadata of a REDCap project
+#' @aliases
+#' regex_named_captures checkbox_choices
 #'
-#' @description A collection of functions that assists handling REDCap
+#' @title
+#' Manipulate and interpret the metadata of a REDCap project
+#'
+#' @description
+#' A collection of functions that assists handling REDCap
 #' project metadata.
 #'
 #' @param pattern The regular expression pattern.  Required.
 #' @param text The text to apply the regex against.  Required.
 #' @param select_choices The text containing the choices that should be parsed
-#'   to determine the `id` and `label` values.  Required.
+#' to determine the `id` and `label` values.  Required.
 #' @param perl Indicates if perl-compatible regexps should be used.
-#'   Default is `TRUE`. Optional.
+#' Default is `TRUE`. Optional.
 #'
-#' @return Currently, a [tibble::tibble()] is returned a row for each match,
+#' @return
+#' Currently, a [tibble::tibble()] is returned a row for each match,
 #' and a column for each *named* group within a match.  For the
 #' `retrieve_checkbox_choices()` function, the columns will be.
 #' * `id`: The numeric value assigned to each choice (in the data dictionary).
@@ -33,8 +38,11 @@
 #' since that the delimiter REDCap uses to separate choices
 #' presented to the user.
 #'
-#' @author Will Beasley
-#' @references See the official documentation for permissible characters in a
+#' @author
+#' Will Beasley
+#'
+#' @references
+#' See the official documentation for permissible characters in a
 #' checkbox label.
 #' *I'm bluffing here, because I don't know where this is located.
 #' If you know, please tell me.*
@@ -50,7 +58,8 @@
 #'   "3, Native Hawaiian or Other Pacific Islander | ",
 #'   "4, Black or African American | ",
 #'   "5, White | ",
-#'   "6, Unknown / Not Reported")
+#'   "6, Unknown / Not Reported"
+#' )
 #'
 #' # This calls the general function, and requires the correct regex pattern.
 #' REDCapR::regex_named_captures(pattern=pattern_boxes, text=choices_1)

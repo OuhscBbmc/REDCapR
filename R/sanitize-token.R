@@ -1,6 +1,8 @@
-#' @title Validate and sanitize the user's REDCap token
+#' @title
+#' Validate and sanitize the user's REDCap token
 #'
-#' @description Verifies the token is nonmissing and conforms to the legal
+#' @description
+#' Verifies the token is nonmissing and conforms to the legal
 #' pattern of a 32-character hexadecimal value.
 #' Each character must be an (a) digit 0-9, (b) uppercase letter A-F, or
 #' (c) lowercase letter a-f.
@@ -28,12 +30,15 @@
 #'
 #' @param token The REDCap token. Required.
 #'
-#' @return The token, without a terminal newline character.
+#' @return
+#' The token, without a terminal newline character.
 #'
-#' @note Contact your institution's REDCap administrator for more information
+#' @note
+#' Contact your institution's REDCap administrator for more information
 #' about your project-specific token.
 #'
-#' @author Hao Zhu, Benjamin Nutter, Will Beasley, Jordan Mark Barbone
+#' @author
+#' Hao Zhu, Benjamin Nutter, Will Beasley, Jordan Mark Barbone
 #'
 #' @examples
 #' secret_token_1 <- "12345678901234567890123456ABCDEF"

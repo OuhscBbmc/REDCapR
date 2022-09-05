@@ -1,6 +1,8 @@
-#' @title Upload a file into to a REDCap project record
+#' @title
+#' Upload a file into to a REDCap project record
 #'
-#' @description This function uses REDCap's API to upload a file.
+#' @description
+#' This function uses REDCap's API to upload a file.
 #'
 #' @param file_name The name of the relative or full file to be uploaded into
 #' the REDCap project.  Required.
@@ -21,7 +23,8 @@
 #' @param config_options A list of options passed to [httr::POST()].
 #' See details at [httr::httr_options()]. Optional.
 #'
-#' @return Currently, a list is returned with the following elements:
+#' @return
+#' Currently, a list is returned with the following elements:
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
 #' * `status_code`: The
@@ -41,9 +44,11 @@
 #' REDCap's supported variables.  See [validate_for_write()] for a helper
 #' function that checks for some common important conflicts.
 #'
-#' @author Will Beasley, John J. Aponte
+#' @author
+#' Will Beasley, John J. Aponte
 #'
-#' @references The official documentation can be found on the 'API Help Page'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (ie,
 #' https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html).
@@ -58,9 +63,9 @@
 #' field  <- "mugshot"
 #' event  <- "" # only for longitudinal events
 #'
-#' #Upload a single image file.
+#' # Upload a single image file.
 #' record    <- 1
-#' file_path <- system.file("test-data/mugshot-1.jpg", package="REDCapR")
+#' file_path <- system.file("test-data/mugshot-1.jpg", package = "REDCapR")
 #'
 #' REDCapR::redcap_upload_file_oneshot(
 #'   file_name  = file_path,
@@ -70,7 +75,7 @@
 #'   token      = token
 #' )
 #'
-#' #Upload a collection of five images.
+#' # Upload a collection of five images.
 #' records    <- 1:5
 #' file_paths <- system.file(
 #'   paste0("test-data/mugshot-", records, ".jpg"),

@@ -1,14 +1,20 @@
 #' @name constant
-#' @aliases constant constant_to_form_completion constant_to_form_rights
-#' constant_to_export_rights constant_to_access
-#' @title Collection of REDCap-specific constants
 #'
-#' @description Collection of constants defined by the REDCap developers.
+#' @aliases
+#' constant constant_to_form_completion constant_to_form_rights
+#' constant_to_export_rights constant_to_access
+#'
+#' @title
+#' Collection of REDCap-specific constants
+#'
+#' @description
+#' Collection of constants defined by the REDCap developers.
 #'
 #' @param name Name of constant.  Required character.
 #'
-#' @return The constant's value.  Currently all are single integers,
-#'   but that could be expanded in the future.
+#' @return
+#' The constant's value.  Currently all are single integers,
+#' but that could be expanded in the future.
 #'
 #' @details
 #` Constants have the following groupings.
@@ -50,7 +56,8 @@
 #' [Editing files in another user's repository](https://docs.github.com/articles/editing-files-in-another-user-s-repository/) # nolint
 #' in the GitHub documentation.
 #'
-#' @author Will Beasley
+#' @author
+#' Will Beasley
 #'
 #' @examples
 #' REDCapR::constant("form_incomplete")  # Returns 0L

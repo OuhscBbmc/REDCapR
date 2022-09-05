@@ -1,6 +1,8 @@
-#' @title Download REDCap Instruments
+#' @title
+#' Download REDCap Instruments
 #'
-#' @description Download instruments as a pdf, with or without responses.
+#' @description
+#' Download instruments as a pdf, with or without responses.
 #'
 #' @param file_name The name of the file where the downloaded pdf is saved.
 #' Optional.
@@ -28,7 +30,8 @@
 #' @param config_options A list of options passed to [httr::POST()].
 #' See details at [httr::httr_options()]. Optional.
 #'
-#' @return Currently, a list is returned with the following elements,
+#' @return
+#' Currently, a list is returned with the following elements,
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
 #' * `status_code`: The
@@ -49,9 +52,12 @@
 #' REDCap's supported variables.  See [validate_for_write()] for a helper
 #' function that checks for some common important conflicts.
 #'
-#' @author Will Beasley
+#' @author
 #'
-#' @references The official documentation can be found on the 'API Help Page'
+#' Will Beasley
+#'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html).

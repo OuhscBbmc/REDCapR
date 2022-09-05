@@ -1,6 +1,8 @@
-#' @title Export Arms
+#' @title
+#' Export Arms
 #'
-#' @description Export Arms of a REDCap project
+#' @description
+#' Export Arms of a REDCap project
 #'
 #' @param redcap_uri The
 #' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
@@ -9,7 +11,6 @@
 #' Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
-#'
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  The verbose output might contain
 #' sensitive information (*e.g.* PHI), so turn this off if the output might
@@ -17,7 +18,8 @@
 #' @param config_options A list of options passed to [httr::POST()].
 #' See details at [httr::httr_options()]. Optional.
 #'
-#' @return Currently, a list is returned with the following elements:
+#' @return
+#' Currently, a list is returned with the following elements:
 #' * `has_arms`: a `logical` value indicating if the REDCap project has
 #' arms (*i.e.*, "TRUE") or is a classic non-longitudinal project
 #' (*i.e.*, "FALSE").
@@ -35,9 +37,11 @@
 #' REDCap.  If an operation is successful, the `raw_text` is returned as an
 #' empty string to save RAM.
 #'
-#' @author Will Beasley
+#' @author
+#' Will Beasley
 #'
-#' @references The official documentation can be found on the 'API Help Page'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html).

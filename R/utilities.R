@@ -1,7 +1,11 @@
-#' @name replace_nas_with_explicit
-#' @title Create explicit factor level for missing values
+#' @name
+#' replace_nas_with_explicit
 #'
-#' @description Missing values are converted to a factor level.
+#' @title
+#' Create explicit factor level for missing values
+#'
+#' @description
+#' Missing values are converted to a factor level.
 #' This explicit assignment can reduce the chances that missing values
 #' are inadvertently ignored. It also allows the presence of a missing
 #' to become a predictor in models.
@@ -15,8 +19,9 @@
 #' @param add_unknown_level Should a new factor level be created?
 #' (Specify `TRUE` if it already exists.)   Defaults to `FALSE`.
 #'
-#' @return An array of values, where the `NA` values are now a factor level,
-#'   with the label specified by the `new_na_label` value.
+#' @return
+#' An array of values, where the `NA` values are now a factor level,
+#' with the label specified by the `new_na_label` value.
 #'
 #' @note
 #' The `create_factor` parameter is respected only if `scores` isn't already
@@ -25,7 +30,8 @@
 #' A `stop` error will be thrown if the operation fails to convert all the
 #' `NA` values.
 #'
-#' @author Will Beasley
+#' @author
+#' Will Beasley
 #'
 #' @examples
 #' library(REDCapR) #Load the package into the current R session.
@@ -64,6 +70,7 @@ replace_nas_with_explicit <- function(
 
 
 #' @name collapse_vector
+#'
 #' @title Collapse a vector of values into a single string when necessary
 #'
 #' @description REDCap's API frequently specifies a series of values
@@ -79,7 +86,8 @@ replace_nas_with_explicit <- function(
 #' @return A single character element, where the values are separated by
 #' commas.  Can be blank. (*i.e.*, `""`).
 #'
-#' @author Will Beasley
+#' @author
+#' Will Beasley
 #'
 #' @examples
 #' library(REDCapR) #Load the package into the current R session.

@@ -1,5 +1,6 @@
 #' @name retrieve_token
-#' @aliases retrieve_token_mssql
+#' @aliases
+#' retrieve_token_mssql
 #' @export retrieve_token_mssql
 #' @title Read a token from a (non-REDCap) database.
 #'
@@ -31,7 +32,8 @@
 #' that can be done with this R function that isn't already exposed by any other interface into the database
 #' (*e.g.*, SQL Server Management Studio, or MySQL Workbench.)
 #'
-#' @author Will Beasley
+#' @author
+#' Will Beasley
 #'
 #' @examples
 #' library(REDCapR) #Load the package into the current R session.

@@ -1,6 +1,8 @@
-#' @title Enumerate the instruments to event mappings
+#' @title
+#' Enumerate the instruments to event mappings
 #'
-#' @description Export the instrument-event mappings for a project
+#' @description
+#' Export the instrument-event mappings for a project
 #' (i.e., how the data collection instruments are designated for certain
 #' events in a longitudinal project).
 #' (Copied from "Export Instrument-Event Mappings" method of
@@ -21,7 +23,8 @@
 #' @param config_options A list of options passed to [httr::POST()].
 #' See details at [httr::httr_options()]. Optional.
 #'
-#' @return Currently, a list is returned with the following elements,
+#' @return
+#' Currently, a list is returned with the following elements,
 #' * `data`: A [tibble::tibble()] where each row represents one column
 #' in the REDCap dataset.
 #' * `success`: A boolean value indicating if the operation was apparently
@@ -36,9 +39,11 @@
 #' REDCap.  If an operation is successful, the `raw_text` is returned as an
 #' empty string to save RAM.
 #'
-#' @author Victor Castro, Will Beasley
+#' @author
+#' Victor Castro, Will Beasley
 #'
-#' @references The official documentation can be found on the 'API Help Page'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html).
@@ -88,12 +93,13 @@ redcap_event_instruments <- function(
   if (kernel$success) {
     try(
       {
+        # Convert the raw text to a dataset.
         ds <-
           readr::read_csv(
             file            = I(kernel$raw_text),
             col_types       = col_types
           )
-      }, #Convert the raw text to a dataset.
+      },
       silent = TRUE
       # Don't print the warning in the try block.  Print it below, where
       #    it's under the control of the caller.
