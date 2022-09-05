@@ -61,6 +61,52 @@ test_that("default", {
   expect_true(returned_object$success)
 })
 
+test_that("default w/ batching", {
+  testthat::skip_on_cran()
+  skip_if_onlyread()
+
+  path_expected_before <- "test-data/specific-redcapr/write-dag/before.R"
+  path_expected_after  <- "test-data/specific-redcapr/write-dag/after.R"
+  start_clean_result <- REDCapR:::clean_start_dag_write(batch = TRUE)
+  project <- start_clean_result$redcap_project
+
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expect_message(
+    returned_object <- redcap_read_oneshot(url, credential_user$token),
+    regexp = expected_outcome_message
+  )
+  expected_data_frame <- retrieve_expected(path_expected_before)
+  # Use the same as the non-batched test
+
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object$data$bmi<-NULL; returned_object$data$age<-NULL;dput(returned_object$data)
+  expect_equal(returned_object$status_code, expected=200L)
+  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true(returned_object$success)
+
+  ds_updated <- returned_object$data
+  ds_updated$last_name <- paste("last name", seq_len(nrow(ds_updated)))
+  ds_updated$demographics_complete <- REDCapR::constant("form_complete")
+  # ds_updated$record_id <- sub("^\\d+-(\\d+)$", "\\1",  ds_updated$record_id)
+  # ds_updated$redcap_data_access_group <- NULL
+
+  redcap_write_oneshot(ds_updated, url, credential_user$token)
+  returned_object <- redcap_read_oneshot(url, credential_admin$token)
+
+  if (update_expectation) save_expected(returned_object$data, path_expected_after)
+  # Use the same as the non-batched test
+
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object$data$bmi<-NULL; returned_object$data$age<-NULL;dput(returned_object$data)
+  expect_equal(returned_object$status_code, expected=200L)
+  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true(returned_object$success)
+})
+
 test_that("reassign subject to a different dag", {
   testthat::skip_on_cran()
   skip_if_onlyread()
