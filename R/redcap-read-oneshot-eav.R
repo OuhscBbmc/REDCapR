@@ -244,7 +244,6 @@ redcap_read_oneshot_eav <- function(
     stop(error_message)
   }
 
-
   ds_metadata <-
     REDCapR::redcap_metadata_read(
       redcap_uri,

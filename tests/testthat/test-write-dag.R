@@ -75,8 +75,8 @@ test_that("default w/ batching", {
     returned_object <- redcap_read_oneshot(url, credential_user$token),
     regexp = expected_outcome_message
   )
-  expected_data_frame <- retrieve_expected(path_expected_before)
   # Use the same as the non-batched test
+  expected_data_frame <- retrieve_expected(path_expected_before)
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object$data$bmi<-NULL; returned_object$data$age<-NULL;dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
@@ -95,8 +95,8 @@ test_that("default w/ batching", {
   redcap_write_oneshot(ds_updated, url, credential_user$token)
   returned_object <- redcap_read_oneshot(url, credential_admin$token)
 
-  if (update_expectation) save_expected(returned_object$data, path_expected_after)
   # Use the same as the non-batched test
+  expected_data_frame <- retrieve_expected(path_expected_after)
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object$data$bmi<-NULL; returned_object$data$age<-NULL;dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
