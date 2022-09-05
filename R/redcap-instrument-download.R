@@ -67,10 +67,10 @@
 #' @examples
 #' \dontrun{
 #' uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
-#' token   <- "D70F9ACD1EDD6F151C6EA78683944E98" #pid=213
+#' token   <- "D70F9ACD1EDD6F151C6EA78683944E98" # pid=213
 #' # event <- "" # only for longitudinal projects
 #'
-#' (full_name <- base::temp(pattern="instruments-all-records-all", fileext=".pdf"))
+#' (full_name <- base::temp(pattern="instruments-all-records-all", fileext = ".pdf"))
 #' result_1   <- REDCapR::redcap_download_instrument(
 #'   file_name     = full_name,
 #'   redcap_uri    = uri,
@@ -78,7 +78,7 @@
 #' )
 #' base::unlink(full_name)
 #'
-#' (full_name <- base::tempfile(pattern="instruments-all-record-1-", fileext=".pdf"))
+#' (full_name <- base::tempfile(pattern="instruments-all-record-1-", fileext = ".pdf"))
 #' result_2   <- REDCapR::redcap_download_instrument(
 #'   record        = 5,
 #'   file_name     = full_name,
@@ -147,7 +147,7 @@ redcap_download_instrument <- function(
     file_path <- if (missing(directory) && is.null(directory)) {
       file_name # Use relative path.
     } else {
-      file.path(directory, file_name) #Qualify the file with its full path.
+      file.path(directory, file_name) # Qualify the file with its full path.
     }
 
     if (verbose)

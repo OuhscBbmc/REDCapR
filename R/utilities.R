@@ -34,7 +34,7 @@
 #' Will Beasley
 #'
 #' @examples
-#' library(REDCapR) #Load the package into the current R session.
+#' library(REDCapR) # Load the package into the current R session.
 
 ## We're intentionally not exporting this function.
 replace_nas_with_explicit <- function(
@@ -90,10 +90,10 @@ replace_nas_with_explicit <- function(
 #' Will Beasley
 #'
 #' @examples
-#' library(REDCapR) #Load the package into the current R session.
-#' REDCapR:::collapse_vector(elements=NULL, collapsed=NULL)
-#' REDCapR:::collapse_vector(elements=letters, collapsed=NULL)
-#' REDCapR:::collapse_vector(elements=NULL, collapsed="4,5,6")
+#' library(REDCapR) # Load the package into the current R session.
+#' REDCapR:::collapse_vector(elements = NULL   , collapsed = NULL)
+#' REDCapR:::collapse_vector(elements = letters, collapsed = NULL)
+#' REDCapR:::collapse_vector(elements = NULL   , collapsed = "4,5,6")
 
 ## We're intentionally not exporting this function.
 collapse_vector <- function(elements, collapsed) {

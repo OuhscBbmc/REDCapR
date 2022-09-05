@@ -213,7 +213,7 @@ redcap_download_file_oneshot <- function(
     # If an operation is successful, the `raw_text` is no longer returned to
     #   save RAM.  The content is not really necessary with httr's status
     #   message exposed.
-  } else { #If the operation was unsuccessful, then...
+  } else { # If the operation was unsuccessful, then...
     # kernel$status_code placeholder
     outcome_message         <- "file NOT downloaded."
     records_affected_count  <- 0L

@@ -117,10 +117,10 @@
 #' uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token    <- "9A81268476645C4E5F03428B8AC3AA7B"
 #'
-#' #Return all records and all variables.
+#' # Return all records and all variables.
 #' ds <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=uri, token=token)$data
 #'
-#' #Return only records with IDs of 1 and 3
+#' # Return only records with IDs of 1 and 3
 #' desired_records_v1 <- c(1, 3)
 #' ds_some_rows_v1    <- REDCapR::redcap_read_oneshot_eav(
 #'    redcap_uri = uri,
@@ -128,7 +128,7 @@
 #'    records    = desired_records_v1
 #' )$data
 #'
-#' #Return only the fields record_id, name_first, and age
+#' # Return only the fields record_id, name_first, and age
 #' desired_fields_v1 <- c("record_id", "name_first", "age")
 #' ds_some_fields_v1 <- redcap_read_oneshot_eav(
 #'    redcap_uri = uri,

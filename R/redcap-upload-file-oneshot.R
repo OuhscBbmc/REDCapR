@@ -146,7 +146,7 @@ redcap_upload_file_oneshot <- function(
     records_affected_count  <- 1L
     record_id               <- as.character(record)
     kernel$raw_text         <- ""
-  } else { #If the returned content wasn't recognized as valid IDs, then
+  } else { # If the returned content wasn't recognized as valid IDs, then
     # kernel$raw_text
     outcome_message         <- "file NOT uploaded "
     records_affected_count  <- 0L

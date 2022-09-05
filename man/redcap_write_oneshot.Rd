@@ -89,7 +89,7 @@ ds1$telephone
 ds1$telephone  <- paste0("(405) 321-000", seq_len(nrow(ds1)))
 
 ds1 <- ds1[1:3, ]
-ds1$age        <- NULL; ds1$bmi <- NULL #Drop the calculated fields before writing.
+ds1$age        <- NULL; ds1$bmi <- NULL # Drop the calculated fields before writing.
 result_write   <- REDCapR::redcap_write_oneshot(ds=ds1, redcap_uri=uri, token=token)
 
 # Read the dataset for the second time.

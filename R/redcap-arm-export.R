@@ -120,7 +120,7 @@ redcap_arm_export <- function(
           arm_name    = .data$name
         )
 
-      #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
+      # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
       kernel$raw_text <- ""
     } else if (kernel$raw_text == "ERROR: You cannot export arms for classic projects") {
       has_arms <- FALSE

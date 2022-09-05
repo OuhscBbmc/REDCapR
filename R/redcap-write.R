@@ -78,7 +78,7 @@
 #'
 #' @examples
 #' if (FALSE) {
-#' #Define some constants
+#' # Define some constants
 #' uri           <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token         <- "D70F9ACD1EDD6F151C6EA78683944E98"
 #'
@@ -91,7 +91,7 @@
 #' ds1$telephone <- paste0("(405) 321-000", seq_len(nrow(ds1)))
 #'
 #' ds1 <- ds1[1:3, ]
-#' ds1$age       <- NULL; ds1$bmi <- NULL #Drop the calculated fields before writing.
+#' ds1$age       <- NULL; ds1$bmi <- NULL # Drop the calculated fields before writing.
 #' result_write  <- REDCapR::redcap_write(ds1, redcap_uri=uri, token=token)
 #'
 #' # Read the dataset for the second time.
