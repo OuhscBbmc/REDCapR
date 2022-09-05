@@ -362,14 +362,15 @@ redcap_read_oneshot_eav <- function(
   } else {
     # nocov start
     ds_2            <- tibble::tibble() # Return an empty data.frame
-    outcome_message <- if (any(grepl(kernel$regex_empty, kernel$raw_text))) {
-      "The REDCapR read/export operation was not successful.  The returned dataset was empty."
-    } else {
-      sprintf(
-        "The REDCapR read/export operation was not successful.  The error message was:\n%s",
-        kernel$raw_text
-      )
-    }
+    outcome_message <-
+      if (any(grepl(kernel$regex_empty, kernel$raw_text))) {
+        "The REDCapR read/export operation was not successful.  The returned dataset was empty."
+      } else {
+        sprintf(
+          "The REDCapR read/export operation was not successful.  The error message was:\n%s",
+          kernel$raw_text
+        )
+      }
     # nocov end
   }
 

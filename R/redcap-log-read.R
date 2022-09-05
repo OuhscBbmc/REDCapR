@@ -183,15 +183,18 @@ redcap_log_read <- function(
       # nocov end
     }
   } else { # kernel fails
+    # nocov start
     ds              <- tibble::tibble() # Return an empty data.frame
-    outcome_message <- if (any(grepl(kernel$regex_empty, kernel$raw_text))) {
-      "The REDCapR log export operation was not successful.  The returned dataset was empty."  # nocov
-    } else {
-      sprintf(
-        "The REDCapR log export operation was not successful.  The error message was:\n%s",
-        kernel$raw_text
-      )
-    }
+    outcome_message <-
+      if (any(grepl(kernel$regex_empty, kernel$raw_text))) {
+        "The REDCapR log export operation was not successful.  The returned dataset was empty."  # nocov
+      } else {
+        sprintf(
+          "The REDCapR log export operation was not successful.  The error message was:\n%s",
+          kernel$raw_text
+        )
+      }
+    # nocov end
   }
 
   if (verbose)

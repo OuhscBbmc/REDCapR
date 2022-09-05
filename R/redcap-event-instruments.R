@@ -131,14 +131,15 @@ redcap_event_instruments <- function(
     }
   } else {
     ds              <- tibble::tibble() # Return an empty data.frame
-    outcome_message <- if (any(grepl(kernel$regex_empty, kernel$raw_text))) {
-      "The REDCapR read/export operation was not successful.  The returned dataset (of instrument-events) was empty."
-    } else {
-      sprintf(
-        "The REDCapR instrument retrieval was not successful.  The error message was:\n%s",
-        kernel$raw_text
-      )
-    }
+    outcome_message <-
+      if (any(grepl(kernel$regex_empty, kernel$raw_text))) {
+        "The REDCapR read/export operation was not successful.  The returned dataset (of instrument-events) was empty." # nocov
+      } else {
+        sprintf(
+          "The REDCapR instrument retrieval was not successful.  The error message was:\n%s",
+          kernel$raw_text
+        )
+      }
   }
 
   if (verbose)
