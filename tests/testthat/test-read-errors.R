@@ -73,25 +73,16 @@ test_that("Batch: Bad Uri -Not HTTPS", {
 
 test_that("Batch: Bad Uri -wrong address", {
   testthat::skip_on_cran()
-  expected_message <- "The initial call failed with the code: 404."
-  # expected_message <- "The requested URL was not found on this server."
+  # expected_message <- "The initial call failed with the code: 404."
+  expected_message <- "The requested URL was not found on this server."
 
-  expect_message(
-    returned_object <-
-      redcap_read(
-        redcap_uri    = "https://bbmc.ouhsc.edu/redcap/apiFFFFFFFFFFFFFF/", # Wrong url
-        token         = credential$token
-      ),
-    "The requested URL was not found on this server."
+  expect_error(
+    redcap_read(
+      redcap_uri    = "https://bbmc.ouhsc.edu/redcap/apiFFFFFFFFFFFFFF/", # Wrong url
+      token         = credential$token
+    ),
+    expected_message
   )
-
-  expect_equal(returned_object$data, expected=data.frame(), label="An empty data.frame should be returned.", ignore_attr = TRUE)
-  expect_equal(returned_object$status_code, expected=404L)
-  expect_equal(returned_object$records_collapsed, "failed in initial batch call")
-  expect_equal(returned_object$fields_collapsed, "failed in initial batch call")
-  expect_equal(returned_object$outcome_messages, expected_message)
-  expect_false(returned_object$success)
-  expect_s3_class(returned_object$data, "tbl")
 })
 
 test_that("hashed record -warn", {
