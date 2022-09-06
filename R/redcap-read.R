@@ -301,6 +301,7 @@ redcap_read <- function(
 
   # Stop and return to the caller if the initial query failed. --------------
   if (!initial_call$success) {
+    # nocov start
     outcome_messages  <- paste0("The initial call failed with the code: ", initial_call$status_code, ".")
     elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
     return(list(
@@ -317,6 +318,7 @@ redcap_read <- function(
       outcome_messages      = outcome_messages,
       success               = initial_call$success
     ))
+    # nocov end
   }
 
   # Continue as intended if the initial query succeeded. --------------------
@@ -415,6 +417,7 @@ redcap_read <- function(
   ids_missing_rows  <- setdiff(unique_ids, unique_ids_actual)
 
   if (0L < length(ids_missing_rows)) {
+    # nocov start
     message_template <-
       paste0(
         "There are %i subject(s) that are missing rows in the returned dataset. ",
@@ -433,6 +436,7 @@ redcap_read <- function(
       length(ids_missing_rows),
       paste(ids_missing_rows, collapse = ",")
     ))
+    # nocov end
   }
 
   elapsed_seconds          <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
