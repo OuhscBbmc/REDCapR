@@ -6,7 +6,8 @@
 #' into a project. Because of this method's destructive nature,
 #' it works for only projects in Development status.
 #'
-#' @param ds The [base::data.frame()] to be imported into the REDCap project.
+#' @param ds The [base::data.frame()] or [tibble::tibble()]
+#' to be imported into the REDCap project.
 #' Required.
 #' @param redcap_uri The
 #' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url

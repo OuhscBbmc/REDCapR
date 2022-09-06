@@ -4,7 +4,8 @@
 #' @description
 #' This function uses REDCap's API to select and return data.
 #'
-#' @param ds The [base::data.frame()] to be imported into the REDCap project.
+#' @param ds The [base::data.frame()] or [tibble::tibble()]
+#' to be imported into the REDCap project.
 #' Required.
 #' @param redcap_uri The
 #' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
@@ -14,11 +15,11 @@
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
 #' @param overwrite_with_blanks A boolean value indicating if
-#' blank/`NA` values in the R [base::data.frame]
+#' blank/`NA` values in the R data frame
 #' will overwrite data on the server.
 #' This is the default behavior for REDCapR,
 #' which essentially deletes the cell's value
-#' If `FALSE`, blank/`NA` values in the [base::data.frame]
+#' If `FALSE`, blank/`NA` values in the data frame
 #' will be ignored.  Optional.
 #' @param convert_logical_to_integer If `TRUE`, all [base::logical] columns
 #' in `ds` are cast to an integer before uploading to REDCap.

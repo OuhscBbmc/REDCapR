@@ -15,7 +15,8 @@ redcap_write_oneshot(
 )
 }
 \arguments{
-\item{ds}{The \code{\link[base:data.frame]{base::data.frame()}} to be imported into the REDCap project.
+\item{ds}{The \code{\link[base:data.frame]{base::data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}}
+to be imported into the REDCap project.
 Required.}
 
 \item{redcap_uri}{The
@@ -28,11 +29,11 @@ Required.}
 project.  Required.}
 
 \item{overwrite_with_blanks}{A boolean value indicating if
-blank/\code{NA} values in the R \link[base:data.frame]{base::data.frame}
+blank/\code{NA} values in the R data frame
 will overwrite data on the server.
 This is the default behavior for REDCapR,
 which essentially deletes the cell's value
-If \code{FALSE}, blank/\code{NA} values in the \link[base:data.frame]{base::data.frame}
+If \code{FALSE}, blank/\code{NA} values in the data frame
 will be ignored.  Optional.}
 
 \item{convert_logical_to_integer}{If \code{TRUE}, all \link[base:logical]{base::logical} columns

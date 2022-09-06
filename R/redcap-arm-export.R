@@ -23,7 +23,7 @@
 #' * `has_arms`: a `logical` value indicating if the REDCap project has
 #' arms (*i.e.*, "TRUE") or is a classic non-longitudinal project
 #' (*i.e.*, "FALSE").
-#' * `data`: a [`tibble`] with one row per arm.  The columns are
+#' * `data`: a [tibble::tibble()] with one row per arm.  The columns are
 #' `arm_number` (an integer) and `arm_name` (a human-friendly string).
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.

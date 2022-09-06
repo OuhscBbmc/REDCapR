@@ -29,7 +29,7 @@
 #'
 #' @details
 #' This function can also assist splitting and saving a large
-#' [base::data.frame()] to disk as smaller files (such as a .csv).  The
+#' data frame to disk as smaller files (such as a .csv).  The
 #' padded columns allow the OS to sort the batches/files in sequential order.
 #'
 #' @author

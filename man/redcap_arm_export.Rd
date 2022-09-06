@@ -30,7 +30,7 @@ Currently, a list is returned with the following elements:
 \item \code{has_arms}: a \code{logical} value indicating if the REDCap project has
 arms (\emph{i.e.}, "TRUE") or is a classic non-longitudinal project
 (\emph{i.e.}, "FALSE").
-\item \code{data}: a \code{\link{tibble}} with one row per arm.  The columns are
+\item \code{data}: a \code{\link[tibble:tibble]{tibble::tibble()}} with one row per arm.  The columns are
 \code{arm_number} (an integer) and \code{arm_name} (a human-friendly string).
 \item \code{success}: A boolean value indicating if the operation was apparently
 successful.

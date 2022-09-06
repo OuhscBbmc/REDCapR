@@ -5,8 +5,8 @@
 #' Replace non-ASCII characters with legal characters that won't
 #' cause problems when writing to a REDCap project.
 #'
-#' @param d The [base::data.frame()] containing the dataset used to update
-#' the REDCap project.  Required.
+#' @param d The [base::data.frame()] or [tibble::tibble()] containing the dataset
+#' used to update the REDCap project.  Required.
 #' @param column_names An array of `character` values indicating the names of
 #' the variables to sanitize.  Optional.
 #' @param encoding_initial An array of `character` values indicating the names
@@ -14,7 +14,7 @@
 #' @param substitution_character The `character` value that replaces characters
 #' that were unable to be appropriately matched.
 #'
-#' @return A [base::data.frame()] with same columns, but whose character values
+#' @return A data frame with same columns, but whose character values
 #' have been sanitized.
 #'
 #' @details

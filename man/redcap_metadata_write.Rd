@@ -13,7 +13,8 @@ redcap_metadata_write(
 )
 }
 \arguments{
-\item{ds}{The \code{\link[base:data.frame]{base::data.frame()}} to be imported into the REDCap project.
+\item{ds}{The \code{\link[base:data.frame]{base::data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}}
+to be imported into the REDCap project.
 Required.}
 
 \item{redcap_uri}{The

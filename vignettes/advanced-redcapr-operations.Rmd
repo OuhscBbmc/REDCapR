@@ -102,7 +102,7 @@ ds_wide <-
 ds_wide
 ```
 
-In some scenarios, multiple variables (*e.g.*, `pmq1` - `pmq4`) can be widened in a single `tidyr::pivot_wider()` operation.  This example contains the additional wrinkle that the REDCap event names "first_dose" and "first_visit" are renamed "dose_1" and "visit_1", which will help all the values be dose and visit values be proper numbers.
+In some scenarios, multiple variables (*e.g.*, `pmq1` - `pmq4`) can be widened in a single [`tidyr::pivot_wider()`](https://tidyr.tidyverse.org/reference/pivot_wider.html) operation.  This example contains the additional wrinkle that the REDCap event names "first_dose" and "first_visit" are renamed "dose_1" and "visit_1", which will help all the values be dose and visit values be proper numbers.
 
 ```{r widen-typical}
 pattern <- "^(\\w+?)_arm_(\\d)$"

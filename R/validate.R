@@ -21,13 +21,14 @@
 #' writing to a REDCap project
 #'
 #' @description
-#' This set of functions inspect a [base::data.frame()] to
-#' anticipate problems before writing with REDCap's API.
+#' This set of functions inspect a data frame
+#' to anticipate problems before writing with REDCap's API.
 #'
-#' @param d The [base::data.frame()] containing the dataset used to update
+#' @param d The [base::data.frame()] or [tibble::tibble()]
+#' containing the dataset used to update
 #' the REDCap project.
-#' @param data_types The data types of the [base::data.frame()] corresponding
-#'  to the REDCap project.
+#' @param data_types The data types of the data frame corresponding
+#' to the REDCap project.
 #' @param field_names The names of the fields/variables in the REDCap project.
 #' Each field is an individual element in the character vector.
 #' @param field_names_collapsed  The names of the fields/variables in the
@@ -39,7 +40,7 @@
 #' @return
 #' A [tibble::tibble()], where each potential violation is a row.
 #' The two columns are:
-#' * `field_name`: The name of the [base::data.frame()] that might cause
+#' * `field_name`: The name of the field/column/variable that might cause
 #' problems during the upload.
 #' * `field_index`: The position of the field.  (For example, a value of
 #' '1' indicates the first column, while a '3' indicates the third column.)
@@ -163,6 +164,6 @@ validate_for_write <- function(d) {
     validate_field_names(colnames(d))
   )
 
-  # Vertically stack all the data.frames into a single data.frame
+  # Vertically stack all the data.frames into a single data frame
   dplyr::bind_rows(lst_concerns)
 }

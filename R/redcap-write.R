@@ -4,8 +4,8 @@
 #' @description
 #' This function uses REDCap's APIs to select and return data.
 #'
-#' @param ds_to_write The [base::data.frame()] to be imported into the REDCap
-#' project.  Required.
+#' @param ds_to_write The [base::data.frame()] or [tibble::tibble()]
+#' to be imported into the REDCap project.  Required.
 #' @param batch_size The maximum number of subject records a single batch
 #' should contain.  The default is 100.
 #' @param interbatch_delay The number of seconds the function will wait before
@@ -21,11 +21,11 @@
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
 #' @param overwrite_with_blanks A boolean value indicating if
-#' blank/`NA` values in the R [base::data.frame]
+#' blank/`NA` values in the R data frame
 #' will overwrite data on the server.
 #' This is the default behavior for REDCapR,
 #' which essentially deletes the cell's value
-#' If `FALSE`, blank/`NA` values in the [base::data.frame]
+#' If `FALSE`, blank/`NA` values in the data.frame
 #' will be ignored.  Optional.
 #' @param convert_logical_to_integer If `TRUE`, all [base::logical] columns
 #' in `ds` are cast to an integer before uploading to REDCap.
