@@ -1,11 +1,24 @@
+Release History
+==========================================================
+
+Quick links:
+
+* [CRAN Archive of older versions](https://cran.r-project.org/src/contrib/Archive/REDCapR/)
+* [Current & previous GitHub Issues](https://github.com/OuhscBbmc/REDCapR/issues?q=is%3Aissue)
+* [Documentation for current GitHub version](https://ouhscbbmc.github.io/REDCapR/)
+
 Upcoming Release
 ==========================================================
 
-### Possibly Breaking Changes
+These features are not yet on CRAN.  Install with `remotes::install_github(repo = "OuhscBbmc/REDCapR")`
 
-* `redcap_read()`, `redcap_read_oneshot()`, `redcap_dag_read()`, `redcap_log_read()` and `redcap_report()` return a tibble instead of a data.frame.  (#415)
+### Possibly Breaking Change
+
+* `redcap_read()`, `redcap_read_oneshot()`, `redcap_dag_read()`, `redcap_log_read()` and `redcap_report()` return a [tibble](https://tibble.tidyverse.org/) instead of a [data.frame](https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html).  (#415)
 
     This should affect client code only if you expect a call like `ds[, 3]` to return a vector instead of a single-column data.frame/tibble.  One solution is to upcast the tibble to a data.frame (with something like `as.data.frame()`).  We recommend using an approach that works for both data.frames and tibbles, such as `ds[[3]]` or `dplyr::pull(ds, "gender")`.
+
+    For more information, read the short chapter in [*R for Data Science*](https://r4ds.had.co.nz/tibbles.html).
 
 ### New Features
 
