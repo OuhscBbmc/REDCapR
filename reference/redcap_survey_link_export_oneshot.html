@@ -107,8 +107,8 @@ to the R console during the operation.  Optional.</p></dd>
 
 
 <dt>config_options</dt>
-<dd><p>A list of options to pass to <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code> method
-in the 'httr' package.  See the details below. Optional.</p></dd>
+<dd><p>A list of options passed to <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code>.
+See details at <code><a href="https://httr.r-lib.org/reference/httr_options.html" class="external-link">httr::httr_options()</a></code>. Optional.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -158,7 +158,7 @@ administrator to send you the static material.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="va">uri</span>     <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
-<span class="r-in"><span><span class="va">token</span>   <span class="op">&lt;-</span> <span class="st">"8FA9A6BDAE2C0B5DD3CB472DD8E8918C"</span> <span class="co">#pid=817</span></span></span>
+<span class="r-in"><span><span class="va">token</span>   <span class="op">&lt;-</span> <span class="st">"8FA9A6BDAE2C0B5DD3CB472DD8E8918C"</span> <span class="co"># pid=817</span></span></span>
 <span class="r-in"><span><span class="va">record</span>  <span class="op">&lt;-</span> <span class="fl">1</span></span></span>
 <span class="r-in"><span><span class="va">instrument</span>   <span class="op">&lt;-</span> <span class="st">"participant_morale_questionnaire"</span></span></span>
 <span class="r-in"><span><span class="co"># event &lt;- "" # only for longitudinal projects</span></span></span>

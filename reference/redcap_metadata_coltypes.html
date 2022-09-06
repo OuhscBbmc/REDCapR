@@ -109,8 +109,8 @@ be visible somewhere public. Optional.</p></dd>
 
 
 <dt>config_options</dt>
-<dd><p>A list of options to pass to <code>POST</code> method in the
-<code>httr</code> package.  See the details below. Optional.</p></dd>
+<dd><p>A list of options passed to <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code>.
+See details at <code><a href="https://httr.r-lib.org/reference/httr_options.html" class="external-link">httr::httr_options()</a></code>. Optional.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -184,9 +184,6 @@ returned by the API.  The the "abcd" scenario, consider (a) changing the type
 from <code>col_integer</code> to <code>col_character</code>, (b) excluding the trash values,
 then (c) in a <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate()</a></code> statement,
 use <code><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">readr::parse_integer()</a></code> to cast it to the desired type.</p>
-<p>The full list of configuration options accepted by the <code>httr</code> package is
-viewable by executing <code><a href="https://httr.r-lib.org/reference/httr_options.html" class="external-link">httr::httr_options()</a></code>.  The <code>httr</code> package and
-documentation is available at https://cran.r-project.org/package=httr.</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -521,7 +518,7 @@ administrator to send you the static material.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   v_zipcode                     = readr::col_character()                    , # validation is 'zipcode'</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   form_1_complete               = readr::col_integer()                      , # completion status of form/instrument</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> )</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The metadata for the REDCap project has validation types for at least one field that specifies a comma for a decimal for at least one field that specifies a period for a decimal.  Mixing these two formats in the same proejct can cause confusion and problems.  Consider passing `readr::col_character()` for this field (to REDCapR's `col_types` parameter) and then convert the desired fields to R's numeric type.  The function `readr::parse_double()` is useful for this.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The metadata for the REDCap project has validation types for at least one field that specifies a comma for a decimal for at least one field that specifies a period for a decimal.  Mixing these two formats in the same project can cause confusion and problems.  Consider passing `readr::col_character()` for this field (to REDCapR's `col_types` parameter) and then convert the desired fields to R's numeric type.  The function `readr::parse_double()` is useful for this.</span>
 <span class="r-in"><span><span class="fu"><a href="redcap_read_oneshot.html">redcap_read_oneshot</a></span><span class="op">(</span><span class="va">uri</span>, <span class="va">token</span>, col_types <span class="op">=</span> <span class="va">col_types</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1 records and 52 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 52</span></span>

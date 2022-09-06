@@ -75,7 +75,8 @@
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ds</dt>
-<dd><p>The <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> to be imported into the REDCap project.
+<dd><p>The <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> or <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code>
+to be imported into the REDCap project.
 Required.</p></dd>
 
 
@@ -94,11 +95,11 @@ project.  Required.</p></dd>
 
 <dt>overwrite_with_blanks</dt>
 <dd><p>A boolean value indicating if
-blank/<code>NA</code> values in the R <a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame</a>
+blank/<code>NA</code> values in the R data frame
 will overwrite data on the server.
 This is the default behavior for REDCapR,
 which essentially deletes the cell's value
-If <code>FALSE</code>, blank/<code>NA</code> values in the <a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame</a>
+If <code>FALSE</code>, blank/<code>NA</code> values in the data frame
 will be ignored.  Optional.</p></dd>
 
 
@@ -117,8 +118,8 @@ be visible somewhere public. Optional.</p></dd>
 
 
 <dt>config_options</dt>
-<dd><p>A list of options to pass to <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code> method
-in the 'httr' package.  See the details in <code><a href="redcap_read_oneshot.html">redcap_read_oneshot()</a></code> Optional.</p></dd>
+<dd><p>A list of options passed to <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code>.
+See details at <code><a href="https://httr.r-lib.org/reference/httr_options.html" class="external-link">httr::httr_options()</a></code>. Optional.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -162,7 +163,7 @@ administrator to send you the static material.</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="co">#Define some constants</span></span></span>
+<span class="r-in"><span><span class="co"># Define some constants</span></span></span>
 <span class="r-in"><span><span class="va">uri</span>            <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
 <span class="r-in"><span><span class="va">token</span>          <span class="op">&lt;-</span> <span class="st">"D70F9ACD1EDD6F151C6EA78683944E98"</span></span></span>
 <span class="r-in"><span></span></span>
@@ -175,7 +176,7 @@ administrator to send you the static material.</p>
 <span class="r-in"><span><span class="va">ds1</span><span class="op">$</span><span class="va">telephone</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"(405) 321-000"</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">ds1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ds1</span> <span class="op">&lt;-</span> <span class="va">ds1</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span></span></span>
-<span class="r-in"><span><span class="va">ds1</span><span class="op">$</span><span class="va">age</span>        <span class="op">&lt;-</span> <span class="cn">NULL</span>; <span class="va">ds1</span><span class="op">$</span><span class="va">bmi</span> <span class="op">&lt;-</span> <span class="cn">NULL</span> <span class="co">#Drop the calculated fields before writing.</span></span></span>
+<span class="r-in"><span><span class="va">ds1</span><span class="op">$</span><span class="va">age</span>        <span class="op">&lt;-</span> <span class="cn">NULL</span>; <span class="va">ds1</span><span class="op">$</span><span class="va">bmi</span> <span class="op">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Drop the calculated fields before writing.</span></span></span>
 <span class="r-in"><span><span class="va">result_write</span>   <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_write_oneshot</span><span class="op">(</span>ds<span class="op">=</span><span class="va">ds1</span>, redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Read the dataset for the second time.</span></span></span>

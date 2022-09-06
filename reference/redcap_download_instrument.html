@@ -128,8 +128,8 @@ to the R console during the operation.  Optional.</p></dd>
 
 
 <dt>config_options</dt>
-<dd><p>A list of options to pass to <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code> method
-in the 'httr' package.  See the details below. Optional.</p></dd>
+<dd><p>A list of options passed to <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code>.
+See details at <code><a href="https://httr.r-lib.org/reference/httr_options.html" class="external-link">httr::httr_options()</a></code>. Optional.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -175,10 +175,10 @@ administrator to send you the static material.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="va">uri</span>     <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
-<span class="r-in"><span><span class="va">token</span>   <span class="op">&lt;-</span> <span class="st">"D70F9ACD1EDD6F151C6EA78683944E98"</span> <span class="co">#pid=213</span></span></span>
+<span class="r-in"><span><span class="va">token</span>   <span class="op">&lt;-</span> <span class="st">"D70F9ACD1EDD6F151C6EA78683944E98"</span> <span class="co"># pid=213</span></span></span>
 <span class="r-in"><span><span class="co"># event &lt;- "" # only for longitudinal projects</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="op">(</span><span class="va">full_name</span> <span class="op">&lt;-</span> <span class="fu">base</span><span class="fu">::</span><span class="fu">temp</span><span class="op">(</span>pattern<span class="op">=</span><span class="st">"instruments-all-records-all"</span>, fileext<span class="op">=</span><span class="st">".pdf"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">(</span><span class="va">full_name</span> <span class="op">&lt;-</span> <span class="fu">base</span><span class="fu">::</span><span class="fu">temp</span><span class="op">(</span>pattern<span class="op">=</span><span class="st">"instruments-all-records-all"</span>, fileext <span class="op">=</span> <span class="st">".pdf"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'temp' not found</span>
 <span class="r-in"><span><span class="va">result_1</span>   <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_download_instrument</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  file_name     <span class="op">=</span> <span class="va">full_name</span>,</span></span>
@@ -189,19 +189,19 @@ administrator to send you the static material.</p>
 <span class="r-in"><span><span class="fu">base</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">full_name</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in base::unlink(full_name):</span> object 'full_name' not found</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="op">(</span><span class="va">full_name</span> <span class="op">&lt;-</span> <span class="fu">base</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>pattern<span class="op">=</span><span class="st">"instruments-all-record-1-"</span>, fileext<span class="op">=</span><span class="st">".pdf"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpLa3r3X/instruments-all-record-1-f5261acdc1a.pdf"</span>
+<span class="r-in"><span><span class="op">(</span><span class="va">full_name</span> <span class="op">&lt;-</span> <span class="fu">base</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>pattern<span class="op">=</span><span class="st">"instruments-all-record-1-"</span>, fileext <span class="op">=</span> <span class="st">".pdf"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpPDKysB/instruments-all-record-1-d037435c49a.pdf"</span>
 <span class="r-in"><span><span class="va">result_2</span>   <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_download_instrument</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  record        <span class="op">=</span> <span class="fl">5</span>,</span></span>
 <span class="r-in"><span>  file_name     <span class="op">=</span> <span class="va">full_name</span>,</span></span>
 <span class="r-in"><span>  redcap_uri    <span class="op">=</span> <span class="va">uri</span>,</span></span>
 <span class="r-in"><span>  token         <span class="op">=</span> <span class="va">token</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Preparing to download the file `/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpLa3r3X/instruments-all-record-1-f5261acdc1a.pdf`.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> text/html; charset=UTF-8 successfully downloaded in 0.3 seconds, and saved as /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpLa3r3X/instruments-all-record-1-f5261acdc1a.pdf.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Preparing to download the file `/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpPDKysB/instruments-all-record-1-d037435c49a.pdf`.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> text/html; charset=UTF-8 successfully downloaded in 0.4 seconds, and saved as /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpPDKysB/instruments-all-record-1-d037435c49a.pdf.</span>
 <span class="r-in"><span><span class="fu">base</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">full_name</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">full_name</span> <span class="op">&lt;-</span> <span class="fu">base</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>pattern<span class="op">=</span><span class="st">"instrument-1-record-1-"</span>, fileext<span class="op">=</span><span class="st">".pdf"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpLa3r3X/instrument-1-record-1-f521ba6610f.pdf"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpPDKysB/instrument-1-record-1-d0375fe9610.pdf"</span>
 <span class="r-in"><span><span class="va">result_3</span>   <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_download_instrument</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  record        <span class="op">=</span> <span class="fl">5</span>,</span></span>
 <span class="r-in"><span>  instrument    <span class="op">=</span> <span class="st">"health"</span>,</span></span>
@@ -209,8 +209,8 @@ administrator to send you the static material.</p>
 <span class="r-in"><span>  redcap_uri    <span class="op">=</span> <span class="va">uri</span>,</span></span>
 <span class="r-in"><span>  token         <span class="op">=</span> <span class="va">token</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Preparing to download the file `/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpLa3r3X/instrument-1-record-1-f521ba6610f.pdf`.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> text/html; charset=UTF-8 successfully downloaded in 0.5 seconds, and saved as /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpLa3r3X/instrument-1-record-1-f521ba6610f.pdf.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Preparing to download the file `/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpPDKysB/instrument-1-record-1-d0375fe9610.pdf`.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> text/html; charset=UTF-8 successfully downloaded in 0.3 seconds, and saved as /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpPDKysB/instrument-1-record-1-d0375fe9610.pdf.</span>
 <span class="r-in"><span><span class="fu">base</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">full_name</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>

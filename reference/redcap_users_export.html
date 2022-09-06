@@ -87,15 +87,15 @@ be visible somewhere public. Optional.</p></dd>
 
 
 <dt>config_options</dt>
-<dd><p>A list of options to pass to <code>POST</code> method in the
-<code>httr</code> package.  See the details below.  Optional.</p></dd>
+<dd><p>A list of options passed to <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code>.
+See details at <code><a href="https://httr.r-lib.org/reference/httr_options.html" class="external-link">httr::httr_options()</a></code>. Optional.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     
 
-<p>Currently, a list is returned with the following elements:</p><ul><li><p><code>data_user</code>: A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> of all users associated with the project.
+<ul><li><p><code>data_user</code>: A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> of all users associated with the project.
 One row represents one user.</p></li>
 <li><p><code>data_user_form</code>: A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> of permissions for users and forms.
 One row represents a unique user-by-form combination.</p></li>

@@ -86,7 +86,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Basic REDCapR Operations</h1>
             
-            <h4 data-toc-skip class="date">2022-09-01</h4>
+            <h4 data-toc-skip class="date">2022-09-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/HEAD/vignettes/BasicREDCapROperations.Rmd" class="external-link"><code>vignettes/BasicREDCapROperations.Rmd</code></a></small>
       <div class="hidden name"><code>BasicREDCapROperations.Rmd</code></div>
@@ -95,11 +95,11 @@
 
     
     
-<p>This vignette covers the the basic functions exposed by the <a href="https://github.com/r-lib/httr" class="external-link"><code>httr</code></a> and <a href="https://cran.r-project.org/package=curl" class="external-link"><code>curl</code></a> packages which allow you to interact with <a href="https://www.project-redcap.org/" class="external-link">REDCap</a> through its API.</p>
+<p>This vignette covers the the basic functions exposed by the <a href="https://github.com/r-lib/httr" class="external-link">httr</a> and <a href="https://cran.r-project.org/package=curl" class="external-link">curl</a> packages which allow you to interact with <a href="https://www.project-redcap.org/" class="external-link">REDCap</a> through its API.</p>
 <div class="section level2">
 <h2 id="reading-redcap-data">Reading REDCap Data<a class="anchor" aria-label="anchor" href="#reading-redcap-data"></a>
 </h2>
-<p>The function <code>redcap_read_oneshot</code> uses the <a href="https://cran.r-project.org/package=httr" class="external-link"><code>httr</code></a> package to call the REDCap API.</p>
+<p>The functions <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code>redcap_read()</code></a> and <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read_oneshot.html"><code>redcap_read_oneshot()</code></a> use the <a href="https://cran.r-project.org/package=httr" class="external-link">httr</a> package to call the REDCap API.</p>
 <pre><code><span><span class="co">## Loading required namespace: kableExtra</span></span></code></pre>
 <div class="section level3">
 <h3 id="set-project-wide-values">Set project-wide values<a class="anchor" aria-label="anchor" href="#set-project-wide-values"></a>
@@ -119,7 +119,7 @@
 <span><span class="va">ds_all_rows_all_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-09-01 16:08:51.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-09-06 17:52:21.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -168,7 +168,7 @@ cols(
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2022-09-01 16:08:52.</code></pre>
+<pre><code>Starting to read 2 records  at 2022-09-06 17:52:22.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -195,7 +195,7 @@ cols(
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2022-09-01 16:08:53.</code></pre>
+<pre><code>Starting to read 2 records  at 2022-09-06 17:52:23.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -229,18 +229,18 @@ cols(
 <div class="section level3">
 <h3 id="read-a-subset-of-the-fields">Read a subset of the fields<a class="anchor" aria-label="anchor" href="#read-a-subset-of-the-fields"></a>
 </h3>
-<p>If only a subset of the <strong>fields</strong> is desired, then two approaches exist. The first is to pass an array (where each element is an field) to the <code>fields</code> parameter. The second is to pass a single string (where the elements are separated by commas) to the <code>fields_collapsed</code> parameter. Like with <code>records</code> and <code>records_collapsed</code> described above, this function converts the more natural format (<em>i.e.</em>, <code>fields</code>) to the format required by the API (<em>ie</em>, <code>fields_collapsed</code>) if <code>fields</code> is specified and <code>fields_collapsed</code> is not.</p>
+<p>If only a subset of the <strong>fields</strong> is desired, then two approaches exist. The first is to pass an array (where each element is an field) to the <code>fields</code> parameter. The second is to pass a single string (where the elements are separated by commas) to the <code>fields_collapsed</code> parameter. Like with <code>records</code> and <code>records_collapsed</code> described above, this function converts the more natural format (<em>i.e.</em>, <code>fields</code>) to the format required by the API (<em>i.e.</em>, <code>fields_collapsed</code>) if <code>fields</code> is specified and <code>fields_collapsed</code> is not.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#Return only the fields record_id, name_first, and age</span></span>
+<code class="sourceCode R"><span><span class="co"># Return only the fields record_id, name_first, and age</span></span>
 <span><span class="va">desired_fields_v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"name_first"</span>, <span class="st">"age"</span><span class="op">)</span></span>
 <span><span class="va">ds_some_fields_v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span></span>
 <span>  redcap_uri <span class="op">=</span> <span class="va">uri</span>,</span>
 <span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  fields     <span class="op">=</span> <span class="va">desired_fields_v1</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-09-01 16:08:54.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-09-06 17:52:24.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -251,16 +251,16 @@ cols(
   age =  [32mcol_double() [39m
 )</code></pre>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#Return only the fields record_id, name_first, and age (alternate way)</span></span>
+<code class="sourceCode R"><span><span class="co"># Return only the fields record_id, name_first, and age (alternate way)</span></span>
 <span><span class="va">desired_fields_v2</span> <span class="op">&lt;-</span> <span class="st">"record_id, name_first, age"</span></span>
 <span><span class="va">ds_some_fields_v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span></span>
 <span>  redcap_uri       <span class="op">=</span> <span class="va">uri</span>,</span>
 <span>  token            <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  fields_collapsed <span class="op">=</span> <span class="va">desired_fields_v2</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-09-01 16:08:55.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-09-06 17:52:26.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -296,7 +296,7 @@ cols(
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-09-01 16:08:57.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-09-06 17:52:27.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -336,7 +336,7 @@ cols(
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2022-09-01 16:08:58.</code></pre>
+<pre><code>Starting to read 2 records  at 2022-09-06 17:52:28.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -370,9 +370,9 @@ cols(
 <div class="section level3">
 <h3 id="additional-returned-information">Additional Returned Information<a class="anchor" aria-label="anchor" href="#additional-returned-information"></a>
 </h3>
-<p>The examples above have shown only the resulting <code>data.frame</code>, by specifying <code>$data</code> at the end of the call. However, more is available to those wanting additional information, such as:</p>
+<p>The examples above have shown only the resulting data frame, by specifying <code>$data</code> at the end of the call. However, more is available to those wanting additional information, such as:</p>
 <ol style="list-style-type: decimal">
-<li>The <code>data</code> object has the <code>data.frame</code>, as in the previous examples.</li>
+<li>The <code>data</code> object has the data frame, as in the previous examples.</li>
 <li>The <code>success</code> boolean value indicates if <code>redcap_read_oneshot</code> believes the operation completed as intended.</li>
 <li>The <code>status_codes</code> is a collection of <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" class="external-link">http status codes</a>, separated by semicolons. There is one code for each batch attempted.</li>
 <li>The <code>outcome_messages</code>: A collection of human readable strings indicating the operations’ semicolons. There is one code for each batch attempted. In an unsuccessful operation, it should contain diagnostic information.</li>
@@ -389,7 +389,7 @@ cols(
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-09-01 16:08:59.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-09-06 17:52:29.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -442,7 +442,7 @@ $datetime_range_end
 [1] NA
 
 $elapsed_seconds
-[1] 1.074878</code></pre>
+[1] 1.177184</code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -461,7 +461,7 @@ Environment <span class="glyphicon glyphicon-plus-sign"></span>
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       UTC
- date     2022-09-01
+ date     2022-09-06
  pandoc   2.14.2 @ /usr/local/bin/ (via rmarkdown)
 
  [1m [36m─ Packages ─────────────────────────────────────────────────────────────────── [39m [22m
@@ -504,7 +504,7 @@ Environment <span class="glyphicon glyphicon-plus-sign"></span>
  R6            2.5.1     [90m2021-08-19 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
  ragg          1.2.2     [90m2022-02-21 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
  readr         2.1.2     [90m2022-01-30 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- REDCapR     *  [1m [35m1.1.9003 [39m [22m  [90m2022-09-01 [39m  [90m[1] [39m  [1m [35mlocal [39m [22m
+ REDCapR     *  [1m [35m1.1.9003 [39m [22m  [90m2022-09-06 [39m  [90m[1] [39m  [1m [35mlocal [39m [22m
  rlang         1.0.5     [90m2022-08-31 [39m  [90m[1] [39m  [90mCRAN (R 4.2.1) [39m
  rmarkdown     2.16      [90m2022-08-24 [39m  [90m[1] [39m  [90mCRAN (R 4.2.1) [39m
  rprojroot     2.0.3     [90m2022-04-02 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
@@ -535,7 +535,7 @@ Environment <span class="glyphicon glyphicon-plus-sign"></span>
  [90m [2] /Library/Frameworks/R.framework/Versions/4.2/Resources/library [39m
 
  [1m [36m────────────────────────────────────────────────────────────────────────────── [39m [22m</code></pre>
-</details><p>Report rendered by runner at 2022-09-01, 16:09 +0000 in 11 seconds.</p>
+</details><p>Report rendered by runner at 2022-09-06, 17:52 +0000 in 12 seconds.</p>
 </div>
   </div>
 

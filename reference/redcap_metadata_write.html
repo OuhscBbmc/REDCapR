@@ -77,7 +77,8 @@ it works for only projects in Development status.</p>
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ds</dt>
-<dd><p>The <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> to be imported into the REDCap project.
+<dd><p>The <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> or <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code>
+to be imported into the REDCap project.
 Required.</p></dd>
 
 
@@ -102,8 +103,8 @@ be visible somewhere public. Optional.</p></dd>
 
 
 <dt>config_options</dt>
-<dd><p>A list of options to pass to <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code> method
-in the 'httr' package.  See the details in <code><a href="redcap_read_oneshot.html">redcap_read_oneshot()</a></code> Optional.</p></dd>
+<dd><p>A list of options passed to <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code>.
+See details at <code><a href="https://httr.r-lib.org/reference/httr_options.html" class="external-link">httr::httr_options()</a></code>. Optional.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -199,7 +200,7 @@ administrator to send you the static material.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 16</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_seconds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.197633</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.225929</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $raw_text</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>

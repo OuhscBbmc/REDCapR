@@ -89,8 +89,8 @@ be visible somewhere public. Optional.</p></dd>
 
 
 <dt>config_options</dt>
-<dd><p>A list of options to pass to <code>POST</code> method in the
-<code>httr</code> package.  See the details below. Optional.</p></dd>
+<dd><p>A list of options passed to <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code>.
+See details at <code><a href="https://httr.r-lib.org/reference/httr_options.html" class="external-link">httr::httr_options()</a></code>. Optional.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -113,10 +113,7 @@ empty string to save RAM.</p></li>
 </ul></div>
     <div id="details">
     <h2>Details</h2>
-    <p>The full list of configuration options accepted by the <code>httr</code> package is
-viewable by executing <code><a href="https://httr.r-lib.org/reference/httr_options.html" class="external-link">httr::httr_options()</a></code>.  The <code>httr</code> package and
-documentation is available at https://cran.r-project.org/package=httr.</p>
-<p>As of REDCap version 6.14.2, three variable types are <em>not</em> returned in
+    <p>As of REDCap version 6.14.2, three variable types are <em>not</em> returned in
 this call: calculated, file, and descriptive.  All variables returned are
 writable/uploadable.</p>
     </div>
@@ -140,7 +137,7 @@ administrator to send you the static material.</p>
 <span class="r-in"><span><span class="va">uri</span>         <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
 <span class="r-in"><span><span class="va">token</span>       <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span></span>
 <span class="r-in"><span><span class="va">ds_variable</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_variables</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

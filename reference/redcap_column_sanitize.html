@@ -74,8 +74,8 @@ cause problems when writing to a REDCap project.</p>
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>d</dt>
-<dd><p>The <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> containing the dataset used to update
-the REDCap project.  Required.</p></dd>
+<dd><p>The <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> or <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code> containing the dataset
+used to update the REDCap project.  Required.</p></dd>
 
 
 <dt>column_names</dt>
@@ -97,7 +97,7 @@ that were unable to be appropriately matched.</p></dd>
     <h2>Value</h2>
     
 
-<p>A <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> with same columns, but whose character values
+<p>A data frame with same columns, but whose character values
 have been sanitized.</p>
     </div>
     <div id="details">

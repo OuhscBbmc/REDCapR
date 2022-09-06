@@ -139,8 +139,8 @@ be visible somewhere public. Optional.</p></dd>
 
 
 <dt>config_options</dt>
-<dd><p>A list of options to pass to <code>POST</code> method in the
-<code>httr</code> package.</p></dd>
+<dd><p>A list of options passed to <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code>.
+See details at <code><a href="https://httr.r-lib.org/reference/httr_options.html" class="external-link">httr::httr_options()</a></code>. Optional.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -180,17 +180,17 @@ administrator to send you the static material.</p>
 <span class="r-in"><span><span class="va">token</span>        <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ds_last_week</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_log_read</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 37,386 rows were read from REDCap in 0.9 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 32,794 rows were read from REDCap in 0.9 seconds.  The http status code was 200.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ds_last_week</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   timestamp           username        action        details                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2022-09-01 <span style="color: #949494;">11:08:00</span> unittestphifree Manage/Design Export instruments (API)    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2022-09-01 <span style="color: #949494;">11:08:00</span> unittestphifree Manage/Design Export DAGs (API)           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 2022-09-01 <span style="color: #949494;">11:08:00</span> unittestphifree Manage/Design Download data dictionary (A…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 2022-09-01 <span style="color: #949494;">11:08:00</span> unittestphifree Manage/Design Export project information …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 2022-09-01 <span style="color: #949494;">11:04:00</span> unittestphifree <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 2022-09-01 <span style="color: #949494;">11:04:00</span> unittestphifree <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   timestamp           username        action            details                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2022-09-06 <span style="color: #949494;">12:51:00</span> unittestphifree Manage/Design     Download data dictionar…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2022-09-06 <span style="color: #949494;">12:51:00</span> unittestphifree Data export (API) export_format: CSV, raw…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 2022-09-06 <span style="color: #949494;">12:51:00</span> unittestphifree Manage/Design     Export instruments (API)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 2022-09-06 <span style="color: #949494;">12:51:00</span> unittestphifree Data export (API) export_format: CSV, raw…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 2022-09-06 <span style="color: #949494;">12:51:00</span> unittestphifree Manage/Design     Download data dictionar…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 2022-09-06 <span style="color: #949494;">12:51:00</span> unittestphifree Data export (API) export_format: CSV, raw…</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ds_one_day</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>  <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_log_read</span><span class="op">(</span></span></span>
