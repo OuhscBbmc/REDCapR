@@ -1,12 +1,12 @@
 #' @docType package
 #' @name REDCapR-package
-#' @aliases REDCapR
+#' @aliases
+#' REDCapR
 #'
 #' @title R utilities for interacting with a REDCap data system
 #' <https://www.project-redcap.org/>
 #'
 #' @description
-#'
 #' Comprehensive documentation is also available at
 #' https://ouhscbbmc.github.io/REDCapR/.
 #'
@@ -39,7 +39,8 @@
 #' 2013-2017.
 #'
 #'
-#' @note The release version is available through
+#' @note
+#' The release version is available through
 #' [CRAN](https://cran.r-project.org/package=REDCapR) by running
 #' `install.packages('REDCapR')`.  The most recent development version is
 #' available through [GitHub](https://github.com/OuhscBbmc/REDCapR) by

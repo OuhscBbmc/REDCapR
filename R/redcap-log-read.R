@@ -1,7 +1,9 @@
-#' @title Get the logging of a project.
+#' @title
+#' Get the logging of a project.
 #'
-#' @description This function reads the available logging messages from
-#'   REDCap as a [tibble::tibble()].
+#' @description
+#' This function reads the available logging messages from
+#' REDCap as a [tibble::tibble()].
 #'
 #' @param redcap_uri The
 #' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
@@ -30,15 +32,16 @@
 #' [httr::content()].  Defaults to 'UTF-8'.
 #' @param locale a [readr::locale()] object to specify preferences like
 #' number, date, and time formats.  This object is passed to
-#' [`readr::read_csv()`].  Defaults to [readr::default_locale()].
+#' [readr::read_csv()].  Defaults to [readr::default_locale()].
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  The verbose output might contain
 #' sensitive information (*e.g.* PHI), so turn this off if the output might
 #' be visible somewhere public. Optional.
-#' @param config_options  A list of options to pass to `POST` method in the
-#' `httr` package.
+#' @param config_options A list of options passed to [httr::POST()].
+#' See details at [httr::httr_options()]. Optional.
 #'
-#' @return Currently, a list is returned with the following elements:
+#' @return
+#' Currently, a list is returned with the following elements:
 #' * `data`: An R [tibble::tibble()] of all data access groups of the project.
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
@@ -50,8 +53,11 @@
 #' unsuccessful operation, it should contain diagnostic information.
 #' * `elapsed_seconds`: The duration of the function.
 #'
-#' @author Jonathan M. Mang, Will Beasley
-#' @references The official documentation can be found on the 'API Help Page'
+#' @author
+#' Jonathan M. Mang, Will Beasley
+#'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html
 #' and
@@ -154,7 +160,7 @@ redcap_log_read <- function(
     if (exists("ds") && inherits(ds, "data.frame")) {
       outcome_message <- sprintf(
         "%s rows were read from REDCap in %0.1f seconds.  The http status code was %i.",
-        format(  nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE),
+        format(nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE),
         kernel$elapsed_seconds,
         kernel$status_code
       )
@@ -177,15 +183,18 @@ redcap_log_read <- function(
       # nocov end
     }
   } else { # kernel fails
+    # nocov start
     ds              <- tibble::tibble() # Return an empty data.frame
-    outcome_message <- if (any(grepl(kernel$regex_empty, kernel$raw_text))) {
-      "The REDCapR log export operation was not successful.  The returned dataset was empty."  # nocov
-    } else {
-      sprintf(
-        "The REDCapR log export operation was not successful.  The error message was:\n%s",
-        kernel$raw_text
-      )
-    }
+    outcome_message <-
+      if (any(grepl(kernel$regex_empty, kernel$raw_text))) {
+        "The REDCapR log export operation was not successful.  The returned dataset was empty."  # nocov
+      } else {
+        sprintf(
+          "The REDCapR log export operation was not successful.  The error message was:\n%s",
+          kernel$raw_text
+        )
+      }
+    # nocov end
   }
 
   if (verbose)

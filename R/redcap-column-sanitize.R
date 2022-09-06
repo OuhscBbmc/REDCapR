@@ -1,10 +1,12 @@
-#' @title Sanitize to adhere to REDCap character encoding requirements
+#' @title
+#' Sanitize to adhere to REDCap character encoding requirements
 #'
-#' @description Replace non-ASCII characters with legal characters that won't
+#' @description
+#' Replace non-ASCII characters with legal characters that won't
 #' cause problems when writing to a REDCap project.
 #'
-#' @param d The [base::data.frame()] containing the dataset used to update
-#' the REDCap project.  Required.
+#' @param d The [base::data.frame()] or [tibble::tibble()] containing the dataset
+#' used to update the REDCap project.  Required.
 #' @param column_names An array of `character` values indicating the names of
 #' the variables to sanitize.  Optional.
 #' @param encoding_initial An array of `character` values indicating the names
@@ -12,7 +14,7 @@
 #' @param substitution_character The `character` value that replaces characters
 #' that were unable to be appropriately matched.
 #'
-#' @return A [base::data.frame()] with same columns, but whose character values
+#' @return A data frame with same columns, but whose character values
 #' have been sanitized.
 #'
 #' @details
@@ -23,7 +25,8 @@
 #' `R 3.1.0`, the OSes use similar, but different, versions to convert the
 #' characters.  Be aware of this in case you notice OS-dependent differences.
 #'
-#' @author Will Beasley
+#' @author
+#' Will Beasley
 #'
 #' @examples
 #' # Typical examples are not shown because they require non-ASCII encoding,

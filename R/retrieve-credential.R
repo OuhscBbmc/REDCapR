@@ -1,10 +1,16 @@
-#' @name retrieve_credential
-#' @aliases retrieve_credential_local retrieve_credential_mssql create_credential_local
-#' @title Read a token and other credentials from a (non-REDCap)
+#' @name
+#' retrieve_credential
+#'
+#' @aliases
+#' retrieve_credential_local retrieve_credential_mssql create_credential_local
+#'
+#' @title
+#' Read a token and other credentials from a (non-REDCap)
 #' database or file
 #'
-#' @description These functions are not essential to calling the REDCap API,
-#'  but instead are functions that help manage tokens securely.
+#' @description
+#' These functions are not essential to calling the REDCap API,
+#' but instead are functions that help manage tokens securely.
 #'
 #' @usage
 #' retrieve_credential_local(
@@ -51,7 +57,8 @@
 #' @param username A character value used to retrieve a credential.
 #' See the Notes below. Optional.
 #'
-#' @return A list of the following elements are returned from
+#' @return
+#' A list of the following elements are returned from
 #' `retrieve_credential_local()` and `retrieve_credential_mssql()`:
 #' * `redcap_uri`: The URI of the REDCap Server.
 #' * `username`: Username.
@@ -86,7 +93,6 @@
 #' 6. Double-check the file is secured and not accessible by other users.
 #'
 #' @note
-#'
 #' *Storing credentials on a server is preferred*
 #'
 #' Although we strongly encourage storing all the tokens on a central server
@@ -105,7 +111,8 @@
 #' The `username` field is connected only in the local credential file.
 #' It does not need to be the same as the official username in REDCap.
 #'
-#' @author Will Beasley
+#' @author
+#' Will Beasley
 #'
 #' @examples
 #' # ---- Local File Example ----------------------------
@@ -182,7 +189,7 @@ retrieve_credential_local <- function(
     stop(
       "The project_id was not found in the csv credential file."
     )
-  } else if (nrow(ds_credential) > 1) {
+  } else if (1L < nrow(ds_credential)) {
     stop(
       "More than one matching project_id was found in the csv credential ",
       "file.  There should be only one."
@@ -253,7 +260,6 @@ credential_local_validation <- function(
 # system.file("misc/vignette.css", package="REDCapR")
 # system.file("misc/example.credentials", package="REDCapR")
 
-
 #' @export
 create_credential_local <- function(path_credential) {
   path_source <- system.file(
@@ -292,8 +298,8 @@ retrieve_credential_mssql <- function(
   channel     = NULL
 ) {
 
-  if (!requireNamespace("DBI") )  stop("The function REDCapR::retrieve_credential_mssql() cannot run if the `DBI` package is not installed.  Please install it and try again.")
-  if (!requireNamespace("odbc"))  stop("The function REDCapR::retrieve_credential_mssql() cannot run if the `odbc` package is not installed.  Please install it and try again.")
+  if (!requireNamespace("DBI") ) stop("The function REDCapR::retrieve_credential_mssql() cannot run if the `DBI` package is not installed.  Please install it and try again.")
+  if (!requireNamespace("odbc")) stop("The function REDCapR::retrieve_credential_mssql() cannot run if the `odbc` package is not installed.  Please install it and try again.")
 
   regex_pattern_1 <- "^\\d+$"
   regex_pattern_2 <- "^\\[*[a-zA-Z0-9_]+\\]*$"

@@ -1,6 +1,8 @@
-#' @title Read/Export records from a REDCap project
+#' @title
+#' Read/Export records from a REDCap project
 #'
-#' @description This function uses REDCap's API to select and return data.
+#' @description
+#' This function uses REDCap's API to select and return data.
 #'
 #' @param redcap_uri The
 #' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
@@ -64,7 +66,6 @@
 #' can be exported either as a blank value or as "0" (Incomplete). Blank values
 #' are recommended in a data export if the data will be re-imported into a
 #' REDCap project. Default is `FALSE`.
-#'
 #' @param col_types A [readr::cols()] object passed internally to
 #' [readr::read_csv()].  Optional.
 #' @param guess_type A boolean value indicating if all columns should be
@@ -77,15 +78,16 @@
 #' [httr::content()].  Defaults to 'UTF-8'.
 #' @param locale a [readr::locale()] object to specify preferences like
 #' number, date, and time formats.  This object is passed to
-#' [`readr::read_csv()`].  Defaults to [readr::default_locale()].
+#' [readr::read_csv()].  Defaults to [readr::default_locale()].
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  The verbose output might contain
 #' sensitive information (*e.g.* PHI), so turn this off if the output might
 #' be visible somewhere public. Optional.
-#' @param config_options  A list of options to pass to `POST` method in the
-#' `httr` package.  See the details below. Optional.
+#' @param config_options A list of options passed to [httr::POST()].
+#' See details at [httr::httr_options()]. Optional.
 #'
-#' @return Currently, a list is returned with the following elements:
+#' @return
+#' Currently, a list is returned with the following elements:
 #' * `data`: A [tibble::tibble()] of the desired records and columns.
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
@@ -105,19 +107,17 @@
 #' empty string to save RAM.
 #'
 #' @details
-#' The full list of configuration options accepted by the `httr` package is
-#' viewable by executing [httr::httr_options()].  The `httr` package and
-#' documentation is available at https://cran.r-project.org/package=httr.
-#'
-#' If you do not pass in this `export_data_access_groups` value, it will default
+#' If you do not pass an `export_data_access_groups` value, it will default
 #' to `FALSE`. The following is from the API help page for version 10.5.1:
 #' *This flag is only viable if the user whose token is being used to make the
 #' API request is **not** in a data access group. If the user is in a group,
 #' then this flag will revert to its default value*.
 #'
-#' @author Will Beasley
+#' @author
+#' Will Beasley
 #'
-#' @references The official documentation can be found on the 'API Help Page'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html).
@@ -129,25 +129,24 @@
 #' uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
 #' token    <- "9A81268476645C4E5F03428B8AC3AA7B"
 #'
-#' #Return all records and all variables.
+#' # Return all records and all variables.
 #' ds <- REDCapR::redcap_read_oneshot(redcap_uri=uri, token=token)$data
 #'
-#' #Return only records with IDs of 1 and 3
+#' # Return only records with IDs of 1 and 3
 #' desired_records_v1 <- c(1, 3)
 #' ds_some_rows_v1 <- REDCapR::redcap_read_oneshot(
-#'    redcap_uri = uri,
-#'    token      = token,
-#'    records    = desired_records_v1
+#'   redcap_uri = uri,
+#'   token      = token,
+#'   records    = desired_records_v1
 #' )$data
 #'
-#' #Return only the fields record_id, name_first, and age
+#' # Return only the fields record_id, name_first, and age
 #' desired_fields_v1 <- c("record_id", "name_first", "age")
 #' ds_some_fields_v1 <- REDCapR::redcap_read_oneshot(
-#'    redcap_uri = uri,
-#'    token      = token,
-#'    fields     = desired_fields_v1
+#'   redcap_uri = uri,
+#'   token      = token,
+#'   fields     = desired_fields_v1
 #' )$data
-#'
 #'
 #' # Specify the column types.
 #' col_types <- readr::cols(
@@ -160,11 +159,10 @@
 #'   race___6   = readr::col_logical()
 #' )
 #' ds_col_types <- REDCapR::redcap_read_oneshot(
-#'    redcap_uri = uri,
-#'    token      = token,
-#'    col_types  = col_types
+#'   redcap_uri = uri,
+#'   token      = token,
+#'   col_types  = col_types
 #' )$data
-#'
 #' }
 
 #' @importFrom magrittr %>%
@@ -190,7 +188,6 @@ redcap_read_oneshot <- function(
   datetime_range_begin          = as.POSIXct(NA),
   datetime_range_end            = as.POSIXct(NA),
   blank_for_gray_form_status    = FALSE,
-
   col_types                     = NULL,
   guess_type                    = TRUE,
   guess_max                     = 1000,
@@ -308,25 +305,6 @@ redcap_read_oneshot <- function(
         kernel$status_code
       )
 
-      # ds <- dplyr::mutate_if(
-      #   ds,
-      #   is.character,
-      #   function(x) dplyr::coalesce(x, "") #Replace NAs with blanks
-      # )
-      #
-      # ds <- dplyr::mutate_if(
-      #   ds,
-      #   is.character,
-      #   function( x ) gsub("\r\n", "\n", x, perl=TRUE)
-      # )
-      # ds <- dplyr::mutate_if(
-      #   ds,
-      #   function( x) inherits(x, "Date"),
-      #   as.character
-      # )
-      #
-      # ds <- base::as.data.frame(ds)
-
       # If an operation is successful, the `raw_text` is no longer returned to
       #   save RAM.  The content is not really necessary with httr's status
       #   message exposed.
@@ -346,32 +324,33 @@ redcap_read_oneshot <- function(
     }
   } else { # kernel fails
     ds              <- tibble::tibble() # Return an empty data.frame
-    outcome_message <- if (any(grepl(kernel$regex_empty, kernel$raw_text))) {
-      "The REDCapR read/export operation was not successful.  The returned dataset was empty."  # nocov
-    } else {
-      sprintf(
-        "The REDCapR read/export operation was not successful.  The error message was:\n%s",
-        kernel$raw_text
-      )
-    }
+    outcome_message <-
+      if (any(grepl(kernel$regex_empty, kernel$raw_text))) {
+        "The REDCapR read/export operation was not successful.  The returned dataset was empty."  # nocov
+      } else {
+        sprintf(
+          "The REDCapR read/export operation was not successful.  The error message was:\n%s",
+          kernel$raw_text
+        )
+      }
   }
 
   if (verbose)
     message(outcome_message)
 
   list(
-    data               = ds,
-    success            = kernel$success,
-    status_code        = kernel$status_code,
-    outcome_message    = outcome_message,
-    records_collapsed  = records_collapsed,
-    fields_collapsed   = fields_collapsed,
-    forms_collapsed    = forms_collapsed,
-    events_collapsed   = events_collapsed,
-    filter_logic       = filter_logic,
-    datetime_range_begin   = datetime_range_begin,
-    datetime_range_end     = datetime_range_end,
-    elapsed_seconds    = kernel$elapsed_seconds,
-    raw_text           = kernel$raw_text
+    data                    = ds,
+    success                 = kernel$success,
+    status_code             = kernel$status_code,
+    outcome_message         = outcome_message,
+    records_collapsed       = records_collapsed,
+    fields_collapsed        = fields_collapsed,
+    forms_collapsed         = forms_collapsed,
+    events_collapsed        = events_collapsed,
+    filter_logic            = filter_logic,
+    datetime_range_begin    = datetime_range_begin,
+    datetime_range_end      = datetime_range_end,
+    elapsed_seconds         = kernel$elapsed_seconds,
+    raw_text                = kernel$raw_text
   )
 }

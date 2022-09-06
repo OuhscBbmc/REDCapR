@@ -1,7 +1,6 @@
 # These functions are not exported.
 
 populate_project_delete_single_arm <- function() {
-
   if (!requireNamespace("testthat")) {
     # nocov start
     stop(
@@ -53,6 +52,7 @@ populate_project_delete_single_arm <- function() {
   ))
   list(is_success = returned_object$success, redcap_project = project)
 }
+
 clear_project_delete_single_arm <- function(verbose = TRUE) {
   if (!requireNamespace("testthat")) {
     # nocov start
@@ -95,14 +95,14 @@ clean_start_delete_single_arm <- function(delay_in_seconds = 1) {
     regexp = "clear_project_delete_single_arm success: TRUE."
   )
   testthat::expect_true(clear_result, "Clearing the results from the delete_single_arm project should be successful.")
-  base::Sys.sleep(delay_in_seconds) #Pause after deleting records.
+  base::Sys.sleep(delay_in_seconds) # Pause after deleting records.
 
   testthat::expect_message(
     populate_result <- populate_project_delete_single_arm(),
     regexp = "populate_project_delete_single_arm success: TRUE."
   )
   testthat::expect_true(populate_result$is_success, "Population of the delete_single_arm project should be successful.")
-  base::Sys.sleep(delay_in_seconds) #Pause after writing records.
+  base::Sys.sleep(delay_in_seconds) # Pause after writing records.
 
   populate_result
 }

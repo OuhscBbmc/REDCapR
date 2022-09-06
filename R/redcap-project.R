@@ -2,9 +2,11 @@
 #' @export redcap_project
 #' @importFrom methods new
 #'
-#' @title A Reference Class to make later calls to REDCap more convenient
+#' @title
+#' A Reference Class to make later calls to REDCap more convenient
 #'
-#' @description This `Reference Class` represents a REDCap project.
+#' @description
+#' This `Reference Class` represents a REDCap project.
 #' Once some values are set that are specific to a REDCap project
 #' (such as the URI and token), later calls are less verbose
 #' (such as reading and writing data).
@@ -33,12 +35,12 @@
 #'
 #' }
 #' if (FALSE) {
-#' #Switch the Genders
+#' # Switch the Genders
 #' sex_original   <- ds_skinny$sex
 #' ds_skinny$sex  <- (1 - ds_skinny$sex)
 #' project$write(ds_skinny)
 #'
-#' #Switch the Genders back
+#' # Switch the Genders back
 #' ds_skinny$sex <- sex_original
 #' project$write(ds_skinny)
 #' }
@@ -130,8 +132,8 @@ redcap_project <- setRefClass(
         config_options          = config_options
       ))
     }
-  ) #End methods list
-) #End class
+  ) # End methods list
+) # End class
 
 # https://adv-r.had.co.nz/OO-essentials.html # nolint
 # https://stackoverflow.com/questions/21875596/mapping-a-c-sharp-class-definition-to-an-r-reference-class-definition # nolint

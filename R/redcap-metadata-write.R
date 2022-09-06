@@ -1,11 +1,13 @@
-#' @title Import metadata of a REDCap project
+#' @title
+#' Import metadata of a REDCap project
 #'
 #' @description
 #' Import metadata (*i.e.*, data dictionary)
 #' into a project. Because of this method's destructive nature,
 #' it works for only projects in Development status.
 #'
-#' @param ds The [base::data.frame()] to be imported into the REDCap project.
+#' @param ds The [base::data.frame()] or [tibble::tibble()]
+#' to be imported into the REDCap project.
 #' Required.
 #' @param redcap_uri The
 #' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
@@ -18,10 +20,11 @@
 #' to the R console during the operation.  The verbose output might contain
 #' sensitive information (*e.g.* PHI), so turn this off if the output might
 #' be visible somewhere public. Optional.
-#' @param config_options  A list of options to pass to [httr::POST()] method
-#' in the 'httr' package.  See the details in [redcap_read_oneshot()] Optional.
+#' @param config_options A list of options passed to [httr::POST()].
+#' See details at [httr::httr_options()]. Optional.
 #'
-#' @return Currently, a list is returned with the following elements:
+#' @return
+#' Currently, a list is returned with the following elements:
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
 #' * `status_code`: The
@@ -35,9 +38,11 @@
 #' REDCap.  If an operation is successful, the `raw_text` is returned as an
 #' empty string to save RAM.
 #'
-#' @author Will Beasley
+#' @author
+#' Will Beasley
 #'
-#' @references The official documentation can be found on the 'API Help Page'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki.
 #' If you do not have an account for the wiki, please ask your campus REDCap
 #' administrator to send you the static material.
@@ -77,7 +82,7 @@ redcap_metadata_write <- function(
   config_options  = NULL
 ) {
   # This prevents the R CHECK NOTE: 'No visible binding for global variable Note in R CMD check';
-  # Also see  if( getRversion() >= "2.15.1" )    utils::globalVariables(names=c("csv_elements"))
+  # Also see if( getRversion() >= "2.15.1" )    utils::globalVariables(names=c("csv_elements"))
   # https://stackoverflow.com/questions/8096313/; https://stackoverflow.com/questions/9439256
   csv_elements <- NULL
 

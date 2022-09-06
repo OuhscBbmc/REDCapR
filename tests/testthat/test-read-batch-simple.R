@@ -620,8 +620,8 @@ test_that("date-range", {
 test_that("error-bad-token", {
   testthat::skip_on_cran()
 
-  expected_outcome_message <- "The REDCapR read/export operation was not successful\\."
-  expect_message(
+  expected_outcome_message <- "The REDCapR record export operation was not successful\\."
+  expect_error(
     regexp           = expected_outcome_message,
     redcap_read(
       redcap_uri    = credential$redcap_uri,

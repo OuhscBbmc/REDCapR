@@ -42,7 +42,7 @@ A \code{stop} error will be thrown if the operation fails to convert all the
 \code{NA} values.
 }
 \examples{
-library(REDCapR) #Load the package into the current R session.
+library(REDCapR) # Load the package into the current R session.
 }
 \author{
 Will Beasley

@@ -21,8 +21,8 @@ Required.}
 
 \item{post_body}{List of contents expected by the REDCap API.  Required.}
 
-\item{config_options}{A list of options to pass to \code{POST} method in the
-\code{httr} package.  See the details below.  Optional.}
+\item{config_options}{A list of options passed to \code{\link[httr:POST]{httr::POST()}}.
+See details at \code{\link[httr:httr_options]{httr::httr_options()}}. Optional.}
 
 \item{encoding}{The encoding value passed to \code{\link[httr:content]{httr::content()}}.  Defaults
 to 'UTF-8'.}
@@ -34,8 +34,7 @@ to 'text/csv'.}
 A \link[utils:packageDescription]{utils::packageVersion}.
 }
 \description{
-This function is used by other functions to read and write
-values.
+This function is used by other functions to read and write values.
 }
 \details{
 If the API call is unsuccessful, a value of

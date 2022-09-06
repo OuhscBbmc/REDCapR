@@ -75,12 +75,12 @@ ds_shorties     <- project$read(records=ids_of_shorties)$data
 
 }
 if (FALSE) {
-#Switch the Genders
+# Switch the Genders
 sex_original   <- ds_skinny$sex
 ds_skinny$sex  <- (1 - ds_skinny$sex)
 project$write(ds_skinny)
 
-#Switch the Genders back
+# Switch the Genders back
 ds_skinny$sex <- sex_original
 project$write(ds_skinny)
 }

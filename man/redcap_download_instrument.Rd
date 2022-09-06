@@ -50,8 +50,8 @@ only for the specified event from that record. Optional.}
 \item{verbose}{A boolean value indicating if \code{message}s should be printed
 to the R console during the operation.  Optional.}
 
-\item{config_options}{A list of options to pass to \code{\link[httr:POST]{httr::POST()}} method
-in the 'httr' package.  See the details below. Optional.}
+\item{config_options}{A list of options passed to \code{\link[httr:POST]{httr::POST()}}.
+See details at \code{\link[httr:httr_options]{httr::httr_options()}}. Optional.}
 }
 \value{
 Currently, a list is returned with the following elements,
@@ -83,10 +83,10 @@ function that checks for some common important conflicts.
 \examples{
 \dontrun{
 uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
-token   <- "D70F9ACD1EDD6F151C6EA78683944E98" #pid=213
+token   <- "D70F9ACD1EDD6F151C6EA78683944E98" # pid=213
 # event <- "" # only for longitudinal projects
 
-(full_name <- base::temp(pattern="instruments-all-records-all", fileext=".pdf"))
+(full_name <- base::temp(pattern="instruments-all-records-all", fileext = ".pdf"))
 result_1   <- REDCapR::redcap_download_instrument(
   file_name     = full_name,
   redcap_uri    = uri,
@@ -94,7 +94,7 @@ result_1   <- REDCapR::redcap_download_instrument(
 )
 base::unlink(full_name)
 
-(full_name <- base::tempfile(pattern="instruments-all-record-1-", fileext=".pdf"))
+(full_name <- base::tempfile(pattern="instruments-all-record-1-", fileext = ".pdf"))
 result_2   <- REDCapR::redcap_download_instrument(
   record        = 5,
   file_name     = full_name,

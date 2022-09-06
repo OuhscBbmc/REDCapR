@@ -12,8 +12,8 @@ redcap_column_sanitize(
 )
 }
 \arguments{
-\item{d}{The \code{\link[base:data.frame]{base::data.frame()}} containing the dataset used to update
-the REDCap project.  Required.}
+\item{d}{The \code{\link[base:data.frame]{base::data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}} containing the dataset
+used to update the REDCap project.  Required.}
 
 \item{column_names}{An array of \code{character} values indicating the names of
 the variables to sanitize.  Optional.}
@@ -25,7 +25,7 @@ of the variables to sanitize.  Optional.}
 that were unable to be appropriately matched.}
 }
 \value{
-A \code{\link[base:data.frame]{base::data.frame()}} with same columns, but whose character values
+A data frame with same columns, but whose character values
 have been sanitized.
 }
 \description{

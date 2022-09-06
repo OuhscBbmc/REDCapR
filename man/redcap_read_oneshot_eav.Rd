@@ -104,8 +104,8 @@ to the R console during the operation.  The verbose output might contain
 sensitive information (\emph{e.g.} PHI), so turn this off if the output might
 be visible somewhere public. Optional.}
 
-\item{config_options}{A list of options to pass to \code{POST} method in the
-\code{httr} package.  See the details below. Optional.}
+\item{config_options}{A list of options passed to \code{\link[httr:POST]{httr::POST()}}.
+See details at \code{\link[httr:httr_options]{httr::httr_options()}}. Optional.}
 }
 \value{
 Currently, a list is returned with the following elements:
@@ -134,11 +134,6 @@ This function uses REDCap's API to select and return data.
 This function is still in development.
 }
 \details{
-The full list of configuration options accepted by the \code{httr} package is
-viewable by executing \code{\link[httr:httr_options]{httr::httr_options()}}.  The \code{httr}
-package and documentation is available at
-https://cran.r-project.org/package=httr.
-
 If you do not pass in this export_data_access_groups value, it will
 default to \code{FALSE}. The following is from the API help page for version
 5.2.3:
@@ -153,10 +148,10 @@ As of REDCap 6.14.3, this field is not exported in the EAV API call.
 uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
 token    <- "9A81268476645C4E5F03428B8AC3AA7B"
 
-#Return all records and all variables.
+# Return all records and all variables.
 ds <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=uri, token=token)$data
 
-#Return only records with IDs of 1 and 3
+# Return only records with IDs of 1 and 3
 desired_records_v1 <- c(1, 3)
 ds_some_rows_v1    <- REDCapR::redcap_read_oneshot_eav(
    redcap_uri = uri,
@@ -164,7 +159,7 @@ ds_some_rows_v1    <- REDCapR::redcap_read_oneshot_eav(
    records    = desired_records_v1
 )$data
 
-#Return only the fields record_id, name_first, and age
+# Return only the fields record_id, name_first, and age
 desired_fields_v1 <- c("record_id", "name_first", "age")
 ds_some_fields_v1 <- redcap_read_oneshot_eav(
    redcap_uri = uri,

@@ -1,6 +1,8 @@
-#' @title Determine version of REDCap instance
+#' @title
+#' Determine version of REDCap instance
 #'
-#' @description This function uses REDCap's API to query its version.
+#' @description
+#' This function uses REDCap's API to query its version.
 #'
 #' @param redcap_uri The
 #' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
@@ -13,12 +15,14 @@
 #' to the R console during the operation.  The verbose output might contain
 #' sensitive information (*e.g.* PHI), so turn this off if the output might
 #' be visible somewhere public. Optional.
-#' @param config_options  A list of options to pass to `POST` method in the
-#' `httr` package.  See the details below.  Optional.
+#' @param config_options A list of options passed to [httr::POST()].
+#' See details at [httr::httr_options()]. Optional.
 #'
-#' @return a [utils::packageDescription]
+#' @return
+#' a [utils::packageDescription]
 #'
-#' @details If the API call is unsuccessful, a value of
+#' @details
+#' If the API call is unsuccessful, a value of
 #' `base::package_version("0.0.0")` will be returned.
 #' This ensures that a the function will always return an object of class
 #' [base::numeric_version].  It guarantees the value can always be used in
@@ -55,8 +59,7 @@ redcap_version <- function(
 
   if (kernel$success) {
     try(
-      version <- package_version(kernel$raw_text)
-      ,
+      version <- package_version(kernel$raw_text),
       silent = TRUE
       # Don't print the warning in the try block.  Print it below, where it's
       #   under the control of the caller.

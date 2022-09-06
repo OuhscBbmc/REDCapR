@@ -18,13 +18,14 @@ validate_field_names( field_names, stop_on_error = FALSE )
 validate_field_names_collapsed( field_names_collapsed, stop_on_error = FALSE )
 }
 \arguments{
-\item{data_types}{The data types of the \code{\link[base:data.frame]{base::data.frame()}} corresponding
+\item{data_types}{The data types of the data frame corresponding
 to the REDCap project.}
 
 \item{stop_on_error}{If \code{TRUE}, an error is thrown for violations.
 Otherwise, a dataset summarizing the problems is returned.}
 
-\item{d}{The \code{\link[base:data.frame]{base::data.frame()}} containing the dataset used to update
+\item{d}{The \code{\link[base:data.frame]{base::data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}}
+containing the dataset used to update
 the REDCap project.}
 
 \item{field_names}{The names of the fields/variables in the REDCap project.
@@ -38,7 +39,7 @@ separated by commas.}
 A \code{\link[tibble:tibble]{tibble::tibble()}}, where each potential violation is a row.
 The two columns are:
 \itemize{
-\item \code{field_name}: The name of the \code{\link[base:data.frame]{base::data.frame()}} that might cause
+\item \code{field_name}: The name of the field/column/variable that might cause
 problems during the upload.
 \item \code{field_index}: The position of the field.  (For example, a value of
 '1' indicates the first column, while a '3' indicates the third column.)
@@ -47,8 +48,8 @@ problems during the upload.
 }
 }
 \description{
-This set of functions inspect a \code{\link[base:data.frame]{base::data.frame()}} to
-anticipate problems before writing with REDCap's API.
+This set of functions inspect a data frame
+to anticipate problems before writing with REDCap's API.
 }
 \details{
 All functions listed in the Usage section above inspect a specific aspect

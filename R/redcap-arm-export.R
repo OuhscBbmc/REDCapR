@@ -1,6 +1,8 @@
-#' @title Export Arms
+#' @title
+#' Export Arms
 #'
-#' @description Export Arms of a REDCap project
+#' @description
+#' Export Arms of a REDCap project
 #'
 #' @param redcap_uri The
 #' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
@@ -9,19 +11,19 @@
 #' Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
-#'
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  The verbose output might contain
 #' sensitive information (*e.g.* PHI), so turn this off if the output might
 #' be visible somewhere public. Optional.
-#' @param config_options  A list of options to pass to `POST` method in the
-#' `httr` package.  See the details in [redcap_read_oneshot()]. Optional.
+#' @param config_options A list of options passed to [httr::POST()].
+#' See details at [httr::httr_options()]. Optional.
 #'
-#' @return Currently, a list is returned with the following elements:
+#' @return
+#' Currently, a list is returned with the following elements:
 #' * `has_arms`: a `logical` value indicating if the REDCap project has
 #' arms (*i.e.*, "TRUE") or is a classic non-longitudinal project
 #' (*i.e.*, "FALSE").
-#' * `data`: a [`tibble`] with one row per arm.  The columns are
+#' * `data`: a [tibble::tibble()] with one row per arm.  The columns are
 #' `arm_number` (an integer) and `arm_name` (a human-friendly string).
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
@@ -35,9 +37,11 @@
 #' REDCap.  If an operation is successful, the `raw_text` is returned as an
 #' empty string to save RAM.
 #'
-#' @author Will Beasley
+#' @author
+#' Will Beasley
 #'
-#' @references The official documentation can be found on the 'API Help Page'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html).
@@ -116,7 +120,7 @@ redcap_arm_export <- function(
           arm_name    = .data$name
         )
 
-      #If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
+      # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
       kernel$raw_text <- ""
     } else if (kernel$raw_text == "ERROR: You cannot export arms for classic projects") {
       has_arms <- FALSE

@@ -18,8 +18,8 @@ redcap_write(
 )
 }
 \arguments{
-\item{ds_to_write}{The \code{\link[base:data.frame]{base::data.frame()}} to be imported into the REDCap
-project.  Required.}
+\item{ds_to_write}{The \code{\link[base:data.frame]{base::data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}}
+to be imported into the REDCap project.  Required.}
 
 \item{batch_size}{The maximum number of subject records a single batch
 should contain.  The default is 100.}
@@ -41,11 +41,11 @@ Required.}
 project.  Required.}
 
 \item{overwrite_with_blanks}{A boolean value indicating if
-blank/\code{NA} values in the R \link[base:data.frame]{base::data.frame}
+blank/\code{NA} values in the R data frame
 will overwrite data on the server.
 This is the default behavior for REDCapR,
 which essentially deletes the cell's value
-If \code{FALSE}, blank/\code{NA} values in the \link[base:data.frame]{base::data.frame}
+If \code{FALSE}, blank/\code{NA} values in the data.frame
 will be ignored.  Optional.}
 
 \item{convert_logical_to_integer}{If \code{TRUE}, all \link[base:logical]{base::logical} columns
@@ -58,8 +58,8 @@ to the R console during the operation.  The verbose output might contain
 sensitive information (\emph{e.g.} PHI), so turn this off if the output might
 be visible somewhere public. Optional.}
 
-\item{config_options}{A list of options to pass to \code{POST} method in the
-\code{httr} package.  See the details in \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}}. Optional.}
+\item{config_options}{A list of options passed to \code{\link[httr:POST]{httr::POST()}}.
+See details at \code{\link[httr:httr_options]{httr::httr_options()}}. Optional.}
 }
 \value{
 Currently, a list is returned with the following elements:
@@ -97,7 +97,7 @@ the appropriate permissions:
 }
 \examples{
 if (FALSE) {
-#Define some constants
+# Define some constants
 uri           <- "https://bbmc.ouhsc.edu/redcap/api/"
 token         <- "D70F9ACD1EDD6F151C6EA78683944E98"
 
@@ -110,7 +110,7 @@ ds1$telephone
 ds1$telephone <- paste0("(405) 321-000", seq_len(nrow(ds1)))
 
 ds1 <- ds1[1:3, ]
-ds1$age       <- NULL; ds1$bmi <- NULL #Drop the calculated fields before writing.
+ds1$age       <- NULL; ds1$bmi <- NULL # Drop the calculated fields before writing.
 result_write  <- REDCapR::redcap_write(ds1, redcap_uri=uri, token=token)
 
 # Read the dataset for the second time.

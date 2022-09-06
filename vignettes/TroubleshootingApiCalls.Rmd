@@ -33,7 +33,9 @@ This first group of checks primarily focuses on the server and the logins accoun
 
 1. **Have you verified your account by responding to the automated email sent to them?** This can be verified in the `Browse Users` section of your server's `Control Center`.  (Talk to your REDCap admin.) For each email address you've entered, there should be a green 'Verified' label and icon.
 
-    ```{r EmailVerified, echo=FALSE, out.extra='style="fig.width=400px"'}
+    ```{r EmailVerified}
+    #| echo = FALSE,
+    #| out.extra = 'style = "fig.width=400px"'
     knitr::include_graphics("images/EmailVerified.png")
     ```
 
@@ -41,7 +43,9 @@ This first group of checks primarily focuses on the server and the logins accoun
 
 1. **Have you been granted the desired import and/or export permissions?** This can be verified in the `User Rights` section or in the `API` section (and it's `Manage All Project Tokens` tab) within the project.  Alternatively, it can be verified in the `API Tokens` section of the server's `Control Center`.
 
-    ```{r ApiPrivilegeDashboard, echo=FALSE, out.extra='style="fig.width=600px"'}
+    ```{r ApiPrivilegeDashboard}
+    #| echo = FALSE,
+    #| out.extra = 'style = "fig.width=600px"'
     knitr::include_graphics("images/ApiPrivilegeDashboard.png")
     ```
 
@@ -49,7 +53,9 @@ This first group of checks primarily focuses on the server and the logins accoun
 
 1. **Are you using the correct token?** This can be verified in the `API` section (and it's `Manage All Project Tokens` tab) within the project.  Click the magnifying glass icon in the user's row.  Alternatively, it can be verified in the `API Tokens` section of the server's `Control Center`.
 
-    ```{r MagnifyingGlass, echo=FALSE, out.extra='style="fig.width=550px"'}
+    ```{r MagnifyingGlass}
+    #| echo = FALSE,
+    #| out.extra = 'style = "fig.width=550px"'
     knitr::include_graphics("images/MagnifyingGlass.png")
     ```
 
@@ -62,7 +68,9 @@ Reading
 
 This section examines potential problems that occur after data leaves a working server, but before it is handled by their programming language (*e.g.*, Python and R).  [Postman](https://www.postman.com/) is a Chrome plugin recommended by [several](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ) [people](https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ) that makes troubleshooting much more efficient.
 
-```{r PostmanScreenshot, echo=FALSE, out.extra='style="fig.width=800px"'}
+```{r PostmanScreenshot}
+#| echo = FALSE,
+#| out.extra = 'style = "fig.width=800px"'
 knitr::include_graphics("images/PostmanScreenshot.png")
 ```
 
@@ -116,13 +124,13 @@ Troubleshooting import operations is trickier than export operations for two maj
 
 The second reason why importing can be trickier is because the schema (*e.g.*, the names and data types) of your local dataset must match the project's schema.  Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project's schema and dataset.  Also, consider exporting the dataset to your machine, and look for differences.  Note that you cannot import calculated fields into REDCap.
 
-1. **Does the dataset pass [`REDCapR::validate_for_write()`](https://ouhscbbmc.github.io/REDCapR/reference/validate.html)?**  The `REDCapR::validate_for_write()` inspects a data.frame to anticipate problems before writing with REDCap's API.  The reference manual contains specifics of the validation checks.
+1. **Does the dataset pass [`REDCapR::validate_for_write()`](https://ouhscbbmc.github.io/REDCapR/reference/validate.html)?**  The `REDCapR::validate_for_write()` inspects a data frame to anticipate problems before writing with REDCap's API.  The reference manual contains specifics of the validation checks.
 
 1. **Can you import a *small subset* of the project?**  For instance, just the `record_id` column.
 
 1. **Can you export the dataset and then import it *without any modifications***?  
 
-    For instance, using REDCapR: First, manually complete ~10 example record in the web browser, and then export/download the records with [`REDCapR::redcap_read_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read_oneshot.html) to a [`data.frame`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html).  (If you have longitudinal or repeating instruments, make sure your examples cover those dimensions adequately) Second, can you successfully upload that same `data.frame` (without modification) with [`REDCapR::redcap_write_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_write_oneshot.html)?  
+    For instance, using REDCapR: First, manually complete ~10 example record in the web browser, and then export/download the records with [`REDCapR::redcap_read_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read_oneshot.html) to a data frame.  (If you have longitudinal or repeating instruments, make sure your examples cover those dimensions adequately) Second, can you successfully upload that same `data.frame` (without modification) with [`REDCapR::redcap_write_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_write_oneshot.html)?  
     
     If so, that dataset will provide a template for how you structure the real dataset and assign values.  If not, that is a helpful piece of troubleshooting.  
 

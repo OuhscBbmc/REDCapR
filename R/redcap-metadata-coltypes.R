@@ -1,6 +1,8 @@
-#' @title Suggests a col_type for each field in a REDCap project
+#' @title
+#' Suggests a col_type for each field in a REDCap project
 #'
-#' @description This function inspects a REDCap project to
+#' @description
+#' This function inspects a REDCap project to
 #' determine a [readr::cols()] object that is compatible with the
 #' the project's current definition.
 #'
@@ -15,15 +17,16 @@
 #' [httr::content()].  Defaults to 'UTF-8'.
 #' @param locale a [readr::locale()] object to specify preferences like
 #' number, date, and time formats.  This object is passed to
-#' [`readr::read_csv()`].  Defaults to [readr::default_locale()].
+#' [readr::read_csv()].  Defaults to [readr::default_locale()].
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  The verbose output might contain
 #' sensitive information (*e.g.* PHI), so turn this off if the output might
 #' be visible somewhere public. Optional.
-#' @param config_options  A list of options to pass to `POST` method in the
-#' `httr` package.  See the details below. Optional.
+#' @param config_options A list of options passed to [httr::POST()].
+#' See details at [httr::httr_options()]. Optional.
 #'
-#' @return A [readr::cols()] object is returned, which can be
+#' @return
+#' A [readr::cols()] object is returned, which can be
 #' passed to [redcap_read()] or [redcap_read_oneshot()].
 #'
 #' Additionally objected is printed to the console, see the Details below.
@@ -102,13 +105,11 @@
 #' then (c) in a [dplyr::mutate()] statement,
 #' use [readr::parse_integer()] to cast it to the desired type.
 #'
-#' The full list of configuration options accepted by the `httr` package is
-#' viewable by executing [httr::httr_options()].  The `httr` package and
-#' documentation is available at https://cran.r-project.org/package=httr.
+#' @author
+#' Will Beasley, Philip Chase
 #'
-#' @author Will Beasley, Philip Chase
-#'
-#' @references The official documentation can be found on the 'API Help Page'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html).
@@ -145,13 +146,13 @@
 #' @importFrom magrittr %>%
 #' @export
 redcap_metadata_coltypes <- function(
-    redcap_uri,
-    token,
+  redcap_uri,
+  token,
 
-    http_response_encoding        = "UTF-8",
-    locale                        = readr::default_locale(),
-    verbose                       = FALSE,
-    config_options                = NULL
+  http_response_encoding        = "UTF-8",
+  locale                        = readr::default_locale(),
+  verbose                       = FALSE,
+  config_options                = NULL
 ) {
 
   checkmate::assert_character(redcap_uri                , any.missing=FALSE, len=1, pattern="^.{1,}$")
@@ -211,6 +212,7 @@ redcap_metadata_coltypes <- function(
         )
       )
   }
+
   if (d_proj$has_repeating_instruments_or_events[1]) {
     d_again <-
       d_again %>%
@@ -251,7 +253,6 @@ redcap_metadata_coltypes <- function(
   meat <-
     d_meta %>%
     dplyr::mutate(
-      # vt          = dplyr::if_else(.data$field_name %in% .form_complete_boxes, "complete", vt),
       autonumber  = (.autonumber & (.data$field_name == .record_field)),
     ) %>%
     dplyr::mutate(
@@ -338,8 +339,6 @@ redcap_metadata_coltypes <- function(
       # Pad the left side before appending the right side.
       aligned = sprintf("  %-*s = readr::%-*s, # %s", .data$padding1, .data$field_name, .data$padding2, .data$readr_col_type, .data$explanation)
     ) %>%
-    # View()
-    # tibble::add_row(aligned = sprintf("  %-*s = readr::%-*s, # b/c %s", .data$padding1, .data$field_name, .data$padding2, .data$readr_col_type, .data$explanation)) %>%
     dplyr::pull(.data$aligned)
 
   # Construct an explanation header that's aligned with the col_types output
@@ -375,7 +374,7 @@ redcap_metadata_coltypes <- function(
       "The metadata for the REDCap project has validation types ",
       "for at least one field that specifies a comma for a decimal ",
       "for at least one field that specifies a period for a decimal.  ",
-      "Mixing these two formats in the same proejct can cause confusion and problems.  ",
+      "Mixing these two formats in the same project can cause confusion and problems.  ",
       "Consider passing `readr::col_character()` for this field ",
       "(to REDCapR's `col_types` parameter) and then convert the ",
       "desired fields to R's numeric type.  ",

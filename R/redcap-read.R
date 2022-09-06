@@ -1,7 +1,9 @@
-#' @title Read records from a REDCap project in subsets, and stacks them
+#' @title
+#' Read records from a REDCap project in subsets, and stacks them
 #' together before returning a dataset
 #'
-#' @description From an external perspective, this function is similar to
+#' @description
+#' From an external perspective, this function is similar to
 #' [redcap_read_oneshot()].  The internals differ in that `redcap_read`
 #' retrieves subsets of the data, and then combines them before returning
 #' (among other objects) a single [tibble::tibble()].  This function can
@@ -77,7 +79,6 @@
 #' can be exported either as a blank value or as "0" (Incomplete). Blank values
 #' are recommended in a data export if the data will be re-imported into a
 #' REDCap project. Default is `FALSE`.
-#'
 #' @param col_types A [readr::cols()] object passed internally to
 #' [readr::read_csv()].  Optional.
 #' @param guess_type A boolean value indicating if all columns should be
@@ -88,18 +89,19 @@
 #' [httr::content()].  Defaults to 'UTF-8'.
 #' @param locale a [readr::locale()] object to specify preferences like
 #' number, date, and time formats.  This object is passed to
-#' [`readr::read_csv()`].  Defaults to [readr::default_locale()].
+#' [readr::read_csv()].  Defaults to [readr::default_locale()].
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  The verbose output might contain
 #' sensitive information (*e.g.* PHI), so turn this off if the output might
 #' be visible somewhere public. Optional.
-#' @param config_options  A list of options to pass to `POST` method in the
-#' `httr` package.  See the details in `redcap_read_oneshot()` Optional.
+#' @param config_options A list of options passed to [httr::POST()].
+#' See details at [httr::httr_options()]. Optional.
 #' @param id_position  The column position of the variable that unique
 #' identifies the subject (typically `record_id`).
 #' This defaults to the first variable in the dataset.
 #'
-#' @return Currently, a list is returned with the following elements:
+#' @return
+#' Currently, a list is returned with the following elements:
 #' * `data`: A [tibble::tibble()] of the desired records and columns.
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
@@ -147,8 +149,11 @@
 #' * select the desired user, and then select 'Edit User Privileges',
 #' * in the 'Data Exports' radio buttons, select 'Full Data Set'.
 #'
-#' @author Will Beasley
-#' @references The official documentation can be found on the 'API Help Page'
+#' @author
+#' Will Beasley
+#'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html
 #' and
@@ -180,7 +185,6 @@
 #'   col_types  = col_types,
 #'   batch_size = 2
 #' )$data
-#'
 #' }
 
 #' @export
@@ -257,7 +261,7 @@ redcap_read <- function(
   filter_logic        <- filter_logic_prepare(filter_logic)
   verbose             <- verbose_prepare(verbose)
 
-  if (1L <= nchar(fields_collapsed) )
+  if (1L <= nchar(fields_collapsed))
     validate_field_names_collapsed(fields_collapsed, stop_on_error = TRUE)
 
   start_time <- Sys.time()
@@ -269,34 +273,35 @@ redcap_read <- function(
     config_options     = config_options
   )
 
-  # if (!metadata$success) {
-  #   error_message     <- sprintf(
-  #     "The REDCapR record export operation was not successful.  The error message was:\n%s",
-  #     metadata$raw_text
-  #   )
-  #   stop(error_message)
-  # }
+  if (!metadata$success) {
+    error_message     <- sprintf(
+      "The REDCapR record export operation was not successful.  The error message was:\n%s",
+      metadata$raw_text
+    )
+    stop(error_message)
+  }
 
   initial_call <- REDCapR::redcap_read_oneshot(
-    redcap_uri         = redcap_uri,
-    token              = token,
-    records_collapsed  = records_collapsed,
-    fields_collapsed   = metadata$data$field_name[id_position],
-    # forms_collapsed    = forms_collapsed,
-    events_collapsed   = events_collapsed,
-    filter_logic       = filter_logic,
-    datetime_range_begin   = datetime_range_begin,
-    datetime_range_end     = datetime_range_end,
+    redcap_uri                 = redcap_uri,
+    token                      = token,
+    records_collapsed          = records_collapsed,
+    fields_collapsed           = metadata$data$field_name[id_position],
+    # forms_collapsed          = forms_collapsed,
+    events_collapsed           = events_collapsed,
+    filter_logic               = filter_logic,
+    datetime_range_begin       = datetime_range_begin,
+    datetime_range_end         = datetime_range_end,
     blank_for_gray_form_status = blank_for_gray_form_status,
-    guess_type         = guess_type,
-    http_response_encoding = http_response_encoding,
-    locale             = locale,
-    verbose            = verbose,
-    config_options     = config_options
+    guess_type                 = guess_type,
+    http_response_encoding     = http_response_encoding,
+    locale                     = locale,
+    verbose                    = verbose,
+    config_options             = config_options
   )
 
   # Stop and return to the caller if the initial query failed. --------------
   if (!initial_call$success) {
+    # nocov start
     outcome_messages  <- paste0("The initial call failed with the code: ", initial_call$status_code, ".")
     elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
     return(list(
@@ -313,6 +318,7 @@ redcap_read <- function(
       outcome_messages      = outcome_messages,
       success               = initial_call$success
     ))
+    # nocov end
   }
 
   # Continue as intended if the initial query succeeded. --------------------
@@ -333,18 +339,13 @@ redcap_read <- function(
     selected_index  <- seq(from=ds_glossary$start_index[i], to=ds_glossary$stop_index[i])
     selected_ids    <- unique_ids[selected_index]
 
-    if (i > 0) Sys.sleep(time = interbatch_delay)
+    if (0L < i) Sys.sleep(time = interbatch_delay)
     if (verbose) {
       message(
         "Reading batch ", i, " of ", nrow(ds_glossary), ", with subjects ",
         min(selected_ids), " through ", max(selected_ids),
         " (ie, ", length(selected_ids), " unique subject records)."
       )
-      # message(
-      #   "\nReading batch ", i, " of ", nrow(ds_glossary), ", with subjects ",
-      #   paste(selected_ids, collapse = ','),
-      #   "\n(ie, ", length(selected_ids), " unique subject records)."
-      # )
     }
     read_result <- REDCapR::redcap_read_oneshot(
       redcap_uri                  = redcap_uri,
@@ -399,7 +400,7 @@ redcap_read <- function(
     lst_batch[[i]]   <- read_result$data
     success_combined <- success_combined & read_result$success
 
-    rm(read_result) #Admittedly overkill defensiveness.
+    rm(read_result) # Admittedly overkill defensiveness.
   }
 
   ds_stacked               <- dplyr::bind_rows(lst_batch)
@@ -416,6 +417,7 @@ redcap_read <- function(
   ids_missing_rows  <- setdiff(unique_ids, unique_ids_actual)
 
   if (0L < length(ids_missing_rows)) {
+    # nocov start
     message_template <-
       paste0(
         "There are %i subject(s) that are missing rows in the returned dataset. ",
@@ -432,8 +434,9 @@ redcap_read <- function(
     stop(sprintf(
       message_template,
       length(ids_missing_rows),
-      paste(ids_missing_rows, collapse=",")
+      paste(ids_missing_rows, collapse = ",")
     ))
+    # nocov end
   }
 
   elapsed_seconds          <- as.numeric(difftime( Sys.time(), start_time, units="secs"))

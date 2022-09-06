@@ -1,4 +1,6 @@
-#' @name validate
+#' @name
+#' validate
+#'
 #' @aliases
 #' validate_for_write
 #' validate_no_logical
@@ -14,16 +16,19 @@
 #'
 #' validate_field_names_collapsed( field_names_collapsed, stop_on_error = FALSE )
 #'
-#' @title Inspect a dataset to anticipate problems before
+#' @title
+#' Inspect a dataset to anticipate problems before
 #' writing to a REDCap project
 #'
-#' @description This set of functions inspect a [base::data.frame()] to
-#' anticipate problems before writing with REDCap's API.
+#' @description
+#' This set of functions inspect a data frame
+#' to anticipate problems before writing with REDCap's API.
 #'
-#' @param d The [base::data.frame()] containing the dataset used to update
+#' @param d The [base::data.frame()] or [tibble::tibble()]
+#' containing the dataset used to update
 #' the REDCap project.
-#' @param data_types The data types of the [base::data.frame()] corresponding
-#'  to the REDCap project.
+#' @param data_types The data types of the data frame corresponding
+#' to the REDCap project.
 #' @param field_names The names of the fields/variables in the REDCap project.
 #' Each field is an individual element in the character vector.
 #' @param field_names_collapsed  The names of the fields/variables in the
@@ -32,9 +37,10 @@
 #' @param stop_on_error If `TRUE`, an error is thrown for violations.
 #' Otherwise, a dataset summarizing the problems is returned.
 #'
-#' @return A [tibble::tibble()], where each potential violation is a row.
+#' @return
+#' A [tibble::tibble()], where each potential violation is a row.
 #' The two columns are:
-#' * `field_name`: The name of the [base::data.frame()] that might cause
+#' * `field_name`: The name of the field/column/variable that might cause
 #' problems during the upload.
 #' * `field_index`: The position of the field.  (For example, a value of
 #' '1' indicates the first column, while a '3' indicates the third column.)
@@ -61,9 +67,11 @@
 #' [new issue](https://github.com/OuhscBbmc/REDCapR/issues), and we'll
 #' incorporate a new validation check into this function.
 #'
-#' @author Will Beasley
+#' @author
+#' Will Beasley
 #'
-#' @references The official documentation can be found on the 'API Help Page'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html).
@@ -156,6 +164,6 @@ validate_for_write <- function(d) {
     validate_field_names(colnames(d))
   )
 
-  # Vertically stack all the data.frames into a single data.frame
+  # Vertically stack all the data.frames into a single data frame
   dplyr::bind_rows(lst_concerns)
 }

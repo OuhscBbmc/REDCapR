@@ -21,8 +21,8 @@ to the R console during the operation.  The verbose output might contain
 sensitive information (\emph{e.g.} PHI), so turn this off if the output might
 be visible somewhere public. Optional.}
 
-\item{config_options}{A list of options to pass to \code{POST} method in the
-\code{httr} package.  See the details below. Optional.}
+\item{config_options}{A list of options passed to \code{\link[httr:POST]{httr::POST()}}.
+See details at \code{\link[httr:httr_options]{httr::httr_options()}}. Optional.}
 }
 \value{
 Currently, a list is returned with the following elements,
@@ -51,11 +51,6 @@ menu when entering data. The instruments will be ordered according to
 their order in the project.
 (Copied from "Export Instruments (Data Entry Forms)" method of
 REDCap API documentation, v.10.5.1)
-}
-\details{
-The full list of configuration options accepted by the \code{httr} package is
-viewable by executing \code{\link[httr:httr_options]{httr::httr_options()}}.  The \code{httr} package and
-documentation is available at https://cran.r-project.org/package=httr.
 }
 \examples{
 \dontrun{

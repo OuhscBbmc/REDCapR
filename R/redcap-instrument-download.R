@@ -1,6 +1,8 @@
-#' @title Download REDCap Instruments
+#' @title
+#' Download REDCap Instruments
 #'
-#' @description Download instruments as a pdf, with or without responses.
+#' @description
+#' Download instruments as a pdf, with or without responses.
 #'
 #' @param file_name The name of the file where the downloaded pdf is saved.
 #' Optional.
@@ -25,10 +27,11 @@
 #' only for the specified event from that record. Optional.
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  Optional.
-#' @param config_options  A list of options to pass to [httr::POST()] method
-#' in the 'httr' package.  See the details below. Optional.
+#' @param config_options A list of options passed to [httr::POST()].
+#' See details at [httr::httr_options()]. Optional.
 #'
-#' @return Currently, a list is returned with the following elements,
+#' @return
+#' Currently, a list is returned with the following elements,
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
 #' * `status_code`: The
@@ -49,9 +52,12 @@
 #' REDCap's supported variables.  See [validate_for_write()] for a helper
 #' function that checks for some common important conflicts.
 #'
-#' @author Will Beasley
+#' @author
 #'
-#' @references The official documentation can be found on the 'API Help Page'
+#' Will Beasley
+#'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html).
@@ -61,10 +67,10 @@
 #' @examples
 #' \dontrun{
 #' uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
-#' token   <- "D70F9ACD1EDD6F151C6EA78683944E98" #pid=213
+#' token   <- "D70F9ACD1EDD6F151C6EA78683944E98" # pid=213
 #' # event <- "" # only for longitudinal projects
 #'
-#' (full_name <- base::temp(pattern="instruments-all-records-all", fileext=".pdf"))
+#' (full_name <- base::temp(pattern="instruments-all-records-all", fileext = ".pdf"))
 #' result_1   <- REDCapR::redcap_download_instrument(
 #'   file_name     = full_name,
 #'   redcap_uri    = uri,
@@ -72,7 +78,7 @@
 #' )
 #' base::unlink(full_name)
 #'
-#' (full_name <- base::tempfile(pattern="instruments-all-record-1-", fileext=".pdf"))
+#' (full_name <- base::tempfile(pattern="instruments-all-record-1-", fileext = ".pdf"))
 #' result_2   <- REDCapR::redcap_download_instrument(
 #'   record        = 5,
 #'   file_name     = full_name,
@@ -141,7 +147,7 @@ redcap_download_instrument <- function(
     file_path <- if (missing(directory) && is.null(directory)) {
       file_name # Use relative path.
     } else {
-      file.path(directory, file_name) #Qualify the file with its full path.
+      file.path(directory, file_name) # Qualify the file with its full path.
     }
 
     if (verbose)

@@ -13,7 +13,10 @@ vignette: >
 
 This vignette covers the the less-typical uses of [REDCapR](https://github.com/OuhscBbmc/REDCapR) to interact with [REDCap](https://www.project-redcap.org/) through its API.
 
-```{r set_options, echo=FALSE, results='hide'}
+```{r set_options}
+#| echo    = FALSE,
+#| results = 'hide'
+
 report_render_start_time <- Sys.time()
 
 library(knitr)
@@ -69,7 +72,9 @@ Converting from tall/long to wide
 
 However we like going wide to produce visual tables for publications, and here's one way to do it in R. First retrieve the dataset from REDCap.
 
-```{r retrieve-longitudinal, results='hold'}
+```{r retrieve-longitudinal}
+#| results = 'hold'
+
 library(magrittr)
 suppressPackageStartupMessages(requireNamespace("dplyr"))
 suppressPackageStartupMessages(requireNamespace("tidyr"))
@@ -82,7 +87,9 @@ ds_long %>%
 
 When widening only one variable (*e.g.*, `pmq1`), the code's pretty simple:
 
-```{r widen-simple, results='hold'}
+```{r widen-simple}
+#| results = 'hold'
+
 ds_wide <-
   ds_long %>%
   dplyr::select(study_id, redcap_event_name, pmq1) %>%
@@ -92,12 +99,10 @@ ds_wide <-
     names_from  = redcap_event_name,
     values_from = pmq1
   )
-  # For old versions of tidyr that predate `pivot_wider()`:
-  # tidyr::spread(key=redcap_event_name, value=pmq1)
 ds_wide
 ```
 
-In some scenarios, multiple variables (*e.g.*, `pmq1` - `pmq4`) can be widened in a single `tidyr::pivot_wider()` operation.  This example contains the additional wrinkle that the REDCap event names "first_dose" and "first_visit" are renamed "dose_1" and "visit_1", which will help all the values be dose and visit values be proper numbers.
+In some scenarios, multiple variables (*e.g.*, `pmq1` - `pmq4`) can be widened in a single [`tidyr::pivot_wider()`](https://tidyr.tidyverse.org/reference/pivot_wider.html) operation.  This example contains the additional wrinkle that the REDCap event names "first_dose" and "first_visit" are renamed "dose_1" and "visit_1", which will help all the values be dose and visit values be proper numbers.
 
 ```{r widen-typical}
 pattern <- "^(\\w+?)_arm_(\\d)$"

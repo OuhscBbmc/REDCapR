@@ -1,7 +1,9 @@
-#' @title Creates a dataset that help batching long-running
+#' @title
+#' Creates a dataset that help batching long-running
 #' read and writes
 #'
-#' @description The function returns a [base::data.frame()] that other
+#' @description
+#' The function returns a [base::data.frame()] that other
 #' functions use to separate long-running read and write REDCap calls into
 #' multiple, smaller REDCap calls.  The goal is to (1) reduce the chance of
 #' time-outs, and (2) introduce little breaks between batches so that the
@@ -11,7 +13,8 @@
 #' @param batch_size The maximum number of subject records a single batch
 #' should contain.
 
-#' @return Currently, a [base::data.frame()] is returned with the following
+#' @return
+#' Currently, a [base::data.frame()] is returned with the following
 #' columns,
 #' * `id`: an `integer` that uniquely identifies the batch, starting at `1`.
 #' * `start_index`: the index of the first row in the batch. `integer`.
@@ -26,10 +29,11 @@
 #'
 #' @details
 #' This function can also assist splitting and saving a large
-#' [base::data.frame()] to disk as smaller files (such as a .csv).  The
+#' data frame to disk as smaller files (such as a .csv).  The
 #' padded columns allow the OS to sort the batches/files in sequential order.
 #'
-#' @author Will Beasley
+#' @author
+#' Will Beasley
 #'
 #' @seealso
 #' See [redcap_read()] for a function that uses `create_batch_glossary`.

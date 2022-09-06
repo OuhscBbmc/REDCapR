@@ -45,19 +45,19 @@ populate_project_simple <- function(batch = FALSE) {
   testthat::expect_message(
     returned_object <- if (batch) {
       REDCapR::redcap_write(
-        ds          = ds_to_write,
-        redcap_uri  = project$redcap_uri,
-        token       = project$token,
-        verbose     = TRUE,
-        convert_logical_to_integer = TRUE
+        ds                          = ds_to_write,
+        redcap_uri                  = project$redcap_uri,
+        token                       = project$token,
+        verbose                     = TRUE,
+        convert_logical_to_integer  = TRUE
       )
     } else {
       REDCapR::redcap_write_oneshot(
-        ds          = ds_to_write,
-        redcap_uri  = project$redcap_uri,
-        token       = project$token,
-        verbose     = TRUE,
-        convert_logical_to_integer = TRUE
+        ds                          = ds_to_write,
+        redcap_uri                  = project$redcap_uri,
+        token                       = project$token,
+        verbose                     = TRUE,
+        convert_logical_to_integer  = TRUE
       )
     }
   )
@@ -77,6 +77,7 @@ populate_project_simple <- function(batch = FALSE) {
   ))
   list(is_success = returned_object$success, redcap_project = project)
 }
+
 clear_project_simple <- function(verbose = TRUE) {
   if (!requireNamespace("testthat")) {
     # nocov start
@@ -120,14 +121,14 @@ clean_start_simple <- function(batch = FALSE, delay_in_seconds = 1) {
     regexp = "clear_project_simple success: TRUE."
   )
   testthat::expect_true(clear_result, "Clearing the results from the simple project should be successful.")
-  base::Sys.sleep(delay_in_seconds) #Pause after deleting records.
+  base::Sys.sleep(delay_in_seconds) # Pause after deleting records.
 
   testthat::expect_message(
     populate_result <- populate_project_simple(batch = batch),
     regexp = "populate_project_simple success: TRUE."
   )
   testthat::expect_true(populate_result$is_success, "Population of the simple project should be successful.")
-  base::Sys.sleep(delay_in_seconds) #Pause after writing records.
+  base::Sys.sleep(delay_in_seconds) # Pause after writing records.
 
   populate_result
 }

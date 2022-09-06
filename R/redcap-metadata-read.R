@@ -1,6 +1,8 @@
-#' @title Export the metadata of a REDCap project
+#' @title
+#' Export the metadata of a REDCap project
 #'
-#' @description Export the metadata (as a data dictionary) of a REDCap project
+#' @description
+#' Export the metadata (as a data dictionary) of a REDCap project
 #' as a [tibble::tibble()]. Each row in the data dictionary corresponds to
 #' one field in the project's dataset.
 #'
@@ -23,10 +25,11 @@
 #' to the R console during the operation.  The verbose output might contain
 #' sensitive information (*e.g.* PHI), so turn this off if the output might
 #' be visible somewhere public. Optional.
-#' @param config_options  A list of options to pass to `POST` method in the
-#' `httr` package.  See the details in [redcap_read_oneshot()]. Optional.
+#' @param config_options A list of options passed to [httr::POST()].
+#' See details at [httr::httr_options()]. Optional.
 #'
-#' @return Currently, a list is returned with the following elements:
+#' @return
+#' Currently, a list is returned with the following elements:
 #'
 #' * `data`: An R [tibble::tibble()] of the desired fields (as rows).
 #' * `success`: A boolean value indicating if the operation was apparently
@@ -43,9 +46,11 @@
 #' string, separated by commas.
 #' * `elapsed_seconds`: The duration of the function.
 #'
-#' @author Will Beasley
+#' @author
+#' Will Beasley
 #'
-#' @references The official documentation can be found on the 'API Help Page'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html).

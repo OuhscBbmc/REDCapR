@@ -1,6 +1,8 @@
-#' @title Read/Export records that populate a REDCap report
+#' @title
+#' Read/Export records that populate a REDCap report
 #'
-#' @description Exports the data set of a report created on a project's
+#' @description
+#' Exports the data set of a report created on a project's
 #' 'Data Exports, Reports, and Stats' page.
 #'
 #' @param redcap_uri The
@@ -35,10 +37,11 @@
 #' to the R console during the operation.  The verbose output might contain
 #' sensitive information (*e.g.* PHI), so turn this off if the output might
 #' be visible somewhere public. Optional.
-#' @param config_options  A list of options to pass to `POST` method in the
-#' `httr` package.  See the details below. Optional.
+#' @param config_options A list of options passed to [httr::POST()].
+#' See details at [httr::httr_options()]. Optional.
 #'
-#' @return Currently, a list is returned with the following elements:
+#' @return
+#' Currently, a list is returned with the following elements:
 #' * `data`: A [tibble::tibble()] of the desired records and columns.
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
@@ -52,14 +55,11 @@
 #' REDCap.  If an operation is successful, the `raw_text` is returned as an
 #' empty string to save RAM.
 #'
-#' @details
-#' The full list of configuration options accepted by the `httr` package is
-#' viewable by executing [httr::httr_options()].  The `httr` package and
-#' documentation is available at https://cran.r-project.org/package=httr.
+#' @author
+#' Will Beasley
 #'
-#' @author Will Beasley
-#'
-#' @references The official documentation can be found on the 'API Help Page'
+#' @references
+#' The official documentation can be found on the 'API Help Page'
 #' and 'API Examples' pages on the REDCap wiki (*i.e.*,
 #' https://community.projectredcap.org/articles/456/api-documentation.html and
 #' https://community.projectredcap.org/articles/462/api-examples.html).
@@ -212,14 +212,15 @@ redcap_report <- function(
     }
   } else { # kernel fails
     ds              <- tibble::tibble() # Return an empty data.frame
-    outcome_message <- if (any(grepl(kernel$regex_empty, kernel$raw_text))) {
-      "The REDCapR report operation was not successful.  The returned dataset was empty."  # nocov
-    } else {
-      sprintf(
-        "The REDCapR report operation was not successful.  The error message was:\n%s",
-        kernel$raw_text
-      )
-    }
+    outcome_message <-
+      if (any(grepl(kernel$regex_empty, kernel$raw_text))) {
+        "The REDCapR report operation was not successful.  The returned dataset was empty."  # nocov
+      } else {
+        sprintf(
+          "The REDCapR report operation was not successful.  The error message was:\n%s",
+          kernel$raw_text
+        )
+      }
   }
 
   if (verbose)

@@ -35,8 +35,8 @@ Optional}
 \item{verbose}{A boolean value indicating if \code{message}s should be printed
 to the R console during the operation.  Optional.}
 
-\item{config_options}{A list of options to pass to \code{\link[httr:POST]{httr::POST()}} method
-in the 'httr' package.  See the details below. Optional.}
+\item{config_options}{A list of options passed to \code{\link[httr:POST]{httr::POST()}}.
+See details at \code{\link[httr:httr_options]{httr::httr_options()}}. Optional.}
 }
 \value{
 Currently, a list is returned with the following elements,
@@ -73,7 +73,7 @@ To use this method, you must have API Export privileges in the project.
 \examples{
 \dontrun{
 uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
-token   <- "8FA9A6BDAE2C0B5DD3CB472DD8E8918C" #pid=817
+token   <- "8FA9A6BDAE2C0B5DD3CB472DD8E8918C" # pid=817
 record  <- 1
 instrument   <- "participant_morale_questionnaire"
 # event <- "" # only for longitudinal projects

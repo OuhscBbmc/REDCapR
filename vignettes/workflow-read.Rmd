@@ -9,7 +9,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r}
+#| include = FALSE
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -224,7 +225,7 @@ Part 5 - Read Data: Structured Approach
 
 As the automation of your scripts matures and institutional resources depend on its output, its output should be stable.  One way to make it more predictable is to specify the column names *and* the column data types.  In the previous example, notice that R (specifically [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html)) made its best guess and reported it in the "Column specification" section.
 
-In the following example, REDCapR passes `col_types` to [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html)) as it converts the plain-text output returned from REDCap into an R [`data.frame`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html). 
+In the following example, REDCapR passes `col_types` to [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html)) as it converts the plain-text output returned from REDCap into an R data frame. (To be precise, a [tibble](https://tibble.tidyverse.org/) is returned.)
 
 When readr sees a column with values like 1, 2, 3, and 4, it will make the reasonable guess that the column should be a double precision floating-point data type.  However we [recommend using the simplest data type reasonable](https://ouhscbbmc.github.io/data-science-practices-1/coding.html#coding-simplify-types) because a simpler data type is less likely contain unintended values and it's typically faster, consumes less memory, and translates more cleanly across platforms.  As specifically for identifiers like `record_id` specify either an integer or character.
 
