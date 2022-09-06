@@ -9,26 +9,28 @@ Description: Encapsulates functions to streamline calls from R to the REDCap
 Version: 1.1.9003
 Authors@R: c(person("Will", "Beasley", role = c("aut", "cre"), email =
     "wibeasley@hotmail.com", comment = c(ORCID = "0000-0002-5613-5006")),
-    person("David", "Bard", role = "ctb"),
+    person("David", "Bard", role = "ctb", comment = c(ORCID = "0000-0002-3922-8489")),
     person("Thomas", "Wilson", role = "ctb"), person(given="John J",
     family="Aponte", role = "ctb", email="john.aponte@isglobal.org"),
     person("Rollie", "Parrish", role = "ctb", email =
-    "rparrish@flightweb.com"), person("Benjamin", "Nutter",
+    "rparrish@flightweb.com", comment = c(ORCID = "0000-0001-8858-6381")), 
+    person("Benjamin", "Nutter",
     role = "ctb"), person("Andrew", "Peters",
-    role = "ctb"), person("Hao", "Zhu",
+    role = "ctb", comment = c(ORCID = "0000-0003-2487-1268")), person("Hao", "Zhu",
     role = "ctb",
-    comment = c(ORCID = '0000-0002-3386-6076')), person("Janosch", "Linkersdörfer",
+    comment = c(ORCID = "0000-0002-3386-6076")), person("Janosch", "Linkersdörfer",
     role = "ctb",
-    comment = c(ORCID = '0000-0002-1577-1233')), person("Jonathan", "Mang",
+    comment = c(ORCID = "0000-0002-1577-1233")), person("Jonathan", "Mang",
     role = "ctb",
-    comment = c(ORCID = '0000-0003-0518-4710')), person("Felix", "Torres",
+    comment = c(ORCID = "0000-0003-0518-4710")), person("Felix", "Torres",
     role = "ctb", email = "fetorres@ucsd.edu"), person("Philip", "Chase",
-    role = "ctb", email = "pbc@ufl.edu"), person("Victor", "Castro",
+    role = "ctb", email = "pbc@ufl.edu",
+    comment = c(ORCID = "0000-0002-5318-9420")), person("Victor", "Castro",
     role = "ctb", email = "vcastro@mgh.harvard.edu",
-    comment = c(ORCID = '0000-0001-7390-6354')), person("Greg", "Botwin",
+    comment = c(ORCID = "0000-0001-7390-6354")), person("Greg", "Botwin",
     role = "ctb"), person("Stephan", "Kadauke",
     role = "ctb",
-    comment = c(ORCID = '0000-0003-2996-8034')))
+    comment = c(ORCID = "0000-0003-2996-8034")))
 URL: https://ouhscbbmc.github.io/REDCapR/, https://github.com/OuhscBbmc/REDCapR, https://www.ouhsc.edu/bbmc/, https://project-redcap.org
 BugReports: https://github.com/OuhscBbmc/REDCapR/issues
 Depends:
