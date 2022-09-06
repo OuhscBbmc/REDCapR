@@ -9,29 +9,38 @@
 #' Trailing line endings are removed.
 #'
 #' A typical user does not call this function directly.  However functions like
-#' [`redcap_read()`](redcap_read) call it to provide a more informative
+#' [redcap_read()] call it to provide a more informative
 #' error message to the user.
 #'
-#' Some institutions create their own tokens not the standard
+#' Some institutions create their own tokens --not the standard
 #' 32-character hexadecimal value.  The pattern that validates their tokens
 #' can be specified with the system environmental variable
 #' `REDCAP_TOKEN_PATTERN` using
 #' [base::Sys.setenv].
 #'
 #' For example, the following regex pattern captures a
-#' [base64 encoded value]() with 40 characters:
+#' [base64 encoded value](https://en.wikipedia.org/wiki/Base64)
+#' with 40 characters (as opposed to a hexadecimal/base16 value
+#' with 32 characters):
 #' `^([A-Za-z\\d+/\\+=]{40})$`.
 #' See <https://regexland.com/base64/> for alternative approaches to validate
 #' base64 values.
 #'
-#' If no pattern is specified, the default is 32-character hex token:
+#' If no pattern is specified, the default is a 32-character hex token:
 #' `^([0-9A-Fa-f]{32})(?:\\n)?$`.  The important segment is contained in the
-#' first (and only) capturing group.  Any trailing newline character is removed.
+#' first (and only) capturing group
+#' (*i.e.*, `[0-9A-Fa-f]{32}`).
+#' Any trailing newline character is removed.
 #'
 #' @param token The REDCap token. Required.
 #'
 #' @return
 #' The token, without a terminal newline character.
+#'
+#' @details
+#' Although the function does not accept a parameter,
+#' it is influenced by the `REDCAP_TOKEN_PATTERN`
+#' environmental variable.
 #'
 #' @note
 #' Contact your institution's REDCap administrator for more information
