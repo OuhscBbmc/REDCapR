@@ -43,9 +43,7 @@ r$headers$status
 r$headers$statusmessage
 raw_text <- httr::content(r, "text")
 
-ds_eav <- readr::read_csv(raw_text)
-# ds_csv <- readr::read_csv(raw_text)
-# ds_json <- jsonlite::fromJSON(raw_text)
+ds_eav <- readr::read_csv(raw_text, show_col_types  = FALSE)
 })
 
 # ds_eav$field_name
@@ -53,31 +51,37 @@ ds_eav <- readr::read_csv(raw_text)
 
 # ---- tweak-data --------------------------------------------------------------
 
+if (!"event_id" %in% colnames(ds_eav)) {
+  ds_eav$event_id <- "dummy_1"
+}
+
 ds_metadata_expanded <-
   ds_metadata %>%
-  dplyr::select(field_name, select_choices_or_calculations, field_type) %>%
+  dplyr::select(.data$field_name, .data$select_choices_or_calculations, .data$field_type) %>%
   dplyr::mutate(
-    is_checkbox  = (field_type=="checkbox"),
-    ids   = dplyr::if_else(is_checkbox, select_choices_or_calculations, "1"),
-    ids   = gsub("(\\d+),.+?(\\||$)", "\\1", ids),
-    ids   = strsplit(ids, " ")
+    is_checkbox   = (.data$field_type == "checkbox"),
+    ids           = dplyr::if_else(.data$is_checkbox, .data$select_choices_or_calculations, "1"),
+    ids           = gsub("(\\d+),.+?(\\||$)", "\\1", .data$ids),
+    ids           = strsplit(.data$ids, " ")
   ) %>%
-  dplyr::select(-select_choices_or_calculations, -field_type) %>%
-  tidyr::unnest(ids) %>%
+  dplyr::select(-.data$select_choices_or_calculations, -.data$field_type) %>%
+  tidyr::unnest(.data$ids) %>%
   dplyr::transmute(
-    is_checkbox,
-    field_name          = dplyr::if_else(is_checkbox, paste0(field_name, "___", ids), field_name)
-  ) %>%
-  tibble::as_tibble()
+    .data$is_checkbox,
+    field_name          = dplyr::if_else(.data$is_checkbox, paste0(.data$field_name, "___", .data$ids), .data$field_name)
+  )
 
-ds_possible_checkbox_rows <-
+distinct_checkboxes <-
   ds_metadata_expanded %>%
-  dplyr::filter(is_checkbox) %>%
-  .[["field_name"]] %>%
+  dplyr::filter(.data$is_checkbox) %>%
+  dplyr::pull(.data$field_name)
+
+ds_possible_checkbox_rows  <-
   tidyr::crossing(
-    field_name = .,
-    record     = dplyr::distinct(ds_eav, record),
-    field_type = "checkbox"
+    field_name = distinct_checkboxes,
+    record     = unique(ds_eav$record),
+    field_type = "checkbox",
+    event_id   =  unique(ds_eav$event_id)
   )
 
 # ds_metadata %>%
@@ -85,39 +89,39 @@ ds_possible_checkbox_rows <-
 #   dplyr::select_("field_name")
 variables_to_keep <-
   ds_metadata_expanded %>%
-  dplyr::select(field_name) %>%
+  dplyr::select(.data$field_name) %>%
   dplyr::union(
     ds_variable %>%
-      dplyr::select_("field_name" = "export_field_name") %>%
-      dplyr::filter(grepl("^\\w+?_complete$", field_name))
+      dplyr::select(field_name = .data$export_field_name) %>%
+      dplyr::filter(grepl("^\\w+?_complete$", .data$field_name))
   ) %>%
-  .[["field_name"]] %>%
-  rev()
+  dplyr::pull(.data$field_name) #%>% rev()
 
 ds_eav_2 <-
   ds_eav %>%
   dplyr::left_join(
     ds_metadata %>%
-      dplyr::select(field_name, field_type),
+      dplyr::select(.data$field_name, .data$field_type),
     by = "field_name"
   ) %>%
   dplyr::mutate(
-    field_name = dplyr::if_else(!is.na(field_type) & (field_type=="checkbox"), paste0(field_name, "___", value), field_name)
+    field_name = dplyr::if_else(!is.na(.data$field_type) & (.data$field_type == "checkbox"), paste0(.data$field_name, "___", .data$value), .data$field_name)
   ) %>%
-  dplyr::full_join(ds_possible_checkbox_rows, by=c("record", "field_name", "field_type")) %>%
+  dplyr::full_join(ds_possible_checkbox_rows, by=c("record", "field_name", "field_type", "event_id")) %>%
   dplyr::mutate(
-    value      = dplyr::if_else(!is.na(field_type) & (field_type=="checkbox"), as.character(!is.na(value))                        , value     )
+    value      = dplyr::if_else(!is.na(.data$field_type) & (.data$field_type == "checkbox"), as.character(!is.na(.data$value)), .data$value)
   )
-
 ds <-
   ds_eav_2 %>%
-  dplyr::select(-field_type) %>%
-  tidyr::spread(key=field_name, value=value) %>%
-  dplyr::select_(.dots=variables_to_keep)
+  dplyr::select(-.data$field_type) %>%
+  # dplyr::select(-.data$redcap_repeat_instance) %>%        # TODO: need a good fix for repeats
+  # tidyr::drop_na(event_id) %>%                            # TODO: need a good fix for repeats
+  tidyr::spread(key = .data$field_name, value = .data$value) %>%
+  dplyr::select(.data = ., !!intersect(variables_to_keep, colnames(.)))
 
 ds_2 <-
   ds %>%
-  dplyr::mutate_if(is.character, type.convert) %>%
+  dplyr::mutate_if(is.character, ~type.convert(., as.is = FALSE)) %>%
   dplyr::mutate_if(is.factor   , as.character)
 
 
