@@ -155,6 +155,56 @@ redcap_metadata_coltypes <- function(
   config_options                = NULL
 ) {
 
+  meat <-
+    redcap_metadata_internal(
+      redcap_uri,
+      token,
+      http_response_encoding,
+      locale,
+      verbose,
+      config_options
+    )$d_variable %>%
+    dplyr::pull(.data$aligned)
+
+  # Construct an explanation header that's aligned with the col_types output
+  gaps <- unlist(gregexpr("[=#]", meat[1]))
+  header <- sprintf(
+    "  # %-*s %-*s %s\n",
+    gaps[1] - 4,
+    "[field]",
+    gaps[2] - gaps[1] - 1,
+    "[readr col_type]",
+    "[explanation for col_type]"
+  )
+
+  # Sandwich the col_types output in between the opening+header and the closing
+  sandwich <-
+    # I'd prefer this approach, but the `.` is causing problems with R CMD check.
+    paste0(
+      "# col_types <- readr::cols_only( # Use `readr::cols_only()` to restrict the retrieval to only these columns\n",
+      "col_types <- readr::cols( # Use `readr::cols()` to include unspecified columns\n",
+      header,
+      paste(meat, collapse = "\n") ,
+      "\n)\n"
+    )
+
+  sandwich %>%
+    message()
+
+  eval(str2expression(sandwich))
+}
+
+#' @importFrom magrittr %>%
+redcap_metadata_internal <- function(
+    redcap_uri,
+    token,
+
+    http_response_encoding        = "UTF-8",
+    locale                        = readr::default_locale(),
+    verbose                       = FALSE,
+    config_options                = NULL
+) {
+
   checkmate::assert_character(redcap_uri                , any.missing=FALSE, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=FALSE, len=1, pattern="^.{1,}$")
 
@@ -250,7 +300,8 @@ redcap_metadata_coltypes <- function(
   # [1] "signature"   "file_upload" "descriptive"
 
   # Translate the four datasets into a single `readr:cols()` string printed to the console
-  meat <-
+  # meat <-
+  d <-
     d_meta %>%
     dplyr::mutate(
       autonumber  = (.autonumber & (.data$field_name == .record_field)),
@@ -339,32 +390,18 @@ redcap_metadata_coltypes <- function(
       # Pad the left side before appending the right side.
       aligned = sprintf("  %-*s = readr::%-*s, # %s", .data$padding1, .data$field_name, .data$padding2, .data$readr_col_type, .data$explanation)
     ) %>%
-    dplyr::pull(.data$aligned)
-
-  # Construct an explanation header that's aligned with the col_types output
-  gaps <- unlist(gregexpr("[=#]", meat[1]))
-  header <- sprintf(
-    "  # %-*s %-*s %s\n",
-    gaps[1] - 4,
-    "[field]",
-    gaps[2] - gaps[1] - 1,
-    "[readr col_type]",
-    "[explanation for col_type]"
-  )
-
-  # Sandwich the col_types output in between the opening+header and the closing
-  sandwich <-
-    # I'd prefer this approach, but the `.` is causing problems with R CMD check.
-    paste0(
-      "# col_types <- readr::cols_only( # Use `readr::cols_only()` to restrict the retrieval to only these columns\n",
-      "col_types <- readr::cols( # Use `readr::cols()` to include unspecified columns\n",
-      header,
-      paste(meat, collapse = "\n") ,
-      "\n)\n"
+    dplyr::select(
+      .data$field_name,
+      .data$field_type,
+      validation_type           = .data$vt,
+      .data$autonumber,
+      # .data$response,
+      .data$readr_col_type,
+      # .data$explanation,
+      # .data$padding1,
+      # .data$padding2,
+      .data$aligned,
     )
-
-  sandwich %>%
-    message()
 
   decimal_period_any <- any(d_meta$vt %in% c("number", "number_1dp", "number_2dp", "number_3dp", "number_4dp" ))
   decimal_comma_any  <- any(d_meta$vt %in% c("number_comma_decimal", "number_1dp_comma_decimal", "number_2dp_comma_decimal", "number_3dp_comma_decimal", "number_4dp_comma_decimal"))
@@ -382,5 +419,7 @@ redcap_metadata_coltypes <- function(
     )
   }
 
-  eval(str2expression(sandwich))
+  list(
+    d_variable = d
+  )
 }
