@@ -1,0 +1,99 @@
+---
+title: "Retrieving Longitudinal and Repeating Structures"
+author: Will Beasley [Biomedical & Behavior Methodology Core](https://www.ouhsc.edu/bbmc/team/), OUHSC Pediatrics
+output:
+  rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Retrieving Longitudinal and Repeating Structures
+  }
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+#| include = FALSE
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  tidy    = FALSE
+)
+```
+
+
+| `pt` | `height` | `weight` | `bmi`  |
+| ---: | -------: | -------: | -----: |
+|    1 |     11.0 |    111.0 | 1111.0 |
+|    2 |     22.0 |    222.0 | 2222.0 |
+
+| `pt` | `key`  | `value` |
+| ---: | :----- | ------: |
+|    1 | height |     1.0 |
+|    1 | weight |    11.0 |
+|    1 | bmi    |   111.0 |
+|    2 | height |     2.0 |
+|    2 | weight |    22.0 |
+|    2 | bmi    |   222.0 |
+
+| `pt` | `time` | `sbp` | `dbp` |
+| ---: | -----: | ----: | ----: |
+|    1 |      1 |  11.1 | 111.1 |
+|    1 |      2 |  11.2 | 111.2 |
+|    1 |      3 |  11.3 | 111.3 |
+|    2 |      1 |  22.1 | 222.1 |
+|    2 |      2 |  22.2 | 222.2 |
+|    2 |      3 |  22.3 | 222.3 |
+
+| `pt` | `time` | `med` | `dose` |
+| ---: | -----: | ----: | -----: |
+|    1 |      1 |   aa1 | 1.1 mg |
+|    1 |      2 |   aa2 | 1.2 mg |
+|    1 |      3 |   aa3 | 1.3 mg |
+|    2 |      1 |   bb1 | 2.1 mg |
+|    2 |      2 |   bb2 | 2.2 mg |
+|    2 |      3 |   bb3 | 2.3 mg |
+
+
+| `pt` | `repeat instrument` |`repeat instance` | `key` | `value` |
+| ---: | ------------------: | ---------------: | ----: | ------: |
+|    1 |                  bp |                1 |   sbp |    11.1 |
+|    1 |                  bp |                1 |   dbp |   111.1 |
+|    1 |          medication |                1 |   med |     aa1 |
+|    1 |          medication |                1 |  dose |  1.1 mg |
+|    1 |                  bp |                2 |   sbp |    11.2 |
+|    1 |                  bp |                2 |   dbp |   111.2 |
+|    1 |          medication |                2 |   med |     aa2 |
+|    1 |          medication |                2 |  dose |  1.2 mg |
+|    1 |                  bp |                3 |   sbp |    11.3 |
+|    1 |                  bp |                3 |   dbp |   111.3 |
+|    1 |          medication |                3 |   med |     aa3 |
+|    1 |          medication |                3 |  dose |  1.3 mg |
+|    2 |                  bp |                1 |   sbp |    22.1 |
+|    2 |                  bp |                1 |   dbp |   222.1 |
+|    1 |          medication |                1 |   med |     bb1 |
+|    1 |          medication |                1 |  dose |  2.1 mg |
+|    2 |                  bp |                2 |   sbp |    22.2 |
+|    2 |                  bp |                2 |   dbp |   222.2 |
+|    1 |          medication |                1 |   med |     bb2 |
+|    1 |          medication |                1 |  dose |  2.2 mg |
+|    2 |                  bp |                3 |   sbp |    22.3 |
+|    2 |                  bp |                3 |   dbp |   222.3 |
+|    1 |          medication |                1 |   med |     bb3 |
+|    1 |          medication |                1 |  dose |  2.3 mg |
+
+
+| `pt` | `repeat instrument` | `repeat instance` | `height` | `weight` |  `bmi` | `sbp`  | `dbp`   | `med` | `dose`   |
+| ---- | :-----------------: | ----------------: | -------: | -------: | -----: | -----: | ------: | ----: |  ------: |
+|    1 |                  -- |                -- |       11 |      111 |   1111 |     -- |      -- |    -- |       -- |
+|    1 | bp                  |                 1 |       -- |       -- |     -- |   11.1 |   111.1 |    -- |       -- |
+|    1 | med                 |                 1 |       -- |       -- |     -- |     -- |      -- |   aa1 |   1.1 mg |
+|    1 | bp                  |                 2 |       -- |       -- |     -- |   11.2 |   111.2 |    -- |       -- |
+|    1 | med                 |                 2 |       -- |       -- |     -- |     -- |      -- |   aa2 |   1.2 mg |
+|    1 | bp                  |                 3 |       -- |       -- |     -- |   11.3 |   111.3 |    -- |       -- |
+|    1 | med                 |                 3 |       -- |       -- |     -- |     -- |      -- |   aa3 |   1.3 mg |
+|    2 |                 --  |                -- |       22 |      222 |   2222 |     -- |      -- |    -- |       -- |
+|    2 | bp                  |                 1 |       -- |       -- |     -- |   22.1 |   222.1 |    -- |       -- |
+|    2 | med                 |                 1 |       -- |       -- |     -- |     -- |      -- |   bb1 |   2.1 mg |
+|    2 | bp                  |                 2 |       -- |       -- |     -- |   22.2 |   222.2 |    -- |       -- |
+|    2 | med                 |                 2 |       -- |       -- |     -- |     -- |      -- |   bb2 |   2.2 mg |
+|    2 | bp                  |                 3 |       -- |       -- |     -- |   22.3 |   222.3 |    -- |       -- |
+|    2 | med                 |                 3 |       -- |       -- |     -- |     -- |      -- |   bb3 |   2.3 mg |
