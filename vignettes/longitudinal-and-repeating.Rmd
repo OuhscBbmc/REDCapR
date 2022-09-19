@@ -19,11 +19,20 @@ knitr::opts_chunk$set(
 )
 ```
 
+Suppose you have two patients (*i.e.*, "1" and "2") with three intake variables (*i.e.*, `height`, `weight`, and `bmi`).  If you were write this on a piece of paper, it would probably look like the following table.  The table's *grain* is "patient", because each row represents a distinct patient.  Understanding the grain of each structure below will help you understand how the structures are re-expressions of the same set of observations.
 
-| `pt` | `height` | `weight` | `bmi`  |
-| ---: | -------: | -------: | -----: |
-|    1 |     11.0 |    111.0 | 1111.0 |
-|    2 |     22.0 |    222.0 | 2222.0 |
+**Table 1: patient grain** is the most natural presentation of the six initial observations.
+
+| `pt` | `height` | `weight` | `bmi` |
+| ---: | -------: | -------: | ----: |
+|    1 |      1.0 |     11.0 | 111.0 |
+|    2 |      2.0 |     22.0 | 222.0 |
+
+This patient-grain structure is how the data points are most comfortably inputted by research personnel into REDCap, and it is the default when exported through the browser and API.  However it is stored differently under the hood.
+
+REDCap's flexibility is a primary driver of its success.  Once a research team learns REDCap, it can reuse the knowledge to capture anything from qqq to qqq.  But to achieve this flexibility in the world of REDCap and EMR, data are stored along the observation grain.  In computer science, this is commonly called an EAV structure (which stands for entity-attribute-value).  The patient's ID is the entity, the variable type is the attribute, and the observed point is the value.  It can also be thought of as a "key-value store" nested within a patient (where "key" is a synonym of "attribute").  Notice that the two rows have morphed into six (skinnier) rows --one row per observation.
+
+**Table 2: observation grain** is how REDCap and EMR databases store observations in their underlying database.
 
 | `pt` | `key`  | `value` |
 | ---: | :----- | ------: |
@@ -34,66 +43,64 @@ knitr::opts_chunk$set(
 |    2 | weight |    22.0 |
 |    2 | bmi    |   222.0 |
 
+If the investigation gains a longitudinal or repeating component, it becomes necessary to include a new dimension
+
+**Table 3a: patient-time grain for BP instrument** is how
+
 | `pt` | `time` | `sbp` | `dbp` |
 | ---: | -----: | ----: | ----: |
-|    1 |      1 |  11.1 | 111.1 |
-|    1 |      2 |  11.2 | 111.2 |
-|    1 |      3 |  11.3 | 111.3 |
-|    2 |      1 |  22.1 | 222.1 |
-|    2 |      2 |  22.2 | 222.2 |
-|    2 |      3 |  22.3 | 222.3 |
+|    1 |      1 |   1.1 |  11.1 |
+|    1 |      2 |   1.2 |  11.2 |
+|    1 |      3 |   1.3 |  11.3 |
+|    2 |      1 |   2.1 |  22.1 |
+|    2 |      2 |   2.2 |  22.2 |
+|    2 |      3 |   2.3 |  22.3 |
 
-| `pt` | `time` | `med` | `dose` |
+**Table 3b: patient-time grain for laboratory instrument** is how
+
+| `pt` | `time` | `lab` | `dose` |
 | ---: | -----: | ----: | -----: |
-|    1 |      1 |   aa1 | 1.1 mg |
-|    1 |      2 |   aa2 | 1.2 mg |
 |    1 |      3 |   aa3 | 1.3 mg |
-|    2 |      1 |   bb1 | 2.1 mg |
-|    2 |      2 |   bb2 | 2.2 mg |
+|    1 |      4 |   aa4 | 1.4 mg |
 |    2 |      3 |   bb3 | 2.3 mg |
+|    2 |      4 |   bb4 | 2.4 mg |
 
 
-| `pt` | `repeat instrument` |`repeat instance` | `key` | `value` |
-| ---: | ------------------: | ---------------: | ----: | ------: |
-|    1 |                  bp |                1 |   sbp |    11.1 |
-|    1 |                  bp |                1 |   dbp |   111.1 |
-|    1 |          medication |                1 |   med |     aa1 |
-|    1 |          medication |                1 |  dose |  1.1 mg |
-|    1 |                  bp |                2 |   sbp |    11.2 |
-|    1 |                  bp |                2 |   dbp |   111.2 |
-|    1 |          medication |                2 |   med |     aa2 |
-|    1 |          medication |                2 |  dose |  1.2 mg |
-|    1 |                  bp |                3 |   sbp |    11.3 |
-|    1 |                  bp |                3 |   dbp |   111.3 |
-|    1 |          medication |                3 |   med |     aa3 |
-|    1 |          medication |                3 |  dose |  1.3 mg |
-|    2 |                  bp |                1 |   sbp |    22.1 |
-|    2 |                  bp |                1 |   dbp |   222.1 |
-|    1 |          medication |                1 |   med |     bb1 |
-|    1 |          medication |                1 |  dose |  2.1 mg |
-|    2 |                  bp |                2 |   sbp |    22.2 |
-|    2 |                  bp |                2 |   dbp |   222.2 |
-|    1 |          medication |                1 |   med |     bb2 |
-|    1 |          medication |                1 |  dose |  2.2 mg |
-|    2 |                  bp |                3 |   sbp |    22.3 |
-|    2 |                  bp |                3 |   dbp |   222.3 |
-|    1 |          medication |                1 |   med |     bb3 |
-|    1 |          medication |                1 |  dose |  2.3 mg |
+| `pt` | `repeat`<br>`instrument` |`repeat`<br>`instance` | `key` | `value`  |
+| ---: | -----------------------: | --------------------: | ----: | -------: |
+|    1 |                       bp |                     1 |   sbp |      1.1 |
+|    1 |                       bp |                     1 |   dbp |     11.1 |
+|    1 |                       bp |                     2 |   sbp |      1.2 |
+|    1 |                       bp |                     2 |   dbp |     11.2 |
+|    1 |               laboratory |                     3 |   lab |      aa3 |
+|    1 |               laboratory |                     3 |  conc |  1.3 ppm |
+|    1 |                       bp |                     3 |   sbp |      1.3 |
+|    1 |                       bp |                     3 |   dbp |     11.3 |
+|    1 |               laboratory |                     4 |   lab |      aa4 |
+|    1 |               laboratory |                     4 |  conc |  1.4 ppm |
+|    2 |                       bp |                     1 |   sbp |      2.1 |
+|    2 |                       bp |                     1 |   dbp |     22.1 |
+|    2 |                       bp |                     2 |   sbp |      2.2 |
+|    2 |                       bp |                     2 |   dbp |     22.2 |
+|    2 |               laboratory |                     3 |   lab |      bb3 |
+|    2 |               laboratory |                     3 |  conc |  2.3 ppm |
+|    2 |                       bp |                     3 |   sbp |      2.3 |
+|    2 |                       bp |                     3 |   dbp |     22.3 |
+|    2 |               laboratory |                     4 |   lab |      bb4 |
+|    2 |               laboratory |                     4 |  conc |  2.4 ppm |
 
 
-| `pt` | `repeat instrument` | `repeat instance` | `height` | `weight` |  `bmi` | `sbp`  | `dbp`   | `med` | `dose`   |
-| ---- | :-----------------: | ----------------: | -------: | -------: | -----: | -----: | ------: | ----: |  ------: |
-|    1 |                  -- |                -- |       11 |      111 |   1111 |     -- |      -- |    -- |       -- |
-|    1 | bp                  |                 1 |       -- |       -- |     -- |   11.1 |   111.1 |    -- |       -- |
-|    1 | med                 |                 1 |       -- |       -- |     -- |     -- |      -- |   aa1 |   1.1 mg |
-|    1 | bp                  |                 2 |       -- |       -- |     -- |   11.2 |   111.2 |    -- |       -- |
-|    1 | med                 |                 2 |       -- |       -- |     -- |     -- |      -- |   aa2 |   1.2 mg |
-|    1 | bp                  |                 3 |       -- |       -- |     -- |   11.3 |   111.3 |    -- |       -- |
-|    1 | med                 |                 3 |       -- |       -- |     -- |     -- |      -- |   aa3 |   1.3 mg |
-|    2 |                 --  |                -- |       22 |      222 |   2222 |     -- |      -- |    -- |       -- |
-|    2 | bp                  |                 1 |       -- |       -- |     -- |   22.1 |   222.1 |    -- |       -- |
-|    2 | med                 |                 1 |       -- |       -- |     -- |     -- |      -- |   bb1 |   2.1 mg |
-|    2 | bp                  |                 2 |       -- |       -- |     -- |   22.2 |   222.2 |    -- |       -- |
-|    2 | med                 |                 2 |       -- |       -- |     -- |     -- |      -- |   bb2 |   2.2 mg |
-|    2 | bp                  |                 3 |       -- |       -- |     -- |   22.3 |   222.3 |    -- |       -- |
-|    2 | med                 |                 3 |       -- |       -- |     -- |     -- |      -- |   bb3 |   2.3 mg |
+| `pt` | `repeat`<br>`instrument` | `repeat`<br>`instance` | `height` | `weight` | `bmi` | `sbp` | `dbp` | `lab` |  `conc` |
+| ---- | :----------------------: | ---------------------: | -------: | -------: | ----: | ----: | ----: | ----: | ------: |
+|    1 |                       -- |                     -- |      1.0 |     11.0 | 111.0 |    -- |    -- |    -- |      -- |
+|    1 | bp                       |                      1 |       -- |       -- |    -- |   1.1 |  11.1 |    -- |      -- |
+|    1 | bp                       |                      2 |       -- |       -- |    -- |   1.2 |  11.2 |    -- |      -- |
+|    1 | bp                       |                      3 |       -- |       -- |    -- |   1.3 |  11.3 |    -- |      -- |
+|    1 | lab                      |                      3 |       -- |       -- |    -- |    -- |    -- |   aa3 | 1.3 ppm |
+|    1 | lab                      |                      4 |       -- |       -- |    -- |    -- |    -- |   aa4 | 1.4 ppm |
+|    2 |                       -- |                     -- |      2.0 |     22.0 | 222.0 |    -- |    -- |    -- |      -- |
+|    2 | bp                       |                      1 |       -- |       -- |    -- |   2.1 |  22.1 |    -- |      -- |
+|    2 | bp                       |                      2 |       -- |       -- |    -- |   2.2 |  22.2 |    -- |      -- |
+|    2 | bp                       |                      3 |       -- |       -- |    -- |   2.3 |  22.3 |    -- |      -- |
+|    2 | lab                      |                      3 |       -- |       -- |    -- |    -- |    -- |   bb3 | 2.3 ppm |
+|    2 | lab                      |                      4 |       -- |       -- |    -- |    -- |    -- |   bb4 | 2.4 ppm |
