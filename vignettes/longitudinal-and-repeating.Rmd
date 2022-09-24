@@ -19,7 +19,17 @@ knitr::opts_chunk$set(
 )
 ```
 
-Suppose you have two patients (*i.e.*, "1" and "2") with three intake variables (*i.e.*, `height`, `weight`, and `bmi`).  If you write this on a piece of paper, it would probably look like the following table.  The table's *grain* is "patient", because each row represents a distinct patient.  Understanding the grain of each structure below will help you understand how the structures are re-expressions of the same set of observations.
+Background
+==================================================================
+
+If your REDCap project is longitudinal or contains repeating measures, a single call to the API (or a single export through the browser) will return a dataset that is not readily analyzed.  Instead, the dataset will resemble Table 5.  This isn't because of a software bug, but because you haven't told the software how you would like it structured.  There isn't a great way to jam this multidimensional space into a rectangle of points.  Our advice for querying REDCap is the same as querying any database system: request datasets that have a natural "grain" and assemble them as to best fit your analyses.
+
+If your project is not longitudinal and has not repeating measures, you can stop reading and simply call REDCapR's [redcap_read()].
+
+Illustration of How Data Points are Structured
+==================================================================
+
+Suppose you have two patients (*i.e.*, "1" and "2") with three intake variables (*i.e.*, `height`, `weight`, and `bmi`).  If you record this on a piece of paper, it would probably look like Table 1.  The table's *grain* is "patient", because each row represents a distinct patient.  Understanding the grain of each structure below will help you understand how the structures are re-expressions of the same set of observations.
 
 **Table 1: patient grain** is the most natural presentation of the six initial observations.
 
@@ -28,9 +38,9 @@ Suppose you have two patients (*i.e.*, "1" and "2") with three intake variables 
 |    1 |      1.0 |     11.0 | 111.0 |
 |    2 |      2.0 |     22.0 | 222.0 |
 
-This patient-grain structure is how the data points are most comfortably inputted by research personnel into REDCap, and it is the default when exported through the browser and API.  However it is stored differently under the hood.
+This patient-grain structure is how the data points are most comfortably inputted by humans into REDCap, and it is the default when exported through the browser and API.  However it is stored differently under the hood.
 
-REDCap's flexibility is a primary driver of its success.  Once a research team learns REDCap, it can reuse the knowledge to capture anything from qqq to qqq.  But to achieve this flexibility in the world of REDCap and EMR, data are stored along the observation grain.  In computer science, this is commonly called an EAV structure (which stands for entity-attribute-value).  The patient's ID is the entity, the variable type is the attribute, and the observed point is the value.  It can also be thought of as a "key-value store" nested within a patient (where "key" is a synonym of "attribute").  Notice that the two rows have morphed into six (skinnier) rows --one row per observation.
+REDCap's flexibility is a driver of its success.  Once a research team learns REDCap, it can reuse the knowledge to capture anything from qqq to qqq.  But to achieve this flexibility in the world of REDCap and EMRs, data are stored along the observation grain.  In computer science, this is commonly called an EAV structure (which stands for entity-attribute-value).  The patient's ID is the entity, the variable type is the attribute, and the observed point is the value.  It can also be thought of as a "key-value store" nested within a patient (where "key" is a synonym of "attribute").  Notice that the two wider rows have morphed into six skinnier rows --one row per observation.
 
 **Table 2: observation grain** is how REDCap and EMR databases store observations in their underlying database.
 
@@ -43,9 +53,9 @@ REDCap's flexibility is a primary driver of its success.  Once a research team l
 |    2 | weight |    22.0 |
 |    2 | bmi    |   222.0 |
 
-If the investigation gains a longitudinal or repeating component, it becomes necessary to include the dimension of time.  Suppose the protocols specifies five time points; the blood pressure instrument is captured at times 1, 2, & 3 while the laboratory instrument is captured at times 3 & 4.  Again if you write
+If the investigation gains a longitudinal or repeating component, it becomes necessary to include the dimension of time.  Suppose the protocols specifies five time points; the blood pressure instrument is captured at times 1, 2, & 3 while the laboratory instrument is captured at times 3 & 4.  If you record this on paper too, it's likely with two rectangles that resemble Tables 3a & 3b: one for vitals and one for labs.
 
-**Table 3a: patient-time grain for BP instrument** is how
+**Table 3a: patient-time grain for `blood_pressure` instrument** is how
 
 | `pt` | `time` | `sbp` | `dbp` |
 | ---: | -----: | ----: | ----: |
@@ -56,7 +66,7 @@ If the investigation gains a longitudinal or repeating component, it becomes nec
 |    2 |      2 |   2.2 |  22.2 |
 |    2 |      3 |   2.3 |  22.3 |
 
-**Table 3b: patient-time grain for laboratory instrument** is how
+**Table 3b: patient-time grain for `laboratory` instrument** is how
 
 | `pt` | `time` | `lab` | `dose` |
 | ---: | -----: | ----: | -----: |
@@ -65,6 +75,9 @@ If the investigation gains a longitudinal or repeating component, it becomes nec
 |    2 |      3 |   bb3 | 2.3 mg |
 |    2 |      4 |   bb4 | 2.4 mg |
 
+When these measurements are added to REDCap's observation table, it resembles Table 4.  Two new columns are required to uniquely distinguish the instrument and its ordinal position.  These columns exist in Table 2, but are empty for those six intake rows.
+
+**Table 4: observation grain for `blood_pressure` and `laboratory` instruments** is how...
 
 | `pt` | `repeat`<br>`instrument` |`repeat`<br>`instance` | `key` | `value`  |
 | ---: | -----------------------: | --------------------: | ----: | -------: |
@@ -89,6 +102,9 @@ If the investigation gains a longitudinal or repeating component, it becomes nec
 |    2 | laboratory               |                     4 |   lab |      bb4 |
 |    2 | laboratory               |                     4 |  conc |  2.4 ppm |
 
+As mentioned above, there isn't a universally good way to combine Tables 1, 3a, and 3b into a single rectangle because the rows represent different things.  When forced to combine the different entities, the best option is probably Table 5.
+
+**Table 5: mismashed grain** is how the points are returned from REDCap if you request the data in a single call.
 
 | `pt` | `repeat`<br>`instrument` | `repeat`<br>`instance` | `height` | `weight` | `bmi` | `sbp` | `dbp` | `lab` |  `conc` |
 | ---- | :----------------------: | ---------------------: | -------: | -------: | ----: | ----: | ----: | ----: | ------: |
@@ -104,3 +120,18 @@ If the investigation gains a longitudinal or repeating component, it becomes nec
 |    2 | blood_pressure           |                      3 |       -- |       -- |    -- |   2.3 |  22.3 |    -- |      -- |
 |    2 | laboratory               |                      3 |       -- |       -- |    -- |    -- |    -- |   bb3 | 2.3 ppm |
 |    2 | laboratory               |                      4 |       -- |       -- |    -- |    -- |    -- |   bb4 | 2.4 ppm |
+
+Retrieving from REDCap
+==================================================================
+
+When provided a structure like Table 5, some people will initially try to break it apart to resemble Tables 1, 3a, & 3b.  However our advice is to step back and modify how the information is retrieved.  Like other database systems, request the three tables separately from the server and then combine them on your desktop to fit your analyses.
+
+You should choose between two approaches: (a) a single call to REDCapTidieR or (b) multiple calls to REDCapR's [redcap_read()].
+
+Single REDCapTidieR Calls
+------------------------------------------------------------------
+
+REDCapTidieR's initial motivation is to facilitate longitudinal analyses
+
+Multiple REDCapR Calls
+------------------------------------------------------------------
