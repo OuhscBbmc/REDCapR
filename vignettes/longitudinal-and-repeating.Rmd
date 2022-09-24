@@ -39,9 +39,9 @@ Suppose you have two patients (*i.e.*, "1" and "2") with three intake variables 
 
 This patient-grain structure is how the data points are most comfortably inputted by humans into REDCap, and it is the default when exported through the browser and API.  However it is stored differently under the hood.
 
-REDCap's flexibility is a driver of its success.  Once a research team learns REDCap, it can reuse the knowledge to capture anything from qqq to qqq.  But to achieve this flexibility in the world of REDCap and EMRs, data are stored along the observation grain.  In computer science, this is commonly called an EAV structure (which stands for entity-attribute-value).  The patient's ID is the entity, the variable type is the attribute, and the observed point is the value.  It can also be thought of as a "key-value store" nested within a patient (where "key" is a synonym of "attribute").  Notice that the two wider rows have morphed into six skinnier rows --one row per observation.
+REDCap's flexibility is a driver of its success.  Once a research team learns REDCap, it can reuse the knowledge to capture anything from qqq to qqq.  But to achieve this flexibility in the world of REDCap and EMRs, data are stored along the observation grain.  In computer science, this is commonly called an EAV structure (which stands for entity-attribute-value).  The patient's ID is the entity, the variable type is the attribute, and the observed point is the value.  It can also be thought of as a "key-value store" nested within a patient (where "key" is a synonym of "attribute").  Notice that the two wider rows have morphed into six skinnier rows --one row per observation.  If you are a curious database administrator, peek at the the structure and rows of the `redcap_data` table.  It is the most important table in the database.
 
-**Table 2: observation grain** is how REDCap and EMR databases store observations in their underlying database.
+**Table 2: observation grain** is how REDCap and EMR databases store observations in their underlying table.  It is a simplification of `redcap_data`, the heart of the database.
 
 | `pt` | `key`  | `value` |
 | ---: | :----- | ------: |
@@ -74,12 +74,18 @@ If the investigation gains a longitudinal or repeating component, it becomes nec
 |    2 |      3 |   bb3 | 2.3 mg |
 |    2 |      4 |   bb4 | 2.4 mg |
 
-When these measurements are added to REDCap's observation table, it resembles Table 4.  Two new columns are required to uniquely distinguish the instrument and its ordinal position.  These columns exist in Table 2, but are empty for those six intake rows.
+When these measurements are added to REDCap's observation table, it resembles Table 4.  Two new columns are required to uniquely distinguish the instrument and its ordinal position.  Notice the first six rows are copied from Table 2; they have empty values for the repeating structure.
 
-**Table 4: observation grain for `blood_pressure` and `laboratory` instruments** is how...
+**Table 4: observation grain for `intake`, `blood_pressure`, and `laboratory` instruments** is how...
 
 | `pt` | `repeat`<br>`instrument` |`repeat`<br>`instance` | `key` | `value`  |
 | ---: | -----------------------: | --------------------: | ----: | -------: |
+|    1 |                       -- |                    -- | height |     1.0 |
+|    1 |                       -- |                    -- | weight |    11.0 |
+|    1 |                       -- |                    -- | bmi    |   111.0 |
+|    2 |                       -- |                    -- | height |     2.0 |
+|    2 |                       -- |                    -- | weight |    22.0 |
+|    2 |                       -- |                    -- | bmi    |   222.0 |
 |    1 | blood_pressure           |                     1 |   sbp |      1.1 |
 |    1 | blood_pressure           |                     1 |   dbp |     11.1 |
 |    1 | blood_pressure           |                     2 |   sbp |      1.2 |
@@ -101,7 +107,9 @@ When these measurements are added to REDCap's observation table, it resembles Ta
 |    2 | laboratory               |                     4 |   lab |      bb4 |
 |    2 | laboratory               |                     4 |  conc |  2.4 ppm |
 
-As mentioned above, there isn't a universally good way to combine Tables 1, 3a, and 3b into a single rectangle because the rows represent different things.  When forced to combine the different entities, the best option is probably Table 5.
+As mentioned above, there isn't a universally good way to coerce Tables 1, 3a, and 3b into a single rectangle because the rows represent different things.  Or from REDCap's perspective, there's not a good transformation of `redcap_data` (*i.e.*, Table 4) that is appropriate for most statistical programs.
+
+When forced to combine the different entities, the best option is probably Table 5.  We call this a "block dataset", borrowing from linear algebra's term "block matrix".  You can see the mishmash of tables masquerading as a unified dataset.  The rows lack a conceptual coherency.
 
 **Table 5: mishmashed grain** is how the points are returned from REDCap if you request the data in a single call.
 
@@ -120,14 +128,19 @@ As mentioned above, there isn't a universally good way to combine Tables 1, 3a, 
 |    2 | laboratory               |                      3 |       -- |       -- |    -- |    -- |    -- |   bb3 | 2.3 ppm |
 |    2 | laboratory               |                      4 |       -- |       -- |    -- |    -- |    -- |   bb4 | 2.4 ppm |
 
+
+A block dataset is not inherently bad.  After all, Table 5 can be unambiguously transformed to and from Table 4.  Its primary limitation isn't directly ingestible by conventional analysis software.  At best, it will always require additional preparation.  At worst, the analyst will inappropriately model the rows to produce misleading conclusions.
+
+Inefficiency is Table 5's secondary limitation.  The empty cells aren't computationally free.  Every cell must be queried from the database and concatenated as REDCap's web server returns Table 5 in the plain-text csv, json, or xml format.  In this simple example, more than half of the block dataset's cells are wasted.  And te emptiness can easily exceed 90% in real-world projects which have many more variables and repeating instances.
+
 Retrieving from REDCap
 ==================================================================
 
-When provided a structure like Table 5, some people's initial attempt involves breaking up Table 5 so it resembles Tables 1, 3a, & 3b.  Although this can be done, the code is difficult to maintain and not portable to projects with different instruments.  (The code is really ugly too.)
+Many people new to REDCap will make a single API call to obtain something like Table 5, and then try to extract something like Tables 1, 3a, & 3b.  Although this can be successful, we strongly discourage it.  The code is difficult to maintain and is not portable to projects with different instruments.  (The code is really ugly too.)
 
-Our advice is to walk upstream of Table 5 and modify how the information is retrieved.  Like other database systems, request the three tables separately from the server and then combine them on your desktop to fit your analyses.
+Our advice is to start upstream before Table 5 is assembled --retrieve the information in a better way.  Like other database systems, request the three tables separately from the server and then combine them on your desktop to fit your analyses.
 
-These two approaches are good for most scenarios: (a) a single call to REDCapTidieR's [REDCapTidieR::redcap_read_tidy()] or (b) multiple calls to REDCapR's [redcap_read()].
+There are two approaches appropriate for most scenarios: (a) a single call to REDCapTidieR's [REDCapTidieR::redcap_read_tidy()] or (b) multiple calls to REDCapR's [redcap_read()].
 
 Single REDCapTidieR Calls
 ------------------------------------------------------------------
@@ -142,24 +155,24 @@ Under the hood, REDCapTidieR calls REDCapR multiple times.
 Choosing between the Approaches
 ------------------------------------------------------------------
 
-We recommend calling [REDCapTidieR](https://chop-cgtdataops.github.io/REDCapTidieR/) a single time if
+We recommend calling [REDCapTidieR](https://chop-cgtdataops.github.io/REDCapTidieR/) if
 
 * you are new to data management with R, or
 * your analyses will require most of the dataset, or
 * you'd benefit from some of the auxiliary information in provides, such as the column and row count of each table.
 
-Calling [REDCapR](https://ouhscbbmc.github.io/REDCapR/) multiple times requires more development time than calling REDCapTidieR once, but could be worth your effort if:
+However we recommend calling [REDCapR](https://ouhscbbmc.github.io/REDCapR/) in other scenarios.  It could be worth the effort of calling REDCapR multiple times requires if:
 
 * you are comfortable with data management with R, or
 * your analyses require only a fraction of the data (such as (a) you need only the first event, or (b) the analyses don't involve most of the instruments), or
 * you want to specify the variables' data types with [readr::cols()].
 
-If in doubt, start with REDCapTidieR.  Escalate to REDCapR if the operation is taking too long and can be decreased by reducing the information retrieved from the server and transported across the network.
+If in doubt, start with REDCapTidieR.  Escalate to REDCapR if the download is taking too long and might be decreased by reducing the information retrieved from the server and transported across the network.
 
 Escalating to REDCapR
 ------------------------------------------------------------------
 
-Even if you know that you'll want REDCapR's low-level control, consider starting with REDCapTidieR anyway.  ...particularly if you are unsure how to specify the grains of the table.  The structure of REDCapTidieR's tables are a great starting point for most conventional analyses.  If you need the performance of REDCapR but are unsure how the tables should look, simply execute something like `REDCapTidieR::redcap_read_tidy(url, project_token)` and study its output.  Then try to mimic it exactly with `REDCapR::redcap_read()` calls.
+Even if you know that you'll want REDCapR's low-level control, consider starting with REDCapTidieR anyway.  ...particularly if you are unsure how to specify the grain of each table.  The structure of REDCapTidieR's tables are a great starting point for most conventional analyses; frequently.  If you need the performance of REDCapR but are unsure how the tables should look, simply execute something like `REDCapTidieR::redcap_read_tidy(url, project_token)` and study its output.  Then try to mimic it exactly with `REDCapR::redcap_read()` calls.
 
 Finally, cull unwanted elements using [redcap_read()] parameters.  Some possible strategies include passing values to
 
