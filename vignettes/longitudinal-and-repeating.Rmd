@@ -4,8 +4,7 @@ author: Will Beasley [Biomedical & Behavior Methodology Core](https://www.ouhsc.
 output:
   rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Retrieving Longitudinal and Repeating Structures
-  }
+  %\VignetteIndexEntry{Retrieving Longitudinal and Repeating Structures}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -104,7 +103,7 @@ When these measurements are added to REDCap's observation table, it resembles Ta
 
 As mentioned above, there isn't a universally good way to combine Tables 1, 3a, and 3b into a single rectangle because the rows represent different things.  When forced to combine the different entities, the best option is probably Table 5.
 
-**Table 5: mismashed grain** is how the points are returned from REDCap if you request the data in a single call.
+**Table 5: mishmashed grain** is how the points are returned from REDCap if you request the data in a single call.
 
 | `pt` | `repeat`<br>`instrument` | `repeat`<br>`instance` | `height` | `weight` | `bmi` | `sbp` | `dbp` | `lab` |  `conc` |
 | ---- | :----------------------: | ---------------------: | -------: | -------: | ----: | ----: | ----: | ----: | ------: |
@@ -131,7 +130,25 @@ You should choose between two approaches: (a) a single call to REDCapTidieR or (
 Single REDCapTidieR Calls
 ------------------------------------------------------------------
 
-REDCapTidieR's initial motivation is to facilitate longitudinal analyses
+REDCapTidieR's initial motivation is to facilitate longitudinal analyses and promote [tidy] data hygiene.
 
 Multiple REDCapR Calls
 ------------------------------------------------------------------
+
+Under the hood, REDCapTidieR calls REDCapR multiple times.
+
+Choosing between the Approaches
+------------------------------------------------------------------
+
+We recommend calling REDCapTidieR a single time if
+
+* you are new to data management with R, or
+* your analyses will eventually use most of the dataset, or
+* you'd benefit from some of the auxiliary information in provides, such as the column and row count of each table.
+
+Calling REDCapR multiple times requires more development time, but could be worth your effort if:
+
+* you are comfortable with data management with R, or
+* your analyses require only a fraction of the data (such as (a) you need only the first event, or (b) the analyses don't involve most of the instruments).
+
+If you're somewhere in between, start with REDCapTidieR.  Switch to REDCapR if the operation is taking too long and can be decreased by reducing the amount of information retrieved from the server and transported across the network.
