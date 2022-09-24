@@ -123,14 +123,16 @@ As mentioned above, there isn't a universally good way to combine Tables 1, 3a, 
 Retrieving from REDCap
 ==================================================================
 
-When provided a structure like Table 5, some people will initially try to break it apart to resemble Tables 1, 3a, & 3b.  However our advice is to step back and modify how the information is retrieved.  Like other database systems, request the three tables separately from the server and then combine them on your desktop to fit your analyses.
+When provided a structure like Table 5, some people's initial attempt involves breaking up Table 5 so it resembles Tables 1, 3a, & 3b.  Although this can be done, the code is difficult to maintain and not portable to projects with different instruments.  (The code is really ugly too.)
 
-You should choose between two approaches: (a) a single call to REDCapTidieR or (b) multiple calls to REDCapR's [redcap_read()].
+Our advice is to walk upstream of Table 5 and modify how the information is retrieved.  Like other database systems, request the three tables separately from the server and then combine them on your desktop to fit your analyses.
+
+These two approaches are good for most scenarios: (a) a single call to REDCapTidieR's [REDCapTidieR::redcap_read_tidy()] or (b) multiple calls to REDCapR's [redcap_read()].
 
 Single REDCapTidieR Calls
 ------------------------------------------------------------------
 
-REDCapTidieR's initial motivation is to facilitate longitudinal analyses and promote [tidy] data hygiene.
+[REDCapTidieR](https://chop-cgtdataops.github.io/REDCapTidieR/)'s initial motivation is to facilitate longitudinal analyses and promote [tidy](https://r4ds.had.co.nz/tidy-data.html) data hygiene.
 
 Multiple REDCapR Calls
 ------------------------------------------------------------------
@@ -140,15 +142,77 @@ Under the hood, REDCapTidieR calls REDCapR multiple times.
 Choosing between the Approaches
 ------------------------------------------------------------------
 
-We recommend calling REDCapTidieR a single time if
+We recommend calling [REDCapTidieR](https://chop-cgtdataops.github.io/REDCapTidieR/) a single time if
 
 * you are new to data management with R, or
-* your analyses will eventually use most of the dataset, or
+* your analyses will require most of the dataset, or
 * you'd benefit from some of the auxiliary information in provides, such as the column and row count of each table.
 
-Calling REDCapR multiple times requires more development time, but could be worth your effort if:
+Calling [REDCapR](https://ouhscbbmc.github.io/REDCapR/) multiple times requires more development time than calling REDCapTidieR once, but could be worth your effort if:
 
 * you are comfortable with data management with R, or
-* your analyses require only a fraction of the data (such as (a) you need only the first event, or (b) the analyses don't involve most of the instruments).
+* your analyses require only a fraction of the data (such as (a) you need only the first event, or (b) the analyses don't involve most of the instruments), or
+* you want to specify the variables' data types with [readr::cols()].
 
-If you're somewhere in between, start with REDCapTidieR.  Switch to REDCapR if the operation is taking too long and can be decreased by reducing the amount of information retrieved from the server and transported across the network.
+If in doubt, start with REDCapTidieR.  Escalate to REDCapR if the operation is taking too long and can be decreased by reducing the information retrieved from the server and transported across the network.
+
+Escalating to REDCapR
+------------------------------------------------------------------
+
+Even if you know that you'll want REDCapR's low-level control, consider starting with REDCapTidieR anyway.  ...particularly if you are unsure how to specify the grains of the table.  The structure of REDCapTidieR's tables are a great starting point for most conventional analyses.  If you need the performance of REDCapR but are unsure how the tables should look, simply execute something like `REDCapTidieR::redcap_read_tidy(url, project_token)` and study its output.  Then try to mimic it exactly with `REDCapR::redcap_read()` calls.
+
+Finally, cull unwanted elements using [redcap_read()] parameters.  Some possible strategies include passing values to
+
+* `instruments` to ignore the remaining instruments.  This one, events, or records.
+* `records`
+* `fields`
+* `forms`
+* `events`
+
+Advanced
+==================================================================
+
+Longitudinal
+-----------------------------------------------------------------
+
+**Table 5: mishmashed grain** is how the points are returned from REDCap if you request the data in a single call.
+
+| `pt` | `repeat`<br>`instrument` | `repeat`<br>`instance` | `height` | `weight` | `bmi` | `sbp` | `dbp` | `lab` |  `conc` |
+| ---- | :----------------------: | ---------------------: | -------: | -------: | ----: | ----: | ----: | ----: | ------: |
+|    1 |                       -- |                     -- |      1.0 |     11.0 | 111.0 |    -- |    -- |    -- |      -- |
+|    1 | blood_pressure           |                      1 |       -- |       -- |    -- |   1.1 |  11.1 |    -- |      -- |
+|    1 | blood_pressure           |                      2 |       -- |       -- |    -- |   1.2 |  11.2 |    -- |      -- |
+|    1 | blood_pressure           |                      3 |       -- |       -- |    -- |   1.3 |  11.3 |    -- |      -- |
+|    1 | laboratory               |                      3 |       -- |       -- |    -- |    -- |    -- |   aa3 | 1.3 ppm |
+|    1 | laboratory               |                      4 |       -- |       -- |    -- |    -- |    -- |   aa4 | 1.4 ppm |
+|    2 |                       -- |                     -- |      2.0 |     22.0 | 222.0 |    -- |    -- |    -- |      -- |
+|    2 | blood_pressure           |                      1 |       -- |       -- |    -- |   2.1 |  22.1 |    -- |      -- |
+|    2 | blood_pressure           |                      2 |       -- |       -- |    -- |   2.2 |  22.2 |    -- |      -- |
+|    2 | blood_pressure           |                      3 |       -- |       -- |    -- |   2.3 |  22.3 |    -- |      -- |
+|    2 | laboratory               |                      3 |       -- |       -- |    -- |    -- |    -- |   bb3 | 2.3 ppm |
+|    2 | laboratory               |                      4 |       -- |       -- |    -- |    -- |    -- |   bb4 | 2.4 ppm |
+
+
+Caching Results to Improve Performance
+-----------------------------------------------------------------
+
+If escalating to REDCapR didn't decrease the duration enough, consider other strategies such as calling REDCap once (with either package) and saving the results to a secured disk.  This will be efficient when the analyses require a *large* dataset, but not a *recent* dataset.
+
+In many retrospective projects, multiple analyses during the day can reuse the same dataset retrieved the night before.  This has helped our complicated projects where multiple statisticians frantically tackle overlapping aspects of a project before a funder's deadline.
+
+Essentially you are moving security responsibilities away from REDCap and to a file server.  This approach has some drawbacks including:
+
+* extra effort is required to create, secure, and maintain a networked drive that is accessible to only authorized analysts.  This will take 15-60 minutes, depending on your institution.
+* extra effort is required to create an automated program to retrieve and cache the dataset every night. See [CDS] for a head start.
+* REDCap's logs will not inform a meaningful audit because no human is accessing the API.  User access audits are now the responsibility of the file system.
+
+Caching Results for other Languages
+-----------------------------------------------------------------
+
+Packages for other programming languages have been developed that access REDCap's API, such [PyCap] and [PhpCap].  Please see a more complete list at <https://redcap-tools.github.io/projects>.  The caching strategy described above may also benefit your investigation if:
+
+* it uses a language like SAS that does not support packages.  We strongly discourage using loose scripts that call the API.  When something is fixed in the original script, it must be distributed by the developer to the ~50 client institutions, then it must by copied to the ~100 projects within the institution.  In contrast, when a developer updates a package distributed through a repository like CRAN, the client needs to run only [base::update.packages()] once per machine to update all its packages --not just those related to REDCap.  Data scientists already do this regularly.
+
+* it uses a language like Julia that lacks a stable or updated package.  The REDCap development team is always releasing useful features (*e.g.*, repeated measures) that improve the quality and efficiency of your research.  Leverage them.
+
+* your investigation incorporates multiple programming languages and you would like the analysis team to use a consistent dataset.  In this scenario, we recommend the code save the same R dataset in multiple file formats, such as a csv file and a feather file.
