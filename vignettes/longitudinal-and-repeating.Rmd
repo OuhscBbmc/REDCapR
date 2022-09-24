@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Suppose you have two patients (*i.e.*, "1" and "2") with three intake variables (*i.e.*, `height`, `weight`, and `bmi`).  If you were write this on a piece of paper, it would probably look like the following table.  The table's *grain* is "patient", because each row represents a distinct patient.  Understanding the grain of each structure below will help you understand how the structures are re-expressions of the same set of observations.
+Suppose you have two patients (*i.e.*, "1" and "2") with three intake variables (*i.e.*, `height`, `weight`, and `bmi`).  If you write this on a piece of paper, it would probably look like the following table.  The table's *grain* is "patient", because each row represents a distinct patient.  Understanding the grain of each structure below will help you understand how the structures are re-expressions of the same set of observations.
 
 **Table 1: patient grain** is the most natural presentation of the six initial observations.
 
@@ -43,7 +43,7 @@ REDCap's flexibility is a primary driver of its success.  Once a research team l
 |    2 | weight |    22.0 |
 |    2 | bmi    |   222.0 |
 
-If the investigation gains a longitudinal or repeating component, it becomes necessary to include a new dimension
+If the investigation gains a longitudinal or repeating component, it becomes necessary to include the dimension of time.  Suppose the protocols specifies five time points; the blood pressure instrument is captured at times 1, 2, & 3 while the laboratory instrument is captured at times 3 & 4.  Again if you write
 
 **Table 3a: patient-time grain for BP instrument** is how
 
@@ -68,39 +68,39 @@ If the investigation gains a longitudinal or repeating component, it becomes nec
 
 | `pt` | `repeat`<br>`instrument` |`repeat`<br>`instance` | `key` | `value`  |
 | ---: | -----------------------: | --------------------: | ----: | -------: |
-|    1 |                       bp |                     1 |   sbp |      1.1 |
-|    1 |                       bp |                     1 |   dbp |     11.1 |
-|    1 |                       bp |                     2 |   sbp |      1.2 |
-|    1 |                       bp |                     2 |   dbp |     11.2 |
-|    1 |               laboratory |                     3 |   lab |      aa3 |
-|    1 |               laboratory |                     3 |  conc |  1.3 ppm |
-|    1 |                       bp |                     3 |   sbp |      1.3 |
-|    1 |                       bp |                     3 |   dbp |     11.3 |
-|    1 |               laboratory |                     4 |   lab |      aa4 |
-|    1 |               laboratory |                     4 |  conc |  1.4 ppm |
-|    2 |                       bp |                     1 |   sbp |      2.1 |
-|    2 |                       bp |                     1 |   dbp |     22.1 |
-|    2 |                       bp |                     2 |   sbp |      2.2 |
-|    2 |                       bp |                     2 |   dbp |     22.2 |
-|    2 |               laboratory |                     3 |   lab |      bb3 |
-|    2 |               laboratory |                     3 |  conc |  2.3 ppm |
-|    2 |                       bp |                     3 |   sbp |      2.3 |
-|    2 |                       bp |                     3 |   dbp |     22.3 |
-|    2 |               laboratory |                     4 |   lab |      bb4 |
-|    2 |               laboratory |                     4 |  conc |  2.4 ppm |
+|    1 | blood_pressure           |                     1 |   sbp |      1.1 |
+|    1 | blood_pressure           |                     1 |   dbp |     11.1 |
+|    1 | blood_pressure           |                     2 |   sbp |      1.2 |
+|    1 | blood_pressure           |                     2 |   dbp |     11.2 |
+|    1 | laboratory               |                     3 |   lab |      aa3 |
+|    1 | laboratory               |                     3 |  conc |  1.3 ppm |
+|    1 | blood_pressure           |                     3 |   sbp |      1.3 |
+|    1 | blood_pressure           |                     3 |   dbp |     11.3 |
+|    1 | laboratory               |                     4 |   lab |      aa4 |
+|    1 | laboratory               |                     4 |  conc |  1.4 ppm |
+|    2 | blood_pressure           |                     1 |   sbp |      2.1 |
+|    2 | blood_pressure           |                     1 |   dbp |     22.1 |
+|    2 | blood_pressure           |                     2 |   sbp |      2.2 |
+|    2 | blood_pressure           |                     2 |   dbp |     22.2 |
+|    2 | laboratory               |                     3 |   lab |      bb3 |
+|    2 | laboratory               |                     3 |  conc |  2.3 ppm |
+|    2 | blood_pressure           |                     3 |   sbp |      2.3 |
+|    2 | blood_pressure           |                     3 |   dbp |     22.3 |
+|    2 | laboratory               |                     4 |   lab |      bb4 |
+|    2 | laboratory               |                     4 |  conc |  2.4 ppm |
 
 
 | `pt` | `repeat`<br>`instrument` | `repeat`<br>`instance` | `height` | `weight` | `bmi` | `sbp` | `dbp` | `lab` |  `conc` |
 | ---- | :----------------------: | ---------------------: | -------: | -------: | ----: | ----: | ----: | ----: | ------: |
 |    1 |                       -- |                     -- |      1.0 |     11.0 | 111.0 |    -- |    -- |    -- |      -- |
-|    1 | bp                       |                      1 |       -- |       -- |    -- |   1.1 |  11.1 |    -- |      -- |
-|    1 | bp                       |                      2 |       -- |       -- |    -- |   1.2 |  11.2 |    -- |      -- |
-|    1 | bp                       |                      3 |       -- |       -- |    -- |   1.3 |  11.3 |    -- |      -- |
-|    1 | lab                      |                      3 |       -- |       -- |    -- |    -- |    -- |   aa3 | 1.3 ppm |
-|    1 | lab                      |                      4 |       -- |       -- |    -- |    -- |    -- |   aa4 | 1.4 ppm |
+|    1 | blood_pressure           |                      1 |       -- |       -- |    -- |   1.1 |  11.1 |    -- |      -- |
+|    1 | blood_pressure           |                      2 |       -- |       -- |    -- |   1.2 |  11.2 |    -- |      -- |
+|    1 | blood_pressure           |                      3 |       -- |       -- |    -- |   1.3 |  11.3 |    -- |      -- |
+|    1 | laboratory               |                      3 |       -- |       -- |    -- |    -- |    -- |   aa3 | 1.3 ppm |
+|    1 | laboratory               |                      4 |       -- |       -- |    -- |    -- |    -- |   aa4 | 1.4 ppm |
 |    2 |                       -- |                     -- |      2.0 |     22.0 | 222.0 |    -- |    -- |    -- |      -- |
-|    2 | bp                       |                      1 |       -- |       -- |    -- |   2.1 |  22.1 |    -- |      -- |
-|    2 | bp                       |                      2 |       -- |       -- |    -- |   2.2 |  22.2 |    -- |      -- |
-|    2 | bp                       |                      3 |       -- |       -- |    -- |   2.3 |  22.3 |    -- |      -- |
-|    2 | lab                      |                      3 |       -- |       -- |    -- |    -- |    -- |   bb3 | 2.3 ppm |
-|    2 | lab                      |                      4 |       -- |       -- |    -- |    -- |    -- |   bb4 | 2.4 ppm |
+|    2 | blood_pressure           |                      1 |       -- |       -- |    -- |   2.1 |  22.1 |    -- |      -- |
+|    2 | blood_pressure           |                      2 |       -- |       -- |    -- |   2.2 |  22.2 |    -- |      -- |
+|    2 | blood_pressure           |                      3 |       -- |       -- |    -- |   2.3 |  22.3 |    -- |      -- |
+|    2 | laboratory               |                      3 |       -- |       -- |    -- |    -- |    -- |   bb3 | 2.3 ppm |
+|    2 | laboratory               |                      4 |       -- |       -- |    -- |    -- |    -- |   bb4 | 2.4 ppm |
