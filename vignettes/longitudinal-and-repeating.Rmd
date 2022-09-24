@@ -52,7 +52,7 @@ REDCap's flexibility is a driver of its success.  Once a research team learns RE
 |    2 | weight |    22.0 |
 |    2 | bmi    |   222.0 |
 
-If the investigation gains a longitudinal or repeating component, it becomes necessary to include the dimension of time.  Suppose the protocols specifies five time points; the blood pressure instrument is captured at times 1, 2, & 3 while the laboratory instrument is captured at times 3 & 4.  If you record this on paper too, it's likely with two rectangles that resemble Tables 3a & 3b: one for vitals and one for labs.
+If the investigation gains a longitudinal or repeating component, it becomes necessary to include the dimension of time.  Suppose the protocols specifies five time points; the blood pressure instrument is captured at times 1, 2, & 3 while the laboratory instrument is captured at times 1 & 2.  If you record this stage on paper, it will likely resemble Tables 3a & 3b: one for vitals and one for labs.
 
 **Table 3a: patient-time grain for `blood_pressure` instrument** is how
 
@@ -69,10 +69,10 @@ If the investigation gains a longitudinal or repeating component, it becomes nec
 
 | `pt` | `time` | `lab` | `dose` |
 | ---: | -----: | ----: | -----: |
-|    1 |      3 |   aa3 | 1.3 mg |
-|    1 |      4 |   aa4 | 1.4 mg |
-|    2 |      3 |   bb3 | 2.3 mg |
-|    2 |      4 |   bb4 | 2.4 mg |
+|    1 |      1 |   aa1 | 1.1 mg |
+|    1 |      2 |   aa2 | 1.2 mg |
+|    2 |      1 |   bb1 | 2.1 mg |
+|    2 |      2 |   bb2 | 2.2 mg |
 
 When these measurements are added to REDCap's observation table, it resembles Table 4.  Two new columns are required to uniquely distinguish the instrument and its ordinal position.  Notice the first six rows are copied from Table 2; they have empty values for the repeating structure.
 
@@ -90,26 +90,26 @@ When these measurements are added to REDCap's observation table, it resembles Ta
 |    1 | blood_pressure           |                     1 |   dbp |     11.1 |
 |    1 | blood_pressure           |                     2 |   sbp |      1.2 |
 |    1 | blood_pressure           |                     2 |   dbp |     11.2 |
-|    1 | laboratory               |                     3 |   lab |      aa3 |
-|    1 | laboratory               |                     3 |  conc |  1.3 ppm |
 |    1 | blood_pressure           |                     3 |   sbp |      1.3 |
 |    1 | blood_pressure           |                     3 |   dbp |     11.3 |
-|    1 | laboratory               |                     4 |   lab |      aa4 |
-|    1 | laboratory               |                     4 |  conc |  1.4 ppm |
+|    1 | laboratory               |                     1 |   lab |      aa1 |
+|    1 | laboratory               |                     1 |  conc |  1.1 ppm |
+|    1 | laboratory               |                     2 |   lab |      aa2 |
+|    1 | laboratory               |                     2 |  conc |  1.2 ppm |
 |    2 | blood_pressure           |                     1 |   sbp |      2.1 |
 |    2 | blood_pressure           |                     1 |   dbp |     22.1 |
 |    2 | blood_pressure           |                     2 |   sbp |      2.2 |
 |    2 | blood_pressure           |                     2 |   dbp |     22.2 |
-|    2 | laboratory               |                     3 |   lab |      bb3 |
-|    2 | laboratory               |                     3 |  conc |  2.3 ppm |
 |    2 | blood_pressure           |                     3 |   sbp |      2.3 |
 |    2 | blood_pressure           |                     3 |   dbp |     22.3 |
-|    2 | laboratory               |                     4 |   lab |      bb4 |
-|    2 | laboratory               |                     4 |  conc |  2.4 ppm |
+|    2 | laboratory               |                     1 |   lab |      bb1 |
+|    2 | laboratory               |                     1 |  conc |  2.1 ppm |
+|    2 | laboratory               |                     2 |   lab |      bb2 |
+|    2 | laboratory               |                     2 |  conc |  2.2 ppm |
 
 As mentioned above, there isn't a universally good way to coerce Tables 1, 3a, and 3b into a single rectangle because the rows represent different things.  Or from REDCap's perspective, there's not a good transformation of `redcap_data` (*i.e.*, Table 4) that is appropriate for most statistical programs.
 
-When forced to combine the different entities, the best option is probably Table 5.  We call this a "block dataset", borrowing from linear algebra's term "block matrix".  You can see the mishmash of tables masquerading as a unified dataset.  The rows lack a conceptual coherency.
+When forced to combine the different entities, the best option is probably Table 5.  We call this a "block dataset", borrowing from linear algebra's term [block matrix](https://mathworld.wolfram.com/BlockMatrix.html).  You can see the mishmash of tables masquerading as a unified dataset.  However it's obvious the rows lack the conceptual coherency of Tables 1, 3a, & 3b.
 
 **Table 5: mishmashed grain** is how the points are returned from REDCap if you request the data in a single call.
 
@@ -119,68 +119,81 @@ When forced to combine the different entities, the best option is probably Table
 |    1 | blood_pressure           |                      1 |       -- |       -- |    -- |   1.1 |  11.1 |    -- |      -- |
 |    1 | blood_pressure           |                      2 |       -- |       -- |    -- |   1.2 |  11.2 |    -- |      -- |
 |    1 | blood_pressure           |                      3 |       -- |       -- |    -- |   1.3 |  11.3 |    -- |      -- |
-|    1 | laboratory               |                      3 |       -- |       -- |    -- |    -- |    -- |   aa3 | 1.3 ppm |
-|    1 | laboratory               |                      4 |       -- |       -- |    -- |    -- |    -- |   aa4 | 1.4 ppm |
+|    1 | laboratory               |                      1 |       -- |       -- |    -- |    -- |    -- |   aa1 | 1.1 ppm |
+|    1 | laboratory               |                      2 |       -- |       -- |    -- |    -- |    -- |   aa2 | 1.2 ppm |
 |    2 |                       -- |                     -- |      2.0 |     22.0 | 222.0 |    -- |    -- |    -- |      -- |
 |    2 | blood_pressure           |                      1 |       -- |       -- |    -- |   2.1 |  22.1 |    -- |      -- |
 |    2 | blood_pressure           |                      2 |       -- |       -- |    -- |   2.2 |  22.2 |    -- |      -- |
 |    2 | blood_pressure           |                      3 |       -- |       -- |    -- |   2.3 |  22.3 |    -- |      -- |
-|    2 | laboratory               |                      3 |       -- |       -- |    -- |    -- |    -- |   bb3 | 2.3 ppm |
-|    2 | laboratory               |                      4 |       -- |       -- |    -- |    -- |    -- |   bb4 | 2.4 ppm |
+|    2 | laboratory               |                      1 |       -- |       -- |    -- |    -- |    -- |   bb1 | 2.1 ppm |
+|    2 | laboratory               |                      2 |       -- |       -- |    -- |    -- |    -- |   bb2 | 2.2 ppm |
 
 
-A block dataset is not inherently bad.  After all, Table 5 can be unambiguously transformed to and from Table 4.  Its primary limitation isn't directly ingestible by conventional analysis software.  At best, it will always require additional preparation.  At worst, the analyst will inappropriately model the rows to produce misleading conclusions.
+A block dataset is not inherently bad.  After all, Table 5 can be unambiguously transformed to and from Table 4.
 
-Inefficiency is Table 5's secondary limitation.  The empty cells aren't computationally free.  Every cell must be queried from the database and concatenated as REDCap's web server returns Table 5 in the plain-text csv, json, or xml format.  In this simple example, more than half of the block dataset's cells are wasted.  And te emptiness can easily exceed 90% in real-world projects which have many more variables and repeating instances.
+Table 5's primary limitation is that a block dataset is not understood by analysis software used in conventional medical research.  At best, the dataset always will require additional preparation.  At worst, the analyst will model the rows inappropriately, which will produce misleading conclusions.
+
+Table 5's secondary limitation is inefficiency.  The empty cells aren't computationally free.  Every cell must be queried from the database and concatenated in REDCap's web server in order to return Table 5 in the plain-text csv, json, or xml format.  In our simple example, more than half of the block dataset's cells are wasted.  The emptiness frequently exceeds 90% in real-world REDCap projects (because they tend to have many more variables and repeating instances).  The emptiness always exceeds 99.9% in real-world EMRs.
+
+For this reason, REDCap and EMR design their observation table to resemble the computational structure of a [sparse matrix](https://en.wikipedia.org/wiki/Sparse_matrix).  The only important difference is that REDCap's unspecified cells are interpreted as null/empty, while a sparse matrix's unspecified cells are interpreted as zero.
+
+> In the case of a sparse matrix, substantial memory requirement reductions can be realized by storing only the non-zero entries. Depending on the number and distribution of the non-zero entries, different data structures can be used and yield huge savings in memory when compared to the basic approach. The trade-off is that accessing the individual elements becomes more complex and additional structures are needed to be able to recover the original matrix unambiguously.
 
 Retrieving from REDCap
 ==================================================================
 
-Many people new to REDCap will make a single API call to obtain something like Table 5, and then try to extract something like Tables 1, 3a, & 3b.  Although this can be successful, we strongly discourage it.  The code is difficult to maintain and is not portable to projects with different instruments.  (The code is really ugly too.)
+Many new REDCap users will submit a single API call and unintentionally obtain something like Table 5; they then try to extract something resembling Tables 1, 3a, & 3b.  Although this can be successful, we strongly discourage it.  The code is difficult to maintain and is not portable to REDCap projects with different instruments.  (The code is really slow and ugly too.)
 
-Our advice is to start upstream before Table 5 is assembled --retrieve the information in a better way.  Like other database systems, request the three tables separately from the server and then combine them on your desktop to fit your analyses.
+Our advice is to start before Table 5 is assembled --retrieve the information in a better way.  Like other database systems, request the three tables separately from the server and then combine them on your desktop to fit your analyses if necessary.
 
-There are two approaches appropriate for most scenarios: (a) a single call to REDCapTidieR's [REDCapTidieR::redcap_read_tidy()] or (b) multiple calls to REDCapR's [redcap_read()].
+Two approaches are appropriate for most scenarios: (a) a single call to REDCapTidieR's [REDCapTidieR::redcap_read_tidy()] or (b) multiple calls to REDCapR's [redcap_read()].
 
 Single REDCapTidieR Calls
 ------------------------------------------------------------------
 
 [REDCapTidieR](https://chop-cgtdataops.github.io/REDCapTidieR/)'s initial motivation is to facilitate longitudinal analyses and promote [tidy](https://r4ds.had.co.nz/tidy-data.html) data hygiene.
 
+{Will Beasley will write this section.}
+
 Multiple REDCapR Calls
 ------------------------------------------------------------------
 
 Under the hood, REDCapTidieR calls REDCapR multiple times.
 
+{Stephan Kadauke & Richard Hanna, please represent your package as you wish.  Tell me if I've positioned it differently than you would have.}
+
 Choosing between the Approaches
 ------------------------------------------------------------------
 
-We recommend calling [REDCapTidieR](https://chop-cgtdataops.github.io/REDCapTidieR/) if
+We recommend calling [REDCapTidieR](https://chop-cgtdataops.github.io/REDCapTidieR/) in many scenarios, such as:
 
-* you are new to data management with R, or
-* your analyses will require most of the dataset, or
-* you'd benefit from some of the auxiliary information in provides, such as the column and row count of each table.
+* you are new to managing data with R, or
+* your analyses will require most of the dataset's rows or columns, or
+* you'd benefit from some of the auxiliary information in [REDCapTidieR's supertibble](https://chop-cgtdataops.github.io/REDCapTidieR/articles/REDCapTidieR.html#tidying-redcap-exports), such as instrument's structure.  <!--Future version may provide more information, like the column and row count of each table.-->
 
-However we recommend calling [REDCapR](https://ouhscbbmc.github.io/REDCapR/) in other scenarios.  It could be worth the effort of calling REDCapR multiple times requires if:
+However we recommend calling [REDCapR](https://ouhscbbmc.github.io/REDCapR/) in other scenarios.  It could be worth calling REDCapR multiple times if:
 
-* you are comfortable with data management with R, or
+* you are comfortable with managing data with R, or
 * your analyses require only a fraction of the data (such as (a) you need only the first event, or (b) the analyses don't involve most of the instruments), or
 * you want to specify the variables' data types with [readr::cols()].
 
-If in doubt, start with REDCapTidieR.  Escalate to REDCapR if the download is taking too long and might be decreased by reducing the information retrieved from the server and transported across the network.
+If in doubt, start with REDCapTidieR.  Escalate to REDCapR if your download time is too long and might be decreased by reducing the information retrieved from the server and transported across the network.
 
 Escalating to REDCapR
 ------------------------------------------------------------------
 
-Even if you know that you'll want REDCapR's low-level control, consider starting with REDCapTidieR anyway.  ...particularly if you are unsure how to specify the grain of each table.  The structure of REDCapTidieR's tables are a great starting point for most conventional analyses; frequently.  If you need the performance of REDCapR but are unsure how the tables should look, simply execute something like `REDCapTidieR::redcap_read_tidy(url, project_token)` and study its output.  Then try to mimic it exactly with `REDCapR::redcap_read()` calls.
+Even if you know that you'll need REDCapR's low-level control, consider starting with REDCapTidieR anyway.  ...particularly if you are unsure how to specify the grain of each table.  The structure of REDCapTidieR's tables easily compatible with conventional analyses.  If you need the performance of REDCapR but are unsure how the tables should look, simply execute something like `REDCapTidieR::redcap_read_tidy(url, project_token)` and study its output.  Then try to mimic it exactly with `REDCapR::redcap_read()` calls.
 
-Finally, cull unwanted elements using [redcap_read()] parameters.  Some possible strategies include passing values to
+Finally, cull unwanted cells using [redcap_read()] parameters.  These data points will not even leave the REDCap instance, which will improve performance.  Some possible strategies include passing [arguments](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html#arguments) to
 
-* `instruments` to ignore the remaining instruments.  This one, events, or records.
-* `records`
-* `fields`
-* `forms`
-* `events`
+* `forms`: this will retrieve only the specified instruments/forms.  Beginners should start here.  It is easy to conceptualize and usually has a big increase in speed for just a little development work.
+* `events`: this will retrieve only the desired events within a longitudinal project.  For instance if the analyses involve only the "intake" and "follow up #1" events, leave follow ups #2-10 on the server.
+* `fields`: this is more granular than `forms`.  It can be combined with calls to `forms`, such as passing `"bmi"` to fields and `c("blood_pressure", "laboratory")` to forms.
+* `records`: in the example scenario, this will pluck individual patients and their associated events and repeating instances.  To be useful in research, it's usually combined with other REDCapR calls.  See the [Read a subset of records, conditioned on the values in some variables](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html#read-a-subset-of-records-conditioned-on-the-values-in-some-variables) section of REDCapR's [Basic REDCapR Operations](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) vignette.
+* `filter_logic`: this will leverage the observation values to limit the rows returned.  Because the underlying table does not index the obs values, this will be less computationally efficient than the options above.
+* `datetime_range_begin` & `datetime_range_end`: this will return only the records that have been created or modified during the specified window.
+
+Please note that the efficiency gains from moving from the block dataset to REDCapTidieR is different than the gains from moving from REDCapTidieR.  When moving to REDCapTidieR, you are eliminating empty cells that will never contain worthwhile data.  When moving to REDCapR, you are eliminating cells that contain data, but may not be relevant to your analysis (such as a patient's name or the time a lab specimen was collected).
 
 Advanced
 ==================================================================
@@ -188,7 +201,7 @@ Advanced
 Longitudinal
 -----------------------------------------------------------------
 
-**Table 5: mishmashed grain** is how the points are returned from REDCap if you request the data in a single call.
+{TODO: Generalize the argument to longitudinal events}
 
 | `pt` | `repeat`<br>`instrument` | `repeat`<br>`instance` | `height` | `weight` | `bmi` | `sbp` | `dbp` | `lab` |  `conc` |
 | ---- | :----------------------: | ---------------------: | -------: | -------: | ----: | ----: | ----: | ----: | ------: |
@@ -209,11 +222,11 @@ Longitudinal
 Caching Results to Improve Performance
 -----------------------------------------------------------------
 
-If escalating to REDCapR didn't decrease the duration enough, consider other strategies such as calling REDCap once (with either package) and saving the results to a secured disk.  This will be efficient when the analyses require a *large* dataset, but not a *recent* dataset.
+If escalating to REDCapR didn't decrease the duration enough, consider the strategy of calling REDCap only once per day (with either package) and saving the results to a secured disk.  This will be efficient when the analyses require a *large* dataset, but not a *recent* dataset.
 
-In many retrospective projects, multiple analyses during the day can reuse the same dataset retrieved the night before.  This has helped our complicated projects where multiple statisticians frantically tackle overlapping aspects of a project before a funder's deadline.
+In many retrospective projects, multiple analyses during the day can reuse the same dataset retrieved the night before (with a function like [readr::write_rds()]).  This has helped our complicated investigations when multiple statisticians frantically tackle overlapping aspects before a funder's deadline.
 
-Essentially you are moving security responsibilities away from REDCap and to a file server.  This approach has some drawbacks including:
+Essentially you are transferring security responsibilities from REDCap to the file server.  To balance its advantages, the approaches drawbacks include:
 
 * extra effort is required to create, secure, and maintain a networked drive that is accessible to only authorized analysts.  This will take 15-60 minutes, depending on your institution.
 * extra effort is required to create an automated program to retrieve and cache the dataset every night. See [CDS] for a head start.
@@ -224,8 +237,8 @@ Caching Results for other Languages
 
 Packages for other programming languages have been developed that access REDCap's API, such [PyCap] and [PhpCap].  Please see a more complete list at <https://redcap-tools.github.io/projects>.  The caching strategy described above may also benefit your investigation if:
 
-* it uses a language like SAS that does not support packages.  We strongly discourage using loose scripts that call the API.  When something is fixed in the original script, it must be distributed by the developer to the ~50 client institutions, then it must by copied to the ~100 projects within the institution.  In contrast, when a developer updates a package distributed through a repository like CRAN, the client needs to run only [base::update.packages()] once per machine to update all its packages --not just those related to REDCap.  Data scientists already do this regularly.
+* it uses a language like SAS that does not support packages.  We strongly discourage deploying loose scripts that call the API.  When something is fixed in the original script, it must be distributed by the developer to the ~50 client institutions, then it must by copied to the ~100 projects within each institution.  In contrast, when a developer updates a package distributed through a repository like CRAN, the client needs to run only [base::update.packages()] once per machine to update all its packages --not just REDCap packages.  Data scientists already do this regularly.
 
-* it uses a language like Julia that lacks a stable or updated package.  The REDCap development team is always releasing useful features (*e.g.*, repeated measures) that improve the quality and efficiency of your research.  Leverage them.
+* it uses a language like Julia that lacks a stable or updated package.  The REDCap developers are always releasing useful features (*e.g.*, repeated measures) that improve the quality and efficiency of your research.  Leverage them.
 
 * your investigation incorporates multiple programming languages and you would like the analysis team to use a consistent dataset.  In this scenario, we recommend the code save the same R dataset in multiple file formats, such as a csv file and a feather file.
