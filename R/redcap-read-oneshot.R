@@ -85,6 +85,14 @@
 #' be visible somewhere public. Optional.
 #' @param config_options A list of options passed to [httr::POST()].
 #' See details at [httr::httr_options()]. Optional.
+#' @param handle_httr The value passed to the `handle` parameter of
+#' [httr::POST()].
+#' This is useful for only unconventional authentication approaches.  It
+#' should be `NULL` for most institutions.
+#' @param encode_httr The value passed to the `encode` parameter of
+#' [httr::POST()].
+#' This is useful for only unconventional authentication approaches.
+#' Defaults to `"multipart"`, which is appropriate for most institutions.
 #'
 #' @return
 #' Currently, a list is returned with the following elements:
@@ -195,7 +203,8 @@ redcap_read_oneshot <- function(
   locale                        = readr::default_locale(),
   verbose                       = TRUE,
   config_options                = NULL,
-  cdc_handle                    = NULL
+  handle_httr                   = NULL,
+  encode_httr                   = "multipart"
 ) {
 
   checkmate::assert_character(redcap_uri                , any.missing=FALSE, len=1, pattern="^.{1,}$")
@@ -228,6 +237,7 @@ redcap_read_oneshot <- function(
   checkmate::assert_class(    locale, "locale"          , null.ok = FALSE)
   checkmate::assert_logical(  verbose                   , any.missing=FALSE, len=1, null.ok=TRUE)
   checkmate::assert_list(     config_options            , any.missing=TRUE ,        null.ok=TRUE)
+  checkmate::assert_character(encode_httr               , any.missing=FALSE, len=1, null.ok = FALSE)
 
   validate_field_names(fields, stop_on_error = TRUE)
 
@@ -273,7 +283,8 @@ redcap_read_oneshot <- function(
     post_body       = post_body,
     config_options  = config_options,
     encoding        = http_response_encoding,
-    cdc_handle      = cdc_handle
+    handle_httr     = handle_httr,
+    encode_httr     = encode_httr
   )
 
   if (kernel$success) {

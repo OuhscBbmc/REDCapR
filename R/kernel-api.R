@@ -16,6 +16,14 @@
 #' to 'UTF-8'.
 #' @param content_type The MIME value passed to [httr::content()].  Defaults
 #' to 'text/csv'.
+#' @param handle_httr The value passed to the `handle` parameter of
+#' [httr::POST()].
+#' This is useful for only unconventional authentication approaches.  It
+#' should be `NULL` for most institutions.
+#' @param encode_httr The value passed to the `encode` parameter of
+#' [httr::POST()].
+#' This is useful for only unconventional authentication approaches.
+#' Defaults to `"multipart"`, which is appropriate for most institutions.
 #'
 #' @return
 #' A [utils::packageVersion].
@@ -50,12 +58,14 @@ kernel_api <- function(
   config_options,
   encoding            = "UTF-8",
   content_type        = "text/csv",
-  cdc_handle          = NULL
-  ) {
+  handle_httr         = NULL,
+  encode_httr         = "multipart"
+) {
 
   checkmate::assert_character(redcap_uri    , len = 1, any.missing = FALSE, null.ok = FALSE)
   checkmate::assert_character(encoding      , len = 1, any.missing = FALSE, null.ok = FALSE)
   checkmate::assert_character(content_type  , len = 1, any.missing = FALSE, null.ok = FALSE)
+  checkmate::assert_character(encode_httr   , len = 1, any.missing = FALSE, null.ok = FALSE)
 
   start_time <- Sys.time()
 
@@ -67,8 +77,8 @@ kernel_api <- function(
     url     = redcap_uri,
     body    = post_body,
     config  = config_options,
-    handle  = cdc_handle,
-    encode  = "form",
+    handle  = handle_httr,
+    encode  = encode_httr,
     httr::user_agent("OuhscBbmc/REDCapR")
   )
 

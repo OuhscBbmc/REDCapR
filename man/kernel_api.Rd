@@ -9,7 +9,9 @@ kernel_api(
   post_body,
   config_options,
   encoding = "UTF-8",
-  content_type = "text/csv"
+  content_type = "text/csv",
+  handle_httr = NULL,
+  encode_httr = "multipart"
 )
 }
 \arguments{
@@ -29,6 +31,16 @@ to 'UTF-8'.}
 
 \item{content_type}{The MIME value passed to \code{\link[httr:content]{httr::content()}}.  Defaults
 to 'text/csv'.}
+
+\item{handle_httr}{The value passed to the \code{handle} parameter of
+\code{\link[httr:POST]{httr::POST()}}.
+This is useful for only unconventional authentication approaches.  It
+should be \code{NULL} for most institutions.}
+
+\item{encode_httr}{The value passed to the \code{encode} parameter of
+\code{\link[httr:POST]{httr::POST()}}.
+This is useful for only unconventional authentication approaches.
+Defaults to \code{"multipart"}, which is appropriate for most institutions.}
 }
 \value{
 A \link[utils:packageDescription]{utils::packageVersion}.
