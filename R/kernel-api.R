@@ -68,6 +68,7 @@ kernel_api <- function(
     body    = post_body,
     config  = config_options,
     handle  = cdc_handle,
+    encode  = "form",
     httr::user_agent("OuhscBbmc/REDCapR")
   )
 
