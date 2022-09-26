@@ -194,7 +194,8 @@ redcap_read_oneshot <- function(
   http_response_encoding        = "UTF-8",
   locale                        = readr::default_locale(),
   verbose                       = TRUE,
-  config_options                = NULL
+  config_options                = NULL,
+  cdc_handle                    = NULL
 ) {
 
   checkmate::assert_character(redcap_uri                , any.missing=FALSE, len=1, pattern="^.{1,}$")
@@ -271,7 +272,8 @@ redcap_read_oneshot <- function(
     redcap_uri      = redcap_uri,
     post_body       = post_body,
     config_options  = config_options,
-    encoding        = http_response_encoding
+    encoding        = http_response_encoding,
+    cdc_handle      = cdc_handle
   )
 
   if (kernel$success) {

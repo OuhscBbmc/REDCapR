@@ -49,7 +49,8 @@ kernel_api <- function(
   post_body,
   config_options,
   encoding            = "UTF-8",
-  content_type        = "text/csv"
+  content_type        = "text/csv",
+  cdc_handle          = NULL
   ) {
 
   checkmate::assert_character(redcap_uri    , len = 1, any.missing = FALSE, null.ok = FALSE)
@@ -66,6 +67,7 @@ kernel_api <- function(
     url     = redcap_uri,
     body    = post_body,
     config  = config_options,
+    handle  = cdc_handle,
     httr::user_agent("OuhscBbmc/REDCapR")
   )
 
