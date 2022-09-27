@@ -37,6 +37,10 @@
 #' be visible somewhere public. Optional.
 #' @param config_options A list of options passed to [httr::POST()].
 #' See details at [httr::httr_options()]. Optional.
+#' @param handle_httr The value passed to the `handle` parameter of
+#' [httr::POST()].
+#' This is useful for only unconventional authentication approaches.  It
+#' should be `NULL` for most institutions.  Optional.
 #'
 #' @return
 #' Currently, a list is returned with the following elements:
@@ -118,7 +122,8 @@ redcap_write <- function(
   overwrite_with_blanks       = TRUE,
   convert_logical_to_integer  = FALSE,
   verbose                     = TRUE,
-  config_options              = NULL
+  config_options              = NULL,
+  handle_httr                 = NULL
 ) {
 
   start_time <- base::Sys.time()
@@ -143,6 +148,7 @@ redcap_write <- function(
     format(nrow(ds_to_write), big.mark = ",", scientific = FALSE, trim = TRUE),
     Sys.time()
   ))
+
   for (i in seq_along(ds_glossary$id)) {
     selected_indices <- seq(
       from  = ds_glossary$start_index[i],
@@ -165,7 +171,8 @@ redcap_write <- function(
       overwrite_with_blanks       = overwrite_with_blanks,
       convert_logical_to_integer  = convert_logical_to_integer,
       verbose                     = verbose,
-      config_options              = config_options
+      config_options              = config_options,
+      handle_httr                 = handle_httr
     )
 
     lst_status_code[[i]]     <- write_result$status_code

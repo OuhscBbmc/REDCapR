@@ -232,8 +232,8 @@ redcap_read_oneshot <- function(
 
   checkmate::assert_logical(  guess_type                , any.missing=FALSE, len=1)
   checkmate::assert_numeric(   guess_max                , any.missing=FALSE, len=1, lower=1)
-  checkmate::assert_character(http_response_encoding    , any.missing=FALSE,     len=1)
 
+  checkmate::assert_character(http_response_encoding    , any.missing=FALSE,     len=1)
   checkmate::assert_class(    locale, "locale"          , null.ok = FALSE)
   checkmate::assert_logical(  verbose                   , any.missing=FALSE, len=1, null.ok=TRUE)
   checkmate::assert_list(     config_options            , any.missing=TRUE ,        null.ok=TRUE)
@@ -277,7 +277,7 @@ redcap_read_oneshot <- function(
   if (0L < nchar(forms_collapsed  )) post_body$forms    <- forms_collapsed
   if (0L < nchar(events_collapsed )) post_body$events   <- events_collapsed
 
-  # This is the important line that communicates with the REDCap server.
+  # This is the important call that communicates with the REDCap server.
   kernel <- kernel_api(
     redcap_uri      = redcap_uri,
     post_body       = post_body,

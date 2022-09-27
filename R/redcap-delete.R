@@ -88,7 +88,8 @@ redcap_delete <- function(
   records_to_delete,
   arm_of_records_to_delete = NULL,
   verbose         = TRUE,
-  config_options  = NULL
+  config_options  = NULL,
+  handle_httr     = NULL
 ) {
 
   checkmate::assert_character(redcap_uri, any.missing=FALSE, len=1, pattern="^.{1,}$")
@@ -107,7 +108,14 @@ redcap_delete <- function(
       sprintf("records[%i]", seq_along(records_to_delete) - 1)
     )
 
-  arms_call <- redcap_arm_export(redcap_uri, token, verbose = FALSE, config_options)
+  arms_call <-
+    redcap_arm_export(
+      redcap_uri      = redcap_uri,
+      token           = token,
+      verbose         = FALSE,
+      config_options  = config_options,
+      handle_httr     = handle_httr
+    )
 
   if (arms_call$has_arms && is.null(arm_of_records_to_delete)) {
     stop("This REDCap project has arms.  Please specify which arm contains the records to be deleted.")
@@ -134,8 +142,14 @@ redcap_delete <- function(
 
   try(
     {
-      # This is the important line that communicates with the REDCap server.
-      kernel <- kernel_api(redcap_uri, post_body, config_options)
+      # This is the important call that communicates with the REDCap server.
+      kernel <-
+        kernel_api(
+          redcap_uri      = redcap_uri,
+          post_body       = post_body,
+          config_options  = config_options,
+          handle_httr     = handle_httr
+        )
     },
     # Don't print the warning in the try block.  Print it below,
     #   where it's under the control of the caller.
