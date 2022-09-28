@@ -96,6 +96,10 @@
 #' be visible somewhere public. Optional.
 #' @param config_options A list of options passed to [httr::POST()].
 #' See details at [httr::httr_options()]. Optional.
+#' @param handle_httr The value passed to the `handle` parameter of
+#' [httr::POST()].
+#' This is useful for only unconventional authentication approaches.  It
+#' should be `NULL` for most institutions.  Optional.
 #' @param id_position  The column position of the variable that unique
 #' identifies the subject (typically `record_id`).
 #' This defaults to the first variable in the dataset.
@@ -216,6 +220,7 @@ redcap_read <- function(
   locale                        = readr::default_locale(),
   verbose                       = TRUE,
   config_options                = NULL,
+  handle_httr                   = NULL,
   id_position                   = 1L
 ) {
 
@@ -270,7 +275,8 @@ redcap_read <- function(
     redcap_uri         = redcap_uri,
     token              = token,
     verbose            = verbose,
-    config_options     = config_options
+    config_options     = config_options,
+    handle_httr        = handle_httr
   )
 
   if (!metadata$success) {
@@ -296,7 +302,8 @@ redcap_read <- function(
     http_response_encoding     = http_response_encoding,
     locale                     = locale,
     verbose                    = verbose,
-    config_options             = config_options
+    config_options             = config_options,
+    handle_httr                = handle_httr
   )
 
   # Stop and return to the caller if the initial query failed. --------------
@@ -371,7 +378,8 @@ redcap_read <- function(
       http_response_encoding      = http_response_encoding,
       locale                      = locale,
       verbose                     = verbose,
-      config_options              = config_options
+      config_options              = config_options,
+      handle_httr                 = handle_httr
     )
 
     lst_status_code[[i]]      <- read_result$status_code

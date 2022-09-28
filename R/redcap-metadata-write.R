@@ -22,6 +22,10 @@
 #' be visible somewhere public. Optional.
 #' @param config_options A list of options passed to [httr::POST()].
 #' See details at [httr::httr_options()]. Optional.
+#' @param handle_httr The value passed to the `handle` parameter of
+#' [httr::POST()].
+#' This is useful for only unconventional authentication approaches.  It
+#' should be `NULL` for most institutions.  Optional.
 #'
 #' @return
 #' Currently, a list is returned with the following elements:
@@ -79,8 +83,10 @@ redcap_metadata_write <- function(
   redcap_uri,
   token,
   verbose         = TRUE,
-  config_options  = NULL
+  config_options  = NULL,
+  handle_httr       = NULL
 ) {
+
   # This prevents the R CHECK NOTE: 'No visible binding for global variable Note in R CMD check';
   # Also see if( getRversion() >= "2.15.1" )    utils::globalVariables(names=c("csv_elements"))
   # https://stackoverflow.com/questions/8096313/; https://stackoverflow.com/questions/9439256
@@ -111,8 +117,14 @@ redcap_metadata_write <- function(
     returnFormat  = "csv"
   )
 
-  # This is the important line that communicates with the REDCap server.
-  kernel <- kernel_api(redcap_uri, post_body, config_options)
+  # This is the important call that communicates with the REDCap server.
+  kernel <-
+    kernel_api(
+      redcap_uri      = redcap_uri,
+      post_body       = post_body,
+      config_options  = config_options,
+      handle_httr     = handle_httr
+    )
 
   if (kernel$success) {
     field_count           <- as.integer(kernel$raw_text)

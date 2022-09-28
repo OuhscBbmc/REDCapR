@@ -22,8 +22,11 @@ redcap_read_oneshot_eav(
   datetime_range_begin = as.POSIXct(NA),
   datetime_range_end = as.POSIXct(NA),
   blank_for_gray_form_status = FALSE,
+  http_response_encoding = "UTF-8",
+  locale = readr::default_locale(),
   verbose = TRUE,
-  config_options = NULL
+  config_options = NULL,
+  handle_httr = NULL
 )
 }
 \arguments{
@@ -99,6 +102,13 @@ can be exported either as a blank value or as "0" (Incomplete). Blank values
 are recommended in a data export if the data will be re-imported into a
 REDCap project. Default is \code{FALSE}.}
 
+\item{http_response_encoding}{The encoding value passed to
+\code{\link[httr:content]{httr::content()}}.  Defaults to 'UTF-8'.}
+
+\item{locale}{a \code{\link[readr:locale]{readr::locale()}} object to specify preferences like
+number, date, and time formats.  This object is passed to
+\code{\link[readr:read_delim]{readr::read_csv()}}.  Defaults to \code{\link[readr:locale]{readr::default_locale()}}.}
+
 \item{verbose}{A boolean value indicating if \code{message}s should be printed
 to the R console during the operation.  The verbose output might contain
 sensitive information (\emph{e.g.} PHI), so turn this off if the output might
@@ -106,6 +116,11 @@ be visible somewhere public. Optional.}
 
 \item{config_options}{A list of options passed to \code{\link[httr:POST]{httr::POST()}}.
 See details at \code{\link[httr:httr_options]{httr::httr_options()}}. Optional.}
+
+\item{handle_httr}{The value passed to the \code{handle} parameter of
+\code{\link[httr:POST]{httr::POST()}}.
+This is useful for only unconventional authentication approaches.  It
+should be \code{NULL} for most institutions.  Optional.}
 }
 \value{
 Currently, a list is returned with the following elements:

@@ -24,6 +24,10 @@
 #' be visible somewhere public. Optional.
 #' @param config_options A list of options passed to [httr::POST()].
 #' See details at [httr::httr_options()]. Optional.
+#' @param handle_httr The value passed to the `handle` parameter of
+#' [httr::POST()].
+#' This is useful for only unconventional authentication approaches.  It
+#' should be `NULL` for most institutions.  Optional.
 #'
 #' @return
 #' A [readr::cols()] object is returned, which can be
@@ -152,7 +156,8 @@ redcap_metadata_coltypes <- function(
   http_response_encoding        = "UTF-8",
   locale                        = readr::default_locale(),
   verbose                       = FALSE,
-  config_options                = NULL
+  config_options                = NULL,
+  handle_httr                   = NULL
 ) {
 
   meat <-
@@ -216,10 +221,10 @@ redcap_metadata_internal <- function(
   verbose             <- verbose_prepare(verbose)
 
   # Retrieve the info necessary to infer the likely data types
-  d_var  <- REDCapR::redcap_variables(        redcap_uri, token, verbose = verbose)$data
-  d_meta <- REDCapR::redcap_metadata_read(    redcap_uri, token, verbose = verbose)$data
-  d_inst <- REDCapR::redcap_instruments(      redcap_uri, token, verbose = verbose)$data
-  d_proj <- REDCapR::redcap_project_info_read(redcap_uri, token, verbose = verbose)$data
+  d_var  <- REDCapR::redcap_variables(        redcap_uri, token, verbose = verbose, handle_httr = handle_httr)$data
+  d_meta <- REDCapR::redcap_metadata_read(    redcap_uri, token, verbose = verbose, handle_httr = handle_httr)$data
+  d_inst <- REDCapR::redcap_instruments(      redcap_uri, token, verbose = verbose, handle_httr = handle_httr)$data
+  d_proj <- REDCapR::redcap_project_info_read(redcap_uri, token, verbose = verbose, handle_httr = handle_httr)$data
 
   # Determine status of autonumbering, instrument complete status, and decimal mark
   .record_field         <- d_var$original_field_name[1]

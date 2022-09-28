@@ -17,6 +17,10 @@
 #' be visible somewhere public. Optional.
 #' @param config_options A list of options passed to [httr::POST()].
 #' See details at [httr::httr_options()]. Optional.
+#' @param handle_httr The value passed to the `handle` parameter of
+#' [httr::POST()].
+#' This is useful for only unconventional authentication approaches.  It
+#' should be `NULL` for most institutions.  Optional.
 #'
 #' @return
 #' Currently, a list is returned with the following elements:
@@ -71,7 +75,8 @@ redcap_arm_export <- function(
   redcap_uri,
   token,
   verbose         = TRUE,
-  config_options  = NULL
+  config_options  = NULL,
+  handle_httr     = NULL
 ) {
 
   checkmate::assert_character(redcap_uri, any.missing=FALSE, len=1, pattern="^.{1,}$")
@@ -89,8 +94,14 @@ redcap_arm_export <- function(
 
   try(
     {
-      # This is the important line that communicates with the REDCap server.
-      kernel <- kernel_api(redcap_uri, post_body, config_options)
+      # This is the important call that communicates with the REDCap server.
+      kernel <-
+        kernel_api(
+          redcap_uri      = redcap_uri,
+          post_body       = post_body,
+          config_options  = config_options,
+          handle_httr     = handle_httr
+        )
     },
     # Don't print the warning in the try block.  Print it below,
     #   where it's under the control of the caller.
