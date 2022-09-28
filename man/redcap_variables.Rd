@@ -4,7 +4,13 @@
 \alias{redcap_variables}
 \title{Enumerate the exported variables}
 \usage{
-redcap_variables(redcap_uri, token, verbose = TRUE, config_options = NULL)
+redcap_variables(
+  redcap_uri,
+  token,
+  verbose = TRUE,
+  config_options = NULL,
+  handle_httr = NULL
+)
 }
 \arguments{
 \item{redcap_uri}{The
@@ -23,6 +29,11 @@ be visible somewhere public. Optional.}
 
 \item{config_options}{A list of options passed to \code{\link[httr:POST]{httr::POST()}}.
 See details at \code{\link[httr:httr_options]{httr::httr_options()}}. Optional.}
+
+\item{handle_httr}{The value passed to the \code{handle} parameter of
+\code{\link[httr:POST]{httr::POST()}}.
+This is useful for only unconventional authentication approaches.  It
+should be \code{NULL} for most institutions.  Optional.}
 }
 \value{
 Currently, a list is returned with the following elements,

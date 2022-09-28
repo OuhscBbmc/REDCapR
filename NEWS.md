@@ -26,6 +26,7 @@ These features are not yet on CRAN.  Install with `remotes::install_github(repo 
 * New `redcap_log_read()` function.  Exports a project's log.  (Thanks @joundso, #383, #320)
 * New `redcap_project_info_read()` function.  Exports a project's information, such as its language and production status.  (Thanks @skadauke, #410)
 * New parameter `blank_for_gray_form_status` in the functions `redcap_read()`, `redcap_read_oneshot()`, and `redcap_read_oneshot_eav()`. (@greg-botwin, #386, #389)
+* A `httr::handle` value is accepted by functions that contact the server.  This will accommodate some institutions with unconventional environments.  (Suggested by @brandonpotvin, #429)
 * `sanitized_token()` now accepts an alternative regex pattern.  (Suggested by @maeon & @michalkouril, #370)
 
 ### Minor Enhancements
