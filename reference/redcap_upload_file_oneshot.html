@@ -69,7 +69,8 @@
 <span>  <span class="va">field</span>,</span>
 <span>  event <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  config_options <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  config_options <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  handle_httr <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -115,6 +116,13 @@ to the R console during the operation.  Optional.</p></dd>
 <dt>config_options</dt>
 <dd><p>A list of options passed to <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code>.
 See details at <code><a href="https://httr.r-lib.org/reference/httr_options.html" class="external-link">httr::httr_options()</a></code>. Optional.</p></dd>
+
+
+<dt>handle_httr</dt>
+<dd><p>The value passed to the <code>handle</code> parameter of
+<code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code>.
+This is useful for only unconventional authentication approaches.  It
+should be <code>NULL</code> for most institutions.  Optional.</p></dd>
 
 </dl></div>
     <div id="value">

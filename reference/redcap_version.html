@@ -61,7 +61,13 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">redcap_version</span><span class="op">(</span><span class="va">redcap_uri</span>, <span class="va">token</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>, config_options <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">redcap_version</span><span class="op">(</span></span>
+<span>  <span class="va">redcap_uri</span>,</span>
+<span>  <span class="va">token</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  config_options <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  handle_httr <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -90,6 +96,13 @@ be visible somewhere public. Optional.</p></dd>
 <dd><p>A list of options passed to <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code>.
 See details at <code><a href="https://httr.r-lib.org/reference/httr_options.html" class="external-link">httr::httr_options()</a></code>. Optional.</p></dd>
 
+
+<dt>handle_httr</dt>
+<dd><p>The value passed to the <code>handle</code> parameter of
+<code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code>.
+This is useful for only unconventional authentication approaches.  It
+should be <code>NULL</code> for most institutions.  Optional.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -113,7 +126,7 @@ This ensures that a the function will always return an object of class
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">uri</span>      <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
 <span class="r-in"><span><span class="va">token</span>    <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span></span>
 <span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_version</span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The REDCap version was successfully determined in 0.2 seconds. The http status code was 200.  Is is 12.5.5.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The REDCap version was successfully determined in 0.1 seconds. The http status code was 200.  Is is 12.5.5.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ‘12.5.5’</span>
 </code></pre></div>
     </div>

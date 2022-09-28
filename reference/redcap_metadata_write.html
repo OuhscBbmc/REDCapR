@@ -70,7 +70,8 @@ it works for only projects in Development status.</p>
 <span>  <span class="va">redcap_uri</span>,</span>
 <span>  <span class="va">token</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  config_options <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  config_options <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  handle_httr <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -105,6 +106,13 @@ be visible somewhere public. Optional.</p></dd>
 <dt>config_options</dt>
 <dd><p>A list of options passed to <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code>.
 See details at <code><a href="https://httr.r-lib.org/reference/httr_options.html" class="external-link">httr::httr_options()</a></code>. Optional.</p></dd>
+
+
+<dt>handle_httr</dt>
+<dd><p>The value passed to the <code>handle</code> parameter of
+<code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code>.
+This is useful for only unconventional authentication approaches.  It
+should be <code>NULL</code> for most institutions.  Optional.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -200,7 +208,7 @@ administrator to send you the static material.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 16</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_seconds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.225929</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.194612</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $raw_text</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>

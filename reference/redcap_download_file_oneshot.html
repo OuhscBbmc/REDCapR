@@ -73,7 +73,8 @@
 <span>  repeat_instrument <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  repeat_instance <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  config_options <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  config_options <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  handle_httr <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -144,6 +145,13 @@ to the R console during the operation.  Optional.</p></dd>
 <dd><p>A list of options passed to <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code>.
 See details at <code><a href="https://httr.r-lib.org/reference/httr_options.html" class="external-link">httr::httr_options()</a></code>. Optional.</p></dd>
 
+
+<dt>handle_httr</dt>
+<dd><p>The value passed to the <code>handle</code> parameter of
+<code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code>.
+This is useful for only unconventional authentication approaches.  It
+should be <code>NULL</code> for most institutions.  Optional.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -205,7 +213,7 @@ administrator to send you the static material.</p>
 <span class="r-in"><span><span class="fu">base</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="st">"mugshot-1.jpg"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">full_name</span> <span class="op">&lt;-</span> <span class="fu">base</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>pattern<span class="op">=</span><span class="st">"mugshot"</span>, fileext <span class="op">=</span> <span class="st">".jpg"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpPDKysB/mugshotd0344bebcda.jpg"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp2bv1nL/mugshot143220a5f8eb.jpg"</span>
 <span class="r-in"><span><span class="va">result_2</span>   <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_download_file_oneshot</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  file_name     <span class="op">=</span> <span class="va">full_name</span>,</span></span>
 <span class="r-in"><span>  record        <span class="op">=</span> <span class="va">record</span>,</span></span>
@@ -213,8 +221,8 @@ administrator to send you the static material.</p>
 <span class="r-in"><span>  redcap_uri    <span class="op">=</span> <span class="va">uri</span>,</span></span>
 <span class="r-in"><span>  token         <span class="op">=</span> <span class="va">token</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Preparing to download the file `/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpPDKysB/mugshotd0344bebcda.jpg`.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> image/jpeg; name="mugshot-1.jpg" successfully downloaded in 0.2 seconds, and saved as /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpPDKysB/mugshotd0344bebcda.jpg.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Preparing to download the file `/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp2bv1nL/mugshot143220a5f8eb.jpg`.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> image/jpeg; name="mugshot-1.jpg" successfully downloaded in 0.1 seconds, and saved as /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp2bv1nL/mugshot143220a5f8eb.jpg.</span>
 <span class="r-in"><span><span class="fu">base</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">full_name</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">relative_name</span> <span class="op">&lt;-</span> <span class="st">"ssss.jpg"</span><span class="op">)</span></span></span>

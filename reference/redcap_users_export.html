@@ -61,7 +61,13 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">redcap_users_export</span><span class="op">(</span><span class="va">redcap_uri</span>, <span class="va">token</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>, config_options <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">redcap_users_export</span><span class="op">(</span></span>
+<span>  <span class="va">redcap_uri</span>,</span>
+<span>  <span class="va">token</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  config_options <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  handle_httr <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -89,6 +95,13 @@ be visible somewhere public. Optional.</p></dd>
 <dt>config_options</dt>
 <dd><p>A list of options passed to <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code>.
 See details at <code><a href="https://httr.r-lib.org/reference/httr_options.html" class="external-link">httr::httr_options()</a></code>. Optional.</p></dd>
+
+
+<dt>handle_httr</dt>
+<dd><p>The value passed to the <code>handle</code> parameter of
+<code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code>.
+This is useful for only unconventional authentication approaches.  It
+should be <code>NULL</code> for most institutions.  Optional.</p></dd>
 
 </dl></div>
     <div id="value">
