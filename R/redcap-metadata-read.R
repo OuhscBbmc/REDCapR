@@ -103,7 +103,7 @@ redcap_metadata_read <- function(
     fields   = fields_collapsed
   )
 
-  # This is the important line that communicates with the REDCap server.
+  # This is the important call that communicates with the REDCap server.
   kernel <-
     kernel_api(
       redcap_uri      = redcap_uri,
