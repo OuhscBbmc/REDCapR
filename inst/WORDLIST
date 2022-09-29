@@ -2,6 +2,7 @@ BBMC
 Barbone
 CAPture
 CCAN
+CDS
 CMD
 CQI
 CRAN's
@@ -39,6 +40,7 @@ OUHSC's
 POSIXct
 POSIXlt
 ParentPRO
+PhpCap
 Pre
 PyCap
 RCurl
@@ -76,6 +78,7 @@ codecov
 conc
 csv
 daniela
+dataset's
 datetime
 dbp
 dp
@@ -84,6 +87,7 @@ edu
 eg
 ethz
 exportFieldNames
+funder's
 getOption
 github
 hatemhosny
@@ -116,6 +120,7 @@ programmatically
 projectredcap
 qqq
 rdoc
+rds
 readr
 readr's
 redcapAPI
@@ -124,6 +129,7 @@ reproducibility
 sbp
 schemas
 setenv
+supertibble
 testthat
 tibble
 tibbles
