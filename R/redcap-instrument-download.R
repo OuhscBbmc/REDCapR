@@ -56,8 +56,11 @@
 #' REDCap's supported variables.  See [validate_for_write()] for a helper
 #' function that checks for some common important conflicts.
 #'
-#' @author
+#' The function `redcap_download_instrument()` is soft-deprecated
+#' as of REDCapR 1.2.0.
+#' Please rename to [redcap_instrument_download()].
 #'
+#' @author
 #' Will Beasley
 #'
 #' @references
@@ -102,7 +105,7 @@
 #' }
 
 #' @export
-redcap_download_instrument <- function(
+redcap_instrument_download <- function(
   file_name       = NULL,
   directory       = NULL,
   overwrite       = FALSE,
@@ -209,4 +212,16 @@ redcap_download_instrument <- function(
     file_name                = file_name,
     file_path                = file_path
   )
+}
+
+#' @usage
+#' redcap_download_instrument(...)
+
+#' @export
+redcap_download_instrument <- function(...){
+  warning(
+    "The function `redcap_download_instrument()` is soft-deprecated as of REDCapR 1.2.0. ",
+    "Please use `redcap_instrument_download()`."
+  )
+  redcap_instrument_download(...)
 }

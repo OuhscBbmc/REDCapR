@@ -99,7 +99,7 @@ function that checks for some common important conflicts.
 
 The function \code{redcap_download_file_oneshot()} is soft-deprecated
 as of REDCapR 1.2.0.
-Please use \code{\link[=redcap_file_download_oneshot]{redcap_file_download_oneshot()}}.
+Please rename to \code{\link[=redcap_file_download_oneshot]{redcap_file_download_oneshot()}}.
 }
 \examples{
 \dontrun{
