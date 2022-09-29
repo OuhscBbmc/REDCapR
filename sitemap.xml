@@ -76,13 +76,16 @@
     <loc>https://ouhscbbmc.github.io/REDCapR/reference/redcap_delete.html</loc>
   </url>
   <url>
-    <loc>https://ouhscbbmc.github.io/REDCapR/reference/redcap_download_file_oneshot.html</loc>
-  </url>
-  <url>
-    <loc>https://ouhscbbmc.github.io/REDCapR/reference/redcap_download_instrument.html</loc>
-  </url>
-  <url>
     <loc>https://ouhscbbmc.github.io/REDCapR/reference/redcap_event_instruments.html</loc>
+  </url>
+  <url>
+    <loc>https://ouhscbbmc.github.io/REDCapR/reference/redcap_file_download_oneshot.html</loc>
+  </url>
+  <url>
+    <loc>https://ouhscbbmc.github.io/REDCapR/reference/redcap_file_upload_oneshot.html</loc>
+  </url>
+  <url>
+    <loc>https://ouhscbbmc.github.io/REDCapR/reference/redcap_instrument_download.html</loc>
   </url>
   <url>
     <loc>https://ouhscbbmc.github.io/REDCapR/reference/redcap_instruments.html</loc>
@@ -122,9 +125,6 @@
   </url>
   <url>
     <loc>https://ouhscbbmc.github.io/REDCapR/reference/redcap_survey_link_export_oneshot.html</loc>
-  </url>
-  <url>
-    <loc>https://ouhscbbmc.github.io/REDCapR/reference/redcap_upload_file_oneshot.html</loc>
   </url>
   <url>
     <loc>https://ouhscbbmc.github.io/REDCapR/reference/redcap_users_export.html</loc>

@@ -56,6 +56,44 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="1.2.0" id="upcoming-changes-in-v120">Upcoming Changes in v1.2.0<a class="anchor" aria-label="anchor" href="#upcoming-changes-in-v120"></a></h2>
+<p>These features are not yet on CRAN. Install with <code>remotes::install_github("OuhscBbmc/REDCapR")</code></p>
+<div class="section level4">
+<h4 id="possibly-breaking-change-1-2-0">Possibly Breaking Change<a class="anchor" aria-label="anchor" href="#possibly-breaking-change-1-2-0"></a></h4>
+<ul><li>
+<p><code><a href="../reference/redcap_read.html">redcap_read()</a></code>, <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code>, <code><a href="../reference/redcap_dag_read.html">redcap_dag_read()</a></code>, <code><a href="../reference/redcap_log_read.html">redcap_log_read()</a></code> and <code><a href="../reference/redcap_report.html">redcap_report()</a></code> return a <a href="https://tibble.tidyverse.org/" class="external-link">tibble</a> instead of a <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html" class="external-link">data.frame</a>. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/415" class="external-link">#415</a>)</p>
+<p>This should affect client code only if you expect a call like <code>ds[, 3]</code> to return a vector instead of a single-column data.frame/tibble. One solution is to upcast the tibble to a data.frame (with something like <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code>). We recommend using an approach that works for both data.frames and tibbles, such as <code>ds[[3]]</code> or <code>dplyr::pull(ds, "gender")</code>.</p>
+<p>For more information, read the short chapter in <a href="https://r4ds.had.co.nz/tibbles.html" class="external-link"><em>R for Data Science</em></a>.</p>
+</li></ul></div>
+<div class="section level4">
+<h4 id="new-features-1-2-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-1-2-0"></a></h4>
+<ul><li>New <code><a href="../reference/redcap_metadata_coltypes.html">redcap_metadata_coltypes()</a></code> function. Inspects the fields types and validation text of each field to generate a suggested <code>readr::col_types</code> object that reflects the project’s current data dictionary. The object then can be passed to the <code>col_types</code> parameter of <code><a href="../reference/redcap_read.html">redcap_read()</a></code> or <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code>. (Suggested and discussed with <a href="https://github.com/pbchase" class="external-link">@pbchase</a>, <a href="https://github.com/nutterb" class="external-link">@nutterb</a>, <a href="https://github.com/skadauke" class="external-link">@skadauke</a>, &amp; others, <a href="https://github.com/OuhscBbmc/REDCapR/issues/405" class="external-link">#405</a> &amp; <a href="https://github.com/OuhscBbmc/REDCapR/issues/294" class="external-link">#294</a>)</li>
+<li>New <code><a href="../reference/redcap_log_read.html">redcap_log_read()</a></code> function. Exports a project’s log. (Thanks <a href="https://github.com/joundso" class="external-link">@joundso</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/383" class="external-link">#383</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/320" class="external-link">#320</a>)</li>
+<li>New <code><a href="../reference/redcap_project_info_read.html">redcap_project_info_read()</a></code> function. Exports a project’s information, such as its language and production status. (Suggested by <a href="https://github.com/skadauke" class="external-link">@skadauke</a>, <a href="https://github.com/timothytsai" class="external-link">@timothytsai</a>, <a href="https://github.com/pbchase" class="external-link">@pbchase</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/236" class="external-link">#236</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/410" class="external-link">#410</a>)</li>
+<li>New parameter <code>blank_for_gray_form_status</code> in the functions <code><a href="../reference/redcap_read.html">redcap_read()</a></code>, <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code>, and <code><a href="../reference/redcap_read_oneshot_eav.html">redcap_read_oneshot_eav()</a></code>. (<a href="https://github.com/greg-botwin" class="external-link">@greg-botwin</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/386" class="external-link">#386</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/389" class="external-link">#389</a>)</li>
+<li>A <code><a href="https://httr.r-lib.org/reference/handle.html" class="external-link">httr::handle</a></code> value is accepted by functions that contact the server. This will accommodate some institutions with unconventional environments. (Suggested by <a href="https://github.com/brandonpotvin" class="external-link">@brandonpotvin</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/429" class="external-link">#429</a>)</li>
+<li>
+<code>sanitized_token()</code> now accepts an alternative regex pattern. (Suggested by <a href="https://github.com/maeon" class="external-link">@maeon</a> &amp; <a href="https://github.com/michalkouril" class="external-link">@michalkouril</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/370" class="external-link">#370</a>)</li>
+</ul></div>
+<div class="section level4">
+<h4 id="minor-enhancements-1-2-0">Minor Enhancements<a class="anchor" aria-label="anchor" href="#minor-enhancements-1-2-0"></a></h4>
+<ul><li>Better documentation for the server url (suggested by <a href="https://github.com/sutzig" class="external-link">@sutzig</a> <a href="https://github.com/OuhscBbmc/REDCapR/issues/395" class="external-link">#395</a>)</li>
+<li>
+<code>read_read_oneshot()</code>’s parameter <code>guess_max</code> now allows floating point values to support <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_csv()</a></code> ability to accept a Inf value. (Suggested by <a href="https://github.com/eveyp" class="external-link">@eveyp</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/392" class="external-link">#392</a>)</li>
+<li>pkgdown pages run &amp; display the examples, but CRAN still doesn’t run them. It’s illegal to call external resources/APIs from CRAN computers –mostly because they are occasionally unavailable, so the code breaks. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/419" class="external-link">#419</a>)</li>
+<li>Renamed some functions to follow a consistent pattern. Old names will be soft-deprecated for a while before being removed. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/416" class="external-link">#416</a>)<ul><li>
+<code><a href="../reference/redcap_file_download_oneshot.html">redcap_download_file_oneshot()</a></code> to <code>redcap_file_download_opneshot()</code>
+</li>
+<li>
+<code><a href="../reference/redcap_file_upload_oneshot.html">redcap_file_upload_oneshot()</a></code> to <code>redcap_file_upload_opneshot()</code>
+</li>
+<li>
+<code><a href="../reference/redcap_instrument_download.html">redcap_download_instrument()</a></code> to <code><a href="../reference/redcap_instrument_download.html">redcap_instrument_download()</a></code>
+</li>
+</ul></li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="1.1.0" id="version-110-released-2022-08-10">Version 1.1.0 (released 2022-08-10)<small>2022-08-10</small><a class="anchor" aria-label="anchor" href="#version-110-released-2022-08-10"></a></h2>
 <div class="section level4">
 <h4 id="new-features-1-1-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-1-1-0"></a></h4>
@@ -244,9 +282,9 @@
 <li>
 <code><a href="../reference/redcap_write.html">redcap_write()</a></code> and <code><a href="../reference/redcap_write_oneshot.html">redcap_write_oneshot()</a></code> are now tested and public.</li>
 <li>
-<code><a href="../reference/redcap_download_file_oneshot.html">redcap_download_file_oneshot()</a></code> function contributed by John Aponte (<a href="https://github.com/johnaponte" class="external-link">@johnaponte</a>; Pull request <a href="https://github.com/OuhscBbmc/REDCapR/issues/35" class="external-link">#35</a>)</li>
+<code><a href="../reference/redcap_file_download_oneshot.html">redcap_download_file_oneshot()</a></code> function contributed by John Aponte (<a href="https://github.com/johnaponte" class="external-link">@johnaponte</a>; Pull request <a href="https://github.com/OuhscBbmc/REDCapR/issues/35" class="external-link">#35</a>)</li>
 <li>
-<code><a href="../reference/redcap_upload_file_oneshot.html">redcap_upload_file_oneshot()</a></code> function contributed by <a href="https://github.com/johnaponte" class="external-link">@johnaponte</a> (Pull request <a href="https://github.com/OuhscBbmc/REDCapR/issues/34" class="external-link">#34</a>)</li>
+<code><a href="../reference/redcap_file_upload_oneshot.html">redcap_upload_file_oneshot()</a></code> function contributed by <a href="https://github.com/johnaponte" class="external-link">@johnaponte</a> (Pull request <a href="https://github.com/OuhscBbmc/REDCapR/issues/34" class="external-link">#34</a>)</li>
 <li>Users can specify if an operation should continue after an error occurs on a batch read or write. Regardless of their choice, more debugging output is written to the console if <code>verbose==TRUE</code>. Follows advice of <a href="https://github.com/johnaponte" class="external-link">@johnaponte</a>, Benjamin Nutter (<a href="https://github.com/nutterb" class="external-link">@nutterb</a>), and Rollie Parrish (<a href="https://github.com/rparrish" class="external-link">@rparrish</a>). Closes <a href="https://github.com/OuhscBbmc/REDCapR/issues/43" class="external-link">#43</a>.</li>
 </ul></div>
 <div class="section level4">
@@ -256,7 +294,7 @@
 <h4 id="updates-0-4-28">Updates<a class="anchor" aria-label="anchor" href="#updates-0-4-28"></a></h4>
 <ul><li>By default, the SSL certs come from the httr package. However, REDCapR will continue to maintain a copy in case httr’s version on CRAN gets out of date.</li>
 <li>The tests are split into two collections: one that’s run by the CRAN checks, and the other run manually. <a href="https://stackoverflow.com/questions/25595487/testthat-pattern-for-long-running-tests" class="external-link">Thanks, Gabor Csardi</a>. Any test with a dependency outside the package code (especially the REDCap test projects) is run manually so changes to the test databases won’t affect the success of building the previous version on CRAN.</li>
-<li>Corrected typo in <code><a href="../reference/redcap_download_file_oneshot.html">redcap_download_file_oneshot()</a></code> documentation, thanks to Andrew Peters (<a href="https://github.com/ARPeters" class="external-link">@ARPeters</a> <a href="https://github.com/OuhscBbmc/REDCapR/issues/45" class="external-link">#45</a>).</li>
+<li>Corrected typo in <code><a href="../reference/redcap_file_download_oneshot.html">redcap_download_file_oneshot()</a></code> documentation, thanks to Andrew Peters (<a href="https://github.com/ARPeters" class="external-link">@ARPeters</a> <a href="https://github.com/OuhscBbmc/REDCapR/issues/45" class="external-link">#45</a>).</li>
 </ul></div>
 </div>
     <div class="section level2">
