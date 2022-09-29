@@ -81,7 +81,7 @@
 #' # event <- "" # only for longitudinal projects
 #'
 #' (full_name <- base::temp(pattern="instruments-all-records-all", fileext = ".pdf"))
-#' result_1   <- REDCapR::redcap_download_instrument(
+#' result_1   <- REDCapR::redcap_instrument_download(
 #'   file_name     = full_name,
 #'   redcap_uri    = uri,
 #'   token         = token
@@ -89,7 +89,7 @@
 #' base::unlink(full_name)
 #'
 #' (full_name <- base::tempfile(pattern="instruments-all-record-1-", fileext = ".pdf"))
-#' result_2   <- REDCapR::redcap_download_instrument(
+#' result_2   <- REDCapR::redcap_instrument_download(
 #'   record        = 5,
 #'   file_name     = full_name,
 #'   redcap_uri    = uri,
@@ -97,7 +97,7 @@
 #' )
 #' base::unlink(full_name)
 #' (full_name <- base::tempfile(pattern="instrument-1-record-1-", fileext=".pdf"))
-#' result_3   <- REDCapR::redcap_download_instrument(
+#' result_3   <- REDCapR::redcap_instrument_download(
 #'   record        = 5,
 #'   instrument    = "health",
 #'   file_name     = full_name,

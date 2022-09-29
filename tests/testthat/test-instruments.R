@@ -10,7 +10,7 @@ test_that("download instrument", {
 
   tryCatch({
     expect_message(
-      returned_object <- redcap_download_instrument(
+      returned_object <- redcap_instrument_download(
         redcap_uri  = credential$redcap_uri,
         token       = credential$token
       ),
@@ -42,7 +42,7 @@ test_that("download instrument conflict -Error", {
   tryCatch({
     # The first run should work.
     expect_message(
-      returned_object_1 <- redcap_download_instrument(
+      returned_object_1 <- redcap_instrument_download(
         redcap_uri    = credential$redcap_uri,
         token         = credential$token,
       ),
@@ -56,7 +56,7 @@ test_that("download instrument conflict -Error", {
 
     # The second run should fail (b/c the file already exists).
     expect_error(
-      returned_object_2 <- redcap_download_instrument(
+      returned_object_2 <- redcap_instrument_download(
         redcap_uri    = credential$redcap_uri,
         token         = credential$token,
         overwrite     = FALSE
@@ -77,7 +77,7 @@ test_that("bad token -Error", {
 
   testthat::expect_message(
     returned_object <-
-      redcap_download_instrument(
+      redcap_instrument_download(
         redcap_uri  = credential$redcap_uri,
         token       = "BAD00000000000000000000000000000"
       ),
