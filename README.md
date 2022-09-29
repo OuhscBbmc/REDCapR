@@ -43,7 +43,7 @@ The *development* version can be installed from [GitHub](https://github.com/Ouhs
 
 ```r
 install.packages("remotes") # Run this line if the 'remotes' package isn't installed already.
-remotes::install_github(repo="OuhscBbmc/REDCapR")
+remotes::install_github("OuhscBbmc/REDCapR")
 ```
 The  [ouhscbbmc.github.io/REDCapR](https://ouhscbbmc.github.io/REDCapR/) site describes the package functions, and includes documents involving [basic operations](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html), [advanced operations](https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.html), [token security](https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html), and
 [troubleshooting](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html).

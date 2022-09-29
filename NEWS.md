@@ -1,16 +1,17 @@
 Release History
 ==========================================================
 
+<!-- pkgdown won't show this section because the header doesn't match a pattern. -->
 Quick links:
 
 * [CRAN Archive of older versions](https://cran.r-project.org/src/contrib/Archive/REDCapR/)
 * [Current & previous GitHub Issues](https://github.com/OuhscBbmc/REDCapR/issues?q=is%3Aissue)
 * [Documentation for current GitHub version](https://ouhscbbmc.github.io/REDCapR/)
 
-Upcoming Release
+Upcoming Changes in v1.2.0
 ==========================================================
 
-These features are not yet on CRAN.  Install with `remotes::install_github(repo = "OuhscBbmc/REDCapR")`
+These features are not yet on CRAN.  Install with `remotes::install_github("OuhscBbmc/REDCapR")`
 
 ### Possibly Breaking Change
 
