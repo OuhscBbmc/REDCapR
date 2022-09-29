@@ -2,6 +2,7 @@
 % Please edit documentation in R/redcap-instrument-download.R
 \name{redcap_instrument_download}
 \alias{redcap_instrument_download}
+\alias{redcap_download_instrument}
 \title{Download REDCap Instruments}
 \usage{
 redcap_instrument_download(

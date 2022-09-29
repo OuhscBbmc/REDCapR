@@ -1,6 +1,9 @@
 #' @title
 #' Download REDCap Instruments
 #'
+#' @aliases
+#' redcap_instrument_download redcap_download_instrument
+#'
 #' @description
 #' Download instruments as a pdf, with or without responses.
 #'

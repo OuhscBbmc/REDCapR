@@ -1,6 +1,9 @@
 #' @title
 #' Upload a file into to a REDCap project record
 #'
+#' @aliases
+#' redcap_file_upload_oneshot redcap_upload_file_oneshot
+#'
 #' @description
 #' This function uses REDCap's API to upload a file.
 #'
@@ -47,6 +50,10 @@
 #' Currently, the function doesn't modify any variable types to conform to
 #' REDCap's supported variables.  See [validate_for_write()] for a helper
 #' function that checks for some common important conflicts.
+#'
+#' The function `redcap_upload_file_oneshot()` is soft-deprecated
+#' as of REDCapR 1.2.0.
+#' Please rename to [redcap_file_upload_oneshot()].
 #'
 #' @author
 #' Will Beasley, John J. Aponte
@@ -100,7 +107,7 @@
 #' }
 
 #' @export
-redcap_upload_file_oneshot <- function(
+redcap_file_upload_oneshot <- function(
   file_name,
   record,
   redcap_uri,
@@ -175,4 +182,16 @@ redcap_upload_file_oneshot <- function(
     elapsed_seconds         = kernel$elapsed_seconds,
     raw_text                = kernel$raw_text
   )
+}
+
+#' @usage
+#' redcap_upload_file_oneshot(...)
+
+#' @export
+redcap_upload_file_oneshot <- function(...){
+  warning(
+    "The function `redcap_upload_file_oneshot()` is soft-deprecated as of REDCapR 1.2.0. ",
+    "Please use `redcap_file_upload_oneshot()`."
+  )
+  redcap_file_upload_oneshot(...)
 }
