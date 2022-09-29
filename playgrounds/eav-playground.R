@@ -81,7 +81,7 @@ ds_possible_checkbox_rows  <-
     field_name = distinct_checkboxes,
     record     = unique(ds_eav$record),
     field_type = "checkbox",
-    event_id   =  unique(ds_eav$event_id)
+    event_id   = unique(ds_eav$event_id)
   )
 
 # ds_metadata %>%
