@@ -29,6 +29,7 @@ articles:
       - SecurityDatabase
       - TroubleshootingApiCalls
       - advanced-redcapr-operations
+      - longitudinal-and-repeating
 reference:
 
   - title: "Records via the API"
