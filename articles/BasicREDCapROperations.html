@@ -86,7 +86,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Basic REDCapR Operations</h1>
             
-            <h4 data-toc-skip class="date">2022-09-28</h4>
+            <h4 data-toc-skip class="date">2022-09-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/HEAD/vignettes/BasicREDCapROperations.Rmd" class="external-link"><code>vignettes/BasicREDCapROperations.Rmd</code></a></small>
       <div class="hidden name"><code>BasicREDCapROperations.Rmd</code></div>
@@ -117,11 +117,11 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Return all records and all variables.</span></span>
 <span><span class="va">ds_all_rows_all_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-09-28 22:38:20.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.4 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-09-29 03:28:42.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
  [36m── [39m  [1mColumn specification [22m  [36m──────────────────────────────────────────────────────── [39m
 cols(
@@ -166,11 +166,11 @@ cols(
 <span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  records    <span class="op">=</span> <span class="va">desired_records_v1</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2022-09-28 22:38:21.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2022-09-29 03:28:44.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
-<pre><code>2 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
  [36m── [39m  [1mColumn specification [22m  [36m──────────────────────────────────────────────────────── [39m
 cols(
@@ -193,11 +193,11 @@ cols(
 <span>  token             <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  records_collapsed <span class="op">=</span> <span class="va">desired_records_v2</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
-<pre><code>2 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2022-09-28 22:38:22.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 2 records  at 2022-09-29 03:28:45.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</code></pre>
-<pre><code>2 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
  [36m── [39m  [1mColumn specification [22m  [36m──────────────────────────────────────────────────────── [39m
 cols(
@@ -238,9 +238,9 @@ cols(
 <span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  fields     <span class="op">=</span> <span class="va">desired_fields_v1</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-09-28 22:38:23.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-09-29 03:28:46.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -258,11 +258,11 @@ cols(
 <span>  token            <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  fields_collapsed <span class="op">=</span> <span class="va">desired_fields_v2</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-09-28 22:38:25.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-09-29 03:28:48.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
  [36m── [39m  [1mColumn specification [22m  [36m──────────────────────────────────────────────────────── [39m
 cols(
@@ -294,11 +294,11 @@ cols(
 <span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  fields     <span class="op">=</span> <span class="va">desired_fields_v3</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
-<pre><code>5 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-09-28 22:38:26.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-09-29 03:28:49.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
-<pre><code>5 records and 3 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
  [36m── [39m  [1mColumn specification [22m  [36m──────────────────────────────────────────────────────── [39m
 cols(
@@ -334,9 +334,9 @@ cols(
 <span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  records    <span class="op">=</span> <span class="va">desired_records_v3</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</code></pre>
+<pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 2 records  at 2022-09-28 22:38:27.</code></pre>
+<pre><code>Starting to read 2 records  at 2022-09-29 03:28:50.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).</code></pre>
 <pre><code>2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -389,7 +389,7 @@ cols(
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code>The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
-<pre><code>Starting to read 5 records  at 2022-09-28 22:38:28.</code></pre>
+<pre><code>Starting to read 5 records  at 2022-09-29 03:28:52.</code></pre>
 <pre><code>Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</code></pre>
 <pre><code>5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</code></pre>
 <pre><code>
@@ -442,7 +442,7 @@ $datetime_range_end
 [1] NA
 
 $elapsed_seconds
-[1] 1.215379</code></pre>
+[1] 1.136738</code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -461,7 +461,7 @@ Environment <span class="glyphicon glyphicon-plus-sign"></span>
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       UTC
- date     2022-09-28
+ date     2022-09-29
  pandoc   2.14.2 @ /usr/local/bin/ (via rmarkdown)
 
  [1m [36m─ Packages ─────────────────────────────────────────────────────────────────── [39m [22m
@@ -504,7 +504,7 @@ Environment <span class="glyphicon glyphicon-plus-sign"></span>
  R6            2.5.1     [90m2021-08-19 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
  ragg          1.2.2     [90m2022-02-21 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
  readr         2.1.2     [90m2022-01-30 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
- REDCapR     *  [1m [35m1.1.9003 [39m [22m  [90m2022-09-28 [39m  [90m[1] [39m  [1m [35mlocal [39m [22m
+ REDCapR     *  [1m [35m1.1.9003 [39m [22m  [90m2022-09-29 [39m  [90m[1] [39m  [1m [35mlocal [39m [22m
  rlang         1.0.6     [90m2022-09-24 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
  rmarkdown     2.16      [90m2022-08-24 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
  rprojroot     2.0.3     [90m2022-04-02 [39m  [90m[1] [39m  [90mCRAN (R 4.2.0) [39m
@@ -535,7 +535,7 @@ Environment <span class="glyphicon glyphicon-plus-sign"></span>
  [90m [2] /Library/Frameworks/R.framework/Versions/4.2/Resources/library [39m
 
  [1m [36m────────────────────────────────────────────────────────────────────────────── [39m [22m</code></pre>
-</details><p>Report rendered by runner at 2022-09-28, 22:38 +0000 in 11 seconds.</p>
+</details><p>Report rendered by runner at 2022-09-29, 03:28 +0000 in 14 seconds.</p>
 </div>
   </div>
 
