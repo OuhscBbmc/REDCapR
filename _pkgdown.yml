@@ -43,8 +43,8 @@ reference:
       - redcap_write_oneshot
       - redcap_delete
       - redcap_report
-      - redcap_download_file_oneshot
-      - redcap_upload_file_oneshot
+      - redcap_file_download_oneshot
+      - redcap_file_upload_oneshot
 
   - title: "Additional API Methods"
     desc: >
@@ -52,8 +52,8 @@ reference:
     contents:
       - redcap_arm_export
       - redcap_dag_read
-      - redcap_download_instrument
       - redcap_event_instruments
+      - redcap_instrument_download
       - redcap_instruments
       - redcap_log_read
       - redcap_metadata_coltypes
@@ -92,3 +92,11 @@ reference:
       - replace_nas_with_explicit
       - sanitize_token
       - validate
+
+  - title: "Soft Deprecated"
+    desc: >
+      Functions that have been renamed and will be removed in future REDCapR versions.
+    contents:
+      - redcap_download_file_oneshot
+      - redcap_upload_file_oneshot
+      - redcap_download_instrument
