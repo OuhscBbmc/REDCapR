@@ -88,7 +88,7 @@ for (i in seq_len(file_count)) {
 
   tryCatch({
     expect_message(
-      returned_object <- redcap_download_file_oneshot(
+      returned_object <- redcap_file_download_oneshot(
         record        = record,
         field         = field,
         redcap_uri    = start_clean_result$redcap_project$redcap_uri,

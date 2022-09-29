@@ -109,7 +109,7 @@ record  <- 1
 field   <- "mugshot"
 # event <- "" # only for longitudinal projects
 
-result_1 <- REDCapR::redcap_download_file_oneshot(
+result_1 <- REDCapR::redcap_file_download_oneshot(
   record        = record,
   field         = field,
   redcap_uri    = uri,
@@ -118,7 +118,7 @@ result_1 <- REDCapR::redcap_download_file_oneshot(
 base::unlink("mugshot-1.jpg")
 
 (full_name <- base::tempfile(pattern="mugshot", fileext = ".jpg"))
-result_2   <- REDCapR::redcap_download_file_oneshot(
+result_2   <- REDCapR::redcap_file_download_oneshot(
   file_name     = full_name,
   record        = record,
   field         = field,
@@ -128,7 +128,7 @@ result_2   <- REDCapR::redcap_download_file_oneshot(
 base::unlink(full_name)
 
 (relative_name <- "ssss.jpg")
-result_3 <- REDCapR::redcap_download_file_oneshot(
+result_3 <- REDCapR::redcap_file_download_oneshot(
   file_name    = relative_name,
   record       = record,
   field        = field,
