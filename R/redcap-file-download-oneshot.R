@@ -1,6 +1,9 @@
 #' @title
 #' Download a file from a REDCap project record
 #'
+#' @aliases
+#' redcap_file_download_oneshot redcap_download_file_oneshot
+#'
 #' @description
 #' This function uses REDCap's API to download a file.
 #'
@@ -62,6 +65,10 @@
 #' REDCap's supported variables.  See [validate_for_write()] for a helper
 #' function that checks for some common important conflicts.
 #'
+#' The function `redcap_download_file_oneshot()` is soft-deprecated
+#' as of REDCapR 1.2.0.
+#' Please rename to [redcap_file_download_oneshot()].
+#'
 #' @author
 #' Will Beasley, John J. Aponte
 #'
@@ -111,7 +118,7 @@
 #' }
 
 #' @export
-redcap_download_file_oneshot <- function(
+redcap_file_download_oneshot <- function(
   file_name       = NULL,
   directory       = NULL,
   overwrite       = FALSE,
@@ -247,4 +254,16 @@ redcap_download_file_oneshot <- function(
     file_name                = file_name,
     file_path                = file_path
   )
+}
+
+#' @usage
+#' redcap_download_file_oneshot(...)
+
+#' @export
+redcap_download_file_oneshot <- function(...){
+  warning(
+    "The function `redcap_download_file_oneshot()` is soft-deprecated as of REDCapR 1.2.0. ",
+    "Please use `redcap_file_download_oneshot()`."
+  )
+  redcap_file_download_oneshot(...)
 }
