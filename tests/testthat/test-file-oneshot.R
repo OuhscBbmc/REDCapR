@@ -318,7 +318,7 @@ test_that("upload w/ bad token -Error", {
 
   testthat::expect_message(
     returned_object <-
-      redcap_upload_file_oneshot(
+      redcap_file_upload_oneshot(
         file_name   = file_path,
         record      = 1,
         field       = "mugshot",

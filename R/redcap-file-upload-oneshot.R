@@ -78,7 +78,7 @@
 #' record    <- 1
 #' file_path <- system.file("test-data/mugshot-1.jpg", package = "REDCapR")
 #'
-#' REDCapR::redcap_upload_file_oneshot(
+#' REDCapR::redcap_file_upload_oneshot(
 #'   file_name  = file_path,
 #'   record     = record,
 #'   field      = field,
@@ -96,7 +96,7 @@
 #' for (i in seq_along(records)) {
 #'   record    <- records[i]
 #'   file_path <- file_paths[i]
-#'   REDCapR::redcap_upload_file_oneshot(
+#'   REDCapR::redcap_file_upload_oneshot(
 #'     file_name  = file_path,
 #'     record     = record,
 #'     field      = field,
