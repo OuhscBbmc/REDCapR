@@ -167,7 +167,8 @@ redcap_metadata_coltypes <- function(
       http_response_encoding,
       locale,
       verbose,
-      config_options
+      config_options,
+      handle_httr
     )$d_variable %>%
     dplyr::pull(.data$aligned)
 
@@ -206,7 +207,8 @@ redcap_metadata_internal <- function(
     http_response_encoding        = "UTF-8",
     locale                        = readr::default_locale(),
     verbose                       = FALSE,
-    config_options                = NULL
+    config_options                = NULL,
+    handle_httr                   = NULL
 ) {
 
   checkmate::assert_character(redcap_uri                , any.missing=FALSE, len=1, pattern="^.{1,}$")
