@@ -18,7 +18,7 @@ test_that("NameComesFromREDCap", {
   expected_outcome_message <- ".+"
   tryCatch({
     capture_messages(
-      returned_object <- redcap_download_file_oneshot(
+      returned_object <- redcap_file_download_oneshot(
         record        = record,
         field         = field,
         redcap_uri    = credential$redcap_uri,
@@ -66,7 +66,7 @@ test_that("FullPathSpecified", {
   full_name <- base::tempfile(pattern="mugshot", fileext=".jpg")
   tryCatch({
     expect_message(
-      returned_object <- redcap_download_file_oneshot(
+      returned_object <- redcap_file_download_oneshot(
         file_name     = full_name,
         record        = record,
         field         = field,
@@ -115,7 +115,7 @@ test_that("RelativePath", {
   (relative_name <- "ssss.jpg")
   tryCatch({
     expect_message(
-      returned_object <- redcap_download_file_oneshot(
+      returned_object <- redcap_file_download_oneshot(
         file_name   = relative_name,
         record      = record,
         field       = field,
@@ -164,7 +164,7 @@ test_that("Full Directory Specific", {
 
   tryCatch({
     expect_message(
-      returned_object <- redcap_download_file_oneshot(
+      returned_object <- redcap_file_download_oneshot(
         directory   = directory,
         record      = record,
         field       = field,
@@ -211,7 +211,7 @@ test_that("download file conflict -Error", {
   tryCatch({
     # The first run should work.
     expect_message(
-      returned_object_1 <- redcap_download_file_oneshot(
+      returned_object_1 <- redcap_file_download_oneshot(
         record        = record,
         field         = field,
         redcap_uri    = credential$redcap_uri,
@@ -227,7 +227,7 @@ test_that("download file conflict -Error", {
 
     # The second run should fail (b/c the file already exists).
     expect_error(
-      returned_object_2 <- redcap_download_file_oneshot(
+      returned_object_2 <- redcap_file_download_oneshot(
         record        = record,
         field         = field,
         redcap_uri    = credential$redcap_uri,
@@ -259,7 +259,7 @@ test_that("Download Error --bad field name", {
 
   tryCatch({
     expect_message(
-      returned_object <- redcap_download_file_oneshot(
+      returned_object <- redcap_file_download_oneshot(
         directory     = directory,
         record        = record,
         field         = field,
@@ -291,7 +291,7 @@ test_that("download w/ bad token -Error", {
 
   testthat::expect_message(
     returned_object <-
-      redcap_download_file_oneshot(
+      redcap_file_download_oneshot(
         record        = 1,
         field         = "mugshot",
         redcap_uri  = credential$redcap_uri,
@@ -318,7 +318,7 @@ test_that("upload w/ bad token -Error", {
 
   testthat::expect_message(
     returned_object <-
-      redcap_upload_file_oneshot(
+      redcap_file_upload_oneshot(
         file_name   = file_path,
         record      = 1,
         field       = "mugshot",

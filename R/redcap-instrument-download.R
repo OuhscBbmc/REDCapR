@@ -1,6 +1,9 @@
 #' @title
 #' Download REDCap Instruments
 #'
+#' @aliases
+#' redcap_instrument_download redcap_download_instrument
+#'
 #' @description
 #' Download instruments as a pdf, with or without responses.
 #'
@@ -56,8 +59,11 @@
 #' REDCap's supported variables.  See [validate_for_write()] for a helper
 #' function that checks for some common important conflicts.
 #'
-#' @author
+#' The function `redcap_download_instrument()` is soft-deprecated
+#' as of REDCapR 1.2.0.
+#' Please rename to [redcap_instrument_download()].
 #'
+#' @author
 #' Will Beasley
 #'
 #' @references
@@ -75,7 +81,7 @@
 #' # event <- "" # only for longitudinal projects
 #'
 #' (full_name <- base::temp(pattern="instruments-all-records-all", fileext = ".pdf"))
-#' result_1   <- REDCapR::redcap_download_instrument(
+#' result_1   <- REDCapR::redcap_instrument_download(
 #'   file_name     = full_name,
 #'   redcap_uri    = uri,
 #'   token         = token
@@ -83,7 +89,7 @@
 #' base::unlink(full_name)
 #'
 #' (full_name <- base::tempfile(pattern="instruments-all-record-1-", fileext = ".pdf"))
-#' result_2   <- REDCapR::redcap_download_instrument(
+#' result_2   <- REDCapR::redcap_instrument_download(
 #'   record        = 5,
 #'   file_name     = full_name,
 #'   redcap_uri    = uri,
@@ -91,7 +97,7 @@
 #' )
 #' base::unlink(full_name)
 #' (full_name <- base::tempfile(pattern="instrument-1-record-1-", fileext=".pdf"))
-#' result_3   <- REDCapR::redcap_download_instrument(
+#' result_3   <- REDCapR::redcap_instrument_download(
 #'   record        = 5,
 #'   instrument    = "health",
 #'   file_name     = full_name,
@@ -102,7 +108,7 @@
 #' }
 
 #' @export
-redcap_download_instrument <- function(
+redcap_instrument_download <- function(
   file_name       = NULL,
   directory       = NULL,
   overwrite       = FALSE,
@@ -209,4 +215,18 @@ redcap_download_instrument <- function(
     file_name                = file_name,
     file_path                = file_path
   )
+}
+
+#' @usage
+#' redcap_download_instrument(...)
+
+#' @export
+redcap_download_instrument <- function(...){
+  # nocov start
+  warning(
+    "The function `redcap_download_instrument()` is soft-deprecated as of REDCapR 1.2.0. ",
+    "Please use `redcap_instrument_download()`."
+  )
+  redcap_instrument_download(...)
+  # nocov end
 }

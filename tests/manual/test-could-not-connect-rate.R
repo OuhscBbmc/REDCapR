@@ -34,7 +34,7 @@ file_read_error_count <- 0L
 for (i in seq_len(file_read_count)) {
 
   tryCatch({
-    returned_object <- redcap_download_file_oneshot(
+    returned_object <- redcap_file_download_oneshot(
       record      = 1L,
       field       = "mugshot",
       verbose     = FALSE,

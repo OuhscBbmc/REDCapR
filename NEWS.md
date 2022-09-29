@@ -1,16 +1,17 @@
 Release History
 ==========================================================
 
+<!-- pkgdown won't show this section because the header doesn't match a pattern. -->
 Quick links:
 
 * [CRAN Archive of older versions](https://cran.r-project.org/src/contrib/Archive/REDCapR/)
 * [Current & previous GitHub Issues](https://github.com/OuhscBbmc/REDCapR/issues?q=is%3Aissue)
 * [Documentation for current GitHub version](https://ouhscbbmc.github.io/REDCapR/)
 
-Upcoming Release
+Upcoming Changes in v1.2.0
 ==========================================================
 
-These features are not yet on CRAN.  Install with `remotes::install_github(repo = "OuhscBbmc/REDCapR")`
+These features are not yet on CRAN.  Install with `remotes::install_github("OuhscBbmc/REDCapR")`
 
 ### Possibly Breaking Change
 
@@ -34,6 +35,10 @@ These features are not yet on CRAN.  Install with `remotes::install_github(repo 
 * Better documentation for the server url (suggested by @sutzig #395)
 * `read_read_oneshot()`'s parameter `guess_max` now allows floating point values to support `readr::read_csv()` ability to accept a Inf value.  (Suggested by @eveyp, #392)
 * pkgdown pages run & display the examples, but CRAN still doesn't run them. It's illegal to call external resources/APIs from CRAN computers --mostly because they are occasionally unavailable, so the code breaks. (#419)
+* Renamed some functions to follow a consistent pattern.  Old names will be soft-deprecated for a while before being removed. (#416)
+  * `redcap_download_file_oneshot()` to `redcap_file_download_opneshot()`
+  * `redcap_file_upload_oneshot()` to `redcap_file_upload_opneshot()`
+  * `redcap_download_instrument()` to `redcap_instrument_download()`
 
 Version 1.1.0 (released 2022-08-10)
 ==========================================================

@@ -1,6 +1,9 @@
 #' @title
 #' Upload a file into to a REDCap project record
 #'
+#' @aliases
+#' redcap_file_upload_oneshot redcap_upload_file_oneshot
+#'
 #' @description
 #' This function uses REDCap's API to upload a file.
 #'
@@ -48,6 +51,10 @@
 #' REDCap's supported variables.  See [validate_for_write()] for a helper
 #' function that checks for some common important conflicts.
 #'
+#' The function `redcap_upload_file_oneshot()` is soft-deprecated
+#' as of REDCapR 1.2.0.
+#' Please rename to [redcap_file_upload_oneshot()].
+#'
 #' @author
 #' Will Beasley, John J. Aponte
 #'
@@ -71,7 +78,7 @@
 #' record    <- 1
 #' file_path <- system.file("test-data/mugshot-1.jpg", package = "REDCapR")
 #'
-#' REDCapR::redcap_upload_file_oneshot(
+#' REDCapR::redcap_file_upload_oneshot(
 #'   file_name  = file_path,
 #'   record     = record,
 #'   field      = field,
@@ -89,7 +96,7 @@
 #' for (i in seq_along(records)) {
 #'   record    <- records[i]
 #'   file_path <- file_paths[i]
-#'   REDCapR::redcap_upload_file_oneshot(
+#'   REDCapR::redcap_file_upload_oneshot(
 #'     file_name  = file_path,
 #'     record     = record,
 #'     field      = field,
@@ -100,7 +107,7 @@
 #' }
 
 #' @export
-redcap_upload_file_oneshot <- function(
+redcap_file_upload_oneshot <- function(
   file_name,
   record,
   redcap_uri,
@@ -175,4 +182,18 @@ redcap_upload_file_oneshot <- function(
     elapsed_seconds         = kernel$elapsed_seconds,
     raw_text                = kernel$raw_text
   )
+}
+
+#' @usage
+#' redcap_upload_file_oneshot(...)
+
+#' @export
+redcap_upload_file_oneshot <- function(...){
+  # nocov start
+  warning(
+    "The function `redcap_upload_file_oneshot()` is soft-deprecated as of REDCapR 1.2.0. ",
+    "Please use `redcap_file_upload_oneshot()`."
+  )
+  redcap_file_upload_oneshot(...)
+  # nocov end
 }

@@ -151,7 +151,7 @@ upload_file_simple <- function(redcap_uri, token = token) {
   for (i in seq_along(records)) {
     record    <- records[i]
     file_path <- file_paths[i]
-    redcap_upload_file_oneshot(
+    redcap_file_upload_oneshot(
       file_name   = file_path,
       record      = record,
       field       = field,
