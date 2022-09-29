@@ -1,6 +1,12 @@
 ---
 title: "Retrieving Longitudinal and Repeating Structures --DRAFT"
-author: Will Beasley [Biomedical & Behavior Methodology Core](https://www.ouhsc.edu/bbmc/team/), OUHSC Pediatrics
+author: 
+- name: Will Beasley 
+  affiliation:
+  - Biomedical & Behavior Methodology Core, OUHSC Pediatrics
+- name: Stephan or Rich?
+  affiliation: 
+  - CHOP
 output:
   rmarkdown::html_vignette
 vignette: >
@@ -175,16 +181,16 @@ However we recommend calling [REDCapR](https://ouhscbbmc.github.io/REDCapR/) in 
 
 * you are comfortable with managing data with R, or
 * your analyses require only a fraction of the data (such as (a) you need only the first event, or (b) the analyses don't involve most of the instruments), or
-* you want to specify the variables' data types with [`readr::cols()`]{https://readr.tidyverse.org/reference/cols.html}.
+* you want to specify the variables' data types with [`readr::cols()`](https://readr.tidyverse.org/reference/cols.html).
 
 If in doubt, start with REDCapTidieR.  Escalate to REDCapR if your download time is too long and might be decreased by reducing the information retrieved from the server and transported across the network.
 
 Escalating to REDCapR
 ------------------------------------------------------------------
 
-Even if you know that you'll need REDCapR's low-level control, consider starting with REDCapTidieR anyway.  ...particularly if you are unsure how to specify the grain of each table.  The structure of REDCapTidieR's tables easily compatible with conventional analyses.  If you need the performance of REDCapR but are unsure how the tables should look, simply execute something like `REDCapTidieR::redcap_read_tidy(url, project_token)` and study its output.  Then try to mimic it exactly with `REDCapR::redcap_read()` calls.
+Even if you think you'll need REDCapR's low-level control, consider starting with REDCapTidieR anyway.  ...particularly if you are unsure how to specify the grain of each table.  The structure of REDCapTidieR's tables easily compatible with conventional analyses.  If you need the performance of REDCapR but are unsure how the tables should look, simply execute something like `REDCapTidieR::redcap_read_tidy(url, project_token)` and study its output.  Then try to mimic it exactly with `REDCapR::redcap_read()` calls.
 
-Finally, cull unwanted cells using [`REDCapR::redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html) parameters.  These data points will not even leave the REDCap instance, which will improve performance.  Some possible strategies include passing [arguments](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html#arguments) to
+Finally, cull unwanted cells using `REDCapR::redcap_read()` parameters.  These data points will not even leave the REDCap instance, which will improve performance.  Some possible strategies include passing [arguments](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html#arguments) to
 
 * `forms`: this will retrieve only the specified instruments/forms.  Beginners should start here.  It is easy to conceptualize and usually has a big increase in speed for just a little development work.
 * `events`: this will retrieve only the desired events within a longitudinal project.  For instance if the analyses involve only the "intake" and "follow up #1" events, leave follow ups #2-10 on the server.
@@ -193,7 +199,7 @@ Finally, cull unwanted cells using [`REDCapR::redcap_read()`](https://ouhscbbmc.
 * `filter_logic`: this will leverage the observation values to limit the rows returned.  Because the underlying table does not index the obs values, this will be less computationally efficient than the options above.
 * `datetime_range_begin` & `datetime_range_end`: this will return only the records that have been created or modified during the specified window.
 
-Please note that the efficiency gains from moving from the block dataset to REDCapTidieR is different than the gains from moving from REDCapTidieR.  When moving to REDCapTidieR, you are eliminating empty cells that will never contain worthwhile data.  When moving to REDCapR, you are eliminating cells that contain data, but may not be relevant to your analysis (such as a patient's name or the time a lab specimen was collected).
+Note that the efficiency gain from moving from the block dataset to REDCapTidieR is different than the gain from moving from REDCapTidieR.  When moving to from Table 5 to qqq (*via* REDCapTidieR), you are eliminating empty cells that will never contain worthwhile data.  When moving to REDCapR, you are eliminating cells that contain data, but may not be relevant to your analysis (such as a patient's name or the time a lab specimen was collected). {This paragraph needs work.}
 
 Advanced
 ==================================================================
@@ -237,7 +243,7 @@ Caching Results for other Languages
 
 Packages for other programming languages have been developed that access REDCap's API, such [PyCap](http://redcap-tools.github.io/PyCap/) and [PhpCap](https://github.com/iuredcap/phpcap).  Please see a more complete list at <https://redcap-tools.github.io/projects>.  The caching strategy described above may also benefit your investigation if:
 
-* it uses a language like SAS that does not support packages.  We strongly discourage deploying loose scripts that call the API.  When something is fixed in the original script, it must be distributed by the developer to the ~50 client institutions, then it must by copied to the ~100 projects within each institution.  In contrast, when a developer updates a package distributed through a repository like CRAN, the client needs to run only [`base::update.packages()`]{https://stat.ethz.ch/R-manual/R-devel/library/utils/html/update.packages.html} once per machine to update all its packages --not just REDCap packages.  Data scientists already do this regularly.
+* it uses a language like SAS that does not support packages.  We strongly discourage deploying loose scripts that call the API.  When something is fixed in the original script, it must be distributed by the developer to the ~50 client institutions, then it must by copied to the ~100 projects within each institution.  In contrast, when a developer updates a package distributed through a repository like CRAN, the client needs to run only [`base::update.packages()`](https://stat.ethz.ch/R-manual/R-devel/library/utils/html/update.packages.html) once per machine to update all its packages --not just REDCap packages.  Data scientists already do this regularly.
 
 * it uses a language like Julia that lacks a stable or updated package.  The REDCap developers are always releasing useful features (*e.g.*, repeated measures) that improve the quality and efficiency of your research.  Leverage them.
 
