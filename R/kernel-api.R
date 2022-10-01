@@ -20,10 +20,11 @@
 #' [httr::POST()].
 #' This is useful for only unconventional authentication approaches.  It
 #' should be `NULL` for most institutions.
-# @param encode_httr The value passed to the `encode` parameter of
-# [httr::POST()].
-# This is useful for only unconventional authentication approaches.
-# Defaults to `"multipart"`, which is appropriate for most institutions.
+#' @param encode_httr The value passed to the `encode` parameter of
+#' [httr::POST()].
+#' Defaults to `"form"`, which is appropriate for most actions.
+#' (Currently, the only exception is importing a file,
+#' which uses "multipart".)
 #'
 #' @return
 #' A [utils::packageVersion].
@@ -58,8 +59,8 @@ kernel_api <- function(
   config_options,
   encoding            = "UTF-8",
   content_type        = "text/csv",
-  handle_httr         = NULL
-  # encode_httr         = "multipart"
+  handle_httr         = NULL,
+  encode_httr         = "form"
 ) {
 
   checkmate::assert_character(redcap_uri    , len = 1, any.missing = FALSE, null.ok = FALSE)
@@ -78,7 +79,7 @@ kernel_api <- function(
     body    = post_body,
     config  = config_options,
     handle  = handle_httr,
-    encode  = "multipart",
+    encode  = encode_httr,
     httr::user_agent("OuhscBbmc/REDCapR")
   )
 

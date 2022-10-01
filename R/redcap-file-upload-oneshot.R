@@ -153,7 +153,8 @@ redcap_file_upload_oneshot <- function(
       redcap_uri      = redcap_uri,
       post_body       = post_body,
       config_options  = config_options,
-      handle_httr     = handle_httr
+      handle_httr     = handle_httr,
+      encode_httr     = "multipart"      # Uploading a file is a rare occasion doesn't use "form"
     )
 
   if (kernel$success) {
