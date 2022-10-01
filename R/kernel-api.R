@@ -73,7 +73,7 @@ kernel_api <- function(
   #   stop("The url `", redcap_uri, "` is not found or throws an error.")
   # }
 
-  result <- httr::POST(
+  response <- httr::POST(
     url     = redcap_uri,
     body    = post_body,
     config  = config_options,
@@ -82,10 +82,10 @@ kernel_api <- function(
     httr::user_agent("OuhscBbmc/REDCapR")
   )
 
-  status_code           <- result$status
+  status_code           <- response$status
   success               <- (status_code == 200L)
   raw_text              <- httr::content(
-    x           = result,
+    x           = response,
     as          = "text",
     encoding    = encoding,     # UTF-8 is the default parameter value
     type        = content_type  # text/csv is the default parameter value
@@ -112,8 +112,8 @@ kernel_api <- function(
     success             = success,
     raw_text            = raw_text,
     elapsed_seconds     = elapsed_seconds,
-    result              = result,
-    result_headers      = result$headers,
+    result              = response,
+    result_headers      = response$headers,
 
     regex_empty         = regex_empty
   ))
