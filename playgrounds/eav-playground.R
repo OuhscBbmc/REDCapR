@@ -11,7 +11,11 @@ requireNamespace("testit")
 
 # ---- declare-globals ---------------------------------------------------------
 redcap_uri <- "https://bbmc.ouhsc.edu/redcap/api/"
-token <- "D70F9ACD1EDD6F151C6EA78683944E98"  #This is for a PHI-free demo project
+token <- "9A81268476645C4E5F03428B8AC3AA7B"  # PHI-free demo: simple static
+token <- "5007DC786DBE39CE77ED8DD0C68069A6"  # PHI-free demo: Checkboxes 1
+# token <- "CCB7E11837D41126D67C744F97389E04"  # PHI-free demo: super-wide --3,000 columns
+# token <- "5C1526186C4D04AE0A0630743E69B53C"  # PHI-free demo: super-wide #3--35,000 columns
+# token <- "56F43A10D01D6578A46393394D76D88F"  # PHI-free demo: Repeating Instruments --Sparse
 
 raw_or_label <- "raw"
 export_data_access_groups_string <- "false"
@@ -45,7 +49,7 @@ raw_text <- httr::content(r, "text")
 
 ds_eav <- readr::read_csv(raw_text, show_col_types  = FALSE)
 })
-
+# stop()
 # ds_eav$field_name
 
 
@@ -76,7 +80,7 @@ distinct_checkboxes <-
   dplyr::filter(.data$is_checkbox) %>%
   dplyr::pull(.data$field_name)
 
-ds_possible_checkbox_rows  <-
+ds_possible_checkbox_rows <-
   tidyr::crossing(
     field_name = distinct_checkboxes,
     record     = unique(ds_eav$record),

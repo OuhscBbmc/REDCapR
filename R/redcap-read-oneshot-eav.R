@@ -299,7 +299,7 @@ redcap_read_oneshot_eav <- function(
           dplyr::mutate(
             is_checkbox   = (.data$field_type == "checkbox"),
             ids           = dplyr::if_else(.data$is_checkbox, .data$select_choices_or_calculations, "1"),
-            ids           = gsub("(\\d+),.+?(\\||$)", "\\1", .data$ids),
+            ids           = gsub("(\\w+),.+?(\\||$)", "\\1", .data$ids),
             ids           = strsplit(.data$ids, " ")
           ) %>%
           dplyr::select(-.data$select_choices_or_calculations, -.data$field_type) %>%
