@@ -10,7 +10,7 @@ requireNamespace("testit")
 
 # ---- declare-globals ---------------------------------------------------------
 redcap_uri <- "https://bbmc.ouhsc.edu/redcap/api/"
-token <- "9A81268476645C4E5F03428B8AC3AA7B"  # PHI-free demo: simple static
+# token <- "9A81268476645C4E5F03428B8AC3AA7B"  # PHI-free demo: simple static
 token <- "5007DC786DBE39CE77ED8DD0C68069A6"  # PHI-free demo: Checkboxes 1 #3074
 # token <- "CCB7E11837D41126D67C744F97389E04"  # PHI-free demo: super-wide --3,000 columns
 # token <- "5C1526186C4D04AE0A0630743E69B53C"  # PHI-free demo: super-wide #3--35,000 columns
@@ -21,8 +21,14 @@ token <- "5007DC786DBE39CE77ED8DD0C68069A6"  # PHI-free demo: Checkboxes 1 #3074
 fields  <- NULL
 forms   <- NULL
 records <- NULL #c("1")
-# blank_for_gray_form_status <- FALSE
+blank_for_gray_form_status <- FALSE
 
+.complete_value_for_untouched_forms <-
+  dplyr::if_else(
+    blank_for_gray_form_status,
+    NA_character_,
+    as.character(REDCapR::constant("form_incomplete"))
+  )
 # .default_check_for_untouched_forms <- dplyr::if_else(blank_for_gray_form_status, FALSE, NA)
 
 # ---- load-data ---------------------------------------------------------------
@@ -43,14 +49,21 @@ system.time({
 })
 
 system.time(
-  ds_expected <- REDCapR::redcap_read_oneshot(redcap_uri, token, records=records, col_types=col_types)$data
+  ds_expected <-
+    REDCapR::redcap_read_oneshot(
+      redcap_uri,
+      token,
+      records                     = records,
+      col_types                   = col_types,
+      blank_for_gray_form_status  = blank_for_gray_form_status
+    )$data
 )
 
 testit::assert(ds_metadata$field_name == colnames(ds_expected))
 testthat::expect_setequal( ds_metadata$field_name, colnames(ds_expected))
 
 # ---- tweak-data --------------------------------------------------------------
-.fields_plumbing  <- c("record", "event_id")#, "redcap_repeat_instrument", "redcap_repeat_instance")
+.fields_plumbing  <- c("record", "event_id")
 
 if (!meta$longitudinal) {
   ds_eav$event_id <- "dummy_1"
@@ -93,7 +106,17 @@ ds_eav_2 <-
     field_name = dplyr::if_else(.data$checkbox, paste0(.data$field_name_base , "___", .data$value), .data$field_name_base),
     value      = dplyr::if_else(.data$checkbox, as.character(!is.na(.data$value)), .data$value),
   ) %>%
-  dplyr::right_join(ds_eav_possible, by = c("record", "event_id", "field_name"))
+  dplyr::right_join(ds_eav_possible, by = c("record", "event_id", "field_name")) %>%
+  dplyr::select(-.data$field_type, -.data$field_name_base, -.data$checkbox) %>%
+  dplyr::left_join(
+    ds_metadata %>%
+      dplyr::select(.data$field_name, .data$field_name_base, .data$field_type),
+    by = "field_name"
+  ) %>%
+  dplyr::mutate(
+    value = dplyr::if_else(.data$field_type == "checkbox", dplyr::coalesce(value, "FALSE"), value),
+    value = dplyr::if_else(.data$field_type == "complete", dplyr::coalesce(value, .complete_value_for_untouched_forms), value),
+  )
 
 ds <-
   ds_eav_2 %>%
