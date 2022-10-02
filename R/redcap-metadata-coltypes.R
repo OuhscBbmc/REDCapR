@@ -342,8 +342,8 @@ redcap_metadata_internal <- function(
       field_order_within_form  = seq_len(dplyr::n()),
     ) %>%
     dplyr::ungroup() %>%
-    dplyr::arrange(form_order,  field_order_within_form) %>%
-    dplyr::select(-form_order, -field_order_within_form) %>%
+    dplyr::arrange(.data$form_order,  .data$field_order_within_form) %>%
+    dplyr::select(-.data$form_order, -.data$field_order_within_form) %>%
     tibble::add_row(d_again, .after = 1)
 
   # setdiff(d_meta$field_name_base, d_var$original_field_name)
