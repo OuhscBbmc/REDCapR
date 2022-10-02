@@ -11,12 +11,13 @@ requireNamespace("testit")
 # ---- declare-globals ---------------------------------------------------------
 redcap_uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "9A81268476645C4E5F03428B8AC3AA7B"  # PHI-free demo: simple static
-token <- "5007DC786DBE39CE77ED8DD0C68069A6"  # PHI-free demo: Checkboxes 1
+# token <- "5007DC786DBE39CE77ED8DD0C68069A6"  # PHI-free demo: Checkboxes 1
 # token <- "CCB7E11837D41126D67C744F97389E04"  # PHI-free demo: super-wide --3,000 columns
 # token <- "5C1526186C4D04AE0A0630743E69B53C"  # PHI-free demo: super-wide #3--35,000 columns
 # token <- "56F43A10D01D6578A46393394D76D88F"  # PHI-free demo: Repeating Instruments --Sparse
 
-fields
+fields  <- c("record_id", "dob")
+forms   <- "health"
 
 # ---- load-data ---------------------------------------------------------------
 system.time(
@@ -24,9 +25,17 @@ system.time(
 )
 
 system.time({
-  col_types   <- REDCapR::redcap_metadata_coltypes( redcap_uri, token)
-  ds_metadata <- REDCapR:::redcap_metadata_internal(redcap_uri, token)$d_variable
-  ds_eav      <- REDCapR:::redcap_read_eav_oneshot( redcap_uri, token)$data
+  col_types   <- REDCapR::redcap_metadata_coltypes(redcap_uri, token, print_col_types_to_console = FALSE)
+
+  ds_metadata <-
+    REDCapR:::redcap_metadata_internal(redcap_uri, token)$d_variable %>%
+    dplyr::filter(
+      (.data$field_name_base %in% fields) | (.data$form_name %in% forms)
+    )
+
+  desired_fields <- ds_metadata$field_name
+
+  ds_eav      <- REDCapR:::redcap_read_eav_oneshot(redcap_uri, token, fields = desired_fields)$data
 })
 
 testit::assert(sort(ds_metadata$field_name) == sort(colnames(ds_expected)))
