@@ -4,7 +4,9 @@
 #' @description
 #' This function inspects a REDCap project to
 #' determine a [readr::cols()] object that is compatible with the
-#' the project's current definition.
+#' the project's current definition.  It can be copied and pasted into the
+#' R code so future calls to the server will produce a [tibble::tibble()]
+#' with an equivalent set of data types.
 #'
 #' @param redcap_uri The
 #' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
@@ -13,6 +15,8 @@
 #' Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
+#' @param print_col_types_to_console Should the [readr::cols()] object
+#' be printed to the console?
 #' @param http_response_encoding  The encoding value passed to
 #' [httr::content()].  Defaults to 'UTF-8'.
 #' @param locale a [readr::locale()] object to specify preferences like
@@ -153,6 +157,8 @@ redcap_metadata_coltypes <- function(
   redcap_uri,
   token,
 
+  print_col_types_to_console    = TRUE,
+
   http_response_encoding        = "UTF-8",
   locale                        = readr::default_locale(),
   verbose                       = FALSE,
@@ -193,8 +199,10 @@ redcap_metadata_coltypes <- function(
       "\n)\n"
     )
 
-  sandwich %>%
-    message()
+  if (print_col_types_to_console) {
+    sandwich %>%
+      message()
+  }
 
   eval(str2expression(sandwich))
 }
