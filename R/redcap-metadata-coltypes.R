@@ -250,11 +250,18 @@ redcap_metadata_internal <- function(
       field_name_base       = .data$original_field_name
     )
 
-  d_complete <-
+  d_inst <-
     d_inst %>%
     dplyr::select(
       form_name   = .data$instrument_name,
     ) %>%
+    dplyr::mutate(
+      form_order  = seq_len(dplyr::n()),
+    )
+
+  # Dataset that holds the *_complete checkboxes
+  d_complete <-
+    d_inst %>%
     dplyr::mutate(
       field_name      = paste0(.data$form_name, "_complete"),
       field_name_base = .data$field_name,  # same for *_complete checkboxes
@@ -269,6 +276,7 @@ redcap_metadata_internal <- function(
       .data$vt,
     )
 
+  # Dataset that holds longitudinal/repeating variables
   d_again <-
     tibble::tibble(
       field_name        = character(0),
@@ -283,9 +291,11 @@ redcap_metadata_internal <- function(
       d_again %>%
       dplyr::union_all(
         tibble::tibble(
-          field_name  = "redcap_event_name",
-          field_type  = "event_name",
-          vt          = NA_character_,
+          field_name      = "redcap_event_name",
+          field_name_base = "redcap_event_name",
+          form_name       = "longitudinal/repeating",
+          field_type      = "event_name",
+          vt              = NA_character_,
         )
       )
   }
@@ -295,14 +305,16 @@ redcap_metadata_internal <- function(
       d_again %>%
       dplyr::union_all(
         tibble::tibble(
-          field_name  = c("redcap_repeat_instrument", "redcap_repeat_instance"),
-          field_type  = c("repeat_instrument"       , "repeat_instance"),
-          vt          = NA_character_,
+          field_name      = c("redcap_repeat_instrument", "redcap_repeat_instance"),
+          field_name_base = c("redcap_repeat_instrument", "redcap_repeat_instance"),
+          form_name       = "longitudinal/repeating",
+          field_type      = c("repeat_instrument"       , "repeat_instance"),
+          vt              = NA_character_,
         )
       )
   }
 
-  # Prepare metadata to be joined
+  # Construct extended metadata
   d_meta <-
     d_meta %>%
     dplyr::select(
@@ -322,14 +334,22 @@ redcap_metadata_internal <- function(
       .data$form_name,
       .data$field_type,
       vt            = .data$text_validation_type_or_show_slider_number,
+    )  %>%
+    dplyr::union_all(d_complete) %>%
+    dplyr::left_join(d_inst, by = "form_name") %>%
+    dplyr::group_by(.data$form_name) %>%
+    dplyr::mutate(
+      field_order_within_form  = seq_len(dplyr::n()),
     ) %>%
-    tibble::add_row(d_again, .after = 1) %>%
-    dplyr::union_all(d_complete)
+    dplyr::ungroup() %>%
+    dplyr::arrange(form_order,  field_order_within_form) %>%
+    dplyr::select(-form_order, -field_order_within_form) %>%
+    tibble::add_row(d_again, .after = 1)
 
   # setdiff(d_meta$field_name_base, d_var$original_field_name)
   # [1] "signature"   "file_upload" "descriptive"
 
-  # Translate the four datasets into a single cohesive dataset.
+  # Determine & notate the likely data type
   d <-
     d_meta %>%
     dplyr::mutate(

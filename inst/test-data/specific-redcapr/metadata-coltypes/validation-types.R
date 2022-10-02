@@ -49,6 +49,6 @@ structure(list(cols = list(record_id = structure(list(), class = c("collector_in
 "collector")), v_time_mm_ss = structure(list(format = "%M:%S"), class = c("collector_time", 
 "collector")), v_vmrn = structure(list(), class = c("collector_character", 
 "collector")), v_zipcode = structure(list(), class = c("collector_character", 
-"collector")), form_1_complete = structure(list(), class = c("collector_character", 
+"collector")), form_1_complete = structure(list(), class = c("collector_integer", 
 "collector"))), default = structure(list(), class = c("collector_guess", 
 "collector")), delim = NULL), class = "col_spec")
