@@ -99,7 +99,8 @@ ds <-
     # id_cols   = c(record, event_id),
     names_from  = field_name,
     values_from = value
-  ) #%>%
+  ) %>%
+  dplyr::select(!!ds_metadata$field_name)
   # dplyr::select(.data = ., !!intersect(variables_to_keep, colnames(.)))
 
 # ds_2 <-

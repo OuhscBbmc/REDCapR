@@ -140,8 +140,7 @@ empty string to save RAM.
 }
 \description{
 This function uses REDCap's API to select and return data in an
-\link{eav}
-(https://en.wikipedia.org/wiki/Entity\%E2\%80\%93attribute\%E2\%80\%93value_model)
+\href{https://en.wikipedia.org/wiki/Entity\%E2\%80\%93attribute\%E2\%80\%93value_model}{eav}
 }
 \details{
 If you do not pass an \code{export_data_access_groups} value, it will default

@@ -3,8 +3,7 @@
 #'
 #' @description
 #' This function uses REDCap's API to select and return data in an
-#' [eav]
-#' (https://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model)
+#' [eav](https://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model)
 #'
 #' @param redcap_uri The
 #' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
