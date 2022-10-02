@@ -157,6 +157,10 @@
 #'   fields     = desired_fields_v1
 #' )$data
 #'
+#' # Repeating
+#' token <- "56F43A10D01D6578A46393394D76D88F"  # PHI-free demo: Repeating Instruments --Sparse # 2603
+#' ds <- REDCapR:::redcap_read_eav_oneshot(redcap_uri=uri, token=token)$data
+#' }
 # # Specify the column types.
 # col_types <- readr::cols(
 #   record_id  = readr::col_integer(),
@@ -172,7 +176,6 @@
 #   token      = token,
 #   col_types  = col_types
 # )$data
-#' }
 
 #' @importFrom magrittr %>%
 # Intentionally NOT exporting for now: @export
@@ -303,7 +306,8 @@ redcap_read_eav_oneshot <- function(
         #   guess_max       = guess_max,
           locale          = locale,
           show_col_types  = FALSE
-        ),
+        ) %>%
+        dplyr::distinct(), # https://community.projectredcap.org/questions/135154/replicated-rows-for-eav-output-via-api.html
 
       # Don't print the warning in the try block.  Print it below,
       #   where it's under the control of the caller.

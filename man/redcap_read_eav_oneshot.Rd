@@ -173,6 +173,9 @@ ds_some_fields_v1 <- REDCapR:::redcap_read_eav_oneshot(
   fields     = desired_fields_v1
 )$data
 
+# Repeating
+token <- "56F43A10D01D6578A46393394D76D88F"  # PHI-free demo: Repeating Instruments --Sparse # 2603
+ds <- REDCapR:::redcap_read_eav_oneshot(redcap_uri=uri, token=token)$data
 }
 }
 \references{
