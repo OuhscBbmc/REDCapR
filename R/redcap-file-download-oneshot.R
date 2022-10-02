@@ -260,7 +260,7 @@ redcap_file_download_oneshot <- function(
 #' redcap_download_file_oneshot(...)
 
 #' @export
-redcap_download_file_oneshot <- function(...){
+redcap_download_file_oneshot <- function(...) {
   # nocov start
   warning(
     "The function `redcap_download_file_oneshot()` is soft-deprecated as of REDCapR 1.2.0. ",
