@@ -11,10 +11,10 @@ requireNamespace("testit")
 # ---- declare-globals ---------------------------------------------------------
 redcap_uri <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "9A81268476645C4E5F03428B8AC3AA7B"  # PHI-free demo: simple static
-token <- "5007DC786DBE39CE77ED8DD0C68069A6"  # PHI-free demo: Checkboxes 1
+# token <- "5007DC786DBE39CE77ED8DD0C68069A6"  # PHI-free demo: Checkboxes 1
 # token <- "CCB7E11837D41126D67C744F97389E04"  # PHI-free demo: super-wide --3,000 columns
 # token <- "5C1526186C4D04AE0A0630743E69B53C"  # PHI-free demo: super-wide #3--35,000 columns
-token <- "56F43A10D01D6578A46393394D76D88F"  # PHI-free demo: Repeating Instruments --Sparse
+# token <- "56F43A10D01D6578A46393394D76D88F"  # PHI-free demo: Repeating Instruments --Sparse
 
 # fields  <- c("record_id", "dob")
 # forms   <- "health"
@@ -28,13 +28,15 @@ system.time({
 
   # View(REDCapR::redcap_variables(redcap_uri, token)$data)
 
+  meta <- REDCapR:::redcap_metadata_internal(redcap_uri, token)
+
   ds_metadata <-
-    REDCapR:::redcap_metadata_internal(redcap_uri, token)$d_variable %>%
+    meta$d_variable %>%
     dplyr::filter(
       # (.data$field_name_base %in% fields) | (.data$form_name %in% forms)
     )
 
-  desired_fields <- ds_metadata$field_name
+  desired_fields <- ds_metadata$field_name_base
 
   ds_eav      <- REDCapR:::redcap_read_eav_oneshot(redcap_uri, token, fields = desired_fields, records=records)$data
 })
@@ -47,15 +49,16 @@ testit::assert(ds_metadata$field_name == colnames(ds_expected))
 testthat::expect_setequal( ds_metadata$field_name, colnames(ds_expected))
 
 # ---- tweak-data --------------------------------------------------------------
-if (!"event_id" %in% colnames(ds_eav)) {
+.fields_plumbing  <- c("record", "event_id")#, "redcap_repeat_instrument", "redcap_repeat_instance")
+
+if (!meta$longitudinal) {
   ds_eav$event_id <- "dummy_1"
-  .dummy_event <- TRUE
-} else {
-  .dummy_event <- FALSE
+}
+if (meta$repeating) {
+  .fields_plumbing <- c(.fields_plumbing, "redcap_repeat_instrument", "redcap_repeat_instance")
 }
 
-.fields_plumbing  <- c("record", "event_id", "redcap_repeat_instrument", "redcap_repeat_instance")
-.fields_to_cross <- setdiff(ds_metadata$field_name, c("redcap_repeat_instrument", "redcap_repeat_instance"))
+.fields_to_cross  <- setdiff(ds_metadata$field_name, c("redcap_repeat_instrument", "redcap_repeat_instance"))
 .fields_to_return <- c("record", "event_id", ds_metadata$field_name)
 .record_id_name   <- ds_metadata$field_name[1]
 
@@ -74,6 +77,7 @@ ds_eav_2 <-
       dplyr::distinct(.data$field_name_base, .data$field_type),
     by = "field_name_base"
   ) %>%
+  # View()
   dplyr::mutate(
     field_name = dplyr::if_else(!is.na(.data$field_type) & (.data$field_type == "checkbox"), paste0(.data$field_name_base , "___", .data$value), .data$field_name_base ),
     value      = dplyr::if_else(!is.na(.data$field_type) & (.data$field_type == "checkbox"), as.character(!is.na(.data$value)), .data$value),
@@ -98,7 +102,7 @@ ds <-
   dplyr::select(!!.fields_to_return)
   # dplyr::select(.data = ., !!intersect(variables_to_keep, colnames(.)))
 
-if (.dummy_event) {
+if (!meta$longitudinal) {
   ds$event_id <- NULL
 }
 
