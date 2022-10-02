@@ -1,0 +1,16 @@
+structure(list(record = c("5", "5", "5", "5", "5", "5", "5", 
+"5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5", 
+"5"), field_name = c("address", "demographics_complete", "record_id", 
+"telephone", "email", "dob", "age", "ethnicity", "sex", "height", 
+"weight", "bmi", "comments", "name_first", "name_last", "health_complete", 
+"race_and_ethnicity_complete", "race", "race", "mugshot", "interpreter_needed"
+), value = c("Hotel Suite\nNew Orleans LA, 70115", "2", "5", 
+"(405) 321-5555", "left@hippocket.com", "1955-04-15", "59", "2", 
+"1", "193.04", "104", "27.9", "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache", 
+"John Lee", "Walker", "0", "2", "1", "6", "198021", "0")), row.names = c(NA, 
+-21L), spec = structure(list(cols = list(record = structure(list(), class = c("collector_character", 
+"collector")), field_name = structure(list(), class = c("collector_character", 
+"collector")), value = structure(list(), class = c("collector_character", 
+"collector"))), default = structure(list(), class = c("collector_character", 
+"collector")), delim = ","), class = "col_spec"), class = c("spec_tbl_df", 
+"tbl_df", "tbl", "data.frame"))

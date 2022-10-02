@@ -29,6 +29,7 @@ These features are not yet on CRAN.  Install with `remotes::install_github("Ouhs
 * New parameter `blank_for_gray_form_status` in the functions `redcap_read()`, `redcap_read_oneshot()`, and `redcap_read_oneshot_eav()`. (@greg-botwin, #386, #389)
 * A `httr::handle` value is accepted by functions that contact the server.  This will accommodate some institutions with unconventional environments.  (Suggested by @brandonpotvin, #429)
 * `sanitized_token()` now accepts an alternative regex pattern.  (Suggested by @maeon & @michalkouril, #370)
+* `redcap_read_eav_oneshot()` is an UNexported function that returns data in an EAV format (#437)
 
 ### Minor Enhancements
 

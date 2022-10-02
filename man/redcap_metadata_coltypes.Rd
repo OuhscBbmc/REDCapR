@@ -147,7 +147,7 @@ col_types  <- redcap_metadata_coltypes(uri, token)
 redcap_read_oneshot(uri, token, col_types = col_types)$data
 
 # A project with every field type and validation type.
-#   Notice It throws a warning that some fields use a comma for a decimal,
+#   Notice it throws a warning that some fields use a comma for a decimal,
 #   while other fields use a period/dot as a decimal
 token      <- "8F5313CAA266789F560D79EFCEE2E2F1" # 2634 - Validation Types
 col_types  <- redcap_metadata_coltypes(uri, token)
