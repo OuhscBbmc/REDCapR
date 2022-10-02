@@ -239,7 +239,6 @@ redcap_metadata_internal <- function(
   # Determine status of autonumbering, instrument complete status, and decimal mark
   .record_field         <- d_var$original_field_name[1]
   .autonumber           <- d_proj$record_autonumbering_enabled[1]
-  .form_complete_boxes  <- paste0(d_inst$instrument_name, "_complete")
   decimal_period        <- (locale$decimal_mark == ".")
   decimal_comma         <- (locale$decimal_mark == ",")
 
@@ -252,17 +251,31 @@ redcap_metadata_internal <- function(
     )
 
   d_complete <-
-    tibble::tibble(
-      field_name  = .form_complete_boxes,
-      field_type  = "complete",
-      vt          = NA_character_,
+    d_inst %>%
+    dplyr::select(
+      form_name   = .data$instrument_name,
+    ) %>%
+    dplyr::mutate(
+      field_name      = paste0(.data$form_name, "_complete"),
+      field_name_base = .data$field_name,  # same for *_complete checkboxes
+      field_type      = "complete",
+      vt              = NA_character_,
+    ) %>%
+    dplyr::select(
+      .data$field_name,
+      .data$field_name_base,
+      .data$form_name,
+      .data$field_type,
+      .data$vt,
     )
 
   d_again <-
     tibble::tibble(
-      field_name  = character(0),
-      field_type  = character(0),
-      vt          = character(0),
+      field_name        = character(0),
+      field_name_base   = character(0),
+      form_name         = character(0),
+      field_type        = character(0),
+      vt                = character(0),
     )
 
   if (d_proj$is_longitudinal[1]) {
@@ -294,6 +307,7 @@ redcap_metadata_internal <- function(
     d_meta %>%
     dplyr::select(
       field_name_base  = .data$field_name,
+      .data$form_name,
       .data$field_type,
       .data$text_validation_type_or_show_slider_number,
     ) %>%
@@ -305,6 +319,7 @@ redcap_metadata_internal <- function(
     dplyr::select(
       .data$field_name,
       .data$field_name_base,
+      .data$form_name,
       .data$field_type,
       vt            = .data$text_validation_type_or_show_slider_number,
     ) %>%
@@ -314,8 +329,7 @@ redcap_metadata_internal <- function(
   # setdiff(d_meta$field_name_base, d_var$original_field_name)
   # [1] "signature"   "file_upload" "descriptive"
 
-  # Translate the four datasets into a single `readr:cols()` string printed to the console
-  # meat <-
+  # Translate the four datasets into a single cohesive dataset.
   d <-
     d_meta %>%
     dplyr::mutate(
@@ -407,6 +421,7 @@ redcap_metadata_internal <- function(
     ) %>%
     dplyr::select(
       .data$field_name,
+      .data$form_name,
       .data$field_type,
       validation_type           = .data$vt,
       .data$autonumber,

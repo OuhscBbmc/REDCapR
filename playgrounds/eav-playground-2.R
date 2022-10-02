@@ -16,6 +16,8 @@ token <- "5007DC786DBE39CE77ED8DD0C68069A6"  # PHI-free demo: Checkboxes 1
 # token <- "5C1526186C4D04AE0A0630743E69B53C"  # PHI-free demo: super-wide #3--35,000 columns
 # token <- "56F43A10D01D6578A46393394D76D88F"  # PHI-free demo: Repeating Instruments --Sparse
 
+fields
+
 # ---- load-data ---------------------------------------------------------------
 system.time(
   ds_expected <- REDCapR::redcap_read_oneshot(redcap_uri, token)$data
