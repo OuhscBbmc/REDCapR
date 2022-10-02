@@ -27,30 +27,8 @@ system.time(
 
 system.time({
   ds_metadata <- REDCapR:::redcap_metadata_internal(redcap_uri, token)$d_variable
-  ds_variable <- REDCapR::redcap_variables(redcap_uri, token)$data
-
-  post_body <- list(
-    token                        = token,
-    content                      = "record",
-    format                       = "csv",
-    type                         = "eav"#,
-    # rawOrLabel                   = raw_or_label,
-    # rawOrLabelHeaders            = raw_or_label_headers,
-    # exportDataAccessGroups       = export_data_access_groups,
-    # filterLogic                  = filter_logic,
-    # dateRangeBegin               = datetime_range_begin,
-    # dateRangeEnd                 = datetime_range_end,
-    # exportBlankForGrayFormStatus = blank_for_gray_form_status
-    # record, fields, forms & events are specified below
-  )
-  kernel <- REDCapR:::kernel_api(
-    redcap_uri      = redcap_uri,
-    post_body       = post_body,
-    config_options  = NULL
-    # config_options  = config_options,
-    # encoding        = http_response_encoding,
-    # handle_httr     = handle_httr
-  )
+  # ds_variable <- REDCapR::redcap_variables(redcap_uri, token)$data
+  ds_eav      <- REDCapR:::redcap_read_eav_oneshot(redcap_uri, token)$data
 })
 
 # ds_eav$field_name
@@ -58,14 +36,6 @@ testit::assert(sort(ds_metadata$field_name) == sort(colnames(ds_expected)))
 testthat::expect_setequal( ds_metadata$field_name, colnames(ds_expected))
 
 # ---- tweak-data --------------------------------------------------------------
-
-ds_eav <-
-  readr::read_csv(
-    file            = I(kernel$raw_text),
-    col_types       = readr::cols(.default = readr::col_character()),
-    # locale          = locale,
-    show_col_types  = FALSE
-  )
 
 if (!"event_id" %in% colnames(ds_eav)) {
   ds_eav$event_id <- "dummy_1"
@@ -120,7 +90,7 @@ ds_eav_2 <-
 
 
 . <- NULL # For the sake of avoiding an R CMD check note.
-# ds <-
+ds <-
   ds_eav_2 %>%
   dplyr::select(-.data$field_type, -.data$field_name_base) %>%
   # dplyr::select(-.data$redcap_repeat_instance) %>%        # TODO: need a good fix for repeats
@@ -132,7 +102,7 @@ ds_eav_2 <-
   ) #%>%
   # dplyr::select(.data = ., !!intersect(variables_to_keep, colnames(.)))
 
-ds_2 <-
-  ds %>%
-  dplyr::mutate_if(is.character, ~type.convert(., as.is = FALSE)) %>%
-  dplyr::mutate_if(is.factor   , as.character)
+# ds_2 <-
+#   ds %>%
+#   dplyr::mutate_if(is.character, ~type.convert(., as.is = FALSE)) %>%
+#   dplyr::mutate_if(is.factor   , as.character)
