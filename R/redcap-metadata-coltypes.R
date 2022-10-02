@@ -140,7 +140,7 @@
 #' redcap_read_oneshot(uri, token, col_types = col_types)$data
 #'
 #' # A project with every field type and validation type.
-#' #   Notice It throws a warning that some fields use a comma for a decimal,
+#' #   Notice it throws a warning that some fields use a comma for a decimal,
 #' #   while other fields use a period/dot as a decimal
 #' token      <- "8F5313CAA266789F560D79EFCEE2E2F1" # 2634 - Validation Types
 #' col_types  <- redcap_metadata_coltypes(uri, token)
@@ -240,7 +240,7 @@ redcap_metadata_internal <- function(
     d_var %>%
     dplyr::select(
       field_name            = .data$export_field_name,
-      field_name_original   = .data$original_field_name
+      field_name_base       = .data$original_field_name
     )
 
   d_complete <-
@@ -285,24 +285,25 @@ redcap_metadata_internal <- function(
   d_meta <-
     d_meta %>%
     dplyr::select(
-      field_name_original  = .data$field_name,
+      field_name_base  = .data$field_name,
       .data$field_type,
       .data$text_validation_type_or_show_slider_number,
     ) %>%
     dplyr::filter(.data$field_type != "descriptive") %>%
-    dplyr::left_join(d_var, by = "field_name_original") %>%
+    dplyr::left_join(d_var, by = "field_name_base") %>%
     dplyr::mutate(
-      field_name = dplyr::coalesce(.data$field_name, .data$field_name_original),
+      field_name = dplyr::coalesce(.data$field_name, .data$field_name_base),
     ) %>%
     dplyr::select(
       .data$field_name,
+      .data$field_name_base,
       .data$field_type,
       vt            = .data$text_validation_type_or_show_slider_number,
     ) %>%
     tibble::add_row(d_again, .after = 1) %>%
     dplyr::union_all(d_complete)
 
-  # setdiff(d_meta$field_name_original, d_var$original_field_name)
+  # setdiff(d_meta$field_name_base, d_var$original_field_name)
   # [1] "signature"   "file_upload" "descriptive"
 
   # Translate the four datasets into a single `readr:cols()` string printed to the console
@@ -407,6 +408,7 @@ redcap_metadata_internal <- function(
       # .data$padding1,
       # .data$padding2,
       .data$aligned,
+      .data$field_name_base
     )
 
   decimal_period_any <- any(d_meta$vt %in% c("number", "number_1dp", "number_2dp", "number_3dp", "number_4dp" ))
