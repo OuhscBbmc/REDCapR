@@ -7,6 +7,7 @@
 redcap_metadata_coltypes(
   redcap_uri,
   token,
+  print_col_types_to_console = TRUE,
   http_response_encoding = "UTF-8",
   locale = readr::default_locale(),
   verbose = FALSE,
@@ -23,6 +24,9 @@ Required.}
 
 \item{token}{The user-specific string that serves as the password for a
 project.  Required.}
+
+\item{print_col_types_to_console}{Should the \code{\link[readr:cols]{readr::cols()}} object
+be printed to the console?}
 
 \item{http_response_encoding}{The encoding value passed to
 \code{\link[httr:content]{httr::content()}}.  Defaults to 'UTF-8'.}
@@ -53,7 +57,9 @@ Additionally objected is printed to the console, see the Details below.
 \description{
 This function inspects a REDCap project to
 determine a \code{\link[readr:cols]{readr::cols()}} object that is compatible with the
-the project's current definition.
+the project's current definition.  It can be copied and pasted into the
+R code so future calls to the server will produce a \code{\link[tibble:tibble]{tibble::tibble()}}
+with an equivalent set of data types.
 }
 \details{
 \code{redcap_metadata_coltypes()} returns a \code{\link[readr:cols]{readr::cols()}} object in two ways.
@@ -147,7 +153,7 @@ col_types  <- redcap_metadata_coltypes(uri, token)
 redcap_read_oneshot(uri, token, col_types = col_types)$data
 
 # A project with every field type and validation type.
-#   Notice It throws a warning that some fields use a comma for a decimal,
+#   Notice it throws a warning that some fields use a comma for a decimal,
 #   while other fields use a period/dot as a decimal
 token      <- "8F5313CAA266789F560D79EFCEE2E2F1" # 2634 - Validation Types
 col_types  <- redcap_metadata_coltypes(uri, token)

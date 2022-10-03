@@ -221,7 +221,7 @@ redcap_instrument_download <- function(
 #' redcap_download_instrument(...)
 
 #' @export
-redcap_download_instrument <- function(...){
+redcap_download_instrument <- function(...) {
   # nocov start
   warning(
     "The function `redcap_download_instrument()` is soft-deprecated as of REDCapR 1.2.0. ",

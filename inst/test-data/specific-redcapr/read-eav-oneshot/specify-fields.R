@@ -1,0 +1,15 @@
+structure(list(record = c("1", "1", "1", "1", "2", "2", "2", 
+"2", "3", "3", "3", "3", "4", "4", "4", "4", "5", "5", "5", "5"
+), field_name = c("age", "record_id", "name_first", "name_last", 
+"age", "record_id", "name_first", "name_last", "age", "record_id", 
+"name_first", "name_last", "record_id", "age", "name_first", 
+"name_last", "record_id", "age", "name_first", "name_last"), 
+    value = c("11", "1", "Nutmeg", "Nutmouse", "11", "2", "Tumtum", 
+    "Nutmouse", "80", "3", "Marcus", "Wood", "4", "61", "Trudy", 
+    "DAG", "5", "59", "John Lee", "Walker")), row.names = c(NA, 
+-20L), spec = structure(list(cols = list(record = structure(list(), class = c("collector_character", 
+"collector")), field_name = structure(list(), class = c("collector_character", 
+"collector")), value = structure(list(), class = c("collector_character", 
+"collector"))), default = structure(list(), class = c("collector_character", 
+"collector")), delim = ","), class = "col_spec"), class = c("spec_tbl_df", 
+"tbl_df", "tbl", "data.frame"))

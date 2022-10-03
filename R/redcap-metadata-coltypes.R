@@ -4,7 +4,9 @@
 #' @description
 #' This function inspects a REDCap project to
 #' determine a [readr::cols()] object that is compatible with the
-#' the project's current definition.
+#' the project's current definition.  It can be copied and pasted into the
+#' R code so future calls to the server will produce a [tibble::tibble()]
+#' with an equivalent set of data types.
 #'
 #' @param redcap_uri The
 #' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
@@ -13,6 +15,8 @@
 #' Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
+#' @param print_col_types_to_console Should the [readr::cols()] object
+#' be printed to the console?
 #' @param http_response_encoding  The encoding value passed to
 #' [httr::content()].  Defaults to 'UTF-8'.
 #' @param locale a [readr::locale()] object to specify preferences like
@@ -140,7 +144,7 @@
 #' redcap_read_oneshot(uri, token, col_types = col_types)$data
 #'
 #' # A project with every field type and validation type.
-#' #   Notice It throws a warning that some fields use a comma for a decimal,
+#' #   Notice it throws a warning that some fields use a comma for a decimal,
 #' #   while other fields use a period/dot as a decimal
 #' token      <- "8F5313CAA266789F560D79EFCEE2E2F1" # 2634 - Validation Types
 #' col_types  <- redcap_metadata_coltypes(uri, token)
@@ -152,6 +156,8 @@
 redcap_metadata_coltypes <- function(
   redcap_uri,
   token,
+
+  print_col_types_to_console    = TRUE,
 
   http_response_encoding        = "UTF-8",
   locale                        = readr::default_locale(),
@@ -193,8 +199,10 @@ redcap_metadata_coltypes <- function(
       "\n)\n"
     )
 
-  sandwich %>%
-    message()
+  if (print_col_types_to_console) {
+    sandwich %>%
+      message()
+  }
 
   eval(str2expression(sandwich))
 }
@@ -231,7 +239,6 @@ redcap_metadata_internal <- function(
   # Determine status of autonumbering, instrument complete status, and decimal mark
   .record_field         <- d_var$original_field_name[1]
   .autonumber           <- d_proj$record_autonumbering_enabled[1]
-  .form_complete_boxes  <- paste0(d_inst$instrument_name, "_complete")
   decimal_period        <- (locale$decimal_mark == ".")
   decimal_comma         <- (locale$decimal_mark == ",")
 
@@ -240,21 +247,43 @@ redcap_metadata_internal <- function(
     d_var %>%
     dplyr::select(
       field_name            = .data$export_field_name,
-      field_name_original   = .data$original_field_name
+      field_name_base       = .data$original_field_name
     )
 
+  d_inst <-
+    d_inst %>%
+    dplyr::select(
+      form_name   = .data$instrument_name,
+    ) %>%
+    dplyr::mutate(
+      form_order  = seq_len(dplyr::n()),
+    )
+
+  # Dataset that holds the *_complete checkboxes
   d_complete <-
-    tibble::tibble(
-      field_name  = .form_complete_boxes,
-      field_type  = "complete",
-      vt          = NA_character_,
+    d_inst %>%
+    dplyr::mutate(
+      field_name      = paste0(.data$form_name, "_complete"),
+      field_name_base = .data$field_name,  # same for *_complete checkboxes
+      field_type      = "complete",
+      vt              = NA_character_,
+    ) %>%
+    dplyr::select(
+      .data$field_name,
+      .data$field_name_base,
+      .data$form_name,
+      .data$field_type,
+      .data$vt,
     )
 
+  # Dataset that holds longitudinal/repeating variables
   d_again <-
     tibble::tibble(
-      field_name  = character(0),
-      field_type  = character(0),
-      vt          = character(0),
+      field_name        = character(0),
+      field_name_base   = character(0),
+      form_name         = character(0),
+      field_type        = character(0),
+      vt                = character(0),
     )
 
   if (d_proj$is_longitudinal[1]) {
@@ -262,9 +291,11 @@ redcap_metadata_internal <- function(
       d_again %>%
       dplyr::union_all(
         tibble::tibble(
-          field_name  = "redcap_event_name",
-          field_type  = "event_name",
-          vt          = NA_character_,
+          field_name      = "redcap_event_name",
+          field_name_base = "redcap_event_name",
+          form_name       = "longitudinal/repeating",
+          field_type      = "event_name",
+          vt              = NA_character_,
         )
       )
   }
@@ -274,39 +305,51 @@ redcap_metadata_internal <- function(
       d_again %>%
       dplyr::union_all(
         tibble::tibble(
-          field_name  = c("redcap_repeat_instrument", "redcap_repeat_instance"),
-          field_type  = c("repeat_instrument"       , "repeat_instance"),
-          vt          = NA_character_,
+          field_name      = c("redcap_repeat_instrument", "redcap_repeat_instance"),
+          field_name_base = c("redcap_repeat_instrument", "redcap_repeat_instance"),
+          form_name       = "longitudinal/repeating",
+          field_type      = c("repeat_instrument"       , "repeat_instance"),
+          vt              = NA_character_,
         )
       )
   }
 
-  # Prepare metadata to be joined
+  # Construct extended metadata
   d_meta <-
     d_meta %>%
     dplyr::select(
-      field_name_original  = .data$field_name,
+      field_name_base  = .data$field_name,
+      .data$form_name,
       .data$field_type,
       .data$text_validation_type_or_show_slider_number,
     ) %>%
     dplyr::filter(.data$field_type != "descriptive") %>%
-    dplyr::left_join(d_var, by = "field_name_original") %>%
+    dplyr::left_join(d_var, by = "field_name_base") %>%
     dplyr::mutate(
-      field_name = dplyr::coalesce(.data$field_name, .data$field_name_original),
+      field_name = dplyr::coalesce(.data$field_name, .data$field_name_base),
     ) %>%
     dplyr::select(
       .data$field_name,
+      .data$field_name_base,
+      .data$form_name,
       .data$field_type,
       vt            = .data$text_validation_type_or_show_slider_number,
+    )  %>%
+    dplyr::union_all(d_complete) %>%
+    dplyr::left_join(d_inst, by = "form_name") %>%
+    dplyr::group_by(.data$form_name) %>%
+    dplyr::mutate(
+      field_order_within_form  = seq_len(dplyr::n()),
     ) %>%
-    tibble::add_row(d_again, .after = 1) %>%
-    dplyr::union_all(d_complete)
+    dplyr::ungroup() %>%
+    dplyr::arrange(.data$form_order,  .data$field_order_within_form) %>%
+    dplyr::select(-.data$form_order, -.data$field_order_within_form) %>%
+    tibble::add_row(d_again, .after = 1)
 
-  # setdiff(d_meta$field_name_original, d_var$original_field_name)
+  # setdiff(d_meta$field_name_base, d_var$original_field_name)
   # [1] "signature"   "file_upload" "descriptive"
 
-  # Translate the four datasets into a single `readr:cols()` string printed to the console
-  # meat <-
+  # Determine & notate the likely data type
   d <-
     d_meta %>%
     dplyr::mutate(
@@ -398,6 +441,7 @@ redcap_metadata_internal <- function(
     ) %>%
     dplyr::select(
       .data$field_name,
+      .data$form_name,
       .data$field_type,
       validation_type           = .data$vt,
       .data$autonumber,
@@ -407,6 +451,7 @@ redcap_metadata_internal <- function(
       # .data$padding1,
       # .data$padding2,
       .data$aligned,
+      .data$field_name_base
     )
 
   decimal_period_any <- any(d_meta$vt %in% c("number", "number_1dp", "number_2dp", "number_3dp", "number_4dp" ))

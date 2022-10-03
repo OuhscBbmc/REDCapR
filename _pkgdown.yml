@@ -39,6 +39,7 @@ reference:
       - redcap_read
       - redcap_read_oneshot
       - redcap_read_oneshot_eav
+      - redcap_read_eav_oneshot
       - redcap_write
       - redcap_write_oneshot
       - redcap_delete

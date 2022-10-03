@@ -10,7 +10,8 @@ kernel_api(
   config_options,
   encoding = "UTF-8",
   content_type = "text/csv",
-  handle_httr = NULL
+  handle_httr = NULL,
+  encode_httr = "form"
 )
 }
 \arguments{
@@ -35,6 +36,12 @@ to 'text/csv'.}
 \code{\link[httr:POST]{httr::POST()}}.
 This is useful for only unconventional authentication approaches.  It
 should be \code{NULL} for most institutions.}
+
+\item{encode_httr}{The value passed to the \code{encode} parameter of
+\code{\link[httr:POST]{httr::POST()}}.
+Defaults to \code{"form"}, which is appropriate for most actions.
+(Currently, the only exception is importing a file,
+which uses "multipart".)}
 }
 \value{
 A \link[utils:packageDescription]{utils::packageVersion}.

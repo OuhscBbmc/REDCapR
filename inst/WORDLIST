@@ -58,6 +58,7 @@ SecurityDatabase
 Sys
 Timezones
 Translational
+UNexported
 URI
 VPN
 Xie
@@ -83,6 +84,7 @@ datetime
 dbp
 dp
 dropdown
+eav
 edu
 eg
 ethz
@@ -120,7 +122,6 @@ programmatically
 projectredcap
 qqq
 rdoc
-rds
 readr
 readr's
 redcapAPI
