@@ -27,9 +27,13 @@ knitr::opts_chunk$set(
 Background
 ==================================================================
 
-If your REDCap project is longitudinal or contains repeating measures, a single call to the API (or a single export through the browser) will return a dataset that is not readily analyzed.  Instead, the dataset will resemble Table 5.  This isn't because of a software bug, but because you haven't told the software how you would like it structured.  There isn't a great way to jam this multidimensional space into a rectangle of points.  Our advice for querying REDCap is the same as querying any database system: request datasets that have a natural "grain" and assemble them as to best fit your analyses.
+This vignette pertains to reading REDCap records from a project that (a) has longitudinal events or (b) has a repeating measure.  The first section conceptually discusses how REDCap stores complex structures.  The remaining sections describe how to best retrieve complex structures with the [REDCapTidyieR](https://chop-cgtdataops.github.io/REDCapTidieR) and [REDCapR]((https://OuhscBbmc.github.io/REDCapR) packages.
 
-If your project is not longitudinal and has not repeating measures, you can stop reading and simply call REDCapR's [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html).
+* If you are new to R or REDCap, consider start with the [Typical REDCap Workflow for a Data Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html) and [Basic REDCapR Operations](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) vignettes and then return to this document.
+* If you are reading from a *simple* project, just call REDCapR's [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html).  
+* If you want to perform some other operation (such as writing records to REDCap), review the [Reference of REDCapR functions](https://ouhscbbmc.github.io/REDCapR/reference/index.html) to see what is currently available.
+
+If your REDCap project is longitudinal or contains repeating measures, a single call to the API (or a single export through the browser) will return a dataset that is not readily analyzed.  Instead, the dataset will resemble Table 5.  This isn't because of a software bug, but because you haven't told the software how you would like the data structured.  There isn't a good way to jam this multidimensional space into a rectangle of points.  Our advice for querying REDCap is the same as querying any database system: request separate datasets that have a natural "grain" and assemble them as to fit your analyses.
 
 Illustration of How Data Points are Structured
 ==================================================================
@@ -115,7 +119,7 @@ When these measurements are added to REDCap's observation table, it resembles Ta
 
 As mentioned above, there isn't a universally good way to coerce Tables 1, 3a, and 3b into a single rectangle because the rows represent different things.  Or from REDCap's perspective, there's not a good transformation of `redcap_data` (*i.e.*, Table 4) that is appropriate for most statistical programs.
 
-When forced to combine the different entities, the best option is probably Table 5.  We call this a "block dataset", borrowing from linear algebra's term [block matrix](https://mathworld.wolfram.com/BlockMatrix.html).  You can see the mishmash of tables masquerading as a unified dataset.  However it's obvious the rows lack the conceptual coherency of Tables 1, 3a, & 3b.
+When forced to combine the different entities, the best option is probably Table 5.  We call this a "block dataset", borrowing from linear algebra's [block matrix](https://mathworld.wolfram.com/BlockMatrix.html) term.  You can see the mishmash of tables masquerading as a unified dataset.  However it's obvious the rows lack the conceptual coherency of Tables 1, 3a, & 3b.
 
 **Table 5: mishmashed grain** is how the points are returned from REDCap if you request the data in a single call.
 
@@ -141,7 +145,7 @@ Table 5's primary limitation is that a block dataset is not understood by analys
 
 Table 5's secondary limitation is inefficiency.  The empty cells aren't computationally free.  Every cell must be queried from the database and concatenated in REDCap's web server in order to return Table 5 in the plain-text csv, json, or xml format.  In our simple example, more than half of the block dataset's cells are wasted.  The emptiness frequently exceeds 90% in real-world REDCap projects (because they tend to have many more variables and repeating instances).  The emptiness always exceeds 99.9% in real-world EMRs.
 
-For this reason, REDCap and EMR design their observation table to resemble the computational structure of a [sparse matrix](https://en.wikipedia.org/wiki/Sparse_matrix).  The only important difference is that REDCap's unspecified cells are interpreted as null/empty, while a sparse matrix's unspecified cells are interpreted as zero.
+For this reason, REDCap and EMR design their observation table to resemble the computational structure of a [sparse matrix](https://en.wikipedia.org/wiki/Sparse_matrix).  (The only important difference is that REDCap's unspecified cells are interpreted as null/empty, while a sparse matrix's unspecified cells are interpreted as zero.)
 
 > In the case of a sparse matrix, substantial memory requirement reductions can be realized by storing only the non-zero entries. Depending on the number and distribution of the non-zero entries, different data structures can be used and yield huge savings in memory when compared to the basic approach. The trade-off is that accessing the individual elements becomes more complex and additional structures are needed to be able to recover the original matrix unambiguously.
 
@@ -171,19 +175,22 @@ Under the hood, REDCapTidieR calls REDCapR multiple times.
 Choosing between the Approaches
 ------------------------------------------------------------------
 
-We recommend calling [REDCapTidieR](https://chop-cgtdataops.github.io/REDCapTidieR/) in many scenarios, such as:
+When retrieving data from REDCap, we recommend calling [REDCapTidieR](https://chop-cgtdataops.github.io/REDCapTidieR/) in many scenarios, such as:
 
-* you are new to managing data with R, or
+* you are new to managing or analyzing data with R, or
 * your analyses will require most of the dataset's rows or columns, or
-* you'd benefit from some of the auxiliary information in [REDCapTidieR's supertibble](https://chop-cgtdataops.github.io/REDCapTidieR/articles/REDCapTidieR.html#tidying-redcap-exports), such as instrument's structure.  <!--Future version may provide more information, like the column and row count of each table.-->
+* you'd benefit from some of the auxiliary information in [REDCapTidieR's supertibble](https://chop-cgtdataops.github.io/REDCapTidieR/articles/REDCapTidieR.html#tidying-redcap-exports), such as the instrument's structure.  <!--Future version may provide more information, like the column and row count of each table.-->
 
 However we recommend calling [REDCapR](https://ouhscbbmc.github.io/REDCapR/) in other scenarios.  It could be worth calling REDCapR multiple times if:
 
-* you are comfortable with managing data with R, or
+* you are performing some operation other than retrieving/reading data from REDCap,
+* you are comfortable with managing and analyzing data with R, or
 * your analyses require only a fraction of the data (such as (a) you need only the first event, or (b) the analyses don't involve most of the instruments), or
 * you want to specify the variables' data types with [`readr::cols()`](https://readr.tidyverse.org/reference/cols.html).
 
 If in doubt, start with REDCapTidieR.  Escalate to REDCapR if your download time is too long and might be decreased by reducing the information retrieved from the server and transported across the network.
+
+And of course many scenarios are solved best with a combination of both packages, such as (a) [REDCapR](https://ouhscbbmc.github.io/REDCapR) populates the initial demographics in REDCap, (b) research staff enter measures collected from patients over time, (c) [REDCapTidieR](https://chop-cgtdataops.github.io/REDCapTidieR/) retrieves the complete longitudinal dataset, (d) [dplyr](https://dplyr.tidyverse.org/) joins the tibbles, and finally (e) [lme4](https://cran.r-project.org/web/packages/lme4/vignettes/lmer.pdf) tests hypotheses involving [patient trajectories](https://datascienceplus.com/analysing-longitudinal-data-multilevel-growth-models-i/) over time.
 
 Escalating to REDCapR
 ------------------------------------------------------------------
