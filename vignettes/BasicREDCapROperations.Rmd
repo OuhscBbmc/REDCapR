@@ -26,7 +26,8 @@ library(magrittr)
 requireNamespace("kableExtra")
 
 opts_chunk$set(
-  comment = NA,
+  collapse = TRUE,
+  comment = "#>",
   tidy    = FALSE
 )
 
