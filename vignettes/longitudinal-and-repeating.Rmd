@@ -233,29 +233,30 @@ ds_demographic <-
 
 ds_demographic 
 
-# col_types_blood_pressure <-
-#   readr::cols_only(
-#     record_id                 = readr::col_integer(),
-#     redcap_repeat_instrument  = readr::col_character(),
-#     redcap_repeat_instance    = readr::col_integer(),
-#     sbp                       = readr::col_double(),
-#     dbp                       = readr::col_double(),
-#     # blood_pressure_complete   = readr::col_integer()
-#   )
-# 
-# ds_blood_pressure <-
-#   REDCapR::redcap_read(
-#     redcap_uri  = credential$redcap_uri,
-#     token       = credential$token,
-#     forms       = "blood_pressure",
-#     # col_types   = col_types_blood_pressure,
-#     verbose     = FALSE,
-#   )$data
-# 
-# ds_blood_pressure 
+col_types_blood_pressure <-
+  readr::cols(
+    record_id                 = readr::col_integer(),
+    redcap_repeat_instrument  = readr::col_character(),
+    redcap_repeat_instance    = readr::col_integer(),
+    sbp                       = readr::col_double(),
+    dbp                       = readr::col_double(),
+    # blood_pressure_complete   = readr::col_integer()
+  )
 
+ds_blood_pressure <-
+  REDCapR::redcap_read_oneshot(
+    redcap_uri  = credential$redcap_uri,
+    token       = credential$token,
+    fields      = "redcord_id",
+    forms       = "blood_pressure",
+    # col_types   = col_types_blood_pressure,
+    verbose     = FALSE,
+  )$data
+
+ds_blood_pressure
 ```
 
+If for some reason you need the block dataset through the API, one call will retrieve it.
 
 ```{r redcapr-block}
 ds_block <-
