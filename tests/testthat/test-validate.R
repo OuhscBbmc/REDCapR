@@ -47,22 +47,12 @@ test_that("validate_field_names -uppercase", {
     validate_field_names("record_ID", stop_on_error = TRUE),
     "1 field name\\(s\\) violated the naming rules.  Only digits, lowercase letters, and underscores are allowed."
   )
-
-  # expect_error(
-  #   validate_field_names_collapsed("record_ID,race,Gender", stop_on_error = TRUE),
-  #   "2 field name\\(s\\) violated the naming rules.  Only digits, lowercase letters, and underscores are allowed."
-  # )
 })
 test_that("validate_field_names -start underscore", {
   expect_error(
     validate_field_names("_record_id", stop_on_error = TRUE),
     "1 field name\\(s\\) violated the naming rules.  Only digits, lowercase letters, and underscores are allowed."
   )
-
-  # expect_error(
-  #   validate_field_names_collapsed("_record_id,race,_gender", stop_on_error = TRUE),
-  #   "2 field name\\(s\\) violated the naming rules.  Only digits, lowercase letters, and underscores are allowed."
-  # )
 })
 
 test_that("validate_field_names -concern dataset", {

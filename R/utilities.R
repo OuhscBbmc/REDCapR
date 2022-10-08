@@ -80,8 +80,6 @@ replace_nas_with_explicit <- function(
 #' (presumably right before the return value is passed to the API)
 #'
 #' @param elements An array of values.  Can be `NULL`.  Required.
-# @param collapsed A single character element, where the values are separated
-# by commas.  Can be `NULL`.  Required.
 #'
 #' @return A single character element, where the values are separated by
 #' commas.  Can be blank. (*i.e.*, `""`).
