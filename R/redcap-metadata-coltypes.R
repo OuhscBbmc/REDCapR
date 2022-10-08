@@ -237,8 +237,9 @@ redcap_metadata_internal <- function(
   d_proj <- REDCapR::redcap_project_info_read(redcap_uri, token, verbose = verbose, handle_httr = handle_httr)$data
 
   # Determine status of autonumbering, instrument complete status, and decimal mark
-  .record_field         <- d_var$original_field_name[1]
+  .record_field         <- d_var$original_field_name[1] # The first field should always be the "record" identifier.
   .autonumber           <- d_proj$record_autonumbering_enabled[1]
+  .plumbing_possibles    <- c(.record_field, "redcap_event_name", "redcap_repeat_instrument", "redcap_repeat_instance")
   decimal_period        <- (locale$decimal_mark == ".")
   decimal_comma         <- (locale$decimal_mark == ",")
 
@@ -346,10 +347,8 @@ redcap_metadata_internal <- function(
     dplyr::select(-.data$form_order, -.data$field_order_within_form) %>%
     tibble::add_row(d_again, .after = 1) %>%
     dplyr::mutate(
-      plumbing = (.data$field_name %in% c("redcap_event_name", "redcap_repeat_instrument", "redcap_repeat_instance"))
+      plumbing = (.data$field_name %in% .plumbing_possibles)
     )
-
-  d_meta$plumbing[1] <- TRUE # The first field should always be the "record" identifier.
 
   # The types of variables that are in metadata, but NOT variables:
   # setdiff(d_meta$field_name_base, d_var$original_field_name)
@@ -461,6 +460,8 @@ redcap_metadata_internal <- function(
       .data$plumbing
     )
 
+  .plumbing_variables <- intersect(d$field_name, .plumbing_possibles)
+
   decimal_period_any <- any(d_meta$vt %in% c("number", "number_1dp", "number_2dp", "number_3dp", "number_4dp" ))
   decimal_comma_any  <- any(d_meta$vt %in% c("number_comma_decimal", "number_1dp_comma_decimal", "number_2dp_comma_decimal", "number_3dp_comma_decimal", "number_4dp_comma_decimal"))
 
@@ -479,8 +480,11 @@ redcap_metadata_internal <- function(
 
   list(
     d_variable      = d,
+    success         = TRUE,
     longitudinal    = d_proj$is_longitudinal[1],
-    repeating       = d_proj$has_repeating_instruments_or_events[1]
+    repeating       = d_proj$has_repeating_instruments_or_events[1],
+    record_id_name  = .record_field,
+    plumbing_variables = .plumbing_variables
   )
 }
 

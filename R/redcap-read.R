@@ -252,7 +252,7 @@ redcap_read <- function(
 
   start_time <- Sys.time()
 
-  metadata <- REDCapR::redcap_metadata_read(
+  metadata <- REDCapR:::redcap_metadata_internal(
     redcap_uri         = redcap_uri,
     token              = token,
     verbose            = verbose,
@@ -260,20 +260,14 @@ redcap_read <- function(
     handle_httr        = handle_httr
   )
 
-  if (!metadata$success) {
-    error_message     <- sprintf(
-      "The REDCapR record export operation was not successful.  The error message was:\n%s",
-      metadata$raw_text
-    )
-    stop(error_message)
-  }
+  if (!is.null(fields))
+    fields  <- base::union(metadata$plumbing_variables, fields)
 
-  record_id_name <- metadata$data$field_name[id_position]
   initial_call <- REDCapR::redcap_read_oneshot(
     redcap_uri                 = redcap_uri,
     token                      = token,
     records                    = records,
-    fields                     = record_id_name,
+    fields                     = metadata$record_id_name,
     # forms                    = forms,
     events                     = events,
     filter_logic               = filter_logic,
