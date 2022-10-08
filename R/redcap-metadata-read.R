@@ -15,12 +15,12 @@
 #' project.  Required.
 #' @param forms An array, where each element corresponds to the REDCap form
 #' of the desired fields.  Optional.
-#' @param forms_collapsed A single string, where the desired forms are
-#' separated by commas.  Optional.
+# @param forms_collapsed A single string, where the desired forms are
+# separated by commas.  Optional.
 #' @param fields An array, where each element corresponds to a desired project
 #' field.  Optional.
-#' @param fields_collapsed A single string, where the desired field names are
-#' separated by commas.  Optional.
+# @param fields_collapsed A single string, where the desired field names are
+# separated by commas.  Optional.
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  The verbose output might contain
 #' sensitive information (*e.g.* PHI), so turn this off if the output might
@@ -84,9 +84,9 @@ redcap_metadata_read <- function(
   redcap_uri,
   token,
   forms             = NULL,
-  forms_collapsed   = "",
+  # forms_collapsed   = "",
   fields            = NULL,
-  fields_collapsed  = "",
+  # fields_collapsed  = "",
   verbose           = TRUE,
   config_options    = NULL,
   handle_httr       = NULL
@@ -98,12 +98,12 @@ redcap_metadata_read <- function(
   validate_field_names(fields, stop_on_error = TRUE)
 
   token               <- sanitize_token(token)
-  fields_collapsed    <- collapse_vector(fields   , fields_collapsed)
-  forms_collapsed     <- collapse_vector(forms    , forms_collapsed)
+  fields_collapsed    <- collapse_vector(fields)
+  forms_collapsed     <- collapse_vector(forms)
   verbose             <- verbose_prepare(verbose)
 
-  if (1L <= nchar(fields_collapsed))
-    validate_field_names_collapsed(fields_collapsed, stop_on_error = TRUE)
+  # if (1L <= nchar(fields_collapsed))
+  #   validate_field_names_collapsed(fields_collapsed, stop_on_error = TRUE)
 
   post_body <- list(
     token    = token,

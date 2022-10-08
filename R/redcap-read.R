@@ -26,20 +26,20 @@
 #' project.  Required.
 #' @param records An array, where each element corresponds to the ID of a
 #' desired record.  Optional.
-#' @param records_collapsed A single string, where the desired ID values are
-#' separated by commas.  Optional.
+# @param records_collapsed A single string, where the desired ID values are
+# separated by commas.  Optional.
 #' @param fields An array, where each element corresponds to a desired project
 #' field.  Optional.
-#' @param fields_collapsed A single string, where the desired field names are
-#' separated by commas.  Optional.
+# @param fields_collapsed A single string, where the desired field names are
+# separated by commas.  Optional.
 #' @param forms An array, where each element corresponds to a desired project
 #' form.  Optional.
-#' @param forms_collapsed A single string, where the desired form names are
-#' separated by commas.  Optional.
+# @param forms_collapsed A single string, where the desired form names are
+# separated by commas.  Optional.
 #' @param events An array, where each element corresponds to a desired project
 #' event.  Optional.
-#' @param events_collapsed A single string, where the desired event names are
-#' separated by commas.  Optional.
+# @param events_collapsed A single string, where the desired event names are
+# separated by commas.  Optional.
 #' @param raw_or_label A string (either `'raw'` or `'label'` that specifies
 #' whether to export the raw coded values or the labels for the options of
 #' multiple choice fields.  Default is `'raw'`.
@@ -198,10 +198,10 @@ redcap_read <- function(
   continue_on_error             = FALSE,
   redcap_uri,
   token,
-  records                       = NULL, records_collapsed = "",
-  fields                        = NULL, fields_collapsed  = "",
-  forms                         = NULL, forms_collapsed   = "",
-  events                        = NULL, events_collapsed  = "",
+  records                       = NULL, # records_collapsed = "",
+  fields                        = NULL, # fields_collapsed  = "",
+  forms                         = NULL, # forms_collapsed   = "",
+  events                        = NULL, # events_collapsed  = "",
   raw_or_label                  = "raw",
   raw_or_label_headers          = "raw",
   export_checkbox_label         = FALSE,
@@ -227,13 +227,13 @@ redcap_read <- function(
   checkmate::assert_character(redcap_uri                , any.missing=FALSE,     len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=FALSE,     len=1, pattern="^.{1,}$")
   checkmate::assert_atomic(  records                    , any.missing=TRUE, min.len=0)
-  checkmate::assert_character(records_collapsed         , any.missing=TRUE ,     len=1, pattern="^.{0,}$", null.ok=TRUE)
+  # checkmate::assert_character(records_collapsed         , any.missing=TRUE ,     len=1, pattern="^.{0,}$", null.ok=TRUE)
   checkmate::assert_character(fields                    , any.missing=TRUE , min.len=1, pattern="^.{1,}$", null.ok=TRUE)
-  checkmate::assert_character(fields_collapsed          , any.missing=TRUE ,     len=1, pattern="^.{0,}$", null.ok=TRUE)
+  # checkmate::assert_character(fields_collapsed          , any.missing=TRUE ,     len=1, pattern="^.{0,}$", null.ok=TRUE)
   checkmate::assert_character(forms                     , any.missing=TRUE , min.len=1, pattern="^.{1,}$", null.ok=TRUE)
-  checkmate::assert_character(forms_collapsed           , any.missing=TRUE ,     len=1, pattern="^.{0,}$", null.ok=TRUE)
+  # checkmate::assert_character(forms_collapsed           , any.missing=TRUE ,     len=1, pattern="^.{0,}$", null.ok=TRUE)
   checkmate::assert_character(events                    , any.missing=TRUE , min.len=1, pattern="^.{1,}$", null.ok=TRUE)
-  checkmate::assert_character(events_collapsed          , any.missing=TRUE ,     len=1, pattern="^.{0,}$", null.ok=TRUE)
+  # checkmate::assert_character(events_collapsed          , any.missing=TRUE ,     len=1, pattern="^.{0,}$", null.ok=TRUE)
   checkmate::assert_character(raw_or_label              , any.missing=FALSE,     len=1)
   checkmate::assert_subset(   raw_or_label              , c("raw", "label"))
   checkmate::assert_character(raw_or_label_headers      , any.missing=FALSE,     len=1)
@@ -259,15 +259,15 @@ redcap_read <- function(
   validate_field_names(fields, stop_on_error = TRUE)
 
   token               <- sanitize_token(token)
-  records_collapsed   <- collapse_vector(records  , records_collapsed)
-  fields_collapsed    <- collapse_vector(fields   , fields_collapsed)
-  forms_collapsed     <- collapse_vector(forms    , forms_collapsed)
-  events_collapsed    <- collapse_vector(events   , events_collapsed)
+  # records_collapsed   <- collapse_vector(records  , records_collapsed)
+  # fields_collapsed    <- collapse_vector(fields   , fields_collapsed)
+  # forms_collapsed     <- collapse_vector(forms    , forms_collapsed)
+  # events_collapsed    <- collapse_vector(events   , events_collapsed)
   filter_logic        <- filter_logic_prepare(filter_logic)
   verbose             <- verbose_prepare(verbose)
 
-  if (1L <= nchar(fields_collapsed))
-    validate_field_names_collapsed(fields_collapsed, stop_on_error = TRUE)
+  # if (1L <= nchar(fields_collapsed))
+  #   validate_field_names_collapsed(fields_collapsed, stop_on_error = TRUE)
 
   start_time <- Sys.time()
 
@@ -294,10 +294,10 @@ redcap_read <- function(
   initial_call <- REDCapR::redcap_read_oneshot(
     redcap_uri                 = redcap_uri,
     token                      = token,
-    records_collapsed          = records_collapsed,
-    fields_collapsed           = record_id_name,
-    # forms_collapsed          = forms_collapsed,
-    events_collapsed           = events_collapsed,
+    records                    = records,
+    fields                     = record_id_name,
+    # forms                    = forms,
+    events                     = events,
     filter_logic               = filter_logic,
     datetime_range_begin       = datetime_range_begin,
     datetime_range_end         = datetime_range_end,
@@ -362,9 +362,9 @@ redcap_read <- function(
       redcap_uri                  = redcap_uri,
       token                       = token,
       records                     = selected_ids,
-      fields_collapsed            = fields_collapsed,
-      events_collapsed            = events_collapsed,
-      forms_collapsed             = forms_collapsed,
+      fields                      = fields,
+      events                      = events,
+      forms                       = forms,
       raw_or_label                = raw_or_label,
       raw_or_label_headers        = raw_or_label_headers,
       export_checkbox_label       = export_checkbox_label,
@@ -412,7 +412,7 @@ redcap_read <- function(
     lst_batch[[i]]   <- read_result$data
     success_combined <- success_combined & read_result$success
 
-    rm(read_result) # Admittedly overkill defensiveness.
+    # rm(read_result) # Admittedly overkill defensiveness.
   }
 
   ds_stacked               <- dplyr::bind_rows(lst_batch)
@@ -461,10 +461,10 @@ redcap_read <- function(
     status_codes        = status_code_combined,
     outcome_messages    = outcome_message_combined,
     # data_types          = data_types,
-    records_collapsed   = records_collapsed,
-    fields_collapsed    = fields_collapsed,
-    forms_collapsed     = forms_collapsed,
-    events_collapsed    = events_collapsed,
+    records_collapsed   = collapse_vector(records),
+    fields_collapsed    = read_result$fields_collapsed,     # From the last call
+    forms_collapsed     = read_result$forms_collapsed,      # From the last call
+    events_collapsed    = read_result$events_collapsed,     # From the last call
     filter_logic        = filter_logic,
     datetime_range_begin= datetime_range_begin,
     datetime_range_end  = datetime_range_end,

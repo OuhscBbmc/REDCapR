@@ -80,8 +80,8 @@ replace_nas_with_explicit <- function(
 #' (presumably right before the return value is passed to the API)
 #'
 #' @param elements An array of values.  Can be `NULL`.  Required.
-#' @param collapsed A single character element, where the values are separated
-#' by commas.  Can be `NULL`.  Required.
+# @param collapsed A single character element, where the values are separated
+# by commas.  Can be `NULL`.  Required.
 #'
 #' @return A single character element, where the values are separated by
 #' commas.  Can be blank. (*i.e.*, `""`).
@@ -91,25 +91,19 @@ replace_nas_with_explicit <- function(
 #'
 #' @examples
 #' library(REDCapR) # Load the package into the current R session.
-#' REDCapR:::collapse_vector(elements = NULL   , collapsed = NULL)
-#' REDCapR:::collapse_vector(elements = letters, collapsed = NULL)
-#' REDCapR:::collapse_vector(elements = NULL   , collapsed = "4,5,6")
+#' REDCapR:::collapse_vector(elements = NULL   )
+#' REDCapR:::collapse_vector(elements = letters)
 
 ## We're intentionally not exporting this function.
-collapse_vector <- function(elements, collapsed) {
-  checkmate::assert_character(collapsed, len=1, any.missing=TRUE, null.ok=TRUE)
+collapse_vector <- function(elements) {
+  checkmate::assert_vector(elements, any.missing=FALSE, null.ok=TRUE)
 
-  if ((is.null(collapsed) || length(collapsed) == 0L) || all(nchar(collapsed) == 0L)) {
-
-    # This is an empty string if `elements` (eg, fields`) is NULL.
-    collapsed <- dplyr::if_else(
-      is.null(elements),
-      "",
-      paste0(elements, collapse = ",")
-    )
-  }
-
-  collapsed
+  # This is an empty string if `elements` (eg, fields`) is NULL.
+  dplyr::if_else(
+    is.null(elements),
+    "",
+    paste0(elements, collapse = ",")
+  )
 }
 
 ## We're intentionally not exporting this function.

@@ -8,9 +8,7 @@ redcap_metadata_read(
   redcap_uri,
   token,
   forms = NULL,
-  forms_collapsed = "",
   fields = NULL,
-  fields_collapsed = "",
   verbose = TRUE,
   config_options = NULL,
   handle_httr = NULL
@@ -29,14 +27,8 @@ project.  Required.}
 \item{forms}{An array, where each element corresponds to the REDCap form
 of the desired fields.  Optional.}
 
-\item{forms_collapsed}{A single string, where the desired forms are
-separated by commas.  Optional.}
-
 \item{fields}{An array, where each element corresponds to a desired project
 field.  Optional.}
-
-\item{fields_collapsed}{A single string, where the desired field names are
-separated by commas.  Optional.}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed
 to the R console during the operation.  The verbose output might contain

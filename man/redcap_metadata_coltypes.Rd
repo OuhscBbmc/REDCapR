@@ -126,7 +126,7 @@ For example, if values like "abcd" where entered in a field for a few months, th
 the project manager selected the "integer" validation option, all those
 "abcd" values remain untouched.
 
-This is one reason \code{redcap_metadata_coltypes} prints it suggestions to the console.
+This is one reason \code{redcap_metadata_coltypes()} prints it suggestions to the console.
 It allows the developer to adjust the specifications to match the values
 returned by the API.  The the "abcd" scenario, consider (a) changing the type
 from \code{col_integer} to \code{col_character}, (b) excluding the trash values,

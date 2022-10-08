@@ -21,6 +21,23 @@ These features are not yet on CRAN.  Install with `remotes::install_github("Ouhs
 
     For more information, read the short chapter in [*R for Data Science*](https://r4ds.had.co.nz/tibbles.html).
 
+* The `*_collapsed` parameters are deprecated.  When your want to limit on records/fields/forms/events, pass the vector of characters, not the scalar character separated by commas (which I think everyone does already).  In other words use `c("demographics", "blood_pressure")` instead of `"demographics,blood_pressure"`.
+
+    Here are the relationships between the four pairs of variables:
+
+    ```r
+    records_collapsed   <- collapse_vector(records  , records_collapsed)
+    fields_collapsed    <- collapse_vector(fields   , fields_collapsed)
+    forms_collapsed     <- collapse_vector(forms    , forms_collapsed)
+    events_collapsed    <- collapse_vector(events   , events_collapsed)
+    ```
+
+    If someone is using the *_collapsed parameter, they can programmatically convert it to a vector like:
+
+    ```r
+    field_names <- trimws(unlist(strsplit(field_names_collapsed, ",")))
+    ```
+
 ### New Features
 
 * New `redcap_metadata_coltypes()` function.  Inspects the fields types and validation text of each field to generate a suggested `readr::col_types` object that reflects the project's current data dictionary.  The object then can be passed to the `col_types` parameter of `redcap_read()` or `redcap_read_oneshot()`.  (Suggested and discussed with @pbchase, @nutterb, @skadauke, & others, #405 & #294)

@@ -8,13 +8,9 @@ redcap_read_eav_oneshot(
   redcap_uri,
   token,
   records = NULL,
-  records_collapsed = "",
   fields = NULL,
-  fields_collapsed = "",
   forms = NULL,
-  forms_collapsed = "",
   events = NULL,
-  events_collapsed = "",
   export_survey_fields = FALSE,
   export_data_access_groups = FALSE,
   filter_logic = "",
@@ -41,26 +37,14 @@ project.  Required.}
 \item{records}{An array, where each element corresponds to the ID of a
 desired record.  Optional.}
 
-\item{records_collapsed}{A single string, where the desired ID values
-are separated by commas.  Optional.}
-
 \item{fields}{An array, where each element corresponds to a desired project
 field.  Optional.}
-
-\item{fields_collapsed}{A single string, where the desired field names are
-separated by commas.  Optional.}
 
 \item{forms}{An array, where each element corresponds to a desired project
 form.  Optional.}
 
-\item{forms_collapsed}{A single string, where the desired form names are
-separated by commas.  Optional.}
-
 \item{events}{An array, where each element corresponds to a desired project
 event.  Optional.}
-
-\item{events_collapsed}{A single string, where the desired event names are
-separated by commas.  Optional.}
 
 \item{export_survey_fields}{A boolean that specifies whether to export the
 survey identifier field (e.g., 'redcap_survey_identifier') or survey
