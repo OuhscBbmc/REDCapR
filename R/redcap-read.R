@@ -287,11 +287,15 @@ redcap_read <- function(
     stop(error_message)
   }
 
+  record_id_name <- metadata$data$field_name[id_position]
+  # if (!grepl(paste0("\\b", record_id_name, "\\b"), forms_collapsed))
+  #   forms_collapsed <- paste0(record_id_name, ",", forms_collapsed)
+
   initial_call <- REDCapR::redcap_read_oneshot(
     redcap_uri                 = redcap_uri,
     token                      = token,
     records_collapsed          = records_collapsed,
-    fields_collapsed           = metadata$data$field_name[id_position],
+    fields_collapsed           = record_id_name,
     # forms_collapsed          = forms_collapsed,
     events_collapsed           = events_collapsed,
     filter_logic               = filter_logic,
