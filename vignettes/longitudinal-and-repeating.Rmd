@@ -17,11 +17,32 @@ vignette: >
 
 ```{r}
 #| include = FALSE
+library(knitr)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   tidy    = FALSE
 )
+
+knit_print.data.frame <- function(x, ...) {
+  # See https://cran.r-project.org/package=knitr/vignettes/knit_print.html
+# stop()
+  x %>%
+    # rmarkdown::print.paged_df() %>%
+    kable(
+      col.names = gsub("_", " ", colnames(.)),
+      format = "html"
+    ) %>%
+    kableExtra::kable_styling(
+      bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+      full_width        = FALSE
+    ) %>%
+    c("", "", .) %>%
+    paste(collapse = "\n") %>%
+    asis_output()
+}
+# register the method
+registerS3method("knit_print", "data.frame", knit_print.data.frame)
 ```
 
 Background
@@ -158,6 +179,20 @@ Our advice is to start before Table 5 is assembled --retrieve the information in
 
 Two approaches are appropriate for most scenarios: (a) a single call to REDCapTidieR's [`redcap_read_tidy()`](https://chop-cgtdataops.github.io/REDCapTidieR/reference/read_redcap_tidy.html) or (b) multiple calls to REDCapR's [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html).
 
+The code in the vignette requires the magrittr package for the `%>%` (alternatively you can use `|>` if you're using R 4.0.2 or later).  It also uses the credentials for practice/unsecure dataset.  Please see [Part 2 - Retrieve Protected Token](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#part-2---retrieve-protected-token) of the [Typical REDCap Workflow for a Data Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html) vignette for approaches for securing a REDCap token.
+
+```{r retrieve-credential}
+# Support pipes
+library(magrittr)
+
+# Retrieve token
+path_credential <- system.file("misc/example.credentials", package = "REDCapR")
+credential  <- REDCapR::retrieve_credential_local(
+  path_credential = path_credential,
+  project_id      = 3181
+)
+```
+
 Single REDCapTidieR Calls
 ------------------------------------------------------------------
 
@@ -171,6 +206,68 @@ Multiple REDCapR Calls
 Under the hood, REDCapTidieR calls REDCapR multiple times.
 
 {Will Beasley will write this section.}
+
+
+To retrieve the credentials for the first project listed above, pass the value of "153" to `project_id`.
+
+```{r redcapr-demographics}
+col_types_demographics <-
+  readr::cols_only(
+    record_id                 = readr::col_integer(),
+    height                    = readr::col_double(),
+    weight                    = readr::col_double(),
+    bmi                       = readr::col_double()
+    # redcap_repeat_instrument  = readr::col_character(),
+    # redcap_repeat_instance    = readr::col_integer(),
+    # demographics_complete     = readr::col_integer()
+  )
+
+ds_demographic <-
+  REDCapR::redcap_read(
+    redcap_uri  = credential$redcap_uri,
+    token       = credential$token,
+    forms       = "demographics",
+    col_types   = col_types_demographics,
+    verbose     = FALSE,
+  )$data
+
+ds_demographic 
+
+# col_types_blood_pressure <-
+#   readr::cols_only(
+#     record_id                 = readr::col_integer(),
+#     redcap_repeat_instrument  = readr::col_character(),
+#     redcap_repeat_instance    = readr::col_integer(),
+#     sbp                       = readr::col_double(),
+#     dbp                       = readr::col_double(),
+#     # blood_pressure_complete   = readr::col_integer()
+#   )
+# 
+# ds_blood_pressure <-
+#   REDCapR::redcap_read(
+#     redcap_uri  = credential$redcap_uri,
+#     token       = credential$token,
+#     forms       = "blood_pressure",
+#     # col_types   = col_types_blood_pressure,
+#     verbose     = FALSE,
+#   )$data
+# 
+# ds_blood_pressure 
+
+```
+
+
+```{r redcapr-block}
+ds_block <-
+  REDCapR::redcap_read(
+    redcap_uri  = credential$redcap_uri,
+    token       = credential$token,
+    col_types   = readr::cols(.default = readr::col_character()),
+    verbose     = FALSE,
+  )$data
+
+ds_block 
+```
 
 Choosing between the Approaches
 ------------------------------------------------------------------
