@@ -92,7 +92,13 @@ redcap_variables <- function(
       handle_httr     = handle_httr
     )
 
-  if (kernel$success) {
+  if (!kernel$success) {
+    if (is.null(kernel$raw_text)) {
+      rlang::abort(message = "REDCapR::redcap_variables() encountered an error communicating with the server.")
+    } else {
+      rlang::abort(message = kernel$raw_text)
+    }
+  } else {
     try(
       {
         # Convert the raw text to a dataset.
@@ -131,18 +137,19 @@ redcap_variables <- function(
       )
       # nocov end
     }
-  } else {
-    ds              <- tibble::tibble() # Return an empty data.frame
-    outcome_message <-
-      if (any(grepl(kernel$regex_empty, kernel$raw_text))) {
-        "The REDCapR read/export operation was not successful.  The returned dataset (of variables) was empty." # nocov
-      } else {
-        sprintf(
-          "The REDCapR variable retrieval was not successful.  The error message was:\n%s",
-          kernel$raw_text
-        )
-      }
   }
+  # } else {
+  #   ds              <- tibble::tibble() # Return an empty data.frame
+  #   outcome_message <-
+  #     if (any(grepl(kernel$regex_empty, kernel$raw_text))) {
+  #       "The REDCapR read/export operation was not successful.  The returned dataset (of variables) was empty." # nocov
+  #     } else {
+  #       sprintf(
+  #         "The REDCapR variable retrieval was not successful.  The error message was:\n%s",
+  #         kernel$raw_text
+  #       )
+  #     }
+  # }
 
   if (verbose)
     message(outcome_message)

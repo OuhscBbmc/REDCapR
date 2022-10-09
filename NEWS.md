@@ -15,11 +15,38 @@ These features are not yet on CRAN.  Install with `remotes::install_github("Ouhs
 
 ### Possibly Breaking Change
 
-* `redcap_read()`, `redcap_read_oneshot()`, `redcap_dag_read()`, `redcap_log_read()` and `redcap_report()` return a [tibble](https://tibble.tidyverse.org/) instead of a [data.frame](https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html).  (#415)
+The could possibly break existing code --but it's very unlikely.  We don't like risking it, but feel these changes will(directly and indirectly) considerably improve the package.
+
+* `redcap_read()`, `redcap_read_oneshot()`, `redcap_dag_read()`, `redcap_log_read()`, and `redcap_report()` return a [tibble](https://tibble.tidyverse.org/) instead of a [data.frame](https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html).  (#415)
 
     This should affect client code only if you expect a call like `ds[, 3]` to return a vector instead of a single-column data.frame/tibble.  One solution is to upcast the tibble to a data.frame (with something like `as.data.frame()`).  We recommend using an approach that works for both data.frames and tibbles, such as `ds[[3]]` or `dplyr::pull(ds, "gender")`.
 
     For more information, read the short chapter in [*R for Data Science*](https://r4ds.had.co.nz/tibbles.html).
+
+* The `*_collapsed` parameters are deprecated.  When your want to limit on records/fields/forms/events, pass the vector of characters, not the scalar character separated by commas (which I think everyone does already).  In other words use `c("demographics", "blood_pressure")` instead of `"demographics,blood_pressure"`.
+
+    Here are the relationships between the four pairs of variables:
+
+    ```r
+    records_collapsed   <- collapse_vector(records  , records_collapsed)
+    fields_collapsed    <- collapse_vector(fields   , fields_collapsed)
+    forms_collapsed     <- collapse_vector(forms    , forms_collapsed)
+    events_collapsed    <- collapse_vector(events   , events_collapsed)
+    ```
+
+    If someone is using the *_collapsed parameter, they can programmatically convert it to a vector like:
+
+    ```r
+    field_names <- trimws(unlist(strsplit(field_names_collapsed, ",")))
+    ```
+
+* `redcap_read()` will automatically include the "plumbing" variables, even if they're not included the list of requested fields & forms.  (#442).  Specifically:
+
+    * `record_id` (or it's customized name) will always be returned
+    * `redcap_event_name` will be returned for longitudinal projects
+    * `redcap_repeat_instrument` and `redcap_repeat_instance` will be returned for projects with repeating instruments
+
+This will help extract forms from longitudinal & repeating projects.
 
 ### New Features
 

@@ -51,6 +51,7 @@ REDCapCon
 REDCapR's
 REDCapTidieR
 REDCapTidieR's
+REDCapTidyieR
 RODBC
 RODBCext
 SSL
@@ -83,6 +84,7 @@ dataset's
 datetime
 dbp
 dp
+dplyr
 dropdown
 eav
 edu
@@ -103,6 +105,8 @@ interpretable
 io
 ish
 json
+lme
+magrittr
 manageably
 mdy
 mishmashed
@@ -136,6 +140,7 @@ tibble
 tibbles
 tidyr
 tidyverse
+unsecure
 upcast
 uploadable
 uri

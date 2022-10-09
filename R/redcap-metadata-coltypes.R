@@ -106,7 +106,7 @@
 #' the project manager selected the "integer" validation option, all those
 #' "abcd" values remain untouched.
 #'
-#' This is one reason `redcap_metadata_coltypes` prints it suggestions to the console.
+#' This is one reason `redcap_metadata_coltypes()` prints it suggestions to the console.
 #' It allows the developer to adjust the specifications to match the values
 #' returned by the API.  The the "abcd" scenario, consider (a) changing the type
 #' from `col_integer` to `col_character`, (b) excluding the trash values,
@@ -237,8 +237,9 @@ redcap_metadata_internal <- function(
   d_proj <- REDCapR::redcap_project_info_read(redcap_uri, token, verbose = verbose, handle_httr = handle_httr)$data
 
   # Determine status of autonumbering, instrument complete status, and decimal mark
-  .record_field         <- d_var$original_field_name[1]
+  .record_field         <- d_var$original_field_name[1] # The first field should always be the "record" identifier.
   .autonumber           <- d_proj$record_autonumbering_enabled[1]
+  .plumbing_possibles    <- c(.record_field, "redcap_event_name", "redcap_repeat_instrument", "redcap_repeat_instance")
   decimal_period        <- (locale$decimal_mark == ".")
   decimal_comma         <- (locale$decimal_mark == ",")
 
@@ -344,8 +345,12 @@ redcap_metadata_internal <- function(
     dplyr::ungroup() %>%
     dplyr::arrange(.data$form_order,  .data$field_order_within_form) %>%
     dplyr::select(-.data$form_order, -.data$field_order_within_form) %>%
-    tibble::add_row(d_again, .after = 1)
+    tibble::add_row(d_again, .after = 1) %>%
+    dplyr::mutate(
+      plumbing = (.data$field_name %in% .plumbing_possibles)
+    )
 
+  # The types of variables that are in metadata, but NOT variables:
   # setdiff(d_meta$field_name_base, d_var$original_field_name)
   # [1] "signature"   "file_upload" "descriptive"
 
@@ -451,8 +456,11 @@ redcap_metadata_internal <- function(
       # .data$padding1,
       # .data$padding2,
       .data$aligned,
-      .data$field_name_base
+      .data$field_name_base,
+      .data$plumbing
     )
+
+  .plumbing_variables <- intersect(d$field_name, .plumbing_possibles)
 
   decimal_period_any <- any(d_meta$vt %in% c("number", "number_1dp", "number_2dp", "number_3dp", "number_4dp" ))
   decimal_comma_any  <- any(d_meta$vt %in% c("number_comma_decimal", "number_1dp_comma_decimal", "number_2dp_comma_decimal", "number_3dp_comma_decimal", "number_4dp_comma_decimal"))
@@ -472,7 +480,21 @@ redcap_metadata_internal <- function(
 
   list(
     d_variable      = d,
+    success         = TRUE,
     longitudinal    = d_proj$is_longitudinal[1],
-    repeating       = d_proj$has_repeating_instruments_or_events[1]
+    repeating       = d_proj$has_repeating_instruments_or_events[1],
+    record_id_name  = .record_field,
+    plumbing_variables = .plumbing_variables
   )
 }
+
+# uri   <- "https://bbmc.ouhsc.edu/redcap/api/"
+#
+# A simple project (pid 153)
+# REDCapR:::redcap_metadata_internal(uri, "9A81268476645C4E5F03428B8AC3AA7B")$d_variable
+#
+# A longitudinal project (pid 212)
+# REDCapR:::redcap_metadata_internal(uri, "0434F0E9CF53ED0587847AB6E51DE762")$d_variable
+#
+# # A repeating measures (pid 3181)
+# REDCapR:::redcap_metadata_internal(uri, "22C3FF1C8B08899FB6F86D91D874A159")$d_variable

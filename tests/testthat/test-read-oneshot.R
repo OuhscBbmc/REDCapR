@@ -224,6 +224,56 @@ test_that("specify-forms", {
 
   expect_s3_class(returned_object$data, "tbl")
 })
+test_that("specify-forms-only-1st", {
+  testthat::skip_on_cran()
+  path_expected <- "test-data/specific-redcapr/read-oneshot/specify-forms-only-1st.R"
+  desired_forms <- c("demographics")
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+
+  expect_message(
+    regexp           = expected_outcome_message,
+    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, forms=desired_forms)
+  )
+
+  if (update_expectation) save_expected(returned_object$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
+
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_equal(returned_object$status_code, expected=200L)
+  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_true(returned_object$filter_logic=="", "A filter was not specified.")
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
+})
+test_that("specify-forms-only-2nd", {
+  testthat::skip_on_cran()
+  path_expected <- "test-data/specific-redcapr/read-oneshot/specify-forms-only-2nd.R"
+  desired_forms <- c("race_and_ethnicity")
+  expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+
+  expect_message(
+    regexp           = expected_outcome_message,
+    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, forms=desired_forms)
+  )
+
+  if (update_expectation) save_expected(returned_object$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
+
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_equal(returned_object$status_code, expected=200L)
+  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
+  expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_true(returned_object$filter_logic=="", "A filter was not specified.")
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true(returned_object$success)
+
+  expect_s3_class(returned_object$data, "tbl")
+})
 test_that("force-character-type", {
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/read-oneshot/force-character-type.R"
@@ -344,33 +394,6 @@ test_that("label", {
 
   expect_s3_class(returned_object$data, "tbl")
 })
-# This test is removed because the vroom version adds digits to make the columns unique
-# test_that("label-header", {
-#   testthat::skip_on_cran()
-#   path_expected <- "test-data/specific-redcapr/read-oneshot/label-header.R"
-#   expected_warning <- "Duplicated column names deduplicated: 'Complete\\?' => 'Complete\\?_1' \\[\\d+\\], 'Complete\\?' => 'Complete\\?_2' \\[\\d+\\]"
-#   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
-#
-#   expect_warning(
-#     regexp = expected_warning,
-#     expect_message(
-#       regexp           = expected_outcome_message,
-#       returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label_headers="label")
-#     )
-#   )
-#
-#   if (update_expectation) save_expected(returned_object$data, path_expected)
-#   expected_data_frame <- retrieve_expected(path_expected)
-#
-#   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
-#   expect_equal(returned_object$status_code, expected=200L)
-#   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
-#   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
-#   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
-#   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
-#   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
-#   expect_true(returned_object$success)
-# })
 test_that("export_checkbox_label", {
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/read-oneshot/export_checkbox_label.R"

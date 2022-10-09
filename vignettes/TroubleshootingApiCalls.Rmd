@@ -11,6 +11,15 @@ vignette: >
 #   - images/EmailVerified.png
 ---
 
+```{r}
+#| include = FALSE
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  tidy    = FALSE
+)
+```
+
 There are many links in the pipeline between your institution's [REDCap](https://www.project-redcap.org/) server and the API user.  When the end result is unsuccessful, this document should help narrow the location of the possible problem.  The first two sections will be relevant to almost any language interacting with the API.  The remaining sections are possibly relevant only to your language (*e.g.*, Python, R, PHP, SAS, bash), or your software library such as [redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://ouhscbbmc.github.io/REDCapR/) in R, [phpcap](https://github.com/iuredcap/phpcap) in PHP, and [PyCap](https://pycap.readthedocs.io/en/latest/) in Python).
 
 Language Agnostic

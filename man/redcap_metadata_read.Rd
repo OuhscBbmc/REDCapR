@@ -8,9 +8,7 @@ redcap_metadata_read(
   redcap_uri,
   token,
   forms = NULL,
-  forms_collapsed = "",
   fields = NULL,
-  fields_collapsed = "",
   verbose = TRUE,
   config_options = NULL,
   handle_httr = NULL
@@ -29,14 +27,8 @@ project.  Required.}
 \item{forms}{An array, where each element corresponds to the REDCap form
 of the desired fields.  Optional.}
 
-\item{forms_collapsed}{A single string, where the desired forms are
-separated by commas.  Optional.}
-
 \item{fields}{An array, where each element corresponds to a desired project
 field.  Optional.}
-
-\item{fields_collapsed}{A single string, where the desired field names are
-separated by commas.  Optional.}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed
 to the R console during the operation.  The verbose output might contain
@@ -78,7 +70,17 @@ one field in the project's dataset.
 \examples{
 \dontrun{
 uri   <- "https://bbmc.ouhsc.edu/redcap/api/"
+
+# A simple project (pid 153)
 token <- "9A81268476645C4E5F03428B8AC3AA7B"
+REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
+
+# A longitudinal project (pid 212)
+token <- "0434F0E9CF53ED0587847AB6E51DE762"
+REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
+
+# A repeating measures (pid 3181)
+token <- "22C3FF1C8B08899FB6F86D91D874A159"
 REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 }
 }

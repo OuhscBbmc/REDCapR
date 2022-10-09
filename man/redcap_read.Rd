@@ -12,13 +12,9 @@ redcap_read(
   redcap_uri,
   token,
   records = NULL,
-  records_collapsed = "",
   fields = NULL,
-  fields_collapsed = "",
   forms = NULL,
-  forms_collapsed = "",
   events = NULL,
-  events_collapsed = "",
   raw_or_label = "raw",
   raw_or_label_headers = "raw",
   export_checkbox_label = FALSE,
@@ -62,26 +58,14 @@ project.  Required.}
 \item{records}{An array, where each element corresponds to the ID of a
 desired record.  Optional.}
 
-\item{records_collapsed}{A single string, where the desired ID values are
-separated by commas.  Optional.}
-
 \item{fields}{An array, where each element corresponds to a desired project
 field.  Optional.}
-
-\item{fields_collapsed}{A single string, where the desired field names are
-separated by commas.  Optional.}
 
 \item{forms}{An array, where each element corresponds to a desired project
 form.  Optional.}
 
-\item{forms_collapsed}{A single string, where the desired form names are
-separated by commas.  Optional.}
-
 \item{events}{An array, where each element corresponds to a desired project
 event.  Optional.}
-
-\item{events_collapsed}{A single string, where the desired event names are
-separated by commas.  Optional.}
 
 \item{raw_or_label}{A string (either \code{'raw'} or \code{'label'} that specifies
 whether to export the raw coded values or the labels for the options of
@@ -213,7 +197,16 @@ if you encounter the error:
 Please try importing/exporting a smaller amount of data.
 }\if{html}{\out{</div>}}
 
-For \code{\link[=redcap_read]{redcap_read()}} to function properly, the user must have Export
+A third benefit (compared to \code{\link[=redcap_read]{redcap_read()}}) is that important fields are
+included, even if not explicitly requested.  As a result:
+\enumerate{
+\item \code{record_id} (or it's customized name) will always be returned
+\item \code{redcap_event_name} will be returned for longitudinal projects
+\item \code{redcap_repeat_instrument} and \code{redcap_repeat_instance} will be returned
+for projects with repeating instruments
+}
+
+For \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}} to function properly, the user must have Export
 permissions for the 'Full Data Set'.  Users with only 'De-Identified'
 export privileges can still use \code{redcap_read_oneshot}.  To grant the
 appropriate permissions:

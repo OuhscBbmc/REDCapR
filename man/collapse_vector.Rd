@@ -4,13 +4,10 @@
 \alias{collapse_vector}
 \title{Collapse a vector of values into a single string when necessary}
 \usage{
-collapse_vector(elements, collapsed)
+collapse_vector(elements)
 }
 \arguments{
 \item{elements}{An array of values.  Can be \code{NULL}.  Required.}
-
-\item{collapsed}{A single character element, where the values are separated
-by commas.  Can be \code{NULL}.  Required.}
 }
 \value{
 A single character element, where the values are separated by
@@ -25,9 +22,8 @@ vector. This functions squashes them together in a single character element
 }
 \examples{
 library(REDCapR) # Load the package into the current R session.
-REDCapR:::collapse_vector(elements = NULL   , collapsed = NULL)
-REDCapR:::collapse_vector(elements = letters, collapsed = NULL)
-REDCapR:::collapse_vector(elements = NULL   , collapsed = "4,5,6")
+REDCapR:::collapse_vector(elements = NULL   )
+REDCapR:::collapse_vector(elements = letters)
 }
 \author{
 Will Beasley

@@ -83,7 +83,7 @@ redcap_event_instruments <- function(
     token     = token,
     content   = "formEventMapping",
     format    = "csv",
-    "arms[0]" = collapse_vector(arms, NULL)
+    "arms[0]" = collapse_vector(arms)
   )
 
   col_types <- readr::cols(

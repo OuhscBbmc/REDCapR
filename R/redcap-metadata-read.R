@@ -15,12 +15,8 @@
 #' project.  Required.
 #' @param forms An array, where each element corresponds to the REDCap form
 #' of the desired fields.  Optional.
-#' @param forms_collapsed A single string, where the desired forms are
-#' separated by commas.  Optional.
 #' @param fields An array, where each element corresponds to a desired project
 #' field.  Optional.
-#' @param fields_collapsed A single string, where the desired field names are
-#' separated by commas.  Optional.
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  The verbose output might contain
 #' sensitive information (*e.g.* PHI), so turn this off if the output might
@@ -64,7 +60,17 @@
 #' @examples
 #' \dontrun{
 #' uri   <- "https://bbmc.ouhsc.edu/redcap/api/"
+#'
+#' # A simple project (pid 153)
 #' token <- "9A81268476645C4E5F03428B8AC3AA7B"
+#' REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
+#'
+#' # A longitudinal project (pid 212)
+#' token <- "0434F0E9CF53ED0587847AB6E51DE762"
+#' REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
+#'
+#' # A repeating measures (pid 3181)
+#' token <- "22C3FF1C8B08899FB6F86D91D874A159"
 #' REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 #' }
 
@@ -74,9 +80,7 @@ redcap_metadata_read <- function(
   redcap_uri,
   token,
   forms             = NULL,
-  forms_collapsed   = "",
   fields            = NULL,
-  fields_collapsed  = "",
   verbose           = TRUE,
   config_options    = NULL,
   handle_httr       = NULL
@@ -88,12 +92,9 @@ redcap_metadata_read <- function(
   validate_field_names(fields, stop_on_error = TRUE)
 
   token               <- sanitize_token(token)
-  fields_collapsed    <- collapse_vector(fields   , fields_collapsed)
-  forms_collapsed     <- collapse_vector(forms    , forms_collapsed)
+  fields_collapsed    <- collapse_vector(fields)
+  forms_collapsed     <- collapse_vector(forms)
   verbose             <- verbose_prepare(verbose)
-
-  if (1L <= nchar(fields_collapsed))
-    validate_field_names_collapsed(fields_collapsed, stop_on_error = TRUE)
 
   post_body <- list(
     token    = token,

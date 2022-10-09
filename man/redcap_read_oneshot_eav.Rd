@@ -8,13 +8,9 @@ redcap_read_oneshot_eav(
   redcap_uri,
   token,
   records = NULL,
-  records_collapsed = "",
   fields = NULL,
-  fields_collapsed = "",
   forms = NULL,
-  forms_collapsed = "",
   events = NULL,
-  events_collapsed = "",
   raw_or_label = "raw",
   raw_or_label_headers = "raw",
   export_data_access_groups = FALSE,
@@ -42,26 +38,14 @@ project.  Required.}
 \item{records}{An array, where each element corresponds to the ID of a
 desired record.  Optional.}
 
-\item{records_collapsed}{A single string, where the desired ID values
-are separated by commas.  Optional.}
-
 \item{fields}{An array, where each element corresponds to a desired
 project field.  Optional.}
-
-\item{fields_collapsed}{A single string, where the desired field names
-are separated by commas.  Optional.}
 
 \item{forms}{An array, where each element corresponds to a desired project
 field.  Optional.}
 
-\item{forms_collapsed}{A single string, where the desired form names are
-separated by commas.  Optional.}
-
 \item{events}{An array, where each element corresponds to a desired project
 event.  Optional.}
-
-\item{events_collapsed}{A single string, where the desired event names are
-separated by commas.  Optional.}
 
 \item{raw_or_label}{A string (either \code{'raw'} or \code{'label'} that specifies
 whether to export the raw coded values or the labels for the options of
@@ -168,7 +152,7 @@ ds <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=uri, token=token)$data
 
 # Return only records with IDs of 1 and 3
 desired_records_v1 <- c(1, 3)
-ds_some_rows_v1    <- REDCapR::redcap_read_oneshot_eav(
+ds_some_rows_v1    <- REDCapR:::redcap_read_oneshot_eav(
    redcap_uri = uri,
    token      = token,
    records    = desired_records_v1
@@ -176,7 +160,7 @@ ds_some_rows_v1    <- REDCapR::redcap_read_oneshot_eav(
 
 # Return only the fields record_id, name_first, and age
 desired_fields_v1 <- c("record_id", "name_first", "age")
-ds_some_fields_v1 <- redcap_read_oneshot_eav(
+ds_some_fields_v1 <- REDCapR:::redcap_read_oneshot_eav(
    redcap_uri = uri,
    token      = token,
    fields     = desired_fields_v1
