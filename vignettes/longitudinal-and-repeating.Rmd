@@ -143,7 +143,7 @@ When these measurements are added to REDCap's observation table, it resembles Ta
 
 As mentioned above, there isn't a universally good way to coerce Tables 1, 3a, and 3b into a single rectangle because the rows represent different things.  Or from REDCap's perspective, there's not a good transformation of `redcap_data` (*i.e.*, Table 4) that is appropriate for most statistical programs.
 
-When forced to combine the different entities, the best option is probably Table 5.  We call this a "block dataset", borrowing from linear algebra's [block matrix](https://mathworld.wolfram.com/BlockMatrix.html) term.  You can see the mishmash of tables masquerading as a unified dataset.  However it's obvious the rows lack the conceptual coherency of Tables 1, 3a, & 3b.
+When forced to combine the different entities, the best option is probably Table 5.  We call this a "block dataset", borrowing from linear algebra's [block matrix](https://mathworld.wolfram.com/BlockMatrix.html) term.  You can see the mishmash of tables masquerading as a unified dataset.  The rows lack the conceptual coherency of Tables 1, 3a, & 3b.
 
 **Table 5: mishmashed grain** is how the points are returned from REDCap if you request the data in a single call.
 
@@ -180,9 +180,14 @@ Many new REDCap users will submit a single API call and unintentionally obtain s
 
 Our advice is to start before Table 5 is assembled --retrieve the information in a better way.  Like other database systems, request the three tables separately from the server and then combine them on your desktop to fit your analyses if necessary.
 
-Two approaches are appropriate for most scenarios: (a) a single call to REDCapTidieR's [`redcap_read_tidy()`](https://chop-cgtdataops.github.io/REDCapTidieR/reference/read_redcap_tidy.html) or (b) multiple calls to REDCapR's [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html).
+Two approaches are appropriate for most scenarios:
 
-The code in the vignette requires the magrittr package for the `%>%` (alternatively you can use `|>` if you're using R 4.0.2 or later).  It also uses the credentials for this practice/fake dataset.  Please see [Part 2 - Retrieve Protected Token](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#part-2---retrieve-protected-token) of the [Typical REDCap Workflow for a Data Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html) vignette for approaches for securing a REDCap token.
+1. multiple calls to REDCapR's [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html), or
+1. a single call to REDCapTidieR's [`redcap_read_tidy()`](https://chop-cgtdataops.github.io/REDCapTidieR/reference/read_redcap_tidy.html).
+
+The code in the vignette requires the magrittr package for the `%>%` (alternatively you can use `|>` if you're using R 4.0.2 or later).  
+
+The vignette uses these credentials to retrieve the practice/fake dataset.  **This is not appropriate for datasets containing PHI or other sensitive information.**  Please see [Part 2 - Retrieve Protected Token](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#part-2---retrieve-protected-token) of the [Typical REDCap Workflow for a Data Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html) vignette for secure approaches.
 
 ```{r retrieve-credential}
 # Support pipes
@@ -196,24 +201,16 @@ credential  <- REDCapR::retrieve_credential_local(
 )
 ```
 
-Single REDCapTidieR Calls
+One REDCapR Call for Each Table
 ------------------------------------------------------------------
 
-[REDCapTidieR](https://chop-cgtdataops.github.io/REDCapTidieR/)'s initial motivation is to facilitate longitudinal analyses and promote [tidy](https://r4ds.had.co.nz/tidy-data.html) data hygiene.
+The tidy datasets represented in Tables 1, 3a, and 3b can be obtained by calling REDCapR three times --one call per table.  Using the `forms` parameter, pass "demographics" to get Table 1, "blood_pressure" to get Table 3a, and "laboratory" to get Table 3b.
 
-{Stephan Kadauke & Richard Hanna, please represent your package as you wish.  Tell me if I've positioned it differently than you would have.}
+Although it is not required, we recommend specifying a  [`readr::cols()`](https://readr.tidyverse.org/reference/cols.html) object to ensure the desired variable data types.
 
-Multiple REDCapR Calls
-------------------------------------------------------------------
+### Retrieve patient-level table (corresponding to Table 1)
 
-Under the hood, REDCapTidieR calls REDCapR multiple times.
-
-{Will Beasley will write this section.}
-
-
-To retrieve the credentials for the first project listed above, pass the value of "153" to `project_id`.
-
-```{r redcapr-demographics}
+```{r redcapr-patient}
 col_types_demographics <-
   readr::cols_only(
     record_id                 = readr::col_integer(),
@@ -224,7 +221,7 @@ col_types_demographics <-
 
 ds_demographic <-
   REDCapR::redcap_read(
-    redcap_uri  = credential$redcap_uri,
+    redcap_uri  = credential$redcap_uri, # From the previous code snippet.
     token       = credential$token,
     forms       = "demographics",
     col_types   = col_types_demographics,
@@ -232,7 +229,12 @@ ds_demographic <-
   )$data
 
 ds_demographic
+```
 
+
+### Retrieve patient-time-level tables (corresponding to Tables 3a & 3b)
+
+```{r redcapr-repeating}
 col_types_blood_pressure <-
   readr::cols(
     record_id                 = readr::col_integer(),
@@ -278,6 +280,8 @@ ds_laboratory %>%
   tidyr::drop_na(redcap_repeat_instrument)
 ```
 
+### Retrieve block tables (corresponding to Table 5)
+
 If for some reason you need the block dataset through the API, one call will retrieve it.
 
 ```{r redcapr-block}
@@ -291,6 +295,13 @@ ds_block <-
 
 ds_block
 ```
+
+One REDCapTidieR Call for All Tables
+------------------------------------------------------------------
+
+[REDCapTidieR](https://chop-cgtdataops.github.io/REDCapTidieR/)'s initial motivation is to facilitate longitudinal analyses and promote [tidy](https://r4ds.had.co.nz/tidy-data.html) data hygiene.
+
+{Stephan Kadauke & Richard Hanna, please represent your package as you wish.  Tell me if I've positioned it differently than you would have.}
 
 Choosing between the Approaches
 ------------------------------------------------------------------
@@ -317,10 +328,10 @@ Escalating to REDCapR
 
 Even if you think you'll need REDCapR's low-level control, consider starting with REDCapTidieR anyway.  ...particularly if you are unsure how to specify the grain of each table.  The structure of REDCapTidieR's tables easily compatible with conventional analyses.  If you need the performance of REDCapR but are unsure how the tables should look, simply execute something like `REDCapTidieR::redcap_read_tidy(url, project_token)` and study its output.  Then try to mimic it exactly with `REDCapR::redcap_read()` calls.
 
-Finally, cull unwanted cells using `REDCapR::redcap_read()` parameters.  These data points will not even leave the REDCap instance, which will improve performance.  Some possible strategies include passing [arguments](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html#arguments) to
+Finally, cull unwanted cells using the parameters of `REDCapR::redcap_read()`.  These data points will not even leave the REDCap instance, which will improve performance.  Some possible strategies include passing [arguments](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html#arguments) to
 
 * `forms`: this will retrieve only the specified instruments/forms.  Beginners should start here.  It is easy to conceptualize and usually has a big increase in speed for just a little development work.
-* `events`: this will retrieve only the desired events within a longitudinal project.  For instance if the analyses involve only the "intake" and "follow up #1" events, leave follow ups #2-10 on the server.
+* `events`: this will retrieve only the desired events within a longitudinal project.  For instance if the analyses involve only the "intake" and "follow up #1" events, leave follow ups #2, #3, and #4 on the server.
 * `fields`: this is more granular than `forms`.  It can be combined with calls to `forms`, such as passing `"bmi"` to fields and `c("blood_pressure", "laboratory")` to forms.
 * `records`: in the example scenario, this will pluck individual patients and their associated events and repeating instances.  To be useful in research, it's usually combined with other REDCapR calls.  See the [Read a subset of records, conditioned on the values in some variables](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html#read-a-subset-of-records-conditioned-on-the-values-in-some-variables) section of REDCapR's [Basic REDCapR Operations](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) vignette.
 * `filter_logic`: this will leverage the observation values to limit the rows returned.  Because the underlying table does not index the obs values, this will be less computationally efficient than the options above.
@@ -355,15 +366,15 @@ Longitudinal
 Caching Results to Improve Performance
 -----------------------------------------------------------------
 
-If escalating to REDCapR didn't decrease the duration enough, consider the strategy of calling REDCap only once per day (with either package) and saving the results to a secured disk.  This will be efficient when the analyses require a *large* dataset, but not a *recent* dataset.
+If escalating to REDCapR didn't decrease the duration enough, consider the strategy of calling REDCap only once per day (with either package) and saving the results to a secured disk.  This will be efficient when the analyses require a *large* dataset, but not a *real-time* dataset.
 
 In many retrospective projects, multiple analyses during the day can reuse the same dataset retrieved the night before (with a function like [`readr::write_rds()`](https://readr.tidyverse.org/reference/read_rds.html)).  This has helped our complicated investigations when multiple statisticians frantically tackle overlapping aspects before a funder's deadline.
 
-Essentially you are transferring security responsibilities from REDCap to the file server.  To balance its advantages, the approaches drawbacks include:
+Essentially you are transferring security responsibilities from REDCap to the file server.  To balance its advantages, the approach's drawbacks include:
 
 * extra effort is required to create, secure, and maintain a networked drive that is accessible to only authorized analysts.  This will take 15-60 minutes, depending on your institution.
 * extra effort is required to create an automated program to retrieve and cache the dataset every night. See [CDS] for a head start.
-* REDCap's logs will not inform a meaningful audit because no human is accessing the API.  User access audits are now the responsibility of the file system.
+* REDCap's logs will not support a meaningful audit because no human is accessing the API.  User access audits are now the responsibility of the file system.
 
 Caching Results for other Languages
 -----------------------------------------------------------------
