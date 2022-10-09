@@ -30,7 +30,8 @@ knit_print.data.frame <- function(x, ...) {
   x %>%
     # rmarkdown::print.paged_df() %>%
     kable(
-      col.names = paste0("<code>", gsub("_", "<br>", colnames(.)), "</code>"),
+      col.names = gsub("_", "<br>", colnames(.)),
+      # col.names = paste0("<code>", gsub("_", "<br>", colnames(.)), "</code>"),
       # col.names = gsub("_", " ", colnames(.)),
       escape = FALSE,
       format = "html"
@@ -66,10 +67,10 @@ Suppose you have two patients (*i.e.*, "1" and "2") with three intake variables 
 
 ### Table 1: patient grain
 
-| `pt`<br>`id` | `height` | `weight` | `bmi` |
-| ---: | -------: | -------: | ----: |
-|    1 |      1.0 |     11.0 | 111.0 |
-|    2 |      2.0 |     22.0 | 222.0 |
+| pt<br>id | height | weight | bmi   |
+| :------: | :----: | :----: | :---: |
+|        1 |    1.0 |   11.0 | 111.0 |
+|        2 |    2.0 |   22.0 | 222.0 |
 
 This patient-grain structure is how the data points are most comfortably inputted by humans into REDCap, and it is the default when exported through the browser and API.  However it is stored differently under the hood.
 
@@ -79,69 +80,69 @@ REDCap's flexibility is a driver of its success.  Once a research team learns RE
 
 REDCap and EMR databases have an "observation" t, store observations in their underlying table.  This table is a simplification of the `redcap_data` table, which is the heart of the database.
 
-| `pt`<br>`id` | `key`  | `value` |
-| ---: | :----- | ------: |
-|    1 | height |     1.0 |
-|    1 | weight |    11.0 |
-|    1 | bmi    |   111.0 |
-|    2 | height |     2.0 |
-|    2 | weight |    22.0 |
-|    2 | bmi    |   222.0 |
+| pt<br>id | key    | value |
+| :------: | :----- | ----: |
+|        1 | height |   1.0 |
+|        1 | weight |  11.0 |
+|        1 | bmi    | 111.0 |
+|        2 | height |   2.0 |
+|        2 | weight |  22.0 |
+|        2 | bmi    | 222.0 |
 
 If the investigation gains a longitudinal or repeating component, it becomes necessary to include the dimension of time.  Suppose the protocols specifies five time points; the blood pressure instrument is captured at times 1, 2, & 3 while the laboratory instrument is captured at times 1 & 2.  If you record this stage on paper, it will likely resemble Tables 3a & 3b: one for vitals and one for labs.
 
 ### Table 3a: patient-time grain for `blood_pressure` instrument
 
-| `pt`<br>`id` | `time` | `sbp` | `dbp` |
-| ---: | -----: | ----: | ----: |
-|    1 |      1 |   1.1 |  11.1 |
-|    1 |      2 |   1.2 |  11.2 |
-|    1 |      3 |   1.3 |  11.3 |
-|    2 |      1 |   2.1 |  22.1 |
-|    2 |      2 |   2.2 |  22.2 |
-|    2 |      3 |   2.3 |  22.3 |
+| pt<br>id | time | sbp  | dbp  |
+| :------: | :--: | :--: | :--: |
+|        1 |    1 |  1.1 | 11.1 |
+|        1 |    2 |  1.2 | 11.2 |
+|        1 |    3 |  1.3 | 11.3 |
+|        2 |    1 |  2.1 | 22.1 |
+|        2 |    2 |  2.2 | 22.2 |
+|        2 |    3 |  2.3 | 22.3 |
 
 ### Table 3b: patient-time grain for `laboratory` instrument
 
-| `pt`<br>`id` | `time` | `lab` | `dose` |
-| ---: | -----: | ----: | -----: |
-|    1 |      1 |   aa1 | 1.1 mg |
-|    1 |      2 |   aa2 | 1.2 mg |
-|    2 |      1 |   bb1 | 2.1 mg |
-|    2 |      2 |   bb2 | 2.2 mg |
+| pt<br>id | time | lab  | dose   |
+| :------: | :--: | :--: | :----: |
+|        1 |    1 |  aa1 | 1.1 mg |
+|        1 |    2 |  aa2 | 1.2 mg |
+|        2 |    1 |  bb1 | 2.1 mg |
+|        2 |    2 |  bb2 | 2.2 mg |
 
 When these measurements are added to REDCap's observation table, it resembles Table 4.  Two new columns are required to uniquely distinguish the instrument and its ordinal position.  Notice the first six rows are copied from Table 2; they have empty values for the repeating structure.
 
 ### Table 4: observation grain for `intake`, `blood_pressure`, and `laboratory` instruments
 
-| `pt`<br>`id` | `repeat`<br>`instrument` |`repeat`<br>`instance` | `key` | `value`  |
-| ---: | ------------------------ | --------------------: | ----: | -------: |
-|    1 |                       -- |                    -- | height |     1.0 |
-|    1 |                       -- |                    -- | weight |    11.0 |
-|    1 |                       -- |                    -- | bmi    |   111.0 |
-|    2 |                       -- |                    -- | height |     2.0 |
-|    2 |                       -- |                    -- | weight |    22.0 |
-|    2 |                       -- |                    -- | bmi    |   222.0 |
-|    1 | blood_pressure           |                     1 |   sbp |      1.1 |
-|    1 | blood_pressure           |                     1 |   dbp |     11.1 |
-|    1 | blood_pressure           |                     2 |   sbp |      1.2 |
-|    1 | blood_pressure           |                     2 |   dbp |     11.2 |
-|    1 | blood_pressure           |                     3 |   sbp |      1.3 |
-|    1 | blood_pressure           |                     3 |   dbp |     11.3 |
-|    1 | laboratory               |                     1 |   lab |      aa1 |
-|    1 | laboratory               |                     1 |  conc |  1.1 ppm |
-|    1 | laboratory               |                     2 |   lab |      aa2 |
-|    1 | laboratory               |                     2 |  conc |  1.2 ppm |
-|    2 | blood_pressure           |                     1 |   sbp |      2.1 |
-|    2 | blood_pressure           |                     1 |   dbp |     22.1 |
-|    2 | blood_pressure           |                     2 |   sbp |      2.2 |
-|    2 | blood_pressure           |                     2 |   dbp |     22.2 |
-|    2 | blood_pressure           |                     3 |   sbp |      2.3 |
-|    2 | blood_pressure           |                     3 |   dbp |     22.3 |
-|    2 | laboratory               |                     1 |   lab |      bb1 |
-|    2 | laboratory               |                     1 |  conc |  2.1 ppm |
-|    2 | laboratory               |                     2 |   lab |      bb2 |
-|    2 | laboratory               |                     2 |  conc |  2.2 ppm |
+| pt<br>id | repeat<br>instrument | repeat<br>instance | key    | value   |
+| :------: | :------------------- | :----------------: | :----- | ------: |
+|        1 | --                   |                 -- | height |     1.0 |
+|        1 | --                   |                 -- | weight |    11.0 |
+|        1 | --                   |                 -- | bmi    |   111.0 |
+|        2 | --                   |                 -- | height |     2.0 |
+|        2 | --                   |                 -- | weight |    22.0 |
+|        2 | --                   |                 -- | bmi    |   222.0 |
+|        1 | blood_pressure       |                  1 | sbp    |     1.1 |
+|        1 | blood_pressure       |                  1 | dbp    |    11.1 |
+|        1 | blood_pressure       |                  2 | sbp    |     1.2 |
+|        1 | blood_pressure       |                  2 | dbp    |    11.2 |
+|        1 | blood_pressure       |                  3 | sbp    |     1.3 |
+|        1 | blood_pressure       |                  3 | dbp    |    11.3 |
+|        1 | laboratory           |                  1 | lab    |     aa1 |
+|        1 | laboratory           |                  1 | conc   | 1.1 ppm |
+|        1 | laboratory           |                  2 | lab    |     aa2 |
+|        1 | laboratory           |                  2 | conc   | 1.2 ppm |
+|        2 | blood_pressure       |                  1 | sbp    |     2.1 |
+|        2 | blood_pressure       |                  1 | dbp    |    22.1 |
+|        2 | blood_pressure       |                  2 | sbp    |     2.2 |
+|        2 | blood_pressure       |                  2 | dbp    |    22.2 |
+|        2 | blood_pressure       |                  3 | sbp    |     2.3 |
+|        2 | blood_pressure       |                  3 | dbp    |    22.3 |
+|        2 | laboratory           |                  1 | lab    |     bb1 |
+|        2 | laboratory           |                  1 | conc   | 2.1 ppm |
+|        2 | laboratory           |                  2 | lab    |     bb2 |
+|        2 | laboratory           |                  2 | conc   | 2.2 ppm |
 
 As mentioned above, there isn't a universally good way to coerce Tables 1, 3a, and 3b into a single rectangle because the rows represent different things.  Or from REDCap's perspective, there's not a good transformation of `redcap_data` (*i.e.*, Table 4) that is appropriate for most statistical programs.
 
@@ -149,20 +150,20 @@ When forced to combine the different entities, the best option is probably Table
 
 ### Table 5: mishmashed grain
 
-| `pt`<br>`id` | `repeat`<br>`instrument` | `repeat`<br>`instance` | `height` | `weight` | `bmi` | `sbp` | `dbp` | `lab` |  `conc` |
-| ---- | :----------------------- | ---------------------: | -------: | -------: | ----: | ----: | ----: | ----: | ------: |
-|    1 |                       -- |                     -- |      1.0 |     11.0 | 111.0 |    -- |    -- |    -- |      -- |
-|    1 | blood_pressure           |                      1 |       -- |       -- |    -- |   1.1 |  11.1 |    -- |      -- |
-|    1 | blood_pressure           |                      2 |       -- |       -- |    -- |   1.2 |  11.2 |    -- |      -- |
-|    1 | blood_pressure           |                      3 |       -- |       -- |    -- |   1.3 |  11.3 |    -- |      -- |
-|    1 | laboratory               |                      1 |       -- |       -- |    -- |    -- |    -- |   aa1 | 1.1 ppm |
-|    1 | laboratory               |                      2 |       -- |       -- |    -- |    -- |    -- |   aa2 | 1.2 ppm |
-|    2 |                       -- |                     -- |      2.0 |     22.0 | 222.0 |    -- |    -- |    -- |      -- |
-|    2 | blood_pressure           |                      1 |       -- |       -- |    -- |   2.1 |  22.1 |    -- |      -- |
-|    2 | blood_pressure           |                      2 |       -- |       -- |    -- |   2.2 |  22.2 |    -- |      -- |
-|    2 | blood_pressure           |                      3 |       -- |       -- |    -- |   2.3 |  22.3 |    -- |      -- |
-|    2 | laboratory               |                      1 |       -- |       -- |    -- |    -- |    -- |   bb1 | 2.1 ppm |
-|    2 | laboratory               |                      2 |       -- |       -- |    -- |    -- |    -- |   bb2 | 2.2 ppm |
+| pt<br>id | repeat<br>instrument | repeat<br>instance | height | weight | bmi   | sbp  | dbp  | lab  | conc    |
+| :------: | :------------------- | :----------------: | :----: | :----: | :---: | :--: | :--: | :--: | :-----: |
+|        1 | --                   |                 -- |    1.0 |   11.0 | 111.0 |   -- |   -- |   -- |      -- |
+|        1 | blood_pressure       |                  1 |     -- |     -- |    -- |  1.1 | 11.1 |   -- |      -- |
+|        1 | blood_pressure       |                  2 |     -- |     -- |    -- |  1.2 | 11.2 |   -- |      -- |
+|        1 | blood_pressure       |                  3 |     -- |     -- |    -- |  1.3 | 11.3 |   -- |      -- |
+|        1 | laboratory           |                  1 |     -- |     -- |    -- |   -- |   -- |  aa1 | 1.1 ppm |
+|        1 | laboratory           |                  2 |     -- |     -- |    -- |   -- |   -- |  aa2 | 1.2 ppm |
+|        2 | --                   |                 -- |    2.0 |   22.0 | 222.0 |   -- |   -- |   -- |      -- |
+|        2 | blood_pressure       |                  1 |     -- |     -- |    -- |  2.1 | 22.1 |   -- |      -- |
+|        2 | blood_pressure       |                  2 |     -- |     -- |    -- |  2.2 | 22.2 |   -- |      -- |
+|        2 | blood_pressure       |                  3 |     -- |     -- |    -- |  2.3 | 22.3 |   -- |      -- |
+|        2 | laboratory           |                  1 |     -- |     -- |    -- |   -- |   -- |  bb1 | 2.1 ppm |
+|        2 | laboratory           |                  2 |     -- |     -- |    -- |   -- |   -- |  bb2 | 2.2 ppm |
 
 
 A block dataset is not inherently bad.  After all, Table 5 can be unambiguously transformed to and from Table 4.
