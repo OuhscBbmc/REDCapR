@@ -324,7 +324,13 @@ redcap_read <- function(
   lst_outcome_message    <- NULL
   success_combined       <- TRUE
 
-  message("Starting to read ", format(length(unique_ids), big.mark=",", scientific=FALSE, trim=TRUE), " records  at ", Sys.time(), ".")
+  if (verbose) {
+    message(
+      "Starting to read ",
+      format(length(unique_ids), big.mark=",", scientific=FALSE, trim=TRUE),
+      " records  at ", Sys.time(), "."
+    )
+  }
   for (i in ds_glossary$id) {
     selected_index  <- seq(from=ds_glossary$start_index[i], to=ds_glossary$stop_index[i])
     selected_ids    <- unique_ids[selected_index]
