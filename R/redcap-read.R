@@ -137,7 +137,14 @@
 #' Please try importing/exporting a smaller amount of data.
 #' ```
 #'
-#' For [redcap_read()] to function properly, the user must have Export
+#' A third benefit (compared to [redcap_read()]) is that important fields are
+#' included, even if not explicitly requested.  As a result:
+#' 1. `record_id` (or it's customized name) will always be returned
+#' 1. `redcap_event_name` will be returned for longitudinal projects
+#' 1. `redcap_repeat_instrument` and `redcap_repeat_instance` will be returned
+#'   for projects with repeating instruments
+#'
+#' For [redcap_read_oneshot()] to function properly, the user must have Export
 #' permissions for the 'Full Data Set'.  Users with only 'De-Identified'
 #' export privileges can still use `redcap_read_oneshot`.  To grant the
 #' appropriate permissions:

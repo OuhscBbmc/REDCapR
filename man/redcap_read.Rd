@@ -197,7 +197,16 @@ if you encounter the error:
 Please try importing/exporting a smaller amount of data.
 }\if{html}{\out{</div>}}
 
-For \code{\link[=redcap_read]{redcap_read()}} to function properly, the user must have Export
+A third benefit (compared to \code{\link[=redcap_read]{redcap_read()}}) is that important fields are
+included, even if not explicitly requested.  As a result:
+\enumerate{
+\item \code{record_id} (or it's customized name) will always be returned
+\item \code{redcap_event_name} will be returned for longitudinal projects
+\item \code{redcap_repeat_instrument} and \code{redcap_repeat_instance} will be returned
+for projects with repeating instruments
+}
+
+For \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}} to function properly, the user must have Export
 permissions for the 'Full Data Set'.  Users with only 'De-Identified'
 export privileges can still use \code{redcap_read_oneshot}.  To grant the
 appropriate permissions:
