@@ -30,7 +30,9 @@ knit_print.data.frame <- function(x, ...) {
   x %>%
     # rmarkdown::print.paged_df() %>%
     kable(
-      col.names = gsub("_", " ", colnames(.)),
+      col.names = paste0("<code>", gsub("_", "<br>", colnames(.)), "</code>"),
+      # col.names = gsub("_", " ", colnames(.)),
+      escape = FALSE,
       format = "html"
     ) %>%
     kableExtra::kable_styling(
@@ -180,7 +182,7 @@ Our advice is to start before Table 5 is assembled --retrieve the information in
 
 Two approaches are appropriate for most scenarios: (a) a single call to REDCapTidieR's [`redcap_read_tidy()`](https://chop-cgtdataops.github.io/REDCapTidieR/reference/read_redcap_tidy.html) or (b) multiple calls to REDCapR's [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html).
 
-The code in the vignette requires the magrittr package for the `%>%` (alternatively you can use `|>` if you're using R 4.0.2 or later).  It also uses the credentials for practice/unsecure dataset.  Please see [Part 2 - Retrieve Protected Token](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#part-2---retrieve-protected-token) of the [Typical REDCap Workflow for a Data Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html) vignette for approaches for securing a REDCap token.
+The code in the vignette requires the magrittr package for the `%>%` (alternatively you can use `|>` if you're using R 4.0.2 or later).  It also uses the credentials for this practice/fake dataset.  Please see [Part 2 - Retrieve Protected Token](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#part-2---retrieve-protected-token) of the [Typical REDCap Workflow for a Data Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html) vignette for approaches for securing a REDCap token.
 
 ```{r retrieve-credential}
 # Support pipes
@@ -247,7 +249,7 @@ ds_blood_pressure <-
     token       = credential$token,
     forms       = "blood_pressure",
     col_types   = col_types_blood_pressure,
-    verbose     = FALSE,
+    verbose     = FALSE
   )$data
 
 ds_blood_pressure %>%
@@ -258,8 +260,8 @@ col_types_laboratory  <-
     record_id                 = readr::col_integer(),
     redcap_repeat_instrument  = readr::col_character(),
     redcap_repeat_instance    = readr::col_integer(),
-    lab                       = readr::col_double(),
-    conc                      = readr::col_double(),
+    lab                       = readr::col_character(),
+    conc                      = readr::col_character(),
     laboratory_complete       = readr::col_integer()
   )
 
@@ -267,10 +269,9 @@ ds_laboratory  <-
   REDCapR::redcap_read(
     redcap_uri  = credential$redcap_uri,
     token       = credential$token,
-    # fields      = "redcord_id",
-    forms       = "laboratory"
-    # col_types   = col_types_laboratory,
-    # verbose     = FALSE,
+    forms       = "laboratory",
+    col_types   = col_types_laboratory,
+    verbose     = FALSE
   )$data
 
 ds_laboratory %>%
