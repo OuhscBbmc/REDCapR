@@ -213,7 +213,6 @@ test_that("specify-records-and-fields-zero-length", {
   expect_true(returned_object$success)
   expect_s3_class(returned_object$data, "tbl")
 })
-
 test_that("specify-forms", {
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/read-batch-simple/specify-forms.R"
@@ -296,47 +295,6 @@ test_that("specify-forms-only-1st", {
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
   expect_s3_class(returned_object2$data, "tbl")
 })
-# test_that("specify-forms-only-2nd", {
-#   testthat::skip_on_cran()
-#   path_expected <- "test-data/specific-redcapr/read-batch-simple/specify-forms-only-2nd.R"
-#   desired_forms <- c("race_and_ethnicity")
-#   expected_outcome_message <- "\\d+ records and 19 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
-#
-#   ###########################
-#   ## Default Batch size
-#   expect_message(
-#     regexp            = expected_outcome_message,
-#     returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, forms=desired_forms)
-#   )
-#
-#   if (update_expectation) save_expected(returned_object1$data, path_expected)
-#   expected_data_frame <- retrieve_expected(path_expected)
-#
-#   expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object1$data)
-#   expect_true(returned_object1$success)
-#   expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
-#   expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
-#   expect_true(returned_object1$fields_collapsed=="", "A subset of fields was not requested.")
-#   expect_true(returned_object1$filter_logic=="", "A filter was not specified.")
-#   expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
-#   expect_s3_class(returned_object1$data, "tbl")
-#
-#   ###########################
-#   ## Tiny Batch size
-#   expect_message(
-#     returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, forms=desired_forms, batch_size=2),
-#     regexp = expected_outcome_message
-#   )
-#
-#   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
-#   expect_true(returned_object2$success)
-#   expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
-#   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
-#   expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
-#   expect_true(returned_object2$filter_logic=="", "A filter was not specified.")
-#   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
-#   expect_s3_class(returned_object2$data, "tbl")
-# })
 test_that("raw", {
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/read-batch-simple/raw.R"
@@ -504,32 +462,6 @@ test_that("label", {
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
   expect_s3_class(returned_object2$data, "tbl")
 })
-# This test is removed because the vroom version adds digits to make the columns unique
-# test_that("label-header", {
-#   testthat::skip_on_cran()
-#   path_expected <- "test-data/specific-redcapr/read-batch-simple/label-header.R"
-#
-#   expected_warning <- "Duplicated column names deduplicated: 'Complete\\?' => 'Complete\\?_1' \\[16\\], 'Complete\\?' => 'Complete\\?_2' \\[25\\]"
-#   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
-#
-#   expect_warning(
-#     regexp = expected_warning,
-#     expect_message(
-#       regexp           = expected_outcome_message,
-#       returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label_headers="label")
-#     )
-#   )
-#
-#   if (update_expectation) save_expected(returned_object$data, path_expected)
-#   expected_data_frame <- retrieve_expected(path_expected)
-#
-#   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
-#   expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
-#   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
-#   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
-#   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
-#   expect_true(returned_object$success)
-# })
 test_that("export_checkbox_label", {
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/read-batch-simple/export_checkbox_label.R"
@@ -669,7 +601,6 @@ test_that("blank-for-gray-status-false", {
   expect_true(returned_object$success)
   expect_s3_class(returned_object$data, "tbl")
 })
-
 test_that("date-range", {
   testthat::skip_on_cran()
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
@@ -698,7 +629,6 @@ test_that("date-range", {
   expect_true(returned_object$success)
   expect_s3_class(returned_object$data, "tbl")
 })
-
 test_that("error-bad-token", {
   testthat::skip_on_cran()
 
@@ -711,5 +641,6 @@ test_that("error-bad-token", {
     )
   )
 })
+
 rm(credential, project)
 rm(update_expectation)
