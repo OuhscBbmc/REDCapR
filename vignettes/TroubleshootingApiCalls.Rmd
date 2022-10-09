@@ -89,7 +89,7 @@ knitr::include_graphics("images/PostmanScreenshot.png")
 
     At the bottom of the playground page, the interface attempts to translate your specific API call to different languages, like Python and R.  These suggestions are usually correct, but  inspect it critically, as you would for any auto-generated script.
 
-1. **Is the URL/URI correct?**  Notice the url typically resembles <https://bbmc.ouhsc.edu/redcap/api/> and *not* <https://bbmc.ouhsc.edu/> (even if <https://bbmc.ouhsc.edu/> redirects to <https://bbmc.ouhsc.edu/redcap>).
+1. **Is the URL/URI correct?**  Notice the url typically ends with "api/" so it resembles `https://bbmc.ouhsc.edu/redcap/api/` and *not* `https://bbmc.ouhsc.edu/` (even if <https://bbmc.ouhsc.edu/> redirects to <https://bbmc.ouhsc.edu/redcap/>).
 
 1. **Is Postman installed and operating correctly?**  If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the [OUHSC BBMC](https://www.ouhsc.edu/bbmc/).  The url is `https://bbmc.ouhsc.edu/redcap/api/`.  There are three key-value pairs: (1) the 'token' is `9A81268476645C4E5F03428B8AC3AA7B`, (2) the 'content' is `record`, and (3) the 'format' should be `CSV`.  When checking your own server, the token value should change, but the content and format should not.  It should return five records in a CSV format.  The 'status' should be `200 OK`.  The result should look roughly like this.  Notice the line breaks were included in the text values themselves.
 
@@ -137,20 +137,20 @@ The second reason why importing can be trickier is because the schema (*e.g.*, t
 
 1. **Can you import a *small subset* of the project?**  For instance, just the `record_id` column.
 
-1. **Can you export the dataset and then import it *without any modifications***?  
+1. **Can you export the dataset and then import it *without any modifications***?
 
-    For instance, using REDCapR: First, manually complete ~10 example record in the web browser, and then export/download the records with [`REDCapR::redcap_read_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read_oneshot.html) to a data frame.  (If you have longitudinal or repeating instruments, make sure your examples cover those dimensions adequately) Second, can you successfully upload that same `data.frame` (without modification) with [`REDCapR::redcap_write_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_write_oneshot.html)?  
-    
-    If so, that dataset will provide a template for how you structure the real dataset and assign values.  If not, that is a helpful piece of troubleshooting.  
+    For instance, using REDCapR: First, manually complete ~10 example record in the web browser, and then export/download the records with [`REDCapR::redcap_read_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read_oneshot.html) to a data frame.  (If you have longitudinal or repeating instruments, make sure your examples cover those dimensions adequately) Second, can you successfully upload that same `data.frame` (without modification) with [`REDCapR::redcap_write_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_write_oneshot.html)?
 
-1. **Is the longitudinal and/or repeating structure correct?**  Three variables  are frequently misspecified: `redcap_event_name` (for longitudinal projects) and  `redcap_repeat_instrument` & `redcap_repeat_instance` (for repeating instruments).  The values for these variables are clearer to understand once you complete the step above and inspect the layout.  
+    If so, that dataset will provide a template for how you structure the real dataset and assign values.  If not, that is a helpful piece of troubleshooting.
+
+1. **Is the longitudinal and/or repeating structure correct?**  Three variables  are frequently misspecified: `redcap_event_name` (for longitudinal projects) and  `redcap_repeat_instrument` & `redcap_repeat_instance` (for repeating instruments).  The values for these variables are clearer to understand once you complete the step above and inspect the layout.
 
     For longitudinal projects: Example values for `redcap_event_name` are "admission_1_arm_1",  "admission_2_arm_1", and  "admission_3_arm_1".  (Notice the "_arm_1" suffix is used even if arms are not specified in your project.)
 
     For projects with repeating instruments: Examples values for `redcap_repeat_instrument` are "lab", "vitals", and "medication"; these instrument names are specified in the REDCap Designer. Example values for `redcap_repeat_instance` are "1", "2", "3", "4", and "5"; this is a consecutive sequence within a participant's longitudinal event.
-    
+
     If participant 101 has two lab results, one vitals record, and three medications, the dataset structure might be:
-    
+
     | record_id | redcap_repeat_instrument | redcap_repeat_instance | lab_result | pulse | o2    | admin_date |
     |:---------:|:------------------------:|:----------------------:|:----------:|:-----:|:-----:|:----------:|
     | 101       | lab                      | 1                      | positive   |       |       |            |
@@ -167,7 +167,7 @@ If one of these checks fail, please start by consulting your REDCap administrato
 Common Gotchas  {#gotchas-agnostic}
 ------------------------------------------------------------------
 
-1. **Problems in the project's metadata/dictionary.**  If exporting the metadata fails (*e.g.*, [`REDCapR::redcap_metadata_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_read.html) and [`redcapAPI::exportMetaData()`](https://rdrr.io/github/nutterb/redcapAPI/man/exportMetaData.html)), manually download the data dictionary from the REDCap browser.  Inspect the plain text closely in a text editor like [Atom](https://atom.io/) or [Visual Studio Code](https://code.visualstudio.com/); avoid programs like Excel that tend to interpret, align, and decorate the values, which sometimes masks problems.  Scrutinize all elements, but especially look for nonstandard characters.  *See the next bullet.*
+1. **Problems in the project's metadata/dictionary.**  If exporting the metadata fails (*e.g.*, [`REDCapR::redcap_metadata_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_read.html) and [`redcapAPI::exportMetaData()`](https://rdrr.io/github/nutterb/redcapAPI/man/exportMetaData.html)), manually download the data dictionary from the REDCap browser.  Inspect the plain text closely in a text editor like [Visual Studio Code](https://code.visualstudio.com/); avoid programs like Excel that tend to interpret, align, and decorate the values, which sometimes masks problems.  Scrutinize all elements, but especially look for nonstandard characters.  *See the next bullet.*
 
     Some API libraries test that problematic elements of a project are handled correctly.  If you encounter an element that causes problems, please consider
 

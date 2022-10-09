@@ -1,11 +1,11 @@
 ---
 title: "Retrieving Longitudinal and Repeating Structures --DRAFT"
-author: 
-- name: Will Beasley 
+author:
+- name: Will Beasley
   affiliation:
   - Biomedical & Behavior Methodology Core, OUHSC Pediatrics
 - name: Stephan or Rich?
-  affiliation: 
+  affiliation:
   - CHOP
 output:
   rmarkdown::html_vignette
@@ -49,10 +49,10 @@ registerS3method("knit_print", "data.frame", knit_print.data.frame)
 Background
 ==================================================================
 
-This vignette pertains to reading REDCap records from a project that (a) has longitudinal events or (b) has a repeating measure.  The first section conceptually discusses how REDCap stores complex structures.  The remaining sections describe how to best retrieve complex structures with the [REDCapTidyieR](https://chop-cgtdataops.github.io/REDCapTidieR) and [REDCapR]((https://OuhscBbmc.github.io/REDCapR) packages.
+This vignette pertains to reading REDCap records from a project that (a) has longitudinal events or (b) has a repeating measure.  The first section conceptually discusses how REDCap stores complex structures.  The remaining sections describe how to best retrieve complex structures with the [REDCapTidyieR](https://chop-cgtdataops.github.io/REDCapTidieR/) and [REDCapR](https://ouhscbbmc.github.io/REDCapR/) packages.
 
 * If you are new to R or REDCap, consider start with the [Typical REDCap Workflow for a Data Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html) and [Basic REDCapR Operations](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) vignettes and then return to this document.
-* If you are reading from a *simple* project, just call REDCapR's [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html).  
+* If you are reading from a *simple* project, just call REDCapR's [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html).
 * If you want to perform some other operation (such as writing records to REDCap), review the [Reference of REDCapR functions](https://ouhscbbmc.github.io/REDCapR/reference/index.html) to see what is currently available.
 
 If your REDCap project is longitudinal or contains repeating measures, a single call to the API (or a single export through the browser) will return a dataset that is not readily analyzed.  Instead, the dataset will resemble Table 5.  This isn't because of a software bug, but because you haven't told the software how you would like the data structured.  There isn't a good way to jam this multidimensional space into a rectangle of points.  Our advice for querying REDCap is the same as querying any database system: request separate datasets that have a natural "grain" and assemble them as to fit your analyses.
@@ -288,7 +288,7 @@ ds_block <-
     verbose     = FALSE,
   )$data
 
-ds_block 
+ds_block
 ```
 
 Choosing between the Approaches
@@ -309,7 +309,7 @@ However we recommend calling [REDCapR](https://ouhscbbmc.github.io/REDCapR/) in 
 
 If in doubt, start with REDCapTidieR.  Escalate to REDCapR if your download time is too long and might be decreased by reducing the information retrieved from the server and transported across the network.
 
-And of course many scenarios are solved best with a combination of both packages, such as (a) [REDCapR](https://ouhscbbmc.github.io/REDCapR) populates the initial demographics in REDCap, (b) research staff enter measures collected from patients over time, (c) [REDCapTidieR](https://chop-cgtdataops.github.io/REDCapTidieR/) retrieves the complete longitudinal dataset, (d) [dplyr](https://dplyr.tidyverse.org/) joins the tibbles, and finally (e) [lme4](https://cran.r-project.org/web/packages/lme4/vignettes/lmer.pdf) tests hypotheses involving [patient trajectories](https://datascienceplus.com/analysing-longitudinal-data-multilevel-growth-models-i/) over time.
+And of course many scenarios are solved best with a combination of both packages, such as (a) [REDCapR](https://ouhscbbmc.github.io/REDCapR/) populates the initial demographics in REDCap, (b) research staff enter measures collected from patients over time, (c) [REDCapTidieR](https://chop-cgtdataops.github.io/REDCapTidieR/) retrieves the complete longitudinal dataset, (d) [dplyr](https://dplyr.tidyverse.org/) joins the tibbles, and finally (e) [lme4](https://cran.r-project.org/package=lme4/vignettes/lmer.pdf) tests hypotheses involving [patient trajectories](https://datascienceplus.com/analysing-longitudinal-data-multilevel-growth-models-i/) over time.
 
 Escalating to REDCapR
 ------------------------------------------------------------------
@@ -367,7 +367,7 @@ Essentially you are transferring security responsibilities from REDCap to the fi
 Caching Results for other Languages
 -----------------------------------------------------------------
 
-Packages for other programming languages have been developed that access REDCap's API, such [PyCap](http://redcap-tools.github.io/PyCap/) and [PhpCap](https://github.com/iuredcap/phpcap).  Please see a more complete list at <https://redcap-tools.github.io/projects>.  The caching strategy described above may also benefit your investigation if:
+Packages for other programming languages have been developed that access REDCap's API, such [PyCap](http://redcap-tools.github.io/PyCap/) and [PhpCap](https://github.com/iuredcap/phpcap).  Please see a more complete list at <https://redcap-tools.github.io/projects/>.  The caching strategy described above may also benefit your investigation if:
 
 * it uses a language like SAS that does not support packages.  We strongly discourage deploying loose scripts that call the API.  When something is fixed in the original script, it must be distributed by the developer to the ~50 client institutions, then it must by copied to the ~100 projects within each institution.  In contrast, when a developer updates a package distributed through a repository like CRAN, the client needs to run only [`base::update.packages()`](https://stat.ethz.ch/R-manual/R-devel/library/utils/html/update.packages.html) once per machine to update all its packages --not just REDCap packages.  Data scientists already do this regularly.
 
