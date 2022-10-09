@@ -60,11 +60,37 @@
 <p>These features are not yet on CRAN. Install with <code>remotes::install_github("OuhscBbmc/REDCapR")</code></p>
 <div class="section level4">
 <h4 id="possibly-breaking-change-1-2-0">Possibly Breaking Change<a class="anchor" aria-label="anchor" href="#possibly-breaking-change-1-2-0"></a></h4>
+<p>The could possibly break existing code –but it’s very unlikely. We don’t like risking it, but feel these changes will(directly and indirectly) considerably improve the package.</p>
 <ul><li>
-<p><code><a href="../reference/redcap_read.html">redcap_read()</a></code>, <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code>, <code><a href="../reference/redcap_dag_read.html">redcap_dag_read()</a></code>, <code><a href="../reference/redcap_log_read.html">redcap_log_read()</a></code> and <code><a href="../reference/redcap_report.html">redcap_report()</a></code> return a <a href="https://tibble.tidyverse.org/" class="external-link">tibble</a> instead of a <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html" class="external-link">data.frame</a>. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/415" class="external-link">#415</a>)</p>
+<p><code><a href="../reference/redcap_read.html">redcap_read()</a></code>, <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code>, <code><a href="../reference/redcap_dag_read.html">redcap_dag_read()</a></code>, <code><a href="../reference/redcap_log_read.html">redcap_log_read()</a></code>, and <code><a href="../reference/redcap_report.html">redcap_report()</a></code> return a <a href="https://tibble.tidyverse.org/" class="external-link">tibble</a> instead of a <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html" class="external-link">data.frame</a>. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/415" class="external-link">#415</a>)</p>
 <p>This should affect client code only if you expect a call like <code>ds[, 3]</code> to return a vector instead of a single-column data.frame/tibble. One solution is to upcast the tibble to a data.frame (with something like <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code>). We recommend using an approach that works for both data.frames and tibbles, such as <code>ds[[3]]</code> or <code>dplyr::pull(ds, "gender")</code>.</p>
 <p>For more information, read the short chapter in <a href="https://r4ds.had.co.nz/tibbles.html" class="external-link"><em>R for Data Science</em></a>.</p>
-</li></ul></div>
+</li>
+<li>
+<p>The <code>*_collapsed</code> parameters are deprecated. When your want to limit on records/fields/forms/events, pass the vector of characters, not the scalar character separated by commas (which I think everyone does already). In other words use <code>c("demographics", "blood_pressure")</code> instead of <code>"demographics,blood_pressure"</code>.</p>
+<p>Here are the relationships between the four pairs of variables:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">records_collapsed</span>   <span class="op">&lt;-</span> <span class="fu"><a href="../reference/collapse_vector.html">collapse_vector</a></span><span class="op">(</span><span class="va">records</span>  , <span class="va">records_collapsed</span><span class="op">)</span></span>
+<span><span class="va">fields_collapsed</span>    <span class="op">&lt;-</span> <span class="fu"><a href="../reference/collapse_vector.html">collapse_vector</a></span><span class="op">(</span><span class="va">fields</span>   , <span class="va">fields_collapsed</span><span class="op">)</span></span>
+<span><span class="va">forms_collapsed</span>     <span class="op">&lt;-</span> <span class="fu"><a href="../reference/collapse_vector.html">collapse_vector</a></span><span class="op">(</span><span class="va">forms</span>    , <span class="va">forms_collapsed</span><span class="op">)</span></span>
+<span><span class="va">events_collapsed</span>    <span class="op">&lt;-</span> <span class="fu"><a href="../reference/collapse_vector.html">collapse_vector</a></span><span class="op">(</span><span class="va">events</span>   , <span class="va">events_collapsed</span><span class="op">)</span></span></code></pre></div>
+<p>If someone is using the *_collapsed parameter, they can programmatically convert it to a vector like:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">field_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/trimws.html" class="external-link">trimws</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit</a></span><span class="op">(</span><span class="va">field_names_collapsed</span>, <span class="st">","</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</li>
+<li>
+<p><code><a href="../reference/redcap_read.html">redcap_read()</a></code> will automatically include the “plumbing” variables, even if they’re not included the list of requested fields &amp; forms. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/442" class="external-link">#442</a>). Specifically:</p>
+<ul><li>
+<code>record_id</code> (or it’s customized name) will always be returned</li>
+<li>
+<code>redcap_event_name</code> will be returned for longitudinal projects</li>
+<li>
+<code>redcap_repeat_instrument</code> and <code>redcap_repeat_instance</code> will be returned for projects with repeating instruments</li>
+</ul></li>
+</ul><p>This will help extract forms from longitudinal &amp; repeating projects.</p>
+</div>
 <div class="section level4">
 <h4 id="new-features-1-2-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-1-2-0"></a></h4>
 <ul><li>New <code><a href="../reference/redcap_metadata_coltypes.html">redcap_metadata_coltypes()</a></code> function. Inspects the fields types and validation text of each field to generate a suggested <code>readr::col_types</code> object that reflects the project’s current data dictionary. The object then can be passed to the <code>col_types</code> parameter of <code><a href="../reference/redcap_read.html">redcap_read()</a></code> or <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code>. (Suggested and discussed with <a href="https://github.com/pbchase" class="external-link">@pbchase</a>, <a href="https://github.com/nutterb" class="external-link">@nutterb</a>, <a href="https://github.com/skadauke" class="external-link">@skadauke</a>, &amp; others, <a href="https://github.com/OuhscBbmc/REDCapR/issues/405" class="external-link">#405</a> &amp; <a href="https://github.com/OuhscBbmc/REDCapR/issues/294" class="external-link">#294</a>)</li>

@@ -81,13 +81,9 @@ datasets that could tie up the server.</p>
 <span>  <span class="va">redcap_uri</span>,</span>
 <span>  <span class="va">token</span>,</span>
 <span>  records <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  records_collapsed <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  fields <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  fields_collapsed <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  forms <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  forms_collapsed <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  events <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  events_collapsed <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  raw_or_label <span class="op">=</span> <span class="st">"raw"</span>,</span>
 <span>  raw_or_label_headers <span class="op">=</span> <span class="st">"raw"</span>,</span>
 <span>  export_checkbox_label <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -145,19 +141,9 @@ project.  Required.</p></dd>
 desired record.  Optional.</p></dd>
 
 
-<dt>records_collapsed</dt>
-<dd><p>A single string, where the desired ID values are
-separated by commas.  Optional.</p></dd>
-
-
 <dt>fields</dt>
 <dd><p>An array, where each element corresponds to a desired project
 field.  Optional.</p></dd>
-
-
-<dt>fields_collapsed</dt>
-<dd><p>A single string, where the desired field names are
-separated by commas.  Optional.</p></dd>
 
 
 <dt>forms</dt>
@@ -165,19 +151,9 @@ separated by commas.  Optional.</p></dd>
 form.  Optional.</p></dd>
 
 
-<dt>forms_collapsed</dt>
-<dd><p>A single string, where the desired form names are
-separated by commas.  Optional.</p></dd>
-
-
 <dt>events</dt>
 <dd><p>An array, where each element corresponds to a desired project
 event.  Optional.</p></dd>
-
-
-<dt>events_collapsed</dt>
-<dd><p>A single string, where the desired event names are
-separated by commas.  Optional.</p></dd>
 
 
 <dt>raw_or_label</dt>
@@ -334,7 +310,12 @@ tackles more manageably sized objects in memory.  Consider batching
 if you encounter the error:</p>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ERROR<span class="sc">:</span> REDCap ran out of server memory. The request cannot be processed.</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Please try importing<span class="sc">/</span>exporting a smaller amount of data.</span></code></pre><p></p></div>
-<p>For <code>redcap_read()</code> to function properly, the user must have Export
+<p>A third benefit (compared to <code>redcap_read()</code>) is that important fields are
+included, even if not explicitly requested.  As a result:</p><ol><li><p><code>record_id</code> (or it's customized name) will always be returned</p></li>
+<li><p><code>redcap_event_name</code> will be returned for longitudinal projects</p></li>
+<li><p><code>redcap_repeat_instrument</code> and <code>redcap_repeat_instance</code> will be returned
+for projects with repeating instruments</p></li>
+</ol><p>For <code><a href="redcap_read_oneshot.html">redcap_read_oneshot()</a></code> to function properly, the user must have Export
 permissions for the 'Full Data Set'.  Users with only 'De-Identified'
 export privileges can still use <code>redcap_read_oneshot</code>.  To grant the
 appropriate permissions:</p><ul><li><p>go to 'User Rights' in the REDCap project site,</p></li>
@@ -364,15 +345,18 @@ administrator to send you the static material.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Return the entire dataset</span></span></span>
 <span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_read</span><span class="op">(</span>batch_size<span class="op">=</span><span class="fl">2</span>, redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 5 records and 1 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting to read 5 records  at 2022-10-03 18:10:13.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 5 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting to read 5 records  at 2022-10-09 05:28:19.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading batch 1 of 3, with subjects 1 through 2 (ie, 2 unique subject records).</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading batch 2 of 3, with subjects 3 through 4 (ie, 2 unique subject records).</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading batch 3 of 3, with subjects 5 through 5 (ie, 1 unique subject records).</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> cols(</span>
@@ -418,13 +402,16 @@ administrator to send you the static material.</p>
 <span class="r-in"><span>  col_types  <span class="op">=</span> <span class="va">col_types</span>,</span></span>
 <span class="r-in"><span>  batch_size <span class="op">=</span> <span class="fl">2</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting to read 5 records  at 2022-10-03 18:10:16.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 5 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting to read 5 records  at 2022-10-09 05:28:22.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading batch 1 of 3, with subjects 1 through 2 (ie, 2 unique subject records).</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading batch 2 of 3, with subjects 3 through 4 (ie, 2 unique subject records).</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading batch 3 of 3, with subjects 5 through 5 (ie, 1 unique subject records).</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 25</span></span>

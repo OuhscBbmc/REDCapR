@@ -69,9 +69,7 @@ one field in the project's dataset.</p>
 <span>  <span class="va">redcap_uri</span>,</span>
 <span>  <span class="va">token</span>,</span>
 <span>  forms <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  forms_collapsed <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  fields <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  fields_collapsed <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  config_options <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  handle_httr <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -98,19 +96,9 @@ project.  Required.</p></dd>
 of the desired fields.  Optional.</p></dd>
 
 
-<dt>forms_collapsed</dt>
-<dd><p>A single string, where the desired forms are
-separated by commas.  Optional.</p></dd>
-
-
 <dt>fields</dt>
 <dd><p>An array, where each element corresponds to a desired project
 field.  Optional.</p></dd>
-
-
-<dt>fields_collapsed</dt>
-<dd><p>A single string, where the desired field names are
-separated by commas.  Optional.</p></dd>
 
 
 <dt>verbose</dt>
@@ -169,9 +157,11 @@ administrator to send you the static material.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="va">uri</span>   <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># A simple project (pid 153)</span></span></span>
 <span class="r-in"><span><span class="va">token</span> <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span></span>
 <span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_metadata_read</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 17 × 18</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    field_name    form_…¹ secti…² field…³ field…⁴ selec…⁵ field…⁶ text_…⁷ text_…⁸</span>
@@ -208,7 +198,7 @@ administrator to send you the static material.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 200</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $outcome_message</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $forms_collapsed</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
@@ -217,7 +207,100 @@ administrator to send you the static material.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_seconds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1615481</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.122396</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $raw_text</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># A longitudinal project (pid 212)</span></span></span>
+<span class="r-in"><span><span class="va">token</span> <span class="op">&lt;-</span> <span class="st">"0434F0E9CF53ED0587847AB6E51DE762"</span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_metadata_read</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 95 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 95 × 18</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    field_name    form_…¹ secti…² field…³ field…⁴ selec…⁵ field…⁶ text_…⁷ text_…⁸</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> study_id      demogr… <span style="color: #BB0000;">NA</span>      text    Study … <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> date_enrolled demogr… Consen… text    Date s… <span style="color: #BB0000;">NA</span>      YYYY-M… date_y… <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> patient_docu… demogr… <span style="color: #BB0000;">NA</span>      file    Upload… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> first_name    demogr… Contac… text    First … <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> last_name     demogr… <span style="color: #BB0000;">NA</span>      text    Last N… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> telephone_1   demogr… <span style="color: #BB0000;">NA</span>      text    Phone … <span style="color: #BB0000;">NA</span>      Includ… phone   <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> email         demogr… <span style="color: #BB0000;">NA</span>      text    E-mail  <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      email   <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> dob           demogr… <span style="color: #BB0000;">NA</span>      text    Date o… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      date_y… <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> age           demogr… <span style="color: #BB0000;">NA</span>      calc    Age (y… roundd… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ethnicity     demogr… <span style="color: #BB0000;">NA</span>      radio   Ethnic… 0, His… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 85 more rows, 9 more variables: text_validation_max &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   identifier &lt;chr&gt;, branching_logic &lt;chr&gt;, required_field &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   custom_alignment &lt;chr&gt;, question_number &lt;chr&gt;, matrix_group_name &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   matrix_ranking &lt;chr&gt;, field_annotation &lt;chr&gt;, and abbreviated variable</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   names ¹​form_name, ²​section_header, ³​field_type, ⁴​field_label,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁵​select_choices_or_calculations, ⁶​field_note,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁷​text_validation_type_or_show_slider_number, ⁸​text_validation_min</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $success</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $status_code</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $outcome_message</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The data dictionary describing 95 fields was read from REDCap in 0.1 seconds.  The http status code was 200."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $forms_collapsed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $fields_collapsed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_seconds</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1349571</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $raw_text</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># A repeating measures (pid 3181)</span></span></span>
+<span class="r-in"><span><span class="va">token</span> <span class="op">&lt;-</span> <span class="st">"22C3FF1C8B08899FB6F86D91D874A159"</span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_metadata_read</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 8 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 8 × 18</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   field_name form_name   secti…¹ field…² field…³ selec…⁴ field…⁵ text_…⁶ text_…⁷</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> record_id  demographi… <span style="color: #BB0000;">NA</span>      text    Record… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> height     demographi… <span style="color: #BB0000;">NA</span>      text    patien… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      number… 1      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> weight     demographi… <span style="color: #BB0000;">NA</span>      text    patien… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      number… 1      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> bmi        demographi… <span style="color: #BB0000;">NA</span>      text    patien… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      number… 0      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> sbp        blood_pres… <span style="color: #BB0000;">NA</span>      text    systol… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      number  1      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> dbp        blood_pres… <span style="color: #BB0000;">NA</span>      text    diasto… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      number  1      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> lab        laboratory  <span style="color: #BB0000;">NA</span>      text    lab va… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> conc       laboratory  <span style="color: #BB0000;">NA</span>      text    concen… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 9 more variables: text_validation_max &lt;chr&gt;, identifier &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   branching_logic &lt;chr&gt;, required_field &lt;chr&gt;, custom_alignment &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   question_number &lt;chr&gt;, matrix_group_name &lt;chr&gt;, matrix_ranking &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   field_annotation &lt;chr&gt;, and abbreviated variable names ¹​section_header,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ²​field_type, ³​field_label, ⁴​select_choices_or_calculations, ⁵​field_note,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁶​text_validation_type_or_show_slider_number, ⁷​text_validation_min</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $success</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $status_code</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $outcome_message</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The data dictionary describing 8 fields was read from REDCap in 0.1 seconds.  The http status code was 200."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $forms_collapsed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $fields_collapsed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_seconds</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.130224</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $raw_text</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
