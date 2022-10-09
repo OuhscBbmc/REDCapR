@@ -702,7 +702,7 @@ test_that("date-range", {
 test_that("error-bad-token", {
   testthat::skip_on_cran()
 
-  expected_outcome_message <- "The REDCapR record export operation was not successful\\."
+  expected_outcome_message <- "You do not have permissions to use the API"
   expect_error(
     regexp           = expected_outcome_message,
     redcap_read(

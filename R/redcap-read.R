@@ -252,7 +252,7 @@ redcap_read <- function(
 
   start_time <- Sys.time()
 
-  metadata <- REDCapR:::redcap_metadata_internal(
+  metadata <- redcap_metadata_internal(
     redcap_uri         = redcap_uri,
     token              = token,
     verbose            = verbose,
