@@ -15,7 +15,9 @@ These features are not yet on CRAN.  Install with `remotes::install_github("Ouhs
 
 ### Possibly Breaking Change
 
-* `redcap_read()`, `redcap_read_oneshot()`, `redcap_dag_read()`, `redcap_log_read()` and `redcap_report()` return a [tibble](https://tibble.tidyverse.org/) instead of a [data.frame](https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html).  (#415)
+The could possibly break existing code --but it's very unlikely.  We don't like risking it, but feel these changes will(directly and indirectly) considerably improve the package.
+
+* `redcap_read()`, `redcap_read_oneshot()`, `redcap_dag_read()`, `redcap_log_read()`, and `redcap_report()` return a [tibble](https://tibble.tidyverse.org/) instead of a [data.frame](https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html).  (#415)
 
     This should affect client code only if you expect a call like `ds[, 3]` to return a vector instead of a single-column data.frame/tibble.  One solution is to upcast the tibble to a data.frame (with something like `as.data.frame()`).  We recommend using an approach that works for both data.frames and tibbles, such as `ds[[3]]` or `dplyr::pull(ds, "gender")`.
 
@@ -37,6 +39,14 @@ These features are not yet on CRAN.  Install with `remotes::install_github("Ouhs
     ```r
     field_names <- trimws(unlist(strsplit(field_names_collapsed, ",")))
     ```
+
+* `redcap_read()` will automatically include the "plumbing" variables, even if they're not included the list of requested fields & forms.  (#442).  Specifically:
+
+    * `record_id` (or it's customized name) will always be returned
+    * `redcap_event_name` will be returned for longitudinal projects
+    * `redcap_repeat_instrument` and `redcap_repeat_instance` will be returned for projects with repeating instruments
+
+This will help extract forms from longitudinal & repeating projects.
 
 ### New Features
 

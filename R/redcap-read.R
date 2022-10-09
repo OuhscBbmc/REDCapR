@@ -260,7 +260,7 @@ redcap_read <- function(
     handle_httr        = handle_httr
   )
 
-  if (!is.null(fields))
+  if (!is.null(fields) | !is.null(forms))
     fields  <- base::union(metadata$plumbing_variables, fields)
 
   initial_call <- REDCapR::redcap_read_oneshot(
