@@ -206,14 +206,14 @@ credential  <- REDCapR::retrieve_credential_local(
 One REDCapR Call for Each Table
 ------------------------------------------------------------------
 
-The tidy datasets represented in Tables 1, 3a, and 3b can be obtained by calling REDCapR three times --one call per table.  Using the `forms` parameter, pass "demographics" to get Table 1, "blood_pressure" to get Table 3a, and "laboratory" to get Table 3b.
+The tidy datasets represented in Tables 1, 3a, and 3b can be obtained by calling REDCapR three times --one call per table.  Using the `forms` parameter, pass "intake" to get Table 1, "blood_pressure" to get Table 3a, and "laboratory" to get Table 3b.
 
 Although it is not required, we recommend specifying a  [`readr::cols()`](https://readr.tidyverse.org/reference/cols.html) object to ensure the desired variable data types.
 
 ### Retrieve patient-level table (corresponding to Table 1)
 
-```{r redcapr-patient}
-col_types_demographics <-
+```{r redcapr-intake}
+col_types_intake <-
   readr::cols_only(
     record_id                 = readr::col_integer(),
     height                    = readr::col_double(),
@@ -221,16 +221,16 @@ col_types_demographics <-
     bmi                       = readr::col_double()
   )
 
-ds_demographic <-
+ds_intake <-
   REDCapR::redcap_read(
     redcap_uri  = credential$redcap_uri, # From the previous code snippet.
     token       = credential$token,
-    forms       = "demographics",
-    col_types   = col_types_demographics,
+    forms       = "intake",
+    col_types   = col_types_intake,
     verbose     = FALSE,
   )$data
 
-ds_demographic
+ds_intake
 ```
 
 
