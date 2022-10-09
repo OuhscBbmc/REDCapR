@@ -64,9 +64,9 @@ Illustration of How Data Points are Structured
 
 Suppose you have two patients (*i.e.*, "1" and "2") with three intake variables (*i.e.*, `height`, `weight`, and `bmi`).  If you record this on a piece of paper, it would probably look like Table 1.  The table's *grain* is "patient", because each row represents a distinct patient.  Understanding the grain of each structure below will help you understand how the structures are re-expressions of the same set of observations.
 
-**Table 1: patient grain** is the most natural presentation of the six initial observations.
+### Table 1: patient grain
 
-| `pt` | `height` | `weight` | `bmi` |
+| `pt`<br>`id` | `height` | `weight` | `bmi` |
 | ---: | -------: | -------: | ----: |
 |    1 |      1.0 |     11.0 | 111.0 |
 |    2 |      2.0 |     22.0 | 222.0 |
@@ -75,9 +75,11 @@ This patient-grain structure is how the data points are most comfortably inputte
 
 REDCap's flexibility is a driver of its success.  Once a research team learns REDCap, it can reuse the knowledge to capture anything from qqq to qqq.  But to achieve this flexibility in the world of REDCap and EMRs, data are stored along the observation grain.  In computer science, this is commonly called an EAV structure (which stands for entity-attribute-value).  The patient's ID is the entity, the variable type is the attribute, and the observed point is the value.  It can also be thought of as a "key-value store" nested within a patient (where "key" is a synonym of "attribute").  Notice that the two wider rows have morphed into six skinnier rows --one row per observation.  If you are a curious database administrator, peek at the the structure and rows of the `redcap_data` table.  It is the most important table in the database.
 
-**Table 2: observation grain** is how REDCap and EMR databases store observations in their underlying table.  It is a simplification of `redcap_data`, the heart of the database.
+### Table 2: observation grain for `intake` instrument
 
-| `pt` | `key`  | `value` |
+REDCap and EMR databases have an "observation" t, store observations in their underlying table.  This table is a simplification of the `redcap_data` table, which is the heart of the database.
+
+| `pt`<br>`id` | `key`  | `value` |
 | ---: | :----- | ------: |
 |    1 | height |     1.0 |
 |    1 | weight |    11.0 |
@@ -88,9 +90,9 @@ REDCap's flexibility is a driver of its success.  Once a research team learns RE
 
 If the investigation gains a longitudinal or repeating component, it becomes necessary to include the dimension of time.  Suppose the protocols specifies five time points; the blood pressure instrument is captured at times 1, 2, & 3 while the laboratory instrument is captured at times 1 & 2.  If you record this stage on paper, it will likely resemble Tables 3a & 3b: one for vitals and one for labs.
 
-**Table 3a: patient-time grain for `blood_pressure` instrument** is how
+### Table 3a: patient-time grain for `blood_pressure` instrument
 
-| `pt` | `time` | `sbp` | `dbp` |
+| `pt`<br>`id` | `time` | `sbp` | `dbp` |
 | ---: | -----: | ----: | ----: |
 |    1 |      1 |   1.1 |  11.1 |
 |    1 |      2 |   1.2 |  11.2 |
@@ -99,9 +101,9 @@ If the investigation gains a longitudinal or repeating component, it becomes nec
 |    2 |      2 |   2.2 |  22.2 |
 |    2 |      3 |   2.3 |  22.3 |
 
-**Table 3b: patient-time grain for `laboratory` instrument** is how
+### Table 3b: patient-time grain for `laboratory` instrument
 
-| `pt` | `time` | `lab` | `dose` |
+| `pt`<br>`id` | `time` | `lab` | `dose` |
 | ---: | -----: | ----: | -----: |
 |    1 |      1 |   aa1 | 1.1 mg |
 |    1 |      2 |   aa2 | 1.2 mg |
@@ -110,10 +112,10 @@ If the investigation gains a longitudinal or repeating component, it becomes nec
 
 When these measurements are added to REDCap's observation table, it resembles Table 4.  Two new columns are required to uniquely distinguish the instrument and its ordinal position.  Notice the first six rows are copied from Table 2; they have empty values for the repeating structure.
 
-**Table 4: observation grain for `intake`, `blood_pressure`, and `laboratory` instruments** is how...
+### Table 4: observation grain for `intake`, `blood_pressure`, and `laboratory` instruments
 
-| `pt` | `repeat`<br>`instrument` |`repeat`<br>`instance` | `key` | `value`  |
-| ---: | -----------------------: | --------------------: | ----: | -------: |
+| `pt`<br>`id` | `repeat`<br>`instrument` |`repeat`<br>`instance` | `key` | `value`  |
+| ---: | ------------------------ | --------------------: | ----: | -------: |
 |    1 |                       -- |                    -- | height |     1.0 |
 |    1 |                       -- |                    -- | weight |    11.0 |
 |    1 |                       -- |                    -- | bmi    |   111.0 |
@@ -145,10 +147,10 @@ As mentioned above, there isn't a universally good way to coerce Tables 1, 3a, a
 
 When forced to combine the different entities, the best option is probably Table 5.  We call this a "block dataset", borrowing from linear algebra's [block matrix](https://mathworld.wolfram.com/BlockMatrix.html) term.  You can see the mishmash of tables masquerading as a unified dataset.  The rows lack the conceptual coherency of Tables 1, 3a, & 3b.
 
-**Table 5: mishmashed grain** is how the points are returned from REDCap if you request the data in a single call.
+### Table 5: mishmashed grain
 
-| `pt` | `repeat`<br>`instrument` | `repeat`<br>`instance` | `height` | `weight` | `bmi` | `sbp` | `dbp` | `lab` |  `conc` |
-| ---- | :----------------------: | ---------------------: | -------: | -------: | ----: | ----: | ----: | ----: | ------: |
+| `pt`<br>`id` | `repeat`<br>`instrument` | `repeat`<br>`instance` | `height` | `weight` | `bmi` | `sbp` | `dbp` | `lab` |  `conc` |
+| ---- | :----------------------- | ---------------------: | -------: | -------: | ----: | ----: | ----: | ----: | ------: |
 |    1 |                       -- |                     -- |      1.0 |     11.0 | 111.0 |    -- |    -- |    -- |      -- |
 |    1 | blood_pressure           |                      1 |       -- |       -- |    -- |   1.1 |  11.1 |    -- |      -- |
 |    1 | blood_pressure           |                      2 |       -- |       -- |    -- |   1.2 |  11.2 |    -- |      -- |
@@ -185,7 +187,7 @@ Two approaches are appropriate for most scenarios:
 1. multiple calls to REDCapR's [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html), or
 1. a single call to REDCapTidieR's [`redcap_read_tidy()`](https://chop-cgtdataops.github.io/REDCapTidieR/reference/read_redcap_tidy.html).
 
-The code in the vignette requires the magrittr package for the `%>%` (alternatively you can use `|>` if you're using R 4.0.2 or later).  
+The code in the vignette requires the magrittr package for the `%>%` (alternatively you can use `|>` if you're using R 4.0.2 or later).
 
 The vignette uses these credentials to retrieve the practice/fake dataset.  **This is not appropriate for datasets containing PHI or other sensitive information.**  Please see [Part 2 - Retrieve Protected Token](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#part-2---retrieve-protected-token) of the [Typical REDCap Workflow for a Data Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html) vignette for secure approaches.
 
