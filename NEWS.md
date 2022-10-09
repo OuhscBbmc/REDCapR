@@ -15,7 +15,7 @@ These features are not yet on CRAN.  Install with `remotes::install_github("Ouhs
 
 ### Possibly Breaking Change
 
-The could possibly break existing code --but it's very unlikely.  We don't like risking it, but feel these changes will(directly and indirectly) considerably improve the package.
+These changes could possibly break existing code --but it's very unlikely.  We feel they will (directly and indirectly) improve the package considerably.
 
 * `redcap_read()`, `redcap_read_oneshot()`, `redcap_dag_read()`, `redcap_log_read()`, and `redcap_report()` return a [tibble](https://tibble.tidyverse.org/) instead of a [data.frame](https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html).  (#415)
 
