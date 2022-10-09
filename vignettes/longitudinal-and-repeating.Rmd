@@ -229,7 +229,7 @@ ds_demographic <-
     verbose     = FALSE,
   )$data
 
-ds_demographic 
+ds_demographic
 
 col_types_blood_pressure <-
   readr::cols(
@@ -250,7 +250,8 @@ ds_blood_pressure <-
     verbose     = FALSE,
   )$data
 
-ds_blood_pressure
+ds_blood_pressure %>%
+  tidyr::drop_na(redcap_repeat_instrument)
 
 col_types_laboratory  <-
   readr::cols(
@@ -272,7 +273,8 @@ ds_laboratory  <-
     # verbose     = FALSE,
   )$data
 
-ds_laboratory
+ds_laboratory %>%
+  tidyr::drop_na(redcap_repeat_instrument)
 ```
 
 If for some reason you need the block dataset through the API, one call will retrieve it.
