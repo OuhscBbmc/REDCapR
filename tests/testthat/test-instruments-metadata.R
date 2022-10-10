@@ -5,9 +5,12 @@ update_expectation  <- FALSE
 
 test_that("Smoke Test", {
   testthat::skip_on_cran()
-  expect_message(
-    returned_object <- redcap_instruments(redcap_uri=credential$redcap_uri, token=credential$token)
-  )
+  returned_object <-
+    redcap_instruments(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )
 })
 
 test_that("default", {
@@ -15,10 +18,12 @@ test_that("default", {
   path_expected <- "test-data/specific-redcapr/instruments/default.R"
   expected_outcome_message <- "\\d+ instrument metadata records were read from REDCap in \\d\\.\\d seconds\\.  The http status code was 200\\.(\\n)?"
 
-  expect_message(
-    returned_object <- redcap_instruments(redcap_uri=credential$redcap_uri, token=credential$token),
-    regexp = expected_outcome_message
-  )
+  returned_object <-
+    redcap_instruments(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -42,11 +47,12 @@ test_that("Bad URI", {
   # expected_outcome_message <- "(?s)The REDCapR variable retrieval was not successful\\..+?.+"
 
   expect_error(
-    returned_object <- redcap_instruments(
-      redcap_uri  = bad_uri,
-      token       = credential$token
-    )#,
-    # regexp = expected_outcome_message
+    returned_object <-
+      redcap_instruments(
+        redcap_uri  = bad_uri,
+        token       = credential$token,
+        verbose     = FALSE
+      )
   )
 })
 

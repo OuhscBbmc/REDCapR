@@ -22,7 +22,8 @@ test_that("NameComesFromREDCap", {
         record        = record,
         field         = field,
         redcap_uri    = credential$redcap_uri,
-        token         = credential$token
+        token         = credential$token,
+        verbose       = FALSE
       )#,
       # regexp = NA #expected_outcome_message
     )
@@ -65,16 +66,15 @@ test_that("FullPathSpecified", {
 
   full_name <- base::tempfile(pattern="mugshot", fileext=".jpg")
   tryCatch({
-    expect_message(
-      returned_object <- redcap_file_download_oneshot(
+    returned_object <-
+      redcap_file_download_oneshot(
         file_name     = full_name,
         record        = record,
         field         = field,
         redcap_uri    = credential$redcap_uri,
         token         = credential$token,
-      ),
-      regexp = expected_outcome_message
-    )
+        verbose       = FALSE
+      )
     Sys.sleep(delay_after_download_file)
 
     info_actual <- file.info(full_name)
@@ -114,16 +114,15 @@ test_that("RelativePath", {
 
   (relative_name <- "ssss.jpg")
   tryCatch({
-    expect_message(
-      returned_object <- redcap_file_download_oneshot(
+    returned_object <-
+      redcap_file_download_oneshot(
         file_name   = relative_name,
         record      = record,
         field       = field,
         redcap_uri  = credential$redcap_uri,
-        token       = credential$token
-      ),
-      regexp = expected_outcome_message
-    )
+        token       = credential$token,
+        verbose     = FALSE
+      )
     Sys.sleep(delay_after_download_file)
 
     info_actual <- file.info(relative_name)
@@ -163,16 +162,15 @@ test_that("Full Directory Specific", {
   expected_outcome_message <- '; name="mugshot-3\\.jpg" successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as .+\\.jpg'
 
   tryCatch({
-    expect_message(
-      returned_object <- redcap_file_download_oneshot(
+    returned_object <-
+      redcap_file_download_oneshot(
         directory   = directory,
         record      = record,
         field       = field,
         redcap_uri  = credential$redcap_uri,
-        token       = credential$token
-      ),
-      regexp = expected_outcome_message
-    )
+        token       = credential$token,
+        verbose     = FALSE
+      )
     Sys.sleep(delay_after_download_file)
 
     info_actual <- file.info(returned_object$file_name)
@@ -210,15 +208,14 @@ test_that("download file conflict -Error", {
 
   tryCatch({
     # The first run should work.
-    expect_message(
-      returned_object_1 <- redcap_file_download_oneshot(
+    returned_object_1 <-
+      redcap_file_download_oneshot(
         record        = record,
         field         = field,
         redcap_uri    = credential$redcap_uri,
         token         = credential$token,
-      ),
-      regexp = expected_outcome_message_1
-    )
+        verbose       = FALSE
+      )
     Sys.sleep(delay_after_download_file)
 
     #Test the values of the returned object.
@@ -227,13 +224,15 @@ test_that("download file conflict -Error", {
 
     # The second run should fail (b/c the file already exists).
     expect_error(
-      returned_object_2 <- redcap_file_download_oneshot(
-        record        = record,
-        field         = field,
-        redcap_uri    = credential$redcap_uri,
-        token         = credential$token,
-        overwrite     = FALSE
-      ),
+      returned_object_2 <-
+        redcap_file_download_oneshot(
+          record        = record,
+          field         = field,
+          redcap_uri    = credential$redcap_uri,
+          token         = credential$token,
+          overwrite     = FALSE,
+          verbose       = FALSE
+        ),
       regexp = expected_outcome_message_2
     )
     Sys.sleep(delay_after_download_file)
@@ -258,16 +257,15 @@ test_that("Download Error --bad field name", {
   expected_raw_text        <- "ERROR: The field 'mugshotttttt' does not exist or is not a 'file' field"
 
   tryCatch({
-    expect_message(
-      returned_object <- redcap_file_download_oneshot(
+    returned_object <-
+      redcap_file_download_oneshot(
         directory     = directory,
         record        = record,
         field         = field,
         redcap_uri    = credential$redcap_uri,
         token         = credential$token,
-      ),
-      regexp = expected_outcome_message
-    )
+        verbose       = FALSE
+      )
     Sys.sleep(delay_after_download_file)
 
     expect_null(returned_object$file_name)
@@ -289,16 +287,14 @@ test_that("download w/ bad token -Error", {
   testthat::skip_on_cran()
   expected_outcome_message <- "file NOT downloaded."
 
-  testthat::expect_message(
-    returned_object <-
-      redcap_file_download_oneshot(
-        record        = 1,
-        field         = "mugshot",
-        redcap_uri  = credential$redcap_uri,
-        token       = "BAD00000000000000000000000000000"
-      ),
-    expected_outcome_message
-  )
+  returned_object <-
+    redcap_file_download_oneshot(
+      record      = 1,
+      field       = "mugshot",
+      redcap_uri  = credential$redcap_uri,
+      token       = "BAD00000000000000000000000000000",
+      verbose     = FALSE
+    )
 
   testthat::expect_false(returned_object$success)
   testthat::expect_equal(returned_object$status_code, 403L)
@@ -316,17 +312,15 @@ test_that("upload w/ bad token -Error", {
     package = "REDCapR"
   )
 
-  testthat::expect_message(
-    returned_object <-
-      redcap_file_upload_oneshot(
-        file_name   = file_path,
-        record      = 1,
-        field       = "mugshot",
-        redcap_uri  = credential_upload$redcap_uri,
-        token       = "BAD00000000000000000000000000000"
-      ),
-    expected_outcome_message
-  )
+  returned_object <-
+    redcap_file_upload_oneshot(
+      file_name   = file_path,
+      record      = 1,
+      field       = "mugshot",
+      redcap_uri  = credential_upload$redcap_uri,
+      token       = "BAD00000000000000000000000000000",
+      verbose     = FALSE
+    )
 
   testthat::expect_false(returned_object$success)
   testthat::expect_equal(returned_object$status_code, 403L)
