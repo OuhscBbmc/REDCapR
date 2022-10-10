@@ -5,13 +5,13 @@ update_expectation  <- FALSE
 
 test_that("smoke test", {
   testthat::skip_on_cran()
-  expect_message(
-    returned_object <-
-      redcap_log_read(
-        redcap_uri    = credential$redcap_uri,
-        token         = credential$token
-      )
-  )
+  returned_object <-
+    redcap_log_read(
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token,
+      verbose       = FALSE
+    )
+  expect_type(returned, "list")
 })
 
 test_that("2020-08-10", {
@@ -19,16 +19,14 @@ test_that("2020-08-10", {
   path_expected <- "test-data/specific-redcapr/log-read/2020-08-10.R"
   expected_outcome_message <- "\\d+ rows were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp          = expected_outcome_message,
-    returned_object <-
-      REDCapR::redcap_log_read(
-        redcap_uri     = credential$redcap_uri,
-        token          = credential$token,
-        log_begin_date = as.Date("2020-08-10"),
-        log_end_date   = as.Date("2020-08-10")
-      )
-  )
+  returned_object <-
+    REDCapR::redcap_log_read(
+      redcap_uri     = credential$redcap_uri,
+      token          = credential$token,
+      log_begin_date = as.Date("2020-08-10"),
+      log_end_date   = as.Date("2020-08-10"),
+      verbose        = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -47,16 +45,14 @@ test_that("2020-08-10-api-export", {
   path_expected <- "test-data/specific-redcapr/log-read/2020-08-10.R"
   expected_outcome_message <- "\\d+ rows were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp          = expected_outcome_message,
-    returned_object <-
-      REDCapR::redcap_log_read(
-        redcap_uri     = credential$redcap_uri,
-        token          = credential$token,
-        log_begin_date = as.Date("2020-08-10"),
-        log_end_date   = as.Date("2020-08-10")
-      )
-  )
+  returned_object <-
+    REDCapR::redcap_log_read(
+      redcap_uri     = credential$redcap_uri,
+      token          = credential$token,
+      log_begin_date = as.Date("2020-08-10"),
+      log_end_date   = as.Date("2020-08-10"),
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -74,18 +70,16 @@ test_that("2021-07-11-record3-user", {
   path_expected <- "test-data/specific-redcapr/log-read/2021-07-11-record3-user.R"
   expected_outcome_message <- "\\d+ rows were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp          = expected_outcome_message,
-    returned_object <-
-        REDCapR::redcap_log_read(
-          redcap_uri     = credential$redcap_uri,
-          token          = credential$token,
-          log_begin_date = as.Date("2021-07-11"),
-          log_end_date   = as.Date("2021-07-11"),
-          record         = as.character(3),
-          user           = "unittestphifree"
-        )
-  )
+  returned_object <-
+    REDCapR::redcap_log_read(
+      redcap_uri     = credential$redcap_uri,
+      token          = credential$token,
+      log_begin_date = as.Date("2021-07-11"),
+      log_end_date   = as.Date("2021-07-11"),
+      record         = as.character(3),
+      user           = "unittestphifree",
+      verbose        = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)

@@ -3,7 +3,6 @@ library(testthat)
 credential_1        <- retrieve_credential_testing()
 credential_no_dag   <- retrieve_credential_testing(2597L)
 
-
 test_that("smoke", {
   testthat::skip_on_cran()
   returned <-
@@ -12,6 +11,7 @@ test_that("smoke", {
       token       = credential_1$token,
       verbose     = FALSE
     )
+  expect_type(returned, "list")
 })
 
 test_that("dag-default", {

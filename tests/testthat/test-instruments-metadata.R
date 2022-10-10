@@ -11,6 +11,7 @@ test_that("Smoke Test", {
       token       = credential$token,
       verbose     = FALSE
     )
+  expect_type(returned, "list")
 })
 
 test_that("default", {
