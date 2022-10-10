@@ -93,16 +93,20 @@ redcap_metadata_read <- function(
 
   token               <- sanitize_token(token)
   fields_collapsed    <- collapse_vector(fields)
+  fields_array        <- to_api_array(fields, "fields")
   forms_collapsed     <- collapse_vector(forms)
+  forms_array         <- to_api_array(forms, "forms")
   verbose             <- verbose_prepare(verbose)
 
   post_body <- list(
     token    = token,
     content  = "metadata",
-    format   = "json",
-    forms    = forms_collapsed,
-    fields   = fields_collapsed
+    format   = "json"
   )
+
+  # append forms and fields arrays in format expected by REDCap API
+  # If either is NULL nothing will be appended
+  post_body <- c(post_body, fields_array, forms_array)
 
   # This is the important call that communicates with the REDCap server.
   kernel <-
@@ -179,108 +183,28 @@ redcap_metadata_read <- function(
 }
 
 #' @title
-#' Don't use this! Just for testing pulling a single form from redcap metadata
-
-#' @importFrom magrittr %>%
-#' @export
-redcap_metadata_read_hacky_single_form <- function(
-    redcap_uri,
-    token,
-    forms             = NULL,
-    fields            = NULL,
-    verbose           = TRUE,
-    config_options    = NULL,
-    handle_httr       = NULL
-) {
-
-  checkmate::assert_character(redcap_uri  , any.missing=FALSE, len=1, pattern="^.{1,}$")
-  checkmate::assert_character(token       , any.missing=FALSE, len=1, pattern="^.{1,}$")
-
-  validate_field_names(fields, stop_on_error = TRUE)
-
-  token               <- sanitize_token(token)
-  fields_collapsed    <- collapse_vector(fields)
-  forms_collapsed     <- collapse_vector(forms)
-  verbose             <- verbose_prepare(verbose)
-
-  post_body <- list(
-    token    = token,
-    content  = "metadata",
-    format   = "json",
-    `forms[0]`    = forms,
-    fields   = fields_collapsed
-  )
-
-  # This is the important call that communicates with the REDCap server.
-  kernel <-
-    kernel_api(
-      redcap_uri      = redcap_uri,
-      post_body       = post_body,
-      config_options  = config_options,
-      handle_httr     = handle_httr
-    )
-
-  if (kernel$success) {
-    try(
-      {
-        # Convert the raw text to a dataset.
-        ds <-
-          kernel$raw_text %>%
-          jsonlite::fromJSON(
-            flatten = TRUE
-          ) %>%
-          tibble::as_tibble() %>%
-          dplyr::mutate_all(
-            ~dplyr::na_if(.x, "")
-          )
-      },
-      # Don't print the warning in the try block.  Print it below,
-      #   where it's under the control of the caller.
-      silent = TRUE
-    )
-
-    if (exists("ds") && inherits(ds, "data.frame")) {
-      outcome_message <- sprintf(
-        "The data dictionary describing %s fields was read from REDCap in %0.1f seconds.  The http status code was %i.",
-        format(nrow(ds), big.mark = ",", scientific = FALSE, trim = TRUE),
-        kernel$elapsed_seconds,
-        kernel$status_code
-      )
-
-      # If an operation is successful, the `raw_text` is no longer returned
-      #   to save RAM.  The content is not really necessary with httr's status
-      #   message exposed.
-      kernel$raw_text   <- ""
-    } else { # nocov start
-      # Override the 'success' determination from the http status code
-      #   and return an empty data.frame.
-      kernel$success    <- FALSE
-      ds                <- tibble::tibble()
-      outcome_message   <- sprintf(
-        "The REDCap metadata export failed.  The http status code was %i.  The 'raw_text' returned was '%s'.",
-        kernel$status_code,
-        kernel$raw_text
-      )
-    }       # nocov end
-  } else {
-    ds                  <- tibble::tibble() # Return an empty data.frame
-    outcome_message     <- sprintf(
-      "The REDCapR metadata export operation was not successful.  The error message was:\n%s",
-      kernel$raw_text
-    )
+#' Convert a vector to the array format expected by the REDCap API
+#'
+#' @description
+#' Utility function to convert a vector into the array format expected by the
+#' REDCap API.
+#'
+#' @param x A vector to convert to array format
+#' @param arr_name A string containing the name of the API request parameter for
+#' the array
+#'
+#' @return
+#' If \code{x} is not \code{NULL} a list is returned with one element for
+#' each element of x in the format:
+#' \code{list(`arr_name[0]` = x[1], `arr_name[1]` = x[2], ...)}. If \code{x} is
+#' \code{NULL} then \code{NULL} is returned.
+to_api_array <- function(x, arr_name) {
+  if (is.null(x)) {
+    return(NULL)
   }
 
-  if (verbose)
-    message(outcome_message)
+  res <- as.list(x)
+  names(res) <- paste0(arr_name, "[", seq_along(res) - 1, "]")
 
-  list(
-    data               = ds,
-    success            = kernel$success,
-    status_code        = kernel$status_code,
-    outcome_message    = outcome_message,
-    forms_collapsed    = forms_collapsed,
-    fields_collapsed   = fields_collapsed,
-    elapsed_seconds    = kernel$elapsed_seconds,
-    raw_text           = kernel$raw_text
-  )
+  res
 }
