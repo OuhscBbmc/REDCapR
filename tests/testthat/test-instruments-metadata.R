@@ -5,7 +5,7 @@ update_expectation  <- FALSE
 
 test_that("Smoke Test", {
   testthat::skip_on_cran()
-  returned_object <-
+  returned <-
     redcap_instruments(
       redcap_uri  = credential$redcap_uri,
       token       = credential$token,

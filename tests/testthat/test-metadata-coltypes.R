@@ -23,6 +23,7 @@ test_that("simple", {
     redcap_metadata_coltypes(
       redcap_uri  = credential$redcap_uri,
       token       = credential$token,
+      print_col_types_to_console = FALSE,
       verbose     = FALSE
     )
 
@@ -32,7 +33,12 @@ test_that("simple", {
   expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_s3_class(actual, "col_spec")
 
-  ds <- redcap_read_oneshot(credential$redcap_uri, credential$token)$data
+  ds <-
+    redcap_read_oneshot(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )$data
   col_metadata <- names(actual[[1]])
   col_data     <- colnames(ds)
 
@@ -52,6 +58,7 @@ test_that("longitudinal", {
     redcap_metadata_coltypes(
       redcap_uri  = credential$redcap_uri,
       token       = credential$token,
+      print_col_types_to_console = FALSE,
       verbose     = FALSE
     )
 
@@ -61,7 +68,12 @@ test_that("longitudinal", {
   expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_s3_class(actual, "col_spec")
 
-  ds <- redcap_read_oneshot(credential$redcap_uri, credential$token)$data
+  ds <-
+    redcap_read_oneshot(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )$data
   col_metadata <- names(actual[[1]])
   col_data     <- colnames(ds)
 
@@ -81,6 +93,7 @@ test_that("superwide", {
     redcap_metadata_coltypes(
       redcap_uri  = credential$redcap_uri,
       token       = credential$token,
+      print_col_types_to_console = FALSE,
       verbose     = FALSE
     )
 
@@ -116,6 +129,7 @@ test_that("repeating-instruments", {
     redcap_metadata_coltypes(
       redcap_uri  = credential$redcap_uri,
       token       = credential$token,
+      print_col_types_to_console = FALSE,
       verbose     = FALSE
     )
 
@@ -125,7 +139,12 @@ test_that("repeating-instruments", {
   expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_s3_class(actual, "col_spec")
 
-  ds <- redcap_read_oneshot(credential$redcap_uri, credential$token)$data
+  ds <-
+    redcap_read_oneshot(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )$data
   col_metadata <- names(actual[[1]])
   col_data     <- colnames(ds)
 
@@ -145,9 +164,9 @@ test_that("problematic-dictionary", {
     redcap_metadata_coltypes(
       redcap_uri  = credential$redcap_uri,
       token       = credential$token,
+      print_col_types_to_console = FALSE,
       verbose     = FALSE
     )
-
 
   if (update_expectation) save_expected(actual, path_expected)
   expected <- retrieve_expected(path_expected)
@@ -172,12 +191,15 @@ test_that("validation-types", {
   # expected_outcome_message <- "col_types <- readr::cols"
   expected_warning_message <- "at least one field that specifies a comma for a decimal"
 
-  actual <-
-    redcap_metadata_coltypes(
-      redcap_uri  = credential$redcap_uri,
-      token       = credential$token,
-      verbose     = FALSE
-    )
+  expect_warning(
+    actual <-
+      redcap_metadata_coltypes(
+        redcap_uri  = credential$redcap_uri,
+        token       = credential$token,
+        print_col_types_to_console = FALSE,
+        verbose     = FALSE
+      )
+  )
 
   if (update_expectation) save_expected(actual, path_expected)
   expected <- retrieve_expected(path_expected)
@@ -185,7 +207,12 @@ test_that("validation-types", {
   expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_s3_class(actual, "col_spec")
 
-  ds <- redcap_read_oneshot(credential$redcap_uri, credential$token)$data
+  ds <-
+    redcap_read_oneshot(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )$data
   col_metadata <- names(actual[[1]])
   col_data     <- colnames(ds)
 

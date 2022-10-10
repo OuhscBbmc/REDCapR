@@ -168,13 +168,13 @@ redcap_metadata_coltypes <- function(
 
   meat <-
     redcap_metadata_internal(
-      redcap_uri,
-      token,
-      http_response_encoding,
-      locale,
-      verbose,
-      config_options,
-      handle_httr
+      redcap_uri              = redcap_uri,
+      token                   = token,
+      http_response_encoding  = http_response_encoding,
+      locale                  = locale,
+      verbose                 = verbose,
+      config_options          = config_options,
+      handle_httr             = handle_httr
     )$d_variable %>%
     dplyr::pull(.data$aligned)
 
