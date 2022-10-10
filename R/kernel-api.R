@@ -96,7 +96,6 @@ kernel_api <- function(
   raw_text        <- gsub("\r\n", "\n", raw_text)
   elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
 
-  # example: raw_text <- "The hostname (redcap-db.hsc.net.ou.edreu) / username (redcapsql) / password (XXXXXX) combination could not connect to the MySQL server. \r\n\t\tPlease check their values."
   regex_cannot_connect  <- "^The hostname \\((.+)\\) / username \\((.+)\\) / password \\((.+)\\) combination could not connect.+"
   regex_empty           <- "^\\s+$"
 
