@@ -1,6 +1,6 @@
 # These functions are not exported.
 
-populate_project_delete_multiple_arm <- function() {
+populate_project_delete_multiple_arm <- function(verbose = FALSE) {
   if (!requireNamespace("testthat")) {
     # nocov start
     stop(
@@ -36,20 +36,21 @@ populate_project_delete_multiple_arm <- function() {
   # ds_to_write <- utils::read.csv(file="./inst/test-data/delete-multiple-arm/delete-multiple-arm-data.csv")
 
   # Import the data into the REDCap project
-  testthat::expect_message(
-    returned_object <- REDCapR::redcap_write(
+  returned_object <-
+    REDCapR::redcap_write(
       ds          = ds_to_write,
       redcap_uri  = project$redcap_uri,
       token       = project$token,
-      verbose     = TRUE
+      verbose     = verbose
     )
-  )
 
   # Print a message and return a boolean value
-  base::message(base::sprintf(
-    "populate_project_delete_multiple_arm success: %s.",
-    returned_object$success
-  ))
+  if (verbose) {
+    base::message(base::sprintf(
+      "populate_project_delete_multiple_arm success: %s.",
+      returned_object$success
+    ))
+  }
   list(is_success = returned_object$success, redcap_project = project)
 }
 
@@ -79,7 +80,7 @@ clear_project_delete_multiple_arm <- function(verbose = TRUE) {
   was_successful
 }
 
-clean_start_delete_multiple_arm <- function(delay_in_seconds = 1) {
+clean_start_delete_multiple_arm <- function(delay_in_seconds = 1, verbose = FALSE) {
   checkmate::assert_numeric(delay_in_seconds, any.missing=FALSE, len=1, lower=0)
 
   if (!requireNamespace("testthat")) {
@@ -90,17 +91,12 @@ clean_start_delete_multiple_arm <- function(delay_in_seconds = 1) {
     )
     # nocov end
   }
-  testthat::expect_message(
-    clear_result <- clear_project_delete_multiple_arm(),
-    regexp = "clear_project_delete_multiple_arm success: TRUE."
-  )
+
+  clear_result <- clear_project_delete_multiple_arm(verbose = verbose)
   testthat::expect_true(clear_result, "Clearing the results from the delete_multiple_arm project should be successful.")
   base::Sys.sleep(delay_in_seconds) # Pause after deleting records.
 
-  testthat::expect_message(
-    populate_result <- populate_project_delete_multiple_arm(),
-    regexp = "populate_project_delete_multiple_arm success: TRUE."
-  )
+  populate_result <- populate_project_delete_multiple_arm(verbose = verbose)
   testthat::expect_true(populate_result$is_success, "Population of the delete_multiple_arm project should be successful.")
   base::Sys.sleep(delay_in_seconds) # Pause after writing records.
 
