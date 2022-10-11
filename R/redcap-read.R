@@ -398,7 +398,7 @@ redcap_read <- function(
     success_combined <- success_combined & read_result$success
 
     # rm(read_result) # Admittedly overkill defensiveness.
-  }
+  } # end of for loop
 
   ds_stacked               <- dplyr::bind_rows(lst_batch)
 
@@ -406,7 +406,8 @@ redcap_read <- function(
     ds_stacked <-
       ds_stacked %>%
       readr::type_convert(
-        locale = locale
+        locale = locale,
+        col_types = readr::cols(.default = readr::col_guess())
       )
   }
 

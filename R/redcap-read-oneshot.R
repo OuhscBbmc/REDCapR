@@ -271,8 +271,7 @@ redcap_read_oneshot <- function(
   if (kernel$success) {
     col_types <-
       if (!is.null(col_types)) col_types
-      else if (guess_type)     readr::cols(.default = readr::col_guess())
-      # else if (guess_type)     NULL
+      else if (guess_type)     NULL
       else                     readr::cols(.default = readr::col_character())
 
     try(
