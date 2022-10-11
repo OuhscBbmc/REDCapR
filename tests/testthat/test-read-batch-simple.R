@@ -28,11 +28,11 @@ test_that("smoke test", {
   expect_type(returned_object, "list")
 
   #Instance method w/ default batch size
-  returned_object <- project$read()
+  returned_object <- project$read(verbose = FALSE)
   expect_type(returned_object, "list")
 
   #Instance method w/ tiny batch size
-  returned_object <- project$read(batch_size=2)
+  returned_object <- project$read(batch_size=2, verbose = FALSE)
   expect_type(returned_object, "list")
 })
 test_that("default", {
@@ -175,10 +175,14 @@ test_that("specify-fields", {
   desired_fields <- c("record_id", "name_first", "name_last", "age")
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, fields=desired_fields, batch_size=2)
-  )
+  returned_object <-
+    redcap_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      fields      = desired_fields,
+      batch_size  = 2,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -500,10 +504,14 @@ test_that("label", {
 
   ###########################
   ## Default Batch size
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object1   <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups=FALSE)
-  )
+  returned_object1   <-
+    redcap_read(
+      redcap_uri                = credential$redcap_uri,
+      token                     = credential$token,
+      raw_or_label              ="label",
+      export_data_access_groups = FALSE,
+      verbose                   = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object1$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
