@@ -8,6 +8,7 @@ test_that("smoke test", {
     redcap_metadata_coltypes(
       redcap_uri  = credential$redcap_uri,
       token       = credential$token,
+      print_col_types_to_console = FALSE,
       verbose     = FALSE
     )
   )
