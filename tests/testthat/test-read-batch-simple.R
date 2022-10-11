@@ -9,24 +9,31 @@ test_that("smoke test", {
   testthat::skip_on_cran()
 
   #Static method w/ default batch size
-  expect_message(
-    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token)
-  )
+  returned_object <-
+    redcap_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )
+  expect_type(returned_object, "list")
 
   #Static method w/ tiny batch size
-  expect_message(
-    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, batch_size=2)
-  )
+  returned_object <-
+    redcap_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      batch_size  = 2,
+      verbose     = FALSE
+    )
+  expect_type(returned_object, "list")
 
   #Instance method w/ default batch size
-  expect_message(
-    returned_object <- project$read()
-  )
+  returned_object <- project$read()
+  expect_type(returned_object, "list")
 
   #Instance method w/ tiny batch size
-  expect_message(
-    returned_object <- project$read(batch_size=2)
-  )
+  returned_object <- project$read(batch_size=2)
+  expect_type(returned_object, "list")
 })
 test_that("default", {
   testthat::skip_on_cran()
@@ -34,10 +41,12 @@ test_that("default", {
 
   ###########################
   ## Default Batch size
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token)
-  )
+  returned_object1 <-
+    redcap_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object1$data, path_expected_default)
   expected_data_frame <- retrieve_expected(path_expected_default)
@@ -53,10 +62,13 @@ test_that("default", {
 
   ###########################
   ## Tiny Batch size
-  expect_message(
-    returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, batch_size=2),
-    regexp = expected_outcome_message
-  )
+  returned_object2 <-
+    redcap_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      batch_size  = 2,
+      verbose     = FALSE
+    )
 
   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
   expect_true(returned_object2$success)
@@ -82,10 +94,14 @@ test_that("col_types", {
 
   expected_outcome_message <- "\\d+ records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, col_types=col_types, batch_size=2)
-  )
+  returned_object <-
+    redcap_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      col_types   = col_types,
+      batch_size  = 2,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -105,10 +121,14 @@ test_that("specify-records", {
   desired_records <- c(1L, 3L, 4L)
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, records=desired_records, batch_size=2)
-  )
+  returned_object <-
+    redcap_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      records     = desired_records,
+      batch_size  = 2,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -128,10 +148,14 @@ test_that("specify-records-zero-length", {
   desired_records <- c()
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, records=desired_records, batch_size=2)
-  )
+  returned_object <-
+    redcap_read(
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token,
+      records       = desired_records,
+      batch_size    = 2,
+      verbose       = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -174,10 +198,14 @@ test_that("specify-fields-zero-length", {
   desired_fields <- c()
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, fields=desired_fields, batch_size=2)
-  )
+  returned_object <-
+    redcap_read(
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token,
+      fields        = desired_fields,
+      batch_size    = 2,
+      verbose       = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -197,10 +225,15 @@ test_that("specify-records-and-fields-zero-length", {
   desired_fields <- c()
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, records=desired_records, fields=desired_fields, batch_size=2)
-  )
+  returned_object <-
+    redcap_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      records     = desired_records,
+      fields      = desired_fields,
+      batch_size  = 2,
+      verbose     = FALSE
+    )
 
   expected_data_frame <- retrieve_expected(path_expected_default)
 
@@ -221,10 +254,13 @@ test_that("specify-forms", {
 
   ###########################
   ## Default Batch size
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, forms=desired_forms)
-  )
+  returned_object1 <-
+    redcap_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      forms       = desired_forms,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object1$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -240,10 +276,14 @@ test_that("specify-forms", {
 
   ###########################
   ## Tiny Batch size
-  expect_message(
-    returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, forms=desired_forms, batch_size=2),
-    regexp = expected_outcome_message
-  )
+  returned_object2 <-
+    redcap_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      forms       = desired_forms,
+      batch_size  = 2,
+      verbose     = FALSE
+    )
 
   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
   expect_true(returned_object2$success)
@@ -262,10 +302,13 @@ test_that("specify-forms-only-1st", {
 
   ###########################
   ## Default Batch size
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, forms=desired_forms)
-  )
+  returned_object1 <-
+    redcap_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      forms       = desired_forms,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object1$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -281,10 +324,14 @@ test_that("specify-forms-only-1st", {
 
   ###########################
   ## Tiny Batch size
-  expect_message(
-    returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, forms=desired_forms, batch_size=2),
-    regexp = expected_outcome_message
-  )
+  returned_object2 <-
+    redcap_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      forms       = desired_forms,
+      batch_size  = 2,
+      verbose     = FALSE
+    )
 
   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
   expect_true(returned_object2$success)
@@ -302,10 +349,12 @@ test_that("raw", {
 
   ###########################
   ## Default Batch size
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token)
-  )
+  returned_object1 <-
+    redcap_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object1$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -321,10 +370,13 @@ test_that("raw", {
 
   ###########################
   ## Tiny Batch size
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, batch_size=2)
-  )
+  returned_object2 <-
+    redcap_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      batch_size  = 2,
+      verbose     = FALSE
+    )
 
   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
   expect_true(returned_object2$success)
@@ -342,10 +394,14 @@ test_that("raw-and-dag", {
 
   ###########################
   ## Default Batch size
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="raw", export_data_access_groups=TRUE)
-  )
+  returned_object1 <-
+    redcap_read(
+      redcap_uri   = credential$redcap_uri,
+      token        = credential$token,
+      raw_or_label ="raw",
+      export_data_access_groups = TRUE,
+      verbose                   = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object1$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -361,10 +417,15 @@ test_that("raw-and-dag", {
 
   ###########################
   ## Tiny Batch size
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="raw", export_data_access_groups=TRUE, batch_size=2)
-  )
+  returned_object2 <-
+    redcap_read(
+      redcap_uri                = credential$redcap_uri,
+      token                     = credential$token,
+      raw_or_label              = "raw",
+      export_data_access_groups = TRUE,
+      batch_size                = 2,
+      verbose                   = FALSE
+    )
 
   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
   expect_true(returned_object2$success)
@@ -383,10 +444,14 @@ test_that("label-and-dag-one-single-batch", {
 
   ###########################
   ## Default Batch size
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups=TRUE)
-  )
+  returned_object <-
+    redcap_read(
+      redcap_uri                = credential$redcap_uri,
+      token                     = credential$token,
+      raw_or_label              = "label",
+      export_data_access_groups = TRUE,
+      verbose                   = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -406,10 +471,15 @@ test_that("label-and-dag-three-tiny-batches", {
 
   expected_outcome_message <- "\\d+ records and 26 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object   <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups=TRUE, batch_size=2)
-  )
+  returned_object   <-
+    redcap_read(
+      redcap_uri                = credential$redcap_uri,
+      token                     = credential$token,
+      raw_or_label              = "label",
+      export_data_access_groups = TRUE,
+      batch_size                = 2,
+      verbose                   = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -449,10 +519,15 @@ test_that("label", {
 
   ###########################
   ## Tiny Batch size
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups=FALSE, batch_size=2)
-  )
+  returned_object2 <-
+    redcap_read(
+      redcap_uri                  = credential$redcap_uri,
+      token                       = credential$token,
+      raw_or_label                = "label",
+      export_data_access_groups   = FALSE,
+      batch_size                  = 2,
+      verbose                     = FALSE
+    )
 
   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
   expect_true(returned_object2$success)
@@ -469,10 +544,14 @@ test_that("export_checkbox_label", {
 
   ###########################
   ## Default Batch size
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object1  <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_checkbox_label=TRUE)
-  )
+  returned_object1  <-
+    redcap_read(
+      redcap_uri            = credential$redcap_uri,
+      token                 = credential$token,
+      raw_or_label          = "label",
+      export_checkbox_label = TRUE,
+      verbose               = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object1$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -488,10 +567,15 @@ test_that("export_checkbox_label", {
 
   ###########################
   ## Tiny Batch size
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_checkbox_label=TRUE, batch_size=2)
-  )
+  returned_object2 <-
+    redcap_read(
+      redcap_uri            = credential$redcap_uri,
+      token                 = credential$token,
+      raw_or_label          = "label",
+      export_checkbox_label = TRUE,
+      batch_size            = 2,
+      verbose               = FALSE
+    )
 
   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
   expect_true(returned_object2$success)
@@ -507,10 +591,13 @@ test_that("filter-numeric", {
   expected_outcome_message <- "2 records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   filter <- "[age] >= 61"
 
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object   <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, filter_logic=filter)
-  )
+  returned_object   <-
+    redcap_read(
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token,
+      filter_logic  = filter,
+      verbose       = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -530,10 +617,13 @@ test_that("filter-character", {
   expected_outcome_message <- "1 records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   filter <- "[name_first] = 'John Lee'"
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, filter_logic=filter)
-  )
+  returned_object <-
+    redcap_read(
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token,
+      filter_logic  = filter,
+      verbose       = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -553,14 +643,13 @@ test_that("blank-for-gray-status-true", {
   path_expected <- "test-data/specific-redcapr/read-batch-simple/blank-for-gray-true.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp          = expected_outcome_message,
-    returned_object <- redcap_read(
-      redcap_uri    = credential_blank_for_gray$redcap_uri,
-      token         = credential_blank_for_gray$token,
-      blank_for_gray_form_status = TRUE
+  returned_object <-
+    redcap_read(
+      redcap_uri                  = credential_blank_for_gray$redcap_uri,
+      token                       = credential_blank_for_gray$token,
+      blank_for_gray_form_status  = TRUE,
+      verbose                     = FALSE
     )
-  )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -580,14 +669,13 @@ test_that("blank-for-gray-status-false", {
   path_expected <- "test-data/specific-redcapr/read-batch-simple/blank-for-gray-false.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp          = expected_outcome_message,
-    returned_object <- redcap_read(
-      redcap_uri    = credential_blank_for_gray$redcap_uri,
-      token         = credential_blank_for_gray$token,
-      blank_for_gray_form_status = FALSE
+  returned_object <-
+    redcap_read(
+      redcap_uri                  = credential_blank_for_gray$redcap_uri,
+      token                       = credential_blank_for_gray$token,
+      blank_for_gray_form_status  = FALSE,
+      verbose                     = FALSE
     )
-  )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -607,16 +695,14 @@ test_that("date-range", {
 
   start <- as.POSIXct(strptime("2018-08-01 03:00", "%Y-%m-%d %H:%M"))
   stop  <- Sys.time()
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <-
-      redcap_read(
-        redcap_uri        = credential$redcap_uri,
-        token             = credential$token,
-        datetime_range_begin  = start,
-        datetime_range_end    = stop
-      )
-  )
+  returned_object <-
+    redcap_read(
+      redcap_uri            = credential$redcap_uri,
+      token                 = credential$token,
+      datetime_range_begin  = start,
+      datetime_range_end    = stop,
+      verbose               = FALSE
+    )
 
   expected_data_frame <- retrieve_expected(path_expected_default)
 

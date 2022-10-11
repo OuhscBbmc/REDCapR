@@ -10,6 +10,7 @@ test_that("Smoke Test", {
       token       = credential$token,
       verbose     = FALSE
     )
+  expect_type(returned, "character")
 })
 
 test_that("Numeric ID", {

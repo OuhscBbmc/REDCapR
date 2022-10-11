@@ -125,7 +125,10 @@ redcap_arm_export <- function(
         name    = readr::col_character()
       )
       d <-
-        readr::read_csv(I(kernel$raw_text), col_types = col_types) %>%
+        readr::read_csv(
+          I(kernel$raw_text),
+          col_types = col_types
+        ) %>%
         dplyr::select(
           arm_number  = .data$arm_num,
           arm_name    = .data$name
