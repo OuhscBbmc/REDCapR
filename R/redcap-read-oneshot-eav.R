@@ -250,14 +250,16 @@ redcap_read_oneshot_eav <- function(
       redcap_uri,
       token,
       forms           = forms,
-      handle_httr     = handle_httr
+      handle_httr     = handle_httr,
+      verbose         = verbose
     )$data
 
   ds_variable <-
     REDCapR::redcap_variables(
       redcap_uri  = redcap_uri,
       token       = token,
-      handle_httr = handle_httr
+      handle_httr = handle_httr,
+      verbose     = verbose
     )$data
 
   if (kernel$success) {

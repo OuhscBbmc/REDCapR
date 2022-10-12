@@ -32,13 +32,12 @@ test_that("One Shot: Bad Uri -wrong address", {
   # expected_outcome_message <- "The initial call failed with the code: 404."
   # expected_outcome_message <- "The requested URL was not found on this server."
 
-  expect_message(
-    returned_object <-
-      redcap_read_oneshot(
-        redcap_uri    = "https://bbmc.ouhsc.edu/redcap/apiFFFFFFFFFFFFFF/", # Wrong url
-        token         = credential$token
-      )
-  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri    = "https://bbmc.ouhsc.edu/redcap/apiFFFFFFFFFFFFFF/", # Wrong url
+      token         = credential$token,
+      verbose       = FALSE
+    )
 
   expect_equal(returned_object$data, expected=tibble::tibble(), label="An empty data.frame should be returned.", ignore_attr = TRUE)
   expect_equal(returned_object$status_code, expected=404L)
@@ -55,19 +54,11 @@ test_that("Batch: Bad Uri -Not HTTPS", {
   # expected_outcome_message <- "The initial call failed with the code: (411|501)."
 
   expect_error(
-    # returned_object <-
-      redcap_read(
-        redcap_uri    = "http://bbmc.ouhsc.edu/redcap/api/", # Not HTTPS
-        token         = credential$token
-      )
+    redcap_read(
+      redcap_uri    = "http://bbmc.ouhsc.edu/redcap/api/", # Not HTTPS
+      token         = credential$token
+    )
   )
-
-  # expect_equal(returned_object$data, expected=data.frame(), label="An empty data.frame should be returned.")
-  # expect_true(returned_object$status_code %in% c(411L, 501L))
-  # expect_equal(returned_object$records_collapsed, "failed in initial batch call")
-  # expect_equal(returned_object$fields_collapsed, "failed in initial batch call")
-  # expect_match(returned_object$outcome_messages, expected_outcome_message)
-  # expect_false(returned_object$success)
 })
 
 test_that("Batch: Bad Uri -wrong address", {
@@ -101,10 +92,11 @@ test_that("guess_max deprecated -warn", {
 
   expect_warning(
     regexp           = expected_outcome_message,
-    returned_object <- redcap_read(
+    redcap_read(
       redcap_uri    = credential$redcap_uri,
       token         = credential$token,
-      guess_max     = 100
+      guess_max     = 100,
+      verbose       = FALSE
     )
   )
 })
