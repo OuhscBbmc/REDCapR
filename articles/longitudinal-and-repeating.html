@@ -101,11 +101,10 @@
 <div class="section level2">
 <h2 id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a>
 </h2>
-<p>This vignette pertains to reading REDCap records from a project that (a) has longitudinal events or (b) has a repeating measure. The first section conceptually discusses how REDCap stores complex structures. The remaining sections describe how to best retrieve complex structures with the <a href="https://chop-cgtdataops.github.io/REDCapTidieR" class="external-link">REDCapTidyieR</a> and [REDCapR]((<a href="https://OuhscBbmc.github.io/REDCapR" class="external-link uri">https://OuhscBbmc.github.io/REDCapR</a>) packages.</p>
+<p>This vignette pertains to reading REDCap records from a project that (a) has longitudinal events or (b) has a repeating measure. The first section conceptually discusses how REDCap stores complex structures. The remaining sections describe how to best retrieve complex structures with the <a href="https://chop-cgtdataops.github.io/REDCapTidieR/" class="external-link">REDCapTidyieR</a> and <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> packages.</p>
 <ul>
 <li>If you are new to R or REDCap, consider start with the <a href="https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html">Typical REDCap Workflow for a Data Analyst</a> and <a href="https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html">Basic REDCapR Operations</a> vignettes and then return to this document.</li>
-<li>If you are reading from a <em>simple</em> project, just call REDCapR’s <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code>redcap_read()</code></a>.<br>
-</li>
+<li>If you are reading from a <em>simple</em> project, just call REDCapR’s <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code>redcap_read()</code></a>.</li>
 <li>If you want to perform some other operation (such as writing records to REDCap), review the <a href="https://ouhscbbmc.github.io/REDCapR/reference/index.html">Reference of REDCapR functions</a> to see what is currently available.</li>
 </ul>
 <p>If your REDCap project is longitudinal or contains repeating measures, a single call to the API (or a single export through the browser) will return a dataset that is not readily analyzed. Instead, the dataset will resemble Table 5. This isn’t because of a software bug, but because you haven’t told the software how you would like the data structured. There isn’t a good way to jam this multidimensional space into a rectangle of points. Our advice for querying REDCap is the same as querying any database system: request separate datasets that have a natural “grain” and assemble them as to fit your analyses.</p>
@@ -113,518 +112,531 @@
 <div class="section level2">
 <h2 id="illustration-of-how-data-points-are-structured">Illustration of How Data Points are Structured<a class="anchor" aria-label="anchor" href="#illustration-of-how-data-points-are-structured"></a>
 </h2>
+<div class="section level3">
+<h3 id="possible-table-structures">Possible Table Structures<a class="anchor" aria-label="anchor" href="#possible-table-structures"></a>
+</h3>
 <p>Suppose you have two patients (<em>i.e.</em>, “1” and “2”) with three intake variables (<em>i.e.</em>, <code>height</code>, <code>weight</code>, and <code>bmi</code>). If you record this on a piece of paper, it would probably look like Table 1. The table’s <em>grain</em> is “patient”, because each row represents a distinct patient. Understanding the grain of each structure below will help you understand how the structures are re-expressions of the same set of observations.</p>
-<p><strong>Table 1: patient grain</strong> is the most natural presentation of the six initial observations.</p>
+<div class="section level4">
+<h4 id="table-1-patient-grain">Table 1: patient grain<a class="anchor" aria-label="anchor" href="#table-1-patient-grain"></a>
+</h4>
 <table class="table">
 <thead><tr class="header">
-<th align="right"><code>pt</code></th>
-<th align="right"><code>height</code></th>
-<th align="right"><code>weight</code></th>
-<th align="right"><code>bmi</code></th>
+<th align="center">pt<br>id</th>
+<th align="center">height</th>
+<th align="center">weight</th>
+<th align="center">bmi</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="right">1</td>
-<td align="right">1.0</td>
-<td align="right">11.0</td>
-<td align="right">111.0</td>
+<td align="center">1</td>
+<td align="center">1.0</td>
+<td align="center">11.0</td>
+<td align="center">111.0</td>
 </tr>
 <tr class="even">
-<td align="right">2</td>
-<td align="right">2.0</td>
-<td align="right">22.0</td>
-<td align="right">222.0</td>
+<td align="center">2</td>
+<td align="center">2.0</td>
+<td align="center">22.0</td>
+<td align="center">222.0</td>
 </tr>
 </tbody>
 </table>
 <p>This patient-grain structure is how the data points are most comfortably inputted by humans into REDCap, and it is the default when exported through the browser and API. However it is stored differently under the hood.</p>
 <p>REDCap’s flexibility is a driver of its success. Once a research team learns REDCap, it can reuse the knowledge to capture anything from qqq to qqq. But to achieve this flexibility in the world of REDCap and EMRs, data are stored along the observation grain. In computer science, this is commonly called an EAV structure (which stands for entity-attribute-value). The patient’s ID is the entity, the variable type is the attribute, and the observed point is the value. It can also be thought of as a “key-value store” nested within a patient (where “key” is a synonym of “attribute”). Notice that the two wider rows have morphed into six skinnier rows –one row per observation. If you are a curious database administrator, peek at the the structure and rows of the <code>redcap_data</code> table. It is the most important table in the database.</p>
-<p><strong>Table 2: observation grain</strong> is how REDCap and EMR databases store observations in their underlying table. It is a simplification of <code>redcap_data</code>, the heart of the database.</p>
+</div>
+<div class="section level4">
+<h4 id="table-2-observation-grain-for-intake-instrument">Table 2: observation grain for <code>intake</code> instrument<a class="anchor" aria-label="anchor" href="#table-2-observation-grain-for-intake-instrument"></a>
+</h4>
+<p>REDCap and EMR databases have an “observation” t, store observations in their underlying table. This table is a simplification of the <code>redcap_data</code> table, which is the heart of the database.</p>
 <table class="table">
 <thead><tr class="header">
-<th align="right"><code>pt</code></th>
-<th align="left"><code>key</code></th>
-<th align="right"><code>value</code></th>
+<th align="center">pt<br>id</th>
+<th align="left">key</th>
+<th align="right">value</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="right">1</td>
+<td align="center">1</td>
 <td align="left">height</td>
 <td align="right">1.0</td>
 </tr>
 <tr class="even">
-<td align="right">1</td>
+<td align="center">1</td>
 <td align="left">weight</td>
 <td align="right">11.0</td>
 </tr>
 <tr class="odd">
-<td align="right">1</td>
+<td align="center">1</td>
 <td align="left">bmi</td>
 <td align="right">111.0</td>
 </tr>
 <tr class="even">
-<td align="right">2</td>
+<td align="center">2</td>
 <td align="left">height</td>
 <td align="right">2.0</td>
 </tr>
 <tr class="odd">
-<td align="right">2</td>
+<td align="center">2</td>
 <td align="left">weight</td>
 <td align="right">22.0</td>
 </tr>
 <tr class="even">
-<td align="right">2</td>
+<td align="center">2</td>
 <td align="left">bmi</td>
 <td align="right">222.0</td>
 </tr>
 </tbody>
 </table>
 <p>If the investigation gains a longitudinal or repeating component, it becomes necessary to include the dimension of time. Suppose the protocols specifies five time points; the blood pressure instrument is captured at times 1, 2, &amp; 3 while the laboratory instrument is captured at times 1 &amp; 2. If you record this stage on paper, it will likely resemble Tables 3a &amp; 3b: one for vitals and one for labs.</p>
-<p><strong>Table 3a: patient-time grain for <code>blood_pressure</code> instrument</strong> is how</p>
+</div>
+<div class="section level4">
+<h4 id="table-3a-patient-time-grain-for-blood_pressure-instrument">Table 3a: patient-time grain for <code>blood_pressure</code> instrument<a class="anchor" aria-label="anchor" href="#table-3a-patient-time-grain-for-blood_pressure-instrument"></a>
+</h4>
 <table class="table">
 <thead><tr class="header">
-<th align="right"><code>pt</code></th>
-<th align="right"><code>time</code></th>
-<th align="right"><code>sbp</code></th>
-<th align="right"><code>dbp</code></th>
+<th align="center">pt<br>id</th>
+<th align="center">time</th>
+<th align="center">sbp</th>
+<th align="center">dbp</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1.1</td>
-<td align="right">11.1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1.1</td>
+<td align="center">11.1</td>
 </tr>
 <tr class="even">
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">1.2</td>
-<td align="right">11.2</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">1.2</td>
+<td align="center">11.2</td>
 </tr>
 <tr class="odd">
-<td align="right">1</td>
-<td align="right">3</td>
-<td align="right">1.3</td>
-<td align="right">11.3</td>
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">1.3</td>
+<td align="center">11.3</td>
 </tr>
 <tr class="even">
-<td align="right">2</td>
-<td align="right">1</td>
-<td align="right">2.1</td>
-<td align="right">22.1</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">2.1</td>
+<td align="center">22.1</td>
 </tr>
 <tr class="odd">
-<td align="right">2</td>
-<td align="right">2</td>
-<td align="right">2.2</td>
-<td align="right">22.2</td>
+<td align="center">2</td>
+<td align="center">2</td>
+<td align="center">2.2</td>
+<td align="center">22.2</td>
 </tr>
 <tr class="even">
-<td align="right">2</td>
-<td align="right">3</td>
-<td align="right">2.3</td>
-<td align="right">22.3</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">2.3</td>
+<td align="center">22.3</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Table 3b: patient-time grain for <code>laboratory</code> instrument</strong> is how</p>
+</div>
+<div class="section level4">
+<h4 id="table-3b-patient-time-grain-for-laboratory-instrument">Table 3b: patient-time grain for <code>laboratory</code> instrument<a class="anchor" aria-label="anchor" href="#table-3b-patient-time-grain-for-laboratory-instrument"></a>
+</h4>
 <table class="table">
 <thead><tr class="header">
-<th align="right"><code>pt</code></th>
-<th align="right"><code>time</code></th>
-<th align="right"><code>lab</code></th>
-<th align="right"><code>dose</code></th>
+<th align="center">pt<br>id</th>
+<th align="center">time</th>
+<th align="center">lab</th>
+<th align="center">dose</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">aa1</td>
-<td align="right">1.1 mg</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">aa1</td>
+<td align="center">1.1 mg</td>
 </tr>
 <tr class="even">
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="right">aa2</td>
-<td align="right">1.2 mg</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">aa2</td>
+<td align="center">1.2 mg</td>
 </tr>
 <tr class="odd">
-<td align="right">2</td>
-<td align="right">1</td>
-<td align="right">bb1</td>
-<td align="right">2.1 mg</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">bb1</td>
+<td align="center">2.1 mg</td>
 </tr>
 <tr class="even">
-<td align="right">2</td>
-<td align="right">2</td>
-<td align="right">bb2</td>
-<td align="right">2.2 mg</td>
+<td align="center">2</td>
+<td align="center">2</td>
+<td align="center">bb2</td>
+<td align="center">2.2 mg</td>
 </tr>
 </tbody>
 </table>
 <p>When these measurements are added to REDCap’s observation table, it resembles Table 4. Two new columns are required to uniquely distinguish the instrument and its ordinal position. Notice the first six rows are copied from Table 2; they have empty values for the repeating structure.</p>
-<p><strong>Table 4: observation grain for <code>intake</code>, <code>blood_pressure</code>, and <code>laboratory</code> instruments</strong> is how…</p>
+</div>
+<div class="section level4">
+<h4 id="table-4-observation-grain-for-intake-blood_pressure-and-laboratory-instruments">Table 4: observation grain for <code>intake</code>, <code>blood_pressure</code>, and <code>laboratory</code> instruments<a class="anchor" aria-label="anchor" href="#table-4-observation-grain-for-intake-blood_pressure-and-laboratory-instruments"></a>
+</h4>
 <table class="table">
 <thead><tr class="header">
-<th align="right"><code>pt</code></th>
-<th align="right">
-<code>repeat</code><br><code>instrument</code>
-</th>
-<th align="right">
-<code>repeat</code><br><code>instance</code>
-</th>
-<th align="right"><code>key</code></th>
-<th align="right"><code>value</code></th>
+<th align="center">pt<br>id</th>
+<th align="left">repeat<br>instrument</th>
+<th align="center">repeat<br>instance</th>
+<th align="left">key</th>
+<th align="right">value</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="right">1</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">height</td>
+<td align="center">1</td>
+<td align="left">–</td>
+<td align="center">–</td>
+<td align="left">height</td>
 <td align="right">1.0</td>
 </tr>
 <tr class="even">
-<td align="right">1</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">weight</td>
+<td align="center">1</td>
+<td align="left">–</td>
+<td align="center">–</td>
+<td align="left">weight</td>
 <td align="right">11.0</td>
 </tr>
 <tr class="odd">
-<td align="right">1</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">bmi</td>
+<td align="center">1</td>
+<td align="left">–</td>
+<td align="center">–</td>
+<td align="left">bmi</td>
 <td align="right">111.0</td>
 </tr>
 <tr class="even">
-<td align="right">2</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">height</td>
+<td align="center">2</td>
+<td align="left">–</td>
+<td align="center">–</td>
+<td align="left">height</td>
 <td align="right">2.0</td>
 </tr>
 <tr class="odd">
-<td align="right">2</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">weight</td>
+<td align="center">2</td>
+<td align="left">–</td>
+<td align="center">–</td>
+<td align="left">weight</td>
 <td align="right">22.0</td>
 </tr>
 <tr class="even">
-<td align="right">2</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">bmi</td>
+<td align="center">2</td>
+<td align="left">–</td>
+<td align="center">–</td>
+<td align="left">bmi</td>
 <td align="right">222.0</td>
 </tr>
 <tr class="odd">
-<td align="right">1</td>
-<td align="right">blood_pressure</td>
-<td align="right">1</td>
-<td align="right">sbp</td>
+<td align="center">1</td>
+<td align="left">blood_pressure</td>
+<td align="center">1</td>
+<td align="left">sbp</td>
 <td align="right">1.1</td>
 </tr>
 <tr class="even">
-<td align="right">1</td>
-<td align="right">blood_pressure</td>
-<td align="right">1</td>
-<td align="right">dbp</td>
+<td align="center">1</td>
+<td align="left">blood_pressure</td>
+<td align="center">1</td>
+<td align="left">dbp</td>
 <td align="right">11.1</td>
 </tr>
 <tr class="odd">
-<td align="right">1</td>
-<td align="right">blood_pressure</td>
-<td align="right">2</td>
-<td align="right">sbp</td>
+<td align="center">1</td>
+<td align="left">blood_pressure</td>
+<td align="center">2</td>
+<td align="left">sbp</td>
 <td align="right">1.2</td>
 </tr>
 <tr class="even">
-<td align="right">1</td>
-<td align="right">blood_pressure</td>
-<td align="right">2</td>
-<td align="right">dbp</td>
+<td align="center">1</td>
+<td align="left">blood_pressure</td>
+<td align="center">2</td>
+<td align="left">dbp</td>
 <td align="right">11.2</td>
 </tr>
 <tr class="odd">
-<td align="right">1</td>
-<td align="right">blood_pressure</td>
-<td align="right">3</td>
-<td align="right">sbp</td>
+<td align="center">1</td>
+<td align="left">blood_pressure</td>
+<td align="center">3</td>
+<td align="left">sbp</td>
 <td align="right">1.3</td>
 </tr>
 <tr class="even">
-<td align="right">1</td>
-<td align="right">blood_pressure</td>
-<td align="right">3</td>
-<td align="right">dbp</td>
+<td align="center">1</td>
+<td align="left">blood_pressure</td>
+<td align="center">3</td>
+<td align="left">dbp</td>
 <td align="right">11.3</td>
 </tr>
 <tr class="odd">
-<td align="right">1</td>
-<td align="right">laboratory</td>
-<td align="right">1</td>
-<td align="right">lab</td>
+<td align="center">1</td>
+<td align="left">laboratory</td>
+<td align="center">1</td>
+<td align="left">lab</td>
 <td align="right">aa1</td>
 </tr>
 <tr class="even">
-<td align="right">1</td>
-<td align="right">laboratory</td>
-<td align="right">1</td>
-<td align="right">conc</td>
+<td align="center">1</td>
+<td align="left">laboratory</td>
+<td align="center">1</td>
+<td align="left">conc</td>
 <td align="right">1.1 ppm</td>
 </tr>
 <tr class="odd">
-<td align="right">1</td>
-<td align="right">laboratory</td>
-<td align="right">2</td>
-<td align="right">lab</td>
+<td align="center">1</td>
+<td align="left">laboratory</td>
+<td align="center">2</td>
+<td align="left">lab</td>
 <td align="right">aa2</td>
 </tr>
 <tr class="even">
-<td align="right">1</td>
-<td align="right">laboratory</td>
-<td align="right">2</td>
-<td align="right">conc</td>
+<td align="center">1</td>
+<td align="left">laboratory</td>
+<td align="center">2</td>
+<td align="left">conc</td>
 <td align="right">1.2 ppm</td>
 </tr>
 <tr class="odd">
-<td align="right">2</td>
-<td align="right">blood_pressure</td>
-<td align="right">1</td>
-<td align="right">sbp</td>
+<td align="center">2</td>
+<td align="left">blood_pressure</td>
+<td align="center">1</td>
+<td align="left">sbp</td>
 <td align="right">2.1</td>
 </tr>
 <tr class="even">
-<td align="right">2</td>
-<td align="right">blood_pressure</td>
-<td align="right">1</td>
-<td align="right">dbp</td>
+<td align="center">2</td>
+<td align="left">blood_pressure</td>
+<td align="center">1</td>
+<td align="left">dbp</td>
 <td align="right">22.1</td>
 </tr>
 <tr class="odd">
-<td align="right">2</td>
-<td align="right">blood_pressure</td>
-<td align="right">2</td>
-<td align="right">sbp</td>
+<td align="center">2</td>
+<td align="left">blood_pressure</td>
+<td align="center">2</td>
+<td align="left">sbp</td>
 <td align="right">2.2</td>
 </tr>
 <tr class="even">
-<td align="right">2</td>
-<td align="right">blood_pressure</td>
-<td align="right">2</td>
-<td align="right">dbp</td>
+<td align="center">2</td>
+<td align="left">blood_pressure</td>
+<td align="center">2</td>
+<td align="left">dbp</td>
 <td align="right">22.2</td>
 </tr>
 <tr class="odd">
-<td align="right">2</td>
-<td align="right">blood_pressure</td>
-<td align="right">3</td>
-<td align="right">sbp</td>
+<td align="center">2</td>
+<td align="left">blood_pressure</td>
+<td align="center">3</td>
+<td align="left">sbp</td>
 <td align="right">2.3</td>
 </tr>
 <tr class="even">
-<td align="right">2</td>
-<td align="right">blood_pressure</td>
-<td align="right">3</td>
-<td align="right">dbp</td>
+<td align="center">2</td>
+<td align="left">blood_pressure</td>
+<td align="center">3</td>
+<td align="left">dbp</td>
 <td align="right">22.3</td>
 </tr>
 <tr class="odd">
-<td align="right">2</td>
-<td align="right">laboratory</td>
-<td align="right">1</td>
-<td align="right">lab</td>
+<td align="center">2</td>
+<td align="left">laboratory</td>
+<td align="center">1</td>
+<td align="left">lab</td>
 <td align="right">bb1</td>
 </tr>
 <tr class="even">
-<td align="right">2</td>
-<td align="right">laboratory</td>
-<td align="right">1</td>
-<td align="right">conc</td>
+<td align="center">2</td>
+<td align="left">laboratory</td>
+<td align="center">1</td>
+<td align="left">conc</td>
 <td align="right">2.1 ppm</td>
 </tr>
 <tr class="odd">
-<td align="right">2</td>
-<td align="right">laboratory</td>
-<td align="right">2</td>
-<td align="right">lab</td>
+<td align="center">2</td>
+<td align="left">laboratory</td>
+<td align="center">2</td>
+<td align="left">lab</td>
 <td align="right">bb2</td>
 </tr>
 <tr class="even">
-<td align="right">2</td>
-<td align="right">laboratory</td>
-<td align="right">2</td>
-<td align="right">conc</td>
+<td align="center">2</td>
+<td align="left">laboratory</td>
+<td align="center">2</td>
+<td align="left">conc</td>
 <td align="right">2.2 ppm</td>
 </tr>
 </tbody>
 </table>
 <p>As mentioned above, there isn’t a universally good way to coerce Tables 1, 3a, and 3b into a single rectangle because the rows represent different things. Or from REDCap’s perspective, there’s not a good transformation of <code>redcap_data</code> (<em>i.e.</em>, Table 4) that is appropriate for most statistical programs.</p>
-<p>When forced to combine the different entities, the best option is probably Table 5. We call this a “block dataset”, borrowing from linear algebra’s <a href="https://mathworld.wolfram.com/BlockMatrix.html" class="external-link">block matrix</a> term. You can see the mishmash of tables masquerading as a unified dataset. However it’s obvious the rows lack the conceptual coherency of Tables 1, 3a, &amp; 3b.</p>
-<p><strong>Table 5: mishmashed grain</strong> is how the points are returned from REDCap if you request the data in a single call.</p>
+<p>When forced to combine the different entities, the best option is probably Table 5. We call this a “block dataset”, borrowing from linear algebra’s <a href="https://mathworld.wolfram.com/BlockMatrix.html" class="external-link">block matrix</a> term. You can see the mishmash of tables masquerading as a unified dataset. The rows lack the conceptual coherency of Tables 1, 3a, &amp; 3b.</p>
+</div>
+<div class="section level4">
+<h4 id="table-5-mishmashed-grain">Table 5: mishmashed grain<a class="anchor" aria-label="anchor" href="#table-5-mishmashed-grain"></a>
+</h4>
 <table class="table">
 <thead><tr class="header">
-<th><code>pt</code></th>
-<th align="center">
-<code>repeat</code><br><code>instrument</code>
-</th>
-<th align="right">
-<code>repeat</code><br><code>instance</code>
-</th>
-<th align="right"><code>height</code></th>
-<th align="right"><code>weight</code></th>
-<th align="right"><code>bmi</code></th>
-<th align="right"><code>sbp</code></th>
-<th align="right"><code>dbp</code></th>
-<th align="right"><code>lab</code></th>
-<th align="right"><code>conc</code></th>
+<th align="center">pt<br>id</th>
+<th align="left">repeat<br>instrument</th>
+<th align="center">repeat<br>instance</th>
+<th align="center">height</th>
+<th align="center">weight</th>
+<th align="center">bmi</th>
+<th align="center">sbp</th>
+<th align="center">dbp</th>
+<th align="center">lab</th>
+<th align="center">conc</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>1</td>
+<td align="center">1</td>
+<td align="left">–</td>
 <td align="center">–</td>
-<td align="right">–</td>
-<td align="right">1.0</td>
-<td align="right">11.0</td>
-<td align="right">111.0</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">–</td>
-</tr>
-<tr class="even">
-<td>1</td>
-<td align="center">blood_pressure</td>
-<td align="right">1</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">1.1</td>
-<td align="right">11.1</td>
-<td align="right">–</td>
-<td align="right">–</td>
-</tr>
-<tr class="odd">
-<td>1</td>
-<td align="center">blood_pressure</td>
-<td align="right">2</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">1.2</td>
-<td align="right">11.2</td>
-<td align="right">–</td>
-<td align="right">–</td>
-</tr>
-<tr class="even">
-<td>1</td>
-<td align="center">blood_pressure</td>
-<td align="right">3</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">1.3</td>
-<td align="right">11.3</td>
-<td align="right">–</td>
-<td align="right">–</td>
-</tr>
-<tr class="odd">
-<td>1</td>
-<td align="center">laboratory</td>
-<td align="right">1</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">aa1</td>
-<td align="right">1.1 ppm</td>
-</tr>
-<tr class="even">
-<td>1</td>
-<td align="center">laboratory</td>
-<td align="right">2</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">aa2</td>
-<td align="right">1.2 ppm</td>
-</tr>
-<tr class="odd">
-<td>2</td>
+<td align="center">1.0</td>
+<td align="center">11.0</td>
+<td align="center">111.0</td>
 <td align="center">–</td>
-<td align="right">–</td>
-<td align="right">2.0</td>
-<td align="right">22.0</td>
-<td align="right">222.0</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">–</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">–</td>
 </tr>
 <tr class="even">
-<td>2</td>
-<td align="center">blood_pressure</td>
-<td align="right">1</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">2.1</td>
-<td align="right">22.1</td>
-<td align="right">–</td>
-<td align="right">–</td>
+<td align="center">1</td>
+<td align="left">blood_pressure</td>
+<td align="center">1</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">1.1</td>
+<td align="center">11.1</td>
+<td align="center">–</td>
+<td align="center">–</td>
 </tr>
 <tr class="odd">
-<td>2</td>
-<td align="center">blood_pressure</td>
-<td align="right">2</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">2.2</td>
-<td align="right">22.2</td>
-<td align="right">–</td>
-<td align="right">–</td>
+<td align="center">1</td>
+<td align="left">blood_pressure</td>
+<td align="center">2</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">1.2</td>
+<td align="center">11.2</td>
+<td align="center">–</td>
+<td align="center">–</td>
 </tr>
 <tr class="even">
-<td>2</td>
-<td align="center">blood_pressure</td>
-<td align="right">3</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">2.3</td>
-<td align="right">22.3</td>
-<td align="right">–</td>
-<td align="right">–</td>
+<td align="center">1</td>
+<td align="left">blood_pressure</td>
+<td align="center">3</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">1.3</td>
+<td align="center">11.3</td>
+<td align="center">–</td>
+<td align="center">–</td>
 </tr>
 <tr class="odd">
-<td>2</td>
-<td align="center">laboratory</td>
-<td align="right">1</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">bb1</td>
-<td align="right">2.1 ppm</td>
+<td align="center">1</td>
+<td align="left">laboratory</td>
+<td align="center">1</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">aa1</td>
+<td align="center">1.1 ppm</td>
 </tr>
 <tr class="even">
-<td>2</td>
-<td align="center">laboratory</td>
-<td align="right">2</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">–</td>
-<td align="right">bb2</td>
-<td align="right">2.2 ppm</td>
+<td align="center">1</td>
+<td align="left">laboratory</td>
+<td align="center">2</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">aa2</td>
+<td align="center">1.2 ppm</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="left">–</td>
+<td align="center">–</td>
+<td align="center">2.0</td>
+<td align="center">22.0</td>
+<td align="center">222.0</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">–</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="left">blood_pressure</td>
+<td align="center">1</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">2.1</td>
+<td align="center">22.1</td>
+<td align="center">–</td>
+<td align="center">–</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="left">blood_pressure</td>
+<td align="center">2</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">2.2</td>
+<td align="center">22.2</td>
+<td align="center">–</td>
+<td align="center">–</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="left">blood_pressure</td>
+<td align="center">3</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">2.3</td>
+<td align="center">22.3</td>
+<td align="center">–</td>
+<td align="center">–</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="left">laboratory</td>
+<td align="center">1</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">bb1</td>
+<td align="center">2.1 ppm</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="left">laboratory</td>
+<td align="center">2</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">–</td>
+<td align="center">bb2</td>
+<td align="center">2.2 ppm</td>
 </tr>
 </tbody>
 </table>
@@ -636,13 +648,49 @@
 <p>In the case of a sparse matrix, substantial memory requirement reductions can be realized by storing only the non-zero entries. Depending on the number and distribution of the non-zero entries, different data structures can be used and yield huge savings in memory when compared to the basic approach. The trade-off is that accessing the individual elements becomes more complex and additional structures are needed to be able to recover the original matrix unambiguously.</p>
 </blockquote>
 </div>
+</div>
+<div class="section level3">
+<h3 id="terminology">Terminology<a class="anchor" aria-label="anchor" href="#terminology"></a>
+</h3>
+<div class="section level4">
+<h4 id="observation">observation<a class="anchor" aria-label="anchor" href="#observation"></a>
+</h4>
+<p>The term “observation” in the world of <a href="https://ohdsi.github.io/CommonDataModel/cdm60.html#OBSERVATION" class="external-link">medical databases</a> has a different and more granular meaning than it does in the <a href="https://r4ds.had.co.nz/tidy-data.html#tidy-data-1" class="external-link">tidyverse literature</a>. In REDCap and medical databases, an observation is typically a single point (such as a heart rate or systolic blood pressure) with contextual variables (such as the the associated date, unit, visit ID, and patient ID); see Tables 2 and 4 above. In the tidyverse publications, an observation is roughly equivalent to a REDCap instrument (which is a collection of associated values); see Tables 1, 3a, and 3b.</p>
+<p>(We use the medical terminology in this vignette. We’d love to hear if someone has another term that’s unambiguous.)</p>
+<table class="table">
+<thead><tr class="header">
+<th align="left">Concept</th>
+<th align="left">REDCap &amp; Medical World</th>
+<th align="left">Tidyverse Literature</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">A single measured point</td>
+<td align="left">observation</td>
+<td align="left">value</td>
+</tr>
+<tr class="even">
+<td align="left">A collection of associated points</td>
+<td align="left">instrument</td>
+<td align="left">observation</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 <div class="section level2">
 <h2 id="retrieving-from-redcap">Retrieving from REDCap<a class="anchor" aria-label="anchor" href="#retrieving-from-redcap"></a>
 </h2>
 <p>Many new REDCap users will submit a single API call and unintentionally obtain something like Table 5; they then try to extract something resembling Tables 1, 3a, &amp; 3b. Although this can be successful, we strongly discourage it. The code is difficult to maintain and is not portable to REDCap projects with different instruments. (The code is really slow and ugly too.)</p>
 <p>Our advice is to start before Table 5 is assembled –retrieve the information in a better way. Like other database systems, request the three tables separately from the server and then combine them on your desktop to fit your analyses if necessary.</p>
-<p>Two approaches are appropriate for most scenarios: (a) a single call to REDCapTidieR’s <a href="https://chop-cgtdataops.github.io/REDCapTidieR/reference/read_redcap_tidy.html" class="external-link"><code>redcap_read_tidy()</code></a> or (b) multiple calls to REDCapR’s <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code>redcap_read()</code></a>.</p>
-<p>The code in the vignette requires the magrittr package for the <code>%&gt;%</code> (alternatively you can use <code>|&gt;</code> if you’re using R 4.0.2 or later). It also uses the credentials for practice/unsecure dataset. Please see <a href="https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#part-2---retrieve-protected-token">Part 2 - Retrieve Protected Token</a> of the <a href="https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html">Typical REDCap Workflow for a Data Analyst</a> vignette for approaches for securing a REDCap token.</p>
+<p>Two approaches are appropriate for most scenarios:</p>
+<ol style="list-style-type: decimal">
+<li>multiple calls to REDCapR’s <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code>redcap_read()</code></a>, or</li>
+<li>a single call to REDCapTidieR’s <a href="https://chop-cgtdataops.github.io/REDCapTidieR/reference/read_redcap_tidy.html" class="external-link"><code>redcap_read_tidy()</code></a>.</li>
+</ol>
+<p>The code in the vignette requires the magrittr package for the <code>%&gt;%</code> (alternatively you can use <code>|&gt;</code> if you’re using R 4.0.2 or later).</p>
+<p>The vignette uses these credentials to retrieve the practice/fake dataset. <strong>This is not appropriate for datasets containing PHI or other sensitive information.</strong> Please see <a href="https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#part-2---retrieve-protected-token">Part 2 - Retrieve Protected Token</a> of the <a href="https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html">Typical REDCap Workflow for a Data Analyst</a> vignette for secure approaches.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Support pipes</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
@@ -654,19 +702,15 @@
 <span>  project_id      <span class="op">=</span> <span class="fl">3181</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
-<h3 id="single-redcaptidier-calls">Single REDCapTidieR Calls<a class="anchor" aria-label="anchor" href="#single-redcaptidier-calls"></a>
+<h3 id="one-redcapr-call-for-each-table">One REDCapR Call for Each Table<a class="anchor" aria-label="anchor" href="#one-redcapr-call-for-each-table"></a>
 </h3>
-<p><a href="https://chop-cgtdataops.github.io/REDCapTidieR/" class="external-link">REDCapTidieR</a>’s initial motivation is to facilitate longitudinal analyses and promote <a href="https://r4ds.had.co.nz/tidy-data.html" class="external-link">tidy</a> data hygiene.</p>
-<p>{Stephan Kadauke &amp; Richard Hanna, please represent your package as you wish. Tell me if I’ve positioned it differently than you would have.}</p>
-</div>
-<div class="section level3">
-<h3 id="multiple-redcapr-calls">Multiple REDCapR Calls<a class="anchor" aria-label="anchor" href="#multiple-redcapr-calls"></a>
-</h3>
-<p>Under the hood, REDCapTidieR calls REDCapR multiple times.</p>
-<p>{Will Beasley will write this section.}</p>
-<p>To retrieve the credentials for the first project listed above, pass the value of “153” to <code>project_id</code>.</p>
+<p>The tidy datasets represented in Tables 1, 3a, and 3b can be obtained by calling REDCapR three times –one call per table. Using the <code>forms</code> parameter, pass “intake” to get Table 1, “blood_pressure” to get Table 3a, and “laboratory” to get Table 3b.</p>
+<p>Although it is not required, we recommend specifying a <a href="https://readr.tidyverse.org/reference/cols.html" class="external-link"><code>readr::cols()</code></a> object to ensure the desired variable data types.</p>
+<div class="section level4">
+<h4 id="retrieve-patient-level-table-corresponding-to-table-1">Retrieve patient-level table (corresponding to Table 1)<a class="anchor" aria-label="anchor" href="#retrieve-patient-level-table-corresponding-to-table-1"></a>
+</h4>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">col_types_demographics</span> <span class="op">&lt;-</span></span>
+<code class="sourceCode R"><span><span class="va">col_types_intake</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">cols_only</a></span><span class="op">(</span></span>
 <span>    record_id                 <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_integer</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    height                    <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_double</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -674,21 +718,20 @@
 <span>    bmi                       <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_double</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
-<span><span class="va">ds_demographic</span> <span class="op">&lt;-</span></span>
+<span><span class="va">ds_intake</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span></span>
-<span>    redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,</span>
+<span>    redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>, <span class="co"># From the previous code snippet.</span></span>
 <span>    token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,</span>
-<span>    forms       <span class="op">=</span> <span class="st">"demographics"</span>,</span>
-<span>    col_types   <span class="op">=</span> <span class="va">col_types_demographics</span>,</span>
+<span>    forms       <span class="op">=</span> <span class="st">"intake"</span>,</span>
+<span>    col_types   <span class="op">=</span> <span class="va">col_types_intake</span>,</span>
 <span>    verbose     <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span><span class="co">#&gt; Starting to read 2 records  at 2022-10-09 05:29:26.</span></span>
 <span></span>
-<span><span class="va">ds_demographic</span></span></code></pre></div>
+<span><span class="va">ds_intake</span></span></code></pre></div>
 <table class="table table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead><tr>
 <th style="text-align:right;">
-record id
+record<br>id
 </th>
 <th style="text-align:right;">
 height
@@ -731,9 +774,12 @@ bmi
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section level4">
+<h4 id="retrieve-patient-time-level-tables-corresponding-to-tables-3a-3b">Retrieve patient-time-level tables (corresponding to Tables 3a &amp; 3b)<a class="anchor" aria-label="anchor" href="#retrieve-patient-time-level-tables-corresponding-to-tables-3a-3b"></a>
+</h4>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="va">col_types_blood_pressure</span> <span class="op">&lt;-</span></span>
+<code class="sourceCode R"><span><span class="va">col_types_blood_pressure</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">cols</a></span><span class="op">(</span></span>
 <span>    record_id                 <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_integer</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    redcap_repeat_instrument  <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_character</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -749,22 +795,21 @@ bmi
 <span>    token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,</span>
 <span>    forms       <span class="op">=</span> <span class="st">"blood_pressure"</span>,</span>
 <span>    col_types   <span class="op">=</span> <span class="va">col_types_blood_pressure</span>,</span>
-<span>    verbose     <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>    verbose     <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span>  <span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span><span class="co">#&gt; Starting to read 2 records  at 2022-10-09 05:29:28.</span></span>
 <span></span>
 <span><span class="va">ds_blood_pressure</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="va">redcap_repeat_instrument</span><span class="op">)</span></span></code></pre></div>
 <table class="table table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead><tr>
 <th style="text-align:right;">
-record id
+record<br>id
 </th>
 <th style="text-align:left;">
-redcap repeat instrument
+redcap<br>repeat<br>instrument
 </th>
 <th style="text-align:right;">
-redcap repeat instance
+redcap<br>repeat<br>instance
 </th>
 <th style="text-align:right;">
 sbp
@@ -773,7 +818,7 @@ sbp
 dbp
 </th>
 <th style="text-align:right;">
-blood pressure complete
+blood<br>pressure<br>complete
 </th>
 </tr></thead>
 <tbody>
@@ -906,8 +951,8 @@ blood_pressure
 <span>    record_id                 <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_integer</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    redcap_repeat_instrument  <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_character</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    redcap_repeat_instance    <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_integer</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    lab                       <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_double</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    conc                      <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_double</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    lab                       <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_character</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    conc                      <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_character</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    laboratory_complete       <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_integer</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
@@ -915,42 +960,23 @@ blood_pressure
 <span>  <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span></span>
 <span>    redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,</span>
 <span>    token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,</span>
-<span>    <span class="co"># fields      = "redcord_id",</span></span>
-<span>    forms       <span class="op">=</span> <span class="st">"laboratory"</span></span>
-<span>    <span class="co"># col_types   = col_types_laboratory,</span></span>
-<span>    <span class="co"># verbose     = FALSE,</span></span>
+<span>    forms       <span class="op">=</span> <span class="st">"laboratory"</span>,</span>
+<span>    col_types   <span class="op">=</span> <span class="va">col_types_laboratory</span>,</span>
+<span>    verbose     <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span>  <span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span><span class="co">#&gt; 11 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; The data dictionary describing 8 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 2 records and 3 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; Starting to read 2 records  at 2022-10-09 05:29:30.</span></span>
-<span><span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 2 (ie, 2 unique subject records).</span></span>
-<span><span class="co">#&gt; 6 records and 6 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; cols(</span></span>
-<span><span class="co">#&gt;   record_id = <span style="color: #00BB00;">col_double()</span>,</span></span>
-<span><span class="co">#&gt;   redcap_repeat_instrument = <span style="color: #BB0000;">col_character()</span>,</span></span>
-<span><span class="co">#&gt;   redcap_repeat_instance = <span style="color: #00BB00;">col_double()</span>,</span></span>
-<span><span class="co">#&gt;   lab = <span style="color: #BB0000;">col_character()</span>,</span></span>
-<span><span class="co">#&gt;   conc = <span style="color: #BB0000;">col_character()</span>,</span></span>
-<span><span class="co">#&gt;   laboratory_complete = <span style="color: #00BB00;">col_double()</span></span></span>
-<span><span class="co">#&gt; )</span></span>
 <span></span>
 <span><span class="va">ds_laboratory</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="va">redcap_repeat_instrument</span><span class="op">)</span></span></code></pre></div>
 <table class="table table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead><tr>
 <th style="text-align:right;">
-record id
+record<br>id
 </th>
 <th style="text-align:left;">
-redcap repeat instrument
+redcap<br>repeat<br>instrument
 </th>
 <th style="text-align:right;">
-redcap repeat instance
+redcap<br>repeat<br>instance
 </th>
 <th style="text-align:left;">
 lab
@@ -959,7 +985,7 @@ lab
 conc
 </th>
 <th style="text-align:right;">
-laboratory complete
+laboratory<br>complete
 </th>
 </tr></thead>
 <tbody>
@@ -1045,6 +1071,10 @@ bb2
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section level4">
+<h4 id="retrieve-block-tables-corresponding-to-table-5">Retrieve block tables (corresponding to Table 5)<a class="anchor" aria-label="anchor" href="#retrieve-block-tables-corresponding-to-table-5"></a>
+</h4>
 <p>If for some reason you need the block dataset through the API, one call will retrieve it.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds_block</span> <span class="op">&lt;-</span></span>
@@ -1054,19 +1084,18 @@ bb2
 <span>    col_types   <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">cols</a></span><span class="op">(</span>.default <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_character</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>    verbose     <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span><span class="co">#&gt; Starting to read 2 records  at 2022-10-09 05:29:32.</span></span>
 <span></span>
-<span><span class="va">ds_block</span> </span></code></pre></div>
+<span><span class="va">ds_block</span></span></code></pre></div>
 <table class="table table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead><tr>
 <th style="text-align:left;">
-record id
+record<br>id
 </th>
 <th style="text-align:left;">
-redcap repeat instrument
+redcap<br>repeat<br>instrument
 </th>
 <th style="text-align:left;">
-redcap repeat instance
+redcap<br>repeat<br>instance
 </th>
 <th style="text-align:left;">
 height
@@ -1078,7 +1107,7 @@ weight
 bmi
 </th>
 <th style="text-align:left;">
-demographics complete
+intake<br>complete
 </th>
 <th style="text-align:left;">
 sbp
@@ -1087,7 +1116,7 @@ sbp
 dbp
 </th>
 <th style="text-align:left;">
-blood pressure complete
+blood<br>pressure<br>complete
 </th>
 <th style="text-align:left;">
 lab
@@ -1096,7 +1125,7 @@ lab
 conc
 </th>
 <th style="text-align:left;">
-laboratory complete
+laboratory<br>complete
 </th>
 </tr></thead>
 <tbody>
@@ -1595,6 +1624,13 @@ bb2
 </tbody>
 </table>
 </div>
+</div>
+<div class="section level3">
+<h3 id="one-redcaptidier-call-for-all-tables">One REDCapTidieR Call for All Tables<a class="anchor" aria-label="anchor" href="#one-redcaptidier-call-for-all-tables"></a>
+</h3>
+<p><a href="https://chop-cgtdataops.github.io/REDCapTidieR/" class="external-link">REDCapTidieR</a>’s initial motivation is to facilitate longitudinal analyses and promote <a href="https://r4ds.hadley.nz/data-tidy.html" class="external-link">tidy</a> data hygiene.</p>
+<p>{Stephan Kadauke &amp; Richard Hanna, please represent your package as you wish. Tell me if I’ve positioned it differently than you would have.}</p>
+</div>
 <div class="section level3">
 <h3 id="choosing-between-the-approaches">Choosing between the Approaches<a class="anchor" aria-label="anchor" href="#choosing-between-the-approaches"></a>
 </h3>
@@ -1613,18 +1649,18 @@ bb2
 <li>you want to specify the variables’ data types with <a href="https://readr.tidyverse.org/reference/cols.html" class="external-link"><code>readr::cols()</code></a>.</li>
 </ul>
 <p>If in doubt, start with REDCapTidieR. Escalate to REDCapR if your download time is too long and might be decreased by reducing the information retrieved from the server and transported across the network.</p>
-<p>And of course many scenarios are solved best with a combination of both packages, such as (a) <a href="https://ouhscbbmc.github.io/REDCapR">REDCapR</a> populates the initial demographics in REDCap, (b) research staff enter measures collected from patients over time, (c) <a href="https://chop-cgtdataops.github.io/REDCapTidieR/" class="external-link">REDCapTidieR</a> retrieves the complete longitudinal dataset, (d) <a href="https://dplyr.tidyverse.org/" class="external-link">dplyr</a> joins the tibbles, and finally (e) <a href="https://cran.r-project.org/web/packages/lme4/vignettes/lmer.pdf" class="external-link">lme4</a> tests hypotheses involving <a href="https://datascienceplus.com/analysing-longitudinal-data-multilevel-growth-models-i/" class="external-link">patient trajectories</a> over time.</p>
+<p>And of course many scenarios are solved best with a combination of both packages, such as (a) <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> populates the initial demographics in REDCap, (b) research staff enter measures collected from patients over time, (c) <a href="https://chop-cgtdataops.github.io/REDCapTidieR/" class="external-link">REDCapTidieR</a> retrieves the complete longitudinal dataset, (d) <a href="https://dplyr.tidyverse.org/" class="external-link">dplyr</a> joins the tibbles, and finally (e) <a href="https://cran.r-project.org/package=lme4/vignettes/lmer.pdf" class="external-link">lme4</a> tests hypotheses involving <a href="https://datascienceplus.com/analysing-longitudinal-data-multilevel-growth-models-i/" class="external-link">patient trajectories</a> over time.</p>
 </div>
 <div class="section level3">
 <h3 id="escalating-to-redcapr">Escalating to REDCapR<a class="anchor" aria-label="anchor" href="#escalating-to-redcapr"></a>
 </h3>
 <p>Even if you think you’ll need REDCapR’s low-level control, consider starting with REDCapTidieR anyway. …particularly if you are unsure how to specify the grain of each table. The structure of REDCapTidieR’s tables easily compatible with conventional analyses. If you need the performance of REDCapR but are unsure how the tables should look, simply execute something like <code>REDCapTidieR::redcap_read_tidy(url, project_token)</code> and study its output. Then try to mimic it exactly with <code><a href="../reference/redcap_read.html">REDCapR::redcap_read()</a></code> calls.</p>
-<p>Finally, cull unwanted cells using <code><a href="../reference/redcap_read.html">REDCapR::redcap_read()</a></code> parameters. These data points will not even leave the REDCap instance, which will improve performance. Some possible strategies include passing <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html#arguments">arguments</a> to</p>
+<p>Finally, cull unwanted cells using the parameters of <code><a href="../reference/redcap_read.html">REDCapR::redcap_read()</a></code>. These data points will not even leave the REDCap instance, which will improve performance. Some possible strategies include passing <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html#arguments">arguments</a> to</p>
 <ul>
 <li>
 <code>forms</code>: this will retrieve only the specified instruments/forms. Beginners should start here. It is easy to conceptualize and usually has a big increase in speed for just a little development work.</li>
 <li>
-<code>events</code>: this will retrieve only the desired events within a longitudinal project. For instance if the analyses involve only the “intake” and “follow up #1” events, leave follow ups #2-10 on the server.</li>
+<code>events</code>: this will retrieve only the desired events within a longitudinal project. For instance if the analyses involve only the “intake” and “follow up #1” events, leave follow ups #2, #3, and #4 on the server.</li>
 <li>
 <code>fields</code>: this is more granular than <code>forms</code>. It can be combined with calls to <code>forms</code>, such as passing <code>"bmi"</code> to fields and <code>c("blood_pressure", "laboratory")</code> to forms.</li>
 <li>
@@ -1812,19 +1848,19 @@ bb2
 <div class="section level3">
 <h3 id="caching-results-to-improve-performance">Caching Results to Improve Performance<a class="anchor" aria-label="anchor" href="#caching-results-to-improve-performance"></a>
 </h3>
-<p>If escalating to REDCapR didn’t decrease the duration enough, consider the strategy of calling REDCap only once per day (with either package) and saving the results to a secured disk. This will be efficient when the analyses require a <em>large</em> dataset, but not a <em>recent</em> dataset.</p>
+<p>If escalating to REDCapR didn’t decrease the duration enough, consider the strategy of calling REDCap only once per day (with either package) and saving the results to a secured disk. This will be efficient when the analyses require a <em>large</em> dataset, but not a <em>real-time</em> dataset.</p>
 <p>In many retrospective projects, multiple analyses during the day can reuse the same dataset retrieved the night before (with a function like <a href="https://readr.tidyverse.org/reference/read_rds.html" class="external-link"><code>readr::write_rds()</code></a>). This has helped our complicated investigations when multiple statisticians frantically tackle overlapping aspects before a funder’s deadline.</p>
-<p>Essentially you are transferring security responsibilities from REDCap to the file server. To balance its advantages, the approaches drawbacks include:</p>
+<p>Essentially you are transferring security responsibilities from REDCap to the file server. To balance its advantages, the approach’s drawbacks include:</p>
 <ul>
 <li>extra effort is required to create, secure, and maintain a networked drive that is accessible to only authorized analysts. This will take 15-60 minutes, depending on your institution.</li>
 <li>extra effort is required to create an automated program to retrieve and cache the dataset every night. See [CDS] for a head start.</li>
-<li>REDCap’s logs will not inform a meaningful audit because no human is accessing the API. User access audits are now the responsibility of the file system.</li>
+<li>REDCap’s logs will not support a meaningful audit because no human is accessing the API. User access audits are now the responsibility of the file system.</li>
 </ul>
 </div>
 <div class="section level3">
 <h3 id="caching-results-for-other-languages">Caching Results for other Languages<a class="anchor" aria-label="anchor" href="#caching-results-for-other-languages"></a>
 </h3>
-<p>Packages for other programming languages have been developed that access REDCap’s API, such <a href="http://redcap-tools.github.io/PyCap/" class="external-link">PyCap</a> and <a href="https://github.com/iuredcap/phpcap" class="external-link">PhpCap</a>. Please see a more complete list at <a href="https://redcap-tools.github.io/projects" class="external-link uri">https://redcap-tools.github.io/projects</a>. The caching strategy described above may also benefit your investigation if:</p>
+<p>Packages for other programming languages have been developed that access REDCap’s API, such <a href="http://redcap-tools.github.io/PyCap/" class="external-link">PyCap</a> and <a href="https://github.com/iuredcap/phpcap" class="external-link">PhpCap</a>. Please see a more complete list at <a href="https://redcap-tools.github.io/projects/" class="external-link uri">https://redcap-tools.github.io/projects/</a>. The caching strategy described above may also benefit your investigation if:</p>
 <ul>
 <li><p>it uses a language like SAS that does not support packages. We strongly discourage deploying loose scripts that call the API. When something is fixed in the original script, it must be distributed by the developer to the ~50 client institutions, then it must by copied to the ~100 projects within each institution. In contrast, when a developer updates a package distributed through a repository like CRAN, the client needs to run only <a href="https://stat.ethz.ch/R-manual/R-devel/library/utils/html/update.packages.html" class="external-link"><code>base::update.packages()</code></a> once per machine to update all its packages –not just REDCap packages. Data scientists already do this regularly.</p></li>
 <li><p>it uses a language like Julia that lacks a stable or updated package. The REDCap developers are always releasing useful features (<em>e.g.</em>, repeated measures) that improve the quality and efficiency of your research. Leverage them.</p></li>

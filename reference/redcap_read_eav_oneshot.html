@@ -247,7 +247,7 @@ administrator to send you the static material.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Return all records and all variables.</span></span></span>
 <span class="r-in"><span><span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">:::</span><span class="fu">redcap_read_eav_oneshot</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 103 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 103 records and 3 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Return only records with IDs of 1 and 3</span></span></span>
 <span class="r-in"><span><span class="va">desired_records_v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span></span></span>
@@ -265,12 +265,12 @@ administrator to send you the static material.</p>
 <span class="r-in"><span>  token      <span class="op">=</span> <span class="va">token</span>,</span></span>
 <span class="r-in"><span>  fields     <span class="op">=</span> <span class="va">desired_fields_v1</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 15 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 15 records and 3 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Repeating</span></span></span>
 <span class="r-in"><span><span class="va">token</span> <span class="op">&lt;-</span> <span class="st">"56F43A10D01D6578A46393394D76D88F"</span>  <span class="co"># PHI-free demo: Repeating Instruments --Sparse # 2603</span></span></span>
 <span class="r-in"><span><span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">:::</span><span class="fu">redcap_read_eav_oneshot</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 45 records and 5 columns were read from REDCap in 5.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 45 records and 5 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

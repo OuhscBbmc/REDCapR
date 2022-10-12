@@ -207,28 +207,14 @@
 <span>    redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,</span>
 <span>    token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span></span>
 <span>  <span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 0.3 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 3.6 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.5 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; Starting to read 5 records  at 2022-10-09 05:29:40.</span></span>
+<span><span class="co">#&gt; 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; Starting to read 5 records  at 2022-10-12 11:42:40.</span></span>
 <span><span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span></span>
-<span><span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; cols(</span></span>
-<span><span class="co">#&gt;   .default = col_double(),</span></span>
-<span><span class="co">#&gt;   name_first = <span style="color: #BB0000;">col_character()</span>,</span></span>
-<span><span class="co">#&gt;   name_last = <span style="color: #BB0000;">col_character()</span>,</span></span>
-<span><span class="co">#&gt;   address = <span style="color: #BB0000;">col_character()</span>,</span></span>
-<span><span class="co">#&gt;   telephone = <span style="color: #BB0000;">col_character()</span>,</span></span>
-<span><span class="co">#&gt;   email = <span style="color: #BB0000;">col_character()</span>,</span></span>
-<span><span class="co">#&gt;   dob = <span style="color: #0000BB;">col_date(format = "")</span>,</span></span>
-<span><span class="co">#&gt;   comments = <span style="color: #BB0000;">col_character()</span>,</span></span>
-<span><span class="co">#&gt;   mugshot = <span style="color: #BB0000;">col_character()</span></span></span>
-<span><span class="co">#&gt; )</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` for the full column specifications.</span></span></code></pre></div>
+<span><span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span></code></pre></div>
 <p>At this point, the data.frame <code>ds_1</code> has everything you need to start analyzing the project.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds_1</span></span>
@@ -350,21 +336,6 @@
 <span>  records     <span class="op">=</span> <span class="va">desired_records</span>,</span>
 <span>  verbose     <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span><span class="co">#&gt; Starting to read 2 records  at 2022-10-09 05:29:42.</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; cols(</span></span>
-<span><span class="co">#&gt;   .default = col_double(),</span></span>
-<span><span class="co">#&gt;   name_first = <span style="color: #BB0000;">col_character()</span>,</span></span>
-<span><span class="co">#&gt;   name_last = <span style="color: #BB0000;">col_character()</span>,</span></span>
-<span><span class="co">#&gt;   address = <span style="color: #BB0000;">col_character()</span>,</span></span>
-<span><span class="co">#&gt;   telephone = <span style="color: #BB0000;">col_character()</span>,</span></span>
-<span><span class="co">#&gt;   email = <span style="color: #BB0000;">col_character()</span>,</span></span>
-<span><span class="co">#&gt;   dob = <span style="color: #0000BB;">col_date(format = "")</span>,</span></span>
-<span><span class="co">#&gt;   comments = <span style="color: #BB0000;">col_character()</span>,</span></span>
-<span><span class="co">#&gt;   mugshot = <span style="color: #BB0000;">col_character()</span></span></span>
-<span><span class="co">#&gt; )</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` for the full column specifications.</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 25</span></span></span>
 <span><span class="co">#&gt;   record_id name_…¹ name_…² address telep…³ email dob          age   sex demog…⁴</span></span>
 <span><span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -389,21 +360,6 @@
 <span>  filter_logic  <span class="op">=</span> <span class="st">"'2003-01-01' &lt; [dob]"</span>,</span>
 <span>  verbose       <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span><span class="co">#&gt; Starting to read 2 records  at 2022-10-09 05:29:44.</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; cols(</span></span>
-<span><span class="co">#&gt;   .default = col_double(),</span></span>
-<span><span class="co">#&gt;   name_first = <span style="color: #BB0000;">col_character()</span>,</span></span>
-<span><span class="co">#&gt;   name_last = <span style="color: #BB0000;">col_character()</span>,</span></span>
-<span><span class="co">#&gt;   address = <span style="color: #BB0000;">col_character()</span>,</span></span>
-<span><span class="co">#&gt;   telephone = <span style="color: #BB0000;">col_character()</span>,</span></span>
-<span><span class="co">#&gt;   email = <span style="color: #BB0000;">col_character()</span>,</span></span>
-<span><span class="co">#&gt;   dob = <span style="color: #0000BB;">col_date(format = "")</span>,</span></span>
-<span><span class="co">#&gt;   comments = <span style="color: #BB0000;">col_character()</span>,</span></span>
-<span><span class="co">#&gt;   mugshot = <span style="color: #BB0000;">col_character()</span></span></span>
-<span><span class="co">#&gt; )</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` for the full column specifications.</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 25</span></span></span>
 <span><span class="co">#&gt;   record_id name_…¹ name_…² address telep…³ email dob          age   sex demog…⁴</span></span>
 <span><span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -429,14 +385,6 @@
 <span>  fields      <span class="op">=</span> <span class="va">desired_fields</span>,</span>
 <span>  verbose     <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span><span class="co">#&gt; Starting to read 5 records  at 2022-10-09 05:29:46.</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; cols(</span></span>
-<span><span class="co">#&gt;   record_id = <span style="color: #00BB00;">col_double()</span>,</span></span>
-<span><span class="co">#&gt;   name_first = <span style="color: #BB0000;">col_character()</span>,</span></span>
-<span><span class="co">#&gt;   age = <span style="color: #00BB00;">col_double()</span></span></span>
-<span><span class="co">#&gt; )</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 3</span></span></span>
 <span><span class="co">#&gt;   record_id name_first   age</span></span>
 <span><span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -475,7 +423,6 @@
 <span>  verbose     <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  col_types   <span class="op">=</span> <span class="va">col_types</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span><span class="co">#&gt; Starting to read 5 records  at 2022-10-09 05:29:48.</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 7</span></span></span>
 <span><span class="co">#&gt;   record_id race___1 race___2 race___3 race___4 race___5 race___6</span></span>
 <span><span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   </span></span>
@@ -500,7 +447,6 @@
 <span>  verbose     <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  col_types   <span class="op">=</span> <span class="va">col_types</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span><span class="co">#&gt; Starting to read 5 records  at 2022-10-09 05:29:50.</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 7</span></span></span>
 <span><span class="co">#&gt;   record_id race___1 race___2 race___3 race___4 race___5 race___6</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span></span>
