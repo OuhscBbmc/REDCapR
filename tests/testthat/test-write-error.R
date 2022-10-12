@@ -18,9 +18,13 @@ test_that("One Shot: writing with read-only privileges", {
   expected_message    <- "The REDCapR write/import operation was not successful.  The error message was:\nERROR: You do not have API Import/Update privileges"
   expected_text       <- "ERROR: You do not have API Import/Update privileges"
 
-  expect_message(
-    result <- REDCapR::redcap_write_oneshot(ds=mtcars, redcap_uri=credential$redcap_uri, token=credential$token)
-  )
+  result <-
+    REDCapR::redcap_write_oneshot(
+      ds          = mtcars,
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )
 
   expect_false(result$success)
   expect_equal(result$status_code, expected=403L)
@@ -46,7 +50,13 @@ test_that("Single Batch: writing with read-only privileges", {
 
   # if (exists("result")) rm(result)
   expect_error(
-    result <- REDCapR::redcap_write(ds=mtcars, redcap_uri=credential$redcap_uri, token=credential$token)
+    result <-
+      REDCapR::redcap_write(
+        ds          = mtcars,
+        redcap_uri  = credential$redcap_uri,
+        token       = credential$token,
+        verbose     = FALSE
+      )
   )
 
   # expect_false(exists("result"))
@@ -66,7 +76,14 @@ test_that("Many Batches: writing with read-only privileges", {
   expected_text       <- "ERROR: You do not have API Import/Update privileges"
 
   expect_error(
-    result <- REDCapR::redcap_write(ds=mtcars, redcap_uri=credential$redcap_uri, token=credential$token, batch_size=10)
+    result <-
+      REDCapR::redcap_write(
+        ds          = mtcars,
+        redcap_uri  = credential$redcap_uri,
+        token       = credential$token,
+        batch_size  = 10,
+        verbose     = FALSE
+      )
   )
 
   # expect_false(exists("result"))
@@ -84,9 +101,16 @@ test_that("Single Batch: writing with read-only privileges --contiue on error", 
 
   expected_message    <- "The REDCapR write/import operation was not successful.  The error message was:\nERROR: You do not have API Import/Update privileges"
 
-  expect_warning(expect_message(
-    result <- REDCapR::redcap_write(ds=mtcars, redcap_uri=credential$redcap_uri, token=credential$token, continue_on_error=TRUE)
-  ))
+  expect_warning(
+    result <-
+      REDCapR::redcap_write(
+        ds                = mtcars,
+        redcap_uri        = credential$redcap_uri,
+        token             = credential$token,
+        continue_on_error = TRUE,
+        verbose           = FALSE
+      )
+  )
 
   expect_false(result$success)
   expect_equal(result$status_code, expected="403")
@@ -109,7 +133,15 @@ test_that("Many Batches: writing with read-only privileges --contiue on error", 
   expected_message    <- "The REDCapR write/import operation was not successful.  The error message was:\nERROR: You do not have API Import/Update privileges"
 
   expect_warning(expect_warning(expect_warning(expect_warning(
-    result <- REDCapR::redcap_write(ds=mtcars, redcap_uri=credential$redcap_uri, token=credential$token, continue_on_error=TRUE, batch_size=10)
+    result <-
+      REDCapR::redcap_write(
+        ds                  = mtcars,
+        redcap_uri          = credential$redcap_uri,
+        token               = credential$token,
+        continue_on_error   = TRUE,
+        batch_size          = 10,
+        verbose             = FALSE
+      )
   ))))
 
   expect_false(result$success)

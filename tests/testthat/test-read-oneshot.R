@@ -6,25 +6,24 @@ path_expected_default <- "test-data/specific-redcapr/read-oneshot/default.R"
 
 test_that("smoke test", {
   testthat::skip_on_cran()
-  expect_message(
-    returned_object <-
-      redcap_read_oneshot(
-        redcap_uri    = credential$redcap_uri,
-        token         = credential$token
-      )
-  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token,
+      verbose       = FALSE
+    )
+  expect_type(returned_object, "list")
 })
 test_that("default", {
   testthat::skip_on_cran()
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp          = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(
+  returned_object <-
+    redcap_read_oneshot(
       redcap_uri    = credential$redcap_uri,
-      token         = credential$token
+      token         = credential$token,
+      verbose       = FALSE
     )
-  )
 
   if (update_expectation) save_expected(returned_object$data, path_expected_default)
   expected_data_frame <- retrieve_expected(path_expected_default)
@@ -56,10 +55,13 @@ test_that("col_types", {
     race___6   = readr::col_logical()
   )
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, col_types=col_types)
-  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      col_types   = col_types,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -81,10 +83,13 @@ test_that("specify-records", {
   desired_records <- c(1L, 3L, 4L)
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, records=desired_records)
-  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      records     = desired_records,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -106,10 +111,13 @@ test_that("specify-records-zero-length", {
   desired_records <- c()
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, records=desired_records)
-  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      records     = desired_records,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -131,10 +139,13 @@ test_that("specify-fields", {
   desired_fields <- c("record_id", "name_first", "name_last", "age")
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, fields=desired_fields)
-  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      fields      = desired_fields,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -156,10 +167,13 @@ test_that("specify-fields-zero-length", {
   desired_fields <- c()
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, fields=desired_fields)
-  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      fields      = desired_fields,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -181,10 +195,14 @@ test_that("specify-records-and-fields-zero-length", {
   desired_fields <- c()
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, records=desired_records, fields=desired_fields)
-  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      records     = desired_records,
+      fields      = desired_fields,
+      verbose     = FALSE
+    )
 
   expected_data_frame <- retrieve_expected(path_expected_default)
 
@@ -205,10 +223,13 @@ test_that("specify-forms", {
   desired_forms <- c("demographics", "race_and_ethnicity")
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, forms=desired_forms)
-  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      forms       = desired_forms,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -230,10 +251,13 @@ test_that("specify-forms-only-1st", {
   desired_forms <- c("demographics")
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, forms=desired_forms)
-  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      forms       = desired_forms,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -255,10 +279,13 @@ test_that("specify-forms-only-2nd", {
   desired_forms <- c("race_and_ethnicity")
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, forms=desired_forms)
-  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      forms       = desired_forms,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -279,10 +306,13 @@ test_that("force-character-type", {
   path_expected <- "test-data/specific-redcapr/read-oneshot/force-character-type.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, guess_type=FALSE)
-  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      guess_type  = FALSE,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -303,10 +333,13 @@ test_that("raw", {
   path_expected <- "test-data/specific-redcapr/read-oneshot/raw.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="raw")
-  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token,
+      raw_or_label  = "raw",
+      verbose       = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -327,10 +360,14 @@ test_that("raw-and-dag", {
   path_expected <- "test-data/specific-redcapr/read-oneshot/raw-and-dag.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="raw", export_data_access_groups=TRUE)
-  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri                  = credential$redcap_uri,
+      token                       = credential$token,
+      raw_or_label                = "raw",
+      export_data_access_groups   = TRUE,
+      verbose                     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -351,10 +388,14 @@ test_that("label-and-dag", {
   path_expected <- "test-data/specific-redcapr/read-oneshot/label-and-dag.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups=TRUE)
-  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri                = credential$redcap_uri,
+      token                     = credential$token,
+      raw_or_label              = "label",
+      export_data_access_groups = TRUE,
+      verbose                   = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -375,10 +416,14 @@ test_that("label", {
   path_expected <- "test-data/specific-redcapr/read-oneshot/label.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, raw_or_label="label", export_data_access_groups=FALSE)
-  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri                = credential$redcap_uri,
+      token                     = credential$token,
+      raw_or_label              = "label",
+      export_data_access_groups = FALSE,
+      verbose                   = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -399,10 +444,14 @@ test_that("export_checkbox_label", {
   path_expected <- "test-data/specific-redcapr/read-oneshot/export_checkbox_label.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, export_checkbox_label=TRUE, raw_or_label="label")
-  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri            = credential$redcap_uri,
+      token                 = credential$token,
+      export_checkbox_label = TRUE,
+      raw_or_label          = "label",
+      verbose               = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -425,10 +474,13 @@ test_that("filter-numeric", {
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
   filter <- "[age] >= 61"
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, filter_logic=filter)
-  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token,
+      filter_logic  = filter,
+      verbose       = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -450,10 +502,13 @@ test_that("filter-character", {
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   filter <- "[name_first] = 'John Lee'"
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(redcap_uri=credential$redcap_uri, token=credential$token, filter_logic=filter)
-  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token,
+      filter_logic  = filter,
+      verbose       = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -475,14 +530,13 @@ test_that("blank-for-gray-status-true", {
   path_expected <- "test-data/specific-redcapr/read-oneshot/blank-for-gray-true.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp          = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(
-      redcap_uri    = credential_blank_for_gray$redcap_uri,
-      token         = credential_blank_for_gray$token,
-      blank_for_gray_form_status = TRUE
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri                  = credential_blank_for_gray$redcap_uri,
+      token                       = credential_blank_for_gray$token,
+      blank_for_gray_form_status  = TRUE,
+      verbose                     = FALSE
     )
-  )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -504,14 +558,13 @@ test_that("blank-for-gray-status-false", {
   path_expected <- "test-data/specific-redcapr/read-oneshot/blank-for-gray-false.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp          = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(
-      redcap_uri    = credential_blank_for_gray$redcap_uri,
-      token         = credential_blank_for_gray$token,
-      blank_for_gray_form_status = FALSE
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri                  = credential_blank_for_gray$redcap_uri,
+      token                       = credential_blank_for_gray$token,
+      blank_for_gray_form_status  = FALSE,
+      verbose                     = FALSE
     )
-  )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -534,16 +587,15 @@ test_that("date-range", {
 
   start <- as.POSIXct(strptime("2018-08-01 03:00", "%Y-%m-%d %H:%M"))
   stop  <- Sys.time()
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <-
-      redcap_read_oneshot(
-        redcap_uri        = credential$redcap_uri,
-        token             = credential$token,
-        datetime_range_begin  = start,
-        datetime_range_end    = stop
-      )
-  )
+
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri            = credential$redcap_uri,
+      token                 = credential$token,
+      datetime_range_begin  = start,
+      datetime_range_end    = stop,
+      verbose               = FALSE
+    )
 
   expected_data_frame <- retrieve_expected(path_expected_default)
 
@@ -563,14 +615,13 @@ test_that("guess_max-Inf", {
   testthat::skip_on_cran()
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp          = expected_outcome_message,
-    returned_object <- redcap_read_oneshot(
+  returned_object <-
+    redcap_read_oneshot(
       redcap_uri    = credential$redcap_uri,
       token         = credential$token,
-      guess_max     = Inf
+      guess_max     = Inf,
+      verbose       = FALSE
     )
-  )
 
   if (update_expectation) save_expected(returned_object$data, path_expected_default)
   expected_data_frame <- retrieve_expected(path_expected_default)
@@ -591,14 +642,13 @@ test_that("bad token -Error", {
   testthat::skip_on_cran()
   expected_outcome_message <- "The REDCapR read/export operation was not successful\\."
 
-  expect_message(
-    returned_object <-
-      redcap_read_oneshot(
-        redcap_uri    = credential$redcap_uri,
-        token         = "BAD00000000000000000000000000000"
-      ),
-    expected_outcome_message
-  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri    = credential$redcap_uri,
+      token         = "BAD00000000000000000000000000000",
+      verbose       = FALSE
+    )
+
   testthat::expect_false(returned_object$success)
   testthat::expect_equal(returned_object$status_code, 403L)
   testthat::expect_equal(returned_object$raw_text, "ERROR: You do not have permissions to use the API")

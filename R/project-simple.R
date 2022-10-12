@@ -56,7 +56,7 @@ populate_project_simple <- function(batch = FALSE, verbose = TRUE) {
       ds                          = ds_to_write,
       redcap_uri                  = project$redcap_uri,
       token                       = project$token,
-      verbose                     = TRUE,
+      verbose                     = verbose,
       convert_logical_to_integer  = TRUE
     )
   }
@@ -106,7 +106,7 @@ clear_project_simple <- function(verbose = TRUE) {
   was_successful
 }
 
-clean_start_simple <- function(batch = FALSE, delay_in_seconds = 1, verbose = TRUE) {
+clean_start_simple <- function(batch = FALSE, delay_in_seconds = 1, verbose = FALSE) {
   checkmate::assert_logical(batch           , any.missing=FALSE, len=1)
   checkmate::assert_numeric(delay_in_seconds, any.missing=FALSE, len=1, lower=0)
 
