@@ -12,15 +12,13 @@ test_that("single-arm-four-records", {
   records_to_delete <- c(102, 103, 105, 120)
 
   expected_outcome_message <- "\\d+ records were deleted from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
-  expect_message(
-    returned_object1 <-
-      redcap_delete(
-        redcap_uri        = project$redcap_uri,
-        token             = project$token,
-        records_to_delete = records_to_delete
-      ),
-    regexp = expected_outcome_message
-  )
+  returned_object1 <-
+    redcap_delete(
+      redcap_uri        = project$redcap_uri,
+      token             = project$token,
+      records_to_delete = records_to_delete,
+      verbose           = FALSE
+    )
 
   expect_equal(returned_object1$status_code, expected=200L)
   expect_equal(returned_object1$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
@@ -29,10 +27,12 @@ test_that("single-arm-four-records", {
   expect_true( returned_object1$success)
 
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
-  expect_message(
-    returned_object2 <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token),
-    regexp = expected_outcome_message
-  )
+  returned_object2 <-
+    redcap_read_oneshot(
+      redcap_uri = project$redcap_uri,
+      token      = project$token,
+      verbose    = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object2$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -58,16 +58,14 @@ test_that("multiple-arm-four-records", {
   records_to_delete <- c(102, 103, 105, 120)
 
   expected_outcome_message <- "\\d+ records were deleted from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
-  expect_message(
-    returned_object1 <-
-      redcap_delete(
-        redcap_uri        = project$redcap_uri,
-        token             = project$token,
-        records_to_delete = records_to_delete,
-        arm_of_records_to_delete = arm
-      ),
-    regexp = expected_outcome_message
-  )
+  returned_object1 <-
+    redcap_delete(
+      redcap_uri        = project$redcap_uri,
+      token             = project$token,
+      records_to_delete = records_to_delete,
+      arm_of_records_to_delete = arm,
+      verbose           = FALSE
+    )
 
   expect_equal(returned_object1$status_code, expected=200L)
   expect_equal(returned_object1$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
@@ -76,10 +74,12 @@ test_that("multiple-arm-four-records", {
   expect_true( returned_object1$success)
 
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
-  expect_message(
-    returned_object2 <- redcap_read_oneshot(redcap_uri=project$redcap_uri, token=project$token),
-    regexp = expected_outcome_message
-  )
+  returned_object2 <-
+    redcap_read_oneshot(
+      redcap_uri = project$redcap_uri,
+      token      = project$token,
+      verbose    = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object2$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -105,7 +105,8 @@ test_that("no-delete-permissions", {
     redcap_delete(
       redcap_uri        = credential$redcap_uri,
       token             = credential$token,
-      records_to_delete = records_to_delete
+      records_to_delete = records_to_delete,
+      verbose           = FALSE
     ),
     regexp = expected_outcome_message
   )
@@ -123,7 +124,8 @@ test_that("Delete records that don't exist", {
     redcap_delete(
       redcap_uri        = credential$redcap_uri,
       token             = credential$token,
-      records_to_delete = records_to_delete
+      records_to_delete = records_to_delete,
+      verbose           = FALSE
     ),
     regexp = expected_outcome_message
   )
@@ -143,7 +145,8 @@ test_that("unnecessarily specify arm", {
       redcap_uri        = credential$redcap_uri,
       token             = credential$token,
       records_to_delete = records_to_delete,
-      arm_of_records_to_delete = arm_number
+      arm_of_records_to_delete = arm_number,
+      verbose           = FALSE
     ),
     regexp = expected_outcome_message
   )
@@ -162,7 +165,8 @@ test_that("unspecified required arm", {
     redcap_delete(
       redcap_uri        = credential$redcap_uri,
       token             = credential$token,
-      records_to_delete = records_to_delete
+      records_to_delete = records_to_delete,
+      verbose           = FALSE
     ),
     regexp = expected_outcome_message
   )
@@ -179,7 +183,8 @@ test_that("Bad Token", {
     redcap_delete(
       redcap_uri        = credential$redcap_uri,
       token             = bad_token,
-      records_to_delete = records_to_delete
+      records_to_delete = records_to_delete,
+      verbose           = FALSE
     ),
     regexp = expected_error_message
   )

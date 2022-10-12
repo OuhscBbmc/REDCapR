@@ -10,8 +10,14 @@ test_that("Smoke Test", {
   testthat::skip_on_cran()
   skip_if_onlyread()
 
-  start_clean_result <- REDCapR:::clean_start_dag_write(batch=FALSE)
+  start_clean_result <-
+    REDCapR:::clean_start_dag_write(
+      batch   = FALSE,
+      verbose = FALSE
+    )
   project <- start_clean_result$redcap_project
+
+  expect_type(start_clean_result, "list")
 })
 
 test_that("default", {
@@ -20,14 +26,20 @@ test_that("default", {
 
   path_expected_before <- "test-data/specific-redcapr/write-dag/before.R"
   path_expected_after  <- "test-data/specific-redcapr/write-dag/after.R"
-  start_clean_result <- REDCapR:::clean_start_dag_write(batch=FALSE)
+  start_clean_result <-
+    REDCapR:::clean_start_dag_write(
+      batch   = FALSE,
+      verbose = FALSE
+    )
   project <- start_clean_result$redcap_project
 
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
-  expect_message(
-    returned_object <- redcap_read_oneshot(url, credential_user$token),
-    regexp = expected_outcome_message
-  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri  = url,
+      token       = credential_user$token,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected_before)
   expected_data_frame <- retrieve_expected(path_expected_before)
@@ -46,8 +58,18 @@ test_that("default", {
   # ds_updated$record_id <- sub("^\\d+-(\\d+)$", "\\1",  ds_updated$record_id)
   # ds_updated$redcap_data_access_group <- NULL
 
-  redcap_write_oneshot(ds_updated, url, credential_user$token)
-  returned_object <- redcap_read_oneshot(url, credential_admin$token)
+  redcap_write_oneshot(
+    ds          = ds_updated,
+    redcap_uri  = url,
+    token       = credential_user$token,
+    verbose     = FALSE
+  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri  = url,
+      token       = credential_admin$token,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected_after)
   expected_data_frame <- retrieve_expected(path_expected_after)
@@ -71,10 +93,13 @@ test_that("default w/ batching", {
   project <- start_clean_result$redcap_project
 
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
-  expect_message(
-    returned_object <- redcap_read_oneshot(url, credential_user$token),
-    regexp = expected_outcome_message
-  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri  = url,
+      token       = credential_user$token,
+      verbose     = FALSE
+    )
+
   # Use the same as the non-batched test
   expected_data_frame <- retrieve_expected(path_expected_before)
 
@@ -92,8 +117,18 @@ test_that("default w/ batching", {
   # ds_updated$record_id <- sub("^\\d+-(\\d+)$", "\\1",  ds_updated$record_id)
   # ds_updated$redcap_data_access_group <- NULL
 
-  redcap_write_oneshot(ds_updated, url, credential_user$token)
-  returned_object <- redcap_read_oneshot(url, credential_admin$token)
+  redcap_write_oneshot(
+    ds          = ds_updated,
+    redcap_uri  = url,
+    token       = credential_user$token,
+    verbose     = FALSE
+  )
+  returned_object <-
+    redcap_read_oneshot(
+      redcap_uri  = url,
+      token       = credential_admin$token,
+      verbose     = FALSE
+    )
 
   # Use the same as the non-batched test
   expected_data_frame <- retrieve_expected(path_expected_after)
@@ -112,35 +147,66 @@ test_that("reassign subject to a different dag", {
   skip_if_onlyread()
 
   # Step 1: Initialize the project
-  start_clean_result <- REDCapR:::clean_start_dag_write(batch=FALSE)
+  start_clean_result <-
+    REDCapR:::clean_start_dag_write(
+      batch   = FALSE,
+      verbose = FALSE
+    )
   # url                <- start_clean_result$redcap_project$redcap_uri
   # token_for_admin    <- start_clean_result$redcap_project$token
   # token_for_dag_user <- "C79DB3836373478986928303B52E74DF"
 
   # Step 2a: Retrieve the dataset as admin.  The 3 subjects' DAGs are 'daga', 'daga', & 'dagb'
-  ds_admin_1  <- redcap_read_oneshot(url, credential_admin$token, export_data_access_groups = TRUE)$data
+  ds_admin_1  <-
+    redcap_read_oneshot(
+      redcap_uri                = url,
+      token                     = credential_admin$token,
+      export_data_access_groups = TRUE,
+      verbose                   = FALSE
+    )$data
   expect_equal(nrow(ds_admin_1), 3L)
   expect_equal(ds_admin_1$record_id               , c("331-1", "331-2", "332-3"))
   expect_equal(ds_admin_1$redcap_data_access_group, c("daga", "daga", "dagb"   ))
 
   # Step 2b: Retrieve the dataset as user. Only the first two subjects are visible to DAG-A users initially.
-  ds_user_1   <- redcap_read_oneshot(url, credential_user$token)$data
+  ds_user_1   <-
+    redcap_read_oneshot(
+      redcap_uri  = url,
+      token       = credential_user$token,
+      verbose     = FALSE
+    )$data
   expect_equal(nrow(ds_user_1), 2L)
   expect_equal(ds_user_1$record_id, c("331-1", "331-2"))
 
   #Step 3: Reassign the 2nd subject and upload to server
   ds_admin_1$redcap_data_access_group[2] <- "dagb"
-  redcap_write_oneshot(ds_admin_1, url, credential_admin$token)
+  redcap_write_oneshot(
+    ds          = ds_admin_1,
+    redcap_uri  = url,
+    token       = credential_admin$token,
+    verbose     = FALSE
+  )
 
   # Step 4a: Retrieve the dataset as admin.  Should the 2nd row automatically change from '331-2' to '332-2'?
-  ds_admin_2  <- redcap_read_oneshot(url, credential_admin$token, export_data_access_groups = TRUE)$data
+  ds_admin_2  <-
+    redcap_read_oneshot(
+      redcap_uri                = url,
+      token                     = credential_admin$token,
+      export_data_access_groups = TRUE,
+      verbose                   = FALSE
+    )$data
   expect_equal(nrow(ds_admin_2), 3L)
   expect_equal(ds_admin_2$record_id               , c("331-1", "331-2", "332-3"))
   # expect_equal(ds_admin_2$record_id               , c("331-1", "332-2", "332-3"))
   expect_equal(ds_admin_2$redcap_data_access_group, c("daga", "dagb", "dagb"   ))
 
   # Step 4b: Retrieve the dataset as user. Now only one subject is visible to DAG-A users.
-  ds_user_2   <- redcap_read_oneshot(url, credential_user$token)$data
+  ds_user_2   <-
+    redcap_read_oneshot(
+      redcap_uri  = url,
+      token       = credential_user$token,
+      verbose     = FALSE
+    )$data
   expect_equal(nrow(ds_user_2), 1L)
   expect_equal(ds_user_2$record_id, c("331-1"))
 })

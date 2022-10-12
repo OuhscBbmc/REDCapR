@@ -143,11 +143,13 @@ redcap_write <- function(
   lst_outcome_message   <- NULL
   success_combined      <- TRUE
 
-  message(sprintf(
-    "Starting to update %s records to be written at %s.",
-    format(nrow(ds_to_write), big.mark = ",", scientific = FALSE, trim = TRUE),
-    Sys.time()
-  ))
+  if (verbose) {
+    message(sprintf(
+      "Starting to update %s records to be written at %s.",
+      format(nrow(ds_to_write), big.mark = ",", scientific = FALSE, trim = TRUE),
+      Sys.time()
+    ))
+  }
 
   for (i in seq_along(ds_glossary$id)) {
     selected_indices <- seq(
@@ -156,13 +158,16 @@ redcap_write <- function(
     )
 
     if (0L < i) Sys.sleep(time = interbatch_delay)
-    message(sprintf(
-      "Writing batch %i of %i, with indices %i through %i.",
-      i,
-      nrow(ds_glossary),
-      min(selected_indices),
-      max(selected_indices)
-    ))
+
+    if (verbose) {
+      message(sprintf(
+        "Writing batch %i of %i, with indices %i through %i.",
+        i,
+        nrow(ds_glossary),
+        min(selected_indices),
+        max(selected_indices)
+      ))
+    }
 
     write_result <- REDCapR::redcap_write_oneshot(
       ds                          = ds_to_write[selected_indices, ],

@@ -5,7 +5,12 @@ test_that("smoke test", {
   testthat::skip_on_cran()
   credential  <- retrieve_credential_testing(2634L)
   expect_warning(
-    redcap_metadata_coltypes(credential$redcap_uri, credential$token)
+    redcap_metadata_coltypes(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      print_col_types_to_console = FALSE,
+      verbose     = FALSE
+    )
   )
 })
 
@@ -15,10 +20,13 @@ test_that("simple", {
   path_expected            <- "test-data/specific-redcapr/metadata-coltypes/simple.R"
   expected_outcome_message <- "col_types <- readr::cols"
 
-  expect_message(
-    regexp  = expected_outcome_message,
-    actual  <- redcap_metadata_coltypes(credential$redcap_uri, credential$token)
-  )
+  actual  <-
+    redcap_metadata_coltypes(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      print_col_types_to_console = FALSE,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(actual, path_expected)
   expected <- retrieve_expected(path_expected)
@@ -26,7 +34,12 @@ test_that("simple", {
   expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_s3_class(actual, "col_spec")
 
-  ds <- redcap_read_oneshot(credential$redcap_uri, credential$token)$data
+  ds <-
+    redcap_read_oneshot(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )$data
   col_metadata <- names(actual[[1]])
   col_data     <- colnames(ds)
 
@@ -42,10 +55,13 @@ test_that("longitudinal", {
   path_expected            <- "test-data/specific-redcapr/metadata-coltypes/longitudinal.R"
   expected_outcome_message <- "col_types <- readr::cols"
 
-  expect_message(
-    regexp  = expected_outcome_message,
-    actual  <- redcap_metadata_coltypes(credential$redcap_uri, credential$token)
-  )
+  actual  <-
+    redcap_metadata_coltypes(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      print_col_types_to_console = FALSE,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(actual, path_expected)
   expected <- retrieve_expected(path_expected)
@@ -53,7 +69,12 @@ test_that("longitudinal", {
   expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_s3_class(actual, "col_spec")
 
-  ds <- redcap_read_oneshot(credential$redcap_uri, credential$token)$data
+  ds <-
+    redcap_read_oneshot(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )$data
   col_metadata <- names(actual[[1]])
   col_data     <- colnames(ds)
 
@@ -69,10 +90,13 @@ test_that("superwide", {
   path_expected            <- "test-data/specific-redcapr/metadata-coltypes/superwide.R"
   expected_outcome_message <- "col_types <- readr::cols"
 
-  expect_message(
-    regexp  = expected_outcome_message,
-    actual  <- redcap_metadata_coltypes(credential$redcap_uri, credential$token)
-  )
+  actual  <-
+    redcap_metadata_coltypes(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      print_col_types_to_console = FALSE,
+      verbose     = FALSE
+    )
 
   # if (update_expectation) save_expected(actual, path_expected)
   # expected <- retrieve_expected(path_expected)
@@ -80,7 +104,13 @@ test_that("superwide", {
   # expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_s3_class(actual, "col_spec")
 
-  ds <- redcap_read_oneshot(credential$redcap_uri, credential$token)$data
+  ds <-
+    redcap_read_oneshot(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )$data
+
   col_metadata <- names(actual[[1]])
   col_data     <- colnames(ds)
 
@@ -96,10 +126,13 @@ test_that("repeating-instruments", {
   path_expected            <- "test-data/specific-redcapr/metadata-coltypes/repeating-instruments.R"
   expected_outcome_message <- "col_types <- readr::cols"
 
-  expect_message(
-    regexp  = expected_outcome_message,
-    actual  <- redcap_metadata_coltypes(credential$redcap_uri, credential$token)
-  )
+  actual  <-
+    redcap_metadata_coltypes(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      print_col_types_to_console = FALSE,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(actual, path_expected)
   expected <- retrieve_expected(path_expected)
@@ -107,7 +140,12 @@ test_that("repeating-instruments", {
   expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_s3_class(actual, "col_spec")
 
-  ds <- redcap_read_oneshot(credential$redcap_uri, credential$token)$data
+  ds <-
+    redcap_read_oneshot(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )$data
   col_metadata <- names(actual[[1]])
   col_data     <- colnames(ds)
 
@@ -123,10 +161,13 @@ test_that("problematic-dictionary", {
   path_expected            <- "test-data/specific-redcapr/metadata-coltypes/problematic-dictionary.R"
   expected_outcome_message <- "col_types <- readr::cols"
 
-  expect_message(
-    regexp  = expected_outcome_message,
-    actual  <- redcap_metadata_coltypes(credential$redcap_uri, credential$token)
-  )
+  actual  <-
+    redcap_metadata_coltypes(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      print_col_types_to_console = FALSE,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(actual, path_expected)
   expected <- retrieve_expected(path_expected)
@@ -152,8 +193,13 @@ test_that("validation-types", {
   expected_warning_message <- "at least one field that specifies a comma for a decimal"
 
   expect_warning(
-    regexp  = expected_warning_message,
-    actual  <- redcap_metadata_coltypes(credential$redcap_uri, credential$token)
+    actual <-
+      redcap_metadata_coltypes(
+        redcap_uri  = credential$redcap_uri,
+        token       = credential$token,
+        print_col_types_to_console = FALSE,
+        verbose     = FALSE
+      )
   )
 
   if (update_expectation) save_expected(actual, path_expected)
@@ -162,7 +208,12 @@ test_that("validation-types", {
   expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_s3_class(actual, "col_spec")
 
-  ds <- redcap_read_oneshot(credential$redcap_uri, credential$token)$data
+  ds <-
+    redcap_read_oneshot(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )$data
   col_metadata <- names(actual[[1]])
   col_data     <- colnames(ds)
 

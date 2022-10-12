@@ -50,7 +50,8 @@ redcap_project <- setRefClass(
 
   fields = list(
     redcap_uri  = "character",
-    token       = "character"
+    token       = "character",
+    verbose     = "logical"
   ),
 
   methods = list(
@@ -69,7 +70,7 @@ redcap_project <- setRefClass(
       export_survey_fields        = FALSE,
       export_data_access_groups   = FALSE,
       filter_logic                  = "",
-
+      col_types                     = NULL,
       guess_type                    = TRUE,
       guess_max                     = 1000,
       verbose                       = TRUE,
@@ -95,7 +96,7 @@ redcap_project <- setRefClass(
         export_survey_fields          = export_survey_fields,
         export_data_access_groups     = export_data_access_groups,
         filter_logic                  = filter_logic,
-
+        col_types                     = col_types,
         guess_type                    = guess_type,
         # placeholder guess_max
         verbose                       = verbose,
@@ -121,6 +122,7 @@ redcap_project <- setRefClass(
         continue_on_error       = continue_on_error,
         redcap_uri              = redcap_uri,
         token                   = token,
+        verbose                 = verbose,
         config_options          = config_options
       ))
     }

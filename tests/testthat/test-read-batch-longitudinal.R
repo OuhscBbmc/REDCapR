@@ -4,14 +4,16 @@ credential          <- retrieve_credential_testing(212L)
 project             <- redcap_project$new(redcap_uri=credential$redcap_uri, token=credential$token)
 update_expectation  <- FALSE
 
-
 test_that("smoke", {
   testthat::skip_on_cran()
 
   #Static method w/ default batch size
-  expect_message(
-    returned_object <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token)
-  )
+  returned_object <-
+    redcap_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )
 
   # #Static method w/ tiny batch size
   # expect_message(
@@ -19,14 +21,12 @@ test_that("smoke", {
   # )
 
   #Instance method w/ default batch size
-  expect_message(
-    returned_object <- project$read()
-  )
+  returned_object <- project$read(verbose = FALSE)
+  expect_type(returned_object, "list")
 
   #Instance method w/ tiny batch size
-  expect_message(
-    returned_object <- project$read(batch_size=2)
-  )
+  returned_object <- project$read(batch_size = 2, verbose = FALSE)
+  expect_type(returned_object, "list")
 })
 
 test_that("so-example-data-frame-retrieval", {
@@ -48,10 +48,12 @@ test_that("default", {
 
   ###########################
   ## Default Batch size
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token)
-  )
+  returned_object1 <-
+    redcap_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object1$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -67,10 +69,13 @@ test_that("default", {
 
   ###########################
   ## Tiny Batch size
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, batch_size=8)
-  )
+  returned_object2 <-
+    redcap_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      batch_size  = 8,
+      verbose     = FALSE
+    )
 
   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
   expect_true(returned_object2$success)
@@ -91,10 +96,13 @@ test_that("filter-numeric", {
 
   ###########################
   ## Default Batch size
-  expect_message(
-    returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, filter_logic=filter),
-    regexp = expected_outcome_message
-  )
+  returned_object1 <-
+    redcap_read(
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token,
+      filter_logic  = filter,
+      verbose       = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object1$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -111,10 +119,14 @@ test_that("filter-numeric", {
 
   ###########################
   ## Tiny Batch size
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, batch_size=8, filter_logic=filter)
-  )
+  returned_object2 <-
+    redcap_read(
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token,
+      batch_size    = 8,
+      filter_logic  = filter,
+      verbose       = FALSE
+    )
 
   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
   expect_true(returned_object2$success)
@@ -135,10 +147,13 @@ test_that("filter-character", {
 
   ###########################
   ## Default Batch size
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, filter_logic=filter)
-  )
+  returned_object1 <-
+    redcap_read(
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token,
+      filter_logic  = filter,
+      verbose       = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object1$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -154,10 +169,14 @@ test_that("filter-character", {
 
   ###########################
   ## Tiny Batch size
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, batch_size=8, filter_logic=filter)
-  )
+  returned_object2 <-
+    redcap_read(
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token,
+      batch_size    = 8,
+      filter_logic  = filter,
+      verbose       = FALSE
+    )
 
   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
   expect_true(returned_object2$success)

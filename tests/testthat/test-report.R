@@ -6,28 +6,27 @@ report_id           <- 5980L
 
 test_that("smoke test", {
   testthat::skip_on_cran()
-  expect_message(
-    returned_object <-
-      redcap_report(
-        redcap_uri    = credential$redcap_uri,
-        token         = credential$token,
-        report_id     = report_id
-      )
-  )
+  returned_object <-
+    redcap_report(
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token,
+      report_id     = report_id,
+      verbose       = FALSE
+    )
+  expect_type(returned_object, "list")
 })
 test_that("default", {
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/report/default.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp          = expected_outcome_message,
-    returned_object <- redcap_report(
+  returned_object <-
+    redcap_report(
       redcap_uri    = credential$redcap_uri,
       token         = credential$token,
-      report_id     = report_id
+      report_id     = report_id,
+      verbose       = FALSE
     )
-  )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -53,16 +52,14 @@ test_that("col_types", {
     ethnicity          = readr::col_integer()
   )
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <-
-        REDCapR::redcap_report(
-          redcap_uri = credential$redcap_uri,
-          token      = credential$token,
-          report_id  = report_id,
-          col_types  = col_types
-        )
-  )
+  returned_object <-
+    REDCapR::redcap_report(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      report_id   = report_id,
+      col_types   = col_types,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -80,16 +77,14 @@ test_that("force-character-type", {
   path_expected <- "test-data/specific-redcapr/report/force-character-type.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <-
-      redcap_report(
-        redcap_uri  = credential$redcap_uri,
-        token       = credential$token,
-        report_id   = report_id,
-        guess_type  = FALSE
-      )
-  )
+  returned_object <-
+    redcap_report(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      report_id   = report_id,
+      guess_type  = FALSE,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -107,16 +102,14 @@ test_that("raw", {
   path_expected <- "test-data/specific-redcapr/report/raw.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <-
-      redcap_report(
-        redcap_uri    = credential$redcap_uri,
-        token         = credential$token,
-        report_id     = report_id,
-        raw_or_label  = "raw"
-      )
-  )
+  returned_object <-
+    redcap_report(
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token,
+      report_id     = report_id,
+      raw_or_label  = "raw",
+      verbose       = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -134,17 +127,15 @@ test_that("export_checkbox_label", {
   path_expected <- "test-data/specific-redcapr/report/export_checkbox_label.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <-
-      redcap_report(
-        redcap_uri            = credential$redcap_uri,
-        token                 = credential$token,
-        report_id             = report_id,
-        export_checkbox_label = TRUE,
-        raw_or_label          = "label"
-      )
-  )
+  returned_object <-
+    redcap_report(
+      redcap_uri            = credential$redcap_uri,
+      token                 = credential$token,
+      report_id             = report_id,
+      export_checkbox_label = TRUE,
+      raw_or_label          = "label",
+      verbose               = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)

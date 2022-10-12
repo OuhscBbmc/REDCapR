@@ -30,6 +30,7 @@ gp
 
 devtools::document()
 pkgdown::clean_site()
+# pkgdown::build_articles() # preview the vignettes
 pkgdown::build_site(run_dont_run = TRUE)
 # system("R CMD Rd2pdf --no-preview --force --output=./documentation-peek.pdf ." )
 

@@ -33,7 +33,7 @@ test_that("Metadata Write", {
   testthat::expect_equal(returned_object$field_count, 16L)
   testthat::expect_equal(returned_object$raw_text, "")
 })
-test_that("Metadata Writen -Error", {
+test_that("Metadata Write -Error", {
   testthat::skip_on_cran()
 
   testthat::expect_message(

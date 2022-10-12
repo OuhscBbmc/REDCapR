@@ -3,15 +3,15 @@ library(testthat)
 credential_1        <- retrieve_credential_testing()
 credential_no_dag   <- retrieve_credential_testing(2597L)
 
-
 test_that("smoke", {
   testthat::skip_on_cran()
-  expect_message(
-    returned <- redcap_dag_read(
+  returned <-
+    redcap_dag_read(
       redcap_uri  = credential_1$redcap_uri,
-      token       = credential_1$token
+      token       = credential_1$token,
+      verbose     = FALSE
     )
-  )
+  expect_type(returned, "list")
 })
 
 test_that("dag-default", {
@@ -26,12 +26,12 @@ test_that("dag-default", {
       "collector")), delim = ","), class = "col_spec"), class = c("spec_tbl_df",
       "tbl_df", "tbl", "data.frame")
     )
-  expect_message(
-    actual <- redcap_dag_read(
+  actual <-
+    redcap_dag_read(
       redcap_uri  = credential_1$redcap_uri,
-      token       = credential_1$token
+      token       = credential_1$token,
+      verbose     = FALSE
     )
-  )
 
   expect_true( actual$success)
   expect_equal(actual$status_code, 200L)
@@ -51,12 +51,12 @@ test_that("dag-default", {
       "tbl_df", "tbl", "data.frame")
     )
 
-  expect_message(
-    actual <- redcap_dag_read(
+  actual <-
+    redcap_dag_read(
       redcap_uri  = credential_no_dag$redcap_uri,
-      token       = credential_no_dag$token
+      token       = credential_no_dag$token,
+      verbose     = FALSE
     )
-  )
 
   expect_true( actual$success)
   expect_equal(actual$status_code, 200L)

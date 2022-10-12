@@ -1,6 +1,6 @@
 # These functions are not exported.
 
-populate_project_dag_write <- function(batch = FALSE) {
+populate_project_dag_write <- function(batch = FALSE, verbose = FALSE) {
   checkmate::assert_logical(batch, any.missing = FALSE, len = 1)
 
   if (!requireNamespace("testthat")) {
@@ -51,7 +51,7 @@ populate_project_dag_write <- function(batch = FALSE) {
         ds                          = ds_to_write,
         redcap_uri                  = project$redcap_uri,
         token                       = project$token,
-        verbose                     = TRUE,
+        verbose                     = verbose,
         convert_logical_to_integer  = TRUE
       )
     } else {
@@ -59,7 +59,7 @@ populate_project_dag_write <- function(batch = FALSE) {
         ds                          = ds_to_write,
         redcap_uri                  = project$redcap_uri,
         token                       = project$token,
-        verbose                     = TRUE,
+        verbose                     = verbose,
         convert_logical_to_integer  = TRUE
       )
     }
@@ -74,14 +74,16 @@ populate_project_dag_write <- function(batch = FALSE) {
   # }
 
   # Print a message and return a boolean value
-  base::message(base::sprintf(
-    "populate_project_dag_write success: %s.",
-    returned_object$success
-  ))
+  if (verbose) {
+    base::message(base::sprintf(
+      "populate_project_dag_write success: %s.",
+      returned_object$success
+    ))
+  }
   list(is_success = returned_object$success, redcap_project = project)
 }
 
-clear_project_dag_write <- function(verbose = TRUE) {
+clear_project_dag_write <- function(verbose = FALSE) {
   if (!requireNamespace("testthat")) {
     # nocov start
     stop(
@@ -107,7 +109,11 @@ clear_project_dag_write <- function(verbose = TRUE) {
   was_successful
 }
 
-clean_start_dag_write <- function(batch = FALSE, delay_in_seconds = 1) {
+clean_start_dag_write <- function(
+  batch             = FALSE,
+  delay_in_seconds  = 1,
+  verbose           = FALSE
+) {
   checkmate::assert_logical(batch           , any.missing=FALSE, len=1)
   checkmate::assert_numeric(delay_in_seconds, any.missing=FALSE, len=1, lower=0)
 
@@ -119,17 +125,17 @@ clean_start_dag_write <- function(batch = FALSE, delay_in_seconds = 1) {
     )
     # nocov end
   }
-  testthat::expect_message(
-    clear_result <- clear_project_dag_write(),
-    regexp = "clear_project_dag_write success: TRUE."
-  )
+  # testthat::expect_message(
+  clear_result <- clear_project_dag_write(verbose = verbose)
+  #   regexp = "clear_project_dag_write success: TRUE."
+  # )
   testthat::expect_true(clear_result, "Clearing the results from the dag_write project should be successful.")
   base::Sys.sleep(delay_in_seconds) # Pause after deleting records.
 
-  testthat::expect_message(
-    populate_result <- populate_project_dag_write(batch = batch),
-    regexp = "populate_project_dag_write success: TRUE."
-  )
+  # testthat::expect_message(
+  populate_result <- populate_project_dag_write(batch = batch, verbose = FALSE)
+  #   regexp = "populate_project_dag_write success: TRUE."
+  # )
   testthat::expect_true(populate_result$is_success, "Population of the dag_write project should be successful.")
   base::Sys.sleep(delay_in_seconds) # Pause after writing records.
 

@@ -6,7 +6,11 @@ update_expectation  <- FALSE
 test_that("Smoke Test", {
   testthat::skip_on_cran()
   expect_message(
-    returned_object <- redcap_event_instruments(redcap_uri=credential$redcap_uri, token=credential$token)
+    returned_object <-
+      redcap_event_instruments(
+        redcap_uri  = credential$redcap_uri,
+        token       = credential$token
+      )
   )
 })
 
@@ -15,10 +19,12 @@ test_that("default", {
   path_expected <- "test-data/specific-redcapr/event-instruments/default.R"
   expected_outcome_message <- "\\d+ event instrument metadata records were read from REDCap in \\d\\.\\d seconds\\.  The http status code was 200\\.(\\n)?"
 
-  expect_message(
-    returned_object <- redcap_event_instruments(redcap_uri=credential$redcap_uri, token=credential$token),
-    regexp = expected_outcome_message
-  )
+  returned_object <-
+    redcap_event_instruments(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -44,26 +50,22 @@ test_that("Bad URI", {
   expect_error(
     returned_object <- redcap_event_instruments(
       redcap_uri  = bad_uri,
-      token       = credential$token
-    )#,
-    # regexp = expected_outcome_message
+      token       = credential$token,
+      verbose     = FALSE
+    )
   )
-
-
 })
 
 test_that("bad token -Error", {
   testthat::skip_on_cran()
   expected_outcome_message <- "ERROR: You do not have permissions to use the API"
 
-  testthat::expect_message(
-    returned_object <-
-      redcap_event_instruments(
-        redcap_uri  = credential$redcap_uri,
-        token       = "BAD00000000000000000000000000000"
-      ),
-    expected_outcome_message
-  )
+  returned_object <-
+    redcap_event_instruments(
+      redcap_uri  = credential$redcap_uri,
+      token       = "BAD00000000000000000000000000000",
+      verbose     = FALSE
+    )
 
   testthat::expect_false(returned_object$success)
   testthat::expect_equal(returned_object$status_code, 403L)

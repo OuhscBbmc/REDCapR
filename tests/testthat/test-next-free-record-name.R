@@ -4,15 +4,24 @@ credential  <- retrieve_credential_testing()
 
 test_that("Smoke Test", {
   testthat::skip_on_cran()
-  expect_message(
-    returned <- redcap_next_free_record_name(redcap_uri=credential$redcap_uri, token=credential$token)
-  )
+  returned <-
+    redcap_next_free_record_name(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )
+  expect_type(returned, "character")
 })
 
 test_that("Numeric ID", {
   testthat::skip_on_cran()
   expected <- "6"
-  observed <- redcap_next_free_record_name(redcap_uri=credential$redcap_uri, token=credential$token)
+  observed <-
+    redcap_next_free_record_name(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )
 
   expect_equal(observed, expected)
 })
@@ -23,10 +32,12 @@ test_that("Arm", {
   credential_arm  <- retrieve_credential_testing(212L)
 
   expected <- "305"
-  observed <- redcap_next_free_record_name(
-    redcap_uri        = credential_arm$redcap_uri,
-    token             = credential_arm$token
-  )
+  observed <-
+    redcap_next_free_record_name(
+      redcap_uri  = credential_arm$redcap_uri,
+      token       = credential_arm$token,
+      verbose     = FALSE
+    )
 
   expect_equal(observed, expected)
 })
@@ -37,10 +48,12 @@ test_that("Character ID", {
   credential_character <- retrieve_credential_testing(998L)
 
   expected <- "1"
-  observed <- redcap_next_free_record_name(
-    redcap_uri        = credential_character$redcap_uri,
-    token             = credential_character$token
-  )
+  observed <-
+    redcap_next_free_record_name(
+      redcap_uri  = credential_character$redcap_uri,
+      token       = credential_character$token,
+      verbose     = FALSE
+    )
 
   expect_equal(observed, expected)
 })
@@ -51,10 +64,12 @@ test_that("DAG", {
   credential_dag <- retrieve_credential_testing(999L)
 
   expected <- "331-3"
-  observed <- redcap_next_free_record_name(
-    redcap_uri        = credential_dag$redcap_uri,
-    token             = credential_dag$token
-  )
+  observed <-
+    redcap_next_free_record_name(
+      redcap_uri  = credential_dag$redcap_uri,
+      token       = credential_dag$token,
+      verbose     = FALSE
+    )
 
   expect_equal(observed, expected)
 })

@@ -10,16 +10,14 @@ test_that("simple", {
   desired_forms <- c("race_and_ethnicity") # Doesn't include the initial "demographics" form.
   expected_outcome_message <- "\\d+ records and 10 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object <-
-      redcap_read(
-        batch_size  = 2,
-        redcap_uri  = credential$redcap_uri,
-        token       = credential$token,
-        forms       = desired_forms
-      )
-  )
+  returned_object <-
+    redcap_read(
+      batch_size  = 2,
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      forms       = desired_forms,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -40,16 +38,14 @@ test_that("longitudinal", {
   desired_forms <- c("visit_observed_behavior") # Doesn't include the initial "demographics" form.
   expected_outcome_message <- "\\d+ records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object <-
-      redcap_read(
-        batch_size  = 2,
-        redcap_uri  = credential$redcap_uri,
-        token       = credential$token,
-        forms       = desired_forms
-      )
-  )
+  returned_object <-
+    redcap_read(
+      batch_size  = 2,
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      forms       = desired_forms,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -70,16 +66,14 @@ test_that("repeated", {
   desired_forms <- c("visit_observed_behavior") # Doesn't include the initial "demographics" form.
   expected_outcome_message <- "\\d+ records and 13 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object <-
-      redcap_read(
-        batch_size  = 2,
-        redcap_uri  = credential$redcap_uri,
-        token       = credential$token,
-        forms       = desired_forms
-      )
-  )
+  returned_object <-
+    redcap_read(
+      batch_size  = 2,
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      forms       = desired_forms,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)

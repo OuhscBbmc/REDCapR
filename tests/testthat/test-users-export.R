@@ -6,10 +6,22 @@ update_expectation  <- FALSE
 
 test_that("smoke test", {
   testthat::skip_on_cran()
-  expect_message({
-    returned_object_1 <- redcap_users_export(redcap_uri=credential_1$redcap_uri, token=credential_1$token)
-    returned_object_2 <- redcap_users_export(redcap_uri=credential_2$redcap_uri, token=credential_2$token)
-  })
+
+  returned_object_1 <-
+    redcap_users_export(
+      redcap_uri  = credential_1$redcap_uri,
+      token       = credential_1$token,
+      verbose     = FALSE
+    )
+  expect_type(returned_object_1, "list")
+
+  returned_object_2 <-
+    redcap_users_export(
+      redcap_uri  = credential_2$redcap_uri,
+      token       = credential_2$token,
+      verbose     = FALSE
+    )
+  expect_type(returned_object_2, "list")
 })
 
 test_that("with-dags", {
@@ -18,10 +30,12 @@ test_that("with-dags", {
   path_expected_user_form   <- "test-data/specific-redcapr/users-export/with-dags--user_form.R"
   expected_outcome_message  <- "The REDCap users were successfully exported in \\d+(\\.\\d+\\W|\\W)seconds\\.  The http status code was 200\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_users_export(redcap_uri=credential_1$redcap_uri, token=credential_1$token)
-  )
+  returned_object <-
+    redcap_users_export(
+      redcap_uri  = credential_1$redcap_uri,
+      token       = credential_1$token,
+      verbose     = FALSE
+    )
 
   if (update_expectation) {
     save_expected(returned_object$data_user     , path_expected_user     )
@@ -46,10 +60,12 @@ test_that("without DAGs", {
   path_expected_user_form   <- "test-data/specific-redcapr/users-export/without-dags--user_form.R"
   expected_outcome_message  <- "The REDCap users were successfully exported in \\d+(\\.\\d+\\W|\\W)seconds\\.  The http status code was 200\\."
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_users_export(redcap_uri=credential_2$redcap_uri, token=credential_2$token)
-  )
+  returned_object <-
+    redcap_users_export(
+      redcap_uri  = credential_2$redcap_uri,
+      token       = credential_2$token,
+      verbose     = FALSE
+    )
 
   if (update_expectation) {
     save_expected(returned_object$data_user     , path_expected_user     )

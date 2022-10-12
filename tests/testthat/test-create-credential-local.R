@@ -34,5 +34,4 @@ test_that("overwrite-fail", {
     regexp = expected_message,
     create_credential_local(path_demo)
   )
-
 })

@@ -9,9 +9,13 @@ update_expectation    <- FALSE
 
 test_that("Metadata Read Smoke Test", {
   testthat::skip_on_cran()
-  expect_message(
-    returned_object <- redcap_metadata_read(redcap_uri=credential$redcap_uri, token=credential$token)
-  )
+  returned_object <-
+    redcap_metadata_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )
+  expect_type(returned_object, "list")
 })
 
 
@@ -22,10 +26,12 @@ test_that("Super-wide", {
   expected_column_count <- 18L
   expected_na_cells     <- 42014L
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_metadata_read(redcap_uri=credential_super_wide$redcap_uri, token=credential_super_wide$token)
-  )
+  returned_object <-
+    redcap_metadata_read(
+      redcap_uri  = credential_super_wide$redcap_uri,
+      token       = credential_super_wide$token,
+      verbose     = FALSE
+    )
 
   expect_equal(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
   expect_equal(ncol(returned_object$data), expected=expected_column_count)
@@ -40,10 +46,12 @@ test_that("Super-wide 2", {
   expected_column_count <- 18L
   expected_na_cells     <- 63511L
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_metadata_read(redcap_uri=credential_super_wide_2$redcap_uri, token=credential_super_wide_2$token)
-  )
+  returned_object <-
+    redcap_metadata_read(
+      redcap_uri  = credential_super_wide_2$redcap_uri,
+      token       = credential_super_wide_2$token,
+      verbose     = FALSE
+    )
 
   expect_equal(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
   expect_equal(ncol(returned_object$data), expected=expected_column_count)
@@ -58,10 +66,12 @@ test_that("Super-wide 3", {
   expected_column_count <- 18L
   expected_na_cells     <- 397297L
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_metadata_read(redcap_uri=credential_super_wide_3$redcap_uri, token=credential_super_wide_3$token)
-  )
+  returned_object <-
+    redcap_metadata_read(
+      redcap_uri  = credential_super_wide_3$redcap_uri,
+      token       = credential_super_wide_3$token,
+      verbose     = FALSE
+    )
 
   expect_equal(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
   expect_equal(ncol(returned_object$data), expected=expected_column_count)
@@ -76,10 +86,12 @@ test_that("Problematic Dictionary", {
   expected_column_count <- 18L
   expected_na_cells     <- 76L
 
-  expect_message(
-    regexp           = expected_outcome_message,
-    returned_object <- redcap_metadata_read(redcap_uri=credential_problem$redcap_uri, token=credential_problem$token)
-  )
+  returned_object <-
+    redcap_metadata_read(
+      redcap_uri  = credential_problem$redcap_uri,
+      token       = credential_problem$token,
+      verbose     = FALSE
+    )
 
   expect_equal(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
   expect_equal(ncol(returned_object$data), expected=expected_column_count)
@@ -92,10 +104,12 @@ test_that("normal", {
   path_expected <- "test-data/specific-redcapr/metadata-read/normal.R"
   expected_outcome_message <- "The data dictionary describing \\d+ fields was read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\.  The http status code was 200."
 
-  expect_message(
-    returned_object <- redcap_metadata_read(redcap_uri=credential$redcap_uri, token=credential$token),
-    regexp = expected_outcome_message
-  )
+  returned_object <-
+    redcap_metadata_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)

@@ -7,27 +7,28 @@ instrument   <- "participant_morale_questionnaire"
 test_that("Smoke Test", {
   testthat::skip_on_cran()
 
-  expect_message(
+  returned_object <-
     REDCapR::redcap_survey_link_export_oneshot(
       record         = record,
       instrument     = instrument,
       redcap_uri     = credential$redcap_uri,
-      token          = credential$token
+      token          = credential$token,
+      verbose        = FALSE
     )
-  )
+  expect_type(returned_object, "list")
 })
 
 test_that("Vanilla", {
   testthat::skip_on_cran()
 
-  expect_message(
-    result <- REDCapR::redcap_survey_link_export_oneshot(
+  result <-
+    REDCapR::redcap_survey_link_export_oneshot(
       record         = record,
       instrument     = instrument,
       redcap_uri     = credential$redcap_uri,
-      token          = credential$token
+      token          = credential$token,
+      verbose        = FALSE
     )
-  )
 
   expect_equal(result$survey_link, "https://bbmc.ouhsc.edu/redcap/surveys/?s=8KuzSLMHf6")
   expect_true(result$success)
@@ -42,14 +43,14 @@ test_that("Nonexistent Record ID", {
 
   record_bad <- -1
 
-  expect_message(
-    result <- REDCapR::redcap_survey_link_export_oneshot(
+  result <-
+    REDCapR::redcap_survey_link_export_oneshot(
       record         = record_bad,
       instrument     = instrument,
       redcap_uri     = credential$redcap_uri,
-      token          = credential$token
+      token          = credential$token,
+      verbose        = FALSE
     )
-  )
 
   expect_equal(result$survey_link, character(0))
   expect_false(result$success)

@@ -36,6 +36,7 @@ password for a project.  Required.}
   export_survey_fields = FALSE,
   export_data_access_groups = FALSE,
   filter_logic = "",
+  col_types = NULL,
   guess_type = TRUE,
   guess_max = 1000,
   verbose = TRUE,
