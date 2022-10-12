@@ -8,20 +8,31 @@ test_that("smoke", {
   testthat::skip_on_cran()
 
   #Static method w/ default batch size
-  expect_message(
-    returned_object <- redcap_read(
-      redcap_uri=credential$redcap_uri, token=credential$token, export_survey_fields=TRUE
+  returned_object <-
+    redcap_read(
+      redcap_uri           = credential$redcap_uri,
+      token                = credential$token,
+      export_survey_fields = TRUE,
+      verbose              = FALSE
     )
-  )
+  expect_type(returned_object, "list")
+
   #Instance method w/ default batch size
-  expect_message(
-    returned_object <- project$read(export_survey_fields=TRUE)
-  )
+  returned_object <-
+    project$read(
+      export_survey_fields  = TRUE,
+      verbose               = FALSE
+    )
+  expect_type(returned_object, "list")
 
   #Instance method w/ tiny batch size
-  expect_message(
-    returned_object <- project$read(batch_size=2, export_survey_fields=TRUE)
-  )
+  returned_object <-
+    project$read(
+      batch_size            = 2,
+      export_survey_fields  = TRUE,
+      verbose               = FALSE
+    )
+  expect_type(returned_object, "list")
 })
 
 test_that("so-example-data-frame-retrieval", {
@@ -43,10 +54,13 @@ test_that("default", {
 
   ###########################
   ## Default Batch size
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object1 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, export_survey_fields=TRUE)
-  )
+  returned_object1 <-
+    redcap_read(
+      redcap_uri            = credential$redcap_uri,
+      token                 = credential$token,
+      export_survey_fields  = TRUE,
+      verbose               = FALSE
+    )
 
   if (update_expectation) save_expected(returned_object1$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
@@ -63,10 +77,14 @@ test_that("default", {
 
   ###########################
   ## Tiny Batch size
-  expect_message(
-    regexp            = expected_outcome_message,
-    returned_object2 <- redcap_read(redcap_uri=credential$redcap_uri, token=credential$token, export_survey_fields=TRUE, batch_size=8)
-  )
+  returned_object2 <-
+    redcap_read(
+      redcap_uri            = credential$redcap_uri,
+      token                 = credential$token,
+      export_survey_fields  = TRUE,
+      batch_size            = 8,
+      verbose               = FALSE
+    )
 
   expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
   expect_true(all(!is.na(returned_object1$data$prescreening_survey_timestamp)))
