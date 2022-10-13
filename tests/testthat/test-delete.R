@@ -6,19 +6,21 @@ test_that("single-arm-four-records", {
   skip_if_onlyread()
 
   path_expected <- "test-data/specific-redcapr/delete/single-arm-four-records.R"
-  start_clean_result <- REDCapR:::clean_start_delete_single_arm()
+  start_clean_result <- REDCapR:::clean_start_delete_single_arm(verbose = F)
   project <- start_clean_result$redcap_project
 
   records_to_delete <- c(102, 103, 105, 120)
 
   expected_outcome_message <- "\\d+ records were deleted from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
-  returned_object1 <-
-    redcap_delete(
-      redcap_uri        = project$redcap_uri,
-      token             = project$token,
-      records_to_delete = records_to_delete,
-      verbose           = FALSE
-    )
+  expect_message({
+    returned_object1 <-
+      redcap_delete(
+        redcap_uri        = project$redcap_uri,
+        token             = project$token,
+        records_to_delete = records_to_delete,
+        verbose           = TRUE
+      )
+  })
 
   expect_equal(returned_object1$status_code, expected=200L)
   expect_equal(returned_object1$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
