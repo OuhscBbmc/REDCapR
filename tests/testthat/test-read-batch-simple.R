@@ -9,22 +9,26 @@ test_that("smoke test", {
   testthat::skip_on_cran()
 
   #Static method w/ default batch size
-  returned_object <-
-    redcap_read(
-      redcap_uri  = credential$redcap_uri,
-      token       = credential$token,
-      verbose     = FALSE
-    )
+  suppressMessages({
+    returned_object <-
+      redcap_read(
+        redcap_uri  = credential$redcap_uri,
+        token       = credential$token,
+        verbose     = TRUE
+      )
+  })
   expect_type(returned_object, "list")
 
   #Static method w/ tiny batch size
-  returned_object <-
-    redcap_read(
-      redcap_uri  = credential$redcap_uri,
-      token       = credential$token,
-      batch_size  = 2,
-      verbose     = FALSE
-    )
+  suppressMessages({
+    returned_object <-
+      redcap_read(
+        redcap_uri  = credential$redcap_uri,
+        token       = credential$token,
+        batch_size  = 2,
+        verbose     = FALSE
+      )
+  })
   expect_type(returned_object, "list")
 
   #Instance method w/ default batch size
