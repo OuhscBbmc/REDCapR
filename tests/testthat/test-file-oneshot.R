@@ -5,6 +5,7 @@ delay_after_download_file <- 1.0 # In seconds
 
 test_that("NameComesFromREDCap", {
   testthat::skip_on_cran()
+  on.exit(base::unlink(returned_object$file_name))
 
   # start_time <- Sys.time() - lubridate::seconds(1) #Knock off a second in case there's small time imprecisions
   start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
@@ -15,24 +16,21 @@ test_that("NameComesFromREDCap", {
 
   expected_outcome_message <- '^(Preparing to download the file `mugshot-1.jpg`\\.|.+; name="mugshot-1\\.jpg" successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as mugshot-1.jpg)'
 
-  expected_outcome_message <- ".+"
-  tryCatch({
-    capture_messages(
-      returned_object <- redcap_file_download_oneshot(
+  # expected_outcome_message <- ".+"
+  suppressMessages({
+    returned_object <-
+      redcap_file_download_oneshot(
         record        = record,
         field         = field,
         redcap_uri    = credential$redcap_uri,
         token         = credential$token,
-        verbose       = FALSE
-      )#,
-      # regexp = NA #expected_outcome_message
-    )
-    Sys.sleep(delay_after_download_file)
+        verbose       = TRUE
+      )
+  })
 
-    info_actual <- file.info(returned_object$file_name)
-    expect_true(file.exists(returned_object$file_name), "The downloaded file should exist.")
-    }, finally = base::unlink(returned_object$file_name)
-  )
+  Sys.sleep(delay_after_download_file)
+  info_actual <- file.info(returned_object$file_name)
+  expect_true(file.exists(returned_object$file_name), "The downloaded file should exist.")
 
   #Test the values of the returned object.
   expect_true(returned_object$success)
@@ -55,6 +53,7 @@ test_that("NameComesFromREDCap", {
 
 test_that("FullPathSpecified", {
   testthat::skip_on_cran()
+  on.exit(base::unlink(returned_object$file_name))
 
   start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
   path_of_expected <- system.file("test-data/mugshot-2.jpg", package="REDCapR")
@@ -65,7 +64,7 @@ test_that("FullPathSpecified", {
   expected_outcome_message <- '; name="mugshot-2\\.jpg" successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as .+\\.jpg'
 
   full_name <- base::tempfile(pattern="mugshot", fileext=".jpg")
-  tryCatch({
+  suppressMessages({
     returned_object <-
       redcap_file_download_oneshot(
         file_name     = full_name,
@@ -73,14 +72,13 @@ test_that("FullPathSpecified", {
         field         = field,
         redcap_uri    = credential$redcap_uri,
         token         = credential$token,
-        verbose       = FALSE
+        verbose       = TRUE
       )
-    Sys.sleep(delay_after_download_file)
+  })
 
-    info_actual <- file.info(full_name)
-    expect_true(file.exists(full_name), "The downloaded file should exist.")
-  }, finally = base::unlink(full_name)
-  )
+  Sys.sleep(delay_after_download_file)
+  info_actual <- file.info(full_name)
+  expect_true(file.exists(full_name), "The downloaded file should exist.")
 
   #Test the values of the returned object.
   expect_true(returned_object$success)
@@ -103,6 +101,7 @@ test_that("FullPathSpecified", {
 
 test_that("RelativePath", {
   testthat::skip_on_cran()
+  on.exit(base::unlink(returned_object$file_name))
 
   start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
   path_of_expected <- system.file("test-data/mugshot-3.jpg", package="REDCapR")
@@ -113,7 +112,7 @@ test_that("RelativePath", {
   expected_outcome_message <- '; name="mugshot-3\\.jpg" successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as .+\\.jpg'
 
   (relative_name <- "ssss.jpg")
-  tryCatch({
+  suppressMessages({
     returned_object <-
       redcap_file_download_oneshot(
         file_name   = relative_name,
@@ -121,14 +120,13 @@ test_that("RelativePath", {
         field       = field,
         redcap_uri  = credential$redcap_uri,
         token       = credential$token,
-        verbose     = FALSE
+        verbose     = TRUE
       )
-    Sys.sleep(delay_after_download_file)
+  })
 
-    info_actual <- file.info(relative_name)
-    expect_true(file.exists(relative_name), "The downloaded file should exist.")
-  }, finally = base::unlink(relative_name)
-  )
+  Sys.sleep(delay_after_download_file)
+  info_actual <- file.info(relative_name)
+  expect_true(file.exists(relative_name), "The downloaded file should exist.")
 
   #Test the values of the returned object.
   expect_true(returned_object$success)
@@ -151,6 +149,7 @@ test_that("RelativePath", {
 
 test_that("Full Directory Specific", {
   testthat::skip_on_cran()
+  on.exit(base::unlink(returned_object$file_name))
 
   start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
   path_of_expected <- system.file("test-data/mugshot-3.jpg", package="REDCapR")
@@ -161,7 +160,7 @@ test_that("Full Directory Specific", {
 
   expected_outcome_message <- '; name="mugshot-3\\.jpg" successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as .+\\.jpg'
 
-  tryCatch({
+  suppressMessages({
     returned_object <-
       redcap_file_download_oneshot(
         directory   = directory,
@@ -169,14 +168,13 @@ test_that("Full Directory Specific", {
         field       = field,
         redcap_uri  = credential$redcap_uri,
         token       = credential$token,
-        verbose     = FALSE
+        verbose     = TRUE
       )
-    Sys.sleep(delay_after_download_file)
+  })
 
-    info_actual <- file.info(returned_object$file_name)
-    expect_true(file.exists(returned_object$file_name), "The downloaded file should exist.")
-  }, finally = base::unlink(returned_object$file_path)
-  )
+  Sys.sleep(delay_after_download_file)
+  info_actual <- file.info(returned_object$file_name)
+  expect_true(file.exists(returned_object$file_name), "The downloaded file should exist.")
 
   #Test the values of the returned object.
   expect_true(returned_object$success)
@@ -199,6 +197,7 @@ test_that("Full Directory Specific", {
 
 test_that("download file conflict -Error", {
   testthat::skip_on_cran()
+  on.exit(base::unlink(returned_object_1$file_name))
 
   record <- 2
   field <- "mugshot"
@@ -206,45 +205,42 @@ test_that("download file conflict -Error", {
   expected_outcome_message_1  <- '; name="mugshot-2\\.jpg" successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as mugshot-2.jpg'
   expected_outcome_message_2  <- "The operation was halted because the file `mugshot-2\\.jpg` already exists and `overwrite` is FALSE\\.  Please check the directory if you believe this is a mistake\\."
 
-  tryCatch({
-    # The first run should work.
-    returned_object_1 <-
+  # The first run should work.
+  returned_object_1 <-
+    redcap_file_download_oneshot(
+      record        = record,
+      field         = field,
+      redcap_uri    = credential$redcap_uri,
+      token         = credential$token,
+      verbose       = FALSE
+    )
+
+  Sys.sleep(delay_after_download_file)
+  #Test the values of the returned object.
+  expect_true(returned_object_1$success)
+  expect_equal(returned_object_1$status_code, expected=200L)
+
+  # The second run should fail (b/c the file already exists).
+  expect_error(
+    returned_object_2 <-
       redcap_file_download_oneshot(
         record        = record,
         field         = field,
         redcap_uri    = credential$redcap_uri,
         token         = credential$token,
+        overwrite     = FALSE,
         verbose       = FALSE
-      )
-    Sys.sleep(delay_after_download_file)
-
-    #Test the values of the returned object.
-    expect_true(returned_object_1$success)
-    expect_equal(returned_object_1$status_code, expected=200L)
-
-    # The second run should fail (b/c the file already exists).
-    expect_error(
-      returned_object_2 <-
-        redcap_file_download_oneshot(
-          record        = record,
-          field         = field,
-          redcap_uri    = credential$redcap_uri,
-          token         = credential$token,
-          overwrite     = FALSE,
-          verbose       = FALSE
-        ),
-      regexp = expected_outcome_message_2
-    )
-    Sys.sleep(delay_after_download_file)
-
-    expect_false(exists("returned_object_2"))
-
-  }, finally = base::unlink(returned_object_1$file_name)
+      ),
+    regexp = expected_outcome_message_2
   )
+  Sys.sleep(delay_after_download_file)
+
+  expect_false(exists("returned_object_2"))
 })
 
 test_that("Download Error --bad field name", {
   testthat::skip_on_cran()
+  on.exit(base::unlink(returned_object$file_name))
 
   start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
   path_of_expected <- system.file("test-data/mugshot-3.jpg", package="REDCapR")
@@ -256,7 +252,7 @@ test_that("Download Error --bad field name", {
   expected_outcome_message <- "file NOT downloaded"
   expected_raw_text        <- "ERROR: The field 'mugshotttttt' does not exist or is not a 'file' field"
 
-  tryCatch({
+  suppressMessages({
     returned_object <-
       redcap_file_download_oneshot(
         directory     = directory,
@@ -266,11 +262,10 @@ test_that("Download Error --bad field name", {
         token         = credential$token,
         verbose       = FALSE
       )
-    Sys.sleep(delay_after_download_file)
+  })
 
-    expect_null(returned_object$file_name)
-  }, finally = base::unlink(returned_object$file_path)
-  )
+  Sys.sleep(delay_after_download_file)
+  expect_null(returned_object$file_name)
 
   #Test the values of the returned object.
   expect_false(returned_object$success)

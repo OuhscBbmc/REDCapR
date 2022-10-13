@@ -10,11 +10,13 @@ test_that("Smoke Test", {
   testthat::skip_on_cran()
   skip_if_onlyread()
 
-  start_clean_result <-
-    REDCapR:::clean_start_dag_write(
-      batch   = FALSE,
-      verbose = FALSE
-    )
+  expect_message({
+    start_clean_result <-
+      REDCapR:::clean_start_dag_write(
+        batch   = FALSE,
+        verbose = TRUE
+      )
+  })
   project <- start_clean_result$redcap_project
 
   expect_type(start_clean_result, "list")

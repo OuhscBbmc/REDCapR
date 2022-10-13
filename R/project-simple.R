@@ -130,7 +130,7 @@ clean_start_simple <- function(batch = FALSE, delay_in_seconds = 1, verbose = FA
   populate_result
 }
 
-upload_file_simple <- function(redcap_uri, token = token, verbose = TRUE) {
+upload_file_simple <- function(redcap_uri, token = token, verbose = FALSE) {
   checkmate::assert_character(redcap_uri, any.missing=FALSE, len=1, min.chars = 5)
   checkmate::assert_character(token     , any.missing=FALSE, len=1, pattern="^\\w{32}$")
 

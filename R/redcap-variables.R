@@ -94,9 +94,17 @@ redcap_variables <- function(
 
   if (!kernel$success) {
     if (is.null(kernel$raw_text)) {
-      rlang::abort(message = "REDCapR::redcap_variables() encountered an error communicating with the server.")
+      # nocov start
+      rlang::abort(
+        message = "REDCapR::redcap_variables() encountered an error communicating with the server."
+      )
+      # nocov end
     } else {
-      rlang::abort(message = kernel$raw_text)
+      # nocov start
+      rlang::abort(
+        message = kernel$raw_text
+      )
+      # nocov end
     }
   } else {
     try(
