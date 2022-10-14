@@ -5,12 +5,14 @@ credential_no_dag   <- retrieve_credential_testing(2597L)
 
 test_that("smoke", {
   testthat::skip_on_cran()
-  returned <-
-    redcap_dag_read(
-      redcap_uri  = credential_1$redcap_uri,
-      token       = credential_1$token,
-      verbose     = FALSE
-    )
+  expect_message({
+    returned <-
+      redcap_dag_read(
+        redcap_uri  = credential_1$redcap_uri,
+        token       = credential_1$token,
+        verbose     = TRUE
+      )
+  })
   expect_type(returned, "list")
 })
 

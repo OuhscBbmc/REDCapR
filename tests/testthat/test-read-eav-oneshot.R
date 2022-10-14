@@ -6,12 +6,14 @@ path_expected_default <- "test-data/specific-redcapr/read-eav-oneshot/default.R"
 
 test_that("smoke test", {
   testthat::skip_on_cran()
-  returned_object <-
-    REDCapR:::redcap_read_eav_oneshot(
-      redcap_uri    = credential$redcap_uri,
-      token         = credential$token,
-      verbose       = FALSE
-    )
+  expect_message({
+    returned_object <-
+      REDCapR:::redcap_read_eav_oneshot(
+        redcap_uri    = credential$redcap_uri,
+        token         = credential$token,
+        verbose       = TRUE
+      )
+  })
   expect_type(returned_object, "list")
 })
 test_that("default", {

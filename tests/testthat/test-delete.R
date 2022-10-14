@@ -6,7 +6,12 @@ test_that("single-arm-four-records", {
   skip_if_onlyread()
 
   path_expected <- "test-data/specific-redcapr/delete/single-arm-four-records.R"
-  start_clean_result <- REDCapR:::clean_start_delete_single_arm(verbose = F)
+  suppressMessages({
+    start_clean_result <-
+      REDCapR:::clean_start_delete_single_arm(
+        verbose = TRUE
+      )
+  })
   project <- start_clean_result$redcap_project
 
   records_to_delete <- c(102, 103, 105, 120)
@@ -53,7 +58,12 @@ test_that("multiple-arm-four-records", {
   skip_if_onlyread()
 
   path_expected <- "test-data/specific-redcapr/delete/multiple-arm-four-records.R"
-  start_clean_result <- REDCapR:::clean_start_delete_multiple_arm()
+  suppressMessages({
+    start_clean_result <-
+      REDCapR:::clean_start_delete_multiple_arm(
+        verbose = TRUE
+      )
+  })
   project <- start_clean_result$redcap_project
 
   arm <- 2L

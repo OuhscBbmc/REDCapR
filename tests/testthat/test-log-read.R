@@ -5,12 +5,14 @@ update_expectation  <- FALSE
 
 test_that("smoke test", {
   testthat::skip_on_cran()
-  returned <-
-    redcap_log_read(
-      redcap_uri    = credential$redcap_uri,
-      token         = credential$token,
-      verbose       = FALSE
-    )
+  expect_message({
+    returned <-
+      redcap_log_read(
+        redcap_uri    = credential$redcap_uri,
+        token         = credential$token,
+        verbose       = TRUE
+      )
+  })
   expect_type(returned, "list")
 })
 
