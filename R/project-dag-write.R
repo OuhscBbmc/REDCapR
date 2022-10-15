@@ -133,7 +133,7 @@ clean_start_dag_write <- function(
   base::Sys.sleep(delay_in_seconds) # Pause after deleting records.
 
   # testthat::expect_message(
-  populate_result <- populate_project_dag_write(batch = batch, verbose = FALSE)
+  populate_result <- populate_project_dag_write(batch = batch, verbose = verbose)
   #   regexp = "populate_project_dag_write success: TRUE."
   # )
   testthat::expect_true(populate_result$is_success, "Population of the dag_write project should be successful.")

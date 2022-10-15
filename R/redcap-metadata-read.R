@@ -156,11 +156,13 @@ redcap_metadata_read <- function(
       )
     }       # nocov end
   } else {
+    # nocov start
     ds                  <- tibble::tibble() # Return an empty data.frame
     outcome_message     <- sprintf(
       "The REDCapR metadata export operation was not successful.  The error message was:\n%s",
       kernel$raw_text
     )
+    # nocov end
   }
 
   if (verbose)

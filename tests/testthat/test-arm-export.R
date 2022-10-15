@@ -51,12 +51,14 @@ test_that("delete-single-arm", {
   credential  <- retrieve_credential_testing(2626L)
 
   expected_outcome_message <- "A 'classic' REDCap project has no arms.  Retrieved in \\d+(\\.\\d+\\W|\\W)seconds\\."
-  returned_object <-
-    redcap_arm_export(
-      redcap_uri        = credential$redcap_uri,
-      token             = credential$token,
-      verbose           = FALSE
-    )
+  expect_message({
+    returned_object <-
+      redcap_arm_export(
+        redcap_uri        = credential$redcap_uri,
+        token             = credential$token,
+        verbose           = TRUE
+      )
+  })
 
   expect_equal(returned_object$data, expected=empty_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
   expect_equal(returned_object$status_code, expected=400L)

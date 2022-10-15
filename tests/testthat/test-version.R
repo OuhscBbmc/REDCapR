@@ -4,12 +4,14 @@ credential  <- retrieve_credential_testing()
 
 test_that("smoke", {
   testthat::skip_on_cran()
-  returned <-
-    redcap_version(
-      redcap_uri  = credential$redcap_uri,
-      token       = credential$token,
-      verbose     = FALSE
-    )
+  expect_message({
+    returned <-
+      redcap_version(
+        redcap_uri  = credential$redcap_uri,
+        token       = credential$token,
+        verbose     = TRUE
+      )
+  })
   expect_type(returned, "list")
 })
 

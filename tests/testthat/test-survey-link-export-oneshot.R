@@ -7,14 +7,16 @@ instrument   <- "participant_morale_questionnaire"
 test_that("Smoke Test", {
   testthat::skip_on_cran()
 
-  returned_object <-
-    REDCapR::redcap_survey_link_export_oneshot(
-      record         = record,
-      instrument     = instrument,
-      redcap_uri     = credential$redcap_uri,
-      token          = credential$token,
-      verbose        = FALSE
-    )
+  suppressMessages({
+    returned_object <-
+      REDCapR::redcap_survey_link_export_oneshot(
+        record         = record,
+        instrument     = instrument,
+        redcap_uri     = credential$redcap_uri,
+        token          = credential$token,
+        verbose        = TRUE
+      )
+  })
   expect_type(returned_object, "list")
 })
 

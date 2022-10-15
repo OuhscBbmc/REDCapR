@@ -7,17 +7,18 @@ credential_super_wide_3<-retrieve_credential_testing(2597L)
 credential_problem    <- retrieve_credential_testing(1425L)
 update_expectation    <- FALSE
 
-test_that("Metadata Read Smoke Test", {
+test_that("Smoke Test", {
   testthat::skip_on_cran()
-  returned_object <-
-    redcap_metadata_read(
-      redcap_uri  = credential$redcap_uri,
-      token       = credential$token,
-      verbose     = FALSE
-    )
+  expect_message({
+    returned_object <-
+      redcap_metadata_read(
+        redcap_uri  = credential$redcap_uri,
+        token       = credential$token,
+        verbose     = TRUE
+      )
+  })
   expect_type(returned_object, "list")
 })
-
 
 test_that("Super-wide", {
   testthat::skip_on_cran()

@@ -5,11 +5,13 @@ test_that("Smoke Test", {
   testthat::skip_on_cran()
   skip_if_onlyread()
 
-  start_clean_result <-
-    REDCapR:::clean_start_simple(
-      batch   = FALSE,
-      verbose = FALSE
-    )
+  suppressMessages({ # Multiple messages are thrown, but now testthat::expect_message catches only one.
+    start_clean_result <-
+      REDCapR:::clean_start_simple(
+        batch   = FALSE,
+        verbose = TRUE
+      )
+  })
   project <- start_clean_result$redcap_project
 })
 

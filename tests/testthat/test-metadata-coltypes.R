@@ -3,12 +3,12 @@ update_expectation  <- FALSE
 
 test_that("smoke test", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(2634L)
-  expect_warning(
+  credential  <- retrieve_credential_testing()
+  expect_message(
     redcap_metadata_coltypes(
       redcap_uri  = credential$redcap_uri,
       token       = credential$token,
-      print_col_types_to_console = FALSE,
+      print_col_types_to_console = TRUE,
       verbose     = FALSE
     )
   )

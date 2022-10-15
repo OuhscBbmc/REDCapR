@@ -5,18 +5,18 @@ delay_after_download_file <- 1.0 # In seconds
 
 test_that("download instrument", {
   testthat::skip_on_cran()
+  on.exit(base::unlink(returned_object$file_name))
 
   expected_outcome_message <- "Preparing to download the file `.+`."
 
-  tryCatch({
+  suppressMessages({
     returned_object <-
       redcap_instrument_download(
         redcap_uri  = credential$redcap_uri,
         token       = credential$token,
-        verbose     = FALSE
+        verbose     = TRUE
       )
-  }, finally = base::unlink(returned_object$file_name)
-  )
+  })
 
   # start_time <- Sys.time() - lubridate::seconds(1) #Knock off a second in case there's small time imprecisions
   start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
