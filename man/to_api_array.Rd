@@ -10,7 +10,7 @@ to_api_array(x, arr_name)
 \item{x}{A vector to convert to array format}
 
 \item{arr_name}{A string containing the name of the API request parameter for
-the array}
+the array.  Must be either "fields" or "forms".}
 }
 \value{
 If \code{x} is not \code{NULL} a list is returned with one element for
