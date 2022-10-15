@@ -93,16 +93,20 @@ redcap_metadata_read <- function(
 
   token               <- sanitize_token(token)
   fields_collapsed    <- collapse_vector(fields)
+  fields_array        <- to_api_array(fields, "fields")
   forms_collapsed     <- collapse_vector(forms)
+  forms_array         <- to_api_array(forms, "forms")
   verbose             <- verbose_prepare(verbose)
 
   post_body <- list(
     token    = token,
     content  = "metadata",
-    format   = "json",
-    forms    = forms_collapsed,
-    fields   = fields_collapsed
+    format   = "json"
   )
+
+  # append forms and fields arrays in format expected by REDCap API
+  # If either is NULL nothing will be appended
+  post_body <- c(post_body, fields_array, forms_array)
 
   # This is the important call that communicates with the REDCap server.
   kernel <-
@@ -178,4 +182,31 @@ redcap_metadata_read <- function(
     elapsed_seconds    = kernel$elapsed_seconds,
     raw_text           = kernel$raw_text
   )
+}
+
+#' @title
+#' Convert a vector to the array format expected by the REDCap API
+#'
+#' @description
+#' Utility function to convert a vector into the array format expected by the
+#' REDCap API.
+#'
+#' @param x A vector to convert to array format
+#' @param arr_name A string containing the name of the API request parameter for
+#' the array
+#'
+#' @return
+#' If \code{x} is not \code{NULL} a list is returned with one element for
+#' each element of x in the format:
+#' \code{list(`arr_name[0]` = x[1], `arr_name[1]` = x[2], ...)}. If \code{x} is
+#' \code{NULL} then \code{NULL} is returned.
+to_api_array <- function(x, arr_name) {
+  if (is.null(x)) {
+    return(NULL)
+  }
+
+  res <- as.list(x)
+  names(res) <- paste0(arr_name, "[", seq_along(res) - 1, "]")
+
+  res
 }
