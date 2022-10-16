@@ -247,14 +247,14 @@ redcap_metadata_internal <- function(
   d_var <-
     d_var %>%
     dplyr::select(
-      field_name            = .data$export_field_name,
-      field_name_base       = .data$original_field_name
+      field_name            = "export_field_name",
+      field_name_base       = "original_field_name"
     )
 
   d_inst <-
     d_inst %>%
     dplyr::select(
-      form_name   = .data$instrument_name,
+      form_name   = "instrument_name",
     ) %>%
     dplyr::mutate(
       form_order  = seq_len(dplyr::n()),
@@ -270,11 +270,11 @@ redcap_metadata_internal <- function(
       vt              = NA_character_,
     ) %>%
     dplyr::select(
-      .data$field_name,
-      .data$field_name_base,
-      .data$form_name,
-      .data$field_type,
-      .data$vt,
+      "field_name",
+      "field_name_base",
+      "form_name",
+      "field_type",
+      "vt",
     )
 
   # Dataset that holds longitudinal/repeating variables
@@ -319,10 +319,10 @@ redcap_metadata_internal <- function(
   d_meta <-
     d_meta %>%
     dplyr::select(
-      field_name_base  = .data$field_name,
-      .data$form_name,
-      .data$field_type,
-      .data$text_validation_type_or_show_slider_number,
+      field_name_base  = "field_name",
+      "form_name",
+      "field_type",
+      "text_validation_type_or_show_slider_number",
     ) %>%
     dplyr::filter(.data$field_type != "descriptive") %>%
     dplyr::left_join(d_var, by = "field_name_base") %>%
@@ -330,11 +330,11 @@ redcap_metadata_internal <- function(
       field_name = dplyr::coalesce(.data$field_name, .data$field_name_base),
     ) %>%
     dplyr::select(
-      .data$field_name,
-      .data$field_name_base,
-      .data$form_name,
-      .data$field_type,
-      vt            = .data$text_validation_type_or_show_slider_number,
+      "field_name",
+      "field_name_base",
+      "form_name",
+      "field_type",
+      vt            = "text_validation_type_or_show_slider_number",
     )  %>%
     dplyr::union_all(d_complete) %>%
     dplyr::left_join(d_inst, by = "form_name") %>%
@@ -344,7 +344,7 @@ redcap_metadata_internal <- function(
     ) %>%
     dplyr::ungroup() %>%
     dplyr::arrange(.data$form_order,  .data$field_order_within_form) %>%
-    dplyr::select(-.data$form_order, -.data$field_order_within_form) %>%
+    dplyr::select(-"form_order", -"field_order_within_form") %>%
     tibble::add_row(d_again, .after = 1) %>%
     dplyr::mutate(
       plumbing = (.data$field_name %in% .plumbing_possibles)
@@ -445,19 +445,19 @@ redcap_metadata_internal <- function(
       aligned = sprintf("  %-*s = readr::%-*s, # %s", .data$padding1, .data$field_name, .data$padding2, .data$readr_col_type, .data$explanation)
     ) %>%
     dplyr::select(
-      .data$field_name,
-      .data$form_name,
-      .data$field_type,
-      validation_type           = .data$vt,
-      .data$autonumber,
-      # .data$response,
-      .data$readr_col_type,
-      # .data$explanation,
-      # .data$padding1,
-      # .data$padding2,
-      .data$aligned,
-      .data$field_name_base,
-      .data$plumbing
+      "field_name",
+      "form_name",
+      "field_type",
+      validation_type           = "vt",
+      "autonumber",
+      # "response",
+      "readr_col_type",
+      # "explanation",
+      # "padding1",
+      # "padding2",
+      "aligned",
+      "field_name_base",
+      "plumbing",
     )
 
   .plumbing_variables <- intersect(d$field_name, .plumbing_possibles)
