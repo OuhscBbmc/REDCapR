@@ -15,8 +15,9 @@ the array.  Must be either "fields" or "forms".}
 \value{
 If \code{x} is not \code{NULL} a list is returned with one element for
 each element of x in the format:
-\code{list(`arr_name[0]` = x[1], `arr_name[1]` = x[2], ...)}. If \code{x} is
-\code{NULL} then \code{NULL} is returned.
+\code{list(`arr_name[0]` = x[1], `arr_name[1]` = x[2], ...)}.
+
+If \code{x} is \code{NULL} then \code{NULL} is returned.
 }
 \description{
 Utility function to convert a vector into the array format expected by the
