@@ -13,7 +13,7 @@ Authors@R: c(person("Will", "Beasley", role = c("aut", "cre"), email =
     person("Thomas", "Wilson", role = "ctb"), person(given="John J",
     family="Aponte", role = "ctb", email="john.aponte@isglobal.org"),
     person("Rollie", "Parrish", role = "ctb", email =
-    "rparrish@flightweb.com", comment = c(ORCID = "0000-0001-8858-6381")), 
+    "rparrish@flightweb.com", comment = c(ORCID = "0000-0001-8858-6381")),
     person("Benjamin", "Nutter",
     role = "ctb"), person("Andrew", "Peters",
     role = "ctb", comment = c(ORCID = "0000-0003-2487-1268")), person("Hao", "Zhu",
@@ -30,7 +30,9 @@ Authors@R: c(person("Will", "Beasley", role = c("aut", "cre"), email =
     comment = c(ORCID = "0000-0001-7390-6354")), person("Greg", "Botwin",
     role = "ctb"), person("Stephan", "Kadauke",
     role = "ctb",
-    comment = c(ORCID = "0000-0003-2996-8034")))
+    comment = c(ORCID = "0000-0003-2996-8034")), person("Ezra", "Porter",
+    role = "ctb",
+    comment = c(ORCID = "0000-0002-4690-8343")))
 URL: https://ouhscbbmc.github.io/REDCapR/, https://github.com/OuhscBbmc/REDCapR, https://www.ouhsc.edu/bbmc/, https://project-redcap.org
 BugReports: https://github.com/OuhscBbmc/REDCapR/issues
 Depends:
