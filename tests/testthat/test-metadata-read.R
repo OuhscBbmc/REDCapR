@@ -124,9 +124,9 @@ test_that("normal-filter-form-race_and_ethnicity", {
   expect_s3_class(returned_object$data, "tbl")
 })
 
-test_that("normal-filter-form-demographics-and-race_and_ethnicity", {
+test_that("normal-filter-form-all-three", {
   testthat::skip_on_cran()
-  path_expected <- "test-data/specific-redcapr/metadata-read/normal-filter-form-demographics-and-race_and_ethnicity.R"
+  path_expected <- "test-data/specific-redcapr/metadata-read/normal-filter-form-all-three.R"
   expected_outcome_message <- "The data dictionary describing \\d+ fields was read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\.  The http status code was 200."
 
   returned_object <-
