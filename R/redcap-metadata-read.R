@@ -189,30 +189,31 @@ redcap_metadata_read <- function(
 #'
 #' @description
 #' Utility function to convert a vector into the array format expected by the
-#' REDCap API.
+#' some REDCap API calls.  It is called internally by REDCapR functions,
+#' and is not intended to be called directly.
 #'
-#' @param x A vector to convert to array format
-#' @param arr_name A string containing the name of the API request parameter for
+#' @param x A vector to convert to array format.  Can be `NULL`.
+#' @param element_names A string containing the name of the API request parameter for
 #' the array.  Must be either "fields" or "forms".
 #'
 #' @return
 #' If `x` is not `NULL` a list is returned with one element for
 #' each element of x in the format:
-#' \code{list(`arr_name[0]` = x[1], `arr_name[1]` = x[2], ...)}.
+#' \code{list(`element_names[0]` = x[1], `element_names[1]` = x[2], ...)}.
 #'
 #' If `x` is `NULL` then `NULL` is returned.
-to_api_array <- function(x, arr_name) {
+to_api_array <- function(x, element_names) {
   checkmate::assert_character(x       , null.ok = TRUE, any.missing = FALSE)
-  checkmate::assert_character(arr_name, null.ok = TRUE, any.missing = FALSE, max.len = 1L, pattern = "^fields|forms$")
+  checkmate::assert_character(element_names, null.ok = TRUE, any.missing = FALSE, max.len = 1L, pattern = "^fields|forms$")
 
   if (is.null(x)) {
     return(NULL)
-  } else if (is.null(arr_name)){
-    rlang::abort("The `arr_name` parameter cannot be null if `x` is not null.")
+  } else if (is.null(element_names)){
+    rlang::abort("The `element_names` parameter cannot be null if `x` is not null.")
   }
 
   res <- as.list(x)
-  names(res) <- paste0(arr_name, "[", seq_along(res) - 1L, "]")
+  names(res) <- paste0(element_names, "[", seq_along(res) - 1L, "]")
 
   res
 }
