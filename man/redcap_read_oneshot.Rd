@@ -151,6 +151,10 @@ string, separated by commas.
 REDCap.  If an operation is successful, the \code{raw_text} is returned as an
 empty string to save RAM.
 }
+
+If no records are retrieved (such as no records meet the filter criteria),
+a zero-row tibble is returned.
+Currently the empty tibble has zero columns, but that may change in the future.
 }
 \description{
 This function uses REDCap's API to select and return data.

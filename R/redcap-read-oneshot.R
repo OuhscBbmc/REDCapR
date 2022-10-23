@@ -106,6 +106,10 @@
 #' REDCap.  If an operation is successful, the `raw_text` is returned as an
 #' empty string to save RAM.
 #'
+#' If no records are retrieved (such as no records meet the filter criteria),
+#' a zero-row tibble is returned.
+#' Currently the empty tibble has zero columns, but that may change in the future.
+#'
 #' @details
 #' If you do not pass an `export_data_access_groups` value, it will default
 #' to `FALSE`. The following is from the API help page for version 10.5.1:

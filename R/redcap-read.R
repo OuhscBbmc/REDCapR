@@ -114,6 +114,10 @@
 #' * `filter_logic`: The filter statement passed as an argument.
 #' * `elapsed_seconds`: The duration of the function.
 #'
+#' If no records are retrieved (such as no records meet the filter criteria),
+#' a zero-row tibble is returned.
+#' Currently the empty tibble has zero columns, but that may change in the future.
+#'
 #' @details
 #' [redcap_read()] internally uses multiple calls to [redcap_read_oneshot()]
 #' to select and return data.  Initially, only the primary key is queried
