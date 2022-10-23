@@ -73,6 +73,7 @@ reference:
     contents:
       - REDCapR-package
       - redcap_project
+      - to_api_array
       - kernel_api
 
   - title: "Security"

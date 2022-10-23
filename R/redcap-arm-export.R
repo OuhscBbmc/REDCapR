@@ -130,8 +130,8 @@ redcap_arm_export <- function(
           col_types = col_types
         ) %>%
         dplyr::select(
-          arm_number  = .data$arm_num,
-          arm_name    = .data$name
+          arm_number  = "arm_num",
+          arm_name    = "name"
         )
 
       # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.

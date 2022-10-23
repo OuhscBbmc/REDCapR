@@ -1,0 +1,48 @@
+structure(list(field_name = c("record_id", "variable_00002", 
+"variable_00003", "variable_00004", "variable_00005", "variable_00012", 
+"variable_00013", "variable_00014", "variable_00015", "variable_00016", 
+"variable_00017"), form_name = c("form_0001", "form_0001", "form_0001", 
+"form_0001", "form_0001", "form_0003", "form_0003", "form_0003", 
+"form_0003", "form_0003", "form_0003"), section_header = c(NA, 
+NA, NA, NA, NA, "<div class=\"rich-text-field-label\"><p style=\"text-align: center;\"><span style=\"color: #000080;\">Please answer the following questions in form_0003</span></p></div>", 
+NA, NA, NA, NA, NA), field_type = c("text", "radio", "checkbox", 
+"notes", "text", "descriptive", "text", "radio", "checkbox", 
+"notes", "text"), field_label = c("Long description for variable record_id", 
+"\n    <span lang=\"en\">{Name of University} is one part of a super awesome study.\n\n    We will also collect some small biological samples, such as saliva.\n\n    Do you have any questions about what the study involves?</span>\n\n    <span lang=\"es\">La {nombre de la universidad} forma parte de un estudio fabuloso.\n\n    También se colectará algunas muestras biológicas, como saliva.\n\n    ¿Tiene alguna pregunta sobre lo que implica el estudio?</span>\"\n  ", 
+"Long description for variable variable_00003", "Long description for variable variable_00004", 
+"Long description for variable variable_00005", "Long description for variable variable_00012", 
+"Long description for variable variable_00013", "Long description for variable variable_00014", 
+"Long description for variable variable_00015", "Long description for variable variable_00016", 
+"Long description for variable variable_00017"), select_choices_or_calculations = c(NA, 
+"1, Yup | 2, Nope | 3, Other", "1, Yup | 2, Nope | 3, Other", 
+NA, NA, NA, NA, "1, Yup | 2, Nope | 3, Other", "1, Yup | 2, Nope | 3, Other", 
+NA, NA), field_note = c("Field note record_id", "Field note variable_00002", 
+"Field note variable_00003", "Field note variable_00004", "Field note variable_00005", 
+"Field note variable_00012", "Field note variable_00013", "Field note variable_00014", 
+"Field note variable_00015", "Field note variable_00016", "Field note variable_00017"
+), text_validation_type_or_show_slider_number = c(NA, NA, NA, 
+NA, "date_ymd", NA, NA, NA, NA, NA, "date_ymd"), text_validation_min = c(NA_character_, 
+NA_character_, NA_character_, NA_character_, NA_character_, NA_character_, 
+NA_character_, NA_character_, NA_character_, NA_character_, NA_character_
+), text_validation_max = c(NA_character_, NA_character_, NA_character_, 
+NA_character_, NA_character_, NA_character_, NA_character_, NA_character_, 
+NA_character_, NA_character_, NA_character_), identifier = c(NA, 
+NA, NA, "y", NA, "y", NA, NA, NA, "y", NA), branching_logic = c(NA_character_, 
+NA_character_, NA_character_, NA_character_, NA_character_, NA_character_, 
+NA_character_, NA_character_, NA_character_, NA_character_, NA_character_
+), required_field = c(NA, "y", NA, "y", NA, NA, NA, "y", NA, 
+"y", NA), custom_alignment = c(NA, NA, NA, NA, "RH", NA, NA, 
+NA, "RH", NA, NA), question_number = c(NA_character_, NA_character_, 
+NA_character_, NA_character_, NA_character_, NA_character_, NA_character_, 
+NA_character_, NA_character_, NA_character_, NA_character_), 
+    matrix_group_name = c(NA_character_, NA_character_, NA_character_, 
+    NA_character_, NA_character_, NA_character_, NA_character_, 
+    NA_character_, NA_character_, NA_character_, NA_character_
+    ), matrix_ranking = c(NA_character_, NA_character_, NA_character_, 
+    NA_character_, NA_character_, NA_character_, NA_character_, 
+    NA_character_, NA_character_, NA_character_, NA_character_
+    ), field_annotation = c(NA_character_, NA_character_, NA_character_, 
+    NA_character_, NA_character_, NA_character_, NA_character_, 
+    NA_character_, NA_character_, NA_character_, NA_character_
+    )), row.names = c(NA, -11L), class = c("tbl_df", "tbl", "data.frame"
+))

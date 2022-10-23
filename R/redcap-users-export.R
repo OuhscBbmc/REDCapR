@@ -139,11 +139,11 @@ redcap_users_export <- function(
 
         ds_user <-
           ds_combined %>%
-          dplyr::select(-.data$forms)
+          dplyr::select(-"forms")
 
         ds_user_form <-
           ds_combined %>%
-          dplyr::select(.data$username, .data$forms) %>%
+          dplyr::select("username", "forms") %>%
           tidyr::separate_rows(.data$forms, sep = ",") %>%
           # tidyr::separate_(
           #   col     = "form",
@@ -164,7 +164,7 @@ redcap_users_export <- function(
             #   ordered     = TRUE
             # )
           ) %>%
-          dplyr::select(-.data$forms)
+          dplyr::select(-"forms")
       },
       silent = TRUE
       # Don't print the warning in the try block.  Print it below, where it's

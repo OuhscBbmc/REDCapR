@@ -278,14 +278,14 @@ redcap_read_oneshot_eav <- function(
 
         ds_metadata_expanded <-
           ds_metadata %>%
-          dplyr::select(.data$field_name, .data$select_choices_or_calculations, .data$field_type) %>%
+          dplyr::select("field_name", "select_choices_or_calculations", "field_type") %>%
           dplyr::mutate(
             is_checkbox   = (.data$field_type == "checkbox"),
             ids           = dplyr::if_else(.data$is_checkbox, .data$select_choices_or_calculations, "1"),
             ids           = gsub("(\\w+),.+?(\\||$)", "\\1", .data$ids),
             ids           = strsplit(.data$ids, " ")
           ) %>%
-          dplyr::select(-.data$select_choices_or_calculations, -.data$field_type) %>%
+          dplyr::select(-"select_choices_or_calculations", -"field_type") %>%
           tidyr::unnest(.data$ids) %>%
           dplyr::transmute(
             .data$is_checkbox,
@@ -311,7 +311,7 @@ redcap_read_oneshot_eav <- function(
           dplyr::select(.data$field_name) %>%
           dplyr::union(
             ds_variable %>%
-              dplyr::select(field_name = .data$export_field_name) %>%
+              dplyr::select(field_name = "export_field_name") %>%
               dplyr::filter(grepl("^\\w+?_complete$", .data$field_name))
           ) %>%
           dplyr::pull(.data$field_name) #%>% rev()
@@ -320,7 +320,7 @@ redcap_read_oneshot_eav <- function(
           ds_eav %>%
           dplyr::left_join(
             ds_metadata %>%
-              dplyr::select(.data$field_name, .data$field_type),
+              dplyr::select("field_name", "field_type"),
             by = "field_name"
           ) %>%
           dplyr::mutate(
@@ -334,8 +334,8 @@ redcap_read_oneshot_eav <- function(
         . <- NULL # For the sake of avoiding an R CMD check note.
         ds <-
           ds_eav_2 %>%
-          dplyr::select(-.data$field_type) %>%
-          # dplyr::select(-.data$redcap_repeat_instance) %>%        # TODO: need a good fix for repeats
+          dplyr::select(-"field_type") %>%
+          # dplyr::select(-"redcap_repeat_instance") %>%        # TODO: need a good fix for repeats
           # tidyr::drop_na(event_id) %>%                            # TODO: need a good fix for repeats
           tidyr::spread(key = .data$field_name, value = .data$value) %>%
           dplyr::select(.data = ., !!intersect(variables_to_keep, colnames(.)))

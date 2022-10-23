@@ -193,20 +193,26 @@ redcap_metadata_read <- function(
 #'
 #' @param x A vector to convert to array format
 #' @param arr_name A string containing the name of the API request parameter for
-#' the array
+#' the array.  Must be either "fields" or "forms".
 #'
 #' @return
-#' If \code{x} is not \code{NULL} a list is returned with one element for
+#' If `x` is not `NULL` a list is returned with one element for
 #' each element of x in the format:
-#' \code{list(`arr_name[0]` = x[1], `arr_name[1]` = x[2], ...)}. If \code{x} is
-#' \code{NULL} then \code{NULL} is returned.
+#' \code{list(`arr_name[0]` = x[1], `arr_name[1]` = x[2], ...)}.
+#'
+#' If `x` is `NULL` then `NULL` is returned.
 to_api_array <- function(x, arr_name) {
+  checkmate::assert_character(x       , null.ok = TRUE, any.missing = FALSE)
+  checkmate::assert_character(arr_name, null.ok = TRUE, any.missing = FALSE, max.len = 1L, pattern = "^fields|forms$")
+
   if (is.null(x)) {
     return(NULL)
+  } else if (is.null(arr_name)){
+    rlang::abort("The `arr_name` parameter cannot be null if `x` is not null.")
   }
 
   res <- as.list(x)
-  names(res) <- paste0(arr_name, "[", seq_along(res) - 1, "]")
+  names(res) <- paste0(arr_name, "[", seq_along(res) - 1L, "]")
 
   res
 }

@@ -57,6 +57,7 @@ This will help extract forms from longitudinal & repeating projects.
 * A `httr::handle` value is accepted by functions that contact the server.  This will accommodate some institutions with unconventional environments.  (Suggested by @brandonpotvin, #429)
 * `sanitized_token()` now accepts an alternative regex pattern.  (Suggested by @maeon & @michalkouril, #370)
 * `redcap_read_eav_oneshot()` is an UNexported function that returns data in an EAV format (#437)
+* `redcap_metadata_read()` now correctly subsets the forms (identified & corrected by @ezraporter, #431 & #445)
 
 ### Minor Enhancements
 
