@@ -90,7 +90,8 @@
 <code>redcap_repeat_instrument</code> and <code>redcap_repeat_instance</code> will be returned for projects with repeating instruments</li>
 </ul></li>
 </ul><p>This will help extract forms from longitudinal &amp; repeating projects.</p>
-</div>
+<ul><li>
+<code><a href="../reference/redcap_read.html">redcap_read()</a></code> and <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code> now return an empty dataset if no records are retrieved (such as no records meet the filter criteria). Currently a 0x0 tibble is returned, but that may change in the future. Until now an error was deliberately thrown. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/452" class="external-link">#452</a>)</li></ul></div>
 <div class="section level4">
 <h4 id="new-features-1-2-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-1-2-0"></a></h4>
 <ul><li>New <code><a href="../reference/redcap_metadata_coltypes.html">redcap_metadata_coltypes()</a></code> function. Inspects the fields types and validation text of each field to generate a suggested <code>readr::col_types</code> object that reflects the project’s current data dictionary. The object then can be passed to the <code>col_types</code> parameter of <code><a href="../reference/redcap_read.html">redcap_read()</a></code> or <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code>. (Suggested and discussed with <a href="https://github.com/pbchase" class="external-link">@pbchase</a>, <a href="https://github.com/nutterb" class="external-link">@nutterb</a>, <a href="https://github.com/skadauke" class="external-link">@skadauke</a>, &amp; others, <a href="https://github.com/OuhscBbmc/REDCapR/issues/405" class="external-link">#405</a> &amp; <a href="https://github.com/OuhscBbmc/REDCapR/issues/294" class="external-link">#294</a>)</li>

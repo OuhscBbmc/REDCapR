@@ -291,7 +291,10 @@ string, separated by commas.</p></li>
 string, separated by commas.</p></li>
 <li><p><code>filter_logic</code>: The filter statement passed as an argument.</p></li>
 <li><p><code>elapsed_seconds</code>: The duration of the function.</p></li>
-</ul></div>
+</ul><p>If no records are retrieved (such as no records meet the filter criteria),
+a zero-row tibble is returned.
+Currently the empty tibble has zero columns, but that may change in the future.</p>
+    </div>
     <div id="details">
     <h2>Details</h2>
     <p><code>redcap_read()</code> internally uses multiple calls to <code><a href="redcap_read_oneshot.html">redcap_read_oneshot()</a></code>
@@ -347,10 +350,10 @@ administrator to send you the static material.</p>
 <span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_read</span><span class="op">(</span>batch_size<span class="op">=</span><span class="fl">2</span>, redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 3 instrument metadata records were read from REDCap in 0.4 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.3 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting to read 5 records  at 2022-10-23 01:47:43.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting to read 5 records  at 2022-10-23 23:32:02.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading batch 1 of 3, with subjects 1 through 2 (ie, 2 unique subject records).</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading batch 2 of 3, with subjects 3 through 4 (ie, 2 unique subject records).</span>
@@ -393,7 +396,7 @@ administrator to send you the static material.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting to read 5 records  at 2022-10-23 01:47:46.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting to read 5 records  at 2022-10-23 23:32:05.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading batch 1 of 3, with subjects 1 through 2 (ie, 2 unique subject records).</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading batch 2 of 3, with subjects 3 through 4 (ie, 2 unique subject records).</span>
