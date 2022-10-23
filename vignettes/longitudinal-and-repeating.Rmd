@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
 
 knit_print.data.frame <- function(x, ...) {
   # See https://cran.r-project.org/package=knitr/vignettes/knit_print.html
-# stop()
+  . <- NULL # Avoid lintr check
   x %>%
     # rmarkdown::print.paged_df() %>%
     kable(
