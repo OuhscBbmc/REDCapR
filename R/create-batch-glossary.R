@@ -41,7 +41,8 @@
 #' @examples
 #' REDCapR::create_batch_glossary(100, 50)
 #' REDCapR::create_batch_glossary(100, 25)
-#' REDCapR::create_batch_glossary(100, 3)
+#' REDCapR::create_batch_glossary(100,  3)
+#' REDCapR::create_batch_glossary(  0,  3)
 #' d <- data.frame(
 #'   record_id = 1:100,
 #'   iv        = sample(x=4, size=100, replace=TRUE),
@@ -51,13 +52,27 @@
 
 #' @export
 create_batch_glossary <- function(row_count, batch_size) {
-  checkmate::assert_integerish(row_count , any.missing=FALSE, len=1L, lower=1L)
+  checkmate::assert_integerish(row_count , any.missing=FALSE, len=1L, lower=0L)
   checkmate::assert_integerish(batch_size, any.missing=FALSE, len=1L, lower=1L)
 
-  start_index <- base::seq.int(from=1, to=row_count, by=batch_size)
+  if (0L == row_count) {
+    return(
+      tibble::tibble(
+        id                    = integer(0),
+        start_index           = integer(0),
+        stop_index            = integer(0),
+        index_pretty          = character(0),
+        start_index_pretty    = character(0),
+        stop_index_pretty     = character(0),
+        label                 = character(0),
+      )
+    )
+  }
+
+  start_index <- as.integer(base::seq.int(from=1L, to=row_count, by=batch_size))
 
   ds_batch             <-
-    base::data.frame(
+    tibble::tibble(
       id          = seq_along(start_index),
       start_index = start_index
     )
@@ -67,7 +82,7 @@ create_batch_glossary <- function(row_count, batch_size) {
         base::ifelse(
           i < length(start_index),
           start_index[i + 1L] - 1L,
-          row_count
+          as.integer(row_count)
         )
       },
       ds_batch$id

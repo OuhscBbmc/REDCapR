@@ -34,7 +34,9 @@ test_that("N100B3", {
     "27_079_081", "28_082_084", "29_085_087", "30_088_090", "31_091_093",
     "32_094_096", "33_097_099", "34_100_100")), .Names = c("id",
     "start_index", "stop_index", "index_pretty", "start_index_pretty",
-    "stop_index_pretty", "label"), row.names = c(NA, -34L), class = "data.frame")
+    "stop_index_pretty", "label"), row.names = c(NA, -34L),
+    class = c("tbl_df", "tbl", "data.frame"))
+
 
   expect_equal(object=nrow(ds_result), expected=expected_glossary_count, info="The number of batches should be correct.")
   expect_equal(object=colnames(ds_result), expected=expected_column_names, info="The column namesshould be correct.")
@@ -50,7 +52,9 @@ test_that("N100B100", {
   ds_expected <- structure(list(id = 1L, start_index = 1, stop_index = 100, index_pretty = "1",
     start_index_pretty = "001", stop_index_pretty = "100", label = "1_001_100"), .Names = c("id",
     "start_index", "stop_index", "index_pretty", "start_index_pretty",
-    "stop_index_pretty", "label"), row.names = c(NA, -1L), class = "data.frame")
+    "stop_index_pretty", "label"), row.names = c(NA, -1L),
+    class = c("tbl_df", "tbl", "data.frame"))
+
 
   expect_equal(object=nrow(ds_result), expected=expected_glossary_count, info="The number of batches should be correct.")
   expect_equal(object=colnames(ds_result), expected=expected_column_names, info="The column names should be correct.")
@@ -70,7 +74,25 @@ test_that("N50B10", {
     "50"), label = c("1_01_10", "2_11_20", "3_21_30", "4_31_40",
     "5_41_50")), .Names = c("id", "start_index", "stop_index",
     "index_pretty", "start_index_pretty", "stop_index_pretty", "label"
-    ), row.names = c(NA, -5L), class = "data.frame")
+    ), row.names = c(NA, -5L), class = c("tbl_df", "tbl", "data.frame"))
+
+  expect_equal(object=nrow(ds_result), expected=expected_glossary_count, info="The number of batches should be correct.")
+  expect_equal(object=colnames(ds_result), expected=expected_column_names, info="The column names should be correct.")
+  expect_equal(object=ds_result, expected=ds_expected, info="The returned batch glossary should be correct.")
+})
+
+test_that("N0B10", {
+  row_count <- 0
+  batch_size <- 10
+  expected_glossary_count <- 0
+
+  ds_result <- REDCapR::create_batch_glossary(row_count=row_count, batch_size=batch_size) # dput(ds_result)
+  ds_expected <-
+    structure(list(id = integer(0), start_index = integer(0), stop_index = integer(0),
+    index_pretty = character(0), start_index_pretty = character(0),
+    stop_index_pretty = character(0), label = character(0)), class = c("tbl_df",
+    "tbl", "data.frame"), row.names = integer(0))
+
   expect_equal(object=nrow(ds_result), expected=expected_glossary_count, info="The number of batches should be correct.")
   expect_equal(object=colnames(ds_result), expected=expected_column_names, info="The column names should be correct.")
   expect_equal(object=ds_result, expected=ds_expected, info="The returned batch glossary should be correct.")

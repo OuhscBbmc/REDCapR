@@ -166,6 +166,10 @@ string, separated by commas.
 \item \code{filter_logic}: The filter statement passed as an argument.
 \item \code{elapsed_seconds}: The duration of the function.
 }
+
+If no records are retrieved (such as no records meet the filter criteria),
+a zero-row tibble is returned.
+Currently the empty tibble has zero columns, but that may change in the future.
 }
 \description{
 From an external perspective, this function is similar to

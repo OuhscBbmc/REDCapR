@@ -4,22 +4,23 @@
 \alias{to_api_array}
 \title{Convert a vector to the array format expected by the REDCap API}
 \usage{
-to_api_array(x, arr_name)
+to_api_array(x, element_names)
 }
 \arguments{
-\item{x}{A vector to convert to array format}
+\item{x}{A vector to convert to array format.  Can be \code{NULL}.}
 
-\item{arr_name}{A string containing the name of the API request parameter for
+\item{element_names}{A string containing the name of the API request parameter for
 the array.  Must be either "fields" or "forms".}
 }
 \value{
 If \code{x} is not \code{NULL} a list is returned with one element for
 each element of x in the format:
-\code{list(`arr_name[0]` = x[1], `arr_name[1]` = x[2], ...)}.
+\code{list(`element_names[0]` = x[1], `element_names[1]` = x[2], ...)}.
 
 If \code{x} is \code{NULL} then \code{NULL} is returned.
 }
 \description{
 Utility function to convert a vector into the array format expected by the
-REDCap API.
+some REDCap API calls.  It is called internally by REDCapR functions,
+and is not intended to be called directly.
 }
