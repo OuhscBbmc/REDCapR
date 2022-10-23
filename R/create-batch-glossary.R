@@ -69,7 +69,7 @@ create_batch_glossary <- function(row_count, batch_size) {
     )
   }
 
-  start_index <- base::seq.int(from=1, to=row_count, by=batch_size)
+  start_index <- as.integer(base::seq.int(from=1L, to=row_count, by=batch_size))
 
   ds_batch             <-
     tibble::tibble(
@@ -82,7 +82,7 @@ create_batch_glossary <- function(row_count, batch_size) {
         base::ifelse(
           i < length(start_index),
           start_index[i + 1L] - 1L,
-          row_count
+          as.integer(row_count)
         )
       },
       ds_batch$id

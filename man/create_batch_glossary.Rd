@@ -44,7 +44,8 @@ padded columns allow the OS to sort the batches/files in sequential order.
 \examples{
 REDCapR::create_batch_glossary(100, 50)
 REDCapR::create_batch_glossary(100, 25)
-REDCapR::create_batch_glossary(100, 3)
+REDCapR::create_batch_glossary(100,  3)
+REDCapR::create_batch_glossary(  0,  3)
 d <- data.frame(
   record_id = 1:100,
   iv        = sample(x=4, size=100, replace=TRUE),
