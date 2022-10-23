@@ -72,7 +72,7 @@ create_batch_glossary <- function(row_count, batch_size) {
   start_index <- base::seq.int(from=1, to=row_count, by=batch_size)
 
   ds_batch             <-
-    base::data.frame(
+    tibble::tibble(
       id          = seq_along(start_index),
       start_index = start_index
     )
