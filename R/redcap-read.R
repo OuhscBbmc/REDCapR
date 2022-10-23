@@ -223,6 +223,7 @@ redcap_read <- function(
   id_position                   = 1L
 ) {
 
+  # Validate incoming parameters ----------------------------
   checkmate::assert_character(redcap_uri                , any.missing=FALSE,     len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=FALSE,     len=1, pattern="^.{1,}$")
   checkmate::assert_atomic(  records                    , any.missing=TRUE, min.len=0)
@@ -259,6 +260,7 @@ redcap_read <- function(
 
   start_time <- Sys.time()
 
+  # Retrieve metadata ------------------------------------------------
   metadata <- redcap_metadata_internal(
     redcap_uri         = redcap_uri,
     token              = token,
@@ -270,6 +272,7 @@ redcap_read <- function(
   if (!is.null(fields) || !is.null(forms))
     fields  <- base::union(metadata$plumbing_variables, fields)
 
+  # Retrieve list of record ids --------------------------------------
   initial_call <- REDCapR::redcap_read_oneshot(
     redcap_uri                 = redcap_uri,
     token                      = token,
@@ -312,7 +315,12 @@ redcap_read <- function(
   }
 
   # Continue as intended if the initial query succeeded. --------------------
-  unique_ids <- sort(unique(initial_call$data[[id_position]]))
+  unique_ids <-
+    if (0L == nrow(initial_call$data)) {
+      character(0)
+    } else {
+      sort(unique(initial_call$data[[id_position]]))
+    }
 
   if (0L < length(unique_ids) && all(nchar(unique_ids)==32L))
     warn_hash_record_id()  # nocov
@@ -331,6 +339,8 @@ redcap_read <- function(
       " records  at ", Sys.time(), "."
     )
   }
+
+  # Loop through batches  ------------------------------------------------
   for (i in ds_glossary$id) {
     selected_index  <- seq(from=ds_glossary$start_index[i], to=ds_glossary$stop_index[i])
     selected_ids    <- unique_ids[selected_index]
@@ -363,7 +373,7 @@ redcap_read <- function(
 
       col_types                   = col_types,
       guess_type                  = FALSE,
-      # guess_max                   = guess_max, # Not used, because guess_type is FALSE
+      # guess_max                 # Not used, because guess_type is FALSE
       http_response_encoding      = http_response_encoding,
       locale                      = locale,
       verbose                     = verbose,
@@ -396,12 +406,12 @@ redcap_read <- function(
 
     lst_batch[[i]]   <- read_result$data
     success_combined <- success_combined & read_result$success
-
-    # rm(read_result) # Admittedly overkill defensiveness.
   } # end of for loop
 
-  ds_stacked               <- dplyr::bind_rows(lst_batch)
+  # Stack batches ------------------------------------------------
+  ds_stacked  <- dplyr::bind_rows(lst_batch)
 
+  # Guess data types if requested --------------------------------
   if (is.null(col_types) && guess_type) {
     ds_stacked <-
       ds_stacked %>%
@@ -411,6 +421,7 @@ redcap_read <- function(
       )
   }
 
+  # Identify if rows are missing --------------------------------
   unique_ids_actual <- sort(unique(ds_stacked[[id_position]]))
   ids_missing_rows  <- setdiff(unique_ids, unique_ids_actual)
 
@@ -437,6 +448,7 @@ redcap_read <- function(
     # nocov end
   }
 
+  # Return values
   elapsed_seconds          <- as.numeric(difftime( Sys.time(), start_time, units="secs"))
   status_code_combined     <- paste(lst_status_code    , collapse="; ")
   outcome_message_combined <- paste(lst_outcome_message, collapse="; ")

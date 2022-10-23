@@ -41,7 +41,6 @@ test_that("default", {
 
   expect_s3_class(returned_object$data, "tbl")
 })
-
 test_that("col_types", {
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/read-oneshot/col_types.R"
@@ -582,7 +581,6 @@ test_that("blank-for-gray-status-false", {
 
   expect_s3_class(returned_object$data, "tbl")
 })
-
 test_that("date-range", {
   testthat::skip_on_cran()
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
@@ -612,7 +610,6 @@ test_that("date-range", {
 
   expect_s3_class(returned_object$data, "tbl")
 })
-
 test_that("guess_max-Inf", {
   testthat::skip_on_cran()
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
@@ -639,7 +636,6 @@ test_that("guess_max-Inf", {
 
   expect_s3_class(returned_object$data, "tbl")
 })
-
 test_that("bad token -Error", {
   testthat::skip_on_cran()
   expected_outcome_message <- "The REDCapR read/export operation was not successful\\."
