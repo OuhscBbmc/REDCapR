@@ -308,7 +308,7 @@ redcap_read <- function(
       .datetime_range_begin  = "failed in initial batch call",
       .datetime_range_end    = "failed in initial batch call",
       .elapsed_seconds       = elapsed_seconds,
-      .status_code           = initial_call$status_code,
+      .status_codes          = initial_call$status_code,
       .outcome_messages      = outcome_messages,
       .success               = initial_call$success
     ))
