@@ -154,6 +154,9 @@
     <loc>https://ouhscbbmc.github.io/REDCapR/reference/sanitize_token.html</loc>
   </url>
   <url>
+    <loc>https://ouhscbbmc.github.io/REDCapR/reference/to_api_array.html</loc>
+  </url>
+  <url>
     <loc>https://ouhscbbmc.github.io/REDCapR/reference/validate.html</loc>
   </url>
 </urlset>
