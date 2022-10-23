@@ -292,26 +292,45 @@ redcap_read <- function(
     handle_httr                = handle_httr
   )
 
-  # Stop and return to the caller if the initial query failed. --------------
-  if (!initial_call$success) {
+  # Stop and return to the caller if the initial query failed or is empty. --------------
+  if (!initial_call$success) { # Call failed
     # nocov start
     outcome_messages  <- paste0("The initial call failed with the code: ", initial_call$status_code, ".")
-    elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
-    return(list(
-      data                  = tibble::tibble(),
-      records_collapsed     = "failed in initial batch call",
-      fields_collapsed      = "failed in initial batch call",
-      forms_collapsed       = "failed in initial batch call",
-      events_collapsed      = "failed in initial batch call",
-      filter_logic          = "failed in initial batch call",
-      datetime_range_begin  = "failed in initial batch call",
-      datetime_range_end    = "failed in initial batch call",
-      elapsed_seconds       = elapsed_seconds,
-      status_code           = initial_call$status_code,
-      outcome_messages      = outcome_messages,
-      success               = initial_call$success
+    elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units = "secs"))
+
+    return(ship_records(
+      .data                  = tibble::tibble(),
+      .records_collapsed     = "failed in initial batch call",
+      .fields_collapsed      = "failed in initial batch call",
+      .forms_collapsed       = "failed in initial batch call",
+      .events_collapsed      = "failed in initial batch call",
+      .filter_logic          = "failed in initial batch call",
+      .datetime_range_begin  = "failed in initial batch call",
+      .datetime_range_end    = "failed in initial batch call",
+      .elapsed_seconds       = elapsed_seconds,
+      .status_code           = initial_call$status_code,
+      .outcome_messages      = outcome_messages,
+      .success               = initial_call$success
     ))
     # nocov end
+  } else if (0L == nrow(initial_call$data)) { # zero rows
+    outcome_messages  <- "The initial call completed, but zero rows match the criteria."
+    elapsed_seconds   <- as.numeric(difftime(Sys.time(), start_time, units = "secs"))
+
+    return(ship_records(
+      .data                    = tibble::tibble(), # 0x0 tibble
+      .success                 = initial_call$success,
+      .status_codes            = as.character(initial_call$status_code),
+      .outcome_messages        = outcome_messages,
+      .records_collapsed       = collapse_vector(records),
+      .fields_collapsed        = "No records were returned so the fields weren't determined.",
+      .forms_collapsed         = "No records were returned so the forms weren't determined.",
+      .events_collapsed        = "No records were returned so the events weren't determined.",
+      .filter_logic            = filter_logic,
+      .datetime_range_begin    = datetime_range_begin,
+      .datetime_range_end      = datetime_range_end,
+      .elapsed_seconds         = elapsed_seconds
+    ))
   }
 
   # Continue as intended if the initial query succeeded. --------------------
@@ -453,21 +472,49 @@ redcap_read <- function(
   status_code_combined     <- paste(lst_status_code    , collapse="; ")
   outcome_message_combined <- paste(lst_outcome_message, collapse="; ")
 
-  list(
-    data                = ds_stacked,
-    success             = success_combined,
-    status_codes        = status_code_combined,
-    outcome_messages    = outcome_message_combined,
-    # data_types          = data_types,
-    records_collapsed   = collapse_vector(records),
-    fields_collapsed    = read_result$fields_collapsed,     # From the last call
-    forms_collapsed     = read_result$forms_collapsed,      # From the last call
-    events_collapsed    = read_result$events_collapsed,     # From the last call
-    filter_logic        = filter_logic,
-    datetime_range_begin= datetime_range_begin,
-    datetime_range_end  = datetime_range_end,
+  ship_records(
+    .data                    = ds_stacked,
+    .success                 = success_combined,
+    .status_codes            = status_code_combined,
+    .outcome_messages        = outcome_message_combined,
+    .records_collapsed       = collapse_vector(records),
+    .fields_collapsed        = read_result$fields_collapsed,     # From the last call
+    .forms_collapsed         = read_result$forms_collapsed,      # From the last call
+    .events_collapsed        = read_result$events_collapsed,     # From the last call
+    .filter_logic            = filter_logic,
+    .datetime_range_begin    = datetime_range_begin,
+    .datetime_range_end      = datetime_range_end,
+    .elapsed_seconds         = elapsed_seconds
+  )
+}
 
-    elapsed_seconds     = elapsed_seconds
+ship_records <- function (
+  .data,
+  .success,
+  .status_codes,
+  .outcome_messages,
+  .records_collapsed,
+  .fields_collapsed,
+  .forms_collapsed,
+  .events_collapsed,
+  .filter_logic,
+  .datetime_range_begin,
+  .datetime_range_end,
+  .elapsed_seconds
+) {
+  list(
+    data                    = .data,
+    success                 = .success,
+    status_codes            = .status_codes,
+    outcome_messages        = .outcome_messages,
+    records_collapsed       = .records_collapsed,
+    fields_collapsed        = .fields_collapsed,
+    forms_collapsed         = .forms_collapsed,
+    events_collapsed        = .events_collapsed,
+    filter_logic            = .filter_logic,
+    datetime_range_begin    = .datetime_range_begin,
+    datetime_range_end      = .datetime_range_end,
+    elapsed_seconds         = .elapsed_seconds
   )
 }
 

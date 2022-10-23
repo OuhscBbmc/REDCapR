@@ -48,6 +48,8 @@ These changes could possibly break existing code --but it's very unlikely.  We f
 
 This will help extract forms from longitudinal & repeating projects.
 
+* `redcap_read()` and `redcap_read_oneshot()` now return an empty dataset if no records are retrieved (such as no records meet the filter criteria).  Currently a 0x0 tibble is returned, but that may change in the future.  Until now an error was deliberately thrown.  (#452)
+
 ### New Features
 
 * New `redcap_metadata_coltypes()` function.  Inspects the fields types and validation text of each field to generate a suggested `readr::col_types` object that reflects the project's current data dictionary.  The object then can be passed to the `col_types` parameter of `redcap_read()` or `redcap_read_oneshot()`.  (Suggested and discussed with @pbchase, @nutterb, @skadauke, & others, #405 & #294)

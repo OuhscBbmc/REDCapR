@@ -727,6 +727,29 @@ test_that("date-range", {
   expect_true(returned_object$success)
   expect_s3_class(returned_object$data, "tbl")
 })
+test_that("empty-dataset", {
+  testthat::skip_on_cran()
+  expected_outcome_message <- "The initial call completed, but zero rows match the criteria\\."
+
+  returned_object <-
+    redcap_read(
+      redcap_uri            = credential$redcap_uri,
+      token                 = credential$token,
+      datetime_range_begin  = Sys.time(),
+      verbose               = FALSE
+    )
+
+  expect_equal(returned_object$data, expected=tibble::tibble(), label="The returned tibble should be empty", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_equal(returned_object$status_code, expected="200")
+  expect_true(returned_object$records_collapsed == "", "A subset of records was not requested.")
+  expect_equal(returned_object$fields_collapsed  , "No records were returned so the fields weren't determined.")
+  expect_equal(returned_object$forms_collapsed   , "No records were returned so the forms weren't determined.")
+  expect_equal(returned_object$events_collapsed  , "No records were returned so the events weren't determined.")
+  expect_equal(returned_object$filter_logic, "")
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true(returned_object$success)
+  expect_s3_class(returned_object$data, "tbl")
+})
 test_that("error-bad-token", {
   testthat::skip_on_cran()
 
