@@ -4,7 +4,7 @@ credential  <- retrieve_credential_testing(1490L)
 
 # Read in the dictionary in R's memory from a csv file.
 path_in <- system.file(
-  "test-data/project-simple/simple-metadata.csv",
+  "test-data/project-simple/metadata.csv",
   package = "REDCapR"
 )
 dictionary_to_write <-

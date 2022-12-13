@@ -20,7 +20,7 @@ populate_project_simple <- function(batch = FALSE, verbose = TRUE) {
     verbose       = verbose
   )
   path_in_simple <- system.file(
-    "test-data/project-simple/simple-data.csv",
+    "test-data/project-simple/data.csv",
     package = "REDCapR"
   )
 
@@ -45,7 +45,7 @@ populate_project_simple <- function(batch = FALSE, verbose = TRUE) {
   # Import the data into the REDCap project
   returned_object <- if (batch) {
     REDCapR::redcap_write(
-      ds                          = ds_to_write,
+      ds_to_write                 = ds_to_write,
       redcap_uri                  = project$redcap_uri,
       token                       = project$token,
       verbose                     = verbose,
