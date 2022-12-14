@@ -286,7 +286,7 @@ redcap_read_oneshot_eav <- function(
             ids           = strsplit(.data$ids, " ")
           ) %>%
           dplyr::select(-"select_choices_or_calculations", -"field_type") %>%
-          tidyr::unnest(.data$ids) %>%
+          tidyr::unnest("ids") %>%
           dplyr::transmute(
             .data$is_checkbox,
             field_name          = dplyr::if_else(.data$is_checkbox, paste0(.data$field_name, "___", .data$ids), .data$field_name)
@@ -308,7 +308,7 @@ redcap_read_oneshot_eav <- function(
 
         variables_to_keep <-
           ds_metadata_expanded %>%
-          dplyr::select(.data$field_name) %>%
+          dplyr::select("field_name") %>%
           dplyr::union(
             ds_variable %>%
               dplyr::select(field_name = "export_field_name") %>%
