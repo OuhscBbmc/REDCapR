@@ -24,12 +24,12 @@ test_that("version-successful", {
     verbose     = FALSE
   )
 
-  expected <- package_version("12.5.5")
+  expected <- package_version("13.1.0")
   version_good <- (expected <= actual)
   expect_true(version_good)
 })
 
-test_that("version-unuccessful-bad-token", {
+test_that("version-unsuccessful-bad-token", {
   testthat::skip_on_cran()
   actual <-
     redcap_version(
