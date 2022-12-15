@@ -86,7 +86,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Advanced REDCapR Operations</h1>
             
-            <h4 data-toc-skip class="date">2022-10-23</h4>
+            <h4 data-toc-skip class="date">2022-12-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/HEAD/vignettes/advanced-redcapr-operations.Rmd" class="external-link"><code>vignettes/advanced-redcapr-operations.Rmd</code></a></small>
       <div class="hidden name"><code>advanced-redcapr-operations.Rmd</code></div>
@@ -95,7 +95,9 @@
 
     
     
-<p>This vignette covers the the less-typical uses of <a href="https://github.com/OuhscBbmc/REDCapR" class="external-link">REDCapR</a> to interact with <a href="https://www.project-redcap.org/" class="external-link">REDCap</a> through its API.</p>
+<p>This vignette covers the the less-typical uses of <a href="https://github.com/OuhscBbmc/REDCapR" class="external-link">REDCapR</a> to interact with
+<a href="https://www.project-redcap.org/" class="external-link">REDCap</a> through its
+API.</p>
 <div class="section level2">
 <h2 class="emphasized" id="nextsteps">Next Steps<a class="anchor" aria-label="anchor" href="#nextsteps"></a>
 </h2>
@@ -103,8 +105,16 @@
 <div class="section level2">
 <h2 id="set-project-wide-values">Set project-wide values<a class="anchor" aria-label="anchor" href="#set-project-wide-values"></a>
 </h2>
-<p>There is some information that is specific to a REDCap project, as opposed to an individual operation. This includes the (1) uri of the server, and the (2) token for the user’s project. This is hosted on a machine used in REDCapR’s public test suite, so you can run this example from any computer. Unless tests are running.</p>
-<p><em>Other than PHI-free demos, we strongly suggest storing tokens securely and avoiding hard-coding them like below. Our recommendation is to store tokens <a href="https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html">in a database</a>. If that is not feasible for your institution, consider storing them in a secured csv and retrieving with <a href="https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html"><code>REDCapR::retrieve_credential_local()</code></a>.</em></p>
+<p>There is some information that is specific to a REDCap project, as
+opposed to an individual operation. This includes the (1) uri of the
+server, and the (2) token for the user’s project. This is hosted on a
+machine used in REDCapR’s public test suite, so you can run this example
+from any computer. Unless tests are running.</p>
+<p><em>Other than PHI-free demos, we strongly suggest storing tokens
+securely and avoiding hard-coding them like below. Our recommendation is
+to store tokens <a href="https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html">in
+a database</a>. If that is not feasible for your institution, consider
+storing them in a secured csv and retrieving with <a href="https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html"><code>REDCapR::retrieve_credential_local()</code></a>.</em></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span> <span class="co">#Load the package into the current R session.</span></span>
 <span><span class="va">uri</span>                   <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span>
@@ -114,8 +124,20 @@
 <div class="section level2">
 <h2 id="converting-from-talllong-to-wide">Converting from tall/long to wide<a class="anchor" aria-label="anchor" href="#converting-from-talllong-to-wide"></a>
 </h2>
-<p><em>Disclaimer</em>: Occasionally we’re asked for a longitudinal dataset to be converted from a “long/tall format” (where typically each row is one observation for a participant) to a “wide format” (where each row is on participant). Usually we advise against it. Besides all the database benefits of a long structure, a wide structure restricts your options with the stat routine. No modern longitudinal analysis procedures (<em>e.g.</em>, growth curve models or multilevel/hierarchical models) accept wide. You’re pretty much stuck with repeated measures anova, which is very inflexible for real-world medical-ish analyses. It requires a patient to have a measurement at every time point; otherwise the anova excludes the patient entirely.</p>
-<p>However we like going wide to produce visual tables for publications, and here’s one way to do it in R. First retrieve the dataset from REDCap.</p>
+<p><em>Disclaimer</em>: Occasionally we’re asked for a longitudinal
+dataset to be converted from a “long/tall format” (where typically each
+row is one observation for a participant) to a “wide format” (where each
+row is on participant). Usually we advise against it. Besides all the
+database benefits of a long structure, a wide structure restricts your
+options with the stat routine. No modern longitudinal analysis
+procedures (<em>e.g.</em>, growth curve models or
+multilevel/hierarchical models) accept wide. You’re pretty much stuck
+with repeated measures anova, which is very inflexible for real-world
+medical-ish analyses. It requires a patient to have a measurement at
+every time point; otherwise the anova excludes the patient entirely.</p>
+<p>However we like going wide to produce visual tables for publications,
+and here’s one way to do it in R. First retrieve the dataset from
+REDCap.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"dplyr"</span><span class="op">)</span><span class="op">)</span></span>
@@ -123,7 +145,7 @@
 <span><span class="va">events_to_retain</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dose_1_arm_1"</span>, <span class="st">"visit_1_arm_1"</span>, <span class="st">"dose_2_arm_1"</span>, <span class="st">"visit_2_arm_1"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ds_long</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token_longitudinal</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; 18 records and 125 columns were read from REDCap in 0.6 seconds.  The http status code was 200.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; 18 records and 125 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</span></span></code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">study_id</span>, <span class="va">redcap_event_name</span>, <span class="va">pmq1</span>, <span class="va">pmq2</span>, <span class="va">pmq3</span>, <span class="va">pmq4</span><span class="op">)</span></span></code></pre></div>
@@ -148,7 +170,8 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>      304 first_visit_arm_2            2     0     0     0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>      304 final_visit_arm_2           <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span>      304 deadline_to_return_arm_2    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span></span></span></code></pre>
-<p>When widening only one variable (<em>e.g.</em>, <code>pmq1</code>), the code’s pretty simple:</p>
+<p>When widening only one variable (<em>e.g.</em>, <code>pmq1</code>),
+the code’s pretty simple:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds_wide</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">ds_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -165,7 +188,12 @@
 <span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>      100            2             1            3             0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>      220            0             0            1             3</span></span></code></pre>
-<p>In some scenarios, multiple variables (<em>e.g.</em>, <code>pmq1</code> - <code>pmq4</code>) can be widened in a single <a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link"><code>tidyr::pivot_wider()</code></a> operation. This example contains the additional wrinkle that the REDCap event names “first_dose” and “first_visit” are renamed “dose_1” and “visit_1”, which will help all the values be dose and visit values be proper numbers.</p>
+<p>In some scenarios, multiple variables (<em>e.g.</em>,
+<code>pmq1</code> - <code>pmq4</code>) can be widened in a single <a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link"><code>tidyr::pivot_wider()</code></a>
+operation. This example contains the additional wrinkle that the REDCap
+event names “first_dose” and “first_visit” are renamed “dose_1” and
+“visit_1”, which will help all the values be dose and visit values be
+proper numbers.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pattern</span> <span class="op">&lt;-</span> <span class="st">"^(\\w+?)_arm_(\\d)$"</span></span>
 <span><span class="va">ds_wide</span> <span class="op">&lt;-</span></span>
@@ -198,7 +226,9 @@
 <span><span class="co">#&gt; <span style="color: #949494;">#   pmq4_visit_1 &lt;dbl&gt;, pmq4_dose_2 &lt;dbl&gt;, pmq4_visit_2 &lt;dbl&gt;, and abbreviated</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   variable names ¹​pmq1_dose_1, ²​pmq1_visit_1, ³​pmq1_dose_2, ⁴​pmq1_visit_2,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ⁵​pmq2_dose_1, ⁶​pmq2_visit_1, ⁷​pmq2_dose_2, ⁸​pmq2_visit_2</span></span></span></code></pre>
-<p>However, in other widening scenarios, it can be easier to go even longer/taller (<em>e.g.</em>, <code>ds_eav</code>) before reversing direction and going wide.</p>
+<p>However, in other widening scenarios, it can be easier to go even
+longer/taller (<em>e.g.</em>, <code>ds_eav</code>) before reversing
+direction and going wide.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds_eav</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">ds_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -263,15 +293,34 @@
 <span><span class="co">#&gt; <span style="color: #949494;">#   pmq2_visit_2 &lt;dbl&gt;, pmq3_visit_2 &lt;dbl&gt;, pmq4_visit_2 &lt;dbl&gt;, and abbreviated</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   variable names ¹​pmq1_dose_1, ²​pmq2_dose_1, ³​pmq3_dose_1, ⁴​pmq4_dose_1,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ⁵​pmq1_visit_1, ⁶​pmq2_visit_1, ⁷​pmq3_visit_1, ⁸​pmq4_visit_1</span></span></span></code></pre>
-<p>Lots of packages and documentation exist. Our current preference is the <a href="https://tidyr.tidyverse.org/articles/pivot.html" class="external-link">tidyverse approach</a> to pivoting, but the <a href="https://www.r-bloggers.com/2019/03/creating-blazing-fast-pivot-tables-from-r-with-data-table-now-with-subtotals-using-grouping-sets/" class="external-link">data.table approach</a> is worth considering if you’re comfortable with that package. This <a href="https://stackoverflow.com/questions/10589693/convert-data-from-long-format-to-wide-format-with-multiple-measure-columns/" class="external-link">Stack Overflow post</a> describes several ways. We recommend against the <a href="https://CRAN.R-project.org/package=reshape" class="external-link">reshape</a> and <a href="https://CRAN.R-project.org/package=reshape2" class="external-link">reshape2</a> packages, because their developers have replaced them with the <a href="https://CRAN.R-project.org/package=tidyr" class="external-link">tidyr</a> functions described above.</p>
+<p>Lots of packages and documentation exist. Our current preference is
+the <a href="https://tidyr.tidyverse.org/articles/pivot.html" class="external-link">tidyverse
+approach</a> to pivoting, but the <a href="https://www.r-bloggers.com/2019/03/creating-blazing-fast-pivot-tables-from-r-with-data-table-now-with-subtotals-using-grouping-sets/" class="external-link">data.table
+approach</a> is worth considering if you’re comfortable with that
+package. This <a href="https://stackoverflow.com/questions/10589693/convert-data-from-long-format-to-wide-format-with-multiple-measure-columns/" class="external-link">Stack
+Overflow post</a> describes several ways. We recommend against the <a href="https://CRAN.R-project.org/package=reshape" class="external-link">reshape</a> and <a href="https://CRAN.R-project.org/package=reshape2" class="external-link">reshape2</a>
+packages, because their developers have replaced them with the <a href="https://CRAN.R-project.org/package=tidyr" class="external-link">tidyr</a> functions
+described above.</p>
 </div>
 <div class="section level2">
 <h2 id="query-the-underlying-mysql-database">Query the Underlying MySQL Database<a class="anchor" aria-label="anchor" href="#query-the-underlying-mysql-database"></a>
 </h2>
-<p>If you require a feature that is not available from your instance’s API, first upgrade your institution’s REDCap instance and see if the feature has been added recently. Second, check if someone has released the desired API-like features as an <a href="https://redcap.vanderbilt.edu/consortium/modules/" class="external-link">REDCap External Module</a>.</p>
-<p>Third, you may need to query the database underneath REDCap’s web server. The <a href="https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html#transfer-credentials">Transfer Credentials</a> section of the <a href="https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html#transfer-credentials">Security Database Vignette</a> provides a complete example of using R to query the MySQL database through odbc.</p>
-<p>We find it’s best to develop the query in <a href="https://www.mysql.com/products/workbench/" class="external-link">MySQL Workbench</a>, then copy the code to R (or alternatively, use <a href="https://ouhscbbmc.github.io/OuhscMunge/reference/execute_sql_file.html" class="external-link"><code>OuhscMunge::execute_sql_file()</code></a>).</p>
-<p>Here is an example that retrieves the <code>first_submit_time</code>, which is helpful if you need a timestamp from surveys that were not marked as completed. Replace ‘444’ with your pid, and 1001 through 1003 with the desired events.</p>
+<p>If you require a feature that is not available from your instance’s
+API, first upgrade your institution’s REDCap instance and see if the
+feature has been added recently. Second, check if someone has released
+the desired API-like features as an <a href="https://redcap.vanderbilt.edu/consortium/modules/" class="external-link">REDCap External
+Module</a>.</p>
+<p>Third, you may need to query the database underneath REDCap’s web
+server. The <a href="https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html#transfer-credentials">Transfer
+Credentials</a> section of the <a href="https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html#transfer-credentials">Security
+Database Vignette</a> provides a complete example of using R to query
+the MySQL database through odbc.</p>
+<p>We find it’s best to develop the query in <a href="https://www.mysql.com/products/workbench/" class="external-link">MySQL Workbench</a>,
+then copy the code to R (or alternatively, use <a href="https://ouhscbbmc.github.io/OuhscMunge/reference/execute_sql_file.html" class="external-link"><code>OuhscMunge::execute_sql_file()</code></a>).</p>
+<p>Here is an example that retrieves the <code>first_submit_time</code>,
+which is helpful if you need a timestamp from surveys that were not
+marked as completed. Replace ‘444’ with your pid, and 1001 through 1003
+with the desired events.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  p.participant_id      <span class="kw">as</span> participant_survey_id</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  ,r.<span class="dt">record</span>             <span class="kw">as</span> record_id</span>
@@ -297,8 +346,10 @@
 <div class="section level2">
 <h2 id="ssl-options">SSL Options<a class="anchor" aria-label="anchor" href="#ssl-options"></a>
 </h2>
-<p>The official <a href="https://curl.se/" class="external-link">cURL site</a> discusses the process of using SSL to verify the server being connected to.</p>
-<p>Use the SSL cert file that come with the <code>openssl</code> package.</p>
+<p>The official <a href="https://curl.se/" class="external-link">cURL site</a> discusses the
+process of using SSL to verify the server being connected to.</p>
+<p>Use the SSL cert file that come with the <code>openssl</code>
+package.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cert_location</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"cacert.pem"</span>, package <span class="op">=</span> <span class="st">"openssl"</span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.exists</a></span><span class="op">(</span><span class="va">cert_location</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -310,7 +361,8 @@
 <span>  <span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span></code></pre>
-<p>Force the connection to use SSL=3 (which is not preferred, and possibly insecure).</p>
+<p>Force the connection to use SSL=3 (which is not preferred, and
+possibly insecure).</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">config_options</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sslversion <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">ds_ssl_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot</a></span><span class="op">(</span></span>
@@ -326,12 +378,13 @@
 <span>  token          <span class="op">=</span> <span class="va">token_simple</span>,</span>
 <span>  config_options <span class="op">=</span> <span class="va">config_options</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="convert-spss-output-to-redcap-data-dictionary">Convert SPSS Output to REDCap data dictionary<a class="anchor" aria-label="anchor" href="#convert-spss-output-to-redcap-data-dictionary"></a>
 </h2>
-<p>The solution <a href="https://stackoverflow.com/a/51013678/1082435" class="external-link uri">https://stackoverflow.com/a/51013678/1082435</a> converts levels specified in SPSS output like</p>
+<p>The solution <a href="https://stackoverflow.com/a/51013678/1082435" class="external-link uri">https://stackoverflow.com/a/51013678/1082435</a> converts
+levels specified in SPSS output like</p>
 <pre><code>SEX       0 Male
           1 Female
 
@@ -347,12 +400,14 @@ LANGUAGE 1, English | 2, Spanish | 3, Other | 6, Unknown</code></pre>
 <div class="section level2">
 <h2 id="session-information">Session Information<a class="anchor" aria-label="anchor" href="#session-information"></a>
 </h2>
-<p>For the sake of documentation and reproducibility, the current report was rendered in the following environment. Click the line below to expand.</p>
+<p>For the sake of documentation and reproducibility, the current report
+was rendered in the following environment. Click the line below to
+expand.</p>
 <details><summary>
 Environment <span class="glyphicon glyphicon-plus-sign"></span>
 </summary><pre><code><span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Session info ───────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">setting </span> <span style="color: #555555; font-style: italic;">value</span></span></span>
-<span><span class="co">#&gt;  version  R version 4.2.1 (2022-06-23)</span></span>
+<span><span class="co">#&gt;  version  R version 4.2.2 (2022-10-31)</span></span>
 <span><span class="co">#&gt;  os       macOS Big Sur ... 10.16</span></span>
 <span><span class="co">#&gt;  system   x86_64, darwin17.0</span></span>
 <span><span class="co">#&gt;  ui       X11</span></span>
@@ -360,15 +415,15 @@ Environment <span class="glyphicon glyphicon-plus-sign"></span>
 <span><span class="co">#&gt;  collate  en_US.UTF-8</span></span>
 <span><span class="co">#&gt;  ctype    en_US.UTF-8</span></span>
 <span><span class="co">#&gt;  tz       UTC</span></span>
-<span><span class="co">#&gt;  date     2022-10-23</span></span>
-<span><span class="co">#&gt;  pandoc   2.14.2 @ /usr/local/bin/ (via rmarkdown)</span></span>
+<span><span class="co">#&gt;  date     2022-12-15</span></span>
+<span><span class="co">#&gt;  pandoc   2.19.2 @ /usr/local/bin/ (via rmarkdown)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Packages ───────────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">package    </span> <span style="color: #555555; font-style: italic;">*</span> <span style="color: #555555; font-style: italic;">version </span> <span style="color: #555555; font-style: italic;">date (UTC)</span> <span style="color: #555555; font-style: italic;">lib</span> <span style="color: #555555; font-style: italic;">source</span></span></span>
 <span><span class="co">#&gt;  backports     1.4.1    <span style="color: #555555;">2021-12-13</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  bit           4.0.4    <span style="color: #555555;">2020-08-04</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
+<span><span class="co">#&gt;  bit           4.0.5    <span style="color: #555555;">2022-11-15</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  bit64         4.0.5    <span style="color: #555555;">2020-08-30</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  bslib         0.4.0    <span style="color: #555555;">2022-07-16</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
+<span><span class="co">#&gt;  bslib         0.4.1    <span style="color: #555555;">2022-11-02</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  cachem        1.0.6    <span style="color: #555555;">2021-08-19</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  checkmate     2.1.0    <span style="color: #555555;">2022-04-21</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  cli           3.4.1    <span style="color: #555555;">2022-09-23</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
@@ -376,22 +431,22 @@ Environment <span class="glyphicon glyphicon-plus-sign"></span>
 <span><span class="co">#&gt;  crayon        1.5.2    <span style="color: #555555;">2022-09-29</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  curl          4.3.3    <span style="color: #555555;">2022-10-06</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  desc          1.4.2    <span style="color: #555555;">2022-09-08</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  digest        0.6.30   <span style="color: #555555;">2022-10-18</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
+<span><span class="co">#&gt;  digest        0.6.31   <span style="color: #555555;">2022-12-11</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  dplyr         1.0.10   <span style="color: #555555;">2022-09-01</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  ellipsis      0.3.2    <span style="color: #555555;">2021-04-29</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  evaluate      0.17     <span style="color: #555555;">2022-10-07</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
+<span><span class="co">#&gt;  evaluate      0.19     <span style="color: #555555;">2022-12-13</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.2)</span></span></span>
 <span><span class="co">#&gt;  fansi         1.0.3    <span style="color: #555555;">2022-03-24</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  fastmap       1.1.0    <span style="color: #555555;">2021-01-25</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  fs            1.5.2    <span style="color: #555555;">2021-12-08</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  generics      0.1.3    <span style="color: #555555;">2022-07-05</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  glue          1.6.2    <span style="color: #555555;">2022-02-24</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  hms           1.1.2    <span style="color: #555555;">2022-08-19</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  htmltools     0.5.3    <span style="color: #555555;">2022-07-18</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
+<span><span class="co">#&gt;  htmltools     0.5.4    <span style="color: #555555;">2022-12-07</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  httr          1.4.4    <span style="color: #555555;">2022-08-17</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  jquerylib     0.1.4    <span style="color: #555555;">2021-04-26</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  jsonlite      1.8.3    <span style="color: #555555;">2022-10-21</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.1)</span></span></span>
+<span><span class="co">#&gt;  jsonlite      1.8.4    <span style="color: #555555;">2022-12-06</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  kableExtra    1.3.4    <span style="color: #555555;">2021-02-20</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  knitr       * 1.40     <span style="color: #555555;">2022-08-24</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
+<span><span class="co">#&gt;  knitr       * 1.41     <span style="color: #555555;">2022-11-18</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  lifecycle     1.0.3    <span style="color: #555555;">2022-10-07</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  magrittr    * 2.0.3    <span style="color: #555555;">2022-03-30</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  memoise       2.0.1    <span style="color: #555555;">2021-11-26</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
@@ -401,19 +456,19 @@ Environment <span class="glyphicon glyphicon-plus-sign"></span>
 <span><span class="co">#&gt;  pkgdown       2.0.6    <span style="color: #555555;">2022-07-16</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  purrr         0.3.5    <span style="color: #555555;">2022-10-06</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  R6            2.5.1    <span style="color: #555555;">2021-08-19</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  ragg          1.2.3    <span style="color: #555555;">2022-09-29</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
+<span><span class="co">#&gt;  ragg          1.2.4    <span style="color: #555555;">2022-10-24</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  readr         2.1.3    <span style="color: #555555;">2022-10-01</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  REDCapR     * <span style="color: #BB00BB; font-weight: bold;">1.1.9003</span> <span style="color: #555555;">2022-10-23</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
+<span><span class="co">#&gt;  REDCapR     * <span style="color: #BB00BB; font-weight: bold;">1.1.9003</span> <span style="color: #555555;">2022-12-15</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
 <span><span class="co">#&gt;  rlang         1.0.6    <span style="color: #555555;">2022-09-24</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  rmarkdown     2.17     <span style="color: #555555;">2022-10-07</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
+<span><span class="co">#&gt;  rmarkdown     2.19     <span style="color: #555555;">2022-12-15</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.2)</span></span></span>
 <span><span class="co">#&gt;  rprojroot     2.0.3    <span style="color: #555555;">2022-04-02</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  rstudioapi    0.14     <span style="color: #555555;">2022-08-22</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  rvest         1.0.3    <span style="color: #555555;">2022-08-19</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  sass          0.4.2    <span style="color: #555555;">2022-07-16</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
+<span><span class="co">#&gt;  sass          0.4.4    <span style="color: #555555;">2022-11-24</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  scales        1.2.1    <span style="color: #555555;">2022-08-20</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  sessioninfo   1.2.2    <span style="color: #555555;">2021-12-06</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  stringi       1.7.8    <span style="color: #555555;">2022-07-11</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  stringr       1.4.1    <span style="color: #555555;">2022-08-20</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
+<span><span class="co">#&gt;  stringr       1.5.0    <span style="color: #555555;">2022-12-02</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  svglite       2.1.0    <span style="color: #555555;">2022-02-03</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  systemfonts   1.0.4    <span style="color: #555555;">2022-02-11</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  textshaping   0.3.6    <span style="color: #555555;">2021-10-13</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
@@ -422,12 +477,12 @@ Environment <span class="glyphicon glyphicon-plus-sign"></span>
 <span><span class="co">#&gt;  tidyselect    1.2.0    <span style="color: #555555;">2022-10-10</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  tzdb          0.3.0    <span style="color: #555555;">2022-03-28</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  utf8          1.2.2    <span style="color: #555555;">2021-07-24</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  vctrs         0.5.0    <span style="color: #555555;">2022-10-22</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.1)</span></span></span>
+<span><span class="co">#&gt;  vctrs         0.5.1    <span style="color: #555555;">2022-11-16</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  viridisLite   0.4.1    <span style="color: #555555;">2022-08-22</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  vroom         1.6.0    <span style="color: #555555;">2022-09-30</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  webshot       0.5.4    <span style="color: #555555;">2022-09-26</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  withr         2.5.0    <span style="color: #555555;">2022-03-03</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  xfun          0.34     <span style="color: #555555;">2022-10-18</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
+<span><span class="co">#&gt;  xfun          0.35     <span style="color: #555555;">2022-11-16</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  xml2          1.3.3    <span style="color: #555555;">2021-11-30</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  yaml          2.3.6    <span style="color: #555555;">2022-10-18</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt; </span></span>
@@ -435,7 +490,8 @@ Environment <span class="glyphicon glyphicon-plus-sign"></span>
 <span><span class="co">#&gt; <span style="color: #555555;"> [2] /Library/Frameworks/R.framework/Versions/4.2/Resources/library</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">──────────────────────────────────────────────────────────────────────────────</span></span></span></code></pre>
-</details><p>Report rendered by runner at 2022-10-23, 23:32 +0000 in 4 seconds.</p>
+</details><p>Report rendered by runner at 2022-12-15, 15:10 +0000 in 4
+seconds.</p>
 </div>
   </div>
 

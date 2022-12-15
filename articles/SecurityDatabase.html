@@ -86,7 +86,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Security Database</h1>
             
-            <h4 data-toc-skip class="date">2022-10-23</h4>
+            <h4 data-toc-skip class="date">2022-12-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/HEAD/vignettes/SecurityDatabase.Rmd" class="external-link"><code>vignettes/SecurityDatabase.Rmd</code></a></small>
       <div class="hidden name"><code>SecurityDatabase.Rmd</code></div>
@@ -98,29 +98,54 @@
 <div class="section level2">
 <h2 id="description">Description<a class="anchor" aria-label="anchor" href="#description"></a>
 </h2>
-<p>The SQL code below adds schemas, a table and two stored procedures to an existing Microsoft SQL Server database. This second database is not essential to calling the REDCap API, but it helps manage tokens securely.</p>
-<p>This database contains the tokens and other sensitive content (such as passwords, API tokens, and file paths) that should not be stored in a Git repository (even a private Git repository). These passwords can be retrieved by <code><a href="../reference/retrieve_credential.html">REDCapR::retrieve_credential_mssql()</a></code>.</p>
+<p>The SQL code below adds schemas, a table and two stored procedures to
+an existing Microsoft SQL Server database. This second database is not
+essential to calling the REDCap API, but it helps manage tokens
+securely.</p>
+<p>This database contains the tokens and other sensitive content (such
+as passwords, API tokens, and file paths) that should not be stored in a
+Git repository (even a private Git repository). These passwords can be
+retrieved by <code><a href="../reference/retrieve_credential.html">REDCapR::retrieve_credential_mssql()</a></code>.</p>
 </div>
 <div class="section level2">
 <h2 id="create-a-dsn-on-each-client">Create a DSN on each client<a class="anchor" aria-label="anchor" href="#create-a-dsn-on-each-client"></a>
 </h2>
-<p>After executing the SQL code in an existing database, create an ODBC <a href="https://en.wikipedia.org/wiki/Data_source_name" class="external-link">DSN</a> on <em>each</em> client machine that calls the database. Download the most recent drivers (as of Aug 2018, the <a href="https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server" class="external-link">most recent version is 17</a> for Windows and Linux), then run the wizard. Many values in the wizard will remain at the default values. Here are the important ones to change.</p>
+<p>After executing the SQL code in an existing database, create an ODBC
+<a href="https://en.wikipedia.org/wiki/Data_source_name" class="external-link">DSN</a> on
+<em>each</em> client machine that calls the database. Download the most
+recent drivers (as of Aug 2018, the <a href="https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server" class="external-link">most
+recent version is 17</a> for Windows and Linux), then run the wizard.
+Many values in the wizard will remain at the default values. Here are
+the important ones to change.</p>
 <ol style="list-style-type: decimal">
-<li>Set the DSN’s <code>name</code> field to whatever is used in the repository’s R code.</li>
-<li>Set the authenticity method to <code>Integrated Windows authentication</code>.</li>
-<li>Set the <code>default database</code> to the name of the database that containing the tokens</li>
+<li>Set the DSN’s <code>name</code> field to whatever is used in the
+repository’s R code.</li>
+<li>Set the authenticity method to
+<code>Integrated Windows authentication</code>.</li>
+<li>Set the <code>default database</code> to the name of the database
+that containing the tokens</li>
 </ol>
-<p>In our code below, both DSN and database are named <code>auxiliary_security</code>.</p>
+<p>In our code below, both DSN and database are named
+<code>auxiliary_security</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a>
 </h2>
-<p>We use Microsoft SQL Server, because that fits our university’s infrastructure most easily. But this approach theoretically can work with any LDAP-enabled database server. Please contact us if your institution is using something other than SQL Server (or a different configuration of these components), and would like help adapting this approach.</p>
+<p>We use Microsoft SQL Server, because that fits our university’s
+infrastructure most easily. But this approach theoretically can work
+with any LDAP-enabled database server. Please contact us if your
+institution is using something other than SQL Server (or a different
+configuration of these components), and would like help adapting this
+approach.</p>
 </div>
 <div class="section level2">
 <h2 id="create-database">Create Database<a class="anchor" aria-label="anchor" href="#create-database"></a>
 </h2>
-<p>This SQL code is run once inside an existing database to establish the schemas, table, and stored procedure used by <code><a href="../reference/retrieve_credential.html">REDCapR::retrieve_credential_mssql()</a></code>. In this example, we’ve arbitrarily called the database <code>auxiliary_security</code>.</p>
+<p>This SQL code is run once inside an existing database to establish
+the schemas, table, and stored procedure used by
+<code><a href="../reference/retrieve_credential.html">REDCapR::retrieve_credential_mssql()</a></code>. In this example,
+we’ve arbitrarily called the database
+<code>auxiliary_security</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">------- SQL code to create necessary components in a Microsoft SQL Sever database -------</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">-----------------------------------------------------------------------</span></span>
@@ -172,9 +197,17 @@
 <div class="section level2">
 <h2 id="create-user-credentials-to-the-auxiliary-database">Create user credentials to the auxiliary database<a class="anchor" aria-label="anchor" href="#create-user-credentials-to-the-auxiliary-database"></a>
 </h2>
-<p>Add a user’s LDAP account to the <code>auxiliary_security</code> database so that they can query the tables to retrieve their API.</p>
-<p>Notice that this only gives the permissions to retrieve the token. You still must grant them API privileges to each appropriate REDCap project. The automation in the R file below will copy the API token from the MySQL database into the <code>auxiliary_security</code> database (see the ‘Transfer Credentials’ section).</p>
-<p>Only database admins should have authorization for the ‘redcap_private’ schema. Typical users should not be authorized for this schema. The current system allows typical users to view only their own tokens.</p>
+<p>Add a user’s LDAP account to the <code>auxiliary_security</code>
+database so that they can query the tables to retrieve their API.</p>
+<p>Notice that this only gives the permissions to retrieve the token.
+You still must grant them API privileges to each appropriate REDCap
+project. The automation in the R file below will copy the API token from
+the MySQL database into the <code>auxiliary_security</code> database
+(see the ‘Transfer Credentials’ section).</p>
+<p>Only database admins should have authorization for the
+‘redcap_private’ schema. Typical users should not be authorized for this
+schema. The current system allows typical users to view only their own
+tokens.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">-----------------------------------------------------------------------</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- Add a user account to the auxiliary_security database so that they can query the tables to retrieve their API.</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- Notice that this only gives the permissions to retrieve the token.  You must still:</span></span>
@@ -253,11 +286,16 @@
 <div class="section level2">
 <h2 id="transfer-credentials">Transfer Credentials<a class="anchor" aria-label="anchor" href="#transfer-credentials"></a>
 </h2>
-<p>Manually transferring tokens to the auxiliary server becomes unmanageable as your institution’s collection of API users grows. This script demonstrates how to programmatically transfer all tokens from multiple REDCap instances. The basic steps are:</p>
+<p>Manually transferring tokens to the auxiliary server becomes
+unmanageable as your institution’s collection of API users grows. This
+script demonstrates how to programmatically transfer all tokens from
+multiple REDCap instances. The basic steps are:</p>
 <ol style="list-style-type: decimal">
-<li>Read from the MySQL database(s) underneath each REDCap instance on your campus.</li>
+<li>Read from the MySQL database(s) underneath each REDCap instance on
+your campus.</li>
 <li>Combine &amp; groom the credentials.</li>
-<li>Upload to SQL Server (called <code>auxiliary_security</code> here).</li>
+<li>Upload to SQL Server (called <code>auxiliary_security</code>
+here).</li>
 </ol>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>(<span class="at">all=</span><span class="cn">TRUE</span>)) <span class="co">#Clear the memory for any variables set from any previous runs.</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -418,7 +456,9 @@
 <div class="section level2">
 <h2 id="document-info">Document Info<a class="anchor" aria-label="anchor" href="#document-info"></a>
 </h2>
-<p>This document is primarily based on REDCap version 8.4.0, and was last updated 2018-08-10. A development version of the document is available on GitHub: <a href="https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html" class="uri">https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html</a></p>
+<p>This document is primarily based on REDCap version 8.4.0, and was
+last updated 2018-08-10. A development version of the document is
+available on GitHub: <a href="https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html" class="uri">https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html</a></p>
 </div>
   </div>
 

@@ -86,7 +86,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Troubleshooting REDCap API Calls</h1>
             
-            <h4 data-toc-skip class="date">2022-10-23</h4>
+            <h4 data-toc-skip class="date">2022-12-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/HEAD/vignettes/TroubleshootingApiCalls.Rmd" class="external-link"><code>vignettes/TroubleshootingApiCalls.Rmd</code></a></small>
       <div class="hidden name"><code>TroubleshootingApiCalls.Rmd</code></div>
@@ -95,56 +95,121 @@
 
     
     
-<p>There are many links in the pipeline between your institution’s <a href="https://www.project-redcap.org/" class="external-link">REDCap</a> server and the API user. When the end result is unsuccessful, this document should help narrow the location of the possible problem. The first two sections will be relevant to almost any language interacting with the API. The remaining sections are possibly relevant only to your language (<em>e.g.</em>, Python, R, PHP, SAS, bash), or your software library such as <a href="https://github.com/nutterb/redcapAPI" class="external-link">redcapAPI</a> and <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> in R, <a href="https://github.com/iuredcap/phpcap" class="external-link">phpcap</a> in PHP, and <a href="https://pycap.readthedocs.io/en/latest/" class="external-link">PyCap</a> in Python).</p>
+<p>There are many links in the pipeline between your institution’s <a href="https://www.project-redcap.org/" class="external-link">REDCap</a> server and the API
+user. When the end result is unsuccessful, this document should help
+narrow the location of the possible problem. The first two sections will
+be relevant to almost any language interacting with the API. The
+remaining sections are possibly relevant only to your language
+(<em>e.g.</em>, Python, R, PHP, SAS, bash), or your software library
+such as <a href="https://github.com/nutterb/redcapAPI" class="external-link">redcapAPI</a> and
+<a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> in R, <a href="https://github.com/iuredcap/phpcap" class="external-link">phpcap</a> in PHP, and <a href="https://pycap.readthedocs.io/en/latest/" class="external-link">PyCap</a> in Python).</p>
 <div class="section level2">
 <h2 id="language-agnostic">Language Agnostic<a class="anchor" aria-label="anchor" href="#language-agnostic"></a>
 </h2>
 <div class="section level3">
 <h3 id="server-configuration-and-authorization">Server Configuration and Authorization<a class="anchor" aria-label="anchor" href="#server-configuration-and-authorization"></a>
 </h3>
-<p>This first group of checks primarily focuses on the server and the logins accounts. Unlike later sections, REDCap administrator privileges are necessary for most of these checks.</p>
+<p>This first group of checks primarily focuses on the server and the
+logins accounts. Unlike later sections, REDCap administrator privileges
+are necessary for most of these checks.</p>
 <ol style="list-style-type: decimal">
 <li>
-<p><strong>Do you have an account for the <em>server</em>?</strong> This can be verified in the <code>Browse Users</code> section of the server’s <code>Control Center</code>.</p>
+<p><strong>Do you have an account for the <em>server</em>?</strong>
+This can be verified in the <code>Browse Users</code> section of the
+server’s <code>Control Center</code>.</p>
 <ul>
-<li><p>If you’re a REDCap admin, put yourself in the user’s position –does the user have an account?</p></li>
-<li><p>If you’re a typical user, you may have to consult with your institution’s REDCap administrator for some of these checks.</p></li>
+<li><p>If you’re a REDCap admin, put yourself in the user’s position
+–does the user have an account?</p></li>
+<li><p>If you’re a typical user, you may have to consult with your
+institution’s REDCap administrator for some of these checks.</p></li>
 </ul>
 </li>
-<li><p><strong>Do you have permissions for the specific <em>project</em>?</strong> This can be verified in the <code>User Rights</code> section within the project. Notice that it’s possible (but ultimately not useful) to have an account here, but not with the server, so don’t skip the previous step.</p></li>
-<li><p><strong>Can you log in normally through the interface?</strong> However if the username and password aren’t working, the API theoretically might still work because it uses their token instead of their password.</p></li>
+<li><p><strong>Do you have permissions for the specific
+<em>project</em>?</strong> This can be verified in the
+<code>User Rights</code> section within the project. Notice that it’s
+possible (but ultimately not useful) to have an account here, but not
+with the server, so don’t skip the previous step.</p></li>
+<li><p><strong>Can you log in normally through the interface?</strong>
+However if the username and password aren’t working, the API
+theoretically might still work because it uses their token instead of
+their password.</p></li>
 <li>
-<p><strong>Have you verified your account by responding to the automated email sent to them?</strong> This can be verified in the <code>Browse Users</code> section of your server’s <code>Control Center</code>. (Talk to your REDCap admin.) For each email address you’ve entered, there should be a green ‘Verified’ label and icon.</p>
+<p><strong>Have you verified your account by responding to the
+automated email sent to them?</strong> This can be verified in the
+<code>Browse Users</code> section of your server’s
+<code>Control Center</code>. (Talk to your REDCap admin.) For each email
+address you’ve entered, there should be a green ‘Verified’ label and
+icon.</p>
 <p><img src="images/EmailVerified.png" style="fig.width=400px"></p>
 <p><!--<img src="/Users/runner/work/REDCapR/REDCapR/vignettes/images/EmailVerified.png" alt="EmailVerified" style="width: 400px;"/>--></p>
 </li>
 <li>
-<p><strong>Have you been granted the desired import and/or export permissions?</strong> This can be verified in the <code>User Rights</code> section or in the <code>API</code> section (and it’s <code>Manage All Project Tokens</code> tab) within the project. Alternatively, it can be verified in the <code>API Tokens</code> section of the server’s <code>Control Center</code>.</p>
+<p><strong>Have you been granted the desired import and/or export
+permissions?</strong> This can be verified in the
+<code>User Rights</code> section or in the <code>API</code> section (and
+it’s <code>Manage All Project Tokens</code> tab) within the project.
+Alternatively, it can be verified in the <code>API Tokens</code> section
+of the server’s <code>Control Center</code>.</p>
 <p><img src="images/ApiPrivilegeDashboard.png" style="fig.width=600px"></p>
 <p><!--<img src="/Users/runner/work/REDCapR/REDCapR/vignettes/images/ApiPrivilegeDashboard.png" alt="ApiPrivilegeDashboard" style="width: 600px;"/>--></p>
 </li>
 <li>
-<p><strong>Are you using the correct token?</strong> This can be verified in the <code>API</code> section (and it’s <code>Manage All Project Tokens</code> tab) within the project. Click the magnifying glass icon in the user’s row. Alternatively, it can be verified in the <code>API Tokens</code> section of the server’s <code>Control Center</code>.</p>
+<p><strong>Are you using the correct token?</strong> This can be
+verified in the <code>API</code> section (and it’s
+<code>Manage All Project Tokens</code> tab) within the project. Click
+the magnifying glass icon in the user’s row. Alternatively, it can be
+verified in the <code>API Tokens</code> section of the server’s
+<code>Control Center</code>.</p>
 <p><img src="images/MagnifyingGlass.png" style="fig.width=550px"></p>
 <p><!--<img src="/Users/runner/work/REDCapR/REDCapR/vignettes/images/MagnifyingGlass.png" alt="MagnifyingGlass" style="width: 550px;"/>--></p>
 </li>
 </ol>
-<p>If all these checks pass, proceed to the next section. If not, start by consulting with your REDCap administrator.</p>
+<p>If all these checks pass, proceed to the next section. If not, start
+by consulting with your REDCap administrator.</p>
 </div>
 <div class="section level3">
 <h3 id="reading">Reading<a class="anchor" aria-label="anchor" href="#reading"></a>
 </h3>
-<p>This section examines potential problems that occur after data leaves a working server, but before it is handled by their programming language (<em>e.g.</em>, Python and R). <a href="https://www.postman.com/" class="external-link">Postman</a> is a Chrome plugin recommended by <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ" class="external-link">several</a> <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ" class="external-link">people</a> that makes troubleshooting much more efficient.</p>
+<p>This section examines potential problems that occur after data leaves
+a working server, but before it is handled by their programming language
+(<em>e.g.</em>, Python and R). <a href="https://www.postman.com/" class="external-link">Postman</a> is a Chrome plugin
+recommended by <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ" class="external-link">several</a>
+<a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ" class="external-link">people</a>
+that makes troubleshooting much more efficient.</p>
 <p><img src="images/PostmanScreenshot.png" style="fig.width=800px"></p>
 <!--<img src="/Users/runner/work/REDCapR/REDCapR/vignettes/images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>-->
 <ol style="list-style-type: decimal">
 <li>
-<p><strong>Is the API Playground producing the expected result?</strong> REDCap’s “API Playground” holds your hand by (a) offering a dropdown list of API methods available to your REDCap instance, and (b) presenting a series of dropdown boxes appropriate for the selected method. Find it through the API link visible in the left margin of REDCap. When you’ve completed the inputs, click ‘Execute’ to view the plain-text returned by the server.</p>
-<p>At the bottom of the playground page, the interface attempts to translate your specific API call to different languages, like Python and R. These suggestions are usually correct, but inspect it critically, as you would for any auto-generated script.</p>
+<p><strong>Is the API Playground producing the expected
+result?</strong> REDCap’s “API Playground” holds your hand by (a)
+offering a dropdown list of API methods available to your REDCap
+instance, and (b) presenting a series of dropdown boxes appropriate for
+the selected method. Find it through the API link visible in the left
+margin of REDCap. When you’ve completed the inputs, click ‘Execute’ to
+view the plain-text returned by the server.</p>
+<p>At the bottom of the playground page, the interface attempts to
+translate your specific API call to different languages, like Python and
+R. These suggestions are usually correct, but inspect it critically, as
+you would for any auto-generated script.</p>
 </li>
-<li><p><strong>Is the URL/URI correct?</strong> Notice the url typically ends with “api/” so it resembles <code>https://bbmc.ouhsc.edu/redcap/api/</code> and <em>not</em> <code>https://bbmc.ouhsc.edu/</code> (even if <a href="https://bbmc.ouhsc.edu/" class="external-link uri">https://bbmc.ouhsc.edu/</a> redirects to <a href="https://bbmc.ouhsc.edu/redcap/" class="external-link uri">https://bbmc.ouhsc.edu/redcap/</a>).</p></li>
+<li><p><strong>Is the URL/URI correct?</strong> Notice the url typically
+ends with “api/” so it resembles
+<code>https://bbmc.ouhsc.edu/redcap/api/</code> and <em>not</em>
+<code>https://bbmc.ouhsc.edu/</code> (even if <a href="https://bbmc.ouhsc.edu/" class="external-link uri">https://bbmc.ouhsc.edu/</a>
+redirects to <a href="https://bbmc.ouhsc.edu/redcap/" class="external-link uri">https://bbmc.ouhsc.edu/redcap/</a>).</p></li>
 <li>
-<p><strong>Is Postman installed and operating correctly?</strong> If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the <a href="https://www.ouhsc.edu/bbmc/" class="external-link">OUHSC BBMC</a>. The url is <code>https://bbmc.ouhsc.edu/redcap/api/</code>. There are three key-value pairs: (1) the ‘token’ is <code>9A81268476645C4E5F03428B8AC3AA7B</code>, (2) the ‘content’ is <code>record</code>, and (3) the ‘format’ should be <code>CSV</code>. When checking your own server, the token value should change, but the content and format should not. It should return five records in a CSV format. The ‘status’ should be <code>200 OK</code>. The result should look roughly like this. Notice the line breaks were included in the text values themselves.</p>
+<p><strong>Is Postman installed and operating correctly?</strong> If
+it helps to start with a different REDCap server, you can use this dummy
+project containing fake data hosted by the <a href="https://www.ouhsc.edu/bbmc/" class="external-link">OUHSC BBMC</a>. The url is
+<code>https://bbmc.ouhsc.edu/redcap/api/</code>. There are three
+key-value pairs: (1) the ‘token’ is
+<code>9A81268476645C4E5F03428B8AC3AA7B</code>, (2) the ‘content’ is
+<code>record</code>, and (3) the ‘format’ should be <code>CSV</code>.
+When checking your own server, the token value should change, but the
+content and format should not. It should return five records in a CSV
+format. The ‘status’ should be <code>200 OK</code>. The result should
+look roughly like this. Notice the line breaks were included in the text
+values themselves.</p>
 <pre class="csv"><code>record_id,name_first,name_last,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete
 "1","Nutmeg","Nutmouse","14 Rose Cottage St.
 Kenning UK, 323232","(432) 456-4848","nutty@mouse.com","2003-08-30",10,1,2,0,5,1,400,"Character in a book, with some guessing",2
@@ -162,34 +227,92 @@ New Orleans LA, 70115","(333) 333-4444","left@hippocket.com","1955-04-15",58,1,4
 
 He had a gold watch chain and a black mustache",2</code></pre>
 </li>
-<li><p><strong>Can an administrator query the API successfully with Postman with the admin token?</strong> As an administrator, create an account for yourself, and verify that your token works on your server and project.</p></li>
-<li><p><strong>Can an administrator query the API successfully with Postman with the user’s token?</strong> Use <a href="https://www.postman.com/" class="external-link">Postman</a> as before, but replace your token with the user’s token. Once the whole problem is solved, reissue new API tokens to both you and the user.</p></li>
-<li><p><strong>Can a user query the API successfully with Postman with the their own token?</strong> The values you enter should be exactly the same as those entered in the previous step. A failure here (assuming the previous step was successful) suggests a network or firewall issue. If the server is behind your institution’s firewall, verify the you are connecting successfully through the VPN.</p></li>
+<li><p><strong>Can an administrator query the API successfully with
+Postman with the admin token?</strong> As an administrator, create an
+account for yourself, and verify that your token works on your server
+and project.</p></li>
+<li><p><strong>Can an administrator query the API successfully with
+Postman with the user’s token?</strong> Use <a href="https://www.postman.com/" class="external-link">Postman</a> as before, but replace your
+token with the user’s token. Once the whole problem is solved, reissue
+new API tokens to both you and the user.</p></li>
+<li><p><strong>Can a user query the API successfully with Postman with
+the their own token?</strong> The values you enter should be exactly the
+same as those entered in the previous step. A failure here (assuming the
+previous step was successful) suggests a network or firewall issue. If
+the server is behind your institution’s firewall, verify the you are
+connecting successfully through the VPN.</p></li>
 <li>
-<p><strong>Can a user query the API with cURL?</strong> <a href="https://curl.se/" class="external-link">cURL</a> is a command line tool that’s underneath a lot of libraries. If it’s installed correctly on your location machine, it can be executed from the terminal or command line.</p>
+<p><strong>Can a user query the API with cURL?</strong> <a href="https://curl.se/" class="external-link">cURL</a> is a command line tool that’s
+underneath a lot of libraries. If it’s installed correctly on your
+location machine, it can be executed from the terminal or command
+line.</p>
 <pre class="shell"><code>curl -X POST -H "Cache-Control: no-cache" -F "token=9A81268476645C4E5F03428B8AC3AA7B" -F "content=record" -F "format=csv" "https://bbmc.ouhsc.edu/redcap/api/"</code></pre>
 </li>
 </ol>
-<p>If all these checks pass, proceed to the next section. If not, start by consulting with your REDCap administrator. If that fails, consider creating a GitHub issue for your package (<em>e.g.</em>, <a href="https://github.com/nutterb/redcapAPI" class="external-link">redcapAPI</a> and <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> in R, <a href="https://github.com/iuredcap/phpcap" class="external-link">phpcap</a> in PHP, and <a href="https://pycap.readthedocs.io/en/latest/" class="external-link">PyCap</a> in Python).</p>
+<p>If all these checks pass, proceed to the next section. If not, start
+by consulting with your REDCap administrator. If that fails, consider
+creating a GitHub issue for your package (<em>e.g.</em>, <a href="https://github.com/nutterb/redcapAPI" class="external-link">redcapAPI</a> and <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> in R, <a href="https://github.com/iuredcap/phpcap" class="external-link">phpcap</a> in PHP, and <a href="https://pycap.readthedocs.io/en/latest/" class="external-link">PyCap</a> in Python).</p>
 </div>
 <div class="section level3">
 <h3 id="writing">Writing<a class="anchor" aria-label="anchor" href="#writing"></a>
 </h3>
-<p>Troubleshooting import operations is trickier than export operations for two major reasons. First, the database potentially persists your <em>import</em> mistakes. In contrast, repeatedly <em>exporting</em> data won’t affect subsequent reads. Considering cloning the REDCap project for testing until the problem is resolved. Remember to create a new token (because they’re not automatically created when projects are cloned, even when users are copied), and to modify your code’s token to point to the new testing clone.</p>
-<p>The second reason why importing can be trickier is because the schema (<em>e.g.</em>, the names and data types) of your local dataset must match the project’s schema. Current recommendations include checking if you can write to simpler projects (perhaps with 1 ID field and 1 string field), and progressively moving to mimic the problematic project’s schema and dataset. Also, consider exporting the dataset to your machine, and look for differences. Note that you cannot import calculated fields into REDCap.</p>
+<p>Troubleshooting import operations is trickier than export operations
+for two major reasons. First, the database potentially persists your
+<em>import</em> mistakes. In contrast, repeatedly <em>exporting</em>
+data won’t affect subsequent reads. Considering cloning the REDCap
+project for testing until the problem is resolved. Remember to create a
+new token (because they’re not automatically created when projects are
+cloned, even when users are copied), and to modify your code’s token to
+point to the new testing clone.</p>
+<p>The second reason why importing can be trickier is because the schema
+(<em>e.g.</em>, the names and data types) of your local dataset must
+match the project’s schema. Current recommendations include checking if
+you can write to simpler projects (perhaps with 1 ID field and 1 string
+field), and progressively moving to mimic the problematic project’s
+schema and dataset. Also, consider exporting the dataset to your
+machine, and look for differences. Note that you cannot import
+calculated fields into REDCap.</p>
 <ol style="list-style-type: decimal">
-<li><p><strong>Does the dataset pass <a href="https://ouhscbbmc.github.io/REDCapR/reference/validate.html"><code>REDCapR::validate_for_write()</code></a>?</strong> The <code><a href="../reference/validate.html">REDCapR::validate_for_write()</a></code> inspects a data frame to anticipate problems before writing with REDCap’s API. The reference manual contains specifics of the validation checks.</p></li>
-<li><p><strong>Can you import a <em>small subset</em> of the project?</strong> For instance, just the <code>record_id</code> column.</p></li>
+<li><p><strong>Does the dataset pass <a href="https://ouhscbbmc.github.io/REDCapR/reference/validate.html"><code>REDCapR::validate_for_write()</code></a>?</strong>
+The <code><a href="../reference/validate.html">REDCapR::validate_for_write()</a></code> inspects a data frame to
+anticipate problems before writing with REDCap’s API. The reference
+manual contains specifics of the validation checks.</p></li>
+<li><p><strong>Can you import a <em>small subset</em> of the
+project?</strong> For instance, just the <code>record_id</code>
+column.</p></li>
 <li>
-<p><strong>Can you export the dataset and then import it <em>without any modifications</em></strong>?</p>
-<p>For instance, using REDCapR: First, manually complete ~10 example record in the web browser, and then export/download the records with <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read_oneshot.html"><code>REDCapR::redcap_read_oneshot()</code></a> to a data frame. (If you have longitudinal or repeating instruments, make sure your examples cover those dimensions adequately) Second, can you successfully upload that same <code>data.frame</code> (without modification) with <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_write_oneshot.html"><code>REDCapR::redcap_write_oneshot()</code></a>?</p>
-<p>If so, that dataset will provide a template for how you structure the real dataset and assign values. If not, that is a helpful piece of troubleshooting.</p>
+<p><strong>Can you export the dataset and then import it <em>without
+any modifications</em></strong>?</p>
+<p>For instance, using REDCapR: First, manually complete ~10 example
+record in the web browser, and then export/download the records with <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read_oneshot.html"><code>REDCapR::redcap_read_oneshot()</code></a>
+to a data frame. (If you have longitudinal or repeating instruments,
+make sure your examples cover those dimensions adequately) Second, can
+you successfully upload that same <code>data.frame</code> (without
+modification) with <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_write_oneshot.html"><code>REDCapR::redcap_write_oneshot()</code></a>?</p>
+<p>If so, that dataset will provide a template for how you structure the
+real dataset and assign values. If not, that is a helpful piece of
+troubleshooting.</p>
 </li>
 <li>
-<p><strong>Is the longitudinal and/or repeating structure correct?</strong> Three variables are frequently misspecified: <code>redcap_event_name</code> (for longitudinal projects) and <code>redcap_repeat_instrument</code> &amp; <code>redcap_repeat_instance</code> (for repeating instruments). The values for these variables are clearer to understand once you complete the step above and inspect the layout.</p>
-<p>For longitudinal projects: Example values for <code>redcap_event_name</code> are “admission_1_arm_1”, “admission_2_arm_1”, and “admission_3_arm_1”. (Notice the “_arm_1” suffix is used even if arms are not specified in your project.)</p>
-<p>For projects with repeating instruments: Examples values for <code>redcap_repeat_instrument</code> are “lab”, “vitals”, and “medication”; these instrument names are specified in the REDCap Designer. Example values for <code>redcap_repeat_instance</code> are “1”, “2”, “3”, “4”, and “5”; this is a consecutive sequence within a participant’s longitudinal event.</p>
-<p>If participant 101 has two lab results, one vitals record, and three medications, the dataset structure might be:</p>
+<p><strong>Is the longitudinal and/or repeating structure
+correct?</strong> Three variables are frequently misspecified:
+<code>redcap_event_name</code> (for longitudinal projects) and
+<code>redcap_repeat_instrument</code> &amp;
+<code>redcap_repeat_instance</code> (for repeating instruments). The
+values for these variables are clearer to understand once you complete
+the step above and inspect the layout.</p>
+<p>For longitudinal projects: Example values for
+<code>redcap_event_name</code> are “admission_1_arm_1”,
+“admission_2_arm_1”, and “admission_3_arm_1”. (Notice the “_arm_1”
+suffix is used even if arms are not specified in your project.)</p>
+<p>For projects with repeating instruments: Examples values for
+<code>redcap_repeat_instrument</code> are “lab”, “vitals”, and
+“medication”; these instrument names are specified in the REDCap
+Designer. Example values for <code>redcap_repeat_instance</code> are
+“1”, “2”, “3”, “4”, and “5”; this is a consecutive sequence within a
+participant’s longitudinal event.</p>
+<p>If participant 101 has two lab results, one vitals record, and three
+medications, the dataset structure might be:</p>
 <table class="table">
 <colgroup>
 <col width="11%">
@@ -267,24 +390,48 @@ He had a gold watch chain and a black mustache",2</code></pre>
 </tbody>
 </table>
 </li>
-<li><p><strong>Can you import the <em>entire</em> project?</strong> Can all columns be written for all rows?</p></li>
+<li><p><strong>Can you import the <em>entire</em> project?</strong> Can
+all columns be written for all rows?</p></li>
 </ol>
-<p>If one of these checks fail, please start by consulting your REDCap administrator.</p>
+<p>If one of these checks fail, please start by consulting your REDCap
+administrator.</p>
 </div>
 <div class="section level3">
 <h3 id="gotchas-agnostic">Common Gotchas<a class="anchor" aria-label="anchor" href="#gotchas-agnostic"></a>
 </h3>
 <ol style="list-style-type: decimal">
 <li>
-<p><strong>Problems in the project’s metadata/dictionary.</strong> If exporting the metadata fails (<em>e.g.</em>, <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_read.html"><code>REDCapR::redcap_metadata_read()</code></a> and <a href="https://rdrr.io/github/nutterb/redcapAPI/man/exportMetaData.html" class="external-link"><code>redcapAPI::exportMetaData()</code></a>), manually download the data dictionary from the REDCap browser. Inspect the plain text closely in a text editor like <a href="https://code.visualstudio.com/" class="external-link">Visual Studio Code</a>; avoid programs like Excel that tend to interpret, align, and decorate the values, which sometimes masks problems. Scrutinize all elements, but especially look for nonstandard characters. <em>See the next bullet.</em></p>
-<p>Some API libraries test that problematic elements of a project are handled correctly. If you encounter an element that causes problems, please consider</p>
+<p><strong>Problems in the project’s metadata/dictionary.</strong>
+If exporting the metadata fails (<em>e.g.</em>, <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_read.html"><code>REDCapR::redcap_metadata_read()</code></a>
+and <a href="https://rdrr.io/github/nutterb/redcapAPI/man/exportMetaData.html" class="external-link"><code>redcapAPI::exportMetaData()</code></a>),
+manually download the data dictionary from the REDCap browser. Inspect
+the plain text closely in a text editor like <a href="https://code.visualstudio.com/" class="external-link">Visual Studio Code</a>; avoid
+programs like Excel that tend to interpret, align, and decorate the
+values, which sometimes masks problems. Scrutinize all elements, but
+especially look for nonstandard characters. <em>See the next
+bullet.</em></p>
+<p>Some API libraries test that problematic elements of a project are
+handled correctly. If you encounter an element that causes problems,
+please consider</p>
 <ol style="list-style-type: decimal">
-<li><p>creating a new GitHub Issue that describes the problem (<em>e.g.</em>, <a href="https://github.com/OuhscBbmc/REDCapR/issues" class="external-link">REDCapR</a>, <a href="https://github.com/nutterb/redcapAPI/issues" class="external-link">redcapAPI</a>, <a href="https://github.com/iuredcap/phpcap/issues" class="external-link">phpcap</a>).</p></li>
-<li><p>in the issue, attach the problematic fields of your data dictionary. If you’re uncomfortable sharing your dictionary with the world, consider emailing it to developer. Because it’s just the data dictionary, no PHI should be included.</p></li>
+<li><p>creating a new GitHub Issue that describes the problem
+(<em>e.g.</em>, <a href="https://github.com/OuhscBbmc/REDCapR/issues" class="external-link">REDCapR</a>, <a href="https://github.com/nutterb/redcapAPI/issues" class="external-link">redcapAPI</a>, <a href="https://github.com/iuredcap/phpcap/issues" class="external-link">phpcap</a>).</p></li>
+<li><p>in the issue, attach the problematic fields of your data
+dictionary. If you’re uncomfortable sharing your dictionary with the
+world, consider emailing it to developer. Because it’s just the data
+dictionary, no PHI should be included.</p></li>
 </ol>
-<p>If the package developer can’t find a way to gracefully adapt, they’ll at least try to provide a better error message.</p>
+<p>If the package developer can’t find a way to gracefully adapt,
+they’ll at least try to provide a better error message.</p>
 </li>
-<li><p><strong>Identify problematic characters.</strong> This is a special case of the previous bullet. Look for fancy characters that might not be interpreted smoothly. For instance, when editing the data dictionary in Excel, sometimes <em>straight</em> quotes are converted to <em>curly</em> quotes. This might cause a problem later, when your API client tries to interpret the character using the wrong encoding. All ASCII characters in REDCap dictionaries appear to be interpreted smoothly.</p></li>
+<li><p><strong>Identify problematic characters.</strong> This is a
+special case of the previous bullet. Look for fancy characters that
+might not be interpreted smoothly. For instance, when editing the data
+dictionary in Excel, sometimes <em>straight</em> quotes are converted to
+<em>curly</em> quotes. This might cause a problem later, when your API
+client tries to interpret the character using the wrong encoding. All
+ASCII characters in REDCap dictionaries appear to be interpreted
+smoothly.</p></li>
 </ol>
 </div>
 </div>
@@ -294,17 +441,31 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <div class="section level3">
 <h3 id="reading-without-a-package">Reading without a Package<a class="anchor" aria-label="anchor" href="#reading-without-a-package"></a>
 </h3>
-<p>There are several ways to call REDCap’s API from <a href="https://cran.r-project.org/" class="external-link">R</a>. The packages <a href="https://github.com/nutterb/redcapAPI" class="external-link">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR" class="external-link">REDCapR</a> both rely on the <a href="https://cran.r-project.org/package=httr" class="external-link">httr</a> package, which calls the <a href="https://cran.r-project.org/package=curl" class="external-link">curl</a> package, which calls <a href="https://curl.se/" class="external-link">cURL</a>.</p>
+<p>There are several ways to call REDCap’s API from <a href="https://cran.r-project.org/" class="external-link">R</a>. The packages <a href="https://github.com/nutterb/redcapAPI" class="external-link">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR" class="external-link">REDCapR</a> both rely on the
+<a href="https://cran.r-project.org/package=httr" class="external-link">httr</a> package,
+which calls the <a href="https://cran.r-project.org/package=curl" class="external-link">curl</a> package, which
+calls <a href="https://curl.se/" class="external-link">cURL</a>.</p>
 <ol style="list-style-type: decimal">
 <li>
-<p><strong>Is httr installed on the user’s local machine?</strong> If so, running <code><a href="https://httr.r-lib.org/" class="external-link">library(httr)</a></code> should not produce any error messages if you’re starting with a fresh session of R:</p>
+<p><strong>Is httr installed on the user’s local machine?</strong>
+If so, running <code><a href="https://httr.r-lib.org/" class="external-link">library(httr)</a></code> should not produce any error
+messages if you’re starting with a fresh session of R:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/" class="external-link">httr</a></span><span class="op">)</span></span></code></pre></div>
 </li>
-<li><p><strong>Do you have the most recent version of httr?</strong> There are several ways to do this, but the easiest is probably to run <code>update.packages(ask = FALSE, repos = "https://cran.rstudio.com")</code>. The optional argument <code>ask</code> prevents the user from needing to respond ‘Y’ to each outdated package.</p></li>
+<li><p><strong>Do you have the most recent version of httr?</strong>
+There are several ways to do this, but the easiest is probably to run
+<code>update.packages(ask = FALSE, repos = "https://cran.rstudio.com")</code>.
+The optional argument <code>ask</code> prevents the user from needing to
+respond ‘Y’ to each outdated package.</p></li>
 <li>
-<p><strong>Can you query a <em>test</em> project using httr?</strong> Both the <a href="https://github.com/nutterb/redcapAPI" class="external-link">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR" class="external-link">REDCapR</a> packages employ something similar to the following function in <a href="https://cran.r-project.org/package=httr" class="external-link">httr</a>. If you’re curious, here is the relevant source code for <a href="https://github.com/nutterb/redcapAPI/blob/master/R/exportRecords.R" class="external-link">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-read-oneshot.R" class="external-link">REDCapR</a>.</p>
-<p>If this check fails, consider attempting again with the url and token used above in the Postman example.</p>
+<p><strong>Can you query a <em>test</em> project using
+httr?</strong> Both the <a href="https://github.com/nutterb/redcapAPI" class="external-link">redcapAPI</a> and <a href="https://github.com/OuhscBbmc/REDCapR" class="external-link">REDCapR</a> packages employ
+something similar to the following function in <a href="https://cran.r-project.org/package=httr" class="external-link">httr</a>. If you’re
+curious, here is the relevant source code for <a href="https://github.com/nutterb/redcapAPI/blob/master/R/exportRecords.R" class="external-link">redcapAPI</a>
+and <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-read-oneshot.R" class="external-link">REDCapR</a>.</p>
+<p>If this check fails, consider attempting again with the url and token
+used above in the Postman example.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">redcap_uri</span> <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span>
 <span><span class="va">token</span>      <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span>
@@ -323,7 +484,8 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">raw_text</span></span></code></pre></div>
-<p>Alternatively, you can try using the <a href="https://cran.r-project.org/package=RCurl" class="external-link">RCurl</a> package, which has been mostly replaced by httr in packages developed since 2014.</p>
+<p>Alternatively, you can try using the <a href="https://cran.r-project.org/package=RCurl" class="external-link">RCurl</a> package, which
+has been mostly replaced by httr in packages developed since 2014.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">raw_text</span> <span class="op">&lt;-</span> <span class="fu">RCurl</span><span class="fu">::</span><span class="fu">postForm</span><span class="op">(</span></span>
 <span>  uri             <span class="op">=</span> <span class="va">redcap_uri</span></span>
@@ -334,8 +496,16 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
-<p><strong>Can you query a <em>subset</em> of <em>your</em> project using httr?</strong> This step is like the previous one, but with two differences. First, it’s using your REDCap project (instead of the test project). Second, it pulls fewer records, and a smaller collection of fields. Subsetting can help troubleshoot by avoiding (and thus identifying) cells with problematic values.</p>
-<p>Notice this call now passes values to the <code>records</code> and <code>fields</code> parameters. Also notice each value is a <em>single</em> long string (rather a <em>vector</em> of shorter strings, which is more natural to most R users).</p>
+<p><strong>Can you query a <em>subset</em> of <em>your</em> project
+using httr?</strong> This step is like the previous one, but with two
+differences. First, it’s using your REDCap project (instead of the test
+project). Second, it pulls fewer records, and a smaller collection of
+fields. Subsetting can help troubleshoot by avoiding (and thus
+identifying) cells with problematic values.</p>
+<p>Notice this call now passes values to the <code>records</code> and
+<code>fields</code> parameters. Also notice each value is a
+<em>single</em> long string (rather a <em>vector</em> of shorter
+strings, which is more natural to most R users).</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">redcap_uri</span>         <span class="op">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span></span>
 <span><span class="va">token</span>              <span class="op">&lt;-</span> <span class="st">"your-secret-token"</span></span>
@@ -361,8 +531,20 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <span><span class="va">raw_text</span></span></code></pre></div>
 </li>
 <li>
-<p><strong>Can you query an <em>entire</em> project using httr?</strong> There are two advantages of trying a subset of the data. First, small datasets avoid the time-out errors that plague large datasets. Second, it may avoid problematic values being passed through the pipeline. If the current check fails but the previous check succeeds, then experiment with different expanses of records and fields. This should help determine which values are causing the problems, or if there’s simply too much data being pulled in one pass.</p>
-<p>If the desired dataset is too large, consider if you can prune unnecessary records or fields. If not, one solution is to pull smaller, multiple batches using the API, then reassemble them. The <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code>redcap_read()</code> function</a> in <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> does this automatically, and allows the user to specify a <code>batch_size</code>.</p>
+<p><strong>Can you query an <em>entire</em> project using
+httr?</strong> There are two advantages of trying a subset of the data.
+First, small datasets avoid the time-out errors that plague large
+datasets. Second, it may avoid problematic values being passed through
+the pipeline. If the current check fails but the previous check
+succeeds, then experiment with different expanses of records and fields.
+This should help determine which values are causing the problems, or if
+there’s simply too much data being pulled in one pass.</p>
+<p>If the desired dataset is too large, consider if you can prune
+unnecessary records or fields. If not, one solution is to pull smaller,
+multiple batches using the API, then reassemble them. The <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code>redcap_read()</code>
+function</a> in <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> does this
+automatically, and allows the user to specify a
+<code>batch_size</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">redcap_uri</span>                  <span class="op">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span></span>
 <span><span class="va">token</span>                       <span class="op">&lt;-</span> <span class="st">"your-secret-token"</span></span>
@@ -388,44 +570,72 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <span><span class="va">raw_text</span></span></code></pre></div>
 </li>
 </ol>
-<p>If all these checks pass, proceed to the next section. If not, start by consulting your REDCap administrator.</p>
+<p>If all these checks pass, proceed to the next section. If not, start
+by consulting your REDCap administrator.</p>
 </div>
 <div class="section level3">
 <h3 id="reading-with-the-redcapr-package">Reading with the REDCapR Package<a class="anchor" aria-label="anchor" href="#reading-with-the-redcapr-package"></a>
 </h3>
-<p><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> wraps convenience functions around <a href="https://httr.r-lib.org/" class="external-link">httr</a> to reduce the size and complexity of the user’s code. The package’s basic functions are <a href="https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html">demonstrated in a vignette</a> and are documented in its <a href="https://ouhscbbmc.github.io/REDCapR/reference/">reference manual</a>.</p>
-<p>If you’re not using REDCapR, you can skip this section and proceed to “Exporting from REDCap to R, using redcapAPI” or “Importing into REDCap from R” below.</p>
-<p><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> and <a href="https://github.com/nutterb/redcapAPI" class="external-link">redcapAPI</a> are different R packages, but the developers collaborate with each other and share advice.</p>
+<p><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> wraps
+convenience functions around <a href="https://httr.r-lib.org/" class="external-link">httr</a>
+to reduce the size and complexity of the user’s code. The package’s
+basic functions are <a href="https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html">demonstrated
+in a vignette</a> and are documented in its <a href="https://ouhscbbmc.github.io/REDCapR/reference/">reference
+manual</a>.</p>
+<p>If you’re not using REDCapR, you can skip this section and proceed to
+“Exporting from REDCap to R, using redcapAPI” or “Importing into REDCap
+from R” below.</p>
+<p><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> and <a href="https://github.com/nutterb/redcapAPI" class="external-link">redcapAPI</a> are different
+R packages, but the developers collaborate with each other and share
+advice.</p>
 <ol style="list-style-type: decimal">
 <li>
-<p><strong>Is the latest version of REDCapR installed on your machine?</strong> Currently the easiest way to install REDCapR is with the <a href="https://remotes.r-lib.org/" class="external-link">remotes</a> package. The following code installs remotes, then installs REDCapR. The CRAN version of REDCapR is updated only a few times a year, while the code below will download the latest stable version.</p>
+<p><strong>Is the latest version of REDCapR installed on your
+machine?</strong> Currently the easiest way to install REDCapR is with
+the <a href="https://remotes.r-lib.org/" class="external-link">remotes</a> package. The
+following code installs remotes, then installs REDCapR. The CRAN version
+of REDCapR is updated only a few times a year, while the code below will
+download the latest stable version.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span>, repos <span class="op">=</span> <span class="st">"https://cran.rstudio.com"</span><span class="op">)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"OuhscBbmc/REDCapR"</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
-<p><strong>Does REDCapR load successfully on your machine?</strong> If so, running <code><a href="https://ouhscbbmc.github.io/REDCapR/">library(REDCapR)</a></code> should produce the following output if you’re starting with a fresh session of R:</p>
+<p><strong>Does REDCapR load successfully on your machine?</strong>
+If so, running <code><a href="https://ouhscbbmc.github.io/REDCapR/">library(REDCapR)</a></code> should produce the
+following output if you’re starting with a fresh session of R:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span></span>
 <span><span class="co"># Loading required package: REDCapR</span></span></code></pre></div>
 </li>
 <li>
-<p><strong>Can you export their data dictionary?</strong> Sometimes the problem exists within the metadata/dictionary, instead of the actual data values. Verify the structure and content of this specific project is interpretable by your local environment.</p>
+<p><strong>Can you export their data dictionary?</strong> Sometimes
+the problem exists within the metadata/dictionary, instead of the actual
+data values. Verify the structure and content of this specific project
+is interpretable by your local environment.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session, if you haven't already.</span></span>
 <span><span class="va">redcap_uri</span>       <span class="op">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span></span>
 <span><span class="va">token</span>            <span class="op">&lt;-</span> <span class="st">"your-secret-token"</span></span>
 <span><span class="fu"><a href="../reference/redcap_metadata_read.html">redcap_metadata_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span></span></code></pre></div>
-<p>If this fails, see “Problems in the project’s metadata/dictionary” under <a href="#gotchas-agnostic">Common Gotchas</a> above. A problematic data dictionary may produce the error <code>Error in inherits(ds, "data.frame") : object 'ds' not found</code> when calling <code><a href="../reference/redcap_metadata_read.html">REDCapR::redcap_metadata_read()</a></code>.</p>
+<p>If this fails, see “Problems in the project’s metadata/dictionary”
+under <a href="#gotchas-agnostic">Common Gotchas</a> above. A
+problematic data dictionary may produce the error
+<code>Error in inherits(ds, "data.frame") : object 'ds' not found</code>
+when calling <code><a href="../reference/redcap_metadata_read.html">REDCapR::redcap_metadata_read()</a></code>.</p>
 </li>
 <li>
-<p><strong>Can you export from an example project?</strong> This is the same fake data hosted by the <a href="https://www.ouhsc.edu/bbmc/" class="external-link">OUHSC BBMC</a> as in the previous section.</p>
+<p><strong>Can you export from an example project?</strong> This is
+the same fake data hosted by the <a href="https://www.ouhsc.edu/bbmc/" class="external-link">OUHSC BBMC</a> as in the previous
+section.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session.</span></span>
 <span><span class="va">uri</span>   <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span>
 <span><span class="va">token</span> <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span>
 <span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<p>The previous code should produce similar output. Notice there are five rows and the columns will wrap around if your console window is too narrow.</p>
+<p>The previous code should produce similar output. Notice there are
+five rows and the columns will wrap around if your console window is too
+narrow.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> records and <span class="dv">1</span> columns were read from REDCap <span class="cf">in</span> <span class="fl">0.41</span> seconds.</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>Starting to read <span class="dv">5</span> records  at <span class="dv">2014-06-27</span> <span class="dv">17</span><span class="sc">:</span><span class="dv">19</span><span class="sc">:</span><span class="dv">49</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>Reading batch <span class="dv">1</span> of <span class="dv">1</span>, with ids <span class="dv">1</span> through <span class="fl">5.</span></span>
@@ -460,13 +670,17 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="st">5                     2</span></span></code></pre></div>
 </li>
 <li>
-<p><strong>Can you export from your own project?</strong> The code is similar to the previous check, but the <code>uri</code> and <code>token</code> values will need to be modified.</p>
+<p><strong>Can you export from your own project?</strong> The code
+is similar to the previous check, but the <code>uri</code> and
+<code>token</code> values will need to be modified.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session, if you haven't already.</span></span>
 <span><span class="va">redcap_uri</span>       <span class="op">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span></span>
 <span><span class="va">token</span>            <span class="op">&lt;-</span> <span class="st">"your-secret-token"</span></span>
 <span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
-<p>Alternatively, a <code>redcap_project</code> object can be declared initially, which makes subsequent calls cleaner when the token and url are required only the when the object is declared.</p>
+<p>Alternatively, a <code>redcap_project</code> object can be declared
+initially, which makes subsequent calls cleaner when the token and url
+are required only the when the object is declared.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session, if you haven't already.</span></span>
 <span><span class="va">uri</span>               <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span>
@@ -481,19 +695,32 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <span><span class="va">ds_males</span>          <span class="op">&lt;-</span> <span class="va">project</span><span class="op">$</span><span class="fu">read</span><span class="op">(</span>records <span class="op">=</span> <span class="va">ids_of_males</span>, batch_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
 <span><span class="va">ds_minors</span>         <span class="op">&lt;-</span> <span class="va">project</span><span class="op">$</span><span class="fu">read</span><span class="op">(</span>records <span class="op">=</span> <span class="va">ids_of_minors</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
 </li>
-<li><p><strong>Is the export operation still unsuccessful using REDCapR?</strong> If so the “Can the user query a <em>entire</em> REDCap project using httr?” check succeeded, but the REDCapR checks did not, consider posting a new <a href="https://github.com/OuhscBbmc/REDCapR/issues" class="external-link">GitHub issue</a> to the package developers.</p></li>
+<li><p><strong>Is the export operation still unsuccessful using
+REDCapR?</strong> If so the “Can the user query a <em>entire</em> REDCap
+project using httr?” check succeeded, but the REDCapR checks did not,
+consider posting a new <a href="https://github.com/OuhscBbmc/REDCapR/issues" class="external-link">GitHub issue</a> to
+the package developers.</p></li>
 </ol>
-<p>If one of these checks fail, please start by consulting your REDCap administrator.</p>
+<p>If one of these checks fail, please start by consulting your REDCap
+administrator.</p>
 </div>
 <div class="section level3">
 <h3 id="reading-with-the-redcapapi-package">Reading with the redcapAPI Package<a class="anchor" aria-label="anchor" href="#reading-with-the-redcapapi-package"></a>
 </h3>
-<p><a href="https://httr.r-lib.org/" class="external-link">httr</a> <a href="https://github.com/nutterb/redcapAPI" class="external-link">redcapAPI</a> wraps convenience functions around <a href="https://httr.r-lib.org/" class="external-link">httr</a> to reduce the size and complexity of the user’s code.</p>
-<p>If you’re not using redcapAPI, you can skip this section and proceed to ‘Importing into REDCap from R’ below. More specific discussion about <code>redcapAPI</code> can be found at the <a href="https://github.com/nutterb/redcapAPI/wiki" class="external-link">package’s wiki</a>.</p>
-<p><a href="https://github.com/nutterb/redcapAPI" class="external-link">redcapAPI</a> and <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> are different packages, but the developers collaborate with each other and share advice.</p>
+<p><a href="https://httr.r-lib.org/" class="external-link">httr</a> <a href="https://github.com/nutterb/redcapAPI" class="external-link">redcapAPI</a> wraps
+convenience functions around <a href="https://httr.r-lib.org/" class="external-link">httr</a>
+to reduce the size and complexity of the user’s code.</p>
+<p>If you’re not using redcapAPI, you can skip this section and proceed
+to ‘Importing into REDCap from R’ below. More specific discussion about
+<code>redcapAPI</code> can be found at the <a href="https://github.com/nutterb/redcapAPI/wiki" class="external-link">package’s wiki</a>.</p>
+<p><a href="https://github.com/nutterb/redcapAPI" class="external-link">redcapAPI</a> and <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> are different
+packages, but the developers collaborate with each other and share
+advice.</p>
 <ol style="list-style-type: decimal">
 <li>
-<p><strong>Is redcapAPI installed on your machine?</strong> Currently, the easiest way to install <code>redcapAPI</code> is from CRAN.</p>
+<p><strong>Is redcapAPI installed on your machine?</strong>
+Currently, the easiest way to install <code>redcapAPI</code> is from
+CRAN.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"redcapAPI"</span><span class="op">)</span></span></code></pre></div>
 <p>Developmental versions may be available on GitHub.</p>
@@ -502,22 +729,31 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"nutterb/redcapAPI"</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
-<p><strong>Does redcapAPI load successfully on your machine?</strong> If so, running <code><a href="https://github.com/nutterb/redcapAPI/wiki" class="external-link">library(redcapAPI)</a></code> should produce the following output if you’re starting with a fresh session of R:</p>
+<p><strong>Does redcapAPI load successfully on your
+machine?</strong> If so, running <code><a href="https://github.com/nutterb/redcapAPI/wiki" class="external-link">library(redcapAPI)</a></code> should
+produce the following output if you’re starting with a fresh session of
+R:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nutterb/redcapAPI/wiki" class="external-link">redcapAPI</a></span><span class="op">)</span></span>
 <span><span class="co"># Loading required package: redcapAPI</span></span></code></pre></div>
 </li>
 <li>
-<p><strong>Can you export their data dictionary?</strong> Sometimes the problem exists within the metadata/dictionary, instead of the actual data values. Verify the structure and content of this specific project is interpretable by your local environment.</p>
+<p><strong>Can you export their data dictionary?</strong> Sometimes
+the problem exists within the metadata/dictionary, instead of the actual
+data values. Verify the structure and content of this specific project
+is interpretable by your local environment.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nutterb/redcapAPI/wiki" class="external-link">redcapAPI</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session, if you haven't already.</span></span>
 <span><span class="va">redcap_uri</span>       <span class="op">&lt;-</span> <span class="st">"https://the.urlofyourinsitution.edu/api/"</span></span>
 <span><span class="va">token</span>            <span class="op">&lt;-</span> <span class="st">"your-secret-token"</span></span>
 <span><span class="fu">exportMetaData</span><span class="op">(</span><span class="va">rcon</span><span class="op">)</span></span></code></pre></div>
-<p>If this fails, see “Problems in the project’s metadata/dictionary.” under <a href="#gotchas-agnostic">Gotchas</a> above</p>
+<p>If this fails, see “Problems in the project’s metadata/dictionary.”
+under <a href="#gotchas-agnostic">Gotchas</a> above</p>
 </li>
 <li>
-<p><strong>Can you export from an example project?</strong> This is the same fake data hosted by the <a href="https://www.ouhsc.edu/bbmc/" class="external-link">OUHSC BBMC</a> as in the previous section.</p>
+<p><strong>Can you export from an example project?</strong> This is
+the same fake data hosted by the <a href="https://www.ouhsc.edu/bbmc/" class="external-link">OUHSC BBMC</a> as in the previous
+section.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nutterb/redcapAPI/wiki" class="external-link">redcapAPI</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session.</span></span>
 <span><span class="va">rcon</span> <span class="op">&lt;-</span> <span class="fu">redcapConnection</span><span class="op">(</span></span>
@@ -525,7 +761,9 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <span>  token <span class="op">=</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu">exportRecords</span><span class="op">(</span><span class="va">rcon</span><span class="op">)</span></span></code></pre></div>
-<p>The previous code should produce similar output. Notice there are five rows and the columns will wrap around if your console window is too narrow.</p>
+<p>The previous code should produce similar output. Notice there are
+five rows and the columns will wrap around if your console window is too
+narrow.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>record_id name_first name_last                                 address      telephone               email</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>         <span class="dv">1</span>     Nutmeg  Nutmouse <span class="dv">14</span> Rose Cottage St.\nKenning UK, <span class="dv">323232</span> (<span class="dv">432</span>) <span class="dv">456-4848</span>     nutty<span class="sc">@</span>mouse.com</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>         <span class="dv">2</span>     Tumtum  Nutmouse <span class="dv">14</span> Rose Cottage Blvd.\nKenning UK <span class="dv">34243</span> (<span class="dv">234</span>) <span class="dv">234-2343</span>    tummy<span class="sc">@</span>mouse.comm</span>
@@ -555,7 +793,9 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="st">5                     2</span></span></code></pre></div>
 </li>
 <li>
-<p><strong>Can you export your own project?</strong> The code is similar to the previous check, but the <code>uri</code> and <code>token</code> values will need to be modified.</p>
+<p><strong>Can you export your own project?</strong> The code is
+similar to the previous check, but the <code>uri</code> and
+<code>token</code> values will need to be modified.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nutterb/redcapAPI/wiki" class="external-link">redcapAPI</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session, if you haven't already.</span></span>
 <span><span class="va">rcon</span> <span class="op">&lt;-</span> <span class="fu">redcapConnection</span><span class="op">(</span></span>
@@ -564,9 +804,14 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <span><span class="op">)</span></span>
 <span><span class="fu">exportRecords</span><span class="op">(</span><span class="va">rcon</span><span class="op">)</span></span></code></pre></div>
 </li>
-<li><p><strong>Is the export operation still unsuccessful using redcapAPI?</strong> If so the “Can the user query a <em>entire</em> REDCap project using httr?” check succeeded, but the redcapAPI checks did not, consider posting a new <a href="https://github.com/nutterb/redcapAPI/issues" class="external-link">GitHub issue</a> to the package developers.</p></li>
+<li><p><strong>Is the export operation still unsuccessful using
+redcapAPI?</strong> If so the “Can the user query a <em>entire</em>
+REDCap project using httr?” check succeeded, but the redcapAPI checks
+did not, consider posting a new <a href="https://github.com/nutterb/redcapAPI/issues" class="external-link">GitHub issue</a> to
+the package developers.</p></li>
 </ol>
-<p>If one of these checks fail, please start by consulting your REDCap administrator.</p>
+<p>If one of these checks fail, please start by consulting your REDCap
+administrator.</p>
 </div>
 </div>
 <div class="section level2">
@@ -576,29 +821,53 @@ He had a gold watch chain and a black mustache",2</code></pre>
 <h3 id="troubleshooting-strategies">Troubleshooting Strategies<a class="anchor" aria-label="anchor" href="#troubleshooting-strategies"></a>
 </h3>
 <ol style="list-style-type: decimal">
-<li><p><strong>Simplify.</strong> Eliminate potential sources of problems by cumulatively. For example, reduce the columns &amp; records that you read/write.</p></li>
-<li><p><strong>Start fresh.</strong> If that’s not feasible, start a new REDCap project and gradually add elements from the original project. Identify the problematic element by testing the API call after each addition.</p></li>
+<li><p><strong>Simplify.</strong> Eliminate potential sources of
+problems by cumulatively. For example, reduce the columns &amp; records
+that you read/write.</p></li>
+<li><p><strong>Start fresh.</strong> If that’s not feasible, start a new
+REDCap project and gradually add elements from the original project.
+Identify the problematic element by testing the API call after each
+addition.</p></li>
 </ol>
 </div>
 <div class="section level3">
 <h3 id="resources">Resources<a class="anchor" aria-label="anchor" href="#resources"></a>
 </h3>
 <ul>
-<li><p>REDCap is used in many environments, and it’s not surprising that a lot of libraries have been developed to cater to different scenarios and languages. An active list is maintained at <a href="https://redcap-tools.github.io/projects/" class="external-link">REDCap-Tools</a>. In an entry needs to be added, please notify us; instructions are found at the bottom of the page.</p></li>
+<li><p>REDCap is used in many environments, and it’s not surprising that
+a lot of libraries have been developed to cater to different scenarios
+and languages. An active list is maintained at <a href="https://redcap-tools.github.io/projects/" class="external-link">REDCap-Tools</a>. In an
+entry needs to be added, please notify us; instructions are found at the
+bottom of the page.</p></li>
 <li>
-<p>The basic API documentation is available on your REDCap server, typically at</p>
+<p>The basic API documentation is available on your REDCap server,
+typically at</p>
 <pre><code>https://&lt;*your server name*&gt;/redcap/api/help</code></pre>
 </li>
-<li><p>If you have access to the REDCap wiki, some newer examples might exist at <a href="https://community.projectredcap.org/articles/462/api-examples.html" class="external-link uri">https://community.projectredcap.org/articles/462/api-examples.html</a>. The official documentation can be found on the <code>API Help Page</code> and `API Examples’ pages on the REDCap wiki (<em>i.e.</em>, <a href="https://community.projectredcap.org/articles/456/api-documentation.html" class="external-link uri">https://community.projectredcap.org/articles/456/api-documentation.html</a> and <a href="https://community.projectredcap.org/articles/462/api-examples.html" class="external-link uri">https://community.projectredcap.org/articles/462/api-examples.html</a>). If you do not have an account for the wiki, please ask your campus REDCap administrator to send you the static material.</p></li>
-<li><p>Scott Burns, the primary developer of <a href="https://github.com/redcap-tools/PyCap" class="external-link">PyCap</a> has a good intro at <a href="http://sburns.org/2013/07/22/intro-to-redcap-api.html" class="external-link uri">http://sburns.org/2013/07/22/intro-to-redcap-api.html</a></p></li>
-<li><p>Benjamin Nutter, the primary developer of <a href="https://github.com/nutterb/redcapAPI/wiki" class="external-link">redcapAPI</a> has a good wiki at <a href="https://github.com/nutterb/redcapAPI/wiki" class="external-link uri">https://github.com/nutterb/redcapAPI/wiki</a></p></li>
-<li><p>In addition to this troubleshooting document, REDCapR has vignettes that covers its <a href="https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html">basic</a> and <a href="https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.html">advanced</a> operations.</p></li>
+<li><p>If you have access to the REDCap wiki, some newer examples might
+exist at <a href="https://community.projectredcap.org/articles/462/api-examples.html" class="external-link uri">https://community.projectredcap.org/articles/462/api-examples.html</a>.
+The official documentation can be found on the
+<code>API Help Page</code> and `API Examples’ pages on the REDCap wiki
+(<em>i.e.</em>, <a href="https://community.projectredcap.org/articles/456/api-documentation.html" class="external-link uri">https://community.projectredcap.org/articles/456/api-documentation.html</a>
+and <a href="https://community.projectredcap.org/articles/462/api-examples.html" class="external-link uri">https://community.projectredcap.org/articles/462/api-examples.html</a>).
+If you do not have an account for the wiki, please ask your campus
+REDCap administrator to send you the static material.</p></li>
+<li><p>Scott Burns, the primary developer of <a href="https://github.com/redcap-tools/PyCap" class="external-link">PyCap</a> has a good intro
+at <a href="http://sburns.org/2013/07/22/intro-to-redcap-api.html" class="external-link uri">http://sburns.org/2013/07/22/intro-to-redcap-api.html</a></p></li>
+<li><p>Benjamin Nutter, the primary developer of <a href="https://github.com/nutterb/redcapAPI/wiki" class="external-link">redcapAPI</a> has a
+good wiki at <a href="https://github.com/nutterb/redcapAPI/wiki" class="external-link uri">https://github.com/nutterb/redcapAPI/wiki</a></p></li>
+<li><p>In addition to this troubleshooting document, REDCapR has
+vignettes that covers its <a href="https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html">basic</a>
+and <a href="https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.html">advanced</a>
+operations.</p></li>
 </ul>
 </div>
 <div class="section level3">
 <h3 id="document-info">Document Info<a class="anchor" aria-label="anchor" href="#document-info"></a>
 </h3>
-<p>This document is primarily based on REDCap version 6.0.2 and was last updated 2020-01-21. A development version of the document is available on GitHub: <a href="https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html" class="uri">https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html</a>.</p>
+<p>This document is primarily based on REDCap version 6.0.2 and was last
+updated 2020-01-21. A development version of the document is available
+on GitHub: <a href="https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html" class="uri">https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html</a>.</p>
 </div>
 </div>
   </div>
