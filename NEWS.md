@@ -71,6 +71,9 @@ This will help extract forms from longitudinal & repeating projects.
   * `redcap_file_upload_oneshot()` to `redcap_file_upload_opneshot()`
   * `redcap_download_instrument()` to `redcap_instrument_download()`
 
+* `redcap_dag_read()` has new `data_access_group_id` field (introduced maybe in [13.1.0](https://community.projectredcap.org/articles/13/index.html)) (#459)
+* `redcap_users_export()` has new `mycap_participants` field (introduced maybe in [13.0.0](https://community.projectredcap.org/articles/13/index.html)) (#459)
+
 Version 1.1.0 (released 2022-08-10)
 ==========================================================
 

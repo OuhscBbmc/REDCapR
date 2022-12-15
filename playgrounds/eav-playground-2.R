@@ -87,7 +87,7 @@ ds_eav_possible <-
 # ds_form_pt <-
 #   ds_metadata %>%
 #   dplyr::filter(.data$field_type == "complete") %>%
-#   dplyr::select(.data$field_name, .data$form_name) %>%
+#   dplyr::select("field_name", "form_name") %>%
 #   dplyr::inner_join(ds_eav, by = "field_name") %>%
 #   dplyr::mutate(
 #     .default_check = dplyr::i
@@ -107,10 +107,10 @@ ds_eav_2 <-
     value      = dplyr::if_else(.data$checkbox, as.character(!is.na(.data$value)), .data$value),
   ) %>%
   dplyr::right_join(ds_eav_possible, by = c("record", "event_id", "field_name")) %>%
-  dplyr::select(-.data$field_type, -.data$field_name_base, -.data$checkbox) %>%
+  dplyr::select(-"field_type", -"field_name_base", -"checkbox") %>%
   dplyr::left_join(
     ds_metadata %>%
-      dplyr::select(.data$field_name, .data$field_name_base, .data$field_type),
+      dplyr::select("field_name", "field_name_base", "field_type"),
     by = "field_name"
   ) %>%
   dplyr::mutate(
@@ -120,7 +120,7 @@ ds_eav_2 <-
 
 ds <-
   ds_eav_2 %>%
-  dplyr::select(-.data$field_type, -.data$field_name_base) %>%
+  dplyr::select(-"field_type", -"field_name_base") %>%
   # dplyr::slice(1:46) %>%
   # dplyr::group_by(record, redcap_repeat_instrument, redcap_repeat_instance, event_id, field_name) %>%
   # dplyr::summarise(n = dplyr::n(), .groups = "drop") %>%
@@ -130,8 +130,8 @@ ds <-
   # tidyr::drop_na(event_id) %>%                            # TODO: need a good fix for repeats
   tidyr::pivot_wider( # Everything else is considered an ID column
     id_cols     = !!.fields_plumbing,
-    names_from  = .data$field_name,
-    values_from = .data$value
+    names_from  = "field_name",
+    values_from = "value"
   ) %>%
   dplyr::select(!!.fields_to_return)
   # dplyr::select(.data = ., !!intersect(variables_to_keep, colnames(.)))
@@ -144,7 +144,7 @@ ds[[.record_id_name]] <- NULL
 ds <-
   ds %>%
   dplyr::rename(
-    !!.record_id_name := .data$record
+    !!.record_id_name := "record"
   ) %>%
   readr::type_convert(col_types)# |>
     # View()
