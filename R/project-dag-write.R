@@ -19,7 +19,7 @@ populate_project_dag_write <- function(batch = FALSE, verbose = FALSE) {
     token         = credential$token
   )
   path_in_dag <- system.file(
-    "test-data/project-dag/dag-data.csv",
+    "test-data/project-dag/data.csv",
     package = "REDCapR"
   )
 
@@ -48,7 +48,7 @@ populate_project_dag_write <- function(batch = FALSE, verbose = FALSE) {
   # testthat::expect_message(
     returned_object <- if (batch) {
       REDCapR::redcap_write(
-        ds                          = ds_to_write,
+        ds_to_write                 = ds_to_write,
         redcap_uri                  = project$redcap_uri,
         token                       = project$token,
         verbose                     = verbose,

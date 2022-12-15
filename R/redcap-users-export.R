@@ -144,7 +144,7 @@ redcap_users_export <- function(
         ds_user_form <-
           ds_combined %>%
           dplyr::select("username", "forms") %>%
-          tidyr::separate_rows(.data$forms, sep = ",") %>%
+          tidyr::separate_rows("forms", sep = ",") %>%
           # tidyr::separate_(
           #   col     = "form",
           #   into    = c("form_name", "permission"),

@@ -78,7 +78,7 @@ choices_2   <- ds_metadata[ds_metadata$field_name == "race", ]$select_choices_or
 REDCapR::regex_named_captures(pattern = pattern_boxes, text = choices_2)
 }
 
-path_3     <- system.file(package = "REDCapR", "test-data/project-simple/simple-metadata.csv")
+path_3     <- system.file(package = "REDCapR", "test-data/project-simple/metadata.csv")
 ds_metadata_3  <- read.csv(path_3)
 choices_3  <- ds_metadata_3[ds_metadata_3$field_name=="race", "select_choices_or_calculations"]
 REDCapR::regex_named_captures(pattern = pattern_boxes, text = choices_3)

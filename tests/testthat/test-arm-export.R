@@ -12,8 +12,8 @@ read_arms <- function(path) {
   full_path |>
     readr::read_csv(col_types = col_types) %>%
     dplyr::select(
-      arm_number  = .data$arm_num,
-      arm_name    = .data$name
+      arm_number  = "arm_num",
+      arm_name    = "name"
     )
 }
 
