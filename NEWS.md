@@ -60,6 +60,7 @@ This will help extract forms from longitudinal & repeating projects.
 * `sanitized_token()` now accepts an alternative regex pattern.  (Suggested by @maeon & @michalkouril, #370)
 * `redcap_read_eav_oneshot()` is an UNexported function that returns data in an EAV format (#437)
 * `redcap_metadata_read()` now correctly subsets the forms (identified & corrected by @ezraporter, #431 & #445)
+* New `redcap_event_read()` function. Exports metadata associated with a project's longitudinal events (@ezraporter, #457 & #XXX)
 
 ### Minor Enhancements
 
