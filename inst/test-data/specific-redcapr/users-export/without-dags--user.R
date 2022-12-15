@@ -15,6 +15,7 @@ structure(list(username = c("unittestphifree", "wbeasleya"),
     FALSE), mobile_app_download_data = c(FALSE, FALSE), record_create = c(TRUE, 
     TRUE), record_rename = c(FALSE, FALSE), record_delete = c(FALSE, 
     FALSE), lock_records_all_forms = c(FALSE, FALSE), lock_records = c(FALSE, 
-    FALSE), lock_records_customization = c(FALSE, FALSE), forms_export = c("demographics:1,health:1,race_and_ethnicity:1", 
+    FALSE), lock_records_customization = c(FALSE, FALSE), mycap_participants = c(0, 
+    0), forms_export = c("demographics:1,health:1,race_and_ethnicity:1", 
     "demographics:1,health:1,race_and_ethnicity:1")), row.names = c(NA, 
 -2L), class = c("tbl_df", "tbl", "data.frame"))
