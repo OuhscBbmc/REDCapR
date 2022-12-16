@@ -24,13 +24,10 @@
 #'
 #' @return
 #' Currently, a list is returned with the following elements:
-#' * `has_events`: a `logical` value indicating if the REDCap project has
-#' events (*i.e.*, "TRUE") or is a classic non-longitudinal project
-#' (*i.e.*, "FALSE").
 #' * `data`: a [tibble::tibble()] with one row per arm-event combination.  The
 #' columns are `event_name` (a human-friendly string), `arm_num` (an integer),
 #' `unique_event_name` (a string), `custom_event_label` (a string), and
-#' `event_id` (a double).
+#' `event_id` (an integer).
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
 #' * `status_code`: The
@@ -44,7 +41,7 @@
 #' empty string to save RAM.
 #'
 #' @author
-#' Will Beasley, Ezra Porter
+#' Ezra Porter, Will Beasley
 #'
 #' @references
 #' The official documentation can be found on the 'API Help Page'
@@ -60,20 +57,17 @@
 #'
 #' # Query a longitudinal project with a single arm and 3 events
 #' token_1  <- "786334BEB4A87D572DD0E99C4BFCE144"
-#' result_1 <- REDCapR::redcap_arm_export(redcap_uri=uri, token=token_1)
-#' result_1$has_events
+#' result_1 <- REDCapR::redcap_event_read(redcap_uri=uri, token=token_1)
 #' result_1$data
 #'
 #' # Query a longitudinal project with 2 arms and complex arm-event mappings
 #' token_2  <- "0434F0E9CF53ED0587847AB6E51DE762"
-#' result_2 <- REDCapR::redcap_arm_export(redcap_uri=uri, token=token_2)
-#' result_2$has_events
+#' result_2 <- REDCapR::redcap_event_read(redcap_uri=uri, token=token_2)
 #' result_2$data
 #'
 #' # Query a classic project without events
 #' token_3  <- "D70F9ACD1EDD6F151C6EA78683944E98"
-#' result_3 <- REDCapR::redcap_arm_export(redcap_uri=uri, token=token_3)
-#' result_3$has_events
+#' result_3 <- REDCapR::redcap_event_read(redcap_uri=uri, token=token_3)
 #' result_3$data
 #' }
 #' @export
@@ -116,7 +110,6 @@ redcap_event_read <- function(
 
   if (exists("kernel")) {
     if (kernel$success) {
-      has_events <- TRUE
       outcome_message <- sprintf(
         paste(
           "The list of events was retrieved from the REDCap project in %0.1f seconds.",
@@ -131,7 +124,7 @@ redcap_event_read <- function(
         arm_num            = readr::col_integer(),
         unique_event_name  = readr::col_character(),
         custom_event_label = readr::col_character(),
-        event_id           = readr::col_double()
+        event_id           = readr::col_integer()
       )
       d <-
         readr::read_csv(
@@ -142,7 +135,6 @@ redcap_event_read <- function(
       # If an operation is successful, the `raw_text` is no longer returned to save RAM.  The content is not really necessary with httr's status message exposed.
       kernel$raw_text <- ""
     } else if (kernel$raw_text == "ERROR: You cannot export events for classic projects") {
-      has_events <- FALSE
       outcome_message <- sprintf(
         paste(
           "A 'classic' REDCap project has no events.  Retrieved in %0.1f seconds.",
@@ -157,7 +149,7 @@ redcap_event_read <- function(
         arm_num            = integer(0),
         unique_event_name  = character(0),
         custom_event_label = character(0),
-        event_id           = double(0)
+        event_id           = integer(0)
       )
     } else {
       error_message <- sprintf(
@@ -182,7 +174,6 @@ redcap_event_read <- function(
     message(outcome_message)
 
   list(
-    has_events                = has_events,
     data                      = d,
     success                   = kernel$success,
     status_code               = kernel$status_code,

@@ -1,6 +1,6 @@
 library(testthat)
 
-read_events <- function(path) {
+retrieve_expected_events <- function(path) {
   full_path   <- system.file(path, package = "REDCapR")
   if (!file.exists(full_path))
     stop("The expected file `", full_path, "` was not found.")  # nocov
@@ -10,7 +10,7 @@ read_events <- function(path) {
     arm_num            = readr::col_integer(),
     unique_event_name  = readr::col_character(),
     custom_event_label = readr::col_character(),
-    event_id           = readr::col_double()
+    event_id           = readr::col_integer()
   )
 
   full_path |>
@@ -23,7 +23,7 @@ empty_data_frame <-
     arm_num            = integer(0),
     unique_event_name  = character(0),
     custom_event_label = character(0),
-    event_id           = double(0)
+    event_id           = integer(0)
   )
 
 test_that("Longitudinal Single Arm", {
@@ -31,7 +31,7 @@ test_that("Longitudinal Single Arm", {
   credential  <- retrieve_credential_testing(2629L)
 
   path_expected <- "test-data/longitudinal-single-arm/event.csv"
-  expected_data_frame <- read_events(path_expected)
+  expected_data_frame <- retrieve_expected_events(path_expected)
 
   expected_outcome_message <- "The list of events was retrieved from the REDCap project in \\d+(\\.\\d+\\W|\\W)seconds\\."
   returned_object <-
@@ -53,7 +53,7 @@ test_that("Longitudinal Two Arms", {
   credential  <- retrieve_credential_testing(212L)
 
   path_expected <- "test-data/project-longitudinal/event.csv"
-  expected_data_frame <- read_events(path_expected)
+  expected_data_frame <- retrieve_expected_events(path_expected)
 
   expected_outcome_message <- "The list of events was retrieved from the REDCap project in \\d+(\\.\\d+\\W|\\W)seconds\\."
   returned_object <-
@@ -96,8 +96,7 @@ test_that("delete-multiple-arm", {
   credential  <- retrieve_credential_testing(2627L)
 
   path_expected <- "test-data/delete-multiple-arm/event.csv"
-  expected_data_frame <- read_events(path_expected)
-  # start_clean_result <- REDCapR:::clean_start_delete_single_arm()
+  expected_data_frame <- retrieve_expected_events(path_expected)
 
   expected_outcome_message <- "The list of events was retrieved from the REDCap project in \\d+(\\.\\d+\\W|\\W)seconds\\."
   returned_object <-
@@ -151,4 +150,4 @@ test_that("Bad Token", {
   )
 })
 
-rm(read_events, empty_data_frame)
+rm(retrieve_expected_events, empty_data_frame)

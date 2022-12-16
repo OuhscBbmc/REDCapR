@@ -38,13 +38,10 @@ should be \code{NULL} for most institutions.  Optional.}
 \value{
 Currently, a list is returned with the following elements:
 \itemize{
-\item \code{has_events}: a \code{logical} value indicating if the REDCap project has
-events (\emph{i.e.}, "TRUE") or is a classic non-longitudinal project
-(\emph{i.e.}, "FALSE").
 \item \code{data}: a \code{\link[tibble:tibble]{tibble::tibble()}} with one row per arm-event combination.  The
 columns are \code{event_name} (a human-friendly string), \code{arm_num} (an integer),
 \code{unique_event_name} (a string), \code{custom_event_label} (a string), and
-\code{event_id} (a double).
+\code{event_id} (an integer).
 \item \code{success}: A boolean value indicating if the operation was apparently
 successful.
 \item \code{status_code}: The
@@ -67,20 +64,17 @@ uri            <- "https://bbmc.ouhsc.edu/redcap/api/"
 
 # Query a longitudinal project with a single arm and 3 events
 token_1  <- "786334BEB4A87D572DD0E99C4BFCE144"
-result_1 <- REDCapR::redcap_arm_export(redcap_uri=uri, token=token_1)
-result_1$has_events
+result_1 <- REDCapR::redcap_event_read(redcap_uri=uri, token=token_1)
 result_1$data
 
 # Query a longitudinal project with 2 arms and complex arm-event mappings
 token_2  <- "0434F0E9CF53ED0587847AB6E51DE762"
-result_2 <- REDCapR::redcap_arm_export(redcap_uri=uri, token=token_2)
-result_2$has_events
+result_2 <- REDCapR::redcap_event_read(redcap_uri=uri, token=token_2)
 result_2$data
 
 # Query a classic project without events
 token_3  <- "D70F9ACD1EDD6F151C6EA78683944E98"
-result_3 <- REDCapR::redcap_arm_export(redcap_uri=uri, token=token_3)
-result_3$has_events
+result_3 <- REDCapR::redcap_event_read(redcap_uri=uri, token=token_3)
 result_3$data
 }
 }
@@ -93,5 +87,5 @@ If you do not have an account for the wiki, please ask your campus REDCap
 administrator to send you the static material.
 }
 \author{
-Will Beasley, Ezra Porter
+Ezra Porter, Will Beasley
 }
