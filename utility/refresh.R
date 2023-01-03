@@ -27,6 +27,7 @@ gp <-
   }()
 goodpractice::results(gp)
 gp
+# If necessary: tinytex::tlmgr_install("makeindex")
 
 devtools::document()
 pkgdown::clean_site()
