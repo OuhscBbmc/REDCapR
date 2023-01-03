@@ -208,7 +208,7 @@ to_api_array <- function(x, element_names) {
 
   if (is.null(x)) {
     return(NULL)
-  } else if (is.null(element_names)){
+  } else if (is.null(element_names)) {
     rlang::abort("The `element_names` parameter cannot be null if `x` is not null.")
   }
 
