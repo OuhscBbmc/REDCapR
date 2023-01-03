@@ -54,6 +54,7 @@ reference:
       - redcap_arm_export
       - redcap_dag_read
       - redcap_event_instruments
+      - redcap_event_read
       - redcap_instrument_download
       - redcap_instruments
       - redcap_log_read

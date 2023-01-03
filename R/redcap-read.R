@@ -492,7 +492,7 @@ redcap_read <- function(
   )
 }
 
-ship_records <- function (
+ship_records <- function(
   .data,
   .success,
   .status_codes,
