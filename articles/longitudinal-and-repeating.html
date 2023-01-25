@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.9004</span>
       </span>
     </div>
 
@@ -109,7 +109,7 @@ or Rich?</h4>
 (a) has longitudinal events or (b) has a repeating measure. The first
 section conceptually discusses how REDCap stores complex structures. The
 remaining sections describe how to best retrieve complex structures with
-the <a href="https://chop-cgtdataops.github.io/REDCapTidieR/" class="external-link">REDCapTidyieR</a>
+the <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/" class="external-link">REDCapTidyieR</a>
 and <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a>
 packages.</p>
 <ul>
@@ -816,7 +816,7 @@ desktop to fit your analyses if necessary.</p>
 <ol style="list-style-type: decimal">
 <li>multiple calls to REDCapR’s <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html"><code>redcap_read()</code></a>,
 or</li>
-<li>a single call to REDCapTidieR’s <a href="https://chop-cgtdataops.github.io/REDCapTidieR/reference/read_redcap_tidy.html" class="external-link"><code>redcap_read_tidy()</code></a>.</li>
+<li>a single call to REDCapTidieR’s <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html" class="external-link"><code>redcap_read_tidy()</code></a>.</li>
 </ol>
 <p>The code in the vignette requires the magrittr package for the
 <code>%&gt;%</code> (alternatively you can use <code>|&gt;</code> if
@@ -1770,7 +1770,7 @@ bb2
 <div class="section level3">
 <h3 id="one-redcaptidier-call-for-all-tables">One REDCapTidieR Call for All Tables<a class="anchor" aria-label="anchor" href="#one-redcaptidier-call-for-all-tables"></a>
 </h3>
-<p><a href="https://chop-cgtdataops.github.io/REDCapTidieR/" class="external-link">REDCapTidieR</a>’s
+<p><a href="https://chop-cgtinformatics.github.io/REDCapTidieR/" class="external-link">REDCapTidieR</a>’s
 initial motivation is to facilitate longitudinal analyses and promote <a href="https://r4ds.hadley.nz/data-tidy.html" class="external-link">tidy</a> data hygiene.</p>
 <p>{Stephan Kadauke &amp; Richard Hanna, please represent your package
 as you wish. Tell me if I’ve positioned it differently than you would
@@ -1779,13 +1779,13 @@ have.}</p>
 <div class="section level3">
 <h3 id="choosing-between-the-approaches">Choosing between the Approaches<a class="anchor" aria-label="anchor" href="#choosing-between-the-approaches"></a>
 </h3>
-<p>When retrieving data from REDCap, we recommend calling <a href="https://chop-cgtdataops.github.io/REDCapTidieR/" class="external-link">REDCapTidieR</a>
+<p>When retrieving data from REDCap, we recommend calling <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/" class="external-link">REDCapTidieR</a>
 in many scenarios, such as:</p>
 <ul>
 <li>you are new to managing or analyzing data with R, or</li>
 <li>your analyses will require most of the dataset’s rows or columns,
 or</li>
-<li>you’d benefit from some of the auxiliary information in <a href="https://chop-cgtdataops.github.io/REDCapTidieR/articles/REDCapTidieR.html#tidying-redcap-exports" class="external-link">REDCapTidieR’s
+<li>you’d benefit from some of the auxiliary information in <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/articles/REDCapTidieR.html#tidying-redcap-exports" class="external-link">REDCapTidieR’s
 supertibble</a>, such as the instrument’s structure.
 <!--Future version may provide more information, like the column and row count of each table.-->
 </li>
@@ -1808,7 +1808,7 @@ network.</p>
 <p>And of course many scenarios are solved best with a combination of
 both packages, such as (a) <a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a> populates the
 initial demographics in REDCap, (b) research staff enter measures
-collected from patients over time, (c) <a href="https://chop-cgtdataops.github.io/REDCapTidieR/" class="external-link">REDCapTidieR</a>
+collected from patients over time, (c) <a href="https://chop-cgtinformatics.github.io/REDCapTidieR/" class="external-link">REDCapTidieR</a>
 retrieves the complete longitudinal dataset, (d) <a href="https://dplyr.tidyverse.org/" class="external-link">dplyr</a> joins the tibbles, and
 finally (e) <a href="https://cran.r-project.org/package=lme4/vignettes/lmer.pdf" class="external-link">lme4</a>
 tests hypotheses involving <a href="https://datascienceplus.com/analysing-longitudinal-data-multilevel-growth-models-i/" class="external-link">patient
