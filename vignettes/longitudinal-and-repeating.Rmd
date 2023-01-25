@@ -52,7 +52,7 @@ registerS3method("knit_print", "data.frame", knit_print.data.frame)
 Background
 ==================================================================
 
-This vignette pertains to reading REDCap records from a project that (a) has longitudinal events or (b) has a repeating measure.  The first section conceptually discusses how REDCap stores complex structures.  The remaining sections describe how to best retrieve complex structures with the [REDCapTidyieR](https://chop-cgtdataops.github.io/REDCapTidieR/) and [REDCapR](https://ouhscbbmc.github.io/REDCapR/) packages.
+This vignette pertains to reading REDCap records from a project that (a) has longitudinal events or (b) has a repeating measure.  The first section conceptually discusses how REDCap stores complex structures.  The remaining sections describe how to best retrieve complex structures with the [REDCapTidyieR](https://chop-cgtinformatics.github.io/REDCapTidieR/) and [REDCapR](https://ouhscbbmc.github.io/REDCapR/) packages.
 
 * If you are new to R or REDCap, consider start with the [Typical REDCap Workflow for a Data Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html) and [Basic REDCapR Operations](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) vignettes and then return to this document.
 * If you are reading from a *simple* project, just call REDCapR's [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html).
@@ -203,7 +203,7 @@ Our advice is to start before Table 5 is assembled --retrieve the information in
 Two approaches are appropriate for most scenarios:
 
 1. multiple calls to REDCapR's [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html), or
-1. a single call to REDCapTidieR's [`redcap_read_tidy()`](https://chop-cgtdataops.github.io/REDCapTidieR/reference/read_redcap_tidy.html).
+1. a single call to REDCapTidieR's [`redcap_read_tidy()`](https://chop-cgtinformatics.github.io/REDCapTidieR/reference/read_redcap_tidy.html).
 
 The code in the vignette requires the magrittr package for the `%>%` (alternatively you can use `|>` if you're using R 4.0.2 or later).
 
@@ -319,18 +319,18 @@ ds_block
 One REDCapTidieR Call for All Tables
 ------------------------------------------------------------------
 
-[REDCapTidieR](https://chop-cgtdataops.github.io/REDCapTidieR/)'s initial motivation is to facilitate longitudinal analyses and promote [tidy](https://r4ds.hadley.nz/data-tidy.html) data hygiene.
+[REDCapTidieR](https://chop-cgtinformatics.github.io/REDCapTidieR/)'s initial motivation is to facilitate longitudinal analyses and promote [tidy](https://r4ds.hadley.nz/data-tidy.html) data hygiene.
 
 {Stephan Kadauke & Richard Hanna, please represent your package as you wish.  Tell me if I've positioned it differently than you would have.}
 
 Choosing between the Approaches
 ------------------------------------------------------------------
 
-When retrieving data from REDCap, we recommend calling [REDCapTidieR](https://chop-cgtdataops.github.io/REDCapTidieR/) in many scenarios, such as:
+When retrieving data from REDCap, we recommend calling [REDCapTidieR](https://chop-cgtinformatics.github.io/REDCapTidieR/) in many scenarios, such as:
 
 * you are new to managing or analyzing data with R, or
 * your analyses will require most of the dataset's rows or columns, or
-* you'd benefit from some of the auxiliary information in [REDCapTidieR's supertibble](https://chop-cgtdataops.github.io/REDCapTidieR/articles/REDCapTidieR.html#tidying-redcap-exports), such as the instrument's structure.  <!--Future version may provide more information, like the column and row count of each table.-->
+* you'd benefit from some of the auxiliary information in [REDCapTidieR's supertibble](https://chop-cgtinformatics.github.io/REDCapTidieR/articles/REDCapTidieR.html#tidying-redcap-exports), such as the instrument's structure.  <!--Future version may provide more information, like the column and row count of each table.-->
 
 However we recommend calling [REDCapR](https://ouhscbbmc.github.io/REDCapR/) in other scenarios.  It could be worth calling REDCapR multiple times if:
 
@@ -341,7 +341,7 @@ However we recommend calling [REDCapR](https://ouhscbbmc.github.io/REDCapR/) in 
 
 If in doubt, start with REDCapTidieR.  Escalate to REDCapR if your download time is too long and might be decreased by reducing the information retrieved from the server and transported across the network.
 
-And of course many scenarios are solved best with a combination of both packages, such as (a) [REDCapR](https://ouhscbbmc.github.io/REDCapR/) populates the initial demographics in REDCap, (b) research staff enter measures collected from patients over time, (c) [REDCapTidieR](https://chop-cgtdataops.github.io/REDCapTidieR/) retrieves the complete longitudinal dataset, (d) [dplyr](https://dplyr.tidyverse.org/) joins the tibbles, and finally (e) [lme4](https://cran.r-project.org/package=lme4/vignettes/lmer.pdf) tests hypotheses involving [patient trajectories](https://datascienceplus.com/analysing-longitudinal-data-multilevel-growth-models-i/) over time.
+And of course many scenarios are solved best with a combination of both packages, such as (a) [REDCapR](https://ouhscbbmc.github.io/REDCapR/) populates the initial demographics in REDCap, (b) research staff enter measures collected from patients over time, (c) [REDCapTidieR](https://chop-cgtinformatics.github.io/REDCapTidieR/) retrieves the complete longitudinal dataset, (d) [dplyr](https://dplyr.tidyverse.org/) joins the tibbles, and finally (e) [lme4](https://cran.r-project.org/package=lme4/vignettes/lmer.pdf) tests hypotheses involving [patient trajectories](https://datascienceplus.com/analysing-longitudinal-data-multilevel-growth-models-i/) over time.
 
 Escalating to REDCapR
 ------------------------------------------------------------------
