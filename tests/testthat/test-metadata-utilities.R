@@ -20,8 +20,6 @@ test_that("Named Captures", {
 })
 
 test_that("checkbox choices", {
-  pattern_checkboxes <- "(?<=\\A| \\| )(?<id>\\d{1,}), (?<label>[\x20-\x7B\x7D-\x7E]{1,})(?= \\| |\\Z)"
-
   choices_1 <- "1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported"
   ds_boxes <- checkbox_choices(select_choices=choices_1)
 
@@ -35,5 +33,23 @@ test_that("checkbox choices", {
   )
 
   expect_equal(ds_boxes, expected=ds_expected, label="The returned data.frame should be correct") #dput(ds_boxes)
+  expect_s3_class(ds_boxes, "tbl")
+})
+
+
+test_that("checkbox choices with special characters", {
+  choices_1 <- "1, Hospital A | 2, Hospitäl B | 3, Hospital Ç | 4, Hospítal D"
+  ds_boxes <- checkbox_choices(select_choices=choices_1)
+
+  ds_expected <- structure(
+    list(
+      id = c("1", "2", "3", "4"),
+      label = c("Hospital A", "Hospitäl B", "Hospital Ç", "Hospítal D")
+    ),
+    class = c("tbl_df", "tbl", "data.frame"),
+    row.names = c(NA, -4L)
+  )
+
+  expect_equal(ds_boxes, expected=ds_expected, label="The returned data.frame should be correct")
   expect_s3_class(ds_boxes, "tbl")
 })
