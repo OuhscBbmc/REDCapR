@@ -301,6 +301,16 @@ redcap_metadata_internal <- function(
       )
   }
 
+  if (is.na(d_proj$has_repeating_instruments_or_events[1]))
+    stop(
+      sprintf(
+        paste(
+          "The REDCap instance at %s failed to report if the",
+          "current project uses repeatable instruments or events."
+        ),
+        redcap_uri
+      )
+    )
   if (d_proj$has_repeating_instruments_or_events[1]) {
     d_again <-
       d_again %>%
