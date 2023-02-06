@@ -172,7 +172,7 @@ redcap_project_info_read <- function(
     handle_httr     = handle_httr
   )
 
-  col_types <- readr::cols(
+  all_col_types <- readr::cols(
     project_id                              = readr::col_integer(),
     project_title                           = readr::col_character(),
     creation_time                           = readr::col_datetime(format = ""),
@@ -204,14 +204,40 @@ redcap_project_info_read <- function(
 
   if (kernel$success) {
     try(
-      # Convert the raw text to a dataset.
-      ds <-
-        readr::read_csv(
-          file            = I(kernel$raw_text),
-          locale          = locale,
-          col_types       = col_types,
-          show_col_types  = FALSE
-        ),
+      {
+        # Read column names returned by the API.
+        present_names <-
+          names(
+            readr::read_csv(
+              file           = I(kernel$raw_text),
+              locale         = locale,
+              n_max          = 0,
+              show_col_types = FALSE
+            )
+          )
+
+        # Build a column specification that matches the API response.
+        col_types <- readr::cols()
+        for(present_name in present_names)
+          col_types$cols <- c(col_types$cols, all_col_types$cols[present_name])
+
+        # Convert the raw text to a dataset.
+        ds <-
+          readr::read_csv(
+            file            = I(kernel$raw_text),
+            locale          = locale,
+            col_types       = col_types,
+            show_col_types  = FALSE
+          )
+
+        # Add any missing columns as NA.
+        absent_names <- setdiff(names(all_col_types$cols), names(col_types$cols))
+        for(absent_name in absent_names) {
+          ds[absent_name] <- NA
+          attr(ds, "spec")$cols <-
+            c(attr(ds, "spec")$cols, all_col_types$cols[absent_name])
+        }
+      },
 
       # Don't print the warning in the try block.  Print it below,
       #   where it's under the control of the caller.
