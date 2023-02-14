@@ -6,7 +6,7 @@ Description: Encapsulates functions to streamline calls from R to the REDCap
     University.  The Application Programming Interface (API) offers an avenue
     to access and modify data programmatically, improving the capacity for
     literate and reproducible programming.
-Version: 1.1.9004
+Version: 1.1.9005
 Authors@R: c(person("Will", "Beasley", role = c("aut", "cre"), email =
     "wibeasley@hotmail.com", comment = c(ORCID = "0000-0002-5613-5006")),
     person("David", "Bard", role = "ctb", comment = c(ORCID = "0000-0002-3922-8489")),
@@ -32,7 +32,8 @@ Authors@R: c(person("Will", "Beasley", role = c("aut", "cre"), email =
     role = "ctb",
     comment = c(ORCID = "0000-0003-2996-8034")), person("Ezra", "Porter",
     role = "ctb",
-    comment = c(ORCID = "0000-0002-4690-8343")))
+    comment = c(ORCID = "0000-0002-4690-8343")), person("Matthew", "Schuelke",
+    role = "ctb", email="matt@themadstatter.com"))
 URL: https://ouhscbbmc.github.io/REDCapR/, https://github.com/OuhscBbmc/REDCapR, https://www.ouhsc.edu/bbmc/, https://project-redcap.org
 BugReports: https://github.com/OuhscBbmc/REDCapR/issues
 Depends:
