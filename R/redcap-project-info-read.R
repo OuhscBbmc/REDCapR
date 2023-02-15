@@ -232,11 +232,14 @@ redcap_project_info_read <- function(
 
         # Add any missing columns as NA.
         absent_names <- setdiff(names(all_col_types$cols), names(col_types$cols))
+        # Don't test coverage for this block b/c it only executes for old versions of REDCap
+        # nocov start
         for(absent_name in absent_names) {
           ds[absent_name] <- NA
           attr(ds, "spec")$cols <-
             c(attr(ds, "spec")$cols, all_col_types$cols[absent_name])
         }
+        # nocov end
       },
 
       # Don't print the warning in the try block.  Print it below,
