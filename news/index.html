@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">REDCapR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.9005</span>
       </span>
     </div>
 
@@ -129,6 +129,7 @@
 <code><a href="../reference/redcap_dag_read.html">redcap_dag_read()</a></code> has new <code>data_access_group_id</code> field (introduced maybe in <a href="https://community.projectredcap.org/articles/13/index.html" class="external-link">13.1.0</a>) (<a href="https://github.com/OuhscBbmc/REDCapR/issues/459" class="external-link">#459</a>)</li>
 <li>
 <code><a href="../reference/redcap_users_export.html">redcap_users_export()</a></code> has new <code>mycap_participants</code> field (introduced maybe in <a href="https://community.projectredcap.org/articles/13/index.html" class="external-link">13.0.0</a>) (<a href="https://github.com/OuhscBbmc/REDCapR/issues/459" class="external-link">#459</a>)</li>
+<li>Accommodate older versions of REDCap that don’t return project-level variable, like <code>has_repeating_instruments_or_events</code>, <code>missing_data_codes</code>, <code>external_modules</code>, <code>bypass_branching_erase_field_prompt</code> (<a href="https://github.com/the-mad-statter" class="external-link">@the-mad-statter</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/465" class="external-link">#465</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/466" class="external-link">#466</a>)</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -264,7 +265,7 @@
 <li>updated to readr 1.2.0 (<a href="https://github.com/OuhscBbmc/REDCapR/issues/200" class="external-link">#200</a>). This changed how some data variables were assigned a data types.</li>
 <li>uses <code>odbc</code> package to retrieve credentials from the token server. Remove RODBC and RODBCext (<a href="https://github.com/OuhscBbmc/REDCapR/issues/188" class="external-link">#188</a>). Thanks to <a href="https://github.com/krlmlr" class="external-link">@krlmlr</a> for error checking advice in <a href="https://stackoverflow.com/a/50419403/1082435" class="external-link uri">https://stackoverflow.com/a/50419403/1082435</a>.</li>
 <li>
-<code>data.table::rbindlist()</code> replaced by <code><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">dplyr::bind_rows()</a></code>
+<code>data.table::rbindlist()</code> replaced by <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">dplyr::bind_rows()</a></code>
 </li>
 <li>the checkmate package inspects most function parameters now (instead of <code>testit::assert()</code> and <code>base:stop()</code> ) (<a href="https://github.com/OuhscBbmc/REDCapR/issues/190" class="external-link">#190</a> &amp; <a href="https://github.com/OuhscBbmc/REDCapR/issues/208" class="external-link">#208</a>).</li>
 <li>
