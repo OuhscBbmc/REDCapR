@@ -301,7 +301,7 @@ redcap_metadata_internal <- function(
       )
   }
 
-  if (is.na(d_proj$has_repeating_instruments_or_events[1])) { #nocov start
+  if (is.na(d_proj$has_repeating_instruments_or_events[1])) { # nocov start
     # Don't test coverage for this block b/c it only executes for old versions of REDCap
     stop(
       sprintf(
@@ -312,7 +312,8 @@ redcap_metadata_internal <- function(
         redcap_uri
       )
     )
-  } #nocov end
+  } # nocov end
+
   if (d_proj$has_repeating_instruments_or_events[1]) {
     d_again <-
       d_again %>%
