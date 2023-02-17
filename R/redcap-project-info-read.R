@@ -218,7 +218,7 @@ redcap_project_info_read <- function(
 
         # Build a column specification that matches the API response.
         col_types <- readr::cols()
-        for(present_name in present_names)
+        for (present_name in present_names)
           col_types$cols <- c(col_types$cols, all_col_types$cols[present_name])
 
         # Convert the raw text to a dataset.
@@ -234,7 +234,7 @@ redcap_project_info_read <- function(
         absent_names <- setdiff(names(all_col_types$cols), names(col_types$cols))
         # Don't test coverage for this block b/c it only executes for old versions of REDCap
         # nocov start
-        for(absent_name in absent_names) {
+        for (absent_name in absent_names) {
           ds[absent_name] <- NA
           attr(ds, "spec")$cols <-
             c(attr(ds, "spec")$cols, all_col_types$cols[absent_name])
