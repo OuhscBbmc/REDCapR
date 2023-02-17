@@ -86,7 +86,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Basic REDCapR Operations</h1>
             
-            <h4 data-toc-skip class="date">2023-02-15</h4>
+            <h4 data-toc-skip class="date">2023-02-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/HEAD/vignettes/BasicREDCapROperations.Rmd" class="external-link"><code>vignettes/BasicREDCapROperations.Rmd</code></a></small>
       <div class="hidden name"><code>BasicREDCapROperations.Rmd</code></div>
@@ -133,7 +133,7 @@ returned.</p>
 <span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; Starting to read 5 records  at 2023-02-15 04:12:43.</span></span>
+<span><span class="co">#&gt; Starting to read 5 records  at 2023-02-17 05:18:10.</span></span>
 <span><span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span></span>
 <span><span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="va">ds_all_rows_all_fields</span> <span class="co"># Inspect the returned dataset</span></span>
@@ -173,12 +173,12 @@ converts the array into the format needed by the API.</p>
 <span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  records    <span class="op">=</span> <span class="va">desired_records</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; Starting to read 2 records  at 2023-02-15 04:12:45.</span></span>
+<span><span class="co">#&gt; Starting to read 2 records  at 2023-02-17 05:18:12.</span></span>
 <span><span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</span></span>
 <span><span class="co">#&gt; 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span></code></pre></div>
 </div>
@@ -203,12 +203,12 @@ the format required by the API (<em>i.e.</em>,
 <span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  fields     <span class="op">=</span> <span class="va">desired_fields</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 0.4 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; Starting to read 5 records  at 2023-02-15 04:12:48.</span></span>
+<span><span class="co">#&gt; Starting to read 5 records  at 2023-02-17 05:18:15.</span></span>
 <span><span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span></span>
 <span><span class="co">#&gt; 5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span></code></pre></div>
 </div>
@@ -236,14 +236,14 @@ columns, but only for the identified records.</p>
 <span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  fields     <span class="op">=</span> <span class="va">desired_fields_v3</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 0.3 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.7 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; Starting to read 5 records  at 2023-02-15 04:12:51.</span></span>
+<span><span class="co">#&gt; 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; Starting to read 5 records  at 2023-02-17 05:18:17.</span></span>
 <span><span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span></span>
-<span><span class="co">#&gt; 5 records and 3 columns were read from REDCap in 0.5 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span></span>
 <span><span class="va">ds_some_fields_v3</span> <span class="co">#Examine the these three variables.</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 3</span></span></span>
@@ -274,10 +274,10 @@ columns, but only for the identified records.</p>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
 <span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 2 records and 1 columns were read from REDCap in 0.6 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; Starting to read 2 records  at 2023-02-15 04:12:54.</span></span>
+<span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; Starting to read 2 records  at 2023-02-17 05:18:19.</span></span>
 <span><span class="co">#&gt; Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).</span></span>
 <span><span class="co">#&gt; 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span></span>
@@ -328,11 +328,11 @@ call.</li>
 <span>  fields     <span class="op">=</span> <span class="va">desired_fields</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.4 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.7 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; Starting to read 5 records  at 2023-02-15 04:12:57.</span></span>
+<span><span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; Starting to read 5 records  at 2023-02-17 05:18:21.</span></span>
 <span><span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span></span>
 <span><span class="co">#&gt; 5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="va">all_information</span> <span class="co">#Inspect the additional information</span></span>
@@ -377,7 +377,7 @@ call.</li>
 <span><span class="co">#&gt; [1] NA</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $elapsed_seconds</span></span>
-<span><span class="co">#&gt; [1] 2.889832</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 1.953043</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -398,7 +398,7 @@ Environment <span class="glyphicon glyphicon-plus-sign"></span>
 <span><span class="co">#&gt;  collate  en_US.UTF-8</span></span>
 <span><span class="co">#&gt;  ctype    en_US.UTF-8</span></span>
 <span><span class="co">#&gt;  tz       UTC</span></span>
-<span><span class="co">#&gt;  date     2023-02-15</span></span>
+<span><span class="co">#&gt;  date     2023-02-17</span></span>
 <span><span class="co">#&gt;  pandoc   2.19.2 @ /usr/local/bin/ (via rmarkdown)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Packages ───────────────────────────────────────────────────────────────────</span></span></span>
@@ -441,7 +441,7 @@ Environment <span class="glyphicon glyphicon-plus-sign"></span>
 <span><span class="co">#&gt;  R6            2.5.1    <span style="color: #555555;">2021-08-19</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  ragg          1.2.5    <span style="color: #555555;">2023-01-12</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  readr         2.1.4    <span style="color: #555555;">2023-02-10</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
-<span><span class="co">#&gt;  REDCapR     * <span style="color: #BB00BB; font-weight: bold;">1.1.9005</span> <span style="color: #555555;">2023-02-15</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
+<span><span class="co">#&gt;  REDCapR     * <span style="color: #BB00BB; font-weight: bold;">1.1.9005</span> <span style="color: #555555;">2023-02-17</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
 <span><span class="co">#&gt;  rlang         1.0.6    <span style="color: #555555;">2022-09-24</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  rmarkdown     2.20     <span style="color: #555555;">2023-01-19</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
 <span><span class="co">#&gt;  rprojroot     2.0.3    <span style="color: #555555;">2022-04-02</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.2.0)</span></span></span>
@@ -472,7 +472,7 @@ Environment <span class="glyphicon glyphicon-plus-sign"></span>
 <span><span class="co">#&gt; <span style="color: #555555;"> [2] /Library/Frameworks/R.framework/Versions/4.2/Resources/library</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">──────────────────────────────────────────────────────────────────────────────</span></span></span></code></pre>
-</details><p>Report rendered by runner at 2023-02-15, 04:12 +0000 in 19
+</details><p>Report rendered by runner at 2023-02-17, 05:18 +0000 in 15
 seconds.</p>
 </div>
   </div>
