@@ -33,6 +33,8 @@ test_that("simple", {
 
   expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_s3_class(actual, "col_spec")
+  # Project has dags, so record_id should be a character
+  expect_equal(actual$cols$record_id, readr::col_character())
 
   ds <-
     redcap_read_oneshot(
@@ -68,6 +70,8 @@ test_that("longitudinal", {
 
   expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_s3_class(actual, "col_spec")
+  # Project does not have auto-numbering enabled, so study_id should be a character
+  expect_equal(actual$cols$study_id, readr::col_character())
 
   ds <-
     redcap_read_oneshot(
@@ -103,6 +107,8 @@ test_that("superwide", {
   #
   # expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_s3_class(actual, "col_spec")
+  # Project has auto-numbering enabled, and no dags, so record_id should be an integer
+  expect_equal(actual$cols$record_id, readr::col_integer())
 
   ds <-
     redcap_read_oneshot(
