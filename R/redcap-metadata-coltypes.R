@@ -237,7 +237,6 @@ redcap_metadata_internal <- function(
   d_proj <- REDCapR::redcap_project_info_read(redcap_uri, token, verbose = verbose, handle_httr = handle_httr)$data
   d_dags <- REDCapR::redcap_dag_read(         redcap_uri, token, verbose = verbose, handle_httr = handle_httr)$data
 
-
   # Determine status of autonumbering, instrument complete status, and decimal mark
   .record_field         <- d_var$original_field_name[1] # The first field should always be the "record" identifier.
   .autonumber           <- d_proj$record_autonumbering_enabled[1]
