@@ -380,7 +380,8 @@ redcap_metadata_internal <- function(
     dplyr::mutate(
       response =
         dplyr::case_when(
-          autonumber & !dags                                  ~ paste0("col_integer()"                        , "~~record_autonumbering is enabled for a project without DAGs"),
+          dags                                                ~ paste0("col_character()"                      , "~~DAGs are enabled for the project"),
+          autonumber & !dags                                  ~ paste0("col_integer()"                        , "~~record_autonumbering is enabled and DAGs are disabled for the project"),
           field_type == "event_name"                          ~ paste0("col_character()"                      , "~~longitudinal event_name"),
           field_type == "repeat_instrument"                   ~ paste0("col_character()"                      , "~~repeat_instrument"),
           field_type == "repeat_instance"                     ~ paste0("col_integer()"                        , "~~repeat_instance"),
