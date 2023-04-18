@@ -75,6 +75,7 @@ This will help extract forms from longitudinal & repeating projects.
 * `redcap_dag_read()` has new `data_access_group_id` field (introduced maybe in [13.1.0](https://community.projectredcap.org/articles/13/index.html)) (#459)
 * `redcap_users_export()` has new `mycap_participants` field (introduced maybe in [13.0.0](https://community.projectredcap.org/articles/13/index.html)) (#459)
 * Accommodate older versions of REDCap that don't return project-level variable, like `has_repeating_instruments_or_events`, `missing_data_codes`, `external_modules`, `bypass_branching_erase_field_prompt` (@the-mad-statter, #465, #466)
+* `redcap_meta_coltypes()` correctly determines data type for autonumber `record_id` fields. It suggests a character if the project has DAGs, and an integer if not. (@pwildenhain, #472)
 
 
 Version 1.1.0 (released 2022-08-10)

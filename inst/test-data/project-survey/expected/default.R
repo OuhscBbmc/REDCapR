@@ -7,11 +7,11 @@ NA), prescreening_survey_timestamp = structure(c(1520351563,
     NA), first_name = c(NA, NA), last_name = c(NA, NA), address = c(NA, 
     NA), telephone_1 = c(NA, NA), ethnicity = c(NA, NA), race = c(NA, 
     NA), sex = c(NA, NA), height = c(NA, NA), weight = c(NA, 
-    NA), participant_info_survey_complete = c(0, 0), participant_morale_questionnaire_timestamp = c(NA, 
+    NA), participant_info_survey_complete = c(0, 0), participant_morale_questionnaire_timestamp = c("[not completed]", 
     NA), pmq1 = c(NA, NA), pmq2 = c(NA, NA), pmq3 = c(NA, NA), 
     pmq4 = c(NA, NA), participant_morale_questionnaire_complete = c(0, 
     0), complete_study = c(NA, NA), withdraw_date = c(NA, NA), 
     withdraw_reason = c(NA, NA), date_visit_4 = c(NA, NA), discharge_date_4 = c(NA, 
     NA), discharge_summary_4 = c(NA, NA), study_comments = c(NA, 
     NA), completion_data_complete = c(0, 0)), row.names = c(NA, 
--2L), class = "data.frame")
+-2L), class = c("spec_tbl_df", "tbl_df", "tbl", "data.frame"))
