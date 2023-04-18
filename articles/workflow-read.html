@@ -271,12 +271,13 @@ both are in the credential object created in the previous section.</p>
 <span>    redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,</span>
 <span>    token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span></span>
 <span>  <span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 0.3 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 0.4 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; Starting to read 5 records  at 2023-02-17 05:18:57.</span></span>
+<span><span class="co">#&gt; Starting to read 5 records  at 2023-04-18 17:49:54.</span></span>
 <span><span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span></span>
 <span><span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span></code></pre></div>
 <p>At this point, the data.frame <code>ds_1</code> has everything you
@@ -284,19 +285,18 @@ need to start analyzing the project.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds_1</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 25</span></span></span>
-<span><span class="co">#&gt;   record_id name_…¹ name_…² address telep…³ email dob          age   sex demog…⁴</span></span>
-<span><span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>         1 Nutmeg  Nutmou… <span style="color: #949494;">"</span>14 Ro… (405) … nutt… 2003-08-30    11     0       2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>         2 Tumtum  Nutmou… <span style="color: #949494;">"</span>14 Ro… (405) … tumm… 2003-03-10    11     1       2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>         3 Marcus  Wood    <span style="color: #949494;">"</span>243 H… (405) … mw@m… 1934-04-09    80     1       2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>         4 Trudy   DAG     <span style="color: #949494;">"</span>342 E… (405) … pero… 1952-11-02    61     0       2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>         5 John L… Walker  <span style="color: #949494;">"</span>Hotel… (405) … left… 1955-04-15    59     1       2</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 15 more variables: height &lt;dbl&gt;, weight &lt;dbl&gt;, bmi &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   comments &lt;chr&gt;, mugshot &lt;chr&gt;, health_complete &lt;dbl&gt;, race___1 &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   race___2 &lt;dbl&gt;, race___3 &lt;dbl&gt;, race___4 &lt;dbl&gt;, race___5 &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   race___6 &lt;dbl&gt;, ethnicity &lt;dbl&gt;, interpreter_needed &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   race_and_ethnicity_complete &lt;dbl&gt;, and abbreviated variable names</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​name_first, ²​name_last, ³​telephone, ⁴​demographics_complete</span></span></span>
+<span><span class="co">#&gt;   record_id name_first name_last address  telephone email dob          age   sex</span></span>
+<span><span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>         1 Nutmeg     Nutmouse  <span style="color: #949494;">"</span>14 Ros… (405) 32… nutt… 2003-08-30    11     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>         2 Tumtum     Nutmouse  <span style="color: #949494;">"</span>14 Ros… (405) 32… tumm… 2003-03-10    11     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>         3 Marcus     Wood      <span style="color: #949494;">"</span>243 Hi… (405) 32… mw@m… 1934-04-09    80     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>         4 Trudy      DAG       <span style="color: #949494;">"</span>342 El… (405) 32… pero… 1952-11-02    61     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>         5 John Lee   Walker    <span style="color: #949494;">"</span>Hotel … (405) 32… left… 1955-04-15    59     1</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 16 more variables: demographics_complete &lt;dbl&gt;, height &lt;dbl&gt;, weight &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bmi &lt;dbl&gt;, comments &lt;chr&gt;, mugshot &lt;chr&gt;, health_complete &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   race___1 &lt;dbl&gt;, race___2 &lt;dbl&gt;, race___3 &lt;dbl&gt;, race___4 &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   race___5 &lt;dbl&gt;, race___6 &lt;dbl&gt;, ethnicity &lt;dbl&gt;, interpreter_needed &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   race_and_ethnicity_complete &lt;dbl&gt;</span></span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">ds_1</span><span class="op">$</span><span class="va">weight</span><span class="op">)</span></span></code></pre></div>
 <p><img src="workflow-read_files/figure-html/unstructured-2-1.png" width="700"></p>
@@ -413,16 +413,15 @@ identifiers.</p>
 <span>  verbose     <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 25</span></span></span>
-<span><span class="co">#&gt;   record_id name_…¹ name_…² address telep…³ email dob          age   sex demog…⁴</span></span>
-<span><span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>         1 Nutmeg  Nutmou… <span style="color: #949494;">"</span>14 Ro… (405) … nutt… 2003-08-30    11     0       2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>         4 Trudy   DAG     <span style="color: #949494;">"</span>342 E… (405) … pero… 1952-11-02    61     0       2</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 15 more variables: height &lt;dbl&gt;, weight &lt;dbl&gt;, bmi &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   comments &lt;chr&gt;, mugshot &lt;chr&gt;, health_complete &lt;dbl&gt;, race___1 &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   race___2 &lt;dbl&gt;, race___3 &lt;dbl&gt;, race___4 &lt;dbl&gt;, race___5 &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   race___6 &lt;dbl&gt;, ethnicity &lt;dbl&gt;, interpreter_needed &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   race_and_ethnicity_complete &lt;dbl&gt;, and abbreviated variable names</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​name_first, ²​name_last, ³​telephone, ⁴​demographics_complete</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   record_id name_first name_last address  telephone email dob          age   sex</span></span>
+<span><span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>         1 Nutmeg     Nutmouse  <span style="color: #949494;">"</span>14 Ros… (405) 32… nutt… 2003-08-30    11     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>         4 Trudy      DAG       <span style="color: #949494;">"</span>342 El… (405) 32… pero… 1952-11-02    61     0</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 16 more variables: demographics_complete &lt;dbl&gt;, height &lt;dbl&gt;, weight &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bmi &lt;dbl&gt;, comments &lt;chr&gt;, mugshot &lt;chr&gt;, health_complete &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   race___1 &lt;dbl&gt;, race___2 &lt;dbl&gt;, race___3 &lt;dbl&gt;, race___4 &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   race___5 &lt;dbl&gt;, race___6 &lt;dbl&gt;, ethnicity &lt;dbl&gt;, interpreter_needed &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   race_and_ethnicity_complete &lt;dbl&gt;</span></span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="specify-row-filter">Specify Row Filter<a class="anchor" aria-label="anchor" href="#specify-row-filter"></a>
@@ -441,16 +440,15 @@ strings and numbers.</p>
 <span>  verbose       <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 25</span></span></span>
-<span><span class="co">#&gt;   record_id name_…¹ name_…² address telep…³ email dob          age   sex demog…⁴</span></span>
-<span><span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>         1 Nutmeg  Nutmou… <span style="color: #949494;">"</span>14 Ro… (405) … nutt… 2003-08-30    11     0       2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>         2 Tumtum  Nutmou… <span style="color: #949494;">"</span>14 Ro… (405) … tumm… 2003-03-10    11     1       2</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 15 more variables: height &lt;dbl&gt;, weight &lt;dbl&gt;, bmi &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   comments &lt;chr&gt;, mugshot &lt;chr&gt;, health_complete &lt;dbl&gt;, race___1 &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   race___2 &lt;dbl&gt;, race___3 &lt;dbl&gt;, race___4 &lt;dbl&gt;, race___5 &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   race___6 &lt;dbl&gt;, ethnicity &lt;dbl&gt;, interpreter_needed &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   race_and_ethnicity_complete &lt;dbl&gt;, and abbreviated variable names</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​name_first, ²​name_last, ³​telephone, ⁴​demographics_complete</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   record_id name_first name_last address  telephone email dob          age   sex</span></span>
+<span><span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>         1 Nutmeg     Nutmouse  <span style="color: #949494;">"</span>14 Ros… (405) 32… nutt… 2003-08-30    11     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>         2 Tumtum     Nutmouse  <span style="color: #949494;">"</span>14 Ros… (405) 32… tumm… 2003-03-10    11     1</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 16 more variables: demographics_complete &lt;dbl&gt;, height &lt;dbl&gt;, weight &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bmi &lt;dbl&gt;, comments &lt;chr&gt;, mugshot &lt;chr&gt;, health_complete &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   race___1 &lt;dbl&gt;, race___2 &lt;dbl&gt;, race___3 &lt;dbl&gt;, race___4 &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   race___5 &lt;dbl&gt;, race___6 &lt;dbl&gt;, ethnicity &lt;dbl&gt;, interpreter_needed &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   race_and_ethnicity_complete &lt;dbl&gt;</span></span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="specify-column-names">Specify Column Names<a class="anchor" aria-label="anchor" href="#specify-column-names"></a>

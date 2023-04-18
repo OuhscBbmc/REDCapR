@@ -161,35 +161,34 @@ administrator to send you the static material.</p>
 <span class="r-in"><span><span class="co"># A simple project (pid 153)</span></span></span>
 <span class="r-in"><span><span class="va">token</span> <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span></span>
 <span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_metadata_read</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 17 × 18</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    field_name    form_…¹ secti…² field…³ field…⁴ selec…⁵ field…⁶ text_…⁷ text_…⁸</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> record_id     demogr… <span style="color: #BB0000;">NA</span>      text    Study … <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name_first    demogr… Contac… text    First … <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name_last     demogr… <span style="color: #BB0000;">NA</span>      text    Last N… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> address       demogr… <span style="color: #BB0000;">NA</span>      notes   Street… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> telephone     demogr… <span style="color: #BB0000;">NA</span>      text    Phone … <span style="color: #BB0000;">NA</span>      Includ… phone   <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> email         demogr… <span style="color: #BB0000;">NA</span>      text    E-mail  <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      email   <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> dob           demogr… <span style="color: #BB0000;">NA</span>      text    Date o… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      date_y… <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> age           demogr… <span style="color: #BB0000;">NA</span>      text    Age (y… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> sex           demogr… <span style="color: #BB0000;">NA</span>      radio   Gender  0, Fem… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> height        health  <span style="color: #BB0000;">NA</span>      text    Height… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      number  130    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> weight        health  <span style="color: #BB0000;">NA</span>      text    Weight… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      integer 35     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> bmi           health  <span style="color: #BB0000;">NA</span>      calc    BMI     round(… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> comments      health  Genera… notes   Commen… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> mugshot       health  <span style="color: #BB0000;">NA</span>      file    Mugshot <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> race          race_a… <span style="color: #BB0000;">NA</span>      checkb… Race (… 1, Ame… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> ethnicity     race_a… <span style="color: #BB0000;">NA</span>      radio   Ethnic… 0, Unk… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> interpreter_… race_a… <span style="color: #BB0000;">NA</span>      truefa… Are in… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 9 more variables: text_validation_max &lt;chr&gt;, identifier &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    field_name         form_name          section_header   field_type field_label</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> record_id          demographics       <span style="color: #BB0000;">NA</span>               text       Study ID   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> name_first         demographics       Contact Informa… text       First Name </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> name_last          demographics       <span style="color: #BB0000;">NA</span>               text       Last Name  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> address            demographics       <span style="color: #BB0000;">NA</span>               notes      Street, Ci…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> telephone          demographics       <span style="color: #BB0000;">NA</span>               text       Phone numb…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> email              demographics       <span style="color: #BB0000;">NA</span>               text       E-mail     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> dob                demographics       <span style="color: #BB0000;">NA</span>               text       Date of bi…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> age                demographics       <span style="color: #BB0000;">NA</span>               text       Age (years)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> sex                demographics       <span style="color: #BB0000;">NA</span>               radio      Gender     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> height             health             <span style="color: #BB0000;">NA</span>               text       Height (cm)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> weight             health             <span style="color: #BB0000;">NA</span>               text       Weight (ki…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> bmi                health             <span style="color: #BB0000;">NA</span>               calc       BMI        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> comments           health             General Comments notes      Comments   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> mugshot            health             <span style="color: #BB0000;">NA</span>               file       Mugshot    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> race               race_and_ethnicity <span style="color: #BB0000;">NA</span>               checkbox   Race (Sele…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> ethnicity          race_and_ethnicity <span style="color: #BB0000;">NA</span>               radio      Ethnicity  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> interpreter_needed race_and_ethnicity <span style="color: #BB0000;">NA</span>               truefalse  Are interp…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 13 more variables: select_choices_or_calculations &lt;chr&gt;, field_note &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_type_or_show_slider_number &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_min &lt;chr&gt;, text_validation_max &lt;chr&gt;, identifier &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   branching_logic &lt;chr&gt;, required_field &lt;chr&gt;, custom_alignment &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   question_number &lt;chr&gt;, matrix_group_name &lt;chr&gt;, matrix_ranking &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   field_annotation &lt;chr&gt;, and abbreviated variable names ¹​form_name,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ²​section_header, ³​field_type, ⁴​field_label,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁵​select_choices_or_calculations, ⁶​field_note,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁷​text_validation_type_or_show_slider_number, ⁸​text_validation_min</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   field_annotation &lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $success</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
@@ -198,7 +197,7 @@ administrator to send you the static material.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 200</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $outcome_message</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $forms_collapsed</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
@@ -207,7 +206,7 @@ administrator to send you the static material.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_seconds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1594059</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.140856</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $raw_text</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
@@ -219,25 +218,25 @@ administrator to send you the static material.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 95 × 18</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    field_name    form_…¹ secti…² field…³ field…⁴ selec…⁵ field…⁶ text_…⁷ text_…⁸</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> study_id      demogr… <span style="color: #BB0000;">NA</span>      text    Study … <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> date_enrolled demogr… Consen… text    Date s… <span style="color: #BB0000;">NA</span>      YYYY-M… date_y… <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> patient_docu… demogr… <span style="color: #BB0000;">NA</span>      file    Upload… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> first_name    demogr… Contac… text    First … <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> last_name     demogr… <span style="color: #BB0000;">NA</span>      text    Last N… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> telephone_1   demogr… <span style="color: #BB0000;">NA</span>      text    Phone … <span style="color: #BB0000;">NA</span>      Includ… phone   <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> email         demogr… <span style="color: #BB0000;">NA</span>      text    E-mail  <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      email   <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> dob           demogr… <span style="color: #BB0000;">NA</span>      text    Date o… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      date_y… <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> age           demogr… <span style="color: #BB0000;">NA</span>      calc    Age (y… roundd… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ethnicity     demogr… <span style="color: #BB0000;">NA</span>      radio   Ethnic… 0, His… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 85 more rows, 9 more variables: text_validation_max &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   identifier &lt;chr&gt;, branching_logic &lt;chr&gt;, required_field &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   custom_alignment &lt;chr&gt;, question_number &lt;chr&gt;, matrix_group_name &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   matrix_ranking &lt;chr&gt;, field_annotation &lt;chr&gt;, and abbreviated variable</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   names ¹​form_name, ²​section_header, ³​field_type, ⁴​field_label,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁵​select_choices_or_calculations, ⁶​field_note,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁷​text_validation_type_or_show_slider_number, ⁸​text_validation_min</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    field_name       form_name    section_header      field_type field_label     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> study_id         demographics <span style="color: #BB0000;">NA</span>                  text       Study ID        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> date_enrolled    demographics Consent Information text       Date subject si…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> patient_document demographics <span style="color: #BB0000;">NA</span>                  file       Upload the pati…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> first_name       demographics Contact Information text       First Name      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> last_name        demographics <span style="color: #BB0000;">NA</span>                  text       Last Name       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> telephone_1      demographics <span style="color: #BB0000;">NA</span>                  text       Phone number    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> email            demographics <span style="color: #BB0000;">NA</span>                  text       E-mail          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> dob              demographics <span style="color: #BB0000;">NA</span>                  text       Date of birth   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> age              demographics <span style="color: #BB0000;">NA</span>                  calc       Age (years)     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ethnicity        demographics <span style="color: #BB0000;">NA</span>                  radio      Ethnicity       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 85 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 13 more variables: select_choices_or_calculations &lt;chr&gt;, field_note &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_type_or_show_slider_number &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_min &lt;chr&gt;, text_validation_max &lt;chr&gt;, identifier &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   branching_logic &lt;chr&gt;, required_field &lt;chr&gt;, custom_alignment &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   question_number &lt;chr&gt;, matrix_group_name &lt;chr&gt;, matrix_ranking &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   field_annotation &lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $success</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
@@ -255,7 +254,7 @@ administrator to send you the static material.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_seconds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.157002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2055619</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $raw_text</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
@@ -267,22 +266,22 @@ administrator to send you the static material.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 8 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 8 × 18</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   field_name form_name   secti…¹ field…² field…³ selec…⁴ field…⁵ text_…⁶ text_…⁷</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> record_id  intake      <span style="color: #BB0000;">NA</span>      text    Record… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> height     intake      <span style="color: #BB0000;">NA</span>      text    patien… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      number… 1      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> weight     intake      <span style="color: #BB0000;">NA</span>      text    patien… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      number… 1      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> bmi        intake      <span style="color: #BB0000;">NA</span>      text    patien… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      number… 0      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> sbp        blood_pres… <span style="color: #BB0000;">NA</span>      text    systol… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      number  1      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> dbp        blood_pres… <span style="color: #BB0000;">NA</span>      text    diasto… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      number  1      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> lab        laboratory  <span style="color: #BB0000;">NA</span>      text    lab va… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> conc       laboratory  <span style="color: #BB0000;">NA</span>      text    concen… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 9 more variables: text_validation_max &lt;chr&gt;, identifier &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   field_name form_name      section_header field_type field_label             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> record_id  intake         <span style="color: #BB0000;">NA</span>             text       Record ID               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> height     intake         <span style="color: #BB0000;">NA</span>             text       patient height          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> weight     intake         <span style="color: #BB0000;">NA</span>             text       patient weight          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> bmi        intake         <span style="color: #BB0000;">NA</span>             text       patient bmi             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> sbp        blood_pressure <span style="color: #BB0000;">NA</span>             text       systolic blood pressure </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> dbp        blood_pressure <span style="color: #BB0000;">NA</span>             text       diastolic blood pressure</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> lab        laboratory     <span style="color: #BB0000;">NA</span>             text       lab value               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> conc       laboratory     <span style="color: #BB0000;">NA</span>             text       concentration           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 13 more variables: select_choices_or_calculations &lt;chr&gt;, field_note &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_type_or_show_slider_number &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_min &lt;chr&gt;, text_validation_max &lt;chr&gt;, identifier &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   branching_logic &lt;chr&gt;, required_field &lt;chr&gt;, custom_alignment &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   question_number &lt;chr&gt;, matrix_group_name &lt;chr&gt;, matrix_ranking &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   field_annotation &lt;chr&gt;, and abbreviated variable names ¹​section_header,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ²​field_type, ³​field_label, ⁴​select_choices_or_calculations, ⁵​field_note,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁶​text_validation_type_or_show_slider_number, ⁷​text_validation_min</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   field_annotation &lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $success</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
@@ -300,7 +299,7 @@ administrator to send you the static material.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_seconds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1548488</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1777561</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $raw_text</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>

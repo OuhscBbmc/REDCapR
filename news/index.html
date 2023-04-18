@@ -130,6 +130,8 @@
 <li>
 <code><a href="../reference/redcap_users_export.html">redcap_users_export()</a></code> has new <code>mycap_participants</code> field (introduced maybe in <a href="https://community.projectredcap.org/articles/13/index.html" class="external-link">13.0.0</a>) (<a href="https://github.com/OuhscBbmc/REDCapR/issues/459" class="external-link">#459</a>)</li>
 <li>Accommodate older versions of REDCap that don’t return project-level variable, like <code>has_repeating_instruments_or_events</code>, <code>missing_data_codes</code>, <code>external_modules</code>, <code>bypass_branching_erase_field_prompt</code> (<a href="https://github.com/the-mad-statter" class="external-link">@the-mad-statter</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/465" class="external-link">#465</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/466" class="external-link">#466</a>)</li>
+<li>
+<code>redcap_meta_coltypes()</code> correctly determines data type for autonumber <code>record_id</code> fields. It suggests a character if the project has DAGs, and an integer if not. (<a href="https://github.com/pwildenhain" class="external-link">@pwildenhain</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/472" class="external-link">#472</a>)</li>
 </ul></div>
 </div>
     <div class="section level2">
