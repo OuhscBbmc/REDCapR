@@ -11,5 +11,14 @@ structure(list(timestamp = structure(c(1626044880, 1626044880,
 "Download file (API)", "Download file (API)", "Download file (API)", 
 "Download file (API)", "Download file (API)", "Download file (API)", 
 "Download file (API)", "Download file (API)", "Download file (API)", 
-"Download file (API)", "Download file (API)")), row.names = c(NA, 
--12L), class = "data.frame")
+"Download file (API)", "Download file (API)"), record = c(NA, 
+NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)), row.names = c(NA, 
+-12L), spec = structure(list(cols = list(timestamp = structure(list(
+    format = ""), class = c("collector_datetime", "collector"
+)), username = structure(list(), class = c("collector_character", 
+"collector")), action = structure(list(), class = c("collector_character", 
+"collector")), details = structure(list(), class = c("collector_character", 
+"collector")), record = structure(list(), class = c("collector_logical", 
+"collector"))), default = structure(list(), class = c("collector_guess", 
+"collector")), delim = ","), class = "col_spec"), class = c("spec_tbl_df", 
+"tbl_df", "tbl", "data.frame"))
