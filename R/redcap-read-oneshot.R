@@ -229,6 +229,8 @@ redcap_read_oneshot <- function(
 
   validate_field_names(fields, stop_on_error = TRUE)
 
+  fields              <- setdiff(fields, c("redcap_event_name", "redcap_repeat_instrument", "redcap_repeat_instance"))
+
   token               <- sanitize_token(token)
   records_collapsed   <- collapse_vector(records)
   fields_collapsed    <- collapse_vector(fields)
