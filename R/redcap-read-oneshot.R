@@ -229,7 +229,17 @@ redcap_read_oneshot <- function(
 
   validate_field_names(fields, stop_on_error = TRUE)
 
-  fields              <- setdiff(fields, c("redcap_event_name", "redcap_repeat_instrument", "redcap_repeat_instance"))
+  pseudofields <- c("redcap_event_name", "redcap_repeat_instrument", "redcap_repeat_instance")
+  if (1L <= length(fields) && any(fields %in% pseudofields)) {
+    fields  <- setdiff(fields, pseudofields) # Remove any that are requested.
+    message(
+      "At least one 'pseudofield' was requested and will be suppressed before calling the server. ",
+      "The server will return it if it's appropriate for the project structure.\n\n",
+      "Common pseudofields are: ",
+      paste(pseudofields, collapse = ", "),
+      "."
+    )
+  }
 
   token               <- sanitize_token(token)
   records_collapsed   <- collapse_vector(records)
