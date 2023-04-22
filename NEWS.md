@@ -88,7 +88,7 @@ Version 1.1.0 (released 2022-08-10)
 * New `redcap_arm_export()` function.  It retrieves a list of REDCap project arms.  (#375)
 * `redcap_read()` and `redcap_read_oneshot()` accept a new `locale` parameter that specifies date, time, and number formats, like using a comma as the decimal separator.  It is a [`readr::locale`](https://readr.tidyverse.org/reference/locale.html) object.  (#377, suggested by @joundso)
 * New `redcap_instruments()` function exports a list of the data collection instruments for a project.  (#381, @vcastro)
-* New `redcap_event_instruments()` function exports the instrument-event mappings for a project (i.e., how the data collection instruments are designated for certain events in a longitudinal project)..  (#381, @vcastro)
+* New `redcap_event_instruments()` function exports the instrument-event mappings for a project (i.e., how the data collection instruments are designated for certain events in a longitudinal project).  (#381, @vcastro)
 * New `redcap_dag_read()` function returns the Data Access Groups for a project (#382, @joundso)
 * New detection when REDCap has trouble with a large request and drops records. (#400 w/ @TimMonahan)
 
@@ -206,7 +206,7 @@ Version 0.10.2 (Released 2019-09-22)
 * All interaction with the REDCap server goes through the new `kernal_api()` function, which uses the 'httr' and 'curl' packages underneath.  Until now, each function called those packages directly. (#213)
 * When converting REDCap's CSV to R's data.frame, `readr::read_csv()` is used instead of `utils::read.csv()` (Issue #127).
 * updated to readr 1.2.0 (#200).  This changed how some data variables were assigned a data types.
-* uses `odbc` package to retrieve credentials from the token server.  Remove RODBC and RODBCext (#188).  Thanks to @krlmlr for error checking advice in https://stackoverflow.com/a/50419403/1082435.
+* uses `odbc` package to retrieve credentials from the token server.  Remove RODBC and RODBCext (#188).  Thanks to @krlmlr for error checking advice in <https://stackoverflow.com/a/50419403/1082435>.
 * `data.table::rbindlist()` replaced by `dplyr::bind_rows()`
 * the checkmate package inspects most function parameters now (instead of `testit::assert()` and `base:stop()` ) (#190 & #208).
 * `collapse_vector()` is refactored and tested (#209)
@@ -241,7 +241,7 @@ Versions 0.9.7 (Released 2017-09-09)
 
 ### Minor Updates
 
-* When combining batches into a single data.frame, `data.table::rbindlist()` is used.  This should prevent errors with the first batch's data type (for a column) isn't compatible with a later batch.  For instance, this occurs when the first batch has only integers for `record_id`, but a subsequent batch has values like `aa-test-aa`.  The variable for the combined dataset should be a character. (Issue #128 & https://stackoverflow.com/questions/39377370/bind-rows-of-different-data-types; Thanks @arunsrinivasan)
+* When combining batches into a single data.frame, `data.table::rbindlist()` is used.  This should prevent errors with the first batch's data type (for a column) isn't compatible with a later batch.  For instance, this occurs when the first batch has only integers for `record_id`, but a subsequent batch has values like `aa-test-aa`.  The variable for the combined dataset should be a character. (Issue #128 & <https://stackoverflow.com/questions/39377370/bind-rows-of-different-data-types>; Thanks @arunsrinivasan)
 * Uses the `dplyr` package instead of `plyr`.  This shouldn't affect callers, because immediately before returning the data, `REDCapR::redcap_read()` coerces the `tibble::tibble` (which was formerly called `dplyr::tbl_df`) back to a vanilla `data.frame` with `as.data.frame()`.
 * A few more instances of validating input parameters to read functions. (Issue #8).
 
@@ -279,7 +279,7 @@ Version 0.6 (Released 2014-11-03)
 
 ### New Features
 
-* The `config_options` in the httr package are exposed to the REDCapR user.  See issues #55 & #58; thanks to @rparrish and @nutterb for their contributions (https://github.com/OuhscBbmc/REDCapR/issues/55 & https://github.com/OuhscBbmc/REDCapR/issues/58).
+* The `config_options` in the httr package are exposed to the REDCapR user.  See issues #55 & #58; thanks to @rparrish and @nutterb for their contributions (<https://github.com/OuhscBbmc/REDCapR/issues/55> & <https://github.com/OuhscBbmc/REDCapR/issues/58>).
 
 
 Version 0.5 (Released 2014-10-19)
@@ -322,7 +322,7 @@ Version 0.3 (Released 2014-09-01)
 
 ### New Features
 
-* Relies on the `httr` package, which provides benefits like the status code message can be captured (eg, 200-OK, 403-Forbidden, 404-NotFound).  See https://cran.r-project.org/package=httr.
+* Relies on the `httr` package, which provides benefits like the status code message can be captured (eg, 200-OK, 403-Forbidden, 404-NotFound).  See <https://cran.r-project.org/package=httr>.
 
 ### Updates
 
@@ -368,5 +368,5 @@ Version 0.1 (Released 2014-01-14)
 
 GitHub Commits and Releases
 
-* For a detailed change log, please see https://github.com/OuhscBbmc/REDCapR/commits/main.
-* For a list of the major releases, please see https://github.com/OuhscBbmc/REDCapR/releases.
+* For a detailed change log, please see <https://github.com/OuhscBbmc/REDCapR/commits/main>.
+* For a list of the major releases, please see <https://github.com/OuhscBbmc/REDCapR/releases>.

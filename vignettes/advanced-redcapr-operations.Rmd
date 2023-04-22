@@ -228,7 +228,7 @@ ds_no_ssl <- redcap_read_oneshot(
 Convert SPSS Output to REDCap data dictionary
 ==================================================================
 
-The solution https://stackoverflow.com/a/51013678/1082435 converts levels specified in SPSS output like
+The solution <https://stackoverflow.com/a/51013678/1082435> converts levels specified in SPSS output like
 
 ```
 SEX       0 Male

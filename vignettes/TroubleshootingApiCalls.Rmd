@@ -521,12 +521,12 @@ Resources
     https://<*your server name*>/redcap/api/help
     ```
 
-* If you have access to the REDCap wiki, some newer examples might exist at <https://community.projectredcap.org/articles/462/api-examples.html>.  The official documentation can be found on the `API Help Page` and `API Examples' pages on the REDCap wiki (*i.e.*, <https://community.projectredcap.org/articles/456/api-documentation.html> and <https://community.projectredcap.org/articles/462/api-examples.html>). If you do not have an account for the wiki, please ask your campus REDCap administrator to send you the static material.
-* Scott Burns, the primary developer of [PyCap](https://github.com/redcap-tools/PyCap) has a good intro at http://sburns.org/2013/07/22/intro-to-redcap-api.html
-* Benjamin Nutter, the primary developer of [redcapAPI](https://github.com/nutterb/redcapAPI/wiki) has a good wiki at https://github.com/nutterb/redcapAPI/wiki
+* If you have access to the REDCap wiki, some newer examples might exist at `https://community.projectredcap.org/articles/462/api-examples.html`.  The official documentation can be found on the "API Help Page" and "API Examples" pages on the REDCap wiki (*i.e.*, `https://community.projectredcap.org/articles/456/api-documentation.html` and `https://community.projectredcap.org/articles/462/api-examples.html`). If you do not have an account for the wiki, please ask your campus REDCap administrator to send you the static material.
+* Scott Burns, the primary developer of [PyCap](https://github.com/redcap-tools/PyCap) has a good intro at <http://sburns.org/2013/07/22/intro-to-redcap-api.html>
+* Benjamin Nutter, the primary developer of [redcapAPI](https://github.com/nutterb/redcapAPI/wiki) has a good wiki at <https://github.com/nutterb/redcapAPI/wiki>
 * In addition to this troubleshooting document, REDCapR has vignettes that covers its [basic](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html) and [advanced](https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.html) operations.
 
 Document Info
 ------------------------------------------------------------------
 
-This document is primarily based on REDCap version 6.0.2 and was last updated 2020-01-21.  A development version of the document is available on GitHub: https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html.
+This document is primarily based on REDCap version 6.0.2 and was last updated 2020-01-21.  A development version of the document is available on GitHub: <https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html>.
