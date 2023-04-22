@@ -57,6 +57,7 @@ RODBCext
 SSL
 SecurityDatabase
 Sys
+Tidyverse
 Timezones
 Translational
 UNexported
@@ -72,7 +73,6 @@ api
 autonumber
 bb
 bbb
-bbmc
 bmi
 cURL
 codebook
@@ -87,7 +87,6 @@ dp
 dplyr
 dropdown
 eav
-edu
 eg
 ethz
 exportFieldNames
@@ -115,7 +114,6 @@ nano
 nolint
 nonmissing
 odbc
-ouhsc
 ouhscbbmc
 packageVersion
 perl
@@ -124,6 +122,7 @@ pid
 pkgdown
 programmatically
 projectredcap
+pseudofields
 qqq
 rdoc
 readr
@@ -140,7 +139,6 @@ tibble
 tibbles
 tidyr
 tidyverse
-unsecure
 upcast
 uploadable
 uri

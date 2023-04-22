@@ -39,7 +39,7 @@ devtools::run_examples(); #dev.off() #This overwrites the NAMESPACE file too
 # devtools::run_examples(, "redcap_read.Rd")
 # pkgload::load_all()
 test_results_checked <- devtools::test()
-test_results_checked <- devtools::test(filter = "read-batch-simple")
+test_results_checked <- devtools::test(filter = "read-batch-survey")
 test_results_checked <- devtools::test(filter = "^metadata-coltypes")
 withr::local_envvar(ONLYREADTESTS = "true")
 test_results_checked <- devtools::test(filter = "write-batch")
@@ -54,7 +54,7 @@ devtools::check( # Equivalent of R-hub
   remote    = TRUE,
   incoming  = TRUE
 )
-devtools::check_rhub(email="wibeasley@hotmail.com")
+rhub::check_for_cran(email="wibeasley@hotmail.com")
 # devtools::check_win_devel() # CRAN submission policies encourage the development version
 # revdepcheck::revdep_check(num_workers = 4)
 # usethis::use_release_issue()

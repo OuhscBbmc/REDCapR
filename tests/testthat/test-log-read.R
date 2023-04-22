@@ -3,6 +3,8 @@ library(testthat)
 credential  <- retrieve_credential_testing()
 update_expectation  <- FALSE
 
+path_expected_2020_08 <- "test-data/specific-redcapr/log-read/2020-08-10.R"
+
 test_that("smoke test", {
   testthat::skip_on_cran()
   expect_message({
@@ -18,7 +20,6 @@ test_that("smoke test", {
 
 test_that("2020-08-10", {
   testthat::skip_on_cran()
-  path_expected <- "test-data/specific-redcapr/log-read/2020-08-10.R"
   expected_outcome_message <- "\\d+ rows were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   returned_object <-
@@ -30,8 +31,8 @@ test_that("2020-08-10", {
       verbose        = FALSE
     )
 
-  if (update_expectation) save_expected(returned_object$data, path_expected)
-  expected_data_frame <- retrieve_expected(path_expected)
+  if (update_expectation) save_expected(returned_object$data, path_expected_2020_08)
+  expected_data_frame <- retrieve_expected(path_expected_2020_08)
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
@@ -44,7 +45,6 @@ test_that("2020-08-10", {
 
 test_that("2020-08-10-api-export", {
   testthat::skip_on_cran()
-  path_expected <- "test-data/specific-redcapr/log-read/2020-08-10.R"
   expected_outcome_message <- "\\d+ rows were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   returned_object <-
@@ -56,8 +56,8 @@ test_that("2020-08-10-api-export", {
       verbose     = FALSE
     )
 
-  if (update_expectation) save_expected(returned_object$data, path_expected)
-  expected_data_frame <- retrieve_expected(path_expected)
+  if (update_expectation) save_expected(returned_object$data, path_expected_2020_08)
+  expected_data_frame <- retrieve_expected(path_expected_2020_08)
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
