@@ -156,6 +156,32 @@
 #' * select the desired user, and then select 'Edit User Privileges',
 #' * in the 'Data Exports' radio buttons, select 'Full Data Set'.
 #'
+#' The REDCap project may contain "pseudofields", depending on its structure.
+#' Pseudofields are exported for certain project structures, but are not
+#' defined by users and do not appear in the codebook.
+#' If a recognized pseudofield is passed to the `fields` api parameter,
+#' it is suppressed by [REDCapR::redcap_read()] and [REDCapR::redcap_read_oneshot()]
+#' so the server doesn't throw an error.
+#' Requesting a pseudofield is discouraged, so a message is returned to the user.
+#'
+#' Pseudofields include:
+#' * `redcap_event_name`: for longitudinal projects or multi-arm projects.
+#' * `redcap_repeat_instrument`:  for projects with repeating instruments.
+#' * `redcap_repeat_instance`:   for projects with repeating instruments.
+#' * `redcap_data_access_group`: for projects with DAGs when the
+#'   `export_data_access_groups` api parameter is TRUE.
+#' * `redcap_survey_identifier`:  for projects with surveys when the
+#'   `export_survey_fields` api parameter is TRUE.
+#' * *instrument_name*`_timestamp`: for projects with surveys.
+#'   For example, an instrument called "demographics" will have a pseudofield
+#'   named `demographics_timestamp`.
+#'   REDCapR does not suppress requests for timestamps, so the server will
+#'   throw an error like
+#'
+#'   ```
+#'   ERROR: The following values in the parameter fields are not valid: 'demographics_timestamp'
+#'   ```
+#'
 #' @author
 #' Will Beasley
 #'
