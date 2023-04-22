@@ -132,6 +132,10 @@
 <li>Accommodate older versions of REDCap that don’t return project-level variable, like <code>has_repeating_instruments_or_events</code>, <code>missing_data_codes</code>, <code>external_modules</code>, <code>bypass_branching_erase_field_prompt</code> (<a href="https://github.com/the-mad-statter" class="external-link">@the-mad-statter</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/465" class="external-link">#465</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/466" class="external-link">#466</a>)</li>
 <li>
 <code>redcap_meta_coltypes()</code> correctly determines data type for autonumber <code>record_id</code> fields. It suggests a character if the project has DAGs, and an integer if not. (<a href="https://github.com/pwildenhain" class="external-link">@pwildenhain</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/472" class="external-link">#472</a>)</li>
+<li>
+<code><a href="../reference/redcap_log_read.html">redcap_log_read()</a></code> now returns a new column reflecting the affected record id value (ref <a href="https://github.com/OuhscBbmc/REDCapR/issues/478" class="external-link">#478</a>)</li>
+<li>
+<code><a href="../reference/redcap_read.html">redcap_read()</a></code> and <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code> now remove “pseudofields” (e.g., <code>redcap_event_name</code>, <code>redcap_repeat_instrument</code>, &amp; <code>redcap_repeat_instance</code>) from the <code>fields</code> parameter. Starting with REDCap v13.4.10, an error is thrown by the server. REDCap will return a message if a common pseudofield is requested explicitly by the user. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/477" class="external-link">#477</a>)</li>
 </ul></div>
 </div>
     <div class="section level2">

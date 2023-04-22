@@ -866,6 +866,9 @@ object to ensure the desired variable data types.</p>
 <span>    col_types   <span class="op">=</span> <span class="va">col_types_intake</span>,</span>
 <span>    verbose     <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
+<span><span class="co">#&gt; At least one 'pseudofield' was requested and will be suppressed before calling the server. The server will return it if it's appropriate for the project structure.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Common pseudofields are: redcap_event_name, redcap_repeat_instrument, redcap_repeat_instance.</span></span>
 <span></span>
 <span><span class="va">ds_intake</span></span></code></pre></div>
 <table class="table table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
@@ -938,6 +941,9 @@ bmi
 <span>    col_types   <span class="op">=</span> <span class="va">col_types_blood_pressure</span>,</span>
 <span>    verbose     <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span>  <span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
+<span><span class="co">#&gt; At least one 'pseudofield' was requested and will be suppressed before calling the server. The server will return it if it's appropriate for the project structure.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Common pseudofields are: redcap_event_name, redcap_repeat_instrument, redcap_repeat_instance.</span></span>
 <span></span>
 <span><span class="va">ds_blood_pressure</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="va">redcap_repeat_instrument</span><span class="op">)</span></span></code></pre></div>
@@ -1105,6 +1111,9 @@ blood_pressure
 <span>    col_types   <span class="op">=</span> <span class="va">col_types_laboratory</span>,</span>
 <span>    verbose     <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span>  <span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
+<span><span class="co">#&gt; At least one 'pseudofield' was requested and will be suppressed before calling the server. The server will return it if it's appropriate for the project structure.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Common pseudofields are: redcap_event_name, redcap_repeat_instrument, redcap_repeat_instance.</span></span>
 <span></span>
 <span><span class="va">ds_laboratory</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="va">redcap_repeat_instrument</span><span class="op">)</span></span></code></pre></div>

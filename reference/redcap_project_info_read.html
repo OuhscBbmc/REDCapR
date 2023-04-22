@@ -205,7 +205,7 @@ administrator to send you the static material.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   randomization_enabled &lt;lgl&gt;, ddp_enabled &lt;lgl&gt;, project_irb_number &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   project_grant_number &lt;chr&gt;, project_pi_firstname &lt;chr&gt;, …</span></span>
 <span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_project_info_read</span><span class="op">(</span><span class="va">uri</span>, <span class="va">token_longitudinal</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.3 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 26</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   project_id project_title creation_time       production_time in_production</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>        </span>
@@ -248,32 +248,32 @@ administrator to send you the static material.</p>
 <span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fl">32L</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/nchar.html" class="external-link">nchar</a></span><span class="op">(</span><span class="va">token</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">pmap_dfr</a></span><span class="op">(</span><span class="fu">REDCapR</span><span class="fu">::</span><span class="va">redcap_project_info_read</span>, locale <span class="op">=</span> <span class="va">server_locale</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.3 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.4 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.9 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
@@ -307,16 +307,16 @@ administrator to send you the static material.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 30 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    data$project_id success status_code outcome_message  elapsed_seconds raw_text</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>             153 TRUE            200 1 rows were rea…           0.153 <span style="color: #949494;">""</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>             212 TRUE            200 1 rows were rea…           0.148 <span style="color: #949494;">""</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>             213 TRUE            200 1 rows were rea…           0.143 <span style="color: #949494;">""</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>             268 TRUE            200 1 rows were rea…           0.172 <span style="color: #949494;">""</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>             690 TRUE            200 1 rows were rea…           0.144 <span style="color: #949494;">""</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>             691 TRUE            200 1 rows were rea…           0.144 <span style="color: #949494;">""</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>             753 TRUE            200 1 rows were rea…           0.180 <span style="color: #949494;">""</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>             817 TRUE            200 1 rows were rea…           0.145 <span style="color: #949494;">""</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>             977 TRUE            200 1 rows were rea…           0.141 <span style="color: #949494;">""</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>             998 TRUE            200 1 rows were rea…           0.146 <span style="color: #949494;">""</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>             153 TRUE            200 1 rows were rea…           0.166 <span style="color: #949494;">""</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>             212 TRUE            200 1 rows were rea…           0.177 <span style="color: #949494;">""</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>             213 TRUE            200 1 rows were rea…           0.181 <span style="color: #949494;">""</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>             268 TRUE            200 1 rows were rea…           0.188 <span style="color: #949494;">""</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>             690 TRUE            200 1 rows were rea…           0.166 <span style="color: #949494;">""</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>             691 TRUE            200 1 rows were rea…           0.170 <span style="color: #949494;">""</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>             753 TRUE            200 1 rows were rea…           0.201 <span style="color: #949494;">""</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>             817 TRUE            200 1 rows were rea…           0.166 <span style="color: #949494;">""</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>             977 TRUE            200 1 rows were rea…           0.162 <span style="color: #949494;">""</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>             998 TRUE            200 1 rows were rea…           0.165 <span style="color: #949494;">""</span>      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 20 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 25 more variables: data$project_title &lt;chr&gt;, $creation_time &lt;dttm&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   $production_time &lt;dttm&gt;, $in_production &lt;lgl&gt;, $project_language &lt;chr&gt;,</span></span>
