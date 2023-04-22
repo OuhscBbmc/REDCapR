@@ -11,8 +11,8 @@ Test environments
 1. Local Ubuntu, R 4.2.2
 2. Local Win10, R 4.2.3 patched
 3. R-hub
-    1. [Ubuntu Linux 20.04 LTS, R-release, GCC](https://builder.r-hub.io/status/REDCapR_1.1.0.tar.gz-65720cf9ae694996b81294e2ade39175)
-    2. [Fedora Linux, R-devel, clang, gfortran](https://builder.r-hub.io/status/REDCapR_1.1.0.tar.gz-dfbf2b851e0c48aeaaf8e85c9c34c332)
+    1. [Ubuntu Linux 20.04 LTS, R-release, GCC](https://builder.r-hub.io/status/REDCapR_1.1.9005.tar.gz-aa1d5ab8d07d453db1f07927d1ad23f4)
+    2. [Fedora Linux, R-devel, clang, gfortran](https://builder.r-hub.io/status/REDCapR_1.1.9005.tar.gz-a56bc6477bbb48d2a4aa5d1872481dac)
     3. [Windows Server](https://builder.r-hub.io/status/REDCapR_1.1.9005.tar.gz-34917c524b674b82860b920d177844f1)
 4. [win-builder](https://win-builder.r-project.org/eG6x3HZ9ITqN), development version.
 5. [GiHub Actions](https://github.com/OuhscBbmc/REDCapR/actions), Ubuntu 20.04 LTS
