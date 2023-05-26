@@ -14,10 +14,10 @@ test_that("Smoke Test", {
   )
 })
 
-test_that("default", {
+test_that("2-arms-retrieve-only-arm-1", {
   testthat::skip_on_cran()
   credential    <- retrieve_credential_testing(212L)
-  path_expected <- "test-data/specific-redcapr/event-instruments/default.R"
+  path_expected <- "test-data/specific-redcapr/event-instruments/2-arms-retrieve-only-arm-1.R"
   expected_outcome_message <- "\\d+ event instrument metadata records were read from REDCap in \\d\\.\\d seconds\\.  The http status code was 200\\.(\\n)?"
 
   returned_object <-
