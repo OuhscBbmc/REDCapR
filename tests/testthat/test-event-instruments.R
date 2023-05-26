@@ -37,6 +37,20 @@ test_that("2-arms-retrieve-both-arms", {
   expect_match(   returned_object_explicit$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(    returned_object_explicit$success)
   expect_s3_class(returned_object_explicit$data, "tbl")
+
+  returned_object_default <-
+    redcap_event_instruments(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )
+
+  expect_equal(   returned_object_default$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_equal(   returned_object_default$status_code, expected=200L)
+  expect_equal(   returned_object_default$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_match(   returned_object_default$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true(    returned_object_default$success)
+  expect_s3_class(returned_object_default$data, "tbl")
 })
 test_that("2-arms-retrieve-only-arm-1", {
   testthat::skip_on_cran()
@@ -48,6 +62,7 @@ test_that("2-arms-retrieve-only-arm-1", {
     redcap_event_instruments(
       redcap_uri  = credential$redcap_uri,
       token       = credential$token,
+      arms        = "1",
       verbose     = FALSE
     )
 
