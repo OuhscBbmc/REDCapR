@@ -145,6 +145,31 @@ test_that("Bad URI", {
   )
 })
 
+test_that("no-arms", {
+  testthat::skip_on_cran()
+  credential    <- retrieve_credential_testing(153L)
+  path_expected <- "test-data/specific-redcapr/event-instruments/no-arms.R"
+  expected_outcome_message <- "You cannot export form/event mappings for classic projects(\\n)?"
+
+  returned_object <-
+    redcap_event_instruments(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      arms        = "2",
+      verbose     = FALSE
+    )
+
+  if (update_expectation) save_expected(returned_object$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
+
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_equal(returned_object$status_code, expected=400L)
+  expect_equal(returned_object$raw_text, expected="ERROR: You cannot export form/event mappings for classic projects", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_false(returned_object$success)
+  expect_s3_class(returned_object$data, "tbl")
+})
+
 test_that("bad token -Error", {
   testthat::skip_on_cran()
   credential    <- retrieve_credential_testing(212L)
