@@ -69,6 +69,8 @@
 #' token_2  <- "0434F0E9CF53ED0587847AB6E51DE762" # pid 212
 #' REDCapR::redcap_arm_export(redcap_uri=uri, token=token_2)$data
 #' REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_2)$data
+#' REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_2, arms = "2")$data
+#' REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_2, arms = c("1", "2"))$data
 #'
 #' # Classic project (without arms) throws an error
 #' token_3  <- "9A81268476645C4E5F03428B8AC3AA7B" # pid 153
@@ -96,7 +98,7 @@ redcap_event_instruments <- function(
     token     = token,
     content   = "formEventMapping",
     format    = "csv",
-    "arms[0]" = collapse_vector(arms)
+    "arms" = collapse_vector(arms)
   )
 
   col_types <- readr::cols(

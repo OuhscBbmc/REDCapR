@@ -1,10 +1,10 @@
 library(testthat)
 
-credential  <- retrieve_credential_testing(212L)
 update_expectation  <- FALSE
 
 test_that("Smoke Test", {
   testthat::skip_on_cran()
+  credential    <- retrieve_credential_testing(212L)
   expect_message(
     returned_object <-
       redcap_event_instruments(
@@ -16,6 +16,7 @@ test_that("Smoke Test", {
 
 test_that("default", {
   testthat::skip_on_cran()
+  credential    <- retrieve_credential_testing(212L)
   path_expected <- "test-data/specific-redcapr/event-instruments/default.R"
   expected_outcome_message <- "\\d+ event instrument metadata records were read from REDCap in \\d\\.\\d seconds\\.  The http status code was 200\\.(\\n)?"
 
@@ -39,6 +40,7 @@ test_that("default", {
 
 test_that("Bad URI", {
   testthat::skip_on_cran()
+  credential    <- retrieve_credential_testing(212L)
   bad_uri <- "https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"
   expected_data_frame <- structure(list(), .Names = character(0), row.names = integer(0), class = "data.frame")
 
@@ -58,6 +60,7 @@ test_that("Bad URI", {
 
 test_that("bad token -Error", {
   testthat::skip_on_cran()
+  credential    <- retrieve_credential_testing(212L)
   expected_outcome_message <- "ERROR: You do not have permissions to use the API"
 
   returned_object <-
@@ -71,5 +74,3 @@ test_that("bad token -Error", {
   testthat::expect_equal(returned_object$status_code, 403L)
   testthat::expect_equal(returned_object$raw_text, expected_outcome_message)
 })
-
-rm(credential)
