@@ -14,6 +14,30 @@ test_that("Smoke Test", {
   )
 })
 
+test_that("2-arms-retrieve-both-arms", {
+  testthat::skip_on_cran()
+  credential    <- retrieve_credential_testing(212L)
+  path_expected <- "test-data/specific-redcapr/event-instruments/2-arms-retrieve-both-arms.R"
+  expected_outcome_message <- "\\d+ event instrument metadata records were read from REDCap in \\d\\.\\d seconds\\.  The http status code was 200\\.(\\n)?"
+
+  returned_object_explicit <-
+    redcap_event_instruments(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      arms        = c("1", "2"),
+      verbose     = FALSE
+    )
+
+  if (update_expectation) save_expected(returned_object_explicit$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
+
+  expect_equal(   returned_object_explicit$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_equal(   returned_object_explicit$status_code, expected=200L)
+  expect_equal(   returned_object_explicit$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_match(   returned_object_explicit$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_true(    returned_object_explicit$success)
+  expect_s3_class(returned_object_explicit$data, "tbl")
+})
 test_that("2-arms-retrieve-only-arm-1", {
   testthat::skip_on_cran()
   credential    <- retrieve_credential_testing(212L)
