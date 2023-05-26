@@ -50,6 +50,8 @@ This will help extract forms from longitudinal & repeating projects.
 
 * `redcap_read()` and `redcap_read_oneshot()` now return an empty dataset if no records are retrieved (such as no records meet the filter criteria).  Currently a 0x0 tibble is returned, but that may change in the future.  Until now an error was deliberately thrown.  (#452)
 
+* `redcap_event_instruments()` now by default returns mappings for all arms.  The previous default was to return the mappings for only the first arm.  To recreate the previous behavior use a call like `REDCapR::redcap_event_instruments(uri, token_2, arms = "1")`.  (Suggested by @januz, #482)
+
 ### New Features
 
 * New `redcap_metadata_coltypes()` function.  Inspects the fields types and validation text of each field to generate a suggested `readr::col_types` object that reflects the project's current data dictionary.  The object then can be passed to the `col_types` parameter of `redcap_read()` or `redcap_read_oneshot()`.  (Suggested and discussed with @pbchase, @nutterb, @skadauke, & others, #405 & #294)
@@ -78,6 +80,7 @@ This will help extract forms from longitudinal & repeating projects.
 * `redcap_meta_coltypes()` correctly determines data type for autonumber `record_id` fields. It suggests a character if the project has DAGs, and an integer if not. (@pwildenhain, #472)
 * `redcap_log_read()` now returns a new column reflecting the affected record id value (ref #478)
 * `redcap_read()` and `redcap_read_oneshot()` now remove "pseudofields" (e.g., `redcap_event_name`, `redcap_repeat_instrument`, & `redcap_repeat_instance`) from the `fields` parameter.  Starting with REDCap v13.4.10, an error is thrown by the server.  REDCap will return a message if a common pseudofield is requested explicitly by the user. (#477)
+* `redcap_event_instruments()` now can return mappings for all arms, instead of one arm per call.(Suggested by @januz, #482)
 
 Version 1.1.0 (released 2022-08-10)
 ==========================================================

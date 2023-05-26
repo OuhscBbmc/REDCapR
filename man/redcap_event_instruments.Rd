@@ -7,7 +7,7 @@
 redcap_event_instruments(
   redcap_uri,
   token,
-  arms = c("1"),
+  arms = NULL,
   verbose = TRUE,
   config_options = NULL,
   handle_httr = NULL
@@ -23,8 +23,6 @@ Required.}
 \item{token}{The user-specific string that serves as the password for a
 project.  Required.}
 
-\item{arms}{A character string of arms to retrieve.  (Default: '1')}
-
 \item{verbose}{A boolean value indicating if \code{message}s should be printed
 to the R console during the operation.  The verbose output might contain
 sensitive information (\emph{e.g.} PHI), so turn this off if the output might
@@ -37,6 +35,9 @@ See details at \code{\link[httr:httr_options]{httr::httr_options()}}. Optional.}
 \code{\link[httr:POST]{httr::POST()}}.
 This is useful for only unconventional authentication approaches.  It
 should be \code{NULL} for most institutions.  Optional.}
+
+\item{arm}{A character string of arms to retrieve.
+Defaults to all arms of the project.}
 }
 \value{
 Currently, a list is returned with the following elements,
@@ -66,8 +67,23 @@ REDCap API documentation, v.10.5.1)
 \examples{
 \dontrun{
 uri                 <- "https://bbmc.ouhsc.edu/redcap/api/"
-token               <- "0434F0E9CF53ED0587847AB6E51DE762"
-ds_event_instrument <- REDCapR::redcap_event_instruments(redcap_uri=uri, token=token)$data
+
+# Longitudinal project with one arm
+token_1  <- "786334BEB4A87D572DD0E99C4BFCE144" # pid 2629
+REDCapR::redcap_arm_export(redcap_uri=uri, token=token_1)$data
+REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_1)$data
+
+# Project with two arms
+token_2  <- "0434F0E9CF53ED0587847AB6E51DE762" # pid 212
+REDCapR::redcap_arm_export(redcap_uri=uri, token=token_2)$data
+REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_2)$data
+REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_2, arms = c("1", "2"))$data
+REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_2, arms = "2")$data
+
+# Classic project (without arms) throws an error
+token_3  <- "9A81268476645C4E5F03428B8AC3AA7B" # pid 153
+REDCapR::redcap_arm_export(redcap_uri=uri, token=token_3)$data
+# REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_3)$data
 }
 }
 \references{
