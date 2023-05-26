@@ -23,6 +23,9 @@ Required.}
 \item{token}{The user-specific string that serves as the password for a
 project.  Required.}
 
+\item{arms}{A character string of arms to retrieve.
+Defaults to all arms of the project.}
+
 \item{verbose}{A boolean value indicating if \code{message}s should be printed
 to the R console during the operation.  The verbose output might contain
 sensitive information (\emph{e.g.} PHI), so turn this off if the output might
@@ -35,9 +38,6 @@ See details at \code{\link[httr:httr_options]{httr::httr_options()}}. Optional.}
 \code{\link[httr:POST]{httr::POST()}}.
 This is useful for only unconventional authentication approaches.  It
 should be \code{NULL} for most institutions.  Optional.}
-
-\item{arm}{A character string of arms to retrieve.
-Defaults to all arms of the project.}
 }
 \value{
 Currently, a list is returned with the following elements,
