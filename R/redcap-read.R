@@ -299,8 +299,10 @@ redcap_read <- function(
     handle_httr        = handle_httr
   )
 
+  # browser()
   if (!is.null(fields) || !is.null(forms))
-    fields  <- base::union(metadata$plumbing_variables, fields)
+    fields  <- base::union(metadata$record_id_name, fields)
+    # fields  <- base::union(metadata$plumbing_variables, fields)
 
   # Retrieve list of record ids --------------------------------------
   initial_call <- REDCapR::redcap_read_oneshot(
