@@ -1,7 +1,7 @@
 ---
 title: "Typical REDCap Workflow for a Data Analyst"
 author: Will Beasley, Geneva Marshall, & Thomas Wilson, [Biomedical & Behavior Methodology Core](https://www.ouhsc.edu/bbmc/team/), OUHSC Pediatrics
-output: 
+output:
   rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Typical REDCap Workflow for a Data Analyst}
@@ -18,9 +18,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-The REDCap API facilitates repetitive tasks.  If you're sure you'll download and analyze a project only once, then it may make sense to avoid the API and instead download a CSV through the browser. 
+The REDCap API facilitates repetitive tasks.  If you're sure you'll download and analyze a project only once, then it may make sense to avoid the API and instead download a CSV through the browser.
 
-But that single-shot scenario almost never happens in my life: 
+But that single-shot scenario almost never happens in my life:
 
 1. the patient dataset is updated with relevant & fresh information daily, or
 1. you run it on a different computer a few months later, or *and this is the heart of reproducibility:*
@@ -45,7 +45,7 @@ requireNamespace("REDCapR")
 
 # If this fails, run `install.packages("REDCapR")` or `remotes::install_github(repo="OuhscBbmc/REDCapR")`
 ```
- 
+
 If you're a workshop attendee, you can use this vignette to copy snippets of code to your local machine to follow along with the examples: <https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html>.
 
 Verify REDCap Access
@@ -122,11 +122,11 @@ Compared to the method below, this one is less secure but easier to establish.
 Security Method 2: Token Server
 -------------------------
 
-Our preferred method involves saving the tokens in a separate database that uses something like Active Directory to authenticate requests.  This method is described in detail in the [Security Database](https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html) vignette.  
+Our preferred method involves saving the tokens in a separate database that uses something like Active Directory to authenticate requests.  This method is described in detail in the [Security Database](https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html) vignette.
 
-This approach realistically requires someone in your institution to have at least basic database administration experience. 
+This approach realistically requires someone in your institution to have at least basic database administration experience.
 
-Part 3 - Read Data: Unstructured Approach 
+Part 3 - Read Data: Unstructured Approach
 ===================================
 
 The `redcap_uri` and `token` fields are the only required arguments of [`REDCapR::redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html); both are in the credential object created in the previous section.
@@ -158,7 +158,7 @@ summary(lm(age ~ 1 + sex + bmi, data = ds_1))
 Part 4 - Read Data: Choosing Columns and Rows
 ===================================
 
-When you read a dataset for the first time, you probably haven't decided which columns are needed so it makes sense to retrieve everything.  As you gain familiarity with the data and with the analytic objectives, consider being more selective with the variables and rows transported from the remote server to your local machine.  
+When you read a dataset for the first time, you probably haven't decided which columns are needed so it makes sense to retrieve everything.  As you gain familiarity with the data and with the analytic objectives, consider being more selective with the variables and rows transported from the remote server to your local machine.
 
 Advantages include:
 
@@ -220,7 +220,7 @@ REDCapR::redcap_read(
 )$data
 ```
 
-Part 5 - Read Data: Structured Approach 
+Part 5 - Read Data: Structured Approach
 ===================================
 
 As the automation of your scripts matures and institutional resources depend on its output, its output should be stable.  One way to make it more predictable is to specify the column names *and* the column data types.  In the previous example, notice that R (specifically [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html)) made its best guess and reported it in the "Column specification" section.
@@ -233,7 +233,7 @@ When readr sees a column with values like 1, 2, 3, and 4, it will make the reaso
 Specify Column Names & Types
 -------------------------
 
-```{r col_types} 
+```{r col_types}
 # Specify the column types.
 desired_fields <- c("record_id", "race")
 col_types <- readr::cols(
@@ -260,7 +260,7 @@ Specify Everything is a Character
 
 REDCap internally stores every value as a string.  To accept full responsibility of the data types, tell [`readr::cols()`](https://readr.tidyverse.org/reference/cols.html) to keep them as strings.
 
-```{r col_types-string} 
+```{r col_types-string}
 # Specify the column types.
 desired_fields <- c("record_id", "race")
 col_types <- readr::cols(.default = readr::col_character())
@@ -285,7 +285,7 @@ In addition to documentation [for each function](https://ouhscbbmc.github.io/RED
 Create an Arch for Reuse
 -------------------------
 
-When multiple R files use REDCapR call the same REDCap dataset, consider refactoring your scripts so that extraction code is written once, and called by the multiple analysis files.  This "arch" pattern is described in slides 9-16 of the 2014 [REDCapCon](https://projectredcap.org/about/redcapcon/) presentation, [Literate Programming Patterns and Practices for Continuous Quality Improvement (CQI)]( 
+When multiple R files use REDCapR call the same REDCap dataset, consider refactoring your scripts so that extraction code is written once, and called by the multiple analysis files.  This "arch" pattern is described in slides 9-16 of the 2014 [REDCapCon](https://projectredcap.org/about/redcapcon/) presentation, [Literate Programming Patterns and Practices for Continuous Quality Improvement (CQI)](
 https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/Publications/Presentation-2014-09-REDCapCon/LiterateProgrammingPatternsAndPracticesWithREDCap.pptx).
 
 Downstream Reproducible Reports
@@ -302,7 +302,7 @@ By default, `REDCapR::redcap_read()` requests datasets of 100 patients as a time
 Writing to the Server
 -------------------------
 
-Reading record data is only one API capability.  REDCapR [exposes 20+ API functions](https://ouhscbbmc.github.io/REDCapR/reference/), such as reading metadata, retrieving survey links, and writing records back to REDCap.  This last operation is relevant in  [Kenneth McLean](https://twitter.com/kennethmclean92)'s presentation following a five-minute break. 
+Reading record data is only one API capability.  REDCapR [exposes 20+ API functions](https://ouhscbbmc.github.io/REDCapR/reference/), such as reading metadata, retrieving survey links, and writing records back to REDCap.  This last operation is relevant in  [Kenneth McLean](https://twitter.com/kennethmclean92)'s presentation following a five-minute break.
 
 Notes
 ===================================

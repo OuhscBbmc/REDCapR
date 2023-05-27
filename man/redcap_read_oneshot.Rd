@@ -165,6 +165,33 @@ to \code{FALSE}. The following is from the API help page for version 10.5.1:
 \emph{This flag is only viable if the user whose token is being used to make the
 API request is \strong{not} in a data access group. If the user is in a group,
 then this flag will revert to its default value}.
+
+The REDCap project may contain "pseudofields", depending on its structure.
+Pseudofields are exported for certain project structures, but are not
+defined by users and do not appear in the codebook.
+If a recognized pseudofield is passed to the \code{fields} api parameter,
+it is suppressed by \code{\link[=redcap_read]{redcap_read()}} and \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}}
+so the server doesn't throw an error.
+Requesting a pseudofield is discouraged, so a message is returned to the user.
+
+Pseudofields include:
+\itemize{
+\item \code{redcap_event_name}: for longitudinal projects or multi-arm projects.
+\item \code{redcap_repeat_instrument}:  for projects with repeating instruments.
+\item \code{redcap_repeat_instance}:   for projects with repeating instruments.
+\item \code{redcap_data_access_group}: for projects with DAGs when the
+\code{export_data_access_groups} api parameter is TRUE.
+\item \code{redcap_survey_identifier}:  for projects with surveys when the
+\code{export_survey_fields} api parameter is TRUE.
+\item \emph{instrument_name}\verb{_timestamp}: for projects with surveys.
+For example, an instrument called "demographics" will have a pseudofield
+named \code{demographics_timestamp}.
+REDCapR does not suppress requests for timestamps, so the server will
+throw an error like
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{ERROR: The following values in the parameter fields are not valid: 'demographics_timestamp'
+}\if{html}{\out{</div>}}
+}
 }
 \examples{
 \dontrun{

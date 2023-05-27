@@ -15,7 +15,8 @@
 #' Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
-#' @param arms A character string of arms to retrieve.  (Default: '1')
+#' @param arms A character string of arms to retrieve.
+#' Defaults to all arms of the project.
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  The verbose output might contain
 #' sensitive information (*e.g.* PHI), so turn this off if the output might
@@ -59,15 +60,30 @@
 #' @examples
 #' \dontrun{
 #' uri                 <- "https://bbmc.ouhsc.edu/redcap/api/"
-#' token               <- "0434F0E9CF53ED0587847AB6E51DE762"
-#' ds_event_instrument <- REDCapR::redcap_event_instruments(redcap_uri=uri, token=token)$data
+#'
+#' # Longitudinal project with one arm
+#' token_1  <- "786334BEB4A87D572DD0E99C4BFCE144" # pid 2629
+#' REDCapR::redcap_arm_export(redcap_uri=uri, token=token_1)$data
+#' REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_1)$data
+#'
+#' # Project with two arms
+#' token_2  <- "0434F0E9CF53ED0587847AB6E51DE762" # pid 212
+#' REDCapR::redcap_arm_export(redcap_uri=uri, token=token_2)$data
+#' REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_2)$data
+#' REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_2, arms = c("1", "2"))$data
+#' REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_2, arms = "2")$data
+#'
+#' # Classic project (without arms) throws an error
+#' token_3  <- "9A81268476645C4E5F03428B8AC3AA7B" # pid 153
+#' REDCapR::redcap_arm_export(redcap_uri=uri, token=token_3)$data
+#' # REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_3)$data
 #' }
 
 #' @export
 redcap_event_instruments <- function(
   redcap_uri,
   token,
-  arms              = c("1"),
+  arms              = NULL,
   verbose           = TRUE,
   config_options    = NULL,
   handle_httr       = NULL
@@ -83,7 +99,7 @@ redcap_event_instruments <- function(
     token     = token,
     content   = "formEventMapping",
     format    = "csv",
-    "arms[0]" = collapse_vector(arms)
+    "arms" = collapse_vector(arms)
   )
 
   col_types <- readr::cols(

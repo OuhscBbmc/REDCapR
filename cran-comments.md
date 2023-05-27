@@ -50,6 +50,6 @@ R CMD check results
 Downstream dependencies
 -----------------------------------------------
 
-No downstream packages are affected.  The package that depends/imports/suggests REDCapR passes checks with `revdepcheck::revdep_check()`.  Results: https://github.com/OuhscBbmc/REDCapR/blob/main/revdep/cran.md
+No downstream packages are affected.  The package that depends/imports/suggests REDCapR passes checks with `revdepcheck::revdep_check()`.  Results: <https://github.com/OuhscBbmc/REDCapR/blob/main/revdep/cran.md>
 
 * [ReviewR](https://CRAN.R-project.org/package=ReviewR)

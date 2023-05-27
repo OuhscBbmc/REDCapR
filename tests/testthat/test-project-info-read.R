@@ -29,6 +29,10 @@ test_that("simple", {
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
+  # Don't compare the external modules, because they change so frequently.
+  expected_data_frame$external_modules  <- NULL
+  returned_object$data$external_modules <- NULL
+
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
@@ -60,6 +64,10 @@ test_that("all-test-projects", {
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
+  # Don't compare the external modules, because they change so frequently.
+  expected_data_frame$external_modules  <- NULL
+  returned_object$data$external_modules <- NULL
+
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_match(as.character(returned_object$status_code), regexp="200", perl=TRUE)
   expect_match(returned_object$raw_text, regexp="", perl=TRUE) # dput(returned_object$raw_text)
@@ -84,6 +92,10 @@ test_that("chicago", {
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
+
+  # Don't compare the external modules, because they change so frequently.
+  expected_data_frame$external_modules  <- NULL
+  returned_object$data$external_modules <- NULL
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)

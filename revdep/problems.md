@@ -3,8 +3,8 @@
 <details>
 
 * Version: 1.1.0
-* GitHub: https://github.com/RaymondBalise/tidyREDCap
-* Source code: https://github.com/cran/tidyREDCap
+* GitHub: <https://github.com/RaymondBalise/tidyREDCap>
+* Source code: <https://github.com/cran/tidyREDCap>
 * Date/Publication: 2023-02-18 18:10:02 UTC
 * Number of recursive dependencies: 82
 
@@ -31,9 +31,8 @@ Run `revdepcheck::revdep_details(, "tidyREDCap")` for more info
        16.                   └─vctrs:::stop_names(...)
        17.                     └─vctrs:::stop_vctrs(...)
        18.                       └─rlang::abort(message, class = c(class, "vctrs_error"), ..., call = call)
-      
+
       [ FAIL 1 | WARN 0 | SKIP 0 | PASS 4 ]
       Error: Test failures
       Execution halted
     ```
-

@@ -42,6 +42,7 @@ POSIXlt
 ParentPRO
 PhpCap
 Pre
+Pseudofields
 PyCap
 RCurl
 RDoc
@@ -122,6 +123,7 @@ pid
 pkgdown
 programmatically
 projectredcap
+pseudofield
 pseudofields
 qqq
 rdoc
