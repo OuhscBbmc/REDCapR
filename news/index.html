@@ -90,8 +90,8 @@
 <code>redcap_repeat_instrument</code> and <code>redcap_repeat_instance</code> will be returned for projects with repeating instruments</li>
 </ul></li>
 </ul><p>This will help extract forms from longitudinal &amp; repeating projects.</p>
-<ul><li>
-<code><a href="../reference/redcap_read.html">redcap_read()</a></code> and <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code> now return an empty dataset if no records are retrieved (such as no records meet the filter criteria). Currently a 0x0 tibble is returned, but that may change in the future. Until now an error was deliberately thrown. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/452" class="external-link">#452</a>)</li>
+<ul><li><p><code><a href="../reference/redcap_read.html">redcap_read()</a></code> and <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code> now return an empty dataset if no records are retrieved (such as no records meet the filter criteria). Currently a 0x0 tibble is returned, but that may change in the future. Until now an error was deliberately thrown. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/452" class="external-link">#452</a>)</p></li>
+<li><p><code><a href="../reference/redcap_event_instruments.html">redcap_event_instruments()</a></code> now by default returns mappings for all arms. The previous default was to return the mappings for only the first arm. To recreate the previous behavior use a call like <code>REDCapR::redcap_event_instruments(uri, token_2, arms = "1")</code>. (Suggested by <a href="https://github.com/januz" class="external-link">@januz</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/482" class="external-link">#482</a>)</p></li>
 </ul></div>
 <div class="section level4">
 <h4 id="new-features-1-2-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-1-2-0"></a></h4>
@@ -136,6 +136,8 @@
 <code><a href="../reference/redcap_log_read.html">redcap_log_read()</a></code> now returns a new column reflecting the affected record id value (ref <a href="https://github.com/OuhscBbmc/REDCapR/issues/478" class="external-link">#478</a>)</li>
 <li>
 <code><a href="../reference/redcap_read.html">redcap_read()</a></code> and <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code> now remove “pseudofields” (e.g., <code>redcap_event_name</code>, <code>redcap_repeat_instrument</code>, &amp; <code>redcap_repeat_instance</code>) from the <code>fields</code> parameter. Starting with REDCap v13.4.10, an error is thrown by the server. REDCap will return a message if a common pseudofield is requested explicitly by the user. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/477" class="external-link">#477</a>)</li>
+<li>
+<code><a href="../reference/redcap_event_instruments.html">redcap_event_instruments()</a></code> now can return mappings for all arms, instead of one arm per call.(Suggested by <a href="https://github.com/januz" class="external-link">@januz</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/482" class="external-link">#482</a>)</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -147,7 +149,7 @@
 <li>
 <code><a href="../reference/redcap_read.html">redcap_read()</a></code> and <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code> accept a new <code>locale</code> parameter that specifies date, time, and number formats, like using a comma as the decimal separator. It is a <a href="https://readr.tidyverse.org/reference/locale.html" class="external-link"><code>readr::locale</code></a> object. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/377" class="external-link">#377</a>, suggested by <a href="https://github.com/joundso" class="external-link">@joundso</a>)</li>
 <li>New <code><a href="../reference/redcap_instruments.html">redcap_instruments()</a></code> function exports a list of the data collection instruments for a project. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/381" class="external-link">#381</a>, <a href="https://github.com/vcastro" class="external-link">@vcastro</a>)</li>
-<li>New <code><a href="../reference/redcap_event_instruments.html">redcap_event_instruments()</a></code> function exports the instrument-event mappings for a project (i.e., how the data collection instruments are designated for certain events in a longitudinal project).. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/381" class="external-link">#381</a>, <a href="https://github.com/vcastro" class="external-link">@vcastro</a>)</li>
+<li>New <code><a href="../reference/redcap_event_instruments.html">redcap_event_instruments()</a></code> function exports the instrument-event mappings for a project (i.e., how the data collection instruments are designated for certain events in a longitudinal project). (<a href="https://github.com/OuhscBbmc/REDCapR/issues/381" class="external-link">#381</a>, <a href="https://github.com/vcastro" class="external-link">@vcastro</a>)</li>
 <li>New <code><a href="../reference/redcap_dag_read.html">redcap_dag_read()</a></code> function returns the Data Access Groups for a project (<a href="https://github.com/OuhscBbmc/REDCapR/issues/382" class="external-link">#382</a>, <a href="https://github.com/joundso" class="external-link">@joundso</a>)</li>
 <li>New detection when REDCap has trouble with a large request and drops records. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/400" class="external-link">#400</a> w/ <a href="https://github.com/TimMonahan" class="external-link">@TimMonahan</a>)</li>
 </ul></div>

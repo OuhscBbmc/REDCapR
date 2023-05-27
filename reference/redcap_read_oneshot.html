@@ -267,7 +267,27 @@ to <code>FALSE</code>. The following is from the API help page for version 10.5.
 <em>This flag is only viable if the user whose token is being used to make the
 API request is <strong>not</strong> in a data access group. If the user is in a group,
 then this flag will revert to its default value</em>.</p>
-    </div>
+<p>The REDCap project may contain "pseudofields", depending on its structure.
+Pseudofields are exported for certain project structures, but are not
+defined by users and do not appear in the codebook.
+If a recognized pseudofield is passed to the <code>fields</code> api parameter,
+it is suppressed by <code><a href="redcap_read.html">redcap_read()</a></code> and <code>redcap_read_oneshot()</code>
+so the server doesn't throw an error.
+Requesting a pseudofield is discouraged, so a message is returned to the user.</p>
+<p>Pseudofields include:</p><ul><li><p><code>redcap_event_name</code>: for longitudinal projects or multi-arm projects.</p></li>
+<li><p><code>redcap_repeat_instrument</code>:  for projects with repeating instruments.</p></li>
+<li><p><code>redcap_repeat_instance</code>:   for projects with repeating instruments.</p></li>
+<li><p><code>redcap_data_access_group</code>: for projects with DAGs when the
+<code>export_data_access_groups</code> api parameter is TRUE.</p></li>
+<li><p><code>redcap_survey_identifier</code>:  for projects with surveys when the
+<code>export_survey_fields</code> api parameter is TRUE.</p></li>
+<li><p><em>instrument_name</em><code>_timestamp</code>: for projects with surveys.
+For example, an instrument called "demographics" will have a pseudofield
+named <code>demographics_timestamp</code>.
+REDCapR does not suppress requests for timestamps, so the server will
+throw an error like</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ERROR<span class="sc">:</span> The following values <span class="cf">in</span> the parameter fields are not valid<span class="sc">:</span> <span class="st">'demographics_timestamp'</span></span></code></pre><p></p></div></li>
+</ul></div>
     <div id="references">
     <h2>References</h2>
     <p>The official documentation can be found on the 'API Help Page'
