@@ -1,0 +1,80 @@
+---
+title: "Writing to a REDCap Project"
+author: Will Beasley [Biomedical & Behavior Methodology Core](https://www.ouhsc.edu/bbmc/team/), OUHSC Pediatrics;<br>Raymond Balise, University of Miami School of Medicine
+output:
+  rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Writing to a REDCap Project}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+#| include = FALSE
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  tidy    = FALSE
+)
+```
+
+Writing data to REDCap is more difficult than reading data from REDCap.  
+When you read, you receive data in the structure that the REDCap provides you.
+You have some control about the columns, rows, and data types, 
+but there is not a lot you have to be concerned.
+
+In contrast, the structure of the dataset you send _to_ the REDCap server must be precise.  
+This vignette walks you through that process.
+
+If you are new to REDCap and its API, 
+please first understand the concepts described in the [vignettes](https://ouhscbbmc.github.io/REDCapR/articles/):
+* [Typical REDCap Workflow for a Data Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html) and
+* [Retrieving Longitudinal and Repeating Structures](https://ouhscbbmc.github.io/REDCapR/articles/longitudinal-and-repeating.html) and
+
+
+Part 1 - Pre-requisites
+===================================
+
+See the [Typical REDCap Workflow for a Data Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html)
+vignette and
+
+1. [Verify REDCapR is installed](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#verify-redcapr-is-installed)
+1. [Verify REDCap Access](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#verify-redcap-access)
+1. [Review Codebook](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#review-codebook)
+1. [Retrieve Protected Token](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#part-2---retrieve-protected-token)
+
+Part 2 - Write Data: One row per patient
+===================================
+
+The `redcap_uri` and `token` fields are the only required arguments of [`REDCapR::redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html); both are in the credential object created in the previous section.
+
+
+Part 3 - Write Data: Repeating Instrument
+===================================
+
+
+*Pause here in the workshop for a few minutes.  Raise hand if you're having trouble.*
+
+Part 6 - Next Steps
+===================================
+
+Batching
+-------------------------
+
+**Adopt this for writing**
+
+By default, `REDCapR::redcap_read()` requests datasets of 100 patients as a time, and stacks the resulting subsets together before returning a data.frame.  This can be adjusted to improve performance; the 'Details' section of [`REDCapR::redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html#details) discusses the trade offs.
+
+Writing to the Server
+-------------------------
+
+<!--
+Reading record data is only one API capability.  REDCapR [exposes 20+ API functions](https://ouhscbbmc.github.io/REDCapR/reference/), such as reading metadata, retrieving survey links, and writing records back to REDCap.  
+-->
+
+Notes
+===================================
+
+This vignette was originally designed for a 2023 R/Medicine REDCap workshop with [Raymond R. Balise](https://github.com/RaymondBalise), and others...
+
+This work was made possible in part by the NIH grant [U54GM104938](https://taggs.hhs.gov/Detail/AwardDetail?arg_AwardNum=U54GM104938&arg_ProgOfficeCode=127) to the [Oklahoma Shared Clinical and Translational Resource)](http://osctr.ouhsc.edu).
