@@ -391,6 +391,7 @@ ds_patient <-
   dplyr::select(
     -redcap_repeat_instrument,
     -redcap_repeat_instance,
+    -enrollment_complete,
   )
 
 ds_daily <-
@@ -399,6 +400,7 @@ ds_daily <-
   dplyr::select(
     -redcap_repeat_instrument,
     -redcap_repeat_instance,
+    -daily_complete,
   )
 
 # ---- verify-values -----------------------------------------------------------
@@ -432,5 +434,5 @@ ds_daily <-
 # ---- save-to-disk ------------------------------------------------------------
 # If there's no PHI, a rectangular CSV is usually adequate, and it's portable to other machines and software.
 # readr::write_csv(ds_slim, path_out_unified)
-readr::write_rds(ds_patient, path_patient, compress="gz") # Save as a compressed R-binary file if it's large or has a lot of factors.
-readr::write_rds(ds_daily  , path_daily  , compress="gz") # Save as a compressed R-binary file if it's large or has a lot of factors.
+readr::write_rds(ds_patient, path_patient, compress = "gz") # Save as a compressed R-binary file if it's large or has a lot of factors.
+readr::write_rds(ds_daily  , path_daily  , compress = "gz")
