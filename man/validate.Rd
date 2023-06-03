@@ -27,6 +27,10 @@ the REDCap project.}
 
 \item{field_names}{The names of the fields/variables in the REDCap project.
 Each field is an individual element in the character vector.}
+
+\item{convert_logical_to_integer}{This mimics the \code{convert_logical_to_integer} parameter  in
+\code{\link[=redcap_write]{redcap_write()}} when checking for potential importing problems.
+Defaults to \code{FALSE}.}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}}, where each potential violation is a row.

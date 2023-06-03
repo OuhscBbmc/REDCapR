@@ -21,6 +21,17 @@ test_that("validate_for_write_no_errors", {
   expect_equal(object=nrow(ds), expected=0)
 })
 
+test_that("validate_for_write_no_errors - convert_logical_to_integer", {
+  d <-
+    data.frame(
+      record_id     = 1:4,
+      logical       = c(TRUE, TRUE, FALSE, TRUE),
+      no_uppercase  = c(4, 6, 8, 2)
+    )
+  ds <- validate_for_write(d, convert_logical_to_integer = TRUE)
+  expect_equal(object = nrow(ds), expected = 0)
+})
+
 test_that("validate_no_logical -stop on error", {
   expect_error(
     validate_no_logical(vapply(ds_bad, class, character(1)), stop_on_error = TRUE),
