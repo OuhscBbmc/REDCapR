@@ -67,7 +67,8 @@ c(credential$redcap_uri, credential$token)
 Datasets to Write to Server
 -------------------------
 
-For the purposes of this vignette, we'll start with the data that needs to be written.  
+To keep this vignette focused on writing/importing/uploading to the server,
+we'll start with the data that needs to be written.  
 These example tables were prepared by [Raymond Balise](https://github.com/RaymondBalise) 
 for our 2023 [R/Medicine](https://events.linuxfoundation.org/r-medicine/) workshop,
 "Using REDCap and R to Rapidly Produce Biomedical Publications".
@@ -107,7 +108,7 @@ function are `redcap_uri` and `token`;
 both are contained in the credential object created in the previous section.
 
 As discussed in the [Troubleshooting vignette](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html#writing),
-we recommend running at least two preliminary checks before trying to write the
+we recommend running these two preliminary checks before trying to write the
 dataset to the server for the very first time.
 
 
@@ -123,8 +124,8 @@ REDCapR::validate_for_write(ds_patient, convert_logical_to_integer = TRUE)
 ```
 
 If you encounter problems that can be checked with automation, 
-please tell us in [an issue](https://github.com/OuhscBbmc/REDCapR/issues) and
-we'll work with you to incorporate the new check into `REDCapR::validate_for_write()`.
+please tell us in [an issue](https://github.com/OuhscBbmc/REDCapR/issues).
+We'll work with you to incorporate the new check into `REDCapR::validate_for_write()`.
 
 When a dataset's problems are caught before reaching the server,
 the solutions are easier to identify and implement.
@@ -134,15 +135,16 @@ Prep: Write Small Subset First
 -------------------------
 
 If this is your first time with a complicated project, consider loading a small subset of rows and columns.
+In this case, we start with only three columns and two rows.
 
 ```{r patient-subset}
 ds_patient |> 
-  dplyr::select(
+  dplyr::select(              # First three columns
     id_code,
     date,
     is_mobile,
   ) |> 
-  dplyr::slice(1:2) |> 
+  dplyr::slice(1:2) |>        # First two rows
   REDCapR::redcap_write(
     ds_to_write = _,
     redcap_uri  = credential$redcap_uri,
@@ -151,14 +153,14 @@ ds_patient |>
   )
 ```
 
-
 Write Entire Patient-level Table
 -------------------------
 
-If the small subset works, we usually try to upload all columns and rows.
+If the small subset works, we usually jump ahead and try all columns and rows.
+
 If this larger table fails, split the difference between
 (a) the smaller working example and 
-(b) the larger failing example.  
+(b) the larger failing example.
 See if this middle point (that has fewer rows and/or columns than the failing point)
 succeeds or fails.  
 Then repeat.
@@ -179,6 +181,50 @@ ds_patient |>
 Part 3 - Write Data: Repeating Instrument
 ===================================
 
+
+Add Plumbing Variables
+-------------------------
+
+As stated in the vignette's intro, 
+the structure of the dataset uploaded to the server must be precise. 
+When uploading repeating instruments, there are three or four important columns:
+
+1. `record_id`: typically indicates the patient's id.  (This field can be renamed for the project.)
+1. `redcap_event_name`: If the project is longitudinal or has arms, this indicates the event.  
+  Otherwise, you don't need to add this variable.
+1. `redcap_repeat_instrument`: Indicates the instrument/form that is repeating for these columns.
+1. `redcap_repeat_instance`: Typically a sequential positive integer (*e.g.*, 1, 2, 3, ...) indicating the order.
+
+The combination of these variables needs to be unique.  
+Please read the [Retrieving Longitudinal and Repeating Structures](https://ouhscbbmc.github.io/REDCapR/articles/longitudinal-and-repeating.html)
+vignette for details of these variables and their meanings. 
+
+You need to pass specific variables so that the REDCap server understands the hierarchical structure of the data points.
+
+```{r repeat-plumbing}
+ds_daily <- 
+  ds_daily |> 
+  dplyr::group_by(id_code) |> 
+  dplyr::mutate(
+    redcap_repeat_instrument  = "daily",
+    redcap_repeat_instance    = dplyr::row_number(da_date),
+    daily_complete            = REDCapR::constant("form_complete"),
+  ) |> 
+  dplyr::ungroup() |> 
+  dplyr::select(
+    id_code,                        # Or `record_id`, if you didn't rename it
+    # redcap_event_name,            # If the project is longitudinal or has arms
+    redcap_repeat_instrument,       # The name of the repeating instrument/form 
+    redcap_repeat_instance,         # The sequence of the repeating instrument
+    tidyselect::everything(),       # All columns not explicitly passed to `dplyr::select()`
+    daily_complete,                 # Indicates incomplete, unverified, or complete
+  )
+
+# Check for potential problems.  (Remember zero rows are good.)
+REDCapR::validate_for_write(ds_daily, convert_logical_to_integer = TRUE)
+
+ds_daily
+```
 
 
 *Pause here in the workshop for a few minutes.  Raise hand if you're having trouble.*
