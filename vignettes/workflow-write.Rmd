@@ -100,12 +100,43 @@ ds_daily
 Part 2 - Write Data: One row per patient
 ===================================
 
-The `redcap_uri` and `token` fields are the only required arguments of [`REDCapR::redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html); both are in the credential object created in the previous section.
+Besides the [data.frame] to write to REDCap,
+the only required arguments of the
+[`REDCapR::redcap_write()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_write.html)
+function are `redcap_uri` and `token`;
+both are contained in the credential object created in the previous section.
+
+As discussed in the [Troubleshooting vignette](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html#writing),
+we recommend running at least two preliminary checks before trying to write the
+dataset to the server for the very first time.
 
 
+Prep: `REDCapR::validate_for_write()`
+-------------------------
 
-```{r simple-load}
+`REDCapR::validate_for_write()` inspects a data frame to anticipate potential problems before writing with REDCap's API.  
+A data.frame is returned, with one row per potential problem (and a suggestion how to avoid it).
+If you encounter importing problems that can be checked with automation, 
+please tell us in [an issue](https://github.com/OuhscBbmc/REDCapR/issues) and
+we'll work with you to incorporate the new check into `REDCapR::validate_for_write()`.
+
+```{r patient-validate}
+REDCapR::validate_for_write(ds_patient)
+```
+
+
+Prep: Write Small Subset First
+-------------------------
+
+If this is your first time with a complicated project, consider loading a small subset of rows and columns.
+
+```{r patient-subset}
 ds_patient |> 
+  dplyr::select(
+    id_code,
+    date,
+    is_mobile,
+  ) |> 
   dplyr::slice(1:2) |> 
   REDCapR::redcap_write(
     ds_to_write = _,
@@ -113,7 +144,22 @@ ds_patient |>
     token       = credential$token,
     convert_logical_to_integer = TRUE
   )
+```
 
+
+Write Entire Patient-level Table
+-------------------------
+
+If the small subset works, we usually try to upload all columns and rows.
+If this larger table fails, split the difference between
+(a) the smaller working example and 
+(b) the larger failing example.  
+See if this middle point (that has fewer rows and/or columns than the failing point)
+succeeds or fails.  
+Then repeat.
+This "bisection" or "binary search" [debugging technique](https://medium.com/codecastpublication/debugging-tools-and-techniques-binary-search-2da5bb4282c7) is helpful in many areas of programming and statistical modeling.
+
+```{r patient-complete}
 ds_patient |> 
   REDCapR::redcap_write(
     ds_to_write = _,
