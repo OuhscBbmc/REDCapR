@@ -6,6 +6,7 @@
 \alias{validate_for_write}
 \alias{validate_no_logical}
 \alias{validate_field_names}
+\alias{validate_repeat_instance}
 \title{Inspect a dataset to anticipate problems before
 writing to a REDCap project}
 \usage{
@@ -16,6 +17,8 @@ validate_data_frame_inherits( d )
 validate_no_logical( data_types, stop_on_error )
 
 validate_field_names( field_names, stop_on_error = FALSE )
+
+validate_repeat_instance( d, stop_on_error )
 }
 \arguments{
 \item{d}{The \code{\link[base:data.frame]{base::data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}}
@@ -59,6 +62,7 @@ with one call.
 
 Currently it verifies that the dataset
 \itemize{
+\item inherits from \code{\link[data.table:data.table]{data.table::data.table()}}.
 \item does not contain
 \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/logical.html}{logical}
 values (because REDCap typically wants \code{0}/\code{1} values instead of
@@ -66,6 +70,7 @@ values (because REDCap typically wants \code{0}/\code{1} values instead of
 \item starts with a lowercase letter, and subsequent optional characters are a
 sequence of (a) lowercase letters, (b) digits 0-9, and/or (c) underscores.
 (The exact regex is \verb{^[a-z][0-9a-z_]*$}.)
+\item has an integer for \code{redcap_repeat_instance}, if the column is present.
 }
 
 If you encounter additional types of problems when attempting to write to

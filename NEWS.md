@@ -81,6 +81,7 @@ This will help extract forms from longitudinal & repeating projects.
 * `redcap_log_read()` now returns a new column reflecting the affected record id value (ref #478)
 * `redcap_read()` and `redcap_read_oneshot()` now remove "pseudofields" (e.g., `redcap_event_name`, `redcap_repeat_instrument`, & `redcap_repeat_instance`) from the `fields` parameter.  Starting with REDCap v13.4.10, an error is thrown by the server.  REDCap will return a message if a common pseudofield is requested explicitly by the user. (#477)
 * `redcap_event_instruments()` now can return mappings for all arms, instead of one arm per call.(Suggested by @januz, #482)
+* `validate_for_write()` contains a few more checks, such as `validate_repeat_instance()` and `validate_data_frame_inherits()`  (#485)
 
 Version 1.1.0 (released 2022-08-10)
 ==========================================================
