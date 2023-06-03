@@ -32,6 +32,14 @@ test_that("validate_for_write_no_errors - convert_logical_to_integer", {
   expect_equal(object = nrow(ds), expected = 0)
 })
 
+test_that("not a data.frame", {
+  error_pattern <- "The `d` object is not a valid `data\\.frame`\\."
+  expect_error(
+    validate_for_write(as.matrix(mtcars)),
+    error_pattern
+  )
+})
+
 test_that("validate_no_logical -stop on error", {
   expect_error(
     validate_no_logical(vapply(ds_bad, class, character(1)), stop_on_error = TRUE),

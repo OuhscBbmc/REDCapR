@@ -114,15 +114,20 @@ dataset to the server for the very first time.
 Prep: `REDCapR::validate_for_write()`
 -------------------------
 
-`REDCapR::validate_for_write()` inspects a data frame to anticipate potential problems before writing with REDCap's API.  
-A data.frame is returned, with one row per potential problem (and a suggestion how to avoid it).
-If you encounter importing problems that can be checked with automation, 
+`REDCapR::validate_for_write()` inspects a data frame to anticipate potential problems before writing with REDCap's API.
+A tibble is returned, with one row per potential problem (and a suggestion how to avoid it).
+Ideally an 0-row tibble is returned.
+
+```{r patient-validate}
+REDCapR::validate_for_write(ds_patient, convert_logical_to_integer = TRUE)
+```
+
+If you encounter problems that can be checked with automation, 
 please tell us in [an issue](https://github.com/OuhscBbmc/REDCapR/issues) and
 we'll work with you to incorporate the new check into `REDCapR::validate_for_write()`.
 
-```{r patient-validate}
-REDCapR::validate_for_write(ds_patient)
-```
+When a dataset's problems are caught before reaching the server,
+the solutions are easier to identify and implement.
 
 
 Prep: Write Small Subset First

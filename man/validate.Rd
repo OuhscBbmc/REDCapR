@@ -2,31 +2,34 @@
 % Please edit documentation in R/validate.R
 \name{validate}
 \alias{validate}
-\alias{validate_no_logical}
+\alias{validate_data_frame_inherits}
 \alias{validate_for_write}
+\alias{validate_no_logical}
 \alias{validate_field_names}
 \title{Inspect a dataset to anticipate problems before
 writing to a REDCap project}
 \usage{
-validate_for_write( d )
+validate_for_write( d, convert_logical_to_integer )
+
+validate_data_frame_inherits( d )
 
 validate_no_logical( data_types, stop_on_error )
 
 validate_field_names( field_names, stop_on_error = FALSE )
 }
 \arguments{
-\item{data_types}{The data types of the data frame corresponding
-to the REDCap project.}
-
-\item{stop_on_error}{If \code{TRUE}, an error is thrown for violations.
-Otherwise, a dataset summarizing the problems is returned.}
-
 \item{d}{The \code{\link[base:data.frame]{base::data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}}
 containing the dataset used to update
 the REDCap project.}
 
+\item{data_types}{The data types of the data frame corresponding
+to the REDCap project.}
+
 \item{field_names}{The names of the fields/variables in the REDCap project.
 Each field is an individual element in the character vector.}
+
+\item{stop_on_error}{If \code{TRUE}, an error is thrown for violations.
+Otherwise, a dataset summarizing the problems is returned.}
 
 \item{convert_logical_to_integer}{This mimics the \code{convert_logical_to_integer} parameter  in
 \code{\link[=redcap_write]{redcap_write()}} when checking for potential importing problems.
@@ -77,6 +80,12 @@ d <- data.frame(
   flag_Uppercase = c(4, 6, 8, 2)
 )
 REDCapR::validate_for_write(d = d)
+
+REDCapR::validate_for_write(d = d, convert_logical_to_integer = TRUE)
+
+# If `d` is not a data.frame, the remaining validation checks are skipped:
+# REDCapR::validate_for_write(as.matrix(mtcars))
+# REDCapR::validate_for_write(c(mtcars, iris))
 }
 \references{
 The official documentation can be found on the 'API Help Page'
