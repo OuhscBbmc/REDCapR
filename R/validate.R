@@ -7,7 +7,9 @@
 #' validate_field_names
 #'
 #' @usage
-#' validate_for_write( d )
+#' validate_for_write( d, convert_logical_to_integer )
+#'
+#' validate_data_frame_inherits( d )
 #'
 #' validate_no_logical( data_types, stop_on_error )
 #'
@@ -85,6 +87,24 @@
 #' REDCapR::validate_for_write(d = d)
 #'
 #' REDCapR::validate_for_write(d = d, convert_logical_to_integer = TRUE)
+#'
+#' # If `d` is not a data.frame, the remaining validation checks are skipped:
+#' # REDCapR::validate_for_write(as.matrix(mtcars))
+#' # REDCapR::validate_for_write(c(mtcars, iris))
+
+#' @export
+validate_data_frame_inherits <- function(d) {
+  if(!base::inherits(d, "data.frame")) {
+    stop(
+      "The `d` object is not a valid `data.frame`.  ",
+      "Make sure it is a data.frame ",
+      "or it inherits from a data.frame (like a tibble or data.table).  ",
+      "It appears to be a `",
+      class(d),
+      "`."
+    )
+  }
+}
 
 #' @export
 validate_no_logical <- function(data_types, stop_on_error = FALSE) {
@@ -160,10 +180,11 @@ validate_for_write <- function(
   d,
   convert_logical_to_integer = FALSE
 ) {
-  checkmate::assert_data_frame(d, any.missing = TRUE, null.ok = FALSE)
+  # checkmate::assert_data_frame(d, any.missing = TRUE, null.ok = FALSE)
   checkmate::assert_logical(convert_logical_to_integer, any.missing = FALSE, len = 1)
 
   lst_concerns <- list(
+    validate_data_frame_inherits(d),
     validate_field_names(colnames(d))
   )
 
