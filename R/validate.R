@@ -30,6 +30,10 @@
 #' Each field is an individual element in the character vector.
 #' @param stop_on_error If `TRUE`, an error is thrown for violations.
 #' Otherwise, a dataset summarizing the problems is returned.
+#' @param convert_logical_to_integer
+#' This mimics the `convert_logical_to_integer` parameter  in
+#' [redcap_write()] when checking for potential importing problems.
+#' Defaults to `FALSE`.
 #'
 #' @return
 #' A [tibble::tibble()], where each potential violation is a row.
@@ -79,6 +83,8 @@
 #'   flag_Uppercase = c(4, 6, 8, 2)
 #' )
 #' REDCapR::validate_for_write(d = d)
+#'
+#' REDCapR::validate_for_write(d = d, convert_logical_to_integer = TRUE)
 
 #' @export
 validate_no_logical <- function(data_types, stop_on_error = FALSE) {
@@ -150,13 +156,25 @@ validate_field_names <- function(field_names, stop_on_error = FALSE) {
 # }
 
 #' @export
-validate_for_write <- function(d) {
-  checkmate::assert_data_frame(d, any.missing = FALSE)
+validate_for_write <- function(
+  d,
+  convert_logical_to_integer = FALSE
+) {
+  checkmate::assert_data_frame(d, any.missing = TRUE, null.ok = FALSE)
+  checkmate::assert_logical(convert_logical_to_integer, any.missing = FALSE, len = 1)
 
   lst_concerns <- list(
-    validate_no_logical(vapply(d, class, character(1))),
     validate_field_names(colnames(d))
   )
+
+  if (!convert_logical_to_integer) {
+    # lst_concerns <-
+    #   base::append(
+    #     lst_concerns,
+    #     validate_no_logical(vapply(d, class, character(1)))
+    #   )
+    lst_concerns[[length(lst_concerns) + 1L]] <- validate_no_logical(vapply(d, class, character(1)))
+  }
 
   # Vertically stack all the data.frames into a single data frame
   dplyr::bind_rows(lst_concerns)
