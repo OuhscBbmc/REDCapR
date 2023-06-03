@@ -18,19 +18,21 @@ knitr::opts_chunk$set(
 )
 ```
 
-Writing data to REDCap is more difficult than reading data from REDCap.
+Writing data _to_ REDCap is more difficult than reading data _from_ REDCap.
 When you read, you receive data in the structure that the REDCap provides you.
 You have some control about the columns, rows, and data types,
 but there is not a lot you have to be concerned.
 
-In contrast, the structure of the dataset you send _to_ the REDCap server must be precise.
+In contrast, the structure of the dataset you send to the REDCap server must be precise.
+You need to pass special variables so that the REDCap server understands the
+hierarchical structure of the data points.
 This vignette walks you through that process.
 
 If you are new to REDCap and its API,
-please first understand the concepts described in the [vignettes](https://ouhscbbmc.github.io/REDCapR/articles/):
-* [Typical REDCap Workflow for a Data Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html) and
-* [Retrieving Longitudinal and Repeating Structures](https://ouhscbbmc.github.io/REDCapR/articles/longitudinal-and-repeating.html) and
+please first understand the concepts described in these two [vignettes](https://ouhscbbmc.github.io/REDCapR/articles/):
 
+* [Typical REDCap Workflow for a Data Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html)
+* [Retrieving Longitudinal and Repeating Structures](https://ouhscbbmc.github.io/REDCapR/articles/longitudinal-and-repeating.html)
 
 Part 1 - Pre-requisites
 ===================================
@@ -41,7 +43,16 @@ vignette and
 1. [Verify REDCapR is installed](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#verify-redcapr-is-installed)
 1. [Verify REDCap Access](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#verify-redcap-access)
 1. [Review Codebook](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#review-codebook)
-1. [Retrieve Protected Token](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#part-2---retrieve-protected-token)
+
+
+Retrieve Token
+-------------------------
+
+Please closely read the 
+[Retrieve Protected Token](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#part-2---retrieve-protected-token) section,
+which has important security implications.  
+The current vignette imports a fake dataset into REDCap,
+and we'll use a token stored in a local file.
 
 ```{r retrieve-credential}
 path_credential <- system.file("misc/example.credentials", package = "REDCapR")
@@ -50,8 +61,41 @@ credential  <- REDCapR::retrieve_credential_local(
   project_id      = 3748
 )
 
-credential
+c(credential$redcap_uri, credential$token)
 ```
+
+Datasets to Write to Server
+-------------------------
+
+For the purposes of this vignette, we'll start with the data that needs to be written.  
+These example tables were prepared by [Raymond Balise](https://github.com/RaymondBalise) 
+for our 2023 [R/Medicine](https://events.linuxfoundation.org/r-medicine/) workshop,
+"Using REDCap and R to Rapidly Produce Biomedical Publications".
+
+There are two tables, each with a different [granularity](https://www.1keydata.com/datawarehousing/fact-table-granularity.html): 
+
+* `ds_patient`: each row represents one patient, 
+* `ds_daily`: each row represents one daily measurement per patient.
+
+```{r load-patient}
+ds_patient <-
+  "test-data/vignette-repeating-write/data-patient.rds" |>
+  system.file(package = "REDCapR") |>
+  readr::read_rds()
+
+ds_patient
+```
+
+
+```{r load-repeating}
+ds_daily <-
+  "test-data/vignette-repeating-write/data-daily.rds" |>
+  system.file(package = "REDCapR") |>
+  readr::read_rds()
+
+ds_daily
+```
+
 
 Part 2 - Write Data: One row per patient
 ===================================
@@ -61,13 +105,6 @@ The `redcap_uri` and `token` fields are the only required arguments of [`REDCapR
 
 
 ```{r simple-load}
-ds_patient <-
-  "test-data/vignette-repeating-write/data-patient.rds" |>
-  system.file(package = "REDCapR") |>
-  readr::read_rds()
-
-ds_patient
-
 ds_patient |> 
   dplyr::slice(1:2) |> 
   REDCapR::redcap_write(
@@ -86,17 +123,11 @@ ds_patient |>
   )
 ```
 
+
+
 Part 3 - Write Data: Repeating Instrument
 ===================================
 
-```{r repeating-load}
-ds_patient <-
-  "test-data/vignette-repeating-write/data-patient.rds" |>
-  system.file(package = "REDCapR") |>
-  readr::read_rds()
-
-ds_patient
-```
 
 
 *Pause here in the workshop for a few minutes.  Raise hand if you're having trouble.*

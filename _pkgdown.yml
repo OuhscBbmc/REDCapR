@@ -30,6 +30,7 @@ articles:
       - TroubleshootingApiCalls
       - advanced-redcapr-operations
       - longitudinal-and-repeating
+      - workflow-write
 reference:
 
   - title: "Records via the API"
