@@ -393,6 +393,14 @@ ds_patient <-
     -redcap_repeat_instance,
   )
 
+ds_daily <-
+  ds_daily |>
+  tidyr::drop_na(redcap_repeat_instrument) |>
+  dplyr::select(
+    -redcap_repeat_instrument,
+    -redcap_repeat_instance,
+  )
+
 # ---- verify-values -----------------------------------------------------------
 # OuhscMunge::verify_value_headstart(ds)
 # checkmate::assert_integer(  ds$subject_id , any.missing=F , lower=1001, upper=1200 , unique=T)
