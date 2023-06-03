@@ -18,15 +18,15 @@ knitr::opts_chunk$set(
 )
 ```
 
-Writing data to REDCap is more difficult than reading data from REDCap.  
+Writing data to REDCap is more difficult than reading data from REDCap.
 When you read, you receive data in the structure that the REDCap provides you.
-You have some control about the columns, rows, and data types, 
+You have some control about the columns, rows, and data types,
 but there is not a lot you have to be concerned.
 
-In contrast, the structure of the dataset you send _to_ the REDCap server must be precise.  
+In contrast, the structure of the dataset you send _to_ the REDCap server must be precise.
 This vignette walks you through that process.
 
-If you are new to REDCap and its API, 
+If you are new to REDCap and its API,
 please first understand the concepts described in the [vignettes](https://ouhscbbmc.github.io/REDCapR/articles/):
 * [Typical REDCap Workflow for a Data Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html) and
 * [Retrieving Longitudinal and Repeating Structures](https://ouhscbbmc.github.io/REDCapR/articles/longitudinal-and-repeating.html) and
@@ -43,14 +43,60 @@ vignette and
 1. [Review Codebook](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#review-codebook)
 1. [Retrieve Protected Token](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#part-2---retrieve-protected-token)
 
+```{r retrieve-credential}
+path_credential <- system.file("misc/example.credentials", package = "REDCapR")
+credential  <- REDCapR::retrieve_credential_local(
+  path_credential = path_credential,
+  project_id      = 3748
+)
+
+credential
+```
+
 Part 2 - Write Data: One row per patient
 ===================================
 
 The `redcap_uri` and `token` fields are the only required arguments of [`REDCapR::redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html); both are in the credential object created in the previous section.
 
 
+
+```{r simple-load}
+ds_patient <-
+  "test-data/vignette-repeating-write/data-patient.rds" |>
+  system.file(package = "REDCapR") |>
+  readr::read_rds()
+
+ds_patient
+
+ds_patient |> 
+  dplyr::slice(1:2) |> 
+  REDCapR::redcap_write(
+    ds_to_write = _,
+    redcap_uri  = credential$redcap_uri,
+    token       = credential$token,
+    convert_logical_to_integer = TRUE
+  )
+
+ds_patient |> 
+  REDCapR::redcap_write(
+    ds_to_write = _,
+    redcap_uri  = credential$redcap_uri,
+    token       = credential$token,
+    convert_logical_to_integer = TRUE
+  )
+```
+
 Part 3 - Write Data: Repeating Instrument
 ===================================
+
+```{r repeating-load}
+ds_patient <-
+  "test-data/vignette-repeating-write/data-patient.rds" |>
+  system.file(package = "REDCapR") |>
+  readr::read_rds()
+
+ds_patient
+```
 
 
 *Pause here in the workshop for a few minutes.  Raise hand if you're having trouble.*
@@ -69,7 +115,7 @@ Writing to the Server
 -------------------------
 
 <!--
-Reading record data is only one API capability.  REDCapR [exposes 20+ API functions](https://ouhscbbmc.github.io/REDCapR/reference/), such as reading metadata, retrieving survey links, and writing records back to REDCap.  
+Reading record data is only one API capability.  REDCapR [exposes 20+ API functions](https://ouhscbbmc.github.io/REDCapR/reference/), such as reading metadata, retrieving survey links, and writing records back to REDCap.
 -->
 
 Notes
