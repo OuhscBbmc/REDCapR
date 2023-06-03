@@ -3,8 +3,10 @@
 #'
 #' @aliases
 #' validate_for_write
+#' validate_data_frame_inherits
 #' validate_no_logical
 #' validate_field_names
+#' validate_repeat_instance
 #'
 #' @usage
 #' validate_for_write( d, convert_logical_to_integer )
@@ -14,6 +16,8 @@
 #' validate_no_logical( data_types, stop_on_error )
 #'
 #' validate_field_names( field_names, stop_on_error = FALSE )
+#'
+#' validate_repeat_instance( d, stop_on_error )
 #'
 #' @title
 #' Inspect a dataset to anticipate problems before
@@ -54,6 +58,7 @@
 #' with one call.
 #'
 #' Currently it verifies that the dataset
+#' * inherits from [data.table::data.table()].
 #' * does not contain
 #' [logical](https://stat.ethz.ch/R-manual/R-devel/library/base/html/logical.html)
 #' values (because REDCap typically wants `0`/`1` values instead of
@@ -61,6 +66,7 @@
 #' * starts with a lowercase letter, and subsequent optional characters are a
 #' sequence of (a) lowercase letters, (b) digits 0-9, and/or (c) underscores.
 #' (The exact regex is `^[a-z][0-9a-z_]*$`.)
+#' * has an integer for `redcap_repeat_instance`, if the column is present.
 #'
 #' If you encounter additional types of problems when attempting to write to
 #' REDCap, please tell us by creating a
@@ -169,6 +175,44 @@ validate_field_names <- function(field_names, stop_on_error = FALSE) {
   }
 }
 
+#' @export
+validate_repeat_instance <- function(d, stop_on_error = FALSE) {
+  checkmate::assert_data_frame(d)
+  checkmate::assert_logical(stop_on_error, any.missing = FALSE, len = 1)
+
+  column_name <- "redcap_repeat_instance"
+  if(!any(colnames(d) == column_name)) {
+    tibble::tibble(
+      field_name         = character(0),
+      field_index        = integer(0),
+      concern            = character(0),
+      suggestion         = character(0)
+    )
+  } else if (inherits(d[[column_name]], "integer")) {
+    tibble::tibble(
+      field_name         = character(0),
+      field_index        = integer(0),
+      concern            = character(0),
+      suggestion         = character(0)
+    )
+  } else if (stop_on_error) {
+    stop(
+      "The `redcap_repeat_instance` column should be an integer.  ",
+      "Use `as.integer()` to cast it.  ",
+      "Make sure no 'NAs introduced by coercion' warnings appears."
+    )
+  } else {
+    indices <- grep(column_name, x = colnames(d), perl = TRUE)
+
+    tibble::tibble(
+      field_name         = column_name,
+      field_index        = indices,
+      concern            = "The `redcap_repeat_instance` column should be an integer.",
+      suggestion         = "Use `as.integer()` to cast it.  Make sure no 'NAs introduced by coercion' warnings appears."
+    )
+  }
+}
+
 # #' @export
 # validate_field_names_collapsed <- function(field_names_collapsed, stop_on_error = FALSE) {
 #   field_names <- trimws(unlist(strsplit(field_names_collapsed, ",")))
@@ -185,7 +229,8 @@ validate_for_write <- function(
 
   lst_concerns <- list(
     validate_data_frame_inherits(d),
-    validate_field_names(colnames(d))
+    validate_field_names(colnames(d)),
+    validate_repeat_instance(d)
   )
 
   if (!convert_logical_to_integer) {
