@@ -66,18 +66,33 @@ to anticipate problems before writing with REDCap's API.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">validate_for_write</span><span class="op">(</span> <span class="va">d</span> <span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">validate_for_write</span><span class="op">(</span> <span class="va">d</span>, <span class="va">convert_logical_to_integer</span> <span class="op">)</span></span>
+<span></span>
+<span><span class="fu">validate_data_frame_inherits</span><span class="op">(</span> <span class="va">d</span> <span class="op">)</span></span>
 <span></span>
 <span><span class="fu">validate_no_logical</span><span class="op">(</span> <span class="va">data_types</span>, <span class="va">stop_on_error</span> <span class="op">)</span></span>
 <span></span>
-<span><span class="fu">validate_field_names</span><span class="op">(</span> <span class="va">field_names</span>, stop_on_error <span class="op">=</span> <span class="cn">FALSE</span> <span class="op">)</span></span></code></pre></div>
+<span><span class="fu">validate_field_names</span><span class="op">(</span> <span class="va">field_names</span>, stop_on_error <span class="op">=</span> <span class="cn">FALSE</span> <span class="op">)</span></span>
+<span></span>
+<span><span class="fu">validate_repeat_instance</span><span class="op">(</span> <span class="va">d</span>, <span class="va">stop_on_error</span> <span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>data_types</dt>
+    <dl><dt>d</dt>
+<dd><p>The <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> or <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code>
+containing the dataset used to update
+the REDCap project.</p></dd>
+
+
+<dt>data_types</dt>
 <dd><p>The data types of the data frame corresponding
 to the REDCap project.</p></dd>
+
+
+<dt>field_names</dt>
+<dd><p>The names of the fields/variables in the REDCap project.
+Each field is an individual element in the character vector.</p></dd>
 
 
 <dt>stop_on_error</dt>
@@ -85,15 +100,10 @@ to the REDCap project.</p></dd>
 Otherwise, a dataset summarizing the problems is returned.</p></dd>
 
 
-<dt>d</dt>
-<dd><p>The <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> or <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code>
-containing the dataset used to update
-the REDCap project.</p></dd>
-
-
-<dt>field_names</dt>
-<dd><p>The names of the fields/variables in the REDCap project.
-Each field is an individual element in the character vector.</p></dd>
+<dt>convert_logical_to_integer</dt>
+<dd><p>This mimics the <code>convert_logical_to_integer</code> parameter  in
+<code><a href="redcap_write.html">redcap_write()</a></code> when checking for potential importing problems.
+Defaults to <code>FALSE</code>.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -114,13 +124,15 @@ problems during the upload.</p></li>
 of the dataset.  The <code>validate_for_write()</code> function executes all these
 individual validation checks.  It allows the client to check everything
 with one call.</p>
-<p>Currently it verifies that the dataset</p><ul><li><p>does not contain
+<p>Currently it verifies that the dataset</p><ul><li><p>inherits from <code>data.table::data.table()</code>.</p></li>
+<li><p>does not contain
 <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/logical.html" class="external-link">logical</a>
 values (because REDCap typically wants <code>0</code>/<code>1</code> values instead of
 <code>FALSE</code>/<code>TRUE</code>).</p></li>
 <li><p>starts with a lowercase letter, and subsequent optional characters are a
 sequence of (a) lowercase letters, (b) digits 0-9, and/or (c) underscores.
 (The exact regex is <code>^[a-z][0-9a-z_]*$</code>.)</p></li>
+<li><p>has an integer for <code>redcap_repeat_instance</code>, if the column is present.</p></li>
 </ul><p>If you encounter additional types of problems when attempting to write to
 REDCap, please tell us by creating a
 <a href="https://github.com/OuhscBbmc/REDCapR/issues" class="external-link">new issue</a>, and we'll
@@ -151,8 +163,18 @@ administrator to send you the static material.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   field_name     field_index concern                                  suggestion</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> flag_logical             2 The REDCap API does not automatically c… Convert t…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> flag_Uppercase           3 A REDCap project does not allow field n… Change th…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> flag_Uppercase           3 A REDCap project does not allow field n… Change th…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> flag_logical             2 The REDCap API does not automatically c… Convert t…</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">validate_for_write</span><span class="op">(</span>d <span class="op">=</span> <span class="va">d</span>, convert_logical_to_integer <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   field_name     field_index concern                                  suggestion</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> flag_Uppercase           3 A REDCap project does not allow field n… Change th…</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># If `d` is not a data.frame, the remaining validation checks are skipped:</span></span></span>
+<span class="r-in"><span><span class="co"># REDCapR::validate_for_write(as.matrix(mtcars))</span></span></span>
+<span class="r-in"><span><span class="co"># REDCapR::validate_for_write(c(mtcars, iris))</span></span></span>
 </code></pre></div>
     </div>
   </div>
