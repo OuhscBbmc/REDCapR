@@ -1,5 +1,5 @@
 ---
-title: "Retrieving Longitudinal and Repeating Structures --DRAFT"
+title: "Retrieving Longitudinal and Repeating Structures"
 author:
 - name: Will Beasley
   affiliation:

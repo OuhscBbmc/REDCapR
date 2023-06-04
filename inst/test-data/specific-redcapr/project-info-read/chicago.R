@@ -10,7 +10,7 @@ structure(list(project_id = 153L, project_title = "REDCapR Target Simple Static 
     randomization_enabled = FALSE, ddp_enabled = FALSE, project_irb_number = NA_character_, 
     project_grant_number = NA_character_, project_pi_firstname = NA_character_, 
     project_pi_lastname = NA_character_, display_today_now_button = TRUE, 
-    missing_data_codes = NA_character_, external_modules = "cross_project_piping,date_validation_action_tags,form_status_tweaks", 
+    missing_data_codes = NA_character_, external_modules = "cross_project_piping,form_status_tweaks,redcap_autofill,data_driven_project_banner", 
     bypass_branching_erase_field_prompt = "0"), row.names = c(NA, 
 -1L), spec = structure(list(cols = list(project_id = structure(list(), class = c("collector_integer", 
 "collector")), project_title = structure(list(), class = c("collector_character", 
@@ -38,6 +38,6 @@ structure(list(project_id = 153L, project_title = "REDCapR Target Simple Static 
 "collector")), missing_data_codes = structure(list(), class = c("collector_character", 
 "collector")), external_modules = structure(list(), class = c("collector_character", 
 "collector")), bypass_branching_erase_field_prompt = structure(list(), class = c("collector_character", 
-"collector"))), default = structure(list(), class = c("collector_character", 
+"collector"))), default = structure(list(), class = c("collector_guess", 
 "collector")), delim = ","), class = "col_spec"), class = c("spec_tbl_df", 
 "tbl_df", "tbl", "data.frame"))
