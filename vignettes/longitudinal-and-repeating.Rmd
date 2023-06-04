@@ -10,7 +10,7 @@ author:
 output:
   rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Retrieving Longitudinal and Repeating Structures --DRAFT}
+  %\VignetteIndexEntry{Retrieving Longitudinal and Repeating Structures}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
