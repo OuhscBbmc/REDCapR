@@ -4,7 +4,7 @@ author:
 - name: Will Beasley
   affiliation:
   - Biomedical & Behavior Methodology Core, OUHSC Pediatrics
-- name: Stephan or Rich?
+- name: Stephan Kaduke
   affiliation:
   - CHOP
 output:
