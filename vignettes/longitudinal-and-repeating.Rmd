@@ -4,13 +4,13 @@ author:
 - name: Will Beasley
   affiliation:
   - Biomedical & Behavior Methodology Core, OUHSC Pediatrics
-- name: Stephan or Rich?
+- name: Stephan Kaduke
   affiliation:
   - CHOP
 output:
   rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Retrieving Longitudinal and Repeating Structures --DRAFT}
+  %\VignetteIndexEntry{Retrieving Longitudinal and Repeating Structures}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
