@@ -226,7 +226,7 @@ ds_patient <-
 
 ```{r codebook-race}
 #| echo = FALSE,
-#| out.extra = 'style = "fig.width=600px"'
+#| out.extra = 'style = "fig.width=1200px"'
 knitr::include_graphics("images/codebook-race.png")
 ```
 
@@ -304,6 +304,19 @@ ds_daily
 ```
 
 
+Writing Repeating Instrument Variables
+-------------------------
+
+```{r daily-entire}
+ds_daily |>
+  REDCapR::redcap_write(
+    ds_to_write = _,
+    redcap_uri  = credential$redcap_uri,
+    token       = credential$token,
+    convert_logical_to_integer = TRUE
+  )
+```
+
 Part 4 - Next Steps
 ===================================
 
@@ -321,6 +334,17 @@ By default, `REDCapR::redcap_write()` requests datasets of 100 patients as a tim
 
 I usually shoot for ~10 seconds per batch.
 
+Manual vs API
+-------------------------
+
+Manual downloading/uploading might make sense if you're do the operation only once.
+But when does it ever stop after the first time?
+
+If you have trouble uploading, consider adding a few fake patients & measurements
+and then download the csv.  
+It might reveal something. 
+But be aware that it will be in the block matrix format 
+(*i.e.*, everything jammed into one rectangle.)
 
 Notes
 ===================================
