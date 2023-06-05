@@ -311,9 +311,9 @@ only three columns and two rows.</p>
 <span>    token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,</span>
 <span>    convert_logical_to_integer <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="co">#&gt; Starting to update 2 records to be written at 2023-06-04 00:51:33.610218.</span></span>
+<span><span class="co">#&gt; Starting to update 2 records to be written at 2023-06-05 15:39:43.885731.</span></span>
 <span><span class="co">#&gt; Writing batch 1 of 1, with indices 1 through 2.</span></span>
-<span><span class="co">#&gt; 2 records were written to REDCap in 0.5 seconds.</span></span>
+<span><span class="co">#&gt; 2 records were written to REDCap in 0.6 seconds.</span></span>
 <span><span class="co">#&gt; $success</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -321,7 +321,7 @@ only three columns and two rows.</p>
 <span><span class="co">#&gt; [1] "200"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $outcome_message</span></span>
-<span><span class="co">#&gt; [1] "2 records were written to REDCap in 0.5 seconds."</span></span>
+<span><span class="co">#&gt; [1] "2 records were written to REDCap in 0.6 seconds."</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $records_affected_count</span></span>
 <span><span class="co">#&gt; [1] 2</span></span>
@@ -330,7 +330,34 @@ only three columns and two rows.</p>
 <span><span class="co">#&gt; [1] "07" "15"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $elapsed_seconds</span></span>
-<span><span class="co">#&gt; [1] 1.028838</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 1.10318</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="prep-recode-variables-where-necessary">Prep: Recode Variables where Necessary<a class="anchor" aria-label="anchor" href="#prep-recode-variables-where-necessary"></a>
+</h3>
+<p>Some variables in the data.frame might be represented differently
+than in REDCap.</p>
+<p>A common transformation is changing strings into the integers that
+underlie radio buttons. Common approaches are <a href="https://dplyr.tidyverse.org/reference/case_match.html" class="external-link"><code>dplyr::case_match()</code></a>
+and using joining to lookup tables (if the mappings are expressed in a
+csv). Here’s an in-line example of <code><a href="https://dplyr.tidyverse.org/reference/case_match.html" class="external-link">dplyr::case_match()</a></code>.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ds_patient</span> <span class="op">&lt;-</span></span>
+<span>  <span class="va">ds_patient</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
+<span>    race <span class="op">=</span> </span>
+<span>      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html" class="external-link">case_match</a></span><span class="op">(</span></span>
+<span>        <span class="va">race</span>,</span>
+<span>        <span class="st">"White"</span>                       <span class="op">~</span>  <span class="fl">1L</span>,</span>
+<span>        <span class="st">"Black or African American"</span>   <span class="op">~</span>  <span class="fl">2L</span>,</span>
+<span>        <span class="st">"Asian"</span>                       <span class="op">~</span>  <span class="fl">3L</span>,</span>
+<span>        <span class="st">"Native American"</span>             <span class="op">~</span>  <span class="fl">4L</span>,</span>
+<span>        <span class="st">"Pacific Islander"</span>            <span class="op">~</span>  <span class="fl">5L</span>,</span>
+<span>        <span class="st">"Multiracial"</span>                 <span class="op">~</span>  <span class="fl">6L</span>,</span>
+<span>        <span class="st">"Refused or don't know"</span>       <span class="op">~</span>  <span class="fl">7L</span></span>
+<span>      <span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="images/codebook-race.png" style="fig.width=600px"></p>
 </div>
 <div class="section level3">
 <h3 id="write-entire-patient-level-table">Write Entire Patient-level Table<a class="anchor" aria-label="anchor" href="#write-entire-patient-level-table"></a>
@@ -343,7 +370,7 @@ middle point (that has fewer rows and/or columns than the failing point)
 succeeds or fails. Then repeat. This “bisection” or “binary search” <a href="https://medium.com/codecastpublication/debugging-tools-and-techniques-binary-search-2da5bb4282c7" class="external-link">debugging
 technique</a> is helpful in many areas of programming and statistical
 modeling.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds_patient</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_write.html">redcap_write</a></span><span class="op">(</span></span>
 <span>    ds_to_write <span class="op">=</span> <span class="va">_</span>,</span>
@@ -351,7 +378,7 @@ modeling.</p>
 <span>    token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,</span>
 <span>    convert_logical_to_integer <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="co">#&gt; Starting to update 34 records to be written at 2023-06-04 00:51:34.707487.</span></span>
+<span><span class="co">#&gt; Starting to update 34 records to be written at 2023-06-05 15:39:45.251772.</span></span>
 <span><span class="co">#&gt; Writing batch 1 of 1, with indices 1 through 34.</span></span>
 <span><span class="co">#&gt; 34 records were written to REDCap in 1.0 seconds.</span></span>
 <span><span class="co">#&gt; $success</span></span>
@@ -373,7 +400,7 @@ modeling.</p>
 <span><span class="co">#&gt; [31] "7432" "8765" "8976" "8977"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $elapsed_seconds</span></span>
-<span><span class="co">#&gt; [1] 1.740445</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 1.690958</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -406,7 +433,7 @@ Longitudinal and Repeating Structures</a> vignette for details of these
 variables and their meanings.</p>
 <p>You need to pass specific variables so that the REDCap server
 understands the hierarchical structure of the data points.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds_daily</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">ds_daily</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">id_code</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -452,29 +479,28 @@ understands the hierarchical structure of the data points.</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   da_visit_reason___3 &lt;lgl&gt;, da_visit_reason___4 &lt;lgl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   da_visit_reason___5 &lt;lgl&gt;, da_visit_reason___6 &lt;lgl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   da_visit_reason___7 &lt;lgl&gt;, da_visit_reason___8 &lt;lgl&gt;, …</span></span></span></code></pre></div>
-<p><em>Pause here in the workshop for a few minutes. Raise hand if
-you’re having trouble.</em></p>
 </div>
 </div>
 <div class="section level2">
-<h2 id="part-6---next-steps">Part 6 - Next Steps<a class="anchor" aria-label="anchor" href="#part-6---next-steps"></a>
+<h2 id="part-4---next-steps">Part 4 - Next Steps<a class="anchor" aria-label="anchor" href="#part-4---next-steps"></a>
 </h2>
+<div class="section level3">
+<h3 id="more-complexity">More Complexity<a class="anchor" aria-label="anchor" href="#more-complexity"></a>
+</h3>
+<p>This vignette required only two data.frames, but more complex
+projects sometimes need more.<br>
+For example, each repeating instrument should be its own data.frame and
+writing step. Arms and longitudinal events need them too.</p>
+</div>
 <div class="section level3">
 <h3 id="batching">Batching<a class="anchor" aria-label="anchor" href="#batching"></a>
 </h3>
-<p><strong>Adopt this for writing</strong></p>
-<p>By default, <code><a href="../reference/redcap_read.html">REDCapR::redcap_read()</a></code> requests datasets of
+<p>By default, <code><a href="../reference/redcap_write.html">REDCapR::redcap_write()</a></code> requests datasets of
 100 patients as a time, and stacks the resulting subsets together before
 returning a data.frame. This can be adjusted to improve performance; the
-‘Details’ section of <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html#details"><code>REDCapR::redcap_read()</code></a>
+‘Details’ section of <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_write.html#details"><code>REDCapR::redcap_write()</code></a>
 discusses the trade offs.</p>
-</div>
-<div class="section level3">
-<h3 id="writing-to-the-server">Writing to the Server<a class="anchor" aria-label="anchor" href="#writing-to-the-server"></a>
-</h3>
-<!--
-Reading record data is only one API capability.  REDCapR [exposes 20+ API functions](https://ouhscbbmc.github.io/REDCapR/reference/), such as reading metadata, retrieving survey links, and writing records back to REDCap.
--->
+<p>I usually shoot for ~10 seconds per batch.</p>
 </div>
 </div>
 <div class="section level2">
@@ -482,7 +508,8 @@ Reading record data is only one API capability.  REDCapR [exposes 20+ API functi
 </h2>
 <p>This vignette was originally designed for a 2023 R/Medicine REDCap
 workshop with <a href="https://github.com/RaymondBalise" class="external-link">Raymond R.
-Balise</a>, and others…</p>
+Balise</a>, Belén Hervera, Daniel Maya, Anna Calderon, Tyler
+Bartholomew, Stephan Kadauke, and João Pedro Carmezim Correia.</p>
 <p>This work was made possible in part by the NIH grant <a href="https://taggs.hhs.gov/Detail/AwardDetail?arg_AwardNum=U54GM104938&amp;arg_ProgOfficeCode=127" class="external-link">U54GM104938</a>
 to the <a href="http://osctr.ouhsc.edu" class="external-link">Oklahoma Shared Clinical and
 Translational Resource)</a>.</p>
