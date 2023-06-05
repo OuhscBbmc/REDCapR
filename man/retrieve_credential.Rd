@@ -113,7 +113,7 @@ feasible and the token must be stored locally.  Please contact us
 if your institution is using something other than SQL Server, and
 would like help adapting this approach to your infrastructure.
 
-\emph{Stored credentials locally}
+\emph{Storing credentials locally}
 
 When storing credentials locally, typically the credential file
 should be dedicated to just one user. Occasionally it makes sense to store
