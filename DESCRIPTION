@@ -60,7 +60,8 @@ Suggests:
     purrr (>= 0.3.4),
     rmarkdown (>= 2.0),
     sessioninfo (>= 1.1.1),
-    testthat (>= 3.0)
+    testthat (>= 3.0),
+    tidyselect
 License: MIT + file LICENSE
 VignetteBuilder: knitr
 Encoding: UTF-8
