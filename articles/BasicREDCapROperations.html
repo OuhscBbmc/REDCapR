@@ -130,13 +130,13 @@ returned.</p>
 <span><span class="va">ds_all_rows_all_fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
 <span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 0.4 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.3 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; Starting to read 5 records  at 2023-06-09 06:12:05.321605.</span></span>
+<span><span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; Starting to read 5 records  at 2023-06-09 06:37:14.375196.</span></span>
 <span><span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span></span>
-<span><span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.</span></span>
 <span><span class="va">ds_all_rows_all_fields</span> <span class="co"># Inspect the returned dataset</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 25</span></span></span>
 <span><span class="co">#&gt;   record_id name_first name_last address  telephone email dob          age   sex</span></span>
@@ -173,13 +173,13 @@ converts the array into the format needed by the API.</p>
 <span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  records    <span class="op">=</span> <span class="va">desired_records</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 2 data access groups were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; Starting to read 2 records  at 2023-06-09 06:12:07.744488.</span></span>
+<span><span class="co">#&gt; Starting to read 2 records  at 2023-06-09 06:37:16.816035.</span></span>
 <span><span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).</span></span>
 <span><span class="co">#&gt; 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span></code></pre></div>
 </div>
@@ -205,12 +205,12 @@ the format required by the API (<em>i.e.</em>,
 <span>  fields     <span class="op">=</span> <span class="va">desired_fields</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
 <span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; Starting to read 5 records  at 2023-06-09 06:12:09.949067.</span></span>
+<span><span class="co">#&gt; Starting to read 5 records  at 2023-06-09 06:37:19.160467.</span></span>
 <span><span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span></span>
 <span><span class="co">#&gt; 5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span></code></pre></div>
 </div>
@@ -239,12 +239,12 @@ columns, but only for the identified records.</p>
 <span>  fields     <span class="op">=</span> <span class="va">desired_fields_v3</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
 <span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 2 data access groups were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; Starting to read 5 records  at 2023-06-09 06:12:12.145427.</span></span>
+<span><span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; Starting to read 5 records  at 2023-06-09 06:37:21.170362.</span></span>
 <span><span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span></span>
 <span><span class="co">#&gt; 5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span></span>
@@ -275,13 +275,13 @@ columns, but only for the identified records.</p>
 <span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  records    <span class="op">=</span> <span class="va">desired_records_v3</span></span>
 <span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 2 data access groups were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; Starting to read 2 records  at 2023-06-09 06:12:14.137132.</span></span>
+<span><span class="co">#&gt; Starting to read 2 records  at 2023-06-09 06:37:23.081806.</span></span>
 <span><span class="co">#&gt; Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).</span></span>
 <span><span class="co">#&gt; 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span></span>
@@ -330,13 +330,13 @@ call.</li>
 <span>  token      <span class="op">=</span> <span class="va">token</span>,</span>
 <span>  fields     <span class="op">=</span> <span class="va">desired_fields</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; Starting to read 5 records  at 2023-06-09 06:12:16.2002.</span></span>
+<span><span class="co">#&gt; Starting to read 5 records  at 2023-06-09 06:37:25.185076.</span></span>
 <span><span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span></span>
 <span><span class="co">#&gt; 5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
 <span><span class="va">all_information</span> <span class="co">#Inspect the additional information</span></span>
@@ -381,7 +381,7 @@ call.</li>
 <span><span class="co">#&gt; [1] NA</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $elapsed_seconds</span></span>
-<span><span class="co">#&gt; [1] 1.803053</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 1.858523</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -475,7 +475,7 @@ Environment <span class="glyphicon glyphicon-plus-sign"></span>
 <span><span class="co">#&gt; <span style="color: #555555;"> [2] /Library/Frameworks/R.framework/Versions/4.3-x86_64/Resources/library</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">──────────────────────────────────────────────────────────────────────────────</span></span></span></code></pre>
-</details><p>Report rendered by runner at 2023-06-09, 06:12 +0000 in 15
+</details><p>Report rendered by runner at 2023-06-09, 06:37 +0000 in 15
 seconds.</p>
 </div>
   </div>
