@@ -132,7 +132,7 @@ distinct steps:</p>
 <li>Upload the each repeating instrument separately.</li>
 </ol>
 <p>The actual upload phase is pretty straight-forward –it’s just a call
-to [<code><a href="../reference/redcap_write.html">REDCapR::redcap_write()</a></code>]. Most of the vignette’s code
+to <code><a href="../reference/redcap_write.html">REDCapR::redcap_write()</a></code>. Most of the vignette’s code
 prepares the dataset so that the upload will run smoothly.</p>
 </div>
 <div class="section level3">
@@ -157,14 +157,14 @@ Protected Token</a> section, which has important security implications.
 The current vignette imports a fake dataset into REDCap, and we’ll use a
 token stored in a local file.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">path_credential</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"misc/example.credentials"</span>, package <span class="op">=</span> <span class="st">"REDCapR"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># retrieve-credential</span></span>
+<span><span class="va">path_credential</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"misc/example.credentials"</span>, package <span class="op">=</span> <span class="st">"REDCapR"</span><span class="op">)</span></span>
 <span><span class="va">credential</span>  <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/retrieve_credential.html">retrieve_credential_local</a></span><span class="op">(</span></span>
 <span>  path_credential <span class="op">=</span> <span class="va">path_credential</span>,</span>
 <span>  project_id      <span class="op">=</span> <span class="fl">3748</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>, <span class="va">credential</span><span class="op">$</span><span class="va">token</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "https://bbmc.ouhsc.edu/redcap/api/" "1CA2BDE35577F9E97E7BD4E6CB7C69B1"</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>, <span class="va">credential</span><span class="op">$</span><span class="va">token</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="datasets-to-write-to-server">Datasets to Write to Server<a class="anchor" aria-label="anchor" href="#datasets-to-write-to-server"></a>
@@ -184,59 +184,21 @@ Publications”.</p>
 patient.</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ds_patient</span> <span class="op">&lt;-</span></span>
+<code class="sourceCode R"><span><span class="co"># load-patient</span></span>
+<span><span class="va">ds_patient</span> <span class="op">&lt;-</span></span>
 <span>  <span class="st">"test-data/vignette-repeating-write/data-patient.rds"</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"REDCapR"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_rds.html" class="external-link">read_rds</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">ds_patient</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 34 × 126</span></span></span>
-<span><span class="co">#&gt;    id_code date       is_mobile is_mobile_where initials unique_initials</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 07      2016-07-05 0         <span style="color: #BB0000;">NA</span>              AB       AB             </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 15      2016-09-09 0         <span style="color: #BB0000;">NA</span>              EF       EF             </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 23      2016-11-16 0         <span style="color: #BB0000;">NA</span>              IJ       IJ             </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 37      2016-10-04 0         <span style="color: #BB0000;">NA</span>              MN       MN             </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 45      2016-02-23 0         <span style="color: #BB0000;">NA</span>              QR       QR             </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 52      2016-12-25 1         5               UV       UV             </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 65      2016-10-10 0         <span style="color: #BB0000;">NA</span>              YZ       YZ             </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 70      2017-02-04 1         7               CD       CD             </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 76      2017-04-17 1         1               GH       GH             </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 80      2017-04-09 0         <span style="color: #BB0000;">NA</span>              KL       KL             </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 24 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 120 more variables: initials_mother &lt;chr&gt;, unique_initials_mother &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   birth_month &lt;chr&gt;, unique_birth_month &lt;chr&gt;, birth_year &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   simulated_dob &lt;chr&gt;, age_at_enrollment &lt;chr&gt;, race &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   unique_race &lt;chr&gt;, is_hispanic &lt;chr&gt;, sex_at_birth &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   unique_sex_at_birth &lt;chr&gt;, gender &lt;chr&gt;, unique_idcode &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   is_homeless &lt;chr&gt;, is_homeless_length &lt;dbl&gt;, is_homeless_units &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="va">ds_patient</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ds_daily</span> <span class="op">&lt;-</span></span>
+<code class="sourceCode R"><span><span class="co"># load-repeating</span></span>
+<span><span class="va">ds_daily</span> <span class="op">&lt;-</span></span>
 <span>  <span class="st">"test-data/vignette-repeating-write/data-daily.rds"</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"REDCapR"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_rds.html" class="external-link">read_rds</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">ds_daily</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 65 × 188</span></span></span>
-<span><span class="co">#&gt;    id_code da_date    da_is_mobile da_is_mobile_where da_encounter_type</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 07      2016-07-05 0            <span style="color: #BB0000;">NA</span>                 1                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 07      2016-09-12 0            <span style="color: #BB0000;">NA</span>                 1                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 07      2016-11-09 0            <span style="color: #BB0000;">NA</span>                 1                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 07      2018-11-11 0            <span style="color: #BB0000;">NA</span>                 1                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 15      2016-09-09 0            <span style="color: #BB0000;">NA</span>                 1                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 15      2016-09-28 0            <span style="color: #BB0000;">NA</span>                 1                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 23      2016-11-16 0            <span style="color: #BB0000;">NA</span>                 1                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 23      2017-02-01 0            <span style="color: #BB0000;">NA</span>                 1                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 23      2017-06-27 0            <span style="color: #BB0000;">NA</span>                 1                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 23      2017-11-19 0            <span style="color: #BB0000;">NA</span>                 1                </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 55 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 183 more variables: da_visit_reason___1 &lt;lgl&gt;, da_visit_reason___2 &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   da_visit_reason___3 &lt;lgl&gt;, da_visit_reason___4 &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   da_visit_reason___5 &lt;lgl&gt;, da_visit_reason___6 &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   da_visit_reason___7 &lt;lgl&gt;, da_visit_reason___8 &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   da_visit_reason___9 &lt;lgl&gt;, da_visit_reason___10 &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   da_visit_reason___13 &lt;lgl&gt;, da_visit_reason___12 &lt;lgl&gt;, …</span></span></span></code></pre></div>
+<span><span class="va">ds_daily</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -266,7 +228,8 @@ will appear green.</p>
 “enrollment”, so the corresponding variable is
 <code>enrollment_complete</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ds_patient</span> <span class="op">&lt;-</span></span>
+<code class="sourceCode R"><span><span class="co"># patient-complete</span></span>
+<span><span class="va">ds_patient</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">ds_patient</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    enrollment_complete   <span class="op">=</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/constant.html">constant</a></span><span class="op">(</span><span class="st">"form_complete"</span><span class="op">)</span>,</span>
@@ -280,10 +243,7 @@ anticipate potential problems before writing with REDCap’s API. A tibble
 is returned, with one row per potential problem (and a suggestion how to
 avoid it). Ideally an 0-row tibble is returned.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/validate.html">validate_for_write</a></span><span class="op">(</span><span class="va">ds_patient</span>, convert_logical_to_integer <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 4</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 variables: field_name &lt;chr&gt;, field_index &lt;int&gt;, concern &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   suggestion &lt;chr&gt;</span></span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/validate.html">validate_for_write</a></span><span class="op">(</span><span class="va">ds_patient</span>, convert_logical_to_integer <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>If you encounter problems that can be checked with automation, please
 tell us in <a href="https://github.com/OuhscBbmc/REDCapR/issues" class="external-link">an
 issue</a>. We’ll work with you to incorporate the new check into
@@ -298,7 +258,8 @@ solutions are easier to identify and implement.</p>
 loading a small subset of rows and columns. In this case, we start with
 only three columns and two rows.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ds_patient</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="co"># patient-subset</span></span>
+<span><span class="va">ds_patient</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>              <span class="co"># First three columns</span></span>
 <span>    <span class="va">id_code</span>,</span>
 <span>    <span class="va">date</span>,</span>
@@ -310,27 +271,7 @@ only three columns and two rows.</p>
 <span>    redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,</span>
 <span>    token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,</span>
 <span>    convert_logical_to_integer <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="co">#&gt; Starting to update 2 records to be written at 2023-06-05 15:39:43.885731.</span></span>
-<span><span class="co">#&gt; Writing batch 1 of 1, with indices 1 through 2.</span></span>
-<span><span class="co">#&gt; 2 records were written to REDCap in 0.6 seconds.</span></span>
-<span><span class="co">#&gt; $success</span></span>
-<span><span class="co">#&gt; [1] TRUE</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $status_code</span></span>
-<span><span class="co">#&gt; [1] "200"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $outcome_message</span></span>
-<span><span class="co">#&gt; [1] "2 records were written to REDCap in 0.6 seconds."</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $records_affected_count</span></span>
-<span><span class="co">#&gt; [1] 2</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $affected_ids</span></span>
-<span><span class="co">#&gt; [1] "07" "15"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $elapsed_seconds</span></span>
-<span><span class="co">#&gt; [1] 1.10318</span></span></code></pre></div>
+<span>  <span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="prep-recode-variables-where-necessary">Prep: Recode Variables where Necessary<a class="anchor" aria-label="anchor" href="#prep-recode-variables-where-necessary"></a>
@@ -343,9 +284,9 @@ and using joining to lookup tables (if the mappings are expressed in a
 csv). Here’s an in-line example of <code><a href="https://dplyr.tidyverse.org/reference/case_match.html" class="external-link">dplyr::case_match()</a></code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds_patient</span> <span class="op">&lt;-</span></span>
-<span>  <span class="va">ds_patient</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="va">ds_patient</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span>    race <span class="op">=</span> </span>
+<span>    race <span class="op">=</span></span>
 <span>      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_match.html" class="external-link">case_match</a></span><span class="op">(</span></span>
 <span>        <span class="va">race</span>,</span>
 <span>        <span class="st">"White"</span>                       <span class="op">~</span>  <span class="fl">1L</span>,</span>
@@ -357,7 +298,7 @@ csv). Here’s an in-line example of <code><a href="https://dplyr.tidyverse.org/
 <span>        <span class="st">"Refused or don't know"</span>       <span class="op">~</span>  <span class="fl">7L</span></span>
 <span>      <span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="images/codebook-race.png" style="fig.width=600px"></p>
+<p><img src="images/codebook-race.png" style="fig.width=1200px"></p>
 </div>
 <div class="section level3">
 <h3 id="write-entire-patient-level-table">Write Entire Patient-level Table<a class="anchor" aria-label="anchor" href="#write-entire-patient-level-table"></a>
@@ -371,36 +312,14 @@ succeeds or fails. Then repeat. This “bisection” or “binary search” <a h
 technique</a> is helpful in many areas of programming and statistical
 modeling.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ds_patient</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="co"># patient-entire</span></span>
+<span><span class="va">ds_patient</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_write.html">redcap_write</a></span><span class="op">(</span></span>
 <span>    ds_to_write <span class="op">=</span> <span class="va">_</span>,</span>
 <span>    redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,</span>
 <span>    token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,</span>
 <span>    convert_logical_to_integer <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="co">#&gt; Starting to update 34 records to be written at 2023-06-05 15:39:45.251772.</span></span>
-<span><span class="co">#&gt; Writing batch 1 of 1, with indices 1 through 34.</span></span>
-<span><span class="co">#&gt; 34 records were written to REDCap in 1.0 seconds.</span></span>
-<span><span class="co">#&gt; $success</span></span>
-<span><span class="co">#&gt; [1] TRUE</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $status_code</span></span>
-<span><span class="co">#&gt; [1] "200"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $outcome_message</span></span>
-<span><span class="co">#&gt; [1] "34 records were written to REDCap in 1.0 seconds."</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $records_affected_count</span></span>
-<span><span class="co">#&gt; [1] 34</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $affected_ids</span></span>
-<span><span class="co">#&gt;  [1] "07"   "15"   "23"   "37"   "45"   "52"   "65"   "70"   "76"   "80"  </span></span>
-<span><span class="co">#&gt; [11] "88"   "92"   "100"  "109"  "123"  "151"  "209"  "268"  "303"  "408" </span></span>
-<span><span class="co">#&gt; [21] "515"  "650"  "1024" "1242" "2222" "3333" "4444" "4455" "5555" "6543"</span></span>
-<span><span class="co">#&gt; [31] "7432" "8765" "8976" "8977"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $elapsed_seconds</span></span>
-<span><span class="co">#&gt; [1] 1.690958</span></span></code></pre></div>
+<span>  <span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -434,7 +353,8 @@ variables and their meanings.</p>
 <p>You need to pass specific variables so that the REDCap server
 understands the hierarchical structure of the data points.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ds_daily</span> <span class="op">&lt;-</span></span>
+<code class="sourceCode R"><span><span class="co"># repeat-plumbing</span></span>
+<span><span class="va">ds_daily</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">ds_daily</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">id_code</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
@@ -454,31 +374,21 @@ understands the hierarchical structure of the data points.</p>
 <span></span>
 <span><span class="co"># Check for potential problems.  (Remember zero rows are good.)</span></span>
 <span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/validate.html">validate_for_write</a></span><span class="op">(</span><span class="va">ds_daily</span>, convert_logical_to_integer <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 4</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 variables: field_name &lt;chr&gt;, field_index &lt;int&gt;, concern &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   suggestion &lt;chr&gt;</span></span></span>
 <span></span>
-<span><span class="va">ds_daily</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 65 × 191</span></span></span>
-<span><span class="co">#&gt;    id_code redcap_repeat_instru…¹ redcap_repeat_instance da_date    da_is_mobile</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 07      daily                                       1 2016-07-05 0           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 07      daily                                       2 2016-09-12 0           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 07      daily                                       3 2016-11-09 0           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 07      daily                                       4 2018-11-11 0           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 15      daily                                       1 2016-09-09 0           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 15      daily                                       2 2016-09-28 0           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 23      daily                                       1 2016-11-16 0           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 23      daily                                       2 2017-02-01 0           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 23      daily                                       3 2017-06-27 0           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 23      daily                                       4 2017-11-19 0           </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 55 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ abbreviated name: ¹​redcap_repeat_instrument</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 186 more variables: da_is_mobile_where &lt;chr&gt;, da_encounter_type &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   da_visit_reason___1 &lt;lgl&gt;, da_visit_reason___2 &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   da_visit_reason___3 &lt;lgl&gt;, da_visit_reason___4 &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   da_visit_reason___5 &lt;lgl&gt;, da_visit_reason___6 &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   da_visit_reason___7 &lt;lgl&gt;, da_visit_reason___8 &lt;lgl&gt;, …</span></span></span></code></pre></div>
+<span><span class="va">ds_daily</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="writing-repeating-instrument-variables">Writing Repeating Instrument Variables<a class="anchor" aria-label="anchor" href="#writing-repeating-instrument-variables"></a>
+</h3>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># daily-entire</span></span>
+<span><span class="va">ds_daily</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="../reference/redcap_write.html">redcap_write</a></span><span class="op">(</span></span>
+<span>    ds_to_write <span class="op">=</span> <span class="va">_</span>,</span>
+<span>    redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,</span>
+<span>    token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span>,</span>
+<span>    convert_logical_to_integer <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -488,9 +398,9 @@ understands the hierarchical structure of the data points.</p>
 <h3 id="more-complexity">More Complexity<a class="anchor" aria-label="anchor" href="#more-complexity"></a>
 </h3>
 <p>This vignette required only two data.frames, but more complex
-projects sometimes need more.<br>
-For example, each repeating instrument should be its own data.frame and
-writing step. Arms and longitudinal events need them too.</p>
+projects sometimes need more. For example, each repeating instrument
+should be its own data.frame and writing step. Arms and longitudinal
+events need to be considered too.</p>
 </div>
 <div class="section level3">
 <h3 id="batching">Batching<a class="anchor" aria-label="anchor" href="#batching"></a>
@@ -498,18 +408,30 @@ writing step. Arms and longitudinal events need them too.</p>
 <p>By default, <code><a href="../reference/redcap_write.html">REDCapR::redcap_write()</a></code> requests datasets of
 100 patients as a time, and stacks the resulting subsets together before
 returning a data.frame. This can be adjusted to improve performance; the
-‘Details’ section of <a href="https://ouhscbbmc.github.io/REDCapR/reference/redcap_write.html#details"><code>REDCapR::redcap_write()</code></a>
-discusses the trade offs.</p>
+‘Details’ section of <code><a href="../reference/redcap_write.html">REDCapR::redcap_write()</a></code> discusses the
+trade offs.</p>
 <p>I usually shoot for ~10 seconds per batch.</p>
+</div>
+<div class="section level3">
+<h3 id="manual-vs-api">Manual vs API<a class="anchor" aria-label="anchor" href="#manual-vs-api"></a>
+</h3>
+<p>Manual downloading/uploading might make sense if you’re do the
+operation only once. But when does it ever stop after the first
+time?</p>
+<p>If you have trouble uploading, consider adding a few fake patients
+&amp; measurements and then download the csv. It might reveal something
+you didn’t anticipate. But be aware that it will be in the block matrix
+format (<em>i.e.</em>, everything jammed into one rectangle.)</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="notes">Notes<a class="anchor" aria-label="anchor" href="#notes"></a>
 </h2>
-<p>This vignette was originally designed for a 2023 R/Medicine REDCap
-workshop with <a href="https://github.com/RaymondBalise" class="external-link">Raymond R.
-Balise</a>, Belén Hervera, Daniel Maya, Anna Calderon, Tyler
-Bartholomew, Stephan Kadauke, and João Pedro Carmezim Correia.</p>
+<p>This vignette was originally designed for the <a href="https://events.linuxfoundation.org/r-medicine/" class="external-link">2023
+R/Medicine</a> workshop, <em>Using REDCap and R to Rapidly Produce
+Biomedical Publications Cleaning Medical Data</em> with <a href="https://github.com/RaymondBalise" class="external-link">Raymond R. Balise</a>, Belén
+Hervera, Daniel Maya, Anna Calderon, Tyler Bartholomew, Stephan Kadauke,
+and João Pedro Carmezim Correia. The entire workshop’s slides are at <a href="https://github.com/RaymondBalise/r_med_redcap_2023_public" class="external-link uri">https://github.com/RaymondBalise/r_med_redcap_2023_public</a>.</p>
 <p>This work was made possible in part by the NIH grant <a href="https://taggs.hhs.gov/Detail/AwardDetail?arg_AwardNum=U54GM104938&amp;arg_ProgOfficeCode=127" class="external-link">U54GM104938</a>
 to the <a href="http://osctr.ouhsc.edu" class="external-link">Oklahoma Shared Clinical and
 Translational Resource)</a>.</p>
