@@ -102,7 +102,7 @@
 #' if your institution is using something other than SQL Server, and
 #' would like help adapting this approach to your infrastructure.
 #'
-#' *Stored credentials locally*
+#' *Storing credentials locally*
 #'
 #' When storing credentials locally, typically the credential file
 #' should be dedicated to just one user. Occasionally it makes sense to store

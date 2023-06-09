@@ -51,7 +51,7 @@ Following this strategy, we'll write to the REDCap server in two distinct steps:
 1. Upload the each repeating instrument separately.
 
 The actual upload phase is pretty straight-forward
---it's just a call to [`REDCapR::redcap_write()`].
+--it's just a call to `REDCapR::redcap_write()`.
 Most of the vignette's code prepares the dataset so that the upload will run smoothly.
 
 Pre-requisites
@@ -73,7 +73,8 @@ which has important security implications.
 The current vignette imports a fake dataset into REDCap,
 and we'll use a token stored in a local file.
 
-```{r retrieve-credential}
+```r
+# retrieve-credential
 path_credential <- system.file("misc/example.credentials", package = "REDCapR")
 credential  <- REDCapR::retrieve_credential_local(
   path_credential = path_credential,
@@ -97,7 +98,8 @@ There are two tables, each with a different [granularity](https://www.1keydata.c
 * `ds_patient`: each row represents one patient,
 * `ds_daily`: each row represents one daily measurement per patient.
 
-```{r load-patient}
+```r
+# load-patient
 ds_patient <-
   "test-data/vignette-repeating-write/data-patient.rds" |>
   system.file(package = "REDCapR") |>
@@ -106,8 +108,8 @@ ds_patient <-
 ds_patient
 ```
 
-
-```{r load-repeating}
+```r
+# load-repeating
 ds_daily <-
   "test-data/vignette-repeating-write/data-daily.rds" |>
   system.file(package = "REDCapR") |>
@@ -147,7 +149,8 @@ it will appear green.
 With this example project, the only patient-level instrument is "enrollment",
 so the corresponding variable is `enrollment_complete`.
 
-```{r patient-complete}
+```r
+# patient-complete
 ds_patient <-
   ds_patient |>
   dplyr::mutate(
@@ -162,7 +165,7 @@ Prep: `REDCapR::validate_for_write()`
 A tibble is returned, with one row per potential problem (and a suggestion how to avoid it).
 Ideally an 0-row tibble is returned.
 
-```{r patient-validate}
+```r
 REDCapR::validate_for_write(ds_patient, convert_logical_to_integer = TRUE)
 ```
 
@@ -173,14 +176,14 @@ We'll work with you to incorporate the new check into `REDCapR::validate_for_wri
 When a dataset's problems are caught before reaching the server,
 the solutions are easier to identify and implement.
 
-
 Prep: Write Small Subset First
 -------------------------
 
 If this is your first time with a complicated project, consider loading a small subset of rows and columns.
 In this case, we start with only three columns and two rows.
 
-```{r patient-subset}
+```r
+# patient-subset
 ds_patient |>
   dplyr::select(              # First three columns
     id_code,
@@ -208,9 +211,9 @@ Here's an in-line example of `dplyr::case_match()`.
 
 ```r
 ds_patient <-
-  ds_patient |> 
+  ds_patient |>
   dplyr::mutate(
-    race = 
+    race =
       dplyr::case_match(
         race,
         "White"                       ~  1L,
@@ -226,7 +229,7 @@ ds_patient <-
 
 ```{r codebook-race}
 #| echo = FALSE,
-#| out.extra = 'style = "fig.width=600px"'
+#| out.extra = 'style = "fig.width=1200px"'
 knitr::include_graphics("images/codebook-race.png")
 ```
 
@@ -243,7 +246,8 @@ succeeds or fails.
 Then repeat.
 This "bisection" or "binary search" [debugging technique](https://medium.com/codecastpublication/debugging-tools-and-techniques-binary-search-2da5bb4282c7) is helpful in many areas of programming and statistical modeling.
 
-```{r patient-entire}
+```r
+# patient-entire
 ds_patient |>
   REDCapR::redcap_write(
     ds_to_write = _,
@@ -253,11 +257,8 @@ ds_patient |>
   )
 ```
 
-
-
 Part 3 - Write Data: Repeating Instrument
 ===================================
-
 
 Add Plumbing Variables
 -------------------------
@@ -278,7 +279,8 @@ vignette for details of these variables and their meanings.
 
 You need to pass specific variables so that the REDCap server understands the hierarchical structure of the data points.
 
-```{r repeat-plumbing}
+```r
+# repeat-plumbing
 ds_daily <-
   ds_daily |>
   dplyr::group_by(id_code) |>
@@ -303,6 +305,19 @@ REDCapR::validate_for_write(ds_daily, convert_logical_to_integer = TRUE)
 ds_daily
 ```
 
+Writing Repeating Instrument Variables
+-------------------------
+
+```r
+# daily-entire
+ds_daily |>
+  REDCapR::redcap_write(
+    ds_to_write = _,
+    redcap_uri  = credential$redcap_uri,
+    token       = credential$token,
+    convert_logical_to_integer = TRUE
+  )
+```
 
 Part 4 - Next Steps
 ===================================
@@ -310,21 +325,40 @@ Part 4 - Next Steps
 More Complexity
 -------------------------
 
-This vignette required only two data.frames, but more complex projects sometimes need more.  
+This vignette required only two data.frames, but more complex projects sometimes need more.
 For example, each repeating instrument should be its own data.frame and
-writing step.  Arms and longitudinal events need them too.
+writing step.  Arms and longitudinal events need to be considered too.
 
 Batching
 -------------------------
 
-By default, `REDCapR::redcap_write()` requests datasets of 100 patients as a time, and stacks the resulting subsets together before returning a data.frame.  This can be adjusted to improve performance; the 'Details' section of [`REDCapR::redcap_write()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_write.html#details) discusses the trade offs.
+By default, `REDCapR::redcap_write()` requests datasets of 100 patients as a time,
+and stacks the resulting subsets together before returning a data.frame.
+This can be adjusted to improve performance;
+the 'Details' section of `REDCapR::redcap_write()` discusses the trade offs.
 
 I usually shoot for ~10 seconds per batch.
 
+Manual vs API
+-------------------------
+
+Manual downloading/uploading might make sense if you're do the operation only once.
+But when does it ever stop after the first time?
+
+If you have trouble uploading, consider adding a few fake patients & measurements
+and then download the csv.
+It might reveal something you didn't anticipate.
+But be aware that it will be in the block matrix format
+(*i.e.*, everything jammed into one rectangle.)
 
 Notes
 ===================================
 
-This vignette was originally designed for a 2023 R/Medicine REDCap workshop with [Raymond R. Balise](https://github.com/RaymondBalise), Belén Hervera, Daniel Maya, Anna Calderon, Tyler Bartholomew, Stephan Kadauke, and João Pedro Carmezim Correia.
+This vignette was originally designed for the
+[2023 R/Medicine](https://events.linuxfoundation.org/r-medicine/) workshop,
+_Using REDCap and R to Rapidly Produce Biomedical Publications Cleaning Medical Data_
+with [Raymond R. Balise](https://github.com/RaymondBalise), Belén Hervera, Daniel Maya, Anna Calderon, Tyler Bartholomew, Stephan Kadauke, and João Pedro Carmezim Correia.
+The entire workshop's slides are at <https://github.com/RaymondBalise/r_med_redcap_2023_public>.
 
-This work was made possible in part by the NIH grant [U54GM104938](https://taggs.hhs.gov/Detail/AwardDetail?arg_AwardNum=U54GM104938&arg_ProgOfficeCode=127) to the [Oklahoma Shared Clinical and Translational Resource)](http://osctr.ouhsc.edu).
+This work was made possible in part by the NIH grant [U54GM104938](https://taggs.hhs.gov/Detail/AwardDetail?arg_AwardNum=U54GM104938&arg_ProgOfficeCode=127)
+to the [Oklahoma Shared Clinical and Translational Resource)](http://osctr.ouhsc.edu).
