@@ -73,7 +73,8 @@ which has important security implications.
 The current vignette imports a fake dataset into REDCap,
 and we'll use a token stored in a local file.
 
-```{r retrieve-credential}
+```r
+# retrieve-credential
 path_credential <- system.file("misc/example.credentials", package = "REDCapR")
 credential  <- REDCapR::retrieve_credential_local(
   path_credential = path_credential,
@@ -97,7 +98,8 @@ There are two tables, each with a different [granularity](https://www.1keydata.c
 * `ds_patient`: each row represents one patient,
 * `ds_daily`: each row represents one daily measurement per patient.
 
-```{r load-patient}
+```r
+# load-patient
 ds_patient <-
   "test-data/vignette-repeating-write/data-patient.rds" |>
   system.file(package = "REDCapR") |>
@@ -106,7 +108,8 @@ ds_patient <-
 ds_patient
 ```
 
-```{r load-repeating}
+```r
+# load-repeating
 ds_daily <-
   "test-data/vignette-repeating-write/data-daily.rds" |>
   system.file(package = "REDCapR") |>
@@ -146,7 +149,8 @@ it will appear green.
 With this example project, the only patient-level instrument is "enrollment",
 so the corresponding variable is `enrollment_complete`.
 
-```{r patient-complete}
+```r
+# patient-complete
 ds_patient <-
   ds_patient |>
   dplyr::mutate(
@@ -161,7 +165,7 @@ Prep: `REDCapR::validate_for_write()`
 A tibble is returned, with one row per potential problem (and a suggestion how to avoid it).
 Ideally an 0-row tibble is returned.
 
-```{r patient-validate}
+```r
 REDCapR::validate_for_write(ds_patient, convert_logical_to_integer = TRUE)
 ```
 
@@ -178,7 +182,8 @@ Prep: Write Small Subset First
 If this is your first time with a complicated project, consider loading a small subset of rows and columns.
 In this case, we start with only three columns and two rows.
 
-```{r patient-subset}
+```r
+# patient-subset
 ds_patient |>
   dplyr::select(              # First three columns
     id_code,
@@ -241,7 +246,8 @@ succeeds or fails.
 Then repeat.
 This "bisection" or "binary search" [debugging technique](https://medium.com/codecastpublication/debugging-tools-and-techniques-binary-search-2da5bb4282c7) is helpful in many areas of programming and statistical modeling.
 
-```{r patient-entire}
+```r
+# patient-entire
 ds_patient |>
   REDCapR::redcap_write(
     ds_to_write = _,
@@ -273,7 +279,8 @@ vignette for details of these variables and their meanings.
 
 You need to pass specific variables so that the REDCap server understands the hierarchical structure of the data points.
 
-```{r repeat-plumbing}
+```r
+# repeat-plumbing
 ds_daily <-
   ds_daily |>
   dplyr::group_by(id_code) |>
@@ -301,7 +308,8 @@ ds_daily
 Writing Repeating Instrument Variables
 -------------------------
 
-```{r daily-entire}
+```r
+# daily-entire
 ds_daily |>
   REDCapR::redcap_write(
     ds_to_write = _,
