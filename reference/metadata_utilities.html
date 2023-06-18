@@ -166,7 +166,7 @@ If you know, please tell me.</em></p>
 <span class="r-in"><span><span class="va">token</span>       <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ds_metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="redcap_metadata_read.html">redcap_metadata_read</a></span><span class="op">(</span><span class="va">uri</span>, <span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-in"><span><span class="va">choices_2</span>   <span class="op">&lt;-</span> <span class="va">ds_metadata</span><span class="op">[</span><span class="va">ds_metadata</span><span class="op">$</span><span class="va">field_name</span> <span class="op">==</span> <span class="st">"race"</span>, <span class="op">]</span><span class="op">$</span><span class="va">select_choices_or_calculations</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">regex_named_captures</span><span class="op">(</span>pattern <span class="op">=</span> <span class="va">pattern_boxes</span>, text <span class="op">=</span> <span class="va">choices_2</span><span class="op">)</span></span></span>
