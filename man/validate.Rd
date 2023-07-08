@@ -113,6 +113,7 @@ d2 <- tibble::tribble(
   2L,"e1", "i1", 3L,
   2L,"e1", "i1", 4L,
 )
+validate_uniqueness(d2)
 
 d3 <- tibble::tribble(
   ~record_id, ~redcap_event_name, ~redcap_repeat_instrument, ~redcap_repeat_instance,
@@ -121,6 +122,7 @@ d3 <- tibble::tribble(
   1L,"e1", "i1", 3L,
   1L,"e1", "i1", 3L
 )
+validate_uniqueness(d3)
 }
 \references{
 The official documentation can be found on the 'API Help Page'

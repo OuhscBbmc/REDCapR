@@ -40,6 +40,9 @@ test_that("not a data.frame", {
   )
 })
 
+# test_that("validate_no_logical -good", {
+#   validate_no_logical(ds_good)
+# })
 test_that("validate_no_logical -stop on error", {
   expect_error(
     validate_no_logical(vapply(ds_bad, class, character(1)), stop_on_error = TRUE),
@@ -92,6 +95,7 @@ test_that("repeat-instance: no column", {
  ds <- validate_repeat_instance(mtcars)
   expect_equal(object = nrow(ds), expected = 0)
 })
+
 # test_that("repeat-instance: good integer", {
 #   d <-
 #     "test-data/vignette-repeating-write/data-block-matrix.csv" |>

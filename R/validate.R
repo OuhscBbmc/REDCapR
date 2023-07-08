@@ -118,6 +118,7 @@
 #'   2L,"e1", "i1", 3L,
 #'   2L,"e1", "i1", 4L,
 #' )
+#' validate_uniqueness(d2)
 #'
 #' d3 <- tibble::tribble(
 #'   ~record_id, ~redcap_event_name, ~redcap_repeat_instrument, ~redcap_repeat_instance,
@@ -126,6 +127,7 @@
 #'   1L,"e1", "i1", 3L,
 #'   1L,"e1", "i1", 3L
 #' )
+#' validate_uniqueness(d3)
 
 #' @export
 validate_data_frame_inherits <- function(d) {
@@ -253,10 +255,20 @@ validate_uniqueness <- function(d, record_id_name = "record_id", stop_on_error =
 
   d_replicates <-
     d |>
-    dplyr::count(!!!rlang::parse_exprs(variables)) |>
-    dplyr::filter(1L < n)
+    dplyr::count(
+      !!!rlang::parse_exprs(variables),
+      name  = "count_of_records"
+    ) |>
+    dplyr::filter(1L < count_of_records)
 
+  if(0L < nrow(d_replicates)) {
+    d_replicates |>
+      print()
+    "There are %i record(s) that violate the uniqueness requirement.  See the output above." |>
+      sprintf(nrow(d_replicates)) |>
+      stop()
 
+  }
 }
 # validate_uniqueness(d2)
 # validate_uniqueness(d3)
