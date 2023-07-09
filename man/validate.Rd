@@ -122,7 +122,8 @@ d3 <- tibble::tribble(
   1L,"e1", "i1", 3L,
   1L,"e1", "i1", 3L
 )
-validate_uniqueness(d3)
+# Throws error:
+# validate_uniqueness(d3)
 }
 \references{
 The official documentation can be found on the 'API Help Page'

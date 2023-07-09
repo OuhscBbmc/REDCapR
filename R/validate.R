@@ -127,7 +127,8 @@
 #'   1L,"e1", "i1", 3L,
 #'   1L,"e1", "i1", 3L
 #' )
-#' validate_uniqueness(d3)
+#' # Throws error:
+#' # validate_uniqueness(d3)
 
 #' @export
 validate_data_frame_inherits <- function(d) {
