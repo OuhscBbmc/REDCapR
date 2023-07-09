@@ -11,33 +11,23 @@ ds_good <- data.frame(
   no_uppercase = c(4, 6, 8, 2)
 )
 
-test_that("validate_for_write", {
-  ds <- validate_for_write(d=ds_bad)
-  expect_equal(object=nrow(ds), expected=2)
+test_that("validate_no_logical -good", {
+  ds <- validate_no_logical(vapply(ds_good, class, character(1)), stop_on_error = TRUE)
+  expect_equal(nrow(ds), 0)
 })
 
-test_that("validate_for_write_no_errors", {
-  ds <- validate_for_write(d=ds_good)
-  expect_equal(object=nrow(ds), expected=0)
-})
-
-test_that("validate_for_write_no_errors - convert_logical_to_integer", {
-  d <-
-    data.frame(
-      record_id     = 1:4,
-      logical       = c(TRUE, TRUE, FALSE, TRUE),
-      no_uppercase  = c(4, 6, 8, 2)
-    )
-  ds <- validate_for_write(d, convert_logical_to_integer = TRUE)
-  expect_equal(object = nrow(ds), expected = 0)
-})
-
-test_that("not a data.frame", {
-  error_pattern <- "The `d` object is not a valid `data\\.frame`\\."
+test_that("validate_no_logical -stop on error", {
   expect_error(
-    validate_for_write(as.matrix(mtcars)),
-    error_pattern
+    validate_no_logical(vapply(ds_bad, class, character(1)), stop_on_error = TRUE),
+    "1 field\\(s\\) were logical/boolean. The REDCap API does not automatically convert boolean values to 0/1 values.  Convert the variable with the `as.integer\\(\\)` function."
   )
+})
+
+test_that("validate_no_logical -concern dataset", {
+  ds <- validate_no_logical(vapply(ds_bad, class, character(1)))
+  expect_equal(object=nrow(ds), expected=1, info="One logical field should be flagged")
+  expect_equal(object=ds$field_name, expected="bad_logical")
+  expect_equal(object=unname(ds$field_index), expected=2)
 })
 
 # ---- redcap-repeat-instance --------------------------------------------------
@@ -46,6 +36,10 @@ test_that("not a data.frame", {
 #   project_id      = 1400
 # )
 
+test_that("repeat-instance: no column", {
+ ds <- validate_repeat_instance(mtcars)
+  expect_equal(object = nrow(ds), expected = 0)
+})
 
 # test_that("repeat-instance: good integer", {
 #   d <-
