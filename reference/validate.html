@@ -74,7 +74,9 @@ to anticipate problems before writing with REDCap's API.</p>
 <span></span>
 <span><span class="fu">validate_field_names</span><span class="op">(</span> <span class="va">field_names</span>, stop_on_error <span class="op">=</span> <span class="cn">FALSE</span> <span class="op">)</span></span>
 <span></span>
-<span><span class="fu">validate_repeat_instance</span><span class="op">(</span> <span class="va">d</span>, <span class="va">stop_on_error</span> <span class="op">)</span></span></code></pre></div>
+<span><span class="fu">validate_repeat_instance</span><span class="op">(</span> <span class="va">d</span>, <span class="va">stop_on_error</span> <span class="op">)</span></span>
+<span></span>
+<span><span class="fu">validate_uniqueness</span><span class="op">(</span><span class="va">d</span>, <span class="va">record_id_name</span>, <span class="va">stop_on_error</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -93,6 +95,11 @@ to the REDCap project.</p></dd>
 <dt>field_names</dt>
 <dd><p>The names of the fields/variables in the REDCap project.
 Each field is an individual element in the character vector.</p></dd>
+
+
+<dt>record_id_name</dt>
+<dd><p>The name of the field that represents one record.
+The default name in REDCap is "record_id".</p></dd>
 
 
 <dt>stop_on_error</dt>
@@ -154,27 +161,61 @@ administrator to send you the static material.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">d1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  record_id      <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,</span></span>
 <span class="r-in"><span>  flag_logical   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  flag_Uppercase <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">6</span>, <span class="fl">8</span>, <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">validate_for_write</span><span class="op">(</span>d <span class="op">=</span> <span class="va">d</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">validate_for_write</span><span class="op">(</span>d <span class="op">=</span> <span class="va">d1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   field_name     field_index concern                                  suggestion</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> flag_Uppercase           3 A REDCap project does not allow field n… Change th…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> flag_logical             2 The REDCap API does not automatically c… Convert t…</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">validate_for_write</span><span class="op">(</span>d <span class="op">=</span> <span class="va">d</span>, convert_logical_to_integer <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">validate_for_write</span><span class="op">(</span>d <span class="op">=</span> <span class="va">d1</span>, convert_logical_to_integer <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   field_name     field_index concern                                  suggestion</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> flag_Uppercase           3 A REDCap project does not allow field n… Change th…</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># If `d` is not a data.frame, the remaining validation checks are skipped:</span></span></span>
+<span class="r-in"><span><span class="co"># If `d1` is not a data.frame, the remaining validation checks are skipped:</span></span></span>
 <span class="r-in"><span><span class="co"># REDCapR::validate_for_write(as.matrix(mtcars))</span></span></span>
 <span class="r-in"><span><span class="co"># REDCapR::validate_for_write(c(mtcars, iris))</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">d2</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="op">~</span><span class="va">record_id</span>, <span class="op">~</span><span class="va">redcap_event_name</span>, <span class="op">~</span><span class="va">redcap_repeat_instrument</span>, <span class="op">~</span><span class="va">redcap_repeat_instance</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">1L</span>, <span class="st">"e1"</span>, <span class="st">"i1"</span>, <span class="fl">1L</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">1L</span>, <span class="st">"e1"</span>, <span class="st">"i1"</span>, <span class="fl">2L</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">1L</span>, <span class="st">"e1"</span>, <span class="st">"i1"</span>, <span class="fl">3L</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">1L</span>, <span class="st">"e1"</span>, <span class="st">"i1"</span>, <span class="fl">4L</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">1L</span>, <span class="st">"e1"</span>, <span class="st">"i2"</span>, <span class="fl">1L</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">1L</span>, <span class="st">"e1"</span>, <span class="st">"i2"</span>, <span class="fl">2L</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">1L</span>, <span class="st">"e1"</span>, <span class="st">"i2"</span>, <span class="fl">3L</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">1L</span>, <span class="st">"e1"</span>, <span class="st">"i2"</span>, <span class="fl">4L</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">2L</span>, <span class="st">"e1"</span>, <span class="st">"i1"</span>, <span class="fl">1L</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">2L</span>, <span class="st">"e1"</span>, <span class="st">"i1"</span>, <span class="fl">2L</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">2L</span>, <span class="st">"e1"</span>, <span class="st">"i1"</span>, <span class="fl">3L</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">2L</span>, <span class="st">"e1"</span>, <span class="st">"i1"</span>, <span class="fl">4L</span>,</span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">validate_uniqueness</span><span class="op">(</span><span class="va">d2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 0 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 4 variables: field_name &lt;chr&gt;, field_index &lt;int&gt;, concern &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   suggestion &lt;chr&gt;</span></span>
+<span class="r-in"><span><span class="fu">validate_for_write</span><span class="op">(</span><span class="va">d2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 0 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 4 variables: field_name &lt;chr&gt;, field_index &lt;int&gt;, concern &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   suggestion &lt;chr&gt;</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">d3</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="op">~</span><span class="va">record_id</span>, <span class="op">~</span><span class="va">redcap_event_name</span>, <span class="op">~</span><span class="va">redcap_repeat_instrument</span>, <span class="op">~</span><span class="va">redcap_repeat_instance</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">1L</span>, <span class="st">"e1"</span>, <span class="st">"i1"</span>, <span class="fl">1L</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">1L</span>, <span class="st">"e1"</span>, <span class="st">"i1"</span>, <span class="fl">3L</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">1L</span>, <span class="st">"e1"</span>, <span class="st">"i1"</span>, <span class="fl">3L</span>,</span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># validate_uniqueness(d3)</span></span></span>
+<span class="r-in"><span><span class="co"># Throws error:</span></span></span>
+<span class="r-in"><span><span class="co"># validate_uniqueness(d3, stop_on_error = TRUE)</span></span></span>
 </code></pre></div>
     </div>
   </div>
