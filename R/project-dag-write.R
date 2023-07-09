@@ -75,10 +75,12 @@ populate_project_dag_write <- function(batch = FALSE, verbose = FALSE) {
 
   # Print a message and return a boolean value
   if (verbose) {
+    # no cov start
     base::message(base::sprintf(
       "populate_project_dag_write success: %s.",
       returned_object$success
     ))
+    # no cov end
   }
   list(is_success = returned_object$success, redcap_project = project)
 }
@@ -100,10 +102,12 @@ clear_project_dag_write <- function(verbose = FALSE) {
 
   # Print a message and return a boolean value
   if (verbose) {
+    # no cov start
     base::message(base::sprintf(
       "clear_project_dag_write success: %s.",
       was_successful
     ))
+    # no cov end
   }
 
   was_successful
