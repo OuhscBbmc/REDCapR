@@ -119,6 +119,7 @@
 #'   2L, "e1", "i1", 4L,
 #' )
 #' validate_uniqueness(d2)
+#' validate_for_write(d2)
 #'
 #' d3 <- tibble::tribble(
 #'   ~record_id, ~redcap_event_name, ~redcap_repeat_instrument, ~redcap_repeat_instance,
@@ -249,7 +250,7 @@ validate_repeat_instance <- function(d, stop_on_error = FALSE) {
 validate_uniqueness <- function(d, record_id_name = "record_id", stop_on_error = FALSE) {
   checkmate::assert_data_frame(d)
 
-  n <- NULL
+  count_of_records <- NULL
   plumbing <- c(record_id_name, "redcap_event_name", "redcap_repeat_instrument", "redcap_repeat_instance")
   variables <- intersect(colnames(d), plumbing)
 
@@ -261,17 +262,33 @@ validate_uniqueness <- function(d, record_id_name = "record_id", stop_on_error =
     ) |>
     dplyr::filter(1L < count_of_records)
 
-  if(0L < nrow(d_replicates)) {
+  if(nrow(d_replicates) == 0L) {
+    tibble::tibble(
+      field_name         = character(0),
+      field_index        = integer(0),
+      concern            = character(0),
+      suggestion         = character(0)
+    )
+  } else if (stop_on_error) {
     d_replicates |>
       print()
     "There are %i record(s) that violate the uniqueness requirement.  See the output above." |>
       sprintf(nrow(d_replicates)) |>
       stop()
+  } else {
+    indices <- paste(which(colnames(d) == variables), collapse = ", ")
 
+    tibble::tibble(
+      field_name         = paste(variables, collapse = ", "),
+      field_index        = indices,
+      concern            = "The values in these variables were not unique.",
+      suggestion         = "Run `validate_uniqueness()` with `stop_on_error = TRUE` to see the specific values that are duplicated."
+    )
   }
 }
 # validate_uniqueness(d2)
 # validate_uniqueness(d3)
+# validate_uniqueness(d3, stop_on_error = TRUE)
 # #' @export
 # validate_field_names_collapsed <- function(field_names_collapsed, stop_on_error = FALSE) {
 #   field_names <- trimws(unlist(strsplit(field_names_collapsed, ",")))
@@ -289,6 +306,7 @@ validate_for_write <- function(
   lst_concerns <- list(
     validate_data_frame_inherits(d),
     validate_field_names(colnames(d)),
+    validate_uniqueness(d),
     validate_repeat_instance(d)
   )
 

@@ -75,9 +75,14 @@ test_that("validate_uniqueness -bad -all four", {
   )
 
   expect_error(
-    validate_uniqueness(d),
+    validate_uniqueness(d, stop_on_error = TRUE),
     "There are \\d+ record\\(s\\) that violate the uniqueness requirement\\.  See the output above\\."
   )
+
+  ds <- validate_uniqueness(d, stop_on_error = FALSE)
+  expect_equal(object = nrow(ds), expected = 1)
+  expect_equal(object = ds$field_name, expected = "record_id, redcap_event_name, redcap_repeat_instrument, redcap_repeat_instance")
+  expect_equal(object = ds$field_index, expected = "1, 2, 3, 4")
 })
 
 test_that("validate_uniqueness -bad -events", {
@@ -94,7 +99,12 @@ test_that("validate_uniqueness -bad -events", {
   )
 
   expect_error(
-    validate_uniqueness(d),
+    validate_uniqueness(d, stop_on_error = TRUE),
     "There are \\d+ record\\(s\\) that violate the uniqueness requirement\\.  See the output above\\."
   )
+
+  ds <- validate_uniqueness(d, stop_on_error = FALSE)
+  expect_equal(object = nrow(ds), expected = 1)
+  expect_equal(object = ds$field_name, expected = "record_id, redcap_event_name")
+  expect_equal(object = ds$field_index, expected = "1, 2")
 })
