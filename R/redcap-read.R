@@ -300,9 +300,31 @@ redcap_read <- function(
     handle_httr        = handle_httr
   )
 
-  if (!is.null(events) && !metadata$longitudinal) {
-    stop("This project is NOT longitudinal, so do not pass a value to the `event` argument.")
-  } else if (!is.null(fields) || !is.null(forms)) {
+  if (!is.null(events)) {
+    if (!metadata$longitudinal) {
+      "This project is NOT longitudinal, so do not pass a value to the `event` argument." %>%
+       stop(call. = FALSE)
+    } else {
+      events_in_project <-
+        redcap_event_read(
+          redcap_uri,
+          token,
+          verbose         = verbose,
+          config_options  = config_options,
+          handle_httr     = handle_httr
+        )$data %>%
+        dplyr::pull(unique_event_name)
+
+      events_not_recognized <- setdiff(events, events_in_project)
+      if(0L < length(events_not_recognized)) {
+        "The following events are not recognized for this project: {%s}.\nMake sure you're using internal `event-name` (lowercase letters & underscores)\ninstead of the user-facing `event-label` (that can have spaces and uppercase letters)." %>%
+          sprintf(paste(events_not_recognized, collapse = ", ")) %>%
+          stop(call. = FALSE)
+      }
+    } # end of else
+  } # end of !is.null(events)
+
+  if (!is.null(fields) || !is.null(forms)) {
     fields  <- base::union(metadata$record_id_name, fields)
     # fields  <- base::union(metadata$plumbing_variables, fields)
   }
