@@ -300,10 +300,12 @@ redcap_read <- function(
     handle_httr        = handle_httr
   )
 
-  # browser()
-  if (!is.null(fields) || !is.null(forms))
+  if (!is.null(events) && !metadata$longitudinal) {
+    stop("This project is NOT longitudinal, so do not pass a value to the `event` argument.")
+  } else if (!is.null(fields) || !is.null(forms)) {
     fields  <- base::union(metadata$record_id_name, fields)
     # fields  <- base::union(metadata$plumbing_variables, fields)
+  }
 
   # Retrieve list of record ids --------------------------------------
   initial_call <- REDCapR::redcap_read_oneshot(
@@ -405,6 +407,7 @@ redcap_read <- function(
         " (ie, ", length(selected_ids), " unique subject records)."
       )
     }
+
     read_result <- REDCapR::redcap_read_oneshot(
       redcap_uri                  = redcap_uri,
       token                       = token,
