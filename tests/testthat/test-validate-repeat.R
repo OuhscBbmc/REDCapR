@@ -5,11 +5,11 @@ test_that("validate_repeat_instance: no column", {
   expect_equal(object = nrow(ds), expected = 0)
 })
 
-test_that("validate_repeat_instance: no column", {
+test_that("validate_repeat_instance: good", {
   d <-
     mtcars |>
     dplyr::mutate(
-       redcap_repeat_instance <- sample(1:100, size = 32, replace = TRUE)
+       redcap_repeat_instance = sample(1:100, size = 32, replace = TRUE)
     )
   ds <- validate_repeat_instance(d)
   expect_equal(object = nrow(ds), expected = 0)
