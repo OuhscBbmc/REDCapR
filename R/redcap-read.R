@@ -187,6 +187,22 @@
 #'   ERROR: The following values in the parameter fields are not valid: 'demographics_timestamp'
 #'   ```
 #'
+#' @section Events:
+#' The `event` argument is a vector of characters passed to the server.
+#' It is the "event-name", not the "event-label".
+#' The event-label is the value presented to the users,
+#' which contains uppercase letters and spaces,
+#' while the event-name can contain only lowercase letters, digits,
+#' and underscores.
+#'
+#' If `event` is nonnull and the project is not longitudinal,
+#' [redcap_read()] will throw an error.
+#' Similarly, if a value in the `event` vector is not a current
+#' event-name, [redcap_read()] will throw an error.
+#'
+#' The simpler [redcap_read_oneshot()] function does not
+#' check for invalid event values, and will not throw errors.
+#'
 #' @author
 #' Will Beasley
 #'

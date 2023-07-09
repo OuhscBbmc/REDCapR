@@ -258,6 +258,24 @@ throw an error like
 }
 }
 
+\section{Events}{
+
+The \code{event} argument is a vector of characters passed to the server.
+It is the "event-name", not the "event-label".
+The event-label is the value presented to the users,
+which contains uppercase letters and spaces,
+while the event-name can contain only lowercase letters, digits,
+and underscores.
+
+If \code{event} is nonnull and the project is not longitudinal,
+\code{\link[=redcap_read]{redcap_read()}} will throw an error.
+Similarly, if a value in the \code{event} vector is not a current
+event-name, \code{\link[=redcap_read]{redcap_read()}} will throw an error.
+
+The simpler \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}} function does not
+check for invalid event values, and will not throw errors.
+}
+
 \examples{
 \dontrun{
 uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
