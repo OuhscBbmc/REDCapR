@@ -7,6 +7,7 @@
 \alias{validate_no_logical}
 \alias{validate_field_names}
 \alias{validate_repeat_instance}
+\alias{validate_uniqueness}
 \title{Inspect a dataset to anticipate problems before
 writing to a REDCap project}
 \usage{
@@ -19,6 +20,8 @@ validate_no_logical( data_types, stop_on_error )
 validate_field_names( field_names, stop_on_error = FALSE )
 
 validate_repeat_instance( d, stop_on_error )
+
+validate_uniqueness(d, record_id_name, stop_on_error)
 }
 \arguments{
 \item{d}{The \code{\link[base:data.frame]{base::data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}}
@@ -30,6 +33,9 @@ to the REDCap project.}
 
 \item{field_names}{The names of the fields/variables in the REDCap project.
 Each field is an individual element in the character vector.}
+
+\item{record_id_name}{The name of the field that represents one record.
+The default name in REDCap is "record_id".}
 
 \item{stop_on_error}{If \code{TRUE}, an error is thrown for violations.
 Otherwise, a dataset summarizing the problems is returned.}
@@ -79,18 +85,46 @@ REDCap, please tell us by creating a
 incorporate a new validation check into this function.
 }
 \examples{
-d <- data.frame(
+d1 <- data.frame(
   record_id      = 1:4,
   flag_logical   = c(TRUE, TRUE, FALSE, TRUE),
   flag_Uppercase = c(4, 6, 8, 2)
 )
-REDCapR::validate_for_write(d = d)
+REDCapR::validate_for_write(d = d1)
 
-REDCapR::validate_for_write(d = d, convert_logical_to_integer = TRUE)
+REDCapR::validate_for_write(d = d1, convert_logical_to_integer = TRUE)
 
-# If `d` is not a data.frame, the remaining validation checks are skipped:
+# If `d1` is not a data.frame, the remaining validation checks are skipped:
 # REDCapR::validate_for_write(as.matrix(mtcars))
 # REDCapR::validate_for_write(c(mtcars, iris))
+
+d2 <- tibble::tribble(
+  ~record_id, ~redcap_event_name, ~redcap_repeat_instrument, ~redcap_repeat_instance,
+  1L, "e1", "i1", 1L,
+  1L, "e1", "i1", 2L,
+  1L, "e1", "i1", 3L,
+  1L, "e1", "i1", 4L,
+  1L, "e1", "i2", 1L,
+  1L, "e1", "i2", 2L,
+  1L, "e1", "i2", 3L,
+  1L, "e1", "i2", 4L,
+  2L, "e1", "i1", 1L,
+  2L, "e1", "i1", 2L,
+  2L, "e1", "i1", 3L,
+  2L, "e1", "i1", 4L,
+)
+validate_uniqueness(d2)
+validate_for_write(d2)
+
+d3 <- tibble::tribble(
+  ~record_id, ~redcap_event_name, ~redcap_repeat_instrument, ~redcap_repeat_instance,
+  1L, "e1", "i1", 1L,
+  1L, "e1", "i1", 3L,
+  1L, "e1", "i1", 3L,
+)
+# validate_uniqueness(d3)
+# Throws error:
+# validate_uniqueness(d3, stop_on_error = TRUE)
 }
 \references{
 The official documentation can be found on the 'API Help Page'

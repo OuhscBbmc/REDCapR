@@ -70,6 +70,7 @@
 #' }
 
 #' @importFrom rlang .data
+#' @importFrom magrittr %>%
 #' @export
 redcap_arm_export <- function(
   redcap_uri,

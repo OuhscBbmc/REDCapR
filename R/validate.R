@@ -7,6 +7,7 @@
 #' validate_no_logical
 #' validate_field_names
 #' validate_repeat_instance
+#' validate_uniqueness
 #'
 #' @usage
 #' validate_for_write( d, convert_logical_to_integer )
@@ -18,6 +19,8 @@
 #' validate_field_names( field_names, stop_on_error = FALSE )
 #'
 #' validate_repeat_instance( d, stop_on_error )
+#'
+#' validate_uniqueness(d, record_id_name, stop_on_error)
 #'
 #' @title
 #' Inspect a dataset to anticipate problems before
@@ -34,6 +37,8 @@
 #' to the REDCap project.
 #' @param field_names The names of the fields/variables in the REDCap project.
 #' Each field is an individual element in the character vector.
+#' @param record_id_name The name of the field that represents one record.
+#' The default name in REDCap is "record_id".
 #' @param stop_on_error If `TRUE`, an error is thrown for violations.
 #' Otherwise, a dataset summarizing the problems is returned.
 #' @param convert_logical_to_integer
@@ -85,18 +90,46 @@
 #' administrator to send you the static material.
 #'
 #' @examples
-#' d <- data.frame(
+#' d1 <- data.frame(
 #'   record_id      = 1:4,
 #'   flag_logical   = c(TRUE, TRUE, FALSE, TRUE),
 #'   flag_Uppercase = c(4, 6, 8, 2)
 #' )
-#' REDCapR::validate_for_write(d = d)
+#' REDCapR::validate_for_write(d = d1)
 #'
-#' REDCapR::validate_for_write(d = d, convert_logical_to_integer = TRUE)
+#' REDCapR::validate_for_write(d = d1, convert_logical_to_integer = TRUE)
 #'
-#' # If `d` is not a data.frame, the remaining validation checks are skipped:
+#' # If `d1` is not a data.frame, the remaining validation checks are skipped:
 #' # REDCapR::validate_for_write(as.matrix(mtcars))
 #' # REDCapR::validate_for_write(c(mtcars, iris))
+#'
+#' d2 <- tibble::tribble(
+#'   ~record_id, ~redcap_event_name, ~redcap_repeat_instrument, ~redcap_repeat_instance,
+#'   1L, "e1", "i1", 1L,
+#'   1L, "e1", "i1", 2L,
+#'   1L, "e1", "i1", 3L,
+#'   1L, "e1", "i1", 4L,
+#'   1L, "e1", "i2", 1L,
+#'   1L, "e1", "i2", 2L,
+#'   1L, "e1", "i2", 3L,
+#'   1L, "e1", "i2", 4L,
+#'   2L, "e1", "i1", 1L,
+#'   2L, "e1", "i1", 2L,
+#'   2L, "e1", "i1", 3L,
+#'   2L, "e1", "i1", 4L,
+#' )
+#' validate_uniqueness(d2)
+#' validate_for_write(d2)
+#'
+#' d3 <- tibble::tribble(
+#'   ~record_id, ~redcap_event_name, ~redcap_repeat_instrument, ~redcap_repeat_instance,
+#'   1L, "e1", "i1", 1L,
+#'   1L, "e1", "i1", 3L,
+#'   1L, "e1", "i1", 3L,
+#' )
+#' # validate_uniqueness(d3)
+#' # Throws error:
+#' # validate_uniqueness(d3, stop_on_error = TRUE)
 
 #' @export
 validate_data_frame_inherits <- function(d) {
@@ -213,6 +246,57 @@ validate_repeat_instance <- function(d, stop_on_error = FALSE) {
   }
 }
 
+#' @importFrom magrittr %>%
+#' @export
+validate_uniqueness <- function(d, record_id_name = "record_id", stop_on_error = FALSE) {
+  checkmate::assert_data_frame(d)
+
+  count_of_records <- NULL
+  plumbing  <- c(record_id_name, "redcap_event_name", "redcap_repeat_instrument", "redcap_repeat_instance")
+  variables <- intersect(colnames(d), plumbing)
+
+  d_replicates <-
+    d |>
+    dplyr::count(
+      !!!rlang::parse_exprs(variables),
+      name  = "count_of_records"
+    ) |>
+    dplyr::filter(1L < count_of_records)
+
+  if(nrow(d_replicates) == 0L) {
+    tibble::tibble(
+      field_name         = character(0),
+      field_index        = integer(0),
+      concern            = character(0),
+      suggestion         = character(0)
+    )
+  } else if (stop_on_error) {
+    m <-
+      if(requireNamespace("knitr", quietly = TRUE)) {
+        d_replicates %>%
+          knitr::kable() %>%
+          paste(collapse = "\n")
+      } else {
+        paste(d_replicates, collapse = "\n")  # nocov
+      }
+
+    "There are %i record(s) that violate the uniqueness requirement:\n%s" |>
+      sprintf(nrow(d_replicates), m) |>
+      stop()
+  } else {
+    indices <- paste(which(colnames(d) == variables), collapse = ", ")
+
+    tibble::tibble(
+      field_name         = paste(variables, collapse = ", "),
+      field_index        = indices,
+      concern            = "The values in these variables were not unique.",
+      suggestion         = "Run `validate_uniqueness()` with `stop_on_error = TRUE` to see the specific values that are duplicated."
+    )
+  }
+}
+# validate_uniqueness(d2)
+# validate_uniqueness(d3)
+# validate_uniqueness(d3, stop_on_error = TRUE)
 # #' @export
 # validate_field_names_collapsed <- function(field_names_collapsed, stop_on_error = FALSE) {
 #   field_names <- trimws(unlist(strsplit(field_names_collapsed, ",")))
@@ -230,6 +314,7 @@ validate_for_write <- function(
   lst_concerns <- list(
     validate_data_frame_inherits(d),
     validate_field_names(colnames(d)),
+    validate_uniqueness(d),
     validate_repeat_instance(d)
   )
 
