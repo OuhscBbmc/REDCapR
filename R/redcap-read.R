@@ -118,7 +118,8 @@
 #' a zero-row tibble is returned.
 #' Currently the empty tibble has zero columns, but that may change in the future.
 #'
-#' @details
+#' @section Batching subsets of data:
+#'
 #' [redcap_read()] internally uses multiple calls to [redcap_read_oneshot()]
 #' to select and return data.  Initially, only the primary key is queried
 #' through the REDCap API.  The long list is then subsetted into batches,
@@ -148,6 +149,8 @@
 #' 1. `redcap_repeat_instrument` and `redcap_repeat_instance` will be returned
 #'   for projects with repeating instruments
 #'
+#' @section Export permissions:
+#'
 #' For [redcap_read_oneshot()] to function properly, the user must have Export
 #' permissions for the 'Full Data Set'.  Users with only 'De-Identified'
 #' export privileges can still use `redcap_read_oneshot`.  To grant the
@@ -155,6 +158,8 @@
 #' * go to 'User Rights' in the REDCap project site,
 #' * select the desired user, and then select 'Edit User Privileges',
 #' * in the 'Data Exports' radio buttons, select 'Full Data Set'.
+#'
+#' @section Pseudofields:
 #'
 #' The REDCap project may contain "pseudofields", depending on its structure.
 #' Pseudofields are exported for certain project structures, but are not

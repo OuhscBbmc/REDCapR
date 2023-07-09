@@ -179,7 +179,9 @@ retrieves subsets of the data, and then combines them before returning
 be more appropriate than \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}} when returning large
 datasets that could tie up the server.
 }
-\details{
+\section{Batching subsets of data}{
+
+
 \code{\link[=redcap_read]{redcap_read()}} internally uses multiple calls to \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}}
 to select and return data.  Initially, only the primary key is queried
 through the REDCap API.  The long list is then subsetted into batches,
@@ -209,6 +211,10 @@ included, even if not explicitly requested.  As a result:
 \item \code{redcap_repeat_instrument} and \code{redcap_repeat_instance} will be returned
 for projects with repeating instruments
 }
+}
+
+\section{Export permissions}{
+
 
 For \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}} to function properly, the user must have Export
 permissions for the 'Full Data Set'.  Users with only 'De-Identified'
@@ -219,6 +225,10 @@ appropriate permissions:
 \item select the desired user, and then select 'Edit User Privileges',
 \item in the 'Data Exports' radio buttons, select 'Full Data Set'.
 }
+}
+
+\section{Pseudofields}{
+
 
 The REDCap project may contain "pseudofields", depending on its structure.
 Pseudofields are exported for certain project structures, but are not
@@ -247,6 +257,7 @@ throw an error like
 }\if{html}{\out{</div>}}
 }
 }
+
 \examples{
 \dontrun{
 uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
