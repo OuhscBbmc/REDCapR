@@ -23,8 +23,8 @@ test_that("validate_uniqueness -good -all four", {
     2L,"e1", "i1", 4L,
   )
 
-  validate_uniqueness(d)
-  expect_true(TRUE)
+  ds <- validate_uniqueness(d)
+  expect_equal(nrow(ds), 0)
 })
 
 test_that("validate_uniqueness -good -events", {
@@ -40,8 +40,8 @@ test_that("validate_uniqueness -good -events", {
     2L,"e3",
   )
 
-  validate_uniqueness(d)
-  expect_true(TRUE)
+  ds <- validate_uniqueness(d)
+  expect_equal(nrow(ds), 0)
 })
 
 test_that("validate_uniqueness -good -repeated", {
@@ -61,8 +61,8 @@ test_that("validate_uniqueness -good -repeated", {
     2L, "i1", 4L,
   )
 
-  validate_uniqueness(d)
-  expect_true(TRUE)
+  ds <- validate_uniqueness(d)
+  expect_equal(nrow(ds), 0)
 })
 
 test_that("validate_uniqueness -bad -all four", {

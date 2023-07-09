@@ -40,9 +40,11 @@ test_that("not a data.frame", {
   )
 })
 
-# test_that("validate_no_logical -good", {
-#   validate_no_logical(ds_good)
-# })
+test_that("validate_no_logical -good", {
+  ds <- validate_no_logical(vapply(ds_good, class, character(1)), stop_on_error = TRUE)
+  expect_equal(nrow(ds), 0)
+})
+
 test_that("validate_no_logical -stop on error", {
   expect_error(
     validate_no_logical(vapply(ds_bad, class, character(1)), stop_on_error = TRUE),
@@ -55,6 +57,11 @@ test_that("validate_no_logical -concern dataset", {
   expect_equal(object=nrow(ds), expected=1, info="One logical field should be flagged")
   expect_equal(object=ds$field_name, expected="bad_logical")
   expect_equal(object=unname(ds$field_index), expected=2)
+})
+
+test_that("validate_field_names -good", {
+  ds <- validate_field_names(colnames(ds_good))
+  expect_equal(nrow(ds), 0)
 })
 
 test_that("validate_field_names -stop on error", {
