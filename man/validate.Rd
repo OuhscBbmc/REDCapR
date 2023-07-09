@@ -100,30 +100,31 @@ REDCapR::validate_for_write(d = d1, convert_logical_to_integer = TRUE)
 
 d2 <- tibble::tribble(
   ~record_id, ~redcap_event_name, ~redcap_repeat_instrument, ~redcap_repeat_instance,
-  1L,"e1", "i1", 1L,
-  1L,"e1", "i1", 2L,
-  1L,"e1", "i1", 3L,
-  1L,"e1", "i1", 4L,
-  1L,"e1", "i2", 1L,
-  1L,"e1", "i2", 2L,
-  1L,"e1", "i2", 3L,
-  1L,"e1", "i2", 4L,
-  2L,"e1", "i1", 1L,
-  2L,"e1", "i1", 2L,
-  2L,"e1", "i1", 3L,
-  2L,"e1", "i1", 4L,
+  1L, "e1", "i1", 1L,
+  1L, "e1", "i1", 2L,
+  1L, "e1", "i1", 3L,
+  1L, "e1", "i1", 4L,
+  1L, "e1", "i2", 1L,
+  1L, "e1", "i2", 2L,
+  1L, "e1", "i2", 3L,
+  1L, "e1", "i2", 4L,
+  2L, "e1", "i1", 1L,
+  2L, "e1", "i1", 2L,
+  2L, "e1", "i1", 3L,
+  2L, "e1", "i1", 4L,
 )
 validate_uniqueness(d2)
+validate_for_write(d2)
 
 d3 <- tibble::tribble(
   ~record_id, ~redcap_event_name, ~redcap_repeat_instrument, ~redcap_repeat_instance,
-  1L,"e1", "i1", 1L,
-  1L,"e1", "i1", 2L,
-  1L,"e1", "i1", 3L,
-  1L,"e1", "i1", 3L
+  1L, "e1", "i1", 1L,
+  1L, "e1", "i1", 3L,
+  1L, "e1", "i1", 3L,
 )
-# Throws error:
 # validate_uniqueness(d3)
+# Throws error:
+# validate_uniqueness(d3, stop_on_error = TRUE)
 }
 \references{
 The official documentation can be found on the 'API Help Page'

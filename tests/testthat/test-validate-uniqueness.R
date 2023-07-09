@@ -76,7 +76,7 @@ test_that("validate_uniqueness -bad -all four", {
 
   expect_error(
     validate_uniqueness(d, stop_on_error = TRUE),
-    "There are \\d+ record\\(s\\) that violate the uniqueness requirement\\.  See the output above\\."
+    "There are \\d+ record\\(s\\) that violate the uniqueness requirement:"
   )
 
   ds <- validate_uniqueness(d, stop_on_error = FALSE)
@@ -100,7 +100,7 @@ test_that("validate_uniqueness -bad -events", {
 
   expect_error(
     validate_uniqueness(d, stop_on_error = TRUE),
-    "There are \\d+ record\\(s\\) that violate the uniqueness requirement\\.  See the output above\\."
+    "There are \\d+ record\\(s\\) that violate the uniqueness requirement:"
   )
 
   ds <- validate_uniqueness(d, stop_on_error = FALSE)

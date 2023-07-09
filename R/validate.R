@@ -127,8 +127,9 @@
 #'   1L, "e1", "i1", 3L,
 #'   1L, "e1", "i1", 3L,
 #' )
-#' # Throws error:
 #' # validate_uniqueness(d3)
+#' # Throws error:
+#' # validate_uniqueness(d3, stop_on_error = TRUE)
 
 #' @export
 validate_data_frame_inherits <- function(d) {
@@ -245,13 +246,12 @@ validate_repeat_instance <- function(d, stop_on_error = FALSE) {
   }
 }
 
-
 #' @export
 validate_uniqueness <- function(d, record_id_name = "record_id", stop_on_error = FALSE) {
   checkmate::assert_data_frame(d)
 
   count_of_records <- NULL
-  plumbing <- c(record_id_name, "redcap_event_name", "redcap_repeat_instrument", "redcap_repeat_instance")
+  plumbing  <- c(record_id_name, "redcap_event_name", "redcap_repeat_instrument", "redcap_repeat_instance")
   variables <- intersect(colnames(d), plumbing)
 
   d_replicates <-
@@ -270,10 +270,18 @@ validate_uniqueness <- function(d, record_id_name = "record_id", stop_on_error =
       suggestion         = character(0)
     )
   } else if (stop_on_error) {
-    d_replicates |>
-      print()
-    "There are %i record(s) that violate the uniqueness requirement.  See the output above." |>
-      sprintf(nrow(d_replicates)) |>
+    m <-
+      if(requireNamespace("knitr", quietly = TRUE)) {
+        d_replicates %>%
+          knitr::kable() %>%
+          paste(collapse = "\n")
+      } else {
+        d_replicates %>%
+          paste(collapse = "\n")
+      }
+
+    "There are %i record(s) that violate the uniqueness requirement:\n%s" |>
+      sprintf(nrow(d_replicates), m) |>
       stop()
   } else {
     indices <- paste(which(colnames(d) == variables), collapse = ", ")
