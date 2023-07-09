@@ -276,8 +276,7 @@ validate_uniqueness <- function(d, record_id_name = "record_id", stop_on_error =
           knitr::kable() %>%
           paste(collapse = "\n")
       } else {
-        d_replicates %>%
-          paste(collapse = "\n")
+        paste(d_replicates, collapse = "\n")  # nocov
       }
 
     "There are %i record(s) that violate the uniqueness requirement:\n%s" |>
