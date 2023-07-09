@@ -99,6 +99,7 @@
 #' result_write$raw_text
 #' }
 
+#' @importFrom magrittr %>%
 #' @export
 redcap_write_oneshot <- function(
   ds,

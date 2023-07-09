@@ -59,6 +59,7 @@
 #' result$data_user_form
 #' }
 
+#' @importFrom magrittr %>%
 #' @export
 redcap_users_export <- function(
   redcap_uri,

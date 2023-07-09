@@ -246,6 +246,7 @@ validate_repeat_instance <- function(d, stop_on_error = FALSE) {
   }
 }
 
+#' @importFrom magrittr %>%
 #' @export
 validate_uniqueness <- function(d, record_id_name = "record_id", stop_on_error = FALSE) {
   checkmate::assert_data_frame(d)

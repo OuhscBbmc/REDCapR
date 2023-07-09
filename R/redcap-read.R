@@ -220,6 +220,7 @@
 #' )$data
 #' }
 
+#' @importFrom magrittr %>%
 #' @export
 redcap_read <- function(
   batch_size                    = 100L,
