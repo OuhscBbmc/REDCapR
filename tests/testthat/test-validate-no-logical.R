@@ -27,7 +27,7 @@ test_that("validate_no_logical -concern dataset", {
   ds <- validate_no_logical(vapply(ds_bad, class, character(1)))
   expect_equal(object=nrow(ds), expected=1, info="One logical field should be flagged")
   expect_equal(object=ds$field_name, expected="bad_logical")
-  expect_equal(object=unname(ds$field_index), expected=2)
+  expect_equal(object=unname(ds$field_index), expected="2")
 })
 
 # ---- redcap-repeat-instance --------------------------------------------------

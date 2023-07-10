@@ -155,7 +155,7 @@ validate_no_logical <- function(data_types, stop_on_error = FALSE) {
   if (length(indices) == 0L) {
     tibble::tibble(
       field_name         = character(0),
-      field_index        = integer(0),
+      field_index        = character(0),
       concern            = character(0),
       suggestion         = character(0)
     )
@@ -169,7 +169,7 @@ validate_no_logical <- function(data_types, stop_on_error = FALSE) {
   } else {
     tibble::tibble(
       field_name         = names(data_types)[indices],
-      field_index        = indices,
+      field_index        = as.character(indices),
       concern            = "The REDCap API does not automatically convert boolean values to 0/1 values.",
       suggestion         = "Convert the variable with the `as.integer()` function."
     )
@@ -187,7 +187,7 @@ validate_field_names <- function(field_names, stop_on_error = FALSE) {
   if (length(indices) == 0L) {
     tibble::tibble(
       field_name         = character(0),
-      field_index        = integer(0),
+      field_index        = character(0),
       concern            = character(0),
       suggestion         = character(0)
     )
@@ -201,7 +201,7 @@ validate_field_names <- function(field_names, stop_on_error = FALSE) {
   } else {
     tibble::tibble(
       field_name         = field_names[indices],
-      field_index        = indices,
+      field_index        = as.character(indices),
       concern            = "A REDCap project does not allow field names with an uppercase letter.",
       suggestion         = "Change the uppercase letters to lowercase, potentially with `base::tolower()`."
     )
@@ -217,14 +217,14 @@ validate_repeat_instance <- function(d, stop_on_error = FALSE) {
   if (!any(colnames(d) == column_name)) {
     tibble::tibble(
       field_name         = character(0),
-      field_index        = integer(0),
+      field_index        = character(0),
       concern            = character(0),
       suggestion         = character(0)
     )
   } else if (inherits(d[[column_name]], "integer")) {
     tibble::tibble(
       field_name         = character(0),
-      field_index        = integer(0),
+      field_index        = character(0),
       concern            = character(0),
       suggestion         = character(0)
     )
@@ -239,7 +239,7 @@ validate_repeat_instance <- function(d, stop_on_error = FALSE) {
 
     tibble::tibble(
       field_name         = column_name,
-      field_index        = indices,
+      field_index        = as.character(indices),
       concern            = "The `redcap_repeat_instance` column should be an integer.",
       suggestion         = "Use `as.integer()` to cast it.  Make sure no 'NAs introduced by coercion' warnings appears."
     )
@@ -266,7 +266,7 @@ validate_uniqueness <- function(d, record_id_name = "record_id", stop_on_error =
   if (nrow(d_replicates) == 0L) {
     tibble::tibble(
       field_name         = character(0),
-      field_index        = integer(0),
+      field_index        = character(0),
       concern            = character(0),
       suggestion         = character(0)
     )
@@ -288,7 +288,7 @@ validate_uniqueness <- function(d, record_id_name = "record_id", stop_on_error =
 
     tibble::tibble(
       field_name         = paste(variables, collapse = ", "),
-      field_index        = indices,
+      field_index        = as.character(indices),
       concern            = "The values in these variables were not unique.",
       suggestion         = "Run `validate_uniqueness()` with `stop_on_error = TRUE` to see the specific values that are duplicated."
     )
@@ -327,6 +327,7 @@ validate_for_write <- function(
     lst_concerns[[length(lst_concerns) + 1L]] <- validate_no_logical(vapply(d, class, character(1)))
   }
 
+  # browser()
   # Vertically stack all the data.frames into a single data frame
   dplyr::bind_rows(lst_concerns)
 }

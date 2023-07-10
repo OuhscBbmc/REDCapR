@@ -40,5 +40,5 @@ test_that("validate_field_names -concern dataset", {
   ds <- validate_field_names(colnames(ds_bad))
   expect_equal(object=nrow(ds), expected=1, info="One uppercase field should be flagged")
   expect_equal(object=ds$field_name, expected="bad_Uppercase")
-  expect_equal(object=ds$field_index, expected=3)
+  expect_equal(object=ds$field_index, expected="3")
 })
