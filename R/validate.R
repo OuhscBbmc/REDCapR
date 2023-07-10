@@ -14,7 +14,7 @@
 #'
 #' validate_data_frame_inherits( d )
 #'
-#' validate_no_logical( data_types, stop_on_error )
+#' validate_no_logical( d, stop_on_error )
 #'
 #' validate_field_names( field_names, stop_on_error = FALSE )
 #'
@@ -33,8 +33,6 @@
 #' @param d The [base::data.frame()] or [tibble::tibble()]
 #' containing the dataset used to update
 #' the REDCap project.
-#' @param data_types The data types of the data frame corresponding
-#' to the REDCap project.
 #' @param field_names The names of the fields/variables in the REDCap project.
 #' Each field is an individual element in the character vector.
 #' @param record_id_name The name of the field that represents one record.
@@ -146,11 +144,11 @@ validate_data_frame_inherits <- function(d) {
 }
 
 #' @export
-validate_no_logical <- function(data_types, stop_on_error = FALSE) {
-  checkmate::assert_character(data_types, any.missing=FALSE, min.len=1, min.chars=2)
+validate_no_logical <- function(d, stop_on_error = FALSE) {
+  checkmate::assert_data_frame(d)
   checkmate::assert_logical(stop_on_error, any.missing=FALSE, len=1)
 
-  indices <- which(data_types == "logical")
+  indices <- which(vapply(d, \(x) inherits(x, "logical"), logical(1)))
 
   if (length(indices) == 0L) {
     tibble::tibble(
@@ -168,7 +166,7 @@ validate_no_logical <- function(data_types, stop_on_error = FALSE) {
     )
   } else {
     tibble::tibble(
-      field_name         = names(data_types)[indices],
+      field_name         = colnames(d)[indices],
       field_index        = as.character(indices),
       concern            = "The REDCap API does not automatically convert boolean values to 0/1 values.",
       suggestion         = "Convert the variable with the `as.integer()` function."
@@ -324,7 +322,7 @@ validate_for_write <- function(
     #     lst_concerns,
     #     validate_no_logical(vapply(d, class, character(1)))
     #   )
-    lst_concerns[[length(lst_concerns) + 1L]] <- validate_no_logical(vapply(d, class, character(1)))
+    lst_concerns[[length(lst_concerns) + 1L]] <- validate_no_logical(d)
   }
 
   # browser()

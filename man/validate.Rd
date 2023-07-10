@@ -15,7 +15,7 @@ validate_for_write( d, convert_logical_to_integer )
 
 validate_data_frame_inherits( d )
 
-validate_no_logical( data_types, stop_on_error )
+validate_no_logical( d, stop_on_error )
 
 validate_field_names( field_names, stop_on_error = FALSE )
 
@@ -27,9 +27,6 @@ validate_uniqueness(d, record_id_name, stop_on_error)
 \item{d}{The \code{\link[base:data.frame]{base::data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}}
 containing the dataset used to update
 the REDCap project.}
-
-\item{data_types}{The data types of the data frame corresponding
-to the REDCap project.}
 
 \item{field_names}{The names of the fields/variables in the REDCap project.
 Each field is an individual element in the character vector.}
