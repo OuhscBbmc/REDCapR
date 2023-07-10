@@ -133,7 +133,7 @@
 
 #' @export
 validate_data_frame_inherits <- function(d) {
-  if(!base::inherits(d, "data.frame")) {
+  if (!base::inherits(d, "data.frame")) {
     stop(
       "The `d` object is not a valid `data.frame`.  ",
       "Make sure it is a data.frame ",
@@ -214,7 +214,7 @@ validate_repeat_instance <- function(d, stop_on_error = FALSE) {
   checkmate::assert_logical(stop_on_error, any.missing = FALSE, len = 1)
 
   column_name <- "redcap_repeat_instance"
-  if(!any(colnames(d) == column_name)) {
+  if (!any(colnames(d) == column_name)) {
     tibble::tibble(
       field_name         = character(0),
       field_index        = integer(0),
@@ -263,7 +263,7 @@ validate_uniqueness <- function(d, record_id_name = "record_id", stop_on_error =
     ) |>
     dplyr::filter(1L < count_of_records)
 
-  if(nrow(d_replicates) == 0L) {
+  if (nrow(d_replicates) == 0L) {
     tibble::tibble(
       field_name         = character(0),
       field_index        = integer(0),
@@ -272,7 +272,7 @@ validate_uniqueness <- function(d, record_id_name = "record_id", stop_on_error =
     )
   } else if (stop_on_error) {
     m <-
-      if(requireNamespace("knitr", quietly = TRUE)) {
+      if (requireNamespace("knitr", quietly = TRUE)) {
         d_replicates %>%
           knitr::kable() %>%
           paste(collapse = "\n")

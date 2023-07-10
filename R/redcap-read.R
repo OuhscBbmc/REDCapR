@@ -336,7 +336,7 @@ redcap_read <- function(
         )$data[["unique_event_name"]]
 
       events_not_recognized <- setdiff(events, events_in_project)
-      if(0L < length(events_not_recognized)) {
+      if (0L < length(events_not_recognized)) {
         "The following events are not recognized for this project: {%s}.\nMake sure you're using internal `event-name` (lowercase letters & underscores)\ninstead of the user-facing `event-label` (that can have spaces and uppercase letters)." %>%
           sprintf(paste(events_not_recognized, collapse = ", ")) %>%
           stop(call. = FALSE)
