@@ -333,8 +333,7 @@ redcap_read <- function(
           verbose         = verbose,
           config_options  = config_options,
           handle_httr     = handle_httr
-        )$data %>%
-        dplyr::pull(unique_event_name)
+        )$data[["unique_event_name"]]
 
       events_not_recognized <- setdiff(events, events_in_project)
       if(0L < length(events_not_recognized)) {
