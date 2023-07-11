@@ -182,7 +182,7 @@ validate_field_names <- function(d, stop_on_error = FALSE) {
   pattern <- "^[a-z][0-9a-z_]*$"
   field_names <- colnames(d)
 
-  indices <- which(!grepl(pattern, x = field_names, perl = TRUE))
+  indices <- grep(pattern, x = field_names, perl = TRUE, invert = TRUE)
   if (length(indices) == 0L) {
     tibble::tibble(
       field_name         = character(0),
