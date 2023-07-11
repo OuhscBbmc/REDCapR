@@ -142,7 +142,7 @@ redcap_file_download_oneshot <- function(
   record  <- as.character(record)
   checkmate::assert_character(record    , any.missing=FALSE, len=1, pattern="^.{1,}$")
   checkmate::assert_character(field     , any.missing=FALSE, len=1, pattern="^.{1,}$")
-  validate_field_names(field, stop_on_error = TRUE)
+  assert_field_names(field)
   checkmate::assert_character(event     , any.missing=FALSE, len=1, pattern="^.{0,}$")
   checkmate::assert_logical(  verbose   , any.missing=FALSE)
 

@@ -29,5 +29,5 @@ test_that("validate_repeat_instance -double", {
   ds <- validate_repeat_instance(d)
   expect_equal(object=nrow(ds), expected=1)
   expect_equal(object=ds$field_name, expected="redcap_repeat_instance")
-  expect_equal(object=ds$field_index, expected=1)
+  expect_equal(object=ds$field_index, expected="1")
 })

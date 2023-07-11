@@ -121,6 +121,7 @@ misspecified
 nano
 nolint
 nonmissing
+nonnull
 odbc
 ouhscbbmc
 packageVersion

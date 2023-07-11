@@ -302,11 +302,15 @@ By default, `REDCapR::redcap_read()` requests datasets of 100 patients as a time
 Writing to the Server
 -------------------------
 
-Reading record data is only one API capability.  REDCapR [exposes 20+ API functions](https://ouhscbbmc.github.io/REDCapR/reference/), such as reading metadata, retrieving survey links, and writing records back to REDCap.  This last operation is relevant in  [Kenneth McLean](https://twitter.com/kennethmclean92)'s presentation following a five-minute break.
+Reading record data is only one API capability.  REDCapR [exposes 20+ API functions](https://ouhscbbmc.github.io/REDCapR/reference/), such as reading metadata, retrieving survey links, and writing records back to REDCap.  This last operation is relevant in
+[Kenneth McLean](https://orcid.org/0000-0001-6482-9086)'s presentation following a five-minute break.
 
 Notes
 ===================================
 
-This vignette was originally designed for a 2021 R/Medicine REDCap workshop with [Peter Higgins](https://www.med.umich.edu/higginslab/), [Amanda Miller](https://coloradosph.cuanschutz.edu/resources/directory/directory-profile/Miller-Amanda-UCD6000053152), and [Kenneth McLean](https://twitter.com/kennethmclean92).
+This vignette was originally designed for a 2021 R/Medicine REDCap workshop with 
+[Peter Higgins](https://scholar.google.com/citations?user=UGJGFaAAAAAJ&hl=en), 
+[Amanda Miller](https://coloradosph.cuanschutz.edu/resources/directory/directory-profile/Miller-Amanda-UCD6000053152), 
+and [Kenneth McLean](https://orcid.org/0000-0001-6482-9086).
 
 This work was made possible in part by the NIH grant [U54GM104938](https://taggs.hhs.gov/Detail/AwardDetail?arg_AwardNum=U54GM104938&arg_ProgOfficeCode=127) to the [Oklahoma Shared Clinical and Translational Resource)](http://osctr.ouhsc.edu).

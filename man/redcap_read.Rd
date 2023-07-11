@@ -179,7 +179,9 @@ retrieves subsets of the data, and then combines them before returning
 be more appropriate than \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}} when returning large
 datasets that could tie up the server.
 }
-\details{
+\section{Batching subsets of data}{
+
+
 \code{\link[=redcap_read]{redcap_read()}} internally uses multiple calls to \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}}
 to select and return data.  Initially, only the primary key is queried
 through the REDCap API.  The long list is then subsetted into batches,
@@ -209,6 +211,10 @@ included, even if not explicitly requested.  As a result:
 \item \code{redcap_repeat_instrument} and \code{redcap_repeat_instance} will be returned
 for projects with repeating instruments
 }
+}
+
+\section{Export permissions}{
+
 
 For \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}} to function properly, the user must have Export
 permissions for the 'Full Data Set'.  Users with only 'De-Identified'
@@ -219,6 +225,10 @@ appropriate permissions:
 \item select the desired user, and then select 'Edit User Privileges',
 \item in the 'Data Exports' radio buttons, select 'Full Data Set'.
 }
+}
+
+\section{Pseudofields}{
+
 
 The REDCap project may contain "pseudofields", depending on its structure.
 Pseudofields are exported for certain project structures, but are not
@@ -247,6 +257,25 @@ throw an error like
 }\if{html}{\out{</div>}}
 }
 }
+
+\section{Events}{
+
+The \code{event} argument is a vector of characters passed to the server.
+It is the "event-name", not the "event-label".
+The event-label is the value presented to the users,
+which contains uppercase letters and spaces,
+while the event-name can contain only lowercase letters, digits,
+and underscores.
+
+If \code{event} is nonnull and the project is not longitudinal,
+\code{\link[=redcap_read]{redcap_read()}} will throw an error.
+Similarly, if a value in the \code{event} vector is not a current
+event-name, \code{\link[=redcap_read]{redcap_read()}} will throw an error.
+
+The simpler \code{\link[=redcap_read_oneshot]{redcap_read_oneshot()}} function does not
+check for invalid event values, and will not throw errors.
+}
+
 \examples{
 \dontrun{
 uri     <- "https://bbmc.ouhsc.edu/redcap/api/"

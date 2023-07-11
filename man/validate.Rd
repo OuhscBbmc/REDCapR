@@ -6,33 +6,30 @@
 \alias{validate_for_write}
 \alias{validate_no_logical}
 \alias{validate_field_names}
+\alias{validate_record_id_name}
 \alias{validate_repeat_instance}
 \alias{validate_uniqueness}
 \title{Inspect a dataset to anticipate problems before
 writing to a REDCap project}
 \usage{
-validate_for_write( d, convert_logical_to_integer )
+validate_for_write( d, convert_logical_to_integer, record_id_name )
 
 validate_data_frame_inherits( d )
 
-validate_no_logical( data_types, stop_on_error )
+validate_no_logical( d, stop_on_error = FALSE )
 
-validate_field_names( field_names, stop_on_error = FALSE )
+validate_field_names( d, stop_on_error = FALSE )
 
-validate_repeat_instance( d, stop_on_error )
+validate_record_id_name( d, record_id_name = "record_id", stop_on_error = FALSE )
 
-validate_uniqueness(d, record_id_name, stop_on_error)
+validate_repeat_instance( d, stop_on_error = FALSE )
+
+validate_uniqueness( d, record_id_name, stop_on_error = FALSE)
 }
 \arguments{
 \item{d}{The \code{\link[base:data.frame]{base::data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}}
 containing the dataset used to update
 the REDCap project.}
-
-\item{data_types}{The data types of the data frame corresponding
-to the REDCap project.}
-
-\item{field_names}{The names of the fields/variables in the REDCap project.
-Each field is an individual element in the character vector.}
 
 \item{record_id_name}{The name of the field that represents one record.
 The default name in REDCap is "record_id".}
@@ -66,17 +63,36 @@ of the dataset.  The \code{\link[=validate_for_write]{validate_for_write()}} fun
 individual validation checks.  It allows the client to check everything
 with one call.
 
-Currently it verifies that the dataset
-\itemize{
-\item inherits from \code{\link[data.table:data.table]{data.table::data.table()}}.
-\item does not contain
+Currently, the individual checks include:
+\enumerate{
+\item \code{validate_data_frame_inherits(d)}:
+\code{d} inherits from \code{\link[base:data.frame]{base::data.frame()}}
+\item \code{validate_field_names(d)}:
+The columns of \code{d}
+start with a lowercase letter, and subsequent optional characters are a
+sequence of (a) lowercase letters, (b) digits 0-9, and/or (c) underscores.
+(The exact regex is \verb{^[a-z][0-9a-z_]*$}.)
+\item \code{validate_record_id_name(d)}:
+\code{d} contains a field called "record_id",
+or whatever value was passed to \code{record_id_name}.
+\item \code{validate_no_logical(d)} (unless \code{convert_logical_to_integer} is TRUE):
+\code{d} does not contain
 \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/logical.html}{logical}
 values (because REDCap typically wants \code{0}/\code{1} values instead of
 \code{FALSE}/\code{TRUE}).
-\item starts with a lowercase letter, and subsequent optional characters are a
-sequence of (a) lowercase letters, (b) digits 0-9, and/or (c) underscores.
-(The exact regex is \verb{^[a-z][0-9a-z_]*$}.)
-\item has an integer for \code{redcap_repeat_instance}, if the column is present.
+\item \code{validate_repeat_instance(d)}:
+\code{d} has an integer for \code{redcap_repeat_instance}, if the column is present.
+\item \code{validate_uniqueness(d, record_id_name = record_id_name)}:
+\code{d} does not contain multiple rows with duplicate values of
+\code{record_id},
+\code{redcap_event_name},
+\code{redcap_repeat_instrument}, and
+\code{redcap_repeat_instance}
+(depending on the longitudinal & repeating structure of the project).
+
+Technically duplicate rows are not errors,
+but we feel that this will almost always be unintentional,
+and lead to an irrecoverable corruption of the data.
 }
 
 If you encounter additional types of problems when attempting to write to
@@ -120,7 +136,7 @@ d3 <- tibble::tribble(
   ~record_id, ~redcap_event_name, ~redcap_repeat_instrument, ~redcap_repeat_instance,
   1L, "e1", "i1", 1L,
   1L, "e1", "i1", 3L,
-  1L, "e1", "i1", 3L,
+  1L, "e1", "i1", 3L, # Notice this duplicates the row above
 )
 # validate_uniqueness(d3)
 # Throws error:

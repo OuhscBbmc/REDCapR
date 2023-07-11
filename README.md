@@ -70,7 +70,9 @@ Much of this package has been developed to support the needs of the following pr
 * Additional Institutional Support from OUHSC [Dept of Pediatrics](https://medicine.ouhsc.edu/Academic-Departments/Pediatrics); 2013-2021.
 
 Thanks,
-[Will Beasley](https://www.researchgate.net/profile/William-Beasley-5), David Bard, & Thomas Wilson<br/>
+[Will Beasley](https://orcid.org/0000-0002-5613-5006), 
+[David Bard](https://orcid.org/0000-0002-3922-8489), 
+& Thomas Wilson<br/>
 [University of Oklahoma Health Sciences Center](https://www.ouhsc.edu/),
 [Department of Pediatrics](https://medicine.ouhsc.edu/Academic-Departments/Pediatrics),
 [Biomedical & Behavioral Research Core](https://www.ouhsc.edu/BBMC/).

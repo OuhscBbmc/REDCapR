@@ -118,7 +118,8 @@
 #' a zero-row tibble is returned.
 #' Currently the empty tibble has zero columns, but that may change in the future.
 #'
-#' @details
+#' @section Batching subsets of data:
+#'
 #' [redcap_read()] internally uses multiple calls to [redcap_read_oneshot()]
 #' to select and return data.  Initially, only the primary key is queried
 #' through the REDCap API.  The long list is then subsetted into batches,
@@ -148,6 +149,8 @@
 #' 1. `redcap_repeat_instrument` and `redcap_repeat_instance` will be returned
 #'   for projects with repeating instruments
 #'
+#' @section Export permissions:
+#'
 #' For [redcap_read_oneshot()] to function properly, the user must have Export
 #' permissions for the 'Full Data Set'.  Users with only 'De-Identified'
 #' export privileges can still use `redcap_read_oneshot`.  To grant the
@@ -155,6 +158,8 @@
 #' * go to 'User Rights' in the REDCap project site,
 #' * select the desired user, and then select 'Edit User Privileges',
 #' * in the 'Data Exports' radio buttons, select 'Full Data Set'.
+#'
+#' @section Pseudofields:
 #'
 #' The REDCap project may contain "pseudofields", depending on its structure.
 #' Pseudofields are exported for certain project structures, but are not
@@ -181,6 +186,22 @@
 #'   ```
 #'   ERROR: The following values in the parameter fields are not valid: 'demographics_timestamp'
 #'   ```
+#'
+#' @section Events:
+#' The `event` argument is a vector of characters passed to the server.
+#' It is the "event-name", not the "event-label".
+#' The event-label is the value presented to the users,
+#' which contains uppercase letters and spaces,
+#' while the event-name can contain only lowercase letters, digits,
+#' and underscores.
+#'
+#' If `event` is nonnull and the project is not longitudinal,
+#' [redcap_read()] will throw an error.
+#' Similarly, if a value in the `event` vector is not a current
+#' event-name, [redcap_read()] will throw an error.
+#'
+#' The simpler [redcap_read_oneshot()] function does not
+#' check for invalid event values, and will not throw errors.
 #'
 #' @author
 #' Will Beasley
@@ -283,7 +304,7 @@ redcap_read <- function(
   checkmate::assert_list(     config_options            , any.missing=TRUE ,            null.ok=TRUE)
   checkmate::assert_integer(  id_position               , any.missing=FALSE,     len=1, lower=1L)
 
-  validate_field_names(fields, stop_on_error = TRUE)
+  assert_field_names(fields)
 
   token               <- sanitize_token(token)
   filter_logic        <- filter_logic_prepare(filter_logic)
@@ -300,10 +321,33 @@ redcap_read <- function(
     handle_httr        = handle_httr
   )
 
-  # browser()
-  if (!is.null(fields) || !is.null(forms))
+  if (!is.null(events)) {
+    if (!metadata$longitudinal) {
+      "This project is NOT longitudinal, so do not pass a value to the `event` argument." %>%
+       stop(call. = FALSE)
+    } else {
+      events_in_project <-
+        redcap_event_read(
+          redcap_uri,
+          token,
+          verbose         = verbose,
+          config_options  = config_options,
+          handle_httr     = handle_httr
+        )$data[["unique_event_name"]]
+
+      events_not_recognized <- setdiff(events, events_in_project)
+      if (0L < length(events_not_recognized)) {
+        "The following events are not recognized for this project: {%s}.\nMake sure you're using internal `event-name` (lowercase letters & underscores)\ninstead of the user-facing `event-label` (that can have spaces and uppercase letters)." %>%
+          sprintf(paste(events_not_recognized, collapse = ", ")) %>%
+          stop(call. = FALSE)
+      }
+    } # end of else
+  } # end of !is.null(events)
+
+  if (!is.null(fields) || !is.null(forms)) {
     fields  <- base::union(metadata$record_id_name, fields)
     # fields  <- base::union(metadata$plumbing_variables, fields)
+  }
 
   # Retrieve list of record ids --------------------------------------
   initial_call <- REDCapR::redcap_read_oneshot(
@@ -405,6 +449,7 @@ redcap_read <- function(
         " (ie, ", length(selected_ids), " unique subject records)."
       )
     }
+
     read_result <- REDCapR::redcap_read_oneshot(
       redcap_uri                  = redcap_uri,
       token                       = token,

@@ -350,6 +350,102 @@ test_that("specify-forms-only-1st", {
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
   expect_s3_class(returned_object2$data, "tbl")
 })
+test_that("specify-forms-without-record-id", {
+  testthat::skip_on_cran()
+  path_expected <- "test-data/specific-redcapr/read-batch-simple/specify-forms-without-record-id.R"
+  desired_forms <- c("health")
+  expected_outcome_message <- "\\d+ records and 7 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+
+  ###########################
+  ## Default Batch size
+  returned_object1 <-
+    redcap_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      forms       = desired_forms,
+      verbose     = FALSE
+    )
+
+  if (update_expectation) save_expected(returned_object1$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
+
+  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object1$data)
+  expect_true(returned_object1$success)
+  expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
+  expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
+  expect_equal(returned_object1$fields_collapsed, "record_id")
+  expect_true(returned_object1$filter_logic=="", "A filter was not specified.")
+  expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  expect_s3_class(returned_object1$data, "tbl")
+
+  ###########################
+  ## Tiny Batch size
+  returned_object2 <-
+    redcap_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      forms       = desired_forms,
+      batch_size  = 2,
+      verbose     = FALSE
+    )
+
+  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
+  expect_true(returned_object2$success)
+  expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
+  expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
+  expect_equal(returned_object2$fields_collapsed, "record_id")
+  expect_true(returned_object2$filter_logic=="", "A filter was not specified.")
+  expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  expect_s3_class(returned_object2$data, "tbl")
+})
+test_that("specify-fields-without-record-id", {
+  testthat::skip_on_cran()
+  path_expected <- "test-data/specific-redcapr/read-batch-simple/specify-fields-without-record-id.R"
+  desired_fields <- c("name_first", "address", "interpreter_needed")
+  expected_outcome_message <- "\\d+ records and 4 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+
+  ###########################
+  ## Default Batch size
+  returned_object1 <-
+    redcap_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      fields      = desired_fields,
+      verbose     = FALSE
+    )
+
+  if (update_expectation) save_expected(returned_object1$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
+
+  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object1$data)
+  expect_true(returned_object1$success)
+  expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
+  expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
+  expect_equal(returned_object1$fields_collapsed, paste0("record_id,", paste(desired_fields, collapse = ",")))
+  expect_true(returned_object1$filter_logic=="", "A filter was not specified.")
+  expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  expect_s3_class(returned_object1$data, "tbl")
+
+  ###########################
+  ## Tiny Batch size
+  returned_object2 <-
+    redcap_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      fields      = desired_fields,
+      batch_size  = 2,
+      verbose     = FALSE
+    )
+
+  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
+  expect_true(returned_object2$success)
+  expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
+  expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
+  expect_equal(returned_object2$fields_collapsed, paste0("record_id,", paste(desired_fields, collapse = ",")))
+  expect_true(returned_object2$filter_logic=="", "A filter was not specified.")
+  expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  expect_s3_class(returned_object2$data, "tbl")
+})
 test_that("raw", {
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/read-batch-simple/raw.R"
