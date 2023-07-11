@@ -126,9 +126,9 @@
 </li>
 </ul></li>
 <li>
-<code><a href="../reference/redcap_dag_read.html">redcap_dag_read()</a></code> has new <code>data_access_group_id</code> field (introduced maybe in <a href="https://community.projectredcap.org/articles/13/index.html" class="external-link">13.1.0</a>) (<a href="https://github.com/OuhscBbmc/REDCapR/issues/459" class="external-link">#459</a>)</li>
+<code><a href="../reference/redcap_dag_read.html">redcap_dag_read()</a></code> has new <code>data_access_group_id</code> field (introduced maybe in <a href="https://redcap.vanderbilt.edu/community/post.php?id=13" class="external-link">13.1.0</a>) (<a href="https://github.com/OuhscBbmc/REDCapR/issues/459" class="external-link">#459</a>)</li>
 <li>
-<code><a href="../reference/redcap_users_export.html">redcap_users_export()</a></code> has new <code>mycap_participants</code> field (introduced maybe in <a href="https://community.projectredcap.org/articles/13/index.html" class="external-link">13.0.0</a>) (<a href="https://github.com/OuhscBbmc/REDCapR/issues/459" class="external-link">#459</a>)</li>
+<code><a href="../reference/redcap_users_export.html">redcap_users_export()</a></code> has new <code>mycap_participants</code> field (introduced maybe in <a href="https://redcap.vanderbilt.edu/community/post.php?id=13" class="external-link">13.0.0</a>) (<a href="https://github.com/OuhscBbmc/REDCapR/issues/459" class="external-link">#459</a>)</li>
 <li>Accommodate older versions of REDCap that don’t return project-level variable, like <code>has_repeating_instruments_or_events</code>, <code>missing_data_codes</code>, <code>external_modules</code>, <code>bypass_branching_erase_field_prompt</code> (<a href="https://github.com/the-mad-statter" class="external-link">@the-mad-statter</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/465" class="external-link">#465</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/466" class="external-link">#466</a>)</li>
 <li>
 <code>redcap_meta_coltypes()</code> correctly determines data type for autonumber <code>record_id</code> fields. It suggests a character if the project has DAGs, and an integer if not. (<a href="https://github.com/pwildenhain" class="external-link">@pwildenhain</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/472" class="external-link">#472</a>)</li>
@@ -139,7 +139,16 @@
 <li>
 <code><a href="../reference/redcap_event_instruments.html">redcap_event_instruments()</a></code> now can return mappings for all arms, instead of one arm per call.(Suggested by <a href="https://github.com/januz" class="external-link">@januz</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/482" class="external-link">#482</a>)</li>
 <li>
-<code><a href="../reference/validate.html">validate_for_write()</a></code> contains a few more checks, such as <code><a href="../reference/validate.html">validate_repeat_instance()</a></code> and <code><a href="../reference/validate.html">validate_data_frame_inherits()</a></code> (<a href="https://github.com/OuhscBbmc/REDCapR/issues/485" class="external-link">#485</a>)</li>
+<code><a href="../reference/validate.html">validate_for_write()</a></code> contains a few more checks. (<a href="https://github.com/OuhscBbmc/REDCapR/issues/485" class="external-link">#485</a>) The complete list is now:
+<ul><li><code><a href="../reference/validate.html">validate_data_frame_inherits()</a></code></li>
+<li><code><a href="../reference/validate.html">validate_field_names()</a></code></li>
+<li><code><a href="../reference/validate.html">validate_record_id_name()</a></code></li>
+<li><code><a href="../reference/validate.html">validate_uniqueness()</a></code></li>
+<li><code><a href="../reference/validate.html">validate_repeat_instance()</a></code></li>
+<li><code><a href="../reference/validate.html">validate_no_logical()</a></code></li>
+</ul></li>
+<li>
+<code><a href="../reference/redcap_read.html">redcap_read()</a></code> checks the <code>event</code> parameter and throws an error if a value is not recognized, or the project is not longitudinal (<a href="https://github.com/OuhscBbmc/REDCapR/issues/493" class="external-link">#493</a>)</li>
 </ul></div>
 </div>
     <div class="section level2">
