@@ -17,7 +17,7 @@ validate_data_frame_inherits( d )
 
 validate_no_logical( d, stop_on_error )
 
-validate_field_names( field_names, stop_on_error = FALSE )
+validate_field_names( d, stop_on_error = FALSE )
 
 validate_repeat_instance( d, stop_on_error )
 
@@ -27,9 +27,6 @@ validate_uniqueness(d, record_id_name, stop_on_error)
 \item{d}{The \code{\link[base:data.frame]{base::data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}}
 containing the dataset used to update
 the REDCap project.}
-
-\item{field_names}{The names of the fields/variables in the REDCap project.
-Each field is an individual element in the character vector.}
 
 \item{record_id_name}{The name of the field that represents one record.
 The default name in REDCap is "record_id".}

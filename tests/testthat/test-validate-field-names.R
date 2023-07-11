@@ -12,32 +12,27 @@ ds_good <- data.frame(
 )
 
 test_that("validate_field_names -good", {
-  ds <- validate_field_names(colnames(ds_good))
+  ds <- validate_field_names(ds_good)
   expect_equal(nrow(ds), 0)
 })
 
 test_that("validate_field_names -stop on error", {
   expect_error(
-    validate_field_names(colnames(ds_bad), stop_on_error = TRUE),
+    validate_field_names(ds_bad, stop_on_error = TRUE),
     "1 field name\\(s\\) violated the naming rules.  Only digits, lowercase letters, and underscores are allowed."
   )
 })
 
 test_that("validate_field_names -uppercase", {
+  d_bad <- data.frame(record_ID = 1:4)
   expect_error(
-    validate_field_names("record_ID", stop_on_error = TRUE),
-    "1 field name\\(s\\) violated the naming rules.  Only digits, lowercase letters, and underscores are allowed."
-  )
-})
-test_that("validate_field_names -start underscore", {
-  expect_error(
-    validate_field_names("_record_id", stop_on_error = TRUE),
+    validate_field_names(d_bad, stop_on_error = TRUE),
     "1 field name\\(s\\) violated the naming rules.  Only digits, lowercase letters, and underscores are allowed."
   )
 })
 
 test_that("validate_field_names -concern dataset", {
-  ds <- validate_field_names(colnames(ds_bad))
+  ds <- validate_field_names(ds_bad)
   expect_equal(object=nrow(ds), expected=1, info="One uppercase field should be flagged")
   expect_equal(object=ds$field_name, expected="bad_Uppercase")
   expect_equal(object=ds$field_index, expected="3")

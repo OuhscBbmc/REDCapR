@@ -16,7 +16,7 @@
 #'
 #' validate_no_logical( d, stop_on_error )
 #'
-#' validate_field_names( field_names, stop_on_error = FALSE )
+#' validate_field_names( d, stop_on_error = FALSE )
 #'
 #' validate_repeat_instance( d, stop_on_error )
 #'
@@ -33,8 +33,6 @@
 #' @param d The [base::data.frame()] or [tibble::tibble()]
 #' containing the dataset used to update
 #' the REDCap project.
-#' @param field_names The names of the fields/variables in the REDCap project.
-#' Each field is an individual element in the character vector.
 #' @param record_id_name The name of the field that represents one record.
 #' The default name in REDCap is "record_id".
 #' @param stop_on_error If `TRUE`, an error is thrown for violations.
@@ -52,7 +50,7 @@
 #' * `field_index`: The position of the field.  (For example, a value of
 #' '1' indicates the first column, while a '3' indicates the third column.)
 #' * `concern`: A description of the problem potentially caused by the `field`.
-#' * `suggestion`: A *potential* solution to the concern.
+#' * `suggestion`: A _potential_ solution to the concern.
 #'
 #' @details
 #' All functions listed in the Usage section above inspect a specific aspect
@@ -175,11 +173,13 @@ validate_no_logical <- function(d, stop_on_error = FALSE) {
 }
 
 #' @export
-validate_field_names <- function(field_names, stop_on_error = FALSE) {
-  checkmate::assert_character(field_names, any.missing=FALSE, null.ok=TRUE, min.len=1, min.chars=1)
+validate_field_names <- function(d, stop_on_error = FALSE) {
+  checkmate::assert_data_frame(d)
+  # checkmate::assert_character(field_names, any.missing=FALSE, null.ok=TRUE, min.len=1, min.chars=1)
   checkmate::assert_logical(stop_on_error, any.missing=FALSE, len=1)
 
   pattern <- "^[a-z][0-9a-z_]*$"
+  field_names <- colnames(d)
 
   indices <- which(!grepl(pattern, x = field_names, perl = TRUE))
   if (length(indices) == 0L) {
@@ -311,7 +311,7 @@ validate_for_write <- function(
 
   lst_concerns <- list(
     validate_data_frame_inherits(d),
-    validate_field_names(colnames(d)),
+    validate_field_names(d),
     validate_uniqueness(d),
     validate_repeat_instance(d)
   )
