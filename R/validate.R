@@ -6,6 +6,7 @@
 #' validate_data_frame_inherits
 #' validate_no_logical
 #' validate_field_names
+#' validate_record_id_name
 #' validate_repeat_instance
 #' validate_uniqueness
 #'

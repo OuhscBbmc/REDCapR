@@ -6,6 +6,7 @@
 \alias{validate_for_write}
 \alias{validate_no_logical}
 \alias{validate_field_names}
+\alias{validate_record_id_name}
 \alias{validate_repeat_instance}
 \alias{validate_uniqueness}
 \title{Inspect a dataset to anticipate problems before
