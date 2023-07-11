@@ -65,7 +65,7 @@ with one call.
 
 Currently it verifies that the dataset
 \itemize{
-\item inherits from \code{\link[data.table:data.table]{data.table::data.table()}}.
+\item inherits from \code{\link[base:data.frame]{base::data.frame()}}.
 \item does not contain
 \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/logical.html}{logical}
 values (because REDCap typically wants \code{0}/\code{1} values instead of

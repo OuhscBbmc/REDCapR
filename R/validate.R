@@ -61,7 +61,7 @@
 #' with one call.
 #'
 #' Currently it verifies that the dataset
-#' * inherits from [data.table::data.table()].
+#' * inherits from [base::data.frame()].
 #' * does not contain
 #' [logical](https://stat.ethz.ch/R-manual/R-devel/library/base/html/logical.html)
 #' values (because REDCap typically wants `0`/`1` values instead of
