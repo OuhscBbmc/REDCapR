@@ -15,15 +15,15 @@ validate_for_write( d, convert_logical_to_integer, record_id_name )
 
 validate_data_frame_inherits( d )
 
-validate_no_logical( d, stop_on_error )
+validate_no_logical( d, stop_on_error = FALSE )
 
 validate_field_names( d, stop_on_error = FALSE )
 
 validate_record_id_name( d, record_id_name = "record_id", stop_on_error = FALSE )
 
-validate_repeat_instance( d, stop_on_error )
+validate_repeat_instance( d, stop_on_error = FALSE )
 
-validate_uniqueness(d, record_id_name, stop_on_error)
+validate_uniqueness( d, record_id_name, stop_on_error = FALSE)
 }
 \arguments{
 \item{d}{The \code{\link[base:data.frame]{base::data.frame()}} or \code{\link[tibble:tibble]{tibble::tibble()}}

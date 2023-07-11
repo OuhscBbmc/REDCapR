@@ -14,15 +14,15 @@
 #'
 #' validate_data_frame_inherits( d )
 #'
-#' validate_no_logical( d, stop_on_error )
+#' validate_no_logical( d, stop_on_error = FALSE )
 #'
 #' validate_field_names( d, stop_on_error = FALSE )
 #'
 #' validate_record_id_name( d, record_id_name = "record_id", stop_on_error = FALSE )
 #'
-#' validate_repeat_instance( d, stop_on_error )
+#' validate_repeat_instance( d, stop_on_error = FALSE )
 #'
-#' validate_uniqueness(d, record_id_name, stop_on_error)
+#' validate_uniqueness( d, record_id_name, stop_on_error = FALSE)
 #'
 #' @title
 #' Inspect a dataset to anticipate problems before
@@ -146,7 +146,7 @@ validate_data_frame_inherits <- function(d) {
 #' @export
 validate_no_logical <- function(d, stop_on_error = FALSE) {
   checkmate::assert_data_frame(d)
-  checkmate::assert_logical(stop_on_error, any.missing=FALSE, len=1)
+  checkmate::assert_logical(stop_on_error, any.missing = FALSE, len = 1L)
 
   indices <- which(vapply(d, \(x) inherits(x, "logical"), logical(1)))
 
@@ -177,8 +177,7 @@ validate_no_logical <- function(d, stop_on_error = FALSE) {
 #' @export
 validate_field_names <- function(d, stop_on_error = FALSE) {
   checkmate::assert_data_frame(d)
-  # checkmate::assert_character(field_names, any.missing=FALSE, null.ok=TRUE, min.len=1, min.chars=1)
-  checkmate::assert_logical(stop_on_error, any.missing=FALSE, len=1)
+  checkmate::assert_logical(stop_on_error, any.missing = FALSE, len = 1L)
 
   pattern <- "^[a-z][0-9a-z_]*$"
   field_names <- colnames(d)
@@ -216,7 +215,7 @@ validate_record_id_name <- function (
 ) {
   checkmate::assert_data_frame(d)
   checkmate::assert_character(record_id_name, len = 1L, any.missing = FALSE, min.chars = 1L)
-  checkmate::assert_logical(stop_on_error, any.missing = FALSE, len = 1)
+  checkmate::assert_logical(stop_on_error, any.missing = FALSE, len = 1L)
 
   record_id_found <- (record_id_name %in% colnames(d))
 
@@ -244,7 +243,7 @@ validate_record_id_name <- function (
 #' @export
 validate_repeat_instance <- function(d, stop_on_error = FALSE) {
   checkmate::assert_data_frame(d)
-  checkmate::assert_logical(stop_on_error, any.missing = FALSE, len = 1)
+  checkmate::assert_logical(stop_on_error, any.missing = FALSE, len = 1L)
 
   column_name <- "redcap_repeat_instance"
   if (!any(colnames(d) == column_name)) {
@@ -284,6 +283,7 @@ validate_repeat_instance <- function(d, stop_on_error = FALSE) {
 validate_uniqueness <- function(d, record_id_name = "record_id", stop_on_error = FALSE) {
   checkmate::assert_data_frame(d)
   checkmate::assert_character(record_id_name, len = 1L, any.missing = FALSE, min.chars = 1L)
+  checkmate::assert_logical(stop_on_error, any.missing = FALSE, len = 1L)
 
   count_of_records <- NULL
   plumbing  <- c(record_id_name, "redcap_event_name", "redcap_repeat_instrument", "redcap_repeat_instance")
