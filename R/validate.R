@@ -252,7 +252,7 @@ assert_field_names <- function(field_names) {
 }
 
 #' @export
-validate_record_id_name <- function (
+validate_record_id_name <- function(
   d,
   record_id_name              = "record_id",
   stop_on_error               = FALSE
