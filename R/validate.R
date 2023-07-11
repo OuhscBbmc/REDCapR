@@ -60,16 +60,41 @@
 #' individual validation checks.  It allows the client to check everything
 #' with one call.
 #'
-#' Currently it verifies that the dataset
-#' * inherits from [base::data.frame()].
-#' * does not contain
-#' [logical](https://stat.ethz.ch/R-manual/R-devel/library/base/html/logical.html)
-#' values (because REDCap typically wants `0`/`1` values instead of
-#' `FALSE`/`TRUE`).
-#' * starts with a lowercase letter, and subsequent optional characters are a
-#' sequence of (a) lowercase letters, (b) digits 0-9, and/or (c) underscores.
-#' (The exact regex is `^[a-z][0-9a-z_]*$`.)
-#' * has an integer for `redcap_repeat_instance`, if the column is present.
+#' Currently, the individual checks include:
+#'
+#' 1. `validate_data_frame_inherits(d)`:
+#'    `d` inherits from [base::data.frame()]
+#'
+#' 1. `validate_field_names(d)`:
+#'    The columns of `d`
+#'    start with a lowercase letter, and subsequent optional characters are a
+#'    sequence of (a) lowercase letters, (b) digits 0-9, and/or (c) underscores.
+#'    (The exact regex is `^[a-z][0-9a-z_]*$`.)
+#'
+#' 1. `validate_record_id_name(d)`:
+#'    `d` contains a field called "record_id",
+#'    or whatever value was passed to `record_id_name`.
+#'
+#' 1. `validate_no_logical(d)` (unless `convert_logical_to_integer` is TRUE):
+#'    `d` does not contain
+#'    [logical](https://stat.ethz.ch/R-manual/R-devel/library/base/html/logical.html)
+#'    values (because REDCap typically wants `0`/`1` values instead of
+#'    `FALSE`/`TRUE`).
+#'
+#' 1. `validate_repeat_instance(d)`:
+#'    `d` has an integer for `redcap_repeat_instance`, if the column is present.
+#'
+#' 1. `validate_uniqueness(d, record_id_name = record_id_name)`:
+#'    `d` does not contain multiple rows with duplicate values of
+#'    `record_id`,
+#'    `redcap_event_name`,
+#'    `redcap_repeat_instrument`, and
+#'    `redcap_repeat_instance`
+#'    (depending on the longitudinal & repeating structure of the project).
+#'
+#'    Technically duplicate rows are not errors,
+#'    but we feel that this will almost always be unintentional,
+#'    and lead to an irrecoverable corruption of the data.
 #'
 #' If you encounter additional types of problems when attempting to write to
 #' REDCap, please tell us by creating a
@@ -123,7 +148,7 @@
 #'   ~record_id, ~redcap_event_name, ~redcap_repeat_instrument, ~redcap_repeat_instance,
 #'   1L, "e1", "i1", 1L,
 #'   1L, "e1", "i1", 3L,
-#'   1L, "e1", "i1", 3L,
+#'   1L, "e1", "i1", 3L, # Notice this duplicates the row above
 #' )
 #' # validate_uniqueness(d3)
 #' # Throws error:

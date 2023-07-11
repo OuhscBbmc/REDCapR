@@ -62,17 +62,36 @@ of the dataset.  The \code{\link[=validate_for_write]{validate_for_write()}} fun
 individual validation checks.  It allows the client to check everything
 with one call.
 
-Currently it verifies that the dataset
-\itemize{
-\item inherits from \code{\link[base:data.frame]{base::data.frame()}}.
-\item does not contain
+Currently, the individual checks include:
+\enumerate{
+\item \code{validate_data_frame_inherits(d)}:
+\code{d} inherits from \code{\link[base:data.frame]{base::data.frame()}}
+\item \code{validate_field_names(d)}:
+The columns of \code{d}
+start with a lowercase letter, and subsequent optional characters are a
+sequence of (a) lowercase letters, (b) digits 0-9, and/or (c) underscores.
+(The exact regex is \verb{^[a-z][0-9a-z_]*$}.)
+\item \code{validate_record_id_name(d)}:
+\code{d} contains a field called "record_id",
+or whatever value was passed to \code{record_id_name}.
+\item \code{validate_no_logical(d)} (unless \code{convert_logical_to_integer} is TRUE):
+\code{d} does not contain
 \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/logical.html}{logical}
 values (because REDCap typically wants \code{0}/\code{1} values instead of
 \code{FALSE}/\code{TRUE}).
-\item starts with a lowercase letter, and subsequent optional characters are a
-sequence of (a) lowercase letters, (b) digits 0-9, and/or (c) underscores.
-(The exact regex is \verb{^[a-z][0-9a-z_]*$}.)
-\item has an integer for \code{redcap_repeat_instance}, if the column is present.
+\item \code{validate_repeat_instance(d)}:
+\code{d} has an integer for \code{redcap_repeat_instance}, if the column is present.
+\item \code{validate_uniqueness(d, record_id_name = record_id_name)}:
+\code{d} does not contain multiple rows with duplicate values of
+\code{record_id},
+\code{redcap_event_name},
+\code{redcap_repeat_instrument}, and
+\code{redcap_repeat_instance}
+(depending on the longitudinal & repeating structure of the project).
+
+Technically duplicate rows are not errors,
+but we feel that this will almost always be unintentional,
+and lead to an irrecoverable corruption of the data.
 }
 
 If you encounter additional types of problems when attempting to write to
@@ -116,7 +135,7 @@ d3 <- tibble::tribble(
   ~record_id, ~redcap_event_name, ~redcap_repeat_instrument, ~redcap_repeat_instance,
   1L, "e1", "i1", 1L,
   1L, "e1", "i1", 3L,
-  1L, "e1", "i1", 3L,
+  1L, "e1", "i1", 3L, # Notice this duplicates the row above
 )
 # validate_uniqueness(d3)
 # Throws error:
