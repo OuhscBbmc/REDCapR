@@ -10,13 +10,15 @@
 #' validate_uniqueness
 #'
 #' @usage
-#' validate_for_write( d, convert_logical_to_integer )
+#' validate_for_write( d, convert_logical_to_integer, record_id_name )
 #'
 #' validate_data_frame_inherits( d )
 #'
 #' validate_no_logical( d, stop_on_error )
 #'
 #' validate_field_names( d, stop_on_error = FALSE )
+#'
+#' validate_record_id_name( d, record_id_name = "record_id", stop_on_error = FALSE )
 #'
 #' validate_repeat_instance( d, stop_on_error )
 #'
@@ -207,6 +209,39 @@ validate_field_names <- function(d, stop_on_error = FALSE) {
 }
 
 #' @export
+validate_record_id_name <- function (
+  d,
+  record_id_name              = "record_id",
+  stop_on_error               = FALSE
+) {
+  checkmate::assert_data_frame(d)
+  checkmate::assert_character(record_id_name, len = 1L, any.missing = FALSE, min.chars = 1L)
+  checkmate::assert_logical(stop_on_error, any.missing = FALSE, len = 1)
+
+  record_id_found <- (record_id_name %in% colnames(d))
+
+  if (record_id_found) {
+    tibble::tibble(
+      field_name         = character(0),
+      field_index        = character(0),
+      concern            = character(0),
+      suggestion         = character(0)
+    )
+  } else if (stop_on_error) {
+    "The field called `%s` is not found in the dataset.\nAdjust the value passed to the `record_id_name` if this isn't the correct named used by your specific REDCap project." |>
+      sprintf(record_id_name) |>
+      stop()
+  } else {
+    tibble::tibble(
+      field_name         = record_id_name,
+      field_index        = NA_character_,
+      concern            = "The field is not found in the dataset.",
+      suggestion         = "Adjust the value passed to the `record_id_name` if this isn't the correct named used by your specific REDCap project."
+    )
+  }
+}
+
+#' @export
 validate_repeat_instance <- function(d, stop_on_error = FALSE) {
   checkmate::assert_data_frame(d)
   checkmate::assert_logical(stop_on_error, any.missing = FALSE, len = 1)
@@ -248,6 +283,7 @@ validate_repeat_instance <- function(d, stop_on_error = FALSE) {
 #' @export
 validate_uniqueness <- function(d, record_id_name = "record_id", stop_on_error = FALSE) {
   checkmate::assert_data_frame(d)
+  checkmate::assert_character(record_id_name, len = 1L, any.missing = FALSE, min.chars = 1L)
 
   count_of_records <- NULL
   plumbing  <- c(record_id_name, "redcap_event_name", "redcap_repeat_instrument", "redcap_repeat_instance")
@@ -304,15 +340,18 @@ validate_uniqueness <- function(d, record_id_name = "record_id", stop_on_error =
 #' @export
 validate_for_write <- function(
   d,
-  convert_logical_to_integer = FALSE
+  convert_logical_to_integer  = FALSE,
+  record_id_name              = "record_id"
 ) {
   # checkmate::assert_data_frame(d, any.missing = TRUE, null.ok = FALSE)
   checkmate::assert_logical(convert_logical_to_integer, any.missing = FALSE, len = 1)
+  checkmate::assert_character(record_id_name, len = 1L, any.missing = FALSE, min.chars = 1L)
 
   lst_concerns <- list(
     validate_data_frame_inherits(d),
     validate_field_names(d),
-    validate_uniqueness(d),
+    validate_record_id_name(d),
+    validate_uniqueness(d, record_id_name = record_id_name),
     validate_repeat_instance(d)
   )
 
