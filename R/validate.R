@@ -207,6 +207,25 @@ validate_field_names <- function(d, stop_on_error = FALSE) {
   }
 }
 
+# Intentionally not exported
+assert_field_names <- function(field_names) {
+  checkmate::assert_character(field_names, any.missing=FALSE, null.ok=TRUE, min.len=1, min.chars=1)
+  pattern <- "^[a-z][0-9a-z_]*$"
+
+  bad_names <- grep(pattern, x = field_names, perl = TRUE, invert = TRUE)
+
+  if (0L < length(bad_names)) {
+    paste(
+      "%i field name(s) violated the naming rules.  Only digits, lowercase ",
+      "letters, and underscores are allowed.  The variable must start with ",
+      "a letter.  The bad names are {%s}.",
+      collapse = ""
+    ) %>%
+    sprintf(length(bad_names), paste(bad_names, collapse = ", ")) %>%
+    stop()
+  }
+}
+
 #' @export
 validate_record_id_name <- function (
   d,

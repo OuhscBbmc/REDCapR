@@ -37,3 +37,17 @@ test_that("validate_field_names -concern dataset", {
   expect_equal(object=ds$field_name, expected="bad_Uppercase")
   expect_equal(object=ds$field_index, expected="3")
 })
+
+
+test_that("assert_field_names -good", {
+  expect_no_condition(
+    assert_field_names(colnames(ds_good))
+  )
+})
+
+test_that("assert_field_names -bad", {
+  expect_error(
+    assert_field_names(colnames(ds_bad)),
+    "1 field name\\(s\\) violated the naming rules\\."
+  )
+})

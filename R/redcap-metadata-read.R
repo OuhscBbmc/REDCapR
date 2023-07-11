@@ -89,7 +89,7 @@ redcap_metadata_read <- function(
   checkmate::assert_character(redcap_uri  , any.missing=FALSE, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token       , any.missing=FALSE, len=1, pattern="^.{1,}$")
 
-  validate_field_names(fields, stop_on_error = TRUE)
+  assert_field_names(fields)
 
   token               <- sanitize_token(token)
   fields_collapsed    <- collapse_vector(fields)
