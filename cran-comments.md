@@ -11,8 +11,8 @@ Test environments
 1. Local Ubuntu, R 4.2.2
 2. Local Win11, R 4.3.1 patched
 3. R-hub
-    1. [Ubuntu Linux, R-release, GCC](https://builder.r-hub.io/status/REDCapR_1.1.9005.tar.gz-aa1d5ab8d07d453db1f07927d1ad23f4)
-    2. [Fedora Linux, R-devel, clang, gfortran](https://builder.r-hub.io/status/REDCapR_1.1.9005.tar.gz-a56bc6477bbb48d2a4aa5d1872481dac)
+    1. [Ubuntu Linux, R-release, GCC](https://builder.r-hub.io/status/REDCapR_1.1.9005.tar.gz-ca31dc0eef2e4d6f82ea439a64125d94)
+    2. [Fedora Linux, R-devel, clang, gfortran](https://builder.r-hub.io/status/REDCapR_1.1.9005.tar.gz-04e47bc289634445aeafd374a16db8d3)
     3. [Windows Server](https://builder.r-hub.io/status/REDCapR_1.1.9005.tar.gz-a8833d5bd66847c38c3890470eb2d97a)
 4. [win-builder](https://win-builder.r-project.org/BS3KTA59FLDi/), development version.
 5. [GiHub Actions](https://github.com/OuhscBbmc/REDCapR/actions), Ubuntu 22.04 LTS
@@ -22,13 +22,7 @@ R CMD check results
 
 * No ERRORs or WARNINGs on any builds.
 
-* A NOTE is returned for a few websites.  All are accessible by browser.
-  * <https://community.projectredcap.org> is a site accessible only to REDCap administrators
-  * <https://grantome.com/grant/NIH/P01-AG043362>
-  * <https://grantome.com/grant/NIH/U54-GM104938>
-  * <https://taggs.hhs.gov/Detail/AwardDetail?arg_AwardNum=U54GM104938&arg_ProgOfficeCode=127>
-
-* There is twos NOTEs across the R-hub builds:
+* There are two NOTEs across the R-hub builds:
 
   ```txt
   * checking for detritus in the temp directory ... NOTE
