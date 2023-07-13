@@ -28,6 +28,7 @@ gp <-
 goodpractice::results(gp)
 gp
 # If necessary: tinytex::tlmgr_install("makeindex")
+BiocCheck::BiocCheck()
 
 devtools::document()
 pkgdown::clean_site()
