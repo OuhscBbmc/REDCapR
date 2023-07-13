@@ -314,3 +314,19 @@ This vignette was originally designed for a 2021 R/Medicine REDCap workshop with
 and [Kenneth McLean](https://orcid.org/0000-0001-6482-9086).
 
 This work was made possible in part by the NIH grant [U54GM104938](https://taggs.hhs.gov/Detail/AwardDetail?arg_AwardNum=U54GM104938&arg_ProgOfficeCode=127) to the [Oklahoma Shared Clinical and Translational Resource)](http://osctr.ouhsc.edu).
+
+Session Information
+==================================================================
+
+For the sake of documentation and reproducibility, the current report was rendered in the following environment.  Click the line below to expand.
+
+<details>
+  <summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary>
+```{r session-info, echo=FALSE}
+if (requireNamespace("sessioninfo", quietly = TRUE)) {
+  sessioninfo::session_info()
+} else {
+  sessionInfo()
+}
+```
+</details>
