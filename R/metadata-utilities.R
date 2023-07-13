@@ -114,7 +114,7 @@ regex_named_captures <- function(pattern, text, perl = TRUE) {
 checkbox_choices <- function(select_choices) {
   checkmate::assert_character(select_choices, any.missing=FALSE, len=1, min.chars=1)
 
-  pattern_checkboxes <- "(?<=\\A| \\| )(?<id>\\d{1,}), (?<label>[^|]{1,})(?= \\| |\\Z)"
+  pattern_checkboxes <- "(?<=\\A| \\| |\\| )(?<id>\\d{1,}), (?<label>[^|]{1,}?)(?= \\| |\\| |\\Z)"
 
   regex_named_captures(pattern = pattern_checkboxes, text = select_choices)
 }
