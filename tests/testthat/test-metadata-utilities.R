@@ -53,3 +53,37 @@ test_that("checkbox choices with special characters", {
   expect_equal(ds_boxes, expected=ds_expected, label="The returned data.frame should be correct")
   expect_s3_class(ds_boxes, "tbl")
 })
+
+###############################################################################
+# Test case where a leading space in front of a checkbox option results in the
+# choices string missing a space.
+#
+# Options set in REDCap, note leading space on option 3
+# 1, Depressive mood disorder
+# 2, Adjustment disorder
+#  3, Personality disorder
+# 4, Anxiety
+# 0, Not Noted
+#
+# Previous behavior would result in options 2 and 3 being omitted from the
+# choices.
+#
+# Seen specifically in REDCap 13.7.5 but likely the same behavior in other
+# REDCap versions
+###############################################################################
+test_that("checkbox choices with errant space", {
+  choices_1 <- "1, Depressive mood disorder | 2, Adjustment disorder| 3, Personality disorder | 4, Anxiety | 0, Not Noted"
+  ds_boxes <- checkbox_choices(select_choices=choices_1)
+
+  ds_expected <- structure(
+    list(
+      id = c("1", "2", "3", "4", "0"),
+      label = c("Depressive mood disorder", "Adjustment disorder", "Personality disorder", "Anxiety", "Not Noted")
+    ),
+    class = c("tbl_df", "tbl", "data.frame"),
+    row.names = c(NA, -5L)
+  )
+
+  expect_equal(ds_boxes, expected=ds_expected, label="The returned data.frame should be correct")
+  expect_s3_class(ds_boxes, "tbl")
+})
