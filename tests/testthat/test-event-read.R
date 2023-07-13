@@ -13,7 +13,7 @@ retrieve_expected_events <- function(path) {
     event_id           = readr::col_integer()
   )
 
-  full_path |>
+  full_path %>%
     readr::read_csv(col_types = col_types)
 }
 

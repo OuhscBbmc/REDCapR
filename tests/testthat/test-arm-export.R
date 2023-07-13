@@ -9,7 +9,7 @@ read_arms <- function(path) {
     arm_num = readr::col_integer(),
     name    = readr::col_character()
   )
-  full_path |>
+  full_path %>%
     readr::read_csv(col_types = col_types) %>%
     dplyr::select(
       arm_number  = "arm_num",

@@ -48,13 +48,13 @@ test_that("all-test-projects", {
   server_locale <- readr::locale(tz = "America/Chicago")
 
   returned_object <-
-    system.file("misc/example.credentials", package = "REDCapR") |>
+    system.file("misc/example.credentials", package = "REDCapR") %>%
     readr::read_csv(
       comment     = "#",
       col_select  = c(redcap_uri, token),
       col_types   = readr::cols(.default = readr::col_character()),
-    ) |>
-    dplyr::filter(32L == nchar(token)) |>
+    ) %>%
+    dplyr::filter(32L == nchar(token)) %>%
     purrr::pmap_dfr(
       REDCapR::redcap_project_info_read,
       locale  = server_locale,
