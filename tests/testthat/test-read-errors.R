@@ -9,28 +9,16 @@ test_that("One Shot: Bad Uri -Not HTTPS", {
   # expected_message_501 <- "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><hash><error>The requested method is not implemented.</error></hash>"
 
   expect_error(
-    # returned_object <-
-      redcap_read_oneshot(
-        redcap_uri    = "http://bbmc.ouhsc.edu/redcap/api/", # Not HTTPS
-        token         = credential$token
-      )
+    redcap_read_oneshot(
+      redcap_uri    = "http://bbmc.ouhsc.edu/redcap/api/", # Not HTTPS
+      token         = credential$token
+    )
   )
-
-  # expect_equal(returned_object$data, expected=data.frame(), label="An empty data.frame should be returned.")
-  # expect_true(returned_object$status_code %in% c(411L, 501L))
-  # expect_true(returned_object$raw_text %in% c(expected_message_411, expected_message_501))
-  # # expect_equal(returned_object$raw_text, expected=expected_message)
-  # expect_equal(returned_object$records_collapsed, "")
-  # expect_equal(returned_object$fields_collapsed, "")
-  # expect_false(returned_object$success)
 })
 
 test_that("One Shot: Bad Uri -wrong address", {
   testthat::skip_on_cran()
   expected_message <- "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>404 Not Found</title>\n</head><body>\n<h1>Not Found</h1>\n<p>The requested URL was not found on this server.</p>\n</body></html>\n"
-
-  # expected_outcome_message <- "The initial call failed with the code: 404."
-  # expected_outcome_message <- "The requested URL was not found on this server."
 
   returned_object <-
     redcap_read_oneshot(
