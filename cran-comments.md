@@ -1,7 +1,7 @@
 Description
 ===============================================
 
-This submission is primarily to address a recent change in the REDCap server.
+This submission is primarily to address a change in the REDCap server.  A lot of packages additions in the meantime were building up.
 
 Thank you for taking the time to review my submission, and please tell me if there's something else I should do for CRAN.  -Will Beasley
 
@@ -11,10 +11,10 @@ Test environments
 1. Local Ubuntu, R 4.2.2
 2. Local Win11, R 4.3.1 patched
 3. R-hub
-    1. [Ubuntu Linux, R-release, GCC](https://builder.r-hub.io/status/REDCapR_1.1.9005.tar.gz-ca31dc0eef2e4d6f82ea439a64125d94)
-    2. [Fedora Linux, R-devel, clang, gfortran](https://builder.r-hub.io/status/REDCapR_1.1.9005.tar.gz-04e47bc289634445aeafd374a16db8d3)
-    3. [Windows Server](https://builder.r-hub.io/status/REDCapR_1.1.9005.tar.gz-a8833d5bd66847c38c3890470eb2d97a)
-4. [win-builder](https://win-builder.r-project.org/BS3KTA59FLDi/), development version.
+    1. [Ubuntu Linux, R-release, GCC](https://builder.r-hub.io/status/REDCapR_1.1.9005.tar.gz-746e237d11914129b4410114fbfa2c83)
+    2. [Fedora Linux, R-devel, clang, gfortran](https://builder.r-hub.io/status/REDCapR_1.1.9005.tar.gz-e695d8a48601419e8059863cc80964b7)
+    3. [Windows Server](https://builder.r-hub.io/status/REDCapR_1.1.9005.tar.gz-c30d344462dc43a4b03e68a33be664d9)
+4. [win-builder](https://win-builder.r-project.org/0u5J1JiksFZg/), development version.
 5. [GiHub Actions](https://github.com/OuhscBbmc/REDCapR/actions), Ubuntu 22.04 LTS
 
 R CMD check results
@@ -43,8 +43,11 @@ R CMD check results
 Downstream dependencies
 -----------------------------------------------
 
-Packages that depend/import/suggest REDCapR pass checks with `revdepcheck::revdep_check()`.
-I talked to the tidyREDCap developer last month, and he says the problem is unrelated to REDCapR.
+With one exception,
+packages that depend/import/suggest REDCapR pass checks with `revdepcheck::revdep_check()`.
+
+I worked with **tidyREDCap** team and they accepted a PR that fixes the problem:
+<https://github.com/RaymondBalise/tidyREDCap/pull/61>.
 
 package                                  | E        | W        | N
 -------                                  | -        | -        | -

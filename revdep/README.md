@@ -10,7 +10,7 @@
 |collate  |English_United States.utf8                       |
 |ctype    |English_United States.utf8                       |
 |tz       |America/Chicago                                  |
-|date     |2023-07-11                                       |
+|date     |2023-07-14                                       |
 |rstudio  |2023.06.1+524 Mountain Hydrangea (desktop)       |
 |pandoc   |3.1.5 @ C:\PROGRA~1\Pandoc\pandoc.exe            |
 
