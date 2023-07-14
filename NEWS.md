@@ -89,6 +89,7 @@ This will help extract forms from longitudinal & repeating projects.
   * `validate_repeat_instance()`
   * `validate_no_logical()`
 * `redcap_read()` checks the `event` parameter and throws an error if a value is not recognized, or the project is not longitudinal (#493)
+* The regex in `regex_named_captures()` is forgiving if there's an unnecessary leading space (@BlairCooper, #495)
 
 Version 1.1.0 (released 2022-08-10)
 ==========================================================
