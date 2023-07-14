@@ -61,15 +61,15 @@ uri            <- "https://bbmc.ouhsc.edu/redcap/api/"
 token          <- "9A81268476645C4E5F03428B8AC3AA7B"
 post_body      <- list(
   token    = token,
-  content  = 'project',
-  format   = 'csv'
+  content  = "project",
+  format   = "csv"
 )
 \dontrun{
 kernel <- REDCapR:::kernel_api(uri, post_body, config_options)
 
 # Consume the results in a few different ways.
 kernel$result
-read.csv(text=kernel$raw_text)
-as.list(read.csv(text=kernel$raw_text))
+read.csv(text = kernel$raw_text)
+as.list(read.csv(text = kernel$raw_text))
 }
 }
