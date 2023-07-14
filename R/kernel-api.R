@@ -41,16 +41,16 @@
 #' token          <- "9A81268476645C4E5F03428B8AC3AA7B"
 #' post_body      <- list(
 #'   token    = token,
-#'   content  = 'project',
-#'   format   = 'csv'
+#'   content  = "project",
+#'   format   = "csv"
 #' )
 #' \dontrun{
 #' kernel <- REDCapR:::kernel_api(uri, post_body, config_options)
 #'
 #' # Consume the results in a few different ways.
 #' kernel$result
-#' read.csv(text=kernel$raw_text)
-#' as.list(read.csv(text=kernel$raw_text))
+#' read.csv(text = kernel$raw_text)
+#' as.list(read.csv(text = kernel$raw_text))
 #' }
 
 kernel_api <- function(
@@ -83,9 +83,9 @@ kernel_api <- function(
     httr::user_agent("OuhscBbmc/REDCapR")
   )
 
-  status_code           <- response$status
-  success               <- (status_code == 200L)
-  raw_text              <- httr::content(
+  status_code <- response$status
+  success     <- (status_code == 200L)
+  raw_text    <- httr::content(
     x           = response,
     as          = "text",
     encoding    = encoding,     # UTF-8 is the default parameter value
@@ -104,7 +104,7 @@ kernel_api <- function(
     any(grepl(regex_cannot_connect, raw_text)) #||
     # any(grepl(regex_empty         , raw_text))
   ) {
-    success     <- FALSE  # nocov
+    success <- FALSE  # nocov
   }
 
   return(list(
@@ -114,7 +114,6 @@ kernel_api <- function(
     elapsed_seconds     = elapsed_seconds,
     result              = response,
     result_headers      = response$headers,
-
     regex_empty         = regex_empty
   ))
 }

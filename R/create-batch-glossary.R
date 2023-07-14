@@ -71,12 +71,12 @@ create_batch_glossary <- function(row_count, batch_size) {
 
   start_index <- as.integer(base::seq.int(from=1L, to=row_count, by=batch_size))
 
-  ds_batch             <-
+  ds_batch <-
     tibble::tibble(
       id          = seq_along(start_index),
       start_index = start_index
     )
-  ds_batch$stop_index  <-
+  ds_batch$stop_index <-
     base::mapply(
       function(i) {
         base::ifelse(

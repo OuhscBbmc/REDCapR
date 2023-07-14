@@ -23,7 +23,7 @@
 #'
 #' The current constants relate to the 'complete' variable at the
 #' end of each form.
-#' * `form_incomplete`: 0L (*i.e.*, an integer)
+#' * `form_incomplete`: 0L (_i.e._, an integer)
 #' * `form_unverified`: 1L
 #' * `form_complete`: 2L
 #'
