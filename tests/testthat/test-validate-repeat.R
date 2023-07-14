@@ -7,7 +7,7 @@ test_that("validate_repeat_instance: no column", {
 
 test_that("validate_repeat_instance: good", {
   d <-
-    mtcars |>
+    mtcars %>%
     dplyr::mutate(
        redcap_repeat_instance = sample(1:100, size = 32, replace = TRUE)
     )

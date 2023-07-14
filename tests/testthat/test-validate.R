@@ -49,9 +49,9 @@ test_that("not a data.frame", {
 
 # test_that("repeat-instance: good integer", {
 #   d <-
-#     "test-data/vignette-repeating-write/data-block-matrix.csv" |>
-#     system.file(package = "REDCapR") |>
-#     readr::read_csv(show_col_types = FALSE) |>
+#     "test-data/vignette-repeating-write/data-block-matrix.csv" %>%
+#     system.file(package = "REDCapR") %>%
+#     readr::read_csv(show_col_types = FALSE) %>%
 #     dplyr::mutate(
 #       redcap_repeat_instance = as.integer(redcap_repeat_instance),
 #     )
@@ -61,8 +61,8 @@ test_that("not a data.frame", {
 # })
 # test_that("repeat-instance: bad double", {
 #   d <-
-#     "test-data/vignette-repeating-write/data-block-matrix.csv" |>
-#     system.file(package = "REDCapR") |>
+#     "test-data/vignette-repeating-write/data-block-matrix.csv" %>%
+#     system.file(package = "REDCapR") %>%
 #     readr::read_csv(show_col_types = FALSE)
 #
 #   ds_1 <- validate_repeat_instance(d)
@@ -80,8 +80,8 @@ test_that("not a data.frame", {
 #
 # test_that("repeat-instance: bad double -stop on error", {
 #   d <-
-#     "test-data/vignette-repeating-write/data-block-matrix.csv" |>
-#     system.file(package = "REDCapR") |>
+#     "test-data/vignette-repeating-write/data-block-matrix.csv" %>%
+#     system.file(package = "REDCapR") %>%
 #     readr::read_csv(show_col_types = FALSE)
 #
 #   expect_error(

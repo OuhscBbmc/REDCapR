@@ -272,8 +272,8 @@ validate_record_id_name <- function(
       suggestion         = character(0)
     )
   } else if (stop_on_error) {
-    "The field called `%s` is not found in the dataset.\nAdjust the value passed to the `record_id_name` if this isn't the correct named used by your specific REDCap project." |>
-      sprintf(record_id_name) |>
+    "The field called `%s` is not found in the dataset.\nAdjust the value passed to the `record_id_name` if this isn't the correct named used by your specific REDCap project." %>%
+      sprintf(record_id_name) %>%
       stop()
   } else {
     tibble::tibble(
@@ -335,11 +335,11 @@ validate_uniqueness <- function(d, record_id_name = "record_id", stop_on_error =
   variables <- intersect(colnames(d), plumbing)
 
   d_replicates <-
-    d |>
+    d %>%
     dplyr::count(
       !!!rlang::parse_exprs(variables),
       name  = "count_of_records"
-    ) |>
+    ) %>%
     dplyr::filter(1L < count_of_records)
 
   if (nrow(d_replicates) == 0L) {
@@ -359,8 +359,8 @@ validate_uniqueness <- function(d, record_id_name = "record_id", stop_on_error =
         paste(d_replicates, collapse = "\n")  # nocov
       }
 
-    "There are %i record(s) that violate the uniqueness requirement:\n%s" |>
-      sprintf(nrow(d_replicates), m) |>
+    "There are %i record(s) that violate the uniqueness requirement:\n%s" %>%
+      sprintf(nrow(d_replicates), m) %>%
       stop()
   } else {
     indices <- paste(which(colnames(d) == variables), collapse = ", ")

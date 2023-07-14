@@ -306,7 +306,7 @@ redcap_metadata_internal <- function(
 
   if (is.na(d_proj$has_repeating_instruments_or_events[1])) { # nocov start
     # Don't test coverage for this block b/c it only executes for old versions of REDCap
-    stop(
+    error_message <-
       sprintf(
         paste(
           "The REDCap instance at %s failed to report if the",
@@ -314,7 +314,7 @@ redcap_metadata_internal <- function(
         ),
         redcap_uri
       )
-    )
+    stop(error_message)
   } # nocov end
 
   if (d_proj$has_repeating_instruments_or_events[1]) {

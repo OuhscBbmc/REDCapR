@@ -4,8 +4,6 @@ options(device = deviceType) #https://support.rstudio.org/help/discussions/probl
 
 spelling::spell_check_package()
 # spelling::update_wordlist()
-lintr::lint_package()
-# lintr::lint("R/redcap-metadata-coltypes.R")
 urlchecker::url_check(); urlchecker::url_update()
 
 devtools::document()
@@ -13,6 +11,8 @@ devtools::check_man() #Should return NULL
 devtools::clean_vignettes()
 devtools::build_vignettes()
 
+lintr::lint_package()
+# lintr::lint("R/redcap-metadata-coltypes.R")
 checks_to_exclude <- c(
   "covr",
   "cyclocomp",
@@ -28,6 +28,9 @@ gp <-
 goodpractice::results(gp)
 gp
 # If necessary: tinytex::tlmgr_install("makeindex")
+BiocCheck::BiocCheck()
+# styler::style_pkg()
+# styler::style_file("R/redcap-read-oneshot.R")
 
 devtools::document()
 pkgdown::clean_site()
@@ -39,10 +42,9 @@ devtools::run_examples(); #dev.off() #This overwrites the NAMESPACE file too
 # devtools::run_examples(, "redcap_read.Rd")
 # pkgload::load_all()
 test_results_checked <- devtools::test()
-test_results_checked <- devtools::test(filter = "read-batch-survey")
 test_results_checked <- devtools::test(filter = "^validate")
-withr::local_envvar(ONLYREADTESTS = "true")
-test_results_checked <- devtools::test(filter = "write-batch")
+# withr::local_envvar(ONLYREADTESTS = "true")
+# test_results_checked <- devtools::test(filter = "write-batch")
 
 # testthat::test_dir("./tests/")
 test_results_not_checked <- testthat::test_dir("./tests/manual/")
@@ -54,6 +56,7 @@ devtools::check( # Equivalent of R-hub
   remote    = TRUE,
   incoming  = TRUE
 )
+rhub::list_validated_emails(); # rhub::validate_email()
 rhub::check_for_cran(email="wibeasley@hotmail.com")
 # devtools::check_win_devel() # CRAN submission policies encourage the development version
 # revdepcheck::revdep_check(num_workers = 4)
