@@ -137,8 +137,8 @@ It guarantees the value can always be used in <code><a href="https://rdrr.io/r/u
 <span class="r-in"><span><span class="va">token</span>          <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span></span>
 <span class="r-in"><span><span class="va">post_body</span>      <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  token    <span class="op">=</span> <span class="va">token</span>,</span></span>
-<span class="r-in"><span>  content  <span class="op">=</span> <span class="st">'project'</span>,</span></span>
-<span class="r-in"><span>  format   <span class="op">=</span> <span class="st">'csv'</span></span></span>
+<span class="r-in"><span>  content  <span class="op">=</span> <span class="st">"project"</span>,</span></span>
+<span class="r-in"><span>  format   <span class="op">=</span> <span class="st">"csv"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="va">kernel</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">:::</span><span class="fu">kernel_api</span><span class="op">(</span><span class="va">uri</span>, <span class="va">post_body</span>, <span class="va">config_options</span><span class="op">)</span></span></span>
@@ -146,13 +146,13 @@ It guarantees the value can always be used in <code><a href="https://rdrr.io/r/u
 <span class="r-in"><span><span class="co"># Consume the results in a few different ways.</span></span></span>
 <span class="r-in"><span><span class="va">kernel</span><span class="op">$</span><span class="va">result</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Response [https://bbmc.ouhsc.edu/redcap/api/]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Date: 2023-07-11 23:02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Date: 2023-07-14 22:07</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Status: 200</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Content-Type: text/csv; charset=utf-8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Size: 717 B</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> project_id,project_title,creation_time,production_time,in_production,project_...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 153,"REDCapR Target Simple Static -see https://github.com/OuhscBbmc/REDCapR",...</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span>text<span class="op">=</span><span class="va">kernel</span><span class="op">$</span><span class="va">raw_text</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span>text <span class="op">=</span> <span class="va">kernel</span><span class="op">$</span><span class="va">raw_text</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   project_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1        153</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                            project_title</span>
@@ -173,7 +173,7 @@ It guarantees the value can always be used in <code><a href="https://rdrr.io/r/u
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 cross_project_piping,form_status_tweaks,redcap_autofill,data_driven_project_banner</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   bypass_branching_erase_field_prompt</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                                   0</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span>text<span class="op">=</span><span class="va">kernel</span><span class="op">$</span><span class="va">raw_text</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span>text <span class="op">=</span> <span class="va">kernel</span><span class="op">$</span><span class="va">raw_text</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $project_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 153</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
