@@ -19,21 +19,60 @@ test_that("Named Captures", {
   expect_s3_class(ds_boxes, "tbl")
 })
 
-test_that("checkbox choices", {
-  choices_1 <- "1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported"
-  ds_boxes <- checkbox_choices(select_choices=choices_1)
+test_that("checkbox choices -digits", {
+  ds_expected <-
+    tibble::tribble(
+      ~id,                                      ~label,
+      "1",             "American Indian/Alaska Native",
+      "-2",                                    "Asian",
+      "3", "Native Hawaiian or Other Pacific Islander",
+      "4",                 "Black or African American",
+      "5",                                     "White",
+      "66",                   "Unknown / Not Reported"
+    )
 
-  ds_expected <- structure(
-    list(
-      id = c("1", "2", "3", "4", "5", "6"),
-      label = c("American Indian/Alaska Native", "Asian", "Native Hawaiian or Other Pacific Islander", "Black or African American", "White", "Unknown / Not Reported")
-    ),
-    class = c("tbl_df", "tbl", "data.frame"),
-    row.names = c(NA, -6L)
-  )
+  # well-behaved
+  "1, American Indian/Alaska Native | -2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 66, Unknown / Not Reported" |>
+    checkbox_choices() |>
+    expect_equal(ds_expected, label = "well-behaved:")
 
-  expect_equal(ds_boxes, expected=ds_expected, label="The returned data.frame should be correct") #dput(ds_boxes)
-  expect_s3_class(ds_boxes, "tbl")
+  # no leading spaces
+  "1, American Indian/Alaska Native |-2, Asian |3, Native Hawaiian or Other Pacific Islander |4, Black or African American |5, White |66, Unknown / Not Reported" |>
+    checkbox_choices() |>
+    expect_equal(ds_expected, label = "no leading spaces:")
+
+  # no trailing spaces
+  "1, American Indian/Alaska Native| -2, Asian| 3, Native Hawaiian or Other Pacific Islander| 4, Black or African American| 5, White| 66, Unknown / Not Reported" |>
+    checkbox_choices() |>
+    expect_equal(ds_expected, label = "no trailing spaces:")
+})
+
+test_that("checkbox choices -letters", {
+  ds_expected <-
+    tibble::tribble(
+      ~id,                                      ~label,
+      "a",             "American Indian/Alaska Native",
+      "b",                                     "Asian",
+      "c", "Native Hawaiian or Other Pacific Islander",
+      "dd",                "Black or African American",
+      "eee",                                   "White",
+      "f",                    "Unknown / Not Reported"
+    )
+
+  # well-behaved
+  "a, American Indian/Alaska Native | b, Asian | c, Native Hawaiian or Other Pacific Islander | dd, Black or African American | eee, White | f, Unknown / Not Reported" |>
+    checkbox_choices() |>
+    expect_equal(ds_expected, label = "well-behaved:")
+
+  # no leading spaces
+  "a, American Indian/Alaska Native |b, Asian |c, Native Hawaiian or Other Pacific Islander |dd, Black or African American |eee, White |f, Unknown / Not Reported" |>
+    checkbox_choices() |>
+    expect_equal(ds_expected, label = "no leading spaces:")
+
+  # no trailing spaces
+  "a, American Indian/Alaska Native| b, Asian| c, Native Hawaiian or Other Pacific Islander| dd, Black or African American| eee, White| f, Unknown / Not Reported" |>
+    checkbox_choices() |>
+    expect_equal(ds_expected, label = "no trailing spaces:")
 })
 
 
