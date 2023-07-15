@@ -79,9 +79,6 @@ test_that("checkbox choices -letters", {
 
 
 test_that("checkbox choices with special characters", {
-
-  ds_boxes <- checkbox_choices(select_choices=choices_1)
-
   ds_expected <- # datapasta::tribble_paste(ds_expected)
     tibble::tribble(
       ~id,       ~label,
