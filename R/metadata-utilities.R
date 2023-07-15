@@ -82,6 +82,7 @@
 #' choices_3  <- ds_metadata_3[ds_metadata_3$field_name=="race", "select_choices_or_calculations"]
 #' REDCapR::regex_named_captures(pattern = pattern_boxes, text = choices_3)
 
+#' @importFrom magrittr %>%
 #' @export
 regex_named_captures <- function(pattern, text, perl = TRUE) {
   checkmate::assert_character(pattern, any.missing = FALSE, len = 1, min.chars = 0L)
@@ -114,8 +115,10 @@ regex_named_captures <- function(pattern, text, perl = TRUE) {
 checkbox_choices <- function(select_choices) {
   checkmate::assert_character(select_choices, any.missing=FALSE, len=1, min.chars=1)
 
-  strsplit(select_choices, split = "|", fixed = TRUE)[[1]] |>
-    I() |>
+  select_choices %>%
+    strsplit(split = "|", fixed = TRUE) %>%
+    magrittr::extract2(1) %>%
+    I() %>%
     readr::read_csv(
       col_names = c("id", "label"),
       col_types = "cc"
