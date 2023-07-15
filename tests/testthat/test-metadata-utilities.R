@@ -47,6 +47,11 @@ test_that("checkbox choices -digits", {
   "1, American Indian/Alaska Native| -2, Asian| 3, Native Hawaiian or Other Pacific Islander| 4, Black or African American| 5, White| 66, Unknown / Not Reported" |>
     checkbox_choices() |>
     expect_equal(ds_expected, label = "no trailing spaces:")
+
+  # extra lines
+  "| | 1, American Indian/Alaska Native | | | -2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 66, Unknown / Not Reported | | | " |>
+    checkbox_choices() |>
+    expect_equal(ds_expected, label = "extra lines:")
 })
 
 test_that("checkbox choices -letters", {
