@@ -111,18 +111,25 @@ regex_named_captures <- function(pattern, text, perl = TRUE) {
 }
 
 #' @rdname metadata_utilities
+#' @importFrom rlang .data
 #' @export
 checkbox_choices <- function(select_choices) {
   checkmate::assert_character(select_choices, any.missing=FALSE, len=1, min.chars=1)
 
+  pattern <- "^(.+?),\\s*+(.*)$"
+
   select_choices %>%
     strsplit(split = "|", fixed = TRUE) %>%
     magrittr::extract2(1) %>%
-    I() %>%
-    readr::read_csv(
-      col_names = c("id", "label"),
-      col_types = "cc"
+    base::trimws() %>%
+    tibble::as_tibble() %>% # default column name is `value`
+    dplyr::filter(.data$value != "") %>%
+    dplyr::transmute(
+      id    = sub(pattern, "\\1", .data$value, perl = TRUE),
+      label = sub(pattern, "\\2", .data$value, perl = TRUE),
     )
+
   # pattern_checkboxes <- "(?<=\\A| \\| |\\| )(?<id>\\d{1,}), (?<label>[^|]{1,}?)(?= \\| |\\| |\\Z)"
+  # pattern_checkboxes <- "(?<=\\A| \\| |\\| | \\|)(?<id>\\d{1,}), ?(?<label>[^|]{1,}?)(?= \\| |\\| | \\||\\Z)"
   # regex_named_captures(pattern = pattern_checkboxes, text = select_choices)
 }
