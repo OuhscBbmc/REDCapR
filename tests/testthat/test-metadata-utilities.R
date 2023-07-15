@@ -87,3 +87,68 @@ test_that("checkbox choices with errant space", {
   expect_equal(ds_boxes, expected=ds_expected, label="The returned data.frame should be correct")
   expect_s3_class(ds_boxes, "tbl")
 })
+
+###############################################################################
+# Test case where a trailing newline at the end of checkbox options results in
+# the choices string containing a blank option at the end.
+#
+# Options set in REDCap, note leading space on option 3
+# 1, PCM
+# 2, NCM
+# 3, BH
+# 4, OPT
+# (blank line here)
+#
+# Previous behavior would result in option 4 missing.
+#
+# Seen specifically in REDCap 13.7.5 but likely the same behavior in other
+# REDCap versions
+###############################################################################
+test_that("checkbox choices with errant newline at end", {
+  choices_1 <- "1, PCM | 2, NCM | 3, BH | 4, OPT |"
+  ds_boxes <- checkbox_choices(select_choices=choices_1)
+
+  ds_expected <- structure(
+    list(
+      id = c("1", "2", "3", "4"),
+      label = c("PCM", "NCM", "BH", "OPT")
+    ),
+    class = c("tbl_df", "tbl", "data.frame"),
+    row.names = c(NA, -4L)
+  )
+
+  expect_equal(ds_boxes, expected=ds_expected, label="The returned data.frame should be correct")
+  expect_s3_class(ds_boxes, "tbl")
+})
+
+###############################################################################
+# Test case where missing space after the comma results in the option being
+# omitted.
+#
+# Options set in REDCap, note missing space on option 2
+# 1, 1
+# 2,2
+# 3, 3
+# 4, 4
+#
+# Previous behavior would result in option 2 missing.
+#
+# Seen specifically in REDCap 13.7.5 but likely the same behavior in other
+# REDCap versions
+###############################################################################
+test_that("checkbox choices with missing space after comma", {
+  choices_1 <- "1, 1 | 2,2 | 3, 3 | 4, 4"
+  ds_boxes <- checkbox_choices(select_choices=choices_1)
+
+  ds_expected <- structure(
+    list(
+      id = c("1", "2", "3", "4"),
+      label = c("1", "2", "3", "4")
+    ),
+    class = c("tbl_df", "tbl", "data.frame"),
+    row.names = c(NA, -4L)
+  )
+
+  expect_equal(ds_boxes, expected=ds_expected, label="The returned data.frame should be correct")
+  expect_s3_class(ds_boxes, "tbl")
+})

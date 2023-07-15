@@ -114,7 +114,25 @@ regex_named_captures <- function(pattern, text, perl = TRUE) {
 checkbox_choices <- function(select_choices) {
   checkmate::assert_character(select_choices, any.missing=FALSE, len=1, min.chars=1)
 
-  pattern_checkboxes <- "(?<=\\A| \\| |\\| )(?<id>\\d{1,}), (?<label>[^|]{1,}?)(?= \\| |\\| |\\Z)"
+  # Pattern consists of four capture groups:
+  # (?<=\\A| \\| |\\| | \\|) :
+  #     At the start of a string (\A) OR
+  #     A space, a pipe and a space ( \| ) OR
+  #     A pipe and a space (\| ) OR
+  #     A space and a pipe ( \|)
+  # (?<id>\\d{1,}) :
+  #     A named (id) capture of one or more decimals
+  # , ? :
+  #     A comma followed by 0 or more spaces
+  # (?<label>[^|]{1,}?) :
+  #     A named (label) capture one or more characters that aren't a pipe
+  #     (lazily captured to avoid grabbing a space a the end)
+  # (?= \\| |\\| | \\||\\Z)
+  #     A space, a pipe and a space ( \| ) OR
+  #     A pipe and a space (\| ) OR
+  #     A space and a pipe ( \|) OR
+  #     At the end of a string (\Z)
+  pattern_checkboxes <- "(?<=\\A| \\| |\\| | \\|)(?<id>\\d{1,}), ?(?<label>[^|]{1,}?)(?= \\| |\\| | \\||\\Z)"
 
   regex_named_captures(pattern = pattern_checkboxes, text = select_choices)
 }
