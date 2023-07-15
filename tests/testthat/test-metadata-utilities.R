@@ -110,6 +110,37 @@ test_that("checkbox choices -commas in labels", {
     expect_equal(ds_expected, label = "no trailing spaces:")
 })
 
+test_that("checkbox choices -digits only", {
+  ds_expected <- # datapasta::tribble_paste(ds_expected)
+    tibble::tribble(
+      ~id   , ~label,
+      "1"   , "1",
+      "2"   , "2",
+      "3"   , "3",
+      "4"   , "4"
+    )
+
+  # well-behaved
+  "1, 1 | 2, 2 | 3, 3 | 4, 4" |>
+    checkbox_choices() |>
+    expect_equal(ds_expected, label = "well-behaved:")
+
+  # missing leading space
+  "1, 1 | 2,2 | 3, 3 | 4, 4" |>
+    checkbox_choices() |>
+    expect_equal(ds_expected, label = "missing leading space:")
+
+  # missing trailing spaces
+  "1, 1 | 2, 2| 3, 3| 4, 4" |>
+    checkbox_choices() |>
+    expect_equal(ds_expected, label = "no leading spaces:")
+
+  # extra lines
+  "|1, 1 | 2, 2 | 3, 3 || 4, 4| |" |>
+    checkbox_choices() |>
+    expect_equal(ds_expected, label = "well-behaved:")
+})
+
 test_that("checkbox choices with special characters", {
   ds_expected <- # datapasta::tribble_paste(ds_expected)
     tibble::tribble(
