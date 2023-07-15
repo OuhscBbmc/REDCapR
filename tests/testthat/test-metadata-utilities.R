@@ -82,6 +82,33 @@ test_that("checkbox choices -letters", {
     expect_equal(ds_expected, label = "no trailing spaces:")
 })
 
+test_that("checkbox choices -commas in labels", {
+  ds_expected <- # datapasta::tribble_paste(ds_expected)
+    tibble::tribble(
+      ~id   , ~label,
+      "a"   , "American Indian, Native American, or Alaska Native",
+      "b"   , "Asian",
+      "c"   , "Native Hawaiian, Samoan, or Other Pacific Islander",
+      "dd"  , "Black or African American",
+      "eee" , "White",
+      "f"   , "Unknown / Not Reported"
+    )
+
+  # well-behaved
+  "a, American Indian, Native American, or Alaska Native | b, Asian | c, Native Hawaiian, Samoan, or Other Pacific Islander | dd, Black or African American | eee, White | f, Unknown / Not Reported" |>
+    checkbox_choices() |>
+    expect_equal(ds_expected, label = "well-behaved:")
+
+  # no leading spaces
+  "a, American Indian, Native American, or Alaska Native |b, Asian |c, Native Hawaiian, Samoan, or Other Pacific Islander |dd, Black or African American |eee, White |f, Unknown / Not Reported" |>
+    checkbox_choices() |>
+    expect_equal(ds_expected, label = "no leading spaces:")
+
+  # no trailing spaces
+  "a, American Indian, Native American, or Alaska Native| b, Asian| c, Native Hawaiian, Samoan, or Other Pacific Islander| dd, Black or African American| eee, White| f, Unknown / Not Reported" |>
+    checkbox_choices() |>
+    expect_equal(ds_expected, label = "no trailing spaces:")
+})
 
 test_that("checkbox choices with special characters", {
   ds_expected <- # datapasta::tribble_paste(ds_expected)
