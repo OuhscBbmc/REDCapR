@@ -11,10 +11,10 @@ Test environments
 1. Local Ubuntu, R 4.2.2
 2. Local Win11, R 4.3.1 patched
 3. R-hub
-    1. [Ubuntu Linux, R-release, GCC](https://builder.r-hub.io/status/REDCapR_1.1.9005.tar.gz-746e237d11914129b4410114fbfa2c83)
-    2. [Fedora Linux, R-devel, clang, gfortran](https://builder.r-hub.io/status/REDCapR_1.1.9005.tar.gz-e695d8a48601419e8059863cc80964b7)
-    3. [Windows Server](https://builder.r-hub.io/status/REDCapR_1.1.9005.tar.gz-c30d344462dc43a4b03e68a33be664d9)
-4. [win-builder](https://win-builder.r-project.org/0u5J1JiksFZg/), development version.
+    1. [Ubuntu Linux, R-release, GCC](https://builder.r-hub.io/status/REDCapR_1.1.9005.tar.gz-6f45462d131a4ac49833c0c7c014bad0)
+    2. [Fedora Linux, R-devel, clang, gfortran](https://builder.r-hub.io/status/REDCapR_1.1.9005.tar.gz-2e9560e6fcdb4467af8e9ea8d22c165d)
+    3. [Windows Server](https://builder.r-hub.io/status/REDCapR_1.1.9005.tar.gz-3ec1ed8fac734d24a16cc5ecf238cf47)
+4. [win-builder](https://win-builder.r-project.org/N3n87tj2ky0v/), development version.
 5. [GiHub Actions](https://github.com/OuhscBbmc/REDCapR/actions), Ubuntu 22.04 LTS
 
 R CMD check results
