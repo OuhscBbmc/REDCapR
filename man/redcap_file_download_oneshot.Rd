@@ -14,7 +14,6 @@ redcap_file_download_oneshot(
   record,
   field,
   event = "",
-  repeat_instrument = NULL,
   repeat_instance = NULL,
   verbose = TRUE,
   config_options = NULL,
@@ -47,10 +46,6 @@ project.  Required.}
 Required}
 
 \item{event}{The name of the event where the file is saved in REDCap.
-Optional}
-
-\item{repeat_instrument}{The name of the instrument that is repeating
-for a given event.
 Optional}
 
 \item{repeat_instance}{(only for projects with repeating instruments/events)
