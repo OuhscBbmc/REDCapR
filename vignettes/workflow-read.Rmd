@@ -333,11 +333,12 @@ REDCapR::redcap_read(
 )$data
 ```
 
-
 Specify Everything is a Character
 -------------------------
 
-REDCap internally stores every value as a string.  To accept full responsibility of the data types, tell [`readr::cols()`](https://readr.tidyverse.org/reference/cols.html) to keep them as strings.
+REDCap internally stores every value as a string.
+To accept full responsibility of the data types, tell
+[`readr::cols()`](https://readr.tidyverse.org/reference/cols.html) to keep them as strings.
 
 ```{r col_types-string}
 # Specify the column types.
@@ -352,37 +353,55 @@ REDCapR::redcap_read(
 )$data
 ```
 
-
 Part 6 - Next Steps
 ===================================
 
 Other REDCapR Resources
 -------------------------
 
-In addition to documentation [for each function](https://ouhscbbmc.github.io/REDCapR/reference/) the REDCapR package contains a handful of [vignettes](https://ouhscbbmc.github.io/REDCapR/articles/) including a [troubleshooting guide](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html).
+In addition to documentation
+[for each function](https://ouhscbbmc.github.io/REDCapR/reference/)
+the REDCapR package contains a handful of
+[vignettes](https://ouhscbbmc.github.io/REDCapR/articles/) including a
+[troubleshooting guide](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html).
 
 Create an Arch for Reuse
 -------------------------
 
-When multiple R files use REDCapR call the same REDCap dataset, consider refactoring your scripts so that extraction code is written once, and called by the multiple analysis files.  This "arch" pattern is described in slides 9-16 of the 2014 [REDCapCon](https://projectredcap.org/about/redcapcon/) presentation, [Literate Programming Patterns and Practices for Continuous Quality Improvement (CQI)](
-https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/Publications/Presentation-2014-09-REDCapCon/LiterateProgrammingPatternsAndPracticesWithREDCap.pptx).
+When multiple R files use REDCapR call the same REDCap dataset,
+consider refactoring your scripts so that extraction code is written once,
+and called by the multiple analysis files.
+This "arch" pattern is described in slides 9-16 of the 2014 [REDCapCon](https://projectredcap.org/about/redcapcon/) presentation,
+[Literate Programming Patterns and Practices for Continuous Quality Improvement (CQI)](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/Publications/Presentation-2014-09-REDCapCon/LiterateProgrammingPatternsAndPracticesWithREDCap.pptx).
 
 Downstream Reproducible Reports
 -------------------------
 
-Once the dataset is in R, take advantage of all the reproducible research tools available.  Tomorrow, [R/Medicine](https://events.linuxfoundation.org/r-medicine/) has a workshop on this topic using the exciting new [Quarto](https://quarto.org/) program that's similar to R Markdown.  Also see the relevant [R/Medicine 2020 presentation videos](https://www.youtube.com/playlist?list=PL4IzsxWztPdljYo7uE5G_R2PtYw3fUReo).  And of course, [any book by Yihui Xie and colleagues](https://www.amazon.com/Yihui-Xie/e/B00E9CQJGY?ref=sr_ntt_srch_lnk_1&qid=1625895927&sr=1-1).
-
+Once the dataset is in R, take advantage of all the reproducible research tools available.
+Tomorrow, [R/Medicine](https://events.linuxfoundation.org/r-medicine/)
+has a workshop on this topic using the exciting new
+[Quarto](https://quarto.org/) program that's similar to R Markdown.
+Also see the relevant [R/Medicine 2020 presentation videos](https://www.youtube.com/playlist?list=PL4IzsxWztPdljYo7uE5G_R2PtYw3fUReo).
+And of course, [any book by Yihui Xie and colleagues](https://www.amazon.com/Yihui-Xie/e/B00E9CQJGY?ref=sr_ntt_srch_lnk_1&qid=1625895927&sr=1-1).
 
 Batching
 -------------------------
 
-By default, `REDCapR::redcap_read()` requests datasets of 100 patients as a time, and stacks the resulting subsets together before returning a data.frame.  This can be adjusted to improve performance; the 'Details' section of [`REDCapR::redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html#details) discusses the trade offs.
+By default, `REDCapR::redcap_read()` requests datasets of 100 patients as a time,
+and stacks the resulting subsets together before returning a data.frame.
+This can be adjusted to improve performance; the 'Details' section of
+[`REDCapR::redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html#details)
+discusses the trade offs.
 
 Writing to the Server
 -------------------------
 
-Reading record data is only one API capability.  REDCapR [exposes 20+ API functions](https://ouhscbbmc.github.io/REDCapR/reference/), such as reading metadata, retrieving survey links, and writing records back to REDCap.  This last operation is relevant in
-[Kenneth McLean](https://orcid.org/0000-0001-6482-9086)'s presentation following a five-minute break.
+Reading record data is only one API capability.
+REDCapR [exposes 20+ API functions](https://ouhscbbmc.github.io/REDCapR/reference/),
+such as reading metadata, retrieving survey links, and writing records back to REDCap.
+This last operation is relevant in
+[Kenneth McLean](https://orcid.org/0000-0001-6482-9086)'s
+presentation following a five-minute break.
 
 Notes
 ===================================
@@ -392,7 +411,9 @@ This vignette was originally designed for a 2021 R/Medicine REDCap workshop with
 [Amanda Miller](https://coloradosph.cuanschutz.edu/resources/directory/directory-profile/Miller-Amanda-UCD6000053152),
 and [Kenneth McLean](https://orcid.org/0000-0001-6482-9086).
 
-This work was made possible in part by the NIH grant [U54GM104938](https://taggs.hhs.gov/Detail/AwardDetail?arg_AwardNum=U54GM104938&arg_ProgOfficeCode=127) to the [Oklahoma Shared Clinical and Translational Resource)](http://osctr.ouhsc.edu).
+This work was made possible in part by the NIH grant
+[U54GM104938](https://taggs.hhs.gov/Detail/AwardDetail?arg_AwardNum=U54GM104938&arg_ProgOfficeCode=127) to the
+[Oklahoma Shared Clinical and Translational Resource)](http://osctr.ouhsc.edu).
 
 Session Information
 ==================================================================
