@@ -180,12 +180,15 @@ This method is described in detail in the
 [Security Database](https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html)
 vignette.
 
-This approach realistically requires someone in your institution to have at least basic database administration experience.
+This approach realistically requires someone in your institution
+to have at least basic database administration experience.
 
 Part 3 - Read Data: Unstructured Approach
 ===================================
 
-The `redcap_uri` and `token` fields are the only required arguments of [`REDCapR::redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html); both are in the credential object created in the previous section.
+The `redcap_uri` and `token` fields are the only required arguments of
+[`REDCapR::redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html);
+both are in the credential object created in the previous section.
 
 
 ```{r unstructured-1}
@@ -214,7 +217,11 @@ summary(lm(age ~ 1 + sex + bmi, data = ds_1))
 Part 4 - Read Data: Choosing Columns and Rows
 ===================================
 
-When you read a dataset for the first time, you probably haven't decided which columns are needed so it makes sense to retrieve everything.  As you gain familiarity with the data and with the analytic objectives, consider being more selective with the variables and rows transported from the remote server to your local machine.
+When you read a dataset for the first time,
+you probably haven't decided which columns are needed so it makes sense to retrieve everything.
+As you gain familiarity with the data and with the analytic objectives,
+consider being more selective with the variables and rows transported
+from the remote server to your local machine.
 
 Advantages include:
 
@@ -225,7 +232,6 @@ Advantages include:
 1. Your brain doesn't have to look past unnecessary columns.
 1. Your R code doesn't have filter what the server already removed.
 1. Highly-sensitive PHI columns that are unnecessary for an analysis remain on the server.
-
 
 Specify Record IDs
 -------------------------
@@ -247,7 +253,11 @@ REDCapR::redcap_read(
 Specify Row Filter
 -------------------------
 
-A more useful operation to limit rows is passing an expression to filter the records before returning.  See your server's documentation for the syntax rules of the filter statements.  Remember to enclose your variable names in square brackets.  Also be aware of differences between strings and numbers.
+A more useful operation to limit rows is passing an expression
+to filter the records before returning.
+See your server's documentation for the syntax rules of the filter statements.
+Remember to enclose your variable names in square brackets.
+Also be aware of differences between strings and numbers.
 
 ```{r choose-records-filter}
 # Return only records with a birth date after January 2003
@@ -258,7 +268,6 @@ REDCapR::redcap_read(
   verbose       = FALSE
 )$data
 ```
-
 
 Specify Column Names
 -------------------------
@@ -279,12 +288,26 @@ REDCapR::redcap_read(
 Part 5 - Read Data: Structured Approach
 ===================================
 
-As the automation of your scripts matures and institutional resources depend on its output, its output should be stable.  One way to make it more predictable is to specify the column names *and* the column data types.  In the previous example, notice that R (specifically [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html)) made its best guess and reported it in the "Column specification" section.
+As the automation of your scripts matures and institutional resources depend on its output,
+its output should be stable.
+One way to make it more predictable is to specify the column names *and* the column data types.
+In the previous example, notice that R
+(specifically [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html))
+made its best guess and reported it in the "Column specification" section.
 
-In the following example, REDCapR passes `col_types` to [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html) as it converts the plain-text output returned from REDCap into an R data frame. (To be precise, a [tibble](https://tibble.tidyverse.org/) is returned.)
+In the following example, REDCapR passes `col_types` to
+[`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html)
+as it converts the plain-text output returned from REDCap into an R data frame.
+(To be precise, a [tibble](https://tibble.tidyverse.org/) is returned.)
 
-When readr sees a column with values like 1, 2, 3, and 4, it will make the reasonable guess that the column should be a double precision floating-point data type.  However we [recommend using the simplest data type reasonable](https://ouhscbbmc.github.io/data-science-practices-1/coding.html#coding-simplify-types) because a simpler data type is less likely contain unintended values and it's typically faster, consumes less memory, and translates more cleanly across platforms.  As specifically for identifiers like `record_id` specify either an integer or character.
-
+When readr sees a column with values like 1, 2, 3, and 4,
+it will make the reasonable guess that the column
+should be a double precision floating-point data type.
+However we
+[recommend using the simplest data type reasonable](https://ouhscbbmc.github.io/data-science-practices-1/coding.html#coding-simplify-types)
+because a simpler data type is less likely contain unintended values
+and it's typically faster, consumes less memory, and translates more cleanly across platforms.
+As specifically for identifiers like `record_id` specify either an integer or character.
 
 Specify Column Names & Types
 -------------------------
