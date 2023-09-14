@@ -18,7 +18,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-The REDCap API facilitates repetitive tasks.  If you're sure you'll download and analyze a project only once, then it may make sense to avoid the API and instead download a CSV through the browser.
+The REDCap API facilitates repetitive tasks.
+If you're sure you'll download and analyze a project only once,
+then it may make sense to avoid the API and instead download a CSV through the browser.
 
 But that single-shot scenario almost never happens in my life:
 
@@ -26,11 +28,20 @@ But that single-shot scenario almost never happens in my life:
 1. you run it on a different computer a few months later, or *and this is the heart of reproducibility:*
 1. you want someone else to be able to unambiguously & effortlessly produce the same analysis.
 
-Instead of telling your students or colleagues "first go to REDCap, then go to project 55, then click "Data Exports", then click "Export Data", then download these files, then move the files to this subdirectory, and finally convert them to this format before you run these models" ...say it with a few lines of R code.
+Instead of telling your students or colleagues "first go to REDCap,
+then go to project 55, then click "Data Exports", then click "Export Data",
+then download these files, then move the files to this subdirectory,
+and finally convert them to this format before you run these models"
+...say it with a few lines of R code.
 
-For people running your code on their machines ...the API is so integrated and responsive that they may not even realize their computer is connecting to the outside world. If they're not looking closely, they may think it's a dataset that's included locally in a package they've already installed.
+For people running your code on their machines
+...the API is so integrated and responsive that
+they may not even realize their computer is connecting to the outside world.
+If they're not looking closely, they may think it's a dataset
+that's included locally in a package they've already installed.
 
-For beginners, most of the work is related to passing security credentials ...which is something that is a reality of working with PHI.
+For beginners, most of the work is related to passing security credentials
+...which is something that is a reality of working with PHI.
 
 Part 1 - Pre-requisites
 ===================================
@@ -38,7 +49,11 @@ Part 1 - Pre-requisites
 Verify REDCapR is installed
 -------------------------
 
-First confirm that the REDCapR package is installed on your local machine.  If not, the following line will throw the error `Loading required namespace: REDCapR.  Failed with error: ‘there is no package called ‘REDCapR’’`.  If this call fails, follow the installation instructions on the [REDCapR](https://ouhscbbmc.github.io/REDCapR/) webpage.
+First confirm that the REDCapR package is installed on your local machine.
+If not, the following line will throw the error
+`Loading required namespace: REDCapR.  Failed with error: ‘there is no package called ‘REDCapR’’`.
+If this call fails, follow the installation instructions on the
+[REDCapR](https://ouhscbbmc.github.io/REDCapR/) website.
 
 ```{r pre-req}
 requireNamespace("REDCapR")
@@ -46,7 +61,10 @@ requireNamespace("REDCapR")
 # If this fails, run `install.packages("REDCapR")` or `remotes::install_github(repo="OuhscBbmc/REDCapR")`
 ```
 
-If you're a workshop attendee, you can use this vignette to copy snippets of code to your local machine to follow along with the examples: <https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html>.
+If you're a workshop attendee,
+you can use this vignette to copy snippets of code to your local machine
+to follow along with the examples:
+<https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html>.
 
 Verify REDCap Access
 -------------------------
@@ -57,13 +75,20 @@ Check with your institution's REDCap administrator to ensure you have
 1. access to the specific REDCap project, and
 1. an API token with appropriate privileges to the specific REDCap project.
 
-This might be the first time you've ever needed to request a token, and your institution may have a formal process for API approval.  Your REDCap admin can help.
+This might be the first time you've ever needed to request a token,
+and your institution may have a formal process for API approval.
+Your REDCap admin can help.
 
-For this vignette, we'll use a fake dataset hosted at `https://bbmc.ouhsc.edu/redcap/api/` and accessible with the token "9A81268476645C4E5F03428B8AC3AA7B".
+For this vignette, we'll use a fake dataset hosted at `https://bbmc.ouhsc.edu/redcap/api/`
+and accessible with the token "9A81268476645C4E5F03428B8AC3AA7B".
 
 Note to REDCap Admins:
 
-> For [`REDCapR::redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html) to function properly, the user must have Export permissions for the 'Full Data Set'. Users with only 'De-Identified' export privileges can still use [`REDCapR::redcap_read_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read_oneshot.html). To grant the appropriate permissions:
+> For [`REDCapR::redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html)
+> to function properly, the user must have Export permissions for the 'Full Data Set'.
+> Users with only 'De-Identified' export privileges can still use
+> [`REDCapR::redcap_read_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read_oneshot.html).
+> To grant the appropriate permissions:
 >
 > * go to 'User Rights' in the REDCap project site,
 > * select the desired user, and then select 'Edit User Privileges',
@@ -308,9 +333,9 @@ Reading record data is only one API capability.  REDCapR [exposes 20+ API functi
 Notes
 ===================================
 
-This vignette was originally designed for a 2021 R/Medicine REDCap workshop with 
-[Peter Higgins](https://scholar.google.com/citations?user=UGJGFaAAAAAJ&hl=en), 
-[Amanda Miller](https://coloradosph.cuanschutz.edu/resources/directory/directory-profile/Miller-Amanda-UCD6000053152), 
+This vignette was originally designed for a 2021 R/Medicine REDCap workshop with
+[Peter Higgins](https://scholar.google.com/citations?user=UGJGFaAAAAAJ&hl=en),
+[Amanda Miller](https://coloradosph.cuanschutz.edu/resources/directory/directory-profile/Miller-Amanda-UCD6000053152),
 and [Kenneth McLean](https://orcid.org/0000-0001-6482-9086).
 
 This work was made possible in part by the NIH grant [U54GM104938](https://taggs.hhs.gov/Detail/AwardDetail?arg_AwardNum=U54GM104938&arg_ProgOfficeCode=127) to the [Oklahoma Shared Clinical and Translational Resource)](http://osctr.ouhsc.edu).
