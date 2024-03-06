@@ -65,3 +65,38 @@ the default SSL options.
 # remotes::install_github('OuhscBbmc/REDCapR')
 }
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://ouhscbbmc.github.io/REDCapR/}
+  \item \url{https://github.com/OuhscBbmc/REDCapR}
+  \item \url{https://www.ouhsc.edu/bbmc/}
+  \item \url{https://project-redcap.org}
+  \item Report bugs at \url{https://github.com/OuhscBbmc/REDCapR/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Will Beasley \email{wibeasley@hotmail.com} (\href{https://orcid.org/0000-0002-5613-5006}{ORCID})
+
+Other contributors:
+\itemize{
+  \item David Bard (\href{https://orcid.org/0000-0002-3922-8489}{ORCID}) [contributor]
+  \item Thomas Wilson [contributor]
+  \item John J Aponte \email{john.aponte@isglobal.org} [contributor]
+  \item Rollie Parrish \email{rparrish@flightweb.com} (\href{https://orcid.org/0000-0001-8858-6381}{ORCID}) [contributor]
+  \item Benjamin Nutter [contributor]
+  \item Andrew Peters (\href{https://orcid.org/0000-0003-2487-1268}{ORCID}) [contributor]
+  \item Hao Zhu (\href{https://orcid.org/0000-0002-3386-6076}{ORCID}) [contributor]
+  \item Janosch Linkersdörfer (\href{https://orcid.org/0000-0002-1577-1233}{ORCID}) [contributor]
+  \item Jonathan Mang (\href{https://orcid.org/0000-0003-0518-4710}{ORCID}) [contributor]
+  \item Felix Torres \email{fetorres@ucsd.edu} [contributor]
+  \item Philip Chase \email{pbc@ufl.edu} (\href{https://orcid.org/0000-0002-5318-9420}{ORCID}) [contributor]
+  \item Victor Castro \email{vcastro@mgh.harvard.edu} (\href{https://orcid.org/0000-0001-7390-6354}{ORCID}) [contributor]
+  \item Greg Botwin [contributor]
+  \item Stephan Kadauke (\href{https://orcid.org/0000-0003-2996-8034}{ORCID}) [contributor]
+  \item Ezra Porter (\href{https://orcid.org/0000-0002-4690-8343}{ORCID}) [contributor]
+  \item Matthew Schuelke \email{matt@themadstatter.com} (\href{https://orcid.org/0000-0001-5755-1725}{ORCID}) [contributor]
+}
+
+}
