@@ -1,11 +1,11 @@
-#' @docType package
+#' @keywords internal
+"_PACKAGE"
+
 #' @name REDCapR-package
-#' @aliases
-#' REDCapR
-#'
-#' @title R utilities for interacting with a REDCap data system
-#' <https://www.project-redcap.org/>
-#'
+
+## usethis namespace: start
+## usethis namespace: end
+
 #' @description
 #' Comprehensive documentation is also available at
 #' https://ouhscbbmc.github.io/REDCapR/.
