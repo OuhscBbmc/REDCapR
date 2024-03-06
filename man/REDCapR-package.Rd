@@ -2,11 +2,14 @@
 % Please edit documentation in R/REDCapR-package.R
 \docType{package}
 \name{REDCapR-package}
-\alias{REDCapR-package}
 \alias{REDCapR}
-\title{R utilities for interacting with a REDCap data system
-\url{https://www.project-redcap.org/}}
+\alias{REDCapR-package}
+\title{REDCapR: Interaction Between R and REDCap}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
+Encapsulates functions to streamline calls from R to the REDCap API. REDCap (Research Electronic Data CAPture) is a web application for building and managing online surveys and databases developed at Vanderbilt University. The Application Programming Interface (API) offers an avenue to access and modify data programmatically, improving the capacity for literate and reproducible programming.
+
 Comprehensive documentation is also available at
 https://ouhscbbmc.github.io/REDCapR/.
 
@@ -100,3 +103,4 @@ Other contributors:
 }
 
 }
+\keyword{internal}
