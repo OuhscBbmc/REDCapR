@@ -81,7 +81,7 @@ REDCap's flexibility is a driver of its success.  Once a research team learns RE
 
 ### Table 2: observation grain for `intake` instrument
 
-REDCap and EMR databases have an "observation" t, store observations in their underlying table.  This table is a simplification of the `redcap_data` table, which is the heart of the database.
+REDCap and EMR databases store observations in their underlying table.  This table is a simplification of the `redcap_data` table, which is the heart of the REDCap's internal database.
 
 | pt<br>id | key    | value |
 | :------: | :----- | ----: |
@@ -92,7 +92,7 @@ REDCap and EMR databases have an "observation" t, store observations in their un
 |        2 | weight |  22.0 |
 |        2 | bmi    | 222.0 |
 
-If the investigation gains a longitudinal or repeating component, it becomes necessary to include the dimension of time.  Suppose the protocols specifies five time points; the blood pressure instrument is captured at times 1, 2, & 3 while the laboratory instrument is captured at times 1 & 2.  If you record this stage on paper, it will likely resemble Tables 3a & 3b: one for vitals and one for labs.
+If the investigation gains a longitudinal or repeating component, it becomes necessary to include the dimension of time.  Suppose the protocol specifies five time points; the blood pressure instrument is captured at times 1, 2, & 3 while the laboratory instrument is captured at times 1 & 2.  If you record this stage on paper, it will likely resemble Tables 3a & 3b: one for vitals and one for labs.
 
 ### Table 3a: patient-time grain for `blood_pressure` instrument
 
