@@ -75,7 +75,7 @@ Suppose you have two patients (*i.e.*, "1" and "2") with three intake variables 
 |        1 |    1.0 |   11.0 | 111.0 |
 |        2 |    2.0 |   22.0 | 222.0 |
 
-This patient-grain structure is how the data points are most comfortably inputted by humans into REDCap, and it is the default when exported through the browser and API.  However it is stored differently under the hood.
+This patient-grain structure is how the data points are most comfortably inputted by humans into REDCap, and it is the default when exported through the browser and API.  However it is stored differently by REDCap's internal database.
 
 REDCap's flexibility is a driver of its success.  Once a research team learns REDCap, it can reuse the knowledge to capture anything from qqq to qqq.  But to achieve this flexibility in the world of REDCap and EMRs, data are stored along the observation grain.  In computer science, this is commonly called an EAV structure (which stands for entity-attribute-value).  The patient's ID is the entity, the variable type is the attribute, and the observed point is the value.  It can also be thought of as a "key-value store" nested within a patient (where "key" is a synonym of "attribute").  Notice that the two wider rows have morphed into six skinnier rows --one row per observation.  If you are a curious database administrator, peek at the the structure and rows of the `redcap_data` table.  It is the most important table in the database.
 
