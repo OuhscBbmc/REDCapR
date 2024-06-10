@@ -178,6 +178,7 @@ Table 5's secondary limitation is inefficiency.  The empty cells aren't computat
 For this reason, REDCap and EMR design their observation table to resemble the computational structure of a [sparse matrix](https://en.wikipedia.org/wiki/Sparse_matrix).  (The only important difference is that REDCap's unspecified cells are interpreted as null/empty, while a sparse matrix's unspecified cells are interpreted as zero.)
 
 > In the case of a sparse matrix, substantial memory requirement reductions can be realized by storing only the non-zero entries. Depending on the number and distribution of the non-zero entries, different data structures can be used and yield huge savings in memory when compared to the basic approach. The trade-off is that accessing the individual elements becomes more complex and additional structures are needed to be able to recover the original matrix unambiguously.
+> (source: [Wikipedia: Sparse matrix - storage](https://en.wikipedia.org/wiki/Sparse_matrix#Storage))
 
 Terminology
 ------------------------------------------------------------------
