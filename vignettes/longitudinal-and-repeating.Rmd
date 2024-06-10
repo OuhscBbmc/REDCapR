@@ -243,7 +243,7 @@ ds_intake <-
   REDCapR::redcap_read(
     redcap_uri  = credential$redcap_uri, # From the previous code snippet.
     token       = credential$token,
-    forms       = "intake",
+    forms       = c("intake"),
     col_types   = col_types_intake,
     verbose     = FALSE,
   )$data
@@ -269,7 +269,7 @@ ds_blood_pressure <-
   REDCapR::redcap_read(
     redcap_uri  = credential$redcap_uri,
     token       = credential$token,
-    forms       = "blood_pressure",
+    forms       = c("blood_pressure"),
     col_types   = col_types_blood_pressure,
     verbose     = FALSE
   )$data
@@ -291,7 +291,7 @@ ds_laboratory  <-
   REDCapR::redcap_read(
     redcap_uri  = credential$redcap_uri,
     token       = credential$token,
-    forms       = "laboratory",
+    forms       = c("laboratory"),
     col_types   = col_types_laboratory,
     verbose     = FALSE
   )$data
