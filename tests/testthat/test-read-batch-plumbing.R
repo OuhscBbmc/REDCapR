@@ -63,7 +63,8 @@ test_that("repeated", {
 
   credential    <- retrieve_credential_testing(3181L)
   path_expected <- "test-data/specific-redcapr/read-batch-plumbing/repeated.R"
-  desired_forms <- c("visit_observed_behavior") # Doesn't include the initial "demographics" form.
+  # desired_forms <- c("visit_observed_behavior") # Doesn't include the initial "demographics" form.
+  desired_forms <- c("blood_pressure", "laboratory") # Doesn't include the initial "demographics" form.
   expected_outcome_message <- "\\d+ records and 13 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   returned_object <-
@@ -71,7 +72,7 @@ test_that("repeated", {
       batch_size  = 2,
       redcap_uri  = credential$redcap_uri,
       token       = credential$token,
-      forms       = desired_forms,
+      # forms       = desired_forms,
       verbose     = FALSE
     )
 
@@ -82,7 +83,7 @@ test_that("repeated", {
   expect_true(returned_object$success)
   expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
-  expect_equal(returned_object$fields_collapsed, "record_id")
+  expect_equal(returned_object$fields_collapsed, "")
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })

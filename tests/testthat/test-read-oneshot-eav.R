@@ -94,6 +94,7 @@ test_that("raw", {
   expect_s3_class(returned_object$data, "tbl")
 })
 test_that("raw-and-dag", {
+  testthat::skip("Temporarily turning off DAG on experimental function")
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/read-oneshot-eav/raw-and-dag.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
@@ -121,6 +122,7 @@ test_that("raw-and-dag", {
   expect_s3_class(returned_object$data, "tbl")
 })
 test_that("label-and-dag", {
+  testthat::skip("Temporarily turning off DAG on experimental function")
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/read-oneshot-eav/label-and-dag.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."

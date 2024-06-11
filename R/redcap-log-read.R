@@ -139,6 +139,11 @@ redcap_log_read <- function(
     user                    = user
   )
 
+  col_types <- readr::cols(
+    timestamp   = readr::col_datetime(),
+    .default    = readr::col_character()
+  )
+
   # This is the important call that communicates with the REDCap server.
   kernel <- kernel_api(
     redcap_uri      = redcap_uri,
@@ -155,6 +160,7 @@ redcap_log_read <- function(
         readr::read_csv(
           file            = I(kernel$raw_text),
           locale          = locale,
+          col_types       = col_types,
           show_col_types  = FALSE
         ),
 
@@ -162,6 +168,7 @@ redcap_log_read <- function(
       #   where it's under the control of the caller.
       silent = TRUE
     )
+      # browser()
 
     if (exists("ds") && inherits(ds, "data.frame")) {
       outcome_message <- sprintf(

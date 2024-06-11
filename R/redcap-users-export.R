@@ -90,7 +90,7 @@ redcap_users_export <- function(
     data_access_group             = readr::col_character(),
     data_access_group_id          = readr::col_character(),
     design                        = readr::col_logical(),
-    user_rights                   = readr::col_logical(),
+    user_rights                   = readr::col_integer(),
     data_access_groups            = readr::col_logical(),
     # data_export                   = readr::col_character(), # dropped sometime between 10.5.1 and 12.5.2
     reports                       = readr::col_logical(),
