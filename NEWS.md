@@ -52,6 +52,8 @@ This will help extract forms from longitudinal & repeating projects.
 
 * `redcap_event_instruments()` now by default returns mappings for all arms.  The previous default was to return the mappings for only the first arm.  To recreate the previous behavior use a call like `REDCapR::redcap_event_instruments(uri, token_2, arms = "1")`.  (Suggested by @januz, #482)
 
+* `redcap_users_export()` used to return a boolean for `user_rights`, but now it can be 0, 1, or 2. (#523)
+
 ### New Features
 
 * New `redcap_metadata_coltypes()` function.  Inspects the fields types and validation text of each field to generate a suggested `readr::col_types` object that reflects the project's current data dictionary.  The object then can be passed to the `col_types` parameter of `redcap_read()` or `redcap_read_oneshot()`.  (Suggested and discussed with @pbchase, @nutterb, @skadauke, & others, #405 & #294)
