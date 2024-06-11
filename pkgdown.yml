@@ -1,15 +1,15 @@
-pandoc: 2.19.2
-pkgdown: 2.0.7
+pandoc: 3.1.11
+pkgdown: 2.0.9
 pkgdown_sha: ~
 articles:
+  advanced-redcapr-operations: advanced-redcapr-operations.html
   BasicREDCapROperations: BasicREDCapROperations.html
+  longitudinal-and-repeating: longitudinal-and-repeating.html
   SecurityDatabase: SecurityDatabase.html
   TroubleshootingApiCalls: TroubleshootingApiCalls.html
-  advanced-redcapr-operations: advanced-redcapr-operations.html
-  longitudinal-and-repeating: longitudinal-and-repeating.html
   workflow-read: workflow-read.html
   workflow-write: workflow-write.html
-last_built: 2024-01-22T17:10Z
+last_built: 2024-06-11T17:20Z
 urls:
   reference: https://ouhscbbmc.github.io/REDCapR/reference
   article: https://ouhscbbmc.github.io/REDCapR/articles
