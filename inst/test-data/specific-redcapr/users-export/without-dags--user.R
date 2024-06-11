@@ -5,7 +5,7 @@ structure(list(username = c("unittestphifree", "wbeasleya"),
     ), class = "Date"), data_access_group = c(NA_character_, 
     NA_character_), data_access_group_id = c(NA_character_, NA_character_
     ), design = c(FALSE, TRUE), alerts = c(0, 1), user_rights = 2:1, 
-    data_access_groups = c(FALSE, TRUE), reports = c(TRUE, TRUE
+    data_access_groups = c(TRUE, TRUE), reports = c(TRUE, TRUE
     ), stats_and_charts = c(TRUE, TRUE), manage_survey_participants = c(TRUE, 
     TRUE), calendar = c(TRUE, TRUE), data_import_tool = c(FALSE, 
     TRUE), data_comparison_tool = c(FALSE, TRUE), logging = c(TRUE, 
