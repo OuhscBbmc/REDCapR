@@ -1,6 +1,6 @@
 ---
 title: "Writing to a REDCap Project"
-author: Will Beasley [Biomedical & Behavior Methodology Core](https://www.ouhsc.edu/bbmc/team/), OUHSC Pediatrics;<br>Raymond Balise, University of Miami School of Medicine
+author: Will Beasley [Biomedical & Behavior Methodology Core](https://www.ouhsc.edu/bbmc/team/), OUHSC Pediatrics;;<br>Raymond Balise, University of Miami School of Medicine<br>Stephan Kadauke, Children's Hospital of Philadelphia
 output:
   rmarkdown::html_vignette
 vignette: >
@@ -357,8 +357,10 @@ Notes
 This vignette was originally designed for the
 [2023 R/Medicine](https://events.linuxfoundation.org/r-medicine/) workshop,
 _Using REDCap and R to Rapidly Produce Biomedical Publications Cleaning Medical Data_
-with [Raymond R. Balise](https://github.com/RaymondBalise), Belén Hervera, Daniel Maya, Anna Calderon, Tyler Bartholomew, Stephan Kadauke, and João Pedro Carmezim Correia.
-The entire workshop's slides are at <https://github.com/RaymondBalise/r_med_redcap_2023_public>.
+with [Raymond R. Balise](https://github.com/RaymondBalise), Belén Hervera, Daniel Maya, Anna Calderon, Tyler Bartholomew, Stephan Kadauke, and João Pedro Carmezim Correia and the [2024 R/Medicine](https://rconsortium.github.io/RMedicine_website/Program.html) workshop, 
+_REDCap + R: Teaming Up in the Tidyverse_, with Stephan Kadauke.
+The workshop slides are for [2023](https://github.com/RaymondBalise/r_med_redcap_2023_public)
+and [2024](https://github.com/skadauke/rmedicine_2024_redcap_r_workshop).
 
 This work was made possible in part by the NIH grant [U54GM104938](https://taggs.hhs.gov/Detail/AwardDetail?arg_AwardNum=U54GM104938&arg_ProgOfficeCode=127)
 to the [Oklahoma Shared Clinical and Translational Resource)](http://osctr.ouhsc.edu).
