@@ -362,6 +362,21 @@ measurements and then download the csv. It might reveal something you
 didn't anticipate. But be aware that it will be in the block matrix
 format (*i.e.*, everything jammed into one rectangle.)
 
+## REDCap's CDIS
+
+The [Clinical Data Interoperability Services](https://projectredcap.org/software/cdis/) (CDIS) 
+use [FHIR](https://www.hl7.org/fhir/overview.html) to move data from
+your institution's [EMR/EHR](https://www.healthit.gov/faq/what-are-differences-between-electronic-medical-records-electronic-health-records-and-personal)
+(eg, Epic, Cerner) to REDCap. 
+Research staff have control over which patient records are selected or eligible.
+Conceptually it's similar to writing to REDCap's with the API, 
+but at much bigger scale.
+Realistically, it takes months to get through your institution's human layers.
+Once established, a project would be populated with EMR data 
+in much less development time  
+--assuming the desired data models corresponds with
+FHIR [endpoints](https://hl7.org/fhir/endpoint.html).
+
 # Notes
 
 This vignette was originally designed for the [2023
