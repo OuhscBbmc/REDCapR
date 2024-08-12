@@ -46,7 +46,7 @@ populate_project_dag_write <- function(batch = FALSE, verbose = FALSE) {
 
   # Import the data into the REDCap project
   # testthat::expect_message(
-    returned_object <- if (batch) {
+  returned_object <- if (batch) {
       REDCapR::redcap_write(
         ds_to_write                 = ds_to_write,
         redcap_uri                  = project$redcap_uri,

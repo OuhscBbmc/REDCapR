@@ -72,11 +72,11 @@
 #' }
 #' @export
 redcap_event_read <- function(
-    redcap_uri,
-    token,
-    verbose         = TRUE,
-    config_options  = NULL,
-    handle_httr     = NULL
+  redcap_uri,
+  token,
+  verbose         = TRUE,
+  config_options  = NULL,
+  handle_httr     = NULL
 ) {
 
   checkmate::assert_character(redcap_uri, any.missing=FALSE, len=1, pattern="^.{1,}$")
