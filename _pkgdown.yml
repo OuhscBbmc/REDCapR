@@ -1,6 +1,7 @@
 url: https://ouhscbbmc.github.io/REDCapR
 
 template:
+  bootstrap: 5
   params:
     bootswatch: simplex
     docsearch:
