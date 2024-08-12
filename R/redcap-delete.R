@@ -178,15 +178,15 @@ redcap_delete <- function(
       kernel$raw_text <- ""
     } else {
       records_affected_count <- 0
-        error_message <- sprintf(
-          paste(
-            "The REDCapR record deletion failed.",
-            "The http status code was %i.",
-            "The error message was: '%s'."
-          ),
-          kernel$status_code,
-          kernel$raw_text
-        )
+      error_message <- sprintf(
+        paste(
+          "The REDCapR record deletion failed.",
+          "The http status code was %i.",
+          "The error message was: '%s'."
+        ),
+        kernel$status_code,
+        kernel$raw_text
+      )
       stop(error_message)
     }
   } else {

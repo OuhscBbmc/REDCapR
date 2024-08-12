@@ -152,6 +152,7 @@ The package has been stable for years and should be reflected in the major versi
 
 * Accepts more than one `config_option` element.  (Proposed by @BastienRance, #307)
 * Fixed calculation of `success` value returned by `redcap_read()` and `redcap_write()` when the parameter `continue_on_error` is true.  (Bug found by @llrs, #317)
+* [`redcap_survey_link_export_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_survey_link_export_oneshot.html) documentation corrected & improved (@jrob95, #526)
 
 Version 0.11.0 (Released 2020-04-20)
 ==========================================================

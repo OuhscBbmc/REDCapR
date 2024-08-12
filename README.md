@@ -1,4 +1,4 @@
-[REDCapR](https://github.com/OuhscBbmc/REDCapR)  <img src="man/figures/logo.png" align="right" width="130" />
+[REDCapR](https://github.com/OuhscBbmc/REDCapR)  <img src="man/figures/logo.png" align="right" width="130" alt="REDCapR logo"/>
 =======
 
 We’ve been using R with [REDCap](https://projectredcap.org/)'s API since 2012 and have developed   [`REDCapR`](https://github.com/OuhscBbmc/REDCapR).  Before encapsulating these functions in a package, we were replicating 50+ lines of code to contact REDCap and robustly transform the returned [csv](https://en.wikipedia.org/wiki/Comma-separated_values) into an R `data.frame`; it took twice that much to implement batching.  All this can be done in one call to [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html):
@@ -60,7 +60,7 @@ We'd like to thank the following developers for their [advice](https://github.co
 
 Much of this package has been developed to support the needs of the following projects.  We appreciate the support.  (So far) the primary developers of REDCapR are the external evaluators for [Oklahoma's MIECHV](https://oklahoma.gov/health/health-education/children---family-health/family-support-and-prevention-service/miechv-program-federal-home-visiting-grant.html) program.  See the preliminary CQI reports (many of which use REDCapR) at <https://ouhscbbmc.github.io/MReportingPublic/>.
 
-* *OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting ([MIECHV](https://mchb.hrsa.gov/maternal-child-health-initiatives/home-visiting-overview)) Project*. HRSA/ACF D89MC23154.  David Bard, PI, OUHSC; 2011-2015.
+* *OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting ([MIECHV](https://mchb.hrsa.gov/programs-impact/programs/home-visiting/maternal-infant-early-childhood-home-visiting-miechv-program)) Project*. HRSA/ACF D89MC23154.  David Bard, PI, OUHSC; 2011-2015.
 * *Independent Evaluation of the State of OK MIECHV Evidence Based Home Visitation Project*, [NIH](https://www.nih.gov/)-sponsored collaboration with [OSDH](https://oklahoma.gov/health.html). David Bard, PI, OUHSC; 2015-2017.
 * *OSDH ParentPRO Pilot Evaluation*, federally-sponsored collaboration with [OSDH](https://oklahoma.gov/health.html).  David Bard, PI, OUHSC; 2015-2017.
 * *Title IV-E Waiver Project*, [HRSA/MCHB](https://mchb.hrsa.gov/)-sponsored collaboration with [OKDHS](https://oklahoma.gov/okdhs.html); David Bard, PI, OUHSC; 2014-2017.

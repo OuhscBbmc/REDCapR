@@ -209,14 +209,14 @@ redcap_metadata_coltypes <- function(
 
 #' @importFrom magrittr %>%
 redcap_metadata_internal <- function(
-    redcap_uri,
-    token,
+  redcap_uri,
+  token,
 
-    http_response_encoding        = "UTF-8",
-    locale                        = readr::default_locale(),
-    verbose                       = FALSE,
-    config_options                = NULL,
-    handle_httr                   = NULL
+  http_response_encoding        = "UTF-8",
+  locale                        = readr::default_locale(),
+  verbose                       = FALSE,
+  config_options                = NULL,
+  handle_httr                   = NULL
 ) {
 
   checkmate::assert_character(redcap_uri                , any.missing=FALSE, len=1, pattern="^.{1,}$")

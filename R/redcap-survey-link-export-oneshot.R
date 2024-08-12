@@ -1,8 +1,8 @@
 #' @title
-#' Download a file from a REDCap project record
+#' Get survey link from REDCap
 #'
 #' @description
-#' This function uses REDCap's API to download a file.
+#' This function uses REDCap's API to get the link for a survey.
 #'
 #' @param redcap_uri The
 #' [uri](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier)/url
@@ -11,10 +11,12 @@
 #' Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
-#' @param record The record ID where the file is to be imported. Required
+#' @param record The record ID associated with the
+#' survey link. Required
 #' @param instrument The name of the instrument associated with the
 #' survey link.  Required
-#' @param event The name of the event where the file is saved in REDCap.
+#' @param event The name of the event associated with the
+#' survey link.
 #' Optional
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  Optional.
@@ -27,6 +29,7 @@
 #'
 #' @return
 #' Currently, a list is returned with the following elements,
+#' * `survey_link`: a character string containing the URL for the survey.
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
 #' * `status_code`: The
@@ -34,14 +37,14 @@
 #' of the operation.
 #' * `outcome_message`: A human readable string indicating the operation's
 #' outcome.
-#' * `records_affected_count`: The number of records inserted or updated.
-#' * `affected_ids`: The subject IDs of the inserted or updated records.
+#' * `instrument`: The instrument associated with the survey link.
+#' * `records_affected_count`: The number of records associated with
+#' the survey link.
+#' * `affected_ids`: The subject IDs associated with the survey link.
 #' * `elapsed_seconds`: The duration of the function.
 #' * `raw_text`: If an operation is NOT successful, the text returned by
 #' REDCap.  If an operation is successful, the `raw_text` is returned as an
 #' empty string to save RAM.
-#' * `file_name`: The name of the file persisted to disk. This is useful if
-#' the name stored in REDCap is used (which is the default).
 #'
 #' @details
 #' Currently, the function doesn't modify any variable types to conform to

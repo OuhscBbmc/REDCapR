@@ -43,7 +43,7 @@ for (i in seq_len(file_read_count)) {
     )
 
     expect_true(file.exists(returned_object$file_name), "The downloaded file should exist.")
-    }, finally = base::unlink("mugshot-1.jpg")
+  }, finally = base::unlink("mugshot-1.jpg")
   )
 
   message(i, ": ", returned_object$elapsed_seconds, " -", returned_object$raw_text)

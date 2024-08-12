@@ -168,7 +168,6 @@ redcap_log_read <- function(
       #   where it's under the control of the caller.
       silent = TRUE
     )
-      # browser()
 
     if (exists("ds") && inherits(ds, "data.frame")) {
       outcome_message <- sprintf(

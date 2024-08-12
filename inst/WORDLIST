@@ -4,11 +4,13 @@ Barbone
 Belén
 CAPture
 CCAN
+CDIS
 CDS
 CMD
 CQI
 CRAN's
 Carmezim
+Cerner
 Codebook
 Codecov
 Correia
@@ -20,9 +22,11 @@ DSN's
 De
 Dev
 EAV
+EHR
 EMR
 EMRs
 EMs
+FHIR
 Funders
 Gabor
 HRSA
@@ -65,7 +69,7 @@ RODBCext
 Recode
 SSL
 SecurityDatabase
-Sys
+Supertibble
 Tidyverse
 Timezones
 Translational
@@ -125,7 +129,6 @@ nonmissing
 nonnull
 odbc
 ouhscbbmc
-packageVersion
 perl
 phpcap
 pid
@@ -134,7 +137,6 @@ programmatically
 projectredcap
 pseudofield
 pseudofields
-qqq
 rdoc
 readr
 readr's
@@ -143,7 +145,6 @@ regexes
 reproducibility
 sbp
 schemas
-setenv
 supertibble
 testthat
 tibble

@@ -60,7 +60,7 @@ test_that("Nonexistent Record ID", {
   expect_equal(result$instrument, "participant_morale_questionnaire")
   expect_equal(result$records_affected_count, 0L)
   expect_equal(result$affected_ids, character(0))
-  expect_equal(result$raw_text, "ERROR: The record '-1' does not exist")
+  expect_equal(result$raw_text, "ERROR: The record \"-1\" does not exist")
 })
 
 rm(credential, record, instrument)

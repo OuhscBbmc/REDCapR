@@ -182,7 +182,7 @@ test_that("checkbox choices with errant space", {
       "3",     "Personality disorder",
       "4",                  "Anxiety",
       "0",                "Not Noted"
-     )
+    )
 
   "1, Depressive mood disorder | 2, Adjustment disorder| 3, Personality disorder | 4, Anxiety | 0, Not Noted" |>
     checkbox_choices() |> # datapasta::tribble_paste()

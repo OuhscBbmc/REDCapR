@@ -18,7 +18,7 @@ following projects.  We appreciate the support.
 \itemize{
 \item \emph{OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive
 Maternal, Infant, and Early Childhood Home Visiting
-(\href{https://mchb.hrsa.gov/maternal-child-health-initiatives/home-visiting-overview}{MIECHV}) Project}.
+(\href{https://mchb.hrsa.gov/programs-impact/programs/home-visiting/maternal-infant-early-childhood-home-visiting-miechv-program}{MIECHV}) Project}.
 HRSA/ACF D89MC23154.
 David Bard, PI, OUHSC; 2011-2015.
 \item \emph{Independent Evaluation of the State of OK MIECHV Evidence Based Home

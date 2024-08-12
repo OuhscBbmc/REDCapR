@@ -218,8 +218,9 @@ redcap_project_info_read <- function(
 
         # Build a column specification that matches the API response.
         col_types <- readr::cols()
-        for (present_name in present_names)
+        for (present_name in present_names) {
           col_types$cols <- c(col_types$cols, all_col_types$cols[present_name])
+        }
 
         # Convert the raw text to a dataset.
         ds <-

@@ -100,11 +100,13 @@ redcap_users_export <- function(
     data_import_tool              = readr::col_logical(),
     data_comparison_tool          = readr::col_logical(),
     logging                       = readr::col_logical(),
+    email_logging                 = readr::col_logical(), # added 14.6.0
     file_repository               = readr::col_logical(),
     data_quality_create           = readr::col_logical(),
     data_quality_execute          = readr::col_logical(),
     api_export                    = readr::col_logical(),
     api_import                    = readr::col_logical(),
+    api_modules                   = readr::col_logical(), # added 14.6.0 maybe
     mobile_app                    = readr::col_logical(),
     mobile_app_download_data      = readr::col_logical(),
     record_create                 = readr::col_logical(),
