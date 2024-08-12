@@ -172,31 +172,31 @@
 #' @importFrom magrittr %>%
 # Intentionally NOT exporting for now: @export
 redcap_read_eav_oneshot <- function(
-    redcap_uri,
-    token,
-    records                       = NULL,
-    fields                        = NULL,
-    forms                         = NULL,
-    events                        = NULL,
-    # raw_or_label                  = "raw",
-    # raw_or_label_headers          = "raw",
-    # export_checkbox_label         = FALSE,
-    # placeholder returnFormat
-    export_survey_fields          = FALSE,
-    export_data_access_groups     = FALSE,
-    filter_logic                  = "",
-    datetime_range_begin          = as.POSIXct(NA),
-    datetime_range_end            = as.POSIXct(NA),
-    blank_for_gray_form_status    = FALSE,
-    # col_types                     = NULL,
-    # guess_type                    = TRUE,
-    # guess_max                     = 1000,
-    http_response_encoding        = "UTF-8",
-    locale                        = readr::default_locale(),
-    verbose                       = TRUE,
-    config_options                = NULL,
-    handle_httr                   = NULL
-    # encode_httr                   = "multipart"
+  redcap_uri,
+  token,
+  records                       = NULL,
+  fields                        = NULL,
+  forms                         = NULL,
+  events                        = NULL,
+  # raw_or_label                  = "raw",
+  # raw_or_label_headers          = "raw",
+  # export_checkbox_label         = FALSE,
+  # placeholder returnFormat
+  export_survey_fields          = FALSE,
+  export_data_access_groups     = FALSE,
+  filter_logic                  = "",
+  datetime_range_begin          = as.POSIXct(NA),
+  datetime_range_end            = as.POSIXct(NA),
+  blank_for_gray_form_status    = FALSE,
+  # col_types                     = NULL,
+  # guess_type                    = TRUE,
+  # guess_max                     = 1000,
+  http_response_encoding        = "UTF-8",
+  locale                        = readr::default_locale(),
+  verbose                       = TRUE,
+  config_options                = NULL,
+  handle_httr                   = NULL
+  # encode_httr                   = "multipart"
 ) {
 
   checkmate::assert_character(redcap_uri                , any.missing=FALSE, len=1, pattern="^.{1,}$")
@@ -205,11 +205,11 @@ redcap_read_eav_oneshot <- function(
   checkmate::assert_character(fields                    , any.missing=TRUE , min.len=1, pattern="^.{1,}$", null.ok=TRUE)
   checkmate::assert_character(forms                     , any.missing=TRUE , min.len=1, pattern="^.{1,}$", null.ok=TRUE)
   checkmate::assert_character(events                    , any.missing=TRUE , min.len=1, pattern="^.{1,}$", null.ok=TRUE)
-#   checkmate::assert_character(raw_or_label              , any.missing=FALSE, len=1)
-#   checkmate::assert_subset(   raw_or_label              , c("raw", "label"))
-#   checkmate::assert_character(raw_or_label_headers      , any.missing=FALSE, len=1)
-#   checkmate::assert_subset(   raw_or_label_headers      , c("raw", "label"))
-#   checkmate::assert_logical(  export_checkbox_label     , any.missing=FALSE, len=1)
+  # checkmate::assert_character(raw_or_label              , any.missing=FALSE, len=1)
+  # checkmate::assert_subset(   raw_or_label              , c("raw", "label"))
+  # checkmate::assert_character(raw_or_label_headers      , any.missing=FALSE, len=1)
+  # checkmate::assert_subset(   raw_or_label_headers      , c("raw", "label"))
+  # checkmate::assert_logical(  export_checkbox_label     , any.missing=FALSE, len=1)
   # placeholder: returnFormat
   checkmate::assert_logical(  export_survey_fields      , any.missing=FALSE, len=1)
   checkmate::assert_logical(  export_data_access_groups , any.missing=FALSE, len=1)
@@ -218,8 +218,8 @@ redcap_read_eav_oneshot <- function(
   checkmate::assert_posixct(  datetime_range_end        , any.missing=TRUE , len=1, null.ok=TRUE)
   checkmate::assert_logical( blank_for_gray_form_status , any.missing=FALSE, len=1)
 
-#   checkmate::assert_logical(  guess_type                , any.missing=FALSE, len=1)
-#   checkmate::assert_numeric(   guess_max                , any.missing=FALSE, len=1, lower=1)
+  # checkmate::assert_logical(  guess_type                , any.missing=FALSE, len=1)
+  # checkmate::assert_numeric(   guess_max                , any.missing=FALSE, len=1, lower=1)
 
   checkmate::assert_character(http_response_encoding    , any.missing=FALSE,     len=1)
   checkmate::assert_class(    locale, "locale"          , null.ok = FALSE)
@@ -284,7 +284,6 @@ redcap_read_eav_oneshot <- function(
         readr::read_csv(
           file            = I(kernel$raw_text),
           col_types       = readr::cols(.default = readr::col_character()),
-        #   guess_max       = guess_max,
           locale          = locale,
           show_col_types  = FALSE
         ) %>%

@@ -324,7 +324,7 @@ redcap_read <- function(
   if (!is.null(events)) {
     if (!metadata$longitudinal) {
       "This project is NOT longitudinal, so do not pass a value to the `event` argument." %>%
-       stop(call. = FALSE)
+        stop(call. = FALSE)
     } else {
       events_in_project <-
         redcap_event_read(

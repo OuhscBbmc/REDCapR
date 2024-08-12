@@ -38,7 +38,7 @@
 #' * `outcome_message`: A human readable string indicating the operation's
 #' outcome.
 #' * `instrument`: The instrument associated with the survey link.
-#' * `records_affected_count`: The number of records associated with 
+#' * `records_affected_count`: The number of records associated with
 #' the survey link.
 #' * `affected_ids`: The subject IDs associated with the survey link.
 #' * `elapsed_seconds`: The duration of the function.
