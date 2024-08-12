@@ -19,10 +19,10 @@ test_that("version-successful", {
   testthat::skip_on_cran()
   actual <-
     redcap_version(
-    redcap_uri  = credential$redcap_uri,
-    token       = credential$token,
-    verbose     = FALSE
-  )
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      verbose     = FALSE
+    )
 
   expected <- package_version("13.7.1")
   version_good <- (expected <= actual)

@@ -134,7 +134,7 @@ test_that("label-and-dag", {
       raw_or_label                = "label",
       export_data_access_groups   = TRUE,
       verbose                     = FALSE
-  )
+    )
 
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)

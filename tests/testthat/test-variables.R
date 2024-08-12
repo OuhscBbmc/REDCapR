@@ -58,13 +58,13 @@ test_that("Bad Uri -wrong address (2 of 2)", {
   # Windows gives a different message than Travis/Linux
   expected_outcome_message <- "(https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com|Couldn't resolve host 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com')"
   # "The REDCapR variable retrieval was not successful\\..+?Error 405 \\(Method Not Allowed\\).+"
-   # expected_outcome_message <- "(?s)The REDCapR variable retrieval was not successful\\..+?.+"
+  # expected_outcome_message <- "(?s)The REDCapR variable retrieval was not successful\\..+?.+"
 
   expect_error(
     redcap_variables(
       redcap_uri  = bad_uri,
       token       = credential$token
-      )#,
+    )#,
     # regexp = expected_outcome_message
   )
 
