@@ -14,7 +14,7 @@
 #' following projects.  We appreciate the support.
 #' * *OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive
 #' Maternal, Infant, and Early Childhood Home Visiting
-#' ([MIECHV](https://mchb.hrsa.gov/maternal-child-health-initiatives/home-visiting-overview)) Project*.
+#' ([MIECHV](https://mchb.hrsa.gov/programs-impact/programs/home-visiting/maternal-infant-early-childhood-home-visiting-miechv-program)) Project*.
 #' HRSA/ACF D89MC23154.
 #' David Bard, PI, OUHSC; 2011-2015.
 #' * *Independent Evaluation of the State of OK MIECHV Evidence Based Home
