@@ -247,8 +247,8 @@ assert_field_names <- function(field_names) {
       "a letter.  The bad names are {%s}.",
       collapse = ""
     ) %>%
-    sprintf(length(bad_names), paste(bad_names, collapse = ", ")) %>%
-    stop()
+      sprintf(length(bad_names), paste(bad_names, collapse = ", ")) %>%
+      stop()
   }
 }
 

@@ -328,7 +328,7 @@ redcap_read_oneshot_eav <- function(
           ) %>%
           dplyr::full_join(ds_possible_checkbox_rows, by=c("record", "field_name", "field_type", "event_id")) %>%
           dplyr::mutate(
-            value      =
+            value =
               dplyr::if_else(
                 !is.na(.data$field_type) & (.data$field_type == "checkbox"),
                 as.character(!is.na(.data$value)),
