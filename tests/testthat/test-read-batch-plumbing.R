@@ -65,7 +65,7 @@ test_that("repeated", {
   path_expected <- "test-data/specific-redcapr/read-batch-plumbing/repeated.R"
   # desired_forms <- c("visit_observed_behavior") # Doesn't include the initial "demographics" form.
   desired_forms <- c("blood_pressure", "laboratory") # Doesn't include the initial "demographics" form.
-  expected_outcome_message <- "\\d+ records and 13 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+  expected_outcome_message <- "\\d+ records and 15 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   returned_object <-
     redcap_read(
