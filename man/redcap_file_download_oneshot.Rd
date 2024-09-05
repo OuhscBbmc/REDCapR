@@ -93,9 +93,10 @@ the name stored in REDCap is used (which is the default).
 This function uses REDCap's API to download a file.
 }
 \details{
-Currently, the function doesn't modify any variable types to conform to
-REDCap's supported variables.  See \code{\link[=validate_for_write]{validate_for_write()}} for a helper
-function that checks for some common important conflicts.
+As of REDCap 14.6.4, for files in a repeating instrument,
+you can't specify which repeating instance to download.
+It always returns the file of the first instance
+(within the record/patient).
 
 The function \code{redcap_download_file_oneshot()} is soft-deprecated
 as of REDCapR 1.2.0.

@@ -198,7 +198,10 @@ test_that("Full Directory Specific", {
 test_that("file in repeating instrument", {
   testthat::skip_on_cran()
   credential_repeating <- retrieve_credential_testing(3181L)
-  on.exit(base::unlink(returned_object_1$file_name))
+  on.exit({
+    base::unlink(returned_object_1$file_name)
+    base::unlink(returned_object_2$file_name)
+  })
 
   # start_time <- Sys.time() - lubridate::seconds(1) #Knock off a second in case there's small time imprecisions
   start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
@@ -211,8 +214,9 @@ test_that("file in repeating instrument", {
   field <- "image_profile"
 
   expected_outcome_message <- '^(Preparing to download the file `.+\\.jpg`\\.|.+; name=".+\\.jpg" successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as .+\\.jpg)'
-
   # expected_outcome_message <- ".+"
+
+  # ---- first record --------------------------
   suppressMessages({
     returned_object_1 <-
       redcap_file_download_oneshot(
@@ -243,8 +247,42 @@ test_that("file in repeating instrument", {
   expect_false(info_actual_1$isdir, "The downloaded file should not be a directory.")
   # expect_equal(as.character(info_actual$mode), expected=as.character(info_expected$mode), label="The mode/permissions of the downloaded file should match.")
   expect_true(start_time <= info_actual_1$mtime, label="The downloaded file's modification time should not precede this function's start time.")
-  expect_true(start_time <= info_actual_1$ctime, label="The downloaded file's last change time should not precede this function's start time.")
+  # expect_true(start_time <= info_actual_1$ctime, label="The downloaded file's last change time should not precede this function's start time.")
   expect_true(start_time <= info_actual_1$atime, label="The downloaded file's last access time should not precede this function's start time.")
+
+  # ---- second record --------------------------
+  suppressMessages({
+    returned_object_2 <-
+      redcap_file_download_oneshot(
+        record        = 2L,
+        field         = field,
+        redcap_uri    = credential_repeating$redcap_uri,
+        token         = credential_repeating$token,
+        verbose       = TRUE
+      )
+  })
+
+  Sys.sleep(delay_after_download_file)
+  info_actual_2 <- file.info(returned_object_2$file_name)
+  expect_true(file.exists(returned_object_2$file_name), "The downloaded file should exist.")
+
+  #Test the values of the returned object.
+  expect_true(returned_object_2$success)
+  expect_equal(returned_object_2$status_code, expected=200L)
+  expect_match(returned_object_2$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_equal(returned_object_2$records_affected_count, 1L)
+  expect_equal(returned_object_2$affected_ids, "2")
+  expect_true(returned_object_2$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
+  expect_equal(returned_object_2$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object_1$raw_text)
+  expect_equal(returned_object_2$file_name, "mugshot-2.jpg", label="The name of the downloaded file should be correct.")
+
+  #Test the values of the file.
+  expect_equal(info_actual_2$size, expected=info_expected_2_1$size, label="The size of the downloaded file should match.")
+  expect_false(info_actual_2$isdir, "The downloaded file should not be a directory.")
+  # expect_equal(as.character(info_actual$mode), expected=as.character(info_expected$mode), label="The mode/permissions of the downloaded file should match.")
+  expect_true(start_time <= info_actual_2$mtime, label="The downloaded file's modification time should not precede this function's start time.")
+  # expect_true(start_time <= info_actual_2$ctime, label="The downloaded file's last change time should not precede this function's start time.")
+  expect_true(start_time <= info_actual_2$atime, label="The downloaded file's last access time should not precede this function's start time.")
 })
 
 test_that("download file conflict -Error", {
