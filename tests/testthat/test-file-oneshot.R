@@ -329,8 +329,8 @@ test_that("file in repeating instrument", {
   testthat::skip_on_cran()
   credential_repeating <- retrieve_credential_testing(3181L)
   on.exit({
-    base::unlink(returned_object_1$file_name)
-    base::unlink(returned_object_2$file_name)
+    base::unlink(returned_object_1_1$file_name)
+    base::unlink(returned_object_2_1$file_name)
   })
 
   # start_time <- Sys.time() - lubridate::seconds(1) #Knock off a second in case there's small time imprecisions
@@ -346,12 +346,13 @@ test_that("file in repeating instrument", {
   expected_outcome_message <- '^(Preparing to download the file `.+\\.jpg`\\.|.+; name=".+\\.jpg" successfully downloaded in \\d+(\\.\\d+\\W|\\W)seconds\\, and saved as .+\\.jpg)'
   # expected_outcome_message <- ".+"
 
-  # ---- first record --------------------------
+  # ---- first record, first instance --------------------------
   suppressMessages({
-    returned_object_1 <-
+    returned_object_1_1 <-
       redcap_file_download_oneshot(
         record        = 1L,
         field         = field,
+        repeat_instance = "1",
         redcap_uri    = credential_repeating$redcap_uri,
         token         = credential_repeating$token,
         verbose       = TRUE
@@ -359,33 +360,36 @@ test_that("file in repeating instrument", {
   })
 
   Sys.sleep(delay_after_download_file)
-  info_actual_1 <- file.info(returned_object_1$file_name)
-  expect_true(file.exists(returned_object_1$file_name), "The downloaded file should exist.")
+  info_actual_1_1 <- file.info(returned_object_1_1$file_name)
+  expect_true(file.exists(returned_object_1_1$file_name), "The downloaded file should exist.")
 
   #Test the values of the returned object.
-  expect_true(returned_object_1$success)
-  expect_equal(returned_object_1$status_code, expected=200L)
-  expect_match(returned_object_1$outcome_message, regexp=expected_outcome_message, perl=TRUE)
-  expect_equal(returned_object_1$records_affected_count, 1L)
-  expect_equal(returned_object_1$affected_ids, "1")
-  expect_true(returned_object_1$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
-  expect_equal(returned_object_1$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object_1$raw_text)
-  expect_equal(returned_object_1$file_name, "levon-and-barry.jpg", label="The name of the downloaded file should be correct.")
+  expect_true(returned_object_1_1$success)
+  expect_equal(returned_object_1_1$status_code, expected=200L)
+  expect_match(returned_object_1_1$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_equal(returned_object_1_1$records_affected_count, 1L)
+  expect_equal(returned_object_1_1$affected_ids, "1")
+  expect_true(returned_object_1_1$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
+  expect_equal(returned_object_1_1$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object_1$raw_text)
+  expect_equal(returned_object_1_1$file_name, "levon-and-barry.jpg", label="The name of the downloaded file should be correct.")
 
   #Test the values of the file.
-  expect_equal(info_actual_1$size, expected=info_expected_1_1$size, label="The size of the downloaded file should match.")
-  expect_false(info_actual_1$isdir, "The downloaded file should not be a directory.")
+  expect_equal(info_actual_1_1$size, expected=info_expected_1_1$size, label="The size of the downloaded file should match.")
+  expect_false(info_actual_1_1$isdir, "The downloaded file should not be a directory.")
   # expect_equal(as.character(info_actual$mode), expected=as.character(info_expected$mode), label="The mode/permissions of the downloaded file should match.")
-  expect_true(start_time <= info_actual_1$mtime, label="The downloaded file's modification time should not precede this function's start time.")
-  # expect_true(start_time <= info_actual_1$ctime, label="The downloaded file's last change time should not precede this function's start time.")
-  expect_true(start_time <= info_actual_1$atime, label="The downloaded file's last access time should not precede this function's start time.")
+  expect_true(start_time <= info_actual_1_1$mtime, label="The downloaded file's modification time should not precede this function's start time.")
+  # expect_true(start_time <= info_actual_1_1$ctime, label="The downloaded file's last change time should not precede this function's start time.")
+  expect_true(start_time <= info_actual_1_1$atime, label="The downloaded file's last access time should not precede this function's start time.")
 
-  # ---- second record --------------------------
+  # ---- first record, second instance --------------------------
+
+  # ---- second record, first instance --------------------------
   suppressMessages({
-    returned_object_2 <-
+    returned_object_2_1 <-
       redcap_file_download_oneshot(
         record        = 2L,
         field         = field,
+        repeat_instance = "1",
         redcap_uri    = credential_repeating$redcap_uri,
         token         = credential_repeating$token,
         verbose       = TRUE
@@ -393,26 +397,26 @@ test_that("file in repeating instrument", {
   })
 
   Sys.sleep(delay_after_download_file)
-  info_actual_2 <- file.info(returned_object_2$file_name)
-  expect_true(file.exists(returned_object_2$file_name), "The downloaded file should exist.")
+  info_actual_2_1 <- file.info(returned_object_2_1$file_name)
+  expect_true(file.exists(returned_object_2_1$file_name), "The downloaded file should exist.")
 
   #Test the values of the returned object.
-  expect_true(returned_object_2$success)
-  expect_equal(returned_object_2$status_code, expected=200L)
-  expect_match(returned_object_2$outcome_message, regexp=expected_outcome_message, perl=TRUE)
-  expect_equal(returned_object_2$records_affected_count, 1L)
-  expect_equal(returned_object_2$affected_ids, "2")
-  expect_true(returned_object_2$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
-  expect_equal(returned_object_2$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object_1$raw_text)
-  expect_equal(returned_object_2$file_name, "mugshot-2.jpg", label="The name of the downloaded file should be correct.")
+  expect_true(returned_object_2_1$success)
+  expect_equal(returned_object_2_1$status_code, expected=200L)
+  expect_match(returned_object_2_1$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_equal(returned_object_2_1$records_affected_count, 1L)
+  expect_equal(returned_object_2_1$affected_ids, "2")
+  expect_true(returned_object_2_1$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
+  expect_equal(returned_object_2_1$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object_1$raw_text)
+  expect_equal(returned_object_2_1$file_name, "mugshot-2.jpg", label="The name of the downloaded file should be correct.")
 
   #Test the values of the file.
-  expect_equal(info_actual_2$size, expected=info_expected_2_1$size, label="The size of the downloaded file should match.")
-  expect_false(info_actual_2$isdir, "The downloaded file should not be a directory.")
+  expect_equal(info_actual_2_1$size, expected=info_expected_2_1$size, label="The size of the downloaded file should match.")
+  expect_false(info_actual_2_1$isdir, "The downloaded file should not be a directory.")
   # expect_equal(as.character(info_actual$mode), expected=as.character(info_expected$mode), label="The mode/permissions of the downloaded file should match.")
-  expect_true(start_time <= info_actual_2$mtime, label="The downloaded file's modification time should not precede this function's start time.")
-  # expect_true(start_time <= info_actual_2$ctime, label="The downloaded file's last change time should not precede this function's start time.")
-  expect_true(start_time <= info_actual_2$atime, label="The downloaded file's last access time should not precede this function's start time.")
+  expect_true(start_time <= info_actual_2_1$mtime, label="The downloaded file's modification time should not precede this function's start time.")
+  # expect_true(start_time <= info_actual_2_1$ctime, label="The downloaded file's last change time should not precede this function's start time.")
+  expect_true(start_time <= info_actual_2_1$atime, label="The downloaded file's last access time should not precede this function's start time.")
 })
 
 test_that("download file conflict -Error", {
