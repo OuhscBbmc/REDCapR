@@ -199,17 +199,17 @@ test_that("file in longitudinal event", {
   testthat::skip_on_cran()
   credential_longitudinal <- retrieve_credential_testing(2629L)
   on.exit({
-    base::unlink(returned_object_1$file_name)
-    # base::unlink(returned_object_2$file_name)
+    base::unlink(returned_object_1_1$file_name)
+    base::unlink(returned_object_1_2$file_name)
   })
 
   # start_time <- Sys.time() - lubridate::seconds(1) #Knock off a second in case there's small time imprecisions
   start_time <- Sys.time() - 10 #Knock off ten seconds in case there are small time imprecisions.
   path_of_expected_1_1 <- system.file("test-data/mugshot-1.jpg", package="REDCapR")
-  # path_of_expected_1_2 <- system.file("test-data/mugshot-1.jpg", package="REDCapR")
+  path_of_expected_1_2 <- system.file("test-data/mugshot-2.jpg", package="REDCapR")
   # path_of_expected_2_1 <- system.file("test-data/mugshot-2.jpg", package="REDCapR")
   info_expected_1_1 <- file.info(path_of_expected_1_1)
-  # info_expected_2_1 <- file.info(path_of_expected_2_1)
+  info_expected_1_2 <- file.info(path_of_expected_1_2)
   # record <- 1
   field <- "image_profile"
 
@@ -250,6 +250,41 @@ test_that("file in longitudinal event", {
   expect_true(start_time <= info_actual_1_1$mtime, label="The downloaded file's modification time should not precede this function's start time.")
   # expect_true(start_time <= info_actual_1_1$ctime, label="The downloaded file's last change time should not precede this function's start time.")
   expect_true(start_time <= info_actual_1_1$atime, label="The downloaded file's last access time should not precede this function's start time.")
+
+  # ---- first record, second event --------------------------
+  suppressMessages({
+    returned_object_1_2 <-
+      redcap_file_download_oneshot(
+        record        = 1L,
+        event         = "dischage_arm_1",
+        field         = field,
+        redcap_uri    = credential_longitudinal$redcap_uri,
+        token         = credential_longitudinal$token,
+        verbose       = TRUE
+      )
+  })
+
+  Sys.sleep(delay_after_download_file)
+  info_actual_1_2 <- file.info(returned_object_1_2$file_name)
+  expect_true(file.exists(returned_object_1_2$file_name), "The downloaded file should exist.")
+
+  #Test the values of the returned object.
+  expect_true(returned_object_1_2$success)
+  expect_equal(returned_object_1_2$status_code, expected=200L)
+  expect_match(returned_object_1_2$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_equal(returned_object_1_2$records_affected_count, 1L)
+  expect_equal(returned_object_1_2$affected_ids, "1")
+  expect_true(returned_object_1_2$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
+  expect_equal(returned_object_1_2$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object_1$raw_text)
+  expect_equal(returned_object_1_2$file_name, "mugshot-2.jpg", label="The name of the downloaded file should be correct.")
+
+  #Test the values of the file.
+  expect_equal(info_actual_1_2$size, expected=info_expected_1_2$size, label="The size of the downloaded file should match.")
+  expect_false(info_actual_1_2$isdir, "The downloaded file should not be a directory.")
+  # expect_equal(as.character(info_actual_1_2$mode), expected=as.character(info_expected$mode), label="The mode/permissions of the downloaded file should match.")
+  expect_true(start_time <= info_actual_1_2$mtime, label="The downloaded file's modification time should not precede this function's start time.")
+  # expect_true(start_time <= info_actual_1_2$ctime, label="The downloaded file's last change time should not precede this function's start time.")
+  expect_true(start_time <= info_actual_1_2$atime, label="The downloaded file's last access time should not precede this function's start time.")
 
 })
 
