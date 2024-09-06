@@ -72,8 +72,8 @@ This will help extract forms from longitudinal & repeating projects.
 * `read_read_oneshot()`'s parameter `guess_max` now allows floating point values to support `readr::read_csv()` ability to accept a Inf value.  (Suggested by @eveyp, #392)
 * pkgdown pages run & display the examples, but CRAN still doesn't run them. It's illegal to call external resources/APIs from CRAN computers --mostly because they are occasionally unavailable, so the code breaks. (#419)
 * Renamed some functions to follow a consistent pattern.  Old names will be soft-deprecated for a while before being removed. (#416)
-  * `redcap_download_file_oneshot()` to `redcap_file_download_opneshot()`
-  * `redcap_file_upload_oneshot()` to `redcap_file_upload_opneshot()`
+  * `redcap_download_file_oneshot()` to `redcap_file_download_oneshot()`
+  * `redcap_file_upload_oneshot()` to `redcap_file_upload_oneshot()`
   * `redcap_download_instrument()` to `redcap_instrument_download()`
 
 * `redcap_dag_read()` has new `data_access_group_id` field (introduced maybe in [13.1.0](https://redcap.vanderbilt.edu/community/post.php?id=13)) (#459)
@@ -93,6 +93,7 @@ This will help extract forms from longitudinal & repeating projects.
 * `redcap_read()` checks the `event` parameter and throws an error if a value is not recognized, or the project is not longitudinal (#493)
 * The regex in `regex_named_captures()` is forgiving if there's an unnecessary leading space (@BlairCooper, #495, #501)
 * `redcap_log_read()` assumes all columns are character, except for `timestamp` (#525)
+* `redcap_file_download_oneshot()` no longer asks for the unnecessary parameter for `repeating_instrument` (that the REDCap server ignores).  (@BlairCooper, #506, #530)
 
 Version 1.1.0 (released 2022-08-10)
 ==========================================================

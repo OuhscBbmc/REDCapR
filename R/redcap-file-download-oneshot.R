@@ -26,9 +26,6 @@
 #' Required
 #' @param event The name of the event where the file is saved in REDCap.
 #' Optional
-#' @param repeat_instrument The name of the instrument that is repeating
-#' for a given event.
-#' Optional
 #' @param repeat_instance (only for projects with repeating instruments/events)
 #' The repeat instance number of the repeating event (if longitudinal) or the
 #' repeating instrument (if classic or longitudinal). Default value is '1'.
@@ -61,9 +58,8 @@
 #' the name stored in REDCap is used (which is the default).
 #'
 #' @details
-#' Currently, the function doesn't modify any variable types to conform to
-#' REDCap's supported variables.  See [validate_for_write()] for a helper
-#' function that checks for some common important conflicts.
+#' For files in a repeating instrument, don't specify `repeating_instrument`.
+#' The server only needs `field` (name) and `repeating_instance`.
 #'
 #' The function `redcap_download_file_oneshot()` is soft-deprecated
 #' as of REDCapR 1.2.0.
@@ -127,7 +123,6 @@ redcap_file_download_oneshot <- function(
   record,
   field,
   event           = "",
-  repeat_instrument = NULL,
   repeat_instance = NULL,
   verbose         = TRUE,
   config_options  = NULL,
@@ -161,13 +156,7 @@ redcap_file_download_oneshot <- function(
 
   if (0L < nchar(event)) post_body$event <- event
 
-  if (!is.null(repeat_instrument)) {
-    if (is.null(repeat_instance)) {
-      stop("You must specify repeat_instance when specified repeat_instrument")
-    }
-    post_body$repeat_instrument <- repeat_instrument
-    post_body$repeat_instance   <- repeat_instance
-  }
+  if (!is.null(repeat_instance)) post_body$repeat_instance <- repeat_instance
 
   # This is the first of two important lines in the function.
   #   It retrieves the information from the server and stores it in RAM.

@@ -14,7 +14,6 @@ redcap_file_download_oneshot(
   record,
   field,
   event = "",
-  repeat_instrument = NULL,
   repeat_instance = NULL,
   verbose = TRUE,
   config_options = NULL,
@@ -47,10 +46,6 @@ project.  Required.}
 Required}
 
 \item{event}{The name of the event where the file is saved in REDCap.
-Optional}
-
-\item{repeat_instrument}{The name of the instrument that is repeating
-for a given event.
 Optional}
 
 \item{repeat_instance}{(only for projects with repeating instruments/events)
@@ -93,9 +88,8 @@ the name stored in REDCap is used (which is the default).
 This function uses REDCap's API to download a file.
 }
 \details{
-Currently, the function doesn't modify any variable types to conform to
-REDCap's supported variables.  See \code{\link[=validate_for_write]{validate_for_write()}} for a helper
-function that checks for some common important conflicts.
+For files in a repeating instrument, don't specify \code{repeating_instrument}.
+The server only needs \code{field} (name) and \code{repeating_instance}.
 
 The function \code{redcap_download_file_oneshot()} is soft-deprecated
 as of REDCapR 1.2.0.
