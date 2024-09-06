@@ -26,10 +26,10 @@
 #' Required
 #' @param event The name of the event where the file is saved in REDCap.
 #' Optional
-#' @param repeat_instance (only for projects with repeating instruments/events)
-#' The repeat instance number of the repeating event (if longitudinal) or the
-#' repeating instrument (if classic or longitudinal). Default value is '1'.
-#' Optional
+# @param repeat_instance (only for projects with repeating instruments/events)
+# The repeat instance number of the repeating event (if longitudinal) or the
+# repeating instrument (if classic or longitudinal). Default value is '1'.
+# Optional
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  Optional.
 #' @param config_options A list of options passed to [httr::POST()].
@@ -125,7 +125,7 @@ redcap_file_download_oneshot <- function(
   record,
   field,
   event           = "",
-  repeat_instance = NULL,
+  # repeat_instance = NULL,
   verbose         = TRUE,
   config_options  = NULL,
   handle_httr     = NULL
@@ -158,7 +158,7 @@ redcap_file_download_oneshot <- function(
 
   if (0L < nchar(event)) post_body$event <- event
 
-  if (!is.null(repeat_instance)) post_body$repeat_instance <- repeat_instance
+  # if (!is.null(repeat_instance)) post_body$repeat_instance <- repeat_instance
 
   # This is the first of two important lines in the function.
   #   It retrieves the information from the server and stores it in RAM.
