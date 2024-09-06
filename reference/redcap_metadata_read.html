@@ -11,7 +11,7 @@ one field in the project's dataset."><meta property="og:image" content="https://
 
     <a class="navbar-brand me-2" href="../index.html">REDCapR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.9005</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.9007</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -186,7 +186,7 @@ administrator to send you the static material.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_seconds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.442966</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3879299</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $raw_text</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
@@ -195,7 +195,7 @@ administrator to send you the static material.</p>
 <span class="r-in"><span><span class="co"># A longitudinal project (pid 212)</span></span></span>
 <span class="r-in"><span><span class="va">token</span> <span class="op">&lt;-</span> <span class="st">"0434F0E9CF53ED0587847AB6E51DE762"</span></span></span>
 <span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_metadata_read</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 95 fields was read from REDCap in 0.3 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 95 × 18</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    field_name       form_name    section_header      field_type field_label     </span>
@@ -225,7 +225,7 @@ administrator to send you the static material.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 200</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $outcome_message</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The data dictionary describing 95 fields was read from REDCap in 0.3 seconds.  The http status code was 200."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $forms_collapsed</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
@@ -234,7 +234,7 @@ administrator to send you the static material.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_seconds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2801151</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1557758</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $raw_text</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
@@ -243,19 +243,20 @@ administrator to send you the static material.</p>
 <span class="r-in"><span><span class="co"># A repeating measures (pid 3181)</span></span></span>
 <span class="r-in"><span><span class="va">token</span> <span class="op">&lt;-</span> <span class="st">"22C3FF1C8B08899FB6F86D91D874A159"</span></span></span>
 <span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_metadata_read</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 8 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 8 × 18</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   field_name form_name      section_header field_type field_label             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> record_id  intake         <span style="color: #BB0000;">NA</span>             text       Record ID               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> height     intake         <span style="color: #BB0000;">NA</span>             text       patient height          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> weight     intake         <span style="color: #BB0000;">NA</span>             text       patient weight          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> bmi        intake         <span style="color: #BB0000;">NA</span>             text       patient bmi             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> sbp        blood_pressure <span style="color: #BB0000;">NA</span>             text       systolic blood pressure </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> dbp        blood_pressure <span style="color: #BB0000;">NA</span>             text       diastolic blood pressure</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> lab        laboratory     <span style="color: #BB0000;">NA</span>             text       lab value               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> conc       laboratory     <span style="color: #BB0000;">NA</span>             text       concentration           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 18</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   field_name    form_name      section_header field_type field_label            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> record_id     intake         <span style="color: #BB0000;">NA</span>             text       Record ID              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> height        intake         <span style="color: #BB0000;">NA</span>             text       patient height         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> weight        intake         <span style="color: #BB0000;">NA</span>             text       patient weight         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> bmi           intake         <span style="color: #BB0000;">NA</span>             text       patient bmi            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> sbp           blood_pressure <span style="color: #BB0000;">NA</span>             text       systolic blood pressure</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> dbp           blood_pressure <span style="color: #BB0000;">NA</span>             text       diastolic blood pressu…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> lab           laboratory     <span style="color: #BB0000;">NA</span>             text       lab value              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> conc          laboratory     <span style="color: #BB0000;">NA</span>             text       concentration          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> image_profile image          <span style="color: #BB0000;">NA</span>             file       Picture of Patient     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 13 more variables: select_choices_or_calculations &lt;chr&gt;, field_note &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_type_or_show_slider_number &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   text_validation_min &lt;chr&gt;, text_validation_max &lt;chr&gt;, identifier &lt;chr&gt;,</span></span>
@@ -270,7 +271,7 @@ administrator to send you the static material.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 200</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $outcome_message</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The data dictionary describing 8 fields was read from REDCap in 0.2 seconds.  The http status code was 200."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $forms_collapsed</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
@@ -279,7 +280,7 @@ administrator to send you the static material.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_seconds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2013299</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1452861</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $raw_text</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
