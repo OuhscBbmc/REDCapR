@@ -58,10 +58,8 @@
 #' the name stored in REDCap is used (which is the default).
 #'
 #' @details
-#' As of REDCap 14.6.4, for files in a repeating instrument,
-#' you can't specify which repeating instance to download.
-#' It always returns the file of the first instance
-#' (within the record/patient).
+#' For files in a repeating instrument, don't specify `repeating_instrument`.
+#' The server only needs `field` (name) and `repeating_instance`.
 #'
 #' The function `redcap_download_file_oneshot()` is soft-deprecated
 #' as of REDCapR 1.2.0.

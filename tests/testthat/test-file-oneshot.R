@@ -417,7 +417,6 @@ test_that("file in repeating instrument", {
   # expect_true(start_time <= info_actual_1_2$ctime, label="The downloaded file's last change time should not precede this function's start time.")
   expect_true(start_time <= info_actual_1_2$atime, label="The downloaded file's last access time should not precede this function's start time.")
 
-
   # ---- second record, first instance --------------------------
   suppressMessages({
     returned_object_2_1 <-
