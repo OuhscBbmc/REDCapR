@@ -94,6 +94,7 @@ This will help extract forms from longitudinal & repeating projects.
 * The regex in `regex_named_captures()` is forgiving if there's an unnecessary leading space (@BlairCooper, #495, #501)
 * `redcap_log_read()` assumes all columns are character, except for `timestamp` (#525)
 * `redcap_file_download_oneshot()` no longer asks for the unnecessary parameter for `repeating_instrument` (that the REDCap server ignores).  (@BlairCooper, #506, #530)
+* `redcap_read()` and `redcap_read_oneshot()` accommodate `readr::read_csv()`'s parameter of `na`.  (Suggested by @rmtrane in #529)
 
 Version 1.1.0 (released 2022-08-10)
 ==========================================================

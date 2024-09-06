@@ -60,6 +60,8 @@
 #' REDCap project. Default is `FALSE`.
 #' @param col_types A [readr::cols()] object passed internally to
 #' [readr::read_csv()].  Optional.
+#' @param na A [character] vector passed internally to [readr::read_csv()].
+#' Defaults to `c("", "NA")`.
 #' @param guess_type A boolean value indicating if all columns should be
 #' returned as character.  If true, [readr::read_csv()] guesses the intended
 #' data type for each column.  Ignored if `col_types` is not null.
@@ -215,6 +217,7 @@ redcap_read_oneshot <- function(
   datetime_range_end            = as.POSIXct(NA),
   blank_for_gray_form_status    = FALSE,
   col_types                     = NULL,
+  na                            = c("", "NA"),
   guess_type                    = TRUE,
   guess_max                     = 1000,
   http_response_encoding        = "UTF-8",
@@ -244,6 +247,7 @@ redcap_read_oneshot <- function(
   checkmate::assert_posixct(  datetime_range_end        , any.missing=TRUE , len=1, null.ok=TRUE)
   checkmate::assert_logical( blank_for_gray_form_status , any.missing=FALSE, len=1)
 
+  checkmate::assert_character(na                        , any.missing=FALSE)
   checkmate::assert_logical(  guess_type                , any.missing=FALSE, len=1)
   checkmate::assert_numeric(   guess_max                , any.missing=FALSE, len=1, lower=1)
 
@@ -329,6 +333,7 @@ redcap_read_oneshot <- function(
         readr::read_csv(
           file            = I(kernel$raw_text),
           col_types       = col_types,
+          na              = na,
           guess_max       = guess_max,
           locale          = locale,
           show_col_types  = FALSE
