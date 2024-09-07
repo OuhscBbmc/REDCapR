@@ -89,7 +89,7 @@ Follow these steps to adapt to your desired REDCap project(s):
 \enumerate{
 \item Modify the credential file for the REDCap API with a text editor
 like \href{https://notepad-plus-plus.org/}{Notepad++},
-\href{https://code.visualstudio.com}{Visual Studio Code}, or
+Visual Studio Code, or
 \href{https://www.nano-editor.org/}{nano}.
 Replace existing records with the information from your projects.
 Delete the remaining example records.

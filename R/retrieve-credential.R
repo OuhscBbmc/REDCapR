@@ -78,7 +78,7 @@
 #' Follow these steps to adapt to your desired REDCap project(s):
 #' 1. Modify the credential file for the REDCap API with a text editor
 #'    like [Notepad++](https://notepad-plus-plus.org/),
-#'    [Visual Studio Code](https://code.visualstudio.com), or
+#'    Visual Studio Code, or
 #'    [nano](https://www.nano-editor.org/).
 #'    Replace existing records with the information from your projects.
 #'    Delete the remaining example records.

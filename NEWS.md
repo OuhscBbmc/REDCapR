@@ -8,7 +8,7 @@ Quick links:
 * [Current & previous GitHub Issues](https://github.com/OuhscBbmc/REDCapR/issues?q=is%3Aissue)
 * [Documentation for current GitHub version](https://ouhscbbmc.github.io/REDCapR/)
 
-Upcoming Changes in v1.2.0
+Version 1.2.0  (released 2024-09-08)
 ==========================================================
 
 These features are not yet on CRAN.  Install with `remotes::install_github("OuhscBbmc/REDCapR")`
