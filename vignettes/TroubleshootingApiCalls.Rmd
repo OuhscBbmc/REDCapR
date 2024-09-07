@@ -167,7 +167,7 @@ If one of these checks fail, please start by consulting your REDCap administrato
 Common Gotchas  {#gotchas-agnostic}
 ------------------------------------------------------------------
 
-1. **Problems in the project's metadata/dictionary.**  If exporting the metadata fails (*e.g.*, [`REDCapR::redcap_metadata_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_read.html) and [`redcapAPI::exportMetaData()`](https://rdrr.io/github/nutterb/redcapAPI/man/exportMetaData.html)), manually download the data dictionary from the REDCap browser.  Inspect the plain text closely in a text editor like [Visual Studio Code](https://code.visualstudio.com); avoid programs like Excel that tend to interpret, align, and decorate the values, which sometimes masks problems.  Scrutinize all elements, but especially look for nonstandard characters.  *See the next bullet.*
+1. **Problems in the project's metadata/dictionary.**  If exporting the metadata fails (*e.g.*, [`REDCapR::redcap_metadata_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_read.html) and [`redcapAPI::exportMetaData()`](https://www.rdocumentation.org/packages/redcapAPI/versions/2.0/topics/exportMetaData.html)), manually download the data dictionary from the REDCap browser.  Inspect the plain text closely in a text editor like [Visual Studio Code](https://code.visualstudio.com); avoid programs like Excel that tend to interpret, align, and decorate the values, which sometimes masks problems.  Scrutinize all elements, but especially look for nonstandard characters.  *See the next bullet.*
 
     Some API libraries test that problematic elements of a project are handled correctly.  If you encounter an element that causes problems, please consider
 
