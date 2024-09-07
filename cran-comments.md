@@ -20,8 +20,14 @@ Test environments
 R CMD check results
 -----------------------------------------------
 
-* No ERRORs, WARNINGs, or NOTEs on any builds.
-
+* No ERRORs or WARNINGs on any builds.
+* One one Ubuntu build, there was this warning.  
+  I don't understand the source.  I'm not calling any function called `tidy()` when I search.  And the two hyperlinks containing "tidy" look fine to my eye.
+  
+  ```
+  ❯ checking HTML version of manual ... NOTE
+  Skipping checking HTML validation: no command 'tidy' found
+  ```
 
 Downstream dependencies
 -----------------------------------------------
