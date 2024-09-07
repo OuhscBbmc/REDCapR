@@ -130,6 +130,8 @@
 <code><a href="../reference/redcap_log_read.html">redcap_log_read()</a></code> assumes all columns are character, except for <code>timestamp</code> (<a href="https://github.com/OuhscBbmc/REDCapR/issues/525" class="external-link">#525</a>)</li>
 <li>
 <code><a href="../reference/redcap_file_download_oneshot.html">redcap_file_download_oneshot()</a></code> no longer asks for the unnecessary parameter for <code>repeating_instrument</code> (that the REDCap server ignores). (<a href="https://github.com/BlairCooper" class="external-link">@BlairCooper</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/506" class="external-link">#506</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/530" class="external-link">#530</a>)</li>
+<li>
+<code><a href="../reference/redcap_read.html">redcap_read()</a></code> and <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code> accommodate <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_csv()</a></code>’s parameter of <code>na</code>. (Suggested by <a href="https://github.com/rmtrane" class="external-link">@rmtrane</a> in <a href="https://github.com/OuhscBbmc/REDCapR/issues/529" class="external-link">#529</a>)</li>
 </ul></div>
 </div>
     <div class="section level2">
