@@ -74,7 +74,7 @@ Useful links:
   \item \url{https://ouhscbbmc.github.io/REDCapR/}
   \item \url{https://github.com/OuhscBbmc/REDCapR}
   \item \url{https://www.ouhsc.edu/bbmc/}
-  \item \url{https://project-redcap.org}
+  \item \url{https://projectredcap.org}
   \item Report bugs at \url{https://github.com/OuhscBbmc/REDCapR/issues}
 }
 
