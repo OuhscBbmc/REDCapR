@@ -56,9 +56,9 @@ devtools::check( # Equivalent of R-hub
   remote    = TRUE,
   incoming  = TRUE
 )
-rhub::list_validated_emails(); # rhub::validate_email()
-rhub::check_for_cran(email="wibeasley@hotmail.com")
 # devtools::check_win_devel() # CRAN submission policies encourage the development version
-# revdepcheck::revdep_check(num_workers = 4)
+# Check Rhub at <https://github.com/OuhscBbmc/REDCapR/actions/workflows/rhub.yaml>
+# Check reverse dependencies at <https://github.com/OuhscBbmc/REDCapR/actions/workflows/recheck.yml>
+#   Old way: revdepcheck::revdep_check(num_workers = 4)
 # usethis::use_release_issue()
 # devtools::release(check=FALSE) #Careful, the last question ultimately uploads it to CRAN, where you can't delete/reverse your decision.
