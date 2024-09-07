@@ -83,6 +83,43 @@ test_that("default", {
   expect_match(returned_object2$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
   expect_s3_class(returned_object2$data, "tbl")
 })
+test_that("na", {
+  testthat::skip_on_cran()
+  path_expected <- "test-data/specific-redcapr/read-batch-simple/na.R"
+  col_types <- readr::cols(
+    record_id  = readr::col_integer(),
+    race___1   = readr::col_logical(),
+    race___2   = readr::col_logical(),
+    race___3   = readr::col_logical(),
+    race___4   = readr::col_logical(),
+    race___5   = readr::col_logical(),
+    race___6   = readr::col_logical()
+  )
+
+  expected_outcome_message <- "\\d+ records and 25 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+
+  returned_object <-
+    redcap_read(
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
+      na          = c("", "NA", "Nutmouse"),
+      col_types   = col_types,
+      batch_size  = 2,
+      verbose     = FALSE
+    )
+
+  if (update_expectation) save_expected(returned_object$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
+
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_true( returned_object$success)
+  expect_match(returned_object$status_codes, regexp="200", perl=TRUE)
+  expect_true( returned_object$records_collapsed=="", "A subset of records was not requested.")
+  expect_true( returned_object$fields_collapsed=="", "A subset of fields was not requested.")
+  expect_true( returned_object$filter_logic=="", "A filter was not specified.")
+  expect_match(returned_object$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
+  expect_s3_class(returned_object$data, "tbl")
+})
 test_that("col_types", {
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/read-batch-simple/col_types.R"
