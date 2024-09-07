@@ -8,8 +8,8 @@ Thank you for taking the time to review my submission, and please tell me if the
 Test environments
 -----------------------------------------------
 
-1. Local Ubuntu, R 4.2.2
-2. Local Win11, R 4.3.1 patched
+1. Local Ubuntu, R 4.4.1
+2. Local Win11, R 4.4.1 patched
 3. R-hub
     1. [Ubuntu Linux, R-release, GCC](https://builder.r-hub.io/status/REDCapR_1.1.9005.tar.gz-6f45462d131a4ac49833c0c7c014bad0)
     2. [Fedora Linux, R-devel, clang, gfortran](https://builder.r-hub.io/status/REDCapR_1.1.9005.tar.gz-2e9560e6fcdb4467af8e9ea8d22c165d)
