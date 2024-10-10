@@ -33,7 +33,7 @@ test_that("simple", {
 test_that("longitudinal", {
   testthat::skip_on_cran()
 
-  credential    <- retrieve_credential_testing(212L)
+  credential    <- retrieve_credential_testing("longitudinal")
   path_expected <- "test-data/specific-redcapr/read-batch-plumbing/longitudinal.R"
   desired_forms <- c("visit_observed_behavior") # Doesn't include the initial "demographics" form.
   expected_outcome_message <- "\\d+ records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
@@ -61,7 +61,7 @@ test_that("longitudinal", {
 test_that("repeated", {
   testthat::skip_on_cran()
 
-  credential    <- retrieve_credential_testing(3181L)
+  credential    <- retrieve_credential_testing("vignette-repeating")
   path_expected <- "test-data/specific-redcapr/read-batch-plumbing/repeated.R"
   # desired_forms <- c("visit_observed_behavior") # Doesn't include the initial "demographics" form.
   desired_forms <- c("blood_pressure", "laboratory") # Doesn't include the initial "demographics" form.

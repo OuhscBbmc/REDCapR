@@ -1,6 +1,6 @@
 library(testthat)
 
-credential  <- retrieve_credential_testing(1490L)
+credential  <- retrieve_credential_testing("metadata-write")
 
 # Read in the dictionary in R's memory from a csv file.
 path_in <- system.file(

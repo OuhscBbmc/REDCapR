@@ -1,6 +1,6 @@
 library(testthat)
 
-credential          <- retrieve_credential_testing(212L)
+credential          <- retrieve_credential_testing("longitudinal")
 project             <- redcap_project$new(redcap_uri=credential$redcap_uri, token=credential$token)
 update_expectation  <- FALSE
 

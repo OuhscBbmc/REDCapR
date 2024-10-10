@@ -1,0 +1,41 @@
+-
+  instance: bbmc
+  credential_file: "misc/example.credentials"
+  projects:
+    - simple: 153
+    - longitudinal: 212
+    - simple-write: 213
+    - russian: 268
+    - empty-rows: 690
+    - single-column: 691
+    - super-wide-1: 753
+    - static-survey: 817
+    - clinical-trial: 977
+    # 0
+    - nonnumeric-record_id: 998
+    - dag: 999
+    - potentially-problematic-values: 1396
+    - repeating-instruments: 1400
+    - potentially-problematic-dictionary: 1425
+    - metadata-write: 1490
+    - dag-write: 2545
+    - super-wide-2: 2593
+    - super-wide-3: 2597
+    - repeating-instruments-sparse: 2603
+    - arm-single-delete: 2626
+    - arm-multiple-delete: 2627
+    - arm-single-longitudinal: 2629
+    - decimal-comma-and-dot: 2630
+    - decimal-comma: 2631
+    - decimal-dot: 2632
+    - validation-types: 2634
+    - blank-for-gray-status: 3003
+    - checkboxes-1: 3074
+    - vignette-repeating: 3181
+-
+  instance: dev-2
+  credential_file: "misc/example.credentials"
+  projects:
+    - simple: 953
+    - longitudinal: 912
+    - simple-write: 913

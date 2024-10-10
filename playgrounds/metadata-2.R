@@ -1,5 +1,5 @@
 # ---- commas-as-decimals ------------------------------------------------------
-credential  <- retrieve_credential_testing(2630L)
+credential  <- retrieve_credential_testing("decimal-comma-and-dot")
 m <- redcap_metadata_read(credential$redcap_uri, credential$token)$data
 m$text_validation_type_or_show_slider_number
 
@@ -19,7 +19,7 @@ for (variable in colnames(d)) {
 d
 
 # ---- longitudinal ------------------------------------------------------
-credential  <- retrieve_credential_testing(212L)
+credential  <- retrieve_credential_testing("longitudinal")
 d <- redcap_read_oneshot(credential$redcap_uri, credential$token, col_types = readr::cols(.default = readr::col_character()))$data
 d_m <- redcap_metadata_read(credential$redcap_uri, credential$token)$data
 d_m$text_validation_type_or_show_slider_number

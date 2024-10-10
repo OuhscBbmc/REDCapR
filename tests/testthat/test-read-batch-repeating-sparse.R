@@ -1,6 +1,6 @@
 library(testthat)
 
-credential  <- retrieve_credential_testing(project_id = 2603L)
+credential  <- retrieve_credential_testing("repeating-instruments-sparse")
 update_expectation  <- FALSE
 
 test_that("smoke test", {

@@ -10,7 +10,7 @@ populate_project_delete_single_arm <- function(verbose = FALSE) {
     # nocov end
   }
 
-  credential  <- retrieve_credential_testing(2626L)
+  credential  <- retrieve_credential_testing("arm-single-delete")
 
   project <- REDCapR::redcap_project$new(
     redcap_uri    = credential$redcap_uri,

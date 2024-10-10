@@ -28,7 +28,7 @@ empty_data_frame <-
 
 test_that("Longitudinal Single Arm", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(2629L)
+  credential  <- retrieve_credential_testing("arm-single-longitudinal")
 
   path_expected <- "test-data/longitudinal-single-arm/event.csv"
   expected_data_frame <- retrieve_expected_events(path_expected)
@@ -50,7 +50,7 @@ test_that("Longitudinal Single Arm", {
 
 test_that("Longitudinal Two Arms", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(212L)
+  credential  <- retrieve_credential_testing("longitudinal")
 
   path_expected <- "test-data/project-longitudinal/event.csv"
   expected_data_frame <- retrieve_expected_events(path_expected)
@@ -72,7 +72,7 @@ test_that("Longitudinal Two Arms", {
 
 test_that("Classic", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(153L)
+  credential  <- retrieve_credential_testing()
 
   expected_outcome_message <- "A 'classic' REDCap project has no events.  Retrieved in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message({
@@ -93,7 +93,7 @@ test_that("Classic", {
 
 test_that("delete-multiple-arm", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(2627L)
+  credential  <- retrieve_credential_testing("arm-multiple-delete")
 
   path_expected <- "test-data/delete-multiple-arm/event.csv"
   expected_data_frame <- retrieve_expected_events(path_expected)
@@ -115,7 +115,7 @@ test_that("delete-multiple-arm", {
 
 test_that("delete-single-arm", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(2626L)
+  credential  <- retrieve_credential_testing("arm-single-delete")
 
   expected_outcome_message <- "A 'classic' REDCap project has no events.  Retrieved in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message({
@@ -136,7 +136,7 @@ test_that("delete-single-arm", {
 
 test_that("Bad Token", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(2629L)
+  credential  <- retrieve_credential_testing("arm-single-longitudinal")
   bad_token   <- "1234567890ABCDEF1234567890ABCDEF"
 
   expected_error_message <- "The REDCapR event export failed\\. The http status code was 403. The error message was: 'ERROR: You do not have permissions to use the API'"

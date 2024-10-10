@@ -1,6 +1,6 @@
 library(testthat)
 
-credential_1  <- retrieve_credential_testing(999L)
+credential_1  <- retrieve_credential_testing("dag")
 credential_2  <- retrieve_credential_testing()
 update_expectation  <- FALSE
 

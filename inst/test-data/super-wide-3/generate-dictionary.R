@@ -91,7 +91,7 @@ ds <-
   )
 
 # takes ~10 min to upload
-credential <- retrieve_credential_testing(2597L)
+credential <- retrieve_credential_testing("super-wide-3")
 REDCapR::redcap_write(
   ds          = ds,
   redcap_uri  = credential$redcap_uri,

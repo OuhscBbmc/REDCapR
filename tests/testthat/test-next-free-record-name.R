@@ -29,7 +29,7 @@ test_that("Numeric ID", {
 test_that("Arm", {
   testthat::skip_on_cran()
 
-  credential_arm  <- retrieve_credential_testing(212L)
+  credential_arm  <- retrieve_credential_testing("longitudinal")
 
   expected <- "305"
   observed <-
@@ -45,7 +45,7 @@ test_that("Arm", {
 test_that("Character ID", {
   testthat::skip_on_cran()
 
-  credential_character <- retrieve_credential_testing(998L)
+  credential_character <- retrieve_credential_testing("nonnumeric-record_id")
 
   expected <- "1"
   observed <-
@@ -61,7 +61,7 @@ test_that("Character ID", {
 test_that("DAG", {
   testthat::skip_on_cran()
 
-  credential_dag <- retrieve_credential_testing(999L)
+  credential_dag <- retrieve_credential_testing("dag")
 
   expected <- "331-3"
   observed <-

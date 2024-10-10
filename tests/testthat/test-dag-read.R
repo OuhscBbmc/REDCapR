@@ -1,7 +1,7 @@
 library(testthat)
 
 credential_1        <- retrieve_credential_testing()
-credential_no_dag   <- retrieve_credential_testing(2597L)
+credential_no_dag   <- retrieve_credential_testing("super-wide-3")
 
 test_that("smoke", {
   testthat::skip_on_cran()

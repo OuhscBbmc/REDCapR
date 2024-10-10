@@ -12,7 +12,7 @@ populate_project_simple <- function(batch = FALSE, verbose = TRUE) {
     # nocov end
   }
 
-  credential  <- retrieve_credential_testing(213L)
+  credential  <- retrieve_credential_testing("simple-write")
 
   project <- REDCapR::redcap_project$new(
     redcap_uri    = credential$redcap_uri,
