@@ -62,7 +62,7 @@
 #' ds_to_write <-
 #'   readr::read_csv(
 #'     file = system.file(
-#'       "test-data/project/simple/metadata.csv",
+#'       "test-data/projects/simple/metadata.csv",
 #'       package = "REDCapR"
 #'     ),
 #'     col_types = readr::cols(.default = readr::col_character())
