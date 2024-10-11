@@ -10,7 +10,7 @@
     - single-column: 691
     - super-wide-1: 753
     - static-survey: 817
-    - clinical-trial: 977
+    - clinical-trial-1: 977
     # 0
     - nonnumeric-record_id: 998
     - dag: 999
@@ -44,7 +44,7 @@
     - single-column: 0
     - super-wide-1: 0
     - static-survey: 0
-    - clinical-trial: 0
+    - clinical-trial-1: 0
     - nonnumeric-record_id: 0
     - dag: 0
     - potentially-problematic-values: 0
