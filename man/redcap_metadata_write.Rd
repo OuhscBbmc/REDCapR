@@ -73,7 +73,7 @@ token          <- "457C24AB91B7FCF5B1A7DA67E70E24C7"
 ds_to_write <-
   readr::read_csv(
     file = system.file(
-      "test-data/project-simple/metadata.csv",
+      "test-data/project/simple/metadata.csv",
       package = "REDCapR"
     ),
     col_types = readr::cols(.default = readr::col_character())
