@@ -96,7 +96,7 @@ ds_wide <-
     arm   = as.integer(sub(pattern, "\\2", redcap_event_name))
   ) %>%
   dplyr::select(study_id, event, arm, pmq1, pmq2, pmq3, pmq4) %>%
-  dplyr::filter(!(event %in% 
+  dplyr::filter(!(event %in%
     c("enrollment", "final_visit", "deadline_to_return", "deadline_to_opt_ou")
   )) %>%
   tidyr::pivot_wider(
