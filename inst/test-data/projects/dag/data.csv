@@ -1,0 +1,4 @@
+record_id,redcap_data_access_group,first_name,last_name,address,telephone,email,dob,age,ethnicity,race,sex,height,weight,bmi,comments,demographics_complete
+331-1,daga,aa,AA,,,,,,,,,,,,,0
+331-2,daga,bb,BB,,,,,,,,,,,,,0
+332-3,dagb,cc,CC,,,,,,,,,,,,,0

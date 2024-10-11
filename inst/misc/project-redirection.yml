@@ -45,8 +45,8 @@
     - super-wide-1: 40
     - static-survey: 41
     - clinical-trial-1: 42
-    - nonnumeric-record-id: 0
-    - dag: 0
+    - nonnumeric-record-id: 43
+    - dag: 44
     - potentially-problematic-values: 0
     - repeating-instruments: 0
     - potentially-problematic-dictionary: 0
