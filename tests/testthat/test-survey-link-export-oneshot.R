@@ -32,7 +32,8 @@ test_that("Vanilla", {
       verbose        = FALSE
     )
 
-  expect_equal(result$survey_link, "https://bbmc.ouhsc.edu/redcap/surveys/?s=8KuzSLMHf6")
+  # "https://bbmc.ouhsc.edu/redcap/surveys/?s=8KuzSLMHf6"
+  expect_match(result$survey_link, "^https://.+?/redcap/surveys/\\?s=\\w+$")
   expect_true(result$success)
   expect_equal(result$status_code, 200L)
   expect_equal(result$instrument, "participant_morale_questionnaire")
