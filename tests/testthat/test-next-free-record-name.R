@@ -45,7 +45,7 @@ test_that("Arm", {
 test_that("Character ID", {
   testthat::skip_on_cran()
 
-  credential_character <- retrieve_credential_testing("nonnumeric-record_id")
+  credential_character <- retrieve_credential_testing("nonnumeric-record-id")
 
   expected <- "1"
   observed <-

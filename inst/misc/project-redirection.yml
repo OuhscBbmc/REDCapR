@@ -12,7 +12,7 @@
     - static-survey: 817
     - clinical-trial-1: 977
     # 0
-    - nonnumeric-record_id: 998
+    - nonnumeric-record-id: 998
     - dag: 999
     - potentially-problematic-values: 1396
     - repeating-instruments: 1400
@@ -39,13 +39,13 @@
     - simple: 33
     - longitudinal: 34
     - simple-write: 36
-    - russian: 0
-    - empty-rows: 0
-    - single-column: 0
-    - super-wide-1: 0
-    - static-survey: 0
-    - clinical-trial-1: 0
-    - nonnumeric-record_id: 0
+    - russian: 37
+    - empty-rows: 38
+    - single-column: 39
+    - super-wide-1: 40
+    - static-survey: 41
+    - clinical-trial-1: 42
+    - nonnumeric-record-id: 0
     - dag: 0
     - potentially-problematic-values: 0
     - repeating-instruments: 0
