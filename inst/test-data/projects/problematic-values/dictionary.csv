@@ -3,3 +3,7 @@ record_id,form_1,,text,"Record ID",,,,,,,,,,,,,
 time_1,form_1,,text,"Potentially problematic time values 
 
 See https://github.com/OuhscBbmc/REDCapR/issues/245",,,,,,,,,,,,,
+date_before_validation,form_1,,text,"Dates entered before validation logic added
+",,,date_ymd,,,,,,,,,,
+integer_before_validation,form_1,,text,"Integer entered before validation logic added
+",,,integer,,,,,,,,,,
