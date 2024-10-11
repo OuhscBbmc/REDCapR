@@ -5,7 +5,7 @@ uri   <- "https://bbmc.ouhsc.edu/redcap/api/"
 token <- "9A81268476645C4E5F03428B8AC3AA7B" # 153
 token <- "0434F0E9CF53ED0587847AB6E51DE762" # 212
 # token <- "CCB7E11837D41126D67C744F97389E04" # 753 - superwide
-# token <- "F187271FC6FD72C3BFCE37990A6BF6A7" # 1400 - Repeating Instruments # 753 - superwide
+# token <- "054009B8FBB899DED4D00F29792816AD" # 1400 - Repeating Instruments # 753 - superwide
 # token <- "221E86DABFEEA233067C6889991B7FBB" # 1425 - Potentially problematic dictionary
 # token <- "8F5313CAA266789F560D79EFCEE2E2F1" # 2634 - Validation Types
 
