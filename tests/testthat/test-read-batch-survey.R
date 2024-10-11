@@ -36,7 +36,7 @@ test_that("smoke", {
 })
 
 test_that("so-example-data-frame-retrieval", {
-  path_expected <- "test-data/project-survey/expected/so-example-data-frame-retrieval.R"
+  path_expected <- "test-data/projects/survey/expected/so-example-data-frame-retrieval.R"
 
   actual <- tibble::tibble(a=1:5, b=6:10) # saveRDS(actual, file.path("./inst", directory_relative, file_name))
 
@@ -49,7 +49,7 @@ test_that("so-example-data-frame-retrieval", {
 
 test_that("default", {
   testthat::skip_on_cran()
-  path_expected <- "test-data/project-survey/expected/default.R"
+  path_expected <- "test-data/projects/survey/expected/default.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   ###########################

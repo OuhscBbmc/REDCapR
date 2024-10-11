@@ -68,7 +68,7 @@ ds_dictionary$`Field Label`[2] <-
 
 ds_dictionary$variable_index <- NULL # Drop before writing to disk.
 
-readr::write_csv(ds_dictionary, "inst/test-data/super-wide-3/super-wide-3-dictionary.csv")
+readr::write_csv(ds_dictionary, "inst/test-data/projects/super-wide-3/super-wide-3-dictionary.csv")
 
 
 ds_dictionary_slim <-
@@ -81,7 +81,7 @@ row_count <- 20
 #   ds_dictionary$`Variable / Field Name` |>
 #   purrr::map_dfc(~paste0(.x, "--", 1:row_count), ) |>
 #   magrittr::set_colnames(ds_dictionary$`Variable / Field Name`)# |>
-#   # readr::write_csv("inst/test-data/super-wide-3/super-wide-3.csv")
+#   # readr::write_csv("inst/test-data/projects/super-wide-3/super-wide-3.csv")
 ds <-
   matrix(rep(1, row_count * nrow(ds_dictionary_slim)), nrow = row_count) |>
   tibble::as_tibble() |>
