@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="REDCapR Repeating Instruments --See https://github.com/OuhscBbmc/REDCapR" AsOfDateTime="2024-10-11T17:55:35" CreationDateTime="2024-10-11T17:55:35" SourceSystem="REDCap" SourceSystemVersion="14.6.11">
+<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="REDCapR Repeating Instruments --See https://github.com/OuhscBbmc/REDCapR" AsOfDateTime="2024-10-11T18:11:59" CreationDateTime="2024-10-11T18:11:59" SourceSystem="REDCap" SourceSystemVersion="14.6.11">
 <Study OID="Project.REDCapRRepeatingInstrumentsSee">
 <GlobalVariables>
 	<StudyName>REDCapR Repeating Instruments --See https://github.com/OuhscBbmc/REDCapR</StudyName>
@@ -39,7 +39,7 @@
 		<redcap:Reports title="demographics only" unique_report_name="R-847NCTTPKH" report_order="1" user_access="ALL" user_edit_access="ALL" description="" combine_checkbox_values="0" output_dags="0" output_survey_fields="0" output_missing_data_codes="0" remove_line_breaks_in_values="1" orderby_field1="record_id" orderby_sort1="ASC" orderby_field2="" orderby_sort2="" orderby_field3="" orderby_sort3="" advanced_logic="" filter_type="RECORD" dynamic_filter1="" dynamic_filter2="" dynamic_filter3="" hash="YDWXJLCD3FXWMCFJ" short_url="" is_public="0" report_display_include_repeating_fields="0" report_display_header="BOTH" report_display_data="BOTH" limiter_logic="" redcap_reports_fields="record_id,date_enrolled,dob" redcap_reports_filter_dags="" redcap_reports_filter_events="" ID="7b1b691d12832e10daf32561c092ee460f7ecb2e"/>
 	</redcap:ReportsGroup>
 </GlobalVariables>
-<MetaDataVersion OID="Metadata.REDCapRRepeatingInstrumentsSee_2024-10-11_1755" Name="REDCapR Repeating Instruments --See https://github.com/OuhscBbmc/REDCapR" redcap:RecordIdField="record_id">
+<MetaDataVersion OID="Metadata.REDCapRRepeatingInstrumentsSee_2024-10-11_1811" Name="REDCapR Repeating Instruments --See https://github.com/OuhscBbmc/REDCapR" redcap:RecordIdField="record_id">
 	<FormDef OID="Form.demographics" Name="demographics" Repeating="No" redcap:FormName="demographics">
 		<ItemGroupRef ItemGroupOID="demographics.record_id" Mandatory="No"/>
 		<ItemGroupRef ItemGroupOID="demographics.demographics_complete" Mandatory="No"/>
@@ -81,7 +81,7 @@
 	<ItemDef OID="dob" Name="dob" DataType="date" Length="999" redcap:Variable="dob" redcap:FieldType="text" redcap:TextValidationType="date_ymd" redcap:FieldNote="YYYY-MM-DD" redcap:Identifier="y">
 		<Question><TranslatedText>Date of Birth</TranslatedText></Question>
 	</ItemDef>
-	<ItemDef OID="age" Name="age" DataType="float" Length="999" redcap:Variable="age" redcap:FieldType="calc" redcap:Calculation="rounddown(datediff(&quot;today&quot;, [dob], &quot;y&quot;, &quot;ymd&quot;), 1 )">
+	<ItemDef OID="age" Name="age" DataType="text" Length="999" redcap:Variable="age" redcap:FieldType="text">
 		<Question><TranslatedText>Age (years)</TranslatedText></Question>
 	</ItemDef>
 	<ItemDef OID="ethnicity" Name="ethnicity" DataType="text" Length="1" redcap:Variable="ethnicity" redcap:FieldType="radio" redcap:CustomAlignment="LH">
@@ -151,7 +151,7 @@
 	</CodeList>
 </MetaDataVersion>
 </Study>
-<ClinicalData StudyOID="Project.REDCapRRepeatingInstrumentsSee" MetaDataVersionOID="Metadata.REDCapRRepeatingInstrumentsSee_2024-10-11_1755">
+<ClinicalData StudyOID="Project.REDCapRRepeatingInstrumentsSee" MetaDataVersionOID="Metadata.REDCapRRepeatingInstrumentsSee_2024-10-11_1811">
 	<SubjectData SubjectKey="1" redcap:RecordIdField="record_id">
 			<FormData FormOID="Form.demographics" FormRepeatKey="1">
 				<ItemGroupData ItemGroupOID="demographics.record_id" ItemGroupRepeatKey="1">

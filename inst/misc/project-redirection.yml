@@ -48,7 +48,7 @@
     - nonnumeric-record-id: 43
     - dag: 44
     - potentially-problematic-values: 45
-    - repeating-instruments: 0
+    - repeating-instruments: 46
     - potentially-problematic-dictionary: 0
     - metadata-write: 0
     - dag-write: 0
