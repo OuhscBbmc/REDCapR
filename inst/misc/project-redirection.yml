@@ -37,8 +37,8 @@
   credential_file: "misc/example.credentials"
   projects:
     - simple: 33
-    - longitudinal: 0
-    - simple-write: 0
+    - longitudinal: 34
+    - simple-write: 36
     - russian: 0
     - empty-rows: 0
     - single-column: 0
