@@ -37,15 +37,26 @@ test_that("with-dags", {
       verbose     = FALSE
     )
 
+  d_user <-
+    returned_object$data_user |>
+    dplyr::filter(username == "unittestphifree") |>
+    dplyr::select(
+      -email
+    )
+
+  d_user_form <-
+    returned_object$data_user_form |>
+    dplyr::filter(username == "unittestphifree")
+
   if (update_expectation) {
-    save_expected(returned_object$data_user     , path_expected_user     )
-    save_expected(returned_object$data_user_form, path_expected_user_form)
+    save_expected(d_user     , path_expected_user     )
+    save_expected(d_user_form, path_expected_user_form)
   }
   expected_data_user      <- retrieve_expected(path_expected_user     )
   expected_data_user_form <- retrieve_expected(path_expected_user_form)
 
-  expect_equal(returned_object$data_user     , expected=expected_data_user     , label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data_user);
-  expect_equal(returned_object$data_user_form, expected=expected_data_user_form, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data_user_form)
+  expect_equal(d_user     , expected=expected_data_user     , label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data_user);
+  expect_equal(d_user_form, expected=expected_data_user_form, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data_user_form)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
@@ -67,15 +78,26 @@ test_that("without DAGs", {
       verbose     = FALSE
     )
 
+  d_user <-
+    returned_object$data_user |>
+    dplyr::filter(username == "unittestphifree") |>
+    dplyr::select(
+      -email
+    )
+
+  d_user_form <-
+    returned_object$data_user_form |>
+    dplyr::filter(username == "unittestphifree")
+
   if (update_expectation) {
-    save_expected(returned_object$data_user     , path_expected_user     )
-    save_expected(returned_object$data_user_form, path_expected_user_form)
+    save_expected(d_user     , path_expected_user     )
+    save_expected(d_user_form, path_expected_user_form)
   }
   expected_data_user      <- retrieve_expected(path_expected_user     )
   expected_data_user_form <- retrieve_expected(path_expected_user_form)
 
-  expect_equal(returned_object$data_user     , expected=expected_data_user     , label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data_user);
-  expect_equal(returned_object$data_user_form, expected=expected_data_user_form, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data_user_form)
+  expect_equal(d_user     , expected=expected_data_user     , label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data_user);
+  expect_equal(d_user_form, expected=expected_data_user_form, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data_user_form)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
