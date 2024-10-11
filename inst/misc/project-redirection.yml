@@ -47,7 +47,7 @@
     - clinical-trial-1: 42
     - nonnumeric-record-id: 43
     - dag: 44
-    - potentially-problematic-values: 0
+    - potentially-problematic-values: 45
     - repeating-instruments: 0
     - potentially-problematic-dictionary: 0
     - metadata-write: 0
