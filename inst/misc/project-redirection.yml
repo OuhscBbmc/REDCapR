@@ -55,7 +55,7 @@
     - super-wide-2: 50
     - super-wide-3: 51
     - repeating-instruments-sparse: 52
-    - arm-single-delete: 0
+    - arm-single-delete: 53
     - arm-multiple-delete: 0
     - arm-single-longitudinal: 0
     - decimal-comma-and-dot: 0
