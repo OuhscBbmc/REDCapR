@@ -50,7 +50,7 @@
     - potentially-problematic-values: 45
     - repeating-instruments: 46
     - potentially-problematic-dictionary: 47
-    - metadata-write: 0
+    - metadata-write: 48
     - dag-write: 0
     - super-wide-2: 0
     - super-wide-3: 0
