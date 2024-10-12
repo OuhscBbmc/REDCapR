@@ -94,8 +94,8 @@ ds <-
 credential <- retrieve_credential_testing("super-wide-3")
 REDCapR::redcap_write(
   ds          = ds,
-  redcap_uri  = credential$redcap_uri,
-  token       = credential$token,
+  redcap_uri  = "https://redcap-dev-2.ouhsc.edu/redcap/api/", # credential$redcap_uri,
+  token       = "5938FF306FC4BEBE75A3825B6BB310E8", #credential$token,
   batch_size  = 1
 )
 

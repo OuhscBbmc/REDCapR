@@ -53,7 +53,7 @@
     - metadata-write: 48
     - dag-write: 49
     - super-wide-2: 50
-    - super-wide-3: 0
+    - super-wide-3: 51
     - repeating-instruments-sparse: 0
     - arm-single-delete: 0
     - arm-multiple-delete: 0
