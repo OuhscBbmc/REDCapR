@@ -19,7 +19,7 @@ populate_project_dag_write <- function(batch = FALSE, verbose = FALSE) {
     token         = credential$token
   )
   path_in_dag <- system.file(
-    "test-data/project-dag/data.csv",
+    "test-data/projects/dag/data.csv",
     package = "REDCapR"
   )
 
