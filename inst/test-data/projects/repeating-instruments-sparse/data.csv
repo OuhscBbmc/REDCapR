@@ -1,0 +1,10 @@
+record_id,redcap_repeat_instrument,redcap_repeat_instance,date_enrolled,first_name,dob,age,ethnicity,race,sex,demographics_complete,date_bp,bp_systolic,bp_diastolic,bp_complete
+1,,,2019-10-14,aaa,2010-10-14,8.9,1,4,0,2,,,,
+1,bp,1,,,,,,,,,2019-10-14,110,100,2
+1,bp,2,,,,,,,,,2019-10-14,111,101,2
+1,bp,3,,,,,,,,,2019-10-14,112,102,2
+2,,,2019-02-02,bbb,2010-02-02,9.6,0,6,1,2,,,,
+2,bp,1,,,,,,,,,2004-04-04,114,104,2
+3,,,2021-11-04,"empty 3",,,,,,0,,,,
+4,,,2021-11-04,"empty 4",,,,,,0,,,,
+5,,,,"empty 5",,,,,,0,,,,
