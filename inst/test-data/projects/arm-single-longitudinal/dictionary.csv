@@ -2,3 +2,4 @@
 record_id,collection,,text,"Record ID",,,,,,,,,,,,,
 interview_date,collection,,text,interview_date,,,date_ymd,,,,,,,,,,
 weight,collection,,text,weight,,,,,,,,,,,,,
+image_profile,collection,,file,"Picture of fake patient",,,,,,,,,,,,,

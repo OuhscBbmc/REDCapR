@@ -57,7 +57,7 @@
     - repeating-instruments-sparse: 52
     - arm-single-delete: 53
     - arm-multiple-delete: 54
-    - arm-single-longitudinal: 0
+    - arm-single-longitudinal: 55
     - decimal-comma-and-dot: 0
     - decimal-comma: 0
     - decimal-dot: 0
