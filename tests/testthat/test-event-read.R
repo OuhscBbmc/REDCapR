@@ -30,7 +30,7 @@ test_that("Longitudinal Single Arm", {
   testthat::skip_on_cran()
   credential  <- retrieve_credential_testing("arm-single-longitudinal")
 
-  path_expected <- "test-data/longitudinal-single-arm/event.csv"
+  path_expected <- "test-data/projects/arm-single-longitudinal/event.csv"
   expected_data_frame <- retrieve_expected_events(path_expected)
 
   expected_outcome_message <- "The list of events was retrieved from the REDCap project in \\d+(\\.\\d+\\W|\\W)seconds\\."

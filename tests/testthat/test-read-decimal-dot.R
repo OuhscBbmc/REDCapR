@@ -5,7 +5,7 @@ test_that("default-mismatched", {
   testthat::skip_on_cran()
   credential  <- retrieve_credential_testing("decimal-comma-and-dot")
 
-  path_expected <- "test-data/decimal-comma-and-dot/redcapr-specific/default-mismatched.R"
+  path_expected <- "test-data/projects/decimal-comma-and-dot/redcapr-specific/default-mismatched.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   returned_object <-
