@@ -34,7 +34,7 @@ test_that("locale-comma-oneshot", {
   credential  <- retrieve_credential_testing("decimal-comma")
   locale      <- readr::locale(decimal_mark = ",")
 
-  path_expected <- "test-data/decimal-comma/redcapr-specific/set-locale.R"
+  path_expected <- "test-data/projects/decimal-comma/redcapr-specific/set-locale.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   returned_object <-
@@ -64,7 +64,7 @@ test_that("locale-comma-batch", {
   credential  <- retrieve_credential_testing("decimal-comma")
   locale      <- readr::locale(decimal_mark = ",")
 
-  path_expected <- "test-data/decimal-comma/redcapr-specific/set-locale.R"
+  path_expected <- "test-data/projects/decimal-comma/redcapr-specific/set-locale.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   returned_object <-
