@@ -62,8 +62,11 @@ test_that("DAG", {
   testthat::skip_on_cran()
 
   credential_dag <- retrieve_credential_testing("dag")
+  if (credential_dag$redcap_uri != "https://redcap-dev-2.ouhsc.edu/redcap/api/") {
+    testthat::skip("Skipping test when run on a different server.")
+  }
 
-  expected <- "331-3"
+  expected <- "20-1"
   observed <-
     redcap_next_free_record_name(
       redcap_uri  = credential_dag$redcap_uri,
