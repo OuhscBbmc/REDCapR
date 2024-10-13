@@ -60,7 +60,7 @@
     - arm-single-longitudinal: 55
     - decimal-comma-and-dot: 56
     - decimal-comma: 57
-    - decimal-dot: 0
+    - decimal-dot: 58
     - validation-types: 0
     - blank-for-gray-status: 0
     - checkboxes-1: 0
