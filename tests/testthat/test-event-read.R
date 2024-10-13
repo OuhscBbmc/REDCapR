@@ -5,12 +5,12 @@ retrieve_expected_events <- function(path) {
   if (!file.exists(full_path))
     stop("The expected file `", full_path, "` was not found.")  # nocov
 
-  col_types <- readr::cols(
+  col_types <- readr::cols_only(
     event_name         = readr::col_character(),
     arm_num            = readr::col_integer(),
     unique_event_name  = readr::col_character(),
-    custom_event_label = readr::col_character(),
-    event_id           = readr::col_integer()
+    custom_event_label = readr::col_character()#,
+    # event_id           = readr::col_integer()
   )
 
   full_path %>%
@@ -22,8 +22,8 @@ empty_data_frame <-
     event_name         = character(0),
     arm_num            = integer(0),
     unique_event_name  = character(0),
-    custom_event_label = character(0),
-    event_id           = integer(0)
+    custom_event_label = character(0)#,
+    # event_id           = integer(0)
   )
 
 test_that("Longitudinal Single Arm", {
@@ -40,6 +40,11 @@ test_that("Longitudinal Single Arm", {
       token             = credential$token,
       verbose           = FALSE
     )
+
+  expect_true(all(!is.na(returned_object$data$event_id)))
+  expect_true(all(0 < returned_object$data$event_id))
+
+  returned_object$data$event_id <- NULL
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
   expect_equal(returned_object$status_code, expected=200L)
@@ -63,6 +68,11 @@ test_that("Longitudinal Two Arms", {
       verbose           = FALSE
     )
 
+  expect_true(all(!is.na(returned_object$data$event_id)))
+  expect_true(all(0 < returned_object$data$event_id))
+
+  returned_object$data$event_id <- NULL
+
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object2$raw_text)
@@ -83,6 +93,11 @@ test_that("Classic", {
         verbose           = TRUE
       )
   })
+
+  expect_true(all(!is.na(returned_object$data$event_id)))
+  expect_true(all(0 < returned_object$data$event_id))
+
+  returned_object$data$event_id <- NULL
 
   expect_equal(returned_object$data, expected=empty_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
   expect_equal(returned_object$status_code, expected=400L)
@@ -106,6 +121,11 @@ test_that("delete-multiple-arm", {
       verbose           = FALSE
     )
 
+  expect_true(all(!is.na(returned_object$data$event_id)))
+  expect_true(all(0 < returned_object$data$event_id))
+
+  returned_object$data$event_id <- NULL
+
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object2$raw_text)
@@ -126,6 +146,11 @@ test_that("delete-single-arm", {
         verbose           = TRUE
       )
   })
+
+  expect_true(all(!is.na(returned_object$data$event_id)))
+  expect_true(all(0 < returned_object$data$event_id))
+
+  returned_object$data$event_id <- NULL
 
   expect_equal(returned_object$data, expected=empty_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
   expect_equal(returned_object$status_code, expected=400L)
