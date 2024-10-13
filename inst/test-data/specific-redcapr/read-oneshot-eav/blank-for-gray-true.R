@@ -14,7 +14,6 @@ NA), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02",
     "A mouse character from a good book", "completely made up", 
     "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache", 
-    NA), mugshot = c(324901L, 324902L, 324903L, 324904L, 324905L, 
     NA), race___1 = c(FALSE, FALSE, FALSE, FALSE, TRUE, FALSE
     ), race___2 = c(FALSE, FALSE, FALSE, TRUE, FALSE, FALSE), 
     race___3 = c(FALSE, TRUE, FALSE, FALSE, FALSE, FALSE), race___4 = c(FALSE, 
