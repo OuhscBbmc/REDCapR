@@ -19,6 +19,10 @@ test_that("simple", {
   path_expected <- "test-data/specific-redcapr/project-info-read/simple.R"
   expected_outcome_message <- "\\d+ rows were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
+  if (credential$redcap_uri != "https://redcap-dev-2.ouhsc.edu/redcap/api/") {
+    testthat::skip("Skip when run a different server.")
+  }
+
   returned_object <-
     redcap_project_info_read(
       redcap_uri    = credential$redcap_uri,
@@ -79,6 +83,10 @@ test_that("chicago", {
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/project-info-read/chicago.R"
   expected_outcome_message <- "\\d+ rows were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
+
+  if (credential$redcap_uri != "https://redcap-dev-2.ouhsc.edu/redcap/api/") {
+    testthat::skip("Skip when run a different server.")
+  }
 
   server_locale <- readr::locale(tz = "America/Chicago")
 
