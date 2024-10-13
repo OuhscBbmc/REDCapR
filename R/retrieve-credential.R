@@ -34,7 +34,7 @@
 #' )
 #'
 #' @param path_credential The file path to the CSV containing the credentials.
-#'  Required.
+#' Required.
 #' @param project_id The ID assigned to the project withing REDCap.  This
 #' allows the user to store tokens to multiple REDCap projects in one file.
 #' Required
