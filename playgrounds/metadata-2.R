@@ -111,10 +111,8 @@ ds_mapping_validation_name |>
     matrix_ranking,
     field_annotation,
   ) |>
-  readr::write_csv("inst/test-data/validation-types-v1/dictionary.csv")
+  readr::write_csv("inst/test-data/projects/validation-types-1/dictionary.csv")
 
 ds_mapping_validation_name$validation_name |>
   paste(collapse=",") |>
-  readr::write_file("inst/test-data/validation-types-v1/data.csv")
-
-
+  readr::write_file("inst/test-data/projects/validation-types-1/data.csv")

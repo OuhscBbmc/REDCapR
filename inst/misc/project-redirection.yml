@@ -28,7 +28,7 @@
     - decimal-comma-and-dot: 2630
     - decimal-comma: 2631
     - decimal-dot: 2632
-    - validation-types: 2634
+    - validation-types-1: 2634
     - blank-for-gray-status: 3003
     - checkboxes-1: 3074
     - vignette-repeating: 3181
@@ -61,7 +61,7 @@
     - decimal-comma-and-dot: 56
     - decimal-comma: 57
     - decimal-dot: 58
-    - validation-types: 0
+    - validation-types-1: 59
     - blank-for-gray-status: 0
     - checkboxes-1: 0
     - vignette-repeating: 0

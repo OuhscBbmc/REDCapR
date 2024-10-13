@@ -193,7 +193,7 @@ test_that("problematic-dictionary", {
 
 test_that("validation-types", {
   testthat::skip_on_cran()
-  credential               <- retrieve_credential_testing("validation-types")
+  credential               <- retrieve_credential_testing("validation-types-1")
   path_expected            <- "test-data/specific-redcapr/metadata-coltypes/validation-types.R"
   # expected_outcome_message <- "col_types <- readr::cols"
   expected_warning_message <- "at least one field that specifies a comma for a decimal"
