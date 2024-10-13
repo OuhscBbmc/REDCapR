@@ -2,7 +2,7 @@ library(testthat)
 
 path               <- system.file("misc/dev-2.credentials", package="REDCapR")
 pid_read           <- 33L # This project is for testing only reading from the server.
-# pid_longitudinal   <- 34L # This project is for testing reading longitudinal projects.
+pid_longitudinal   <- 34L # This project is for testing reading longitudinal projects.
 # pid_write          <- 35L # This project is for testing reading & writing.
 # pid_dag            <- 49L #This project is for testing DAGs.
 
@@ -80,7 +80,7 @@ test_that("Missing file", {
 
   expect_error(
     regexp = expected_message,
-    object = REDCapR::retrieve_credential_local(
+    object = retrieve_credential_local(
       path_credential = "misc/missing.credentials", #system.file("misc/missing.credentials", package="REDCapR"),
       project_id      = pid_read
     )
@@ -91,7 +91,7 @@ test_that("Malformed file", {
 
   expect_error(
     regexp = expected_message,
-    object = REDCapR::retrieve_credential_local(
+    object = retrieve_credential_local(
       path_credential = system.file("misc/out-of-order.credentials", package="REDCapR"),
       project_id      = pid_read
     )
@@ -102,7 +102,7 @@ test_that("Zero rows", {
 
   expect_error(
     regexp = expected_message,
-    object = REDCapR::retrieve_credential_local(
+    object = retrieve_credential_local(
       path_credential = system.file("misc/zero-rows.credentials", package="REDCapR"),
       project_id      = 666L
     )
@@ -113,7 +113,7 @@ test_that("Zero matching rows", {
 
   expect_error(
     regexp = expected_message,
-    object = REDCapR::retrieve_credential_local(
+    object = retrieve_credential_local(
       path_credential = path,
       project_id      = 666L
     )
@@ -124,7 +124,7 @@ test_that("Conflicting rows", {
 
   expect_error(
     regexp = expected_message,
-    object = REDCapR::retrieve_credential_local(
+    object = retrieve_credential_local(
       path_credential = system.file("misc/conflicting-rows.credentials", package="REDCapR"),
       project_id      = pid_read
     )
@@ -135,9 +135,9 @@ test_that("Bad URI", {
 
   expect_error(
     regexp = expected_message,
-    object = REDCapR::retrieve_credential_local(
+    object = retrieve_credential_local(
       path_credential     = system.file("misc/bad.credentials", package="REDCapR"),
-      project_id          = pid_read,
+      project_id          = pid_longitudinal,
       check_url           = TRUE,
       check_username      = FALSE,
       check_token_pattern = FALSE
@@ -149,7 +149,7 @@ test_that("Bad Username", {
 
   expect_error(
     regexp = expected_message,
-    object = REDCapR::retrieve_credential_local(
+    object = retrieve_credential_local(
       path_credential     = system.file("misc/bad.credentials", package="REDCapR"),
       project_id          = pid_read,
       check_url           = FALSE,
@@ -158,12 +158,12 @@ test_that("Bad Username", {
     )
   )
 })
-test_that("Bad URI", {
+test_that("Bad token", {
   expected_message <- "A REDCap token should be a string of 32 digits and uppercase characters.  The retrieved value was not. Set the `check_token_pattern` parameter to FALSE if you're sure you have the correct file & file contents."
 
   expect_error(
     regexp = expected_message,
-    object = REDCapR::retrieve_credential_local(
+    object = retrieve_credential_local(
       path_credential     = system.file("misc/bad.credentials", package="REDCapR"),
       project_id          = pid_read,
       check_url           = FALSE,
