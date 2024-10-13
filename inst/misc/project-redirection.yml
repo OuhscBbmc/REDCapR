@@ -34,7 +34,7 @@
     - vignette-repeating: 3181
 -
   instance: dev-2
-  credential_file: "misc/example.credentials"
+  credential_file: "misc/dev-2.credentials"
   projects:
     - simple: 33
     - longitudinal: 34

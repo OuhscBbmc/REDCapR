@@ -1,29 +1,29 @@
 library(testthat)
 
-path               <- system.file("misc/example.credentials", package="REDCapR")
-pid_read           <- 153L # This project is for testing only reading from the server.
-# pid_longitudinal   <- 212L # This project is for testing reading longitudinal projects.
-# pid_write          <- 213L # This project is for testing reading & writing.
-# pid_dag            <- 2545L #This project is for testing DAGs.
+path               <- system.file("misc/dev-2.credentials", package="REDCapR")
+pid_read           <- 33L # This project is for testing only reading from the server.
+# pid_longitudinal   <- 34L # This project is for testing reading longitudinal projects.
+# pid_write          <- 35L # This project is for testing reading & writing.
+# pid_dag            <- 49L #This project is for testing DAGs.
 
 test_that("Good Credentials", {
-  expected_read_redcap_uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
+  expected_read_redcap_uri      <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
   expected_read_username        <- "myusername"
   # expected_read_project_id      <- pid_read
-  expected_read_token           <- "9A81268476645C4E5F03428B8AC3AA7B"
-  expected_read_comment         <- "simple static (read-only) test project"
+  expected_read_token           <- "9A068C425B1341D69E83064A2D273A70"
+  expected_read_comment         <- "simple"
 
-  expected_longitudinal_redcap_uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
+  expected_longitudinal_redcap_uri     <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
   expected_longitudinal_username       <- "myusername"
   # expected_longitudinal_project_id     <- pid_longitudinal
-  expected_longitudinal_token          <- "0434F0E9CF53ED0587847AB6E51DE762"
-  expected_longitudinal_comment        <- "longitudinal (read-only) ARM test project"
+  expected_longitudinal_token          <- "DA6F2BB23146BD5A7EA3408C1A44A556"
+  expected_longitudinal_comment        <- "longitudinal"
 
-  expected_write_redcap_uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
+  expected_write_redcap_uri     <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
   expected_write_username       <- "myusername"
   # expected_write_project_id     <- pid_write
-  expected_write_token          <- "D70F9ACD1EDD6F151C6EA78683944E98"
-  expected_write_comment        <- "simple write data"
+  expected_write_token          <- "F9CBFFF78C3D78F641BAE9623F6B7E6A"
+  expected_write_comment        <- "simple-write"
 
   credential_read         <- retrieve_credential_testing()                # This project is for testing only reading from the server.
   credential_longitudinal <- retrieve_credential_testing("longitudinal")  # This project is for testing reading longitudinal projects.
@@ -48,17 +48,17 @@ test_that("Good Credentials", {
   expect_equal(credential_write$comment      , expected_write_comment)
 })
 test_that("Multiple users", {
-  expected_admin_redcap_uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
+  expected_admin_redcap_uri     <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
   expected_admin_username       <- "admin"
   # expected_admin_project_id     <- pid_dag
-  expected_admin_token          <- "0BF11B9CB01F0B8F8EE203B7E07DEFD9"
-  expected_admin_comment        <- "DAG Write -admin"
+  expected_admin_token          <- "F6F871FE0322EEE8D23F56DBBE23B756"
+  expected_admin_comment        <- "dag-write --admin"
 
-  expected_user_redcap_uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
+  expected_user_redcap_uri      <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
   expected_user_username        <- "user-dag1"
   # expected_user_project_id      <- pid_dag
-  expected_user_token           <- "C79DB3836373478986928303B52E74DF"
-  expected_user_comment         <- "DAG Write -group A"
+  expected_user_token           <- "8092B2302CAA359C4F5641AEC1CE72ED"
+  expected_user_comment         <- "dag-write --group A"
 
   credential_admin        <- retrieve_credential_testing(username = expected_admin_username)
   credential_user         <- retrieve_credential_testing(username = expected_user_username)
@@ -75,7 +75,6 @@ test_that("Multiple users", {
   expect_equal(credential_user$token        , expected_user_token)
   expect_equal(credential_user$comment      , expected_user_comment)
 })
-
 test_that("Missing file", {
   expected_message <- "Assertion on 'path_credential' failed: File does not exist: 'misc/missing.credentials'."
 
@@ -98,7 +97,6 @@ test_that("Malformed file", {
     )
   )
 })
-
 test_that("Zero rows", {
   expected_message <- "The project_id was not found in the csv credential file."
 
@@ -110,7 +108,6 @@ test_that("Zero rows", {
     )
   )
 })
-
 test_that("Zero matching rows", {
   expected_message <- "The project_id was not found in the csv credential file."
 
@@ -122,7 +119,6 @@ test_that("Zero matching rows", {
     )
   )
 })
-
 test_that("Conflicting rows", {
   expected_message <- "More than one matching project_id was found in the csv credential file.  There should be only one."
 
@@ -134,7 +130,6 @@ test_that("Conflicting rows", {
     )
   )
 })
-
 test_that("Bad URI", {
   expected_message <- "The REDCap URL does not reference an https address\\."
 
@@ -149,7 +144,6 @@ test_that("Bad URI", {
     )
   )
 })
-
 test_that("Bad Username", {
   expected_message <- "doesn't match the username in the credentials file."
 
@@ -164,7 +158,6 @@ test_that("Bad Username", {
     )
   )
 })
-
 test_that("Bad URI", {
   expected_message <- "A REDCap token should be a string of 32 digits and uppercase characters.  The retrieved value was not. Set the `check_token_pattern` parameter to FALSE if you're sure you have the correct file & file contents."
 
@@ -180,6 +173,4 @@ test_that("Bad URI", {
   )
 })
 
-# rm(credential_read         )
-# rm(credential_longitudinal )
-# rm(credential_write        )
+rm(path, pid_read)
