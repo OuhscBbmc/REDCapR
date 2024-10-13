@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="test-checkbox-export" AsOfDateTime="2022-09-02T20:07:57" CreationDateTime="2022-09-02T20:07:57" SourceSystem="REDCap" SourceSystemVersion="12.2.1">
-<Study OID="Project.Testcheckboxexport">
+<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="REDCapR Checkboxes 1" AsOfDateTime="2024-10-12T23:13:57" CreationDateTime="2024-10-12T23:13:57" SourceSystem="REDCap" SourceSystemVersion="14.6.11">
+<Study OID="Project.REDCapRCheckboxes1">
 <GlobalVariables>
-	<StudyName>test-checkbox-export</StudyName>
-	<StudyDescription>This file contains the metadata, events, and data for REDCap project "test-checkbox-export".</StudyDescription>
-	<ProtocolName>test-checkbox-export</ProtocolName>
+	<StudyName>REDCapR Checkboxes 1</StudyName>
+	<StudyDescription>This file contains the metadata, events, and data for REDCap project "REDCapR Checkboxes 1".</StudyDescription>
+	<ProtocolName>REDCapR Checkboxes 1</ProtocolName>
 	<redcap:RecordAutonumberingEnabled>1</redcap:RecordAutonumberingEnabled>
 	<redcap:CustomRecordLabel></redcap:CustomRecordLabel>
 	<redcap:SecondaryUniqueField></redcap:SecondaryUniqueField>
+	<redcap:SecondaryUniqueFieldDisplayValue>1</redcap:SecondaryUniqueFieldDisplayValue>
+	<redcap:SecondaryUniqueFieldDisplayLabel>1</redcap:SecondaryUniqueFieldDisplayLabel>
 	<redcap:SchedulingEnabled>0</redcap:SchedulingEnabled>
 	<redcap:SurveysEnabled>0</redcap:SurveysEnabled>
 	<redcap:SurveyInvitationEmailField></redcap:SurveyInvitationEmailField>
-	<redcap:Purpose>0</redcap:Purpose>
+	<redcap:DisplayTodayNowButton>1</redcap:DisplayTodayNowButton>
+	<redcap:PreventBranchingEraseValues>0</redcap:PreventBranchingEraseValues>
+	<redcap:RequireChangeReason>0</redcap:RequireChangeReason>
+	<redcap:DataHistoryPopup>1</redcap:DataHistoryPopup>
+	<redcap:OrderRecordsByField></redcap:OrderRecordsByField>
+	<redcap:MyCapEnabled>0</redcap:MyCapEnabled>
+	<redcap:Purpose>4</redcap:Purpose>
 	<redcap:PurposeOther></redcap:PurposeOther>
-	<redcap:ProjectNotes>To test out EAV exports through API</redcap:ProjectNotes>
-	<redcap:SurveyQueueCustomText></redcap:SurveyQueueCustomText>
-	<redcap:SurveyQueueHide>0</redcap:SurveyQueueHide>
-	<redcap:DataMartProjectEnabled>0</redcap:DataMartProjectEnabled>
-	<redcap:DatamartAllowRepeatRevision>0</redcap:DatamartAllowRepeatRevision>
-	<redcap:DatamartAllowCreateRevision>0</redcap:DatamartAllowCreateRevision>
-	<redcap:DatamartCronEnabled>0</redcap:DatamartCronEnabled>
-	<redcap:HideFilledForms>1</redcap:HideFilledForms>
-	<redcap:FormActivationSurveyAutocontinue>0</redcap:FormActivationSurveyAutocontinue>
+	<redcap:ProjectNotes>Variety of f checkboxes</redcap:ProjectNotes>
 	<redcap:MissingDataCodes></redcap:MissingDataCodes>
 	<redcap:ProtectedEmailMode>0</redcap:ProtectedEmailMode>
 	<redcap:ProtectedEmailModeCustomText></redcap:ProtectedEmailModeCustomText>
 	<redcap:ProtectedEmailModeTrigger>ALL</redcap:ProtectedEmailModeTrigger>
 	<redcap:ProtectedEmailModeLogo></redcap:ProtectedEmailModeLogo>
-	<redcap:MultilanguageSettingsGroup>
-		<redcap:MultilanguageSettings settings="YToxNDp7czo3OiJ2ZXJzaW9uIjtzOjY6IjEyLjIuMSI7czo1OiJsYW5ncyI7YTowOnt9czo5OiJwcm9qZWN0SWQiO3M6MjoiNDIiO3M6MTU6ImRlc2lnbmF0ZWRGaWVsZCI7czowOiIiO3M6NToiZGVidWciO2I6MDtzOjc6InJlZkxhbmciO3M6MDoiIjtzOjEyOiJmYWxsYmFja0xhbmciO3M6MDoiIjtzOjg6ImRpc2FibGVkIjtiOjA7czoyNToiaGlnaGxpZ2h0TWlzc2luZ0RhdGFlbnRyeSI7YjowO3M6MjI6ImhpZ2hsaWdodE1pc3NpbmdTdXJ2ZXkiO2I6MDtzOjEyOiJhbGVydFNvdXJjZXMiO2E6MDp7fXM6MTQ6ImV4Y2x1ZGVkQWxlcnRzIjthOjA6e31zOjE0OiJleGNsdWRlZEZpZWxkcyI7YTowOnt9czoxNjoiZXhjbHVkZWRTZXR0aW5ncyI7YTowOnt9fQ=="/>
-	</redcap:MultilanguageSettingsGroup>
+	<redcap:UserRolesGroup>
+		<redcap:UserRoles role_name="api" unique_role_name="U-552TRJ489T" lock_record="0" lock_record_multiform="0" lock_record_customize="0" data_export_tool="" data_export_instruments="[form_1,1][form_2,1]" data_import_tool="0" data_comparison_tool="0" data_logging="0" email_logging="0" file_repository="0" double_data="0" user_rights="0" data_access_groups="0" graphical="0" reports="0" design="0" alerts="0" calendar="0" data_entry="[form_1,1][form_2,1]" api_export="1" api_import="0" api_modules="0" mobile_app="0" mobile_app_download_data="0" record_create="0" record_rename="0" record_delete="0" dts="0" participants="1" data_quality_design="0" data_quality_execute="0" data_quality_resolution="1" random_setup="0" random_dashboard="0" random_perform="0" realtime_webservice_mapping="0" realtime_webservice_adjudicate="0" external_module_config="" mycap_participants="0"/>
+	</redcap:UserRolesGroup>
 </GlobalVariables>
-<MetaDataVersion OID="Metadata.Testcheckboxexport_2022-09-02_2007" Name="test-checkbox-export" redcap:RecordIdField="record_id">
+<MetaDataVersion OID="Metadata.REDCapRCheckboxes1_2024-10-12_2313" Name="REDCapR Checkboxes 1" redcap:RecordIdField="record_id">
 	<FormDef OID="Form.form_1" Name="Form 1" Repeating="No" redcap:FormName="form_1">
 		<ItemGroupRef ItemGroupOID="form_1.record_id" Mandatory="No"/>
 		<ItemGroupRef ItemGroupOID="form_1.form_1_complete" Mandatory="No"/>
@@ -116,39 +116,39 @@
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Unverified</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="2"><Decode><TranslatedText>Complete</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="check_one___1.choices" Name="check_one___1" DataType="boolean" redcap:Variable="check_one" redcap:CheckboxChoices="1, one | 2, two | 3, three | 4, four">
+	<CodeList OID="check_one___1.choices" Name="check_one___1" DataType="boolean" redcap:Variable="check_one" redcap:CheckboxChoices="1, one|2, two|3, three|4, four">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="check_one___2.choices" Name="check_one___2" DataType="boolean" redcap:Variable="check_one" redcap:CheckboxChoices="1, one | 2, two | 3, three | 4, four">
+	<CodeList OID="check_one___2.choices" Name="check_one___2" DataType="boolean" redcap:Variable="check_one" redcap:CheckboxChoices="1, one|2, two|3, three|4, four">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="check_one___3.choices" Name="check_one___3" DataType="boolean" redcap:Variable="check_one" redcap:CheckboxChoices="1, one | 2, two | 3, three | 4, four">
+	<CodeList OID="check_one___3.choices" Name="check_one___3" DataType="boolean" redcap:Variable="check_one" redcap:CheckboxChoices="1, one|2, two|3, three|4, four">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="check_one___4.choices" Name="check_one___4" DataType="boolean" redcap:Variable="check_one" redcap:CheckboxChoices="1, one | 2, two | 3, three | 4, four">
+	<CodeList OID="check_one___4.choices" Name="check_one___4" DataType="boolean" redcap:Variable="check_one" redcap:CheckboxChoices="1, one|2, two|3, three|4, four">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="check_two___a.choices" Name="check_two___a" DataType="boolean" redcap:Variable="check_two" redcap:CheckboxChoices="a, A | b, B | c, C | d, D | e, E">
+	<CodeList OID="check_two___a.choices" Name="check_two___a" DataType="boolean" redcap:Variable="check_two" redcap:CheckboxChoices="a, A|b, B|c, C|d, D|e, E">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="check_two___b.choices" Name="check_two___b" DataType="boolean" redcap:Variable="check_two" redcap:CheckboxChoices="a, A | b, B | c, C | d, D | e, E">
+	<CodeList OID="check_two___b.choices" Name="check_two___b" DataType="boolean" redcap:Variable="check_two" redcap:CheckboxChoices="a, A|b, B|c, C|d, D|e, E">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="check_two___c.choices" Name="check_two___c" DataType="boolean" redcap:Variable="check_two" redcap:CheckboxChoices="a, A | b, B | c, C | d, D | e, E">
+	<CodeList OID="check_two___c.choices" Name="check_two___c" DataType="boolean" redcap:Variable="check_two" redcap:CheckboxChoices="a, A|b, B|c, C|d, D|e, E">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="check_two___d.choices" Name="check_two___d" DataType="boolean" redcap:Variable="check_two" redcap:CheckboxChoices="a, A | b, B | c, C | d, D | e, E">
+	<CodeList OID="check_two___d.choices" Name="check_two___d" DataType="boolean" redcap:Variable="check_two" redcap:CheckboxChoices="a, A|b, B|c, C|d, D|e, E">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="check_two___e.choices" Name="check_two___e" DataType="boolean" redcap:Variable="check_two" redcap:CheckboxChoices="a, A | b, B | c, C | d, D | e, E">
+	<CodeList OID="check_two___e.choices" Name="check_two___e" DataType="boolean" redcap:Variable="check_two" redcap:CheckboxChoices="a, A|b, B|c, C|d, D|e, E">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
@@ -159,7 +159,7 @@
 	</CodeList>
 </MetaDataVersion>
 </Study>
-<ClinicalData StudyOID="Project.Testcheckboxexport" MetaDataVersionOID="Metadata.Testcheckboxexport_2022-09-02_2007">
+<ClinicalData StudyOID="Project.REDCapRCheckboxes1" MetaDataVersionOID="Metadata.REDCapRCheckboxes1_2024-10-12_2313">
 	<SubjectData SubjectKey="1" redcap:RecordIdField="record_id">
 			<FormData FormOID="Form.form_1" FormRepeatKey="1">
 				<ItemGroupData ItemGroupOID="form_1.record_id" ItemGroupRepeatKey="1">
