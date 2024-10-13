@@ -1,4 +1,4 @@
-retrieve_credential_testing <- function(project_tag = "simple", server_instance = "dev-2", username = NA_character_) {
+retrieve_credential_testing <- function(project_tag = "simple", server_instance = "bbmc", username = NA_character_) {
   checkmate::assert_character(project_tag     , any.missing = FALSE, min.chars = 2, max.chars = 50)
   checkmate::assert_character(server_instance , any.missing = FALSE, min.chars = 2, max.chars = 50)
   checkmate::assert_character(username        , any.missing = TRUE , min.chars = 2, max.chars = 50)

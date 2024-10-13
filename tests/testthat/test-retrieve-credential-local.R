@@ -25,9 +25,9 @@ test_that("Good Credentials", {
   expected_write_token          <- "F9CBFFF78C3D78F641BAE9623F6B7E6A"
   expected_write_comment        <- "simple-write"
 
-  credential_read         <- retrieve_credential_testing()                # This project is for testing only reading from the server.
-  credential_longitudinal <- retrieve_credential_testing("longitudinal")  # This project is for testing reading longitudinal projects.
-  credential_write        <- retrieve_credential_testing("simple-write")  # This project is for testing reading & writing.
+  credential_read         <- retrieve_credential_testing(server_instance = "dev-2")                # This project is for testing only reading from the server.
+  credential_longitudinal <- retrieve_credential_testing(server_instance = "dev-2","longitudinal")  # This project is for testing reading longitudinal projects.
+  credential_write        <- retrieve_credential_testing(server_instance = "dev-2","simple-write")  # This project is for testing reading & writing.
 
   expect_equal(credential_read$redcap_uri   , expected_read_redcap_uri)
   expect_equal(credential_read$username     , expected_read_username)
@@ -60,8 +60,8 @@ test_that("Multiple users", {
   expected_user_token           <- "8092B2302CAA359C4F5641AEC1CE72ED"
   expected_user_comment         <- "dag-write --group A"
 
-  credential_admin        <- retrieve_credential_testing(username = expected_admin_username)
-  credential_user         <- retrieve_credential_testing(username = expected_user_username)
+  credential_admin        <- retrieve_credential_testing(server_instance = "dev-2", username = expected_admin_username)
+  credential_user         <- retrieve_credential_testing(server_instance = "dev-2", username = expected_user_username)
 
   expect_equal(credential_admin$redcap_uri  , expected_admin_redcap_uri)
   expect_equal(credential_admin$username    , expected_admin_username)
