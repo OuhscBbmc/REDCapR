@@ -23,13 +23,13 @@ id,redcap_data_access_group,color___r,color___g,color___b,color___p,thisform_com
 
 The url and token of the project are:
 ```r
-url <- "https://bbmc.ouhsc.edu/redcap/api"
+url <- "https://redcap-dev-2.ouhsc.edu/redcap/api"
 token <- "BECD55331CA005887DA3543230E10284"
 ```
 
 Here's some (slightly modified) code that Benjamin wrote for Issue #51:
 ```r
-> url <- "https://bbmc.ouhsc.edu/redcap/api/"
+> url <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 > token <- "BECD55331CA005887DA3543230E10284"
 > 
 > post_result_all <- httr::POST(url=url, body=list(token=token, content='record', format='csv', rawOrLabel='label', fields='id, color'))

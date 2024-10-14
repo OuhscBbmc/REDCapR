@@ -135,27 +135,27 @@ use \code{\link[readr:parse_atomic]{readr::parse_integer()}} to cast it to the d
 }
 \examples{
 \dontrun{
-uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
+uri      <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 
 # A simple project
-token      <- "9A81268476645C4E5F03428B8AC3AA7B" # 153
+token      <- "9A068C425B1341D69E83064A2D273A70" # simple
 col_types  <- redcap_metadata_coltypes(uri, token)
 redcap_read_oneshot(uri, token, col_types = col_types)$data
 
 # A longitudinal project
-token      <- "0434F0E9CF53ED0587847AB6E51DE762" # 212
+token      <- "DA6F2BB23146BD5A7EA3408C1A44A556" # longitudinal
 col_types  <- redcap_metadata_coltypes(uri, token)
 redcap_read_oneshot(uri, token, col_types = col_types)$data
 
 # A repeating instruments project
-token      <- "56F43A10D01D6578A46393394D76D88F" # 2603
+token      <- "64720C527CA236880FBA785C9934F02A" # repeating-instruments-sparse
 col_types  <- redcap_metadata_coltypes(uri, token)
 redcap_read_oneshot(uri, token, col_types = col_types)$data
 
 # A project with every field type and validation type.
 #   Notice it throws a warning that some fields use a comma for a decimal,
 #   while other fields use a period/dot as a decimal
-token      <- "8F5313CAA266789F560D79EFCEE2E2F1" # 2634 - Validation Types
+token      <- "EB1FD5DDE583364AE605629AB7619397" # validation-types-1
 col_types  <- redcap_metadata_coltypes(uri, token)
 redcap_read_oneshot(uri, token, col_types = col_types)$data
 }

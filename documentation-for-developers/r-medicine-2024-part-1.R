@@ -23,7 +23,7 @@ View(ds_1)
 
 
 # View corresponding REDCap project in browser:
-# https://bbmc.ouhsc.edu/redcap/redcap_v14.3.13/DataEntry/record_home.php?pid=3181&arm=1&id=1
+# https://redcap-dev-2.ouhsc.edu/redcap/redcap_v14.3.13/DataEntry/record_home.php?pid=62&arm=1&id=1
 
 
 # ---- redcap_metadata_read ----------------------------------------------------

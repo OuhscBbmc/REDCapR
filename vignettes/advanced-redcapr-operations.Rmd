@@ -41,9 +41,9 @@ There is some information that is specific to a REDCap project, as opposed to an
 
 ```{r project_values}
 library(REDCapR) #Load the package into the current R session.
-uri                   <- "https://bbmc.ouhsc.edu/redcap/api/"
-token_simple          <- "9A81268476645C4E5F03428B8AC3AA7B"
-token_longitudinal    <- "0434F0E9CF53ED0587847AB6E51DE762"
+uri                   <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
+token_simple          <- "9A068C425B1341D69E83064A2D273A70"
+token_longitudinal    <- "DA6F2BB23146BD5A7EA3408C1A44A556"
 ```
 
 Converting from tall/long to wide

@@ -79,8 +79,8 @@ This might be the first time you've ever needed to request a token,
 and your institution may have a formal process for API approval.
 Your REDCap admin can help.
 
-For this vignette, we'll use a fake dataset hosted at `https://bbmc.ouhsc.edu/redcap/api/`
-and accessible with the token "9A81268476645C4E5F03428B8AC3AA7B".
+For this vignette, we'll use a fake dataset hosted at `https://redcap-dev-2.ouhsc.edu/redcap/api/`
+and accessible with the token "9A068C425B1341D69E83064A2D273A70".
 
 Note to REDCap Admins:
 

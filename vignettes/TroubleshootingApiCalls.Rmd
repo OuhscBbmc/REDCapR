@@ -89,7 +89,7 @@ knitr::include_graphics("images/PostmanScreenshot.png")
 
     At the bottom of the playground page, the interface attempts to translate your specific API call to different languages, like Python and R.  These suggestions are usually correct, but  inspect it critically, as you would for any auto-generated script.
 
-1. **Is the URL/URI correct?**  Notice the url typically ends with "api/" so it resembles `https://bbmc.ouhsc.edu/redcap/api/` and *not* `https://bbmc.ouhsc.edu/` (even if <https://bbmc.ouhsc.edu/> redirects to <https://bbmc.ouhsc.edu/redcap/>).
+1. **Is the URL/URI correct?**  Notice the url typically ends with "api/" so it resembles `https://redcap.ouhsc.edu/redcap/api/` and *not* `https://redcap.ouhsc.edu/` (even if <https://redcap.ouhsc.edu/> redirects to <https://redcap.ouhsc.edu/redcap/>).
 
 1. **Is Postman installed and operating correctly?**  If it helps to start with a different REDCap server, you can use this dummy project containing fake data hosted by the [OUHSC BBMC](https://www.ouhsc.edu/bbmc/).  The url is `https://bbmc.ouhsc.edu/redcap/api/`.  There are three key-value pairs: (1) the 'token' is `9A81268476645C4E5F03428B8AC3AA7B`, (2) the 'content' is `record`, and (3) the 'format' should be `CSV`.  When checking your own server, the token value should change, but the content and format should not.  It should return five records in a CSV format.  The 'status' should be `200 OK`.  The result should look roughly like this.  Notice the line breaks were included in the text values themselves.
 
@@ -121,7 +121,7 @@ knitr::include_graphics("images/PostmanScreenshot.png")
 1. **Can a user query the API with cURL?**  [cURL](https://curl.se/) is a command line tool that's underneath a lot of libraries.  If it's installed correctly on your location machine, it can be executed from the terminal or command line.
 
     ```shell
-    curl -X POST -H "Cache-Control: no-cache" -F "token=9A81268476645C4E5F03428B8AC3AA7B" -F "content=record" -F "format=csv" "https://bbmc.ouhsc.edu/redcap/api/"
+    curl -X POST -H "Cache-Control: no-cache" -F "token=9A068C425B1341D69E83064A2D273A70" -F "content=record" -F "format=csv" "https://redcap-dev-2.ouhsc.edu/redcap/api/"
     ```
 
 If all these checks pass, proceed to the next section.  If not, start by consulting with your REDCap administrator.  If that fails, consider creating a GitHub issue for your package (*e.g.*, [redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://ouhscbbmc.github.io/REDCapR/) in R, [phpcap](https://github.com/iuredcap/phpcap) in PHP, and [PyCap](https://pycap.readthedocs.io/en/latest/) in Python).
@@ -200,8 +200,8 @@ There are several ways to call REDCap's API from [R](https://cran.r-project.org/
     If this check fails, consider attempting again with the url and token used above in the Postman example.
 
     ```r
-    redcap_uri <- "https://bbmc.ouhsc.edu/redcap/api/"
-    token      <- "9A81268476645C4E5F03428B8AC3AA7B"
+    redcap_uri <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
+    token      <- "9A068C425B1341D69E83064A2D273A70"
 
     post_body <- list(
       token           = token,
@@ -329,8 +329,8 @@ If you're not using REDCapR, you can skip this section and proceed to "Exporting
 
     ```r
     library(REDCapR) # Load the package into the current R session.
-    uri   <- "https://bbmc.ouhsc.edu/redcap/api/"
-    token <- "9A81268476645C4E5F03428B8AC3AA7B"
+    uri   <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
+    token <- "9A068C425B1341D69E83064A2D273A70"
     redcap_read(redcap_uri = uri, token = token)$data
     ```
 
@@ -384,8 +384,8 @@ If you're not using REDCapR, you can skip this section and proceed to "Exporting
 
     ```r
     library(REDCapR) # Load the package into the current R session, if you haven't already.
-    uri               <- "https://bbmc.ouhsc.edu/redcap/api/"
-    token             <- "9A81268476645C4E5F03428B8AC3AA7B"
+    uri               <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
+    token             <- "9A068C425B1341D69E83064A2D273A70"
     project           <- redcap_project$new(redcap_uri = uri, token = token)
 
     ds_three_columns  <- project$read(fields = c("record_id", "sex", "age"))$data
@@ -447,8 +447,8 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
     ```r
     library(redcapAPI) # Load the package into the current R session.
     rcon <- redcapConnection(
-      url   = "https://bbmc.ouhsc.edu/redcap/api/",
-      token = "9A81268476645C4E5F03428B8AC3AA7B"
+      url   = "https://redcap-dev-2.ouhsc.edu/redcap/api/",
+      token = "9A068C425B1341D69E83064A2D273A70"
     )
     exportRecords(rcon)
     ```

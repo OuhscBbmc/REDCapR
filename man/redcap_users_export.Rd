@@ -68,8 +68,8 @@ the user with the role's defined privileges.
 }
 \examples{
 \dontrun{
-uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
-token    <- "06DEFB601F9B46847DAA9DF0CFA951B4"
+uri      <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
+token    <- "0BF920AAF9566A8E603F528A498A5729" # dag
 result   <- REDCapR::redcap_users_export(redcap_uri=uri, token=token)
 result$data_user
 result$data_user_form
