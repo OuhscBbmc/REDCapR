@@ -1,21 +1,14 @@
-structure(list(username = c("unittestphifree", "wbeasleya"), 
-    email = c("wibeasley@hotmail.com", "william-beasley@ouhsc.edu"
-    ), firstname = c("Unit Test", "Will"), lastname = c("PHI Free", 
-    "Beasley_A"), expiration = structure(c(NA_real_, NA_real_
-    ), class = "Date"), data_access_group = c(NA_character_, 
-    NA_character_), data_access_group_id = c(NA_character_, NA_character_
-    ), design = c(FALSE, TRUE), alerts = c(0, 1), user_rights = 2:1, 
-    data_access_groups = c(TRUE, TRUE), reports = c(TRUE, TRUE
-    ), stats_and_charts = c(TRUE, TRUE), manage_survey_participants = c(TRUE, 
-    TRUE), calendar = c(TRUE, TRUE), data_import_tool = c(FALSE, 
-    TRUE), data_comparison_tool = c(FALSE, TRUE), logging = c(TRUE, 
-    TRUE), email_logging = c(FALSE, TRUE), file_repository = c(TRUE, 
-    TRUE), data_quality_create = c(FALSE, TRUE), data_quality_execute = c(FALSE, 
-    TRUE), api_export = c(TRUE, FALSE), api_import = c(FALSE, 
-    FALSE), api_modules = c(FALSE, FALSE), mobile_app = c(FALSE, 
-    FALSE), mobile_app_download_data = c(FALSE, FALSE), record_create = c(TRUE, 
-    TRUE), record_rename = c(FALSE, FALSE), record_delete = c(FALSE, 
-    FALSE), lock_records_all_forms = c(FALSE, FALSE), lock_records = c(FALSE, 
-    FALSE), lock_records_customization = c(FALSE, FALSE), forms_export = c("demographics:1,health:1,race_and_ethnicity:1", 
-    "demographics:1,health:1,race_and_ethnicity:1")), row.names = c(NA, 
--2L), class = c("tbl_df", "tbl", "data.frame"))
+structure(list(username = "unittestphifree", firstname = "Unit Test", 
+    lastname = "Phi Free", expiration = structure(NA_real_, class = "Date"), 
+    data_access_group = NA_character_, data_access_group_id = NA_character_, 
+    design = FALSE, alerts = 0, user_rights = 1L, data_access_groups = TRUE, 
+    reports = FALSE, stats_and_charts = FALSE, manage_survey_participants = TRUE, 
+    calendar = FALSE, data_import_tool = FALSE, data_comparison_tool = FALSE, 
+    logging = TRUE, email_logging = FALSE, file_repository = FALSE, 
+    data_quality_create = FALSE, data_quality_execute = FALSE, 
+    api_export = TRUE, api_import = FALSE, api_modules = FALSE, 
+    mobile_app = FALSE, mobile_app_download_data = FALSE, record_create = FALSE, 
+    record_rename = FALSE, record_delete = FALSE, lock_records_all_forms = FALSE, 
+    lock_records = FALSE, lock_records_customization = FALSE, 
+    forms_export = "demographics:1,health:1,race_and_ethnicity:1"), row.names = c(NA, 
+-1L), class = c("tbl_df", "tbl", "data.frame"))

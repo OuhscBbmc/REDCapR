@@ -1,0 +1,67 @@
+-
+  instance: bbmc
+  credential_file: "misc/example.credentials"
+  projects:
+    - simple: 153
+    - longitudinal: 212
+    - simple-write: 213
+    - russian: 268
+    - empty-rows: 690
+    - single-column: 691
+    - super-wide-1: 753
+    - survey: 817
+    - clinical-trial-1: 977
+    # 0
+    - nonnumeric-record-id: 998
+    - dag: 999
+    - potentially-problematic-values: 1396
+    - repeating-instruments: 1400
+    - potentially-problematic-dictionary: 1425
+    - metadata-write: 1490
+    - dag-write: 2545
+    - super-wide-2: 2593
+    - super-wide-3: 2597
+    - repeating-instruments-sparse: 2603
+    - arm-single-delete: 2626
+    - arm-multiple-delete: 2627
+    - arm-single-longitudinal: 2629
+    - decimal-comma-and-dot: 2630
+    - decimal-comma: 2631
+    - decimal-dot: 2632
+    - validation-types-1: 2634
+    - blank-for-gray-status: 3003
+    - checkboxes-1: 3074
+    - vignette-repeating: 3181
+-
+  instance: dev-2
+  credential_file: "misc/dev-2.credentials"
+  projects:
+    - simple: 33
+    - longitudinal: 34
+    - simple-write: 36
+    - russian: 37
+    - empty-rows: 38
+    - single-column: 39
+    - super-wide-1: 40
+    - survey: 41
+    - clinical-trial-1: 42
+    - nonnumeric-record-id: 43
+    - dag: 44
+    - potentially-problematic-values: 45
+    - repeating-instruments: 46
+    - potentially-problematic-dictionary: 47
+    - metadata-write: 48
+    - dag-write: 49
+    - super-wide-2: 50
+    - super-wide-3: 51
+    - repeating-instruments-sparse: 52
+    - arm-single-delete: 53
+    - arm-multiple-delete: 54
+    - arm-single-longitudinal: 55
+    - decimal-comma-and-dot: 56
+    - decimal-comma: 57
+    - decimal-dot: 58
+    - validation-types-1: 59
+    - blank-for-gray-status: 60
+    - checkboxes-1: 61
+    - vignette-repeating: 62

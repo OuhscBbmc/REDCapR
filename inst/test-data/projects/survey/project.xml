@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="REDCapR: survey" AsOfDateTime="2024-10-13T21:40:19" CreationDateTime="2024-10-13T21:40:19" SourceSystem="REDCap" SourceSystemVersion="14.6.11">
+<Study OID="Project.REDCapRSurvey">
+<GlobalVariables>
+	<StudyName>REDCapR: survey</StudyName>
+	<StudyDescription>This file contains the metadata, events, and data for REDCap project "REDCapR: survey".</StudyDescription>
+	<ProtocolName>REDCapR: survey</ProtocolName>
+	<redcap:RecordAutonumberingEnabled>1</redcap:RecordAutonumberingEnabled>
+	<redcap:CustomRecordLabel></redcap:CustomRecordLabel>
+	<redcap:SecondaryUniqueField></redcap:SecondaryUniqueField>
+	<redcap:SecondaryUniqueFieldDisplayValue>1</redcap:SecondaryUniqueFieldDisplayValue>
+	<redcap:SecondaryUniqueFieldDisplayLabel>1</redcap:SecondaryUniqueFieldDisplayLabel>
+	<redcap:SchedulingEnabled>0</redcap:SchedulingEnabled>
+	<redcap:SurveysEnabled>1</redcap:SurveysEnabled>
+	<redcap:SurveyInvitationEmailField>email</redcap:SurveyInvitationEmailField>
+	<redcap:DisplayTodayNowButton>1</redcap:DisplayTodayNowButton>
+	<redcap:PreventBranchingEraseValues>0</redcap:PreventBranchingEraseValues>
+	<redcap:RequireChangeReason>0</redcap:RequireChangeReason>
+	<redcap:DataHistoryPopup>1</redcap:DataHistoryPopup>
+	<redcap:OrderRecordsByField></redcap:OrderRecordsByField>
+	<redcap:MyCapEnabled>0</redcap:MyCapEnabled>
+	<redcap:Purpose>4</redcap:Purpose>
+	<redcap:PurposeOther></redcap:PurposeOther>
+	<redcap:ProjectNotes></redcap:ProjectNotes>
+	<redcap:SurveyAuthEnabled>0</redcap:SurveyAuthEnabled>
+	<redcap:SurveyAuthField1></redcap:SurveyAuthField1>
+	<redcap:SurveyAuthEvent1></redcap:SurveyAuthEvent1>
+	<redcap:SurveyAuthField2></redcap:SurveyAuthField2>
+	<redcap:SurveyAuthEvent2></redcap:SurveyAuthEvent2>
+	<redcap:SurveyAuthField3></redcap:SurveyAuthField3>
+	<redcap:SurveyAuthEvent3></redcap:SurveyAuthEvent3>
+	<redcap:SurveyAuthMinFields></redcap:SurveyAuthMinFields>
+	<redcap:SurveyAuthApplyAllSurveys>1</redcap:SurveyAuthApplyAllSurveys>
+	<redcap:SurveyAuthCustomMessage></redcap:SurveyAuthCustomMessage>
+	<redcap:SurveyAuthFailLimit></redcap:SurveyAuthFailLimit>
+	<redcap:SurveyAuthFailWindow></redcap:SurveyAuthFailWindow>
+	<redcap:MissingDataCodes></redcap:MissingDataCodes>
+	<redcap:ProtectedEmailMode>0</redcap:ProtectedEmailMode>
+	<redcap:ProtectedEmailModeCustomText></redcap:ProtectedEmailModeCustomText>
+	<redcap:ProtectedEmailModeTrigger>ALL</redcap:ProtectedEmailModeTrigger>
+	<redcap:ProtectedEmailModeLogo></redcap:ProtectedEmailModeLogo>
+	<redcap:SurveysGroup>
+		<redcap:Surveys form_name="prescreening_survey" title="Pre-Screening Survey" instructions="&lt;p&gt;&lt;strong&gt;Please complete the survey below.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Thank you!&lt;/p&gt;" offline_instructions="" acknowledgement="&lt;p&gt;&lt;strong&gt;Thank you for taking the survey.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Have a nice day!&lt;/p&gt;" stop_action_acknowledgement="" stop_action_delete_response="0" question_by_section="0" display_page_number="1" question_auto_numbering="1" survey_enabled="1" save_and_return="0" save_and_return_code_bypass="0" logo="" hide_title="0" view_results="0" min_responses_view_results="10" check_diversity_view_results="0" end_survey_redirect_url="" survey_expiration="" promis_skip_question="0" survey_auth_enabled_single="0" edit_completed_response="0" hide_back_button="0" show_required_field_text="1" confirmation_email_subject="" confirmation_email_content="" confirmation_email_from="" confirmation_email_from_display="" confirmation_email_attach_pdf="0" confirmation_email_attachment="" text_to_speech="0" text_to_speech_language="en" end_survey_redirect_next_survey="0" end_survey_redirect_next_survey_logic="" theme="" text_size="" font_family="" theme_text_buttons="" theme_bg_page="" theme_text_title="" theme_bg_title="" theme_text_sectionheader="" theme_bg_sectionheader="" theme_text_question="" theme_bg_question="" enhanced_choices="0" repeat_survey_enabled="0" repeat_survey_btn_text="" repeat_survey_btn_location="BEFORE_SUBMIT" response_limit="" response_limit_include_partials="1" response_limit_custom_text="" survey_time_limit_days="" survey_time_limit_hours="" survey_time_limit_minutes="" email_participant_field="" end_of_survey_pdf_download="0" pdf_save_to_field="" pdf_save_to_event_id="" pdf_save_translated="0" pdf_auto_archive="0" pdf_econsent_version="" pdf_econsent_type="" pdf_econsent_firstname_field="" pdf_econsent_firstname_event_id="" pdf_econsent_lastname_field="" pdf_econsent_lastname_event_id="" pdf_econsent_dob_field="" pdf_econsent_dob_event_id="" pdf_econsent_allow_edit="0" pdf_econsent_signature_field1="" pdf_econsent_signature_field2="" pdf_econsent_signature_field3="" pdf_econsent_signature_field4="" pdf_econsent_signature_field5="" survey_width_percent="" survey_show_font_resize="1" survey_btn_text_prev_page="" survey_btn_text_next_page="" survey_btn_text_submit="" survey_btn_hide_submit="0" survey_btn_hide_submit_logic=""/>
+		<redcap:Surveys form_name="participant_info_survey" title="Follow-Up Survey" instructions="&lt;p&gt;&lt;strong&gt;Please complete the survey below.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Thank you!&lt;/p&gt;" offline_instructions="" acknowledgement="&lt;p&gt;&lt;strong&gt;Thank you for taking the survey.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Have a nice day!&lt;/p&gt;" stop_action_acknowledgement="" stop_action_delete_response="0" question_by_section="0" display_page_number="1" question_auto_numbering="1" survey_enabled="1" save_and_return="1" save_and_return_code_bypass="0" logo="" hide_title="0" view_results="0" min_responses_view_results="10" check_diversity_view_results="0" end_survey_redirect_url="" survey_expiration="" promis_skip_question="0" survey_auth_enabled_single="0" edit_completed_response="0" hide_back_button="0" show_required_field_text="1" confirmation_email_subject="" confirmation_email_content="" confirmation_email_from="" confirmation_email_from_display="" confirmation_email_attach_pdf="0" confirmation_email_attachment="" text_to_speech="0" text_to_speech_language="en" end_survey_redirect_next_survey="0" end_survey_redirect_next_survey_logic="" theme="" text_size="" font_family="" theme_text_buttons="" theme_bg_page="" theme_text_title="" theme_bg_title="" theme_text_sectionheader="" theme_bg_sectionheader="" theme_text_question="" theme_bg_question="" enhanced_choices="0" repeat_survey_enabled="0" repeat_survey_btn_text="" repeat_survey_btn_location="BEFORE_SUBMIT" response_limit="" response_limit_include_partials="1" response_limit_custom_text="" survey_time_limit_days="" survey_time_limit_hours="" survey_time_limit_minutes="" email_participant_field="" end_of_survey_pdf_download="0" pdf_save_to_field="" pdf_save_to_event_id="" pdf_save_translated="0" pdf_auto_archive="0" pdf_econsent_version="" pdf_econsent_type="" pdf_econsent_firstname_field="" pdf_econsent_firstname_event_id="" pdf_econsent_lastname_field="" pdf_econsent_lastname_event_id="" pdf_econsent_dob_field="" pdf_econsent_dob_event_id="" pdf_econsent_allow_edit="0" pdf_econsent_signature_field1="" pdf_econsent_signature_field2="" pdf_econsent_signature_field3="" pdf_econsent_signature_field4="" pdf_econsent_signature_field5="" survey_width_percent="" survey_show_font_resize="1" survey_btn_text_prev_page="" survey_btn_text_next_page="" survey_btn_text_submit="" survey_btn_hide_submit="0" survey_btn_hide_submit_logic=""/>
+		<redcap:Surveys form_name="participant_morale_questionnaire" title="Patient Morale Questionnaire" instructions="&lt;p&gt;&lt;strong&gt;Please complete the survey below.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Thank you!&lt;/p&gt;" offline_instructions="" acknowledgement="&lt;p&gt;&lt;strong&gt;Thank you for taking the survey.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Have a nice day!&lt;/p&gt;" stop_action_acknowledgement="" stop_action_delete_response="0" question_by_section="0" display_page_number="1" question_auto_numbering="1" survey_enabled="1" save_and_return="1" save_and_return_code_bypass="0" logo="" hide_title="0" view_results="0" min_responses_view_results="10" check_diversity_view_results="0" end_survey_redirect_url="" survey_expiration="" promis_skip_question="0" survey_auth_enabled_single="0" edit_completed_response="0" hide_back_button="0" show_required_field_text="1" confirmation_email_subject="" confirmation_email_content="" confirmation_email_from="" confirmation_email_from_display="" confirmation_email_attach_pdf="0" confirmation_email_attachment="" text_to_speech="0" text_to_speech_language="en" end_survey_redirect_next_survey="0" end_survey_redirect_next_survey_logic="" theme="" text_size="" font_family="" theme_text_buttons="" theme_bg_page="" theme_text_title="" theme_bg_title="" theme_text_sectionheader="" theme_bg_sectionheader="" theme_text_question="" theme_bg_question="" enhanced_choices="0" repeat_survey_enabled="0" repeat_survey_btn_text="" repeat_survey_btn_location="BEFORE_SUBMIT" response_limit="" response_limit_include_partials="1" response_limit_custom_text="" survey_time_limit_days="" survey_time_limit_hours="" survey_time_limit_minutes="" email_participant_field="" end_of_survey_pdf_download="0" pdf_save_to_field="" pdf_save_to_event_id="" pdf_save_translated="0" pdf_auto_archive="0" pdf_econsent_version="" pdf_econsent_type="" pdf_econsent_firstname_field="" pdf_econsent_firstname_event_id="" pdf_econsent_lastname_field="" pdf_econsent_lastname_event_id="" pdf_econsent_dob_field="" pdf_econsent_dob_event_id="" pdf_econsent_allow_edit="0" pdf_econsent_signature_field1="" pdf_econsent_signature_field2="" pdf_econsent_signature_field3="" pdf_econsent_signature_field4="" pdf_econsent_signature_field5="" survey_width_percent="" survey_show_font_resize="1" survey_btn_text_prev_page="" survey_btn_text_next_page="" survey_btn_text_submit="" survey_btn_hide_submit="0" survey_btn_hide_submit_logic=""/>
+	</redcap:SurveysGroup>
+	<redcap:UserRolesGroup>
+		<redcap:UserRoles role_name="api" unique_role_name="U-934FFEECMF" lock_record="0" lock_record_multiform="0" lock_record_customize="0" data_export_tool="" data_export_instruments="[prescreening_survey,1][participant_info_survey,1][participant_morale_questionnaire,1][completion_data,1]" data_import_tool="0" data_comparison_tool="0" data_logging="0" email_logging="0" file_repository="0" double_data="0" user_rights="0" data_access_groups="0" graphical="0" reports="0" design="0" alerts="0" calendar="0" data_entry="[prescreening_survey,3][participant_info_survey,3][participant_morale_questionnaire,3][completion_data,1]" api_export="1" api_import="0" api_modules="0" mobile_app="0" mobile_app_download_data="0" record_create="0" record_rename="0" record_delete="0" dts="0" participants="1" data_quality_design="0" data_quality_execute="0" data_quality_resolution="1" random_setup="0" random_dashboard="0" random_perform="0" realtime_webservice_mapping="0" realtime_webservice_adjudicate="0" external_module_config="" mycap_participants="1"/>
+	</redcap:UserRolesGroup>
+</GlobalVariables>
+<MetaDataVersion OID="Metadata.REDCapRSurvey_2024-10-13_2140" Name="REDCapR: survey" redcap:RecordIdField="participant_id">
+	<FormDef OID="Form.prescreening_survey" Name="Pre-Screening Survey" Repeating="No" redcap:FormName="prescreening_survey">
+		<ItemGroupRef ItemGroupOID="prescreening_survey.participant_id" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="prescreening_survey.prescreening_survey_timestamp" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="prescreening_survey.dob" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="prescreening_survey.email" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="prescreening_survey.prescreening_survey_complete" Mandatory="No"/>
+	</FormDef>
+	<FormDef OID="Form.participant_info_survey" Name="Participant Info Survey" Repeating="No" redcap:FormName="participant_info_survey">
+		<ItemGroupRef ItemGroupOID="participant_info_survey.participant_info_survey_timestamp" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="participant_info_survey.first_name" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="participant_info_survey.last_name" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="participant_info_survey.participant_info_survey_complete" Mandatory="No"/>
+	</FormDef>
+	<FormDef OID="Form.participant_morale_questionnaire" Name="Participant Morale Questionnaire" Repeating="No" redcap:FormName="participant_morale_questionnaire">
+		<ItemGroupRef ItemGroupOID="participant_morale_questionnaire.participant_morale_questionnaire_timestamp" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="participant_morale_questionnaire.pmq1" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="participant_morale_questionnaire.pmq2" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="participant_morale_questionnaire.participant_morale_questionnaire_complete" Mandatory="No"/>
+	</FormDef>
+	<FormDef OID="Form.completion_data" Name="Completion Data (to be entered by study personnel only)" Repeating="No" redcap:FormName="completion_data">
+		<ItemGroupRef ItemGroupOID="completion_data.complete_study" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="completion_data.withdraw_date" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="completion_data.completion_data_complete" Mandatory="No"/>
+	</FormDef>
+	<ItemGroupDef OID="prescreening_survey.participant_id" Name="Pre-Screening Survey" Repeating="No">
+		<ItemRef ItemOID="participant_id" Mandatory="No" redcap:Variable="participant_id"/>
+		<ItemRef ItemOID="redcap_survey_identifier" Mandatory="No" redcap:Variable="redcap_survey_identifier"/>
+		<ItemRef ItemOID="prescreening_survey_timestamp" Mandatory="No" redcap:Variable="prescreening_survey_timestamp"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="prescreening_survey.prescreening_survey_timestamp" Name="" Repeating="No">
+		<ItemRef ItemOID="prescreening_survey_timestamp" Mandatory="No" redcap:Variable="prescreening_survey_timestamp"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="prescreening_survey.dob" Name="Please fill out the information below." Repeating="No">
+		<ItemRef ItemOID="dob" Mandatory="No" redcap:Variable="dob"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="prescreening_survey.email" Name="Pre-Screening Survey" Repeating="No">
+		<ItemRef ItemOID="email" Mandatory="No" redcap:Variable="email"/>
+		<ItemRef ItemOID="has_diabetes" Mandatory="No" redcap:Variable="has_diabetes"/>
+		<ItemRef ItemOID="consent___1" Mandatory="No" redcap:Variable="consent"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="prescreening_survey.prescreening_survey_complete" Name="Form Status" Repeating="No">
+		<ItemRef ItemOID="prescreening_survey_complete" Mandatory="No" redcap:Variable="prescreening_survey_complete"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="participant_info_survey.participant_info_survey_timestamp" Name="" Repeating="No">
+		<ItemRef ItemOID="participant_info_survey_timestamp" Mandatory="No" redcap:Variable="participant_info_survey_timestamp"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="participant_info_survey.first_name" Name="As a participant in this study, please answer the questions below. Thank you!" Repeating="No">
+		<ItemRef ItemOID="first_name" Mandatory="No" redcap:Variable="first_name"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="participant_info_survey.last_name" Name="Participant Info Survey" Repeating="No">
+		<ItemRef ItemOID="last_name" Mandatory="No" redcap:Variable="last_name"/>
+		<ItemRef ItemOID="address" Mandatory="No" redcap:Variable="address"/>
+		<ItemRef ItemOID="telephone_1" Mandatory="No" redcap:Variable="telephone_1"/>
+		<ItemRef ItemOID="ethnicity" Mandatory="No" redcap:Variable="ethnicity"/>
+		<ItemRef ItemOID="race" Mandatory="No" redcap:Variable="race"/>
+		<ItemRef ItemOID="sex" Mandatory="No" redcap:Variable="sex"/>
+		<ItemRef ItemOID="height" Mandatory="No" redcap:Variable="height"/>
+		<ItemRef ItemOID="weight" Mandatory="No" redcap:Variable="weight"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="participant_info_survey.participant_info_survey_complete" Name="Form Status" Repeating="No">
+		<ItemRef ItemOID="participant_info_survey_complete" Mandatory="No" redcap:Variable="participant_info_survey_complete"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="participant_morale_questionnaire.participant_morale_questionnaire_timestamp" Name="" Repeating="No">
+		<ItemRef ItemOID="participant_morale_questionnaire_timestamp" Mandatory="No" redcap:Variable="participant_morale_questionnaire_timestamp"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="participant_morale_questionnaire.pmq1" Name="As a participant in this study, please answer the questions below. Thank you!" Repeating="No">
+		<ItemRef ItemOID="pmq1" Mandatory="No" redcap:Variable="pmq1"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="participant_morale_questionnaire.pmq2" Name="Participant Morale Questionnaire" Repeating="No">
+		<ItemRef ItemOID="pmq2" Mandatory="No" redcap:Variable="pmq2"/>
+		<ItemRef ItemOID="pmq3" Mandatory="No" redcap:Variable="pmq3"/>
+		<ItemRef ItemOID="pmq4" Mandatory="No" redcap:Variable="pmq4"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="participant_morale_questionnaire.participant_morale_questionnaire_complete" Name="Form Status" Repeating="No">
+		<ItemRef ItemOID="participant_morale_questionnaire_complete" Mandatory="No" redcap:Variable="participant_morale_questionnaire_complete"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="completion_data.complete_study" Name="This form is to be filled out by study personnel." Repeating="No">
+		<ItemRef ItemOID="complete_study" Mandatory="No" redcap:Variable="complete_study"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="completion_data.withdraw_date" Name="Completion Data (to be entered by study personnel only)" Repeating="No">
+		<ItemRef ItemOID="withdraw_date" Mandatory="No" redcap:Variable="withdraw_date"/>
+		<ItemRef ItemOID="withdraw_reason" Mandatory="No" redcap:Variable="withdraw_reason"/>
+		<ItemRef ItemOID="date_visit_4" Mandatory="No" redcap:Variable="date_visit_4"/>
+		<ItemRef ItemOID="discharge_date_4" Mandatory="No" redcap:Variable="discharge_date_4"/>
+		<ItemRef ItemOID="discharge_summary_4" Mandatory="No" redcap:Variable="discharge_summary_4"/>
+		<ItemRef ItemOID="study_comments" Mandatory="No" redcap:Variable="study_comments"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="completion_data.completion_data_complete" Name="Form Status" Repeating="No">
+		<ItemRef ItemOID="completion_data_complete" Mandatory="No" redcap:Variable="completion_data_complete"/>
+	</ItemGroupDef>
+	<ItemDef OID="participant_id" Name="participant_id" DataType="text" Length="999" redcap:Variable="participant_id" redcap:FieldType="text">
+		<Question><TranslatedText>Participant ID</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="redcap_survey_identifier" Name="redcap_survey_identifier" DataType="text" Length="999" redcap:Variable="redcap_survey_identifier">
+		<Question><TranslatedText>Survey Identifier</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="prescreening_survey_timestamp" Name="prescreening_survey_timestamp" DataType="datetime" Length="999" redcap:Variable="prescreening_survey_timestamp">
+		<Question><TranslatedText>Survey Timestamp</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="prescreening_survey_timestamp" Name="prescreening_survey_timestamp" DataType="datetime" Length="999" redcap:Variable="prescreening_survey_timestamp">
+		<Question><TranslatedText>Survey Timestamp</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="dob" Name="dob" DataType="date" Length="999" redcap:Variable="dob" redcap:FieldType="text" redcap:TextValidationType="date_ymd" redcap:SectionHeader="Please fill out the information below.">
+		<Question><TranslatedText>Date of birth</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="email" Name="email" DataType="text" Length="999" redcap:Variable="email" redcap:FieldType="text" redcap:TextValidationType="email" redcap:Identifier="y">
+		<Question><TranslatedText>E-mail address</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="has_diabetes" Name="has_diabetes" DataType="boolean" Length="1" redcap:Variable="has_diabetes" redcap:FieldType="truefalse">
+		<Question><TranslatedText>I currently have Type 2 Diabetes</TranslatedText></Question>
+		<CodeListRef CodeListOID="has_diabetes.choices"/>
+	</ItemDef>
+	<ItemDef OID="consent___1" Name="consent___1" DataType="boolean" Length="1" redcap:Variable="consent" redcap:FieldType="checkbox">
+		<Question><TranslatedText>By checking this box, I certify that I am at least 18 years old and that I give my consent freely to participant in this study.</TranslatedText></Question>
+		<CodeListRef CodeListOID="consent___1.choices"/>
+	</ItemDef>
+	<ItemDef OID="prescreening_survey_complete" Name="prescreening_survey_complete" DataType="text" Length="1" redcap:Variable="prescreening_survey_complete" redcap:FieldType="select" redcap:SectionHeader="Form Status">
+		<Question><TranslatedText>Complete?</TranslatedText></Question>
+		<CodeListRef CodeListOID="prescreening_survey_complete.choices"/>
+	</ItemDef>
+	<ItemDef OID="participant_info_survey_timestamp" Name="participant_info_survey_timestamp" DataType="datetime" Length="999" redcap:Variable="participant_info_survey_timestamp">
+		<Question><TranslatedText>Survey Timestamp</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="first_name" Name="first_name" DataType="text" Length="999" redcap:Variable="first_name" redcap:FieldType="text" redcap:SectionHeader="As a participant in this study, please answer the questions below. Thank you!" redcap:Identifier="y">
+		<Question><TranslatedText>First Name</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="last_name" Name="last_name" DataType="text" Length="999" redcap:Variable="last_name" redcap:FieldType="text" redcap:Identifier="y">
+		<Question><TranslatedText>Last Name</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="address" Name="address" DataType="text" Length="999" redcap:Variable="address" redcap:FieldType="textarea" redcap:Identifier="y">
+		<Question><TranslatedText>Street, City, State, ZIP</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="telephone_1" Name="telephone_1" DataType="text" Length="999" redcap:Variable="telephone_1" redcap:FieldType="text" redcap:TextValidationType="phone" redcap:FieldNote="Include Area Code" redcap:Identifier="y">
+		<Question><TranslatedText>Phone number</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="ethnicity" Name="ethnicity" DataType="text" Length="1" redcap:Variable="ethnicity" redcap:FieldType="radio" redcap:CustomAlignment="LH">
+		<Question><TranslatedText>Ethnicity</TranslatedText></Question>
+		<CodeListRef CodeListOID="ethnicity.choices"/>
+	</ItemDef>
+	<ItemDef OID="race" Name="race" DataType="text" Length="1" redcap:Variable="race" redcap:FieldType="select">
+		<Question><TranslatedText>Race</TranslatedText></Question>
+		<CodeListRef CodeListOID="race.choices"/>
+	</ItemDef>
+	<ItemDef OID="sex" Name="sex" DataType="text" Length="1" redcap:Variable="sex" redcap:FieldType="radio">
+		<Question><TranslatedText>Gender</TranslatedText></Question>
+		<CodeListRef CodeListOID="sex.choices"/>
+	</ItemDef>
+	<ItemDef OID="height" Name="height" DataType="float" Length="999" SignificantDigits="1" redcap:Variable="height" redcap:FieldType="text" redcap:TextValidationType="float">
+		<Question><TranslatedText>Height (cm)</TranslatedText></Question>
+		<RangeCheck Comparator="GE" SoftHard="Soft">
+			<CheckValue>130</CheckValue>
+			<ErrorMessage><TranslatedText>The value you provided is outside the suggested range (130 - 215). This value is admissible, but you may wish to double check it.</TranslatedText></ErrorMessage>
+		</RangeCheck>
+		<RangeCheck Comparator="LE" SoftHard="Soft">
+			<CheckValue>215</CheckValue>
+			<ErrorMessage><TranslatedText>The value you provided is outside the suggested range (130 - 215). This value is admissible, but you may wish to double check it.</TranslatedText></ErrorMessage>
+		</RangeCheck>
+	</ItemDef>
+	<ItemDef OID="weight" Name="weight" DataType="integer" Length="999" redcap:Variable="weight" redcap:FieldType="text" redcap:TextValidationType="int">
+		<Question><TranslatedText>Weight (kilograms)</TranslatedText></Question>
+		<RangeCheck Comparator="GE" SoftHard="Soft">
+			<CheckValue>35</CheckValue>
+			<ErrorMessage><TranslatedText>The value you provided is outside the suggested range (35 - 200). This value is admissible, but you may wish to double check it.</TranslatedText></ErrorMessage>
+		</RangeCheck>
+		<RangeCheck Comparator="LE" SoftHard="Soft">
+			<CheckValue>200</CheckValue>
+			<ErrorMessage><TranslatedText>The value you provided is outside the suggested range (35 - 200). This value is admissible, but you may wish to double check it.</TranslatedText></ErrorMessage>
+		</RangeCheck>
+	</ItemDef>
+	<ItemDef OID="participant_info_survey_complete" Name="participant_info_survey_complete" DataType="text" Length="1" redcap:Variable="participant_info_survey_complete" redcap:FieldType="select" redcap:SectionHeader="Form Status">
+		<Question><TranslatedText>Complete?</TranslatedText></Question>
+		<CodeListRef CodeListOID="participant_info_survey_complete.choices"/>
+	</ItemDef>
+	<ItemDef OID="participant_morale_questionnaire_timestamp" Name="participant_morale_questionnaire_timestamp" DataType="datetime" Length="999" redcap:Variable="participant_morale_questionnaire_timestamp">
+		<Question><TranslatedText>Survey Timestamp</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="pmq1" Name="pmq1" DataType="text" Length="1" redcap:Variable="pmq1" redcap:FieldType="select" redcap:SectionHeader="As a participant in this study, please answer the questions below. Thank you!">
+		<Question><TranslatedText>On average, how many pills did you take each day last week?</TranslatedText></Question>
+		<CodeListRef CodeListOID="pmq1.choices"/>
+	</ItemDef>
+	<ItemDef OID="pmq2" Name="pmq2" DataType="text" Length="1" redcap:Variable="pmq2" redcap:FieldType="select">
+		<Question><TranslatedText>Using the handout, which level of dependence do you feel you are currently at?</TranslatedText></Question>
+		<CodeListRef CodeListOID="pmq2.choices"/>
+	</ItemDef>
+	<ItemDef OID="pmq3" Name="pmq3" DataType="boolean" Length="1" redcap:Variable="pmq3" redcap:FieldType="yesno">
+		<Question><TranslatedText>Would you be willing to discuss your experiences with a psychiatrist?</TranslatedText></Question>
+		<CodeListRef CodeListOID="pmq3.choices"/>
+	</ItemDef>
+	<ItemDef OID="pmq4" Name="pmq4" DataType="text" Length="1" redcap:Variable="pmq4" redcap:FieldType="select">
+		<Question><TranslatedText>How open are you to further testing?</TranslatedText></Question>
+		<CodeListRef CodeListOID="pmq4.choices"/>
+	</ItemDef>
+	<ItemDef OID="participant_morale_questionnaire_complete" Name="participant_morale_questionnaire_complete" DataType="text" Length="1" redcap:Variable="participant_morale_questionnaire_complete" redcap:FieldType="select" redcap:SectionHeader="Form Status">
+		<Question><TranslatedText>Complete?</TranslatedText></Question>
+		<CodeListRef CodeListOID="participant_morale_questionnaire_complete.choices"/>
+	</ItemDef>
+	<ItemDef OID="complete_study" Name="complete_study" DataType="boolean" Length="1" redcap:Variable="complete_study" redcap:FieldType="yesno" redcap:SectionHeader="This form is to be filled out by study personnel.">
+		<Question><TranslatedText>Has patient completed study?</TranslatedText></Question>
+		<CodeListRef CodeListOID="complete_study.choices"/>
+	</ItemDef>
+	<ItemDef OID="withdraw_date" Name="withdraw_date" DataType="date" Length="999" redcap:Variable="withdraw_date" redcap:FieldType="text" redcap:TextValidationType="date_ymd">
+		<Question><TranslatedText>Put a date if patient withdrew study</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="withdraw_reason" Name="withdraw_reason" DataType="text" Length="1" redcap:Variable="withdraw_reason" redcap:FieldType="select">
+		<Question><TranslatedText>Reason patient withdrew from study</TranslatedText></Question>
+		<CodeListRef CodeListOID="withdraw_reason.choices"/>
+	</ItemDef>
+	<ItemDef OID="date_visit_4" Name="date_visit_4" DataType="date" Length="999" redcap:Variable="date_visit_4" redcap:FieldType="text" redcap:TextValidationType="date_ymd">
+		<Question><TranslatedText>Date of last visit</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="discharge_date_4" Name="discharge_date_4" DataType="date" Length="999" redcap:Variable="discharge_date_4" redcap:FieldType="text" redcap:TextValidationType="date_ymd">
+		<Question><TranslatedText>Date of hospital discharge</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="discharge_summary_4" Name="discharge_summary_4" DataType="text" Length="1" redcap:Variable="discharge_summary_4" redcap:FieldType="select">
+		<Question><TranslatedText>Discharge summary in patients binder?</TranslatedText></Question>
+		<CodeListRef CodeListOID="discharge_summary_4.choices"/>
+	</ItemDef>
+	<ItemDef OID="study_comments" Name="study_comments" DataType="text" Length="999" redcap:Variable="study_comments" redcap:FieldType="textarea">
+		<Question><TranslatedText>Comments</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="completion_data_complete" Name="completion_data_complete" DataType="text" Length="1" redcap:Variable="completion_data_complete" redcap:FieldType="select" redcap:SectionHeader="Form Status">
+		<Question><TranslatedText>Complete?</TranslatedText></Question>
+		<CodeListRef CodeListOID="completion_data_complete.choices"/>
+	</ItemDef>
+	<CodeList OID="has_diabetes.choices" Name="has_diabetes" DataType="boolean" redcap:Variable="has_diabetes">
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>True</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>False</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="consent___1.choices" Name="consent___1" DataType="boolean" redcap:Variable="consent" redcap:CheckboxChoices="1, I consent">
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="prescreening_survey_complete.choices" Name="prescreening_survey_complete" DataType="text" redcap:Variable="prescreening_survey_complete">
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Incomplete</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Unverified</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="2"><Decode><TranslatedText>Complete</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="ethnicity.choices" Name="ethnicity" DataType="text" redcap:Variable="ethnicity">
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Hispanic or Latino</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>NOT Hispanic or Latino</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="2"><Decode><TranslatedText>Unknown / Not Reported</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="race.choices" Name="race" DataType="text" redcap:Variable="race">
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>American Indian/Alaska Native</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Asian</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="2"><Decode><TranslatedText>Native Hawaiian or Other Pacific Islander</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="3"><Decode><TranslatedText>Black or African American</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="4"><Decode><TranslatedText>White</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="5"><Decode><TranslatedText>More Than One Race</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="6"><Decode><TranslatedText>Unknown / Not Reported</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="sex.choices" Name="sex" DataType="text" redcap:Variable="sex">
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Female</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Male</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="participant_info_survey_complete.choices" Name="participant_info_survey_complete" DataType="text" redcap:Variable="participant_info_survey_complete">
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Incomplete</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Unverified</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="2"><Decode><TranslatedText>Complete</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="pmq1.choices" Name="pmq1" DataType="text" redcap:Variable="pmq1">
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Less than 5</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>5-10</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="2"><Decode><TranslatedText>6-15</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="3"><Decode><TranslatedText>Over 15</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="pmq2.choices" Name="pmq2" DataType="text" redcap:Variable="pmq2">
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>0</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>1</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="2"><Decode><TranslatedText>2</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="3"><Decode><TranslatedText>3</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="4"><Decode><TranslatedText>4</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="5"><Decode><TranslatedText>5</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="pmq3.choices" Name="pmq3" DataType="boolean" redcap:Variable="pmq3">
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Yes</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>No</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="pmq4.choices" Name="pmq4" DataType="text" redcap:Variable="pmq4">
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Not open</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Undecided</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="2"><Decode><TranslatedText>Very open</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="participant_morale_questionnaire_complete.choices" Name="participant_morale_questionnaire_complete" DataType="text" redcap:Variable="participant_morale_questionnaire_complete">
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Incomplete</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Unverified</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="2"><Decode><TranslatedText>Complete</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="complete_study.choices" Name="complete_study" DataType="boolean" redcap:Variable="complete_study">
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Yes</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>No</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="withdraw_reason.choices" Name="withdraw_reason" DataType="text" redcap:Variable="withdraw_reason">
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Non-compliance</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Did not wish to continue in study</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="2"><Decode><TranslatedText>Could not tolerate the supplement</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="3"><Decode><TranslatedText>Hospitalization</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="4"><Decode><TranslatedText>Other</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="discharge_summary_4.choices" Name="discharge_summary_4" DataType="text" redcap:Variable="discharge_summary_4">
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>No</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Yes</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="completion_data_complete.choices" Name="completion_data_complete" DataType="text" redcap:Variable="completion_data_complete">
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Incomplete</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Unverified</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="2"><Decode><TranslatedText>Complete</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+</MetaDataVersion>
+</Study>
+<ClinicalData StudyOID="Project.REDCapRSurvey" MetaDataVersionOID="Metadata.REDCapRSurvey_2024-10-13_2140">
+	<SubjectData SubjectKey="1" redcap:RecordIdField="participant_id">
+			<FormData FormOID="Form.prescreening_survey" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="prescreening_survey.participant_id" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="participant_id" Value="1"/>
+					<ItemData ItemOID="prescreening_survey_timestamp" Value="2024-10-13 20:39:30"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="prescreening_survey.dob" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="dob" Value="2018-03-06"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="prescreening_survey.email" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="email" Value="aaa@bbb.com"/>
+					<ItemData ItemOID="has_diabetes" Value="1"/>
+					<ItemData ItemOID="consent___1" Value="1"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="prescreening_survey.prescreening_survey_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="prescreening_survey_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+			<FormData FormOID="Form.participant_morale_questionnaire" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="participant_morale_questionnaire.participant_morale_questionnaire_timestamp" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="participant_morale_questionnaire_timestamp" Value="2024-10-13 21:31:03"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="participant_morale_questionnaire.participant_morale_questionnaire_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="participant_morale_questionnaire_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+	</SubjectData>
+	<SubjectData SubjectKey="2" redcap:RecordIdField="participant_id">
+			<FormData FormOID="Form.prescreening_survey" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="prescreening_survey.participant_id" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="participant_id" Value="2"/>
+					<ItemData ItemOID="prescreening_survey_timestamp" Value="2024-10-13 20:40:51"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="prescreening_survey.dob" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="dob" Value="2018-03-05"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="prescreening_survey.email" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="email" Value="ccc@ddd.com"/>
+					<ItemData ItemOID="has_diabetes" Value="0"/>
+					<ItemData ItemOID="consent___1" Value="0"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="prescreening_survey.prescreening_survey_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="prescreening_survey_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+	</SubjectData>
+</ClinicalData>
+</ODM>

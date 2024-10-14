@@ -1,8 +1,8 @@
 library(testthat)
 
-credential_1  <- retrieve_credential_testing(753L)
-credential_2  <- retrieve_credential_testing(2593L)
-credential_3  <- retrieve_credential_testing(2597L)
+credential_1  <- retrieve_credential_testing("super-wide-1")
+credential_2  <- retrieve_credential_testing("super-wide-2")
+credential_3  <- retrieve_credential_testing("super-wide-3")
 
 test_that("smoke test -superwide 1", {
   testthat::skip_on_cran()
@@ -143,3 +143,5 @@ test_that("correct dimensions -superwide 1 -batch", {
 # })
 
 rm(credential_1)
+rm(credential_2)
+rm(credential_3)

@@ -1,0 +1,31 @@
+structure(list(timestamp = structure(c(1728643440, 1728643380, 
+1728643380, 1728643320, 1728643320, 1728643260, 1728643260, 1728643260, 
+1728643260, 1728643200, 1728643140, 1728643140, 1728641160, 1728641160, 
+1728641160, 1728641160, 1728641160, 1728638100), class = c("POSIXct", 
+"POSIXt"), tzone = "UTC"), username = c("unittestphifree", "unittestphifree", 
+"unittestphifree", "unittestphifree", "unittestphifree", "unittestphifree", 
+"unittestphifree", "unittestphifree", "itawilliamb", "unittestphifree", 
+"unittestphifree", "unittestphifree", "itawilliamb", "itawilliamb", 
+"itawilliamb", "itawilliamb", "itawilliamb", "itawilliamb"), 
+    action = c("Manage/Design", "Manage/Design", "Manage/Design", 
+    "Manage/Design", "Manage/Design", "Manage/Design", "Manage/Design", 
+    "Manage/Design", "Edit user role", "Manage/Design", "Manage/Design", 
+    "Manage/Design", "Update record (import) 5", "Update record (import) 4", 
+    "Update record (import) 3", "Update record (import) 2", "Update record (import) 1", 
+    "Edit user role"), details = c("Export Logging (API)", "Export Logging (API)", 
+    "Export Logging (API)", "Export Logging (API)", "Export Logging (API)", 
+    "Export Logging (API)", "Export Logging (API)", "Export Logging (API)", 
+    "role = 'api'", "Export instruments (API)", "Export DAGs (API)", 
+    "Export project information (API)", "mugshot = '26'", "comments = 'This record doesn't have a DAG assigned  So call up Trudy on the telephone Send her a letter in the mail', mugshot = '25'", 
+    "mugshot = '24'", "mugshot = '23'", "mugshot = '22'", "role = 'api'"
+    ), record = c(NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 
+    NA, "5", "4", "3", "2", "1", NA)), row.names = c(NA, -18L
+), spec = structure(list(cols = list(timestamp = structure(list(
+    format = ""), class = c("collector_datetime", "collector"
+)), username = structure(list(), class = c("collector_character", 
+"collector")), action = structure(list(), class = c("collector_character", 
+"collector")), details = structure(list(), class = c("collector_character", 
+"collector")), record = structure(list(), class = c("collector_character", 
+"collector"))), default = structure(list(), class = c("collector_character", 
+"collector")), delim = ","), class = "col_spec"), class = c("spec_tbl_df", 
+"tbl_df", "tbl", "data.frame"))

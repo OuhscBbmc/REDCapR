@@ -12,7 +12,7 @@ populate_project_simple <- function(batch = FALSE, verbose = TRUE) {
     # nocov end
   }
 
-  credential  <- retrieve_credential_testing(213L)
+  credential  <- retrieve_credential_testing("simple-write")
 
   project <- REDCapR::redcap_project$new(
     redcap_uri    = credential$redcap_uri,
@@ -20,15 +20,15 @@ populate_project_simple <- function(batch = FALSE, verbose = TRUE) {
     verbose       = verbose
   )
   path_in_simple <- system.file(
-    "test-data/project-simple/data.csv",
+    "test-data/projects/simple/data.csv",
     package = "REDCapR"
   )
 
   # Write the file to disk (necessary only when you wanted to change the data).  Don't uncomment; just run manually.
   # returned_object <- redcap_read_oneshot(redcap_uri=uri, token=token, raw_or_label="raw")
-  # utils::write.csv(returned_object$data, file="./inst/test-data/project-simple/simple-data.csv", row.names=FALSE)
+  # utils::write.csv(returned_object$data, file="./inst/test-data/projects/simple/simple-data.csv", row.names=FALSE)
   # returned_object_metadata <- redcap_metadata_read(redcap_uri=uri, token=token)
-  # utils::write.csv(returned_object_metadata$data, file="./inst/test-data/project-simple/simple-metadata.csv", row.names=FALSE)
+  # utils::write.csv(returned_object_metadata$data, file="./inst/test-data/projects/simple/simple-metadata.csv", row.names=FALSE)
 
   # Read in the data in R's memory from a csv file.
   ds_to_write <-
@@ -36,7 +36,7 @@ populate_project_simple <- function(batch = FALSE, verbose = TRUE) {
       path_in_simple,
       show_col_types = FALSE
     )
-  # ds_to_write <- utils::read.csv(file="./inst/test-data/project-simple/simple-data.csv")
+  # ds_to_write <- utils::read.csv(file="./inst/test-data/projects/simple/simple-data.csv")
 
   # Remove the calculated variables.
   ds_to_write$age <- NULL
@@ -90,7 +90,7 @@ clear_project_simple <- function(verbose = TRUE) {
     # nocov end
   }
   path_delete_test_record <-
-    "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_simple.php"
+    "https://redcap-dev-2.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_simple.php"
 
   # Returns a boolean value if successful
   was_successful <- !httr::http_error(path_delete_test_record)

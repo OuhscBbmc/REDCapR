@@ -5,12 +5,12 @@ retrieve_expected_events <- function(path) {
   if (!file.exists(full_path))
     stop("The expected file `", full_path, "` was not found.")  # nocov
 
-  col_types <- readr::cols(
+  col_types <- readr::cols_only(
     event_name         = readr::col_character(),
     arm_num            = readr::col_integer(),
     unique_event_name  = readr::col_character(),
-    custom_event_label = readr::col_character(),
-    event_id           = readr::col_integer()
+    custom_event_label = readr::col_character()#,
+    # event_id           = readr::col_integer()
   )
 
   full_path %>%
@@ -22,15 +22,15 @@ empty_data_frame <-
     event_name         = character(0),
     arm_num            = integer(0),
     unique_event_name  = character(0),
-    custom_event_label = character(0),
-    event_id           = integer(0)
+    custom_event_label = character(0)#,
+    # event_id           = integer(0)
   )
 
 test_that("Longitudinal Single Arm", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(2629L)
+  credential  <- retrieve_credential_testing("arm-single-longitudinal")
 
-  path_expected <- "test-data/longitudinal-single-arm/event.csv"
+  path_expected <- "test-data/projects/arm-single-longitudinal/event.csv"
   expected_data_frame <- retrieve_expected_events(path_expected)
 
   expected_outcome_message <- "The list of events was retrieved from the REDCap project in \\d+(\\.\\d+\\W|\\W)seconds\\."
@@ -40,6 +40,11 @@ test_that("Longitudinal Single Arm", {
       token             = credential$token,
       verbose           = FALSE
     )
+
+  expect_true(all(!is.na(returned_object$data$event_id)))
+  expect_true(all(0 < returned_object$data$event_id))
+
+  returned_object$data$event_id <- NULL
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
   expect_equal(returned_object$status_code, expected=200L)
@@ -50,9 +55,9 @@ test_that("Longitudinal Single Arm", {
 
 test_that("Longitudinal Two Arms", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(212L)
+  credential  <- retrieve_credential_testing("longitudinal")
 
-  path_expected <- "test-data/project-longitudinal/event.csv"
+  path_expected <- "test-data/projects/longitudinal/event.csv"
   expected_data_frame <- retrieve_expected_events(path_expected)
 
   expected_outcome_message <- "The list of events was retrieved from the REDCap project in \\d+(\\.\\d+\\W|\\W)seconds\\."
@@ -63,6 +68,11 @@ test_that("Longitudinal Two Arms", {
       verbose           = FALSE
     )
 
+  expect_true(all(!is.na(returned_object$data$event_id)))
+  expect_true(all(0 < returned_object$data$event_id))
+
+  returned_object$data$event_id <- NULL
+
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object2$raw_text)
@@ -72,7 +82,7 @@ test_that("Longitudinal Two Arms", {
 
 test_that("Classic", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(153L)
+  credential  <- retrieve_credential_testing()
 
   expected_outcome_message <- "A 'classic' REDCap project has no events.  Retrieved in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message({
@@ -84,6 +94,11 @@ test_that("Classic", {
       )
   })
 
+  expect_true(all(!is.na(returned_object$data$event_id)))
+  expect_true(all(0 < returned_object$data$event_id))
+
+  returned_object$data$event_id <- NULL
+
   expect_equal(returned_object$data, expected=empty_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
   expect_equal(returned_object$status_code, expected=400L)
   expect_equal(returned_object$raw_text, expected="ERROR: You cannot export events for classic projects", ignore_attr = TRUE) # dput(returned_object2$raw_text)
@@ -93,7 +108,7 @@ test_that("Classic", {
 
 test_that("delete-multiple-arm", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(2627L)
+  credential  <- retrieve_credential_testing("arm-multiple-delete")
 
   path_expected <- "test-data/delete-multiple-arm/event.csv"
   expected_data_frame <- retrieve_expected_events(path_expected)
@@ -106,6 +121,11 @@ test_that("delete-multiple-arm", {
       verbose           = FALSE
     )
 
+  expect_true(all(!is.na(returned_object$data$event_id)))
+  expect_true(all(0 < returned_object$data$event_id))
+
+  returned_object$data$event_id <- NULL
+
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object2$raw_text)
@@ -115,7 +135,7 @@ test_that("delete-multiple-arm", {
 
 test_that("delete-single-arm", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(2626L)
+  credential  <- retrieve_credential_testing("arm-single-delete")
 
   expected_outcome_message <- "A 'classic' REDCap project has no events.  Retrieved in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message({
@@ -127,6 +147,11 @@ test_that("delete-single-arm", {
       )
   })
 
+  expect_true(all(!is.na(returned_object$data$event_id)))
+  expect_true(all(0 < returned_object$data$event_id))
+
+  returned_object$data$event_id <- NULL
+
   expect_equal(returned_object$data, expected=empty_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
   expect_equal(returned_object$status_code, expected=400L)
   expect_equal(returned_object$raw_text, expected="ERROR: You cannot export events for classic projects", ignore_attr = TRUE) # dput(returned_object2$raw_text)
@@ -136,7 +161,7 @@ test_that("delete-single-arm", {
 
 test_that("Bad Token", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(2629L)
+  credential  <- retrieve_credential_testing("arm-single-longitudinal")
   bad_token   <- "1234567890ABCDEF1234567890ABCDEF"
 
   expected_error_message <- "The REDCapR event export failed\\. The http status code was 403. The error message was: 'ERROR: You do not have permissions to use the API'"

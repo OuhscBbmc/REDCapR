@@ -29,7 +29,7 @@ test_that("Numeric ID", {
 test_that("Arm", {
   testthat::skip_on_cran()
 
-  credential_arm  <- retrieve_credential_testing(212L)
+  credential_arm  <- retrieve_credential_testing("longitudinal")
 
   expected <- "305"
   observed <-
@@ -45,7 +45,7 @@ test_that("Arm", {
 test_that("Character ID", {
   testthat::skip_on_cran()
 
-  credential_character <- retrieve_credential_testing(998L)
+  credential_character <- retrieve_credential_testing("nonnumeric-record-id")
 
   expected <- "1"
   observed <-
@@ -61,9 +61,12 @@ test_that("Character ID", {
 test_that("DAG", {
   testthat::skip_on_cran()
 
-  credential_dag <- retrieve_credential_testing(999L)
+  credential_dag <- retrieve_credential_testing("dag")
+  if (credential_dag$redcap_uri != "https://redcap-dev-2.ouhsc.edu/redcap/api/") {
+    testthat::skip("Skipping test when run on a different server.")
+  }
 
-  expected <- "331-3"
+  expected <- "20-1"
   observed <-
     redcap_next_free_record_name(
       redcap_uri  = credential_dag$redcap_uri,

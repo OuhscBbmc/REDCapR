@@ -10,10 +10,17 @@ Quick links:
 * [Current & previous GitHub Issues](https://github.com/OuhscBbmc/REDCapR/issues?q=is%3Aissue)
 * [Documentation for current GitHub version](https://ouhscbbmc.github.io/REDCapR/)
 
-Version 1.2.0  (released 2024-09-08)
+Version 1.3.x  (Not yet released on CRAN)
 ==========================================================
 
 These features are not yet on CRAN.  Install with `remotes::install_github("OuhscBbmc/REDCapR")`
+
+### Minor Enhancements
+
+* Redirection layer for test suite allows you to plug in your own server (#539)
+
+Version 1.2.0  (released 2024-09-08)
+==========================================================
 
 ### Possibly Breaking Change
 
@@ -175,7 +182,7 @@ Version 0.11.0 (Released 2020-04-20)
 
 * [`redcap_metadata_write()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_write.html) writes to the project's metadata. (#274, @felixetorres)
 
-* [`redcap_survey_link_export_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_survey_link_export_oneshot.html) retrieves the URL to a specific record's survey (*e.g.*, "https://bbmc.ouhsc.edu/redcap/surveys/?s=8KuzSLMHf6") (#293)
+* [`redcap_survey_link_export_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_survey_link_export_oneshot.html) retrieves the URL to a specific record's survey (*e.g.*, "https://redcap-dev-2.ouhsc.edu/redcap/surveys/?s=8KuzSLMHf6") (#293)
 
 * `convert_logical_to_integer` is a new parameter for [`redcap_write()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_write.html) and [`redcap_write_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_write_oneshot.html). If `TRUE`, all [base::logical] columns in `ds` are cast to an integer before uploading to REDCap.  Boolean values are typically represented as 0/1 in REDCap radio buttons.  Defaults to `FALSE` to maintain backwards compatibility. (#305)
 

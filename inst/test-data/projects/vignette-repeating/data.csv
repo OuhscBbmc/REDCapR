@@ -1,0 +1,18 @@
+record_id,redcap_repeat_instrument,redcap_repeat_instance,height,weight,bmi,intake_complete,sbp,dbp,blood_pressure_complete,lab,conc,laboratory_complete,image_profile,image_complete
+1,,,1.0,11.0,111.0,2,,,,,,,,
+1,blood_pressure,1,,,,,1.1,11.1,2,,,,,
+1,blood_pressure,2,,,,,1.2,11.2,2,,,,,
+1,blood_pressure,3,,,,,1.3,11.3,2,,,,,
+1,laboratory,1,,,,,,,,aa1,"1.1 ppm",2,,
+1,laboratory,2,,,,,,,,aa2,"1.2 ppm",2,,
+1,image,1,,,,,,,,,,,levon-and-barry.jpg,2
+1,image,2,,,,,,,,,,,mugshot-1.jpg,0
+2,,,2.0,22.0,222.0,2,,,,,,,,
+2,blood_pressure,1,,,,,2.1,22.1,2,,,,,
+2,blood_pressure,2,,,,,2.2,22.2,2,,,,,
+2,blood_pressure,3,,,,,2.3,22.3,2,,,,,
+2,laboratory,1,,,,,,,,bb1,"2.1 ppm",2,,
+2,laboratory,2,,,,,,,,bb2,"2.2 ppm",2,,
+2,image,1,,,,,,,,,,,mugshot-2.jpg,2
+2,image,2,,,,,,,,,,,mugshot-3.jpg,1
+2,image,3,,,,,,,,,,,mugshot-4.jpg,0

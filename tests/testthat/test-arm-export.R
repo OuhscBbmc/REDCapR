@@ -25,7 +25,7 @@ empty_data_frame <-
 
 test_that("delete-multiple-arm", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(2627L)
+  credential  <- retrieve_credential_testing("arm-multiple-delete")
 
   path_expected <- "test-data/delete-multiple-arm/arm.csv"
   expected_data_frame <- read_arms(path_expected)
@@ -48,7 +48,7 @@ test_that("delete-multiple-arm", {
 
 test_that("delete-single-arm", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(2626L)
+  credential  <- retrieve_credential_testing("arm-single-delete")
 
   expected_outcome_message <- "A 'classic' REDCap project has no arms.  Retrieved in \\d+(\\.\\d+\\W|\\W)seconds\\."
   expect_message({
@@ -69,9 +69,9 @@ test_that("delete-single-arm", {
 
 test_that("Longitudinal Two Arms", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(212L)
+  credential  <- retrieve_credential_testing("longitudinal")
 
-  path_expected <- "test-data/project-longitudinal/arm.csv"
+  path_expected <- "test-data/projects/longitudinal/arm.csv"
   expected_data_frame <- read_arms(path_expected)
 
   expected_outcome_message <- "The list of arms was retrieved from the REDCap project in \\d+(\\.\\d+\\W|\\W)seconds\\."
@@ -91,9 +91,9 @@ test_that("Longitudinal Two Arms", {
 
 test_that("Longitudinal Single Arm", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(2629L)
+  credential  <- retrieve_credential_testing("arm-single-longitudinal")
 
-  path_expected <- "test-data/longitudinal-single-arm/arm.csv"
+  path_expected <- "test-data/projects/arm-single-longitudinal/arm.csv"
   expected_data_frame <- read_arms(path_expected)
 
   expected_outcome_message <- "The list of arms was retrieved from the REDCap project in \\d+(\\.\\d+\\W|\\W)seconds\\."
@@ -113,7 +113,7 @@ test_that("Longitudinal Single Arm", {
 
 test_that("Bad Token", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(2629L)
+  credential  <- retrieve_credential_testing("arm-single-longitudinal")
   bad_token   <- "1234567890ABCDEF1234567890ABCDEF"
 
   expected_error_message <- "The REDCapR arm export failed\\. The http status code was 403. The error message was: 'ERROR: You do not have permissions to use the API'"

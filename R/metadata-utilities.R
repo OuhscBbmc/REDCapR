@@ -68,8 +68,8 @@
 #' REDCapR::checkbox_choices(select_choices=choices_1)
 #'
 #' \dontrun{
-#' uri         <- "https://bbmc.ouhsc.edu/redcap/api/"
-#' token       <- "9A81268476645C4E5F03428B8AC3AA7B"
+#' uri         <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
+#' token       <- "9A068C425B1341D69E83064A2D273A70"
 #'
 #' ds_metadata <- redcap_metadata_read(uri, token)$data
 #' choices_2   <- ds_metadata[ds_metadata$field_name == "race", ]$select_choices_or_calculations
@@ -77,7 +77,7 @@
 #' REDCapR::regex_named_captures(pattern = pattern_boxes, text = choices_2)
 #' }
 #'
-#' path_3     <- system.file(package = "REDCapR", "test-data/project-simple/metadata.csv")
+#' path_3     <- system.file(package = "REDCapR", "test-data/projects/simple/metadata.csv")
 #' ds_metadata_3  <- read.csv(path_3)
 #' choices_3  <- ds_metadata_3[ds_metadata_3$field_name=="race", "select_choices_or_calculations"]
 #' REDCapR::regex_named_captures(pattern = pattern_boxes, text = choices_3)

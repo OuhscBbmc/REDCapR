@@ -12,14 +12,14 @@ populate_project_dag_write <- function(batch = FALSE, verbose = FALSE) {
     # nocov end
   }
 
-  credential  <- retrieve_credential_testing(2545L, "admin")
+  credential  <- retrieve_credential_testing("dag-write", username = "admin")
 
   project <- REDCapR::redcap_project$new(
     redcap_uri    = credential$redcap_uri,
     token         = credential$token
   )
   path_in_dag <- system.file(
-    "test-data/project-dag/data.csv",
+    "test-data/projects/dag/data.csv",
     package = "REDCapR"
   )
 
@@ -95,7 +95,7 @@ clear_project_dag_write <- function(verbose = FALSE) {
     # nocov end
   }
   path_delete_test_record <-
-    "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_dag_write.php"
+    "https://redcap-dev-2.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_dag_write.php"
 
   # Returns a boolean value if successful
   was_successful <- !httr::http_error(path_delete_test_record)

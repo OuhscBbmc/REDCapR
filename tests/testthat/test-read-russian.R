@@ -1,6 +1,6 @@
 library(testthat)
 
-credential  <- retrieve_credential_testing(268L)
+credential  <- retrieve_credential_testing("russian")
 
 test_that("Russian Recruit", {
   testthat::skip_on_cran()

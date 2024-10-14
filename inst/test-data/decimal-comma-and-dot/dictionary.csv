@@ -1,9 +1,0 @@
-"Variable / Field Name","Form Name","Section Header","Field Type","Field Label","Choices, Calculations, OR Slider Labels","Field Note","Text Validation Type OR Show Slider Number","Text Validation Min","Text Validation Max",Identifier?,"Branching Logic (Show field only if...)","Required Field?","Custom Alignment","Question Number (surveys only)","Matrix Group Name","Matrix Ranking?","Field Annotation"
-record_id,demographics,,text,"Study ID",,,,,,,,,,,,,
-name,demographics,,text,"Last Name",,,,,,y,,,,,,,
-height_dot,demographics,,text,"Height (m)",,"This field is the standard ""Number"" validated field",number,0,3,,,,,,,,
-height_comma,demographics,,text,"Height (m, comma)",,"This field is the comma separated ""Number (comma as decimal)"" validated field",number_comma_decimal,0,3,,,,,,,,
-weight_dot,demographics,,text,"Weight (kilograms)",,"This field is the standard ""Number"" validated field",number,35,200,,,,,,,,
-weight_comma,demographics,,text,"Weight (kilograms, comma)",,"This field is the comma separated ""Number (comma as decimal)"" validated field",number_comma_decimal,35,200,,,,,,,,
-bmi,demographics,,calc,BMI,"round(([weight_dot])/(([height_dot])^(2)),1)",,,,,,,,,,,,
-bmi_comma,demographics,,calc,"BMI (comma)","round(([weight_comma])/(([height_comma])^(2)),1)",,,,,,,,,,,,

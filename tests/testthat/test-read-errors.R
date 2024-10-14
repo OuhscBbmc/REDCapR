@@ -10,7 +10,7 @@ test_that("One Shot: Bad Uri -Not HTTPS", {
 
   expect_error(
     redcap_read_oneshot(
-      redcap_uri    = "http://bbmc.ouhsc.edu/redcap/api/", # Not HTTPS
+      redcap_uri    = "http://redcap-dev-2.ouhsc.edu/redcap/api/", # Not HTTPS
       token         = credential$token
     )
   )
@@ -22,7 +22,7 @@ test_that("One Shot: Bad Uri -wrong address", {
 
   returned_object <-
     redcap_read_oneshot(
-      redcap_uri    = "https://bbmc.ouhsc.edu/redcap/apiFFFFFFFFFFFFFF/", # Wrong url
+      redcap_uri    = "https://redcap-dev-2.ouhsc.edu/redcap/apiFFFFFFFFFFFFFF/", # Wrong url
       token         = credential$token,
       verbose       = FALSE
     )
@@ -43,7 +43,7 @@ test_that("Batch: Bad Uri -Not HTTPS", {
 
   expect_error(
     redcap_read(
-      redcap_uri    = "http://bbmc.ouhsc.edu/redcap/api/", # Not HTTPS
+      redcap_uri    = "http://redcap-dev-2.ouhsc.edu/redcap/api/", # Not HTTPS
       token         = credential$token
     )
   )
@@ -56,7 +56,7 @@ test_that("Batch: Bad Uri -wrong address", {
 
   expect_error(
     redcap_read(
-      redcap_uri    = "https://bbmc.ouhsc.edu/redcap/apiFFFFFFFFFFFFFF/", # Wrong url
+      redcap_uri    = "https://redcap-dev-2.ouhsc.edu/redcap/apiFFFFFFFFFFFFFF/", # Wrong url
       token         = credential$token
     ),
     expected_message

@@ -1,3 +1,0 @@
-participant_id,redcap_survey_identifier,prescreening_survey_timestamp,dob,email,has_diabetes,consent___1,prescreening_survey_complete,participant_info_survey_timestamp,first_name,last_name,address,telephone_1,ethnicity,race,sex,height,weight,participant_info_survey_complete,participant_morale_questionnaire_timestamp,pmq1,pmq2,pmq3,pmq4,participant_morale_questionnaire_complete,complete_study,withdraw_date,withdraw_reason,date_visit_4,discharge_date_4,discharge_summary_4,study_comments,completion_data_complete
-1,,"2018-03-06 15:52:43",2018-03-06,aaa@bbb.com,1,1,2,,,,,,,,,,,0,,,,,,0,,,,,,,,0
-2,,"2018-03-06 15:53:15",2018-03-05,ccc@ddd.com,0,0,2,,,,,,,,,,,0,,,,,,0,,,,,,,,0

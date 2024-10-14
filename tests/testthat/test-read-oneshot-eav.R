@@ -235,7 +235,7 @@ test_that("filter-character", {
 })
 test_that("blank-for-gray-status-true", {
   testthat::skip_on_cran()
-  credential_blank_for_gray  <- retrieve_credential_testing(3003L)
+  credential_blank_for_gray  <- retrieve_credential_testing("blank-for-gray-status")
   path_expected <- "test-data/specific-redcapr/read-oneshot-eav/blank-for-gray-true.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
@@ -247,10 +247,16 @@ test_that("blank-for-gray-status-true", {
       verbose                     = FALSE
     )
 
-  if (update_expectation) save_expected(returned_object$data, path_expected)
+  d <-
+    returned_object$data |>
+    dplyr::select(
+      -mugshot # Don't compare file IDs across servers.
+    )
+
+  if (update_expectation) save_expected(d, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_equal(d, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
@@ -262,7 +268,7 @@ test_that("blank-for-gray-status-true", {
 })
 test_that("blank-for-gray-status-false", {
   testthat::skip_on_cran()
-  credential_blank_for_gray  <- retrieve_credential_testing(3003L)
+  credential_blank_for_gray  <- retrieve_credential_testing("blank-for-gray-status")
   path_expected <- "test-data/specific-redcapr/read-oneshot-eav/blank-for-gray-false.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
@@ -274,10 +280,16 @@ test_that("blank-for-gray-status-false", {
       verbose                     = FALSE
     )
 
-  if (update_expectation) save_expected(returned_object$data, path_expected)
+  d <-
+    returned_object$data |>
+    dplyr::select(
+      -mugshot # Don't compare file IDs across servers.
+    )
+
+  if (update_expectation) save_expected(d, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_equal(d, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=200L)
   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
@@ -287,7 +299,6 @@ test_that("blank-for-gray-status-false", {
   expect_true(returned_object$success)
   expect_s3_class(returned_object$data, "tbl")
 })
-
 test_that("date-range", {
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/read-oneshot-eav/default.R"

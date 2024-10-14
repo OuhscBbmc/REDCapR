@@ -104,8 +104,8 @@ the appropriate permissions:
 \examples{
 if (FALSE) {
 # Define some constants
-uri           <- "https://bbmc.ouhsc.edu/redcap/api/"
-token         <- "D70F9ACD1EDD6F151C6EA78683944E98"
+uri           <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
+token         <- "F9CBFFF78C3D78F641BAE9623F6B7E6A" # simple-write
 
 # Read the dataset for the first time.
 result_read1  <- REDCapR::redcap_read_oneshot(redcap_uri=uri, token=token)

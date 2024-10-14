@@ -2,7 +2,11 @@ library(testthat)
 
 credential          <- retrieve_credential_testing()
 update_expectation  <- FALSE
-report_id           <- 5980L
+report_id           <- 12L
+
+if (credential$redcap_uri != "https://redcap-dev-2.ouhsc.edu/redcap/api/") {
+  testthat::skip("Skip report tests on a new server")
+}
 
 test_that("smoke test", {
   testthat::skip_on_cran()

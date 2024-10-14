@@ -1,6 +1,6 @@
 library(testthat)
 
-credential  <- retrieve_credential_testing(977L)
+credential  <- retrieve_credential_testing("clinical-trial-1")
 update_expectation  <- FALSE
 
 test_that("smoke test", {

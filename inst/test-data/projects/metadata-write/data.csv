@@ -1,0 +1,6 @@
+record_id,redcap_data_access_group,name_first,name_last,address,telephone,email,dob,age,sex,demographics_complete,height,weight,bmi,comments,mugshot,health_complete,race___1,race___2,race___3,race___4,race___5,race___6,ethnicity,race_and_ethnicity_complete
+1,,Nutmeg,Nutmouse,1001,"(405) 321-1111",nutty@mouse.com,2003-08-30,16,0,2,7,1,204.1,"Character in a book, with some guessing",mugshot-1.jpg,1,0,0,0,0,1,0,1,2
+2,,Tumtum,Nutmouse,1002,"(405) 321-2222",tummy@mouse.comm,2003-03-10,16,1,2,6,1,277.8,"A mouse character from a good book",mugshot-2.jpg,0,0,0,1,0,1,0,1,0
+3,,Marcus,Wood,1003,"(405) 321-3333",mw@mwood.net,1934-04-09,85,1,2,180,80,24.7,"completely made up",mugshot-3.jpg,2,0,0,0,1,1,0,0,2
+4,,Trudy,DAG,1004,"(405) 321-4444",peroxide@blonde.com,1952-11-02,67,0,2,165,54,19.8,"This record doesn't have a DAG assigned    So call up Trudy on the telephone  Send her a letter in the mail",mugshot-4.jpg,2,0,1,0,0,1,0,1,2
+5,,"John Lee",Walker,1005,"(405) 321-5555",left@hippocket.com,1955-04-15,64,1,2,193.04,104,27.9,"Had a hand for trouble and a eye for cash    He had a gold watch chain and a black mustache",mugshot-5.jpg,0,1,0,0,0,0,1,2,2

@@ -1,12 +1,13 @@
 library(testthat)
 update_expectation  <- FALSE
 
+credential  <- retrieve_credential_testing("decimal-dot")
+
 test_that("locale-dot-oneshot", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(2632L)
   locale      <- readr::locale(decimal_mark = ".")
 
-  path_expected <- "test-data/decimal-dot/redcapr-specific/set-locale.R"
+  path_expected <- "test-data/projects/decimal-dot/redcapr-specific/set-locale.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   returned_object <-
@@ -33,10 +34,9 @@ test_that("locale-dot-oneshot", {
 
 test_that("locale-dot-batch", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(2632L)
   locale      <- readr::locale(decimal_mark = ".")
 
-  path_expected <- "test-data/decimal-dot/redcapr-specific/set-locale.R"
+  path_expected <- "test-data/projects/decimal-dot/redcapr-specific/set-locale.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   returned_object <-
@@ -62,9 +62,8 @@ test_that("locale-dot-batch", {
 
 test_that("default-oneshot", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(2632L)
 
-  path_expected <- "test-data/decimal-dot/redcapr-specific/set-locale.R"
+  path_expected <- "test-data/projects/decimal-dot/redcapr-specific/set-locale.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   returned_object <-
@@ -90,9 +89,8 @@ test_that("default-oneshot", {
 
 test_that("default-batch", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(2632L)
 
-  path_expected <- "test-data/decimal-dot/redcapr-specific/set-locale.R"
+  path_expected <- "test-data/projects/decimal-dot/redcapr-specific/set-locale.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   returned_object <-
@@ -114,3 +112,5 @@ test_that("default-batch", {
   expect_true(returned_object$success)
   expect_s3_class(returned_object$data, "tbl")
 })
+
+rm(credential)

@@ -34,7 +34,7 @@
 #' )
 #'
 #' @param path_credential The file path to the CSV containing the credentials.
-#'  Required.
+#' Required.
 #' @param project_id The ID assigned to the project withing REDCap.  This
 #' allows the user to store tokens to multiple REDCap projects in one file.
 #' Required
@@ -116,9 +116,9 @@
 #'
 #' @examples
 #' # ---- Local File Example ----------------------------
-#' path <- system.file("misc/example.credentials", package = "REDCapR")
-#' (p1  <- REDCapR::retrieve_credential_local(path, 153L))
-#' (p2  <- REDCapR::retrieve_credential_local(path, 212L))
+#' path <- system.file("misc/dev-2.credentials", package = "REDCapR")
+#' (p1  <- REDCapR::retrieve_credential_local(path, 33L))
+#' (p2  <- REDCapR::retrieve_credential_local(path, 34L))
 #'
 #'
 #' \dontrun{
@@ -152,7 +152,7 @@ retrieve_credential_local <- function(
     comment       = readr::col_character()
   )
 
-  ds_credentials <- readr::read_csv(
+  d_credentials <- readr::read_csv(
     file            = path_credential,
     col_types       = col_types,
     comment         = "#",
@@ -160,14 +160,14 @@ retrieve_credential_local <- function(
   )
 
   # Check that it's a data.frame with valid variable names
-  if (!inherits(ds_credentials, "data.frame")) {
+  if (!inherits(d_credentials, "data.frame")) {
     stop(
       "The credentials file was not correctly transformed into a ",
       "[base::data.frame()].  Make sure it's a well-formed CSV."
     )
   } else if (
     !identical(
-      colnames(ds_credentials),
+      colnames(d_credentials),
       c("redcap_uri", "username", "project_id", "token", "comment"))
     ) {
     stop(
@@ -177,30 +177,31 @@ retrieve_credential_local <- function(
   }
 
   # Select only the records with a matching project id.
-  ds_credential <- ds_credentials[ds_credentials$project_id == project_id, ]
+  d_credentials <- d_credentials[!is.na(d_credentials$project_id), ]
+  d_credential  <- d_credentials[d_credentials$project_id == project_id, ]
 
   # If specified, select only the records with a matching username.
   if (!is.na(username)) {
-    ds_credential <- ds_credentials[ds_credentials$username == username, ]
+    d_credential <- d_credentials[d_credentials$username == username, ]
   }
 
   # Check that one and only one record matches the project id.
-  if (nrow(ds_credential) == 0L) {
+  if (nrow(d_credential) == 0L) {
     stop(
       "The project_id was not found in the csv credential file."
     )
-  } else if (1L < nrow(ds_credential)) {
+  } else if (1L < nrow(d_credential)) {
     stop(
       "More than one matching project_id was found in the csv credential ",
       "file.  There should be only one."
     )
   } else {
     credential <- list(
-      redcap_uri   = ds_credential$redcap_uri[1],
-      username     = ds_credential$username[1],
-      project_id   = ds_credential$project_id[1],
-      token        = ds_credential$token[1],
-      comment      = ds_credential$comment[1]
+      redcap_uri   = d_credential$redcap_uri[1],
+      username     = d_credential$username[1],
+      project_id   = d_credential$project_id[1],
+      token        = d_credential$token[1],
+      comment      = d_credential$comment[1]
     )
   }
 
@@ -258,7 +259,7 @@ credential_local_validation <- function(
 }
 
 # system.file("misc/vignette.css", package="REDCapR")
-# system.file("misc/example.credentials", package="REDCapR")
+# system.file("misc/dev-2.credentials", package="REDCapR")
 
 #' @export
 create_credential_local <- function(path_credential) {

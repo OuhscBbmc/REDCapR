@@ -101,9 +101,9 @@ separated by a column.  Consider using a function like
 \examples{
 \dontrun{
 # Specify your project uri and token(s).
-uri                  <- "https://bbmc.ouhsc.edu/redcap/api/"
-token_simple         <- "9A81268476645C4E5F03428B8AC3AA7B"
-token_longitudinal   <- "0434F0E9CF53ED0587847AB6E51DE762"
+uri                  <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
+token_simple         <- "9A068C425B1341D69E83064A2D273A70"
+token_longitudinal   <- "DA6F2BB23146BD5A7EA3408C1A44A556"
 
 # ---- Simple examples
 REDCapR::redcap_project_info_read(uri, token_simple      )$data
@@ -128,7 +128,7 @@ client_locale <- readr::locale(tz = Sys.timezone())
 #   starting from a csv of REDCapR test projects.
 # The native pipes in this snippet require R 4.1+.
 d_all <-
-  system.file("misc/example.credentials", package = "REDCapR") |>
+  system.file("misc/dev-2.credentials", package = "REDCapR") |>
   readr::read_csv(
     comment     = "#",
     col_select  = c(redcap_uri, token),

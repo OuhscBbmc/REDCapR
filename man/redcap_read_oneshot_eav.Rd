@@ -144,8 +144,8 @@ As of REDCap 6.14.3, this field is not exported in the EAV API call.
 }
 \examples{
 \dontrun{
-uri      <- "https://bbmc.ouhsc.edu/redcap/api/"
-token    <- "9A81268476645C4E5F03428B8AC3AA7B"
+uri      <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
+token    <- "9A068C425B1341D69E83064A2D273A70"
 
 # Return all records and all variables.
 ds <- REDCapR:::redcap_read_oneshot_eav(redcap_uri=uri, token=token)$data

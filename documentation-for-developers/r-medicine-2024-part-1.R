@@ -4,10 +4,10 @@ requireNamespace("REDCapR")
 # If this fails, run `install.packages("REDCapR")` or `remotes::install_github(repo="OuhscBbmc/REDCapR")`
 
 ## ----retrieve-credential------------------------------------------------------
-path_credential <- system.file("misc/example.credentials", package = "REDCapR")
+path_credential <- system.file("misc/dev-2.credentials", package = "REDCapR")
 credential  <- REDCapR::retrieve_credential_local(
   path_credential = path_credential,
-  project_id      = 3181
+  project_id      = 62
 )
 
 credential
@@ -23,7 +23,7 @@ View(ds_1)
 
 
 # View corresponding REDCap project in browser:
-# https://bbmc.ouhsc.edu/redcap/redcap_v14.3.13/DataEntry/record_home.php?pid=3181&arm=1&id=1
+# https://redcap-dev-2.ouhsc.edu/redcap/redcap_v14.3.13/DataEntry/record_home.php?pid=62&arm=1&id=1
 
 
 # ---- redcap_metadata_read ----------------------------------------------------

@@ -53,7 +53,7 @@ test_that("simple", {
 
 test_that("longitudinal", {
   testthat::skip_on_cran()
-  credential               <- retrieve_credential_testing(212L)
+  credential               <- retrieve_credential_testing("longitudinal")
   path_expected            <- "test-data/specific-redcapr/metadata-coltypes/longitudinal.R"
   expected_outcome_message <- "col_types <- readr::cols"
 
@@ -90,7 +90,7 @@ test_that("longitudinal", {
 
 test_that("superwide", {
   testthat::skip_on_cran()
-  credential               <- retrieve_credential_testing(753L)
+  credential               <- retrieve_credential_testing("super-wide-1")
   path_expected            <- "test-data/specific-redcapr/metadata-coltypes/superwide.R"
   expected_outcome_message <- "col_types <- readr::cols"
 
@@ -128,7 +128,7 @@ test_that("superwide", {
 
 test_that("repeating-instruments", {
   testthat::skip_on_cran()
-  credential               <- retrieve_credential_testing(1400L)
+  credential               <- retrieve_credential_testing("repeating-instruments")
   path_expected            <- "test-data/specific-redcapr/metadata-coltypes/repeating-instruments.R"
   expected_outcome_message <- "col_types <- readr::cols"
 
@@ -163,7 +163,7 @@ test_that("repeating-instruments", {
 
 test_that("problematic-dictionary", {
   testthat::skip_on_cran()
-  credential               <- retrieve_credential_testing(1425L)
+  credential               <- retrieve_credential_testing("potentially-problematic-dictionary")
   path_expected            <- "test-data/specific-redcapr/metadata-coltypes/problematic-dictionary.R"
   expected_outcome_message <- "col_types <- readr::cols"
 
@@ -193,7 +193,7 @@ test_that("problematic-dictionary", {
 
 test_that("validation-types", {
   testthat::skip_on_cran()
-  credential               <- retrieve_credential_testing(2634L)
+  credential               <- retrieve_credential_testing("validation-types-1")
   path_expected            <- "test-data/specific-redcapr/metadata-coltypes/validation-types.R"
   # expected_outcome_message <- "col_types <- readr::cols"
   expected_warning_message <- "at least one field that specifies a comma for a decimal"

@@ -1,8 +1,8 @@
 library(testthat)
 update_expectation  <- FALSE
-credential_admin  <- retrieve_credential_testing(2545L, "admin")
-credential_user   <- retrieve_credential_testing(2545L, "user-dag1")
-url               <- credential_admin$redcap_uri
+credential_admin    <- retrieve_credential_testing("dag-write", username = "admin")
+credential_user     <- retrieve_credential_testing("dag-write", username = "user-dag1")
+url                 <- credential_admin$redcap_uri
 
 testthat::expect_equal(url,  credential_user$redcap_uri)
 
@@ -210,3 +210,5 @@ test_that("reassign subject to a different dag", {
   expect_equal(nrow(ds_user_2), 1L)
   expect_equal(ds_user_2$record_id, c("331-1"))
 })
+
+rm(update_expectation, credential_admin, credential_user, url)

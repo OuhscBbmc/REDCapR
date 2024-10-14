@@ -10,7 +10,7 @@ populate_project_delete_multiple_arm <- function(verbose = FALSE) {
     # nocov end
   }
 
-  credential  <- retrieve_credential_testing(2627L)
+  credential  <- retrieve_credential_testing("arm-multiple-delete")
 
   project <- REDCapR::redcap_project$new(
     redcap_uri    = credential$redcap_uri,
@@ -64,7 +64,7 @@ clear_project_delete_multiple_arm <- function(verbose = TRUE) {
     # nocov end
   }
   path_delete_test_record <-
-    "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_delete_multiple_arm.php"
+    "https://redcap-dev-2.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_delete_multiple_arm.php"
 
   # Returns a boolean value if successful
   was_successful <- !httr::http_error(path_delete_test_record)

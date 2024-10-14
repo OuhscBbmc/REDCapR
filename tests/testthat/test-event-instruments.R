@@ -1,21 +1,21 @@
 library(testthat)
 
 update_expectation  <- FALSE
+credential_longitudinal    <- retrieve_credential_testing("longitudinal")
 
 test_that("Smoke Test", {
   testthat::skip_on_cran()
-  credential    <- retrieve_credential_testing(212L)
   expect_message(
     returned_object <-
       redcap_event_instruments(
-        redcap_uri  = credential$redcap_uri,
-        token       = credential$token
+        redcap_uri  = credential_longitudinal$redcap_uri,
+        token       = credential_longitudinal$token
       )
   )
 })
 test_that("1-arm", {
   testthat::skip_on_cran()
-  credential    <- retrieve_credential_testing(2629L)
+  credential    <- retrieve_credential_testing("arm-single-longitudinal")
   path_expected <- "test-data/specific-redcapr/event-instruments/1-arm.R"
   expected_outcome_message <- "\\d+ event instrument metadata records were read from REDCap in \\d\\.\\d seconds\\.  The http status code was 200\\.(\\n)?"
 
@@ -37,17 +37,15 @@ test_that("1-arm", {
   expect_true(returned_object$success)
   expect_s3_class(returned_object$data, "tbl")
 })
-
 test_that("2-arms-retrieve-both-arms", {
   testthat::skip_on_cran()
-  credential    <- retrieve_credential_testing(212L)
   path_expected <- "test-data/specific-redcapr/event-instruments/2-arms-retrieve-both-arms.R"
   expected_outcome_message <- "\\d+ event instrument metadata records were read from REDCap in \\d\\.\\d seconds\\.  The http status code was 200\\.(\\n)?"
 
   returned_object_explicit <-
     redcap_event_instruments(
-      redcap_uri  = credential$redcap_uri,
-      token       = credential$token,
+      redcap_uri  = credential_longitudinal$redcap_uri,
+      token       = credential_longitudinal$token,
       arms        = c("1", "2"),
       verbose     = FALSE
     )
@@ -64,8 +62,8 @@ test_that("2-arms-retrieve-both-arms", {
 
   returned_object_default <-
     redcap_event_instruments(
-      redcap_uri  = credential$redcap_uri,
-      token       = credential$token,
+      redcap_uri  = credential_longitudinal$redcap_uri,
+      token       = credential_longitudinal$token,
       verbose     = FALSE
     )
 
@@ -78,14 +76,13 @@ test_that("2-arms-retrieve-both-arms", {
 })
 test_that("2-arms-retrieve-only-arm-1", {
   testthat::skip_on_cran()
-  credential    <- retrieve_credential_testing(212L)
   path_expected <- "test-data/specific-redcapr/event-instruments/2-arms-retrieve-only-arm-1.R"
   expected_outcome_message <- "\\d+ event instrument metadata records were read from REDCap in \\d\\.\\d seconds\\.  The http status code was 200\\.(\\n)?"
 
   returned_object <-
     redcap_event_instruments(
-      redcap_uri  = credential$redcap_uri,
-      token       = credential$token,
+      redcap_uri  = credential_longitudinal$redcap_uri,
+      token       = credential_longitudinal$token,
       arms        = "1",
       verbose     = FALSE
     )
@@ -102,14 +99,13 @@ test_that("2-arms-retrieve-only-arm-1", {
 })
 test_that("2-arms-retrieve-only-arm-2", {
   testthat::skip_on_cran()
-  credential    <- retrieve_credential_testing(212L)
   path_expected <- "test-data/specific-redcapr/event-instruments/2-arms-retrieve-only-arm-2.R"
   expected_outcome_message <- "\\d+ event instrument metadata records were read from REDCap in \\d\\.\\d seconds\\.  The http status code was 200\\.(\\n)?"
 
   returned_object <-
     redcap_event_instruments(
-      redcap_uri  = credential$redcap_uri,
-      token       = credential$token,
+      redcap_uri  = credential_longitudinal$redcap_uri,
+      token       = credential_longitudinal$token,
       arms        = "2",
       verbose     = FALSE
     )
@@ -124,10 +120,8 @@ test_that("2-arms-retrieve-only-arm-2", {
   expect_true(returned_object$success)
   expect_s3_class(returned_object$data, "tbl")
 })
-
 test_that("Bad URI", {
   testthat::skip_on_cran()
-  credential    <- retrieve_credential_testing(212L)
   bad_uri <- "https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"
   expected_data_frame <- structure(list(), .Names = character(0), row.names = integer(0), class = "data.frame")
 
@@ -139,15 +133,14 @@ test_that("Bad URI", {
   expect_error(
     returned_object <- redcap_event_instruments(
       redcap_uri  = bad_uri,
-      token       = credential$token,
+      token       = credential_longitudinal$token,
       verbose     = FALSE
     )
   )
 })
-
 test_that("no-arms", {
   testthat::skip_on_cran()
-  credential    <- retrieve_credential_testing(153L)
+  credential    <- retrieve_credential_testing()
   path_expected <- "test-data/specific-redcapr/event-instruments/no-arms.R"
   expected_outcome_message <- "You cannot export form/event mappings for classic projects(\\n)?"
 
@@ -169,15 +162,13 @@ test_that("no-arms", {
   expect_false(returned_object$success)
   expect_s3_class(returned_object$data, "tbl")
 })
-
 test_that("bad token -Error", {
   testthat::skip_on_cran()
-  credential    <- retrieve_credential_testing(212L)
   expected_outcome_message <- "ERROR: You do not have permissions to use the API"
 
   returned_object <-
     redcap_event_instruments(
-      redcap_uri  = credential$redcap_uri,
+      redcap_uri  = credential_longitudinal$redcap_uri,
       token       = "BAD00000000000000000000000000000",
       verbose     = FALSE
     )
@@ -186,3 +177,5 @@ test_that("bad token -Error", {
   testthat::expect_equal(returned_object$status_code, 403L)
   testthat::expect_equal(returned_object$raw_text, expected_outcome_message)
 })
+
+rm(credential_longitudinal)

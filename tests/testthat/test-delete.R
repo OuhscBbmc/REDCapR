@@ -108,7 +108,7 @@ test_that("multiple-arm-four-records", {
 test_that("no-delete-permissions", {
   testthat::skip_on_cran()
   skip_if_onlyread()
-  credential  <- retrieve_credential_testing(213L) # Write-project, but  no privileges for deleting records
+  credential  <- retrieve_credential_testing("simple-write") # Write-project, but  no privileges for deleting records
 
   records_to_delete <- 1
 
@@ -127,7 +127,7 @@ test_that("no-delete-permissions", {
 test_that("Delete records that don't exist", {
   testthat::skip_on_cran()
   skip_if_onlyread()
-  credential  <- retrieve_credential_testing(2626L)
+  credential  <- retrieve_credential_testing("arm-single-delete")
 
   records_to_delete <- 1
 
@@ -146,7 +146,7 @@ test_that("Delete records that don't exist", {
 test_that("unnecessarily specify arm", {
   testthat::skip_on_cran()
   skip_if_onlyread()
-  credential  <- retrieve_credential_testing(2626L) # This project has no arms
+  credential  <- retrieve_credential_testing("arm-single-delete") # This project has no arms
 
   records_to_delete <- 101
   arm_number        <- 1L
@@ -167,7 +167,7 @@ test_that("unnecessarily specify arm", {
 test_that("unspecified required arm", {
   testthat::skip_on_cran()
   skip_if_onlyread()
-  credential  <- retrieve_credential_testing(2627L) # This project has three arms
+  credential  <- retrieve_credential_testing("arm-multiple-delete") # This project has three arms
 
   records_to_delete <- 101
   arm_number        <- 1L
@@ -186,7 +186,7 @@ test_that("unspecified required arm", {
 
 test_that("Bad Token", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(153L)
+  credential  <- retrieve_credential_testing()
   bad_token   <- "1234567890ABCDEF1234567890ABCDEF"
   records_to_delete <- 101
 

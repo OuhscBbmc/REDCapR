@@ -215,10 +215,10 @@ The vignette uses these credentials to retrieve the practice/fake dataset.  **Th
 library(magrittr)
 
 # Retrieve token
-path_credential <- system.file("misc/example.credentials", package = "REDCapR")
+path_credential <- system.file("misc/dev-2.credentials", package = "REDCapR")
 credential  <- REDCapR::retrieve_credential_local(
   path_credential = path_credential,
-  project_id      = 3181
+  project_id      = 62
 )
 ```
 

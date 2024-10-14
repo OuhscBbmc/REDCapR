@@ -1,0 +1,13 @@
+"Variable / Field Name","Form Name","Section Header","Field Type","Field Label","Choices, Calculations, OR Slider Labels","Field Note","Text Validation Type OR Show Slider Number","Text Validation Min","Text Validation Max",Identifier?,"Branching Logic (Show field only if...)","Required Field?","Custom Alignment","Question Number (surveys only)","Matrix Group Name","Matrix Ranking?","Field Annotation"
+record_id,demographics,,text,"Record ID",,,,,,,,,,,,,
+name_last,demographics,,text,name_last,,,,,,y,,,,,,,
+name_first,demographics,,text,name_first,,,,,,y,,,,,,,
+address,demographics,,text,address,,,,,,y,,,,,,,
+phone,demographics,,text,phone,,,,,,y,,,,,,,
+dob,demographics,,text,dob,,,date_ymd,1900-01-01,2029-12-31,y,,,,,,,
+ethnicity,demographics,,radio,ethnicity,"0, Latino | 1, Non-Latino | 2, Missing",,,,,,,,,,,,
+race,demographics,,radio,race,"1, Asian | 2, (Not Used) | 3, Black | 4, White | 5, Other/Mixed | 6, Missing",,,,,,,,,,,,
+gender,demographics,,radio,gender,"0, Female | 1, Male",,,,,,,,,,,,
+height,demographics,,text,"height (cm)",,,number,0,250,,,,,,,,
+weight,demographics,,text,"weight (kg)",,,integer,0,300,,,,,,,,
+email,demographics,,text,email,,,,,,,,,,,,,

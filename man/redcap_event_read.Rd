@@ -60,20 +60,20 @@ Export Events of a REDCap project
 }
 \examples{
 \dontrun{
-uri            <- "https://bbmc.ouhsc.edu/redcap/api/"
+uri            <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 
 # Query a longitudinal project with a single arm and 3 events
-token_1  <- "786334BEB4A87D572DD0E99C4BFCE144"
+token_1  <- "76B4A71A0158BD34C98F10DA72D5F27C" # arm-single-longitudinal
 result_1 <- REDCapR::redcap_event_read(redcap_uri=uri, token=token_1)
 result_1$data
 
 # Query a longitudinal project with 2 arms and complex arm-event mappings
-token_2  <- "0434F0E9CF53ED0587847AB6E51DE762"
+token_2  <- "DA6F2BB23146BD5A7EA3408C1A44A556" # longitudinal
 result_2 <- REDCapR::redcap_event_read(redcap_uri=uri, token=token_2)
 result_2$data
 
 # Query a classic project without events
-token_3  <- "D70F9ACD1EDD6F151C6EA78683944E98"
+token_3  <- "F9CBFFF78C3D78F641BAE9623F6B7E6A" # simple-write
 result_3 <- REDCapR::redcap_event_read(redcap_uri=uri, token=token_3)
 result_3$data
 }

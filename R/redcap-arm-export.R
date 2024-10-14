@@ -54,16 +54,16 @@
 #'
 #' @examples
 #' \dontrun{
-#' uri            <- "https://bbmc.ouhsc.edu/redcap/api/"
+#' uri            <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 #'
 #' # Query a classic project with 3 arms
-#' token_1  <- "CDF9F3767E413FDBAA31D92E9F36730A"
+#' token_1  <- "14817611F9EA1A6E149BBDC37134E8EA" # arm-multiple-delete
 #' result_1 <- REDCapR::redcap_arm_export(redcap_uri=uri, token=token_1)
 #' result_1$has_arms
 #' result_1$data
 #'
 #' # Query a classic project without arms
-#' token_2  <- "D70F9ACD1EDD6F151C6EA78683944E98"
+#' token_2  <- "F9CBFFF78C3D78F641BAE9623F6B7E6A" # simple-write
 #' result_2 <- REDCapR::redcap_arm_export(redcap_uri=uri, token=token_2)
 #' result_2$has_arms
 #' result_2$data

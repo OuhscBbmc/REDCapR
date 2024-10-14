@@ -3,9 +3,9 @@ update_expectation  <- FALSE
 
 test_that("default-mismatched", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(2630L)
+  credential  <- retrieve_credential_testing("decimal-comma-and-dot")
 
-  path_expected <- "test-data/decimal-comma-and-dot/redcapr-specific/default-mismatched.R"
+  path_expected <- "test-data/projects/decimal-comma-and-dot/redcapr-specific/default-mismatched.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   returned_object <-
@@ -31,10 +31,10 @@ test_that("default-mismatched", {
 
 test_that("locale-comma-oneshot", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(2631L)
+  credential  <- retrieve_credential_testing("decimal-comma")
   locale      <- readr::locale(decimal_mark = ",")
 
-  path_expected <- "test-data/decimal-comma/redcapr-specific/set-locale.R"
+  path_expected <- "test-data/projects/decimal-comma/redcapr-specific/set-locale.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   returned_object <-
@@ -61,10 +61,10 @@ test_that("locale-comma-oneshot", {
 
 test_that("locale-comma-batch", {
   testthat::skip_on_cran()
-  credential  <- retrieve_credential_testing(2631L)
+  credential  <- retrieve_credential_testing("decimal-comma")
   locale      <- readr::locale(decimal_mark = ",")
 
-  path_expected <- "test-data/decimal-comma/redcapr-specific/set-locale.R"
+  path_expected <- "test-data/projects/decimal-comma/redcapr-specific/set-locale.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   returned_object <-

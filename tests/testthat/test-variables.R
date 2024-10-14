@@ -44,7 +44,7 @@ test_that("Bad Uri -wrong address (1 of 2)", {
 
   expect_error(
     redcap_variables(
-      redcap_uri    = "https://bbmc.ouhsc.edu/redcap/apiFFFFFFFFFFFFFF/", # Wrong url
+      redcap_uri    = "https://redcap-dev-2.ouhsc.edu/redcap/apiFFFFFFFFFFFFFF/", # Wrong url
       token         = credential$token
     ),
     expected_message

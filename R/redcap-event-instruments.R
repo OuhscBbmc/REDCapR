@@ -59,22 +59,22 @@
 #'
 #' @examples
 #' \dontrun{
-#' uri                 <- "https://bbmc.ouhsc.edu/redcap/api/"
+#' uri                 <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 #'
 #' # Longitudinal project with one arm
-#' token_1  <- "786334BEB4A87D572DD0E99C4BFCE144" # pid 2629
+#' token_1  <- "76B4A71A0158BD34C98F10DA72D5F27C" # "arm-single-longitudinal" test project
 #' REDCapR::redcap_arm_export(redcap_uri=uri, token=token_1)$data
 #' REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_1)$data
 #'
 #' # Project with two arms
-#' token_2  <- "0434F0E9CF53ED0587847AB6E51DE762" # pid 212
+#' token_2  <- "DA6F2BB23146BD5A7EA3408C1A44A556" # "longitudinal" test project
 #' REDCapR::redcap_arm_export(redcap_uri=uri, token=token_2)$data
 #' REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_2)$data
 #' REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_2, arms = c("1", "2"))$data
 #' REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_2, arms = "2")$data
 #'
 #' # Classic project (without arms) throws an error
-#' token_3  <- "9A81268476645C4E5F03428B8AC3AA7B" # pid 153
+#' token_3  <- "9A068C425B1341D69E83064A2D273A70" # "simple" test project
 #' REDCapR::redcap_arm_export(redcap_uri=uri, token=token_3)$data
 #' # REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_3)$data
 #' }

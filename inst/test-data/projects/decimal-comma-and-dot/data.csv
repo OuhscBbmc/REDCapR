@@ -1,0 +1,5 @@
+record_id,name,height_dot,height_comma,weight_dot,weight_comma,bmi,bmi_comma,demographics_complete
+1,Valdez,1.54,"1,54",52.3,"52,3",22.1,22.1,2
+2,Rich,1.84,"1,84",92.3,"92,3",27.3,27.3,2
+3,Furtado,1.95,"1,95",123.4,"123,4",32.5,32.5,2
+4,Akbar,1.61,"1,61",45.9,"45,9",17.7,17.7,2

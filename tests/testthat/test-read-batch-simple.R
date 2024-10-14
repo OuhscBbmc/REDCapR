@@ -784,7 +784,7 @@ test_that("filter-character", {
 })
 test_that("blank-for-gray-status-true", {
   testthat::skip_on_cran()
-  credential_blank_for_gray  <- retrieve_credential_testing(3003L)
+  credential_blank_for_gray  <- retrieve_credential_testing("blank-for-gray-status")
   path_expected <- "test-data/specific-redcapr/read-batch-simple/blank-for-gray-true.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
@@ -810,7 +810,7 @@ test_that("blank-for-gray-status-true", {
 })
 test_that("blank-for-gray-status-false", {
   testthat::skip_on_cran()
-  credential_blank_for_gray  <- retrieve_credential_testing(3003L)
+  credential_blank_for_gray  <- retrieve_credential_testing("blank-for-gray-status")
   path_expected <- "test-data/specific-redcapr/read-batch-simple/blank-for-gray-false.R"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 

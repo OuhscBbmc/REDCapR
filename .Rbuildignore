@@ -9,6 +9,10 @@
 ^cran-comments\.md$
 README.html$
 
+project\.xml$
+\.zip$
+\.tar.xz$
+
 documentation-peek.pdf
 documentation-for-developers/
 lastMiKTeXException/

@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="REDCapR Target Simple with Gray Form Status --see https://github.com/OuhscBbmc/REDCapR" AsOfDateTime="2024-10-12T21:19:46" CreationDateTime="2024-10-12T21:19:46" SourceSystem="REDCap" SourceSystemVersion="14.6.11">
+<Study OID="Project.REDCapRTargetSimpleWithGrayFor">
+<GlobalVariables>
+	<StudyName>REDCapR Target Simple with Gray Form Status --see https://github.com/OuhscBbmc/REDCapR</StudyName>
+	<StudyDescription>This file contains the metadata, events, and data for REDCap project "REDCapR Target Simple with Gray Form Status --see https://github.com/OuhscBbmc/REDCapR".</StudyDescription>
+	<ProtocolName>REDCapR Target Simple with Gray Form Status --see https://github.com/OuhscBbmc/REDCapR</ProtocolName>
+	<redcap:RecordAutonumberingEnabled>1</redcap:RecordAutonumberingEnabled>
+	<redcap:CustomRecordLabel></redcap:CustomRecordLabel>
+	<redcap:SecondaryUniqueField></redcap:SecondaryUniqueField>
+	<redcap:SecondaryUniqueFieldDisplayValue>1</redcap:SecondaryUniqueFieldDisplayValue>
+	<redcap:SecondaryUniqueFieldDisplayLabel>1</redcap:SecondaryUniqueFieldDisplayLabel>
+	<redcap:SchedulingEnabled>0</redcap:SchedulingEnabled>
+	<redcap:SurveysEnabled>0</redcap:SurveysEnabled>
+	<redcap:SurveyInvitationEmailField></redcap:SurveyInvitationEmailField>
+	<redcap:DisplayTodayNowButton>1</redcap:DisplayTodayNowButton>
+	<redcap:PreventBranchingEraseValues>0</redcap:PreventBranchingEraseValues>
+	<redcap:RequireChangeReason>0</redcap:RequireChangeReason>
+	<redcap:DataHistoryPopup>1</redcap:DataHistoryPopup>
+	<redcap:OrderRecordsByField></redcap:OrderRecordsByField>
+	<redcap:MyCapEnabled>0</redcap:MyCapEnabled>
+	<redcap:Purpose>0</redcap:Purpose>
+	<redcap:PurposeOther></redcap:PurposeOther>
+	<redcap:ProjectNotes>Created for 
+https://github.com/OuhscBbmc/REDCapR/issues/386 &amp; https://github.com/OuhscBbmc/REDCapR/pull/389</redcap:ProjectNotes>
+	<redcap:MissingDataCodes></redcap:MissingDataCodes>
+	<redcap:ProtectedEmailMode>0</redcap:ProtectedEmailMode>
+	<redcap:ProtectedEmailModeCustomText></redcap:ProtectedEmailModeCustomText>
+	<redcap:ProtectedEmailModeTrigger>ALL</redcap:ProtectedEmailModeTrigger>
+	<redcap:ProtectedEmailModeLogo></redcap:ProtectedEmailModeLogo>
+	<redcap:DataAccessGroupsGroup>
+		<redcap:DataAccessGroups group_name="dag_1"/>
+		<redcap:DataAccessGroups group_name="dag_2"/>
+	</redcap:DataAccessGroupsGroup>
+	<redcap:UserRolesGroup>
+		<redcap:UserRoles role_name="api" unique_role_name="U-131RWLJ3NR" lock_record="0" lock_record_multiform="0" lock_record_customize="0" data_export_tool="" data_export_instruments="[demographics,1][health,1][race_and_ethnicity,1]" data_import_tool="0" data_comparison_tool="0" data_logging="0" email_logging="0" file_repository="0" double_data="0" user_rights="0" data_access_groups="0" graphical="0" reports="0" design="0" alerts="0" calendar="0" data_entry="[demographics,1][health,1][race_and_ethnicity,1]" api_export="1" api_import="0" api_modules="0" mobile_app="0" mobile_app_download_data="0" record_create="0" record_rename="0" record_delete="0" dts="0" participants="1" data_quality_design="0" data_quality_execute="0" data_quality_resolution="1" random_setup="0" random_dashboard="0" random_perform="0" realtime_webservice_mapping="0" realtime_webservice_adjudicate="0" external_module_config="" mycap_participants="1"/>
+	</redcap:UserRolesGroup>
+	<redcap:ReportsGroup>
+		<redcap:Reports title="test-report-1" unique_report_name="R-759FY444MK" report_order="1" user_access="ALL" user_edit_access="ALL" description="" combine_checkbox_values="0" output_dags="0" output_survey_fields="0" output_missing_data_codes="0" remove_line_breaks_in_values="1" orderby_field1="record_id" orderby_sort1="ASC" orderby_field2="" orderby_sort2="" orderby_field3="" orderby_sort3="" advanced_logic="" filter_type="EVENT" dynamic_filter1="" dynamic_filter2="" dynamic_filter3="" hash="3KWLN73R98MMLEM8" short_url="" is_public="0" report_display_include_repeating_fields="1" report_display_header="BOTH" report_display_data="BOTH" limiter_logic="" redcap_reports_fields="record_id,height,health_complete,address,ethnicity" redcap_reports_filter_dags="" redcap_reports_filter_events="" ID="1d51e8102f4b1358b106d359d55727fd0a9fe54f"/>
+		<redcap:Reports title="test-report-2" unique_report_name="R-989FCK9E4E" report_order="2" user_access="ALL" user_edit_access="ALL" description="" combine_checkbox_values="1" output_dags="0" output_survey_fields="0" output_missing_data_codes="0" remove_line_breaks_in_values="1" orderby_field1="record_id" orderby_sort1="ASC" orderby_field2="" orderby_sort2="" orderby_field3="" orderby_sort3="" advanced_logic="" filter_type="EVENT" dynamic_filter1="" dynamic_filter2="" dynamic_filter3="" hash="EPKHLA3TJ3HAFXDM" short_url="" is_public="0" report_display_include_repeating_fields="1" report_display_header="BOTH" report_display_data="BOTH" limiter_logic="" redcap_reports_fields="record_id,race" redcap_reports_filter_dags="" redcap_reports_filter_events="" ID="3e029c1f953208b3b662e6972508520b8e3d3515"/>
+	</redcap:ReportsGroup>
+</GlobalVariables>
+<MetaDataVersion OID="Metadata.REDCapRTargetSimpleWithGrayFor_2024-10-12_2119" Name="REDCapR Target Simple with Gray Form Status --see https://github.com/OuhscBbmc/REDCapR" redcap:RecordIdField="record_id">
+	<FormDef OID="Form.demographics" Name="demographics" Repeating="No" redcap:FormName="demographics">
+		<ItemGroupRef ItemGroupOID="demographics.record_id" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="demographics.name_first" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="demographics.name_last" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="demographics.demographics_complete" Mandatory="No"/>
+	</FormDef>
+	<FormDef OID="Form.health" Name="health" Repeating="No" redcap:FormName="health">
+		<ItemGroupRef ItemGroupOID="health.height" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="health.comments" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="health.mugshot" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="health.health_complete" Mandatory="No"/>
+	</FormDef>
+	<FormDef OID="Form.race_and_ethnicity" Name="race_and_ethnicity" Repeating="No" redcap:FormName="race_and_ethnicity">
+		<ItemGroupRef ItemGroupOID="race_and_ethnicity.race___1" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="race_and_ethnicity.race_and_ethnicity_complete" Mandatory="No"/>
+	</FormDef>
+	<ItemGroupDef OID="demographics.record_id" Name="demographics" Repeating="No">
+		<ItemRef ItemOID="record_id" Mandatory="No" redcap:Variable="record_id"/>
+		<ItemRef ItemOID="redcap_data_access_group" Mandatory="No" redcap:Variable="redcap_data_access_group"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="demographics.name_first" Name="Contact Information" Repeating="No">
+		<ItemRef ItemOID="name_first" Mandatory="No" redcap:Variable="name_first"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="demographics.name_last" Name="demographics" Repeating="No">
+		<ItemRef ItemOID="name_last" Mandatory="No" redcap:Variable="name_last"/>
+		<ItemRef ItemOID="address" Mandatory="No" redcap:Variable="address"/>
+		<ItemRef ItemOID="telephone" Mandatory="No" redcap:Variable="telephone"/>
+		<ItemRef ItemOID="email" Mandatory="No" redcap:Variable="email"/>
+		<ItemRef ItemOID="dob" Mandatory="No" redcap:Variable="dob"/>
+		<ItemRef ItemOID="age" Mandatory="No" redcap:Variable="age"/>
+		<ItemRef ItemOID="sex" Mandatory="No" redcap:Variable="sex"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="demographics.demographics_complete" Name="Form Status" Repeating="No">
+		<ItemRef ItemOID="demographics_complete" Mandatory="No" redcap:Variable="demographics_complete"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="health.height" Name="health" Repeating="No">
+		<ItemRef ItemOID="height" Mandatory="No" redcap:Variable="height"/>
+		<ItemRef ItemOID="weight" Mandatory="No" redcap:Variable="weight"/>
+		<ItemRef ItemOID="bmi" Mandatory="No" redcap:Variable="bmi"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="health.comments" Name="General Comments" Repeating="No">
+		<ItemRef ItemOID="comments" Mandatory="No" redcap:Variable="comments"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="health.mugshot" Name="health" Repeating="No">
+		<ItemRef ItemOID="mugshot" Mandatory="No" redcap:Variable="mugshot"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="health.health_complete" Name="Form Status" Repeating="No">
+		<ItemRef ItemOID="health_complete" Mandatory="No" redcap:Variable="health_complete"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="race_and_ethnicity.race___1" Name="" Repeating="No">
+		<ItemRef ItemOID="race___1" Mandatory="No" redcap:Variable="race"/>
+		<ItemRef ItemOID="race___2" Mandatory="No" redcap:Variable="race"/>
+		<ItemRef ItemOID="race___3" Mandatory="No" redcap:Variable="race"/>
+		<ItemRef ItemOID="race___4" Mandatory="No" redcap:Variable="race"/>
+		<ItemRef ItemOID="race___5" Mandatory="No" redcap:Variable="race"/>
+		<ItemRef ItemOID="race___6" Mandatory="No" redcap:Variable="race"/>
+		<ItemRef ItemOID="ethnicity" Mandatory="No" redcap:Variable="ethnicity"/>
+		<ItemRef ItemOID="interpreter_needed" Mandatory="No" redcap:Variable="interpreter_needed"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="race_and_ethnicity.race_and_ethnicity_complete" Name="Form Status" Repeating="No">
+		<ItemRef ItemOID="race_and_ethnicity_complete" Mandatory="No" redcap:Variable="race_and_ethnicity_complete"/>
+	</ItemGroupDef>
+	<ItemDef OID="record_id" Name="record_id" DataType="text" Length="999" redcap:Variable="record_id" redcap:FieldType="text">
+		<Question><TranslatedText>Study ID</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="redcap_data_access_group" Name="redcap_data_access_group" DataType="text" Length="999" redcap:Variable="redcap_data_access_group">
+		<Question><TranslatedText>Data Access Group</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="name_first" Name="name_first" DataType="text" Length="999" redcap:Variable="name_first" redcap:FieldType="text" redcap:SectionHeader="Contact Information" redcap:Identifier="y">
+		<Question><TranslatedText>First Name</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="name_last" Name="name_last" DataType="text" Length="999" redcap:Variable="name_last" redcap:FieldType="text" redcap:Identifier="y">
+		<Question><TranslatedText>Last Name</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="address" Name="address" DataType="text" Length="999" redcap:Variable="address" redcap:FieldType="textarea" redcap:Identifier="y">
+		<Question><TranslatedText>Street, City, State, ZIP</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="telephone" Name="telephone" DataType="text" Length="999" redcap:Variable="telephone" redcap:FieldType="text" redcap:TextValidationType="phone" redcap:FieldNote="Include Area Code" redcap:Identifier="y">
+		<Question><TranslatedText>Phone number</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="email" Name="email" DataType="text" Length="999" redcap:Variable="email" redcap:FieldType="text" redcap:TextValidationType="email" redcap:Identifier="y">
+		<Question><TranslatedText>E-mail</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="dob" Name="dob" DataType="date" Length="999" redcap:Variable="dob" redcap:FieldType="text" redcap:TextValidationType="date_ymd" redcap:Identifier="y">
+		<Question><TranslatedText>Date of birth</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="age" Name="age" DataType="text" Length="999" redcap:Variable="age" redcap:FieldType="text">
+		<Question><TranslatedText>Age (years)</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="sex" Name="sex" DataType="text" Length="1" redcap:Variable="sex" redcap:FieldType="radio">
+		<Question><TranslatedText>Gender</TranslatedText></Question>
+		<CodeListRef CodeListOID="sex.choices"/>
+	</ItemDef>
+	<ItemDef OID="demographics_complete" Name="demographics_complete" DataType="text" Length="1" redcap:Variable="demographics_complete" redcap:FieldType="select" redcap:SectionHeader="Form Status">
+		<Question><TranslatedText>Complete?</TranslatedText></Question>
+		<CodeListRef CodeListOID="demographics_complete.choices"/>
+	</ItemDef>
+	<ItemDef OID="height" Name="height" DataType="float" Length="999" SignificantDigits="1" redcap:Variable="height" redcap:FieldType="text" redcap:TextValidationType="float">
+		<Question><TranslatedText>Height (cm)</TranslatedText></Question>
+		<RangeCheck Comparator="GE" SoftHard="Soft">
+			<CheckValue>130</CheckValue>
+			<ErrorMessage><TranslatedText>The value you provided is outside the suggested range (130 - 215). This value is admissible, but you may wish to double check it.</TranslatedText></ErrorMessage>
+		</RangeCheck>
+		<RangeCheck Comparator="LE" SoftHard="Soft">
+			<CheckValue>215</CheckValue>
+			<ErrorMessage><TranslatedText>The value you provided is outside the suggested range (130 - 215). This value is admissible, but you may wish to double check it.</TranslatedText></ErrorMessage>
+		</RangeCheck>
+	</ItemDef>
+	<ItemDef OID="weight" Name="weight" DataType="integer" Length="999" redcap:Variable="weight" redcap:FieldType="text" redcap:TextValidationType="int">
+		<Question><TranslatedText>Weight (kilograms)</TranslatedText></Question>
+		<RangeCheck Comparator="GE" SoftHard="Soft">
+			<CheckValue>35</CheckValue>
+			<ErrorMessage><TranslatedText>The value you provided is outside the suggested range (35 - 200). This value is admissible, but you may wish to double check it.</TranslatedText></ErrorMessage>
+		</RangeCheck>
+		<RangeCheck Comparator="LE" SoftHard="Soft">
+			<CheckValue>200</CheckValue>
+			<ErrorMessage><TranslatedText>The value you provided is outside the suggested range (35 - 200). This value is admissible, but you may wish to double check it.</TranslatedText></ErrorMessage>
+		</RangeCheck>
+	</ItemDef>
+	<ItemDef OID="bmi" Name="bmi" DataType="text" Length="999" redcap:Variable="bmi" redcap:FieldType="text">
+		<Question><TranslatedText>BMI</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="comments" Name="comments" DataType="text" Length="999" redcap:Variable="comments" redcap:FieldType="textarea" redcap:SectionHeader="General Comments">
+		<Question><TranslatedText>Comments</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="mugshot" Name="mugshot" DataType="text" Length="999" redcap:Variable="mugshot" redcap:FieldType="file">
+		<Question><TranslatedText>Mugshot</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="health_complete" Name="health_complete" DataType="text" Length="1" redcap:Variable="health_complete" redcap:FieldType="select" redcap:SectionHeader="Form Status">
+		<Question><TranslatedText>Complete?</TranslatedText></Question>
+		<CodeListRef CodeListOID="health_complete.choices"/>
+	</ItemDef>
+	<ItemDef OID="race___1" Name="race___1" DataType="boolean" Length="1" redcap:Variable="race" redcap:FieldType="checkbox">
+		<Question><TranslatedText>Race (Select all that apply)</TranslatedText></Question>
+		<CodeListRef CodeListOID="race___1.choices"/>
+	</ItemDef>
+	<ItemDef OID="race___2" Name="race___2" DataType="boolean" Length="1" redcap:Variable="race" redcap:FieldType="checkbox">
+		<Question><TranslatedText>Race (Select all that apply)</TranslatedText></Question>
+		<CodeListRef CodeListOID="race___2.choices"/>
+	</ItemDef>
+	<ItemDef OID="race___3" Name="race___3" DataType="boolean" Length="1" redcap:Variable="race" redcap:FieldType="checkbox">
+		<Question><TranslatedText>Race (Select all that apply)</TranslatedText></Question>
+		<CodeListRef CodeListOID="race___3.choices"/>
+	</ItemDef>
+	<ItemDef OID="race___4" Name="race___4" DataType="boolean" Length="1" redcap:Variable="race" redcap:FieldType="checkbox">
+		<Question><TranslatedText>Race (Select all that apply)</TranslatedText></Question>
+		<CodeListRef CodeListOID="race___4.choices"/>
+	</ItemDef>
+	<ItemDef OID="race___5" Name="race___5" DataType="boolean" Length="1" redcap:Variable="race" redcap:FieldType="checkbox">
+		<Question><TranslatedText>Race (Select all that apply)</TranslatedText></Question>
+		<CodeListRef CodeListOID="race___5.choices"/>
+	</ItemDef>
+	<ItemDef OID="race___6" Name="race___6" DataType="boolean" Length="1" redcap:Variable="race" redcap:FieldType="checkbox">
+		<Question><TranslatedText>Race (Select all that apply)</TranslatedText></Question>
+		<CodeListRef CodeListOID="race___6.choices"/>
+	</ItemDef>
+	<ItemDef OID="ethnicity" Name="ethnicity" DataType="text" Length="1" redcap:Variable="ethnicity" redcap:FieldType="radio">
+		<Question><TranslatedText>Ethnicity</TranslatedText></Question>
+		<CodeListRef CodeListOID="ethnicity.choices"/>
+	</ItemDef>
+	<ItemDef OID="interpreter_needed" Name="interpreter_needed" DataType="boolean" Length="1" redcap:Variable="interpreter_needed" redcap:FieldType="truefalse">
+		<Question><TranslatedText>Are interpreter services requested?</TranslatedText></Question>
+		<CodeListRef CodeListOID="interpreter_needed.choices"/>
+	</ItemDef>
+	<ItemDef OID="race_and_ethnicity_complete" Name="race_and_ethnicity_complete" DataType="text" Length="1" redcap:Variable="race_and_ethnicity_complete" redcap:FieldType="select" redcap:SectionHeader="Form Status">
+		<Question><TranslatedText>Complete?</TranslatedText></Question>
+		<CodeListRef CodeListOID="race_and_ethnicity_complete.choices"/>
+	</ItemDef>
+	<CodeList OID="sex.choices" Name="sex" DataType="text" redcap:Variable="sex">
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Female</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Male</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="demographics_complete.choices" Name="demographics_complete" DataType="text" redcap:Variable="demographics_complete">
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Incomplete</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Unverified</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="2"><Decode><TranslatedText>Complete</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="health_complete.choices" Name="health_complete" DataType="text" redcap:Variable="health_complete">
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Incomplete</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Unverified</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="2"><Decode><TranslatedText>Complete</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="race___1.choices" Name="race___1" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported">
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="race___2.choices" Name="race___2" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported">
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="race___3.choices" Name="race___3" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported">
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="race___4.choices" Name="race___4" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported">
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="race___5.choices" Name="race___5" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported">
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="race___6.choices" Name="race___6" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported">
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="ethnicity.choices" Name="ethnicity" DataType="text" redcap:Variable="ethnicity">
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unknown / Not Reported</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>NOT Hispanic or Latino</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="2"><Decode><TranslatedText>Hispanic or Latino</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="interpreter_needed.choices" Name="interpreter_needed" DataType="boolean" redcap:Variable="interpreter_needed">
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>True</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>False</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="race_and_ethnicity_complete.choices" Name="race_and_ethnicity_complete" DataType="text" redcap:Variable="race_and_ethnicity_complete">
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Incomplete</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Unverified</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="2"><Decode><TranslatedText>Complete</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+</MetaDataVersion>
+</Study>
+<ClinicalData StudyOID="Project.REDCapRTargetSimpleWithGrayFor" MetaDataVersionOID="Metadata.REDCapRTargetSimpleWithGrayFor_2024-10-12_2119">
+	<SubjectData SubjectKey="1" redcap:RecordIdField="record_id">
+			<FormData FormOID="Form.demographics" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="demographics.record_id" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="record_id" Value="1"/>
+					<ItemData ItemOID="redcap_data_access_group" Value="dag_1"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="demographics.name_first" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="name_first" Value="Nutmeg"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="demographics.name_last" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="name_last" Value="Nutmouse"/>
+					<ItemData ItemOID="address" Value="14 Rose Cottage St.
+Kenning UK, 323232"/>
+					<ItemData ItemOID="telephone" Value="(405) 321-1111"/>
+					<ItemData ItemOID="email" Value="nutty@mouse.com"/>
+					<ItemData ItemOID="dob" Value="2003-08-30"/>
+					<ItemData ItemOID="age" Value="11"/>
+					<ItemData ItemOID="sex" Value="0"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="demographics.demographics_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="demographics_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+			<FormData FormOID="Form.health" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="health.height" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="height" Value="7"/>
+					<ItemData ItemOID="weight" Value="1"/>
+					<ItemData ItemOID="bmi" Value="204.1"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="health.comments" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="comments" Value="Character in a book, with some guessing"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="health.mugshot" ItemGroupRepeatKey="1">
+					<ItemDataBase64Binary ItemOID="mugshot" redcap:DocName="mugshot-1.jpg" redcap:MimeType="image/jpeg"><![CDATA[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]]></ItemDataBase64Binary>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="health.health_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="health_complete" Value="1"/>
+				</ItemGroupData>
+			</FormData>
+			<FormData FormOID="Form.race_and_ethnicity" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="race_and_ethnicity.race___1" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="race___1" Value="0"/>
+					<ItemData ItemOID="race___2" Value="0"/>
+					<ItemData ItemOID="race___3" Value="0"/>
+					<ItemData ItemOID="race___4" Value="0"/>
+					<ItemData ItemOID="race___5" Value="1"/>
+					<ItemData ItemOID="race___6" Value="0"/>
+					<ItemData ItemOID="ethnicity" Value="1"/>
+					<ItemData ItemOID="interpreter_needed" Value="0"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="race_and_ethnicity.race_and_ethnicity_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="race_and_ethnicity_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+	</SubjectData>
+	<SubjectData SubjectKey="2" redcap:RecordIdField="record_id">
+			<FormData FormOID="Form.demographics" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="demographics.record_id" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="record_id" Value="2"/>
+					<ItemData ItemOID="redcap_data_access_group" Value="dag_1"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="demographics.name_first" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="name_first" Value="Tumtum"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="demographics.name_last" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="name_last" Value="Nutmouse"/>
+					<ItemData ItemOID="address" Value="14 Rose Cottage Blvd.
+Kenning UK 34243"/>
+					<ItemData ItemOID="telephone" Value="(405) 321-2222"/>
+					<ItemData ItemOID="email" Value="tummy@mouse.comm"/>
+					<ItemData ItemOID="dob" Value="2003-03-10"/>
+					<ItemData ItemOID="age" Value="11"/>
+					<ItemData ItemOID="sex" Value="1"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="demographics.demographics_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="demographics_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+			<FormData FormOID="Form.health" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="health.height" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="height" Value="6"/>
+					<ItemData ItemOID="weight" Value="1"/>
+					<ItemData ItemOID="bmi" Value="277.8"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="health.comments" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="comments" Value="A mouse character from a good book"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="health.mugshot" ItemGroupRepeatKey="1">
+					<ItemDataBase64Binary ItemOID="mugshot" redcap:DocName="mugshot-2.jpg" redcap:MimeType="image/jpeg"><![CDATA[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]]></ItemDataBase64Binary>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="health.health_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="health_complete" Value="0"/>
+				</ItemGroupData>
+			</FormData>
+			<FormData FormOID="Form.race_and_ethnicity" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="race_and_ethnicity.race___1" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="race___1" Value="0"/>
+					<ItemData ItemOID="race___2" Value="0"/>
+					<ItemData ItemOID="race___3" Value="1"/>
+					<ItemData ItemOID="race___4" Value="0"/>
+					<ItemData ItemOID="race___5" Value="1"/>
+					<ItemData ItemOID="race___6" Value="0"/>
+					<ItemData ItemOID="ethnicity" Value="1"/>
+					<ItemData ItemOID="interpreter_needed" Value="0"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="race_and_ethnicity.race_and_ethnicity_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="race_and_ethnicity_complete" Value="0"/>
+				</ItemGroupData>
+			</FormData>
+	</SubjectData>
+	<SubjectData SubjectKey="3" redcap:RecordIdField="record_id">
+			<FormData FormOID="Form.demographics" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="demographics.record_id" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="record_id" Value="3"/>
+					<ItemData ItemOID="redcap_data_access_group" Value="dag_1"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="demographics.name_first" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="name_first" Value="Marcus"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="demographics.name_last" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="name_last" Value="Wood"/>
+					<ItemData ItemOID="address" Value="243 Hill St.
+Guthrie OK 73402"/>
+					<ItemData ItemOID="telephone" Value="(405) 321-3333"/>
+					<ItemData ItemOID="email" Value="mw@mwood.net"/>
+					<ItemData ItemOID="dob" Value="1934-04-09"/>
+					<ItemData ItemOID="age" Value="80"/>
+					<ItemData ItemOID="sex" Value="1"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="demographics.demographics_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="demographics_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+			<FormData FormOID="Form.health" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="health.height" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="height" Value="180"/>
+					<ItemData ItemOID="weight" Value="80"/>
+					<ItemData ItemOID="bmi" Value="24.7"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="health.comments" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="comments" Value="completely made up"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="health.mugshot" ItemGroupRepeatKey="1">
+					<ItemDataBase64Binary ItemOID="mugshot" redcap:DocName="mugshot-3.jpg" redcap:MimeType="image/jpeg"><![CDATA[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]]></ItemDataBase64Binary>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="health.health_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="health_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+			<FormData FormOID="Form.race_and_ethnicity" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="race_and_ethnicity.race___1" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="race___1" Value="0"/>
+					<ItemData ItemOID="race___2" Value="0"/>
+					<ItemData ItemOID="race___3" Value="0"/>
+					<ItemData ItemOID="race___4" Value="1"/>
+					<ItemData ItemOID="race___5" Value="1"/>
+					<ItemData ItemOID="race___6" Value="0"/>
+					<ItemData ItemOID="ethnicity" Value="0"/>
+					<ItemData ItemOID="interpreter_needed" Value="1"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="race_and_ethnicity.race_and_ethnicity_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="race_and_ethnicity_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+	</SubjectData>
+	<SubjectData SubjectKey="4" redcap:RecordIdField="record_id">
+			<FormData FormOID="Form.demographics" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="demographics.record_id" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="record_id" Value="4"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="demographics.name_first" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="name_first" Value="Trudy"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="demographics.name_last" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="name_last" Value="DAG"/>
+					<ItemData ItemOID="address" Value="342 Elm
+Duncanville TX, 75116"/>
+					<ItemData ItemOID="telephone" Value="(405) 321-4444"/>
+					<ItemData ItemOID="email" Value="peroxide@blonde.com"/>
+					<ItemData ItemOID="dob" Value="1952-11-02"/>
+					<ItemData ItemOID="age" Value="61"/>
+					<ItemData ItemOID="sex" Value="0"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="demographics.demographics_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="demographics_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+			<FormData FormOID="Form.health" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="health.height" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="height" Value="165"/>
+					<ItemData ItemOID="weight" Value="54"/>
+					<ItemData ItemOID="bmi" Value="19.8"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="health.comments" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="comments" Value="This record doesn&#039;t have a DAG assigned
+
+So call up Trudy on the telephone
+Send her a letter in the mail"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="health.mugshot" ItemGroupRepeatKey="1">
+					<ItemDataBase64Binary ItemOID="mugshot" redcap:DocName="mugshot-4.jpg" redcap:MimeType="image/jpeg"><![CDATA[/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxQTEhUUExQVFRUXFxUUFxcXGBUVFxkXGBcXFxkXFRgYHCggGBolHBcXJDEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0OGhAQGiwcHCQsLC0sLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLDQsLCwsLCwsKywrLP/AABEIAMMBAgMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAAFAAIDBAYBB//EAEQQAAEDAQQGCAIHBgUFAQAAAAECAxEABBIhMQVBUWFxgQYTIjKRobHBQtEUI1JicuHwFTOCkpPxU1RzstI0Q2OiwiT/xAAZAQADAQEBAAAAAAAAAAAAAAAAAQIDBAX/xAAsEQACAgIBAwIFAwUAAAAAAAAAAQIRAyExEkFRE2EEMnGhwRTR8CIjQoGR/9oADAMBAAIRAxEAPwDXacbYUO06pxeq6pN0cBED1rKWmwGLwvlOshOHjkKgdYWyqFohWeIkctVHtH6UffFxCAAMCpIhPMnLlUF8lDQ2mUMHFoHYR3h450VtOj12ohax1adWEKI2R8/Crtg0I22bxAUvOYwH4Rq40Wu0DSM3pHQzSWgEpAhQJOszhicznWa6UWEJQ2pIyJSeYn2r0K02a8lSdoI56qyumLPfYWNcXo3pxj1FVHgiapo87eRVe7V99vCqhTQAwCnAVw11CFqBKUKITiVAEgDaTqoKUbHAUpFQpBOOJHjUqG8DgOB/WFFj6RxIpIrV/s+wos4f6lawYAF9QMzBCoOEHXS6PWqxLeS29ZEhCzdCusclKjlOIwOVJOzTJheN0zNt50TYJCTByI8CD8hR/T2hWLOtSSwojNJDihKduMiaG2NixuKCb77MmJIQtInImIMUJiniceTW9FLYEtXVqAxMXjr7xidy0nxrSxWF0joC0WdQSlxDowUn4SYF3AK2DDA7KK6N6ThAS3aEKbUABegwYwkjMedJh0tJWaaK7FMs76VpCkEKByIxFSUhirtKlFACiuXadSoENilTopRQAylT4psUhnJpV2KUUAcmlSilFAHIpV2lSAz9l0IVCXjO1IM+Kvl40as7ASAEgADIDAVKBUiRVEpURXKfFOilQMaaxPS1xxlZCe4uSI2/EJ448628UM6QsMqal8whJBmYM7BtnZTTJkrPKHUYVDYtHuPuBtpN5RIGoATtJwAq9pApKyUpUlsyUA5kZZneDjjzp+jbUb4T3U5pAwAUMQo6yd5ptlY4KUlFndJaIbsS7j6S87AUBilkA657zmIOwYU2z6bccVcVdS2RdCEJCUDdAz51r+mdmFqsaLSkdtvvx9nJY5GDwmvN1YYik9ouDeKd90SiwnrFNTdkG6duHZG7GJ51HakC6hxIu/CoDDEZ5Za6IaTN5LbycwQDw/v61y0tAlYGTiQ6n8WSv/YTzojtGnxEFGeuHtBbRUKbcYxurSH29canE8jjzrOqRBIOYkVe0La7oQv/AAVyf9NzsLHmPCpOkNk6t0xkf0PKKXDLf9zDfeOv9M2tjtH02wBRxeY7KtqgBnzTB4pNYe1s3VRqzHCjXQG2qZtHaENupuknuyMUknxH8VN6UWMJUq6QQlUpIMi6cRiOI8KG9ihCUsbi1xtfk0eiLR9MsRScXmcN5EYeKcOKazK7Yts3DC0ZhK+0nlrTyiudD9KdRaUEnsL+rVwVkeRg8Jor0y0b1bhIyPbTwJxHIzQ9OyMa64OHdbX5JrHZj1SbTY1FJm440o3oVuPxJOGeOOdHdDafS6bixcdyunI/h37qynQy2gOllfcfSUHcrNJ9RzFWrWyFLLbhuuAkJX95OpW7Ig0NhixepF09o3YpTWc0HppV/qLRg4MEq1K2Sdp1HXxo8XoVuyPqfIimlZhJ9PJNXaan8vCnUmNOxCu1wV2gBRSiuzSBpAcu0rtOpUAMu0iKfXCKBkcUqdFdoA4E0q7Su0xHIpRTorlAFe3WpDSFOLMJHiTqA2k15tpfSqrS5K8EibiNQHudpo3b7V9NtPV3rrKJjaojMjedW4VlLfZ1NOKQrNJjjsI4imC09mz6QWVNrsCHkJAW0O6kZAYLSANWAUOFeezBkaq9A6DW4SWzk5JGy8MxzHoKyPSbRv0e0Lb+GbyPwnEeGI5ULZeSDhL67RsOhlrCwppWKXEkxviFDmPSvP8ATGjyw+4yZNxRA2kZpPMEUW6N24oUIzQoKHDWP1tq3p7SnWOKeLfaACeyDCQO6FK2486lOtHVPEsjWS6TW/qAtHi8hxs+er9GomVy0hWtpcH8KoSfO5Wi0BZrMpsWl4yA4WnkFIUn62A2sZXAJJJM4igFnYSl51gKC0KvoSoGQqCQlQOvUapI58mRSio+O4yyJCXyhXdcBSeCgceVW9IvKWw0pXeQSy5tCk908wD/AC0MtK8G164g8Un+9HGWQ4p5EwHUIeT+LWf5gRzNDruLF1t9Me5d/Zym7Gh9KyqWwu7cwHahSSoLnDHGKEftaUkKTmCMDUSdLuJbDKg2pCQpKQttCim8TN1RF4GTtquzZFKTKRIyqajybQy5vlTv2CLViupAeQtsqxSVBSJG0TnWo0hpQPMtpUD1iBdvYEKEQTuOANB+kWlGnbMlIUvrAtBuqSQq6EXT1iu6sjIKTBIicqE6EDrjqGmyJWSAFHs4AkzswByoa8FYs0ItdceO428ULwMFKpB3gyDWw6SHrUN2lH/dQFGNS0YKHtyrI6WQpLpCgAYScDeBBEhSSM0kQQa03R17rbC62c2VhxP4V4K/+jzpvgzxtLLS4ev+kdotKXmUTgtJTdVlCSYUDwz89VaLo/pIvNm930wFb8MDzA8QaxdlMFSMJBkTkdx3Ee9F9BvBu0gJwbeSCASTBxgHeFBSedXjezL4uL57vn6o3TCpE7vMYH0B51JVKzOQY3+uHqE1cFE1TMcbuI4U6m10VBYortdpUAKlSpUgFSpUqAFSpUqAFFKu1wj9edMLOTWd6Z6S6tnq0ntuSOCPiPPLma0Sccq8x6W27rLSvYk9WngnA+c0xXZVZeLakxgR2gd4NHOlNnD1lRakDEEIXw/JRI51lrevFJrW9F7QHGVsKxS4CecEKHhjypI6ZR6k0uxm9B2spVgYI7SeIrU9NWW7Q3Z3QqFmcNdw5g8FCOZrCuoUw6UnvIUQd8fMetHmrK6+CGADkCoqCRJEhCSc1EYxSdp6NMTxzx/1/wCP39gejRyz1rjEENAXgD2wDmQnMgRiau2TSrC7O0hwuy2HAphIVcfUSVJWpSSIIMEz9mn2DTnVlKXGFG0sS22pJCBEFNx8DvJHtVCzNpbIB76v1yFDdEwxvNLxEBBwgFMmDF4SYMZSNcSaJWwwGXAIiB4j2xqnb2rrigBrkc6ItWVSrMrA9nHfhjSb4ZWKG5434f2KGkY+sT9++ngsXsPGiei3CPo6jh3mjwULyPMHxqFjSSbqbwlQETcQojgTkKY9pC/CQLvbSorUZOExgBgMTtqpbRz4pdM0/DFpuxFLiikYEzhqmpdCpVdWADtGG78qIWvSlnJkl1WrspSkHmoz5VWGnko/dsZ61rKp5ACoq4nV6kYfEtrgiafKsHG8Nv8AfKrujLL1TnWJTfSUlMApvpmCFtFWAWkgETQxennPhQyng2CfFU1CvTT/APiEfhCU/wC0Cq6a4M/1ClrIr9+5d6QOl59biUFIMQFETgADIGAkyYG2ifQIqTaerUDdeQts68YvD0PjWaOl3/8AFX/MasWfTdpQUrS4ZBkEhCiD/EDVHK9PQSt6S28CdsHiDBrrzhSoRmhRWngYJ8CPM1ExphdoUQ4G3FElUKHVkk4m6pOAO4ipLdBurRIBlCknNJGBSqNx86UbTOjLOM1KvZ/ub1u0g3VAiFgEYjWJHnFFm1yARrxrP9C7UF2YJwlBKTwzBPj5Uc6pPw9k/dw8svKtZbPPhLpJxThUAKxsVw7J+R8qcHxkcDsOHht5Vm0aqaZPSptdFIqztKlSoGKlSropAcpV2lQAprizkd4+XoaVcUJBG41SJZQbcuubpjxrzC3rSOtB7/WYbc13uWVek6UMEq1Re8prye1u3lKUc1EqPEma0kjOEh2kF4JNFdCWooSlQzSbw3wcRzoJaTLQOw/lVzQz3ZG4ke/vWVaO5T6cifZ/nQS6fWUBxDyR2XU4nekCDzSR4VR0Jp1KE9RaEdYwVXgBg42v7baswa0elwy5o7tupQttXZBiVEYgJGZlKiOVYdFtSg/Vpkj4lY+VO9GModMnF+TQvuqWty0KTdU4b2OAAyCdpwAk0JC0JXfWu8qQYFUrRa3HO+ondq8BTEIqTfJmTqMNJfywra9KJUqW241Sc/L512yOurkBxLadZJujgDmTXNEaLW8q6gfiVqSPnW1sXRZlHeAUdqjPkMKltJUK5Tk58NmMbsLUxfW4rY2g+pq+xodR7tmPFxceWFbxmytJEAgbgIHkKnTd+ESf1rNS5j9LyYRfRh1eYZb/AA3iedU7b0ceRkA4Pu5+B9pr0wIOvwFcUwk6qlTG8SPHXrIpPeSpP4kkVB1E5STuE17G4ygZmNWJj1pybMjMCedV6hPo+54wGjJEYjbhHKuBHahc45bK1nTfR3Vuh1OSsFcdR5j0rPWliUz4ca1i7RhONOiiCUrwwIII45itFal3rjgydSCR/wCRH5SOVZx9UwraIPEUbsLk2X/TcSeR/uasyD/Qq1XH1tnJYMcU4jymtxfry6zvdW6hwHJWI2AGPMGvR2rO6cyhPio+1UjGRbLsVA/a064p6dHD4lqPCEjyx86mbsTYyQJ2nE+Jpkpg5u1fYvcEgqT4ZDyojZnXT3kAbyqJ5CYqcU+aTii4yaGKWRmk8u1+flXW3AcjP617Kdfpi0pOYx2jA+IxqXAtZCQJrt2oL6hkbw2HA+IHtzqRu1A4HsnYrDwORqXGjRTTJrlKnTSpUOyCuTXCaaTQAD6ULu2davuqR53a8xQ1fWlExeITJ1E4Ca9G6XrJsrkDsymDtlSchsmvN7QohKSMCFEg8IrV8GMeWRtHBaFap5RgapN2wtiE5nM7OFJGK0g61AHfJqO2JlTh2KjliPYVHc2c7SXgS3FKMqkk6zNdQaNP24mwtQcZLZ/hwHlFVmGQEmNQmlYXZywaNdd/doUreMvE4Vq9E9ClmC8bo+ynPx1Vc6CCGUnatXsPaiGnekyGZQ3C3Mj9lPHad1ZSk7pHRGEathew2BtpNxCQB+s6tBI2CvPB0otP2x/In5VM30qtAzUk8Uj2qOhl+pE30V2KzfR/pEp1YQ4EjBRkYYzgPCjrzar6FJIgXgoHWDGW8EDzqWqLTtHbVaUtpKlm6ka+YGrjWV0r0uOIYTA+2rE8k6ufhRLpVYFOpRdi8CcJ1GPcCgDehQHW0uHskjrCDATJISJ3kVcIpmeWbimDVNO2g3lqn7y1ADlPsKtNaDtCO00tM/cWR+VGrGGEFtS220L63q1t9l0KaMdq72iSNu0CKvL0clTl+ytFlPxF0dley633kcZHCtJKjHHLr2gBaF2h1hbL7apCVKS4dZSQQkkYT+dZyyG8givUyx2DeABIxAJI5SK8wsrd1a07CoeBj2qcbsvLGqAdowJG+i2gDeQ+ja3eHFP96HWpGKjvirvRlcPgalJUnyn2rY5XyT2gzdO0V6toe0X2WlbUJPOIPnXkCl91P2QU85Ir0jobapYCJkt4TqKVdoEeY/hq0ZSNLNK9UV6uTTIJppXqivU0qoAlKqaXKiKqiU5QBYLlcLlVOspqlxmQOJigaLN1OzzNcql9IR9sedKgqwwai72fd1DbvO6lN7Pu7NvHd60lOVEYlzn2QG6Z/wDSucUf7xXmFq7o4q9q9R6TC9ZXR92f5SFe1eW2ju8z6D5VbM0wY4qCDsINWLUPrVjUtF4eF4eYNdDaS24TgpICkmc+0ElMcCTP3aidclttettVw8MxUM1sdZXZs7idikqHMEH/AGiiVhxB3poLZeytSRkoEe49qKaIey3YVJaNJoW2luxdgSsuFCQM7yscI2Cat2LQiWUF14X1ATd+Ecdp/QBqPoTHWONHbfHoY5RWyf0chcBUlKcQmYE/aMYkjVjhWMnTOqMepWZ0NOKjrg4gFzqi20I6vAG8sgEnAjCrP7Is3UuJltLrTpCFGSXRAVdUgSTnGA1DfRYaGakkhaic7zjip1YyrHDbU30MIEMpbbJwm6MBuAzPGqeSPZEejNu2wJZ7M0ltSg1cN0gzM5ZY0V6PuKUwgqMmB+VPVoxPVqTKiVAiVEkkkeXKq/Rp6Wk7hdPFOFZN2bpUFHGgYnVQ+16O7RKWmlzmFzJ4EggcIomTXamy2rK1ls6UDsoSg7EgYcwKmp0Vw0WFEb3dPA15Wo/Wun7y/U16jalQg8K8nv8AZcVtnzNa4jDNwUHEm6cJm8rgAYpui2VqUC2oJUkiCd+E5VetTYDca7oHv61S0K5BVwBHEVujkkWvoiw+pokKcK7k6pvDGdmutR0KtEPKQTqUjmFFQ8us8KzH7TvOJdAMk3lXrpvOQRMgDs5YYa6MaOtvV2wqfUkRLirsReUg4CCf8Q5bKtGclo9GBrs1mHemLQ7iVHfHziobJ0mW6sp7oiRGZjOaZka6q71sQM1Dlj6Vn3rSTmSeJqAuUAGnNKJGQJ8qqOaWVqAHn60MvUxS6ALjlvUc1H09KrKfqBS6gccoGXOupUN+kDaPGlQM35fUrupUeRjxOFODDh+yniZPgPnRAmuE0Egx/Rl5KkqWTIIgAAYjfJryO0CJB2+k17YTXlHSex3bS6kR3rwG5QvQPGhjRmHxXbB2r7f2kyPxJxFdfFVmnLq0q2EGpZpEalcXVaxh4flFXrGqDIyBg8NVVXAFKcKMpvcpg+vlU2j8zGoTG3dUmiNNYLYWnm3hlkrhr/W6vUWXAoAjIia8gshEXDkrun241t+hWk5SWFntI7s60/l8qxyR7nTilWjV04U0U4VgdIqD6GRDjwHdDio5wT51c0lbC3cSkAqWopE5CBJJ24aqh0OgpBCjiVLM7ZUTPhVLgT5CZFUUaQSlRQ4QkpgScAQcjP6yNXqqPKaJVeIlSbpB1pEnLmaSGy3XDQ/o+6SwicwNed2Td8oogaQA7Tjt1hZ+6r0NeZNolIG1Q8sa9F6VKizOcI8cKwFmTgN0+lb4+DnzclHSU3jsgHw1VQ0Me2RtSfUUT0uexyNCdEfveRrY5ZDLtxRSrUYO0cKsWdePaKuIAWecqFP6RgB/s622ifxdWmY8qrWRlS4CO0smAhIUVQBN7ARHOqIYVsSAtV2+VHGAkQcBON+APOj+i7M0O0hRUYzJyB3QKzn0FxHfcaaVli52scCD1c+FWrHeQAEvsmD2f3uG0DsZHZTTIZpnDVd+0pSJUQBvNDVPvTMsqB2OKAHIgGqbywO0pSVqHdSkENpO0zio8vGnaIoIp0smQClaQe6VCAeE1YU6dQHM/L51misqWQo3rwJM7RiI2ZVfRaC0oJJJbUYQTmk/ZV7GhMAionWfDD86YQP74+tMCyrugngCfSnGzL1gJH3iB6SaYxdaKVV7if8AGb86VAHrM1ymTTSqkSdUa826ctRaVHalCvAXf/mvRCush04sRI65IkABK9wB7Kh4qB40DRgLWJx258RXNJWRF0LbwyCkzME5Ea4O/XxwTyqjdeQEQAbxwVsjP2FI1RcWkKYs7sDC/ZXY/mQT/Co4/doYx2VwdRg0T6PDrUv2Y5uovtz/AIrcqEcRI5UNtJkJXrIhX4k4GfKpZSD7LYWnAxkd4O3CrdntCkKS6nBaDCt/5GgtgcyOsfqaOMwrHaIIqWaxZ6VYLWl1tK05KAP5VaFY3oRbLqlsH8afKR6edbEVyyVM7YO0UNLWVTly5F5BvicthB4imJsjpMylA2QFGeMxHKiddpWVQOtNlcULoUBOBVJkDWQNtTo0a0P+2nZiJJ47alfBwgxSD6dtAEl0UjTetTtFMRaEqkJUlRGBgg47DFIAd0lbvWdwbifDH2rz6yHCvTrSApB/XEV5epvq3FtnMEj5e1bY2c+ZdyDSgkRxoNo4w8OJHkaMWlwKTvoMuzlTkJwyJOyt0crO26VXnTrMJ3gAJHkmrlmltAaSSFugKdUMCEHFLY2YYnjurlvSLzTIykSN39prtidvuqX9okjhq8qZlMJNNJSIAAqUKps0x1cJUdgJ8ATSMyWarWtqRIzqgLQ4clGTsA+VRrtroyhXED2igfSx1hMuqOsAACqtkdJJSontYHcqcFbiD5SKZY3yXCYglOW9OI9Kl0i2ELKvhVjw/uKZPAS/bVocSO1AygADEYGoFNKV3lE8TNQ2BZKlDWYX/MJPnNXg2dZ8Kou7K30UbaVWOp3ny+VKmM9dW9G7jhVR23oHxTwxrOrfJzM00vGggNOaUGpJ5n5VTtNuUsFJiCCCIzBwNU71NKqBGM05YS0uM0nFJ9jvFBXa32lbIHUFOE5pOw/KsLaGyklJEEEgjfSZpFnLC4tCw43N5v6yRjF3Wd2o8aI6UCVLWpvuOjr0DYrEOI4g3vAUMstqLa7wE4KSRtBBBBw31IJSEqBlIN7mYB8YHhSLRJo93teVH7Gv1HnWcZgOYZSY4aqOWZyPEHwqWaJhrRb9y0sq2kJ8cPevRyYrytKv3R2KHr+VeoL7ojca58iOvC9HbRakIi+oCcBnid1VXLYtWDTaj95f1afPE+FXbomdddcTIwJG8R7iszYFjRrxxU8kE6koBA4EmaejQTfxqWs6yVKHkmAKZaUvDN+BtCEAxxOHlQ51bJ/ePFe5ThI/lThVbJYUZsdmvFKUJWRn8YTxJkTuzq+GUjIARsEelV9F9Xc+rKY2JjDkMqtmpZSI0Jz3k1gemti6t1LgyWIPFOvwjwr0AmvNukGkE2l5SiT1TYhMZkTq2Xjr2RV4+TLL8oBtTwnA5+R111hKW0lajjnv57/Slb3Vm4kgJSCbiQMsp3mcMTU1m0Xe7TuWpP8AyI9K6DibArTxU7fM4hRHIHKrWilQRxirWnm7pbIECFJw/XGh1lMYUzGRoagt6oaX+H3FNatYIxMGmWt1KkKSDiRGVBmD2FG6IMSmDvBjA04Gq6ELAiU4caY4HIPdinZr1Iisp+tTxoza0S3vAHkBNCtFt4lw5DLeaONpwx5+9IykwUH130uXYCkqQDqJRBMfzCpDalTidmyqr1pMJbUSeqcKUgQIQQowPLGu9YDt551SKjwGL1KqSLQIHAUqZRsCuo12lIzUKqk8+ONMXEVRITSrCRXWZUAZidUY+dVLI52Ruw8MKmZcw4SPPDyihCLAs41yeJ9hhQjpBoYOC+2AFgZZBQ+dEFP40wvUxLRhkhJN1yUkYXtfBQ966lYaMBd8a8IA4ba1GmNGIdBWRdUBN4RjA+Ia6yDDClCQJAzFRJGsZF4sAkLRHDUeFWG3tuB/WRqihSknBChtBB8qtKcBGIxwMEetQaoJsOXg0naoeZ/OvT7K/GByrytl1KsVtgDWWzdI33TgfKjOj9OOMqKFfWJSbuJx5H51lONnRimkelA12azejukTaoF66T8KsPPKj7b4NYuLR0KSfBA7o1C1XnJXsST2R/CM+dWWmEp7qUp4AD0p9D9I6UDSkJuqVeN3DVxpbK0Ea5SmhOndLhlBCSC4cEpGJk6yP1NCQmwP0q02ZUygwBg4oZn7g9zWRZsy1m62lSipJwSJOrHcJ11qNH9FVr7T6ikHG6O+SftHIfrKoehmD8f+JXktNbJpLRzyTk9mXtTS0vBDghSMCJBiROY5UVGQqppRy9bH1ffWPA3farachVo5sip0U9L2a+2QO8O0OI1eE1mUr11s6zGnGktudn4heI2GdXGqMuSNNoTrMV36RPdBPkPE1SSoZ1cS8mM6Zm0PTe1xyx86ruEuG6MEjvHbuFNcdK1XE4bTu11aCbgCU56tonCTsUfIbyYAJ7M12gBknwnZv46+EVG81L3ZUQYSSU9o4GDhIBwE47DRbRlgEY90f+x1z90Zb4PMRb1m8VEjJBTdwugoBAEbJI4zQJbG2/R6lLQUA3rziFXhcMphQJByJSrbqrqdBvAzdH8wq7oOR1STjeWXACdRQtPsPKpreErXdbLoeDyEq7SroSRJIExEA6qZogcdEu/Z8xSrdfsf748KVMYCS0s/CY2mE+uNVX1FK0gkGZkCDHA0NWXV4qUTxNSWezXTJONUSGLC53hvB8cPap5xI2wfb2FDLO+AsDaD8/aprTaoggTmDwMY+VMRcKqSnoEkwKCP6ZAwSJPl+dUFKdeOPd8Ej50mx0E9KacF0oR2sCJ1cttD9BJJvAbArww9xVliwJTnidp9hVbQyrjmOo3TwPZ9btZt2UjTMmUjhSW0lXeSDxANOAiu0gQHtNn6tYSnurwE5Akxnsxq7pGxKZguLbN7sm6rIgAYzrMeVP0kxebO0doe/lWksyNJGx2NVhYZdS4251i1dSFIcLiu2vrR20wZhOOCpzFFWaqVIzlksSnEBSVNkSRHWJBwMZGilk0g8wO3C0fjQSOBBOFa/SNk0gWEXWbOh5TymjcbaUENLbIQ+oLmVIcgkAwROBwqFKrf/wDjUbIDeccctSQ2x2GluhDTWMG8htRWSmSS0Bkqk4FLNXYBjpi1HxcLyfnVW06Vcfi4AkAhU3kzIyxMCtZadG2tCFYuLBtS0lSWLEXUWcIWUFpJbCVSu4CVBRgmAMSJG7PbPpTALDfUFNl60ltkKCi3aS8ITeHeDEwsxhdJBNL0iv1DfKMyV2hwQq0NoGwKTPl86IaG0Yw2b5cSteoqUnDeBOdGdK6MtSV2lTPb7dk6ltTVmDYSp5vr+0Gr8Bu8JJJAJIkxVfR1mthtLAeaAavWrrQhDNzB94MiSyVFPVBuDKCRBMkkUel7h6/t9y19Lb+2j+ZPzrDaGtjbdt76QJfSe0IgXlDXurY6QsVtBtobbTDbT6rMrqrOetcdCVMgAowLJS4iD3gtJMmqttYtwVauqbUcLT1YUzZQhMLSLP1Crl5Sim9N8LGGrAEWKu45fEX2PNLNaEqUtV5PaM5jWSaMAgjCCN1btyz2y9Z7rRIusXpasxC1l4i0fSVFCCgJauqSW0pk3sDgk4zSaQLRaQAABaLRgMB+9VVVSMJStlVagAScAMTwrJW94revcCAcIAyB5etGtK2wR93Z9o/8aoaLsAcJU5iDQSVH7E6o3g2J+6U48caqvtqRgtJSdh18K0itAs7COBPvQi2WRsOpQkqIBlUmRtgUyWcsjYQiTngYOtWYB3DvHikazVrRqJUVHH5mqr6sY2epxPnhwAqzY3glI2XiDzGB8qDNmmWLrIKSMGkkE/6YOPOstpVP1isDdARIKryh9WmReOYGXKjFpt6RZlJKhIFwb0KMYfhkjhG+hmmFBTrpAuypZjvCBsOacBliN9CHAtdE2iXQsiEIBTjlCgAZGy7e8aC9cqXlBaoGMhRCiL0ATr1Z1O68UpgHE4AbTwqIWUJSmRKpAO+c6Y4rZoGXrSUg304gHEnWOFKgQ0o4jsgiE9kYahgKVIsKKptmF44/L0pUq0JLYaAyFAtKukrKZMbKVKgBaMZSpWImBNGLtKlWbGIChy0jriNox5ilSqSkaOzmUJJzKUk+FSCu0qZI4Coeh9ibVa1oU22pMOdlSEqGChiLwwONKlUy4N8XzD9B2Fo20ILbZTfdTdUlKhAvxgRuFa57QlmB/wCnY/pN/KlSrKTZ1QS2M/Y1n/y7H9Jv5Uv2JZiR/wDnZ/po+VKlStldK8BBGgLL/lmP6TZ9qR0DZf8ALWf+k3/xpUqTbKUV4OK0FZf8tZ/6Tf8AxrzbpE0nrlpCG0hJgBKEI/2gTSpVWNuzPKlRLZLG2UiUIOXwim2tsIuBICRKsAABjJOA340qVbHCwC6LzsKxF6OVaOxIEZa6VKmhE6hiedZXRol1JOMkzSpUEshWMTxPrXRSpUzJETwy/Wyo37QqIkwIA14DECTjG6lSoNES2dPcVrJIJOOryqy3ipU6oilSplIm6lOyuUqVAH//2Q==]]></ItemDataBase64Binary>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="health.health_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="health_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+			<FormData FormOID="Form.race_and_ethnicity" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="race_and_ethnicity.race___1" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="race___1" Value="0"/>
+					<ItemData ItemOID="race___2" Value="1"/>
+					<ItemData ItemOID="race___3" Value="0"/>
+					<ItemData ItemOID="race___4" Value="0"/>
+					<ItemData ItemOID="race___5" Value="1"/>
+					<ItemData ItemOID="race___6" Value="0"/>
+					<ItemData ItemOID="ethnicity" Value="1"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="race_and_ethnicity.race_and_ethnicity_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="race_and_ethnicity_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+	</SubjectData>
+	<SubjectData SubjectKey="5" redcap:RecordIdField="record_id">
+			<FormData FormOID="Form.demographics" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="demographics.record_id" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="record_id" Value="5"/>
+					<ItemData ItemOID="redcap_data_access_group" Value="dag_2"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="demographics.name_first" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="name_first" Value="John Lee"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="demographics.name_last" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="name_last" Value="Walker"/>
+					<ItemData ItemOID="address" Value="Hotel Suite
+New Orleans LA, 70115"/>
+					<ItemData ItemOID="telephone" Value="(405) 321-5555"/>
+					<ItemData ItemOID="email" Value="left@hippocket.com"/>
+					<ItemData ItemOID="dob" Value="1955-04-15"/>
+					<ItemData ItemOID="age" Value="59"/>
+					<ItemData ItemOID="sex" Value="1"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="demographics.demographics_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="demographics_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+			<FormData FormOID="Form.health" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="health.height" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="height" Value="193.04"/>
+					<ItemData ItemOID="weight" Value="104"/>
+					<ItemData ItemOID="bmi" Value="27.9"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="health.comments" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="comments" Value="Had a hand for trouble and a eye for cash
+
+He had a gold watch chain and a black mustache"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="health.mugshot" ItemGroupRepeatKey="1">
+					<ItemDataBase64Binary ItemOID="mugshot" redcap:DocName="mugshot-5.jpg" redcap:MimeType="image/jpeg"><![CDATA[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]]></ItemDataBase64Binary>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="health.health_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="health_complete" Value="0"/>
+				</ItemGroupData>
+			</FormData>
+			<FormData FormOID="Form.race_and_ethnicity" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="race_and_ethnicity.race___1" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="race___1" Value="1"/>
+					<ItemData ItemOID="race___2" Value="0"/>
+					<ItemData ItemOID="race___3" Value="0"/>
+					<ItemData ItemOID="race___4" Value="0"/>
+					<ItemData ItemOID="race___5" Value="0"/>
+					<ItemData ItemOID="race___6" Value="1"/>
+					<ItemData ItemOID="ethnicity" Value="2"/>
+					<ItemData ItemOID="interpreter_needed" Value="0"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="race_and_ethnicity.race_and_ethnicity_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="race_and_ethnicity_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+	</SubjectData>
+	<SubjectData SubjectKey="6" redcap:RecordIdField="record_id">
+			<FormData FormOID="Form.demographics" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="demographics.record_id" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="record_id" Value="6"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="demographics.name_first" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="name_first" Value="blank-for-gray"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="demographics.name_last" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="name_last" Value="blank-for-gray"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="demographics.demographics_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="demographics_complete" Value="0"/>
+				</ItemGroupData>
+			</FormData>
+			<FormData FormOID="Form.race_and_ethnicity" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="race_and_ethnicity.race___1" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="race___1" Value="0"/>
+					<ItemData ItemOID="race___2" Value="0"/>
+					<ItemData ItemOID="race___3" Value="0"/>
+					<ItemData ItemOID="race___4" Value="0"/>
+					<ItemData ItemOID="race___5" Value="0"/>
+					<ItemData ItemOID="race___6" Value="0"/>
+				</ItemGroupData>
+			</FormData>
+	</SubjectData>
+</ClinicalData>
+</ODM>

@@ -92,10 +92,10 @@ Exports the data set of a report created on a project's
 }
 \examples{
 \dontrun{
-uri          <- "https://bbmc.ouhsc.edu/redcap/api/"
-token        <- "9A81268476645C4E5F03428B8AC3AA7B"
-report_1_id  <- 5980L
-report_2_id  <- 6431L
+uri          <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
+token        <- "9A068C425B1341D69E83064A2D273A70"
+report_1_id  <- 12L
+report_2_id  <- 13L
 
 # Return all records and all variables.
 ds_1a <-

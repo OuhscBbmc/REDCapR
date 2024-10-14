@@ -55,14 +55,14 @@
 #' \dontrun{
 #' # Please don't run this example without changing the token to
 #' # point to your server.  It could interfere with our testing suite.
-#' uri            <- "https://bbmc.ouhsc.edu/redcap/api/"
-#' token          <- "457C24AB91B7FCF5B1A7DA67E70E24C7"
+#' uri            <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
+#' token          <- "06C38F6D76B3863DFAE84069D8DBCFFC" # metadata-write
 #'
 #' # Read in the dictionary in R's memory from a csv file.
 #' ds_to_write <-
 #'   readr::read_csv(
 #'     file = system.file(
-#'       "test-data/project-simple/metadata.csv",
+#'       "test-data/projects/simple/metadata.csv",
 #'       package = "REDCapR"
 #'     ),
 #'     col_types = readr::cols(.default = readr::col_character())

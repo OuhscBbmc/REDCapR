@@ -197,7 +197,7 @@ test_that("Full Directory Specific", {
 
 test_that("file in longitudinal event", {
   testthat::skip_on_cran()
-  credential_longitudinal <- retrieve_credential_testing(2629L)
+  credential_longitudinal <- retrieve_credential_testing("arm-single-longitudinal")
   on.exit({
     base::unlink(returned_object_1_1$file_name)
     base::unlink(returned_object_1_2$file_name)
@@ -327,7 +327,7 @@ test_that("file in longitudinal event", {
 
 test_that("file in repeating instrument", {
   testthat::skip_on_cran()
-  credential_repeating <- retrieve_credential_testing(3181L)
+  credential_repeating <- retrieve_credential_testing("vignette-repeating")
   on.exit({
     base::unlink(returned_object_1_1$file_name)
     base::unlink(returned_object_1_2$file_name)
@@ -558,7 +558,7 @@ test_that("upload w/ bad token -Error", {
   testthat::skip_on_cran()
   expected_outcome_message <- "file NOT uploaded."
 
-  credential_upload <- retrieve_credential_testing(213L)
+  credential_upload <- retrieve_credential_testing("simple-write")
 
   file_path <- system.file(
     "test-data/mugshot-5.jpg",

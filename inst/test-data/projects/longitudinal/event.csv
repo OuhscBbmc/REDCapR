@@ -1,0 +1,13 @@
+event_name,arm_num,unique_event_name,custom_event_label,event_id
+"Enrollment",1,enrollment_arm_1,,2888
+"Dose 1",1,dose_1_arm_1,,2889
+"Visit 1",1,visit_1_arm_1,,2890
+"Dose 2",1,dose_2_arm_1,,2891
+"Visit 2",1,visit_2_arm_1,,2892
+"Final visit",1,final_visit_arm_1,,2895
+"Enrollment",2,enrollment_arm_2,,2896
+"Deadline to opt out of study",2,deadline_to_opt_ou_arm_2,,2897
+"First dose",2,first_dose_arm_2,,2898
+"First visit",2,first_visit_arm_2,,2899
+"Final visit",2,final_visit_arm_2,,2902
+"Deadline to return feedback",2,deadline_to_return_arm_2,,2903
