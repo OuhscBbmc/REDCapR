@@ -1,6 +1,6 @@
 library(testthat)
 
-credential   <- retrieve_credential_testing("static-survey")
+credential   <- retrieve_credential_testing("survey")
 record       <- 1
 instrument   <- "participant_morale_questionnaire"
 

@@ -1,6 +1,6 @@
 library(testthat)
 
-credential          <- retrieve_credential_testing("static-survey")
+credential          <- retrieve_credential_testing("survey")
 project             <- redcap_project$new(redcap_uri=credential$redcap_uri, token=credential$token)
 update_expectation  <- FALSE
 

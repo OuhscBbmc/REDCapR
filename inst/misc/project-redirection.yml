@@ -9,7 +9,7 @@
     - empty-rows: 690
     - single-column: 691
     - super-wide-1: 753
-    - static-survey: 817
+    - survey: 817
     - clinical-trial-1: 977
     # 0
     - nonnumeric-record-id: 998
@@ -43,7 +43,7 @@
     - empty-rows: 38
     - single-column: 39
     - super-wide-1: 40
-    - static-survey: 41
+    - survey: 41
     - clinical-trial-1: 42
     - nonnumeric-record-id: 43
     - dag: 44
