@@ -23,7 +23,6 @@ test_that("smoke test", {
     )
   expect_type(returned_object_2, "list")
 })
-
 test_that("with-dags", {
   testthat::skip_on_cran()
   path_expected_user        <- "test-data/specific-redcapr/users-export/with-dags--user.R"

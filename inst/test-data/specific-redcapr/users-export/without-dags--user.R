@@ -1,5 +1,5 @@
 structure(list(username = "unittestphifree", firstname = "Unit Test", 
-    lastname = "PHI Free", expiration = structure(NA_real_, class = "Date"), 
+    lastname = "Phi Free", expiration = structure(NA_real_, class = "Date"), 
     data_access_group = NA_character_, data_access_group_id = NA_character_, 
     design = FALSE, alerts = 0, user_rights = 1L, data_access_groups = TRUE, 
     reports = FALSE, stats_and_charts = FALSE, manage_survey_participants = TRUE, 

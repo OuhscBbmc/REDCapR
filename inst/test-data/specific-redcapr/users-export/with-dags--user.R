@@ -1,6 +1,6 @@
 structure(list(username = "unittestphifree", firstname = "Unit Test", 
-    lastname = "PHI Free", expiration = structure(NA_real_, class = "Date"), 
-    data_access_group = "daga", data_access_group_id = "331", 
+    lastname = "Phi Free", expiration = structure(NA_real_, class = "Date"), 
+    data_access_group = "daga", data_access_group_id = "20", 
     design = FALSE, alerts = 0, user_rights = 2L, data_access_groups = FALSE, 
     reports = FALSE, stats_and_charts = FALSE, manage_survey_participants = TRUE, 
     calendar = FALSE, data_import_tool = FALSE, data_comparison_tool = FALSE, 
