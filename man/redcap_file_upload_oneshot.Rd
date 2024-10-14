@@ -82,8 +82,8 @@ Please rename to \code{\link[=redcap_file_upload_oneshot]{redcap_file_upload_one
 \examples{
 \dontrun{
 # Define some constants
-uri    <- "https://bbmc.ouhsc.edu/redcap/api/"
-token  <- "D70F9ACD1EDD6F151C6EA78683944E98" # The simple project -pid 213
+uri    <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
+token  <- "F9CBFFF78C3D78F641BAE9623F6B7E6A" # simple-write
 field  <- "mugshot"
 event  <- "" # only for longitudinal events
 
@@ -95,7 +95,7 @@ REDCapR::redcap_file_upload_oneshot(
   file_name  = file_path,
   record     = record,
   field      = field,
-  redcap_uri = redcap_uri,
+  redcap_uri = uri,
   token      = token
 )
 
@@ -113,7 +113,7 @@ for (i in seq_along(records)) {
     file_name  = file_path,
     record     = record,
     field      = field,
-    redcap_uri = redcap_uri,
+    redcap_uri = uri,
     token      = token
   )
 }

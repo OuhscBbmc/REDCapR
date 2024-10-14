@@ -124,9 +124,9 @@ It does not need to be the same as the official username in REDCap.
 }
 \examples{
 # ---- Local File Example ----------------------------
-path <- system.file("misc/example.credentials", package = "REDCapR")
-(p1  <- REDCapR::retrieve_credential_local(path, 153L))
-(p2  <- REDCapR::retrieve_credential_local(path, 212L))
+path <- system.file("misc/dev-2.credentials", package = "REDCapR")
+(p1  <- REDCapR::retrieve_credential_local(path, 33L))
+(p2  <- REDCapR::retrieve_credential_local(path, 34L))
 
 
 \dontrun{

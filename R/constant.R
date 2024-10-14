@@ -214,18 +214,18 @@ constant_list <- list(
   form_unverified       = 1L,
   form_complete         = 2L,
 
-  # https://bbmc.ouhsc.edu/redcap/api/help/?content=exp_users
+  # https://redcap-dev-2.ouhsc.edu/redcap/api/help/?content=exp_users
   data_export_rights_no_access    = 0L,
   data_export_rights_deidentified = 1L,
   data_export_rights_full         = 2L,
 
-  # https://bbmc.ouhsc.edu/redcap/api/help/?content=exp_users
+  # https://redcap-dev-2.ouhsc.edu/redcap/api/help/?content=exp_users
   form_rights_no_access    = 0L,
   form_rights_readonly     = 2L,
   form_rights_edit_form    = 1L,  # Notice order is not sequential
   form_rights_edit_survey  = 3L,
 
-  # https://bbmc.ouhsc.edu/redcap/api/help/?content=exp_users
+  # https://redcap-dev-2.ouhsc.edu/redcap/api/help/?content=exp_users
   access_no    = 0L,
   access_yes   = 1L
 )

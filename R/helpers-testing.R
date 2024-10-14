@@ -44,7 +44,7 @@ retrieve_credential_testing <- function(project_tag = "simple", server_instance 
   }
 
   retrieve_credential_local(
-    path_credential = path_credential, # "misc/example.credentials"
+    path_credential = path_credential, # "misc/dev-2.credentials"
     project_id      = d_map$project_id,
     username        = username
   )

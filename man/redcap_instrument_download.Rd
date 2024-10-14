@@ -93,11 +93,11 @@ Please rename to \code{\link[=redcap_instrument_download]{redcap_instrument_down
 }
 \examples{
 \dontrun{
-uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
-token   <- "D70F9ACD1EDD6F151C6EA78683944E98" # pid=213
+uri     <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
+token   <- "F9CBFFF78C3D78F641BAE9623F6B7E6A" # simple-write
 # event <- "" # only for longitudinal projects
 
-(full_name <- base::temp(pattern="instruments-all-records-all", fileext = ".pdf"))
+(full_name <- base::tempfile(pattern="instruments-all-records-all", fileext = ".pdf"))
 result_1   <- REDCapR::redcap_instrument_download(
   file_name     = full_name,
   redcap_uri    = uri,

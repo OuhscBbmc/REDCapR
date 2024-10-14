@@ -97,8 +97,8 @@ Please rename to \code{\link[=redcap_file_download_oneshot]{redcap_file_download
 }
 \examples{
 \dontrun{
-uri     <- "https://bbmc.ouhsc.edu/redcap/api/"
-token   <- "D70F9ACD1EDD6F151C6EA78683944E98" # pid=213
+uri     <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
+token   <- "F9CBFFF78C3D78F641BAE9623F6B7E6A" # simple-write
 record  <- 1
 field   <- "mugshot"
 # event <- "" # only for longitudinal projects

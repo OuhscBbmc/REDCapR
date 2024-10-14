@@ -118,7 +118,7 @@
 #' #   starting from a csv of REDCapR test projects.
 #' # The native pipes in this snippet require R 4.1+.
 #' d_all <-
-#'   system.file("misc/example.credentials", package = "REDCapR") |>
+#'   system.file("misc/dev-2.credentials", package = "REDCapR") |>
 #'   readr::read_csv(
 #'     comment     = "#",
 #'     col_select  = c(redcap_uri, token),

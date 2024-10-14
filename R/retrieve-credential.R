@@ -116,9 +116,9 @@
 #'
 #' @examples
 #' # ---- Local File Example ----------------------------
-#' path <- system.file("misc/example.credentials", package = "REDCapR")
-#' (p1  <- REDCapR::retrieve_credential_local(path, 153L))
-#' (p2  <- REDCapR::retrieve_credential_local(path, 212L))
+#' path <- system.file("misc/dev-2.credentials", package = "REDCapR")
+#' (p1  <- REDCapR::retrieve_credential_local(path, 33L))
+#' (p2  <- REDCapR::retrieve_credential_local(path, 34L))
 #'
 #'
 #' \dontrun{
@@ -259,7 +259,7 @@ credential_local_validation <- function(
 }
 
 # system.file("misc/vignette.css", package="REDCapR")
-# system.file("misc/example.credentials", package="REDCapR")
+# system.file("misc/dev-2.credentials", package="REDCapR")
 
 #' @export
 create_credential_local <- function(path_credential) {

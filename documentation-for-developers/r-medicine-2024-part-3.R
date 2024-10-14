@@ -75,7 +75,7 @@ and we'll use a token stored in a local file.
 
 ```r
 # retrieve-credential
-path_credential <- system.file("misc/example.credentials", package = "REDCapR")
+path_credential <- system.file("misc/dev-2.credentials", package = "REDCapR")
 credential  <- REDCapR::retrieve_credential_local(
   path_credential = path_credential,
   project_id      = 3748
