@@ -32,7 +32,7 @@ test_that("validate_no_logical -concern dataset", {
 
 # ---- redcap-repeat-instance --------------------------------------------------
 # credential  <- REDCapR::retrieve_credential_local(
-#   path_credential = system.file("misc/example.credentials", package = "REDCapR"),
+#   path_credential = system.file("misc/dev-2.credentials", package = "REDCapR"),
 #   project_id      = 1400
 # )
 

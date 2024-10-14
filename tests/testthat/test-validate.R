@@ -42,7 +42,7 @@ test_that("not a data.frame", {
 
 # ---- redcap-repeat-instance --------------------------------------------------
 # credential  <- REDCapR::retrieve_credential_local(
-#   path_credential = system.file("misc/example.credentials", package = "REDCapR"),
+#   path_credential = system.file("misc/dev-2.credentials", package = "REDCapR"),
 #   project_id      = 1400
 # )
 
