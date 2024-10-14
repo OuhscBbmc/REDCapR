@@ -14,14 +14,9 @@ NA), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02",
     "A mouse character from a good book", "completely made up", 
     "This record doesn't have a DAG assigned\n\nSo call up Trudy on the telephone\nSend her a letter in the mail", 
     "Had a hand for trouble and a eye for cash\n\nHe had a gold watch chain and a black mustache", 
-    NA), race___1 = c(FALSE, FALSE, FALSE, FALSE, TRUE, FALSE
-    ), race___2 = c(FALSE, FALSE, FALSE, TRUE, FALSE, FALSE), 
-    race___3 = c(FALSE, TRUE, FALSE, FALSE, FALSE, FALSE), race___4 = c(FALSE, 
-    FALSE, TRUE, FALSE, FALSE, FALSE), race___5 = c(TRUE, TRUE, 
-    TRUE, TRUE, FALSE, FALSE), race___6 = c(FALSE, FALSE, FALSE, 
-    FALSE, TRUE, FALSE), ethnicity = c(1L, 1L, 0L, 1L, 2L, NA
-    ), interpreter_needed = c(0L, 0L, 1L, NA, 0L, NA), demographics_complete = c(2L, 
-    2L, 2L, 2L, 2L, 0L), health_complete = c(1L, 0L, 2L, 2L, 
-    0L, NA), race_and_ethnicity_complete = c(2L, 0L, 2L, 2L, 
-    2L, NA)), row.names = c(NA, -6L), class = c("tbl_df", "tbl", 
-"data.frame"))
+    NA), race___123456 = c(FALSE, FALSE, FALSE, FALSE, FALSE, 
+    FALSE), ethnicity = c(1L, 1L, 0L, 1L, 2L, NA), interpreter_needed = c(0L, 
+    0L, 1L, NA, 0L, NA), demographics_complete = c(2L, 2L, 2L, 
+    2L, 2L, 0L), health_complete = c(1L, 0L, 2L, 2L, 0L, 0L), 
+    race_and_ethnicity_complete = c(2L, 0L, 2L, 2L, 2L, 0L)), row.names = c(NA, 
+-6L), class = c("tbl_df", "tbl", "data.frame"))
