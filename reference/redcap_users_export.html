@@ -115,16 +115,16 @@ unsuccessful operation, it should contain diagnostic information.</p></li>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="va">uri</span>      <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
-<span class="r-in"><span><span class="va">token</span>    <span class="op">&lt;-</span> <span class="st">"06DEFB601F9B46847DAA9DF0CFA951B4"</span></span></span>
+<span class="r-in"><span><span class="va">uri</span>      <span class="op">&lt;-</span> <span class="st">"https://redcap-dev-2.ouhsc.edu/redcap/api/"</span></span></span>
+<span class="r-in"><span><span class="va">token</span>    <span class="op">&lt;-</span> <span class="st">"0BF920AAF9566A8E603F528A498A5729"</span> <span class="co"># dag</span></span></span>
 <span class="r-in"><span><span class="va">result</span>   <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_users_export</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The REDCap users were successfully exported in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The REDCap users were successfully exported in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-in"><span><span class="va">result</span><span class="op">$</span><span class="va">data_user</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 34</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   username        email          firstname lastname expiration data_access_group</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> unittestphifree wibeasley@hot… Unit Test PHI Free <span style="color: #BB0000;">NA</span>         daga             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> wbeasleya       william-beasl… Will      Beasley… <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> itawilliamb     william-beasl… Will      Beasley… <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> unittestphifree whb4@ou.edu    Unit Test Phi Free <span style="color: #BB0000;">NA</span>         daga             </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 28 more variables: data_access_group_id &lt;chr&gt;, design &lt;lgl&gt;, alerts &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   user_rights &lt;int&gt;, data_access_groups &lt;lgl&gt;, reports &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   stats_and_charts &lt;lgl&gt;, manage_survey_participants &lt;lgl&gt;, calendar &lt;lgl&gt;,</span></span>
@@ -136,8 +136,8 @@ unsuccessful operation, it should contain diagnostic information.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   username        form_name    permission_id permission</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> unittestphifree demographics             1 edit_form </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> wbeasleya       <span style="color: #BB0000;">NA</span>                      <span style="color: #BB0000;">NA</span> unknown   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> itawilliamb     demographics             1 edit_form </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> unittestphifree demographics             1 edit_form </span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
@@ -150,7 +150,7 @@ unsuccessful operation, it should contain diagnostic information.</p></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>

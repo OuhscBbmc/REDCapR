@@ -58,7 +58,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Troubleshooting REDCap API Calls</h1>
             
-            <h4 data-toc-skip class="date">2024-09-11</h4>
+            <h4 data-toc-skip class="date">2024-10-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/OuhscBbmc/REDCapR/blob/main/vignettes/TroubleshootingApiCalls.Rmd" class="external-link"><code>vignettes/TroubleshootingApiCalls.Rmd</code></a></small>
       <div class="d-none name"><code>TroubleshootingApiCalls.Rmd</code></div>
@@ -111,7 +111,7 @@ automated email sent to them?</strong> This can be verified in the
 <code>Control Center</code>. (Talk to your REDCap admin.) For each email
 address you’ve entered, there should be a green ‘Verified’ label and
 icon.</p>
-<p><img src="images/EmailVerified.png" style="fig.width=400px"></p>
+<p><img src="images%2FEmailVerified.png" style="fig.width=400px"></p>
 <p><!--<img src="/Users/runner/work/REDCapR/REDCapR/vignettes/images/EmailVerified.png" alt="EmailVerified" style="width: 400px;"/>--></p>
 </li>
 <li>
@@ -121,7 +121,7 @@ permissions?</strong> This can be verified in the
 it’s <code>Manage All Project Tokens</code> tab) within the project.
 Alternatively, it can be verified in the <code>API Tokens</code> section
 of the server’s <code>Control Center</code>.</p>
-<p><img src="images/ApiPrivilegeDashboard.png" style="fig.width=600px"></p>
+<p><img src="images%2FApiPrivilegeDashboard.png" style="fig.width=600px"></p>
 <p><!--<img src="/Users/runner/work/REDCapR/REDCapR/vignettes/images/ApiPrivilegeDashboard.png" alt="ApiPrivilegeDashboard" style="width: 600px;"/>--></p>
 </li>
 <li>
@@ -131,7 +131,7 @@ verified in the <code>API</code> section (and it’s
 the magnifying glass icon in the user’s row. Alternatively, it can be
 verified in the <code>API Tokens</code> section of the server’s
 <code>Control Center</code>.</p>
-<p><img src="images/MagnifyingGlass.png" style="fig.width=550px"></p>
+<p><img src="images%2FMagnifyingGlass.png" style="fig.width=550px"></p>
 <p><!--<img src="/Users/runner/work/REDCapR/REDCapR/vignettes/images/MagnifyingGlass.png" alt="MagnifyingGlass" style="width: 550px;"/>--></p>
 </li>
 </ol>
@@ -147,7 +147,7 @@ a working server, but before it is handled by their programming language
 recommended by <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/eYK_SLzW2k4/0hmf8vWLpdAJ" class="external-link">several</a>
 <a href="https://groups.google.com/forum/#!searchin/project-redcap/postman/project-redcap/RdLeRFGqzbg/WgdjTBLph1kJ" class="external-link">people</a>
 that makes troubleshooting much more efficient.</p>
-<p><img src="images/PostmanScreenshot.png" style="fig.width=800px"></p>
+<p><img src="images%2FPostmanScreenshot.png" style="fig.width=800px"></p>
 <!--<img src="/Users/runner/work/REDCapR/REDCapR/vignettes/images/PostmanScreenshot.png" alt="PostmanScreenshot" style="width: 800px;"/>-->
 <ol style="list-style-type: decimal">
 <li>
@@ -165,16 +165,15 @@ you would for any auto-generated script.</p>
 </li>
 <li><p><strong>Is the URL/URI correct?</strong> Notice the url typically
 ends with “api/” so it resembles
-<code>https://bbmc.ouhsc.edu/redcap/api/</code> and <em>not</em>
-<code>https://bbmc.ouhsc.edu/</code> (even if <a href="https://bbmc.ouhsc.edu/" class="external-link uri">https://bbmc.ouhsc.edu/</a>
-redirects to <a href="https://bbmc.ouhsc.edu/redcap/" class="external-link uri">https://bbmc.ouhsc.edu/redcap/</a>).</p></li>
+<code>https://redcap.ouhsc.edu/redcap/api/</code> and <em>not</em>
+<code>https://redcap.ouhsc.edu/</code> (even if <a href="https://redcap.ouhsc.edu/" class="external-link uri">https://redcap.ouhsc.edu/</a> redirects to <a href="https://redcap.ouhsc.edu/redcap/" class="external-link uri">https://redcap.ouhsc.edu/redcap/</a>).</p></li>
 <li>
 <p><strong>Is Postman installed and operating correctly?</strong> If
 it helps to start with a different REDCap server, you can use this dummy
 project containing fake data hosted by the <a href="https://www.ouhsc.edu/bbmc/" class="external-link">OUHSC BBMC</a>. The url is
-<code>https://bbmc.ouhsc.edu/redcap/api/</code>. There are three
+<code>https://redcap-dev-2.ouhsc.edu/redcap/api/</code>. There are three
 key-value pairs: (1) the ‘token’ is
-<code>9A81268476645C4E5F03428B8AC3AA7B</code>, (2) the ‘content’ is
+<code>9A068C425B1341D69E83064A2D273A70</code>, (2) the ‘content’ is
 <code>record</code>, and (3) the ‘format’ should be <code>CSV</code>.
 When checking your own server, the token value should change, but the
 content and format should not. It should return five records in a CSV
@@ -217,7 +216,7 @@ connecting successfully through the VPN.</p></li>
 underneath a lot of libraries. If it’s installed correctly on your
 location machine, it can be executed from the terminal or command
 line.</p>
-<pre class="shell"><code>curl -X POST -H "Cache-Control: no-cache" -F "token=9A81268476645C4E5F03428B8AC3AA7B" -F "content=record" -F "format=csv" "https://bbmc.ouhsc.edu/redcap/api/"</code></pre>
+<pre class="shell"><code>curl -X POST -H "Cache-Control: no-cache" -F "token=9A068C425B1341D69E83064A2D273A70" -F "content=record" -F "format=csv" "https://redcap-dev-2.ouhsc.edu/redcap/api/"</code></pre>
 </li>
 </ol>
 <p>If all these checks pass, proceed to the next section. If not, start
@@ -438,8 +437,8 @@ and <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-read-ones
 <p>If this check fails, consider attempting again with the url and token
 used above in the Postman example.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">redcap_uri</span> <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span>
-<span><span class="va">token</span>      <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span>
+<code class="sourceCode R"><span><span class="va">redcap_uri</span> <span class="op">&lt;-</span> <span class="st">"https://redcap-dev-2.ouhsc.edu/redcap/api/"</span></span>
+<span><span class="va">token</span>      <span class="op">&lt;-</span> <span class="st">"9A068C425B1341D69E83064A2D273A70"</span></span>
 <span></span>
 <span><span class="va">post_body</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  token           <span class="op">=</span> <span class="va">token</span>,</span>
@@ -601,8 +600,8 @@ the same fake data hosted by the <a href="https://www.ouhsc.edu/bbmc/" class="ex
 section.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session.</span></span>
-<span><span class="va">uri</span>   <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span>
-<span><span class="va">token</span> <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span>
+<span><span class="va">uri</span>   <span class="op">&lt;-</span> <span class="st">"https://redcap-dev-2.ouhsc.edu/redcap/api/"</span></span>
+<span><span class="va">token</span> <span class="op">&lt;-</span> <span class="st">"9A068C425B1341D69E83064A2D273A70"</span></span>
 <span><span class="fu"><a href="../reference/redcap_read.html">redcap_read</a></span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></code></pre></div>
 <p>The previous code should produce similar output. Notice there are
 five rows and the columns will wrap around if your console window is too
@@ -654,8 +653,8 @@ initially, which makes subsequent calls cleaner when the token and url
 are required only the when the object is declared.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ouhscbbmc.github.io/REDCapR/">REDCapR</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session, if you haven't already.</span></span>
-<span><span class="va">uri</span>               <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span>
-<span><span class="va">token</span>             <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span>
+<span><span class="va">uri</span>               <span class="op">&lt;-</span> <span class="st">"https://redcap-dev-2.ouhsc.edu/redcap/api/"</span></span>
+<span><span class="va">token</span>             <span class="op">&lt;-</span> <span class="st">"9A068C425B1341D69E83064A2D273A70"</span></span>
 <span><span class="va">project</span>           <span class="op">&lt;-</span> <span class="va"><a href="../reference/redcap_project.html">redcap_project</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>redcap_uri <span class="op">=</span> <span class="va">uri</span>, token <span class="op">=</span> <span class="va">token</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ds_three_columns</span>  <span class="op">&lt;-</span> <span class="va">project</span><span class="op">$</span><span class="fu">read</span><span class="op">(</span>fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"record_id"</span>, <span class="st">"sex"</span>, <span class="st">"age"</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
@@ -728,8 +727,8 @@ section.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vubiostat/redcapAPI" class="external-link">redcapAPI</a></span><span class="op">)</span> <span class="co"># Load the package into the current R session.</span></span>
 <span><span class="va">rcon</span> <span class="op">&lt;-</span> <span class="fu">redcapConnection</span><span class="op">(</span></span>
-<span>  url   <span class="op">=</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span>,</span>
-<span>  token <span class="op">=</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span>
+<span>  url   <span class="op">=</span> <span class="st">"https://redcap-dev-2.ouhsc.edu/redcap/api/"</span>,</span>
+<span>  token <span class="op">=</span> <span class="st">"9A068C425B1341D69E83064A2D273A70"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu">exportRecords</span><span class="op">(</span><span class="va">rcon</span><span class="op">)</span></span></code></pre></div>
 <p>The previous code should produce similar output. Notice there are
@@ -854,7 +853,7 @@ on GitHub: <a href="https://ouhscbbmc.github.io/REDCapR/articles/Troubleshooting
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>

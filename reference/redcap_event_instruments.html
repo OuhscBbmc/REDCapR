@@ -139,12 +139,12 @@ administrator to send you the static material.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="va">uri</span>                 <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
+<span class="r-in"><span><span class="va">uri</span>                 <span class="op">&lt;-</span> <span class="st">"https://redcap-dev-2.ouhsc.edu/redcap/api/"</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Longitudinal project with one arm</span></span></span>
-<span class="r-in"><span><span class="va">token_1</span>  <span class="op">&lt;-</span> <span class="st">"786334BEB4A87D572DD0E99C4BFCE144"</span> <span class="co"># pid 2629</span></span></span>
+<span class="r-in"><span><span class="va">token_1</span>  <span class="op">&lt;-</span> <span class="st">"76B4A71A0158BD34C98F10DA72D5F27C"</span> <span class="co"># "arm-single-longitudinal" test project</span></span></span>
 <span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="redcap_arm_export.html">redcap_arm_export</a></span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token_1</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The list of arms was retrieved from the REDCap project in 0.2 seconds. The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The list of arms was retrieved from the REDCap project in 0.1 seconds. The http status code was 200.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   arm_number arm_name</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
@@ -159,16 +159,16 @@ administrator to send you the static material.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>       1 follow_up_arm_1   collection</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Project with two arms</span></span></span>
-<span class="r-in"><span><span class="va">token_2</span>  <span class="op">&lt;-</span> <span class="st">"0434F0E9CF53ED0587847AB6E51DE762"</span> <span class="co"># pid 212</span></span></span>
+<span class="r-in"><span><span class="va">token_2</span>  <span class="op">&lt;-</span> <span class="st">"DA6F2BB23146BD5A7EA3408C1A44A556"</span> <span class="co"># "longitudinal" test project</span></span></span>
 <span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="redcap_arm_export.html">redcap_arm_export</a></span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token_2</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The list of arms was retrieved from the REDCap project in 0.2 seconds. The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The list of arms was retrieved from the REDCap project in 0.1 seconds. The http status code was 200.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   arm_number arm_name</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>          1 Drug A  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>          2 Drug B  </span>
 <span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_event_instruments</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token_2</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 25 event instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 25 event instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 25 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    arm_num unique_event_name form                        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       </span>
@@ -216,9 +216,9 @@ administrator to send you the static material.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>       2 deadline_to_return_arm_2 contact_info                    </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Classic project (without arms) throws an error</span></span></span>
-<span class="r-in"><span><span class="va">token_3</span>  <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span> <span class="co"># pid 153</span></span></span>
+<span class="r-in"><span><span class="va">token_3</span>  <span class="op">&lt;-</span> <span class="st">"9A068C425B1341D69E83064A2D273A70"</span> <span class="co"># "simple" test project</span></span></span>
 <span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu"><a href="redcap_arm_export.html">redcap_arm_export</a></span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token_3</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> A 'classic' REDCap project has no arms.  Retrieved in 0.2 seconds. The http status code was 400.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> A 'classic' REDCap project has no arms.  Retrieved in 0.1 seconds. The http status code was 400.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 0 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 variables: arm_number &lt;int&gt;, arm_name &lt;chr&gt;</span></span>
 <span class="r-in"><span><span class="co"># REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_3)$data</span></span></span>
@@ -234,7 +234,7 @@ administrator to send you the static material.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>

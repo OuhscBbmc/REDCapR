@@ -111,8 +111,8 @@ It guarantees the value can always be used in <code><a href="https://rdrr.io/r/u
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">config_options</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span></span>
-<span class="r-in"><span><span class="va">uri</span>            <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
-<span class="r-in"><span><span class="va">token</span>          <span class="op">&lt;-</span> <span class="st">"9A81268476645C4E5F03428B8AC3AA7B"</span></span></span>
+<span class="r-in"><span><span class="va">uri</span>            <span class="op">&lt;-</span> <span class="st">"https://redcap-dev-2.ouhsc.edu/redcap/api/"</span></span></span>
+<span class="r-in"><span><span class="va">token</span>          <span class="op">&lt;-</span> <span class="st">"9A068C425B1341D69E83064A2D273A70"</span></span></span>
 <span class="r-in"><span><span class="va">post_body</span>      <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  token    <span class="op">=</span> <span class="va">token</span>,</span></span>
 <span class="r-in"><span>  content  <span class="op">=</span> <span class="st">"project"</span>,</span></span>
@@ -123,43 +123,37 @@ It guarantees the value can always be used in <code><a href="https://rdrr.io/r/u
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Consume the results in a few different ways.</span></span></span>
 <span class="r-in"><span><span class="va">kernel</span><span class="op">$</span><span class="va">result</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Response [https://bbmc.ouhsc.edu/redcap/api/]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Date: 2024-09-11 13:20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Response [https://redcap-dev-2.ouhsc.edu/redcap/api/]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Date: 2024-10-14 13:06</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Status: 200</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Content-Type: text/csv; charset=utf-8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Size: 717 B</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Size: 590 B</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> project_id,project_title,creation_time,production_time,in_production,project_...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 153,"REDCapR Target Simple Static -see https://github.com/OuhscBbmc/REDCapR",...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33,"REDCapR: simple","2024-10-10 20:21:18",,0,English,4,,,,,0,0,0,0,1,0,0,,,,...</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span>text <span class="op">=</span> <span class="va">kernel</span><span class="op">$</span><span class="va">raw_text</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   project_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1        153</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                            project_title</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 REDCapR Target Simple Static -see https://github.com/OuhscBbmc/REDCapR</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         creation_time production_time in_production project_language purpose</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2013-11-29 15:58:20              NA             0          English       0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   purpose_other project_notes custom_record_label secondary_unique_field</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1            NA            NA                  NA                     NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   is_longitudinal has_repeating_instruments_or_events surveys_enabled</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1               0                                   0               0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   scheduling_enabled record_autonumbering_enabled randomization_enabled</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                  0                            1                     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ddp_enabled project_irb_number project_grant_number project_pi_firstname</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1           0                 NA                   NA                   NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   project_pi_lastname display_today_now_button missing_data_codes</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                  NA                        1                 NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                     external_modules</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 cross_project_piping,form_status_tweaks,redcap_autofill,data_driven_project_banner</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   bypass_branching_erase_field_prompt</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                   0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   project_id   project_title       creation_time production_time in_production</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         33 REDCapR: simple 2024-10-10 20:21:18              NA             0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   project_language purpose purpose_other project_notes custom_record_label</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1          English       4            NA            NA                  NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   secondary_unique_field is_longitudinal has_repeating_instruments_or_events</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                     NA               0                                   0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   surveys_enabled scheduling_enabled record_autonumbering_enabled</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1               0                  0                            1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   randomization_enabled ddp_enabled project_irb_number project_grant_number</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                     0           0                 NA                   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   project_pi_firstname project_pi_lastname display_today_now_button</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                   NA                  NA                        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   missing_data_codes external_modules bypass_branching_erase_field_prompt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                 NA    redcap_entity                                   0</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span>text <span class="op">=</span> <span class="va">kernel</span><span class="op">$</span><span class="va">raw_text</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $project_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 153</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 33</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $project_title</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "REDCapR Target Simple Static -see https://github.com/OuhscBbmc/REDCapR"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "REDCapR: simple"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $creation_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2013-11-29 15:58:20"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2024-10-10 20:21:18"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $production_time</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
@@ -171,7 +165,7 @@ It guarantees the value can always be used in <code><a href="https://rdrr.io/r/u
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "English"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $purpose</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $purpose_other</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
@@ -225,7 +219,7 @@ It guarantees the value can always be used in <code><a href="https://rdrr.io/r/u
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $external_modules</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "cross_project_piping,form_status_tweaks,redcap_autofill,data_driven_project_banner"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "redcap_entity"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $bypass_branching_erase_field_prompt</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
@@ -242,7 +236,7 @@ It guarantees the value can always be used in <code><a href="https://rdrr.io/r/u
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>

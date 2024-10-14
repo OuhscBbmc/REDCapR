@@ -119,45 +119,45 @@ administrator to send you the static material.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="va">uri</span>            <span class="op">&lt;-</span> <span class="st">"https://bbmc.ouhsc.edu/redcap/api/"</span></span></span>
+<span class="r-in"><span><span class="va">uri</span>            <span class="op">&lt;-</span> <span class="st">"https://redcap-dev-2.ouhsc.edu/redcap/api/"</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Query a longitudinal project with a single arm and 3 events</span></span></span>
-<span class="r-in"><span><span class="va">token_1</span>  <span class="op">&lt;-</span> <span class="st">"786334BEB4A87D572DD0E99C4BFCE144"</span></span></span>
+<span class="r-in"><span><span class="va">token_1</span>  <span class="op">&lt;-</span> <span class="st">"76B4A71A0158BD34C98F10DA72D5F27C"</span> <span class="co"># arm-single-longitudinal</span></span></span>
 <span class="r-in"><span><span class="va">result_1</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_event_read</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token_1</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The list of events was retrieved from the REDCap project in 0.2 seconds. The http status code was 200.</span>
 <span class="r-in"><span><span class="va">result_1</span><span class="op">$</span><span class="va">data</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   event_name arm_num unique_event_name custom_event_label event_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Intake           1 intake_arm_1      <span style="color: #BB0000;">NA</span>                    <span style="text-decoration: underline;">12</span>357</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Dischage         1 dischage_arm_1    <span style="color: #BB0000;">NA</span>                    <span style="text-decoration: underline;">12</span>358</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Follow up        1 follow_up_arm_1   <span style="color: #BB0000;">NA</span>                    <span style="text-decoration: underline;">12</span>359</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Intake           1 intake_arm_1      <span style="color: #BB0000;">NA</span>                       95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Dischage         1 dischage_arm_1    <span style="color: #BB0000;">NA</span>                       96</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Follow up        1 follow_up_arm_1   <span style="color: #BB0000;">NA</span>                       97</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Query a longitudinal project with 2 arms and complex arm-event mappings</span></span></span>
-<span class="r-in"><span><span class="va">token_2</span>  <span class="op">&lt;-</span> <span class="st">"0434F0E9CF53ED0587847AB6E51DE762"</span></span></span>
+<span class="r-in"><span><span class="va">token_2</span>  <span class="op">&lt;-</span> <span class="st">"DA6F2BB23146BD5A7EA3408C1A44A556"</span> <span class="co"># longitudinal</span></span></span>
 <span class="r-in"><span><span class="va">result_2</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_event_read</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token_2</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The list of events was retrieved from the REDCap project in 0.2 seconds. The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The list of events was retrieved from the REDCap project in 0.1 seconds. The http status code was 200.</span>
 <span class="r-in"><span><span class="va">result_2</span><span class="op">$</span><span class="va">data</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    event_name              arm_num unique_event_name custom_event_label event_id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Enrollment                    1 enrollment_arm_1  <span style="color: #BB0000;">NA</span>                     <span style="text-decoration: underline;">2</span>888</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Dose 1                        1 dose_1_arm_1      <span style="color: #BB0000;">NA</span>                     <span style="text-decoration: underline;">2</span>889</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Visit 1                       1 visit_1_arm_1     <span style="color: #BB0000;">NA</span>                     <span style="text-decoration: underline;">2</span>890</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Dose 2                        1 dose_2_arm_1      <span style="color: #BB0000;">NA</span>                     <span style="text-decoration: underline;">2</span>891</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Visit 2                       1 visit_2_arm_1     <span style="color: #BB0000;">NA</span>                     <span style="text-decoration: underline;">2</span>892</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Final visit                   1 final_visit_arm_1 <span style="color: #BB0000;">NA</span>                     <span style="text-decoration: underline;">2</span>895</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Enrollment                    2 enrollment_arm_2  <span style="color: #BB0000;">NA</span>                     <span style="text-decoration: underline;">2</span>896</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Deadline to opt out of…       2 deadline_to_opt_… <span style="color: #BB0000;">NA</span>                     <span style="text-decoration: underline;">2</span>897</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> First dose                    2 first_dose_arm_2  <span style="color: #BB0000;">NA</span>                     <span style="text-decoration: underline;">2</span>898</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> First visit                   2 first_visit_arm_2 <span style="color: #BB0000;">NA</span>                     <span style="text-decoration: underline;">2</span>899</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> Final visit                   2 final_visit_arm_2 <span style="color: #BB0000;">NA</span>                     <span style="text-decoration: underline;">2</span>902</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> Deadline to return fee…       2 deadline_to_retu… <span style="color: #BB0000;">NA</span>                     <span style="text-decoration: underline;">2</span>903</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Enrollment                    1 enrollment_arm_1  <span style="color: #BB0000;">NA</span>                       61</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Dose 1                        1 dose_1_arm_1      <span style="color: #BB0000;">NA</span>                       62</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Visit 1                       1 visit_1_arm_1     <span style="color: #BB0000;">NA</span>                       63</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Dose 2                        1 dose_2_arm_1      <span style="color: #BB0000;">NA</span>                       64</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Visit 2                       1 visit_2_arm_1     <span style="color: #BB0000;">NA</span>                       65</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Final visit                   1 final_visit_arm_1 <span style="color: #BB0000;">NA</span>                       66</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Enrollment                    2 enrollment_arm_2  <span style="color: #BB0000;">NA</span>                       67</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Deadline to opt out of…       2 deadline_to_opt_… <span style="color: #BB0000;">NA</span>                       68</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> First dose                    2 first_dose_arm_2  <span style="color: #BB0000;">NA</span>                       69</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> First visit                   2 first_visit_arm_2 <span style="color: #BB0000;">NA</span>                       70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> Final visit                   2 final_visit_arm_2 <span style="color: #BB0000;">NA</span>                       71</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> Deadline to return fee…       2 deadline_to_retu… <span style="color: #BB0000;">NA</span>                       72</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Query a classic project without events</span></span></span>
-<span class="r-in"><span><span class="va">token_3</span>  <span class="op">&lt;-</span> <span class="st">"D70F9ACD1EDD6F151C6EA78683944E98"</span></span></span>
+<span class="r-in"><span><span class="va">token_3</span>  <span class="op">&lt;-</span> <span class="st">"F9CBFFF78C3D78F641BAE9623F6B7E6A"</span> <span class="co"># simple-write</span></span></span>
 <span class="r-in"><span><span class="va">result_3</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_event_read</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token_3</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> A 'classic' REDCap project has no events.  Retrieved in 0.2 seconds. The http status code was 400.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> A 'classic' REDCap project has no events.  Retrieved in 0.1 seconds. The http status code was 400.</span>
 <span class="r-in"><span><span class="va">result_3</span><span class="op">$</span><span class="va">data</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 0 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5 variables: event_name &lt;chr&gt;, arm_num &lt;int&gt;, unique_event_name &lt;chr&gt;,</span></span>
@@ -174,7 +174,7 @@ administrator to send you the static material.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>
