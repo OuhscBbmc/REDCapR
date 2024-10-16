@@ -258,9 +258,6 @@ credential_local_validation <- function(
   }
 }
 
-# system.file("misc/vignette.css", package="REDCapR")
-# system.file("misc/dev-2.credentials", package="REDCapR")
-
 #' @export
 create_credential_local <- function(path_credential) {
   path_source <- system.file(
