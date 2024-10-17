@@ -17,6 +17,6 @@ NA), dob = c("2003-08-30", "2003-03-10", "1934-04-09", "1952-11-02",
     NA), race___123456 = c(FALSE, FALSE, FALSE, FALSE, FALSE, 
     FALSE), ethnicity = c(1L, 1L, 0L, 1L, 2L, NA), interpreter_needed = c(0L, 
     0L, 1L, NA, 0L, NA), demographics_complete = c(2L, 2L, 2L, 
-    2L, 2L, 0L), health_complete = c(1L, 0L, 2L, 2L, 0L, 0L), 
-    race_and_ethnicity_complete = c(2L, 0L, 2L, 2L, 2L, 0L)), row.names = c(NA, 
+    2L, 2L, 0L), health_complete = c(1L, 0L, 2L, 2L, 0L, NA), 
+    race_and_ethnicity_complete = c(2L, 0L, 2L, 2L, 2L, NA)), row.names = c(NA, 
 -6L), class = c("tbl_df", "tbl", "data.frame"))
