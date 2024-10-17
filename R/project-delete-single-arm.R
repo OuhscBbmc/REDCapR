@@ -17,7 +17,8 @@ populate_project_delete_single_arm <- function(verbose = FALSE) {
     token         = credential$token
   )
   path_in <- system.file(
-    "test-data/delete-single-arm/data.csv",
+    "test-data/projects/arm-single-delete/data.csv",
+    # "test-data/delete-single-arm/data.csv",
     package = "REDCapR"
   )
 
