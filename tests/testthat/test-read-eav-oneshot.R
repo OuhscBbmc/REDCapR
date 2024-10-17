@@ -4,6 +4,10 @@ credential  <- retrieve_credential_testing()
 update_expectation  <- FALSE
 path_expected_default <- "test-data/specific-redcapr/read-eav-oneshot/default.R"
 
+if (credential$redcap_uri != "https://redcap-dev-2.ouhsc.edu/redcap/api/") {
+  testthat::skip("Skipping EAV test on non-dev server")
+}
+
 test_that("smoke test", {
   testthat::skip_on_cran()
   expect_message({
