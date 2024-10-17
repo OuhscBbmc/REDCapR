@@ -8,3 +8,4 @@ Steps to recreate on a fresh server
     Tests are case-sensitive.
     1. 'unittestphifree': First name = "Unit Test"; Last name "Phi Free".
     1. 'unittestphifree-dag1': First name = "Unit Test"; Last name "PHI Free DAG1"
+1.  Install plugins
