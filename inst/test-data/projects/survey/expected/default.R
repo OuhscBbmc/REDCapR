@@ -1,9 +1,7 @@
 structure(list(participant_id = c(1, 2), redcap_survey_identifier = c(NA, 
-NA), prescreening_survey_timestamp = structure(c(1728851970, 
-1728852051), class = c("POSIXct", "POSIXt"), tzone = "UTC"), 
-    dob = structure(c(17596, 17595), class = "Date"), email = c("aaa@bbb.com", 
-    "ccc@ddd.com"), has_diabetes = c(1, 0), consent___1 = c(1, 
-    0), prescreening_survey_complete = c(2, 2), participant_info_survey_timestamp = c(NA, 
+NA), dob = structure(c(17596, 17595), class = "Date"), email = c("aaa@bbb.com", 
+"ccc@ddd.com"), has_diabetes = c(1, 0), consent___1 = c(1, 0), 
+    prescreening_survey_complete = c(2, 2), participant_info_survey_timestamp = c(NA, 
     NA), first_name = c(NA, NA), last_name = c(NA, NA), address = c(NA, 
     NA), telephone_1 = c(NA, NA), ethnicity = c(NA, NA), race = c(NA, 
     NA), sex = c(NA, NA), height = c(NA, NA), weight = c(NA, 
@@ -14,4 +12,4 @@ NA), prescreening_survey_timestamp = structure(c(1728851970,
     withdraw_reason = c(NA, NA), date_visit_4 = c(NA, NA), discharge_date_4 = c(NA, 
     NA), discharge_summary_4 = c(NA, NA), study_comments = c(NA, 
     NA), completion_data_complete = c(0, 0)), row.names = c(NA, 
--2L), class = c("spec_tbl_df", "tbl_df", "tbl", "data.frame"))
+-2L), class = c("tbl_df", "tbl", "data.frame"))
