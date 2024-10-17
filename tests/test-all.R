@@ -2,7 +2,8 @@
 library(testthat)
 library(REDCapR)
 
-Sys.setenv("redcapr_test_server" = "dev-2")
+# Sys.setenv("redcapr_test_server" = "dev-2")
+Sys.setenv("redcapr_test_server" = "bbmc")
 
 message("Using test server '", Sys.getenv("redcapr_test_server"), "'.")
 

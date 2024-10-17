@@ -1,7 +1,17 @@
-retrieve_credential_testing <- function(project_tag = "simple", server_instance = "dev-2", username = NA_character_) {
+retrieve_credential_testing <- function(
+    project_tag = "simple",
+    username = NA_character_
+  ) {
   checkmate::assert_character(project_tag     , any.missing = FALSE, min.chars = 2, max.chars = 50)
-  checkmate::assert_character(server_instance , any.missing = FALSE, min.chars = 2, max.chars = 50)
   checkmate::assert_character(username        , any.missing = TRUE , min.chars = 2, max.chars = 50)
+
+  server_instance <-
+    # if(Sys.getenv("redcapr_test_server") != "") {
+      Sys.getenv("redcapr_test_server")
+    # } else {
+    #   "dev-2"
+    # }
+  checkmate::assert_character(server_instance , any.missing = FALSE, min.chars = 2, max.chars = 50)
 
   # This line avoids a warning from the package check.
   projects <- project_id <- instance <- tag <- NULL
@@ -49,8 +59,15 @@ retrieve_credential_testing <- function(project_tag = "simple", server_instance 
     username        = username
   )
 }
-retrieve_plugins <- function(plugin_name, server_instance = "dev-2") {
+retrieve_plugins <- function(plugin_name) {
   checkmate::assert_character(plugin_name     , any.missing = FALSE, min.chars = 2, max.chars = 50)
+
+  server_instance <-
+    # if(Sys.getenv("redcapr_test_server") != "") {
+      Sys.getenv("redcapr_test_server")
+    # } else {
+    #   "dev-2"
+    # }
   checkmate::assert_character(server_instance , any.missing = FALSE, min.chars = 2, max.chars = 50)
 
   # This line avoids a warning from the package check.
