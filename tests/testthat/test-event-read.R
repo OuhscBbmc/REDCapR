@@ -110,7 +110,7 @@ test_that("delete-multiple-arm", {
   testthat::skip_on_cran()
   credential  <- retrieve_credential_testing("arm-multiple-delete")
 
-  path_expected <- "test-data/delete-multiple-arm/event.csv"
+  path_expected <- "test-data/projects/arm-multiple-delete/event.csv"
   expected_data_frame <- retrieve_expected_events(path_expected)
 
   expected_outcome_message <- "The list of events was retrieved from the REDCap project in \\d+(\\.\\d+\\W|\\W)seconds\\."

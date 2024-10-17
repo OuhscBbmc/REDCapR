@@ -17,7 +17,8 @@ populate_project_delete_single_arm <- function(verbose = FALSE) {
     token         = credential$token
   )
   path_in <- system.file(
-    "test-data/delete-single-arm/data.csv",
+    "test-data/projects/arm-single-delete/data.csv",
+    # "test-data/delete-single-arm/data.csv",
     package = "REDCapR"
   )
 
@@ -63,8 +64,8 @@ clear_project_delete_single_arm <- function(verbose = FALSE) {
     )
     # nocov end
   }
-  path_delete_test_record <-
-    "https://redcap-dev-2.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_delete_single_arm.php"
+  path_delete_test_record <- retrieve_plugins("delete_arm_single")
+  # "https://redcap-dev-2.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_delete_single_arm.php"
 
   # Returns a boolean value if successful
   was_successful <- !httr::http_error(path_delete_test_record)

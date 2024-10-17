@@ -3,73 +3,70 @@ library(testthat)
 path               <- system.file("misc/dev-2.credentials", package="REDCapR")
 pid_read           <- 33L # This project is for testing only reading from the server.
 pid_longitudinal   <- 34L # This project is for testing reading longitudinal projects.
-# pid_write          <- 35L # This project is for testing reading & writing.
-# pid_dag            <- 49L #This project is for testing DAGs.
+pid_write          <- 36L # This project is for testing reading & writing.
+pid_dag_write      <- 49L #This project is for testing DAGs.
 
 test_that("Good Credentials", {
-  expected_read_redcap_uri      <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
+  expected_redcap_uri           <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
   expected_read_username        <- "myusername"
   # expected_read_project_id      <- pid_read
   expected_read_token           <- "9A068C425B1341D69E83064A2D273A70"
   expected_read_comment         <- "simple"
 
-  expected_longitudinal_redcap_uri     <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
   expected_longitudinal_username       <- "myusername"
   # expected_longitudinal_project_id     <- pid_longitudinal
   expected_longitudinal_token          <- "DA6F2BB23146BD5A7EA3408C1A44A556"
   expected_longitudinal_comment        <- "longitudinal"
 
-  expected_write_redcap_uri     <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
   expected_write_username       <- "myusername"
   # expected_write_project_id     <- pid_write
   expected_write_token          <- "F9CBFFF78C3D78F641BAE9623F6B7E6A"
   expected_write_comment        <- "simple-write"
 
-  credential_read         <- retrieve_credential_testing(server_instance = "dev-2")                # This project is for testing only reading from the server.
-  credential_longitudinal <- retrieve_credential_testing(server_instance = "dev-2","longitudinal")  # This project is for testing reading longitudinal projects.
-  credential_write        <- retrieve_credential_testing(server_instance = "dev-2","simple-write")  # This project is for testing reading & writing.
+  credential_read         <- retrieve_credential_local(path_credential = path, project_id = pid_read)                # This project is for testing only reading from the server.
+  credential_longitudinal <- retrieve_credential_local(path_credential = path, project_id = pid_longitudinal)  # This project is for testing reading longitudinal projects.
+  credential_write        <- retrieve_credential_local(path_credential = path, project_id = pid_write)  # This project is for testing reading & writing.
 
-  expect_equal(credential_read$redcap_uri   , expected_read_redcap_uri)
+  expect_equal(credential_read$redcap_uri   , expected_redcap_uri)
   expect_equal(credential_read$username     , expected_read_username)
   # expect_equal(credential_read$project_id   , expected_read_project_id)
   expect_equal(credential_read$token        , expected_read_token)
   expect_equal(credential_read$comment      , expected_read_comment)
 
-  expect_equal(credential_longitudinal$redcap_uri   , expected_longitudinal_redcap_uri)
+  expect_equal(credential_longitudinal$redcap_uri   , expected_redcap_uri)
   expect_equal(credential_longitudinal$username     , expected_longitudinal_username)
   # expect_equal(credential_longitudinal$project_id   , expected_longitudinal_project_id)
   expect_equal(credential_longitudinal$token        , expected_longitudinal_token)
   expect_equal(credential_longitudinal$comment      , expected_longitudinal_comment)
 
-  expect_equal(credential_write$redcap_uri   , expected_write_redcap_uri)
+  expect_equal(credential_write$redcap_uri   , expected_redcap_uri)
   expect_equal(credential_write$username     , expected_write_username)
   # expect_equal(credential_write$project_id   , expected_write_project_id)
   expect_equal(credential_write$token        , expected_write_token)
   expect_equal(credential_write$comment      , expected_write_comment)
 })
 test_that("Multiple users", {
-  expected_admin_redcap_uri     <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
+  expected_redcap_uri           <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
   expected_admin_username       <- "admin"
   # expected_admin_project_id     <- pid_dag
   expected_admin_token          <- "F6F871FE0322EEE8D23F56DBBE23B756"
   expected_admin_comment        <- "dag-write --admin"
 
-  expected_user_redcap_uri      <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
   expected_user_username        <- "user-dag1"
   # expected_user_project_id      <- pid_dag
   expected_user_token           <- "8092B2302CAA359C4F5641AEC1CE72ED"
   expected_user_comment         <- "dag-write --group A"
 
-  credential_admin        <- retrieve_credential_testing(server_instance = "dev-2", username = expected_admin_username)
-  credential_user         <- retrieve_credential_testing(server_instance = "dev-2", username = expected_user_username)
+  credential_admin  <- retrieve_credential_local(path_credential = path, project_id = pid_dag_write, username = expected_admin_username)                # This project is for testing only reading from the server.
+  credential_user   <- retrieve_credential_local(path_credential = path, project_id = pid_dag_write, username = expected_user_username)  # This project is for testing reading longitudinal projects.
 
-  expect_equal(credential_admin$redcap_uri  , expected_admin_redcap_uri)
+  expect_equal(credential_admin$redcap_uri  , expected_redcap_uri)
   expect_equal(credential_admin$username    , expected_admin_username)
   # expect_equal(credential_admin$project_id  , expected_admin_project_id)
   expect_equal(credential_admin$token       , expected_admin_token)
   expect_equal(credential_admin$comment     , expected_admin_comment)
 
-  expect_equal(credential_user$redcap_uri   , expected_user_redcap_uri)
+  expect_equal(credential_user$redcap_uri   , expected_redcap_uri)
   expect_equal(credential_user$username     , expected_user_username)
   # expect_equal(credential_user$project_id   , expected_user_project_id)
   expect_equal(credential_user$token        , expected_user_token)

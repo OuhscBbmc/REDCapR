@@ -17,7 +17,7 @@ These features are not yet on CRAN.  Install with `remotes::install_github("Ouhs
 
 ### Minor Enhancements
 
-* Redirection layer for test suite allows you to plug in your own server (#539)
+* Redirection layer for test suite allows you to plug in your own server (#539, #542, #544)
 
 Version 1.2.0  (released 2024-09-08)
 ==========================================================

@@ -43,6 +43,23 @@ test_that("with-dags", {
       -email
     )
 
+  # Check the group id exists
+  expect_true(!is.na(d_user$data_access_group_id))
+
+  # For these two specific servers, check the exact value of the id
+  if (credential_1$redcap_uri == "https://redcap-dev-2.ouhsc.edu/redcap/api/") {
+    expect_equal(d_user$data_access_group_id, "20")
+  } else if (credential_1$redcap_uri == "https://bbmc.ouhsc.edu/redcap/api/") {
+    expect_equal(d_user$data_access_group_id, "331")
+  }
+
+  # Drop the ID because it won't match other servers
+  d_user <-
+    d_user |>
+    dplyr::select(
+      -data_access_group_id
+    )
+
   d_user_form <-
     returned_object$data_user_form |>
     dplyr::filter(username == "unittestphifree")

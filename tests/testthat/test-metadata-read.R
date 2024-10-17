@@ -7,6 +7,13 @@ credential_super_wide_3<-retrieve_credential_testing("super-wide-3")
 credential_problem    <- retrieve_credential_testing("potentially-problematic-dictionary")
 update_expectation    <- FALSE
 
+if (credential$redcap_uri != "https://redcap-dev-2.ouhsc.edu/redcap/api/") {
+  testthat::skip("Skipping EAV test on non-dev server")
+  # The two servers have different outputs/spaces around the pipes.
+  # dev : "0, Female|1, Male"
+  # bbmc: "0, Female | 1, Male"
+}
+
 test_that("Smoke Test", {
   testthat::skip_on_cran()
   expect_message({

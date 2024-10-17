@@ -27,7 +27,7 @@ test_that("delete-multiple-arm", {
   testthat::skip_on_cran()
   credential  <- retrieve_credential_testing("arm-multiple-delete")
 
-  path_expected <- "test-data/delete-multiple-arm/arm.csv"
+  path_expected <- "test-data/projects/arm-multiple-delete/arm.csv"
   expected_data_frame <- read_arms(path_expected)
   # start_clean_result <- REDCapR:::clean_start_delete_single_arm()
 

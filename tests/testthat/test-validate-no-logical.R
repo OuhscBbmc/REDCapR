@@ -31,11 +31,6 @@ test_that("validate_no_logical -concern dataset", {
 })
 
 # ---- redcap-repeat-instance --------------------------------------------------
-# credential  <- REDCapR::retrieve_credential_local(
-#   path_credential = system.file("misc/dev-2.credentials", package = "REDCapR"),
-#   project_id      = 1400
-# )
-
 test_that("repeat-instance: no column", {
   ds <- validate_repeat_instance(mtcars)
   expect_equal(object = nrow(ds), expected = 0)

@@ -62,11 +62,18 @@ test_that("default", {
       verbose               = FALSE
     )
 
-  if (update_expectation) save_expected(returned_object1$data, path_expected)
+  expect_true(all(!is.na(returned_object1$data$prescreening_survey_timestamp)))
+  expect_s3_class(returned_object1$data$prescreening_survey_timestamp, "POSIXct")
+  d1 <-
+    returned_object1$data |>
+    dplyr::select(
+      -prescreening_survey_timestamp
+    )
+
+  if (update_expectation) save_expected(d1, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object1$data)
-  expect_true(all(!is.na(returned_object1$data$prescreening_survey_timestamp)))
+  expect_equal(d1, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object1$data)
   expect_true(returned_object1$success)
   expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
@@ -86,8 +93,15 @@ test_that("default", {
       verbose               = FALSE
     )
 
-  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
-  expect_true(all(!is.na(returned_object1$data$prescreening_survey_timestamp)))
+  expect_true(all(!is.na(returned_object2$data$prescreening_survey_timestamp)))
+  expect_s3_class(returned_object2$data$prescreening_survey_timestamp, "POSIXct")
+  d2 <-
+    returned_object2$data |>
+    dplyr::select(
+      -prescreening_survey_timestamp
+    )
+
+  expect_equal(d2, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
   expect_true(returned_object2$success)
   expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")

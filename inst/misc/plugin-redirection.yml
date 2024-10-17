@@ -1,0 +1,15 @@
+-
+  instance: bbmc
+  plugins:
+    - delete_simple       : "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_simple.php"
+    - delete_arm_single   : "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_delete_single_arm.php"
+    - delete_arm_multiple : "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_delete_multiple_arm.php"
+    - delete_dag          : "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_dag_write.php"
+
+-
+  instance: dev-2
+  plugins:
+    - delete_simple       : "https://redcap-dev-2.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_simple.php"
+    - delete_arm_single   : "https://redcap-dev-2.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_delete_single_arm.php"
+    - delete_arm_multiple : "https://redcap-dev-2.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_delete_multiple_arm.php"
+    - delete_dag          : "https://redcap-dev-2.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_dag_write.php"
