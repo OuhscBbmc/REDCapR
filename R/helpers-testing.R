@@ -49,7 +49,42 @@ retrieve_credential_testing <- function(project_tag = "simple", server_instance 
     username        = username
   )
 }
+retrieve_plugins <- function(plugin_name, server_instance = "dev-2") {
+  checkmate::assert_character(plugin_name     , any.missing = FALSE, min.chars = 2, max.chars = 50)
+  checkmate::assert_character(server_instance , any.missing = FALSE, min.chars = 2, max.chars = 50)
 
+  # This line avoids a warning from the package check.
+  plugins <- instance <- tag <- project_tag <- NULL
+
+  if (!requireNamespace("yaml", quietly = TRUE)) {
+    stop(
+      "Package `yaml` must be installed to use this function.",
+      call. = FALSE
+    )
+  }
+  d_map <-
+    system.file("misc/plugin-redirection.yml", package = "REDCapR") |>
+    yaml::yaml.load_file(
+      handlers = list(map = \(x) tibble::as_tibble(x))
+    ) |>
+    dplyr::bind_rows() |>
+    tidyr::unnest(plugins) |>
+    tidyr::pivot_longer(
+      cols      = -c("instance"),
+      names_to  = "tag",
+      values_to = "url"
+    ) |>
+    tidyr::drop_na(url) |>
+    dplyr::filter(instance == server_instance) |>
+    dplyr::filter(tag      == plugin_name)
+
+  if (nrow(d_map) == 0L) {
+    stop("A plugin mapping entry does not exist for the desired arguments.")
+  }
+
+  d_map |>
+    dplyr::pull(url)
+}
 # This function isn't used during testing itself.  Just to create the expected file.
 save_expected <- function(o, path) {
   # nocov start
@@ -60,7 +95,6 @@ save_expected <- function(o, path) {
   dput(o, path)
   # nocov end
 }
-
 retrieve_expected <- function(path) {
   full_path   <- system.file(path, package = "REDCapR")
   if (!file.exists(full_path))

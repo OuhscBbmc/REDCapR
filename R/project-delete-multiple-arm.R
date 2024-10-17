@@ -64,8 +64,8 @@ clear_project_delete_multiple_arm <- function(verbose = TRUE) {
     )
     # nocov end
   }
-  path_delete_test_record <-
-    "https://redcap-dev-2.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_delete_multiple_arm.php"
+  path_delete_test_record <- retrieve_plugins("delete_arm_multiple")
+  # "https://redcap-dev-2.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_delete_multiple_arm.php"
 
   # Returns a boolean value if successful
   was_successful <- !httr::http_error(path_delete_test_record)
