@@ -17,7 +17,8 @@ populate_project_delete_multiple_arm <- function(verbose = FALSE) {
     token         = credential$token
   )
   path_in <- system.file(
-    "test-data/delete-multiple-arm/data.csv",
+    "test-data/projects/arm-multiple-delete/data.csv",
+    # "test-data/delete-multiple-arm/data.csv",
     package = "REDCapR"
   )
 
