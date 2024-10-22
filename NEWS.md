@@ -10,14 +10,13 @@ Quick links:
 * [Current & previous GitHub Issues](https://github.com/OuhscBbmc/REDCapR/issues?q=is%3Aissue)
 * [Documentation for current GitHub version](https://ouhscbbmc.github.io/REDCapR/)
 
-Version 1.3.x  (Not yet released on CRAN)
+Version 1.3.0  (released 2024-10-22)
 ==========================================================
-
-These features are not yet on CRAN.  Install with `remotes::install_github("OuhscBbmc/REDCapR")`
 
 ### Minor Enhancements
 
 * Redirection layer for test suite allows you to plug in your own server (#539, #542, #544)
+* Skip a test when checked on CRAN servers (but not on local or GitHub Action machines)
 
 Version 1.2.0  (released 2024-09-08)
 ==========================================================
