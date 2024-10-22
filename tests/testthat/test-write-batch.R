@@ -54,7 +54,7 @@ test_that("default", {
 })
 
 test_that("update-one-field", {
-  testthat::skip_on_cran
+  testthat::skip_on_cran()
   skip_if_onlyread()
 
   path_expected <- "test-data/specific-redcapr/write-batch/update-one-field.R"
