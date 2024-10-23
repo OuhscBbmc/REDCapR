@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-There are many links in the pipeline between your institution's [REDCap](https://www.project-redcap.org/) server and the API user.  When the end result is unsuccessful, this document should help narrow the location of the possible problem.  The first two sections will be relevant to almost any language interacting with the API.  The remaining sections are possibly relevant only to your language (*e.g.*, Python, R, PHP, SAS, bash), or your software library such as [redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://ouhscbbmc.github.io/REDCapR/) in R, [phpcap](https://github.com/iuredcap/phpcap) in PHP, and [PyCap](https://pycap.readthedocs.io/en/latest/) in Python).
+There are many links in the pipeline between your institution's [REDCap](https://projectredcap.org/) server and the API user.  When the end result is unsuccessful, this document should help narrow the location of the possible problem.  The first two sections will be relevant to almost any language interacting with the API.  The remaining sections are possibly relevant only to your language (*e.g.*, Python, R, PHP, SAS, bash), or your software library such as [redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://ouhscbbmc.github.io/REDCapR/) in R, [phpcap](https://github.com/iuredcap/phpcap) in PHP, and [PyCap](https://pypi.org/project/pycap/) in Python).
 
 Language Agnostic
 ==================================================================
@@ -124,7 +124,7 @@ knitr::include_graphics("images/PostmanScreenshot.png")
     curl -X POST -H "Cache-Control: no-cache" -F "token=9A068C425B1341D69E83064A2D273A70" -F "content=record" -F "format=csv" "https://redcap-dev-2.ouhsc.edu/redcap/api/"
     ```
 
-If all these checks pass, proceed to the next section.  If not, start by consulting with your REDCap administrator.  If that fails, consider creating a GitHub issue for your package (*e.g.*, [redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://ouhscbbmc.github.io/REDCapR/) in R, [phpcap](https://github.com/iuredcap/phpcap) in PHP, and [PyCap](https://pycap.readthedocs.io/en/latest/) in Python).
+If all these checks pass, proceed to the next section.  If not, start by consulting with your REDCap administrator.  If that fails, consider creating a GitHub issue for your package (*e.g.*, [redcapAPI](https://github.com/nutterb/redcapAPI) and [REDCapR](https://ouhscbbmc.github.io/REDCapR/) in R, [phpcap](https://github.com/iuredcap/phpcap) in PHP, and [PyCap](https://pypi.org/project/pycap/) in Python).
 
 Writing
 ------------------------------------------------------------------

@@ -9,7 +9,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-This vignette covers the the basic functions exposed by the [httr](https://github.com/r-lib/httr) and [curl](https://cran.r-project.org/package=curl) packages which allow you to interact with [REDCap](https://www.project-redcap.org/) through its API.
+This vignette covers the the basic functions exposed by the [httr](https://github.com/r-lib/httr) and [curl](https://cran.r-project.org/package=curl) packages which allow you to interact with [REDCap](https://projectredcap.org/) through its API.
 
 Reading REDCap Data
 ==================================================================

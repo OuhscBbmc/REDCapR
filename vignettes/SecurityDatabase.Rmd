@@ -19,7 +19,7 @@ This database contains the tokens and other sensitive content (such as passwords
 Create a DSN on each client
 ========================================
 
-After executing the SQL code in an existing database, create an ODBC [DSN](https://en.wikipedia.org/wiki/Data_source_name) on *each* client machine that calls the database.  Download the most recent drivers (as of Aug 2018, the [most recent version is 17](https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server) for Windows and Linux), then run the wizard.  Many values in the wizard will remain at the default values.  Here are the important ones to change.
+After executing the SQL code in an existing database, create an ODBC [DSN](https://en.wikipedia.org/wiki/Data_source_name) on *each* client machine that calls the database.  Download the most recent drivers (as of Aug 2018, the [most recent version is 17](https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server) for Windows and Linux), then run the wizard.  Many values in the wizard will remain at the default values.  Here are the important ones to change.
 
 1. Set the DSN's `name` field to whatever is used in the repository's R code.
 2. Set the authenticity method to `Integrated Windows authentication`.
