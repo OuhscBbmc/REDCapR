@@ -1,3 +1,5 @@
+# REDCapR (development version)
+
 Release History
 ==========================================================
 
@@ -7,6 +9,11 @@ Quick links:
 * [CRAN Archive of older versions](https://cran.r-project.org/src/contrib/Archive/REDCapR/)
 * [Current & previous GitHub Issues](https://github.com/OuhscBbmc/REDCapR/issues?q=is%3Aissue)
 * [Documentation for current GitHub version](https://ouhscbbmc.github.io/REDCapR/)
+
+Version 1.4.x  (Not yet released on CRAN)
+==========================================================
+
+These features are not yet on CRAN.  Install with `remotes::install_github("OuhscBbmc/REDCapR")`
 
 Version 1.3.0  (released 2024-10-22)
 ==========================================================
