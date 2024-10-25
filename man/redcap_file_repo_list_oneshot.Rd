@@ -2,8 +2,7 @@
 % Please edit documentation in R/redcap-file-repo-list.R
 \name{redcap_file_repo_list_oneshot}
 \alias{redcap_file_repo_list_oneshot}
-\title{Export a List of Files/Folders from the File Repository
-#'}
+\title{Export a List of Files/Folders from the File Repository}
 \usage{
 redcap_file_repo_list_oneshot(
   redcap_uri,
@@ -24,7 +23,7 @@ Required.}
 \item{token}{The user-specific string that serves as the password for a
 project.  Required.}
 
-\item{folder_id}{the \code{folder_id} of a specific folder in the
+\item{folder_id}{the integer of a specific folder in the
 File Repository for which you wish to export a list of its
 files and sub-folders.
 If \code{NA} (the default),

@@ -15,6 +15,10 @@ Version 1.4.x  (Not yet released on CRAN)
 
 These features are not yet on CRAN.  Install with `remotes::install_github("OuhscBbmc/REDCapR")`
 
+### New Features
+
+* `redcap_file_repo_list_oneshot()` export a list of files/folders from the file repository (requested by @agdamsbo, #549)
+
 Version 1.3.0  (released 2024-10-22)
 ==========================================================
 
