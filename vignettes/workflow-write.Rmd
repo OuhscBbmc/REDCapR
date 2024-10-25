@@ -7,8 +7,8 @@ vignette: >
   %\VignetteIndexEntry{Writing to a REDCap Project}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
-editor_options: 
-  markdown: 
+editor_options:
+  markdown:
     wrap: 72
 ---
 
@@ -241,6 +241,7 @@ ds_patient <-
 
 ```{r codebook-race}
 #| echo = FALSE,
+#| fig.alt = 'codebook race variable screen shot',
 #| out.extra = 'style = "fig.width=1200px"'
 knitr::include_graphics("images/codebook-race.png")
 ```
@@ -364,16 +365,16 @@ format (*i.e.*, everything jammed into one rectangle.)
 
 ## REDCap's CDIS
 
-The [Clinical Data Interoperability Services](https://projectredcap.org/software/cdis/) (CDIS) 
+The [Clinical Data Interoperability Services](https://projectredcap.org/software/cdis/) (CDIS)
 use [FHIR](https://www.hl7.org/fhir/overview.html) to move data from
 your institution's [EMR/EHR](https://www.healthit.gov/faq/what-are-differences-between-electronic-medical-records-electronic-health-records-and-personal)
-(eg, Epic, Cerner) to REDCap. 
+(eg, Epic, Cerner) to REDCap.
 Research staff have control over which patient records are selected or eligible.
-Conceptually it's similar to writing to REDCap's with the API, 
+Conceptually it's similar to writing to REDCap's with the API,
 but at much bigger scale.
 Realistically, it takes months to get through your institution's human layers.
-Once established, a project would be populated with EMR data 
-in much less development time  
+Once established, a project would be populated with EMR data
+in much less development time
 --assuming the desired data models corresponds with
 FHIR [endpoints](https://hl7.org/fhir/endpoint.html).
 
