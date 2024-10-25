@@ -6,11 +6,12 @@ retrieve_credential_testing <- function(
   checkmate::assert_character(username        , any.missing = TRUE , min.chars = 2, max.chars = 50)
 
   server_instance <-
-    # if(Sys.getenv("redcapr_test_server") != "") {
+    if(Sys.getenv("redcapr_test_server") != "") {
       Sys.getenv("redcapr_test_server")
-    # } else {
-    #   "dev-2"
-    # }
+    } else {
+      message("The test server was not explicitly set, so defaulting to 'dev-2'.")
+      "dev-2"
+    }
   checkmate::assert_character(server_instance , any.missing = FALSE, min.chars = 2, max.chars = 50)
 
   # This line avoids a warning from the package check.
