@@ -1,13 +1,13 @@
 #' @title
 #' Export a List of Files/Folders from the File Repository
-#'#'
+#'
 #' @description
 #' Allows you to export a list of all files and sub-folders from a specific
 #' folder in a project's File Repository.
 #' Each sub-folder will have an associated folder_id number,
 #' and each file will have an associated doc_id number.
 #'
-#' @param folder_id the `folder_id` of a specific folder in the
+#' @param folder_id the integer of a specific folder in the
 #' File Repository for which you wish to export a list of its
 #' files and sub-folders.
 #' If `NA` (the default),

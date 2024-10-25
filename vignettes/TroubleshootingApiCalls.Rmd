@@ -44,6 +44,7 @@ This first group of checks primarily focuses on the server and the logins accoun
 
     ```{r EmailVerified}
     #| echo = FALSE,
+    #| fig.alt = 'verified email screen shot',
     #| out.extra = 'style = "fig.width=400px"'
     knitr::include_graphics("images/EmailVerified.png")
     ```
@@ -54,6 +55,7 @@ This first group of checks primarily focuses on the server and the logins accoun
 
     ```{r ApiPrivilegeDashboard}
     #| echo = FALSE,
+    #| fig.alt = 'tokens screen shot',
     #| out.extra = 'style = "fig.width=600px"'
     knitr::include_graphics("images/ApiPrivilegeDashboard.png")
     ```
@@ -64,6 +66,7 @@ This first group of checks primarily focuses on the server and the logins accoun
 
     ```{r MagnifyingGlass}
     #| echo = FALSE,
+    #| fig.alt = 'magnifying screen shot',
     #| out.extra = 'style = "fig.width=550px"'
     knitr::include_graphics("images/MagnifyingGlass.png")
     ```
@@ -79,6 +82,7 @@ This section examines potential problems that occur after data leaves a working 
 
 ```{r PostmanScreenshot}
 #| echo = FALSE,
+#| fig.alt = 'PostMan screen shot',
 #| out.extra = 'style = "fig.width=800px"'
 knitr::include_graphics("images/PostmanScreenshot.png")
 ```

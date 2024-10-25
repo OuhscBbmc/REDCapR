@@ -46,8 +46,14 @@ reference:
       - redcap_write_oneshot
       - redcap_delete
       - redcap_report
+
+  - title: "File API Operations"
+    desc: >
+      Manipulating files in the REDCap records and in the file repository.
+    contents:
       - redcap_file_download_oneshot
       - redcap_file_upload_oneshot
+      - redcap_file_repo_list_oneshot
 
   - title: "Additional API Methods"
     desc: >
