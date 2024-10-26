@@ -56,7 +56,7 @@
 #' Please rename to [redcap_file_download_oneshot()].
 #'
 #' @author
-#' Will Beasley, John J. Aponte
+#' Will Beasley
 #'
 #' @references
 #' The official documentation can be found on the 'API Help Page'
