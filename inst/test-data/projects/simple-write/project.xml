@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="REDCapR Target Simple -Write Data" AsOfDateTime="2024-10-11T10:11:36" CreationDateTime="2024-10-11T10:11:36" SourceSystem="REDCap" SourceSystemVersion="14.6.11">
-<Study OID="Project.REDCapRTargetSimpleWriteData">
+<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="REDCapR: simple-write" AsOfDateTime="2024-11-03T17:01:40" CreationDateTime="2024-11-03T17:01:40" SourceSystem="REDCap" SourceSystemVersion="14.7.3">
+<Study OID="Project.REDCapRSimplewrite">
 <GlobalVariables>
-	<StudyName>REDCapR Target Simple -Write Data</StudyName>
-	<StudyDescription>This file contains the metadata, events, and data for REDCap project "REDCapR Target Simple -Write Data".</StudyDescription>
-	<ProtocolName>REDCapR Target Simple -Write Data</ProtocolName>
+	<StudyName>REDCapR: simple-write</StudyName>
+	<StudyDescription>This file contains the metadata, events, and data for REDCap project "REDCapR: simple-write".</StudyDescription>
+	<ProtocolName>REDCapR: simple-write</ProtocolName>
 	<redcap:RecordAutonumberingEnabled>1</redcap:RecordAutonumberingEnabled>
 	<redcap:CustomRecordLabel></redcap:CustomRecordLabel>
 	<redcap:SecondaryUniqueField></redcap:SecondaryUniqueField>
@@ -13,15 +13,17 @@
 	<redcap:SchedulingEnabled>0</redcap:SchedulingEnabled>
 	<redcap:SurveysEnabled>0</redcap:SurveysEnabled>
 	<redcap:SurveyInvitationEmailField></redcap:SurveyInvitationEmailField>
+	<redcap:RandomizationEnabled>0</redcap:RandomizationEnabled>
 	<redcap:DisplayTodayNowButton>1</redcap:DisplayTodayNowButton>
 	<redcap:PreventBranchingEraseValues>0</redcap:PreventBranchingEraseValues>
 	<redcap:RequireChangeReason>0</redcap:RequireChangeReason>
 	<redcap:DataHistoryPopup>1</redcap:DataHistoryPopup>
 	<redcap:OrderRecordsByField></redcap:OrderRecordsByField>
+	<redcap:taskCompleteStatus>0</redcap:taskCompleteStatus>
 	<redcap:MyCapEnabled>0</redcap:MyCapEnabled>
-	<redcap:Purpose>0</redcap:Purpose>
+	<redcap:Purpose>4</redcap:Purpose>
 	<redcap:PurposeOther></redcap:PurposeOther>
-	<redcap:ProjectNotes>see https://github.com/OuhscBbmc/REDCapR</redcap:ProjectNotes>
+	<redcap:ProjectNotes></redcap:ProjectNotes>
 	<redcap:MissingDataCodes></redcap:MissingDataCodes>
 	<redcap:ProtectedEmailMode>0</redcap:ProtectedEmailMode>
 	<redcap:ProtectedEmailModeCustomText></redcap:ProtectedEmailModeCustomText>
@@ -35,7 +37,7 @@
 		<redcap:UserRoles role_name="api" unique_role_name="U-12489HFEE4" lock_record="0" lock_record_multiform="0" lock_record_customize="0" data_export_tool="" data_export_instruments="[demographics,1][health,1][race_and_ethnicity,1]" data_import_tool="0" data_comparison_tool="0" data_logging="0" email_logging="0" file_repository="1" double_data="0" user_rights="0" data_access_groups="0" graphical="1" reports="1" design="0" alerts="0" calendar="1" data_entry="[demographics,1][health,1][race_and_ethnicity,1]" api_export="1" api_import="1" api_modules="0" mobile_app="0" mobile_app_download_data="0" record_create="1" record_rename="0" record_delete="0" dts="0" participants="1" data_quality_design="0" data_quality_execute="0" data_quality_resolution="1" random_setup="0" random_dashboard="0" random_perform="0" realtime_webservice_mapping="0" realtime_webservice_adjudicate="0" external_module_config="" mycap_participants="1"/>
 	</redcap:UserRolesGroup>
 </GlobalVariables>
-<MetaDataVersion OID="Metadata.REDCapRTargetSimpleWriteData_2024-10-11_1011" Name="REDCapR Target Simple -Write Data" redcap:RecordIdField="record_id">
+<MetaDataVersion OID="Metadata.REDCapRSimplewrite_2024-11-03_1701" Name="REDCapR: simple-write" redcap:RecordIdField="record_id">
 	<FormDef OID="Form.demographics" Name="demographics" Repeating="No" redcap:FormName="demographics">
 		<ItemGroupRef ItemGroupOID="demographics.record_id" Mandatory="No"/>
 		<ItemGroupRef ItemGroupOID="demographics.name_first" Mandatory="No"/>
@@ -213,27 +215,27 @@
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Unverified</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="2"><Decode><TranslatedText>Complete</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="race___1.choices" Name="race___1" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported">
+	<CodeList OID="race___1.choices" Name="race___1" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native|2, Asian|3, Native Hawaiian or Other Pacific Islander|4, Black or African American|5, White|6, Unknown / Not Reported">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="race___2.choices" Name="race___2" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported">
+	<CodeList OID="race___2.choices" Name="race___2" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native|2, Asian|3, Native Hawaiian or Other Pacific Islander|4, Black or African American|5, White|6, Unknown / Not Reported">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="race___3.choices" Name="race___3" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported">
+	<CodeList OID="race___3.choices" Name="race___3" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native|2, Asian|3, Native Hawaiian or Other Pacific Islander|4, Black or African American|5, White|6, Unknown / Not Reported">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="race___4.choices" Name="race___4" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported">
+	<CodeList OID="race___4.choices" Name="race___4" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native|2, Asian|3, Native Hawaiian or Other Pacific Islander|4, Black or African American|5, White|6, Unknown / Not Reported">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="race___5.choices" Name="race___5" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported">
+	<CodeList OID="race___5.choices" Name="race___5" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native|2, Asian|3, Native Hawaiian or Other Pacific Islander|4, Black or African American|5, White|6, Unknown / Not Reported">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="race___6.choices" Name="race___6" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported">
+	<CodeList OID="race___6.choices" Name="race___6" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native|2, Asian|3, Native Hawaiian or Other Pacific Islander|4, Black or African American|5, White|6, Unknown / Not Reported">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
@@ -249,7 +251,7 @@
 	</CodeList>
 </MetaDataVersion>
 </Study>
-<ClinicalData StudyOID="Project.REDCapRTargetSimpleWriteData" MetaDataVersionOID="Metadata.REDCapRTargetSimpleWriteData_2024-10-11_1011">
+<ClinicalData StudyOID="Project.REDCapRSimplewrite" MetaDataVersionOID="Metadata.REDCapRSimplewrite_2024-11-03_1701">
 	<SubjectData SubjectKey="1" redcap:RecordIdField="record_id">
 			<FormData FormOID="Form.demographics" FormRepeatKey="1">
 				<ItemGroupData ItemGroupOID="demographics.record_id" ItemGroupRepeatKey="1">
@@ -260,8 +262,6 @@
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="demographics.name_last" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="name_last" Value="Nutmouse"/>
-					<ItemData ItemOID="address" Value="1001"/>
-					<ItemData ItemOID="telephone" Value="(405) 321-1111"/>
 					<ItemData ItemOID="email" Value="nutty@mouse.com"/>
 					<ItemData ItemOID="dob" Value="2003-08-30"/>
 					<ItemData ItemOID="age" Value="21"/>
@@ -312,8 +312,6 @@
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="demographics.name_last" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="name_last" Value="Nutmouse"/>
-					<ItemData ItemOID="address" Value="1002"/>
-					<ItemData ItemOID="telephone" Value="(405) 321-2222"/>
 					<ItemData ItemOID="email" Value="tummy@mouse.comm"/>
 					<ItemData ItemOID="dob" Value="2003-03-10"/>
 					<ItemData ItemOID="age" Value="21"/>
@@ -364,8 +362,6 @@
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="demographics.name_last" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="name_last" Value="Wood"/>
-					<ItemData ItemOID="address" Value="1003"/>
-					<ItemData ItemOID="telephone" Value="(405) 321-3333"/>
 					<ItemData ItemOID="email" Value="mw@mwood.net"/>
 					<ItemData ItemOID="dob" Value="1934-04-09"/>
 					<ItemData ItemOID="age" Value="90"/>
@@ -416,11 +412,9 @@
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="demographics.name_last" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="name_last" Value="DAG"/>
-					<ItemData ItemOID="address" Value="1004"/>
-					<ItemData ItemOID="telephone" Value="(405) 321-4444"/>
 					<ItemData ItemOID="email" Value="peroxide@blonde.com"/>
 					<ItemData ItemOID="dob" Value="1952-11-02"/>
-					<ItemData ItemOID="age" Value="71"/>
+					<ItemData ItemOID="age" Value="72"/>
 					<ItemData ItemOID="sex" Value="0"/>
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="demographics.demographics_complete" ItemGroupRepeatKey="1">
@@ -471,8 +465,6 @@ Send her a letter in the mail"/>
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="demographics.name_last" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="name_last" Value="Walker"/>
-					<ItemData ItemOID="address" Value="1005"/>
-					<ItemData ItemOID="telephone" Value="(405) 321-5555"/>
 					<ItemData ItemOID="email" Value="left@hippocket.com"/>
 					<ItemData ItemOID="dob" Value="1955-04-15"/>
 					<ItemData ItemOID="age" Value="69"/>

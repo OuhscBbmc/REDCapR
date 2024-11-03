@@ -73,7 +73,7 @@
   projects:
     - simple: 2298
     - longitudinal: 2299
-    - simple-write: 0
+    - simple-write: 2300
     - russian: 0
     - empty-rows: 0
     - single-column: 0
