@@ -102,7 +102,11 @@ should be <code>NULL</code> for most institutions.  Optional.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>Currently, a list is returned with the following elements,</p><ul><li><p><code>success</code>: A boolean value indicating if the operation was apparently
+    <p>Currently, a list is returned with the following elements,</p><ul><li><p><code>data</code>: A <a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble</a> with the following columns:
+<code>folder_id</code>, <code>doc_id</code>, and (file) <code>name</code>.
+Each sub-folder will have an associated <code>folder_id</code> integer,
+and each file will have an associated <code>doc_id</code> integer.</p></li>
+<li><p><code>success</code>: A boolean value indicating if the operation was apparently
 successful.</p></li>
 <li><p><code>status_code</code>: The
 <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" class="external-link">http status code</a>
@@ -110,21 +114,18 @@ of the operation.</p></li>
 <li><p><code>outcome_message</code>: A human readable string indicating the operation's
 outcome.</p></li>
 <li><p><code>records_affected_count</code>: The number of records inserted or updated.</p></li>
-<li><p><code>affected_ids</code>: The subject IDs of the inserted or updated records.</p></li>
 <li><p><code>elapsed_seconds</code>: The duration of the function.</p></li>
 <li><p><code>raw_text</code>: If an operation is NOT successful, the text returned by
 REDCap.  If an operation is successful, the <code>raw_text</code> is returned as an
 empty string to save RAM.</p></li>
-<li><p><code>file_name</code>: The name of the file persisted to disk. This is useful if
-the name stored in REDCap is used (which is the default).</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>For files in a repeating instrument, don't specify <code>repeating_instrument</code>.
-The server only needs <code>field</code> (name) and <code>repeating_instance</code>.</p>
-<p>The function <code><a href="redcap_file_download_oneshot.html">redcap_download_file_oneshot()</a></code> is soft-deprecated
-as of REDCapR 1.2.0.
-Please rename to <code><a href="redcap_file_download_oneshot.html">redcap_file_download_oneshot()</a></code>.</p>
+    <p>This functions requires API Export privileges and File Repository privileges
+in the project.
+(Note: Until
+<a href="https://redcap.vumc.org/community/post.php?id=243161" class="external-link">v14.7.3 Standard</a>,
+API <em>import</em> privileges too.)</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
@@ -137,7 +138,7 @@ administrator to send you the static material.</p>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
-    <p>Will Beasley, John J. Aponte</p>
+    <p>Will Beasley</p>
     </div>
 
     <div class="section level2">
