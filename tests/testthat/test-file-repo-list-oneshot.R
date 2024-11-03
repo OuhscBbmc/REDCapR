@@ -63,6 +63,11 @@ test_that("default", {
 })
 test_that("first-subdirectory", {
   testthat::skip_on_cran()
+
+  if (credential$redcap_uri != "https://redcap-dev-2.ouhsc.edu/redcap/api/") {
+    testthat::skip("The `folder_id` will be different on different servers.")
+  }
+
   expected_message <- "The file repository structure describing 1 elements was read from REDCap in [0-9.]+ seconds\\.  The http status code was 200\\."
 
   path_expected <- "test-data/specific-redcapr/file-repo-list-oneshot/first-subdirectory.R"
@@ -83,9 +88,7 @@ test_that("first-subdirectory", {
   expected_data_frame <- retrieve_expected(path_expected)
 
   #Test the values of the returned object.
-  if (credential$redcap_uri == "https://redcap-dev-2.ouhsc.edu/redcap/api/") {
-    expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
-  }
+  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
 
   expect_equal(nrow(returned_object$data), expected=1L)
   expect_equal(returned_object$data$name, expected_data_frame$name)
