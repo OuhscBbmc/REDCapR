@@ -106,6 +106,40 @@ test_that("first-subdirectory", {
   expect_true(returned_object$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
 })
+test_that("bad-folder-id", {
+  testthat::skip_on_cran()
+  expected_message <- "ERROR: The File Repository folder folder_id=99 does not exist or else you do not have permission to that folder because it is DAG-restricted or Role-restricted."
+
+  path_expected <- "test-data/specific-redcapr/file-repo-list-oneshot/bad-folder-id.R"
+
+  suppressMessages({
+    expect_message(
+      returned_object <-
+        redcap_file_repo_list_oneshot(
+          redcap_uri  = credential$redcap_uri,
+          token       = credential$token,
+          folder_id   = 99
+        ),
+      expected_message
+    )
+  })
+
+  if (update_expectation) save_expected(returned_object$data, path_expected)
+  expected_data_frame <- retrieve_expected(path_expected)
+
+  #Test the values of the returned object.
+  if (credential$redcap_uri == "https://redcap-dev-2.ouhsc.edu/redcap/api/") {
+    expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  }
+
+  expect_equal(nrow(returned_object$data), expected=0L)
+
+  expect_false(returned_object$success)
+  expect_equal(returned_object$status_code, expected=400L)
+  expect_match(returned_object$outcome_message, regexp=expected_message, perl=TRUE)
+  expect_true(returned_object$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
+  expect_equal(returned_object$raw_text, expected=expected_message, ignore_attr = TRUE) # dput(returned_object$raw_text)
+})
 test_that("download w/ bad token -Error", {
   testthat::skip_on_cran()
 
