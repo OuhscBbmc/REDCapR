@@ -43,6 +43,10 @@ should be \code{NULL} for most institutions.  Optional.}
 \value{
 Currently, a list is returned with the following elements,
 \itemize{
+\item \code{data}: A \link[tibble:tibble]{tibble::tibble} with the following columns:
+\code{folder_id}, \code{doc_id}, and (file) \code{name}.
+Each sub-folder will have an associated \code{folder_id} integer,
+and each file will have an associated \code{doc_id} integer.
 \item \code{success}: A boolean value indicating if the operation was apparently
 successful.
 \item \code{status_code}: The
@@ -51,13 +55,10 @@ of the operation.
 \item \code{outcome_message}: A human readable string indicating the operation's
 outcome.
 \item \code{records_affected_count}: The number of records inserted or updated.
-\item \code{affected_ids}: The subject IDs of the inserted or updated records.
 \item \code{elapsed_seconds}: The duration of the function.
 \item \code{raw_text}: If an operation is NOT successful, the text returned by
 REDCap.  If an operation is successful, the \code{raw_text} is returned as an
 empty string to save RAM.
-\item \code{file_name}: The name of the file persisted to disk. This is useful if
-the name stored in REDCap is used (which is the default).
 }
 }
 \description{
@@ -65,14 +66,6 @@ Allows you to export a list of all files and sub-folders from a specific
 folder in a project's File Repository.
 Each sub-folder will have an associated folder_id number,
 and each file will have an associated doc_id number.
-}
-\details{
-For files in a repeating instrument, don't specify \code{repeating_instrument}.
-The server only needs \code{field} (name) and \code{repeating_instance}.
-
-The function \code{redcap_download_file_oneshot()} is soft-deprecated
-as of REDCapR 1.2.0.
-Please rename to \code{\link[=redcap_file_download_oneshot]{redcap_file_download_oneshot()}}.
 }
 \examples{
 \dontrun{
