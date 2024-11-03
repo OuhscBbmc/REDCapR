@@ -48,6 +48,13 @@
 #' REDCap.  If an operation is successful, the `raw_text` is returned as an
 #' empty string to save RAM.
 #'
+#' @details
+#' This functions requires API Export privileges and File Repository privileges
+#' in the project.
+#' (Note: Until
+#' [v14.7.3 Standard](https://redcap.vumc.org/community/post.php?id=243161),
+#' API *import* privileges too.)
+#'
 #'
 #' @author
 #' Will Beasley

@@ -67,6 +67,13 @@ folder in a project's File Repository.
 Each sub-folder will have an associated folder_id number,
 and each file will have an associated doc_id number.
 }
+\details{
+This functions requires API Export privileges and File Repository privileges
+in the project.
+(Note: Until
+\href{https://redcap.vumc.org/community/post.php?id=243161}{v14.7.3 Standard},
+API \emph{import} privileges too.)
+}
 \examples{
 \dontrun{
 uri     <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
