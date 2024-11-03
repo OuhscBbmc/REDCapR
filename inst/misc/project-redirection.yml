@@ -72,7 +72,7 @@
   credential_file: "misc/coph.credentials"
   projects:
     - simple: 2298
-    - longitudinal: 0
+    - longitudinal: 2299
     - simple-write: 0
     - russian: 0
     - empty-rows: 0
