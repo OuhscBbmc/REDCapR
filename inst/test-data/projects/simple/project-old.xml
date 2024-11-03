@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="REDCapR: simple" AsOfDateTime="2024-11-03T15:56:00" CreationDateTime="2024-11-03T15:56:00" SourceSystem="REDCap" SourceSystemVersion="14.7.3">
+<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="REDCapR: simple" AsOfDateTime="2024-11-03T15:47:45" CreationDateTime="2024-11-03T15:47:45" SourceSystem="REDCap" SourceSystemVersion="14.7.3">
 <Study OID="Project.REDCapRSimple">
 <GlobalVariables>
 	<StudyName>REDCapR: simple</StudyName>
@@ -19,7 +19,7 @@
 	<redcap:RequireChangeReason>0</redcap:RequireChangeReason>
 	<redcap:DataHistoryPopup>1</redcap:DataHistoryPopup>
 	<redcap:OrderRecordsByField></redcap:OrderRecordsByField>
-	<redcap:taskCompleteStatus>0</redcap:taskCompleteStatus>
+	<redcap:taskCompleteStatus>2</redcap:taskCompleteStatus>
 	<redcap:MyCapEnabled>0</redcap:MyCapEnabled>
 	<redcap:Purpose>4</redcap:Purpose>
 	<redcap:PurposeOther></redcap:PurposeOther>
@@ -34,14 +34,15 @@
 		<redcap:DataAccessGroups group_name="dag_2"/>
 	</redcap:DataAccessGroupsGroup>
 	<redcap:UserRolesGroup>
+		<redcap:UserRoles role_name="admin" unique_role_name="U-882YE3W3NT" lock_record="0" lock_record_multiform="0" lock_record_customize="0" data_export_tool="" data_export_instruments="[demographics,1][health,1][race_and_ethnicity,1]" data_import_tool="0" data_comparison_tool="0" data_logging="0" email_logging="0" file_repository="1" double_data="0" user_rights="1" data_access_groups="1" graphical="1" reports="1" design="1" alerts="0" calendar="1" data_entry="[demographics,1][health,1][race_and_ethnicity,1]" api_export="0" api_import="0" api_modules="0" mobile_app="0" mobile_app_download_data="0" record_create="1" record_rename="0" record_delete="0" dts="0" participants="1" data_quality_design="0" data_quality_execute="0" data_quality_resolution="1" random_setup="0" random_dashboard="0" random_perform="0" realtime_webservice_mapping="0" realtime_webservice_adjudicate="0" external_module_config="" mycap_participants="1"/>
 		<redcap:UserRoles role_name="api" unique_role_name="U-639NX7EKW8" lock_record="0" lock_record_multiform="0" lock_record_customize="0" data_export_tool="" data_export_instruments="[demographics,1][health,1][race_and_ethnicity,1]" data_import_tool="0" data_comparison_tool="0" data_logging="1" email_logging="0" file_repository="0" double_data="0" user_rights="1" data_access_groups="1" graphical="0" reports="0" design="0" alerts="0" calendar="0" data_entry="[demographics,1][health,1][race_and_ethnicity,1]" api_export="1" api_import="0" api_modules="0" mobile_app="0" mobile_app_download_data="0" record_create="0" record_rename="0" record_delete="0" dts="0" participants="1" data_quality_design="0" data_quality_execute="0" data_quality_resolution="1" random_setup="0" random_dashboard="0" random_perform="0" realtime_webservice_mapping="0" realtime_webservice_adjudicate="0" external_module_config="" mycap_participants="1"/>
 	</redcap:UserRolesGroup>
 	<redcap:ReportsGroup>
-		<redcap:Reports title="test-report-1" unique_report_name="R-3788YK8R7X" report_order="1" user_access="ALL" user_edit_access="ALL" description="" combine_checkbox_values="0" output_dags="0" output_survey_fields="0" output_missing_data_codes="0" remove_line_breaks_in_values="1" orderby_field1="record_id" orderby_sort1="ASC" orderby_field2="" orderby_sort2="" orderby_field3="" orderby_sort3="" advanced_logic="" filter_type="EVENT" dynamic_filter1="" dynamic_filter2="" dynamic_filter3="" hash="N3RY9YXHEPK9HAD7" short_url="" is_public="0" report_display_include_repeating_fields="1" report_display_header="BOTH" report_display_data="BOTH" limiter_logic="" redcap_reports_fields="record_id,height,health_complete,address,ethnicity" redcap_reports_filter_dags="" redcap_reports_filter_events="" ID="7b52009b64fd0a2a49e6d8a939753077792b0554"/>
-		<redcap:Reports title="test-report-2" unique_report_name="R-2338YHPD7Y" report_order="2" user_access="ALL" user_edit_access="ALL" description="" combine_checkbox_values="1" output_dags="0" output_survey_fields="0" output_missing_data_codes="0" remove_line_breaks_in_values="1" orderby_field1="record_id" orderby_sort1="ASC" orderby_field2="" orderby_sort2="" orderby_field3="" orderby_sort3="" advanced_logic="" filter_type="EVENT" dynamic_filter1="" dynamic_filter2="" dynamic_filter3="" hash="4XLM9RTT3M79K3RH" short_url="" is_public="0" report_display_include_repeating_fields="1" report_display_header="BOTH" report_display_data="BOTH" limiter_logic="" redcap_reports_fields="record_id,race" redcap_reports_filter_dags="" redcap_reports_filter_events="" ID="bd307a3ec329e10a2cff8fb87480823da114f8f4"/>
+		<redcap:Reports title="test-report-1" unique_report_name="R-3788YK8R7X" report_order="1" user_access="ALL" user_edit_access="ALL" description="" combine_checkbox_values="0" output_dags="0" output_survey_fields="0" output_missing_data_codes="0" remove_line_breaks_in_values="1" orderby_field1="record_id" orderby_sort1="ASC" orderby_field2="" orderby_sort2="" orderby_field3="" orderby_sort3="" advanced_logic="" filter_type="EVENT" dynamic_filter1="" dynamic_filter2="" dynamic_filter3="" hash="" short_url="" is_public="0" report_display_include_repeating_fields="1" report_display_header="BOTH" report_display_data="BOTH" limiter_logic="" redcap_reports_fields="record_id,height,health_complete,address,ethnicity" redcap_reports_filter_dags="" redcap_reports_filter_events="" ID="a63a44ca7af921f4d5ca139fc2ade9dbb3c2efbf"/>
+		<redcap:Reports title="test-report-2" unique_report_name="R-2338YHPD7Y" report_order="2" user_access="ALL" user_edit_access="ALL" description="" combine_checkbox_values="1" output_dags="0" output_survey_fields="0" output_missing_data_codes="0" remove_line_breaks_in_values="1" orderby_field1="record_id" orderby_sort1="ASC" orderby_field2="" orderby_sort2="" orderby_field3="" orderby_sort3="" advanced_logic="" filter_type="EVENT" dynamic_filter1="" dynamic_filter2="" dynamic_filter3="" hash="" short_url="" is_public="0" report_display_include_repeating_fields="1" report_display_header="BOTH" report_display_data="BOTH" limiter_logic="" redcap_reports_fields="record_id,race" redcap_reports_filter_dags="" redcap_reports_filter_events="" ID="a09db9fde76f0e75f7ccff85d971f5d6b25532fc"/>
 	</redcap:ReportsGroup>
 </GlobalVariables>
-<MetaDataVersion OID="Metadata.REDCapRSimple_2024-11-03_1556" Name="REDCapR: simple" redcap:RecordIdField="record_id">
+<MetaDataVersion OID="Metadata.REDCapRSimple_2024-11-03_1547" Name="REDCapR: simple" redcap:RecordIdField="record_id">
 	<FormDef OID="Form.demographics" Name="demographics" Repeating="No" redcap:FormName="demographics">
 		<ItemGroupRef ItemGroupOID="demographics.record_id" Mandatory="No"/>
 		<ItemGroupRef ItemGroupOID="demographics.name_first" Mandatory="No"/>
@@ -264,7 +265,7 @@
 	</CodeList>
 </MetaDataVersion>
 </Study>
-<ClinicalData StudyOID="Project.REDCapRSimple" MetaDataVersionOID="Metadata.REDCapRSimple_2024-11-03_1556">
+<ClinicalData StudyOID="Project.REDCapRSimple" MetaDataVersionOID="Metadata.REDCapRSimple_2024-11-03_1547">
 	<SubjectData SubjectKey="1" redcap:RecordIdField="record_id">
 			<FormData FormOID="Form.demographics" FormRepeatKey="1">
 				<ItemGroupData ItemGroupOID="demographics.record_id" ItemGroupRepeatKey="1">
@@ -292,7 +293,6 @@ Kenning UK, 323232"/>
 				<ItemGroupData ItemGroupOID="health.height" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="height" Value="7"/>
 					<ItemData ItemOID="weight" Value="1"/>
-					<ItemData ItemOID="bmi" Value="204.1"/>
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="health.comments" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="comments" Value="Character in a book, with some guessing"/>
@@ -347,7 +347,6 @@ Kenning UK 34243"/>
 				<ItemGroupData ItemGroupOID="health.height" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="height" Value="6"/>
 					<ItemData ItemOID="weight" Value="1"/>
-					<ItemData ItemOID="bmi" Value="277.8"/>
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="health.comments" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="comments" Value="A mouse character from a good book"/>
@@ -402,7 +401,6 @@ Guthrie OK 73402"/>
 				<ItemGroupData ItemGroupOID="health.height" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="height" Value="180"/>
 					<ItemData ItemOID="weight" Value="80"/>
-					<ItemData ItemOID="bmi" Value="24.7"/>
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="health.comments" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="comments" Value="completely made up"/>
@@ -456,11 +454,9 @@ Duncanville TX, 75116"/>
 				<ItemGroupData ItemGroupOID="health.height" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="height" Value="165"/>
 					<ItemData ItemOID="weight" Value="54"/>
-					<ItemData ItemOID="bmi" Value="19.8"/>
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="health.comments" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="comments" Value="This record doesn&#039;t have a DAG assigned
-
 So call up Trudy on the telephone
 Send her a letter in the mail"/>
 				</ItemGroupData>
@@ -517,7 +513,6 @@ New Orleans LA, 70115"/>
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="health.comments" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="comments" Value="Had a hand for trouble and a eye for cash
-
 He had a gold watch chain and a black mustache"/>
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="health.mugshot" ItemGroupRepeatKey="1">

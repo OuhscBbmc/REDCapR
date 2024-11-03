@@ -11,3 +11,7 @@ testthat::test_check("REDCapR")
 # Sys.setenv("redcapr_test_server" = "bbmc")
 # message("Using test server '", Sys.getenv("redcapr_test_server"), "'.")
 # testthat::test_check("REDCapR")
+
+# Sys.setenv("redcapr_test_server" = "coph")
+# message("Using test server '", Sys.getenv("redcapr_test_server"), "'.")
+# testthat::test_check("REDCapR")
