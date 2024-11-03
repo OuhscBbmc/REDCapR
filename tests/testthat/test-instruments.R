@@ -5,6 +5,10 @@ delay_after_download_file <- 1.0 # In seconds
 
 test_that("download instrument", {
   testthat::skip_on_cran()
+  expected_file_name <- "instruments.pdf"
+  if (base::file.exists(expected_file_name)) {
+    base::unlink(expected_file_name) # nocov
+  }
   on.exit(base::unlink(returned_object$file_name))
 
   expected_outcome_message <- "Preparing to download the file `.+`."
@@ -29,7 +33,7 @@ test_that("download instrument", {
   expect_equal(length(returned_object$record_id), 0L)
   expect_true(returned_object$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
-  expect_equal(returned_object$file_name, "instruments.pdf", label="The name of the downloaded file should be correct.")
+  expect_equal(returned_object$file_name, expected_file_name, label="The name of the downloaded file should be correct.")
 })
 
 test_that("download instrument conflict -Error", {

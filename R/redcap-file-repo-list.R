@@ -31,6 +31,10 @@
 #'
 #' @return
 #' Currently, a list is returned with the following elements,
+#' * `data`: A [tibble::tibble] with the following columns:
+#'   `folder_id`, `doc_id`, and (file) `name`.
+#'   Each sub-folder will have an associated `folder_id` integer,
+#'   and each file will have an associated `doc_id` integer.
 #' * `success`: A boolean value indicating if the operation was apparently
 #' successful.
 #' * `status_code`: The
@@ -39,24 +43,21 @@
 #' * `outcome_message`: A human readable string indicating the operation's
 #' outcome.
 #' * `records_affected_count`: The number of records inserted or updated.
-#' * `affected_ids`: The subject IDs of the inserted or updated records.
 #' * `elapsed_seconds`: The duration of the function.
 #' * `raw_text`: If an operation is NOT successful, the text returned by
 #' REDCap.  If an operation is successful, the `raw_text` is returned as an
 #' empty string to save RAM.
-#' * `file_name`: The name of the file persisted to disk. This is useful if
-#' the name stored in REDCap is used (which is the default).
 #'
 #' @details
-#' For files in a repeating instrument, don't specify `repeating_instrument`.
-#' The server only needs `field` (name) and `repeating_instance`.
+#' This functions requires API Export privileges and File Repository privileges
+#' in the project.
+#' (Note: Until
+#' [v14.7.3 Standard](https://redcap.vumc.org/community/post.php?id=243161),
+#' API *import* privileges too.)
 #'
-#' The function `redcap_download_file_oneshot()` is soft-deprecated
-#' as of REDCapR 1.2.0.
-#' Please rename to [redcap_file_download_oneshot()].
 #'
 #' @author
-#' Will Beasley, John J. Aponte
+#' Will Beasley
 #'
 #' @references
 #' The official documentation can be found on the 'API Help Page'

@@ -32,7 +32,7 @@
     - blank-for-gray-status: 3003
     - checkboxes-1: 3074
     - vignette-repeating: 3181
-    # - file-repo: 63
+    - file-repo: 5002
 -
   instance: dev-2
   credential_file: "misc/dev-2.credentials"
