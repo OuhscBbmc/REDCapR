@@ -103,5 +103,5 @@ If you do not have an account for the wiki, please ask your campus REDCap
 administrator to send you the static material.
 }
 \author{
-Will Beasley, John J. Aponte
+Will Beasley
 }
