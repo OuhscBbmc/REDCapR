@@ -3,7 +3,6 @@ library(testthat)
 library(REDCapR)
 # source("R/helpers-testing.R")
 
-# Sys.setenv("redcapr_test_server" = "bbmc")
 Sys.setenv("redcapr_test_server" = "dev-2")
 message("Using test server '", Sys.getenv("redcapr_test_server"), "'.")
 testthat::test_check("REDCapR")

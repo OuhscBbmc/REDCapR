@@ -75,7 +75,7 @@
     - longitudinal: 2299
     - simple-write: 2300
     - russian: 2301
-    - empty-rows: 0
+    - empty-rows: 2302
     - single-column: 0
     - super-wide-1: 0
     - survey: 0
