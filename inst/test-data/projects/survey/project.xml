@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="REDCapR: survey" AsOfDateTime="2024-10-13T21:40:19" CreationDateTime="2024-10-13T21:40:19" SourceSystem="REDCap" SourceSystemVersion="14.6.11">
+<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="REDCapR: survey" AsOfDateTime="2024-11-04T09:12:39" CreationDateTime="2024-11-04T09:12:39" SourceSystem="REDCap" SourceSystemVersion="14.7.3">
 <Study OID="Project.REDCapRSurvey">
 <GlobalVariables>
 	<StudyName>REDCapR: survey</StudyName>
@@ -13,11 +13,13 @@
 	<redcap:SchedulingEnabled>0</redcap:SchedulingEnabled>
 	<redcap:SurveysEnabled>1</redcap:SurveysEnabled>
 	<redcap:SurveyInvitationEmailField>email</redcap:SurveyInvitationEmailField>
+	<redcap:RandomizationEnabled>0</redcap:RandomizationEnabled>
 	<redcap:DisplayTodayNowButton>1</redcap:DisplayTodayNowButton>
 	<redcap:PreventBranchingEraseValues>0</redcap:PreventBranchingEraseValues>
 	<redcap:RequireChangeReason>0</redcap:RequireChangeReason>
 	<redcap:DataHistoryPopup>1</redcap:DataHistoryPopup>
 	<redcap:OrderRecordsByField></redcap:OrderRecordsByField>
+	<redcap:taskCompleteStatus>0</redcap:taskCompleteStatus>
 	<redcap:MyCapEnabled>0</redcap:MyCapEnabled>
 	<redcap:Purpose>4</redcap:Purpose>
 	<redcap:PurposeOther></redcap:PurposeOther>
@@ -54,7 +56,7 @@
 		<redcap:UserRoles role_name="api" unique_role_name="U-934FFEECMF" lock_record="0" lock_record_multiform="0" lock_record_customize="0" data_export_tool="" data_export_instruments="[prescreening_survey,1][participant_info_survey,1][participant_morale_questionnaire,1][completion_data,1]" data_import_tool="0" data_comparison_tool="0" data_logging="0" email_logging="0" file_repository="0" double_data="0" user_rights="0" data_access_groups="0" graphical="0" reports="0" design="0" alerts="0" calendar="0" data_entry="[prescreening_survey,3][participant_info_survey,3][participant_morale_questionnaire,3][completion_data,1]" api_export="1" api_import="0" api_modules="0" mobile_app="0" mobile_app_download_data="0" record_create="0" record_rename="0" record_delete="0" dts="0" participants="1" data_quality_design="0" data_quality_execute="0" data_quality_resolution="1" random_setup="0" random_dashboard="0" random_perform="0" realtime_webservice_mapping="0" realtime_webservice_adjudicate="0" external_module_config="" mycap_participants="1"/>
 	</redcap:UserRolesGroup>
 </GlobalVariables>
-<MetaDataVersion OID="Metadata.REDCapRSurvey_2024-10-13_2140" Name="REDCapR: survey" redcap:RecordIdField="participant_id">
+<MetaDataVersion OID="Metadata.REDCapRSurvey_2024-11-04_0912" Name="REDCapR: survey" redcap:RecordIdField="participant_id">
 	<FormDef OID="Form.prescreening_survey" Name="Pre-Screening Survey" Repeating="No" redcap:FormName="prescreening_survey">
 		<ItemGroupRef ItemGroupOID="prescreening_survey.participant_id" Mandatory="No"/>
 		<ItemGroupRef ItemGroupOID="prescreening_survey.prescreening_survey_timestamp" Mandatory="No"/>
@@ -365,7 +367,7 @@
 	</CodeList>
 </MetaDataVersion>
 </Study>
-<ClinicalData StudyOID="Project.REDCapRSurvey" MetaDataVersionOID="Metadata.REDCapRSurvey_2024-10-13_2140">
+<ClinicalData StudyOID="Project.REDCapRSurvey" MetaDataVersionOID="Metadata.REDCapRSurvey_2024-11-04_0912">
 	<SubjectData SubjectKey="1" redcap:RecordIdField="participant_id">
 			<FormData FormOID="Form.prescreening_survey" FormRepeatKey="1">
 				<ItemGroupData ItemGroupOID="prescreening_survey.participant_id" ItemGroupRepeatKey="1">
@@ -386,10 +388,10 @@
 			</FormData>
 			<FormData FormOID="Form.participant_morale_questionnaire" FormRepeatKey="1">
 				<ItemGroupData ItemGroupOID="participant_morale_questionnaire.participant_morale_questionnaire_timestamp" ItemGroupRepeatKey="1">
-					<ItemData ItemOID="participant_morale_questionnaire_timestamp" Value="2024-10-13 21:31:03"/>
+					<ItemData ItemOID="participant_morale_questionnaire_timestamp" Value="[not completed]"/>
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="participant_morale_questionnaire.participant_morale_questionnaire_complete" ItemGroupRepeatKey="1">
-					<ItemData ItemOID="participant_morale_questionnaire_complete" Value="2"/>
+					<ItemData ItemOID="participant_morale_questionnaire_complete" Value="0"/>
 				</ItemGroupData>
 			</FormData>
 	</SubjectData>

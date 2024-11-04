@@ -78,7 +78,7 @@
     - empty-rows: 2302
     - single-column: 2303
     - super-wide-1: 2304
-    - survey: 0
+    - survey: 2305
     - clinical-trial-1: 0
     - nonnumeric-record-id: 0
     - dag: 0
