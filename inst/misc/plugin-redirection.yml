@@ -13,3 +13,11 @@
     - delete_arm_single   : "https://redcap-dev-2.ouhsc.edu/redcap/plugins/redcapr/wipe-project-redcapr-arm-delete-single.php"
     - delete_arm_multiple : "https://redcap-dev-2.ouhsc.edu/redcap/plugins/redcapr/wipe-project-redcapr-arm-delete-multiple.php"
     - delete_dag          : "https://redcap-dev-2.ouhsc.edu/redcap/plugins/redcapr/wipe-project-redcapr-dag-write.php"
+
+-
+  instance: coph
+  plugins:
+    - delete_simple       : "https://redcap.ouhsc.edu/redcap/plugins/redcapr/wipe-project-redcapr-simple.php"
+    - delete_arm_single   : "https://redcap.ouhsc.edu/redcap/plugins/redcapr/wipe-project-redcapr-arm-delete-single.php"
+    - delete_arm_multiple : "https://redcap.ouhsc.edu/redcap/plugins/redcapr/wipe-project-redcapr-arm-delete-multiple.php"
+    - delete_dag          : "https://redcap.ouhsc.edu/redcap/plugins/redcapr/wipe-project-redcapr-dag-write.php"
