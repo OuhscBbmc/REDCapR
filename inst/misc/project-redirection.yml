@@ -93,7 +93,7 @@
     - arm-single-delete: 2317
     - arm-multiple-delete: 2318
     - arm-single-longitudinal: 2319
-    - decimal-comma-and-dot: 0
+    - decimal-comma-and-dot: 2320
     - decimal-comma: 0
     - decimal-dot: 0
     - validation-types-1: 0
