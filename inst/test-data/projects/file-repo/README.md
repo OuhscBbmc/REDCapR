@@ -1,11 +1,11 @@
 file-repo Test Project
 =========
 
-Steps to Recreate:
+In addition to the typical steps to establish a project:
 
-1.  Create new project, based on project.xml
 1.  Reconstruct the file repository, manually
-    1.  Create top-level directory called "the-state"
+    1.  Create top-level directory called "the-state".
+        It should be accessible to "users in all roles"
     1.  Drop [levon-and-barry.jpg](../../levon-and-barry.jpg) into this directory
     1.  Navigate back to the root directory.
     1.  Drop the following file files into the root directory:
