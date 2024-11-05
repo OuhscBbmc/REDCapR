@@ -83,7 +83,7 @@
     - nonnumeric-record-id: 2307
     - dag: 2308
     - potentially-problematic-values: 2309
-    - repeating-instruments: 0
+    - repeating-instruments: 2310
     - potentially-problematic-dictionary: 0
     - metadata-write: 0
     - dag-write: 0
