@@ -95,7 +95,7 @@
     - arm-single-longitudinal: 2319
     - decimal-comma-and-dot: 2320
     - decimal-comma: 2321
-    - decimal-dot: 0
+    - decimal-dot: 2322
     - validation-types-1: 0
     - blank-for-gray-status: 0
     - checkboxes-1: 0
