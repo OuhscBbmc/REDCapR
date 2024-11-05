@@ -87,7 +87,7 @@
     - potentially-problematic-dictionary: 2311
     - metadata-write: 2312
     - dag-write: 2313
-    - super-wide-2: 0
+    - super-wide-2: 2314
     - super-wide-3: 0
     - repeating-instruments-sparse: 0
     - arm-single-delete: 0
