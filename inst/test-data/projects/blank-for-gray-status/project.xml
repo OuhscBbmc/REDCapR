@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="REDCapR Target Simple with Gray Form Status --see https://github.com/OuhscBbmc/REDCapR" AsOfDateTime="2024-10-12T21:19:46" CreationDateTime="2024-10-12T21:19:46" SourceSystem="REDCap" SourceSystemVersion="14.6.11">
-<Study OID="Project.REDCapRTargetSimpleWithGrayFor">
+<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="REDCapR: blank-for-gray-status" AsOfDateTime="2024-11-05T15:43:31" CreationDateTime="2024-11-05T15:43:31" SourceSystem="REDCap" SourceSystemVersion="14.7.3">
+<Study OID="Project.REDCapRBlankforgraystatus">
 <GlobalVariables>
-	<StudyName>REDCapR Target Simple with Gray Form Status --see https://github.com/OuhscBbmc/REDCapR</StudyName>
-	<StudyDescription>This file contains the metadata, events, and data for REDCap project "REDCapR Target Simple with Gray Form Status --see https://github.com/OuhscBbmc/REDCapR".</StudyDescription>
-	<ProtocolName>REDCapR Target Simple with Gray Form Status --see https://github.com/OuhscBbmc/REDCapR</ProtocolName>
+	<StudyName>REDCapR: blank-for-gray-status</StudyName>
+	<StudyDescription>This file contains the metadata, events, and data for REDCap project "REDCapR: blank-for-gray-status".</StudyDescription>
+	<ProtocolName>REDCapR: blank-for-gray-status</ProtocolName>
 	<redcap:RecordAutonumberingEnabled>1</redcap:RecordAutonumberingEnabled>
 	<redcap:CustomRecordLabel></redcap:CustomRecordLabel>
 	<redcap:SecondaryUniqueField></redcap:SecondaryUniqueField>
@@ -13,16 +13,17 @@
 	<redcap:SchedulingEnabled>0</redcap:SchedulingEnabled>
 	<redcap:SurveysEnabled>0</redcap:SurveysEnabled>
 	<redcap:SurveyInvitationEmailField></redcap:SurveyInvitationEmailField>
+	<redcap:RandomizationEnabled>0</redcap:RandomizationEnabled>
 	<redcap:DisplayTodayNowButton>1</redcap:DisplayTodayNowButton>
 	<redcap:PreventBranchingEraseValues>0</redcap:PreventBranchingEraseValues>
 	<redcap:RequireChangeReason>0</redcap:RequireChangeReason>
 	<redcap:DataHistoryPopup>1</redcap:DataHistoryPopup>
 	<redcap:OrderRecordsByField></redcap:OrderRecordsByField>
+	<redcap:taskCompleteStatus>0</redcap:taskCompleteStatus>
 	<redcap:MyCapEnabled>0</redcap:MyCapEnabled>
-	<redcap:Purpose>0</redcap:Purpose>
+	<redcap:Purpose>4</redcap:Purpose>
 	<redcap:PurposeOther></redcap:PurposeOther>
-	<redcap:ProjectNotes>Created for 
-https://github.com/OuhscBbmc/REDCapR/issues/386 &amp; https://github.com/OuhscBbmc/REDCapR/pull/389</redcap:ProjectNotes>
+	<redcap:ProjectNotes></redcap:ProjectNotes>
 	<redcap:MissingDataCodes></redcap:MissingDataCodes>
 	<redcap:ProtectedEmailMode>0</redcap:ProtectedEmailMode>
 	<redcap:ProtectedEmailModeCustomText></redcap:ProtectedEmailModeCustomText>
@@ -36,11 +37,11 @@ https://github.com/OuhscBbmc/REDCapR/issues/386 &amp; https://github.com/OuhscBb
 		<redcap:UserRoles role_name="api" unique_role_name="U-131RWLJ3NR" lock_record="0" lock_record_multiform="0" lock_record_customize="0" data_export_tool="" data_export_instruments="[demographics,1][health,1][race_and_ethnicity,1]" data_import_tool="0" data_comparison_tool="0" data_logging="0" email_logging="0" file_repository="0" double_data="0" user_rights="0" data_access_groups="0" graphical="0" reports="0" design="0" alerts="0" calendar="0" data_entry="[demographics,1][health,1][race_and_ethnicity,1]" api_export="1" api_import="0" api_modules="0" mobile_app="0" mobile_app_download_data="0" record_create="0" record_rename="0" record_delete="0" dts="0" participants="1" data_quality_design="0" data_quality_execute="0" data_quality_resolution="1" random_setup="0" random_dashboard="0" random_perform="0" realtime_webservice_mapping="0" realtime_webservice_adjudicate="0" external_module_config="" mycap_participants="1"/>
 	</redcap:UserRolesGroup>
 	<redcap:ReportsGroup>
-		<redcap:Reports title="test-report-1" unique_report_name="R-759FY444MK" report_order="1" user_access="ALL" user_edit_access="ALL" description="" combine_checkbox_values="0" output_dags="0" output_survey_fields="0" output_missing_data_codes="0" remove_line_breaks_in_values="1" orderby_field1="record_id" orderby_sort1="ASC" orderby_field2="" orderby_sort2="" orderby_field3="" orderby_sort3="" advanced_logic="" filter_type="EVENT" dynamic_filter1="" dynamic_filter2="" dynamic_filter3="" hash="3KWLN73R98MMLEM8" short_url="" is_public="0" report_display_include_repeating_fields="1" report_display_header="BOTH" report_display_data="BOTH" limiter_logic="" redcap_reports_fields="record_id,height,health_complete,address,ethnicity" redcap_reports_filter_dags="" redcap_reports_filter_events="" ID="1d51e8102f4b1358b106d359d55727fd0a9fe54f"/>
-		<redcap:Reports title="test-report-2" unique_report_name="R-989FCK9E4E" report_order="2" user_access="ALL" user_edit_access="ALL" description="" combine_checkbox_values="1" output_dags="0" output_survey_fields="0" output_missing_data_codes="0" remove_line_breaks_in_values="1" orderby_field1="record_id" orderby_sort1="ASC" orderby_field2="" orderby_sort2="" orderby_field3="" orderby_sort3="" advanced_logic="" filter_type="EVENT" dynamic_filter1="" dynamic_filter2="" dynamic_filter3="" hash="EPKHLA3TJ3HAFXDM" short_url="" is_public="0" report_display_include_repeating_fields="1" report_display_header="BOTH" report_display_data="BOTH" limiter_logic="" redcap_reports_fields="record_id,race" redcap_reports_filter_dags="" redcap_reports_filter_events="" ID="3e029c1f953208b3b662e6972508520b8e3d3515"/>
+		<redcap:Reports title="test-report-1" unique_report_name="R-759FY444MK" report_order="1" user_access="ALL" user_edit_access="ALL" description="" combine_checkbox_values="0" output_dags="0" output_survey_fields="0" output_missing_data_codes="0" remove_line_breaks_in_values="1" orderby_field1="record_id" orderby_sort1="ASC" orderby_field2="" orderby_sort2="" orderby_field3="" orderby_sort3="" advanced_logic="" filter_type="EVENT" dynamic_filter1="" dynamic_filter2="" dynamic_filter3="" hash="" short_url="" is_public="0" report_display_include_repeating_fields="1" report_display_header="BOTH" report_display_data="BOTH" limiter_logic="" redcap_reports_fields="record_id,height,health_complete,address,ethnicity" redcap_reports_filter_dags="" redcap_reports_filter_events="" ID="f1abd670358e036c31296e66b3b66c382ac00812"/>
+		<redcap:Reports title="test-report-2" unique_report_name="R-989FCK9E4E" report_order="2" user_access="ALL" user_edit_access="ALL" description="" combine_checkbox_values="1" output_dags="0" output_survey_fields="0" output_missing_data_codes="0" remove_line_breaks_in_values="1" orderby_field1="record_id" orderby_sort1="ASC" orderby_field2="" orderby_sort2="" orderby_field3="" orderby_sort3="" advanced_logic="" filter_type="EVENT" dynamic_filter1="" dynamic_filter2="" dynamic_filter3="" hash="" short_url="" is_public="0" report_display_include_repeating_fields="1" report_display_header="BOTH" report_display_data="BOTH" limiter_logic="" redcap_reports_fields="record_id,race" redcap_reports_filter_dags="" redcap_reports_filter_events="" ID="1574bddb75c78a6fd2251d61e2993b5146201319"/>
 	</redcap:ReportsGroup>
 </GlobalVariables>
-<MetaDataVersion OID="Metadata.REDCapRTargetSimpleWithGrayFor_2024-10-12_2119" Name="REDCapR Target Simple with Gray Form Status --see https://github.com/OuhscBbmc/REDCapR" redcap:RecordIdField="record_id">
+<MetaDataVersion OID="Metadata.REDCapRBlankforgraystatus_2024-11-05_1543" Name="REDCapR: blank-for-gray-status" redcap:RecordIdField="record_id">
 	<FormDef OID="Form.demographics" Name="demographics" Repeating="No" redcap:FormName="demographics">
 		<ItemGroupRef ItemGroupOID="demographics.record_id" Mandatory="No"/>
 		<ItemGroupRef ItemGroupOID="demographics.name_first" Mandatory="No"/>
@@ -223,27 +224,27 @@ https://github.com/OuhscBbmc/REDCapR/issues/386 &amp; https://github.com/OuhscBb
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Unverified</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="2"><Decode><TranslatedText>Complete</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="race___1.choices" Name="race___1" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported">
+	<CodeList OID="race___1.choices" Name="race___1" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native|2, Asian|3, Native Hawaiian or Other Pacific Islander|4, Black or African American|5, White|6, Unknown / Not Reported">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="race___2.choices" Name="race___2" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported">
+	<CodeList OID="race___2.choices" Name="race___2" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native|2, Asian|3, Native Hawaiian or Other Pacific Islander|4, Black or African American|5, White|6, Unknown / Not Reported">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="race___3.choices" Name="race___3" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported">
+	<CodeList OID="race___3.choices" Name="race___3" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native|2, Asian|3, Native Hawaiian or Other Pacific Islander|4, Black or African American|5, White|6, Unknown / Not Reported">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="race___4.choices" Name="race___4" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported">
+	<CodeList OID="race___4.choices" Name="race___4" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native|2, Asian|3, Native Hawaiian or Other Pacific Islander|4, Black or African American|5, White|6, Unknown / Not Reported">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="race___5.choices" Name="race___5" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported">
+	<CodeList OID="race___5.choices" Name="race___5" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native|2, Asian|3, Native Hawaiian or Other Pacific Islander|4, Black or African American|5, White|6, Unknown / Not Reported">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="race___6.choices" Name="race___6" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported">
+	<CodeList OID="race___6.choices" Name="race___6" DataType="boolean" redcap:Variable="race" redcap:CheckboxChoices="1, American Indian/Alaska Native|2, Asian|3, Native Hawaiian or Other Pacific Islander|4, Black or African American|5, White|6, Unknown / Not Reported">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
@@ -263,7 +264,7 @@ https://github.com/OuhscBbmc/REDCapR/issues/386 &amp; https://github.com/OuhscBb
 	</CodeList>
 </MetaDataVersion>
 </Study>
-<ClinicalData StudyOID="Project.REDCapRTargetSimpleWithGrayFor" MetaDataVersionOID="Metadata.REDCapRTargetSimpleWithGrayFor_2024-10-12_2119">
+<ClinicalData StudyOID="Project.REDCapRBlankforgraystatus" MetaDataVersionOID="Metadata.REDCapRBlankforgraystatus_2024-11-05_1543">
 	<SubjectData SubjectKey="1" redcap:RecordIdField="record_id">
 			<FormData FormOID="Form.demographics" FormRepeatKey="1">
 				<ItemGroupData ItemGroupOID="demographics.record_id" ItemGroupRepeatKey="1">
