@@ -4,6 +4,10 @@ credential          <- retrieve_credential_testing("longitudinal")
 project             <- redcap_project$new(redcap_uri=credential$redcap_uri, token=credential$token)
 update_expectation  <- FALSE
 
+if (credential$redcap_uri != "https://redcap-dev-2.ouhsc.edu/redcap/api/") {
+  testthat::skip("Skipping tests with lots of consecutive new lines on non-dev server")
+}
+
 test_that("smoke", {
   testthat::skip_on_cran()
 
