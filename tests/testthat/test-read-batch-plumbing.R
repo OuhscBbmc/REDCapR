@@ -2,6 +2,10 @@
 library(testthat)
 update_expectation  <- FALSE
 
+if (credential$redcap_uri != "https://redcap-dev-2.ouhsc.edu/redcap/api/") {
+  testthat::skip("Skipping tests with lots of consecutive new lines on non-dev server")
+}
+
 test_that("simple", {
   testthat::skip_on_cran()
 
