@@ -91,7 +91,7 @@ ds <-
     record_id = seq_len(dplyr::n())
   )
 
-# takes ~10 min to upload
+# takes ~25 min to upload
 credential <- retrieve_credential_testing("super-wide-3")
 REDCapR::redcap_write(
   ds          = ds,

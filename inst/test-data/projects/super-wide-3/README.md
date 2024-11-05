@@ -16,6 +16,7 @@ So perform these manual steps to create the project on a new server.
    1. to generate the dictionary to this test project's directory, then
    1. wait for the script to hit a `stop()` command, next
    1. upload <super-wide-3-dictionary.csv> via the browser, and finally
-   1. run the rest of the R file to upload the data via the api
+   1. run the rest of the R file to upload the data via the api.
+      (This takes ~25 min to upload.)
 1. Delete <super-wide-3-dictionary.csv>, if desired.
    This file is ignored/blocked from being committed to the repo
