@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="REDCapR Target Simple -Write Metadata" AsOfDateTime="2024-10-12T08:17:03" CreationDateTime="2024-10-12T08:17:03" SourceSystem="REDCap" SourceSystemVersion="14.6.11">
-<Study OID="Project.REDCapRTargetSimpleWriteMetada">
+<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="REDCapR: metadata-write" AsOfDateTime="2024-11-05T12:43:14" CreationDateTime="2024-11-05T12:43:14" SourceSystem="REDCap" SourceSystemVersion="14.7.3">
+<Study OID="Project.REDCapRMetadatawrite">
 <GlobalVariables>
-	<StudyName>REDCapR Target Simple -Write Metadata</StudyName>
-	<StudyDescription>This file contains the metadata, events, and data for REDCap project "REDCapR Target Simple -Write Metadata".</StudyDescription>
-	<ProtocolName>REDCapR Target Simple -Write Metadata</ProtocolName>
+	<StudyName>REDCapR: metadata-write</StudyName>
+	<StudyDescription>This file contains the metadata, events, and data for REDCap project "REDCapR: metadata-write".</StudyDescription>
+	<ProtocolName>REDCapR: metadata-write</ProtocolName>
 	<redcap:RecordAutonumberingEnabled>1</redcap:RecordAutonumberingEnabled>
 	<redcap:CustomRecordLabel></redcap:CustomRecordLabel>
 	<redcap:SecondaryUniqueField></redcap:SecondaryUniqueField>
@@ -13,15 +13,17 @@
 	<redcap:SchedulingEnabled>0</redcap:SchedulingEnabled>
 	<redcap:SurveysEnabled>0</redcap:SurveysEnabled>
 	<redcap:SurveyInvitationEmailField></redcap:SurveyInvitationEmailField>
+	<redcap:RandomizationEnabled>0</redcap:RandomizationEnabled>
 	<redcap:DisplayTodayNowButton>1</redcap:DisplayTodayNowButton>
 	<redcap:PreventBranchingEraseValues>0</redcap:PreventBranchingEraseValues>
 	<redcap:RequireChangeReason>0</redcap:RequireChangeReason>
 	<redcap:DataHistoryPopup>1</redcap:DataHistoryPopup>
 	<redcap:OrderRecordsByField></redcap:OrderRecordsByField>
+	<redcap:taskCompleteStatus>0</redcap:taskCompleteStatus>
 	<redcap:MyCapEnabled>0</redcap:MyCapEnabled>
-	<redcap:Purpose>0</redcap:Purpose>
+	<redcap:Purpose>4</redcap:Purpose>
 	<redcap:PurposeOther></redcap:PurposeOther>
-	<redcap:ProjectNotes>see https://github.com/OuhscBbmc/REDCapR</redcap:ProjectNotes>
+	<redcap:ProjectNotes></redcap:ProjectNotes>
 	<redcap:MissingDataCodes></redcap:MissingDataCodes>
 	<redcap:ProtectedEmailMode>0</redcap:ProtectedEmailMode>
 	<redcap:ProtectedEmailModeCustomText></redcap:ProtectedEmailModeCustomText>
@@ -35,7 +37,7 @@
 		<redcap:UserRoles role_name="api" unique_role_name="U-69784TDHYW" lock_record="0" lock_record_multiform="0" lock_record_customize="0" data_export_tool="" data_export_instruments="[demographics,1][health,1][race_and_ethnicity,1]" data_import_tool="0" data_comparison_tool="0" data_logging="0" email_logging="0" file_repository="0" double_data="0" user_rights="0" data_access_groups="0" graphical="0" reports="0" design="1" alerts="0" calendar="0" data_entry="[demographics,1][health,1][race_and_ethnicity,1]" api_export="1" api_import="1" api_modules="0" mobile_app="0" mobile_app_download_data="0" record_create="0" record_rename="0" record_delete="0" dts="0" participants="1" data_quality_design="0" data_quality_execute="0" data_quality_resolution="1" random_setup="0" random_dashboard="0" random_perform="0" realtime_webservice_mapping="0" realtime_webservice_adjudicate="0" external_module_config="" mycap_participants="1"/>
 	</redcap:UserRolesGroup>
 </GlobalVariables>
-<MetaDataVersion OID="Metadata.REDCapRTargetSimpleWriteMetada_2024-10-12_0817" Name="REDCapR Target Simple -Write Metadata" redcap:RecordIdField="record_id">
+<MetaDataVersion OID="Metadata.REDCapRMetadatawrite_2024-11-05_1243" Name="REDCapR: metadata-write" redcap:RecordIdField="record_id">
 	<FormDef OID="Form.demographics" Name="demographics" Repeating="No" redcap:FormName="demographics">
 		<ItemGroupRef ItemGroupOID="demographics.record_id" Mandatory="No"/>
 		<ItemGroupRef ItemGroupOID="demographics.name_first" Mandatory="No"/>
@@ -121,7 +123,7 @@
 	<ItemDef OID="dob" Name="dob" DataType="date" Length="999" redcap:Variable="dob" redcap:FieldType="text" redcap:TextValidationType="date_ymd" redcap:Identifier="y">
 		<Question><TranslatedText>Date of birth</TranslatedText></Question>
 	</ItemDef>
-	<ItemDef OID="age" Name="age" DataType="text" Length="999" redcap:Variable="age" redcap:FieldType="text">
+	<ItemDef OID="age" Name="age" DataType="float" Length="999" redcap:Variable="age" redcap:FieldType="calc" redcap:Calculation="rounddown(datediff([dob],&#039;today&#039;,&#039;y&#039;))">
 		<Question><TranslatedText>Age (years)</TranslatedText></Question>
 	</ItemDef>
 	<ItemDef OID="sex" Name="sex" DataType="text" Length="1" redcap:Variable="sex" redcap:FieldType="radio">
@@ -249,7 +251,7 @@
 	</CodeList>
 </MetaDataVersion>
 </Study>
-<ClinicalData StudyOID="Project.REDCapRTargetSimpleWriteMetada" MetaDataVersionOID="Metadata.REDCapRTargetSimpleWriteMetada_2024-10-12_0817">
+<ClinicalData StudyOID="Project.REDCapRMetadatawrite" MetaDataVersionOID="Metadata.REDCapRMetadatawrite_2024-11-05_1243">
 	<SubjectData SubjectKey="1" redcap:RecordIdField="record_id">
 			<FormData FormOID="Form.demographics" FormRepeatKey="1">
 				<ItemGroupData ItemGroupOID="demographics.record_id" ItemGroupRepeatKey="1">
@@ -435,7 +437,6 @@
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="health.comments" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="comments" Value="This record doesn&#039;t have a DAG assigned
-
 So call up Trudy on the telephone
 Send her a letter in the mail"/>
 				</ItemGroupData>
@@ -490,7 +491,6 @@ Send her a letter in the mail"/>
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="health.comments" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="comments" Value="Had a hand for trouble and a eye for cash
-
 He had a gold watch chain and a black mustache"/>
 				</ItemGroupData>
 				<ItemGroupData ItemGroupOID="health.mugshot" ItemGroupRepeatKey="1">
