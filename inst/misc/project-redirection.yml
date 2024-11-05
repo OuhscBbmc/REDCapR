@@ -82,7 +82,7 @@
     - clinical-trial-1: 2306
     - nonnumeric-record-id: 2307
     - dag: 2308
-    - potentially-problematic-values: 0
+    - potentially-problematic-values: 2309
     - repeating-instruments: 0
     - potentially-problematic-dictionary: 0
     - metadata-write: 0
