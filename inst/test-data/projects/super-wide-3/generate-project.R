@@ -70,6 +70,7 @@ ds_dictionary$variable_index <- NULL # Drop before writing to disk.
 
 readr::write_csv(ds_dictionary, "inst/test-data/projects/super-wide-3/super-wide-3-dictionary.csv")
 
+stop("Upload the dictionary through the browser, then run the rest of the R file")
 
 ds_dictionary_slim <-
   ds_dictionary |>
@@ -84,13 +85,13 @@ row_count <- 20
 #   # readr::write_csv("inst/test-data/projects/super-wide-3/super-wide-3.csv")
 ds <-
   matrix(rep(1, row_count * nrow(ds_dictionary_slim)), nrow = row_count) |>
-  tibble::as_tibble() |>
+  tibble::as_tibble(.name_repair = "minimal") |>
   magrittr::set_colnames(ds_dictionary_slim$`Variable / Field Name`) |>
   dplyr::mutate(
     record_id = seq_len(dplyr::n())
   )
 
-# takes ~10 min to upload
+# takes ~25 min to upload
 credential <- retrieve_credential_testing("super-wide-3")
 REDCapR::redcap_write(
   ds          = ds,

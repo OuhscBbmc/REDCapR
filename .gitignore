@@ -19,3 +19,5 @@ docs
 inst/doc
 /doc/
 /Meta/
+
+inst/test-data/projects/super-wide-3/super-wide-3-dictionary.csv

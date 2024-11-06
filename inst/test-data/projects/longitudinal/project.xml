@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="REDCapR Target Longitudinal Arm -see https://github.com/OuhscBbmc/REDCapR" AsOfDateTime="2024-10-10T21:42:15" CreationDateTime="2024-10-10T21:42:15" SourceSystem="REDCap" SourceSystemVersion="14.6.11">
-<Study OID="Project.REDCapRTargetLongitudinalArmSe">
+<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="REDCapR: longitudinal" AsOfDateTime="2024-11-03T16:57:30" CreationDateTime="2024-11-03T16:57:30" SourceSystem="REDCap" SourceSystemVersion="14.7.3">
+<Study OID="Project.REDCapRLongitudinal">
 <GlobalVariables>
-	<StudyName>REDCapR Target Longitudinal Arm -see https://github.com/OuhscBbmc/REDCapR</StudyName>
-	<StudyDescription>This file contains the metadata, events, and data for REDCap project "REDCapR Target Longitudinal Arm -see https://github.com/OuhscBbmc/REDCapR".</StudyDescription>
-	<ProtocolName>REDCapR Target Longitudinal Arm -see https://github.com/OuhscBbmc/REDCapR</ProtocolName>
+	<StudyName>REDCapR: longitudinal</StudyName>
+	<StudyDescription>This file contains the metadata, events, and data for REDCap project "REDCapR: longitudinal".</StudyDescription>
+	<ProtocolName>REDCapR: longitudinal</ProtocolName>
 	<redcap:RecordAutonumberingEnabled>0</redcap:RecordAutonumberingEnabled>
 	<redcap:CustomRecordLabel></redcap:CustomRecordLabel>
 	<redcap:SecondaryUniqueField></redcap:SecondaryUniqueField>
@@ -13,13 +13,15 @@
 	<redcap:SchedulingEnabled>0</redcap:SchedulingEnabled>
 	<redcap:SurveysEnabled>0</redcap:SurveysEnabled>
 	<redcap:SurveyInvitationEmailField></redcap:SurveyInvitationEmailField>
+	<redcap:RandomizationEnabled>0</redcap:RandomizationEnabled>
 	<redcap:DisplayTodayNowButton>1</redcap:DisplayTodayNowButton>
 	<redcap:PreventBranchingEraseValues>0</redcap:PreventBranchingEraseValues>
 	<redcap:RequireChangeReason>0</redcap:RequireChangeReason>
 	<redcap:DataHistoryPopup>1</redcap:DataHistoryPopup>
 	<redcap:OrderRecordsByField></redcap:OrderRecordsByField>
+	<redcap:taskCompleteStatus>0</redcap:taskCompleteStatus>
 	<redcap:MyCapEnabled>0</redcap:MyCapEnabled>
-	<redcap:Purpose>0</redcap:Purpose>
+	<redcap:Purpose>4</redcap:Purpose>
 	<redcap:PurposeOther></redcap:PurposeOther>
 	<redcap:ProjectNotes></redcap:ProjectNotes>
 	<redcap:MissingDataCodes></redcap:MissingDataCodes>
@@ -27,8 +29,11 @@
 	<redcap:ProtectedEmailModeCustomText></redcap:ProtectedEmailModeCustomText>
 	<redcap:ProtectedEmailModeTrigger>ALL</redcap:ProtectedEmailModeTrigger>
 	<redcap:ProtectedEmailModeLogo></redcap:ProtectedEmailModeLogo>
+	<redcap:UserRolesGroup>
+		<redcap:UserRoles role_name="api" unique_role_name="U-367FDTHTTT" lock_record="0" lock_record_multiform="0" lock_record_customize="0" data_export_tool="" data_export_instruments="[demographics,1][contact_info,1][baseline_data,1][visit_lab_data,1][patient_morale_questionnaire,1][visit_blood_workup,1][visit_observed_behavior,1][completion_data,1][completion_project_questionnaire,1]" data_import_tool="0" data_comparison_tool="0" data_logging="0" email_logging="0" file_repository="0" double_data="0" user_rights="1" data_access_groups="0" graphical="1" reports="0" design="0" alerts="0" calendar="0" data_entry="[demographics,1][contact_info,1][baseline_data,1][visit_lab_data,1][patient_morale_questionnaire,1][visit_blood_workup,1][visit_observed_behavior,1][completion_data,1][completion_project_questionnaire,1]" api_export="1" api_import="0" api_modules="0" mobile_app="0" mobile_app_download_data="0" record_create="0" record_rename="0" record_delete="0" dts="0" participants="1" data_quality_design="0" data_quality_execute="0" data_quality_resolution="1" random_setup="0" random_dashboard="0" random_perform="0" realtime_webservice_mapping="0" realtime_webservice_adjudicate="0" external_module_config="" mycap_participants="1"/>
+	</redcap:UserRolesGroup>
 </GlobalVariables>
-<MetaDataVersion OID="Metadata.REDCapRTargetLongitudinalArmSe_2024-10-10_2142" Name="REDCapR Target Longitudinal Arm -see https://github.com/OuhscBbmc/REDCapR" redcap:RecordIdField="study_id">
+<MetaDataVersion OID="Metadata.REDCapRLongitudinal_2024-11-03_1657" Name="REDCapR: longitudinal" redcap:RecordIdField="study_id">
 	<Protocol>
 		<StudyEventRef StudyEventOID="Event.enrollment_arm_1" OrderNumber="1" Mandatory="No"/>
 		<StudyEventRef StudyEventOID="Event.dose_1_arm_1" OrderNumber="2" Mandatory="No"/>
@@ -1107,7 +1112,7 @@
 	</CodeList>
 </MetaDataVersion>
 </Study>
-<ClinicalData StudyOID="Project.REDCapRTargetLongitudinalArmSe" MetaDataVersionOID="Metadata.REDCapRTargetLongitudinalArmSe_2024-10-10_2142">
+<ClinicalData StudyOID="Project.REDCapRLongitudinal" MetaDataVersionOID="Metadata.REDCapRLongitudinal_2024-11-03_1657">
 	<SubjectData SubjectKey="100" redcap:RecordIdField="study_id">
 		<StudyEventData StudyEventOID="Event.enrollment_arm_1" StudyEventRepeatKey="1" redcap:UniqueEventName="enrollment_arm_1">
 			<FormData FormOID="Form.demographics" FormRepeatKey="1">

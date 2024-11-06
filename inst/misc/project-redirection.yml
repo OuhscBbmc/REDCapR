@@ -67,3 +67,37 @@
     - checkboxes-1: 61
     - vignette-repeating: 62
     - file-repo: 63
+-
+  instance: coph
+  credential_file: "misc/coph.credentials"
+  projects:
+    - simple: 2298
+    - longitudinal: 2299
+    - simple-write: 2300
+    - russian: 2301
+    - empty-rows: 2302
+    - single-column: 2303
+    - super-wide-1: 2304
+    - survey: 2305
+    - clinical-trial-1: 2306
+    - nonnumeric-record-id: 2307
+    - dag: 2308
+    - potentially-problematic-values: 2309
+    - repeating-instruments: 2310
+    - potentially-problematic-dictionary: 2311
+    - metadata-write: 2312
+    - dag-write: 2313
+    - super-wide-2: 2314
+    - super-wide-3: 2315
+    - repeating-instruments-sparse: 2316
+    - arm-single-delete: 2317
+    - arm-multiple-delete: 2318
+    - arm-single-longitudinal: 2319
+    - decimal-comma-and-dot: 2320
+    - decimal-comma: 2321
+    - decimal-dot: 2322
+    - validation-types-1: 2323
+    - blank-for-gray-status: 2324
+    - checkboxes-1: 2325
+    - vignette-repeating: 2326
+    - file-repo: 2327

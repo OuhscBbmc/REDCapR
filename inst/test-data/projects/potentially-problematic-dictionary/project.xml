@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="REDCapR Problematic dictionary" AsOfDateTime="2024-10-11T18:17:08" CreationDateTime="2024-10-11T18:17:08" SourceSystem="REDCap" SourceSystemVersion="14.6.11">
-<Study OID="Project.REDCapRProblematicDictionary">
+<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="REDCapR: potentially-problematic-dictionary" AsOfDateTime="2024-11-05T12:39:03" CreationDateTime="2024-11-05T12:39:03" SourceSystem="REDCap" SourceSystemVersion="14.7.3">
+<Study OID="Project.REDCapRPotentiallyproblematicd">
 <GlobalVariables>
-	<StudyName>REDCapR Problematic dictionary</StudyName>
-	<StudyDescription>This file contains the metadata, events, and data for REDCap project "REDCapR Problematic dictionary".</StudyDescription>
-	<ProtocolName>REDCapR Problematic dictionary</ProtocolName>
+	<StudyName>REDCapR: potentially-problematic-dictionary</StudyName>
+	<StudyDescription>This file contains the metadata, events, and data for REDCap project "REDCapR: potentially-problematic-dictionary".</StudyDescription>
+	<ProtocolName>REDCapR: potentially-problematic-dictionary</ProtocolName>
 	<redcap:RecordAutonumberingEnabled>1</redcap:RecordAutonumberingEnabled>
 	<redcap:CustomRecordLabel></redcap:CustomRecordLabel>
 	<redcap:SecondaryUniqueField></redcap:SecondaryUniqueField>
@@ -13,15 +13,17 @@
 	<redcap:SchedulingEnabled>0</redcap:SchedulingEnabled>
 	<redcap:SurveysEnabled>0</redcap:SurveysEnabled>
 	<redcap:SurveyInvitationEmailField></redcap:SurveyInvitationEmailField>
+	<redcap:RandomizationEnabled>0</redcap:RandomizationEnabled>
 	<redcap:DisplayTodayNowButton>1</redcap:DisplayTodayNowButton>
 	<redcap:PreventBranchingEraseValues>0</redcap:PreventBranchingEraseValues>
 	<redcap:RequireChangeReason>0</redcap:RequireChangeReason>
 	<redcap:DataHistoryPopup>1</redcap:DataHistoryPopup>
 	<redcap:OrderRecordsByField></redcap:OrderRecordsByField>
+	<redcap:taskCompleteStatus>0</redcap:taskCompleteStatus>
 	<redcap:MyCapEnabled>0</redcap:MyCapEnabled>
 	<redcap:Purpose>4</redcap:Purpose>
 	<redcap:PurposeOther></redcap:PurposeOther>
-	<redcap:ProjectNotes>Has variables or descriptions that might cause problems with the API</redcap:ProjectNotes>
+	<redcap:ProjectNotes></redcap:ProjectNotes>
 	<redcap:MissingDataCodes></redcap:MissingDataCodes>
 	<redcap:ProtectedEmailMode>0</redcap:ProtectedEmailMode>
 	<redcap:ProtectedEmailModeCustomText></redcap:ProtectedEmailModeCustomText>
@@ -31,7 +33,7 @@
 		<redcap:UserRoles role_name="api" unique_role_name="U-1279LLPFHD" lock_record="0" lock_record_multiform="0" lock_record_customize="0" data_export_tool="" data_export_instruments="[form_1,1]" data_import_tool="0" data_comparison_tool="0" data_logging="0" email_logging="0" file_repository="0" double_data="0" user_rights="0" data_access_groups="0" graphical="0" reports="0" design="0" alerts="0" calendar="0" data_entry="[form_1,1]" api_export="1" api_import="0" api_modules="0" mobile_app="0" mobile_app_download_data="0" record_create="0" record_rename="0" record_delete="0" dts="0" participants="1" data_quality_design="0" data_quality_execute="0" data_quality_resolution="1" random_setup="0" random_dashboard="0" random_perform="0" realtime_webservice_mapping="0" realtime_webservice_adjudicate="0" external_module_config="" mycap_participants="0"/>
 	</redcap:UserRolesGroup>
 </GlobalVariables>
-<MetaDataVersion OID="Metadata.REDCapRProblematicDictionary_2024-10-11_1817" Name="REDCapR Problematic dictionary" redcap:RecordIdField="record_id">
+<MetaDataVersion OID="Metadata.REDCapRPotentiallyproblematicd_2024-11-05_1239" Name="REDCapR: potentially-problematic-dictionary" redcap:RecordIdField="record_id">
 	<FormDef OID="Form.form_1" Name="Form 1" Repeating="No" redcap:FormName="form_1">
 		<ItemGroupRef ItemGroupOID="form_1.record_id" Mandatory="No"/>
 		<ItemGroupRef ItemGroupOID="form_1.form_1_complete" Mandatory="No"/>
@@ -103,6 +105,6 @@
 	</CodeList>
 </MetaDataVersion>
 </Study>
-<ClinicalData StudyOID="Project.REDCapRProblematicDictionary" MetaDataVersionOID="Metadata.REDCapRProblematicDictionary_2024-10-11_1817">
+<ClinicalData StudyOID="Project.REDCapRPotentiallyproblematicd" MetaDataVersionOID="Metadata.REDCapRPotentiallyproblematicd_2024-11-05_1239">
 </ClinicalData>
 </ODM>

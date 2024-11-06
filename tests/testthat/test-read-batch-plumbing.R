@@ -1,11 +1,15 @@
 # This file test that `redcap_read()` includes the appropriate plumbing variables.
 library(testthat)
 update_expectation  <- FALSE
+credential    <- retrieve_credential_testing()
+
+if (credential$redcap_uri != "https://redcap-dev-2.ouhsc.edu/redcap/api/") {
+  testthat::skip("Skipping tests with lots of consecutive new lines on non-dev server")
+}
 
 test_that("simple", {
   testthat::skip_on_cran()
 
-  credential    <- retrieve_credential_testing()
   path_expected <- "test-data/specific-redcapr/read-batch-plumbing/simple.R"
   desired_forms <- c("race_and_ethnicity") # Doesn't include the initial "demographics" form.
   expected_outcome_message <- "\\d+ records and 10 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
@@ -87,3 +91,5 @@ test_that("repeated", {
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
   expect_match(returned_object$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 })
+
+rm(credential)

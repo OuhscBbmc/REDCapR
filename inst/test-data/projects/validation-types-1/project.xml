@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="REDCapR Validation Types" AsOfDateTime="2024-10-12T19:46:25" CreationDateTime="2024-10-12T19:46:25" SourceSystem="REDCap" SourceSystemVersion="14.6.11">
-<Study OID="Project.REDCapRValidationTypes">
+<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="REDCapR: valiation-types-1" AsOfDateTime="2024-11-05T15:41:01" CreationDateTime="2024-11-05T15:41:01" SourceSystem="REDCap" SourceSystemVersion="14.7.3">
+<Study OID="Project.REDCapRValiationtypes1">
 <GlobalVariables>
-	<StudyName>REDCapR Validation Types</StudyName>
-	<StudyDescription>This file contains the metadata, events, and data for REDCap project "REDCapR Validation Types".</StudyDescription>
-	<ProtocolName>REDCapR Validation Types</ProtocolName>
+	<StudyName>REDCapR: valiation-types-1</StudyName>
+	<StudyDescription>This file contains the metadata, events, and data for REDCap project "REDCapR: valiation-types-1".</StudyDescription>
+	<ProtocolName>REDCapR: valiation-types-1</ProtocolName>
 	<redcap:RecordAutonumberingEnabled>1</redcap:RecordAutonumberingEnabled>
 	<redcap:CustomRecordLabel></redcap:CustomRecordLabel>
 	<redcap:SecondaryUniqueField></redcap:SecondaryUniqueField>
@@ -13,15 +13,17 @@
 	<redcap:SchedulingEnabled>0</redcap:SchedulingEnabled>
 	<redcap:SurveysEnabled>0</redcap:SurveysEnabled>
 	<redcap:SurveyInvitationEmailField></redcap:SurveyInvitationEmailField>
+	<redcap:RandomizationEnabled>0</redcap:RandomizationEnabled>
 	<redcap:DisplayTodayNowButton>1</redcap:DisplayTodayNowButton>
 	<redcap:PreventBranchingEraseValues>0</redcap:PreventBranchingEraseValues>
 	<redcap:RequireChangeReason>0</redcap:RequireChangeReason>
 	<redcap:DataHistoryPopup>1</redcap:DataHistoryPopup>
 	<redcap:OrderRecordsByField></redcap:OrderRecordsByField>
+	<redcap:taskCompleteStatus>0</redcap:taskCompleteStatus>
 	<redcap:MyCapEnabled>0</redcap:MyCapEnabled>
-	<redcap:Purpose>3</redcap:Purpose>
+	<redcap:Purpose>4</redcap:Purpose>
 	<redcap:PurposeOther></redcap:PurposeOther>
-	<redcap:ProjectNotes>REDCapR using Validation Types</redcap:ProjectNotes>
+	<redcap:ProjectNotes></redcap:ProjectNotes>
 	<redcap:MissingDataCodes></redcap:MissingDataCodes>
 	<redcap:ProtectedEmailMode>0</redcap:ProtectedEmailMode>
 	<redcap:ProtectedEmailModeCustomText></redcap:ProtectedEmailModeCustomText>
@@ -31,7 +33,7 @@
 		<redcap:UserRoles role_name="api" unique_role_name="U-643ANAHXMW" lock_record="0" lock_record_multiform="0" lock_record_customize="0" data_export_tool="" data_export_instruments="[form_1,1]" data_import_tool="0" data_comparison_tool="0" data_logging="0" email_logging="0" file_repository="0" double_data="0" user_rights="0" data_access_groups="0" graphical="0" reports="0" design="0" alerts="0" calendar="0" data_entry="[form_1,1]" api_export="1" api_import="0" api_modules="0" mobile_app="0" mobile_app_download_data="0" record_create="0" record_rename="0" record_delete="0" dts="0" participants="1" data_quality_design="0" data_quality_execute="0" data_quality_resolution="1" random_setup="0" random_dashboard="0" random_perform="0" realtime_webservice_mapping="0" realtime_webservice_adjudicate="0" external_module_config="" mycap_participants="0"/>
 	</redcap:UserRolesGroup>
 </GlobalVariables>
-<MetaDataVersion OID="Metadata.REDCapRValidationTypes_2024-10-12_1946" Name="REDCapR Validation Types" redcap:RecordIdField="record_id">
+<MetaDataVersion OID="Metadata.REDCapRValiationtypes1_2024-11-05_1541" Name="REDCapR: valiation-types-1" redcap:RecordIdField="record_id">
 	<FormDef OID="Form.form_1" Name="Form 1" Repeating="No" redcap:FormName="form_1">
 		<ItemGroupRef ItemGroupOID="form_1.record_id" Mandatory="No"/>
 		<ItemGroupRef ItemGroupOID="form_1.f_calculated" Mandatory="No"/>
@@ -272,15 +274,15 @@
 		<Question><TranslatedText>Complete?</TranslatedText></Question>
 		<CodeListRef CodeListOID="form_1_complete.choices"/>
 	</ItemDef>
-	<CodeList OID="f_checkbox___0.choices" Name="f_checkbox___0" DataType="boolean" redcap:Variable="f_checkbox" redcap:CheckboxChoices="0, Zero | 1, One | 2, Two">
+	<CodeList OID="f_checkbox___0.choices" Name="f_checkbox___0" DataType="boolean" redcap:Variable="f_checkbox" redcap:CheckboxChoices="0, Zero|1, One|2, Two">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="f_checkbox___1.choices" Name="f_checkbox___1" DataType="boolean" redcap:Variable="f_checkbox" redcap:CheckboxChoices="0, Zero | 1, One | 2, Two">
+	<CodeList OID="f_checkbox___1.choices" Name="f_checkbox___1" DataType="boolean" redcap:Variable="f_checkbox" redcap:CheckboxChoices="0, Zero|1, One|2, Two">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
-	<CodeList OID="f_checkbox___2.choices" Name="f_checkbox___2" DataType="boolean" redcap:Variable="f_checkbox" redcap:CheckboxChoices="0, Zero | 1, One | 2, Two">
+	<CodeList OID="f_checkbox___2.choices" Name="f_checkbox___2" DataType="boolean" redcap:Variable="f_checkbox" redcap:CheckboxChoices="0, Zero|1, One|2, Two">
 		<CodeListItem CodedValue="1"><Decode><TranslatedText>Checked</TranslatedText></Decode></CodeListItem>
 		<CodeListItem CodedValue="0"><Decode><TranslatedText>Unchecked</TranslatedText></Decode></CodeListItem>
 	</CodeList>
@@ -309,11 +311,16 @@
 	</CodeList>
 </MetaDataVersion>
 </Study>
-<ClinicalData StudyOID="Project.REDCapRValidationTypes" MetaDataVersionOID="Metadata.REDCapRValidationTypes_2024-10-12_1946">
+<ClinicalData StudyOID="Project.REDCapRValiationtypes1" MetaDataVersionOID="Metadata.REDCapRValiationtypes1_2024-11-05_1541">
 	<SubjectData SubjectKey="1" redcap:RecordIdField="record_id">
 			<FormData FormOID="Form.form_1" FormRepeatKey="1">
 				<ItemGroupData ItemGroupOID="form_1.record_id" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="record_id" Value="1"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="form_1.f_calculated" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="f_calculated" Value="7"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="form_1.f_checkbox___0" ItemGroupRepeatKey="1">
 					<ItemData ItemOID="f_checkbox___0" Value="0"/>
 					<ItemData ItemOID="f_checkbox___1" Value="0"/>
 					<ItemData ItemOID="f_checkbox___2" Value="0"/>

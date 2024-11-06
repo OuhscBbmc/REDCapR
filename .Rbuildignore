@@ -12,6 +12,8 @@ README.html$
 project\.xml$
 \.zip$
 \.tar.xz$
+inst/test-data/projects/super-wide-3/super-wide-3-dictionary\.csv
+
 
 documentation-peek.pdf
 documentation-for-developers/
