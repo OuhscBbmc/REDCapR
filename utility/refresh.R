@@ -42,7 +42,7 @@ devtools::run_examples(); #dev.off() #This overwrites the NAMESPACE file too
 # devtools::run_examples(, "redcap_read.Rd")
 # pkgload::load_all()
 test_results_checked <- devtools::test()
-test_results_checked <- devtools::test(filter = "^retrieve-credential")
+test_results_checked <- devtools::test(filter = "^sanitize")
 # withr::local_envvar(ONLYREADTESTS = "true")
 # test_results_checked <- devtools::test(filter = "write-batch")
 
