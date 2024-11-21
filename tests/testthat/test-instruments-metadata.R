@@ -40,21 +40,24 @@ test_that("default", {
 test_that("Bad URI", {
   testthat::skip_on_cran()
   bad_uri <- "https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"
-  expected_data_frame <- structure(list(), .Names = character(0), row.names = integer(0), class = "data.frame")
+  # expected_data_frame <- structure(list(), .Names = character(0), row.names = integer(0), class = "data.frame")
 
   # Windows gives a different message than Travis/Linux
-  expected_outcome_message <- "(https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com|Couldn't resolve host 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com')"
+  # expected_outcome_message <- "(https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com|Couldn't resolve host 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com')"
   # "The REDCapR variable retrieval was not successful\\..+?Error 405 \\(Method Not Allowed\\).+"
   # expected_outcome_message <- "(?s)The REDCapR variable retrieval was not successful\\..+?.+"
 
-  expect_error(
+  # expect_error(
     returned_object <-
       redcap_instruments(
         redcap_uri  = bad_uri,
         token       = credential$token,
         verbose     = FALSE
       )
-  )
+  # )
+  expect_false(returned_object$success)
+  expect_equal(returned_object$status_code, 403L)
+  expect_match(returned_object$outcome_message, "The REDCapR instrument retrieval was not successful.+")
 })
 
 test_that("bad token -Error", {
