@@ -9,8 +9,10 @@ retrieve_credential_testing <- function(
     if(Sys.getenv("redcapr_test_server") != "") {
       Sys.getenv("redcapr_test_server")
     } else {
+      # nocov start
       message("The test server was not explicitly set, so defaulting to 'dev-2'.")
       "dev-2"
+      # nocov end
     }
   checkmate::assert_character(server_instance , any.missing = FALSE, min.chars = 2, max.chars = 50)
 
@@ -18,10 +20,12 @@ retrieve_credential_testing <- function(
   projects <- project_id <- instance <- tag <- NULL
 
   if (!requireNamespace("yaml", quietly = TRUE)) {
+    # nocov start
     stop(
       "Package `yaml` must be installed to use this function.",
       call. = FALSE
     )
+    # nocov end
   }
   d_map <-
     system.file("misc/project-redirection.yml", package = "REDCapR") |>
@@ -40,11 +44,12 @@ retrieve_credential_testing <- function(
     dplyr::filter(tag      == project_tag)
 
   if (nrow(d_map) == 0L) {
-    stop("A credential mapping entry does not exist for the desired arguments.")
+    stop("A credential mapping entry does not exist for the desired arguments.") # nocov
   }
 
   path_credential <- system.file(d_map$credential_file, package = "REDCapR")
   if (!base::file.exists(path_credential)) {
+    # nocov start
     stop(
       "The credential file `",
       d_map$credential_file,
@@ -52,6 +57,7 @@ retrieve_credential_testing <- function(
       server_instance,
       "` does not exist on this machine."
     )
+    # nocov end
   }
 
   retrieve_credential_local(
@@ -67,8 +73,10 @@ retrieve_plugins <- function(plugin_name) {
     if(Sys.getenv("redcapr_test_server") != "") {
       Sys.getenv("redcapr_test_server")
     } else {
+      # nocov start
       message("The test server was not explicitly set for plugins, so defaulting to 'dev-2'.")
       "dev-2"
+      # nocov end
     }
   checkmate::assert_character(server_instance , any.missing = FALSE, min.chars = 2, max.chars = 50)
 
@@ -76,10 +84,12 @@ retrieve_plugins <- function(plugin_name) {
   plugins <- instance <- tag <- project_tag <- NULL
 
   if (!requireNamespace("yaml", quietly = TRUE)) {
+    # nocov start
     stop(
       "Package `yaml` must be installed to use this function.",
       call. = FALSE
     )
+    # nocov end
   }
   d_map <-
     system.file("misc/plugin-redirection.yml", package = "REDCapR") |>
@@ -98,7 +108,7 @@ retrieve_plugins <- function(plugin_name) {
     dplyr::filter(tag      == plugin_name)
 
   if (nrow(d_map) == 0L) {
-    stop("A plugin mapping entry does not exist for the desired arguments.")
+    stop("A plugin mapping entry does not exist for the desired arguments.") # nocov
   }
 
   d_map |>
