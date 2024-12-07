@@ -1,21 +1,28 @@
 # Simplified script incorporating a cron job & REDCapR
-# Adapated from https://heds.nz/posts/automate-r-reporting-linux-cron/
-cat(paste0(Sys.time(), " Starting cron job...\n"))
+# Adapted from https://heds.nz/posts/automate-r-reporting-linux-cron/
+message("==============================")
+message(paste0(Sys.time(), " Starting cron job...\n"))
 
-uri   <- "https://bbmc.ouhsc.edu/redcap/api/"
+uri   <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 
-# A simple project (pid 153)
-token <- "9A81268476645C4E5F03428B8AC3AA7B"
-REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
+message("---- simple project --------------------------")
+token_1 <- "9A068C425B1341D69E83064A2D273A70"
+REDCapR::redcap_metadata_read(redcap_uri=uri, token=token_1)
 
-# A longitudinal project (pid 212)
-token <- "0434F0E9CF53ED0587847AB6E51DE762"
-REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
+message("---- repeating measures project w/ environmental token --------------------------")
+Sys.setenv(REDCAP_KIRA_SGM_KEY = "77842BD8C18D3408819A21DD0154CCF4")
+token_3 <- Sys.getenv("REDCAP_KIRA_SGM_KEY")
+REDCapR::redcap_metadata_read(redcap_uri=uri, token=token_3)
 
-# A repeating measures (pid 3181)
-token <- "22C3FF1C8B08899FB6F86D91D874A159"
-REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
+message("---- longitudinal project w/ stored token--------------------------")
+path <- system.file("misc/dev-2.credentials", package = "REDCapR")
+# message(path)
+message("Credential file exists: ", fs::file_exists(path))
+credential <- REDCapR::retrieve_credential_local(path, 34L)
+# message(credential)
+REDCapR::redcap_metadata_read(redcap_uri=credential$redcap_uri, token=credential$token)
 
-cat(paste0(Sys.time(), " Finished running scripts/new_iris.R.\n"))
+message("------------------------------")
+message(paste0(Sys.time(), " Finished running utility/cron-example.R.\n"))
 
 # * * * * * Rscript ~/redcap/REDCapR/utility/cron-example.R >> ~/redcap/REDCapR/utility/cron-example.log 2>&1

@@ -1,4 +1,7 @@
-2024-12-05 09:33:02.079769 Starting cron job...
+==============================
+2024-12-07 11:06:01.289504 Starting cron job...
+
+---- simple project --------------------------
 The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.
 $data
 # A tibble: 17 × 18
@@ -44,11 +47,56 @@ $fields_collapsed
 [1] ""
 
 $elapsed_seconds
-[1] 0.3130496
+[1] 0.2690506
 
 $raw_text
 [1] ""
 
+---- repeating measures project w/ environmental token --------------------------
+The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
+$data
+# A tibble: 9 × 18
+  field_name    form_name      section_header field_type field_label            
+  <chr>         <chr>          <chr>          <chr>      <chr>                  
+1 record_id     intake         <NA>           text       Record ID              
+2 height        intake         <NA>           text       patient height         
+3 weight        intake         <NA>           text       patient weight         
+4 bmi           intake         <NA>           text       patient bmi            
+5 sbp           blood_pressure <NA>           text       systolic blood pressure
+6 dbp           blood_pressure <NA>           text       diastolic blood pressu…
+7 lab           laboratory     <NA>           text       lab value              
+8 conc          laboratory     <NA>           text       concentration          
+9 image_profile image          <NA>           file       Picture of Patient     
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.1433709
+
+$raw_text
+[1] ""
+
+---- longitudinal project w/ stored token--------------------------
+Credential file exists: TRUE
 The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
 $data
 # A tibble: 95 × 18
@@ -88,55 +136,18 @@ $fields_collapsed
 [1] ""
 
 $elapsed_seconds
-[1] 0.1591053
+[1] 0.1581771
 
 $raw_text
 [1] ""
 
-The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
-$data
-# A tibble: 9 × 18
-  field_name    form_name      section_header field_type field_label            
-  <chr>         <chr>          <chr>          <chr>      <chr>                  
-1 record_id     intake         <NA>           text       Record ID              
-2 height        intake         <NA>           text       patient height         
-3 weight        intake         <NA>           text       patient weight         
-4 bmi           intake         <NA>           text       patient bmi            
-5 sbp           blood_pressure <NA>           text       systolic blood pressure
-6 dbp           blood_pressure <NA>           text       diastolic blood pressu…
-7 lab           laboratory     <NA>           text       lab value              
-8 conc          laboratory     <NA>           text       concentration          
-9 image_profile image          <NA>           file       Picture of Patient     
-# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
-#   text_validation_type_or_show_slider_number <chr>,
-#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
-#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
-#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
-#   field_annotation <chr>
+------------------------------
+2024-12-07 11:06:03.09582 Finished running utility/cron-example.R.
 
-$success
-[1] TRUE
+==============================
+2024-12-07 11:07:01.28665 Starting cron job...
 
-$status_code
-[1] 200
-
-$outcome_message
-[1] "The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200."
-
-$forms_collapsed
-[1] ""
-
-$fields_collapsed
-[1] ""
-
-$elapsed_seconds
-[1] 0.1083767
-
-$raw_text
-[1] ""
-
-2024-12-05 09:33:03.784631 Finished running scripts/new_iris.R.
-2024-12-05 09:34:02.08569 Starting cron job...
+---- simple project --------------------------
 The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.
 $data
 # A tibble: 17 × 18
@@ -182,55 +193,12 @@ $fields_collapsed
 [1] ""
 
 $elapsed_seconds
-[1] 0.3179343
+[1] 0.3143952
 
 $raw_text
 [1] ""
 
-The data dictionary describing 95 fields was read from REDCap in 0.4 seconds.  The http status code was 200.
-$data
-# A tibble: 95 × 18
-   field_name       form_name    section_header      field_type field_label     
-   <chr>            <chr>        <chr>               <chr>      <chr>           
- 1 study_id         demographics <NA>                text       Study ID        
- 2 date_enrolled    demographics Consent Information text       Date subject si…
- 3 patient_document demographics <NA>                file       Upload the pati…
- 4 first_name       demographics Contact Information text       First Name      
- 5 last_name        demographics <NA>                text       Last Name       
- 6 telephone_1      demographics <NA>                text       Phone number    
- 7 email            demographics <NA>                text       E-mail          
- 8 dob              demographics <NA>                text       Date of birth   
- 9 age              demographics <NA>                text       Age (years)     
-10 ethnicity        demographics <NA>                radio      Ethnicity       
-# ℹ 85 more rows
-# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
-#   text_validation_type_or_show_slider_number <chr>,
-#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
-#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
-#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
-#   field_annotation <chr>
-
-$success
-[1] TRUE
-
-$status_code
-[1] 200
-
-$outcome_message
-[1] "The data dictionary describing 95 fields was read from REDCap in 0.4 seconds.  The http status code was 200."
-
-$forms_collapsed
-[1] ""
-
-$fields_collapsed
-[1] ""
-
-$elapsed_seconds
-[1] 0.3935587
-
-$raw_text
-[1] ""
-
+---- repeating measures project w/ environmental token --------------------------
 The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
 $data
 # A tibble: 9 × 18
@@ -268,13 +236,64 @@ $fields_collapsed
 [1] ""
 
 $elapsed_seconds
-[1] 0.1074209
+[1] 0.1464875
 
 $raw_text
 [1] ""
 
-2024-12-05 09:34:04.015385 Finished running scripts/new_iris.R.
-2024-12-05 09:35:01.322777 Starting cron job...
+---- longitudinal project w/ stored token--------------------------
+Credential file exists: TRUE
+The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
+$data
+# A tibble: 95 × 18
+   field_name       form_name    section_header      field_type field_label     
+   <chr>            <chr>        <chr>               <chr>      <chr>           
+ 1 study_id         demographics <NA>                text       Study ID        
+ 2 date_enrolled    demographics Consent Information text       Date subject si…
+ 3 patient_document demographics <NA>                file       Upload the pati…
+ 4 first_name       demographics Contact Information text       First Name      
+ 5 last_name        demographics <NA>                text       Last Name       
+ 6 telephone_1      demographics <NA>                text       Phone number    
+ 7 email            demographics <NA>                text       E-mail          
+ 8 dob              demographics <NA>                text       Date of birth   
+ 9 age              demographics <NA>                text       Age (years)     
+10 ethnicity        demographics <NA>                radio      Ethnicity       
+# ℹ 85 more rows
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.1773546
+
+$raw_text
+[1] ""
+
+------------------------------
+2024-12-07 11:07:03.234982 Finished running utility/cron-example.R.
+
+==============================
+2024-12-07 11:08:01.43933 Starting cron job...
+
+---- simple project --------------------------
 The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.
 $data
 # A tibble: 17 × 18
@@ -320,55 +339,12 @@ $fields_collapsed
 [1] ""
 
 $elapsed_seconds
-[1] 0.3099558
+[1] 0.291121
 
 $raw_text
 [1] ""
 
-The data dictionary describing 95 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
-$data
-# A tibble: 95 × 18
-   field_name       form_name    section_header      field_type field_label     
-   <chr>            <chr>        <chr>               <chr>      <chr>           
- 1 study_id         demographics <NA>                text       Study ID        
- 2 date_enrolled    demographics Consent Information text       Date subject si…
- 3 patient_document demographics <NA>                file       Upload the pati…
- 4 first_name       demographics Contact Information text       First Name      
- 5 last_name        demographics <NA>                text       Last Name       
- 6 telephone_1      demographics <NA>                text       Phone number    
- 7 email            demographics <NA>                text       E-mail          
- 8 dob              demographics <NA>                text       Date of birth   
- 9 age              demographics <NA>                text       Age (years)     
-10 ethnicity        demographics <NA>                radio      Ethnicity       
-# ℹ 85 more rows
-# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
-#   text_validation_type_or_show_slider_number <chr>,
-#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
-#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
-#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
-#   field_annotation <chr>
-
-$success
-[1] TRUE
-
-$status_code
-[1] 200
-
-$outcome_message
-[1] "The data dictionary describing 95 fields was read from REDCap in 0.1 seconds.  The http status code was 200."
-
-$forms_collapsed
-[1] ""
-
-$fields_collapsed
-[1] ""
-
-$elapsed_seconds
-[1] 0.1435215
-
-$raw_text
-[1] ""
-
+---- repeating measures project w/ environmental token --------------------------
 The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
 $data
 # A tibble: 9 × 18
@@ -406,9 +382,1371 @@ $fields_collapsed
 [1] ""
 
 $elapsed_seconds
-[1] 0.1098793
+[1] 0.1496165
 
 $raw_text
 [1] ""
 
-2024-12-05 09:35:03.12585 Finished running scripts/new_iris.R.
+---- longitudinal project w/ stored token--------------------------
+Credential file exists: TRUE
+The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
+$data
+# A tibble: 95 × 18
+   field_name       form_name    section_header      field_type field_label     
+   <chr>            <chr>        <chr>               <chr>      <chr>           
+ 1 study_id         demographics <NA>                text       Study ID        
+ 2 date_enrolled    demographics Consent Information text       Date subject si…
+ 3 patient_document demographics <NA>                file       Upload the pati…
+ 4 first_name       demographics Contact Information text       First Name      
+ 5 last_name        demographics <NA>                text       Last Name       
+ 6 telephone_1      demographics <NA>                text       Phone number    
+ 7 email            demographics <NA>                text       E-mail          
+ 8 dob              demographics <NA>                text       Date of birth   
+ 9 age              demographics <NA>                text       Age (years)     
+10 ethnicity        demographics <NA>                radio      Ethnicity       
+# ℹ 85 more rows
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.1713202
+
+$raw_text
+[1] ""
+
+------------------------------
+2024-12-07 11:08:03.362437 Finished running utility/cron-example.R.
+
+==============================
+2024-12-07 11:09:01.550743 Starting cron job...
+
+---- simple project --------------------------
+The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.
+$data
+# A tibble: 17 × 18
+   field_name         form_name          section_header   field_type field_label
+   <chr>              <chr>              <chr>            <chr>      <chr>      
+ 1 record_id          demographics       <NA>             text       Study ID   
+ 2 name_first         demographics       Contact Informa… text       First Name 
+ 3 name_last          demographics       <NA>             text       Last Name  
+ 4 address            demographics       <NA>             notes      Street, Ci…
+ 5 telephone          demographics       <NA>             text       Phone numb…
+ 6 email              demographics       <NA>             text       E-mail     
+ 7 dob                demographics       <NA>             text       Date of bi…
+ 8 age                demographics       <NA>             text       Age (years)
+ 9 sex                demographics       <NA>             radio      Gender     
+10 height             health             <NA>             text       Height (cm)
+11 weight             health             <NA>             text       Weight (ki…
+12 bmi                health             <NA>             calc       BMI        
+13 comments           health             General Comments notes      Comments   
+14 mugshot            health             <NA>             file       Mugshot    
+15 race               race_and_ethnicity <NA>             checkbox   Race (Sele…
+16 ethnicity          race_and_ethnicity <NA>             radio      Ethnicity  
+17 interpreter_needed race_and_ethnicity <NA>             truefalse  Are interp…
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.273406
+
+$raw_text
+[1] ""
+
+---- repeating measures project w/ environmental token --------------------------
+The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
+$data
+# A tibble: 9 × 18
+  field_name    form_name      section_header field_type field_label            
+  <chr>         <chr>          <chr>          <chr>      <chr>                  
+1 record_id     intake         <NA>           text       Record ID              
+2 height        intake         <NA>           text       patient height         
+3 weight        intake         <NA>           text       patient weight         
+4 bmi           intake         <NA>           text       patient bmi            
+5 sbp           blood_pressure <NA>           text       systolic blood pressure
+6 dbp           blood_pressure <NA>           text       diastolic blood pressu…
+7 lab           laboratory     <NA>           text       lab value              
+8 conc          laboratory     <NA>           text       concentration          
+9 image_profile image          <NA>           file       Picture of Patient     
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.1437643
+
+$raw_text
+[1] ""
+
+---- longitudinal project w/ stored token--------------------------
+Credential file exists: TRUE
+The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
+$data
+# A tibble: 95 × 18
+   field_name       form_name    section_header      field_type field_label     
+   <chr>            <chr>        <chr>               <chr>      <chr>           
+ 1 study_id         demographics <NA>                text       Study ID        
+ 2 date_enrolled    demographics Consent Information text       Date subject si…
+ 3 patient_document demographics <NA>                file       Upload the pati…
+ 4 first_name       demographics Contact Information text       First Name      
+ 5 last_name        demographics <NA>                text       Last Name       
+ 6 telephone_1      demographics <NA>                text       Phone number    
+ 7 email            demographics <NA>                text       E-mail          
+ 8 dob              demographics <NA>                text       Date of birth   
+ 9 age              demographics <NA>                text       Age (years)     
+10 ethnicity        demographics <NA>                radio      Ethnicity       
+# ℹ 85 more rows
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.1756694
+
+$raw_text
+[1] ""
+
+------------------------------
+2024-12-07 11:09:03.415152 Finished running utility/cron-example.R.
+
+==============================
+2024-12-07 11:10:01.624951 Starting cron job...
+
+---- simple project --------------------------
+The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.
+$data
+# A tibble: 17 × 18
+   field_name         form_name          section_header   field_type field_label
+   <chr>              <chr>              <chr>            <chr>      <chr>      
+ 1 record_id          demographics       <NA>             text       Study ID   
+ 2 name_first         demographics       Contact Informa… text       First Name 
+ 3 name_last          demographics       <NA>             text       Last Name  
+ 4 address            demographics       <NA>             notes      Street, Ci…
+ 5 telephone          demographics       <NA>             text       Phone numb…
+ 6 email              demographics       <NA>             text       E-mail     
+ 7 dob                demographics       <NA>             text       Date of bi…
+ 8 age                demographics       <NA>             text       Age (years)
+ 9 sex                demographics       <NA>             radio      Gender     
+10 height             health             <NA>             text       Height (cm)
+11 weight             health             <NA>             text       Weight (ki…
+12 bmi                health             <NA>             calc       BMI        
+13 comments           health             General Comments notes      Comments   
+14 mugshot            health             <NA>             file       Mugshot    
+15 race               race_and_ethnicity <NA>             checkbox   Race (Sele…
+16 ethnicity          race_and_ethnicity <NA>             radio      Ethnicity  
+17 interpreter_needed race_and_ethnicity <NA>             truefalse  Are interp…
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.3057504
+
+$raw_text
+[1] ""
+
+---- repeating measures project w/ environmental token --------------------------
+The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
+$data
+# A tibble: 9 × 18
+  field_name    form_name      section_header field_type field_label            
+  <chr>         <chr>          <chr>          <chr>      <chr>                  
+1 record_id     intake         <NA>           text       Record ID              
+2 height        intake         <NA>           text       patient height         
+3 weight        intake         <NA>           text       patient weight         
+4 bmi           intake         <NA>           text       patient bmi            
+5 sbp           blood_pressure <NA>           text       systolic blood pressure
+6 dbp           blood_pressure <NA>           text       diastolic blood pressu…
+7 lab           laboratory     <NA>           text       lab value              
+8 conc          laboratory     <NA>           text       concentration          
+9 image_profile image          <NA>           file       Picture of Patient     
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.1496959
+
+$raw_text
+[1] ""
+
+---- longitudinal project w/ stored token--------------------------
+Credential file exists: TRUE
+The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
+$data
+# A tibble: 95 × 18
+   field_name       form_name    section_header      field_type field_label     
+   <chr>            <chr>        <chr>               <chr>      <chr>           
+ 1 study_id         demographics <NA>                text       Study ID        
+ 2 date_enrolled    demographics Consent Information text       Date subject si…
+ 3 patient_document demographics <NA>                file       Upload the pati…
+ 4 first_name       demographics Contact Information text       First Name      
+ 5 last_name        demographics <NA>                text       Last Name       
+ 6 telephone_1      demographics <NA>                text       Phone number    
+ 7 email            demographics <NA>                text       E-mail          
+ 8 dob              demographics <NA>                text       Date of birth   
+ 9 age              demographics <NA>                text       Age (years)     
+10 ethnicity        demographics <NA>                radio      Ethnicity       
+# ℹ 85 more rows
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.1668601
+
+$raw_text
+[1] ""
+
+------------------------------
+2024-12-07 11:10:03.555642 Finished running utility/cron-example.R.
+
+==============================
+2024-12-07 11:11:01.76844 Starting cron job...
+
+---- simple project --------------------------
+The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.
+$data
+# A tibble: 17 × 18
+   field_name         form_name          section_header   field_type field_label
+   <chr>              <chr>              <chr>            <chr>      <chr>      
+ 1 record_id          demographics       <NA>             text       Study ID   
+ 2 name_first         demographics       Contact Informa… text       First Name 
+ 3 name_last          demographics       <NA>             text       Last Name  
+ 4 address            demographics       <NA>             notes      Street, Ci…
+ 5 telephone          demographics       <NA>             text       Phone numb…
+ 6 email              demographics       <NA>             text       E-mail     
+ 7 dob                demographics       <NA>             text       Date of bi…
+ 8 age                demographics       <NA>             text       Age (years)
+ 9 sex                demographics       <NA>             radio      Gender     
+10 height             health             <NA>             text       Height (cm)
+11 weight             health             <NA>             text       Weight (ki…
+12 bmi                health             <NA>             calc       BMI        
+13 comments           health             General Comments notes      Comments   
+14 mugshot            health             <NA>             file       Mugshot    
+15 race               race_and_ethnicity <NA>             checkbox   Race (Sele…
+16 ethnicity          race_and_ethnicity <NA>             radio      Ethnicity  
+17 interpreter_needed race_and_ethnicity <NA>             truefalse  Are interp…
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.253253
+
+$raw_text
+[1] ""
+
+---- repeating measures project w/ environmental token --------------------------
+The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
+$data
+# A tibble: 9 × 18
+  field_name    form_name      section_header field_type field_label            
+  <chr>         <chr>          <chr>          <chr>      <chr>                  
+1 record_id     intake         <NA>           text       Record ID              
+2 height        intake         <NA>           text       patient height         
+3 weight        intake         <NA>           text       patient weight         
+4 bmi           intake         <NA>           text       patient bmi            
+5 sbp           blood_pressure <NA>           text       systolic blood pressure
+6 dbp           blood_pressure <NA>           text       diastolic blood pressu…
+7 lab           laboratory     <NA>           text       lab value              
+8 conc          laboratory     <NA>           text       concentration          
+9 image_profile image          <NA>           file       Picture of Patient     
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.1407044
+
+$raw_text
+[1] ""
+
+---- longitudinal project w/ stored token--------------------------
+Credential file exists: TRUE
+The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
+$data
+# A tibble: 95 × 18
+   field_name       form_name    section_header      field_type field_label     
+   <chr>            <chr>        <chr>               <chr>      <chr>           
+ 1 study_id         demographics <NA>                text       Study ID        
+ 2 date_enrolled    demographics Consent Information text       Date subject si…
+ 3 patient_document demographics <NA>                file       Upload the pati…
+ 4 first_name       demographics Contact Information text       First Name      
+ 5 last_name        demographics <NA>                text       Last Name       
+ 6 telephone_1      demographics <NA>                text       Phone number    
+ 7 email            demographics <NA>                text       E-mail          
+ 8 dob              demographics <NA>                text       Date of birth   
+ 9 age              demographics <NA>                text       Age (years)     
+10 ethnicity        demographics <NA>                radio      Ethnicity       
+# ℹ 85 more rows
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.1609802
+
+$raw_text
+[1] ""
+
+------------------------------
+2024-12-07 11:11:03.751485 Finished running utility/cron-example.R.
+
+==============================
+2024-12-07 11:12:01.970974 Starting cron job...
+
+---- simple project --------------------------
+The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.
+$data
+# A tibble: 17 × 18
+   field_name         form_name          section_header   field_type field_label
+   <chr>              <chr>              <chr>            <chr>      <chr>      
+ 1 record_id          demographics       <NA>             text       Study ID   
+ 2 name_first         demographics       Contact Informa… text       First Name 
+ 3 name_last          demographics       <NA>             text       Last Name  
+ 4 address            demographics       <NA>             notes      Street, Ci…
+ 5 telephone          demographics       <NA>             text       Phone numb…
+ 6 email              demographics       <NA>             text       E-mail     
+ 7 dob                demographics       <NA>             text       Date of bi…
+ 8 age                demographics       <NA>             text       Age (years)
+ 9 sex                demographics       <NA>             radio      Gender     
+10 height             health             <NA>             text       Height (cm)
+11 weight             health             <NA>             text       Weight (ki…
+12 bmi                health             <NA>             calc       BMI        
+13 comments           health             General Comments notes      Comments   
+14 mugshot            health             <NA>             file       Mugshot    
+15 race               race_and_ethnicity <NA>             checkbox   Race (Sele…
+16 ethnicity          race_and_ethnicity <NA>             radio      Ethnicity  
+17 interpreter_needed race_and_ethnicity <NA>             truefalse  Are interp…
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.319459
+
+$raw_text
+[1] ""
+
+---- repeating measures project w/ environmental token --------------------------
+The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
+$data
+# A tibble: 9 × 18
+  field_name    form_name      section_header field_type field_label            
+  <chr>         <chr>          <chr>          <chr>      <chr>                  
+1 record_id     intake         <NA>           text       Record ID              
+2 height        intake         <NA>           text       patient height         
+3 weight        intake         <NA>           text       patient weight         
+4 bmi           intake         <NA>           text       patient bmi            
+5 sbp           blood_pressure <NA>           text       systolic blood pressure
+6 dbp           blood_pressure <NA>           text       diastolic blood pressu…
+7 lab           laboratory     <NA>           text       lab value              
+8 conc          laboratory     <NA>           text       concentration          
+9 image_profile image          <NA>           file       Picture of Patient     
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.1383016
+
+$raw_text
+[1] ""
+
+---- longitudinal project w/ stored token--------------------------
+Credential file exists: TRUE
+The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
+$data
+# A tibble: 95 × 18
+   field_name       form_name    section_header      field_type field_label     
+   <chr>            <chr>        <chr>               <chr>      <chr>           
+ 1 study_id         demographics <NA>                text       Study ID        
+ 2 date_enrolled    demographics Consent Information text       Date subject si…
+ 3 patient_document demographics <NA>                file       Upload the pati…
+ 4 first_name       demographics Contact Information text       First Name      
+ 5 last_name        demographics <NA>                text       Last Name       
+ 6 telephone_1      demographics <NA>                text       Phone number    
+ 7 email            demographics <NA>                text       E-mail          
+ 8 dob              demographics <NA>                text       Date of birth   
+ 9 age              demographics <NA>                text       Age (years)     
+10 ethnicity        demographics <NA>                radio      Ethnicity       
+# ℹ 85 more rows
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.1714332
+
+$raw_text
+[1] ""
+
+------------------------------
+2024-12-07 11:12:03.854855 Finished running utility/cron-example.R.
+
+==============================
+2024-12-07 11:13:02.055956 Starting cron job...
+
+---- simple project --------------------------
+The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.
+$data
+# A tibble: 17 × 18
+   field_name         form_name          section_header   field_type field_label
+   <chr>              <chr>              <chr>            <chr>      <chr>      
+ 1 record_id          demographics       <NA>             text       Study ID   
+ 2 name_first         demographics       Contact Informa… text       First Name 
+ 3 name_last          demographics       <NA>             text       Last Name  
+ 4 address            demographics       <NA>             notes      Street, Ci…
+ 5 telephone          demographics       <NA>             text       Phone numb…
+ 6 email              demographics       <NA>             text       E-mail     
+ 7 dob                demographics       <NA>             text       Date of bi…
+ 8 age                demographics       <NA>             text       Age (years)
+ 9 sex                demographics       <NA>             radio      Gender     
+10 height             health             <NA>             text       Height (cm)
+11 weight             health             <NA>             text       Weight (ki…
+12 bmi                health             <NA>             calc       BMI        
+13 comments           health             General Comments notes      Comments   
+14 mugshot            health             <NA>             file       Mugshot    
+15 race               race_and_ethnicity <NA>             checkbox   Race (Sele…
+16 ethnicity          race_and_ethnicity <NA>             radio      Ethnicity  
+17 interpreter_needed race_and_ethnicity <NA>             truefalse  Are interp…
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.2940636
+
+$raw_text
+[1] ""
+
+---- repeating measures project w/ environmental token --------------------------
+The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
+$data
+# A tibble: 9 × 18
+  field_name    form_name      section_header field_type field_label            
+  <chr>         <chr>          <chr>          <chr>      <chr>                  
+1 record_id     intake         <NA>           text       Record ID              
+2 height        intake         <NA>           text       patient height         
+3 weight        intake         <NA>           text       patient weight         
+4 bmi           intake         <NA>           text       patient bmi            
+5 sbp           blood_pressure <NA>           text       systolic blood pressure
+6 dbp           blood_pressure <NA>           text       diastolic blood pressu…
+7 lab           laboratory     <NA>           text       lab value              
+8 conc          laboratory     <NA>           text       concentration          
+9 image_profile image          <NA>           file       Picture of Patient     
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.146631
+
+$raw_text
+[1] ""
+
+---- longitudinal project w/ stored token--------------------------
+Credential file exists: TRUE
+The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
+$data
+# A tibble: 95 × 18
+   field_name       form_name    section_header      field_type field_label     
+   <chr>            <chr>        <chr>               <chr>      <chr>           
+ 1 study_id         demographics <NA>                text       Study ID        
+ 2 date_enrolled    demographics Consent Information text       Date subject si…
+ 3 patient_document demographics <NA>                file       Upload the pati…
+ 4 first_name       demographics Contact Information text       First Name      
+ 5 last_name        demographics <NA>                text       Last Name       
+ 6 telephone_1      demographics <NA>                text       Phone number    
+ 7 email            demographics <NA>                text       E-mail          
+ 8 dob              demographics <NA>                text       Date of birth   
+ 9 age              demographics <NA>                text       Age (years)     
+10 ethnicity        demographics <NA>                radio      Ethnicity       
+# ℹ 85 more rows
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.1753004
+
+$raw_text
+[1] ""
+
+------------------------------
+2024-12-07 11:13:03.904053 Finished running utility/cron-example.R.
+
+==============================
+2024-12-07 11:14:02.091437 Starting cron job...
+
+---- simple project --------------------------
+The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.
+$data
+# A tibble: 17 × 18
+   field_name         form_name          section_header   field_type field_label
+   <chr>              <chr>              <chr>            <chr>      <chr>      
+ 1 record_id          demographics       <NA>             text       Study ID   
+ 2 name_first         demographics       Contact Informa… text       First Name 
+ 3 name_last          demographics       <NA>             text       Last Name  
+ 4 address            demographics       <NA>             notes      Street, Ci…
+ 5 telephone          demographics       <NA>             text       Phone numb…
+ 6 email              demographics       <NA>             text       E-mail     
+ 7 dob                demographics       <NA>             text       Date of bi…
+ 8 age                demographics       <NA>             text       Age (years)
+ 9 sex                demographics       <NA>             radio      Gender     
+10 height             health             <NA>             text       Height (cm)
+11 weight             health             <NA>             text       Weight (ki…
+12 bmi                health             <NA>             calc       BMI        
+13 comments           health             General Comments notes      Comments   
+14 mugshot            health             <NA>             file       Mugshot    
+15 race               race_and_ethnicity <NA>             checkbox   Race (Sele…
+16 ethnicity          race_and_ethnicity <NA>             radio      Ethnicity  
+17 interpreter_needed race_and_ethnicity <NA>             truefalse  Are interp…
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.2643588
+
+$raw_text
+[1] ""
+
+---- repeating measures project w/ environmental token --------------------------
+The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
+$data
+# A tibble: 9 × 18
+  field_name    form_name      section_header field_type field_label            
+  <chr>         <chr>          <chr>          <chr>      <chr>                  
+1 record_id     intake         <NA>           text       Record ID              
+2 height        intake         <NA>           text       patient height         
+3 weight        intake         <NA>           text       patient weight         
+4 bmi           intake         <NA>           text       patient bmi            
+5 sbp           blood_pressure <NA>           text       systolic blood pressure
+6 dbp           blood_pressure <NA>           text       diastolic blood pressu…
+7 lab           laboratory     <NA>           text       lab value              
+8 conc          laboratory     <NA>           text       concentration          
+9 image_profile image          <NA>           file       Picture of Patient     
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.1340029
+
+$raw_text
+[1] ""
+
+---- longitudinal project w/ stored token--------------------------
+Credential file exists: TRUE
+The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
+$data
+# A tibble: 95 × 18
+   field_name       form_name    section_header      field_type field_label     
+   <chr>            <chr>        <chr>               <chr>      <chr>           
+ 1 study_id         demographics <NA>                text       Study ID        
+ 2 date_enrolled    demographics Consent Information text       Date subject si…
+ 3 patient_document demographics <NA>                file       Upload the pati…
+ 4 first_name       demographics Contact Information text       First Name      
+ 5 last_name        demographics <NA>                text       Last Name       
+ 6 telephone_1      demographics <NA>                text       Phone number    
+ 7 email            demographics <NA>                text       E-mail          
+ 8 dob              demographics <NA>                text       Date of birth   
+ 9 age              demographics <NA>                text       Age (years)     
+10 ethnicity        demographics <NA>                radio      Ethnicity       
+# ℹ 85 more rows
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.1701632
+
+$raw_text
+[1] ""
+
+------------------------------
+2024-12-07 11:14:03.970552 Finished running utility/cron-example.R.
+
+==============================
+2024-12-07 11:15:02.164451 Starting cron job...
+
+---- simple project --------------------------
+The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.
+$data
+# A tibble: 17 × 18
+   field_name         form_name          section_header   field_type field_label
+   <chr>              <chr>              <chr>            <chr>      <chr>      
+ 1 record_id          demographics       <NA>             text       Study ID   
+ 2 name_first         demographics       Contact Informa… text       First Name 
+ 3 name_last          demographics       <NA>             text       Last Name  
+ 4 address            demographics       <NA>             notes      Street, Ci…
+ 5 telephone          demographics       <NA>             text       Phone numb…
+ 6 email              demographics       <NA>             text       E-mail     
+ 7 dob                demographics       <NA>             text       Date of bi…
+ 8 age                demographics       <NA>             text       Age (years)
+ 9 sex                demographics       <NA>             radio      Gender     
+10 height             health             <NA>             text       Height (cm)
+11 weight             health             <NA>             text       Weight (ki…
+12 bmi                health             <NA>             calc       BMI        
+13 comments           health             General Comments notes      Comments   
+14 mugshot            health             <NA>             file       Mugshot    
+15 race               race_and_ethnicity <NA>             checkbox   Race (Sele…
+16 ethnicity          race_and_ethnicity <NA>             radio      Ethnicity  
+17 interpreter_needed race_and_ethnicity <NA>             truefalse  Are interp…
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.2832725
+
+$raw_text
+[1] ""
+
+---- repeating measures project w/ environmental token --------------------------
+The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
+$data
+# A tibble: 9 × 18
+  field_name    form_name      section_header field_type field_label            
+  <chr>         <chr>          <chr>          <chr>      <chr>                  
+1 record_id     intake         <NA>           text       Record ID              
+2 height        intake         <NA>           text       patient height         
+3 weight        intake         <NA>           text       patient weight         
+4 bmi           intake         <NA>           text       patient bmi            
+5 sbp           blood_pressure <NA>           text       systolic blood pressure
+6 dbp           blood_pressure <NA>           text       diastolic blood pressu…
+7 lab           laboratory     <NA>           text       lab value              
+8 conc          laboratory     <NA>           text       concentration          
+9 image_profile image          <NA>           file       Picture of Patient     
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.142642
+
+$raw_text
+[1] ""
+
+---- longitudinal project w/ stored token--------------------------
+Credential file exists: TRUE
+The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
+$data
+# A tibble: 95 × 18
+   field_name       form_name    section_header      field_type field_label     
+   <chr>            <chr>        <chr>               <chr>      <chr>           
+ 1 study_id         demographics <NA>                text       Study ID        
+ 2 date_enrolled    demographics Consent Information text       Date subject si…
+ 3 patient_document demographics <NA>                file       Upload the pati…
+ 4 first_name       demographics Contact Information text       First Name      
+ 5 last_name        demographics <NA>                text       Last Name       
+ 6 telephone_1      demographics <NA>                text       Phone number    
+ 7 email            demographics <NA>                text       E-mail          
+ 8 dob              demographics <NA>                text       Date of birth   
+ 9 age              demographics <NA>                text       Age (years)     
+10 ethnicity        demographics <NA>                radio      Ethnicity       
+# ℹ 85 more rows
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.1728756
+
+$raw_text
+[1] ""
+
+------------------------------
+2024-12-07 11:15:04.143959 Finished running utility/cron-example.R.
+
+==============================
+2024-12-07 11:16:01.344881 Starting cron job...
+
+---- simple project --------------------------
+The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.
+$data
+# A tibble: 17 × 18
+   field_name         form_name          section_header   field_type field_label
+   <chr>              <chr>              <chr>            <chr>      <chr>      
+ 1 record_id          demographics       <NA>             text       Study ID   
+ 2 name_first         demographics       Contact Informa… text       First Name 
+ 3 name_last          demographics       <NA>             text       Last Name  
+ 4 address            demographics       <NA>             notes      Street, Ci…
+ 5 telephone          demographics       <NA>             text       Phone numb…
+ 6 email              demographics       <NA>             text       E-mail     
+ 7 dob                demographics       <NA>             text       Date of bi…
+ 8 age                demographics       <NA>             text       Age (years)
+ 9 sex                demographics       <NA>             radio      Gender     
+10 height             health             <NA>             text       Height (cm)
+11 weight             health             <NA>             text       Weight (ki…
+12 bmi                health             <NA>             calc       BMI        
+13 comments           health             General Comments notes      Comments   
+14 mugshot            health             <NA>             file       Mugshot    
+15 race               race_and_ethnicity <NA>             checkbox   Race (Sele…
+16 ethnicity          race_and_ethnicity <NA>             radio      Ethnicity  
+17 interpreter_needed race_and_ethnicity <NA>             truefalse  Are interp…
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.2808993
+
+$raw_text
+[1] ""
+
+---- repeating measures project w/ environmental token --------------------------
+The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
+$data
+# A tibble: 9 × 18
+  field_name    form_name      section_header field_type field_label            
+  <chr>         <chr>          <chr>          <chr>      <chr>                  
+1 record_id     intake         <NA>           text       Record ID              
+2 height        intake         <NA>           text       patient height         
+3 weight        intake         <NA>           text       patient weight         
+4 bmi           intake         <NA>           text       patient bmi            
+5 sbp           blood_pressure <NA>           text       systolic blood pressure
+6 dbp           blood_pressure <NA>           text       diastolic blood pressu…
+7 lab           laboratory     <NA>           text       lab value              
+8 conc          laboratory     <NA>           text       concentration          
+9 image_profile image          <NA>           file       Picture of Patient     
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.1400197
+
+$raw_text
+[1] ""
+
+---- longitudinal project w/ stored token--------------------------
+Credential file exists: TRUE
+The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
+$data
+# A tibble: 95 × 18
+   field_name       form_name    section_header      field_type field_label     
+   <chr>            <chr>        <chr>               <chr>      <chr>           
+ 1 study_id         demographics <NA>                text       Study ID        
+ 2 date_enrolled    demographics Consent Information text       Date subject si…
+ 3 patient_document demographics <NA>                file       Upload the pati…
+ 4 first_name       demographics Contact Information text       First Name      
+ 5 last_name        demographics <NA>                text       Last Name       
+ 6 telephone_1      demographics <NA>                text       Phone number    
+ 7 email            demographics <NA>                text       E-mail          
+ 8 dob              demographics <NA>                text       Date of birth   
+ 9 age              demographics <NA>                text       Age (years)     
+10 ethnicity        demographics <NA>                radio      Ethnicity       
+# ℹ 85 more rows
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.1605253
+
+$raw_text
+[1] ""
+
+------------------------------
+2024-12-07 11:16:03.212882 Finished running utility/cron-example.R.
+
+==============================
+2024-12-07 11:17:01.443348 Starting cron job...
+
+---- simple project --------------------------
+The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.
+$data
+# A tibble: 17 × 18
+   field_name         form_name          section_header   field_type field_label
+   <chr>              <chr>              <chr>            <chr>      <chr>      
+ 1 record_id          demographics       <NA>             text       Study ID   
+ 2 name_first         demographics       Contact Informa… text       First Name 
+ 3 name_last          demographics       <NA>             text       Last Name  
+ 4 address            demographics       <NA>             notes      Street, Ci…
+ 5 telephone          demographics       <NA>             text       Phone numb…
+ 6 email              demographics       <NA>             text       E-mail     
+ 7 dob                demographics       <NA>             text       Date of bi…
+ 8 age                demographics       <NA>             text       Age (years)
+ 9 sex                demographics       <NA>             radio      Gender     
+10 height             health             <NA>             text       Height (cm)
+11 weight             health             <NA>             text       Weight (ki…
+12 bmi                health             <NA>             calc       BMI        
+13 comments           health             General Comments notes      Comments   
+14 mugshot            health             <NA>             file       Mugshot    
+15 race               race_and_ethnicity <NA>             checkbox   Race (Sele…
+16 ethnicity          race_and_ethnicity <NA>             radio      Ethnicity  
+17 interpreter_needed race_and_ethnicity <NA>             truefalse  Are interp…
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.3216732
+
+$raw_text
+[1] ""
+
+---- repeating measures project w/ environmental token --------------------------
+The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
+$data
+# A tibble: 9 × 18
+  field_name    form_name      section_header field_type field_label            
+  <chr>         <chr>          <chr>          <chr>      <chr>                  
+1 record_id     intake         <NA>           text       Record ID              
+2 height        intake         <NA>           text       patient height         
+3 weight        intake         <NA>           text       patient weight         
+4 bmi           intake         <NA>           text       patient bmi            
+5 sbp           blood_pressure <NA>           text       systolic blood pressure
+6 dbp           blood_pressure <NA>           text       diastolic blood pressu…
+7 lab           laboratory     <NA>           text       lab value              
+8 conc          laboratory     <NA>           text       concentration          
+9 image_profile image          <NA>           file       Picture of Patient     
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.1444757
+
+$raw_text
+[1] ""
+
+---- longitudinal project w/ stored token--------------------------
+Credential file exists: TRUE
+The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
+$data
+# A tibble: 95 × 18
+   field_name       form_name    section_header      field_type field_label     
+   <chr>            <chr>        <chr>               <chr>      <chr>           
+ 1 study_id         demographics <NA>                text       Study ID        
+ 2 date_enrolled    demographics Consent Information text       Date subject si…
+ 3 patient_document demographics <NA>                file       Upload the pati…
+ 4 first_name       demographics Contact Information text       First Name      
+ 5 last_name        demographics <NA>                text       Last Name       
+ 6 telephone_1      demographics <NA>                text       Phone number    
+ 7 email            demographics <NA>                text       E-mail          
+ 8 dob              demographics <NA>                text       Date of birth   
+ 9 age              demographics <NA>                text       Age (years)     
+10 ethnicity        demographics <NA>                radio      Ethnicity       
+# ℹ 85 more rows
+# ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
+#   text_validation_type_or_show_slider_number <chr>,
+#   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
+#   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
+#   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
+#   field_annotation <chr>
+
+$success
+[1] TRUE
+
+$status_code
+[1] 200
+
+$outcome_message
+[1] "The data dictionary describing 95 fields was read from REDCap in 0.2 seconds.  The http status code was 200."
+
+$forms_collapsed
+[1] ""
+
+$fields_collapsed
+[1] ""
+
+$elapsed_seconds
+[1] 0.1616328
+
+$raw_text
+[1] ""
+
+------------------------------
+2024-12-07 11:17:03.511681 Finished running utility/cron-example.R.
+
