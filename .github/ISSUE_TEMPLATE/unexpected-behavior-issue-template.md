@@ -7,7 +7,9 @@ assignees: ''
 
 ---
 
-*!! Note about security !! If your question/issue involves sensitive information, please do not post it in this public location.  You might assist someone in compromising your institution's server or network.  The [REDCap Community](https://redcap.vumc.org/community/index.php?space=20) is the appropriate forum.  Please ask your institution's REDCap administrator to post a question on this site, with the tags [api](https://redcap.vumc.org/community/index.php?topic=337) and [redcapr](https://redcap.vumc.org/community/index.php?topic=23921).  If you post an example from your institution's server, consider using/creating a practice project that doesn't contain any real PHI.*
+!! Note about security !! _If your question/issue involves sensitive information, please do not post it in this public location.  You might assist someone in compromising your institution's server or network.  The [REDCap Community](https://redcap.vumc.org/community/index.php?space=20) is the appropriate forum.  Please ask your institution's REDCap administrator to post a question on this site, with the tags [api](https://redcap.vumc.org/community/index.php?topic=337) and [redcapr](https://redcap.vumc.org/community/index.php?topic=23921)._
+
+_If you post an example from your institution's server, consider using/creating a practice project that doesn't contain any real PHI._
 
 Thank you for taking the time to file an issue.  Here are some suggestions for writing your issue that should let us respond and help you more quickly.
 
