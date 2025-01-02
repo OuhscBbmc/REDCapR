@@ -60,7 +60,7 @@ We'd like to thank the following developers for their [advice](https://github.co
 
 Much of this package has been developed to support the needs of the following projects.  We appreciate the support.  (So far) the primary developers of REDCapR are the external evaluators for [Oklahoma's MIECHV](https://oklahoma.gov/health/health-education/children---family-health/family-support-and-prevention-service/miechv-program-federal-home-visiting-grant.html) program.  See the preliminary CQI reports (many of which use REDCapR) at <https://ouhscbbmc.github.io/MReportingPublic/>.
 
-* *OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting ([MIECHV](https://mchb.hrsa.gov/programs-impact/programs/home-visiting/maternal-infant-early-childhood-home-visiting-miechv-program)) Project*. HRSA/ACF D89MC23154.  David Bard, PI, OUHSC; 2011-2015.
+* *OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting ([MIECHV](https://mchb.hrsa.gov/programs-impact/maternal-infant-early-childhood-home-visiting-miechv-program)) Project*. HRSA/ACF D89MC23154.  David Bard, PI, OUHSC; 2011-2015.
 * *Independent Evaluation of the State of OK MIECHV Evidence Based Home Visitation Project*, [NIH](https://www.nih.gov/)-sponsored collaboration with [OSDH](https://oklahoma.gov/health.html). David Bard, PI, OUHSC; 2015-2017.
 * *OSDH ParentPRO Pilot Evaluation*, federally-sponsored collaboration with [OSDH](https://oklahoma.gov/health.html).  David Bard, PI, OUHSC; 2015-2017.
 * *Title IV-E Waiver Project*, [HRSA/MCHB](https://mchb.hrsa.gov/)-sponsored collaboration with [OKDHS](https://oklahoma.gov/okdhs.html); David Bard, PI, OUHSC; 2014-2017.
