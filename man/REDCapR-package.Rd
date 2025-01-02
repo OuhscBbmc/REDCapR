@@ -39,7 +39,7 @@ Will Beasley, PI of site-award, OUHSC; 2013-2018.
 \href{https://grantome.com/grant/NIH/U54-GM104938}{NIH NIGMS; U54 GM104938}.
 Judith A. James, PI, OUHSC; 2013-2018.
 \item Additional Institutional Support from OUHSC
-\href{https://medicine.ouhsc.edu/Academic-Departments/Pediatrics}{Dept of Pediatrics};
+\href{https://medicine.ouhsc.edu/academic-departments/pediatrics}{Dept of Pediatrics};
 2013-2017.
 }
 }

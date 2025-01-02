@@ -35,7 +35,7 @@
 #' [NIH NIGMS; U54 GM104938](https://grantome.com/grant/NIH/U54-GM104938).
 #' Judith A. James, PI, OUHSC; 2013-2018.
 #' * Additional Institutional Support from OUHSC
-#' [Dept of Pediatrics](https://medicine.ouhsc.edu/Academic-Departments/Pediatrics);
+#' [Dept of Pediatrics](https://medicine.ouhsc.edu/academic-departments/pediatrics);
 #' 2013-2017.
 #'
 #'

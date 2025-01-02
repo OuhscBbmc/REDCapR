@@ -67,14 +67,14 @@ Much of this package has been developed to support the needs of the following pr
 * *Integrative Analysis of Longitudinal Studies of Aging (IALSA)*, sponsored by [NIH 5P01AG043362](https://grantome.com/grant/NIH/P01-AG043362).  Scott Hofer, PI, University of Victoria; Will Beasley, PI of site-award, OUHSC; 2013-2018.
 * *Oklahoma Shared Clinical and Translational Resources*, sponsored by [NIH NIGMS; U54 GM104938](https://grantome.com/grant/NIH/U54-GM104938). Judith A. James, PI, OUHSC; 2013-2018.
 * *Oklahoma Shared Clinical and Translational Resources*, sponsored by [NIH U54GM104938](https://taggs.hhs.gov/Detail/AwardDetail?arg_AwardNum=U54GM104938&arg_ProgOfficeCode=127); 2020-2021.
-* Additional Institutional Support from OUHSC [Dept of Pediatrics](https://medicine.ouhsc.edu/Academic-Departments/Pediatrics); 2013-2021.
+* Additional Institutional Support from OUHSC [Dept of Pediatrics](https://medicine.ouhsc.edu/academic-departments/pediatrics); 2013-2021.
 
 Thanks,
 [Will Beasley](https://orcid.org/0000-0002-5613-5006), 
 [David Bard](https://orcid.org/0000-0002-3922-8489), 
 & Thomas Wilson<br/>
 [University of Oklahoma Health Sciences Center](https://www.ouhsc.edu/),
-[Department of Pediatrics](https://medicine.ouhsc.edu/Academic-Departments/Pediatrics),
+[Department of Pediatrics](https://medicine.ouhsc.edu/academic-departments/pediatrics),
 [Biomedical & Behavioral Research Core](https://www.ouhsc.edu/BBMC/).
 
 ### Build Status and Package Characteristics
