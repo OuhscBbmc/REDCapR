@@ -24,6 +24,7 @@ library(magrittr)
 requireNamespace("kableExtra")
 
 opts_chunk$set(
+  eval    = !REDCapR:::on_cran(),
   collapse = TRUE,
   comment = "#>",
   tidy    = FALSE

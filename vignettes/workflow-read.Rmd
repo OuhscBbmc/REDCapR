@@ -12,6 +12,7 @@ vignette: >
 ```{r}
 #| include = FALSE
 knitr::opts_chunk$set(
+  eval    = !REDCapR:::on_cran(),
   collapse = TRUE,
   comment = "#>",
   tidy    = FALSE
