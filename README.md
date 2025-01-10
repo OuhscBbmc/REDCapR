@@ -60,21 +60,21 @@ We'd like to thank the following developers for their [advice](https://github.co
 
 Much of this package has been developed to support the needs of the following projects.  We appreciate the support.  (So far) the primary developers of REDCapR are the external evaluators for [Oklahoma's MIECHV](https://oklahoma.gov/health/health-education/children---family-health/family-support-and-prevention-service/miechv-program-federal-home-visiting-grant.html) program.  See the preliminary CQI reports (many of which use REDCapR) at <https://ouhscbbmc.github.io/MReportingPublic/>.
 
-* *OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting ([MIECHV](https://mchb.hrsa.gov/programs-impact/programs/home-visiting/maternal-infant-early-childhood-home-visiting-miechv-program)) Project*. HRSA/ACF D89MC23154.  David Bard, PI, OUHSC; 2011-2015.
+* *OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting ([MIECHV](https://mchb.hrsa.gov/programs-impact/maternal-infant-early-childhood-home-visiting-miechv-program)) Project*. HRSA/ACF D89MC23154.  David Bard, PI, OUHSC; 2011-2015.
 * *Independent Evaluation of the State of OK MIECHV Evidence Based Home Visitation Project*, [NIH](https://www.nih.gov/)-sponsored collaboration with [OSDH](https://oklahoma.gov/health.html). David Bard, PI, OUHSC; 2015-2017.
 * *OSDH ParentPRO Pilot Evaluation*, federally-sponsored collaboration with [OSDH](https://oklahoma.gov/health.html).  David Bard, PI, OUHSC; 2015-2017.
 * *Title IV-E Waiver Project*, [HRSA/MCHB](https://mchb.hrsa.gov/)-sponsored collaboration with [OKDHS](https://oklahoma.gov/okdhs.html); David Bard, PI, OUHSC; 2014-2017.
 * *Integrative Analysis of Longitudinal Studies of Aging (IALSA)*, sponsored by [NIH 5P01AG043362](https://grantome.com/grant/NIH/P01-AG043362).  Scott Hofer, PI, University of Victoria; Will Beasley, PI of site-award, OUHSC; 2013-2018.
 * *Oklahoma Shared Clinical and Translational Resources*, sponsored by [NIH NIGMS; U54 GM104938](https://grantome.com/grant/NIH/U54-GM104938). Judith A. James, PI, OUHSC; 2013-2018.
 * *Oklahoma Shared Clinical and Translational Resources*, sponsored by [NIH U54GM104938](https://taggs.hhs.gov/Detail/AwardDetail?arg_AwardNum=U54GM104938&arg_ProgOfficeCode=127); 2020-2021.
-* Additional Institutional Support from OUHSC [Dept of Pediatrics](https://medicine.ouhsc.edu/Academic-Departments/Pediatrics); 2013-2021.
+* Additional Institutional Support from OUHSC [Dept of Pediatrics](https://medicine.ouhsc.edu/academic-departments/pediatrics); 2013-2021.
 
 Thanks,
 [Will Beasley](https://orcid.org/0000-0002-5613-5006), 
 [David Bard](https://orcid.org/0000-0002-3922-8489), 
 & Thomas Wilson<br/>
 [University of Oklahoma Health Sciences Center](https://www.ouhsc.edu/),
-[Department of Pediatrics](https://medicine.ouhsc.edu/Academic-Departments/Pediatrics),
+[Department of Pediatrics](https://medicine.ouhsc.edu/academic-departments/pediatrics),
 [Biomedical & Behavioral Research Core](https://www.ouhsc.edu/BBMC/).
 
 ### Build Status and Package Characteristics

@@ -18,7 +18,7 @@ following projects.  We appreciate the support.
 \itemize{
 \item \emph{OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive
 Maternal, Infant, and Early Childhood Home Visiting
-(\href{https://mchb.hrsa.gov/programs-impact/programs/home-visiting/maternal-infant-early-childhood-home-visiting-miechv-program}{MIECHV}) Project}.
+(\href{https://mchb.hrsa.gov/programs-impact/maternal-infant-early-childhood-home-visiting-miechv-program}{MIECHV}) Project}.
 HRSA/ACF D89MC23154.
 David Bard, PI, OUHSC; 2011-2015.
 \item \emph{Independent Evaluation of the State of OK MIECHV Evidence Based Home
@@ -39,7 +39,7 @@ Will Beasley, PI of site-award, OUHSC; 2013-2018.
 \href{https://grantome.com/grant/NIH/U54-GM104938}{NIH NIGMS; U54 GM104938}.
 Judith A. James, PI, OUHSC; 2013-2018.
 \item Additional Institutional Support from OUHSC
-\href{https://medicine.ouhsc.edu/Academic-Departments/Pediatrics}{Dept of Pediatrics};
+\href{https://medicine.ouhsc.edu/academic-departments/pediatrics}{Dept of Pediatrics};
 2013-2017.
 }
 }
