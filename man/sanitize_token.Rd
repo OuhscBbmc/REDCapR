@@ -34,8 +34,7 @@ For example, the following regex pattern captures a
 with 40 characters (as opposed to a hexadecimal/base16 value
 with 32 characters):
 \verb{^([A-Za-z\\\\d+/\\\\+=]\{40\})$}.
-See \url{https://rgxdb.com/r/1NUN74O6} or
-\url{https://regex101.com/library/lXFWqM}
+See \url{https://rgxdb.com/r/1NUN74O6}
 for alternative approaches to validate base64 values.
 
 If no pattern is specified, the default is a 32-character hex token:
