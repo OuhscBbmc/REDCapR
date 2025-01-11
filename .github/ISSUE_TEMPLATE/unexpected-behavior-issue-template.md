@@ -7,7 +7,9 @@ assignees: ''
 
 ---
 
-*!! Note about security !! If your question/issue involves sensitive information, please do not post it in this public location.  You might assist someone in compromising your institution's server or network.  The [REDCap Community](https://community.projectredcap.org/spaces/20/index.html) is the appropriate forum.  Please ask your institution's REDCap administrator to post a question on this site, with the tags [api](https://community.projectredcap.org/topics/337/api.html) and [redcapr](https://community.projectredcap.org/topics/23921/redcapr.html).*
+!! Note about security !! _If your question/issue involves sensitive information, please do not post it in this public location.  You might assist someone in compromising your institution's server or network.  The [REDCap Community](https://redcap.vumc.org/community/index.php?space=20) is the appropriate forum.  Please ask your institution's REDCap administrator to post a question on this site, with the tags [api](https://redcap.vumc.org/community/index.php?topic=337) and [redcapr](https://redcap.vumc.org/community/index.php?topic=23921)._
+
+_If you post an example from your institution's server, consider using/creating a practice project that doesn't contain any real PHI._
 
 Thank you for taking the time to file an issue.  Here are some suggestions for writing your issue that should let us respond and help you more quickly.
 
@@ -30,4 +32,4 @@ Thank you for taking the time to file an issue.  Here are some suggestions for w
 
 **Thank you and reminder**: 
   * Many people have contributed to this package and it's documentation, and it's continually improving.  If you have advice for improving the documentation, the [Troubleshooter](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html), or [this issue template](https://github.com/OuhscBbmc/REDCapR/blob/master/.github/ISSUE_TEMPLATE/unexpected-behavior-issue-template.md), we'd love to hear it.
-  * *Remember, don't include tokens, PHI, or other information that should not be public.*
+  * *Remember, don't include tokens, PHI, or other information that should not be public. And consider using a practice project, just to be be safe.*
