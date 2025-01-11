@@ -1,10 +1,7 @@
 ---
 title: Advanced REDCapR Operations
-date: "`r Sys.Date()`"
-output:
-  rmarkdown::html_vignette:
+output: rmarkdown::html_vignette
     # css: styles.css
-
 vignette: >
   %\VignetteIndexEntry{Advanced REDCapR Operations}
   %\VignetteEngine{knitr::rmarkdown}
@@ -18,12 +15,14 @@ This vignette covers the the less-typical uses of [REDCapR](https://github.com/O
 #| results = 'hide'
 
 report_render_start_time <- Sys.time()
+report_render_duration_in_seconds <- -999 # In case the vignette isn't evaluated (on CRAN)
 
 library(knitr)
 library(magrittr)
 suppressPackageStartupMessages(requireNamespace("kableExtra"))
 
 opts_chunk$set(
+  eval    = !REDCapR:::on_cran(),
   comment = "#>",
   tidy    = FALSE
 )

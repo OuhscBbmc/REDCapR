@@ -1,8 +1,6 @@
 ---
 title: Basic REDCapR Operations
-date: "`r Sys.Date()`"
-output:
-  rmarkdown::html_vignette
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Basic REDCapR Operations}
   %\VignetteEngine{knitr::rmarkdown}
@@ -20,12 +18,14 @@ The functions [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/re
 #| echo = FALSE, results = 'hide'
 
 report_render_start_time <- Sys.time()
+report_render_duration_in_seconds <- -999 # In case the vignette isn't evaluated (on CRAN)
 
 library(knitr)
 library(magrittr)
 requireNamespace("kableExtra")
 
 opts_chunk$set(
+  eval    = !REDCapR:::on_cran(),
   collapse = TRUE,
   comment = "#>",
   tidy    = FALSE
@@ -166,7 +166,7 @@ if (requireNamespace("sessioninfo", quietly = TRUE)) {
 </details>
 
 ```{r session-duration, echo=FALSE}
-report_render_duration <- round(as.numeric(difftime(Sys.time(), report_render_start_time, units = "secs")))
+report_render_duration_in_seconds <- round(as.numeric(difftime(Sys.time(), report_render_start_time, units = "secs")))
 ```
 
-Report rendered by `r Sys.info()["user"]` at `r strftime(Sys.time(), "%Y-%m-%d, %H:%M %z")` in `r report_render_duration` seconds.
+Report rendered by `r Sys.info()["user"]` at `r strftime(Sys.time(), "%Y-%m-%d, %H:%M %z")` in `r report_render_duration_in_seconds` seconds.

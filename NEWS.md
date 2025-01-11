@@ -19,6 +19,11 @@ These features are not yet on CRAN.  Install with `remotes::install_github("Ouhs
 
 * `redcap_file_repo_list_oneshot()` export a list of files/folders from the file repository (requested by @agdamsbo, #549)
 
+### Minor Enhancements
+
+* Vignettes are not run/evaluated on CRAN, to comply with it policies. (#561)
+* Alt text for figures. (#550)
+
 Version 1.3.0  (released 2024-10-22)
 ==========================================================
 
