@@ -1,4 +1,4 @@
-# REDCapR (development version)
+# REDCapR 1.5.0
 
 # Release History
 
