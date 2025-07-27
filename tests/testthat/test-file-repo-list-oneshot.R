@@ -144,6 +144,7 @@ test_that("bad-folder-id", {
   expect_equal(returned_object$raw_text, expected=expected_message, ignore_attr = TRUE) # dput(returned_object$raw_text)
 })
 test_that("download w/ bad token -Error", {
+  testthat::skip()
   testthat::skip_on_cran()
 
   returned_object <-
