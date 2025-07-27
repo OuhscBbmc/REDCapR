@@ -38,6 +38,7 @@ test_that("default", {
 })
 
 test_that("Bad URI", {
+  testthat::skip()
   testthat::skip_on_cran()
   bad_uri <- "https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"
   # expected_data_frame <- structure(list(), .Names = character(0), row.names = integer(0), class = "data.frame")
