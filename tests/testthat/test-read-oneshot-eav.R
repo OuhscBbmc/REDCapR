@@ -252,7 +252,7 @@ test_that("blank-for-gray-status-true", {
     )
 
   d <-
-    returned_object$data |>
+    returned_object$data %>%
     dplyr::select(
       -mugshot # Don't compare file IDs across servers.
     )
@@ -285,7 +285,7 @@ test_that("blank-for-gray-status-false", {
     )
 
   d <-
-    returned_object$data |>
+    returned_object$data %>%
     dplyr::select(
       -mugshot # Don't compare file IDs across servers.
     )

@@ -37,8 +37,8 @@ test_that("with-dags", {
     )
 
   d_user <-
-    returned_object$data_user |>
-    dplyr::filter(username == "unittestphifree") |>
+    returned_object$data_user %>%
+    dplyr::filter(username == "unittestphifree") %>%
     dplyr::select(
       -email
     )
@@ -55,13 +55,13 @@ test_that("with-dags", {
 
   # Drop the ID because it won't match other servers
   d_user <-
-    d_user |>
+    d_user %>%
     dplyr::select(
       -data_access_group_id
     )
 
   d_user_form <-
-    returned_object$data_user_form |>
+    returned_object$data_user_form %>%
     dplyr::filter(username == "unittestphifree")
 
   if (update_expectation) {
@@ -95,14 +95,14 @@ test_that("without DAGs", {
     )
 
   d_user <-
-    returned_object$data_user |>
-    dplyr::filter(username == "unittestphifree") |>
+    returned_object$data_user %>%
+    dplyr::filter(username == "unittestphifree") %>%
     dplyr::select(
       -email
     )
 
   d_user_form <-
-    returned_object$data_user_form |>
+    returned_object$data_user_form %>%
     dplyr::filter(username == "unittestphifree")
 
   if (update_expectation) {
