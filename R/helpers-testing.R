@@ -81,7 +81,7 @@ retrieve_plugins <- function(plugin_name) {
   checkmate::assert_character(server_instance , any.missing = FALSE, min.chars = 2, max.chars = 50)
 
   # This line avoids a warning from the package check.
-  plugins <- instance <- tag <- project_tag <- NULL
+  plugins <- instance <- tag <- NULL
 
   if (!requireNamespace("yaml", quietly = TRUE)) {
     # nocov start
