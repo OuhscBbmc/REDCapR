@@ -3,6 +3,18 @@
 # Release History
 
 
+Version 1.5.0  (released 2025-07-27)
+==========================================================
+
+This release is primarily small changes to comply with new CRAN checks
+
+### Minor Enhancements
+
+* Avoid native pipes outside of essential package code (#572).
+  (Essential package code has always used magrittr pipes to allow REDCapR
+  to run on version of R before 4.1.0.)
+* Avoid calling server in a CRAN example (#571)
+
 Version 1.4.0  (released 2025-01-11)
 ==========================================================
 
