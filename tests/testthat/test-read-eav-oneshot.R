@@ -257,7 +257,7 @@ test_that("blank-for-gray-status-true", {
     )
 
   d <-
-    returned_object$data |>
+    returned_object$data %>%
     dplyr::filter(field_name != "mugshot") # Don't compare file IDs across servers.
 
   if (update_expectation) save_expected(d, path_expected)
@@ -289,7 +289,7 @@ test_that("blank-for-gray-status-false", {
     )
 
   d <-
-    returned_object$data |>
+    returned_object$data %>%
     dplyr::filter(field_name != "mugshot") # Don't compare file IDs across servers.
 
   if (update_expectation) save_expected(d, path_expected)

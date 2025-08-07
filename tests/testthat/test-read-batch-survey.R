@@ -65,7 +65,7 @@ test_that("default", {
   expect_true(all(!is.na(returned_object1$data$prescreening_survey_timestamp)))
   expect_s3_class(returned_object1$data$prescreening_survey_timestamp, "POSIXct")
   d1 <-
-    returned_object1$data |>
+    returned_object1$data %>%
     dplyr::select(
       -prescreening_survey_timestamp
     )
@@ -96,7 +96,7 @@ test_that("default", {
   expect_true(all(!is.na(returned_object2$data$prescreening_survey_timestamp)))
   expect_s3_class(returned_object2$data$prescreening_survey_timestamp, "POSIXct")
   d2 <-
-    returned_object2$data |>
+    returned_object2$data %>%
     dplyr::select(
       -prescreening_survey_timestamp
     )

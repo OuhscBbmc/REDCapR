@@ -128,13 +128,13 @@ client_locale <- readr::locale(tz = Sys.timezone())
 #   starting from a csv of REDCapR test projects.
 # The native pipes in this snippet require R 4.1+.
 d_all <-
-  system.file("misc/dev-2.credentials", package = "REDCapR") |>
+  system.file("misc/dev-2.credentials", package = "REDCapR") \%>\%
   readr::read_csv(
     comment     = "#",
     col_select  = c(redcap_uri, token),
     col_types   = readr::cols(.default = readr::col_character())
-  ) |>
-  dplyr::filter(32L == nchar(token)) |>
+  ) \%>\%
+  dplyr::filter(32L == nchar(token)) \%>\%
   purrr::pmap_dfr(REDCapR::redcap_project_info_read, locale = server_locale)
 
 # Inspect values stored on the server.

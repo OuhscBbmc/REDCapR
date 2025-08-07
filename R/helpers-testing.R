@@ -28,19 +28,19 @@ retrieve_credential_testing <- function(
     # nocov end
   }
   d_map <-
-    system.file("misc/project-redirection.yml", package = "REDCapR") |>
+    system.file("misc/project-redirection.yml", package = "REDCapR") %>%
     yaml::yaml.load_file(
       handlers = list(map = \(x) tibble::as_tibble(x))
-    ) |>
-    dplyr::bind_rows() |>
-    tidyr::unnest(projects) |>
+    ) %>%
+    dplyr::bind_rows() %>%
+    tidyr::unnest(projects) %>%
     tidyr::pivot_longer(
       cols      = -c("instance", "credential_file"),
       names_to  = "tag",
       values_to = "project_id"
-    ) |>
-    tidyr::drop_na(project_id) |>
-    dplyr::filter(instance == server_instance) |>
+    ) %>%
+    tidyr::drop_na(project_id) %>%
+    dplyr::filter(instance == server_instance) %>%
     dplyr::filter(tag      == project_tag)
 
   if (nrow(d_map) == 0L) {
@@ -81,7 +81,7 @@ retrieve_plugins <- function(plugin_name) {
   checkmate::assert_character(server_instance , any.missing = FALSE, min.chars = 2, max.chars = 50)
 
   # This line avoids a warning from the package check.
-  plugins <- instance <- tag <- project_tag <- NULL
+  plugins <- instance <- tag <- NULL
 
   if (!requireNamespace("yaml", quietly = TRUE)) {
     # nocov start
@@ -92,26 +92,26 @@ retrieve_plugins <- function(plugin_name) {
     # nocov end
   }
   d_map <-
-    system.file("misc/plugin-redirection.yml", package = "REDCapR") |>
+    system.file("misc/plugin-redirection.yml", package = "REDCapR") %>%
     yaml::yaml.load_file(
       handlers = list(map = \(x) tibble::as_tibble(x))
-    ) |>
-    dplyr::bind_rows() |>
-    tidyr::unnest(plugins) |>
+    ) %>%
+    dplyr::bind_rows() %>%
+    tidyr::unnest(plugins) %>%
     tidyr::pivot_longer(
       cols      = -c("instance"),
       names_to  = "tag",
       values_to = "url"
-    ) |>
-    tidyr::drop_na(url) |>
-    dplyr::filter(instance == server_instance) |>
+    ) %>%
+    tidyr::drop_na(url) %>%
+    dplyr::filter(instance == server_instance) %>%
     dplyr::filter(tag      == plugin_name)
 
   if (nrow(d_map) == 0L) {
     stop("A plugin mapping entry does not exist for the desired arguments.") # nocov
   }
 
-  d_map |>
+  d_map %>%
     dplyr::pull(url)
 }
 # This function isn't used during testing itself.  Just to create the expected file.
