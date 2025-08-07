@@ -1,10 +1,4 @@
-# REDCapR 1.5.0
-
-# Release History
-
-
-Version 1.5.0  (released 2025-07-27)
-==========================================================
+# Version 1.5.0  (released 2025-07-27)
 
 This release is primarily small changes to comply with new CRAN checks
 
@@ -15,8 +9,7 @@ This release is primarily small changes to comply with new CRAN checks
   to run on version of R before 4.1.0.)
 * Avoid calling server in a CRAN example (#571)
 
-Version 1.4.0  (released 2025-01-11)
-==========================================================
+# Version 1.4.0  (released 2025-01-11)
 
 ### New Features
 
