@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">REDCapR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.5.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -124,7 +124,7 @@ administrator to send you the static material.</p>
 <span class="r-in"><span><span class="co"># Query a longitudinal project with a single arm and 3 events</span></span></span>
 <span class="r-in"><span><span class="va">token_1</span>  <span class="op">&lt;-</span> <span class="st">"76B4A71A0158BD34C98F10DA72D5F27C"</span> <span class="co"># arm-single-longitudinal</span></span></span>
 <span class="r-in"><span><span class="va">result_1</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_event_read</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token_1</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The list of events was retrieved from the REDCap project in 0.2 seconds. The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The list of events was retrieved from the REDCap project in 0.3 seconds. The http status code was 200.</span>
 <span class="r-in"><span><span class="va">result_1</span><span class="op">$</span><span class="va">data</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   event_name arm_num unique_event_name custom_event_label event_id</span>
@@ -136,7 +136,7 @@ administrator to send you the static material.</p>
 <span class="r-in"><span><span class="co"># Query a longitudinal project with 2 arms and complex arm-event mappings</span></span></span>
 <span class="r-in"><span><span class="va">token_2</span>  <span class="op">&lt;-</span> <span class="st">"DA6F2BB23146BD5A7EA3408C1A44A556"</span> <span class="co"># longitudinal</span></span></span>
 <span class="r-in"><span><span class="va">result_2</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_event_read</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token_2</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The list of events was retrieved from the REDCap project in 0.1 seconds. The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The list of events was retrieved from the REDCap project in 0.2 seconds. The http status code was 200.</span>
 <span class="r-in"><span><span class="va">result_2</span><span class="op">$</span><span class="va">data</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    event_name              arm_num unique_event_name custom_event_label event_id</span>
