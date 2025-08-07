@@ -1,8 +1,6 @@
-REDCapR (development version)
-==========================================================
+# REDCapR (development version)
 
-REDCapR 1.5.0  (released 2025-07-27)
-==========================================================
+# REDCapR 1.5.0  (released 2025-07-27)
 
 This release is primarily small changes to comply with new CRAN checks
 
@@ -13,8 +11,7 @@ This release is primarily small changes to comply with new CRAN checks
   to run on version of R before 4.1.0.)
 * Avoid calling server in a CRAN example (#571)
 
-REDCapR 1.4.0  (released 2025-01-11)
-==========================================================
+# REDCapR 1.4.0  (released 2025-01-11)
 
 ### New Features
 
@@ -25,16 +22,14 @@ REDCapR 1.4.0  (released 2025-01-11)
 * Vignettes are not run/evaluated on CRAN, to comply with it policies. (#561)
 * Alt text for figures. (#550)
 
-REDCapR 1.3.0  (released 2024-10-22)
-==========================================================
+# REDCapR 1.3.0  (released 2024-10-22)
 
 ### Minor Enhancements
 
 * Redirection layer for test suite allows you to plug in your own server (#539, #542, #544)
 * Skip a test when checked on CRAN servers (but not on local or GitHub Action machines)
 
-REDCapR 1.2.0  (released 2024-09-08)
-==========================================================
+# REDCapR 1.2.0  (released 2024-09-08)
 
 ### Possibly Breaking Change
 
@@ -119,8 +114,7 @@ This will help extract forms from longitudinal & repeating projects.
 * `redcap_file_download_oneshot()` no longer asks for the unnecessary parameter for `repeating_instrument` (that the REDCap server ignores).  (@BlairCooper, #506, #530)
 * `redcap_read()` and `redcap_read_oneshot()` accommodate `readr::read_csv()`'s parameter of `na`.  (Suggested by @rmtrane in #529)
 
-REDCapR 1.1.0 (released 2022-08-10)
-==========================================================
+# REDCapR 1.1.0 (released 2022-08-10)
 
 ### New Features
 
@@ -150,8 +144,7 @@ REDCapR 1.1.0 (released 2022-08-10)
 * Added two more dictionaries that are super wide -5k & 35k variables  (#335 & #360, @januz & @datalorax)
 * Read, modify, & read projects with DAGs (#353, daniela.wolkersdorfer, #353)
 
-REDCapR 1.0.0 (released 2021-07-21)
-==========================================================
+# REDCapR 1.0.0 (released 2021-07-21)
 
 The package has been stable for years and should be reflected in the major version number.
 
@@ -179,8 +172,7 @@ The package has been stable for years and should be reflected in the major versi
 * Fixed calculation of `success` value returned by `redcap_read()` and `redcap_write()` when the parameter `continue_on_error` is true.  (Bug found by @llrs, #317)
 * [`redcap_survey_link_export_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_survey_link_export_oneshot.html) documentation corrected & improved (@jrob95, #526)
 
-REDCapR 0.11.0 (Released 2020-04-20)
-==========================================================
+# REDCapR 0.11.0 (Released 2020-04-20)
 
 ### Breaking Changes (possible, but unlikely)
 
@@ -216,8 +208,7 @@ REDCapR 0.11.0 (Released 2020-04-20)
 
 * Allow more than one `httr::config()` parameter to be passed (Thanks @BastienRance, #307).
 
-REDCapR 0.10.2 (Released 2019-09-22)
-==========================================================
+# REDCapR 0.10.2 (Released 2019-09-22)
 
 ### Minor New Features
 
@@ -258,8 +249,7 @@ REDCapR 0.10.2 (Released 2019-09-22)
 
 * `retrieve_token_mssql()`, because `retrieve_credential_mssql()` is more general and more useful.
 
-REDCapR 0.9.8 (Released 2017-05-18)
-==========================================================
+# REDCapR 0.9.8 (Released 2017-05-18)
 
 ### New Features
 
@@ -270,8 +260,7 @@ REDCapR 0.9.8 (Released 2017-05-18)
 
 * Adapted to new 2.4 version of curl (see #154)
 
-REDCapR 0.9.7 (Released 2017-09-09)
-==========================================================
+# REDCapR 0.9.7 (Released 2017-09-09)
 
 ### New Features
 
@@ -286,15 +275,13 @@ REDCapR 0.9.7 (Released 2017-09-09)
 * Uses the `dplyr` package instead of `plyr`.  This shouldn't affect callers, because immediately before returning the data, `REDCapR::redcap_read()` coerces the `tibble::tibble` (which was formerly called `dplyr::tbl_df`) back to a vanilla `data.frame` with `as.data.frame()`.
 * A few more instances of validating input parameters to read functions. (Issue #8).
 
-REDCapR 0.9.3 (Released 2015-08-25)
-==========================================================
+# REDCapR 0.9.3 (Released 2015-08-25)
 
 ### Minor Updates
 
 * The `retrieve-token()` tests now account for the (OS X) builds where the RODBC package isn't available.
 
-REDCapR 0.9.0 (Released 2015-08-14)
-==========================================================
+# REDCapR 0.9.0 (Released 2015-08-14)
 
 ### New Features
 
@@ -308,23 +295,19 @@ REDCapR 0.9.0 (Released 2015-08-14)
 * Reconnected code that reads only the `id_position` in the first stage of batching.  The metadata needed to be read before that, after the updates for REDCap Version 6.0.x.
 * `retrieve_token_mssql()` uses regexes to validate parameters
 
-REDCapR 0.7-1 (Released 2014-12-17)
-==========================================================
+# REDCapR 0.7-1 (Released 2014-12-17)
 
 ### New Features
 
 * Updated for Version 6.0.x of REDCap (which introduced a lot of improvements to API behavior).
 
-REDCapR 0.6 (Released 2014-11-03)
-==========================================================
+# REDCapR 0.6 (Released 2014-11-03)
 
 ### New Features
 
 * The `config_options` in the httr package are exposed to the REDCapR user.  See issues #55 & #58; thanks to @rparrish and @nutterb for their contributions (<https://github.com/OuhscBbmc/REDCapR/issues/55> & <https://github.com/OuhscBbmc/REDCapR/issues/58>).
 
-
-REDCapR 0.5 (Released 2014-10-19)
-==========================================================
+# REDCapR 0.5 (Released 2014-10-19)
 
 ### New Features
 
@@ -335,9 +318,7 @@ REDCapR 0.5 (Released 2014-10-19)
 * Test suite now uses `testthat::skip_on_cran()` before any call involving OUHSC's REDCap server.
 * Vignette example of subsetting, conditioned on a second variable's value.
 
-
-REDCapR 0.4-28 (Released 2014-09-20)
-==========================================================
+# REDCapR 0.4-28 (Released 2014-09-20)
 
 ### New Features
 
@@ -357,9 +338,7 @@ REDCapR 0.4-28 (Released 2014-09-20)
 * The tests are split into two collections: one that's run by the CRAN checks, and the other run manually.  [Thanks, Gabor Csardi](https://stackoverflow.com/questions/25595487/testthat-pattern-for-long-running-tests).  Any test with a dependency outside the package code (especially the REDCap test projects) is run manually so changes to the test databases won't affect the success of building the previous version on CRAN.
 * Corrected typo in `redcap_download_file_oneshot()` documentation, thanks to Andrew Peters (@ARPeters #45).
 
-
-REDCapR 0.3 (Released 2014-09-01)
-==========================================================
+# REDCapR 0.3 (Released 2014-09-01)
 
 ### New Features
 
@@ -374,8 +353,7 @@ REDCapR 0.3 (Released 2014-09-01)
 
 * Correct batch reads with longitudinal schema #27
 
-REDCapR 0.2 (Released 2014-07-02)
-==========================================================
+# REDCapR 0.2 (Released 2014-07-02)
 
 ### New Features
 
@@ -391,8 +369,7 @@ REDCapR 0.2 (Released 2014-07-02)
 * Renamed `redcap_write()` to `redcap_write_oneshot()` (which is an internal function).
 * Small renames to parameters
 
-REDCapR 0.1 (Released 2014-01-14)
-==========================================================
+# REDCapR 0.1 (Released 2014-01-14)
 
 ### New Features
 

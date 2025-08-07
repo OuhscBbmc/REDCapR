@@ -64,5 +64,6 @@
         "vmrn",
         "yesno",
         "zipcode"
-    ]
+    ],
+    "r.lsp.promptToInstall": false
 }
