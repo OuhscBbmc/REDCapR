@@ -125,7 +125,7 @@ administrator to send you the static material.</p>
 <span class="r-in"><span><span class="co"># Query a classic project with 3 arms</span></span></span>
 <span class="r-in"><span><span class="va">token_1</span>  <span class="op">&lt;-</span> <span class="st">"14817611F9EA1A6E149BBDC37134E8EA"</span> <span class="co"># arm-multiple-delete</span></span></span>
 <span class="r-in"><span><span class="va">result_1</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_arm_export</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token_1</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The list of arms was retrieved from the REDCap project in 0.2 seconds. The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The list of arms was retrieved from the REDCap project in 0.6 seconds. The http status code was 200.</span>
 <span class="r-in"><span><span class="va">result_1</span><span class="op">$</span><span class="va">has_arms</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span><span class="va">result_1</span><span class="op">$</span><span class="va">data</span></span></span>
@@ -139,7 +139,7 @@ administrator to send you the static material.</p>
 <span class="r-in"><span><span class="co"># Query a classic project without arms</span></span></span>
 <span class="r-in"><span><span class="va">token_2</span>  <span class="op">&lt;-</span> <span class="st">"F9CBFFF78C3D78F641BAE9623F6B7E6A"</span> <span class="co"># simple-write</span></span></span>
 <span class="r-in"><span><span class="va">result_2</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_arm_export</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token_2</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> A 'classic' REDCap project has no arms.  Retrieved in 0.1 seconds. The http status code was 400.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> A 'classic' REDCap project has no arms.  Retrieved in 0.5 seconds. The http status code was 400.</span>
 <span class="r-in"><span><span class="va">result_2</span><span class="op">$</span><span class="va">has_arms</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="va">result_2</span><span class="op">$</span><span class="va">data</span></span></span>
