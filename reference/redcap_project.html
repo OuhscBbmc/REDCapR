@@ -103,18 +103,19 @@ password for a project.  Required.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">uri</span>     <span class="op">&lt;-</span> <span class="st">"https://redcap-dev-2.ouhsc.edu/redcap/api/"</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="va">uri</span>     <span class="op">&lt;-</span> <span class="st">"https://redcap-dev-2.ouhsc.edu/redcap/api/"</span></span></span>
 <span class="r-in"><span><span class="va">token</span>   <span class="op">&lt;-</span> <span class="st">"9A068C425B1341D69E83064A2D273A70"</span></span></span>
-<span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">project</span> <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="va">redcap_project</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">ds_all</span>  <span class="op">&lt;-</span> <span class="va">project</span><span class="op">$</span><span class="fu">read</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting to read 5 records  at 2025-09-11 22:46:55.748275.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting to read 5 records  at 2025-10-07 19:10:25.145268.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-in"><span></span></span>
@@ -125,9 +126,9 @@ password for a project.  Required.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2 data access groups were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting to read 5 records  at 2025-09-11 22:46:56.992184.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting to read 5 records  at 2025-10-07 19:10:26.338846.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-in"><span></span></span>
@@ -135,25 +136,25 @@ password for a project.  Required.</p></dd>
 <span class="r-in"><span><span class="va">ids_of_shorties</span> <span class="op">&lt;-</span> <span class="va">ds_skinny</span><span class="op">$</span><span class="va">record_id</span><span class="op">[</span><span class="va">ds_skinny</span><span class="op">$</span><span class="va">height</span> <span class="op">&lt;</span> <span class="fl">40</span><span class="op">]</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ds_males</span>        <span class="op">&lt;-</span> <span class="va">project</span><span class="op">$</span><span class="fu">read</span><span class="op">(</span>records<span class="op">=</span><span class="va">ids_of_males</span>, batch_size<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2 data access groups were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 3 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting to read 3 records  at 2025-09-11 22:46:58.232916.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting to read 3 records  at 2025-10-07 19:10:27.623426.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading batch 1 of 2, with subjects 2 through 3 (ie, 2 unique subject records).</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading batch 2 of 2, with subjects 5 through 5 (ie, 1 unique subject records).</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-in"><span><span class="va">ds_shorties</span>     <span class="op">&lt;-</span> <span class="va">project</span><span class="op">$</span><span class="fu">read</span><span class="op">(</span>records<span class="op">=</span><span class="va">ids_of_shorties</span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting to read 2 records  at 2025-09-11 22:46:59.618508.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Starting to read 2 records  at 2025-10-07 19:10:29.097263.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Reading batch 1 of 1, with subjects 1 through 2 (ie, 2 unique subject records).</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-in"><span></span></span>
