@@ -16,15 +16,14 @@ Thank you for taking the time to review my submission, and please tell me if the
 Test environments
 -----------------------------------------------
 
-1. Local Ubuntu, R 4.4.2
-2. Local Win11, R 4.4.2 patched
+1. Local Ubuntu, R 4.5.1
+2. Local Win11, R 4.5.1 patched
 3. R-hub
-    1. [Ubuntu Linux, R-devel](https://github.com/OuhscBbmc/REDCapR/actions/runs/16556199643/job/46817960404)
-    2. [Windows Server, R-devel](https://github.com/OuhscBbmc/REDCapR/actions/runs/16556199643/job/46817960397)
-    3. [MacOS, R-devel](https://github.com/OuhscBbmc/REDCapR/actions/runs/16556199643/job/46817960406)
-4. [win-builder](https://win-builder.r-project.org/1P2wqjw560kmrevdepcheck::revdep_check(num_workers = 4)
-), development version.
-5. [GiHub Actions R-CMD-check](https://github.com/OuhscBbmc/REDCapR/actions/workflows/check-release.yaml), Ubuntu 24.04 LTS
+    1. [Ubuntu Linux, R-devel](https://github.com/OuhscBbmc/REDCapR/actions/runs/18323818727/job/52183210338)
+    2. [Windows Server, R-devel](https://github.com/OuhscBbmc/REDCapR/actions/runs/18323818727/job/52183210404)
+    3. [MacOS, R-devel](https://github.com/OuhscBbmc/REDCapR/actions/runs/18323818727/job/52183210334)
+4. win-builder: I haven't gotten a response during this afternoon.
+5. [GitHub Actions R-CMD-check](https://github.com/OuhscBbmc/REDCapR/actions/workflows/check-release.yaml), Ubuntu 24.04 LTS
 
 R CMD check results
 -----------------------------------------------
