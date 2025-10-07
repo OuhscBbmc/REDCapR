@@ -1,7 +1,7 @@
 retrieve_credential_testing <- function(
-    project_tag = "simple",
-    username = NA_character_
-  ) {
+  project_tag = "simple",
+  username = NA_character_
+) {
   checkmate::assert_character(project_tag     , any.missing = FALSE, min.chars = 2, max.chars = 50)
   checkmate::assert_character(username        , any.missing = TRUE , min.chars = 2, max.chars = 50)
 
