@@ -30,7 +30,7 @@ retrieve_credential_testing <- function(
   d_map <-
     system.file("misc/project-redirection.yml", package = "REDCapR") %>%
     yaml::yaml.load_file(
-      handlers = list(map = \(x) tibble::as_tibble(x))
+      handlers = list(map = function(x) tibble::as_tibble(x))
     ) %>%
     dplyr::bind_rows() %>%
     tidyr::unnest(projects) %>%
@@ -94,7 +94,7 @@ retrieve_plugins <- function(plugin_name) {
   d_map <-
     system.file("misc/plugin-redirection.yml", package = "REDCapR") %>%
     yaml::yaml.load_file(
-      handlers = list(map = \(x) tibble::as_tibble(x))
+      handlers = list(map = function(x) tibble::as_tibble(x))
     ) %>%
     dplyr::bind_rows() %>%
     tidyr::unnest(plugins) %>%

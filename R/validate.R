@@ -174,7 +174,7 @@ validate_no_logical <- function(d, stop_on_error = FALSE) {
   checkmate::assert_data_frame(d)
   checkmate::assert_logical(stop_on_error, any.missing = FALSE, len = 1L)
 
-  indices <- which(vapply(d, \(x) inherits(x, "logical"), logical(1)))
+  indices <- which(vapply(d, function(x) {inherits(x, "logical")}, logical(1)))
 
   if (length(indices) == 0L) {
     tibble::tibble(
