@@ -1,5 +1,15 @@
 # REDCapR (development version)
 
+# REDCapR 1.6.0  (released 2025-10-07)
+
+This release is primarily small changes to comply with a CRAN check.
+One of the examples accidentally called an external/test server, which is against CRAN rules.
+
+### Minor Enhancements
+
+* Avoid calling server in a CRAN example (#577)
+* Add new multilevel model test project to the test suite (#578)
+
 # REDCapR 1.5.0  (released 2025-07-27)
 
 This release is primarily small changes to comply with new CRAN checks
