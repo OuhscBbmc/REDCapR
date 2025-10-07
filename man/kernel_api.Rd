@@ -56,15 +56,16 @@ the function will always return an object of class \link[base:numeric_version]{b
 It guarantees the value can always be used in \code{\link[utils:compareVersion]{utils::compareVersion()}}.
 }
 \examples{
-config_options <- NULL
+\dontrun{
 uri            <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token          <- "9A068C425B1341D69E83064A2D273A70"
+
+config_options <- NULL
 post_body      <- list(
   token    = token,
   content  = "project",
   format   = "csv"
 )
-\dontrun{
 kernel <- REDCapR:::kernel_api(uri, post_body, config_options)
 
 # Consume the results in a few different ways.

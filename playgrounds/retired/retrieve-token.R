@@ -36,8 +36,8 @@
 #' Will Beasley
 #'
 #' @examples
-#' library(REDCapR) #Load the package into the current R session.
 #' \dontrun{
+#' library(REDCapR) #Load the package into the current R session.
 #' # ---- SQL Server Example ----------------------------
 #' # Rely on `retrieve_token()` to create & destory the channel.
 #' dsn      <- "TokenSecurity"

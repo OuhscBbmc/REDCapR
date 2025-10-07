@@ -54,6 +54,7 @@
 #' \dontrun{
 #' uri      <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 #' token    <- "0BF920AAF9566A8E603F528A498A5729" # dag
+#'
 #' result   <- REDCapR::redcap_users_export(redcap_uri=uri, token=token)
 #' result$data_user
 #' result$data_user_form

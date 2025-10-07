@@ -91,7 +91,6 @@ REDCapR::redcap_file_repo_list_oneshot(
   token         = token,
   folder_id     = 1
 )$data
-
 }
 }
 \references{

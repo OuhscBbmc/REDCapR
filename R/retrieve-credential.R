@@ -115,13 +115,13 @@
 #' Will Beasley
 #'
 #' @examples
+#' \dontrun{
 #' # ---- Local File Example ----------------------------
 #' path <- system.file("misc/dev-2.credentials", package = "REDCapR")
 #' (p1  <- REDCapR::retrieve_credential_local(path, 33L))
 #' (p2  <- REDCapR::retrieve_credential_local(path, 34L))
 #'
 #'
-#' \dontrun{
 #' # Create a skeleton of the local credential file to modify
 #' path_demo <- base::tempfile(pattern = "temp", fileext = ".credentials")
 #'

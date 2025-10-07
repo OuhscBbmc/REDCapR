@@ -17,9 +17,10 @@
 #' password for a project.  Required.
 #'
 #' @examples
+#' \dontrun{
 #' uri     <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 #' token   <- "9A068C425B1341D69E83064A2D273A70"
-#' \dontrun{
+#'
 #' project <- REDCapR::redcap_project$new(redcap_uri=uri, token=token)
 #' ds_all  <- project$read()
 #'

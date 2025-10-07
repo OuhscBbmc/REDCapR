@@ -84,7 +84,6 @@
 #'   token         = token,
 #'   folder_id     = 1
 #' )$data
-#'
 #' }
 
 #' @export
