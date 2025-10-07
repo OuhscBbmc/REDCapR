@@ -49,7 +49,10 @@ This ensures that a the function will always return an object of class
 \code{\link[utils:compareVersion]{utils::compareVersion()}}.
 }
 \examples{
+\dontrun{
 uri      <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token    <- "9A068C425B1341D69E83064A2D273A70"
+
 REDCapR::redcap_version(redcap_uri = uri, token = token)
+}
 }

@@ -67,6 +67,7 @@ REDCap API documentation, v.10.5.1)
 \dontrun{
 uri           <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token         <- "9A068C425B1341D69E83064A2D273A70"
+
 ds_instrument <- REDCapR::redcap_instruments(redcap_uri=uri, token=token)$data
 }
 }

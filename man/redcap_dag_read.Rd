@@ -67,6 +67,7 @@ REDCap an returns them as a \code{\link[tibble:tibble]{tibble::tibble()}}.
 \dontrun{
 uri     <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token   <- "9A068C425B1341D69E83064A2D273A70"
+
 REDCapR::redcap_dag_read(redcap_uri=uri, token=token)$data
 }
 }

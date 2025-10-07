@@ -33,9 +33,12 @@
 #' [utils::compareVersion()].
 #'
 #' @examples
+#' \dontrun{
 #' uri      <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 #' token    <- "9A068C425B1341D69E83064A2D273A70"
+#'
 #' REDCapR::redcap_version(redcap_uri = uri, token = token)
+#' }
 
 #' @export
 redcap_version <- function(
@@ -43,7 +46,7 @@ redcap_version <- function(
   token,
   verbose         = TRUE,
   config_options  = NULL,
-  handle_httr       = NULL
+  handle_httr     = NULL
 ) {
 
   version_error <- base::package_version("0.0.0")
