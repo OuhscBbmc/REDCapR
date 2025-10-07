@@ -5,6 +5,12 @@ This submission is primarily to address an example that called an external serve
 Brian Ripley requested that it be modified to comply with the CRAN policy that states
 no external sources should be called.
 
+This is the second time this year an example has slipped through like this.
+I have done two things that should prevent this from happening again:
+
+1. I reviewed all 40 instances of the `@example` tag.  About half call a server
+2. I standardized their appearance, and made sure they all are wrapped with `\dontrun{}` from beginning to end.
+
 Thank you for taking the time to review my submission, and please tell me if there's something else I should do for CRAN.  -Will Beasley
 
 Test environments
@@ -26,6 +32,9 @@ R CMD check results
 * No ERRORs or WARNINGs on any builds.
 * One NOTE:
   * On some builds, five urls produced a 403 in the check, but they resolve fine in the browser.
+    These seem to be related to the government shutdown.
+    Withholding any political commentary that will get our funding cut further,
+    here is a banner on an HHS page: "Mission-critical activities of HHS will continue during the Democrat-led government shutdown. Please use this site as a resource as the Trump Administration works to reopen the government for the American people."
 
 Downstream dependencies
 -----------------------------------------------
