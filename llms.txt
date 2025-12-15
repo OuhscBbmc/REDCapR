@@ -1,0 +1,337 @@
+# [REDCapR](https://github.com/OuhscBbmc/REDCapR)
+
+We’ve been using R with [REDCap](https://projectredcap.org/)’s API since
+2012 and have developed
+[`REDCapR`](https://github.com/OuhscBbmc/REDCapR). Before encapsulating
+these functions in a package, we were replicating 50+ lines of code to
+contact REDCap and robustly transform the returned
+[csv](https://en.wikipedia.org/wiki/Comma-separated_values) into an R
+`data.frame`; it took twice that much to implement batching. All this
+can be done in one call to
+[`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html):
+
+``` r
+ds <- redcap_read(redcap_uri=uri, token=token)$data
+```
+
+The
+[`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html)
+function also accepts values for subsetting/filtering the records and
+fields. Here are two examples; the first selects only a portion of the
+rows, while the second selects only a portion of the columns.
+Documentation for the additional 20+ functions are found at
+[ouhscbbmc.github.io/REDCapR/reference](https://ouhscbbmc.github.io/REDCapR/reference/).
+
+``` r
+# Return only records with IDs of 1 and 4
+desired_records <- c(1, 4)
+ds_some_rows <- redcap_read(
+  redcap_uri   = uri,
+  token        = token,
+  records      = desired_records
+)$data
+
+# Return only the fields record_id, name_first, and age
+desired_fields <- c("record_id", "name_first", "age")
+ds_some_fields <- redcap_read(
+  redcap_uri  = uri,
+  token       = token,
+  fields      = desired_fields
+)$data
+```
+
+The `REDCapR` package includes the SSL certificate retrieved by
+[`httr::find_cert_bundle()`](https://github.com/r-lib/httr/blob/main/R/utils.r).
+Your REDCap server’s identity is always verified, unless the setting is
+overridden (alternative certificates can also be provided).
+
+To keep our maintenance efforts manageable, the package implements only
+the REDCap API functions that have been requested. If there’s a feature
+that would help your projects, please tell us in a new issue in
+REDCapR’s [GitHub
+repository](https://github.com/OuhscBbmc/REDCapR/issues). A
+[troubleshooting](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html)
+document helps diagnose issues with the API.
+
+### Installation and Documentation
+
+The *release* version can be installed from
+[CRAN](https://cran.r-project.org/package=REDCapR).
+
+``` r
+install.packages("REDCapR")
+```
+
+The *development* version can be installed from
+[GitHub](https://github.com/OuhscBbmc/REDCapR) after installing the
+`remotes` package.
+
+``` r
+install.packages("remotes") # Run this line if the 'remotes' package isn't installed already.
+remotes::install_github("OuhscBbmc/REDCapR")
+```
+
+The [ouhscbbmc.github.io/REDCapR](https://ouhscbbmc.github.io/REDCapR/)
+site describes the package functions, and includes documents involving
+[basic
+operations](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html),
+[advanced
+operations](https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.html),
+[token
+security](https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html),
+and
+[troubleshooting](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html).
+
+Also checkout the other packages that exist for communicating with
+REDCap, which are listed in the [REDCap
+Tools](https://redcap-tools.github.io/projects/) directory.
+
+### Collaborative Development
+
+We encourage input and collaboration. If you’re familiar with GitHub and
+R packages, feel free to submit a [pull
+request](https://github.com/OuhscBbmc/REDCapR/pulls). If you’d like to
+report a bug or make a suggestion, please create a GitHub
+[issue](https://github.com/OuhscBbmc/REDCapR/issues); issues are a
+usually a good place to ask public questions too. However, feel free to
+email Will (<wibeasley@hotmail.com>). Please note that this project is
+released with a [Contributor Code of
+Conduct](https://github.com/OuhscBbmc/REDCapR/blob/main/CONDUCT.md); by
+participating in this project you agree to abide by its terms. We have
+some starting material described in the
+[`./documentation-for-developers/`](https://github.com/OuhscBbmc/REDCapR/tree/main/documentation-for-developers)
+directory.
+
+We’d like to thank the following developers for their
+[advice](https://github.com/OuhscBbmc/REDCapR/issues?q=is%3Aissue+is%3Aclosed)
+and [code
+contributions](https://github.com/OuhscBbmc/REDCapR/graphs/contributors):
+[Benjamin Nutter](https://github.com/nutterb), [Rollie
+Parrish](https://github.com/rparrish), [Scott
+Burns](https://github.com/sburns), [John
+Aponte](https://github.com/johnaponte), [Andrew
+Peters](https://github.com/ARPeters), and [Hao
+Zhu](https://github.com/haozhu233).
+
+### Funders
+
+Much of this package has been developed to support the needs of the
+following projects. We appreciate the support. (So far) the primary
+developers of REDCapR are the external evaluators for [Oklahoma’s
+MIECHV](https://oklahoma.gov/health/health-education/children---family-health/family-support-and-prevention-service/miechv-program-federal-home-visiting-grant.html)
+program. See the preliminary CQI reports (many of which use REDCapR) at
+<https://ouhscbbmc.github.io/MReportingPublic/>.
+
+- *OUHSC CCAN Independent Evaluation of the State of Oklahoma
+  Competitive Maternal, Infant, and Early Childhood Home Visiting
+  ([MIECHV](https://mchb.hrsa.gov/programs-impact/maternal-infant-early-childhood-home-visiting-miechv-program))
+  Project*. HRSA/ACF D89MC23154. David Bard, PI, OUHSC; 2011-2015.
+- *Independent Evaluation of the State of OK MIECHV Evidence Based Home
+  Visitation Project*, [NIH](https://www.nih.gov/)-sponsored
+  collaboration with [OSDH](https://oklahoma.gov/health.html). David
+  Bard, PI, OUHSC; 2015-2017.
+- *OSDH ParentPRO Pilot Evaluation*, federally-sponsored collaboration
+  with [OSDH](https://oklahoma.gov/health.html). David Bard, PI, OUHSC;
+  2015-2017.
+- *Title IV-E Waiver Project*,
+  [HRSA/MCHB](https://mchb.hrsa.gov/)-sponsored collaboration with
+  [OKDHS](https://oklahoma.gov/okdhs.html); David Bard, PI, OUHSC;
+  2014-2017.
+- *Integrative Analysis of Longitudinal Studies of Aging (IALSA)*,
+  sponsored by [NIH
+  5P01AG043362](https://grantome.com/grant/NIH/P01-AG043362). Scott
+  Hofer, PI, University of Victoria; Will Beasley, PI of site-award,
+  OUHSC; 2013-2018.
+- *Oklahoma Shared Clinical and Translational Resources*, sponsored by
+  [NIH NIGMS; U54
+  GM104938](https://grantome.com/grant/NIH/U54-GM104938). Judith A.
+  James, PI, OUHSC; 2013-2018.
+- *Oklahoma Shared Clinical and Translational Resources*, sponsored by
+  [NIH
+  U54GM104938](https://taggs.hhs.gov/Detail/AwardDetail?arg_AwardNum=U54GM104938&arg_ProgOfficeCode=127);
+  2020-2021.
+- Additional Institutional Support from OUHSC [Dept of
+  Pediatrics](https://medicine.ouhsc.edu/academic-departments/pediatrics);
+  2013-2021.
+
+Thanks, [Will Beasley](https://orcid.org/0000-0002-5613-5006), [David
+Bard](https://orcid.org/0000-0002-3922-8489), & Thomas Wilson  
+[University of Oklahoma Health Sciences Center](https://www.ouhsc.edu/),
+[Department of
+Pediatrics](https://medicine.ouhsc.edu/academic-departments/pediatrics),
+[Biomedical & Behavioral Research Core](https://www.ouhsc.edu/BBMC/).
+
+### Build Status and Package Characteristics
+
+| [Branch](https://github.com/OuhscBbmc/REDCapR)         |                                          [GitHub Actions](https://github.com/OuhscBbmc/REDCapR/actions)                                          |                                           [Codecov](https://app.codecov.io/gh/OuhscBbmc/REDCapR)                                           |
+|:-------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------:|
+| [Main](https://github.com/OuhscBbmc/REDCapR/tree/main) | [![R-CMD-check](https://github.com/OuhscBbmc/REDCapR/workflows/R-CMD-check/badge.svg?branch=main)](https://github.com/OuhscBbmc/REDCapR/actions) | [![codecov](https://codecov.io/gh/OuhscBbmc/REDCapR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/OuhscBbmc/REDCapR/branch/main) |
+| [Dev](https://github.com/OuhscBbmc/REDCapR/tree/dev)   | [![R-CMD-check](https://github.com/OuhscBbmc/REDCapR/workflows/R-CMD-check/badge.svg?branch=dev)](https://github.com/OuhscBbmc/REDCapR/actions)  |  [![codecov](https://codecov.io/gh/OuhscBbmc/REDCapR/branch/dev/graph/badge.svg)](https://app.codecov.io/gh/OuhscBbmc/REDCapR/branch/dev)  |
+|                                                        |                                                                 *Ubuntu Latest*                                                                  |                                                              *Test Coverage*                                                               |
+
+| Key                                                         | Value                                                                                                                                               |
+|:------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------|
+| [License](https://choosealicense.com/)                      | [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://choosealicense.com/licenses/mit/)                                      |
+| [CRAN Version](https://cran.r-project.org/package=REDCapR)  | [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/REDCapR)](https://cran.r-project.org/package=REDCapR)                                    |
+| [CRAN Rate](https://cranlogs.r-pkg.org/)                    | ![CRAN Pace](https://cranlogs.r-pkg.org/badges/REDCapR)                                                                                             |
+| [Zenodo Archive](https://zenodo.org/search?ln=en&p=redcapr) | [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.61990.svg)](https://doi.org/10.5281/zenodo.61990)                                               |
+| [Production Doc](https://www.rdocumentation.org/)           | [![RDoc](https://api.rdocumentation.org/badges/version/REDCapR)](https://www.rdocumentation.org/packages/REDCapR)                                   |
+| [Development Doc](https://ouhscbbmc.github.io/REDCapR/)     | [![rdoc](https://img.shields.io/badge/pkgdown-GitHub.io-orange.svg?longCache=true&style=style=for-the-badge)](https://ouhscbbmc.github.io/REDCapR/) |
+
+# Package index
+
+## Records via the API
+
+Reading and writing REDCap records, and files within a record.
+
+- [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.md)
+  : Read records from a REDCap project in subsets, and stacks them
+  together before returning a dataset
+- [`redcap_read_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read_oneshot.md)
+  : Read/Export records from a REDCap project
+- [`redcap_read_oneshot_eav()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read_oneshot_eav.md)
+  : Read/Export records from a REDCap project –still in development
+- [`redcap_read_eav_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read_eav_oneshot.md)
+  : Read/Export records from a REDCap project, returned as eav
+- [`redcap_write()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_write.md)
+  : Write/Import records to a REDCap project
+- [`redcap_write_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_write_oneshot.md)
+  : Write/Import records to a REDCap project
+- [`redcap_delete()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_delete.md)
+  : Delete records in a REDCap project
+- [`redcap_report()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_report.md)
+  : Read/Export records that populate a REDCap report
+
+## File API Operations
+
+Manipulating files in the REDCap records and in the file repository.
+
+- [`redcap_file_download_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_file_download_oneshot.md)
+  : Download a file from a REDCap project record
+- [`redcap_file_upload_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_file_upload_oneshot.md)
+  : Upload a file into to a REDCap project record
+- [`redcap_file_repo_list_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_file_repo_list_oneshot.md)
+  : Export a List of Files/Folders from the File Repository
+
+## Additional API Methods
+
+Accessing other information from the REDCap project or server.
+
+- [`redcap_arm_export()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_arm_export.md)
+  : Export Arms
+- [`redcap_dag_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_dag_read.md)
+  : Read data access groups from a REDCap project
+- [`redcap_event_instruments()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_event_instruments.md)
+  : Enumerate the instruments to event mappings
+- [`redcap_event_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_event_read.md)
+  : Export Events
+- [`redcap_instrument_download()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_instrument_download.md)
+  : Download REDCap Instruments
+- [`redcap_instruments()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_instruments.md)
+  : Enumerate the instruments (forms)
+- [`redcap_log_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_log_read.md)
+  : Get the logging of a project.
+- [`redcap_metadata_coltypes()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_coltypes.md)
+  : Suggests a col_type for each field in a REDCap project
+- [`redcap_metadata_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_read.md)
+  : Export the metadata of a REDCap project
+- [`redcap_metadata_write()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_metadata_write.md)
+  : Import metadata of a REDCap project
+- [`redcap_next_free_record_name()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_next_free_record_name.md)
+  : Determine free available record ID
+- [`redcap_project_info_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_project_info_read.md)
+  : Export project information.
+- [`redcap_survey_link_export_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_survey_link_export_oneshot.md)
+  : Get survey link from REDCap
+- [`redcap_users_export()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_users_export.md)
+  : List authorized users
+- [`redcap_variables()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_variables.md)
+  : Enumerate the exported variables
+- [`redcap_version()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_version.md)
+  : Determine version of REDCap instance
+
+## Internals
+
+Functions and classes used by the methods above.
+
+- [`REDCapR`](https://ouhscbbmc.github.io/REDCapR/reference/REDCapR-package.md)
+  [`REDCapR-package`](https://ouhscbbmc.github.io/REDCapR/reference/REDCapR-package.md)
+  : REDCapR: Interaction Between R and REDCap
+- [`redcap_project`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_project.md)
+  : A Reference Class to make later calls to REDCap more convenient
+- [`to_api_array()`](https://ouhscbbmc.github.io/REDCapR/reference/to_api_array.md)
+  : Convert a vector to the array format expected by the REDCap API
+- [`kernel_api()`](https://ouhscbbmc.github.io/REDCapR/reference/kernel_api.md)
+  : REDCapR internal function for calling the REDCap API
+
+## Security
+
+Responsibly store and retrieve a user’s project-specific token.
+
+- [`retrieve_credential_local()`](https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.md)
+  [`retrieve_credential_mssql()`](https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.md)
+  [`create_credential_local()`](https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.md)
+  : Read a token and other credentials from a (non-REDCap) database or
+  file
+
+## Utilities
+
+Functions to help the methods above.
+
+- [`collapse_vector()`](https://ouhscbbmc.github.io/REDCapR/reference/collapse_vector.md)
+  : Collapse a vector of values into a single string when necessary
+- [`constant()`](https://ouhscbbmc.github.io/REDCapR/reference/constant.md)
+  : Collection of REDCap-specific constants
+- [`create_batch_glossary()`](https://ouhscbbmc.github.io/REDCapR/reference/create_batch_glossary.md)
+  : Creates a dataset that help batching long-running read and writes
+- [`regex_named_captures()`](https://ouhscbbmc.github.io/REDCapR/reference/metadata_utilities.md)
+  [`checkbox_choices()`](https://ouhscbbmc.github.io/REDCapR/reference/metadata_utilities.md)
+  : Manipulate and interpret the metadata of a REDCap project
+- [`redcap_column_sanitize()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_column_sanitize.md)
+  : Sanitize to adhere to REDCap character encoding requirements
+- [`replace_nas_with_explicit()`](https://ouhscbbmc.github.io/REDCapR/reference/replace_nas_with_explicit.md)
+  : Create explicit factor level for missing values
+- [`sanitize_token()`](https://ouhscbbmc.github.io/REDCapR/reference/sanitize_token.md)
+  : Validate and sanitize the user's REDCap token
+- [`validate_for_write()`](https://ouhscbbmc.github.io/REDCapR/reference/validate.md)
+  [`validate_data_frame_inherits()`](https://ouhscbbmc.github.io/REDCapR/reference/validate.md)
+  [`validate_no_logical()`](https://ouhscbbmc.github.io/REDCapR/reference/validate.md)
+  [`validate_field_names()`](https://ouhscbbmc.github.io/REDCapR/reference/validate.md)
+  [`validate_record_id_name()`](https://ouhscbbmc.github.io/REDCapR/reference/validate.md)
+  [`validate_repeat_instance()`](https://ouhscbbmc.github.io/REDCapR/reference/validate.md)
+  [`validate_uniqueness()`](https://ouhscbbmc.github.io/REDCapR/reference/validate.md)
+  : Inspect a dataset to anticipate problems before writing to a REDCap
+  project
+
+## Soft Deprecated
+
+Functions that have been renamed and will be removed in future REDCapR
+versions.
+
+- [`redcap_file_download_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_file_download_oneshot.md)
+  : Download a file from a REDCap project record
+- [`redcap_file_upload_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_file_upload_oneshot.md)
+  : Upload a file into to a REDCap project record
+- [`redcap_instrument_download()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_instrument_download.md)
+  : Download REDCap Instruments
+
+# Articles
+
+### Getting Started
+
+These vignettes provide an introduction to REDCapR.
+
+- [Typical REDCap Workflow for a Data
+  Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.md):
+- [Basic REDCapR
+  Operations](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.md):
+- [Security
+  Database](https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.md):
+- [Troubleshooting REDCap API
+  Calls](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.md):
+- [Advanced REDCapR
+  Operations](https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.md):
+- [Retrieving Longitudinal and Repeating
+  Structures](https://ouhscbbmc.github.io/REDCapR/articles/longitudinal-and-repeating.md):
+- [Writing to a REDCap
+  Project](https://ouhscbbmc.github.io/REDCapR/articles/workflow-write.md):

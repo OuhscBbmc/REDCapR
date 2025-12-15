@@ -1,0 +1,433 @@
+# Writing to a REDCap Project
+
+Writing data *to* REDCap is more difficult than reading data *from*
+REDCap. When you read, you receive data in the structure that the REDCap
+provides you. You have some control about the columns, rows, and data
+types, but there is not a lot you have to be concerned.
+
+In contrast, the structure of the dataset you send to the REDCap server
+must be precise. You need to pass special variables so that the REDCap
+server understands the hierarchical structure of the data points. This
+vignette walks you through that process.
+
+If you are new to REDCap and its API, please first understand the
+concepts described in these two
+[vignettes](https://ouhscbbmc.github.io/REDCapR/articles/):
+
+- [Typical REDCap Workflow for a Data
+  Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html)
+- [Retrieving Longitudinal and Repeating
+  Structures](https://ouhscbbmc.github.io/REDCapR/articles/longitudinal-and-repeating.html)
+
+## Part 1 - Intro
+
+### Strategy
+
+As described in the [Retrieving Longitudinal and Repeating
+Structures](https://ouhscbbmc.github.io/REDCapR/articles/longitudinal-and-repeating.html)
+vignette, the best way to read and write data from projects with
+longitudinal/repeating elements is to break up the “block matrix”
+dataset into individual datasets. Each rectangle should have a coherent
+grain.
+
+Following this strategy, we’ll write to the REDCap server in two
+distinct steps:
+
+1.  Upload the patient-level instrument(s)
+2.  Upload the each repeating instrument separately.
+
+The actual upload phase is pretty straight-forward –it’s just a call to
+[`REDCapR::redcap_write()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_write.md).
+Most of the vignette’s code prepares the dataset so that the upload will
+run smoothly.
+
+### Pre-requisites
+
+See the [Typical REDCap Workflow for a Data
+Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html)
+vignette and
+
+1.  [Verify REDCapR is
+    installed](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#verify-redcapr-is-installed)
+2.  [Verify REDCap
+    Access](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#verify-redcap-access)
+3.  [Review
+    Codebook](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#review-codebook)
+
+### Retrieve Token
+
+Please closely read the [Retrieve Protected
+Token](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html#part-2---retrieve-protected-token)
+section, which has important security implications. The current vignette
+imports a fake dataset into REDCap, and we’ll use a token stored in a
+local file.
+
+``` r
+# retrieve-credential
+path_credential <- system.file("misc/dev-2.credentials", package = "REDCapR")
+credential  <- REDCapR::retrieve_credential_local(
+  path_credential = path_credential,
+  project_id      = 3748
+)
+
+c(credential$redcap_uri, credential$token)
+```
+
+### Datasets to Write to Server
+
+To keep this vignette focused on writing/importing/uploading to the
+server, we’ll start with the data that needs to be written. These
+example tables were prepared by [Raymond
+Balise](https://github.com/RaymondBalise) for our 2023
+[R/Medicine](https://events.linuxfoundation.org/r-medicine/) workshop,
+“Using REDCap and R to Rapidly Produce Biomedical Publications”.
+
+There are two tables, each with a different
+[granularity](https://www.1keydata.com/datawarehousing/fact-table-granularity.html):
+
+- `ds_patient`: each row represents one patient,
+- `ds_daily`: each row represents one daily measurement per patient.
+
+``` r
+# load-patient
+ds_patient <-
+  "test-data/vignette-repeating-write/data-patient.rds" |>
+  system.file(package = "REDCapR") |>
+  readr::read_rds()
+
+ds_patient
+```
+
+``` r
+# load-repeating
+ds_daily <-
+  "test-data/vignette-repeating-write/data-daily.rds" |>
+  system.file(package = "REDCapR") |>
+  readr::read_rds()
+
+ds_daily
+```
+
+## Part 2 - Write Data: One row per patient
+
+Besides the
+[`data.frame`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html)
+to write to REDCap, the only required arguments of the
+[`REDCapR::redcap_write()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_write.html)
+function are `redcap_uri` and `token`; both are contained in the
+credential object created in the previous section.
+
+As discussed in the [Troubleshooting
+vignette](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html#writing),
+we recommend running these two preliminary checks before trying to write
+the dataset to the server for the very first time.
+
+### Prep: Stoplight Fields
+
+If the REDCap project isn’t longitudinal and doesn’t have arms,
+uploading a patient-level data.frame to REDCap doesn’t require adding
+variables. However we typically populate the `*_complete` variables to
+communicate the record’s status.
+
+If the row is needs a human to add more values or inspect the existing
+values consider [marking the
+instrument](https://ouhscbbmc.github.io/REDCapR/reference/constant.html)
+“incomplete” or “unverified”; the patient’s instrument record will
+appear red or yellow in REDCap’s Record Dashboard. Otherwise consider
+marking the instrument “complete” so it will appear green.
+
+With this example project, the only patient-level instrument is
+“enrollment”, so the corresponding variable is `enrollment_complete`.
+
+``` r
+# patient-complete
+ds_patient <-
+  ds_patient |>
+  dplyr::mutate(
+    enrollment_complete   = REDCapR::constant("form_complete"),
+  )
+```
+
+### Prep: `REDCapR::validate_for_write()`
+
+[`REDCapR::validate_for_write()`](https://ouhscbbmc.github.io/REDCapR/reference/validate.md)
+inspects a data frame to anticipate potential problems before writing
+with REDCap’s API. A tibble is returned, with one row per potential
+problem (and a suggestion how to avoid it). Ideally an 0-row tibble is
+returned.
+
+``` r
+REDCapR::validate_for_write(ds_patient, convert_logical_to_integer = TRUE)
+```
+
+If you encounter problems that can be checked with automation, please
+tell us in [an issue](https://github.com/OuhscBbmc/REDCapR/issues).
+We’ll work with you to incorporate the new check into
+[`REDCapR::validate_for_write()`](https://ouhscbbmc.github.io/REDCapR/reference/validate.md).
+
+When a dataset’s problems are caught before reaching the server, the
+solutions are easier to identify and implement.
+
+### Prep: Write Small Subset First
+
+If this is your first time with a complicated project, consider loading
+a small subset of rows and columns. In this case, we start with only
+three columns and two rows.
+
+``` r
+# patient-subset
+ds_patient |>
+  dplyr::select(              # First three columns
+    id_code,
+    date,
+    is_mobile,
+  ) |>
+  dplyr::slice(1:2) |>        # First two rows
+  REDCapR::redcap_write(
+    ds_to_write = _,
+    redcap_uri  = credential$redcap_uri,
+    token       = credential$token,
+    convert_logical_to_integer = TRUE
+  )
+```
+
+### Prep: Recode Variables where Necessary
+
+Some variables in the data.frame might be represented differently than
+in REDCap.
+
+A common transformation is changing strings into the integers that
+underlie radio buttons. Common approaches are
+[`dplyr::case_match()`](https://dplyr.tidyverse.org/reference/case_match.html)
+and using joining to lookup tables (if the mappings are expressed in a
+csv). Here’s an in-line example of
+[`dplyr::case_match()`](https://dplyr.tidyverse.org/reference/case_match.html).
+
+``` r
+ds_patient <-
+  ds_patient |>
+  dplyr::mutate(
+    race =
+      dplyr::case_match(
+        race,
+        "White"                       ~  1L,
+        "Black or African American"   ~  2L,
+        "Asian"                       ~  3L,
+        "Native American"             ~  4L,
+        "Pacific Islander"            ~  5L,
+        "Multiracial"                 ~  6L,
+        "Refused or don't know"       ~  7L
+      )
+  )
+```
+
+![codebook race variable screen shot](images/codebook-race.png)
+
+### Write Entire Patient-level Table
+
+If the small subset works, we usually jump ahead and try all columns and
+rows.
+
+If this larger table fails, split the difference between (a) the smaller
+working example and (b) the larger failing example. See if this middle
+point (that has fewer rows and/or columns than the failing point)
+succeeds or fails. Then repeat. This “bisection” or “binary search”
+[debugging
+technique](https://medium.com/codecastpublication/debugging-tools-and-techniques-binary-search-2da5bb4282c7)
+is helpful in many areas of programming and statistical modeling.
+
+``` r
+# patient-entire
+ds_patient |>
+  REDCapR::redcap_write(
+    ds_to_write = _,
+    redcap_uri  = credential$redcap_uri,
+    token       = credential$token,
+    convert_logical_to_integer = TRUE
+  )
+```
+
+## Part 3 - Write Data: Repeating Instrument
+
+### Add Plumbing Variables
+
+As stated in the vignette’s intro, the structure of the dataset uploaded
+to the server must be precise. When uploading repeating instruments,
+there are several important columns:
+
+1.  `record_id`: typically indicates the patient’s id. (This field can
+    be renamed for the project.)
+2.  `redcap_event_name`: If the project is longitudinal or has arms,
+    this indicates the event. Otherwise, you don’t need to add this
+    variable.
+3.  `redcap_repeat_instrument`: Indicates the instrument/form that is
+    repeating for these columns.
+4.  `redcap_repeat_instance`: Typically a sequential positive integer
+    (*e.g.*, 1, 2, 3, …) indicating the order.
+
+The combination of these variables needs to be unique. Please read the
+[Retrieving Longitudinal and Repeating
+Structures](https://ouhscbbmc.github.io/REDCapR/articles/longitudinal-and-repeating.html)
+vignette for details of these variables and their meanings.
+
+You need to pass specific variables so that the REDCap server
+understands the hierarchical structure of the data points.
+
+``` r
+# repeat-plumbing
+ds_daily <-
+  ds_daily |>
+  dplyr::group_by(id_code) |>
+  dplyr::mutate(
+    redcap_repeat_instrument  = "daily",
+    redcap_repeat_instance    = dplyr::row_number(da_date),
+    daily_complete            = REDCapR::constant("form_complete"),
+  ) |>
+  dplyr::ungroup() |>
+  dplyr::select(
+    id_code,                        # Or `record_id`, if you didn't rename it
+    # redcap_event_name,            # If the project is longitudinal or has arms
+    redcap_repeat_instrument,       # The name of the repeating instrument/form
+    redcap_repeat_instance,         # The sequence of the repeating instrument
+    tidyselect::everything(),       # All columns not explicitly passed to `dplyr::select()`
+    daily_complete,                 # Indicates incomplete, unverified, or complete
+  )
+
+# Check for potential problems.  (Remember zero rows are good.)
+REDCapR::validate_for_write(ds_daily, convert_logical_to_integer = TRUE)
+
+ds_daily
+```
+
+### Writing Repeating Instrument Variables
+
+``` r
+# daily-entire
+ds_daily |>
+  REDCapR::redcap_write(
+    ds_to_write = _,
+    redcap_uri  = credential$redcap_uri,
+    token       = credential$token,
+    convert_logical_to_integer = TRUE
+  )
+```
+
+## Part 4 - Next Steps
+
+### More Complexity
+
+This vignette required only two data.frames, but more complex projects
+sometimes need more. For example, each repeating instrument should be
+its own data.frame and writing step. Arms and longitudinal events need
+to be considered too.
+
+### Batching
+
+By default,
+[`REDCapR::redcap_write()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_write.md)
+requests datasets of 100 patients as a time, and stacks the resulting
+subsets together before returning a data.frame. This can be adjusted to
+improve performance; the ‘Details’ section of
+[`REDCapR::redcap_write()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_write.md)
+discusses the trade offs.
+
+I usually shoot for ~10 seconds per batch.
+
+### Manual vs API
+
+Manual downloading/uploading might make sense if you’re do the operation
+only once. But when does it ever stop after the first time?
+
+If you have trouble uploading, consider adding a few fake patients &
+measurements and then download the csv. It might reveal something you
+didn’t anticipate. But be aware that it will be in the block matrix
+format (*i.e.*, everything jammed into one rectangle.)
+
+### REDCap’s CDIS
+
+The [Clinical Data Interoperability
+Services](https://projectredcap.org/software/cdis/) (CDIS) use
+[FHIR](https://www.hl7.org/fhir/overview.html) to move data from your
+institution’s
+[EMR/EHR](https://www.healthit.gov/faq/what-are-differences-between-electronic-medical-records-electronic-health-records-and-personal)
+(eg, Epic, Cerner) to REDCap. Research staff have control over which
+patient records are selected or eligible. Conceptually it’s similar to
+writing to REDCap’s with the API, but at much bigger scale.
+Realistically, it takes months to get through your institution’s human
+layers. Once established, a project would be populated with EMR data in
+much less development time –assuming the desired data models corresponds
+with FHIR [endpoints](https://hl7.org/fhir/endpoint.html).
+
+## Notes
+
+This vignette was originally designed for the [2023
+R/Medicine](https://events.linuxfoundation.org/r-medicine/) workshop,
+*Using REDCap and R to Rapidly Produce Biomedical Publications Cleaning
+Medical Data* with [Raymond R.
+Balise](https://github.com/RaymondBalise), Belén Hervera, Daniel Maya,
+Anna Calderon, Tyler Bartholomew, Stephan Kadauke, and João Pedro
+Carmezim Correia and the [2024
+R/Medicine](https://rconsortium.github.io/RMedicine_website/Program.html)
+workshop, *REDCap + R: Teaming Up in the Tidyverse*, with Stephan
+Kadauke. The workshop slides are for
+[2023](https://github.com/RaymondBalise/r_med_redcap_2023_public) and
+[2024](https://github.com/skadauke/rmedicine_2024_redcap_r_workshop).
+
+This work was made possible in part by the NIH grant
+[U54GM104938](https://taggs.hhs.gov/Detail/AwardDetail?arg_AwardNum=U54GM104938&arg_ProgOfficeCode=127)
+to the [Oklahoma Shared Clinical and Translational
+Resource)](http://osctr.ouhsc.edu).
+
+## Session Information
+
+For the sake of documentation and reproducibility, the current report
+was rendered in the following environment. Click the line below to
+expand.
+
+Environment
+
+    #> ─ Session info ───────────────────────────────────────────────────────────────
+    #>  setting  value
+    #>  version  R version 4.5.2 (2025-10-31)
+    #>  os       macOS Sequoia 15.7.2
+    #>  system   aarch64, darwin20
+    #>  ui       X11
+    #>  language en-US
+    #>  collate  en_US.UTF-8
+    #>  ctype    en_US.UTF-8
+    #>  tz       UTC
+    #>  date     2025-12-15
+    #>  pandoc   3.1.11 @ /usr/local/bin/ (via rmarkdown)
+    #>  quarto   NA
+    #> 
+    #> ─ Packages ───────────────────────────────────────────────────────────────────
+    #>  package     * version date (UTC) lib source
+    #>  bslib         0.9.0   2025-01-30 [1] CRAN (R 4.5.0)
+    #>  cachem        1.1.0   2024-05-16 [1] CRAN (R 4.5.0)
+    #>  cli           3.6.5   2025-04-23 [1] CRAN (R 4.5.0)
+    #>  desc          1.4.3   2023-12-10 [1] CRAN (R 4.5.0)
+    #>  digest        0.6.39  2025-11-19 [1] CRAN (R 4.5.2)
+    #>  evaluate      1.0.5   2025-08-27 [1] CRAN (R 4.5.0)
+    #>  fastmap       1.2.0   2024-05-15 [1] CRAN (R 4.5.0)
+    #>  fs            1.6.6   2025-04-12 [1] CRAN (R 4.5.0)
+    #>  htmltools     0.5.9   2025-12-04 [1] CRAN (R 4.5.2)
+    #>  jquerylib     0.1.4   2021-04-26 [1] CRAN (R 4.5.0)
+    #>  jsonlite      2.0.0   2025-03-27 [1] CRAN (R 4.5.0)
+    #>  knitr         1.50    2025-03-16 [1] CRAN (R 4.5.0)
+    #>  lifecycle     1.0.4   2023-11-07 [1] CRAN (R 4.5.0)
+    #>  pkgdown       2.2.0   2025-11-06 [1] CRAN (R 4.5.0)
+    #>  R6            2.6.1   2025-02-15 [1] CRAN (R 4.5.0)
+    #>  ragg          1.5.0   2025-09-02 [1] CRAN (R 4.5.0)
+    #>  rlang         1.1.6   2025-04-11 [1] CRAN (R 4.5.0)
+    #>  rmarkdown     2.30    2025-09-28 [1] CRAN (R 4.5.0)
+    #>  sass          0.4.10  2025-04-11 [1] CRAN (R 4.5.0)
+    #>  sessioninfo   1.2.3   2025-02-05 [1] CRAN (R 4.5.0)
+    #>  systemfonts   1.3.1   2025-10-01 [1] CRAN (R 4.5.0)
+    #>  textshaping   1.0.4   2025-10-10 [1] CRAN (R 4.5.0)
+    #>  xfun          0.54    2025-10-30 [1] CRAN (R 4.5.0)
+    #>  yaml          2.3.12  2025-12-10 [1] CRAN (R 4.5.2)
+    #> 
+    #>  [1] /Users/runner/work/_temp/Library
+    #>  [2] /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library
+    #> 
+    #> ──────────────────────────────────────────────────────────────────────────────

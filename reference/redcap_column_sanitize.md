@@ -1,0 +1,76 @@
+# Sanitize to adhere to REDCap character encoding requirements
+
+Replace non-ASCII characters with legal characters that won't cause
+problems when writing to a REDCap project.
+
+## Usage
+
+``` r
+redcap_column_sanitize(
+  d,
+  column_names = colnames(d),
+  encoding_initial = "latin1",
+  substitution_character = "?"
+)
+```
+
+## Arguments
+
+- d:
+
+  The [`base::data.frame()`](https://rdrr.io/r/base/data.frame.html) or
+  [`tibble::tibble()`](https://tibble.tidyverse.org/reference/tibble.html)
+  containing the dataset used to update the REDCap project. Required.
+
+- column_names:
+
+  An array of `character` values indicating the names of the variables
+  to sanitize. Optional.
+
+- encoding_initial:
+
+  An array of `character` values indicating the names of the variables
+  to sanitize. Optional.
+
+- substitution_character:
+
+  The `character` value that replaces characters that were unable to be
+  appropriately matched.
+
+## Value
+
+A data frame with same columns, but whose character values have been
+sanitized.
+
+## Details
+
+Letters like an accented 'A' are replaced with a plain 'A'.
+
+This is a thin wrapper around
+[`base::iconv()`](https://rdrr.io/r/base/iconv.html). The
+`ASCII//TRANSLIT` option does the actual transliteration work. As of
+`R 3.1.0`, the OSes use similar, but different, versions to convert the
+characters. Be aware of this in case you notice OS-dependent
+differences.
+
+## Author
+
+Will Beasley
+
+## Examples
+
+``` r
+# Typical examples are not shown because they require non-ASCII encoding,
+#   which makes the package documentation less portable.
+
+dirty <- data.frame(
+  id     = 1:3,
+  names  = c("Ekstr\xf8m", "J\xf6reskog", "bi\xdfchen Z\xfcrcher")
+)
+
+REDCapR::redcap_column_sanitize(dirty)
+#>   id             names
+#> 1  1           Ekstrom
+#> 2  2         J"oreskog
+#> 3  3 bisschen Z"urcher
+```

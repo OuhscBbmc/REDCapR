@@ -240,15 +240,15 @@ both are in the credential object created in the previous section.</p>
 <span>    redcap_uri  <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">redcap_uri</span>,</span>
 <span>    token       <span class="op">=</span> <span class="va">credential</span><span class="op">$</span><span class="va">token</span></span>
 <span>  <span class="op">)</span><span class="op">$</span><span class="va">data</span></span>
-<span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 0.5 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 24 variable metadata records were read from REDCap in 0.3 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
 <span><span class="co">#&gt; 2 data access groups were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.</span></span>
-<span><span class="co">#&gt; Starting to read 5 records  at 2025-10-14 01:09:47.824541.</span></span>
+<span><span class="co">#&gt; 5 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span>
+<span><span class="co">#&gt; Starting to read 5 records  at 2025-12-15 19:48:29.154479.</span></span>
 <span><span class="co">#&gt; Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).</span></span>
-<span><span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.4 seconds.  The http status code was 200.</span></span></code></pre></div>
+<span><span class="co">#&gt; 5 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.</span></span></code></pre></div>
 <p>At this point, the data.frame <code>ds_1</code> has everything you
 need to start analyzing the project.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -268,7 +268,7 @@ need to start analyzing the project.</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   race_and_ethnicity_complete &lt;dbl&gt;</span></span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">ds_1</span><span class="op">$</span><span class="va">weight</span><span class="op">)</span></span></code></pre></div>
-<p><img src="workflow-read_files/figure-html/unstructured-2-1.png" alt="histogram of patient weight" width="700"></p>
+<p><img src="workflow-read_files/figure-html/unstructured-2-1.png" class="r-plt" alt="histogram of patient weight" width="700"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">ds_1</span><span class="op">)</span></span>
@@ -593,15 +593,15 @@ expand.</p>
 Environment <span class="glyphicon glyphicon-plus-sign"></span>
 </summary><pre><code><span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Session info ───────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">setting </span> <span style="color: #555555; font-style: italic;">value</span></span></span>
-<span><span class="co">#&gt;  version  R version 4.5.1 (2025-06-13)</span></span>
-<span><span class="co">#&gt;  os       macOS Sequoia 15.6.1</span></span>
+<span><span class="co">#&gt;  version  R version 4.5.2 (2025-10-31)</span></span>
+<span><span class="co">#&gt;  os       macOS Sequoia 15.7.2</span></span>
 <span><span class="co">#&gt;  system   aarch64, darwin20</span></span>
 <span><span class="co">#&gt;  ui       X11</span></span>
 <span><span class="co">#&gt;  language en-US</span></span>
 <span><span class="co">#&gt;  collate  en_US.UTF-8</span></span>
 <span><span class="co">#&gt;  ctype    en_US.UTF-8</span></span>
 <span><span class="co">#&gt;  tz       UTC</span></span>
-<span><span class="co">#&gt;  date     2025-10-14</span></span>
+<span><span class="co">#&gt;  date     2025-12-15</span></span>
 <span><span class="co">#&gt;  pandoc   3.1.11 @ /usr/local/bin/ (via rmarkdown)</span></span>
 <span><span class="co">#&gt;  quarto   NA</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -617,15 +617,15 @@ Environment <span class="glyphicon glyphicon-plus-sign"></span>
 <span><span class="co">#&gt;  crayon        1.5.3      <span style="color: #555555;">2024-06-20</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
 <span><span class="co">#&gt;  curl          7.0.0      <span style="color: #555555;">2025-08-19</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
 <span><span class="co">#&gt;  desc          1.4.3      <span style="color: #555555;">2023-12-10</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
-<span><span class="co">#&gt;  digest        0.6.37     <span style="color: #555555;">2024-08-19</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  digest        0.6.39     <span style="color: #555555;">2025-11-19</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
 <span><span class="co">#&gt;  dplyr         1.1.4      <span style="color: #555555;">2023-11-17</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
 <span><span class="co">#&gt;  evaluate      1.0.5      <span style="color: #555555;">2025-08-27</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
 <span><span class="co">#&gt;  fastmap       1.2.0      <span style="color: #555555;">2024-05-15</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
 <span><span class="co">#&gt;  fs            1.6.6      <span style="color: #555555;">2025-04-12</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
 <span><span class="co">#&gt;  generics      0.1.4      <span style="color: #555555;">2025-05-09</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
 <span><span class="co">#&gt;  glue          1.8.0      <span style="color: #555555;">2024-09-30</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
-<span><span class="co">#&gt;  hms           1.1.3      <span style="color: #555555;">2023-03-21</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
-<span><span class="co">#&gt;  htmltools     0.5.8.1    <span style="color: #555555;">2024-04-04</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  hms           1.1.4      <span style="color: #555555;">2025-10-17</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  htmltools     0.5.9      <span style="color: #555555;">2025-12-04</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
 <span><span class="co">#&gt;  httr          1.4.7      <span style="color: #555555;">2023-08-15</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
 <span><span class="co">#&gt;  jquerylib     0.1.4      <span style="color: #555555;">2021-04-26</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
 <span><span class="co">#&gt;  jsonlite      2.0.0      <span style="color: #555555;">2025-03-27</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
@@ -634,11 +634,11 @@ Environment <span class="glyphicon glyphicon-plus-sign"></span>
 <span><span class="co">#&gt;  magrittr      2.0.4      <span style="color: #555555;">2025-09-12</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
 <span><span class="co">#&gt;  pillar        1.11.1     <span style="color: #555555;">2025-09-17</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
 <span><span class="co">#&gt;  pkgconfig     2.0.3      <span style="color: #555555;">2019-09-22</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
-<span><span class="co">#&gt;  pkgdown       2.1.3      <span style="color: #555555;">2025-05-25</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  pkgdown       2.2.0      <span style="color: #555555;">2025-11-06</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
 <span><span class="co">#&gt;  R6            2.6.1      <span style="color: #555555;">2025-02-15</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
 <span><span class="co">#&gt;  ragg          1.5.0      <span style="color: #555555;">2025-09-02</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
-<span><span class="co">#&gt;  readr         2.1.5      <span style="color: #555555;">2024-01-10</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
-<span><span class="co">#&gt;  REDCapR       <span style="color: #BB00BB; font-weight: bold;">1.6.0.9000</span> <span style="color: #555555;">2025-10-14</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
+<span><span class="co">#&gt;  readr         2.1.6      <span style="color: #555555;">2025-11-14</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
+<span><span class="co">#&gt;  REDCapR       <span style="color: #BB00BB; font-weight: bold;">1.6.0.9000</span> <span style="color: #555555;">2025-12-15</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span></span>
 <span><span class="co">#&gt;  rlang         1.1.6      <span style="color: #555555;">2025-04-11</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
 <span><span class="co">#&gt;  rmarkdown     2.30       <span style="color: #555555;">2025-09-28</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
 <span><span class="co">#&gt;  sass          0.4.10     <span style="color: #555555;">2025-04-11</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
@@ -650,10 +650,10 @@ Environment <span class="glyphicon glyphicon-plus-sign"></span>
 <span><span class="co">#&gt;  tzdb          0.5.0      <span style="color: #555555;">2025-03-15</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
 <span><span class="co">#&gt;  utf8          1.2.6      <span style="color: #555555;">2025-06-08</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
 <span><span class="co">#&gt;  vctrs         0.6.5      <span style="color: #555555;">2023-12-01</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
-<span><span class="co">#&gt;  vroom         1.6.6      <span style="color: #555555;">2025-09-19</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  vroom         1.6.7      <span style="color: #555555;">2025-11-28</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
 <span><span class="co">#&gt;  withr         3.0.2      <span style="color: #555555;">2024-10-28</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
-<span><span class="co">#&gt;  xfun          0.53       <span style="color: #555555;">2025-08-19</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
-<span><span class="co">#&gt;  yaml          2.3.10     <span style="color: #555555;">2024-07-26</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  xfun          0.54       <span style="color: #555555;">2025-10-30</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.0)</span></span></span>
+<span><span class="co">#&gt;  yaml          2.3.12     <span style="color: #555555;">2025-12-10</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">CRAN (R 4.5.2)</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #555555;"> [1] /Users/runner/work/_temp/Library</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;"> [2] /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library</span></span></span>
@@ -672,7 +672,7 @@ Environment <span class="glyphicon glyphicon-plus-sign"></span>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
