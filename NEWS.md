@@ -2,7 +2,7 @@
 
 ### New Features
 
-* New `redcap_repeating_read()` function exports repeating instrument-event mappings for a project. (#XXX, @ezraporter)
+* New `redcap_repeating_read()` function exports repeating instrument-event mappings for a project. (#585, @ezraporter)
 
 # REDCapR 1.6.0  (released 2025-10-07)
 
