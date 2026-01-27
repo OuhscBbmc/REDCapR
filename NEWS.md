@@ -6,7 +6,7 @@
 
 ### Minor Enhancements
 
-* Better new columns returned from the server to `redcap_project_info_read()` no longer throw a warning. (#587)
+* New columns returned from the server to `redcap_project_info_read()` no longer throw a warning. (#587)
 
 # REDCapR 1.6.0  (released 2025-10-07)
 
