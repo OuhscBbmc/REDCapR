@@ -156,8 +156,8 @@ redcap_users_export <- function(
           #   convert = FALSE
           # ) %>%
           dplyr::mutate(
-            form_name     = sub("^(\\w+):([0-2])$", "\\1", .data$forms),
-            permission_id = sub("^(\\w+):([0-2])$", "\\2", .data$forms),
+            form_name     = sub("^(\\w+):(\\d{1,3})$", "\\1", .data$forms, perl = TRUE),
+            permission_id = sub("^(\\w+):(\\d{1,3})$", "\\2", .data$forms, perl = TRUE),
             permission_id = as.integer(.data$permission_id),
             permission    = constant_to_form_rights(.data$permission_id)
             #   translate_form_rights(
