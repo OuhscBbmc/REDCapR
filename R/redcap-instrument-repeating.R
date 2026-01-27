@@ -63,18 +63,21 @@
 #' @examples
 #' \dontrun{
 #' uri                 <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
+#' uri                 <- "https://bbmc.ouhsc.edu/redcap/api/" # production
 #'
 #' # Repeating events project
-#' token_1  <- "FEF7A22B52E6B9942AFF7A28C426C871" # "repeating-instruments" test project
-#' REDCapR::redcap_repeating_read(redcap_uri=uri, token=token_1)$data
+#' token_1  <- "FEF7A22B52E6B9942AFF7A28C426C871" # "vignette-repeating" test project
+#' token_1  <- "22C3FF1C8B08899FB6F86D91D874A159" # vignette-repeating production
+#' REDCapR::redcap_instrument_repeating(redcap_uri=uri, token=token_1)$data
 #'
 #' # Classic project (without repeating instruments) throws an error
 #' token_2  <- "9A068C425B1341D69E83064A2D273A70" # "simple" test project
-#' # REDCapR::redcap_repeating_read(redcap_uri=uri, token=token_2)$data
+#' token_2  <- "9A81268476645C4E5F03428B8AC3AA7B" # "simple" test project production
+#' # Throws an error REDCapR::redcap_instrument_repeating(redcap_uri=uri, token=token_2)$data
 #' }
 
 #' @export
-redcap_repeating_read <- function(
+redcap_instrument_repeating <- function(
   redcap_uri,
   token,
   verbose           = TRUE,

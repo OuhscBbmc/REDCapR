@@ -2,7 +2,7 @@
 
 ### New Features
 
-* New `redcap_repeating_read()` function exports repeating instrument-event mappings for a project. (#585, @ezraporter)
+* New `redcap_instrument_repeating()` function exports repeating instrument-event mappings for a project. (#585, @ezraporter)
 
 ### Minor Enhancements
 

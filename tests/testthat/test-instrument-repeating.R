@@ -7,7 +7,7 @@ test_that("Smoke Test", {
   testthat::skip_on_cran()
   expect_message(
     returned_object <-
-      redcap_repeating_read(
+      redcap_instrument_repeating(
         redcap_uri  = credential_repeating$redcap_uri,
         token       = credential_repeating$token
       )
@@ -19,7 +19,7 @@ test_that("simple repeating", {
   expected_outcome_message <- "\\d+ repeating event-instrument metadata metadata records were read from REDCap in \\d\\.\\d seconds\\.  The http status code was 200\\.(\\n)?"
 
   returned_object <-
-    redcap_repeating_read(
+    redcap_instrument_repeating(
       redcap_uri  = credential_repeating$redcap_uri,
       token       = credential_repeating$token,
       verbose     = FALSE
@@ -43,7 +43,7 @@ test_that("longitudinal repeating", {
   expected_outcome_message <- "\\d+ repeating event-instrument metadata metadata records were read from REDCap in \\d\\.\\d seconds\\.  The http status code was 200\\.(\\n)?"
 
   returned_object_explicit <-
-    redcap_repeating_read(
+    redcap_instrument_repeating(
       redcap_uri  = credential$redcap_uri,
       token       = credential$token,
       verbose     = FALSE
@@ -85,7 +85,7 @@ test_that("Bad URI", {
   # expected_outcome_message <- "(?s)The REDCapR variable retrieval was not successful\\..+?.+"
 
   # expect_error(
-    returned_object <- redcap_repeating_read(
+    returned_object <- redcap_instrument_repeating(
       redcap_uri  = bad_uri,
       token       = credential_repeating$token,
       verbose     = FALSE
@@ -103,7 +103,7 @@ test_that("no repeating", {
   expected_outcome_message <- "You cannot export repeating instruments and events because the project does not contain any repeating instruments and events(\\n)?"
 
   returned_object <-
-    redcap_repeating_read(
+    redcap_instrument_repeating(
       redcap_uri  = credential$redcap_uri,
       token       = credential$token,
       verbose     = FALSE
@@ -124,7 +124,7 @@ test_that("bad token -Error", {
   expected_outcome_message <- "ERROR: You do not have permissions to use the API"
 
   returned_object <-
-    redcap_repeating_read(
+    redcap_instrument_repeating(
       redcap_uri  = credential_repeating$redcap_uri,
       token       = "BAD00000000000000000000000000000",
       verbose     = FALSE
