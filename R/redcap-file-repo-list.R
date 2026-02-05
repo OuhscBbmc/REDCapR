@@ -123,7 +123,6 @@ redcap_file_repo_list_oneshot <- function(
       config_options  = config_options,
       handle_httr     = handle_httr
     )
-  # browser()
 
   col_types <- readr::cols(
     folder_id   = readr::col_integer(),

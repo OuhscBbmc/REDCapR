@@ -409,7 +409,6 @@ validate_for_write <- function(
     lst_concerns[[length(lst_concerns) + 1L]] <- validate_no_logical(d)
   }
 
-  # browser()
   # Vertically stack all the data.frames into a single data frame
   dplyr::bind_rows(lst_concerns)
 }
