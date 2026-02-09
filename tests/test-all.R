@@ -7,10 +7,10 @@ library(REDCapR)
 # message("Using test server '", Sys.getenv("redcapr_test_server"), "'.")
 # testthat::test_check("REDCapR")
 
-Sys.setenv("redcapr_test_server" = "bbmc")
+Sys.setenv("redcapr_test_server" = "prod-1")
 message("Using test server '", Sys.getenv("redcapr_test_server"), "'.")
 testthat::test_check("REDCapR")
 
-# Sys.setenv("redcapr_test_server" = "coph")
+# Sys.setenv("redcapr_test_server" = "prod-2")
 # message("Using test server '", Sys.getenv("redcapr_test_server"), "'.")
 # testthat::test_check("REDCapR")

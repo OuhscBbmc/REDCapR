@@ -1,7 +1,8 @@
 -
-  instance: bbmc
-  credential_file: "misc/example.credentials"
+  instance: prod-1
+  credential_file: "misc/prod-1.credentials"
   projects:
+    # 0
     - simple: 153
     - longitudinal: 212
     - simple-write: 213
@@ -11,7 +12,6 @@
     - super-wide-1: 753
     - survey: 817
     - clinical-trial-1: 977
-    # 0
     - nonnumeric-record-id: 998
     - dag: 999
     - potentially-problematic-values: 1396
@@ -35,7 +35,7 @@
     - file-repo: 5002
 -
   instance: dev-2
-  credential_file: "misc/dev-2.credentials"
+  credential_file: "misc/example.credentials"
   projects:
     - simple: 33
     - longitudinal: 34
@@ -68,8 +68,8 @@
     - vignette-repeating: 62
     - file-repo: 63
 -
-  instance: coph
-  credential_file: "misc/coph.credentials"
+  instance: prod-2
+  credential_file: "misc/prod-2.credentials"
   projects:
     - simple: 2298
     - longitudinal: 2299

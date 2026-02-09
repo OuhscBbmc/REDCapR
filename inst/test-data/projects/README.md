@@ -13,8 +13,7 @@ Steps to recreate on a fresh server
 1.  Assign the user (created above) to the "api" user role for each project.
 1.  Add a token for each project
 1.  Create a credential file for the new project
-    (examples [1](https://github.com/OuhscBbmc/REDCapR/blob/main/inst/misc/example.credentials) and
-    [2](https://github.com/OuhscBbmc/REDCapR/blob/main/inst/misc/dev-2.credentials))
+    (examples [1](https://github.com/OuhscBbmc/REDCapR/blob/main/inst/misc/example.credentials))
     1.  Update `redcap_uri`
     1.  Update the corresponding `project_id`
     1.  Update the corresponding `token`
