@@ -55,7 +55,7 @@ test_that("all-test-projects", {
   server_locale <- readr::locale(tz = "America/Chicago")
 
   returned_object <-
-    system.file("misc/dev-2.credentials", package = "REDCapR") %>%
+    system.file("misc/example.credentials", package = "REDCapR") %>%
     readr::read_csv(
       comment     = "#",
       col_select  = c(redcap_uri, token),

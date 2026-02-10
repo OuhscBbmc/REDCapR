@@ -15,7 +15,7 @@ token_3 <- Sys.getenv("REDCAP_KIRA_SGM_KEY")
 REDCapR::redcap_metadata_read(redcap_uri=uri, token=token_3)
 
 message("---- longitudinal project w/ stored token--------------------------")
-path <- system.file("misc/dev-2.credentials", package = "REDCapR")
+path <- system.file("misc/example.credentials", package = "REDCapR")
 # message(path)
 message("Credential file exists: ", fs::file_exists(path))
 credential <- REDCapR::retrieve_credential_local(path, 34L)

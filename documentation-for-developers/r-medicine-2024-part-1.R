@@ -4,7 +4,7 @@ requireNamespace("REDCapR")
 # If this fails, run `install.packages("REDCapR")` or `remotes::install_github(repo="OuhscBbmc/REDCapR")`
 
 ## ----retrieve-credential------------------------------------------------------
-path_credential <- system.file("misc/dev-2.credentials", package = "REDCapR")
+path_credential <- system.file("misc/example.credentials", package = "REDCapR")
 credential  <- REDCapR::retrieve_credential_local(
   path_credential = path_credential,
   project_id      = 62

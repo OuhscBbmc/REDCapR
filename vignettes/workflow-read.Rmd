@@ -156,7 +156,7 @@ To retrieve the credentials for the first project listed above,
 pass the value of "33" to `project_id`.
 
 ```{r retrieve-credential}
-path_credential <- system.file("misc/dev-2.credentials", package = "REDCapR")
+path_credential <- system.file("misc/example.credentials", package = "REDCapR")
 credential  <- REDCapR::retrieve_credential_local(
   path_credential = path_credential,
   project_id      = 33
