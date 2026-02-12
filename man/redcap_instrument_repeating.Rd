@@ -69,7 +69,6 @@ REDCap API documentation, v.16.0.4)
 \examples{
 \dontrun{
 uri                 <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
-uri                 <- "https://bbmc.ouhsc.edu/redcap/api/" # production
 
 # Repeating events project
 token_1  <- "FEF7A22B52E6B9942AFF7A28C426C871" # "vignette-repeating" test project
@@ -85,8 +84,8 @@ token_2  <- "9A81268476645C4E5F03428B8AC3AA7B" # "simple" test project productio
 \references{
 The official documentation can be found on the 'API Help Page'
 and 'API Examples' pages on the REDCap wiki (\emph{i.e.},
-https://community.projectredcap.org/articles/456/api-documentation.html and
-https://community.projectredcap.org/articles/462/api-examples.html).
+\url{https://redcap.vumc.org/community/post.php?id=456} and
+\url{https://redcap.vumc.org/community/post.php?id=462} ).
 If you do not have an account for the wiki, please ask your campus REDCap
 administrator to send you the static material.
 }

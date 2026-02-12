@@ -89,8 +89,8 @@ REDCapR::redcap_arm_export(redcap_uri=uri, token=token_3)$data
 \references{
 The official documentation can be found on the 'API Help Page'
 and 'API Examples' pages on the REDCap wiki (\emph{i.e.},
-https://community.projectredcap.org/articles/456/api-documentation.html and
-https://community.projectredcap.org/articles/462/api-examples.html).
+\url{https://redcap.vumc.org/community/post.php?id=456} and
+\url{https://redcap.vumc.org/community/post.php?id=462} ).
 If you do not have an account for the wiki, please ask your campus REDCap
 administrator to send you the static material.
 }
