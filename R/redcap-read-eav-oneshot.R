@@ -286,8 +286,8 @@ redcap_read_eav_oneshot <- function(
           col_types       = readr::cols(.default = readr::col_character()),
           locale          = locale,
           show_col_types  = FALSE
-        ) %>%
-        dplyr::distinct(), # https://community.projectredcap.org/questions/135154/replicated-rows-for-eav-output-via-api.html
+        ), # %>%
+        # dplyr::distinct(), # hack until this was fixed: https://redcap.vumc.org/community/post.php?id=135154
 
       # Don't print the warning in the try block.  Print it below,
       #   where it's under the control of the caller.
