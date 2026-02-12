@@ -1,5 +1,13 @@
 # REDCapR (development version)
 
+### New Features
+
+* New `redcap_instrument_repeating()` function exports repeating instrument-event mappings for a project. (#585, @ezraporter)
+
+### Minor Enhancements
+
+* New columns returned from the server to `redcap_project_info_read()` no longer throw a warning. (#587)
+
 # REDCapR 1.6.0  (released 2025-10-07)
 
 This release is primarily small changes to comply with a CRAN check.

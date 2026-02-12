@@ -1,6 +1,6 @@
 library(testthat)
 
-path               <- system.file("misc/dev-2.credentials", package="REDCapR")
+path               <- system.file("misc/example.credentials", package="REDCapR")
 pid_read           <- 33L # This project is for testing only reading from the server.
 pid_longitudinal   <- 34L # This project is for testing reading longitudinal projects.
 pid_write          <- 36L # This project is for testing reading & writing.

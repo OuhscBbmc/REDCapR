@@ -1,5 +1,5 @@
 -
-  instance: bbmc
+  instance: prod-1
   plugins:
     - delete_simple       : "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/wipe-project-redcapr-simple.php"
     - delete_arm_single   : "https://bbmc.ouhsc.edu/redcap/plugins/redcapr/wipe-project-redcapr-arm-delete-single.php"
@@ -15,7 +15,7 @@
     - delete_dag          : "https://redcap-dev-2.ouhsc.edu/redcap/plugins/redcapr/wipe-project-redcapr-dag-write.php"
 
 -
-  instance: coph
+  instance: prod-2
   plugins:
     - delete_simple       : "https://redcap.ouhsc.edu/redcap/plugins/redcapr/wipe-project-redcapr-simple.php"
     - delete_arm_single   : "https://redcap.ouhsc.edu/redcap/plugins/redcapr/wipe-project-redcapr-arm-delete-single.php"

@@ -170,7 +170,7 @@ redcap_write <- function(
     }
 
     write_result <- REDCapR::redcap_write_oneshot(
-      ds                          = ds_to_write[selected_indices, ],
+      ds                          = ds_to_write[selected_indices, ,drop = FALSE],
       redcap_uri                  = redcap_uri,
       token                       = token,
       overwrite_with_blanks       = overwrite_with_blanks,

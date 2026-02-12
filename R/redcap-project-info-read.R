@@ -118,7 +118,7 @@
 #' #   starting from a csv of REDCapR test projects.
 #' # The native pipes in this snippet require R 4.1+.
 #' d_all <-
-#'   system.file("misc/dev-2.credentials", package = "REDCapR") %>%
+#'   system.file("misc/example.credentials", package = "REDCapR") %>%
 #'   readr::read_csv(
 #'     comment     = "#",
 #'     col_select  = c(redcap_uri, token),
@@ -195,6 +195,7 @@ redcap_project_info_read <- function(
     project_grant_number                    = readr::col_character(),
     project_pi_firstname                    = readr::col_character(),
     project_pi_lastname                     = readr::col_character(),
+    project_pi_email                        = readr::col_character(),
     display_today_now_button                = readr::col_logical(),
     missing_data_codes                      = readr::col_character(),
     external_modules                        = readr::col_character(),
@@ -219,7 +220,9 @@ redcap_project_info_read <- function(
         # Build a column specification that matches the API response.
         col_types <- readr::cols()
         for (present_name in present_names) {
-          col_types$cols <- c(col_types$cols, all_col_types$cols[present_name])
+          if (!is.null(all_col_types$cols[[present_name]])) {
+            col_types$cols <- c(col_types$cols, all_col_types$cols[present_name])
+          }
         }
 
         # Convert the raw text to a dataset.
