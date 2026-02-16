@@ -153,7 +153,7 @@ Will Beasley
 ``` r
 # \dontrun{
 # ---- Local File Example ----------------------------
-path <- system.file("misc/dev-2.credentials", package = "REDCapR")
+path <- system.file("misc/example.credentials", package = "REDCapR")
 (p1  <- REDCapR::retrieve_credential_local(path, 33L))
 #> $redcap_uri
 #> [1] "https://redcap-dev-2.ouhsc.edu/redcap/api/"

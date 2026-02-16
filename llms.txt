@@ -227,6 +227,8 @@ Accessing other information from the REDCap project or server.
   : Export Events
 - [`redcap_instrument_download()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_instrument_download.md)
   : Download REDCap Instruments
+- [`redcap_instrument_repeating()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_instrument_repeating.md)
+  : Enumerate repeating instruments and events
 - [`redcap_instruments()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_instruments.md)
   : Enumerate the instruments (forms)
 - [`redcap_log_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_log_read.md)

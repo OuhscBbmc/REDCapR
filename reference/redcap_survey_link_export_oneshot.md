@@ -106,10 +106,10 @@ privileges in the project. (As stated in the 9.0.0 documentation.)
 
 The official documentation can be found on the 'API Help Page' and 'API
 Examples' pages on the REDCap wiki (*i.e.*,
-https://community.projectredcap.org/articles/456/api-documentation.html
-and https://community.projectredcap.org/articles/462/api-examples.html).
-If you do not have an account for the wiki, please ask your campus
-REDCap administrator to send you the static material.
+<https://redcap.vumc.org/community/post.php?id=456> and
+<https://redcap.vumc.org/community/post.php?id=462> ). If you do not
+have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.
 
 ## Author
 
@@ -133,7 +133,7 @@ result <- REDCapR::redcap_survey_link_export_oneshot(
   token          = token
 )
 #> Preparing to export the survey link for the instrument `participant_morale_questionnaire`.
-#> exported the survey link in 0.1 seconds, for instrument `participant_morale_questionnaire`, record `1`.
+#> exported the survey link in 0.2 seconds, for instrument `participant_morale_questionnaire`, record `1`.
 result$survey_link
 #> [1] "https://redcap-dev-2.ouhsc.edu/redcap/surveys/?s=wrz55jpDyXYBuw73"
 # }

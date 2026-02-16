@@ -97,10 +97,10 @@ Currently, a list is returned with the following elements:
 
 The official documentation can be found on the 'API Help Page' and 'API
 Examples' pages on the REDCap wiki (*i.e.*,
-https://community.projectredcap.org/articles/456/api-documentation.html
-and https://community.projectredcap.org/articles/462/api-examples.html).
-If you do not have an account for the wiki, please ask your campus
-REDCap administrator to send you the static material.
+<https://redcap.vumc.org/community/post.php?id=456> and
+<https://redcap.vumc.org/community/post.php?id=462> ). If you do not
+have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.
 
 ## Author
 
@@ -160,7 +160,7 @@ REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 #> [1] ""
 #> 
 #> $elapsed_seconds
-#> [1] 0.128912
+#> [1] 0.1433389
 #> 
 #> $raw_text
 #> [1] ""
@@ -190,7 +190,7 @@ REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 #> [1] ""
 #> 
 #> $elapsed_seconds
-#> [1] 0.08918309
+#> [1] 0.1221881
 #> 
 #> $raw_text
 #> [1] "{\"error\":\"You do not have permissions to use the API\"}"
@@ -236,7 +236,7 @@ REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 #> [1] ""
 #> 
 #> $elapsed_seconds
-#> [1] 0.1072869
+#> [1] 0.129024
 #> 
 #> $raw_text
 #> [1] ""

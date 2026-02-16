@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">REDCapR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.6.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.6.0.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,20 +119,20 @@ unsuccessful operation, it should contain diagnostic information.</p></li>
 <span class="r-in"><span><span class="va">token</span>    <span class="op">&lt;-</span> <span class="st">"0BF920AAF9566A8E603F528A498A5729"</span> <span class="co"># dag</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span>   <span class="op">&lt;-</span> <span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_users_export</span><span class="op">(</span>redcap_uri<span class="op">=</span><span class="va">uri</span>, token<span class="op">=</span><span class="va">token</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The REDCap users were successfully exported in 0.1 seconds.  The http status code was 200.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The REDCap users were successfully exported in 0.2 seconds.  The http status code was 200.</span>
 <span class="r-in"><span><span class="va">result</span><span class="op">$</span><span class="va">data_user</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 34</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 35</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   username        email          firstname lastname expiration data_access_group</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> itawilliamb     william-beasl… Will      Beasley… <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>               </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> unittestphifree whb4@ou.edu    Unit Test Phi Free <span style="color: #BB0000;">NA</span>         daga             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 28 more variables: data_access_group_id &lt;chr&gt;, design &lt;lgl&gt;, alerts &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 29 more variables: data_access_group_id &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   data_access_group_label &lt;chr&gt;, design &lt;lgl&gt;, alerts &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   user_rights &lt;int&gt;, data_access_groups &lt;lgl&gt;, reports &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   stats_and_charts &lt;lgl&gt;, manage_survey_participants &lt;lgl&gt;, calendar &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   data_import_tool &lt;lgl&gt;, data_comparison_tool &lt;lgl&gt;, logging &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   email_logging &lt;lgl&gt;, file_repository &lt;lgl&gt;, data_quality_create &lt;lgl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   data_quality_execute &lt;lgl&gt;, api_export &lt;lgl&gt;, api_import &lt;lgl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   api_modules &lt;lgl&gt;, mobile_app &lt;lgl&gt;, mobile_app_download_data &lt;lgl&gt;, …</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   data_quality_execute &lt;lgl&gt;, api_export &lt;lgl&gt;, api_import &lt;lgl&gt;, …</span></span>
 <span class="r-in"><span><span class="va">result</span><span class="op">$</span><span class="va">data_user_form</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   username        form_name    permission_id permission</span>

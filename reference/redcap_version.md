@@ -72,7 +72,7 @@ uri      <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token    <- "9A068C425B1341D69E83064A2D273A70"
 
 REDCapR::redcap_version(redcap_uri = uri, token = token)
-#> The REDCap version was successfully determined in 0.1 seconds. The http status code was 200.  Is is 15.2.0.
-#> [1] ‘15.2.0’
+#> The REDCap version was successfully determined in 0.1 seconds. The http status code was 200.  Is is 16.1.1.
+#> [1] ‘16.1.1’
 # }
 ```

@@ -143,7 +143,7 @@ REDCapR::redcap_metadata_write(
   redcap_uri  = uri,
   token       = token
 )
-#> 16 fields were written to the REDCap dictionary in 0.2 seconds.
+#> 16 fields were written to the REDCap dictionary in 0.3 seconds.
 #> $success
 #> [1] TRUE
 #> 
@@ -151,13 +151,13 @@ REDCapR::redcap_metadata_write(
 #> [1] 200
 #> 
 #> $outcome_message
-#> [1] "16 fields were written to the REDCap dictionary in 0.2 seconds."
+#> [1] "16 fields were written to the REDCap dictionary in 0.3 seconds."
 #> 
 #> $field_count
 #> [1] 16
 #> 
 #> $elapsed_seconds
-#> [1] 0.193269
+#> [1] 0.268856
 #> 
 #> $raw_text
 #> [1] ""

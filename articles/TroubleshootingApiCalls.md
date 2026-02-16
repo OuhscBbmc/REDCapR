@@ -740,15 +740,13 @@ administrator.
       https://<*your server name*>/redcap/api/help
 
 - If you have access to the REDCap wiki, some newer examples might exist
-  at
-  `https://community.projectredcap.org/articles/462/api-examples.html`.
-  The official documentation can be found on the “API Help Page” and
-  “API Examples” pages on the REDCap wiki (*i.e.*,
-  `https://community.projectredcap.org/articles/456/api-documentation.html`
-  and
-  `https://community.projectredcap.org/articles/462/api-examples.html`).
-  If you do not have an account for the wiki, please ask your campus
-  REDCap administrator to send you the static material.
+  at `https://redcap.vumc.org/community/post.php?id=462`. The official
+  documentation can be found on the “API Help Page” and “API Examples”
+  pages on the REDCap wiki (*i.e.*,
+  `https://redcap.vumc.org/community/post.php?id=456` and
+  `https://redcap.vumc.org/community/post.php?id=462`). If you do not
+  have an account for the wiki, please ask your campus REDCap
+  administrator to send you the static material.
 
 - Scott Burns, the primary developer of
   [PyCap](https://github.com/redcap-tools/PyCap) has a good intro at

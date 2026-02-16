@@ -64,7 +64,7 @@ local file.
 
 ``` r
 # retrieve-credential
-path_credential <- system.file("misc/dev-2.credentials", package = "REDCapR")
+path_credential <- system.file("misc/example.credentials", package = "REDCapR")
 credential  <- REDCapR::retrieve_credential_local(
   path_credential = path_credential,
   project_id      = 3748
@@ -389,20 +389,20 @@ Environment
     #> ─ Session info ───────────────────────────────────────────────────────────────
     #>  setting  value
     #>  version  R version 4.5.2 (2025-10-31)
-    #>  os       macOS Sequoia 15.7.2
+    #>  os       macOS Sequoia 15.7.3
     #>  system   aarch64, darwin20
     #>  ui       X11
     #>  language en-US
     #>  collate  en_US.UTF-8
     #>  ctype    en_US.UTF-8
     #>  tz       UTC
-    #>  date     2025-12-15
+    #>  date     2026-02-16
     #>  pandoc   3.1.11 @ /usr/local/bin/ (via rmarkdown)
     #>  quarto   NA
     #> 
     #> ─ Packages ───────────────────────────────────────────────────────────────────
     #>  package     * version date (UTC) lib source
-    #>  bslib         0.9.0   2025-01-30 [1] CRAN (R 4.5.0)
+    #>  bslib         0.10.0  2026-01-26 [1] CRAN (R 4.5.2)
     #>  cachem        1.1.0   2024-05-16 [1] CRAN (R 4.5.0)
     #>  cli           3.6.5   2025-04-23 [1] CRAN (R 4.5.0)
     #>  desc          1.4.3   2023-12-10 [1] CRAN (R 4.5.0)
@@ -413,18 +413,18 @@ Environment
     #>  htmltools     0.5.9   2025-12-04 [1] CRAN (R 4.5.2)
     #>  jquerylib     0.1.4   2021-04-26 [1] CRAN (R 4.5.0)
     #>  jsonlite      2.0.0   2025-03-27 [1] CRAN (R 4.5.0)
-    #>  knitr         1.50    2025-03-16 [1] CRAN (R 4.5.0)
-    #>  lifecycle     1.0.4   2023-11-07 [1] CRAN (R 4.5.0)
+    #>  knitr         1.51    2025-12-20 [1] CRAN (R 4.5.2)
+    #>  lifecycle     1.0.5   2026-01-08 [1] CRAN (R 4.5.2)
     #>  pkgdown       2.2.0   2025-11-06 [1] CRAN (R 4.5.0)
     #>  R6            2.6.1   2025-02-15 [1] CRAN (R 4.5.0)
     #>  ragg          1.5.0   2025-09-02 [1] CRAN (R 4.5.0)
-    #>  rlang         1.1.6   2025-04-11 [1] CRAN (R 4.5.0)
+    #>  rlang         1.1.7   2026-01-09 [1] CRAN (R 4.5.2)
     #>  rmarkdown     2.30    2025-09-28 [1] CRAN (R 4.5.0)
     #>  sass          0.4.10  2025-04-11 [1] CRAN (R 4.5.0)
     #>  sessioninfo   1.2.3   2025-02-05 [1] CRAN (R 4.5.0)
     #>  systemfonts   1.3.1   2025-10-01 [1] CRAN (R 4.5.0)
     #>  textshaping   1.0.4   2025-10-10 [1] CRAN (R 4.5.0)
-    #>  xfun          0.54    2025-10-30 [1] CRAN (R 4.5.0)
+    #>  xfun          0.56    2026-01-18 [1] CRAN (R 4.5.2)
     #>  yaml          2.3.12  2025-12-10 [1] CRAN (R 4.5.2)
     #> 
     #>  [1] /Users/runner/work/_temp/Library

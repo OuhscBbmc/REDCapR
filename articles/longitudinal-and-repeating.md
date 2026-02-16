@@ -210,7 +210,7 @@ vignette for secure approaches.
 library(magrittr)
 
 # Retrieve token
-path_credential <- system.file("misc/dev-2.credentials", package = "REDCapR")
+path_credential <- system.file("misc/example.credentials", package = "REDCapR")
 credential  <- REDCapR::retrieve_credential_local(
   path_credential = path_credential,
   project_id      = 62
@@ -510,14 +510,14 @@ Environment
     #> ─ Session info ───────────────────────────────────────────────────────────────
     #>  setting  value
     #>  version  R version 4.5.2 (2025-10-31)
-    #>  os       macOS Sequoia 15.7.2
+    #>  os       macOS Sequoia 15.7.3
     #>  system   aarch64, darwin20
     #>  ui       X11
     #>  language en-US
     #>  collate  en_US.UTF-8
     #>  ctype    en_US.UTF-8
     #>  tz       UTC
-    #>  date     2025-12-15
+    #>  date     2026-02-16
     #>  pandoc   3.1.11 @ /usr/local/bin/ (via rmarkdown)
     #>  quarto   NA
     #> 
@@ -526,15 +526,15 @@ Environment
     #>  backports      1.5.0      2024-05-23 [1] CRAN (R 4.5.0)
     #>  bit            4.6.0      2025-03-06 [1] CRAN (R 4.5.0)
     #>  bit64          4.6.0-1    2025-01-16 [1] CRAN (R 4.5.0)
-    #>  bslib          0.9.0      2025-01-30 [1] CRAN (R 4.5.0)
+    #>  bslib          0.10.0     2026-01-26 [1] CRAN (R 4.5.2)
     #>  cachem         1.1.0      2024-05-16 [1] CRAN (R 4.5.0)
-    #>  checkmate      2.3.3      2025-08-18 [1] CRAN (R 4.5.0)
+    #>  checkmate      2.3.4      2026-02-03 [1] CRAN (R 4.5.2)
     #>  cli            3.6.5      2025-04-23 [1] CRAN (R 4.5.0)
     #>  crayon         1.5.3      2024-06-20 [1] CRAN (R 4.5.0)
     #>  curl           7.0.0      2025-08-19 [1] CRAN (R 4.5.0)
     #>  desc           1.4.3      2023-12-10 [1] CRAN (R 4.5.0)
     #>  digest         0.6.39     2025-11-19 [1] CRAN (R 4.5.2)
-    #>  dplyr          1.1.4      2023-11-17 [1] CRAN (R 4.5.0)
+    #>  dplyr          1.2.0      2026-02-03 [1] CRAN (R 4.5.2)
     #>  evaluate       1.0.5      2025-08-27 [1] CRAN (R 4.5.0)
     #>  farver         2.1.2      2024-05-13 [1] CRAN (R 4.5.0)
     #>  fastmap        1.2.0      2024-05-15 [1] CRAN (R 4.5.0)
@@ -543,25 +543,25 @@ Environment
     #>  glue           1.8.0      2024-09-30 [1] CRAN (R 4.5.0)
     #>  hms            1.1.4      2025-10-17 [1] CRAN (R 4.5.0)
     #>  htmltools      0.5.9      2025-12-04 [1] CRAN (R 4.5.2)
-    #>  httr           1.4.7      2023-08-15 [1] CRAN (R 4.5.0)
+    #>  httr           1.4.8      2026-02-13 [1] CRAN (R 4.5.2)
     #>  jquerylib      0.1.4      2021-04-26 [1] CRAN (R 4.5.0)
     #>  jsonlite       2.0.0      2025-03-27 [1] CRAN (R 4.5.0)
     #>  kableExtra     1.4.0      2024-01-24 [1] CRAN (R 4.5.0)
-    #>  knitr        * 1.50       2025-03-16 [1] CRAN (R 4.5.0)
-    #>  lifecycle      1.0.4      2023-11-07 [1] CRAN (R 4.5.0)
+    #>  knitr        * 1.51       2025-12-20 [1] CRAN (R 4.5.2)
+    #>  lifecycle      1.0.5      2026-01-08 [1] CRAN (R 4.5.2)
     #>  magrittr     * 2.0.4      2025-09-12 [1] CRAN (R 4.5.0)
     #>  pillar         1.11.1     2025-09-17 [1] CRAN (R 4.5.0)
     #>  pkgconfig      2.0.3      2019-09-22 [1] CRAN (R 4.5.0)
     #>  pkgdown        2.2.0      2025-11-06 [1] CRAN (R 4.5.0)
-    #>  purrr          1.2.0      2025-11-04 [1] CRAN (R 4.5.0)
+    #>  purrr          1.2.1      2026-01-09 [1] CRAN (R 4.5.2)
     #>  R6             2.6.1      2025-02-15 [1] CRAN (R 4.5.0)
     #>  ragg           1.5.0      2025-09-02 [1] CRAN (R 4.5.0)
     #>  RColorBrewer   1.1-3      2022-04-03 [1] CRAN (R 4.5.0)
     #>  readr          2.1.6      2025-11-14 [1] CRAN (R 4.5.2)
-    #>  REDCapR        1.6.0.9000 2025-12-15 [1] local
-    #>  rlang          1.1.6      2025-04-11 [1] CRAN (R 4.5.0)
+    #>  REDCapR        1.6.0.9001 2026-02-16 [1] local
+    #>  rlang          1.1.7      2026-01-09 [1] CRAN (R 4.5.2)
     #>  rmarkdown      2.30       2025-09-28 [1] CRAN (R 4.5.0)
-    #>  rstudioapi     0.17.1     2024-10-22 [1] CRAN (R 4.5.0)
+    #>  rstudioapi     0.18.0     2026-01-16 [1] CRAN (R 4.5.2)
     #>  sass           0.4.10     2025-04-11 [1] CRAN (R 4.5.0)
     #>  scales         1.4.0      2025-04-24 [1] CRAN (R 4.5.0)
     #>  sessioninfo    1.2.3      2025-02-05 [1] CRAN (R 4.5.0)
@@ -570,16 +570,16 @@ Environment
     #>  svglite        2.2.2      2025-10-21 [1] CRAN (R 4.5.0)
     #>  systemfonts    1.3.1      2025-10-01 [1] CRAN (R 4.5.0)
     #>  textshaping    1.0.4      2025-10-10 [1] CRAN (R 4.5.0)
-    #>  tibble         3.3.0      2025-06-08 [1] CRAN (R 4.5.0)
-    #>  tidyr          1.3.1      2024-01-24 [1] CRAN (R 4.5.0)
+    #>  tibble         3.3.1      2026-01-11 [1] CRAN (R 4.5.2)
+    #>  tidyr          1.3.2      2025-12-19 [1] CRAN (R 4.5.2)
     #>  tidyselect     1.2.1      2024-03-11 [1] CRAN (R 4.5.0)
     #>  tzdb           0.5.0      2025-03-15 [1] CRAN (R 4.5.0)
-    #>  vctrs          0.6.5      2023-12-01 [1] CRAN (R 4.5.0)
-    #>  viridisLite    0.4.2      2023-05-02 [1] CRAN (R 4.5.0)
-    #>  vroom          1.6.7      2025-11-28 [1] CRAN (R 4.5.2)
+    #>  vctrs          0.7.1      2026-01-23 [1] CRAN (R 4.5.2)
+    #>  viridisLite    0.4.3      2026-02-04 [1] CRAN (R 4.5.2)
+    #>  vroom          1.7.0      2026-01-27 [1] CRAN (R 4.5.2)
     #>  withr          3.0.2      2024-10-28 [1] CRAN (R 4.5.0)
-    #>  xfun           0.54       2025-10-30 [1] CRAN (R 4.5.0)
-    #>  xml2           1.5.1      2025-12-01 [1] CRAN (R 4.5.2)
+    #>  xfun           0.56       2026-01-18 [1] CRAN (R 4.5.2)
+    #>  xml2           1.5.2      2026-01-17 [1] CRAN (R 4.5.2)
     #>  yaml           2.3.12     2025-12-10 [1] CRAN (R 4.5.2)
     #> 
     #>  [1] /Users/runner/work/_temp/Library

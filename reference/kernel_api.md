@@ -95,10 +95,10 @@ kernel <- REDCapR:::kernel_api(uri, post_body, config_options)
 # Consume the results in a few different ways.
 kernel$result
 #> Response [https://redcap-dev-2.ouhsc.edu/redcap/api/]
-#>   Date: 2025-12-15 19:47
+#>   Date: 2026-02-16 23:43
 #>   Status: 200
 #>   Content-Type: text/csv; charset=utf-8
-#>   Size: 590 B
+#>   Size: 608 B
 #> project_id,project_title,creation_time,production_time,in_production,project_...
 #> 33,"REDCapR: simple","2024-10-10 20:21:18",,0,English,4,,,,,0,0,0,0,1,0,0,,,,...
 read.csv(text = kernel$raw_text)
@@ -112,10 +112,12 @@ read.csv(text = kernel$raw_text)
 #> 1               0                  0                            1
 #>   randomization_enabled ddp_enabled project_irb_number project_grant_number
 #> 1                     0           0                 NA                   NA
-#>   project_pi_firstname project_pi_lastname display_today_now_button
-#> 1                   NA                  NA                        1
-#>   missing_data_codes external_modules bypass_branching_erase_field_prompt
-#> 1                 NA    redcap_entity                                   0
+#>   project_pi_firstname project_pi_lastname project_pi_email
+#> 1                   NA                  NA               NA
+#>   display_today_now_button missing_data_codes external_modules
+#> 1                        1                 NA    redcap_entity
+#>   bypass_branching_erase_field_prompt
+#> 1                                   0
 as.list(read.csv(text = kernel$raw_text))
 #> $project_id
 #> [1] 33
@@ -181,6 +183,9 @@ as.list(read.csv(text = kernel$raw_text))
 #> [1] NA
 #> 
 #> $project_pi_lastname
+#> [1] NA
+#> 
+#> $project_pi_email
 #> [1] NA
 #> 
 #> $display_today_now_button

@@ -133,10 +133,10 @@ Currently, a list is returned with the following elements:
 
 The official documentation can be found on the 'API Help Page' and 'API
 Examples' pages on the REDCap wiki (*i.e.*,
-https://community.projectredcap.org/articles/456/api-documentation.html
-and https://community.projectredcap.org/articles/462/api-examples.html).
-If you do not have an account for the wiki, please ask your campus
-REDCap administrator to send you the static material.
+<https://redcap.vumc.org/community/post.php?id=456> and
+<https://redcap.vumc.org/community/post.php?id=462> ). If you do not
+have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.
 
 ## Author
 
@@ -159,7 +159,7 @@ ds_1a <-
     token      = token,
     report_id  = report_1_id
   )$data
-#> 5 records and 5 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 5 records and 5 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 
 
 # Specify the column types.
@@ -177,7 +177,7 @@ ds_1b <-
     report_id  = report_1_id,
     col_types  = col_types_1
   )$data
-#> 5 records and 5 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 5 records and 5 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 
 
 # Return condensed checkboxes Report option:
@@ -195,6 +195,6 @@ ds_2 <-
     report_id  = report_2_id,
     col_types  = col_types_2
   )$data
-#> 5 records and 2 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 5 records and 2 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 # }
 ```

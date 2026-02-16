@@ -107,10 +107,10 @@ REDCapR 1.2.0. Please rename to `redcap_file_upload_oneshot()`.
 
 The official documentation can be found on the 'API Help Page' and 'API
 Examples' pages on the REDCap wiki (ie,
-https://community.projectredcap.org/articles/456/api-documentation.html
-and https://community.projectredcap.org/articles/462/api-examples.html).
-If you do not have an account for the wiki, please ask your campus
-REDCap administrator to send you the static material.
+<https://redcap.vumc.org/community/post.php?id=456> and
+<https://redcap.vumc.org/community/post.php?id=462> ). If you do not
+have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.
 
 ## Author
 
@@ -139,7 +139,7 @@ REDCapR::redcap_file_upload_oneshot(
   token      = token
 )
 #> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-1.jpg`.
-#> file uploaded to REDCap in 0.2 seconds.
+#> file uploaded to REDCap in 0.3 seconds.
 #> $success
 #> [1] TRUE
 #> 
@@ -147,7 +147,7 @@ REDCapR::redcap_file_upload_oneshot(
 #> [1] 200
 #> 
 #> $outcome_message
-#> [1] "file uploaded to REDCap in 0.2 seconds."
+#> [1] "file uploaded to REDCap in 0.3 seconds."
 #> 
 #> $records_affected_count
 #> [1] 1
@@ -156,7 +156,7 @@ REDCapR::redcap_file_upload_oneshot(
 #> [1] "1"
 #> 
 #> $elapsed_seconds
-#> [1] 0.1915121
+#> [1] 0.3254158
 #> 
 #> $raw_text
 #> [1] ""
@@ -181,14 +181,14 @@ for (i in seq_along(records)) {
   )
 }
 #> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-1.jpg`.
-#> file uploaded to REDCap in 0.1 seconds.
+#> file uploaded to REDCap in 0.3 seconds.
 #> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-2.jpg`.
-#> file uploaded to REDCap in 0.1 seconds.
+#> file uploaded to REDCap in 0.3 seconds.
 #> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-3.jpg`.
-#> file uploaded to REDCap in 0.1 seconds.
+#> file uploaded to REDCap in 0.2 seconds.
 #> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-4.jpg`.
-#> file uploaded to REDCap in 0.1 seconds.
+#> file uploaded to REDCap in 0.3 seconds.
 #> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-5.jpg`.
-#> file uploaded to REDCap in 0.1 seconds.
+#> file uploaded to REDCap in 0.3 seconds.
 # }
 ```

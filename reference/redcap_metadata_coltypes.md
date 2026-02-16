@@ -174,10 +174,10 @@ to cast it to the desired type.
 
 The official documentation can be found on the 'API Help Page' and 'API
 Examples' pages on the REDCap wiki (*i.e.*,
-https://community.projectredcap.org/articles/456/api-documentation.html
-and https://community.projectredcap.org/articles/462/api-examples.html).
-If you do not have an account for the wiki, please ask your campus
-REDCap administrator to send you the static material.
+<https://redcap.vumc.org/community/post.php?id=456> and
+<https://redcap.vumc.org/community/post.php?id=462> ). If you do not
+have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.
 
 ## Author
 
@@ -222,7 +222,7 @@ col_types  <- redcap_metadata_coltypes(uri, token)
 #>   race_and_ethnicity_complete   = readr::col_integer()    , # completion status of form/instrument
 #> )
 redcap_read_oneshot(uri, token, col_types = col_types)$data
-#> 5 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> # A tibble: 5 × 25
 #>   record_id name_first name_last address  telephone email dob        age   sex  
 #>   <chr>     <chr>      <chr>     <chr>    <chr>     <chr> <date>     <chr> <chr>

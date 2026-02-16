@@ -124,10 +124,10 @@ Currently, a list is returned with the following elements:
 
 The official documentation can be found on the 'API Help Page' and 'API
 Examples' pages on the REDCap wiki (*i.e.*,
-https://community.projectredcap.org/articles/456/api-documentation.html
-and https://community.projectredcap.org/articles/462/api-examples.html).
-If you do not have an account for the wiki, please ask your campus
-REDCap administrator to send you the static material.
+<https://redcap.vumc.org/community/post.php?id=456> and
+<https://redcap.vumc.org/community/post.php?id=462> ). If you do not
+have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.
 
 ## Author
 
@@ -141,17 +141,17 @@ uri          <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token        <- "9A068C425B1341D69E83064A2D273A70"
 
 ds_last_week <- REDCapR::redcap_log_read(redcap_uri=uri, token=token)$data
-#> 2,091 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 9,753 rows were read from REDCap in 0.4 seconds.  The http status code was 200.
 head(ds_last_week)
 #> # A tibble: 6 × 5
-#>   timestamp           username        action        details               record
-#>   <dttm>              <chr>           <chr>         <chr>                 <chr> 
-#> 1 2025-12-15 13:47:00 unittestphifree Manage/Design Export instruments (… NA    
-#> 2 2025-12-15 13:47:00 unittestphifree Manage/Design Export DAGs (API)     NA    
-#> 3 2025-12-15 13:47:00 unittestphifree Manage/Design Download data dictio… NA    
-#> 4 2025-12-15 13:47:00 unittestphifree Manage/Design Export project infor… NA    
-#> 5 2025-12-15 09:33:00 unittestphifree NA            NA                    NA    
-#> 6 2025-12-15 09:33:00 unittestphifree NA            NA                    NA    
+#>   timestamp           username        action            details           record
+#>   <dttm>              <chr>           <chr>             <chr>             <chr> 
+#> 1 2026-02-16 17:43:00 unittestphifree Manage/Design     Export instrumen… NA    
+#> 2 2026-02-16 17:43:00 unittestphifree Data export (API) export_format: C… NA    
+#> 3 2026-02-16 17:43:00 unittestphifree Data export (API) export_format: C… NA    
+#> 4 2026-02-16 17:43:00 unittestphifree Data export (API) export_format: C… NA    
+#> 5 2026-02-16 17:43:00 unittestphifree Manage/Design     Export DAGs (API) NA    
+#> 6 2026-02-16 17:43:00 unittestphifree Data export (API) export_format: C… NA    
 
 ds_one_day <-
   REDCapR::redcap_log_read(

@@ -124,10 +124,10 @@ REDCapR 1.2.0. Please rename to `redcap_instrument_download()`.
 
 The official documentation can be found on the 'API Help Page' and 'API
 Examples' pages on the REDCap wiki (*i.e.*,
-https://community.projectredcap.org/articles/456/api-documentation.html
-and https://community.projectredcap.org/articles/462/api-examples.html).
-If you do not have an account for the wiki, please ask your campus
-REDCap administrator to send you the static material.
+<https://redcap.vumc.org/community/post.php?id=456> and
+<https://redcap.vumc.org/community/post.php?id=462> ). If you do not
+have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.
 
 ## Author
 
@@ -143,29 +143,29 @@ token   <- "F9CBFFF78C3D78F641BAE9623F6B7E6A" # simple-write
 # event <- "" # only for longitudinal projects
 
 (full_name <- base::tempfile(pattern="instruments-all-records-all", fileext = ".pdf"))
-#> [1] "/var/folders/bp/kmfmhnl95kx1c8x321z7twbw0000gn/T//Rtmp8xFghB/instruments-all-records-all1ab97c56401b.pdf"
+#> [1] "/var/folders/w0/cd8qgn052r16zsblrrxl1gxw0000gn/T//RtmpPWB379/instruments-all-records-all13632cfb6c7f.pdf"
 result_1   <- REDCapR::redcap_instrument_download(
   file_name     = full_name,
   redcap_uri    = uri,
   token         = token
 )
-#> Preparing to download the file `/var/folders/bp/kmfmhnl95kx1c8x321z7twbw0000gn/T//Rtmp8xFghB/instruments-all-records-all1ab97c56401b.pdf`.
-#> text/html; charset=UTF-8 successfully downloaded in 0.2 seconds, and saved as /var/folders/bp/kmfmhnl95kx1c8x321z7twbw0000gn/T//Rtmp8xFghB/instruments-all-records-all1ab97c56401b.pdf.
+#> Preparing to download the file `/var/folders/w0/cd8qgn052r16zsblrrxl1gxw0000gn/T//RtmpPWB379/instruments-all-records-all13632cfb6c7f.pdf`.
+#> text/html; charset=UTF-8 successfully downloaded in 0.2 seconds, and saved as /var/folders/w0/cd8qgn052r16zsblrrxl1gxw0000gn/T//RtmpPWB379/instruments-all-records-all13632cfb6c7f.pdf.
 base::unlink(full_name)
 
 (full_name <- base::tempfile(pattern="instruments-all-record-1-", fileext = ".pdf"))
-#> [1] "/var/folders/bp/kmfmhnl95kx1c8x321z7twbw0000gn/T//Rtmp8xFghB/instruments-all-record-1-1ab928aec63.pdf"
+#> [1] "/var/folders/w0/cd8qgn052r16zsblrrxl1gxw0000gn/T//RtmpPWB379/instruments-all-record-1-13632e901ceb.pdf"
 result_2   <- REDCapR::redcap_instrument_download(
   record        = 5,
   file_name     = full_name,
   redcap_uri    = uri,
   token         = token
 )
-#> Preparing to download the file `/var/folders/bp/kmfmhnl95kx1c8x321z7twbw0000gn/T//Rtmp8xFghB/instruments-all-record-1-1ab928aec63.pdf`.
-#> text/html; charset=UTF-8 successfully downloaded in 0.2 seconds, and saved as /var/folders/bp/kmfmhnl95kx1c8x321z7twbw0000gn/T//Rtmp8xFghB/instruments-all-record-1-1ab928aec63.pdf.
+#> Preparing to download the file `/var/folders/w0/cd8qgn052r16zsblrrxl1gxw0000gn/T//RtmpPWB379/instruments-all-record-1-13632e901ceb.pdf`.
+#> text/html; charset=UTF-8 successfully downloaded in 0.3 seconds, and saved as /var/folders/w0/cd8qgn052r16zsblrrxl1gxw0000gn/T//RtmpPWB379/instruments-all-record-1-13632e901ceb.pdf.
 base::unlink(full_name)
 (full_name <- base::tempfile(pattern="instrument-1-record-1-", fileext=".pdf"))
-#> [1] "/var/folders/bp/kmfmhnl95kx1c8x321z7twbw0000gn/T//Rtmp8xFghB/instrument-1-record-1-1ab96ea558e2.pdf"
+#> [1] "/var/folders/w0/cd8qgn052r16zsblrrxl1gxw0000gn/T//RtmpPWB379/instrument-1-record-1-1363775aa02e.pdf"
 result_3   <- REDCapR::redcap_instrument_download(
   record        = 5,
   instrument    = "health",
@@ -173,8 +173,8 @@ result_3   <- REDCapR::redcap_instrument_download(
   redcap_uri    = uri,
   token         = token
 )
-#> Preparing to download the file `/var/folders/bp/kmfmhnl95kx1c8x321z7twbw0000gn/T//Rtmp8xFghB/instrument-1-record-1-1ab96ea558e2.pdf`.
-#> text/html; charset=UTF-8 successfully downloaded in 0.2 seconds, and saved as /var/folders/bp/kmfmhnl95kx1c8x321z7twbw0000gn/T//Rtmp8xFghB/instrument-1-record-1-1ab96ea558e2.pdf.
+#> Preparing to download the file `/var/folders/w0/cd8qgn052r16zsblrrxl1gxw0000gn/T//RtmpPWB379/instrument-1-record-1-1363775aa02e.pdf`.
+#> text/html; charset=UTF-8 successfully downloaded in 0.3 seconds, and saved as /var/folders/w0/cd8qgn052r16zsblrrxl1gxw0000gn/T//RtmpPWB379/instrument-1-record-1-1363775aa02e.pdf.
 base::unlink(full_name)
 # }
 ```

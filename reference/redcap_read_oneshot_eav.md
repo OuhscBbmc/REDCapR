@@ -197,10 +197,10 @@ As of REDCap 6.14.3, this field is not exported in the EAV API call.
 
 The official documentation can be found on the 'API Help Page' and 'API
 Examples' pages on the REDCap wiki (*i.e.*,
-https://community.projectredcap.org/articles/456/api-documentation.html
-and https://community.projectredcap.org/articles/462/api-examples.html).
-If you do not have an account for the wiki, please ask your campus
-REDCap administrator to send you the static material.
+<https://redcap.vumc.org/community/post.php?id=456> and
+<https://redcap.vumc.org/community/post.php?id=462> ). If you do not
+have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.
 
 ## Author
 
@@ -227,8 +227,8 @@ ds_some_rows_v1    <- REDCapR:::redcap_read_oneshot_eav(
    records    = desired_records_v1
 )$data
 #> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
-#> 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
-#> 2 records and 20 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 2 records and 20 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 
 # Return only the fields record_id, name_first, and age
 desired_fields_v1 <- c("record_id", "name_first", "age")
@@ -239,6 +239,6 @@ ds_some_fields_v1 <- REDCapR:::redcap_read_oneshot_eav(
 )$data
 #> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
-#> 5 records and 4 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 5 records and 4 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 # }
 ```

@@ -2,6 +2,35 @@
 
 ## REDCapR (development version)
 
+#### New Features
+
+- New
+  [`redcap_instrument_repeating()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_instrument_repeating.md)
+  function exports repeating instrument-event mappings for a project.
+  ([\#585](https://github.com/OuhscBbmc/REDCapR/issues/585) &
+  [\#589](https://github.com/OuhscBbmc/REDCapR/issues/589),
+  [@ezraporter](https://github.com/ezraporter))
+
+#### Minor Enhancements
+
+- New columns returned from the server to
+  [`redcap_project_info_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_project_info_read.md)
+  no longer throw a warning.
+  ([\#587](https://github.com/OuhscBbmc/REDCapR/issues/587))
+- [`redcap_file_repo_list_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_file_repo_list_oneshot.md)
+  function tests for the new `dag` and `role` columns
+  ([\#593](https://github.com/OuhscBbmc/REDCapR/issues/593))
+- [`redcap_write()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_write.md)
+  now accommodates single-column data.frames. Previously only
+  single-column tibbles were accommodated.
+  ([@brandonerose](https://github.com/brandonerose),
+  [\#591](https://github.com/OuhscBbmc/REDCapR/issues/591) &
+  [\#592](https://github.com/OuhscBbmc/REDCapR/issues/592))
+- Update urls for REDCap Community
+  ([\#596](https://github.com/OuhscBbmc/REDCapR/issues/596))
+- Simplified token files for other people to test with
+  ([\#594](https://github.com/OuhscBbmc/REDCapR/issues/594))
+
 ## REDCapR 1.6.0 (released 2025-10-07)
 
 CRAN release: 2025-10-08
@@ -799,7 +828,7 @@ CRAN release: 2016-09-09
   coerces the
   [`tibble::tibble`](https://tibble.tidyverse.org/reference/tibble.html)
   (which was formerly called
-  [`dplyr::tbl_df`](https://dplyr.tidyverse.org/reference/tbl_df.html))
+  [`dplyr::tbl_df`](https://dplyr.tidyverse.org/reference/defunct.html))
   back to a vanilla `data.frame` with
   [`as.data.frame()`](https://rdrr.io/r/base/as.data.frame.html).
 - A few more instances of validating input parameters to read functions.

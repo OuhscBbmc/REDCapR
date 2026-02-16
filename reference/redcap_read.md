@@ -365,10 +365,10 @@ errors.
 
 The official documentation can be found on the 'API Help Page' and 'API
 Examples' pages on the REDCap wiki (*i.e.*,
-https://community.projectredcap.org/articles/456/api-documentation.html
-and https://community.projectredcap.org/articles/462/api-examples.html).
-If you do not have an account for the wiki, please ask your campus
-REDCap administrator to send you the static material.
+<https://redcap.vumc.org/community/post.php?id=456> and
+<https://redcap.vumc.org/community/post.php?id=462> ). If you do not
+have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.
 
 ## Author
 
@@ -388,14 +388,14 @@ REDCapR::redcap_read(batch_size=2, redcap_uri=uri, token=token)$data
 #> 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.1 seconds.  The http status code was 200.
-#> 5 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2025-12-15 19:47:41.804249.
+#> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> Starting to read 5 records  at 2026-02-16 23:43:40.501407.
 #> Reading batch 1 of 3, with subjects 1 through 2 (ie, 2 unique subject records).
 #> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> Reading batch 2 of 3, with subjects 3 through 4 (ie, 2 unique subject records).
-#> 2 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> Reading batch 3 of 3, with subjects 5 through 5 (ie, 1 unique subject records).
-#> 1 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 1 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> # A tibble: 5 × 25
 #>   record_id name_first name_last address  telephone email dob          age   sex
 #>       <dbl> <chr>      <chr>     <chr>    <chr>     <chr> <date>     <dbl> <dbl>
@@ -427,18 +427,18 @@ REDCapR::redcap_read(
   batch_size = 2
 )$data
 #> 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
-#> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
+#> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.1 seconds.  The http status code was 200.
-#> 5 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2025-12-15 19:47:44.661025.
+#> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> Starting to read 5 records  at 2026-02-16 23:43:43.685638.
 #> Reading batch 1 of 3, with subjects 1 through 2 (ie, 2 unique subject records).
 #> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> Reading batch 2 of 3, with subjects 3 through 4 (ie, 2 unique subject records).
-#> 2 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> Reading batch 3 of 3, with subjects 5 through 5 (ie, 1 unique subject records).
-#> 1 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 1 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> # A tibble: 5 × 25
 #>   record_id name_first name_last address  telephone email dob          age   sex
 #>       <int> <chr>      <chr>     <chr>    <chr>     <chr> <date>     <dbl> <dbl>

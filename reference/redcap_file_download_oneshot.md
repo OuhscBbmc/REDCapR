@@ -130,10 +130,10 @@ REDCapR 1.2.0. Please rename to `redcap_file_download_oneshot()`.
 
 The official documentation can be found on the 'API Help Page' and 'API
 Examples' pages on the REDCap wiki (*i.e.*,
-https://community.projectredcap.org/articles/456/api-documentation.html
-and https://community.projectredcap.org/articles/462/api-examples.html).
-If you do not have an account for the wiki, please ask your campus
-REDCap administrator to send you the static material.
+<https://redcap.vumc.org/community/post.php?id=456> and
+<https://redcap.vumc.org/community/post.php?id=462> ). If you do not
+have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.
 
 ## Author
 
@@ -161,7 +161,7 @@ result_1 <- REDCapR::redcap_file_download_oneshot(
 base::unlink("mugshot-1.jpg")
 
 (full_name <- base::tempfile(pattern="mugshot", fileext = ".jpg"))
-#> [1] "/var/folders/bp/kmfmhnl95kx1c8x321z7twbw0000gn/T//Rtmp8xFghB/mugshot1ab9564e9090.jpg"
+#> [1] "/var/folders/w0/cd8qgn052r16zsblrrxl1gxw0000gn/T//RtmpPWB379/mugshot136373396f5.jpg"
 result_2   <- REDCapR::redcap_file_download_oneshot(
   file_name     = full_name,
   record        = record,
@@ -169,8 +169,8 @@ result_2   <- REDCapR::redcap_file_download_oneshot(
   redcap_uri    = uri,
   token         = token
 )
-#> Preparing to download the file `/var/folders/bp/kmfmhnl95kx1c8x321z7twbw0000gn/T//Rtmp8xFghB/mugshot1ab9564e9090.jpg`.
-#> image/jpeg; name="mugshot-1.jpg" successfully downloaded in 0.1 seconds, and saved as /var/folders/bp/kmfmhnl95kx1c8x321z7twbw0000gn/T//Rtmp8xFghB/mugshot1ab9564e9090.jpg.
+#> Preparing to download the file `/var/folders/w0/cd8qgn052r16zsblrrxl1gxw0000gn/T//RtmpPWB379/mugshot136373396f5.jpg`.
+#> image/jpeg; name="mugshot-1.jpg" successfully downloaded in 0.1 seconds, and saved as /var/folders/w0/cd8qgn052r16zsblrrxl1gxw0000gn/T//RtmpPWB379/mugshot136373396f5.jpg.
 base::unlink(full_name)
 
 (relative_name <- "ssss.jpg")

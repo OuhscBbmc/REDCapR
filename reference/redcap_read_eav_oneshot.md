@@ -188,10 +188,10 @@ group, then this flag will revert to its default value*.
 
 The official documentation can be found on the 'API Help Page' and 'API
 Examples' pages on the REDCap wiki (*i.e.*,
-https://community.projectredcap.org/articles/456/api-documentation.html
-and https://community.projectredcap.org/articles/462/api-examples.html).
-If you do not have an account for the wiki, please ask your campus
-REDCap administrator to send you the static material.
+<https://redcap.vumc.org/community/post.php?id=456> and
+<https://redcap.vumc.org/community/post.php?id=462> ). If you do not
+have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.
 
 ## Author
 
@@ -206,7 +206,7 @@ token    <- "9A068C425B1341D69E83064A2D273A70"
 
 # Return all records and all variables.
 ds <- REDCapR:::redcap_read_eav_oneshot(redcap_uri=uri, token=token)$data
-#> 103 records and 3 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 103 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 
 # Return only records with IDs of 1 and 3
 desired_records_v1 <- c(1, 3)
@@ -215,7 +215,7 @@ ds_some_rows_v1 <- REDCapR:::redcap_read_eav_oneshot(
   token      = token,
   records    = desired_records_v1
 )$data
-#> 41 records and 3 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 41 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 
 # Return only the fields record_id, name_first, and age
 desired_fields_v1 <- c("record_id", "name_first", "age")

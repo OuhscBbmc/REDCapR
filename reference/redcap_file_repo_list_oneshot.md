@@ -97,10 +97,10 @@ Standard](https://redcap.vumc.org/community/post.php?id=243161), API
 
 The official documentation can be found on the 'API Help Page' and 'API
 Examples' pages on the REDCap wiki (*i.e.*,
-https://community.projectredcap.org/articles/456/api-documentation.html
-and https://community.projectredcap.org/articles/462/api-examples.html).
-If you do not have an account for the wiki, please ask your campus
-REDCap administrator to send you the static material.
+<https://redcap.vumc.org/community/post.php?id=456> and
+<https://redcap.vumc.org/community/post.php?id=462> ). If you do not
+have an account for the wiki, please ask your campus REDCap
+administrator to send you the static material.
 
 ## Author
 
@@ -119,15 +119,15 @@ REDCapR::redcap_file_repo_list_oneshot(
   token         = token
 )$data
 #> The file repository structure describing 6 elements was read from REDCap in 0.1 seconds.  The http status code was 200.
-#> # A tibble: 6 × 3
-#>   folder_id doc_id name         
-#>       <int>  <int> <chr>        
-#> 1         1     NA the-state    
-#> 2        NA   6652 mugshot-1.jpg
-#> 3        NA   6653 mugshot-2.jpg
-#> 4        NA   6654 mugshot-3.jpg
-#> 5        NA   6655 mugshot-4.jpg
-#> 6        NA   6656 mugshot-5.jpg
+#> # A tibble: 6 × 5
+#>   folder_id doc_id name          role  dag  
+#>       <int>  <int> <chr>         <lgl> <lgl>
+#> 1         1     NA the-state     NA    NA   
+#> 2        NA   6652 mugshot-1.jpg NA    NA   
+#> 3        NA   6653 mugshot-2.jpg NA    NA   
+#> 4        NA   6654 mugshot-3.jpg NA    NA   
+#> 5        NA   6655 mugshot-4.jpg NA    NA   
+#> 6        NA   6656 mugshot-5.jpg NA    NA   
 
 # First subdirectory
 REDCapR::redcap_file_repo_list_oneshot(
@@ -136,9 +136,9 @@ REDCapR::redcap_file_repo_list_oneshot(
   folder_id     = 1
 )$data
 #> The file repository structure describing 1 elements was read from REDCap in 0.1 seconds.  The http status code was 200.
-#> # A tibble: 1 × 3
-#>   folder_id doc_id name               
-#>       <int>  <int> <chr>              
-#> 1        NA   6651 levon-and-barry.jpg
+#> # A tibble: 1 × 5
+#>   folder_id doc_id name                role  dag  
+#>       <int>  <int> <chr>               <lgl> <lgl>
+#> 1        NA   6651 levon-and-barry.jpg NA    NA   
 # }
 ```

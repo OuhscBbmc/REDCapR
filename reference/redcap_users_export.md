@@ -94,20 +94,20 @@ uri      <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token    <- "0BF920AAF9566A8E603F528A498A5729" # dag
 
 result   <- REDCapR::redcap_users_export(redcap_uri=uri, token=token)
-#> The REDCap users were successfully exported in 0.1 seconds.  The http status code was 200.
+#> The REDCap users were successfully exported in 0.2 seconds.  The http status code was 200.
 result$data_user
-#> # A tibble: 2 × 34
+#> # A tibble: 2 × 35
 #>   username        email          firstname lastname expiration data_access_group
 #>   <chr>           <chr>          <chr>     <chr>    <date>     <chr>            
 #> 1 itawilliamb     william-beasl… Will      Beasley… NA         NA               
 #> 2 unittestphifree whb4@ou.edu    Unit Test Phi Free NA         daga             
-#> # ℹ 28 more variables: data_access_group_id <chr>, design <lgl>, alerts <dbl>,
+#> # ℹ 29 more variables: data_access_group_id <chr>,
+#> #   data_access_group_label <chr>, design <lgl>, alerts <dbl>,
 #> #   user_rights <int>, data_access_groups <lgl>, reports <lgl>,
 #> #   stats_and_charts <lgl>, manage_survey_participants <lgl>, calendar <lgl>,
 #> #   data_import_tool <lgl>, data_comparison_tool <lgl>, logging <lgl>,
 #> #   email_logging <lgl>, file_repository <lgl>, data_quality_create <lgl>,
-#> #   data_quality_execute <lgl>, api_export <lgl>, api_import <lgl>,
-#> #   api_modules <lgl>, mobile_app <lgl>, mobile_app_download_data <lgl>, …
+#> #   data_quality_execute <lgl>, api_export <lgl>, api_import <lgl>, …
 result$data_user_form
 #> # A tibble: 2 × 4
 #>   username        form_name    permission_id permission
