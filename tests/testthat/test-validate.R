@@ -32,6 +32,16 @@ test_that("validate_for_write_no_errors - convert_logical_to_integer", {
   expect_equal(object = nrow(ds), expected = 0)
 })
 
+test_that("validate_for_write_no_errors - record_id_name", {
+  d <-
+    data.frame(
+      id = 1:4
+    )
+
+  ds <- validate_for_write(d, record_id_name = "id")
+  expect_equal(object = nrow(ds), expected = 0)
+})
+
 test_that("not a data.frame", {
   error_pattern <- "The `d` object is not a valid `data\\.frame`\\."
   expect_error(
