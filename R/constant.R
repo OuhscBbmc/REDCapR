@@ -1,8 +1,7 @@
 #' @name constant
 #'
 #' @aliases
-#' constant constant_to_form_completion constant_to_form_rights
-#' constant_to_export_rights constant_to_access
+#' constant constant_to_form_completion constant_to_form_rights constant_to_export_rights constant_to_access
 #'
 #' @title
 #' Collection of REDCap-specific constants
