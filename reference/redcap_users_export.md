@@ -94,7 +94,7 @@ uri      <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token    <- "0BF920AAF9566A8E603F528A498A5729" # dag
 
 result   <- REDCapR::redcap_users_export(redcap_uri=uri, token=token)
-#> The REDCap users were successfully exported in 0.2 seconds.  The http status code was 200.
+#> The REDCap users were successfully exported in 0.1 seconds.  The http status code was 200.
 result$data_user
 #> # A tibble: 2 × 35
 #>   username        email          firstname lastname expiration data_access_group

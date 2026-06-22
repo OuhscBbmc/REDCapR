@@ -160,7 +160,7 @@ REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 #> [1] ""
 #> 
 #> $elapsed_seconds
-#> [1] 0.1433389
+#> [1] 0.1410689
 #> 
 #> $raw_text
 #> [1] ""
@@ -190,7 +190,7 @@ REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 #> [1] ""
 #> 
 #> $elapsed_seconds
-#> [1] 0.1221881
+#> [1] 0.106689
 #> 
 #> $raw_text
 #> [1] "{\"error\":\"You do not have permissions to use the API\"}"
@@ -236,7 +236,7 @@ REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 #> [1] ""
 #> 
 #> $elapsed_seconds
-#> [1] 0.129024
+#> [1] 0.1250188
 #> 
 #> $raw_text
 #> [1] ""

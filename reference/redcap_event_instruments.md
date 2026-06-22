@@ -149,7 +149,7 @@ REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_2)$data
 #> 10       1 visit_2_arm_1     visit_lab_data              
 #> # ℹ 15 more rows
 REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_2, arms = c("1", "2"))$data
-#> 25 event instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 25 event instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> # A tibble: 25 × 3
 #>    arm_num unique_event_name form                        
 #>      <int> <chr>             <chr>                       

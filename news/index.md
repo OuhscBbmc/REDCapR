@@ -132,6 +132,7 @@ package considerably.
   Here are the relationships between the four pairs of variables:
 
   ``` r
+
   records_collapsed   <- collapse_vector(records  , records_collapsed)
   fields_collapsed    <- collapse_vector(fields   , fields_collapsed)
   forms_collapsed     <- collapse_vector(forms    , forms_collapsed)
@@ -142,6 +143,7 @@ package considerably.
   programmatically convert it to a vector like:
 
   ``` r
+
   field_names <- trimws(unlist(strsplit(field_names_collapsed, ",")))
   ```
 

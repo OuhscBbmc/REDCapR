@@ -23,6 +23,7 @@ secured csv and retrieving with
 [`REDCapR::retrieve_credential_local()`](https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html).*
 
 ``` r
+
 library(REDCapR) #Load the package into the current R session.
 uri                   <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token_simple          <- "9A068C425B1341D69E83064A2D273A70"
@@ -48,6 +49,7 @@ and here’s one way to do it in R. First retrieve the dataset from
 REDCap.
 
 ``` r
+
 library(magrittr)
 suppressPackageStartupMessages(requireNamespace("dplyr"))
 suppressPackageStartupMessages(requireNamespace("tidyr"))
@@ -59,6 +61,7 @@ ds_long <- REDCapR::redcap_read_oneshot(redcap_uri = uri, token = token_longitud
     #> 18 records and 125 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
 
 ``` r
+
 ds_long %>%
   dplyr::select(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4)
 ```
@@ -89,6 +92,7 @@ When widening only one variable (*e.g.*, `pmq1`), the code’s pretty
 simple:
 
 ``` r
+
 ds_wide <-
   ds_long %>%
   dplyr::select(study_id, redcap_event_name, pmq1) %>%
@@ -116,6 +120,7 @@ event names “first_dose” and “first_visit” are renamed “dose_1” and
 proper numbers.
 
 ``` r
+
 pattern <- "^(\\w+?)_arm_(\\d)$"
 ds_wide <-
   ds_long %>%
@@ -154,6 +159,7 @@ longer/taller (*e.g.*, `ds_eav`) before reversing direction and going
 wide.
 
 ``` r
+
 ds_eav <-
   ds_long %>%
   dplyr::select(study_id, redcap_event_name, pmq1, pmq2, pmq3, pmq4) %>%
@@ -198,6 +204,7 @@ ds_eav %>%
     #> 10      100     1 pmq2_dose_2      1
 
 ``` r
+
 # Spread the EAV to wide.
 ds_wide_2 <-
   ds_eav %>%
@@ -294,6 +301,7 @@ using SSL to verify the server being connected to.
 Use the SSL cert file that come with the `openssl` package.
 
 ``` r
+
 cert_location <- system.file("cacert.pem", package = "openssl")
 if (file.exists(cert_location)) {
   config_options         <- list(cainfo = cert_location)
@@ -311,6 +319,7 @@ Force the connection to use SSL=3 (which is not preferred, and possibly
 insecure).
 
 ``` r
+
 config_options <- list(sslversion = 3)
 ds_ssl_3 <- redcap_read_oneshot(
   redcap_uri     = uri,
@@ -319,9 +328,10 @@ ds_ssl_3 <- redcap_read_oneshot(
 )$data
 ```
 
-    #> 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+    #> 5 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
 
 ``` r
+
 config_options <- list(ssl.verifypeer = FALSE)
 ds_no_ssl <- redcap_read_oneshot(
   redcap_uri     = uri,
@@ -363,84 +373,85 @@ Environment
 
     #> ─ Session info ───────────────────────────────────────────────────────────────
     #>  setting  value
-    #>  version  R version 4.5.2 (2025-10-31)
-    #>  os       macOS Sequoia 15.7.3
-    #>  system   aarch64, darwin20
+    #>  version  R version 4.6.0 (2026-04-24)
+    #>  os       macOS Sequoia 15.7.7
+    #>  system   aarch64, darwin23
     #>  ui       X11
     #>  language en-US
     #>  collate  en_US.UTF-8
     #>  ctype    en_US.UTF-8
     #>  tz       UTC
-    #>  date     2026-02-16
-    #>  pandoc   3.1.11 @ /usr/local/bin/ (via rmarkdown)
+    #>  date     2026-06-22
+    #>  pandoc   3.8.3 @ /usr/local/bin/ (via rmarkdown)
     #>  quarto   NA
     #> 
     #> ─ Packages ───────────────────────────────────────────────────────────────────
     #>  package      * version    date (UTC) lib source
-    #>  backports      1.5.0      2024-05-23 [1] CRAN (R 4.5.0)
-    #>  bit            4.6.0      2025-03-06 [1] CRAN (R 4.5.0)
-    #>  bit64          4.6.0-1    2025-01-16 [1] CRAN (R 4.5.0)
-    #>  bslib          0.10.0     2026-01-26 [1] CRAN (R 4.5.2)
-    #>  cachem         1.1.0      2024-05-16 [1] CRAN (R 4.5.0)
-    #>  checkmate      2.3.4      2026-02-03 [1] CRAN (R 4.5.2)
-    #>  cli            3.6.5      2025-04-23 [1] CRAN (R 4.5.0)
-    #>  crayon         1.5.3      2024-06-20 [1] CRAN (R 4.5.0)
-    #>  curl           7.0.0      2025-08-19 [1] CRAN (R 4.5.0)
-    #>  desc           1.4.3      2023-12-10 [1] CRAN (R 4.5.0)
-    #>  digest         0.6.39     2025-11-19 [1] CRAN (R 4.5.2)
-    #>  dplyr          1.2.0      2026-02-03 [1] CRAN (R 4.5.2)
-    #>  evaluate       1.0.5      2025-08-27 [1] CRAN (R 4.5.0)
-    #>  farver         2.1.2      2024-05-13 [1] CRAN (R 4.5.0)
-    #>  fastmap        1.2.0      2024-05-15 [1] CRAN (R 4.5.0)
-    #>  fs             1.6.6      2025-04-12 [1] CRAN (R 4.5.0)
-    #>  generics       0.1.4      2025-05-09 [1] CRAN (R 4.5.0)
-    #>  glue           1.8.0      2024-09-30 [1] CRAN (R 4.5.0)
-    #>  hms            1.1.4      2025-10-17 [1] CRAN (R 4.5.0)
-    #>  htmltools      0.5.9      2025-12-04 [1] CRAN (R 4.5.2)
-    #>  httr           1.4.8      2026-02-13 [1] CRAN (R 4.5.2)
-    #>  jquerylib      0.1.4      2021-04-26 [1] CRAN (R 4.5.0)
-    #>  jsonlite       2.0.0      2025-03-27 [1] CRAN (R 4.5.0)
-    #>  kableExtra     1.4.0      2024-01-24 [1] CRAN (R 4.5.0)
-    #>  knitr        * 1.51       2025-12-20 [1] CRAN (R 4.5.2)
-    #>  lifecycle      1.0.5      2026-01-08 [1] CRAN (R 4.5.2)
-    #>  magrittr     * 2.0.4      2025-09-12 [1] CRAN (R 4.5.0)
-    #>  pillar         1.11.1     2025-09-17 [1] CRAN (R 4.5.0)
-    #>  pkgconfig      2.0.3      2019-09-22 [1] CRAN (R 4.5.0)
-    #>  pkgdown        2.2.0      2025-11-06 [1] CRAN (R 4.5.0)
-    #>  purrr          1.2.1      2026-01-09 [1] CRAN (R 4.5.2)
-    #>  R6             2.6.1      2025-02-15 [1] CRAN (R 4.5.0)
-    #>  ragg           1.5.0      2025-09-02 [1] CRAN (R 4.5.0)
-    #>  RColorBrewer   1.1-3      2022-04-03 [1] CRAN (R 4.5.0)
-    #>  readr          2.1.6      2025-11-14 [1] CRAN (R 4.5.2)
-    #>  REDCapR      * 1.6.0.9001 2026-02-16 [1] local
-    #>  rlang          1.1.7      2026-01-09 [1] CRAN (R 4.5.2)
-    #>  rmarkdown      2.30       2025-09-28 [1] CRAN (R 4.5.0)
-    #>  rstudioapi     0.18.0     2026-01-16 [1] CRAN (R 4.5.2)
-    #>  sass           0.4.10     2025-04-11 [1] CRAN (R 4.5.0)
-    #>  scales         1.4.0      2025-04-24 [1] CRAN (R 4.5.0)
-    #>  sessioninfo    1.2.3      2025-02-05 [1] CRAN (R 4.5.0)
-    #>  stringi        1.8.7      2025-03-27 [1] CRAN (R 4.5.0)
-    #>  stringr        1.6.0      2025-11-04 [1] CRAN (R 4.5.0)
-    #>  svglite        2.2.2      2025-10-21 [1] CRAN (R 4.5.0)
-    #>  systemfonts    1.3.1      2025-10-01 [1] CRAN (R 4.5.0)
-    #>  textshaping    1.0.4      2025-10-10 [1] CRAN (R 4.5.0)
-    #>  tibble         3.3.1      2026-01-11 [1] CRAN (R 4.5.2)
-    #>  tidyr          1.3.2      2025-12-19 [1] CRAN (R 4.5.2)
-    #>  tidyselect     1.2.1      2024-03-11 [1] CRAN (R 4.5.0)
-    #>  tzdb           0.5.0      2025-03-15 [1] CRAN (R 4.5.0)
-    #>  utf8           1.2.6      2025-06-08 [1] CRAN (R 4.5.0)
-    #>  vctrs          0.7.1      2026-01-23 [1] CRAN (R 4.5.2)
-    #>  viridisLite    0.4.3      2026-02-04 [1] CRAN (R 4.5.2)
-    #>  vroom          1.7.0      2026-01-27 [1] CRAN (R 4.5.2)
-    #>  withr          3.0.2      2024-10-28 [1] CRAN (R 4.5.0)
-    #>  xfun           0.56       2026-01-18 [1] CRAN (R 4.5.2)
-    #>  xml2           1.5.2      2026-01-17 [1] CRAN (R 4.5.2)
-    #>  yaml           2.3.12     2025-12-10 [1] CRAN (R 4.5.2)
+    #>  backports      1.5.1      2026-04-03 [1] CRAN (R 4.6.0)
+    #>  bit            4.6.0      2025-03-06 [1] CRAN (R 4.6.0)
+    #>  bit64          4.8.2      2026-05-19 [1] CRAN (R 4.6.0)
+    #>  bslib          0.11.0     2026-05-16 [1] CRAN (R 4.6.0)
+    #>  cachem         1.1.0      2024-05-16 [1] CRAN (R 4.6.0)
+    #>  checkmate      2.3.4      2026-02-03 [1] CRAN (R 4.6.0)
+    #>  cli            3.6.6      2026-04-09 [1] CRAN (R 4.6.0)
+    #>  crayon         1.5.3      2024-06-20 [1] CRAN (R 4.6.0)
+    #>  curl           7.1.0      2026-04-22 [1] CRAN (R 4.6.0)
+    #>  desc           1.4.3      2023-12-10 [1] CRAN (R 4.6.0)
+    #>  digest         0.6.39     2025-11-19 [1] CRAN (R 4.6.0)
+    #>  dplyr          1.2.1      2026-04-03 [1] CRAN (R 4.6.0)
+    #>  evaluate       1.0.5      2025-08-27 [1] CRAN (R 4.6.0)
+    #>  farver         2.1.2      2024-05-13 [1] CRAN (R 4.6.0)
+    #>  fastmap        1.2.0      2024-05-15 [1] CRAN (R 4.6.0)
+    #>  fs             2.1.0      2026-04-18 [1] CRAN (R 4.6.0)
+    #>  generics       0.1.4      2025-05-09 [1] CRAN (R 4.6.0)
+    #>  glue           1.8.1      2026-04-17 [1] CRAN (R 4.6.0)
+    #>  hms            1.1.4      2025-10-17 [1] CRAN (R 4.6.0)
+    #>  htmltools      0.5.9      2025-12-04 [1] CRAN (R 4.6.0)
+    #>  httr           1.4.8      2026-02-13 [1] CRAN (R 4.6.0)
+    #>  jquerylib      0.1.4      2021-04-26 [1] CRAN (R 4.6.0)
+    #>  jsonlite       2.0.0      2025-03-27 [1] CRAN (R 4.6.0)
+    #>  kableExtra     1.4.0      2024-01-24 [1] CRAN (R 4.6.0)
+    #>  knitr        * 1.51       2025-12-20 [1] CRAN (R 4.6.0)
+    #>  lifecycle      1.0.5      2026-01-08 [1] CRAN (R 4.6.0)
+    #>  magrittr     * 2.0.5      2026-04-04 [1] CRAN (R 4.6.0)
+    #>  otel           0.2.0      2025-08-29 [1] CRAN (R 4.6.0)
+    #>  pillar         1.11.1     2025-09-17 [1] CRAN (R 4.6.0)
+    #>  pkgconfig      2.0.3      2019-09-22 [1] CRAN (R 4.6.0)
+    #>  pkgdown        2.2.0      2025-11-06 [1] CRAN (R 4.6.0)
+    #>  purrr          1.2.2      2026-04-10 [1] CRAN (R 4.6.0)
+    #>  R6             2.6.1      2025-02-15 [1] CRAN (R 4.6.0)
+    #>  ragg           1.5.2      2026-03-23 [1] CRAN (R 4.6.0)
+    #>  RColorBrewer   1.1-3      2022-04-03 [1] CRAN (R 4.6.0)
+    #>  readr          2.2.0      2026-02-19 [1] CRAN (R 4.6.0)
+    #>  REDCapR      * 1.6.0.9001 2026-06-22 [1] local
+    #>  rlang          1.2.0      2026-04-06 [1] CRAN (R 4.6.0)
+    #>  rmarkdown      2.31       2026-03-26 [1] CRAN (R 4.6.0)
+    #>  rstudioapi     0.19.0     2026-06-11 [1] CRAN (R 4.6.0)
+    #>  sass           0.4.10     2025-04-11 [1] CRAN (R 4.6.0)
+    #>  scales         1.4.0      2025-04-24 [1] CRAN (R 4.6.0)
+    #>  sessioninfo    1.2.4      2026-06-04 [1] CRAN (R 4.6.0)
+    #>  stringi        1.8.7      2025-03-27 [1] CRAN (R 4.6.0)
+    #>  stringr        1.6.0      2025-11-04 [1] CRAN (R 4.6.0)
+    #>  svglite        2.2.2      2025-10-21 [1] CRAN (R 4.6.0)
+    #>  systemfonts    1.3.2      2026-03-05 [1] CRAN (R 4.6.0)
+    #>  textshaping    1.0.5      2026-03-06 [1] CRAN (R 4.6.0)
+    #>  tibble         3.3.1      2026-01-11 [1] CRAN (R 4.6.0)
+    #>  tidyr          1.3.2      2025-12-19 [1] CRAN (R 4.6.0)
+    #>  tidyselect     1.2.1      2024-03-11 [1] CRAN (R 4.6.0)
+    #>  tzdb           0.5.0      2025-03-15 [1] CRAN (R 4.6.0)
+    #>  utf8           1.2.6      2025-06-08 [1] CRAN (R 4.6.0)
+    #>  vctrs          0.7.3      2026-04-11 [1] CRAN (R 4.6.0)
+    #>  viridisLite    0.4.3      2026-02-04 [1] CRAN (R 4.6.0)
+    #>  vroom          1.7.1      2026-03-31 [1] CRAN (R 4.6.0)
+    #>  withr          3.0.3      2026-06-19 [1] CRAN (R 4.6.0)
+    #>  xfun           0.59       2026-06-19 [1] CRAN (R 4.6.0)
+    #>  xml2           1.5.2      2026-01-17 [1] CRAN (R 4.6.0)
+    #>  yaml           2.3.12     2025-12-10 [1] CRAN (R 4.6.0)
     #> 
     #>  [1] /Users/runner/work/_temp/Library
-    #>  [2] /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library
+    #>  [2] /Library/Frameworks/R.framework/Versions/4.6/Resources/library
     #>  * ── Packages attached to the search path.
     #> 
     #> ──────────────────────────────────────────────────────────────────────────────
 
-Report rendered by runner at 2026-02-16, 23:43 +0000 in 2 seconds.
+Report rendered by runner at 2026-06-22, 16:04 +0000 in 2 seconds.

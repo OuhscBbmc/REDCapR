@@ -231,14 +231,14 @@ REDCap.
     If participant 101 has two lab results, one vitals record, and three
     medications, the dataset structure might be:
 
-    | record_id | redcap_repeat_instrument | redcap_repeat_instance | lab_result | pulse | o2  | admin_date |
-    |:---------:|:------------------------:|:----------------------:|:----------:|:-----:|:---:|:----------:|
-    |    101    |           lab            |           1            |  positive  |       |     |            |
-    |    101    |           lab            |           2            |  negative  |       |     |            |
-    |    101    |          vitals          |           1            |            |  72   | 98  |            |
-    |    101    |        medication        |           1            |            |       |     | 2021-02-01 |
-    |    101    |        medication        |           2            |            |       |     | 2021-02-02 |
-    |    101    |        medication        |           3            |            |       |     | 2021-02-03 |
+    | record_id | redcap_repeat_instrument | redcap_repeat_instance | lab_result | pulse | o2 | admin_date |
+    |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+    | 101 | lab | 1 | positive |  |  |  |
+    | 101 | lab | 2 | negative |  |  |  |
+    | 101 | vitals | 1 |  | 72 | 98 |  |
+    | 101 | medication | 1 |  |  |  | 2021-02-01 |
+    | 101 | medication | 2 |  |  |  | 2021-02-02 |
+    | 101 | medication | 3 |  |  |  | 2021-02-03 |
 
 5.  **Can you import the *entire* project?** Can all columns be written
     for all rows?
@@ -302,6 +302,7 @@ There are several ways to call REDCap’s API from
     error messages if you’re starting with a fresh session of R:
 
     ``` r
+
     library(httr)
     ```
 
@@ -325,6 +326,7 @@ There are several ways to call REDCap’s API from
     token used above in the Postman example.
 
     ``` r
+
     redcap_uri <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
     token      <- "9A068C425B1341D69E83064A2D273A70"
 
@@ -349,6 +351,7 @@ There are several ways to call REDCap’s API from
     been mostly replaced by httr in packages developed since 2014.
 
     ``` r
+
     raw_text <- RCurl::postForm(
       uri             = redcap_uri
       , token         = token
@@ -371,6 +374,7 @@ There are several ways to call REDCap’s API from
     users).
 
     ``` r
+
     redcap_uri         <- "https://the.urlofyourinsitution.edu/api/"
     token              <- "your-secret-token"
 
@@ -413,6 +417,7 @@ There are several ways to call REDCap’s API from
     automatically, and allows the user to specify a `batch_size`.
 
     ``` r
+
     redcap_uri                  <- "https://the.urlofyourinsitution.edu/api/"
     token                       <- "your-secret-token"
 
@@ -467,6 +472,7 @@ advice.
     download the latest stable version.
 
     ``` r
+
     install.packages("remotes", repos = "https://cran.rstudio.com")
     remotes::install_github(repo = "OuhscBbmc/REDCapR")
     ```
@@ -477,6 +483,7 @@ advice.
     of R:
 
     ``` r
+
     library(REDCapR)
     # Loading required package: REDCapR
     ```
@@ -487,6 +494,7 @@ advice.
     interpretable by your local environment.
 
     ``` r
+
     library(REDCapR) # Load the package into the current R session, if you haven't already.
     redcap_uri       <- "https://the.urlofyourinsitution.edu/api/"
     token            <- "your-secret-token"
@@ -505,6 +513,7 @@ advice.
     the previous section.
 
     ``` r
+
     library(REDCapR) # Load the package into the current R session.
     uri   <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
     token <- "9A068C425B1341D69E83064A2D273A70"
@@ -555,6 +564,7 @@ advice.
     modified.
 
     ``` r
+
     library(REDCapR) # Load the package into the current R session, if you haven't already.
     redcap_uri       <- "https://the.urlofyourinsitution.edu/api/"
     token            <- "your-secret-token"
@@ -566,6 +576,7 @@ advice.
     required only the when the object is declared.
 
     ``` r
+
     library(REDCapR) # Load the package into the current R session, if you haven't already.
     uri               <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
     token             <- "9A068C425B1341D69E83064A2D273A70"
@@ -609,12 +620,14 @@ but the developers collaborate with each other and share advice.
     way to install `redcapAPI` is from CRAN.
 
     ``` r
+
     install.packages("redcapAPI")
     ```
 
     Developmental versions may be available on GitHub.
 
     ``` r
+
     install.packages("remotes", repos = "https://cran.rstudio.com")
     remotes::install_github(repo = "nutterb/redcapAPI")
     ```
@@ -625,6 +638,7 @@ but the developers collaborate with each other and share advice.
     session of R:
 
     ``` r
+
     library(redcapAPI)
     # Loading required package: redcapAPI
     ```
@@ -635,6 +649,7 @@ but the developers collaborate with each other and share advice.
     interpretable by your local environment.
 
     ``` r
+
     library(redcapAPI) # Load the package into the current R session, if you haven't already.
     redcap_uri       <- "https://the.urlofyourinsitution.edu/api/"
     token            <- "your-secret-token"
@@ -649,6 +664,7 @@ but the developers collaborate with each other and share advice.
     the previous section.
 
     ``` r
+
     library(redcapAPI) # Load the package into the current R session.
     rcon <- redcapConnection(
       url   = "https://redcap-dev-2.ouhsc.edu/redcap/api/",
@@ -696,6 +712,7 @@ but the developers collaborate with each other and share advice.
     modified.
 
     ``` r
+
     library(redcapAPI) # Load the package into the current R session, if you haven't already.
     rcon <- redcapConnection(
       url   = "https://the.urlofyourinsitution.edu/api/", # Adapt this to your server.

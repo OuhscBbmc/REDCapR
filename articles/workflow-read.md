@@ -39,6 +39,7 @@ If this call fails, follow the installation instructions on the
 [REDCapR](https://ouhscbbmc.github.io/REDCapR/) website.
 
 ``` r
+
 requireNamespace("REDCapR")
 
 # If this fails, run `install.packages("REDCapR")` or `remotes::install_github(repo="OuhscBbmc/REDCapR")`
@@ -106,6 +107,7 @@ file**. In other words, no PHI project should be accessed with an R file
 that includes the line
 
 ``` r
+
 my_secret_token <- "9A81268476645C4E5F03428B8AC3AA7B"
 ```
 
@@ -137,6 +139,7 @@ To retrieve the credentials for the first project listed above, pass the
 value of “33” to `project_id`.
 
 ``` r
+
 path_credential <- system.file("misc/example.credentials", package = "REDCapR")
 credential  <- REDCapR::retrieve_credential_local(
   path_credential = path_credential,
@@ -186,6 +189,7 @@ The `redcap_uri` and `token` fields are the only required arguments of
 both are in the credential object created in the previous section.
 
 ``` r
+
 ds_1 <-
   REDCapR::redcap_read(
     redcap_uri  = credential$redcap_uri,
@@ -194,10 +198,10 @@ ds_1 <-
 #> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
-#> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2026-02-16 23:44:29.974502.
+#> Starting to read 5 records  at 2026-06-22 16:04:38.740969.
 #> Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
 #> 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 ```
@@ -206,6 +210,7 @@ At this point, the data.frame `ds_1` has everything you need to start
 analyzing the project.
 
 ``` r
+
 ds_1
 #> # A tibble: 5 × 25
 #>   record_id name_first name_last address  telephone email dob          age   sex
@@ -229,55 +234,56 @@ weight](workflow-read_files/figure-html/unstructured-2-1.png)
 
 ``` r
 
+
 summary(ds_1)
-#>    record_id  name_first         name_last           address         
-#>  Min.   :1   Length:5           Length:5           Length:5          
-#>  1st Qu.:2   Class :character   Class :character   Class :character  
-#>  Median :3   Mode  :character   Mode  :character   Mode  :character  
-#>  Mean   :3                                                           
-#>  3rd Qu.:4                                                           
-#>  Max.   :5                                                           
-#>                                                                      
-#>   telephone            email                dob                  age      
-#>  Length:5           Length:5           Min.   :1934-04-09   Min.   :11.0  
-#>  Class :character   Class :character   1st Qu.:1952-11-02   1st Qu.:11.0  
-#>  Mode  :character   Mode  :character   Median :1955-04-15   Median :59.0  
-#>                                        Mean   :1969-11-06   Mean   :44.4  
-#>                                        3rd Qu.:2003-03-10   3rd Qu.:61.0  
-#>                                        Max.   :2003-08-30   Max.   :80.0  
-#>                                                                           
-#>       sex      demographics_complete     height          weight   
-#>  Min.   :0.0   Min.   :2             Min.   :  6.0   Min.   :  1  
-#>  1st Qu.:0.0   1st Qu.:2             1st Qu.:  7.0   1st Qu.:  1  
-#>  Median :1.0   Median :2             Median :165.0   Median : 54  
-#>  Mean   :0.6   Mean   :2             Mean   :110.2   Mean   : 48  
-#>  3rd Qu.:1.0   3rd Qu.:2             3rd Qu.:180.0   3rd Qu.: 80  
-#>  Max.   :1.0   Max.   :2             Max.   :193.0   Max.   :104  
-#>                                                                   
-#>       bmi          comments           mugshot          health_complete
-#>  Min.   : 19.8   Length:5           Length:5           Min.   :0      
-#>  1st Qu.: 24.7   Class :character   Class :character   1st Qu.:0      
-#>  Median : 27.9   Mode  :character   Mode  :character   Median :1      
-#>  Mean   :110.9                                         Mean   :1      
-#>  3rd Qu.:204.1                                         3rd Qu.:2      
-#>  Max.   :277.8                                         Max.   :2      
-#>                                                                       
-#>     race___1      race___2      race___3      race___4      race___5  
-#>  Min.   :0.0   Min.   :0.0   Min.   :0.0   Min.   :0.0   Min.   :0.0  
-#>  1st Qu.:0.0   1st Qu.:0.0   1st Qu.:0.0   1st Qu.:0.0   1st Qu.:1.0  
-#>  Median :0.0   Median :0.0   Median :0.0   Median :0.0   Median :1.0  
-#>  Mean   :0.2   Mean   :0.2   Mean   :0.2   Mean   :0.2   Mean   :0.8  
-#>  3rd Qu.:0.0   3rd Qu.:0.0   3rd Qu.:0.0   3rd Qu.:0.0   3rd Qu.:1.0  
-#>  Max.   :1.0   Max.   :1.0   Max.   :1.0   Max.   :1.0   Max.   :1.0  
-#>                                                                       
-#>     race___6     ethnicity interpreter_needed race_and_ethnicity_complete
-#>  Min.   :0.0   Min.   :0   Min.   :0.00       Min.   :0.0                
-#>  1st Qu.:0.0   1st Qu.:1   1st Qu.:0.00       1st Qu.:2.0                
-#>  Median :0.0   Median :1   Median :0.00       Median :2.0                
-#>  Mean   :0.2   Mean   :1   Mean   :0.25       Mean   :1.6                
-#>  3rd Qu.:0.0   3rd Qu.:1   3rd Qu.:0.25       3rd Qu.:2.0                
-#>  Max.   :1.0   Max.   :2   Max.   :1.00       Max.   :2.0                
-#>                            NA's   :1
+#>    record_id     name_first     name_last      address       telephone 
+#>  Min.   :1   Length   :5    Length   :5   Length   : 5   Length   : 5  
+#>  1st Qu.:2   N.unique :5    N.unique :4   N.unique : 5   N.unique : 5  
+#>  Median :3   N.blank  :0    N.blank  :0   N.blank  : 0   N.blank  : 0  
+#>  Mean   :3   Min.nchar:5    Min.nchar:3   Min.nchar:29   Min.nchar:14  
+#>  3rd Qu.:4   Max.nchar:8    Max.nchar:8   Max.nchar:38   Max.nchar:14  
+#>  Max.   :5                                                             
+#>                                                                        
+#>        email         dob                  age            sex     
+#>  Length   : 5   Min.   :1934-04-09   Min.   :11.0   Min.   :0.0  
+#>  N.unique : 5   1st Qu.:1952-11-02   1st Qu.:11.0   1st Qu.:0.0  
+#>  N.blank  : 0   Median :1955-04-15   Median :59.0   Median :1.0  
+#>  Min.nchar:12   Mean   :1969-11-06   Mean   :44.4   Mean   :0.6  
+#>  Max.nchar:19   3rd Qu.:2003-03-10   3rd Qu.:61.0   3rd Qu.:1.0  
+#>                 Max.   :2003-08-30   Max.   :80.0   Max.   :1.0  
+#>                                                                  
+#>  demographics_complete     height          weight         bmi       
+#>  Min.   :2             Min.   :  6.0   Min.   :  1   Min.   : 19.8  
+#>  1st Qu.:2             1st Qu.:  7.0   1st Qu.:  1   1st Qu.: 24.7  
+#>  Median :2             Median :165.0   Median : 54   Median : 27.9  
+#>  Mean   :2             Mean   :110.2   Mean   : 48   Mean   :110.9  
+#>  3rd Qu.:2             3rd Qu.:180.0   3rd Qu.: 80   3rd Qu.:204.1  
+#>  Max.   :2             Max.   :193.0   Max.   :104   Max.   :277.8  
+#>                                                                     
+#>       comments        mugshot   health_complete    race___1      race___2  
+#>  Length   :  5   Length   : 5   Min.   :0       Min.   :0.0   Min.   :0.0  
+#>  N.unique :  5   N.unique : 5   1st Qu.:0       1st Qu.:0.0   1st Qu.:0.0  
+#>  N.blank  :  0   N.blank  : 0   Median :1       Median :0.0   Median :0.0  
+#>  Min.nchar: 18   Min.nchar:13   Mean   :1       Mean   :0.2   Mean   :0.2  
+#>  Max.nchar:104   Max.nchar:13   3rd Qu.:2       3rd Qu.:0.0   3rd Qu.:0.0  
+#>                                 Max.   :2       Max.   :1.0   Max.   :1.0  
+#>                                                                            
+#>     race___3      race___4      race___5      race___6     ethnicity
+#>  Min.   :0.0   Min.   :0.0   Min.   :0.0   Min.   :0.0   Min.   :0  
+#>  1st Qu.:0.0   1st Qu.:0.0   1st Qu.:1.0   1st Qu.:0.0   1st Qu.:1  
+#>  Median :0.0   Median :0.0   Median :1.0   Median :0.0   Median :1  
+#>  Mean   :0.2   Mean   :0.2   Mean   :0.8   Mean   :0.2   Mean   :1  
+#>  3rd Qu.:0.0   3rd Qu.:0.0   3rd Qu.:1.0   3rd Qu.:0.0   3rd Qu.:1  
+#>  Max.   :1.0   Max.   :1.0   Max.   :1.0   Max.   :1.0   Max.   :2  
+#>                                                                     
+#>  interpreter_needed race_and_ethnicity_complete
+#>  Min.   :0.00       Min.   :0.0                
+#>  1st Qu.:0.00       1st Qu.:2.0                
+#>  Median :0.00       Median :2.0                
+#>  Mean   :0.25       Mean   :1.6                
+#>  3rd Qu.:0.25       3rd Qu.:2.0                
+#>  Max.   :1.00       Max.   :2.0                
+#>  NAs    :1
 
 summary(lm(age ~ 1 + sex + bmi, data = ds_1))
 #> 
@@ -332,6 +338,7 @@ The most basic operation to limit rows is passing the exact record
 identifiers.
 
 ``` r
+
 # Return only records with IDs of 1 and 4
 desired_records <- c(1, 4)
 REDCapR::redcap_read(
@@ -361,6 +368,7 @@ names in square brackets. Also be aware of differences between strings
 and numbers.
 
 ``` r
+
 # Return only records with a birth date after January 2003
 REDCapR::redcap_read(
   redcap_uri    = credential$redcap_uri,
@@ -385,6 +393,7 @@ REDCapR::redcap_read(
 Limit the returned fields by passing a vector of the desired names.
 
 ``` r
+
 # Return only the fields record_id, name_first, and age
 desired_fields <- c("record_id", "name_first", "age")
 REDCapR::redcap_read(
@@ -432,6 +441,7 @@ specify either an integer or character.
 ### Specify Column Names & Types
 
 ``` r
+
 # Specify the column types.
 desired_fields <- c("record_id", "race")
 col_types <- readr::cols(
@@ -468,6 +478,7 @@ responsibility of the data types, tell
 keep them as strings.
 
 ``` r
+
 # Specify the column types.
 desired_fields <- c("record_id", "race")
 col_types <- readr::cols(.default = readr::col_character())
@@ -565,69 +576,70 @@ Environment
 
     #> ─ Session info ───────────────────────────────────────────────────────────────
     #>  setting  value
-    #>  version  R version 4.5.2 (2025-10-31)
-    #>  os       macOS Sequoia 15.7.3
-    #>  system   aarch64, darwin20
+    #>  version  R version 4.6.0 (2026-04-24)
+    #>  os       macOS Sequoia 15.7.7
+    #>  system   aarch64, darwin23
     #>  ui       X11
     #>  language en-US
     #>  collate  en_US.UTF-8
     #>  ctype    en_US.UTF-8
     #>  tz       UTC
-    #>  date     2026-02-16
-    #>  pandoc   3.1.11 @ /usr/local/bin/ (via rmarkdown)
+    #>  date     2026-06-22
+    #>  pandoc   3.8.3 @ /usr/local/bin/ (via rmarkdown)
     #>  quarto   NA
     #> 
     #> ─ Packages ───────────────────────────────────────────────────────────────────
     #>  package     * version    date (UTC) lib source
-    #>  backports     1.5.0      2024-05-23 [1] CRAN (R 4.5.0)
-    #>  bit           4.6.0      2025-03-06 [1] CRAN (R 4.5.0)
-    #>  bit64         4.6.0-1    2025-01-16 [1] CRAN (R 4.5.0)
-    #>  bslib         0.10.0     2026-01-26 [1] CRAN (R 4.5.2)
-    #>  cachem        1.1.0      2024-05-16 [1] CRAN (R 4.5.0)
-    #>  checkmate     2.3.4      2026-02-03 [1] CRAN (R 4.5.2)
-    #>  cli           3.6.5      2025-04-23 [1] CRAN (R 4.5.0)
-    #>  crayon        1.5.3      2024-06-20 [1] CRAN (R 4.5.0)
-    #>  curl          7.0.0      2025-08-19 [1] CRAN (R 4.5.0)
-    #>  desc          1.4.3      2023-12-10 [1] CRAN (R 4.5.0)
-    #>  digest        0.6.39     2025-11-19 [1] CRAN (R 4.5.2)
-    #>  dplyr         1.2.0      2026-02-03 [1] CRAN (R 4.5.2)
-    #>  evaluate      1.0.5      2025-08-27 [1] CRAN (R 4.5.0)
-    #>  fastmap       1.2.0      2024-05-15 [1] CRAN (R 4.5.0)
-    #>  fs            1.6.6      2025-04-12 [1] CRAN (R 4.5.0)
-    #>  generics      0.1.4      2025-05-09 [1] CRAN (R 4.5.0)
-    #>  glue          1.8.0      2024-09-30 [1] CRAN (R 4.5.0)
-    #>  hms           1.1.4      2025-10-17 [1] CRAN (R 4.5.0)
-    #>  htmltools     0.5.9      2025-12-04 [1] CRAN (R 4.5.2)
-    #>  httr          1.4.8      2026-02-13 [1] CRAN (R 4.5.2)
-    #>  jquerylib     0.1.4      2021-04-26 [1] CRAN (R 4.5.0)
-    #>  jsonlite      2.0.0      2025-03-27 [1] CRAN (R 4.5.0)
-    #>  knitr         1.51       2025-12-20 [1] CRAN (R 4.5.2)
-    #>  lifecycle     1.0.5      2026-01-08 [1] CRAN (R 4.5.2)
-    #>  magrittr      2.0.4      2025-09-12 [1] CRAN (R 4.5.0)
-    #>  pillar        1.11.1     2025-09-17 [1] CRAN (R 4.5.0)
-    #>  pkgconfig     2.0.3      2019-09-22 [1] CRAN (R 4.5.0)
-    #>  pkgdown       2.2.0      2025-11-06 [1] CRAN (R 4.5.0)
-    #>  R6            2.6.1      2025-02-15 [1] CRAN (R 4.5.0)
-    #>  ragg          1.5.0      2025-09-02 [1] CRAN (R 4.5.0)
-    #>  readr         2.1.6      2025-11-14 [1] CRAN (R 4.5.2)
-    #>  REDCapR       1.6.0.9001 2026-02-16 [1] local
-    #>  rlang         1.1.7      2026-01-09 [1] CRAN (R 4.5.2)
-    #>  rmarkdown     2.30       2025-09-28 [1] CRAN (R 4.5.0)
-    #>  sass          0.4.10     2025-04-11 [1] CRAN (R 4.5.0)
-    #>  sessioninfo   1.2.3      2025-02-05 [1] CRAN (R 4.5.0)
-    #>  systemfonts   1.3.1      2025-10-01 [1] CRAN (R 4.5.0)
-    #>  textshaping   1.0.4      2025-10-10 [1] CRAN (R 4.5.0)
-    #>  tibble        3.3.1      2026-01-11 [1] CRAN (R 4.5.2)
-    #>  tidyselect    1.2.1      2024-03-11 [1] CRAN (R 4.5.0)
-    #>  tzdb          0.5.0      2025-03-15 [1] CRAN (R 4.5.0)
-    #>  utf8          1.2.6      2025-06-08 [1] CRAN (R 4.5.0)
-    #>  vctrs         0.7.1      2026-01-23 [1] CRAN (R 4.5.2)
-    #>  vroom         1.7.0      2026-01-27 [1] CRAN (R 4.5.2)
-    #>  withr         3.0.2      2024-10-28 [1] CRAN (R 4.5.0)
-    #>  xfun          0.56       2026-01-18 [1] CRAN (R 4.5.2)
-    #>  yaml          2.3.12     2025-12-10 [1] CRAN (R 4.5.2)
+    #>  backports     1.5.1      2026-04-03 [1] CRAN (R 4.6.0)
+    #>  bit           4.6.0      2025-03-06 [1] CRAN (R 4.6.0)
+    #>  bit64         4.8.2      2026-05-19 [1] CRAN (R 4.6.0)
+    #>  bslib         0.11.0     2026-05-16 [1] CRAN (R 4.6.0)
+    #>  cachem        1.1.0      2024-05-16 [1] CRAN (R 4.6.0)
+    #>  checkmate     2.3.4      2026-02-03 [1] CRAN (R 4.6.0)
+    #>  cli           3.6.6      2026-04-09 [1] CRAN (R 4.6.0)
+    #>  crayon        1.5.3      2024-06-20 [1] CRAN (R 4.6.0)
+    #>  curl          7.1.0      2026-04-22 [1] CRAN (R 4.6.0)
+    #>  desc          1.4.3      2023-12-10 [1] CRAN (R 4.6.0)
+    #>  digest        0.6.39     2025-11-19 [1] CRAN (R 4.6.0)
+    #>  dplyr         1.2.1      2026-04-03 [1] CRAN (R 4.6.0)
+    #>  evaluate      1.0.5      2025-08-27 [1] CRAN (R 4.6.0)
+    #>  fastmap       1.2.0      2024-05-15 [1] CRAN (R 4.6.0)
+    #>  fs            2.1.0      2026-04-18 [1] CRAN (R 4.6.0)
+    #>  generics      0.1.4      2025-05-09 [1] CRAN (R 4.6.0)
+    #>  glue          1.8.1      2026-04-17 [1] CRAN (R 4.6.0)
+    #>  hms           1.1.4      2025-10-17 [1] CRAN (R 4.6.0)
+    #>  htmltools     0.5.9      2025-12-04 [1] CRAN (R 4.6.0)
+    #>  httr          1.4.8      2026-02-13 [1] CRAN (R 4.6.0)
+    #>  jquerylib     0.1.4      2021-04-26 [1] CRAN (R 4.6.0)
+    #>  jsonlite      2.0.0      2025-03-27 [1] CRAN (R 4.6.0)
+    #>  knitr         1.51       2025-12-20 [1] CRAN (R 4.6.0)
+    #>  lifecycle     1.0.5      2026-01-08 [1] CRAN (R 4.6.0)
+    #>  magrittr      2.0.5      2026-04-04 [1] CRAN (R 4.6.0)
+    #>  otel          0.2.0      2025-08-29 [1] CRAN (R 4.6.0)
+    #>  pillar        1.11.1     2025-09-17 [1] CRAN (R 4.6.0)
+    #>  pkgconfig     2.0.3      2019-09-22 [1] CRAN (R 4.6.0)
+    #>  pkgdown       2.2.0      2025-11-06 [1] CRAN (R 4.6.0)
+    #>  R6            2.6.1      2025-02-15 [1] CRAN (R 4.6.0)
+    #>  ragg          1.5.2      2026-03-23 [1] CRAN (R 4.6.0)
+    #>  readr         2.2.0      2026-02-19 [1] CRAN (R 4.6.0)
+    #>  REDCapR       1.6.0.9001 2026-06-22 [1] local
+    #>  rlang         1.2.0      2026-04-06 [1] CRAN (R 4.6.0)
+    #>  rmarkdown     2.31       2026-03-26 [1] CRAN (R 4.6.0)
+    #>  sass          0.4.10     2025-04-11 [1] CRAN (R 4.6.0)
+    #>  sessioninfo   1.2.4      2026-06-04 [1] CRAN (R 4.6.0)
+    #>  systemfonts   1.3.2      2026-03-05 [1] CRAN (R 4.6.0)
+    #>  textshaping   1.0.5      2026-03-06 [1] CRAN (R 4.6.0)
+    #>  tibble        3.3.1      2026-01-11 [1] CRAN (R 4.6.0)
+    #>  tidyselect    1.2.1      2024-03-11 [1] CRAN (R 4.6.0)
+    #>  tzdb          0.5.0      2025-03-15 [1] CRAN (R 4.6.0)
+    #>  utf8          1.2.6      2025-06-08 [1] CRAN (R 4.6.0)
+    #>  vctrs         0.7.3      2026-04-11 [1] CRAN (R 4.6.0)
+    #>  vroom         1.7.1      2026-03-31 [1] CRAN (R 4.6.0)
+    #>  withr         3.0.3      2026-06-19 [1] CRAN (R 4.6.0)
+    #>  xfun          0.59       2026-06-19 [1] CRAN (R 4.6.0)
+    #>  yaml          2.3.12     2025-12-10 [1] CRAN (R 4.6.0)
     #> 
     #>  [1] /Users/runner/work/_temp/Library
-    #>  [2] /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library
+    #>  [2] /Library/Frameworks/R.framework/Versions/4.6/Resources/library
     #> 
     #> ──────────────────────────────────────────────────────────────────────────────

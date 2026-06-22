@@ -11,6 +11,7 @@ can be done in one call to
 [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.html):
 
 ``` r
+
 ds <- redcap_read(redcap_uri=uri, token=token)$data
 ```
 
@@ -23,6 +24,7 @@ Documentation for the additional 20+ functions are found at
 [ouhscbbmc.github.io/REDCapR/reference](https://ouhscbbmc.github.io/REDCapR/reference/).
 
 ``` r
+
 # Return only records with IDs of 1 and 4
 desired_records <- c(1, 4)
 ds_some_rows <- redcap_read(
@@ -59,6 +61,7 @@ The *release* version can be installed from
 [CRAN](https://cran.r-project.org/package=REDCapR).
 
 ``` r
+
 install.packages("REDCapR")
 ```
 
@@ -67,6 +70,7 @@ The *development* version can be installed from
 `remotes` package.
 
 ``` r
+
 install.packages("remotes") # Run this line if the 'remotes' package isn't installed already.
 remotes::install_github("OuhscBbmc/REDCapR")
 ```
@@ -163,20 +167,20 @@ Pediatrics](https://medicine.ouhsc.edu/academic-departments/pediatrics),
 
 ### Build Status and Package Characteristics
 
-| [Branch](https://github.com/OuhscBbmc/REDCapR)         |                                          [GitHub Actions](https://github.com/OuhscBbmc/REDCapR/actions)                                          |                                           [Codecov](https://app.codecov.io/gh/OuhscBbmc/REDCapR)                                           |
-|:-------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------:|
+| [Branch](https://github.com/OuhscBbmc/REDCapR) | [GitHub Actions](https://github.com/OuhscBbmc/REDCapR/actions) | [Codecov](https://app.codecov.io/gh/OuhscBbmc/REDCapR) |
+|:---|:--:|:--:|
 | [Main](https://github.com/OuhscBbmc/REDCapR/tree/main) | [![R-CMD-check](https://github.com/OuhscBbmc/REDCapR/workflows/R-CMD-check/badge.svg?branch=main)](https://github.com/OuhscBbmc/REDCapR/actions) | [![codecov](https://codecov.io/gh/OuhscBbmc/REDCapR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/OuhscBbmc/REDCapR/branch/main) |
-| [Dev](https://github.com/OuhscBbmc/REDCapR/tree/dev)   | [![R-CMD-check](https://github.com/OuhscBbmc/REDCapR/workflows/R-CMD-check/badge.svg?branch=dev)](https://github.com/OuhscBbmc/REDCapR/actions)  |  [![codecov](https://codecov.io/gh/OuhscBbmc/REDCapR/branch/dev/graph/badge.svg)](https://app.codecov.io/gh/OuhscBbmc/REDCapR/branch/dev)  |
-|                                                        |                                                                 *Ubuntu Latest*                                                                  |                                                              *Test Coverage*                                                               |
+| [Dev](https://github.com/OuhscBbmc/REDCapR/tree/dev) | [![R-CMD-check](https://github.com/OuhscBbmc/REDCapR/workflows/R-CMD-check/badge.svg?branch=dev)](https://github.com/OuhscBbmc/REDCapR/actions) | [![codecov](https://codecov.io/gh/OuhscBbmc/REDCapR/branch/dev/graph/badge.svg)](https://app.codecov.io/gh/OuhscBbmc/REDCapR/branch/dev) |
+|  | *Ubuntu Latest* | *Test Coverage* |
 
-| Key                                                         | Value                                                                                                                                               |
-|:------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------|
-| [License](https://choosealicense.com/)                      | [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://choosealicense.com/licenses/mit/)                                      |
-| [CRAN Version](https://cran.r-project.org/package=REDCapR)  | [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/REDCapR)](https://cran.r-project.org/package=REDCapR)                                    |
-| [CRAN Rate](https://cranlogs.r-pkg.org/)                    | ![CRAN Pace](https://cranlogs.r-pkg.org/badges/REDCapR)                                                                                             |
-| [Zenodo Archive](https://zenodo.org/search?ln=en&p=redcapr) | [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.61990.svg)](https://doi.org/10.5281/zenodo.61990)                                               |
-| [Production Doc](https://www.rdocumentation.org/)           | [![RDoc](https://api.rdocumentation.org/badges/version/REDCapR)](https://www.rdocumentation.org/packages/REDCapR)                                   |
-| [Development Doc](https://ouhscbbmc.github.io/REDCapR/)     | [![rdoc](https://img.shields.io/badge/pkgdown-GitHub.io-orange.svg?longCache=true&style=style=for-the-badge)](https://ouhscbbmc.github.io/REDCapR/) |
+| Key | Value |
+|:---|:---|
+| [License](https://choosealicense.com/) | [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://choosealicense.com/licenses/mit/) |
+| [CRAN Version](https://cran.r-project.org/package=REDCapR) | [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/REDCapR)](https://cran.r-project.org/package=REDCapR) |
+| [CRAN Rate](https://cranlogs.r-pkg.org/) | ![CRAN Pace](https://cranlogs.r-pkg.org/badges/REDCapR) |
+| [Zenodo Archive](https://zenodo.org/search?ln=en&p=redcapr) | [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.61990.svg)](https://doi.org/10.5281/zenodo.61990) |
+| [Production Doc](https://www.rdocumentation.org/) | [![RDoc](https://api.rdocumentation.org/badges/version/REDCapR)](https://www.rdocumentation.org/packages/REDCapR) |
+| [Development Doc](https://ouhscbbmc.github.io/REDCapR/) | [![rdoc](https://img.shields.io/badge/pkgdown-GitHub.io-orange.svg?longCache=true&style=style=for-the-badge)](https://ouhscbbmc.github.io/REDCapR/) |
 
 # Package index
 

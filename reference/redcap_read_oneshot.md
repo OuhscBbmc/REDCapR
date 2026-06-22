@@ -296,7 +296,7 @@ token    <- "9A068C425B1341D69E83064A2D273A70"
 
 # Return all records and all variables.
 ds <- REDCapR::redcap_read_oneshot(redcap_uri=uri, token=token)$data
-#> 5 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
+#> 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 
 # Return only records with IDs of 1 and 3
 desired_records_v1 <- c(1, 3)
@@ -314,7 +314,7 @@ ds_some_fields_v1 <- REDCapR::redcap_read_oneshot(
   token      = token,
   fields     = desired_fields_v1
 )$data
-#> 5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 5 records and 3 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
 
 # Specify the column types.
 col_types <- readr::cols(
@@ -331,6 +331,6 @@ ds_col_types <- REDCapR::redcap_read_oneshot(
   token      = token,
   col_types  = col_types
 )$data
-#> 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 5 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
 # }
 ```

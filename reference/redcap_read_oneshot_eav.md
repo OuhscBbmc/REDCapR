@@ -227,8 +227,8 @@ ds_some_rows_v1    <- REDCapR:::redcap_read_oneshot_eav(
    records    = desired_records_v1
 )$data
 #> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
-#> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 2 records and 20 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 2 records and 20 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
 
 # Return only the fields record_id, name_first, and age
 desired_fields_v1 <- c("record_id", "name_first", "age")
@@ -239,6 +239,6 @@ ds_some_fields_v1 <- REDCapR:::redcap_read_oneshot_eav(
 )$data
 #> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
-#> 5 records and 4 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 5 records and 4 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
 # }
 ```
