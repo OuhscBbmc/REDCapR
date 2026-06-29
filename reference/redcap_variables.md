@@ -101,6 +101,6 @@ uri         <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token       <- "9A068C425B1341D69E83064A2D273A70"
 
 ds_variable <- REDCapR::redcap_variables(redcap_uri=uri, token=token)$data
-#> 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
 # }
 ```

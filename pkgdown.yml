@@ -9,7 +9,7 @@ articles:
   TroubleshootingApiCalls: TroubleshootingApiCalls.html
   workflow-read: workflow-read.html
   workflow-write: workflow-write.html
-last_built: 2026-06-22T16:03Z
+last_built: 2026-06-29T15:54Z
 urls:
   reference: https://ouhscbbmc.github.io/REDCapR/reference
   article: https://ouhscbbmc.github.io/REDCapR/articles

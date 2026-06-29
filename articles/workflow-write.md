@@ -398,15 +398,15 @@ Environment
 
     #> ─ Session info ───────────────────────────────────────────────────────────────
     #>  setting  value
-    #>  version  R version 4.6.0 (2026-04-24)
-    #>  os       macOS Sequoia 15.7.7
+    #>  version  R version 4.6.1 (2026-06-24)
+    #>  os       macOS Tahoe 26.4
     #>  system   aarch64, darwin23
     #>  ui       X11
     #>  language en-US
     #>  collate  en_US.UTF-8
     #>  ctype    en_US.UTF-8
     #>  tz       UTC
-    #>  date     2026-06-22
+    #>  date     2026-06-29
     #>  pandoc   3.8.3 @ /usr/local/bin/ (via rmarkdown)
     #>  quarto   NA
     #> 

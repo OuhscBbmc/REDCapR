@@ -156,7 +156,7 @@ token_longitudinal   <- "DA6F2BB23146BD5A7EA3408C1A44A556"
 
 # ---- Simple examples
 REDCapR::redcap_project_info_read(uri, token_simple      )$data
-#> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> # A tibble: 1 × 27
 #>   project_id project_title creation_time       production_time in_production
 #>        <int> <chr>         <dttm>              <dttm>          <lgl>        
@@ -169,7 +169,7 @@ REDCapR::redcap_project_info_read(uri, token_simple      )$data
 #> #   randomization_enabled <lgl>, ddp_enabled <lgl>, project_irb_number <chr>,
 #> #   project_grant_number <chr>, project_pi_firstname <chr>, …
 REDCapR::redcap_project_info_read(uri, token_longitudinal)$data
-#> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> # A tibble: 1 × 27
 #>   project_id project_title creation_time       production_time in_production
 #>        <int> <chr>         <dttm>              <dttm>          <lgl>        

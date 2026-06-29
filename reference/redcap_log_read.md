@@ -141,17 +141,17 @@ uri          <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token        <- "9A068C425B1341D69E83064A2D273A70"
 
 ds_last_week <- REDCapR::redcap_log_read(redcap_uri=uri, token=token)$data
-#> 3,560 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 5,331 rows were read from REDCap in 0.3 seconds.  The http status code was 200.
 head(ds_last_week)
 #> # A tibble: 6 × 5
-#>   timestamp           username        action        details               record
-#>   <dttm>              <chr>           <chr>         <chr>                 <chr> 
-#> 1 2026-06-22 11:03:00 unittestphifree Manage/Design Export instruments (… NA    
-#> 2 2026-06-22 11:03:00 unittestphifree Manage/Design Export DAGs (API)     NA    
-#> 3 2026-06-22 11:03:00 unittestphifree Manage/Design Download data dictio… NA    
-#> 4 2026-06-22 11:03:00 unittestphifree Manage/Design Export project infor… NA    
-#> 5 2026-06-22 10:47:00 unittestphifree NA            NA                    NA    
-#> 6 2026-06-22 10:47:00 unittestphifree NA            NA                    NA    
+#>   timestamp           username        action            details           record
+#>   <dttm>              <chr>           <chr>             <chr>             <chr> 
+#> 1 2026-06-29 10:54:00 unittestphifree Data export (API) export_format: C… NA    
+#> 2 2026-06-29 10:54:00 unittestphifree Manage/Design     Export DAGs (API) NA    
+#> 3 2026-06-29 10:54:00 unittestphifree Manage/Design     Export instrumen… NA    
+#> 4 2026-06-29 10:54:00 unittestphifree Manage/Design     Export project i… NA    
+#> 5 2026-06-29 10:54:00 unittestphifree Manage/Design     Export instrumen… NA    
+#> 6 2026-06-29 10:54:00 unittestphifree Manage/Design     Download data di… NA    
 
 ds_one_day <-
   REDCapR::redcap_log_read(
@@ -160,7 +160,7 @@ ds_one_day <-
     log_begin_date = as.Date("2024-10-11"),
     log_end_date   = as.Date("2024-10-11")
   )$data
-#> 18 rows were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 18 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 head(ds_one_day)
 #> # A tibble: 6 × 5
 #>   timestamp           username        action        details              record

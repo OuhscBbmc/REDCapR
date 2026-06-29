@@ -305,7 +305,7 @@ ds_some_rows_v1 <- REDCapR::redcap_read_oneshot(
   token      = token,
   records    = desired_records_v1
 )$data
-#> 2 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 
 # Return only the fields record_id, name_first, and age
 desired_fields_v1 <- c("record_id", "name_first", "age")
@@ -314,7 +314,7 @@ ds_some_fields_v1 <- REDCapR::redcap_read_oneshot(
   token      = token,
   fields     = desired_fields_v1
 )$data
-#> 5 records and 3 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 
 # Specify the column types.
 col_types <- readr::cols(
@@ -331,6 +331,6 @@ ds_col_types <- REDCapR::redcap_read_oneshot(
   token      = token,
   col_types  = col_types
 )$data
-#> 5 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 # }
 ```

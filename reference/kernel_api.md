@@ -95,7 +95,7 @@ kernel <- REDCapR:::kernel_api(uri, post_body, config_options)
 # Consume the results in a few different ways.
 kernel$result
 #> Response [https://redcap-dev-2.ouhsc.edu/redcap/api/]
-#>   Date: 2026-06-22 16:03
+#>   Date: 2026-06-29 15:54
 #>   Status: 200
 #>   Content-Type: text/csv; charset=utf-8
 #>   Size: 608 B

@@ -115,7 +115,7 @@ uri   <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 # A simple project
 token <- "9A068C425B1341D69E83064A2D273A70" # simple
 REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
-#> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
+#> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
 #> $data
 #> # A tibble: 17 × 18
 #>    field_name         form_name          section_header   field_type field_label
@@ -151,7 +151,7 @@ REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 #> [1] 200
 #> 
 #> $outcome_message
-#> [1] "The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200."
+#> [1] "The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200."
 #> 
 #> $forms_collapsed
 #> [1] ""
@@ -160,7 +160,7 @@ REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 #> [1] ""
 #> 
 #> $elapsed_seconds
-#> [1] 0.1410689
+#> [1] 0.1966269
 #> 
 #> $raw_text
 #> [1] ""
@@ -190,7 +190,7 @@ REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 #> [1] ""
 #> 
 #> $elapsed_seconds
-#> [1] 0.106689
+#> [1] 0.1554031
 #> 
 #> $raw_text
 #> [1] "{\"error\":\"You do not have permissions to use the API\"}"
@@ -199,7 +199,7 @@ REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 # A repeating measures
 token <- "77842BD8C18D3408819A21DD0154CCF4" # vignette-repeating
 REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
-#> The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
+#> The data dictionary describing 9 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
 #> $data
 #> # A tibble: 9 × 18
 #>   field_name    form_name      section_header field_type field_label            
@@ -227,7 +227,7 @@ REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 #> [1] 200
 #> 
 #> $outcome_message
-#> [1] "The data dictionary describing 9 fields was read from REDCap in 0.1 seconds.  The http status code was 200."
+#> [1] "The data dictionary describing 9 fields was read from REDCap in 0.2 seconds.  The http status code was 200."
 #> 
 #> $forms_collapsed
 #> [1] ""
@@ -236,7 +236,7 @@ REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 #> [1] ""
 #> 
 #> $elapsed_seconds
-#> [1] 0.1250188
+#> [1] 0.168422
 #> 
 #> $raw_text
 #> [1] ""

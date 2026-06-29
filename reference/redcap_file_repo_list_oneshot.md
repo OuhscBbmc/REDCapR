@@ -118,7 +118,7 @@ REDCapR::redcap_file_repo_list_oneshot(
   redcap_uri    = uri,
   token         = token
 )$data
-#> The file repository structure describing 6 elements was read from REDCap in 0.1 seconds.  The http status code was 200.
+#> The file repository structure describing 6 elements was read from REDCap in 0.2 seconds.  The http status code was 200.
 #> # A tibble: 6 × 5
 #>   folder_id doc_id name          role  dag  
 #>       <int>  <int> <chr>         <lgl> <lgl>

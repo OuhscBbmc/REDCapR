@@ -109,13 +109,13 @@ uri                 <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 # Longitudinal project with one arm
 token_1  <- "76B4A71A0158BD34C98F10DA72D5F27C" # "arm-single-longitudinal" test project
 REDCapR::redcap_arm_export(redcap_uri=uri, token=token_1)$data
-#> The list of arms was retrieved from the REDCap project in 0.1 seconds. The http status code was 200.
+#> The list of arms was retrieved from the REDCap project in 0.2 seconds. The http status code was 200.
 #> # A tibble: 1 × 2
 #>   arm_number arm_name
 #>        <int> <chr>   
 #> 1          1 Arm 1   
 REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_1)$data
-#> 3 event instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 3 event instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> # A tibble: 3 × 3
 #>   arm_num unique_event_name form      
 #>     <int> <chr>             <chr>     
@@ -126,7 +126,7 @@ REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_1)$data
 # Project with two arms
 token_2  <- "DA6F2BB23146BD5A7EA3408C1A44A556" # "longitudinal" test project
 REDCapR::redcap_arm_export(redcap_uri=uri, token=token_2)$data
-#> The list of arms was retrieved from the REDCap project in 0.1 seconds. The http status code was 200.
+#> The list of arms was retrieved from the REDCap project in 0.2 seconds. The http status code was 200.
 #> # A tibble: 2 × 2
 #>   arm_number arm_name
 #>        <int> <chr>   
@@ -165,7 +165,7 @@ REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_2, arms = c("1", "
 #> 10       1 visit_2_arm_1     visit_lab_data              
 #> # ℹ 15 more rows
 REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_2, arms = "2")$data
-#> 10 event instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 10 event instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> # A tibble: 10 × 3
 #>    arm_num unique_event_name        form                            
 #>      <int> <chr>                    <chr>                           

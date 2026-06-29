@@ -514,15 +514,15 @@ Environment
 
     #> ─ Session info ───────────────────────────────────────────────────────────────
     #>  setting  value
-    #>  version  R version 4.6.0 (2026-04-24)
-    #>  os       macOS Sequoia 15.7.7
+    #>  version  R version 4.6.1 (2026-06-24)
+    #>  os       macOS Tahoe 26.4
     #>  system   aarch64, darwin23
     #>  ui       X11
     #>  language en-US
     #>  collate  en_US.UTF-8
     #>  ctype    en_US.UTF-8
     #>  tz       UTC
-    #>  date     2026-06-22
+    #>  date     2026-06-29
     #>  pandoc   3.8.3 @ /usr/local/bin/ (via rmarkdown)
     #>  quarto   NA
     #> 
@@ -564,7 +564,7 @@ Environment
     #>  ragg           1.5.2      2026-03-23 [1] CRAN (R 4.6.0)
     #>  RColorBrewer   1.1-3      2022-04-03 [1] CRAN (R 4.6.0)
     #>  readr          2.2.0      2026-02-19 [1] CRAN (R 4.6.0)
-    #>  REDCapR        1.6.0.9001 2026-06-22 [1] local
+    #>  REDCapR        1.6.0.9001 2026-06-29 [1] local
     #>  rlang          1.2.0      2026-04-06 [1] CRAN (R 4.6.0)
     #>  rmarkdown      2.31       2026-03-26 [1] CRAN (R 4.6.0)
     #>  rstudioapi     0.19.0     2026-06-11 [1] CRAN (R 4.6.0)
@@ -585,7 +585,7 @@ Environment
     #>  vroom          1.7.1      2026-03-31 [1] CRAN (R 4.6.0)
     #>  withr          3.0.3      2026-06-19 [1] CRAN (R 4.6.0)
     #>  xfun           0.59       2026-06-19 [1] CRAN (R 4.6.0)
-    #>  xml2           1.5.2      2026-01-17 [1] CRAN (R 4.6.0)
+    #>  xml2           1.6.0      2026-06-22 [1] CRAN (R 4.6.1)
     #>  yaml           2.3.12     2025-12-10 [1] CRAN (R 4.6.0)
     #> 
     #>  [1] /Users/runner/work/_temp/Library
