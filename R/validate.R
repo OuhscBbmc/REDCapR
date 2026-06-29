@@ -395,7 +395,7 @@ validate_for_write <- function(
   lst_concerns <- list(
     validate_data_frame_inherits(d),
     validate_field_names(d),
-    validate_record_id_name(d),
+    validate_record_id_name(d, record_id_name = record_id_name),
     validate_uniqueness(d, record_id_name = record_id_name),
     validate_repeat_instance(d)
   )
