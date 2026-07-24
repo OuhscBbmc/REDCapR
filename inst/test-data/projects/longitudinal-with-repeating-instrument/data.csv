@@ -1,0 +1,9 @@
+record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birth_date,county,demographics_complete,visit_date,provider_npi,visit_complete,lab,conc,laboratory_complete,med,dose,medication_complete
+1,visit_1_arm_1,,,2001-01-01,Adair,2,2011-01-01,11,2,,,,,,
+1,visit_1_arm_1,laboratory,1,,,,,,,RBC,11.1,2,,,
+1,visit_1_arm_1,laboratory,2,,,,,,,WBCs,11.2,2,,,
+1,visit_1_arm_1,laboratory,3,,,,,,,Hgb,11.3,2,,,
+1,visit_1_arm_1,laboratory,4,,,,,,,Hct,11.4,2,,,
+1,visit_1_arm_1,medication,1,,,,,,,,,,Atorvastatin,11.1,2
+1,visit_1_arm_1,medication,2,,,,,,,,,,Levothyroxine,11.2,2
+1,visit_1_arm_1,medication,3,,,,,,,,,,Metformin,11.3,2

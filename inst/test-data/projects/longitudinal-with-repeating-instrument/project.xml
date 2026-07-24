@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ODM xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:redcap="https://projectredcap.org" xsi:schemaLocation="http://www.cdisc.org/ns/odm/v1.3 schema/odm/ODM1-3-1.xsd" ODMVersion="1.3.1" FileOID="000-00-0000" FileType="Snapshot" Description="REDCapR: longitudinal-with-repeating-instrument" AsOfDateTime="2026-07-24T16:41:44" CreationDateTime="2026-07-24T16:41:44" SourceSystem="REDCap" SourceSystemVersion="17.2.3">
+<Study OID="Project.REDCapRLongitudinalwithrepeati">
+<GlobalVariables>
+	<StudyName>REDCapR: longitudinal-with-repeating-instrument</StudyName>
+	<StudyDescription>This file contains the metadata, events, and data for REDCap project "REDCapR: longitudinal-with-repeating-instrument".</StudyDescription>
+	<ProtocolName>REDCapR: longitudinal-with-repeating-instrument</ProtocolName>
+	<redcap:RecordAutonumberingEnabled>1</redcap:RecordAutonumberingEnabled>
+	<redcap:CustomRecordLabel></redcap:CustomRecordLabel>
+	<redcap:SecondaryUniqueField></redcap:SecondaryUniqueField>
+	<redcap:SecondaryUniqueFieldDisplayValue>1</redcap:SecondaryUniqueFieldDisplayValue>
+	<redcap:SecondaryUniqueFieldDisplayLabel>1</redcap:SecondaryUniqueFieldDisplayLabel>
+	<redcap:SchedulingEnabled>0</redcap:SchedulingEnabled>
+	<redcap:SurveysEnabled>0</redcap:SurveysEnabled>
+	<redcap:SurveyInvitationEmailField></redcap:SurveyInvitationEmailField>
+	<redcap:SurveyParticipantIdentifiers>0</redcap:SurveyParticipantIdentifiers>
+	<redcap:RandomizationEnabled>0</redcap:RandomizationEnabled>
+	<redcap:DisplayTodayNowButton>1</redcap:DisplayTodayNowButton>
+	<redcap:PreventBranchingEraseValues>0</redcap:PreventBranchingEraseValues>
+	<redcap:RequireChangeReason>0</redcap:RequireChangeReason>
+	<redcap:DataHistoryPopup>1</redcap:DataHistoryPopup>
+	<redcap:OrderRecordsByField></redcap:OrderRecordsByField>
+	<redcap:taskCompleteStatus>2</redcap:taskCompleteStatus>
+	<redcap:DataResolutionWorkflowEnabled>1</redcap:DataResolutionWorkflowEnabled>
+	<redcap:FieldCommentLogOptionEditDelete>1</redcap:FieldCommentLogOptionEditDelete>
+	<redcap:DataResolutionWorkflowHideClosedQueries>1</redcap:DataResolutionWorkflowHideClosedQueries>
+	<redcap:MyCapEnabled>0</redcap:MyCapEnabled>
+	<redcap:Purpose>0</redcap:Purpose>
+	<redcap:PurposeOther></redcap:PurposeOther>
+	<redcap:ProjectNotes></redcap:ProjectNotes>
+	<redcap:SurveyQueueCustomText></redcap:SurveyQueueCustomText>
+	<redcap:SurveyQueueHide>0</redcap:SurveyQueueHide>
+	<redcap:SurveyAuthEnabled>0</redcap:SurveyAuthEnabled>
+	<redcap:SurveyAuthField1></redcap:SurveyAuthField1>
+	<redcap:SurveyAuthEvent1></redcap:SurveyAuthEvent1>
+	<redcap:SurveyAuthField2></redcap:SurveyAuthField2>
+	<redcap:SurveyAuthEvent2></redcap:SurveyAuthEvent2>
+	<redcap:SurveyAuthField3></redcap:SurveyAuthField3>
+	<redcap:SurveyAuthEvent3></redcap:SurveyAuthEvent3>
+	<redcap:SurveyAuthMinFields></redcap:SurveyAuthMinFields>
+	<redcap:SurveyAuthApplyAllSurveys>1</redcap:SurveyAuthApplyAllSurveys>
+	<redcap:SurveyAuthCustomMessage></redcap:SurveyAuthCustomMessage>
+	<redcap:SurveyAuthFailLimit></redcap:SurveyAuthFailLimit>
+	<redcap:SurveyAuthFailWindow></redcap:SurveyAuthFailWindow>
+	<redcap:DataMartProjectEnabled>0</redcap:DataMartProjectEnabled>
+	<redcap:DatamartAllowRepeatRevision>0</redcap:DatamartAllowRepeatRevision>
+	<redcap:DatamartAllowCreateRevision>0</redcap:DatamartAllowCreateRevision>
+	<redcap:DatamartCronEnabled>0</redcap:DatamartCronEnabled>
+	<redcap:HideFilledForms>1</redcap:HideFilledForms>
+	<redcap:HideDisabledForms>0</redcap:HideDisabledForms>
+	<redcap:MissingDataCodes></redcap:MissingDataCodes>
+	<redcap:ProtectedEmailMode>0</redcap:ProtectedEmailMode>
+	<redcap:ProtectedEmailModeCustomText></redcap:ProtectedEmailModeCustomText>
+	<redcap:ProtectedEmailModeTrigger>ALL</redcap:ProtectedEmailModeTrigger>
+	<redcap:ProtectedEmailModeLogo></redcap:ProtectedEmailModeLogo>
+	<redcap:RepeatingInstrumentsAndEvents>
+		<redcap:RepeatingInstruments>
+			<redcap:RepeatingInstrument redcap:UniqueEventName="visit_1_arm_1" redcap:RepeatInstrument="laboratory" redcap:CustomLabel="[lab]-[conc]"/>
+			<redcap:RepeatingInstrument redcap:UniqueEventName="visit_1_arm_1" redcap:RepeatInstrument="medication" redcap:CustomLabel="[med]-[dose]"/>
+		</redcap:RepeatingInstruments>
+		<redcap:RepeatingInstruments>
+			<redcap:RepeatingInstrument redcap:UniqueEventName="visit_2_arm_1" redcap:RepeatInstrument="laboratory" redcap:CustomLabel="[lab]-[conc]"/>
+			<redcap:RepeatingInstrument redcap:UniqueEventName="visit_2_arm_1" redcap:RepeatInstrument="medication" redcap:CustomLabel="[med]-[dose]"/>
+		</redcap:RepeatingInstruments>
+		<redcap:RepeatingInstruments>
+			<redcap:RepeatingInstrument redcap:UniqueEventName="visit_3_arm_1" redcap:RepeatInstrument="laboratory" redcap:CustomLabel="[lab]-[conc]"/>
+			<redcap:RepeatingInstrument redcap:UniqueEventName="visit_3_arm_1" redcap:RepeatInstrument="medication" redcap:CustomLabel="[med]-[dose]"/>
+		</redcap:RepeatingInstruments>
+	</redcap:RepeatingInstrumentsAndEvents>
+	<redcap:MycapProjectsGroup>
+		<redcap:MycapProjects/>
+	</redcap:MycapProjectsGroup>
+	<redcap:MycapThemesGroup>
+		<redcap:MycapThemes/>
+	</redcap:MycapThemesGroup>
+	<redcap:MultilanguageSettingsGroup>
+		<redcap:MultilanguageSettings settings="YToyNDp7czo3OiJ2ZXJzaW9uIjtzOjY6IjE3LjIuMyI7czo1OiJsYW5ncyI7YTowOnt9czo5OiJwcm9qZWN0SWQiO3M6MjoiNjgiO3M6MTU6ImRlc2lnbmF0ZWRGaWVsZCI7czowOiIiO3M6Njoic3RhdHVzIjtzOjM6ImRldiI7czo1OiJkZWJ1ZyI7YjowO3M6MTM6ImFkbWluLWVuYWJsZWQiO2I6MDtzOjE0OiJhZG1pbi1kaXNhYmxlZCI7YjowO3M6MTU6ImFsbG93LWZyb20tZmlsZSI7YjowO3M6MTg6ImFsbG93LWZyb20tc2NyYXRjaCI7YjowO3M6MjE6Im9wdGlvbmFsLXN1YnNjcmlwdGlvbiI7YjowO3M6MTg6ImFsbG93LXVpLW92ZXJyaWRlcyI7YjowO3M6NzoicmVmTGFuZyI7czowOiIiO3M6MTI6ImZhbGxiYWNrTGFuZyI7czowOiIiO3M6ODoiZGlzYWJsZWQiO2I6MDtzOjI1OiJoaWdobGlnaHRNaXNzaW5nRGF0YWVudHJ5IjtiOjA7czoyMjoiaGlnaGxpZ2h0TWlzc2luZ1N1cnZleSI7YjowO3M6MjE6ImF1dG9EZXRlY3RCcm93c2VyTGFuZyI7YjowO3M6MTQ6InNldE5vVHJhbnNsYXRlIjtiOjA7czoxMjoiYWxlcnRTb3VyY2VzIjthOjA6e31zOjEwOiJhc2lTb3VyY2VzIjthOjA6e31zOjE0OiJleGNsdWRlZEFsZXJ0cyI7YTowOnt9czoxNDoiZXhjbHVkZWRGaWVsZHMiO2E6MDp7fXM6MTY6ImV4Y2x1ZGVkU2V0dGluZ3MiO2E6MDp7fX0="/>
+	</redcap:MultilanguageSettingsGroup>
+</GlobalVariables>
+<MetaDataVersion OID="Metadata.REDCapRLongitudinalwithrepeati_2026-07-24_1641" Name="REDCapR: longitudinal-with-repeating-instrument" redcap:RecordIdField="record_id">
+	<Protocol>
+		<StudyEventRef StudyEventOID="Event.visit_1_arm_1" OrderNumber="1" Mandatory="No"/>
+		<StudyEventRef StudyEventOID="Event.visit_2_arm_1" OrderNumber="2" Mandatory="No"/>
+		<StudyEventRef StudyEventOID="Event.visit_3_arm_1" OrderNumber="3" Mandatory="No"/>
+	</Protocol>
+	<StudyEventDef OID="Event.visit_1_arm_1" Name="visit 1" Type="Common" Repeating="No" redcap:EventName="visit 1" redcap:CustomEventLabel="" redcap:UniqueEventName="visit_1_arm_1" redcap:ArmNum="1" redcap:ArmName="Arm 1" redcap:DayOffset="1" redcap:OffsetMin="0" redcap:OffsetMax="0">
+		<FormRef FormOID="Form.demographics" OrderNumber="1" Mandatory="No" redcap:FormName="demographics"/>
+		<FormRef FormOID="Form.visit" OrderNumber="2" Mandatory="No" redcap:FormName="visit"/>
+		<FormRef FormOID="Form.laboratory" OrderNumber="3" Mandatory="No" redcap:FormName="laboratory"/>
+		<FormRef FormOID="Form.medication" OrderNumber="4" Mandatory="No" redcap:FormName="medication"/>
+	</StudyEventDef>
+	<StudyEventDef OID="Event.visit_2_arm_1" Name="visit 2" Type="Common" Repeating="No" redcap:EventName="visit 2" redcap:CustomEventLabel="" redcap:UniqueEventName="visit_2_arm_1" redcap:ArmNum="1" redcap:ArmName="Arm 1" redcap:DayOffset="2" redcap:OffsetMin="0" redcap:OffsetMax="0">
+		<FormRef FormOID="Form.visit" OrderNumber="1" Mandatory="No" redcap:FormName="visit"/>
+		<FormRef FormOID="Form.laboratory" OrderNumber="2" Mandatory="No" redcap:FormName="laboratory"/>
+		<FormRef FormOID="Form.medication" OrderNumber="3" Mandatory="No" redcap:FormName="medication"/>
+	</StudyEventDef>
+	<StudyEventDef OID="Event.visit_3_arm_1" Name="visit 3" Type="Common" Repeating="No" redcap:EventName="visit 3" redcap:CustomEventLabel="" redcap:UniqueEventName="visit_3_arm_1" redcap:ArmNum="1" redcap:ArmName="Arm 1" redcap:DayOffset="3" redcap:OffsetMin="0" redcap:OffsetMax="0">
+		<FormRef FormOID="Form.visit" OrderNumber="1" Mandatory="No" redcap:FormName="visit"/>
+		<FormRef FormOID="Form.laboratory" OrderNumber="2" Mandatory="No" redcap:FormName="laboratory"/>
+		<FormRef FormOID="Form.medication" OrderNumber="3" Mandatory="No" redcap:FormName="medication"/>
+	</StudyEventDef>
+	<FormDef OID="Form.demographics" Name="demographics" Repeating="No" redcap:FormName="demographics">
+		<ItemGroupRef ItemGroupOID="demographics.record_id" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="demographics.demographics_complete" Mandatory="No"/>
+	</FormDef>
+	<FormDef OID="Form.visit" Name="visit" Repeating="No" redcap:FormName="visit">
+		<ItemGroupRef ItemGroupOID="visit.visit_date" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="visit.visit_complete" Mandatory="No"/>
+	</FormDef>
+	<FormDef OID="Form.laboratory" Name="laboratory" Repeating="No" redcap:FormName="laboratory">
+		<ItemGroupRef ItemGroupOID="laboratory.lab" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="laboratory.laboratory_complete" Mandatory="No"/>
+	</FormDef>
+	<FormDef OID="Form.medication" Name="medication" Repeating="No" redcap:FormName="medication">
+		<ItemGroupRef ItemGroupOID="medication.med" Mandatory="No"/>
+		<ItemGroupRef ItemGroupOID="medication.medication_complete" Mandatory="No"/>
+	</FormDef>
+	<ItemGroupDef OID="demographics.record_id" Name="demographics" Repeating="No">
+		<ItemRef ItemOID="record_id" Mandatory="No" redcap:Variable="record_id"/>
+		<ItemRef ItemOID="birth_date" Mandatory="Yes" redcap:Variable="birth_date"/>
+		<ItemRef ItemOID="county" Mandatory="Yes" redcap:Variable="county"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="demographics.demographics_complete" Name="Form Status" Repeating="No">
+		<ItemRef ItemOID="demographics_complete" Mandatory="No" redcap:Variable="demographics_complete"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="visit.visit_date" Name="visit" Repeating="No">
+		<ItemRef ItemOID="visit_date" Mandatory="Yes" redcap:Variable="visit_date"/>
+		<ItemRef ItemOID="provider_npi" Mandatory="Yes" redcap:Variable="provider_npi"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="visit.visit_complete" Name="Form Status" Repeating="No">
+		<ItemRef ItemOID="visit_complete" Mandatory="No" redcap:Variable="visit_complete"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="laboratory.lab" Name="laboratory" Repeating="No">
+		<ItemRef ItemOID="lab" Mandatory="No" redcap:Variable="lab"/>
+		<ItemRef ItemOID="conc" Mandatory="No" redcap:Variable="conc"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="laboratory.laboratory_complete" Name="Form Status" Repeating="No">
+		<ItemRef ItemOID="laboratory_complete" Mandatory="No" redcap:Variable="laboratory_complete"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="medication.med" Name="medication" Repeating="No">
+		<ItemRef ItemOID="med" Mandatory="No" redcap:Variable="med"/>
+		<ItemRef ItemOID="dose" Mandatory="No" redcap:Variable="dose"/>
+	</ItemGroupDef>
+	<ItemGroupDef OID="medication.medication_complete" Name="Form Status" Repeating="No">
+		<ItemRef ItemOID="medication_complete" Mandatory="No" redcap:Variable="medication_complete"/>
+	</ItemGroupDef>
+	<ItemDef OID="record_id" Name="record_id" DataType="text" Length="999" redcap:Variable="record_id" redcap:FieldType="text">
+		<Question><TranslatedText>Record ID</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="birth_date" Name="birth_date" DataType="date" Length="999" redcap:Variable="birth_date" redcap:FieldType="text" redcap:TextValidationType="date_ymd" redcap:RequiredField="y">
+		<Question><TranslatedText>Patient&#039;s Date of Birth</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="county" Name="county" DataType="text" Length="999" redcap:Variable="county" redcap:FieldType="text" redcap:RequiredField="y">
+		<Question><TranslatedText>Country of Residence</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="demographics_complete" Name="demographics_complete" DataType="text" Length="1" redcap:Variable="demographics_complete" redcap:FieldType="select" redcap:SectionHeader="Form Status">
+		<Question><TranslatedText>Complete?</TranslatedText></Question>
+		<CodeListRef CodeListOID="demographics_complete.choices"/>
+	</ItemDef>
+	<ItemDef OID="visit_date" Name="visit_date" DataType="date" Length="999" redcap:Variable="visit_date" redcap:FieldType="text" redcap:TextValidationType="date_ymd" redcap:RequiredField="y">
+		<Question><TranslatedText>Date of Visit</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="provider_npi" Name="provider_npi" DataType="text" Length="999" redcap:Variable="provider_npi" redcap:FieldType="text" redcap:RequiredField="y">
+		<Question><TranslatedText>Provider&#039;s NPI</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="visit_complete" Name="visit_complete" DataType="text" Length="1" redcap:Variable="visit_complete" redcap:FieldType="select" redcap:SectionHeader="Form Status">
+		<Question><TranslatedText>Complete?</TranslatedText></Question>
+		<CodeListRef CodeListOID="visit_complete.choices"/>
+	</ItemDef>
+	<ItemDef OID="lab" Name="lab" DataType="text" Length="999" redcap:Variable="lab" redcap:FieldType="text">
+		<Question><TranslatedText>lab value</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="conc" Name="conc" DataType="text" Length="999" redcap:Variable="conc" redcap:FieldType="text">
+		<Question><TranslatedText>concentration</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="laboratory_complete" Name="laboratory_complete" DataType="text" Length="1" redcap:Variable="laboratory_complete" redcap:FieldType="select" redcap:SectionHeader="Form Status">
+		<Question><TranslatedText>Complete?</TranslatedText></Question>
+		<CodeListRef CodeListOID="laboratory_complete.choices"/>
+	</ItemDef>
+	<ItemDef OID="med" Name="med" DataType="text" Length="999" redcap:Variable="med" redcap:FieldType="text">
+		<Question><TranslatedText>Medication Name</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="dose" Name="dose" DataType="text" Length="999" redcap:Variable="dose" redcap:FieldType="text">
+		<Question><TranslatedText>Medication Dose</TranslatedText></Question>
+	</ItemDef>
+	<ItemDef OID="medication_complete" Name="medication_complete" DataType="text" Length="1" redcap:Variable="medication_complete" redcap:FieldType="select" redcap:SectionHeader="Form Status">
+		<Question><TranslatedText>Complete?</TranslatedText></Question>
+		<CodeListRef CodeListOID="medication_complete.choices"/>
+	</ItemDef>
+	<CodeList OID="demographics_complete.choices" Name="demographics_complete" DataType="text" redcap:Variable="demographics_complete">
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Incomplete</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Unverified</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="2"><Decode><TranslatedText>Complete</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="visit_complete.choices" Name="visit_complete" DataType="text" redcap:Variable="visit_complete">
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Incomplete</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Unverified</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="2"><Decode><TranslatedText>Complete</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="laboratory_complete.choices" Name="laboratory_complete" DataType="text" redcap:Variable="laboratory_complete">
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Incomplete</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Unverified</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="2"><Decode><TranslatedText>Complete</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+	<CodeList OID="medication_complete.choices" Name="medication_complete" DataType="text" redcap:Variable="medication_complete">
+		<CodeListItem CodedValue="0"><Decode><TranslatedText>Incomplete</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="1"><Decode><TranslatedText>Unverified</TranslatedText></Decode></CodeListItem>
+		<CodeListItem CodedValue="2"><Decode><TranslatedText>Complete</TranslatedText></Decode></CodeListItem>
+	</CodeList>
+</MetaDataVersion>
+</Study>
+<ClinicalData StudyOID="Project.REDCapRLongitudinalwithrepeati" MetaDataVersionOID="Metadata.REDCapRLongitudinalwithrepeati_2026-07-24_1641">
+	<SubjectData SubjectKey="1" redcap:RecordIdField="record_id">
+		<StudyEventData StudyEventOID="Event.visit_1_arm_1" StudyEventRepeatKey="1" redcap:UniqueEventName="visit_1_arm_1">
+			<FormData FormOID="Form.demographics" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="demographics.record_id" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="record_id" Value="1"/>
+					<ItemData ItemOID="birth_date" Value="2001-01-01"/>
+					<ItemData ItemOID="county" Value="Adair"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="demographics.demographics_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="demographics_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+			<FormData FormOID="Form.visit" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="visit.visit_date" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="visit_date" Value="2011-01-01"/>
+					<ItemData ItemOID="provider_npi" Value="11"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="visit.visit_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="visit_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+			<FormData FormOID="Form.laboratory" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="laboratory.lab" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="lab" Value="RBC"/>
+					<ItemData ItemOID="conc" Value="11.1"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="laboratory.laboratory_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="laboratory_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+			<FormData FormOID="Form.laboratory" FormRepeatKey="2">
+				<ItemGroupData ItemGroupOID="laboratory.lab" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="lab" Value="WBCs"/>
+					<ItemData ItemOID="conc" Value="11.2"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="laboratory.laboratory_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="laboratory_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+			<FormData FormOID="Form.laboratory" FormRepeatKey="3">
+				<ItemGroupData ItemGroupOID="laboratory.lab" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="lab" Value="Hgb"/>
+					<ItemData ItemOID="conc" Value="11.3"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="laboratory.laboratory_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="laboratory_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+			<FormData FormOID="Form.laboratory" FormRepeatKey="4">
+				<ItemGroupData ItemGroupOID="laboratory.lab" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="lab" Value="Hct"/>
+					<ItemData ItemOID="conc" Value="11.4"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="laboratory.laboratory_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="laboratory_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+			<FormData FormOID="Form.medication" FormRepeatKey="1">
+				<ItemGroupData ItemGroupOID="medication.med" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="med" Value="Atorvastatin"/>
+					<ItemData ItemOID="dose" Value="11.1"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="medication.medication_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="medication_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+			<FormData FormOID="Form.medication" FormRepeatKey="2">
+				<ItemGroupData ItemGroupOID="medication.med" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="med" Value="Levothyroxine"/>
+					<ItemData ItemOID="dose" Value="11.2"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="medication.medication_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="medication_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+			<FormData FormOID="Form.medication" FormRepeatKey="3">
+				<ItemGroupData ItemGroupOID="medication.med" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="med" Value="Metformin"/>
+					<ItemData ItemOID="dose" Value="11.3"/>
+				</ItemGroupData>
+				<ItemGroupData ItemGroupOID="medication.medication_complete" ItemGroupRepeatKey="1">
+					<ItemData ItemOID="medication_complete" Value="2"/>
+				</ItemGroupData>
+			</FormData>
+		</StudyEventData>
+	</SubjectData>
+</ClinicalData>
+</ODM>
