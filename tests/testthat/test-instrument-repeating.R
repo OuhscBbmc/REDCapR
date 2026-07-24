@@ -15,8 +15,8 @@ test_that("Smoke Test", {
 })
 test_that("simple repeating", {
   testthat::skip_on_cran()
-  path_expected <- ""
-  expected_outcome_message <- "\\d+ repeating event-instrument metadata metadata records were read from REDCap in \\d\\.\\d seconds\\.  The http status code was 200\\.(\\n)?"
+  path_expected <- "test-data/specific-redcapr/instrument-repeating/simple.R"
+  expected_outcome_message <- "\\d+ repeating event-instrument metadata records were read from REDCap in \\d\\.\\d seconds\\.  The http status code was 200\\.(\\n)?"
 
   returned_object <-
     redcap_instrument_repeating(
