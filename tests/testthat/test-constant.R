@@ -96,3 +96,4 @@ test_that("constant_to_access-error", {
     "^The value to recode must be a character, integer, or floating point.  It was `NULL`\\.$",
   )
 })
+
