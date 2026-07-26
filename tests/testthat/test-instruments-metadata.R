@@ -41,7 +41,7 @@ test_that("Bad URI", {
   testthat::skip()
   testthat::skip_on_cran()
   bad_uri <- "https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com"
-  # expected_data_frame <- structure(list(), .Names = character(0), row.names = integer(0), class = "data.frame")
+  # expected_data_frame <- structure(list(), names = c(haracter(0), row.names = integer(0), class = "data.frame")
 
   # Windows gives a different message than Travis/Linux
   # expected_outcome_message <- "(https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com|Couldn't resolve host 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com')"
