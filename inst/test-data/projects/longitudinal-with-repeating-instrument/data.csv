@@ -263,7 +263,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 11,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,1132.1,2
 11,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,1132.2,1
 11,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,1132.3,0
-12,visit_1_arm_1,,,2001-12-01,Cheyenne,2,2011-12-01,121,2,,,,,,
+12,visit_1_arm_1,,,2001-12-01,Choctaw,2,2011-12-01,121,2,,,,,,
 12,visit_1_arm_1,laboratory,1,,,,,,,RBC,1211.1,3,,,
 12,visit_1_arm_1,laboratory,2,,,,,,,WBCs,1211.2,2,,,
 12,visit_1_arm_1,laboratory,3,,,,,,,Hgb,1211.3,1,,,
@@ -287,7 +287,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 12,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,1232.1,2
 12,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,1232.2,1
 12,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,1232.3,0
-13,visit_1_arm_1,,,2002-01-01,Chickasaw,2,2011-01-01,131,2,,,,,,
+13,visit_1_arm_1,,,2002-01-01,Cimarron,2,2011-01-01,131,2,,,,,,
 13,visit_1_arm_1,laboratory,1,,,,,,,RBC,1311.1,3,,,
 13,visit_1_arm_1,laboratory,2,,,,,,,WBCs,1311.2,2,,,
 13,visit_1_arm_1,laboratory,3,,,,,,,Hgb,1311.3,1,,,
@@ -311,7 +311,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 13,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,1332.1,2
 13,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,1332.2,1
 13,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,1332.3,0
-14,visit_1_arm_1,,,2002-02-01,Choctaw,2,2011-02-01,141,2,,,,,,
+14,visit_1_arm_1,,,2002-02-01,Cleveland,2,2011-02-01,141,2,,,,,,
 14,visit_1_arm_1,laboratory,1,,,,,,,RBC,1411.1,3,,,
 14,visit_1_arm_1,laboratory,2,,,,,,,WBCs,1411.2,2,,,
 14,visit_1_arm_1,laboratory,3,,,,,,,Hgb,1411.3,1,,,
@@ -335,7 +335,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 14,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,1432.1,2
 14,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,1432.2,1
 14,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,1432.3,0
-15,visit_1_arm_1,,,2002-03-01,Cimarron,2,2011-03-01,151,2,,,,,,
+15,visit_1_arm_1,,,2002-03-01,Coal,2,2011-03-01,151,2,,,,,,
 15,visit_1_arm_1,laboratory,1,,,,,,,RBC,1511.1,3,,,
 15,visit_1_arm_1,laboratory,2,,,,,,,WBCs,1511.2,2,,,
 15,visit_1_arm_1,laboratory,3,,,,,,,Hgb,1511.3,1,,,
@@ -359,7 +359,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 15,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,1532.1,2
 15,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,1532.2,1
 15,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,1532.3,0
-16,visit_1_arm_1,,,2002-04-01,Cleveland,2,2011-04-01,161,2,,,,,,
+16,visit_1_arm_1,,,2002-04-01,Comanche,2,2011-04-01,161,2,,,,,,
 16,visit_1_arm_1,laboratory,1,,,,,,,RBC,1611.1,3,,,
 16,visit_1_arm_1,laboratory,2,,,,,,,WBCs,1611.2,2,,,
 16,visit_1_arm_1,laboratory,3,,,,,,,Hgb,1611.3,1,,,
@@ -383,7 +383,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 16,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,1632.1,2
 16,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,1632.2,1
 16,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,1632.3,0
-17,visit_1_arm_1,,,2002-05-01,Coal,2,2011-05-01,171,2,,,,,,
+17,visit_1_arm_1,,,2002-05-01,Cotton,2,2011-05-01,171,2,,,,,,
 17,visit_1_arm_1,laboratory,1,,,,,,,RBC,1711.1,3,,,
 17,visit_1_arm_1,laboratory,2,,,,,,,WBCs,1711.2,2,,,
 17,visit_1_arm_1,laboratory,3,,,,,,,Hgb,1711.3,1,,,
@@ -407,7 +407,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 17,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,1732.1,2
 17,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,1732.2,1
 17,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,1732.3,0
-18,visit_1_arm_1,,,2002-06-01,Comanche,2,2011-06-01,181,2,,,,,,
+18,visit_1_arm_1,,,2002-06-01,Craig,2,2011-06-01,181,2,,,,,,
 18,visit_1_arm_1,laboratory,1,,,,,,,RBC,1811.1,3,,,
 18,visit_1_arm_1,laboratory,2,,,,,,,WBCs,1811.2,2,,,
 18,visit_1_arm_1,laboratory,3,,,,,,,Hgb,1811.3,1,,,
@@ -431,7 +431,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 18,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,1832.1,2
 18,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,1832.2,1
 18,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,1832.3,0
-19,visit_1_arm_1,,,2002-07-01,Cotton,2,2011-07-01,191,2,,,,,,
+19,visit_1_arm_1,,,2002-07-01,Creek,2,2011-07-01,191,2,,,,,,
 19,visit_1_arm_1,laboratory,1,,,,,,,RBC,1911.1,3,,,
 19,visit_1_arm_1,laboratory,2,,,,,,,WBCs,1911.2,2,,,
 19,visit_1_arm_1,laboratory,3,,,,,,,Hgb,1911.3,1,,,
@@ -455,7 +455,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 19,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,1932.1,2
 19,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,1932.2,1
 19,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,1932.3,0
-20,visit_1_arm_1,,,2002-08-01,Craig,2,2011-08-01,201,2,,,,,,
+20,visit_1_arm_1,,,2002-08-01,Custer,2,2011-08-01,201,2,,,,,,
 20,visit_1_arm_1,laboratory,1,,,,,,,RBC,2011.1,3,,,
 20,visit_1_arm_1,laboratory,2,,,,,,,WBCs,2011.2,2,,,
 20,visit_1_arm_1,laboratory,3,,,,,,,Hgb,2011.3,1,,,
@@ -479,7 +479,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 20,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,2032.1,2
 20,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,2032.2,1
 20,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,2032.3,0
-21,visit_1_arm_1,,,2002-09-01,Creek,2,2011-09-01,211,2,,,,,,
+21,visit_1_arm_1,,,2002-09-01,Delaware,2,2011-09-01,211,2,,,,,,
 21,visit_1_arm_1,laboratory,1,,,,,,,RBC,2111.1,3,,,
 21,visit_1_arm_1,laboratory,2,,,,,,,WBCs,2111.2,2,,,
 21,visit_1_arm_1,laboratory,3,,,,,,,Hgb,2111.3,1,,,
@@ -503,7 +503,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 21,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,2132.1,2
 21,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,2132.2,1
 21,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,2132.3,0
-22,visit_1_arm_1,,,2002-10-01,Custer,2,2011-10-01,221,2,,,,,,
+22,visit_1_arm_1,,,2002-10-01,Dewey,2,2011-10-01,221,2,,,,,,
 22,visit_1_arm_1,laboratory,1,,,,,,,RBC,2211.1,3,,,
 22,visit_1_arm_1,laboratory,2,,,,,,,WBCs,2211.2,2,,,
 22,visit_1_arm_1,laboratory,3,,,,,,,Hgb,2211.3,1,,,
@@ -527,7 +527,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 22,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,2232.1,2
 22,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,2232.2,1
 22,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,2232.3,0
-23,visit_1_arm_1,,,2002-11-01,Delaware,2,2011-11-01,231,2,,,,,,
+23,visit_1_arm_1,,,2002-11-01,Ellis,2,2011-11-01,231,2,,,,,,
 23,visit_1_arm_1,laboratory,1,,,,,,,RBC,2311.1,3,,,
 23,visit_1_arm_1,laboratory,2,,,,,,,WBCs,2311.2,2,,,
 23,visit_1_arm_1,laboratory,3,,,,,,,Hgb,2311.3,1,,,
@@ -551,7 +551,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 23,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,2332.1,2
 23,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,2332.2,1
 23,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,2332.3,0
-24,visit_1_arm_1,,,2002-12-01,Dewey,2,2011-12-01,241,2,,,,,,
+24,visit_1_arm_1,,,2002-12-01,Garfield,2,2011-12-01,241,2,,,,,,
 24,visit_1_arm_1,laboratory,1,,,,,,,RBC,2411.1,3,,,
 24,visit_1_arm_1,laboratory,2,,,,,,,WBCs,2411.2,2,,,
 24,visit_1_arm_1,laboratory,3,,,,,,,Hgb,2411.3,1,,,
@@ -575,7 +575,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 24,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,2432.1,2
 24,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,2432.2,1
 24,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,2432.3,0
-25,visit_1_arm_1,,,2003-01-01,Ellis,2,2011-01-01,251,2,,,,,,
+25,visit_1_arm_1,,,2003-01-01,Garvin,2,2011-01-01,251,2,,,,,,
 25,visit_1_arm_1,laboratory,1,,,,,,,RBC,2511.1,3,,,
 25,visit_1_arm_1,laboratory,2,,,,,,,WBCs,2511.2,2,,,
 25,visit_1_arm_1,laboratory,3,,,,,,,Hgb,2511.3,1,,,
@@ -599,7 +599,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 25,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,2532.1,2
 25,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,2532.2,1
 25,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,2532.3,0
-26,visit_1_arm_1,,,2003-02-01,Garfield,2,2011-02-01,261,2,,,,,,
+26,visit_1_arm_1,,,2003-02-01,Grady,2,2011-02-01,261,2,,,,,,
 26,visit_1_arm_1,laboratory,1,,,,,,,RBC,2611.1,3,,,
 26,visit_1_arm_1,laboratory,2,,,,,,,WBCs,2611.2,2,,,
 26,visit_1_arm_1,laboratory,3,,,,,,,Hgb,2611.3,1,,,
@@ -623,7 +623,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 26,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,2632.1,2
 26,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,2632.2,1
 26,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,2632.3,0
-27,visit_1_arm_1,,,2003-03-01,Garvin,2,2011-03-01,271,2,,,,,,
+27,visit_1_arm_1,,,2003-03-01,Grant,2,2011-03-01,271,2,,,,,,
 27,visit_1_arm_1,laboratory,1,,,,,,,RBC,2711.1,3,,,
 27,visit_1_arm_1,laboratory,2,,,,,,,WBCs,2711.2,2,,,
 27,visit_1_arm_1,laboratory,3,,,,,,,Hgb,2711.3,1,,,
@@ -647,7 +647,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 27,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,2732.1,2
 27,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,2732.2,1
 27,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,2732.3,0
-28,visit_1_arm_1,,,2003-04-01,Grady,2,2011-04-01,281,2,,,,,,
+28,visit_1_arm_1,,,2003-04-01,Greer,2,2011-04-01,281,2,,,,,,
 28,visit_1_arm_1,laboratory,1,,,,,,,RBC,2811.1,3,,,
 28,visit_1_arm_1,laboratory,2,,,,,,,WBCs,2811.2,2,,,
 28,visit_1_arm_1,laboratory,3,,,,,,,Hgb,2811.3,1,,,
@@ -671,7 +671,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 28,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,2832.1,2
 28,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,2832.2,1
 28,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,2832.3,0
-29,visit_1_arm_1,,,2003-05-01,Grant,2,2011-05-01,291,2,,,,,,
+29,visit_1_arm_1,,,2003-05-01,Harmon,2,2011-05-01,291,2,,,,,,
 29,visit_1_arm_1,laboratory,1,,,,,,,RBC,2911.1,3,,,
 29,visit_1_arm_1,laboratory,2,,,,,,,WBCs,2911.2,2,,,
 29,visit_1_arm_1,laboratory,3,,,,,,,Hgb,2911.3,1,,,
@@ -695,7 +695,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 29,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,2932.1,2
 29,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,2932.2,1
 29,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,2932.3,0
-30,visit_1_arm_1,,,2003-06-01,Greer,2,2011-06-01,301,2,,,,,,
+30,visit_1_arm_1,,,2003-06-01,Harper,2,2011-06-01,301,2,,,,,,
 30,visit_1_arm_1,laboratory,1,,,,,,,RBC,3011.1,3,,,
 30,visit_1_arm_1,laboratory,2,,,,,,,WBCs,3011.2,2,,,
 30,visit_1_arm_1,laboratory,3,,,,,,,Hgb,3011.3,1,,,
@@ -719,7 +719,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 30,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,3032.1,2
 30,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,3032.2,1
 30,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,3032.3,0
-31,visit_1_arm_1,,,2003-07-01,Harmon,2,2011-07-01,311,2,,,,,,
+31,visit_1_arm_1,,,2003-07-01,Haskell,2,2011-07-01,311,2,,,,,,
 31,visit_1_arm_1,laboratory,1,,,,,,,RBC,3111.1,3,,,
 31,visit_1_arm_1,laboratory,2,,,,,,,WBCs,3111.2,2,,,
 31,visit_1_arm_1,laboratory,3,,,,,,,Hgb,3111.3,1,,,
@@ -743,7 +743,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 31,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,3132.1,2
 31,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,3132.2,1
 31,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,3132.3,0
-32,visit_1_arm_1,,,2003-08-01,Harper,2,2011-08-01,321,2,,,,,,
+32,visit_1_arm_1,,,2003-08-01,Hughes,2,2011-08-01,321,2,,,,,,
 32,visit_1_arm_1,laboratory,1,,,,,,,RBC,3211.1,3,,,
 32,visit_1_arm_1,laboratory,2,,,,,,,WBCs,3211.2,2,,,
 32,visit_1_arm_1,laboratory,3,,,,,,,Hgb,3211.3,1,,,
@@ -767,7 +767,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 32,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,3232.1,2
 32,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,3232.2,1
 32,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,3232.3,0
-33,visit_1_arm_1,,,2003-09-01,Haskell,2,2011-09-01,331,2,,,,,,
+33,visit_1_arm_1,,,2003-09-01,Jackson,2,2011-09-01,331,2,,,,,,
 33,visit_1_arm_1,laboratory,1,,,,,,,RBC,3311.1,3,,,
 33,visit_1_arm_1,laboratory,2,,,,,,,WBCs,3311.2,2,,,
 33,visit_1_arm_1,laboratory,3,,,,,,,Hgb,3311.3,1,,,
@@ -791,7 +791,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 33,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,3332.1,2
 33,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,3332.2,1
 33,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,3332.3,0
-34,visit_1_arm_1,,,2003-10-01,Hughes,2,2011-10-01,341,2,,,,,,
+34,visit_1_arm_1,,,2003-10-01,Jefferson,2,2011-10-01,341,2,,,,,,
 34,visit_1_arm_1,laboratory,1,,,,,,,RBC,3411.1,3,,,
 34,visit_1_arm_1,laboratory,2,,,,,,,WBCs,3411.2,2,,,
 34,visit_1_arm_1,laboratory,3,,,,,,,Hgb,3411.3,1,,,
@@ -815,7 +815,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 34,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,3432.1,2
 34,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,3432.2,1
 34,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,3432.3,0
-35,visit_1_arm_1,,,2003-11-01,Jackson,2,2011-11-01,351,2,,,,,,
+35,visit_1_arm_1,,,2003-11-01,Johnston,2,2011-11-01,351,2,,,,,,
 35,visit_1_arm_1,laboratory,1,,,,,,,RBC,3511.1,3,,,
 35,visit_1_arm_1,laboratory,2,,,,,,,WBCs,3511.2,2,,,
 35,visit_1_arm_1,laboratory,3,,,,,,,Hgb,3511.3,1,,,
@@ -839,7 +839,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 35,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,3532.1,2
 35,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,3532.2,1
 35,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,3532.3,0
-36,visit_1_arm_1,,,2003-12-01,Jefferson,2,2011-12-01,361,2,,,,,,
+36,visit_1_arm_1,,,2003-12-01,Kay,2,2011-12-01,361,2,,,,,,
 36,visit_1_arm_1,laboratory,1,,,,,,,RBC,3611.1,3,,,
 36,visit_1_arm_1,laboratory,2,,,,,,,WBCs,3611.2,2,,,
 36,visit_1_arm_1,laboratory,3,,,,,,,Hgb,3611.3,1,,,
@@ -863,7 +863,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 36,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,3632.1,2
 36,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,3632.2,1
 36,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,3632.3,0
-37,visit_1_arm_1,,,2004-01-01,Johnston,2,2011-01-01,371,2,,,,,,
+37,visit_1_arm_1,,,2004-01-01,Kingfisher,2,2011-01-01,371,2,,,,,,
 37,visit_1_arm_1,laboratory,1,,,,,,,RBC,3711.1,3,,,
 37,visit_1_arm_1,laboratory,2,,,,,,,WBCs,3711.2,2,,,
 37,visit_1_arm_1,laboratory,3,,,,,,,Hgb,3711.3,1,,,
@@ -887,7 +887,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 37,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,3732.1,2
 37,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,3732.2,1
 37,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,3732.3,0
-38,visit_1_arm_1,,,2004-02-01,Kay,2,2011-02-01,381,2,,,,,,
+38,visit_1_arm_1,,,2004-02-01,Kiowa,2,2011-02-01,381,2,,,,,,
 38,visit_1_arm_1,laboratory,1,,,,,,,RBC,3811.1,3,,,
 38,visit_1_arm_1,laboratory,2,,,,,,,WBCs,3811.2,2,,,
 38,visit_1_arm_1,laboratory,3,,,,,,,Hgb,3811.3,1,,,
@@ -911,7 +911,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 38,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,3832.1,2
 38,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,3832.2,1
 38,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,3832.3,0
-39,visit_1_arm_1,,,2004-03-01,Kingfisher,2,2011-03-01,391,2,,,,,,
+39,visit_1_arm_1,,,2004-03-01,Latimer,2,2011-03-01,391,2,,,,,,
 39,visit_1_arm_1,laboratory,1,,,,,,,RBC,3911.1,3,,,
 39,visit_1_arm_1,laboratory,2,,,,,,,WBCs,3911.2,2,,,
 39,visit_1_arm_1,laboratory,3,,,,,,,Hgb,3911.3,1,,,
@@ -935,7 +935,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 39,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,3932.1,2
 39,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,3932.2,1
 39,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,3932.3,0
-40,visit_1_arm_1,,,2004-04-01,Kiowa,2,2011-04-01,401,2,,,,,,
+40,visit_1_arm_1,,,2004-04-01,LeFlore,2,2011-04-01,401,2,,,,,,
 40,visit_1_arm_1,laboratory,1,,,,,,,RBC,4011.1,3,,,
 40,visit_1_arm_1,laboratory,2,,,,,,,WBCs,4011.2,2,,,
 40,visit_1_arm_1,laboratory,3,,,,,,,Hgb,4011.3,1,,,
@@ -959,7 +959,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 40,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,4032.1,2
 40,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,4032.2,1
 40,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,4032.3,0
-41,visit_1_arm_1,,,2004-05-01,Latimer,2,2011-05-01,411,2,,,,,,
+41,visit_1_arm_1,,,2004-05-01,Lincoln,2,2011-05-01,411,2,,,,,,
 41,visit_1_arm_1,laboratory,1,,,,,,,RBC,4111.1,3,,,
 41,visit_1_arm_1,laboratory,2,,,,,,,WBCs,4111.2,2,,,
 41,visit_1_arm_1,laboratory,3,,,,,,,Hgb,4111.3,1,,,
@@ -983,7 +983,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 41,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,4132.1,2
 41,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,4132.2,1
 41,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,4132.3,0
-42,visit_1_arm_1,,,2004-06-01,Le Flore,2,2011-06-01,421,2,,,,,,
+42,visit_1_arm_1,,,2004-06-01,Logan,2,2011-06-01,421,2,,,,,,
 42,visit_1_arm_1,laboratory,1,,,,,,,RBC,4211.1,3,,,
 42,visit_1_arm_1,laboratory,2,,,,,,,WBCs,4211.2,2,,,
 42,visit_1_arm_1,laboratory,3,,,,,,,Hgb,4211.3,1,,,
@@ -1007,7 +1007,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 42,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,4232.1,2
 42,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,4232.2,1
 42,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,4232.3,0
-43,visit_1_arm_1,,,2004-07-01,Lincoln,2,2011-07-01,431,2,,,,,,
+43,visit_1_arm_1,,,2004-07-01,Love,2,2011-07-01,431,2,,,,,,
 43,visit_1_arm_1,laboratory,1,,,,,,,RBC,4311.1,3,,,
 43,visit_1_arm_1,laboratory,2,,,,,,,WBCs,4311.2,2,,,
 43,visit_1_arm_1,laboratory,3,,,,,,,Hgb,4311.3,1,,,
@@ -1031,7 +1031,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 43,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,4332.1,2
 43,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,4332.2,1
 43,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,4332.3,0
-44,visit_1_arm_1,,,2004-08-01,Logan,2,2011-08-01,441,2,,,,,,
+44,visit_1_arm_1,,,2004-08-01,Major,2,2011-08-01,441,2,,,,,,
 44,visit_1_arm_1,laboratory,1,,,,,,,RBC,4411.1,3,,,
 44,visit_1_arm_1,laboratory,2,,,,,,,WBCs,4411.2,2,,,
 44,visit_1_arm_1,laboratory,3,,,,,,,Hgb,4411.3,1,,,
@@ -1055,7 +1055,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 44,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,4432.1,2
 44,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,4432.2,1
 44,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,4432.3,0
-45,visit_1_arm_1,,,2004-09-01,Love,2,2011-09-01,451,2,,,,,,
+45,visit_1_arm_1,,,2004-09-01,Marshall,2,2011-09-01,451,2,,,,,,
 45,visit_1_arm_1,laboratory,1,,,,,,,RBC,4511.1,3,,,
 45,visit_1_arm_1,laboratory,2,,,,,,,WBCs,4511.2,2,,,
 45,visit_1_arm_1,laboratory,3,,,,,,,Hgb,4511.3,1,,,
@@ -1079,7 +1079,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 45,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,4532.1,2
 45,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,4532.2,1
 45,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,4532.3,0
-46,visit_1_arm_1,,,2004-10-01,Major,2,2011-10-01,461,2,,,,,,
+46,visit_1_arm_1,,,2004-10-01,Mayes,2,2011-10-01,461,2,,,,,,
 46,visit_1_arm_1,laboratory,1,,,,,,,RBC,4611.1,3,,,
 46,visit_1_arm_1,laboratory,2,,,,,,,WBCs,4611.2,2,,,
 46,visit_1_arm_1,laboratory,3,,,,,,,Hgb,4611.3,1,,,
@@ -1103,7 +1103,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 46,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,4632.1,2
 46,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,4632.2,1
 46,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,4632.3,0
-47,visit_1_arm_1,,,2004-11-01,Marshall,2,2011-11-01,471,2,,,,,,
+47,visit_1_arm_1,,,2004-11-01,McClain,2,2011-11-01,471,2,,,,,,
 47,visit_1_arm_1,laboratory,1,,,,,,,RBC,4711.1,3,,,
 47,visit_1_arm_1,laboratory,2,,,,,,,WBCs,4711.2,2,,,
 47,visit_1_arm_1,laboratory,3,,,,,,,Hgb,4711.3,1,,,
@@ -1127,7 +1127,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 47,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,4732.1,2
 47,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,4732.2,1
 47,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,4732.3,0
-48,visit_1_arm_1,,,2004-12-01,Mayes,2,2011-12-01,481,2,,,,,,
+48,visit_1_arm_1,,,2004-12-01,McCurtain,2,2011-12-01,481,2,,,,,,
 48,visit_1_arm_1,laboratory,1,,,,,,,RBC,4811.1,3,,,
 48,visit_1_arm_1,laboratory,2,,,,,,,WBCs,4811.2,2,,,
 48,visit_1_arm_1,laboratory,3,,,,,,,Hgb,4811.3,1,,,
@@ -1151,7 +1151,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 48,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,4832.1,2
 48,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,4832.2,1
 48,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,4832.3,0
-49,visit_1_arm_1,,,2005-01-01,McClain,2,2011-01-01,491,2,,,,,,
+49,visit_1_arm_1,,,2005-01-01,McIntosh,2,2011-01-01,491,2,,,,,,
 49,visit_1_arm_1,laboratory,1,,,,,,,RBC,4911.1,3,,,
 49,visit_1_arm_1,laboratory,2,,,,,,,WBCs,4911.2,2,,,
 49,visit_1_arm_1,laboratory,3,,,,,,,Hgb,4911.3,1,,,
@@ -1175,7 +1175,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 49,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,4932.1,2
 49,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,4932.2,1
 49,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,4932.3,0
-50,visit_1_arm_1,,,2005-02-01,McCurtain,2,2011-02-01,501,2,,,,,,
+50,visit_1_arm_1,,,2005-02-01,Murray,2,2011-02-01,501,2,,,,,,
 50,visit_1_arm_1,laboratory,1,,,,,,,RBC,5011.1,3,,,
 50,visit_1_arm_1,laboratory,2,,,,,,,WBCs,5011.2,2,,,
 50,visit_1_arm_1,laboratory,3,,,,,,,Hgb,5011.3,1,,,
@@ -1199,7 +1199,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 50,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,5032.1,2
 50,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,5032.2,1
 50,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,5032.3,0
-51,visit_1_arm_1,,,2005-03-01,McIntosh,2,2011-03-01,511,2,,,,,,
+51,visit_1_arm_1,,,2005-03-01,Muskogee,2,2011-03-01,511,2,,,,,,
 51,visit_1_arm_1,laboratory,1,,,,,,,RBC,5111.1,3,,,
 51,visit_1_arm_1,laboratory,2,,,,,,,WBCs,5111.2,2,,,
 51,visit_1_arm_1,laboratory,3,,,,,,,Hgb,5111.3,1,,,
@@ -1223,7 +1223,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 51,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,5132.1,2
 51,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,5132.2,1
 51,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,5132.3,0
-52,visit_1_arm_1,,,2005-04-01,Miner,2,2011-04-01,521,2,,,,,,
+52,visit_1_arm_1,,,2005-04-01,Noble,2,2011-04-01,521,2,,,,,,
 52,visit_1_arm_1,laboratory,1,,,,,,,RBC,5211.1,3,,,
 52,visit_1_arm_1,laboratory,2,,,,,,,WBCs,5211.2,2,,,
 52,visit_1_arm_1,laboratory,3,,,,,,,Hgb,5211.3,1,,,
@@ -1247,7 +1247,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 52,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,5232.1,2
 52,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,5232.2,1
 52,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,5232.3,0
-53,visit_1_arm_1,,,2005-05-01,Mobley,2,2011-05-01,531,2,,,,,,
+53,visit_1_arm_1,,,2005-05-01,Nowata,2,2011-05-01,531,2,,,,,,
 53,visit_1_arm_1,laboratory,1,,,,,,,RBC,5311.1,3,,,
 53,visit_1_arm_1,laboratory,2,,,,,,,WBCs,5311.2,2,,,
 53,visit_1_arm_1,laboratory,3,,,,,,,Hgb,5311.3,1,,,
@@ -1271,7 +1271,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 53,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,5332.1,2
 53,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,5332.2,1
 53,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,5332.3,0
-54,visit_1_arm_1,,,2005-06-01,Montgomery,2,2011-06-01,541,2,,,,,,
+54,visit_1_arm_1,,,2005-06-01,Okfuskee,2,2011-06-01,541,2,,,,,,
 54,visit_1_arm_1,laboratory,1,,,,,,,RBC,5411.1,3,,,
 54,visit_1_arm_1,laboratory,2,,,,,,,WBCs,5411.2,2,,,
 54,visit_1_arm_1,laboratory,3,,,,,,,Hgb,5411.3,1,,,
@@ -1295,7 +1295,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 54,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,5432.1,2
 54,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,5432.2,1
 54,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,5432.3,0
-55,visit_1_arm_1,,,2005-07-01,Muskogee,2,2011-07-01,551,2,,,,,,
+55,visit_1_arm_1,,,2005-07-01,Oklahoma,2,2011-07-01,551,2,,,,,,
 55,visit_1_arm_1,laboratory,1,,,,,,,RBC,5511.1,3,,,
 55,visit_1_arm_1,laboratory,2,,,,,,,WBCs,5511.2,2,,,
 55,visit_1_arm_1,laboratory,3,,,,,,,Hgb,5511.3,1,,,
@@ -1319,7 +1319,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 55,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,5532.1,2
 55,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,5532.2,1
 55,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,5532.3,0
-56,visit_1_arm_1,,,2005-08-01,Noble,2,2011-08-01,561,2,,,,,,
+56,visit_1_arm_1,,,2005-08-01,Okmulgee,2,2011-08-01,561,2,,,,,,
 56,visit_1_arm_1,laboratory,1,,,,,,,RBC,5611.1,3,,,
 56,visit_1_arm_1,laboratory,2,,,,,,,WBCs,5611.2,2,,,
 56,visit_1_arm_1,laboratory,3,,,,,,,Hgb,5611.3,1,,,
@@ -1343,7 +1343,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 56,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,5632.1,2
 56,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,5632.2,1
 56,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,5632.3,0
-57,visit_1_arm_1,,,2005-09-01,Nowata,2,2011-09-01,571,2,,,,,,
+57,visit_1_arm_1,,,2005-09-01,Osage,2,2011-09-01,571,2,,,,,,
 57,visit_1_arm_1,laboratory,1,,,,,,,RBC,5711.1,3,,,
 57,visit_1_arm_1,laboratory,2,,,,,,,WBCs,5711.2,2,,,
 57,visit_1_arm_1,laboratory,3,,,,,,,Hgb,5711.3,1,,,
@@ -1367,7 +1367,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 57,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,5732.1,2
 57,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,5732.2,1
 57,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,5732.3,0
-58,visit_1_arm_1,,,2005-10-01,Okfuskee,2,2011-10-01,581,2,,,,,,
+58,visit_1_arm_1,,,2005-10-01,Ottawa,2,2011-10-01,581,2,,,,,,
 58,visit_1_arm_1,laboratory,1,,,,,,,RBC,5811.1,3,,,
 58,visit_1_arm_1,laboratory,2,,,,,,,WBCs,5811.2,2,,,
 58,visit_1_arm_1,laboratory,3,,,,,,,Hgb,5811.3,1,,,
@@ -1391,7 +1391,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 58,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,5832.1,2
 58,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,5832.2,1
 58,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,5832.3,0
-59,visit_1_arm_1,,,2005-11-01,Oklahoma,2,2011-11-01,591,2,,,,,,
+59,visit_1_arm_1,,,2005-11-01,Pawnee,2,2011-11-01,591,2,,,,,,
 59,visit_1_arm_1,laboratory,1,,,,,,,RBC,5911.1,3,,,
 59,visit_1_arm_1,laboratory,2,,,,,,,WBCs,5911.2,2,,,
 59,visit_1_arm_1,laboratory,3,,,,,,,Hgb,5911.3,1,,,
@@ -1415,7 +1415,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 59,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,5932.1,2
 59,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,5932.2,1
 59,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,5932.3,0
-60,visit_1_arm_1,,,2005-12-01,Osage,2,2011-12-01,601,2,,,,,,
+60,visit_1_arm_1,,,2005-12-01,Payne,2,2011-12-01,601,2,,,,,,
 60,visit_1_arm_1,laboratory,1,,,,,,,RBC,6011.1,3,,,
 60,visit_1_arm_1,laboratory,2,,,,,,,WBCs,6011.2,2,,,
 60,visit_1_arm_1,laboratory,3,,,,,,,Hgb,6011.3,1,,,
@@ -1439,7 +1439,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 60,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,6032.1,2
 60,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,6032.2,1
 60,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,6032.3,0
-61,visit_1_arm_1,,,2006-01-01,Ottawa,2,2011-01-01,611,2,,,,,,
+61,visit_1_arm_1,,,2006-01-01,Pittsburg,2,2011-01-01,611,2,,,,,,
 61,visit_1_arm_1,laboratory,1,,,,,,,RBC,6111.1,3,,,
 61,visit_1_arm_1,laboratory,2,,,,,,,WBCs,6111.2,2,,,
 61,visit_1_arm_1,laboratory,3,,,,,,,Hgb,6111.3,1,,,
@@ -1463,7 +1463,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 61,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,6132.1,2
 61,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,6132.2,1
 61,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,6132.3,0
-62,visit_1_arm_1,,,2006-02-01,Pawnee,2,2011-02-01,621,2,,,,,,
+62,visit_1_arm_1,,,2006-02-01,Pontotoc,2,2011-02-01,621,2,,,,,,
 62,visit_1_arm_1,laboratory,1,,,,,,,RBC,6211.1,3,,,
 62,visit_1_arm_1,laboratory,2,,,,,,,WBCs,6211.2,2,,,
 62,visit_1_arm_1,laboratory,3,,,,,,,Hgb,6211.3,1,,,
@@ -1487,7 +1487,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 62,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,6232.1,2
 62,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,6232.2,1
 62,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,6232.3,0
-63,visit_1_arm_1,,,2006-03-01,Payne,2,2011-03-01,631,2,,,,,,
+63,visit_1_arm_1,,,2006-03-01,Pottawatomie,2,2011-03-01,631,2,,,,,,
 63,visit_1_arm_1,laboratory,1,,,,,,,RBC,6311.1,3,,,
 63,visit_1_arm_1,laboratory,2,,,,,,,WBCs,6311.2,2,,,
 63,visit_1_arm_1,laboratory,3,,,,,,,Hgb,6311.3,1,,,
@@ -1511,7 +1511,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 63,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,6332.1,2
 63,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,6332.2,1
 63,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,6332.3,0
-64,visit_1_arm_1,,,2006-04-01,Pittsburg,2,2011-04-01,641,2,,,,,,
+64,visit_1_arm_1,,,2006-04-01,Pushmataha,2,2011-04-01,641,2,,,,,,
 64,visit_1_arm_1,laboratory,1,,,,,,,RBC,6411.1,3,,,
 64,visit_1_arm_1,laboratory,2,,,,,,,WBCs,6411.2,2,,,
 64,visit_1_arm_1,laboratory,3,,,,,,,Hgb,6411.3,1,,,
@@ -1535,7 +1535,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 64,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,6432.1,2
 64,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,6432.2,1
 64,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,6432.3,0
-65,visit_1_arm_1,,,2006-05-01,Pontotoc,2,2011-05-01,651,2,,,,,,
+65,visit_1_arm_1,,,2006-05-01,Roger Mills,2,2011-05-01,651,2,,,,,,
 65,visit_1_arm_1,laboratory,1,,,,,,,RBC,6511.1,3,,,
 65,visit_1_arm_1,laboratory,2,,,,,,,WBCs,6511.2,2,,,
 65,visit_1_arm_1,laboratory,3,,,,,,,Hgb,6511.3,1,,,
@@ -1559,7 +1559,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 65,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,6532.1,2
 65,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,6532.2,1
 65,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,6532.3,0
-66,visit_1_arm_1,,,2006-06-01,Pottawatomie,2,2011-06-01,661,2,,,,,,
+66,visit_1_arm_1,,,2006-06-01,Rogers,2,2011-06-01,661,2,,,,,,
 66,visit_1_arm_1,laboratory,1,,,,,,,RBC,6611.1,3,,,
 66,visit_1_arm_1,laboratory,2,,,,,,,WBCs,6611.2,2,,,
 66,visit_1_arm_1,laboratory,3,,,,,,,Hgb,6611.3,1,,,
@@ -1583,7 +1583,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 66,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,6632.1,2
 66,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,6632.2,1
 66,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,6632.3,0
-67,visit_1_arm_1,,,2006-07-01,Rogers,2,2011-07-01,671,2,,,,,,
+67,visit_1_arm_1,,,2006-07-01,Seminole,2,2011-07-01,671,2,,,,,,
 67,visit_1_arm_1,laboratory,1,,,,,,,RBC,6711.1,3,,,
 67,visit_1_arm_1,laboratory,2,,,,,,,WBCs,6711.2,2,,,
 67,visit_1_arm_1,laboratory,3,,,,,,,Hgb,6711.3,1,,,
@@ -1607,7 +1607,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 67,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,6732.1,2
 67,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,6732.2,1
 67,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,6732.3,0
-68,visit_1_arm_1,,,2006-08-01,Seminole,2,2011-08-01,681,2,,,,,,
+68,visit_1_arm_1,,,2006-08-01,Sequoyah,2,2011-08-01,681,2,,,,,,
 68,visit_1_arm_1,laboratory,1,,,,,,,RBC,6811.1,3,,,
 68,visit_1_arm_1,laboratory,2,,,,,,,WBCs,6811.2,2,,,
 68,visit_1_arm_1,laboratory,3,,,,,,,Hgb,6811.3,1,,,
@@ -1631,7 +1631,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 68,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,6832.1,2
 68,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,6832.2,1
 68,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,6832.3,0
-69,visit_1_arm_1,,,2006-09-01,Sequoyah,2,2011-09-01,691,2,,,,,,
+69,visit_1_arm_1,,,2006-09-01,Stephens,2,2011-09-01,691,2,,,,,,
 69,visit_1_arm_1,laboratory,1,,,,,,,RBC,6911.1,3,,,
 69,visit_1_arm_1,laboratory,2,,,,,,,WBCs,6911.2,2,,,
 69,visit_1_arm_1,laboratory,3,,,,,,,Hgb,6911.3,1,,,
@@ -1655,7 +1655,7 @@ record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,birt
 69,visit_3_arm_1,medication,1,,,,,,,,,,Atorvastatin,6932.1,2
 69,visit_3_arm_1,medication,2,,,,,,,,,,Levothyroxine,6932.2,1
 69,visit_3_arm_1,medication,3,,,,,,,,,,Metformin,6932.3,0
-70,visit_1_arm_1,,,2006-10-01,Stephens,2,2011-10-01,701,2,,,,,,
+70,visit_1_arm_1,,,2006-10-01,Texas,2,2011-10-01,701,2,,,,,,
 70,visit_1_arm_1,laboratory,1,,,,,,,RBC,7011.1,3,,,
 70,visit_1_arm_1,laboratory,2,,,,,,,WBCs,7011.2,2,,,
 70,visit_1_arm_1,laboratory,3,,,,,,,Hgb,7011.3,1,,,
