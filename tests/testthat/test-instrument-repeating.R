@@ -38,9 +38,11 @@ test_that("simple repeating", {
 test_that("longitudinal repeating", {
   testthat::skip_on_cran()
   # Add credential for longitudinal project with repeating events here!
-  credential    <- retrieve_credential_testing()
-  path_expected <- ""
-  expected_outcome_message <- "\\d+ repeating event-instrument metadata metadata records were read from REDCap in \\d\\.\\d seconds\\.  The http status code was 200\\.(\\n)?"
+  credential    <- retrieve_credential_testing(project_tag = "longitudinal-with-repeating-instrument")
+  path_expected_explicit    <- "test-data/specific-redcapr/instrument-repeating/longitudinal-explicit.R"
+  path_expected_default     <- "test-data/specific-redcapr/instrument-repeating/longitudinal-default.R"
+  expected_outcome_message_explicit  <- "\\d+ repeating event-instrument metadata records were read from REDCap in \\d\\.\\d seconds\\.  The http status code was 200\\.(\\n)?"
+  expected_outcome_message_default   <- "\\d+ event instrument metadata records were read from REDCap in \\d\\.\\d seconds\\.  The http status code was 200\\.(\\n)?"
 
   returned_object_explicit <-
     redcap_instrument_repeating(
@@ -49,30 +51,34 @@ test_that("longitudinal repeating", {
       verbose     = FALSE
     )
 
-  if (update_expectation) save_expected(returned_object_explicit$data, path_expected)
-  expected_data_frame <- retrieve_expected(path_expected)
+  if (update_expectation) save_expected(returned_object_explicit$data, path_expected_explicit)
+  expected_data_frame_explicit <- retrieve_expected(path_expected_explicit)
 
-  expect_equal(   returned_object_explicit$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_equal(   returned_object_explicit$data, expected=expected_data_frame_explicit, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_equal(   returned_object_explicit$status_code, expected=200L)
   expect_equal(   returned_object_explicit$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
-  expect_match(   returned_object_explicit$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_match(   returned_object_explicit$outcome_message, regexp=expected_outcome_message_explicit, perl=TRUE)
   expect_true(    returned_object_explicit$success)
   expect_s3_class(returned_object_explicit$data, "tbl")
 
   returned_object_default <-
     redcap_event_instruments(
-      redcap_uri  = credential_longitudinal$redcap_uri,
-      token       = credential_longitudinal$token,
+      redcap_uri  = credential$redcap_uri,
+      token       = credential$token,
       verbose     = FALSE
     )
 
-  expect_equal(   returned_object_default$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  if (update_expectation) save_expected(returned_object_default$data, path_expected_default)
+  expected_data_frame_default <- retrieve_expected(path_expected_default)
+
+  expect_equal(   returned_object_default$data, expected=expected_data_frame_default, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_equal(   returned_object_default$status_code, expected=200L)
   expect_equal(   returned_object_default$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
-  expect_match(   returned_object_default$outcome_message, regexp=expected_outcome_message, perl=TRUE)
+  expect_match(   returned_object_default$outcome_message, regexp=expected_outcome_message_default, perl=TRUE)
   expect_true(    returned_object_default$success)
   expect_s3_class(returned_object_default$data, "tbl")
 })
+
 test_that("Bad URI", {
   testthat::skip()
   testthat::skip_on_cran()
