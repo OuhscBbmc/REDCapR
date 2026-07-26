@@ -11,6 +11,8 @@
 * `redcap_write()`  now accommodates single-column data.frames. Previously only single-column tibbles were accommodated. (@brandonerose, #591 & #592)
 * Update urls for REDCap Community (#596)
 * Simplified token files for other people to test with (#594)
+* New test project that includes both longitudinal events, and repeated measures (#606, needed to test #589)
+* Update deprecated parameters for `base::structure (#605)
 
 # REDCapR 1.6.0  (released 2025-10-07)
 
