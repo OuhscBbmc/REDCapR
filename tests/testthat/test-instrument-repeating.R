@@ -104,9 +104,8 @@ test_that("Bad URI", {
 })
 test_that("no repeating", {
   testthat::skip_on_cran()
-  credential    <- retrieve_credential_testing("simple")
-  path_expected <- ""
-  expected_outcome_message <- "You cannot export repeating instruments and events because the project does not contain any repeating instruments and events(\\n)?"
+  credential    <- retrieve_credential_testing("metadata-write")
+  expected_outcome_message <- "ERROR: You cannot export repeating instruments and events because the project does not contain any repeating instruments and events(\\n)?"
 
   returned_object <-
     redcap_instrument_repeating(
@@ -115,8 +114,7 @@ test_that("no repeating", {
       verbose     = FALSE
     )
 
-  if (update_expectation) save_expected(returned_object$data, path_expected)
-  expected_data_frame <- retrieve_expected(path_expected)
+  expected_data_frame <- tibble::tibble()
 
   expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_equal(returned_object$status_code, expected=400L)
