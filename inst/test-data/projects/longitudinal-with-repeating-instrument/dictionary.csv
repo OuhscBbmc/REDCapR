@@ -1,0 +1,10 @@
+"Variable / Field Name","Form Name","Section Header","Field Type","Field Label","Choices, Calculations, OR Slider Labels","Field Note","Text Validation Type OR Show Slider Number","Text Validation Min","Text Validation Max",Identifier?,"Branching Logic (Show field only if...)","Required Field?","Custom Alignment","Question Number (surveys only)","Matrix Group Name","Matrix Ranking?","Field Annotation"
+record_id,demographics,,text,"Record ID",,,,,,,,,,,,,
+birth_date,demographics,,text,"Patient's Date of Birth",,,date_ymd,,,,,y,,,,,
+county,demographics,,text,"Country of Residence",,,,,,,,y,,,,,
+visit_date,visit,,text,"Date of Visit",,,date_ymd,,,,,y,,,,,
+provider_npi,visit,,text,"Provider's NPI",,,,,,,,y,,,,,
+lab,laboratory,,text,"lab value",,,,,,,,,,,,,
+conc,laboratory,,text,concentration,,,,,,,,,,,,,
+med,medication,,text,"Medication Name",,,,,,,,,,,,,
+dose,medication,,text,"Medication Dose",,,,,,,,,,,,,

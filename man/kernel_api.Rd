@@ -44,7 +44,7 @@ Defaults to \code{"form"}, which is appropriate for most actions.
 which uses "multipart".)}
 }
 \value{
-A \link[utils:packageDescription]{utils::packageVersion}.
+A \link[utils:packageVersion]{utils::packageVersion}.
 }
 \description{
 This function is used by other functions to read and write values.
@@ -52,7 +52,7 @@ This function is used by other functions to read and write values.
 \details{
 If the API call is unsuccessful, a value of
 \code{base::package_version("0.0.0")} will be returned.  This ensures that a
-the function will always return an object of class \link[base:numeric_version]{base::package_version}.
+the function will always return an object of class \link[base:package_version]{base::package_version}.
 It guarantees the value can always be used in \code{\link[utils:compareVersion]{utils::compareVersion()}}.
 }
 \examples{

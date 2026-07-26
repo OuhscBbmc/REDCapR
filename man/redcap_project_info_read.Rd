@@ -29,7 +29,7 @@ project.  Required.}
 
 \item{locale}{a \code{\link[readr:locale]{readr::locale()}} object to specify preferences like
 number, date, and time formats.  This object is passed to
-\code{\link[readr:read_delim]{readr::read_csv()}}.  Defaults to \code{\link[readr:locale]{readr::default_locale()}}.}
+\code{\link[readr:read_csv]{readr::read_csv()}}.  Defaults to \code{\link[readr:default_locale]{readr::default_locale()}}.}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed
 to the R console during the operation.  The verbose output might contain
@@ -70,11 +70,11 @@ production.  Returns a \code{\link[tibble:tibble]{tibble::tibble()}}.
 
 Several datetime variables are returned, such as the project's
 \code{creation_time}.  For the time to be meaningful, you'll need to set
-the time zone because this function uses \code{\link[readr:read_delim]{readr::read_csv()}},
+the time zone because this function uses \code{\link[readr:read_csv]{readr::read_csv()}},
 which assigns
 \href{https://en.wikipedia.org/wiki/Coordinated_Universal_Time}{UTC}
 if no timezone is specified.  Find your server's location listed in
-\code{\link[base:timezones]{base::OlsonNames()}}, and pass it to readr's \code{\link[readr:locale]{readr::locale()}} function,
+\code{\link[base:OlsonNames]{base::OlsonNames()}}, and pass it to readr's \code{\link[readr:locale]{readr::locale()}} function,
 and then pass that to \code{redcap_project_info_read()}.  See the examples below
 
 For more timezone details see the

@@ -1,14 +1,7 @@
 #' @name
 #' validate
 #'
-#' @aliases
-#' validate_for_write
-#' validate_data_frame_inherits
-#' validate_no_logical
-#' validate_field_names
-#' validate_record_id_name
-#' validate_repeat_instance
-#' validate_uniqueness
+#' @aliases validate_for_write validate_data_frame_inherits validate_no_logical validate_field_names validate_record_id_name validate_repeat_instance validate_uniqueness
 #'
 #' @usage
 #' validate_for_write( d, convert_logical_to_integer, record_id_name )

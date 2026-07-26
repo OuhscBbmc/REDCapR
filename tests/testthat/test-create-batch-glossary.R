@@ -32,7 +32,7 @@ test_that("N100B3", {
     "17_049_051", "18_052_054", "19_055_057", "20_058_060", "21_061_063",
     "22_064_066", "23_067_069", "24_070_072", "25_073_075", "26_076_078",
     "27_079_081", "28_082_084", "29_085_087", "30_088_090", "31_091_093",
-    "32_094_096", "33_097_099", "34_100_100")), .Names = c("id",
+    "32_094_096", "33_097_099", "34_100_100")), names = c("id",
     "start_index", "stop_index", "index_pretty", "start_index_pretty",
     "stop_index_pretty", "label"), row.names = c(NA, -34L),
     class = c("tbl_df", "tbl", "data.frame"))
@@ -50,7 +50,7 @@ test_that("N100B100", {
 
   ds_result <- REDCapR::create_batch_glossary(row_count=row_count, batch_size=batch_size) # dput(ds_result)
   ds_expected <- structure(list(id = 1L, start_index = 1, stop_index = 100, index_pretty = "1",
-    start_index_pretty = "001", stop_index_pretty = "100", label = "1_001_100"), .Names = c("id",
+    start_index_pretty = "001", stop_index_pretty = "100", label = "1_001_100"), names = c("id",
     "start_index", "stop_index", "index_pretty", "start_index_pretty",
     "stop_index_pretty", "label"), row.names = c(NA, -1L),
     class = c("tbl_df", "tbl", "data.frame"))
@@ -72,7 +72,7 @@ test_that("N50B10", {
     "2", "3", "4", "5"), start_index_pretty = c("01", "11", "21",
     "31", "41"), stop_index_pretty = c("10", "20", "30", "40",
     "50"), label = c("1_01_10", "2_11_20", "3_21_30", "4_31_40",
-    "5_41_50")), .Names = c("id", "start_index", "stop_index",
+    "5_41_50")), names = c("id", "start_index", "stop_index",
     "index_pretty", "start_index_pretty", "stop_index_pretty", "label"
     ), row.names = c(NA, -5L), class = c("tbl_df", "tbl", "data.frame"))
 

@@ -24,3 +24,4 @@ inst/doc
 inst/test-data/projects/super-wide-3/super-wide-3-dictionary.csv
 !inst/misc/example.credentials
 inst/misc/*.credentials
+.positai
