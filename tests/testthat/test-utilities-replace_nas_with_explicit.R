@@ -22,7 +22,7 @@ test_that("replace_nas_factor_standard", {
 
   expected <- structure(
     c(1L, 2L, 27L, 4L, 5L, 27L, 7L, 27L, 9L, 10L, 11L, 12L, 13L, 14L, 15L, 16L, 17L, 18L, 19L, 20L, 21L, 22L, 23L, 24L, 27L, 26L),
-    label = c((letters, "Unknown"),
+    label = c(letters, "Unknown"),
     class = "factor"
   )
 
@@ -38,7 +38,7 @@ test_that("replace_nas_factor_create_not_existing", {
 
   expected <- structure(
     c(1L, 2L, 23L, 3L, 4L, 23L, 5L, 23L, 6L, 7L, 8L, 9L,  10L, 11L, 12L, 13L, 14L, 15L, 16L, 17L, 18L, 19L, 20L, 21L, 23L,  22L),
-    label = c(("a", "b", "d", "e", "g", "i", "j", "k", "l",  "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "z", "Unknown"),
+    label = c("a", "b", "d", "e", "g", "i", "j", "k", "l",  "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "z", "Unknown"),
     class = "factor"
   )
 
@@ -54,7 +54,7 @@ test_that("replace_nas_factor_create_already_existing", {
 
   expected <- structure(
     c(1L, 2L, 27L, 4L, 5L, 27L, 7L, 27L, 9L, 10L, 11L, 12L, 13L, 14L, 15L, 16L, 17L, 18L, 19L, 20L, 21L, 22L, 23L, 24L, 27L, 26L),
-    label = c((letters, "Unknown"),
+    label = c(letters, "Unknown"),
     class = "factor"
   )
 
