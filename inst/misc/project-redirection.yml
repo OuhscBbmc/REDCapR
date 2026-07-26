@@ -67,6 +67,7 @@
     - checkboxes-1: 61
     - vignette-repeating: 62
     - file-repo: 63
+    - longitudinal-with-repeating-instrument: 68
 -
   instance: prod-2
   credential_file: "misc/prod-2.credentials"
