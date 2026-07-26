@@ -82,6 +82,11 @@ Useful links:
 **Maintainer**: Will Beasley <wibeasley@hotmail.com>
 ([ORCID](https://orcid.org/0000-0002-5613-5006))
 
+Authors:
+
+- Will Beasley <wibeasley@hotmail.com>
+  ([ORCID](https://orcid.org/0000-0002-5613-5006))
+
 Other contributors:
 
 - David Bard ([ORCID](https://orcid.org/0000-0002-3922-8489))

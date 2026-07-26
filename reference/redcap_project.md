@@ -40,7 +40,7 @@ ds_all  <- project$read()
 #> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2026-06-29 15:54:53.763217.
+#> Starting to read 5 records  at 2026-07-26 22:54:59.777102.
 #> Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
 #> 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 
@@ -52,8 +52,8 @@ ds_skinny <- project$read(fields=c("record_id", "sex", "height"))$data
 #> 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2026-06-29 15:54:54.971363.
+#> 5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
+#> Starting to read 5 records  at 2026-07-26 22:55:01.289746.
 #> Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
 #> 5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 
@@ -64,10 +64,10 @@ ds_males        <- project$read(records=ids_of_males, batch_size=2)$data
 #> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 3 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 3 records  at 2026-06-29 15:54:56.199137.
+#> Starting to read 3 records  at 2026-07-26 22:55:02.736299.
 #> Reading batch 1 of 2, with subjects 2 through 3 (ie, 2 unique subject records).
 #> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> Reading batch 2 of 2, with subjects 5 through 5 (ie, 1 unique subject records).
@@ -76,10 +76,10 @@ ds_shorties     <- project$read(records=ids_of_shorties)$data
 #> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 2 records  at 2026-06-29 15:54:57.636959.
+#> Starting to read 2 records  at 2026-07-26 22:55:04.23203.
 #> Reading batch 1 of 1, with subjects 1 through 2 (ie, 2 unique subject records).
 #> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 

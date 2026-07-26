@@ -191,7 +191,7 @@ d3 <-
     token_simple,
     locale     = server_locale
   )$data
-#> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 d3$creation_time
 #> [1] "2024-10-10 20:21:18 CDT"
 

@@ -522,7 +522,7 @@ Environment
     #>  collate  en_US.UTF-8
     #>  ctype    en_US.UTF-8
     #>  tz       UTC
-    #>  date     2026-06-29
+    #>  date     2026-07-26
     #>  pandoc   3.8.3 @ /usr/local/bin/ (via rmarkdown)
     #>  quarto   NA
     #> 
@@ -551,21 +551,21 @@ Environment
     #>  httr           1.4.8      2026-02-13 [1] CRAN (R 4.6.0)
     #>  jquerylib      0.1.4      2021-04-26 [1] CRAN (R 4.6.0)
     #>  jsonlite       2.0.0      2025-03-27 [1] CRAN (R 4.6.0)
-    #>  kableExtra     1.4.0      2024-01-24 [1] CRAN (R 4.6.0)
+    #>  kableExtra     1.4.1      2026-07-08 [1] CRAN (R 4.6.1)
     #>  knitr        * 1.51       2025-12-20 [1] CRAN (R 4.6.0)
     #>  lifecycle      1.0.5      2026-01-08 [1] CRAN (R 4.6.0)
     #>  magrittr     * 2.0.5      2026-04-04 [1] CRAN (R 4.6.0)
     #>  otel           0.2.0      2025-08-29 [1] CRAN (R 4.6.0)
     #>  pillar         1.11.1     2025-09-17 [1] CRAN (R 4.6.0)
     #>  pkgconfig      2.0.3      2019-09-22 [1] CRAN (R 4.6.0)
-    #>  pkgdown        2.2.0      2025-11-06 [1] CRAN (R 4.6.0)
+    #>  pkgdown        2.2.1      2026-07-07 [1] CRAN (R 4.6.1)
     #>  purrr          1.2.2      2026-04-10 [1] CRAN (R 4.6.0)
     #>  R6             2.6.1      2025-02-15 [1] CRAN (R 4.6.0)
     #>  ragg           1.5.2      2026-03-23 [1] CRAN (R 4.6.0)
     #>  RColorBrewer   1.1-3      2022-04-03 [1] CRAN (R 4.6.0)
     #>  readr          2.2.0      2026-02-19 [1] CRAN (R 4.6.0)
-    #>  REDCapR        1.6.0.9001 2026-06-29 [1] local
-    #>  rlang          1.2.0      2026-04-06 [1] CRAN (R 4.6.0)
+    #>  REDCapR        1.6.0.9001 2026-07-26 [1] local
+    #>  rlang          1.3.0      2026-07-05 [1] CRAN (R 4.6.1)
     #>  rmarkdown      2.31       2026-03-26 [1] CRAN (R 4.6.0)
     #>  rstudioapi     0.19.0     2026-06-11 [1] CRAN (R 4.6.0)
     #>  sass           0.4.10     2025-04-11 [1] CRAN (R 4.6.0)
@@ -584,7 +584,7 @@ Environment
     #>  viridisLite    0.4.3      2026-02-04 [1] CRAN (R 4.6.0)
     #>  vroom          1.7.1      2026-03-31 [1] CRAN (R 4.6.0)
     #>  withr          3.0.3      2026-06-19 [1] CRAN (R 4.6.0)
-    #>  xfun           0.59       2026-06-19 [1] CRAN (R 4.6.0)
+    #>  xfun           0.60       2026-07-09 [1] CRAN (R 4.6.1)
     #>  xml2           1.6.0      2026-06-22 [1] CRAN (R 4.6.1)
     #>  yaml           2.3.12     2025-12-10 [1] CRAN (R 4.6.0)
     #> 

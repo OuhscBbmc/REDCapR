@@ -30,6 +30,12 @@
   ([\#596](https://github.com/OuhscBbmc/REDCapR/issues/596))
 - Simplified token files for other people to test with
   ([\#594](https://github.com/OuhscBbmc/REDCapR/issues/594))
+- New test project that includes both longitudinal events, and repeated
+  measures ([\#606](https://github.com/OuhscBbmc/REDCapR/issues/606),
+  needed to test
+  [\#589](https://github.com/OuhscBbmc/REDCapR/issues/589))
+- Update deprecated parameters for \`base::structure
+  ([\#605](https://github.com/OuhscBbmc/REDCapR/issues/605))
 
 ## REDCapR 1.6.0 (released 2025-10-07)
 

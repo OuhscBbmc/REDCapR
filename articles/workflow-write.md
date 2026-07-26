@@ -406,7 +406,7 @@ Environment
     #>  collate  en_US.UTF-8
     #>  ctype    en_US.UTF-8
     #>  tz       UTC
-    #>  date     2026-06-29
+    #>  date     2026-07-26
     #>  pandoc   3.8.3 @ /usr/local/bin/ (via rmarkdown)
     #>  quarto   NA
     #> 
@@ -426,16 +426,16 @@ Environment
     #>  knitr         1.51    2025-12-20 [1] CRAN (R 4.6.0)
     #>  lifecycle     1.0.5   2026-01-08 [1] CRAN (R 4.6.0)
     #>  otel          0.2.0   2025-08-29 [1] CRAN (R 4.6.0)
-    #>  pkgdown       2.2.0   2025-11-06 [1] CRAN (R 4.6.0)
+    #>  pkgdown       2.2.1   2026-07-07 [1] CRAN (R 4.6.1)
     #>  R6            2.6.1   2025-02-15 [1] CRAN (R 4.6.0)
     #>  ragg          1.5.2   2026-03-23 [1] CRAN (R 4.6.0)
-    #>  rlang         1.2.0   2026-04-06 [1] CRAN (R 4.6.0)
+    #>  rlang         1.3.0   2026-07-05 [1] CRAN (R 4.6.1)
     #>  rmarkdown     2.31    2026-03-26 [1] CRAN (R 4.6.0)
     #>  sass          0.4.10  2025-04-11 [1] CRAN (R 4.6.0)
     #>  sessioninfo   1.2.4   2026-06-04 [1] CRAN (R 4.6.0)
     #>  systemfonts   1.3.2   2026-03-05 [1] CRAN (R 4.6.0)
     #>  textshaping   1.0.5   2026-03-06 [1] CRAN (R 4.6.0)
-    #>  xfun          0.59    2026-06-19 [1] CRAN (R 4.6.0)
+    #>  xfun          0.60    2026-07-09 [1] CRAN (R 4.6.1)
     #>  yaml          2.3.12  2025-12-10 [1] CRAN (R 4.6.0)
     #> 
     #>  [1] /Users/runner/work/_temp/Library

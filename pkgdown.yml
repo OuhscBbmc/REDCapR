@@ -1,5 +1,5 @@
 pandoc: 3.8.3
-pkgdown: 2.2.0
+pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   advanced-redcapr-operations: advanced-redcapr-operations.html
@@ -9,7 +9,7 @@ articles:
   TroubleshootingApiCalls: TroubleshootingApiCalls.html
   workflow-read: workflow-read.html
   workflow-write: workflow-write.html
-last_built: 2026-06-29T15:54Z
+last_built: 2026-07-26T22:54Z
 urls:
   reference: https://ouhscbbmc.github.io/REDCapR/reference
   article: https://ouhscbbmc.github.io/REDCapR/articles
