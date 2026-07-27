@@ -314,7 +314,7 @@ retrieve_credential_mssql <- function(
       "Either enclose in ",
       "quotes, or cast with `as.character()`."
     )
-  } else if (!(base::missing(dsn) || base::is.null(dsn)) && !(class(dsn) %in% c("character"))) {
+  } else if (!(base::missing(dsn) || base::is.null(dsn)) && !inherits(dsn, "character")) {
     stop(
       "The `dsn` parameter be a character type, or missing or NULL.  ",
       "Either enclose in quotes, or cast with `as.character()`."
