@@ -13,6 +13,7 @@
 * Simplified token files for other people to test with (#594)
 * New test project that includes both longitudinal events, and repeated measures (#606, needed to test #589)
 * Update deprecated parameters for `base::structure (#605)
+* `validate_for_write()` now accommodates projects with a custom name for `record_id` (#601, #602, @vanbibn)
 
 # REDCapR 1.6.0  (released 2025-10-07)
 

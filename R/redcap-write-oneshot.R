@@ -99,6 +99,22 @@
 #' result_write$raw_text
 #' }
 
+serialize_csv_for_write <- function(ds) {
+  csv_elements <- NULL
+  old_options <- options(scipen = 999)
+  on.exit(options(old_options), add = TRUE)
+
+  con <- base::textConnection(
+    object  = "csv_elements",
+    open    = "w",
+    local   = TRUE
+  )
+  on.exit(close(con), add = TRUE)
+
+  utils::write.csv(ds, con, row.names = FALSE, na = "")
+  paste(csv_elements, collapse = "\n")
+}
+
 #' @importFrom magrittr %>%
 #' @export
 redcap_write_oneshot <- function(
@@ -111,11 +127,6 @@ redcap_write_oneshot <- function(
   config_options                = NULL,
   handle_httr                   = NULL
 ) {
-
-  # This prevents the R CHECK NOTE: 'No visible binding for global variable Note in R CMD check';
-  # Also see  if( getRversion() >= "2.15.1" )    utils::globalVariables(names=c("csv_elements"))
-  # https://stackoverflow.com/questions/8096313/; https://stackoverflow.com/questions/9439256
-  csv_elements <- NULL
 
   checkmate::assert_character(redcap_uri, any.missing=FALSE, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token     , any.missing=FALSE, len=1, pattern="^.{1,}$")
@@ -130,16 +141,7 @@ redcap_write_oneshot <- function(
       dplyr::mutate_if(is.logical, as.integer)
   }
 
-  con     <-  base::textConnection(
-    object  = "csv_elements",
-    open    = "w",
-    local   = TRUE
-  )
-  utils::write.csv(ds, con, row.names = FALSE, na = "")
-  close(con)
-
-  csv     <- paste(csv_elements, collapse = "\n")
-  rm(csv_elements, con)
+  csv <- serialize_csv_for_write(ds)
 
   post_body <- list(
     token     = token,
