@@ -189,18 +189,10 @@ redcap_write_oneshot <- function(
   )
 }
 
-serialize_csv_for_write <- function(ds) {
-  csv_elements <- NULL
-  old_options <- options(scipen = 999)
-  on.exit(options(old_options), add = TRUE)
-
-  con <- base::textConnection(
-    object  = "csv_elements",
-    open    = "w",
-    local   = TRUE
+serialize_csv_for_write <- function(d) {
+  readr::format_csv(
+    x     = d,
+    na    = "",
+    quote = "all"
   )
-  on.exit(close(con), add = TRUE)
-
-  utils::write.csv(ds, con, row.names = FALSE, na = "")
-  paste(csv_elements, collapse = "\n")
 }
