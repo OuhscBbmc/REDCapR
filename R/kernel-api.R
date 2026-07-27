@@ -54,6 +54,7 @@
 #' as.list(read.csv(text = kernel$raw_text))
 #' }
 
+#' @export
 kernel_api <- function(
   redcap_uri,
   post_body,
