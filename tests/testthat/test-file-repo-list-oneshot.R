@@ -44,8 +44,8 @@ test_that("default", {
 
   expect_equal(nrow(returned_object$data), expected=6L)
   expect_equal(returned_object$data$name, expected_data_frame$name)
-  expect_s3_class(returned_object$data$folder_id, "integer")
-  expect_s3_class(returned_object$data$doc_id   , "integer")
+  expect_identical(class(returned_object$data$folder_id), "integer")
+  expect_identical(class(returned_object$data$doc_id   ), "integer")
   expect_equal(
     !is.na(returned_object$data$folder_id),
     c(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE)
@@ -92,8 +92,8 @@ test_that("first-subdirectory", {
 
   expect_equal(nrow(returned_object$data), expected=1L)
   expect_equal(returned_object$data$name, expected_data_frame$name)
-  expect_s3_class(returned_object$data$folder_id, "integer")
-  expect_s3_class(returned_object$data$doc_id   , "integer")
+  expect_identical(class(returned_object$data$folder_id), "integer")
+  expect_identical(class(returned_object$data$doc_id   ), "integer")
   expect_false(
     !is.na(returned_object$data$folder_id)
   )
