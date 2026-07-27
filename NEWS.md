@@ -15,6 +15,10 @@
 * Update deprecated parameters for `base::structure (#605)
 * `validate_for_write()` now accommodates projects with a custom name for `record_id` (#601, #602, @vanbibn)
 
+### Bug fixes
+
+* When writing to the server, a numeric value like "10000" will not be converted to scientific notation (#599, #600, @Olawemi5)
+
 # REDCapR 1.6.0  (released 2025-10-07)
 
 This release is primarily small changes to comply with a CRAN check.
