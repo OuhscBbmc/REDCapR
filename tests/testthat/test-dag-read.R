@@ -44,8 +44,8 @@ test_that("dag-default", {
   # dput(actual$data)
 
   expect_true( actual$success)
-  expect_equal(actual$status_code, 200L)
-  expect_equal(actual$data, expected_data)
+  expect_identical(actual$status_code, 200L)
+  expect_identical(actual$data, expected_data)
   expect_s3_class(actual$data, "tbl")
 })
 
@@ -72,8 +72,8 @@ test_that("no-dag-default", {
     )
 
   expect_true( actual$success)
-  expect_equal(actual$status_code, 200L)
-  expect_equal(actual$data, expected_data)
+  expect_identical(actual$status_code, 200L)
+  expect_identical(actual$data, expected_data)
   expect_s3_class(actual$data, "tbl")
 })
 
