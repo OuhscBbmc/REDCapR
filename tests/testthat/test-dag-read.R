@@ -37,7 +37,7 @@ test_that("dag-default", {
       verbose     = FALSE
     )
 
-  expect_true(all(!is.na(actual$data$data_access_group_id)))
+  expect_true(!any(is.na(actual$data$data_access_group_id)))
   expect_true(all(0 < actual$data$data_access_group_id))
 
   actual$data$data_access_group_id <- NULL
