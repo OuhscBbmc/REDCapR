@@ -61,7 +61,7 @@ replace_nas_with_explicit <- function(
 
   scores[is.na(scores)] <- new_na_label # "Unknown"
 
-  if (any(is.na(scores))) {
+  if (anyNA(scores)) {
     stop("The reassigned factor variable should not have any NA values.")
   }
 
