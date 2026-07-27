@@ -94,11 +94,11 @@ test_that("first-subdirectory", {
   expect_equal(returned_object$data$name, expected_data_frame$name)
   expect_identical(class(returned_object$data$folder_id), "integer")
   expect_identical(class(returned_object$data$doc_id   ), "integer")
-  expect_false(
-    !is.na(returned_object$data$folder_id)
-  )
   expect_true(
-    !is.na(returned_object$data$doc_id)
+    is.na(returned_object$data$folder_id)
+  )
+  expect_false(
+    is.na(returned_object$data$doc_id)
   )
 
   expect_true(returned_object$success)
