@@ -109,7 +109,8 @@ filter_logic_prepare <- function(filter_logic) {
   # This is an empty string if `filter_logic` is NULL.
   if (all(nchar(filter_logic) == 0L))
     filter_logic <- dplyr::if_else(is.null(filter_logic), "", filter_logic)
-  return( filter_logic )
+
+  filter_logic
 }
 
 ## We're intentionally not exporting this function.
