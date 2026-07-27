@@ -41,7 +41,7 @@ test_that("Longitudinal Single Arm", {
       verbose           = FALSE
     )
 
-  expect_false(any(is.na(returned_object$data$event_id)))
+  expect_false(anyNA(returned_object$data$event_id))
   expect_true(all(0 < returned_object$data$event_id))
 
   returned_object$data$event_id <- NULL
@@ -68,7 +68,7 @@ test_that("Longitudinal Two Arms", {
       verbose           = FALSE
     )
 
-  expect_false(any(is.na(returned_object$data$event_id)))
+  expect_false(anyNA(returned_object$data$event_id))
   expect_true(all(0 < returned_object$data$event_id))
 
   returned_object$data$event_id <- NULL
@@ -94,7 +94,7 @@ test_that("Classic", {
       )
   })
 
-  expect_false(any(is.na(returned_object$data$event_id)))
+  expect_false(anyNA(returned_object$data$event_id))
   expect_true(all(0 < returned_object$data$event_id))
 
   returned_object$data$event_id <- NULL
@@ -121,7 +121,7 @@ test_that("delete-multiple-arm", {
       verbose           = FALSE
     )
 
-  expect_false(any(is.na(returned_object$data$event_id)))
+  expect_false(anyNA(returned_object$data$event_id))
   expect_true(all(0 < returned_object$data$event_id))
 
   returned_object$data$event_id <- NULL

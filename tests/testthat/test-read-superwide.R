@@ -108,7 +108,7 @@ test_that("correct dimensions -superwide 1 -batch", {
 #
 #   expect_equal(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
 #   expect_equal(ncol(returned_object$data), expected=expected_column_count)
-#   expect_false(any(is.na(returned_object$data)))
+#   expect_false(anyNA(returned_object$data))
 #
 #   expect_equal(returned_object$status_code, expected=200L)
 #   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
@@ -132,7 +132,7 @@ test_that("correct dimensions -superwide 1 -batch", {
 #
 #   expect_equal(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
 #   expect_equal(ncol(returned_object$data), expected=expected_column_count)
-#   expect_false(any(is.na(returned_object$data)))
+#   expect_false(anyNA(returned_object$data))
 #
 #   expect_true(  returned_object$success)
 #   expect_match( returned_object$status_codes, regexp="200", perl=TRUE)
