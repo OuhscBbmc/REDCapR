@@ -367,7 +367,7 @@ format (*i.e.*, everything jammed into one rectangle.)
 
 The [Clinical Data Interoperability Services](https://projectredcap.org/software/cdis/) (CDIS)
 use [FHIR](https://www.hl7.org/fhir/overview.html) to move data from
-your institution's [EMR/EHR](https://www.healthit.gov/faq/what-are-differences-between-electronic-medical-records-electronic-health-records-and-personal)
+your institution's [EMR/EHR](https://healthit.gov/faq/what-are-differences-between-electronic-medical-records-electronic-health-records-and-personal/)
 (eg, Epic, Cerner) to REDCap.
 Research staff have control over which patient records are selected or eligible.
 Conceptually it's similar to writing to REDCap's with the API,
