@@ -44,7 +44,7 @@ test_that("replace_nas_factor_create_not_existing", {
 
   a <- REDCapR:::replace_nas_with_explicit(a, create_factor=TRUE, add_unknown_level=TRUE)
   expect_equal(a, expected, label="The correct letters should have been replaced.")
-  expect_equal(class(a), "factor")
+  expect_s3_class(a, "factor")
 })
 
 test_that("replace_nas_factor_create_already_existing", {
@@ -60,7 +60,7 @@ test_that("replace_nas_factor_create_already_existing", {
 
   a <- REDCapR:::replace_nas_with_explicit(a, create_factor=TRUE, add_unknown_level=TRUE)
   expect_equal(a, expected, label="The correct letters should have been replaced.")
-  expect_equal(class(a), "factor")
+  expect_s3_class(a, "factor")
 })
 
 test_that("replace_nas_factor_not_yet", {
