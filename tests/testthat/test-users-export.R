@@ -44,7 +44,7 @@ test_that("with-dags", {
     )
 
   # Check the group id exists
-  expect_true(!is.na(d_user$data_access_group_id))
+  expect_false(is.na(d_user$data_access_group_id))
 
   # For these two specific servers, check the exact value of the id
   if (credential_1$redcap_uri == "https://redcap-dev-2.ouhsc.edu/redcap/api/") {
