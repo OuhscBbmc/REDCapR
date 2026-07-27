@@ -224,7 +224,7 @@ ds_some_fields_v1 <- REDCapR:::redcap_read_eav_oneshot(
   token      = token,
   fields     = desired_fields_v1
 )$data
-#> 15 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
+#> 15 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 
 # Repeating
 token <- "56F43A10D01D6578A46393394D76D88F"  # PHI-free demo: Repeating Instruments --Sparse # 2603

@@ -52,12 +52,12 @@ Source:
 [`DESCRIPTION`](https://github.com/OuhscBbmc/REDCapR/blob/main/DESCRIPTION)
 
 Beasley W (2026). *REDCapR: Interaction Between R and REDCap*. R package
-version 1.6.0.9001, <https://ouhscbbmc.github.io/REDCapR/>.
+version 1.6.0.9002, <https://ouhscbbmc.github.io/REDCapR/>.
 
     @Manual{,
       title = {REDCapR: Interaction Between R and REDCap},
       author = {Will Beasley},
       year = {2026},
-      note = {R package version 1.6.0.9001},
+      note = {R package version 1.6.0.9002},
       url = {https://ouhscbbmc.github.io/REDCapR/},
     }

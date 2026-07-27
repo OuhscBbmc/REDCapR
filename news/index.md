@@ -42,6 +42,14 @@
   [\#602](https://github.com/OuhscBbmc/REDCapR/issues/602),
   [@vanbibn](https://github.com/vanbibn))
 
+#### Bug fixes
+
+- When writing to the server, a numeric value like “10000” will not be
+  converted to scientific notation
+  ([\#599](https://github.com/OuhscBbmc/REDCapR/issues/599),
+  [\#600](https://github.com/OuhscBbmc/REDCapR/issues/600),
+  [@Olawemi5](https://github.com/Olawemi5))
+
 ## REDCapR 1.6.0 (released 2025-10-07)
 
 CRAN release: 2025-10-08

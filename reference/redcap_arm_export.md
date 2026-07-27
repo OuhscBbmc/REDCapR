@@ -115,7 +115,7 @@ result_1$data
 # Query a classic project without arms
 token_2  <- "F9CBFFF78C3D78F641BAE9623F6B7E6A" # simple-write
 result_2 <- REDCapR::redcap_arm_export(redcap_uri=uri, token=token_2)
-#> A 'classic' REDCap project has no arms.  Retrieved in 0.1 seconds. The http status code was 400.
+#> A 'classic' REDCap project has no arms.  Retrieved in 0.2 seconds. The http status code was 400.
 result_2$has_arms
 #> [1] FALSE
 result_2$data
