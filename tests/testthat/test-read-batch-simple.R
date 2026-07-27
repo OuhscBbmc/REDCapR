@@ -186,7 +186,7 @@ test_that("specify-records", {
 test_that("specify-records-zero-length", {
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/read-batch-simple/specify-records-zero-length.R"
-  desired_records <- c()
+  desired_records <- NULL
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   returned_object <-
@@ -240,7 +240,7 @@ test_that("specify-fields", {
 test_that("specify-fields-zero-length", {
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/read-batch-simple/specify-fields-zero-length.R"
-  desired_fields <- c()
+  desired_fields <- NULL
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   returned_object <-
@@ -266,8 +266,8 @@ test_that("specify-fields-zero-length", {
 })
 test_that("specify-records-and-fields-zero-length", {
   testthat::skip_on_cran()
-  desired_records <- c()
-  desired_fields <- c()
+  desired_records <- NULL
+  desired_fields <- NULL
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   returned_object <-
@@ -342,7 +342,7 @@ test_that("specify-forms", {
 test_that("specify-forms-only-1st", {
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/read-batch-simple/specify-forms-only-1st.R"
-  desired_forms <- c("demographics")
+  desired_forms <- "demographics"
   expected_outcome_message <- "\\d+ records and 10 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   ###########################
@@ -390,7 +390,7 @@ test_that("specify-forms-only-1st", {
 test_that("specify-forms-without-record-id", {
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/read-batch-simple/specify-forms-without-record-id.R"
-  desired_forms <- c("health")
+  desired_forms <- "health"
   expected_outcome_message <- "\\d+ records and 7 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   ###########################
