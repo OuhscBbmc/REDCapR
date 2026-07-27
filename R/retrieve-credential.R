@@ -217,47 +217,6 @@ retrieve_credential_local <- function(
   credential
 }
 
-# Privately-scoped function
-credential_local_validation <- function(
-  redcap_uri,
-  token,
-  username,
-  check_url                = TRUE,
-  check_username           = FALSE,
-  check_token_pattern      = TRUE
-
-) {
-  # Progress through the optional checks
-  if (check_url && !grepl("https://", redcap_uri, fixed = TRUE)) {
-    error_message_username <- paste(
-      "The REDCap URL does not reference an https address.  First check",
-      "that the URL is correct, and then consider using SSL to encrypt",
-      "the REDCap webserver.  Set the `check_url` parameter to FALSE",
-      "if you're sure you have the correct file & file contents."
-    )
-    stop(error_message_username)
-
-  } else if (check_username && (Sys.info()["user"] != username)) {
-    error_message_username <- paste(
-      "The username (according to R's `Sys.info()['user']` doesn't match the",
-      "username in the credentials file.  This is a friendly check, and",
-      "NOT a security measure.  Set the `check_username` parameter to FALSE",
-      "if you're sure you have the correct file & file contents.",
-      "Otherwise, you may be pointing to the wrong credentials file."
-    )
-    stop(error_message_username)
-
-  } else if (check_token_pattern && !grepl("[A-F0-9]{32}", token, perl = TRUE)) {
-    error_message_token <- paste(
-      "A REDCap token should be a string of 32 digits and uppercase",
-      "characters.  The retrieved value was not.",
-      "Set the `check_token_pattern` parameter to FALSE",
-      "if you're sure you have the correct file & file contents."
-    )
-    stop(error_message_token)
-  }
-}
-
 #' @export
 create_credential_local <- function(path_credential) {
   path_source <- system.file(
@@ -394,4 +353,45 @@ retrieve_credential_mssql <- function(
   )
 
   credential
+}
+
+# Privately-scoped function
+credential_local_validation <- function(
+    redcap_uri,
+    token,
+    username,
+    check_url                = TRUE,
+    check_username           = FALSE,
+    check_token_pattern      = TRUE
+
+) {
+  # Progress through the optional checks
+  if (check_url && !grepl("https://", redcap_uri, fixed = TRUE)) {
+    error_message_username <- paste(
+      "The REDCap URL does not reference an https address.  First check",
+      "that the URL is correct, and then consider using SSL to encrypt",
+      "the REDCap webserver.  Set the `check_url` parameter to FALSE",
+      "if you're sure you have the correct file & file contents."
+    )
+    stop(error_message_username)
+
+  } else if (check_username && (Sys.info()["user"] != username)) {
+    error_message_username <- paste(
+      "The username (according to R's `Sys.info()['user']` doesn't match the",
+      "username in the credentials file.  This is a friendly check, and",
+      "NOT a security measure.  Set the `check_username` parameter to FALSE",
+      "if you're sure you have the correct file & file contents.",
+      "Otherwise, you may be pointing to the wrong credentials file."
+    )
+    stop(error_message_username)
+
+  } else if (check_token_pattern && !grepl("[A-F0-9]{32}", token, perl = TRUE)) {
+    error_message_token <- paste(
+      "A REDCap token should be a string of 32 digits and uppercase",
+      "characters.  The retrieved value was not.",
+      "Set the `check_token_pattern` parameter to FALSE",
+      "if you're sure you have the correct file & file contents."
+    )
+    stop(error_message_token)
+  }
 }
