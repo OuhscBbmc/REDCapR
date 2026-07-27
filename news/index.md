@@ -36,6 +36,11 @@
   [\#589](https://github.com/OuhscBbmc/REDCapR/issues/589))
 - Update deprecated parameters for \`base::structure
   ([\#605](https://github.com/OuhscBbmc/REDCapR/issues/605))
+- [`validate_for_write()`](https://ouhscbbmc.github.io/REDCapR/reference/validate.md)
+  now accommodates projects with a custom name for `record_id`
+  ([\#601](https://github.com/OuhscBbmc/REDCapR/issues/601),
+  [\#602](https://github.com/OuhscBbmc/REDCapR/issues/602),
+  [@vanbibn](https://github.com/vanbibn))
 
 ## REDCapR 1.6.0 (released 2025-10-07)
 
