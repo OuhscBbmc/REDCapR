@@ -208,7 +208,7 @@ test_that("reassign subject to a different dag", {
       verbose     = FALSE
     )$data
   expect_equal(nrow(ds_user_2), 1L)
-  expect_equal(ds_user_2$record_id, c("331-1"))
+  expect_equal(ds_user_2$record_id, "331-1")
 })
 
 rm(update_expectation, credential_admin, credential_user, url)

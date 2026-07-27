@@ -287,7 +287,7 @@ test_that("specify-forms", {
 test_that("specify-forms-without-record-id", {
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/read-oneshot/specify-forms-without-record-id.R"
-  desired_forms <- c("health")
+  desired_forms <- "health"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   returned_object <-
@@ -343,7 +343,7 @@ test_that("specify-fields-without-record-id", {
 test_that("specify-forms-only-1st", {
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/read-oneshot/specify-forms-only-1st.R"
-  desired_forms <- c("demographics")
+  desired_forms <- "demographics"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   returned_object <-
@@ -371,7 +371,7 @@ test_that("specify-forms-only-1st", {
 test_that("specify-forms-only-2nd", {
   testthat::skip_on_cran()
   path_expected <- "test-data/specific-redcapr/read-oneshot/specify-forms-only-2nd.R"
-  desired_forms <- c("race_and_ethnicity")
+  desired_forms <- "race_and_ethnicity"
   expected_outcome_message <- "\\d+ records and \\d+ columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   returned_object <-

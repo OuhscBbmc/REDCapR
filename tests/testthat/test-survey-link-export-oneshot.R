@@ -38,7 +38,7 @@ test_that("Vanilla", {
   expect_equal(result$status_code, 200L)
   expect_equal(result$instrument, "participant_morale_questionnaire")
   expect_equal(result$records_affected_count, 1L)
-  expect_equal(result$affected_ids, c("1"))
+  expect_equal(result$affected_ids, "1")
 })
 
 test_that("Nonexistent Record ID", {
