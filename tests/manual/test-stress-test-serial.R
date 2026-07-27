@@ -70,9 +70,9 @@ for (i in seq_len(read_count)) {
     regexp = expected_outcome_message
   )
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
@@ -126,18 +126,18 @@ for (i in seq_len(file_count)) {
 
   # Test the values of the returned object.
   expect_true(returned_object$success)
-  expect_equal(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$status_code, expected=200L)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_identical(returned_object$records_affected_count, 1L)
   expect_identical(returned_object$affected_ids, "1")
   expect_true(returned_object$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
-  expect_equal(returned_object$file_name, "mugshot-1.jpg", label="The name of the downloaded file should be correct.")
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$file_name, "mugshot-1.jpg", label="The name of the downloaded file should be correct.")
 
   # Test the values of the file.
-  expect_equal(info_actual$size, expected=info_expected$size, label="The size of the downloaded file should match.")
+  expect_identical(info_actual$size, expected=info_expected$size, label="The size of the downloaded file should match.")
   expect_false(info_actual$isdir, "The downloaded file should not be a directory.")
-  expect_equal(info_actual$mode, expected=info_expected$mode, label="The mode/permissions of the downloaded file should match.")
+  expect_identical(info_actual$mode, expected=info_expected$mode, label="The mode/permissions of the downloaded file should match.")
   expect_gt(info_actual$mtime, expected=start_time, label="The downloaded file's modification time should not precede this function's start time.")
   expect_gt(info_actual$ctime, expected=start_time, label="The downloaded file's last change time should not precede this function's start time.")
   expect_gt(info_actual$atime, expected=start_time, label="The downloaded file's last access time should not precede this function's start time.")
