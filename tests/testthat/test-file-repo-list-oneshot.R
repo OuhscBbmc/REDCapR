@@ -94,13 +94,11 @@ test_that("first-subdirectory", {
   expect_equal(returned_object$data$name, expected_data_frame$name)
   expect_s3_class(returned_object$data$folder_id, "integer")
   expect_s3_class(returned_object$data$doc_id   , "integer")
-  expect_equal(
-    !is.na(returned_object$data$folder_id),
-    FALSE
+  expect_false(
+    !is.na(returned_object$data$folder_id)
   )
-  expect_equal(
-    !is.na(returned_object$data$doc_id),
-    TRUE
+  expect_true(
+    !is.na(returned_object$data$doc_id)
   )
 
   expect_true(returned_object$success)
