@@ -99,7 +99,7 @@ retrieve_plugins <- function(plugin_name) {
     dplyr::bind_rows() %>%
     tidyr::unnest(plugins) %>%
     tidyr::pivot_longer(
-      cols      = -c("instance"),
+      cols      = -"instance",
       names_to  = "tag",
       values_to = "url"
     ) %>%

@@ -11,7 +11,7 @@ test_that("simple", {
   testthat::skip_on_cran()
 
   path_expected <- "test-data/specific-redcapr/read-batch-plumbing/simple.R"
-  desired_forms <- c("race_and_ethnicity") # Doesn't include the initial "demographics" form.
+  desired_forms <- "race_and_ethnicity" # Doesn't include the initial "demographics" form.
   expected_outcome_message <- "\\d+ records and 10 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   returned_object <-
@@ -39,7 +39,7 @@ test_that("longitudinal", {
 
   credential    <- retrieve_credential_testing("longitudinal")
   path_expected <- "test-data/specific-redcapr/read-batch-plumbing/longitudinal.R"
-  desired_forms <- c("visit_observed_behavior") # Doesn't include the initial "demographics" form.
+  desired_forms <- "visit_observed_behavior" # Doesn't include the initial "demographics" form.
   expected_outcome_message <- "\\d+ records and 17 columns were read from REDCap in \\d+(\\.\\d+\\W|\\W)seconds\\."
 
   returned_object <-

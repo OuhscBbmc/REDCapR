@@ -96,11 +96,11 @@ test_that("first-subdirectory", {
   expect_equal(class(returned_object$data$doc_id   ), "integer")
   expect_equal(
     !is.na(returned_object$data$folder_id),
-    c(FALSE)
+    FALSE
   )
   expect_equal(
     !is.na(returned_object$data$doc_id),
-    c(TRUE)
+    TRUE
   )
 
   expect_true(returned_object$success)
