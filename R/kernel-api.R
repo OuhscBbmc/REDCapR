@@ -108,7 +108,7 @@ kernel_api <- function(
     success <- FALSE  # nocov
   }
 
-  return(list(
+  list(
     status_code         = status_code,
     success             = success,
     raw_text            = raw_text,
@@ -116,5 +116,5 @@ kernel_api <- function(
     result              = response,
     result_headers      = response$headers,
     regex_empty         = regex_empty
-  ))
+  )
 }
