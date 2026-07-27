@@ -30,7 +30,7 @@ test_that("download instrument", {
   expect_true(returned_object$success)
   expect_equal(returned_object$status_code, expected=200L)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
-  expect_equal(length(returned_object$record_id), 0L)
+  expect_length(returned_object$record_id, 0L)
   expect_true(returned_object$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_equal(returned_object$file_name, expected_file_name, label="The name of the downloaded file should be correct.")
