@@ -94,7 +94,7 @@ kernel_api <- function(
   )
 
   # Convert all line-endings to linux-style
-  raw_text        <- gsub("\r\n", "\n", raw_text)
+  raw_text        <- gsub("\r\n", "\n", raw_text, fixed = TRUE)
   elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
 
   regex_cannot_connect  <- "^The hostname \\((.+)\\) / username \\((.+)\\) / password \\((.+)\\) combination could not connect.+"

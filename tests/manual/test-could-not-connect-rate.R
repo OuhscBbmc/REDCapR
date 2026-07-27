@@ -19,7 +19,7 @@ for (i in seq_len(record_read_count)) {
   )
   message(i, ": ", returned_object$elapsed_seconds, " -", returned_object$raw_text)
 
-  if (any(grepl(pattern="combination could not connect to the MySQL server", returned_object$raw_text)))
+  if (any(grepl(pattern="combination could not connect to the MySQL server", returned_object$raw_text, fixed = TRUE)))
     record_read_error_count <- record_read_error_count + 1L
 }
 message("Record read error rate: ", record_read_error_count/record_read_count)
@@ -48,7 +48,7 @@ for (i in seq_len(file_read_count)) {
 
   message(i, ": ", returned_object$elapsed_seconds, " -", returned_object$raw_text)
 
-  if (any(grepl(pattern="combination could not connect to the MySQL server", returned_object$raw_text)))
+  if (any(grepl(pattern="combination could not connect to the MySQL server", returned_object$raw_text, fixed = TRUE)))
     file_read_error_count <- file_read_error_count + 1L
 }
 message("File read error rate: ", file_read_error_count/file_read_count)

@@ -228,7 +228,7 @@ credential_local_validation <- function(
 
 ) {
   # Progress through the optional checks
-  if (check_url && !grepl("https://", redcap_uri, perl = TRUE)) {
+  if (check_url && !grepl("https://", redcap_uri, fixed = TRUE)) {
     error_message_username <- paste(
       "The REDCap URL does not reference an https address.  First check",
       "that the URL is correct, and then consider using SSL to encrypt",

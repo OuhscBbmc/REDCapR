@@ -31,7 +31,7 @@ knit_print.data.frame <- function(x, ...) {
   x %>%
     # rmarkdown::print.paged_df() %>%
     kable(
-      col.names = gsub("_", "<br>", colnames(.)),
+      col.names = gsub("_", "<br>", colnames(.), fixed = TRUE),
       # col.names = paste0("<code>", gsub("_", "<br>", colnames(.)), "</code>"),
       # col.names = gsub("_", " ", colnames(.)),
       escape = FALSE,
