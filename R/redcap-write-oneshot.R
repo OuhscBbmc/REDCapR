@@ -99,21 +99,6 @@
 #' result_write$raw_text
 #' }
 
-serialize_csv_for_write <- function(ds) {
-  csv_elements <- NULL
-  old_options <- options(scipen = 999)
-  on.exit(options(old_options), add = TRUE)
-
-  con <- base::textConnection(
-    object  = "csv_elements",
-    open    = "w",
-    local   = TRUE
-  )
-  on.exit(close(con), add = TRUE)
-
-  utils::write.csv(ds, con, row.names = FALSE, na = "")
-  paste(csv_elements, collapse = "\n")
-}
 
 #' @importFrom magrittr %>%
 #' @export
@@ -201,5 +186,13 @@ redcap_write_oneshot <- function(
     affected_ids              = affected_ids,
     elapsed_seconds           = kernel$elapsed_seconds,
     raw_text                  = kernel$raw_text
+  )
+}
+
+serialize_csv_for_write <- function(d) {
+  readr::format_csv(
+    x     = d,
+    na    = "",
+    quote = "all"
   )
 }
