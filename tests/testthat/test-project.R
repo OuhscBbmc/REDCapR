@@ -69,8 +69,8 @@ test_that("read-insert-and-update", {
   if (update_expectation) save_expected(returned_object2$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
-  expect_equal(returned_object2$status_code, expected="200")
+  expect_identical(returned_object2$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
+  expect_identical(returned_object2$status_code, expected="200")
   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object2$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object2$outcome_message, regexp=expected_outcome_message, perl=TRUE)
