@@ -28,9 +28,9 @@ test_that("simple repeating", {
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
   expect_s3_class(returned_object$data, "tbl")
@@ -54,9 +54,9 @@ test_that("longitudinal repeating", {
   if (update_expectation) save_expected(returned_object_explicit$data, path_expected_explicit)
   expected_data_frame_explicit <- retrieve_expected(path_expected_explicit)
 
-  expect_equal(   returned_object_explicit$data, expected=expected_data_frame_explicit, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
-  expect_equal(   returned_object_explicit$status_code, expected=200L)
-  expect_equal(   returned_object_explicit$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(   returned_object_explicit$data, expected=expected_data_frame_explicit, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_identical(   returned_object_explicit$status_code, expected=200L)
+  expect_identical(   returned_object_explicit$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(   returned_object_explicit$outcome_message, regexp=expected_outcome_message_explicit, perl=TRUE)
   expect_true(    returned_object_explicit$success)
   expect_s3_class(returned_object_explicit$data, "tbl")
@@ -71,9 +71,9 @@ test_that("longitudinal repeating", {
   if (update_expectation) save_expected(returned_object_default$data, path_expected_default)
   expected_data_frame_default <- retrieve_expected(path_expected_default)
 
-  expect_equal(   returned_object_default$data, expected=expected_data_frame_default, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
-  expect_equal(   returned_object_default$status_code, expected=200L)
-  expect_equal(   returned_object_default$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(   returned_object_default$data, expected=expected_data_frame_default, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_identical(   returned_object_default$status_code, expected=200L)
+  expect_identical(   returned_object_default$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(   returned_object_default$outcome_message, regexp=expected_outcome_message_default, perl=TRUE)
   expect_true(    returned_object_default$success)
   expect_s3_class(returned_object_default$data, "tbl")
@@ -92,9 +92,9 @@ test_that("no repeating", {
 
   expected_data_frame <- tibble::tibble()
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected=400L)
-  expect_equal(returned_object$raw_text, expected="ERROR: You cannot export repeating instruments and events because the project does not contain any repeating instruments and events", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected=400L)
+  expect_identical(returned_object$raw_text, expected="ERROR: You cannot export repeating instruments and events because the project does not contain any repeating instruments and events", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_false(returned_object$success)
   expect_s3_class(returned_object$data, "tbl")
@@ -111,8 +111,8 @@ test_that("bad token -Error", {
     )
 
   testthat::expect_false(returned_object$success)
-  testthat::expect_equal(returned_object$status_code, 403L)
-  testthat::expect_equal(returned_object$raw_text, expected_outcome_message)
+  testthat::expect_identical(returned_object$status_code, 403L)
+  testthat::expect_identical(returned_object$raw_text, expected_outcome_message)
 })
 
 rm(credential_repeating)
