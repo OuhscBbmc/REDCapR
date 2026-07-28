@@ -370,7 +370,7 @@ col_types  <- redcap_metadata_coltypes(uri, token)
 #>   completion_project_questionnaire_complete   = readr::col_integer()    , # completion status of form/instrument
 #> )
 redcap_read_oneshot(uri, token, col_types = col_types)$data
-#> 18 records and 125 columns were read from REDCap in 0.4 seconds.  The http status code was 200.
+#> 18 records and 125 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
 #> # A tibble: 18 × 125
 #>    study_id redcap_event_name        date_enrolled patient_document   first_name
 #>    <chr>    <chr>                    <date>        <chr>              <chr>     
@@ -423,7 +423,7 @@ col_types  <- redcap_metadata_coltypes(uri, token)
 #>   bp_complete                 = readr::col_integer()    , # completion status of form/instrument
 #> )
 redcap_read_oneshot(uri, token, col_types = col_types)$data
-#> 9 records and 15 columns were read from REDCap in 0.4 seconds.  The http status code was 200.
+#> 9 records and 15 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
 #> # A tibble: 9 × 15
 #>   record_id redcap_repeat_instrument redcap_repeat_instance date_enrolled
 #>       <int> <chr>                                     <int> <date>       

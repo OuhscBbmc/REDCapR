@@ -249,7 +249,7 @@ If you require a feature that is not available from your instance’s API,
 first upgrade your institution’s REDCap instance and see if the feature
 has been added recently. Second, check if someone has released the
 desired API-like features as an [REDCap External
-Module](https://redcap.vanderbilt.edu/consortium/modules/).
+Module](https://redcap.vumc.org:443/consortium/modules/).
 
 Third, you may need to query the database underneath REDCap’s web
 server. The [Transfer
@@ -381,7 +381,7 @@ Environment
     #>  collate  en_US.UTF-8
     #>  ctype    en_US.UTF-8
     #>  tz       UTC
-    #>  date     2026-07-27
+    #>  date     2026-07-28
     #>  pandoc   3.8.3 @ /usr/local/bin/ (via rmarkdown)
     #>  quarto   NA
     #> 
@@ -423,7 +423,7 @@ Environment
     #>  ragg           1.5.2      2026-03-23 [1] CRAN (R 4.6.0)
     #>  RColorBrewer   1.1-3      2022-04-03 [1] CRAN (R 4.6.0)
     #>  readr          2.2.0      2026-02-19 [1] CRAN (R 4.6.0)
-    #>  REDCapR      * 1.6.0.9002 2026-07-27 [1] local
+    #>  REDCapR      * 1.6.0.9002 2026-07-28 [1] local
     #>  rlang          1.3.0      2026-07-05 [1] CRAN (R 4.6.1)
     #>  rmarkdown      2.31       2026-03-26 [1] CRAN (R 4.6.0)
     #>  rstudioapi     0.19.0     2026-06-11 [1] CRAN (R 4.6.0)
@@ -454,4 +454,4 @@ Environment
     #> 
     #> ──────────────────────────────────────────────────────────────────────────────
 
-Report rendered by runner at 2026-07-27, 02:28 +0000 in 2 seconds.
+Report rendered by runner at 2026-07-28, 18:14 +0000 in 3 seconds.

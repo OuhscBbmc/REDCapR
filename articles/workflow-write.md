@@ -240,8 +240,8 @@ working example and (b) the larger failing example. See if this middle
 point (that has fewer rows and/or columns than the failing point)
 succeeds or fails. Then repeat. This “bisection” or “binary search”
 [debugging
-technique](https://medium.com/codecastpublication/debugging-tools-and-techniques-binary-search-2da5bb4282c7)
-is helpful in many areas of programming and statistical modeling.
+technique](https://www.codewithjason.com/binary-search-debugging/) is
+helpful in many areas of programming and statistical modeling.
 
 ``` r
 
@@ -359,7 +359,7 @@ The [Clinical Data Interoperability
 Services](https://projectredcap.org/software/cdis/) (CDIS) use
 [FHIR](https://www.hl7.org/fhir/overview.html) to move data from your
 institution’s
-[EMR/EHR](https://www.healthit.gov/faq/what-are-differences-between-electronic-medical-records-electronic-health-records-and-personal)
+[EMR/EHR](https://healthit.gov/blog/electronic-health-and-medical-records/emr-vs-ehr-difference/)
 (eg, Epic, Cerner) to REDCap. Research staff have control over which
 patient records are selected or eligible. Conceptually it’s similar to
 writing to REDCap’s with the API, but at much bigger scale.
@@ -406,7 +406,7 @@ Environment
     #>  collate  en_US.UTF-8
     #>  ctype    en_US.UTF-8
     #>  tz       UTC
-    #>  date     2026-07-27
+    #>  date     2026-07-28
     #>  pandoc   3.8.3 @ /usr/local/bin/ (via rmarkdown)
     #>  quarto   NA
     #> 

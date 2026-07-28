@@ -237,7 +237,7 @@ ds_some_fields_v1 <- REDCapR:::redcap_read_oneshot_eav(
    token      = token,
    fields     = desired_fields_v1
 )$data
-#> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
+#> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 5 records and 4 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 # }

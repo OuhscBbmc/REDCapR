@@ -41,6 +41,8 @@
   ([\#601](https://github.com/OuhscBbmc/REDCapR/issues/601),
   [\#602](https://github.com/OuhscBbmc/REDCapR/issues/602),
   [@vanbibn](https://github.com/vanbibn))
+- Follows new rules from the goodpractice package released in the past
+  year ([\#610](https://github.com/OuhscBbmc/REDCapR/issues/610))
 
 #### Bug fixes
 
@@ -290,12 +292,10 @@ This will help extract forms from longitudinal & repeating projects.
     to
     [`redcap_instrument_download()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_instrument_download.md)
 - [`redcap_dag_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_dag_read.md)
-  has new `data_access_group_id` field (introduced maybe in
-  [13.1.0](https://redcap.vanderbilt.edu/community/post.php?id=13))
+  has new `data_access_group_id` field (introduced maybe in 13.1.0
   ([\#459](https://github.com/OuhscBbmc/REDCapR/issues/459))
 - [`redcap_users_export()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_users_export.md)
-  has new `mycap_participants` field (introduced maybe in
-  [13.0.0](https://redcap.vanderbilt.edu/community/post.php?id=13))
+  has new `mycap_participants` field (introduced maybe in 13.0.0
   ([\#459](https://github.com/OuhscBbmc/REDCapR/issues/459))
 - Accommodate older versions of REDCap that don’t return project-level
   variable, like `has_repeating_instruments_or_events`,

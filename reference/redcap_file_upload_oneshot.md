@@ -156,7 +156,7 @@ REDCapR::redcap_file_upload_oneshot(
 #> [1] "1"
 #> 
 #> $elapsed_seconds
-#> [1] 0.3081369
+#> [1] 0.2791688
 #> 
 #> $raw_text
 #> [1] ""
@@ -185,10 +185,10 @@ for (i in seq_along(records)) {
 #> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-2.jpg`.
 #> file uploaded to REDCap in 0.2 seconds.
 #> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-3.jpg`.
-#> file uploaded to REDCap in 0.3 seconds.
+#> file uploaded to REDCap in 0.2 seconds.
 #> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-4.jpg`.
-#> file uploaded to REDCap in 0.3 seconds.
+#> file uploaded to REDCap in 0.2 seconds.
 #> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-5.jpg`.
-#> file uploaded to REDCap in 0.3 seconds.
+#> file uploaded to REDCap in 0.2 seconds.
 # }
 ```

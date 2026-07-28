@@ -99,7 +99,7 @@ uri            <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 # Query a longitudinal project with a single arm and 3 events
 token_1  <- "76B4A71A0158BD34C98F10DA72D5F27C" # arm-single-longitudinal
 result_1 <- REDCapR::redcap_event_read(redcap_uri=uri, token=token_1)
-#> The list of events was retrieved from the REDCap project in 0.3 seconds. The http status code was 200.
+#> The list of events was retrieved from the REDCap project in 0.2 seconds. The http status code was 200.
 result_1$data
 #> # A tibble: 3 × 5
 #>   event_name arm_num unique_event_name custom_event_label event_id

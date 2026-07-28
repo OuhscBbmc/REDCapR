@@ -51,6 +51,7 @@
 <li>Update deprecated parameters for `base::structure (<a href="https://github.com/OuhscBbmc/REDCapR/issues/605" class="external-link">#605</a>)</li>
 <li>
 <code><a href="../reference/validate.html">validate_for_write()</a></code> now accommodates projects with a custom name for <code>record_id</code> (<a href="https://github.com/OuhscBbmc/REDCapR/issues/601" class="external-link">#601</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/602" class="external-link">#602</a>, <a href="https://github.com/vanbibn" class="external-link">@vanbibn</a>)</li>
+<li>Follows new rules from the goodpractice package released in the past year (<a href="https://github.com/OuhscBbmc/REDCapR/issues/610" class="external-link">#610</a>)</li>
 </ul></div>
 <div class="section level4">
 <h4 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h4>
@@ -165,9 +166,9 @@
 </li>
 </ul></li>
 <li>
-<code><a href="../reference/redcap_dag_read.html">redcap_dag_read()</a></code> has new <code>data_access_group_id</code> field (introduced maybe in <a href="https://redcap.vanderbilt.edu/community/post.php?id=13" class="external-link">13.1.0</a>) (<a href="https://github.com/OuhscBbmc/REDCapR/issues/459" class="external-link">#459</a>)</li>
+<code><a href="../reference/redcap_dag_read.html">redcap_dag_read()</a></code> has new <code>data_access_group_id</code> field (introduced maybe in 13.1.0 (<a href="https://github.com/OuhscBbmc/REDCapR/issues/459" class="external-link">#459</a>)</li>
 <li>
-<code><a href="../reference/redcap_users_export.html">redcap_users_export()</a></code> has new <code>mycap_participants</code> field (introduced maybe in <a href="https://redcap.vanderbilt.edu/community/post.php?id=13" class="external-link">13.0.0</a>) (<a href="https://github.com/OuhscBbmc/REDCapR/issues/459" class="external-link">#459</a>)</li>
+<code><a href="../reference/redcap_users_export.html">redcap_users_export()</a></code> has new <code>mycap_participants</code> field (introduced maybe in 13.0.0 (<a href="https://github.com/OuhscBbmc/REDCapR/issues/459" class="external-link">#459</a>)</li>
 <li>Accommodate older versions of REDCap that don’t return project-level variable, like <code>has_repeating_instruments_or_events</code>, <code>missing_data_codes</code>, <code>external_modules</code>, <code>bypass_branching_erase_field_prompt</code> (<a href="https://github.com/the-mad-statter" class="external-link">@the-mad-statter</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/465" class="external-link">#465</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/466" class="external-link">#466</a>)</li>
 <li>
 <code>redcap_meta_coltypes()</code> correctly determines data type for autonumber <code>record_id</code> fields. It suggests a character if the project has DAGs, and an integer if not. (<a href="https://github.com/pwildenhain" class="external-link">@pwildenhain</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/472" class="external-link">#472</a>)</li>

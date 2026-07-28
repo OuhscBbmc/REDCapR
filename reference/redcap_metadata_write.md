@@ -157,7 +157,7 @@ REDCapR::redcap_metadata_write(
 #> [1] 16
 #> 
 #> $elapsed_seconds
-#> [1] 0.221102
+#> [1] 0.235539
 #> 
 #> $raw_text
 #> [1] ""
