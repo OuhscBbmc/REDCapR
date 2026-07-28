@@ -313,7 +313,7 @@ if (file.exists(cert_location)) {
 }
 ```
 
-    #> 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+    #> 5 records and 25 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
 
 Force the connection to use SSL=3 (which is not preferred, and possibly
 insecure).
@@ -454,4 +454,4 @@ Environment
     #> 
     #> ──────────────────────────────────────────────────────────────────────────────
 
-Report rendered by runner at 2026-07-28, 18:14 +0000 in 3 seconds.
+Report rendered by runner at 2026-07-28, 23:53 +0000 in 2 seconds.

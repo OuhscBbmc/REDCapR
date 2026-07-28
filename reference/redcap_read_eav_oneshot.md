@@ -206,7 +206,7 @@ token    <- "9A068C425B1341D69E83064A2D273A70"
 
 # Return all records and all variables.
 ds <- REDCapR:::redcap_read_eav_oneshot(redcap_uri=uri, token=token)$data
-#> 103 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 103 records and 3 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
 
 # Return only records with IDs of 1 and 3
 desired_records_v1 <- c(1, 3)

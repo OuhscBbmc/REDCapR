@@ -41,13 +41,13 @@ records and fields returned.
 
 # Return all records and all variables.
 ds_all_rows_all_fields <- redcap_read(redcap_uri = uri, token = token)$data
-#> 24 variable metadata records were read from REDCap in 0.4 seconds.  The http status code was 200.
+#> 24 variable metadata records were read from REDCap in 0.3 seconds.  The http status code was 200.
 #> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2026-07-28 18:14:41.143851.
+#> Starting to read 5 records  at 2026-07-28 23:53:55.132325.
 #> Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
 #> 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 ds_all_rows_all_fields # Inspect the returned dataset
@@ -89,13 +89,13 @@ ds_some_rows_v1 <- redcap_read(
   token      = token,
   records    = desired_records
 )$data
-#> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
 #> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
-#> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 2 records  at 2026-07-28 18:14:43.057597.
+#> Starting to read 2 records  at 2026-07-28 23:53:57.153471.
 #> Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).
 #> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 ```
@@ -126,7 +126,7 @@ ds_some_fields <- redcap_read(
 #> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2026-07-28 18:14:44.952382.
+#> Starting to read 5 records  at 2026-07-28 23:53:59.142052.
 #> Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
 #> 5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 ```
@@ -154,12 +154,12 @@ ds_some_fields_v3 <- redcap_read(
   fields     = desired_fields_v3
 )$data
 #> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
+#> The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.
 #> 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2026-07-28 18:14:46.863756.
+#> 5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
+#> Starting to read 5 records  at 2026-07-28 23:54:01.531801.
 #> Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
 #> 5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 
@@ -196,9 +196,9 @@ ds_some_rows_v3 <- redcap_read(
 #> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 2 records  at 2026-07-28 18:14:48.76809.
+#> Starting to read 2 records  at 2026-07-28 23:54:03.634743.
 #> Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).
-#> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 2 records and 25 columns were read from REDCap in 0.4 seconds.  The http status code was 200.
 
 ds_some_rows_v3 #Examine the results.
 #> # A tibble: 2 × 25
@@ -244,12 +244,12 @@ all_information <- redcap_read(
   fields     = desired_fields
 )
 #> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> The data dictionary describing 17 fields was read from REDCap in 0.3 seconds.  The http status code was 200.
+#> 3 instrument metadata records were read from REDCap in 0.3 seconds.  The http status code was 200.
+#> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2026-07-28 18:14:50.764432.
+#> Starting to read 5 records  at 2026-07-28 23:54:06.087578.
 #> Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
 #> 5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 all_information #Inspect the additional information
@@ -294,7 +294,7 @@ all_information #Inspect the additional information
 #> [1] NA
 #> 
 #> $elapsed_seconds
-#> [1] 1.839582
+#> [1] 2.243609
 ```
 
 ## Session Information
@@ -386,4 +386,4 @@ Environment
     #> 
     #> ──────────────────────────────────────────────────────────────────────────────
 
-Report rendered by runner at 2026-07-28, 18:14 +0000 in 13 seconds.
+Report rendered by runner at 2026-07-28, 23:54 +0000 in 14 seconds.

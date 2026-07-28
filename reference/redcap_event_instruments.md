@@ -109,7 +109,7 @@ uri                 <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 # Longitudinal project with one arm
 token_1  <- "76B4A71A0158BD34C98F10DA72D5F27C" # "arm-single-longitudinal" test project
 REDCapR::redcap_arm_export(redcap_uri=uri, token=token_1)$data
-#> The list of arms was retrieved from the REDCap project in 0.1 seconds. The http status code was 200.
+#> The list of arms was retrieved from the REDCap project in 0.2 seconds. The http status code was 200.
 #> # A tibble: 1 × 2
 #>   arm_number arm_name
 #>        <int> <chr>   
@@ -149,7 +149,7 @@ REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_2)$data
 #> 10       1 visit_2_arm_1     visit_lab_data              
 #> # ℹ 15 more rows
 REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_2, arms = c("1", "2"))$data
-#> 25 event instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 25 event instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
 #> # A tibble: 25 × 3
 #>    arm_num unique_event_name form                        
 #>      <int> <chr>             <chr>                       
@@ -183,7 +183,7 @@ REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_2, arms = "2")$dat
 # Classic project (without arms) throws an error
 token_3  <- "9A068C425B1341D69E83064A2D273A70" # "simple" test project
 REDCapR::redcap_arm_export(redcap_uri=uri, token=token_3)$data
-#> A 'classic' REDCap project has no arms.  Retrieved in 0.1 seconds. The http status code was 400.
+#> A 'classic' REDCap project has no arms.  Retrieved in 0.2 seconds. The http status code was 400.
 #> # A tibble: 0 × 2
 #> # ℹ 2 variables: arm_number <int>, arm_name <chr>
 # REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_3)$data

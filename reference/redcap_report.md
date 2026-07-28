@@ -177,7 +177,7 @@ ds_1b <-
     report_id  = report_1_id,
     col_types  = col_types_1
   )$data
-#> 5 records and 5 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 5 records and 5 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
 
 
 # Return condensed checkboxes Report option:
@@ -195,6 +195,6 @@ ds_2 <-
     report_id  = report_2_id,
     col_types  = col_types_2
   )$data
-#> 5 records and 2 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 5 records and 2 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
 # }
 ```
