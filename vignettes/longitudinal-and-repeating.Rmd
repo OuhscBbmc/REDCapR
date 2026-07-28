@@ -31,7 +31,7 @@ knit_print.data.frame <- function(x, ...) {
   x %>%
     # rmarkdown::print.paged_df() %>%
     kable(
-      col.names = gsub("_", "<br>", colnames(.)),
+      col.names = gsub("_", "<br>", colnames(.), fixed = TRUE),
       # col.names = paste0("<code>", gsub("_", "<br>", colnames(.)), "</code>"),
       # col.names = gsub("_", " ", colnames(.)),
       escape = FALSE,
@@ -245,7 +245,7 @@ ds_intake <-
   REDCapR::redcap_read(
     redcap_uri  = credential$redcap_uri, # From the previous code snippet.
     token       = credential$token,
-    forms       = c("intake"),
+    forms       = "intake",
     col_types   = col_types_intake,
     verbose     = FALSE,
   )$data
@@ -271,7 +271,7 @@ ds_blood_pressure <-
   REDCapR::redcap_read(
     redcap_uri  = credential$redcap_uri,
     token       = credential$token,
-    forms       = c("blood_pressure"),
+    forms       = "blood_pressure",
     col_types   = col_types_blood_pressure,
     verbose     = FALSE
   )$data
@@ -293,7 +293,7 @@ ds_laboratory  <-
   REDCapR::redcap_read(
     redcap_uri  = credential$redcap_uri,
     token       = credential$token,
-    forms       = c("laboratory"),
+    forms       = "laboratory",
     col_types   = col_types_laboratory,
     verbose     = FALSE
   )$data

@@ -167,7 +167,7 @@ validate_no_logical <- function(d, stop_on_error = FALSE) {
   checkmate::assert_data_frame(d)
   checkmate::assert_logical(stop_on_error, any.missing = FALSE, len = 1L)
 
-  indices <- which(vapply(d, function(x) {inherits(x, "logical")}, logical(1)))
+  indices <- which(vapply(d, function(x) inherits(x, "logical"), logical(1)))
 
   if (length(indices) == 0L) {
     tibble::tibble(
@@ -223,25 +223,6 @@ validate_field_names <- function(d, stop_on_error = FALSE) {
       concern            = "A REDCap project does not allow field names with an uppercase letter.",
       suggestion         = "Change the uppercase letters to lowercase, potentially with `base::tolower()`."
     )
-  }
-}
-
-# Intentionally not exported
-assert_field_names <- function(field_names) {
-  checkmate::assert_character(field_names, any.missing=FALSE, null.ok=TRUE, min.len=1, min.chars=1)
-  pattern <- "^[a-z][0-9a-z_]*$"
-
-  bad_names <- grep(pattern, x = field_names, perl = TRUE, invert = TRUE)
-
-  if (0L < length(bad_names)) {
-    paste(
-      "%i field name(s) violated the naming rules.  Only digits, lowercase ",
-      "letters, and underscores are allowed.  The variable must start with ",
-      "a letter.  The bad names are {%s}.",
-      collapse = ""
-    ) %>%
-      sprintf(length(bad_names), paste(bad_names, collapse = ", ")) %>%
-      stop()
   }
 }
 
@@ -404,4 +385,23 @@ validate_for_write <- function(
 
   # Vertically stack all the data.frames into a single data frame
   dplyr::bind_rows(lst_concerns)
+}
+
+# Intentionally not exported
+assert_field_names <- function(field_names) {
+  checkmate::assert_character(field_names, any.missing=FALSE, null.ok=TRUE, min.len=1, min.chars=1)
+  pattern <- "^[a-z][0-9a-z_]*$"
+
+  bad_names <- grep(pattern, x = field_names, perl = TRUE, invert = TRUE)
+
+  if (0L < length(bad_names)) {
+    paste(
+      "%i field name(s) violated the naming rules.  Only digits, lowercase ",
+      "letters, and underscores are allowed.  The variable must start with ",
+      "a letter.  The bad names are {%s}.",
+      collapse = ""
+    ) %>%
+      sprintf(length(bad_names), paste(bad_names, collapse = ", ")) %>%
+      stop()
+  }
 }

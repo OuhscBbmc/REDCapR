@@ -28,12 +28,12 @@ test_that("download instrument", {
 
   #Test the values of the returned object.
   expect_true(returned_object$success)
-  expect_equal(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$status_code, expected=200L)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
-  expect_equal(length(returned_object$record_id), 0L)
+  expect_length(returned_object$record_id, 0L)
   expect_true(returned_object$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
-  expect_equal(returned_object$file_name, expected_file_name, label="The name of the downloaded file should be correct.")
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$file_name, expected_file_name, label="The name of the downloaded file should be correct.")
 })
 
 test_that("download instrument conflict -Error", {
@@ -54,7 +54,7 @@ test_that("download instrument conflict -Error", {
 
     #Test the values of the returned object.
     expect_true(returned_object_1$success)
-    expect_equal(returned_object_1$status_code, expected=200L)
+    expect_identical(returned_object_1$status_code, expected=200L)
 
     # The second run should fail (b/c the file already exists).
     expect_error(
@@ -87,8 +87,8 @@ test_that("bad token -Error", {
     )
 
   testthat::expect_false(returned_object$success)
-  testthat::expect_equal(returned_object$status_code, 403L)
-  testthat::expect_equal(returned_object$raw_text, "ERROR: You do not have permissions to use the API")
+  testthat::expect_identical(returned_object$status_code, 403L)
+  testthat::expect_identical(returned_object$raw_text, "ERROR: You do not have permissions to use the API")
 })
 
 rm(credential)

@@ -41,14 +41,14 @@ test_that("Longitudinal Single Arm", {
       verbose           = FALSE
     )
 
-  expect_true(all(!is.na(returned_object$data$event_id)))
+  expect_false(anyNA(returned_object$data$event_id))
   expect_true(all(0 < returned_object$data$event_id))
 
   returned_object$data$event_id <- NULL
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object2$raw_text)
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object2$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
@@ -68,14 +68,14 @@ test_that("Longitudinal Two Arms", {
       verbose           = FALSE
     )
 
-  expect_true(all(!is.na(returned_object$data$event_id)))
+  expect_false(anyNA(returned_object$data$event_id))
   expect_true(all(0 < returned_object$data$event_id))
 
   returned_object$data$event_id <- NULL
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object2$raw_text)
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object2$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
@@ -94,14 +94,14 @@ test_that("Classic", {
       )
   })
 
-  expect_true(all(!is.na(returned_object$data$event_id)))
+  expect_false(anyNA(returned_object$data$event_id))
   expect_true(all(0 < returned_object$data$event_id))
 
   returned_object$data$event_id <- NULL
 
-  expect_equal(returned_object$data, expected=empty_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
-  expect_equal(returned_object$status_code, expected=400L)
-  expect_equal(returned_object$raw_text, expected="ERROR: You cannot export events for classic projects", ignore_attr = TRUE) # dput(returned_object2$raw_text)
+  expect_identical(returned_object$data, expected=empty_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
+  expect_identical(returned_object$status_code, expected=400L)
+  expect_identical(returned_object$raw_text, expected="ERROR: You cannot export events for classic projects", ignore_attr = TRUE) # dput(returned_object2$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_false(returned_object$success)
 })
@@ -121,14 +121,14 @@ test_that("delete-multiple-arm", {
       verbose           = FALSE
     )
 
-  expect_true(all(!is.na(returned_object$data$event_id)))
+  expect_false(anyNA(returned_object$data$event_id))
   expect_true(all(0 < returned_object$data$event_id))
 
   returned_object$data$event_id <- NULL
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object2$raw_text)
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object2$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 })
@@ -147,14 +147,14 @@ test_that("delete-single-arm", {
       )
   })
 
-  expect_true(all(!is.na(returned_object$data$event_id)))
+  expect_false(any(is.na(returned_object$data$event_id)))
   expect_true(all(0 < returned_object$data$event_id))
 
   returned_object$data$event_id <- NULL
 
-  expect_equal(returned_object$data, expected=empty_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
-  expect_equal(returned_object$status_code, expected=400L)
-  expect_equal(returned_object$raw_text, expected="ERROR: You cannot export events for classic projects", ignore_attr = TRUE) # dput(returned_object2$raw_text)
+  expect_identical(returned_object$data, expected=empty_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object2$data$bmi<-NULL; returned_object2$data$age<-NULL;dput(returned_object2$data)
+  expect_identical(returned_object$status_code, expected=400L)
+  expect_identical(returned_object$raw_text, expected="ERROR: You cannot export events for classic projects", ignore_attr = TRUE) # dput(returned_object2$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_false(returned_object$success)
 })

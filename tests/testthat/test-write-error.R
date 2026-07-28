@@ -26,11 +26,11 @@ test_that("One Shot: writing with read-only privileges", {
     )
 
   expect_false(result$success)
-  expect_equal(result$status_code, expected=403L)
-  expect_equal(result$outcome_message, expected_message)
+  expect_identical(result$status_code, expected=403L)
+  expect_identical(result$outcome_message, expected_message)
   expect_true( is.na(result$records_affected_count))
-  expect_equal(result$affected_ids, character(0))
-  expect_equal(result$raw_text, expected_text, ignore_attr = TRUE)
+  expect_identical(result$affected_ids, character(0))
+  expect_identical(result$raw_text, expected_text, ignore_attr = TRUE)
 
   expect_null( result$data)
   expect_null( result$records_collapsed)
@@ -106,10 +106,10 @@ test_that("Single Batch: writing with read-only privileges --contiue on error", 
   )
 
   expect_false(result$success)
-  expect_equal(result$status_code, expected="403")
-  expect_equal(result$outcome_message, expected_message)
-  expect_equal( result$records_affected_count, 0L)
-  expect_equal(result$affected_ids, character(0))
+  expect_identical(result$status_code, expected="403")
+  expect_identical(result$outcome_message, expected_message)
+  expect_identical( result$records_affected_count, 0L)
+  expect_identical(result$affected_ids, character(0))
 
   expect_null( result$raw_text)
   expect_null( result$records_collapsed)
@@ -136,10 +136,10 @@ test_that("Many Batches: writing with read-only privileges --contiue on error", 
   ))))
 
   expect_false(result$success)
-  expect_equal(result$status_code, expected="403; 403; 403; 403")
+  expect_identical(result$status_code, expected="403; 403; 403; 403")
   expect_match(result$outcome_message, expected_message)
-  expect_equal( result$records_affected_count, 0L)
-  expect_equal(result$affected_ids, character(0))
+  expect_identical( result$records_affected_count, 0L)
+  expect_identical(result$affected_ids, character(0))
 
   expect_null( result$raw_text)
   expect_null( result$records_collapsed)

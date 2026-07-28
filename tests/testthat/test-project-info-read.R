@@ -37,9 +37,9 @@ test_that("simple", {
   expected_data_frame$external_modules  <- NULL
   returned_object$data$external_modules <- NULL
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true( returned_object$success)
 })
@@ -75,7 +75,7 @@ test_that("all-test-projects", {
   expected_data_frame$external_modules  <- NULL
   returned_object$data$external_modules <- NULL
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_match(as.character(returned_object$status_code), regexp="200", perl=TRUE)
   expect_match(returned_object$raw_text, regexp="", perl=TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
@@ -108,9 +108,9 @@ test_that("chicago", {
   expected_data_frame$external_modules  <- NULL
   returned_object$data$external_modules <- NULL
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true( returned_object$success)
 })

@@ -29,9 +29,9 @@ test_that("Metadata Write", {
   )
 
   testthat::expect_true(returned_object$success)
-  testthat::expect_equal(returned_object$status_code, 200L)
-  testthat::expect_equal(returned_object$field_count, 16L)
-  testthat::expect_equal(returned_object$raw_text, "")
+  testthat::expect_identical(returned_object$status_code, 200L)
+  testthat::expect_identical(returned_object$field_count, 16L)
+  testthat::expect_identical(returned_object$raw_text, "")
 })
 test_that("Metadata Write -Error", {
   testthat::skip_on_cran()
@@ -47,9 +47,9 @@ test_that("Metadata Write -Error", {
   )
 
   testthat::expect_false(returned_object$success)
-  testthat::expect_equal(returned_object$status_code, 403L)
-  testthat::expect_equal(returned_object$field_count, 0L)
-  testthat::expect_equal(returned_object$raw_text, "ERROR: You do not have permissions to use the API")
+  testthat::expect_identical(returned_object$status_code, 403L)
+  testthat::expect_identical(returned_object$field_count, 0L)
+  testthat::expect_identical(returned_object$raw_text, "ERROR: You do not have permissions to use the API")
 })
 
 rm(credential)

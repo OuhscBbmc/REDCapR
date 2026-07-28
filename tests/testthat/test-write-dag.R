@@ -4,7 +4,7 @@ credential_admin    <- retrieve_credential_testing("dag-write", username = "admi
 credential_user     <- retrieve_credential_testing("dag-write", username = "user-dag1")
 url                 <- credential_admin$redcap_uri
 
-testthat::expect_equal(url,  credential_user$redcap_uri)
+testthat::expect_identical(url,  credential_user$redcap_uri)
 
 test_that("Smoke Test", {
   testthat::skip_on_cran()
@@ -44,9 +44,9 @@ test_that("default", {
   if (update_expectation) save_expected(returned_object$data, path_expected_before)
   expected_data_frame <- retrieve_expected(path_expected_before)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object$data$bmi<-NULL; returned_object$data$age<-NULL;dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object$data$bmi<-NULL; returned_object$data$age<-NULL;dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
@@ -74,9 +74,9 @@ test_that("default", {
   if (update_expectation) save_expected(returned_object$data, path_expected_after)
   expected_data_frame <- retrieve_expected(path_expected_after)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object$data$bmi<-NULL; returned_object$data$age<-NULL;dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object$data$bmi<-NULL; returned_object$data$age<-NULL;dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
@@ -103,9 +103,9 @@ test_that("default w/ batching", {
   # Use the same as the non-batched test
   expected_data_frame <- retrieve_expected(path_expected_before)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object$data$bmi<-NULL; returned_object$data$age<-NULL;dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object$data$bmi<-NULL; returned_object$data$age<-NULL;dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
@@ -133,9 +133,9 @@ test_that("default w/ batching", {
   # Use the same as the non-batched test
   expected_data_frame <- retrieve_expected(path_expected_after)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object$data$bmi<-NULL; returned_object$data$age<-NULL;dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) #returned_object$data$bmi<-NULL; returned_object$data$age<-NULL;dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
@@ -164,9 +164,9 @@ test_that("reassign subject to a different dag", {
       export_data_access_groups = TRUE,
       verbose                   = FALSE
     )$data
-  expect_equal(nrow(ds_admin_1), 3L)
-  expect_equal(ds_admin_1$record_id               , c("331-1", "331-2", "332-3"))
-  expect_equal(ds_admin_1$redcap_data_access_group, c("daga", "daga", "dagb"   ))
+  expect_identical(nrow(ds_admin_1), 3L)
+  expect_identical(ds_admin_1$record_id               , c("331-1", "331-2", "332-3"))
+  expect_identical(ds_admin_1$redcap_data_access_group, c("daga", "daga", "dagb"   ))
 
   # Step 2b: Retrieve the dataset as user. Only the first two subjects are visible to DAG-A users initially.
   ds_user_1   <-
@@ -175,8 +175,8 @@ test_that("reassign subject to a different dag", {
       token       = credential_user$token,
       verbose     = FALSE
     )$data
-  expect_equal(nrow(ds_user_1), 2L)
-  expect_equal(ds_user_1$record_id, c("331-1", "331-2"))
+  expect_identical(nrow(ds_user_1), 2L)
+  expect_identical(ds_user_1$record_id, c("331-1", "331-2"))
 
   #Step 3: Reassign the 2nd subject and upload to server
   ds_admin_1$redcap_data_access_group[2] <- "dagb"
@@ -195,10 +195,10 @@ test_that("reassign subject to a different dag", {
       export_data_access_groups = TRUE,
       verbose                   = FALSE
     )$data
-  expect_equal(nrow(ds_admin_2), 3L)
-  expect_equal(ds_admin_2$record_id               , c("331-1", "331-2", "332-3"))
-  # expect_equal(ds_admin_2$record_id               , c("331-1", "332-2", "332-3"))
-  expect_equal(ds_admin_2$redcap_data_access_group, c("daga", "dagb", "dagb"   ))
+  expect_identical(nrow(ds_admin_2), 3L)
+  expect_identical(ds_admin_2$record_id               , c("331-1", "331-2", "332-3"))
+  # expect_identical(ds_admin_2$record_id               , c("331-1", "332-2", "332-3"))
+  expect_identical(ds_admin_2$redcap_data_access_group, c("daga", "dagb", "dagb"   ))
 
   # Step 4b: Retrieve the dataset as user. Now only one subject is visible to DAG-A users.
   ds_user_2   <-
@@ -207,8 +207,8 @@ test_that("reassign subject to a different dag", {
       token       = credential_user$token,
       verbose     = FALSE
     )$data
-  expect_equal(nrow(ds_user_2), 1L)
-  expect_equal(ds_user_2$record_id, c("331-1"))
+  expect_identical(nrow(ds_user_2), 1L)
+  expect_identical(ds_user_2$record_id, "331-1")
 })
 
 rm(update_expectation, credential_admin, credential_user, url)

@@ -29,8 +29,8 @@ test_that("default", {
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected="200")
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected="200")
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
@@ -56,8 +56,8 @@ test_that("batch size 3", {
   # if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected="200; 200")
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected="200; 200")
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
@@ -83,8 +83,8 @@ test_that("batch size 2", {
   # if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected="200; 200; 200")
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected="200; 200; 200")
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
@@ -110,8 +110,8 @@ test_that("batch size 1", {
   # if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected="200; 200; 200; 200; 200")
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected="200; 200; 200; 200; 200")
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")

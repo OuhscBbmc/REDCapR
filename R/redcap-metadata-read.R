@@ -202,6 +202,8 @@ redcap_metadata_read <- function(
 #' \code{list(`element_names[0]` = x[1], `element_names[1]` = x[2], ...)}.
 #'
 #' If `x` is `NULL` then `NULL` is returned.
+
+#' @export
 to_api_array <- function(x, element_names) {
   checkmate::assert_character(x       , null.ok = TRUE, any.missing = FALSE)
   checkmate::assert_character(element_names, null.ok = TRUE, any.missing = FALSE, max.len = 1L, pattern = "^fields|forms$")

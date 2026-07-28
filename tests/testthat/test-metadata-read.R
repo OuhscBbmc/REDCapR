@@ -43,9 +43,9 @@ test_that("normal", {
   expected_data_frame <- retrieve_expected(path_expected)
 
   # datapasta::tribble_paste(returned_object$data)
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_true(returned_object$forms_collapsed=="", "A subset of forms was not requested.")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
@@ -69,10 +69,10 @@ test_that("normal-filter-form-demographics", {
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
-  expect_equal(returned_object$forms_collapsed, "demographics")
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$forms_collapsed, "demographics")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
@@ -95,10 +95,10 @@ test_that("normal-filter-form-health", {
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
-  expect_equal(returned_object$forms_collapsed, "health")
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$forms_collapsed, "health")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
@@ -121,10 +121,10 @@ test_that("normal-filter-form-race_and_ethnicity", {
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
-  expect_equal(returned_object$forms_collapsed, "race_and_ethnicity")
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$forms_collapsed, "race_and_ethnicity")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
@@ -147,10 +147,10 @@ test_that("normal-filter-form-all-three", {
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
-  expect_equal(returned_object$forms_collapsed, "demographics,race_and_ethnicity")
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$forms_collapsed, "demographics,race_and_ethnicity")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
@@ -172,10 +172,10 @@ test_that("normal-filter-form-demographics-and-health-race_and_ethnicity", {
 
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
-  expect_equal(returned_object$forms_collapsed, "demographics,health,race_and_ethnicity")
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$forms_collapsed, "demographics,health,race_and_ethnicity")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
@@ -197,10 +197,10 @@ test_that("normal-filter-form-out-of-order", {
 
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
-  expect_equal(returned_object$forms_collapsed, "race_and_ethnicity,demographics,health")
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$forms_collapsed, "race_and_ethnicity,demographics,health")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
@@ -221,9 +221,9 @@ test_that("super-wide", {
       verbose     = FALSE
     )
 
-  expect_equal(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
-  expect_equal(ncol(returned_object$data), expected=expected_column_count)
-  expect_equal(sum(is.na(returned_object$data)), expected=expected_na_cells)
+  expect_identical(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
+  expect_identical(ncol(returned_object$data), expected=expected_column_count)
+  expect_identical(sum(is.na(returned_object$data)), expected=expected_na_cells)
   expect_s3_class(returned_object$data, "tbl")
 })
 
@@ -241,9 +241,9 @@ test_that("super-wide 2", {
       verbose     = FALSE
     )
 
-  expect_equal(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
-  expect_equal(ncol(returned_object$data), expected=expected_column_count)
-  expect_equal(sum(is.na(returned_object$data)), expected=expected_na_cells)
+  expect_identical(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
+  expect_identical(ncol(returned_object$data), expected=expected_column_count)
+  expect_identical(sum(is.na(returned_object$data)), expected=expected_na_cells)
   expect_s3_class(returned_object$data, "tbl")
 })
 
@@ -261,9 +261,9 @@ test_that("super-wide 3", {
       verbose     = FALSE
     )
 
-  expect_equal(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
-  expect_equal(ncol(returned_object$data), expected=expected_column_count)
-  expect_equal(sum(is.na(returned_object$data)), expected=expected_na_cells)
+  expect_identical(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
+  expect_identical(ncol(returned_object$data), expected=expected_column_count)
+  expect_identical(sum(is.na(returned_object$data)), expected=expected_na_cells)
   expect_s3_class(returned_object$data, "tbl")
 })
 
@@ -283,10 +283,10 @@ test_that("super-wide 3 -subset", {
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
-  expect_equal(returned_object$forms_collapsed, "form_0001,form_0003")
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct") # dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$forms_collapsed, "form_0001,form_0003")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
@@ -307,9 +307,9 @@ test_that("Problematic Dictionary", {
       verbose     = FALSE
     )
 
-  expect_equal(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
-  expect_equal(ncol(returned_object$data), expected=expected_column_count)
-  expect_equal(sum(is.na(returned_object$data)), expected=expected_na_cells)
+  expect_identical(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
+  expect_identical(ncol(returned_object$data), expected=expected_column_count)
+  expect_identical(sum(is.na(returned_object$data)), expected=expected_na_cells)
   expect_s3_class(returned_object$data, "tbl")
 })
 

@@ -35,10 +35,10 @@ test_that("Vanilla", {
   # https://redcap-dev-2.ouhsc.edu/redcap/surveys/?s=EHXE4PNJW8E3MDAE
   expect_match(result$survey_link, "^https://.+?/redcap/surveys/\\?s=\\w+$")
   expect_true(result$success)
-  expect_equal(result$status_code, 200L)
-  expect_equal(result$instrument, "participant_morale_questionnaire")
-  expect_equal(result$records_affected_count, 1L)
-  expect_equal(result$affected_ids, c("1"))
+  expect_identical(result$status_code, 200L)
+  expect_identical(result$instrument, "participant_morale_questionnaire")
+  expect_identical(result$records_affected_count, 1L)
+  expect_identical(result$affected_ids, "1")
 })
 
 test_that("Nonexistent Record ID", {
@@ -55,13 +55,13 @@ test_that("Nonexistent Record ID", {
       verbose        = FALSE
     )
 
-  expect_equal(result$survey_link, character(0))
+  expect_identical(result$survey_link, character(0))
   expect_false(result$success)
-  expect_equal(result$status_code, 400L)
-  expect_equal(result$instrument, "participant_morale_questionnaire")
-  expect_equal(result$records_affected_count, 0L)
-  expect_equal(result$affected_ids, character(0))
-  expect_equal(result$raw_text, "ERROR: The record \"-1\" does not exist")
+  expect_identical(result$status_code, 400L)
+  expect_identical(result$instrument, "participant_morale_questionnaire")
+  expect_identical(result$records_affected_count, 0L)
+  expect_identical(result$affected_ids, character(0))
+  expect_identical(result$raw_text, "ERROR: The record \"-1\" does not exist")
 })
 
 rm(credential, record, instrument)

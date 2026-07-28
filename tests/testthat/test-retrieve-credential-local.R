@@ -27,23 +27,23 @@ test_that("Good Credentials", {
   credential_longitudinal <- retrieve_credential_local(path_credential = path, project_id = pid_longitudinal)  # This project is for testing reading longitudinal projects.
   credential_write        <- retrieve_credential_local(path_credential = path, project_id = pid_write)  # This project is for testing reading & writing.
 
-  expect_equal(credential_read$redcap_uri   , expected_redcap_uri)
-  expect_equal(credential_read$username     , expected_read_username)
-  # expect_equal(credential_read$project_id   , expected_read_project_id)
-  expect_equal(credential_read$token        , expected_read_token)
-  expect_equal(credential_read$comment      , expected_read_comment)
+  expect_identical(credential_read$redcap_uri   , expected_redcap_uri)
+  expect_identical(credential_read$username     , expected_read_username)
+  # expect_identical(credential_read$project_id   , expected_read_project_id)
+  expect_identical(credential_read$token        , expected_read_token)
+  expect_identical(credential_read$comment      , expected_read_comment)
 
-  expect_equal(credential_longitudinal$redcap_uri   , expected_redcap_uri)
-  expect_equal(credential_longitudinal$username     , expected_longitudinal_username)
-  # expect_equal(credential_longitudinal$project_id   , expected_longitudinal_project_id)
-  expect_equal(credential_longitudinal$token        , expected_longitudinal_token)
-  expect_equal(credential_longitudinal$comment      , expected_longitudinal_comment)
+  expect_identical(credential_longitudinal$redcap_uri   , expected_redcap_uri)
+  expect_identical(credential_longitudinal$username     , expected_longitudinal_username)
+  # expect_identical(credential_longitudinal$project_id   , expected_longitudinal_project_id)
+  expect_identical(credential_longitudinal$token        , expected_longitudinal_token)
+  expect_identical(credential_longitudinal$comment      , expected_longitudinal_comment)
 
-  expect_equal(credential_write$redcap_uri   , expected_redcap_uri)
-  expect_equal(credential_write$username     , expected_write_username)
-  # expect_equal(credential_write$project_id   , expected_write_project_id)
-  expect_equal(credential_write$token        , expected_write_token)
-  expect_equal(credential_write$comment      , expected_write_comment)
+  expect_identical(credential_write$redcap_uri   , expected_redcap_uri)
+  expect_identical(credential_write$username     , expected_write_username)
+  # expect_identical(credential_write$project_id   , expected_write_project_id)
+  expect_identical(credential_write$token        , expected_write_token)
+  expect_identical(credential_write$comment      , expected_write_comment)
 })
 test_that("Multiple users", {
   expected_redcap_uri           <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
@@ -60,17 +60,17 @@ test_that("Multiple users", {
   credential_admin  <- retrieve_credential_local(path_credential = path, project_id = pid_dag_write, username = expected_admin_username)                # This project is for testing only reading from the server.
   credential_user   <- retrieve_credential_local(path_credential = path, project_id = pid_dag_write, username = expected_user_username)  # This project is for testing reading longitudinal projects.
 
-  expect_equal(credential_admin$redcap_uri  , expected_redcap_uri)
-  expect_equal(credential_admin$username    , expected_admin_username)
-  # expect_equal(credential_admin$project_id  , expected_admin_project_id)
-  expect_equal(credential_admin$token       , expected_admin_token)
-  expect_equal(credential_admin$comment     , expected_admin_comment)
+  expect_identical(credential_admin$redcap_uri  , expected_redcap_uri)
+  expect_identical(credential_admin$username    , expected_admin_username)
+  # expect_identical(credential_admin$project_id  , expected_admin_project_id)
+  expect_identical(credential_admin$token       , expected_admin_token)
+  expect_identical(credential_admin$comment     , expected_admin_comment)
 
-  expect_equal(credential_user$redcap_uri   , expected_redcap_uri)
-  expect_equal(credential_user$username     , expected_user_username)
-  # expect_equal(credential_user$project_id   , expected_user_project_id)
-  expect_equal(credential_user$token        , expected_user_token)
-  expect_equal(credential_user$comment      , expected_user_comment)
+  expect_identical(credential_user$redcap_uri   , expected_redcap_uri)
+  expect_identical(credential_user$username     , expected_user_username)
+  # expect_identical(credential_user$project_id   , expected_user_project_id)
+  expect_identical(credential_user$token        , expected_user_token)
+  expect_identical(credential_user$comment      , expected_user_comment)
 })
 test_that("Missing file", {
   expected_message <- "Assertion on 'path_credential' failed: File does not exist: 'misc/missing.credentials'."

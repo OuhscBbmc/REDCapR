@@ -39,7 +39,7 @@ test_that("version-unsuccessful-bad-token", {
     )
 
   expected <- package_version("0.0.0")
-  expect_equal(actual, expected)
+  expect_identical(actual, expected)
 })
 
 rm(credential)

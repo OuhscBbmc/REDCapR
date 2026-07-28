@@ -7,6 +7,6 @@ test_that("write serialization preserves large IDs without scientific notation",
   expected  <- "\"record_id\",\"value\"\n99999,\"a\"\n100000,\"b\"\n,\"c\"\n200000,\"d\"\n"
   observed  <- REDCapR:::serialize_csv_for_write(ds)
 
-  expect_equal(observed, expected)
+  expect_identical(observed, expected)
   expect_false(grepl("1e\\+05|2e\\+05", observed))
 })

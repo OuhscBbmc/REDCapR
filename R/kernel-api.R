@@ -54,6 +54,7 @@
 #' as.list(read.csv(text = kernel$raw_text))
 #' }
 
+#' @export
 kernel_api <- function(
   redcap_uri,
   post_body,
@@ -94,7 +95,7 @@ kernel_api <- function(
   )
 
   # Convert all line-endings to linux-style
-  raw_text        <- gsub("\r\n", "\n", raw_text)
+  raw_text        <- gsub("\r\n", "\n", raw_text, fixed = TRUE)
   elapsed_seconds <- as.numeric(difftime(Sys.time(), start_time, units="secs"))
 
   regex_cannot_connect  <- "^The hostname \\((.+)\\) / username \\((.+)\\) / password \\((.+)\\) combination could not connect.+"
@@ -108,7 +109,7 @@ kernel_api <- function(
     success <- FALSE  # nocov
   }
 
-  return(list(
+  list(
     status_code         = status_code,
     success             = success,
     raw_text            = raw_text,
@@ -116,5 +117,5 @@ kernel_api <- function(
     result              = response,
     result_headers      = response$headers,
     regex_empty         = regex_empty
-  ))
+  )
 }

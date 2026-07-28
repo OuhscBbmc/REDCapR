@@ -17,7 +17,7 @@ test_that("Named Captures", {
   choices_1 <- "1, American Indian/Alaska Native | 2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 6, Unknown / Not Reported"
   ds_boxes <- regex_named_captures(pattern=pattern_checkboxes, text=choices_1)
 
-  expect_equal(ds_boxes, expected=ds_expected, label="The returned data.frame should be correct") #dput(ds_boxes)
+  expect_identical(ds_boxes, expected=ds_expected, label="The returned data.frame should be correct") #dput(ds_boxes)
   expect_s3_class(ds_boxes, "tbl")
 })
 
@@ -36,22 +36,22 @@ test_that("checkbox choices -digits", {
   # well-behaved
   "1, American Indian/Alaska Native | -2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 66, Unknown / Not Reported" %>%
     checkbox_choices() %>%
-    expect_equal(ds_expected, label = "well-behaved:")
+    expect_identical(ds_expected, label = "well-behaved:")
 
   # no leading spaces
   "1, American Indian/Alaska Native |-2, Asian |3, Native Hawaiian or Other Pacific Islander |4, Black or African American |5, White |66, Unknown / Not Reported" %>%
     checkbox_choices() %>%
-    expect_equal(ds_expected, label = "no leading spaces:")
+    expect_identical(ds_expected, label = "no leading spaces:")
 
   # no trailing spaces
   "1, American Indian/Alaska Native| -2, Asian| 3, Native Hawaiian or Other Pacific Islander| 4, Black or African American| 5, White| 66, Unknown / Not Reported" %>%
     checkbox_choices() %>%
-    expect_equal(ds_expected, label = "no trailing spaces:")
+    expect_identical(ds_expected, label = "no trailing spaces:")
 
   # extra lines
   "| | 1, American Indian/Alaska Native | | | -2, Asian | 3, Native Hawaiian or Other Pacific Islander | 4, Black or African American | 5, White | 66, Unknown / Not Reported | | | " %>%
     checkbox_choices() %>%
-    expect_equal(ds_expected, label = "extra lines:")
+    expect_identical(ds_expected, label = "extra lines:")
 })
 
 test_that("checkbox choices -letters", {
@@ -69,17 +69,17 @@ test_that("checkbox choices -letters", {
   # well-behaved
   "a, American Indian/Alaska Native | b, Asian | c, Native Hawaiian or Other Pacific Islander | dd, Black or African American | eee, White | f, Unknown / Not Reported" %>%
     checkbox_choices() %>%
-    expect_equal(ds_expected, label = "well-behaved:")
+    expect_identical(ds_expected, label = "well-behaved:")
 
   # no leading spaces
   "a, American Indian/Alaska Native |b, Asian |c, Native Hawaiian or Other Pacific Islander |dd, Black or African American |eee, White |f, Unknown / Not Reported" %>%
     checkbox_choices() %>%
-    expect_equal(ds_expected, label = "no leading spaces:")
+    expect_identical(ds_expected, label = "no leading spaces:")
 
   # no trailing spaces
   "a, American Indian/Alaska Native| b, Asian| c, Native Hawaiian or Other Pacific Islander| dd, Black or African American| eee, White| f, Unknown / Not Reported" %>%
     checkbox_choices() %>%
-    expect_equal(ds_expected, label = "no trailing spaces:")
+    expect_identical(ds_expected, label = "no trailing spaces:")
 })
 
 test_that("checkbox choices -commas in labels", {
@@ -97,17 +97,17 @@ test_that("checkbox choices -commas in labels", {
   # well-behaved
   "a, American Indian, Native American, or Alaska Native | b, Asian | c, Native Hawaiian, Samoan, or Other Pacific Islander | dd, Black or African American | eee, White | f, Unknown / Not Reported" %>%
     checkbox_choices() %>%
-    expect_equal(ds_expected, label = "well-behaved:")
+    expect_identical(ds_expected, label = "well-behaved:")
 
   # no leading spaces
   "a, American Indian, Native American, or Alaska Native |b, Asian |c, Native Hawaiian, Samoan, or Other Pacific Islander |dd, Black or African American |eee, White |f, Unknown / Not Reported" %>%
     checkbox_choices() %>%
-    expect_equal(ds_expected, label = "no leading spaces:")
+    expect_identical(ds_expected, label = "no leading spaces:")
 
   # no trailing spaces
   "a, American Indian, Native American, or Alaska Native| b, Asian| c, Native Hawaiian, Samoan, or Other Pacific Islander| dd, Black or African American| eee, White| f, Unknown / Not Reported" %>%
     checkbox_choices() %>%
-    expect_equal(ds_expected, label = "no trailing spaces:")
+    expect_identical(ds_expected, label = "no trailing spaces:")
 })
 
 test_that("checkbox choices -digits only", {
@@ -123,22 +123,22 @@ test_that("checkbox choices -digits only", {
   # well-behaved
   "1, 1 | 2, 2 | 3, 3 | 4, 4" %>%
     checkbox_choices() %>%
-    expect_equal(ds_expected, label = "well-behaved:")
+    expect_identical(ds_expected, label = "well-behaved:")
 
   # missing leading space
   "1, 1 | 2,2 | 3, 3 | 4, 4" %>%
     checkbox_choices() %>%
-    expect_equal(ds_expected, label = "missing leading space:")
+    expect_identical(ds_expected, label = "missing leading space:")
 
   # missing trailing spaces
   "1, 1 | 2, 2| 3, 3| 4, 4" %>%
     checkbox_choices() %>%
-    expect_equal(ds_expected, label = "no leading spaces:")
+    expect_identical(ds_expected, label = "no leading spaces:")
 
   # extra lines
   "|1, 1 | 2, 2 | 3, 3 || 4, 4| |" %>%
     checkbox_choices() %>%
-    expect_equal(ds_expected, label = "well-behaved:")
+    expect_identical(ds_expected, label = "well-behaved:")
 })
 
 test_that("checkbox choices with special characters", {
@@ -153,7 +153,7 @@ test_that("checkbox choices with special characters", {
 
   "1, Hospital A | 2, Hospitäl B | 3, Hospital Ç | 4, Hospítal D" %>%
     checkbox_choices() %>%
-    expect_equal(ds_expected)
+    expect_identical(ds_expected)
 })
 
 ###############################################################################
@@ -186,5 +186,5 @@ test_that("checkbox choices with errant space", {
 
   "1, Depressive mood disorder | 2, Adjustment disorder| 3, Personality disorder | 4, Anxiety | 0, Not Noted" %>%
     checkbox_choices() %>% # datapasta::tribble_paste()
-    expect_equal(ds_expected)
+    expect_identical(ds_expected)
 })

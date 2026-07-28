@@ -172,7 +172,7 @@ redcap_file_download_oneshot <- function(
   if (kernel$success) {
     result_header <- kernel$result_headers$`content-type`
 
-    if (missing(file_name) || is.null(file_name)) {
+    if (is.null(file_name)) {
       # process the content-type to get the file name
       regex_matches <- regmatches(
         kernel$result_headers,
@@ -186,7 +186,7 @@ redcap_file_download_oneshot <- function(
       )
     }
 
-    file_path <- if (missing(directory) && is.null(directory)) {
+    file_path <- if (is.null(directory)) {
       file_name # Use relative path.
     } else {
       file.path(directory, file_name) # Qualify the file with its full path.

@@ -23,7 +23,7 @@ test_that("Numeric ID", {
       verbose     = FALSE
     )
 
-  expect_equal(observed, expected)
+  expect_identical(observed, expected)
 })
 
 test_that("Arm", {
@@ -39,7 +39,7 @@ test_that("Arm", {
       verbose     = FALSE
     )
 
-  expect_equal(observed, expected)
+  expect_identical(observed, expected)
 })
 
 test_that("Character ID", {
@@ -55,7 +55,7 @@ test_that("Character ID", {
       verbose     = FALSE
     )
 
-  expect_equal(observed, expected)
+  expect_identical(observed, expected)
 })
 
 test_that("DAG", {
@@ -74,7 +74,7 @@ test_that("DAG", {
       verbose     = FALSE
     )
 
-  expect_equal(observed, expected)
+  expect_identical(observed, expected)
 })
 
 test_that("bad token -Error", {
@@ -89,6 +89,6 @@ test_that("bad token -Error", {
       ),
     expected_outcome_message
   )
-  testthat::expect_equal(observed, character(0))
+  testthat::expect_identical(observed, character(0))
 })
 rm(credential)

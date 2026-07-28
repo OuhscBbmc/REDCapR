@@ -37,15 +37,15 @@ test_that("dag-default", {
       verbose     = FALSE
     )
 
-  expect_true(all(!is.na(actual$data$data_access_group_id)))
+  expect_false(anyNA(actual$data$data_access_group_id))
   expect_true(all(0 < actual$data$data_access_group_id))
 
   actual$data$data_access_group_id <- NULL
   # dput(actual$data)
 
   expect_true( actual$success)
-  expect_equal(actual$status_code, 200L)
-  expect_equal(actual$data, expected_data)
+  expect_identical(actual$status_code, 200L)
+  expect_identical(actual$data, expected_data)
   expect_s3_class(actual$data, "tbl")
 })
 
@@ -72,8 +72,8 @@ test_that("no-dag-default", {
     )
 
   expect_true( actual$success)
-  expect_equal(actual$status_code, 200L)
-  expect_equal(actual$data, expected_data)
+  expect_identical(actual$status_code, 200L)
+  expect_identical(actual$data, expected_data)
   expect_s3_class(actual$data, "tbl")
 })
 

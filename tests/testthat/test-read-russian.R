@@ -19,8 +19,8 @@ test_that("Russian Recruit", {
   # Sys.getlocale()
   # Experiment w/ Joe Cheng's answer at https://stackoverflow.com/questions/5031630/how-to-source-r-file-saved-using-utf-8-encoding
 
-  # expect_equal(d$recruitment_other[1], expected_single)
-  # expect_equal(d$recruitment_other, expected_multiple)
+  # expect_identical(d$recruitment_other[1], expected_single)
+  # expect_identical(d$recruitment_other, expected_multiple)
 })
 
 # test_that("Russian Encoded", {
@@ -38,7 +38,7 @@ test_that("Russian Recruit", {
 #   iconv("н", "UTF-8")
 #   iconv("s", "UTF-8")
 #   iconv(d$recruitment_other, "latin1", "ASCII", sub = "byte")
-#   expect_equal(d$recruitment_other, expected)
+#   expect_identical(d$recruitment_other, expected)
 # })
 
 rm(credential)

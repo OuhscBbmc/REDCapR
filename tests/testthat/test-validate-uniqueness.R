@@ -24,7 +24,7 @@ test_that("validate_uniqueness -good -all four", {
   )
 
   ds <- validate_uniqueness(d)
-  expect_equal(nrow(ds), 0)
+  expect_identical(nrow(ds), 0L)
 })
 
 test_that("validate_uniqueness -good -events", {
@@ -41,7 +41,7 @@ test_that("validate_uniqueness -good -events", {
   )
 
   ds <- validate_uniqueness(d)
-  expect_equal(nrow(ds), 0)
+  expect_identical(nrow(ds), 0L)
 })
 
 test_that("validate_uniqueness -good -repeated", {
@@ -62,7 +62,7 @@ test_that("validate_uniqueness -good -repeated", {
   )
 
   ds <- validate_uniqueness(d)
-  expect_equal(nrow(ds), 0)
+  expect_identical(nrow(ds), 0L)
 })
 
 test_that("validate_uniqueness -bad -all four", {
@@ -80,9 +80,9 @@ test_that("validate_uniqueness -bad -all four", {
   )
 
   ds <- validate_uniqueness(d, stop_on_error = FALSE)
-  expect_equal(object = nrow(ds), expected = 1)
-  expect_equal(object = ds$field_name, expected = "record_id, redcap_event_name, redcap_repeat_instrument, redcap_repeat_instance")
-  expect_equal(object = ds$field_index, expected = "1, 2, 3, 4")
+  expect_identical(object = nrow(ds), expected = 1L)
+  expect_identical(object = ds$field_name, expected = "record_id, redcap_event_name, redcap_repeat_instrument, redcap_repeat_instance")
+  expect_identical(object = ds$field_index, expected = "1, 2, 3, 4")
 })
 
 test_that("validate_uniqueness -bad -events", {
@@ -104,7 +104,7 @@ test_that("validate_uniqueness -bad -events", {
   )
 
   ds <- validate_uniqueness(d, stop_on_error = FALSE)
-  expect_equal(object = nrow(ds), expected = 1)
-  expect_equal(object = ds$field_name, expected = "record_id, redcap_event_name")
-  expect_equal(object = ds$field_index, expected = "1, 2")
+  expect_identical(object = nrow(ds), expected = 1L)
+  expect_identical(object = ds$field_name, expected = "record_id, redcap_event_name")
+  expect_identical(object = ds$field_index, expected = "1, 2")
 })

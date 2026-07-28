@@ -49,12 +49,12 @@ test_that("correct dimensions -superwide 1 -oneshot", {
       verbose     = FALSE
     )
 
-  expect_equal(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
-  expect_equal(ncol(returned_object$data), expected=expected_column_count)
-  expect_false(any(is.na(returned_object$data)))
+  expect_identical(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
+  expect_identical(ncol(returned_object$data), expected=expected_column_count)
+  expect_false(anyNA(returned_object$data))
 
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
@@ -76,9 +76,9 @@ test_that("correct dimensions -superwide 1 -batch", {
       verbose     = FALSE
     )
 
-  expect_equal(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
-  expect_equal(ncol(returned_object$data), expected=expected_column_count)
-  expect_false(any(is.na(returned_object$data)))
+  expect_identical(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
+  expect_identical(ncol(returned_object$data), expected=expected_column_count)
+  expect_false(anyNA(returned_object$data))
 
   expect_true(  returned_object$success)
   expect_match( returned_object$status_codes, regexp="200", perl=TRUE)
@@ -106,12 +106,12 @@ test_that("correct dimensions -superwide 1 -batch", {
 #     returned_object <- redcap_read_oneshot(redcap_uri=credential_3$redcap_uri, token=credential_3$token)
 #   )
 #
-#   expect_equal(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
-#   expect_equal(ncol(returned_object$data), expected=expected_column_count)
-#   expect_false(any(is.na(returned_object$data)))
+#   expect_identical(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
+#   expect_identical(ncol(returned_object$data), expected=expected_column_count)
+#   expect_false(anyNA(returned_object$data))
 #
-#   expect_equal(returned_object$status_code, expected=200L)
-#   expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+#   expect_identical(returned_object$status_code, expected=200L)
+#   expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
 #   expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
 #   expect_true(returned_object$fields_collapsed=="", "A subset of fields was not requested.")
 #   expect_true(returned_object$filter_logic=="", "A filter was not specified.")
@@ -130,9 +130,9 @@ test_that("correct dimensions -superwide 1 -batch", {
 #     returned_object <- redcap_read(redcap_uri=credential_3$redcap_uri, token=credential_3$token)
 #   )
 #
-#   expect_equal(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
-#   expect_equal(ncol(returned_object$data), expected=expected_column_count)
-#   expect_false(any(is.na(returned_object$data)))
+#   expect_identical(nrow(returned_object$data), expected=expected_row_count) # dput(returned_object$data)
+#   expect_identical(ncol(returned_object$data), expected=expected_column_count)
+#   expect_false(anyNA(returned_object$data))
 #
 #   expect_true(  returned_object$success)
 #   expect_match( returned_object$status_codes, regexp="200", perl=TRUE)

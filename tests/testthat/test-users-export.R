@@ -44,13 +44,13 @@ test_that("with-dags", {
     )
 
   # Check the group id exists
-  expect_true(!is.na(d_user$data_access_group_id))
+  expect_false(is.na(d_user$data_access_group_id))
 
   # For these two specific servers, check the exact value of the id
   if (credential_1$redcap_uri == "https://redcap-dev-2.ouhsc.edu/redcap/api/") {
-    expect_equal(d_user$data_access_group_id, "20")
+    expect_identical(d_user$data_access_group_id, "20")
   } else if (credential_1$redcap_uri == "https://bbmc.ouhsc.edu/redcap/api/") {
-    expect_equal(d_user$data_access_group_id, "331")
+    expect_identical(d_user$data_access_group_id, "331")
   }
 
   # Drop the ID because it won't match other servers
@@ -71,10 +71,10 @@ test_that("with-dags", {
   expected_data_user      <- retrieve_expected(path_expected_user     )
   expected_data_user_form <- retrieve_expected(path_expected_user_form)
 
-  expect_equal(d_user     , expected=expected_data_user     , label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data_user);
-  expect_equal(d_user_form, expected=expected_data_user_form, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data_user_form)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(d_user     , expected=expected_data_user     , label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data_user);
+  expect_identical(d_user_form, expected=expected_data_user_form, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data_user_form)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 
@@ -112,10 +112,10 @@ test_that("without DAGs", {
   expected_data_user      <- retrieve_expected(path_expected_user     )
   expected_data_user_form <- retrieve_expected(path_expected_user_form)
 
-  expect_equal(d_user     , expected=expected_data_user     , label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data_user);
-  expect_equal(d_user_form, expected=expected_data_user_form, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data_user_form)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(d_user     , expected=expected_data_user     , label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data_user);
+  expect_identical(d_user_form, expected=expected_data_user_form, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data_user_form)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
 
@@ -136,8 +136,8 @@ test_that("bad token -Error", {
   )
 
   testthat::expect_false(returned_object$success)
-  testthat::expect_equal(returned_object$status_code, 403L)
-  testthat::expect_equal(returned_object$raw_text, expected_outcome_message)
+  testthat::expect_identical(returned_object$status_code, 403L)
+  testthat::expect_identical(returned_object$raw_text, expected_outcome_message)
 })
 
 rm(credential_1, credential_2)

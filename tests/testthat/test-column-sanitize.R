@@ -6,7 +6,7 @@ test_that("dry_run", {
   expected <- structure(list(id = as.character(1:26), names = letters),
                         names = c("id", "names"), row.names = c(NA, -26L), class = "data.frame")
   observed <- REDCapR::redcap_column_sanitize(dirty)
-  expect_equal(observed, expected, label="The dry-runsanitized values should be correct.")
+  expect_identical(observed, expected, label="The dry-runsanitized values should be correct.")
 })
 
 test_that("sanitize_last_names", {
@@ -24,9 +24,9 @@ test_that("sanitize_last_names", {
 
   #The different OSes can have subtly different conversions, b/c they're based on different underlying conversion libraries.
   if (Sys.info()["sysname"] == "Windows") {
-    expect_equal(observed, expected_windows, label="The sanitized values should be correct.")
+    expect_identical(observed, expected_windows, label="The sanitized values should be correct.")
   } else if (grepl("^Fedora", sessionInfo()$running)) {
-    expect_equal(observed, expected_fedora, label="The sanitized values should be correct.")
+    expect_identical(observed, expected_fedora, label="The sanitized values should be correct.")
   } else {
     fits_ubuntu <- any(observed == expected_ubuntu_1 | observed == expected_ubuntu_2)
     expect_true(fits_ubuntu, label="One of the possible Ubuntu matches should be correct.")

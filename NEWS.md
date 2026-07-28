@@ -14,6 +14,7 @@
 * New test project that includes both longitudinal events, and repeated measures (#606, needed to test #589)
 * Update deprecated parameters for `base::structure (#605)
 * `validate_for_write()` now accommodates projects with a custom name for `record_id` (#601, #602, @vanbibn)
+* Follows new rules from the goodpractice package released in the past year (#610)
 
 ### Bug fixes
 
@@ -123,8 +124,8 @@ This will help extract forms from longitudinal & repeating projects.
   * `redcap_file_upload_oneshot()` to `redcap_file_upload_oneshot()`
   * `redcap_download_instrument()` to `redcap_instrument_download()`
 
-* `redcap_dag_read()` has new `data_access_group_id` field (introduced maybe in [13.1.0](https://redcap.vanderbilt.edu/community/post.php?id=13)) (#459)
-* `redcap_users_export()` has new `mycap_participants` field (introduced maybe in [13.0.0](https://redcap.vanderbilt.edu/community/post.php?id=13)) (#459)
+* `redcap_dag_read()` has new `data_access_group_id` field (introduced maybe in 13.1.0 (#459)
+* `redcap_users_export()` has new `mycap_participants` field (introduced maybe in 13.0.0 (#459)
 * Accommodate older versions of REDCap that don't return project-level variable, like `has_repeating_instruments_or_events`, `missing_data_codes`, `external_modules`, `bypass_branching_erase_field_prompt` (@the-mad-statter, #465, #466)
 * `redcap_meta_coltypes()` correctly determines data type for autonumber `record_id` fields. It suggests a character if the project has DAGs, and an integer if not. (@pwildenhain, #472)
 * `redcap_log_read()` now returns a new column reflecting the affected record id value (ref #478)
