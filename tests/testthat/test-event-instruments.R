@@ -30,9 +30,9 @@ test_that("1-arm", {
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
   expect_s3_class(returned_object$data, "tbl")
@@ -53,9 +53,9 @@ test_that("2-arms-retrieve-both-arms", {
   if (update_expectation) save_expected(returned_object_explicit$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(   returned_object_explicit$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
-  expect_equal(   returned_object_explicit$status_code, expected=200L)
-  expect_equal(   returned_object_explicit$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(   returned_object_explicit$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_identical(   returned_object_explicit$status_code, expected=200L)
+  expect_identical(   returned_object_explicit$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(   returned_object_explicit$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(    returned_object_explicit$success)
   expect_s3_class(returned_object_explicit$data, "tbl")
@@ -67,9 +67,9 @@ test_that("2-arms-retrieve-both-arms", {
       verbose     = FALSE
     )
 
-  expect_equal(   returned_object_default$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
-  expect_equal(   returned_object_default$status_code, expected=200L)
-  expect_equal(   returned_object_default$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(   returned_object_default$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_identical(   returned_object_default$status_code, expected=200L)
+  expect_identical(   returned_object_default$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(   returned_object_default$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(    returned_object_default$success)
   expect_s3_class(returned_object_default$data, "tbl")
@@ -90,9 +90,9 @@ test_that("2-arms-retrieve-only-arm-1", {
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
   expect_s3_class(returned_object$data, "tbl")
@@ -113,9 +113,9 @@ test_that("2-arms-retrieve-only-arm-2", {
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected=200L)
-  expect_equal(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected=200L)
+  expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_true(returned_object$success)
   expect_s3_class(returned_object$data, "tbl")
@@ -140,7 +140,7 @@ test_that("Bad URI", {
   # )
 
   expect_false(returned_object$success)
-  expect_equal(returned_object$status_code, 403L)
+  expect_identical(returned_object$status_code, 403L)
   expect_match(returned_object$outcome_message, "The REDCapR instrument retrieval was not successful.+")
 })
 test_that("no-arms", {
@@ -160,9 +160,9 @@ test_that("no-arms", {
   if (update_expectation) save_expected(returned_object$data, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
-  expect_equal(returned_object$status_code, expected=400L)
-  expect_equal(returned_object$raw_text, expected="ERROR: You cannot export form/event mappings for classic projects", ignore_attr = TRUE) # dput(returned_object$raw_text)
+  expect_identical(returned_object$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_identical(returned_object$status_code, expected=400L)
+  expect_identical(returned_object$raw_text, expected="ERROR: You cannot export form/event mappings for classic projects", ignore_attr = TRUE) # dput(returned_object$raw_text)
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
   expect_false(returned_object$success)
   expect_s3_class(returned_object$data, "tbl")
@@ -179,8 +179,8 @@ test_that("bad token -Error", {
     )
 
   testthat::expect_false(returned_object$success)
-  testthat::expect_equal(returned_object$status_code, 403L)
-  testthat::expect_equal(returned_object$raw_text, expected_outcome_message)
+  testthat::expect_identical(returned_object$status_code, 403L)
+  testthat::expect_identical(returned_object$raw_text, expected_outcome_message)
 })
 
 rm(credential_longitudinal)
