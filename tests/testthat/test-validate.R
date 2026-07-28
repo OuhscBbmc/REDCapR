@@ -13,12 +13,12 @@ ds_good <- data.frame(
 
 test_that("validate_for_write", {
   ds <- validate_for_write(d=ds_bad)
-  expect_equal(object=nrow(ds), expected=2)
+  expect_identical(object=nrow(ds), expected=2L)
 })
 
 test_that("validate_for_write_no_errors", {
   ds <- validate_for_write(d=ds_good)
-  expect_equal(object=nrow(ds), expected=0)
+  expect_identical(object=nrow(ds), expected=0L)
 })
 
 test_that("validate_for_write_no_errors - convert_logical_to_integer", {
@@ -29,7 +29,7 @@ test_that("validate_for_write_no_errors - convert_logical_to_integer", {
       no_uppercase  = c(4, 6, 8, 2)
     )
   ds <- validate_for_write(d, convert_logical_to_integer = TRUE)
-  expect_equal(object = nrow(ds), expected = 0)
+  expect_identical(object = nrow(ds), expected = 0L)
 })
 
 test_that("validate_for_write_no_errors - record_id_name", {
@@ -39,7 +39,7 @@ test_that("validate_for_write_no_errors - record_id_name", {
     )
 
   ds <- validate_for_write(d, record_id_name = "id")
-  expect_equal(object = nrow(ds), expected = 0)
+  expect_identical(object = nrow(ds), expected = 0L)
 })
 
 test_that("not a data.frame", {
@@ -67,7 +67,7 @@ test_that("not a data.frame", {
 #     )
 #
 #   ds <- validate_repeat_instance(d)
-#   expect_equal(object = nrow(ds), expected = 0)
+#   expect_identical(object = nrow(ds), expected = 0)
 # })
 # test_that("repeat-instance: bad double", {
 #   d <-
@@ -77,15 +77,15 @@ test_that("not a data.frame", {
 #
 #   ds_1 <- validate_repeat_instance(d)
 #
-#   expect_equal(object=nrow(ds_1), expected=1, info="One uppercase field should be flagged")
-#   expect_equal(object=ds_1$field_name, expected="redcap_repeat_instance")
-#   expect_equal(object=ds_1$field_index, expected=3)
+#   expect_identical(object=nrow(ds_1), expected=1, info="One uppercase field should be flagged")
+#   expect_identical(object=ds_1$field_name, expected="redcap_repeat_instance")
+#   expect_identical(object=ds_1$field_index, expected=3)
 #
 #   ds_2 <- validate_for_write(d, convert_logical_to_integer = TRUE)
 #
-#   expect_equal(object=nrow(ds_2), expected=1, info="One uppercase field should be flagged")
-#   expect_equal(object=ds_2$field_name, expected="redcap_repeat_instance")
-#   expect_equal(object=ds_2$field_index, expected=3)
+#   expect_identical(object=nrow(ds_2), expected=1, info="One uppercase field should be flagged")
+#   expect_identical(object=ds_2$field_name, expected="redcap_repeat_instance")
+#   expect_identical(object=ds_2$field_index, expected=3)
 # })
 #
 # test_that("repeat-instance: bad double -stop on error", {
