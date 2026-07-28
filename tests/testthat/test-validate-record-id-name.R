@@ -8,7 +8,7 @@ test_that("validate_record_id_name: default", {
   )
 
   ds <- validate_record_id_name(d1)
-  expect_equal(object = nrow(ds), expected = 0)
+  expect_identical(object = nrow(ds), expected = 0L)
 })
 
 test_that("validate_record_id_name: nondefault", {
@@ -19,7 +19,7 @@ test_that("validate_record_id_name: nondefault", {
   )
 
   ds <- validate_record_id_name(d1, record_id_name = "pt_id")
-  expect_equal(object = nrow(ds), expected = 0)
+  expect_identical(object = nrow(ds), expected = 0L)
 })
 
 
@@ -33,7 +33,7 @@ test_that("validate_repeat_instance -stopping", {
 test_that("validate_repeat_instance -not stopping", {
   ds <- validate_record_id_name(mtcars, stop_on_error = FALSE)
 
-  expect_equal(object=nrow(ds), expected=1)
-  expect_equal(object=ds$field_name, expected="record_id")
+  expect_identical(object=nrow(ds), expected=1L)
+  expect_identical(object=ds$field_name, expected="record_id")
   expect_true(is.na(ds$field_index))
 })
