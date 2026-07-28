@@ -31,10 +31,10 @@ test_that("simple", {
   if (update_expectation) save_expected(actual, path_expected)
   expected <- retrieve_expected(path_expected)
 
-  expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_identical(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_s3_class(actual, "col_spec")
   # Project has dags, so record_id should be a character
-  expect_equal(actual$cols$record_id, readr::col_character())
+  expect_identical(actual$cols$record_id, readr::col_character())
 
   ds <-
     redcap_read_oneshot(
@@ -68,10 +68,10 @@ test_that("longitudinal", {
   if (update_expectation) save_expected(actual, path_expected)
   expected <- retrieve_expected(path_expected)
 
-  expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_identical(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_s3_class(actual, "col_spec")
   # Project does not have auto-numbering enabled, so study_id should be a character
-  expect_equal(actual$cols$study_id, readr::col_character())
+  expect_identical(actual$cols$study_id, readr::col_character())
 
   ds <-
     redcap_read_oneshot(
@@ -105,10 +105,10 @@ test_that("superwide", {
   # if (update_expectation) save_expected(actual, path_expected)
   # expected <- retrieve_expected(path_expected)
   #
-  # expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  # expect_identical(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_s3_class(actual, "col_spec")
   # Project has auto-numbering enabled, and no dags, so record_id should be an integer
-  expect_equal(actual$cols$record_id, readr::col_integer())
+  expect_identical(actual$cols$record_id, readr::col_integer())
 
   ds <-
     redcap_read_oneshot(
@@ -143,7 +143,7 @@ test_that("repeating-instruments", {
   if (update_expectation) save_expected(actual, path_expected)
   expected <- retrieve_expected(path_expected)
 
-  expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_identical(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_s3_class(actual, "col_spec")
 
   ds <-
@@ -178,7 +178,7 @@ test_that("problematic-dictionary", {
   if (update_expectation) save_expected(actual, path_expected)
   expected <- retrieve_expected(path_expected)
 
-  expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_identical(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_s3_class(actual, "col_spec")
 
   # ds <- redcap_read_oneshot(credential$redcap_uri, credential$token)$data
@@ -211,7 +211,7 @@ test_that("validation-types", {
   if (update_expectation) save_expected(actual, path_expected)
   expected <- retrieve_expected(path_expected)
 
-  expect_equal(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
+  expect_identical(actual, expected=expected, label="The returned col_types should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_s3_class(actual, "col_spec")
 
   ds <-
