@@ -13,7 +13,7 @@ ds_good <- data.frame(
 
 test_that("validate_field_names -good", {
   ds <- validate_field_names(ds_good)
-  expect_equal(nrow(ds), 0)
+  expect_identical(nrow(ds), 0L)
 })
 
 test_that("validate_field_names -stop on error", {
@@ -33,11 +33,10 @@ test_that("validate_field_names -uppercase", {
 
 test_that("validate_field_names -concern dataset", {
   ds <- validate_field_names(ds_bad)
-  expect_equal(object=nrow(ds), expected=1, info="One uppercase field should be flagged")
-  expect_equal(object=ds$field_name, expected="bad_Uppercase")
-  expect_equal(object=ds$field_index, expected="3")
+  expect_identical(object=nrow(ds), expected=1L, info="One uppercase field should be flagged")
+  expect_identical(object=ds$field_name, expected="bad_Uppercase")
+  expect_identical(object=ds$field_index, expected="3")
 })
-
 
 test_that("assert_field_names -good", {
   expect_no_condition(
