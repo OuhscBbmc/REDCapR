@@ -412,7 +412,7 @@ expand.
 if (requireNamespace("sessioninfo", quietly = TRUE)) {
   sessioninfo::session_info()
 } else {
-  sessionInfo()
+  utils::sessionInfo()
 }
 ```
 

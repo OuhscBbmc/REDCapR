@@ -58,7 +58,7 @@ test_that("default", {
   expect_true(returned_object$success)
   expect_identical(returned_object$status_code, expected=200L)
   expect_match(returned_object$outcome_message, regexp=expected_message, perl=TRUE)
-  expect_true(returned_object$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
+  expect_gt(returned_object$elapsed_seconds, 0, "The `elapsed_seconds` should be a positive number.")
   expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
 })
 test_that("first-subdirectory", {
@@ -104,7 +104,7 @@ test_that("first-subdirectory", {
   expect_true(returned_object$success)
   expect_identical(returned_object$status_code, expected=200L)
   expect_match(returned_object$outcome_message, regexp=expected_message, perl=TRUE)
-  expect_true(returned_object$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
+  expect_gt(returned_object$elapsed_seconds, 0, "The `elapsed_seconds` should be a positive number.")
   expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
 })
 test_that("bad-folder-id", {
@@ -138,7 +138,7 @@ test_that("bad-folder-id", {
   expect_false(returned_object$success)
   expect_identical(returned_object$status_code, expected=400L)
   expect_match(returned_object$outcome_message, regexp=expected_message, perl=TRUE)
-  expect_true(returned_object$elapsed_seconds>0, "The `elapsed_seconds` should be a positive number.")
+  expect_gt(returned_object$elapsed_seconds, 0, "The `elapsed_seconds` should be a positive number.")
   expect_identical(returned_object$raw_text, expected=expected_message, ignore_attr = TRUE) # dput(returned_object$raw_text)
 })
 test_that("download w/ bad token -Error", {

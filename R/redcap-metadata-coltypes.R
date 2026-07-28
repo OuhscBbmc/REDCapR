@@ -208,7 +208,6 @@ redcap_metadata_coltypes <- function(
 }
 
 #' @importFrom magrittr %>%
-#' @export
 redcap_metadata_internal <- function(
   redcap_uri,
   token,

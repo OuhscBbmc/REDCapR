@@ -158,7 +158,7 @@ redcap_instrument_download <- function(
   if (kernel$success) {
     result_header <- kernel$result_headers$`content-type`
 
-    if (missing(file_name) || is.null(file_name)) {
+    if (is.null(file_name)) {
       file_name <- "instruments.pdf"
     }
 
