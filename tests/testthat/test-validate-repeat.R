@@ -2,7 +2,7 @@ library(testthat)
 
 test_that("validate_repeat_instance: no column", {
   ds <- validate_repeat_instance(mtcars)
-  expect_equal(object = nrow(ds), expected = 0)
+  expect_identical(object = nrow(ds), expected = 0L)
 })
 
 test_that("validate_repeat_instance: good", {
@@ -12,7 +12,7 @@ test_that("validate_repeat_instance: good", {
       redcap_repeat_instance = sample(1:100, size = 32, replace = TRUE)
     )
   ds <- validate_repeat_instance(d)
-  expect_equal(object = nrow(ds), expected = 0)
+  expect_identical(object = nrow(ds), expected = 0L)
 })
 
 test_that("validate_repeat_instance -double", {
@@ -27,7 +27,7 @@ test_that("validate_repeat_instance -double", {
   )
 
   ds <- validate_repeat_instance(d)
-  expect_equal(object=nrow(ds), expected=1)
-  expect_equal(object=ds$field_name, expected="redcap_repeat_instance")
-  expect_equal(object=ds$field_index, expected="1")
+  expect_identical(object=nrow(ds), expected=1L)
+  expect_identical(object=ds$field_name, expected="redcap_repeat_instance")
+  expect_identical(object=ds$field_index, expected="1")
 })
