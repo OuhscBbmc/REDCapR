@@ -160,7 +160,7 @@ For the sake of documentation and reproducibility, the current report was render
 if (requireNamespace("sessioninfo", quietly = TRUE)) {
   sessioninfo::session_info()
 } else {
-  sessionInfo()
+  utils::sessionInfo()
 }
 ```
 </details>
