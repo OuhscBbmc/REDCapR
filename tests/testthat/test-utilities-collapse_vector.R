@@ -5,14 +5,14 @@ test_that("NULL", {
   expected  <- ""
 
   observed  <- REDCapR:::collapse_vector(elements)
-  expect_equal(observed, expected)
+  expect_identical(observed, expected)
 })
 test_that("specified", {
   elements  <- letters
   expected  <- "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z"
 
   observed  <- REDCapR:::collapse_vector(elements)
-  expect_equal(observed, expected)
+  expect_identical(observed, expected)
 })
 
 #' REDCapR:::collapse_vector(elements=NULL, collapsed=NULL)

@@ -4,14 +4,14 @@ test_that("sanitize token w/o line endings", {
   secret_token <- "12345678901234567890123456ABCDEF"
 
   returned <- REDCapR::sanitize_token(secret_token)
-  expect_equal(returned, secret_token)
+  expect_identical(returned, secret_token)
 })
 
 test_that("sanitize token w/ line endings", {
   secret_token <- "12345678901234567890123456ABCDEF\n"
 
   returned <- REDCapR::sanitize_token(secret_token)
-  expect_equal(returned, substr(secret_token, 1L, 32L))
+  expect_identical(returned, substr(secret_token, 1L, 32L))
 })
 
 test_that("sanitize token w/o line endings", {
@@ -46,7 +46,7 @@ test_that("sanitize token - lowercase (#347)", {
 
   returned <- REDCapR::sanitize_token(secret_token)
   # No change
-  expect_equal(returned, secret_token)
+  expect_identical(returned, secret_token)
 })
 
 test_that("sanitize token - env variable -success", {
@@ -57,7 +57,7 @@ test_that("sanitize token - env variable -success", {
   returned <- REDCapR::sanitize_token(secret_token)
 
   # No change
-  expect_equal(returned, secret_token)
+  expect_identical(returned, secret_token)
   Sys.getenv("REDCAP_TOKEN_PATTERN")
 })
 test_that("sanitize token - env variable -bad", {
