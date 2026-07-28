@@ -27,11 +27,11 @@ test_that("One Shot: Bad Uri -wrong address", {
       verbose       = FALSE
     )
 
-  expect_equal(returned_object$data, expected=tibble::tibble(), label="An empty data.frame should be returned.", ignore_attr = TRUE)
-  expect_equal(returned_object$status_code, expected=404L)
-  expect_equal(returned_object$raw_text, expected=expected_message)
-  expect_equal(returned_object$records_collapsed, "")
-  expect_equal(returned_object$fields_collapsed, "")
+  expect_identical(returned_object$data, expected=tibble::tibble(), label="An empty data.frame should be returned.", ignore_attr = TRUE)
+  expect_identical(returned_object$status_code, expected=404L)
+  expect_identical(returned_object$raw_text, expected=expected_message)
+  expect_identical(returned_object$records_collapsed, "")
+  expect_identical(returned_object$fields_collapsed, "")
   expect_false(returned_object$success)
   expect_s3_class(returned_object$data, "tbl")
 })
