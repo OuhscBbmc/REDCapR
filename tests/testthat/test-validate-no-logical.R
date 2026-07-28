@@ -13,7 +13,7 @@ ds_good <- data.frame(
 
 test_that("validate_no_logical -good", {
   ds <- validate_no_logical(ds_good, stop_on_error = TRUE)
-  expect_equal(nrow(ds), 0)
+  expect_identical(nrow(ds), 0L)
 })
 
 test_that("validate_no_logical -stop on error", {
@@ -25,15 +25,15 @@ test_that("validate_no_logical -stop on error", {
 
 test_that("validate_no_logical -concern dataset", {
   ds <- validate_no_logical(ds_bad)
-  expect_equal(object=nrow(ds), expected=1, info="One logical field should be flagged")
-  expect_equal(object=ds$field_name, expected="bad_logical")
-  expect_equal(object=unname(ds$field_index), expected="2")
+  expect_identical(object=nrow(ds), expected=1L, info="One logical field should be flagged")
+  expect_identical(object=ds$field_name, expected="bad_logical")
+  expect_identical(object=unname(ds$field_index), expected="2")
 })
 
 # ---- redcap-repeat-instance --------------------------------------------------
 test_that("repeat-instance: no column", {
   ds <- validate_repeat_instance(mtcars)
-  expect_equal(object = nrow(ds), expected = 0)
+  expect_identical(object = nrow(ds), expected = 0L)
 })
 
 # test_that("repeat-instance: good integer", {
@@ -46,7 +46,7 @@ test_that("repeat-instance: no column", {
 #     )
 #
 #   ds <- validate_repeat_instance(d)
-#   expect_equal(object = nrow(ds), expected = 0)
+#   expect_identical(object = nrow(ds), expected = 0)
 # })
 # test_that("repeat-instance: bad double", {
 #   d <-
@@ -56,15 +56,15 @@ test_that("repeat-instance: no column", {
 #
 #   ds_1 <- validate_repeat_instance(d)
 #
-#   expect_equal(object=nrow(ds_1), expected=1, info="One uppercase field should be flagged")
-#   expect_equal(object=ds_1$field_name, expected="redcap_repeat_instance")
-#   expect_equal(object=ds_1$field_index, expected=3)
+#   expect_identical(object=nrow(ds_1), expected=1, info="One uppercase field should be flagged")
+#   expect_identical(object=ds_1$field_name, expected="redcap_repeat_instance")
+#   expect_identical(object=ds_1$field_index, expected=3)
 #
 #   ds_2 <- validate_for_write(d, convert_logical_to_integer = TRUE)
 #
-#   expect_equal(object=nrow(ds_2), expected=1, info="One uppercase field should be flagged")
-#   expect_equal(object=ds_2$field_name, expected="redcap_repeat_instance")
-#   expect_equal(object=ds_2$field_index, expected=3)
+#   expect_identical(object=nrow(ds_2), expected=1, info="One uppercase field should be flagged")
+#   expect_identical(object=ds_2$field_name, expected="redcap_repeat_instance")
+#   expect_identical(object=ds_2$field_index, expected=3)
 # })
 #
 # test_that("repeat-instance: bad double -stop on error", {
