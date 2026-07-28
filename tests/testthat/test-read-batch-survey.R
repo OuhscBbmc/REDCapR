@@ -43,7 +43,7 @@ test_that("so-example-data-frame-retrieval", {
   if (update_expectation) save_expected(actual, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(actual, expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE)
+  expect_identical(actual, expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE)
   expect_s3_class(actual, "tbl")
 })
 
@@ -73,7 +73,7 @@ test_that("default", {
   if (update_expectation) save_expected(d1, path_expected)
   expected_data_frame <- retrieve_expected(path_expected)
 
-  expect_equal(d1, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object1$data)
+  expect_identical(d1, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object1$data)
   expect_true(returned_object1$success)
   expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object1$records_collapsed=="", "A subset of records was not requested.")
@@ -101,7 +101,7 @@ test_that("default", {
       -prescreening_survey_timestamp
     )
 
-  expect_equal(d2, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
+  expect_identical(d2, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object2$data)
   expect_true(returned_object2$success)
   expect_match(returned_object2$status_codes, regexp="200", perl=TRUE)
   expect_true(returned_object2$records_collapsed=="", "A subset of records was not requested.")
