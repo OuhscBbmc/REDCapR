@@ -114,8 +114,8 @@ test_that("filter-numeric", {
   expect_identical(returned_object1$data, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object1$data)
   expect_true(returned_object1$success)
   expect_match(returned_object1$status_codes, regexp="200", perl=TRUE)
-  expect_idential(returned_object1$records_collapsed, "", "A subset of records was not requested.")
-  expect_idential(returned_object1$fields_collapsed, "", "A subset of fields was not requested.")
+  expect_identical(returned_object1$records_collapsed, "", "A subset of records was not requested.")
+  expect_identical(returned_object1$fields_collapsed, "", "A subset of fields was not requested.")
   expect_identical(returned_object1$filter_logic, filter)
   expect_match(returned_object1$outcome_messages, regexp=expected_outcome_message, perl=TRUE)
 
