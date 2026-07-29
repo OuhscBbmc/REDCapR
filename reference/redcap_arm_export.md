@@ -101,7 +101,7 @@ uri            <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 # Query a classic project with 3 arms
 token_1  <- "14817611F9EA1A6E149BBDC37134E8EA" # arm-multiple-delete
 result_1 <- REDCapR::redcap_arm_export(redcap_uri=uri, token=token_1)
-#> The list of arms was retrieved from the REDCap project in 0.1 seconds. The http status code was 200.
+#> The list of arms was retrieved from the REDCap project in 0.2 seconds. The http status code was 200.
 result_1$has_arms
 #> [1] TRUE
 result_1$data

@@ -247,7 +247,7 @@ ds_intake <-
     token       = credential$token,
     forms       = "intake",
     col_types   = col_types_intake,
-    verbose     = FALSE,
+    verbose     = FALSE
   )$data
 
 ds_intake
@@ -324,7 +324,7 @@ ds_block <-
     redcap_uri  = credential$redcap_uri,
     token       = credential$token,
     col_types   = readr::cols(.default = readr::col_character()),
-    verbose     = FALSE,
+    verbose     = FALSE
   )$data
 
 ds_block
@@ -522,7 +522,7 @@ Environment
     #>  collate  en_US.UTF-8
     #>  ctype    en_US.UTF-8
     #>  tz       UTC
-    #>  date     2026-07-28
+    #>  date     2026-07-29
     #>  pandoc   3.8.3 @ /usr/local/bin/ (via rmarkdown)
     #>  quarto   NA
     #> 
@@ -564,7 +564,7 @@ Environment
     #>  ragg           1.5.2      2026-03-23 [1] CRAN (R 4.6.0)
     #>  RColorBrewer   1.1-3      2022-04-03 [1] CRAN (R 4.6.0)
     #>  readr          2.2.0      2026-02-19 [1] CRAN (R 4.6.0)
-    #>  REDCapR        1.6.0.9002 2026-07-28 [1] local
+    #>  REDCapR        1.6.0.9002 2026-07-29 [1] local
     #>  rlang          1.3.0      2026-07-05 [1] CRAN (R 4.6.1)
     #>  rmarkdown      2.31       2026-03-26 [1] CRAN (R 4.6.0)
     #>  rstudioapi     0.19.0     2026-06-11 [1] CRAN (R 4.6.0)
