@@ -147,7 +147,7 @@ test_that("delete-single-arm", {
       )
   })
 
-  expect_false(any(is.na(returned_object$data$event_id)))
+  expect_false(anyNA(returned_object$data$event_id))
   expect_true(all(0 < returned_object$data$event_id))
 
   returned_object$data$event_id <- NULL
