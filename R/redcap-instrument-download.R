@@ -162,7 +162,7 @@ redcap_instrument_download <- function(
       file_name <- "instruments.pdf"
     }
 
-    file_path <- if (missing(directory) && is.null(directory)) {
+    file_path <- if (is.null(directory)) {
       file_name # Use relative path.
     } else {
       file.path(directory, file_name) # Qualify the file with its full path.
