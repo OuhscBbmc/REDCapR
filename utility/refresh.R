@@ -27,6 +27,8 @@ gp <-
   }()
 goodpractice::results(gp)
 gp
+# goodpractice::gp(checks = "lintr_missing_argument_linter")
+
 # If necessary: tinytex::tlmgr_install("makeindex")
 BiocCheck::BiocCheck()
 # styler::style_pkg()
