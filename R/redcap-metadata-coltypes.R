@@ -257,10 +257,10 @@ redcap_metadata_internal <- function(
   d_inst <-
     d_inst %>%
     dplyr::select(
-      form_name   = "instrument_name",
+      form_name   = "instrument_name"
     ) %>%
     dplyr::mutate(
-      form_order  = seq_len(dplyr::n()),
+      form_order  = seq_len(dplyr::n())
     )
 
   # Dataset that holds the *_complete checkboxes
@@ -270,14 +270,14 @@ redcap_metadata_internal <- function(
       field_name      = paste0(.data$form_name, "_complete"),
       field_name_base = .data$field_name,  # same for *_complete checkboxes
       field_type      = "complete",
-      vt              = NA_character_,
+      vt              = NA_character_
     ) %>%
     dplyr::select(
       "field_name",
       "field_name_base",
       "form_name",
       "field_type",
-      "vt",
+      "vt"
     )
 
   # Dataset that holds longitudinal/repeating variables
@@ -287,7 +287,7 @@ redcap_metadata_internal <- function(
       field_name_base   = character(0),
       form_name         = character(0),
       field_type        = character(0),
-      vt                = character(0),
+      vt                = character(0)
     )
 
   if (d_proj$is_longitudinal[1]) {
@@ -299,7 +299,7 @@ redcap_metadata_internal <- function(
           field_name_base = "redcap_event_name",
           form_name       = "longitudinal/repeating",
           field_type      = "event_name",
-          vt              = NA_character_,
+          vt              = NA_character_
         )
       )
   }
@@ -326,7 +326,7 @@ redcap_metadata_internal <- function(
           field_name_base = c("redcap_repeat_instrument", "redcap_repeat_instance"),
           form_name       = "longitudinal/repeating",
           field_type      = c("repeat_instrument"       , "repeat_instance"),
-          vt              = NA_character_,
+          vt              = NA_character_
         )
       )
   }
@@ -338,25 +338,25 @@ redcap_metadata_internal <- function(
       field_name_base  = "field_name",
       "form_name",
       "field_type",
-      "text_validation_type_or_show_slider_number",
+      "text_validation_type_or_show_slider_number"
     ) %>%
     dplyr::filter(.data$field_type != "descriptive") %>%
     dplyr::left_join(d_var, by = "field_name_base") %>%
     dplyr::mutate(
-      field_name = dplyr::coalesce(.data$field_name, .data$field_name_base),
+      field_name = dplyr::coalesce(.data$field_name, .data$field_name_base)
     ) %>%
     dplyr::select(
       "field_name",
       "field_name_base",
       "form_name",
       "field_type",
-      vt            = "text_validation_type_or_show_slider_number",
+      vt            = "text_validation_type_or_show_slider_number"
     )  %>%
     dplyr::union_all(d_complete) %>%
     dplyr::left_join(d_inst, by = "form_name") %>%
     dplyr::group_by(.data$form_name) %>%
     dplyr::mutate(
-      field_order_within_form  = seq_len(dplyr::n()),
+      field_order_within_form  = seq_len(dplyr::n())
     ) %>%
     dplyr::ungroup() %>%
     dplyr::arrange(.data$form_order,  .data$field_order_within_form) %>%
@@ -375,7 +375,7 @@ redcap_metadata_internal <- function(
     d_meta %>%
     dplyr::mutate(
       dags        = (.dags & (.data$field_name == .record_field)),
-      autonumber  = (.autonumber & (.data$field_name == .record_field)),
+      autonumber  = (.autonumber & (.data$field_name == .record_field))
     ) %>%
     dplyr::mutate(
       response =
@@ -445,7 +445,7 @@ redcap_metadata_internal <- function(
           vt == "time_mm_ss"                                  ~ paste0("col_time(\"%M:%S\")"                  , "~~validation is 'time_mm_ss'"),
           vt == "vmrn"                                        ~ paste0("col_character()"                      , "~~validation is 'vmrn'"),
           vt == "zipcode"                                     ~ paste0("col_character()"                      , "~~validation is 'zipcode'"),
-          TRUE                                                ~ paste0("col_character()"                      , "~~validation doesn't have an associated col_type.  Tell us in a new REDCapR issue. "),
+          TRUE                                                ~ paste0("col_character()"                      , "~~validation doesn't have an associated col_type.  Tell us in a new REDCapR issue. ")
         )
     ) %>%
     dplyr::mutate(
@@ -475,7 +475,7 @@ redcap_metadata_internal <- function(
       # "padding2",
       "aligned",
       "field_name_base",
-      "plumbing",
+      "plumbing"
     )
 
   .plumbing_variables <- intersect(d$field_name, .plumbing_possibles)

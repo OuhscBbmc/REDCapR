@@ -64,7 +64,7 @@ create_batch_glossary <- function(row_count, batch_size) {
         index_pretty          = character(0),
         start_index_pretty    = character(0),
         stop_index_pretty     = character(0),
-        label                 = character(0),
+        label                 = character(0)
       )
     )
   }
