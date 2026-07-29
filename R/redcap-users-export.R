@@ -117,7 +117,7 @@ redcap_users_export <- function(
     lock_records                  = readr::col_logical(),
     lock_records_customization    = readr::col_logical(),
     forms                         = readr::col_character(),
-    forms_export                  = readr::col_character(),  # Added sometime between 10.5.1 and 12.5.2
+    forms_export                  = readr::col_character()   # Added sometime between 10.5.1 and 12.5.2
   )
 
   # This is the important call that communicates with the REDCap server.

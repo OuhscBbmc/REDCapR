@@ -126,7 +126,7 @@ checkbox_choices <- function(select_choices) {
     dplyr::filter(.data$value != "") %>%
     dplyr::transmute(
       id    = sub(pattern, "\\1", .data$value, perl = TRUE),
-      label = sub(pattern, "\\2", .data$value, perl = TRUE),
+      label = sub(pattern, "\\2", .data$value, perl = TRUE)
     )
 
   # pattern_checkboxes <- "(?<=\\A| \\| |\\| )(?<id>\\d{1,}), (?<label>[^|]{1,}?)(?= \\| |\\| |\\Z)"
