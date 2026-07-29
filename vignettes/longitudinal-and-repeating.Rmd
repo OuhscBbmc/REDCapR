@@ -247,7 +247,7 @@ ds_intake <-
     token       = credential$token,
     forms       = "intake",
     col_types   = col_types_intake,
-    verbose     = FALSE,
+    verbose     = FALSE
   )$data
 
 ds_intake
@@ -312,7 +312,7 @@ ds_block <-
     redcap_uri  = credential$redcap_uri,
     token       = credential$token,
     col_types   = readr::cols(.default = readr::col_character()),
-    verbose     = FALSE,
+    verbose     = FALSE
   )$data
 
 ds_block

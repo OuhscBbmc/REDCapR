@@ -72,27 +72,27 @@ test_that("constant_to_access", {
 test_that("constant_to_form_completion-error", {
   expect_error(
     constant_to_form_completion(NULL),
-    "^The value to recode must be a character, integer, or floating point.  It was `NULL`\\.$",
+    "^The value to recode must be a character, integer, or floating point.  It was `NULL`\\.$"
   )
 })
 
 test_that("constant_to_form_rights-error", {
   expect_error(
     constant_to_form_rights(NULL),
-    "^The value to recode must be a character, integer, or floating point.  It was `NULL`\\.$",
+    "^The value to recode must be a character, integer, or floating point.  It was `NULL`\\.$"
   )
 })
 
 test_that("constant_to_export_rights-error", {
   expect_error(
     constant_to_export_rights(NULL),
-    "^The value to recode must be a character, integer, or floating point.  It was `NULL`\\.$",
+    "^The value to recode must be a character, integer, or floating point.  It was `NULL`\\.$"
   )
 })
 
 test_that("constant_to_access-error", {
   expect_error(
     constant_to_access(NULL),
-    "^The value to recode must be a character, integer, or floating point.  It was `NULL`\\.$",
+    "^The value to recode must be a character, integer, or floating point.  It was `NULL`\\.$"
   )
 })

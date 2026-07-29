@@ -20,7 +20,7 @@ test_that("validate_uniqueness -good -all four", {
     2L, "e1", "i1", 1L,
     2L, "e1", "i1", 2L,
     2L, "e1", "i1", 3L,
-    2L, "e1", "i1", 4L,
+    2L, "e1", "i1", 4L
   )
 
   ds <- validate_uniqueness(d)
@@ -37,7 +37,7 @@ test_that("validate_uniqueness -good -events", {
     1L, "e5",
     2L, "e1",
     2L, "e2",
-    2L, "e3",
+    2L, "e3"
   )
 
   ds <- validate_uniqueness(d)
@@ -58,7 +58,7 @@ test_that("validate_uniqueness -good -repeated", {
     2L, "i1", 1L,
     2L, "i1", 2L,
     2L, "i1", 3L,
-    2L, "i1", 4L,
+    2L, "i1", 4L
   )
 
   ds <- validate_uniqueness(d)
@@ -95,7 +95,7 @@ test_that("validate_uniqueness -bad -events", {
     1L, "e5",
     2L, "e1",
     2L, "e2",
-    2L, "e1",
+    2L, "e1"
   )
 
   expect_error(
