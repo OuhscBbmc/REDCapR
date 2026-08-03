@@ -1,14 +1,12 @@
 # These functions are not exported.
 
 populate_project_delete_multiple_arm <- function(verbose = FALSE) {
-  if (!requireNamespace("testthat")) {
-    # nocov start
-    stop(
-      "The function REDCapR:::populate_project_delete_multiple_arm() cannot run if the ",
-      "`testthat` package is not installed.  Please install it and try again."
-    )
-    # nocov end
-  }
+  # nocov start
+  rlang::check_installed(
+    pkg     = "testthat",
+    reason  = "to use `REDCapR::populate_project_delete_multiple_arm()`."
+  )
+  # nocov end
 
   credential  <- retrieve_credential_testing("arm-multiple-delete")
 
@@ -56,14 +54,13 @@ populate_project_delete_multiple_arm <- function(verbose = FALSE) {
 }
 
 clear_project_delete_multiple_arm <- function(verbose = TRUE) {
-  if (!requireNamespace("testthat")) {
-    # nocov start
-    stop(
-      "The function REDCapR:::populate_project_delete_multiple_arm() cannot run if the ",
-      "`testthat` package is not installed.  Please install it and try again."
-    )
-    # nocov end
-  }
+  # nocov start
+  rlang::check_installed(
+    pkg     = "testthat",
+    reason  = "to use `REDCapR::clear_project_delete_multiple_arm()`."
+  )
+  # nocov end
+
   path_delete_test_record <- retrieve_plugins("delete_arm_multiple")
   # "https://redcap-dev-2.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_delete_multiple_arm.php"
 
@@ -84,14 +81,12 @@ clear_project_delete_multiple_arm <- function(verbose = TRUE) {
 clean_start_delete_multiple_arm <- function(delay_in_seconds = 1, verbose = FALSE) {
   checkmate::assert_numeric(delay_in_seconds, any.missing=FALSE, len=1, lower=0)
 
-  if (!requireNamespace("testthat")) {
-    # nocov start
-    stop(
-      "The function REDCapR:::populate_project_delete_multiple_arm() cannot run if the ",
-      "`testthat` package is not installed.  Please install it and try again."
-    )
-    # nocov end
-  }
+  # nocov start
+  rlang::check_installed(
+    pkg     = "testthat",
+    reason  = "to use `REDCapR::clean_start_delete_multiple_arm()`."
+  )
+  # nocov end
 
   clear_result <- clear_project_delete_multiple_arm(verbose = verbose)
   testthat::expect_true(clear_result, "Clearing the results from the delete_multiple_arm project should be successful.")

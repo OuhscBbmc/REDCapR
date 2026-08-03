@@ -3,14 +3,12 @@
 populate_project_simple <- function(batch = FALSE, verbose = TRUE) {
   checkmate::assert_logical(batch, any.missing = FALSE, len = 1)
 
-  if (!requireNamespace("testthat")) {
-    # nocov start
-    stop(
-      "The function REDCapR:::populate_project_simple() cannot run if the ",
-      "`testthat` package is not installed.  Please install it and try again."
-    )
-    # nocov end
-  }
+  # nocov start
+  rlang::check_installed(
+    pkg     = "testthat",
+    reason  = "to use `REDCapR::populate_project_simple()`."
+  )
+  # nocov end
 
   credential  <- retrieve_credential_testing("simple-write")
 
@@ -81,14 +79,13 @@ populate_project_simple <- function(batch = FALSE, verbose = TRUE) {
 }
 
 clear_project_simple <- function(verbose = TRUE) {
-  if (!requireNamespace("testthat")) {
-    # nocov start
-    stop(
-      "The function REDCapR:::populate_project_simple() cannot run if the ",
-      "`testthat` package is not installed.  Please install it and try again."
-    )
-    # nocov end
-  }
+  # nocov start
+  rlang::check_installed(
+    pkg     = "testthat",
+    reason  = "to use `REDCapR::clear_project_simple()`."
+  )
+  # nocov end
+
   path_delete_test_record <- retrieve_plugins("delete_simple")
   # "https://redcap-dev-2.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_simple.php"
 
@@ -110,14 +107,12 @@ clean_start_simple <- function(batch = FALSE, delay_in_seconds = 1, verbose = FA
   checkmate::assert_logical(batch           , any.missing=FALSE, len=1)
   checkmate::assert_numeric(delay_in_seconds, any.missing=FALSE, len=1, lower=0)
 
-  if (!requireNamespace("testthat")) {
-    # nocov start
-    stop(
-      "The function REDCapR:::populate_project_simple() cannot run if the ",
-      "`testthat` package is not installed.  Please install it and try again."
-    )
-    # nocov end
-  }
+  # nocov start
+  rlang::check_installed(
+    pkg     = "testthat",
+    reason  = "to use `REDCapR::clean_start_simple()`."
+  )
+  # nocov end
 
   clear_result <- clear_project_simple(verbose = verbose)
   testthat::expect_true(clear_result, "Clearing the results from the simple project should be successful.")

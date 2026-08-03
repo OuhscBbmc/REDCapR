@@ -3,14 +3,12 @@
 populate_project_dag_write <- function(batch = FALSE, verbose = FALSE) {
   checkmate::assert_logical(batch, any.missing = FALSE, len = 1)
 
-  if (!requireNamespace("testthat")) {
-    # nocov start
-    stop(
-      "The function REDCapR:::populate_project_dag_write() cannot run if the ",
-      "`testthat` package is not installed.  Please install it and try again."
-    )
-    # nocov end
-  }
+  # nocov start
+  rlang::check_installed(
+    pkg     = "testthat",
+    reason  = "to use `REDCapR::populate_project_dag_write()`."
+  )
+  # nocov end
 
   credential  <- retrieve_credential_testing("dag-write", username = "admin")
 
@@ -86,14 +84,12 @@ populate_project_dag_write <- function(batch = FALSE, verbose = FALSE) {
 }
 
 clear_project_dag_write <- function(verbose = FALSE) {
-  if (!requireNamespace("testthat")) {
-    # nocov start
-    stop(
-      "The function REDCapR:::populate_project_dag_write() cannot run if the ",
-      "`testthat` package is not installed.  Please install it and try again."
-    )
-    # nocov end
-  }
+  # nocov start
+  rlang::check_installed(
+    pkg     = "testthat",
+    reason  = "to use `REDCapR::clear_project_dag_write()`."
+  )
+  # nocov end
 
   path_delete_test_record <- retrieve_plugins("delete_dag")
   # "https://redcap-dev-2.ouhsc.edu/redcap/plugins/redcapr/delete_redcapr_dag_write.php"
@@ -122,14 +118,13 @@ clean_start_dag_write <- function(
   checkmate::assert_logical(batch           , any.missing=FALSE, len=1)
   checkmate::assert_numeric(delay_in_seconds, any.missing=FALSE, len=1, lower=0)
 
-  if (!requireNamespace("testthat")) {
-    # nocov start
-    stop(
-      "The function REDCapR:::populate_project_dag_write() cannot run if the ",
-      "`testthat` package is not installed.  Please install it and try again."
-    )
-    # nocov end
-  }
+  # nocov start
+  rlang::check_installed(
+    pkg     = "testthat",
+    reason  = "to use `REDCapR::clean_start_dag_write()`."
+  )
+  # nocov end
+
   # testthat::expect_message(
   clear_result <- clear_project_dag_write(verbose = verbose)
   #   regexp = "clear_project_dag_write success: TRUE."
