@@ -19,14 +19,13 @@ retrieve_credential_testing <- function(
   # This line avoids a warning from the package check.
   projects <- project_id <- instance <- tag <- NULL
 
-  if (!requireNamespace("yaml", quietly = TRUE)) {
-    # nocov start
-    stop(
-      "Package `yaml` must be installed to use this function.",
-      call. = FALSE
-    )
-    # nocov end
-  }
+  # nocov start
+  rlang::check_installed(
+    pkg     = "yaml",
+    reason  = "to use `retrieve_credential_testing()` for package test suite."
+  )
+  # nocov end
+
   d_map <-
     system.file("misc/project-redirection.yml", package = "REDCapR") %>%
     yaml::yaml.load_file(
@@ -83,14 +82,14 @@ retrieve_plugins <- function(plugin_name) {
   # This line avoids a warning from the package check.
   plugins <- instance <- tag <- NULL
 
-  if (!requireNamespace("yaml", quietly = TRUE)) {
-    # nocov start
-    stop(
-      "Package `yaml` must be installed to use this function.",
-      call. = FALSE
-    )
-    # nocov end
-  }
+
+  # nocov start
+  rlang::check_installed(
+    pkg     = "yaml",
+    reason  = "to use `retrieve_credential_testing()` for package test suite."
+  )
+  # nocov end
+
   d_map <-
     system.file("misc/plugin-redirection.yml", package = "REDCapR") %>%
     yaml::yaml.load_file(
