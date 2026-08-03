@@ -160,7 +160,7 @@ REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 #> [1] ""
 #> 
 #> $elapsed_seconds
-#> [1] 0.1647
+#> [1] 0.1504581
 #> 
 #> $raw_text
 #> [1] ""
@@ -190,7 +190,7 @@ REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 #> [1] ""
 #> 
 #> $elapsed_seconds
-#> [1] 0.135783
+#> [1] 0.1132851
 #> 
 #> $raw_text
 #> [1] "{\"error\":\"You do not have permissions to use the API\"}"
@@ -199,7 +199,7 @@ REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 # A repeating measures
 token <- "77842BD8C18D3408819A21DD0154CCF4" # vignette-repeating
 REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
-#> The data dictionary describing 9 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
+#> The data dictionary describing 9 fields was read from REDCap in 0.4 seconds.  The http status code was 200.
 #> $data
 #> # A tibble: 9 × 18
 #>   field_name    form_name      section_header field_type field_label            
@@ -227,7 +227,7 @@ REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 #> [1] 200
 #> 
 #> $outcome_message
-#> [1] "The data dictionary describing 9 fields was read from REDCap in 0.2 seconds.  The http status code was 200."
+#> [1] "The data dictionary describing 9 fields was read from REDCap in 0.4 seconds.  The http status code was 200."
 #> 
 #> $forms_collapsed
 #> [1] ""
@@ -236,7 +236,7 @@ REDCapR::redcap_metadata_read(redcap_uri=uri, token=token)
 #> [1] ""
 #> 
 #> $elapsed_seconds
-#> [1] 0.164849
+#> [1] 0.417701
 #> 
 #> $raw_text
 #> [1] ""
