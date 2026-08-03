@@ -39,6 +39,8 @@
 #' REDCap requires that at least one `record_id` value be passed to
 #' the delete call.
 #'
+#' ## Arm Number
+#'
 #' When the project has arms, REDCapR has stricter requirements than REDCap.
 #' If the REDCap project has arms, a value must be passed to
 #' `arm_of_records_to_delete`.  This is a different behavior than calling
@@ -48,6 +50,14 @@
 #' Note that all longitudinal projects technically have arms, even if
 #' only one arm is defined.  Therefore a value of `arm_number` must be
 #' specified for all longitudinal projects.
+#'
+#' ## Non-existing values
+#'
+#' If a value is passed for `record_id` that does not exist in the project,
+#' the server returns an error and no records are deleted.
+#' See the examples for a demonstration of querying the data first,
+#' then removing any non-existing IDs from the vector, then finally
+#' passing the vector to `redcap_delete()`.
 #'
 #' @author
 #' Jonathan Mang, Will Beasley
@@ -78,6 +88,40 @@
 #'   token                    = token,
 #'   records_to_delete        = records_to_delete,
 #'   arm_of_records_to_delete = arm_number
+#' )
+#' }
+#'
+#' # If there's a chance you'll pass non-existing record_id values,
+#' # consider limiting to those that are returned from a preliminary query.
+#' if (FALSE) {
+#' # Return list of existing records
+#' records_existing <-
+#'   REDCapR::redcap_read_oneshot(
+#'     redcap_uri     = uri,
+#'     token          = token,
+#'     fields         = "record_id",
+#'     verbose        = FALSE
+#'   )$data$record_id
+#'
+#' # Specify IDs to delete (w/ some that don't exist)
+#' records_with_extras <-
+#'   c(
+#'     66,   # Doesn't exist
+#'     102,  # Exists
+#'     103,  # Exists
+#'     166   # Doesn't exist
+#'   )
+#'
+#' # Find the intersection to remove the bad IDs
+#' records_subset <-
+#'   records_existing %>%
+#'   intersect(records_with_extras)
+#'
+#' # Deleting only existing arms:
+#' REDCapR::redcap_delete(
+#'   redcap_uri               = uri,
+#'   token                    = token,
+#'   records_to_delete        = records_subset,
 #' )
 #' }
 
