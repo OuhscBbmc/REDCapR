@@ -43,6 +43,10 @@
   [@vanbibn](https://github.com/vanbibn))
 - Follows new rules from the goodpractice package released in the past
   year ([\#610](https://github.com/OuhscBbmc/REDCapR/issues/610))
+- New example demonstrates removing non-existing `record_id` values
+  before passing to
+  [`redcap_delete()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_delete.md)
+  ([\#567](https://github.com/OuhscBbmc/REDCapR/issues/567))
 
 #### Bug fixes
 

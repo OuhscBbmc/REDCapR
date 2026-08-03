@@ -389,7 +389,7 @@ REDCapR::redcap_read(batch_size=2, redcap_uri=uri, token=token)$data
 #> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2026-07-29 13:08:28.515122.
+#> Starting to read 5 records  at 2026-08-03 13:59:21.713047.
 #> Reading batch 1 of 3, with subjects 1 through 2 (ie, 2 unique subject records).
 #> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> Reading batch 2 of 3, with subjects 3 through 4 (ie, 2 unique subject records).
@@ -431,8 +431,8 @@ REDCapR::redcap_read(
 #> 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 5 records and 1 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2026-07-29 13:08:32.309385.
+#> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> Starting to read 5 records  at 2026-08-03 13:59:25.16569.
 #> Reading batch 1 of 3, with subjects 1 through 2 (ie, 2 unique subject records).
 #> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> Reading batch 2 of 3, with subjects 3 through 4 (ie, 2 unique subject records).
