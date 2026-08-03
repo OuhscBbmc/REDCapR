@@ -15,6 +15,7 @@
 * Update deprecated parameters for `base::structure (#605)
 * `validate_for_write()` now accommodates projects with a custom name for `record_id` (#601, #602, @vanbibn)
 * Follows new rules from the goodpractice package released in the past year (#610)
+* New example demonstrates removing non-existing `record_id` values before passing to `redcap_delete()` (#567)
 
 ### Bug fixes
 
