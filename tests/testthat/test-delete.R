@@ -124,7 +124,7 @@ test_that("no-delete-permissions", {
   )
 })
 
-test_that("Delete records that don't exist", {
+test_that("Delete record that doesn't exist", {
   testthat::skip_on_cran()
   skip_if_onlyread()
   credential  <- retrieve_credential_testing("arm-single-delete")
