@@ -12,6 +12,17 @@
 #' Required.
 #' @param token The user-specific string that serves as the password for a
 #' project.  Required.
+#' @param delimiter A single-character value passed to
+#' the `delim` parameter of [readr::read_delim()].
+#' Options include:
+#' 1. "," (a comma, the default),
+#' 1. ";" (a semi-colon),
+#' 1. "|" (a pipe),
+#' 1. "^" (a caret), or
+#' 1. "tab" (pass "tab", instead of a symbol).
+#'
+#' When "tab" is passed to the REDCapR function,
+#' it is converted to `\t` before passing to [readr::read_delim()].
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  The verbose output might contain
 #' sensitive information (*e.g.* PHI), so turn this off if the output might
@@ -67,6 +78,7 @@
 redcap_variables <- function(
   redcap_uri,
   token,
+  delimiter         = ",",
   verbose           = TRUE,
   config_options    = NULL,
   handle_httr       = NULL
@@ -74,8 +86,10 @@ redcap_variables <- function(
 
   checkmate::assert_character(redcap_uri, any.missing=FALSE, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token     , any.missing=FALSE, len=1, pattern="^.{1,}$")
+  checkmate::assert_character(delimiter , any.missing=FALSE, len=1, pattern = "^(?:,|;|\\||\\^|tab)$")
 
   token   <- sanitize_token(token)
+  delimiter  <- dplyr::if_else(delimiter == "tab", "\t", delimiter)
   verbose <- verbose_prepare(verbose)
 
   post_body <- list(
@@ -112,8 +126,9 @@ redcap_variables <- function(
       {
         # Convert the raw text to a dataset.
         ds <-
-          readr::read_csv(
+          readr::read_delim(
             file            = I(kernel$raw_text),
+            delim           = delimiter,
             show_col_types  = FALSE
           )
       },
