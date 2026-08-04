@@ -266,7 +266,7 @@ test_that("blank-for-gray-status-true", {
   expect_identical(d, expected=expected_data_frame, label="The returned data.frame should be correct", ignore_attr = TRUE) # dput(returned_object$data)
   expect_identical(returned_object$status_code, expected=200L)
   expect_identical(returned_object$raw_text, expected="", ignore_attr = TRUE) # dput(returned_object$raw_text)
-  expect_true(returned_object$records_collapsed=="", "A subset of records was not requested.")
+  expect_identical(returned_object$records_collapsed, "", "A subset of records was not requested.")
   expect_identical(returned_object$fields_collapsed, "", "A subset of fields was not requested.")
   expect_identical(returned_object$filter_logic, "", "A filter was not specified.")
   expect_match(returned_object$outcome_message, regexp=expected_outcome_message, perl=TRUE)
