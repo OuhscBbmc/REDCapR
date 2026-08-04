@@ -3,7 +3,7 @@
 ### New Features
 
 * New `redcap_instrument_repeating()` function exports repeating instrument-event mappings for a project. (#585 & #589, @ezraporter)
-* `redcap_read_oneshot()` accepts a delimiter, to accommodate server instances in locales that use something other than a comma (#570, @mrkskk)
+* `redcap_read()` and `redcap_read_oneshot()` accept a delimiter, to accommodate server instances in locales that use something other than a comma (#570, @mrkskk)
 
 ### Minor Enhancements
 
