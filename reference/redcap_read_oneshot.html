@@ -61,6 +61,7 @@
 <span>  guess_max <span class="op">=</span> <span class="fl">1000</span>,</span>
 <span>  http_response_encoding <span class="op">=</span> <span class="st">"UTF-8"</span>,</span>
 <span>  locale <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/locale.html" class="external-link">default_locale</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  delimiter <span class="op">=</span> <span class="st">","</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  config_options <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  handle_httr <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -200,6 +201,19 @@ specifies the maximum number of records to use for guessing column types.</p></d
 <dd><p>a <code><a href="https://readr.tidyverse.org/reference/locale.html" class="external-link">readr::locale()</a></code> object to specify preferences like
 number, date, and time formats.  This object is passed to
 <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_csv()</a></code>.  Defaults to <code><a href="https://readr.tidyverse.org/reference/locale.html" class="external-link">readr::default_locale()</a></code>.</p></dd>
+
+
+<dt id="arg-delimiter">delimiter<a class="anchor" aria-label="anchor" href="#arg-delimiter"></a></dt>
+<dd><p>A single-character value passed both to the REDCap API
+(the <code>csvDelimiter</code> parameter) and to <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_delim()</a></code>
+(the <code>delim</code> parameter).
+Options include:</p><ol><li><p>"," (a comma, the default),</p></li>
+<li><p>";" (a semi-colon),</p></li>
+<li><p>"|" (a pipe),</p></li>
+<li><p>"^" (a caret), or</p></li>
+<li><p>"tab" (pass "tab", instead of a symbol).</p></li>
+</ol><p>When "tab" is passed to the REDCapR function,
+it is converted to <code>\t</code> before passing to <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_delim()</a></code>.</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>

@@ -27,6 +27,7 @@ redcap_read_oneshot(
   guess_max = 1000,
   http_response_encoding = "UTF-8",
   locale = readr::default_locale(),
+  delimiter = ",",
   verbose = TRUE,
   config_options = NULL,
   handle_httr = NULL
@@ -176,6 +177,27 @@ redcap_read_oneshot(
   [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html).
   Defaults to
   [`readr::default_locale()`](https://readr.tidyverse.org/reference/locale.html).
+
+- delimiter:
+
+  A single-character value passed both to the REDCap API (the
+  `csvDelimiter` parameter) and to
+  [`readr::read_delim()`](https://readr.tidyverse.org/reference/read_delim.html)
+  (the `delim` parameter). Options include:
+
+  1.  "," (a comma, the default),
+
+  2.  ";" (a semi-colon),
+
+  3.  "\|" (a pipe),
+
+  4.  "^" (a caret), or
+
+  5.  "tab" (pass "tab", instead of a symbol).
+
+  When "tab" is passed to the REDCapR function, it is converted to `\t`
+  before passing to
+  [`readr::read_delim()`](https://readr.tidyverse.org/reference/read_delim.html).
 
 - verbose:
 

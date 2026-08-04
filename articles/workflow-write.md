@@ -406,13 +406,13 @@ Environment
     #>  collate  en_US.UTF-8
     #>  ctype    en_US.UTF-8
     #>  tz       UTC
-    #>  date     2026-08-03
+    #>  date     2026-08-04
     #>  pandoc   3.8.3 @ /usr/local/bin/ (via rmarkdown)
     #>  quarto   NA
     #> 
     #> ─ Packages ───────────────────────────────────────────────────────────────────
     #>  package     * version date (UTC) lib source
-    #>  bslib         0.11.0  2026-05-16 [1] CRAN (R 4.6.0)
+    #>  bslib         0.12.0  2026-08-04 [1] CRAN (R 4.6.1)
     #>  cachem        1.1.0   2024-05-16 [1] CRAN (R 4.6.0)
     #>  cli           3.6.6   2026-04-09 [1] CRAN (R 4.6.0)
     #>  desc          1.4.3   2023-12-10 [1] CRAN (R 4.6.0)

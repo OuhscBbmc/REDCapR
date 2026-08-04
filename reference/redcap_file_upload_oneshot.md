@@ -156,7 +156,7 @@ REDCapR::redcap_file_upload_oneshot(
 #> [1] "1"
 #> 
 #> $elapsed_seconds
-#> [1] 0.306169
+#> [1] 0.289454
 #> 
 #> $raw_text
 #> [1] ""

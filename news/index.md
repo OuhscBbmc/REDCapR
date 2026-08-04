@@ -10,6 +10,13 @@
   ([\#585](https://github.com/OuhscBbmc/REDCapR/issues/585) &
   [\#589](https://github.com/OuhscBbmc/REDCapR/issues/589),
   [@ezraporter](https://github.com/ezraporter))
+- [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.md)
+  and
+  [`redcap_read_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read_oneshot.md)
+  accept a delimiter, to accommodate server instances in locales that
+  use something other than a comma
+  ([\#570](https://github.com/OuhscBbmc/REDCapR/issues/570),
+  [@mrkskk](https://github.com/mrkskk))
 
 #### Minor Enhancements
 
