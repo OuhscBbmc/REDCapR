@@ -7,6 +7,7 @@
 redcap_event_read(
   redcap_uri,
   token,
+  delimiter = ",",
   verbose = TRUE,
   config_options = NULL,
   handle_httr = NULL
@@ -21,6 +22,20 @@ Required.}
 
 \item{token}{The user-specific string that serves as the password for a
 project.  Required.}
+
+\item{delimiter}{A single-character value passed to
+the \code{delim} parameter of \code{\link[readr:read_delim]{readr::read_delim()}}.
+Options include:
+\enumerate{
+\item "," (a comma, the default),
+\item ";" (a semi-colon),
+\item "|" (a pipe),
+\item "^" (a caret), or
+\item "tab" (pass "tab", instead of a symbol).
+}
+
+When "tab" is passed to the REDCapR function,
+it is converted to \verb{\\t} before passing to \code{\link[readr:read_delim]{readr::read_delim()}}.}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed
 to the R console during the operation.  The verbose output might contain
