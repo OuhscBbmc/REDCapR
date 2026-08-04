@@ -72,18 +72,18 @@
 #' are recommended in a data export if the data will be re-imported into a
 #' REDCap project. Default is `FALSE`.
 #' @param col_types A [readr::cols()] object passed internally to
-#' [readr::read_csv()].  Optional.
-#' @param na A [character] vector passed internally to [readr::read_csv()].
+#' [readr::read_delim()].  Optional.
+#' @param na A [character] vector passed internally to [readr::read_delim()].
 #' Defaults to `c("", "NA")`.
 #' @param guess_type A boolean value indicating if all columns should be
-#' returned as character.  If true, [readr::read_csv()] guesses the intended
+#' returned as character.  If true, [readr::read_delim()] guesses the intended
 #' data type for each column.  Ignored if `col_types` is not null.
 #' @param guess_max Deprecated.
 #' @param http_response_encoding  The encoding value passed to
 #' [httr::content()].  Defaults to 'UTF-8'.
 #' @param locale a [readr::locale()] object to specify preferences like
 #' number, date, and time formats.  This object is passed to
-#' [readr::read_csv()].  Defaults to [readr::default_locale()].
+#' [readr::read_delim()].  Defaults to [readr::default_locale()].
 #' @param delimiter A single-character value passed both to the REDCap API
 #' (the `csvDelimiter` parameter) and to [readr::read_delim()]
 #' (the `delim` parameter).
