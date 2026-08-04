@@ -84,18 +84,14 @@
 #' @param locale a [readr::locale()] object to specify preferences like
 #' number, date, and time formats.  This object is passed to
 #' [readr::read_delim()].  Defaults to [readr::default_locale()].
-#' @param delimiter A single-character value passed both to the REDCap API
-#' (the `csvDelimiter` parameter) and to [readr::read_delim()]
-#' (the `delim` parameter).
+#' @param delimiter A single-character value passed to
+#' the `delim` parameter of [readr::read_delim()].
 #' Options include:
-#' 1. "," (a comma, the default),
-#' 1. ";" (a semi-colon),
-#' 1. "|" (a pipe),
-#' 1. "^" (a caret), or
-#' 1. "tab" (pass "tab", instead of a symbol).
-#'
-#' When "tab" is passed to the REDCapR function,
-#' it is converted to `\t` before passing to [readr::read_delim()].
+#' 1. `,` (a comma, the default),
+#' 1. `;` (a semi-colon),
+#' 1. `|` (a pipe),
+#' 1. `^` (a caret), or
+#' 1. `\t` (a tab).
 #' @param verbose A boolean value indicating if `message`s should be printed
 #' to the R console during the operation.  The verbose output might contain
 #' sensitive information (*e.g.* PHI), so turn this off if the output might
@@ -315,7 +311,7 @@ redcap_read <- function(
 
   checkmate::assert_character(http_response_encoding    , any.missing=FALSE,     len=1)
   checkmate::assert_class(    locale, "locale"          , null.ok = FALSE)
-  checkmate::assert_character(delimiter                 , any.missing=FALSE,     len=1, pattern = "^(?:,|;|\\||\\^|tab)$")
+  checkmate::assert_character(delimiter                 , any.missing=FALSE, len=1, pattern = "^(?:,|;|\\||\\^|\\t)$")
 
   checkmate::assert_logical(  verbose                   , any.missing=FALSE,     len=1, null.ok=TRUE)
   checkmate::assert_list(     config_options            , any.missing=TRUE ,            null.ok=TRUE)
