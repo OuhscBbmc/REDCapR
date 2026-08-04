@@ -317,8 +317,8 @@ redcap_read_oneshot <- function(
     filterLogic             = filter_logic,
     dateRangeBegin          = datetime_range_begin,
     dateRangeEnd            = datetime_range_end,
-    exportBlankForGrayFormStatus = blank_for_gray_form_status,
-    csvDelimiter            = delimiter
+    exportBlankForGrayFormStatus = blank_for_gray_form_status
+    # csvDelimiter            = delimiter
     # record, fields, forms & events are specified below
   )
 
