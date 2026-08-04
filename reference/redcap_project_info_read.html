@@ -53,6 +53,7 @@ production.  Returns a <code><a href="https://tibble.tidyverse.org/reference/tib
 <span>  <span class="va">token</span>,</span>
 <span>  http_response_encoding <span class="op">=</span> <span class="st">"UTF-8"</span>,</span>
 <span>  locale <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/locale.html" class="external-link">default_locale</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  delimiter <span class="op">=</span> <span class="st">","</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  config_options <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  handle_httr <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -85,6 +86,17 @@ project.  Required.</p></dd>
 <dd><p>a <code><a href="https://readr.tidyverse.org/reference/locale.html" class="external-link">readr::locale()</a></code> object to specify preferences like
 number, date, and time formats.  This object is passed to
 <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_csv()</a></code>.  Defaults to <code><a href="https://readr.tidyverse.org/reference/locale.html" class="external-link">readr::default_locale()</a></code>.</p></dd>
+
+
+<dt id="arg-delimiter">delimiter<a class="anchor" aria-label="anchor" href="#arg-delimiter"></a></dt>
+<dd><p>A single-character value passed to
+the <code>delim</code> parameter of <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_delim()</a></code>.
+Options include:</p><ol><li><p><code>,</code> (a comma, the default),</p></li>
+<li><p><code>;</code> (a semi-colon),</p></li>
+<li><p><code>|</code> (a pipe),</p></li>
+<li><p><code>^</code> (a caret), or</p></li>
+<li><p><code>\t</code> (a tab).</p></li>
+</ol></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>

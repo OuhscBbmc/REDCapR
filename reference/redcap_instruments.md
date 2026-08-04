@@ -14,6 +14,7 @@ method of REDCap API documentation, v.10.5.1)
 redcap_instruments(
   redcap_uri,
   token,
+  delimiter = ",",
   verbose = TRUE,
   config_options = NULL,
   handle_httr = NULL
@@ -33,6 +34,22 @@ redcap_instruments(
 
   The user-specific string that serves as the password for a project.
   Required.
+
+- delimiter:
+
+  A single-character value passed to the `delim` parameter of
+  [`readr::read_delim()`](https://readr.tidyverse.org/reference/read_delim.html).
+  Options include:
+
+  1.  `,` (a comma, the default),
+
+  2.  `;` (a semi-colon),
+
+  3.  `|` (a pipe),
+
+  4.  `^` (a caret), or
+
+  5.  `\t` (a tab).
 
 - verbose:
 

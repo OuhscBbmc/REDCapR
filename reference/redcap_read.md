@@ -164,21 +164,21 @@ redcap_read(
 
   A [`readr::cols()`](https://readr.tidyverse.org/reference/cols.html)
   object passed internally to
-  [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html).
+  [`readr::read_delim()`](https://readr.tidyverse.org/reference/read_delim.html).
   Optional.
 
 - na:
 
   A [character](https://rdrr.io/r/base/character.html) vector passed
   internally to
-  [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html).
+  [`readr::read_delim()`](https://readr.tidyverse.org/reference/read_delim.html).
   Defaults to `c("", "NA")`.
 
 - guess_type:
 
   A boolean value indicating if all columns should be returned as
   character. If true,
-  [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html)
+  [`readr::read_delim()`](https://readr.tidyverse.org/reference/read_delim.html)
   guesses the intended data type for each column. Ignored if `col_types`
   is not null.
 
@@ -198,30 +198,25 @@ redcap_read(
   [`readr::locale()`](https://readr.tidyverse.org/reference/locale.html)
   object to specify preferences like number, date, and time formats.
   This object is passed to
-  [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html).
+  [`readr::read_delim()`](https://readr.tidyverse.org/reference/read_delim.html).
   Defaults to
   [`readr::default_locale()`](https://readr.tidyverse.org/reference/locale.html).
 
 - delimiter:
 
-  A single-character value passed both to the REDCap API (the
-  `csvDelimiter` parameter) and to
-  [`readr::read_delim()`](https://readr.tidyverse.org/reference/read_delim.html)
-  (the `delim` parameter). Options include:
-
-  1.  "," (a comma, the default),
-
-  2.  ";" (a semi-colon),
-
-  3.  "\|" (a pipe),
-
-  4.  "^" (a caret), or
-
-  5.  "tab" (pass "tab", instead of a symbol).
-
-  When "tab" is passed to the REDCapR function, it is converted to `\t`
-  before passing to
+  A single-character value passed to the `delim` parameter of
   [`readr::read_delim()`](https://readr.tidyverse.org/reference/read_delim.html).
+  Options include:
+
+  1.  `,` (a comma, the default),
+
+  2.  `;` (a semi-colon),
+
+  3.  `|` (a pipe),
+
+  4.  `^` (a caret), or
+
+  5.  `\t` (a tab).
 
 - verbose:
 
@@ -405,13 +400,13 @@ token   <- "9A068C425B1341D69E83064A2D273A70"
 
 # Return the entire dataset
 REDCapR::redcap_read(batch_size=2, redcap_uri=uri, token=token)$data
-#> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2026-08-04 13:27:21.779894.
+#> Starting to read 5 records  at 2026-08-04 22:31:55.127169.
 #> Reading batch 1 of 3, with subjects 1 through 2 (ie, 2 unique subject records).
 #> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> Reading batch 2 of 3, with subjects 3 through 4 (ie, 2 unique subject records).
@@ -448,13 +443,13 @@ REDCapR::redcap_read(
   col_types  = col_types,
   batch_size = 2
 )$data
-#> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 2 data access groups were read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2026-08-04 13:27:25.198473.
+#> Starting to read 5 records  at 2026-08-04 22:31:58.285649.
 #> Reading batch 1 of 3, with subjects 1 through 2 (ie, 2 unique subject records).
 #> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> Reading batch 2 of 3, with subjects 3 through 4 (ie, 2 unique subject records).

@@ -8,6 +8,7 @@ This function calls the 'exportFieldNames' function of the REDCap API.
 redcap_variables(
   redcap_uri,
   token,
+  delimiter = ",",
   verbose = TRUE,
   config_options = NULL,
   handle_httr = NULL
@@ -27,6 +28,22 @@ redcap_variables(
 
   The user-specific string that serves as the password for a project.
   Required.
+
+- delimiter:
+
+  A single-character value passed to the `delim` parameter of
+  [`readr::read_delim()`](https://readr.tidyverse.org/reference/read_delim.html).
+  Options include:
+
+  1.  `,` (a comma, the default),
+
+  2.  `;` (a semi-colon),
+
+  3.  `|` (a pipe),
+
+  4.  `^` (a caret), or
+
+  5.  `\t` (a tab).
 
 - verbose:
 
@@ -101,6 +118,6 @@ uri         <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token       <- "9A068C425B1341D69E83064A2D273A70"
 
 ds_variable <- REDCapR::redcap_variables(redcap_uri=uri, token=token)$data
-#> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
 # }
 ```

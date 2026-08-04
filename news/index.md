@@ -10,11 +10,16 @@
   ([\#585](https://github.com/OuhscBbmc/REDCapR/issues/585) &
   [\#589](https://github.com/OuhscBbmc/REDCapR/issues/589),
   [@ezraporter](https://github.com/ezraporter))
-- [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.md)
-  and
-  [`redcap_read_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read_oneshot.md)
-  accept a delimiter, to accommodate server instances in locales that
-  use something other than a comma
+- [`redcap_event_instruments()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_event_instruments.md),
+  [`redcap_event_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_event_read.md),
+  [`redcap_instruments()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_instruments.md),
+  [`redcap_project_info_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_project_info_read.md),
+  [`redcap_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read.md),
+  [`redcap_read_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_read_oneshot.md)and
+  `redcap_variable()` accept a delimiter, to accommodate server
+  instances in locales that use something other than a comma. The
+  delimiter is passed to
+  [`readr::read_delim()`](https://readr.tidyverse.org/reference/read_delim.html)
   ([\#570](https://github.com/OuhscBbmc/REDCapR/issues/570),
   [@mrkskk](https://github.com/mrkskk))
 

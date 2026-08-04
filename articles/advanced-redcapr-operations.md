@@ -58,7 +58,7 @@ events_to_retain  <- c("dose_1_arm_1", "visit_1_arm_1", "dose_2_arm_1", "visit_2
 ds_long <- REDCapR::redcap_read_oneshot(redcap_uri = uri, token = token_longitudinal)$data
 ```
 
-    #> 18 records and 125 columns were read from REDCap in 0.4 seconds.  The http status code was 200.
+    #> 18 records and 125 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
 
 ``` r
 
@@ -430,7 +430,7 @@ Environment
     #>  sass           0.4.10     2025-04-11 [1] CRAN (R 4.6.0)
     #>  scales         1.4.0      2025-04-24 [1] CRAN (R 4.6.0)
     #>  sessioninfo    1.2.4      2026-06-04 [1] CRAN (R 4.6.0)
-    #>  stringi        1.8.7      2025-03-27 [1] CRAN (R 4.6.0)
+    #>  stringi        1.8.9      2026-08-04 [1] CRAN (R 4.6.1)
     #>  stringr        1.6.0      2025-11-04 [1] CRAN (R 4.6.0)
     #>  svglite        2.2.2      2025-10-21 [1] CRAN (R 4.6.0)
     #>  systemfonts    1.3.2      2026-03-05 [1] CRAN (R 4.6.0)
@@ -454,4 +454,4 @@ Environment
     #> 
     #> ──────────────────────────────────────────────────────────────────────────────
 
-Report rendered by runner at 2026-08-04, 13:27 +0000 in 3 seconds.
+Report rendered by runner at 2026-08-04, 22:32 +0000 in 2 seconds.

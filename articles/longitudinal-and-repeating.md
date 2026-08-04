@@ -571,7 +571,7 @@ Environment
     #>  sass           0.4.10     2025-04-11 [1] CRAN (R 4.6.0)
     #>  scales         1.4.0      2025-04-24 [1] CRAN (R 4.6.0)
     #>  sessioninfo    1.2.4      2026-06-04 [1] CRAN (R 4.6.0)
-    #>  stringi        1.8.7      2025-03-27 [1] CRAN (R 4.6.0)
+    #>  stringi        1.8.9      2026-08-04 [1] CRAN (R 4.6.1)
     #>  stringr        1.6.0      2025-11-04 [1] CRAN (R 4.6.0)
     #>  svglite        2.2.2      2025-10-21 [1] CRAN (R 4.6.0)
     #>  systemfonts    1.3.2      2026-03-05 [1] CRAN (R 4.6.0)

@@ -143,29 +143,29 @@ token   <- "F9CBFFF78C3D78F641BAE9623F6B7E6A" # simple-write
 # event <- "" # only for longitudinal projects
 
 (full_name <- base::tempfile(pattern="instruments-all-records-all", fileext = ".pdf"))
-#> [1] "/var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpGcadcU/instruments-all-records-allc3734286c72.pdf"
+#> [1] "/var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpfYCNkZ/instruments-all-records-allbcd7cfcb618.pdf"
 result_1   <- REDCapR::redcap_instrument_download(
   file_name     = full_name,
   redcap_uri    = uri,
   token         = token
 )
-#> Preparing to download the file `/var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpGcadcU/instruments-all-records-allc3734286c72.pdf`.
-#> text/html; charset=UTF-8 successfully downloaded in 0.3 seconds, and saved as /var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpGcadcU/instruments-all-records-allc3734286c72.pdf.
+#> Preparing to download the file `/var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpfYCNkZ/instruments-all-records-allbcd7cfcb618.pdf`.
+#> text/html; charset=UTF-8 successfully downloaded in 0.2 seconds, and saved as /var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpfYCNkZ/instruments-all-records-allbcd7cfcb618.pdf.
 base::unlink(full_name)
 
 (full_name <- base::tempfile(pattern="instruments-all-record-1-", fileext = ".pdf"))
-#> [1] "/var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpGcadcU/instruments-all-record-1-c3749e7cb1e.pdf"
+#> [1] "/var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpfYCNkZ/instruments-all-record-1-bcd331721c3.pdf"
 result_2   <- REDCapR::redcap_instrument_download(
   record        = 5,
   file_name     = full_name,
   redcap_uri    = uri,
   token         = token
 )
-#> Preparing to download the file `/var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpGcadcU/instruments-all-record-1-c3749e7cb1e.pdf`.
-#> text/html; charset=UTF-8 successfully downloaded in 0.3 seconds, and saved as /var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpGcadcU/instruments-all-record-1-c3749e7cb1e.pdf.
+#> Preparing to download the file `/var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpfYCNkZ/instruments-all-record-1-bcd331721c3.pdf`.
+#> text/html; charset=UTF-8 successfully downloaded in 0.3 seconds, and saved as /var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpfYCNkZ/instruments-all-record-1-bcd331721c3.pdf.
 base::unlink(full_name)
 (full_name <- base::tempfile(pattern="instrument-1-record-1-", fileext=".pdf"))
-#> [1] "/var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpGcadcU/instrument-1-record-1-c3710c8447a.pdf"
+#> [1] "/var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpfYCNkZ/instrument-1-record-1-bcd33a9a369.pdf"
 result_3   <- REDCapR::redcap_instrument_download(
   record        = 5,
   instrument    = "health",
@@ -173,8 +173,8 @@ result_3   <- REDCapR::redcap_instrument_download(
   redcap_uri    = uri,
   token         = token
 )
-#> Preparing to download the file `/var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpGcadcU/instrument-1-record-1-c3710c8447a.pdf`.
-#> text/html; charset=UTF-8 successfully downloaded in 0.3 seconds, and saved as /var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpGcadcU/instrument-1-record-1-c3710c8447a.pdf.
+#> Preparing to download the file `/var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpfYCNkZ/instrument-1-record-1-bcd33a9a369.pdf`.
+#> text/html; charset=UTF-8 successfully downloaded in 0.3 seconds, and saved as /var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpfYCNkZ/instrument-1-record-1-bcd33a9a369.pdf.
 base::unlink(full_name)
 # }
 ```

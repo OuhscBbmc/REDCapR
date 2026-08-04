@@ -8,6 +8,7 @@ Export Events of a REDCap project
 redcap_event_read(
   redcap_uri,
   token,
+  delimiter = ",",
   verbose = TRUE,
   config_options = NULL,
   handle_httr = NULL
@@ -27,6 +28,22 @@ redcap_event_read(
 
   The user-specific string that serves as the password for a project.
   Required.
+
+- delimiter:
+
+  A single-character value passed to the `delim` parameter of
+  [`readr::read_delim()`](https://readr.tidyverse.org/reference/read_delim.html).
+  Options include:
+
+  1.  `,` (a comma, the default),
+
+  2.  `;` (a semi-colon),
+
+  3.  `|` (a pipe),
+
+  4.  `^` (a caret), or
+
+  5.  `\t` (a tab).
 
 - verbose:
 
@@ -99,7 +116,7 @@ uri            <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 # Query a longitudinal project with a single arm and 3 events
 token_1  <- "76B4A71A0158BD34C98F10DA72D5F27C" # arm-single-longitudinal
 result_1 <- REDCapR::redcap_event_read(redcap_uri=uri, token=token_1)
-#> The list of events was retrieved from the REDCap project in 0.3 seconds. The http status code was 200.
+#> The list of events was retrieved from the REDCap project in 0.2 seconds. The http status code was 200.
 result_1$data
 #> # A tibble: 3 × 5
 #>   event_name arm_num unique_event_name custom_event_label event_id
@@ -111,7 +128,7 @@ result_1$data
 # Query a longitudinal project with 2 arms and complex arm-event mappings
 token_2  <- "DA6F2BB23146BD5A7EA3408C1A44A556" # longitudinal
 result_2 <- REDCapR::redcap_event_read(redcap_uri=uri, token=token_2)
-#> The list of events was retrieved from the REDCap project in 0.2 seconds. The http status code was 200.
+#> The list of events was retrieved from the REDCap project in 0.1 seconds. The http status code was 200.
 result_2$data
 #> # A tibble: 12 × 5
 #>    event_name              arm_num unique_event_name custom_event_label event_id
@@ -132,7 +149,7 @@ result_2$data
 # Query a classic project without events
 token_3  <- "F9CBFFF78C3D78F641BAE9623F6B7E6A" # simple-write
 result_3 <- REDCapR::redcap_event_read(redcap_uri=uri, token=token_3)
-#> A 'classic' REDCap project has no events.  Retrieved in 0.2 seconds. The http status code was 400.
+#> A 'classic' REDCap project has no events.  Retrieved in 0.1 seconds. The http status code was 400.
 result_3$data
 #> # A tibble: 0 × 5
 #> # ℹ 5 variables: event_name <chr>, arm_num <int>, unique_event_name <chr>,

@@ -14,6 +14,7 @@ redcap_project_info_read(
   token,
   http_response_encoding = "UTF-8",
   locale = readr::default_locale(),
+  delimiter = ",",
   verbose = TRUE,
   config_options = NULL,
   handle_httr = NULL
@@ -49,6 +50,22 @@ redcap_project_info_read(
   [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html).
   Defaults to
   [`readr::default_locale()`](https://readr.tidyverse.org/reference/locale.html).
+
+- delimiter:
+
+  A single-character value passed to the `delim` parameter of
+  [`readr::read_delim()`](https://readr.tidyverse.org/reference/read_delim.html).
+  Options include:
+
+  1.  `,` (a comma, the default),
+
+  2.  `;` (a semi-colon),
+
+  3.  `|` (a pipe),
+
+  4.  `^` (a caret), or
+
+  5.  `\t` (a tab).
 
 - verbose:
 

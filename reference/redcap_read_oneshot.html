@@ -172,23 +172,23 @@ REDCap project. Default is <code>FALSE</code>.</p></dd>
 
 <dt id="arg-col-types">col_types<a class="anchor" aria-label="anchor" href="#arg-col-types"></a></dt>
 <dd><p>A <code><a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">readr::cols()</a></code> object passed internally to
-<code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_csv()</a></code>.  Optional.</p></dd>
+<code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_delim()</a></code>.  Optional.</p></dd>
 
 
 <dt id="arg-na">na<a class="anchor" aria-label="anchor" href="#arg-na"></a></dt>
-<dd><p>A <a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> vector passed internally to <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_csv()</a></code>.
+<dd><p>A <a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> vector passed internally to <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_delim()</a></code>.
 Defaults to <code>c("", "NA")</code>.</p></dd>
 
 
 <dt id="arg-guess-type">guess_type<a class="anchor" aria-label="anchor" href="#arg-guess-type"></a></dt>
 <dd><p>A boolean value indicating if all columns should be
-returned as character.  If true, <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_csv()</a></code> guesses the intended
+returned as character.  If true, <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_delim()</a></code> guesses the intended
 data type for each column.  Ignored if <code>col_types</code> is not null.</p></dd>
 
 
 <dt id="arg-guess-max">guess_max<a class="anchor" aria-label="anchor" href="#arg-guess-max"></a></dt>
 <dd><p>A positive <a href="https://rdrr.io/r/base/numeric.html" class="external-link">base::numeric</a> value
-passed to <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_csv()</a></code> that
+passed to <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_delim()</a></code> that
 specifies the maximum number of records to use for guessing column types.</p></dd>
 
 
@@ -200,20 +200,18 @@ specifies the maximum number of records to use for guessing column types.</p></d
 <dt id="arg-locale">locale<a class="anchor" aria-label="anchor" href="#arg-locale"></a></dt>
 <dd><p>a <code><a href="https://readr.tidyverse.org/reference/locale.html" class="external-link">readr::locale()</a></code> object to specify preferences like
 number, date, and time formats.  This object is passed to
-<code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_csv()</a></code>.  Defaults to <code><a href="https://readr.tidyverse.org/reference/locale.html" class="external-link">readr::default_locale()</a></code>.</p></dd>
+<code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_delim()</a></code>.  Defaults to <code><a href="https://readr.tidyverse.org/reference/locale.html" class="external-link">readr::default_locale()</a></code>.</p></dd>
 
 
 <dt id="arg-delimiter">delimiter<a class="anchor" aria-label="anchor" href="#arg-delimiter"></a></dt>
-<dd><p>A single-character value passed both to the REDCap API
-(the <code>csvDelimiter</code> parameter) and to <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_delim()</a></code>
-(the <code>delim</code> parameter).
-Options include:</p><ol><li><p>"," (a comma, the default),</p></li>
-<li><p>";" (a semi-colon),</p></li>
-<li><p>"|" (a pipe),</p></li>
-<li><p>"^" (a caret), or</p></li>
-<li><p>"tab" (pass "tab", instead of a symbol).</p></li>
-</ol><p>When "tab" is passed to the REDCapR function,
-it is converted to <code>\t</code> before passing to <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_delim()</a></code>.</p></dd>
+<dd><p>A single-character value passed to
+the <code>delim</code> parameter of <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_delim()</a></code>.
+Options include:</p><ol><li><p><code>,</code> (a comma, the default),</p></li>
+<li><p><code>;</code> (a semi-colon),</p></li>
+<li><p><code>|</code> (a pipe),</p></li>
+<li><p><code>^</code> (a caret), or</p></li>
+<li><p><code>\t</code> (a tab).</p></li>
+</ol></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>

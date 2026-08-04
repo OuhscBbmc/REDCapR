@@ -136,21 +136,21 @@ redcap_read_oneshot(
 
   A [`readr::cols()`](https://readr.tidyverse.org/reference/cols.html)
   object passed internally to
-  [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html).
+  [`readr::read_delim()`](https://readr.tidyverse.org/reference/read_delim.html).
   Optional.
 
 - na:
 
   A [character](https://rdrr.io/r/base/character.html) vector passed
   internally to
-  [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html).
+  [`readr::read_delim()`](https://readr.tidyverse.org/reference/read_delim.html).
   Defaults to `c("", "NA")`.
 
 - guess_type:
 
   A boolean value indicating if all columns should be returned as
   character. If true,
-  [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html)
+  [`readr::read_delim()`](https://readr.tidyverse.org/reference/read_delim.html)
   guesses the intended data type for each column. Ignored if `col_types`
   is not null.
 
@@ -158,7 +158,7 @@ redcap_read_oneshot(
 
   A positive [base::numeric](https://rdrr.io/r/base/numeric.html) value
   passed to
-  [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html)
+  [`readr::read_delim()`](https://readr.tidyverse.org/reference/read_delim.html)
   that specifies the maximum number of records to use for guessing
   column types.
 
@@ -174,30 +174,25 @@ redcap_read_oneshot(
   [`readr::locale()`](https://readr.tidyverse.org/reference/locale.html)
   object to specify preferences like number, date, and time formats.
   This object is passed to
-  [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html).
+  [`readr::read_delim()`](https://readr.tidyverse.org/reference/read_delim.html).
   Defaults to
   [`readr::default_locale()`](https://readr.tidyverse.org/reference/locale.html).
 
 - delimiter:
 
-  A single-character value passed both to the REDCap API (the
-  `csvDelimiter` parameter) and to
-  [`readr::read_delim()`](https://readr.tidyverse.org/reference/read_delim.html)
-  (the `delim` parameter). Options include:
-
-  1.  "," (a comma, the default),
-
-  2.  ";" (a semi-colon),
-
-  3.  "\|" (a pipe),
-
-  4.  "^" (a caret), or
-
-  5.  "tab" (pass "tab", instead of a symbol).
-
-  When "tab" is passed to the REDCapR function, it is converted to `\t`
-  before passing to
+  A single-character value passed to the `delim` parameter of
   [`readr::read_delim()`](https://readr.tidyverse.org/reference/read_delim.html).
+  Options include:
+
+  1.  `,` (a comma, the default),
+
+  2.  `;` (a semi-colon),
+
+  3.  `|` (a pipe),
+
+  4.  `^` (a caret), or
+
+  5.  `\t` (a tab).
 
 - verbose:
 
