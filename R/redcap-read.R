@@ -333,6 +333,7 @@ redcap_read <- function(
   metadata <- redcap_metadata_internal(
     redcap_uri         = redcap_uri,
     token              = token,
+    delimiter          = delimiter,
     verbose            = verbose,
     config_options     = config_options,
     handle_httr        = handle_httr
