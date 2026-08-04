@@ -214,6 +214,7 @@ redcap_metadata_internal <- function(
 
   http_response_encoding        = "UTF-8",
   locale                        = readr::default_locale(),
+  delimiter                     = ",",
   verbose                       = FALSE,
   config_options                = NULL,
   handle_httr                   = NULL
@@ -224,6 +225,7 @@ redcap_metadata_internal <- function(
 
   checkmate::assert_character(http_response_encoding    , any.missing=FALSE,     len=1)
   checkmate::assert_class(    locale, "locale"          , null.ok = FALSE)
+  checkmate::assert_character(delimiter                 , any.missing=FALSE, len=1, pattern = "^(?:,|;|\\||\\^|tab)$")
   checkmate::assert_logical(  verbose                   , any.missing=FALSE, len=1, null.ok=TRUE)
   checkmate::assert_list(     config_options            , any.missing=TRUE ,        null.ok=TRUE)
 
@@ -231,11 +233,11 @@ redcap_metadata_internal <- function(
   verbose             <- verbose_prepare(verbose)
 
   # Retrieve the info necessary to infer the likely data types
-  d_var  <- REDCapR::redcap_variables(        redcap_uri, token, verbose = verbose, handle_httr = handle_httr)$data
-  d_meta <- REDCapR::redcap_metadata_read(    redcap_uri, token, verbose = verbose, handle_httr = handle_httr)$data
-  d_inst <- REDCapR::redcap_instruments(      redcap_uri, token, verbose = verbose, handle_httr = handle_httr)$data
-  d_proj <- REDCapR::redcap_project_info_read(redcap_uri, token, verbose = verbose, handle_httr = handle_httr)$data
-  d_dags <- REDCapR::redcap_dag_read(         redcap_uri, token, verbose = verbose, handle_httr = handle_httr)
+  d_var  <- REDCapR::redcap_variables(        redcap_uri, token, delimiter = delimiter, verbose = verbose, handle_httr = handle_httr)$data
+  d_meta <- REDCapR::redcap_metadata_read(    redcap_uri, token                       , verbose = verbose, handle_httr = handle_httr)$data
+  d_inst <- REDCapR::redcap_instruments(      redcap_uri, token, delimiter = delimiter, verbose = verbose, handle_httr = handle_httr)$data
+  d_proj <- REDCapR::redcap_project_info_read(redcap_uri, token, delimiter = delimiter, verbose = verbose, handle_httr = handle_httr)$data
+  d_dags <- REDCapR::redcap_dag_read(         redcap_uri, token                       , verbose = verbose, handle_httr = handle_httr)
 
   # Determine status of autonumbering, instrument complete status, and decimal mark
   .record_field         <- d_var$original_field_name[1] # The first field should always be the "record" identifier.

@@ -3,7 +3,7 @@
 ### New Features
 
 * New `redcap_instrument_repeating()` function exports repeating instrument-event mappings for a project. (#585 & #589, @ezraporter)
-* `redcap_read()` and `redcap_read_oneshot()` accept a delimiter, to accommodate server instances in locales that use something other than a comma (#570, @mrkskk)
+* `redcap_event_instruments()`, `redcap_event_read()`, `redcap_instruments()`, `redcap_project_info_read()`, `redcap_read()`, `redcap_read_oneshot()`and `redcap_variable()` accept a delimiter, to accommodate server instances in locales that use something other than a comma.  The delimiter is passed to `readr::read_delim()` (#570, @mrkskk)
 
 ### Minor Enhancements
 

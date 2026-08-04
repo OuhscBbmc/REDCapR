@@ -8,6 +8,7 @@ redcap_event_instruments(
   redcap_uri,
   token,
   arms = NULL,
+  delimiter = ",",
   verbose = TRUE,
   config_options = NULL,
   handle_httr = NULL
@@ -25,6 +26,17 @@ project.  Required.}
 
 \item{arms}{A character string of arms to retrieve.
 Defaults to all arms of the project.}
+
+\item{delimiter}{A single-character value passed to
+the \code{delim} parameter of \code{\link[readr:read_delim]{readr::read_delim()}}.
+Options include:
+\enumerate{
+\item \verb{,} (a comma, the default),
+\item \verb{;} (a semi-colon),
+\item \code{|} (a pipe),
+\item \code{^} (a caret), or
+\item \verb{\\t} (a tab).
+}}
 
 \item{verbose}{A boolean value indicating if \code{message}s should be printed
 to the R console during the operation.  The verbose output might contain
