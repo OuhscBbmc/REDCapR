@@ -120,7 +120,7 @@ redcap_instruments <- function(
       {
         # Convert the raw text to a dataset.
         ds <-
-          readr::read_csv(
+          readr::read_delim(
             file            = I(kernel$raw_text),
             delim           = delimiter,
             col_types       = col_types
