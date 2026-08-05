@@ -86,7 +86,6 @@ redcap_metadata_write <- function(
   config_options  = NULL,
   handle_httr       = NULL
 ) {
-
   # This prevents the R CHECK NOTE: 'No visible binding for global variable Note in R CMD check';
   # Also see if( getRversion() >= "2.15.1" )    utils::globalVariables(names=c("csv_elements"))
   # https://stackoverflow.com/questions/8096313/; https://stackoverflow.com/questions/9439256

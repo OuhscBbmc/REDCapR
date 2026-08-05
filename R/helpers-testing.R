@@ -124,8 +124,11 @@ save_expected <- function(o, path) {
   # nocov end
 }
 retrieve_expected <- function(path) {
-  full_path   <- system.file(path, package = "REDCapR")
-  if (!file.exists(full_path))
-    stop("The expected file `", full_path, "` was not found.")  # nocov
+  full_path <- system.file(path, package = "REDCapR")
+  # nocov start
+  if (!file.exists(full_path)) {
+    stop("The expected file `", full_path, "` was not found.")
+  }
+  # nocov end
   dget(full_path)
 }

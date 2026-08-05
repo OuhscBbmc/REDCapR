@@ -78,7 +78,6 @@ redcap_next_free_record_name <- function(
   config_options    = NULL,
   handle_httr       = NULL
 ) {
-
   value_error       <- character(0)
 
   checkmate::assert_character(redcap_uri, any.missing=FALSE, len=1, pattern="^.{1,}$")
@@ -118,7 +117,6 @@ redcap_next_free_record_name <- function(
         kernel$status_code,
         value
       )
-
     } else {
       # nocov start
       value          <- value_error

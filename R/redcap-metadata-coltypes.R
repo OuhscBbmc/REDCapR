@@ -165,7 +165,6 @@ redcap_metadata_coltypes <- function(
   config_options                = NULL,
   handle_httr                   = NULL
 ) {
-
   meat <-
     redcap_metadata_internal(
       redcap_uri              = redcap_uri,
@@ -219,7 +218,6 @@ redcap_metadata_internal <- function(
   config_options                = NULL,
   handle_httr                   = NULL
 ) {
-
   checkmate::assert_character(redcap_uri                , any.missing=FALSE, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=FALSE, len=1, pattern="^.{1,}$")
 
@@ -270,7 +268,7 @@ redcap_metadata_internal <- function(
     d_inst %>%
     dplyr::mutate(
       field_name      = paste0(.data$form_name, "_complete"),
-      field_name_base = .data$field_name,  # same for *_complete checkboxes
+      field_name_base = .data$field_name, # same for *_complete checkboxes
       field_type      = "complete",
       vt              = NA_character_
     ) %>%
@@ -376,7 +374,7 @@ redcap_metadata_internal <- function(
   d <-
     d_meta %>%
     dplyr::mutate(
-      dags        = (.dags & (.data$field_name == .record_field)),
+      dags        = (.dags       & (.data$field_name == .record_field)),
       autonumber  = (.autonumber & (.data$field_name == .record_field))
     ) %>%
     dplyr::mutate(

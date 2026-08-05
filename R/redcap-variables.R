@@ -141,7 +141,7 @@ redcap_variables <- function(
         kernel$status_code
       )
 
-      kernel$raw_text   <- ""
+      kernel$raw_text <- ""
       # If an operation is successful, the `raw_text` is no longer returned
       #   to save RAM.  The content is not really necessary with httr's status
       #   message exposed.

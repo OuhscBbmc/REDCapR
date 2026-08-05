@@ -95,7 +95,6 @@ redcap_survey_link_export_oneshot <- function(
   config_options  = NULL,
   handle_httr     = NULL
 ) {
-
   checkmate::assert_character(redcap_uri, any.missing=FALSE, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token     , any.missing=FALSE, len=1, pattern="^.{1,}$")
   record  <- as.character(record)
@@ -131,7 +130,7 @@ redcap_survey_link_export_oneshot <- function(
     if (verbose)
       message("Preparing to export the survey link for the instrument `", instrument, "`.")
 
-    link  <- kernel$raw_text
+    link <- kernel$raw_text
 
     outcome_message <- sprintf(
       "exported the survey link in %0.1f seconds, for instrument `%s`, record `%s`.",
