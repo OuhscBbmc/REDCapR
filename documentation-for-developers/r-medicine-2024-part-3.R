@@ -13,8 +13,8 @@ vignette: >
 #| include = FALSE
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  tidy    = FALSE
+  comment  = "#>",
+  tidy     = FALSE
 )
 ```
 
