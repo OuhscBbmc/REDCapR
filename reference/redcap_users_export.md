@@ -52,6 +52,8 @@ redcap_users_export(
 
 ## Value
 
+Currently, a list is returned with the following elements:
+
 - `data_user`: A
   [`tibble::tibble()`](https://tibble.tidyverse.org/reference/tibble.html)
   of all users associated with the project. One row represents one user.
@@ -94,7 +96,7 @@ uri      <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token    <- "0BF920AAF9566A8E603F528A498A5729" # dag
 
 result   <- REDCapR::redcap_users_export(redcap_uri=uri, token=token)
-#> The REDCap users were successfully exported in 0.1 seconds.  The http status code was 200.
+#> The REDCap users were successfully exported in 0.2 seconds.  The http status code was 200.
 result$data_user
 #> # A tibble: 2 × 35
 #>   username        email          firstname lastname expiration data_access_group

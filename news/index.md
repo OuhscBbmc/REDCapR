@@ -6,10 +6,10 @@
 
 - New
   [`redcap_instrument_repeating()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_instrument_repeating.md)
-  function exports repeating instrument-event mappings for a project.
+  function exports repeating instrument-event mappings for a project
   ([\#585](https://github.com/OuhscBbmc/REDCapR/issues/585) &
   [\#589](https://github.com/OuhscBbmc/REDCapR/issues/589),
-  [@ezraporter](https://github.com/ezraporter))
+  [@ezraporter](https://github.com/ezraporter)).
 - [`redcap_event_instruments()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_event_instruments.md),
   [`redcap_event_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_event_read.md),
   [`redcap_instruments()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_instruments.md),
@@ -21,44 +21,44 @@
   delimiter is passed to
   [`readr::read_delim()`](https://readr.tidyverse.org/reference/read_delim.html)
   ([\#570](https://github.com/OuhscBbmc/REDCapR/issues/570),
-  [@mrkskk](https://github.com/mrkskk))
+  [@mrkskk](https://github.com/mrkskk)).
 
 #### Minor Enhancements
 
 - New columns returned from the server to
   [`redcap_project_info_read()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_project_info_read.md)
-  no longer throw a warning.
-  ([\#587](https://github.com/OuhscBbmc/REDCapR/issues/587))
+  no longer throw a warning
+  ([\#587](https://github.com/OuhscBbmc/REDCapR/issues/587)).
 - [`redcap_file_repo_list_oneshot()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_file_repo_list_oneshot.md)
   function tests for the new `dag` and `role` columns
-  ([\#593](https://github.com/OuhscBbmc/REDCapR/issues/593))
+  ([\#593](https://github.com/OuhscBbmc/REDCapR/issues/593)).
 - [`redcap_write()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_write.md)
   now accommodates single-column data.frames. Previously only
-  single-column tibbles were accommodated.
+  single-column tibbles were accommodated
   ([@brandonerose](https://github.com/brandonerose),
   [\#591](https://github.com/OuhscBbmc/REDCapR/issues/591) &
-  [\#592](https://github.com/OuhscBbmc/REDCapR/issues/592))
+  [\#592](https://github.com/OuhscBbmc/REDCapR/issues/592)).
 - Update urls for REDCap Community
-  ([\#596](https://github.com/OuhscBbmc/REDCapR/issues/596))
+  ([\#596](https://github.com/OuhscBbmc/REDCapR/issues/596)).
 - Simplified token files for other people to test with
-  ([\#594](https://github.com/OuhscBbmc/REDCapR/issues/594))
+  ([\#594](https://github.com/OuhscBbmc/REDCapR/issues/594)).
 - New test project that includes both longitudinal events, and repeated
   measures ([\#606](https://github.com/OuhscBbmc/REDCapR/issues/606),
   needed to test
-  [\#589](https://github.com/OuhscBbmc/REDCapR/issues/589))
+  [\#589](https://github.com/OuhscBbmc/REDCapR/issues/589)).
 - Update deprecated parameters for \`base::structure
-  ([\#605](https://github.com/OuhscBbmc/REDCapR/issues/605))
+  ([\#605](https://github.com/OuhscBbmc/REDCapR/issues/605)).
 - [`validate_for_write()`](https://ouhscbbmc.github.io/REDCapR/reference/validate.md)
   now accommodates projects with a custom name for `record_id`
   ([\#601](https://github.com/OuhscBbmc/REDCapR/issues/601),
   [\#602](https://github.com/OuhscBbmc/REDCapR/issues/602),
-  [@vanbibn](https://github.com/vanbibn))
+  [@vanbibn](https://github.com/vanbibn)).
 - Follows new rules from the goodpractice package released in the past
-  year ([\#610](https://github.com/OuhscBbmc/REDCapR/issues/610))
+  year ([\#610](https://github.com/OuhscBbmc/REDCapR/issues/610)).
 - New example demonstrates removing non-existing `record_id` values
   before passing to
   [`redcap_delete()`](https://ouhscbbmc.github.io/REDCapR/reference/redcap_delete.md)
-  ([\#567](https://github.com/OuhscBbmc/REDCapR/issues/567))
+  ([\#567](https://github.com/OuhscBbmc/REDCapR/issues/567)).
 
 #### Bug fixes
 
@@ -66,7 +66,7 @@
   converted to scientific notation
   ([\#599](https://github.com/OuhscBbmc/REDCapR/issues/599),
   [\#600](https://github.com/OuhscBbmc/REDCapR/issues/600),
-  [@Olawemi5](https://github.com/Olawemi5))
+  [@Olawemi5](https://github.com/Olawemi5)).
 
 ## REDCapR 1.6.0 (released 2025-10-07)
 

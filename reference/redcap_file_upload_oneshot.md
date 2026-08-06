@@ -156,7 +156,7 @@ REDCapR::redcap_file_upload_oneshot(
 #> [1] "1"
 #> 
 #> $elapsed_seconds
-#> [1] 0.270685
+#> [1] 0.3337209
 #> 
 #> $raw_text
 #> [1] ""
@@ -166,7 +166,7 @@ REDCapR::redcap_file_upload_oneshot(
 records    <- 1:5
 file_paths <- system.file(
   paste0("test-data/mugshot-", records, ".jpg"),
-  package="REDCapR"
+  package = "REDCapR"
 )
 
 for (i in seq_along(records)) {
@@ -181,13 +181,13 @@ for (i in seq_along(records)) {
   )
 }
 #> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-1.jpg`.
-#> file uploaded to REDCap in 0.3 seconds.
+#> file uploaded to REDCap in 0.2 seconds.
 #> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-2.jpg`.
 #> file uploaded to REDCap in 0.3 seconds.
 #> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-3.jpg`.
 #> file uploaded to REDCap in 0.3 seconds.
 #> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-4.jpg`.
-#> file uploaded to REDCap in 0.2 seconds.
+#> file uploaded to REDCap in 0.3 seconds.
 #> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-5.jpg`.
 #> file uploaded to REDCap in 0.2 seconds.
 # }

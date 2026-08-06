@@ -141,7 +141,7 @@ value of “33” to `project_id`.
 ``` r
 
 path_credential <- system.file("misc/example.credentials", package = "REDCapR")
-credential  <- REDCapR::retrieve_credential_local(
+credential <- REDCapR::retrieve_credential_local(
   path_credential = path_credential,
   project_id      = 33
 )
@@ -195,13 +195,13 @@ ds_1 <-
     redcap_uri  = credential$redcap_uri,
     token       = credential$token
   )$data
-#> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
-#> 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
-#> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 24 variable metadata records were read from REDCap in 0.3 seconds.  The http status code was 200.
+#> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2026-08-04 22:32:47.044753.
+#> Starting to read 5 records  at 2026-08-06 14:43:42.949912.
 #> Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
 #> 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 ```
@@ -584,7 +584,7 @@ Environment
     #>  collate  en_US.UTF-8
     #>  ctype    en_US.UTF-8
     #>  tz       UTC
-    #>  date     2026-08-04
+    #>  date     2026-08-06
     #>  pandoc   3.8.3 @ /usr/local/bin/ (via rmarkdown)
     #>  quarto   NA
     #> 
@@ -622,7 +622,7 @@ Environment
     #>  R6            2.6.1      2025-02-15 [1] CRAN (R 4.6.0)
     #>  ragg          1.5.2      2026-03-23 [1] CRAN (R 4.6.0)
     #>  readr         2.2.0      2026-02-19 [1] CRAN (R 4.6.0)
-    #>  REDCapR       1.6.0.9002 2026-08-04 [1] local
+    #>  REDCapR       1.6.0.9002 2026-08-06 [1] local
     #>  rlang         1.3.0      2026-07-05 [1] CRAN (R 4.6.1)
     #>  rmarkdown     2.31       2026-03-26 [1] CRAN (R 4.6.0)
     #>  sass          0.4.10     2025-04-11 [1] CRAN (R 4.6.0)

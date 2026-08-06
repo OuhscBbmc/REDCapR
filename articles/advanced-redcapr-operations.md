@@ -24,7 +24,7 @@ secured csv and retrieving with
 
 ``` r
 
-library(REDCapR) #Load the package into the current R session.
+library(REDCapR) # Load the package into the current R session.
 uri                   <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token_simple          <- "9A068C425B1341D69E83064A2D273A70"
 token_longitudinal    <- "DA6F2BB23146BD5A7EA3408C1A44A556"
@@ -53,12 +53,12 @@ REDCap.
 library(magrittr)
 suppressPackageStartupMessages(requireNamespace("dplyr"))
 suppressPackageStartupMessages(requireNamespace("tidyr"))
-events_to_retain  <- c("dose_1_arm_1", "visit_1_arm_1", "dose_2_arm_1", "visit_2_arm_1")
+events_to_retain <- c("dose_1_arm_1", "visit_1_arm_1", "dose_2_arm_1", "visit_2_arm_1")
 
 ds_long <- REDCapR::redcap_read_oneshot(redcap_uri = uri, token = token_longitudinal)$data
 ```
 
-    #> 18 records and 125 columns were read from REDCap in 0.3 seconds.  The http status code was 200.
+    #> 18 records and 125 columns were read from REDCap in 0.4 seconds.  The http status code was 200.
 
 ``` r
 
@@ -177,8 +177,8 @@ ds_eav <-
   # For old versions of tidyr that predate `pivot_wider()`:
   # tidyr::gather(key=key, value=value, pmq1, pmq2, pmq3, pmq4) %>%
   dplyr::filter(!(event %in% c(
-    "enrollment", "final_visit", "deadline_to_return", "deadline_to_opt_ou")
-  )) %>%
+    "enrollment", "final_visit", "deadline_to_return", "deadline_to_opt_ou"
+  ))) %>%
   dplyr::mutate( # Simulate correcting for mismatched names across arms:
     key = paste0(key, "_", event)
   ) %>%
@@ -381,7 +381,7 @@ Environment
     #>  collate  en_US.UTF-8
     #>  ctype    en_US.UTF-8
     #>  tz       UTC
-    #>  date     2026-08-04
+    #>  date     2026-08-06
     #>  pandoc   3.8.3 @ /usr/local/bin/ (via rmarkdown)
     #>  quarto   NA
     #> 
@@ -423,7 +423,7 @@ Environment
     #>  ragg           1.5.2      2026-03-23 [1] CRAN (R 4.6.0)
     #>  RColorBrewer   1.1-3      2022-04-03 [1] CRAN (R 4.6.0)
     #>  readr          2.2.0      2026-02-19 [1] CRAN (R 4.6.0)
-    #>  REDCapR      * 1.6.0.9002 2026-08-04 [1] local
+    #>  REDCapR      * 1.6.0.9002 2026-08-06 [1] local
     #>  rlang          1.3.0      2026-07-05 [1] CRAN (R 4.6.1)
     #>  rmarkdown      2.31       2026-03-26 [1] CRAN (R 4.6.0)
     #>  rstudioapi     0.19.0     2026-06-11 [1] CRAN (R 4.6.0)
@@ -454,4 +454,4 @@ Environment
     #> 
     #> ──────────────────────────────────────────────────────────────────────────────
 
-Report rendered by runner at 2026-08-04, 22:32 +0000 in 2 seconds.
+Report rendered by runner at 2026-08-06, 14:43 +0000 in 3 seconds.

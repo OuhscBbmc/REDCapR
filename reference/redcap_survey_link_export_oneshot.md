@@ -133,7 +133,7 @@ result <- REDCapR::redcap_survey_link_export_oneshot(
   token          = token
 )
 #> Preparing to export the survey link for the instrument `participant_morale_questionnaire`.
-#> exported the survey link in 0.1 seconds, for instrument `participant_morale_questionnaire`, record `1`.
+#> exported the survey link in 0.2 seconds, for instrument `participant_morale_questionnaire`, record `1`.
 result$survey_link
 #> [1] "https://redcap-dev-2.ouhsc.edu/redcap/surveys/?s=wrz55jpDyXYBuw73"
 # }

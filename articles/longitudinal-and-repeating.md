@@ -212,7 +212,7 @@ library(magrittr)
 
 # Retrieve token
 path_credential <- system.file("misc/example.credentials", package = "REDCapR")
-credential  <- REDCapR::retrieve_credential_local(
+credential <- REDCapR::retrieve_credential_local(
   path_credential = path_credential,
   project_id      = 62
 )
@@ -287,7 +287,7 @@ ds_blood_pressure %>%
 ``` r
 
 
-col_types_laboratory  <-
+col_types_laboratory <-
   readr::cols(
     record_id                 = readr::col_integer(),
     redcap_repeat_instrument  = readr::col_character(),
@@ -297,7 +297,7 @@ col_types_laboratory  <-
     laboratory_complete       = readr::col_integer()
   )
 
-ds_laboratory  <-
+ds_laboratory <-
   REDCapR::redcap_read(
     redcap_uri  = credential$redcap_uri,
     token       = credential$token,
@@ -522,7 +522,7 @@ Environment
     #>  collate  en_US.UTF-8
     #>  ctype    en_US.UTF-8
     #>  tz       UTC
-    #>  date     2026-08-04
+    #>  date     2026-08-06
     #>  pandoc   3.8.3 @ /usr/local/bin/ (via rmarkdown)
     #>  quarto   NA
     #> 
@@ -564,7 +564,7 @@ Environment
     #>  ragg           1.5.2      2026-03-23 [1] CRAN (R 4.6.0)
     #>  RColorBrewer   1.1-3      2022-04-03 [1] CRAN (R 4.6.0)
     #>  readr          2.2.0      2026-02-19 [1] CRAN (R 4.6.0)
-    #>  REDCapR        1.6.0.9002 2026-08-04 [1] local
+    #>  REDCapR        1.6.0.9002 2026-08-06 [1] local
     #>  rlang          1.3.0      2026-07-05 [1] CRAN (R 4.6.1)
     #>  rmarkdown      2.31       2026-03-26 [1] CRAN (R 4.6.0)
     #>  rstudioapi     0.19.0     2026-06-11 [1] CRAN (R 4.6.0)

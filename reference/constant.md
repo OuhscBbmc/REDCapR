@@ -21,6 +21,8 @@ be expanded in the future.
 
 ## Details
 
+Constants have the following groupings.
+
 **Form Completeness**
 
 The current constants relate to the 'complete' variable at the end of
