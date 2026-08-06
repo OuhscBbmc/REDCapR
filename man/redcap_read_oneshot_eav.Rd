@@ -161,9 +161,9 @@ ds_some_rows_v1    <- REDCapR:::redcap_read_oneshot_eav(
 # Return only the fields record_id, name_first, and age
 desired_fields_v1 <- c("record_id", "name_first", "age")
 ds_some_fields_v1 <- REDCapR:::redcap_read_oneshot_eav(
-   redcap_uri = uri,
-   token      = token,
-   fields     = desired_fields_v1
+  redcap_uri = uri,
+  token      = token,
+  fields     = desired_fields_v1
 )$data
 }
 }

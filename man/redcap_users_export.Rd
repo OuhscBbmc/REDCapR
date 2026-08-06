@@ -36,6 +36,7 @@ This is useful for only unconventional authentication approaches.  It
 should be \code{NULL} for most institutions.  Optional.}
 }
 \value{
+Currently, a list is returned with the following elements:
 \itemize{
 \item \code{data_user}: A \code{\link[tibble:tibble]{tibble::tibble()}} of all users associated with the project.
 One row represents one user.

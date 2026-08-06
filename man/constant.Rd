@@ -21,6 +21,8 @@ but that could be expanded in the future.
 Collection of constants defined by the REDCap developers.
 }
 \details{
+Constants have the following groupings.
+
 \strong{Form Completeness}
 
 The current constants relate to the 'complete' variable at the
