@@ -1,6 +1,6 @@
 ---
 title: "Typical REDCap Workflow for a Data Analyst"
-author: Will Beasley, Geneva Marshall, & Thomas Wilson, [Biomedical & Behavior Methodology Core](https://www.ouhsc.edu/bbmc/team/), OUHSC Pediatrics
+author: Will Beasley, Geneva Daniel, & Thomas Wilson, [Biomedical & Behavior Methodology Core](https://www.ouhsc.edu/bbmc/team/), OUHSC Pediatrics
 output:
   rmarkdown::html_vignette
 vignette: >
