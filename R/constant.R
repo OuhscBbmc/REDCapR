@@ -16,7 +16,7 @@
 #' but that could be expanded in the future.
 #'
 #' @details
-#` Constants have the following groupings.
+#' Constants have the following groupings.
 #'
 #' **Form Completeness**
 #'

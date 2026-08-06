@@ -235,7 +235,7 @@ redcap_delete <- function(
     }
   } else {
     # nocov start
-    error_message     <- sprintf(
+    error_message <- sprintf(
       paste(
         "The REDCapR record deletion was not successful.",
         "The error message was:\n%s"

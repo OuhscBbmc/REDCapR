@@ -43,7 +43,6 @@ replace_nas_with_explicit <- function(
   create_factor     = FALSE,
   add_unknown_level = FALSE
 ) {
-
   if (create_factor && !is.factor(scores)) {
     scores <- factor(scores)
   }
@@ -67,7 +66,6 @@ replace_nas_with_explicit <- function(
 
   scores
 }
-
 
 #' @name collapse_vector
 #'

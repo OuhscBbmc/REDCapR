@@ -56,7 +56,6 @@ redcap_project <- setRefClass(
   ),
 
   methods = list(
-
     read = function(
       batch_size                  = 100L,
       interbatch_delay            = 0,
@@ -83,7 +82,6 @@ redcap_project <- setRefClass(
       REDCapR::redcap_read(
         batch_size                    = batch_size,
         interbatch_delay              = interbatch_delay,
-
         redcap_uri                    = redcap_uri,
         token                         = token,
         records                       = records,

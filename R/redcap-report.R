@@ -177,9 +177,13 @@ redcap_report <- function(
 
   if (kernel$success) {
     col_types <-
-      if (!is.null(col_types)) col_types
-      else if (guess_type)     NULL
-      else                     readr::cols(.default = readr::col_character())
+      if (!is.null(col_types)) {
+        col_types
+      } else if (guess_type) {
+        NULL
+      } else {
+        readr::cols(.default = readr::col_character())
+      }
 
     try(
       # Convert the raw text to a dataset.
@@ -208,7 +212,7 @@ redcap_report <- function(
       # If an operation is successful, the `raw_text` is no longer returned to
       #   save RAM.  The content is not really necessary with httr's status
       #   message exposed.
-      kernel$raw_text   <- ""
+      kernel$raw_text <- ""
     } else { # ds doesn't exist as a data.frame.
       # nocov start
       # Override the 'success' determination from the http status code.

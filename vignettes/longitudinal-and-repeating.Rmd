@@ -19,10 +19,10 @@ vignette: >
 #| include = FALSE
 library(knitr)
 knitr::opts_chunk$set(
-  eval    = !REDCapR:::on_cran(),
+  eval     = !REDCapR:::on_cran(),
   collapse = TRUE,
-  comment = "#>",
-  tidy    = FALSE
+  comment  = "#>",
+  tidy     = FALSE
 )
 
 knit_print.data.frame <- function(x, ...) {
@@ -217,7 +217,7 @@ library(magrittr)
 
 # Retrieve token
 path_credential <- system.file("misc/example.credentials", package = "REDCapR")
-credential  <- REDCapR::retrieve_credential_local(
+credential <- REDCapR::retrieve_credential_local(
   path_credential = path_credential,
   project_id      = 62
 )
@@ -279,7 +279,7 @@ ds_blood_pressure <-
 ds_blood_pressure %>%
   tidyr::drop_na(redcap_repeat_instrument)
 
-col_types_laboratory  <-
+col_types_laboratory <-
   readr::cols(
     record_id                 = readr::col_integer(),
     redcap_repeat_instrument  = readr::col_character(),
@@ -289,7 +289,7 @@ col_types_laboratory  <-
     laboratory_complete       = readr::col_integer()
   )
 
-ds_laboratory  <-
+ds_laboratory <-
   REDCapR::redcap_read(
     redcap_uri  = credential$redcap_uri,
     token       = credential$token,

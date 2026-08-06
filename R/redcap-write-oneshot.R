@@ -112,7 +112,6 @@ redcap_write_oneshot <- function(
   config_options                = NULL,
   handle_httr                   = NULL
 ) {
-
   checkmate::assert_character(redcap_uri, any.missing=FALSE, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token     , any.missing=FALSE, len=1, pattern="^.{1,}$")
 

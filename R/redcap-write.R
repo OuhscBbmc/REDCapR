@@ -125,7 +125,6 @@ redcap_write <- function(
   config_options              = NULL,
   handle_httr                 = NULL
 ) {
-
   start_time <- base::Sys.time()
   checkmate::assert_character(redcap_uri, any.missing=FALSE, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token     , any.missing=FALSE, len=1, pattern="^.{1,}$")
@@ -187,8 +186,11 @@ redcap_write <- function(
       error_message <- paste0("The `redcap_write()` call failed on iteration ", i, ".")
       error_message <- paste(error_message, ifelse(!verbose, "Set the `verbose` parameter to TRUE and rerun for additional information.", ""))
 
-      if (continue_on_error) warning(error_message)
-      else stop(error_message)
+      if (continue_on_error) {
+        warning(error_message)
+      } else {
+        stop(error_message)
+      }
     }
 
     affected_ids     <- c(affected_ids, write_result$affected_ids)

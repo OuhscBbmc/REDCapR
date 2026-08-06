@@ -91,7 +91,7 @@
 #' records    <- 1:5
 #' file_paths <- system.file(
 #'   paste0("test-data/mugshot-", records, ".jpg"),
-#'   package="REDCapR"
+#'   package = "REDCapR"
 #' )
 #'
 #' for (i in seq_along(records)) {

@@ -179,7 +179,7 @@ redcap_log_read <- function(
       # If an operation is successful, the `raw_text` is no longer returned to
       #   save RAM.  The content is not really necessary with httr's status
       #   message exposed.
-      kernel$raw_text   <- ""
+      kernel$raw_text <- ""
     } else { # ds doesn't exist as a data.frame.
       # nocov start
       # Override the 'success' determination from the http status code.

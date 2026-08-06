@@ -23,7 +23,7 @@
 #' should be `NULL` for most institutions.  Optional.
 #'
 #' @return
-#; Currently, a list is returned with the following elements:
+#' Currently, a list is returned with the following elements:
 #' * `data_user`: A [tibble::tibble()] of all users associated with the project.
 #' One row represents one user.
 #' * `data_user_form`: A [tibble::tibble()] of permissions for users and forms.
@@ -69,7 +69,6 @@ redcap_users_export <- function(
   config_options  = NULL,
   handle_httr       = NULL
 ) {
-
   checkmate::assert_character(redcap_uri , any.missing=FALSE, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token      , any.missing=FALSE, len=1, pattern="^.{1,}$")
 
@@ -186,7 +185,7 @@ redcap_users_export <- function(
         kernel$elapsed_seconds,
         kernel$status_code
       )
-      kernel$raw_text   <- ""
+      kernel$raw_text <- ""
       # If an operation is successful, the `raw_text` is no longer returned
       #   to save RAM.  The content is not really necessary with httr's
       #   status message exposed.

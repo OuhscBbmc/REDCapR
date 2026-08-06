@@ -85,7 +85,6 @@ redcap_metadata_read <- function(
   config_options    = NULL,
   handle_httr       = NULL
 ) {
-
   checkmate::assert_character(redcap_uri  , any.missing=FALSE, len=1, pattern="^.{1,}$")
   checkmate::assert_character(token       , any.missing=FALSE, len=1, pattern="^.{1,}$")
 
@@ -128,7 +127,7 @@ redcap_metadata_read <- function(
           ) %>%
           tibble::as_tibble() %>%
           dplyr::mutate_all(
-            ~dplyr::na_if(.x, "")
+            ~ dplyr::na_if(.x, "")
           )
       },
       # Don't print the warning in the try block.  Print it below,

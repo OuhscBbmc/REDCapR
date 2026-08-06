@@ -39,7 +39,7 @@ There is some information that is specific to a REDCap project, as opposed to an
 *Other than PHI-free demos, we strongly suggest storing tokens securely and avoiding hard-coding them like below.  Our recommendation is to store tokens [in a database](https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html).  If that is not feasible for your institution, consider storing them in a secured csv and retrieving with [`REDCapR::retrieve_credential_local()`](https://ouhscbbmc.github.io/REDCapR/reference/retrieve_credential.html).*
 
 ```{r project_values}
-library(REDCapR) #Load the package into the current R session.
+library(REDCapR) # Load the package into the current R session.
 uri                   <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token_simple          <- "9A068C425B1341D69E83064A2D273A70"
 token_longitudinal    <- "DA6F2BB23146BD5A7EA3408C1A44A556"
@@ -58,7 +58,7 @@ However we like going wide to produce visual tables for publications, and here's
 library(magrittr)
 suppressPackageStartupMessages(requireNamespace("dplyr"))
 suppressPackageStartupMessages(requireNamespace("tidyr"))
-events_to_retain  <- c("dose_1_arm_1", "visit_1_arm_1", "dose_2_arm_1", "visit_2_arm_1")
+events_to_retain <- c("dose_1_arm_1", "visit_1_arm_1", "dose_2_arm_1", "visit_2_arm_1")
 
 ds_long <- REDCapR::redcap_read_oneshot(redcap_uri = uri, token = token_longitudinal)$data
 ds_long %>%
@@ -127,8 +127,8 @@ ds_eav <-
   # For old versions of tidyr that predate `pivot_wider()`:
   # tidyr::gather(key=key, value=value, pmq1, pmq2, pmq3, pmq4) %>%
   dplyr::filter(!(event %in% c(
-    "enrollment", "final_visit", "deadline_to_return", "deadline_to_opt_ou")
-  )) %>%
+    "enrollment", "final_visit", "deadline_to_return", "deadline_to_opt_ou"
+  ))) %>%
   dplyr::mutate( # Simulate correcting for mismatched names across arms:
     key = paste0(key, "_", event)
   ) %>%

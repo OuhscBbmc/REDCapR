@@ -139,7 +139,6 @@ retrieve_credential_local <- function(
   check_token_pattern      = TRUE,
   username                 = NA_character_
 ) {
-
   checkmate::assert_character(path_credential  , any.missing=FALSE, len=1, pattern="^.{1,}$")
   checkmate::assert_file_exists(path_credential                                         )
   checkmate::assert_character(username         , any.missing=TRUE, len=1, pattern="^.{1,}$")
@@ -168,8 +167,9 @@ retrieve_credential_local <- function(
   } else if (
     !identical(
       colnames(d_credentials),
-      c("redcap_uri", "username", "project_id", "token", "comment"))
-    ) {
+      c("redcap_uri", "username", "project_id", "token", "comment")
+    )
+  ) {
     stop(
       "The credentials file did not contain the proper variables of ",
       "`redcap_uri`, `username`, `project_id`, `token`,  and `comment`."
@@ -254,7 +254,6 @@ retrieve_credential_mssql <- function(
   dsn         = NULL,
   channel     = NULL
 ) {
-
   rlang::check_installed(
     pkg     = "DBI",
     reason  = "to use `REDCapR::retrieve_credential_mssql()`."
@@ -287,7 +286,6 @@ retrieve_credential_mssql <- function(
     )
   } else if (!(base::missing(channel) || base::is.null(channel)) && !methods::is(channel, "DBIConnection")) {
     stop("The `channel` parameter be a `DBIConnection` type, or NULL.")
-
   } else if (length(project_id) != 1L) {
     stop("The `project_id` parameter should contain exactly one element.")
   } else if (length(instance) != 1L) {
@@ -364,13 +362,12 @@ retrieve_credential_mssql <- function(
 
 # Privately-scoped function
 credential_local_validation <- function(
-    redcap_uri,
-    token,
-    username,
-    check_url                = TRUE,
-    check_username           = FALSE,
-    check_token_pattern      = TRUE
-
+  redcap_uri,
+  token,
+  username,
+  check_url                = TRUE,
+  check_username           = FALSE,
+  check_token_pattern      = TRUE
 ) {
   # Progress through the optional checks
   if (check_url && !grepl("https://", redcap_uri, fixed = TRUE)) {
@@ -381,7 +378,6 @@ credential_local_validation <- function(
       "if you're sure you have the correct file & file contents."
     )
     stop(error_message_username)
-
   } else if (check_username && (Sys.info()["user"] != username)) {
     error_message_username <- paste(
       "The username (according to R's `Sys.info()['user']` doesn't match the",
@@ -391,7 +387,6 @@ credential_local_validation <- function(
       "Otherwise, you may be pointing to the wrong credentials file."
     )
     stop(error_message_username)
-
   } else if (check_token_pattern && !grepl("[A-F0-9]{32}", token, perl = TRUE)) {
     error_message_token <- paste(
       "A REDCap token should be a string of 32 digits and uppercase",

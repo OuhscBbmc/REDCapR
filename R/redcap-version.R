@@ -48,7 +48,6 @@ redcap_version <- function(
   config_options  = NULL,
   handle_httr     = NULL
 ) {
-
   version_error <- base::package_version("0.0.0")
 
   checkmate::assert_character(redcap_uri, any.missing=FALSE, len=1, pattern="^.{1,}$")

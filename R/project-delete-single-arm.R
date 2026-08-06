@@ -8,7 +8,7 @@ populate_project_delete_single_arm <- function(verbose = FALSE) {
   )
   # nocov end
 
-  credential  <- retrieve_credential_testing("arm-single-delete")
+  credential <- retrieve_credential_testing("arm-single-delete")
 
   project <- REDCapR::redcap_project$new(
     redcap_uri    = credential$redcap_uri,
@@ -79,7 +79,7 @@ clear_project_delete_single_arm <- function(verbose = FALSE) {
 }
 
 clean_start_delete_single_arm <- function(delay_in_seconds = 1, verbose = FALSE) {
-  checkmate::assert_numeric(delay_in_seconds, any.missing=FALSE, len=1, lower=0)
+  checkmate::assert_numeric(delay_in_seconds, any.missing = FALSE, len = 1, lower = 0)
 
   # nocov start
   rlang::check_installed(

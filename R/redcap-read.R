@@ -285,7 +285,6 @@ redcap_read <- function(
   handle_httr                   = NULL,
   id_position                   = 1L
 ) {
-
   # Validate incoming parameters ----------------------------
   checkmate::assert_character(redcap_uri                , any.missing=FALSE,     len=1, pattern="^.{1,}$")
   checkmate::assert_character(token                     , any.missing=FALSE,     len=1, pattern="^.{1,}$")
@@ -359,8 +358,7 @@ redcap_read <- function(
   } # end of !is.null(events)
 
   if (!is.null(fields) || !is.null(forms)) {
-    fields  <- base::union(metadata$record_id_name, fields)
-    # fields  <- base::union(metadata$plumbing_variables, fields)
+    fields <- base::union(metadata$record_id_name, fields)
   }
 
   # Retrieve list of record ids --------------------------------------
@@ -512,8 +510,11 @@ redcap_read <- function(
         )
       )
 
-      if (continue_on_error) warning(error_message)
-      else stop(error_message)
+      if (continue_on_error) {
+        warning(error_message)
+      } else {
+        stop(error_message)
+      }
       # nocov end
     }
 
