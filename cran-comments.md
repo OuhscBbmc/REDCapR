@@ -10,22 +10,21 @@ Test environments
 
 1. Local Ubuntu, R 4.6.1
 2. Local Win11, R 4.6.1 patched
-3. R-hub
-    1. [Ubuntu Linux, R-devel](https://github.com/OuhscBbmc/REDCapR/actions/runs/18323818727/job/52183210338)
-    2. [Windows Server, R-devel](https://github.com/OuhscBbmc/REDCapR/actions/runs/18323818727/job/52183210404)
-    3. [MacOS, R-devel](https://github.com/OuhscBbmc/REDCapR/actions/runs/18323818727/job/52183210334)
-4. win-builder: I haven't gotten a response during this afternoon.
-5. [GitHub Actions R-CMD-check](https://github.com/OuhscBbmc/REDCapR/actions/workflows/check-release.yaml), Ubuntu 24.04 LTS
+3. [R-hub](https://github.com/OuhscBbmc/REDCapR/actions/runs/31197522139)
+    * Ubuntu Linux, R-devel
+    * Windows Server, R-devel
+    * MacOS, R-devel
+4. [win-builder](https://win-builder.r-project.org/k5Rzcp80I2KE)
+5. [GitHub Actions R-CMD-check](https://github.com/OuhscBbmc/REDCapR/actions/workflows/check-release.yaml), Ubuntu
 
 R CMD check results
 -----------------------------------------------
 
 * No ERRORs or WARNINGs on any builds.
 * One NOTE:
-  * On some builds, three urls produced a 403 in the check, but they resolve fine in the browser.
-    * <http://osctr.ouhsc.edu>
-    * <https://grantome.com/grant/NIH/P01-AG043362-05>
-    * <https://grantome.com/grant/NIH/U54-GM104938>
+  * On some builds, a few urls produced a note in the check, but they resolve fine in the browser.
+    * <https://www.amazon.com/stores/Yihui-Xie/author/B00E9CQJGY>
+    * The <https://grantome.com/> pages
 
 Downstream dependencies
 -----------------------------------------------

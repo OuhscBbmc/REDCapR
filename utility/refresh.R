@@ -59,6 +59,7 @@ devtools::check( # Equivalent of R-hub
   incoming  = TRUE
 )
 # devtools::check_win_devel() # CRAN submission policies encourage the development version
+devtools::check_win_devel(email = "qqq@gmail.com") # If Outlook.com is silently eating messages
 # Check Rhub at <https://github.com/OuhscBbmc/REDCapR/actions/workflows/rhub.yaml>
 # Check reverse dependencies at <https://github.com/OuhscBbmc/REDCapR/actions/workflows/recheck.yml>
 #   Old way: revdepcheck::revdep_check(num_workers = 4)
