@@ -243,8 +243,8 @@ redcap_metadata_internal <- function(
   # If the dags call fails, since the user is assigned to a DAG, then we assign .dags a value of TRUE
   .dags                 <- (1L <= nrow(d_dags$data)) | (grepl("do not have permission", d_dags$raw_text, fixed = TRUE))
   .plumbing_possibles   <- c(.record_field, "redcap_event_name", "redcap_repeat_instrument", "redcap_repeat_instance")
-  decimal_period        <- (locale$decimal_mark == ".")
-  decimal_comma         <- (locale$decimal_mark == ",")
+  decimal_period        <- (locale$decimal_mark == ".") # nolint: object_usage_linter
+  decimal_comma         <- (locale$decimal_mark == ",") # nolint: object_usage_linter
 
   # Prepare metadata to be joined
   d_var <-
