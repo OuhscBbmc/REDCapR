@@ -14,7 +14,7 @@ Test environments
     * Ubuntu Linux, R-devel
     * Windows Server, R-devel
     * MacOS, R-devel
-4. [win-builder](https://win-builder.r-project.org/k5Rzcp80I2KE)
+4. [win-builder](https://win-builder.r-project.org/YUxp940bDu6Z)
 5. [GitHub Actions R-CMD-check](https://github.com/OuhscBbmc/REDCapR/actions/workflows/check-release.yaml), Ubuntu
 
 R CMD check results
