@@ -64,4 +64,4 @@ devtools::check_win_devel(email = "qqq@gmail.com") # If Outlook.com is silently 
 # Check reverse dependencies at <https://github.com/OuhscBbmc/REDCapR/actions/workflows/recheck.yml>
 #   Old way: revdepcheck::revdep_check(num_workers = 4)
 # usethis::use_release_issue()
-# devtools::release(check=FALSE) #Careful, the last question ultimately uploads it to CRAN, where you can't delete/reverse your decision.
+devtools::submit_cran() # Careful, the last question ultimately uploads it to CRAN, where you can't delete/reverse your decision.
