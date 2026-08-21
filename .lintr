@@ -4,8 +4,16 @@ linters: linters_with_defaults(
     commas_linter = NULL,
     commented_code_linter = NULL,
     infix_spaces_linter = NULL,
+    pipe_consistency_linter = NULL,
     spaces_inside_linter = NULL
   )
 exclusions: list(
-    "inst"
+    "inst",
+    "tests/*" = list(
+      indentation_linter = c(1:1000)
+    ),
+    "vignettes/*" = list(
+      trailing_blank_lines_linter = c(1:1000),
+      object_name_linter = c(1:1000)
+    )
   )
