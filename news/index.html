@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">REDCapR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.6.0.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.7.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,15 +33,15 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="redcapr-development-version">REDCapR (development version)<a class="anchor" aria-label="anchor" href="#redcapr-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.7.0" id="redcapr-170">REDCapR 1.7.0<a class="anchor" aria-label="anchor" href="#redcapr-170"></a></h2><p class="text-muted">CRAN release: 2026-08-20</p>
 <div class="section level4">
-<h4 id="new-features-development-version">New Features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h4>
+<h4 id="new-features-1-7-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-1-7-0"></a></h4>
 <ul><li>New <code><a href="../reference/redcap_instrument_repeating.html">redcap_instrument_repeating()</a></code> function exports repeating instrument-event mappings for a project (<a href="https://github.com/OuhscBbmc/REDCapR/issues/585" class="external-link">#585</a> &amp; <a href="https://github.com/OuhscBbmc/REDCapR/issues/589" class="external-link">#589</a>, <a href="https://github.com/ezraporter" class="external-link">@ezraporter</a>).</li>
 <li>
 <code><a href="../reference/redcap_event_instruments.html">redcap_event_instruments()</a></code>, <code><a href="../reference/redcap_event_read.html">redcap_event_read()</a></code>, <code><a href="../reference/redcap_instruments.html">redcap_instruments()</a></code>, <code><a href="../reference/redcap_project_info_read.html">redcap_project_info_read()</a></code>, <code><a href="../reference/redcap_read.html">redcap_read()</a></code>, <code><a href="../reference/redcap_read_oneshot.html">redcap_read_oneshot()</a></code>and <code>redcap_variable()</code> accept a delimiter, to accommodate server instances in locales that use something other than a comma. The delimiter is passed to <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_delim()</a></code> (<a href="https://github.com/OuhscBbmc/REDCapR/issues/570" class="external-link">#570</a>, <a href="https://github.com/mrkskk" class="external-link">@mrkskk</a>).</li>
 </ul></div>
 <div class="section level4">
-<h4 id="minor-enhancements-development-version">Minor Enhancements<a class="anchor" aria-label="anchor" href="#minor-enhancements-development-version"></a></h4>
+<h4 id="minor-enhancements-1-7-0">Minor Enhancements<a class="anchor" aria-label="anchor" href="#minor-enhancements-1-7-0"></a></h4>
 <ul><li>New columns returned from the server to <code><a href="../reference/redcap_project_info_read.html">redcap_project_info_read()</a></code> no longer throw a warning (<a href="https://github.com/OuhscBbmc/REDCapR/issues/587" class="external-link">#587</a>).</li>
 <li>
 <code><a href="../reference/redcap_file_repo_list_oneshot.html">redcap_file_repo_list_oneshot()</a></code> function tests for the new <code>dag</code> and <code>role</code> columns (<a href="https://github.com/OuhscBbmc/REDCapR/issues/593" class="external-link">#593</a>).</li>
@@ -57,7 +57,7 @@
 <li>New example demonstrates removing non-existing <code>record_id</code> values before passing to <code><a href="../reference/redcap_delete.html">redcap_delete()</a></code> (<a href="https://github.com/OuhscBbmc/REDCapR/issues/567" class="external-link">#567</a>).</li>
 </ul></div>
 <div class="section level4">
-<h4 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h4>
+<h4 id="bug-fixes-1-7-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-7-0"></a></h4>
 <ul><li>When writing to the server, a numeric value like “10000” will not be converted to scientific notation (<a href="https://github.com/OuhscBbmc/REDCapR/issues/599" class="external-link">#599</a>, <a href="https://github.com/OuhscBbmc/REDCapR/issues/600" class="external-link">#600</a>, <a href="https://github.com/Olawemi5" class="external-link">@Olawemi5</a>).</li>
 </ul></div>
 </div>

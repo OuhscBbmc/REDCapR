@@ -200,7 +200,7 @@ REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_2, arms = "2")$dat
 # Classic project (without arms) throws an error
 token_3  <- "9A068C425B1341D69E83064A2D273A70" # "simple" test project
 REDCapR::redcap_arm_export(redcap_uri=uri, token=token_3)$data
-#> A 'classic' REDCap project has no arms.  Retrieved in 0.1 seconds. The http status code was 400.
+#> A 'classic' REDCap project has no arms.  Retrieved in 0.2 seconds. The http status code was 400.
 #> # A tibble: 0 × 2
 #> # ℹ 2 variables: arm_number <int>, arm_name <chr>
 # REDCapR::redcap_event_instruments(redcap_uri=uri, token=token_3)$data

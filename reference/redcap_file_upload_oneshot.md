@@ -139,7 +139,7 @@ REDCapR::redcap_file_upload_oneshot(
   token      = token
 )
 #> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-1.jpg`.
-#> file uploaded to REDCap in 0.3 seconds.
+#> file uploaded to REDCap in 0.4 seconds.
 #> $success
 #> [1] TRUE
 #> 
@@ -147,7 +147,7 @@ REDCapR::redcap_file_upload_oneshot(
 #> [1] 200
 #> 
 #> $outcome_message
-#> [1] "file uploaded to REDCap in 0.3 seconds."
+#> [1] "file uploaded to REDCap in 0.4 seconds."
 #> 
 #> $records_affected_count
 #> [1] 1
@@ -156,7 +156,7 @@ REDCapR::redcap_file_upload_oneshot(
 #> [1] "1"
 #> 
 #> $elapsed_seconds
-#> [1] 0.3337209
+#> [1] 0.4253111
 #> 
 #> $raw_text
 #> [1] ""
@@ -181,14 +181,14 @@ for (i in seq_along(records)) {
   )
 }
 #> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-1.jpg`.
-#> file uploaded to REDCap in 0.2 seconds.
+#> file uploaded to REDCap in 1.2 seconds.
 #> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-2.jpg`.
-#> file uploaded to REDCap in 0.3 seconds.
+#> file uploaded to REDCap in 1.1 seconds.
 #> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-3.jpg`.
-#> file uploaded to REDCap in 0.3 seconds.
+#> file uploaded to REDCap in 1.0 seconds.
 #> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-4.jpg`.
-#> file uploaded to REDCap in 0.3 seconds.
+#> file uploaded to REDCap in 0.4 seconds.
 #> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-5.jpg`.
-#> file uploaded to REDCap in 0.2 seconds.
+#> file uploaded to REDCap in 1.0 seconds.
 # }
 ```

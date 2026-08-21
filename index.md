@@ -122,7 +122,8 @@ Zhu](https://github.com/haozhu233).
 Much of this package has been developed to support the needs of the
 following projects. We appreciate the support. (So far) the primary
 developers of REDCapR are the external evaluators for [Oklahoma’s
-MIECHV](https://oklahoma.gov/health/health-education/children---family-health/family-support-and-prevention-service/miechv-program-federal-home-visiting-grant.html)
+parentPRO and
+MIECHV](https://oklahoma.gov/health/health-education/children---family-health/family-support-and-prevention-service/parentpro.html)
 program. See the preliminary CQI reports (many of which use REDCapR) at
 <https://ouhscbbmc.github.io/MReportingPublic/>.
 
