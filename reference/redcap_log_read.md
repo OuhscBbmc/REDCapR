@@ -141,17 +141,17 @@ uri          <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token        <- "9A068C425B1341D69E83064A2D273A70"
 
 ds_last_week <- REDCapR::redcap_log_read(redcap_uri=uri, token=token)$data
-#> 10,587 rows were read from REDCap in 0.5 seconds.  The http status code was 200.
+#> 11,760 rows were read from REDCap in 0.5 seconds.  The http status code was 200.
 head(ds_last_week)
 #> # A tibble: 6 × 5
 #>   timestamp           username        action        details               record
 #>   <dttm>              <chr>           <chr>         <chr>                 <chr> 
-#> 1 2026-08-20 20:25:00 unittestphifree Manage/Design Export instruments (… NA    
-#> 2 2026-08-20 20:24:00 unittestphifree Manage/Design Export DAGs (API)     NA    
-#> 3 2026-08-20 20:24:00 unittestphifree Manage/Design Download data dictio… NA    
-#> 4 2026-08-20 20:24:00 unittestphifree Manage/Design Export project infor… NA    
-#> 5 2026-08-20 20:14:00 unittestphifree NA            NA                    NA    
-#> 6 2026-08-20 20:14:00 unittestphifree NA            NA                    NA    
+#> 1 2026-08-20 20:53:00 unittestphifree Manage/Design Export instruments (… NA    
+#> 2 2026-08-20 20:52:00 unittestphifree Manage/Design Export DAGs (API)     NA    
+#> 3 2026-08-20 20:52:00 unittestphifree Manage/Design Download data dictio… NA    
+#> 4 2026-08-20 20:52:00 unittestphifree Manage/Design Export project infor… NA    
+#> 5 2026-08-20 20:38:00 unittestphifree NA            NA                    NA    
+#> 6 2026-08-20 20:38:00 unittestphifree NA            NA                    NA    
 
 ds_one_day <-
   REDCapR::redcap_log_read(

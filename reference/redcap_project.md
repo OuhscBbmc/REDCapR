@@ -40,7 +40,7 @@ ds_all  <- project$read()
 #> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2026-08-21 01:25:23.992656.
+#> Starting to read 5 records  at 2026-08-21 01:53:12.400835.
 #> Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
 #> 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 
@@ -53,7 +53,7 @@ ds_skinny <- project$read(fields=c("record_id", "sex", "height"))$data
 #> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2026-08-21 01:25:25.502968.
+#> Starting to read 5 records  at 2026-08-21 01:53:13.684486.
 #> Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
 #> 5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 
@@ -67,7 +67,7 @@ ds_males        <- project$read(records=ids_of_males, batch_size=2)$data
 #> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 3 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 3 records  at 2026-08-21 01:25:26.791375.
+#> Starting to read 3 records  at 2026-08-21 01:53:14.950618.
 #> Reading batch 1 of 2, with subjects 2 through 3 (ie, 2 unique subject records).
 #> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> Reading batch 2 of 2, with subjects 5 through 5 (ie, 1 unique subject records).
@@ -79,7 +79,7 @@ ds_shorties     <- project$read(records=ids_of_shorties)$data
 #> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 2 records  at 2026-08-21 01:25:28.292472.
+#> Starting to read 2 records  at 2026-08-21 01:53:16.408267.
 #> Reading batch 1 of 1, with subjects 1 through 2 (ie, 2 unique subject records).
 #> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 

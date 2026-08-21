@@ -161,7 +161,7 @@ result_1 <- REDCapR::redcap_file_download_oneshot(
 base::unlink("mugshot-1.jpg")
 
 (full_name <- base::tempfile(pattern="mugshot", fileext = ".jpg"))
-#> [1] "/var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpBLdhTn/mugshot13fc1094e4bf.jpg"
+#> [1] "/var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpI0SGwG/mugshotaa9106e3501.jpg"
 result_2   <- REDCapR::redcap_file_download_oneshot(
   file_name     = full_name,
   record        = record,
@@ -169,8 +169,8 @@ result_2   <- REDCapR::redcap_file_download_oneshot(
   redcap_uri    = uri,
   token         = token
 )
-#> Preparing to download the file `/var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpBLdhTn/mugshot13fc1094e4bf.jpg`.
-#> image/jpeg; name="mugshot-1.jpg" successfully downloaded in 0.2 seconds, and saved as /var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpBLdhTn/mugshot13fc1094e4bf.jpg.
+#> Preparing to download the file `/var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpI0SGwG/mugshotaa9106e3501.jpg`.
+#> image/jpeg; name="mugshot-1.jpg" successfully downloaded in 0.2 seconds, and saved as /var/folders/df/djsxfhc17x95674wsm_g8s980000gn/T//RtmpI0SGwG/mugshotaa9106e3501.jpg.
 base::unlink(full_name)
 
 (relative_name <- "ssss.jpg")

@@ -1,5 +1,7 @@
 # Changelog
 
+## REDCapR (development version)
+
 ## REDCapR 1.7.0
 
 CRAN release: 2026-08-20
