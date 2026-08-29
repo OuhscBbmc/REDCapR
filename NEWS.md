@@ -1,6 +1,6 @@
 # REDCapR (development version)
 
-# REDCapR 1.7.0
+# REDCapR 1.7.0 (released 2026-08-20)
 
 ### New Features
 
