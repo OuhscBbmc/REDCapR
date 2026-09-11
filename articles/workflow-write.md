@@ -399,14 +399,14 @@ Environment
     #> ─ Session info ───────────────────────────────────────────────────────────────
     #>  setting  value
     #>  version  R version 4.6.1 (2026-06-24)
-    #>  os       macOS Tahoe 26.5.2
+    #>  os       macOS Tahoe 26.6.2
     #>  system   aarch64, darwin23
     #>  ui       X11
     #>  language en-US
     #>  collate  en_US.UTF-8
     #>  ctype    en_US.UTF-8
     #>  tz       UTC
-    #>  date     2026-08-21
+    #>  date     2026-09-11
     #>  pandoc   3.8.3 @ /usr/local/bin/ (via rmarkdown)
     #>  quarto   NA
     #> 
@@ -430,7 +430,7 @@ Environment
     #>  R6            2.6.1   2025-02-15 [1] CRAN (R 4.6.0)
     #>  ragg          1.5.2   2026-03-23 [1] CRAN (R 4.6.0)
     #>  rlang         1.3.0   2026-07-05 [1] CRAN (R 4.6.1)
-    #>  rmarkdown     2.31    2026-03-26 [1] CRAN (R 4.6.0)
+    #>  rmarkdown     2.32    2026-09-01 [1] CRAN (R 4.6.1)
     #>  sass          0.4.10  2025-04-11 [1] CRAN (R 4.6.0)
     #>  sessioninfo   1.2.4   2026-06-04 [1] CRAN (R 4.6.0)
     #>  systemfonts   1.3.2   2026-03-05 [1] CRAN (R 4.6.0)

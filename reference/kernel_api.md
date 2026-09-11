@@ -95,10 +95,10 @@ kernel <- REDCapR:::kernel_api(uri, post_body, config_options)
 # Consume the results in a few different ways.
 kernel$result
 #> Response [https://redcap-dev-2.ouhsc.edu/redcap/api/]
-#>   Date: 2026-08-21 01:52
+#>   Date: 2026-09-11 22:58
 #>   Status: 200
 #>   Content-Type: text/csv; charset=utf-8
-#>   Size: 608 B
+#>   Size: 636 B
 #> project_id,project_title,creation_time,production_time,in_production,project_...
 #> 33,"REDCapR: simple","2024-10-10 20:21:18",,0,English,4,,,,,0,0,0,0,1,0,0,,,,...
 read.csv(text = kernel$raw_text)
@@ -114,10 +114,10 @@ read.csv(text = kernel$raw_text)
 #> 1                     0           0                 NA                   NA
 #>   project_pi_firstname project_pi_lastname project_pi_email
 #> 1                   NA                  NA               NA
-#>   display_today_now_button missing_data_codes external_modules
-#> 1                        1                 NA    redcap_entity
-#>   bypass_branching_erase_field_prompt
-#> 1                                   0
+#>   display_today_now_button missing_data_codes
+#> 1                        1                 NA
+#>                          external_modules bypass_branching_erase_field_prompt
+#> 1 redcap_entity,redcap_timezone_scheduler                                   0
 as.list(read.csv(text = kernel$raw_text))
 #> $project_id
 #> [1] 33
@@ -195,7 +195,7 @@ as.list(read.csv(text = kernel$raw_text))
 #> [1] NA
 #> 
 #> $external_modules
-#> [1] "redcap_entity"
+#> [1] "redcap_entity,redcap_timezone_scheduler"
 #> 
 #> $bypass_branching_erase_field_prompt
 #> [1] 0

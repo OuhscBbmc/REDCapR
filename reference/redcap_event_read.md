@@ -128,7 +128,7 @@ result_1$data
 # Query a longitudinal project with 2 arms and complex arm-event mappings
 token_2  <- "DA6F2BB23146BD5A7EA3408C1A44A556" # longitudinal
 result_2 <- REDCapR::redcap_event_read(redcap_uri=uri, token=token_2)
-#> The list of events was retrieved from the REDCap project in 0.2 seconds. The http status code was 200.
+#> The list of events was retrieved from the REDCap project in 0.1 seconds. The http status code was 200.
 result_2$data
 #> # A tibble: 12 × 5
 #>    event_name              arm_num unique_event_name custom_event_label event_id

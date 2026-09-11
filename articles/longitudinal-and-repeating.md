@@ -515,14 +515,14 @@ Environment
     #> ─ Session info ───────────────────────────────────────────────────────────────
     #>  setting  value
     #>  version  R version 4.6.1 (2026-06-24)
-    #>  os       macOS Tahoe 26.5.2
+    #>  os       macOS Tahoe 26.6.2
     #>  system   aarch64, darwin23
     #>  ui       X11
     #>  language en-US
     #>  collate  en_US.UTF-8
     #>  ctype    en_US.UTF-8
     #>  tz       UTC
-    #>  date     2026-08-21
+    #>  date     2026-09-11
     #>  pandoc   3.8.3 @ /usr/local/bin/ (via rmarkdown)
     #>  quarto   NA
     #> 
@@ -530,13 +530,13 @@ Environment
     #>  package      * version    date (UTC) lib source
     #>  backports      1.5.1      2026-04-03 [1] CRAN (R 4.6.0)
     #>  bit            4.6.0      2025-03-06 [1] CRAN (R 4.6.0)
-    #>  bit64          4.8.4      2026-08-20 [1] CRAN (R 4.6.1)
+    #>  bit64          4.8.6      2026-09-01 [1] CRAN (R 4.6.1)
     #>  bslib          0.12.0     2026-08-04 [1] CRAN (R 4.6.1)
     #>  cachem         1.1.0      2024-05-16 [1] CRAN (R 4.6.0)
     #>  checkmate      2.3.4      2026-02-03 [1] CRAN (R 4.6.0)
     #>  cli            3.6.6      2026-04-09 [1] CRAN (R 4.6.0)
     #>  crayon         1.5.3      2024-06-20 [1] CRAN (R 4.6.0)
-    #>  curl           7.1.0      2026-04-22 [1] CRAN (R 4.6.0)
+    #>  curl           8.0.0      2026-08-25 [1] CRAN (R 4.6.1)
     #>  desc           1.4.3      2023-12-10 [1] CRAN (R 4.6.0)
     #>  digest         0.6.39     2025-11-19 [1] CRAN (R 4.6.0)
     #>  dplyr          1.2.1      2026-04-03 [1] CRAN (R 4.6.0)
@@ -548,7 +548,7 @@ Environment
     #>  glue           1.8.1      2026-04-17 [1] CRAN (R 4.6.0)
     #>  hms            1.1.4      2025-10-17 [1] CRAN (R 4.6.0)
     #>  htmltools      0.5.9      2025-12-04 [1] CRAN (R 4.6.0)
-    #>  httr           1.4.8      2026-02-13 [1] CRAN (R 4.6.0)
+    #>  httr           1.4.9      2026-09-01 [1] CRAN (R 4.6.1)
     #>  jquerylib      0.1.4      2021-04-26 [1] CRAN (R 4.6.0)
     #>  jsonlite       2.0.0      2025-03-27 [1] CRAN (R 4.6.0)
     #>  kableExtra     1.4.1      2026-07-08 [1] CRAN (R 4.6.1)
@@ -564,9 +564,9 @@ Environment
     #>  ragg           1.5.2      2026-03-23 [1] CRAN (R 4.6.0)
     #>  RColorBrewer   1.1-3      2022-04-03 [1] CRAN (R 4.6.0)
     #>  readr          2.2.0      2026-02-19 [1] CRAN (R 4.6.0)
-    #>  REDCapR        1.7.0.9000 2026-08-21 [1] local
+    #>  REDCapR        1.7.0.9000 2026-09-11 [1] local
     #>  rlang          1.3.0      2026-07-05 [1] CRAN (R 4.6.1)
-    #>  rmarkdown      2.31       2026-03-26 [1] CRAN (R 4.6.0)
+    #>  rmarkdown      2.32       2026-09-01 [1] CRAN (R 4.6.1)
     #>  rstudioapi     0.19.0     2026-06-11 [1] CRAN (R 4.6.0)
     #>  sass           0.4.10     2025-04-11 [1] CRAN (R 4.6.0)
     #>  scales         1.4.0      2025-04-24 [1] CRAN (R 4.6.0)

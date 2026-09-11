@@ -215,7 +215,7 @@ ds_some_rows_v1 <- REDCapR:::redcap_read_eav_oneshot(
   token      = token,
   records    = desired_records_v1
 )$data
-#> 41 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 41 records and 3 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
 
 # Return only the fields record_id, name_first, and age
 desired_fields_v1 <- c("record_id", "name_first", "age")
