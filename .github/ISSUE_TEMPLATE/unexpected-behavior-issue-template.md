@@ -15,14 +15,14 @@ Thank you for taking the time to file an issue.  Here are some suggestions for w
 
 **Troubleshooter**: Please carefully reread the [Troubleshooting Vignette](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html) and thoroughly describe which parts don't work.  
 
-**Describe the behavior**: Please provide a clear and concise description of the scenario and the behavior.  *Be careful not to include tokens, PHI (protected health information), or other information that should not be public!*
+**Describe the behavior**: Please provide a clear and concise description of the scenario and the behavior.  Include any relevant code. *Be careful not to include tokens, PHI (protected health information), or other information that should not be public!*
 
 
 **Expected behavior**: A clear and concise description of what you expected to happen.
 
 
 **Desktop (please complete the following information):**
- - OS: [e.g. Windows 10]
+ - OS: [e.g. Windows 11]
  - REDCap version [e.g. 9.0.1 --look at the bottom of the REDCap web page]
  - REDCapR Version [e.g. 0.10.2.9005  --run `packageVersion("REDCapR")`]
 
