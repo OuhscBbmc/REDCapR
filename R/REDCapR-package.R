@@ -33,8 +33,8 @@
 #' [CRAN](https://cran.r-project.org/package=REDCapR) by running
 #' `install.packages('REDCapR')`.  The most recent development version is
 #' available through [GitHub](https://github.com/OuhscBbmc/REDCapR) by
-#' running `remotes::install_github('OuhscBbmc/REDCapR')`
-#' (make sure [remotes](https://cran.r-project.org/package=remotes) is
+#' running `pak::pkg_install('OuhscBbmc/REDCapR')`
+#' (make sure [pak](https://cran.r-project.org/package=pak) is
 #' already installed). If you're having trouble with the package, please
 #' install the development version.  If this doesn't solve your problem,
 #' please create a [new issue](https://github.com/OuhscBbmc/REDCapR/issues),
@@ -49,7 +49,7 @@
 #' # install.packages('REDCapR')
 #'
 #' # Install/update REDCapR with the development version from GitHub
-#' # install.packages("remotes") # Uncomment if `remotes` isn't installed already.
-#' # remotes::install_github('OuhscBbmc/REDCapR')
+#' # install.packages("pak") # Uncomment if `pak` isn't installed already.
+#' # pak::pkg_install('OuhscBbmc/REDCapR')
 #' }
 NULL

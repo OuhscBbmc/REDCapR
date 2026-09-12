@@ -16,31 +16,20 @@ https://ouhscbbmc.github.io/REDCapR/.
 Much of this package has been developed to support the needs of the
 following projects.  We appreciate the support.
 \itemize{
-\item \emph{OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive
-Maternal, Infant, and Early Childhood Home Visiting
-(\href{https://mchb.hrsa.gov/programs-impact/maternal-infant-early-childhood-home-visiting-miechv-program}{MIECHV}) Project}.
-HRSA/ACF D89MC23154.
-David Bard, PI, OUHSC; 2011-2015.
-\item \emph{Independent Evaluation of the State of OK MIECHV Evidence Based Home
-Visitation Project}, \href{https://www.nih.gov/}{NIH}-sponsored collaboration
-with \href{https://oklahoma.gov/health.html}{OSDH}.
-David Bard, PI, OUHSC; 2015-2017.
-\item \emph{OSDH ParentPRO Pilot Evaluation}, federally-sponsored collaboration
-with \href{https://oklahoma.gov/health.html}{OSDH}.
-David Bard, PI, OUHSC; 2015-2017.
-\item \emph{Title IV-E Waiver Project}, \href{https://mchb.hrsa.gov/}{HRSA/MCHB}-sponsored
-collaboration with \href{https://oklahoma.gov/okdhs.html}{OKDHS};
-David Bard, PI, OUHSC; 2014-2017.
+\item Health Resources and Services Administration (HRSA) Maternal, Infant, and Early Childhood Home Visiting
+(\href{https://mchb.hrsa.gov/programs-impact/maternal-infant-early-childhood-home-visiting-miechv-program}{MIECHV})
+Program through a series of competitive and formula awards
+(D89MC23154, D89MC28275, X10MC29496, X10MC3114, UH4MC30745, X10MC32214, X10MC33603, U4GMC45638, X10MC43603, X10MC53634, and X10MC55033 ).
+\item \emph{Title IV-E Waiver Project}, \href{https://mchb.hrsa.gov/}{HRSA/MCHB}-sponsored collaboration with
+\href{https://oklahoma.gov/okdhs.html}{OKDHS}; David Bard, PI, OU; 2014-2017.
 \item \emph{Integrative Analysis of Longitudinal Studies of Aging (IALSA)},
 sponsored by \href{https://grantome.com/grant/NIH/P01-AG043362-05}{NIH 5P01AG043362}.
-Scott Hofer, PI, University of Victoria;
-Will Beasley, PI of site-award, OUHSC; 2013-2018.
-\item \emph{Oklahoma Shared Clinical and Translational Resources}, sponsored by
-\href{https://grantome.com/grant/NIH/U54-GM104938}{NIH NIGMS; U54 GM104938}.
-Judith A. James, PI, OUHSC; 2013-2018.
-\item Additional Institutional Support from OUHSC
-\href{https://medicine.ouhsc.edu/academic-departments/pediatrics}{Dept of Pediatrics};
-2013-2017.
+Scott Hofer, PI, University of Victoria; Will Beasley, PI of site-award, OU; 2013-2018.
+\item \emph{Oklahoma Shared Clinical and Translational Resources},
+sponsored by \href{https://grantome.com/grant/NIH/U54-GM104938}{NIH NIGMS; U54 GM104938}. Judith A. James, PI, OU; 2013-2018.
+\item \emph{Oklahoma Shared Clinical and Translational Resources},
+sponsored by \href{https://taggs.hhs.gov/Detail/AwardDetail?arg_AwardNum=U54GM104938&arg_ProgOfficeCode=127}{NIH U54GM104938}; 2020-2026.
+\item Additional Institutional Support from OU \href{https://medicine.ouhsc.edu/academic-departments/pediatrics}{Dept of Pediatrics}; 2013-2026.
 }
 }
 \note{
@@ -48,8 +37,8 @@ The release version is available through
 \href{https://cran.r-project.org/package=REDCapR}{CRAN} by running
 \code{install.packages('REDCapR')}.  The most recent development version is
 available through \href{https://github.com/OuhscBbmc/REDCapR}{GitHub} by
-running \code{remotes::install_github('OuhscBbmc/REDCapR')}
-(make sure \href{https://cran.r-project.org/package=remotes}{remotes} is
+running \code{pak::pkg_install('OuhscBbmc/REDCapR')}
+(make sure \href{https://cran.r-project.org/package=pak}{pak} is
 already installed). If you're having trouble with the package, please
 install the development version.  If this doesn't solve your problem,
 please create a \href{https://github.com/OuhscBbmc/REDCapR/issues}{new issue},
@@ -64,8 +53,8 @@ the default SSL options.
 # install.packages('REDCapR')
 
 # Install/update REDCapR with the development version from GitHub
-# install.packages("remotes") # Uncomment if `remotes` isn't installed already.
-# remotes::install_github('OuhscBbmc/REDCapR')
+# install.packages("pak") # Uncomment if `pak` isn't installed already.
+# pak::pkg_install('OuhscBbmc/REDCapR')
 }
 }
 \seealso{

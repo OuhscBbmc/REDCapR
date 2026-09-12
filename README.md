@@ -39,11 +39,11 @@ The *release* version can be installed from [CRAN](https://cran.r-project.org/pa
 install.packages("REDCapR")
 ```
 
-The *development* version can be installed from [GitHub](https://github.com/OuhscBbmc/REDCapR) after installing the `remotes` package.
+The *development* version can be installed from [GitHub](https://github.com/OuhscBbmc/REDCapR) after installing the `pak` package.
 
 ```r
-install.packages("remotes") # Run this line if the 'remotes' package isn't installed already.
-remotes::install_github("OuhscBbmc/REDCapR")
+install.packages("pak") # Run this line if the 'pak' package isn't installed already.
+pak::pkg_install("OuhscBbmc/REDCapR")
 ```
 The  [ouhscbbmc.github.io/REDCapR](https://ouhscbbmc.github.io/REDCapR/) site describes the package functions, and includes documents involving [basic operations](https://ouhscbbmc.github.io/REDCapR/articles/BasicREDCapROperations.html), [advanced operations](https://ouhscbbmc.github.io/REDCapR/articles/advanced-redcapr-operations.html), [token security](https://ouhscbbmc.github.io/REDCapR/articles/SecurityDatabase.html), and
 [troubleshooting](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html).
