@@ -302,11 +302,11 @@ If you're not using REDCapR, you can skip this section and proceed to "Exporting
 
 [REDCapR](https://ouhscbbmc.github.io/REDCapR/) and [redcapAPI](https://github.com/nutterb/redcapAPI) are different R packages, but the developers collaborate with each other and share advice.
 
-1. **Is the latest version of REDCapR installed on your machine?** Currently the easiest way to install REDCapR is with the [remotes](https://remotes.r-lib.org/) package.  The following code installs remotes, then installs REDCapR.  The CRAN version of REDCapR is updated only a few times a year, while the code below will download the latest stable version.
+1. **Is the latest version of REDCapR installed on your machine?** Currently the easiest way to install REDCapR is with the [pak](https://pak.r-lib.org/) package.  The following code installs pak, then installs REDCapR.  The CRAN version of REDCapR is updated only a few times a year, while the code below will download the latest stable version.
 
     ```r
-    install.packages("remotes", repos = "https://cran.rstudio.com")
-    remotes::install_github(repo = "OuhscBbmc/REDCapR")
+    install.packages("pak", repos = "https://cran.rstudio.com")
+    pak::pkg_install(repo = "OuhscBbmc/REDCapR")
     ```
 
 1. **Does REDCapR load successfully on your machine?** If so, running `library(REDCapR)` should produce the following output if you're starting with a fresh session of R:
@@ -422,8 +422,8 @@ If you're not using redcapAPI, you can skip this section and proceed to 'Importi
     Developmental versions may be available on GitHub.
 
     ```r
-    install.packages("remotes", repos = "https://cran.rstudio.com")
-    remotes::install_github(repo = "nutterb/redcapAPI")
+    install.packages("pak", repos = "https://cran.rstudio.com")
+    pak::pkg_install(repo = "nutterb/redcapAPI")
     ```
 
 1. **Does redcapAPI load successfully on your machine?** If so, running `library(redcapAPI)` should produce the following output if you're starting with a fresh session of R:

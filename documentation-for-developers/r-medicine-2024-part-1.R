@@ -1,7 +1,7 @@
 ## ----pre-req------------------------------------------------------------------
 requireNamespace("REDCapR")
 
-# If this fails, run `install.packages("REDCapR")` or `remotes::install_github(repo="OuhscBbmc/REDCapR")`
+# If this fails, run `install.packages("REDCapR")` or `pak::pkg_install(repo="OuhscBbmc/REDCapR")`
 
 ## ----retrieve-credential------------------------------------------------------
 path_credential <- system.file("misc/example.credentials", package = "REDCapR")
