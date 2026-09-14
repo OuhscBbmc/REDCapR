@@ -558,13 +558,13 @@ advice.</p>
 <li>
 <p><strong>Is the latest version of REDCapR installed on your
 machine?</strong> Currently the easiest way to install REDCapR is with
-the <a href="https://remotes.r-lib.org/" class="external-link">remotes</a> package. The
-following code installs remotes, then installs REDCapR. The CRAN version
-of REDCapR is updated only a few times a year, while the code below will
-download the latest stable version.</p>
+the <a href="https://pak.r-lib.org/" class="external-link">pak</a> package. The following code
+installs pak, then installs REDCapR. The CRAN version of REDCapR is
+updated only a few times a year, while the code below will download the
+latest stable version.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span>, repos <span class="op">=</span> <span class="st">"https://cran.rstudio.com"</span><span class="op">)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"OuhscBbmc/REDCapR"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span>, repos <span class="op">=</span> <span class="st">"https://cran.rstudio.com"</span><span class="op">)</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu">pkg_install</span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"OuhscBbmc/REDCapR"</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Does REDCapR load successfully on your machine?</strong>
@@ -691,8 +691,8 @@ CRAN.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"redcapAPI"</span><span class="op">)</span></span></code></pre></div>
 <p>Developmental versions may be available on GitHub.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span>, repos <span class="op">=</span> <span class="st">"https://cran.rstudio.com"</span><span class="op">)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"nutterb/redcapAPI"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span>, repos <span class="op">=</span> <span class="st">"https://cran.rstudio.com"</span><span class="op">)</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu">pkg_install</span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"nutterb/redcapAPI"</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Does redcapAPI load successfully on your

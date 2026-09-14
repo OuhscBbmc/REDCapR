@@ -272,7 +272,7 @@ here).</li>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co"># ---- load-packages -----------------------------------------------------------</span></span>
 <span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(OuhscMunge))</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>  <span class="fu">stop</span>(<span class="st">'The `OuhscMunge` package needs to be installed with `remotes::install_github("OuhscBbmc/OuhscMunge")`.'</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>  <span class="fu">stop</span>(<span class="st">'The `OuhscMunge` package needs to be installed with `pak::pkg_install("OuhscBbmc/OuhscMunge")`.'</span>)</span>
 <span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a></span>
 <span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>testit<span class="sc">::</span><span class="fu">assert</span>(</span>
 <span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>  <span class="st">"The `OuhscMunge` package should meet a minimal version."</span>,</span>
@@ -287,7 +287,7 @@ here).</li>
 <span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">"tibble"</span>)</span>
 <span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">"testit"</span>)</span>
 <span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">"checkmate"</span>)</span>
-<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">"OuhscMunge"</span>)  <span class="co"># remotes::install_github("OuhscBbmc/OuhscMunge")</span></span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">"OuhscMunge"</span>)  <span class="co"># pak::pkg_install("OuhscBbmc/OuhscMunge")</span></span>
 <span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a></span>
 <span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a></span>
 <span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>

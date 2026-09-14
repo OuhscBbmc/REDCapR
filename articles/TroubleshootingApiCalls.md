@@ -466,15 +466,15 @@ advice.
 
 1.  **Is the latest version of REDCapR installed on your machine?**
     Currently the easiest way to install REDCapR is with the
-    [remotes](https://remotes.r-lib.org/) package. The following code
-    installs remotes, then installs REDCapR. The CRAN version of REDCapR
-    is updated only a few times a year, while the code below will
-    download the latest stable version.
+    [pak](https://pak.r-lib.org/) package. The following code installs
+    pak, then installs REDCapR. The CRAN version of REDCapR is updated
+    only a few times a year, while the code below will download the
+    latest stable version.
 
     ``` r
 
-    install.packages("remotes", repos = "https://cran.rstudio.com")
-    remotes::install_github(repo = "OuhscBbmc/REDCapR")
+    install.packages("pak", repos = "https://cran.rstudio.com")
+    pak::pkg_install(repo = "OuhscBbmc/REDCapR")
     ```
 
 2.  **Does REDCapR load successfully on your machine?** If so, running
@@ -628,8 +628,8 @@ but the developers collaborate with each other and share advice.
 
     ``` r
 
-    install.packages("remotes", repos = "https://cran.rstudio.com")
-    remotes::install_github(repo = "nutterb/redcapAPI")
+    install.packages("pak", repos = "https://cran.rstudio.com")
+    pak::pkg_install(repo = "nutterb/redcapAPI")
     ```
 
 2.  **Does redcapAPI load successfully on your machine?** If so, running

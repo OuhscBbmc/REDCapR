@@ -67,12 +67,12 @@ install.packages("REDCapR")
 
 The *development* version can be installed from
 [GitHub](https://github.com/OuhscBbmc/REDCapR) after installing the
-`remotes` package.
+`pak` package.
 
 ``` r
 
-install.packages("remotes") # Run this line if the 'remotes' package isn't installed already.
-remotes::install_github("OuhscBbmc/REDCapR")
+install.packages("pak") # Run this line if the 'pak' package isn't installed already.
+pak::pkg_install("OuhscBbmc/REDCapR")
 ```
 
 The [ouhscbbmc.github.io/REDCapR](https://ouhscbbmc.github.io/REDCapR/)
@@ -120,47 +120,39 @@ Zhu](https://github.com/haozhu233).
 ### Funders
 
 Much of this package has been developed to support the needs of the
-following projects. We appreciate the support. (So far) the primary
-developers of REDCapR are the external evaluators for [Oklahoma’s
-parentPRO and
-MIECHV](https://oklahoma.gov/health/health-education/children---family-health/family-support-and-prevention-service/parentpro.html)
-program. See the preliminary CQI reports (many of which use REDCapR) at
-<https://ouhscbbmc.github.io/MReportingPublic/>.
+following projects. We appreciate the support.
 
-- *OUHSC CCAN Independent Evaluation of the State of Oklahoma
-  Competitive Maternal, Infant, and Early Childhood Home Visiting
+- Health Resources and Services Administration (HRSA) Maternal, Infant,
+  and Early Childhood Home Visiting
   ([MIECHV](https://mchb.hrsa.gov/programs-impact/maternal-infant-early-childhood-home-visiting-miechv-program))
-  Project*. HRSA/ACF D89MC23154. David Bard, PI, OUHSC; 2011-2015.
-- *Independent Evaluation of the State of OK MIECHV Evidence Based Home
-  Visitation Project*, [NIH](https://www.nih.gov/)-sponsored
-  collaboration with [OSDH](https://oklahoma.gov/health.html). David
-  Bard, PI, OUHSC; 2015-2017.
-- *OSDH ParentPRO Pilot Evaluation*, federally-sponsored collaboration
-  with [OSDH](https://oklahoma.gov/health.html). David Bard, PI, OUHSC;
-  2015-2017.
+  Program through a series of competitive and formula awards
+  (D89MC23154, D89MC28275, X10MC29496, X10MC3114, UH4MC30745,
+  X10MC32214, X10MC33603, U4GMC45638, X10MC43603, X10MC53634, and
+  X10MC55033 ).
 - *Title IV-E Waiver Project*,
   [HRSA/MCHB](https://mchb.hrsa.gov/)-sponsored collaboration with
-  [OKDHS](https://oklahoma.gov/okdhs.html); David Bard, PI, OUHSC;
+  [OKDHS](https://oklahoma.gov/okdhs.html); David Bard, PI, OU;
   2014-2017.
 - *Integrative Analysis of Longitudinal Studies of Aging (IALSA)*,
   sponsored by [NIH
   5P01AG043362](https://grantome.com/grant/NIH/P01-AG043362-05). Scott
-  Hofer, PI, University of Victoria; Will Beasley, PI of site-award,
-  OUHSC; 2013-2018.
+  Hofer, PI, University of Victoria; Will Beasley, PI of site-award, OU;
+  2013-2018.
 - *Oklahoma Shared Clinical and Translational Resources*, sponsored by
   [NIH NIGMS; U54
   GM104938](https://grantome.com/grant/NIH/U54-GM104938). Judith A.
-  James, PI, OUHSC; 2013-2018.
+  James, PI, OU; 2013-2018.
 - *Oklahoma Shared Clinical and Translational Resources*, sponsored by
   [NIH
   U54GM104938](https://taggs.hhs.gov/Detail/AwardDetail?arg_AwardNum=U54GM104938&arg_ProgOfficeCode=127);
-  2020-2021.
-- Additional Institutional Support from OUHSC [Dept of
+  2020-2026.
+- Additional Institutional Support from OU [Dept of
   Pediatrics](https://medicine.ouhsc.edu/academic-departments/pediatrics);
-  2013-2021.
+  2013-2026.
 
 Thanks, [Will Beasley](https://orcid.org/0000-0002-5613-5006), [David
-Bard](https://orcid.org/0000-0002-3922-8489), & Thomas Wilson  
+Bard](https://orcid.org/0000-0002-3922-8489), & [Thomas
+Wilson](https://orcid.org/0009-0009-1239-1348)  
 [University of Oklahoma Health Sciences Center](https://www.ouhsc.edu/),
 [Department of
 Pediatrics](https://medicine.ouhsc.edu/academic-departments/pediatrics),
