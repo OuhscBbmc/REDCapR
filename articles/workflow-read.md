@@ -195,13 +195,13 @@ ds_1 <-
     redcap_uri  = credential$redcap_uri,
     token       = credential$token
   )$data
-#> 24 variable metadata records were read from REDCap in 0.3 seconds.  The http status code was 200.
-#> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 24 variable metadata records were read from REDCap in 0.5 seconds.  The http status code was 200.
+#> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 2 data access groups were read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2026-09-21 15:04:43.08258.
+#> Starting to read 5 records  at 2026-09-21 16:53:49.455657.
 #> Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
 #> 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 ```
