@@ -197,11 +197,11 @@ ds_1 <-
   )$data
 #> 24 variable metadata records were read from REDCap in 0.3 seconds.  The http status code was 200.
 #> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
 #> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2026-09-14 12:20:56.212088.
+#> Starting to read 5 records  at 2026-09-21 15:04:43.08258.
 #> Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
 #> 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 ```
@@ -577,69 +577,70 @@ Environment
     #> ─ Session info ───────────────────────────────────────────────────────────────
     #>  setting  value
     #>  version  R version 4.6.1 (2026-06-24)
-    #>  os       macOS Tahoe 26.6.2
-    #>  system   aarch64, darwin23
+    #>  os       Ubuntu 24.04.5 LTS
+    #>  system   x86_64, linux-gnu
     #>  ui       X11
     #>  language en-US
-    #>  collate  en_US.UTF-8
-    #>  ctype    en_US.UTF-8
+    #>  collate  C.UTF-8
+    #>  ctype    C.UTF-8
     #>  tz       UTC
-    #>  date     2026-09-14
-    #>  pandoc   3.8.3 @ /usr/local/bin/ (via rmarkdown)
+    #>  date     2026-09-21
+    #>  pandoc   3.8.3 @ /opt/hostedtoolcache/pandoc/3.8.3/x64/ (via rmarkdown)
     #>  quarto   NA
     #> 
     #> ─ Packages ───────────────────────────────────────────────────────────────────
     #>  package     * version    date (UTC) lib source
-    #>  backports     1.5.1      2026-04-03 [1] CRAN (R 4.6.0)
-    #>  bit           4.6.0      2025-03-06 [1] CRAN (R 4.6.0)
-    #>  bit64         4.8.6      2026-09-01 [1] CRAN (R 4.6.1)
-    #>  bslib         0.12.0     2026-08-04 [1] CRAN (R 4.6.1)
-    #>  cachem        1.1.0      2024-05-16 [1] CRAN (R 4.6.0)
-    #>  checkmate     2.3.4      2026-02-03 [1] CRAN (R 4.6.0)
-    #>  cli           3.6.6      2026-04-09 [1] CRAN (R 4.6.0)
-    #>  crayon        1.5.3      2024-06-20 [1] CRAN (R 4.6.0)
-    #>  curl          8.0.0      2026-08-25 [1] CRAN (R 4.6.1)
-    #>  desc          1.4.3      2023-12-10 [1] CRAN (R 4.6.0)
-    #>  digest        0.6.39     2025-11-19 [1] CRAN (R 4.6.0)
-    #>  dplyr         1.2.1      2026-04-03 [1] CRAN (R 4.6.0)
-    #>  evaluate      1.0.5      2025-08-27 [1] CRAN (R 4.6.0)
-    #>  fastmap       1.2.0      2024-05-15 [1] CRAN (R 4.6.0)
-    #>  fs            2.1.0      2026-04-18 [1] CRAN (R 4.6.0)
-    #>  generics      0.1.4      2025-05-09 [1] CRAN (R 4.6.0)
-    #>  glue          1.8.1      2026-04-17 [1] CRAN (R 4.6.0)
-    #>  hms           1.1.4      2025-10-17 [1] CRAN (R 4.6.0)
-    #>  htmltools     0.5.9      2025-12-04 [1] CRAN (R 4.6.0)
-    #>  httr          1.4.9      2026-09-01 [1] CRAN (R 4.6.1)
-    #>  jquerylib     0.1.4      2021-04-26 [1] CRAN (R 4.6.0)
-    #>  jsonlite      2.0.0      2025-03-27 [1] CRAN (R 4.6.0)
-    #>  knitr         1.51       2025-12-20 [1] CRAN (R 4.6.0)
-    #>  lifecycle     1.0.5      2026-01-08 [1] CRAN (R 4.6.0)
-    #>  magrittr      2.0.5      2026-04-04 [1] CRAN (R 4.6.0)
-    #>  otel          0.2.0      2025-08-29 [1] CRAN (R 4.6.0)
-    #>  pillar        1.11.1     2025-09-17 [1] CRAN (R 4.6.0)
-    #>  pkgconfig     2.0.3      2019-09-22 [1] CRAN (R 4.6.0)
-    #>  pkgdown       2.2.1      2026-07-07 [1] CRAN (R 4.6.1)
-    #>  R6            2.6.1      2025-02-15 [1] CRAN (R 4.6.0)
-    #>  ragg          1.5.2      2026-03-23 [1] CRAN (R 4.6.0)
-    #>  readr         2.2.0      2026-02-19 [1] CRAN (R 4.6.0)
-    #>  REDCapR       1.7.0.9000 2026-09-14 [1] local
-    #>  rlang         1.3.0      2026-07-05 [1] CRAN (R 4.6.1)
-    #>  rmarkdown     2.32       2026-09-01 [1] CRAN (R 4.6.1)
-    #>  sass          0.4.10     2025-04-11 [1] CRAN (R 4.6.0)
-    #>  sessioninfo   1.2.4      2026-06-04 [1] CRAN (R 4.6.0)
-    #>  systemfonts   1.3.2      2026-03-05 [1] CRAN (R 4.6.0)
-    #>  textshaping   1.0.5      2026-03-06 [1] CRAN (R 4.6.0)
-    #>  tibble        3.3.1      2026-01-11 [1] CRAN (R 4.6.0)
-    #>  tidyselect    1.2.1      2024-03-11 [1] CRAN (R 4.6.0)
-    #>  tzdb          0.5.0      2025-03-15 [1] CRAN (R 4.6.0)
-    #>  utf8          1.2.6      2025-06-08 [1] CRAN (R 4.6.0)
-    #>  vctrs         0.7.3      2026-04-11 [1] CRAN (R 4.6.0)
-    #>  vroom         1.7.1      2026-03-31 [1] CRAN (R 4.6.0)
-    #>  withr         3.0.3      2026-06-19 [1] CRAN (R 4.6.0)
-    #>  xfun          0.60       2026-07-09 [1] CRAN (R 4.6.1)
-    #>  yaml          2.3.12     2025-12-10 [1] CRAN (R 4.6.0)
+    #>  backports     1.5.1      2026-04-03 [1] RSPM
+    #>  bit           4.6.0      2025-03-06 [1] RSPM
+    #>  bit64         4.8.6      2026-09-01 [1] RSPM
+    #>  bslib         0.12.0     2026-08-04 [1] RSPM
+    #>  cachem        1.1.0      2024-05-16 [1] RSPM
+    #>  checkmate     2.3.4      2026-02-03 [1] RSPM
+    #>  cli           3.6.6      2026-04-09 [1] RSPM
+    #>  crayon        1.5.3      2024-06-20 [1] RSPM
+    #>  curl          8.0.0      2026-08-25 [1] RSPM
+    #>  desc          1.4.3      2023-12-10 [1] RSPM
+    #>  digest        0.6.39     2025-11-19 [1] RSPM
+    #>  dplyr         1.2.1      2026-04-03 [1] RSPM
+    #>  evaluate      1.0.5      2025-08-27 [1] RSPM
+    #>  fastmap       1.2.0      2024-05-15 [1] RSPM
+    #>  fs            2.1.0      2026-04-18 [1] RSPM
+    #>  generics      0.1.4      2025-05-09 [1] RSPM
+    #>  glue          1.8.1      2026-04-17 [1] RSPM
+    #>  hms           1.1.4      2025-10-17 [1] RSPM
+    #>  htmltools     0.5.9      2025-12-04 [1] RSPM
+    #>  httr          1.4.9      2026-09-01 [1] RSPM
+    #>  jquerylib     0.1.4      2021-04-26 [1] RSPM
+    #>  jsonlite      2.0.0      2025-03-27 [1] RSPM
+    #>  knitr         1.52       2026-09-06 [1] RSPM
+    #>  lifecycle     1.0.5      2026-01-08 [1] RSPM
+    #>  magrittr      2.0.5      2026-04-04 [1] RSPM
+    #>  otel          0.2.0      2025-08-29 [1] RSPM
+    #>  pillar        1.11.1     2025-09-17 [1] RSPM
+    #>  pkgconfig     2.0.3      2019-09-22 [1] RSPM
+    #>  pkgdown       2.2.1      2026-07-07 [1] any (@2.2.1)
+    #>  R6            2.6.1      2025-02-15 [1] RSPM
+    #>  ragg          1.5.2      2026-03-23 [1] RSPM
+    #>  readr         2.2.0      2026-02-19 [1] RSPM
+    #>  REDCapR       1.7.0.9000 2026-09-21 [1] local
+    #>  rlang         1.3.0      2026-07-05 [1] RSPM
+    #>  rmarkdown     2.32       2026-09-01 [1] RSPM
+    #>  sass          0.4.10     2025-04-11 [1] RSPM
+    #>  sessioninfo   1.2.4      2026-06-04 [1] RSPM
+    #>  systemfonts   1.3.2      2026-03-05 [1] RSPM
+    #>  textshaping   1.0.5      2026-03-06 [1] RSPM
+    #>  tibble        3.3.1      2026-01-11 [1] RSPM
+    #>  tidyselect    1.2.1      2024-03-11 [1] RSPM
+    #>  tzdb          0.5.0      2025-03-15 [1] RSPM
+    #>  utf8          1.2.6      2025-06-08 [1] RSPM
+    #>  vctrs         0.7.3      2026-04-11 [1] RSPM
+    #>  vroom         1.7.1      2026-03-31 [1] RSPM
+    #>  withr         3.0.3      2026-06-19 [1] RSPM
+    #>  xfun          0.61       2026-09-16 [1] RSPM
+    #>  yaml          2.3.12     2025-12-10 [1] RSPM
     #> 
-    #>  [1] /Users/runner/work/_temp/Library
-    #>  [2] /Library/Frameworks/R.framework/Versions/4.6/Resources/library
+    #>  [1] /home/runner/work/_temp/Library
+    #>  [2] /opt/R/4.6.1/lib/R/site-library
+    #>  [3] /opt/R/4.6.1/lib/R/library
     #> 
     #> ──────────────────────────────────────────────────────────────────────────────

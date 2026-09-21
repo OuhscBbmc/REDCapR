@@ -146,7 +146,7 @@ administrator to send you the static material.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="co"># Define some constants</span></span></span>
 <span class="r-in"><span><span class="va">uri</span>    <span class="op">&lt;-</span> <span class="st">"https://redcap-dev-2.ouhsc.edu/redcap/api/"</span></span></span>
 <span class="r-in"><span><span class="va">token</span>  <span class="op">&lt;-</span> <span class="st">"F9CBFFF78C3D78F641BAE9623F6B7E6A"</span> <span class="co"># simple-write</span></span></span>
@@ -165,29 +165,6 @@ administrator to send you the static material.</p>
 <span class="r-in"><span>  redcap_uri <span class="op">=</span> <span class="va">uri</span>,</span></span>
 <span class="r-in"><span>  token      <span class="op">=</span> <span class="va">token</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-1.jpg`.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> file uploaded to REDCap in 0.3 seconds.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $success</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $status_code</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $outcome_message</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "file uploaded to REDCap in 0.3 seconds."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $records_affected_count</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $affected_ids</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_seconds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2926459</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $raw_text</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Upload a collection of five images.</span></span></span>
 <span class="r-in"><span><span class="va">records</span>    <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span></span></span>
@@ -207,17 +184,7 @@ administrator to send you the static material.</p>
 <span class="r-in"><span>    token      <span class="op">=</span> <span class="va">token</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-1.jpg`.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> file uploaded to REDCap in 0.2 seconds.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-2.jpg`.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> file uploaded to REDCap in 0.2 seconds.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-3.jpg`.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> file uploaded to REDCap in 0.2 seconds.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-4.jpg`.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> file uploaded to REDCap in 0.2 seconds.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-5.jpg`.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> file uploaded to REDCap in 0.2 seconds.</span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

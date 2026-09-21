@@ -135,16 +135,14 @@ constant_to_access(          c(0, 1, 1, 0, NA))
 #> [1] no      yes     yes     no      unknown
 #> Levels: no yes unknown
 
-# \dontrun{
+if (FALSE) { # \dontrun{
 # The following line returns an error:
 #     Assertion on 'name' failed: Must be a subset of
 #     {'form_complete','form_incomplete','form_unverified'},
 #     but is {'bad-name'}.
 
 REDCapR::constant("bad-name")    # Returns an error
-#> Error in REDCapR::constant("bad-name"): Assertion on 'name' failed: Must be a subset of {'form_incomplete','form_unverified','form_complete','data_export_rights_no_access','data_export_rights_deidentified','data_export_rights_full','form_rights_no_access','form_rights_readonly','form_rights_edit_form','form_rights_edit_survey','access_no','access_yes'}, but has additional elements {'bad-name'}.
 
 REDCapR::constant(c("form_complete", "bad-name")) # Returns an error
-#> Error in REDCapR::constant(c("form_complete", "bad-name")): Assertion on 'name' failed: Must be a subset of {'form_incomplete','form_unverified','form_complete','data_export_rights_no_access','data_export_rights_deidentified','data_export_rights_full','form_rights_no_access','form_rights_readonly','form_rights_edit_form','form_rights_edit_survey','access_no','access_yes'}, but has additional elements {'bad-name'}.
-# }
+} # }
 ```

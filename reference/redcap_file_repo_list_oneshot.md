@@ -109,7 +109,7 @@ Will Beasley
 ## Examples
 
 ``` r
-# \dontrun{
+if (FALSE) { # \dontrun{
 uri     <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token   <- "589740603423E92BC79BAC2811B1F82A" # file-repo
 
@@ -118,16 +118,6 @@ REDCapR::redcap_file_repo_list_oneshot(
   redcap_uri    = uri,
   token         = token
 )$data
-#> The file repository structure describing 6 elements was read from REDCap in 0.2 seconds.  The http status code was 200.
-#> # A tibble: 6 × 5
-#>   folder_id doc_id name          role  dag  
-#>       <int>  <int> <chr>         <lgl> <lgl>
-#> 1         1     NA the-state     NA    NA   
-#> 2        NA   6652 mugshot-1.jpg NA    NA   
-#> 3        NA   6653 mugshot-2.jpg NA    NA   
-#> 4        NA   6654 mugshot-3.jpg NA    NA   
-#> 5        NA   6655 mugshot-4.jpg NA    NA   
-#> 6        NA   6656 mugshot-5.jpg NA    NA   
 
 # First subdirectory
 REDCapR::redcap_file_repo_list_oneshot(
@@ -135,10 +125,5 @@ REDCapR::redcap_file_repo_list_oneshot(
   token         = token,
   folder_id     = 1
 )$data
-#> The file repository structure describing 1 elements was read from REDCap in 0.2 seconds.  The http status code was 200.
-#> # A tibble: 1 × 5
-#>   folder_id doc_id name                role  dag  
-#>       <int>  <int> <chr>               <lgl> <lgl>
-#> 1        NA   6651 levon-and-barry.jpg NA    NA   
-# }
+} # }
 ```

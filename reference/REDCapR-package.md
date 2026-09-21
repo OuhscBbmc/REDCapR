@@ -133,12 +133,12 @@ Other contributors:
 ## Examples
 
 ``` r
-# \dontrun{
+if (FALSE) { # \dontrun{
 # Install/update REDCapR with the release version from CRAN.
 # install.packages('REDCapR')
 
 # Install/update REDCapR with the development version from GitHub
 # install.packages("pak") # Uncomment if `pak` isn't installed already.
 # pak::pkg_install('OuhscBbmc/REDCapR')
-# }
+} # }
 ```

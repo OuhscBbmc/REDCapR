@@ -394,38 +394,12 @@ Will Beasley
 ## Examples
 
 ``` r
-# \dontrun{
+if (FALSE) { # \dontrun{
 uri     <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token   <- "9A068C425B1341D69E83064A2D273A70"
 
 # Return the entire dataset
 REDCapR::redcap_read(batch_size=2, redcap_uri=uri, token=token)$data
-#> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2026-09-14 12:20:04.652404.
-#> Reading batch 1 of 3, with subjects 1 through 2 (ie, 2 unique subject records).
-#> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Reading batch 2 of 3, with subjects 3 through 4 (ie, 2 unique subject records).
-#> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Reading batch 3 of 3, with subjects 5 through 5 (ie, 1 unique subject records).
-#> 1 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> # A tibble: 5 × 25
-#>   record_id name_first name_last address  telephone email dob          age   sex
-#>       <dbl> <chr>      <chr>     <chr>    <chr>     <chr> <date>     <dbl> <dbl>
-#> 1         1 Nutmeg     Nutmouse  "14 Ros… (405) 32… nutt… 2003-08-30    11     0
-#> 2         2 Tumtum     Nutmouse  "14 Ros… (405) 32… tumm… 2003-03-10    11     1
-#> 3         3 Marcus     Wood      "243 Hi… (405) 32… mw@m… 1934-04-09    80     1
-#> 4         4 Trudy      DAG       "342 El… (405) 32… pero… 1952-11-02    61     0
-#> 5         5 John Lee   Walker    "Hotel … (405) 32… left… 1955-04-15    59     1
-#> # ℹ 16 more variables: demographics_complete <dbl>, height <dbl>, weight <dbl>,
-#> #   bmi <dbl>, comments <chr>, mugshot <chr>, health_complete <dbl>,
-#> #   race___1 <dbl>, race___2 <dbl>, race___3 <dbl>, race___4 <dbl>,
-#> #   race___5 <dbl>, race___6 <dbl>, ethnicity <dbl>, interpreter_needed <dbl>,
-#> #   race_and_ethnicity_complete <dbl>
 
 # Return a subset of columns while also specifying the column types.
 col_types <- readr::cols(
@@ -443,31 +417,5 @@ REDCapR::redcap_read(
   col_types  = col_types,
   batch_size = 2
 )$data
-#> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
-#> 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2026-09-14 12:20:07.828216.
-#> Reading batch 1 of 3, with subjects 1 through 2 (ie, 2 unique subject records).
-#> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Reading batch 2 of 3, with subjects 3 through 4 (ie, 2 unique subject records).
-#> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Reading batch 3 of 3, with subjects 5 through 5 (ie, 1 unique subject records).
-#> 1 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> # A tibble: 5 × 25
-#>   record_id name_first name_last address  telephone email dob          age   sex
-#>       <int> <chr>      <chr>     <chr>    <chr>     <chr> <date>     <dbl> <dbl>
-#> 1         1 Nutmeg     Nutmouse  "14 Ros… (405) 32… nutt… 2003-08-30    11     0
-#> 2         2 Tumtum     Nutmouse  "14 Ros… (405) 32… tumm… 2003-03-10    11     1
-#> 3         3 Marcus     Wood      "243 Hi… (405) 32… mw@m… 1934-04-09    80     1
-#> 4         4 Trudy      DAG       "342 El… (405) 32… pero… 1952-11-02    61     0
-#> 5         5 John Lee   Walker    "Hotel … (405) 32… left… 1955-04-15    59     1
-#> # ℹ 16 more variables: demographics_complete <dbl>, height <dbl>, weight <dbl>,
-#> #   bmi <dbl>, comments <chr>, mugshot <chr>, health_complete <dbl>,
-#> #   race___1 <lgl>, race___2 <lgl>, race___3 <lgl>, race___4 <lgl>,
-#> #   race___5 <lgl>, race___6 <lgl>, ethnicity <dbl>, interpreter_needed <dbl>,
-#> #   race_and_ethnicity_complete <dbl>
-# }
+} # }
 ```

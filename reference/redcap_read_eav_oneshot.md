@@ -200,13 +200,12 @@ Will Beasley
 ## Examples
 
 ``` r
-# \dontrun{
+if (FALSE) { # \dontrun{
 uri      <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token    <- "9A068C425B1341D69E83064A2D273A70"
 
 # Return all records and all variables.
 ds <- REDCapR:::redcap_read_eav_oneshot(redcap_uri=uri, token=token)$data
-#> 103 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 
 # Return only records with IDs of 1 and 3
 desired_records_v1 <- c(1, 3)
@@ -215,7 +214,6 @@ ds_some_rows_v1 <- REDCapR:::redcap_read_eav_oneshot(
   token      = token,
   records    = desired_records_v1
 )$data
-#> 41 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 
 # Return only the fields record_id, name_first, and age
 desired_fields_v1 <- c("record_id", "name_first", "age")
@@ -224,12 +222,9 @@ ds_some_fields_v1 <- REDCapR:::redcap_read_eav_oneshot(
   token      = token,
   fields     = desired_fields_v1
 )$data
-#> 15 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 
 # Repeating
 token <- "56F43A10D01D6578A46393394D76D88F"  # PHI-free demo: Repeating Instruments --Sparse # 2603
 ds <- REDCapR:::redcap_read_eav_oneshot(redcap_uri=uri, token=token)$data
-#> The REDCapR read/export operation was not successful.  The error message was:
-#> ERROR: You do not have permissions to use the API
-# }
+} # }
 ```

@@ -100,20 +100,17 @@ Ezra Porter
 ## Examples
 
 ``` r
-# \dontrun{
+if (FALSE) { # \dontrun{
 uri                 <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 
 # Repeating events project
 token_1  <- "FEF7A22B52E6B9942AFF7A28C426C871" # "vignette-repeating" test project
 token_1  <- "22C3FF1C8B08899FB6F86D91D874A159" # vignette-repeating production
 REDCapR::redcap_instrument_repeating(redcap_uri=uri, token=token_1)$data
-#> The REDCapR repeating event-instrument retrieval was not successful.  The error message was:
-#> ERROR: You do not have permissions to use the API
-#> # A tibble: 0 × 0
 
 # Classic project (without repeating instruments) throws an error
 token_2  <- "9A068C425B1341D69E83064A2D273A70" # "simple" test project
 token_2  <- "9A81268476645C4E5F03428B8AC3AA7B" # "simple" test project production
 # Throws an error REDCapR::redcap_instrument_repeating(redcap_uri=uri, token=token_2)$data
-# }
+} # }
 ```

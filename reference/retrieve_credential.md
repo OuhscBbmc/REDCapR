@@ -151,49 +151,18 @@ Will Beasley
 ## Examples
 
 ``` r
-# \dontrun{
+if (FALSE) { # \dontrun{
 # ---- Local File Example ----------------------------
 path <- system.file("misc/example.credentials", package = "REDCapR")
 (p1  <- REDCapR::retrieve_credential_local(path, 33L))
-#> $redcap_uri
-#> [1] "https://redcap-dev-2.ouhsc.edu/redcap/api/"
-#> 
-#> $username
-#> [1] "myusername"
-#> 
-#> $project_id
-#> [1] 33
-#> 
-#> $token
-#> [1] "9A068C425B1341D69E83064A2D273A70"
-#> 
-#> $comment
-#> [1] "simple"
-#> 
 (p2  <- REDCapR::retrieve_credential_local(path, 34L))
-#> $redcap_uri
-#> [1] "https://redcap-dev-2.ouhsc.edu/redcap/api/"
-#> 
-#> $username
-#> [1] "myusername"
-#> 
-#> $project_id
-#> [1] 34
-#> 
-#> $token
-#> [1] "DA6F2BB23146BD5A7EA3408C1A44A556"
-#> 
-#> $comment
-#> [1] "longitudinal"
-#> 
 
 
 # Create a skeleton of the local credential file to modify
 path_demo <- base::tempfile(pattern = "temp", fileext = ".credentials")
 
 create_credential_local(path_demo)
-#> [1] TRUE
 
 base::unlink(path_demo) # This is just a demo; don't delete the real file!
-# }
+} # }
 ```

@@ -110,20 +110,15 @@ REDCapR::checkbox_choices(select_choices=choices_1)
 #> 5 5     White                                    
 #> 6 6     Unknown / Not Reported                   
 
-# \dontrun{
+if (FALSE) { # \dontrun{
 uri         <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token       <- "9A068C425B1341D69E83064A2D273A70"
 
 ds_metadata <- redcap_metadata_read(uri, token)$data
-#> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
 choices_2   <- ds_metadata[ds_metadata$field_name == "race", ]$select_choices_or_calculations
 
 REDCapR::regex_named_captures(pattern = pattern_boxes, text = choices_2)
-#> # A tibble: 1 × 2
-#>   id    label
-#>   <chr> <chr>
-#> 1 ""    ""   
-# }
+} # }
 
 path_3     <- system.file(package = "REDCapR", "test-data/projects/simple/metadata.csv")
 ds_metadata_3  <- read.csv(path_3)

@@ -145,7 +145,7 @@ Will Beasley
 ## Examples
 
 ``` r
-# \dontrun{
+if (FALSE) { # \dontrun{
 uri          <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token        <- "9A068C425B1341D69E83064A2D273A70"
 
@@ -159,7 +159,6 @@ ds_1a <-
     token      = token,
     report_id  = report_1_id
   )$data
-#> 5 records and 5 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 
 
 # Specify the column types.
@@ -177,7 +176,6 @@ ds_1b <-
     report_id  = report_1_id,
     col_types  = col_types_1
   )$data
-#> 5 records and 5 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
 
 
 # Return condensed checkboxes Report option:
@@ -195,6 +193,5 @@ ds_2 <-
     report_id  = report_2_id,
     col_types  = col_types_2
   )$data
-#> 5 records and 2 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-# }
+} # }
 ```

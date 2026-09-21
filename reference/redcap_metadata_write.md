@@ -95,7 +95,7 @@ Will Beasley
 ## Examples
 
 ``` r
-# \dontrun{
+if (FALSE) { # \dontrun{
 # Please don't run this example without changing the token to
 # point to your server.  It could interfere with our testing suite.
 uri            <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
@@ -111,31 +111,6 @@ ds_to_write <-
     col_types = readr::cols(.default = readr::col_character())
   )
 ds_to_write
-#> # A tibble: 16 × 18
-#>    field_name form_name          section_header      field_type field_label     
-#>    <chr>      <chr>              <chr>               <chr>      <chr>           
-#>  1 record_id  demographics       NA                  text       Study ID        
-#>  2 name_first demographics       Contact Information text       First Name      
-#>  3 name_last  demographics       NA                  text       Last Name       
-#>  4 address    demographics       NA                  notes      Street, City, S…
-#>  5 telephone  demographics       NA                  text       Phone number    
-#>  6 email      demographics       NA                  text       E-mail          
-#>  7 dob        demographics       NA                  text       Date of birth   
-#>  8 age        demographics       NA                  calc       Age (years)     
-#>  9 sex        demographics       NA                  radio      Gender          
-#> 10 height     health             NA                  text       Height (cm)     
-#> 11 weight     health             NA                  text       Weight (kilogra…
-#> 12 bmi        health             NA                  calc       BMI             
-#> 13 comments   health             General Comments    notes      Comments        
-#> 14 mugshot    health             NA                  file       Mugshot         
-#> 15 race       race_and_ethnicity NA                  checkbox   Race (Select al…
-#> 16 ethnicity  race_and_ethnicity NA                  radio      Ethnicity       
-#> # ℹ 13 more variables: select_choices_or_calculations <chr>, field_note <chr>,
-#> #   text_validation_type_or_show_slider_number <chr>,
-#> #   text_validation_min <chr>, text_validation_max <chr>, identifier <chr>,
-#> #   branching_logic <chr>, required_field <chr>, custom_alignment <chr>,
-#> #   question_number <chr>, matrix_group_name <chr>, matrix_ranking <chr>,
-#> #   field_annotation <chr>
 
 # Import the dictionary into the REDCap project
 REDCapR::redcap_metadata_write(
@@ -143,24 +118,5 @@ REDCapR::redcap_metadata_write(
   redcap_uri  = uri,
   token       = token
 )
-#> 16 fields were written to the REDCap dictionary in 0.2 seconds.
-#> $success
-#> [1] TRUE
-#> 
-#> $status_code
-#> [1] 200
-#> 
-#> $outcome_message
-#> [1] "16 fields were written to the REDCap dictionary in 0.2 seconds."
-#> 
-#> $field_count
-#> [1] 16
-#> 
-#> $elapsed_seconds
-#> [1] 0.212214
-#> 
-#> $raw_text
-#> [1] ""
-#> 
-# }
+} # }
 ```

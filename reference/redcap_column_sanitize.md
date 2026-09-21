@@ -69,8 +69,8 @@ dirty <- data.frame(
 )
 
 REDCapR::redcap_column_sanitize(dirty)
-#>   id             names
-#> 1  1           Ekstrom
-#> 2  2         J"oreskog
-#> 3  3 bisschen Z"urcher
+#>   id            names
+#> 1  1          Ekstrom
+#> 2  2         Joreskog
+#> 3  3 bisschen Zurcher
 ```

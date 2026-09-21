@@ -119,7 +119,7 @@ Will Beasley, John J. Aponte
 ## Examples
 
 ``` r
-# \dontrun{
+if (FALSE) { # \dontrun{
 # Define some constants
 uri    <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token  <- "F9CBFFF78C3D78F641BAE9623F6B7E6A" # simple-write
@@ -138,29 +138,6 @@ REDCapR::redcap_file_upload_oneshot(
   redcap_uri = uri,
   token      = token
 )
-#> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-1.jpg`.
-#> file uploaded to REDCap in 0.3 seconds.
-#> $success
-#> [1] TRUE
-#> 
-#> $status_code
-#> [1] 200
-#> 
-#> $outcome_message
-#> [1] "file uploaded to REDCap in 0.3 seconds."
-#> 
-#> $records_affected_count
-#> [1] 1
-#> 
-#> $affected_ids
-#> [1] "1"
-#> 
-#> $elapsed_seconds
-#> [1] 0.2926459
-#> 
-#> $raw_text
-#> [1] ""
-#> 
 
 # Upload a collection of five images.
 records    <- 1:5
@@ -180,15 +157,5 @@ for (i in seq_along(records)) {
     token      = token
   )
 }
-#> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-1.jpg`.
-#> file uploaded to REDCap in 0.2 seconds.
-#> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-2.jpg`.
-#> file uploaded to REDCap in 0.2 seconds.
-#> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-3.jpg`.
-#> file uploaded to REDCap in 0.2 seconds.
-#> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-4.jpg`.
-#> file uploaded to REDCap in 0.2 seconds.
-#> Preparing to upload the file `/Users/runner/work/_temp/Library/REDCapR/test-data/mugshot-5.jpg`.
-#> file uploaded to REDCap in 0.2 seconds.
-# }
+} # }
 ```

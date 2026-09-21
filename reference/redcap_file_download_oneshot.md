@@ -142,7 +142,7 @@ Will Beasley, John J. Aponte
 ## Examples
 
 ``` r
-# \dontrun{
+if (FALSE) { # \dontrun{
 uri     <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token   <- "F9CBFFF78C3D78F641BAE9623F6B7E6A" # simple-write
 
@@ -156,12 +156,9 @@ result_1 <- REDCapR::redcap_file_download_oneshot(
   redcap_uri    = uri,
   token         = token
 )
-#> Preparing to download the file `mugshot-1.jpg`.
-#> image/jpeg; name="mugshot-1.jpg" successfully downloaded in 0.3 seconds, and saved as mugshot-1.jpg.
 base::unlink("mugshot-1.jpg")
 
 (full_name <- base::tempfile(pattern="mugshot", fileext = ".jpg"))
-#> [1] "/var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T//Rtmp809I6s/mugshotd0e38321686.jpg"
 result_2   <- REDCapR::redcap_file_download_oneshot(
   file_name     = full_name,
   record        = record,
@@ -169,12 +166,9 @@ result_2   <- REDCapR::redcap_file_download_oneshot(
   redcap_uri    = uri,
   token         = token
 )
-#> Preparing to download the file `/var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T//Rtmp809I6s/mugshotd0e38321686.jpg`.
-#> image/jpeg; name="mugshot-1.jpg" successfully downloaded in 0.2 seconds, and saved as /var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T//Rtmp809I6s/mugshotd0e38321686.jpg.
 base::unlink(full_name)
 
 (relative_name <- "ssss.jpg")
-#> [1] "ssss.jpg"
 result_3 <- REDCapR::redcap_file_download_oneshot(
   file_name    = relative_name,
   record       = record,
@@ -182,8 +176,6 @@ result_3 <- REDCapR::redcap_file_download_oneshot(
   redcap_uri   = uri,
   token        = token
 )
-#> Preparing to download the file `ssss.jpg`.
-#> image/jpeg; name="mugshot-1.jpg" successfully downloaded in 0.2 seconds, and saved as ssss.jpg.
 base::unlink(relative_name)
-# }
+} # }
 ```

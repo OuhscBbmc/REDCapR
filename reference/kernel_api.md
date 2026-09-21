@@ -80,7 +80,7 @@ guarantees the value can always be used in
 ## Examples
 
 ``` r
-# \dontrun{
+if (FALSE) { # \dontrun{
 uri            <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token          <- "9A068C425B1341D69E83064A2D273A70"
 
@@ -94,111 +94,7 @@ kernel <- REDCapR:::kernel_api(uri, post_body, config_options)
 
 # Consume the results in a few different ways.
 kernel$result
-#> Response [https://redcap-dev-2.ouhsc.edu/redcap/api/]
-#>   Date: 2026-09-14 12:19
-#>   Status: 200
-#>   Content-Type: text/csv; charset=utf-8
-#>   Size: 636 B
-#> project_id,project_title,creation_time,production_time,in_production,project_...
-#> 33,"REDCapR: simple","2024-10-10 20:21:18",,0,English,4,,,,,0,0,0,0,1,0,0,,,,...
 read.csv(text = kernel$raw_text)
-#>   project_id   project_title       creation_time production_time in_production
-#> 1         33 REDCapR: simple 2024-10-10 20:21:18              NA             0
-#>   project_language purpose purpose_other project_notes custom_record_label
-#> 1          English       4            NA            NA                  NA
-#>   secondary_unique_field is_longitudinal has_repeating_instruments_or_events
-#> 1                     NA               0                                   0
-#>   surveys_enabled scheduling_enabled record_autonumbering_enabled
-#> 1               0                  0                            1
-#>   randomization_enabled ddp_enabled project_irb_number project_grant_number
-#> 1                     0           0                 NA                   NA
-#>   project_pi_firstname project_pi_lastname project_pi_email
-#> 1                   NA                  NA               NA
-#>   display_today_now_button missing_data_codes
-#> 1                        1                 NA
-#>                          external_modules bypass_branching_erase_field_prompt
-#> 1 redcap_entity,redcap_timezone_scheduler                                   0
 as.list(read.csv(text = kernel$raw_text))
-#> $project_id
-#> [1] 33
-#> 
-#> $project_title
-#> [1] "REDCapR: simple"
-#> 
-#> $creation_time
-#> [1] "2024-10-10 20:21:18"
-#> 
-#> $production_time
-#> [1] NA
-#> 
-#> $in_production
-#> [1] 0
-#> 
-#> $project_language
-#> [1] "English"
-#> 
-#> $purpose
-#> [1] 4
-#> 
-#> $purpose_other
-#> [1] NA
-#> 
-#> $project_notes
-#> [1] NA
-#> 
-#> $custom_record_label
-#> [1] NA
-#> 
-#> $secondary_unique_field
-#> [1] NA
-#> 
-#> $is_longitudinal
-#> [1] 0
-#> 
-#> $has_repeating_instruments_or_events
-#> [1] 0
-#> 
-#> $surveys_enabled
-#> [1] 0
-#> 
-#> $scheduling_enabled
-#> [1] 0
-#> 
-#> $record_autonumbering_enabled
-#> [1] 1
-#> 
-#> $randomization_enabled
-#> [1] 0
-#> 
-#> $ddp_enabled
-#> [1] 0
-#> 
-#> $project_irb_number
-#> [1] NA
-#> 
-#> $project_grant_number
-#> [1] NA
-#> 
-#> $project_pi_firstname
-#> [1] NA
-#> 
-#> $project_pi_lastname
-#> [1] NA
-#> 
-#> $project_pi_email
-#> [1] NA
-#> 
-#> $display_today_now_button
-#> [1] 1
-#> 
-#> $missing_data_codes
-#> [1] NA
-#> 
-#> $external_modules
-#> [1] "redcap_entity,redcap_timezone_scheduler"
-#> 
-#> $bypass_branching_erase_field_prompt
-#> [1] 0
-#> 
-# }
+} # }
 ```

@@ -110,7 +110,7 @@ It guarantees the value can always be used in <code><a href="https://rdrr.io/r/u
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="va">uri</span>            <span class="op">&lt;-</span> <span class="st">"https://redcap-dev-2.ouhsc.edu/redcap/api/"</span></span></span>
 <span class="r-in"><span><span class="va">token</span>          <span class="op">&lt;-</span> <span class="st">"9A068C425B1341D69E83064A2D273A70"</span></span></span>
 <span class="r-in"><span></span></span>
@@ -124,113 +124,9 @@ It guarantees the value can always be used in <code><a href="https://rdrr.io/r/u
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Consume the results in a few different ways.</span></span></span>
 <span class="r-in"><span><span class="va">kernel</span><span class="op">$</span><span class="va">result</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Response [https://redcap-dev-2.ouhsc.edu/redcap/api/]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Date: 2026-09-14 12:19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Status: 200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Content-Type: text/csv; charset=utf-8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Size: 636 B</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> project_id,project_title,creation_time,production_time,in_production,project_...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33,"REDCapR: simple","2024-10-10 20:21:18",,0,English,4,,,,,0,0,0,0,1,0,0,,,,...</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span>text <span class="op">=</span> <span class="va">kernel</span><span class="op">$</span><span class="va">raw_text</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   project_id   project_title       creation_time production_time in_production</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1         33 REDCapR: simple 2024-10-10 20:21:18              NA             0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   project_language purpose purpose_other project_notes custom_record_label</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1          English       4            NA            NA                  NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   secondary_unique_field is_longitudinal has_repeating_instruments_or_events</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                     NA               0                                   0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   surveys_enabled scheduling_enabled record_autonumbering_enabled</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1               0                  0                            1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   randomization_enabled ddp_enabled project_irb_number project_grant_number</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                     0           0                 NA                   NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   project_pi_firstname project_pi_lastname project_pi_email</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                   NA                  NA               NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   display_today_now_button missing_data_codes</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                        1                 NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          external_modules bypass_branching_erase_field_prompt</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 redcap_entity,redcap_timezone_scheduler                                   0</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span>text <span class="op">=</span> <span class="va">kernel</span><span class="op">$</span><span class="va">raw_text</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $project_id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 33</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $project_title</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "REDCapR: simple"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $creation_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2024-10-10 20:21:18"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $production_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $in_production</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $project_language</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "English"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $purpose</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $purpose_other</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $project_notes</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $custom_record_label</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $secondary_unique_field</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $is_longitudinal</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $has_repeating_instruments_or_events</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $surveys_enabled</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $scheduling_enabled</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $record_autonumbering_enabled</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $randomization_enabled</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ddp_enabled</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $project_irb_number</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $project_grant_number</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $project_pi_firstname</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $project_pi_lastname</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $project_pi_email</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $display_today_now_button</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $missing_data_codes</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $external_modules</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "redcap_entity,redcap_timezone_scheduler"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $bypass_branching_erase_field_prompt</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

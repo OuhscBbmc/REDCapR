@@ -118,7 +118,7 @@ Will Beasley
 ## Examples
 
 ``` r
-# \dontrun{
+if (FALSE) { # \dontrun{
 uri     <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token   <- "4780D038A2080BA2E7CC904A14218662" # survey
 
@@ -132,9 +132,6 @@ result <- REDCapR::redcap_survey_link_export_oneshot(
   redcap_uri     = uri,
   token          = token
 )
-#> Preparing to export the survey link for the instrument `participant_morale_questionnaire`.
-#> exported the survey link in 0.2 seconds, for instrument `participant_morale_questionnaire`, record `1`.
 result$survey_link
-#> [1] "https://redcap-dev-2.ouhsc.edu/redcap/surveys/?s=wrz55jpDyXYBuw73"
-# }
+} # }
 ```

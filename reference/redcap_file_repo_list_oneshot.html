@@ -143,7 +143,7 @@ administrator to send you the static material.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="va">uri</span>     <span class="op">&lt;-</span> <span class="st">"https://redcap-dev-2.ouhsc.edu/redcap/api/"</span></span></span>
 <span class="r-in"><span><span class="va">token</span>   <span class="op">&lt;-</span> <span class="st">"589740603423E92BC79BAC2811B1F82A"</span> <span class="co"># file-repo</span></span></span>
 <span class="r-in"><span></span></span>
@@ -152,16 +152,6 @@ administrator to send you the static material.</p>
 <span class="r-in"><span>  redcap_uri    <span class="op">=</span> <span class="va">uri</span>,</span></span>
 <span class="r-in"><span>  token         <span class="op">=</span> <span class="va">token</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The file repository structure describing 6 elements was read from REDCap in 0.2 seconds.  The http status code was 200.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   folder_id doc_id name          role  dag  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>         1     <span style="color: #BB0000;">NA</span> the-state     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>        <span style="color: #BB0000;">NA</span>   <span style="text-decoration: underline;">6</span>652 mugshot-1.jpg <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>        <span style="color: #BB0000;">NA</span>   <span style="text-decoration: underline;">6</span>653 mugshot-2.jpg <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>        <span style="color: #BB0000;">NA</span>   <span style="text-decoration: underline;">6</span>654 mugshot-3.jpg <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>        <span style="color: #BB0000;">NA</span>   <span style="text-decoration: underline;">6</span>655 mugshot-4.jpg <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>        <span style="color: #BB0000;">NA</span>   <span style="text-decoration: underline;">6</span>656 mugshot-5.jpg <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># First subdirectory</span></span></span>
 <span class="r-in"><span><span class="fu">REDCapR</span><span class="fu">::</span><span class="fu">redcap_file_repo_list_oneshot</span><span class="op">(</span></span></span>
@@ -169,12 +159,7 @@ administrator to send you the static material.</p>
 <span class="r-in"><span>  token         <span class="op">=</span> <span class="va">token</span>,</span></span>
 <span class="r-in"><span>  folder_id     <span class="op">=</span> <span class="fl">1</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="va">data</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The file repository structure describing 1 elements was read from REDCap in 0.2 seconds.  The http status code was 200.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   folder_id doc_id name                role  dag  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>        <span style="color: #BB0000;">NA</span>   <span style="text-decoration: underline;">6</span>651 levon-and-barry.jpg <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

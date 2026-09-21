@@ -136,22 +136,12 @@ Jonathan M. Mang, Will Beasley
 ## Examples
 
 ``` r
-# \dontrun{
+if (FALSE) { # \dontrun{
 uri          <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token        <- "9A068C425B1341D69E83064A2D273A70"
 
 ds_last_week <- REDCapR::redcap_log_read(redcap_uri=uri, token=token)$data
-#> 27,635 rows were read from REDCap in 0.8 seconds.  The http status code was 200.
 head(ds_last_week)
-#> # A tibble: 6 × 5
-#>   timestamp           username        action        details               record
-#>   <dttm>              <chr>           <chr>         <chr>                 <chr> 
-#> 1 2026-09-14 07:19:00 unittestphifree Manage/Design Export instruments (… NA    
-#> 2 2026-09-14 07:19:00 unittestphifree Manage/Design Export DAGs (API)     NA    
-#> 3 2026-09-14 07:19:00 unittestphifree Manage/Design Download data dictio… NA    
-#> 4 2026-09-14 07:19:00 unittestphifree Manage/Design Export project infor… NA    
-#> 5 2026-09-14 06:56:00 unittestphifree NA            NA                    NA    
-#> 6 2026-09-14 06:56:00 unittestphifree NA            NA                    NA    
 
 ds_one_day <-
   REDCapR::redcap_log_read(
@@ -160,17 +150,7 @@ ds_one_day <-
     log_begin_date = as.Date("2024-10-11"),
     log_end_date   = as.Date("2024-10-11")
   )$data
-#> 18 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 head(ds_one_day)
-#> # A tibble: 6 × 5
-#>   timestamp           username        action        details              record
-#>   <dttm>              <chr>           <chr>         <chr>                <chr> 
-#> 1 2024-10-11 10:44:00 unittestphifree Manage/Design Export Logging (API) NA    
-#> 2 2024-10-11 10:43:00 unittestphifree Manage/Design Export Logging (API) NA    
-#> 3 2024-10-11 10:43:00 unittestphifree Manage/Design Export Logging (API) NA    
-#> 4 2024-10-11 10:42:00 unittestphifree Manage/Design Export Logging (API) NA    
-#> 5 2024-10-11 10:42:00 unittestphifree Manage/Design Export Logging (API) NA    
-#> 6 2024-10-11 10:41:00 unittestphifree Manage/Design Export Logging (API) NA    
 
 ds_one_day_single_record <-
   REDCapR::redcap_log_read(
@@ -181,11 +161,6 @@ ds_one_day_single_record <-
     record         = as.character(3),
     # user           = "unittestphifree"
   )$data
-#> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 head(ds_one_day_single_record)
-#> # A tibble: 1 × 5
-#>   timestamp           username    action          details      record
-#>   <dttm>              <chr>       <chr>           <chr>        <chr> 
-#> 1 2024-10-10 20:26:00 itawilliamb Update record 3 bmi = '24.7' 3     
-# }
+} # }
 ```

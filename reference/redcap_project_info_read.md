@@ -165,7 +165,7 @@ Will Beasley, Stephan Kadauke
 ## Examples
 
 ``` r
-# \dontrun{
+if (FALSE) { # \dontrun{
 # Specify your project uri and token(s).
 uri                  <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token_simple         <- "9A068C425B1341D69E83064A2D273A70"
@@ -173,31 +173,7 @@ token_longitudinal   <- "DA6F2BB23146BD5A7EA3408C1A44A556"
 
 # ---- Simple examples
 REDCapR::redcap_project_info_read(uri, token_simple      )$data
-#> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> # A tibble: 1 × 27
-#>   project_id project_title creation_time       production_time in_production
-#>        <int> <chr>         <dttm>              <dttm>          <lgl>        
-#> 1         33 REDCapR: sim… 2024-10-10 20:21:18 NA              FALSE        
-#> # ℹ 22 more variables: project_language <chr>, purpose <int>,
-#> #   purpose_other <chr>, project_notes <chr>, custom_record_label <chr>,
-#> #   secondary_unique_field <chr>, is_longitudinal <lgl>,
-#> #   has_repeating_instruments_or_events <lgl>, surveys_enabled <lgl>,
-#> #   scheduling_enabled <lgl>, record_autonumbering_enabled <lgl>,
-#> #   randomization_enabled <lgl>, ddp_enabled <lgl>, project_irb_number <chr>,
-#> #   project_grant_number <chr>, project_pi_firstname <chr>, …
 REDCapR::redcap_project_info_read(uri, token_longitudinal)$data
-#> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> # A tibble: 1 × 27
-#>   project_id project_title creation_time       production_time in_production
-#>        <int> <chr>         <dttm>              <dttm>          <lgl>        
-#> 1         34 REDCapR: lon… 2024-10-10 20:40:17 NA              FALSE        
-#> # ℹ 22 more variables: project_language <chr>, purpose <int>,
-#> #   purpose_other <chr>, project_notes <chr>, custom_record_label <chr>,
-#> #   secondary_unique_field <chr>, is_longitudinal <lgl>,
-#> #   has_repeating_instruments_or_events <lgl>, surveys_enabled <lgl>,
-#> #   scheduling_enabled <lgl>, record_autonumbering_enabled <lgl>,
-#> #   randomization_enabled <lgl>, ddp_enabled <lgl>, project_irb_number <chr>,
-#> #   project_grant_number <chr>, project_pi_firstname <chr>, …
 
 # ---- Specify timezone
 # Specify the server's timezone, for example, US Central
@@ -208,9 +184,7 @@ d3 <-
     token_simple,
     locale     = server_locale
   )$data
-#> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
 d3$creation_time
-#> [1] "2024-10-10 20:21:18 CDT"
 
 # Alternatively, set timezone to the client's location.
 client_locale <- readr::locale(tz = Sys.timezone())
@@ -228,15 +202,12 @@ d_all <-
   ) %>%
   dplyr::filter(32L == nchar(token)) %>%
   purrr::pmap_dfr(REDCapR::redcap_project_info_read, locale = server_locale)
-#> Error in system.file("misc/example.credentials", package = "REDCapR") %>%     readr::read_csv(comment = "#", col_select = c(redcap_uri,         token), col_types = readr::cols(.default = readr::col_character())) %>%     dplyr::filter(32L == nchar(token)) %>% purrr::pmap_dfr(REDCapR::redcap_project_info_read,     locale = server_locale): could not find function "%>%"
 
 # Inspect values stored on the server.
 d_all$data
-#> Error: object 'd_all' not found
 # or: View(d_all$data)
 
 # Inspect everything returned, including values like the http status code.
 d_all
-#> Error: object 'd_all' not found
-# }
+} # }
 ```

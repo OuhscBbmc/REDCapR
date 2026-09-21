@@ -136,36 +136,29 @@ Will Beasley
 ## Examples
 
 ``` r
-# \dontrun{
+if (FALSE) { # \dontrun{
 uri     <- "https://redcap-dev-2.ouhsc.edu/redcap/api/"
 token   <- "F9CBFFF78C3D78F641BAE9623F6B7E6A" # simple-write
 
 # event <- "" # only for longitudinal projects
 
 (full_name <- base::tempfile(pattern="instruments-all-records-all", fileext = ".pdf"))
-#> [1] "/var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T//Rtmp809I6s/instruments-all-records-alld0e1543408.pdf"
 result_1   <- REDCapR::redcap_instrument_download(
   file_name     = full_name,
   redcap_uri    = uri,
   token         = token
 )
-#> Preparing to download the file `/var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T//Rtmp809I6s/instruments-all-records-alld0e1543408.pdf`.
-#> text/html; charset=UTF-8 successfully downloaded in 0.3 seconds, and saved as /var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T//Rtmp809I6s/instruments-all-records-alld0e1543408.pdf.
 base::unlink(full_name)
 
 (full_name <- base::tempfile(pattern="instruments-all-record-1-", fileext = ".pdf"))
-#> [1] "/var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T//Rtmp809I6s/instruments-all-record-1-d0e3f23f9e6.pdf"
 result_2   <- REDCapR::redcap_instrument_download(
   record        = 5,
   file_name     = full_name,
   redcap_uri    = uri,
   token         = token
 )
-#> Preparing to download the file `/var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T//Rtmp809I6s/instruments-all-record-1-d0e3f23f9e6.pdf`.
-#> text/html; charset=UTF-8 successfully downloaded in 0.3 seconds, and saved as /var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T//Rtmp809I6s/instruments-all-record-1-d0e3f23f9e6.pdf.
 base::unlink(full_name)
 (full_name <- base::tempfile(pattern="instrument-1-record-1-", fileext=".pdf"))
-#> [1] "/var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T//Rtmp809I6s/instrument-1-record-1-d0e52eb8b6c.pdf"
 result_3   <- REDCapR::redcap_instrument_download(
   record        = 5,
   instrument    = "health",
@@ -173,8 +166,6 @@ result_3   <- REDCapR::redcap_instrument_download(
   redcap_uri    = uri,
   token         = token
 )
-#> Preparing to download the file `/var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T//Rtmp809I6s/instrument-1-record-1-d0e52eb8b6c.pdf`.
-#> text/html; charset=UTF-8 successfully downloaded in 0.3 seconds, and saved as /var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T//Rtmp809I6s/instrument-1-record-1-d0e52eb8b6c.pdf.
 base::unlink(full_name)
-# }
+} # }
 ```
