@@ -135,7 +135,8 @@ redcap_event_instruments <- function(
           readr::read_delim(
             file            = I(kernel$raw_text),
             col_types       = col_types,
-            delim           = delimiter
+            delim           = delimiter,
+            trim_ws         = TRUE
           )
       },
       silent = TRUE

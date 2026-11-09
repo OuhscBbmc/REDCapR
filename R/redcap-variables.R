@@ -125,6 +125,7 @@ redcap_variables <- function(
           readr::read_delim(
             file            = I(kernel$raw_text),
             delim           = delimiter,
+            trim_ws         = TRUE,
             show_col_types  = FALSE
           )
       },
