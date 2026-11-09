@@ -1,5 +1,9 @@
 # REDCapR (development version)
 
+### Bug Fixes
+
+* Trim leading & trailing whitespace around dataset values, to stay consistent with the behavior of `readr::read_csv()`.  REDCapR v1.7.0 switched to `readr::read_delim()`.  (#633, @tillmanal)
+
 # REDCapR 1.7.0 (released 2026-08-20)
 
 ### New Features

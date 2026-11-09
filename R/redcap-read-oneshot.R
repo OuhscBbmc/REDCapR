@@ -351,6 +351,7 @@ redcap_read_oneshot <- function(
           guess_max       = guess_max,
           locale          = locale,
           delim           = delimiter,
+          trim_ws         = TRUE,
           show_col_types  = FALSE
         ),
 

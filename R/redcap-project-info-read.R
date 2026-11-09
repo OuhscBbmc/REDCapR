@@ -223,6 +223,7 @@ redcap_project_info_read <- function(
               locale         = locale,
               n_max          = 0,
               delim          = delimiter,
+              trim_ws        = TRUE,
               show_col_types = FALSE
             )
           )
@@ -242,6 +243,7 @@ redcap_project_info_read <- function(
             locale          = locale,
             col_types       = col_types,
             delim           = delimiter,
+            trim_ws         = TRUE,
             show_col_types  = FALSE
           )
 
