@@ -2,6 +2,16 @@
 
 ## REDCapR (development version)
 
+#### Bug Fixes
+
+- Trim leading & trailing whitespace around dataset values, to stay
+  consistent with the behavior of
+  [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html).
+  REDCapR v1.7.0 switched to
+  [`readr::read_delim()`](https://readr.tidyverse.org/reference/read_delim.html).
+  ([\#633](https://github.com/OuhscBbmc/REDCapR/issues/633),
+  [@tillmanal](https://github.com/tillmanal))
+
 ## REDCapR 1.7.0 (released 2026-08-20)
 
 CRAN release: 2026-08-20

@@ -398,15 +398,15 @@ Environment
 
     #> ─ Session info ───────────────────────────────────────────────────────────────
     #>  setting  value
-    #>  version  R version 4.6.1 (2026-06-24)
-    #>  os       Ubuntu 24.04.5 LTS
+    #>  version  R version 4.6.2 (2026-10-29)
+    #>  os       Ubuntu 26.04.1 LTS
     #>  system   x86_64, linux-gnu
     #>  ui       X11
     #>  language en-US
     #>  collate  C.UTF-8
     #>  ctype    C.UTF-8
     #>  tz       UTC
-    #>  date     2026-09-21
+    #>  date     2026-11-09
     #>  pandoc   3.8.3 @ /opt/hostedtoolcache/pandoc/3.8.3/x64/ (via rmarkdown)
     #>  quarto   NA
     #> 
@@ -425,7 +425,7 @@ Environment
     #>  jsonlite      2.0.0   2025-03-27 [1] RSPM
     #>  knitr         1.52    2026-09-06 [1] RSPM
     #>  lifecycle     1.0.5   2026-01-08 [1] RSPM
-    #>  otel          0.2.0   2025-08-29 [1] RSPM
+    #>  otel          0.3.0   2026-11-07 [1] RSPM
     #>  pkgdown       2.2.1   2026-07-07 [1] any (@2.2.1)
     #>  R6            2.6.1   2025-02-15 [1] RSPM
     #>  ragg          1.5.2   2026-03-23 [1] RSPM
@@ -435,11 +435,11 @@ Environment
     #>  sessioninfo   1.2.4   2026-06-04 [1] RSPM
     #>  systemfonts   1.3.2   2026-03-05 [1] RSPM
     #>  textshaping   1.0.5   2026-03-06 [1] RSPM
-    #>  xfun          0.61    2026-09-16 [1] RSPM
+    #>  xfun          0.62    2026-10-16 [1] RSPM
     #>  yaml          2.3.12  2025-12-10 [1] RSPM
     #> 
     #>  [1] /home/runner/work/_temp/Library
-    #>  [2] /opt/R/4.6.1/lib/R/site-library
-    #>  [3] /opt/R/4.6.1/lib/R/library
+    #>  [2] /opt/R/4.6.2/lib/R/site-library
+    #>  [3] /opt/R/4.6.2/lib/R/library
     #> 
     #> ──────────────────────────────────────────────────────────────────────────────

@@ -41,15 +41,15 @@ records and fields returned.
 
 # Return all records and all variables.
 ds_all_rows_all_fields <- redcap_read(redcap_uri = uri, token = token)$data
-#> 24 variable metadata records were read from REDCap in 0.4 seconds.  The http status code was 200.
-#> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 24 variable metadata records were read from REDCap in 0.3 seconds.  The http status code was 200.
+#> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
-#> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2026-09-21 16:53:19.225104.
+#> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 2 data access groups were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 5 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> Starting to read 5 records  at 2026-11-09 16:37:37.632936.
 #> Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
-#> 5 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 5 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
 ds_all_rows_all_fields # Inspect the returned dataset
 #> # A tibble: 5 × 25
 #>   record_id name_first name_last address  telephone email dob          age   sex
@@ -89,15 +89,15 @@ ds_some_rows_v1 <- redcap_read(
   token      = token,
   records    = desired_records
 )$data
-#> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.
-#> 2 data access groups were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 2 records  at 2026-09-21 16:53:21.080336.
+#> 2 data access groups were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 2 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> Starting to read 2 records  at 2026-11-09 16:37:38.964859.
 #> Reading batch 1 of 1, with subjects 1 through 3 (ie, 2 unique subject records).
-#> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 2 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
 ```
 
 ### Read a subset of the fields
@@ -120,15 +120,15 @@ ds_some_fields <- redcap_read(
   token      = token,
   fields     = desired_fields
 )$data
-#> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.1 seconds.  The http status code was 200.
-#> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2026-09-21 16:53:22.855762.
+#> 5 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> Starting to read 5 records  at 2026-11-09 16:37:40.285264.
 #> Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
-#> 5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 5 records and 3 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
 ```
 
 ### Read a subset of records, conditioned on the values in some variables
@@ -153,15 +153,15 @@ ds_some_fields_v3 <- redcap_read(
   token      = token,
   fields     = desired_fields_v3
 )$data
-#> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
 #> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
-#> 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.1 seconds.  The http status code was 200.
-#> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2026-09-21 16:53:24.615532.
+#> 5 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> Starting to read 5 records  at 2026-11-09 16:37:41.557513.
 #> Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
-#> 5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 5 records and 3 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
 
 ds_some_fields_v3 # Examine the these three variables.
 #> # A tibble: 5 × 3
@@ -190,15 +190,15 @@ ds_some_rows_v3 <- redcap_read(
   token      = token,
   records    = desired_records_v3
 )$data
-#> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> The data dictionary describing 17 fields was read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> 1 rows were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.1 seconds.  The http status code was 200.
-#> 2 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 2 records  at 2026-09-21 16:53:26.341521.
+#> 2 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> Starting to read 2 records  at 2026-11-09 16:37:42.782554.
 #> Reading batch 1 of 1, with subjects 3 through 5 (ie, 2 unique subject records).
-#> 2 records and 25 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 2 records and 25 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
 
 ds_some_rows_v3 # Examine the results.
 #> # A tibble: 2 × 25
@@ -243,15 +243,15 @@ all_information <- redcap_read(
   token      = token,
   fields     = desired_fields
 )
-#> 24 variable metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 24 variable metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
 #> The data dictionary describing 17 fields was read from REDCap in 0.1 seconds.  The http status code was 200.
-#> 3 instrument metadata records were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 3 instrument metadata records were read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 1 rows were read from REDCap in 0.1 seconds.  The http status code was 200.
 #> 2 data access groups were read from REDCap in 0.1 seconds.  The http status code was 200.
-#> 5 records and 1 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
-#> Starting to read 5 records  at 2026-09-21 16:53:28.151881.
+#> 5 records and 1 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
+#> Starting to read 5 records  at 2026-11-09 16:37:44.088508.
 #> Reading batch 1 of 1, with subjects 1 through 5 (ie, 5 unique subject records).
-#> 5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200.
+#> 5 records and 3 columns were read from REDCap in 0.1 seconds.  The http status code was 200.
 all_information # Inspect the additional information
 #> $data
 #> # A tibble: 5 × 3
@@ -270,7 +270,7 @@ all_information # Inspect the additional information
 #> [1] "200"
 #> 
 #> $outcome_messages
-#> [1] "5 records and 3 columns were read from REDCap in 0.2 seconds.  The http status code was 200."
+#> [1] "5 records and 3 columns were read from REDCap in 0.1 seconds.  The http status code was 200."
 #> 
 #> $records_collapsed
 #> [1] ""
@@ -294,7 +294,7 @@ all_information # Inspect the additional information
 #> [1] NA
 #> 
 #> $elapsed_seconds
-#> [1] 1.687717
+#> [1] 1.205386
 ```
 
 ## Session Information
@@ -307,15 +307,15 @@ Environment
 
     #> ─ Session info ───────────────────────────────────────────────────────────────
     #>  setting  value
-    #>  version  R version 4.6.1 (2026-06-24)
-    #>  os       Ubuntu 24.04.5 LTS
+    #>  version  R version 4.6.2 (2026-10-29)
+    #>  os       Ubuntu 26.04.1 LTS
     #>  system   x86_64, linux-gnu
     #>  ui       X11
     #>  language en-US
     #>  collate  C.UTF-8
     #>  ctype    C.UTF-8
     #>  tz       UTC
-    #>  date     2026-09-21
+    #>  date     2026-11-09
     #>  pandoc   3.8.3 @ /opt/hostedtoolcache/pandoc/3.8.3/x64/ (via rmarkdown)
     #>  quarto   NA
     #> 
@@ -329,7 +329,7 @@ Environment
     #>  checkmate      2.3.4      2026-02-03 [1] RSPM
     #>  cli            3.6.6      2026-04-09 [1] RSPM
     #>  crayon         1.5.3      2024-06-20 [1] RSPM
-    #>  curl           8.0.0      2026-08-25 [1] RSPM
+    #>  curl           8.1.0      2026-10-14 [1] RSPM
     #>  desc           1.4.3      2023-12-10 [1] RSPM
     #>  digest         0.6.39     2025-11-19 [1] RSPM
     #>  dplyr          1.2.1      2026-04-03 [1] RSPM
@@ -348,7 +348,7 @@ Environment
     #>  knitr        * 1.52       2026-09-06 [1] RSPM
     #>  lifecycle      1.0.5      2026-01-08 [1] RSPM
     #>  magrittr     * 2.0.5      2026-04-04 [1] RSPM
-    #>  otel           0.2.0      2025-08-29 [1] RSPM
+    #>  otel           0.3.0      2026-11-07 [1] RSPM
     #>  pillar         1.11.1     2025-09-17 [1] RSPM
     #>  pkgconfig      2.0.3      2019-09-22 [1] RSPM
     #>  pkgdown        2.2.1      2026-07-07 [1] any (@2.2.1)
@@ -356,7 +356,7 @@ Environment
     #>  ragg           1.5.2      2026-03-23 [1] RSPM
     #>  RColorBrewer   1.1-3      2022-04-03 [1] RSPM
     #>  readr          2.2.0      2026-02-19 [1] RSPM
-    #>  REDCapR      * 1.7.0.9000 2026-09-21 [1] local
+    #>  REDCapR      * 1.7.0.9000 2026-11-09 [1] local
     #>  rlang          1.3.0      2026-07-05 [1] RSPM
     #>  rmarkdown      2.32       2026-09-01 [1] RSPM
     #>  rstudioapi     0.19.0     2026-06-11 [1] RSPM
@@ -376,15 +376,15 @@ Environment
     #>  viridisLite    0.4.3      2026-02-04 [1] RSPM
     #>  vroom          1.7.1      2026-03-31 [1] RSPM
     #>  withr          3.0.3      2026-06-19 [1] RSPM
-    #>  xfun           0.61       2026-09-16 [1] RSPM
+    #>  xfun           0.62       2026-10-16 [1] RSPM
     #>  xml2           1.6.0      2026-06-22 [1] RSPM
     #>  yaml           2.3.12     2025-12-10 [1] RSPM
     #> 
     #>  [1] /home/runner/work/_temp/Library
-    #>  [2] /opt/R/4.6.1/lib/R/site-library
-    #>  [3] /opt/R/4.6.1/lib/R/library
+    #>  [2] /opt/R/4.6.2/lib/R/site-library
+    #>  [3] /opt/R/4.6.2/lib/R/library
     #>  * ── Packages attached to the search path.
     #> 
     #> ──────────────────────────────────────────────────────────────────────────────
 
-Report rendered by runner at 2026-09-21, 16:53 +0000 in 12 seconds.
+Report rendered by runner at 2026-11-09, 16:37 +0000 in 9 seconds.

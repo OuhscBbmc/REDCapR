@@ -514,15 +514,15 @@ Environment
 
     #> ─ Session info ───────────────────────────────────────────────────────────────
     #>  setting  value
-    #>  version  R version 4.6.1 (2026-06-24)
-    #>  os       Ubuntu 24.04.5 LTS
+    #>  version  R version 4.6.2 (2026-10-29)
+    #>  os       Ubuntu 26.04.1 LTS
     #>  system   x86_64, linux-gnu
     #>  ui       X11
     #>  language en-US
     #>  collate  C.UTF-8
     #>  ctype    C.UTF-8
     #>  tz       UTC
-    #>  date     2026-09-21
+    #>  date     2026-11-09
     #>  pandoc   3.8.3 @ /opt/hostedtoolcache/pandoc/3.8.3/x64/ (via rmarkdown)
     #>  quarto   NA
     #> 
@@ -536,7 +536,7 @@ Environment
     #>  checkmate      2.3.4      2026-02-03 [1] RSPM
     #>  cli            3.6.6      2026-04-09 [1] RSPM
     #>  crayon         1.5.3      2024-06-20 [1] RSPM
-    #>  curl           8.0.0      2026-08-25 [1] RSPM
+    #>  curl           8.1.0      2026-10-14 [1] RSPM
     #>  desc           1.4.3      2023-12-10 [1] RSPM
     #>  digest         0.6.39     2025-11-19 [1] RSPM
     #>  dplyr          1.2.1      2026-04-03 [1] RSPM
@@ -555,7 +555,7 @@ Environment
     #>  knitr        * 1.52       2026-09-06 [1] RSPM
     #>  lifecycle      1.0.5      2026-01-08 [1] RSPM
     #>  magrittr     * 2.0.5      2026-04-04 [1] RSPM
-    #>  otel           0.2.0      2025-08-29 [1] RSPM
+    #>  otel           0.3.0      2026-11-07 [1] RSPM
     #>  pillar         1.11.1     2025-09-17 [1] RSPM
     #>  pkgconfig      2.0.3      2019-09-22 [1] RSPM
     #>  pkgdown        2.2.1      2026-07-07 [1] any (@2.2.1)
@@ -564,7 +564,7 @@ Environment
     #>  ragg           1.5.2      2026-03-23 [1] RSPM
     #>  RColorBrewer   1.1-3      2022-04-03 [1] RSPM
     #>  readr          2.2.0      2026-02-19 [1] RSPM
-    #>  REDCapR        1.7.0.9000 2026-09-21 [1] local
+    #>  REDCapR        1.7.0.9000 2026-11-09 [1] local
     #>  rlang          1.3.0      2026-07-05 [1] RSPM
     #>  rmarkdown      2.32       2026-09-01 [1] RSPM
     #>  rstudioapi     0.19.0     2026-06-11 [1] RSPM
@@ -584,13 +584,13 @@ Environment
     #>  viridisLite    0.4.3      2026-02-04 [1] RSPM
     #>  vroom          1.7.1      2026-03-31 [1] RSPM
     #>  withr          3.0.3      2026-06-19 [1] RSPM
-    #>  xfun           0.61       2026-09-16 [1] RSPM
+    #>  xfun           0.62       2026-10-16 [1] RSPM
     #>  xml2           1.6.0      2026-06-22 [1] RSPM
     #>  yaml           2.3.12     2025-12-10 [1] RSPM
     #> 
     #>  [1] /home/runner/work/_temp/Library
-    #>  [2] /opt/R/4.6.1/lib/R/site-library
-    #>  [3] /opt/R/4.6.1/lib/R/library
+    #>  [2] /opt/R/4.6.2/lib/R/site-library
+    #>  [3] /opt/R/4.6.2/lib/R/library
     #>  * ── Packages attached to the search path.
     #> 
     #> ──────────────────────────────────────────────────────────────────────────────
